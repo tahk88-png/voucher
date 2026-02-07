@@ -3,6 +3,7 @@ import { WarmCard } from "@app/components/WarmCard";
 import { WarmButton } from "@app/components/WarmButton";
 import { useParams, useNavigate } from "react-router-dom";
 import { Gift, Share2, Copy, Check, QrCode } from "lucide-react";
+import { CurrencyDisplay } from "@app/components/CurrencyDisplay";
 import { toast } from "sonner";
 import { copyToClipboard } from "@app/utils/clipboard";
 
@@ -19,6 +20,8 @@ export function VoucherPublic() {
       "<p>Valid on all summer items.</p><ul><li>Cannot be combined with other offers</li><li>One use per customer</li></ul>",
     code: "SUMMER25",
     discount: "25%",
+    discountValue: 25,
+    currency: "EUR" as const,
     validUntil: "2024-08-31",
     merchantName: "Fashion Store",
     image:
@@ -66,7 +69,7 @@ export function VoucherPublic() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4] flex items-center justify-center p-4 motion-safe:animate-fade-up">
       <div className="w-full max-w-lg">
         {/* Logo/Brand */}
         <div className="text-center mb-6">
@@ -113,6 +116,15 @@ export function VoucherPublic() {
             <div className="bg-gradient-to-br from-[#FFC857] to-[#FFB627] px-8 py-12 text-center">
               <div className="text-5xl font-bold text-[#2D2721] mb-4">
                 {voucher.discount}
+              </div>
+              <div className="text-sm font-semibold text-[#6B5744] mb-2">
+                Säästad kuni{" "}
+                <span className="font-bold text-[#2D2721]">
+                  <CurrencyDisplay
+                    amount={voucher.discountValue}
+                    currency={voucher.currency}
+                  />
+                </span>
               </div>
               <h1 className="text-2xl font-bold text-[#2D2721]">
                 {voucher.headline}

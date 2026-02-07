@@ -1,8 +1,21 @@
 import { Link, useLocation, useNavigate } from 'react-router';
 import { Logo } from '@/figma/app/components/Logo';
 import { Button } from '@/figma/app/components/ui/button';
-import { ShoppingBag, Search, Menu, X, ArrowLeft, Globe } from 'lucide-react';
-import { useState } from 'react';
+import {
+  ShoppingBag,
+  Search,
+  Menu,
+  X,
+  ArrowLeft,
+  Globe,
+  Home,
+  Megaphone,
+  Ticket,
+  Calendar,
+  CalendarDays,
+  Gift,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { cn } from '@/figma/lib/utils';
 import { LiveClock } from '@/figma/app/components/LiveClock';
 
@@ -19,16 +32,22 @@ export function GlobalNavigation() {
   };
 
   const navItems = [
-    { name: 'Avaleht', path: '/' },
-    { name: 'Kampaaniad', path: '/campaigns' },
-    { name: 'Pakkumised', path: '/voucher' },
-    { name: 'Rent', path: '/rentals' },
-    { name: 'Pood', path: '/shop' },
+    { name: 'Avaleht', path: '/', icon: Home },
+    { name: 'Kampaaniad', path: '/campaigns', icon: Megaphone },
+    { name: 'Pakkumised', path: '/voucher', icon: Ticket },
+    { name: 'Kinkekaardid', path: '/gift-cards', icon: Gift },
+    { name: 'Sündmused', path: '/events', icon: CalendarDays },
+    { name: 'Rent', path: '/rentals', icon: Calendar },
+    { name: 'Pood', path: '/shop', icon: ShoppingBag },
   ];
 
   const toggleLang = () => {
     setLang(prev => prev === 'EST' ? 'ENG' : 'EST');
   };
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <header className="sticky top-0 z-50 bg-white/75 backdrop-blur-md border-b border-[#E7DCC7] shadow-sm transition-shadow">
@@ -46,21 +65,32 @@ export function GlobalNavigation() {
             </button>
           )}
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6">
             <Logo className="flex-shrink-0" />
             
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden md:flex items-center gap-1 bg-white/70 border border-[#E7DCC7]/70 rounded-full px-2 py-1 shadow-sm">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
                   to={item.path}
+                  aria-current={isActive(item.path) ? "page" : undefined}
                   className={cn(
-                    "px-4 py-2 rounded-full text-sm font-bold transition-all",
+                    "group px-3.5 py-2 rounded-full text-sm font-bold transition-all inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2",
                     isActive(item.path)
                       ? "bg-[#2D2721] text-white shadow-warm-sm"
-                      : "text-[#6B5744] hover:bg-[#FAF7F2] hover:text-[#2D2721] hover:shadow-sm"
+                      : "text-[#6B5744] hover:bg-[#FAF7F2] hover:text-[#2D2721]"
                   )}
                 >
+                  <span
+                    className={cn(
+                      "w-6 h-6 rounded-full grid place-items-center border text-[10px]",
+                      isActive(item.path)
+                        ? "border-white/20 bg-white/10 text-white"
+                        : "border-[#E7DCC7] bg-white text-[#8B7355] group-hover:border-[#D9CBB4]"
+                    )}
+                  >
+                    <item.icon className="w-3.5 h-3.5" />
+                  </span>
                   {item.name}
                 </Link>
               ))}
@@ -82,13 +112,22 @@ export function GlobalNavigation() {
              {lang}
           </button>
 
-          <Button variant="ghost" size="icon" className="hidden sm:flex text-[#6B5744]">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden sm:flex text-[#6B5744] border border-transparent hover:border-[#E7DCC7] hover:bg-[#FAF7F2]"
+          >
             <Search className="w-5 h-5" />
           </Button>
           
           <Link to="/cart">
-            <Button variant="ghost" size="icon" className="text-[#6B5744] relative">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-[#6B5744] relative border border-transparent hover:border-[#E7DCC7] hover:bg-[#FAF7F2]"
+            >
               <ShoppingBag className="w-5 h-5" />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-[#E17B5C] rounded-full border-2 border-white" />
             </Button>
           </Link>
 
@@ -100,7 +139,7 @@ export function GlobalNavigation() {
 
           <Link to="/b2b-solutions" className="hidden sm:block">
             <Button className="bg-[#E17B5C] hover:bg-[#D16B4C] text-white rounded-full px-6 shadow-warm-sm hover:shadow-warm">
-              Partnerile
+              Hakka partneriks
             </Button>
           </Link>
 
@@ -108,6 +147,8 @@ export function GlobalNavigation() {
           <button 
             className="md:hidden p-2 text-[#2D2721]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Sulge menüü" : "Ava menüü"}
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -119,7 +160,10 @@ export function GlobalNavigation() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <>
-          <div className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-black/20 backdrop-blur-sm animate-fade-in" />
+          <div
+            className="md:hidden fixed inset-x-0 top-16 bottom-0 bg-black/20 backdrop-blur-sm animate-fade-in"
+            onClick={() => setIsMenuOpen(false)}
+          />
           <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b border-[#E7DCC7] p-4 animate-fade-up shadow-xl h-[calc(100vh-64px)] overflow-y-auto">
             <nav className="flex flex-col gap-2">
               {navItems.map((item) => (
@@ -127,13 +171,17 @@ export function GlobalNavigation() {
                   key={item.path}
                   to={item.path}
                   onClick={() => setIsMenuOpen(false)}
+                  aria-current={isActive(item.path) ? "page" : undefined}
                   className={cn(
-                    "px-4 py-3 rounded-xl text-lg font-bold transition-colors",
+                    "px-4 py-3 rounded-xl text-lg font-bold transition-colors inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2",
                     isActive(item.path)
                       ? "bg-[#FAF7F2] text-[#2D2721]"
                       : "text-[#6B5744]"
                   )}
                 >
+                  <span className="w-8 h-8 rounded-full bg-[#FFF9ED] border border-[#E7DCC7] grid place-items-center text-[#8B7355]">
+                    <item.icon className="w-4 h-4" />
+                  </span>
                   {item.name}
                 </Link>
               ))}
@@ -161,7 +209,7 @@ export function GlobalNavigation() {
                 onClick={() => setIsMenuOpen(false)}
                 className="px-4 py-3 text-[#E17B5C] font-bold mt-2"
               >
-                Partnerile
+                Hakka partneriks
               </Link>
             </nav>
           </div>

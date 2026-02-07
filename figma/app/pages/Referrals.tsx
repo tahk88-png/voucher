@@ -222,8 +222,11 @@ export function Referrals() {
               Invite & Earn
             </h2>
             <p className="text-[#6B5744]">
-              Get <span className="font-semibold text-[#2D2721]">â‚¬25</span> for
-              every merchant you refer
+              Get{" "}
+              <span className="font-semibold text-[#2D2721]">
+                <CurrencyDisplay amount={25} currency={referralData.currency} />
+              </span>{" "}
+              for every merchant you refer
             </p>
           </div>
 
@@ -418,8 +421,10 @@ export function Referrals() {
                 Earn Rewards
               </h4>
               <p className="text-sm text-[#6B5744]">
-                Get â‚¬25 when they create their first campaign
-              </p>
+              Get{" "}
+              <CurrencyDisplay amount={25} currency={referralData.currency} />{" "}
+              when they create their first campaign
+            </p>
             </div>
           </div>
         </div>
@@ -485,7 +490,7 @@ export function Referrals() {
                     <div>{referral.joinedDate}</div>
                     {referral.completedDate && (
                       <div className="text-xs text-[#9DB5A5]">
-                        âœ“ {referral.completedDate}
+                        ✓ {referral.completedDate}
                       </div>
                     )}
                   </td>

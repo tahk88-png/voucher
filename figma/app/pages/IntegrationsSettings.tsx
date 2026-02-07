@@ -83,7 +83,7 @@ export function IntegrationsSettings() {
 
         {/* Content Area */}
         <main className="flex-1 overflow-y-auto p-8 custom-scrollbar">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto motion-safe:animate-fade-up">
             {activeTab === "integrations" && <IntegrationsTab />}
             {activeTab === "api" && <ApiTab />}
             {activeTab === "domain" && <DomainTab />}
@@ -151,7 +151,7 @@ function IntegrationsTab() {
       type: "payment",
       active: false,
       icon: CreditCard,
-      desc: "Otsene Ã¼hendus LHV Connect kaudu.",
+      desc: "Otsene ühendus LHV Connect kaudu.",
     },
     {
       id: "montonio",
@@ -159,7 +159,7 @@ function IntegrationsTab() {
       type: "payment",
       active: false,
       icon: CreditCard,
-      desc: "Makse- ja jÃ¤relmaksulahendused.",
+      desc: "Makse- ja järelmaksulahendused.",
     },
 
     {
@@ -168,7 +168,7 @@ function IntegrationsTab() {
       type: "logistics",
       active: true,
       icon: Truck,
-      desc: "Pakiautomaatide asukohad ja siltide trÃ¼kk.",
+      desc: "Pakiautomaatide asukohad ja siltide trükk.",
     },
     {
       id: "itella",
@@ -185,7 +185,7 @@ function IntegrationsTab() {
       type: "accounting",
       active: true,
       icon: FileText,
-      desc: "MÃ¼Ã¼giarvete automaatne saatmine.",
+      desc: "Müügiarvete automaatne saatmine.",
     },
     {
       id: "merit",
@@ -193,7 +193,7 @@ function IntegrationsTab() {
       type: "accounting",
       active: false,
       icon: FileText,
-      desc: "Raamatupidamise sÃ¼nkroniseerimine.",
+      desc: "Raamatupidamise sünkroniseerimine.",
     },
 
     {
@@ -202,7 +202,7 @@ function IntegrationsTab() {
       type: "marketing",
       active: false,
       icon: BarChart3,
-      desc: "JÃ¤lgi poe kÃ¼lastatavust ja mÃ¼Ã¼ke.",
+      desc: "Jälgi poe külastatavust ja müüke.",
     },
     {
       id: "gads",
@@ -210,7 +210,7 @@ function IntegrationsTab() {
       type: "marketing",
       active: false,
       icon: Megaphone,
-      desc: "ReklaamivÃµrgustiku Ã¼hendus ja konversioonid.",
+      desc: "Reklaamivõrgustiku ühendus ja konversioonid.",
     },
     {
       id: "gtm",
@@ -218,7 +218,7 @@ function IntegrationsTab() {
       type: "marketing",
       active: false,
       icon: Tag,
-      desc: "Halda kÃµiki oma skripte Ã¼hest kohast.",
+      desc: "Halda kõiki oma skripte ühest kohast.",
     },
     {
       id: "meta",
@@ -226,7 +226,7 @@ function IntegrationsTab() {
       type: "marketing",
       active: false,
       icon: Share2,
-      desc: "Facebooki ja Instagrami reklaamide jÃ¤lgimine.",
+      desc: "Facebooki ja Instagrami reklaamide jälgimine.",
     },
 
     {
@@ -243,7 +243,7 @@ function IntegrationsTab() {
       type: "social",
       active: false,
       icon: Share2,
-      desc: "SÃ¼nkroniseeri tooted automaatselt Facebooki kataloogi.",
+      desc: "Sünkroniseeri tooted automaatselt Facebooki kataloogi.",
     },
     {
       id: "youtube",
@@ -263,7 +263,7 @@ function IntegrationsTab() {
           toast(
             newState ? "Integratsioon aktiveeritud" : "Integratsioon peatatud",
             {
-              description: `${i.name} on nÃ¼Ã¼d ${newState ? "Ã¼hendatud" : "lahti Ã¼hendatud"}.`,
+              description: `${i.name} on nüüd ${newState ? "ühendatud" : "lahti ühendatud"}.`,
             },
           );
           return { ...i, active: newState };
@@ -274,7 +274,7 @@ function IntegrationsTab() {
   };
 
   const groups = [
-    { title: "Turundus ja AnalÃ¼Ã¼tika", type: "marketing" },
+    { title: "Turundus ja Analüütika", type: "marketing" },
     { title: "Sotsiaalmeedia ja Sisu", type: "social" },
     { title: "Pangad ja Maksed", type: "payment" },
     { title: "Logistika ja Tarne", type: "logistics" },
@@ -288,7 +288,7 @@ function IntegrationsTab() {
           Teenuste Liidestamine
         </h2>
         <p className="text-[#6B5744]">
-          Halda vÃ¤liseid teenuseid, mis panevad sinu Ã¤ri toimima.
+          Halda väliseid teenuseid, mis panevad sinu äri toimima.
         </p>
       </div>
 
@@ -324,7 +324,7 @@ function IntegrationsTab() {
                     {item.active && (
                       <div className="mt-3 flex items-center gap-2 text-xs font-bold text-[#00D098]">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#00D098] animate-pulse"></div>
-                        Aktiivne Ã¼hendus
+                        Aktiivne ühendus
                       </div>
                     )}
                   </div>
@@ -344,7 +344,7 @@ function ApiTab() {
       name: "Tootearendus PROD",
       prefix: "pk_live_...",
       created: "20.03.2024",
-      lastUsed: "TÃ¤na, 14:30",
+      lastUsed: "Täna, 14:30",
     },
     {
       id: 2,
@@ -356,18 +356,18 @@ function ApiTab() {
   ]);
 
   const copyToClipboard = () => {
-    toast.success("API vÃµti kopeeritud lÃµikelauale");
+    toast.success("API võti kopeeritud lõikelauale");
   };
 
   const createKey = () => {
-    toast.success("Uus API vÃµti genereeritud!");
+    toast.success("Uus API võti genereeritud!");
     setKeys([
       ...keys,
       {
         id: Math.random(),
-        name: "Uus VÃµti",
+        name: "Uus Võti",
         prefix: "pk_live_...",
-        created: "Just nÃ¼Ã¼d",
+        created: "Just nüüd",
         lastUsed: "-",
       },
     ]);
@@ -377,13 +377,13 @@ function ApiTab() {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-[#2D2721] mb-2">API VÃµtmed</h2>
+          <h2 className="text-2xl font-bold text-[#2D2721] mb-2">API Võtmed</h2>
           <p className="text-[#6B5744]">
-            Halda ligipÃ¤Ã¤su GiftHubi arendajate liidestele.
+            Halda ligipääsu GiftHubi arendajate liidestele.
           </p>
         </div>
         <WarmButton onClick={createKey} className="gap-2">
-          <Plus className="w-4 h-4" /> Loo uus vÃµti
+          <Plus className="w-4 h-4" /> Loo uus võti
         </WarmButton>
       </div>
 
@@ -392,7 +392,7 @@ function ApiTab() {
           <thead className="bg-[#FAF7F2] text-[#8B7355] font-bold border-b border-[#E7DCC7]">
             <tr>
               <th className="p-4">Nimi</th>
-              <th className="p-4">VÃµtme prefiks</th>
+              <th className="p-4">Võtme prefiks</th>
               <th className="p-4">Loodud</th>
               <th className="p-4">Viimati kasutatud</th>
               <th className="p-4 text-right">Tegevused</th>
@@ -403,7 +403,7 @@ function ApiTab() {
               <tr key={key.id} className="group hover:bg-[#FAF7F2]/50">
                 <td className="p-4 font-bold text-[#2D2721]">{key.name}</td>
                 <td className="p-4 font-mono text-[#6B5744] bg-gray-50 rounded w-fit px-2 py-1">
-                  {key.prefix}â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢
+                  {key.prefix}••••••••
                 </td>
                 <td className="p-4 text-[#6B5744]">{key.created}</td>
                 <td className="p-4 text-[#6B5744]">{key.lastUsed}</td>
@@ -435,8 +435,8 @@ function ApiTab() {
         <div>
           <h3 className="font-bold text-white mb-2">Webhooks</h3>
           <p className="text-sm opacity-80 mb-4">
-            Seadista teavitused sÃ¼ndmuste kohta (nt. `order.created`,
-            `rental.ended`) oma vÃ¤lisele serverile.
+            Seadista teavitused sündmuste kohta (nt. `order.created`,
+            `rental.ended`) oma välisele serverile.
           </p>
           <WarmButton
             variant="outline"
@@ -451,7 +451,7 @@ function ApiTab() {
 }
 
 function DomainTab() {
-  const [domain, setDomain] = useState("pood.minubrÃ¤nd.ee");
+  const [domain, setDomain] = useState("pood.minubränd.ee");
   const [status, setStatus] = useState<"pending" | "active">("pending");
 
   const verifyDomain = () => {
@@ -466,7 +466,7 @@ function DomainTab() {
           Domeeni Seaded
         </h2>
         <p className="text-[#6B5744]">
-          Ãœhenda oma olemasolev domeen GiftHubi poega.
+          Ühenda oma olemasolev domeen GiftHubi poega.
         </p>
       </div>
 
@@ -533,8 +533,8 @@ function DomainTab() {
           <div className="mt-6 flex items-start gap-3 text-sm text-[#6B5744] bg-white/50 p-3 rounded">
             <AlertCircle className="w-5 h-5 text-[#E17B5C] shrink-0" />
             <p>
-              DNS muudatuste levimine vÃµib vÃµtta aega kuni 24 tundi. SSL
-              sertifikaat genereeritakse automaatselt pÃ¤rast DNS kirjete
+              DNS muudatuste levimine võib võtta aega kuni 24 tundi. SSL
+              sertifikaat genereeritakse automaatselt pärast DNS kirjete
               kinnitamist.
             </p>
           </div>
@@ -549,10 +549,10 @@ function B2BTab() {
     <div className="max-w-3xl space-y-8 animate-in fade-in duration-500">
       <div>
         <h2 className="text-2xl font-bold text-[#2D2721] mb-2">
-          B2B ja Ã„rikliendi Seaded
+          B2B ja Ärikliendi Seaded
         </h2>
         <p className="text-[#6B5744]">
-          Kohanda poe kÃ¤itumist Ã¤riklientide ja hulgimÃ¼Ã¼gi jaoks.
+          Kohanda poe käitumist äriklientide ja hulgimüügi jaoks.
         </p>
       </div>
 
@@ -560,10 +560,10 @@ function B2BTab() {
         <div className="p-6 flex items-center justify-between">
           <div>
             <h4 className="font-bold text-[#2D2721]">
-              Ã„rikliendi registreerimine
+              Ärikliendi registreerimine
             </h4>
             <p className="text-sm text-[#6B5744] mt-1">
-              Luba ettevÃµtetel registreerida ja kÃ¼si KMKR numbrit.
+              Luba ettevõtetel registreerida ja küsi KMKR numbrit.
             </p>
           </div>
           <Switch defaultChecked />
@@ -572,10 +572,10 @@ function B2BTab() {
         <div className="p-6 flex items-center justify-between">
           <div>
             <h4 className="font-bold text-[#2D2721]">
-              Kuva hindu kÃ¤ibemaksuta
+              Kuva hindu käibemaksuta
             </h4>
             <p className="text-sm text-[#6B5744] mt-1">
-              Sisselogitud Ã¤riklientidele nÃ¤idatakse hindu ilma KM-ta.
+              Sisselogitud äriklientidele näidatakse hindu ilma KM-ta.
             </p>
           </div>
           <Switch defaultChecked />
@@ -587,7 +587,7 @@ function B2BTab() {
               Automaatne krediidilimiit
             </h4>
             <p className="text-sm text-[#6B5744] mt-1">
-              MÃ¤Ã¤ra vaikimisi krediidilimiit uutele Ã¤riklientidele (0 =
+              Määra vaikimisi krediidilimiit uutele äriklientidele (0 =
               keelatud).
             </p>
           </div>
@@ -601,7 +601,7 @@ function B2BTab() {
           <div>
             <h4 className="font-bold text-[#2D2721]">Hinnakirjad</h4>
             <p className="text-sm text-[#6B5744] mt-1">
-              VÃµimalda kliendipÃµhiseid hinnakirju ja allahindlusi.
+              Võimalda kliendipõhiseid hinnakirju ja allahindlusi.
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -616,12 +616,12 @@ function B2BTab() {
       <div className="bg-[#FAF7F2] border border-[#E7DCC7] p-6 rounded-xl">
         <h3 className="font-bold text-[#2D2721] mb-4 flex items-center gap-2">
           <ShieldCheck className="w-5 h-5 text-[#00D098]" />
-          Ã„rikliendi valideerimine
+          Ärikliendi valideerimine
         </h3>
         <div className="space-y-4">
           <p className="text-sm text-[#6B5744]">
-            Kasutame <strong>Ã„riregistri API-t</strong>, et kontrollida
-            ettevÃµtete tausta ja KMKR kehtivust automaatselt.
+            Kasutame <strong>Äriregistri API-t</strong>, et kontrollida
+            ettevõtete tausta ja KMKR kehtivust automaatselt.
           </p>
           <div className="flex gap-4">
             <div className="flex items-center gap-2 text-sm">
@@ -630,7 +630,7 @@ function B2BTab() {
             </div>
             <div className="flex items-center gap-2 text-sm">
               <Switch defaultChecked />
-              <span>Blokeeri vÃµlgnevustega ettevÃµtted</span>
+              <span>Blokeeri võlgnevustega ettevõtted</span>
             </div>
           </div>
         </div>

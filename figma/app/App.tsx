@@ -96,7 +96,10 @@ export default function App() {
                   <Route path="/voucher" element={<VoucherOffers />} />
                   <Route path="/voucher/:id" element={<VoucherPublic />} />
 
+                  <Route path="/gift-cards" element={<GiftCardsList />} />
                   <Route path="/gift-card/:id" element={<GiftCardPublic />} />
+
+                  <Route path="/events" element={<EventsList />} />
                   <Route path="/event/:id" element={<EventPublic />} />
                   <Route path="/redeem" element={<StaffRedeem />} />
 
@@ -138,9 +141,7 @@ export default function App() {
                   <Route path="/vouchers" element={<VouchersList />} />
                   <Route path="/vouchers/create" element={<VoucherCreate />} />
                   <Route path="/discounts" element={<DiscountCodes />} />
-                  <Route path="/gift-cards" element={<GiftCardsList />} />
                   <Route path="/gift-cards/create" element={<GiftCardCreate />} />
-                  <Route path="/events" element={<EventsList />} />
                   <Route path="/events/create" element={<EventCreate />} />
                   <Route path="/events/:id" element={<EventDetail />} />
                   <Route path="/events/:id/edit" element={<EventCreate />} />

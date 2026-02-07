@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect } from "react";
 import { WarmCard } from "@app/components/WarmCard";
 import { WarmButton } from "@app/components/WarmButton";
+import { CurrencyDisplay } from "@app/components/CurrencyDisplay";
 import { Input } from "@app/components/ui/input";
 import { Label } from "@app/components/ui/label";
 import { Switch } from "@app/components/ui/switch";
@@ -49,7 +50,7 @@ export function Settings() {
     {
       id: "1",
       name: "Tallinna Esindus",
-      address: "PÃ¤rnu mnt 123",
+      address: "Pärnu mnt 123",
       city: "Tallinn",
       hours: "E-R 9-18",
       phone: "+372 5555 5555",
@@ -92,7 +93,7 @@ export function Settings() {
     country: "Estonia",
 
     // Company Info
-    companyName: "Fashion Store OÃœ",
+    companyName: "Fashion Store OÜ",
     registryCode: "12345678",
     vatNumber: "EE123456789",
     companyEmail: "contact@fashionstore.com",
@@ -137,15 +138,24 @@ export function Settings() {
       setFormData((prev) => ({
         ...prev,
         ...rest,
-        deliveryPickupAllowed: deliveryOptions?.pickupAllowed ?? true,
-        deliveryPickupPrice: deliveryOptions?.pickupPrice ?? 0,
-        deliveryCourierAllowed: deliveryOptions?.courierAllowed ?? true,
-        deliveryCourierPrice: deliveryOptions?.courierPrice ?? 5.9,
-        deliveryFreeThreshold: deliveryOptions?.freeThreshold ?? 50.0,
-        deliverySmartpostAllowed: deliveryOptions?.smartpostAllowed ?? true,
-        deliverySmartpostPrice: deliveryOptions?.smartpostPrice ?? 2.9,
-        deliveryOmnivaAllowed: deliveryOptions?.omnivaAllowed ?? true,
-        deliveryOmnivaPrice: deliveryOptions?.omnivaPrice ?? 2.5,
+        deliveryPickupAllowed:
+          deliveryOptions?.pickupAllowed ?? prev.deliveryPickupAllowed,
+        deliveryPickupPrice:
+          deliveryOptions?.pickupPrice ?? prev.deliveryPickupPrice,
+        deliveryCourierAllowed:
+          deliveryOptions?.courierAllowed ?? prev.deliveryCourierAllowed,
+        deliveryCourierPrice:
+          deliveryOptions?.courierPrice ?? prev.deliveryCourierPrice,
+        deliveryFreeThreshold:
+          deliveryOptions?.freeThreshold ?? prev.deliveryFreeThreshold,
+        deliverySmartpostAllowed:
+          deliveryOptions?.smartpostAllowed ?? prev.deliverySmartpostAllowed,
+        deliverySmartpostPrice:
+          deliveryOptions?.smartpostPrice ?? prev.deliverySmartpostPrice,
+        deliveryOmnivaAllowed:
+          deliveryOptions?.omnivaAllowed ?? prev.deliveryOmnivaAllowed,
+        deliveryOmnivaPrice:
+          deliveryOptions?.omnivaPrice ?? prev.deliveryOmnivaPrice,
       }));
     }
   }, []);
@@ -183,7 +193,7 @@ export function Settings() {
     if (file) {
       const url = URL.createObjectURL(file);
       setFormData({ ...formData, logoUrl: url });
-      toast.success("Logo Ã¼les laetud!");
+      toast.success("Logo üles laetud!");
     }
   };
 
@@ -218,7 +228,7 @@ export function Settings() {
   };
 
   return (
-    <div className="space-y-6 max-w-3xl pb-12 animate-in fade-in duration-500">
+    <div className="space-y-6 max-w-3xl pb-12 motion-safe:animate-fade-up">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-[#2D2721]">Seaded</h1>
@@ -234,8 +244,8 @@ export function Settings() {
           Poed ja Laod
         </h2>
         <p className="text-sm text-[#6B5744] mb-4">
-          MÃ¤Ã¤ra asukohad, kust kliendid saavad kauba ise kÃ¤tte ("Tulen ise
-          jÃ¤rele").
+          Määra asukohad, kust kliendid saavad kauba ise kätte ("Tulen ise
+          järele").
         </p>
 
         <div className="space-y-4">
@@ -342,7 +352,7 @@ export function Settings() {
                   variant="ghost"
                   onClick={() => setIsEditingLocation(null)}
                 >
-                  TÃ¼hista
+                  Tühista
                 </WarmButton>
                 <WarmButton onClick={addLocation}>Lisa asukoht</WarmButton>
               </div>
@@ -375,7 +385,7 @@ export function Settings() {
               <div>
                 <h3 className="font-bold text-[#2D2721]">Tasuta tarne</h3>
                 <p className="text-sm text-[#6B5744]">
-                  Rakenda tasuta tarne, kui ostukorvi summa Ã¼letab piiri
+                  Rakenda tasuta tarne, kui ostukorvi summa ületab piiri
                 </p>
               </div>
             </div>
@@ -403,10 +413,10 @@ export function Settings() {
               <div>
                 <h3 className="font-semibold text-[#2D2721] flex items-center gap-2">
                   <Package className="w-4 h-4 text-[#8B7355]" />
-                  Tulen ise jÃ¤rele
+                  Tulen ise järele
                 </h3>
                 <p className="text-sm text-[#6B5744]">
-                  Klient valib Ã¼he sinu poodidest (Ã¼lal mÃ¤Ã¤ratud)
+                  Klient valib ühe sinu poodidest (ülal määratud)
                 </p>
               </div>
               <Switch
@@ -435,7 +445,8 @@ export function Settings() {
                     className="bg-white"
                   />
                   <p className="text-xs text-[#8B7355]">
-                    Tavaliselt tasuta (â‚¬0.00)
+                    Tavaliselt tasuta (
+                    <CurrencyDisplay amount={0} currency="EUR" />)
                   </p>
                 </div>
               </div>
@@ -451,7 +462,7 @@ export function Settings() {
                   Kulleriga koju
                 </h3>
                 <p className="text-sm text-[#6B5744]">
-                  DPD, Itella vÃµi Omniva kuller
+                  DPD, Itella või Omniva kuller
                 </p>
               </div>
               <Switch
@@ -650,7 +661,7 @@ export function Settings() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="apiKey" className="text-[#2D2721] font-medium">
-                  API VÃµti
+                  API Võti
                 </Label>
                 <Input
                   id="apiKey"
@@ -668,7 +679,7 @@ export function Settings() {
               </div>
               <div className="bg-[#FFF9ED] p-4 rounded-xl border border-[#E7DCC7] flex gap-3 text-sm text-[#8B7355]">
                 <Shield className="w-5 h-5 flex-shrink-0 text-[#E17B5C]" />
-                <p>Sinu vÃµtmed on krÃ¼pteeritud ja turvaliselt hoitud.</p>
+                <p>Sinu võtmed on krüpteeritud ja turvaliselt hoitud.</p>
               </div>
             </div>
           )}
@@ -677,7 +688,7 @@ export function Settings() {
 
       {/* Brand Settings */}
       <WarmCard padding="lg">
-        <h2 className="text-xl font-semibold text-[#2D2721] mb-6">BrÃ¤nding</h2>
+        <h2 className="text-xl font-semibold text-[#2D2721] mb-6">Bränding</h2>
 
         <div className="space-y-6 motion-safe:animate-fade-up">
           <div className="space-y-2">
@@ -706,7 +717,7 @@ export function Settings() {
                   <div className="inline-block">
                     <WarmButton variant="secondary" size="sm" type="button">
                       <Upload className="h-4 w-4 mr-2" />
-                      Lae Ã¼les
+                      Lae üles
                     </WarmButton>
                   </div>
                 </label>
@@ -720,7 +731,7 @@ export function Settings() {
                 htmlFor="brandColor"
                 className="text-[#2D2721] font-medium"
               >
-                PÃµhivÃ¤rv
+                Põhivärv
               </Label>
               <div className="flex gap-2">
                 <input
@@ -746,7 +757,7 @@ export function Settings() {
                 htmlFor="accentColor"
                 className="text-[#2D2721] font-medium"
               >
-                AktsentvÃ¤rv
+                Aktsentvärv
               </Label>
               <div className="flex gap-2">
                 <input

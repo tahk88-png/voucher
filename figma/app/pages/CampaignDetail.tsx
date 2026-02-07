@@ -52,6 +52,16 @@ type EnrichedCampaign = Campaign & {
   longDescription: string;
 };
 
+const formatCurrency = (amount?: number) => {
+  if (typeof amount !== "number") return "";
+  return new Intl.NumberFormat("et-EE", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+};
+
 export function CampaignDetail() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -174,10 +184,10 @@ export function CampaignDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2]">
+    <div className="min-h-screen bg-[#FAF7F2] motion-safe:animate-fade-up">
       <SEOHead
         title={`${campaign.title} -${discount}% | ${campaign.merchantDetails.name}`}
-        description={`${campaign.title}. Vaata pakkumist partnerilt ${campaign.merchantDetails.name}. Hind: €${campaign.price} (Tavahind: €${campaign.original_price}).`}
+        description={`${campaign.title}. Vaata pakkumist partnerilt ${campaign.merchantDetails.name}. Hind: ${formatCurrency(campaign.price)}${campaign.original_price ? ` (Tavahind: ${formatCurrency(campaign.original_price)}).` : "."}`}
         image={heroImage}
         type="product"
         jsonLd={jsonLd}
@@ -266,11 +276,14 @@ export function CampaignDetail() {
               <div className="mb-8">
                 <div className="flex items-baseline gap-2 mb-1">
                   <span className="text-3xl font-bold text-[#2D2721]">
-                    <CurrencyDisplay amount={campaign.price} />
+                    <CurrencyDisplay amount={campaign.price} currency="EUR" />
                   </span>
                   {campaign.original_price && (
                     <span className="text-lg text-[#8B7355] line-through">
-                      <CurrencyDisplay amount={campaign.original_price} />
+                      <CurrencyDisplay
+                        amount={campaign.original_price}
+                        currency="EUR"
+                      />
                     </span>
                   )}
                 </div>
@@ -357,7 +370,7 @@ export function CampaignDetail() {
                         Sisaldab kõiki teenuseid ja on parim valik.
                       </p>
                       <div className="font-bold text-[#2D2721] text-xl">
-                        <CurrencyDisplay amount={campaign.price} />
+                        <CurrencyDisplay amount={campaign.price} currency="EUR" />
                       </div>
                     </div>
                     <div className="flex flex-col justify-center sm:w-40">

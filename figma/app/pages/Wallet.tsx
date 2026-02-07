@@ -128,21 +128,21 @@ export function Wallet() {
 
   const stats = [
     {
-      label: "Total Earned",
+      label: "Kokku teenitud",
       value: 1247.5,
       change: "+18.5%",
       icon: TrendingUp,
       color: "from-[#9DB5A5] to-[#7FA090]",
     },
     {
-      label: "This Month",
+      label: "Sel kuul",
       value: 165.0,
       change: "+12.3%",
       icon: Calendar,
       color: "from-[#FFC857] to-[#FFB627]",
     },
     {
-      label: "Active Referrals",
+      label: "Aktiivsed soovitused",
       value: 23,
       change: "+4",
       icon: Users,
@@ -199,14 +199,14 @@ export function Wallet() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#2D2721]">Wallet</h1>
+          <h1 className="text-3xl font-bold text-[#2D2721]">Rahakott</h1>
           <p className="text-[#6B5744] mt-1">
-            Manage your credits and earnings
+            Halda oma krediite ja teenitud tulu
           </p>
         </div>
         <WarmButton onClick={() => navigate("/referrals")}>
           <Users className="h-5 w-5 mr-2" />
-          View Referrals
+          Vaata soovitusi
         </WarmButton>
       </div>
 
@@ -217,7 +217,7 @@ export function Wallet() {
             <div>
               <div className="flex items-center gap-2 text-white/80 mb-2">
                 <WalletIcon className="h-5 w-5" />
-                <span className="text-sm font-medium">Available Balance</span>
+                <span className="text-sm font-medium">Saadaval saldo</span>
               </div>
               <div className="text-5xl font-bold text-white mb-2">
                 <CurrencyDisplay
@@ -243,14 +243,14 @@ export function Wallet() {
               variant="outline"
               className="flex-1 bg-white/10 border-white/30 text-white hover:bg-white/20"
             >
-              Withdraw
+              Võta välja
             </WarmButton>
             <WarmButton
               variant="outline"
               className="flex-1 bg-white/10 border-white/30 text-white hover:bg-white/20"
             >
               <Download className="h-4 w-4 mr-2" />
-              Statement
+              Väljavõte
             </WarmButton>
           </div>
         </div>
@@ -295,9 +295,9 @@ export function Wallet() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
             <h2 className="text-xl font-semibold text-[#2D2721] mb-1">
-              Transaction History
+              Tehingute ajalugu
             </h2>
-            <p className="text-sm text-[#6B5744]">All your wallet activity</p>
+            <p className="text-sm text-[#6B5744]">Kõik rahakoti tegevused</p>
           </div>
           <div className="flex items-center gap-3">
             <Select
@@ -309,11 +309,11 @@ export function Wallet() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Types</SelectItem>
-                <SelectItem value="referral">Referrals</SelectItem>
-                <SelectItem value="reward">Rewards</SelectItem>
-                <SelectItem value="credit">Credits</SelectItem>
-                <SelectItem value="withdrawal">Withdrawals</SelectItem>
+                <SelectItem value="all">Kõik tüübid</SelectItem>
+                <SelectItem value="referral">Soovitused</SelectItem>
+                <SelectItem value="reward">Boonused</SelectItem>
+                <SelectItem value="credit">Krediidid</SelectItem>
+                <SelectItem value="withdrawal">Väljamaksed</SelectItem>
               </SelectContent>
             </Select>
             <Select
@@ -325,10 +325,10 @@ export function Wallet() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="7d">Last 7 Days</SelectItem>
-                <SelectItem value="30d">Last 30 Days</SelectItem>
-                <SelectItem value="90d">Last 90 Days</SelectItem>
-                <SelectItem value="all">All Time</SelectItem>
+                <SelectItem value="7d">Viimased 7 päeva</SelectItem>
+                <SelectItem value="30d">Viimased 30 päeva</SelectItem>
+                <SelectItem value="90d">Viimased 90 päeva</SelectItem>
+                <SelectItem value="all">Kogu aeg</SelectItem>
               </SelectContent>
             </Select>
           </div>

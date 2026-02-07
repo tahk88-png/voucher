@@ -206,7 +206,7 @@ export function Billing() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500 pb-12">
+    <div className="space-y-6 motion-safe:animate-fade-up pb-12">
       {/* Payment Method Modal */}
       <PaymentMethodModal
         isOpen={isPaymentModalOpen}
@@ -226,7 +226,11 @@ export function Billing() {
         </div>
         <div className="flex items-center gap-2 text-sm text-[#8B7355] bg-white px-3 py-1.5 rounded-full border border-[#E7DCC7] shadow-sm">
           <Zap className="w-4 h-4 text-[#FFC857] fill-[#FFC857]" />
-          Järgmine makse: <strong>€29.00</strong> ({currentPeriodEnd})
+          Järgmine makse:{" "}
+          <strong>
+            <CurrencyDisplay amount={currentPlan.price} currency="EUR" />
+          </strong>{" "}
+          ({currentPeriodEnd})
         </div>
       </div>
 

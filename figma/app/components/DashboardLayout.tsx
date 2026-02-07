@@ -139,6 +139,7 @@ export function DashboardLayout({ children }: { children?: ReactNode }) {
               <div className="p-4 space-y-2">
                 {navigation.map((item) => {
                   const Icon = item.icon;
+                  const active = isActive(item.href);
                   return (
                     <button
                       key={item.name}
@@ -146,13 +147,21 @@ export function DashboardLayout({ children }: { children?: ReactNode }) {
                         navigate(item.href);
                         setMobileMenuOpen(false);
                       }}
-                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium transition-all ${
-                        isActive(item.href)
+                      className={`group w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium transition-all ${
+                        active
                           ? 'bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm'
                           : 'text-[#6B5744] hover:bg-[#F8F6F1]'
                       }`}
                     >
-                      <Icon className="h-5 w-5" />
+                      <span
+                        className={`w-9 h-9 rounded-xl grid place-items-center border transition-colors ${
+                          active
+                            ? 'border-white/40 bg-white/20 text-[#2D2721]'
+                            : 'border-[#E7DCC7] bg-white text-[#8B7355] group-hover:border-[#D9CBB4]'
+                        }`}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </span>
                       {item.name}
                     </button>
                   );
@@ -196,18 +205,27 @@ export function DashboardLayout({ children }: { children?: ReactNode }) {
             {navigation.map((item) => {
               const Icon = item.icon;
               const showBadge = item.href === '/dashboard' && pendingBonusCount > 0;
+              const active = isActive(item.href);
               return (
                 <button
                   key={item.name}
                   onClick={() => navigate(item.href)}
                   title={isCollapsed ? item.name : ''}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-[14px] font-medium transition-all relative group ${
-                    isActive(item.href)
+                  className={`group w-full flex items-center gap-3 px-4 py-3 rounded-[14px] font-medium transition-all relative ${
+                    active
                       ? 'bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm'
                       : 'text-[#6B5744] hover:bg-[#F8F6F1]'
                   } ${isCollapsed ? 'justify-center' : ''}`}
                 >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
+                  <span
+                    className={`w-9 h-9 rounded-xl grid place-items-center border transition-colors flex-shrink-0 ${
+                      active
+                        ? 'border-white/40 bg-white/20 text-[#2D2721]'
+                        : 'border-[#E7DCC7] bg-white text-[#8B7355] group-hover:border-[#D9CBB4]'
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                  </span>
                   <span className={`transition-all duration-300 whitespace-nowrap ${isCollapsed ? 'w-0 opacity-0 overflow-hidden' : 'w-auto opacity-100'}`}>
                     {item.name}
                   </span>

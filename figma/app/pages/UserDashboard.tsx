@@ -39,6 +39,7 @@ import {
   Tag,
   QrCode,
 } from "lucide-react";
+import { CurrencyDisplay } from "@app/components/CurrencyDisplay";
 import { Input } from "@app/components/ui/input";
 import { Progress } from "@app/components/ui/progress";
 import { toast } from "sonner";
@@ -136,7 +137,7 @@ export function UserDashboard() {
     nextRewardAt: 3000,
     totalShares: 127,
     successfulReferrals: 18,
-    totalEarned: "â‚¬245",
+    totalEarned: 245,
     currentStreak: 7,
     rank: "Gold Member",
     level: 12,
@@ -156,15 +157,15 @@ export function UserDashboard() {
 
   // Leaderboard
   const leaderboard = [
-    { rank: 1, name: "Ana Costa", points: 5240, avatar: "ðŸ‘¸", badge: "ðŸ†" },
-    { rank: 2, name: "JoÃ£o Silva", points: 4980, avatar: "ðŸ§‘", badge: "ðŸ¥ˆ" },
-    { rank: 3, name: "Pedro Alves", points: 4520, avatar: "ðŸ‘¨", badge: "ðŸ¥‰" },
+    { rank: 1, name: "Ana Costa", points: 5240, avatar: "👸", badge: "🏆" },
+    { rank: 2, name: "João Silva", points: 4980, avatar: "🧑", badge: "🥈" },
+    { rank: 3, name: "Pedro Alves", points: 4520, avatar: "👨", badge: "🥉" },
     {
       rank: 48,
       name: "You (Maria Silva)",
       points: 2450,
-      avatar: "ðŸ‘©",
-      badge: "â­",
+      avatar: "👩",
+      badge: "⭐",
       isUser: true,
     },
   ];
@@ -174,28 +175,28 @@ export function UserDashboard() {
     {
       id: 1,
       name: "First Share",
-      icon: "ðŸŽ¯",
+      icon: "🎯",
       unlocked: true,
       color: "from-[#9DB5A5] to-[#7FA090]",
     },
     {
       id: 2,
       name: "10 Referrals",
-      icon: "ðŸš€",
+      icon: "🚀",
       unlocked: true,
       color: "from-[#FFC857] to-[#FFB627]",
     },
     {
       id: 3,
       name: "Week Streak",
-      icon: "ðŸ”¥",
+      icon: "🔥",
       unlocked: true,
       color: "from-[#E17B5C] to-[#D16B4C]",
     },
     {
       id: 4,
       name: "1000 Points",
-      icon: "ðŸ’Ž",
+      icon: "💎",
       unlocked: false,
       color: "from-gray-300 to-gray-400",
     },
@@ -213,7 +214,7 @@ export function UserDashboard() {
     {
       id: 2,
       type: "referral",
-      name: "JoÃ£o Costa",
+      name: "João Costa",
       points: 200,
       time: "1 day ago",
     },
@@ -244,19 +245,19 @@ export function UserDashboard() {
   const availableRewards = [
     {
       id: 1,
-      name: "â‚¬10 Voucher",
+      name: "€10 Voucher",
       points: 1000,
-      image: "ðŸŽ",
+      image: "🎁",
       available: true,
       discount: "25% OFF",
     },
-    { id: 2, name: "â‚¬25 Voucher", points: 2500, image: "ðŸ’Ž", available: false },
-    { id: 3, name: "â‚¬50 Voucher", points: 5000, image: "ðŸ†", available: false },
+    { id: 2, name: "€25 Voucher", points: 2500, image: "💎", available: false },
+    { id: 3, name: "€50 Voucher", points: 5000, image: "🏆", available: false },
     {
       id: 4,
       name: "Premium Month",
       points: 3000,
-      image: "â­",
+      image: "⭐",
       available: false,
     },
   ];
@@ -268,8 +269,8 @@ export function UserDashboard() {
       merchant: "Fashion Store",
       title: "30% Off Summer Collection",
       category: "Fashion",
-      emoji: "ðŸ‘—",
-      bonus: "â‚¬5",
+      emoji: "👗",
+      bonus: "€5",
       expiresIn: "3 days",
       shares: 234,
       trending: true,
@@ -279,18 +280,18 @@ export function UserDashboard() {
       merchant: "Coffee House",
       title: "Buy 2 Get 1 Free",
       category: "Food & Dining",
-      emoji: "â˜•",
-      bonus: "â‚¬3",
+      emoji: "☕",
+      bonus: "€3",
       expiresIn: "1 week",
       shares: 156,
     },
     {
       id: 3,
       merchant: "Tech Store",
-      title: "â‚¬100 Off Laptops",
+      title: "€100 Off Laptops",
       category: "Electronics",
-      emoji: "ðŸ’»",
-      bonus: "â‚¬8",
+      emoji: "💻",
+      bonus: "€8",
       expiresIn: "5 days",
       shares: 412,
       trending: true,
@@ -300,8 +301,8 @@ export function UserDashboard() {
       merchant: "Spa Wellness",
       title: "Massage Special 20% Off",
       category: "Beauty & Wellness",
-      emoji: "ðŸ’†",
-      bonus: "â‚¬4",
+      emoji: "💆",
+      bonus: "€4",
       expiresIn: "2 weeks",
       shares: 89,
     },
@@ -315,7 +316,7 @@ export function UserDashboard() {
       date: "Feb 15, 2026",
       location: "Tallinn",
       tickets: "15 available",
-      emoji: "ðŸŽ­",
+      emoji: "🎭",
     },
     {
       id: 2,
@@ -323,7 +324,7 @@ export function UserDashboard() {
       date: "Feb 22, 2026",
       location: "Riga",
       tickets: "42 available",
-      emoji: "ðŸ½ï¸",
+      emoji: "🍽️",
     },
     {
       id: 3,
@@ -331,7 +332,7 @@ export function UserDashboard() {
       date: "Mar 5, 2026",
       location: "Vilnius",
       tickets: "8 available",
-      emoji: "ðŸš€",
+      emoji: "🚀",
     },
   ];
 
@@ -350,10 +351,10 @@ export function UserDashboard() {
     {
       id: 1,
       merchant: "Fashion Store",
-      title: "â‚¬20 Off Purchase",
+      title: "€20 Off Purchase",
       code: "FASH20",
       expiresIn: "5 days",
-      emoji: "ðŸ‘—",
+      emoji: "👗",
       used: false,
     },
     {
@@ -362,7 +363,7 @@ export function UserDashboard() {
       title: "Free Coffee",
       code: "COFFEE",
       expiresIn: "2 days",
-      emoji: "â˜•",
+      emoji: "☕",
       used: false,
     },
     {
@@ -371,7 +372,7 @@ export function UserDashboard() {
       title: "10% Off Electronics",
       code: "TECH10",
       expiresIn: "12 days",
-      emoji: "ðŸ’»",
+      emoji: "💻",
       used: true,
     },
   ];
@@ -381,17 +382,17 @@ export function UserDashboard() {
     {
       id: 1,
       merchant: "Universal Gift Card",
-      value: "â‚¬50",
-      balance: "â‚¬35",
-      emoji: "ðŸŽ",
+      value: "€50",
+      balance: "€35",
+      emoji: "🎁",
       color: "from-[#FFC857] to-[#FFB627]",
     },
     {
       id: 2,
       merchant: "Spa & Wellness",
-      value: "â‚¬100",
-      balance: "â‚¬100",
-      emoji: "ðŸ’†",
+      value: "€100",
+      balance: "€100",
+      emoji: "💆",
       color: "from-[#D8A7C5] to-[#C897B5]",
     },
   ];
@@ -404,7 +405,7 @@ export function UserDashboard() {
       date: "Feb 15, 2026",
       location: "Tallinn",
       quantity: 2,
-      emoji: "ðŸŽ­",
+      emoji: "🎭",
       qrCode: true,
     },
     {
@@ -413,7 +414,7 @@ export function UserDashboard() {
       date: "Feb 22, 2026",
       location: "Riga",
       quantity: 1,
-      emoji: "ðŸ½ï¸",
+      emoji: "🍽️",
       qrCode: true,
     },
   ];
@@ -450,13 +451,13 @@ export function UserDashboard() {
     const success = await copyToClipboard(referralLink);
     if (success) {
       setCopied(true);
-      toast.success("ðŸŽ‰ Referral link copied!");
+      toast.success("🎉 Referral link copied!");
       setTimeout(() => setCopied(false), 2000);
     }
   };
 
   const handleShare = (platform: string) => {
-    toast.success(`âœ¨ Sharing on ${platform}... +50 points!`);
+    toast.success(`✨ Sharing on ${platform}... +50 points!`);
   };
 
   const progressPercentage =
@@ -542,7 +543,7 @@ export function UserDashboard() {
               }}
               transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
             >
-              ðŸŽ¯
+              🎯
             </motion.span>
             <span className="ml-3 bg-gradient-to-r from-[#2D2721] via-[#FFC857] to-[#E17B5C] bg-clip-text text-transparent">
               Rewards Dashboard
@@ -561,7 +562,7 @@ export function UserDashboard() {
               animate={{ rotate: [0, 14, -8, 14, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
             >
-              ðŸ‘‹
+              👋
             </motion.span>
           </motion.p>
         </div>
@@ -739,7 +740,11 @@ export function UserDashboard() {
                     >
                       <Trophy className="h-4 w-4 text-[#FFB627]" />
                     </motion.div>
-                    Progress to â‚¬25 Voucher
+                    Progress to{" "}
+                    <span className="font-semibold text-[#2D2721]">
+                      <CurrencyDisplay amount={25} currency="EUR" />
+                    </span>{" "}
+                    voucher
                   </span>
                   <motion.span
                     className="font-bold text-xl bg-gradient-to-r from-[#FFC857] to-[#E17B5C] bg-clip-text text-transparent"
@@ -865,7 +870,10 @@ export function UserDashboard() {
                     className="text-4xl font-bold bg-gradient-to-r from-[#E17B5C] to-[#FFC857] bg-clip-text text-transparent"
                     whileHover={{ scale: 1.2 }}
                   >
-                    {userStats.totalEarned}
+                    <CurrencyDisplay
+                      amount={userStats.totalEarned}
+                      currency="EUR"
+                    />
                   </motion.div>
                 </div>
                 <div className="text-sm text-[#8B7355] font-semibold">
@@ -943,7 +951,7 @@ export function UserDashboard() {
                     animate={{ scale: [1, 1.3, 1] }}
                     transition={{ duration: 1, repeat: Infinity }}
                   >
-                    ðŸ”¥
+                    🔥
                   </motion.span>
                 </div>
               </WarmCard>
@@ -986,7 +994,7 @@ export function UserDashboard() {
             </motion.div>
             <div>
               <h3 className="text-xl font-semibold text-[#2D2721]">
-                ðŸ… Your Achievements
+                🏅 Your Achievements
               </h3>
               <p className="text-sm text-[#8B7355]">
                 Unlock badges by completing challenges
@@ -1061,7 +1069,7 @@ export function UserDashboard() {
                       animate={{ scale: 1 }}
                       className="mt-1 text-xs text-[#9DB5A5] font-medium relative z-10"
                     >
-                      âœ“ Unlocked
+                      ✓ Unlocked
                     </motion.div>
                   )}
                 </WarmCard>
@@ -1106,7 +1114,7 @@ export function UserDashboard() {
                 animate={{ x: [0, 3, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
-                ðŸŽ Your Referral Link
+                🎁 Your Referral Link
               </motion.h3>
               <p className="text-sm text-[#8B7355]">
                 Share with friends and earn{" "}

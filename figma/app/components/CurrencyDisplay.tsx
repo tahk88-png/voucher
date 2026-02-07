@@ -3,11 +3,15 @@ import { currencySymbols } from '@/figma/app/data/mock-data';
 
 interface CurrencyDisplayProps {
   amount: number;
-  currency: Currency;
+  currency?: Currency;
   showCode?: boolean;
 }
 
-export function CurrencyDisplay({ amount, currency, showCode = false }: CurrencyDisplayProps) {
+export function CurrencyDisplay({
+  amount,
+  currency = 'EUR',
+  showCode = false,
+}: CurrencyDisplayProps) {
   const symbol = currencySymbols[currency];
   const formatted = new Intl.NumberFormat('en-EU', {
     minimumFractionDigits: 2,

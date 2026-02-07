@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import { WarmCard } from "@app/components/WarmCard";
 import { WarmButton } from "@app/components/WarmButton";
+import { CurrencyDisplay } from "@app/components/CurrencyDisplay";
 import {
   Megaphone,
   TrendingUp,
@@ -60,7 +61,7 @@ const CAMPAIGNS_DATA = [
   },
   {
     id: 3,
-    name: "SÃµbrapÃ¤eva Pakkumine",
+    name: "Sõbrapäeva Pakkumine",
     type: "social",
     status: "scheduled",
     reach: 0,
@@ -72,7 +73,7 @@ const CAMPAIGNS_DATA = [
   },
   {
     id: 4,
-    name: "PÃ¼sikliendi Kampaania",
+    name: "Püsikliendi Kampaania",
     type: "email",
     status: "active",
     reach: 3200,
@@ -111,7 +112,7 @@ export function CampaignsList() {
       campaigns.map((c) => (c.id === id ? { ...c, status: newStatus } : c)),
     );
     toast.success(
-      `Kampaania ${newStatus === "active" ? "jÃ¤tkatud" : "peatatud"}`,
+      `Kampaania ${newStatus === "active" ? "jätkatud" : "peatatud"}`,
     );
   };
 
@@ -124,7 +125,7 @@ export function CampaignsList() {
   });
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500 pb-12">
+    <div className="space-y-8 motion-safe:animate-fade-up pb-12">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
@@ -132,7 +133,7 @@ export function CampaignsList() {
             Turunduskampaaniad
           </h2>
           <p className="text-[#6B5744] mt-1">
-            Halda reklaame, uudiskirju ja sooduspakkumisi Ã¼hest kohast
+            Halda reklaame, uudiskirju ja sooduspakkumisi ühest kohast
           </p>
         </div>
         <WarmButton
@@ -178,10 +179,13 @@ export function CampaignsList() {
 
         <WarmCard padding="md" className="col-span-1">
           <div className="flex items-center gap-2 mb-2 text-[#8B7355] text-sm">
-            <Tag className="w-4 h-4" /> MÃ¼Ã¼k
+            <Tag className="w-4 h-4" /> Müük
           </div>
           <div className="text-2xl font-bold text-[#2D2721] mb-1">
-            â‚¬{campaigns.reduce((acc, c) => acc + c.sales, 0).toLocaleString()}
+            <CurrencyDisplay
+              amount={campaigns.reduce((acc, c) => acc + c.sales, 0)}
+              currency="EUR"
+            />
           </div>
         </WarmCard>
       </div>
@@ -212,12 +216,12 @@ export function CampaignsList() {
                   }`}
                 >
                   {status === "all"
-                    ? "KÃµik"
+                    ? "Kõik"
                     : status === "active"
                       ? "Aktiivsed"
                       : status === "scheduled"
                         ? "Ootel"
-                        : "LÃµppenud"}
+                        : "Lõppenud"}
                 </button>
               ))}
             </div>
@@ -265,12 +269,12 @@ export function CampaignsList() {
                             <span className="text-[#E17B5C]">Peatatud</span>
                           )}
                           {c.status === "completed" && (
-                            <span className="text-[#8B7355]">LÃµppenud</span>
+                            <span className="text-[#8B7355]">Lõppenud</span>
                           )}
                           {c.status === "scheduled" && (
                             <span className="text-[#E17B5C]">Ootel</span>
                           )}
-                          <span className="text-[#E7DCC7]">â€¢</span>
+                          <span className="text-[#E7DCC7]">•</span>
                           <span className="text-[#6B5744] capitalize">
                             {c.type}
                           </span>
@@ -283,7 +287,7 @@ export function CampaignsList() {
                         <button
                           onClick={() => handleStatusToggle(c.id, c.status)}
                           className="p-2 hover:bg-[#FAF7F2] rounded-lg text-[#8B7355] hover:text-[#2D2721]"
-                          title={c.status === "active" ? "Peata" : "JÃ¤tka"}
+                          title={c.status === "active" ? "Peata" : "Jätka"}
                         >
                           {c.status === "active" ? (
                             <PauseCircle className="w-5 h-5" />
@@ -322,9 +326,9 @@ export function CampaignsList() {
                       </div>
                     </div>
                     <div>
-                      <div className="text-xs text-[#8B7355] mb-1">MÃ¼Ã¼k</div>
+                      <div className="text-xs text-[#8B7355] mb-1">Müük</div>
                       <div className="font-bold text-[#2D2721] text-lg">
-                        â‚¬{c.sales.toLocaleString()}
+                        <CurrencyDisplay amount={c.sales} currency="EUR" />
                       </div>
                     </div>
                     <div>
@@ -345,7 +349,9 @@ export function CampaignsList() {
                 {c.status === "active" && (
                   <div className="bg-[#FAF7F2] px-5 py-3 flex items-center justify-between text-xs">
                     <span className="font-bold text-[#8B7355]">
-                      Eelarve kasutus (â‚¬{c.spent} / â‚¬{c.budget})
+                      Eelarve kasutus (
+                      <CurrencyDisplay amount={c.spent} currency="EUR" /> /{" "}
+                      <CurrencyDisplay amount={c.budget} currency="EUR" />)
                     </span>
                     <div className="flex items-center gap-3 w-1/2">
                       <div className="h-1.5 w-full bg-[#E7DCC7] rounded-full overflow-hidden">
@@ -376,7 +382,7 @@ export function CampaignsList() {
                     setFilterStatus("all");
                   }}
                 >
-                  TÃ¼hista filtrid
+                  Tühista filtrid
                 </WarmButton>
               </div>
             )}
@@ -390,7 +396,7 @@ export function CampaignsList() {
             className="bg-white h-[400px] flex flex-col shadow-lg border border-[#E7DCC7]"
           >
             <h3 className="font-bold text-[#2D2721] mb-6 flex items-center gap-2">
-              <BarChart3 className="w-4 h-4 text-[#FFC857]" /> NÃ¤dala tulemused
+              <BarChart3 className="w-4 h-4 text-[#FFC857]" /> Nädala tulemused
             </h3>
             <div className="flex-1 -ml-4">
               <ResponsiveContainer width="100%" height="100%">
@@ -432,7 +438,7 @@ export function CampaignsList() {
                   <Area
                     type="monotone"
                     dataKey="value"
-                    name="KÃ¤esolev nÃ¤dal"
+                    name="Käesolev nädal"
                     stroke="#00D098"
                     strokeWidth={3}
                     fillOpacity={1}
@@ -441,7 +447,7 @@ export function CampaignsList() {
                   <Area
                     type="monotone"
                     dataKey="prev"
-                    name="Eelmine nÃ¤dal"
+                    name="Eelmine nädal"
                     stroke="#8B7355"
                     strokeWidth={2}
                     strokeDasharray="5 5"
@@ -461,7 +467,7 @@ export function CampaignsList() {
             </h4>
             <p className="text-sm text-[#6B5744] leading-relaxed relative z-10 mb-4">
               Sinu kampaania "Kevadine Allahindlus" toimib oodatust paremini
-              (+15% klikke). Soovitame pikendada kampaaniat 3 pÃ¤eva vÃµrra.
+              (+15% klikke). Soovitame pikendada kampaaniat 3 päeva võrra.
             </p>
             <WarmButton
               size="sm"
