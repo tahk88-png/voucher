@@ -23,7 +23,6 @@ import { toast } from 'sonner';
 import { copyToClipboard } from '@app/utils/clipboard';
 import { UnifiedData, Campaign } from '@services/unifiedData';
 import { useCart } from '@app/contexts/CartContext';
-import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { SEOHead } from '@app/components/SEOHead';
 
 const DEFAULT_IMAGES = {
@@ -167,7 +166,6 @@ export function CampaignDetail() {
         type="product"
         jsonLd={jsonLd}
       />
-      <GlobalNavigation />
 
       <ShareModal
           isOpen={isShareModalOpen}

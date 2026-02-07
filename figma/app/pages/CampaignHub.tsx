@@ -19,7 +19,6 @@ import {
   Utensils,
   Plane,
 } from 'lucide-react';
-import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { UnifiedData, Campaign } from '@services/unifiedData';
 
 export function CampaignHub() {
@@ -50,7 +49,6 @@ export function CampaignHub() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
-      <GlobalNavigation />
 
       {/* Hero / Header Section */}
       <div className="bg-[#2D2721] text-white py-12 px-4 mb-8">

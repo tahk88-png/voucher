@@ -21,7 +21,6 @@ import {
   Package
 } from 'lucide-react';
 import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
-import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { useCart } from '@app/contexts/CartContext';
 import { UnifiedData } from '@services/unifiedData';
 import { IDVerification } from '@app/components/checkout/IDVerification';
@@ -129,7 +128,6 @@ export function Cart() {
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-[#FAF7F2]">
-        <GlobalNavigation />
         <div className="flex items-center justify-center p-4 h-[calc(100vh-64px)]">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-[#2D2721] mb-2">Sinu ostukorv on tühi</h2>
@@ -143,7 +141,6 @@ export function Cart() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] pb-12">
-      <GlobalNavigation />
       
       {/* Header */}
       <div className="bg-white border-b border-[#E7DCC7] sticky top-16 z-20">

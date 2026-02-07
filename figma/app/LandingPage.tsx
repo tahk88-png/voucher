@@ -5,7 +5,6 @@ import { Button } from './components/ui/button';
 import { ChevronRight, Loader2, Smartphone, Ticket, Smile, Camera, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { UnifiedData, Campaign } from '@services/unifiedData';
 
 const HERO_IMAGE = "https://images.unsplash.com/photo-1667235195726-a7c440bca9bd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBzcGElMjB3ZWxsbmVzc3xlbnwxfHx8fDE3NjkzMjQxMDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral";
@@ -46,7 +45,6 @@ export default function LandingPage() {
       <CampaignTicker />
 
       {/* Navbar */}
-      <GlobalNavigation />
 
       {/* Hero Section */}
       <section className="relative pt-12 pb-20 px-4 overflow-hidden">

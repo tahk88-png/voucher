@@ -6,7 +6,6 @@ import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { UnifiedData, Product, Rental, Campaign } from '@services/unifiedData';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@app/components/ui/tabs';
 import { MapPin, Globe, Mail, Phone, Star, ArrowRight, ShoppingBag, Camera, Ticket } from 'lucide-react';
-import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 
 export function MerchantProfilePublic() {
@@ -39,7 +38,6 @@ export function MerchantProfilePublic() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
-      <GlobalNavigation />
 
       {/* Hero / Header */}
       <div className="bg-white border-b border-[#E7DCC7]">

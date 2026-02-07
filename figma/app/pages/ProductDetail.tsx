@@ -23,7 +23,6 @@ import {
   PlayCircle
 } from 'lucide-react';
 import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
-import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { useCart } from '@app/contexts/CartContext';
 import { UnifiedData, Product } from '@services/unifiedData';
 import { SEOHead } from '@app/components/SEOHead';
@@ -179,7 +178,6 @@ export function ProductDetail() {
         image={product.image}
         type="product"
       />
-      <GlobalNavigation />
       
       {/* Context Bar */}
       <div className="bg-white border-b border-[#E7DCC7] sticky top-16 z-20 shadow-sm">

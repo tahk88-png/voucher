@@ -29,7 +29,6 @@ import {
   BookOpen
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { UnifiedData, Rental } from '@services/unifiedData';
 import { useCart } from '@app/contexts/CartContext';
 import { ExternalService } from '@services/externalService';
@@ -301,7 +300,6 @@ export function RentalDetail() {
         image={rentalItem.image}
         type="product"
       />
-      <GlobalNavigation />
       
       {/* Context Bar */}
       <div className="bg-white border-b border-[#E7DCC7] sticky top-16 z-20 shadow-sm">
