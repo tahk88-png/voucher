@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: Voucher Commerce Integration API
+  version: 1.0.0
+  description: Platform-agnostic discount validation and redemption confirmation.
+servers:
+  - url: https://your-domain.com
+paths:
+  /api/commerce/discount/validate:
+    post:
+      summary: Validate a discount code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiscountValidateRequest'
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiscountValidateResponse'
+  /api/commerce/redemption/confirm:
+    post:
+      summary: Confirm a paid order and unlock credit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedemptionConfirmRequest'
+      responses:
+        '200':
+          description: Confirmation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedemptionConfirmResponse'
+  /api/commerce/redemption/revoke:
+    post:
+      summary: Revoke a redemption (refund/cancel)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedemptionRevokeRequest'
+      responses:
+        '200':
+          description: Revoke result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericOk'
+  /api/commerce/codes/generate:
+    post:
+      summary: Generate voucher codes for a campaign
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodesGenerateRequest'
+      responses:
+        '200':
+          description: Codes generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodesGenerateResponse'
+components:
+  schemas:
+    Metadata:
+      type: object
+      properties:
+        platform:
+          type: string
+          enum: [shopify, woocommerce, magento, custom]
+        shopId:
+          type: string
+        orderId:
+          type: string
+        customerId:
+          type: string
+        refSource:
+          type: string
+          enum: [email, qr, share]
+        refParam:
+          type: string
+        couponCode:
+          type: string
+    DiscountValidateRequest:
+      type: object
+      required: [code, orderTotal, currency]
+      properties:
+        code:
+          type: string
+        orderTotal:
+          type: integer
+          description: Minor units (cents)
+        currency:
+          type: string
+        customerEmail:
+          type: string
+        referralId:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    DiscountValidateResponse:
+      type: object
+      required: [valid]
+      properties:
+        valid:
+          type: boolean
+        discountAmount:
+          type: integer
+        voucherId:
+          type: string
+        referralId:
+          type: string
+        reason:
+          type: string
+    RedemptionConfirmRequest:
+      type: object
+      required: [voucherId, orderReference, amountBeforeDiscount, discountApplied, currency]
+      properties:
+        voucherId:
+          type: string
+        referralId:
+          type: string
+        orderReference:
+          type: string
+        amountBeforeDiscount:
+          type: integer
+        discountApplied:
+          type: integer
+        currency:
+          type: string
+        customerEmail:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    RedemptionConfirmResponse:
+      type: object
+      required: [ok]
+      properties:
+        ok:
+          type: boolean
+        creditUnlocked:
+          type: boolean
+        redemptionId:
+          type: string
+    RedemptionRevokeRequest:
+      type: object
+      required: [orderReference, reason]
+      properties:
+        orderReference:
+          type: string
+        reason:
+          type: string
+    CodesGenerateRequest:
+      type: object
+      required: [campaignId, count]
+      properties:
+        campaignId:
+          type: string
+        count:
+          type: integer
+        prefix:
+          type: string
+    CodesGenerateResponse:
+      type: object
+      required: [codes]
+      properties:
+        codes:
+          type: array
+          items:
+            type: string
+    GenericOk:
+      type: object
+      required: [ok]
+      properties:
+        ok:
+          type: boolean

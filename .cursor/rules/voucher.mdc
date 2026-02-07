@@ -1,0 +1,239 @@
+---
+name: voucher
+description: This is a new rule
+---
+
+# Voucher Rules
+
+## 0) SINGLE SOURCE OF TRUTH
+
+Ainus tõde on TOTAL / ALL-IN PROMPT + MVP UI Scope-lock + Business Rules.
+
+Kui miski on vastuolus → ära ehita.
+
+Küsimuse korral → küsi enne.
+
+## 1) MVP SCOPE ON LUKUS
+
+EHITADA TOHIB AINULT:
+
+Voucher → Referral → Redemption → Credit → Wallet
+
+Public pages ilma login’ita
+
+Merchant dashboard minimaalses mahus
+
+KEELATUD MVP-S:
+
+marketplace
+
+feed
+
+kommentaarid / like’id
+
+loyalty tiers / badges
+
+ads
+
+AI
+
+growth-hackid
+
+extra analytics
+
+Kui funktsioon ei aita jagada, lunastada või krediteerida, siis ära ehita.
+
+## 2) TECH STACK ON LUKUS
+
+Next.js (App Router)
+
+TypeScript kõikjal
+
+Prisma + PostgreSQL
+
+shadcn/ui + Tailwind
+
+PWA (manifest + service worker)
+
+next-intl (EN default)
+
+Ei mingeid:
+
+teisi frameworke
+
+custom CSS süsteeme
+
+teisi ORM-e
+
+paroolipõhist auth’i
+
+## 3) ROLLID & ÕIGUSED (RANGE)
+
+anonymous → ainult public pages
+
+user → ainult enda wallet & vouchers
+
+merchant_staff → redemption confirm
+
+merchant_admin → voucherid, settings
+
+platform_admin → audit & risk
+
+Reegel:
+UI võib peita, server peab alati kontrollima.
+
+## 4) PUBLIC PAGES REEGEL (KRIITILINE)
+
+/v/[voucherId] ja /r/[referralId]:
+
+EI TOHI nõuda login’it
+
+PEAVAD avanema <1s
+
+PEAVAD töötama mobiilis ideaalselt
+
+Jagamine peab olema 1 tap.
+
+## 5) BUSINESS RULES (MITTEVAIDLUSTATAV)
+
+Credit ≠ raha
+
+Credit on merchant-põhine
+
+Credit:
+
+algul locked
+
+available ainult pärast redemption confirm
+
+aegub
+
+Self-referral on keelatud
+
+Weekly Drop:
+
+limited stock
+
+first-come-first-served
+
+kui otsas → otsas
+
+## 6) DATA & TRANSACTIONS
+
+Kõik write’id:
+
+transaction’iga
+
+server-side validatsioon
+
+Ära salvesta:
+
+raw phone/email (hash ainult)
+
+Prisma schema = püha
+
+Ära kasuta JSON-i, kui on vaja relatsiooni (v.a designJson, conditionsJson).
+
+## 7) UI & UX REEGLID
+
+1 primary CTA per vaade
+
+Mobile-first (desktop = enhancement)
+
+Ei mingeid “wizard’eid” üle 2 sammu
+
+Ei mingeid modal-hell’e
+
+Credit peab tunduma päris väärtusena
+
+Kui UI on ilus, aga aeglane → vale.
+
+## 8) PWA REEGLID
+
+Installitav
+
+Native share (mobile)
+
+Offline QR juba avatud voucheritele
+
+iOS & Android browser support
+
+## 9) LOGGING & AUDIT
+
+Kõik admin/staff tegevused → AuditLog
+
+Ära logi tundlikke andmeid
+
+Riskisündmused märgista (fraud flags)
+
+## 10) DONE DEFINITSIOON (ABSOLUUTNE)
+
+MVP on DONE, kui lokaalselt seed’iga:
+
+Avan voucheri
+
+Loon referral’i
+
+Jagan linki
+
+Friend redeem’ib
+
+Staff kinnitab
+
+Credit tekib locked
+
+Credit unlock’itakse
+
+Credit kasutatakse demo checkout’is
+
+Kui üks samm ei tööta → NOT DONE.
+
+## 11) KEEELUD (AUTOMAATNE STOPP)
+
+Cursor EI TOHI:
+
+lisada uusi lehti
+
+lisada uusi rolle
+
+lisada uusi tasemeid
+
+lisada analytics’e “niisama”
+
+“parandada UX-i” scope’i laiendades
+
+Kui tekib kiusatus → kirjuta V2 backlog’isse, ära ehita.
+
+## 12) BUILD ORDER (JÄRGI)
+
+Prisma schema + migrations
+
+Auth + RBAC + tenancy
+
+Public voucher & referral pages
+
+Merchant voucher builder
+
+Redemption + credit pipeline
+
+Wallet UI
+
+PWA polish
+
+Tests + seed + docs
+
+## 13) SUHTLUSREEGEL
+
+Kui midagi on ebaselge → küsi
+
+Kui miski ei mahu MVP-sse → ära tee
+
+Kui reegel on vastuolus ideega → idee kaotab
+
+## 14) FILOSOOFIA
+
+See projekt ei võida müraga.
+See võidab selguse, distsipliini ja usaldusega.
+
+Build infrastructure.
+Not hype.

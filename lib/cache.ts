@@ -1,0 +1,129 @@
+/**
+ * Caching layer using Redis (production) or in-memory (development)
+ *
+ * Usage:
+ *   const cached = await getCached('key', async () => fetchData(), 3600);
+ *   await set('key', data, 3600);
+ *   await invalidateCache('key');
+ */
+
+import { getRedisClient } from './redis';
+
+// In-memory fallback cache
+const memoryCache = new Map<string, { value: any; expiresAt: number }>();
+
+/**
+ * Get cached value or compute and cache
+ */
+export async function getCached<T>(
+  key: string,
+  computeFn: () => Promise<T>,
+  ttlSeconds: number = 3600
+): Promise<T> {
+  const cached = await get<T>(key);
+  if (cached !== null) {
+    return cached;
+  }
+
+  const value = await computeFn();
+  await set(key, value, ttlSeconds);
+  return value;
+}
+
+/**
+ * Get cached value
+ */
+export async function get<T>(key: string): Promise<T | null> {
+  const redisClient = await getRedisClient();
+  if (redisClient) {
+    try {
+      const value = await redisClient.get(key);
+      return value ? JSON.parse(value) : null;
+    } catch (error) {
+      console.error('Redis get error:', error);
+      return null;
+    }
+  }
+
+  // Fallback to memory cache
+  const cached = memoryCache.get(key);
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.value as T;
+  }
+  if (cached) {
+    memoryCache.delete(key);
+  }
+  return null;
+}
+
+/**
+ * Set cached value
+ */
+export async function set(key: string, value: any, ttlSeconds: number = 3600): Promise<void> {
+  const redisClient = await getRedisClient();
+  if (redisClient) {
+    try {
+      await redisClient.setEx(key, ttlSeconds, JSON.stringify(value));
+      return;
+    } catch (error) {
+      console.error('Redis set error:', error);
+    }
+  }
+
+  // Fallback to memory cache
+  memoryCache.set(key, {
+    value,
+    expiresAt: Date.now() + ttlSeconds * 1000,
+  });
+}
+
+/**
+ * Invalidate cache
+ */
+export async function invalidateCache(key: string): Promise<void> {
+  const redisClient = await getRedisClient();
+  if (redisClient) {
+    try {
+      await redisClient.del(key);
+    } catch (error) {
+      console.error('Redis delete error:', error);
+    }
+  }
+
+  memoryCache.delete(key);
+}
+
+/**
+ * Invalidate cache by pattern (Redis only)
+ */
+export async function invalidatePattern(pattern: string): Promise<void> {
+  const redisClient = await getRedisClient();
+  if (redisClient) {
+    try {
+      const keys = await redisClient.keys(pattern);
+      if (keys.length > 0) {
+        await redisClient.del(keys);
+      }
+    } catch (error) {
+      console.error('Redis pattern delete error:', error);
+    }
+  }
+
+  // For memory cache, iterate and delete matching keys
+  for (const key of memoryCache.keys()) {
+    if (key.includes(pattern.replace('*', ''))) {
+      memoryCache.delete(key);
+    }
+  }
+}
+
+/**
+ * Cache keys
+ */
+export const CacheKeys = {
+  voucher: (id: string) => `voucher:${id}`,
+  merchant: (slug: string) => `merchant:${slug}`,
+  merchantVouchers: (merchantId: string) => `merchant:${merchantId}:vouchers`,
+  campaign: (id: string) => `campaign:${id}`,
+  userWallet: (userId: string, merchantId: string) => `wallet:${userId}:${merchantId}`,
+};

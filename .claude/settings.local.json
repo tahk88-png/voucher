@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(test:*)",
+      "Bash(docker:*)",
+      "Bash(docker compose:*)",
+      "Bash(npm run docker:up:*)",
+      "Bash(npm run db:push:*)",
+      "Bash(npm run db:seed:*)",
+      "Bash(npm run build:*)",
+      "Bash(tee:*)",
+      "Bash(npm run dev)",
+      "mcp__claude_ai_Figma__get_design_context"
+    ]
+  }
+}

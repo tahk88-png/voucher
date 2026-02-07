@@ -1,0 +1,64 @@
+
+> voucher-platform@1.0.0 build
+> node scripts/build.cjs
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+
+✔ Generated Prisma Client (v5.22.0) to .\node_modules\@prisma\client in 848ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+Tip: Want to react to database changes in your app as they happen? Discover how with Pulse: https://pris.ly/tip-1-pulse
+
+  ▲ Next.js 14.2.35
+  - Environments: .env.local, .env
+
+   Creating an optimized production build ...
+> [PWA] Compile server
+> [PWA] Compile server
+> [PWA] Compile client (static)
+> [PWA] Auto register service worker with: C:\Users\tahk8\voucher\node_modules\next-pwa\register.js
+> [PWA] Service worker: C:\Users\tahk8\voucher\public\sw.js
+> [PWA]   url: /sw.js
+> [PWA]   scope: /
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./lib/auth.ts:70:59
+Type error: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+[0m [90m 68 |[39m               [36mlet[39m user [33m=[39m [36mawait[39m prisma[33m.[39muser[33m.[39mfindUnique({ where[33m:[39m { email } })[33m;[39m[0m
+[0m [90m 69 |[39m               [36mif[39m ([33m![39muser) {[0m
+[0m[31m[1m>[22m[39m[90m 70 |[39m                 user [33m=[39m [36mawait[39m prisma[33m.[39muser[33m.[39mcreate({ data[33m:[39m { email[33m,[39m name } })[33m;[39m[0m
+[0m [90m    |[39m                                                           [31m[1m^[22m[39m[0m
+[0m [90m 71 |[39m               }[0m
+[0m [90m 72 |[39m               [36mreturn[39m { id[33m:[39m user[33m.[39mid[33m,[39m email[33m:[39m user[33m.[39memail[33m,[39m name[33m:[39m user[33m.[39mname [33m?[39m[33m?[39m name }[33m;[39m[0m
+[0m [90m 73 |[39m             }[33m,[39m[0m
+Next.js build worker exited with code: 1 and signal: null
+node:child_process:1000
+    throw err;
+    ^
+
+Error: Command failed: npx next build
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:925:11)
+    at execSync (node:child_process:997:15)
+    at Object.<anonymous> (C:\Users\tahk8\voucher\scripts\build.cjs:9:1)
+    at Module._compile (node:internal/modules/cjs/loader:1761:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14) {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 31076,
+  stdout: null,
+  stderr: null
+}
+
+Node.js v24.13.0

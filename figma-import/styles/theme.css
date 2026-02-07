@@ -1,0 +1,199 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Typography */
+  --font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size: 16px;
+  
+  /* Warm Color Palette */
+  --cream-50: #FFFBF5;
+  --cream-100: #FFF9ED;
+  --cream-200: #F8F6F1;
+  --cream-300: #F2EDE3;
+  
+  --beige-100: #FFE5B4;
+  --beige-200: #FFDAA3;
+  --beige-300: #F5C98E;
+  
+  --yellow-400: #FFC857;
+  --yellow-500: #FFB627;
+  
+  --brown-500: #8B7355;
+  --brown-600: #6B5744;
+  --brown-700: #4A3F35;
+  --brown-800: #2D2721;
+  
+  --terracotta: #E17B5C;
+  --sage: #9DB5A5;
+  
+  /* Semantic Colors */
+  --background: var(--cream-50);
+  --foreground: var(--brown-800);
+  --card: #FFFFFF;
+  --card-foreground: var(--brown-800);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--brown-800);
+  --primary: var(--yellow-500);
+  --primary-foreground: var(--brown-800);
+  --secondary: var(--cream-300);
+  --secondary-foreground: var(--brown-700);
+  --muted: var(--cream-200);
+  --muted-foreground: var(--brown-500);
+  --accent: var(--beige-200);
+  --accent-foreground: var(--brown-800);
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --success: var(--sage);
+  --success-foreground: var(--brown-800);
+  --border: rgba(139, 115, 85, 0.15);
+  --input: rgba(139, 115, 85, 0.1);
+  --input-background: #FFFFFF;
+  --ring: var(--yellow-500);
+  
+  /* Spacing & Layout */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  /* Shadows - Warm & Soft */
+  --shadow-sm: 0 2px 8px rgba(139, 115, 85, 0.08);
+  --shadow-md: 0 4px 16px rgba(139, 115, 85, 0.12);
+  --shadow-lg: 0 8px 24px rgba(139, 115, 85, 0.15);
+  --shadow-xl: 0 12px 32px rgba(139, 115, 85, 0.18);
+  
+  /* Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Charts */
+  --chart-1: var(--yellow-500);
+  --chart-2: var(--terracotta);
+  --chart-3: var(--sage);
+  --chart-4: var(--beige-300);
+  --chart-5: var(--brown-600);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family);
+  }
+
+  /* Warm Gradient Utilities */
+  .gradient-warm {
+    background: linear-gradient(135deg, var(--cream-100) 0%, var(--beige-100) 100%);
+  }
+
+  .gradient-yellow {
+    background: linear-gradient(135deg, var(--yellow-400) 0%, var(--yellow-500) 100%);
+  }
+
+  .gradient-sunset {
+    background: linear-gradient(135deg, var(--yellow-400) 0%, var(--terracotta) 100%);
+  }
+
+  /* Typography Styles */
+  h1 {
+    font-size: 2.25rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 1.875rem;
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.3;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.4;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Mobile Typography */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.75rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* Soft Shadow Utilities */
+  .shadow-warm-sm {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .shadow-warm {
+    box-shadow: var(--shadow-md);
+  }
+
+  .shadow-warm-lg {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .shadow-warm-xl {
+    box-shadow: var(--shadow-xl);
+  }
+}
