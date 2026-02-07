@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send, MinusCircle } from 'lucide-react';
-import { useAdminSettings } from '@/figma/app/contexts/AdminSettings';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { useAdminSettings } from '@app/contexts/AdminSettings';
+import { WarmButton } from '@app/components/WarmButton';
 
 export function ChatWidget() {
   const { chatEnabled } = useAdminSettings();

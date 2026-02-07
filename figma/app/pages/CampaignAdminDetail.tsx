@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { Input } from '@/figma/app/components/ui/input';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { Input } from '@app/components/ui/input';
 import { 
   ArrowLeft, 
   Save, 
@@ -20,7 +20,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 
 // Mock data types matching our system
 type CampaignType = 'voucher' | 'gift_card' | 'discount';

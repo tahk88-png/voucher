@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { useBonusTracking } from '@/figma/app/contexts/BonusTracking';
-import { copyToClipboard } from '@/figma/app/utils/clipboard';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { useBonusTracking } from '@app/contexts/BonusTracking';
+import { copyToClipboard } from '@app/utils/clipboard';
 import {
   Share2,
   Copy,

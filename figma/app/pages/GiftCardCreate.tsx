@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Gift, CreditCard, Mail, Upload, X, Check, Eye } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { Textarea } from '@/figma/app/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/figma/app/components/ui/select';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { Textarea } from '@app/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@app/components/ui/select';
 import { toast } from 'sonner';
 import { QRCodeSVG } from 'qrcode.react';
 import { motion, AnimatePresence } from 'motion/react';

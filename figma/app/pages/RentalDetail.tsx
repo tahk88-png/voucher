@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { ImageWithFallback } from '@/figma/app/components/figma/ImageWithFallback';
+import { WarmButton } from '@app/components/WarmButton';
+import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { 
   ArrowLeft, 
   MapPin, 
@@ -29,15 +29,16 @@ import {
   BookOpen
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { UnifiedData, Rental } from '@/figma/services/unifiedData';
-import { useCart } from '@/figma/app/contexts/CartContext';
-import { ExternalService } from '@/figma/services/externalService';
-import { SEOHead } from '@/figma/app/components/SEOHead';
+import { GlobalNavigation } from '@app/components/GlobalNavigation';
+import { UnifiedData, Rental } from '@services/unifiedData';
+import { useCart } from '@app/contexts/CartContext';
+import { ExternalService } from '@services/externalService';
+import { SEOHead } from '@app/components/SEOHead';
 import { format, differenceInDays, addDays, isSameDay } from 'date-fns';
 import { et } from 'date-fns/locale';
 import { DayPicker, DateRange } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { copyToClipboard } from '@/figma/app/utils/clipboard';
+import { copyToClipboard } from '@app/utils/clipboard';
 
 // RENTAL ADD-ONS MOCK
 const RENTAL_ADDONS = [
@@ -300,6 +301,7 @@ export function RentalDetail() {
         image={rentalItem.image}
         type="product"
       />
+      <GlobalNavigation />
       
       {/* Context Bar */}
       <div className="bg-white border-b border-[#E7DCC7] sticky top-16 z-20 shadow-sm">

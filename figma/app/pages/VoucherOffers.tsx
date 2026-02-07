@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { ImageWithFallback } from '@/figma/app/components/figma/ImageWithFallback';
-import { SEOHead } from '@/figma/app/components/SEOHead';
+import { WarmButton } from '@app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
+import { SEOHead } from '@app/components/SEOHead';
+import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { Tag, Clock, ArrowRight, Sparkles, Gift, Globe, Languages, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -96,6 +97,7 @@ export function VoucherOffers() {
   return (
     <div className="min-h-screen bg-[#FAF7F2] pb-12">
       <SEOHead title="Pakkumised ja Vautšerid | GiftHub" />
+      <GlobalNavigation />
 
       {/* Hero */}
       <div className="bg-[#2D2721] text-[#E7DCC7] py-12 px-4 relative overflow-hidden">

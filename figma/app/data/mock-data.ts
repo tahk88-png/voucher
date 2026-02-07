@@ -1,4 +1,4 @@
-import { Voucher, Merchant, CountryMetrics, VATRate, Country, Currency } from '@/figma/app/types';
+import { Voucher, Merchant, CountryMetrics, VATRate, Country, Currency } from '@app/types';
 
 export const vatRates: VATRate[] = [
   { country: 'DE', standardRate: 19, reducedRates: [7] },

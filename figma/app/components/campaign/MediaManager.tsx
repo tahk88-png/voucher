@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Upload, Search, Wand2, Image as ImageIcon, X, Loader2, Sparkles, Download } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { Button } from '@/figma/app/components/ui/button';
-import { Label } from '@/figma/app/components/ui/label';
-import { cn } from '@/figma/app/components/ui/utils';
+import { Input } from '@app/components/ui/input';
+import { Button } from '@app/components/ui/button';
+import { Label } from '@app/components/ui/label';
+import { cn } from '@app/components/ui/utils';
 
 // Mock data for AI generation simulation
 const MOCK_GENERATED_IMAGES = [

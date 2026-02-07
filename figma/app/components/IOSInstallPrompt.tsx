@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { X, Share, Plus, Home } from 'lucide-react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 
 export function IOSInstallPrompt() {
   const [showPrompt, setShowPrompt] = useState(false);

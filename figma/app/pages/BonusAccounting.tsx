@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { useNavigate } from 'react-router-dom';
 import { 
   DollarSign,
@@ -19,9 +19,9 @@ import {
   Phone,
   ExternalLink
 } from 'lucide-react';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
-import { Input } from '@/figma/app/components/ui/input';
-import { useBonusTracking } from '@/figma/app/contexts/BonusTracking';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
+import { Input } from '@app/components/ui/input';
+import { useBonusTracking } from '@app/contexts/BonusTracking';
 
 type BonusStatus = 'pending' | 'approved' | 'paid' | 'cancelled';
 

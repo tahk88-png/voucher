@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Star, MessageSquare, X, Send, ThumbsUp } from 'lucide-react';
-import { useAdminSettings } from '@/figma/app/contexts/AdminSettings';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { useAdminSettings } from '@app/contexts/AdminSettings';
+import { WarmButton } from '@app/components/WarmButton';
 import { toast } from 'sonner';
 
 export function FeedbackWidget() {

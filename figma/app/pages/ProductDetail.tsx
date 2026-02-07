@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { ImageWithFallback } from '@/figma/app/components/figma/ImageWithFallback';
+import { WarmButton } from '@app/components/WarmButton';
+import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { 
   ArrowLeft, 
   ArrowRight,
@@ -22,12 +22,13 @@ import {
   Linkedin,
   PlayCircle
 } from 'lucide-react';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
-import { useCart } from '@/figma/app/contexts/CartContext';
-import { UnifiedData, Product } from '@/figma/services/unifiedData';
-import { SEOHead } from '@/figma/app/components/SEOHead';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
+import { GlobalNavigation } from '@app/components/GlobalNavigation';
+import { useCart } from '@app/contexts/CartContext';
+import { UnifiedData, Product } from '@services/unifiedData';
+import { SEOHead } from '@app/components/SEOHead';
 import { toast } from 'sonner';
-import { copyToClipboard } from '@/figma/app/utils/clipboard';
+import { copyToClipboard } from '@app/utils/clipboard';
 
 // Mock Add-ons Data
 const PRODUCT_ADDONS = [
@@ -178,6 +179,7 @@ export function ProductDetail() {
         image={product.image}
         type="product"
       />
+      <GlobalNavigation />
       
       {/* Context Bar */}
       <div className="bg-white border-b border-[#E7DCC7] sticky top-16 z-20 shadow-sm">

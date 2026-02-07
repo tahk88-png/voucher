@@ -1,8 +1,8 @@
-import { copyToClipboard } from '@/figma/app/utils/clipboard';
+import { copyToClipboard } from '@app/utils/clipboard';
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { useBonusTracking } from '@/figma/app/contexts/BonusTracking';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { useBonusTracking } from '@app/contexts/BonusTracking';
 import { 
   Share2, 
   Copy, 
@@ -20,13 +20,13 @@ import {
   MessageSquare,
   Download
 } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { Textarea } from '@/figma/app/components/ui/textarea';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/figma/app/components/ui/tabs';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { Textarea } from '@app/components/ui/textarea';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@app/components/ui/tabs';
 import { toast } from 'sonner';
-import { QRCodeDesigner } from '@/figma/app/components/QRCodeDesigner';
-import { BulkEmailSender } from '@/figma/app/components/BulkEmailSender';
+import { QRCodeDesigner } from '@app/components/QRCodeDesigner';
+import { BulkEmailSender } from '@app/components/BulkEmailSender';
 
 type ShareItem = {
   id: string;

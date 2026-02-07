@@ -1,8 +1,9 @@
-import { WarmCard } from '@/figma/app/components/WarmCard';
+import { WarmCard } from '@app/components/WarmCard';
+import { GlobalNavigation } from '@app/components/GlobalNavigation';
 import { ScrollText, ShieldCheck, Scale, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { SEOHead } from '@/figma/app/components/SEOHead';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { SEOHead } from '@app/components/SEOHead';
+import { WarmButton } from '@app/components/WarmButton';
 
 export function TermsOfService() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ export function TermsOfService() {
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
       <SEOHead title="Kasutajatingimused | GiftHub" description="Tutvu meie kasutajatingimuste ja privaatsuspoliitikaga." />
+      <GlobalNavigation />
 
       <main className="max-w-4xl mx-auto px-4 py-12">
         <div className="mb-8">

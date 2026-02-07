@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { RichTextEditor } from '@/figma/app/components/RichTextEditor';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { RichTextEditor } from '@app/components/RichTextEditor';
 import { useNavigate } from 'react-router-dom';
 import { 
   ArrowLeft, 
@@ -19,16 +19,16 @@ import {
   Monitor,
   Wand2
 } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/figma/app/components/ui/select';
-import { DatePicker } from '@/figma/app/components/DatePicker';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@app/components/ui/select';
+import { DatePicker } from '@app/components/DatePicker';
 import { toast } from 'sonner';
-import { MediaManager } from '@/figma/app/components/campaign/MediaManager';
-import { CategorySelector } from '@/figma/app/components/campaign/CategorySelector';
-import { CATEGORY_DATA } from '@/figma/app/data/categories';
+import { MediaManager } from '@app/components/campaign/MediaManager';
+import { CategorySelector } from '@app/components/campaign/CategorySelector';
+import { CATEGORY_DATA } from '@app/data/categories';
 import { motion, AnimatePresence } from 'motion/react';
-import { api } from '@/figma/services/api';
+import { api } from '@services/api';
 
 type Step = 1 | 2 | 3 | 4 | 5;
 

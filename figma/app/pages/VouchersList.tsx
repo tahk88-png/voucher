@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Search, QrCode, Eye, Edit, Copy, Trash2, ExternalLink, Share2 } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
+import { Input } from '@app/components/ui/input';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 import { toast } from 'sonner';
 
 type Voucher = {

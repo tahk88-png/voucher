@@ -33,10 +33,10 @@ export function GlobalNavigation() {
 
   const navItems = [
     { name: 'Avaleht', path: '/', icon: Home },
-    { name: 'Kampaaniad', path: '/campaigns', icon: Megaphone },
     { name: 'Pakkumised', path: '/voucher', icon: Ticket },
     { name: 'Kinkekaardid', path: '/gift-cards', icon: Gift },
     { name: 'Sündmused', path: '/events', icon: CalendarDays },
+    { name: 'Kampaaniad', path: '/campaigns', icon: Megaphone },
     { name: 'Rent', path: '/rentals', icon: Calendar },
     { name: 'Pood', path: '/shop', icon: ShoppingBag },
   ];
@@ -139,7 +139,7 @@ export function GlobalNavigation() {
 
           <Link to="/b2b-solutions" className="hidden sm:block">
             <Button className="bg-[#E17B5C] hover:bg-[#D16B4C] text-white rounded-full px-6 shadow-warm-sm hover:shadow-warm">
-              Hakka partneriks
+              Partnerile
             </Button>
           </Link>
 
@@ -209,7 +209,7 @@ export function GlobalNavigation() {
                 onClick={() => setIsMenuOpen(false)}
                 className="px-4 py-3 text-[#E17B5C] font-bold mt-2"
               >
-                Hakka partneriks
+                Partnerile
               </Link>
             </nav>
           </div>

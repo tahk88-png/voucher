@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { SEOHead } from '@/figma/app/components/SEOHead';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { SEOHead } from '@app/components/SEOHead';
 import { FileText, CheckCircle2, Shield, Smartphone, Loader2, ArrowLeft, Download } from 'lucide-react';
 import { toast } from 'sonner';
 

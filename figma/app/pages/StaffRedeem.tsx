@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { useNavigate } from 'react-router-dom';
 import { QrCode, Check, X, ArrowLeft, AlertCircle, Scan, CreditCard, Gift, Ticket, Smartphone } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/figma/app/components/ui/tabs';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@app/components/ui/tabs';
 
 type ScanState = 'idle' | 'scanning' | 'success' | 'error' | 'already-used';
 type RedemptionType = 'voucher' | 'gift-card' | 'event-ticket';

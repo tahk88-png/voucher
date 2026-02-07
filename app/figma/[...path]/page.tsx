@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useParams } from 'next/navigation';
 import { DashboardLayout } from '@/figma/app/components/DashboardLayout';
 import { GlobalNavigation } from '@/figma/app/components/GlobalNavigation';
+import { PublicCatalogShell } from '@/figma/app/components/PublicCatalogShell';
 import { RouterShimProvider } from '@/lib/router-shim';
 import { FIGMA_ROUTES, matchFigmaRoute } from '../route-map';
 
@@ -26,6 +27,8 @@ export default function FigmaCatchAllPage() {
   const content =
     route?.layout === 'dashboard' ? (
       <DashboardLayout>{page}</DashboardLayout>
+    ) : route?.layout === 'public-catalog' ? (
+      <PublicCatalogShell>{page}</PublicCatalogShell>
     ) : (
       <>
         <GlobalNavigation />

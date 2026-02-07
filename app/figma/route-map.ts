@@ -75,7 +75,7 @@ export type FigmaRoute = {
   title: string;
   path: string;
   component: ComponentType;
-  layout?: 'dashboard';
+  layout?: 'dashboard' | 'public-catalog';
 };
 
 export const FIGMA_ROUTES: FigmaRoute[] = [
@@ -119,9 +119,9 @@ export const FIGMA_ROUTES: FigmaRoute[] = [
   { title: 'Vouchers List', path: '/vouchers', component: VouchersList, layout: 'dashboard' },
   { title: 'Voucher Create', path: '/vouchers/create', component: VoucherCreate, layout: 'dashboard' },
   { title: 'Discount Codes', path: '/discounts', component: DiscountCodes, layout: 'dashboard' },
-  { title: 'Gift Cards List', path: '/gift-cards', component: GiftCardsList },
+  { title: 'Gift Cards List', path: '/gift-cards', component: GiftCardsList, layout: 'public-catalog' },
   { title: 'Gift Card Create', path: '/gift-cards/create', component: GiftCardCreate, layout: 'dashboard' },
-  { title: 'Events List', path: '/events', component: EventsList },
+  { title: 'Events List', path: '/events', component: EventsList, layout: 'public-catalog' },
   { title: 'Event Create', path: '/events/create', component: EventCreate, layout: 'dashboard' },
   { title: 'Event Detail', path: '/events/:id', component: EventDetail, layout: 'dashboard' },
   { title: 'Event Edit', path: '/events/:id/edit', component: EventCreate, layout: 'dashboard' },

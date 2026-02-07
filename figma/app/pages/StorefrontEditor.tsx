@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { ImageWithFallback } from '@/figma/app/components/figma/ImageWithFallback';
-import { Switch } from '@/figma/app/components/ui/switch';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { Textarea } from '@/figma/app/components/ui/textarea';
+import { WarmButton } from '@app/components/WarmButton';
+import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
+import { Switch } from '@app/components/ui/switch';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { Textarea } from '@app/components/ui/textarea';
 import { 
   MoveVertical, 
   Plus, 

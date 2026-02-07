@@ -1,5 +1,5 @@
-import { VoucherStatus } from '@/figma/app/types';
-import { Badge } from '@/figma/app/components/ui/badge';
+import { VoucherStatus } from '@app/types';
+import { Badge } from '@app/components/ui/badge';
 
 interface StatusChipProps {
   status: VoucherStatus;

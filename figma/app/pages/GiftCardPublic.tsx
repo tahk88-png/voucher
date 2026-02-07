@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { Gift, QrCode, Share2, Copy, Check, ArrowRight, CreditCard, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
-import { copyToClipboard } from '@/figma/app/utils/clipboard';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
+import { copyToClipboard } from '@app/utils/clipboard';
 
 type Transaction = {
   id: string;

@@ -1,5 +1,5 @@
 import { HTMLAttributes, forwardRef } from 'react';
-import { cn } from '@/figma/app/components/ui/utils';
+import { cn } from '@app/components/ui/utils';
 
 interface WarmCardProps extends HTMLAttributes<HTMLDivElement> {
   gradient?: boolean;
@@ -20,10 +20,9 @@ export const WarmCard = forwardRef<HTMLDivElement, WarmCardProps>(
       <div
         ref={ref}
         className={cn(
-          'relative rounded-[20px] shadow-warm border border-[#F2EDE3] overflow-hidden motion-safe:animate-fade-up',
+          'rounded-[20px] shadow-warm',
           gradient ? 'bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4]' : 'bg-white',
-          hover && 'transition-all duration-200 hover:shadow-warm-lg hover:-translate-y-1',
-          hover && 'before:absolute before:inset-x-0 before:top-0 before:h-20 before:bg-gradient-to-b before:from-white/70 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100',
+          hover && 'transition-all duration-200 hover:shadow-warm-lg hover:scale-[1.01]',
           paddingStyles[padding],
           className
         )}

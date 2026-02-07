@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Minimize2 } from 'lucide-react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { Input } from '@/figma/app/components/ui/input';
-import { useAdminSettings } from '@/figma/app/contexts/AdminSettings';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { Input } from '@app/components/ui/input';
+import { useAdminSettings } from '@app/contexts/AdminSettings';
 
 interface Message {
   id: string;

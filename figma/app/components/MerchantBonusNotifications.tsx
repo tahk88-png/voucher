@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useBonusTracking, ShareActivity } from '@/figma/app/contexts/BonusTracking';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
+import { useBonusTracking, ShareActivity } from '@app/contexts/BonusTracking';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
 import { 
   Bell, 
   Gift, 

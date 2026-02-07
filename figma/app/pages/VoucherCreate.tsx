@@ -4,12 +4,12 @@ import { ArrowLeft, ArrowRight, Check, Upload, X, RefreshCw, QrCode } from 'luci
 import { toast } from 'sonner';
 import { QRCodeSVG } from 'qrcode.react';
 
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { TemplateGallery, Template } from '@/figma/app/components/TemplateGallery';
-import { Label } from '@/figma/app/components/ui/label';
-import { Input } from '@/figma/app/components/ui/input';
-import { RichTextEditor } from '@/figma/app/components/RichTextEditor';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { TemplateGallery, Template } from '@app/components/TemplateGallery';
+import { Label } from '@app/components/ui/label';
+import { Input } from '@app/components/ui/input';
+import { RichTextEditor } from '@app/components/RichTextEditor';
 
 type Step = 1 | 2 | 3;
 

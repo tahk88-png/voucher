@@ -1,18 +1,11 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { SEOHead } from '@/figma/app/components/SEOHead';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { SEOHead } from '@app/components/SEOHead';
 import { useNavigate } from 'react-router-dom';
 import { 
-  Building2,
   Gift, 
-  Home,
-  Laptop,
-  Leaf,
-  Plane,
-  Shirt,
   Ticket, 
-  Utensils,
   QrCode, 
   CreditCard, 
   Users, 
@@ -86,63 +79,63 @@ export function Landing() {
   const categories = [
     { 
       name: 'Food & Drink', 
-      icon: Utensils,
+      icon: '🍽️',
       count: 234,
       color: 'from-[#FFC857] to-[#FFB627]',
       campaigns: ['20% off Pizza', 'Buy 1 Get 1 Coffee', 'Happy Hour Specials']
     },
     { 
       name: 'Fashion', 
-      icon: Shirt,
+      icon: '👗',
       count: 189,
       color: 'from-[#E17B5C] to-[#D16B4C]',
       campaigns: ['Summer Sale 50%', 'New Collection', 'Free Shipping']
     },
     { 
       name: 'Beauty', 
-      icon: Sparkles,
+      icon: '💄',
       count: 156,
       color: 'from-[#F5C98E] to-[#E5B97E]',
       campaigns: ['Spa Day Deals', 'Hair Salon 30%', 'Makeup Masterclass']
     },
     { 
-      name: 'Tech', 
-      icon: Laptop,
+      name: 'Tehnika', 
+      icon: '💻',
       count: 142,
       color: 'from-[#9DB5A5] to-[#7FA090]',
       campaigns: ['Tech Sale', 'Trade-in Bonus', 'Student Discount']
     },
     { 
       name: 'Travel', 
-      icon: Plane,
+      icon: '✈️',
       count: 198,
       color: 'from-[#FFC857] to-[#FFB627]',
       campaigns: ['Weekend Getaway', 'Flight Deals', 'Hotel 40% Off']
     },
     { 
       name: 'Wellness', 
-      icon: Leaf,
+      icon: '🧘',
       count: 123,
       color: 'from-[#9DB5A5] to-[#7FA090]',
       campaigns: ['Yoga Classes', 'Gym Membership', 'Wellness Retreat']
     },
     { 
       name: 'Events', 
-      icon: PartyPopper,
+      icon: '🎉',
       count: 167,
       color: 'from-[#E17B5C] to-[#D16B4C]',
       campaigns: ['Concert Tickets', 'Festival Passes', 'VIP Access']
     },
     { 
       name: 'Home', 
-      icon: Home,
+      icon: '🏠',
       count: 134,
       color: 'from-[#F5C98E] to-[#E5B97E]',
       campaigns: ['Furniture Sale', 'Home Decor', 'Garden Tools']
     },
     { 
       name: 'Accommodation', 
-      icon: Building2,
+      icon: '🏨',
       count: 87,
       color: 'from-[#9DB5A5] to-[#7FA090]',
       campaigns: ['Luxury Suite', 'Boutique Stay', 'Resort Deal']
@@ -192,14 +185,33 @@ export function Landing() {
         type="website"
       />
       
+      {/* Header */}
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-[rgba(139,115,85,0.1)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
+                <Gift className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-xl font-bold text-[#2D2721]">GiftHub</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <WarmButton variant="ghost" onClick={() => navigate('/campaigns')}>
+                Explore Campaigns
+              </WarmButton>
+              <WarmButton onClick={() => navigate('/login')}>
+                Login
+              </WarmButton>
+            </div>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#FFC857] rounded-full blur-3xl motion-safe:animate-float" />
-          <div
-            className="absolute bottom-20 right-10 w-96 h-96 bg-[#9DB5A5] rounded-full blur-3xl motion-safe:animate-float"
-            style={{ animationDelay: '1.4s' }}
-          />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#FFC857] rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#9DB5A5] rounded-full blur-3xl" />
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
@@ -250,7 +262,7 @@ export function Landing() {
         </div>
       </section>
 
-      {/* FEATURED: Explore Campaigns Banner - SUPER PROMINENT */}
+      {/* 🔥 FEATURED: Explore Campaigns Banner - SUPER PROMINENT */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-16">
         <WarmCard padding="none" className="overflow-hidden relative group cursor-pointer" onClick={() => navigate('/campaigns')}>
           <div className="absolute inset-0 bg-gradient-to-br from-[#FFC857] via-[#FFD700] to-[#FFB627] opacity-95" />
@@ -269,11 +281,11 @@ export function Landing() {
                 </div>
                 
                 <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight drop-shadow-lg">
-                  Discover Amazing Campaigns
+                  🎯 Discover Amazing Campaigns!
                 </h2>
                 
                 <p className="text-xl sm:text-2xl text-white/95 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 drop-shadow">
-                  Browse <strong>1,343+ active campaigns</strong> across Europe - Vouchers, Gift Cards, Events & More
+                  Browse <strong>1,343+ active campaigns</strong> across Europe • Vouchers, Gift Cards, Events & More
                 </p>
                 
                 {/* Stats row */}
@@ -324,28 +336,28 @@ export function Landing() {
                   {/* Mini campaign cards preview */}
                   <div className="w-40 h-40 bg-white/95 backdrop-blur rounded-[20px] p-4 shadow-warm-lg hover:scale-105 transition-transform">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#E17B5C] to-[#D16B4C] flex items-center justify-center text-2xl mb-2 shadow-warm">
-                      <Utensils className="h-6 w-6 text-white" />
+                      🍕
                     </div>
                     <div className="text-xs font-bold text-[#2D2721] mb-1">Food & Drink</div>
                     <div className="text-xs text-[#6B5744]">234 deals</div>
                   </div>
                   <div className="w-40 h-40 bg-white/95 backdrop-blur rounded-[20px] p-4 shadow-warm-lg hover:scale-105 transition-transform">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#9DB5A5] to-[#7FA090] flex items-center justify-center text-2xl mb-2 shadow-warm">
-                      <Shirt className="h-6 w-6 text-white" />
+                      👗
                     </div>
                     <div className="text-xs font-bold text-[#2D2721] mb-1">Fashion</div>
                     <div className="text-xs text-[#6B5744]">189 deals</div>
                   </div>
                   <div className="w-40 h-40 bg-white/95 backdrop-blur rounded-[20px] p-4 shadow-warm-lg hover:scale-105 transition-transform">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#F5C98E] to-[#E5B97E] flex items-center justify-center text-2xl mb-2 shadow-warm">
-                      <Plane className="h-6 w-6 text-white" />
+                      ✈️
                     </div>
                     <div className="text-xs font-bold text-[#2D2721] mb-1">Travel</div>
                     <div className="text-xs text-[#6B5744]">198 deals</div>
                   </div>
                   <div className="w-40 h-40 bg-white/95 backdrop-blur rounded-[20px] p-4 shadow-warm-lg hover:scale-105 transition-transform">
                     <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center text-2xl mb-2 shadow-warm">
-                      <PartyPopper className="h-6 w-6 text-white" />
+                      🎉
                     </div>
                     <div className="text-xs font-bold text-[#2D2721] mb-1">Events</div>
                     <div className="text-xs text-[#6B5744]">167 deals</div>
@@ -374,7 +386,7 @@ export function Landing() {
                   <span className="text-sm font-bold">For Users</span>
                 </div>
                 <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                  Share & Earn Free Vouchers
+                  🎁 Share & Earn FREE Vouchers!
                 </h2>
                 <p className="text-white/90 text-lg mb-8 leading-relaxed">
                   As a regular user, you <strong>pay nothing!</strong> Share campaigns with friends and get rewarded with free vouchers and gift cards.
@@ -434,7 +446,7 @@ export function Landing() {
                   <span className="text-sm font-bold">For Merchants</span>
                 </div>
                 <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-                  Grow Your Business
+                  📈 Grow Your Business
                 </h2>
                 <p className="text-white/90 text-lg mb-8 leading-relaxed">
                   Create campaigns, reward customers who share, and watch your sales grow with our powerful platform.
@@ -563,30 +575,26 @@ export function Landing() {
 
         {/* Category Buttons */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 mb-12">
-          {categories.map((category, idx) => {
-            const Icon = category.icon;
-            return (
-              <button
-                key={idx}
-                onClick={() => navigate('/campaigns')}
-                className="group relative flex flex-col items-center gap-2 p-4 bg-white hover:bg-gradient-to-br hover:from-[#FFF9ED] hover:to-[#FFE5B4] rounded-[16px] border border-[rgba(139,115,85,0.1)] transition-all duration-300 hover:shadow-warm hover:-translate-y-1 hover:scale-105"
-              >
-                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center shadow-warm transition-all duration-300 group-hover:scale-110`}>
-                  <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
-                </div>
-                <div className="text-center">
-                  <span className="text-xs sm:text-sm font-semibold text-[#2D2721] block mb-0.5">{category.name}</span>
-                  <span className="text-[10px] sm:text-xs text-[#8B7355] font-medium">{category.count} campaigns</span>
-                </div>
-              </button>
-            );
-          })}
+          {categories.map((category, idx) => (
+            <button
+              key={idx}
+              onClick={() => navigate('/campaigns')}
+              className="group relative flex flex-col items-center gap-2 p-4 bg-white hover:bg-gradient-to-br hover:from-[#FFF9ED] hover:to-[#FFE5B4] rounded-[16px] border border-[rgba(139,115,85,0.1)] transition-all duration-300 hover:shadow-warm hover:-translate-y-1 hover:scale-105"
+            >
+              <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center text-2xl sm:text-3xl shadow-warm transition-all duration-300 group-hover:scale-110`}>
+                {category.icon}
+              </div>
+              <div className="text-center">
+                <span className="text-xs sm:text-sm font-semibold text-[#2D2721] block mb-0.5">{category.name}</span>
+                <span className="text-[10px] sm:text-xs text-[#8B7355] font-medium">{category.count} campaigns</span>
+              </div>
+            </button>
+          ))}
         </div>
 
         {/* Featured Campaigns per Category */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.slice(0, 4).map((category, idx) => {
-            const Icon = category.icon;
             const topCampaign = category.campaigns[0];
             return (
               <WarmCard 
@@ -596,8 +604,8 @@ export function Landing() {
                 className="cursor-pointer group"
                 onClick={() => navigate('/campaigns')}
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 shadow-warm group-hover:scale-110 transition-transform`}>
-                  <Icon className="h-6 w-6 text-white" />
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center text-2xl mb-4 shadow-warm group-hover:scale-110 transition-transform`}>
+                  {category.icon}
                 </div>
                 <div className="mb-3">
                   <div className="text-xs text-[#8B7355] font-medium mb-1">{category.name}</div>
@@ -635,7 +643,7 @@ export function Landing() {
             Choose the plan that fits your business. Save 2 months with annual billing.
           </p>
           <p className="text-sm text-[#9DB5A5] font-semibold max-w-2xl mx-auto mb-8">
-            Note: Regular users pay nothing! These plans are for merchants only.
+            💡 Remember: Regular users pay nothing! These plans are for merchants only.
           </p>
 
           {/* Billing Toggle */}
@@ -675,13 +683,13 @@ export function Landing() {
                 <p className="text-[#8B7355] mb-6">Perfect for small businesses</p>
                 <div className="flex items-baseline gap-2 mb-4 justify-center">
                   <span className="text-5xl font-bold text-[#2D2721]">
-                    EUR {billingPeriod === 'monthly' ? '19' : '16'}
+                    €{billingPeriod === 'monthly' ? '19' : '16'}
                   </span>
                   <span className="text-[#8B7355]">/month</span>
                 </div>
                 {billingPeriod === 'annual' && (
                   <div className="text-sm text-[#9DB5A5] font-semibold mb-4">
-                    EUR 190/year (save 2 months)
+                    €190/year (save 2 months)
                   </div>
                 )}
               </div>
@@ -726,13 +734,13 @@ export function Landing() {
                 <p className="text-[#8B7355] mb-6">For growing businesses</p>
                 <div className="flex items-baseline gap-2 mb-4 justify-center">
                   <span className="text-5xl font-bold text-[#2D2721]">
-                    EUR {billingPeriod === 'monthly' ? '29' : '24'}
+                    €{billingPeriod === 'monthly' ? '29' : '24'}
                   </span>
                   <span className="text-[#8B7355]">/month</span>
                 </div>
                 {billingPeriod === 'annual' && (
                   <div className="text-sm text-[#9DB5A5] font-semibold mb-4">
-                    EUR 290/year (save 2 months)
+                    €290/year (save 2 months)
                   </div>
                 )}
               </div>
@@ -776,13 +784,13 @@ export function Landing() {
                 <p className="text-[#8B7355] mb-6">For large organizations</p>
                 <div className="flex items-baseline gap-2 mb-4 justify-center">
                   <span className="text-5xl font-bold text-[#2D2721]">
-                    EUR {billingPeriod === 'monthly' ? '39' : '33'}
+                    €{billingPeriod === 'monthly' ? '39' : '33'}
                   </span>
                   <span className="text-[#8B7355]">/month</span>
                 </div>
                 {billingPeriod === 'annual' && (
                   <div className="text-sm text-[#9DB5A5] font-semibold mb-4">
-                    EUR 390/year (save 2 months)
+                    €390/year (save 2 months)
                   </div>
                 )}
               </div>
@@ -826,7 +834,7 @@ export function Landing() {
         {/* Pricing Footer */}
         <div className="mt-12 text-center">
           <p className="text-[#8B7355] mb-4">
-            All plans include 2 months free trial - No credit card required - Cancel anytime
+            All plans include 2 months free trial • No credit card required • Cancel anytime
           </p>
           <div className="flex items-center justify-center gap-6 text-sm text-[#6B5744]">
             <div className="flex items-center gap-2">
@@ -862,7 +870,7 @@ export function Landing() {
                   <div className="text-white/80 text-sm">Active Merchants</div>
                 </div>
                 <div>
-                  <div className="text-4xl font-bold text-white mb-1">EUR 12M+</div>
+                  <div className="text-4xl font-bold text-white mb-1">€12M+</div>
                   <div className="text-white/80 text-sm">Processed</div>
                 </div>
                 <div>
@@ -973,7 +981,7 @@ export function Landing() {
               <span className="font-bold text-[#2D2721]">GiftHub</span>
             </div>
             <p className="text-sm text-[#8B7355]">
-              (c) 2026 GiftHub. Made in Europe.
+              © 2026 GiftHub. Made with ❤️ in Europe.
             </p>
           </div>
         </div>

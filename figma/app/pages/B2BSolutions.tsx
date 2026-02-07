@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { useNavigate } from 'react-router-dom';
-import { useLanguage } from '@/figma/app/contexts/LanguageContext';
-import { useCountry } from '@/figma/app/contexts/CountryContext';
+import { useLanguage } from '@app/contexts/LanguageContext';
+import { useCountry } from '@app/contexts/CountryContext';
 import { 
   Gift, 
   Ticket, 
@@ -18,7 +18,9 @@ import {
   Server,
   Database,
   Heart,
-  ChevronDown
+  ChevronDown,
+  Globe,
+  MapPin
 } from 'lucide-react';
 
 export function B2BSolutions() {
@@ -27,6 +29,9 @@ export function B2BSolutions() {
   const { selectedCountry, setSelectedCountry, availableCountries } = useCountry();
   
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [isCountryMenuOpen, setIsCountryMenuOpen] = useState(false);
+
   const valueCards = [
     {
       icon: Ticket,
@@ -97,6 +102,95 @@ export function B2BSolutions() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
       
+      {/* Header with Logo and Login */}
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-[rgba(139,115,85,0.1)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+              <div className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
+                <Gift className="h-6 w-6 text-white" />
+              </div>
+              <span className="text-xl font-bold text-[#2D2721]">GiftHub</span>
+              <span className="hidden sm:inline-block px-2 py-0.5 bg-[#FAF7F2] border border-[#E7DCC7] rounded text-xs font-medium text-[#8B7355] ml-2">
+                {t('b2b.badge')}
+              </span>
+            </div>
+            
+            <div className="flex items-center gap-3">
+              <div className="hidden lg:flex items-center gap-4 mr-4 text-sm font-medium text-[#6B5744]">
+                <button onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#2D2721] transition-colors">{t('b2b.nav.features')}</button>
+                <button onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#2D2721] transition-colors">{t('b2b.nav.pricing')}</button>
+                <button onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#2D2721] transition-colors">{t('b2b.nav.faq')}</button>
+              </div>
+
+              {/* Country Selector */}
+              <div className="relative hidden sm:block">
+                <button 
+                  onClick={() => { setIsCountryMenuOpen(!isCountryMenuOpen); setIsLangMenuOpen(false); }}
+                  className="flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-[#FAF7F2] text-sm font-medium text-[#6B5744] transition-colors border border-transparent hover:border-[#E7DCC7]"
+                >
+                  <span className="text-lg">{selectedCountry.flag}</span>
+                  <span className="hidden xl:inline">{selectedCountry.name}</span>
+                  <ChevronDown className="w-4 h-4 ml-1 opacity-50" />
+                </button>
+                {isCountryMenuOpen && (
+                  <div className="absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-[#E7DCC7] py-2 max-h-80 overflow-y-auto z-50">
+                    <div className="px-3 py-2 text-xs font-bold text-[#8B7355] uppercase tracking-wider">Select Country</div>
+                    {availableCountries.map((c) => (
+                      <button
+                        key={c.code}
+                        onClick={() => { setSelectedCountry(c); setIsCountryMenuOpen(false); }}
+                        className={`w-full text-left px-4 py-2 text-sm flex items-center gap-3 hover:bg-[#FAF7F2] ${selectedCountry.code === c.code ? 'bg-[#FAF7F2] font-semibold text-[#2D2721]' : 'text-[#6B5744]'}`}
+                      >
+                        <span className="text-xl">{c.flag}</span>
+                        <span>{c.name}</span>
+                        {selectedCountry.code === c.code && <Check className="w-4 h-4 ml-auto text-[#FFC857]" />}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Language Selector */}
+              <div className="relative hidden sm:block">
+                <button 
+                  onClick={() => { setIsLangMenuOpen(!isLangMenuOpen); setIsCountryMenuOpen(false); }}
+                  className="flex items-center gap-1 px-3 py-2 rounded-lg hover:bg-[#FAF7F2] text-sm font-medium text-[#6B5744] transition-colors border border-transparent hover:border-[#E7DCC7]"
+                >
+                  <Globe className="w-4 h-4 mr-1" />
+                  <span className="uppercase">{language}</span>
+                  <ChevronDown className="w-4 h-4 ml-1 opacity-50" />
+                </button>
+                {isLangMenuOpen && (
+                  <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-[#E7DCC7] py-2 max-h-80 overflow-y-auto z-50">
+                    <div className="px-3 py-2 text-xs font-bold text-[#8B7355] uppercase tracking-wider">Select Language</div>
+                    {availableLanguages.map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => { setLanguage(l.code); setIsLangMenuOpen(false); }}
+                        className={`w-full text-left px-4 py-2 text-sm flex items-center gap-3 hover:bg-[#FAF7F2] ${language === l.code ? 'bg-[#FAF7F2] font-semibold text-[#2D2721]' : 'text-[#6B5744]'}`}
+                      >
+                        <span className="text-xl">{l.flag}</span>
+                        <span>{l.nativeName}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="h-6 w-px bg-[#E7DCC7] hidden sm:block mx-1" />
+
+              <WarmButton variant="ghost" className="hidden sm:flex" onClick={() => navigate('/login')}>
+                {t('b2b.login') || 'Logi sisse'}
+              </WarmButton>
+              <WarmButton onClick={() => navigate('/login')}>
+                {t('b2b.start_free') || 'Alusta tasuta'}
+              </WarmButton>
+            </div>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-24">
         <div className="absolute inset-0 opacity-30 pointer-events-none">

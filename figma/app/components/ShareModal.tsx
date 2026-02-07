@@ -3,7 +3,7 @@ import { X, Copy, Check, Facebook, Twitter, Linkedin, Mail, MessageCircle } from
 import { WarmCard } from './WarmCard';
 import { WarmButton } from './WarmButton';
 import { toast } from 'sonner';
-import { copyToClipboard } from '@/figma/app/utils/clipboard';
+import { copyToClipboard } from '@app/utils/clipboard';
 
 type ShareModalProps = {
   isOpen: boolean;

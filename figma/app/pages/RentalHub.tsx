@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { ImageWithFallback } from '@/figma/app/components/figma/ImageWithFallback';
-import { Input } from '@/figma/app/components/ui/input';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
+import { Input } from '@app/components/ui/input';
 import { Search, MapPin, Star, ArrowRight } from 'lucide-react';
-import { UnifiedData, Rental } from '@/figma/services/unifiedData';
+import { GlobalNavigation } from '@app/components/GlobalNavigation';
+import { UnifiedData, Rental } from '@services/unifiedData';
 
 const CATEGORIES = ['Kõik', 'Foto & Video', 'Droonid', 'Valgustus', 'Heli', 'Arvutid', 'Mängukonsoolid', 'Tööriistad', 'Matkavarustus'];
 
@@ -29,6 +30,7 @@ export function RentalHub() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
+      <GlobalNavigation />
       
       {/* Hero Section */}
       <div className="bg-[#2D2721] text-white py-16 px-4 relative overflow-hidden">

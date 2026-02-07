@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { Input } from '@/figma/app/components/ui/input';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { Input } from '@app/components/ui/input';
 import { 
   Bell, 
   Settings as SettingsIcon, 

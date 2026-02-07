@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Check, ChevronRight, ChevronLeft } from 'lucide-react';
-import { cn } from '@/figma/app/components/ui/utils';
-import { CATEGORY_DATA, Category, SubCategory } from '@/figma/app/data/categories';
+import { cn } from '@app/components/ui/utils';
+import { CATEGORY_DATA, Category, SubCategory } from '@app/data/categories';
 
 interface CategorySelectorProps {
   onSelect: (category: string, subcategory: string) => void;

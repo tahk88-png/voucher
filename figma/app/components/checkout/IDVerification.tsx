@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/figma/app/components/ui/tabs';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@app/components/ui/tabs';
 import { 
   ShieldCheck, 
   Upload, 

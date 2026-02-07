@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { Input } from '@/figma/app/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/figma/app/components/ui/tabs';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { Input } from '@app/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@app/components/ui/tabs';
 import { 
   Box, 
   ClipboardList, 
@@ -26,7 +26,7 @@ import {
   Download,
   Printer
 } from 'lucide-react';
-import { InventoryService, StockStatus, RentalStatus, OrderStatus } from '@/figma/services/inventoryService';
+import { InventoryService, StockStatus, RentalStatus, OrderStatus } from '@services/inventoryService';
 import { toast } from 'sonner';
 
 // MOCK locations

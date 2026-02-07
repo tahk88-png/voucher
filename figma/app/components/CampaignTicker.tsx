@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Tag, Clock, TrendingUp } from 'lucide-react';
-import { cn } from '@/figma/app/components/ui/utils';
+import { cn } from '@app/components/ui/utils';
 
 interface TickerItem {
   id: string;

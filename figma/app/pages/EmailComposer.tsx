@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { RichTextEditor } from '@/figma/app/components/RichTextEditor';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { RichTextEditor } from '@app/components/RichTextEditor';
 import { 
   Send, 
   Save, 
@@ -15,11 +15,11 @@ import {
   Braces,
   Calendar as CalendarIcon
 } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { Textarea } from '@/figma/app/components/ui/textarea';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { Textarea } from '@app/components/ui/textarea';
 import { toast } from 'sonner';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/figma/app/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@app/components/ui/select';
 
 const TEMPLATES = [
   {

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { ImageWithFallback } from '@/figma/app/components/figma/ImageWithFallback';
+import { WarmButton } from '@app/components/WarmButton';
+import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { Filter, Heart, Star } from 'lucide-react';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
-import { UnifiedData, Product } from '@/figma/services/unifiedData';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
+import { GlobalNavigation } from '@app/components/GlobalNavigation';
+import { UnifiedData, Product } from '@services/unifiedData';
 
 const CATEGORIES = ['Kõik', 'Riided', 'Kodu', 'Aksessuaarid', 'Ehted', 'Kingitused', 'Elektroonika', 'Ilu & Tervis', 'Sport'];
 
@@ -29,6 +30,7 @@ export function ShopHub() {
         Tasuta tarne tellimustele üle 50€ • 14-päevane tagastusõigus
       </div>
 
+      <GlobalNavigation />
 
       {/* Hero */}
       <div className="relative h-[400px] mb-12">

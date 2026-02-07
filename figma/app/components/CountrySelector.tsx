@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { useCountry, Country } from '@/figma/app/contexts/CountryContext';
+import { useCountry, Country } from '@app/contexts/CountryContext';
 import { ChevronDown, Check, Globe } from 'lucide-react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
+import { WarmCard } from '@app/components/WarmCard';
 
 interface CountrySelectorProps {
   variant?: 'default' | 'compact';

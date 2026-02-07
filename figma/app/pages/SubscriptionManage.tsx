@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { useNavigate } from 'react-router-dom';
 import { 
   CreditCard, 
@@ -18,7 +18,7 @@ import {
   Trash2
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { Progress } from '@/figma/app/components/ui/progress';
+import { Progress } from '@app/components/ui/progress';
 
 export function SubscriptionManage() {
   const navigate = useNavigate();

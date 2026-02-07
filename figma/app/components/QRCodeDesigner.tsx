@@ -6,12 +6,12 @@ import QRCodeStyling, {
   ErrorCorrectionLevel,
   Options
 } from 'qr-code-styling';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { Label } from '@/figma/app/components/ui/label';
-import { Input } from '@/figma/app/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/figma/app/components/ui/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/figma/app/components/ui/tabs";
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { Label } from '@app/components/ui/label';
+import { Input } from '@app/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@app/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@app/components/ui/tabs";
 import { Download, RefreshCw, Upload, X, Palette, LayoutGrid, Image as ImageIcon, Settings as SettingsIcon } from 'lucide-react';
 import { toast } from 'sonner';
 

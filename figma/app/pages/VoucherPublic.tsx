@@ -1,11 +1,10 @@
-﻿import { useState } from "react";
-import { WarmCard } from "@app/components/WarmCard";
-import { WarmButton } from "@app/components/WarmButton";
-import { useParams, useNavigate } from "react-router-dom";
-import { Gift, Share2, Copy, Check, QrCode } from "lucide-react";
-import { CurrencyDisplay } from "@app/components/CurrencyDisplay";
-import { toast } from "sonner";
-import { copyToClipboard } from "@app/utils/clipboard";
+import { useState } from 'react';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Gift, Share2, Copy, Check, QrCode } from 'lucide-react';
+import { toast } from 'sonner';
+import { copyToClipboard } from '@app/utils/clipboard';
 
 export function VoucherPublic() {
   const { id } = useParams();
@@ -15,17 +14,13 @@ export function VoucherPublic() {
 
   // Mock voucher data
   const voucher = {
-    headline: "25% Off Summer Collection",
-    description:
-      "<p>Valid on all summer items.</p><ul><li>Cannot be combined with other offers</li><li>One use per customer</li></ul>",
-    code: "SUMMER25",
-    discount: "25%",
-    discountValue: 25,
-    currency: "EUR" as const,
-    validUntil: "2024-08-31",
-    merchantName: "Fashion Store",
-    image:
-      "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=80",
+    headline: '25% Off Summer Collection',
+    description: '<p>Valid on all summer items.</p><ul><li>Cannot be combined with other offers</li><li>One use per customer</li></ul>',
+    code: 'SUMMER25',
+    discount: '25%',
+    validUntil: '2024-08-31',
+    merchantName: 'Fashion Store',
+    image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&q=80',
   };
 
   const handleCopyCode = async () => {
@@ -48,14 +43,14 @@ export function VoucherPublic() {
           text: `Check out this offer: ${voucher.discount} off!`,
           url: window.location.href,
         });
-        toast.success("Shared successfully!");
+        toast.success('Shared successfully!');
       } catch (error: any) {
         // User cancelled or permission denied
-        if (error.name !== "AbortError") {
+        if (error.name !== 'AbortError') {
           // Fallback to clipboard
           const success = await copyToClipboard(window.location.href);
           if (success) {
-            toast.success("Link copied to clipboard!");
+            toast.success('Link copied to clipboard!');
           }
         }
       }
@@ -63,13 +58,13 @@ export function VoucherPublic() {
       // Fallback for browsers that don't support Web Share API
       const success = await copyToClipboard(window.location.href);
       if (success) {
-        toast.success("Link copied to clipboard!");
+        toast.success('Link copied to clipboard!');
       }
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4] flex items-center justify-center p-4 motion-safe:animate-fade-up">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4] flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
         {/* Logo/Brand */}
         <div className="text-center mb-6">
@@ -77,9 +72,7 @@ export function VoucherPublic() {
             <div className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
               <Gift className="h-6 w-6 text-[#2D2721]" />
             </div>
-            <span className="text-lg font-bold text-[#2D2721]">
-              {voucher.merchantName}
-            </span>
+            <span className="text-lg font-bold text-[#2D2721]">{voucher.merchantName}</span>
           </div>
         </div>
 
@@ -89,9 +82,7 @@ export function VoucherPublic() {
               <div className="w-20 h-20 rounded-full bg-[#9DB5A5] flex items-center justify-center mx-auto mb-6">
                 <Check className="h-10 w-10 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-[#2D2721] mb-3">
-                Voucher Claimed!
-              </h2>
+              <h2 className="text-2xl font-bold text-[#2D2721] mb-3">Voucher Claimed!</h2>
               <p className="text-[#6B5744] mb-8">
                 Your discount code has been copied to your clipboard
               </p>
@@ -114,21 +105,8 @@ export function VoucherPublic() {
           <WarmCard padding="none" className="overflow-hidden">
             {/* Header with Gradient */}
             <div className="bg-gradient-to-br from-[#FFC857] to-[#FFB627] px-8 py-12 text-center">
-              <div className="text-5xl font-bold text-[#2D2721] mb-4">
-                {voucher.discount}
-              </div>
-              <div className="text-sm font-semibold text-[#6B5744] mb-2">
-                Säästad kuni{" "}
-                <span className="font-bold text-[#2D2721]">
-                  <CurrencyDisplay
-                    amount={voucher.discountValue}
-                    currency={voucher.currency}
-                  />
-                </span>
-              </div>
-              <h1 className="text-2xl font-bold text-[#2D2721]">
-                {voucher.headline}
-              </h1>
+              <div className="text-5xl font-bold text-[#2D2721] mb-4">{voucher.discount}</div>
+              <h1 className="text-2xl font-bold text-[#2D2721]">{voucher.headline}</h1>
             </div>
 
             {/* Content */}
@@ -136,11 +114,7 @@ export function VoucherPublic() {
               {/* Image */}
               {voucher.image && (
                 <div className="rounded-[12px] overflow-hidden shadow-sm mb-4">
-                  <img
-                    src={voucher.image}
-                    alt={voucher.headline}
-                    className="w-full h-48 object-cover"
-                  />
+                  <img src={voucher.image} alt={voucher.headline} className="w-full h-48 object-cover" />
                 </div>
               )}
 
@@ -153,9 +127,7 @@ export function VoucherPublic() {
 
               {/* Code Display */}
               <div className="bg-[#FFF9ED] rounded-[16px] px-6 py-4 border border-[rgba(139,115,85,0.1)]">
-                <div className="text-xs text-[#8B7355] mb-2 text-center">
-                  VOUCHER CODE
-                </div>
+                <div className="text-xs text-[#8B7355] mb-2 text-center">VOUCHER CODE</div>
                 <div className="flex items-center justify-between gap-4">
                   <div className="text-2xl font-mono font-bold text-[#2D2721] tracking-wider flex-1 text-center">
                     {voucher.code}
@@ -174,7 +146,7 @@ export function VoucherPublic() {
               </div>
 
               {/* Description */}
-              <div
+              <div 
                 className="text-sm text-[#6B5744] leading-relaxed prose prose-sm prose-warm max-w-none text-left"
                 dangerouslySetInnerHTML={{ __html: voucher.description }}
               />
@@ -182,9 +154,7 @@ export function VoucherPublic() {
               {/* Valid Until */}
               <div className="flex items-center justify-center gap-2 text-sm text-[#8B7355]">
                 <span>Valid until</span>
-                <span className="font-semibold text-[#2D2721]">
-                  {voucher.validUntil}
-                </span>
+                <span className="font-semibold text-[#2D2721]">{voucher.validUntil}</span>
               </div>
 
               {/* Actions */}
@@ -204,7 +174,7 @@ export function VoucherPublic() {
         {/* Back Link */}
         <div className="text-center mt-6">
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
             className="text-sm text-[#6B5744] hover:text-[#2D2721] transition-colors"
           >
             Visit our store

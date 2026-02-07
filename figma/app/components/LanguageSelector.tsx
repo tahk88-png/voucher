@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { useLanguage, Language } from '@/figma/app/contexts/LanguageContext';
+import { useLanguage, Language } from '@app/contexts/LanguageContext';
 import { ChevronDown, Check, Globe } from 'lucide-react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
+import { WarmCard } from '@app/components/WarmCard';
 
 interface LanguageSelectorProps {
   variant?: 'default' | 'compact';

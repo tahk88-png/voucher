@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { WarmCard } from '@/figma/app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
 import { useNavigate } from 'react-router-dom';
 import { Mail, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
 import { toast } from 'sonner';
 
 type ViewState = 'input' | 'loading' | 'success' | 'error';

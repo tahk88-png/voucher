@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -29,7 +29,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/figma/app/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@app/components/ui/select';
 
 type TimeRange = '7d' | '30d' | '90d' | '1y';
 
@@ -125,7 +125,7 @@ export function Analytics() {
   const kpis = [
     {
       label: 'Total Revenue',
-      value: 'EUR 42,850',
+      value: '€42,850',
       change: '+12.3%',
       trend: 'up',
       icon: Euro,
@@ -167,9 +167,9 @@ export function Analytics() {
   };
 
   return (
-    <div className="space-y-6 motion-safe:animate-fade-up">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 motion-safe:animate-fade-up" style={{ animationDelay: '40ms' }}>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-[#2D2721]">Analytics</h1>
           <p className="text-[#6B5744] mt-1">Track your performance and insights</p>
@@ -200,7 +200,7 @@ export function Analytics() {
           const Icon = kpi.icon;
           const isPositive = kpi.trend === 'up';
           return (
-            <WarmCard key={index} hover padding="lg" className="relative overflow-hidden" style={{ animationDelay: `${120 + index * 60}ms` }}>
+            <WarmCard key={index} hover padding="lg">
               <div className="flex items-start justify-between mb-4">
                 <div className={`w-12 h-12 rounded-[14px] bg-gradient-to-br ${kpi.color} flex items-center justify-center shadow-warm`}>
                   <Icon className="h-6 w-6 text-white" />
@@ -224,7 +224,7 @@ export function Analytics() {
       </div>
 
       {/* Revenue Trend */}
-      <WarmCard padding="lg" className="relative overflow-hidden" style={{ animationDelay: '360ms' }}>
+      <WarmCard padding="lg">
         <div className="mb-6">
           <h2 className="text-xl font-semibold text-[#2D2721] mb-1">Revenue Trend</h2>
           <p className="text-sm text-[#6B5744]">{getTimeRangeLabel(timeRange)}</p>
@@ -257,7 +257,7 @@ export function Analytics() {
               strokeWidth={3}
               dot={{ fill: '#FFC857', r: 4 }}
               activeDot={{ r: 6 }}
-              name="Revenue (EUR)"
+              name="Revenue (€)"
             />
             <Line 
               type="monotone" 
@@ -275,7 +275,7 @@ export function Analytics() {
       {/* Campaign Performance & Category Distribution */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Campaign Performance */}
-        <WarmCard padding="lg" className="relative overflow-hidden" style={{ animationDelay: '420ms' }}>
+        <WarmCard padding="lg">
           <div className="mb-6">
             <h2 className="text-xl font-semibold text-[#2D2721] mb-1">Campaign Performance</h2>
             <p className="text-sm text-[#6B5744]">Top 5 campaigns by revenue</p>
@@ -300,18 +300,18 @@ export function Analytics() {
                   boxShadow: '0 4px 16px rgba(139, 115, 85, 0.12)',
                 }}
               />
-              <Bar dataKey="value" fill="#FFC857" radius={[0, 8, 8, 0]} name="Revenue (EUR)" />
+              <Bar dataKey="value" fill="#FFC857" radius={[0, 8, 8, 0]} name="Revenue (€)" />
             </BarChart>
           </ResponsiveContainer>
         </WarmCard>
 
         {/* Category Distribution */}
-        <WarmCard padding="lg" className="relative overflow-hidden" style={{ animationDelay: '480ms' }}>
+        <WarmCard padding="lg">
           <div className="mb-6">
             <h2 className="text-xl font-semibold text-[#2D2721] mb-1">Category Distribution</h2>
             <p className="text-sm text-[#6B5744]">Breakdown by campaign type</p>
           </div>
-          <div className="flex items-center justify-center w-full">
+          <div className="flex items-center justify-center">
             <ResponsiveContainer width="100%" height={280}>
               <PieChart>
                 <Pie
@@ -391,7 +391,7 @@ export function Analytics() {
             </div>
             
             {/* Pie Chart */}
-            <div className="flex items-center justify-center mb-6 w-full">
+            <div className="flex items-center justify-center mb-6">
               <ResponsiveContainer width="100%" height={200}>
                 <PieChart>
                   <Pie
@@ -604,7 +604,7 @@ export function Analytics() {
                     </span>
                   </td>
                   <td className="py-4 px-4 text-right font-semibold text-[#2D2721]">
-                    EUR {campaign.revenue.toLocaleString()}
+                    €{campaign.revenue.toLocaleString()}
                   </td>
                   <td className="py-4 px-4 text-right text-[#6B5744]">
                     {campaign.redemptions}
@@ -658,7 +658,7 @@ export function Analytics() {
               <div className="grid grid-cols-3 gap-3 pt-3 border-t border-[rgba(139,115,85,0.1)]">
                 <div>
                   <div className="text-xs text-[#8B7355] mb-1">Revenue</div>
-                  <div className="font-semibold text-[#2D2721]">EUR {campaign.revenue.toLocaleString()}</div>
+                  <div className="font-semibold text-[#2D2721]">€{campaign.revenue.toLocaleString()}</div>
                 </div>
                 <div>
                   <div className="text-xs text-[#8B7355] mb-1">Redemptions</div>

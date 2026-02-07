@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { useNavigate } from 'react-router-dom';
 import { 
   Calendar,
@@ -22,8 +22,8 @@ import {
   XCircle,
   AlertCircle
 } from 'lucide-react';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
-import { Input } from '@/figma/app/components/ui/input';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
+import { Input } from '@app/components/ui/input';
 import { toast } from 'sonner';
 
 type EventStatus = 'upcoming' | 'ongoing' | 'ended' | 'cancelled';

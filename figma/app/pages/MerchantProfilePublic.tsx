@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { ImageWithFallback } from '@/figma/app/components/figma/ImageWithFallback';
-import { UnifiedData, Product, Rental, Campaign } from '@/figma/services/unifiedData';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/figma/app/components/ui/tabs';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
+import { UnifiedData, Product, Rental, Campaign } from '@services/unifiedData';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@app/components/ui/tabs';
 import { MapPin, Globe, Mail, Phone, Star, ArrowRight, ShoppingBag, Camera, Ticket } from 'lucide-react';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
+import { GlobalNavigation } from '@app/components/GlobalNavigation';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 
 export function MerchantProfilePublic() {
   const { id } = useParams<{ id: string }>();
@@ -38,6 +39,7 @@ export function MerchantProfilePublic() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
+      <GlobalNavigation />
 
       {/* Hero / Header */}
       <div className="bg-white border-b border-[#E7DCC7]">

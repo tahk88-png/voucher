@@ -70,6 +70,7 @@ import { ProductCreate } from '@/figma/app/pages/ProductCreate';
 import { CreateOrder } from '@/figma/app/pages/CreateOrder';
 import { IntegrationsSettings } from '@/figma/app/pages/IntegrationsSettings';
 import { PublicLayout } from '@/figma/app/components/PublicLayout';
+import { PublicCatalogLayout } from '@/figma/app/components/PublicCatalogLayout';
 
 export default function App() {
   return (
@@ -96,10 +97,8 @@ export default function App() {
                   <Route path="/voucher" element={<VoucherOffers />} />
                   <Route path="/voucher/:id" element={<VoucherPublic />} />
 
-                  <Route path="/gift-cards" element={<GiftCardsList />} />
                   <Route path="/gift-card/:id" element={<GiftCardPublic />} />
 
-                  <Route path="/events" element={<EventsList />} />
                   <Route path="/event/:id" element={<EventPublic />} />
                   <Route path="/redeem" element={<StaffRedeem />} />
 
@@ -115,6 +114,11 @@ export default function App() {
 
                   {/* 404 Catch All */}
                   <Route path="*" element={<NotFound />} />
+                </Route>
+
+                <Route element={<PublicCatalogLayout />}>
+                  <Route path="/gift-cards" element={<GiftCardsList />} />
+                  <Route path="/events" element={<EventsList />} />
                 </Route>
 
                 {/* Authenticated Routes with Dashboard Layout */}

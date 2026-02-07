@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/figma/app/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@app/components/ui/card';
 import { LucideIcon } from 'lucide-react';
 
 interface KPICardProps {

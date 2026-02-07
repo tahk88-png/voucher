@@ -1,6 +1,6 @@
-import { AIInsight } from '@/figma/app/types';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/figma/app/components/ui/card';
-import { Button } from '@/figma/app/components/ui/button';
+import { AIInsight } from '@app/types';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@app/components/ui/card';
+import { Button } from '@app/components/ui/button';
 import { AlertTriangle, Lightbulb, Info } from 'lucide-react';
 
 interface AIInsightCardProps {

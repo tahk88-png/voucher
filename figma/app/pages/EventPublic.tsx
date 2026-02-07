@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
   Calendar,
@@ -19,11 +19,11 @@ import {
   CalendarCheck,
   PlayCircle
 } from 'lucide-react';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 import { toast } from 'sonner';
-import { copyToClipboard } from '@/figma/app/utils/clipboard';
+import { copyToClipboard } from '@app/utils/clipboard';
 
 type TicketType = {
   id: string;

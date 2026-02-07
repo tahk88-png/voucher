@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { Clock } from "lucide-react";
-import { Label } from "@/figma/app/components/ui/label";
-import { Input } from "@/figma/app/components/ui/input";
-import { cn } from "@/figma/app/components/ui/utils";
+import { Label } from "@app/components/ui/label";
+import { Input } from "@app/components/ui/input";
+import { cn } from "@app/components/ui/utils";
 
 interface TimePickerProps {
   date?: Date;

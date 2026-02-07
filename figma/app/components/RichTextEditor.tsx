@@ -43,7 +43,7 @@ import {
   Type,
   Eraser
 } from 'lucide-react';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmButton } from '@app/components/WarmButton';
 import { toast } from 'sonner';
 import { useState, useRef, useEffect } from 'react';
 import {
@@ -53,17 +53,17 @@ import {
   DialogTitle,
   DialogFooter,
   DialogDescription,
-} from '@/figma/app/components/ui/dialog';
+} from '@app/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/figma/app/components/ui/dropdown-menu";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/figma/app/components/ui/tabs';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { cn } from '@/figma/app/components/ui/utils';
+} from "@app/components/ui/dropdown-menu";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@app/components/ui/tabs';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { cn } from '@app/components/ui/utils';
 
 interface RichTextEditorProps {
   content: string;

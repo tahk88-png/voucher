@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { 
   TrendingUp, 
   Star, 
@@ -13,7 +13,7 @@ import {
   CheckCircle2,
   Clock
 } from 'lucide-react';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 import { toast } from 'sonner';
 
 type PromotionStatus = 'active' | 'scheduled' | 'completed';

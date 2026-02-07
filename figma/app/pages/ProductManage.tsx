@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { Textarea } from '@/figma/app/components/ui/textarea';
-import { Switch } from '@/figma/app/components/ui/switch';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/figma/app/components/ui/tabs';
-import { ImageWithFallback } from '@/figma/app/components/figma/ImageWithFallback';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { Textarea } from '@app/components/ui/textarea';
+import { Switch } from '@app/components/ui/switch';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@app/components/ui/tabs';
+import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { 
   Package, 
   Euro, 
@@ -27,7 +27,7 @@ import {
   MapPin,
   Building2
 } from 'lucide-react';
-import { PRODUCTS } from '@/figma/services/unifiedData';
+import { PRODUCTS } from '@services/unifiedData';
 import { toast } from 'sonner';
 
 export function ProductManage() {

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
-import { CurrencyDisplay } from '@/figma/app/components/CurrencyDisplay';
-import { Input } from '@/figma/app/components/ui/input';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
+import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
+import { Input } from '@app/components/ui/input';
 import {
   Search,
   Sparkles,
@@ -19,7 +19,8 @@ import {
   Utensils,
   Plane,
 } from 'lucide-react';
-import { UnifiedData, Campaign } from '@/figma/services/unifiedData';
+import { GlobalNavigation } from '@app/components/GlobalNavigation';
+import { UnifiedData, Campaign } from '@services/unifiedData';
 
 export function CampaignHub() {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ export function CampaignHub() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
+      <GlobalNavigation />
 
       {/* Hero / Header Section */}
       <div className="bg-[#2D2721] text-white py-12 px-4 mb-8">

@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { et } from 'date-fns/locale';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { DayPicker } from 'react-day-picker';
-import { Popover, PopoverContent, PopoverTrigger } from '@/figma/app/components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@app/components/ui/popover';
 import { cn } from '@/figma/lib/utils';
 
 export interface DatePickerProps {

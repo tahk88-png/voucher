@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import { WarmCard } from '@/figma/app/components/WarmCard';
-import { WarmButton } from '@/figma/app/components/WarmButton';
+import { WarmCard } from '@app/components/WarmCard';
+import { WarmButton } from '@app/components/WarmButton';
 import { QRCodeSVG } from 'qrcode.react';
 import { 
   Download, 
@@ -17,12 +17,12 @@ import {
   Check
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { Input } from '@/figma/app/components/ui/input';
-import { Label } from '@/figma/app/components/ui/label';
-import { Slider } from '@/figma/app/components/ui/slider';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/figma/app/components/ui/tabs';
-import { Switch } from '@/figma/app/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/figma/app/components/ui/select';
+import { Input } from '@app/components/ui/input';
+import { Label } from '@app/components/ui/label';
+import { Slider } from '@app/components/ui/slider';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@app/components/ui/tabs';
+import { Switch } from '@app/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@app/components/ui/select';
 import { cn } from '@/figma/lib/utils';
 
 // Mock data for saved codes
