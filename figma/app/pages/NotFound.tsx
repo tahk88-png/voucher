@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+﻿import { useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Home, Search, ArrowLeft, Gift } from 'lucide-react';
@@ -75,3 +75,4 @@ export function NotFound() {
     </div>
   );
 }
+

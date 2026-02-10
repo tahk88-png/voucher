@@ -94,7 +94,7 @@ export default function PartnerKeysPage() {
         </WarmButton>
       </div>
 
-      <WarmCard padding="lg" className="border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
         <div className="flex flex-col gap-3 md:flex-row md:items-center">
           <div className="flex-1 space-y-1.5">
             <label htmlFor="partner-key-label" className="text-sm font-medium text-[#2D2721]">
@@ -114,7 +114,7 @@ export default function PartnerKeysPage() {
         {createdKey && (
           <div className="mt-4 text-sm">
             <div className="text-xs text-[#8B7355] uppercase mb-1">New key (copy now)</div>
-            <div className="p-3 bg-[#FFF9ED] border border-[#E7DCC7] rounded-[12px] font-mono break-all">
+            <div className="p-3 bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)] rounded-[12px] font-mono break-all">
               {createdKey}
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function PartnerKeysPage() {
       {loading && <div className="text-sm text-[#8B7355]">Loading keys...</div>}
       {error && <div className="text-sm text-red-600">{error}</div>}
 
-      <WarmCard padding="lg" className="border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
         <div className="space-y-3">
           {keys.length === 0 && !loading && <div className="text-sm text-[#8B7355]">No keys yet.</div>}
           {keys.map((key) => (

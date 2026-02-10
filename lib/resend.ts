@@ -37,6 +37,10 @@ export async function sendEmail(params: {
   replyTo?: string;
   tags?: Array<{ name: string; value: string }>;
 }): Promise<{ id: string }> {
+  if (process.env.NODE_ENV === 'test') {
+    return { id: 'test-email' };
+  }
+
   const from = params.from || process.env.RESEND_FROM_EMAIL || 'noreply@vouchr.app';
   
   const result = await resend.emails.send({

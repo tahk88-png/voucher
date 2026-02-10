@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   CreditCard, 
   Calendar,
@@ -241,7 +241,7 @@ export function SubscriptionManage() {
           </div>
           <div className="flex-1">
             <div className="font-semibold text-[#2D2721] capitalize">
-              {subscription.paymentMethod.brand} •••• {subscription.paymentMethod.last4}
+              {subscription.paymentMethod.brand} â€¢â€¢â€¢â€¢ {subscription.paymentMethod.last4}
             </div>
             <div className="text-sm text-[#8B7355]">
               Expires {subscription.paymentMethod.expMonth}/{subscription.paymentMethod.expYear}
@@ -274,7 +274,7 @@ export function SubscriptionManage() {
               {subscription.invoices.map((invoice) => (
                 <tr key={invoice.id} className="border-b border-[rgba(139,115,85,0.05)] hover:bg-[#FFF9ED] transition-colors">
                   <td className="py-4 px-4 text-[#2D2721]">{invoice.date}</td>
-                  <td className="py-4 px-4 font-semibold text-[#2D2721]">€{invoice.amount}</td>
+                  <td className="py-4 px-4 font-semibold text-[#2D2721]">â‚¬{invoice.amount}</td>
                   <td className="py-4 px-4">
                     <span className="px-2 py-1 bg-[#9DB5A5] text-white text-xs rounded-full font-semibold">
                       {invoice.status}
@@ -320,3 +320,4 @@ export function SubscriptionManage() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface Country {
   code: string;
@@ -34,12 +34,39 @@ interface CountryContextType {
 
 const CountryContext = createContext<CountryContextType | undefined>(undefined);
 
+function normalizeCountryCode(value: unknown): string | null {
+  if (typeof value === 'string' && value.trim().length > 0) {
+    return value.trim().toUpperCase();
+  }
+
+  if (value && typeof value === 'object' && 'code' in value) {
+    const code = (value as { code?: unknown }).code;
+    if (typeof code === 'string' && code.trim().length > 0) {
+      return code.trim().toUpperCase();
+    }
+  }
+
+  return null;
+}
+
+function parseStoredCountryCode(saved: string | null): string | null {
+  if (!saved) {
+    return null;
+  }
+
+  try {
+    return normalizeCountryCode(JSON.parse(saved));
+  } catch {
+    return normalizeCountryCode(saved);
+  }
+}
+
 export function CountryProvider({ children }: { children: ReactNode }) {
   // Load from localStorage or default to Estonia
   const [selectedCountry, setSelectedCountryState] = useState<Country>(() => {
     const saved = localStorage.getItem('selectedCountry');
-    if (saved) {
-      const countryCode = JSON.parse(saved);
+    const countryCode = parseStoredCountryCode(saved);
+    if (countryCode) {
       return countries.find(c => c.code === countryCode) || countries[0];
     }
     return countries[0]; // Default to Estonia
@@ -47,7 +74,7 @@ export function CountryProvider({ children }: { children: ReactNode }) {
 
   const setSelectedCountry = (country: Country) => {
     setSelectedCountryState(country);
-    localStorage.setItem('selectedCountry', JSON.stringify(country.code));
+    localStorage.setItem('selectedCountry', country.code);
   };
 
   return (

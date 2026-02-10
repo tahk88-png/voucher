@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import MerchantShell from '@/components/navigation/merchant-shell';
+import { AccessControlError, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 
 export const metadata: Metadata = {
   robots: {
@@ -22,21 +21,22 @@ export default async function MerchantLayout({
   params: { slug: string } | Promise<{ slug: string }>;
 }) {
   const p = await Promise.resolve(params);
-  const session = await auth();
-  
-  if (!session?.user?.id) {
-    redirect(`/login?callbackUrl=${encodeURIComponent('/app')}`);
+  let access;
+  try {
+    access = await requireMerchantProfileAccessBySlug(p.slug, 'merchant_staff');
+  } catch (error) {
+    if (error instanceof AccessControlError) {
+      if (error.status === 401) {
+        redirect(`/login?callbackUrl=${encodeURIComponent('/app')}`);
+      }
+      if (error.status === 404) {
+        notFound();
+      }
+    }
+    redirect('/app');
   }
 
-  const merchant = await prisma.merchant.findUnique({
-    where: { slug: p.slug },
-  });
-
-  if (!merchant) {
-    notFound();
-  }
-
-  await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
+  const { merchant, profile, effectiveRole } = access;
 
   const now = new Date();
   const [activeUsers, campaigns, vouchers, redemptions] = await Promise.all([
@@ -49,6 +49,8 @@ export default async function MerchantLayout({
   ]);
 
   const engagement = activeUsers ? Math.min(99, Math.max(10, Math.round((redemptions / activeUsers) * 100))) : 75;
+  const tNav = await getTranslations('nav');
+  const tAnalytics = await getTranslations('analytics');
 
   // Get messages for client components
   let messages;
@@ -67,12 +69,13 @@ export default async function MerchantLayout({
       <MerchantShell
         slug={p.slug}
         merchantName={merchant.name}
-        userLabel={session.user.email ?? session.user.name ?? 'User'}
+        userLabel={profile.email ?? profile.userId}
+        tenantRole={effectiveRole}
         stats={[
-          { label: 'Active Users', value: activeUsers.toString() },
-          { label: 'Campaigns', value: campaigns.toString() },
-          { label: 'Vouchers', value: vouchers.toString() },
-          { label: 'Engagement', value: `${engagement}%` },
+          { label: tAnalytics('activeUsers'), value: activeUsers.toString() },
+          { label: tNav('campaigns'), value: campaigns.toString() },
+          { label: tNav('vouchers'), value: vouchers.toString() },
+          { label: tAnalytics('engagement'), value: `${engagement}%` },
         ]}
       >
         {children}

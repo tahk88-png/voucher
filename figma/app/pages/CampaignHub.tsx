@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+﻿import { useState, useEffect } from 'react';
+import { useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
@@ -23,7 +23,7 @@ import { UnifiedData, Campaign } from '@services/unifiedData';
 
 export function CampaignHub() {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState<string>('Kõik');
+  const [selectedCategory, setSelectedCategory] = useState<string>('KÃµik');
   const [searchQuery, setSearchQuery] = useState('');
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
@@ -32,7 +32,7 @@ export function CampaignHub() {
   }, []);
 
   const categories = [
-    { id: 'Kõik', label: 'Kõik', icon: Sparkles },
+    { id: 'KÃµik', label: 'KÃµik', icon: Sparkles },
     { id: 'Restoranid', label: 'Restoranid', icon: Utensils },
     { id: 'Ilu & Tervis', label: 'Ilu & Tervis', icon: Heart },
     { id: 'Meelelahutus', label: 'Meelelahutus', icon: PartyPopper },
@@ -41,7 +41,7 @@ export function CampaignHub() {
   ];
 
   const filteredCampaigns = campaigns.filter((campaign) => {
-    const matchesCategory = selectedCategory === 'Kõik' || campaign.category_name === selectedCategory;
+    const matchesCategory = selectedCategory === 'KÃµik' || campaign.category_name === selectedCategory;
     const matchesSearch = campaign.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           (campaign.merchant && campaign.merchant.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
@@ -62,7 +62,7 @@ export function CampaignHub() {
                 <Search className="h-5 w-5 text-[#8B7355] ml-4 flex-shrink-0" />
                 <Input
                     type="text"
-                    placeholder="Otsi pakkumisi, restorane või teenuseid..."
+                    placeholder="Otsi pakkumisi, restorane vÃµi teenuseid..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="border-0 focus-visible:ring-0 text-[#2D2721] placeholder:text-[#8B7355]/60 h-10 text-base"
@@ -144,7 +144,7 @@ export function CampaignHub() {
                         </div>
                         {campaign.original_price && (
                              <span className="text-xs font-bold text-[#9DB5A5]">
-                                Säästad {Math.round((1 - campaign.price / campaign.original_price) * 100)}%
+                                SÃ¤Ã¤stad {Math.round((1 - campaign.price / campaign.original_price) * 100)}%
                              </span>
                         )}
                     </div>
@@ -173,13 +173,13 @@ export function CampaignHub() {
             </div>
             <h3 className="text-xl font-bold text-[#2D2721] mb-2">Pakkumisi ei leitud</h3>
             <p className="text-[#6B5744] mb-6">
-              Proovi muuta otsingusõna või vali teine kategooria.
+              Proovi muuta otsingusÃµna vÃµi vali teine kategooria.
             </p>
             <WarmButton variant="outline" onClick={() => {
-              setSelectedCategory('Kõik');
+              setSelectedCategory('KÃµik');
               setSearchQuery('');
             }}>
-              Tühista filtrid
+              TÃ¼hista filtrid
             </WarmButton>
           </WarmCard>
         )}
@@ -187,3 +187,5 @@ export function CampaignHub() {
     </div>
   );
 }
+
+

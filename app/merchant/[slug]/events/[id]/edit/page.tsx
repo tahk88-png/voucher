@@ -127,14 +127,14 @@ export default function EditEventPage() {
             <div className="space-y-4 mt-4">
               <div>
                 <Label htmlFor="name">Event name *</Label>
-                <Input id="name" name="name" required defaultValue={event.name} className="mt-1 border-[#E7DCC7]" />
+                <Input id="name" name="name" required defaultValue={event.name} className="mt-1 border-[rgba(139,115,85,0.15)]" />
               </div>
               <div>
                 <Label htmlFor="description">Description</Label>
                 <textarea
                   id="description"
                   name="description"
-                  className="w-full min-h-[100px] px-3 py-2 text-sm border border-[#E7DCC7] rounded-md bg-white"
+                  className="w-full min-h-[100px] px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
                   placeholder="Describe your event..."
                   defaultValue={event.description || ''}
                 />
@@ -147,7 +147,7 @@ export default function EditEventPage() {
                   required
                   defaultValue={event.type}
                   aria-label="Event type"
-                  className="w-full px-3 py-2 text-sm border border-[#E7DCC7] rounded-md bg-white"
+                  className="w-full px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
                 >
                   <option value="festival">Festival</option>
                   <option value="internal">Internal event</option>
@@ -171,7 +171,7 @@ export default function EditEventPage() {
                     type="date"
                     required
                     defaultValue={eventDateObj.toISOString().split('T')[0]}
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
                 <div>
@@ -182,7 +182,7 @@ export default function EditEventPage() {
                     type="time"
                     required
                     defaultValue={eventDateObj.toTimeString().slice(0, 5)}
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default function EditEventPage() {
                     name="eventEndDate"
                     type="date"
                     defaultValue={eventEndDateObj ? eventEndDateObj.toISOString().split('T')[0] : ''}
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
                 <div>
@@ -204,7 +204,7 @@ export default function EditEventPage() {
                     name="eventEndTime"
                     type="time"
                     defaultValue={eventEndDateObj ? eventEndDateObj.toTimeString().slice(0, 5) : ''}
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
               </div>
@@ -221,7 +221,7 @@ export default function EditEventPage() {
                   name="location"
                   placeholder="e.g., Main Hall, Outdoor Stage"
                   defaultValue={event.location || ''}
-                  className="mt-1 border-[#E7DCC7]"
+                  className="mt-1 border-[rgba(139,115,85,0.15)]"
                 />
               </div>
               <div>
@@ -231,7 +231,7 @@ export default function EditEventPage() {
                   name="locationAddress"
                   placeholder="Street address, City, Country"
                   defaultValue={event.locationAddress || ''}
-                  className="mt-1 border-[#E7DCC7]"
+                  className="mt-1 border-[rgba(139,115,85,0.15)]"
                 />
               </div>
             </div>
@@ -250,7 +250,7 @@ export default function EditEventPage() {
                   required
                   placeholder="100"
                   defaultValue={event.maxCapacity}
-                  className="mt-1 border-[#E7DCC7]"
+                  className="mt-1 border-[rgba(139,115,85,0.15)]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -265,7 +265,7 @@ export default function EditEventPage() {
                     required
                     placeholder="0.00"
                     defaultValue={(event.price / 100).toFixed(2)}
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
                 <div>
@@ -276,7 +276,7 @@ export default function EditEventPage() {
                     required
                     defaultValue={event.currency}
                     aria-label="Currency"
-                    className="w-full px-3 py-2 text-sm border border-[#E7DCC7] rounded-md bg-white"
+                    className="w-full px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
                   >
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -302,7 +302,7 @@ export default function EditEventPage() {
                 <textarea
                   id="terms"
                   name="terms"
-                  className="w-full min-h-[80px] px-3 py-2 text-sm border border-[#E7DCC7] rounded-md bg-white"
+                  className="w-full min-h-[80px] px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
                   placeholder="Event terms, refund policy, etc."
                   defaultValue={event.terms || ''}
                 />

@@ -1,11 +1,12 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { ArrowLeft, ArrowRight, Check, Upload, X, Plus, Trash2, Calendar, MapPin, Globe, Facebook, Instagram, Twitter, Linkedin, Video, Users, Phone, Mail, Tag } from 'lucide-react';
 import { Input } from '@app/components/ui/input';
 import { Label } from '@app/components/ui/label';
 import { Textarea } from '@app/components/ui/textarea';
+import { useLanguage } from '@app/contexts/LanguageContext';
 import { toast } from 'sonner';
 import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 import { CreditCard } from 'lucide-react';
@@ -25,6 +26,8 @@ type TicketType = {
 
 export function EventCreate() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const tr = (en: string, et: string) => (language === 'et' ? et : en);
   const [currentStep, setCurrentStep] = useState<Step>(1);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -57,7 +60,7 @@ export function EventCreate() {
 
   // Step 2: Ticket Types
   const [ticketTypes, setTicketTypes] = useState<TicketType[]>([
-    { id: '1', name: 'General Admission', price: '', originalPrice: '', quantity: '', description: '', salesStartDate: '', salesEndDate: '' },
+    { id: '1', name: '', price: '', originalPrice: '', quantity: '', description: '', salesStartDate: '', salesEndDate: '' },
   ]);
 
   // Step 3: Additional Settings
@@ -67,7 +70,7 @@ export function EventCreate() {
     allowWaitlist: true,
     maxTicketsPerOrder: '10',
     minTicketsPerOrder: '1',
-    refundPolicy: 'No refunds',
+    refundPolicy: 'none',
     enableEarlyBird: false,
     earlyBirdDiscount: '',
     earlyBirdDeadline: '',
@@ -85,9 +88,9 @@ export function EventCreate() {
   });
 
   const steps = [
-    { number: 1, label: 'Event Details' },
-    { number: 2, label: 'Ticket Types' },
-    { number: 3, label: 'Settings' },
+    { number: 1, label: tr('Event Details', 'Sündmuse andmed') },
+    { number: 2, label: tr('Ticket Types', 'Piletitüübid') },
+    { number: 3, label: tr('Settings', 'Seaded') },
   ];
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,7 +143,7 @@ export function EventCreate() {
 
   const handleNext = () => {
     if (!isStepValid(currentStep)) {
-      toast.error('Please fill in all required fields');
+      toast.error(tr('Please fill in all required fields.', 'Palun täida kõik kohustuslikud väljad.'));
       return;
     }
     if (currentStep < 3) {
@@ -159,7 +162,7 @@ export function EventCreate() {
   };
 
   const handleCreate = () => {
-    toast.success('Event created successfully!');
+    toast.success(tr('Event created successfully!', 'Sündmus loodi edukalt!'));
     setTimeout(() => navigate('/events'), 1500);
   };
 
@@ -178,10 +181,10 @@ export function EventCreate() {
           className="flex items-center gap-2 text-sm text-[#6B5744] hover:text-[#2D2721] mb-4 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to events
+          {tr('Back to events', 'Tagasi sündmuste juurde')}
         </button>
-        <h1 className="text-3xl font-bold text-[#2D2721]">Create Event</h1>
-        <p className="text-[#6B5744] mt-1">Set up your event and start selling tickets</p>
+        <h1 className="text-3xl font-bold text-[#2D2721]">{tr('Create Event', 'Loo sündmus')}</h1>
+        <p className="text-[#6B5744] mt-1">{tr('Set up your event and start selling tickets', 'Sea sündmus üles ja alusta piletite müüki')}</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -232,11 +235,11 @@ export function EventCreate() {
                 <>
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-[#2D2721] font-medium">
-                      Event Name <span className="text-[#E17B5C]">*</span>
+                      {tr('Event Name', 'Sündmuse nimi')} <span className="text-[#E17B5C]">*</span>
                     </Label>
                     <Input
                       id="name"
-                      placeholder="e.g., Summer Music Festival 2024"
+                      placeholder={tr('e.g., Summer Music Festival 2024', 'nt Suvine Muusikafestival 2024')}
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -246,11 +249,11 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="description" className="text-[#2D2721] font-medium">
-                      Short Description <span className="text-[#E17B5C]">*</span>
+                      {tr('Short Description', 'Lühikirjeldus')} <span className="text-[#E17B5C]">*</span>
                     </Label>
                     <Textarea
                       id="description"
-                      placeholder="Brief description for event listings..."
+                      placeholder={tr('Brief description for event listings...', 'Lühikirjeldus sündmuse loendi jaoks...')}
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white min-h-[80px]"
@@ -259,11 +262,11 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="longDescription" className="text-[#2D2721] font-medium">
-                      Full Description
+                      {tr('Full Description', 'Täiskirjeldus')}
                     </Label>
                     <Textarea
                       id="longDescription"
-                      placeholder="Full event description, schedule, lineup, etc..."
+                      placeholder={tr('Full event description, schedule, lineup, etc...', 'Täielik sündmuse kirjeldus, ajakava, esinejad jne...')}
                       value={formData.longDescription}
                       onChange={(e) => setFormData({ ...formData, longDescription: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white min-h-[120px]"
@@ -273,7 +276,7 @@ export function EventCreate() {
                   {/* Image Upload */}
                   <div className="space-y-2">
                     <Label className="text-[#2D2721] font-medium">
-                      Event Image <span className="text-[#E17B5C]">*</span>
+                      {tr('Event Image', 'Sündmuse pilt')} <span className="text-[#E17B5C]">*</span>
                     </Label>
                     {!imagePreview ? (
                       <label
@@ -282,10 +285,10 @@ export function EventCreate() {
                       >
                         <Upload className="h-10 w-10 text-[#FFC857] mb-3" />
                         <span className="text-sm font-medium text-[#6B5744]">
-                          Click to upload event banner
+                          {tr('Click to upload event banner', 'Klõpsa sündmuse bänneri üleslaadimiseks')}
                         </span>
                         <span className="text-xs text-[#8B7355] mt-1">
-                          PNG, JPG up to 10MB (1920x1080 recommended)
+                          {tr('PNG, JPG up to 10MB (1920x1080 recommended)', 'PNG, JPG kuni 10MB (soovituslik 1920x1080)')}
                         </span>
                         <input
                           id="image-upload"
@@ -299,7 +302,7 @@ export function EventCreate() {
                       <div className="relative">
                         <img
                           src={imagePreview}
-                          alt="Preview"
+                          alt={tr('Preview', 'Eelvaade')}
                           className="w-full h-48 object-cover rounded-[12px]"
                         />
                         <button
@@ -315,7 +318,7 @@ export function EventCreate() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="date" className="text-[#2D2721] font-medium">
-                        Date <span className="text-[#E17B5C]">*</span>
+                        {tr('Date', 'Kuupäev')} <span className="text-[#E17B5C]">*</span>
                       </Label>
                       <div className="relative">
                         <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#8B7355] pointer-events-none" />
@@ -331,7 +334,7 @@ export function EventCreate() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="time" className="text-[#2D2721] font-medium">
-                        Time <span className="text-[#E17B5C]">*</span>
+                        {tr('Time', 'Kellaaeg')} <span className="text-[#E17B5C]">*</span>
                       </Label>
                       <Input
                         id="time"
@@ -347,7 +350,7 @@ export function EventCreate() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="endDate" className="text-[#2D2721] font-medium">
-                        End Date
+                        {tr('End Date', 'Lõppkuupäev')}
                       </Label>
                       <div className="relative">
                         <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#8B7355] pointer-events-none" />
@@ -362,7 +365,7 @@ export function EventCreate() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="endTime" className="text-[#2D2721] font-medium">
-                        End Time
+                        {tr('End Time', 'Lõppaeg')}
                       </Label>
                       <Input
                         id="endTime"
@@ -376,13 +379,13 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="location" className="text-[#2D2721] font-medium">
-                      Venue Name <span className="text-[#E17B5C]">*</span>
+                      {tr('Venue Name', 'Toimumiskoha nimi')} <span className="text-[#E17B5C]">*</span>
                     </Label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#8B7355] pointer-events-none" />
                       <Input
                         id="location"
-                        placeholder="e.g., Stockholm Arena"
+                        placeholder={tr('e.g., Stockholm Arena', 'nt Tondiraba jäähall')}
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                         className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12 pl-10"
@@ -393,11 +396,11 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="address" className="text-[#2D2721] font-medium">
-                      Address
+                      {tr('Address', 'Aadress')}
                     </Label>
                     <Input
                       id="address"
-                      placeholder="e.g., 123 Main St, Stockholm"
+                      placeholder={tr('e.g., 123 Main St, Stockholm', 'nt Pärnu mnt 10, Tallinn')}
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -407,11 +410,11 @@ export function EventCreate() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="city" className="text-[#2D2721] font-medium">
-                        City
+                        {tr('City', 'Linn')}
                       </Label>
                       <Input
                         id="city"
-                        placeholder="Stockholm"
+                        placeholder={tr('Stockholm', 'Tallinn')}
                         value={formData.city}
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                         className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -419,11 +422,11 @@ export function EventCreate() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="country" className="text-[#2D2721] font-medium">
-                        Country
+                        {tr('Country', 'Riik')}
                       </Label>
                       <Input
                         id="country"
-                        placeholder="Sweden"
+                        placeholder={tr('Sweden', 'Eesti')}
                         value={formData.country}
                         onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                         className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -433,7 +436,7 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="category" className="text-[#2D2721] font-medium">
-                      Category
+                      {tr('Category', 'Kategooria')}
                     </Label>
                     <select
                       id="category"
@@ -441,25 +444,25 @@ export function EventCreate() {
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                       className="w-full rounded-[12px] border border-[rgba(139,115,85,0.2)] bg-white h-12 px-4 text-[#2D2721]"
                     >
-                      <option value="">Select category</option>
-                      <option value="music">Music & Concerts</option>
-                      <option value="conference">Conference & Summit</option>
-                      <option value="workshop">Workshop & Class</option>
-                      <option value="sports">Sports & Fitness</option>
-                      <option value="food">Food & Drink</option>
-                      <option value="arts">Arts & Culture</option>
-                      <option value="networking">Networking</option>
-                      <option value="other">Other</option>
+                      <option value="">{tr('Select category', 'Vali kategooria')}</option>
+                      <option value="music">{tr('Music & Concerts', 'Muusika ja kontserdid')}</option>
+                      <option value="conference">{tr('Conference & Summit', 'Konverents ja tippkohtumine')}</option>
+                      <option value="workshop">{tr('Workshop & Class', 'Töötuba ja koolitus')}</option>
+                      <option value="sports">{tr('Sports & Fitness', 'Sport ja treening')}</option>
+                      <option value="food">{tr('Food & Drink', 'Toit ja jook')}</option>
+                      <option value="arts">{tr('Arts & Culture', 'Kunst ja kultuur')}</option>
+                      <option value="networking">{tr('Networking', 'Võrgustik')}</option>
+                      <option value="other">{tr('Other', 'Muu')}</option>
                     </select>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="tags" className="text-[#2D2721] font-medium">
-                      Tags
+                      {tr('Tags', 'Sildid')}
                     </Label>
                     <Input
                       id="tags"
-                      placeholder="e.g., music, festival, summer"
+                      placeholder={tr('e.g., music, festival, summer', 'nt muusika, festival, suvi')}
                       value={formData.tags}
                       onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -468,7 +471,7 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="registrationDeadline" className="text-[#2D2721] font-medium">
-                      Registration Deadline
+                      {tr('Registration Deadline', 'Registreerimise tähtaeg')}
                     </Label>
                     <div className="relative">
                       <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#8B7355] pointer-events-none" />
@@ -484,7 +487,7 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="registrationDeadlineTime" className="text-[#2D2721] font-medium">
-                      Registration Deadline Time
+                      {tr('Registration Deadline Time', 'Registreerimise lõppaeg')}
                     </Label>
                     <Input
                       id="registrationDeadlineTime"
@@ -497,11 +500,11 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="organizerName" className="text-[#2D2721] font-medium">
-                      Organizer Name
+                      {tr('Organizer Name', 'Korraldaja nimi')}
                     </Label>
                     <Input
                       id="organizerName"
-                      placeholder="e.g., Event Organizers Inc."
+                      placeholder={tr('e.g., Event Organizers Inc.', 'nt Event Korraldajad OÜ')}
                       value={formData.organizerName}
                       onChange={(e) => setFormData({ ...formData, organizerName: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -510,12 +513,12 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="contactEmail" className="text-[#2D2721] font-medium">
-                      Contact Email
+                      {tr('Contact Email', 'Kontakt e-post')}
                     </Label>
                     <Input
                       id="contactEmail"
                       type="email"
-                      placeholder="e.g., contact@eventorganizers.com"
+                        placeholder={tr('e.g., contact@eventorganizers.com', 'nt info@sundmus.ee')}
                       value={formData.contactEmail}
                       onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -524,12 +527,12 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="contactPhone" className="text-[#2D2721] font-medium">
-                      Contact Phone
+                      {tr('Contact Phone', 'Kontakttelefon')}
                     </Label>
                     <Input
                       id="contactPhone"
                       type="tel"
-                      placeholder="e.g., +46 123 456 789"
+                        placeholder={tr('e.g., +46 123 456 789', 'nt +372 5555 5555')}
                       value={formData.contactPhone}
                       onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -538,12 +541,12 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="eventWebsite" className="text-[#2D2721] font-medium">
-                      Event Website
+                      {tr('Event Website', 'Sündmuse veebileht')}
                     </Label>
                     <Input
                       id="eventWebsite"
                       type="url"
-                      placeholder="e.g., https://www.eventorganizers.com"
+                        placeholder={tr('e.g., https://www.eventorganizers.com', 'nt https://www.sundmus.ee')}
                       value={formData.eventWebsite}
                       onChange={(e) => setFormData({ ...formData, eventWebsite: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -552,11 +555,11 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="languages" className="text-[#2D2721] font-medium">
-                      Languages
+                      {tr('Languages', 'Keeled')}
                     </Label>
                     <Input
                       id="languages"
-                      placeholder="e.g., English, Swedish"
+                      placeholder={tr('e.g., English, Swedish', 'nt eesti, inglise')}
                       value={formData.languages}
                       onChange={(e) => setFormData({ ...formData, languages: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -565,12 +568,12 @@ export function EventCreate() {
 
                   <div className="space-y-2">
                     <Label htmlFor="capacity" className="text-[#2D2721] font-medium">
-                      Capacity
+                      {tr('Capacity', 'Mahutavus')}
                     </Label>
                     <Input
                       id="capacity"
                       type="number"
-                      placeholder="e.g., 1000"
+                      placeholder={tr('e.g., 1000', 'nt 1000')}
                       value={formData.capacity}
                       onChange={(e) => setFormData({ ...formData, capacity: e.target.value })}
                       className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -584,12 +587,12 @@ export function EventCreate() {
                 <>
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h3 className="text-lg font-semibold text-[#2D2721]">Ticket Types</h3>
-                      <p className="text-sm text-[#6B5744]">Add different ticket tiers and pricing</p>
+                      <h3 className="text-lg font-semibold text-[#2D2721]">{tr('Ticket Types', 'Piletitüübid')}</h3>
+                      <p className="text-sm text-[#6B5744]">{tr('Add different ticket tiers and pricing', 'Lisa erinevad piletitasemed ja hinnad')}</p>
                     </div>
                     <WarmButton size="sm" onClick={addTicketType}>
                       <Plus className="h-4 w-4 mr-2" />
-                      Add Ticket
+                      {tr('Add Ticket', 'Lisa pilet')}
                     </WarmButton>
                   </div>
 
@@ -597,7 +600,7 @@ export function EventCreate() {
                     {ticketTypes.map((ticket, index) => (
                       <WarmCard key={ticket.id} padding="lg" className="bg-[#FFF9ED]">
                         <div className="flex items-start justify-between mb-4">
-                          <h4 className="font-semibold text-[#2D2721]">Ticket Type {index + 1}</h4>
+                          <h4 className="font-semibold text-[#2D2721]">{tr('Ticket Type', 'Piletitüüp')} {index + 1}</h4>
                           {ticketTypes.length > 1 && (
                             <button
                               onClick={() => removeTicketType(ticket.id)}
@@ -611,10 +614,10 @@ export function EventCreate() {
                         <div className="space-y-4">
                           <div className="space-y-2">
                             <Label className="text-[#2D2721] font-medium">
-                              Ticket Name <span className="text-[#E17B5C]">*</span>
+                              {tr('Ticket Name', 'Pileti nimi')} <span className="text-[#E17B5C]">*</span>
                             </Label>
                             <Input
-                              placeholder="e.g., Early Bird, VIP, General Admission"
+                              placeholder={tr('e.g., Early Bird, VIP, General Admission', 'nt Varajane pääse, VIP, Üldpääse')}
                               value={ticket.name}
                               onChange={(e) => updateTicketType(ticket.id, 'name', e.target.value)}
                               className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -624,7 +627,7 @@ export function EventCreate() {
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div className="space-y-2">
                               <Label className="text-[#2D2721] font-medium">
-                                Price (€) <span className="text-[#E17B5C]">*</span>
+                                {tr('Price (€)', 'Hind (€)')} <span className="text-[#E17B5C]">*</span>
                               </Label>
                               <Input
                                 type="number"
@@ -637,7 +640,7 @@ export function EventCreate() {
                             </div>
                             <div className="space-y-2">
                               <Label className="text-[#2D2721] font-medium">
-                                Original Price (€)
+                                {tr('Original Price (€)', 'Alghind (€)')}
                               </Label>
                               <Input
                                 type="number"
@@ -650,7 +653,7 @@ export function EventCreate() {
                             </div>
                             <div className="space-y-2">
                               <Label className="text-[#2D2721] font-medium">
-                                Quantity <span className="text-[#E17B5C]">*</span>
+                                {tr('Quantity', 'Kogus')} <span className="text-[#E17B5C]">*</span>
                               </Label>
                               <Input
                                 type="number"
@@ -664,10 +667,10 @@ export function EventCreate() {
 
                           <div className="space-y-2">
                             <Label className="text-[#2D2721] font-medium">
-                              Description
+                              {tr('Description', 'Kirjeldus')}
                             </Label>
                             <Textarea
-                              placeholder="What's included with this ticket..."
+                              placeholder={tr("What's included with this ticket...", 'Mis selle piletiga kaasneb...')}
                               value={ticket.description}
                               onChange={(e) => updateTicketType(ticket.id, 'description', e.target.value)}
                               className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white min-h-[60px]"
@@ -677,7 +680,7 @@ export function EventCreate() {
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-2">
                               <Label className="text-[#2D2721] font-medium">
-                                Sales Start Date
+                                {tr('Sales Start Date', 'Müügi alguskuupäev')}
                               </Label>
                               <div className="relative">
                                 <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#8B7355] pointer-events-none" />
@@ -691,7 +694,7 @@ export function EventCreate() {
                             </div>
                             <div className="space-y-2">
                               <Label className="text-[#2D2721] font-medium">
-                                Sales End Date
+                                {tr('Sales End Date', 'Müügi lõppkuupäev')}
                               </Label>
                               <div className="relative">
                                 <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#8B7355] pointer-events-none" />
@@ -709,7 +712,7 @@ export function EventCreate() {
                           {ticket.price && ticket.quantity && (
                             <div className="pt-3 border-t border-[rgba(139,115,85,0.1)]">
                               <div className="flex items-center justify-between text-sm">
-                                <span className="text-[#8B7355]">Potential Revenue:</span>
+                                <span className="text-[#8B7355]">{tr('Potential Revenue:', 'Potentsiaalne tulu:')}</span>
                                 <span className="font-semibold text-[#2D2721]">
                                   <CurrencyDisplay
                                     amount={parseFloat(ticket.price) * parseInt(ticket.quantity)}
@@ -731,13 +734,13 @@ export function EventCreate() {
                 <>
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-semibold text-[#2D2721] mb-4">Ticket Settings</h3>
+                      <h3 className="text-lg font-semibold text-[#2D2721] mb-4">{tr('Ticket Settings', 'Piletiseaded')}</h3>
                       
                       <div className="space-y-3">
                         <label className="flex items-center justify-between p-4 bg-[#FFF9ED] rounded-lg cursor-pointer hover:bg-[#FFE5B4] transition-colors">
                           <div>
-                            <div className="font-medium text-[#2D2721]">Show Attendees Count</div>
-                            <div className="text-xs text-[#8B7355]">Display how many people are attending</div>
+                            <div className="font-medium text-[#2D2721]">{tr('Show Attendees Count', 'Näita osalejate arvu')}</div>
+                            <div className="text-xs text-[#8B7355]">{tr('Display how many people are attending', 'Kuva, mitu inimest osaleb')}</div>
                           </div>
                           <input
                             type="checkbox"
@@ -749,8 +752,8 @@ export function EventCreate() {
 
                         <label className="flex items-center justify-between p-4 bg-[#FFF9ED] rounded-lg cursor-pointer hover:bg-[#FFE5B4] transition-colors">
                           <div>
-                            <div className="font-medium text-[#2D2721]">Allow Waitlist</div>
-                            <div className="text-xs text-[#8B7355]">Let people join waitlist when sold out</div>
+                            <div className="font-medium text-[#2D2721]">{tr('Allow Waitlist', 'Luba ootenimekiri')}</div>
+                            <div className="text-xs text-[#8B7355]">{tr('Let people join waitlist when sold out', 'Luba liituda ootenimekirjaga, kui piletid on läbi')}</div>
                           </div>
                           <input
                             type="checkbox"
@@ -762,8 +765,8 @@ export function EventCreate() {
 
                         <label className="flex items-center justify-between p-4 bg-[#FFF9ED] rounded-lg cursor-pointer hover:bg-[#FFE5B4] transition-colors">
                           <div>
-                            <div className="font-medium text-[#2D2721]">Require Approval</div>
-                            <div className="text-xs text-[#8B7355]">Manually approve each ticket purchase</div>
+                            <div className="font-medium text-[#2D2721]">{tr('Require Approval', 'Nõua kinnitamist')}</div>
+                            <div className="text-xs text-[#8B7355]">{tr('Manually approve each ticket purchase', 'Kinnita iga piletimüük käsitsi')}</div>
                           </div>
                           <input
                             type="checkbox"
@@ -777,7 +780,7 @@ export function EventCreate() {
 
                     <div className="space-y-2">
                       <Label htmlFor="maxTickets" className="text-[#2D2721] font-medium">
-                        Max Tickets Per Order
+                        {tr('Max Tickets Per Order', 'Maksimaalne piletite arv tellimuses')}
                       </Label>
                       <Input
                         id="maxTickets"
@@ -790,7 +793,7 @@ export function EventCreate() {
 
                     <div className="space-y-2">
                       <Label htmlFor="minTickets" className="text-[#2D2721] font-medium">
-                        Min Tickets Per Order
+                        {tr('Min Tickets Per Order', 'Minimaalne piletite arv tellimuses')}
                       </Label>
                       <Input
                         id="minTickets"
@@ -803,7 +806,7 @@ export function EventCreate() {
 
                     <div className="space-y-2">
                       <Label htmlFor="refundPolicy" className="text-[#2D2721] font-medium">
-                        Refund Policy
+                        {tr('Refund Policy', 'Tagastuspoliitika')}
                       </Label>
                       <select
                         id="refundPolicy"
@@ -811,17 +814,17 @@ export function EventCreate() {
                         onChange={(e) => setSettings({ ...settings, refundPolicy: e.target.value })}
                         className="w-full rounded-[12px] border border-[rgba(139,115,85,0.2)] bg-white h-12 px-4 text-[#2D2721]"
                       >
-                        <option value="No refunds">No refunds</option>
-                        <option value="7 days before">Refund up to 7 days before</option>
-                        <option value="14 days before">Refund up to 14 days before</option>
-                        <option value="30 days before">Refund up to 30 days before</option>
-                        <option value="Anytime">Refund anytime</option>
+                        <option value="none">{tr('No refunds', 'Tagastusi ei ole')}</option>
+                        <option value="7days">{tr('Refund up to 7 days before', 'Tagastus kuni 7 päeva enne')}</option>
+                        <option value="14days">{tr('Refund up to 14 days before', 'Tagastus kuni 14 päeva enne')}</option>
+                        <option value="30days">{tr('Refund up to 30 days before', 'Tagastus kuni 30 päeva enne')}</option>
+                        <option value="anytime">{tr('Refund anytime', 'Tagastus igal ajal')}</option>
                       </select>
                     </div>
 
                     {/* Stripe Payment Settings */}
                     <div className="pt-6 border-t border-[rgba(139,115,85,0.1)]">
-                      <h3 className="text-lg font-semibold text-[#2D2721] mb-4">Payment Settings</h3>
+                      <h3 className="text-lg font-semibold text-[#2D2721] mb-4">{tr('Payment Settings', 'Maksete seaded')}</h3>
                       
                       <div className="bg-gradient-to-br from-[#E8F5E9] to-[#F1F8E9] rounded-[16px] p-6 mb-4">
                         <div className="flex items-start gap-3 mb-4">
@@ -829,37 +832,39 @@ export function EventCreate() {
                             <CreditCard className="h-5 w-5 text-[#9DB5A5]" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-[#2D2721] mb-1">Stripe Payments</h4>
+                            <h4 className="font-semibold text-[#2D2721] mb-1">{tr('Stripe Payments', 'Stripe maksed')}</h4>
                             <p className="text-sm text-[#6B5744]">
-                              Secure payment processing powered by Stripe. Customers pay with credit card, and funds are automatically transferred to your account.
+                              {tr('Secure payment processing powered by Stripe. Customers pay with credit card, and funds are automatically transferred to your account.', 'Turvaline maksete töötlemine Stripe kaudu. Kliendid maksavad kaardiga ja raha kantakse automaatselt sinu kontole.')}
                             </p>
                           </div>
                         </div>
                         
                         <div className="bg-white rounded-lg p-4 space-y-3">
                           <div className="flex items-center justify-between text-sm">
-                            <span className="text-[#8B7355]">Platform Fee:</span>
-                            <span className="font-semibold text-[#2D2721]">6% per ticket</span>
+                            <span className="text-[#8B7355]">{tr('Platform Fee:', 'Platvormi tasu:')}</span>
+                            <span className="font-semibold text-[#2D2721]">{tr('6% per ticket', '6% pileti kohta')}</span>
                           </div>
                           <div className="flex items-center justify-between text-sm">
-                            <span className="text-[#8B7355]">Stripe Processing Fee:</span>
+                            <span className="text-[#8B7355]">{tr('Stripe Processing Fee:', 'Stripe töötlemistasu:')}</span>
                             <span className="font-semibold text-[#2D2721]">~2.9% + €0.25</span>
                           </div>
                           <div className="pt-3 border-t border-[rgba(139,115,85,0.1)]">
                             <div className="flex items-center justify-between">
-                              <span className="text-sm text-[#8B7355]">Your Estimated Revenue:</span>
+                              <span className="text-sm text-[#8B7355]">{tr('Your Estimated Revenue:', 'Sinu hinnanguline tulu:')}</span>
                               <span className="text-lg font-bold text-[#2D2721]">
                                 <CurrencyDisplay amount={totalRevenue * 0.94} currency="EUR" />
                               </span>
                             </div>
-                            <p className="text-xs text-[#8B7355] mt-1">Based on {totalRevenue > 0 ? <CurrencyDisplay amount={totalRevenue} currency="EUR" /> : '€0.00'} potential revenue (excl. Stripe fees)</p>
+                            <p className="text-xs text-[#8B7355] mt-1">
+                              {tr('Based on', 'Põhineb')} {totalRevenue > 0 ? <CurrencyDisplay amount={totalRevenue} currency="EUR" /> : '€0.00'} {tr('potential revenue (excl. Stripe fees)', 'potentsiaalsel tulul (ilma Stripe tasudeta)')}
+                            </p>
                           </div>
                         </div>
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="stripeAccountId" className="text-[#2D2721] font-medium">
-                          Stripe Account ID (Optional)
+                          {tr('Stripe Account ID (Optional)', 'Stripe konto ID (valikuline)')}
                         </Label>
                         <Input
                           id="stripeAccountId"
@@ -869,14 +874,14 @@ export function EventCreate() {
                           className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
                         />
                         <p className="text-xs text-[#8B7355]">
-                          Connect your Stripe account for direct payouts. Leave empty to use platform default.
+                          {tr('Connect your Stripe account for direct payouts. Leave empty to use platform default.', 'Ühenda oma Stripe konto otseväljamaksete jaoks. Jäta tühjaks, kui soovid kasutada platvormi vaikeseadeid.')}
                         </p>
                       </div>
                     </div>
 
                     {/* Social Media Links */}
                     <div className="pt-6 border-t border-[rgba(139,115,85,0.1)]">
-                      <h3 className="text-lg font-semibold text-[#2D2721] mb-4">Social Media Links</h3>
+                      <h3 className="text-lg font-semibold text-[#2D2721] mb-4">{tr('Social Media Links', 'Sotsiaalmeedia lingid')}</h3>
                       
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
@@ -934,15 +939,15 @@ export function EventCreate() {
 
                     {/* Additional Information */}
                     <div className="pt-6 border-t border-[rgba(139,115,85,0.1)]">
-                      <h3 className="text-lg font-semibold text-[#2D2721] mb-4">Additional Information</h3>
+                      <h3 className="text-lg font-semibold text-[#2D2721] mb-4">{tr('Additional Information', 'Lisainfo')}</h3>
                       
                       <div className="space-y-3">
                         <div className="space-y-2">
                           <Label className="text-[#2D2721] font-medium">
-                            Accessibility Info
+                            {tr('Accessibility Info', 'Ligipääsetavuse info')}
                           </Label>
                           <Textarea
-                            placeholder="Information about accessibility features..."
+                            placeholder={tr('Information about accessibility features...', 'Info ligipääsetavuse võimaluste kohta...')}
                             value={settings.accessibilityInfo}
                             onChange={(e) => setSettings({ ...settings, accessibilityInfo: e.target.value })}
                             className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white min-h-[60px]"
@@ -950,10 +955,10 @@ export function EventCreate() {
                         </div>
                         <div className="space-y-2">
                           <Label className="text-[#2D2721] font-medium">
-                            Special Instructions
+                            {tr('Special Instructions', 'Erijuhised')}
                           </Label>
                           <Textarea
-                            placeholder="Any special instructions for attendees..."
+                            placeholder={tr('Any special instructions for attendees...', 'Kõik erijuhised osalejatele...')}
                             value={settings.specialInstructions}
                             onChange={(e) => setSettings({ ...settings, specialInstructions: e.target.value })}
                             className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white min-h-[60px]"
@@ -961,11 +966,11 @@ export function EventCreate() {
                         </div>
                         <div className="space-y-2">
                           <Label className="text-[#2D2721] font-medium">
-                            Age Restriction
+                            {tr('Age Restriction', 'Vanusepiirang')}
                           </Label>
                           <Input
                             type="text"
-                            placeholder="e.g., 18+"
+                            placeholder={tr('e.g., 18+', 'nt 18+')}
                             value={settings.ageRestriction}
                             onChange={(e) => setSettings({ ...settings, ageRestriction: e.target.value })}
                             className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -973,11 +978,11 @@ export function EventCreate() {
                         </div>
                         <div className="space-y-2">
                           <Label className="text-[#2D2721] font-medium">
-                            Dress Code
+                            {tr('Dress Code', 'Riietuskood')}
                           </Label>
                           <Input
                             type="text"
-                            placeholder="e.g., Formal, Casual"
+                            placeholder={tr('e.g., Formal, Casual', 'nt pidulik, vaba')}
                             value={settings.dressCode}
                             onChange={(e) => setSettings({ ...settings, dressCode: e.target.value })}
                             className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
@@ -994,10 +999,10 @@ export function EventCreate() {
             <div className="flex items-center justify-between mt-8 pt-6 border-t border-[rgba(139,115,85,0.1)]">
               <WarmButton variant="outline" onClick={handleBack}>
                 <ArrowLeft className="h-5 w-5 mr-2" />
-                {currentStep === 1 ? 'Cancel' : 'Back'}
+                {currentStep === 1 ? tr('Cancel', 'Tühista') : tr('Back', 'Tagasi')}
               </WarmButton>
               <WarmButton onClick={handleNext}>
-                {currentStep === 3 ? 'Create Event' : 'Next'}
+                {currentStep === 3 ? tr('Create Event', 'Loo sündmus') : tr('Next', 'Järgmine')}
                 {currentStep < 3 && <ArrowRight className="h-5 w-5 ml-2" />}
               </WarmButton>
             </div>
@@ -1008,48 +1013,48 @@ export function EventCreate() {
         <div className="lg:col-span-1">
           <div className="sticky top-6">
             <WarmCard padding="lg">
-              <h3 className="text-lg font-semibold text-[#2D2721] mb-4">Preview</h3>
+              <h3 className="text-lg font-semibold text-[#2D2721] mb-4">{tr('Preview', 'Eelvaade')}</h3>
               
               {imagePreview && (
                 <img
                   src={imagePreview}
-                  alt="Event preview"
+                  alt={tr('Event preview', 'Sündmuse eelvaade')}
                   className="w-full h-32 object-cover rounded-lg mb-4"
                 />
               )}
 
               <div className="space-y-3 text-sm">
                 <div>
-                  <span className="text-[#8B7355]">Event Name:</span>
-                  <p className="font-medium text-[#2D2721]">{formData.name || 'Not set'}</p>
+                  <span className="text-[#8B7355]">{tr('Event Name:', 'Sündmuse nimi:')}</span>
+                  <p className="font-medium text-[#2D2721]">{formData.name || tr('Not set', 'Määramata')}</p>
                 </div>
                 <div>
-                  <span className="text-[#8B7355]">Date & Time:</span>
+                  <span className="text-[#8B7355]">{tr('Date & Time:', 'Kuupäev ja kellaaeg:')}</span>
                   <p className="font-medium text-[#2D2721]">
-                    {formData.date && formData.time ? `${formData.date} at ${formData.time}` : 'Not set'}
+                    {formData.date && formData.time ? `${formData.date} ${tr('at', 'kell')} ${formData.time}` : tr('Not set', 'Määramata')}
                   </p>
                 </div>
                 <div>
-                  <span className="text-[#8B7355]">Location:</span>
-                  <p className="font-medium text-[#2D2721]">{formData.location || 'Not set'}</p>
+                  <span className="text-[#8B7355]">{tr('Location:', 'Asukoht:')}</span>
+                  <p className="font-medium text-[#2D2721]">{formData.location || tr('Not set', 'Määramata')}</p>
                 </div>
                 <div>
-                  <span className="text-[#8B7355]">Ticket Types:</span>
+                  <span className="text-[#8B7355]">{tr('Ticket Types:', 'Piletitüübid:')}</span>
                   <p className="font-medium text-[#2D2721]">{ticketTypes.length}</p>
                 </div>
                 <div>
-                  <span className="text-[#8B7355]">Total Capacity:</span>
+                  <span className="text-[#8B7355]">{tr('Total Capacity:', 'Kogumahutavus:')}</span>
                   <p className="font-medium text-[#2D2721]">
-                    {ticketTypes.reduce((sum, t) => sum + (parseInt(t.quantity) || 0), 0)} tickets
+                    {ticketTypes.reduce((sum, t) => sum + (parseInt(t.quantity) || 0), 0)} {tr('tickets', 'piletit')}
                   </p>
                 </div>
                 <div className="pt-3 border-t border-[rgba(139,115,85,0.1)]">
-                  <span className="text-[#8B7355]">Potential Revenue:</span>
+                  <span className="text-[#8B7355]">{tr('Potential Revenue:', 'Potentsiaalne tulu:')}</span>
                   <p className="text-lg font-bold text-[#2D2721]">
                     <CurrencyDisplay amount={totalRevenue} currency="EUR" />
                   </p>
                   <p className="text-xs text-[#8B7355] mt-1">
-                    After 6% fee: <CurrencyDisplay amount={totalRevenue * 0.94} currency="EUR" />
+                    {tr('After 6% fee:', 'Pärast 6% tasu:')} <CurrencyDisplay amount={totalRevenue * 0.94} currency="EUR" />
                   </p>
                 </div>
               </div>

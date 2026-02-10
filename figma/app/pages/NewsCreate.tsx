@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { RichTextEditor } from '@app/components/RichTextEditor';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -581,3 +581,4 @@ export function NewsCreate() {
     </div>
   );
 }
+

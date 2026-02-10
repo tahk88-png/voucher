@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from '@/lib/router-shim';
 import { 
   Calendar,
   Clock,
@@ -34,6 +34,7 @@ import {
 import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 import { toast } from 'sonner';
 import { copyToClipboard } from '@app/utils/clipboard';
+import { useLanguage } from '@app/contexts/LanguageContext';
 
 type EventStatus = 'upcoming' | 'ongoing' | 'ended' | 'cancelled';
 
@@ -59,7 +60,9 @@ type Attendee = {
 export function EventDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<'overview' | 'attendees' | 'analytics'>('overview');
+  const tr = (en: string, et: string) => (language === 'et' ? et : en);
 
   // Mock event data
   const event = {
@@ -75,10 +78,10 @@ export function EventDetail() {
     description: 'The biggest music festival of the year featuring top artists from around Europe',
     longDescription: `Experience an unforgettable weekend of music, food, and entertainment at the Summer Music Festival 2024.
 
-🎵 World-class lineup featuring 50+ artists
-🍔 Gourmet food trucks and local vendors
-🎨 Art installations and interactive experiences
-🌟 VIP areas with exclusive amenities
+- World-class lineup featuring 50+ artists
+- Gourmet food trucks and local vendors
+- Art installations and interactive experiences
+- VIP areas with exclusive amenities
 
 Don't miss out on the event of the summer!`,
     status: 'upcoming' as EventStatus,
@@ -156,13 +159,13 @@ Don't miss out on the event of the summer!`,
   const getStatusConfig = (status: EventStatus) => {
     switch (status) {
       case 'upcoming':
-        return { label: 'Upcoming', color: 'bg-[#9DB5A5] text-white', icon: Clock };
+        return { label: tr('Upcoming', 'Tulemas'), color: 'bg-[#9DB5A5] text-white', icon: Clock };
       case 'ongoing':
-        return { label: 'Live Now', color: 'bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-white animate-pulse', icon: CheckCircle2 };
+        return { label: tr('Live Now', 'Toimub praegu'), color: 'bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-white animate-pulse', icon: CheckCircle2 };
       case 'ended':
-        return { label: 'Ended', color: 'bg-[#8B7355] text-white', icon: CheckCircle2 };
+        return { label: tr('Ended', 'Loppenud'), color: 'bg-[#8B7355] text-white', icon: CheckCircle2 };
       case 'cancelled':
-        return { label: 'Cancelled', color: 'bg-[#E17B5C] text-white', icon: XCircle };
+        return { label: tr('Cancelled', 'Tuhistatud'), color: 'bg-[#E17B5C] text-white', icon: XCircle };
     }
   };
 
@@ -176,41 +179,41 @@ Don't miss out on the event of the summer!`,
       try {
         await navigator.share({
           title: event.name,
-          text: `Check out ${event.name}!`,
+          text: tr(`Check out ${event.name}!`, `Vaata ${event.name} uritust!`),
           url: url,
         });
-        toast.success('Shared successfully!');
+        toast.success(tr('Shared successfully!', 'Jagamine onnestus!'));
       } catch (error: any) {
         if (error.name !== 'AbortError') {
           const success = await copyToClipboard(url);
           if (success) {
-            toast.success('Link copied to clipboard!');
+            toast.success(tr('Link copied to clipboard!', 'Link kopeeriti loikelauale!'));
           }
         }
       }
     } else {
       const success = await copyToClipboard(url);
       if (success) {
-        toast.success('Link copied to clipboard!');
+        toast.success(tr('Link copied to clipboard!', 'Link kopeeriti loikelauale!'));
       }
     }
   };
 
   const handleDelete = () => {
-    if (confirm('Are you sure you want to delete this event? This action cannot be undone.')) {
-      toast.success('Event deleted successfully');
+    if (confirm(tr('Are you sure you want to delete this event? This action cannot be undone.', 'Kas oled kindel, et soovid selle urituse kustutada? Seda tegevust ei saa tagasi votta.'))) {
+      toast.success(tr('Event deleted successfully', 'Uritus kustutati edukalt'));
       navigate('/events');
     }
   };
 
   const handleExportAttendees = () => {
-    toast.success('Exporting attendee list...');
+    toast.success(tr('Exporting attendee list...', 'Osalejate nimekirja eksportimine...'));
   };
 
   const tabs = [
-    { id: 'overview' as const, label: 'Overview', icon: FileText },
-    { id: 'attendees' as const, label: 'Attendees', icon: Users },
-    { id: 'analytics' as const, label: 'Analytics', icon: BarChart3 },
+    { id: 'overview' as const, label: tr('Overview', 'Ulevaade'), icon: FileText },
+    { id: 'attendees' as const, label: tr('Attendees', 'Osalejad'), icon: Users },
+    { id: 'analytics' as const, label: tr('Analytics', 'Analyytika'), icon: BarChart3 },
   ];
 
   return (
@@ -222,7 +225,7 @@ Don't miss out on the event of the summer!`,
           className="flex items-center gap-2 text-sm text-[#6B5744] hover:text-[#2D2721] mb-4 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to events
+          {tr('Back to events', 'Tagasi urituste juurde')}
         </button>
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
           <div className="flex-1">
@@ -238,11 +241,11 @@ Don't miss out on the event of the summer!`,
           <div className="flex items-center gap-2">
             <WarmButton variant="outline" size="sm" onClick={handleShare}>
               <Share2 className="h-4 w-4 mr-2" />
-              Share
+              {tr('Share', 'Jaga')}
             </WarmButton>
             <WarmButton variant="outline" size="sm" onClick={() => navigate(`/events/create?duplicate=${event.id}`)}>
               <Edit className="h-4 w-4 mr-2" />
-              Edit
+              {tr('Edit', 'Muuda')}
             </WarmButton>
             <button
               onClick={handleDelete}
@@ -259,11 +262,11 @@ Don't miss out on the event of the summer!`,
         <WarmCard padding="lg" hover>
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-[#8B7355] mb-1">Tickets Sold</p>
+              <p className="text-sm text-[#8B7355] mb-1">{tr('Tickets Sold', 'Muudud piletid')}</p>
               <p className="text-2xl font-bold text-[#2D2721]">
                 {event.stats.soldTickets} / {event.stats.totalTickets}
               </p>
-              <p className="text-xs text-[#8B7355] mt-1">{Math.round(soldPercentage)}% sold</p>
+              <p className="text-xs text-[#8B7355] mt-1">{Math.round(soldPercentage)}% {tr('sold', 'muudud')}</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
               <Ticket className="h-6 w-6 text-white" />
@@ -274,11 +277,11 @@ Don't miss out on the event of the summer!`,
         <WarmCard padding="lg" hover>
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-[#8B7355] mb-1">Revenue</p>
+              <p className="text-sm text-[#8B7355] mb-1">{tr('Revenue', 'Kaive')}</p>
               <p className="text-2xl font-bold text-[#2D2721]">
                 <CurrencyDisplay amount={event.stats.revenue} currency="EUR" />
               </p>
-              <p className="text-xs text-[#8B7355] mt-1">After fees: <CurrencyDisplay amount={event.stats.revenue * 0.94} currency="EUR" /></p>
+              <p className="text-xs text-[#8B7355] mt-1">{tr('After fees:', 'Parast tasusid:')} <CurrencyDisplay amount={event.stats.revenue * 0.94} currency="EUR" /></p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#9DB5A5] to-[#7FA090] flex items-center justify-center shadow-warm">
               <TrendingUp className="h-6 w-6 text-white" />
@@ -289,9 +292,9 @@ Don't miss out on the event of the summer!`,
         <WarmCard padding="lg" hover>
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-[#8B7355] mb-1">Page Views</p>
+              <p className="text-sm text-[#8B7355] mb-1">{tr('Page Views', 'Lehevaatamised')}</p>
               <p className="text-2xl font-bold text-[#2D2721]">{event.stats.viewCount.toLocaleString()}</p>
-              <p className="text-xs text-[#8B7355] mt-1">Last 30 days</p>
+              <p className="text-xs text-[#8B7355] mt-1">{tr('Last 30 days', 'Viimased 30 paeva')}</p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#E17B5C] to-[#D16B4C] flex items-center justify-center shadow-warm">
               <Users className="h-6 w-6 text-white" />
@@ -302,10 +305,10 @@ Don't miss out on the event of the summer!`,
         <WarmCard padding="lg" hover>
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-[#8B7355] mb-1">Check-ins</p>
+              <p className="text-sm text-[#8B7355] mb-1">{tr('Check-ins', 'Sissepaasud')}</p>
               <p className="text-2xl font-bold text-[#2D2721]">{event.stats.checkIns}</p>
               <p className="text-xs text-[#8B7355] mt-1">
-                {event.status === 'upcoming' ? 'Event not started' : `${event.stats.soldTickets - event.stats.checkIns} remaining`}
+                {event.status === 'upcoming' ? tr('Event not started', 'Uritus pole alanud') : `${event.stats.soldTickets - event.stats.checkIns} ${tr('remaining', 'alles')}`}
               </p>
             </div>
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#F5C98E] to-[#E5B97E] flex items-center justify-center shadow-warm">
@@ -344,7 +347,7 @@ Don't miss out on the event of the summer!`,
           {/* Main Info */}
           <div className="lg:col-span-2 space-y-6">
             <WarmCard padding="lg">
-              <h2 className="text-xl font-bold text-[#2D2721] mb-4">Event Details</h2>
+              <h2 className="text-xl font-bold text-[#2D2721] mb-4">{tr('Event Details', 'Urituse detailid')}</h2>
               
               {/* Event Image Placeholder */}
               <div className="w-full h-64 bg-gradient-to-br from-[#FFE5B4] to-[#FFC857] rounded-xl flex items-center justify-center mb-6 overflow-hidden">
@@ -357,7 +360,7 @@ Don't miss out on the event of the summer!`,
                     <Calendar className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-[#8B7355]">Date</div>
+                    <div className="text-sm text-[#8B7355]">{tr('Date', 'Kuupaev')}</div>
                     <div className="font-semibold text-[#2D2721]">{event.date}</div>
                   </div>
                 </div>
@@ -366,7 +369,7 @@ Don't miss out on the event of the summer!`,
                     <Clock className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-[#8B7355]">Time</div>
+                    <div className="text-sm text-[#8B7355]">{tr('Time', 'Kellaaeg')}</div>
                     <div className="font-semibold text-[#2D2721]">{event.time} - {event.endTime}</div>
                   </div>
                 </div>
@@ -375,7 +378,7 @@ Don't miss out on the event of the summer!`,
                     <MapPin className="h-5 w-5 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-[#8B7355]">Location</div>
+                    <div className="text-sm text-[#8B7355]">{tr('Location', 'Asukoht')}</div>
                     <div className="font-semibold text-[#2D2721]">{event.venue}</div>
                     <div className="text-sm text-[#6B5744]">{event.city}, {event.country}</div>
                   </div>
@@ -383,13 +386,13 @@ Don't miss out on the event of the summer!`,
               </div>
 
               <div className="pt-4 border-t border-[rgba(139,115,85,0.1)]">
-                <h3 className="font-semibold text-[#2D2721] mb-2">About This Event</h3>
+                <h3 className="font-semibold text-[#2D2721] mb-2">{tr('About This Event', 'Urituse kirjeldus')}</h3>
                 <p className="text-[#6B5744] whitespace-pre-line">{event.longDescription}</p>
               </div>
 
               {/* Organizer & Contact */}
               <div className="pt-4 border-t border-[rgba(139,115,85,0.1)]">
-                <h3 className="font-semibold text-[#2D2721] mb-4">Organizer & Contact</h3>
+                <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Organizer & Contact', 'Korraldaja ja kontakt')}</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {event.organizer.name && (
                     <div className="flex items-start gap-3">
@@ -397,7 +400,7 @@ Don't miss out on the event of the summer!`,
                         <Users className="h-5 w-5" />
                       </div>
                       <div>
-                        <div className="text-sm text-[#8B7355]">Organizer</div>
+                        <div className="text-sm text-[#8B7355]">{tr('Organizer', 'Korraldaja')}</div>
                         <div className="font-medium text-[#2D2721]">{event.organizer.name}</div>
                       </div>
                     </div>
@@ -408,7 +411,7 @@ Don't miss out on the event of the summer!`,
                         <Mail className="h-5 w-5" />
                       </div>
                       <div>
-                        <div className="text-sm text-[#8B7355]">Email</div>
+                        <div className="text-sm text-[#8B7355]">{tr('Email', 'E-post')}</div>
                         <a href={`mailto:${event.organizer.email}`} className="font-medium text-[#2D2721] hover:text-[#E17B5C] transition-colors">
                           {event.organizer.email}
                         </a>
@@ -421,7 +424,7 @@ Don't miss out on the event of the summer!`,
                         <Phone className="h-5 w-5" />
                       </div>
                       <div>
-                        <div className="text-sm text-[#8B7355]">Phone</div>
+                        <div className="text-sm text-[#8B7355]">{tr('Phone', 'Telefon')}</div>
                         <a href={`tel:${event.organizer.phone}`} className="font-medium text-[#2D2721] hover:text-[#E17B5C] transition-colors">
                           {event.organizer.phone}
                         </a>
@@ -434,9 +437,9 @@ Don't miss out on the event of the summer!`,
                         <Globe className="h-5 w-5" />
                       </div>
                       <div>
-                        <div className="text-sm text-[#8B7355]">Website</div>
+                        <div className="text-sm text-[#8B7355]">{tr('Website', 'Veebileht')}</div>
                         <a href={event.organizer.website} target="_blank" rel="noopener noreferrer" className="font-medium text-[#2D2721] hover:text-[#E17B5C] transition-colors">
-                          Visit Website
+                          {tr('Visit Website', 'Ava veebileht')}
                         </a>
                       </div>
                     </div>
@@ -447,7 +450,7 @@ Don't miss out on the event of the summer!`,
               {/* Social Media */}
               {(event.settings.facebookUrl || event.settings.instagramUrl || event.settings.twitterUrl || event.settings.linkedinUrl || event.settings.videoUrl) && (
                 <div className="pt-4 border-t border-[rgba(139,115,85,0.1)]">
-                  <h3 className="font-semibold text-[#2D2721] mb-4">Social Media</h3>
+                  <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Social Media', 'Sotsiaalmeedia')}</h3>
                   <div className="flex flex-wrap gap-4">
                     {event.settings.facebookUrl && (
                       <a href={event.settings.facebookUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-[#F2EDE3] rounded-lg text-[#3B5998] hover:bg-[#E7DCC7] transition-colors">
@@ -464,7 +467,7 @@ Don't miss out on the event of the summer!`,
                     {event.settings.twitterUrl && (
                       <a href={event.settings.twitterUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-[#F2EDE3] rounded-lg text-[#1DA1F2] hover:bg-[#E7DCC7] transition-colors">
                         <Twitter className="h-5 w-5" />
-                        <span className="font-medium">Twitter</span>
+                        <span className="font-medium">{tr('Twitter', 'X / Twitter')}</span>
                       </a>
                     )}
                     {event.settings.linkedinUrl && (
@@ -476,7 +479,7 @@ Don't miss out on the event of the summer!`,
                     {event.settings.videoUrl && (
                       <a href={event.settings.videoUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-[#F2EDE3] rounded-lg text-[#FF0000] hover:bg-[#E7DCC7] transition-colors">
                         <Video className="h-5 w-5" />
-                        <span className="font-medium">Video</span>
+                        <span className="font-medium">{tr('Video', 'Video')}</span>
                       </a>
                     )}
                   </div>
@@ -486,7 +489,7 @@ Don't miss out on the event of the summer!`,
               {/* Additional Information */}
               {(event.settings.accessibilityInfo || event.settings.specialInstructions || event.settings.ageRestriction || event.settings.dressCode) && (
                 <div className="pt-4 border-t border-[rgba(139,115,85,0.1)]">
-                  <h3 className="font-semibold text-[#2D2721] mb-4">Additional Information</h3>
+                  <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Additional Information', 'Lisainfo')}</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {event.settings.accessibilityInfo && (
                       <div className="flex items-start gap-3">
@@ -494,7 +497,7 @@ Don't miss out on the event of the summer!`,
                           <Accessibility className="h-5 w-5" />
                         </div>
                         <div>
-                          <div className="text-sm text-[#8B7355]">Accessibility</div>
+                          <div className="text-sm text-[#8B7355]">{tr('Accessibility', 'Ligipaasetavus')}</div>
                           <div className="text-sm text-[#2D2721]">{event.settings.accessibilityInfo}</div>
                         </div>
                       </div>
@@ -505,7 +508,7 @@ Don't miss out on the event of the summer!`,
                           <Info className="h-5 w-5" />
                         </div>
                         <div>
-                          <div className="text-sm text-[#8B7355]">Special Instructions</div>
+                          <div className="text-sm text-[#8B7355]">{tr('Special Instructions', 'Erijuhised')}</div>
                           <div className="text-sm text-[#2D2721]">{event.settings.specialInstructions}</div>
                         </div>
                       </div>
@@ -516,7 +519,7 @@ Don't miss out on the event of the summer!`,
                           <Users className="h-5 w-5" />
                         </div>
                         <div>
-                          <div className="text-sm text-[#8B7355]">Age Restriction</div>
+                          <div className="text-sm text-[#8B7355]">{tr('Age Restriction', 'Vanusepiirang')}</div>
                           <div className="font-medium text-[#2D2721]">{event.settings.ageRestriction}</div>
                         </div>
                       </div>
@@ -527,7 +530,7 @@ Don't miss out on the event of the summer!`,
                           <Info className="h-5 w-5" />
                         </div>
                         <div>
-                          <div className="text-sm text-[#8B7355]">Dress Code</div>
+                          <div className="text-sm text-[#8B7355]">{tr('Dress Code', 'Riietusstiil')}</div>
                           <div className="font-medium text-[#2D2721]">{event.settings.dressCode}</div>
                         </div>
                       </div>
@@ -540,8 +543,8 @@ Don't miss out on the event of the summer!`,
             {/* Ticket Types */}
             <WarmCard padding="lg">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-[#2D2721]">Ticket Types</h2>
-                <span className="text-sm text-[#8B7355]">{event.ticketTypes.length} types</span>
+                <h2 className="text-xl font-bold text-[#2D2721]">{tr('Ticket Types', 'Piletituubid')}</h2>
+                <span className="text-sm text-[#8B7355]">{event.ticketTypes.length} {tr('types', 'tuupi')}</span>
               </div>
               
               <div className="space-y-3">
@@ -552,14 +555,14 @@ Don't miss out on the event of the summer!`,
                       <div className="flex items-center justify-between mb-3">
                         <div>
                           <h3 className="font-semibold text-[#2D2721]">{ticket.name}</h3>
-                          <p className="text-sm text-[#8B7355]">{ticket.sold} / {ticket.total} sold ({Math.round(ticketSoldPercentage)}%)</p>
+                          <p className="text-sm text-[#8B7355]">{ticket.sold} / {ticket.total} {tr('sold', 'muudud')} ({Math.round(ticketSoldPercentage)}%)</p>
                         </div>
                         <div className="text-right">
                           <p className="text-lg font-bold text-[#2D2721]">
                             <CurrencyDisplay amount={ticket.price} currency={ticket.currency} />
                           </p>
                           <p className="text-xs text-[#8B7355]">
-                            <CurrencyDisplay amount={ticket.revenue} currency={ticket.currency} /> revenue
+                            <CurrencyDisplay amount={ticket.revenue} currency={ticket.currency} /> {tr('revenue', 'kaivet')}
                           </p>
                         </div>
                       </div>
@@ -579,44 +582,44 @@ Don't miss out on the event of the summer!`,
           {/* Sidebar */}
           <div className="space-y-6">
             <WarmCard padding="lg">
-              <h3 className="font-semibold text-[#2D2721] mb-4">Quick Actions</h3>
+              <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Quick Actions', 'Kiirtoimingud')}</h3>
               <div className="space-y-2">
                 <WarmButton fullWidth variant="outline" onClick={() => navigate(`/redeem?event=${event.id}`)}>
                   <QrCode className="h-4 w-4 mr-2" />
-                  Scan Tickets
+                  {tr('Scan Tickets', 'Skaneeri pileteid')}
                 </WarmButton>
                 <WarmButton fullWidth variant="outline" onClick={() => window.open(`/event/${event.id}`, '_blank')}>
                   <Share2 className="h-4 w-4 mr-2" />
-                  View Public Page
+                  {tr('View Public Page', 'Ava avalik leht')}
                 </WarmButton>
                 <WarmButton fullWidth variant="outline" onClick={handleExportAttendees}>
                   <Download className="h-4 w-4 mr-2" />
-                  Export Attendees
+                  {tr('Export Attendees', 'Ekspordi osalejad')}
                 </WarmButton>
               </div>
             </WarmCard>
 
             <WarmCard padding="lg">
-              <h3 className="font-semibold text-[#2D2721] mb-4">Settings</h3>
+              <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Settings', 'Seaded')}</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex items-center justify-between">
-                  <span className="text-[#8B7355]">Show Attendees Count</span>
-                  <span className="font-medium text-[#2D2721]">{event.settings.showAttendeesCount ? 'Yes' : 'No'}</span>
+                  <span className="text-[#8B7355]">{tr('Show Attendees Count', 'Nae osalejate arvu')}</span>
+                  <span className="font-medium text-[#2D2721]">{event.settings.showAttendeesCount ? tr('Yes', 'Jah') : tr('No', 'Ei')}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#8B7355]">Allow Waitlist</span>
-                  <span className="font-medium text-[#2D2721]">{event.settings.allowWaitlist ? 'Yes' : 'No'}</span>
+                  <span className="text-[#8B7355]">{tr('Allow Waitlist', 'Luba ootejarjekord')}</span>
+                  <span className="font-medium text-[#2D2721]">{event.settings.allowWaitlist ? tr('Yes', 'Jah') : tr('No', 'Ei')}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#8B7355]">Require Approval</span>
-                  <span className="font-medium text-[#2D2721]">{event.settings.requireApproval ? 'Yes' : 'No'}</span>
+                  <span className="text-[#8B7355]">{tr('Require Approval', 'Nua kinnitamist')}</span>
+                  <span className="font-medium text-[#2D2721]">{event.settings.requireApproval ? tr('Yes', 'Jah') : tr('No', 'Ei')}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#8B7355]">Max Tickets/Order</span>
+                  <span className="text-[#8B7355]">{tr('Max Tickets/Order', 'Maks pileteid tellimusel')}</span>
                   <span className="font-medium text-[#2D2721]">{event.settings.maxTicketsPerOrder}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#8B7355]">Refund Policy</span>
+                  <span className="text-[#8B7355]">{tr('Refund Policy', 'Tagastuspoliitika')}</span>
                   <span className="font-medium text-[#2D2721]">{event.settings.refundPolicy}</span>
                 </div>
               </div>
@@ -629,12 +632,12 @@ Don't miss out on the event of the summer!`,
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-[#2D2721]">Attendees</h2>
-              <p className="text-sm text-[#8B7355] mt-1">{mockAttendees.length} attendees</p>
+              <h2 className="text-2xl font-bold text-[#2D2721]">{tr('Attendees', 'Osalejad')}</h2>
+              <p className="text-sm text-[#8B7355] mt-1">{mockAttendees.length} {tr('attendees', 'osalejat')}</p>
             </div>
             <WarmButton onClick={handleExportAttendees}>
               <Download className="h-4 w-4 mr-2" />
-              Export List
+              {tr('Export List', 'Ekspordi nimekiri')}
             </WarmButton>
           </div>
 
@@ -643,11 +646,11 @@ Don't miss out on the event of the summer!`,
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-[rgba(139,115,85,0.1)]">
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">Name</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">Email</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">Ticket Type</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">Purchase Date</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">Status</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">{tr('Name', 'Nimi')}</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">{tr('Email', 'E-post')}</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">{tr('Ticket Type', 'Piletituup')}</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">{tr('Purchase Date', 'Ostukuupaev')}</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-[#2D2721]">{tr('Status', 'Staatus')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -666,7 +669,11 @@ Don't miss out on the event of the summer!`,
                           {attendee.status === 'confirmed' && <CheckCircle2 className="h-3 w-3" />}
                           {attendee.status === 'pending' && <AlertCircle className="h-3 w-3" />}
                           {attendee.status === 'cancelled' && <XCircle className="h-3 w-3" />}
-                          {attendee.status.charAt(0).toUpperCase() + attendee.status.slice(1)}
+                          {attendee.status === 'confirmed'
+                            ? tr('Confirmed', 'Kinnitatud')
+                            : attendee.status === 'pending'
+                            ? tr('Pending', 'Ootel')
+                            : tr('Cancelled', 'Tuhistatud')}
                         </span>
                       </td>
                     </tr>
@@ -681,19 +688,19 @@ Don't miss out on the event of the summer!`,
       {activeTab === 'analytics' && (
         <div className="space-y-6">
           <WarmCard padding="lg">
-            <h2 className="text-2xl font-bold text-[#2D2721] mb-6">Event Analytics</h2>
+            <h2 className="text-2xl font-bold text-[#2D2721] mb-6">{tr('Event Analytics', 'Urituse analyytika')}</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-6 bg-[#FFF9ED] rounded-xl">
-                <h3 className="font-semibold text-[#2D2721] mb-4">Sales Progress</h3>
+                <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Sales Progress', 'Muugiedu')}</h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#8B7355]">Target</span>
-                    <span className="font-semibold text-[#2D2721]">{event.stats.totalTickets} tickets</span>
+                    <span className="text-[#8B7355]">{tr('Target', 'Eesmark')}</span>
+                    <span className="font-semibold text-[#2D2721]">{event.stats.totalTickets} {tr('tickets', 'piletit')}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#8B7355]">Sold</span>
-                    <span className="font-semibold text-[#2D2721]">{event.stats.soldTickets} tickets</span>
+                    <span className="text-[#8B7355]">{tr('Sold', 'Muudud')}</span>
+                    <span className="font-semibold text-[#2D2721]">{event.stats.soldTickets} {tr('tickets', 'piletit')}</span>
                   </div>
                   <div className="h-4 bg-[#F2EDE3] rounded-full overflow-hidden">
                     <div
@@ -701,28 +708,28 @@ Don't miss out on the event of the summer!`,
                       style={{ width: `${soldPercentage}%` }}
                     />
                   </div>
-                  <p className="text-xs text-[#8B7355]">{Math.round(soldPercentage)}% of target reached</p>
+                  <p className="text-xs text-[#8B7355]">{Math.round(soldPercentage)}% {tr('of target reached', 'eesmargist saavutatud')}</p>
                 </div>
               </div>
 
               <div className="p-6 bg-[#E8F5E9] rounded-xl">
-                <h3 className="font-semibold text-[#2D2721] mb-4">Revenue Breakdown</h3>
+                <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Revenue Breakdown', 'Kaibe jaotus')}</h3>
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#6B5744]">Gross Revenue</span>
+                    <span className="text-[#6B5744]">{tr('Gross Revenue', 'Brutokaive')}</span>
                     <span className="font-semibold text-[#2D2721]">
                       <CurrencyDisplay amount={event.stats.revenue} currency="EUR" />
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#6B5744]">Platform Fee (6%)</span>
+                    <span className="text-[#6B5744]">{tr('Platform Fee (6%)', 'Platvormi tasu (6%)')}</span>
                     <span className="font-semibold text-[#E17B5C]">
                       -<CurrencyDisplay amount={event.stats.revenue * 0.06} currency="EUR" />
                     </span>
                   </div>
                   <div className="pt-2 border-t border-[rgba(139,115,85,0.1)]">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-[#2D2721]">Net Revenue</span>
+                      <span className="text-sm font-semibold text-[#2D2721]">{tr('Net Revenue', 'Netokaive')}</span>
                       <span className="text-lg font-bold text-[#9DB5A5]">
                         <CurrencyDisplay amount={event.stats.revenue * 0.94} currency="EUR" />
                       </span>
@@ -733,24 +740,24 @@ Don't miss out on the event of the summer!`,
             </div>
 
             <div className="mt-6 p-6 bg-gradient-to-br from-[#FFF9ED] to-[#FFFBF5] rounded-xl">
-              <h3 className="font-semibold text-[#2D2721] mb-4">Engagement Metrics</h3>
+              <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Engagement Metrics', 'Kaasatuse mootdikud')}</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <p className="text-sm text-[#8B7355] mb-1">Page Views</p>
+                  <p className="text-sm text-[#8B7355] mb-1">{tr('Page Views', 'Lehevaatamised')}</p>
                   <p className="text-2xl font-bold text-[#2D2721]">{event.stats.viewCount.toLocaleString()}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-[#8B7355] mb-1">Shares</p>
+                  <p className="text-sm text-[#8B7355] mb-1">{tr('Shares', 'Jagamised')}</p>
                   <p className="text-2xl font-bold text-[#2D2721]">{event.stats.shareCount}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-[#8B7355] mb-1">Conversion Rate</p>
+                  <p className="text-sm text-[#8B7355] mb-1">{tr('Conversion Rate', 'Konversioon')}</p>
                   <p className="text-2xl font-bold text-[#2D2721]">
                     {((event.stats.soldTickets / event.stats.viewCount) * 100).toFixed(1)}%
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm text-[#8B7355] mb-1">Avg. Ticket Value</p>
+                  <p className="text-sm text-[#8B7355] mb-1">{tr('Avg. Ticket Value', 'Keskmine piletivaartus')}</p>
                   <p className="text-2xl font-bold text-[#2D2721]">
                     <CurrencyDisplay amount={event.stats.revenue / event.stats.soldTickets} currency="EUR" />
                   </p>
@@ -763,3 +770,5 @@ Don't miss out on the event of the summer!`,
     </div>
   );
 }
+
+

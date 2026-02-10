@@ -52,16 +52,16 @@ export function ConfirmationDialog({
   }
 
   const icons = {
-    default: <Info className="h-6 w-6 text-[#FFC857]" />,
-    destructive: <AlertTriangle className="h-6 w-6 text-[#E17B5C]" />,
-    warning: <AlertTriangle className="h-6 w-6 text-[#FFC857]" />,
+    default: <Info className="h-6 w-6 text-[var(--primary)]" />,
+    destructive: <AlertTriangle className="h-6 w-6 text-[var(--danger)]" />,
+    warning: <AlertTriangle className="h-6 w-6 text-[var(--primary)]" />,
   }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#FAF7F2]">
+          <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--surface-muted)]">
             {icons[variant]}
           </div>
           <DialogTitle>{title}</DialogTitle>

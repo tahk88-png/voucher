@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { ShareModal } from '@app/components/ShareModal';
 import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from '@/lib/router-shim';
 import { 
   ChevronRight,
   Share2,
@@ -15,7 +15,8 @@ import {
   MapPin,
   Loader2,
   ArrowLeft,
-  ShoppingBag
+  ShoppingBag,
+  Store
 } from 'lucide-react';
 import QRCode from 'react-qr-code';
 import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
@@ -71,17 +72,17 @@ export function CampaignDetail() {
             ...found,
             merchantDetails: {
                 name: found.merchant || 'Partner',
-                logo: '🏢',
+                logo: 'Store',
                 address: 'Tallinn, Eesti',
                 mapImage: 'https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?ixlib=rb-4.1.0&auto=format&fit=crop&w=800&q=80',
-                description: 'Oleme usaldusväärne partner aastast 2010.',
+                description: 'Oleme usaldusvÃ¤Ã¤rne partner aastast 2010.',
                 openingHours: [
                     { day: 'E-R', hours: '10:00 - 19:00' },
                     { day: 'L-P', hours: '11:00 - 17:00' }
                 ],
                 images: DEFAULT_IMAGES.merchant
             },
-            longDescription: 'See on suurepärane võimalus nautida kvaliteetset teenust. Pakkumine kehtib piiratud aja jooksul.'
+            longDescription: 'See on suurepÃ¤rane vÃµimalus nautida kvaliteetset teenust. Pakkumine kehtib piiratud aja jooksul.'
          });
        }
        setLoading(false);
@@ -161,7 +162,7 @@ export function CampaignDetail() {
     <div className="min-h-screen bg-[#FAF7F2]">
       <SEOHead 
         title={`${campaign.title} -${discount}% | ${campaign.merchantDetails.name}`}
-        description={`${campaign.title}. Vaata pakkumist partnerilt ${campaign.merchantDetails.name}. Hind: ${campaign.price}€ (Tavahind: ${campaign.original_price}€).`}
+        description={`${campaign.title}. Vaata pakkumist partnerilt ${campaign.merchantDetails.name}. Hind: ${campaign.price}â‚¬ (Tavahind: ${campaign.original_price}â‚¬).`}
         image={heroImage}
         type="product"
         jsonLd={jsonLd}
@@ -217,7 +218,7 @@ export function CampaignDetail() {
                   className={`flex items-center gap-4 mb-6 pb-6 border-b border-[#E7DCC7]/50 ${campaign.merchantId ? 'cursor-pointer group' : ''}`}
                 >
                     <div className="w-14 h-14 rounded-full bg-[#FAF7F2] flex items-center justify-center text-2xl border border-[#E7DCC7] group-hover:border-[#E17B5C] transition-colors">
-                        {campaign.merchantDetails.logo}
+                        <Store className="w-7 h-7 text-[#8B7355]" />
                     </div>
                     <div>
                         <h3 className="font-bold text-[#2D2721] group-hover:text-[#E17B5C] transition-colors">{campaign.merchantDetails.name}</h3>
@@ -240,7 +241,7 @@ export function CampaignDetail() {
                     </div>
                     {campaign.original_price && (
                         <span className="text-sm font-bold text-[#E17B5C] bg-[#FFF9ED] px-2 py-1 rounded-md">
-                            Säästad {Math.round((1 - campaign.price / campaign.original_price) * 100)}%
+                            SÃ¤Ã¤stad {Math.round((1 - campaign.price / campaign.original_price) * 100)}%
                         </span>
                     )}
                 </div>
@@ -252,7 +253,7 @@ export function CampaignDetail() {
                 
                 <WarmButton fullWidth variant="outline" onClick={handleShare}>
                     <Share2 className="w-4 h-4 mr-2" />
-                    Jaga sõbraga
+                    Jaga sÃµbraga
                 </WarmButton>
 
                 <div className="mt-6 pt-6 border-t border-[#E7DCC7]/50 space-y-3 text-sm text-[#6B5744]">
@@ -294,8 +295,8 @@ export function CampaignDetail() {
                      <WarmCard padding="lg" hover className="bg-white border-l-4 border-l-[#E17B5C]">
                         <div className="flex flex-col sm:flex-row justify-between gap-6">
                             <div>
-                                <h3 className="text-lg font-bold text-[#2D2721] mb-2">Täispakett</h3>
-                                <p className="text-[#6B5744] mb-4">Sisaldab kõiki teenuseid ja on parim valik.</p>
+                                <h3 className="text-lg font-bold text-[#2D2721] mb-2">TÃ¤ispakett</h3>
+                                <p className="text-[#6B5744] mb-4">Sisaldab kÃµiki teenuseid ja on parim valik.</p>
                                 <div className="font-bold text-[#2D2721] text-xl">
                                     <CurrencyDisplay amount={campaign.price} />
                                 </div>
@@ -314,7 +315,7 @@ export function CampaignDetail() {
                                     <h3 className="text-lg font-bold text-[#2D2721] mb-2">Sooduskood -{discount}%</h3>
                                     <span className="bg-[#9DB5A5] text-white text-xs font-bold px-2 py-1 rounded h-fit">TASUTA</span>
                                 </div>
-                                <p className="text-[#6B5744] mb-4">Kasuta seda koodi broneerimisel või kohapeal.</p>
+                                <p className="text-[#6B5744] mb-4">Kasuta seda koodi broneerimisel vÃµi kohapeal.</p>
                                 
                                 <div className="bg-[#FAF7F2] p-3 rounded-lg border border-dashed border-[#8B7355]/30 flex items-center justify-between">
                                     <span className="font-mono font-bold text-[#2D2721] tracking-widest">{freeCode}</span>
@@ -338,3 +339,5 @@ export function CampaignDetail() {
     </div>
   );
 }
+
+

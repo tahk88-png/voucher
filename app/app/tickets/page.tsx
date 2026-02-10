@@ -67,7 +67,7 @@ export default async function MyTicketsPage() {
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {ticketPurchases.map((purchase) => (
-              <WarmCard key={purchase.id} padding="lg" className="bg-white border border-[#E7DCC7]">
+              <WarmCard key={purchase.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                 <div className="space-y-4">
                   <div>
                     <h2 className="text-lg font-semibold text-[#2D2721]">

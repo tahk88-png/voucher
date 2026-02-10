@@ -62,7 +62,7 @@ export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] 
   };
 
   return (
-    <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+    <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
       <div>
         <h2 className="text-base font-semibold text-[#2D2721]">Audit log</h2>
         <p className="text-sm text-[#6B5744]">Recent platform actions.</p>
@@ -74,7 +74,7 @@ export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] 
           <p className="text-[#6B5744] text-center py-4">No audit logs found.</p>
         ) : (
           logs.map((log) => (
-            <div key={log.id} className="border border-[#E7DCC7] rounded-lg p-3 text-sm">
+            <div key={log.id} className="border border-[rgba(139,115,85,0.15)] rounded-lg p-3 text-sm">
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <p className="font-medium text-[#2D2721]">{formatAction(log.action)}</p>

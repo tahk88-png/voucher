@@ -51,7 +51,7 @@ export default async function AppLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <div className="min-h-screen flex flex-col">
-        <header className="sticky top-0 z-10 border-b border-[#E7DCC7] bg-[#FFFBF5]/90 backdrop-blur">
+        <header className="sticky top-0 z-10 border-b border-[rgba(139,115,85,0.15)] bg-[#FFFBF5]/90 backdrop-blur">
           <div className="container mx-auto flex h-14 items-center justify-between px-4">
             <div className="flex items-center gap-4">
               <Link

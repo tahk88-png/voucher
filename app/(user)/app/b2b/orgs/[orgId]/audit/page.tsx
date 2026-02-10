@@ -65,7 +65,7 @@ export default function B2BAuditPage() {
         </WarmButton>
       </div>
 
-      <WarmCard padding="lg" className="border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
         <div className="grid gap-3 md:grid-cols-3">
           <div className="space-y-1.5">
             <label htmlFor="audit-entity-type" className="text-sm font-medium text-[#2D2721]">
@@ -95,7 +95,7 @@ export default function B2BAuditPage() {
       {loading && <div className="text-sm text-[#8B7355]">Loading audit...</div>}
       {error && <div className="text-sm text-red-600">{error}</div>}
 
-      <WarmCard padding="lg" className="border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
         <div className="space-y-3">
           {events.length === 0 && !loading && <div className="text-sm text-[#8B7355]">No events.</div>}
           {events.map((event) => (

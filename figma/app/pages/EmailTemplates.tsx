@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import { useState } from 'react';
+import { useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Input } from '@app/components/ui/input';
@@ -30,18 +30,18 @@ export function EmailTemplates() {
   const [welcomeData, setWelcomeData] = useState({
     subject: 'Tere tulemast meie platvormile!',
     title: 'Tere tulemast pardale, {name}!',
-    body: 'Meil on väga hea meel, et liitusid meie kogukonnaga. Siit leiad parimad pakkumised ja eksklusiivsed võimalused.',
+    body: 'Meil on vÃ¤ga hea meel, et liitusid meie kogukonnaga. Siit leiad parimad pakkumised ja eksklusiivsed vÃµimalused.',
     buttonText: 'Alusta siit',
-    footerText: '© 2024 Sinu Platvorm. Kõik õigused kaitstud.'
+    footerText: 'Â© 2024 Sinu Platvorm. KÃµik Ãµigused kaitstud.'
   });
 
   // Newsletter State
   const [newsletterData, setNewsletterData] = useState({
-    subject: 'Selle nädala parimad pakkumised',
+    subject: 'Selle nÃ¤dala parimad pakkumised',
     title: 'Kuu uudised ja pakkumised',
-    intro: 'Siin on kokkuvõte selle kuu kõige põnevamatest sündmustest ja pakkumistest.',
+    intro: 'Siin on kokkuvÃµte selle kuu kÃµige pÃµnevamatest sÃ¼ndmustest ja pakkumistest.',
     highlightTitle: 'Suvine allahindlus',
-    highlightText: 'Kõik suvetooted on nüüd kuni 50% soodsamad. Vaata lähemalt ja leia endale midagi ilusat.',
+    highlightText: 'KÃµik suvetooted on nÃ¼Ã¼d kuni 50% soodsamad. Vaata lÃ¤hemalt ja leia endale midagi ilusat.',
     buttonText: 'Vaata pakkumisi',
     footerText: 'Soovid uudiskirjast loobuda? Kliki siia.'
   });
@@ -69,7 +69,7 @@ export function EmailTemplates() {
             </button>
             <div>
               <h1 className="text-3xl font-bold text-[#2D2721]">E-posti mallid</h1>
-              <p className="text-[#6B5744]">Halda liitumiskirju ja uudiskirja põhjasid</p>
+              <p className="text-[#6B5744]">Halda liitumiskirju ja uudiskirja pÃµhjasid</p>
             </div>
           </div>
           <div className="flex gap-2">
@@ -189,7 +189,7 @@ export function EmailTemplates() {
                     />
                   </div>
                   <div className="p-4 bg-[#F8F6F1] rounded-xl border border-[#E7DCC7] space-y-4">
-                    <h4 className="font-semibold text-[#2D2721] text-sm">Esiletõstetud plokk</h4>
+                    <h4 className="font-semibold text-[#2D2721] text-sm">EsiletÃµstetud plokk</h4>
                     <div className="space-y-2">
                       <Label>Ploki pealkiri</Label>
                       <Input 
@@ -233,12 +233,12 @@ export function EmailTemplates() {
                     Stiili juhised
                 </h3>
                 <p className="text-sm text-[#6B5744] mb-4">
-                    Meie kirjad kasutavad automaatselt platvormi brändingut:
+                    Meie kirjad kasutavad automaatselt platvormi brÃ¤ndingut:
                 </p>
                 <div className="grid grid-cols-2 gap-4 text-xs">
                     <div className="flex items-center gap-2">
                         <div className="w-6 h-6 bg-[#FAF7F2] border border-[#E7DCC7] rounded"></div>
-                        <span>Taust: Soe Beež</span>
+                        <span>Taust: Soe BeeÅ¾</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-6 h-6 bg-[#2D2721] rounded"></div>
@@ -286,7 +286,7 @@ export function EmailTemplates() {
                             </div>
                             <div className="border-t border-[#FAF7F2] pt-6 mt-6">
                                 <p className="text-sm text-[#8B7355] italic">
-                                    "Meie eesmärk on pakkuda parimat kogemust."
+                                    "Meie eesmÃ¤rk on pakkuda parimat kogemust."
                                 </p>
                             </div>
                         </div>
@@ -295,7 +295,7 @@ export function EmailTemplates() {
                             {/* Hero Section */}
                             <div className="w-full h-48 bg-[#9DB5A5]/20 rounded-lg flex items-center justify-center text-[#9DB5A5]">
                                 <ImageIcon className="w-12 h-12 opacity-50" />
-                                <span className="ml-2">Päisepilt</span>
+                                <span className="ml-2">PÃ¤isepilt</span>
                             </div>
 
                             <div className="text-center space-y-4">
@@ -345,7 +345,7 @@ export function EmailTemplates() {
                         {activeTemplate === 'welcome' ? welcomeData.footerText : newsletterData.footerText}
                     </p>
                     <p className="opacity-50">
-                        Tallinn, Estonia • info@platform.com
+                        Tallinn, Estonia â€¢ info@platform.com
                     </p>
                 </div>
 

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import { useState } from 'react';
+import { useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { 
@@ -70,7 +70,7 @@ export function ScannerLogin() {
           <div>
             <h1 className="text-3xl font-bold text-[#2D2721]">Scanner Login</h1>
             <p className="text-[#6B5744] mt-2">
-              Event Staff • QR Validation System
+              Event Staff â€¢ QR Validation System
             </p>
           </div>
         </div>
@@ -118,7 +118,7 @@ export function ScannerLogin() {
                 type="password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                placeholder="••••••••"
+                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                 required
                 className="w-full px-4 py-3 rounded-[12px] border border-[rgba(139,115,85,0.2)] focus:border-[#FFC857] focus:ring-2 focus:ring-[#FFC857]/20 transition-all bg-white text-[#2D2721]"
               />
@@ -241,10 +241,11 @@ export function ScannerLogin() {
             onClick={() => navigate('/')}
             className="text-sm text-[#8B7355] hover:text-[#6B5744] transition-colors"
           >
-            ← Back to Home
+            â† Back to Home
           </button>
         </div>
       </div>
     </div>
   );
 }
+

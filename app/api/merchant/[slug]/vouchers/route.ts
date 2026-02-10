@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Prisma } from '@prisma/client';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
 import { requireActiveMerchant } from '@/lib/merchant-status';
 import { captureException } from '@/lib/error-tracking';
 import { z } from 'zod';
+import { AccessControlError, accessErrorResponse, requireMerchantCapability, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 
 const createVoucherSchema = z.object({
   type: z.enum(['percentage', 'fixed_amount', 'credit_amount']),
@@ -27,21 +26,9 @@ export async function POST(
   { params }: { params: { slug: string } }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
-    });
-
-    if (!merchant) {
-      return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });
-    }
-
+    const { merchant } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
     await requireActiveMerchant(merchant.id);
-    await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
+    await requireMerchantCapability(merchant.id, merchant.slug, 'voucher.create');
 
     const body = await req.json();
     const data = createVoucherSchema.parse(body);
@@ -64,6 +51,9 @@ export async function POST(
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
+    if (error instanceof AccessControlError) {
+      return accessErrorResponse(error);
+    }
     if (error instanceof Error) {
       captureException(error, { 
         context: 'voucher_creation',
@@ -79,7 +69,6 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   try {
-    const session = await auth();
     const merchant = await prisma.merchant.findUnique({
       where: { slug: params.slug },
     });
@@ -94,14 +83,10 @@ export async function GET(
       merchantId: string;
       status?: string;
     } = { merchantId: merchant.id };
-    if (!session?.user?.id) {
+    try {
+      await requireMerchantProfileAccessBySlug(params.slug, 'merchant_staff');
+    } catch {
       where.status = 'published';
-    } else {
-      try {
-        await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
-      } catch {
-        where.status = 'published';
-      }
     }
 
     const vouchers = await prisma.voucher.findMany({

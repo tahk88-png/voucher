@@ -104,7 +104,7 @@ export default function MerchantsTable() {
 
   if (isLoading) {
     return (
-      <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
         <h2 className="text-base font-semibold text-[#2D2721]">Merchants</h2>
         <p className="text-sm text-[#6B5744] mt-2">Loading...</p>
       </WarmCard>
@@ -112,7 +112,7 @@ export default function MerchantsTable() {
   }
 
   return (
-    <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+    <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
       <div>
         <h2 className="text-base font-semibold text-[#2D2721]">Merchants</h2>
         <p className="text-sm text-[#6B5744]">Manage merchants and feature flags.</p>
@@ -122,7 +122,7 @@ export default function MerchantsTable() {
           <p className="text-[#6B5744] text-center py-4">No merchants found.</p>
         ) : (
           merchants.map((merchant) => (
-            <div key={merchant.id} className="border border-[#E7DCC7] rounded-lg p-4 space-y-3">
+            <div key={merchant.id} className="border border-[rgba(139,115,85,0.15)] rounded-lg p-4 space-y-3">
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-semibold text-[#2D2721]">{merchant.name}</h3>
@@ -140,7 +140,7 @@ export default function MerchantsTable() {
                   {merchant.isActive ? 'Deactivate' : 'Activate'}
                 </WarmButton>
               </div>
-              <div className="border-t border-[#E7DCC7] pt-3">
+              <div className="border-t border-[rgba(139,115,85,0.15)] pt-3">
                 <p className="text-sm font-medium text-[#2D2721] mb-2">Feature flags</p>
                 <div className="space-y-2">
                   <label className="flex items-center gap-2 text-sm text-[#6B5744]">

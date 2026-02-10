@@ -106,8 +106,8 @@ export function FileUpload({
         onDragOver={handleDrag}
         onDrop={handleDrop}
         className={cn(
-          "relative rounded-xl border-2 border-dashed border-[#E7DCC7] bg-[#FAF7F2]/50 p-8 text-center transition-colors",
-          dragActive && "border-[#FFC857] bg-[#FFF9ED]",
+          "relative rounded-xl border-2 border-dashed border-[var(--border)] bg-[var(--surface-muted)]/50 p-8 text-center transition-colors",
+          dragActive && "border-[var(--primary)] bg-[var(--bg-2)]",
           disabled && "opacity-50 cursor-not-allowed"
         )}
       >
@@ -120,13 +120,13 @@ export function FileUpload({
           disabled={disabled}
           className="sr-only"
         />
-        <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#FFF9ED]">
-          <Upload className="h-6 w-6 text-[#8B7355]" />
+        <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--bg-2)]">
+          <Upload className="h-6 w-6 text-[var(--text-faint)]" />
         </div>
-        <div className="mb-2 text-sm font-medium text-[#2D2721]">
+        <div className="mb-2 text-sm font-medium text-[var(--text)]">
           {dragActive ? "Drop files here" : "Drag & drop files here"}
         </div>
-        <div className="mb-4 text-xs text-[#6B5744]">
+        <div className="mb-4 text-xs text-[var(--text-muted)]">
           or click to browse (max {maxSize}MB per file)
         </div>
         <WarmButton
@@ -140,7 +140,7 @@ export function FileUpload({
       </div>
 
       {error && (
-        <div className="rounded-[12px] border-2 border-[#E17B5C] bg-[#E17B5C]/10 p-3 text-sm text-[#E17B5C]">
+        <div className="rounded-[12px] border-2 border-[var(--danger)] bg-[var(--danger)]/10 p-3 text-sm text-[var(--danger)]">
           {error}
         </div>
       )}
@@ -150,14 +150,14 @@ export function FileUpload({
           {files.map((file, index) => (
             <div
               key={index}
-              className="flex items-center gap-3 rounded-xl border-2 border-[#E7DCC7] bg-white p-3"
+              className="flex items-center gap-3 rounded-xl border-2 border-[var(--border)] bg-[var(--surface)] p-3"
             >
-              <div className="text-[#8B7355]">{getFileIcon(file)}</div>
+              <div className="text-[var(--text-faint)]">{getFileIcon(file)}</div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-[#2D2721] truncate">
+                <div className="text-sm font-medium text-[var(--text)] truncate">
                   {file.name}
                 </div>
-                <div className="text-xs text-[#6B5744]">
+                <div className="text-xs text-[var(--text-muted)]">
                   {(file.size / 1024 / 1024).toFixed(2)} MB
                 </div>
               </div>
@@ -165,7 +165,7 @@ export function FileUpload({
                 type="button"
                 onClick={() => removeFile(index)}
                 disabled={disabled}
-                className="text-[#8B7355] hover:text-[#E17B5C] transition-colors disabled:opacity-50"
+                className="text-[var(--text-faint)] hover:text-[var(--danger)] transition-colors disabled:opacity-50"
               >
                 <X className="h-4 w-4" />
               </button>

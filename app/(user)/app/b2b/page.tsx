@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
@@ -51,19 +51,19 @@ export default function B2BOrgsPage() {
       {error && <div className="text-sm text-red-600">{error}</div>}
 
       {!loading && !error && orgs.length === 0 && (
-        <WarmCard padding="lg" className="border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
           <div className="text-[#6B5744]">No organizations found. Ask an admin to invite you.</div>
         </WarmCard>
       )}
 
       <div className="grid gap-4 md:grid-cols-2">
         {orgs.map((org) => (
-          <WarmCard key={org.id} padding="lg" className="border border-[#E7DCC7]">
+          <WarmCard key={org.id} padding="lg" className="border border-[rgba(139,115,85,0.15)]">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h2 className="text-xl font-semibold text-[#2D2721]">{org.name}</h2>
                 <div className="text-xs text-[#8B7355] uppercase tracking-wide mt-1">
-                  {org.type} • {org.status} • {org.role}
+                  {org.type} · {org.status} · {org.role}
                 </div>
               </div>
               <WarmButton asChild size="sm">

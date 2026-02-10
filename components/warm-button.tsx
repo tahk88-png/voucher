@@ -5,8 +5,8 @@ import { Slot } from "@radix-ui/react-slot"
 import { Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-type WarmButtonVariant = "primary" | "secondary" | "outline" | "ghost"
-type WarmButtonSize = "sm" | "md" | "lg"
+type WarmButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "default"
+type WarmButtonSize = "sm" | "md" | "lg" | "icon"
 
 interface WarmButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: WarmButtonVariant
@@ -32,21 +32,26 @@ export const WarmButton = React.forwardRef<HTMLButtonElement, WarmButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "inline-flex items-center justify-center font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]/40 focus-visible:ring-offset-2"
+      "inline-flex items-center justify-center font-semibold tracking-[0.01em] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2"
 
     const variants: Record<WarmButtonVariant, string> = {
       primary:
-        "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] hover:shadow-warm-lg hover:scale-[1.02] active:scale-[0.98]",
+        "gradient-brand text-[var(--primary-foreground)] border border-[var(--primary)] hover:shadow-lg hover:scale-[1.015] active:scale-[0.99]",
+      default:
+        "gradient-brand text-[var(--primary-foreground)] border border-[var(--primary)] hover:shadow-lg hover:scale-[1.015] active:scale-[0.99]",
       secondary:
-        "bg-white text-[#2D2721] border-2 border-[rgba(139,115,85,0.15)] hover:border-[rgba(139,115,85,0.3)] hover:shadow-warm",
-      outline: "bg-transparent text-[#2D2721] border-2 border-[#FFC857] hover:bg-[#FFF9ED]",
-      ghost: "bg-transparent text-[#6B5744] hover:bg-[#F8F6F1]",
+        "bg-[var(--surface)] text-[var(--text)] border-2 border-[var(--border)] hover:border-[var(--border-strong)] hover:shadow-md",
+      outline:
+        "bg-[var(--surface)] text-[var(--text)] border-2 border-[var(--primary)] hover:bg-[var(--accent)]",
+      ghost:
+        "bg-transparent text-[var(--text-muted)] shadow-none hover:bg-[var(--surface-dim)]",
     }
 
     const sizes: Record<WarmButtonSize, string> = {
-      sm: "px-4 py-2 text-sm rounded-[12px]",
-      md: "px-6 py-3 text-base rounded-[16px]",
-      lg: "px-8 py-4 text-lg rounded-[20px]",
+      sm: "px-4 py-2 text-sm rounded-[var(--r-sm)]",
+      md: "px-6 py-3 text-base rounded-[var(--r-md)]",
+      lg: "px-8 py-3.5 text-lg rounded-[var(--r-lg)]",
+      icon: "h-10 w-10 rounded-[var(--r-sm)] p-0",
     }
 
     const shouldSlot =

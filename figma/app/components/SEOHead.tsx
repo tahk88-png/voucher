@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router';
+﻿import { useEffect } from 'react';
+import { useLocation } from '@/lib/router-shim';
 
 export interface SEOProps {
   title?: string;
@@ -16,12 +16,12 @@ export interface SEOProps {
 }
 
 const DEFAULT_SEO: SEOProps = {
-  title: 'GiftHub - Euroopa SaaS Vautšeri ja Soovituste Platvorm',
-  description: 'Jaga, teeni ja lunasta kinkekaarte, vautšereid ja kampaaniaid üle Euroopa. Platvorm kaupmeestele ja kasutajatele.',
+  title: 'GiftHub - Euroopa SaaS vautserite ja soovituste platvorm',
+  description: 'Jaga, teeni ja lunasta kinkekaarte, vautsereid ja kampaaniaid ule Euroopa. Platvorm kaupmeestele ja kasutajatele.',
   image: 'https://gifthub.eu/og-image.png',
   type: 'website',
   keywords: [
-    'vautšerid',
+    'vautserid',
     'kinkekaardid',
     'kampaaniad',
     'soovitused',
@@ -32,10 +32,7 @@ const DEFAULT_SEO: SEOProps = {
     'vouchers',
     'gift cards',
     'campaigns',
-    'referrals',
-    'ваучеры',
-    'подарочные карты',
-    'кампании'
+    'referrals'
   ]
 };
 
@@ -190,3 +187,4 @@ export function SEOHead(props: SEOProps) {
 
   return null;
 }
+

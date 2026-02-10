@@ -100,45 +100,7 @@ const nextConfig = {
     return config;
   },
   async rewrites() {
-    return {
-      beforeFiles: [
-        // Locale-prefixed routes -> Figma UI
-        {
-          source: '/:locale(en|et|es|fr|de|fi|sv|no|da|lv|lt|pl|uk|it|ru)',
-          destination: '/figma/home',
-        },
-        {
-          source: '/:locale(en|et|es|fr|de|fi|sv|no|da|lv|lt|pl|uk|it|ru)/:path*',
-          destination: '/figma/:path*',
-        },
-        // Merchant tenant routes -> Figma dashboard UI
-        { source: '/merchant/:slug', destination: '/figma/dashboard' },
-        { source: '/merchant/:slug/dashboard', destination: '/figma/dashboard' },
-        { source: '/merchant/:slug/campaigns', destination: '/figma/campaigns-list' },
-        { source: '/merchant/:slug/campaigns/new', destination: '/figma/campaigns/create' },
-        { source: '/merchant/:slug/campaigns/:id', destination: '/figma/campaigns/:id/admin' },
-        { source: '/merchant/:slug/vouchers', destination: '/figma/vouchers' },
-        { source: '/merchant/:slug/vouchers/new', destination: '/figma/vouchers/create' },
-        { source: '/merchant/:slug/events', destination: '/figma/events' },
-        { source: '/merchant/:slug/events/new', destination: '/figma/events/create' },
-        { source: '/merchant/:slug/events/:id', destination: '/figma/events/:id' },
-        { source: '/merchant/:slug/gift-cards', destination: '/figma/gift-cards' },
-        { source: '/merchant/:slug/gift-cards/new', destination: '/figma/gift-cards/create' },
-        { source: '/merchant/:slug/referrals', destination: '/figma/referrals' },
-        { source: '/merchant/:slug/redemptions', destination: '/figma/redeem' },
-        // User app routes -> Figma UI
-        { source: '/app/:path*', destination: '/figma/:path*' },
-        // Admin routes -> Figma UI
-        { source: '/admin/:path*', destination: '/figma/admin-dashboard' },
-        // Root -> Figma landing
-        { source: '/', destination: '/figma/home' },
-        // Catch-all (exclude API, Next internals, figma, and static files)
-        {
-          source: '/:path((?!api|_next|figma|favicon\\.ico|robots\\.txt|sitemap\\.xml|manifest\\.json|.*\\..*).*)',
-          destination: '/figma/:path',
-        },
-      ],
-    };
+    return [];
   },
   async headers() {
     return [

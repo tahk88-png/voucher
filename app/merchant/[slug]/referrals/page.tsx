@@ -150,7 +150,7 @@ export default async function ReferralsPage({ params }: { params: { slug: string
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-base font-semibold text-[#2D2721]">Status breakdown</h2>
@@ -180,7 +180,7 @@ export default async function ReferralsPage({ params }: { params: { slug: string
             )}
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white border border-[#E7DCC7] lg:col-span-2">
+          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)] lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-base font-semibold text-[#2D2721]">Top referrers</h2>
@@ -212,7 +212,7 @@ export default async function ReferralsPage({ params }: { params: { slug: string
           </WarmCard>
         </div>
 
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-base font-semibold text-[#2D2721]">Recent referrals</h2>

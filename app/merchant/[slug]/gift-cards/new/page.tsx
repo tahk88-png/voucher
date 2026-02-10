@@ -49,7 +49,7 @@ function GiftCardPreview({ form }: { form: FormData }) {
   const amountStr = formatCurrency(amountNum * 100, form.currency);
   const headline = form.headline || 'Gift card';
   return (
-    <div className="rounded-2xl border border-[#E7DCC7] shadow-lg overflow-hidden bg-[var(--bg)]">
+    <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] shadow-lg overflow-hidden bg-[var(--bg)]">
       <style
         dangerouslySetInnerHTML={{
           __html: `.gift-card-preview{--bg:${form.backgroundColor};--accent:${form.accentColor};--text:${form.textColor};}`,
@@ -186,7 +186,7 @@ export default function NewGiftCardPage() {
                     onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                     placeholder="50"
                     required
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
                 <div>
@@ -198,7 +198,7 @@ export default function NewGiftCardPage() {
                     onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
                     maxLength={3}
                     required
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -210,7 +210,7 @@ export default function NewGiftCardPage() {
                       value={formData.validFrom}
                       onChange={(e) => setFormData({ ...formData, validFrom: e.target.value })}
                       required
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                   <div>
@@ -221,7 +221,7 @@ export default function NewGiftCardPage() {
                       value={formData.validTo}
                       onChange={(e) => setFormData({ ...formData, validTo: e.target.value })}
                       disabled={formData.noExpiry}
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                 </div>
@@ -252,7 +252,7 @@ export default function NewGiftCardPage() {
                     value={formData.headline}
                     onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
                     placeholder="Gift for coffee lovers"
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
                 <div>
@@ -263,7 +263,7 @@ export default function NewGiftCardPage() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Add a personal message for the recipient"
                     rows={3}
-                    className="w-full mt-1 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 text-sm"
+                    className="w-full mt-1 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -275,7 +275,7 @@ export default function NewGiftCardPage() {
                       value={formData.logoUrl}
                       onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })}
                       placeholder="https://..."
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                   <div>
@@ -286,7 +286,7 @@ export default function NewGiftCardPage() {
                       value={formData.imageUrl}
                       onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                       placeholder="https://..."
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                 </div>
@@ -335,7 +335,7 @@ export default function NewGiftCardPage() {
                     }
                     placeholder="GIFT"
                     maxLength={12}
-                    className="mt-1 border-[#E7DCC7]"
+                    className="mt-1 border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
               </div>

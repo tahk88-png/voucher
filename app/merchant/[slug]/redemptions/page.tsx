@@ -132,7 +132,7 @@ export default async function RedemptionsPage({ params }: { params: { slug: stri
               const design = safeParseJson<{ headline?: string }>(redemption.voucher?.designJson);
               const headline = design?.headline ?? 'Voucher';
               return (
-                <WarmCard key={redemption.id} padding="lg" className="bg-white border border-[#E7DCC7]">
+                <WarmCard key={redemption.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <h2 className="text-base font-semibold text-[#2D2721]">

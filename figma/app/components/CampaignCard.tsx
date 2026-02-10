@@ -1,9 +1,9 @@
-import { motion } from 'motion/react';
+﻿import { motion } from 'motion/react';
 import { ArrowRight, Star, Heart } from 'lucide-react';
 import { WarmButton } from './WarmButton';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
-import { Link } from 'react-router-dom';
+import { Link } from '@/lib/router-shim';
 
 interface CampaignProps {
   id: string;
@@ -75,9 +75,9 @@ export function CampaignCard({ id, title, image, price, originalPrice, category,
 
         <div className="flex items-end justify-between mt-4">
           <div className="flex flex-col">
-            <span className="text-xs text-[#8B7355] line-through mb-0.5">{originalPrice}€</span>
+            <span className="text-xs text-[#8B7355] line-through mb-0.5">EUR {originalPrice}</span>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-bold text-[#2D2721]">{price}€</span>
+              <span className="text-2xl font-bold text-[#2D2721]">EUR {price}</span>
               <span className="bg-[#FFF9ED] text-[#E17B5C] text-xs font-bold px-1.5 py-0.5 rounded border border-[#E17B5C]/20">
                 -{discount}%
               </span>
@@ -93,3 +93,4 @@ export function CampaignCard({ id, title, image, price, originalPrice, category,
     </motion.div>
   );
 }
+

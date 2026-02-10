@@ -1,5 +1,4 @@
-import { formatCurrency as formatCurrencyUtil } from './utils';
-import { useLocale } from 'next-intl';
+import { localeToIntlLocale } from "@/lib/locale-config"
 
 /**
  * Format currency with locale support
@@ -58,21 +57,5 @@ export function getCurrencySymbol(currency: string, locale?: string): string {
  * Map locale to currency formatting locale
  */
 export function getCurrencyLocale(locale: string): string {
-  const localeMap: Record<string, string> = {
-    en: 'en-US',
-    et: 'et-EE',
-    es: 'es-ES',
-    fr: 'fr-FR',
-    de: 'de-DE',
-    fi: 'fi-FI',
-    sv: 'sv-SE',
-    no: 'no-NO',
-    da: 'da-DK',
-    lv: 'lv-LV',
-    lt: 'lt-LT',
-    pl: 'pl-PL',
-    uk: 'uk-UA',
-  };
-  
-  return localeMap[locale] || 'en-US';
+  return localeToIntlLocale[locale as keyof typeof localeToIntlLocale] || "en-US"
 }

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { CampaignTicker } from './components/CampaignTicker';
 import { CampaignCard } from './components/CampaignCard';
 import { Button } from './components/ui/button';
 import { ChevronRight, Loader2, Smartphone, Ticket, Smile, Camera, ShoppingBag, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { toast } from 'sonner';
 import { UnifiedData, Campaign } from '@services/unifiedData';
 
@@ -63,7 +63,7 @@ export default function LandingPage() {
             {/* Content */}
             <div className="relative z-10 max-w-2xl px-8 md:px-16 py-12 text-[#FFF9ED]">
               <span className="inline-block py-1 px-3 rounded-full bg-[#E17B5C]/20 border border-[#E17B5C]/50 text-[#E17B5C] text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
-                Päeva Pakkumine
+                PÃ¤eva Pakkumine
               </span>
               <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-6 drop-shadow-lg">
                 Avasta linna parimad <br/>
@@ -146,7 +146,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-3xl font-display font-bold mb-2">Osta parimaid tooteid</h3>
                 <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-                  <span className="font-medium">Külasta poodi</span>
+                  <span className="font-medium">KÃ¼lasta poodi</span>
                   <ArrowRight className="w-4 h-4" />
                 </div>
               </div>
@@ -162,14 +162,14 @@ export default function LandingPage() {
           <div className="flex justify-between items-end mb-10">
             <div>
               <h2 className="font-display font-bold text-3xl text-[#2D2721] mb-2">Kuumad pakkumised</h2>
-              <p className="text-[#6B5744]">Selle nädala populaarsemad valikud</p>
+              <p className="text-[#6B5744]">Selle nÃ¤dala populaarsemad valikud</p>
             </div>
             <Button 
               variant="ghost" 
               onClick={() => navigate('/campaigns')}
               className="text-[#E17B5C] hover:text-[#D16B4C] hover:bg-[#E17B5C]/10 gap-2"
             >
-              Vaata kõiki <ChevronRight className="w-4 h-4" />
+              Vaata kÃµiki <ChevronRight className="w-4 h-4" />
             </Button>
           </div>
 
@@ -185,8 +185,8 @@ export default function LandingPage() {
                     id={campaign.id}
                     title={campaign.title}
                     image={campaign.image_url || ''}
-                    price={campaign.price}
-                    originalPrice={campaign.original_price}
+                    price={campaign.price ?? 0}
+                    originalPrice={campaign.original_price ?? campaign.price ?? 0}
                     category={campaign.category_name || 'Muu'}
                     rating={4.8}
                   />
@@ -205,9 +205,9 @@ export default function LandingPage() {
       <section id="how-it-works" className="py-20 px-4 bg-white border-t border-[#E7DCC7]/50">
         <div className="container mx-auto text-center">
           <div className="mb-16">
-            <h2 className="font-display font-bold text-3xl md:text-4xl text-[#2D2721] mb-4">Kuidas see töötab?</h2>
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-[#2D2721] mb-4">Kuidas see tÃ¶Ã¶tab?</h2>
             <p className="text-[#6B5744] text-lg max-w-2xl mx-auto">
-              Säästa aega ja raha vaid kolme lihtsa sammuga. Meie platvorm on loodud pakkuma parimaid elamusi võimalikult mugavalt.
+              SÃ¤Ã¤sta aega ja raha vaid kolme lihtsa sammuga. Meie platvorm on loodud pakkuma parimaid elamusi vÃµimalikult mugavalt.
             </p>
           </div>
 
@@ -219,17 +219,17 @@ export default function LandingPage() {
               {
                 icon: Smartphone,
                 title: '1. Vali pakkumine',
-                desc: 'Sirvi sadu eksklusiivseid pakkumisi ja leia endale sobiv restoran, spaa või meelelahutus.'
+                desc: 'Sirvi sadu eksklusiivseid pakkumisi ja leia endale sobiv restoran, spaa vÃµi meelelahutus.'
               },
               {
                 icon: Ticket,
-                title: '2. Osta vautšer',
-                desc: 'Soorita turvaline ost sekunditega. Sinu vautšer on koheselt saadaval digitaalsel kujul.'
+                title: '2. Osta vautÅ¡er',
+                desc: 'Soorita turvaline ost sekunditega. Sinu vautÅ¡er on koheselt saadaval digitaalsel kujul.'
               },
               {
                 icon: Smile,
                 title: '3. Naudi elamust',
-                desc: 'Esita vautšer kohapeal otse telefonist ja naudi oma elamust soodsama hinnaga.'
+                desc: 'Esita vautÅ¡er kohapeal otse telefonist ja naudi oma elamust soodsama hinnaga.'
               }
             ].map((step, i) => (
               <div key={i} className="relative group">
@@ -262,3 +262,4 @@ export default function LandingPage() {
     </div>
   );
 }
+

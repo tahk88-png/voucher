@@ -1,10 +1,10 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmButton } from '@app/components/WarmButton';
 import { WarmCard } from '@app/components/WarmCard';
 import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { SEOHead } from '@app/components/SEOHead';
 import { Tag, Clock, ArrowRight, Sparkles, Gift, Globe, Languages, ChevronDown } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 
 const MOCK_OFFERS = [
   {
@@ -15,23 +15,23 @@ const MOCK_OFFERS = [
     originalPrice: 65.00,
     discount: '-30%',
     image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80',
-    expiresIn: '2 päeva',
+    expiresIn: '2 pÃ¤eva',
     type: 'voucher'
   },
   {
     id: '2',
-    title: '3-Käiguline Õhtusöök Kahele',
+    title: '3-KÃ¤iguline Ã•htusÃ¶Ã¶k Kahele',
     merchant: 'Restoran Mantel ja Korsten',
     price: 89.00,
     originalPrice: 110.00,
     discount: '-20%',
     image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80',
-    expiresIn: '5 päeva',
+    expiresIn: '5 pÃ¤eva',
     type: 'voucher'
   },
   {
     id: '3',
-    title: 'Kinkekaart 50€ väärtuses',
+    title: 'Kinkekaart 50â‚¬ vÃ¤Ã¤rtuses',
     merchant: 'Kaubamaja',
     price: 50.00,
     image: 'https://images.unsplash.com/photo-1512909006721-3d6018887383?w=800&q=80',
@@ -55,17 +55,17 @@ const LANGUAGES = [
   { code: 'en', name: 'English' },
   { code: 'fi', name: 'Suomi' },
   { code: 'sv', name: 'Svenska' },
-  { code: 'ru', name: 'Русский' },
-  { code: 'lv', name: 'Latviešu' },
-  { code: 'lt', name: 'Lietuvių' },
+  { code: 'ru', name: 'Ð ÑƒÑÑÐºÐ¸Ð¹' },
+  { code: 'lv', name: 'LatvieÅ¡u' },
+  { code: 'lt', name: 'LietuviÅ³' },
   { code: 'de', name: 'Deutsch' },
-  { code: 'fr', name: 'Français' },
-  { code: 'es', name: 'Español' },
+  { code: 'fr', name: 'FranÃ§ais' },
+  { code: 'es', name: 'EspaÃ±ol' },
   { code: 'it', name: 'Italiano' },
   { code: 'no', name: 'Norsk' },
   { code: 'da', name: 'Dansk' },
   { code: 'pl', name: 'Polski' },
-  { code: 'uk', name: 'Українська' }
+  { code: 'uk', name: 'Ð£ÐºÑ€Ð°Ñ—Ð½ÑÑŒÐºÐ°' }
 ];
 
 const MARKETS = [
@@ -95,7 +95,7 @@ export function VoucherOffers() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] pb-12">
-      <SEOHead title="Pakkumised ja Vautšerid | GiftHub" />
+      <SEOHead title="Pakkumised ja VautÅ¡erid | GiftHub" />
 
       {/* Hero */}
       <div className="bg-[#2D2721] text-[#E7DCC7] py-12 px-4 relative overflow-hidden">
@@ -106,7 +106,7 @@ export function VoucherOffers() {
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">Avasta Parimad Elamused</h1>
           <p className="max-w-2xl mx-auto text-lg opacity-80 mb-8">
-            Leia suurepäraseid pakkumisi spaadest restoranideni. Säästa kuni 50% või kingi elamusi oma lähedastele.
+            Leia suurepÃ¤raseid pakkumisi spaadest restoranideni. SÃ¤Ã¤sta kuni 50% vÃµi kingi elamusi oma lÃ¤hedastele.
           </p>
           
           {/* Market & Language Selection */}
@@ -198,7 +198,7 @@ export function VoucherOffers() {
         
         {/* Filters (Mock) */}
         <div className="flex gap-2 overflow-x-auto pb-6 mb-6 custom-scrollbar">
-           {['Kõik', 'Spa & Ilu', 'Restoranid', 'Meelelahutus', 'Kinkekaardid'].map((cat, i) => (
+           {['KÃµik', 'Spa & Ilu', 'Restoranid', 'Meelelahutus', 'Kinkekaardid'].map((cat, i) => (
              <button 
                key={i} 
                className={`px-5 py-2 rounded-full whitespace-nowrap text-sm font-bold transition-all ${
@@ -244,9 +244,9 @@ export function VoucherOffers() {
                   
                   <div className="mt-auto pt-4 flex items-center justify-between border-t border-[#FAF7F2]">
                     <div className="flex items-baseline gap-2">
-                       <span className="text-xl font-bold text-[#2D2721]">{offer.price.toFixed(2)}€</span>
+                       <span className="text-xl font-bold text-[#2D2721]">{offer.price.toFixed(2)}â‚¬</span>
                        {offer.originalPrice && (
-                         <span className="text-sm text-[#8B7355] line-through decoration-[#E17B5C]/50">{offer.originalPrice.toFixed(2)}€</span>
+                         <span className="text-sm text-[#8B7355] line-through decoration-[#E17B5C]/50">{offer.originalPrice.toFixed(2)}â‚¬</span>
                        )}
                     </div>
                     <div className="w-8 h-8 rounded-full bg-[#FAF7F2] flex items-center justify-center text-[#2D2721] group-hover:bg-[#E17B5C] group-hover:text-white transition-colors">
@@ -263,3 +263,4 @@ export function VoucherOffers() {
     </div>
   );
 }
+

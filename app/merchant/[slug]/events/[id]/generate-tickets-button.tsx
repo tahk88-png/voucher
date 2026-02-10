@@ -79,7 +79,7 @@ export default function GenerateTicketsButton({
   return (
     <WarmCard
       padding="lg"
-      className="absolute z-10 w-full max-w-sm right-0 top-full mt-2 bg-white border border-[#E7DCC7] shadow-warm"
+      className="absolute z-10 w-full max-w-sm right-0 top-full mt-2 bg-white border border-[rgba(139,115,85,0.15)] shadow-warm"
     >
       <div className="space-y-1">
         <h3 className="text-sm font-semibold text-[#2D2721]">Generate tickets</h3>
@@ -96,7 +96,7 @@ export default function GenerateTicketsButton({
             value={count}
             onChange={(e) => setCount(e.target.value)}
             required
-            className="mt-1 border-[#E7DCC7]"
+            className="mt-1 border-[rgba(139,115,85,0.15)]"
           />
         </div>
         <div className="flex gap-2 justify-end">

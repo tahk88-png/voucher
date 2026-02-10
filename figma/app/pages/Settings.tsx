@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Input } from '@app/components/ui/input';
 import { Label } from '@app/components/ui/label';
 import { Switch } from '@app/components/ui/switch';
 import { CountrySelector } from '@app/components/CountrySelector';
+import { useLanguage } from '@app/contexts/LanguageContext';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router';
+import { useNavigate } from '@/lib/router-shim';
 import { UnifiedData } from '@services/unifiedData';
 import { 
   CreditCard, 
@@ -43,6 +44,8 @@ type Location = {
 
 export function Settings() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const tr = (en: string, et: string) => (language === 'et' ? et : en);
   
   // Locations state
   const [locations, setLocations] = useState<Location[]>([
@@ -150,7 +153,7 @@ export function Settings() {
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     setIsSaving(false);
-    toast.success('Seaded salvestatud edukalt!');
+    toast.success(tr('Settings saved successfully!', 'Seaded salvestatud edukalt!'));
   };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -158,7 +161,7 @@ export function Settings() {
     if (file) {
       const url = URL.createObjectURL(file);
       setFormData({ ...formData, logoUrl: url });
-      toast.success('Logo üles laetud!');
+      toast.success(tr('Logo uploaded!', 'Logo üles laetud!'));
     }
   };
 
@@ -177,29 +180,29 @@ export function Settings() {
     setLocations([...locations, loc]);
     setNewLocation({ name: '', address: '', city: '', hours: '', phone: '', isActive: true });
     setIsEditingLocation(null);
-    toast.success('Uus asukoht lisatud!');
+    toast.success(tr('New location added!', 'Uus asukoht lisatud!'));
   };
 
   const removeLocation = (id: string) => {
      setLocations(locations.filter(l => l.id !== id));
-     toast.success('Asukoht eemaldatud');
+     toast.success(tr('Location removed.', 'Asukoht eemaldatud.'));
   };
 
   return (
     <div className="space-y-6 max-w-3xl pb-12 animate-in fade-in duration-500">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-[#2D2721]">Seaded</h1>
-        <p className="text-[#6B5744] mt-1">Halda oma poe seadeid, tarneviise ja asukohti</p>
+        <h1 className="text-3xl font-bold text-[#2D2721]">{tr('Settings', 'Seaded')}</h1>
+        <p className="text-[#6B5744] mt-1">{tr('Manage your store settings, delivery options, and locations.', 'Halda oma poe seadeid, tarneviise ja asukohti.')}</p>
       </div>
 
       {/* Locations & Stores */}
       <WarmCard padding="lg" className="border-l-4 border-l-[#FFC857]">
          <h2 className="text-xl font-semibold text-[#2D2721] mb-6 flex items-center gap-2">
             <Store className="w-5 h-5 text-[#E17B5C]" />
-            Poed ja Laod
+            {tr('Stores and Warehouses', 'Poed ja laod')}
          </h2>
-         <p className="text-sm text-[#6B5744] mb-4">Määra asukohad, kust kliendid saavad kauba ise kätte ("Tulen ise järele").</p>
+         <p className="text-sm text-[#6B5744] mb-4">{tr('Define pickup locations where customers can collect orders themselves ("I\'ll pick it up").', 'Määra asukohad, kust kliendid saavad kauba ise kätte ("Tulen ise järele").')}</p>
          
          <div className="space-y-4">
             {locations.map(loc => (
@@ -229,32 +232,32 @@ export function Settings() {
             {/* Add New Location Form */}
             {isEditingLocation === 'new' ? (
                <div className="bg-[#FAF7F2] p-4 rounded-xl border border-[#E7DCC7] animate-in slide-in-from-top-2">
-                  <h3 className="font-bold text-[#2D2721] mb-3">Lisa uus asukoht</h3>
+                  <h3 className="font-bold text-[#2D2721] mb-3">{tr('Add New Location', 'Lisa uus asukoht')}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                      <div>
-                        <Label>Nimi (nt. Tallinna Esindus)</Label>
+                        <Label>{tr('Name (e.g., Tallinn Branch)', 'Nimi (nt. Tallinna Esindus)')}</Label>
                         <Input value={newLocation.name} onChange={e => setNewLocation({...newLocation, name: e.target.value})} className="bg-white" />
                      </div>
                      <div>
-                        <Label>Aadress</Label>
+                        <Label>{tr('Address', 'Aadress')}</Label>
                         <Input value={newLocation.address} onChange={e => setNewLocation({...newLocation, address: e.target.value})} className="bg-white" />
                      </div>
                      <div>
-                        <Label>Linn</Label>
+                        <Label>{tr('City', 'Linn')}</Label>
                         <Input value={newLocation.city} onChange={e => setNewLocation({...newLocation, city: e.target.value})} className="bg-white" />
                      </div>
                      <div>
-                        <Label>Lahtiolekuaeg</Label>
-                        <Input value={newLocation.hours} onChange={e => setNewLocation({...newLocation, hours: e.target.value})} className="bg-white" placeholder="E-R 9-17" />
+                        <Label>{tr('Opening Hours', 'Lahtiolekuaeg')}</Label>
+                        <Input value={newLocation.hours} onChange={e => setNewLocation({...newLocation, hours: e.target.value})} className="bg-white" placeholder={tr('Mon-Fri 9-17', 'E-R 9-17')} />
                      </div>
                      <div>
-                        <Label>Telefon</Label>
+                        <Label>{tr('Phone', 'Telefon')}</Label>
                         <Input value={newLocation.phone} onChange={e => setNewLocation({...newLocation, phone: e.target.value})} className="bg-white" />
                      </div>
                   </div>
                   <div className="flex justify-end gap-2">
-                     <WarmButton variant="ghost" onClick={() => setIsEditingLocation(null)}>Tühista</WarmButton>
-                     <WarmButton onClick={addLocation}>Lisa asukoht</WarmButton>
+                     <WarmButton variant="ghost" onClick={() => setIsEditingLocation(null)}>{tr('Cancel', 'Tühista')}</WarmButton>
+                     <WarmButton onClick={addLocation}>{tr('Add Location', 'Lisa asukoht')}</WarmButton>
                   </div>
                </div>
             ) : (
@@ -262,8 +265,8 @@ export function Settings() {
                   onClick={() => setIsEditingLocation('new')}
                   className="w-full py-3 border-2 border-dashed border-[#E7DCC7] rounded-xl text-[#8B7355] font-bold hover:bg-[#FAF7F2] hover:border-[#FFC857] transition-all flex items-center justify-center gap-2"
                >
-                  <Plus className="w-5 h-5" /> Lisa uus asukoht
-               </button>
+                  <Plus className="w-5 h-5" /> {tr('Add New Location', 'Lisa uus asukoht')}
+                </button>
             )}
          </div>
       </WarmCard>
@@ -272,7 +275,7 @@ export function Settings() {
       <WarmCard padding="lg">
         <h2 className="text-xl font-semibold text-[#2D2721] mb-6 flex items-center gap-2">
             <Truck className="w-5 h-5 text-[#E17B5C]" />
-            Tarneviisid
+            {tr('Delivery Options', 'Tarneviisid')}
         </h2>
         
         <div className="space-y-6">
@@ -282,12 +285,12 @@ export function Settings() {
                <div className="flex items-center gap-3">
                   <div className="bg-[#FFC857] p-2 rounded-lg text-[#2D2721]"><Award className="w-5 h-5" /></div>
                   <div>
-                     <h3 className="font-bold text-[#2D2721]">Tasuta tarne</h3>
-                     <p className="text-sm text-[#6B5744]">Rakenda tasuta tarne, kui ostukorvi summa ületab piiri</p>
+                     <h3 className="font-bold text-[#2D2721]">{tr('Free Shipping', 'Tasuta tarne')}</h3>
+                     <p className="text-sm text-[#6B5744]">{tr('Offer free shipping when cart total exceeds the threshold.', 'Rakenda tasuta tarne, kui ostukorvi summa ületab piiri.')}</p>
                   </div>
                </div>
                <div className="flex items-center gap-2">
-                  <span className="text-sm font-bold text-[#2D2721]">Alates (€):</span>
+                  <span className="text-sm font-bold text-[#2D2721]">{tr('From (€):', 'Alates (€):')}</span>
                   <Input 
                      type="number" 
                      className="w-24 bg-white border-[#FFC857]" 
@@ -303,9 +306,9 @@ export function Settings() {
                     <div>
                         <h3 className="font-semibold text-[#2D2721] flex items-center gap-2">
                             <Package className="w-4 h-4 text-[#8B7355]" />
-                            Tulen ise järele
+                            {tr("I'll pick it up", 'Tulen ise järele')}
                         </h3>
-                        <p className="text-sm text-[#6B5744]">Klient valib ühe sinu poodidest (ülal määratud)</p>
+                        <p className="text-sm text-[#6B5744]">{tr('Customer chooses one of your stores (defined above).', 'Klient valib ühe sinu poodidest (ülal määratud).')}</p>
                     </div>
                     <Switch 
                         checked={formData.deliveryPickupAllowed} 
@@ -316,7 +319,7 @@ export function Settings() {
                 {formData.deliveryPickupAllowed && (
                     <div className="animate-in slide-in-from-top-2 fade-in">
                         <div className="space-y-2 max-w-xs">
-                            <Label className="text-[#2D2721]">Hind (€)</Label>
+                            <Label className="text-[#2D2721]">{tr('Price (€)', 'Hind (€)')}</Label>
                             <Input 
                                 type="number" 
                                 min="0" 
@@ -325,7 +328,7 @@ export function Settings() {
                                 onChange={(e) => setFormData({...formData, deliveryPickupPrice: parseFloat(e.target.value)})}
                                 className="bg-white"
                             />
-                            <p className="text-xs text-[#8B7355]">Tavaliselt tasuta (0.00€)</p>
+                            <p className="text-xs text-[#8B7355]">{tr('Usually free (0.00€)', 'Tavaliselt tasuta (0.00€)')}</p>
                         </div>
                     </div>
                 )}
@@ -337,9 +340,9 @@ export function Settings() {
                     <div>
                         <h3 className="font-semibold text-[#2D2721] flex items-center gap-2">
                             <Truck className="w-4 h-4 text-[#8B7355]" />
-                            Kulleriga koju
+                            {tr('Courier delivery', 'Kulleriga koju')}
                         </h3>
-                        <p className="text-sm text-[#6B5744]">DPD, Itella või Omniva kuller</p>
+                        <p className="text-sm text-[#6B5744]">{tr('DPD, Itella, or Omniva courier', 'DPD, Itella või Omniva kuller')}</p>
                     </div>
                     <Switch 
                         checked={formData.deliveryCourierAllowed} 
@@ -350,7 +353,7 @@ export function Settings() {
                 {formData.deliveryCourierAllowed && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in slide-in-from-top-2 fade-in">
                         <div className="space-y-2">
-                            <Label className="text-[#2D2721]">Hind (€)</Label>
+                            <Label className="text-[#2D2721]">{tr('Price (€)', 'Hind (€)')}</Label>
                             <Input 
                                 type="number" 
                                 min="0" 
@@ -368,7 +371,7 @@ export function Settings() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 bg-[#F8F6F1] rounded-xl border border-[rgba(139,115,85,0.1)] space-y-4">
                     <div className="flex items-center justify-between">
-                        <span className="font-semibold text-[#2D2721]">Smartpost pakiautomaat</span>
+                        <span className="font-semibold text-[#2D2721]">{tr('Smartpost parcel locker', 'Smartpost pakiautomaat')}</span>
                         <Switch 
                             checked={formData.deliverySmartpostAllowed} 
                             onCheckedChange={(c) => setFormData({...formData, deliverySmartpostAllowed: c})}
@@ -376,7 +379,7 @@ export function Settings() {
                     </div>
                     {formData.deliverySmartpostAllowed && (
                         <div className="space-y-2 animate-in fade-in">
-                             <Label className="text-[#2D2721]">Hind (€)</Label>
+                             <Label className="text-[#2D2721]">{tr('Price (€)', 'Hind (€)')}</Label>
                              <Input 
                                 type="number" 
                                 min="0" 
@@ -391,7 +394,7 @@ export function Settings() {
 
                 <div className="p-4 bg-[#F8F6F1] rounded-xl border border-[rgba(139,115,85,0.1)] space-y-4">
                     <div className="flex items-center justify-between">
-                        <span className="font-semibold text-[#2D2721]">Omniva pakiautomaat</span>
+                        <span className="font-semibold text-[#2D2721]">{tr('Omniva parcel locker', 'Omniva pakiautomaat')}</span>
                         <Switch 
                             checked={formData.deliveryOmnivaAllowed} 
                             onCheckedChange={(c) => setFormData({...formData, deliveryOmnivaAllowed: c})}
@@ -399,7 +402,7 @@ export function Settings() {
                     </div>
                     {formData.deliveryOmnivaAllowed && (
                         <div className="space-y-2 animate-in fade-in">
-                             <Label className="text-[#2D2721]">Hind (€)</Label>
+                             <Label className="text-[#2D2721]">{tr('Price (€)', 'Hind (€)')}</Label>
                              <Input 
                                 type="number" 
                                 min="0" 
@@ -419,21 +422,23 @@ export function Settings() {
       <WarmCard padding="lg">
         <h2 className="text-xl font-semibold text-[#2D2721] mb-6 flex items-center gap-2">
             <CreditCard className="w-5 h-5 text-[#E17B5C]" />
-            Maksed
+            {tr('Payments', 'Maksed')}
         </h2>
         
         <div className="space-y-6">
           <div className="flex flex-col gap-4">
              <div className="flex items-center justify-between p-4 bg-[#F8F6F1] rounded-xl border border-[rgba(139,115,85,0.1)]">
                 <div>
-                    <h3 className="font-semibold text-[#2D2721] mb-1">Platvormi maksed (Soovitatud)</h3>
+                    <h3 className="font-semibold text-[#2D2721] mb-1">{tr('Platform payments (Recommended)', 'Platvormi maksed (Soovitatud)')}</h3>
                     <p className="text-sm text-[#6B5744] max-w-sm">
-                        Meie keskne makselahendus. Hoolitseme tagasimaksete ja raportite eest.
+                        {tr('Our centralized payment setup. We handle refunds and reporting.', 'Meie keskne makselahendus. Hoolitseme tagasimaksete ja raportite eest.')}
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
                     <span className={`text-sm font-bold ${formData.paymentMode === 'platform' ? 'text-[#E17B5C]' : 'text-[#8B7355]'}`}>
-                        {formData.paymentMode === 'platform' ? 'Aktiivne' : 'Mitteaktiivne'}
+                        {formData.paymentMode === 'platform'
+                          ? tr('Active', 'Aktiivne')
+                          : tr('Inactive', 'Mitteaktiivne')}
                     </span>
                     <Switch 
                         checked={formData.paymentMode === 'platform'} 
@@ -444,14 +449,16 @@ export function Settings() {
 
              <div className="flex items-center justify-between p-4 bg-[#F8F6F1] rounded-xl border border-[rgba(139,115,85,0.1)]">
                 <div>
-                    <h3 className="font-semibold text-[#2D2721] mb-1">Otsemaksed (Sinu API)</h3>
+                    <h3 className="font-semibold text-[#2D2721] mb-1">{tr('Direct payments (Your API)', 'Otsemaksed (Sinu API)')}</h3>
                     <p className="text-sm text-[#6B5744] max-w-sm">
-                        Raha laekub otse sinu kontole. Vastutad ise tagasimaksete eest.
+                        {tr('Funds are paid directly to your account. You handle refunds yourself.', 'Raha laekub otse sinu kontole. Vastutad ise tagasimaksete eest.')}
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
                     <span className={`text-sm font-bold ${formData.paymentMode === 'direct' ? 'text-[#E17B5C]' : 'text-[#8B7355]'}`}>
-                        {formData.paymentMode === 'direct' ? 'Aktiivne' : 'Mitteaktiivne'}
+                        {formData.paymentMode === 'direct'
+                          ? tr('Active', 'Aktiivne')
+                          : tr('Inactive', 'Mitteaktiivne')}
                     </span>
                     <Switch 
                         checked={formData.paymentMode === 'direct'} 
@@ -464,7 +471,7 @@ export function Settings() {
           {formData.paymentMode === 'direct' && (
              <div className="space-y-4 pt-4 border-t border-[rgba(139,115,85,0.1)] animate-in slide-in-from-top-2 fade-in duration-300">
                 <div className="space-y-2">
-                    <Label htmlFor="provider" className="text-[#2D2721] font-medium">Teenusepakkuja</Label>
+                    <Label htmlFor="provider" className="text-[#2D2721] font-medium">{tr('Provider', 'Teenusepakkuja')}</Label>
                     <select 
                         id="provider"
                         value={formData.directPaymentProvider}
@@ -477,7 +484,7 @@ export function Settings() {
                     </select>
                 </div>
                 <div className="space-y-2">
-                    <Label htmlFor="apiKey" className="text-[#2D2721] font-medium">API Võti</Label>
+                    <Label htmlFor="apiKey" className="text-[#2D2721] font-medium">{tr('API Key', 'API võti')}</Label>
                     <Input 
                         id="apiKey"
                         type="password" 
@@ -489,7 +496,7 @@ export function Settings() {
                 </div>
                 <div className="bg-[#FFF9ED] p-4 rounded-xl border border-[#E7DCC7] flex gap-3 text-sm text-[#8B7355]">
                     <Shield className="w-5 h-5 flex-shrink-0 text-[#E17B5C]" />
-                    <p>Sinu võtmed on krüpteeritud ja turvaliselt hoitud.</p>
+                    <p>{tr('Your keys are encrypted and stored securely.', 'Sinu võtmed on krüpteeritud ja turvaliselt hoitud.')}</p>
                 </div>
              </div>
           )}
@@ -498,16 +505,16 @@ export function Settings() {
 
       {/* Brand Settings */}
       <WarmCard padding="lg">
-        <h2 className="text-xl font-semibold text-[#2D2721] mb-6">Bränding</h2>
+        <h2 className="text-xl font-semibold text-[#2D2721] mb-6">{tr('Branding', 'Bränding')}</h2>
         
         <div className="space-y-6">
           <div className="space-y-2">
-            <Label className="text-[#2D2721] font-medium">Logo</Label>
+            <Label className="text-[#2D2721] font-medium">{tr('Logo', 'Logo')}</Label>
             <div className="flex items-center gap-4">
               {formData.logoUrl ? (
                 <img
                   src={formData.logoUrl}
-                  alt="Brand logo"
+                  alt={tr('Brand logo', 'Brändi logo')}
                   className="w-20 h-20 rounded-[12px] object-cover border-2 border-[rgba(139,115,85,0.1)]"
                />
               ) : (
@@ -527,7 +534,7 @@ export function Settings() {
                   <div className="inline-block">
                     <WarmButton variant="secondary" size="sm" type="button">
                       <Upload className="h-4 w-4 mr-2" />
-                      Lae üles
+                      {tr('Upload', 'Lae üles')}
                     </WarmButton>
                   </div>
                 </label>
@@ -537,7 +544,7 @@ export function Settings() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="brandColor" className="text-[#2D2721] font-medium">Põhivärv</Label>
+              <Label htmlFor="brandColor" className="text-[#2D2721] font-medium">{tr('Primary Color', 'Põhivärv')}</Label>
               <div className="flex gap-2">
                 <input
                   type="color"
@@ -554,7 +561,7 @@ export function Settings() {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="accentColor" className="text-[#2D2721] font-medium">Aktsentvärv</Label>
+              <Label htmlFor="accentColor" className="text-[#2D2721] font-medium">{tr('Accent Color', 'Aktsentvärv')}</Label>
               <div className="flex gap-2">
                 <input
                   type="color"
@@ -578,9 +585,10 @@ export function Settings() {
       <div className="flex justify-end sticky bottom-6 z-10">
         <WarmButton size="lg" onClick={handleSave} isLoading={isSaving} className="shadow-xl">
           <Save className="h-5 w-5 mr-2" />
-          Salvesta muudatused
+          {tr('Save Changes', 'Salvesta muudatused')}
         </WarmButton>
       </div>
     </div>
   );
 }
+

@@ -35,8 +35,8 @@ export default async function TenantShell({ merchant, children }: TenantShellPro
   const footer = footerLinks.length > 0 ? footerLinks : fallback.footer
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FFFBF5]">
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-[rgba(139,115,85,0.1)]">
+    <div className="min-h-screen flex flex-col bg-[var(--bg)]">
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--surface)]/80 border-b border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2">
             {merchant.brandLogoUrl ? (
@@ -47,11 +47,11 @@ export default async function TenantShell({ merchant, children }: TenantShellPro
                 className="h-10 w-10 rounded-[12px] object-cover shadow-warm"
               />
             ) : (
-              <div className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
+              <div className="w-10 h-10 rounded-[12px] gradient-brand flex items-center justify-center shadow-warm">
                 <Gift className="h-6 w-6 text-white" />
               </div>
             )}
-            <span className="text-xl font-bold text-[#2D2721]">{merchant.name}</span>
+            <span className="text-xl font-bold text-[var(--text)]">{merchant.name}</span>
           </Link>
           <nav className="hidden md:flex items-center gap-2">
             {header.map((link) => (
@@ -71,22 +71,22 @@ export default async function TenantShell({ merchant, children }: TenantShellPro
         </div>
       </header>
       <main className="flex-1">{children}</main>
-      <footer className="bg-white/50 backdrop-blur-sm border-t border-[rgba(139,115,85,0.1)]">
+      <footer className="bg-[var(--surface)]/50 backdrop-blur-sm border-t border-[var(--border)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
-            <p className="text-sm font-semibold text-[#2D2721]">{merchant.name}</p>
-            {merchant.supportEmail ? <p className="text-sm text-[#6B5744]">Support: {merchant.supportEmail}</p> : null}
+            <p className="text-sm font-semibold text-[var(--text)]">{merchant.name}</p>
+            {merchant.supportEmail ? <p className="text-sm text-[var(--text-muted)]">Support: {merchant.supportEmail}</p> : null}
             {merchant.website ? (
-              <p className="text-sm text-[#6B5744]">
+              <p className="text-sm text-[var(--text-muted)]">
                 <a href={merchant.website} className="underline underline-offset-2">
                   {merchant.website}
                 </a>
               </p>
             ) : null}
           </div>
-          <div className="flex flex-wrap gap-4 justify-start md:justify-end text-sm text-[#6B5744]">
+          <div className="flex flex-wrap gap-4 justify-start md:justify-end text-sm text-[var(--text-muted)]">
             {footer.map((link) => (
-              <Link key={link.id} href={link.href} className="hover:text-[#2D2721]">
+              <Link key={link.id} href={link.href} className="hover:text-[var(--text)]">
                 {link.label}
               </Link>
             ))}

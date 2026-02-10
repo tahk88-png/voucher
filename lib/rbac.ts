@@ -1,19 +1,26 @@
-import { prisma } from './prisma';
-import { isPlatformAdmin as isPlatformAdminEmail } from './admin';
+import { prisma } from "@/lib/prisma";
+import { isPlatformAdmin as isPlatformAdminEmail } from "@/lib/admin";
+import type { TenantMembershipRole } from "@/lib/access-control/roles";
 
-export type Role = 'platform_admin' | 'merchant_admin' | 'merchant_staff' | 'user';
+export type Role = "platform_admin" | "merchant_admin" | "merchant_staff" | "user";
 
 export interface UserWithRoles {
   id: string;
   email: string;
   merchantRoles: Array<{
     merchantId: string;
-    role: 'merchant_admin' | 'merchant_staff';
+    role: TenantMembershipRole;
   }>;
 }
 
+const ROLE_RANK: Record<TenantMembershipRole, number> = {
+  merchant_staff: 1,
+  merchant_admin: 2,
+};
+
 /**
- * Get user's roles across all merchants
+ * Get user's tenant memberships.
+ * Backwards-compatible API used by existing routes.
  */
 export async function getUserRoles(userId: string): Promise<UserWithRoles | null> {
   const user = await prisma.user.findUnique({
@@ -33,20 +40,20 @@ export async function getUserRoles(userId: string): Promise<UserWithRoles | null
   return {
     id: user.id,
     email: user.email,
-    merchantRoles: user.merchantMembers.map((mm) => ({
-      merchantId: mm.merchantId,
-      role: mm.role as 'merchant_admin' | 'merchant_staff',
+    merchantRoles: user.merchantMembers.map((member) => ({
+      merchantId: member.merchantId,
+      role: member.role as TenantMembershipRole,
     })),
   };
 }
 
 /**
- * Check if user has a specific role for a merchant
+ * Check tenant role hierarchy.
  */
 export async function hasMerchantRole(
   userId: string,
   merchantId: string,
-  requiredRole: 'merchant_admin' | 'merchant_staff'
+  requiredRole: TenantMembershipRole
 ): Promise<boolean> {
   const member = await prisma.merchantMember.findUnique({
     where: {
@@ -55,36 +62,32 @@ export async function hasMerchantRole(
         userId,
       },
     },
+    select: { role: true },
   });
 
   if (!member) return false;
 
-  if (requiredRole === 'merchant_admin') {
-    return member.role === 'merchant_admin';
-  }
-
-  // merchant_staff can access merchant_staff routes, merchant_admin can access both
-  return member.role === 'merchant_admin' || member.role === 'merchant_staff';
+  const currentRole = member.role as TenantMembershipRole;
+  return ROLE_RANK[currentRole] >= ROLE_RANK[requiredRole];
 }
 
 /**
- * Check if user is platform admin
- * For now, we'll use a simple env-based check. In production, add a platform_admin flag to User model.
+ * Platform admin check.
  */
 export function isPlatformAdmin(email: string | null | undefined): boolean {
   return isPlatformAdminEmail(email);
 }
 
 /**
- * Require merchant role or throw
+ * Require tenant role or throw.
  */
 export async function requireMerchantRole(
   userId: string,
   merchantId: string,
-  requiredRole: 'merchant_admin' | 'merchant_staff'
+  requiredRole: TenantMembershipRole
 ): Promise<void> {
-  const hasRole = await hasMerchantRole(userId, merchantId, requiredRole);
-  if (!hasRole) {
-    throw new Error('Insufficient permissions');
+  const allowed = await hasMerchantRole(userId, merchantId, requiredRole);
+  if (!allowed) {
+    throw new Error("Insufficient permissions for this tenant action.");
   }
 }

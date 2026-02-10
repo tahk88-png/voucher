@@ -18,7 +18,7 @@ export function Spinner({ className, size = "md", ...props }: SpinnerProps) {
       className={cn("flex items-center justify-center", className)}
       {...props}
     >
-      <Loader2 className={cn("animate-spin text-[#FFC857]", sizeClasses[size])} />
+      <Loader2 className={cn("animate-spin text-[var(--primary)]", sizeClasses[size])} />
       <span className="sr-only">Loading...</span>
     </div>
   )

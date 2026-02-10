@@ -160,7 +160,7 @@ export default async function EventDetailPage({
               {event.tickets.map((ticket) => (
                 <div
                   key={ticket.id}
-                  className="flex items-center justify-between p-3 border border-[#E7DCC7] rounded-lg"
+                  className="flex items-center justify-between p-3 border border-[rgba(139,115,85,0.15)] rounded-lg"
                 >
                   <div>
                     <p className="font-medium text-[#2D2721]">{ticket.ticketNumber}</p>

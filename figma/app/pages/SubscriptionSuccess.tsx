@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   CheckCircle2, 
   Download, 
@@ -24,7 +24,7 @@ export function SubscriptionSuccess() {
   const subscription = {
     plan: 'Professional',
     status: 'trialing',
-    price: '€29',
+    price: 'â‚¬29',
     billingPeriod: 'monthly',
     trialEnd: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000), // 60 days from now
     nextBillingDate: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000),
@@ -90,7 +90,7 @@ Thank you for choosing our platform!
             <CheckCircle2 className="h-12 w-12 text-white" />
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-[#2D2721] mb-4">
-            🎉 Welcome Aboard!
+            <span className="inline-flex items-center gap-3"><PartyPopper className="h-10 w-10 text-[#FFC857]" />Welcome Aboard!</span>
           </h1>
           <p className="text-xl text-[#6B5744]">
             Your subscription is now active. Let's get started!
@@ -237,3 +237,5 @@ Thank you for choosing our platform!
     </div>
   );
 }
+
+

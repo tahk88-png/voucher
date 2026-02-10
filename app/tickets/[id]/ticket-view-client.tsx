@@ -47,7 +47,7 @@ export default function TicketViewClient({
           </div>
           <div className="flex flex-col items-center gap-4">
             {qrCodeDataUrl ? (
-              <div className="p-4 bg-white rounded-2xl border border-[#E7DCC7] shadow-warm-sm">
+              <div className="p-4 bg-white rounded-2xl border border-[rgba(139,115,85,0.15)] shadow-warm-sm">
                 <Image
                   src={qrCodeDataUrl}
                   alt="Ticket QR code"
@@ -111,7 +111,7 @@ export default function TicketViewClient({
               </div>
             )}
             {canRedeem && (
-              <div className="pt-4 border-t border-[#E7DCC7]">
+              <div className="pt-4 border-t border-[rgba(139,115,85,0.15)]">
                 <p className="text-sm text-[#6B5744]">
                   As merchant staff, you can redeem this ticket at the event.
                 </p>

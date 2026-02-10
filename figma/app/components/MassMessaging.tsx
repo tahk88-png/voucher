@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Input } from '@app/components/ui/input';
@@ -11,9 +11,9 @@ import {
   Bell,
   Sparkles,
   Send,
-  Eye,
   CheckCircle2,
-  Users
+  Users,
+  Lightbulb
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -184,12 +184,15 @@ export function MassMessaging({ userSegments }: MassMessagingProps) {
                 </div>
               </div>
               <div className="p-4 rounded-lg bg-[#FFF9ED] border border-[rgba(139,115,85,0.1)]">
-                <div className="text-xs font-semibold text-[#8B7355] mb-2">💡 SMS Best Practices:</div>
+                <div className="text-xs font-semibold text-[#8B7355] mb-2 flex items-center gap-2">
+                  <Lightbulb className="h-3.5 w-3.5 text-[#FFC857]" />
+                  SMS Best Practices:
+                </div>
                 <ul className="text-xs text-[#6B5744] space-y-1">
-                  <li>• Keep it short and clear</li>
-                  <li>• Include a clear call-to-action</li>
-                  <li>• Add opt-out instructions (Reply STOP)</li>
-                  <li>• Avoid special characters that may not display correctly</li>
+                  <li>Keep it short and clear</li>
+                  <li>Include a clear call-to-action</li>
+                  <li>Add opt-out instructions (Reply STOP)</li>
+                  <li>Avoid special characters that may not display correctly</li>
                 </ul>
               </div>
             </>
@@ -379,8 +382,8 @@ export function MassMessaging({ userSegments }: MassMessagingProps) {
           {activeTab === 'sms' && (
             <div className="text-right">
               <div className="text-sm text-[#8B7355] mb-1">Estimated Cost</div>
-              <div className="text-xl font-bold text-[#2D2721]">€{(selectedRecipientsCount * 0.05).toFixed(2)}</div>
-              <div className="text-xs text-[#8B7355]">~€0.05 per SMS</div>
+              <div className="text-xl font-bold text-[#2D2721]">EUR {(selectedRecipientsCount * 0.05).toFixed(2)}</div>
+              <div className="text-xs text-[#8B7355]">~EUR 0.05 per SMS</div>
             </div>
           )}
         </div>
@@ -398,3 +401,4 @@ export function MassMessaging({ userSegments }: MassMessagingProps) {
     </WarmCard>
   );
 }
+

@@ -139,7 +139,7 @@ export default function ReferralClient({
         </div>
 
         <div className="p-6 pt-5 space-y-5">
-          <div className="flex items-center justify-between py-2 px-3 rounded-lg bg-[#FFF9ED] border border-[#E7DCC7]">
+          <div className="flex items-center justify-between py-2 px-3 rounded-lg bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)]">
             <span className="font-mono text-base font-semibold tracking-wide text-[#2D2721]">
               {voucherCode}
             </span>
@@ -173,7 +173,7 @@ export default function ReferralClient({
                   value={orderAmount}
                   onChange={(e) => setOrderAmount(e.target.value)}
                   disabled={isRedeeming}
-                  className="mt-2 h-11 border-[#E7DCC7]"
+                  className="mt-2 h-11 border-[rgba(139,115,85,0.15)]"
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -208,13 +208,13 @@ export default function ReferralClient({
                   alt={`Redemption QR code for voucher ${voucherCode}`}
                   width={200}
                   height={200}
-                  className="rounded-lg border border-[#E7DCC7]"
+                  className="rounded-lg border border-[rgba(139,115,85,0.15)]"
                 />
               </>
             )}
           </div>
 
-          <div className="pt-4 border-t border-[#E7DCC7]">
+          <div className="pt-4 border-t border-[rgba(139,115,85,0.15)]">
             <p className="text-sm font-medium mb-3 text-center text-[#6B5744]">
               Share on social media
             </p>

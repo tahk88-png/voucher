@@ -1,8 +1,8 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Input } from '@app/components/ui/input';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   Calendar as CalendarIcon, 
   Search, 
@@ -66,9 +66,9 @@ const ASSETS = [
     category: 'Stabilisaatorid',
     status: 'overdue',
     returnDate: '25.01 12:00',
-    client: 'Filmimehed OÜ',
+    client: 'Filmimehed OÃœ',
     bookings: [
-      { start: 0, days: 5, client: 'Filmimehed OÜ', status: 'overdue' }
+      { start: 0, days: 5, client: 'Filmimehed OÃœ', status: 'overdue' }
     ] 
   },
 ];
@@ -179,7 +179,7 @@ function ListView({ assets }: { assets: typeof ASSETS }) {
                       </td>
                       <td className="p-4">
                          {asset.status === 'available' && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#E6F4EA] text-[#00D098]"><CheckCircle2 className="w-3 h-3" /> Vaba</span>}
-                         {asset.status === 'rented' && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#FFF9ED] text-[#FFC857]"><Clock className="w-3 h-3" /> Väljas</span>}
+                         {asset.status === 'rented' && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#FFF9ED] text-[#FFC857]"><Clock className="w-3 h-3" /> VÃ¤ljas</span>}
                          {asset.status === 'overdue' && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#FFEFEF] text-[#E17B5C]"><AlertCircle className="w-3 h-3" /> Hilinenud</span>}
                       </td>
                       <td className="p-4">
@@ -209,10 +209,10 @@ function ListView({ assets }: { assets: typeof ASSETS }) {
        </div>
        {/* Pagination mock */}
        <div className="p-4 border-t border-[#E7DCC7] flex justify-between items-center bg-[#FAF7F2]/30 mt-auto">
-          <div className="text-xs text-[#8B7355]">Näitan 1-4 kokku 142-st</div>
+          <div className="text-xs text-[#8B7355]">NÃ¤itan 1-4 kokku 142-st</div>
           <div className="flex gap-2">
              <button className="px-3 py-1 bg-white border border-[#E7DCC7] rounded text-xs font-bold text-[#2D2721] hover:bg-[#FAF7F2]">Eelmised</button>
-             <button className="px-3 py-1 bg-white border border-[#E7DCC7] rounded text-xs font-bold text-[#2D2721] hover:bg-[#FAF7F2]">Järgmised</button>
+             <button className="px-3 py-1 bg-white border border-[#E7DCC7] rounded text-xs font-bold text-[#2D2721] hover:bg-[#FAF7F2]">JÃ¤rgmised</button>
           </div>
        </div>
     </div>
@@ -273,7 +273,7 @@ export function RentalManage() {
                <span className="font-bold text-[#2D2721] w-32 text-center text-sm">Jaanuar 2026</span>
                <button className="p-1.5 hover:bg-white rounded shadow-sm transition-all text-[#8B7355] hover:text-[#2D2721]"><ChevronRight className="w-4 h-4" /></button>
             </div>
-            <button className="text-sm font-bold text-[#E17B5C] hover:text-[#C56041] underline decoration-dotted underline-offset-4">Täna</button>
+            <button className="text-sm font-bold text-[#E17B5C] hover:text-[#C56041] underline decoration-dotted underline-offset-4">TÃ¤na</button>
          </div>
          
          <div className="flex gap-3 w-full sm:w-auto">

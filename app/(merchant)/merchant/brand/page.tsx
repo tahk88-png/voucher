@@ -35,7 +35,7 @@ export default function BrandPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Settings Form */}
         <div className="space-y-6">
-          <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
             <div>
               <h2 className="text-base font-semibold text-[#2D2721]">Logo</h2>
               <p className="text-sm text-[#6B5744]">
@@ -44,7 +44,7 @@ export default function BrandPage() {
             </div>
             <div className="space-y-4 mt-4">
               {logoUrl && (
-                <div className="w-32 h-32 border border-[#E7DCC7] rounded-lg p-2 relative">
+                <div className="w-32 h-32 border border-[rgba(139,115,85,0.15)] rounded-lg p-2 relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logoUrl}
@@ -73,7 +73,7 @@ export default function BrandPage() {
             </div>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
             <div>
               <h2 className="text-base font-semibold text-[#2D2721]">Brand color</h2>
               <p className="text-sm text-[#6B5744]">
@@ -93,7 +93,7 @@ export default function BrandPage() {
                 <Input
                   value={brandColor}
                   onChange={(e) => setBrandColor(e.target.value)}
-                  className="flex-1 font-mono border-[#E7DCC7]"
+                  className="flex-1 font-mono border-[rgba(139,115,85,0.15)]"
                   aria-label="Brand color hex value"
                 />
               </div>
@@ -104,7 +104,7 @@ export default function BrandPage() {
         </div>
 
         {/* Preview */}
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <div>
             <h2 className="text-base font-semibold text-[#2D2721]">Preview</h2>
             <p className="text-sm text-[#6B5744]">See how your brand appears on vouchers.</p>

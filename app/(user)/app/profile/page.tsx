@@ -3,17 +3,21 @@ import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { User, Mail, Settings, Bell, LogOut } from 'lucide-react';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const t = await getTranslations('profile');
+  const tNav = await getTranslations('nav');
+
   return (
     <div className="p-4 sm:p-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-[#2D2721]">Profile</h1>
-        <p className="text-sm text-[#6B5744]">Manage your account settings.</p>
+        <h1 className="text-2xl font-semibold text-[#2D2721]">{t('title')}</h1>
+        <p className="text-sm text-[#6B5744]">{t('description')}</p>
       </div>
 
       <WarmCard padding="lg" className="bg-white">
-        <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Account information</h2>
+        <h2 className="text-lg font-semibold text-[#2D2721] mb-4">{t('accountInformation')}</h2>
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-[#FFF9ED] flex items-center justify-center">
             <User className="h-8 w-8 text-[#E17B5C]" />
@@ -26,13 +30,13 @@ export default function ProfilePage() {
       </WarmCard>
 
       <WarmCard padding="lg" className="bg-white">
-        <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Settings</h2>
+        <h2 className="text-lg font-semibold text-[#2D2721] mb-4">{tNav('settings')}</h2>
         <div className="space-y-2">
           <WarmButton asChild variant="ghost" className="w-full justify-start">
             <Link href="/app/notifications/settings">
               <span className="inline-flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                Email preferences
+                {t('emailPreferences')}
               </span>
             </Link>
           </WarmButton>
@@ -40,17 +44,17 @@ export default function ProfilePage() {
             <Link href="/app/notifications">
               <span className="inline-flex items-center gap-2">
                 <Bell className="h-4 w-4" />
-                Notifications
+                {tNav('notifications')}
               </span>
             </Link>
           </WarmButton>
           <WarmButton variant="ghost" className="w-full justify-start">
             <Settings className="h-4 w-4 mr-2" />
-            App settings
+            {t('appSettings')}
           </WarmButton>
           <WarmButton variant="ghost" className="w-full justify-start text-[#E17B5C]">
             <LogOut className="h-4 w-4 mr-2" />
-            Sign out
+            {tNav('logout')}
           </WarmButton>
         </div>
       </WarmCard>

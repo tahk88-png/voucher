@@ -44,8 +44,15 @@ export default function NewCampaignPage() {
       });
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || 'Failed to create campaign');
+        const error = await res.json().catch(() => ({}));
+        const message = error?.error || 'Failed to create campaign';
+        const upgradePath = error?.details?.upgradePath as string | undefined;
+        if (res.status === 402 && upgradePath) {
+          showError(`${message} Redirecting to billing...`);
+          router.push(upgradePath);
+          return;
+        }
+        throw new Error(message);
       }
 
       const campaign = await res.json();
@@ -97,7 +104,7 @@ export default function NewCampaignPage() {
                   name="type"
                   required
                   aria-label="Campaign type"
-                  className="w-full px-3 py-2 border rounded-md border-[#E7DCC7] bg-white"
+                  className="w-full px-3 py-2 border rounded-md border-[rgba(139,115,85,0.15)] bg-white"
                 >
                   <option value="limited">Limited</option>
                   <option value="weekly">Weekly</option>
@@ -192,7 +199,7 @@ export default function NewCampaignPage() {
                   id="terms"
                   name="terms"
                   rows={4}
-                  className="w-full px-3 py-2 border rounded-md border-[#E7DCC7] bg-white"
+                  className="w-full px-3 py-2 border rounded-md border-[rgba(139,115,85,0.15)] bg-white"
                   placeholder="Terms and conditions for this campaign..."
                 />
               </div>

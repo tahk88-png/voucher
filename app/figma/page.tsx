@@ -51,7 +51,7 @@ export default function FigmaIndexPage() {
   return (
       <div className="min-h-screen bg-[#FFFBF5]">
       {/* Header */}
-      <div className="bg-white border-b border-[#E7DCC7] px-6 py-6 animate-fade-in">
+      <div className="bg-white border-b border-[rgba(139,115,85,0.15)] px-6 py-6 animate-fade-in">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -83,7 +83,7 @@ export default function FigmaIndexPage() {
                 placeholder="Search routes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-[#E7DCC7] rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#FFC857]/50"
+                className="w-full pl-10 pr-4 py-2 border border-[rgba(139,115,85,0.15)] rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#FFC857]/50"
               />
             </div>
 
@@ -124,7 +124,7 @@ export default function FigmaIndexPage() {
             </div>
 
             {/* Device Preview */}
-            <div className="flex gap-2 border-l border-[#E7DCC7] pl-4">
+            <div className="flex gap-2 border-l border-[rgba(139,115,85,0.15)] pl-4">
               {[
                 { key: 'mobile', icon: Smartphone, label: 'Mobile' },
                 { key: 'tablet', icon: Tablet, label: 'Tablet' },

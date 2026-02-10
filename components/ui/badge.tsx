@@ -3,16 +3,19 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-[8px] px-2.5 py-0.5 text-xs font-medium transition-colors",
+  "inline-flex items-center rounded-[var(--r-sm)] px-2.5 py-0.5 text-xs font-medium transition-colors",
   {
     variants: {
       variant: {
-        default: "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721]",
-        secondary: "bg-[#FAF7F2] text-[#6B5744] border border-[rgba(139,115,85,0.15)]",
-        outline: "border-2 border-[rgba(139,115,85,0.15)] text-[#2D2721]",
-        success: "bg-[#9DB5A5] text-white",
-        warning: "bg-[#FFC857] text-[#2D2721]",
-        muted: "bg-[#F8F6F1] text-[#8B7355]",
+        default:   "gradient-brand text-[var(--primary-foreground)]",
+        primary:   "gradient-brand text-[var(--primary-foreground)]",
+        accent:    "bg-[var(--accent)] text-[var(--accent-foreground)] border border-[var(--border)]",
+        secondary: "bg-[var(--surface-muted)] text-[var(--text-muted)] border border-[var(--border)]",
+        success:   "bg-[var(--success)] text-white",
+        warning:   "bg-[var(--warning)] text-[var(--primary-foreground)]",
+        danger:    "bg-[var(--danger)] text-white",
+        outline:   "border-2 border-[var(--border)] text-[var(--text)] bg-transparent",
+        muted:     "bg-[var(--surface-dim)] text-[var(--text-faint)]",
       },
     },
     defaultVariants: {

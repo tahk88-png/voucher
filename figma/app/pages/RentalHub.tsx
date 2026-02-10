@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import { useState, useEffect } from 'react';
+import { useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
@@ -7,11 +7,11 @@ import { Input } from '@app/components/ui/input';
 import { Search, MapPin, Star, ArrowRight } from 'lucide-react';
 import { UnifiedData, Rental } from '@services/unifiedData';
 
-const CATEGORIES = ['Kõik', 'Foto & Video', 'Droonid', 'Valgustus', 'Heli', 'Arvutid', 'Mängukonsoolid', 'Tööriistad', 'Matkavarustus'];
+const CATEGORIES = ['KÃµik', 'Foto & Video', 'Droonid', 'Valgustus', 'Heli', 'Arvutid', 'MÃ¤ngukonsoolid', 'TÃ¶Ã¶riistad', 'Matkavarustus'];
 
 export function RentalHub() {
   const navigate = useNavigate();
-  const [activeCategory, setActiveCategory] = useState('Kõik');
+  const [activeCategory, setActiveCategory] = useState('KÃµik');
   const [searchQuery, setSearchQuery] = useState('');
   const [items, setItems] = useState<Rental[]>([]);
 
@@ -21,7 +21,7 @@ export function RentalHub() {
   }, []);
 
   const filteredItems = items.filter(item => {
-    const matchesCategory = activeCategory === 'Kõik' || item.category === activeCategory;
+    const matchesCategory = activeCategory === 'KÃµik' || item.category === activeCategory;
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           item.location.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
@@ -48,7 +48,7 @@ export function RentalHub() {
           <div className="max-w-2xl mx-auto bg-white rounded-2xl p-2 flex items-center shadow-xl">
             <Search className="h-5 w-5 text-[#8B7355] ml-4 flex-shrink-0" />
             <Input 
-              placeholder="Otsi kaamerat, objektiivi või muud..." 
+              placeholder="Otsi kaamerat, objektiivi vÃµi muud..." 
               className="border-0 focus-visible:ring-0 text-[#2D2721] placeholder:text-[#8B7355]/60 text-lg h-12"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -110,8 +110,8 @@ export function RentalHub() {
                   
                   <div className="mt-auto pt-4 border-t border-[#E7DCC7]/50 flex items-center justify-between">
                     <div>
-                      <span className="text-xl font-bold text-[#2D2721]">{item.pricePerDay}€</span>
-                      <span className="text-sm text-[#8B7355]"> / päev</span>
+                      <span className="text-xl font-bold text-[#2D2721]">{item.pricePerDay}â‚¬</span>
+                      <span className="text-sm text-[#8B7355]"> / pÃ¤ev</span>
                     </div>
                     <div className="w-8 h-8 rounded-full bg-[#FAF7F2] flex items-center justify-center group-hover:bg-[#E17B5C] group-hover:text-white transition-colors">
                       <ArrowRight className="w-4 h-4" />
@@ -126,3 +126,4 @@ export function RentalHub() {
     </div>
   );
 }
+

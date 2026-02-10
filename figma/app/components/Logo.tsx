@@ -1,6 +1,6 @@
 import { Gift } from 'lucide-react';
 import { cn } from '@/figma/app/components/ui/utils';
-import { Link } from 'react-router';
+import { Link } from '@/lib/router-shim';
 
 interface LogoProps {
   className?: string;
@@ -34,3 +34,4 @@ export function Logo({ className, variant = 'dark' }: LogoProps) {
     </Link>
   );
 }
+

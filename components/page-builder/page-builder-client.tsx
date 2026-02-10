@@ -234,14 +234,14 @@ export default function PageBuilderClient({
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-[#2D2721]">Page Builder</h1>
-        <p className="text-[#6B5744]">
+        <h1 className="text-3xl font-bold text-[var(--text)]">Page Builder</h1>
+        <p className="text-[var(--text-muted)]">
           Build fast storefront and rental pages with modular sections, add-ons, and AI help.
         </p>
       </div>
 
       <Tabs value={activeType} onValueChange={(value) => setActiveType(value as PageBuilderType)}>
-        <TabsList className="bg-white border border-[#E7DCC7]">
+        <TabsList className="bg-[var(--surface)] border border-[var(--border)]">
           <TabsTrigger value="store">Storefront</TabsTrigger>
           <TabsTrigger value="rental">Rental</TabsTrigger>
         </TabsList>
@@ -250,11 +250,11 @@ export default function PageBuilderClient({
           <TabsContent value={type} key={type}>
             <div className="grid gap-6 lg:grid-cols-[2fr,1fr]">
               <div className="space-y-6">
-                <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+                <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center justify-between gap-4 mb-4">
                     <div>
-                      <h2 className="text-lg font-semibold text-[#2D2721]">Page details</h2>
-                      <p className="text-sm text-[#6B5744]">Title, subtitle, and layout.</p>
+                      <h2 className="text-lg font-semibold text-[var(--text)]">Page details</h2>
+                      <p className="text-sm text-[var(--text-muted)]">Title, subtitle, and layout.</p>
                     </div>
                     <WarmButton onClick={handleSave} isLoading={isSaving}>
                       <Save className="h-4 w-4 mr-2" />
@@ -263,35 +263,35 @@ export default function PageBuilderClient({
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <label htmlFor="page-builder-title" className="text-sm font-medium text-[#2D2721]">
+                      <label htmlFor="page-builder-title" className="text-sm font-medium text-[var(--text)]">
                         Page title
                       </label>
                       <Input
                         id="page-builder-title"
                         value={activePage.title}
                         onChange={(event) => updatePage({ title: event.target.value })}
-                        className="border-[#E7DCC7]"
+                        className="border-[var(--border)]"
                       />
                     </div>
                     <div>
-                      <label htmlFor="page-builder-subtitle" className="text-sm font-medium text-[#2D2721]">
+                      <label htmlFor="page-builder-subtitle" className="text-sm font-medium text-[var(--text)]">
                         Subtitle
                       </label>
                       <Input
                         id="page-builder-subtitle"
                         value={activePage.subtitle || ""}
                         onChange={(event) => updatePage({ subtitle: event.target.value })}
-                        className="border-[#E7DCC7]"
+                        className="border-[var(--border)]"
                       />
                     </div>
                   </div>
                 </WarmCard>
 
-                <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+                <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center justify-between gap-4 mb-4">
                     <div>
-                      <h2 className="text-lg font-semibold text-[#2D2721]">Sections</h2>
-                      <p className="text-sm text-[#6B5744]">Toggle and reorder layout blocks.</p>
+                      <h2 className="text-lg font-semibold text-[var(--text)]">Sections</h2>
+                      <p className="text-sm text-[var(--text-muted)]">Toggle and reorder layout blocks.</p>
                     </div>
                     <WarmButton variant="outline" onClick={handleGenerate} isLoading={isGenerating}>
                       <Sparkles className="h-4 w-4 mr-2" />
@@ -299,7 +299,7 @@ export default function PageBuilderClient({
                     </WarmButton>
                   </div>
                   {vibeUsage && (
-                    <p className="text-xs text-[#8B7355] mb-4">
+                    <p className="text-xs text-[var(--text-faint)] mb-4">
                       Vibe uses left: {vibeUsage.remaining}/{vibeUsage.limit}
                     </p>
                   )}
@@ -312,8 +312,8 @@ export default function PageBuilderClient({
                           className="flex items-center justify-between gap-4 rounded-[14px] border border-[#F2EDE3] px-4 py-3"
                         >
                           <div>
-                            <div className="font-medium text-[#2D2721]">{section.label}</div>
-                            <div className="text-xs text-[#8B7355]">{section.description}</div>
+                            <div className="font-medium text-[var(--text)]">{section.label}</div>
+                            <div className="text-xs text-[var(--text-faint)]">{section.description}</div>
                           </div>
                           <div className="flex items-center gap-2">
                             <button
@@ -321,8 +321,8 @@ export default function PageBuilderClient({
                               onClick={() => toggleSection(section.id)}
                               className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
                                 enabled
-                                  ? "bg-[#FFC857] text-[#2D2721]"
-                                  : "bg-[#F8F6F1] text-[#6B5744]"
+                                  ? "bg-[var(--primary)] text-[var(--text)]"
+                                  : "bg-[var(--surface-dim)] text-[var(--text-muted)]"
                               }`}
                               aria-pressed={enabled}
                               aria-label={`${enabled ? "Disable" : "Enable"} section ${section.label}`}
@@ -336,20 +336,20 @@ export default function PageBuilderClient({
                                   onClick={() =>
                                     moveSection(activePage.sections.indexOf(section.id), "up")
                                   }
-                                  className="h-8 w-8 rounded-full border border-[#E7DCC7] flex items-center justify-center"
+                                  className="h-8 w-8 rounded-full border border-[var(--border)] flex items-center justify-center"
                                   aria-label={`Move ${section.label} section up`}
                                 >
-                                  <ArrowUp className="h-4 w-4 text-[#6B5744]" />
+                                  <ArrowUp className="h-4 w-4 text-[var(--text-muted)]" />
                                 </button>
                                 <button
                                   type="button"
                                   onClick={() =>
                                     moveSection(activePage.sections.indexOf(section.id), "down")
                                   }
-                                  className="h-8 w-8 rounded-full border border-[#E7DCC7] flex items-center justify-center"
+                                  className="h-8 w-8 rounded-full border border-[var(--border)] flex items-center justify-center"
                                   aria-label={`Move ${section.label} section down`}
                                 >
-                                  <ArrowDown className="h-4 w-4 text-[#6B5744]" />
+                                  <ArrowDown className="h-4 w-4 text-[var(--text-muted)]" />
                                 </button>
                               </div>
                             )}
@@ -360,9 +360,9 @@ export default function PageBuilderClient({
                   </div>
                 </WarmCard>
 
-                <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
-                  <h2 className="text-lg font-semibold text-[#2D2721] mb-2">Add-ons</h2>
-                  <p className="text-sm text-[#6B5744] mb-4">Extra widgets and marketing layers.</p>
+                <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
+                  <h2 className="text-lg font-semibold text-[var(--text)] mb-2">Add-ons</h2>
+                  <p className="text-sm text-[var(--text-muted)] mb-4">Extra widgets and marketing layers.</p>
                   <div className="grid gap-3 sm:grid-cols-2">
                     {PAGE_ADDON_CATALOG.map((addon) => {
                       const enabled = activePage.addons.includes(addon.id)
@@ -373,14 +373,14 @@ export default function PageBuilderClient({
                           onClick={() => toggleAddon(addon.id)}
                           className={`text-left rounded-[14px] border px-4 py-3 transition-all ${
                             enabled
-                              ? "border-[#FFC857] bg-[#FFF9ED]"
-                              : "border-[#F2EDE3] bg-white hover:border-[#FFC857]"
+                              ? "border-[var(--primary)] bg-[var(--bg-2)]"
+                              : "border-[#F2EDE3] bg-[var(--surface)] hover:border-[var(--primary)]"
                           }`}
                           aria-pressed={enabled}
                           aria-label={`${enabled ? "Disable" : "Enable"} add-on ${addon.label}`}
                         >
-                          <div className="font-medium text-[#2D2721]">{addon.label}</div>
-                          <div className="text-xs text-[#8B7355] mt-1">{addon.description}</div>
+                          <div className="font-medium text-[var(--text)]">{addon.label}</div>
+                          <div className="text-xs text-[var(--text-faint)] mt-1">{addon.description}</div>
                         </button>
                       )
                     })}
@@ -389,39 +389,39 @@ export default function PageBuilderClient({
               </div>
 
               <div className="space-y-6">
-                <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
-                  <h3 className="text-base font-semibold text-[#2D2721] mb-2">Live summary</h3>
-                  <p className="text-sm text-[#6B5744] mb-4">
+                <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
+                  <h3 className="text-base font-semibold text-[var(--text)] mb-2">Live summary</h3>
+                  <p className="text-sm text-[var(--text-muted)] mb-4">
                     {activePage.title} - {activePage.sections.length} sections - {activePage.addons.length} add-ons
                   </p>
-                  <div className="space-y-2 text-xs text-[#8B7355]">
+                  <div className="space-y-2 text-xs text-[var(--text-faint)]">
                     <div>
-                      <span className="font-semibold text-[#2D2721]">Sections:</span>{" "}
+                      <span className="font-semibold text-[var(--text)]">Sections:</span>{" "}
                       {activePage.sections.join(", ")}
                     </div>
                     <div>
-                      <span className="font-semibold text-[#2D2721]">Add-ons:</span>{" "}
+                      <span className="font-semibold text-[var(--text)]">Add-ons:</span>{" "}
                       {activePage.addons.length ? activePage.addons.join(", ") : "None"}
                     </div>
                   </div>
                 </WarmCard>
 
-                <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+                <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center gap-2 mb-3">
-                    <Bot className="h-4 w-4 text-[#E17B5C]" />
-                  <h3 className="text-base font-semibold text-[#2D2721]">GPT process agent</h3>
+                    <Bot className="h-4 w-4 text-[var(--danger)]" />
+                  <h3 className="text-base font-semibold text-[var(--text)]">GPT process agent</h3>
                 </div>
-                <p className="text-sm text-[#6B5744] mb-4">
+                <p className="text-sm text-[var(--text-muted)] mb-4">
                   Generate action plans and operational checklists.
                 </p>
-                <label htmlFor="page-builder-agent-goal" className="text-sm font-medium text-[#2D2721]">
+                <label htmlFor="page-builder-agent-goal" className="text-sm font-medium text-[var(--text)]">
                   Process goal
                 </label>
                 <select
                   id="page-builder-agent-goal"
                   value={agentGoal}
                   onChange={(event) => setAgentGoal(event.target.value)}
-                  className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 text-sm text-[#2D2721]"
+                  className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)]"
                   >
                     {processOptions.map((option) => (
                       <option key={option.id} value={option.id}>
@@ -438,25 +438,25 @@ export default function PageBuilderClient({
                     Run agent
                   </WarmButton>
                   {agentUsage && (
-                    <p className="text-xs text-[#8B7355] mt-2">
+                    <p className="text-xs text-[var(--text-faint)] mt-2">
                       Agent uses left: {agentUsage.remaining}/{agentUsage.limit}
                     </p>
                   )}
                 </WarmCard>
 
                 {agentResult && (
-                  <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
-                    <h3 className="text-base font-semibold text-[#2D2721] mb-2">
+                  <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
+                    <h3 className="text-base font-semibold text-[var(--text)] mb-2">
                       {agentResult.title}
                     </h3>
-                    <div className="space-y-3 text-sm text-[#6B5744]">
+                    <div className="space-y-3 text-sm text-[var(--text-muted)]">
                       {agentResult.steps.map((step, index) => (
                         <div key={`${step.task}-${index}`}>
-                          <div className="font-semibold text-[#2D2721]">
+                          <div className="font-semibold text-[var(--text)]">
                             {index + 1}. {step.task}
                           </div>
                           {step.outcome ? (
-                            <div className="text-xs text-[#8B7355]">{step.outcome}</div>
+                            <div className="text-xs text-[var(--text-faint)]">{step.outcome}</div>
                           ) : null}
                         </div>
                       ))}

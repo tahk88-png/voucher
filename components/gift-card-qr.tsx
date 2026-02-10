@@ -32,11 +32,11 @@ export default function GiftCardQr({ qrText }: { qrText: string }) {
   }, [qrText]);
 
   if (error) {
-    return <p className="text-sm text-[#E17B5C]">{error}</p>;
+    return <p className="text-sm text-[var(--danger)]">{error}</p>;
   }
 
   if (!dataUrl) {
-    return <p className="text-sm text-[#6B5744]">Generating QR...</p>;
+    return <p className="text-sm text-[var(--text-muted)]">Generating QR...</p>;
   }
 
   return <img src={dataUrl} alt="QR code" className="h-40 w-40" />;

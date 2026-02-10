@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import { useState, useEffect } from 'react';
+import { useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
@@ -42,7 +42,7 @@ export function Cart() {
   // Load merchant settings
   const merchantSettings = UnifiedData.getMerchantSettings();
   const deliveryOptions = merchantSettings?.deliveryOptions || {
-      pickupAllowed: true, pickupPrice: 0, pickupLocation: 'Tallinn, Pärnu mnt 123',
+      pickupAllowed: true, pickupPrice: 0, pickupLocation: 'Tallinn, PÃ¤rnu mnt 123',
       courierAllowed: true, courierPrice: 5.90,
       smartpostAllowed: true, smartpostPrice: 2.90,
       omnivaAllowed: true, omnivaPrice: 2.50
@@ -82,7 +82,7 @@ export function Cart() {
   // Calculate dynamic shipping cost
   const getShippingCost = () => {
      if (!hasProducts) return 0; // Rentals usually picked up or specific logic
-     // If free shipping threshold met (assuming 50€ default)
+     // If free shipping threshold met (assuming 50â‚¬ default)
      if (remainingForFreeShipping <= 0 && deliveryMethod !== 'courier') return 0;
      
      switch (deliveryMethod) {
@@ -104,7 +104,7 @@ export function Cart() {
 
   const validateForm = () => {
     if (!customerDetails.firstName || !customerDetails.lastName || !customerDetails.email || !customerDetails.phone) {
-      toast.error("Palun täida kõik kohustuslikud väljad kontaktandmetes.");
+      toast.error("Palun tÃ¤ida kÃµik kohustuslikud vÃ¤ljad kontaktandmetes.");
       return false;
     }
     if (hasProducts && deliveryMethod !== 'pickup' && !customerDetails.address) {
@@ -130,7 +130,7 @@ export function Cart() {
       <div className="min-h-screen bg-[#FAF7F2]">
         <div className="flex items-center justify-center p-4 h-[calc(100vh-64px)]">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-[#2D2721] mb-2">Sinu ostukorv on tühi</h2>
+            <h2 className="text-2xl font-bold text-[#2D2721] mb-2">Sinu ostukorv on tÃ¼hi</h2>
             <p className="text-[#6B5744] mb-6">Vaata meie uusimaid tooteid ja leia midagi ilusat.</p>
             <WarmButton onClick={() => navigate('/shop')}>Tagasi poodi</WarmButton>
           </div>
@@ -146,7 +146,7 @@ export function Cart() {
       <div className="bg-white border-b border-[#E7DCC7] sticky top-16 z-20">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
            <button onClick={() => navigate('/shop')} className="text-sm text-[#6B5744] hover:text-[#2D2721] flex items-center gap-2">
-             <ArrowLeft className="w-4 h-4" /> Jätka ostlemist
+             <ArrowLeft className="w-4 h-4" /> JÃ¤tka ostlemist
            </button>
            <h1 className="font-bold text-[#2D2721]">Ostukorv ({cartCount})</h1>
            <div className="w-20" /> {/* Spacer for centering */}
@@ -164,11 +164,11 @@ export function Cart() {
               <WarmCard padding="md" className="bg-white">
                  {remainingForFreeShipping > 0 ? (
                    <div className="mb-2 text-sm text-[#6B5744]">
-                     Osta veel <span className="font-bold text-[#2D2721]">{remainingForFreeShipping.toFixed(2)}€</span> eest, et saada <span className="text-[#E17B5C] font-bold">tasuta tarne</span> (v.a. kuller)
+                     Osta veel <span className="font-bold text-[#2D2721]">{remainingForFreeShipping.toFixed(2)}â‚¬</span> eest, et saada <span className="text-[#E17B5C] font-bold">tasuta tarne</span> (v.a. kuller)
                    </div>
                  ) : (
                    <div className="mb-2 text-sm font-bold text-[#9DB5A5] flex items-center gap-2">
-                     <Truck className="w-4 h-4" /> Palju õnne! Sul on tasuta tarne pakiautomaati.
+                     <Truck className="w-4 h-4" /> Palju Ãµnne! Sul on tasuta tarne pakiautomaati.
                    </div>
                  )}
                  <div className="h-2 bg-[#FAF7F2] rounded-full overflow-hidden">
@@ -199,7 +199,7 @@ export function Cart() {
                         <p className="text-xs md:text-sm text-[#6B5744]">{item.variant}</p>
                         {item.rentalPeriod && (
                             <div className="text-xs text-[#E17B5C] mt-1 font-medium bg-[#FFF9ED] px-2 py-1 rounded inline-block">
-                                {item.rentalPeriod.days} päeva ({new Date(item.rentalPeriod.start).toLocaleDateString('et-EE')} - {new Date(item.rentalPeriod.end).toLocaleDateString('et-EE')})
+                                {item.rentalPeriod.days} pÃ¤eva ({new Date(item.rentalPeriod.start).toLocaleDateString('et-EE')} - {new Date(item.rentalPeriod.end).toLocaleDateString('et-EE')})
                             </div>
                         )}
                       </div>
@@ -266,7 +266,7 @@ export function Cart() {
                                 onChange={() => setIsBusinessClient(true)}
                                 className="text-[#E17B5C] focus:ring-[#E17B5C]" 
                             />
-                            <span className="text-sm font-medium text-[#2D2721]">Ettevõte</span>
+                            <span className="text-sm font-medium text-[#2D2721]">EttevÃµte</span>
                         </label>
                     </div>
 
@@ -329,7 +329,7 @@ export function Cart() {
                     {isBusinessClient && (
                         <div className="animate-in fade-in slide-in-from-top-2 duration-300 grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                              <div className="space-y-1.5">
-                                <label className="text-xs font-bold text-[#6B5744]">Ettevõtte nimi *</label>
+                                <label className="text-xs font-bold text-[#6B5744]">EttevÃµtte nimi *</label>
                                 <div className="relative">
                                     <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B7355]" />
                                     <Input 
@@ -337,7 +337,7 @@ export function Cart() {
                                         value={customerDetails.company} 
                                         onChange={handleInputChange} 
                                         className="pl-9 bg-[#FAF7F2] border-[#E7DCC7]" 
-                                        placeholder="Minu Firma OÜ" 
+                                        placeholder="Minu Firma OÃœ" 
                                     />
                                 </div>
                             </div>
@@ -372,14 +372,14 @@ export function Cart() {
                             className={`p-4 rounded-xl border-2 cursor-pointer transition-all flex flex-col gap-2 ${deliveryMethod === 'pickup' ? 'border-[#E17B5C] bg-[#FFF9ED]' : 'border-[#FAF7F2] hover:border-[#E7DCC7]'}`}
                         >
                             <div className="flex justify-between items-start">
-                                <span className="font-bold text-[#2D2721]">Tulen ise järele</span>
+                                <span className="font-bold text-[#2D2721]">Tulen ise jÃ¤rele</span>
                                 {deliveryMethod === 'pickup' && <div className="w-4 h-4 rounded-full bg-[#E17B5C] border-[3px] border-white ring-1 ring-[#E17B5C]"></div>}
                             </div>
                             <span className="text-xs text-[#6B5744] truncate" title={deliveryOptions.pickupLocation}>
-                                {deliveryOptions.pickupLocation || 'Asukoht määrata'}
+                                {deliveryOptions.pickupLocation || 'Asukoht mÃ¤Ã¤rata'}
                             </span>
                             <span className="text-sm font-bold text-[#2D2721]">
-                                {deliveryOptions.pickupPrice === 0 ? 'Tasuta' : `${deliveryOptions.pickupPrice.toFixed(2)}€`}
+                                {deliveryOptions.pickupPrice === 0 ? 'Tasuta' : `${deliveryOptions.pickupPrice.toFixed(2)}â‚¬`}
                             </span>
                         </div>
                     )}
@@ -395,7 +395,7 @@ export function Cart() {
                             </div>
                             <span className="text-xs text-[#6B5744]">Pakiautomaat</span>
                             <span className="text-sm font-bold text-[#2D2721]">
-                                {deliveryOptions.smartpostPrice === 0 ? 'Tasuta' : `${deliveryOptions.smartpostPrice.toFixed(2)}€`}
+                                {deliveryOptions.smartpostPrice === 0 ? 'Tasuta' : `${deliveryOptions.smartpostPrice.toFixed(2)}â‚¬`}
                             </span>
                         </div>
                     )}
@@ -411,7 +411,7 @@ export function Cart() {
                             </div>
                             <span className="text-xs text-[#6B5744]">Pakiautomaat</span>
                             <span className="text-sm font-bold text-[#2D2721]">
-                                {deliveryOptions.omnivaPrice === 0 ? 'Tasuta' : `${deliveryOptions.omnivaPrice.toFixed(2)}€`}
+                                {deliveryOptions.omnivaPrice === 0 ? 'Tasuta' : `${deliveryOptions.omnivaPrice.toFixed(2)}â‚¬`}
                             </span>
                         </div>
                     )}
@@ -425,9 +425,9 @@ export function Cart() {
                                 <span className="font-bold text-[#2D2721]">Kuller</span>
                                 {deliveryMethod === 'courier' && <div className="w-4 h-4 rounded-full bg-[#E17B5C] border-[3px] border-white ring-1 ring-[#E17B5C]"></div>}
                             </div>
-                            <span className="text-xs text-[#6B5744]">Koju või kontorisse</span>
+                            <span className="text-xs text-[#6B5744]">Koju vÃµi kontorisse</span>
                             <span className="text-sm font-bold text-[#2D2721]">
-                                {deliveryOptions.courierPrice === 0 ? 'Tasuta' : `${deliveryOptions.courierPrice.toFixed(2)}€`}
+                                {deliveryOptions.courierPrice === 0 ? 'Tasuta' : `${deliveryOptions.courierPrice.toFixed(2)}â‚¬`}
                             </span>
                         </div>
                     )}
@@ -445,7 +445,7 @@ export function Cart() {
                                     value={customerDetails.address} 
                                     onChange={handleInputChange} 
                                     className="pl-9 bg-[#FAF7F2] border-[#E7DCC7]" 
-                                    placeholder="Tänav, maja, korter" 
+                                    placeholder="TÃ¤nav, maja, korter" 
                                 />
                             </div>
                         </div>
@@ -498,7 +498,7 @@ export function Cart() {
           {/* Right Column: Summary & Checkout */}
           <div className="lg:col-span-1">
             <WarmCard padding="lg" className="bg-white sticky top-24">
-              <h2 className="font-bold text-lg text-[#2D2721] mb-6">Tellimuse kokkuvõte</h2>
+              <h2 className="font-bold text-lg text-[#2D2721] mb-6">Tellimuse kokkuvÃµte</h2>
               
               <div className="space-y-3 mb-6 text-sm">
                 <div className="flex justify-between text-[#6B5744]">
@@ -507,7 +507,7 @@ export function Cart() {
                 </div>
                 <div className="flex justify-between text-[#6B5744]">
                   <span>Tarne ({
-                    deliveryMethod === 'pickup' ? 'Ise järele' : 
+                    deliveryMethod === 'pickup' ? 'Ise jÃ¤rele' : 
                     deliveryMethod === 'courier' ? 'Kuller' : 
                     deliveryMethod === 'smartpost' ? 'Smartpost' : 'Omniva'
                   })</span>
@@ -563,3 +563,4 @@ export function Cart() {
     </div>
   );
 }
+

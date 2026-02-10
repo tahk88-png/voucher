@@ -1,25 +1,25 @@
 import * as React from "react"
 import { redirect } from "next/navigation"
-import { auth } from "@/lib/auth"
-import { prisma } from "@/lib/prisma"
 import { MerchantSidebar } from "@/components/merchant-sidebar"
+import { AccessControlError, requireAuthenticatedProfile } from "@/lib/access-control"
 
 export default async function MerchantLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const session = await auth()
-  if (!session?.user?.id) {
-    redirect("/login?callbackUrl=/merchant")
+  let profile
+  try {
+    profile = await requireAuthenticatedProfile()
+  } catch (error) {
+    if (error instanceof AccessControlError && error.status === 401) {
+      redirect("/login?callbackUrl=/merchant")
+    }
+    redirect("/login")
   }
 
-  const member = await prisma.merchantMember.findFirst({
-    where: { userId: session.user.id },
-    select: { id: true },
-  })
-
-  if (!member) {
+  const hasTenantAccess = profile.roles.includes("tenant_owner") || profile.roles.includes("tenant_staff")
+  if (!hasTenantAccess) {
     redirect("/app")
   }
 

@@ -89,14 +89,14 @@ export default function CreditsClient({
         />
       </div>
 
-      <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
         <h2 className="text-base font-semibold text-[#2D2721]">Recent revenue</h2>
         <div className="space-y-4 mt-4">
           {revenueHistory.length > 0 ? (
             revenueHistory.map((entry) => (
               <div
                 key={entry.id}
-                className="flex items-center justify-between p-4 border border-[#E7DCC7] rounded-lg"
+                className="flex items-center justify-between p-4 border border-[rgba(139,115,85,0.15)] rounded-lg"
               >
                 <div>
                   <p className="font-medium text-[#2D2721]">{formatMoney(entry.amount)}</p>
@@ -120,14 +120,14 @@ export default function CreditsClient({
         </div>
       </WarmCard>
 
-      <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
         <h2 className="text-base font-semibold text-[#2D2721]">Payout requests</h2>
         <div className="space-y-4 mt-4">
           {payoutRequests.length > 0 ? (
             payoutRequests.map((payout) => (
               <div
                 key={payout.id}
-                className="flex items-center justify-between p-4 border border-[#E7DCC7] rounded-lg"
+                className="flex items-center justify-between p-4 border border-[rgba(139,115,85,0.15)] rounded-lg"
               >
                 <div>
                   <p className="font-medium text-[#2D2721]">{formatMoney(payout.amount)}</p>
@@ -152,7 +152,7 @@ export default function CreditsClient({
         </div>
       </WarmCard>
 
-      <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
         <h2 className="text-base font-semibold text-[#2D2721]">Request payout</h2>
         <p className="text-sm text-[#6B5744] mb-4 mt-2">Minimum payout amount: {formatMoney(10000)}</p>
         <WarmButton disabled={!canRequest} onClick={requestPayout}>

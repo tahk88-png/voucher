@@ -1,13 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
-import { MessageCircle, X, Send, MinusCircle } from 'lucide-react';
+﻿import { useState, useEffect, useRef } from 'react';
+import { MessageCircle, X, Send } from 'lucide-react';
 import { useAdminSettings } from '@app/contexts/AdminSettings';
-import { WarmButton } from '@app/components/WarmButton';
+
 
 export function ChatWidget() {
   const { chatEnabled } = useAdminSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{role: 'user' | 'bot', text: string}[]>([
-    { role: 'bot', text: 'Tere! Kuidas saame sind täna aidata?' }
+    { role: 'bot', text: 'Tere! Kuidas saame sind tana aidata?' }
   ]);
   const [inputText, setInputText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -30,11 +30,11 @@ export function ChatWidget() {
 
     // Simulate bot response
     setTimeout(() => {
-      let response = "Aitäh kirjutamast! Meie klienditugi vastab esimesel võimalusel.";
+      let response = 'Aitah kirjutamast! Meie klienditugi vastab esimesel voimalusel.';
       if (userText.toLowerCase().includes('hind') || userText.toLowerCase().includes('maksab')) {
-        response = "Hinnad sõltuvad valitud paketist ja perioodist. Vaata täpsemalt toote lehelt.";
+        response = 'Hinnad soltuvad valitud paketist ja perioodist. Vaata tapsemalt tootelehelt.';
       } else if (userText.toLowerCase().includes('tarne')) {
-        response = "Pakume Smartposti, Omniva ja kullerteenust. Tarne on tasuta ostudel üle 50€.";
+        response = 'Pakume Smartposti, Omniva ja kullerteenust. Tarne on tasuta ostudel ule 50 EUR.';
       }
       setMessages(prev => [...prev, { role: 'bot', text: response }]);
     }, 1000);
@@ -110,7 +110,7 @@ export function ChatWidget() {
         >
           <MessageCircle className="w-6 h-6" />
           <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap font-bold">
-            Küsi abi
+            Kusi abi
           </span>
           <div className="absolute top-0 right-0 w-3 h-3 bg-[#E17B5C] rounded-full animate-pulse border-2 border-[#FAF7F2]"></div>
         </button>

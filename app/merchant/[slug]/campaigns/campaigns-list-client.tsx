@@ -100,7 +100,7 @@ export default function CampaignsListClient({
               placeholder="Search campaigns..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 border-[#E7DCC7] bg-white"
+              className="pl-10 border-[rgba(139,115,85,0.15)] bg-white"
               aria-label="Search campaigns"
             />
           </div>
@@ -145,7 +145,7 @@ export default function CampaignsListClient({
             const endLabel = new Date(campaign.endDate).toLocaleDateString(undefined, { dateStyle: 'medium' });
 
             return (
-              <WarmCard key={campaign.id} padding="lg" className="bg-white border border-[#E7DCC7]">
+              <WarmCard key={campaign.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 flex-wrap">

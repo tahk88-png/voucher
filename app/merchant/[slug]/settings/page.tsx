@@ -67,7 +67,7 @@ export default async function SettingsPage({ params }: { params: { slug: string 
         />
         <h1 className="text-2xl font-semibold text-[#2D2721] mb-6">{t('settings')}</h1>
 
-        <WarmCard padding="lg" className="mb-4 bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="mb-4 bg-white border border-[rgba(139,115,85,0.15)]">
           <div>
             <h2 className="text-base font-semibold text-[#2D2721]">Merchant information</h2>
             <p className="text-sm text-[#6B5744]">Basic merchant details</p>
@@ -127,7 +127,7 @@ export default async function SettingsPage({ params }: { params: { slug: string 
           )}
         </WarmCard>
 
-        <WarmCard padding="lg" className="mb-4 bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="mb-4 bg-white border border-[rgba(139,115,85,0.15)]">
           <div>
             <h2 className="text-base font-semibold text-[#2D2721]">Billing</h2>
             <p className="text-sm text-[#6B5744]">

@@ -136,7 +136,7 @@ export default async function PublicEventPage({ params }: { params: { id: string
           </div>
 
           {event.terms && (
-            <div className="pt-4 mt-6 border-t border-[#E7DCC7]">
+            <div className="pt-4 mt-6 border-t border-[rgba(139,115,85,0.15)]">
               <p className="text-sm font-semibold text-[#2D2721] mb-2">Terms & Conditions</p>
               <p className="text-sm text-[#6B5744] whitespace-pre-wrap">{event.terms}</p>
             </div>

@@ -32,7 +32,7 @@ const enableTestCredentials =
 
 // Log warning if test credentials are enabled (never in production)
 if (enableTestCredentials && isExplicitlyDevelopment) {
-  console.warn('⚠️  WARNING: Test credentials are ENABLED. This is only safe in development.');
+  console.warn('[Warning] Test credentials are ENABLED. This is only safe in development.');
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({

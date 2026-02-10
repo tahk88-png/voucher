@@ -67,7 +67,7 @@ export default function MerchantSidebar({ slug }: MerchantSidebarProps) {
   const t = useTranslations('nav');
 
   return (
-    <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:border-r border-[#E7DCC7] lg:bg-[#FAF7F2]/30">
+    <aside className="hidden lg:flex lg:flex-col lg:w-64 lg:border-r border-[var(--border)] lg:bg-[var(--surface-muted)]/30">
       <nav className="flex-1 space-y-1 p-4">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -81,8 +81,8 @@ export default function MerchantSidebar({ slug }: MerchantSidebarProps) {
               className={cn(
                 'flex items-center gap-3 rounded-[12px] px-3 py-2 text-sm font-medium transition-colors',
                 isActive
-                  ? 'bg-gradient-to-r from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm'
-                  : 'text-[#6B5744] hover:bg-[#FAF7F2] hover:text-[#2D2721]'
+                  ? 'gradient-brand text-[var(--text)] shadow-warm'
+                  : 'text-[var(--text-muted)] hover:bg-[var(--surface-muted)] hover:text-[var(--text)]'
               )}
             >
               <span className="flex items-center gap-3">

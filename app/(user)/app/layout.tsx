@@ -1,21 +1,27 @@
 import * as React from "react"
 import { redirect } from "next/navigation"
-import { auth } from "@/lib/auth"
+import { getTranslations } from "next-intl/server"
 import { prisma } from "@/lib/prisma"
 import UserShell from "@/components/navigation/user-shell"
+import { AccessControlError, requireAuthenticatedProfile } from "@/lib/access-control"
 
 export default async function UserAppLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const session = await auth()
-  if (!session?.user?.id) {
+  let profile
+  try {
+    profile = await requireAuthenticatedProfile()
+  } catch (error) {
+    if (error instanceof AccessControlError && error.status === 401) {
+      redirect("/login")
+    }
     redirect("/login")
   }
 
   const user = await prisma.user.findUnique({
-    where: { id: session.user.id },
+    where: { id: profile.userId },
   })
 
   const now = new Date()
@@ -27,15 +33,17 @@ export default async function UserAppLayout({
   ])
 
   const engagement = activeUsers ? Math.min(99, Math.max(10, Math.round((redemptions / activeUsers) * 100))) : 75
+  const tNav = await getTranslations("nav")
+  const tAnalytics = await getTranslations("analytics")
 
   return (
     <UserShell
-      userLabel={user?.name || user?.email || "User"}
+      userLabel={user?.name || user?.email || tNav("user")}
       stats={[
-        { label: "Active Users", value: activeUsers.toString() },
-        { label: "Campaigns", value: campaigns.toString() },
-        { label: "Vouchers", value: vouchers.toString() },
-        { label: "Engagement", value: `${engagement}%` },
+        { label: tAnalytics("activeUsers"), value: activeUsers.toString() },
+        { label: tNav("campaigns"), value: campaigns.toString() },
+        { label: tNav("vouchers"), value: vouchers.toString() },
+        { label: tAnalytics("engagement"), value: `${engagement}%` },
       ]}
     >
       {children}

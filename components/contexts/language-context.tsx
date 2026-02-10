@@ -1,48 +1,20 @@
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
+import { useLocale } from "next-intl"
+import {
+  defaultLocale,
+  isSupportedLocale,
+  languageCookieName,
+  languageOptions,
+  languageStorageKey,
+  localeCookieName,
+  type LanguageOption,
+  type SupportedLocale,
+} from "@/lib/locale-config"
 
-export type Language =
-  | "et"
-  | "ru"
-  | "en"
-  | "lv"
-  | "lt"
-  | "fi"
-  | "sv"
-  | "no"
-  | "da"
-  | "pl"
-  | "de"
-  | "nl"
-  | "fr"
-  | "cs"
-  | "sk"
-
-export interface LanguageOption {
-  code: Language
-  name: string
-  nativeName: string
-  flag: string
-}
-
-export const languages: LanguageOption[] = [
-  { code: "et", name: "Estonian", nativeName: "Eesti", flag: "🇪🇪" },
-  { code: "en", name: "English", nativeName: "English", flag: "🇬🇧" },
-  { code: "ru", name: "Russian", nativeName: "Русский", flag: "🇷🇺" },
-  { code: "lv", name: "Latvian", nativeName: "Latviešu", flag: "🇱🇻" },
-  { code: "lt", name: "Lithuanian", nativeName: "Lietuvių", flag: "🇱🇹" },
-  { code: "fi", name: "Finnish", nativeName: "Suomi", flag: "🇫🇮" },
-  { code: "sv", name: "Swedish", nativeName: "Svenska", flag: "🇸🇪" },
-  { code: "no", name: "Norwegian", nativeName: "Norsk", flag: "🇳🇴" },
-  { code: "da", name: "Danish", nativeName: "Dansk", flag: "🇩🇰" },
-  { code: "pl", name: "Polish", nativeName: "Polski", flag: "🇵🇱" },
-  { code: "de", name: "German", nativeName: "Deutsch", flag: "🇩🇪" },
-  { code: "nl", name: "Dutch", nativeName: "Nederlands", flag: "🇳🇱" },
-  { code: "fr", name: "French", nativeName: "Français", flag: "🇫🇷" },
-  { code: "cs", name: "Czech", nativeName: "Čeština", flag: "🇨🇿" },
-  { code: "sk", name: "Slovak", nativeName: "Slovenčina", flag: "🇸🇰" },
-]
+export type Language = SupportedLocale
+export const languages: LanguageOption[] = languageOptions
 
 interface LanguageContextType {
   language: Language
@@ -52,22 +24,92 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
+const ONE_YEAR_IN_SECONDS = 60 * 60 * 24 * 365
+
+function getCookieValue(name: string): string | null {
+  if (typeof document === "undefined") {
+    return null
+  }
+
+  const match = document.cookie
+    .split(";")
+    .map((entry) => entry.trim())
+    .find((entry) => entry.startsWith(`${name}=`))
+
+  return match ? decodeURIComponent(match.split("=")[1]) : null
+}
+
+function normalizeStoredLanguage(value: unknown): Language | null {
+  if (typeof value !== "string") {
+    return null
+  }
+
+  const normalized = value.trim().toLowerCase()
+  return isSupportedLocale(normalized) ? normalized : null
+}
+
+function parseStoredLanguage(value: string | null): Language | null {
+  if (!value) {
+    return null
+  }
+
+  try {
+    return normalizeStoredLanguage(JSON.parse(value))
+  } catch {
+    return normalizeStoredLanguage(value)
+  }
+}
+
+function persistLanguage(language: Language) {
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(languageStorageKey, language)
+  }
+
+  if (typeof document !== "undefined") {
+    const cookieAttributes = `path=/; max-age=${ONE_YEAR_IN_SECONDS}; samesite=lax`
+    document.cookie = `${localeCookieName}=${encodeURIComponent(language)}; ${cookieAttributes}`
+    document.cookie = `${languageCookieName}=${encodeURIComponent(language)}; ${cookieAttributes}`
+  }
+}
+
+function readStoredLanguage(): Language | null {
+  if (typeof window === "undefined") {
+    return null
+  }
+
+  const storageLanguage = parseStoredLanguage(window.localStorage.getItem(languageStorageKey))
+  if (storageLanguage) {
+    return storageLanguage
+  }
+
+  const cookieLanguage = parseStoredLanguage(getCookieValue(localeCookieName) ?? getCookieValue(languageCookieName))
+  if (cookieLanguage) {
+    return cookieLanguage
+  }
+
+  return null
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("et")
+  const currentLocale = useLocale()
+  const localeFromProvider: Language =
+    currentLocale && isSupportedLocale(currentLocale) ? currentLocale : defaultLocale
+
+  const [language, setLanguageState] = useState<Language>(localeFromProvider)
 
   useEffect(() => {
-    if (typeof window === "undefined") return
-    const saved = window.localStorage.getItem("selectedLanguage") as Language | null
-    if (saved) {
-      setLanguageState(saved)
+    const storedLanguage = readStoredLanguage()
+    const nextLanguage = storedLanguage ?? localeFromProvider
+    setLanguageState(nextLanguage)
+
+    if (storedLanguage !== nextLanguage) {
+      persistLanguage(nextLanguage)
     }
-  }, [])
+  }, [localeFromProvider])
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("selectedLanguage", lang)
-    }
+    persistLanguage(lang)
   }
 
   const value = useMemo(

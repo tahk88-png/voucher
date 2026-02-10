@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+﻿import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
@@ -16,7 +16,7 @@ export function MerchantProfilePublic() {
   const [products, setProducts] = useState<Product[]>([]);
   const [rentals, setRentals] = useState<Rental[]>([]);
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
-  const [merchantName, setMerchantName] = useState('Ettevõte');
+  const [merchantName, setMerchantName] = useState('EttevÃµte');
 
   useEffect(() => {
     if (id) {
@@ -29,7 +29,7 @@ export function MerchantProfilePublic() {
       setCampaigns(c);
 
       // Try to find merchant name from any item
-      const name = p[0]?.merchantName || r[0]?.merchantName || c[0]?.merchant || 'Tundmatu Ettevõte';
+      const name = p[0]?.merchantName || r[0]?.merchantName || c[0]?.merchant || 'Tundmatu EttevÃµte';
       setMerchantName(name);
     }
   }, [id]);
@@ -67,7 +67,7 @@ export function MerchantProfilePublic() {
                 </div>
               </div>
               <p className="text-[#6B5744] max-w-2xl leading-relaxed">
-                Pakume kvaliteetseid tooteid ja teenuseid. Meie eesmärk on pakkuda parimat kliendikogemust ja usaldusväärset partnerlust.
+                Pakume kvaliteetseid tooteid ja teenuseid. Meie eesmÃ¤rk on pakkuda parimat kliendikogemust ja usaldusvÃ¤Ã¤rset partnerlust.
               </p>
             </div>
 
@@ -174,8 +174,8 @@ export function MerchantProfilePublic() {
                         </div>
                         <div className="mt-auto pt-4 border-t border-[#E7DCC7]/50 flex items-center justify-between">
                           <div>
-                            <span className="text-xl font-bold text-[#2D2721]">{item.pricePerDay}€</span>
-                            <span className="text-sm text-[#8B7355]"> / päev</span>
+                            <span className="text-xl font-bold text-[#2D2721]">{item.pricePerDay}â‚¬</span>
+                            <span className="text-sm text-[#8B7355]"> / pÃ¤ev</span>
                           </div>
                           <div className="w-8 h-8 rounded-full bg-[#FAF7F2] flex items-center justify-center group-hover:bg-[#E17B5C] group-hover:text-white transition-colors">
                             <ArrowRight className="w-4 h-4" />
@@ -219,9 +219,9 @@ export function MerchantProfilePublic() {
                         </h3>
                         <div className="mt-auto pt-4 flex items-center justify-between">
                           <div>
-                            <span className="text-xl font-bold text-[#2D2721]">{campaign.price}€</span>
+                            <span className="text-xl font-bold text-[#2D2721]">{campaign.price}â‚¬</span>
                             {campaign.original_price && (
-                              <span className="text-sm text-[#8B7355] line-through ml-2">{campaign.original_price}€</span>
+                              <span className="text-sm text-[#8B7355] line-through ml-2">{campaign.original_price}â‚¬</span>
                             )}
                           </div>
                           <WarmButton size="sm" variant="outline">Vaata</WarmButton>
@@ -238,3 +238,4 @@ export function MerchantProfilePublic() {
     </div>
   );
 }
+

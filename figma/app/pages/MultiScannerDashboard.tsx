@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { 
@@ -50,7 +50,7 @@ export function MultiScannerDashboard() {
     {
       id: 'SCN-002',
       deviceId: 'VIP-Entrance-1',
-      userName: 'João Santos',
+      userName: 'JoÃ£o Santos',
       status: 'active',
       totalScans: 156,
       validScans: 154,
@@ -89,7 +89,7 @@ export function MultiScannerDashboard() {
     {
       id: 'SCN-005',
       deviceId: 'Gate-C-Scanner-1',
-      userName: 'Liis Mägi',
+      userName: 'Liis MÃ¤gi',
       status: 'idle',
       totalScans: 134,
       validScans: 129,
@@ -167,9 +167,9 @@ export function MultiScannerDashboard() {
 
   const getPlatformIcon = (platform: Scanner['platform']) => {
     switch (platform) {
-      case 'iOS': return '🍎';
-      case 'Android': return '🤖';
-      case 'Web': return '🌐';
+      case 'iOS': return <Smartphone className="h-3.5 w-3.5" />;
+      case 'Android': return <Smartphone className="h-3.5 w-3.5" />;
+      case 'Web': return <Monitor className="h-3.5 w-3.5" />;
     }
   };
 
@@ -349,7 +349,7 @@ export function MultiScannerDashboard() {
               <div className="space-y-1">
                 {scanners.filter(s => s.status === 'offline').map(scanner => (
                   <div key={scanner.id} className="text-sm text-red-600">
-                    • {scanner.userName} ({scanner.deviceId})
+                    â€¢ {scanner.userName} ({scanner.deviceId})
                   </div>
                 ))}
               </div>
@@ -385,7 +385,7 @@ export function MultiScannerDashboard() {
                       {scanner.userName} scanned a ticket
                     </div>
                     <div className="text-xs text-[#8B7355]">
-                      {scanner.deviceId} • {scanner.lastScan}
+                      {scanner.deviceId} â€¢ {scanner.lastScan}
                     </div>
                   </div>
                 </div>
@@ -397,3 +397,4 @@ export function MultiScannerDashboard() {
     </div>
   );
 }
+

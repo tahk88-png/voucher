@@ -180,7 +180,7 @@ export default async function CampaignDetailPage({
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
-      <div className="bg-white/80 backdrop-blur-sm border-b border-[#E7DCC7] sticky top-0 z-20">
+      <div className="bg-white/80 backdrop-blur-sm border-b border-[rgba(139,115,85,0.15)] sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-2 text-sm text-[#8B7355]">
           <Link href="/campaigns" className="hover:text-[#2D2721]">
             Campaigns
@@ -219,8 +219,8 @@ export default async function CampaignDetailPage({
 
           <div className="space-y-6">
             <WarmCard padding="lg" className="sticky top-24 bg-white">
-              <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[#E7DCC7]/50">
-                <div className="w-14 h-14 rounded-full bg-[#FAF7F2] flex items-center justify-center text-2xl border border-[#E7DCC7]">
+              <div className="flex items-center gap-4 mb-6 pb-6 border-b border-[rgba(139,115,85,0.15)]/50">
+                <div className="w-14 h-14 rounded-full bg-[#FAF7F2] flex items-center justify-center text-2xl border border-[rgba(139,115,85,0.15)]">
                   {campaign.merchant.brandLogoUrl ? (
                     <Image
                       src={campaign.merchant.brandLogoUrl}
@@ -274,7 +274,7 @@ export default async function CampaignDetailPage({
 
               <CampaignShareButton url={voucherLink} title={campaign.name} />
 
-              <div className="mt-6 pt-6 border-t border-[#E7DCC7]/50 space-y-3 text-sm text-[#6B5744]">
+              <div className="mt-6 pt-6 border-t border-[rgba(139,115,85,0.15)]/50 space-y-3 text-sm text-[#6B5744]">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-[#E17B5C] flex-shrink-0" />
                   <span>{campaign.merchant.website || "Merchant location"}</span>

@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { activateMerchant, deactivateMerchant } from '@/lib/merchant-status';
 import { captureException } from '@/lib/error-tracking';
-import { isPlatformAdmin } from '@/lib/admin';
 import { z } from 'zod';
+import { AccessControlError, accessErrorResponse, requirePlatformAdminProfile } from '@/lib/access-control';
 
 const updateMerchantSchema = z.object({
   isActive: z.boolean().optional(),
@@ -16,10 +15,7 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id || !isPlatformAdmin(session.user.email)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    const profile = await requirePlatformAdminProfile();
 
     const body = await req.json();
     const data = updateMerchantSchema.parse(body);
@@ -35,9 +31,9 @@ export async function PUT(
     // Handle isActive change (kill switch)
     if (data.isActive !== undefined && data.isActive !== merchant.isActive) {
       if (data.isActive) {
-        await activateMerchant(params.id, session.user.id);
+        await activateMerchant(params.id, profile.userId);
       } else {
-        await deactivateMerchant(params.id, session.user.id, 'Deactivated by platform admin');
+        await deactivateMerchant(params.id, profile.userId, 'Deactivated by platform admin');
       }
     }
 
@@ -63,6 +59,9 @@ export async function PUT(
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
+    }
+    if (error instanceof AccessControlError) {
+      return accessErrorResponse(error);
     }
     if (error instanceof Error) {
       captureException(error, {

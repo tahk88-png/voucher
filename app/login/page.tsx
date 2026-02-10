@@ -17,20 +17,11 @@ function LoginForm() {
   const searchParams = useSearchParams()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [role, setRole] = useState<"user" | "merchant" | "admin">("user")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const showRoleSwitcher =
-    process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_ENABLE_ROLE_SWITCHER === "true"
 
   const callbackUrlParam = searchParams.get("callbackUrl")
-  const roleCallbackUrl =
-    role === "admin"
-      ? "/admin"
-      : role === "merchant"
-      ? "/merchant/coffee-house/dashboard"
-      : "/app"
-  const callbackUrl = callbackUrlParam ?? roleCallbackUrl
+  const callbackUrl = callbackUrlParam ?? "/app/entry"
 
   const handleCredentialsSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -70,39 +61,8 @@ function LoginForm() {
         <WarmCard padding="lg">
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-[#2D2721] mb-2">Welcome back</h1>
-            <p className="text-[#6B5744]">Sign in to your account</p>
+            <p className="text-[#6B5744]">Sign in and we will route you to the correct workspace automatically.</p>
           </div>
-
-          {showRoleSwitcher && (
-            <div className="mb-6 p-4 bg-[#FFF9ED] rounded-[16px] border border-[#F0E2C9]">
-              <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold mb-3 text-center">
-                Switch Role (Demo)
-              </div>
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { key: "user", label: "User" },
-                { key: "merchant", label: "Merchant" },
-                { key: "admin", label: "Admin" },
-              ].map((item) => (
-                <button
-                  key={item.key}
-                  type="button"
-                  onClick={() => setRole(item.key as typeof role)}
-                  className={`px-3 py-2 rounded-[12px] text-sm font-medium transition-all ${
-                    role === item.key
-                      ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm"
-                      : "bg-white border border-[#E7DCC7] text-[#6B5744] hover:bg-[#FFF3D6]"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-            <p className="text-xs text-[#8B7355] mt-3 text-center">
-              You will be redirected to the {role} workspace after login.
-            </p>
-          </div>
-          )}
 
           {error && (
             <div className="flex items-center gap-2 text-sm text-[#DC2626] bg-[#FEE2E2] border border-[#FCA5A5] rounded-[12px] px-3 py-2 mb-4">

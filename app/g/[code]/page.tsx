@@ -30,7 +30,7 @@ export default async function GiftCardPublicPage({ params }: { params: { code: s
         <h1 className="text-xl font-semibold text-[#2D2721] mb-4">{headline}</h1>
 
         <div
-          className="rounded-2xl border border-[#E7DCC7] overflow-hidden bg-[var(--bg)]"
+          className="rounded-2xl border border-[rgba(139,115,85,0.15)] overflow-hidden bg-[var(--bg)]"
           style={{
             ['--bg' as string]: design?.backgroundColor || '#fff8e6',
             ['--accent' as string]: design?.accentColor || '#f4b400',
@@ -82,7 +82,7 @@ export default async function GiftCardPublicPage({ params }: { params: { code: s
             <p className="text-sm text-[#6B5744]">Show this QR to staff to redeem the gift card.</p>
           </div>
         ) : (
-          <div className="rounded-lg border border-dashed border-[#E7DCC7] p-4 text-center text-sm text-[#8B7355] mt-6">
+          <div className="rounded-lg border border-dashed border-[rgba(139,115,85,0.15)] p-4 text-center text-sm text-[#8B7355] mt-6">
             This gift card is {status}.
           </div>
         )}

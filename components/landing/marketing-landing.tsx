@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import {
@@ -9,21 +10,42 @@ import {
   Check,
   ChevronDown,
   CreditCard,
-  Flame,
   Gift,
   Heart,
+  Home,
+  Laptop,
+  Leaf,
+  Paintbrush,
+  Plane,
   PartyPopper,
   QrCode,
   Shield,
+  Shirt,
   Sparkles,
-  Star,
   Ticket,
   TrendingUp,
+  UtensilsCrossed,
   Users,
   Zap,
 } from "lucide-react"
 
-export default function MarketingLanding() {
+type LandingFeaturedOffer = {
+  id: string
+  name: string
+  merchantName: string
+  merchantLogoUrl: string | null
+  categoryLabel: string
+  marketLabel: string
+  priceLabel: string
+  purchases: number
+  discountLabel: string | null
+}
+
+type MarketingLandingProps = {
+  featuredOffers?: LandingFeaturedOffer[]
+}
+
+export default function MarketingLanding({ featuredOffers = [] }: MarketingLandingProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly")
 
@@ -32,25 +54,29 @@ export default function MarketingLanding() {
       icon: Ticket,
       title: "Digital Vouchers",
       description: "Create discount vouchers with flexible rules and QR codes",
-      color: "from-[#FFC857] to-[#FFB627]",
+      color: "from-[var(--primary)] to-[var(--primary-hover)]",
+      iconClass: "text-[var(--text)]",
     },
     {
       icon: QrCode,
       title: "QR Redemption",
       description: "Fast scanning and validation for in-store or online use",
-      color: "from-[#9DB5A5] to-[#7FA090]",
+      color: "from-[var(--success)] to-[#7FA090]",
+      iconClass: "text-white",
     },
     {
       icon: CreditCard,
       title: "Gift Cards",
       description: "Reloadable gift cards with balance tracking",
-      color: "from-[#E17B5C] to-[#D16B4C]",
+      color: "from-[var(--danger)] to-[#D16B4C]",
+      iconClass: "text-white",
     },
     {
       icon: Users,
       title: "Referral Credits",
       description: "Reward customers who bring new business",
       color: "from-[#F5C98E] to-[#E5B97E]",
+      iconClass: "text-[var(--text)]",
     },
   ]
 
@@ -76,15 +102,73 @@ export default function MarketingLanding() {
   ]
 
   const categories = [
-    { name: "Food & Drink", icon: "🍽️", count: 234, color: "from-[#FFC857] to-[#FFB627]" },
-    { name: "Fashion", icon: "👗", count: 189, color: "from-[#E17B5C] to-[#D16B4C]" },
-    { name: "Beauty", icon: "💄", count: 156, color: "from-[#F5C98E] to-[#E5B97E]" },
-    { name: "Tech", icon: "💻", count: 142, color: "from-[#9DB5A5] to-[#7FA090]" },
-    { name: "Travel", icon: "✈️", count: 198, color: "from-[#FFC857] to-[#FFB627]" },
-    { name: "Wellness", icon: "🧘", count: 123, color: "from-[#9DB5A5] to-[#7FA090]" },
-    { name: "Events", icon: "🎉", count: 167, color: "from-[#E17B5C] to-[#D16B4C]" },
-    { name: "Home", icon: "🏠", count: 134, color: "from-[#F5C98E] to-[#E5B97E]" },
+    {
+      name: "Food & Drink",
+      icon: UtensilsCrossed,
+      count: 234,
+      color: "from-[var(--primary)] to-[var(--primary-hover)]",
+      iconClass: "text-[var(--text)]",
+      campaigns: ["20% off Pizza", "Lunch deal", "Weekend brunch"],
+    },
+    {
+      name: "Fashion",
+      icon: Shirt,
+      count: 189,
+      color: "from-[var(--danger)] to-[#D16B4C]",
+      iconClass: "text-white",
+      campaigns: ["Summer Sale 50%", "New arrivals", "Outlet specials"],
+    },
+    {
+      name: "Beauty",
+      icon: Paintbrush,
+      count: 156,
+      color: "from-[#F5C98E] to-[#E5B97E]",
+      iconClass: "text-[var(--text)]",
+      campaigns: ["Spa day deals", "Skincare bundles", "Salon packages"],
+    },
+    {
+      name: "Tech",
+      icon: Laptop,
+      count: 142,
+      color: "from-[var(--success)] to-[#7FA090]",
+      iconClass: "text-white",
+      campaigns: ["Tech sale", "Laptop upgrades", "Accessories week"],
+    },
+    {
+      name: "Travel",
+      icon: Plane,
+      count: 198,
+      color: "from-[var(--primary)] to-[var(--primary-hover)]",
+      iconClass: "text-[var(--text)]",
+      campaigns: ["City break offers", "Flight credits", "Hotel packages"],
+    },
+    {
+      name: "Wellness",
+      icon: Leaf,
+      count: 123,
+      color: "from-[var(--success)] to-[#7FA090]",
+      iconClass: "text-white",
+      campaigns: ["Yoga retreat", "Detox weekend", "Massage special"],
+    },
+    {
+      name: "Events",
+      icon: PartyPopper,
+      count: 167,
+      color: "from-[var(--danger)] to-[#D16B4C]",
+      iconClass: "text-white",
+      campaigns: ["Concert tickets", "Festival pass", "Family events"],
+    },
+    {
+      name: "Home",
+      icon: Home,
+      count: 134,
+      color: "from-[#F5C98E] to-[#E5B97E]",
+      iconClass: "text-[var(--text)]",
+      campaigns: ["Home essentials", "Furniture weekend", "Decor bundle"],
+    },
   ]
+  const visibleOffers = featuredOffers.slice(0, 12)
+  const totalCategoryCampaigns = categories.reduce((sum, category) => sum + category.count, 0)
 
   const benefits = [
     "Unlimited campaigns and vouchers",
@@ -95,6 +179,12 @@ export default function MarketingLanding() {
     "API access for integrations",
     "Dedicated support team",
     "No hidden fees",
+  ]
+
+  const heroStats = [
+    { label: "Active campaigns", value: "1,343+", icon: Sparkles },
+    { label: "European merchants", value: "2,500+", icon: Users },
+    { label: "Processed value", value: "EUR 12M+", icon: TrendingUp },
   ]
 
   const faqs = [
@@ -125,28 +215,29 @@ export default function MarketingLanding() {
   ]
 
   return (
-    <div className="bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
+    <div className="relative overflow-x-hidden bg-gradient-to-br from-[var(--bg)] via-[var(--bg-2)] to-[#FFE5B4]">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#FFC857] rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#9DB5A5] rounded-full blur-3xl" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--primary)] rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--success)] rounded-full blur-3xl" />
         </div>
+        <div className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(to_right,#2d2721_1px,transparent_1px),linear-gradient(to_bottom,#2d2721_1px,transparent_1px)] [background-size:28px_28px]" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-32">
           <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-[rgba(139,115,85,0.1)] mb-6">
-              <Sparkles className="h-4 w-4 text-[#FFC857]" />
-              <span className="text-sm font-medium text-[#6B5744]">European SaaS Voucher Platform</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-[var(--border)] mb-6">
+              <Sparkles className="h-4 w-4 text-[var(--primary)]" />
+              <span className="text-sm font-medium text-[var(--text-muted)]">European SaaS Voucher Platform</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[#2D2721] mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--text)] mb-6 leading-[1.03]">
               Turn Vouchers Into
-              <span className="block bg-gradient-to-r from-[#FFC857] to-[#FFB627] bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-[var(--primary)] to-[var(--primary-hover)] bg-clip-text text-transparent">
                 Revenue Growth
               </span>
             </h1>
 
-            <p className="text-xl sm:text-2xl text-[#6B5744] mb-10 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl sm:text-2xl text-[var(--text-muted)] mb-10 leading-relaxed max-w-3xl mx-auto">
               Create, manage, and track digital vouchers, gift cards, and referral campaigns. All in one beautiful,
               easy-to-use platform built for European merchants.
             </p>
@@ -166,229 +257,250 @@ export default function MarketingLanding() {
               </WarmButton>
             </div>
 
-            <div className="mt-12 flex items-center justify-center gap-8 text-sm text-[#8B7355] flex-wrap">
+            <div className="mt-10 flex items-center justify-center gap-8 text-sm text-[var(--text-faint)] flex-wrap">
               <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-[#9DB5A5]" />
+                <Check className="h-4 w-4 text-[var(--success)]" />
                 No credit card required
               </div>
               <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-[#9DB5A5]" />
+                <Check className="h-4 w-4 text-[var(--success)]" />
                 2 months free trial
               </div>
               <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-[#9DB5A5]" />
+                <Check className="h-4 w-4 text-[var(--success)]" />
                 Cancel anytime
               </div>
+            </div>
+
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
+              {heroStats.map((item) => {
+                const Icon = item.icon
+                return (
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-[var(--border)] bg-white/75 backdrop-blur-sm px-4 py-3 text-left shadow-warm-sm"
+                  >
+                    <div className="flex items-center gap-2 text-[var(--text-muted)] text-xs font-semibold">
+                      <span className="w-6 h-6 rounded-full bg-[#FFF4DA] border border-[#F2D08D] grid place-items-center">
+                        <Icon className="h-3.5 w-3.5 text-[var(--text)]" />
+                      </span>
+                      {item.label}
+                    </div>
+                    <div className="mt-1 text-2xl font-bold text-[var(--text)]">{item.value}</div>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-16">
-        <WarmCard padding="none" className="overflow-hidden relative group">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#FFC857] via-[#FFD700] to-[#FFB627] opacity-95" />
-          <div className="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')]" />
-
-          <div className="relative z-10 p-8 lg:p-12">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
-              <div className="flex-1 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 rounded-full mb-6 shadow-warm">
-                  <Flame className="h-5 w-5 text-[#E17B5C]" />
-                  <span className="text-sm font-bold bg-gradient-to-r from-[#E17B5C] to-[#FFC857] bg-clip-text text-transparent">
-                    HOT DEALS INSIDE
-                  </span>
-                  <Star className="h-5 w-5 text-[#FFC857]" />
-                </div>
-
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight drop-shadow-lg">
-                  🎯 Discover Amazing Campaigns!
-                </h2>
-
-                <p className="text-xl sm:text-2xl text-white/95 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0 drop-shadow">
-                  Browse <strong>1,343+ active campaigns</strong> across Europe • Vouchers, Gift Cards, Events & More
-                </p>
-
-                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 mb-8">
-                  <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <Gift className="h-5 w-5 text-white" />
-                    <div className="text-left">
-                      <div className="text-2xl font-bold text-white">843</div>
-                      <div className="text-xs text-white/80">Vouchers</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <CreditCard className="h-5 w-5 text-white" />
-                    <div className="text-left">
-                      <div className="text-2xl font-bold text-white">312</div>
-                      <div className="text-xs text-white/80">Gift Cards</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    <PartyPopper className="h-5 w-5 text-white" />
-                    <div className="text-left">
-                      <div className="text-2xl font-bold text-white">188</div>
-                      <div className="text-xs text-white/80">Events</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                  <Link
-                    href="/campaigns"
-                    className="group px-8 py-4 bg-white text-[#2D2721] rounded-full font-bold text-lg shadow-warm-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3"
-                  >
-                    <Sparkles className="h-6 w-6 text-[#FFC857] group-hover:rotate-12 transition-transform" />
-                    Explore All Campaigns
-                    <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-transform" />
-                  </Link>
-                  <div className="flex items-center gap-2 text-white/90 text-sm">
-                    <Check className="h-4 w-4" />
-                    <span>Free to browse</span>
-                  </div>
-                </div>
-              </div>
-              <div className="hidden lg:block">
-                <div className="grid grid-cols-2 gap-4">
-                  {categories.slice(0, 4).map((category) => (
-                    <div
-                      key={category.name}
-                      className="w-40 h-40 bg-white/95 backdrop-blur rounded-[20px] p-4 shadow-warm-lg"
-                    >
-                      <div
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center text-2xl mb-2 shadow-warm`}
-                      >
-                        {category.icon}
-                      </div>
-                      <div className="text-xs font-bold text-[#2D2721] mb-1">{category.name}</div>
-                      <div className="text-xs text-[#6B5744]">{category.count} deals</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </WarmCard>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
           {valueCards.map((card) => {
             const Icon = card.icon
             return (
-              <WarmCard key={card.title} hover padding="lg" className="cursor-pointer">
+              <WarmCard
+                key={card.title}
+                hover
+                padding="lg"
+                className="cursor-pointer text-center rounded-[18px] border border-[var(--border)] bg-white/92"
+              >
                 <div
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 shadow-warm`}
+                  className={`w-11 h-11 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 mx-auto shadow-warm ring-1 ring-white/30`}
                 >
-                  <Icon className="h-6 w-6 text-white" />
+                  <Icon className={`h-5 w-5 stroke-[2.25] ${card.iconClass}`} />
                 </div>
-                <h3 className="text-lg font-bold text-[#2D2721] mb-2">{card.title}</h3>
-                <p className="text-sm text-[#6B5744]">{card.description}</p>
+                <h3 className="text-[17px] font-bold text-[var(--text)] mb-2">{card.title}</h3>
+                <p className="text-[13px] leading-relaxed text-[var(--text-muted)]">{card.description}</p>
               </WarmCard>
             )
           })}
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <WarmCard padding="none" className="overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-3">
-            <div className="lg:col-span-1 bg-gradient-to-br from-[#9DB5A5] to-[#7FA090] text-white p-8 lg:p-12">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6">
-                <Users className="h-5 w-5" />
-                <span className="text-sm font-bold">For Users</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-bold mb-4">🎁 Share & Earn FREE Vouchers!</h2>
-              <p className="text-white/90 text-lg mb-8 leading-relaxed">
-                As a regular user, you pay nothing. Share campaigns with friends and get rewarded with free vouchers.
-              </p>
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-1">
-                    <Check className="h-5 w-5" />
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">How It Works</h2>
+          <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">Get started in minutes with our simple three-step process</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {howItWorks.map((step, idx) => {
+            const Icon = step.icon
+            return (
+              <div key={step.step} className="relative">
+                <WarmCard padding="lg" className="text-center h-full rounded-[18px] bg-white/92">
+                  <div className="w-10 h-10 rounded-full gradient-brand flex items-center justify-center mx-auto mb-4 text-base font-bold text-white">
+                    {step.step}
                   </div>
-                  <div>
-                    <div className="font-bold text-lg mb-1">100% Free Forever</div>
-                    <div className="text-white/80">No subscriptions, no hidden fees, ever.</div>
+                  <span className="w-11 h-11 rounded-xl border border-[#F3DEB0] bg-[#FFF8E8] flex items-center justify-center mx-auto mb-3">
+                    <Icon className="h-5 w-5 text-[#F0AF2E] stroke-[2.25]" />
+                  </span>
+                  <h3 className="text-xl font-semibold text-[var(--text)] mb-2">{step.title}</h3>
+                  <p className="text-sm text-[var(--text-muted)]">{step.description}</p>
+                </WarmCard>
+                {idx < howItWorks.length - 1 && (
+                  <div className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2">
+                    <ArrowRight className="h-5 w-5 text-[#F0AF2E]" />
                   </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-1">
-                    <Gift className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-lg mb-1">Get Rewarded</div>
-                    <div className="text-white/80">Earn vouchers & gift cards from top brands.</div>
-                  </div>
-                </div>
+                )}
               </div>
-            </div>
-            <div className="lg:col-span-2 bg-white p-8 lg:p-12">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
-                  <Sparkles className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-[#2D2721]">How It Works</h3>
-                  <p className="text-sm text-[#8B7355]">Simple steps to launch campaigns</p>
-                </div>
-              </div>
-              <div className="grid gap-6 md:grid-cols-3">
-                {howItWorks.map((step) => {
-                  const Icon = step.icon
-                  return (
-                    <div key={step.step} className="space-y-3">
-                      <div className="w-12 h-12 rounded-xl bg-[#FFF9ED] flex items-center justify-center">
-                        <Icon className="h-6 w-6 text-[#E17B5C]" />
-                      </div>
-                      <div className="text-sm font-bold text-[#8B7355]">Step {step.step}</div>
-                      <h4 className="text-lg font-bold text-[#2D2721]">{step.title}</h4>
-                      <p className="text-sm text-[#6B5744]">{step.description}</p>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-        </WarmCard>
+            )
+          })}
+        </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-white rounded-full mb-6 shadow-warm">
-            <TrendingUp className="h-5 w-5" />
-            <span className="text-sm font-bold">Merchant Pricing Plans</span>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Explore Popular Campaigns</h2>
+          <p className="text-lg text-[var(--text-muted)]">Discover vouchers, deals, and experiences across Europe</p>
+          {visibleOffers.length > 0 && (
+            <p className="text-sm text-[var(--text-faint)] mt-2">
+              Showing {visibleOffers.length} live offers from the marketplace feed.
+            </p>
+          )}
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-8">
+          {categories.map((category) => (
+            <WarmCard
+              key={category.name}
+              padding="sm"
+              hover
+              className="text-center cursor-pointer rounded-[14px] border border-[var(--border)] bg-white/92"
+            >
+              <div
+                className={`w-10 h-10 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mx-auto mb-2 ring-1 ring-white/35`}
+              >
+                <category.icon className={`h-[18px] w-[18px] stroke-[2.25] ${category.iconClass}`} />
+              </div>
+              <p className="text-xs font-semibold text-[var(--text)]">{category.name}</p>
+              <p className="text-[11px] text-[var(--text-faint)] mt-1">{category.count} campaigns</p>
+            </WarmCard>
+          ))}
+        </div>
+
+        {visibleOffers.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {visibleOffers.map((offer) => (
+              <WarmCard key={offer.id} hover padding="none" className="rounded-[16px] bg-white/95 overflow-hidden">
+                <div className="relative h-28 bg-[#F6F0E4]">
+                  {offer.merchantLogoUrl ? (
+                    <Image
+                      src={offer.merchantLogoUrl}
+                      alt={offer.merchantName}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                      className="object-cover"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[#F5C98E]">
+                      <Ticket className="h-8 w-8 text-white/85" />
+                    </div>
+                  )}
+                  <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[10px] font-bold text-[var(--text)]">
+                    {offer.categoryLabel}
+                  </span>
+                  {offer.discountLabel && (
+                    <span className="absolute top-3 right-3 rounded-full bg-[var(--text)] px-2.5 py-1 text-[10px] font-bold text-white">
+                      {offer.discountLabel}
+                    </span>
+                  )}
+                </div>
+
+                <div className="p-4 flex flex-col min-h-[200px]">
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--danger)]">{offer.merchantName}</p>
+                  <h3 className="text-base font-bold text-[var(--text)] mt-1 line-clamp-2">{offer.name}</h3>
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <span className="inline-flex rounded-full bg-[#FFF8E8] border border-[#F1E1C3] px-2.5 py-1 text-[10px] font-semibold text-[var(--text-muted)]">
+                      Category: {offer.categoryLabel}
+                    </span>
+                    <span className="inline-flex rounded-full bg-[#EEF6F1] border border-[#D2E5DB] px-2.5 py-1 text-[10px] font-semibold text-[#47695B]">
+                      Marketplace: {offer.marketLabel}
+                    </span>
+                  </div>
+
+                  <div className="mt-auto pt-3 border-t border-[var(--border)] flex items-center justify-between gap-3">
+                    <div>
+                      <div className="text-base font-bold text-[var(--text)]">{offer.priceLabel}</div>
+                      <div className="text-[11px] text-[var(--text-faint)]">{offer.purchases} purchases</div>
+                    </div>
+                    <WarmButton asChild size="sm" className="rounded-full px-4">
+                      <Link href={`/campaigns/${offer.id}`}>
+                        Open
+                        <ArrowRight className="h-4 w-4 ml-1.5" />
+                      </Link>
+                    </WarmButton>
+                  </div>
+                </div>
+              </WarmCard>
+            ))}
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2D2721] mb-4">Simple, Transparent Pricing</h2>
-          <p className="text-lg text-[#6B5744] max-w-2xl mx-auto mb-2">
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {categories.slice(0, 8).map((category) => {
+              const topCampaign = category.campaigns[0]
+              return (
+                <WarmCard key={category.name} hover padding="lg" className="rounded-[16px] bg-white/92">
+                  <div
+                    className={`w-10 h-10 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mb-3 ring-1 ring-white/35`}
+                  >
+                    <category.icon className={`h-[18px] w-[18px] stroke-[2.25] ${category.iconClass}`} />
+                  </div>
+                  <p className="text-xs text-[var(--text-faint)] mb-1">{category.name}</p>
+                  <h3 className="text-lg font-bold text-[var(--text)] mb-3">{topCampaign}</h3>
+                  <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--text-faint)]">
+                    <span>{category.count} active</span>
+                    <ArrowRight className="h-4 w-4 text-[#F0AF2E]" />
+                  </div>
+                </WarmCard>
+              )
+            })}
+          </div>
+        )}
+
+        <div className="text-center mt-8">
+          <WarmButton size="md" asChild>
+            <Link href="/campaigns">
+              {visibleOffers.length > 0 ? "View All Live Campaigns" : `View All ${totalCategoryCampaigns} Campaigns`}
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Link>
+          </WarmButton>
+        </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Simple, Transparent Pricing</h2>
+          <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
             Choose the plan that fits your business. Save 2 months with annual billing.
           </p>
-          <p className="text-sm text-[#9DB5A5] font-semibold max-w-2xl mx-auto mb-8">
-            💡 Remember: Regular users pay nothing! These plans are for merchants only.
-          </p>
+        </div>
 
-          <div className="inline-flex items-center gap-3 p-1 bg-white rounded-[14px] shadow-warm border border-[rgba(139,115,85,0.1)]">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 p-1 bg-[var(--surface)] rounded-[12px] shadow-warm border border-[var(--border)]">
             <button
               onClick={() => setBillingPeriod("monthly")}
-              className={`px-6 py-3 rounded-[12px] font-semibold transition-all ${
+              className={`px-6 py-2 rounded-[10px] text-sm font-semibold transition-all ${
                 billingPeriod === "monthly"
-                  ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-white shadow-warm"
-                  : "text-[#8B7355] hover:text-[#2D2721]"
+                  ? "gradient-brand text-white shadow-warm"
+                  : "text-[var(--text-faint)] hover:text-[var(--text)]"
               }`}
-              aria-pressed={billingPeriod === "monthly"}
             >
               Monthly
             </button>
             <button
               onClick={() => setBillingPeriod("annual")}
-              className={`px-6 py-3 rounded-[12px] font-semibold transition-all relative ${
+              className={`px-6 py-2 rounded-[10px] text-sm font-semibold transition-all relative ${
                 billingPeriod === "annual"
-                  ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-white shadow-warm"
-                  : "text-[#8B7355] hover:text-[#2D2721]"
+                  ? "gradient-brand text-white shadow-warm"
+                  : "text-[var(--text-faint)] hover:text-[var(--text)]"
               }`}
-              aria-pressed={billingPeriod === "annual"}
             >
               Annual
-              <span className="absolute -top-2 -right-2 px-2 py-0.5 bg-[#9DB5A5] text-white text-xs rounded-full font-bold">
+              <span className="absolute -top-2 right-0 px-1.5 py-0.5 text-[10px] rounded-full bg-[var(--success)] text-white font-bold">
                 Save 17%
               </span>
             </button>
@@ -401,6 +513,7 @@ export default function MarketingLanding() {
               name: "Starter",
               monthly: "19",
               annual: "16",
+              cta: "Get Started",
               features: [
                 "Up to 1,000 vouchers/month",
                 "5 active campaigns",
@@ -414,6 +527,7 @@ export default function MarketingLanding() {
               name: "Professional",
               monthly: "29",
               annual: "24",
+              cta: "Get Started",
               features: [
                 "Up to 10,000 vouchers/month",
                 "Unlimited campaigns",
@@ -428,6 +542,7 @@ export default function MarketingLanding() {
               name: "Enterprise",
               monthly: "39",
               annual: "33",
+              cta: "Contact Sales",
               features: [
                 "Unlimited vouchers",
                 "Unlimited campaigns",
@@ -444,69 +559,69 @@ export default function MarketingLanding() {
               key={plan.name}
               hover
               padding="xl"
-              className={`relative h-full flex flex-col ${plan.highlight ? "border-2 border-[#FFC857] shadow-warm-lg" : ""}`}
+              className={`relative h-full flex flex-col ${plan.highlight ? "border-2 border-[var(--primary)] shadow-warm-lg" : ""}`}
             >
               {plan.highlight && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                  <span className="px-4 py-1 bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-white text-sm font-bold rounded-full shadow-warm">
+                  <span className="px-4 py-1 gradient-brand text-white text-sm font-bold rounded-full shadow-warm">
                     Most Popular
                   </span>
                 </div>
               )}
               <div className="mb-6 text-center pt-2">
-                <h3 className="text-2xl font-bold text-[#2D2721] mb-2">{plan.name}</h3>
+                <h3 className="text-2xl font-bold text-[var(--text)] mb-2">{plan.name}</h3>
                 <div className="flex items-baseline gap-2 mb-4 justify-center">
-                  <span className="text-5xl font-bold text-[#2D2721]">
-                    €{billingPeriod === "monthly" ? plan.monthly : plan.annual}
+                  <span className="text-5xl font-bold text-[var(--text)]">
+                    EUR {billingPeriod === "monthly" ? plan.monthly : plan.annual}
                   </span>
-                  <span className="text-[#8B7355]">/month</span>
+                  <span className="text-[var(--text-faint)]">/month</span>
                 </div>
                 {billingPeriod === "annual" && (
-                  <div className="text-sm text-[#9DB5A5] font-semibold mb-4">
-                    €{Number(plan.monthly) * 10}/year (save 2 months)
+                  <div className="text-sm text-[var(--success)] font-semibold mb-4">
+                    EUR {Number(plan.monthly) * 10}/year (save 2 months)
                   </div>
                 )}
               </div>
               <ul className="space-y-3 mb-8 flex-grow">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
-                    <Check className={`h-5 w-5 flex-shrink-0 mt-0.5 ${plan.highlight ? "text-[#FFC857]" : "text-[#9DB5A5]"}`} />
-                    <span className="text-[#2D2721]">{feature}</span>
+                    <Check className={`h-5 w-5 flex-shrink-0 mt-0.5 ${plan.highlight ? "text-[var(--primary)]" : "text-[var(--success)]"}`} />
+                    <span className="text-[var(--text)]">{feature}</span>
                   </li>
                 ))}
               </ul>
               <WarmButton className="w-full mt-auto" asChild>
-                <Link href="/login">Get Started</Link>
+                <Link href="/login">{plan.cta}</Link>
               </WarmButton>
             </WarmCard>
           ))}
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-[#8B7355] mb-4">
-            All plans include 2 months free trial • No credit card required • Cancel anytime
+          <p className="text-[var(--text-faint)] mb-4">
+            All plans include 2 months free trial | No credit card required | Cancel anytime
           </p>
-          <div className="flex items-center justify-center gap-6 text-sm text-[#6B5744] flex-wrap">
+          <div className="flex items-center justify-center gap-6 text-sm text-[var(--text-muted)] flex-wrap">
             <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4 text-[#9DB5A5]" />
+              <Shield className="h-4 w-4 text-[var(--success)]" />
               <span>GDPR Compliant</span>
             </div>
             <div className="flex items-center gap-2">
-              <Zap className="h-4 w-4 text-[#FFC857]" />
+              <Zap className="h-4 w-4 text-[var(--primary)]" />
               <span>Instant Setup</span>
             </div>
             <div className="flex items-center gap-2">
-              <Heart className="h-4 w-4 text-[#E17B5C]" />
+              <Heart className="h-4 w-4 text-[var(--danger)]" />
               <span>99.9% Uptime</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <WarmCard padding="none" className="overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2">
-            <div className="p-8 lg:p-12 bg-gradient-to-br from-[#FFC857] to-[#FFB627]">
+            <div className="p-8 lg:p-12 gradient-brand">
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Why Merchants Love GiftHub</h2>
               <p className="text-white/90 text-lg mb-8">
                 Join thousands of European businesses using our platform to grow their customer base and increase revenue.
@@ -517,7 +632,7 @@ export default function MarketingLanding() {
                   <div className="text-white/80 text-sm">Active Merchants</div>
                 </div>
                 <div>
-                  <div className="text-4xl font-bold text-white mb-1">€12M+</div>
+                  <div className="text-4xl font-bold text-white mb-1">EUR 12M+</div>
                   <div className="text-white/80 text-sm">Processed</div>
                 </div>
                 <div>
@@ -526,14 +641,14 @@ export default function MarketingLanding() {
                 </div>
               </div>
             </div>
-            <div className="p-8 lg:p-12 bg-white">
+            <div className="p-8 lg:p-12 bg-[var(--surface)]">
               <div className="space-y-4">
                 {benefits.map((benefit) => (
                   <div key={benefit} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#9DB5A5] to-[#7FA090] flex items-center justify-center flex-shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[var(--success)] to-[#7FA090] flex items-center justify-center flex-shrink-0">
                       <Check className="h-4 w-4 text-white" />
                     </div>
-                    <span className="text-[#2D2721] font-medium">{benefit}</span>
+                    <span className="text-[var(--text)] font-medium">{benefit}</span>
                   </div>
                 ))}
               </div>
@@ -542,10 +657,10 @@ export default function MarketingLanding() {
         </WarmCard>
       </section>
 
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#2D2721] mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg text-[#6B5744]">Everything you need to know about GiftHub</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Frequently Asked Questions</h2>
+          <p className="text-lg text-[var(--text-muted)]">Everything you need to know about GiftHub</p>
         </div>
 
         <div className="space-y-3">
@@ -558,15 +673,15 @@ export default function MarketingLanding() {
                 aria-controls={`faq-panel-${idx}`}
               >
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-[#2D2721] mb-2">{faq.question}</h3>
+                  <h3 className="text-lg font-semibold text-[var(--text)] mb-2">{faq.question}</h3>
                   {openFaq === idx && (
-                    <p id={`faq-panel-${idx}`} className="text-[#6B5744] leading-relaxed">
+                    <p id={`faq-panel-${idx}`} className="text-[var(--text-muted)] leading-relaxed">
                       {faq.answer}
                     </p>
                   )}
                 </div>
                 <ChevronDown
-                  className={`h-5 w-5 text-[#8B7355] transition-transform flex-shrink-0 ${
+                  className={`h-5 w-5 text-[var(--text-faint)] transition-transform flex-shrink-0 ${
                     openFaq === idx ? "rotate-180" : ""
                   }`}
                 />
@@ -576,16 +691,16 @@ export default function MarketingLanding() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20">
         <WarmCard padding="none" className="overflow-hidden">
-          <div className="relative bg-gradient-to-br from-[#2D2721] to-[#4D3F31] p-12 text-center">
+          <div className="relative bg-gradient-to-br from-[var(--text)] to-[#4D3F31] p-12 text-center">
             <div className="absolute inset-0 opacity-10">
-              <div className="absolute top-10 left-10 w-40 h-40 bg-[#FFC857] rounded-full blur-3xl" />
-              <div className="absolute bottom-10 right-10 w-60 h-60 bg-[#9DB5A5] rounded-full blur-3xl" />
+              <div className="absolute top-10 left-10 w-40 h-40 bg-[var(--primary)] rounded-full blur-3xl" />
+              <div className="absolute bottom-10 right-10 w-60 h-60 bg-[var(--success)] rounded-full blur-3xl" />
             </div>
 
             <div className="relative z-10">
-              <PartyPopper className="h-16 w-16 text-[#FFC857] mx-auto mb-6" />
+              <PartyPopper className="h-16 w-16 text-[var(--primary)] mx-auto mb-6" />
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Boost Your Sales?</h2>
               <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
                 Start creating campaigns today and see the difference. No credit card required.
@@ -605,6 +720,22 @@ export default function MarketingLanding() {
           </div>
         </WarmCard>
       </section>
+
+      <footer className="border-t border-[var(--border)] bg-white/70 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)]">
+            <span className="w-6 h-6 rounded-full gradient-brand grid place-items-center border border-[#F2CB80]">
+              <Gift className="h-3.5 w-3.5 text-white" />
+            </span>
+            GiftHub
+          </div>
+          <p className="text-xs text-[var(--text-faint)] inline-flex items-center gap-1">
+            <span>(c) 2026 GiftHub. Made with</span>
+            <Heart className="h-3.5 w-3.5 text-[var(--danger)]" />
+            <span>in Europe.</span>
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }

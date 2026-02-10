@@ -95,7 +95,7 @@ export default function EventPurchaseClient({
                 value={selectedTicketId || ''}
                 onChange={(e) => setSelectedTicketId(e.target.value)}
                 aria-label="Select ticket"
-                className="mt-1 w-full rounded-[14px] border border-[#E7DCC7] bg-white px-3 py-2 text-sm text-[#2D2721] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]/60"
+                className="mt-1 w-full rounded-[14px] border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm text-[#2D2721] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]/60"
               >
                 {availableTickets.map((ticket) => (
                   <option key={ticket.id} value={ticket.id}>
@@ -112,7 +112,7 @@ export default function EventPurchaseClient({
                 value={attendeeName}
                 onChange={(e) => setAttendeeName(e.target.value)}
                 placeholder="Name of the person attending"
-                className="mt-1 border-[#E7DCC7]"
+                className="mt-1 border-[rgba(139,115,85,0.15)]"
               />
             </div>
 
@@ -124,11 +124,11 @@ export default function EventPurchaseClient({
                 value={attendeeEmail}
                 onChange={(e) => setAttendeeEmail(e.target.value)}
                 placeholder="Email for ticket delivery"
-                className="mt-1 border-[#E7DCC7]"
+                className="mt-1 border-[rgba(139,115,85,0.15)]"
               />
             </div>
 
-            <div className="pt-4 border-t border-[#E7DCC7]">
+            <div className="pt-4 border-t border-[rgba(139,115,85,0.15)]">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-sm font-medium text-[#6B5744]">Total</span>
                 <span className="text-2xl font-semibold text-[#2D2721]">

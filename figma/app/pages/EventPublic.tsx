@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from '@/lib/router-shim';
 import { 
   Calendar,
   Clock,
@@ -51,10 +51,10 @@ export function EventPublic() {
     description: 'Join us for the biggest music festival of the year featuring top artists from around Europe',
     longDescription: `Experience an unforgettable weekend of music, food, and entertainment at the Summer Music Festival 2024.
 
-🎵 World-class lineup featuring 50+ artists
-🍔 Gourmet food trucks and local vendors
-🎨 Art installations and interactive experiences
-🌟 VIP areas with exclusive amenities
+- World-class lineup featuring 50+ artists
+- Gourmet food trucks and local vendors
+- Art installations and interactive experiences
+- VIP areas with exclusive amenities
 
 Don't miss out on the event of the summer!`,
     date: '2024-07-15',
@@ -74,7 +74,7 @@ Don't miss out on the event of the summer!`,
         originalPrice: 120,
         available: 50, 
         total: 500,
-        description: 'Limited early bird special - save €31! Includes general admission and festival wristband.'
+        description: 'Limited early bird special - save â‚¬31! Includes general admission and festival wristband.'
       },
       { 
         id: 'general',
@@ -406,7 +406,7 @@ Don't miss out on the event of the summer!`,
                           {hasDiscount && (
                             <span className="px-2 py-1 bg-gradient-to-br from-[#E17B5C] to-[#D16B4C] text-white text-xs font-semibold rounded-full flex items-center gap-1">
                               <Tag className="h-3 w-3" />
-                              SAVE €{ticket.originalPrice! - ticket.price}
+                              SAVE â‚¬{ticket.originalPrice! - ticket.price}
                             </span>
                           )}
                         </div>
@@ -436,7 +436,7 @@ Don't miss out on the event of the summer!`,
                             disabled={quantity === 0}
                             className="w-10 h-10 rounded-lg bg-[#F2EDE3] hover:bg-[#E5D9C8] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center text-[#2D2721] font-bold transition-colors"
                           >
-                            −
+                            âˆ’
                           </button>
                           <span className="w-12 text-center text-lg font-semibold text-[#2D2721]">
                             {quantity}
@@ -515,7 +515,7 @@ Don't miss out on the event of the summer!`,
                   
                   return (
                     <div key={ticketId} className="flex items-center justify-between text-[#6B5744]">
-                      <span>{quantity}× {ticket.name}</span>
+                      <span>{quantity}Ã— {ticket.name}</span>
                       <span className="font-semibold">
                         <CurrencyDisplay amount={ticket.price * quantity} currency="EUR" />
                       </span>
@@ -586,3 +586,4 @@ Don't miss out on the event of the summer!`,
     </div>
   );
 }
+

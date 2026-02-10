@@ -1,6 +1,6 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Upload, Search, Wand2, Image as ImageIcon, X, Loader2, Sparkles, Download } from 'lucide-react';
+import { Upload, Search, Wand2, Loader2, Sparkles, Download, CheckCircle2 } from 'lucide-react';
 import { Input } from '@app/components/ui/input';
 import { Button } from '@app/components/ui/button';
 import { Label } from '@app/components/ui/label';
@@ -227,7 +227,7 @@ export function MediaManager({ onSelect, currentImage, className }: MediaManager
                   <div className="flex-1">
                     <Label className="text-xs text-[#8B7355] mb-1.5 block">Mida soovid luua?</Label>
                     <Input 
-                      placeholder="Nt. Luksuslik õhtusöök küünlavalgel, vaade merele..." 
+                      placeholder="Nt. luksuslik õhtusöök küünlavalgel, vaade merele..." 
                       className="bg-[#FAF7F2]"
                       value={aiPrompt}
                       onChange={(e) => setAiPrompt(e.target.value)}
@@ -305,7 +305,10 @@ export function MediaManager({ onSelect, currentImage, className }: MediaManager
                 <div className="w-10 h-10 rounded-md overflow-hidden bg-white border border-[#E7DCC7]">
                     <img src={currentImage} alt="Selected" className="w-full h-full object-cover" />
                 </div>
-                <span className="text-sm font-medium text-[#2D2721]"><span className="text-green-600">✓</span> Pilt valitud</span>
+                <span className="text-sm font-medium text-[#2D2721] inline-flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  Pilt valitud
+                </span>
             </div>
             <Button variant="ghost" size="sm" onClick={() => onSelect('')} className="text-red-500 hover:text-red-600 hover:bg-red-50 h-8">
                 Eemalda
@@ -315,3 +318,4 @@ export function MediaManager({ onSelect, currentImage, className }: MediaManager
     </div>
   );
 }
+

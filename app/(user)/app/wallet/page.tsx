@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
 import { Wallet } from 'lucide-react';
 import { getCreditBalance } from '@/lib/credits';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { getCurrencyLocale } from '@/lib/i18n-utils';
 
 export default async function WalletPage() {
   const session = await auth();
@@ -26,13 +28,15 @@ export default async function WalletPage() {
   if (!user) {
     redirect('/login');
   }
+  const locale = await getLocale();
+  const tNav = await getTranslations('nav');
+  const tWallet = await getTranslations('wallet');
 
   const merchantBalances = await Promise.all(
     (user.merchantMembers ?? []).map(async (member) => {
       try {
         const merchantId = member.merchant?.id ?? '';
         if (!merchantId) return { member, balance: null };
-        // @ts-expect-error merchantId guarded above
         const balance = await getCreditBalance(userId, merchantId);
         return { member, balance };
       } catch {
@@ -42,7 +46,7 @@ export default async function WalletPage() {
   );
 
   const formatCurrency = (amount: number, currency: string) =>
-    new Intl.NumberFormat('en-US', {
+    new Intl.NumberFormat(getCurrencyLocale(locale), {
       style: 'currency',
       currency,
     }).format(amount / 100);
@@ -50,8 +54,8 @@ export default async function WalletPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-[#2D2721]">Wallet</h1>
-        <p className="text-sm text-[#6B5744]">Track your available and locked credits.</p>
+        <h1 className="text-2xl font-semibold text-[#2D2721]">{tNav('wallet')}</h1>
+        <p className="text-sm text-[#6B5744]">{tWallet('pageDescription')}</p>
       </div>
 
       {merchantBalances.length === 0 ? (
@@ -60,7 +64,7 @@ export default async function WalletPage() {
             <div className="w-14 h-14 rounded-full bg-[#FFF9ED] flex items-center justify-center">
               <Wallet className="h-6 w-6 text-[#8B7355]" />
             </div>
-            <div>No merchant wallets yet.</div>
+            <div>{tWallet('noMerchantWallets')}</div>
           </div>
         </WarmCard>
       ) : (
@@ -68,7 +72,7 @@ export default async function WalletPage() {
           {merchantBalances.map(({ member, balance }) => {
             const currency = balance?.currency || member.merchant.defaultCurrency || 'USD';
             return (
-              <WarmCard key={member.merchantId} padding="lg" className="bg-white border border-[#E7DCC7]">
+              <WarmCard key={member.merchantId} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                 <div className="space-y-4">
                   <div>
                     <h2 className="text-lg font-semibold text-[#2D2721]">{member.merchant.name}</h2>
@@ -76,19 +80,19 @@ export default async function WalletPage() {
                   </div>
                   <div className="grid gap-3 sm:grid-cols-3">
                     <div>
-                      <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">Available</div>
+                      <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">{tWallet('available')}</div>
                       <div className="text-lg font-semibold text-[#2D2721]">
                         {formatCurrency(balance?.available ?? 0, currency)}
                       </div>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">Locked</div>
+                      <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">{tWallet('locked')}</div>
                       <div className="text-lg font-semibold text-[#2D2721]">
                         {formatCurrency(balance?.locked ?? 0, currency)}
                       </div>
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">Total</div>
+                      <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">{tWallet('total')}</div>
                       <div className="text-lg font-semibold text-[#2D2721]">
                         {formatCurrency(balance?.total ?? 0, currency)}
                       </div>
@@ -105,7 +109,7 @@ export default async function WalletPage() {
                       ))}
                     </div>
                   ) : (
-                    <div className="text-sm text-[#8B7355]">No credits yet.</div>
+                    <div className="text-sm text-[#8B7355]">{tWallet('noCredits')}</div>
                   )}
                 </div>
               </WarmCard>

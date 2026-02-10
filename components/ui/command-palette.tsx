@@ -73,7 +73,7 @@ export function CommandPalette({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl p-0 gap-0">
-        <div className="p-4 border-b border-[#E7DCC7]">
+        <div className="p-4 border-b border-[var(--border)]">
           <SearchInput
             placeholder={placeholder}
             onChange={setQuery}
@@ -83,7 +83,7 @@ export function CommandPalette({
         <div className="max-h-[400px] overflow-y-auto p-2">
           {Object.entries(groupedItems).map(([category, categoryItems]) => (
             <div key={category} className="mb-4">
-              <div className="px-2 py-1.5 text-xs font-semibold text-[#8B7355]">
+              <div className="px-2 py-1.5 text-xs font-semibold text-[var(--text-faint)]">
                 {category}
               </div>
               <div className="space-y-1">
@@ -91,19 +91,19 @@ export function CommandPalette({
                   <button
                     key={item.id}
                     onClick={() => handleSelect(item)}
-                    className="w-full flex items-center gap-3 px-2 py-2 rounded-[8px] hover:bg-[#FAF7F2] transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-2 py-2 rounded-[8px] hover:bg-[var(--surface-muted)] transition-colors text-left"
                   >
                     {item.icon && (
-                      <div className="flex-shrink-0 text-[#8B7355]">
+                      <div className="flex-shrink-0 text-[var(--text-faint)]">
                         {item.icon}
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <div className="text-sm font-medium text-[#2D2721] truncate">
+                      <div className="text-sm font-medium text-[var(--text)] truncate">
                         {item.label}
                       </div>
                       {item.description && (
-                        <div className="text-xs text-[#6B5744] truncate">
+                        <div className="text-xs text-[var(--text-muted)] truncate">
                           {item.description}
                         </div>
                       )}
@@ -114,16 +114,16 @@ export function CommandPalette({
             </div>
           ))}
           {filteredItems.length === 0 && query && (
-            <div className="py-12 text-center text-sm text-[#8B7355]">
+            <div className="py-12 text-center text-sm text-[var(--text-faint)]">
               No results found
             </div>
           )}
         </div>
-        <div className="flex items-center gap-2 px-4 py-3 border-t border-[#E7DCC7] bg-[#FAF7F2]">
-          <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-[#E7DCC7] bg-white px-1.5 font-mono text-[10px] font-medium text-[#8B7355]">
+        <div className="flex items-center gap-2 px-4 py-3 border-t border-[var(--border)] bg-[var(--surface-muted)]">
+          <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-[var(--border)] bg-white px-1.5 font-mono text-[10px] font-medium text-[var(--text-faint)]">
             <span className="text-xs">⌘</span>K
           </kbd>
-          <span className="text-xs text-[#8B7355]">to open</span>
+          <span className="text-xs text-[var(--text-faint)]">to open</span>
         </div>
       </DialogContent>
     </Dialog>

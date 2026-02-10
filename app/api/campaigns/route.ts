@@ -2,12 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Prisma } from '@prisma/client';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
 import { requireActiveMerchant } from '@/lib/merchant-status';
-import { requireCampaignCreationAccess } from '@/lib/billing';
 import { checkCampaignCreationRateLimit } from '@/lib/fraud';
 import { handleError } from '@/lib/errors';
 import { z } from 'zod';
+import {
+  AccessControlError,
+  accessErrorResponse,
+  requireMerchantCapability,
+  requireMerchantProfileAccessById,
+} from '@/lib/access-control';
 
 const createCampaignSchema = z.object({
   merchantId: z.string(),
@@ -26,28 +30,16 @@ const createCampaignSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     const body = await req.json();
     const data = createCampaignSchema.parse(body);
 
-    const merchant = await prisma.merchant.findUnique({
-      where: { id: data.merchantId },
-    });
-
-    if (!merchant) {
-      return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });
-    }
+    const { merchant, profile } = await requireMerchantProfileAccessById(data.merchantId, 'merchant_admin');
 
     await requireActiveMerchant(merchant.id);
-    await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
-    await requireCampaignCreationAccess(merchant.id);
+    await requireMerchantCapability(merchant.id, merchant.slug, 'campaign.create');
 
     // Check rate limit
-    const rateLimit = await checkCampaignCreationRateLimit(session.user.id, merchant.id);
+    const rateLimit = await checkCampaignCreationRateLimit(profile.userId, merchant.id);
     if (!rateLimit.allowed) {
       return NextResponse.json(
         { error: 'Rate limit exceeded', remaining: rateLimit.remaining },
@@ -77,7 +69,7 @@ export async function POST(req: NextRequest) {
     await prisma.auditLog.create({
       data: {
         merchantId: merchant.id,
-        actorUserId: session.user.id,
+        actorUserId: profile.userId,
         action: 'campaign.created',
         payloadJson: {
           campaignId: campaign.id,
@@ -92,8 +84,11 @@ export async function POST(req: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
+    if (error instanceof AccessControlError) {
+      return accessErrorResponse(error);
+    }
     const handled = handleError(error);
-    return NextResponse.json({ error: handled.error }, { status: handled.status });
+    return NextResponse.json({ error: handled.error, code: handled.code, details: handled.details ?? null }, { status: handled.status });
   }
 }
 
@@ -107,27 +102,47 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'merchantId is required' }, { status: 400 });
     }
 
-    // Check if user has access to merchant
-    if (session?.user?.id) {
-      try {
-        await requireMerchantRole(session.user.id, merchantId, 'merchant_staff');
-      } catch {
-        // Not a merchant member - return empty or public campaigns only
-        const campaigns = await prisma.campaign.findMany({
-          where: {
-            merchantId,
-            status: 'active',
+    const merchant = await prisma.merchant.findUnique({
+      where: { id: merchantId },
+      select: { id: true },
+    });
+
+    if (!merchant) {
+      return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });
+    }
+
+    const getPublicCampaigns = () =>
+      prisma.campaign.findMany({
+        where: {
+          merchantId,
+          status: 'active',
+        },
+        include: {
+          vouchers: {
+            where: { status: 'published' },
+            take: 5,
           },
-          include: {
-            vouchers: {
-              where: { status: 'published' },
-              take: 5,
-            },
-          },
-          orderBy: { createdAt: 'desc' },
-        });
-        return NextResponse.json(campaigns);
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+
+    if (!session?.user?.id) {
+      return NextResponse.json(await getPublicCampaigns());
+    }
+
+    try {
+      await requireMerchantProfileAccessById(merchantId, 'merchant_staff');
+    } catch (error) {
+      if (error instanceof AccessControlError) {
+        if (error.status === 401 || error.status === 403) {
+          return NextResponse.json(await getPublicCampaigns());
+        }
+        if (error.status === 404) {
+          return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });
+        }
+        return accessErrorResponse(error);
       }
+      throw error;
     }
 
     // Merchant member - return all campaigns
@@ -147,6 +162,9 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(campaigns);
   } catch (error) {
+    if (error instanceof AccessControlError) {
+      return accessErrorResponse(error);
+    }
     console.error('Error fetching campaigns:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }

@@ -38,33 +38,33 @@ export function AreaChart({
   showLegend = true,
   stacked = false,
 }: AreaChartProps) {
-  const defaultColors = ["#FFC857", "#9DB5A5", "#E17B5C", "#8B7355"]
+  const defaultColors = ["var(--primary)", "var(--success)", "var(--danger)", "var(--text-faint)"]
 
   return (
     <div className={cn("w-full", className)}>
       <ResponsiveContainer width="100%" height={height}>
         <RechartsAreaChart data={data}>
           {showGrid && (
-            <CartesianGrid strokeDasharray="3 3" stroke="#E7DCC7" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
           )}
           <XAxis
             dataKey={xAxisKey}
-            stroke="#8B7355"
-            tick={{ fill: "#6B5744", fontSize: 12 }}
+            stroke="var(--text-faint)"
+            tick={{ fill: "var(--text-muted)", fontSize: 12 }}
           />
           <YAxis
-            stroke="#8B7355"
-            tick={{ fill: "#6B5744", fontSize: 12 }}
+            stroke="var(--text-faint)"
+            tick={{ fill: "var(--text-muted)", fontSize: 12 }}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#FFFFFF",
-              border: "2px solid #E7DCC7",
+              backgroundColor: "var(--surface)",
+              border: "2px solid var(--border)",
               borderRadius: "12px",
               padding: "8px 12px",
             }}
-            labelStyle={{ color: "#2D2721", fontWeight: 600 }}
-            itemStyle={{ color: "#6B5744" }}
+            labelStyle={{ color: "var(--text)", fontWeight: 600 }}
+            itemStyle={{ color: "var(--text-muted)" }}
           />
           {showLegend && (
             <Legend

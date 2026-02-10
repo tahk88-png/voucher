@@ -109,8 +109,8 @@ export function ImageUpload({
         onDragOver={handleDrag}
         onDrop={handleDrop}
         className={cn(
-          "relative rounded-xl border-2 border-dashed border-[#E7DCC7] bg-[#FAF7F2]/50 overflow-hidden transition-colors",
-          dragActive && "border-[#FFC857] bg-[#FFF9ED]",
+          "relative rounded-xl border-2 border-dashed border-[var(--border)] bg-[var(--surface-muted)]/50 overflow-hidden transition-colors",
+          dragActive && "border-[var(--primary)] bg-[var(--bg-2)]",
           disabled && "opacity-50 cursor-not-allowed",
           aspectRatioClass
         )}
@@ -137,20 +137,20 @@ export function ImageUpload({
               type="button"
               onClick={handleRemove}
               disabled={disabled}
-              className="absolute top-2 right-2 rounded-full bg-[#2D2721]/80 p-2 text-white hover:bg-[#2D2721] transition-colors disabled:opacity-50"
+              className="absolute top-2 right-2 rounded-full bg-[var(--text)]/80 p-2 text-white hover:bg-[var(--text)] transition-colors disabled:opacity-50"
             >
               <X className="h-4 w-4" />
             </button>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center p-8 min-h-[200px]">
-            <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#FFF9ED]">
-              <ImageIcon className="h-6 w-6 text-[#8B7355]" />
+            <div className="mx-auto mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--bg-2)]">
+              <ImageIcon className="h-6 w-6 text-[var(--text-faint)]" />
             </div>
-            <div className="mb-2 text-sm font-medium text-[#2D2721]">
+            <div className="mb-2 text-sm font-medium text-[var(--text)]">
               {dragActive ? "Drop image here" : "Upload image"}
             </div>
-            <div className="mb-4 text-xs text-[#6B5744]">
+            <div className="mb-4 text-xs text-[var(--text-muted)]">
               PNG, JPG, GIF up to {maxSize}MB
             </div>
             <WarmButton
@@ -166,7 +166,7 @@ export function ImageUpload({
       </div>
 
       {error && (
-        <div className="rounded-[12px] border-2 border-[#E17B5C] bg-[#E17B5C]/10 p-3 text-sm text-[#E17B5C]">
+        <div className="rounded-[12px] border-2 border-[var(--danger)] bg-[var(--danger)]/10 p-3 text-sm text-[var(--danger)]">
           {error}
         </div>
       )}

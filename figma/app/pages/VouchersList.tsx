@@ -1,11 +1,10 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
-import { Plus, Search, QrCode, Eye, Edit, Copy, Trash2, ExternalLink, Share2 } from 'lucide-react';
+import { useNavigate } from '@/lib/router-shim';
+import { Plus, Search, QrCode } from 'lucide-react';
 import { Input } from '@app/components/ui/input';
-import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
-import { toast } from 'sonner';
+import { useLanguage } from '@app/contexts/LanguageContext';
 
 type Voucher = {
   id: string;
@@ -20,37 +19,111 @@ type Voucher = {
 
 export function VouchersList() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState<'all' | 'active' | 'draft' | 'expired'>('all');
+
+  const copy =
+    language === 'et'
+      ? {
+          title: 'Vautserid',
+          subtitle: 'Loo ja halda oma vautserikoode',
+          createVoucher: 'Loo vautser',
+          searchPlaceholder: 'Otsi pealkirja voi koodi jargi...',
+          noVouchersFound: 'Vautsereid ei leitud',
+          adjustFilters: 'Proovi filtreid muuta',
+          createFirstVoucher: 'Loo esimene vautser alustamiseks',
+          usage: 'Kasutus',
+          validUntil: 'Kehtib kuni',
+          statusLabels: {
+            all: 'Koik',
+            active: 'Aktiivne',
+            draft: 'Mustand',
+            expired: 'Aegunud',
+            redeemed: 'Lunastatud',
+          },
+          vouchers: [
+            {
+              headline: '25% allahindlus suvekollektsioonilt',
+              discount: '25%',
+              validUntil: '31.08.2024',
+            },
+            {
+              headline: 'Tasuta tarne',
+              discount: 'Tasuta',
+              validUntil: '31.12.2024',
+            },
+            {
+              headline: '€10 tervituskink',
+              discount: '€10',
+              validUntil: '31.12.2024',
+            },
+          ],
+        }
+      : {
+          title: 'Vouchers',
+          subtitle: 'Create and manage your voucher codes',
+          createVoucher: 'Create Voucher',
+          searchPlaceholder: 'Search by headline or code...',
+          noVouchersFound: 'No vouchers found',
+          adjustFilters: 'Try adjusting your filters',
+          createFirstVoucher: 'Create your first voucher to get started',
+          usage: 'Usage',
+          validUntil: 'Valid until',
+          statusLabels: {
+            all: 'All',
+            active: 'Active',
+            draft: 'Draft',
+            expired: 'Expired',
+            redeemed: 'Redeemed',
+          },
+          vouchers: [
+            {
+              headline: '25% Off Summer Collection',
+              discount: '25%',
+              validUntil: '2024-08-31',
+            },
+            {
+              headline: 'Free Shipping',
+              discount: 'Free',
+              validUntil: '2024-12-31',
+            },
+            {
+              headline: '€10 Welcome Gift',
+              discount: '€10',
+              validUntil: '2024-12-31',
+            },
+          ],
+        };
 
   const vouchers: Voucher[] = [
     {
       id: '1',
-      headline: '25% Off Summer Collection',
+      headline: copy.vouchers[0].headline,
       code: 'SUMMER25',
       status: 'active',
-      discount: '25%',
-      validUntil: '2024-08-31',
+      discount: copy.vouchers[0].discount,
+      validUntil: copy.vouchers[0].validUntil,
       used: 45,
       limit: 100,
     },
     {
       id: '2',
-      headline: 'Free Shipping',
+      headline: copy.vouchers[1].headline,
       code: 'FREESHIP',
       status: 'active',
-      discount: 'Free',
-      validUntil: '2024-12-31',
+      discount: copy.vouchers[1].discount,
+      validUntil: copy.vouchers[1].validUntil,
       used: 123,
       limit: 500,
     },
     {
       id: '3',
-      headline: '€10 Welcome Gift',
+      headline: copy.vouchers[2].headline,
       code: 'WELCOME10',
       status: 'draft',
-      discount: '€10',
-      validUntil: '2024-12-31',
+      discount: copy.vouchers[2].discount,
+      validUntil: copy.vouchers[2].validUntil,
       used: 0,
       limit: 1000,
     },
@@ -71,6 +144,10 @@ export function VouchersList() {
     }
   };
 
+  const getStatusLabel = (status: Voucher['status'] | 'all') => {
+    return copy.statusLabels[status];
+  };
+
   const filteredVouchers = vouchers.filter((voucher) => {
     const matchesSearch =
       voucher.headline.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -84,12 +161,12 @@ export function VouchersList() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#2D2721]">Vouchers</h1>
-          <p className="text-[#6B5744] mt-1">Create and manage your voucher codes</p>
+          <h1 className="text-3xl font-bold text-[#2D2721]">{copy.title}</h1>
+          <p className="text-[#6B5744] mt-1">{copy.subtitle}</p>
         </div>
         <WarmButton onClick={() => navigate('/vouchers/create')}>
           <Plus className="h-5 w-5 mr-2" />
-          Create Voucher
+          {copy.createVoucher}
         </WarmButton>
       </div>
 
@@ -100,7 +177,7 @@ export function VouchersList() {
             <Search className="h-5 w-5 text-[#8B7355]" />
             <Input
               type="text"
-              placeholder="Search by headline or code..."
+              placeholder={copy.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-[#2D2721]"
@@ -120,7 +197,7 @@ export function VouchersList() {
                   : 'bg-white text-[#6B5744] border border-[rgba(139,115,85,0.15)] hover:border-[rgba(139,115,85,0.3)]'
               }`}
             >
-              {status.charAt(0).toUpperCase() + status.slice(1)}
+              {getStatusLabel(status)}
             </button>
           ))}
         </div>
@@ -133,16 +210,16 @@ export function VouchersList() {
             <div className="w-16 h-16 rounded-full bg-[#FFF9ED] flex items-center justify-center mx-auto mb-4">
               <QrCode className="h-8 w-8 text-[#FFC857]" />
             </div>
-            <h3 className="text-lg font-semibold text-[#2D2721] mb-2">No vouchers found</h3>
+            <h3 className="text-lg font-semibold text-[#2D2721] mb-2">{copy.noVouchersFound}</h3>
             <p className="text-[#6B5744] mb-6">
               {searchQuery || filter !== 'all'
-                ? 'Try adjusting your filters'
-                : 'Create your first voucher to get started'}
+                ? copy.adjustFilters
+                : copy.createFirstVoucher}
             </p>
             {!searchQuery && filter === 'all' && (
               <WarmButton onClick={() => navigate('/vouchers/create')}>
                 <Plus className="h-5 w-5 mr-2" />
-                Create Voucher
+                {copy.createVoucher}
               </WarmButton>
             )}
           </div>
@@ -162,7 +239,7 @@ export function VouchersList() {
                         {voucher.code}
                       </code>
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(voucher.status)}`}>
-                        {voucher.status}
+                        {getStatusLabel(voucher.status)}
                       </span>
                     </div>
                   </div>
@@ -171,7 +248,7 @@ export function VouchersList() {
 
                 <div className="pt-4 border-t border-[rgba(139,115,85,0.1)]">
                   <div className="flex items-center justify-between text-sm mb-2">
-                    <span className="text-[#8B7355]">Usage</span>
+                    <span className="text-[#8B7355]">{copy.usage}</span>
                     <span className="font-medium text-[#2D2721]">
                       {voucher.used} / {voucher.limit}
                     </span>
@@ -185,7 +262,7 @@ export function VouchersList() {
                 </div>
 
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[#8B7355]">Valid until</span>
+                  <span className="text-[#8B7355]">{copy.validUntil}</span>
                   <span className="font-medium text-[#2D2721]">{voucher.validUntil}</span>
                 </div>
               </div>

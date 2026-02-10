@@ -186,7 +186,7 @@ export async function sendCreditExpiryWarning(params: {
 
   await sendEmail({
     to: params.to,
-    subject: `⚠️ Your ${params.merchantName} credit expires in ${params.daysUntilExpiry} ${params.daysUntilExpiry === 1 ? 'day' : 'days'}`,
+    subject: `Credit expiry warning: ${params.merchantName} credit expires in ${params.daysUntilExpiry} ${params.daysUntilExpiry === 1 ? 'day' : 'days'}`,
     html: `<!DOCTYPE html><html><body>${html}</body></html>`,
     text,
     tags: [{ name: 'type', value: 'credit_expiry_warning' }],

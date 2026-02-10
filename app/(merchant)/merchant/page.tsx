@@ -25,7 +25,7 @@ export default async function MerchantOverviewPage() {
           <h1 className="text-3xl font-bold text-[#2D2721]">Merchant dashboard</h1>
           <p className="text-[#6B5744] mt-1">You are not connected to any merchants yet.</p>
         </div>
-        <WarmCard padding="lg" className="bg-white text-center border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white text-center border border-[rgba(139,115,85,0.15)]">
           <Gift className="h-12 w-12 mx-auto text-[#8B7355] mb-4" />
           <h3 className="text-lg font-semibold text-[#2D2721] mb-2">No merchant access</h3>
           <p className="text-sm text-[#6B5744] mb-4">

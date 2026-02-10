@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   Wallet, 
   ArrowUpRight, 
@@ -62,7 +62,7 @@ export function MerchantWallet() {
   const bankAccount = {
     iban: 'EE12 3456 7890 1234 5678',
     bankName: 'Swedbank AS',
-    holder: 'Fashion Store OÜ'
+    holder: 'Fashion Store OÃœ'
   };
 
   const chartData = [
@@ -90,7 +90,7 @@ export function MerchantWallet() {
       type: 'sale',
       amount: 120.00,
       currency: 'EUR',
-      description: 'Gift Card Sale - €120 Value',
+      description: 'Gift Card Sale - â‚¬120 Value',
       date: '2024-01-24',
       status: 'completed',
       referenceId: 'ORD-8491'
@@ -149,7 +149,7 @@ export function MerchantWallet() {
         success: () => {
           setIsPayoutModalOpen(false);
           setPayoutAmount('');
-          return `Payout of €${netAmount.toFixed(2)} requested successfully!`;
+          return `Payout of â‚¬${netAmount.toFixed(2)} requested successfully!`;
         },
         error: 'Failed to request payout'
       }
@@ -281,12 +281,12 @@ export function MerchantWallet() {
                             placeholder="0.00"
                             autoFocus
                           />
-                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 text-lg">€</span>
+                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 text-lg">â‚¬</span>
                         </div>
                         <div className="flex justify-between mt-2 text-xs text-white/50">
-                          <span>Min: €50.00</span>
+                          <span>Min: â‚¬50.00</span>
                           <span className="cursor-pointer hover:text-[#FFC857]" onClick={() => setPayoutAmount(walletBalance.available.toString())}>
-                            Max: €{walletBalance.available.toFixed(2)}
+                            Max: â‚¬{walletBalance.available.toFixed(2)}
                           </span>
                         </div>
                       </div>
@@ -303,17 +303,17 @@ export function MerchantWallet() {
                     <div className="bg-black/20 rounded-xl p-5 space-y-3">
                       <div className="flex justify-between text-white/70 text-sm">
                         <span>Requested Amount</span>
-                        <span>€{parseFloat(payoutAmount || '0').toFixed(2)}</span>
+                        <span>â‚¬{parseFloat(payoutAmount || '0').toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-[#E17B5C] text-sm">
                         <span>Service Fee (6%)</span>
-                        <span>-€{(parseFloat(payoutAmount || '0') * 0.06).toFixed(2)}</span>
+                        <span>-â‚¬{(parseFloat(payoutAmount || '0') * 0.06).toFixed(2)}</span>
                       </div>
                       <div className="h-px bg-white/10 my-1" />
                       <div className="flex justify-between items-end">
                         <span className="text-white font-medium">You Receive</span>
                         <span className="text-2xl font-bold text-[#9DB5A5]">
-                          €{(parseFloat(payoutAmount || '0') * 0.94).toFixed(2)}
+                          â‚¬{(parseFloat(payoutAmount || '0') * 0.94).toFixed(2)}
                         </span>
                       </div>
                       
@@ -411,7 +411,7 @@ export function MerchantWallet() {
                         <div className="font-semibold text-[#2D2721] text-sm md:text-base truncate max-w-[200px] md:max-w-[300px]">{txn.description}</div>
                         <div className="flex items-center gap-2 text-xs text-[#8B7355] mt-0.5">
                           <span>{txn.date}</span>
-                          <span className="text-[rgba(139,115,85,0.3)]">•</span>
+                          <span className="text-[rgba(139,115,85,0.3)]">â€¢</span>
                           <span className="font-mono bg-[rgba(139,115,85,0.1)] px-1.5 rounded text-[10px]">{txn.referenceId}</span>
                         </div>
                       </div>
@@ -498,7 +498,7 @@ export function MerchantWallet() {
               <div className="group">
                 <div className="flex justify-between items-center mb-1 gap-2">
                   <span className="text-sm text-[#6B5744] truncate">Gross Revenue</span>
-                  <span className="font-bold text-[#2D2721] whitespace-nowrap">€15,240.00</span>
+                  <span className="font-bold text-[#2D2721] whitespace-nowrap">â‚¬15,240.00</span>
                 </div>
                 <div className="w-full bg-[#F0EBE5] h-1.5 rounded-full overflow-hidden">
                    <div className="bg-[#9DB5A5] h-full w-[85%] rounded-full group-hover:bg-[#8CA896] transition-colors"></div>
@@ -508,7 +508,7 @@ export function MerchantWallet() {
               <div className="group">
                 <div className="flex justify-between items-center mb-1 gap-2">
                   <span className="text-sm text-[#6B5744] truncate">Fees Paid (6%)</span>
-                  <span className="font-bold text-[#2D2721] whitespace-nowrap">€914.40</span>
+                  <span className="font-bold text-[#2D2721] whitespace-nowrap">â‚¬914.40</span>
                 </div>
                 <div className="w-full bg-[#F0EBE5] h-1.5 rounded-full overflow-hidden">
                    <div className="bg-[#E17B5C] h-full w-[6%] rounded-full group-hover:bg-[#D66A4B] transition-colors"></div>
@@ -517,7 +517,7 @@ export function MerchantWallet() {
               
               <div className="pt-3 border-t border-[rgba(139,115,85,0.1)] flex justify-between items-center">
                 <span className="text-sm font-medium text-[#2D2721]">Net Income</span>
-                <span className="font-bold text-lg text-[#9DB5A5]">€14,325.60</span>
+                <span className="font-bold text-lg text-[#9DB5A5]">â‚¬14,325.60</span>
               </div>
             </div>
           </WarmCard>
@@ -526,3 +526,4 @@ export function MerchantWallet() {
     </div>
   );
 }
+

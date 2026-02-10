@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router';
+﻿import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from '@/lib/router-shim';
 import { WarmButton } from '@app/components/WarmButton';
 import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { 
@@ -41,9 +41,9 @@ import { copyToClipboard } from '@app/utils/clipboard';
 
 // RENTAL ADD-ONS MOCK
 const RENTAL_ADDONS = [
-  { id: 'insurance_full', name: 'Täiskindlustus', price: 5.00, perDay: true, icon: ShieldCheck, description: 'Omavastutus 0€.' },
+  { id: 'insurance_full', name: 'TÃ¤iskindlustus', price: 5.00, perDay: true, icon: ShieldCheck, description: 'Omavastutus 0â‚¬.' },
   { id: 'extra_battery', name: 'Lisaaku', price: 3.00, perDay: true, icon: Battery, description: 'Ole alati valmis.' },
-  { id: 'cables_set', name: 'Kaablite komplekt', price: 2.00, perDay: false, icon: Cable, description: 'Kõik vajalikud üleminekud.' },
+  { id: 'cables_set', name: 'Kaablite komplekt', price: 2.00, perDay: false, icon: Cable, description: 'KÃµik vajalikud Ã¼leminekud.' },
 ];
 
 type MediaItem = {
@@ -162,7 +162,7 @@ export function RentalDetail() {
     }
     
     if (isTooShort) {
-       toast.error(`Minimaalne rendiperiood on ${minDays} päeva`);
+       toast.error(`Minimaalne rendiperiood on ${minDays} pÃ¤eva`);
        return;
     }
 
@@ -181,7 +181,7 @@ export function RentalDetail() {
 
       const addonNames = selectedAddons.map(id => RENTAL_ADDONS.find(a => a.id === id)?.name).join(', ');
       
-      const timeInfo = `Väljastus: ${pickupTime}, Tagastus: ${returnTime}`;
+      const timeInfo = `VÃ¤ljastus: ${pickupTime}, Tagastus: ${returnTime}`;
 
       addItem({
         sourceId: rentalItem!.id,
@@ -213,7 +213,7 @@ export function RentalDetail() {
 
   const addToGoogleCalendar = () => {
     if (!range?.from || isTooShort) {
-      toast.error(isTooShort ? `Vali vähemalt ${minDays} päeva` : "Vali enne kuupäevad");
+      toast.error(isTooShort ? `Vali vÃ¤hemalt ${minDays} pÃ¤eva` : "Vali enne kuupÃ¤evad");
       return;
     }
 
@@ -341,7 +341,7 @@ export function RentalDetail() {
               
               <div className="absolute top-4 left-4 flex gap-2 pointer-events-none">
                  <div className="bg-[#2D2721] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                    <Clock className="w-3 h-3" /> Min. {minDays} päeva
+                    <Clock className="w-3 h-3" /> Min. {minDays} pÃ¤eva
                  </div>
                  {/* Stock Badge */}
                  {rentalItem.stock > 0 && (
@@ -414,7 +414,7 @@ export function RentalDetail() {
              <div>
                 <h2 className="text-2xl font-display font-bold text-[#2D2721] mb-4">Kirjeldus</h2>
                 <p className="text-[#6B5744] leading-relaxed text-lg whitespace-pre-line">
-                   {rentalItem.description || "See seade on mõeldud professionaalidele, kes vajavad usaldusväärsust. Enne iga väljastust kontrollitakse seade meie tehnikute poolt üle."}
+                   {rentalItem.description || "See seade on mÃµeldud professionaalidele, kes vajavad usaldusvÃ¤Ã¤rsust. Enne iga vÃ¤ljastust kontrollitakse seade meie tehnikute poolt Ã¼le."}
                 </p>
              </div>
 
@@ -423,7 +423,7 @@ export function RentalDetail() {
                 <div className="bg-[#FAF7F2] p-6 rounded-2xl border border-[#E7DCC7]">
                    <h3 className="font-bold text-[#2D2721] mb-3 flex items-center gap-2">
                       <BookOpen className="w-5 h-5 text-[#E17B5C]" />
-                      Lühijuhend
+                      LÃ¼hijuhend
                    </h3>
                    <p className="text-[#6B5744] whitespace-pre-line text-sm leading-relaxed">
                       {rentalItem.usageGuide}
@@ -452,7 +452,7 @@ export function RentalDetail() {
                 <div>
                    <h3 className="font-bold text-[#2D2721] mb-4 flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-[#00D098]" /> Komplektis</h3>
                    <ul className="space-y-3">
-                      {['Kandekott', 'Laadija', 'Mälukaart 64GB', 'Puhastuslapp'].map((item, i) => (
+                      {['Kandekott', 'Laadija', 'MÃ¤lukaart 64GB', 'Puhastuslapp'].map((item, i) => (
                          <li key={i} className="flex items-center gap-3 text-[#6B5744] bg-[#FAF7F2] p-2 rounded-lg">
                             <div className="w-1.5 h-1.5 rounded-full bg-[#E7DCC7]"></div>
                             {item}
@@ -511,12 +511,12 @@ export function RentalDetail() {
                        <h1 className="text-xl font-bold text-[#2D2721] mb-1">{rentalItem.title}</h1>
                        <div className="flex items-baseline gap-1">
                           <span className={`text-3xl font-bold ${days >= minDays && activePricePerDay < rentalItem.pricePerDay ? 'text-[#00D098]' : 'text-[#E17B5C]'}`}>
-                             {activePricePerDay}€
+                             {activePricePerDay}â‚¬
                           </span>
-                          <span className="text-[#8B7355] font-medium">/ päev</span>
+                          <span className="text-[#8B7355] font-medium">/ pÃ¤ev</span>
                           
                           {days >= minDays && activePricePerDay < rentalItem.pricePerDay && (
-                             <span className="ml-2 text-sm text-[#8B7355] line-through">{rentalItem.pricePerDay}€</span>
+                             <span className="ml-2 text-sm text-[#8B7355] line-through">{rentalItem.pricePerDay}â‚¬</span>
                           )}
                        </div>
                     </div>
@@ -531,9 +531,9 @@ export function RentalDetail() {
                  {/* Visual Price Grid (Rentster style) */}
                  <div className="grid grid-cols-4 gap-0 mb-6 rounded-xl overflow-hidden border border-[#E7DCC7] divide-x divide-[#E7DCC7] shadow-sm">
                     {[
-                       { label: '1 päev', days: 1 },
-                       { label: '3 päeva', days: 3 },
-                       { label: '1 nädal', days: 7 },
+                       { label: '1 pÃ¤ev', days: 1 },
+                       { label: '3 pÃ¤eva', days: 3 },
+                       { label: '1 nÃ¤dal', days: 7 },
                        { label: '1 kuu', days: 30 }
                     ].map((tier) => {
                        const tierPricePerDay = getActivePrice(tier.days);
@@ -546,7 +546,7 @@ export function RentalDetail() {
                              className={`flex flex-col items-center justify-center p-3 text-center transition-colors cursor-pointer hover:bg-[#FAF7F2] ${isActive ? 'bg-[#FFF9ED] ring-inset ring-2 ring-[#E17B5C]' : 'bg-white'}`}
                           >
                              <div className={`text-lg md:text-xl font-bold leading-none mb-1 ${isActive ? 'text-[#E17B5C]' : 'text-[#2D2721]'}`}>
-                                {totalPrice}€
+                                {totalPrice}â‚¬
                              </div>
                              <div className="text-[10px] md:text-xs font-medium text-[#8B7355] uppercase tracking-wide">
                                 {tier.label}
@@ -663,7 +663,7 @@ export function RentalDetail() {
                          <div className="bg-[#FFF9ED] border border-[#FFC857] rounded-2xl p-4 flex items-center gap-3 text-[#B45309]">
                             <AlertCircle className="w-5 h-5 flex-shrink-0" />
                             <div className="text-sm font-bold">
-                               Minimaalne rendiperiood on {minDays} päeva. Palun vali pikem periood.
+                               Minimaalne rendiperiood on {minDays} pÃ¤eva. Palun vali pikem periood.
                             </div>
                          </div>
                       ) : (
@@ -677,7 +677,7 @@ export function RentalDetail() {
                                     {range?.from && format(range.from, 'dd.MM')} 
                                     <ArrowRight className="w-4 h-4 text-[#E7DCC7]" /> 
                                     {(range?.to || range?.from) && format(range.to || range.from!, 'dd.MM')}
-                                    <span className="text-sm font-normal text-[#8B7355] ml-1">({days} päeva)</span>
+                                    <span className="text-sm font-normal text-[#8B7355] ml-1">({days} pÃ¤eva)</span>
                                  </div>
                               </div>
                               <CalendarIcon className="w-8 h-8 text-[#E17B5C] opacity-20" />
@@ -687,7 +687,7 @@ export function RentalDetail() {
                            <div className="grid grid-cols-2 gap-4 border-t border-[#FAF7F2] pt-4">
                               <div>
                                  <label className="text-xs font-bold text-[#8B7355] block mb-2 flex items-center gap-1">
-                                    Väljastus (Alates)
+                                    VÃ¤ljastus (Alates)
                                  </label>
                                  <div className="relative">
                                    <select 
@@ -731,7 +731,7 @@ export function RentalDetail() {
                  ) : (
                     <div className="bg-[#FAF7F2] rounded-xl p-4 mb-6 flex items-center gap-3 text-[#8B7355] border border-dashed border-[#E7DCC7]">
                        <AlertCircle className="w-5 h-5" />
-                       <span className="text-sm">Palun vali kalendrist vähemalt {minDays} päeva</span>
+                       <span className="text-sm">Palun vali kalendrist vÃ¤hemalt {minDays} pÃ¤eva</span>
                     </div>
                  )}
 
@@ -754,7 +754,7 @@ export function RentalDetail() {
                                 <span className="font-bold text-sm text-[#2D2721]">{addon.name}</span>
                              </div>
                              <div className="text-sm font-bold">
-                                +{addon.price}€ {addon.perDay && <span className="text-[10px] font-normal text-[#8B7355]">/päev</span>}
+                                +{addon.price}â‚¬ {addon.perDay && <span className="text-[10px] font-normal text-[#8B7355]">/pÃ¤ev</span>}
                              </div>
                           </div>
                        );
@@ -765,7 +765,7 @@ export function RentalDetail() {
                  <div className="space-y-4">
                     <div className="flex justify-between items-center text-lg font-bold text-[#2D2721] border-t border-[#FAF7F2] pt-4">
                        <span>Kokku</span>
-                       <span>{calculateTotal().toFixed(2)}€</span>
+                       <span>{calculateTotal().toFixed(2)}â‚¬</span>
                     </div>
                     <WarmButton 
                        fullWidth 
@@ -774,7 +774,7 @@ export function RentalDetail() {
                        disabled={checkingStock || days === 0 || isTooShort}
                        className={days === 0 || isTooShort ? 'opacity-50 cursor-not-allowed' : ''}
                     >
-                       {checkingStock ? 'Kontrollin...' : (isTooShort ? `Vali min. ${minDays} päeva` : 'Broneeri kohe')}
+                       {checkingStock ? 'Kontrollin...' : (isTooShort ? `Vali min. ${minDays} pÃ¤eva` : 'Broneeri kohe')}
                     </WarmButton>
                  </div>
                  
@@ -792,3 +792,5 @@ export function RentalDetail() {
     </div>
   );
 }
+
+

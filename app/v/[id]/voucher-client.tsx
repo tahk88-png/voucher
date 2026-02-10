@@ -163,7 +163,7 @@ export default function VoucherClient({
             {limitText}
           </p>
 
-          <div className="flex items-center justify-between gap-3 py-2 px-3 rounded-lg bg-[#FFF9ED] border border-[#E7DCC7]">
+          <div className="flex items-center justify-between gap-3 py-2 px-3 rounded-lg bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)]">
             <span className="font-mono text-lg font-semibold tracking-wide text-[#2D2721]">{voucherCode}</span>
             <WarmButton
               size="sm"
@@ -178,7 +178,7 @@ export default function VoucherClient({
 
           {qrCodeDataUrl && (
             <div className="flex flex-col items-center gap-2">
-              <div className="rounded-[14px] border border-[#E7DCC7] bg-white p-3 shadow-warm-sm">
+              <div className="rounded-[14px] border border-[rgba(139,115,85,0.15)] bg-white p-3 shadow-warm-sm">
                 <Image
                   src={qrCodeDataUrl}
                   alt={`QR code for voucher ${voucherCode}`}
@@ -229,7 +229,7 @@ export default function VoucherClient({
             )}
           </div>
 
-          <div className="pt-4 border-t border-[#E7DCC7]">
+          <div className="pt-4 border-t border-[rgba(139,115,85,0.15)]">
             <p className="text-sm font-medium mb-3 text-center text-[#6B5744]">Share on social media</p>
             <SocialShare
               url={typeof window !== 'undefined' ? window.location.href : ''}

@@ -121,7 +121,7 @@ export default function TicketRedeemPage() {
                   value={qrToken}
                   onChange={(e) => setQrToken(e.target.value)}
                   placeholder="Enter QR token or ticket number"
-                  className="border-[#E7DCC7]"
+                  className="border-[rgba(139,115,85,0.15)]"
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       handleQRScan();
@@ -135,7 +135,7 @@ export default function TicketRedeemPage() {
             </div>
 
             {ticketInfo && (
-              <div className="p-4 bg-[#FFF9ED] rounded-2xl border border-[#E7DCC7] space-y-2">
+              <div className="p-4 bg-[#FFF9ED] rounded-2xl border border-[rgba(139,115,85,0.15)] space-y-2">
                 <p className="font-semibold text-[#2D2721]">Ticket found</p>
                 <p className="text-sm text-[#6B5744]">
                   <span className="text-[#8B7355]">Number:</span> {ticketInfo.ticketNumber}
@@ -172,7 +172,7 @@ export default function TicketRedeemPage() {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="e.g., Main Entrance, Gate A"
-                  className="border-[#E7DCC7]"
+                  className="border-[rgba(139,115,85,0.15)]"
                 />
               </div>
               <WarmButton onClick={handleRedeem} disabled={isRedeeming} className="w-full" size="lg">

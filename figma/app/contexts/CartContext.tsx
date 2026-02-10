@@ -34,13 +34,18 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(() => {
     // Load from local storage on boot
-    const saved = localStorage.getItem('unified_cart');
+    if (typeof window === 'undefined') {
+      return [];
+    }
+    const saved = window.localStorage.getItem('unified_cart');
     return saved ? JSON.parse(saved) : [];
   });
 
   // Save to local storage on change
   useEffect(() => {
-    localStorage.setItem('unified_cart', JSON.stringify(items));
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('unified_cart', JSON.stringify(items));
+    }
   }, [items]);
 
   const addItem = (newItem: Omit<CartItem, 'id'>) => {

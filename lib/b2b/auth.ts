@@ -11,12 +11,28 @@ export type OrgRole =
   | "partner_cashier"
   | "auditor"
 
-export async function requireSession() {
+export type AuthenticatedSession = {
+  user: {
+    id: string
+    email?: string | null
+    name?: string | null
+    image?: string | null
+  }
+}
+
+export async function requireSession(): Promise<AuthenticatedSession | null> {
   const session = await auth()
   if (!session?.user?.id) {
     return null
   }
-  return session
+  return {
+    user: {
+      id: session.user.id,
+      email: session.user.email ?? null,
+      name: session.user.name ?? null,
+      image: session.user.image ?? null,
+    },
+  }
 }
 
 export async function requireOrgMembership(userId: string, orgId: string, roles?: OrgRole[]) {

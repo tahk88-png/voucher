@@ -36,17 +36,17 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-xl border-2 border-[#E7DCC7] bg-white overflow-hidden">
+    <div className="rounded-xl border-2 border-[var(--border)] bg-white overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-[#FAF7F2]">
+          <thead className="bg-[var(--surface-muted)]">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
                     <th
                       key={header.id}
-                      className="px-4 py-3 text-left text-sm font-bold text-[#2D2721]"
+                      className="px-4 py-3 text-left text-sm font-bold text-[var(--text)]"
                     >
                       {header.isPlaceholder
                         ? null
@@ -66,10 +66,10 @@ export function DataTable<TData, TValue>({
                 <tr
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="border-t border-[#E7DCC7] hover:bg-[#FAF7F2]/50 transition-colors"
+                  className="border-t border-[var(--border)] hover:bg-[var(--surface-muted)]/50 transition-colors"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className="px-4 py-3 text-sm text-[#2D2721]">
+                    <td key={cell.id} className="px-4 py-3 text-sm text-[var(--text)]">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -82,7 +82,7 @@ export function DataTable<TData, TValue>({
               <tr>
                 <td
                   colSpan={columns.length}
-                  className="h-24 text-center text-[#8B7355]"
+                  className="h-24 text-center text-[var(--text-faint)]"
                 >
                   No results.
                 </td>
@@ -111,7 +111,7 @@ export function DataTableColumnHeader<TData, TValue>({
   return (
     <button
       className={cn(
-        "flex items-center gap-2 hover:text-[#2D2721] transition-colors",
+        "flex items-center gap-2 hover:text-[var(--text)] transition-colors",
         className
       )}
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}

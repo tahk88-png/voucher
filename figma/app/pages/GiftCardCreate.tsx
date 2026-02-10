@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { ArrowLeft, ArrowRight, Gift, CreditCard, Mail, Upload, X, Check, Eye } from 'lucide-react';
 import { Input } from '@app/components/ui/input';
 import { Label } from '@app/components/ui/label';
@@ -241,7 +241,7 @@ export function GiftCardCreate() {
                           className="pl-8"
                         />
                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8B7355] font-medium">
-                          {formData.currency === 'EUR' ? '€' : formData.currency === 'USD' ? '$' : 'kr'}
+                          {formData.currency === 'EUR' ? 'â‚¬' : formData.currency === 'USD' ? '$' : 'kr'}
                         </span>
                       </div>
                     </div>
@@ -255,7 +255,7 @@ export function GiftCardCreate() {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="EUR">EUR (€)</SelectItem>
+                          <SelectItem value="EUR">EUR (â‚¬)</SelectItem>
                           <SelectItem value="USD">USD ($)</SelectItem>
                           <SelectItem value="SEK">SEK (kr)</SelectItem>
                           <SelectItem value="NOK">NOK (kr)</SelectItem>
@@ -559,7 +559,7 @@ export function GiftCardCreate() {
                 </div>
                 <div className="flex justify-between text-sm">
                    <span className="text-[#8B7355]">Delivery</span>
-                   <span className="text-[#2D2721] font-medium">{formData.recipientEmail || '—'}</span>
+                   <span className="text-[#2D2721] font-medium">{formData.recipientEmail || 'â€”'}</span>
                 </div>
              </div>
            </div>

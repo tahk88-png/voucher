@@ -95,14 +95,14 @@ export default function NewEventPage() {
             <div className="space-y-4">
               <div>
                 <Label htmlFor="name">Event name *</Label>
-                <Input id="name" name="name" required className="border-[#E7DCC7]" />
+                <Input id="name" name="name" required className="border-[rgba(139,115,85,0.15)]" />
               </div>
               <div>
                 <Label htmlFor="description">Description</Label>
                 <textarea
                   id="description"
                   name="description"
-                  className="w-full min-h-[100px] px-3 py-2 text-sm border border-[#E7DCC7] rounded-md bg-white"
+                  className="w-full min-h-[100px] px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
                   placeholder="Describe your event..."
                 />
               </div>
@@ -113,7 +113,7 @@ export default function NewEventPage() {
                   name="type"
                   required
                   aria-label="Event type"
-                  className="w-full px-3 py-2 text-sm border border-[#E7DCC7] rounded-md bg-white"
+                  className="w-full px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
                 >
                   <option value="festival">Festival</option>
                   <option value="internal">Internal event</option>
@@ -131,21 +131,21 @@ export default function NewEventPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="eventDate">Event date *</Label>
-                  <Input id="eventDate" name="eventDate" type="date" required min={today} className="border-[#E7DCC7]" />
+                  <Input id="eventDate" name="eventDate" type="date" required min={today} className="border-[rgba(139,115,85,0.15)]" />
                 </div>
                 <div>
                   <Label htmlFor="eventTime">Event time *</Label>
-                  <Input id="eventTime" name="eventTime" type="time" required className="border-[#E7DCC7]" />
+                  <Input id="eventTime" name="eventTime" type="time" required className="border-[rgba(139,115,85,0.15)]" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="eventEndDate">End date (optional)</Label>
-                  <Input id="eventEndDate" name="eventEndDate" type="date" min={today} className="border-[#E7DCC7]" />
+                  <Input id="eventEndDate" name="eventEndDate" type="date" min={today} className="border-[rgba(139,115,85,0.15)]" />
                 </div>
                 <div>
                   <Label htmlFor="eventEndTime">End time (optional)</Label>
-                  <Input id="eventEndTime" name="eventEndTime" type="time" className="border-[#E7DCC7]" />
+                  <Input id="eventEndTime" name="eventEndTime" type="time" className="border-[rgba(139,115,85,0.15)]" />
                 </div>
               </div>
             </div>
@@ -156,11 +156,11 @@ export default function NewEventPage() {
             <div className="space-y-4">
               <div>
                 <Label htmlFor="location">Location name</Label>
-                <Input id="location" name="location" placeholder="Main Hall, Outdoor Stage" className="border-[#E7DCC7]" />
+                <Input id="location" name="location" placeholder="Main Hall, Outdoor Stage" className="border-[rgba(139,115,85,0.15)]" />
               </div>
               <div>
                 <Label htmlFor="locationAddress">Full address</Label>
-                <Input id="locationAddress" name="locationAddress" placeholder="Street address, City, Country" className="border-[#E7DCC7]" />
+                <Input id="locationAddress" name="locationAddress" placeholder="Street address, City, Country" className="border-[rgba(139,115,85,0.15)]" />
               </div>
             </div>
           </WarmCard>
@@ -177,7 +177,7 @@ export default function NewEventPage() {
                   min="1"
                   required
                   placeholder="100"
-                  className="border-[#E7DCC7]"
+                  className="border-[rgba(139,115,85,0.15)]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -191,7 +191,7 @@ export default function NewEventPage() {
                     min="0"
                     required
                     placeholder="0.00"
-                    className="border-[#E7DCC7]"
+                    className="border-[rgba(139,115,85,0.15)]"
                   />
                 </div>
                 <div>
@@ -201,7 +201,7 @@ export default function NewEventPage() {
                     name="currency"
                     required
                     aria-label="Currency"
-                    className="w-full px-3 py-2 text-sm border border-[#E7DCC7] rounded-md bg-white"
+                    className="w-full px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
                   >
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -227,7 +227,7 @@ export default function NewEventPage() {
                 <textarea
                   id="terms"
                   name="terms"
-                  className="w-full min-h-[80px] px-3 py-2 text-sm border border-[#E7DCC7] rounded-md bg-white"
+                  className="w-full min-h-[80px] px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
                   placeholder="Event terms, refund policy, etc."
                 />
               </div>

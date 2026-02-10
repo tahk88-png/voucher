@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+﻿import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Input } from '@app/components/ui/input';
@@ -119,7 +119,7 @@ export function CampaignAdminDetail() {
               {campaign.name}
               {renderStatusBadge(campaign.status)}
             </h1>
-            <p className="text-[#6B5744] text-sm">ID: {campaign.id} • {campaign.type.toUpperCase()}</p>
+            <p className="text-[#6B5744] text-sm">ID: {campaign.id} â€¢ {campaign.type.toUpperCase()}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -144,7 +144,7 @@ export function CampaignAdminDetail() {
               : 'border-transparent text-[#6B5744] hover:text-[#2D2721]'
           }`}
         >
-          Ülevaade
+          Ãœlevaade
         </button>
         <button
           onClick={() => setActiveTab('settings')}
@@ -164,7 +164,7 @@ export function CampaignAdminDetail() {
               : 'border-transparent text-[#6B5744] hover:text-[#2D2721]'
           }`}
         >
-          Koodid ja Vautšerid
+          Koodid ja VautÅ¡erid
         </button>
       </div>
 
@@ -182,7 +182,7 @@ export function CampaignAdminDetail() {
                     <div className="p-2 bg-green-50 rounded-lg text-green-600">
                       <CreditCard className="w-5 h-5" />
                     </div>
-                    <span className="text-sm font-medium text-[#6B5744]">Käive</span>
+                    <span className="text-sm font-medium text-[#6B5744]">KÃ¤ive</span>
                   </div>
                   <div className="text-2xl font-bold text-[#2D2721]">
                     <CurrencyDisplay amount={campaign.revenue} currency="EUR" />
@@ -216,7 +216,7 @@ export function CampaignAdminDetail() {
               <WarmCard padding="lg" className="bg-white">
                 <h3 className="text-lg font-bold text-[#2D2721] mb-4 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-[#E17B5C]" />
-                  Müügi ja lunastamise dünaamika
+                  MÃ¼Ã¼gi ja lunastamise dÃ¼naamika
                 </h3>
                 <div className="h-64 bg-gray-50 rounded-xl flex items-center justify-center border border-dashed border-gray-200 text-gray-400">
                   Graafik kuvatakse siin
@@ -244,7 +244,7 @@ export function CampaignAdminDetail() {
                       <option value="active">Aktiivne</option>
                       <option value="paused">Peatatud</option>
                       <option value="draft">Mustand</option>
-                      <option value="ended">Lõppenud</option>
+                      <option value="ended">LÃµppenud</option>
                     </select>
                   </div>
                   
@@ -257,11 +257,11 @@ export function CampaignAdminDetail() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#6B5744]">Alguskuupäev</label>
+                    <label className="text-sm font-medium text-[#6B5744]">AlguskuupÃ¤ev</label>
                     <Input type="date" defaultValue={campaign.startDate} className="bg-[#FAF7F2]" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#6B5744]">Lõppkuupäev</label>
+                    <label className="text-sm font-medium text-[#6B5744]">LÃµppkuupÃ¤ev</label>
                     <Input type="date" defaultValue={campaign.endDate} className="bg-[#FAF7F2]" />
                   </div>
                 </div>
@@ -271,11 +271,11 @@ export function CampaignAdminDetail() {
                 <h3 className="text-lg font-bold text-[#2D2721] mb-4">Hinnastamine ja Limiidid</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#6B5744]">Tavahind (€)</label>
+                    <label className="text-sm font-medium text-[#6B5744]">Tavahind (â‚¬)</label>
                     <Input type="number" defaultValue={campaign.originalPrice} className="bg-[#FAF7F2]" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#6B5744]">Soodushind (€)</label>
+                    <label className="text-sm font-medium text-[#6B5744]">Soodushind (â‚¬)</label>
                     <Input type="number" defaultValue={campaign.price} className="bg-[#FAF7F2]" />
                   </div>
                   <div className="space-y-2">
@@ -316,7 +316,7 @@ export function CampaignAdminDetail() {
                         <td className="px-4 py-3 font-mono font-medium">SALE20-{Math.random().toString(36).substring(2,6).toUpperCase()}</td>
                         <td className="px-4 py-3">
                           <span className={`px-2 py-0.5 rounded-full text-xs ${i % 2 === 0 ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
-                            {i % 2 === 0 ? 'Lunastatud' : 'Müüdud'}
+                            {i % 2 === 0 ? 'Lunastatud' : 'MÃ¼Ã¼dud'}
                           </span>
                         </td>
                         <td className="px-4 py-3">user{i}@example.com</td>
@@ -333,15 +333,15 @@ export function CampaignAdminDetail() {
         {/* Sidebar */}
         <div className="space-y-6">
           <WarmCard padding="md" className="bg-[#2D2721] text-white">
-            <h3 className="font-bold mb-2">Kampaania tüüp</h3>
+            <h3 className="font-bold mb-2">Kampaania tÃ¼Ã¼p</h3>
             <p className="text-white/80 text-sm mb-4">
               See kampaania on seadistatud kui <strong>{campaign.type}</strong>. 
-              {campaign.type === 'voucher' && ' Kliendid saavad osta vautšeri ja lunastada selle kohapeal.'}
-              {campaign.type === 'gift_card' && ' Kliendid saavad osta kinkekaardi kindlas väärtuses.'}
+              {campaign.type === 'voucher' && ' Kliendid saavad osta vautÅ¡eri ja lunastada selle kohapeal.'}
+              {campaign.type === 'gift_card' && ' Kliendid saavad osta kinkekaardi kindlas vÃ¤Ã¤rtuses.'}
             </p>
             <div className="flex items-center gap-2 text-xs bg-white/10 p-2 rounded-lg">
               <AlertCircle className="w-4 h-4 text-[#E17B5C]" />
-              Tüübi muutmine pole aktiivsel kampaanial lubatud.
+              TÃ¼Ã¼bi muutmine pole aktiivsel kampaanial lubatud.
             </div>
           </WarmCard>
 

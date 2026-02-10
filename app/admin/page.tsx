@@ -1,13 +1,12 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { safeParseJson } from '@/lib/utils';
-import { isPlatformAdmin } from '@/lib/admin';
 import { WarmCard } from '@/components/warm-card';
 import { AuditLogPayload } from '@/types';
 import MerchantsTable from './merchants-table';
 import AuditLogView from './audit-log-view';
+import { AccessControlError, requirePlatformAdminProfile } from '@/lib/access-control';
 
 export const metadata: Metadata = {
   robots: {
@@ -17,12 +16,12 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminPage() {
-  const session = await auth();
-  if (!session?.user?.id) {
-    redirect('/login');
-  }
-
-  if (!isPlatformAdmin(session.user.email)) {
+  try {
+    await requirePlatformAdminProfile();
+  } catch (error) {
+    if (error instanceof AccessControlError && error.status === 401) {
+      redirect('/login');
+    }
     redirect('/app');
   }
 

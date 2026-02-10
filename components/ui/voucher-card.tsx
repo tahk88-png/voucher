@@ -80,7 +80,7 @@ export function VoucherCard({
       className={cn(
         "overflow-hidden transition-all duration-200",
         "hover:shadow-warm-lg shadow-warm",
-        "border border-[#E7DCC7]",
+        "border border-[var(--border)]",
         className
       )}
       style={accentStyle}
@@ -88,7 +88,7 @@ export function VoucherCard({
       <div
         className={cn(
           "relative px-4 pt-4 pb-3",
-          accentColor ? "bg-[var(--accent-bg)]" : "bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4]"
+          accentColor ? "bg-[var(--accent-bg)]" : "bg-gradient-to-br from-[var(--bg-2)] to-[#FFE5B4]"
         )}
       >
         <div className="flex items-start justify-between gap-3">
@@ -112,20 +112,20 @@ export function VoucherCard({
       </div>
 
       <div className="p-4 space-y-3">
-        <h3 className="text-lg font-semibold leading-tight text-[#2D2721]">{title}</h3>
+        <h3 className="text-lg font-semibold leading-tight text-[var(--text)]">{title}</h3>
 
         {description && (
-          <p className="text-sm text-[#6B5744] leading-relaxed line-clamp-2">{description}</p>
+          <p className="text-sm text-[var(--text-muted)] leading-relaxed line-clamp-2">{description}</p>
         )}
 
-        <div className="flex items-center gap-1.5 text-xs text-[#8B7355]">
+        <div className="flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
           <Clock className="h-3.5 w-3.5 shrink-0" />
           <span>Expires {formattedExpiry}</span>
         </div>
 
         {code && (
-          <div className="px-3 py-2 bg-[#FFF9ED] border border-[#E7DCC7] rounded-md">
-            <p className="text-sm font-mono font-semibold text-center text-[#2D2721]">{code}</p>
+          <div className="px-3 py-2 bg-[var(--bg-2)] border border-[var(--border)] rounded-md">
+            <p className="text-sm font-mono font-semibold text-center text-[var(--text)]">{code}</p>
           </div>
         )}
 

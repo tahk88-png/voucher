@@ -1,8 +1,8 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { RichTextEditor } from '@app/components/RichTextEditor';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -74,7 +74,7 @@ export function CampaignCreate() {
   };
 
   const steps = [
-    { number: 1, label: 'Põhiinfo', icon: FileText },
+    { number: 1, label: 'PÃµhiinfo', icon: FileText },
     { number: 2, label: 'Pakkumine', icon: Tag },
     { number: 3, label: 'Sihtgrupp', icon: Users },
     { number: 4, label: 'Ajakava', icon: Calendar },
@@ -113,11 +113,11 @@ export function CampaignCreate() {
     setTimeout(() => {
        const descriptions = [
           `<p>Avasta meie uus <strong>${formData.name}</strong>! See on loodud pakkuma sulle parimat elamust.</p><p>Ainult piiratud aja jooksul saadaval erihinnaga.</p><ul><li>Eksklusiivne kvaliteet</li><li>Parim hind turul</li><li>Rahulolu garanteeritud</li></ul>`,
-          `<p>Ära maga maha! <strong>${formData.name}</strong> on nüüd saadaval.</p><p>Ideaalne kingitus endale või lähedasele.</p>`
+          `<p>Ã„ra maga maha! <strong>${formData.name}</strong> on nÃ¼Ã¼d saadaval.</p><p>Ideaalne kingitus endale vÃµi lÃ¤hedasele.</p>`
        ];
        handleInputChange('description', descriptions[0]);
        setIsGeneratingAI(false);
-       toast.success('AI kirjeldus genereeritud ✨');
+       toast.success('AI kirjeldus genereeritud');
     }, 1500);
   };
 
@@ -133,7 +133,7 @@ export function CampaignCreate() {
       case 3:
         return true;
       case 4:
-        if (!formData.startDate || !formData.endDate) { toast.error('Vali kuupäevad'); return false; }
+        if (!formData.startDate || !formData.endDate) { toast.error('Vali kuupÃ¤evad'); return false; }
         return true;
       case 5:
         return true;
@@ -163,10 +163,15 @@ export function CampaignCreate() {
     const loadingToast = toast.loading('Loon kampaaniat...');
     try {
       await api.campaigns.create({
-        ...formData,
+        title: formData.name,
+        description: formData.description || '',
+        image_url: formData.imageUrl || imagePreview,
         price: parseFloat(formData.price),
         original_price: parseFloat(formData.originalPrice),
-        image_url: formData.imageUrl || imagePreview,
+        start_date: formData.startDate,
+        end_date: formData.endDate,
+        category_id: formData.subcategoryId || formData.categoryId || 'general',
+        category_name: formData.category || 'General',
         status: 'active'
       });
       toast.dismiss(loadingToast);
@@ -199,7 +204,7 @@ export function CampaignCreate() {
         </button>
         <div>
           <h1 className="text-3xl font-bold text-[#2D2721]">Loo uus kampaania</h1>
-          <p className="text-[#6B5744] mt-1">Samm-sammuline nõustaja eduka kampaania loomiseks</p>
+          <p className="text-[#6B5744] mt-1">Samm-sammuline nÃµustaja eduka kampaania loomiseks</p>
         </div>
       </div>
 
@@ -246,7 +251,7 @@ export function CampaignCreate() {
                 {currentStep === 1 && (
                   <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
                     <div>
-                      <h3 className="text-xl font-bold text-[#2D2721]">Põhiandmed</h3>
+                      <h3 className="text-xl font-bold text-[#2D2721]">PÃµhiandmed</h3>
                       <p className="text-[#6B5744]">Pane oma kampaaniale nimi ja vali kategooria.</p>
                     </div>
 
@@ -254,7 +259,7 @@ export function CampaignCreate() {
                       <div>
                         <Label>Kampaania nimi *</Label>
                         <Input
-                          placeholder="nt. Kevadine Suurmüük"
+                          placeholder="nt. Kevadine SuurmÃ¼Ã¼k"
                           value={formData.name}
                           onChange={(e) => handleInputChange('name', e.target.value)}
                           className="mt-1.5 text-lg"
@@ -281,7 +286,7 @@ export function CampaignCreate() {
                               className="text-xs font-bold text-[#E17B5C] flex items-center gap-1 hover:underline disabled:opacity-50"
                            >
                               <Wand2 className="w-3 h-3" />
-                              {isGeneratingAI ? 'Genereerin...' : 'Küsi AI abi'}
+                              {isGeneratingAI ? 'Genereerin...' : 'KÃ¼si AI abi'}
                            </button>
                         </div>
                         <RichTextEditor
@@ -298,18 +303,18 @@ export function CampaignCreate() {
                   <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
                     <div>
                       <h3 className="text-xl font-bold text-[#2D2721]">Hinnastamine</h3>
-                      <p className="text-[#6B5744]">Määra hinnad ja soodustused.</p>
+                      <p className="text-[#6B5744]">MÃ¤Ã¤ra hinnad ja soodustused.</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-6">
                       <div>
-                        <Label>Tavahind (€) *</Label>
+                        <Label>Tavahind (â‚¬) *</Label>
                         <Input type="number" value={formData.originalPrice} onChange={(e) => handleInputChange('originalPrice', e.target.value)} className="mt-1.5" placeholder="0.00" />
                       </div>
                       <div>
-                        <Label>Soodushind (€) *</Label>
+                        <Label>Soodushind (â‚¬) *</Label>
                         <Input type="number" value={formData.price} onChange={(e) => handleInputChange('price', e.target.value)} className="mt-1.5 border-[#FFC857]" placeholder="0.00" />
-                        {calculateSavings().percent > 0 && <p className="text-xs text-[#00D098] font-bold mt-1">Sääst: {calculateSavings().percent}%</p>}
+                        {calculateSavings().percent > 0 && <p className="text-xs text-[#00D098] font-bold mt-1">SÃ¤Ã¤st: {calculateSavings().percent}%</p>}
                       </div>
                     </div>
                   </motion.div>
@@ -324,13 +329,13 @@ export function CampaignCreate() {
 
                     <div className="space-y-4">
                        <div>
-                          <Label>Sihtrühm</Label>
+                          <Label>SihtrÃ¼hm</Label>
                           <Select value={formData.targetAudience} onValueChange={(val) => handleInputChange('targetAudience', val)}>
                              <SelectTrigger className="mt-1.5"><SelectValue /></SelectTrigger>
                              <SelectContent>
-                                <SelectItem value="all">Kõik kliendid</SelectItem>
+                                <SelectItem value="all">KÃµik kliendid</SelectItem>
                                 <SelectItem value="new">Uued kliendid</SelectItem>
-                                <SelectItem value="loyal">Püsikliendid</SelectItem>
+                                <SelectItem value="loyal">PÃ¼sikliendid</SelectItem>
                              </SelectContent>
                           </Select>
                        </div>
@@ -354,7 +359,7 @@ export function CampaignCreate() {
                   <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
                     <div>
                       <h3 className="text-xl font-bold text-[#2D2721]">Ajakava</h3>
-                      <p className="text-[#6B5744]">Millal kampaania algab ja lõpeb?</p>
+                      <p className="text-[#6B5744]">Millal kampaania algab ja lÃµpeb?</p>
                     </div>
                     <div className="grid grid-cols-2 gap-6">
                        <div>
@@ -364,7 +369,7 @@ export function CampaignCreate() {
                           </div>
                        </div>
                        <div>
-                          <Label>Lõpp</Label>
+                          <Label>LÃµpp</Label>
                           <div className="mt-1.5">
                              <DatePicker date={parseDate(formData.endDate)} setDate={(d) => handleInputChange('endDate', formatDate(d))} />
                           </div>
@@ -377,7 +382,7 @@ export function CampaignCreate() {
                   <motion.div key="step5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
                     <div>
                       <h3 className="text-xl font-bold text-[#2D2721]">Visuaal</h3>
-                      <p className="text-[#6B5744]">Lisa pilt, mis köidab tähelepanu.</p>
+                      <p className="text-[#6B5744]">Lisa pilt, mis kÃ¶idab tÃ¤helepanu.</p>
                     </div>
                     <MediaManager 
                        currentImage={imagePreview}
@@ -397,7 +402,7 @@ export function CampaignCreate() {
               {currentStep === 1 ? 'Loobu' : 'Tagasi'}
             </WarmButton>
             <WarmButton onClick={handleNext}>
-              {currentStep === 5 ? 'Kinnita ja Loo' : 'Järgmine samm'}
+              {currentStep === 5 ? 'Kinnita ja Loo' : 'JÃ¤rgmine samm'}
               <ArrowRight className="h-4 w-4 ml-2" />
             </WarmButton>
           </div>
@@ -447,9 +452,9 @@ export function CampaignCreate() {
                           {formData.name || 'Sinu kampaania pealkiri'}
                        </h3>
                        <div className="flex items-baseline gap-2 mb-4">
-                          <span className="text-2xl font-bold text-[#E17B5C]">{formData.price ? `€${formData.price}` : '€0.00'}</span>
+                          <span className="text-2xl font-bold text-[#E17B5C]">{formData.price ? `â‚¬${formData.price}` : 'â‚¬0.00'}</span>
                           {formData.originalPrice && (
-                             <span className="text-sm text-[#8B7355] line-through">€{formData.originalPrice}</span>
+                             <span className="text-sm text-[#8B7355] line-through">â‚¬{formData.originalPrice}</span>
                           )}
                        </div>
                        <div className="prose prose-sm prose-warm line-clamp-3 text-[#6B5744]" dangerouslySetInnerHTML={{ __html: formData.description || 'Kampaania kirjeldus ilmub siia...' }}></div>
@@ -470,7 +475,7 @@ export function CampaignCreate() {
                     <div>
                        <h4 className="font-bold text-[#2D2721] text-sm">Kas teadsid?</h4>
                        <p className="text-xs text-[#6B5744] mt-1 leading-relaxed">
-                          AI poolt genereeritud kirjeldused suurendavad konversiooni keskmiselt 15%. Kasuta "Küsi AI abi" nuppu!
+                          AI poolt genereeritud kirjeldused suurendavad konversiooni keskmiselt 15%. Kasuta "KÃ¼si AI abi" nuppu!
                        </p>
                     </div>
                  </div>
@@ -481,3 +486,4 @@ export function CampaignCreate() {
     </div>
   );
 }
+

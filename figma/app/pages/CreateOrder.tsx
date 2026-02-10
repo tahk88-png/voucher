@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { ArrowLeft, Search, Plus, Trash2, User, CreditCard, ShoppingBag, Calendar } from 'lucide-react';
 
 export function CreateOrder() {
@@ -44,9 +44,9 @@ export function CreateOrder() {
             <h1 className="text-xl font-bold text-[#2D2721]">Uus manuaalne tellimus</h1>
           </div>
           <div className="flex gap-3">
-             <WarmButton variant="ghost" onClick={() => navigate(-1)}>Tühista</WarmButton>
+             <WarmButton variant="ghost" onClick={() => navigate(-1)}>TÃ¼hista</WarmButton>
              <WarmButton className="gap-2" disabled={cart.length === 0 || !customer.name}>
-               <CreditCard className="w-4 h-4" /> Loo tellimus ({total.toFixed(2)}€)
+               <CreditCard className="w-4 h-4" /> Loo tellimus ({total.toFixed(2)}â‚¬)
              </WarmButton>
           </div>
         </div>
@@ -78,7 +78,7 @@ export function CreateOrder() {
                           </div>
                           <div>
                              <div className="font-bold text-[#2D2721]">{product.name}</div>
-                             <div className="text-xs text-[#8B7355]">{product.price.toFixed(2)}€</div>
+                             <div className="text-xs text-[#8B7355]">{product.price.toFixed(2)}â‚¬</div>
                           </div>
                        </div>
                        <button onClick={() => addToCart(product)} className="p-2 bg-[#FAF7F2] rounded-lg text-[#2D2721] hover:bg-[#FFC857] transition-colors">
@@ -115,14 +115,14 @@ export function CreateOrder() {
            <WarmCard padding="lg" className="bg-white">
               <h3 className="font-bold text-[#2D2721] mb-4">Ostukorv</h3>
               {cart.length === 0 ? (
-                 <div className="text-center text-[#8B7355] py-8 text-sm">Ostukorv on tühi</div>
+                 <div className="text-center text-[#8B7355] py-8 text-sm">Ostukorv on tÃ¼hi</div>
               ) : (
                  <div className="space-y-3">
                     {cart.map((item) => (
                        <div key={item.id} className="flex justify-between items-center text-sm">
                           <div>
                              <div className="font-bold text-[#2D2721]">{item.quantity}x {item.name}</div>
-                             <div className="text-xs text-[#8B7355]">{(item.price * item.quantity).toFixed(2)}€</div>
+                             <div className="text-xs text-[#8B7355]">{(item.price * item.quantity).toFixed(2)}â‚¬</div>
                           </div>
                           <button onClick={() => removeFromCart(item.id)} className="text-red-400 hover:text-red-600">
                              <Trash2 className="w-4 h-4" />
@@ -131,7 +131,7 @@ export function CreateOrder() {
                     ))}
                     <div className="pt-3 border-t border-[#E7DCC7] flex justify-between font-bold text-lg text-[#2D2721]">
                        <span>Kokku</span>
-                       <span>{total.toFixed(2)}€</span>
+                       <span>{total.toFixed(2)}â‚¬</span>
                     </div>
                  </div>
               )}

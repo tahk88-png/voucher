@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Input } from '@app/components/ui/input';
@@ -31,10 +31,10 @@ import { toast } from 'sonner';
 
 // MOCK locations
 const LOCATIONS = [
-  { id: 'all', name: 'Kõik asukohad' },
+  { id: 'all', name: 'KÃµik asukohad' },
   { id: 'loc1', name: 'Tallinna Pealadu' },
   { id: 'loc2', name: 'Tartu Esindus' },
-  { id: 'loc3', name: 'Suveladu Pärnus' },
+  { id: 'loc3', name: 'Suveladu PÃ¤rnus' },
 ];
 
 export function WarehousePage() {
@@ -42,9 +42,9 @@ export function WarehousePage() {
   const [rentalItems, setRentalItems] = useState(InventoryService.getRentalInventory());
   // Mock orders for logistics tab
   const [orders, setOrders] = useState([
-    { id: 'ORD-3921', customer: 'Mari Tamm', items: 2, status: 'new', destination: 'Pärnu mnt 10, Tallinn', type: 'delivery' },
+    { id: 'ORD-3921', customer: 'Mari Tamm', items: 2, status: 'new', destination: 'PÃ¤rnu mnt 10, Tallinn', type: 'delivery' },
     { id: 'ORD-3920', customer: 'Peeter Oja', items: 1, status: 'processing', destination: 'Tartu Esindus', type: 'pickup' },
-    { id: 'ORD-3919', customer: 'Kanal 2', items: 6, status: 'new', destination: 'Järvevana tee 9', type: 'delivery' }
+    { id: 'ORD-3919', customer: 'Kanal 2', items: 6, status: 'new', destination: 'JÃ¤rvevana tee 9', type: 'delivery' }
   ]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('all');
@@ -53,7 +53,7 @@ export function WarehousePage() {
   const getRentalStatusBadge = (status: RentalStatus) => {
     switch(status) {
       case 'available': return <span className="px-2 py-1 bg-[#E6F4EA] text-[#00D098] rounded-md text-xs font-bold uppercase inline-flex items-center gap-1"><CheckCircle2 className="w-3 h-3" /> Saadaval</span>;
-      case 'rented': return <span className="px-2 py-1 bg-[#FFF9ED] text-[#E17B5C] rounded-md text-xs font-bold uppercase inline-flex items-center gap-1"><Truck className="w-3 h-3" /> Väljas</span>;
+      case 'rented': return <span className="px-2 py-1 bg-[#FFF9ED] text-[#E17B5C] rounded-md text-xs font-bold uppercase inline-flex items-center gap-1"><Truck className="w-3 h-3" /> VÃ¤ljas</span>;
       case 'maintenance': return <span className="px-2 py-1 bg-[#F2EDE3] text-[#8B7355] rounded-md text-xs font-bold uppercase inline-flex items-center gap-1"><Wrench className="w-3 h-3" /> Hoolduses</span>;
       default: return null;
     }
@@ -88,7 +88,7 @@ export function WarehousePage() {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-[#2D2721]">Ladu & Logistika</h2>
-          <p className="text-[#6B5744]">Halda laoseise, rendivara ja tellimuste täitmist</p>
+          <p className="text-[#6B5744]">Halda laoseise, rendivara ja tellimuste tÃ¤itmist</p>
         </div>
         
         {/* Quick Scan Bar & Location Selector */}
@@ -124,7 +124,7 @@ export function WarehousePage() {
           </div>
 
           <WarmButton className="shadow-lg shadow-[#FFC857]/20">
-             <Plus className="w-4 h-4 mr-2" /> Võta arvele
+             <Plus className="w-4 h-4 mr-2" /> VÃµta arvele
           </WarmButton>
         </div>
       </div>
@@ -190,7 +190,7 @@ export function WarehousePage() {
                           <button 
                             onClick={() => handleStockUpdate(item.id, -1)}
                             className="p-1.5 bg-[#FAF7F2] hover:bg-[#E17B5C] hover:text-white rounded-lg transition-colors"
-                            title="Vähenda"
+                            title="VÃ¤henda"
                           >
                              <Minus className="w-4 h-4" />
                           </button>
@@ -221,7 +221,7 @@ export function WarehousePage() {
            {selectedLocation !== 'all' && (
              <div className="bg-[#FFF9ED] border border-[#FFC857] p-3 rounded-xl flex items-center gap-2 text-sm text-[#6B5744] mb-4">
                 <MapPin className="w-4 h-4 text-[#FFC857]" />
-                Näitan rendivara asukohas: <strong>{LOCATIONS.find(l => l.id === selectedLocation)?.name}</strong>
+                NÃ¤itan rendivara asukohas: <strong>{LOCATIONS.find(l => l.id === selectedLocation)?.name}</strong>
              </div>
            )}
 
@@ -296,7 +296,7 @@ export function WarehousePage() {
                  
                  {orders.filter(o => o.status === 'new').length === 0 ? (
                     <div className="p-8 border-2 border-dashed border-[#E7DCC7] rounded-xl text-center text-[#8B7355]">
-                       Kõik tellimused on pakitud! 🎉
+                       KÃµik tellimused on pakitud! ðŸŽ‰
                     </div>
                  ) : (
                     <div className="space-y-3">
@@ -320,7 +320,7 @@ export function WarehousePage() {
                                 </div>
                                 <div className="flex flex-col gap-2">
                                    <WarmButton size="sm" onClick={() => fulfillOrder(order.id)} className="gap-1 shadow-md shadow-[#00D098]/20 bg-[#00D098] hover:bg-[#00B080] border-none text-white">
-                                      <PackageCheck className="w-4 h-4" /> Märgi pakituks
+                                      <PackageCheck className="w-4 h-4" /> MÃ¤rgi pakituks
                                    </WarmButton>
                                    <WarmButton size="sm" variant="outline" className="gap-1">
                                       <Printer className="w-4 h-4" /> Silt
@@ -336,10 +336,10 @@ export function WarehousePage() {
               {/* Summary Stats */}
               <div className="space-y-4">
                  <WarmCard padding="lg" className="bg-[#2D2721] text-[#E7DCC7]">
-                    <h3 className="font-bold text-white mb-4">Logistika ülevaade</h3>
+                    <h3 className="font-bold text-white mb-4">Logistika Ã¼levaade</h3>
                     <div className="space-y-4">
                        <div className="flex justify-between items-center">
-                          <span className="text-sm">Täna pakitud</span>
+                          <span className="text-sm">TÃ¤na pakitud</span>
                           <span className="font-bold text-[#00D098] text-xl">12</span>
                        </div>
                        <div className="w-full bg-[#3E352F] h-px"></div>

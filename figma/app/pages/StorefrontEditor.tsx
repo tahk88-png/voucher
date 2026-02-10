@@ -367,7 +367,7 @@ export function StorefrontEditor() {
   ]);
   const [newPageName, setNewPageName] = useState('');
 
-  const [sections, setSections] = useState([
+  const [sections, setSections] = useState<any[]>([
     { 
        id: 1, 
        type: 'hero', 

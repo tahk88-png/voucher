@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 
@@ -18,6 +19,7 @@ export default function NotificationSettingsForm({
 }: {
   initialSubscriptions: MerchantSubscription[];
 }) {
+  const t = useTranslations('notifications');
   const [subscriptions, setSubscriptions] = useState(initialSubscriptions);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -53,7 +55,7 @@ export default function NotificationSettingsForm({
   return (
     <div className="space-y-4">
       {subscriptions.map((sub) => (
-        <WarmCard key={sub.merchantId} padding="lg" className="bg-white border border-[#E7DCC7]">
+        <WarmCard key={sub.merchantId} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-[#2D2721]">{sub.merchantName}</p>
@@ -68,7 +70,7 @@ export default function NotificationSettingsForm({
                 onChange={() => toggle(sub.merchantId, 'emailEnabled')}
                 className="h-4 w-4 accent-[#FFC857]"
               />
-              Email
+              {t('email')}
             </label>
             <label className="flex items-center gap-2 text-sm text-[#6B5744]">
               <input
@@ -77,7 +79,7 @@ export default function NotificationSettingsForm({
                 onChange={() => toggle(sub.merchantId, 'inAppEnabled')}
                 className="h-4 w-4 accent-[#FFC857]"
               />
-              In-app
+              {t('inApp')}
             </label>
             <label className="flex items-center gap-2 text-sm text-[#6B5744]">
               <input
@@ -86,14 +88,14 @@ export default function NotificationSettingsForm({
                 onChange={() => toggle(sub.merchantId, 'pushEnabled')}
                 className="h-4 w-4 accent-[#FFC857]"
               />
-              Push (beta)
+              {t('pushBeta')}
             </label>
           </div>
         </WarmCard>
       ))}
 
       <WarmButton onClick={handleSave} disabled={isSaving}>
-        {isSaving ? 'Saving...' : 'Save preferences'}
+        {isSaving ? t('saving') : t('savePreferences')}
       </WarmButton>
     </div>
   );

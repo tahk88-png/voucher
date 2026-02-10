@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Input } from '@app/components/ui/input';
@@ -6,7 +6,8 @@ import { Label } from '@app/components/ui/label';
 import { Switch } from '@app/components/ui/switch';
 import { LanguageSelector } from '@app/components/LanguageSelector';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router';
+import { useNavigate } from '@/lib/router-shim';
+import { useLanguage } from '@app/contexts/LanguageContext';
 import { 
   Bell,
   Mail,
@@ -34,13 +35,15 @@ import {
 
 export function AdvancedSettings() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [isSaving, setIsSaving] = useState(false);
+  const tr = (en: string, et: string) => (language === 'et' ? et : en);
 
   const handleSave = async () => {
     setIsSaving(true);
     await new Promise(resolve => setTimeout(resolve, 1000));
     setIsSaving(false);
-    toast.success('Advanced settings saved!');
+    toast.success(tr('Advanced settings saved!', 'Taisustatud seaded salvestatud!'));
   };
 
   return (
@@ -54,10 +57,10 @@ export function AdvancedSettings() {
           className="mb-4"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Settings
+          {tr('Back to Settings', 'Tagasi seadetesse')}
         </WarmButton>
-        <h1 className="text-3xl font-bold text-[#2D2721]">Advanced Settings</h1>
-        <p className="text-[#6B5744] mt-1">Configure advanced features and integrations</p>
+        <h1 className="text-3xl font-bold text-[#2D2721]">{tr('Advanced Settings', 'Taisustatud seaded')}</h1>
+        <p className="text-[#6B5744] mt-1">{tr('Configure advanced features and integrations', 'Seadista keerukamad funktsioonid ja integratsioonid')}</p>
       </div>
 
       {/* Social Media Links */}
@@ -67,8 +70,8 @@ export function AdvancedSettings() {
             <Share2 className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#2D2721]">Social Media Links</h2>
-            <p className="text-sm text-[#6B5744]">Connect your social profiles</p>
+            <h2 className="text-xl font-semibold text-[#2D2721]">{tr('Social Media Links', 'Sotsiaalmeedia lingid')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Connect your social profiles', 'Uhenda oma sotsiaalmeedia profiilid')}</p>
           </div>
         </div>
         
@@ -82,7 +85,7 @@ export function AdvancedSettings() {
             <Input
               id="facebook"
               type="url"
-              placeholder="https://facebook.com/yourpage"
+              placeholder={tr('https://facebook.com/yourpage', 'https://facebook.com/sinuleht')}
               className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
             />
           </div>
@@ -96,7 +99,7 @@ export function AdvancedSettings() {
             <Input
               id="instagram"
               type="url"
-              placeholder="https://instagram.com/yourprofile"
+              placeholder={tr('https://instagram.com/yourprofile', 'https://instagram.com/sinuprofiil')}
               className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
             />
           </div>
@@ -110,7 +113,7 @@ export function AdvancedSettings() {
             <Input
               id="twitter"
               type="url"
-              placeholder="https://twitter.com/yourhandle"
+              placeholder={tr('https://twitter.com/yourhandle', 'https://twitter.com/sinukasutaja')}
               className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
             />
           </div>
@@ -124,7 +127,7 @@ export function AdvancedSettings() {
             <Input
               id="linkedin"
               type="url"
-              placeholder="https://linkedin.com/company/yourcompany"
+              placeholder={tr('https://linkedin.com/company/yourcompany', 'https://linkedin.com/company/sinuettevote')}
               className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
             />
           </div>
@@ -138,7 +141,7 @@ export function AdvancedSettings() {
             <Input
               id="youtube"
               type="url"
-              placeholder="https://youtube.com/@yourchannel"
+              placeholder={tr('https://youtube.com/@yourchannel', 'https://youtube.com/@sinukanal')}
               className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
             />
           </div>
@@ -152,13 +155,16 @@ export function AdvancedSettings() {
             <Clock className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#2D2721]">Business Hours</h2>
-            <p className="text-sm text-[#6B5744]">Set your operating hours</p>
+            <h2 className="text-xl font-semibold text-[#2D2721]">{tr('Business Hours', 'Lahtiolekuajad')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Set your operating hours', 'Määra oma lahtiolekuajad')}</p>
           </div>
         </div>
 
         <div className="space-y-3">
-          {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day, idx) => (
+          {(language === 'et'
+            ? ['Esmaspaev', 'Teisipaev', 'Kolmapaev', 'Neljapaev', 'Reede', 'Laupaev', 'Puhapaev']
+            : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+          ).map((day, idx) => (
             <div key={day} className="flex items-center gap-4">
               <div className="flex items-center gap-3 w-32">
                 <Switch id={`${day}-enabled`} defaultChecked={idx < 5} />
@@ -173,7 +179,7 @@ export function AdvancedSettings() {
                   className="rounded-[10px] border-[rgba(139,115,85,0.2)] bg-white h-10"
                   disabled={idx >= 5}
                 />
-                <span className="text-[#8B7355]">to</span>
+                <span className="text-[#8B7355]">{tr('to', 'kuni')}</span>
                 <Input
                   type="time"
                   defaultValue={idx < 5 ? "18:00" : "16:00"}
@@ -193,8 +199,8 @@ export function AdvancedSettings() {
             <Bell className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#2D2721]">Notification Preferences</h2>
-            <p className="text-sm text-[#6B5744]">Choose how you want to be notified</p>
+            <h2 className="text-xl font-semibold text-[#2D2721]">{tr('Notification Preferences', 'Teavituste eelistused')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Choose how you want to be notified', 'Vali, kuidas soovid teavitusi saada')}</p>
           </div>
         </div>
 
@@ -203,30 +209,30 @@ export function AdvancedSettings() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Mail className="h-5 w-5 text-[#8B7355]" />
-              <h3 className="text-sm font-semibold text-[#2D2721]">Email Notifications</h3>
+              <h3 className="text-sm font-semibold text-[#2D2721]">{tr('Email Notifications', 'E-posti teavitused')}</h3>
             </div>
             <div className="space-y-3 ml-7">
               <div className="flex items-center justify-between">
                 <Label htmlFor="email-voucher-redeemed" className="text-sm text-[#2D2721] cursor-pointer">
-                  Voucher redeemed
+                  {tr('Voucher redeemed', 'Vautser lunastatud')}
                 </Label>
                 <Switch id="email-voucher-redeemed" defaultChecked />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="email-new-customer" className="text-sm text-[#2D2721] cursor-pointer">
-                  New customer signup
+                  {tr('New customer signup', 'Uus kliendi registreerumine')}
                 </Label>
                 <Switch id="email-new-customer" defaultChecked />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="email-campaign-ending" className="text-sm text-[#2D2721] cursor-pointer">
-                  Campaign ending soon
+                  {tr('Campaign ending soon', 'Kampaania loppemas')}
                 </Label>
                 <Switch id="email-campaign-ending" defaultChecked />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="email-weekly-report" className="text-sm text-[#2D2721] cursor-pointer">
-                  Weekly performance report
+                  {tr('Weekly performance report', 'Nadala tulemusraport')}
                 </Label>
                 <Switch id="email-weekly-report" />
               </div>
@@ -237,18 +243,18 @@ export function AdvancedSettings() {
           <div className="pt-4 border-t border-[rgba(139,115,85,0.1)]">
             <div className="flex items-center gap-2 mb-4">
               <Smartphone className="h-5 w-5 text-[#8B7355]" />
-              <h3 className="text-sm font-semibold text-[#2D2721]">SMS Notifications</h3>
+              <h3 className="text-sm font-semibold text-[#2D2721]">{tr('SMS Notifications', 'SMS teavitused')}</h3>
             </div>
             <div className="space-y-3 ml-7">
               <div className="flex items-center justify-between">
                 <Label htmlFor="sms-fraud-alert" className="text-sm text-[#2D2721] cursor-pointer">
-                  Fraud alerts
+                  {tr('Fraud alerts', 'Pettusehoiatused')}
                 </Label>
                 <Switch id="sms-fraud-alert" defaultChecked />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="sms-high-value" className="text-sm text-[#2D2721] cursor-pointer">
-                  High-value transactions
+                  {tr('High-value transactions', 'Suure vaartusega tehingud')}
                 </Label>
                 <Switch id="sms-high-value" defaultChecked />
               </div>
@@ -259,18 +265,18 @@ export function AdvancedSettings() {
           <div className="pt-4 border-t border-[rgba(139,115,85,0.1)]">
             <div className="flex items-center gap-2 mb-4">
               <Bell className="h-5 w-5 text-[#8B7355]" />
-              <h3 className="text-sm font-semibold text-[#2D2721]">Push Notifications</h3>
+              <h3 className="text-sm font-semibold text-[#2D2721]">{tr('Push Notifications', 'Push teavitused')}</h3>
             </div>
             <div className="space-y-3 ml-7">
               <div className="flex items-center justify-between">
                 <Label htmlFor="push-realtime" className="text-sm text-[#2D2721] cursor-pointer">
-                  Real-time redemptions
+                  {tr('Real-time redemptions', 'Reaalajas lunastused')}
                 </Label>
                 <Switch id="push-realtime" />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="push-milestones" className="text-sm text-[#2D2721] cursor-pointer">
-                  Campaign milestones
+                  {tr('Campaign milestones', 'Kampaania vaheeesmargid')}
                 </Label>
                 <Switch id="push-milestones" defaultChecked />
               </div>
@@ -286,8 +292,8 @@ export function AdvancedSettings() {
             <Globe className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#2D2721]">Localization</h2>
-            <p className="text-sm text-[#6B5744]">Regional and language preferences</p>
+            <h2 className="text-xl font-semibold text-[#2D2721]">{tr('Localization', 'Lokaliseerimine')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Regional and language preferences', 'Piirkonna ja keele eelistused')}</p>
           </div>
         </div>
 
@@ -295,7 +301,7 @@ export function AdvancedSettings() {
           {/* Default Language */}
           <div className="space-y-2">
             <Label className="text-[#2D2721] font-medium">
-              Default Language
+              {tr('Default Language', 'Vaikekeel')}
             </Label>
             <LanguageSelector />
           </div>
@@ -303,7 +309,7 @@ export function AdvancedSettings() {
           {/* Timezone */}
           <div className="space-y-2">
             <Label htmlFor="timezone" className="text-[#2D2721] font-medium">
-              Timezone
+              {tr('Timezone', 'Ajavoo')}
             </Label>
             <select
               id="timezone"
@@ -324,7 +330,7 @@ export function AdvancedSettings() {
           {/* Currency */}
           <div className="space-y-2">
             <Label htmlFor="currency" className="text-[#2D2721] font-medium">
-              Default Currency
+              {tr('Default Currency', 'Vaikevaluuta')}
             </Label>
             <select
               id="currency"
@@ -337,14 +343,14 @@ export function AdvancedSettings() {
               <option value="SEK">SEK - Swedish Krona (kr)</option>
               <option value="NOK">NOK - Norwegian Krone (kr)</option>
               <option value="DKK">DKK - Danish Krone (kr)</option>
-              <option value="PLN">PLN - Polish Złoty (zł)</option>
+              <option value="PLN">PLN - Polish Zloty (zł)</option>
             </select>
           </div>
 
           {/* Date Format */}
           <div className="space-y-2">
             <Label htmlFor="dateFormat" className="text-[#2D2721] font-medium">
-              Date Format
+              {tr('Date Format', 'Kuupaeva formaat')}
             </Label>
             <select
               id="dateFormat"
@@ -367,8 +373,8 @@ export function AdvancedSettings() {
             <Shield className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#2D2721]">Security & Privacy</h2>
-            <p className="text-sm text-[#6B5744]">Manage your account security</p>
+            <h2 className="text-xl font-semibold text-[#2D2721]">{tr('Security & Privacy', 'Turvalisus ja privaatsus')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Manage your account security', 'Halda oma konto turvalisust')}</p>
           </div>
         </div>
 
@@ -378,36 +384,36 @@ export function AdvancedSettings() {
             <div className="flex items-center gap-3">
               <Shield className="h-5 w-5 text-[#9DB5A5]" />
               <div>
-                <div className="font-semibold text-[#2D2721]">Two-Factor Authentication</div>
-                <p className="text-sm text-[#6B5744]">Add an extra layer of security</p>
+                <div className="font-semibold text-[#2D2721]">{tr('Two-Factor Authentication', 'Kaheastmeline autentimine')}</div>
+                <p className="text-sm text-[#6B5744]">{tr('Add an extra layer of security', 'Lisa turvalisusele lisakiht')}</p>
               </div>
             </div>
             <WarmButton variant="outline" size="sm">
-              Enable 2FA
+              {tr('Enable 2FA', 'Luba 2FA')}
             </WarmButton>
           </div>
 
           {/* Change Password */}
           <div>
-            <Label className="text-[#2D2721] font-medium mb-4 block">Change Password</Label>
+            <Label className="text-[#2D2721] font-medium mb-4 block">{tr('Change Password', 'Muuda parooli')}</Label>
             <div className="space-y-3">
               <Input
                 type="password"
-                placeholder="Current password"
+                placeholder={tr('Current password', 'Praegune parool')}
                 className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
               />
               <Input
                 type="password"
-                placeholder="New password"
+                placeholder={tr('New password', 'Uus parool')}
                 className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
               />
               <Input
                 type="password"
-                placeholder="Confirm new password"
+                placeholder={tr('Confirm new password', 'Kinnita uus parool')}
                 className="rounded-[12px] border-[rgba(139,115,85,0.2)] bg-white h-12"
               />
               <WarmButton variant="outline" size="sm">
-                Update Password
+                {tr('Update Password', 'Uuenda parooli')}
               </WarmButton>
             </div>
           </div>
@@ -417,7 +423,7 @@ export function AdvancedSettings() {
             <div className="flex items-center justify-between mb-4">
               <Label className="text-[#2D2721] font-medium">Active Sessions</Label>
               <button className="text-sm text-[#FFC857] hover:text-[#FFB627] font-medium">
-                Sign out all devices
+                {tr('Sign out all devices', 'Logi koigist seadmetest valja')}
               </button>
             </div>
             <div className="space-y-2">
@@ -428,11 +434,11 @@ export function AdvancedSettings() {
                   </div>
                   <div>
                     <div className="text-sm font-medium text-[#2D2721]">Chrome on MacOS</div>
-                    <div className="text-xs text-[#8B7355]">Tallinn, Estonia • Active now</div>
+                    <div className="text-xs text-[#8B7355]">{tr('Tallinn, Estonia • Active now', 'Tallinn, Eesti • Hetkel aktiivne')}</div>
                   </div>
                 </div>
                 <span className="px-2 py-1 bg-[#9DB5A5]/10 text-[#9DB5A5] text-xs font-semibold rounded-full">
-                  Current
+                  {tr('Current', 'Praegune')}
                 </span>
               </div>
             </div>
@@ -447,8 +453,8 @@ export function AdvancedSettings() {
             <Code className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#2D2721]">API & Integrations</h2>
-            <p className="text-sm text-[#6B5744]">Connect external services</p>
+            <h2 className="text-xl font-semibold text-[#2D2721]">{tr('API & Integrations', 'API ja integratsioonid')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Connect external services', 'Uhenda valiseid teenuseid')}</p>
           </div>
         </div>
 
@@ -459,7 +465,7 @@ export function AdvancedSettings() {
               <Label className="text-[#2D2721] font-medium">API Keys</Label>
               <WarmButton variant="outline" size="sm">
                 <Plus className="h-4 w-4 mr-2" />
-                Generate New Key
+                {tr('Generate New Key', 'Genereeri uus voti')}
               </WarmButton>
             </div>
 
@@ -470,7 +476,7 @@ export function AdvancedSettings() {
                     <Key className="h-4 w-4 text-[#FFC857]" />
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm font-medium text-[#2D2721] mb-1">Production API Key</div>
+                    <div className="text-sm font-medium text-[#2D2721] mb-1">{tr('Production API Key', 'Tootmise API voti')}</div>
                     <div className="font-mono text-xs text-[#8B7355]">sk_live_••••••••••••••••••••1234</div>
                   </div>
                 </div>
@@ -493,7 +499,7 @@ export function AdvancedSettings() {
                     <Key className="h-4 w-4 text-[#9DB5A5]" />
                   </div>
                   <div className="flex-1">
-                    <div className="text-sm font-medium text-[#2D2721] mb-1">Test API Key</div>
+                    <div className="text-sm font-medium text-[#2D2721] mb-1">{tr('Test API Key', 'Test API voti')}</div>
                     <div className="font-mono text-xs text-[#8B7355]">sk_test_••••••••••••••••••••5678</div>
                   </div>
                 </div>
@@ -518,13 +524,13 @@ export function AdvancedSettings() {
               <Label className="text-[#2D2721] font-medium">Webhooks</Label>
               <WarmButton variant="outline" size="sm">
                 <Plus className="h-4 w-4 mr-2" />
-                Add Webhook
+                {tr('Add Webhook', 'Lisa webhook')}
               </WarmButton>
             </div>
             <div className="p-4 bg-[#F8F6F1] rounded-[12px] text-center">
               <Zap className="h-8 w-8 text-[#8B7355] mx-auto mb-2" />
-              <p className="text-sm text-[#6B5744]">No webhooks configured</p>
-              <p className="text-xs text-[#8B7355] mt-1">Get real-time notifications about events</p>
+              <p className="text-sm text-[#6B5744]">{tr('No webhooks configured', 'Webhooke pole seadistatud')}</p>
+              <p className="text-xs text-[#8B7355] mt-1">{tr('Get real-time notifications about events', 'Saa sundmuste kohta reaalajas teavitusi')}</p>
             </div>
           </div>
         </div>
@@ -537,12 +543,12 @@ export function AdvancedSettings() {
             <Users className="h-6 w-6 text-white" />
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-semibold text-[#2D2721]">Team Members</h2>
-            <p className="text-sm text-[#6B5744]">Manage access and permissions</p>
+            <h2 className="text-xl font-semibold text-[#2D2721]">{tr('Team Members', 'Tiimi liikmed')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Manage access and permissions', 'Halda ligipaase ja oigusi')}</p>
           </div>
           <WarmButton variant="outline" size="sm">
             <Plus className="h-4 w-4 mr-2" />
-            Invite Member
+            {tr('Invite Member', 'Kutsu liige')}
           </WarmButton>
         </div>
 
@@ -560,7 +566,7 @@ export function AdvancedSettings() {
             </div>
             <div className="flex items-center gap-3">
               <span className="px-3 py-1 bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-white text-xs font-semibold rounded-full">
-                Owner
+                {tr('Owner', 'Omanik')}
               </span>
             </div>
           </div>
@@ -578,7 +584,7 @@ export function AdvancedSettings() {
             </div>
             <div className="flex items-center gap-3">
               <span className="px-3 py-1 bg-[#9DB5A5]/20 text-[#9DB5A5] text-xs font-semibold rounded-full">
-                Admin
+                {tr('Admin', 'Admin')}
               </span>
               <button className="p-2 hover:bg-[#F8F6F1] rounded-lg transition-colors">
                 <Trash2 className="h-4 w-4 text-[#E17B5C]" />
@@ -599,7 +605,7 @@ export function AdvancedSettings() {
             </div>
             <div className="flex items-center gap-3">
               <span className="px-3 py-1 bg-[#8B7355]/10 text-[#8B7355] text-xs font-semibold rounded-full">
-                Editor
+                {tr('Editor', 'Toimetaja')}
               </span>
               <button className="p-2 hover:bg-[#F8F6F1] rounded-lg transition-colors">
                 <Trash2 className="h-4 w-4 text-[#E17B5C]" />
@@ -613,9 +619,11 @@ export function AdvancedSettings() {
       <div className="flex justify-end">
         <WarmButton size="lg" onClick={handleSave} isLoading={isSaving}>
           <Save className="h-5 w-5 mr-2" />
-          Save All Changes
+          {tr('Save All Changes', 'Salvesta koik muudatused')}
         </WarmButton>
       </div>
     </div>
   );
 }
+
+

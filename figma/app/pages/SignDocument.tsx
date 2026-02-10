@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+﻿import { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { SEOHead } from '@app/components/SEOHead';
@@ -67,20 +67,20 @@ export function SignDocument() {
               {/* Document Preview Placeholder */}
               <div className="h-64 bg-white border border-[#E7DCC7] rounded-xl p-6 overflow-y-auto text-sm text-[#6B5744] font-mono leading-relaxed shadow-inner">
                 <p className="font-bold text-[#2D2721] mb-4">1. LEPINGU POOLED</p>
-                <p className="mb-4">Käesolev leping on sõlmitud GiftHub (edaspidi Teenusepakkuja) ja Kliendi vahel...</p>
+                <p className="mb-4">KÃ¤esolev leping on sÃµlmitud GiftHub (edaspidi Teenusepakkuja) ja Kliendi vahel...</p>
                 <p className="font-bold text-[#2D2721] mb-4">2. TEENUSE TINGIMUSED</p>
                 <p className="mb-4">Klient kohustub kasutama renditud vara heaperemehelikult ning tagastama selle kokkulepitud ajal.</p>
                 <p className="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
                 <p className="mb-4">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                 <div className="h-20 flex items-center justify-center text-[#E7DCC7] italic">
-                   -- Lõpp --
+                   -- LÃµpp --
                 </div>
               </div>
 
               <div className="flex flex-col gap-3">
                 <label className="flex items-start gap-3 p-3 rounded-lg hover:bg-[#FFF9ED] cursor-pointer transition-colors">
                   <input type="checkbox" className="mt-1 w-4 h-4 rounded border-[#E7DCC7] text-[#E17B5C] focus:ring-[#E17B5C]" />
-                  <span className="text-sm text-[#2D2721]">Olen tutvunud tingimustega ja nõustun nendega täies mahus.</span>
+                  <span className="text-sm text-[#2D2721]">Olen tutvunud tingimustega ja nÃµustun nendega tÃ¤ies mahus.</span>
                 </label>
                 
                 <WarmButton fullWidth size="lg" onClick={startSigning}>
@@ -89,7 +89,7 @@ export function SignDocument() {
               </div>
               
               <div className="flex items-center justify-center gap-2 text-xs text-[#8B7355] mt-4">
-                 <Shield className="w-3 h-3" /> Turvaline ühendus (SSL)
+                 <Shield className="w-3 h-3" /> Turvaline Ã¼hendus (SSL)
               </div>
             </div>
           )}
@@ -105,7 +105,7 @@ export function SignDocument() {
                </div>
                
                <h2 className="text-2xl font-bold text-[#2D2721] mb-2">Kontrolli oma telefoni</h2>
-               <p className="text-[#6B5744] mb-8">Saatsime allkirjastamise päringu sinu Smart-ID rakendusse.</p>
+               <p className="text-[#6B5744] mb-8">Saatsime allkirjastamise pÃ¤ringu sinu Smart-ID rakendusse.</p>
                
                <div className="bg-[#FAF7F2] p-6 rounded-2xl inline-block border-2 border-[#E7DCC7] mb-8">
                   <div className="text-sm text-[#8B7355] uppercase tracking-widest font-bold mb-2">Kontrollkood</div>
@@ -124,11 +124,11 @@ export function SignDocument() {
                </div>
                
                <h2 className="text-2xl font-bold text-[#2D2721] mb-2">Dokument allkirjastatud!</h2>
-               <p className="text-[#6B5744] mb-8">Sinu leping on edukalt sõlmitud ja saadetud e-postile.</p>
+               <p className="text-[#6B5744] mb-8">Sinu leping on edukalt sÃµlmitud ja saadetud e-postile.</p>
                
                <div className="space-y-3">
                   <WarmButton fullWidth onClick={() => navigate('/dashboard')}>
-                     Mine töölauale
+                     Mine tÃ¶Ã¶lauale
                   </WarmButton>
                   <WarmButton variant="outline" fullWidth onClick={() => navigate('/')}>
                      Tagasi avalehele

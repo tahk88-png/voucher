@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { QrCode, Check, X, ArrowLeft, AlertCircle, Scan, CreditCard, Gift, Ticket, Smartphone } from 'lucide-react';
 import { Input } from '@app/components/ui/input';
 import { Label } from '@app/components/ui/label';

@@ -178,7 +178,7 @@ export default async function EventsPage({ params }: { params: { slug: string } 
                   const statusClass = statusStyles[event.status] || statusStyles.draft;
                   const pct = event.maxCapacity > 0 ? Math.min(100, (event.soldTickets / event.maxCapacity) * 100) : 0;
                   return (
-                    <WarmCard key={event.id} padding="lg" className="bg-white border border-[#E7DCC7]">
+                    <WarmCard key={event.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                       <div className="flex items-start justify-between gap-2">
                         <div>
                           <h3 className="text-lg font-semibold text-[#2D2721]">{event.name}</h3>
@@ -243,7 +243,7 @@ export default async function EventsPage({ params }: { params: { slug: string } 
             </div>
 
             <div className="space-y-6">
-              <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+              <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <h2 className="text-base font-semibold text-[#2D2721]">Weekly ticket revenue</h2>

@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   Check, 
   Zap, 
@@ -111,7 +111,7 @@ export function SubscriptionPlans() {
     const plan = plans.find(p => p.id === planId);
     const price = billingPeriod === 'monthly' ? plan?.priceMonthly : plan?.priceAnnual;
     
-    toast.success(`Redirecting to Stripe checkout for ${plan?.name} plan (€${price})...`);
+    toast.success(`Redirecting to Stripe checkout for ${plan?.name} plan (â‚¬${price})...`);
 
     // In real app, this would redirect to Stripe Checkout
     // For demo, just navigate to success page
@@ -199,12 +199,12 @@ export function SubscriptionPlans() {
                 {/* Pricing */}
                 <div className="text-center mb-6">
                   <div className="flex items-baseline justify-center gap-2 mb-2">
-                    <span className="text-5xl font-bold text-[#2D2721]">€{price}</span>
+                    <span className="text-5xl font-bold text-[#2D2721]">â‚¬{price}</span>
                     <span className="text-[#8B7355]">/month</span>
                   </div>
                   {billingPeriod === 'annual' && (
                     <div className="text-sm text-[#9DB5A5] font-semibold">
-                      €{totalAnnual}/year • Save €{(plan.priceMonthly * 12) - plan.priceAnnual}
+                      â‚¬{totalAnnual}/year â€¢ Save â‚¬{(plan.priceMonthly * 12) - plan.priceAnnual}
                     </div>
                   )}
                   <div className="text-xs text-[#A89985] mt-1">
@@ -246,7 +246,7 @@ export function SubscriptionPlans() {
 
                 {billingPeriod === 'monthly' && (
                   <p className="text-xs text-center text-[#A89985] mt-3">
-                    Cancel anytime • No commitment
+                    Cancel anytime â€¢ No commitment
                   </p>
                 )}
               </WarmCard>
@@ -294,3 +294,4 @@ export function SubscriptionPlans() {
     </div>
   );
 }
+

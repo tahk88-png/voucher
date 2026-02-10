@@ -10,7 +10,13 @@
       "Bash(npm run build:*)",
       "Bash(tee:*)",
       "Bash(npm run dev)",
-      "mcp__claude_ai_Figma__get_design_context"
+      "mcp__claude_ai_Figma__get_design_context",
+      "Bash(npx tsc:*)",
+      "Bash(dir:*)",
+      "Read(//c/**)",
+      "Bash(powershell -Command:*)",
+      "Bash(npx next build:*)",
+      "Bash(git reset:*)"
     ]
   }
 }

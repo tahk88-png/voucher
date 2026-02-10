@@ -27,15 +27,15 @@ export function MerchantSidebar() {
   const pathname = usePathname()
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-white">
-      <div className="p-5 border-b border-[#E7DCC7]">
+    <div className="flex flex-col h-full bg-[var(--surface)]">
+      <div className="p-5 border-b border-[var(--border)]">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
+          <div className="w-10 h-10 rounded-[12px] gradient-brand flex items-center justify-center shadow-warm">
             <Gift className="h-5 w-5 text-white" />
           </div>
           <div>
-            <div className="text-lg font-semibold text-[#2D2721]">Merchant</div>
-            <div className="text-xs text-[#8B7355]">GiftHub console</div>
+            <div className="text-lg font-semibold text-[var(--text)]">Merchant</div>
+            <div className="text-xs text-[var(--text-faint)]">GiftHub console</div>
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@ export function MerchantSidebar() {
         {navItems.map((item) => {
           const Icon = item.icon
           const isActive = pathname === item.href || pathname?.startsWith(item.href + "/")
-          
+
           return (
             <Link
               key={item.href}
@@ -51,8 +51,8 @@ export function MerchantSidebar() {
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-[14px] text-sm font-medium transition-all",
                 isActive
-                  ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm"
-                  : "text-[#6B5744] hover:bg-[#F8F6F1] hover:text-[#2D2721]"
+                  ? "gradient-brand text-[var(--text)] shadow-warm"
+                  : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)] hover:text-[var(--text)]"
               )}
             >
               <span className="flex items-center gap-3">
@@ -69,7 +69,7 @@ export function MerchantSidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 md:border-r md:border-[#E7DCC7] md:bg-white">
+      <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 md:border-r md:border-[var(--border)] md:bg-[var(--surface)]">
         <SidebarContent />
       </aside>
 

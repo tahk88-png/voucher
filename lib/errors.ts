@@ -34,6 +34,13 @@ export class ForbiddenError extends AppError {
   }
 }
 
+export class PaymentRequiredError extends AppError {
+  constructor(message: string = 'Payment required', public details?: Record<string, unknown>) {
+    super(message, 402, 'PAYMENT_REQUIRED');
+    this.name = 'PaymentRequiredError';
+  }
+}
+
 export class NotFoundError extends AppError {
   constructor(message: string = 'Not found') {
     super(message, 404, 'NOT_FOUND');
@@ -58,12 +65,16 @@ export class RateLimitError extends AppError {
 /**
  * Handle errors and return appropriate HTTP response
  */
-export function handleError(error: unknown): { status: number; error: string; code?: string } {
+export function handleError(error: unknown): { status: number; error: string; code?: string; details?: Record<string, unknown> } {
   if (error instanceof AppError) {
     return {
       status: error.statusCode,
       error: error.message,
       code: error.code,
+      details:
+        error instanceof PaymentRequiredError
+          ? error.details
+          : undefined,
     };
   }
 

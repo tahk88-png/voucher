@@ -61,7 +61,7 @@ function VoucherPreview({ form }: { form: FormData }) {
       : formatCurrency(val * 100, form.currency);
   const headline = form.designHeadline || 'Voucher';
   return (
-    <div className="voucher-preview w-full max-w-[320px] mx-auto lg:mx-0 rounded-lg border border-[#E7DCC7] shadow-lg overflow-hidden bg-[var(--preview-bg)]">
+    <div className="voucher-preview w-full max-w-[320px] mx-auto lg:mx-0 rounded-lg border border-[rgba(139,115,85,0.15)] shadow-lg overflow-hidden bg-[var(--preview-bg)]">
       <style dangerouslySetInnerHTML={{ __html: `.voucher-preview{--preview-bg:${form.designBackgroundColor};--preview-primary:${form.designPrimaryColor}}` }} />
       <div className="px-5 pt-5 pb-4 text-white bg-[var(--preview-primary)]">
         <h3 className="text-xl font-semibold">{headline}</h3>
@@ -153,7 +153,14 @@ export default function NewVoucherPage() {
 
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
-        throw new Error(d.error || 'Failed to create voucher');
+        const message = d?.error || 'Failed to create voucher';
+        const upgradePath = d?.details?.upgradePath as string | undefined;
+        if (res.status === 402 && upgradePath) {
+          showError(`${message} Redirecting to billing...`);
+          router.push(upgradePath);
+          return;
+        }
+        throw new Error(message);
       }
       const voucher = await res.json();
       router.push(`/merchant/${merchantSlug}/vouchers/${voucher.id}`);
@@ -200,7 +207,7 @@ export default function NewVoucherPage() {
                     <select
                       id="voucher-type"
                       aria-label="Voucher type"
-                      className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 mt-1"
+                      className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 mt-1"
                       value={formData.type}
                       onChange={(e) =>
                         setFormData({ ...formData, type: e.target.value as FormData['type'] })
@@ -222,7 +229,7 @@ export default function NewVoucherPage() {
                       onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                       required
                       placeholder={formData.type === 'percentage' ? '15' : '5'}
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                   <div>
@@ -234,7 +241,7 @@ export default function NewVoucherPage() {
                       onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
                       required
                       maxLength={3}
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -246,7 +253,7 @@ export default function NewVoucherPage() {
                         value={formData.validFrom}
                         onChange={(e) => setFormData({ ...formData, validFrom: e.target.value })}
                         required
-                        className="mt-1 border-[#E7DCC7]"
+                        className="mt-1 border-[rgba(139,115,85,0.15)]"
                       />
                     </div>
                     <div>
@@ -257,7 +264,7 @@ export default function NewVoucherPage() {
                         value={formData.validTo}
                         onChange={(e) => setFormData({ ...formData, validTo: e.target.value })}
                         required
-                        className="mt-1 border-[#E7DCC7]"
+                        className="mt-1 border-[rgba(139,115,85,0.15)]"
                       />
                     </div>
                   </div>
@@ -269,7 +276,7 @@ export default function NewVoucherPage() {
                         type="number"
                         value={formData.usageLimitTotal}
                         onChange={(e) => setFormData({ ...formData, usageLimitTotal: e.target.value })}
-                        className="mt-1 border-[#E7DCC7]"
+                        className="mt-1 border-[rgba(139,115,85,0.15)]"
                       />
                     </div>
                     <div>
@@ -279,7 +286,7 @@ export default function NewVoucherPage() {
                         type="number"
                         value={formData.usageLimitPerUser}
                         onChange={(e) => setFormData({ ...formData, usageLimitPerUser: e.target.value })}
-                        className="mt-1 border-[#E7DCC7]"
+                        className="mt-1 border-[rgba(139,115,85,0.15)]"
                       />
                     </div>
                   </div>
@@ -323,7 +330,7 @@ export default function NewVoucherPage() {
                         <select
                           id="weeklyDropDay"
                           aria-label="Day of week for weekly drop"
-                          className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 mt-1"
+                          className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 mt-1"
                           value={formData.weeklyDropDay}
                           onChange={(e) => setFormData({ ...formData, weeklyDropDay: e.target.value })}
                         >
@@ -348,7 +355,7 @@ export default function NewVoucherPage() {
                           type="time"
                           value={formData.weeklyDropTime}
                           onChange={(e) => setFormData({ ...formData, weeklyDropTime: e.target.value })}
-                          className="mt-1 border-[#E7DCC7]"
+                          className="mt-1 border-[rgba(139,115,85,0.15)]"
                           aria-label="Weekly drop start time"
                           title="Weekly drop start time"
                         />
@@ -362,7 +369,7 @@ export default function NewVoucherPage() {
                             onChange={(e) =>
                               setFormData({ ...formData, weeklyDropDuration: e.target.value })
                             }
-                            className="mt-1 border-[#E7DCC7]"
+                            className="mt-1 border-[rgba(139,115,85,0.15)]"
                           />
                         </div>
                       </div>
@@ -373,7 +380,7 @@ export default function NewVoucherPage() {
                           type="number"
                           value={formData.weeklyDropStock}
                           onChange={(e) => setFormData({ ...formData, weeklyDropStock: e.target.value })}
-                          className="mt-1 border-[#E7DCC7]"
+                          className="mt-1 border-[rgba(139,115,85,0.15)]"
                         />
                       </div>
                     </>
@@ -405,7 +412,7 @@ export default function NewVoucherPage() {
                       value={formData.designHeadline}
                       onChange={(e) => setFormData({ ...formData, designHeadline: e.target.value })}
                       placeholder="15% off your order"
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                   <div>
@@ -416,7 +423,7 @@ export default function NewVoucherPage() {
                       value={formData.designFinePrint}
                       onChange={(e) => setFormData({ ...formData, designFinePrint: e.target.value })}
                       placeholder="Valid for new customers only"
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -470,7 +477,7 @@ export default function NewVoucherPage() {
                       }
                       placeholder="CH"
                       maxLength={10}
-                      className="mt-1 border-[#E7DCC7]"
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
                     />
                   </div>
                   <div className="flex gap-2 pt-2">

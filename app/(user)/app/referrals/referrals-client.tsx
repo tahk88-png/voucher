@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { Copy, Share2, Users } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { showError, showSuccess } from '@/lib/toast-helpers';
+import { getCurrencyLocale } from '@/lib/i18n-utils';
 
 interface ReferralRow {
   id: string;
@@ -42,11 +44,15 @@ export default function ReferralsClient({
   stats,
   referrals,
 }: ReferralsClientProps) {
+  const locale = useLocale();
+  const t = useTranslations('referral');
+  const linkFieldLabel = t('linkField');
+  const codeFieldLabel = t('codeField');
   const [sharing, setSharing] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const formatMoney = (value: number) =>
-    new Intl.NumberFormat('en-US', {
+    new Intl.NumberFormat(getCurrencyLocale(locale), {
       style: 'currency',
       currency,
       maximumFractionDigits: 0,
@@ -54,17 +60,17 @@ export default function ReferralsClient({
 
   const handleCopy = async (value: string, label: string) => {
     if (!navigator?.clipboard) {
-      showError('Clipboard is not available');
+      showError(t('clipboardUnavailable'));
       return;
     }
 
     try {
       await navigator.clipboard.writeText(value);
       setCopiedField(label);
-      showSuccess(`${label} copied`);
+      showSuccess(t('copiedField', { field: label }));
       setTimeout(() => setCopiedField(null), 1200);
     } catch {
-      showError('Unable to copy right now');
+      showError(t('copyFailedNow'));
     }
   };
 
@@ -73,14 +79,14 @@ export default function ReferralsClient({
     setSharing(true);
     try {
       if (navigator?.share) {
-        await navigator.share({ title: 'Referral link', url: referralLink });
-        showSuccess('Referral link opened');
+        await navigator.share({ title: t('linkTitle'), url: referralLink });
+        showSuccess(t('linkOpened'));
       } else {
         await navigator.clipboard.writeText(referralLink);
-        showSuccess('Referral link copied');
+        showSuccess(t('linkCopied'));
       }
     } catch {
-      showError('Unable to share link');
+      showError(t('shareFailed'));
     } finally {
       setSharing(false);
     }
@@ -97,47 +103,47 @@ export default function ReferralsClient({
         <WarmCard padding="lg" className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-[#6B5744]">Referral Link</p>
+              <p className="text-sm font-medium text-[#6B5744]">{t('linkTitle')}</p>
               <p className="text-2xl font-semibold text-[#2D2721] break-all">{referralLink}</p>
             </div>
             <div className="flex gap-2">
-              <WarmButton size="sm" variant="outline" onClick={() => handleCopy(referralLink, 'Link')} className="h-10">
+              <WarmButton size="sm" variant="outline" onClick={() => handleCopy(referralLink, linkFieldLabel)} className="h-10">
                 <Copy className="h-4 w-4" aria-hidden="true" />
-                <span className="ml-2">{copiedField === 'Link' ? 'Copied' : 'Copy'}</span>
+                <span className="ml-2">{copiedField === linkFieldLabel ? t('copied') : t('copy')}</span>
               </WarmButton>
               <WarmButton size="sm" variant="secondary" onClick={handleShare} disabled={sharing} className="h-10">
                 <Share2 className="h-4 w-4" aria-hidden="true" />
-                <span className="ml-2">Share</span>
+                <span className="ml-2">{t('share')}</span>
               </WarmButton>
             </div>
           </div>
           <div className="rounded-[18px] border border-[#F0E2C9] bg-[#FFF9ED] p-4">
-            <p className="text-sm text-[#6B5744] mb-2">Referral code</p>
+            <p className="text-sm text-[#6B5744] mb-2">{t('codeTitle')}</p>
             <div className="flex items-center justify-between gap-3">
               <span className="font-mono text-lg font-semibold text-[#2D2721]">{referralCode}</span>
-              <WarmButton size="sm" variant="ghost" onClick={() => handleCopy(referralCode, 'Code')} className="h-9">
+              <WarmButton size="sm" variant="ghost" onClick={() => handleCopy(referralCode, codeFieldLabel)} className="h-9">
                 <Copy className="h-4 w-4" aria-hidden="true" />
               </WarmButton>
             </div>
           </div>
         </WarmCard>
-        <WarmCard padding="lg" className="space-y-4 bg-gradient-to-br from-[#FFF9ED] via-[#FFEED1] to-[#FFE5B4] border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="space-y-4 bg-gradient-to-br from-[#FFF9ED] via-[#FFEED1] to-[#FFE5B4] border border-[rgba(139,115,85,0.15)]">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-white text-[#E17B5C] shadow-warm-sm">
               <Users className="h-6 w-6" />
             </div>
             <div>
-              <p className="text-sm font-medium text-[#6B5744]">Active Referrals</p>
+              <p className="text-sm font-medium text-[#6B5744]">{t('activeReferrals')}</p>
               <p className="text-3xl font-semibold text-[#2D2721]">{stats.activeReferrals}</p>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3 text-sm text-[#6B5744]">
             <div className="rounded-[12px] bg-white/80 p-3">
-              <p className="text-xs uppercase tracking-wide text-[#8B7355]">Pending Rewards</p>
+              <p className="text-xs uppercase tracking-wide text-[#8B7355]">{t('pendingRewards')}</p>
               <p className="text-lg font-semibold text-[#2D2721]">{formatMoney(stats.pendingRewards)}</p>
             </div>
             <div className="rounded-[12px] bg-white/80 p-3">
-              <p className="text-xs uppercase tracking-wide text-[#8B7355]">Total Earned</p>
+              <p className="text-xs uppercase tracking-wide text-[#8B7355]">{t('totalEarned')}</p>
               <p className="text-lg font-semibold text-[#2D2721]">{formatMoney(stats.totalEarned)}</p>
             </div>
           </div>
@@ -147,13 +153,13 @@ export default function ReferralsClient({
       <WarmCard padding="lg" className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-[#6B5744]">Referral HUD</p>
-            <h2 className="text-xl font-semibold text-[#2D2721]">Your Referrals</h2>
+            <p className="text-sm text-[#6B5744]">{t('title')}</p>
+            <h2 className="text-xl font-semibold text-[#2D2721]">{t('yourReferrals')}</h2>
           </div>
-          <div className="text-sm text-[#8B7355] font-semibold">Completed: {stats.completedReferrals}</div>
+          <div className="text-sm text-[#8B7355] font-semibold">{t('completed')}: {stats.completedReferrals}</div>
         </div>
         {referrals.length === 0 ? (
-          <div className="text-sm text-[#6B5744]">No referrals yet. Share your link to start earning credits.</div>
+          <div className="text-sm text-[#6B5744]">{t('noReferralsDescription')}</div>
         ) : (
           <div className="space-y-2">
             {referrals.map((referral) => (

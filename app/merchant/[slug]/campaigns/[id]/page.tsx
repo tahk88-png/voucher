@@ -93,7 +93,7 @@ export default async function CampaignDetailPage({
               value: campaign.creditPercentage ? `${campaign.creditPercentage / 100}%` : 'None',
             },
           ].map((item) => (
-            <WarmCard key={item.label} padding="lg" className="bg-white border border-[#E7DCC7]">
+            <WarmCard key={item.label} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
               <p className="text-sm font-medium text-[#8B7355]">{item.label}</p>
               <p className="text-lg font-semibold capitalize text-[#2D2721] mt-2">{item.value}</p>
             </WarmCard>
@@ -106,7 +106,7 @@ export default async function CampaignDetailPage({
             { label: 'Total purchases', value: campaign._count.purchases },
             { label: 'Paid purchases', value: paidPurchases },
           ].map((item) => (
-            <WarmCard key={item.label} padding="lg" className="bg-white border border-[#E7DCC7]">
+            <WarmCard key={item.label} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
               <p className="text-sm font-medium text-[#8B7355]">{item.label}</p>
               <p className="text-2xl font-semibold text-[#2D2721] mt-2">{item.value}</p>
             </WarmCard>
@@ -114,14 +114,14 @@ export default async function CampaignDetailPage({
         </div>
 
         {campaign.terms && (
-          <WarmCard padding="lg" className="mb-6 bg-white border border-[#E7DCC7]">
+          <WarmCard padding="lg" className="mb-6 bg-white border border-[rgba(139,115,85,0.15)]">
             <h2 className="text-sm font-semibold text-[#2D2721]">Terms and conditions</h2>
             <p className="text-sm text-[#6B5744] whitespace-pre-wrap mt-2">{campaign.terms}</p>
           </WarmCard>
         )}
 
         {isAdmin && (
-          <WarmCard padding="lg" className="mb-6 bg-white border border-[#E7DCC7]">
+          <WarmCard padding="lg" className="mb-6 bg-white border border-[rgba(139,115,85,0.15)]">
             <div>
               <h2 className="text-sm font-semibold text-[#2D2721]">Promotion</h2>
               <p className="text-sm text-[#6B5744]">
@@ -143,7 +143,7 @@ export default async function CampaignDetailPage({
           </WarmCard>
         )}
 
-        <WarmCard padding="lg" className="relative bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="relative bg-white border border-[rgba(139,115,85,0.15)]">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-base font-semibold text-[#2D2721]">Vouchers</h2>
@@ -184,7 +184,7 @@ export default async function CampaignDetailPage({
                 {campaign.vouchers.map((voucher) => (
                   <div
                     key={voucher.id}
-                    className="flex items-center justify-between p-3 border border-[#E7DCC7] rounded-lg bg-[#FFF9ED]"
+                    className="flex items-center justify-between p-3 border border-[rgba(139,115,85,0.15)] rounded-lg bg-[#FFF9ED]"
                   >
                     <div>
                       <p className="font-medium text-[#2D2721]">

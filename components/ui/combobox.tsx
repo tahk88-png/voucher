@@ -73,7 +73,7 @@ export function Combobox({
         </div>
         <div className="max-h-[200px] overflow-y-auto p-1">
           {filteredOptions.length === 0 ? (
-            <div className="py-6 text-center text-sm text-[#8B7355]">
+            <div className="py-6 text-center text-sm text-[var(--text-faint)]">
               {emptyText}
             </div>
           ) : (
@@ -86,13 +86,13 @@ export function Combobox({
                   setSearch("")
                 }}
                 className={cn(
-                  "flex w-full items-center gap-2 rounded-[8px] px-2 py-1.5 text-sm outline-none transition-colors hover:bg-[#FAF7F2]",
-                  value === option.value && "bg-[#FAF7F2] text-[#2D2721]"
+                  "flex w-full items-center gap-2 rounded-[8px] px-2 py-1.5 text-sm outline-none transition-colors hover:bg-[var(--surface-muted)]",
+                  value === option.value && "bg-[var(--surface-muted)] text-[var(--text)]"
                 )}
               >
                 <Check
                   className={cn(
-                    "h-4 w-4 text-[#FFC857]",
+                    "h-4 w-4 text-[var(--primary)]",
                     value === option.value ? "opacity-100" : "opacity-0"
                   )}
                 />

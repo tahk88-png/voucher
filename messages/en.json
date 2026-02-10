@@ -41,7 +41,10 @@
     "tickets": "Tickets",
     "payments": "Payments",
     "user": "User",
-    "giftCards": "Gift cards"
+    "giftCards": "Gift cards",
+    "b2b": "B2B Orgs",
+    "notifications": "Notifications",
+    "team": "Team"
   },
   "voucher": {
     "title": "Voucher",
@@ -99,7 +102,7 @@
     "limitedTimeOffers": "Limited-time offers on a schedule",
     "nextDesign": "Next: Design",
     "headlineColorsFinePrint": "Headline, colors, fine print",
-    "creating": "Creating\u2026",
+    "creating": "Creating…",
     "preview": "Preview",
     "percentageDiscount": "Percentage discount",
     "fixedAmountDiscount": "Fixed amount discount",
@@ -151,7 +154,9 @@
     "creditToApply": "Credit to Apply",
     "subtotal": "Subtotal",
     "creditApplied": "Credit Applied",
-    "finalTotal": "Total"
+    "finalTotal": "Total",
+    "pageDescription": "Track your available and locked credits.",
+    "noMerchantWallets": "No merchant wallets yet."
   },
   "redemption": {
     "title": "Redemptions",
@@ -178,10 +183,10 @@
     "noReferrals": "No referrals yet",
     "noReferralsDescription": "Start sharing vouchers to see referral stats here",
     "voucherFrom": "You got a voucher from",
-    "noAppRequired": "No app required \u2014 use in browser",
+    "noAppRequired": "No app required — use in browser",
     "cannotRedeemOwn": "You cannot redeem your own referral link",
     "orderAmountLabel": "Order amount (for online use)",
-    "processing": "Processing\u2026",
+    "processing": "Processing…",
     "useOnline": "Use online",
     "showQrInStore": "Show QR in store",
     "showQrToStaff": "Show the QR below to staff. Waiting for merchant confirmation.",
@@ -192,7 +197,26 @@
     "showQrAtRegister": "Show this QR at the register",
     "shareOnSocialMedia": "Share on social media",
     "validUntil": "Valid until",
-    "sharedByFriend": " - Shared by a friend!"
+    "sharedByFriend": " - Shared by a friend!",
+    "clipboardUnavailable": "Clipboard is not available",
+    "copiedField": "{field} copied",
+    "copyFailedNow": "Unable to copy right now",
+    "linkOpened": "Referral link opened",
+    "shareFailed": "Unable to share link",
+    "linkTitle": "Referral Link",
+    "copy": "Copy",
+    "copied": "Copied",
+    "share": "Share",
+    "codeTitle": "Referral code",
+    "activeReferrals": "Active Referrals",
+    "pendingRewards": "Pending Rewards",
+    "totalEarned": "Total Earned",
+    "yourReferrals": "Your Referrals",
+    "completed": "Completed",
+    "merchantLabel": "Merchant",
+    "voucherLabel": "Voucher",
+    "linkField": "Link",
+    "codeField": "Code"
   },
   "analytics": {
     "title": "Analytics",
@@ -218,11 +242,13 @@
     "date": "Date",
     "status": "Status",
     "location": "Location",
-    "viewTicket": "View Ticket"
+    "viewTicket": "View Ticket",
+    "activeUsers": "Active Users",
+    "engagement": "Engagement"
   },
   "placeholders": {
     "email": "you@example.com",
-    "password": "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+    "password": "••••••••",
     "website": "https://example.com",
     "supportEmail": "support@example.com",
     "logoUrl": "https://example.com/logo.png",
@@ -266,7 +292,7 @@
     "verifyRequest": "Check your email",
     "verifyRequestDescription": "We've sent you a magic link to sign in",
     "emailPlaceholder": "you@example.com",
-    "passwordPlaceholder": "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022"
+    "passwordPlaceholder": "••••••••"
   },
   "errors": {
     "unauthorized": "Unauthorized",
@@ -308,7 +334,7 @@
     "failedToRedeemTicket": "Failed to redeem ticket"
   },
   "landing": {
-    "hero": "Turn your best customers into your best salespeople\u2014and only pay when it actually works.",
+    "hero": "Turn your best customers into your best salespeople—and only pay when it actually works.",
     "tagline": "Pay for results, not reach.",
     "description": "Merchant-owned referral infrastructure. Create branded vouchers, reward customers for sharing, and only pay when vouchers are actually redeemed.",
     "getStarted": "Get Started",
@@ -336,7 +362,7 @@
     "step2Title": "Customers Share",
     "step2Description": "Your customers share the voucher link with friends. They earn credit when friends redeem.",
     "step3Title": "Friends Redeem",
-    "step3Description": "Friends redeem vouchers online or in-store. No signup required\u2014just use the voucher code.",
+    "step3Description": "Friends redeem vouchers online or in-store. No signup required—just use the voucher code.",
     "step4Title": "You Pay & Reward",
     "step4Description": "You only pay when vouchers are redeemed. The referrer automatically gets store credit.",
     "ctaTitle": "Ready to launch a campaign?",
@@ -350,7 +376,7 @@
     "footerPrivacy": "Privacy",
     "footerDocs": "Documentation",
     "footerSupport": "Support",
-    "footerCopyright": "\u00a9 2024 Vouchr. All rights reserved.",
+    "footerCopyright": "© 2024 Vouchr. All rights reserved.",
     "badge": "Launch vouchers, gift cards, and ticket promos",
     "headline": "Campaigns that feel like a premium brand experience",
     "subheadline": "Build voucher and gift card campaigns with QR redemption, referrals, and automated credit. Pay only for results.",
@@ -438,7 +464,21 @@
     "twitter": "Twitter",
     "linkedin": "LinkedIn",
     "whatsapp": "WhatsApp",
-    "email": "Email"
+    "email": "Email",
+    "shareAndEarnTitle": "Share & Earn",
+    "shareAndEarnDescription": "Share vouchers with friends and earn credit when they redeem.",
+    "inviteLinkTitle": "Your invite link",
+    "inviteLinkDescription": "Share this link with friends. When they redeem a voucher, you earn credit.",
+    "howRewardsWorkTitle": "How rewards work",
+    "howRewardsWorkLine1": "When you share a voucher and a friend redeems it, you automatically earn merchant credit.",
+    "howRewardsWorkLine2": "Credits are non-transferable and expire based on merchant settings. Check your wallet to see your current balance.",
+    "recentSharesTitle": "Recent shares",
+    "noSharesTitle": "No shares yet",
+    "noSharesDescription": "Start sharing vouchers with friends to earn credit when they redeem.",
+    "viewVouchers": "View vouchers",
+    "redeemed": "Redeemed",
+    "friendLabel": "Friend",
+    "voucherLabel": "Voucher"
   },
   "payment": {
     "purchase": "Purchase",
@@ -447,7 +487,7 @@
     "purchaseFailed": "Failed to create purchase",
     "codeCopied": "Code copied",
     "getVoucher": "Get this voucher",
-    "preparing": "Preparing\u2026",
+    "preparing": "Preparing…",
     "shareAndEarn": "Share & Earn Credit",
     "successTitle": "Payment Successful!",
     "successDescription": "Your payment has been processed successfully",
@@ -514,5 +554,32 @@
       "outdoor": "Outdoor and hikes",
       "other": "Other"
     }
+  },
+  "notifications": {
+    "description": "Latest updates from merchants you follow.",
+    "markAllRead": "Mark all read",
+    "empty": "No notifications yet.",
+    "view": "View",
+    "settingsTitle": "Notification settings",
+    "settingsDescription": "Choose how you want to hear about new vouchers and campaigns.",
+    "email": "Email",
+    "inApp": "In-app",
+    "pushBeta": "Push (beta)",
+    "saving": "Saving...",
+    "savePreferences": "Save preferences"
+  },
+  "settingsPage": {
+    "description": "Manage your account preferences.",
+    "joined": "Joined",
+    "recently": "recently",
+    "accountAccessTitle": "Account access",
+    "accountAccessDescription": "Secure your account and manage access."
+  },
+  "profile": {
+    "title": "Profile",
+    "description": "Manage your account settings.",
+    "accountInformation": "Account information",
+    "emailPreferences": "Email preferences",
+    "appSettings": "App settings"
   }
 }

@@ -86,7 +86,7 @@ export default function CheckoutDemoPage() {
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-semibold text-[#2D2721] mb-6">Checkout demo</h1>
 
-        <WarmCard padding="lg" className="mb-6 bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="mb-6 bg-white border border-[rgba(139,115,85,0.15)]">
           <h2 className="text-lg font-semibold text-[#2D2721]">Credit balance</h2>
           <div className="mt-3">
             {balance ? (
@@ -106,7 +106,7 @@ export default function CheckoutDemoPage() {
           </div>
         </WarmCard>
 
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <div>
             <h2 className="text-lg font-semibold text-[#2D2721]">Order summary</h2>
             <p className="text-sm text-[#6B5744]">Demo checkout page</p>
@@ -120,7 +120,7 @@ export default function CheckoutDemoPage() {
                 placeholder="100.00"
                 value={orderAmount}
                 onChange={(e) => setOrderAmount(e.target.value)}
-                className="mt-1 border-[#E7DCC7]"
+                className="mt-1 border-[rgba(139,115,85,0.15)]"
               />
             </div>
 
@@ -133,7 +133,7 @@ export default function CheckoutDemoPage() {
                 value={creditAmount}
                 onChange={(e) => setCreditAmount(e.target.value)}
                 max={balance ? String(balance.available / 100) : undefined}
-                className="mt-1 border-[#E7DCC7]"
+                className="mt-1 border-[rgba(139,115,85,0.15)]"
               />
               {balance && (
                 <p className="text-sm text-[#6B5744] mt-1">
@@ -148,7 +148,7 @@ export default function CheckoutDemoPage() {
               </div>
             )}
 
-            <div className="border-t border-[#E7DCC7] pt-4 space-y-2 text-sm">
+            <div className="border-t border-[rgba(139,115,85,0.15)] pt-4 space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-[#6B5744]">Subtotal</span>
                 <span className="text-[#2D2721]">
@@ -166,7 +166,7 @@ export default function CheckoutDemoPage() {
                     : '$0.00'}
                 </span>
               </div>
-              <div className="flex justify-between font-semibold text-lg border-t border-[#E7DCC7] pt-2">
+              <div className="flex justify-between font-semibold text-lg border-t border-[rgba(139,115,85,0.15)] pt-2">
                 <span className="text-[#2D2721]">Total</span>
                 <span className="text-[#2D2721]">
                   {formatCurrency(finalAmount * 100, balance?.currency || 'USD')}

@@ -99,10 +99,10 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
           case "hero":
             return (
               <section key={block} className="text-center py-12">
-                <h1 className="text-4xl font-bold text-[#2D2721]">
+                <h1 className="text-4xl font-bold text-[var(--text)]">
                   {scope === "hub" ? "Discover local merchants" : merchant?.name}
                 </h1>
-                <p className="mt-3 text-[#6B5744]">
+                <p className="mt-3 text-[var(--text-muted)]">
                   {scope === "hub"
                     ? "Browse vouchers, rentals, and storefronts from verified partners."
                     : "Explore products, rentals, and vouchers in one place."}
@@ -118,17 +118,17 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
             return (
               <section key={block} id="tenants">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-2xl font-bold text-[#2D2721] mb-6">Featured tenants</h2>
+                  <h2 className="text-2xl font-bold text-[var(--text)] mb-6">Featured tenants</h2>
                   <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {tenants.length === 0 ? (
-                      <WarmCard padding="lg" className="col-span-full text-center bg-white">
-                        <p className="text-[#6B5744]">No tenants found.</p>
+                      <WarmCard padding="lg" className="col-span-full text-center bg-[var(--surface)]">
+                        <p className="text-[var(--text-muted)]">No tenants found.</p>
                       </WarmCard>
                     ) : (
                       tenantLinks.map(({ tenant, url }) => (
-                        <WarmCard key={tenant.id} padding="lg" className="bg-white">
-                          <p className="font-semibold text-[#2D2721]">{tenant.name}</p>
-                          <p className="text-sm text-[#6B5744] mt-1">{tenant.country}</p>
+                        <WarmCard key={tenant.id} padding="lg" className="bg-[var(--surface)]">
+                          <p className="font-semibold text-[var(--text)]">{tenant.name}</p>
+                          <p className="text-sm text-[var(--text-muted)] mt-1">{tenant.country}</p>
                           <WarmButton asChild className="mt-3">
                             <Link href={url}>Visit tenant</Link>
                           </WarmButton>
@@ -143,11 +143,11 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
             return (
               <section key={block}>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-2xl font-bold text-[#2D2721] mb-6">Featured products</h2>
+                  <h2 className="text-2xl font-bold text-[var(--text)] mb-6">Featured products</h2>
                   <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {products.length === 0 ? (
-                      <WarmCard padding="lg" className="col-span-full text-center bg-white">
-                        <p className="text-[#6B5744]">No products available.</p>
+                      <WarmCard padding="lg" className="col-span-full text-center bg-[var(--surface)]">
+                        <p className="text-[var(--text-muted)]">No products available.</p>
                       </WarmCard>
                     ) : (
                       products.map((product: any) => {
@@ -157,13 +157,13 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
                             : null
                         const href = merchantUrl ? `${merchantUrl}/shop` : "/shop"
                         return (
-                          <WarmCard key={product.id} padding="lg" className="bg-white">
+                          <WarmCard key={product.id} padding="lg" className="bg-[var(--surface)]">
                             <Link href={href} className="block">
-                              <p className="font-semibold text-[#2D2721]">{product.name}</p>
+                              <p className="font-semibold text-[var(--text)]">{product.name}</p>
                               {scope === "hub" && product.merchant ? (
-                                <p className="text-xs text-[#8B7355] mt-1">{product.merchant.name}</p>
+                                <p className="text-xs text-[var(--text-faint)] mt-1">{product.merchant.name}</p>
                               ) : null}
-                              <p className="text-sm text-[#6B5744] mt-1">
+                              <p className="text-sm text-[var(--text-muted)] mt-1">
                                 {formatCurrency(product.price, product.currency)}
                               </p>
                             </Link>
@@ -179,11 +179,11 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
             return (
               <section key={block}>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-2xl font-bold text-[#2D2721] mb-6">Rental highlights</h2>
+                  <h2 className="text-2xl font-bold text-[var(--text)] mb-6">Rental highlights</h2>
                   <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {rentals.length === 0 ? (
-                      <WarmCard padding="lg" className="col-span-full text-center bg-white">
-                        <p className="text-[#6B5744]">No rentals available.</p>
+                      <WarmCard padding="lg" className="col-span-full text-center bg-[var(--surface)]">
+                        <p className="text-[var(--text-muted)]">No rentals available.</p>
                       </WarmCard>
                     ) : (
                       rentals.map((item: any) => {
@@ -191,13 +191,13 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
                           scope === "hub" && item.merchant ? merchantUrlMap.get(item.merchantId) : null
                         const href = merchantUrl ? `${merchantUrl}/rent` : "/rent"
                         return (
-                          <WarmCard key={item.id} padding="lg" className="bg-white">
+                          <WarmCard key={item.id} padding="lg" className="bg-[var(--surface)]">
                             <Link href={href} className="block">
-                              <p className="font-semibold text-[#2D2721]">{item.name}</p>
+                              <p className="font-semibold text-[var(--text)]">{item.name}</p>
                               {scope === "hub" && item.merchant ? (
-                                <p className="text-xs text-[#8B7355] mt-1">{item.merchant.name}</p>
+                                <p className="text-xs text-[var(--text-faint)] mt-1">{item.merchant.name}</p>
                               ) : null}
-                              <p className="text-sm text-[#6B5744] mt-1">
+                              <p className="text-sm text-[var(--text-muted)] mt-1">
                                 {formatCurrency(item.dailyRate, item.currency)} / day
                               </p>
                             </Link>
@@ -213,11 +213,11 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
             return (
               <section key={block}>
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                  <h2 className="text-2xl font-bold text-[#2D2721] mb-6">Active vouchers</h2>
+                  <h2 className="text-2xl font-bold text-[var(--text)] mb-6">Active vouchers</h2>
                   <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {vouchers.length === 0 ? (
-                      <WarmCard padding="lg" className="col-span-full text-center bg-white">
-                        <p className="text-[#6B5744]">No vouchers available.</p>
+                      <WarmCard padding="lg" className="col-span-full text-center bg-[var(--surface)]">
+                        <p className="text-[var(--text-muted)]">No vouchers available.</p>
                       </WarmCard>
                     ) : (
                       vouchers.map((voucher: any) => {
@@ -227,12 +227,12 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
                             : null
                         const href = merchantUrl ? `${merchantUrl}/v/${voucher.id}` : `/v/${voucher.id}`
                         return (
-                          <WarmCard key={voucher.id} padding="lg" className="bg-white">
-                            <p className="font-semibold text-[#2D2721]">Voucher</p>
+                          <WarmCard key={voucher.id} padding="lg" className="bg-[var(--surface)]">
+                            <p className="font-semibold text-[var(--text)]">Voucher</p>
                             {scope === "hub" && voucher.merchant ? (
-                              <p className="text-xs text-[#8B7355] mt-1">{voucher.merchant.name}</p>
+                              <p className="text-xs text-[var(--text-faint)] mt-1">{voucher.merchant.name}</p>
                             ) : null}
-                            <p className="text-sm text-[#6B5744] mt-1">
+                            <p className="text-sm text-[var(--text-muted)] mt-1">
                               {formatCurrency(voucher.value, voucher.currency)}
                             </p>
                             <WarmButton asChild className="mt-3">
@@ -257,14 +257,14 @@ export default async function SitePageRenderer({ blocks, scope, merchant }: Site
                       { label: "Products", value: stats.products },
                       { label: "Rentals", value: stats.rentals },
                     ].map((item) => (
-                      <WarmCard key={item.label} padding="lg" className="bg-white text-center">
-                        <p className="text-2xl font-bold text-[#2D2721]">{item.value}</p>
-                        <p className="text-sm text-[#6B5744]">{item.label}</p>
+                      <WarmCard key={item.label} padding="lg" className="bg-[var(--surface)] text-center">
+                        <p className="text-2xl font-bold text-[var(--text)]">{item.value}</p>
+                        <p className="text-sm text-[var(--text-muted)]">{item.label}</p>
                       </WarmCard>
                     ))
                   ) : (
-                    <WarmCard padding="lg" className="bg-white text-center col-span-full">
-                      <p className="text-[#6B5744]">Stats unavailable.</p>
+                    <WarmCard padding="lg" className="bg-[var(--surface)] text-center col-span-full">
+                      <p className="text-[var(--text-muted)]">Stats unavailable.</p>
                     </WarmCard>
                   )}
                 </div>

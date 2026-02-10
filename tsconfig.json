@@ -31,7 +31,9 @@
       "@/lib/*": ["./lib/*"],
       "@/figma/*": ["./figma/*"],
       "@/src/*": ["./src/*"],
-      "@services/*": ["./figma/services/*"]
+      "@services/*": ["./figma/services/*"],
+      "react-router": ["./lib/router-shim.tsx"],
+      "react-router-dom": ["./lib/router-shim.tsx"]
     },
     "allowJs": true,
     "incremental": true,
@@ -46,6 +48,7 @@
     "app",
     "components",
     "lib",
+    "types",
     "figma",
     "src",
     ".next/types/**/*.ts"

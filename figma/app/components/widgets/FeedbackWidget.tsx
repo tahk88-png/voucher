@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Star, MessageSquare, X, Send, ThumbsUp } from 'lucide-react';
+﻿import { useState } from 'react';
+import { Star, X, ThumbsUp } from 'lucide-react';
 import { useAdminSettings } from '@app/contexts/AdminSettings';
 import { WarmButton } from '@app/components/WarmButton';
 import { toast } from 'sonner';
@@ -19,7 +19,7 @@ export function FeedbackWidget() {
       return;
     }
     setSubmitted(true);
-    toast.success('Aitäh tagasiside eest!');
+    toast.success('Aitah tagasiside eest!');
     
     // Auto close after success
     setTimeout(() => {
@@ -30,10 +30,8 @@ export function FeedbackWidget() {
     }, 2000);
   };
 
-  // If chat is also enabled, move feedback up slightly or position differently
-  // For simplicity, we'll assume they stack if both active (CSS handles it via flex/absolute flow if positioned smartly)
-  // But since they are fixed positioned, we need dynamic style.
-  // Actually, chat is bottom-6, so feedback should be higher if both active.
+  // Keep feedback widget above chat when both are enabled.
+  // This avoids overlapping floating buttons on small screens.
   const bottomPosition = chatEnabled ? 'bottom-24' : 'bottom-6';
 
   return (
@@ -45,8 +43,8 @@ export function FeedbackWidget() {
               <div className="w-12 h-12 bg-[#E6F4EA] rounded-full flex items-center justify-center mx-auto mb-3">
                 <ThumbsUp className="w-6 h-6 text-[#00D098]" />
               </div>
-              <h3 className="font-bold text-[#2D2721]">Aitäh!</h3>
-              <p className="text-sm text-[#6B5744]">Sinu arvamus on meile tähtis.</p>
+              <h3 className="font-bold text-[#2D2721]">Aitah!</h3>
+              <p className="text-sm text-[#6B5744]">Sinu arvamus on meile tahtis.</p>
             </div>
           ) : (
             <>
@@ -74,7 +72,7 @@ export function FeedbackWidget() {
               <textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
-                placeholder="Mis meeldis? Mis võiks parem olla?"
+                placeholder="Mis meeldis? Mis voiks parem olla?"
                 className="w-full bg-[#FAF7F2] border-none rounded-xl p-3 text-sm mb-4 h-24 resize-none focus:ring-2 focus:ring-[#E17B5C] focus:outline-none"
               />
 

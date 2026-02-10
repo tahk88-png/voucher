@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Prisma } from '@prisma/client';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
-import { requireCampaignCreationAccess } from '@/lib/billing';
 import { handleError } from '@/lib/errors';
 import { z } from 'zod';
+import { AccessControlError, accessErrorResponse, requireMerchantCapability, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 
 const createCampaignSchema = z.object({
   name: z.string().min(1),
@@ -26,21 +24,8 @@ export async function POST(
   { params }: { params: { slug: string } }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
-    });
-
-    if (!merchant) {
-      return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });
-    }
-
-    await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
-    await requireCampaignCreationAccess(merchant.id);
+    const { merchant, profile } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
+    await requireMerchantCapability(merchant.id, merchant.slug, 'campaign.create');
 
     const body = await req.json();
     const data = createCampaignSchema.parse(body);
@@ -67,7 +52,7 @@ export async function POST(
     await prisma.auditLog.create({
       data: {
         merchantId: merchant.id,
-        actorUserId: session.user.id,
+        actorUserId: profile.userId,
         action: 'campaign.created',
         payloadJson: {
           campaignId: campaign.id,
@@ -82,8 +67,11 @@ export async function POST(
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }
+    if (error instanceof AccessControlError) {
+      return accessErrorResponse(error);
+    }
     const handled = handleError(error);
-    return NextResponse.json({ error: handled.error }, { status: handled.status });
+    return NextResponse.json({ error: handled.error, code: handled.code, details: handled.details ?? null }, { status: handled.status });
   }
 }
 
@@ -92,20 +80,7 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
-    });
-
-    if (!merchant) {
-      return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });
-    }
-
-    await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
+    const { merchant } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_staff');
 
     const campaigns = await prisma.campaign.findMany({
       where: { merchantId: merchant.id },
@@ -123,7 +98,9 @@ export async function GET(
 
     return NextResponse.json(campaigns);
   } catch (error) {
-    console.error('Error fetching campaigns:', error);
+    if (error instanceof AccessControlError) {
+      return accessErrorResponse(error);
+    }
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

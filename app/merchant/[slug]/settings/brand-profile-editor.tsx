@@ -66,7 +66,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
   };
 
   return (
-    <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+    <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
       <div>
         <h2 className="text-base font-semibold text-[#2D2721]">Brand profile</h2>
         <p className="text-sm text-[#6B5744]">
@@ -82,7 +82,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
             type="url"
             placeholder="https://example.com"
             defaultValue={merchant.website || ''}
-            className="mt-1 border-[#E7DCC7]"
+            className="mt-1 border-[rgba(139,115,85,0.15)]"
           />
         </div>
         <div>
@@ -93,7 +93,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
             type="email"
             placeholder="support@example.com"
             defaultValue={merchant.supportEmail || ''}
-            className="mt-1 border-[#E7DCC7]"
+            className="mt-1 border-[rgba(139,115,85,0.15)]"
           />
         </div>
         <div>
@@ -104,7 +104,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
             type="url"
             placeholder="https://example.com/logo.png"
             defaultValue={merchant.brandLogoUrl || ''}
-            className="mt-1 border-[#E7DCC7]"
+            className="mt-1 border-[rgba(139,115,85,0.15)]"
           />
         </div>
         <div>
@@ -121,7 +121,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
               type="text"
               defaultValue={brandColors?.primary || '#FFC857'}
               placeholder="#FFC857"
-              className="flex-1 border-[#E7DCC7]"
+              className="flex-1 border-[rgba(139,115,85,0.15)]"
               aria-label="Primary color hex value"
               onChange={(e) => {
                 const colorInput = document.getElementById('primaryColor') as HTMLInputElement;
@@ -144,7 +144,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
               type="text"
               defaultValue={brandColors?.secondary || '#71717a'}
               placeholder="#71717a"
-              className="flex-1 border-[#E7DCC7]"
+              className="flex-1 border-[rgba(139,115,85,0.15)]"
               aria-label="Secondary color hex value"
               onChange={(e) => {
                 const colorInput = document.getElementById('secondaryColor') as HTMLInputElement;
@@ -167,7 +167,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
               type="text"
               defaultValue={brandColors?.background || '#fafafa'}
               placeholder="#fafafa"
-              className="flex-1 border-[#E7DCC7]"
+              className="flex-1 border-[rgba(139,115,85,0.15)]"
               aria-label="Background color hex value"
               onChange={(e) => {
                 const colorInput = document.getElementById('backgroundColor') as HTMLInputElement;

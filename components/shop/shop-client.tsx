@@ -105,21 +105,21 @@ export default function ShopClient({
     <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
       <div className="grid gap-6 sm:grid-cols-2">
         {products.length === 0 ? (
-          <WarmCard padding="lg" className="bg-white col-span-full text-center">
-            <p className="text-[#6B5744]">No products available yet.</p>
+          <WarmCard padding="lg" className="bg-[var(--surface)] col-span-full text-center">
+            <p className="text-[var(--text-muted)]">No products available yet.</p>
           </WarmCard>
         ) : (
           products.map((product) => (
-            <WarmCard key={product.id} padding="lg" className="bg-white">
+            <WarmCard key={product.id} padding="lg" className="bg-[var(--surface)]">
               <div className="flex flex-col h-full">
                 <div className="flex-1">
-                  <p className="font-semibold text-[#2D2721]">{product.name}</p>
-                  <p className="text-sm text-[#6B5744] mt-1">
+                  <p className="font-semibold text-[var(--text)]">{product.name}</p>
+                  <p className="text-sm text-[var(--text-muted)] mt-1">
                     {product.description || "Product highlight"}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
-                  <span className="text-lg font-bold text-[#2D2721]">
+                  <span className="text-lg font-bold text-[var(--text)]">
                     {formatCurrency(product.price, product.currency || currency)}
                   </span>
                   <WarmButton onClick={() => addToCart(product)}>Add</WarmButton>
@@ -129,22 +129,22 @@ export default function ShopClient({
           ))
         )}
       </div>
-      <WarmCard padding="lg" className="bg-white h-fit">
-        <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Cart</h2>
+      <WarmCard padding="lg" className="bg-[var(--surface)] h-fit">
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Cart</h2>
         {cart.length === 0 ? (
-          <p className="text-sm text-[#6B5744]">Cart is empty.</p>
+          <p className="text-sm text-[var(--text-muted)]">Cart is empty.</p>
         ) : (
           <div className="space-y-3">
             {cart.map((item) => (
               <div key={item.id} className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-[#2D2721]">{item.name}</p>
-                  <p className="text-xs text-[#6B5744]">
+                  <p className="text-sm font-semibold text-[var(--text)]">{item.name}</p>
+                  <p className="text-xs text-[var(--text-muted)]">
                     {item.quantity} x {formatCurrency(item.price, currency)}
                   </p>
                 </div>
                 <button
-                  className="text-xs text-[#E17B5C] hover:underline"
+                  className="text-xs text-[var(--danger)] hover:underline"
                   onClick={() => removeFromCart(item.id)}
                 >
                   Remove
@@ -153,9 +153,9 @@ export default function ShopClient({
             ))}
           </div>
         )}
-        <div className="mt-4 flex items-center justify-between border-t border-[#E7DCC7]/60 pt-4">
-          <span className="text-sm font-semibold text-[#2D2721]">Total</span>
-          <span className="text-lg font-bold text-[#2D2721]">
+        <div className="mt-4 flex items-center justify-between border-t border-[var(--border)]/60 pt-4">
+          <span className="text-sm font-semibold text-[var(--text)]">Total</span>
+          <span className="text-lg font-bold text-[var(--text)]">
             {formatCurrency(total, currency)}
           </span>
         </div>

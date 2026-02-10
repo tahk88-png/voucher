@@ -1,10 +1,10 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Input } from '@app/components/ui/input';
 import { Label } from '@app/components/ui/label';
 import { Textarea } from '@app/components/ui/textarea';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   Store, 
   MapPin, 
@@ -24,11 +24,14 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useLanguage } from '@app/contexts/LanguageContext';
 
 export function MerchantOnboarding() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const tr = (en: string, et: string) => (language === 'et' ? et : en);
 
   const [formData, setFormData] = useState({
     // Step 1: Business Information
@@ -81,25 +84,25 @@ export function MerchantOnboarding() {
     // Validate current step
     if (step === 1) {
       if (!formData.businessName || !formData.registrationNumber) {
-        toast.error('Please fill in all required business information');
+        toast.error(tr('Please fill in all required business information', 'Palun taida koik kohustuslikud ariteabe valjad'));
         return;
       }
     }
     if (step === 2) {
       if (!formData.contactPerson || !formData.email || !formData.phone || !formData.address) {
-        toast.error('Please fill in all required contact information');
+        toast.error(tr('Please fill in all required contact information', 'Palun taida koik kohustuslikud kontaktiandmed'));
         return;
       }
     }
     if (step === 3) {
       if (!formData.targetAudience || !formData.bankAccount) {
-        toast.error('Please fill in all required fields');
+        toast.error(tr('Please fill in all required fields', 'Palun taida koik kohustuslikud valjad'));
         return;
       }
     }
     if (step === 4) {
       if (!formData.termsAccepted || !formData.gdprAccepted) {
-        toast.error('Please accept Terms of Service and GDPR policy');
+        toast.error(tr('Please accept Terms of Service and GDPR policy', 'Palun noustu kasutustingimuste ja GDPR poliitikaga'));
         return;
       }
     }
@@ -121,7 +124,7 @@ export function MerchantOnboarding() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    toast.success('Application submitted successfully! Redirecting to plan selection...');
+    toast.success(tr('Application submitted successfully! Redirecting to plan selection...', 'Taotlus esitatud! Suuname paketivalikusse...'));
     
     // Redirect to subscription plans
     setTimeout(() => {
@@ -130,23 +133,23 @@ export function MerchantOnboarding() {
   };
 
   const businessTypes = [
-    { value: 'retail', label: 'Retail Store' },
-    { value: 'restaurant', label: 'Restaurant/Café' },
-    { value: 'service', label: 'Service Provider' },
-    { value: 'online', label: 'Online Business' },
-    { value: 'other', label: 'Other' },
+    { value: 'retail', label: tr('Retail Store', 'Jaekauplus') },
+    { value: 'restaurant', label: tr('Restaurant/Cafe', 'Restoran/Kohvik') },
+    { value: 'service', label: tr('Service Provider', 'Teenusepakkuja') },
+    { value: 'online', label: tr('Online Business', 'Veebiettevote') },
+    { value: 'other', label: tr('Other', 'Muu') },
   ];
 
   const categories = [
-    { value: 'food_drink', label: '🍽️ Food & Drink' },
-    { value: 'fashion', label: '👗 Fashion' },
-    { value: 'beauty', label: '💄 Beauty & Wellness' },
-    { value: 'electronics', label: '📱 Electronics' },
-    { value: 'travel', label: '✈️ Travel & Tourism' },
-    { value: 'events', label: '🎉 Events & Entertainment' },
-    { value: 'home', label: '🏠 Home & Garden' },
-    { value: 'sports', label: '⚽ Sports & Fitness' },
-    { value: 'other', label: '📦 Other' },
+    { value: 'food_drink', label: tr('Food & Drink', 'Toit ja jook') },
+    { value: 'fashion', label: tr('Fashion', 'Mood') },
+    { value: 'beauty', label: tr('Beauty & Wellness', 'Ilu ja heaolu') },
+    { value: 'electronics', label: tr('Electronics', 'Elektroonika') },
+    { value: 'travel', label: tr('Travel & Tourism', 'Reisimine ja turism') },
+    { value: 'events', label: tr('Events & Entertainment', 'Uritused ja meelelahutus') },
+    { value: 'home', label: tr('Home & Garden', 'Kodu ja aed') },
+    { value: 'sports', label: tr('Sports & Fitness', 'Sport ja fitness') },
+    { value: 'other', label: tr('Other', 'Muu') },
   ];
 
   const countries = [
@@ -162,13 +165,13 @@ export function MerchantOnboarding() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-[rgba(139,115,85,0.1)] mb-4">
             <Store className="h-5 w-5 text-[#FFC857]" />
-            <span className="font-semibold text-[#2D2721]">Merchant Registration</span>
+            <span className="font-semibold text-[#2D2721]">{tr('Merchant Registration', 'Kaupmehe registreerimine')}</span>
           </div>
           <h1 className="text-4xl font-bold text-[#2D2721] mb-3">
-            Join Our Platform
+            {tr('Join Our Platform', 'Liitu meie platvormiga')}
           </h1>
           <p className="text-lg text-[#6B5744]">
-            Complete your business profile to start creating campaigns
+            {tr('Complete your business profile to start creating campaigns', 'Taienda ariprofiil, et alustada kampaaniate loomist')}
           </p>
         </div>
 
@@ -188,11 +191,11 @@ export function MerchantOnboarding() {
                   <span className={`text-xs mt-2 font-medium ${
                     step >= s ? 'text-[#2D2721]' : 'text-[#8B7355]'
                   }`}>
-                    {s === 1 && 'Business'}
-                    {s === 2 && 'Contact'}
-                    {s === 3 && 'Details'}
-                    {s === 4 && 'Legal'}
-                    {s === 5 && 'Review'}
+                    {s === 1 && tr('Business', 'Ari')}
+                    {s === 2 && tr('Contact', 'Kontakt')}
+                    {s === 3 && tr('Details', 'Detailid')}
+                    {s === 4 && tr('Legal', 'Juriidika')}
+                    {s === 5 && tr('Review', 'Ulevaade')}
                   </span>
                 </div>
                 {s < 5 && (
@@ -213,24 +216,24 @@ export function MerchantOnboarding() {
                 <Building className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-[#2D2721]">Business Information</h2>
-                <p className="text-sm text-[#8B7355]">Tell us about your business</p>
+                <h2 className="text-2xl font-bold text-[#2D2721]">{tr('Business Information', 'Ariinfo')}</h2>
+                <p className="text-sm text-[#8B7355]">{tr('Tell us about your business', 'Ragi meile oma ettevottest')}</p>
               </div>
             </div>
 
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="businessName">Business Name *</Label>
+                  <Label htmlFor="businessName">{tr('Business Name *', 'Ettevotte nimi *')}</Label>
                   <Input
                     id="businessName"
-                    placeholder="Your Business Name"
+                    placeholder={tr('Your Business Name', 'Sinu ettevotte nimi')}
                     value={formData.businessName}
                     onChange={(e) => updateField('businessName', e.target.value)}
                   />
                 </div>
                 <div>
-                  <Label htmlFor="businessType">Business Type *</Label>
+                  <Label htmlFor="businessType">{tr('Business Type *', 'Ettevotte tuup *')}</Label>
                   <select
                     id="businessType"
                     className="w-full px-3 py-2 rounded-[12px] border border-[rgba(139,115,85,0.2)] bg-white text-[#2D2721]"
@@ -245,7 +248,7 @@ export function MerchantOnboarding() {
               </div>
 
               <div>
-                <Label htmlFor="category">Business Category *</Label>
+                <Label htmlFor="category">{tr('Business Category *', 'Ettevotte kategooria *')}</Label>
                 <select
                   id="category"
                   className="w-full px-3 py-2 rounded-[12px] border border-[rgba(139,115,85,0.2)] bg-white text-[#2D2721]"
@@ -260,7 +263,7 @@ export function MerchantOnboarding() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="registrationNumber">Business Registration Number *</Label>
+                  <Label htmlFor="registrationNumber">{tr('Business Registration Number *', 'Registrikood *')}</Label>
                   <Input
                     id="registrationNumber"
                     placeholder="12345678"
@@ -269,7 +272,7 @@ export function MerchantOnboarding() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="vatNumber">VAT Number (Optional)</Label>
+                  <Label htmlFor="vatNumber">{tr('VAT Number (Optional)', 'KMKR number (valikuline)')}</Label>
                   <Input
                     id="vatNumber"
                     placeholder="EE123456789"
@@ -280,10 +283,10 @@ export function MerchantOnboarding() {
               </div>
 
               <div>
-                <Label htmlFor="description">Business Description *</Label>
+                <Label htmlFor="description">{tr('Business Description *', 'Ettevotte kirjeldus *')}</Label>
                 <Textarea
                   id="description"
-                  placeholder="Describe your business, products, and services..."
+                  placeholder={tr('Describe your business, products, and services...', 'Kirjelda oma ettevotet, tooteid ja teenuseid...')}
                   rows={4}
                   value={formData.description}
                   onChange={(e) => updateField('description', e.target.value)}
@@ -301,15 +304,15 @@ export function MerchantOnboarding() {
                 <MapPin className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-[#2D2721]">Contact & Location</h2>
-                <p className="text-sm text-[#8B7355]">How can we reach you?</p>
+                <h2 className="text-2xl font-bold text-[#2D2721]">{tr('Contact & Location', 'Kontakt ja asukoht')}</h2>
+                <p className="text-sm text-[#8B7355]">{tr('How can we reach you?', 'Kuidas saame sinuga uhendust?')}</p>
               </div>
             </div>
 
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="contactPerson">Contact Person Name *</Label>
+                  <Label htmlFor="contactPerson">{tr('Contact Person Name *', 'Kontaktisiku nimi *')}</Label>
                   <Input
                     id="contactPerson"
                     placeholder="John Doe"
@@ -318,11 +321,11 @@ export function MerchantOnboarding() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="email">Business Email *</Label>
+                  <Label htmlFor="email">{tr('Business Email *', 'Ettevotte e-post *')}</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="contact@business.com"
+                    placeholder={tr('contact@business.com', 'kontakt@ettevote.ee')}
                     value={formData.email}
                     onChange={(e) => updateField('email', e.target.value)}
                   />
@@ -331,7 +334,7 @@ export function MerchantOnboarding() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="phone">Phone Number *</Label>
+                  <Label htmlFor="phone">{tr('Phone Number *', 'Telefoninumber *')}</Label>
                   <Input
                     id="phone"
                     placeholder="+372 5123 4567"
@@ -340,10 +343,10 @@ export function MerchantOnboarding() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="website">Website (Optional)</Label>
+                  <Label htmlFor="website">{tr('Website (Optional)', 'Veebileht (valikuline)')}</Label>
                   <Input
                     id="website"
-                    placeholder="https://www.business.com"
+                    placeholder={tr('https://www.business.com', 'https://www.ettevote.ee')}
                     value={formData.website}
                     onChange={(e) => updateField('website', e.target.value)}
                   />
@@ -351,10 +354,10 @@ export function MerchantOnboarding() {
               </div>
 
               <div>
-                <Label htmlFor="address">Street Address *</Label>
+                <Label htmlFor="address">{tr('Street Address *', 'Tanava aadress *')}</Label>
                 <Input
                   id="address"
-                  placeholder="123 Main Street"
+                  placeholder={tr('123 Main Street', 'Peatanav 123')}
                   value={formData.address}
                   onChange={(e) => updateField('address', e.target.value)}
                 />
@@ -362,7 +365,7 @@ export function MerchantOnboarding() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
-                  <Label htmlFor="city">City *</Label>
+                  <Label htmlFor="city">{tr('City *', 'Linn *')}</Label>
                   <Input
                     id="city"
                     placeholder="Tallinn"
@@ -371,7 +374,7 @@ export function MerchantOnboarding() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="postalCode">Postal Code *</Label>
+                  <Label htmlFor="postalCode">{tr('Postal Code *', 'Postiindeks *')}</Label>
                   <Input
                     id="postalCode"
                     placeholder="10111"
@@ -380,7 +383,7 @@ export function MerchantOnboarding() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="country">Country *</Label>
+                  <Label htmlFor="country">{tr('Country *', 'Riik *')}</Label>
                   <select
                     id="country"
                     className="w-full px-3 py-2 rounded-[12px] border border-[rgba(139,115,85,0.2)] bg-white text-[#2D2721]"
@@ -405,15 +408,15 @@ export function MerchantOnboarding() {
                 <Users className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-[#2D2721]">Business Details</h2>
-                <p className="text-sm text-[#8B7355]">Help us understand your business better</p>
+                <h2 className="text-2xl font-bold text-[#2D2721]">{tr('Business Details', 'Ari detailid')}</h2>
+                <p className="text-sm text-[#8B7355]">{tr('Help us understand your business better', 'Aita meil sinu ettevotet paremini moista')}</p>
               </div>
             </div>
 
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="employeeCount">Number of Employees</Label>
+                  <Label htmlFor="employeeCount">{tr('Number of Employees', 'Tootajate arv')}</Label>
                   <select
                     id="employeeCount"
                     className="w-full px-3 py-2 rounded-[12px] border border-[rgba(139,115,85,0.2)] bg-white text-[#2D2721]"
@@ -428,7 +431,7 @@ export function MerchantOnboarding() {
                   </select>
                 </div>
                 <div>
-                  <Label htmlFor="monthlyRevenue">Monthly Revenue (EUR)</Label>
+                  <Label htmlFor="monthlyRevenue">{tr('Monthly Revenue (EUR)', 'Kuine kaive (EUR)')}</Label>
                   <select
                     id="monthlyRevenue"
                     className="w-full px-3 py-2 rounded-[12px] border border-[rgba(139,115,85,0.2)] bg-white text-[#2D2721]"
@@ -445,7 +448,7 @@ export function MerchantOnboarding() {
               </div>
 
               <div>
-                <Label htmlFor="bankAccount">Bank Account (IBAN) *</Label>
+                <Label htmlFor="bankAccount">{tr('Bank Account (IBAN) *', 'Pangakonto (IBAN) *')}</Label>
                 <Input
                   id="bankAccount"
                   placeholder="EE00 0000 0000 0000 0000"
@@ -454,15 +457,15 @@ export function MerchantOnboarding() {
                   className="mt-1"
                 />
                 <p className="text-xs text-[#8B7355] mt-1">
-                  Required for payouts from ticket and gift card sales. A 6% service fee applies to all payouts.
+                  {tr('Required for payouts from ticket and gift card sales. A 6% service fee applies to all payouts.', 'Vajalik valjamakseteks piletite ja kinkekaartide muugist. Koigile valjamaksetele rakendub 6% teenustasu.')}
                 </p>
               </div>
 
               <div>
-                <Label htmlFor="targetAudience">Target Audience *</Label>
+                <Label htmlFor="targetAudience">{tr('Target Audience *', 'Sihtruhm *')}</Label>
                 <Textarea
                   id="targetAudience"
-                  placeholder="Describe your ideal customers, demographics, interests..."
+                  placeholder={tr('Describe your ideal customers, demographics, interests...', 'Kirjelda oma ideaalset klienti, demograafiat ja huve...')}
                   rows={4}
                   value={formData.targetAudience}
                   onChange={(e) => updateField('targetAudience', e.target.value)}
@@ -470,20 +473,20 @@ export function MerchantOnboarding() {
               </div>
 
               <div>
-                <Label>Social Media (Optional)</Label>
+                <Label>{tr('Social Media (Optional)', 'Sotsiaalmeedia (valikuline)')}</Label>
                 <div className="space-y-3 mt-2">
                   <Input
-                    placeholder="Facebook page URL"
+                    placeholder={tr('Facebook page URL', 'Facebooki lehe URL')}
                     value={formData.socialMedia.facebook}
                     onChange={(e) => updateSocialMedia('facebook', e.target.value)}
                   />
                   <Input
-                    placeholder="Instagram username"
+                    placeholder={tr('Instagram username', 'Instagrami kasutajanimi')}
                     value={formData.socialMedia.instagram}
                     onChange={(e) => updateSocialMedia('instagram', e.target.value)}
                   />
                   <Input
-                    placeholder="LinkedIn company page"
+                    placeholder={tr('LinkedIn company page', 'LinkedIni ettevotte leht')}
                     value={formData.socialMedia.linkedin}
                     onChange={(e) => updateSocialMedia('linkedin', e.target.value)}
                   />
@@ -501,14 +504,14 @@ export function MerchantOnboarding() {
                 <FileText className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-[#2D2721]">Legal & Compliance</h2>
-                <p className="text-sm text-[#8B7355]">Please review and accept our policies</p>
+                <h2 className="text-2xl font-bold text-[#2D2721]">{tr('Legal & Compliance', 'Juriidika ja vastavus')}</h2>
+                <p className="text-sm text-[#8B7355]">{tr('Please review and accept our policies', 'Palun vaata ule ja noustu meie poliitikatega')}</p>
               </div>
             </div>
 
             <div className="space-y-6">
               <div className="p-6 bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] rounded-[16px] border border-[rgba(139,115,85,0.1)]">
-                <h3 className="font-semibold text-[#2D2721] mb-4">Required Agreements</h3>
+                <h3 className="font-semibold text-[#2D2721] mb-4">{tr('Required Agreements', 'Kohustuslikud kokkulepped')}</h3>
                 <div className="space-y-4">
                   <label className="flex items-start gap-3 cursor-pointer group">
                     <input
@@ -519,10 +522,10 @@ export function MerchantOnboarding() {
                     />
                     <div className="flex-1">
                       <span className="text-[#2D2721] font-medium group-hover:text-[#FFC857] transition-colors">
-                        I accept the Terms of Service *
+                        {tr('I accept the Terms of Service *', 'Noustun kasutustingimustega *')}
                       </span>
                       <p className="text-sm text-[#8B7355] mt-1">
-                        You agree to our platform's terms, conditions, and merchant responsibilities.
+                        {tr("You agree to our platform's terms, conditions, and merchant responsibilities.", 'Noustud platvormi tingimuste ja kaupmehe kohustustega.')}
                       </p>
                     </div>
                   </label>
@@ -536,10 +539,10 @@ export function MerchantOnboarding() {
                     />
                     <div className="flex-1">
                       <span className="text-[#2D2721] font-medium group-hover:text-[#FFC857] transition-colors">
-                        I accept the GDPR & Privacy Policy *
+                        {tr('I accept the GDPR & Privacy Policy *', 'Noustun GDPR-i ja privaatsuspoliitikaga *')}
                       </span>
                       <p className="text-sm text-[#8B7355] mt-1">
-                        Your data will be processed according to GDPR regulations.
+                        {tr('Your data will be processed according to GDPR regulations.', 'Andmeid toodeldakse vastavalt GDPR nouetele.')}
                       </p>
                     </div>
                   </label>
@@ -553,10 +556,10 @@ export function MerchantOnboarding() {
                     />
                     <div className="flex-1">
                       <span className="text-[#2D2721] font-medium group-hover:text-[#FFC857] transition-colors">
-                        I agree to receive marketing communications (Optional)
+                        {tr('I agree to receive marketing communications (Optional)', 'Noustun turundusteavitustega (valikuline)')}
                       </span>
                       <p className="text-sm text-[#8B7355] mt-1">
-                        Get updates about new features, tips, and special offers.
+                        {tr('Get updates about new features, tips, and special offers.', 'Saa uuendusi funktsioonide, nippide ja eripakkumiste kohta.')}
                       </p>
                     </div>
                   </label>
@@ -567,8 +570,8 @@ export function MerchantOnboarding() {
                 <div className="flex items-start gap-3">
                   <AlertCircle className="h-5 w-5 text-[#9DB5A5] flex-shrink-0 mt-0.5" />
                   <div className="text-sm text-[#2D2721]">
-                    <strong>Important:</strong> Your application will be reviewed by our team within 24-48 hours. 
-                    You'll receive an email notification once approved.
+                    <strong>{tr('Important:', 'Taehelepanu:')}</strong>{' '}
+                    {tr("Your application will be reviewed by our team within 24-48 hours. You'll receive an email notification once approved.", 'Meie tiim vaatab taotluse ule 24-48 tunni jooksul. Kinnituse korral saad e-kirja.')}
                   </div>
                 </div>
               </div>
@@ -584,8 +587,8 @@ export function MerchantOnboarding() {
                 <CheckCircle2 className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-[#2D2721]">Review Your Application</h2>
-                <p className="text-sm text-[#8B7355]">Please verify all information before submitting</p>
+                <h2 className="text-2xl font-bold text-[#2D2721]">{tr('Review Your Application', 'Kontrolli oma taotlust')}</h2>
+                <p className="text-sm text-[#8B7355]">{tr('Please verify all information before submitting', 'Palun kontrolli enne esitamist koik andmed ule')}</p>
               </div>
             </div>
 
@@ -594,26 +597,26 @@ export function MerchantOnboarding() {
               <div className="p-6 bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] rounded-[16px]">
                 <h3 className="font-semibold text-[#2D2721] mb-4 flex items-center gap-2">
                   <Building className="h-5 w-5 text-[#FFC857]" />
-                  Business Information
+                  {tr('Business Information', 'Ariinfo')}
                 </h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-[#8B7355]">Business Name:</span>
+                    <span className="text-[#8B7355]">{tr('Business Name:', 'Ettevotte nimi:')}</span>
                     <div className="font-semibold text-[#2D2721]">{formData.businessName}</div>
                   </div>
                   <div>
-                    <span className="text-[#8B7355]">Category:</span>
+                    <span className="text-[#8B7355]">{tr('Category:', 'Kategooria:')}</span>
                     <div className="font-semibold text-[#2D2721]">
                       {categories.find(c => c.value === formData.category)?.label}
                     </div>
                   </div>
                   <div>
-                    <span className="text-[#8B7355]">Registration #:</span>
+                    <span className="text-[#8B7355]">{tr('Registration #:', 'Registrikood:')}</span>
                     <div className="font-semibold text-[#2D2721]">{formData.registrationNumber}</div>
                   </div>
                   <div>
-                    <span className="text-[#8B7355]">VAT #:</span>
-                    <div className="font-semibold text-[#2D2721]">{formData.vatNumber || 'N/A'}</div>
+                    <span className="text-[#8B7355]">{tr('VAT #:', 'KMKR:')}</span>
+                    <div className="font-semibold text-[#2D2721]">{formData.vatNumber || tr('N/A', 'Puudub')}</div>
                   </div>
                 </div>
               </div>
@@ -622,23 +625,23 @@ export function MerchantOnboarding() {
               <div className="p-6 bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] rounded-[16px]">
                 <h3 className="font-semibold text-[#2D2721] mb-4 flex items-center gap-2">
                   <MapPin className="h-5 w-5 text-[#9DB5A5]" />
-                  Contact & Location
+                  {tr('Contact & Location', 'Kontakt ja asukoht')}
                 </h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-[#8B7355]">Contact Person:</span>
+                    <span className="text-[#8B7355]">{tr('Contact Person:', 'Kontaktisik:')}</span>
                     <div className="font-semibold text-[#2D2721]">{formData.contactPerson}</div>
                   </div>
                   <div>
-                    <span className="text-[#8B7355]">Email:</span>
+                    <span className="text-[#8B7355]">{tr('Email:', 'E-post:')}</span>
                     <div className="font-semibold text-[#2D2721]">{formData.email}</div>
                   </div>
                   <div>
-                    <span className="text-[#8B7355]">Phone:</span>
+                    <span className="text-[#8B7355]">{tr('Phone:', 'Telefon:')}</span>
                     <div className="font-semibold text-[#2D2721]">{formData.phone}</div>
                   </div>
                   <div>
-                    <span className="text-[#8B7355]">Location:</span>
+                    <span className="text-[#8B7355]">{tr('Location:', 'Asukoht:')}</span>
                     <div className="font-semibold text-[#2D2721]">
                       {formData.city}, {formData.country}
                     </div>
@@ -650,21 +653,21 @@ export function MerchantOnboarding() {
               <div className="p-6 bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] rounded-[16px]">
                 <h3 className="font-semibold text-[#2D2721] mb-4 flex items-center gap-2">
                   <Users className="h-5 w-5 text-[#E17B5C]" />
-                  Business Details
+                  {tr('Business Details', 'Ari detailid')}
                 </h3>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-[#8B7355]">Employees:</span>
+                    <span className="text-[#8B7355]">{tr('Employees:', 'Tootajad:')}</span>
                     <div className="font-semibold text-[#2D2721]">{formData.employeeCount}</div>
                   </div>
                   <div>
-                    <span className="text-[#8B7355]">Monthly Revenue:</span>
+                    <span className="text-[#8B7355]">{tr('Monthly Revenue:', 'Kuine kaive:')}</span>
                     <div className="font-semibold text-[#2D2721]">{formData.monthlyRevenue}</div>
                   </div>
                   <div className="col-span-2">
-                    <span className="text-[#8B7355]">Bank Account (IBAN):</span>
+                    <span className="text-[#8B7355]">{tr('Bank Account (IBAN):', 'Pangakonto (IBAN):')}</span>
                     <div className="font-semibold text-[#2D2721] font-mono">{formData.bankAccount}</div>
-                    <div className="text-xs text-[#8B7355] mt-0.5">Includes 6% service fee agreement</div>
+                    <div className="text-xs text-[#8B7355] mt-0.5">{tr('Includes 6% service fee agreement', 'Sisaldab 6% teenustasu kokkulepet')}</div>
                   </div>
                 </div>
               </div>
@@ -677,7 +680,7 @@ export function MerchantOnboarding() {
           {step > 1 ? (
             <WarmButton variant="outline" onClick={prevStep} disabled={isSubmitting}>
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Previous
+              {tr('Previous', 'Eelmine')}
             </WarmButton>
           ) : (
             <div />
@@ -685,7 +688,7 @@ export function MerchantOnboarding() {
 
           {step < 5 ? (
             <WarmButton onClick={nextStep}>
-              Next
+              {tr('Next', 'Jargmine')}
               <ArrowRight className="h-4 w-4 ml-2" />
             </WarmButton>
           ) : (
@@ -693,12 +696,12 @@ export function MerchantOnboarding() {
               {isSubmitting ? (
                 <>
                   <CheckCircle2 className="h-4 w-4 mr-2 animate-spin" />
-                  Submitting...
+                  {tr('Submitting...', 'Esitamine...')}
                 </>
               ) : (
                 <>
                   <CheckCircle2 className="h-4 w-4 mr-2" />
-                  Submit Application
+                  {tr('Submit Application', 'Esita taotlus')}
                 </>
               )}
             </WarmButton>
@@ -708,3 +711,5 @@ export function MerchantOnboarding() {
     </div>
   );
 }
+
+

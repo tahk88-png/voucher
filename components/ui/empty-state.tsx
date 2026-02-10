@@ -24,19 +24,19 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[rgba(139,115,85,0.15)] bg-[#FAF7F2]/50 p-12 text-center",
+        "flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[var(--border)] bg-[var(--surface-muted)]/50 p-12 text-center",
         className
       )}
       {...props}
     >
       {Icon && (
-        <div className="mb-4 rounded-xl bg-[#FFF9ED] p-3">
-          <Icon className="h-8 w-8 text-[#8B7355]" />
+        <div className="mb-4 rounded-xl bg-[var(--bg-2)] p-3">
+          <Icon className="h-8 w-8 text-[var(--text-faint)]" />
         </div>
       )}
-      <h3 className="mb-2 text-lg font-bold text-[#2D2721]">{title}</h3>
+      <h3 className="mb-2 text-lg font-bold text-[var(--text)]">{title}</h3>
       {description && (
-        <p className="mb-6 max-w-sm text-sm text-[#6B5744]">{description}</p>
+        <p className="mb-6 max-w-sm text-sm text-[var(--text-muted)]">{description}</p>
       )}
       {action && (
         <WarmButton onClick={action.onClick} size="sm">

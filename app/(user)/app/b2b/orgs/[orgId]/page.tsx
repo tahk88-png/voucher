@@ -170,21 +170,21 @@ export default function B2BOrgDetailPage() {
       {error && <div className="text-sm text-red-600">{error}</div>}
 
       <div className="grid gap-4 md:grid-cols-3">
-        <WarmCard padding="lg" className="border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
           <div className="text-xs text-[#8B7355] uppercase">Campaigns</div>
           <div className="text-2xl font-semibold text-[#2D2721] mt-2">{totals.campaigns}</div>
         </WarmCard>
-        <WarmCard padding="lg" className="border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
           <div className="text-xs text-[#8B7355] uppercase">Vouchers</div>
           <div className="text-2xl font-semibold text-[#2D2721] mt-2">{totals.vouchers}</div>
         </WarmCard>
-        <WarmCard padding="lg" className="border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
           <div className="text-xs text-[#8B7355] uppercase">Orders</div>
           <div className="text-2xl font-semibold text-[#2D2721] mt-2">{totals.orders}</div>
         </WarmCard>
       </div>
 
-      <WarmCard padding="lg" className="border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
         <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Create campaign</h2>
         <div className="grid gap-3 md:grid-cols-4">
           <div className="space-y-1.5">
@@ -227,14 +227,14 @@ export default function B2BOrgDetailPage() {
         </div>
       </WarmCard>
 
-      <WarmCard padding="lg" className="border border-[#E7DCC7]">
+      <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-[#2D2721]">Campaigns</h2>
         </div>
         <div className="space-y-3">
           {campaigns.length === 0 && <div className="text-sm text-[#8B7355]">No campaigns yet.</div>}
           {campaigns.map((campaign) => (
-            <div key={campaign.id} className="border border-[#E7DCC7] rounded-[16px] p-4 flex items-center justify-between gap-3">
+            <div key={campaign.id} className="border border-[rgba(139,115,85,0.15)] rounded-[16px] p-4 flex items-center justify-between gap-3">
               <div>
                 <div className="font-medium text-[#2D2721]">{campaign.name}</div>
                 <div className="text-xs text-[#8B7355]">
@@ -250,7 +250,7 @@ export default function B2BOrgDetailPage() {
       </WarmCard>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <WarmCard padding="lg" className="border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
           <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Recent Vouchers</h2>
           <div className="space-y-3">
             {vouchers.slice(0, 5).map((voucher) => (
@@ -267,7 +267,7 @@ export default function B2BOrgDetailPage() {
             {vouchers.length === 0 && <div className="text-sm text-[#8B7355]">No vouchers issued.</div>}
           </div>
         </WarmCard>
-        <WarmCard padding="lg" className="border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
           <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Recent Orders</h2>
           <div className="space-y-3">
             {orders.slice(0, 5).map((order) => (

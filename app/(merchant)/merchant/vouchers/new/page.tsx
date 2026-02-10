@@ -33,7 +33,7 @@ export default function NewVoucherPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Form */}
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <h2 className="text-base font-semibold text-[#2D2721]">Voucher details</h2>
           <div className="space-y-6 mt-4">
             <div className="space-y-2">
@@ -43,7 +43,7 @@ export default function NewVoucherPage() {
                 value={formData.title}
                 onChange={(e) => handleChange("title", e.target.value)}
                 placeholder="e.g., 20% Off Your Next Purchase"
-                className="border-[#E7DCC7]"
+                className="border-[rgba(139,115,85,0.15)]"
               />
             </div>
 
@@ -51,7 +51,7 @@ export default function NewVoucherPage() {
               <Label htmlFor="description">Description</Label>
               <textarea
                 id="description"
-                className="flex min-h-[80px] w-full rounded-md border border-[#E7DCC7] bg-white px-3 py-2 text-sm placeholder:text-[#8B7355] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]/60 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex min-h-[80px] w-full rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm placeholder:text-[#8B7355] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]/60 disabled:cursor-not-allowed disabled:opacity-50"
                 value={formData.description}
                 onChange={(e) => handleChange("description", e.target.value)}
                 placeholder="Valid on all items. Cannot be combined with other offers."
@@ -65,7 +65,7 @@ export default function NewVoucherPage() {
                 type="date"
                 value={formData.expiryDate}
                 onChange={(e) => handleChange("expiryDate", e.target.value)}
-                className="border-[#E7DCC7]"
+                className="border-[rgba(139,115,85,0.15)]"
               />
             </div>
 
@@ -84,7 +84,7 @@ export default function NewVoucherPage() {
                   type="checkbox"
                   checked={formData.weekly}
                   onChange={(e) => handleChange("weekly", e.target.checked)}
-                  className="h-4 w-4 rounded border-[#E7DCC7] accent-[#FFC857]"
+                  className="h-4 w-4 rounded border-[rgba(139,115,85,0.15)] accent-[#FFC857]"
                   aria-label="Weekly Drop - Limited-time weekly availability"
                 />
               </div>
@@ -101,7 +101,7 @@ export default function NewVoucherPage() {
                   type="checkbox"
                   checked={formData.referral}
                   onChange={(e) => handleChange("referral", e.target.checked)}
-                  className="h-4 w-4 rounded border-[#E7DCC7] accent-[#FFC857]"
+                  className="h-4 w-4 rounded border-[rgba(139,115,85,0.15)] accent-[#FFC857]"
                   aria-label="Enable Referral Credit - Users earn credit when friends redeem"
                 />
               </div>
@@ -122,7 +122,7 @@ export default function NewVoucherPage() {
                 <Input
                   value={formData.accentColor}
                   onChange={(e) => handleChange("accentColor", e.target.value)}
-                  className="flex-1 font-mono border-[#E7DCC7]"
+                  className="flex-1 font-mono border-[rgba(139,115,85,0.15)]"
                   aria-label="Brand color hex value"
                 />
               </div>
@@ -140,7 +140,7 @@ export default function NewVoucherPage() {
         </WarmCard>
 
         {/* Preview */}
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <h2 className="text-base font-semibold text-[#2D2721]">Preview</h2>
           <div className="mt-4">
             <VoucherCard

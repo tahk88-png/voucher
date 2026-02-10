@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   DollarSign,
   Users,
@@ -42,7 +42,7 @@ type BonusEntry = {
 
 export function BonusAccounting() {
   const navigate = useNavigate();
-  const { getPendingForMerchant, markAsPaid, getAllBonusesForMerchant } = useBonusTracking();
+  const { getPendingForMerchant } = useBonusTracking();
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<BonusStatus | 'all'>('all');
   const [selectedEntries, setSelectedEntries] = useState<Set<string>>(new Set());
@@ -454,11 +454,11 @@ export function BonusAccounting() {
           <div>
             <h3 className="font-semibold text-[#2D2721] mb-2">How Bonus Accounting Works</h3>
             <ul className="text-sm text-[#6B5744] space-y-1">
-              <li>• When a customer shares your campaign, they earn a bonus</li>
-              <li>• Review shared content and approve bonuses (or mark as pending for investigation)</li>
-              <li>• Once approved, pay the customer via bank transfer, PayPal, or gift card</li>
-              <li>• Mark entries as "Paid" to keep accurate records</li>
-              <li>• Export monthly reports for your accounting</li>
+              <li>â€¢ When a customer shares your campaign, they earn a bonus</li>
+              <li>â€¢ Review shared content and approve bonuses (or mark as pending for investigation)</li>
+              <li>â€¢ Once approved, pay the customer via bank transfer, PayPal, or gift card</li>
+              <li>â€¢ Mark entries as "Paid" to keep accurate records</li>
+              <li>â€¢ Export monthly reports for your accounting</li>
             </ul>
           </div>
         </div>
@@ -466,3 +466,4 @@ export function BonusAccounting() {
     </div>
   );
 }
+

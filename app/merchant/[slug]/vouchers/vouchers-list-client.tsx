@@ -117,7 +117,7 @@ export default function VouchersListClient({
               placeholder="Search by headline, code prefix, or ID"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 border-[#E7DCC7] bg-white"
+              className="pl-10 border-[rgba(139,115,85,0.15)] bg-white"
               aria-label="Search vouchers"
             />
           </div>
@@ -131,7 +131,7 @@ export default function VouchersListClient({
                 id="voucher-status-filter"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
               >
                 <option value="all">All status</option>
                 <option value="published">Active</option>
@@ -148,7 +148,7 @@ export default function VouchersListClient({
                 id="voucher-type-filter"
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
               >
                 <option value="all">All types</option>
                 <option value="percentage">Percentage</option>
@@ -164,7 +164,7 @@ export default function VouchersListClient({
                 id="voucher-sort-by"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'date' | 'name' | 'redemptions')}
-                className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
               >
                 <option value="date">Date (newest)</option>
                 <option value="name">Name (A-Z)</option>
@@ -210,7 +210,7 @@ export default function VouchersListClient({
             const status = statusLabel[voucher.status] || voucher.status;
 
             return (
-              <WarmCard key={voucher.id} padding="lg" className="bg-white border border-[#E7DCC7]">
+              <WarmCard key={voucher.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                 <div className="flex justify-between items-start gap-2 mb-2">
                   <div className="min-w-0">
                     <h3 className="text-lg font-semibold text-[#2D2721] truncate">{headline}</h3>

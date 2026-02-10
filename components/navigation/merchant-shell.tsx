@@ -21,63 +21,81 @@ import {
   TrendingUp,
   Sparkles,
   Users,
+  Building2,
 } from "lucide-react"
 import { WarmButton } from "@/components/warm-button"
 import { cn } from "@/lib/utils"
 import { CountrySelector } from "@/components/navigation/country-selector"
 import { LanguageSelector } from "@/components/navigation/language-selector"
 import { useCountry } from "@/components/contexts/country-context"
+import type { TenantMembershipRole } from "@/lib/access-control"
 
 interface MerchantShellProps {
   slug: string
   merchantName: string
   userLabel: string
+  tenantRole: TenantMembershipRole
   stats: Array<{ label: string; value: string }>
   children: React.ReactNode
 }
 
 const navItems = [
-  { key: "dashboard", icon: LayoutDashboard, href: (slug: string) => `/merchant/${slug}/dashboard` },
-  { key: "vouchers", icon: Gift, href: (slug: string) => `/merchant/${slug}/vouchers` },
-  { key: "giftCards", icon: CreditCard, href: (slug: string) => `/merchant/${slug}/gift-cards` },
-  { key: "campaigns", icon: Megaphone, href: (slug: string) => `/merchant/${slug}/campaigns` },
-  { key: "events", icon: Calendar, href: (slug: string) => `/merchant/${slug}/events` },
-  { key: "redemptions", icon: CheckCircle, href: (slug: string) => `/merchant/${slug}/redemptions` },
-  { key: "pageBuilder", icon: LayoutTemplate, href: (slug: string) => `/merchant/${slug}/page-builder` },
-  { key: "settings", icon: Settings, href: (slug: string) => `/merchant/${slug}/settings` },
+  { labelKey: "dashboard", fallback: "Dashboard", icon: LayoutDashboard, href: (slug: string) => `/merchant/${slug}/dashboard`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "vouchers", fallback: "Vouchers", icon: Gift, href: (slug: string) => `/merchant/${slug}/vouchers`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "giftCards", fallback: "Gift Cards", icon: CreditCard, href: (slug: string) => `/merchant/${slug}/gift-cards`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "campaigns", fallback: "Campaigns", icon: Megaphone, href: (slug: string) => `/merchant/${slug}/campaigns`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "events", fallback: "Events", icon: Calendar, href: (slug: string) => `/merchant/${slug}/events`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "redemptions", fallback: "Redemptions", icon: CheckCircle, href: (slug: string) => `/merchant/${slug}/redemptions`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "analytics", fallback: "Analytics", icon: TrendingUp, href: (slug: string) => `/merchant/${slug}/analytics`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "b2b", fallback: "B2B", icon: Building2, href: (_slug: string) => `/app/b2b`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "team", fallback: "Team", icon: Users, href: (slug: string) => `/merchant/${slug}/members`, minRole: "merchant_admin" as TenantMembershipRole },
+  { labelKey: "pageBuilder", fallback: "Page Builder", icon: LayoutTemplate, href: (slug: string) => `/merchant/${slug}/page-builder`, minRole: "merchant_admin" as TenantMembershipRole },
+  { labelKey: "settings", fallback: "Settings & Billing", icon: Settings, href: (slug: string) => `/merchant/${slug}/settings`, minRole: "merchant_admin" as TenantMembershipRole },
 ]
 
 export default function MerchantShell({
   slug,
   merchantName,
   userLabel,
+  tenantRole,
   stats,
   children,
 }: MerchantShellProps) {
-  const t = useTranslations("nav")
   const pathname = usePathname()
+  const tNav = useTranslations("nav")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const { selectedCountry } = useCountry()
 
+  const roleRank: Record<TenantMembershipRole, number> = {
+    merchant_staff: 1,
+    merchant_admin: 2,
+  }
+
+  const visibleNavItems = navItems.filter((item) => roleRank[tenantRole] >= roleRank[item.minRole])
+
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`)
+  const getNavLabel = (labelKey: string, fallback: string) => {
+    const translated = tNav(labelKey as never)
+    return translated === labelKey ? fallback : translated
+  }
 
   return (
-    <div className="min-h-screen bg-[#FFFBF5]">
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-[rgba(139,115,85,0.1)] shadow-warm-sm">
+    <div className="min-h-screen bg-[var(--bg)]">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--surface)] border-b border-[var(--border)] shadow-warm-sm">
         <div className="flex items-center justify-between px-4 h-16">
           <Link href={`/merchant/${slug}/dashboard`} className="flex items-center gap-2">
-            <span className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm" />
-            <span className="text-xl font-bold text-[#2D2721]">{merchantName}</span>
+            <span className="w-10 h-10 rounded-[12px] gradient-brand flex items-center justify-center shadow-warm" />
+            <span className="text-xl font-bold text-[var(--text)]">{merchantName}</span>
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="w-10 h-10 rounded-[12px] flex items-center justify-center hover:bg-[#F8F6F1] transition-colors"
+            className="w-10 h-10 rounded-[12px] flex items-center justify-center hover:bg-[var(--surface-dim)] transition-colors"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="merchant-mobile-menu"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6 text-[#2D2721]" /> : <Menu className="h-6 w-6 text-[#2D2721]" />}
+            {mobileMenuOpen ? <X className="h-6 w-6 text-[var(--text)]" /> : <Menu className="h-6 w-6 text-[var(--text)]" />}
           </button>
         </div>
 
@@ -86,10 +104,10 @@ export default function MerchantShell({
             <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" onClick={() => setMobileMenuOpen(false)} />
             <div
               id="merchant-mobile-menu"
-              className="fixed top-16 left-0 right-0 bottom-0 bg-white z-50 overflow-y-auto"
+              className="fixed top-16 left-0 right-0 bottom-0 bg-[var(--surface)] z-50 overflow-y-auto"
             >
               <div className="p-4 space-y-2">
-                {navItems.map((item) => {
+                {visibleNavItems.map((item) => {
                   const href = item.href(slug)
                   const Icon = item.icon
                   return (
@@ -100,21 +118,21 @@ export default function MerchantShell({
                       className={cn(
                         "w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium transition-all",
                         isActive(href)
-                          ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm"
-                          : "text-[#6B5744] hover:bg-[#F8F6F1]"
+                          ? "gradient-brand text-[var(--text)] shadow-warm"
+                          : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]"
                       )}
                     >
                       <Icon className="h-5 w-5" />
-                      {t(item.key)}
+                      {getNavLabel(item.labelKey, item.fallback)}
                     </Link>
                   )
                 })}
                 <Link
                   href="/api/auth/signout?callbackUrl=/"
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium text-[#E17B5C] hover:bg-[#FEE2E2] transition-all"
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium text-[var(--danger)] hover:bg-[#FEE2E2] transition-all"
                 >
                   <LogOut className="h-5 w-5" />
-                  {t("logout")}
+                  {tNav("logout")}
                 </Link>
               </div>
             </div>
@@ -126,16 +144,16 @@ export default function MerchantShell({
 
       <aside
         className={cn(
-          "hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col bg-white border-r border-[rgba(139,115,85,0.1)] shadow-warm-sm transition-all duration-300",
+          "hidden lg:fixed lg:inset-y-0 lg:flex lg:flex-col bg-[var(--surface)] border-r border-[var(--border)] shadow-warm-sm transition-all duration-300",
           collapsed ? "w-20" : "w-72"
         )}
       >
         <div className="flex flex-col flex-1 min-h-0">
-          <div className="relative flex items-center gap-3 px-6 py-6 border-b border-[rgba(139,115,85,0.1)]">
-            <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm flex-shrink-0" />
+          <div className="relative flex items-center gap-3 px-6 py-6 border-b border-[var(--border)]">
+            <div className="w-12 h-12 rounded-[14px] gradient-brand flex items-center justify-center shadow-warm flex-shrink-0" />
             <span
               className={cn(
-                "text-2xl font-bold text-[#2D2721] transition-opacity duration-300",
+                "text-2xl font-bold text-[var(--text)] transition-opacity duration-300",
                 collapsed ? "opacity-0 w-0 overflow-hidden" : "opacity-100"
               )}
             >
@@ -143,7 +161,7 @@ export default function MerchantShell({
             </span>
             <button
               onClick={() => setCollapsed(!collapsed)}
-              className="absolute -right-3 top-9 bg-white border border-[#E7DCC7] rounded-full p-1 text-[#6B5744] hover:text-[#E17B5C] shadow-sm hover:shadow-md transition-transform"
+              className="absolute -right-3 top-9 bg-[var(--surface)] border border-[var(--border)] rounded-full p-1 text-[var(--text-muted)] hover:text-[var(--danger)] shadow-sm hover:shadow-md transition-transform"
               aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
               aria-expanded={!collapsed}
             >
@@ -152,19 +170,19 @@ export default function MerchantShell({
           </div>
 
           <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto overflow-x-hidden">
-            {navItems.map((item) => {
+            {visibleNavItems.map((item) => {
               const href = item.href(slug)
               const Icon = item.icon
               return (
                 <Link
                   key={href}
                   href={href}
-                  title={collapsed ? t(item.key) : ""}
+                  title={collapsed ? getNavLabel(item.labelKey, item.fallback) : ""}
                   className={cn(
                     "w-full flex items-center gap-3 px-4 py-3 rounded-[14px] font-medium transition-all relative group",
                     isActive(href)
-                      ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm"
-                      : "text-[#6B5744] hover:bg-[#F8F6F1]",
+                      ? "gradient-brand text-[var(--text)] shadow-warm"
+                      : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]",
                     collapsed && "justify-center"
                   )}
                 >
@@ -175,11 +193,11 @@ export default function MerchantShell({
                       collapsed ? "w-0 opacity-0 overflow-hidden" : "w-auto opacity-100"
                     )}
                   >
-                    {t(item.key)}
+                    {getNavLabel(item.labelKey, item.fallback)}
                   </span>
                   {collapsed && (
-                    <div className="absolute left-full ml-2 px-2 py-1 bg-[#2D2721] text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-lg">
-                      {t(item.key)}
+                    <div className="absolute left-full ml-2 px-2 py-1 bg-[var(--text)] text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-lg">
+                      {getNavLabel(item.labelKey, item.fallback)}
                     </div>
                   )}
                 </Link>
@@ -187,21 +205,21 @@ export default function MerchantShell({
             })}
           </nav>
 
-          <div className="p-4 border-t border-[rgba(139,115,85,0.1)]">
+          <div className="p-4 border-t border-[var(--border)]">
             <div
               className={cn(
-                "bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] rounded-[14px] p-4 mb-3 transition-all",
+                "bg-gradient-to-br from-[var(--bg-2)] to-[#FFE5B4] rounded-[14px] p-4 mb-3 transition-all",
                 collapsed && "bg-none p-0 mb-4 bg-transparent"
               )}
             >
               <div className={cn("flex items-center gap-3", collapsed ? "justify-center" : "mb-1")}>
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center font-semibold text-[#2D2721] flex-shrink-0">
+                <div className="w-10 h-10 rounded-full gradient-brand flex items-center justify-center font-semibold text-[var(--text)] flex-shrink-0">
                   {merchantName.slice(0, 2).toUpperCase()}
                 </div>
                 {!collapsed && (
                   <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-[#2D2721] text-sm truncate">{merchantName}</div>
-                    <div className="text-xs text-[#8B7355] truncate">{userLabel}</div>
+                    <div className="font-semibold text-[var(--text)] text-sm truncate">{merchantName}</div>
+                    <div className="text-xs text-[var(--text-faint)] truncate">{userLabel}</div>
                   </div>
                 )}
               </div>
@@ -215,7 +233,7 @@ export default function MerchantShell({
             >
               <Link href="/api/auth/signout?callbackUrl=/">
                 <LogOut className={cn("h-4 w-4", collapsed ? "" : "mr-2")} />
-                {!collapsed && t("logout")}
+                {!collapsed && tNav("logout")}
               </Link>
             </WarmButton>
           </div>
@@ -223,40 +241,44 @@ export default function MerchantShell({
       </aside>
 
       <main className={cn("transition-all duration-300", collapsed ? "lg:pl-20" : "lg:pl-72")}>
-        <div className="sticky top-0 z-30 bg-white border-b border-[rgba(139,115,85,0.1)] shadow-sm">
+        <div className="sticky top-0 z-30 bg-[var(--surface)] border-b border-[var(--border)] shadow-sm">
           <div className="px-4 py-3 sm:px-6 lg:px-8 max-w-7xl mx-auto flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <span className="text-2xl">{selectedCountry.flag}</span>
               <div>
-                <div className="font-semibold text-[#2D2721] text-sm">{selectedCountry.name}</div>
-                <div className="text-xs text-[#8B7355]">Market Data</div>
+                <div className="font-semibold text-[var(--text)] text-sm">{selectedCountry.name}</div>
+                <div className="text-xs text-[var(--text-faint)]">Marketplace Context</div>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <LanguageSelector variant="compact" />
-              <CountrySelector variant="compact" />
+              <div className="hidden md:flex flex-col gap-1">
+                <span className="text-[10px] uppercase tracking-wide text-[var(--text-faint)]">Language</span>
+                <LanguageSelector variant="compact" />
+              </div>
+              <div className="hidden md:flex flex-col gap-1">
+                <span className="text-[10px] uppercase tracking-wide text-[var(--text-faint)]">Marketplace</span>
+                <CountrySelector variant="compact" />
+              </div>
+              <div className="md:hidden flex items-center gap-2">
+                <LanguageSelector variant="compact" />
+                <CountrySelector variant="compact" />
+              </div>
             </div>
           </div>
 
-          <div className="px-4 py-3 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-to-r from-[#FFF9ED] to-[#FFE5B4]/30">
+          <div className="px-4 py-3 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-gradient-to-r from-[var(--bg-2)] to-[#FFE5B4]/30">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {stats.map((stat) => {
+              {stats.map((stat, index) => {
                 const Icon =
-                  stat.label === "Active Users"
-                    ? Users
-                    : stat.label === "Campaigns"
-                    ? TrendingUp
-                    : stat.label === "Vouchers"
-                    ? Gift
-                    : Sparkles
+                  index === 0 ? Users : index === 1 ? TrendingUp : index === 2 ? Gift : Sparkles
                 return (
                   <div key={stat.label} className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg gradient-brand flex items-center justify-center">
                       <Icon className="h-4 w-4 text-white" />
                     </div>
                     <div>
-                      <div className="text-xs text-[#8B7355]">{stat.label}</div>
-                      <div className="font-semibold text-[#2D2721]">{stat.value}</div>
+                      <div className="text-xs text-[var(--text-faint)]">{stat.label}</div>
+                      <div className="font-semibold text-[var(--text)]">{stat.value}</div>
                     </div>
                   </div>
                 )
@@ -268,9 +290,9 @@ export default function MerchantShell({
         <div className="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl mx-auto">{children}</div>
       </main>
 
-      <nav className="lg:hidden fixed bottom-0 inset-x-0 bg-white border-t border-[rgba(139,115,85,0.1)] shadow-warm-lg z-40">
+      <nav className="lg:hidden fixed bottom-0 inset-x-0 bg-[var(--surface)] border-t border-[var(--border)] shadow-warm-lg z-40">
         <div className="grid grid-cols-5 gap-1 px-2 py-2">
-          {navItems.slice(0, 5).map((item) => {
+          {visibleNavItems.slice(0, 5).map((item) => {
             const href = item.href(slug)
             const Icon = item.icon
             return (
@@ -280,12 +302,12 @@ export default function MerchantShell({
                 className={cn(
                   "flex flex-col items-center gap-1 py-2 px-1 rounded-[12px] transition-all",
                   isActive(href)
-                    ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721]"
-                    : "text-[#8B7355] hover:bg-[#F8F6F1]"
+                    ? "gradient-brand text-[var(--text)]"
+                    : "text-[var(--text-faint)] hover:bg-[var(--surface-dim)]"
                 )}
               >
                 <Icon className="h-5 w-5" />
-                <span className="text-[10px] font-medium">{t(item.key)}</span>
+                <span className="text-[10px] font-medium">{getNavLabel(item.labelKey, item.fallback)}</span>
               </Link>
             )
           })}

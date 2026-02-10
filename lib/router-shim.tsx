@@ -71,7 +71,7 @@ export function useNavigate() {
 export function useLocation() {
   const current = usePathname() ?? '';
   const pathname = stripFigmaPrefix(current);
-  const searchParams = useSearchParams();
+  const searchParams = useNextSearchParams();
   const search = searchParams?.toString();
   return {
     pathname,
@@ -82,15 +82,16 @@ export function useLocation() {
   };
 }
 
-export function useParamsShim() {
+export function useParamsShim<T extends Record<string, string> = Record<string, string>>() {
   const ctx = useContext(RouterShimParamsContext);
-  const nextParams = useNextParams();
-  return ctx ?? nextParams;
+  const nextParams = useNextParams() as Record<string, string | string[] | undefined>;
+  const normalizedNextParams = normalizeParams(nextParams);
+  return ((ctx ?? normalizedNextParams) as unknown) as T;
 }
 
 export const useParams = useParamsShim;
 
-type RouterParams = Record<string, string | string[]>;
+type RouterParams = Record<string, string>;
 
 const RouterShimParamsContext = createContext<RouterParams | null>(null);
 
@@ -161,4 +162,18 @@ function prefixFigmaPath(target: string, pathname: string) {
   if (target.startsWith('/figma') || target.startsWith('http')) return target;
   if (!target.startsWith('/')) return `/figma/${target}`;
   return `/figma${target}`;
+}
+
+function normalizeParams(params: Record<string, string | string[] | undefined>) {
+  const normalized: Record<string, string> = {};
+  Object.entries(params).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      normalized[key] = value[0] ?? '';
+      return;
+    }
+    if (typeof value === 'string') {
+      normalized[key] = value;
+    }
+  });
+  return normalized;
 }

@@ -6,8 +6,10 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
+import { useRouter } from 'next/navigation';
 
 export default function InviteMemberForm({ merchantSlug }: { merchantSlug: string }) {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState<'merchant_admin' | 'merchant_staff'>('merchant_staff');
@@ -24,7 +26,14 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || 'Failed to invite member');
+        const message = data?.error || 'Failed to invite member';
+        const upgradePath = data?.details?.upgradePath as string | undefined;
+        if (res.status === 402 && upgradePath) {
+          showError(`${message} Redirecting to billing...`);
+          router.push(upgradePath);
+          return;
+        }
+        throw new Error(message);
       }
 
       showSuccess('Member invited successfully');
@@ -39,7 +48,7 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
   };
 
   return (
-    <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+    <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
       <div>
         <h2 className="text-base font-semibold text-[#2D2721]">Invite team member</h2>
         <p className="text-sm text-[#6B5744]">Add a team member by their email address.</p>
@@ -54,7 +63,7 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
             onChange={(e) => setEmail(e.target.value)}
             placeholder="member@example.com"
             required
-            className="mt-1 border-[#E7DCC7]"
+            className="mt-1 border-[rgba(139,115,85,0.15)]"
           />
           <p className="text-sm text-[#6B5744] mt-1">
             User must have an account. If they do not have one, they need to sign up first.
@@ -64,7 +73,7 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
           <Label htmlFor="role">Role</Label>
           <select
             id="role"
-            className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 mt-1 text-sm"
+            className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 mt-1 text-sm"
             value={role}
             onChange={(e) => setRole(e.target.value as 'merchant_admin' | 'merchant_staff')}
           >

@@ -21,13 +21,13 @@ export const WarmCard = React.forwardRef<HTMLDivElement, WarmCardProps>(
       xl: "p-8",
     }
 
-  return (
+    return (
       <div
         ref={ref}
         className={cn(
-          "rounded-xl shadow-warm",
-          gradient ? "bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4]" : "bg-white",
-          hover && "transition-all duration-200 hover:shadow-warm-lg hover:scale-[1.01]",
+          "rounded-[var(--r-lg)] border border-[var(--border)] backdrop-blur-sm shadow-md",
+          gradient ? "bg-gradient-to-br from-[var(--bg-2)]/95 to-[var(--accent)]/95" : "bg-[var(--surface)]/95",
+          hover && "transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5",
           paddingStyles[padding],
           className
         )}

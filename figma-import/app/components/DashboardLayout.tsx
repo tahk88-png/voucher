@@ -315,12 +315,22 @@ export function DashboardLayout() {
               <span className="text-2xl">{selectedCountry.flag}</span>
               <div>
                 <div className="font-semibold text-[#2D2721] text-sm">{selectedCountry.name}</div>
-                <div className="text-xs text-[#8B7355]">Market Data</div>
+                <div className="text-xs text-[#8B7355]">Marketplace Context</div>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <LanguageSelector variant="compact" />
-              <CountrySelector variant="compact" />
+              <div className="hidden md:flex flex-col gap-1">
+                <span className="text-[10px] uppercase tracking-wide text-[#8B7355]">Language</span>
+                <LanguageSelector variant="compact" />
+              </div>
+              <div className="hidden md:flex flex-col gap-1">
+                <span className="text-[10px] uppercase tracking-wide text-[#8B7355]">Marketplace</span>
+                <CountrySelector variant="compact" />
+              </div>
+              <div className="md:hidden flex items-center gap-2">
+                <LanguageSelector variant="compact" />
+                <CountrySelector variant="compact" />
+              </div>
             </div>
           </div>
           

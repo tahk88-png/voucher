@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { getTranslations } from 'next-intl/server';
 import NotificationSettingsForm from './notification-settings-form';
 
 export default async function NotificationSettingsPage() {
@@ -8,6 +9,7 @@ export default async function NotificationSettingsPage() {
   if (!session?.user?.id) {
     redirect('/login');
   }
+  const t = await getTranslations('notifications');
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
@@ -38,10 +40,8 @@ export default async function NotificationSettingsPage() {
     <div className="p-4 sm:p-6">
       <div className="max-w-2xl mx-auto space-y-4">
         <div>
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Notification settings</h1>
-          <p className="text-sm text-[#6B5744]">
-            Choose how you want to hear about new vouchers and campaigns.
-          </p>
+          <h1 className="text-2xl font-semibold text-[#2D2721]">{t('settingsTitle')}</h1>
+          <p className="text-sm text-[#6B5744]">{t('settingsDescription')}</p>
         </div>
         <NotificationSettingsForm initialSubscriptions={subscriptions} />
       </div>

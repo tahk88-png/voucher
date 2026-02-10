@@ -107,7 +107,7 @@ export default function GiftCardsListClient({
               placeholder="Search by headline, code, or message"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 border-[#E7DCC7] bg-white"
+              className="pl-10 border-[rgba(139,115,85,0.15)] bg-white"
               aria-label="Search gift cards"
             />
           </div>
@@ -121,7 +121,7 @@ export default function GiftCardsListClient({
                 id="gift-card-status-filter"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
               >
                 <option value="all">All status</option>
                 <option value="active">Active</option>
@@ -138,7 +138,7 @@ export default function GiftCardsListClient({
                 id="gift-card-sort-by"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'date' | 'amount' | 'status')}
-                className="w-full h-10 rounded-md border border-[#E7DCC7] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
               >
                 <option value="date">Date (newest)</option>
                 <option value="amount">Amount (high to low)</option>
@@ -182,7 +182,7 @@ export default function GiftCardsListClient({
               : 'No expiry';
 
             return (
-              <WarmCard key={card.id} padding="lg" className="bg-white border border-[#E7DCC7]">
+              <WarmCard key={card.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                 <div className="flex justify-between items-start gap-2 mb-2">
                   <div className="min-w-0">
                     <h3 className="text-lg font-semibold text-[#2D2721] truncate">{headline}</h3>

@@ -33,12 +33,12 @@ export function PieChart({
   innerRadius = 60,
 }: PieChartProps) {
   const defaultColors = [
-    "#FFC857",
-    "#9DB5A5",
-    "#E17B5C",
-    "#8B7355",
-    "#FAF7F2",
-    "#E7DCC7",
+    "var(--primary)",
+    "var(--success)",
+    "var(--danger)",
+    "var(--text-faint)",
+    "var(--surface-muted)",
+    "var(--border)",
   ]
 
   const dataWithColors = data.map((item, index) => ({
@@ -69,13 +69,13 @@ export function PieChart({
           </Pie>
           <Tooltip
             contentStyle={{
-              backgroundColor: "#FFFFFF",
-              border: "2px solid #E7DCC7",
+              backgroundColor: "var(--surface)",
+              border: "2px solid var(--border)",
               borderRadius: "12px",
               padding: "8px 12px",
             }}
-            labelStyle={{ color: "#2D2721", fontWeight: 600 }}
-            itemStyle={{ color: "#6B5744" }}
+            labelStyle={{ color: "var(--text)", fontWeight: 600 }}
+            itemStyle={{ color: "var(--text-muted)" }}
           />
           {showLegend && (
             <Legend

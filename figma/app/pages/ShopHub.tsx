@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+﻿import { useState, useEffect } from 'react';
+import { useNavigate } from '@/lib/router-shim';
 import { WarmButton } from '@app/components/WarmButton';
 import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { Filter, Heart, Star } from 'lucide-react';
 import { CurrencyDisplay } from '@app/components/CurrencyDisplay';
 import { UnifiedData, Product } from '@services/unifiedData';
 
-const CATEGORIES = ['Kõik', 'Riided', 'Kodu', 'Aksessuaarid', 'Ehted', 'Kingitused', 'Elektroonika', 'Ilu & Tervis', 'Sport'];
+const CATEGORIES = ['KÃµik', 'Riided', 'Kodu', 'Aksessuaarid', 'Ehted', 'Kingitused', 'Elektroonika', 'Ilu & Tervis', 'Sport'];
 
 export function ShopHub() {
   const navigate = useNavigate();
-  const [activeCategory, setActiveCategory] = useState('Kõik');
+  const [activeCategory, setActiveCategory] = useState('KÃµik');
   const [products, setProducts] = useState<Product[]>([]);
 
   // Load from unified service
@@ -19,14 +19,14 @@ export function ShopHub() {
   }, []);
 
   const filteredProducts = products.filter(p => 
-    activeCategory === 'Kõik' || p.category === activeCategory
+    activeCategory === 'KÃµik' || p.category === activeCategory
   );
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
       {/* Promo Bar */}
       <div className="bg-[#2D2721] text-white text-xs text-center py-2 px-4">
-        Tasuta tarne tellimustele üle 50€ • 14-päevane tagastusõigus
+        Tasuta tarne tellimustele Ã¼le 50â‚¬ â€¢ 14-pÃ¤evane tagastusÃµigus
       </div>
 
 
@@ -40,7 +40,7 @@ export function ShopHub() {
         <div className="absolute inset-0 bg-black/20" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4">
           <span className="text-sm font-bold tracking-[0.2em] uppercase mb-4">Uus Kollektsioon</span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Kevadine Värskus</h2>
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Kevadine VÃ¤rskus</h2>
           <WarmButton className="bg-white text-[#2D2721] hover:bg-[#FFF9ED] border-none">
             Vaata tooteid
           </WarmButton>
@@ -86,7 +86,7 @@ export function ShopHub() {
                 {/* Hover Actions */}
                 <div className="absolute bottom-4 left-4 right-4 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                   <WarmButton fullWidth size="sm" className="shadow-lg">
-                    Vaata lähemalt
+                    Vaata lÃ¤hemalt
                   </WarmButton>
                 </div>
 
@@ -118,3 +118,5 @@ export function ShopHub() {
     </div>
   );
 }
+
+

@@ -6,18 +6,48 @@ const globalForRedis = globalThis as unknown as {
 };
 
 let redis: ReturnType<typeof createClient> | undefined = globalForRedis.redis;
+let redisUnavailableUntil = 0;
+
+const REDIS_CONNECT_TIMEOUT_MS = 500;
+const REDIS_UNAVAILABLE_COOLDOWN_MS = 30_000;
+
+function shouldBypassRedis(): boolean {
+  if (process.env.NODE_ENV === 'test') {
+    return true;
+  }
+
+  return process.env.REDIS_DISABLE === 'true' || process.env.REDIS_DISABLED === 'true';
+}
+
+function markRedisUnavailable() {
+  redisUnavailableUntil = Date.now() + REDIS_UNAVAILABLE_COOLDOWN_MS;
+}
+
+function isRedisTemporarilyUnavailable(): boolean {
+  return Date.now() < redisUnavailableUntil;
+}
 
 // Initialize Redis client if configured
 export async function getRedisClient() {
+  if (shouldBypassRedis()) {
+    return null;
+  }
+
   if (!process.env.REDIS_URL) {
     return null; // Redis is optional
+  }
+
+  if (isRedisTemporarilyUnavailable()) {
+    return null;
   }
 
   if (redis) {
     if (!redis.isOpen) {
       try {
         await redis.connect();
+        redisUnavailableUntil = 0;
       } catch (error) {
+        markRedisUnavailable();
         logger.error('Failed to reconnect to Redis', { error });
         return null;
       }
@@ -29,6 +59,7 @@ export async function getRedisClient() {
     redis = createClient({
       url: process.env.REDIS_URL,
       socket: {
+        connectTimeout: REDIS_CONNECT_TIMEOUT_MS,
         reconnectStrategy: (retries) => {
           if (retries > 10) {
             logger.error('Redis: Max reconnection attempts reached');
@@ -54,6 +85,7 @@ export async function getRedisClient() {
     });
 
     await redis.connect();
+    redisUnavailableUntil = 0;
 
     if (process.env.NODE_ENV !== 'production') {
       globalForRedis.redis = redis;
@@ -61,6 +93,7 @@ export async function getRedisClient() {
 
     return redis;
   } catch (error) {
+    markRedisUnavailable();
     logger.error('Failed to initialize Redis client', { error });
     return null;
   }
@@ -79,7 +112,9 @@ export async function checkRedisRateLimit(
 
   if (!client) {
     // Redis not available - allow request but log warning
-    logger.warn('Redis unavailable for rate limiting, allowing request', { key });
+    if (process.env.NODE_ENV !== 'test') {
+      logger.warn('Redis unavailable for rate limiting, allowing request', { key });
+    }
     return { allowed: true, remaining: maxAttempts - 1, resetAt: Date.now() + windowSeconds * 1000 };
   }
 

@@ -69,7 +69,7 @@ export default function CampaignPromotionForm({
           type="datetime-local"
           value={state.promotedUntil || ''}
           onChange={(e) => setState((prev) => ({ ...prev, promotedUntil: e.target.value || null }))}
-          className="rounded-md border border-[#E7DCC7] bg-white px-3 py-2 text-sm"
+          className="rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
         />
       </label>
       <WarmButton onClick={handleSave} disabled={isSaving}>

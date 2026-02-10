@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
 import { captureException } from '@/lib/error-tracking';
 import { z } from 'zod';
 import { sendMemberInviteEmail } from '@/lib/emails';
+import { AccessControlError, accessErrorResponse, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
+import { requireTeamInviteAccess } from '@/lib/billing';
 
 const inviteMemberSchema = z.object({
   email: z.string().email(),
@@ -16,21 +16,8 @@ export async function POST(
   { params }: { params: { slug: string } }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
-    });
-
-    if (!merchant) {
-      return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });
-    }
-
-    // Only merchant_admin can invite members
-    await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
+    const { merchant, profile } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
+    await requireTeamInviteAccess(merchant.id);
 
     const body = await req.json();
     const data = inviteMemberSchema.parse(body);
@@ -86,7 +73,7 @@ export async function POST(
     await prisma.auditLog.create({
       data: {
         merchantId: merchant.id,
-        actorUserId: session.user.id,
+        actorUserId: profile.userId,
         action: 'member.invited',
         payloadJson: JSON.stringify({
           memberId: member.id,
@@ -103,7 +90,7 @@ export async function POST(
         to: user.email,
         merchantName: merchant.name,
         role: data.role,
-        inviterName: session.user.name || session.user.email || 'Admin',
+        inviterName: profile.email || 'Admin',
       });
     } catch (emailError) {
       if (emailError instanceof Error) {
@@ -120,6 +107,9 @@ export async function POST(
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
+    }
+    if (error instanceof AccessControlError) {
+      return accessErrorResponse(error);
     }
     if (error instanceof Error) {
       captureException(error, {

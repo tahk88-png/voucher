@@ -71,7 +71,7 @@ export function ListSkeleton({ items = 3 }: { items?: number }) {
   return (
     <div className="space-y-3">
       {Array.from({ length: items }).map((_, i) => (
-        <div key={i} className="flex items-center gap-4 p-4 border border-[#E7DCC7] rounded-xl">
+        <div key={i} className="flex items-center gap-4 p-4 border border-[var(--border)] rounded-xl">
           <Skeleton className="h-12 w-12 rounded-full" />
           <div className="flex-1">
             <Skeleton className="h-4 w-[200px] mb-2" />
@@ -87,7 +87,7 @@ export function ListSkeleton({ items = 3 }: { items?: number }) {
 export function VoucherCardSkeleton() {
   return (
     <WarmCard padding="none" className="overflow-hidden">
-      <div className="px-4 pt-4 pb-3 bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4]">
+      <div className="px-4 pt-4 pb-3 gradient-warm">
         <div className="flex items-start justify-between gap-3">
           <Skeleton className="h-12 w-12 rounded-lg" />
           <Skeleton className="h-6 w-[60px] rounded-[8px]" />

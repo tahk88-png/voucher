@@ -4,7 +4,7 @@ import { cn } from '@app/components/ui/utils';
 interface WarmCardProps extends HTMLAttributes<HTMLDivElement> {
   gradient?: boolean;
   hover?: boolean;
-  padding?: 'none' | 'sm' | 'md' | 'lg';
+  padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export const WarmCard = forwardRef<HTMLDivElement, WarmCardProps>(
@@ -14,15 +14,16 @@ export const WarmCard = forwardRef<HTMLDivElement, WarmCardProps>(
       sm: 'p-4',
       md: 'p-6',
       lg: 'p-8',
+      xl: 'p-10',
     };
     
     return (
       <div
         ref={ref}
         className={cn(
-          'rounded-[20px] shadow-warm',
-          gradient ? 'bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4]' : 'bg-white',
-          hover && 'transition-all duration-200 hover:shadow-warm-lg hover:scale-[1.01]',
+          'rounded-[24px] border border-[rgba(139,115,85,0.12)] backdrop-blur-sm shadow-warm',
+          gradient ? 'bg-gradient-to-br from-[#FFF9ED]/95 to-[#FFE5B4]/95' : 'bg-white/95',
+          hover && 'transition-all duration-300 hover:shadow-warm-lg hover:-translate-y-0.5',
           paddingStyles[padding],
           className
         )}

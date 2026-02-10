@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@/lib/router-shim';
 import { 
   ArrowLeft, 
   ShoppingBag, 
@@ -86,7 +86,7 @@ export function ProductCreate() {
 
         <div className="text-center mb-12 max-w-2xl">
           <h1 className="text-4xl font-bold text-[#2D2721] mb-4">Mida soovid lisada?</h1>
-          <p className="text-[#6B5744] text-lg">Vali toote tüüp, et näha vastavaid seadistusi. Seda valikut ei saa hiljem muuta.</p>
+          <p className="text-[#6B5744] text-lg">Vali toote tÃ¼Ã¼p, et nÃ¤ha vastavaid seadistusi. Seda valikut ei saa hiljem muuta.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
@@ -101,10 +101,10 @@ export function ProductCreate() {
             <div className="w-16 h-16 rounded-2xl bg-[#FFF9ED] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <ShoppingBag className="w-8 h-8 text-[#FFC857]" />
             </div>
-            <h3 className="text-2xl font-bold text-[#2D2721] mb-2">Müügitoode</h3>
-            <p className="text-[#6B5744]">Füüsilised tooted, mida müüd e-poes. Sisaldab laohaldust, tarnevalikuid ja variatsioone.</p>
+            <h3 className="text-2xl font-bold text-[#2D2721] mb-2">MÃ¼Ã¼gitoode</h3>
+            <p className="text-[#6B5744]">FÃ¼Ã¼silised tooted, mida mÃ¼Ã¼d e-poes. Sisaldab laohaldust, tarnevalikuid ja variatsioone.</p>
             <div className="mt-8 flex items-center text-[#FFC857] font-bold">
-              Vali Müük <ArrowLeft className="w-5 h-5 ml-2 rotate-180" />
+              Vali MÃ¼Ã¼k <ArrowLeft className="w-5 h-5 ml-2 rotate-180" />
             </div>
           </button>
 
@@ -120,7 +120,7 @@ export function ProductCreate() {
               <Camera className="w-8 h-8 text-[#E17B5C]" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">Renditoode</h3>
-            <p className="text-white/70">Teenused või esemed, mida rendid välja. Sisaldab kalendrit, tagatisi ja ajapõhist hinnastamist.</p>
+            <p className="text-white/70">Teenused vÃµi esemed, mida rendid vÃ¤lja. Sisaldab kalendrit, tagatisi ja ajapÃµhist hinnastamist.</p>
             <div className="mt-8 flex items-center text-[#E17B5C] font-bold">
               Vali Rent <ArrowLeft className="w-5 h-5 ml-2 rotate-180" />
             </div>
@@ -141,7 +141,7 @@ export function ProductCreate() {
             </button>
             <div>
               <h1 className="text-xl font-bold text-[#2D2721]">
-                {productType === 'sale' ? 'Uus müügitoode' : 'Uus renditoode'}
+                {productType === 'sale' ? 'Uus mÃ¼Ã¼gitoode' : 'Uus renditoode'}
               </h1>
               <div className="flex items-center gap-2 text-xs font-medium text-[#8B7355]">
                 {productType === 'sale' ? <ShoppingBag className="w-3 h-3" /> : <Camera className="w-3 h-3" />}
@@ -150,7 +150,7 @@ export function ProductCreate() {
             </div>
           </div>
           <div className="flex gap-3">
-             <WarmButton variant="ghost" onClick={() => navigate(-1)}>Tühista</WarmButton>
+             <WarmButton variant="ghost" onClick={() => navigate(-1)}>TÃ¼hista</WarmButton>
              <WarmButton className="gap-2">
                <Save className="w-4 h-4" /> Salvesta toode
              </WarmButton>
@@ -166,7 +166,7 @@ export function ProductCreate() {
           {/* Basic Info Card */}
           <WarmCard padding="lg" className="bg-white">
             <h3 className="text-lg font-bold text-[#2D2721] mb-6 flex items-center gap-2">
-              <Package className="w-5 h-5 text-[#8B7355]" /> Põhiandmed
+              <Package className="w-5 h-5 text-[#8B7355]" /> PÃµhiandmed
             </h3>
             
             <div className="space-y-6">
@@ -188,7 +188,7 @@ export function ProductCreate() {
                   onChange={(e) => setDescription(e.target.value)}
                   rows={4}
                   className="w-full px-4 py-3 rounded-xl bg-[#FAF7F2] border border-[#E7DCC7] focus:border-[#FFC857] outline-none font-medium resize-none"
-                  placeholder="Kirjelda toodet põhjalikult..."
+                  placeholder="Kirjelda toodet pÃµhjalikult..."
                 />
               </div>
 
@@ -241,7 +241,7 @@ export function ProductCreate() {
                              <input 
                                value={attr.name}
                                onChange={(e) => handleUpdateAttribute(idx, 'name', e.target.value)}
-                               placeholder="Nt. Suurus, Värv"
+                               placeholder="Nt. Suurus, VÃ¤rv"
                                className="w-full px-3 py-2 rounded-lg bg-[#FAF7F2] border border-[#E7DCC7] text-sm font-medium"
                              />
                           </div>
@@ -339,7 +339,7 @@ export function ProductCreate() {
             
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-bold text-[#6B5744] mb-2">Hind (€)</label>
+                <label className="block text-sm font-bold text-[#6B5744] mb-2">Hind (â‚¬)</label>
                 <div className="relative">
                   <input 
                     type="number" 
@@ -348,7 +348,7 @@ export function ProductCreate() {
                     className="w-full pl-8 pr-4 py-3 rounded-xl bg-[#FAF7F2] border border-[#E7DCC7] focus:border-[#FFC857] outline-none font-bold text-lg text-[#2D2721]"
                     placeholder="0.00"
                   />
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8B7355] font-bold">€</span>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8B7355] font-bold">â‚¬</span>
                 </div>
               </div>
 
@@ -380,13 +380,13 @@ export function ProductCreate() {
                           className="flex-1 px-2 py-1 rounded border border-[#E7DCC7] bg-white"
                         >
                            <option value="hour">Tundi</option>
-                           <option value="day">Päeva</option>
-                           <option value="week">Nädalat</option>
+                           <option value="day">PÃ¤eva</option>
+                           <option value="week">NÃ¤dalat</option>
                         </select>
                      </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-bold text-[#6B5744] mb-2">Tagatisraha (€)</label>
+                    <label className="block text-sm font-bold text-[#6B5744] mb-2">Tagatisraha (â‚¬)</label>
                     <input 
                       type="number"
                       value={deposit}

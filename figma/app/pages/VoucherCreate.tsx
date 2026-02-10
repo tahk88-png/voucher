@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import { useState } from 'react';
+import { useNavigate } from '@/lib/router-shim';
 import { ArrowLeft, ArrowRight, Check, Upload, X, RefreshCw, QrCode } from 'lucide-react';
 import { toast } from 'sonner';
 import { QRCodeSVG } from 'qrcode.react';

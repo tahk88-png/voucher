@@ -25,7 +25,7 @@ export default async function WalletPage({ params }: { params: { merchantSlug: s
         <h1 className="text-xl font-semibold text-[#2D2721] mb-1">{merchant.name}</h1>
         <p className="text-sm text-[#6B5744] mb-6">Credit wallet</p>
 
-        <WarmCard padding="lg" className="bg-white mb-8 border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white mb-8 border border-[rgba(139,115,85,0.15)]">
           <p className="text-sm font-medium text-[#8B7355] mb-1">Available to use</p>
           <p className="text-4xl sm:text-5xl font-semibold tabular-nums tracking-tight text-[#2D2721]">
             {formatCurrency(available, balance.currency)}
@@ -42,7 +42,7 @@ export default async function WalletPage({ params }: { params: { merchantSlug: s
         </WarmCard>
 
         {locked > 0 && (
-          <WarmCard padding="lg" className="mb-8 bg-[#FFF9ED] border border-[#E7DCC7]">
+          <WarmCard padding="lg" className="mb-8 bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)]">
             <p className="text-sm font-medium text-[#8B7355]">Locked</p>
             <p className="text-2xl font-semibold tabular-nums text-[#2D2721] mt-2">
               {formatCurrency(locked, balance.currency)}
@@ -53,7 +53,7 @@ export default async function WalletPage({ params }: { params: { merchantSlug: s
           </WarmCard>
         )}
 
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <div className="mb-4">
             <h2 className="text-base font-semibold text-[#2D2721]">Credit history</h2>
             <p className="text-sm text-[#6B5744]">Ledger for {merchant.name}</p>

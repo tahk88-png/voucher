@@ -67,7 +67,7 @@ export default function MerchantMobileNav({ slug }: MerchantMobileNavProps) {
   return (
     <>
       <button
-        className="lg:hidden p-2 text-[#2D2721]"
+        className="lg:hidden p-2 text-[var(--text)]"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
@@ -79,7 +79,7 @@ export default function MerchantMobileNav({ slug }: MerchantMobileNavProps) {
             className="fixed inset-0 bg-black/40 z-40 lg:hidden animate-in fade-in duration-200"
             onClick={() => setIsOpen(false)}
           />
-          <nav className="fixed top-16 left-0 right-0 bottom-0 bg-white border-t border-[#E7DCC7] z-50 lg:hidden overflow-y-auto animate-in slide-in-from-top-2 shadow-xl">
+          <nav className="fixed top-16 left-0 right-0 bottom-0 bg-[var(--surface)] border-t border-[var(--border)] z-50 lg:hidden overflow-y-auto animate-in slide-in-from-top-2 shadow-xl">
             <div className="p-4 space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -94,8 +94,8 @@ export default function MerchantMobileNav({ slug }: MerchantMobileNavProps) {
                     className={cn(
                       'flex items-center gap-3 px-4 py-3 text-lg font-bold transition-colors rounded-xl',
                       isActive
-                        ? 'bg-[#FAF7F2] text-[#2D2721]'
-                        : 'text-[#6B5744] hover:bg-[#FAF7F2]'
+                        ? 'bg-[var(--surface-muted)] text-[var(--text)]'
+                        : 'text-[var(--text-muted)] hover:bg-[var(--surface-muted)]'
                     )}
                   >
                     <Icon className="h-5 w-5 flex-shrink-0" />

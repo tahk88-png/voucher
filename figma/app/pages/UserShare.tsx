@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { useBonusTracking } from '@app/contexts/BonusTracking';
@@ -16,6 +16,7 @@ import {
   TrendingUp,
   Award,
   Sparkles,
+  Clock3,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -48,7 +49,7 @@ export function UserShare() {
       merchantId: 'merchant-fashion',
       merchantName: 'Fashion Store',
       name: 'Summer Sale 25% Off',
-      description: 'Share this amazing summer sale and earn 5€ gift card!',
+      description: 'Share this amazing summer sale and earn 5â‚¬ gift card!',
       bonusAmount: 5,
       image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400',
       url: 'https://vouchers.app/c/summer-sale',
@@ -58,7 +59,7 @@ export function UserShare() {
       merchantId: 'merchant-beauty',
       merchantName: 'Beauty Paradise',
       name: 'Beauty Week Special',
-      description: 'Tell your friends about our beauty week! Get 10€ bonus.',
+      description: 'Tell your friends about our beauty week! Get 10â‚¬ bonus.',
       bonusAmount: 10,
       image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400',
       url: 'https://vouchers.app/c/beauty-week',
@@ -68,7 +69,7 @@ export function UserShare() {
       merchantId: 'merchant-fitness',
       merchantName: 'FitLife Gym',
       name: 'New Member Promotion',
-      description: 'Share our gym and get 15€ for every signup!',
+      description: 'Share our gym and get 15â‚¬ for every signup!',
       bonusAmount: 15,
       image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400',
       url: 'https://vouchers.app/c/fitness-promo',
@@ -108,7 +109,7 @@ export function UserShare() {
         const instagramSuccess = await copyToClipboard(campaign.url);
         if (instagramSuccess) {
           toast.success('Link copied! Share it on Instagram Story', {
-            description: `You'll earn ${campaign.bonusAmount}€ when merchant approves!`,
+            description: `You'll earn ${campaign.bonusAmount}â‚¬ when merchant approves!`,
           });
         }
         return;
@@ -118,7 +119,7 @@ export function UserShare() {
           setCopied(campaign.id);
           setTimeout(() => setCopied(null), 2000);
           toast.success('Link copied to clipboard!', {
-            description: `Share it to earn ${campaign.bonusAmount}€ gift card!`,
+            description: `Share it to earn ${campaign.bonusAmount}â‚¬ gift card!`,
           });
         }
         return;
@@ -128,7 +129,7 @@ export function UserShare() {
       window.open(url, '_blank', 'width=600,height=400');
     }
 
-    toast.success(`🎉 Share tracked! Earn ${campaign.bonusAmount}€ bonus`, {
+    toast.success(`ðŸŽ‰ Share tracked! Earn ${campaign.bonusAmount}â‚¬ bonus`, {
       description: `Merchant will verify and send you a gift card soon!`,
     });
   };
@@ -143,7 +144,7 @@ export function UserShare() {
         </div>
         <div className="text-right">
           <div className="text-sm text-[#8B7355]">Your earnings</div>
-          <div className="text-3xl font-bold text-[#FFC857]">47€</div>
+          <div className="text-3xl font-bold text-[#FFC857]">47â‚¬</div>
           <div className="text-xs text-[#8B7355]">Total bonuses</div>
         </div>
       </div>
@@ -206,7 +207,7 @@ export function UserShare() {
                 <div className="absolute top-3 right-3 px-3 py-1.5 bg-gradient-to-br from-[#9DB5A5] to-[#7FA090] rounded-full shadow-warm">
                   <div className="flex items-center gap-1 text-white font-bold text-sm">
                     <Gift className="h-4 w-4" />
-                    {campaign.bonusAmount}€
+                    {campaign.bonusAmount}â‚¬
                   </div>
                 </div>
               </div>
@@ -275,7 +276,7 @@ export function UserShare() {
                   ) : (
                     <>
                       <Copy className="h-4 w-4 mr-2" />
-                      Copy Link & Earn {campaign.bonusAmount}€
+                      Copy Link & Earn {campaign.bonusAmount}â‚¬
                     </>
                   )}
                 </WarmButton>
@@ -316,16 +317,26 @@ export function UserShare() {
                 <div>
                   <div className="font-semibold text-[#2D2721]">{share.campaign}</div>
                   <div className="text-xs text-[#8B7355]">
-                    {share.platform} • {share.date}
+                    {share.platform} â€¢ {share.date}
                   </div>
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-bold text-[#FFC857]">{share.bonus}€</div>
+                <div className="font-bold text-[#FFC857]">{share.bonus}â‚¬</div>
                 <div className={`text-xs ${
                   share.status === 'approved' ? 'text-[#9DB5A5]' : 'text-[#FFC857]'
                 }`}>
-                  {share.status === 'approved' ? '✓ Approved' : '⏳ Pending'}
+                  {share.status === 'approved' ? (
+                    <span className="inline-flex items-center gap-1">
+                      <Check className="h-3.5 w-3.5" />
+                      Approved
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1">
+                      <Clock3 className="h-3.5 w-3.5" />
+                      Pending
+                    </span>
+                  )}
                 </div>
               </div>
             </div>

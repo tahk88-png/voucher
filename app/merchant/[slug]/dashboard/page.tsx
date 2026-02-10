@@ -8,7 +8,7 @@ import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { AreaChart } from '@/components/ui/charts/area-chart';
 import { formatCurrency, safeParseJson } from '@/lib/utils';
-import { ArrowUpRight, Calendar, CheckCircle2, Sparkles, Ticket } from 'lucide-react';
+import { Calendar, CheckCircle2, Sparkles, Ticket } from 'lucide-react';
 import { DashboardStats } from './dashboard-stats';
 import { RevenueStats } from './revenue-stats';
 import { RecentActivity } from './recent-activity';
@@ -206,7 +206,7 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
 
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-6">
-            <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                 <div>
                   <h2 className="text-base font-semibold text-[#2D2721]">Weekly performance</h2>
@@ -233,7 +233,7 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
             {pendingRedemptions > 0 && (
               <WarmCard
                 padding="lg"
-                className="bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] border border-[#E7DCC7]"
+                className="bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] border border-[rgba(139,115,85,0.15)]"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div>
@@ -249,7 +249,7 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
           </div>
 
           <div className="space-y-6">
-            <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-base font-semibold text-[#2D2721]">Action center</h2>
@@ -285,7 +285,7 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
               )}
             </WarmCard>
 
-            <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-base font-semibold text-[#2D2721]">Upcoming events</h2>
@@ -319,7 +319,7 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
               </div>
             </WarmCard>
 
-            <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-base font-semibold text-[#2D2721]">Top vouchers</h2>
@@ -354,34 +354,6 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
               )}
             </WarmCard>
 
-            <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h2 className="text-base font-semibold text-[#2D2721]">Quick actions</h2>
-                  <p className="text-sm text-[#6B5744]">Merchant tools</p>
-                </div>
-                <Link
-                  href={`/merchant/${params.slug}/settings`}
-                  className="text-sm font-semibold text-[#E17B5C] inline-flex items-center gap-1"
-                >
-                  Settings <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </div>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {[
-                  { label: 'Campaigns', href: `/merchant/${params.slug}/campaigns` },
-                  { label: 'Events', href: `/merchant/${params.slug}/events` },
-                  { label: 'Manage vouchers', href: `/merchant/${params.slug}/vouchers` },
-                  { label: 'Redemptions', href: `/merchant/${params.slug}/redemptions` },
-                  { label: 'Gift cards', href: `/merchant/${params.slug}/gift-cards` },
-                  { label: 'Analytics', href: `/merchant/${params.slug}/analytics` },
-                ].map((link) => (
-                  <WarmButton key={link.label} asChild variant="outline" className="justify-start">
-                    <Link href={link.href}>{link.label}</Link>
-                  </WarmButton>
-                ))}
-              </div>
-            </WarmCard>
           </div>
         </div>
       </div>

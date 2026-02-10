@@ -21,7 +21,7 @@ export default function PaymentErrorPage() {
           <p className="text-sm text-[#6B5744] mt-1">{t('errorDescription')}</p>
         </div>
         <div className="space-y-4 mt-6">
-          <div className="rounded-2xl bg-[#FFF9ED] border border-[#E7DCC7] p-4 text-center">
+          <div className="rounded-2xl bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)] p-4 text-center">
             <p className="text-sm text-[#6B5744]">{t('errorMessage')}</p>
           </div>
 

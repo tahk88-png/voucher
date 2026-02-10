@@ -6,6 +6,8 @@ import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { Award, Flame, Link2, Sparkles, Wallet, Users } from 'lucide-react';
 import { getCreditBalance } from '@/lib/credits';
+import { getLocale } from 'next-intl/server';
+import { getCurrencyLocale } from '@/lib/i18n-utils';
 
 const getVoucherHeadline = (designJson: unknown) => {
   if (!designJson || typeof designJson !== 'object') {
@@ -20,6 +22,8 @@ export default async function AppPage() {
   if (!session?.user?.id) {
     redirect('/login');
   }
+  const locale = await getLocale();
+  const intlLocale = getCurrencyLocale(locale);
   const sessionUser = session.user;
   const userId = sessionUser.id;
 
@@ -78,7 +82,6 @@ export default async function AppPage() {
   const balances = await Promise.all(
     merchantMembersWithId.map(async (member) => {
       try {
-        // @ts-expect-error merchant id is checked above
         return await getCreditBalance(userId, member.merchant!.id);
       } catch {
         return null;
@@ -101,17 +104,17 @@ export default async function AppPage() {
   const progressPercent =
     targetPoints > 0 ? Math.min(100, Math.round((pointsBalance / targetPoints) * 100)) : 0;
   const totalEarned = totalAvailable + totalLocked;
-  const totalEarnedFormatted = new Intl.NumberFormat('en-US', {
+  const totalEarnedFormatted = new Intl.NumberFormat(intlLocale, {
     style: 'currency',
     currency,
     maximumFractionDigits: 0,
   }).format(totalEarned / 100);
-  const rewardTargetLabel = new Intl.NumberFormat('en-US', {
+  const rewardTargetLabel = new Intl.NumberFormat(intlLocale, {
     style: 'currency',
     currency,
     maximumFractionDigits: 0,
   }).format(25);
-  const pointsFormatted = new Intl.NumberFormat('en-US').format(pointsBalance);
+  const pointsFormatted = new Intl.NumberFormat(intlLocale).format(pointsBalance);
   const streakDays = redeemedReferrals ? Math.min(30, redeemedReferrals) : 0;
 
   const [recentReferrals, recentCredits, featuredVouchers] = await Promise.all([
@@ -198,7 +201,7 @@ export default async function AppPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7] lg:col-span-2">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)] lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-[16px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
@@ -218,7 +221,7 @@ export default async function AppPage() {
           </div>
         </WarmCard>
 
-        <WarmCard padding="lg" className="bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] border border-[rgba(139,115,85,0.15)]">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-[16px] bg-white flex items-center justify-center shadow-warm-sm">
               <Sparkles className="h-6 w-6 text-[#E17B5C]" />
@@ -249,7 +252,7 @@ export default async function AppPage() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7] lg:col-span-2">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)] lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-[#2D2721]">Available Rewards</h2>
             <WarmButton asChild size="sm" variant="outline">
@@ -271,7 +274,7 @@ export default async function AppPage() {
                     {getVoucherHeadline(voucher.designJson)}
                   </div>
                   <div className="text-sm text-[#6B5744] mt-2">
-                    Valid until {voucher.validTo.toLocaleDateString()}
+                    Valid until {voucher.validTo.toLocaleDateString(intlLocale)}
                   </div>
                 </WarmCard>
               ))
@@ -279,7 +282,7 @@ export default async function AppPage() {
           </div>
         </WarmCard>
 
-        <WarmCard padding="lg" className="bg-white border border-[#E7DCC7]">
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Recent Activity</h2>
           <div className="space-y-3">
             {recentReferrals.length === 0 && recentCredits.length === 0 && (
@@ -289,7 +292,7 @@ export default async function AppPage() {
               <div key={credit.id} className="flex items-center justify-between text-sm">
                 <span className="text-[#6B5744]">Credit {credit.status}</span>
                 <span className="font-semibold text-[#2D2721]">
-                  {new Intl.NumberFormat('en-US', { style: 'currency', currency: credit.currency }).format(
+                  {new Intl.NumberFormat(intlLocale, { style: 'currency', currency: credit.currency }).format(
                     credit.amount / 100
                   )}
                 </span>
@@ -298,7 +301,7 @@ export default async function AppPage() {
             {recentReferrals.map((referral) => (
               <div key={referral.id} className="flex items-center justify-between text-sm">
                 <span className="text-[#6B5744]">
-                  Referral · {referral.merchant?.name || 'Merchant'}
+                  Referral - {referral.merchant?.name || 'Merchant'}
                 </span>
                 <span className="font-semibold text-[#2D2721]">{referral.status}</span>
               </div>
@@ -316,7 +319,7 @@ export default async function AppPage() {
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {user?.merchantMembers.map((member) => (
-            <WarmCard key={member.merchantId} padding="lg" className="bg-white border border-[#E7DCC7]">
+            <WarmCard key={member.merchantId} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
               <div className="space-y-3">
                 <div>
                   <h3 className="text-lg font-semibold text-[#2D2721]">{member.merchant.name}</h3>
@@ -364,3 +367,4 @@ export default async function AppPage() {
     </div>
   );
 }
+

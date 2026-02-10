@@ -28,14 +28,14 @@ export function StatsCard({
     <WarmCard padding="lg" className={cn("", className)}>
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-[#8B7355]">{title}</p>
+          <p className="text-sm font-medium text-[var(--text-faint)]">{title}</p>
           <div className="mt-2 flex items-baseline gap-2">
-            <h3 className="text-2xl font-bold text-[#2D2721]">{value}</h3>
+            <h3 className="text-2xl font-bold text-[var(--text)]">{value}</h3>
             {trend && (
               <div
                 className={cn(
                   "flex items-center gap-1 text-xs font-medium",
-                  trend.isPositive ? "text-[#9DB5A5]" : "text-[#E17B5C]"
+                  trend.isPositive ? "text-[var(--success)]" : "text-[var(--danger)]"
                 )}
               >
                 {trend.isPositive ? (
@@ -48,18 +48,18 @@ export function StatsCard({
                   {trend.value}%
                 </span>
                 {trend.label && (
-                  <span className="text-[#8B7355]">{trend.label}</span>
+                  <span className="text-[var(--text-faint)]">{trend.label}</span>
                 )}
               </div>
             )}
           </div>
           {description && (
-            <p className="mt-1 text-xs text-[#6B5744]">{description}</p>
+            <p className="mt-1 text-xs text-[var(--text-muted)]">{description}</p>
           )}
         </div>
         {Icon && (
-          <div className="rounded-xl bg-[#FFF9ED] p-2">
-            <Icon className="h-5 w-5 text-[#8B7355]" />
+          <div className="rounded-xl bg-[var(--bg-2)] p-2">
+            <Icon className="h-5 w-5 text-[var(--text-faint)]" />
           </div>
         )}
       </div>

@@ -70,7 +70,7 @@ export default async function VouchersPage({ params }: { params: { merchantSlug:
               const design = safeParseJson<Record<string, any>>(voucher.designJson);
 
               return (
-                <WarmCard key={voucher.id} padding="lg" className="bg-white border border-[#E7DCC7]">
+                <WarmCard key={voucher.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                   <div className="space-y-4">
                     <div>
                       <h2 className="text-lg font-semibold text-[#2D2721]">

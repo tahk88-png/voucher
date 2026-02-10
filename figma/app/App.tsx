@@ -1,12 +1,13 @@
-import { Settings } from '@/figma/app/pages/Settings';
+﻿import { Settings } from '@/figma/app/pages/Settings';
 import { AdvancedSettings } from '@/figma/app/pages/AdvancedSettings';
 import { Login } from '@/figma/app/pages/Login';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from '@/lib/router-shim';
 import { CountryProvider } from '@/figma/app/contexts/CountryContext';
 import { LanguageProvider } from '@/figma/app/contexts/LanguageContext';
 import { AdminSettingsProvider } from '@/figma/app/contexts/AdminSettings';
 import { BonusTrackingProvider } from '@/figma/app/contexts/BonusTracking';
 import { CartProvider } from '@/figma/app/contexts/CartContext';
+import { AuthProvider } from '@/figma/app/contexts/AuthContext';
 import LandingPage from '@/figma/app/LandingPage';
 import { Landing } from '@/figma/app/pages/Landing';
 import { MerchantDashboard } from '@/figma/app/pages/MerchantDashboard';
@@ -75,12 +76,13 @@ import { PublicCatalogLayout } from '@/figma/app/components/PublicCatalogLayout'
 export default function App() {
   return (
     <BrowserRouter>
-      <CountryProvider>
-        <LanguageProvider>
-          <AdminSettingsProvider>
-            <BonusTrackingProvider>
-              <CartProvider>
-              <Routes>
+      <AuthProvider>
+        <CountryProvider>
+          <LanguageProvider>
+            <AdminSettingsProvider>
+              <BonusTrackingProvider>
+                <CartProvider>
+                <Routes>
                 <Route element={<PublicLayout />}>
                   {/* Public Routes */}
                   <Route path="/" element={<Landing />} />
@@ -169,15 +171,17 @@ export default function App() {
                   <Route path="/subscription-manage" element={<SubscriptionManage />} />
                 </Route>
                 
-              </Routes>
-              <Toaster />
-              <ChatWidget />
-              <FeedbackWidget />
-              </CartProvider>
-            </BonusTrackingProvider>
-          </AdminSettingsProvider>
-        </LanguageProvider>
-      </CountryProvider>
+                </Routes>
+                <Toaster />
+                <ChatWidget />
+                <FeedbackWidget />
+                </CartProvider>
+              </BonusTrackingProvider>
+            </AdminSettingsProvider>
+          </LanguageProvider>
+        </CountryProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
+

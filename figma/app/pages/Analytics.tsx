@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
+import { useLanguage } from '@app/contexts/LanguageContext';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -35,6 +36,8 @@ type TimeRange = '7d' | '30d' | '90d' | '1y';
 
 export function Analytics() {
   const [timeRange, setTimeRange] = useState<TimeRange>('30d');
+  const { language } = useLanguage();
+  const tr = (en: string, et: string) => (language === 'et' ? et : en);
 
   // Mock data for charts
   const revenueData = [
@@ -56,10 +59,10 @@ export function Analytics() {
   ];
 
   const categoryData = [
-    { name: 'Vouchers', value: 45, color: '#FFC857' },
-    { name: 'Gift Cards', value: 30, color: '#9DB5A5' },
-    { name: 'Referrals', value: 15, color: '#E17B5C' },
-    { name: 'Events', value: 10, color: '#F5C98E' },
+    { name: tr('Vouchers', 'Vautserid'), value: 45, color: '#FFC857' },
+    { name: tr('Gift Cards', 'Kinkekaardid'), value: 30, color: '#9DB5A5' },
+    { name: tr('Referrals', 'Soovitused'), value: 15, color: '#E17B5C' },
+    { name: tr('Events', 'Sündmused'), value: 10, color: '#F5C98E' },
   ];
 
   // Demographics data - from social media login providers (Facebook, Google, LinkedIn, etc.)
@@ -73,8 +76,8 @@ export function Analytics() {
   ];
 
   const genderDistribution = [
-    { name: 'Female', value: 1547, percentage: 48.9, color: '#E17B5C' },
-    { name: 'Male', value: 1623, percentage: 51.1, color: '#FFC857' },
+    { key: 'female', label: tr('Female', 'Naised'), value: 1547, percentage: 48.9, color: '#E17B5C' },
+    { key: 'male', label: tr('Male', 'Mehed'), value: 1623, percentage: 51.1, color: '#FFC857' },
   ];
 
   const totalUsers = genderDistribution.reduce((sum, item) => sum + item.value, 0);
@@ -83,7 +86,7 @@ export function Analytics() {
     {
       id: 1,
       name: 'Summer Electronics Sale',
-      type: 'Voucher',
+      type: 'voucher',
       revenue: 12450,
       redemptions: 247,
       conversionRate: 73.5,
@@ -93,7 +96,7 @@ export function Analytics() {
     {
       id: 2,
       name: 'Holiday Gift Card',
-      type: 'Gift Card',
+      type: 'giftCard',
       revenue: 8920,
       redemptions: 189,
       conversionRate: 68.2,
@@ -103,7 +106,7 @@ export function Analytics() {
     {
       id: 3,
       name: 'Welcome Bonus',
-      type: 'Voucher',
+      type: 'voucher',
       revenue: 6780,
       redemptions: 423,
       conversionRate: 82.1,
@@ -113,7 +116,7 @@ export function Analytics() {
     {
       id: 4,
       name: 'Referral Program',
-      type: 'Referral',
+      type: 'referral',
       revenue: 4560,
       redemptions: 156,
       conversionRate: 65.8,
@@ -124,7 +127,7 @@ export function Analytics() {
 
   const kpis = [
     {
-      label: 'Total Revenue',
+      label: tr('Total Revenue', 'Kogutulu'),
       value: '€42,850',
       change: '+12.3%',
       trend: 'up',
@@ -132,7 +135,7 @@ export function Analytics() {
       color: 'from-[#FFC857] to-[#FFB627]',
     },
     {
-      label: 'Active Campaigns',
+      label: tr('Active Campaigns', 'Aktiivsed kampaaniad'),
       value: '28',
       change: '+4',
       trend: 'up',
@@ -140,7 +143,7 @@ export function Analytics() {
       color: 'from-[#9DB5A5] to-[#7FA090]',
     },
     {
-      label: 'Total Redemptions',
+      label: tr('Total Redemptions', 'Lunastamisi kokku'),
       value: '1,247',
       change: '+18.5%',
       trend: 'up',
@@ -148,7 +151,7 @@ export function Analytics() {
       color: 'from-[#E17B5C] to-[#D16B4C]',
     },
     {
-      label: 'Avg Conversion',
+      label: tr('Avg Conversion', 'Keskmine konversioon'),
       value: '72.3%',
       change: '-2.1%',
       trend: 'down',
@@ -157,12 +160,25 @@ export function Analytics() {
     },
   ];
 
+  const getCampaignTypeLabel = (type: string) => {
+    switch (type) {
+      case 'voucher':
+        return tr('Voucher', 'Vautser');
+      case 'giftCard':
+        return tr('Gift Card', 'Kinkekaart');
+      case 'referral':
+        return tr('Referral', 'Soovitus');
+      default:
+        return type;
+    }
+  };
+
   const getTimeRangeLabel = (range: TimeRange) => {
     switch (range) {
-      case '7d': return 'Last 7 Days';
-      case '30d': return 'Last 30 Days';
-      case '90d': return 'Last 90 Days';
-      case '1y': return 'Last Year';
+      case '7d': return tr('Last 7 Days', 'Viimased 7 päeva');
+      case '30d': return tr('Last 30 Days', 'Viimased 30 päeva');
+      case '90d': return tr('Last 90 Days', 'Viimased 90 päeva');
+      case '1y': return tr('Last Year', 'Viimane aasta');
     }
   };
 
@@ -171,8 +187,8 @@ export function Analytics() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#2D2721]">Analytics</h1>
-          <p className="text-[#6B5744] mt-1">Track your performance and insights</p>
+          <h1 className="text-3xl font-bold text-[#2D2721]">{tr('Analytics', 'Analüütika')}</h1>
+          <p className="text-[#6B5744] mt-1">{tr('Track your performance and insights', 'Jälgi oma tulemusi ja teadmisi')}</p>
         </div>
         <div className="flex items-center gap-3">
           <Select value={timeRange} onValueChange={(value) => setTimeRange(value as TimeRange)}>
@@ -181,15 +197,15 @@ export function Analytics() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="7d">Last 7 Days</SelectItem>
-              <SelectItem value="30d">Last 30 Days</SelectItem>
-              <SelectItem value="90d">Last 90 Days</SelectItem>
-              <SelectItem value="1y">Last Year</SelectItem>
+              <SelectItem value="7d">{tr('Last 7 Days', 'Viimased 7 päeva')}</SelectItem>
+              <SelectItem value="30d">{tr('Last 30 Days', 'Viimased 30 päeva')}</SelectItem>
+              <SelectItem value="90d">{tr('Last 90 Days', 'Viimased 90 päeva')}</SelectItem>
+              <SelectItem value="1y">{tr('Last Year', 'Viimane aasta')}</SelectItem>
             </SelectContent>
           </Select>
           <WarmButton variant="outline">
             <Download className="h-4 w-4 mr-2" />
-            Export
+            {tr('Export', 'Ekspordi')}
           </WarmButton>
         </div>
       </div>
@@ -226,7 +242,7 @@ export function Analytics() {
       {/* Revenue Trend */}
       <WarmCard padding="lg">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-[#2D2721] mb-1">Revenue Trend</h2>
+          <h2 className="text-xl font-semibold text-[#2D2721] mb-1">{tr('Revenue Trend', 'Tulu trend')}</h2>
           <p className="text-sm text-[#6B5744]">{getTimeRangeLabel(timeRange)}</p>
         </div>
         <ResponsiveContainer width="100%" height={300}>
@@ -257,7 +273,7 @@ export function Analytics() {
               strokeWidth={3}
               dot={{ fill: '#FFC857', r: 4 }}
               activeDot={{ r: 6 }}
-              name="Revenue (€)"
+              name={tr('Revenue (€)', 'Tulu (€)')}
             />
             <Line 
               type="monotone" 
@@ -266,7 +282,7 @@ export function Analytics() {
               strokeWidth={3}
               dot={{ fill: '#9DB5A5', r: 4 }}
               activeDot={{ r: 6 }}
-              name="Redemptions"
+              name={tr('Redemptions', 'Lunastamised')}
             />
           </LineChart>
         </ResponsiveContainer>
@@ -277,8 +293,8 @@ export function Analytics() {
         {/* Campaign Performance */}
         <WarmCard padding="lg">
           <div className="mb-6">
-            <h2 className="text-xl font-semibold text-[#2D2721] mb-1">Campaign Performance</h2>
-            <p className="text-sm text-[#6B5744]">Top 5 campaigns by revenue</p>
+            <h2 className="text-xl font-semibold text-[#2D2721] mb-1">{tr('Campaign Performance', 'Kampaaniate tulemuslikkus')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Top 5 campaigns by revenue', 'Top 5 kampaaniat tulu järgi')}</p>
           </div>
           <ResponsiveContainer width="100%" height={280}>
             <BarChart data={campaignPerformance} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
@@ -300,7 +316,7 @@ export function Analytics() {
                   boxShadow: '0 4px 16px rgba(139, 115, 85, 0.12)',
                 }}
               />
-              <Bar dataKey="value" fill="#FFC857" radius={[0, 8, 8, 0]} name="Revenue (€)" />
+              <Bar dataKey="value" fill="#FFC857" radius={[0, 8, 8, 0]} name={tr('Revenue (€)', 'Tulu (€)')} />
             </BarChart>
           </ResponsiveContainer>
         </WarmCard>
@@ -308,8 +324,8 @@ export function Analytics() {
         {/* Category Distribution */}
         <WarmCard padding="lg">
           <div className="mb-6">
-            <h2 className="text-xl font-semibold text-[#2D2721] mb-1">Category Distribution</h2>
-            <p className="text-sm text-[#6B5744]">Breakdown by campaign type</p>
+            <h2 className="text-xl font-semibold text-[#2D2721] mb-1">{tr('Category Distribution', 'Kategooriate jaotus')}</h2>
+            <p className="text-sm text-[#6B5744]">{tr('Breakdown by campaign type', 'Jaotus kampaania tüübi järgi')}</p>
           </div>
           <div className="flex items-center justify-center">
             <ResponsiveContainer width="100%" height={280}>
@@ -345,16 +361,16 @@ export function Analytics() {
       {/* User Demographics Section */}
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-bold text-[#2D2721] mb-2">User Demographics</h2>
-          <p className="text-[#6B5744]">Customer insights from social media login data (Facebook, Google, LinkedIn, etc.)</p>
+          <h2 className="text-2xl font-bold text-[#2D2721] mb-2">{tr('User Demographics', 'Kasutajate demograafia')}</h2>
+          <p className="text-[#6B5744]">{tr('Customer insights from social media login data (Facebook, Google, LinkedIn, etc.)', 'Kliendiülevaade sotsiaalmeedia sisselogimise andmetest (Facebook, Google, LinkedIn jne)')}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Age Groups by Gender */}
           <WarmCard padding="lg">
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-[#2D2721] mb-1">Age Groups by Gender</h3>
-              <p className="text-sm text-[#6B5744]">Distribution of users across age groups</p>
+              <h3 className="text-xl font-semibold text-[#2D2721] mb-1">{tr('Age Groups by Gender', 'Vanuserühmad soo järgi')}</h3>
+              <p className="text-sm text-[#6B5744]">{tr('Distribution of users across age groups', 'Kasutajate jaotus vanuserühmade lõikes')}</p>
             </div>
             <ResponsiveContainer width="100%" height={320}>
               <BarChart data={ageGenderData}>
@@ -377,8 +393,8 @@ export function Analytics() {
                   }}
                 />
                 <Legend />
-                <Bar dataKey="female" fill="#E17B5C" radius={[8, 8, 0, 0]} name="Female" />
-                <Bar dataKey="male" fill="#FFC857" radius={[8, 8, 0, 0]} name="Male" />
+                <Bar dataKey="female" fill="#E17B5C" radius={[8, 8, 0, 0]} name={tr('Female', 'Naised')} />
+                <Bar dataKey="male" fill="#FFC857" radius={[8, 8, 0, 0]} name={tr('Male', 'Mehed')} />
               </BarChart>
             </ResponsiveContainer>
           </WarmCard>
@@ -386,8 +402,8 @@ export function Analytics() {
           {/* Gender Distribution */}
           <WarmCard padding="lg">
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-[#2D2721] mb-1">Gender Distribution</h3>
-              <p className="text-sm text-[#6B5744]">Overall gender breakdown</p>
+              <h3 className="text-xl font-semibold text-[#2D2721] mb-1">{tr('Gender Distribution', 'Sooline jaotus')}</h3>
+              <p className="text-sm text-[#6B5744]">{tr('Overall gender breakdown', 'Üldine sooline jaotus')}</p>
             </div>
             
             {/* Pie Chart */}
@@ -399,7 +415,7 @@ export function Analytics() {
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={({ name, percentage }) => `${name} ${percentage}%`}
+                    label={({ payload, percentage }) => `${payload.label} ${percentage}%`}
                     outerRadius={80}
                     fill="#8884d8"
                     dataKey="value"
@@ -424,7 +440,7 @@ export function Analytics() {
             <div className="space-y-3">
               {genderDistribution.map((item) => (
                 <div 
-                  key={item.name}
+                  key={item.key}
                   className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-br from-[#FFF9ED] to-white"
                 >
                   <div className="flex items-center gap-3">
@@ -432,20 +448,20 @@ export function Analytics() {
                       className="w-12 h-12 rounded-full flex items-center justify-center shadow-warm"
                       style={{ backgroundColor: item.color }}
                     >
-                      {item.name === 'Female' ? (
+                      {item.key === 'female' ? (
                         <User className="h-6 w-6 text-white" />
                       ) : (
                         <UserCircle className="h-6 w-6 text-white" />
                       )}
                     </div>
                     <div>
-                      <div className="text-sm font-medium text-[#6B5744]">{item.name}</div>
+                      <div className="text-sm font-medium text-[#6B5744]">{item.label}</div>
                       <div className="text-2xl font-bold text-[#2D2721]">{item.value.toLocaleString()}</div>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className="text-xl font-bold text-[#2D2721]">{item.percentage}%</div>
-                    <div className="text-xs text-[#8B7355]">of total</div>
+                    <div className="text-xs text-[#8B7355]">{tr('of total', 'koguarvust')}</div>
                   </div>
                 </div>
               ))}
@@ -457,7 +473,7 @@ export function Analytics() {
                     <Users className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm font-medium opacity-90">Total Users</div>
+                    <div className="text-sm font-medium opacity-90">{tr('Total Users', 'Kasutajaid kokku')}</div>
                     <div className="text-2xl font-bold">{totalUsers.toLocaleString()}</div>
                   </div>
                 </div>
@@ -469,8 +485,8 @@ export function Analytics() {
         {/* Age Group Details Table */}
         <WarmCard padding="lg">
           <div className="mb-6">
-            <h3 className="text-xl font-semibold text-[#2D2721] mb-1">Detailed Age Group Breakdown</h3>
-            <p className="text-sm text-[#6B5744]">User distribution by age and gender</p>
+            <h3 className="text-xl font-semibold text-[#2D2721] mb-1">{tr('Detailed Age Group Breakdown', 'Vanuserühmade detailne jaotus')}</h3>
+            <p className="text-sm text-[#6B5744]">{tr('User distribution by age and gender', 'Kasutajate jaotus vanuse ja soo järgi')}</p>
           </div>
 
           {/* Desktop Table */}
@@ -478,11 +494,11 @@ export function Analytics() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-[rgba(139,115,85,0.1)]">
-                  <th className="text-left py-3 px-4 text-sm font-semibold text-[#6B5744]">Age Group</th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">Female</th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">Male</th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">Total</th>
-                  <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">% of Users</th>
+                  <th className="text-left py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Age Group', 'Vanuserühm')}</th>
+                  <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Female', 'Naised')}</th>
+                  <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Male', 'Mehed')}</th>
+                  <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Total', 'Kokku')}</th>
+                  <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('% of Users', '% kasutajatest')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -518,12 +534,12 @@ export function Analytics() {
               </tbody>
               <tfoot>
                 <tr className="border-t-2 border-[rgba(139,115,85,0.2)] bg-[#FFF9ED]">
-                  <td className="py-4 px-4 font-bold text-[#2D2721]">Total</td>
+                  <td className="py-4 px-4 font-bold text-[#2D2721]">{tr('Total', 'Kokku')}</td>
                   <td className="py-4 px-4 text-right font-bold text-[#E17B5C]">
-                    {genderDistribution.find(g => g.name === 'Female')?.value}
+                    {genderDistribution.find(g => g.key === 'female')?.value}
                   </td>
                   <td className="py-4 px-4 text-right font-bold text-[#FFC857]">
-                    {genderDistribution.find(g => g.name === 'Male')?.value}
+                    {genderDistribution.find(g => g.key === 'male')?.value}
                   </td>
                   <td className="py-4 px-4 text-right font-bold text-[#2D2721]">
                     {totalUsers}
@@ -554,11 +570,11 @@ export function Analytics() {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="p-3 bg-white rounded-lg">
-                      <div className="text-xs text-[#8B7355] mb-1">Female</div>
+                      <div className="text-xs text-[#8B7355] mb-1">{tr('Female', 'Naised')}</div>
                       <div className="text-xl font-bold text-[#E17B5C]">{group.female}</div>
                     </div>
                     <div className="p-3 bg-white rounded-lg">
-                      <div className="text-xs text-[#8B7355] mb-1">Male</div>
+                      <div className="text-xs text-[#8B7355] mb-1">{tr('Male', 'Mehed')}</div>
                       <div className="text-xl font-bold text-[#FFC857]">{group.male}</div>
                     </div>
                   </div>
@@ -572,8 +588,8 @@ export function Analytics() {
       {/* Top Campaigns Table */}
       <WarmCard padding="lg">
         <div className="mb-6">
-          <h2 className="text-xl font-semibold text-[#2D2721] mb-1">Top Campaigns</h2>
-          <p className="text-sm text-[#6B5744]">Best performing campaigns this period</p>
+          <h2 className="text-xl font-semibold text-[#2D2721] mb-1">{tr('Top Campaigns', 'Parimad kampaaniad')}</h2>
+          <p className="text-sm text-[#6B5744]">{tr('Best performing campaigns this period', 'Selle perioodi parima tulemusega kampaaniad')}</p>
         </div>
 
         {/* Desktop Table */}
@@ -581,12 +597,12 @@ export function Analytics() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-[rgba(139,115,85,0.1)]">
-                <th className="text-left py-3 px-4 text-sm font-semibold text-[#6B5744]">Campaign</th>
-                <th className="text-left py-3 px-4 text-sm font-semibold text-[#6B5744]">Type</th>
-                <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">Revenue</th>
-                <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">Redemptions</th>
-                <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">Conversion</th>
-                <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">Trend</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Campaign', 'Kampaania')}</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Type', 'Tüüp')}</th>
+                <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Revenue', 'Tulu')}</th>
+                <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Redemptions', 'Lunastamised')}</th>
+                <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Conversion', 'Konversioon')}</th>
+                <th className="text-right py-3 px-4 text-sm font-semibold text-[#6B5744]">{tr('Trend', 'Trend')}</th>
               </tr>
             </thead>
             <tbody>
@@ -600,7 +616,7 @@ export function Analytics() {
                   </td>
                   <td className="py-4 px-4">
                     <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#FFF9ED] text-[#6B5744]">
-                      {campaign.type}
+                      {getCampaignTypeLabel(campaign.type)}
                     </span>
                   </td>
                   <td className="py-4 px-4 text-right font-semibold text-[#2D2721]">
@@ -641,7 +657,7 @@ export function Analytics() {
                 <div>
                   <div className="font-semibold text-[#2D2721] mb-1">{campaign.name}</div>
                   <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-white text-[#6B5744]">
-                    {campaign.type}
+                    {getCampaignTypeLabel(campaign.type)}
                   </span>
                 </div>
                 <div className={`flex items-center gap-1 text-sm font-medium ${
@@ -657,15 +673,15 @@ export function Analytics() {
               </div>
               <div className="grid grid-cols-3 gap-3 pt-3 border-t border-[rgba(139,115,85,0.1)]">
                 <div>
-                  <div className="text-xs text-[#8B7355] mb-1">Revenue</div>
+                  <div className="text-xs text-[#8B7355] mb-1">{tr('Revenue', 'Tulu')}</div>
                   <div className="font-semibold text-[#2D2721]">€{campaign.revenue.toLocaleString()}</div>
                 </div>
                 <div>
-                  <div className="text-xs text-[#8B7355] mb-1">Redemptions</div>
+                  <div className="text-xs text-[#8B7355] mb-1">{tr('Redemptions', 'Lunastamised')}</div>
                   <div className="font-semibold text-[#2D2721]">{campaign.redemptions}</div>
                 </div>
                 <div>
-                  <div className="text-xs text-[#8B7355] mb-1">Conversion</div>
+                  <div className="text-xs text-[#8B7355] mb-1">{tr('Conversion', 'Konversioon')}</div>
                   <div className="font-semibold text-[#2D2721]">{campaign.conversionRate}%</div>
                 </div>
               </div>
@@ -681,13 +697,15 @@ export function Analytics() {
             <TrendingUp className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-[#2D2721] mb-2">Key Insight</h3>
+            <h3 className="text-lg font-semibold text-[#2D2721] mb-2">{tr('Key Insight', 'Peamine tähelepanek')}</h3>
             <p className="text-[#6B5744] mb-3">
-              Your conversion rate increased by 8.5% this month. The "Summer Electronics Sale" campaign 
-              is performing exceptionally well with a 73.5% conversion rate, significantly above your average.
+              {tr(
+                'Your conversion rate increased by 8.5% this month. The "Summer Electronics Sale" campaign is performing exceptionally well with a 73.5% conversion rate, significantly above your average.',
+                'Sinu konversioonimäär kasvas sel kuul 8.5%. Kampaania "Summer Electronics Sale" toimib erakordselt hästi 73.5% konversiooniga, mis on märgatavalt üle sinu keskmise.',
+              )}
             </p>
             <WarmButton variant="outline" size="sm">
-              View Recommendations
+              {tr('View Recommendations', 'Vaata soovitusi')}
             </WarmButton>
           </div>
         </div>

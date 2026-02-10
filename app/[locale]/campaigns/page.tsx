@@ -220,7 +220,7 @@ export default async function CampaignsPage({
                 className={`flex items-center gap-2 rounded-full px-5 py-2.5 font-bold text-sm whitespace-nowrap transition-all ${
                   isActive
                     ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm"
-                    : "bg-white text-[#6B5744] hover:bg-[#FFF9ED] border border-[#E7DCC7]"
+                    : "bg-white text-[#6B5744] hover:bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)]"
                 }`}
               >
                 <Sparkles className="h-4 w-4" />
@@ -300,7 +300,7 @@ export default async function CampaignsPage({
                       </div>
                     )}
 
-                    <div className="mt-auto pt-4 border-t border-[#E7DCC7]/50 flex items-center justify-between">
+                    <div className="mt-auto pt-4 border-t border-[rgba(139,115,85,0.15)]/50 flex items-center justify-between">
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-xl font-bold text-[#2D2721]">

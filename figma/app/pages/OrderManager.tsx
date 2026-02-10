@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+﻿import { useState, useMemo } from 'react';
+import { useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { 
@@ -116,8 +116,8 @@ const INITIAL_ORDERS: Order[] = [
 ];
 
 const COLUMNS = [
-  { id: 'new', title: 'Uued', subtitle: 'Vajavad tähelepanu', icon: AlertCircle, color: 'text-[#E17B5C]', bg: 'bg-[#E17B5C]/10', border: 'border-[#E17B5C]' },
-  { id: 'processing', title: 'Töös', subtitle: 'Komplekteerimisel', icon: Clock, color: 'text-[#FFC857]', bg: 'bg-[#FFF9ED]', border: 'border-[#FFC857]' },
+  { id: 'new', title: 'Uued', subtitle: 'Vajavad tÃ¤helepanu', icon: AlertCircle, color: 'text-[#E17B5C]', bg: 'bg-[#E17B5C]/10', border: 'border-[#E17B5C]' },
+  { id: 'processing', title: 'TÃ¶Ã¶s', subtitle: 'Komplekteerimisel', icon: Clock, color: 'text-[#FFC857]', bg: 'bg-[#FFF9ED]', border: 'border-[#FFC857]' },
   { id: 'ready', title: 'Valmis', subtitle: 'Ootab klienti', icon: Package, color: 'text-[#8B7355]', bg: 'bg-[#FAF7F2]', border: 'border-[#8B7355]' },
   { id: 'completed', title: 'Tehtud', subtitle: 'Arhiveeritud', icon: CheckCircle2, color: 'text-[#00D098]', bg: 'bg-[#E6F4EA]', border: 'border-[#00D098]' },
 ];
@@ -169,7 +169,7 @@ export function OrderManager() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
          <div className="md:col-span-2">
             <h2 className="text-2xl font-bold text-[#2D2721]">Tellimuste haldus</h2>
-            <p className="text-[#6B5744]">Halda kõiki tellimusi ja rendisoove ühest kohast.</p>
+            <p className="text-[#6B5744]">Halda kÃµiki tellimusi ja rendisoove Ã¼hest kohast.</p>
          </div>
          
          <WarmCard padding="sm" className="bg-white flex items-center justify-between border border-[#E7DCC7]">
@@ -182,8 +182,8 @@ export function OrderManager() {
 
          <WarmCard padding="sm" className="bg-white flex items-center justify-between border border-[#E7DCC7]">
             <div>
-               <div className="text-xs text-[#8B7355] font-bold uppercase">Tänane käive</div>
-               <div className="text-2xl font-bold text-[#2D2721]">{stats.revenue.toFixed(2)}€</div>
+               <div className="text-xs text-[#8B7355] font-bold uppercase">TÃ¤nane kÃ¤ive</div>
+               <div className="text-2xl font-bold text-[#2D2721]">{stats.revenue.toFixed(2)}â‚¬</div>
             </div>
             <div className="p-2 bg-[#E6F4EA] rounded-lg text-[#00D098]"><Euro className="w-5 h-5" /></div>
          </WarmCard>
@@ -195,7 +195,7 @@ export function OrderManager() {
             <div className="relative flex-1 sm:w-64">
                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8B7355]" />
                <input 
-                 placeholder="Otsi nime või ID järgi..."
+                 placeholder="Otsi nime vÃµi ID jÃ¤rgi..."
                  value={searchTerm}
                  onChange={(e) => setSearchTerm(e.target.value)}
                  className="w-full pl-10 pr-4 py-2 bg-[#FAF7F2] border border-[#E7DCC7] rounded-lg focus:border-[#FFC857] outline-none text-sm font-medium"
@@ -209,7 +209,7 @@ export function OrderManager() {
                     onClick={() => setFilterType(type)}
                     className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${filterType === type ? 'bg-white text-[#2D2721] shadow-sm' : 'text-[#8B7355] hover:text-[#2D2721]'}`}
                   >
-                     {type === 'all' ? 'Kõik' : type === 'rental' ? 'Rent' : 'Müük'}
+                     {type === 'all' ? 'KÃµik' : type === 'rental' ? 'Rent' : 'MÃ¼Ã¼k'}
                   </button>
                ))}
             </div>
@@ -280,7 +280,7 @@ export function OrderManager() {
                          <div className="text-xs text-[#6B5744] mb-4 truncate">{order.items.length} toodet: {order.items.map(i => i.name).join(', ')}</div>
 
                          <div className="flex items-center justify-between pt-3 border-t border-[#FAF7F2] mt-auto">
-                            <span className="font-bold text-[#2D2721] text-lg">{order.total.toFixed(2)}€</span>
+                            <span className="font-bold text-[#2D2721] text-lg">{order.total.toFixed(2)}â‚¬</span>
                             
                             <div className="flex items-center gap-2">
                                <div className="text-xs text-[#8B7355] flex items-center gap-1 bg-[#FAF7F2] px-2 py-1 rounded">
@@ -348,7 +348,7 @@ export function OrderManager() {
                       className={`justify-center w-full ${selectedOrder.paymentStatus === 'paid' ? 'text-[#00D098] border-[#00D098]/30 bg-[#E6F4EA]/50' : 'text-[#E17B5C] border-[#E17B5C]/30'}`}
                    >
                       <CreditCard className="w-4 h-4 mr-2" />
-                      {selectedOrder.paymentStatus === 'paid' ? 'Tasutud' : 'Märgi tasutuks'}
+                      {selectedOrder.paymentStatus === 'paid' ? 'Tasutud' : 'MÃ¤rgi tasutuks'}
                    </WarmButton>
                    <WarmButton variant="outline" className="justify-center w-full">
                       <Printer className="w-4 h-4 mr-2" /> Saateleht
@@ -394,15 +394,15 @@ export function OrderManager() {
                                </div>
                                <div>
                                   <div className="font-bold text-[#2D2721]">{item.name}</div>
-                                  <div className="text-xs text-[#8B7355]">{item.price.toFixed(2)}€ / tk</div>
+                                  <div className="text-xs text-[#8B7355]">{item.price.toFixed(2)}â‚¬ / tk</div>
                                </div>
                             </div>
-                            <div className="font-bold text-[#2D2721]">{(item.qty * item.price).toFixed(2)}€</div>
+                            <div className="font-bold text-[#2D2721]">{(item.qty * item.price).toFixed(2)}â‚¬</div>
                          </div>
                       ))}
                       <div className="flex justify-between items-center p-4 bg-[#2D2721] text-white rounded-xl shadow-lg mt-4">
                          <span className="font-bold">Kokku</span>
-                         <span className="text-xl font-bold text-[#FFC857]">{selectedOrder.total.toFixed(2)}€</span>
+                         <span className="text-xl font-bold text-[#FFC857]">{selectedOrder.total.toFixed(2)}â‚¬</span>
                       </div>
                    </div>
                 </div>
@@ -410,7 +410,7 @@ export function OrderManager() {
                 {/* Notes */}
                 {selectedOrder.note && (
                    <div>
-                      <h3 className="text-sm font-bold text-[#8B7355] uppercase tracking-wider mb-2">Märkmed</h3>
+                      <h3 className="text-sm font-bold text-[#8B7355] uppercase tracking-wider mb-2">MÃ¤rkmed</h3>
                       <div className="bg-[#FFF9ED] text-[#6B5744] p-4 rounded-xl text-sm italic border border-[#FFC857]/30">
                          "{selectedOrder.note}"
                       </div>

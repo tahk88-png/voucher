@@ -1,32 +1,16 @@
 "use client"
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
+import {
+  countryOptions,
+  countryStorageKey,
+  defaultCountryCode,
+  getCountryByCode,
+  type CountryOption,
+} from "@/lib/locale-config"
 
-export interface Country {
-  code: string
-  name: string
-  flag: string
-  currency: string
-  locale: string
-}
-
-export const countries: Country[] = [
-  { code: "EE", name: "Estonia", flag: "🇪🇪", currency: "€", locale: "et-EE" },
-  { code: "LV", name: "Latvia", flag: "🇱🇻", currency: "€", locale: "lv-LV" },
-  { code: "LT", name: "Lithuania", flag: "🇱🇹", currency: "€", locale: "lt-LT" },
-  { code: "FI", name: "Finland", flag: "🇫🇮", currency: "€", locale: "fi-FI" },
-  { code: "SE", name: "Sweden", flag: "🇸🇪", currency: "kr", locale: "sv-SE" },
-  { code: "NO", name: "Norway", flag: "🇳🇴", currency: "kr", locale: "nb-NO" },
-  { code: "DK", name: "Denmark", flag: "🇩🇰", currency: "kr", locale: "da-DK" },
-  { code: "PL", name: "Poland", flag: "🇵🇱", currency: "zł", locale: "pl-PL" },
-  { code: "DE", name: "Germany", flag: "🇩🇪", currency: "€", locale: "de-DE" },
-  { code: "FR", name: "France", flag: "🇫🇷", currency: "€", locale: "fr-FR" },
-  { code: "ES", name: "Spain", flag: "🇪🇸", currency: "€", locale: "es-ES" },
-  { code: "IT", name: "Italy", flag: "🇮🇹", currency: "€", locale: "it-IT" },
-  { code: "NL", name: "Netherlands", flag: "🇳🇱", currency: "€", locale: "nl-NL" },
-  { code: "BE", name: "Belgium", flag: "🇧🇪", currency: "€", locale: "nl-BE" },
-  { code: "UA", name: "Ukraine", flag: "🇺🇦", currency: "₴", locale: "uk-UA" },
-]
+export type Country = CountryOption
+export const countries: Country[] = countryOptions
 
 interface CountryContextType {
   selectedCountry: Country
@@ -36,25 +20,74 @@ interface CountryContextType {
 
 const CountryContext = createContext<CountryContextType | undefined>(undefined)
 
+function normalizeStoredCountryCode(value: unknown): string | null {
+  if (typeof value === "string" && value.trim().length > 0) {
+    return value.trim().toUpperCase()
+  }
+
+  if (value && typeof value === "object" && "code" in value) {
+    const nestedCode = (value as { code?: unknown }).code
+    if (typeof nestedCode === "string" && nestedCode.trim().length > 0) {
+      return nestedCode.trim().toUpperCase()
+    }
+  }
+
+  return null
+}
+
+function parseStoredCountryCode(storedValue: string | null): string | null {
+  if (!storedValue) {
+    return null
+  }
+
+  try {
+    return normalizeStoredCountryCode(JSON.parse(storedValue))
+  } catch {
+    return normalizeStoredCountryCode(storedValue)
+  }
+}
+
+function readStoredCountry(): Country | null {
+  if (typeof window === "undefined") {
+    return null
+  }
+
+  const parsedCountryCode = parseStoredCountryCode(window.localStorage.getItem(countryStorageKey))
+  if (!parsedCountryCode) {
+    return null
+  }
+
+  return getCountryByCode(parsedCountryCode) ?? null
+}
+
+function getDefaultCountry(): Country {
+  return getCountryByCode(defaultCountryCode) ?? countries[0]
+}
+
 export function CountryProvider({ children }: { children: React.ReactNode }) {
-  const [selectedCountry, setSelectedCountryState] = useState<Country>(countries[0])
+  const [selectedCountry, setSelectedCountryState] = useState<Country>(getDefaultCountry)
 
   useEffect(() => {
-    if (typeof window === "undefined") return
-    const saved = window.localStorage.getItem("selectedCountry")
-    if (!saved) return
-    const match = countries.find((country) => country.code === saved)
-    if (match) {
-      setSelectedCountryState(match)
+    const storedCountry = readStoredCountry()
+    if (storedCountry) {
+      setSelectedCountryState(storedCountry)
     }
   }, [])
 
-  const setSelectedCountry = (country: Country) => {
-    setSelectedCountryState(country)
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("selectedCountry", country.code)
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return
     }
-  }
+
+    window.localStorage.setItem(countryStorageKey, selectedCountry.code)
+  }, [selectedCountry.code])
+
+  const setSelectedCountry = useCallback(
+    (country: Country) => {
+      setSelectedCountryState(country)
+    },
+    []
+  )
 
   const value = useMemo(
     () => ({
@@ -62,7 +95,7 @@ export function CountryProvider({ children }: { children: React.ReactNode }) {
       setSelectedCountry,
       availableCountries: countries,
     }),
-    [selectedCountry]
+    [selectedCountry, setSelectedCountry]
   )
 
   return <CountryContext.Provider value={value}>{children}</CountryContext.Provider>

@@ -66,22 +66,22 @@ export function QRCodePanel({
   const showPlaceholder = !code && !qrDataUrl && !qrError
 
   return (
-    <div className={cn("flex flex-col items-center justify-center min-h-screen p-4 bg-[#FFF9ED]", className)}>
-      <WarmCard padding="lg" className="w-full max-w-sm bg-white border border-[#E7DCC7]">
+    <div className={cn("flex flex-col items-center justify-center min-h-screen p-4 bg-[var(--bg-2)]", className)}>
+      <WarmCard padding="lg" className="w-full max-w-sm bg-[var(--surface)] border border-[var(--border)]">
         <div className="space-y-6">
           <div className="flex justify-center">
-            <div className="w-full aspect-square bg-white p-4 rounded-lg border-2 border-[#E7DCC7] flex items-center justify-center">
+            <div className="w-full aspect-square bg-[var(--surface)] p-4 rounded-lg border-2 border-[var(--border)] flex items-center justify-center">
               {qrError ? (
-                <p className="text-xs text-[#8B7355]">{qrError}</p>
+                <p className="text-xs text-[var(--text-faint)]">{qrError}</p>
               ) : qrDataUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={qrDataUrl} alt="QR code" className="h-full w-full object-contain" />
               ) : showPlaceholder ? (
-                <div className="h-full w-full rounded-md border-2 border-dashed border-[#E7DCC7] bg-[#FFF9ED] flex items-center justify-center">
-                  <p className="text-xs text-[#8B7355]">QR code will appear here</p>
+                <div className="h-full w-full rounded-md border-2 border-dashed border-[var(--border)] bg-[var(--bg-2)] flex items-center justify-center">
+                  <p className="text-xs text-[var(--text-faint)]">QR code will appear here</p>
                 </div>
               ) : (
-                <p className="text-xs text-[#8B7355]">
+                <p className="text-xs text-[var(--text-faint)]">
                   {isGenerating ? "Generating QR..." : "QR unavailable"}
                 </p>
               )}
@@ -105,8 +105,8 @@ export function QRCodePanel({
               </WarmButton>
 
               {showCode && (
-                <div className="px-4 py-3 bg-[#FFF9ED] border border-[#E7DCC7] rounded-lg">
-                  <p className="text-center font-mono text-lg font-semibold text-[#2D2721]">
+                <div className="px-4 py-3 bg-[var(--bg-2)] border border-[var(--border)] rounded-lg">
+                  <p className="text-center font-mono text-lg font-semibold text-[var(--text)]">
                     {code}
                   </p>
                 </div>
@@ -115,7 +115,7 @@ export function QRCodePanel({
           )}
 
           {expiryDateObj && (
-            <div className="flex items-center justify-center gap-2 text-sm text-[#6B5744]">
+            <div className="flex items-center justify-center gap-2 text-sm text-[var(--text-muted)]">
               <Clock className="h-4 w-4" />
               <span>
                 Expires {expiryDateObj.toLocaleDateString("en-US", {
@@ -128,7 +128,7 @@ export function QRCodePanel({
           )}
 
           <div className="text-center">
-            <p className="text-xs text-[#8B7355]">Code refreshes every 30 seconds</p>
+            <p className="text-xs text-[var(--text-faint)]">Code refreshes every 30 seconds</p>
           </div>
         </div>
       </WarmCard>

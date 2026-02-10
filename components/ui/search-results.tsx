@@ -56,18 +56,18 @@ export function SearchResults({
         <button
           key={result.id}
           onClick={() => onResultClick?.(result)}
-          className="w-full text-left p-4 rounded-xl border-2 border-[#E7DCC7] bg-white hover:bg-[#FAF7F2] hover:border-[#FFC857] transition-all group"
+          className="w-full text-left p-4 rounded-xl border-2 border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-muted)] hover:border-[var(--primary)] transition-all group"
         >
           {result.category && (
-            <div className="text-xs font-medium text-[#8B7355] mb-1">
+            <div className="text-xs font-medium text-[var(--text-faint)] mb-1">
               {result.category}
             </div>
           )}
-          <div className="text-sm font-bold text-[#2D2721] mb-1 group-hover:text-[#FFC857] transition-colors">
+          <div className="text-sm font-bold text-[var(--text)] mb-1 group-hover:text-[var(--primary)] transition-colors">
             {highlightMatch(result.title, query)}
           </div>
           {result.description && (
-            <div className="text-sm text-[#6B5744] line-clamp-2">
+            <div className="text-sm text-[var(--text-muted)] line-clamp-2">
               {highlightMatch(result.description, query)}
             </div>
           )}
@@ -85,7 +85,7 @@ function highlightMatch(text: string, query?: string): React.ReactNode {
     <>
       {parts.map((part, i) =>
         part.toLowerCase() === query.toLowerCase() ? (
-          <mark key={i} className="bg-[#FFC857]/30 text-[#2D2721] font-bold">
+          <mark key={i} className="bg-[var(--primary)]/30 text-[var(--text)] font-bold">
             {part}
           </mark>
         ) : (

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+﻿import { useState } from 'react';
+import { useParams, useNavigate } from '@/lib/router-shim';
 import { WarmCard } from '@app/components/WarmCard';
 import { WarmButton } from '@app/components/WarmButton';
 import { Gift, QrCode, Share2, Copy, Check, ArrowRight, CreditCard, Calendar } from 'lucide-react';
@@ -32,7 +32,7 @@ export function GiftCardPublic() {
     validUntil: '2024-12-31',
     recipientName: 'Anna Andersson',
     message: 'Happy Holidays! Enjoy your shopping!',
-    design: 'warm' as const,
+    design: 'warm' as 'warm' | 'minimal' | 'festive',
     status: 'active' as const,
   };
 
@@ -272,3 +272,4 @@ export function GiftCardPublic() {
     </div>
   );
 }
+

@@ -8,7 +8,7 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
     './figma/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -24,57 +24,74 @@ const config = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        "input-background": "var(--input-background)",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+        /* ── Semantic tokens (CSS variable-backed) ── */
+        bg:      "var(--bg)",
+        surface: {
+          DEFAULT: "var(--surface)",
+          muted:   "var(--surface-muted)",
+          dim:     "var(--surface-dim)",
         },
+        text: {
+          DEFAULT: "var(--text)",
+          muted:   "var(--text-muted)",
+          faint:   "var(--text-faint)",
+        },
+        border:  "var(--border)",
+        ring:    "var(--ring)",
+
+        primary: {
+          DEFAULT:    "var(--primary)",
+          hover:      "var(--primary-hover)",
+          foreground: "var(--primary-foreground)",
+        },
+        accent: {
+          DEFAULT:    "var(--accent)",
+          foreground: "var(--accent-foreground)",
+        },
+
+        success: "var(--success)",
+        warning: "var(--warning)",
+        danger:  "var(--danger)",
+        info:    "var(--info)",
+
+        /* ── shadcn/ui compat (HSL bridge) ── */
+        background:  "hsl(var(--background))",
+        foreground:  "hsl(var(--foreground))",
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
+          DEFAULT:    "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
+          DEFAULT:    "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
+          DEFAULT:    "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
+          DEFAULT:    "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
+          DEFAULT:    "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        input: "hsl(var(--input))",
       },
       boxShadow: {
-        xs: "0 1px 2px rgba(0, 0, 0, 0.05)",
+        sm:  "var(--shadow-sm)",
+        md:  "var(--shadow-md)",
+        lg:  "var(--shadow-lg)",
+        xl:  "var(--shadow-xl)",
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-        button: "var(--radius-button)",
-      },
-      spacing: {
-        "4": "0.25rem",   // 4px
-        "8": "0.5rem",    // 8px
-        "12": "0.75rem",  // 12px
-        "16": "1rem",     // 16px
-        "24": "1.5rem",   // 24px
-        "32": "2rem",     // 32px
+        sm:     "var(--r-sm)",
+        md:     "var(--r-md)",
+        DEFAULT: "var(--r-md)",
+        lg:     "var(--r-lg)",
+        xl:     "var(--r-xl)",
+        full:   "var(--r-full)",
       },
       keyframes: {
         "accordion-down": {

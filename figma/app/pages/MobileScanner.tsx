@@ -172,7 +172,7 @@ export function MobileScanner() {
     if (!streamRef.current) return;
     
     const track = streamRef.current.getVideoTracks()[0];
-    const capabilities = track.getCapabilities();
+    const capabilities = track.getCapabilities() as MediaTrackCapabilities & { torch?: boolean };
     
     if (capabilities.torch) {
       try {

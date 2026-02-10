@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { getTranslations } from "next-intl/server"
 import ReferralsClient from "./referrals-client"
 
 export default async function ReferralsPage() {
@@ -8,6 +9,7 @@ export default async function ReferralsPage() {
   if (!session?.user?.id) {
     redirect("/login")
   }
+  const tReferral = await getTranslations("referral")
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
   const referralLink = `${baseUrl}/app/share`
@@ -57,11 +59,11 @@ export default async function ReferralsPage() {
       }}
       referrals={referrals.map((referral) => ({
         id: referral.id,
-        merchantName: referral.merchant?.name || "Merchant",
+        merchantName: referral.merchant?.name || tReferral("merchantLabel"),
         voucherTitle:
           (referral.voucher?.designJson as { headline?: string } | null)?.headline ||
           referral.voucher?.type ||
-          "Voucher",
+          tReferral("voucherLabel"),
         status: referral.status,
         createdAt: referral.createdAt.toISOString(),
       }))}

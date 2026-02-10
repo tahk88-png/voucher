@@ -1,17 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { captureException } from '@/lib/error-tracking';
-import { isPlatformAdmin } from '@/lib/admin';
+import { AccessControlError, accessErrorResponse, requirePlatformAdminProfile } from '@/lib/access-control';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id || !isPlatformAdmin(session.user.email)) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
+    await requirePlatformAdminProfile();
 
     const searchParams = req.nextUrl.searchParams;
     const limit = parseInt(searchParams.get('limit') || '50', 10);
@@ -60,6 +56,9 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ logs, total, limit, offset });
   } catch (error) {
+    if (error instanceof AccessControlError) {
+      return accessErrorResponse(error);
+    }
     if (error instanceof Error) {
       captureException(error, {
         context: 'admin_audit_log_fetch',

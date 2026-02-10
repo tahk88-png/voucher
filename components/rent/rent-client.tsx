@@ -114,11 +114,11 @@ export default function RentClient({
 
   return (
     <div className="space-y-6">
-      <WarmCard padding="lg" className="bg-white">
-        <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Rental dates</h2>
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Rental dates</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-1.5">
-            <label htmlFor="rental-start-date" className="text-sm font-medium text-[#2D2721]">
+            <label htmlFor="rental-start-date" className="text-sm font-medium text-[var(--text)]">
               Start date
             </label>
             <Input
@@ -129,7 +129,7 @@ export default function RentClient({
             />
           </div>
           <div className="space-y-1.5">
-            <label htmlFor="rental-end-date" className="text-sm font-medium text-[#2D2721]">
+            <label htmlFor="rental-end-date" className="text-sm font-medium text-[var(--text)]">
               End date
             </label>
             <Input
@@ -140,28 +140,28 @@ export default function RentClient({
             />
           </div>
         </div>
-        <p className="text-sm text-[#6B5744] mt-3">
+        <p className="text-sm text-[var(--text-muted)] mt-3">
           {days > 0 ? `${days} rental days selected.` : "Select dates to calculate pricing."}
         </p>
       </WarmCard>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {rentals.length === 0 ? (
-          <WarmCard padding="lg" className="bg-white col-span-full text-center">
-            <p className="text-[#6B5744]">No rentals available yet.</p>
+          <WarmCard padding="lg" className="bg-[var(--surface)] col-span-full text-center">
+            <p className="text-[var(--text-muted)]">No rentals available yet.</p>
           </WarmCard>
         ) : (
           rentals.map((item) => (
-            <WarmCard key={item.id} padding="lg" className="bg-white">
-              <p className="font-semibold text-[#2D2721]">{item.name}</p>
-              <p className="text-sm text-[#6B5744] mt-1">
+            <WarmCard key={item.id} padding="lg" className="bg-[var(--surface)]">
+              <p className="font-semibold text-[var(--text)]">{item.name}</p>
+              <p className="text-sm text-[var(--text-muted)] mt-1">
                 {item.description || "Rental highlight"}
               </p>
-              <p className="mt-3 text-[#2D2721] font-bold">
+              <p className="mt-3 text-[var(--text)] font-bold">
                 {formatCurrency(item.dailyRate, item.currency)} / day
               </p>
               {item.weeklyRate ? (
-                <p className="text-sm text-[#6B5744]">
+                <p className="text-sm text-[var(--text-muted)]">
                   Weekly: {formatCurrency(item.weeklyRate, item.currency)}
                 </p>
               ) : null}
@@ -174,12 +174,12 @@ export default function RentClient({
       </div>
 
       {selection ? (
-        <WarmCard padding="lg" className="bg-white">
-          <h3 className="text-lg font-semibold text-[#2D2721] mb-2">Selected rental</h3>
-          <p className="text-sm text-[#6B5744]">{selection.name}</p>
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
+          <h3 className="text-lg font-semibold text-[var(--text)] mb-2">Selected rental</h3>
+          <p className="text-sm text-[var(--text-muted)]">{selection.name}</p>
           <div className="mt-3 flex items-center justify-between">
-            <span className="text-sm text-[#6B5744]">Estimated total</span>
-            <span className="text-lg font-bold text-[#2D2721]">
+            <span className="text-sm text-[var(--text-muted)]">Estimated total</span>
+            <span className="text-lg font-bold text-[var(--text)]">
               {formatCurrency(total, selection.currency)}
             </span>
           </div>

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router';
+﻿import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from '@/lib/router-shim';
 import { WarmButton } from '@app/components/WarmButton';
 import { ImageWithFallback } from '@app/components/figma/ImageWithFallback';
 import { 
@@ -310,7 +310,7 @@ export function ProductDetail() {
               <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                 {activeTab === 'details' && (
                    <div className="prose prose-stone max-w-none text-[#6B5744]">
-                     <p className="lead text-lg">See on loodud nõudlikule kasutajale, kes hindab kvaliteeti.</p>
+                     <p className="lead text-lg">See on loodud nÃµudlikule kasutajale, kes hindab kvaliteeti.</p>
                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
                      <ul className="grid sm:grid-cols-2 gap-4 mt-6 list-none pl-0">
                         <li className="flex items-center gap-3 bg-[#FAF7F2] p-3 rounded-xl">
@@ -336,7 +336,7 @@ export function ProductDetail() {
                         <span className="font-bold text-[#2D2721]">350g</span>
                      </div>
                      <div className="flex justify-between py-3 border-b border-[#FAF7F2]">
-                        <span className="text-[#8B7355]">Päritolumaa</span>
+                        <span className="text-[#8B7355]">PÃ¤ritolumaa</span>
                         <span className="font-bold text-[#2D2721]">Eesti</span>
                      </div>
                   </div>
@@ -348,17 +348,17 @@ export function ProductDetail() {
                          <div className="text-4xl font-bold text-[#FFC857]">4.9</div>
                          <div>
                             <div className="flex text-[#FFC857] mb-1"><Star className="fill-current w-5 h-5" /><Star className="fill-current w-5 h-5" /><Star className="fill-current w-5 h-5" /><Star className="fill-current w-5 h-5" /><Star className="fill-current w-5 h-5" /></div>
-                            <div className="text-sm text-[#8B7355] font-bold">Põhineb 124 hinnangul</div>
+                            <div className="text-sm text-[#8B7355] font-bold">PÃµhineb 124 hinnangul</div>
                          </div>
                       </div>
                       {/* Demo Review */}
                       <div className="border-b border-[#FAF7F2] pb-6">
                          <div className="flex items-center justify-between mb-2">
                             <span className="font-bold text-[#2D2721]">Mari T.</span>
-                            <span className="text-xs text-[#8B7355]">2 päeva tagasi</span>
+                            <span className="text-xs text-[#8B7355]">2 pÃ¤eva tagasi</span>
                          </div>
                          <div className="flex text-[#FFC857] w-3 h-3 gap-0.5 mb-2"><Star className="fill-current" /><Star className="fill-current" /><Star className="fill-current" /><Star className="fill-current" /><Star className="fill-current" /></div>
-                         <p className="text-sm text-[#6B5744]">Väga rahul tootega! Värv vastas täpselt pildile ja materjal on super pehme.</p>
+                         <p className="text-sm text-[#6B5744]">VÃ¤ga rahul tootega! VÃ¤rv vastas tÃ¤pselt pildile ja materjal on super pehme.</p>
                       </div>
                    </div>
                 )}
@@ -396,7 +396,7 @@ export function ProductDetail() {
                     {/* Trust Badge instead of just name */}
                     <div className="flex items-center gap-2 text-xs font-medium text-[#8B7355] bg-[#FAF7F2] px-3 py-1.5 rounded-lg border border-[#E7DCC7]">
                        <ShieldCheck className="w-3.5 h-3.5 text-[#00D098]" />
-                       <span>Müüb: <span className="font-bold text-[#2D2721]">{product.merchantName || 'Partner'}</span></span>
+                       <span>MÃ¼Ã¼b: <span className="font-bold text-[#2D2721]">{product.merchantName || 'Partner'}</span></span>
                     </div>
                  </div>
               </div>
@@ -407,7 +407,7 @@ export function ProductDetail() {
                  {/* Color */}
                  {product.colors && product.colors.length > 0 && selectedColor && (
                     <div>
-                       <span className="text-sm font-bold text-[#2D2721] mb-3 block">Värv: <span className="text-[#8B7355] font-normal">{selectedColor.name}</span></span>
+                       <span className="text-sm font-bold text-[#2D2721] mb-3 block">VÃ¤rv: <span className="text-[#8B7355] font-normal">{selectedColor.name}</span></span>
                        <div className="flex gap-3">
                           {product.colors.map((color) => (
                              <button
@@ -501,7 +501,7 @@ export function ProductDetail() {
                  </WarmButton>
                  
                  <div className="mt-4 flex items-center justify-center gap-2 text-xs text-white/50">
-                    <Truck className="w-3 h-3" /> Tasuta tarne alates 50€
+                    <Truck className="w-3 h-3" /> Tasuta tarne alates 50â‚¬
                  </div>
               </div>
 
@@ -513,3 +513,5 @@ export function ProductDetail() {
     </div>
   );
 }
+
+

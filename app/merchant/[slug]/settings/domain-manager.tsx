@@ -87,7 +87,7 @@ export default function DomainManager({
   }
 
   return (
-    <WarmCard padding="lg" className="mb-4 bg-white border border-[#E7DCC7]">
+    <WarmCard padding="lg" className="mb-4 bg-white border border-[rgba(139,115,85,0.15)]">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-base font-semibold text-[#2D2721]">Custom domains</h2>
@@ -119,7 +119,7 @@ export default function DomainManager({
           domains.map((domain) => (
             <div
               key={domain.id}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-[#E7DCC7]/70 rounded-xl p-3"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-[rgba(139,115,85,0.15)]/70 rounded-xl p-3"
             >
               <div>
                 <p className="text-sm font-semibold text-[#2D2721]">{domain.domain}</p>

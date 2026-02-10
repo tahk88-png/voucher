@@ -32,7 +32,9 @@ export function LanguageSelector({ variant = 'default' }: LanguageSelectorProps)
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center gap-2 px-3 py-2 rounded-[12px] bg-white hover:bg-[#FFFBF5] border border-[rgba(139,115,85,0.15)] transition-all"
         >
-          <span className="text-xl">{selectedLang?.flag}</span>
+          <span className="inline-flex h-7 min-w-[2rem] items-center justify-center rounded-md border border-[#D9CBB4] bg-[#FAF7F2] px-2 text-xs font-bold text-[#2D2721]">
+            {selectedLang?.flag}
+          </span>
           <span className="text-sm font-medium text-[#2D2721] hidden sm:inline">
             {selectedLang?.code.toUpperCase()}
           </span>
@@ -57,7 +59,9 @@ export function LanguageSelector({ variant = 'default' }: LanguageSelectorProps)
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xl">{lang.flag}</span>
+                      <span className="inline-flex h-7 min-w-[2rem] items-center justify-center rounded-md border border-[#D9CBB4] bg-[#FAF7F2] px-2 text-xs font-bold text-[#2D2721]">
+                        {lang.flag}
+                      </span>
                       <div className="text-left">
                         <div className="text-sm font-medium">{lang.nativeName}</div>
                         <div className="text-xs opacity-70">{lang.name}</div>
@@ -84,7 +88,9 @@ export function LanguageSelector({ variant = 'default' }: LanguageSelectorProps)
       >
         <Globe className="h-5 w-5 text-[#FFC857]" />
         <div className="flex items-center gap-2 flex-1">
-          <span className="text-2xl">{selectedLang?.flag}</span>
+          <span className="inline-flex h-8 min-w-[2.25rem] items-center justify-center rounded-md border border-[#D9CBB4] bg-[#FAF7F2] px-2 text-xs font-bold text-[#2D2721]">
+            {selectedLang?.flag}
+          </span>
           <div className="text-left">
             <div className="text-sm font-semibold text-[#2D2721]">{selectedLang?.nativeName}</div>
             <div className="text-xs text-[#8B7355]">{selectedLang?.name}</div>
@@ -116,7 +122,9 @@ export function LanguageSelector({ variant = 'default' }: LanguageSelectorProps)
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{lang.flag}</span>
+                    <span className="inline-flex h-8 min-w-[2.25rem] items-center justify-center rounded-md border border-[#D9CBB4] bg-[#FAF7F2] px-2 text-xs font-bold text-[#2D2721]">
+                      {lang.flag}
+                    </span>
                     <div className="text-left">
                       <div className="text-sm font-semibold">{lang.nativeName}</div>
                       <div className="text-xs opacity-70">{lang.name}</div>

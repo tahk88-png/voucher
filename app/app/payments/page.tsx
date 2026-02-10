@@ -103,7 +103,7 @@ export default async function PaymentsPage() {
         ) : (
           <div className="space-y-4">
             {allPayments.map((payment) => (
-              <WarmCard key={payment.id} padding="lg" className="bg-white border border-[#E7DCC7]">
+              <WarmCard key={payment.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div className="flex items-start gap-4 flex-1">
                     <div className="p-2 rounded-[12px] bg-[#FFF9ED]">
