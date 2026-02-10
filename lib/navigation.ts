@@ -27,7 +27,15 @@ export async function getNavigationLinks({
     orderBy: [{ order: "asc" }, { createdAt: "asc" }],
   })
 
-  return links.map((link) => ({ id: link.id, label: link.label, href: link.href }))
+  // Deduplicate by href (DB may contain duplicates)
+  const seen = new Set<string>()
+  return links
+    .map((link) => ({ id: link.id, label: link.label, href: link.href }))
+    .filter((link) => {
+      if (seen.has(link.href)) return false
+      seen.add(link.href)
+      return true
+    })
 }
 
 export function getFallbackNavigation(scope: NavigationScope): {
