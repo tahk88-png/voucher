@@ -9,9 +9,7 @@ import {
   ArrowLeft,
   Globe,
   Home,
-  Megaphone,
   Ticket,
-  Calendar,
   CalendarDays,
   Gift,
   LayoutDashboard,
@@ -44,8 +42,6 @@ export function GlobalNavigation() {
     { name: 'Pakkumised', path: '/voucher', icon: Ticket },
     { name: 'Kinkekaardid', path: '/gift-cards', icon: Gift },
     { name: 'Sündmused', path: '/events', icon: CalendarDays },
-    { name: 'Kampaaniad', path: '/campaigns', icon: Megaphone },
-    { name: 'Rent', path: '/rentals', icon: Calendar },
     { name: 'Pood', path: '/shop', icon: ShoppingBag },
   ];
 
@@ -68,14 +64,14 @@ export function GlobalNavigation() {
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[#E7DCC7] shadow-sm transition-shadow">
+    <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--border)] shadow-sm transition-shadow">
       <div className="max-w-[1400px] mx-auto px-3 sm:px-4 lg:px-6">
         <div className="h-[72px] flex items-center justify-between gap-3">
           <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             {location.pathname !== '/' && (
               <button
                 onClick={() => navigate(-1)}
-                className="p-2 rounded-full hover:bg-[#FAF7F2] text-[#6B5744] transition-colors"
+                className="p-2 rounded-full hover:bg-[var(--surface-muted)] text-[var(--text-muted)] transition-colors"
                 title="Tagasi"
               >
                 <ArrowLeft className="w-5 h-5" />
@@ -90,9 +86,9 @@ export function GlobalNavigation() {
             </div>
 
             {isAuthenticated && (
-              <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#D9CBB4] bg-[#FAF7F2] text-xs font-bold text-[#4D3F31] shadow-sm">
-                <span className="w-5 h-5 rounded-full bg-white border border-[#E7DCC7] grid place-items-center">
-                  <DashboardIcon className="w-[18px] h-[18px] text-[#2D2721]" />
+              <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-[var(--surface-muted)] text-xs font-bold text-[var(--text)] shadow-sm">
+                <span className="w-5 h-5 rounded-full bg-[var(--surface)] border border-[var(--border)] grid place-items-center">
+                  <DashboardIcon className="w-[18px] h-[18px] text-[var(--text)]" />
                 </span>
                 {dashboardLabel}
               </div>
@@ -100,7 +96,7 @@ export function GlobalNavigation() {
 
             <button
               onClick={toggleLang}
-              className="hidden lg:flex items-center gap-1.5 text-xs font-bold text-[#4D3F31] px-3 py-1.5 rounded-lg border border-transparent hover:border-[#E7DCC7] hover:bg-[#FAF7F2] transition-colors"
+              className="hidden lg:flex items-center gap-1.5 text-xs font-bold text-[var(--text)] px-3 py-1.5 rounded-lg border border-transparent hover:border-[var(--border)] hover:bg-[var(--surface-muted)] transition-colors"
             >
               <Globe className="w-4 h-4" />
               {language.toUpperCase()}
@@ -109,7 +105,7 @@ export function GlobalNavigation() {
             <Button
               variant="ghost"
               size="icon"
-              className="hidden xl:flex text-[#4D3F31] border border-[#E7DCC7] bg-[#FAF7F2] hover:bg-[#FFF9ED]"
+              className="hidden xl:flex text-[var(--text)] border border-[var(--border)] bg-[var(--surface-muted)] hover:bg-[var(--bg-2)]"
             >
               <Search className="w-5 h-5" />
             </Button>
@@ -118,10 +114,10 @@ export function GlobalNavigation() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-[#4D3F31] relative border border-[#E7DCC7] bg-[#FAF7F2] hover:bg-[#FFF9ED]"
+                className="text-[var(--text)] relative border border-[var(--border)] bg-[var(--surface-muted)] hover:bg-[var(--bg-2)]"
               >
                 <ShoppingBag className="w-5 h-5" />
-                <span className="absolute top-2 right-2 w-2 h-2 bg-[#E17B5C] rounded-full border-2 border-white" />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-[var(--danger)] rounded-full border-2 border-white" />
               </Button>
             </Link>
 
@@ -130,7 +126,7 @@ export function GlobalNavigation() {
                 <button
                   type="button"
                   onClick={() => navigate(getHomeRoute())}
-                  className="hidden xl:flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[#2D2721] border border-[#E7DCC7] bg-white hover:bg-[#FAF7F2]"
+                  className="hidden xl:flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[var(--text)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-muted)]"
                 >
                   <LayoutDashboard className="w-4 h-4" />
                   Dashboard
@@ -138,7 +134,7 @@ export function GlobalNavigation() {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="hidden xl:flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[#6B5744] hover:text-[#2D2721] hover:bg-[#FAF7F2]"
+                  className="hidden xl:flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-muted)]"
                 >
                   <LogOut className="w-4 h-4" />
                   Logi välja
@@ -147,12 +143,12 @@ export function GlobalNavigation() {
             ) : (
               <>
                 <Link to="/login" className="hidden xl:block">
-                  <Button variant="ghost" className="font-semibold text-[#6B5744] hover:bg-[#FAF7F2]">
+                  <Button variant="ghost" className="font-semibold text-[var(--text-muted)] hover:bg-[var(--surface-muted)]">
                     Logi sisse
                   </Button>
                 </Link>
                 <Link to="/b2b-solutions" className="hidden xl:block">
-                  <Button className="bg-[#E17B5C] hover:bg-[#D16B4C] text-white rounded-full px-6 shadow-warm-sm hover:shadow-warm">
+                  <Button className="bg-[var(--danger)] hover:opacity-90 text-white rounded-full px-6 shadow-warm-sm hover:shadow-warm">
                     Partnerile
                   </Button>
                 </Link>
@@ -160,7 +156,7 @@ export function GlobalNavigation() {
             )}
 
             <button
-              className="md:hidden p-2 text-[#2D2721]"
+              className="md:hidden p-2 text-[var(--text)]"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={isMenuOpen ? 'Sulge menüü' : 'Ava menüü'}
               aria-expanded={isMenuOpen}
@@ -171,17 +167,17 @@ export function GlobalNavigation() {
         </div>
 
         <div className="hidden md:flex pb-3">
-          <nav className="w-full flex items-center gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden bg-white/80 border border-[#E7DCC7]/80 rounded-[18px] p-1.5 shadow-sm">
+          <nav className="w-full flex items-center gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden bg-white/80 border border-[var(--border)] rounded-[18px] p-1.5 shadow-sm">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
                 aria-current={isActive(item.path) ? 'page' : undefined}
                 className={cn(
-                  'group shrink-0 px-3 py-2 rounded-[14px] text-sm font-semibold transition-all inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2',
+                  'group shrink-0 px-3 py-2 rounded-[14px] text-sm font-semibold transition-all inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2',
                   isActive(item.path)
-                    ? 'bg-[#2D2721] text-white shadow-warm-sm'
-                    : 'text-[#4D3F31] hover:bg-[#FAF7F2] hover:text-[#2D2721]'
+                    ? 'bg-[var(--text)] text-white shadow-warm-sm'
+                    : 'text-[var(--text-muted)] hover:bg-[var(--surface-muted)] hover:text-[var(--text)]'
                 )}
               >
                 <span
@@ -189,7 +185,7 @@ export function GlobalNavigation() {
                     'w-7 h-7 rounded-full grid place-items-center border',
                     isActive(item.path)
                       ? 'border-white/20 bg-white/10 text-white'
-                      : 'border-[#D9CBB4] bg-white text-[#4D3F31] group-hover:border-[#CBB89C]'
+                      : 'border-[var(--border-strong)] bg-[var(--surface)] text-[var(--text-muted)] group-hover:border-[var(--text-faint)]'
                   )}
                 >
                   <item.icon className="w-[18px] h-[18px]" />
@@ -201,7 +197,7 @@ export function GlobalNavigation() {
         </div>
       </div>
 
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#E7DCC7] to-transparent" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--border)] to-transparent" />
 
       {isMenuOpen && (
         <>
@@ -209,7 +205,7 @@ export function GlobalNavigation() {
             className="md:hidden fixed inset-x-0 top-[72px] bottom-0 bg-black/20 backdrop-blur-sm animate-fade-in"
             onClick={() => setIsMenuOpen(false)}
           />
-          <div className="md:hidden absolute top-[72px] left-0 right-0 bg-white border-b border-[#E7DCC7] p-4 animate-fade-up shadow-xl h-[calc(100vh-72px)] overflow-y-auto">
+          <div className="md:hidden absolute top-[72px] left-0 right-0 bg-[var(--surface)] border-b border-[var(--border)] p-4 animate-fade-up shadow-xl h-[calc(100vh-72px)] overflow-y-auto">
             <nav className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <Link
@@ -218,31 +214,31 @@ export function GlobalNavigation() {
                   onClick={() => setIsMenuOpen(false)}
                   aria-current={isActive(item.path) ? 'page' : undefined}
                   className={cn(
-                    'px-4 py-3 rounded-xl text-lg font-bold transition-colors inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857] focus-visible:ring-offset-2',
-                    isActive(item.path) ? 'bg-[#FAF7F2] text-[#2D2721]' : 'text-[#6B5744]'
+                    'px-4 py-3 rounded-xl text-lg font-bold transition-colors inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2',
+                    isActive(item.path) ? 'bg-[var(--surface-muted)] text-[var(--text)]' : 'text-[var(--text-muted)]'
                   )}
                 >
-                  <span className="w-9 h-9 rounded-full bg-[#FFF9ED] border border-[#D9CBB4] grid place-items-center text-[#3B2F24]">
+                  <span className="w-9 h-9 rounded-full bg-[var(--bg-2)] border border-[var(--border-strong)] grid place-items-center text-[var(--text)]">
                     <item.icon className="w-[18px] h-[18px]" />
                   </span>
                   {item.name}
                 </Link>
               ))}
 
-              <div className="h-px bg-[#E7DCC7] my-2" />
+              <div className="h-px bg-[var(--border)] my-2" />
 
               <div className="flex items-center justify-between px-4 py-3">
-                <span className="text-[#6B5744] font-bold">Keel</span>
-                <div className="flex bg-[#FAF7F2] rounded-lg p-1 border border-[#E7DCC7]">
+                <span className="text-[var(--text-muted)] font-bold">Keel</span>
+                <div className="flex bg-[var(--surface-muted)] rounded-lg p-1 border border-[var(--border)]">
                   <button
                     onClick={() => setLanguage('et')}
-                    className={`px-3 py-1 rounded text-xs font-bold ${language === 'et' ? 'bg-white shadow-sm text-[#2D2721]' : 'text-[#8B7355]'}`}
+                    className={`px-3 py-1 rounded text-xs font-bold ${language === 'et' ? 'bg-[var(--surface)] shadow-sm text-[var(--text)]' : 'text-[var(--text-faint)]'}`}
                   >
                     ET
                   </button>
                   <button
                     onClick={() => setLanguage('en')}
-                    className={`px-3 py-1 rounded text-xs font-bold ${language === 'en' ? 'bg-white shadow-sm text-[#2D2721]' : 'text-[#8B7355]'}`}
+                    className={`px-3 py-1 rounded text-xs font-bold ${language === 'en' ? 'bg-[var(--surface)] shadow-sm text-[var(--text)]' : 'text-[var(--text-faint)]'}`}
                   >
                     EN
                   </button>
@@ -257,7 +253,7 @@ export function GlobalNavigation() {
                       navigate(getHomeRoute());
                       setIsMenuOpen(false);
                     }}
-                    className="px-4 py-3 text-[#2D2721] font-bold block hover:bg-[#FAF7F2] rounded-xl w-full text-left"
+                    className="px-4 py-3 text-[var(--text)] font-bold block hover:bg-[var(--surface-muted)] rounded-xl w-full text-left"
                   >
                     Dashboard
                   </button>
@@ -267,7 +263,7 @@ export function GlobalNavigation() {
                       handleLogout();
                       setIsMenuOpen(false);
                     }}
-                    className="px-4 py-3 text-[#E17B5C] font-bold block hover:bg-[#FAF7F2] rounded-xl w-full text-left"
+                    className="px-4 py-3 text-[var(--danger)] font-bold block hover:bg-[var(--surface-muted)] rounded-xl w-full text-left"
                   >
                     Logi välja
                   </button>
@@ -277,14 +273,14 @@ export function GlobalNavigation() {
                   <Link
                     to="/login"
                     onClick={() => setIsMenuOpen(false)}
-                    className="px-4 py-3 text-[#6B5744] font-bold block hover:bg-[#FAF7F2] rounded-xl"
+                    className="px-4 py-3 text-[var(--text-muted)] font-bold block hover:bg-[var(--surface-muted)] rounded-xl"
                   >
                     Logi sisse
                   </Link>
                   <Link
                     to="/b2b-solutions"
                     onClick={() => setIsMenuOpen(false)}
-                    className="px-4 py-3 text-[#E17B5C] font-bold mt-2"
+                    className="px-4 py-3 text-[var(--danger)] font-bold mt-2"
                   >
                     Partnerile
                   </Link>
@@ -297,4 +293,3 @@ export function GlobalNavigation() {
     </header>
   );
 }
-
