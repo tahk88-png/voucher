@@ -159,17 +159,15 @@ export type RoleRouteMap = {
 export const ROLE_ROUTE_MAP: Record<AppRole, RoleRouteMap> = {
   guest: {
     defaultLanding: "/",
-    allowedRoutes: ["/", "/campaigns", "/shop", "/rent", "/voucher", "/gift-card/:id", "/event/:id", "/login"],
+    allowedRoutes: ["/", "/campaigns", "/login"],
     navigation: [
       { label: "Campaigns", href: "/campaigns" },
-      { label: "Shop", href: "/shop" },
-      { label: "Rent", href: "/rent" },
       { label: "Login", href: "/login" },
     ],
   },
   end_user: {
     defaultLanding: "/app",
-    allowedRoutes: ["/app", "/app/referrals", "/app/wallet", "/app/notifications", "/app/settings", "/campaigns", "/shop", "/rent"],
+    allowedRoutes: ["/app", "/app/referrals", "/app/wallet", "/app/notifications", "/app/settings", "/campaigns"],
     navigation: [
       { label: "Home", href: "/app" },
       { label: "Referrals", href: "/app/referrals" },
@@ -183,15 +181,11 @@ export const ROLE_ROUTE_MAP: Record<AppRole, RoleRouteMap> = {
       "/merchant/:slug/dashboard",
       "/merchant/:slug/campaigns",
       "/merchant/:slug/vouchers",
-      "/merchant/:slug/events",
-      "/merchant/:slug/redemptions",
     ],
     navigation: [
       { label: "Dashboard", href: "/merchant/:slug/dashboard" },
       { label: "Campaigns", href: "/merchant/:slug/campaigns" },
       { label: "Vouchers", href: "/merchant/:slug/vouchers" },
-      { label: "Events", href: "/merchant/:slug/events" },
-      { label: "Redemptions", href: "/merchant/:slug/redemptions" },
     ],
   },
   tenant_owner: {
@@ -202,9 +196,6 @@ export const ROLE_ROUTE_MAP: Record<AppRole, RoleRouteMap> = {
       "/merchant/:slug/campaigns/new",
       "/merchant/:slug/vouchers",
       "/merchant/:slug/vouchers/new",
-      "/merchant/:slug/events",
-      "/merchant/:slug/events/new",
-      "/merchant/:slug/redemptions",
       "/merchant/:slug/members",
       "/merchant/:slug/page-builder",
       "/merchant/:slug/settings",
@@ -213,7 +204,6 @@ export const ROLE_ROUTE_MAP: Record<AppRole, RoleRouteMap> = {
       { label: "Dashboard", href: "/merchant/:slug/dashboard" },
       { label: "Campaigns", href: "/merchant/:slug/campaigns" },
       { label: "Vouchers", href: "/merchant/:slug/vouchers" },
-      { label: "Events", href: "/merchant/:slug/events" },
       { label: "Team", href: "/merchant/:slug/members" },
       { label: "Settings", href: "/merchant/:slug/settings" },
     ],
@@ -257,7 +247,11 @@ export function getHighestRole(roles: readonly AppRole[]): AppRole {
 export function resolveDefaultLanding(role: AppRole, merchantSlug?: string): string {
   const template = ROLE_ROUTE_MAP[role].defaultLanding;
   if (template.includes(":slug")) {
-    return template.replace(":slug", merchantSlug ?? "merchant");
+    // If no merchant slug provided, fall back to /app for tenant roles
+    if (!merchantSlug) {
+      return "/app";
+    }
+    return template.replace(":slug", merchantSlug);
   }
   return template;
 }
