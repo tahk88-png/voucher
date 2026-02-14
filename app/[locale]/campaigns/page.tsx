@@ -11,6 +11,8 @@ import { campaignCategories, fallbackCampaignCategory, getCampaignCategoryId } f
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link, routing } from "@/routing"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_NAME, getLocalePath } from "@/lib/seo"
+import { getTenantContext } from "@/lib/tenant-context"
+import { redirect } from "next/navigation"
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -78,16 +80,25 @@ export default async function CampaignsPage({
   }
   setRequestLocale(locale)
 
+  // Get tenant context for multi-tenancy isolation
+  const context = await getTenantContext()
+
   const now = new Date()
   const searchQuery = searchParams?.q?.toString().trim() || ""
   const selectedCategory = searchParams?.category || "all"
 
+  // Build where clause based on tenant context
+  const campaignWhere = {
+    status: "active",
+    startDate: { lte: now },
+    endDate: { gte: now },
+    ...(context.mode === "tenant" && context.tenant
+      ? { merchantId: context.tenant.id }
+      : {}),
+  }
+
   const campaigns = await prisma.campaign.findMany({
-    where: {
-      status: "active",
-      startDate: { lte: now },
-      endDate: { gte: now },
-    },
+    where: campaignWhere,
     include: {
       merchant: {
         select: {
