@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client"
 import crypto from "crypto"
 import { getDefaultBuilderConfig } from "../lib/page-builder"
+import { hashPassword } from "../lib/passwords"
 
 const prisma = new PrismaClient()
 
@@ -45,28 +46,168 @@ async function main() {
     },
   })
 
+  const credentials = {
+    platformAdmin: {
+      email: process.env.TEST_PLATFORM_ADMIN_EMAIL ?? "platform-admin@gifthub.local",
+      password: process.env.TEST_PLATFORM_ADMIN_PASSWORD ?? "platform123",
+      name: "Platform Admin",
+    },
+    merchantAdmin: {
+      email: process.env.TEST_ADMIN_EMAIL ?? "admin@coffee-house.com",
+      password: process.env.TEST_ADMIN_PASSWORD ?? "admin123",
+      name: "Admin User",
+    },
+    merchantStaff: {
+      email: process.env.TEST_STAFF_EMAIL ?? "staff@coffee-house.com",
+      password: process.env.TEST_STAFF_PASSWORD ?? "staff123",
+      name: "Staff User",
+    },
+    techAdmin: {
+      email: process.env.TEST_TECH_ADMIN_EMAIL ?? "admin@tech-store.com",
+      password: process.env.TEST_TECH_ADMIN_PASSWORD ?? "techadmin123",
+      name: "Tech Admin",
+    },
+    endUser: {
+      email: process.env.TEST_USER_EMAIL ?? "test@example.com",
+      password: process.env.TEST_USER_PASSWORD ?? "test123",
+      name: "Test User",
+    },
+    regularUser: {
+      email: "user@example.com",
+      password: "user123",
+      name: "Regular User",
+    },
+  }
+
+  const credentialHashes = {
+    platformAdmin: await hashPassword(credentials.platformAdmin.password),
+    merchantAdmin: await hashPassword(credentials.merchantAdmin.password),
+    merchantStaff: await hashPassword(credentials.merchantStaff.password),
+    techAdmin: await hashPassword(credentials.techAdmin.password),
+    endUser: await hashPassword(credentials.endUser.password),
+    regularUser: await hashPassword(credentials.regularUser.password),
+  }
+
+  const platformAdminUser = await prisma.user.upsert({
+    where: { email: credentials.platformAdmin.email },
+    create: {
+      email: credentials.platformAdmin.email,
+      name: credentials.platformAdmin.name,
+      passwordHash: credentialHashes.platformAdmin,
+      emailVerified: new Date(),
+      status: "active",
+    },
+    update: {
+      name: credentials.platformAdmin.name,
+      passwordHash: credentialHashes.platformAdmin,
+      emailVerified: new Date(),
+      status: "active",
+    },
+  })
+
+  // Create platform admin org and assign membership
+  const existingPlatformOrg = await prisma.organization.findFirst({
+    where: { name: "GiftHub Platform" },
+  })
+  const platformOrg = existingPlatformOrg ?? (await prisma.organization.create({
+    data: {
+      name: "GiftHub Platform",
+      type: "platform_owner",
+      status: "active",
+    },
+  }))
+
+  await prisma.orgMembership.upsert({
+    where: {
+      orgId_userId: { orgId: platformOrg.id, userId: platformAdminUser.id },
+    },
+    create: { orgId: platformOrg.id, userId: platformAdminUser.id, role: "owner" },
+    update: {},
+  })
+
   const adminUser = await prisma.user.upsert({
-    where: { email: "admin@coffee-house.com" },
-    create: { email: "admin@coffee-house.com", name: "Admin User", emailVerified: new Date() },
-    update: { name: "Admin User" },
+    where: { email: credentials.merchantAdmin.email },
+    create: {
+      email: credentials.merchantAdmin.email,
+      name: credentials.merchantAdmin.name,
+      passwordHash: credentialHashes.merchantAdmin,
+      emailVerified: new Date(),
+      status: "active",
+    },
+    update: {
+      name: credentials.merchantAdmin.name,
+      passwordHash: credentialHashes.merchantAdmin,
+      emailVerified: new Date(),
+      status: "active",
+    },
   })
 
   const staffUser = await prisma.user.upsert({
-    where: { email: "staff@coffee-house.com" },
-    create: { email: "staff@coffee-house.com", name: "Staff User", emailVerified: new Date() },
-    update: { name: "Staff User" },
+    where: { email: credentials.merchantStaff.email },
+    create: {
+      email: credentials.merchantStaff.email,
+      name: credentials.merchantStaff.name,
+      passwordHash: credentialHashes.merchantStaff,
+      emailVerified: new Date(),
+      status: "active",
+    },
+    update: {
+      name: credentials.merchantStaff.name,
+      passwordHash: credentialHashes.merchantStaff,
+      emailVerified: new Date(),
+      status: "active",
+    },
   })
 
   const merchantAdmin2 = await prisma.user.upsert({
-    where: { email: "admin@tech-store.com" },
-    create: { email: "admin@tech-store.com", name: "Tech Admin", emailVerified: new Date() },
-    update: { name: "Tech Admin" },
+    where: { email: credentials.techAdmin.email },
+    create: {
+      email: credentials.techAdmin.email,
+      name: credentials.techAdmin.name,
+      passwordHash: credentialHashes.techAdmin,
+      emailVerified: new Date(),
+      status: "active",
+    },
+    update: {
+      name: credentials.techAdmin.name,
+      passwordHash: credentialHashes.techAdmin,
+      emailVerified: new Date(),
+      status: "active",
+    },
+  })
+
+  const endUser = await prisma.user.upsert({
+    where: { email: credentials.endUser.email },
+    create: {
+      email: credentials.endUser.email,
+      name: credentials.endUser.name,
+      passwordHash: credentialHashes.endUser,
+      emailVerified: new Date(),
+      status: "active",
+    },
+    update: {
+      name: credentials.endUser.name,
+      passwordHash: credentialHashes.endUser,
+      emailVerified: new Date(),
+      status: "active",
+    },
   })
 
   const regularUser = await prisma.user.upsert({
-    where: { email: "user@example.com" },
-    create: { email: "user@example.com", name: "Regular User", emailVerified: new Date() },
-    update: { name: "Regular User" },
+    where: { email: credentials.regularUser.email },
+    create: {
+      email: credentials.regularUser.email,
+      name: credentials.regularUser.name,
+      passwordHash: credentialHashes.regularUser,
+      emailVerified: new Date(),
+      status: "active",
+    },
+    update: {
+      name: credentials.regularUser.name,
+      passwordHash: credentialHashes.regularUser,
+      emailVerified: new Date(),
+      status: "active",
+    },
   })
 
   await prisma.merchantMember.createMany({
@@ -74,6 +215,55 @@ async function main() {
       { merchantId: merchant1.id, userId: adminUser.id, role: "merchant_admin" },
       { merchantId: merchant1.id, userId: staffUser.id, role: "merchant_staff" },
       { merchantId: merchant2.id, userId: merchantAdmin2.id, role: "merchant_admin" },
+    ],
+    skipDuplicates: true,
+  })
+
+  // Create user org memberships (for platform access)
+  await prisma.orgMembership.createMany({
+    data: [
+      { orgId: platformOrg.id, userId: adminUser.id, role: "admin" },
+      { orgId: platformOrg.id, userId: staffUser.id, role: "support" },
+      { orgId: platformOrg.id, userId: merchantAdmin2.id, role: "admin" },
+      { orgId: platformOrg.id, userId: endUser.id, role: "support" },
+      { orgId: platformOrg.id, userId: regularUser.id, role: "support" },
+    ],
+    skipDuplicates: true,
+  })
+
+  // Create sample wallet credits for end users
+  await prisma.creditLedger.createMany({
+    data: [
+      {
+        merchantId: merchant1.id,
+        userId: endUser.id,
+        amount: 5000,
+        currency: "USD",
+        status: "available",
+        source: "referral_redemption",
+        sourceId: `credit_${endUser.id}_1`,
+        expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+      },
+      {
+        merchantId: merchant2.id,
+        userId: endUser.id,
+        amount: 3000,
+        currency: "GBP",
+        status: "available",
+        source: "referral_redemption",
+        sourceId: `credit_${endUser.id}_2`,
+        expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+      },
+      {
+        merchantId: merchant1.id,
+        userId: regularUser.id,
+        amount: 2500,
+        currency: "USD",
+        status: "available",
+        source: "referral_redemption",
+        sourceId: `credit_${regularUser.id}_1`,
+        expiresAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
+      },
     ],
     skipDuplicates: true,
   })
@@ -511,22 +701,67 @@ async function main() {
     skipDuplicates: true,
   })
 
+  // Create sample voucher purchases for end users
+  await prisma.voucherPurchase.createMany({
+    data: [
+      {
+        voucherId: voucher1.id,
+        campaignId: campaign1.id,
+        merchantId: merchant1.id,
+        userId: endUser.id,
+        amount: 0,
+        currency: "USD",
+        status: "paid",
+      },
+      {
+        voucherId: voucher2.id,
+        campaignId: campaign2.id,
+        merchantId: merchant1.id,
+        userId: regularUser.id,
+        amount: 500,
+        platformFeeAmount: 25,
+        currency: "USD",
+        status: "paid",
+      },
+    ],
+    skipDuplicates: true,
+  })
+
+  // Create sample redemption for end user
+  await prisma.redemption.create({
+    data: {
+      merchantId: merchant1.id,
+      voucherId: voucher1.id,
+      redeemedByUserId: endUser.id,
+      redeemedByStaffUserId: staffUser.id,
+      method: "online",
+      amountBeforeDiscount: 10000,
+      discountApplied: 1500,
+      currency: "USD",
+      confirmedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    },
+  })
+
   await prisma.referral.create({
     data: {
       voucherId: voucher1.id,
       merchantId: merchant1.id,
-      referrerUserId: regularUser.id,
+      referrerUserId: endUser.id,
       friendHash: "hashed_friend_identifier_1",
       status: "opened",
     },
   })
 
   console.log("Seeding completed.")
-  console.log("Sample credentials:")
-  console.log("  Admin: admin@coffee-house.com")
-  console.log("  Staff: staff@coffee-house.com")
-  console.log("  Tech admin: admin@tech-store.com")
-  console.log("  User: user@example.com")
+  console.log("Sample credentials (email / password):")
+  console.log(`  Platform Admin: ${credentials.platformAdmin.email} / ${credentials.platformAdmin.password}`)
+  console.log(`  Merchant Admin: ${credentials.merchantAdmin.email} / ${credentials.merchantAdmin.password}`)
+  console.log(`  Merchant Staff: ${credentials.merchantStaff.email} / ${credentials.merchantStaff.password}`)
+  console.log(`  Tech Admin: ${credentials.techAdmin.email} / ${credentials.techAdmin.password}`)
+  console.log(`  End User: ${credentials.endUser.email} / ${credentials.endUser.password}`)
+  console.log(`  Secondary User: ${credentials.regularUser.email} / ${credentials.regularUser.password}`)
+  console.log(`  Platform admin user id: ${platformAdminUser.id}`)
+  console.log(`  Secondary user id: ${regularUser.id}`)
 }
 
 main()
