@@ -5,6 +5,7 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
 ## 🔑 Login Credentials
 
 ### Platform Admin
+
 - **Email:** `platform-admin@gifthub.local`
 - **Password:** `platform123`
 - **Role:** Platform Owner
@@ -17,6 +18,7 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
   - Monitor platform health
 
 ### Merchant Admin (Coffee House)
+
 - **Email:** `admin@coffee-house.com`
 - **Password:** `admin123`
 - **Role:** Merchant Admin
@@ -35,6 +37,7 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
   - Full merchant operational control
 
 ### Merchant Staff (Coffee House)
+
 - **Email:** `staff@coffee-house.com`
 - **Password:** `staff123`
 - **Role:** Merchant Staff
@@ -51,6 +54,7 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
   - Cannot modify campaigns or billing
 
 ### Tech Admin (Tech Store)
+
 - **Email:** `admin@tech-store.com`
 - **Password:** `techadmin123`
 - **Role:** Merchant Admin
@@ -64,11 +68,12 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
   - Full merchant operational control for Tech Store
 
 ### End User (Customer)
+
 - **Email:** `test@example.com`
 - **Password:** `test123`
 - **Role:** Regular User
 - **Access:** User hub (`/app`), wallet, referrals
-- **Wallet:** 
+- **Wallet:**
   - $50.00 USD credit at Coffee House (expires in 1 year)
   - £30.00 GBP credit at Tech Store (expires in 1 year)
 - **Sample Data:**
@@ -85,6 +90,7 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
   - Share referral links
 
 ### Secondary User (Regular User)
+
 - **Email:** `user@example.com`
 - **Password:** `user123`
 - **Role:** Regular User
@@ -100,6 +106,7 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
 ## 🛍️ Test Merchants
 
 ### Coffee House ☕
+
 - **Slug:** `coffee-house`
 - **Country:** United States
 - **Currency:** USD
@@ -110,9 +117,10 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
 - **Products:** House Blend, Gift Pack
 - **Rentals:** Espresso Machine (daily/weekly rates)
 - **Domain:** `coffee-house.local`
-- **Staff:** admin@coffee-house.com, staff@coffee-house.com
+- **Staff:** `admin@coffee-house.com`, `staff@coffee-house.com`
 
 ### Tech Store 💻
+
 - **Slug:** `tech-store`
 - **Country:** United Kingdom
 - **Currency:** GBP
@@ -121,31 +129,36 @@ All demo users are fully seeded with complete profiles, proper RBAC assignments,
 - **Products:** Wireless Headphones, Smart Home Kit
 - **Rentals:** Projector Kit (daily/weekly rates)
 - **Domain:** `tech-store.local`
-- **Admin:** admin@tech-store.com
+- **Admin:** `admin@tech-store.com`
 
 ## ✅ Sample Data Included
 
 ### User Wallets
+
 - End User has earned credits through referrals
 - Secondary User has purchased vouchers
 - Both users have sample transaction history
 
 ### Campaigns & Vouchers
+
 - Coffee House has 2 active campaigns
 - Tech Store has 1 active voucher (GBP £10 credit)
 - All vouchers are published and ready to test
 
 ### Redemptions
+
 - Sample redemption in Coffee House system
 - Shows complete redemption workflow (online method)
 
 ### Referrals
+
 - Sample referral data for testing referral features
 - End user has referral history
 
 ## 🚀 Quick Start Testing
 
 ### Test Login Flow
+
 ```bash
 # Visit login page
 http://localhost:3000/login
@@ -154,18 +167,21 @@ http://localhost:3000/login
 ```
 
 ### Test Each Role
+
 1. **Platform Admin:** Login with platform admin → Visit `/admin`
 2. **Merchant Admin:** Login with Coffee House admin → Visit `/merchant/coffee-house`
 3. **Merchant Staff:** Login with staff → Visit `/merchant/coffee-house`
-4. **End User:** Login with test@example.com → Visit `/app`
+4. **End User:** Login with `test@example.com` → Visit `/app`
 
 ### Test Merchant Stores (if configured)
-- Coffee House: `http://coffee-house.local:3000` (local domain)
-- Tech Store: `http://tech-store.local:3000` (local domain)
+
+- Coffee House: [`http://coffee-house.local:3000`](http://coffee-house.local:3000) (local domain)
+- Tech Store: [`http://tech-store.local:3000`](http://tech-store.local:3000) (local domain)
 
 ## 🔧 Database Details
 
 All users have:
+
 - ✅ Valid password hashes
 - ✅ Email verified status
 - ✅ Active status
