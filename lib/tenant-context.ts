@@ -39,54 +39,58 @@ export async function resolveTenantByHost(hostHeader: string): Promise<TenantCon
     return { mode: "hub", tenant: null, host: hostHeader || "" }
   }
 
-  const custom = await prisma.domainMapping.findUnique({
-    where: { domain: hostname },
-    include: {
-      merchant: {
-        select: {
-          id: true,
-          slug: true,
-          name: true,
-          defaultCurrency: true,
-          brandLogoUrl: true,
-          brandColorsJson: true,
-          website: true,
-          supportEmail: true,
-        },
-      },
-    },
-  })
-
-  if (custom?.merchant && custom.status === "verified") {
-    return { mode: "tenant", tenant: custom.merchant, host: hostHeader }
-  }
-
   const isRoot =
     hostname === root.hostname && (!root.port || !port || root.port === port)
   if (isRoot) {
     return { mode: "hub", tenant: null, host: hostHeader }
   }
 
-  if (hostname.endsWith(`.${root.hostname}`)) {
-    const slug = hostname.slice(0, -1 * (root.hostname.length + 1))
-    if (slug) {
-      const merchant = await prisma.merchant.findUnique({
-        where: { slug },
-        select: {
-          id: true,
-          slug: true,
-          name: true,
-          defaultCurrency: true,
-          brandLogoUrl: true,
-          brandColorsJson: true,
-          website: true,
-          supportEmail: true,
+  try {
+    const custom = await prisma.domainMapping.findUnique({
+      where: { domain: hostname },
+      include: {
+        merchant: {
+          select: {
+            id: true,
+            slug: true,
+            name: true,
+            defaultCurrency: true,
+            brandLogoUrl: true,
+            brandColorsJson: true,
+            website: true,
+            supportEmail: true,
+          },
         },
-      })
-      if (merchant) {
-        return { mode: "tenant", tenant: merchant, host: hostHeader }
+      },
+    })
+
+    if (custom?.merchant && custom.status === "verified") {
+      return { mode: "tenant", tenant: custom.merchant, host: hostHeader }
+    }
+
+    if (hostname.endsWith(`.${root.hostname}`)) {
+      const slug = hostname.slice(0, -1 * (root.hostname.length + 1))
+      if (slug) {
+        const merchant = await prisma.merchant.findUnique({
+          where: { slug },
+          select: {
+            id: true,
+            slug: true,
+            name: true,
+            defaultCurrency: true,
+            brandLogoUrl: true,
+            brandColorsJson: true,
+            website: true,
+            supportEmail: true,
+          },
+        })
+        if (merchant) {
+          return { mode: "tenant", tenant: merchant, host: hostHeader }
+        }
       }
     }
+  } catch {
+    console.warn("tenant-context: database unavailable, defaulting to hub mode")
   }
 
   return { mode: "hub", tenant: null, host: hostHeader }

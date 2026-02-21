@@ -51,30 +51,30 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
 
   const valueCards = [
     {
-      icon: Ticket,
-      title: "Digital Vouchers",
-      description: "Create discount vouchers with flexible rules and QR codes",
+      icon: Users,
+      title: "Referral Engine",
+      description: "Your customers share deals and bring new customers automatically",
       color: "from-[var(--primary)] to-[var(--primary-hover)]",
       iconClass: "text-[var(--text)]",
     },
     {
-      icon: QrCode,
-      title: "QR Redemption",
-      description: "Fast scanning and validation for in-store or online use",
+      icon: Ticket,
+      title: "Digital Vouchers",
+      description: "Create discount campaigns with flexible rules in minutes",
       color: "from-[var(--success)] to-[#7FA090]",
       iconClass: "text-white",
     },
     {
-      icon: CreditCard,
-      title: "Gift Cards",
-      description: "Reloadable gift cards with balance tracking",
+      icon: QrCode,
+      title: "QR Redemption",
+      description: "Scan and validate in-store with just a phone. No hardware needed",
       color: "from-[var(--danger)] to-[#D16B4C]",
       iconClass: "text-white",
     },
     {
-      icon: Users,
-      title: "Referral Credits",
-      description: "Reward customers who bring new business",
+      icon: TrendingUp,
+      title: "Real-time Analytics",
+      description: "See exactly what each campaign costs and returns. No guesswork",
       color: "from-[#F5C98E] to-[#E5B97E]",
       iconClass: "text-[var(--text)]",
     },
@@ -83,21 +83,21 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
   const howItWorks = [
     {
       step: 1,
-      title: "Create Campaign",
-      description: "Set up your voucher campaign with custom rules, discounts, and branding",
+      title: "Create a Campaign",
+      description: "Set up a voucher in 2 minutes: discount, date range, max uses. Done.",
       icon: Sparkles,
     },
     {
       step: 2,
-      title: "Share & Promote",
-      description: "Share via link, QR code, or social media to reach your audience",
-      icon: TrendingUp,
+      title: "Customers Share It",
+      description: "Every buyer gets a referral link. They share it, earn credit, bring friends.",
+      icon: Users,
     },
     {
       step: 3,
-      title: "Track & Redeem",
-      description: "Monitor performance and process redemptions in real-time",
-      icon: Check,
+      title: "Watch It Grow",
+      description: "Track every referral chain, see your cost per new customer, measure ROI.",
+      icon: TrendingUp,
     },
   ]
 
@@ -171,14 +171,14 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
   const totalCategoryCampaigns = categories.reduce((sum, category) => sum + category.count, 0)
 
   const benefits = [
-    "Unlimited campaigns and vouchers",
-    "Real-time analytics dashboard",
-    "Fraud protection and security",
-    "Multi-currency support",
-    "Custom branding options",
-    "API access for integrations",
-    "Dedicated support team",
-    "No hidden fees",
+    "Built-in referral engine on every campaign",
+    "Real-time analytics: cost per acquisition, ROI",
+    "QR redemption — no POS hardware needed",
+    "GDPR compliant, EU-hosted",
+    "Multi-language (15 languages)",
+    "Flat SaaS fee — not 50% like Groupon",
+    "You own your customer data",
+    "5% transaction fee, no hidden costs",
   ]
 
   const heroStats = [
@@ -189,28 +189,29 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
 
   const faqs = [
     {
-      question: "How does the platform work?",
+      question: "How is this different from Groupon?",
       answer:
-        "Create campaigns with vouchers or gift cards, share them with customers via links or QR codes, and track redemptions in real-time through your dashboard.",
+        "Groupon takes 40-50% of your revenue and owns the customer relationship. We charge a flat monthly fee (from \u20ac19/mo) plus 5% on transactions. You keep your customers, your data, and your margins.",
     },
     {
-      question: "What types of vouchers can I create?",
+      question: "How does the referral system work?",
       answer:
-        "You can create percentage discounts, fixed amount discounts, buy-one-get-one offers, gift cards with balances, and event tickets.",
+        "Every customer who buys a voucher gets a unique referral link. When they share it and a friend purchases, both earn credit. Each referral chain is tracked so you see exactly how new customers find you.",
     },
     {
-      question: "Is there a setup fee?",
-      answer: "No setup fees. Start for free and only pay when you scale with our flexible pricing plans.",
+      question: "What happens after the 14-day trial?",
+      answer:
+        "You choose a plan (Starter, Pro, or Scale). If you don\u2019t subscribe, your existing published vouchers stay active for customers, but you can\u2019t create new campaigns until you subscribe.",
     },
     {
-      question: "Can I customize the look of my vouchers?",
+      question: "Do I need special hardware for QR redemption?",
       answer:
-        "Yes! Add your logo, brand colors, custom images, and personalized messaging to match your brand identity.",
+        "No. Your staff opens the mobile scanner on any phone browser, scans the customer\u2019s QR code, and it\u2019s done. No app download, no POS integration required.",
     },
     {
-      question: "How do customers redeem vouchers?",
+      question: "What is the 5% transaction fee?",
       answer:
-        "Customers can redeem via QR code scanning at your location, by entering a unique code online, or through staff validation.",
+        "When a customer purchases a voucher through the platform, we deduct 5% from the payout. This covers payment processing and platform costs. There are no other hidden fees.",
     },
   ]
 
@@ -227,19 +228,19 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-[var(--border)] mb-6">
               <Sparkles className="h-4 w-4 text-[var(--primary)]" />
-              <span className="text-sm font-medium text-[var(--text-muted)]">European SaaS Voucher Platform</span>
+              <span className="text-sm font-medium text-[var(--text-muted)]">Voucher Platform for Local Businesses</span>
             </div>
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--text)] mb-6 leading-[1.03]">
-              Turn Vouchers Into
+              Your Customers Sell
               <span className="block bg-gradient-to-r from-[var(--primary)] to-[var(--primary-hover)] bg-clip-text text-transparent">
-                Revenue Growth
+                Your Next Customers
               </span>
             </h1>
 
             <p className="text-xl sm:text-2xl text-[var(--text-muted)] mb-10 leading-relaxed max-w-3xl mx-auto">
-              Create, manage, and track digital vouchers, gift cards, and referral campaigns. All in one beautiful,
-              easy-to-use platform built for European merchants.
+              Create voucher campaigns. Your customers share them, earn credits, and bring friends.
+              Track every referral. See your exact cost per new customer.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -264,7 +265,7 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[var(--success)]" />
-                2 months free trial
+                14-day free trial
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[var(--success)]" />
@@ -513,44 +514,43 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
               name: "Starter",
               monthly: "19",
               annual: "16",
-              cta: "Get Started",
+              cta: "Start Free Trial",
               features: [
-                "Up to 1,000 vouchers/month",
-                "5 active campaigns",
+                "500 vouchers/month",
+                "3 active campaigns",
+                "2 team members",
+                "QR code redemption",
                 "Basic analytics",
-                "QR code generation",
-                "Email support",
               ],
               highlight: false,
             },
             {
-              name: "Professional",
-              monthly: "29",
-              annual: "24",
-              cta: "Get Started",
+              name: "Pro",
+              monthly: "39",
+              annual: "33",
+              cta: "Start Free Trial",
               features: [
-                "Up to 10,000 vouchers/month",
-                "Unlimited campaigns",
-                "Advanced analytics & reports",
-                "Custom branding",
-                "API access",
-                "Priority support",
+                "5,000 vouchers/month",
+                "25 active campaigns",
+                "10 team members",
+                "Advanced analytics",
+                "Custom domain",
+                "Promo boosts (email + push)",
               ],
               highlight: true,
             },
             {
-              name: "Enterprise",
-              monthly: "39",
-              annual: "33",
-              cta: "Contact Sales",
+              name: "Scale",
+              monthly: "99",
+              annual: "83",
+              cta: "Start Free Trial",
               features: [
                 "Unlimited vouchers",
                 "Unlimited campaigns",
-                "White-label solution",
-                "Multi-location support",
-                "Dedicated account manager",
-                "24/7 phone support",
-                "Custom integrations",
+                "Unlimited team members",
+                "Everything in Pro",
+                "Priority support",
+                "White-label ready",
               ],
               highlight: false,
             },
@@ -599,7 +599,7 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
 
         <div className="mt-12 text-center">
           <p className="text-[var(--text-faint)] mb-4">
-            All plans include 2 months free trial | No credit card required | Cancel anytime
+            All plans include 14-day free trial | 5% transaction fee on sales | Cancel anytime
           </p>
           <div className="flex items-center justify-center gap-6 text-sm text-[var(--text-muted)] flex-wrap">
             <div className="flex items-center gap-2">
@@ -701,9 +701,9 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
 
             <div className="relative z-10">
               <PartyPopper className="h-16 w-16 text-[var(--primary)] mx-auto mb-6" />
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to Boost Your Sales?</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Stop Renting Customers. Build Your Own Army.</h2>
               <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-                Start creating campaigns today and see the difference. No credit card required.
+                Create your first campaign in 2 minutes. Your customers do the rest. 14-day free trial.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <WarmButton size="lg" asChild>

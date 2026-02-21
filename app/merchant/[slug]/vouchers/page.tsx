@@ -64,9 +64,14 @@ export default async function VouchersListPage({ params }: { params: { slug: str
               <p className="text-sm text-[#6B5744]">Manage and create vouchers</p>
             </div>
           </div>
-          <WarmButton asChild>
-            <Link href={`/merchant/${params.slug}/vouchers/new`}>{tVoucher('create')}</Link>
-          </WarmButton>
+          <div className="flex gap-2">
+            <WarmButton asChild variant="outline">
+              <Link href={`/merchant/${params.slug}/vouchers/bulk-import`}>Bulk Import CSV</Link>
+            </WarmButton>
+            <WarmButton asChild>
+              <Link href={`/merchant/${params.slug}/vouchers/new`}>{tVoucher('create')}</Link>
+            </WarmButton>
+          </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">

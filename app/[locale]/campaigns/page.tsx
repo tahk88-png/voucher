@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Prisma } from "@prisma/client"
 import { prisma } from "@/lib/prisma"
 import Image from "next/image"
 import { formatCurrency, formatPercentage, safeParseJson } from "@/lib/utils"
@@ -6,13 +7,23 @@ import { Input } from "@/components/ui/input"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { Search, Sparkles, ShoppingBag, Ticket, Gift } from "lucide-react"
-import { isMerchantActive } from "@/lib/merchant-status"
 import { campaignCategories, fallbackCampaignCategory, getCampaignCategoryId } from "@/lib/campaign-categories"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link, routing } from "@/routing"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_NAME, getLocalePath } from "@/lib/seo"
 import { getTenantContext } from "@/lib/tenant-context"
-import { redirect } from "next/navigation"
+
+function isDatabaseUnavailableError(error: unknown): boolean {
+  if (error instanceof Prisma.PrismaClientInitializationError) {
+    return true
+  }
+
+  if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P1001") {
+    return true
+  }
+
+  return error instanceof Error && error.message.includes("Can't reach database server")
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
@@ -92,56 +103,59 @@ export default async function CampaignsPage({
     status: "active",
     startDate: { lte: now },
     endDate: { gte: now },
+    merchant: { isActive: true },
     ...(context.mode === "tenant" && context.tenant
       ? { merchantId: context.tenant.id }
       : {}),
   }
 
-  const campaigns = await prisma.campaign.findMany({
-    where: campaignWhere,
-    include: {
-      merchant: {
-        select: {
-          id: true,
-          name: true,
-          slug: true,
-          defaultCurrency: true,
-          brandLogoUrl: true,
-          brandColorsJson: true,
-        },
-      },
-      _count: {
-        select: {
-          vouchers: {
-            where: {
-              status: "published",
-              validFrom: { lte: now },
-              validTo: { gte: now },
-            },
-          },
-          purchases: {
-            where: {
-              status: "paid",
-            },
+  async function fetchCampaigns() {
+    return prisma.campaign.findMany({
+      where: campaignWhere,
+      include: {
+        merchant: {
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+            defaultCurrency: true,
+            brandLogoUrl: true,
+            brandColorsJson: true,
           },
         },
+        _count: {
+          select: {
+            vouchers: {
+              where: {
+                status: "published",
+                validFrom: { lte: now },
+                validTo: { gte: now },
+              },
+            },
+            purchases: {
+              where: {
+                status: "paid",
+              },
+            },
+          },
+        },
       },
-    },
-    orderBy: { createdAt: "desc" },
-  })
-
-  const activeCampaigns = await Promise.all(
-    campaigns.map(async (campaign) => {
-      try {
-        const isActive = await isMerchantActive(campaign.merchantId)
-        return isActive ? campaign : null
-      } catch {
-        return null
-      }
+      orderBy: { createdAt: "desc" },
     })
-  )
+  }
 
-  const filteredCampaigns = activeCampaigns.filter((c): c is NonNullable<typeof c> => c !== null)
+  let campaigns: Awaited<ReturnType<typeof fetchCampaigns>> = []
+  let databaseUnavailable = false
+
+  try {
+    campaigns = await fetchCampaigns()
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      databaseUnavailable = true
+    } else {
+      throw error
+    }
+  }
 
   const categoryLabels: Record<string, string> = {
     cafe: "Cafe and bakery",
@@ -161,7 +175,7 @@ export default async function CampaignsPage({
     { id: fallbackCampaignCategory.id, label: categoryLabels[fallbackCampaignCategory.id] || "Other" },
   ]
 
-  const visibleCampaigns = filteredCampaigns.filter((campaign) => {
+  const visibleCampaigns = campaigns.filter((campaign) => {
     const categoryId = getCampaignCategoryId({
       name: campaign.name,
       description: campaign.description,
@@ -341,10 +355,16 @@ export default async function CampaignsPage({
             <div className="w-16 h-16 rounded-full bg-[#FAF7F2] flex items-center justify-center mx-auto mb-4">
               <Sparkles className="h-8 w-8 text-[#8B7355]" />
             </div>
-            <h3 className="text-xl font-bold text-[#2D2721] mb-2">No offers found</h3>
-            <p className="text-[#6B5744] mb-6">Try a different search or choose another category.</p>
+            <h3 className="text-xl font-bold text-[#2D2721] mb-2">
+              {databaseUnavailable ? "Campaigns temporarily unavailable" : "No offers found"}
+            </h3>
+            <p className="text-[#6B5744] mb-6">
+              {databaseUnavailable
+                ? "Could not connect to the database. Please try again in a moment."
+                : "Try a different search or choose another category."}
+            </p>
             <WarmButton asChild variant="outline">
-              <Link href="/campaigns">Clear filters</Link>
+              <Link href="/campaigns">{databaseUnavailable ? "Try again" : "Clear filters"}</Link>
             </WarmButton>
           </WarmCard>
         )}

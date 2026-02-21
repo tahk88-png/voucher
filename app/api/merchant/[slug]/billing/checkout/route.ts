@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { getMerchantBillingStatus } from '@/lib/billing';
 import { stripe, isStripeConfigured } from '@/lib/stripe';
+import { getPriceIdForTier, PLAN_TIERS, type PlanTier } from '@/lib/access-control/monetization';
 
 export async function POST(
   req: NextRequest,
@@ -11,11 +12,6 @@ export async function POST(
 ) {
   if (!isStripeConfigured()) {
     return NextResponse.json({ error: 'Stripe is not configured' }, { status: 503 });
-  }
-
-  const priceId = process.env.STRIPE_SUBSCRIPTION_PRICE_ID;
-  if (!priceId) {
-    return NextResponse.json({ error: 'Missing STRIPE_SUBSCRIPTION_PRICE_ID' }, { status: 500 });
   }
 
   const session = await auth();
@@ -31,6 +27,18 @@ export async function POST(
   }
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
+
+  // Parse plan tier from request body (default: pro)
+  const body = await req.json().catch(() => ({}));
+  const planTier: PlanTier = PLAN_TIERS.includes(body.planTier) ? body.planTier : 'pro';
+
+  const priceId = getPriceIdForTier(planTier);
+  if (!priceId) {
+    return NextResponse.json(
+      { error: `No Stripe price configured for ${planTier} plan. Set STRIPE_PRICE_ID_${planTier.toUpperCase()} in env.` },
+      { status: 500 }
+    );
+  }
 
   const billing = await getMerchantBillingStatus(merchant.id);
 

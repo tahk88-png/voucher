@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { requireActiveMerchant } from '@/lib/merchant-status';
 import { checkCampaignCreationRateLimit } from '@/lib/fraud';
 import { handleError } from '@/lib/errors';
+import { CacheKeys, getCached, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 import {
   AccessControlError,
@@ -27,6 +28,8 @@ const createCampaignSchema = z.object({
   terms: z.string().optional(),
   creditPercentage: z.number().int().min(0).max(10000).nullable().optional(), // basis points (0-10000 = 0-100%)
 });
+
+const PUBLIC_CAMPAIGNS_CACHE_TTL_SECONDS = 60;
 
 export async function POST(req: NextRequest) {
   try {
@@ -79,6 +82,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Draft campaigns are not public, but invalidate to keep cache coherent if status logic changes.
+    await invalidateCache(CacheKeys.publicMerchantCampaigns(merchant.id));
+
     return NextResponse.json(campaign);
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -112,19 +118,24 @@ export async function GET(req: NextRequest) {
     }
 
     const getPublicCampaigns = () =>
-      prisma.campaign.findMany({
-        where: {
-          merchantId,
-          status: 'active',
-        },
-        include: {
-          vouchers: {
-            where: { status: 'published' },
-            take: 5,
-          },
-        },
-        orderBy: { createdAt: 'desc' },
-      });
+      getCached(
+        CacheKeys.publicMerchantCampaigns(merchantId),
+        () =>
+          prisma.campaign.findMany({
+            where: {
+              merchantId,
+              status: 'active',
+            },
+            include: {
+              vouchers: {
+                where: { status: 'published' },
+                take: 5,
+              },
+            },
+            orderBy: { createdAt: 'desc' },
+          }),
+        PUBLIC_CAMPAIGNS_CACHE_TTL_SECONDS
+      );
 
     if (!session?.user?.id) {
       return NextResponse.json(await getPublicCampaigns());

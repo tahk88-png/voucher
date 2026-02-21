@@ -6,6 +6,7 @@ import { WarmCard } from '@/components/warm-card';
 import { AuditLogPayload } from '@/types';
 import MerchantsTable from './merchants-table';
 import AuditLogView from './audit-log-view';
+import PendingMerchants from './pending-merchants';
 import { AccessControlError, requirePlatformAdminProfile } from '@/lib/access-control';
 
 export const metadata: Metadata = {
@@ -25,12 +26,35 @@ export default async function AdminPage() {
     redirect('/app');
   }
 
-  const [merchantCount, userCount, voucherCount, redemptionCount, recentAuditLogs] = await Promise.all([
+  const [
+    merchantCount,
+    userCount,
+    voucherCount,
+    redemptionCount,
+    revenueAgg,
+    feesAgg,
+    pendingMerchants,
+    recentAuditLogs,
+  ] = await Promise.all([
     prisma.merchant.count(),
     prisma.user.count(),
     prisma.voucher.count(),
     prisma.redemption.count({
       where: { confirmedAt: { not: null } },
+    }),
+    prisma.voucherPurchase.aggregate({
+      where: { status: 'paid' },
+      _sum: { amount: true },
+    }),
+    prisma.voucherPurchase.aggregate({
+      where: { status: 'paid' },
+      _sum: { platformFeeAmount: true },
+    }),
+    prisma.merchant.findMany({
+      where: { isActive: false },
+      select: { id: true, name: true, slug: true, createdAt: true },
+      orderBy: { createdAt: 'desc' },
+      take: 20,
     }),
     prisma.auditLog.findMany({
       take: 10,
@@ -54,11 +78,19 @@ export default async function AdminPage() {
     }),
   ]);
 
+  const totalRevenue = revenueAgg._sum.amount || 0;
+  const totalFees = feesAgg._sum.platformFeeAmount || 0;
+
   // Serialize dates to strings and parse payloadJson for client component
   const serializedAuditLogs = recentAuditLogs.map((log) => ({
     ...log,
     createdAt: log.createdAt.toISOString(),
     payloadJson: safeParseJson<AuditLogPayload>(log.payloadJson),
+  }));
+
+  const serializedPending = pendingMerchants.map((m) => ({
+    ...m,
+    createdAt: m.createdAt.toISOString(),
   }));
 
   return (
@@ -74,12 +106,14 @@ export default async function AdminPage() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-6">
+        <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6 mb-6">
           {[
-            { label: 'Merchants', value: merchantCount, accent: 'border-b-[#FFC857]' },
-            { label: 'Users', value: userCount, accent: 'border-b-[#9DB5A5]' },
-            { label: 'Vouchers', value: voucherCount, accent: 'border-b-[#E17B5C]' },
-            { label: 'Redemptions', value: redemptionCount, accent: 'border-b-[#F5C98E]' },
+            { label: 'Merchants', value: String(merchantCount), accent: 'border-b-[#FFC857]' },
+            { label: 'Users', value: String(userCount), accent: 'border-b-[#9DB5A5]' },
+            { label: 'Vouchers', value: String(voucherCount), accent: 'border-b-[#E17B5C]' },
+            { label: 'Redemptions', value: String(redemptionCount), accent: 'border-b-[#F5C98E]' },
+            { label: 'Revenue', value: `€${(totalRevenue / 100).toFixed(0)}`, accent: 'border-b-[#22C55E]' },
+            { label: 'Platform Fees', value: `€${(totalFees / 100).toFixed(0)}`, accent: 'border-b-[#3B82F6]' },
           ].map((stat) => (
             <WarmCard key={stat.label} padding="lg" className={`bg-white border-b-4 ${stat.accent}`}>
               <div className="text-sm font-semibold text-[#8B7355]">{stat.label}</div>
@@ -87,6 +121,13 @@ export default async function AdminPage() {
             </WarmCard>
           ))}
         </div>
+
+        {serializedPending.length > 0 && (
+          <WarmCard padding="lg" className="bg-white mb-6">
+            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Pending Merchants ({serializedPending.length})</h2>
+            <PendingMerchants merchants={serializedPending} />
+          </WarmCard>
+        )}
 
         <div className="grid gap-6 lg:grid-cols-2">
           <WarmCard padding="lg" className="bg-white">

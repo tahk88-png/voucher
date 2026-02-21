@@ -57,7 +57,7 @@ export default async function HubShell({ children }: HubShellProps) {
                 className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 bg-[var(--surface)] text-[var(--text)] font-medium text-sm rounded-[12px] border-2 border-[var(--border)] hover:border-[var(--border-strong)] hover:shadow-warm transition-all"
               >
                 <Gift className="h-4 w-4 text-[var(--primary)]" />
-                <span>Pakkumised</span>
+                <span>Kampaaniad</span>
               </Link>
               <Link
                 href="/login"

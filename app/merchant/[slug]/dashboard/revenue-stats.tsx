@@ -4,7 +4,15 @@ import { StatsCard } from "@/components/ui/stats-card"
 import { DollarSign, CreditCard, TrendingUp, AlertCircle } from "lucide-react"
 import { formatCurrency } from "@/lib/utils"
 
-async function RevenueStatsContent({ merchantId, currency }: { merchantId: string; currency: string }) {
+async function RevenueStatsContent({
+  merchantId,
+  merchantSlug,
+  currency,
+}: {
+  merchantId: string
+  merchantSlug: string
+  currency: string
+}) {
   const [
     totalCreditsIssued,
     totalRevenue,
@@ -34,7 +42,7 @@ async function RevenueStatsContent({ merchantId, currency }: { merchantId: strin
           },
         },
       },
-      include: {
+      select: {
         voucher: {
           select: { value: true },
         },
@@ -65,24 +73,32 @@ async function RevenueStatsContent({ merchantId, currency }: { merchantId: strin
         value={formatCurrency(voucherRevenue, currency)}
         description="Paid voucher sales"
         icon={DollarSign}
+        href={`/merchant/${merchantSlug}/campaigns`}
+        actionLabel="Open campaign sales"
       />
       <StatsCard
         title="Ticket Revenue"
         value={formatCurrency(ticketRevenueValue, currency)}
         description="Paid ticket sales"
         icon={TrendingUp}
+        href={`/merchant/${merchantSlug}/events`}
+        actionLabel="Open event sales"
       />
       <StatsCard
         title="Credits Issued"
         value={formatCurrency(creditsIssued, currency)}
         description="Total credits distributed"
         icon={CreditCard}
+        href={`/merchant/${merchantSlug}/referrals`}
+        actionLabel="Open referral credits"
       />
       <StatsCard
         title="Outstanding Liability"
         value={formatCurrency(outstandingLiability, currency)}
         description="Unredeemed voucher value"
         icon={AlertCircle}
+        href={`/merchant/${merchantSlug}/vouchers`}
+        actionLabel="Open voucher liability"
       />
     </div>
   )
@@ -101,10 +117,18 @@ function RevenueStatsSkeleton() {
   )
 }
 
-export function RevenueStats({ merchantId, currency }: { merchantId: string; currency: string }) {
+export function RevenueStats({
+  merchantId,
+  merchantSlug,
+  currency,
+}: {
+  merchantId: string
+  merchantSlug: string
+  currency: string
+}) {
   return (
     <Suspense fallback={<RevenueStatsSkeleton />}>
-      <RevenueStatsContent merchantId={merchantId} currency={currency} />
+      <RevenueStatsContent merchantId={merchantId} merchantSlug={merchantSlug} currency={currency} />
     </Suspense>
   )
 }

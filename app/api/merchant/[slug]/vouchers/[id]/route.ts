@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { captureException } from '@/lib/error-tracking';
 import { dispatchMerchantAnnouncement } from '@/lib/notifications';
+import { CacheKeys, invalidatePattern } from '@/lib/cache';
 import { z } from 'zod';
 
 const updateVoucherSchema = z.object({
@@ -117,6 +118,8 @@ export async function PUT(
         payloadJson: JSON.stringify({ voucherId: params.id, changes: Object.keys(updateData) }),
       },
     });
+
+    await invalidatePattern(`${CacheKeys.publicMerchantVouchers(merchant.id)}*`);
 
     return NextResponse.json(updated);
   } catch (error) {

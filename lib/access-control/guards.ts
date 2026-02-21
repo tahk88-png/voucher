@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import {
   evaluateEntitlement,
@@ -187,31 +188,62 @@ function getCycleStart(now: Date): Date {
   return new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0);
 }
 
+function isRetryableDatabaseError(error: unknown): boolean {
+  if (error instanceof Prisma.PrismaClientInitializationError) {
+    return true;
+  }
+  if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P1001") {
+    return true;
+  }
+  return error instanceof Error && error.message.includes("Can't reach database server");
+}
+
+async function runWithDatabaseRetry<T>(operation: () => Promise<T>, maxAttempts = 3): Promise<T> {
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      return await operation();
+    } catch (error) {
+      lastError = error;
+      if (!isRetryableDatabaseError(error) || attempt === maxAttempts) {
+        throw error;
+      }
+      await new Promise((resolve) => setTimeout(resolve, attempt * 150));
+    }
+  }
+
+  throw lastError;
+}
+
 async function getMerchantUsageSnapshot(merchantId: string, now: Date): Promise<MerchantUsageSnapshot> {
   const cycleStart = getCycleStart(now);
-  const [campaignsCreatedInCycle, activeCampaigns, vouchersCreatedInCycle, teamMembers] = await Promise.all([
-    prisma.campaign.count({
-      where: {
-        merchantId,
-        createdAt: { gte: cycleStart },
-      },
-    }),
-    prisma.campaign.count({
-      where: {
-        merchantId,
-        status: "active",
-      },
-    }),
-    prisma.voucher.count({
-      where: {
-        merchantId,
-        createdAt: { gte: cycleStart },
-      },
-    }),
-    prisma.merchantMember.count({
-      where: { merchantId },
-    }),
-  ]);
+  const [campaignsCreatedInCycle, activeCampaigns, vouchersCreatedInCycle, teamMembers] = await runWithDatabaseRetry(
+    () =>
+      Promise.all([
+        prisma.campaign.count({
+          where: {
+            merchantId,
+            createdAt: { gte: cycleStart },
+          },
+        }),
+        prisma.campaign.count({
+          where: {
+            merchantId,
+            status: "active",
+          },
+        }),
+        prisma.voucher.count({
+          where: {
+            merchantId,
+            createdAt: { gte: cycleStart },
+          },
+        }),
+        prisma.merchantMember.count({
+          where: { merchantId },
+        }),
+      ])
+  );
 
   return {
     campaignsCreatedInCycle,
@@ -230,19 +262,21 @@ export async function requireMerchantCapability(
   merchantSlug: string,
   capability: MonetizedCapability
 ): Promise<EntitlementDecision> {
-  const merchant = await prisma.merchant.findUnique({
-    where: { id: merchantId },
-    include: {
-      subscription: {
-        select: {
-          status: true,
-          priceId: true,
-          trialEndsAt: true,
-          currentPeriodEnd: true,
+  const merchant = await runWithDatabaseRetry(() =>
+    prisma.merchant.findUnique({
+      where: { id: merchantId },
+      include: {
+        subscription: {
+          select: {
+            status: true,
+            priceId: true,
+            trialEndsAt: true,
+            currentPeriodEnd: true,
+          },
         },
       },
-    },
-  });
+    })
+  );
 
   if (!merchant) {
     throw new AccessControlError("Merchant not found.", 404, "MERCHANT_NOT_FOUND");

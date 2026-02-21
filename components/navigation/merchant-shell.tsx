@@ -22,6 +22,8 @@ import {
   Sparkles,
   Users,
   Building2,
+  ScanLine,
+  BarChart3,
 } from "lucide-react"
 import { WarmButton } from "@/components/warm-button"
 import { cn } from "@/lib/utils"
@@ -46,7 +48,9 @@ const navItems = [
   { labelKey: "campaigns", fallback: "Campaigns", icon: Megaphone, href: (slug: string) => `/merchant/${slug}/campaigns`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "events", fallback: "Events", icon: Calendar, href: (slug: string) => `/merchant/${slug}/events`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "redemptions", fallback: "Redemptions", icon: CheckCircle, href: (slug: string) => `/merchant/${slug}/redemptions`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "scanner", fallback: "Scanner", icon: ScanLine, href: (slug: string) => `/merchant/${slug}/scanner`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "analytics", fallback: "Analytics", icon: TrendingUp, href: (slug: string) => `/merchant/${slug}/analytics`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "reports", fallback: "Reports", icon: BarChart3, href: (slug: string) => `/merchant/${slug}/reports`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "b2b", fallback: "B2B", icon: Building2, href: (_slug: string) => `/app/b2b`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "team", fallback: "Team", icon: Users, href: (slug: string) => `/merchant/${slug}/members`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "pageBuilder", fallback: "Page Builder", icon: LayoutTemplate, href: (slug: string) => `/merchant/${slug}/page-builder`, minRole: "merchant_admin" as TenantMembershipRole },

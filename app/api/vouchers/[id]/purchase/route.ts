@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { createCheckoutSession, isStripeConfigured } from '@/lib/stripe';
 import { checkPurchaseRateLimit } from '@/lib/fraud';
+import { PLATFORM_FEE_PERCENT } from '@/lib/access-control/monetization';
 import { z } from 'zod';
 
 const purchaseSchema = z.object({
@@ -72,7 +73,8 @@ export async function POST(
       }
     }
 
-    // Create purchase record
+    // Create purchase record with platform fee
+    const platformFeeAmount = Math.round((price * PLATFORM_FEE_PERCENT) / 100);
     const purchase = await prisma.voucherPurchase.create({
       data: {
         voucherId: voucher.id,
@@ -80,6 +82,7 @@ export async function POST(
         merchantId: voucher.merchantId,
         userId: session.user.id,
         amount: price,
+        platformFeeAmount,
         currency: voucher.currency,
         status: 'pending',
       },

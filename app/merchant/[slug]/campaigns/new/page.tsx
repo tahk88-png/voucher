@@ -7,6 +7,8 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
+import { parsePaywallResponse, type PaywallDetails } from '@/lib/paywall-utils';
+import PaywallModal from '@/components/billing/paywall-modal';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { useTranslations } from 'next-intl';
 
@@ -15,6 +17,8 @@ export default function NewCampaignPage() {
   const router = useRouter();
   const merchantSlug = params.slug as string;
   const [isLoading, setIsLoading] = useState(false);
+  const [paywallOpen, setPaywallOpen] = useState(false);
+  const [paywallData, setPaywallData] = useState<PaywallDetails | null>(null);
   const t = useTranslations();
   const tNav = useTranslations('nav');
 
@@ -45,14 +49,12 @@ export default function NewCampaignPage() {
 
       if (!res.ok) {
         const error = await res.json().catch(() => ({}));
-        const message = error?.error || 'Failed to create campaign';
-        const upgradePath = error?.details?.upgradePath as string | undefined;
-        if (res.status === 402 && upgradePath) {
-          showError(`${message} Redirecting to billing...`);
-          router.push(upgradePath);
+        if (res.status === 402) {
+          setPaywallData(parsePaywallResponse(error));
+          setPaywallOpen(true);
           return;
         }
-        throw new Error(message);
+        throw new Error(error?.error || 'Failed to create campaign');
       }
 
       const campaign = await res.json();
@@ -219,6 +221,19 @@ export default function NewCampaignPage() {
             </WarmButton>
           </div>
         </form>
+
+        {paywallData && (
+          <PaywallModal
+            open={paywallOpen}
+            onClose={() => setPaywallOpen(false)}
+            slug={merchantSlug}
+            message={paywallData.message}
+            currentTier={paywallData.planTier}
+            requiredPlan={paywallData.requiredPlan}
+            capability={paywallData.capability}
+            limit={paywallData.limit}
+          />
+        )}
       </div>
     </div>
   );

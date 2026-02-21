@@ -26,9 +26,9 @@ export function SubscriptionManage() {
 
   // Mock subscription data (would come from Stripe API in real app)
   const subscription = {
-    plan: 'Professional',
+    plan: 'Pro',
     status: 'active', // trialing, active, past_due, canceled
-    price: 29,
+    price: 39,
     billingPeriod: 'monthly',
     currency: 'EUR',
     currentPeriodStart: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
@@ -40,9 +40,9 @@ export function SubscriptionManage() {
     
     // Usage stats
     usage: {
-      vouchers: { used: 2847, limit: 10000 },
-      campaigns: { used: 12, limit: -1 }, // -1 = unlimited
-      users: { used: 2, limit: 3 },
+      vouchers: { used: 2847, limit: 5000 },
+      campaigns: { used: 12, limit: 25 },
+      users: { used: 2, limit: 10 },
     },
 
     // Payment method
@@ -56,9 +56,9 @@ export function SubscriptionManage() {
 
     // Billing history
     invoices: [
-      { id: 1, date: '2024-11-01', amount: 29, status: 'paid', pdf: '#' },
-      { id: 2, date: '2024-10-01', amount: 29, status: 'paid', pdf: '#' },
-      { id: 3, date: '2024-09-01', amount: 29, status: 'paid', pdf: '#' },
+      { id: 1, date: '2026-02-01', amount: 39, status: 'paid', pdf: '#' },
+      { id: 2, date: '2026-01-01', amount: 39, status: 'paid', pdf: '#' },
+      { id: 3, date: '2025-12-01', amount: 39, status: 'paid', pdf: '#' },
     ],
   };
 

@@ -1,4 +1,4 @@
-export const PLAN_TIERS = ["starter", "growth", "scale"] as const;
+export const PLAN_TIERS = ["starter", "pro", "scale"] as const;
 export type PlanTier = (typeof PLAN_TIERS)[number];
 
 export const MONETIZED_CAPABILITIES = [
@@ -37,7 +37,7 @@ const starterCapabilities: Record<MonetizedCapability, boolean> = {
   "domain.custom": false,
 };
 
-const growthCapabilities: Record<MonetizedCapability, boolean> = {
+const proCapabilities: Record<MonetizedCapability, boolean> = {
   ...starterCapabilities,
   "promotion.boost": true,
   "analytics.advanced": true,
@@ -45,41 +45,50 @@ const growthCapabilities: Record<MonetizedCapability, boolean> = {
 };
 
 const scaleCapabilities: Record<MonetizedCapability, boolean> = {
-  ...growthCapabilities,
+  ...proCapabilities,
 };
 
+/**
+ * LOCKED PRICING — matches business model decision.
+ *
+ * Starter €19/mo (€190/yr) — small local business
+ * Pro     €39/mo (€390/yr) — growing business with analytics needs
+ * Scale   €99/mo (€990/yr) — multi-location / high-volume
+ *
+ * Plus 5% transaction fee on consumer voucher purchases (see PLATFORM_FEE_PERCENT).
+ */
 export const PLAN_CATALOG: Record<PlanTier, PlanDefinition> = {
   starter: {
     id: "starter",
     label: "Starter",
-    monthlyPriceCents: 990,
-    yearlyPriceCents: 9900,
+    monthlyPriceCents: 1900,
+    yearlyPriceCents: 19000,
     limits: {
       campaignCreatesPerCycle: 5,
       activeCampaigns: 3,
-      voucherCreatesPerCycle: 200,
+      voucherCreatesPerCycle: 500,
       teamMembers: 2,
     },
     capabilities: starterCapabilities,
   },
-  growth: {
-    id: "growth",
-    label: "Growth",
-    monthlyPriceCents: 2990,
-    yearlyPriceCents: 29900,
+  pro: {
+    id: "pro",
+    label: "Pro",
+    monthlyPriceCents: 3900,
+    yearlyPriceCents: 39000,
     limits: {
       campaignCreatesPerCycle: 60,
       activeCampaigns: 25,
-      voucherCreatesPerCycle: 4000,
+      voucherCreatesPerCycle: 5000,
       teamMembers: 10,
     },
-    capabilities: growthCapabilities,
+    capabilities: proCapabilities,
   },
   scale: {
     id: "scale",
     label: "Scale",
-    monthlyPriceCents: 9990,
-    yearlyPriceCents: 99900,
+    monthlyPriceCents: 9900,
+    yearlyPriceCents: 99000,
     limits: {
       campaignCreatesPerCycle: null,
       activeCampaigns: null,
@@ -90,10 +99,16 @@ export const PLAN_CATALOG: Record<PlanTier, PlanDefinition> = {
   },
 };
 
+/**
+ * Platform transaction fee on consumer voucher purchases.
+ * Deducted from merchant payout automatically.
+ */
+export const PLATFORM_FEE_PERCENT = 5;
+
 export type MonetizationSurfaceEntry = {
   feature: string;
-  soldAs: "subscription" | "usage_limit" | "addon";
-  whoPays: "tenant";
+  soldAs: "subscription" | "usage_limit" | "transaction_fee";
+  whoPays: "tenant" | "platform_deduction";
   paymentTrigger: string;
   blockedBehavior: string;
   upgradePath: string;
@@ -130,11 +145,21 @@ export const MONETIZATION_SURFACE_MAP: readonly MonetizationSurfaceEntry[] = [
     whoPays: "tenant",
     paymentTrigger: "Capability unavailable on current plan",
     blockedBehavior: "Feature disabled with upgrade guidance",
-    upgradePath: "Merchant Settings -> Billing -> Upgrade to Growth+",
+    upgradePath: "Merchant Settings -> Billing -> Upgrade to Pro+",
+  },
+  {
+    feature: "Voucher purchase transaction fee",
+    soldAs: "transaction_fee",
+    whoPays: "platform_deduction",
+    paymentTrigger: "Consumer completes a voucher purchase via Stripe",
+    blockedBehavior: "N/A — always active, deducted from payout",
+    upgradePath: "N/A",
   },
 ];
 
-export const TRIAL_DAYS = 60;
+/** Trial: 14 days. Hard paywall after. */
+export const TRIAL_DAYS = 14;
+/** Grace period after payment failure: 7 days. */
 export const BILLING_GRACE_DAYS = 7;
 
 export type MerchantBillingSnapshot = {
@@ -184,21 +209,27 @@ function addDays(date: Date, days: number): Date {
 function getConfiguredPriceIds(): Record<PlanTier, string[]> {
   return {
     starter: [process.env.STRIPE_PRICE_ID_STARTER].filter(Boolean) as string[],
-    growth: [process.env.STRIPE_PRICE_ID_GROWTH, process.env.STRIPE_SUBSCRIPTION_PRICE_ID].filter(Boolean) as string[],
+    pro: [process.env.STRIPE_PRICE_ID_PRO, process.env.STRIPE_SUBSCRIPTION_PRICE_ID].filter(Boolean) as string[],
     scale: [process.env.STRIPE_PRICE_ID_SCALE].filter(Boolean) as string[],
   };
 }
 
-export function resolvePlanTierFromPriceId(priceId: string | null): PlanTier {
-  if (!priceId) {
-    return "growth";
-  }
+export function getPriceIdForTier(tier: PlanTier): string | null {
+  const map: Record<PlanTier, string | undefined> = {
+    starter: process.env.STRIPE_PRICE_ID_STARTER,
+    pro: process.env.STRIPE_PRICE_ID_PRO || process.env.STRIPE_SUBSCRIPTION_PRICE_ID,
+    scale: process.env.STRIPE_PRICE_ID_SCALE,
+  };
+  return map[tier] || null;
+}
 
+export function resolvePlanTierFromPriceId(priceId: string | null): PlanTier {
+  if (!priceId) return "pro";
   const configured = getConfiguredPriceIds();
   if (configured.scale.includes(priceId)) return "scale";
-  if (configured.growth.includes(priceId)) return "growth";
+  if (configured.pro.includes(priceId)) return "pro";
   if (configured.starter.includes(priceId)) return "starter";
-  return "growth";
+  return "pro";
 }
 
 export function resolveBilling(snapshot: MerchantBillingSnapshot, now: Date = new Date()): BillingResolution {
@@ -222,29 +253,14 @@ export function resolveBilling(snapshot: MerchantBillingSnapshot, now: Date = ne
     Boolean(graceCandidate && now <= graceCandidate);
 
   if (inGrace) {
-    return {
-      billingState: "grace",
-      trialEndsAt,
-      graceEndsAt: graceCandidate,
-      planTier,
-    };
+    return { billingState: "grace", trialEndsAt, graceEndsAt: graceCandidate, planTier };
   }
 
   if (inTrial) {
-    return {
-      billingState: "trial",
-      trialEndsAt,
-      graceEndsAt: null,
-      planTier: "growth",
-    };
+    return { billingState: "trial", trialEndsAt, graceEndsAt: null, planTier: "pro" };
   }
 
-  return {
-    billingState: "locked",
-    trialEndsAt,
-    graceEndsAt: graceCandidate,
-    planTier,
-  };
+  return { billingState: "locked", trialEndsAt, graceEndsAt: graceCandidate, planTier };
 }
 
 function getLimitDecision(
@@ -253,19 +269,14 @@ function getLimitDecision(
   max: number | null,
   metadata: Omit<EntitlementDecision, "allowed" | "upgradePath"> & { upgradePath: string }
 ): EntitlementDecision | null {
-  if (max === null) {
-    return null;
-  }
-  if (current < max) {
-    return null;
-  }
+  if (max === null || current < max) return null;
   return {
     allowed: false,
     billingState: metadata.billingState,
     planTier: metadata.planTier,
     code: "PAYWALL_LIMIT_REACHED",
     reason: `Plan limit reached for ${key}.`,
-    requiredPlan: metadata.planTier === "starter" ? "growth" : "scale",
+    requiredPlan: metadata.planTier === "starter" ? "pro" : "scale",
     upgradePath: metadata.upgradePath,
     limit: { key, current, max },
     graceEndsAt: metadata.graceEndsAt,
@@ -302,7 +313,7 @@ export function evaluateEntitlement(
       planTier: billing.planTier,
       code: "PAYWALL_PLAN_UPGRADE_REQUIRED",
       reason: `${plan.label} plan does not include ${capability}.`,
-      requiredPlan: billing.planTier === "starter" ? "growth" : "scale",
+      requiredPlan: billing.planTier === "starter" ? "pro" : "scale",
       upgradePath,
       graceEndsAt: billing.graceEndsAt,
     };
@@ -316,40 +327,19 @@ export function evaluateEntitlement(
   };
 
   if (capability === "campaign.create") {
-    const cycleLimit = getLimitDecision(
-      "campaignCreatesPerCycle",
-      usage.campaignsCreatedInCycle,
-      plan.limits.campaignCreatesPerCycle,
-      base
-    );
+    const cycleLimit = getLimitDecision("campaignCreatesPerCycle", usage.campaignsCreatedInCycle, plan.limits.campaignCreatesPerCycle, base);
     if (cycleLimit) return cycleLimit;
-
-    const activeLimit = getLimitDecision(
-      "activeCampaigns",
-      usage.activeCampaigns,
-      plan.limits.activeCampaigns,
-      base
-    );
+    const activeLimit = getLimitDecision("activeCampaigns", usage.activeCampaigns, plan.limits.activeCampaigns, base);
     if (activeLimit) return activeLimit;
   }
 
   if (capability === "voucher.create") {
-    const voucherLimit = getLimitDecision(
-      "voucherCreatesPerCycle",
-      usage.vouchersCreatedInCycle,
-      plan.limits.voucherCreatesPerCycle,
-      base
-    );
+    const voucherLimit = getLimitDecision("voucherCreatesPerCycle", usage.vouchersCreatedInCycle, plan.limits.voucherCreatesPerCycle, base);
     if (voucherLimit) return voucherLimit;
   }
 
   if (capability === "team.member.invite") {
-    const seatLimit = getLimitDecision(
-      "teamMembers",
-      usage.teamMembers,
-      plan.limits.teamMembers,
-      base
-    );
+    const seatLimit = getLimitDecision("teamMembers", usage.teamMembers, plan.limits.teamMembers, base);
     if (seatLimit) return seatLimit;
   }
 
@@ -361,4 +351,3 @@ export function evaluateEntitlement(
     graceEndsAt: billing.graceEndsAt,
   };
 }
-

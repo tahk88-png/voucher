@@ -3,7 +3,7 @@ import { evaluateEntitlement, resolveBilling } from '@/lib/access-control/moneti
 
 const originalEnv = {
   STRIPE_PRICE_ID_STARTER: process.env.STRIPE_PRICE_ID_STARTER,
-  STRIPE_PRICE_ID_GROWTH: process.env.STRIPE_PRICE_ID_GROWTH,
+  STRIPE_PRICE_ID_PRO: process.env.STRIPE_PRICE_ID_PRO,
   STRIPE_PRICE_ID_SCALE: process.env.STRIPE_PRICE_ID_SCALE,
   STRIPE_SUBSCRIPTION_PRICE_ID: process.env.STRIPE_SUBSCRIPTION_PRICE_ID,
 };
@@ -18,19 +18,19 @@ const baseUsage = {
 describe('access-control monetization', () => {
   beforeEach(() => {
     process.env.STRIPE_PRICE_ID_STARTER = 'price_starter';
-    process.env.STRIPE_PRICE_ID_GROWTH = 'price_growth';
+    process.env.STRIPE_PRICE_ID_PRO = 'price_pro';
     process.env.STRIPE_PRICE_ID_SCALE = 'price_scale';
-    process.env.STRIPE_SUBSCRIPTION_PRICE_ID = 'price_growth_legacy';
+    process.env.STRIPE_SUBSCRIPTION_PRICE_ID = 'price_pro_legacy';
   });
 
   afterEach(() => {
     process.env.STRIPE_PRICE_ID_STARTER = originalEnv.STRIPE_PRICE_ID_STARTER;
-    process.env.STRIPE_PRICE_ID_GROWTH = originalEnv.STRIPE_PRICE_ID_GROWTH;
+    process.env.STRIPE_PRICE_ID_PRO = originalEnv.STRIPE_PRICE_ID_PRO;
     process.env.STRIPE_PRICE_ID_SCALE = originalEnv.STRIPE_PRICE_ID_SCALE;
     process.env.STRIPE_SUBSCRIPTION_PRICE_ID = originalEnv.STRIPE_SUBSCRIPTION_PRICE_ID;
   });
 
-  it('keeps merchant in trial during free-trial window', () => {
+  it('keeps merchant in trial during 14-day free-trial window', () => {
     const billing = resolveBilling(
       {
         createdAt: new Date('2026-01-01T00:00:00Z'),
@@ -39,11 +39,26 @@ describe('access-control monetization', () => {
         trialEndsAt: null,
         currentPeriodEnd: null,
       },
-      new Date('2026-02-01T00:00:00Z')
+      new Date('2026-01-10T00:00:00Z')
     );
 
     expect(billing.billingState).toBe('trial');
-    expect(billing.planTier).toBe('growth');
+    expect(billing.planTier).toBe('pro');
+  });
+
+  it('hard blocks after 14-day trial expires', () => {
+    const billing = resolveBilling(
+      {
+        createdAt: new Date('2026-01-01T00:00:00Z'),
+        subscriptionStatus: 'inactive',
+        subscriptionPriceId: null,
+        trialEndsAt: null,
+        currentPeriodEnd: null,
+      },
+      new Date('2026-01-20T00:00:00Z')
+    );
+
+    expect(billing.billingState).toBe('locked');
   });
 
   it('hard blocks entitlement after trial expires without paid subscription', () => {
@@ -58,7 +73,7 @@ describe('access-control monetization', () => {
       },
       baseUsage,
       '/merchant/acme/settings?upgrade=campaign.create',
-      new Date('2026-04-15T00:00:00Z')
+      new Date('2026-01-20T00:00:00Z')
     );
 
     expect(decision.allowed).toBe(false);
@@ -83,16 +98,16 @@ describe('access-control monetization', () => {
 
     expect(decision.allowed).toBe(false);
     expect(decision.code).toBe('PAYWALL_PLAN_UPGRADE_REQUIRED');
-    expect(decision.requiredPlan).toBe('growth');
+    expect(decision.requiredPlan).toBe('pro');
   });
 
-  it('enforces usage limits for campaign creation', () => {
+  it('enforces usage limits for campaign creation on pro plan', () => {
     const decision = evaluateEntitlement(
       'campaign.create',
       {
         createdAt: new Date('2026-01-01T00:00:00Z'),
         subscriptionStatus: 'active',
-        subscriptionPriceId: 'price_growth',
+        subscriptionPriceId: 'price_pro',
         trialEndsAt: null,
         currentPeriodEnd: new Date('2026-03-31T00:00:00Z'),
       },

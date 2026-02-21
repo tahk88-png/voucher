@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
+import { sendVoucherDelivery } from '@/lib/emails';
 import { z } from 'zod';
 
 const grantSchema = z.object({
@@ -74,6 +75,23 @@ export async function POST(
         },
       },
     });
+
+    // Send voucher delivery email to the recipient (non-blocking)
+    const targetUser = await prisma.user.findUnique({ where: { id: targetUserId } });
+    if (targetUser?.email) {
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+      const voucherCode = voucher.id.slice(-8).toUpperCase();
+      sendVoucherDelivery({
+        to: targetUser.email,
+        merchantName: voucher.merchant.name,
+        voucherCode,
+        value: 'Free voucher',
+        validUntil: voucher.validTo
+          ? new Date(voucher.validTo).toLocaleDateString()
+          : 'No expiry',
+        voucherUrl: `${appUrl}/app/voucher/${voucher.id}`,
+      }).catch((err) => console.error('[Email] Voucher grant delivery failed:', err));
+    }
 
     return NextResponse.json({ purchase, message: 'Voucher granted successfully' });
   } catch (error) {

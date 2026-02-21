@@ -12,5 +12,5 @@ export default function middleware(req: NextRequest) {
 
 export const config = {
   // Match only i18n pathnames. /app stays unprefixed and uses cookie locale.
-  matcher: ["/(en|et|es|fr|de|fi|sv|no|da|lv|lt|pl|uk|it|ru)/:path*", "/merchant/:path*", "/admin/:path*"],
+  matcher: ["/(en|et|es|fr|de|fi|sv|no|da|lv|lt|pl|uk|it|ru)/:path*"],
 }

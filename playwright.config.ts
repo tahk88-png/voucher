@@ -3,6 +3,17 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+const playwrightHost = process.env.PLAYWRIGHT_TEST_HOST || '127.0.0.1';
+const playwrightPort = Number(process.env.PLAYWRIGHT_TEST_PORT || 3100);
+const playwrightBaseUrl =
+  process.env.PLAYWRIGHT_TEST_BASE_URL || `http://${playwrightHost}:${playwrightPort}`;
+const playwrightDatabaseUrl =
+  process.env.DATABASE_URL || 'postgresql://voucher_user:voucher_pass@localhost:5433/voucher_db';
+
+if (!process.env.PLAYWRIGHT_TEST_BASE_URL) {
+  process.env.PLAYWRIGHT_TEST_BASE_URL = playwrightBaseUrl;
+}
+
 export default defineConfig({
   testDir: './e2e',
   timeout: 90 * 1000,
@@ -22,7 +33,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000',
+    baseURL: playwrightBaseUrl,
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
@@ -57,9 +68,15 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npm run dev:clean',
-    url: 'http://localhost:3000',
+    command: `npm run dev -- --hostname ${playwrightHost} --port ${playwrightPort}`,
+    url: playwrightBaseUrl,
     reuseExistingServer: false,
     timeout: 180 * 1000,
+    env: {
+      ...process.env,
+      PLAYWRIGHT_TEST_BASE_URL: playwrightBaseUrl,
+      DATABASE_URL: playwrightDatabaseUrl,
+      NEXT_DIST_DIR: '.next-playwright',
+    },
   },
 });

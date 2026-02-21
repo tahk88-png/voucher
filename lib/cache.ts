@@ -124,6 +124,9 @@ export const CacheKeys = {
   voucher: (id: string) => `voucher:${id}`,
   merchant: (slug: string) => `merchant:${slug}`,
   merchantVouchers: (merchantId: string) => `merchant:${merchantId}:vouchers`,
+  publicMerchantVouchers: (merchantId: string) => `public:merchant:${merchantId}:vouchers`,
+  publicMerchantCampaigns: (merchantId: string) => `public:merchant:${merchantId}:campaigns`,
   campaign: (id: string) => `campaign:${id}`,
+  campaignDetails: (id: string) => `campaign:${id}:details`,
   userWallet: (userId: string, merchantId: string) => `wallet:${userId}:${merchantId}`,
 };

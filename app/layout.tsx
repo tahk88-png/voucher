@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import Providers from "@/components/providers/session-provider";
 import { Toaster } from "@/components/ui/toaster";
-import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, getBaseUrl } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, buildLocaleAlternates, getBaseUrl } from "@/lib/seo";
 
-const dmSans = DM_Sans({ subsets: ["latin"] });
 const baseUrl = getBaseUrl();
 
 export const metadata: Metadata = {
@@ -20,12 +18,18 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   manifest: "/manifest.json",
+  alternates: {
+    canonical: "/",
+    languages: buildLocaleAlternates("/"),
+  },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     url: "/",
+    locale: "en_US",
+    alternateLocale: ["et_EE", "ru_RU", "de_DE", "fr_FR", "es_ES", "fi_FI", "sv_SE"],
     images: [
       {
         url: DEFAULT_OG_IMAGE,
@@ -40,12 +44,15 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE],
+    creator: "@vouchr",
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
     title: SITE_NAME,
   },
+  keywords: ["voucher", "gift card", "referral", "cashback", "merchant rewards", "store credit"],
+  category: "ecommerce",
 };
 
 export const viewport = {
@@ -83,7 +90,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={dmSans.className}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://js.stripe.com" />
+        <link rel="dns-prefetch" href="https://api.stripe.com" />
+      </head>
+      <body>
         <Script
           id="ld-organization"
           type="application/ld+json"

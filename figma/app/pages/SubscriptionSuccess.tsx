@@ -22,12 +22,12 @@ export function SubscriptionSuccess() {
 
   // Mock subscription data (would come from Stripe webhook in real app)
   const subscription = {
-    plan: 'Professional',
+    plan: 'Pro',
     status: 'trialing',
-    price: 'â‚¬29',
+    price: '\u20ac39',
     billingPeriod: 'monthly',
-    trialEnd: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000), // 60 days from now
-    nextBillingDate: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000),
+    trialEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days
+    nextBillingDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
     certificateNumber: 'CERT-2024-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
     merchantId: 'MERCH-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
     activatedDate: new Date(),
@@ -60,7 +60,7 @@ This certifies that your business has been approved and subscribed to:
 
 Plan: ${subscription.plan}
 Status: Active (Trial Period)
-Trial Period: 60 days
+Trial Period: 14 days
 Price: ${subscription.price}/${subscription.billingPeriod}
 
 Activated: ${subscription.activatedDate.toLocaleDateString()}
@@ -137,7 +137,7 @@ Thank you for choosing our platform!
               <div>
                 <h3 className="font-semibold text-[#2D2721] mb-2">Trial Period Active</h3>
                 <p className="text-sm text-[#6B5744] mb-4">
-                  You have <strong>60 days</strong> to explore all features completely free. 
+                  You have <strong>14 days</strong> to explore all features completely free. 
                   Your card will be charged <strong>{subscription.price}</strong> on <strong>{subscription.nextBillingDate.toLocaleDateString()}</strong> unless you cancel.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">

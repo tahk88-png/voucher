@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+import { Prisma, PrismaClient } from "@prisma/client"
 import crypto from "crypto"
 import { getDefaultBuilderConfig } from "../lib/page-builder"
 import { hashPassword } from "../lib/passwords"
@@ -475,12 +475,342 @@ async function main() {
         primaryColor: "#0066CC",
         secondaryColor: "#003366",
         backgroundColor: "#F0F8FF",
-        headline: "£10 Store Credit",
+        headline: "GBP 10 Store Credit",
         finePrint: "Credit expires 60 days after redemption",
       },
       codePrefix: "TS",
     },
   })
+
+  type CampaignSeedTemplate = {
+    merchantId: string
+    currency: string
+    name: string
+    description: string
+    type: "weekly" | "limited"
+    status: "draft" | "active" | "ended"
+    startOffsetDays: number
+    durationDays: number
+    price: number
+    discountType: "percentage" | "fixed_amount" | "credit_amount"
+    discountValue: number
+    voucherType: "percentage" | "fixed_amount" | "credit_amount"
+    voucherValue: number
+    usageLimitTotal: number
+    usageLimitPerUser: number
+    creditPercentage: number
+    codePrefix: string
+    colorPrimary: string
+    colorSecondary: string
+    colorBackground: string
+    terms: string
+    weeklyDropJson?: {
+      dayOfWeek: number
+      startTime: string
+      stock: number
+      durationMinutes: number
+    }
+  }
+
+  const dayMs = 24 * 60 * 60 * 1000
+  const campaignTemplates: CampaignSeedTemplate[] = [
+    {
+      merchantId: merchant1.id,
+      currency: "USD",
+      name: "Coffee Brunch Bundle",
+      description: "Cafe combo for coffee and bakery lovers.",
+      type: "limited",
+      status: "active",
+      startOffsetDays: -3,
+      durationDays: 45,
+      price: 1299,
+      discountType: "fixed_amount",
+      discountValue: 400,
+      voucherType: "fixed_amount",
+      voucherValue: 400,
+      usageLimitTotal: 160,
+      usageLimitPerUser: 2,
+      creditPercentage: 700,
+      codePrefix: "CAFE",
+      colorPrimary: "#7B4F2C",
+      colorSecondary: "#D99B5F",
+      colorBackground: "#FFF3E4",
+      terms: "Valid on brunch menu items from 08:00-14:00.",
+    },
+    {
+      merchantId: merchant1.id,
+      currency: "USD",
+      name: "Beauty and Wellness Reset",
+      description: "Spa and massage package for beauty and wellness.",
+      type: "limited",
+      status: "active",
+      startOffsetDays: -1,
+      durationDays: 60,
+      price: 4900,
+      discountType: "fixed_amount",
+      discountValue: 1200,
+      voucherType: "fixed_amount",
+      voucherValue: 1200,
+      usageLimitTotal: 90,
+      usageLimitPerUser: 1,
+      creditPercentage: 1200,
+      codePrefix: "BEAUTY",
+      colorPrimary: "#B86B77",
+      colorSecondary: "#E8A9B5",
+      colorBackground: "#FFF1F4",
+      terms: "Reservation required 24h in advance.",
+    },
+    {
+      merchantId: merchant1.id,
+      currency: "USD",
+      name: "Family Kids Birthday Pass",
+      description: "Family and kids package for birthday play sessions.",
+      type: "limited",
+      status: "active",
+      startOffsetDays: -5,
+      durationDays: 40,
+      price: 2999,
+      discountType: "percentage",
+      discountValue: 20,
+      voucherType: "percentage",
+      voucherValue: 2000,
+      usageLimitTotal: 140,
+      usageLimitPerUser: 1,
+      creditPercentage: 900,
+      codePrefix: "FAMILY",
+      colorPrimary: "#6A8F4E",
+      colorSecondary: "#B9D88A",
+      colorBackground: "#F4FFE9",
+      terms: "Includes one free kids drink.",
+    },
+    {
+      merchantId: merchant1.id,
+      currency: "USD",
+      name: "Outdoor Adventure Weekend",
+      description: "Outdoor hike and trail snack partner offer.",
+      type: "weekly",
+      status: "active",
+      startOffsetDays: -7,
+      durationDays: 84,
+      price: 1500,
+      discountType: "fixed_amount",
+      discountValue: 500,
+      voucherType: "fixed_amount",
+      voucherValue: 500,
+      usageLimitTotal: 100,
+      usageLimitPerUser: 1,
+      creditPercentage: 1000,
+      codePrefix: "OUTDOOR",
+      colorPrimary: "#3E6D54",
+      colorSecondary: "#86BC9E",
+      colorBackground: "#ECFFF4",
+      terms: "Redeemable only on Saturdays and Sundays.",
+      weeklyDropJson: {
+        dayOfWeek: 6,
+        startTime: "09:00",
+        stock: 30,
+        durationMinutes: 90,
+      },
+    },
+    {
+      merchantId: merchant2.id,
+      currency: "GBP",
+      name: "Fitness and Sport Pro Pack",
+      description: "Gym and fitness accessories with training credit.",
+      type: "limited",
+      status: "active",
+      startOffsetDays: -2,
+      durationDays: 50,
+      price: 4500,
+      discountType: "percentage",
+      discountValue: 18,
+      voucherType: "percentage",
+      voucherValue: 1800,
+      usageLimitTotal: 130,
+      usageLimitPerUser: 2,
+      creditPercentage: 1100,
+      codePrefix: "FIT",
+      colorPrimary: "#245C9D",
+      colorSecondary: "#78A8DE",
+      colorBackground: "#EFF7FF",
+      terms: "Applies to fitness tagged products only.",
+    },
+    {
+      merchantId: merchant2.id,
+      currency: "GBP",
+      name: "Live Concert Ticket Drop",
+      description: "Events and ticket bundle with limited seats.",
+      type: "weekly",
+      status: "active",
+      startOffsetDays: -6,
+      durationDays: 70,
+      price: 3500,
+      discountType: "fixed_amount",
+      discountValue: 900,
+      voucherType: "fixed_amount",
+      voucherValue: 900,
+      usageLimitTotal: 120,
+      usageLimitPerUser: 1,
+      creditPercentage: 800,
+      codePrefix: "EVENT",
+      colorPrimary: "#3E3B8E",
+      colorSecondary: "#8A84E2",
+      colorBackground: "#F1F0FF",
+      terms: "Limited seats per drop. First come first served.",
+      weeklyDropJson: {
+        dayOfWeek: 4,
+        startTime: "12:00",
+        stock: 25,
+        durationMinutes: 75,
+      },
+    },
+    {
+      merchantId: merchant2.id,
+      currency: "GBP",
+      name: "Workshop Masterclass Access",
+      description: "Workshop and class access for creators and teams.",
+      type: "limited",
+      status: "active",
+      startOffsetDays: 1,
+      durationDays: 30,
+      price: 2000,
+      discountType: "fixed_amount",
+      discountValue: 600,
+      voucherType: "fixed_amount",
+      voucherValue: 600,
+      usageLimitTotal: 80,
+      usageLimitPerUser: 1,
+      creditPercentage: 600,
+      codePrefix: "WORK",
+      colorPrimary: "#5A5A5A",
+      colorSecondary: "#B9B9B9",
+      colorBackground: "#FAFAFA",
+      terms: "Seats are confirmed only after purchase.",
+    },
+    {
+      merchantId: merchant2.id,
+      currency: "GBP",
+      name: "Travel and Stay Explorer",
+      description: "Travel and hotel partner bundle for weekend trips.",
+      type: "limited",
+      status: "active",
+      startOffsetDays: -4,
+      durationDays: 90,
+      price: 7900,
+      discountType: "fixed_amount",
+      discountValue: 1500,
+      voucherType: "fixed_amount",
+      voucherValue: 1500,
+      usageLimitTotal: 70,
+      usageLimitPerUser: 1,
+      creditPercentage: 1300,
+      codePrefix: "TRAVEL",
+      colorPrimary: "#1B5D72",
+      colorSecondary: "#7BC6D8",
+      colorBackground: "#ECFAFF",
+      terms: "Subject to partner inventory availability.",
+    },
+    {
+      merchantId: merchant2.id,
+      currency: "GBP",
+      name: "Draft Fitness Preview",
+      description: "Upcoming fitness campaign preview for early planning.",
+      type: "limited",
+      status: "draft",
+      startOffsetDays: 7,
+      durationDays: 35,
+      price: 4200,
+      discountType: "percentage",
+      discountValue: 15,
+      voucherType: "percentage",
+      voucherValue: 1500,
+      usageLimitTotal: 60,
+      usageLimitPerUser: 1,
+      creditPercentage: 500,
+      codePrefix: "DRAFTFIT",
+      colorPrimary: "#2E5F7E",
+      colorSecondary: "#89BDD9",
+      colorBackground: "#F1F8FD",
+      terms: "Draft campaign not publicly visible.",
+    },
+    {
+      merchantId: merchant1.id,
+      currency: "USD",
+      name: "Winter Event Archive",
+      description: "Event and ticket campaign already finished.",
+      type: "limited",
+      status: "ended",
+      startOffsetDays: -60,
+      durationDays: 20,
+      price: 1800,
+      discountType: "fixed_amount",
+      discountValue: 300,
+      voucherType: "fixed_amount",
+      voucherValue: 300,
+      usageLimitTotal: 75,
+      usageLimitPerUser: 1,
+      creditPercentage: 400,
+      codePrefix: "ENDED",
+      colorPrimary: "#8F6A46",
+      colorSecondary: "#CFB094",
+      colorBackground: "#FFF7EF",
+      terms: "Ended campaign for historical dashboard data.",
+    },
+  ]
+
+  for (const template of campaignTemplates) {
+    const startDate = new Date(Date.now() + template.startOffsetDays * dayMs)
+    const endDate = new Date(startDate.getTime() + template.durationDays * dayMs)
+    const voucherStatus = template.status === "active" ? "published" : template.status
+
+    const campaign = await prisma.campaign.create({
+      data: {
+        merchantId: template.merchantId,
+        name: template.name,
+        description: template.description,
+        type: template.type,
+        startDate,
+        endDate,
+        price: template.price,
+        discountRules: {
+          type: template.discountType,
+          value: template.discountValue,
+          currency: template.currency,
+        },
+        maxRedemptions: template.usageLimitTotal,
+        maxPurchases: Math.max(template.usageLimitTotal, template.usageLimitTotal + 40),
+        terms: template.terms,
+        creditPercentage: template.creditPercentage,
+        status: template.status,
+      },
+    })
+
+    await prisma.voucher.create({
+      data: {
+        merchantId: template.merchantId,
+        campaignId: campaign.id,
+        status: voucherStatus,
+        type: template.voucherType,
+        value: template.voucherValue,
+        currency: template.currency,
+        validFrom: startDate,
+        validTo: endDate,
+        usageLimitTotal: template.usageLimitTotal,
+        usageLimitPerUser: template.usageLimitPerUser,
+        weeklyDropEnabled: Boolean(template.weeklyDropJson),
+        weeklyDropJson: template.weeklyDropJson ?? Prisma.DbNull,
+        designJson: {
+          logo: null,
+          primaryColor: template.colorPrimary,
+          secondaryColor: template.colorSecondary,
+          backgroundColor: template.colorBackground,
+          headline: template.name,
+          finePrint: template.terms,
+        },
+        codePrefix: template.codePrefix,
+      },
+    })
+  }
 
   await prisma.product.createMany({
     data: [
@@ -764,7 +1094,35 @@ async function main() {
   console.log(`  Secondary user id: ${regularUser.id}`)
 }
 
-main()
+function isRetryableDatabaseError(error: unknown): boolean {
+  if (!(error instanceof Error)) {
+    return false
+  }
+  return error.message.includes("Can't reach database server") || error.message.includes("P1001")
+}
+
+async function runSeedWithRetry(maxAttempts = 5) {
+  let lastError: unknown = null
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      await main()
+      return
+    } catch (error) {
+      lastError = error
+      if (!isRetryableDatabaseError(error) || attempt === maxAttempts) {
+        throw error
+      }
+      const waitMs = attempt * 1000
+      console.warn(`Database not ready (attempt ${attempt}/${maxAttempts}). Retrying in ${waitMs}ms...`)
+      await new Promise((resolve) => setTimeout(resolve, waitMs))
+    }
+  }
+
+  throw lastError
+}
+
+runSeedWithRetry()
   .catch((error) => {
     console.error("Seeding failed:", error)
     process.exit(1)

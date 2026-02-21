@@ -29,6 +29,14 @@ import {
   WeeklyCampaignDigestEmail,
   weeklyCampaignDigestText,
 } from '@/templates/emails/weekly-campaign-digest';
+import {
+  RedemptionConfirmation,
+  redemptionConfirmationText,
+} from '@/templates/emails/redemption-confirmation';
+import {
+  VoucherExpiryReminder,
+  voucherExpiryReminderText,
+} from '@/templates/emails/voucher-expiry-reminder';
 
 // Dynamic import for react-dom/server to avoid client-side bundling
 let renderToString: typeof import('react-dom/server').renderToString;
@@ -334,6 +342,36 @@ export async function sendMerchantAnnouncement(params: {
 }
 
 /**
+ * Send redemption confirmation email to user
+ */
+export async function sendRedemptionConfirmation(params: {
+  to: string;
+  merchantName: string;
+  voucherName: string;
+  redeemedAt: string;
+  voucherUrl: string;
+}): Promise<void> {
+  if (!isResendConfigured()) {
+    console.warn('[Email] Resend not configured, skipping redemption confirmation email');
+    return;
+  }
+
+  if (!renderToString) {
+    renderToString = require('react-dom/server').renderToString;
+  }
+  const html = renderToString(React.createElement(RedemptionConfirmation, params));
+  const text = redemptionConfirmationText(params);
+
+  await sendEmail({
+    to: params.to,
+    subject: `Voucher redeemed at ${params.merchantName}`,
+    html: `<!DOCTYPE html><html><body>${html}</body></html>`,
+    text,
+    tags: [{ name: 'type', value: 'redemption_confirmation' }],
+  });
+}
+
+/**
  * Send weekly campaign digest email
  */
 export async function sendWeeklyCampaignDigest(params: {
@@ -366,5 +404,39 @@ export async function sendWeeklyCampaignDigest(params: {
     html: `<!DOCTYPE html><html><body>${html}</body></html>`,
     text,
     tags: [{ name: 'type', value: 'weekly_campaign_digest' }],
+  });
+}
+
+/**
+ * Send voucher expiry reminder email
+ */
+export async function sendVoucherExpiryReminder(params: {
+  to: string;
+  merchantName: string;
+  voucherName: string;
+  daysUntilExpiry: number;
+  voucherUrl: string;
+}): Promise<void> {
+  if (!isResendConfigured()) {
+    console.warn('[Email] Resend not configured, skipping voucher expiry reminder');
+    return;
+  }
+
+  if (!renderToString) {
+    renderToString = require('react-dom/server').renderToString;
+  }
+  const html = renderToString(React.createElement(VoucherExpiryReminder, params));
+  const text = voucherExpiryReminderText(params);
+
+  const urgencyText = params.daysUntilExpiry === 1
+    ? 'expires tomorrow'
+    : `expires in ${params.daysUntilExpiry} days`;
+
+  await sendEmail({
+    to: params.to,
+    subject: `Your ${params.merchantName} voucher ${urgencyText}`,
+    html: `<!DOCTYPE html><html><body>${html}</body></html>`,
+    text,
+    tags: [{ name: 'type', value: 'voucher_expiry_reminder' }],
   });
 }

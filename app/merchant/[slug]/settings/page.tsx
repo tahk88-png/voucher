@@ -10,8 +10,10 @@ import { WarmCard } from '@/components/warm-card';
 import BrandProfileEditor from './brand-profile-editor';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { getTranslations } from 'next-intl/server';
-import { StartSubscriptionButton, ManageBillingButton } from '@/components/billing-actions';
+import { ManageBillingButton } from '@/components/billing-actions';
+import PlanSelector from '@/components/billing/plan-selector';
 import DomainManager from './domain-manager';
+import { Webhook } from 'lucide-react';
 
 export default async function SettingsPage({ params }: { params: { slug: string } }) {
   const session = await auth();
@@ -131,36 +133,63 @@ export default async function SettingsPage({ params }: { params: { slug: string 
           <div>
             <h2 className="text-base font-semibold text-[#2D2721]">Billing</h2>
             <p className="text-sm text-[#6B5744]">
-              Campaign creation is free for 60 days, then 9.90/month.
+              14-day free trial, then plans from &euro;19/month. 5% transaction fee on voucher sales.
             </p>
           </div>
           <div className="space-y-4 mt-4">
-            <div>
-              <p className="text-sm font-medium text-[#2D2721]">Status</p>
-              <p className="text-[#6B5744]">{billingStatusLabel}</p>
-            </div>
-            {trialEndsAt && billing.inTrial ? (
+            <div className="flex flex-wrap gap-4">
               <div>
-                <p className="text-sm font-medium text-[#2D2721]">Trial ends</p>
-                <p className="text-[#6B5744]">{trialEndsAt}</p>
+                <p className="text-sm font-medium text-[#2D2721]">Status</p>
+                <p className="text-[#6B5744]">{billingStatusLabel}</p>
               </div>
-            ) : null}
-            {periodEndsAt && billing.active ? (
               <div>
-                <p className="text-sm font-medium text-[#2D2721]">Current period ends</p>
-                <p className="text-[#6B5744]">{periodEndsAt}</p>
+                <p className="text-sm font-medium text-[#2D2721]">Current plan</p>
+                <p className="text-[#6B5744]">{billing.plan.label}</p>
               </div>
-            ) : null}
-            <div className="flex flex-wrap gap-2">
-              {!billing.active ? <StartSubscriptionButton slug={params.slug} /> : null}
-              {billing.active || billing.stripeCustomerId ? (
-                <ManageBillingButton slug={params.slug} />
+              {trialEndsAt && billing.inTrial ? (
+                <div>
+                  <p className="text-sm font-medium text-[#2D2721]">Trial ends</p>
+                  <p className="text-[#6B5744]">{trialEndsAt}</p>
+                </div>
+              ) : null}
+              {periodEndsAt && billing.active ? (
+                <div>
+                  <p className="text-sm font-medium text-[#2D2721]">Current period ends</p>
+                  <p className="text-[#6B5744]">{periodEndsAt}</p>
+                </div>
               ) : null}
             </div>
+            {billing.active && billing.stripeCustomerId ? (
+              <ManageBillingButton slug={params.slug} />
+            ) : null}
           </div>
+
+          <PlanSelector
+            slug={params.slug}
+            currentTier={billing.planTier}
+            billingState={billing.billingState}
+            hasStripeCustomer={!!billing.stripeCustomerId}
+          />
         </WarmCard>
 
         <DomainManager merchantSlug={merchant.slug} initialDomains={domainPayload} />
+
+        <WarmCard padding="lg" className="mb-4 bg-white border border-[rgba(139,115,85,0.15)]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-[12px] bg-[#FFF9ED] flex items-center justify-center">
+                <Webhook className="h-5 w-5 text-[#8B7355]" />
+              </div>
+              <div>
+                <h2 className="text-base font-semibold text-[#2D2721]">Webhooks</h2>
+                <p className="text-sm text-[#6B5744]">Receive real-time event notifications via HTTP</p>
+              </div>
+            </div>
+            <WarmButton asChild size="sm" variant="outline">
+              <Link href={`/merchant/${params.slug}/settings/webhooks`}>Manage</Link>
+            </WarmButton>
+          </div>
+        </WarmCard>
 
         <BrandProfileEditor merchant={merchant} brandColors={brandColors} />
       </div>

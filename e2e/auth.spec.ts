@@ -1,57 +1,75 @@
 import { test, expect } from './fixtures';
+import type { Page } from '@playwright/test';
+
+const TEST_EMAIL = process.env.TEST_USER_EMAIL || 'test@example.com';
+const TEST_PASSWORD = process.env.TEST_USER_PASSWORD || 'test123';
+const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:3100';
+
+async function loginWithCredentials(page: Page, email: string, password: string, callbackPath = '/app/entry') {
+  const csrfResponse = await page.request.get('/api/auth/csrf');
+  expect(csrfResponse.ok()).toBeTruthy();
+
+  const csrfBody = (await csrfResponse.json()) as { csrfToken?: string };
+  if (!csrfBody.csrfToken) {
+    throw new Error('Missing CSRF token from /api/auth/csrf');
+  }
+
+  const signInResponse = await page.request.post('/api/auth/callback/credentials', {
+    form: {
+      csrfToken: csrfBody.csrfToken,
+      email,
+      password,
+      callbackUrl: `${BASE_URL}${callbackPath}`,
+      json: 'true',
+    },
+  });
+
+  if (signInResponse.status() >= 400) {
+    const responseBody = await signInResponse.text();
+    throw new Error(`Credentials sign-in failed (${signInResponse.status()}): ${responseBody.slice(0, 200)}`);
+  }
+
+  await page.goto(callbackPath, { waitUntil: 'domcontentloaded' });
+  await page.waitForURL((url) => !url.pathname.startsWith('/login'), { timeout: 15000 });
+}
 
 test.describe('Authentication', () => {
   test('should display login page', async ({ page }) => {
     await page.goto('/login', { waitUntil: 'domcontentloaded' });
-    
-    // Verify login form is visible
-    await expect(page.locator('form')).toBeVisible({ timeout: 5000 });
-    
-    // Verify email input
-    const emailInput = page.locator('input[type="email"]');
-    await expect(emailInput).toBeVisible();
 
-    // Verify submit action exists for passwordless flow
-    await expect(page.locator('button[type="submit"]').first()).toBeVisible();
+    await expect(page.locator('form')).toBeVisible({ timeout: 5000 });
+    await expect(page.locator('#cred-email')).toBeVisible();
+    await expect(page.locator('#cred-password')).toBeVisible();
+    await expect(page.locator('button[type="submit"]')).toBeVisible();
   });
 
   test('should allow navigation to login from home', async ({ page }) => {
     await page.goto('/', { waitUntil: 'domcontentloaded' });
-    
-    // Find and click login link
-    const loginLink = page
-      .locator('a[href*="login"], button:has-text("Login"), button:has-text("Sign in"), button:has-text("Logi sisse")')
-      .first();
-    if (await loginLink.isVisible({ timeout: 2000 })) {
-      await loginLink.click();
-      await expect(page).toHaveURL(/.*login/, { timeout: 5000 });
-    }
+
+    const loginLink = page.locator('a[href="/login"]').first();
+    await expect(loginLink).toBeVisible();
+
+    const loginHref = await loginLink.getAttribute('href');
+    expect(loginHref).toBe('/login');
+
+    await page.goto(loginHref ?? '/login', { waitUntil: 'domcontentloaded' });
+    await expect(page).toHaveURL(/\/login/);
   });
 
   test('should login with credentials', async ({ page }) => {
-    const testEmail = process.env.TEST_USER_EMAIL || 'test@example.com';
+    await loginWithCredentials(page, TEST_EMAIL, TEST_PASSWORD);
 
-    await page.goto('/login?role=user', { waitUntil: 'domcontentloaded' });
-    
-    // Fill login form (current UX is passwordless email link)
-    await page.fill('input[type="email"]', testEmail);
-    await page.locator('button[type="submit"]').first().click();
-    
-    // Wait for redirect after login
-    await page.waitForURL(/.*user-dashboard|.*app|.*merchant|.*dashboard/, { timeout: 15000 });
-    
-    // Verify dashboard content renders
-    await expect(page.getByText(/Rewards Dashboard|Dashboard/i).first()).toBeVisible({ timeout: 10000 });
+    const landingPath = new URL(page.url()).pathname;
+    expect(landingPath).toMatch(/^\/(app|merchant|admin)(\/|$)/);
+    await expect(page.locator('body')).toBeVisible();
   });
 
   test('should show error for invalid credentials', async ({ page }) => {
     await page.goto('/login', { waitUntil: 'domcontentloaded' });
-    
-    // Try to login with malformed email
-    await page.fill('input[type="email"]', 'invalid-email');
-    await page.locator('button[type="submit"]').first().click();
 
-    // HTML5 validation or inline error should block successful login
+    await page.fill('#cred-email', 'invalid-email');
+    await page.fill('#cred-password', 'anything');
+    await page.locator('button[type="submit"]').click();
     await expect(page).toHaveURL(/.*login/, { timeout: 5000 });
   });
 });

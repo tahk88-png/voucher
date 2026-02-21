@@ -28,75 +28,69 @@ export function SubscriptionPlans() {
       icon: Zap,
       color: 'from-[#9DB5A5] to-[#7FA090]',
       priceMonthly: 19,
-      priceAnnual: 190, // 10 months
-      description: 'Perfect for small businesses getting started',
+      priceAnnual: 190,
+      description: 'For small businesses getting started with vouchers',
       popular: false,
       features: [
-        'Up to 1,000 vouchers/month',
-        '5 active campaigns',
+        '500 vouchers/month',
+        '3 active campaigns',
+        '2 team members',
+        'QR code redemption',
         'Basic analytics',
-        'QR code generation',
         'Email support',
-        'Mobile app access',
-        '1 user account',
       ],
       limits: {
-        vouchers: 1000,
-        campaigns: 5,
-        users: 1,
+        vouchers: 500,
+        campaigns: 3,
+        users: 2,
       }
     },
     {
-      id: 'professional',
-      name: 'Professional',
+      id: 'pro',
+      name: 'Pro',
       icon: Crown,
       color: 'from-[#FFC857] to-[#FFB627]',
-      priceMonthly: 29,
-      priceAnnual: 290, // 10 months
-      description: 'For growing businesses that need more',
+      priceMonthly: 39,
+      priceAnnual: 390,
+      description: 'For growing businesses with referral campaigns',
       popular: true,
       features: [
-        'Up to 10,000 vouchers/month',
-        'Unlimited campaigns',
-        'Advanced analytics & reports',
-        'Custom branding',
-        'API access',
+        '5,000 vouchers/month',
+        '25 active campaigns',
+        '10 team members',
+        'Advanced analytics',
+        'Custom domain',
+        'Promo boosts (email + push)',
         'Priority support',
-        '3 user accounts',
-        'Social media integration',
-        'Email marketing tools',
       ],
       limits: {
-        vouchers: 10000,
-        campaigns: -1, // unlimited
-        users: 3,
+        vouchers: 5000,
+        campaigns: 25,
+        users: 10,
       }
     },
     {
-      id: 'enterprise',
-      name: 'Enterprise',
+      id: 'scale',
+      name: 'Scale',
       icon: Rocket,
       color: 'from-[#E17B5C] to-[#D16B4C]',
-      priceMonthly: 39,
-      priceAnnual: 390, // 10 months
-      description: 'For large organizations with complex needs',
+      priceMonthly: 99,
+      priceAnnual: 990,
+      description: 'For large businesses that need unlimited capacity',
       popular: false,
       features: [
         'Unlimited vouchers',
         'Unlimited campaigns',
-        'White-label solution',
-        'Multi-location support',
-        'Dedicated account manager',
-        '24/7 phone support',
+        'Unlimited team members',
+        'Everything in Pro',
+        'White-label ready',
+        'Priority support',
         'Custom integrations',
-        'Unlimited user accounts',
-        'Advanced security features',
-        'Priority feature requests',
       ],
       limits: {
-        vouchers: -1, // unlimited
-        campaigns: -1, // unlimited
-        users: -1, // unlimited
+        vouchers: -1,
+        campaigns: -1,
+        users: -1,
       }
     },
   ];
@@ -133,7 +127,7 @@ export function SubscriptionPlans() {
             Select Your Subscription
           </h1>
           <p className="text-xl text-[#6B5744] max-w-2xl mx-auto mb-8">
-            Choose the perfect plan for your business. All plans include 2 months free trial.
+            Choose the perfect plan for your business. All plans include a 14-day free trial.
           </p>
 
           {/* Billing Toggle */}
@@ -208,7 +202,7 @@ export function SubscriptionPlans() {
                     </div>
                   )}
                   <div className="text-xs text-[#A89985] mt-1">
-                    + 2 months free trial
+                    14-day free trial + 5% transaction fee
                   </div>
                 </div>
 
@@ -274,7 +268,7 @@ export function SubscriptionPlans() {
             <div className="flex items-center gap-3">
               <Sparkles className="h-8 w-8 text-[#E17B5C]" />
               <div>
-                <div className="font-semibold text-[#2D2721]">2 Months Free</div>
+                <div className="font-semibold text-[#2D2721]">14-Day Free Trial</div>
                 <div className="text-sm text-[#8B7355]">Try before you buy</div>
               </div>
             </div>

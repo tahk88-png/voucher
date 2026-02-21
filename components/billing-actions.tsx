@@ -7,13 +7,23 @@ async function redirectTo(url: string) {
   window.location.href = url;
 }
 
-export function StartSubscriptionButton({ slug }: { slug: string }) {
+export function StartSubscriptionButton({
+  slug,
+  planTier = 'pro',
+  label,
+}: {
+  slug: string;
+  planTier?: 'starter' | 'pro' | 'scale';
+  label?: string;
+}) {
   return (
     <WarmButton
       onClick={async () => {
         try {
           const res = await fetch(`/api/merchant/${slug}/billing/checkout`, {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ planTier }),
           });
           const data = await res.json();
           if (!res.ok) {
@@ -25,7 +35,7 @@ export function StartSubscriptionButton({ slug }: { slug: string }) {
         }
       }}
     >
-      Start subscription
+      {label || `Subscribe to ${planTier.charAt(0).toUpperCase() + planTier.slice(1)}`}
     </WarmButton>
   );
 }

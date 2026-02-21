@@ -28,46 +28,69 @@ function addResult(name: string, status: 'pass' | 'fail' | 'warning', message: s
   results.push({ name, status, message });
 }
 
-async function verifyDatabaseSchema() {
-  try {
-    // Check if Merchant model has launch mode fields
-    const merchant = await prisma.merchant.findFirst();
-    if (!merchant) {
-      addResult('Database Schema', 'warning', 'No merchants found - run seed script');
-      return;
-    }
-
-    // Check if isActive field exists (launch mode)
-    if (typeof merchant.isActive === 'undefined') {
-      addResult('Launch Mode: isActive field', 'fail', 'Merchant.isActive field missing - run migration');
-    } else {
-      addResult('Launch Mode: isActive field', 'pass', 'Merchant.isActive field exists');
-    }
-
-    // Check if featureFlags field exists
-    if (merchant.featureFlags === null || typeof merchant.featureFlags === 'undefined') {
-      addResult('Launch Mode: featureFlags field', 'warning', 'featureFlags is null (OK if not set)');
-    } else {
-      addResult('Launch Mode: featureFlags field', 'pass', 'Merchant.featureFlags field exists');
-    }
-
-    // Check if invitedAt and onboardedAt exist
-    if (typeof merchant.invitedAt === 'undefined') {
-      addResult('Launch Mode: invitedAt field', 'fail', 'Merchant.invitedAt field missing - run migration');
-    } else {
-      addResult('Launch Mode: invitedAt field', 'pass', 'Merchant.invitedAt field exists');
-    }
-
-    if (typeof merchant.onboardedAt === 'undefined') {
-      addResult('Launch Mode: onboardedAt field', 'fail', 'Merchant.onboardedAt field missing - run migration');
-    } else {
-      addResult('Launch Mode: onboardedAt field', 'pass', 'Merchant.onboardedAt field exists');
-    }
-
-    addResult('Database Schema', 'pass', 'Database schema verified');
-  } catch (error) {
-    addResult('Database Schema', 'fail', `Error checking schema: ${error instanceof Error ? error.message : 'Unknown error'}`);
+function isRetryableDatabaseError(error: unknown): boolean {
+  if (!(error instanceof Error)) {
+    return false;
   }
+  return error.message.includes("Can't reach database server") || error.message.includes('P1001');
+}
+
+async function verifyDatabaseSchema() {
+  const maxAttempts = 5;
+  let lastError: unknown = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      // Check if Merchant model has launch mode fields
+      const merchant = await prisma.merchant.findFirst();
+      if (!merchant) {
+        addResult('Database Schema', 'warning', 'No merchants found - run seed script');
+        return;
+      }
+
+      // Check if isActive field exists (launch mode)
+      if (typeof merchant.isActive === 'undefined') {
+        addResult('Launch Mode: isActive field', 'fail', 'Merchant.isActive field missing - run migration');
+      } else {
+        addResult('Launch Mode: isActive field', 'pass', 'Merchant.isActive field exists');
+      }
+
+      // Check if featureFlags field exists
+      if (merchant.featureFlags === null || typeof merchant.featureFlags === 'undefined') {
+        addResult('Launch Mode: featureFlags field', 'warning', 'featureFlags is null (OK if not set)');
+      } else {
+        addResult('Launch Mode: featureFlags field', 'pass', 'Merchant.featureFlags field exists');
+      }
+
+      // Check if invitedAt and onboardedAt exist
+      if (typeof merchant.invitedAt === 'undefined') {
+        addResult('Launch Mode: invitedAt field', 'fail', 'Merchant.invitedAt field missing - run migration');
+      } else {
+        addResult('Launch Mode: invitedAt field', 'pass', 'Merchant.invitedAt field exists');
+      }
+
+      if (typeof merchant.onboardedAt === 'undefined') {
+        addResult('Launch Mode: onboardedAt field', 'fail', 'Merchant.onboardedAt field missing - run migration');
+      } else {
+        addResult('Launch Mode: onboardedAt field', 'pass', 'Merchant.onboardedAt field exists');
+      }
+
+      addResult('Database Schema', 'pass', 'Database schema verified');
+      return;
+    } catch (error) {
+      lastError = error;
+      if (!isRetryableDatabaseError(error) || attempt === maxAttempts) {
+        break;
+      }
+      await new Promise((resolve) => setTimeout(resolve, attempt * 1000));
+    }
+  }
+
+  addResult(
+    'Database Schema',
+    'fail',
+    `Error checking schema: ${lastError instanceof Error ? lastError.message : 'Unknown error'}`
+  );
 }
 
 function verifyPWASetup() {

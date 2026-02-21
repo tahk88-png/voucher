@@ -24,16 +24,36 @@
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@/app/*": ["./app/*"],
-      "@app/*": ["./figma/app/*"],
-      "@/components/*": ["./components/*"],
-      "@/lib/*": ["./lib/*"],
-      "@/figma/*": ["./figma/*"],
-      "@/src/*": ["./src/*"],
-      "@services/*": ["./figma/services/*"],
-      "react-router": ["./lib/router-shim.tsx"],
-      "react-router-dom": ["./lib/router-shim.tsx"]
+      "@/*": [
+        "./*"
+      ],
+      "@/app/*": [
+        "./app/*"
+      ],
+      "@app/*": [
+        "./figma/app/*"
+      ],
+      "@/components/*": [
+        "./components/*"
+      ],
+      "@/lib/*": [
+        "./lib/*"
+      ],
+      "@/figma/*": [
+        "./figma/*"
+      ],
+      "@/src/*": [
+        "./src/*"
+      ],
+      "@services/*": [
+        "./figma/services/*"
+      ],
+      "react-router": [
+        "./lib/router-shim.tsx"
+      ],
+      "react-router-dom": [
+        "./lib/router-shim.tsx"
+      ]
     },
     "allowJs": true,
     "incremental": true,
@@ -51,7 +71,8 @@
     "types",
     "figma",
     "src",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".next-playwright/types/**/*.ts"
   ],
   "references": [
     {

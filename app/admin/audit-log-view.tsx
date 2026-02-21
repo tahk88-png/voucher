@@ -25,6 +25,26 @@ type AuditLog = {
 export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] }) {
   const [logs, setLogs] = useState<AuditLog[]>(initialLogs);
   const [isLoading, setIsLoading] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExportCsv = async () => {
+    setIsExporting(true);
+    try {
+      const res = await fetch('/api/admin/audit-log/export');
+      if (!res.ok) throw new Error('Export failed');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `audit-log-${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch {
+      showError('CSV export failed');
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   const fetchLogs = async () => {
     setIsLoading(true);
@@ -63,9 +83,19 @@ export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] 
 
   return (
     <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
-      <div>
-        <h2 className="text-base font-semibold text-[#2D2721]">Audit log</h2>
-        <p className="text-sm text-[#6B5744]">Recent platform actions.</p>
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <h2 className="text-base font-semibold text-[#2D2721]">Audit log</h2>
+          <p className="text-sm text-[#6B5744]">Recent platform actions.</p>
+        </div>
+        <WarmButton
+          variant="outline"
+          size="sm"
+          onClick={handleExportCsv}
+          disabled={isExporting}
+        >
+          {isExporting ? 'Exporting...' : '⬇ CSV'}
+        </WarmButton>
       </div>
       <div className="space-y-3 max-h-[600px] overflow-y-auto mt-4">
         {isLoading ? (

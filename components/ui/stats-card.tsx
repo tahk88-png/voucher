@@ -1,4 +1,5 @@
 import * as React from "react"
+import Link from "next/link"
 import { LucideIcon, TrendingUp, TrendingDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { WarmCard } from "@/components/warm-card"
@@ -13,6 +14,8 @@ interface StatsCardProps {
     label?: string
     isPositive?: boolean
   }
+  href?: string
+  actionLabel?: string
   className?: string
 }
 
@@ -22,9 +25,11 @@ export function StatsCard({
   description,
   icon: Icon,
   trend,
+  href,
+  actionLabel = "Open",
   className,
 }: StatsCardProps) {
-  return (
+  const card = (
     <WarmCard padding="lg" className={cn("", className)}>
       <div className="flex items-start justify-between">
         <div className="flex-1">
@@ -56,6 +61,11 @@ export function StatsCard({
           {description && (
             <p className="mt-1 text-xs text-[var(--text-muted)]">{description}</p>
           )}
+          {href && (
+            <span className="mt-3 inline-flex text-xs font-semibold text-[#E17B5C]">
+              {actionLabel}
+            </span>
+          )}
         </div>
         {Icon && (
           <div className="rounded-xl bg-[var(--bg-2)] p-2">
@@ -64,5 +74,15 @@ export function StatsCard({
         )}
       </div>
     </WarmCard>
+  )
+
+  if (!href) {
+    return card
+  }
+
+  return (
+    <Link href={href} className="block rounded-[22px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]">
+      {card}
+    </Link>
   )
 }

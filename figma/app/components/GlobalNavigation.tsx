@@ -39,10 +39,8 @@ export function GlobalNavigation() {
 
   const navItems = [
     { name: 'Avaleht', path: '/', icon: Home },
-    { name: 'Pakkumised', path: '/voucher', icon: Ticket },
-    { name: 'Kinkekaardid', path: '/gift-cards', icon: Gift },
-    { name: 'Sündmused', path: '/events', icon: CalendarDays },
-    { name: 'Pood', path: '/shop', icon: ShoppingBag },
+    { name: 'Kampaaniad', path: '/campaigns', icon: Ticket },
+    { name: 'Vautšerid', path: '/voucher', icon: Gift },
   ];
 
   const toggleLang = () => {

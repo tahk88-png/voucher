@@ -4,8 +4,9 @@ import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import Link from 'next/link';
-import { Settings } from 'lucide-react';
+import { Settings, Bell } from 'lucide-react';
 import { getLocale, getTranslations } from 'next-intl/server';
+import PushSubscribeButton from '@/components/push-subscribe-button';
 
 export default async function SettingsPage() {
   const session = await auth();
@@ -40,6 +41,19 @@ export default async function SettingsPage() {
             </div>
           </div>
         </div>
+      </WarmCard>
+
+      <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="w-10 h-10 rounded-[12px] bg-[#FFF9ED] flex items-center justify-center shrink-0">
+            <Bell className="h-5 w-5 text-[#8B7355]" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold text-[#2D2721]">Push notifications</div>
+            <div className="text-sm text-[#6B5744]">Get notified when your vouchers are redeemed or about to expire.</div>
+          </div>
+        </div>
+        <PushSubscribeButton />
       </WarmCard>
 
       <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">

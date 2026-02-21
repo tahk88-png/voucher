@@ -5,6 +5,7 @@ import { requireMerchantRole } from '@/lib/rbac';
 import { requireActiveMerchant } from '@/lib/merchant-status';
 import { ensureMerchantOwnership } from '@/lib/tenant';
 import { captureException } from '@/lib/error-tracking';
+import { CacheKeys, invalidatePattern } from '@/lib/cache';
 
 export async function POST(
   req: NextRequest,
@@ -52,6 +53,8 @@ export async function POST(
         payloadJson: JSON.stringify({ voucherId: params.id }),
       },
     });
+
+    await invalidatePattern(`${CacheKeys.publicMerchantVouchers(voucher.merchantId)}*`);
 
     return NextResponse.json(updated);
   } catch (error) {

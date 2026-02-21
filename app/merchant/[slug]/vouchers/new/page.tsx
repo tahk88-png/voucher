@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { formatCurrency } from '@/lib/utils';
 import { showError } from '@/lib/toast-helpers';
+import { parsePaywallResponse, type PaywallDetails } from '@/lib/paywall-utils';
+import PaywallModal from '@/components/billing/paywall-modal';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { useTranslations } from 'next-intl';
 
@@ -87,6 +89,8 @@ export default function NewVoucherPage() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(initial);
   const [weeklyDropsEnabled, setWeeklyDropsEnabled] = useState(false);
+  const [paywallOpen, setPaywallOpen] = useState(false);
+  const [paywallData, setPaywallData] = useState<PaywallDetails | null>(null);
   const t = useTranslations();
   const tNav = useTranslations('nav');
   const tVoucher = useTranslations('voucher');
@@ -153,14 +157,12 @@ export default function NewVoucherPage() {
 
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
-        const message = d?.error || 'Failed to create voucher';
-        const upgradePath = d?.details?.upgradePath as string | undefined;
-        if (res.status === 402 && upgradePath) {
-          showError(`${message} Redirecting to billing...`);
-          router.push(upgradePath);
+        if (res.status === 402) {
+          setPaywallData(parsePaywallResponse(d));
+          setPaywallOpen(true);
           return;
         }
-        throw new Error(message);
+        throw new Error(d?.error || 'Failed to create voucher');
       }
       const voucher = await res.json();
       router.push(`/merchant/${merchantSlug}/vouchers/${voucher.id}`);
@@ -506,6 +508,19 @@ export default function NewVoucherPage() {
             <p className="text-sm font-medium text-[#6B5744] mb-3">{tVoucher('preview')}</p>
             <VoucherPreview form={formData} />
           </div>
+        )}
+
+        {paywallData && (
+          <PaywallModal
+            open={paywallOpen}
+            onClose={() => setPaywallOpen(false)}
+            slug={merchantSlug}
+            message={paywallData.message}
+            currentTier={paywallData.planTier}
+            requiredPlan={paywallData.requiredPlan}
+            capability={paywallData.capability}
+            limit={paywallData.limit}
+          />
         )}
       </div>
     </div>

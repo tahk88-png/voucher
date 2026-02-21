@@ -1,163 +1,227 @@
 import NextAuth from 'next-auth';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import EmailProvider from 'next-auth/providers/email';
 import GoogleProvider from 'next-auth/providers/google';
 import AppleProvider from 'next-auth/providers/apple';
 import FacebookProvider from 'next-auth/providers/facebook';
-import GitHubProvider from 'next-auth/providers/github';
-import TwitterProvider from 'next-auth/providers/twitter';
-import LinkedInProvider from 'next-auth/providers/linkedin';
 import Credentials from 'next-auth/providers/credentials';
 import { prisma } from './prisma';
+import { hashPassword, verifyPassword } from './passwords';
 
 /**
- * IMPORTANT: Test credentials are ONLY enabled when ALL of these conditions are met:
- * 1. NODE_ENV is explicitly set to 'development' or 'test'
- * 2. ENABLE_TEST_CREDENTIALS is explicitly set to 'true'
- * 3. Required test credential environment variables are provided
- *
- * This triple-check ensures test credentials can never accidentally work in production.
+ * Auth: OAuth providers (when configured) + credentials login against DB passwordHash.
+ * JWT sessions with auto-upsert to Prisma DB on sign-in.
  */
 const isExplicitlyDevelopment = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test';
-const testCredentialsExplicitlyEnabled = process.env.ENABLE_TEST_CREDENTIALS === 'true';
-const testEmail = process.env.TEST_USER_EMAIL;
-const testPassword = process.env.TEST_USER_PASSWORD;
-const testAdminEmail = process.env.TEST_ADMIN_EMAIL;
-const testAdminPassword = process.env.TEST_ADMIN_PASSWORD;
+const enableLegacyTestCredentialFallback =
+  isExplicitlyDevelopment && process.env.ENABLE_TEST_CREDENTIALS === 'true';
 
-const enableTestCredentials =
-  isExplicitlyDevelopment &&
-  testCredentialsExplicitlyEnabled &&
-  Boolean((testEmail && testPassword) || (testAdminEmail && testAdminPassword));
+const legacyCredentialProfiles = [
+  {
+    email: process.env.TEST_USER_EMAIL ?? 'test@example.com',
+    password: process.env.TEST_USER_PASSWORD ?? 'test123',
+    name: 'Test User',
+  },
+  {
+    email: process.env.TEST_ADMIN_EMAIL ?? 'admin@coffee-house.com',
+    password: process.env.TEST_ADMIN_PASSWORD ?? 'admin123',
+    name: 'Admin User',
+  },
+  {
+    email: process.env.TEST_STAFF_EMAIL ?? 'staff@coffee-house.com',
+    password: process.env.TEST_STAFF_PASSWORD ?? 'staff123',
+    name: 'Staff User',
+  },
+  {
+    email: process.env.TEST_TECH_ADMIN_EMAIL ?? 'admin@tech-store.com',
+    password: process.env.TEST_TECH_ADMIN_PASSWORD ?? 'techadmin123',
+    name: 'Tech Admin',
+  },
+  {
+    email: process.env.TEST_PLATFORM_ADMIN_EMAIL ?? 'platform-admin@gifthub.local',
+    password: process.env.TEST_PLATFORM_ADMIN_PASSWORD ?? 'platform123',
+    name: 'Platform Admin',
+  },
+].filter((profile) => Boolean(profile.email) && Boolean(profile.password));
 
-// Log warning if test credentials are enabled (never in production)
-if (enableTestCredentials && isExplicitlyDevelopment) {
-  console.warn('[Warning] Test credentials are ENABLED. This is only safe in development.');
+/**
+ * Ensure user exists in Prisma DB. Creates if not found, updates name/image if changed.
+ * Returns the Prisma user ID (used as session.user.id throughout the app).
+ */
+async function ensureDbUser(email: string, name?: string | null, image?: string | null) {
+  const user = await prisma.user.upsert({
+    where: { email },
+    update: {
+      ...(name ? { name } : {}),
+      ...(image ? { image } : {}),
+    },
+    create: {
+      email,
+      name: name ?? email.split('@')[0],
+      image: image ?? null,
+    },
+  });
+  return user;
 }
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
-  providers: [
-    ...(enableTestCredentials
-      ? [
-          Credentials({
-            credentials: {
-              email: { label: 'Email', type: 'email' },
-              password: { label: 'Password', type: 'password' },
-            },
-            async authorize(credentials) {
-              if (
-                !credentials?.email ||
-                typeof credentials.email !== 'string' ||
-                !credentials?.password ||
-                typeof credentials.password !== 'string'
-              )
-                return null;
-              const isUserMatch =
-                Boolean(testEmail && testPassword) &&
-                credentials.email === testEmail &&
-                credentials.password === testPassword;
-              const isAdminMatch =
-                Boolean(testAdminEmail && testAdminPassword) &&
-                credentials.email === testAdminEmail &&
-                credentials.password === testAdminPassword;
-              if (!isUserMatch && !isAdminMatch) return null;
+function normalizeEmail(value: string): string {
+  return value.trim().toLowerCase();
+}
 
-              const email = (isAdminMatch ? testAdminEmail : testEmail) as string;
-              const name = isAdminMatch ? 'Admin User' : 'Test User';
-              let user = await prisma.user.findUnique({ where: { email } });
-              if (!user) {
-                user = await prisma.user.create({ data: { email, name } });
-              }
-              return { id: user.id, email: user.email, name: user.name ?? name };
-            },
-          }),
-        ]
-      : []),
-    EmailProvider({
-      server: {
-        host: process.env.SMTP_HOST,
-        port: Number(process.env.SMTP_PORT) || 587,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASSWORD,
-        },
-        from: process.env.SMTP_FROM || 'noreply@voucher-platform.com',
-      },
-    }),
-    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+const appleClientId = process.env.APPLE_CLIENT_ID || process.env.APPLE_ID;
+const appleClientSecret = process.env.APPLE_CLIENT_SECRET || process.env.APPLE_SECRET;
+const facebookClientId = process.env.FACEBOOK_CLIENT_ID;
+const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET;
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  providers: [
+    // Google OAuth (primary)
+    ...(googleClientId && googleClientSecret && googleClientId !== 'change_me'
       ? [
           GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientId: googleClientId,
+            clientSecret: googleClientSecret,
           }),
         ]
       : []),
-    ...(process.env.APPLE_CLIENT_ID && process.env.APPLE_CLIENT_SECRET
+    // Apple OAuth
+    ...(appleClientId && appleClientSecret && appleClientId !== 'change_me'
       ? [
           AppleProvider({
-            clientId: process.env.APPLE_CLIENT_ID,
-            clientSecret: process.env.APPLE_CLIENT_SECRET,
+            clientId: appleClientId,
+            clientSecret: appleClientSecret,
           }),
         ]
       : []),
-    ...(process.env.FACEBOOK_CLIENT_ID && process.env.FACEBOOK_CLIENT_SECRET
+    // Facebook OAuth
+    ...(facebookClientId && facebookClientSecret && facebookClientId !== 'change_me'
       ? [
           FacebookProvider({
-            clientId: process.env.FACEBOOK_CLIENT_ID,
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+            clientId: facebookClientId,
+            clientSecret: facebookClientSecret,
           }),
         ]
       : []),
-    ...(process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET
-      ? [
-          GitHubProvider({
-            clientId: process.env.GITHUB_CLIENT_ID,
-            clientSecret: process.env.GITHUB_CLIENT_SECRET,
-          }),
-        ]
-      : []),
-    ...(process.env.TWITTER_CLIENT_ID && process.env.TWITTER_CLIENT_SECRET
-      ? [
-          TwitterProvider({
-            clientId: process.env.TWITTER_CLIENT_ID,
-            clientSecret: process.env.TWITTER_CLIENT_SECRET,
-          }),
-        ]
-      : []),
-    ...(process.env.LINKEDIN_CLIENT_ID && process.env.LINKEDIN_CLIENT_SECRET
-      ? [
-          LinkedInProvider({
-            clientId: process.env.LINKEDIN_CLIENT_ID,
-            clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
-          }),
-        ]
-      : []),
+    Credentials({
+      credentials: {
+        email: { label: 'Email', type: 'email' },
+        password: { label: 'Password', type: 'password' },
+        magicToken: { label: 'Magic Token', type: 'text' },
+      },
+      async authorize(credentials) {
+        // Magic token flow (after OTP verification)
+        if (credentials?.magicToken && credentials?.email && typeof credentials.magicToken === 'string' && typeof credentials.email === 'string') {
+          const normalizedEmail = credentials.email.trim().toLowerCase();
+          const tokenRecord = await prisma.verificationToken.findFirst({
+            where: {
+              email: normalizedEmail,
+              token: `magic:${credentials.magicToken}`,
+              expires: { gt: new Date() },
+            },
+          });
+          if (!tokenRecord) return null;
+          await prisma.verificationToken.delete({ where: { id: tokenRecord.id } });
+          const user = await prisma.user.findUnique({ where: { email: normalizedEmail } });
+          if (!user) return null;
+          return { id: user.id, email: user.email, name: user.name, image: user.image ?? undefined };
+        }
+
+        if (
+          !credentials?.email ||
+          typeof credentials.email !== 'string' ||
+          !credentials?.password ||
+          typeof credentials.password !== 'string'
+        ) {
+          return null;
+        }
+
+        const email = normalizeEmail(credentials.email);
+        const password = credentials.password;
+
+        const existingUser = await prisma.user.findUnique({
+          where: { email },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            image: true,
+            passwordHash: true,
+          },
+        });
+
+        if (existingUser?.passwordHash) {
+          const valid = await verifyPassword(password, existingUser.passwordHash);
+          if (!valid) {
+            return null;
+          }
+
+          return {
+            id: existingUser.id,
+            email: existingUser.email,
+            name: existingUser.name,
+            image: existingUser.image ?? undefined,
+          };
+        }
+
+        if (!enableLegacyTestCredentialFallback) {
+          return null;
+        }
+
+        const matchedProfile = legacyCredentialProfiles.find(
+          (profile) => normalizeEmail(profile.email) === email && profile.password === password
+        );
+
+        if (!matchedProfile) {
+          return null;
+        }
+
+        const passwordHash = await hashPassword(password);
+        const dbUser = await prisma.user.upsert({
+          where: { email },
+          update: {
+            name: matchedProfile.name,
+            passwordHash,
+            emailVerified: new Date(),
+          },
+          create: {
+            email,
+            name: matchedProfile.name,
+            passwordHash,
+            emailVerified: new Date(),
+          },
+        });
+
+        return { id: dbUser.id, email: dbUser.email, name: dbUser.name };
+      },
+    }),
   ],
   pages: {
     signIn: '/login',
-    verifyRequest: '/login?verifyRequest=true',
   },
   callbacks: {
-    async session({ session, user, token }) {
-      // Support both database and JWT strategies
-      if (user) {
-        // Database strategy
-        session.user.id = user.id;
-      } else if (token?.sub) {
-        // JWT strategy
-        session.user.id = token.sub;
-      }
-      return session;
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.sub = user.id;
+    async jwt({ token, user, account, profile }) {
+      // On initial sign-in, upsert to DB and store DB user ID
+      if (user && user.email) {
+        const image = (user as unknown as Record<string, unknown>).image as string | undefined;
+        const dbUser = await ensureDbUser(user.email, user.name, image);
+        token.sub = dbUser.id;
+        token.name = dbUser.name;
+        token.email = dbUser.email;
+        token.picture = dbUser.image ?? image;
       }
       return token;
     },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.sub ?? '';
+        session.user.name = token.name ?? null;
+        session.user.email = token.email ?? '';
+        session.user.image = typeof token.picture === 'string' ? token.picture : null;
+      }
+      return session;
+    },
   },
   session: {
-    strategy: 'jwt', // Required for Credentials provider; OAuth still uses adapter for User/Account
+    strategy: 'jwt',
   },
 });

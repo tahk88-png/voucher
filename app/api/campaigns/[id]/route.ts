@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { dispatchMerchantAnnouncement } from '@/lib/notifications';
+import { CacheKeys, getCached, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 
 const updateCampaignSchema = z.object({
@@ -23,24 +24,31 @@ const updateCampaignSchema = z.object({
   status: z.enum(['draft', 'active', 'ended']).optional(),
 });
 
+const CAMPAIGN_DETAILS_CACHE_TTL_SECONDS = 45;
+
 export async function GET(
   _req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const campaign = await prisma.campaign.findUnique({
-      where: { id: params.id },
-      include: {
-        merchant: true,
-        vouchers: true,
-        _count: {
-          select: {
+    const campaign = await getCached(
+      CacheKeys.campaignDetails(params.id),
+      () =>
+        prisma.campaign.findUnique({
+          where: { id: params.id },
+          include: {
+            merchant: true,
             vouchers: true,
-            purchases: true,
+            _count: {
+              select: {
+                vouchers: true,
+                purchases: true,
+              },
+            },
           },
-        },
-      },
-    });
+        }),
+      CAMPAIGN_DETAILS_CACHE_TTL_SECONDS
+    );
 
     if (!campaign) {
       return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
@@ -126,6 +134,11 @@ export async function PUT(
         },
       },
     });
+
+    await Promise.all([
+      invalidateCache(CacheKeys.campaignDetails(params.id)),
+      invalidateCache(CacheKeys.publicMerchantCampaigns(campaign.merchantId)),
+    ]);
 
     return NextResponse.json(updated);
   } catch (error) {

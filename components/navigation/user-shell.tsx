@@ -14,6 +14,7 @@ import {
   X,
   LogOut,
   Gift,
+  Ticket,
   TrendingUp,
   Sparkles,
   ChevronLeft,
@@ -32,13 +33,16 @@ interface UserShellProps {
 }
 
 const navItems = [
-  { labelKey: "dashboard", fallback: "My Rewards", icon: Award, href: "/app" },
-  { labelKey: "b2b", fallback: "B2B Orgs", icon: Users, href: "/app/b2b" },
-  { labelKey: "referrals", fallback: "Referrals", icon: Users, href: "/app/referrals" },
-  { labelKey: "wallet", fallback: "Wallet", icon: Wallet, href: "/app/wallet" },
-  { labelKey: "notifications", fallback: "Notifications", icon: Bell, href: "/app/notifications" },
-  { labelKey: "settings", fallback: "Settings", icon: Settings, href: "/app/settings" },
+  { labelKey: "dashboard", fallback: "My Rewards", icon: Award, href: "/app", bottomNav: true },
+  { labelKey: "myVouchers", fallback: "My Vouchers", icon: Ticket, href: "/app/vouchers", bottomNav: true },
+  { labelKey: "b2b", fallback: "B2B Orgs", icon: Users, href: "/app/b2b", bottomNav: false },
+  { labelKey: "referrals", fallback: "Referrals", icon: Users, href: "/app/referrals", bottomNav: true },
+  { labelKey: "wallet", fallback: "Wallet", icon: Wallet, href: "/app/wallet", bottomNav: true },
+  { labelKey: "notifications", fallback: "Notifications", icon: Bell, href: "/app/notifications", bottomNav: false },
+  { labelKey: "settings", fallback: "Settings", icon: Settings, href: "/app/settings", bottomNav: true },
 ]
+
+const bottomNavItems = navItems.filter((item) => item.bottomNav)
 
 export default function UserShell({ userLabel, stats, children }: UserShellProps) {
   const pathname = usePathname()
@@ -294,7 +298,7 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
 
       <nav className="lg:hidden fixed bottom-0 inset-x-0 bg-[var(--surface)] border-t border-[var(--border)] shadow-warm-lg z-40">
         <div className="grid grid-cols-5 gap-1 px-2 py-2">
-          {navItems.map((item) => {
+          {bottomNavItems.map((item) => {
             const Icon = item.icon
             return (
               <Link

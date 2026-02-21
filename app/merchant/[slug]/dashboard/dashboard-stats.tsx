@@ -4,7 +4,13 @@ import { startOfDay, startOfWeek } from "date-fns"
 import { StatsCard } from "@/components/ui/stats-card"
 import { Ticket, Tag, Calendar, TrendingUp } from "lucide-react"
 
-async function DashboardStatsContent({ merchantId }: { merchantId: string }) {
+async function DashboardStatsContent({
+  merchantId,
+  merchantSlug,
+}: {
+  merchantId: string
+  merchantSlug: string
+}) {
   const now = new Date()
   const dayStart = startOfDay(now)
   const weekStart = startOfWeek(now, { weekStartsOn: 1 })
@@ -37,24 +43,32 @@ async function DashboardStatsContent({ merchantId }: { merchantId: string }) {
         value={activeVouchers}
         description="Published vouchers"
         icon={Ticket}
+        href={`/merchant/${merchantSlug}/vouchers`}
+        actionLabel="Open vouchers"
       />
       <StatsCard
         title="Active Campaigns"
         value={activeCampaigns}
         description="Running campaigns"
         icon={Tag}
+        href={`/merchant/${merchantSlug}/campaigns`}
+        actionLabel="Open campaigns"
       />
       <StatsCard
         title="Active Events"
         value={activeEvents}
         description="Published events"
         icon={Calendar}
+        href={`/merchant/${merchantSlug}/events`}
+        actionLabel="Open events"
       />
       <StatsCard
         title="Today's Redemptions"
         value={redemptionsToday}
         description={`This week: ${redemptionsThisWeek}`}
         icon={TrendingUp}
+        href={`/merchant/${merchantSlug}/redemptions`}
+        actionLabel="Review redemptions"
         trend={{
           value: parseFloat(trendValue),
           label: "of weekly",
@@ -78,10 +92,10 @@ function DashboardStatsSkeleton() {
   )
 }
 
-export function DashboardStats({ merchantId }: { merchantId: string }) {
+export function DashboardStats({ merchantId, merchantSlug }: { merchantId: string; merchantSlug: string }) {
   return (
     <Suspense fallback={<DashboardStatsSkeleton />}>
-      <DashboardStatsContent merchantId={merchantId} />
+      <DashboardStatsContent merchantId={merchantId} merchantSlug={merchantSlug} />
     </Suspense>
   )
 }

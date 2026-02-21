@@ -1,3 +1,6 @@
+// ISR: revalidate every 5 minutes — balances freshness with performance
+export const revalidate = 300;
+
 import HubShell from "@/components/layout/hub-shell"
 import TenantShell from "@/components/layout/tenant-shell"
 import SitePageRenderer from "@/components/site/site-page-renderer"
@@ -43,86 +46,91 @@ function getMarketLabel(countryName: string, currency: string) {
 }
 
 async function getLandingFeaturedOffers(): Promise<LandingFeaturedOffer[]> {
-  const now = new Date()
-  const campaigns = await prisma.campaign.findMany({
-    where: {
-      status: "active",
-      startDate: { lte: now },
-      endDate: { gte: now },
-    },
-    include: {
-      merchant: {
-        select: {
-          id: true,
-          name: true,
-          country: true,
-          defaultCurrency: true,
-          brandLogoUrl: true,
-        },
+  try {
+    const now = new Date()
+    const campaigns = await prisma.campaign.findMany({
+      where: {
+        status: "active",
+        startDate: { lte: now },
+        endDate: { gte: now },
       },
-      _count: {
-        select: {
-          purchases: {
-            where: {
-              status: "paid",
+      include: {
+        merchant: {
+          select: {
+            id: true,
+            name: true,
+            country: true,
+            defaultCurrency: true,
+            brandLogoUrl: true,
+          },
+        },
+        _count: {
+          select: {
+            purchases: {
+              where: {
+                status: "paid",
+              },
             },
           },
         },
       },
-    },
-    orderBy: [{ promotedWeeklyEmail: "desc" }, { promotedNotification: "desc" }, { createdAt: "desc" }],
-    take: 24,
-  })
-
-  const activeCampaigns = await Promise.all(
-    campaigns.map(async (campaign) => {
-      try {
-        const active = await isMerchantActive(campaign.merchantId)
-        return active ? campaign : null
-      } catch {
-        return null
-      }
+      orderBy: [{ promotedWeeklyEmail: "desc" }, { promotedNotification: "desc" }, { createdAt: "desc" }],
+      take: 24,
     })
-  )
 
-  return activeCampaigns
-    .filter((campaign): campaign is NonNullable<typeof campaign> => campaign !== null)
-    .slice(0, 12)
-    .map((campaign) => {
-      const discountRules = safeParseJson<{ type?: string; value?: number; currency?: string }>(campaign.discountRules)
-      let discountLabel: string | null = null
-
-      if (discountRules && typeof discountRules.value === "number") {
-        if (discountRules.type === "percentage") {
-          discountLabel = `${formatPercentage(discountRules.value)} OFF`
-        } else {
-          discountLabel = `${formatCurrency(
-            discountRules.value,
-            discountRules.currency || campaign.merchant.defaultCurrency
-          )} OFF`
+    const activeCampaigns = await Promise.all(
+      campaigns.map(async (campaign) => {
+        try {
+          const active = await isMerchantActive(campaign.merchantId)
+          return active ? campaign : null
+        } catch {
+          return null
         }
-      }
-
-      const categoryId = getCampaignCategoryId({
-        name: campaign.name,
-        description: campaign.description,
       })
+    )
 
-      return {
-        id: campaign.id,
-        name: campaign.name,
-        merchantName: campaign.merchant.name,
-        merchantLogoUrl: campaign.merchant.brandLogoUrl,
-        categoryLabel: categoryLabels[categoryId] || "Other",
-        marketLabel: getMarketLabel(campaign.merchant.country, campaign.merchant.defaultCurrency),
-        priceLabel:
-          campaign.price && campaign.price > 0
-            ? formatCurrency(campaign.price, campaign.merchant.defaultCurrency)
-            : "FREE",
-        purchases: campaign._count.purchases,
-        discountLabel,
-      }
-    })
+    return activeCampaigns
+      .filter((campaign): campaign is NonNullable<typeof campaign> => campaign !== null)
+      .slice(0, 12)
+      .map((campaign) => {
+        const discountRules = safeParseJson<{ type?: string; value?: number; currency?: string }>(campaign.discountRules)
+        let discountLabel: string | null = null
+
+        if (discountRules && typeof discountRules.value === "number") {
+          if (discountRules.type === "percentage") {
+            discountLabel = `${formatPercentage(discountRules.value)} OFF`
+          } else {
+            discountLabel = `${formatCurrency(
+              discountRules.value,
+              discountRules.currency || campaign.merchant.defaultCurrency
+            )} OFF`
+          }
+        }
+
+        const categoryId = getCampaignCategoryId({
+          name: campaign.name,
+          description: campaign.description,
+        })
+
+        return {
+          id: campaign.id,
+          name: campaign.name,
+          merchantName: campaign.merchant.name,
+          merchantLogoUrl: campaign.merchant.brandLogoUrl,
+          categoryLabel: categoryLabels[categoryId] || "Other",
+          marketLabel: getMarketLabel(campaign.merchant.country, campaign.merchant.defaultCurrency),
+          priceLabel:
+            campaign.price && campaign.price > 0
+              ? formatCurrency(campaign.price, campaign.merchant.defaultCurrency)
+              : "FREE",
+          purchases: campaign._count.purchases,
+          discountLabel,
+        }
+      })
+  } catch {
+    console.warn("landing: database unavailable, rendering without featured offers")
+    return []
+  }
 }
 
 export default async function LandingPage() {

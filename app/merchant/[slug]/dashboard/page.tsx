@@ -20,7 +20,24 @@ type ActionItem = {
   tone: 'urgent' | 'warning' | 'info';
 };
 
-export default async function MerchantDashboardPage({ params }: { params: { slug: string } }) {
+type DashboardRange = '7d' | '30d';
+
+const rangeOptions: { value: DashboardRange; label: string; days: number }[] = [
+  { value: '7d', label: '7D', days: 7 },
+  { value: '30d', label: '30D', days: 30 },
+];
+
+function resolveDashboardRange(rawRange: string | undefined): { value: DashboardRange; label: string; days: number } {
+  return rangeOptions.find((option) => option.value === rawRange) ?? rangeOptions[0];
+}
+
+export default async function MerchantDashboardPage({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams?: { range?: string | string[] };
+}) {
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
@@ -29,8 +46,10 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
 
+  const rawRange = Array.isArray(searchParams?.range) ? searchParams?.range[0] : searchParams?.range;
+  const selectedRange = resolveDashboardRange(rawRange);
   const now = new Date();
-  const rangeStart = startOfDay(subDays(now, 6));
+  const rangeStart = startOfDay(subDays(now, selectedRange.days - 1));
   const rangeEnd = startOfDay(now);
 
   const [
@@ -111,6 +130,7 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
   const activityData = dayBuckets.map((day) => ({
     date: format(day, 'EEE'),
     redemptions: 0,
+    revenue: 0,
   }));
 
   for (const redemption of weeklyRedemptions) {
@@ -121,9 +141,28 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
     }
   }
 
+  for (const purchase of weeklyVoucherPurchases) {
+    const key = format(startOfDay(purchase.createdAt), 'yyyy-MM-dd');
+    const index = dayIndex.get(key);
+    if (index !== undefined) {
+      activityData[index].revenue += purchase.amount / 100;
+    }
+  }
+
+  for (const purchase of weeklyTicketPurchases) {
+    const key = format(startOfDay(purchase.createdAt), 'yyyy-MM-dd');
+    const index = dayIndex.get(key);
+    if (index !== undefined) {
+      activityData[index].revenue += purchase.amount / 100;
+    }
+  }
+
   const weeklyRevenueMinor =
     weeklyVoucherPurchases.reduce((sum, purchase) => sum + purchase.amount, 0) +
     weeklyTicketPurchases.reduce((sum, purchase) => sum + purchase.amount, 0);
+  const paidOrderCount = weeklyVoucherPurchases.length + weeklyTicketPurchases.length;
+  const averageOrderValueMinor = paidOrderCount > 0 ? Math.round(weeklyRevenueMinor / paidOrderCount) : 0;
+  const redemptionRatePct = paidOrderCount > 0 ? (weeklyRedemptions.length / paidOrderCount) * 100 : 0;
 
   const actionItems: ActionItem[] = [
     pendingRedemptions > 0
@@ -193,7 +232,7 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
             <h2 className="text-base font-semibold text-[#2D2721]">Performance overview</h2>
             <p className="text-sm text-[#6B5744]">Live campaign activity and redemptions.</p>
           </div>
-          <DashboardStats merchantId={merchant.id} />
+          <DashboardStats merchantId={merchant.id} merchantSlug={params.slug} />
         </section>
 
         <section className="space-y-4">
@@ -201,7 +240,7 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
             <h2 className="text-base font-semibold text-[#2D2721]">Revenue and credits</h2>
             <p className="text-sm text-[#6B5744]">Sales, credits, and outstanding liability.</p>
           </div>
-          <RevenueStats merchantId={merchant.id} currency={merchant.defaultCurrency} />
+          <RevenueStats merchantId={merchant.id} merchantSlug={params.slug} currency={merchant.defaultCurrency} />
         </section>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -209,23 +248,73 @@ export default async function MerchantDashboardPage({ params }: { params: { slug
             <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[#2D2721]">Weekly performance</h2>
-                  <p className="text-sm text-[#6B5744]">Last 7 days of redemption activity.</p>
-                </div>
-                <div className="text-left sm:text-right">
-                  <p className="text-xs uppercase tracking-wide text-[#8B7355]">Revenue</p>
-                  <p className="text-lg font-semibold text-[#2D2721]">
-                    {formatCurrency(weeklyRevenueMinor, merchant.defaultCurrency)}
+                  <h2 className="text-base font-semibold text-[#2D2721]">Performance trend</h2>
+                  <p className="text-sm text-[#6B5744]">
+                    Last {selectedRange.days} days of redemption and revenue activity.
                   </p>
+                </div>
+                <div className="flex flex-col sm:items-end gap-2">
+                  <div className="flex items-center gap-2">
+                    {rangeOptions.map((option) => {
+                      const isActive = option.value === selectedRange.value;
+                      return (
+                        <Link
+                          key={option.value}
+                          href={`/merchant/${params.slug}/dashboard?range=${option.value}`}
+                          className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
+                            isActive
+                              ? 'bg-[#2D2721] text-white'
+                              : 'bg-[#FFF9ED] text-[#6B5744] hover:bg-[#FFECC6]'
+                          }`}
+                        >
+                          {option.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                  <div className="text-left sm:text-right">
+                    <p className="text-xs uppercase tracking-wide text-[#8B7355]">Revenue</p>
+                    <p className="text-lg font-semibold text-[#2D2721]">
+                      {formatCurrency(weeklyRevenueMinor, merchant.defaultCurrency)}
+                    </p>
+                  </div>
                 </div>
               </div>
               <AreaChart
                 data={activityData}
-                areas={[{ dataKey: 'redemptions', name: 'Redemptions', color: '#FFC857' }]}
+                areas={[
+                  { dataKey: 'redemptions', name: 'Redemptions', color: '#FFC857' },
+                  { dataKey: 'revenue', name: 'Revenue', color: '#9DB5A5' },
+                ]}
                 xAxisKey="date"
                 height={260}
-                showLegend={false}
+                showLegend
               />
+              <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] bg-[#FFFDF8] px-4 py-3">
+                  <p className="text-xs uppercase tracking-wide text-[#8B7355]">Paid orders</p>
+                  <p className="text-lg font-semibold text-[#2D2721]">{paidOrderCount}</p>
+                  <Link href={`/merchant/${params.slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#E17B5C]">
+                    Open orders view
+                  </Link>
+                </div>
+                <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] bg-[#FFFDF8] px-4 py-3">
+                  <p className="text-xs uppercase tracking-wide text-[#8B7355]">Avg order</p>
+                  <p className="text-lg font-semibold text-[#2D2721]">
+                    {formatCurrency(averageOrderValueMinor, merchant.defaultCurrency)}
+                  </p>
+                  <Link href={`/merchant/${params.slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#E17B5C]">
+                    Open campaign revenue
+                  </Link>
+                </div>
+                <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] bg-[#FFFDF8] px-4 py-3">
+                  <p className="text-xs uppercase tracking-wide text-[#8B7355]">Redemption rate</p>
+                  <p className="text-lg font-semibold text-[#2D2721]">{redemptionRatePct.toFixed(1)}%</p>
+                  <Link href={`/merchant/${params.slug}/redemptions`} className="mt-2 inline-flex text-xs font-semibold text-[#E17B5C]">
+                    Open redemption queue
+                  </Link>
+                </div>
+              </div>
             </WarmCard>
 
             <RecentActivity merchantId={merchant.id} />

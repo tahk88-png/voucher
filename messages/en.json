@@ -30,6 +30,8 @@
     "campaigns": "Campaigns",
     "events": "Events",
     "redemptions": "Redemptions",
+    "scanner": "Scanner",
+    "reports": "Reports",
     "pageBuilder": "Page builder",
     "analytics": "Analytics",
     "referrals": "Referrals",
@@ -44,7 +46,8 @@
     "giftCards": "Gift cards",
     "b2b": "B2B Orgs",
     "notifications": "Notifications",
-    "team": "Team"
+    "team": "Team",
+    "myVouchers": "My Vouchers"
   },
   "voucher": {
     "title": "Voucher",
@@ -123,7 +126,15 @@
     "checkOutVoucher": "Check out this voucher from",
     "linkShared": "Link shared",
     "linkCopied": "Link copied to clipboard",
-    "firstUses": "First {count} uses"
+    "firstUses": "First {count} uses",
+    "myVouchers": "My Vouchers",
+    "myVouchersDescription": "Your purchased and granted vouchers",
+    "browseVouchers": "Browse available vouchers",
+    "activeVouchers": "Active",
+    "pastVouchers": "Past",
+    "paid": "Paid",
+    "free": "Free",
+    "redeemed": "Redeemed"
   },
   "merchant": {
     "dashboard": "Merchant Dashboard",
@@ -479,6 +490,20 @@
     "redeemed": "Redeemed",
     "friendLabel": "Friend",
     "voucherLabel": "Voucher"
+  },
+  "billing": {
+    "upgradeRequired": "Upgrade Required",
+    "currentPlan": "Current plan",
+    "mostPopular": "Most Popular",
+    "perMonth": "/mo",
+    "startWith": "Start with {plan}",
+    "manageBilling": "Manage Billing",
+    "trialFooter": "14-day free trial included · 5% transaction fee on voucher sales · Cancel anytime",
+    "currentLabel": "Current",
+    "recommendedLabel": "Recommended",
+    "usageLabel": "{current} / {max} used",
+    "upgradeButton": "Upgrade to {plan}",
+    "laterButton": "Later"
   },
   "payment": {
     "purchase": "Purchase",
