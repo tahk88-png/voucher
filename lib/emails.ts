@@ -37,6 +37,10 @@ import {
   VoucherExpiryReminder,
   voucherExpiryReminderText,
 } from '@/templates/emails/voucher-expiry-reminder';
+import {
+  WelcomeEmail,
+  welcomeEmailText,
+} from '@/templates/emails/welcome';
 
 // Dynamic import for react-dom/server to avoid client-side bundling
 let renderToString: typeof import('react-dom/server').renderToString;
@@ -438,5 +442,36 @@ export async function sendVoucherExpiryReminder(params: {
     html: `<!DOCTYPE html><html><body>${html}</body></html>`,
     text,
     tags: [{ name: 'type', value: 'voucher_expiry_reminder' }],
+  });
+}
+
+/**
+ * Send welcome email to new user
+ */
+export async function sendWelcomeEmail(params: {
+  to: string;
+  name: string;
+}): Promise<void> {
+  if (!isResendConfigured()) {
+    console.warn('[Email] Resend not configured, skipping welcome email');
+    return;
+  }
+
+  if (!renderToString) {
+    renderToString = require('react-dom/server').renderToString;
+  }
+
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const loginUrl = `${baseUrl}/login`;
+
+  const html = renderToString(React.createElement(WelcomeEmail, { name: params.name, loginUrl }));
+  const text = welcomeEmailText({ name: params.name, loginUrl });
+
+  await sendEmail({
+    to: params.to,
+    subject: 'Welcome to GiftHub! 🎁',
+    html: `<!DOCTYPE html><html><body>${html}</body></html>`,
+    text,
+    tags: [{ name: 'type', value: 'welcome' }],
   });
 }

@@ -7,6 +7,7 @@ import { captureException } from '@/lib/error-tracking';
 import { dispatchMerchantAnnouncement } from '@/lib/notifications';
 import { CacheKeys, invalidatePattern } from '@/lib/cache';
 import { z } from 'zod';
+import { withErrorHandler } from '@/lib/error-handler';
 
 const updateVoucherSchema = z.object({
   status: z.enum(['draft', 'published', 'paused', 'ended']).optional(),
@@ -28,7 +29,7 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { slug: string; id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -122,20 +123,14 @@ export async function PUT(
     await invalidatePattern(`${CacheKeys.publicMerchantVouchers(merchant.id)}*`);
 
     return NextResponse.json(updated);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error('Error updating voucher:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string; id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     const merchant = await prisma.merchant.findUnique({
       where: { slug: params.slug },
@@ -166,14 +161,5 @@ export async function GET(
     }
 
     return NextResponse.json(voucher);
-  } catch (error) {
-    if (error instanceof Error) {
-      captureException(error, {
-        context: 'voucher_fetch',
-        merchantSlug: params.slug,
-        voucherId: params.id,
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

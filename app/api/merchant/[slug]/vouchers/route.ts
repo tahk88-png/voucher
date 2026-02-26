@@ -7,6 +7,7 @@ import { captureException } from '@/lib/error-tracking';
 import { CacheKeys, getCached, invalidatePattern } from '@/lib/cache';
 import { z } from 'zod';
 import { AccessControlError, accessErrorResponse, requireMerchantCapability, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
+import { withErrorHandler } from '@/lib/error-handler';
 
 const createVoucherSchema = z.object({
   type: z.enum(['percentage', 'fixed_amount', 'credit_amount']),
@@ -44,7 +45,7 @@ export async function POST(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const { merchant } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
     await requireActiveMerchant(merchant.id);
     await requireMerchantCapability(merchant.id, merchant.slug, 'voucher.create');
@@ -69,28 +70,14 @@ export async function POST(
     await invalidatePattern(`${CacheKeys.publicMerchantVouchers(merchant.id)}*`);
 
     return NextResponse.json(voucher);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    if (error instanceof Error) {
-      captureException(error, { 
-        context: 'voucher_creation',
-        merchantSlug: params.slug 
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     const { searchParams } = new URL(req.url);
     const merchant = await prisma.merchant.findUnique({
@@ -262,16 +249,5 @@ export async function GET(
         q: qFilter || null,
       },
     });
-  } catch (error) {
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    if (error instanceof Error) {
-      captureException(error, { 
-        context: 'voucher_fetch',
-        merchantSlug: params.slug 
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

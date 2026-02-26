@@ -5,6 +5,7 @@ import { handleError } from '@/lib/errors';
 import { CacheKeys, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 import { AccessControlError, accessErrorResponse, requireMerchantCapability, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
+import { withErrorHandler } from '@/lib/error-handler';
 
 const createCampaignSchema = z.object({
   name: z.string().min(1),
@@ -40,7 +41,7 @@ export async function POST(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const { merchant, profile } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
     await requireMerchantCapability(merchant.id, merchant.slug, 'campaign.create');
 
@@ -83,23 +84,14 @@ export async function POST(
     await invalidateCache(CacheKeys.publicMerchantCampaigns(merchant.id));
 
     return NextResponse.json(campaign);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    const handled = handleError(error);
-    return NextResponse.json({ error: handled.error, code: handled.code, details: handled.details ?? null }, { status: handled.status });
-  }
+  });
 }
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const { merchant } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_staff');
     const { searchParams } = new URL(req.url);
 
@@ -191,10 +183,5 @@ export async function GET(
         q: qFilter || null,
       },
     });
-  } catch (error) {
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

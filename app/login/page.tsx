@@ -46,6 +46,7 @@ const T = {
     noAccountSub: "An account will be created automatically on first sign-in.",
     magicDesc: "We&rsquo;ll send a 6-digit code to your email. No password needed.",
     passwordDesc: "Sign in with your email and password.",
+    forgotPassword: "Forgot password?",
     langLabel: "Language",
     demo: "Demo accounts",
   },
@@ -82,6 +83,7 @@ const T = {
     noAccountSub: "Konto luuakse automaatselt esimesel sisselogimisel.",
     magicDesc: "Saadame 6-kohalise koodi sinu e-postile. Parooli pole vaja.",
     passwordDesc: "Logi sisse e-posti ja parooliga.",
+    forgotPassword: "Unustasid parooli?",
     langLabel: "Keel",
     demo: "Demo kontod",
   },
@@ -118,6 +120,7 @@ const T = {
     noAccountSub: "Аккаунт создастся автоматически при первом входе.",
     magicDesc: "Отправим 6-значный код на ваш email. Пароль не нужен.",
     passwordDesc: "Войдите с помощью email и пароля.",
+    forgotPassword: "Забыли пароль?",
     langLabel: "Язык",
     demo: "Demo аккаунты",
   },
@@ -491,7 +494,10 @@ function LoginForm() {
             {tab === "password" && (
               <div className="tab-content-enter">
                 <form onSubmit={handlePasswordSignIn} className="space-y-4">
-                  <p className="text-xs text-[var(--text-muted)] -mt-1 mb-3">{s.passwordDesc}</p>
+                  <div className="flex items-center justify-between -mt-1 mb-3">
+                    <p className="text-xs text-[var(--text-muted)]">{s.passwordDesc}</p>
+                    <Link href="/reset-password" className="text-xs font-medium text-[var(--primary)] hover:underline">{s.forgotPassword}</Link>
+                  </div>
                   <div className="space-y-1.5">
                     <Label className="text-sm font-medium text-[var(--text)]">{s.emailLabel}</Label>
                     <div className="relative">
