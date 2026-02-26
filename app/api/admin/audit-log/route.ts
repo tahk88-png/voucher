@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { captureException } from '@/lib/error-tracking';
+import { withErrorHandler } from '@/lib/error-handler';
 import { AccessControlError, accessErrorResponse, requirePlatformAdminProfile } from '@/lib/access-control';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     await requirePlatformAdminProfile();
 
     const searchParams = req.nextUrl.searchParams;
@@ -55,15 +55,5 @@ export async function GET(req: NextRequest) {
     ]);
 
     return NextResponse.json({ logs, total, limit, offset });
-  } catch (error) {
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    if (error instanceof Error) {
-      captureException(error, {
-        context: 'admin_audit_log_fetch',
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

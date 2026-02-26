@@ -3,11 +3,12 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { formatCurrency } from '@/lib/utils';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -85,8 +86,5 @@ export async function GET(req: NextRequest) {
         'Content-Disposition': `attachment; filename="redemptions-${merchantSlug}-${Date.now()}.csv"`,
       },
     });
-  } catch (error) {
-    console.error('Error exporting redemptions:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

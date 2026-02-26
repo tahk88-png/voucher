@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const updateMerchantSchema = z.object({
@@ -23,7 +24,7 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const merchant = await prisma.merchant.findUnique({
       where: { slug: params.slug },
     });
@@ -33,17 +34,14 @@ export async function GET(
     }
 
     return NextResponse.json(merchant);
-  } catch (error) {
-    console.error('Error fetching merchant:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }
 
 export async function PUT(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -89,11 +87,5 @@ export async function PUT(
     });
 
     return NextResponse.json(updated);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error('Error updating merchant:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

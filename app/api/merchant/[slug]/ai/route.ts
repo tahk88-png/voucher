@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { generateAiJson, isAiConfigured } from '@/lib/ai';
-import { handleError } from '@/lib/errors';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const aiRequestSchema = z.object({
@@ -164,7 +164,7 @@ export async function POST(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     if (!isAiConfigured()) {
       return NextResponse.json({ error: 'AI is not configured' }, { status: 503 });
     }
@@ -238,11 +238,5 @@ export async function POST(
           ? { remaining: usage.remaining, limit: usage.limit, resetAt: usage.resetAt }
           : null,
     });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    const handled = handleError(error);
-    return NextResponse.json({ error: handled.error }, { status: handled.status });
-  }
+  });
 }

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { z } from "zod"
 import { requireSession, requireOrgMembership } from "@/lib/b2b/auth"
 import { prisma } from "@/lib/prisma"
+import { withErrorHandler } from "@/lib/error-handler"
 
 const inviteSchema = z.object({
   email: z.string().email(),
@@ -12,25 +13,27 @@ export async function GET(
   req: Request,
   { params }: { params: { orgId: string } }
 ) {
-  const session = await requireSession()
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  return withErrorHandler(async () => {
+    const session = await requireSession()
+    if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-  const membership = await requireOrgMembership(session.user.id, params.orgId)
-  if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+    const membership = await requireOrgMembership(session.user.id, params.orgId)
+    if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
-  const members = await prisma.orgMembership.findMany({
-    where: { orgId: params.orgId },
-    include: { user: { select: { id: true, email: true, name: true } } },
-    orderBy: { createdAt: "asc" },
-  })
+    const members = await prisma.orgMembership.findMany({
+      where: { orgId: params.orgId },
+      include: { user: { select: { id: true, email: true, name: true } } },
+      orderBy: { createdAt: "asc" },
+    })
 
-  return NextResponse.json({
-    members: members.map((m) => ({
-      id: m.id,
-      role: m.role,
-      user: m.user,
-      createdAt: m.createdAt,
-    })),
+    return NextResponse.json({
+      members: members.map((m) => ({
+        id: m.id,
+        role: m.role,
+        user: m.user,
+        createdAt: m.createdAt,
+      })),
+    })
   })
 }
 
@@ -38,38 +41,40 @@ export async function POST(
   req: Request,
   { params }: { params: { orgId: string } }
 ) {
-  const session = await requireSession()
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  return withErrorHandler(async () => {
+    const session = await requireSession()
+    if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-  const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin"])
-  if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin"])
+    if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
-  const body = await req.json().catch(() => null)
-  const parsed = inviteSchema.safeParse(body)
-  if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
-  }
+    const body = await req.json().catch(() => null)
+    const parsed = inviteSchema.safeParse(body)
+    if (!parsed.success) {
+      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
+    }
 
-  const user = await prisma.user.findUnique({ where: { email: parsed.data.email } })
-  if (!user) {
-    return NextResponse.json({ error: "User not found" }, { status: 404 })
-  }
+    const user = await prisma.user.findUnique({ where: { email: parsed.data.email } })
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 })
+    }
 
-  const existing = await prisma.orgMembership.findUnique({
-    where: { orgId_userId: { orgId: params.orgId, userId: user.id } },
+    const existing = await prisma.orgMembership.findUnique({
+      where: { orgId_userId: { orgId: params.orgId, userId: user.id } },
+    })
+
+    if (existing) {
+      return NextResponse.json({ error: "User already a member" }, { status: 409 })
+    }
+
+    const created = await prisma.orgMembership.create({
+      data: {
+        orgId: params.orgId,
+        userId: user.id,
+        role: parsed.data.role,
+      },
+    })
+
+    return NextResponse.json({ member: created })
   })
-
-  if (existing) {
-    return NextResponse.json({ error: "User already a member" }, { status: 409 })
-  }
-
-  const created = await prisma.orgMembership.create({
-    data: {
-      orgId: params.orgId,
-      userId: user.id,
-      role: parsed.data.role,
-    },
-  })
-
-  return NextResponse.json({ member: created })
 }

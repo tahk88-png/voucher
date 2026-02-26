@@ -3,12 +3,13 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { getMerchantFeatureFlags } from '@/lib/merchant-status';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -27,8 +28,5 @@ export async function GET(
     const flags = await getMerchantFeatureFlags(merchant.id);
 
     return NextResponse.json(flags);
-  } catch (error) {
-    console.error('Error fetching feature flags:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

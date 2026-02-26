@@ -4,12 +4,13 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { unlockCreditForRedemption } from '@/lib/credits';
 import { sendRedemptionConfirmation } from '@/lib/emails';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -65,8 +66,5 @@ export async function POST(
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('Error confirming redemption:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

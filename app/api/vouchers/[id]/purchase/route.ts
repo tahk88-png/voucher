@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { createCheckoutSession, isStripeConfigured } from '@/lib/stripe';
 import { checkPurchaseRateLimit } from '@/lib/fraud';
 import { PLATFORM_FEE_PERCENT } from '@/lib/access-control/monetization';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const purchaseSchema = z.object({
@@ -14,7 +15,7 @@ export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -123,11 +124,5 @@ export async function POST(
     });
 
     return NextResponse.json({ url: checkoutSession.url });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error('Voucher purchase error:', error);
-    return NextResponse.json({ error: 'Failed to create purchase' }, { status: 500 });
-  }
+  });
 }

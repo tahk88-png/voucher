@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { requireMerchantRole } from '@/lib/rbac';
+import { withErrorHandler } from '@/lib/error-handler';
 
 const generateSchema = z.object({
   campaignId: z.string(),
@@ -47,7 +48,7 @@ function buildVoucherFromCampaign(campaign: {
 }
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -92,11 +93,5 @@ export async function POST(req: NextRequest) {
     );
 
     return NextResponse.json({ codes });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error('Commerce code generation error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

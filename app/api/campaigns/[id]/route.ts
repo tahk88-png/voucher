@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { dispatchMerchantAnnouncement } from '@/lib/notifications';
 import { CacheKeys, getCached, invalidateCache } from '@/lib/cache';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const updateCampaignSchema = z.object({
@@ -30,7 +31,7 @@ export async function GET(
   _req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const campaign = await getCached(
       CacheKeys.campaignDetails(params.id),
       () =>
@@ -55,17 +56,14 @@ export async function GET(
     }
 
     return NextResponse.json(campaign);
-  } catch (error) {
-    console.error('Error fetching campaign:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }
 
 export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -141,11 +139,5 @@ export async function PUT(
     ]);
 
     return NextResponse.json(updated);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error('Error updating campaign:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export async function GET(
   req: NextRequest,
   { params }: { params: { token: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const ticket = await prisma.ticket.findUnique({
       where: { qrToken: params.token },
       include: {
@@ -39,8 +40,5 @@ export async function GET(
           }
         : null,
     });
-  } catch (error) {
-    console.error('QR ticket lookup error:', error);
-    return NextResponse.json({ error: 'Failed to lookup ticket' }, { status: 500 });
-  }
+  });
 }

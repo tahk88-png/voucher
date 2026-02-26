@@ -8,9 +8,10 @@ import { getCreditBalance } from '@/lib/credits';
 import { captureException } from '@/lib/error-tracking';
 import { logger, loggers } from '@/lib/logger';
 import { sendEmailSafely } from '@/lib/email-safe';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     if (!isStripeConfigured()) {
       return NextResponse.json({ error: 'Stripe is not configured' }, { status: 503 });
     }
@@ -470,11 +471,5 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ received: true });
-  } catch (error) {
-    logger.error('Stripe webhook: Handler failed', {
-      error: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined,
-    });
-    return NextResponse.json({ error: 'Webhook handler failed' }, { status: 500 });
-  }
+  });
 }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 import crypto from 'crypto';
 
@@ -14,7 +15,7 @@ export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -49,7 +50,7 @@ export async function POST(
     // Generate tickets
     const tickets = [];
     const eventPrefix = event.name.slice(0, 3).toUpperCase().replace(/\s/g, '');
-    
+
     for (let i = 0; i < count; i++) {
       const ticketNumber = `${eventPrefix}-${String(currentTickets + i + 1).padStart(6, '0')}`;
       const qrToken = crypto.randomBytes(32).toString('hex');
@@ -79,11 +80,5 @@ export async function POST(
     });
 
     return NextResponse.json({ count, message: `Generated ${count} tickets successfully` });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error('Error generating tickets:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { stripe } from '@/lib/stripe';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -51,8 +52,5 @@ export async function GET(req: NextRequest) {
       type: voucherPurchase ? 'voucher' : 'ticket',
       id: voucherPurchase?.voucherId || ticketPurchase?.ticketId,
     });
-  } catch (error) {
-    console.error('Payment verification error:', error);
-    return NextResponse.json({ error: 'Failed to verify payment' }, { status: 500 });
-  }
+  });
 }

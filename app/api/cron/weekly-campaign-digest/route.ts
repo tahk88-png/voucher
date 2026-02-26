@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendWeeklyCampaignDigest } from '@/lib/emails';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +12,7 @@ function formatDateRange(start: Date, end: Date): string {
 }
 
 export async function GET(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const authHeader = req.headers.get('authorization');
     const cronSecret = process.env.CRON_SECRET;
     if (!cronSecret) {
@@ -145,8 +146,5 @@ export async function GET(req: NextRequest) {
       notificationsCreated,
       campaignsProcessed: campaigns.length,
     });
-  } catch (error) {
-    console.error('Weekly campaign digest error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

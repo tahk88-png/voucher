@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimit } from '@/lib/rate-limit';
 import crypto from 'crypto';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     // IP rate limit: 5 per 15 minutes
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     const ipCheck = rateLimit(`reset:ip:${ip}`, 5, 15 * 60 * 1000);
@@ -98,8 +99,5 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ sent: true });
-  } catch (error) {
-    console.error('[forgot-password]', error);
-    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
-  }
+  });
 }

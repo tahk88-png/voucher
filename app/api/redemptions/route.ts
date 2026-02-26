@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { checkRedemptionRateLimit, isSelfReferral, checkIPRateLimit } from '@/lib/fraud';
 import { requireActiveMerchant } from '@/lib/merchant-status';
-import { captureException } from '@/lib/error-tracking';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const createRedemptionSchema = z.object({
@@ -17,10 +17,10 @@ const createRedemptionSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     // IP-based rate limiting for public redemptions
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 
-               req.headers.get('x-real-ip') || 
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ||
+               req.headers.get('x-real-ip') ||
                'unknown';
     const ipRateLimit = await checkIPRateLimit(ip, 60, 50); // 50 per hour per IP
     if (!ipRateLimit.allowed) {
@@ -168,17 +168,5 @@ export async function POST(req: NextRequest) {
       requiresConfirmation: data.method === 'in_store',
       qrUrl,
     });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    if (error instanceof Error) {
-      captureException(error, {
-        context: 'redemption_creation',
-        endpoint: '/api/redemptions',
-        method: 'POST',
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

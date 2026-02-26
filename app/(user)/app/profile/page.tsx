@@ -1,13 +1,26 @@
-import * as React from 'react';
+import { redirect } from 'next/navigation';
+import { auth } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { User, Mail, Settings, Bell, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import EditProfileForm from '@/components/edit-profile-form';
 
 export default async function ProfilePage() {
+  const session = await auth();
+  if (!session?.user?.id) {
+    redirect('/login');
+  }
+
   const t = await getTranslations('profile');
   const tNav = await getTranslations('nav');
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { name: true, email: true },
+  });
 
   return (
     <div className="p-4 sm:p-6 space-y-6">
@@ -18,13 +31,15 @@ export default async function ProfilePage() {
 
       <WarmCard padding="lg" className="bg-white">
         <h2 className="text-lg font-semibold text-[#2D2721] mb-4">{t('accountInformation')}</h2>
-        <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-[#FFF9ED] flex items-center justify-center">
+        <div className="flex items-start gap-4 mb-6">
+          <div className="w-16 h-16 rounded-full bg-[#FFF9ED] flex items-center justify-center shrink-0">
             <User className="h-8 w-8 text-[#E17B5C]" />
           </div>
-          <div>
-            <p className="font-medium text-[#2D2721]">John Doe</p>
-            <p className="text-sm text-[#6B5744]">john@example.com</p>
+          <div className="flex-1">
+            <EditProfileForm
+              initialName={user?.name || ''}
+              email={user?.email || ''}
+            />
           </div>
         </div>
       </WarmCard>
@@ -48,13 +63,21 @@ export default async function ProfilePage() {
               </span>
             </Link>
           </WarmButton>
-          <WarmButton variant="ghost" className="w-full justify-start">
-            <Settings className="h-4 w-4 mr-2" />
-            {t('appSettings')}
+          <WarmButton asChild variant="ghost" className="w-full justify-start">
+            <Link href="/app/settings">
+              <span className="inline-flex items-center gap-2">
+                <Settings className="h-4 w-4" />
+                {t('appSettings')}
+              </span>
+            </Link>
           </WarmButton>
-          <WarmButton variant="ghost" className="w-full justify-start text-[#E17B5C]">
-            <LogOut className="h-4 w-4 mr-2" />
-            {tNav('logout')}
+          <WarmButton asChild variant="ghost" className="w-full justify-start text-[#E17B5C]">
+            <Link href="/api/auth/signout?callbackUrl=/">
+              <span className="inline-flex items-center gap-2">
+                <LogOut className="h-4 w-4" />
+                {tNav('logout')}
+              </span>
+            </Link>
           </WarmButton>
         </div>
       </WarmCard>

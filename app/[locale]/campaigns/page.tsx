@@ -12,6 +12,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link, routing } from "@/routing"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_NAME, getLocalePath } from "@/lib/seo"
 import { getTenantContext } from "@/lib/tenant-context"
+import { Suspense } from "react"
+import CampaignFilters from "@/components/campaign-filters"
 
 function isDatabaseUnavailableError(error: unknown): boolean {
   if (error instanceof Prisma.PrismaClientInitializationError) {
@@ -82,7 +84,7 @@ export default async function CampaignsPage({
   searchParams,
 }: {
   params: { locale: string } | Promise<{ locale: string }>
-  searchParams?: { category?: string; q?: string }
+  searchParams?: { category?: string; q?: string; sort?: string; merchant?: string; minPrice?: string; maxPrice?: string }
 }) {
   const p = await Promise.resolve(params)
   let locale = p?.locale
@@ -97,6 +99,10 @@ export default async function CampaignsPage({
   const now = new Date()
   const searchQuery = searchParams?.q?.toString().trim() || ""
   const selectedCategory = searchParams?.category || "all"
+  const sortBy = searchParams?.sort || "newest"
+  const merchantFilter = searchParams?.merchant || ""
+  const minPrice = searchParams?.minPrice ? parseInt(searchParams.minPrice, 10) * 100 : 0
+  const maxPrice = searchParams?.maxPrice ? parseInt(searchParams.maxPrice, 10) * 100 : 0
 
   // Build where clause based on tenant context
   const campaignWhere = {
@@ -175,7 +181,7 @@ export default async function CampaignsPage({
     { id: fallbackCampaignCategory.id, label: categoryLabels[fallbackCampaignCategory.id] || "Other" },
   ]
 
-  const visibleCampaigns = campaigns.filter((campaign) => {
+  const filteredCampaigns = campaigns.filter((campaign) => {
     const categoryId = getCampaignCategoryId({
       name: campaign.name,
       description: campaign.description,
@@ -185,12 +191,33 @@ export default async function CampaignsPage({
       searchQuery.length === 0 ||
       campaign.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       campaign.merchant.name.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
+    const matchesMerchant = !merchantFilter || campaign.merchant.slug === merchantFilter
+    const price = campaign.price || 0
+    const matchesMinPrice = !minPrice || price >= minPrice
+    const matchesMaxPrice = !maxPrice || price <= maxPrice
+    return matchesCategory && matchesSearch && matchesMerchant && matchesMinPrice && matchesMaxPrice
+  })
+
+  // Sort
+  const visibleCampaigns = [...filteredCampaigns].sort((a, b) => {
+    switch (sortBy) {
+      case "oldest": return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      case "price_low": return (a.price || 0) - (b.price || 0)
+      case "price_high": return (b.price || 0) - (a.price || 0)
+      case "popular": return b._count.purchases - a._count.purchases
+      case "expiring": return new Date(a.endDate).getTime() - new Date(b.endDate).getTime()
+      default: return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    }
   })
 
   const campaignCount = visibleCampaigns.length
   const merchantCount = new Set(visibleCampaigns.map((campaign) => campaign.merchantId)).size
   const voucherCount = visibleCampaigns.reduce((sum, campaign) => sum + campaign._count.vouchers, 0)
+
+  // Unique merchants for filter dropdown
+  const uniqueMerchants = Array.from(
+    new Map(campaigns.map((c) => [c.merchant.slug, { slug: c.merchant.slug, name: c.merchant.name }])).values()
+  ).sort((a, b) => a.name.localeCompare(b.name))
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
@@ -235,7 +262,7 @@ export default async function CampaignsPage({
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="flex flex-wrap justify-center gap-3 mb-6">
           {categoryOptions.map((category) => {
             const isActive = selectedCategory === category.id
             return (
@@ -253,6 +280,12 @@ export default async function CampaignsPage({
               </Link>
             )
           })}
+        </div>
+
+        <div className="flex justify-center mb-10">
+          <Suspense fallback={null}>
+            <CampaignFilters merchants={uniqueMerchants} />
+          </Suspense>
         </div>
 
         {visibleCampaigns.length > 0 ? (

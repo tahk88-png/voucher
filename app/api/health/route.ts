@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { withErrorHandler } from '@/lib/error-handler';
 
 /**
  * Health check endpoint
@@ -12,22 +13,15 @@ import { prisma } from '@/lib/prisma';
  */
 export async function GET() {
   const timestamp = new Date().toISOString();
-  
-  try {
+
+  return withErrorHandler(async () => {
     // Test database connection
     await prisma.$queryRaw`SELECT 1`;
-    
+
     return NextResponse.json({
       status: 'ok',
       database: 'connected',
       timestamp,
     }, { status: 200 });
-  } catch (error) {
-    return NextResponse.json({
-      status: 'error',
-      database: 'disconnected',
-      timestamp,
-      error: error instanceof Error ? error.message : 'Unknown error',
-    }, { status: 503 });
-  }
+  });
 }

@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { hashFriendIdentifier, safeParseJson } from '@/lib/utils';
 import { isFeatureEnabled } from '@/lib/merchant-status';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const claimSchema = z.object({
@@ -11,7 +12,7 @@ const claimSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -110,14 +111,5 @@ export async function POST(req: NextRequest) {
       shareUrl,
       remaining: weeklyDrop.stock - 1, // Approximate
     });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    if (error instanceof Error && error.message === 'Weekly drop sold out') {
-      return NextResponse.json({ error: error.message }, { status: 409 });
-    }
-    console.error('Error claiming weekly drop:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

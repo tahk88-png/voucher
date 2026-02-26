@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { hashFriendIdentifier } from '@/lib/utils';
 import { checkReferralRateLimit } from '@/lib/fraud';
-import { captureException } from '@/lib/error-tracking';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const createReferralSchema = z.object({
@@ -12,8 +12,7 @@ const createReferralSchema = z.object({
 });
 
 export async function POST(req: NextRequest) {
-  let voucherId: string | undefined;
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -21,7 +20,6 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const parsed = createReferralSchema.parse(body);
-    voucherId = parsed.voucherId;
     const { friendHint } = parsed;
 
     // Get voucher
@@ -70,16 +68,5 @@ export async function POST(req: NextRequest) {
       referralId: referral.id,
       shareUrl,
     });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    if (error instanceof Error) {
-      captureException(error, {
-        context: 'referral_creation',
-        voucherId,
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

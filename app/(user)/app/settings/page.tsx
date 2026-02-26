@@ -4,10 +4,11 @@ import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import Link from 'next/link';
-import { Settings, Bell, Lock } from 'lucide-react';
+import { Settings, Bell, Lock, Trash2 } from 'lucide-react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import PushSubscribeButton from '@/components/push-subscribe-button';
 import ChangePasswordForm from '@/components/change-password-form';
+import DeleteAccountDialog from '@/components/delete-account-dialog';
 
 export default async function SettingsPage() {
   const session = await auth();
@@ -84,6 +85,19 @@ export default async function SettingsPage() {
             <Link href="/api/auth/signout?callbackUrl=/">{tNav('logout')}</Link>
           </WarmButton>
         </div>
+      </WarmCard>
+
+      <WarmCard padding="lg" className="bg-white border border-red-100">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="w-10 h-10 rounded-[12px] bg-red-50 flex items-center justify-center shrink-0">
+            <Trash2 className="h-5 w-5 text-red-500" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold text-[#2D2721]">Delete account</div>
+            <div className="text-sm text-[#6B5744]">Permanently delete your account and anonymize your data. This action cannot be undone.</div>
+          </div>
+        </div>
+        <DeleteAccountDialog />
       </WarmCard>
     </div>
   );

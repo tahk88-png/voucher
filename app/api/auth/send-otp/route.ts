@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimitDistributed } from '@/lib/rate-limit';
 import crypto from 'crypto';
 
@@ -11,7 +12,7 @@ function generateOTP(): string {
 }
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     // IP-based rate limit: 5 requests per 5 minutes (distributed via Redis)
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     const ipCheck = await rateLimitDistributed(`otp:ip:${ip}`, 5, 5 * 60 * 1000);
@@ -80,8 +81,5 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ sent: true });
-  } catch (error) {
-    console.error('[send-otp]', error);
-    return NextResponse.json({ error: 'Failed to send OTP' }, { status: 500 });
-  }
+  });
 }

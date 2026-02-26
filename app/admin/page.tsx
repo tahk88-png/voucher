@@ -3,11 +3,14 @@ import { redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { safeParseJson } from '@/lib/utils';
 import { WarmCard } from '@/components/warm-card';
+import { WarmButton } from '@/components/warm-button';
 import { AuditLogPayload } from '@/types';
 import MerchantsTable from './merchants-table';
 import AuditLogView from './audit-log-view';
 import PendingMerchants from './pending-merchants';
 import { AccessControlError, requirePlatformAdminProfile } from '@/lib/access-control';
+import Link from 'next/link';
+import { Users } from 'lucide-react';
 
 export const metadata: Metadata = {
   robots: {
@@ -100,10 +103,16 @@ export default async function AdminPage() {
           <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
             <span className="text-[#2D2721] font-bold text-lg">A</span>
           </div>
-          <div>
+          <div className="flex-1">
             <h1 className="text-3xl font-bold text-[#2D2721]">Platform Admin</h1>
             <p className="text-[#6B5744]">Overview of merchants, users, and voucher activity.</p>
           </div>
+          <WarmButton asChild variant="outline" size="sm">
+            <Link href="/admin/users" className="inline-flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              Manage Users
+            </Link>
+          </WarmButton>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6 mb-6">

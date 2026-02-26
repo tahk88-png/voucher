@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { captureException } from '@/lib/error-tracking';
+import { withErrorHandler } from '@/lib/error-handler';
 import { AccessControlError, accessErrorResponse, requirePlatformAdminProfile } from '@/lib/access-control';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(_req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     await requirePlatformAdminProfile();
 
     const merchants = await prisma.merchant.findMany({
@@ -25,15 +25,5 @@ export async function GET(_req: NextRequest) {
     });
 
     return NextResponse.json(merchants);
-  } catch (error) {
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    if (error instanceof Error) {
-      captureException(error, {
-        context: 'admin_merchants_fetch',
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

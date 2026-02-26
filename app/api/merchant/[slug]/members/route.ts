@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { sendMemberInviteEmail } from '@/lib/emails';
 import { AccessControlError, accessErrorResponse, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { requireTeamInviteAccess } from '@/lib/billing';
+import { withErrorHandler } from '@/lib/error-handler';
 
 const inviteMemberSchema = z.object({
   email: z.string().email(),
@@ -15,7 +16,7 @@ export async function POST(
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const { merchant, profile } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
     await requireTeamInviteAccess(merchant.id);
 
@@ -104,19 +105,5 @@ export async function POST(
     }
 
     return NextResponse.json(member);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    if (error instanceof Error) {
-      captureException(error, {
-        context: 'member_invite',
-        merchantSlug: params.slug,
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

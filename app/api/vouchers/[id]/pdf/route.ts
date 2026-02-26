@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { createVoucherPDF, generatePDFBuffer } from '@/lib/pdf';
+import { withErrorHandler } from '@/lib/error-handler';
 import QRCode from 'qrcode';
 
 /**
@@ -19,7 +20,7 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const voucher = await prisma.voucher.findUnique({
       where: { id: params.id },
       include: { merchant: true },
@@ -37,7 +38,7 @@ export async function GET(
     // Generate voucher code
     const voucherCode = `${voucher.codePrefix || 'V'}-${voucher.id.slice(0, 8).toUpperCase()}`;
     const voucherUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/v/${voucher.id}`;
-    
+
     // Generate QR code
     let qrCodeDataUrl: string | undefined;
     try {
@@ -67,8 +68,5 @@ export async function GET(
         'Content-Disposition': `attachment; filename="voucher-${voucherCode}.pdf"`,
       },
     });
-  } catch (error) {
-    console.error('Error generating PDF:', error);
-    return NextResponse.json({ error: 'Failed to generate PDF' }, { status: 500 });
-  }
+  });
 }

@@ -4,14 +4,14 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { requireActiveMerchant } from '@/lib/merchant-status';
 import { ensureMerchantOwnership } from '@/lib/tenant';
-import { captureException } from '@/lib/error-tracking';
+import { withErrorHandler } from '@/lib/error-handler';
 import { CacheKeys, invalidatePattern } from '@/lib/cache';
 
 export async function POST(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -57,13 +57,5 @@ export async function POST(
     await invalidatePattern(`${CacheKeys.publicMerchantVouchers(voucher.merchantId)}*`);
 
     return NextResponse.json(updated);
-  } catch (error) {
-    if (error instanceof Error) {
-      captureException(error, {
-        context: 'voucher_publish',
-        voucherId: params.id,
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

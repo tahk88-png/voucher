@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const updateEventSchema = z.object({
@@ -34,7 +35,7 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const event = await prisma.event.findUnique({
       where: { id: params.id },
       include: {
@@ -73,17 +74,14 @@ export async function GET(
       soldTickets,
       availableTickets: event.maxCapacity - soldTickets,
     });
-  } catch (error) {
-    console.error('Error fetching event:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }
 
 export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -136,11 +134,5 @@ export async function PUT(
     });
 
     return NextResponse.json(updated);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error('Error updating event:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

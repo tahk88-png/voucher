@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendCreditExpiryWarning } from '@/lib/emails';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,7 +12,7 @@ export const dynamic = 'force-dynamic';
  * Checks for credits expiring in 7 days and 1 day, sends warnings
  */
 export async function GET(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     // Verify cron secret (optional but recommended)
     const authHeader = req.headers.get('authorization');
     const cronSecret = process.env.CRON_SECRET;
@@ -125,8 +126,5 @@ export async function GET(req: NextRequest) {
         '1day': creditsExpiringIn1Day.length,
       },
     });
-  } catch (error) {
-    console.error('Error processing credit expiry warnings:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

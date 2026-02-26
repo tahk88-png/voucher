@@ -60,7 +60,9 @@
       "Bash(python3:*)",
       "Bash(CI=true pnpm install:*)",
       "Bash(pnpm add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git tag:*)"
     ],
     "additionalDirectories": [
       "C:\\Users\\tahk8\\voucher\\app\\api\\vouchers\\[id]",

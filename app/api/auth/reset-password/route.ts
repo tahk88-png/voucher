@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { hashPassword } from '@/lib/passwords';
+import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimit } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     // IP rate limit: 10 per 15 minutes
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
     const ipCheck = rateLimit(`resetVerify:ip:${ip}`, 10, 15 * 60 * 1000);
@@ -67,8 +68,5 @@ export async function POST(req: NextRequest) {
     ]);
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('[reset-password]', error);
-    return NextResponse.json({ error: 'Failed to reset password' }, { status: 500 });
-  }
+  });
 }

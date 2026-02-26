@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { withErrorHandler } from '@/lib/error-handler';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const { email, otp } = await req.json();
     if (!email || !otp) {
       return NextResponse.json({ error: 'Email and OTP required' }, { status: 400 });
@@ -69,8 +70,5 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ verified: true, email: normalizedEmail, magicToken });
-  } catch (error) {
-    console.error('[verify-otp]', error);
-    return NextResponse.json({ error: 'Verification failed' }, { status: 500 });
-  }
+  });
 }

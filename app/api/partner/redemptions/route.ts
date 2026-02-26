@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { z } from "zod"
 import { requirePartnerApiKey } from "@/lib/b2b/auth"
 import { redeemVoucher } from "@/lib/b2b/vouchers"
+import { withErrorHandler } from "@/lib/error-handler"
 
 const schema = z.object({
   code_or_qr: z.string().min(3),
@@ -12,21 +13,21 @@ const schema = z.object({
 })
 
 export async function POST(req: Request) {
-  const apiKey = await requirePartnerApiKey(req.headers.get("x-partner-key"))
-  if (!apiKey) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  return withErrorHandler(async () => {
+    const apiKey = await requirePartnerApiKey(req.headers.get("x-partner-key"))
+    if (!apiKey) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-  const idempotencyKey = req.headers.get("idempotency-key")
-  if (!idempotencyKey) {
-    return NextResponse.json({ error: "Missing Idempotency-Key" }, { status: 400 })
-  }
+    const idempotencyKey = req.headers.get("idempotency-key")
+    if (!idempotencyKey) {
+      return NextResponse.json({ error: "Missing Idempotency-Key" }, { status: 400 })
+    }
 
-  const body = await req.json().catch(() => null)
-  const parsed = schema.safeParse(body)
-  if (!parsed.success) {
-    return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
-  }
+    const body = await req.json().catch(() => null)
+    const parsed = schema.safeParse(body)
+    if (!parsed.success) {
+      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
+    }
 
-  try {
     const result = await redeemVoucher({
       codeOrQr: parsed.data.code_or_qr,
       partnerOrgId: apiKey.orgId,
@@ -43,7 +44,5 @@ export async function POST(req: Request) {
       remaining_value: result.voucher?.remainingValueAmount ?? null,
       reused: result.reused,
     })
-  } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Redeem failed" }, { status: 400 })
-  }
+  })
 }

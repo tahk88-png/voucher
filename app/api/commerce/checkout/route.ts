@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { z } from "zod"
 import { prisma } from "@/lib/prisma"
 import { isMerchantActive } from "@/lib/merchant-status"
+import { withErrorHandler } from "@/lib/error-handler"
 
 const checkoutSchema = z.object({
   type: z.enum(["product", "rental"]),
@@ -21,7 +22,7 @@ const checkoutSchema = z.object({
 })
 
 export async function POST(req: Request) {
-  try {
+  return withErrorHandler(async () => {
     const body = await req.json()
     const data = checkoutSchema.parse(body)
     const merchant = await prisma.merchant.findUnique({ where: { id: data.merchantId } })
@@ -47,7 +48,5 @@ export async function POST(req: Request) {
     })
 
     return NextResponse.json({ intentId: intent.id, total })
-  } catch (error) {
-    return NextResponse.json({ error: "Invalid checkout request" }, { status: 400 })
-  }
+  })
 }

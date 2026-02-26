@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { createCheckoutSession } from '@/lib/stripe';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 
 const checkoutSchema = z.object({
@@ -47,7 +48,7 @@ function isAllowedRedirect(url: string, allowedHosts: Set<string>) {
 }
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -98,11 +99,5 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ url: checkoutSession.url });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    console.error('Stripe checkout error:', error);
-    return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 });
-  }
+  });
 }

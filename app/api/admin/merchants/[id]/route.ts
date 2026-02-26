@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { activateMerchant, deactivateMerchant } from '@/lib/merchant-status';
-import { captureException } from '@/lib/error-tracking';
+import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
 import { AccessControlError, accessErrorResponse, requirePlatformAdminProfile } from '@/lib/access-control';
 
@@ -14,7 +14,7 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  try {
+  return withErrorHandler(async () => {
     const profile = await requirePlatformAdminProfile();
 
     const body = await req.json();
@@ -56,19 +56,5 @@ export async function PUT(
     });
 
     return NextResponse.json(updated);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    if (error instanceof Error) {
-      captureException(error, {
-        context: 'admin_merchant_update',
-        merchantId: params.id,
-      });
-    }
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }
