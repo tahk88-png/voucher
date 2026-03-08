@@ -5,17 +5,18 @@ import { withErrorHandler } from "@/lib/error-handler"
 
 export async function GET(
   req: Request,
-  { params }: { params: { orgId: string; orderId: string } }
+  { params }: { params: Promise<{ orgId: string; orderId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId, orderId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId)
+    const membership = await requireOrgMembership(session.user.id, orgId)
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const order = await prisma.b2BOrder.findFirst({
-      where: { id: params.orderId, orgId: params.orgId },
+      where: { id: orderId, orgId },
       include: { campaign: true, invoice: true, vouchers: true },
     })
     if (!order) return NextResponse.json({ error: "Not found" }, { status: 404 })

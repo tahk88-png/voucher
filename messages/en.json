@@ -458,7 +458,17 @@
     "polish": "Polish",
     "ukrainian": "Ukrainian",
     "italian": "Italian",
-    "russian": "Russian"
+    "russian": "Russian",
+    "portuguese": "Portuguese",
+    "dutch": "Dutch",
+    "czech": "Czech",
+    "romanian": "Romanian",
+    "hungarian": "Hungarian",
+    "turkish": "Turkish",
+    "japanese": "Japanese",
+    "korean": "Korean",
+    "chinese": "Chinese",
+    "arabic": "Arabic"
   },
   "share": {
     "share": "Share",

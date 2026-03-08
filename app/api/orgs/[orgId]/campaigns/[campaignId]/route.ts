@@ -22,18 +22,23 @@ const updateSchema = z.object({
 
 export async function GET(
   req: Request,
-  { params }: { params: { orgId: string; campaignId: string } }
+  { params }: { params: Promise<{ orgId: string; campaignId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId, campaignId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId)
+    const membership = await requireOrgMembership(session.user.id, orgId)
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const campaign = await prisma.voucherCampaign.findFirst({
-      where: { id: params.campaignId, orgId: params.orgId },
-      include: { allowedPartners: true },
+      where: { id: campaignId, orgId },
+      include: {
+        allowedPartners: { include: { partner: { select: { id: true, name: true } } } },
+        allowedProducts: true,
+        allowedLocations: true,
+      },
     })
 
     if (!campaign) {
@@ -46,13 +51,14 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { orgId: string; campaignId: string } }
+  { params }: { params: Promise<{ orgId: string; campaignId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId, campaignId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin", "marketing"])
+    const membership = await requireOrgMembership(session.user.id, orgId, ["owner", "admin", "marketing"])
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const body = await req.json().catch(() => null)
@@ -62,7 +68,7 @@ export async function PATCH(
     }
 
     const existing = await prisma.voucherCampaign.findFirst({
-      where: { id: params.campaignId, orgId: params.orgId },
+      where: { id: campaignId, orgId },
     })
     if (!existing) {
       return NextResponse.json({ error: "Not found" }, { status: 404 })
@@ -87,7 +93,7 @@ export async function PATCH(
     })
 
     await recordAuditEvent({
-      orgId: params.orgId,
+      orgId,
       actorUserId: session.user.id,
       entityType: "campaign",
       entityId: campaign.id,

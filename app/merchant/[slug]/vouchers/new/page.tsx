@@ -7,6 +7,7 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { formatCurrency } from '@/lib/utils';
+import { sanitizeCssValue } from '@/lib/sanitize-css';
 import { showError } from '@/lib/toast-helpers';
 import { parsePaywallResponse, type PaywallDetails } from '@/lib/paywall-utils';
 import PaywallModal from '@/components/billing/paywall-modal';
@@ -64,7 +65,7 @@ function VoucherPreview({ form }: { form: FormData }) {
   const headline = form.designHeadline || 'Voucher';
   return (
     <div className="voucher-preview w-full max-w-[320px] mx-auto lg:mx-0 rounded-lg border border-[rgba(139,115,85,0.15)] shadow-lg overflow-hidden bg-[var(--preview-bg)]">
-      <style dangerouslySetInnerHTML={{ __html: `.voucher-preview{--preview-bg:${form.designBackgroundColor};--preview-primary:${form.designPrimaryColor}}` }} />
+      <style dangerouslySetInnerHTML={{ __html: `.voucher-preview{--preview-bg:${sanitizeCssValue(form.designBackgroundColor || '')};--preview-primary:${sanitizeCssValue(form.designPrimaryColor || '')}}` }} />
       <div className="px-5 pt-5 pb-4 text-white bg-[var(--preview-primary)]">
         <h3 className="text-xl font-semibold">{headline}</h3>
         <p className="mt-2 text-2xl font-semibold tabular-nums">{valueStr}</p>

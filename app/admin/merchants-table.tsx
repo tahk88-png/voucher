@@ -34,7 +34,7 @@ export default function MerchantsTable() {
       const res = await fetch('/api/admin/merchants');
       if (!res.ok) throw new Error('Failed to fetch merchants');
       const data = await res.json();
-      setMerchants(data);
+      setMerchants(Array.isArray(data) ? data : data.merchants ?? []);
     } catch (error) {
       showError('Failed to load merchants');
       if (error instanceof Error) {

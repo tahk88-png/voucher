@@ -5,32 +5,32 @@ import { Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap font-semibold tracking-[0.01em] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed",
+  "relative inline-flex items-center justify-center whitespace-nowrap font-semibold tracking-[0.01em] transition-all duration-200 ease-spring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--surface)] disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden select-none",
   {
     variants: {
       variant: {
         default:
-          "gradient-brand text-[var(--primary-foreground)] border border-[var(--primary)] shadow-md hover:shadow-lg hover:scale-[1.015] active:scale-[0.98]",
+          "gradient-brand text-[var(--primary-foreground)] border border-[var(--primary)] shadow-md hover:shadow-primary hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:shadow-sm",
         primary:
-          "gradient-brand text-[var(--primary-foreground)] border border-[var(--primary)] shadow-md hover:shadow-lg hover:scale-[1.015] active:scale-[0.98]",
+          "gradient-brand text-[var(--primary-foreground)] border border-[var(--primary)] shadow-md hover:shadow-primary hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:shadow-sm",
         secondary:
-          "bg-[var(--surface)] text-[var(--text)] border-2 border-[var(--border)] hover:border-[var(--border-strong)] hover:shadow-md",
+          "bg-[var(--surface)] text-[var(--text)] border border-[var(--border)] shadow-sm hover:border-[var(--border-strong)] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]",
         ghost:
-          "bg-transparent text-[var(--text-muted)] shadow-none hover:bg-[var(--surface-dim)]",
+          "bg-transparent text-[var(--text-muted)] shadow-none hover:bg-[var(--surface-dim)] hover:text-[var(--text)] active:scale-[0.98]",
         accent:
-          "bg-[var(--accent)] text-[var(--accent-foreground)] border border-[var(--border)] hover:bg-[var(--surface-muted)] shadow-sm",
+          "bg-[var(--accent)] text-[var(--accent-foreground)] border border-[var(--border)] hover:bg-[var(--surface-muted)] hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] shadow-sm",
         destructive:
-          "bg-[var(--danger)] text-white hover:opacity-90 hover:shadow-lg",
+          "bg-[var(--danger)] text-white shadow-sm hover:shadow-danger hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]",
         outline:
-          "border-2 border-[var(--primary)] bg-transparent text-[var(--text)] hover:bg-[var(--accent)]",
+          "border-2 border-[var(--primary)] bg-transparent text-[var(--text)] hover:bg-[var(--accent)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]",
         link:
-          "text-[var(--text)] underline-offset-4 shadow-none hover:underline",
+          "text-[var(--text)] underline-offset-4 shadow-none hover:underline hover:text-[var(--primary)]",
       },
       size: {
-        default: "px-6 py-3 text-sm rounded-[var(--r-md)]",
-        sm:      "px-4 py-2 text-sm rounded-[var(--r-sm)]",
-        md:      "px-6 py-3 text-sm rounded-[var(--r-md)]",
-        lg:      "px-8 py-3.5 text-base rounded-[var(--r-lg)]",
+        default: "px-6 py-3 text-sm rounded-[var(--r-md)] gap-2",
+        sm:      "px-4 py-2 text-sm rounded-[var(--r-sm)] gap-1.5",
+        md:      "px-6 py-3 text-sm rounded-[var(--r-md)] gap-2",
+        lg:      "px-8 py-3.5 text-base rounded-[var(--r-lg)] gap-2.5",
         icon:    "h-10 w-10 rounded-[var(--r-sm)] p-0",
       },
     },

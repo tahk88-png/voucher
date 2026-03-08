@@ -33,11 +33,12 @@ const updateEventSchema = z.object({
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const event = await prisma.event.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         merchant: {
           select: {
@@ -79,16 +80,17 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const event = await prisma.event.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { merchant: true },
     });
 
@@ -119,7 +121,7 @@ export async function PUT(
     if (data.status !== undefined) updateData.status = data.status;
 
     const updated = await prisma.event.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
     });
 
@@ -129,7 +131,7 @@ export async function PUT(
         merchantId: event.merchantId,
         actorUserId: session.user.id,
         action: 'event.updated',
-        payloadJson: { eventId: params.id, changes: Object.keys(updateData) },
+        payloadJson: { eventId: id, changes: Object.keys(updateData) },
       },
     });
 

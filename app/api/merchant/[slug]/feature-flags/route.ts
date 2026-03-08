@@ -7,16 +7,17 @@ import { withErrorHandler } from '@/lib/error-handler';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { slug } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
     });
 
     if (!merchant) {

@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { WarmButton } from "@/components/warm-button"
-import { WarmCard } from "@/components/warm-card"
 import { getNavigationLinks, getFallbackNavigation } from "@/lib/navigation"
 import { Gift } from "lucide-react"
 
@@ -24,15 +23,8 @@ export default async function TenantShell({ merchant, children }: TenantShellPro
       scope: "tenant",
       position: "header",
     })) || []
-  const footerLinks =
-    (await getNavigationLinks({
-      merchantId: merchant.id,
-      scope: "tenant",
-      position: "footer",
-    })) || []
 
   const header = headerLinks.length > 0 ? headerLinks : fallback.header
-  const footer = footerLinks.length > 0 ? footerLinks : fallback.footer
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
@@ -71,28 +63,6 @@ export default async function TenantShell({ merchant, children }: TenantShellPro
         </div>
       </header>
       <main className="flex-1">{children}</main>
-      <footer className="bg-[var(--surface)]/50 backdrop-blur-sm border-t border-[var(--border)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 grid gap-6 md:grid-cols-2">
-          <div className="space-y-2">
-            <p className="text-sm font-semibold text-[var(--text)]">{merchant.name}</p>
-            {merchant.supportEmail ? <p className="text-sm text-[var(--text-muted)]">Support: {merchant.supportEmail}</p> : null}
-            {merchant.website ? (
-              <p className="text-sm text-[var(--text-muted)]">
-                <a href={merchant.website} className="underline underline-offset-2">
-                  {merchant.website}
-                </a>
-              </p>
-            ) : null}
-          </div>
-          <div className="flex flex-wrap gap-4 justify-start md:justify-end text-sm text-[var(--text-muted)]">
-            {footer.map((link) => (
-              <Link key={link.id} href={link.href} className="hover:text-[var(--text)]">
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

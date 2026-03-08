@@ -17,6 +17,10 @@ const languageNames = Object.fromEntries(
   languageOptions.map((language) => [language.code, language.nativeName]),
 ) as Record<SupportedLocale, string>;
 
+const languageEmojis = Object.fromEntries(
+  languageOptions.map((language) => [language.code, language.emoji]),
+) as Record<SupportedLocale, string>;
+
 function persistLocaleSelection(locale: SupportedLocale) {
   const oneYear = 60 * 60 * 24 * 365;
   const cookieAttributes = `path=/; max-age=${oneYear}; samesite=lax`;
@@ -53,13 +57,18 @@ export default function LanguageSelector() {
     <div className="flex items-center gap-2">
       <Globe className="h-4 w-4 text-[var(--text-faint)]" />
       <Select value={locale} onValueChange={handleLanguageChange}>
-        <SelectTrigger className="w-[140px]" aria-label="Select language">
-          <SelectValue>{languageNames[locale as SupportedLocale] || locale}</SelectValue>
+        <SelectTrigger className="w-[180px]" aria-label="Select language">
+          <SelectValue>
+            {languageEmojis[locale as SupportedLocale] || ''} {languageNames[locale as SupportedLocale] || locale}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           {supportedLocales.map((loc) => (
             <SelectItem key={loc} value={loc}>
-              {languageNames[loc] || loc}
+              <span className="inline-flex items-center gap-2">
+                <span>{languageEmojis[loc] || ''}</span>
+                <span>{languageNames[loc] || loc}</span>
+              </span>
             </SelectItem>
           ))}
         </SelectContent>

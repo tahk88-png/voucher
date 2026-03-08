@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { createCheckoutSession } from '@/lib/stripe';
-import { withErrorHandler } from '@/lib/error-handler';
+import { withErrorHandler, RateLimitError } from '@/lib/error-handler';
+import { rateLimit } from '@/lib/rate-limit';
 import { z } from 'zod';
 
 const checkoutSchema = z.object({
@@ -49,6 +50,10 @@ function isAllowedRedirect(url: string, allowedHosts: Set<string>) {
 
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+    const rl = rateLimit(`checkout:${ip}`, 10, 60_000);
+    if (!rl.allowed) throw new RateLimitError('Too many checkout attempts');
+
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

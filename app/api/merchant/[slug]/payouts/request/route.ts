@@ -9,13 +9,14 @@ const requestSchema = z.object({
   amount: z.number().int().positive(),
 })
 
-export async function POST(req: Request, { params }: { params: { slug: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{slug: string}> }) {
+  const { slug } = await params
   const session = await auth()
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const merchant = await prisma.merchant.findUnique({ where: { slug: params.slug } })
+  const merchant = await prisma.merchant.findUnique({ where: { slug } })
   if (!merchant) {
     return NextResponse.json({ error: "Merchant not found" }, { status: 404 })
   }

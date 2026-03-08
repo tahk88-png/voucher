@@ -9,6 +9,7 @@
     ],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": ["node"],
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -70,6 +71,7 @@
     "lib",
     "types",
     "figma",
+    "modules",
     "src",
     ".next/types/**/*.ts",
     ".next-playwright/types/**/*.ts"

@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
-import { AccessControlError, accessErrorResponse, requirePlatformAdminProfile } from '@/lib/access-control';
+import { requireAdminPermission } from '@/lib/admin/guards';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   return withErrorHandler(async () => {
-    await requirePlatformAdminProfile();
+    await requireAdminPermission('admin.audit.read');
 
     const searchParams = req.nextUrl.searchParams;
-    const limit = parseInt(searchParams.get('limit') || '50', 10);
-    const offset = parseInt(searchParams.get('offset') || '0', 10);
+    const limit = Math.min(parseInt(searchParams.get('limit') || '50', 10), 1000);
+    const offset = Math.max(0, parseInt(searchParams.get('offset') || '0', 10));
     const action = searchParams.get('action');
     const merchantId = searchParams.get('merchantId');
 

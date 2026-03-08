@@ -10,13 +10,14 @@ const schema = z.object({
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { orgId: string; memberId: string } }
+  { params }: { params: Promise<{ orgId: string; memberId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId, memberId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin"])
+    const membership = await requireOrgMembership(session.user.id, orgId, ["owner", "admin"])
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const body = await req.json().catch(() => null)
@@ -26,7 +27,7 @@ export async function PATCH(
     }
 
     const member = await prisma.orgMembership.findFirst({
-      where: { id: params.memberId, orgId: params.orgId },
+      where: { id: memberId, orgId },
     })
     if (!member) return NextResponse.json({ error: "Not found" }, { status: 404 })
 

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { withErrorHandler } from '@/lib/error-handler';
+import { hasActiveLegalHold } from '@/lib/admin/legal-hold';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,6 +14,18 @@ export async function DELETE() {
     }
 
     const userId = session.user.id;
+
+    // Check for active legal holds — prevent deletion if any exist
+    const legalHold = await hasActiveLegalHold(userId);
+    if (legalHold) {
+      return NextResponse.json(
+        {
+          error: 'Account deletion is temporarily unavailable. Please contact support.',
+          code: 'LEGAL_HOLD_ACTIVE',
+        },
+        { status: 403 },
+      );
+    }
 
     // Anonymize user data instead of hard-deleting to preserve merchant statistics
     await prisma.$transaction(async (tx) => {

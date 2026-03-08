@@ -60,13 +60,13 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
       <div className="relative" ref={dropdownRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-3 py-2 rounded-[12px] bg-[var(--surface)] hover:bg-[var(--bg)] border border-[var(--border)] transition-all"
+          className="flex items-center gap-2 px-3 py-2 rounded-[var(--r-sm)] bg-[var(--surface)] hover:bg-[var(--bg)] border border-[var(--border)] transition-all duration-200 ease-smooth shadow-sm hover:shadow-md"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-controls={menuId}
           aria-label={`Select interface language (${selectedLang?.code?.toUpperCase() || "unknown"})`}
         >
-          <span className="text-xl">{selectedLang?.flag}</span>
+          <span className="text-lg">{selectedLang?.emoji}</span>
           <span className="text-sm font-medium text-[var(--text)] hidden sm:inline">
             {selectedLang?.code.toUpperCase()}
           </span>
@@ -76,19 +76,19 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
         {isOpen && (
           <div id={menuId} className="absolute right-0 top-full mt-2 z-50 min-w-[200px]" role="listbox">
             <WarmCard padding="sm" className="shadow-warm-lg">
-              <div className="space-y-1">
+              <div className="space-y-1 max-h-[350px] overflow-y-auto pr-1 scrollbar-thin">
                 {availableLanguages.map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => handleLanguageSelect(lang.code)}
-                    className={`w-full flex items-center justify-between gap-3 px-3 py-2 rounded-[10px] transition-all ${
+                    className={`w-full flex items-center justify-between gap-3 px-3 py-2 rounded-[10px] transition-all duration-150 ease-smooth ${
                       language === lang.code
                         ? "gradient-brand text-[var(--text)]"
                         : "hover:bg-[var(--bg)] text-[var(--text-muted)]"
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xl">{lang.flag}</span>
+                      <span className="text-lg">{lang.emoji}</span>
                       <div className="text-left">
                         <div className="text-sm font-medium">{lang.nativeName}</div>
                         <div className="text-xs opacity-70">{lang.name}</div>
@@ -109,7 +109,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 px-4 py-3 rounded-[14px] bg-[var(--surface)] hover:bg-[var(--bg)] border border-[var(--border)] transition-all w-full sm:w-auto"
+        className="flex items-center gap-3 px-4 py-3 rounded-[var(--r-md)] bg-[var(--surface)] hover:bg-[var(--bg)] border border-[var(--border)] transition-all duration-200 ease-smooth shadow-sm hover:shadow-md w-full sm:w-auto"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls={menuId}
@@ -117,7 +117,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
       >
         <Globe className="h-5 w-5 text-[var(--primary)]" />
         <div className="flex items-center gap-2 flex-1">
-          <span className="text-2xl">{selectedLang?.flag}</span>
+          <span className="text-xl">{selectedLang?.emoji}</span>
           <div className="text-left">
             <div className="text-sm font-semibold text-[var(--text)]">{selectedLang?.nativeName}</div>
             <div className="text-xs text-[var(--text-faint)]">{selectedLang?.name} (UI)</div>
@@ -137,19 +137,19 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
               <div className="text-xs font-semibold text-[var(--text-faint)] uppercase tracking-wide">{tLanguage("select")}</div>
               <div className="text-xs text-[var(--text-faint)] mt-1">Changes interface text only</div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1.5 max-h-[400px] overflow-y-auto pr-1 scrollbar-thin">
               {availableLanguages.map((lang) => (
                 <button
                   key={lang.code}
                   onClick={() => handleLanguageSelect(lang.code)}
-                  className={`w-full flex items-center justify-between gap-3 px-4 py-3 rounded-[12px] transition-all ${
+                  className={`w-full flex items-center justify-between gap-3 px-4 py-2.5 rounded-[12px] transition-all duration-150 ease-smooth ${
                     language === lang.code
                       ? "gradient-brand text-[var(--text)] shadow-warm"
                       : "hover:bg-[var(--bg)] text-[var(--text-muted)]"
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{lang.flag}</span>
+                    <span className="text-2xl">{lang.emoji}</span>
                     <div className="text-left">
                       <div className="text-sm font-semibold">{lang.nativeName}</div>
                       <div className="text-xs opacity-70">{lang.name}</div>

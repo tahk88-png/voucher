@@ -22,17 +22,18 @@ const campaignSchema = z.object({
 
 export async function GET(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId)
+    const membership = await requireOrgMembership(session.user.id, orgId)
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const campaigns = await prisma.voucherCampaign.findMany({
-      where: { orgId: params.orgId },
+      where: { orgId },
       orderBy: { createdAt: "desc" },
     })
 
@@ -42,13 +43,14 @@ export async function GET(
 
 export async function POST(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin", "marketing"])
+    const membership = await requireOrgMembership(session.user.id, orgId, ["owner", "admin", "marketing"])
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const body = await req.json().catch(() => null)
@@ -59,7 +61,7 @@ export async function POST(
 
     const campaign = await prisma.voucherCampaign.create({
       data: {
-        orgId: params.orgId,
+        orgId,
         name: parsed.data.name,
         description: parsed.data.description,
         codePrefix: parsed.data.codePrefix,
@@ -76,7 +78,7 @@ export async function POST(
     })
 
     await recordAuditEvent({
-      orgId: params.orgId,
+      orgId,
       actorUserId: session.user.id,
       entityType: "campaign",
       entityId: campaign.id,

@@ -51,36 +51,66 @@ model VerificationToken {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  emailVerified DateTime?
-  name          String?
-  passwordHash  String?
-  status        UserStatus @default(active)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id                String     @id @default(cuid())
+  email             String     @unique
+  emailVerified     DateTime?
+  name              String?
+  passwordHash      String?
+  status            UserStatus @default(active)
+  image             String?
+  adminRole         AdminRole?
+  preferredLanguage String?    @default("en")
+  deleted           Boolean    @default(false)
+  deletedAt         DateTime?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
 
-  accounts         Account[]
-  sessions         Session[]
-  orgMemberships   OrgMembership[]
-  merchantMembers  MerchantMember[]
-  referrals        Referral[]         @relation("Referrer")
-  redemptions      Redemption[]        @relation("RedeemedBy")
-  staffRedemptions Redemption[]        @relation("RedeemedByStaff")
-  creditLedgers    CreditLedger[]
-  creditUsages     CreditUsage[]
-  voucherPurchases VoucherPurchase[]
-  ticketPurchases  TicketPurchase[]
-  auditLogs        AuditLog[]
-  notifications    Notification[]
+  accounts                  Account[]
+  sessions                  Session[]
+  orgMemberships            OrgMembership[]
+  merchantMembers           MerchantMember[]
+  referrals                 Referral[]                 @relation("Referrer")
+  redemptions               Redemption[]               @relation("RedeemedBy")
+  staffRedemptions          Redemption[]               @relation("RedeemedByStaff")
+  creditLedgers             CreditLedger[]
+  creditUsages              CreditUsage[]
+  voucherPurchases          VoucherPurchase[]
+  giftCardPurchases         GiftCardPurchase[]
+  ticketPurchases           TicketPurchase[]
+  auditLogs                 AuditLog[]
+  notifications             Notification[]
   notificationSubscriptions NotificationSubscription[]
-  staffGiftCardRedemptions GiftCard[] @relation("GiftCardRedeemedByStaff")
-  cashierRedemptions VoucherRedemption[] @relation("VoucherRedemptionCashier")
-  orgAuditEvents     AuditEvent[] @relation("OrgAuditActor")
-  pushSubscriptions  PushSubscription[]
+  staffGiftCardRedemptions  GiftCard[]                 @relation("GiftCardRedeemedByStaff")
+  cashierRedemptions        VoucherRedemption[]        @relation("VoucherRedemptionCashier")
+  orgAuditEvents            AuditEvent[]               @relation("OrgAuditActor")
+  pushSubscriptions         PushSubscription[]
+  dataExportRequests        DataExportRequest[]        @relation("DataExportRequestUser")
+  dataDeletionRequests      DataDeletionRequest[]      @relation("DataDeletionRequestUser")
+  userConsents              UserConsent[]              @relation("UserConsentUser")
+
+  // Super Admin Control Wall relations
+  adminAuditLogs       AdminAuditLog[]    @relation("AdminAuditActor")
+  userReportsBy        UserReport[]       @relation("ReportedByUser")
+  userReportsOn        UserReport[]       @relation("ReportedUser")
+  moderationActionsBy  ModerationAction[] @relation("ModeratorUser")
+  moderationActionsOn  ModerationAction[] @relation("ModeratedUser")
+  appeals              Appeal[]           @relation("AppealUser")
+  appealReviewsBy      Appeal[]           @relation("AppealReviewer")
+  supportCases         SupportCase[]      @relation("SupportCaseUser")
+  supportCasesAssigned SupportCase[]      @relation("SupportCaseAssignee")
+  supportNotes         SupportNote[]
+  refundRecords        RefundRecord[]     @relation("RefundActorUser")
+  payoutHolds          PayoutHold[]       @relation("PayoutHoldActorUser")
+  legalHolds           LegalHold[]        @relation("LegalHoldActorUser")
+
+  // Smart Gift Feed relations
+  giftProfile      UserGiftProfile?      @relation("UserGiftProfileUser")
+  giftInteractions UserGiftInteraction[] @relation("UserGiftInteractionUser")
 
   @@index([status])
+  @@index([adminRole])
+  @@index([deleted])
+  @@index([deletedAt])
 }
 
 enum OrgType {
@@ -193,26 +223,120 @@ enum AuditEventType {
   reverse
 }
 
-model Organization {
-  id            String    @id @default(uuid())
-  type          OrgType
-  name          String
-  registryCode  String?
-  vatNumber     String?
-  billingEmail  String?
-  status        OrgStatus @default(active)
-  flagsJson     Json?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+// ─── Super Admin Control Wall Enums ───
 
-  members           OrgMembership[]
-  campaigns         VoucherCampaign[]
-  vouchers          VoucherInstance[] @relation("VoucherOrg")
-  issuedVouchers    VoucherInstance[] @relation("VoucherIssuedOrg")
-  orders            B2BOrder[]
-  partnerRedemptions VoucherRedemption[] @relation("PartnerOrgRedemptions")
-  auditEvents       AuditEvent[]
-  apiKeys           PartnerApiKey[]
+enum AdminRole {
+  super_admin
+  ops_admin
+  billing_admin
+  moderator
+  support_admin
+}
+
+enum ReportStatus {
+  open
+  under_review
+  resolved
+  dismissed
+}
+
+enum ReportCategory {
+  spam
+  fraud
+  offensive_content
+  trademark_violation
+  other
+}
+
+enum ModerationActionType {
+  warning
+  content_removal
+  suspension
+  ban
+  unban
+  feature_restriction
+}
+
+enum AppealStatus {
+  submitted
+  under_review
+  approved
+  denied
+  escalated
+}
+
+enum SupportCaseStatus {
+  open
+  in_progress
+  waiting_on_user
+  resolved
+  closed
+}
+
+enum SupportCasePriority {
+  low
+  normal
+  high
+  urgent
+}
+
+enum FeatureFlagStatus {
+  off
+  percentage
+  allowlist
+  on
+}
+
+enum JobRunStatus {
+  pending
+  running
+  succeeded
+  failed
+  skipped
+}
+
+enum RefundStatus {
+  refund_pending
+  processing
+  refund_succeeded
+  refund_failed
+  refund_cancelled
+}
+
+enum PayoutHoldReason {
+  fraud_review
+  chargeback
+  compliance
+  manual
+}
+
+enum LegalHoldType {
+  gdpr_request
+  law_enforcement
+  litigation
+  regulatory
+}
+
+model Organization {
+  id           String    @id @default(uuid())
+  type         OrgType
+  name         String
+  registryCode String?
+  vatNumber    String?
+  billingEmail String?
+  status       OrgStatus @default(active)
+  flagsJson    Json?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  members              OrgMembership[]
+  campaigns            VoucherCampaign[]
+  vouchers             VoucherInstance[]        @relation("VoucherOrg")
+  issuedVouchers       VoucherInstance[]        @relation("VoucherIssuedOrg")
+  orders               B2BOrder[]
+  partnerRedemptions   VoucherRedemption[]      @relation("PartnerOrgRedemptions")
+  auditEvents          AuditEvent[]
+  apiKeys              PartnerApiKey[]
   partnerCampaignLinks CampaignAllowedPartner[]
 
   @@index([type])
@@ -235,29 +359,29 @@ model OrgMembership {
 }
 
 model VoucherCampaign {
-  id                      String            @id @default(uuid())
-  orgId                   String
-  name                    String
-  description             String?
-  codePrefix              String?
-  valueType               VoucherValueType
-  valueAmount             Int
-  currency                String            @default("EUR")
-  usageType               VoucherUsageType  @default(single)
+  id                       String            @id @default(uuid())
+  orgId                    String
+  name                     String
+  description              String?
+  codePrefix               String?
+  valueType                VoucherValueType
+  valueAmount              Int
+  currency                 String            @default("EUR")
+  usageType                VoucherUsageType  @default(single)
   maxRedemptionsPerVoucher Int?
-  validFrom               DateTime?
-  validTo                 DateTime?
-  minPurchaseAmount       Int?
-  status                  B2BCampaignStatus @default(draft)
-  restrictionsJson        Json?             @default("{}")
-  createdAt               DateTime          @default(now())
-  updatedAt               DateTime          @updatedAt
+  validFrom                DateTime?
+  validTo                  DateTime?
+  minPurchaseAmount        Int?
+  status                   B2BCampaignStatus @default(draft)
+  restrictionsJson         Json?             @default("{}")
+  createdAt                DateTime          @default(now())
+  updatedAt                DateTime          @updatedAt
 
-  org       Organization     @relation(fields: [orgId], references: [id], onDelete: Cascade)
-  vouchers  VoucherInstance[]
-  orders    B2BOrder[]
-  allowedPartners CampaignAllowedPartner[]
-  allowedProducts CampaignAllowedProduct[]
+  org              Organization              @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  vouchers         VoucherInstance[]
+  orders           B2BOrder[]
+  allowedPartners  CampaignAllowedPartner[]
+  allowedProducts  CampaignAllowedProduct[]
   allowedLocations CampaignAllowedLocation[]
 
   @@index([orgId])
@@ -266,29 +390,29 @@ model VoucherCampaign {
 }
 
 model VoucherInstance {
-  id                  String            @id @default(uuid())
-  campaignId          String
-  orgId               String
-  code                String            @unique
-  codeHash            String?           @unique
-  qrPayload           String?
-  status              B2BVoucherStatus  @default(created)
-  issuedToType        IssuedToType?
-  issuedToOrgId       String?
-  issuedToEmail       String?
-  initialValueAmount  Int
+  id                   String           @id @default(uuid())
+  campaignId           String
+  orgId                String
+  code                 String           @unique
+  codeHash             String?          @unique
+  qrPayload            String?
+  status               B2BVoucherStatus @default(created)
+  issuedToType         IssuedToType?
+  issuedToOrgId        String?
+  issuedToEmail        String?
+  initialValueAmount   Int
   remainingValueAmount Int?
-  redeemedCount       Int               @default(0)
-  activatedAt         DateTime?
-  expiresAt           DateTime?
-  createdAt           DateTime          @default(now())
-  updatedAt           DateTime          @updatedAt
+  redeemedCount        Int              @default(0)
+  activatedAt          DateTime?
+  expiresAt            DateTime?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
 
-  org          Organization      @relation("VoucherOrg", fields: [orgId], references: [id], onDelete: Cascade)
-  campaign     VoucherCampaign   @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  issuedToOrg  Organization?     @relation("VoucherIssuedOrg", fields: [issuedToOrgId], references: [id], onDelete: SetNull)
-  redemptions  VoucherRedemption[]
-  orderLinks   OrderVoucher[]
+  org         Organization        @relation("VoucherOrg", fields: [orgId], references: [id], onDelete: Cascade)
+  campaign    VoucherCampaign     @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  issuedToOrg Organization?       @relation("VoucherIssuedOrg", fields: [issuedToOrgId], references: [id], onDelete: SetNull)
+  redemptions VoucherRedemption[]
+  orderLinks  OrderVoucher[]
 
   @@index([orgId])
   @@index([campaignId])
@@ -297,8 +421,8 @@ model VoucherInstance {
 }
 
 model CampaignAllowedPartner {
-  id          String @id @default(uuid())
-  campaignId  String
+  id           String @id @default(uuid())
+  campaignId   String
   partnerOrgId String
 
   campaign VoucherCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
@@ -309,9 +433,9 @@ model CampaignAllowedPartner {
 }
 
 model CampaignAllowedProduct {
-  id          String @id @default(uuid())
-  campaignId  String
-  productId   String
+  id         String @id @default(uuid())
+  campaignId String
+  productId  String
 
   campaign VoucherCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
@@ -320,9 +444,9 @@ model CampaignAllowedProduct {
 }
 
 model CampaignAllowedLocation {
-  id          String @id @default(uuid())
-  campaignId  String
-  locationId  String
+  id         String @id @default(uuid())
+  campaignId String
+  locationId String
 
   campaign VoucherCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
 
@@ -331,23 +455,23 @@ model CampaignAllowedLocation {
 }
 
 model B2BOrder {
-  id               String       @id @default(uuid())
+  id               String         @id @default(uuid())
   orgId            String
   campaignId       String
   quantity         Int
   unitPriceAmount  Int
   totalAmount      Int
-  currency         String       @default("EUR")
+  currency         String         @default("EUR")
   status           B2BOrderStatus @default(draft)
   paymentProvider  String?
   paymentReference String?
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 
-  org       Organization     @relation(fields: [orgId], references: [id], onDelete: Cascade)
-  campaign  VoucherCampaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
-  invoice   B2BInvoice?
-  vouchers  OrderVoucher[]
+  org      Organization    @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  campaign VoucherCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  invoice  B2BInvoice?
+  vouchers OrderVoucher[]
 
   @@index([orgId])
   @@index([campaignId])
@@ -355,8 +479,8 @@ model B2BOrder {
 }
 
 model B2BInvoice {
-  id             String        @id @default(uuid())
-  orderId        String        @unique
+  id             String           @id @default(uuid())
+  orderId        String           @unique
   invoiceNumber  String
   issuedAt       DateTime
   dueAt          DateTime?
@@ -365,8 +489,8 @@ model B2BInvoice {
   totalAmount    Int
   status         B2BInvoiceStatus @default(issued)
   pdfUrl         String?
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
 
   order B2BOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
@@ -398,9 +522,9 @@ model VoucherRedemption {
   metadata       Json?
   createdAt      DateTime            @default(now())
 
-  voucher   VoucherInstance @relation(fields: [voucherId], references: [id], onDelete: Cascade)
-  partner   Organization    @relation("PartnerOrgRedemptions", fields: [partnerOrgId], references: [id], onDelete: Cascade)
-  cashier   User?           @relation("VoucherRedemptionCashier", fields: [cashierUserId], references: [id], onDelete: SetNull)
+  voucher VoucherInstance @relation(fields: [voucherId], references: [id], onDelete: Cascade)
+  partner Organization    @relation("PartnerOrgRedemptions", fields: [partnerOrgId], references: [id], onDelete: Cascade)
+  cashier User?           @relation("VoucherRedemptionCashier", fields: [cashierUserId], references: [id], onDelete: SetNull)
 
   @@unique([partnerOrgId, idempotencyKey])
   @@index([voucherId])
@@ -409,16 +533,16 @@ model VoucherRedemption {
 }
 
 model AuditEvent {
-  id          String         @id @default(uuid())
+  id          String          @id @default(uuid())
   orgId       String
   actorUserId String?
-  actorType   AuditActorType @default(user)
+  actorType   AuditActorType  @default(user)
   entityType  AuditEntityType
   entityId    String
   eventType   AuditEventType
   before      Json?
   after       Json?
-  createdAt   DateTime       @default(now())
+  createdAt   DateTime        @default(now())
 
   org   Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
   actor User?        @relation("OrgAuditActor", fields: [actorUserId], references: [id], onDelete: SetNull)
@@ -429,12 +553,12 @@ model AuditEvent {
 }
 
 model PartnerApiKey {
-  id           String   @id @default(uuid())
-  orgId        String
-  label        String?
-  keyHash      String   @unique
-  lastUsedAt   DateTime?
-  createdAt    DateTime @default(now())
+  id         String    @id @default(uuid())
+  orgId      String
+  label      String?
+  keyHash    String    @unique
+  lastUsedAt DateTime?
+  createdAt  DateTime  @default(now())
 
   org Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
 
@@ -442,57 +566,77 @@ model PartnerApiKey {
 }
 
 model Merchant {
-  id              String   @id @default(cuid())
-  name            String
-  slug            String   @unique
-  country         String
-  defaultCurrency String   @default("USD")
-  brandLogoUrl    String?
-  brandColorsJson Json?
-  website         String?
-  supportEmail    String?
-  isActive        Boolean  @default(true)  // Kill switch for launch mode
-  featureFlags    Json?                    // Per-merchant feature flags
-  invitedAt       DateTime?                // Track manual invites
-  onboardedAt     DateTime?                 // Track onboarding completion
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id                  String    @id @default(cuid())
+  name                String
+  slug                String    @unique
+  country             String
+  registryCode        String? // Company registration number
+  vatNumber           String? // VAT/Tax ID
+  taxResidenceCountry String?
+  defaultCurrency     String    @default("USD")
+  defaultLocale       String?   @default("en")
+  dataResidency       String? // "EU" | "US" for data storage
+  brandLogoUrl        String?
+  brandColorsJson     Json?
+  website             String?
+  supportEmail        String?
+  isActive            Boolean   @default(true) // Kill switch for launch mode
+  featureFlags        Json? // Per-merchant feature flags
+  invitedAt           DateTime? // Track manual invites
+  onboardedAt         DateTime? // Track onboarding completion
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
 
-  members      MerchantMember[]
-  vouchers     Voucher[]
-  campaigns    Campaign[]
-  referrals    Referral[]
-  redemptions  Redemption[]
-  creditLedgers CreditLedger[]
-  creditUsages  CreditUsage[]
-  voucherPurchases VoucherPurchase[]
-  giftCards       GiftCard[]
-  subscription   MerchantSubscription?
-  events          Event[]
-  tickets         Ticket[]
-  ticketPurchases TicketPurchase[]
-  auditLogs    AuditLog[]
-  notifications    Notification[]
+  members                   MerchantMember[]
+  vouchers                  Voucher[]
+  campaigns                 Campaign[]
+  referrals                 Referral[]
+  redemptions               Redemption[]
+  creditLedgers             CreditLedger[]
+  creditUsages              CreditUsage[]
+  voucherPurchases          VoucherPurchase[]
+  giftCards                 GiftCard[]
+  giftCardPurchases         GiftCardPurchase[]
+  subscription              MerchantSubscription?
+  events                    Event[]
+  tickets                   Ticket[]
+  ticketPurchases           TicketPurchase[]
+  auditLogs                 AuditLog[]
+  notifications             Notification[]
   notificationSubscriptions NotificationSubscription[]
-  pageBuilderPages PageBuilderPage[]
-  domainMappings DomainMapping[]
-  navigationLinks NavigationLink[]
-  sitePages SitePage[]
-  products Product[]
-  rentalItems RentalItem[]
-  checkoutIntents CheckoutIntent[]
-  webhookEndpoints WebhookEndpoint[]
+  pageBuilderPages          PageBuilderPage[]
+  domainMappings            DomainMapping[]
+  navigationLinks           NavigationLink[]
+  sitePages                 SitePage[]
+  products                  Product[]
+  rentalItems               RentalItem[]
+  checkoutIntents           CheckoutIntent[]
+  webhookEndpoints          WebhookEndpoint[]
+  userConsents              UserConsent[]              @relation("UserConsentMerchant")
+  dataExportRequests        DataExportRequest[]        @relation("DataExportRequestMerchant")
+  dataDeletionRequests      DataDeletionRequest[]      @relation("DataDeletionRequestMerchant")
+
+  // Compliance relations
+  vatExemptions   VatExemption[]   @relation("VatExemptionMerchant")
+  invoices        Invoice[]        @relation("InvoiceMerchant")
+  refundRequests  RefundRequest[]  @relation("RefundRequestMerchant")
+  payoutRecords   PayoutRecord[]   @relation("PayoutRecordMerchant")
+
+  // Smart Gift Feed relations
+  giftProducts        GiftProduct[]            @relation("GiftProductMerchant")
+  sponsoredPlacements SponsoredGiftPlacement[] @relation("SponsoredPlacementMerchant")
 
   @@index([isActive])
+  @@index([country])
 }
 
 model MerchantMember {
-  id        String   @id @default(cuid())
+  id         String   @id @default(cuid())
   merchantId String
-  userId    String
-  role      String   // merchant_admin | merchant_staff
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userId     String
+  role       String // merchant_admin | merchant_staff
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -503,28 +647,28 @@ model MerchantMember {
 }
 
 model Campaign {
-  id              String   @id @default(cuid())
-  merchantId      String
-  name            String
-  description     String?
-  type            String   // weekly | limited
-  startDate       DateTime
-  endDate         DateTime
-  price           Int?     // minor units, null = free
-  discountRules   Json?    // { type, value, currency }
-  maxRedemptions  Int?
-  maxPurchases    Int?
-  terms           String?
-  creditPercentage Int?    // % of purchase price as credit (basis points, e.g. 500 = 5%)
-  promotedWeeklyEmail Boolean @default(false) // Paid weekly newsletter visibility
-  promotedNotification Boolean @default(false) // Paid notification visibility
-  promotedUntil  DateTime? // Optional end date for promotion
-  status          String   @default("draft") // draft | active | ended
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id                   String    @id @default(cuid())
+  merchantId           String
+  name                 String
+  description          String?
+  type                 String // weekly | limited
+  startDate            DateTime
+  endDate              DateTime
+  price                Int? // minor units, null = free
+  discountRules        Json? // { type, value, currency }
+  maxRedemptions       Int?
+  maxPurchases         Int?
+  terms                String?
+  creditPercentage     Int? // % of purchase price as credit (basis points, e.g. 500 = 5%)
+  promotedWeeklyEmail  Boolean   @default(false) // Paid weekly newsletter visibility
+  promotedNotification Boolean   @default(false) // Paid notification visibility
+  promotedUntil        DateTime? // Optional end date for promotion
+  status               String    @default("draft") // draft | active | ended
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
-  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
-  vouchers Voucher[]
+  merchant  Merchant          @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  vouchers  Voucher[]
   purchases VoucherPurchase[]
 
   @@index([merchantId])
@@ -533,32 +677,32 @@ model Campaign {
 }
 
 model Voucher {
-  id                String   @id @default(cuid())
+  id                String    @id @default(cuid())
   merchantId        String
   campaignId        String?
-  status            String   @default("draft") // draft | published | paused | ended
-  type              String   // percentage | fixed_amount | credit_amount
-  value             Int      // minor units for money, basis points for percentage
+  status            String    @default("draft") // draft | published | paused | ended
+  type              String // percentage | fixed_amount | credit_amount
+  value             Int // minor units for money, basis points for percentage
   currency          String
   validFrom         DateTime
   validTo           DateTime
   usageLimitTotal   Int?
   usageLimitPerUser Int?
-  weeklyDropEnabled Boolean  @default(false)
+  weeklyDropEnabled Boolean   @default(false)
   weeklyDropJson    Json?
   conditionsJson    Json?
   designJson        Json?
   codePrefix        String?
-  isFlashSale       Boolean  @default(false)
+  isFlashSale       Boolean   @default(false)
   flashSaleEndsAt   DateTime?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
-  merchant   Merchant    @relation(fields: [merchantId], references: [id], onDelete: Cascade)
-  campaign   Campaign?   @relation(fields: [campaignId], references: [id], onDelete: SetNull)
-  referrals  Referral[]
-  redemptions Redemption[]
-  purchases  VoucherPurchase[]
+  merchant        Merchant          @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  campaign        Campaign?         @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  referrals       Referral[]
+  redemptions     Redemption[]
+  purchases       VoucherPurchase[]
   waitlistEntries WaitlistEntry[]
 
   @@index([merchantId])
@@ -569,14 +713,14 @@ model Voucher {
 }
 
 model Referral {
-  id            String   @id @default(cuid())
-  voucherId     String
-  merchantId    String
+  id             String   @id @default(cuid())
+  voucherId      String
+  merchantId     String
   referrerUserId String
-  friendHash    String   // hash of friend identifier (phone/email)
-  status        String   @default("created") // created | opened | redeemed | expired | blocked
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  friendHash     String // hash of friend identifier (phone/email)
+  status         String   @default("created") // created | opened | redeemed | expired | blocked
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   voucher    Voucher     @relation(fields: [voucherId], references: [id], onDelete: Cascade)
   merchant   Merchant    @relation(fields: [merchantId], references: [id], onDelete: Cascade)
@@ -591,27 +735,27 @@ model Referral {
 }
 
 model Redemption {
-  id                  String    @id @default(cuid())
-  voucherId           String
-  merchantId           String
-  referralId          String?  @unique
-  redeemedByUserId    String?
+  id                    String    @id @default(cuid())
+  voucherId             String
+  merchantId            String
+  referralId            String?   @unique
+  redeemedByUserId      String?
   redeemedByStaffUserId String?
-  method              String    // online | in_store
-  location            String?   // optional location for redemption
-  orderReference      String?
-  amountBeforeDiscount Int      // minor units
-  discountApplied     Int       // minor units
-  currency            String
-  confirmedAt         DateTime?
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
+  method                String // online | in_store
+  location              String? // optional location for redemption
+  orderReference        String?
+  amountBeforeDiscount  Int // minor units
+  discountApplied       Int // minor units
+  currency              String
+  confirmedAt           DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 
-  voucher   Voucher     @relation(fields: [voucherId], references: [id], onDelete: Cascade)
-  merchant  Merchant    @relation(fields: [merchantId], references: [id], onDelete: Cascade)
-  referral  Referral?   @relation(fields: [referralId], references: [id], onDelete: SetNull)
-  redeemedBy User?      @relation("RedeemedBy", fields: [redeemedByUserId], references: [id], onDelete: SetNull)
-  redeemedByStaff User? @relation("RedeemedByStaff", fields: [redeemedByStaffUserId], references: [id], onDelete: SetNull)
+  voucher         Voucher   @relation(fields: [voucherId], references: [id], onDelete: Cascade)
+  merchant        Merchant  @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  referral        Referral? @relation(fields: [referralId], references: [id], onDelete: SetNull)
+  redeemedBy      User?     @relation("RedeemedBy", fields: [redeemedByUserId], references: [id], onDelete: SetNull)
+  redeemedByStaff User?     @relation("RedeemedByStaff", fields: [redeemedByStaffUserId], references: [id], onDelete: SetNull)
 
   @@index([voucherId])
   @@index([merchantId])
@@ -620,18 +764,18 @@ model Redemption {
 }
 
 model VoucherPurchase {
-  id                  String   @id @default(cuid())
-  voucherId           String?
-  campaignId          String?
-  merchantId          String
-  userId              String
-  stripeSessionId     String?
-  amount              Int      // minor units
-  platformFeeAmount   Int?     // 5% platform fee in minor units
-  currency            String
-  status              String   @default("pending") // pending | paid | failed | refunded
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id                String   @id @default(cuid())
+  voucherId         String?
+  campaignId        String?
+  merchantId        String
+  userId            String
+  stripeSessionId   String?
+  amount            Int // minor units
+  platformFeeAmount Int? // 5% platform fee in minor units
+  currency          String
+  status            String   @default("pending") // pending | paid | failed | refunded
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 
   voucher  Voucher?  @relation(fields: [voucherId], references: [id], onDelete: SetNull)
   campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
@@ -645,17 +789,17 @@ model VoucherPurchase {
 }
 
 model CreditLedger {
-  id        String   @id @default(cuid())
+  id         String    @id @default(cuid())
   merchantId String
-  userId    String
-  amount    Int      // minor units
-  currency  String
-  status    String   @default("locked") // locked | available | used | expired | reversed
-  source    String   // referral_redemption | manual_adjustment
-  sourceId  String
-  expiresAt DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userId     String
+  amount     Int // minor units
+  currency   String
+  status     String    @default("locked") // locked | available | used | expired | reversed
+  source     String // referral_redemption | manual_adjustment
+  sourceId   String
+  expiresAt  DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 
   merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -671,7 +815,7 @@ model CreditUsage {
   merchantId      String
   userId          String
   creditLedgerIds String[] // array of credit ledger IDs used
-  amountUsed      Int      // minor units
+  amountUsed      Int // minor units
   orderReference  String?
   createdAt       DateTime @default(now())
 
@@ -683,26 +827,26 @@ model CreditUsage {
 }
 
 model Event {
-  id              String   @id @default(cuid())
+  id              String    @id @default(cuid())
   merchantId      String
   name            String
   description     String?
-  type            String   // festival | internal | concert | workshop | other
+  type            String // festival | internal | concert | workshop | other
   eventDate       DateTime
   eventEndDate    DateTime?
   location        String?
   locationAddress String?
-  maxCapacity     Int      // Maximum number of tickets/seats
-  price           Int       // minor units, 0 = free
+  maxCapacity     Int // Maximum number of tickets/seats
+  price           Int // minor units, 0 = free
   currency        String    @default("USD")
-  ticketTypesJson Json?     // [{ name, price, capacity }] for different ticket tiers
+  ticketTypesJson Json? // [{ name, price, capacity }] for different ticket tiers
   terms           String?
   status          String    @default("draft") // draft | published | sold_out | cancelled | ended
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
-  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
-  tickets  Ticket[]
+  merchant  Merchant         @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  tickets   Ticket[]
   purchases TicketPurchase[]
 
   @@index([merchantId])
@@ -711,17 +855,17 @@ model Event {
 }
 
 model Ticket {
-  id                String   @id @default(cuid())
-  eventId           String
-  merchantId        String
-  ticketType        String?  // VIP, Standard, Early Bird, etc.
-  ticketNumber      String   @unique // Human-readable ticket number
-  qrToken           String   @unique // QR code token
-  status            String   @default("available") // available | sold | used | cancelled | refunded
-  purchasedAt       DateTime?
-  usedAt            DateTime?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id           String    @id @default(cuid())
+  eventId      String
+  merchantId   String
+  ticketType   String? // VIP, Standard, Early Bird, etc.
+  ticketNumber String    @unique // Human-readable ticket number
+  qrToken      String    @unique // QR code token
+  status       String    @default("available") // available | sold | used | cancelled | refunded
+  purchasedAt  DateTime?
+  usedAt       DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 
   event    Event           @relation(fields: [eventId], references: [id], onDelete: Cascade)
   merchant Merchant        @relation(fields: [merchantId], references: [id], onDelete: Cascade)
@@ -741,18 +885,18 @@ model TicketPurchase {
   merchantId      String
   userId          String
   stripeSessionId String?
-  amount          Int      // minor units
+  amount          Int // minor units
   currency        String
   status          String   @default("pending") // pending | paid | failed | refunded
-  attendeeName    String?  // Name of attendee (may differ from user)
-  attendeeEmail   String?  // Email of attendee
+  attendeeName    String? // Name of attendee (may differ from user)
+  attendeeEmail   String? // Email of attendee
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  ticket  Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
-  event  Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  ticket   Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  event    Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([merchantId])
   @@index([userId])
@@ -762,43 +906,73 @@ model TicketPurchase {
 }
 
 model GiftCard {
-  id                  String   @id @default(cuid())
-  merchantId          String
-  code                String   @unique
-  amount              Int      // minor units
-  currency            String
-  status              String   @default("active") // active | redeemed | expired | cancelled
-  validFrom           DateTime @default(now())
-  validTo             DateTime?
-  designJson          Json?
-  message             String?
-  imageUrl            String?
-  logoUrl             String?
-  redeemedAt          DateTime?
+  id                    String    @id @default(cuid())
+  merchantId            String
+  code                  String    @unique
+  amount                Int // minor units
+  currency              String
+  status                String    @default("active") // active | redeemed | expired | cancelled
+  purchasable           Boolean   @default(false)
+  price                 Int? // sale price in minor units (defaults to amount if null)
+  validFrom             DateTime  @default(now())
+  validTo               DateTime?
+  designJson            Json?
+  message               String?
+  imageUrl              String?
+  logoUrl               String?
+  redeemedAt            DateTime?
   redeemedByStaffUserId String?
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
 
-  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
-  redeemedByStaff User? @relation("GiftCardRedeemedByStaff", fields: [redeemedByStaffUserId], references: [id], onDelete: SetNull)
+  merchant        Merchant           @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  redeemedByStaff User?              @relation("GiftCardRedeemedByStaff", fields: [redeemedByStaffUserId], references: [id], onDelete: SetNull)
+  purchases       GiftCardPurchase[]
 
   @@index([merchantId])
   @@index([status])
   @@index([validTo])
   @@index([redeemedAt])
+  @@index([purchasable])
+}
+
+model GiftCardPurchase {
+  id                String   @id @default(cuid())
+  giftCardId        String
+  merchantId        String
+  userId            String
+  stripeSessionId   String?
+  amount            Int // minor units
+  platformFeeAmount Int? // platform fee in minor units
+  currency          String
+  status            String   @default("pending") // pending | paid | failed | refunded
+  recipientEmail    String?
+  recipientName     String?
+  senderName        String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  giftCard GiftCard @relation(fields: [giftCardId], references: [id], onDelete: Cascade)
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([merchantId])
+  @@index([userId])
+  @@index([status])
+  @@index([stripeSessionId])
 }
 
 model MerchantSubscription {
-  id                   String   @id @default(cuid())
-  merchantId           String   @unique
+  id                   String    @id @default(cuid())
+  merchantId           String    @unique
   stripeCustomerId     String?
   stripeSubscriptionId String?
   priceId              String?
-  status               String   @default("inactive") // inactive | trialing | active | past_due | canceled
+  status               String    @default("inactive") // inactive | trialing | active | past_due | canceled
   trialEndsAt          DateTime?
   currentPeriodEnd     DateTime?
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
   merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
 
@@ -808,12 +982,23 @@ model MerchantSubscription {
 }
 
 model AuditLog {
-  id          String   @id @default(cuid())
-  merchantId  String?
-  actorUserId String
-  action      String
-  payloadJson Json?
-  createdAt   DateTime @default(now())
+  id                 String   @id @default(cuid())
+  merchantId         String?
+  actorUserId        String
+  action             String
+  resourceType       String? // "campaign" | "voucher" | "payment" etc.
+  resourceId         String? // ID of affected resource
+  changes            Json? // { before: {...}, after: {...} }
+  payloadJson        Json?
+  ipAddress          String?
+  userAgent          String?
+  reason             String? // Required for sensitive operations
+  dataClassification String?  @default("standard") // "public" | "standard" | "sensitive" | "restricted"
+  complianceRelevant Boolean  @default(false)
+  hashSelf           String? // SHA256 of all fields
+  hashPrev           String? // SHA256 of previous entry (hash chain)
+  deleted            Boolean  @default(false) // Soft delete flag
+  createdAt          DateTime @default(now())
 
   merchant Merchant? @relation(fields: [merchantId], references: [id], onDelete: SetNull)
   actor    User      @relation(fields: [actorUserId], references: [id], onDelete: Cascade)
@@ -822,10 +1007,13 @@ model AuditLog {
   @@index([actorUserId])
   @@index([action])
   @@index([createdAt])
+  @@index([resourceType])
+  @@index([complianceRelevant])
+  @@index([deleted])
 }
 
 model Notification {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   userId     String
   merchantId String?
   type       String
@@ -833,7 +1021,7 @@ model Notification {
   body       String
   url        String?
   readAt     DateTime?
-  createdAt  DateTime @default(now())
+  createdAt  DateTime  @default(now())
 
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   merchant Merchant? @relation(fields: [merchantId], references: [id], onDelete: SetNull)
@@ -862,17 +1050,17 @@ model NotificationSubscription {
 }
 
 model PageBuilderPage {
-  id          String   @id @default(cuid())
-  merchantId  String
-  type        String   // store | rental
-  status      String   @default("draft") // draft | published
-  title       String
-  subtitle    String?
+  id           String   @id @default(cuid())
+  merchantId   String
+  type         String // store | rental
+  status       String   @default("draft") // draft | published
+  title        String
+  subtitle     String?
   sectionsJson Json?
   addonsJson   Json?
   themeJson    Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
 
@@ -921,14 +1109,14 @@ model NavigationLink {
 }
 
 model DomainMapping {
-  id                String   @id @default(cuid())
+  id                String    @id @default(cuid())
   merchantId        String
-  domain            String   @unique
-  status            String   @default("pending") // pending | verified
+  domain            String    @unique
+  status            String    @default("pending") // pending | verified
   verificationToken String?
   verifiedAt        DateTime?
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
   merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
 
@@ -956,20 +1144,20 @@ model Product {
 }
 
 model RentalItem {
-  id           String   @id @default(cuid())
-  merchantId   String
-  name         String
-  description  String?
-  dailyRate    Int
-  weeklyRate   Int?
-  currency     String
-  imageUrl     String?
-  status       String   @default("active") // active | archived
-  minDays      Int?    @default(1)
+  id            String    @id @default(cuid())
+  merchantId    String
+  name          String
+  description   String?
+  dailyRate     Int
+  weeklyRate    Int?
+  currency      String
+  imageUrl      String?
+  status        String    @default("active") // active | archived
+  minDays       Int?      @default(1)
   availableFrom DateTime?
   availableTo   DateTime?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
   merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
 
@@ -980,7 +1168,7 @@ model RentalItem {
 model CheckoutIntent {
   id         String   @id @default(cuid())
   merchantId String
-  type       String   // product | rental
+  type       String // product | rental
   currency   String
   total      Int
   status     String   @default("created") // created | converted | expired
@@ -1011,12 +1199,12 @@ model PushSubscription {
 }
 
 model WaitlistEntry {
-  id        String   @id @default(cuid())
-  voucherId String
-  userId    String?
-  email     String
+  id         String    @id @default(cuid())
+  voucherId  String
+  userId     String?
+  email      String
   notifiedAt DateTime?
-  createdAt DateTime @default(now())
+  createdAt  DateTime  @default(now())
 
   voucher Voucher @relation(fields: [voucherId], references: [id], onDelete: Cascade)
 
@@ -1026,19 +1214,19 @@ model WaitlistEntry {
 }
 
 model GiftedVoucher {
-  id          String   @id @default(cuid())
-  purchaseId  String?
-  fromUserId  String
-  toEmail     String
-  giftMessage String?
-  token       String   @unique @default(cuid())
-  voucherId   String?
-  merchantId  String
-  status      String   @default("pending") // pending | claimed | expired
-  sentAt      DateTime @default(now())
-  claimedAt   DateTime?
+  id              String    @id @default(cuid())
+  purchaseId      String?
+  fromUserId      String
+  toEmail         String
+  giftMessage     String?
+  token           String    @unique @default(cuid())
+  voucherId       String?
+  merchantId      String
+  status          String    @default("pending") // pending | claimed | expired
+  sentAt          DateTime  @default(now())
+  claimedAt       DateTime?
   claimedByUserId String?
-  createdAt   DateTime @default(now())
+  createdAt       DateTime  @default(now())
 
   @@index([fromUserId])
   @@index([toEmail])
@@ -1078,5 +1266,693 @@ model WebhookDelivery {
 
   @@index([endpointId])
   @@index([event])
+  @@index([createdAt])
+}
+
+// ─── Super Admin Control Wall Models ───
+
+model AdminAuditLog {
+  id             String   @id @default(cuid())
+  actorUserId    String
+  actorIp        String?
+  actorUserAgent String?
+  action         String
+  targetType     String?
+  targetId       String?
+  reason         String?
+  metadata       Json?
+  idempotencyKey String?  @unique
+  hashPrev       String
+  hashSelf       String   @unique
+  createdAt      DateTime @default(now())
+
+  actor User @relation("AdminAuditActor", fields: [actorUserId], references: [id], onDelete: Cascade)
+
+  @@index([actorUserId])
+  @@index([action])
+  @@index([targetType, targetId])
+  @@index([createdAt])
+}
+
+model UserReport {
+  id                 String         @id @default(cuid())
+  reportedByUserId   String?
+  reportedUserId     String?
+  reportedMerchantId String?
+  reportedEntityType String?
+  reportedEntityId   String?
+  category           ReportCategory
+  description        String
+  evidenceUrls       String[]
+  status             ReportStatus   @default(open)
+  assignedAdminId    String?
+  resolvedAt         DateTime?
+  resolution         String?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  reportedBy   User? @relation("ReportedByUser", fields: [reportedByUserId], references: [id], onDelete: SetNull)
+  reportedUser User? @relation("ReportedUser", fields: [reportedUserId], references: [id], onDelete: SetNull)
+
+  moderationActions ModerationAction[]
+
+  @@index([status])
+  @@index([reportedUserId])
+  @@index([reportedMerchantId])
+  @@index([reportedEntityType, reportedEntityId])
+  @@index([createdAt])
+  @@index([assignedAdminId])
+}
+
+model ModerationAction {
+  id               String               @id @default(cuid())
+  moderatorUserId  String
+  targetUserId     String?
+  targetMerchantId String?
+  reportId         String?
+  actionType       ModerationActionType
+  reason           String
+  details          Json?
+  strikeNumber     Int?
+  expiresAt        DateTime?
+  reversedAt       DateTime?
+  reversedBy       String?
+  reversalReason   String?
+  createdAt        DateTime             @default(now())
+
+  moderator  User?       @relation("ModeratorUser", fields: [moderatorUserId], references: [id], onDelete: Cascade)
+  targetUser User?       @relation("ModeratedUser", fields: [targetUserId], references: [id], onDelete: SetNull)
+  report     UserReport? @relation(fields: [reportId], references: [id], onDelete: SetNull)
+  appeals    Appeal[]
+
+  @@index([targetUserId])
+  @@index([targetMerchantId])
+  @@index([moderatorUserId])
+  @@index([actionType])
+  @@index([createdAt])
+}
+
+model Appeal {
+  id                 String       @id @default(cuid())
+  moderationActionId String
+  appealUserId       String
+  reason             String
+  evidenceUrls       String[]
+  status             AppealStatus @default(submitted)
+  reviewerUserId     String?
+  reviewNote         String?
+  resolvedAt         DateTime?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  moderationAction ModerationAction @relation(fields: [moderationActionId], references: [id], onDelete: Cascade)
+  appealUser       User             @relation("AppealUser", fields: [appealUserId], references: [id], onDelete: Cascade)
+  reviewer         User?            @relation("AppealReviewer", fields: [reviewerUserId], references: [id], onDelete: SetNull)
+
+  @@index([moderationActionId])
+  @@index([appealUserId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model SupportCase {
+  id              String              @id @default(cuid())
+  caseNumber      String              @unique
+  userId          String
+  assignedAdminId String?
+  subject         String
+  description     String
+  priority        SupportCasePriority @default(normal)
+  status          SupportCaseStatus   @default(open)
+  category        String?
+  metadata        Json?
+  resolvedAt      DateTime?
+  closedAt        DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  user          User          @relation("SupportCaseUser", fields: [userId], references: [id], onDelete: Cascade)
+  assignedAdmin User?         @relation("SupportCaseAssignee", fields: [assignedAdminId], references: [id], onDelete: SetNull)
+  notes         SupportNote[]
+
+  @@index([userId])
+  @@index([assignedAdminId])
+  @@index([status])
+  @@index([priority])
+  @@index([createdAt])
+}
+
+model SupportNote {
+  id           String   @id @default(cuid())
+  caseId       String
+  authorUserId String
+  body         String
+  isInternal   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  case   SupportCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  author User        @relation(fields: [authorUserId], references: [id], onDelete: Cascade)
+
+  @@index([caseId])
+  @@index([authorUserId])
+  @@index([createdAt])
+}
+
+model FeatureFlag {
+  id          String            @id @default(cuid())
+  key         String            @unique
+  name        String
+  description String?
+  status      FeatureFlagStatus @default(off)
+  rules       Json?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  overrides FeatureFlagOverride[]
+
+  @@index([key])
+  @@index([status])
+}
+
+model FeatureFlagOverride {
+  id       String  @id @default(cuid())
+  flagId   String
+  tenantId String?
+  userId   String?
+  orgId    String?
+  enabled  Boolean
+
+  flag FeatureFlag @relation(fields: [flagId], references: [id], onDelete: Cascade)
+
+  @@unique([flagId, tenantId, userId, orgId])
+  @@index([flagId])
+  @@index([tenantId])
+  @@index([userId])
+}
+
+model JobRun {
+  id          String       @id @default(cuid())
+  jobName     String
+  status      JobRunStatus @default(pending)
+  startedAt   DateTime?
+  completedAt DateTime?
+  durationMs  Int?
+  result      Json?
+  error       String?
+  triggeredBy String?
+  createdAt   DateTime     @default(now())
+
+  @@index([jobName])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model RefundRecord {
+  id             String       @id @default(cuid())
+  purchaseId     String?
+  purchaseType   String
+  stripeRefundId String?      @unique
+  actorUserId    String
+  amountRefunded Int
+  currency       String
+  isPartial      Boolean      @default(false)
+  reason         String
+  status         RefundStatus @default(refund_pending)
+  stripeResponse Json?
+  idempotencyKey String?      @unique
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  actor User @relation("RefundActorUser", fields: [actorUserId], references: [id], onDelete: Cascade)
+
+  @@index([purchaseId])
+  @@index([purchaseType])
+  @@index([actorUserId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model PayoutHold {
+  id          String           @id @default(cuid())
+  merchantId  String
+  reason      PayoutHoldReason
+  notes       String?
+  actorUserId String
+  isActive    Boolean          @default(true)
+  releasedAt  DateTime?
+  releasedBy  String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  actor User @relation("PayoutHoldActorUser", fields: [actorUserId], references: [id], onDelete: Cascade)
+
+  @@index([merchantId])
+  @@index([isActive])
+  @@index([createdAt])
+}
+
+model LegalHold {
+  id          String        @id @default(cuid())
+  userId      String?
+  merchantId  String?
+  holdType    LegalHoldType
+  reference   String?
+  notes       String?
+  actorUserId String
+  isActive    Boolean       @default(true)
+  releasedAt  DateTime?
+  releasedBy  String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  actor User @relation("LegalHoldActorUser", fields: [actorUserId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([merchantId])
+  @@index([holdType])
+  @@index([isActive])
+}
+
+// ─────────────────────────────────────────────────────────
+// SMART GIFT FEED SYSTEM
+// ─────────────────────────────────────────────────────────
+
+enum GiftFeedModuleType {
+  SEASONAL
+  TRENDING
+  AI_CURATED
+  PARTNER
+  CORPORATE
+  LAST_MINUTE
+}
+
+enum GiftInteractionType {
+  VIEW
+  SAVE
+  SHARE
+  ADD_TO_CART
+  PURCHASE
+  CLICK_AFFILIATE
+}
+
+model GiftCategory {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  icon      String?
+  color     String?
+  isActive  Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products GiftProduct[]
+
+  @@index([isActive, sortOrder])
+}
+
+model GiftOccasion {
+  id                String   @id @default(cuid())
+  name              String
+  slug              String   @unique
+  seasonalityWeight Float    @default(1.0)
+  activeMonths      Int[]    @default([]) // 1-12, empty = year-round
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  products GiftProductOccasion[]
+
+  @@index([isActive])
+}
+
+model GiftPersona {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  tags      String[] @default([])
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products GiftProductPersona[]
+
+  @@index([isActive])
+}
+
+model GiftProduct {
+  id              String   @id @default(cuid())
+  merchantId      String
+  title           String
+  description     String   @db.Text
+  priceCents      Int
+  currency        String   @default("EUR")
+  mediaUrl        String?
+  mediaUrls       String[] @default([])
+  stock           Int? // null = unlimited
+  categoryId      String
+  tags            String[] @default([])
+  affiliateUrl    String?
+  isFeatured      Boolean  @default(false)
+  engagementScore Float    @default(0)
+  viewCount       Int      @default(0)
+  purchaseCount   Int      @default(0)
+  conversionRate  Float    @default(0)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  merchant     Merchant              @relation("GiftProductMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
+  category     GiftCategory          @relation(fields: [categoryId], references: [id])
+  occasions    GiftProductOccasion[]
+  personas     GiftProductPersona[]
+  feedItems    GiftFeedItem[]
+  interactions UserGiftInteraction[]
+
+  @@index([merchantId])
+  @@index([categoryId])
+  @@index([isFeatured])
+  @@index([isActive, engagementScore])
+  @@index([priceCents])
+}
+
+model GiftProductOccasion {
+  id         String @id @default(cuid())
+  productId  String
+  occasionId String
+
+  product  GiftProduct  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  occasion GiftOccasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, occasionId])
+}
+
+model GiftProductPersona {
+  id        String @id @default(cuid())
+  productId String
+  personaId String
+
+  product GiftProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  persona GiftPersona @relation(fields: [personaId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, personaId])
+}
+
+model GiftFeedModule {
+  id         String             @id @default(cuid())
+  title      String
+  type       GiftFeedModuleType
+  configJson Json?
+  isActive   Boolean            @default(true)
+  sortOrder  Int                @default(0)
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  items GiftFeedItem[]
+
+  @@index([isActive, sortOrder])
+}
+
+model GiftFeedItem {
+  id                String   @id @default(cuid())
+  moduleId          String
+  productId         String?
+  customTitle       String?
+  customDescription String?  @db.Text
+  priority          Int      @default(0)
+  createdAt         DateTime @default(now())
+
+  module  GiftFeedModule @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  product GiftProduct?   @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  @@index([moduleId, priority])
+}
+
+model UserGiftProfile {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  preferredPersonas  String[] @default([])
+  preferredOccasions String[] @default([])
+  budgetMin          Int?
+  budgetMax          Int?
+  language           String   @default("en")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user User @relation("UserGiftProfileUser", fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserGiftInteraction {
+  id              String              @id @default(cuid())
+  userId          String
+  productId       String
+  interactionType GiftInteractionType
+  dwellMs         Int?
+  feedModuleId    String?
+  createdAt       DateTime            @default(now())
+
+  user    User        @relation("UserGiftInteractionUser", fields: [userId], references: [id], onDelete: Cascade)
+  product GiftProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([productId, interactionType])
+  @@index([createdAt])
+}
+
+model SponsoredGiftPlacement {
+  id               String   @id @default(cuid())
+  sponsorName      String
+  merchantId       String?
+  targetCategories String[] @default([])
+  targetOccasions  String[] @default([])
+  budgetCents      Int
+  spentCents       Int      @default(0)
+  clickCount       Int      @default(0)
+  impressionCount  Int      @default(0)
+  clickLimit       Int?
+  impressionsLimit Int?
+  priority         Int      @default(0)
+  startAt          DateTime
+  endAt            DateTime
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  merchant Merchant? @relation("SponsoredPlacementMerchant", fields: [merchantId], references: [id])
+
+  @@index([isActive, startAt, endAt])
+  @@index([merchantId])
+}
+
+// ─── COMPLIANCE MODELS ───
+
+model VatRate {
+  id             String    @id @default(cuid())
+  countryCode    String // ISO 3166-1 alpha-2 (e.g., "DE", "FR")
+  rate           Float // VAT rate as percentage (e.g., 19.0)
+  rateType       String // "standard" | "reduced" | "super_reduced" | "zero"
+  effectiveFrom  DateTime
+  effectiveUntil DateTime?
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([countryCode, rateType, effectiveFrom])
+  @@index([countryCode])
+  @@index([isActive])
+}
+
+model VatExemption {
+  id                String    @id @default(cuid())
+  merchantId        String
+  countryCode       String
+  exemptionType     String // "b2b" | "export" | "charity" | "public_body"
+  documentReference String? // Reference to supporting document
+  approvedAt        DateTime?
+  approvedBy        String?
+  expiresAt         DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  merchant Merchant @relation("VatExemptionMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@unique([merchantId, countryCode, exemptionType])
+  @@index([merchantId])
+}
+
+model Invoice {
+  id            String @id @default(cuid())
+  merchantId    String
+  invoiceNumber String @unique
+  status        String @default("issued") // "issued" | "paid" | "voided" | "overdue"
+
+  // Amounts in minor units (cents)
+  grossAmount Int // Total including VAT
+  netAmount   Int // Before VAT
+  vatAmount   Int // VAT charged
+  vatRate     Float // VAT percentage applied
+  vatCountry  String // Country where VAT applies
+  currency    String @default("USD")
+
+  issuedAt   DateTime
+  dueAt      DateTime?
+  paidAt     DateTime?
+  voidedAt   DateTime?
+  voidReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  merchant Merchant @relation("InvoiceMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@index([merchantId])
+  @@index([status])
+  @@index([issuedAt])
+}
+
+model RefundRequest {
+  id                String    @id @default(cuid())
+  merchantId        String
+  originalPaymentId String?
+  amount            Int // Amount to refund in minor units
+  currency          String
+  reason            String
+  status            String    @default("pending") // "pending" | "approved" | "rejected" | "executed"
+  requestedBy       String // User ID who requested
+  approvedBy        String? // User ID who approved
+  rejectionReason   String?
+  executedAt        DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  merchant Merchant @relation("RefundRequestMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@index([merchantId])
+  @@index([status])
+}
+
+model PayoutRecord {
+  id                String    @id @default(cuid())
+  merchantId        String
+  settlementBatchId String?
+  amount            Int // Amount in minor units
+  currency          String
+  status            String    @default("pending") // "pending" | "processing" | "completed" | "failed"
+  bankAccount       String? // Masked account number
+  reference         String? // Payout order ID from payment processor
+  failureReason     String?
+  scheduledFor      DateTime
+  processedAt       DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  merchant        Merchant         @relation("PayoutRecordMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
+  settlementBatch SettlementBatch? @relation(fields: [settlementBatchId], references: [id])
+
+  @@index([merchantId])
+  @@index([status])
+  @@index([scheduledFor])
+}
+
+model SettlementBatch {
+  id            String    @id @default(cuid())
+  batchNumber   String    @unique
+  status        String    @default("pending") // "pending" | "processing" | "completed" | "failed"
+  periodStart   DateTime
+  periodEnd     DateTime
+  totalAmount   Int // Total in minor units
+  currency      String    @default("USD")
+  payoutCount   Int       @default(0)
+  processedAt   DateTime?
+  failureReason String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  payoutRecords PayoutRecord[]
+
+  @@index([status])
+  @@index([periodStart, periodEnd])
+}
+
+model DataExportRequest {
+  id              String    @id @default(cuid())
+  userId          String
+  merchantId      String? // If null, request is for user's own data
+  status          String    @default("pending") // "pending" | "processing" | "ready" | "expired" | "failed"
+  downloadUrl     String? // Temporary signed URL
+  downloadExpires DateTime? // URL expiration
+  fileSize        Int? // Size in bytes
+  errorMessage    String?
+  requestedAt     DateTime  @default(now())
+  processedAt     DateTime?
+  expiresAt       DateTime? // Data deletion deadline (30 days)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  user     User      @relation("DataExportRequestUser", fields: [userId], references: [id], onDelete: Cascade)
+  merchant Merchant? @relation("DataExportRequestMerchant", fields: [merchantId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([status])
+  @@index([expiresAt])
+}
+
+model DataDeletionRequest {
+  id                String    @id @default(cuid())
+  userId            String
+  merchantId        String?
+  status            String    @default("pending") // "pending" | "grace_period" | "executing" | "completed" | "failed"
+  reason            String?
+  resultSummary     Json? // Summary of deleted data
+  requestedAt       DateTime  @default(now())
+  gracePeriodEndsAt DateTime // 30-day grace period
+  completedAt       DateTime?
+  failureReason     String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  user     User      @relation("DataDeletionRequestUser", fields: [userId], references: [id], onDelete: Cascade)
+  merchant Merchant? @relation("DataDeletionRequestMerchant", fields: [merchantId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([status])
+  @@index([gracePeriodEndsAt])
+}
+
+model UserConsent {
+  id          String    @id @default(cuid())
+  userId      String
+  merchantId  String
+  consentType String // "marketing" | "analytics" | "processing" | "profiling"
+  granted     Boolean
+  grantedAt   DateTime?
+  withdrawnAt DateTime?
+  ipAddress   String?
+  userAgent   String?
+  metadata    Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user     User     @relation("UserConsentUser", fields: [userId], references: [id], onDelete: Cascade)
+  merchant Merchant @relation("UserConsentMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, merchantId, consentType])
+  @@index([userId])
+  @@index([merchantId])
+  @@index([granted])
+}
+
+model HealthCheckLog {
+  id             String   @id @default(cuid())
+  status         String // "healthy" | "degraded" | "unhealthy"
+  databaseHealth Boolean  @default(false)
+  stripeHealth   Boolean  @default(false)
+  redisHealth    Boolean  @default(false)
+  emailHealth    Boolean  @default(false)
+  message        String?
+  metadata       Json?
+  createdAt      DateTime @default(now())
+
+  @@index([status])
   @@index([createdAt])
 }

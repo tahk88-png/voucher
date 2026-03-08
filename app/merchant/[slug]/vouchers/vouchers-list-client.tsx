@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { safeParseJson } from '@/lib/utils';
+import { sanitizeCssValue } from '@/lib/sanitize-css';
 import { VoucherRowActions } from './voucher-row-actions';
 import { Gift, Search, Filter, Ticket } from 'lucide-react';
 import { VoucherDesign } from '@/types';
@@ -243,7 +244,7 @@ export default function VouchersListClient({
                     <div>
                       <style
                         dangerouslySetInnerHTML={{
-                          __html: `.prog-${String(voucher.id).replace(/\\s/g, '')}{--pct:${pct ?? 0}%}`,
+                          __html: `.prog-${sanitizeCssValue(String(voucher.id))}{--pct:${sanitizeCssValue(String(pct ?? 0))}%}`,
                         }}
                       />
                       <div className="flex justify-between text-xs text-[#8B7355] mb-1">

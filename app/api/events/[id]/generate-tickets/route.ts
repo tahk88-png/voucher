@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { withErrorHandler } from '@/lib/error-handler';
+import { rateLimitDistributed } from '@/lib/rate-limit';
 import { z } from 'zod';
 import crypto from 'crypto';
 
@@ -13,16 +14,22 @@ const generateTicketsSchema = z.object({
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { allowed } = await rateLimitDistributed(`generate-tickets:${session.user.id}`, 10, 60_000);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
+    }
+
     const event = await prisma.event.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { merchant: true },
     });
 

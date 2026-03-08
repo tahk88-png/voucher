@@ -162,9 +162,10 @@ async function enforceUsageLimit(params: {
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { slug } = await params;
     if (!isAiConfigured()) {
       return NextResponse.json({ error: 'AI is not configured' }, { status: 503 });
     }
@@ -175,7 +176,7 @@ export async function POST(
     }
 
     const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
     });
     if (!merchant) {
       return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });

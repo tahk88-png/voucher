@@ -3,14 +3,15 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const cardVariants = cva(
-  "rounded-[var(--r-lg)] border border-[var(--border)] text-[var(--text)]",
+  "rounded-[var(--r-lg)] border border-[var(--border)] text-[var(--text)] transition-all duration-200 ease-smooth",
   {
     variants: {
       variant: {
-        default:     "bg-[var(--surface)] shadow-md",
-        elevated:    "bg-[var(--surface)] shadow-lg",
-        interactive: "bg-[var(--surface)] shadow-md transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer",
+        default:     "bg-[var(--surface)] shadow-sm",
+        elevated:    "bg-[var(--surface)] shadow-md",
+        interactive: "bg-[var(--surface)] shadow-sm hover:shadow-lg hover:-translate-y-1 cursor-pointer active:translate-y-0 active:shadow-md",
         muted:       "bg-[var(--surface-muted)] shadow-sm",
+        glass:       "glass shadow-sm backdrop-blur-lg",
       },
     },
     defaultVariants: {
@@ -64,7 +65,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-[var(--text-muted)]", className)}
+    className={cn("text-sm text-[var(--text-muted)] leading-relaxed", className)}
     {...props}
   />
 ))

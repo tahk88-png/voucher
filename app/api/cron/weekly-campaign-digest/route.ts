@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendWeeklyCampaignDigest } from '@/lib/emails';
 import { withErrorHandler } from '@/lib/error-handler';
+import { startJobRun, completeJobRun } from '@/lib/admin/jobs';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,6 +24,8 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const runId = await startJobRun('weekly-campaign-digest', 'cron');
+    try {
     const now = new Date();
     const weekAgo = new Date(now);
     weekAgo.setDate(weekAgo.getDate() - 7);
@@ -69,11 +72,21 @@ export async function GET(req: NextRequest) {
     let emailSent = 0;
     let notificationsCreated = 0;
 
+    // Batch-load all subscriptions for relevant merchants to avoid N+1 queries
+    const merchantIds = Array.from(campaignsByMerchant.keys());
+    const allSubscriptions = await prisma.notificationSubscription.findMany({
+      where: { merchantId: { in: merchantIds } },
+      include: { user: true },
+    });
+    const subscriptionsByMerchant = new Map<string, typeof allSubscriptions>();
+    for (const sub of allSubscriptions) {
+      const list = subscriptionsByMerchant.get(sub.merchantId) || [];
+      list.push(sub);
+      subscriptionsByMerchant.set(sub.merchantId, list);
+    }
+
     for (const [merchantId, merchantCampaigns] of campaignsByMerchant) {
-      const subscriptions = await prisma.notificationSubscription.findMany({
-        where: { merchantId },
-        include: { user: true },
-      });
+      const subscriptions = subscriptionsByMerchant.get(merchantId) || [];
 
       const emailSubs = subscriptions.filter((sub) => sub.emailEnabled && sub.user.email);
       if (emailSubs.length > 0) {
@@ -110,41 +123,67 @@ export async function GET(req: NextRequest) {
       const promotedCampaigns = merchantCampaigns.filter((campaign) => campaign.promotedNotification);
       if (promotedCampaigns.length > 0) {
         const inAppSubs = subscriptions.filter((sub) => sub.inAppEnabled);
-        for (const sub of inAppSubs) {
-          for (const campaign of promotedCampaigns) {
-            const url = campaign.vouchers.length > 0
+        if (inAppSubs.length > 0) {
+          const userIds = inAppSubs.map((sub) => sub.userId);
+          const campaignUrls = promotedCampaigns.map((campaign) =>
+            campaign.vouchers.length > 0
               ? `${baseUrl}/v/${campaign.vouchers[0].id}`
-              : `${baseUrl}/campaigns`;
-            const recent = await prisma.notification.findFirst({
-              where: {
-                userId: sub.userId,
-                type: 'campaign_promoted',
-                url,
-                createdAt: { gte: weekAgo },
-              },
-            });
-            if (recent) continue;
-            await prisma.notification.create({
-              data: {
+              : `${baseUrl}/campaigns`
+          );
+
+          // Batch load existing notifications to avoid N+1
+          const existingNotifications = await prisma.notification.findMany({
+            where: {
+              userId: { in: userIds },
+              type: 'campaign_promoted',
+              url: { in: campaignUrls },
+              createdAt: { gte: weekAgo },
+            },
+            select: { userId: true, url: true },
+          });
+          const existingSet = new Set(
+            existingNotifications.map((n) => `${n.userId}:${n.url}`)
+          );
+
+          const toCreate: Array<{
+            userId: string;
+            merchantId: string;
+            type: string;
+            title: string;
+            body: string;
+            url: string;
+          }> = [];
+
+          for (const sub of inAppSubs) {
+            for (let i = 0; i < promotedCampaigns.length; i++) {
+              const campaign = promotedCampaigns[i];
+              const url = campaignUrls[i];
+              if (existingSet.has(`${sub.userId}:${url}`)) continue;
+              toCreate.push({
                 userId: sub.userId,
                 merchantId,
                 type: 'campaign_promoted',
                 title: `${campaign.merchant.name} spotlight`,
                 body: `Featured campaign: ${campaign.name}.`,
                 url,
-              },
-            });
-            notificationsCreated++;
+              });
+            }
+          }
+
+          if (toCreate.length > 0) {
+            await prisma.notification.createMany({ data: toCreate, skipDuplicates: true });
+            notificationsCreated += toCreate.length;
           }
         }
       }
     }
 
-    return NextResponse.json({
-      success: true,
-      emailsSent: emailSent,
-      notificationsCreated,
-      campaignsProcessed: campaigns.length,
-    });
+    const resultData = { emailsSent: emailSent, notificationsCreated, campaignsProcessed: campaigns.length };
+    await completeJobRun(runId, { status: 'succeeded', result: resultData });
+    return NextResponse.json({ success: true, ...resultData });
+    } catch (error) {
+      await completeJobRun(runId, { status: 'failed', error: error instanceof Error ? error.message : String(error) });
+      throw error;
+    }
   });
 }

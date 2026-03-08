@@ -10,7 +10,7 @@ import AuditLogView from './audit-log-view';
 import PendingMerchants from './pending-merchants';
 import { AccessControlError, requirePlatformAdminProfile } from '@/lib/access-control';
 import Link from 'next/link';
-import { Users } from 'lucide-react';
+import { Users, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
   robots: {
@@ -107,12 +107,20 @@ export default async function AdminPage() {
             <h1 className="text-3xl font-bold text-[#2D2721]">Platform Admin</h1>
             <p className="text-[#6B5744]">Overview of merchants, users, and voucher activity.</p>
           </div>
-          <WarmButton asChild variant="outline" size="sm">
-            <Link href="/admin/users" className="inline-flex items-center gap-2">
-              <Users className="h-4 w-4" />
-              Manage Users
-            </Link>
-          </WarmButton>
+          <div className="flex gap-2">
+            <WarmButton asChild variant="outline" size="sm">
+              <Link href="/admin/control-panel" className="inline-flex items-center gap-2">
+                <Shield className="h-4 w-4" />
+                Control Panel
+              </Link>
+            </WarmButton>
+            <WarmButton asChild variant="outline" size="sm">
+              <Link href="/admin/users" className="inline-flex items-center gap-2">
+                <Users className="h-4 w-4" />
+                Manage Users
+              </Link>
+            </WarmButton>
+          </div>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6 mb-6">

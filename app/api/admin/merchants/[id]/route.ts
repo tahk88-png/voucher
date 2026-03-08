@@ -3,7 +3,8 @@ import { prisma } from '@/lib/prisma';
 import { activateMerchant, deactivateMerchant } from '@/lib/merchant-status';
 import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
-import { AccessControlError, accessErrorResponse, requirePlatformAdminProfile } from '@/lib/access-control';
+import { requireAdminPermission } from '@/lib/admin/guards';
+import { recordAdminAudit } from '@/lib/admin/audit';
 
 const updateMerchantSchema = z.object({
   isActive: z.boolean().optional(),
@@ -12,16 +13,18 @@ const updateMerchantSchema = z.object({
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
+  const { id } = await params;
+
   return withErrorHandler(async () => {
-    const profile = await requirePlatformAdminProfile();
+    const admin = await requireAdminPermission('admin.merchants.edit');
 
     const body = await req.json();
     const data = updateMerchantSchema.parse(body);
 
     const merchant = await prisma.merchant.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!merchant) {
@@ -31,16 +34,23 @@ export async function PUT(
     // Handle isActive change (kill switch)
     if (data.isActive !== undefined && data.isActive !== merchant.isActive) {
       if (data.isActive) {
-        await activateMerchant(params.id, profile.userId);
+        await activateMerchant(id, admin.userId);
       } else {
-        await deactivateMerchant(params.id, profile.userId, 'Deactivated by platform admin');
+        await deactivateMerchant(id, admin.userId, 'Deactivated by platform admin');
       }
+
+      await recordAdminAudit({
+        actorUserId: admin.userId,
+        action: data.isActive ? 'merchant.activate' : 'merchant.deactivate',
+        targetType: 'Merchant',
+        targetId: id,
+        reason: data.isActive ? 'Activated by admin' : 'Deactivated by platform admin',
+      });
     }
 
     // Handle feature flags
     const updateData: { featureFlags?: Record<string, boolean> } = {};
     if (data.featureFlags !== undefined) {
-      // Validate feature flags are booleans
       const validatedFlags: Record<string, boolean> = {};
       for (const [key, value] of Object.entries(data.featureFlags)) {
         if (typeof value === 'boolean') {
@@ -51,7 +61,7 @@ export async function PUT(
     }
 
     const updated = await prisma.merchant.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
     });
 

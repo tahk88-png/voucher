@@ -95,11 +95,21 @@ export async function POST(req: NextRequest) {
 
         // Handle successful payment
         if (session.metadata) {
-          const { purchaseId, ticketId, voucherId, campaignId, merchantId, userId, referrerId } = session.metadata;
+          const { purchaseId, ticketId, voucherId, campaignId, merchantId, userId, referrerId, type: purchaseType, recipientEmail: metaRecipientEmail } = session.metadata;
           
           // Handle ticket purchase
           if (ticketId && purchaseId && merchantId && userId) {
             try {
+              // Idempotency guard: skip if already processed
+              const existingTicketPurchase = await prisma.ticketPurchase.findUnique({
+                where: { id: purchaseId },
+                select: { status: true },
+              });
+              if (existingTicketPurchase?.status === 'paid') {
+                logger.info('Webhook: Ticket purchase already processed, skipping', { purchaseId });
+                break;
+              }
+
               const ticketPurchase = await prisma.ticketPurchase.update({
                 where: { id: purchaseId },
                 data: {
@@ -170,6 +180,16 @@ export async function POST(req: NextRequest) {
           // Handle voucher purchase
           if (voucherId && purchaseId && merchantId && userId && !ticketId) {
             try {
+              // Idempotency guard: skip if already processed
+              const existingVoucherPurchase = await prisma.voucherPurchase.findUnique({
+                where: { id: purchaseId },
+                select: { status: true },
+              });
+              if (existingVoucherPurchase?.status === 'paid') {
+                logger.info('Webhook: Voucher purchase already processed, skipping', { purchaseId });
+                break;
+              }
+
               // Update purchase status - include all needed relations to avoid N+1 queries
               const purchase = await prisma.voucherPurchase.update({
                 where: { id: purchaseId },
@@ -303,6 +323,73 @@ export async function POST(req: NextRequest) {
               // Don't fail webhook - log and continue
             }
           }
+
+          // Handle gift card purchase
+          if (purchaseType === 'gift_card' && purchaseId && merchantId && userId) {
+            try {
+              // Idempotency guard: skip if already processed
+              const existingGcPurchase = await prisma.giftCardPurchase.findUnique({
+                where: { id: purchaseId },
+                select: { status: true },
+              });
+              if (existingGcPurchase?.status === 'paid') {
+                logger.info('Webhook: Gift card purchase already processed, skipping', { purchaseId });
+                break;
+              }
+
+              const gcPurchase = await prisma.giftCardPurchase.update({
+                where: { id: purchaseId },
+                data: {
+                  status: 'paid',
+                  stripeSessionId: session.id,
+                },
+                include: {
+                  giftCard: true,
+                  merchant: true,
+                  user: true,
+                },
+              });
+
+              // Send gift card to recipient if email provided
+              const recipientAddr = gcPurchase.recipientEmail || metaRecipientEmail;
+              if (recipientAddr) {
+                const giftCardUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/g/${gcPurchase.giftCard.code}`;
+                await sendEmailSafely(
+                  'gift_card_delivery',
+                  () => sendVoucherDelivery({
+                    to: recipientAddr,
+                    merchantName: gcPurchase.merchant.name,
+                    voucherCode: gcPurchase.giftCard.code,
+                    value: `${gcPurchase.giftCard.currency} ${(gcPurchase.giftCard.amount / 100).toFixed(2)}`,
+                    validUntil: gcPurchase.giftCard.validTo?.toISOString().split('T')[0] || 'No expiry',
+                    voucherUrl: giftCardUrl,
+                  }),
+                  { recipient: recipientAddr, giftCardId: gcPurchase.giftCardId }
+                );
+              }
+
+              // Log audit
+              await prisma.auditLog.create({
+                data: {
+                  merchantId: gcPurchase.merchantId,
+                  actorUserId: userId,
+                  action: 'gift_card_purchased',
+                  payloadJson: {
+                    purchaseId: gcPurchase.id,
+                    giftCardId: gcPurchase.giftCardId,
+                    amount: gcPurchase.amount,
+                    currency: gcPurchase.currency,
+                    recipientEmail: recipientAddr || null,
+                  },
+                },
+              });
+            } catch (error) {
+              logger.error('Stripe webhook: Error processing gift card purchase', {
+                error: error instanceof Error ? error.message : 'Unknown error',
+                purchaseId,
+              });
+            }
+          }
         }
         break;
       }
@@ -319,8 +406,14 @@ export async function POST(req: NextRequest) {
         if (paymentIntent.metadata) {
           const { purchaseId, ticketId } = paymentIntent.metadata;
           
+          const piType = paymentIntent.metadata.type;
           try {
-            if (ticketId && purchaseId) {
+            if (piType === 'gift_card' && purchaseId) {
+              await prisma.giftCardPurchase.updateMany({
+                where: { id: purchaseId, status: 'pending' },
+                data: { status: 'paid' },
+              });
+            } else if (ticketId && purchaseId) {
               // Update ticket purchase status if still pending
               await prisma.ticketPurchase.updateMany({
                 where: {
@@ -369,27 +462,35 @@ export async function POST(req: NextRequest) {
         // Handle failed payment - update purchase status
         if (paymentIntent.metadata?.purchaseId) {
           try {
-            // Try ticket purchase first
-            const ticketPurchase = await prisma.ticketPurchase.findUnique({
-              where: { id: paymentIntent.metadata.purchaseId },
-            });
-
-            if (ticketPurchase) {
-              await prisma.ticketPurchase.update({
+            const failedType = paymentIntent.metadata.type;
+            if (failedType === 'gift_card') {
+              await prisma.giftCardPurchase.updateMany({
                 where: { id: paymentIntent.metadata.purchaseId },
                 data: { status: 'failed' },
-              });
-              // Release ticket back to available
-              await prisma.ticket.update({
-                where: { id: ticketPurchase.ticketId },
-                data: { status: 'available', purchasedAt: null },
               });
             } else {
-              // Try voucher purchase
-              await prisma.voucherPurchase.update({
+              // Try ticket purchase first
+              const ticketPurchase = await prisma.ticketPurchase.findUnique({
                 where: { id: paymentIntent.metadata.purchaseId },
-                data: { status: 'failed' },
               });
+
+              if (ticketPurchase) {
+                await prisma.ticketPurchase.update({
+                  where: { id: paymentIntent.metadata.purchaseId },
+                  data: { status: 'failed' },
+                });
+                // Release ticket back to available
+                await prisma.ticket.update({
+                  where: { id: ticketPurchase.ticketId },
+                  data: { status: 'available', purchasedAt: null },
+                });
+              } else {
+                // Try voucher purchase
+                await prisma.voucherPurchase.update({
+                  where: { id: paymentIntent.metadata.purchaseId },
+                  data: { status: 'failed' },
+                });
+              }
             }
           } catch (error) {
             if (error instanceof Error) {
@@ -462,6 +563,204 @@ export async function POST(req: NextRequest) {
           merchantId: merchantSubscription?.merchantId || merchantId,
         });
 
+        break;
+      }
+
+      case 'invoice.payment_failed': {
+        const invoice = event.data.object as Stripe.Invoice;
+        const subscriptionId = invoice.subscription as string | null;
+
+        logger.error('Stripe webhook: Invoice payment failed', {
+          invoiceId: invoice.id,
+          subscriptionId,
+          customerId: invoice.customer,
+          amountDue: invoice.amount_due,
+          attemptCount: invoice.attempt_count,
+        });
+
+        if (subscriptionId) {
+          try {
+            // Update subscription status to past_due
+            await prisma.merchantSubscription.updateMany({
+              where: { stripeSubscriptionId: subscriptionId },
+              data: { status: 'past_due' },
+            });
+
+            // Find merchant for audit log
+            const sub = await prisma.merchantSubscription.findFirst({
+              where: { stripeSubscriptionId: subscriptionId },
+              select: { merchantId: true },
+            });
+
+            if (sub) {
+              await prisma.auditLog.create({
+                data: {
+                  merchantId: sub.merchantId,
+                  actorUserId: 'system',
+                  action: 'subscription_payment_failed',
+                  payloadJson: {
+                    invoiceId: invoice.id,
+                    subscriptionId,
+                    amountDue: invoice.amount_due,
+                    attemptCount: invoice.attempt_count,
+                  },
+                },
+              });
+            }
+          } catch (error) {
+            if (error instanceof Error) {
+              captureException(error, {
+                context: 'stripe_webhook_invoice_payment_failed',
+                invoiceId: invoice.id,
+                subscriptionId,
+              });
+            }
+          }
+        }
+        break;
+      }
+
+      case 'charge.refunded': {
+        const charge = event.data.object as Stripe.Charge;
+        const refundAmount = charge.amount_refunded;
+
+        logger.info('Stripe webhook: Charge refunded', {
+          chargeId: charge.id,
+          amountRefunded: refundAmount,
+          currency: charge.currency,
+          paymentIntentId: charge.payment_intent,
+        });
+
+        try {
+          // Find the purchase by stripe session or payment intent
+          const paymentIntentId = charge.payment_intent as string | null;
+          if (paymentIntentId) {
+            // Check if a RefundRecord already exists for this charge (idempotency)
+            const existing = await prisma.refundRecord.findFirst({
+              where: { stripeRefundId: charge.id },
+            });
+            if (!existing) {
+              // Mark purchase as refunded if we can find it via metadata
+              const metadata = charge.metadata;
+              if (metadata?.purchaseId) {
+                const isTicket = !!metadata.ticketId;
+                const isGiftCard = metadata.type === 'gift_card';
+
+                if (isGiftCard) {
+                  await prisma.giftCardPurchase.updateMany({
+                    where: { id: metadata.purchaseId, status: 'paid' },
+                    data: { status: 'refunded' },
+                  });
+                  // Cancel the gift card on refund
+                  if (metadata.giftCardId) {
+                    await prisma.giftCard.updateMany({
+                      where: { id: metadata.giftCardId, status: 'active' },
+                      data: { status: 'cancelled' },
+                    });
+                  }
+                } else if (isTicket) {
+                  await prisma.ticketPurchase.updateMany({
+                    where: { id: metadata.purchaseId, status: 'paid' },
+                    data: { status: 'refunded' },
+                  });
+                  // Release ticket
+                  if (metadata.ticketId) {
+                    await prisma.ticket.updateMany({
+                      where: { id: metadata.ticketId, status: 'sold' },
+                      data: { status: 'available', purchasedAt: null },
+                    });
+                  }
+                } else {
+                  await prisma.voucherPurchase.updateMany({
+                    where: { id: metadata.purchaseId, status: 'paid' },
+                    data: { status: 'refunded' },
+                  });
+                }
+
+                await prisma.refundRecord.create({
+                  data: {
+                    purchaseId: metadata.purchaseId,
+                    purchaseType: isGiftCard ? 'gift_card' : isTicket ? 'ticket' : 'voucher',
+                    stripeRefundId: charge.id,
+                    actorUserId: 'stripe',
+                    amountRefunded: refundAmount,
+                    currency: charge.currency,
+                    isPartial: refundAmount < charge.amount,
+                    reason: 'stripe_refund',
+                    status: 'refund_completed',
+                  },
+                });
+              }
+            }
+          }
+        } catch (error) {
+          if (error instanceof Error) {
+            captureException(error, {
+              context: 'stripe_webhook_charge_refunded',
+              chargeId: charge.id,
+            });
+          }
+        }
+        break;
+      }
+
+      case 'charge.dispute.created': {
+        const dispute = event.data.object as Stripe.Dispute;
+
+        logger.error('Stripe webhook: Dispute/chargeback created', {
+          disputeId: dispute.id,
+          chargeId: dispute.charge,
+          amount: dispute.amount,
+          currency: dispute.currency,
+          reason: dispute.reason,
+          status: dispute.status,
+        });
+
+        try {
+          const charge = typeof dispute.charge === 'string' ? dispute.charge : dispute.charge?.id;
+          const metadata = dispute.metadata || {};
+
+          // Log dispute in audit for visibility
+          if (metadata.merchantId) {
+            await prisma.auditLog.create({
+              data: {
+                merchantId: metadata.merchantId,
+                actorUserId: 'system',
+                action: 'payment_dispute_created',
+                payloadJson: {
+                  disputeId: dispute.id,
+                  chargeId: charge,
+                  amount: dispute.amount,
+                  currency: dispute.currency,
+                  reason: dispute.reason,
+                },
+              },
+            });
+          }
+
+          // Mark related purchase if identifiable
+          if (metadata.purchaseId) {
+            const isTicket = !!metadata.ticketId;
+            if (isTicket) {
+              await prisma.ticketPurchase.updateMany({
+                where: { id: metadata.purchaseId },
+                data: { status: 'disputed' },
+              });
+            } else {
+              await prisma.voucherPurchase.updateMany({
+                where: { id: metadata.purchaseId },
+                data: { status: 'disputed' },
+              });
+            }
+          }
+        } catch (error) {
+          if (error instanceof Error) {
+            captureException(error, {
+              context: 'stripe_webhook_dispute_created',
+              disputeId: dispute.id,
+            });
+          }
+        }
         break;
       }
 

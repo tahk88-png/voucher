@@ -43,15 +43,16 @@ function filterSections(type: PageBuilderType, sections: string[]) {
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
+  const { slug } = await params
   const session = await auth()
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   })
   if (!merchant) {
     return NextResponse.json({ error: "Merchant not found" }, { status: 404 })
@@ -109,15 +110,16 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
+  const { slug } = await params
   const session = await auth()
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   })
   if (!merchant) {
     return NextResponse.json({ error: "Merchant not found" }, { status: 404 })

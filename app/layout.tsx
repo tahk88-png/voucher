@@ -4,6 +4,7 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import Providers from "@/components/providers/session-provider";
+import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, buildLocaleAlternates, getBaseUrl } from "@/lib/seo";
 
@@ -18,6 +19,9 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   manifest: "/manifest.json",
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
   alternates: {
     canonical: "/",
     languages: buildLocaleAlternates("/"),
@@ -111,7 +115,10 @@ export default async function RootLayout({
         />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
-            {children}
+            <div className="min-h-screen flex flex-col">
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
             <Toaster />
           </Providers>
         </NextIntlClientProvider>

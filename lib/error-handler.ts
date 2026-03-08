@@ -3,6 +3,9 @@ import { ZodError } from 'zod';
 import { Prisma } from '@prisma/client';
 import { logger } from './logger';
 import { captureException } from './error-tracking';
+import { AccessControlError } from './access-control/guards';
+import { CircuitBreakerError } from './circuit-breaker';
+import { recordHttpRequest } from './metrics';
 
 /**
  * Standard API error response format
@@ -71,6 +74,13 @@ export class ConflictError extends AppError {
   }
 }
 
+export class StepUpRequiredError extends AppError {
+  constructor(message = 'Step-up authentication required', details?: unknown) {
+    super(message, 428, 'STEP_UP_REQUIRED', details);
+    this.name = 'StepUpRequiredError';
+  }
+}
+
 /**
  * Centralized error handler for API routes
  * Usage:
@@ -87,10 +97,21 @@ export async function withErrorHandler<T>(
   handler: () => Promise<T>,
   context?: Record<string, unknown>
 ): Promise<T | NextResponse<ApiErrorResponse>> {
+  const startTime = performance.now();
   try {
-    return await handler();
+    const result = await handler();
+    const duration = performance.now() - startTime;
+    if (result instanceof NextResponse) {
+      result.headers.set('Server-Timing', `handler;dur=${duration.toFixed(1)}`);
+      recordHttpRequest('handler', 'route', result.status, duration);
+    }
+    return result;
   } catch (error) {
-    return handleError(error, context);
+    const duration = performance.now() - startTime;
+    const response = handleError(error, context);
+    response.headers.set('Server-Timing', `handler;dur=${duration.toFixed(1)}`);
+    recordHttpRequest('handler', 'route', response.status, duration);
+    return response;
   }
 }
 
@@ -180,6 +201,47 @@ export function handleError(
         requestId,
       },
       { status: 500 }
+    );
+  }
+
+  // Handle AccessControlError (uses .status instead of .statusCode)
+  if (error instanceof AccessControlError) {
+    const level = error.status >= 500 ? 'error' : 'warn';
+    logger[level]('Access control error', {
+      requestId,
+      status: error.status,
+      code: error.code,
+      message: error.message,
+      details: error.details,
+      ...context,
+    });
+
+    return NextResponse.json(
+      {
+        error: error.message,
+        code: error.code,
+        details: error.details,
+        requestId,
+      },
+      { status: error.status }
+    );
+  }
+
+  // Handle circuit breaker errors — service unavailable
+  if (error instanceof CircuitBreakerError) {
+    logger.warn('Circuit breaker open', {
+      requestId,
+      message: error.message,
+      ...context,
+    });
+
+    return NextResponse.json(
+      {
+        error: 'Service temporarily unavailable',
+        code: 'SERVICE_UNAVAILABLE',
+        requestId,
+      },
+      { status: 503 }
     );
   }
 

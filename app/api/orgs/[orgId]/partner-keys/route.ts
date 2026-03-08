@@ -17,17 +17,18 @@ function generateKey() {
 
 export async function GET(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId)
+    const membership = await requireOrgMembership(session.user.id, orgId)
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const keys = await prisma.partnerApiKey.findMany({
-      where: { orgId: params.orgId },
+      where: { orgId },
       orderBy: { createdAt: "desc" },
       select: { id: true, label: true, createdAt: true, lastUsedAt: true },
     })
@@ -38,13 +39,14 @@ export async function GET(
 
 export async function POST(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin"])
+    const membership = await requireOrgMembership(session.user.id, orgId, ["owner", "admin"])
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const body = await req.json().catch(() => null)
@@ -58,17 +60,17 @@ export async function POST(
 
     const created = await prisma.partnerApiKey.create({
       data: {
-        orgId: params.orgId,
+        orgId,
         label: parsed.data.label,
         keyHash,
       },
     })
 
     await recordAuditEvent({
-      orgId: params.orgId,
+      orgId,
       actorUserId: session.user.id,
       entityType: "org",
-      entityId: params.orgId,
+      entityId: orgId,
       eventType: "update",
       after: { partnerKeyId: created.id, label: created.label },
     })

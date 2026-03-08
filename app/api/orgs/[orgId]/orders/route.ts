@@ -12,16 +12,17 @@ const schema = z.object({
 
 export async function GET(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    const membership = await requireOrgMembership(session.user.id, params.orgId)
+    const membership = await requireOrgMembership(session.user.id, orgId)
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const orders = await prisma.b2BOrder.findMany({
-      where: { orgId: params.orgId },
+      where: { orgId },
       include: { campaign: true, invoice: true },
       orderBy: { createdAt: "desc" },
     })
@@ -32,12 +33,13 @@ export async function GET(
 
 export async function POST(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
-    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin", "finance", "marketing"])
+    const membership = await requireOrgMembership(session.user.id, orgId, ["owner", "admin", "finance", "marketing"])
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const body = await req.json().catch(() => null)
@@ -47,7 +49,7 @@ export async function POST(
     }
 
     const campaign = await prisma.voucherCampaign.findFirst({
-      where: { id: parsed.data.campaignId, orgId: params.orgId },
+      where: { id: parsed.data.campaignId, orgId },
     })
     if (!campaign) return NextResponse.json({ error: "Campaign not found" }, { status: 404 })
 
@@ -56,7 +58,7 @@ export async function POST(
 
     const order = await prisma.b2BOrder.create({
       data: {
-        orgId: params.orgId,
+        orgId,
         campaignId: campaign.id,
         quantity: parsed.data.quantity,
         unitPriceAmount,
@@ -67,7 +69,7 @@ export async function POST(
     })
 
     await recordAuditEvent({
-      orgId: params.orgId,
+      orgId,
       actorUserId: session.user.id,
       entityType: "order",
       entityId: order.id,

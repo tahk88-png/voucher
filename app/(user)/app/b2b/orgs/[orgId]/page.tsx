@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useParams } from "next/navigation"
@@ -55,6 +55,12 @@ export default function B2BOrgDetailPage() {
   const [campaignValue, setCampaignValue] = useState(5000)
   const [campaignCurrency, setCampaignCurrency] = useState("EUR")
   const [creating, setCreating] = useState(false)
+
+  // Edit campaign state
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const [editName, setEditName] = useState("")
+  const [editValue, setEditValue] = useState(0)
+  const [saving, setSaving] = useState(false)
 
   const refresh = useCallback(async () => {
     if (!orgId) return
@@ -146,6 +152,48 @@ export default function B2BOrgDetailPage() {
     }
   }
 
+  const startEditing = (campaign: CampaignItem) => {
+    setEditingId(campaign.id)
+    setEditName(campaign.name)
+    setEditValue(campaign.valueAmount)
+  }
+
+  const handleSaveEdit = async () => {
+    if (!orgId || !editingId || !editName.trim()) return
+    setSaving(true)
+    setError(null)
+    try {
+      const res = await fetch(`/api/orgs/${orgId}/campaigns/${editingId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: editName, valueAmount: editValue }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data?.error || "Failed to update campaign")
+      setEditingId(null)
+      await refresh()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to update campaign")
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const handleCampaignAction = async (campaignId: string, action: "activate" | "pause" | "archive") => {
+    if (!orgId) return
+    setError(null)
+    try {
+      const res = await fetch(`/api/orgs/${orgId}/campaigns/${campaignId}/${action}`, {
+        method: "POST",
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data?.error || `Failed to ${action} campaign`)
+      await refresh()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : `Failed to ${action} campaign`)
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
@@ -154,6 +202,9 @@ export default function B2BOrgDetailPage() {
           <p className="text-[#6B5744]">B2B workspace overview</p>
         </div>
         <div className="flex items-center gap-2">
+          <WarmButton asChild variant="outline" size="sm">
+            <Link href={`/app/b2b/orgs/${orgId}/reports`}>Reports</Link>
+          </WarmButton>
           <WarmButton asChild variant="outline" size="sm">
             <Link href={`/app/b2b/orgs/${orgId}/audit`}>Audit</Link>
           </WarmButton>
@@ -234,16 +285,46 @@ export default function B2BOrgDetailPage() {
         <div className="space-y-3">
           {campaigns.length === 0 && <div className="text-sm text-[#8B7355]">No campaigns yet.</div>}
           {campaigns.map((campaign) => (
-            <div key={campaign.id} className="border border-[rgba(139,115,85,0.15)] rounded-[16px] p-4 flex items-center justify-between gap-3">
-              <div>
-                <div className="font-medium text-[#2D2721]">{campaign.name}</div>
-                <div className="text-xs text-[#8B7355]">
-                  {campaign.status} • {campaign.valueType} • {campaign.valueAmount} {campaign.currency}
+            <div key={campaign.id} className="border border-[rgba(139,115,85,0.15)] rounded-[16px] p-4">
+              {editingId === campaign.id ? (
+                <div className="grid gap-3 md:grid-cols-4 items-end">
+                  <div className="space-y-1.5">
+                    <label className="text-xs text-[#8B7355]">Name</label>
+                    <Input value={editName} onChange={(e) => setEditName(e.target.value)} />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs text-[#8B7355]">Value</label>
+                    <Input type="number" value={editValue} onChange={(e) => setEditValue(Number(e.target.value))} />
+                  </div>
+                  <WarmButton size="sm" onClick={handleSaveEdit} isLoading={saving}>Save</WarmButton>
+                  <WarmButton size="sm" variant="outline" onClick={() => setEditingId(null)}>Cancel</WarmButton>
                 </div>
-              </div>
-              <WarmButton size="sm" variant="outline" onClick={() => handleBulkIssue(campaign.id)}>
-                Issue 10 vouchers
-              </WarmButton>
+              ) : (
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <div className="font-medium text-[#2D2721]">{campaign.name}</div>
+                    <div className="text-xs text-[#8B7355]">
+                      {campaign.status} &bull; {campaign.valueType} &bull; {campaign.valueAmount} {campaign.currency}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {campaign.status === "draft" && (
+                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "activate")}>Activate</WarmButton>
+                    )}
+                    {campaign.status === "active" && (
+                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "pause")}>Pause</WarmButton>
+                    )}
+                    {campaign.status === "paused" && (
+                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "activate")}>Resume</WarmButton>
+                    )}
+                    {campaign.status !== "archived" && (
+                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "archive")}>Archive</WarmButton>
+                    )}
+                    <WarmButton size="sm" variant="outline" onClick={() => startEditing(campaign)}>Edit</WarmButton>
+                    <WarmButton size="sm" variant="outline" onClick={() => handleBulkIssue(campaign.id)}>Issue 10</WarmButton>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

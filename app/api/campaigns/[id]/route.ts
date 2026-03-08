@@ -29,14 +29,15 @@ const CAMPAIGN_DETAILS_CACHE_TTL_SECONDS = 45;
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const campaign = await getCached(
-      CacheKeys.campaignDetails(params.id),
+      CacheKeys.campaignDetails(id),
       () =>
         prisma.campaign.findUnique({
-          where: { id: params.id },
+          where: { id },
           include: {
             merchant: true,
             vouchers: true,
@@ -61,16 +62,17 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const campaign = await prisma.campaign.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { merchant: true },
     });
 
@@ -104,7 +106,7 @@ export async function PUT(
 
     const previousStatus = campaign.status;
     const updated = await prisma.campaign.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
     });
 
@@ -134,7 +136,7 @@ export async function PUT(
     });
 
     await Promise.all([
-      invalidateCache(CacheKeys.campaignDetails(params.id)),
+      invalidateCache(CacheKeys.campaignDetails(id)),
       invalidateCache(CacheKeys.publicMerchantCampaigns(campaign.merchantId)),
     ]);
 

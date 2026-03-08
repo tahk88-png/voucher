@@ -43,10 +43,11 @@ function clamp(value: number, min: number, max: number): number {
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
-    const { merchant } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
+    const { slug } = await params;
+    const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
     await requireActiveMerchant(merchant.id);
     await requireMerchantCapability(merchant.id, merchant.slug, 'voucher.create');
 
@@ -75,13 +76,14 @@ export async function POST(
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { slug } = await params;
     const session = await auth();
     const { searchParams } = new URL(req.url);
     const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
       select: { id: true },
     });
 
@@ -196,7 +198,7 @@ export async function GET(
     }
 
     try {
-      await requireMerchantProfileAccessBySlug(params.slug, 'merchant_staff');
+      await requireMerchantProfileAccessBySlug(slug, 'merchant_staff');
     } catch (error) {
       if (error instanceof AccessControlError) {
         if (error.status === 401 || error.status === 403) {

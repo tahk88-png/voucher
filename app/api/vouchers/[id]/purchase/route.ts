@@ -13,9 +13,10 @@ const purchaseSchema = z.object({
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -33,7 +34,7 @@ export async function POST(
 
     // Get voucher
     const voucher = await prisma.voucher.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { merchant: true, campaign: true },
     });
 

@@ -1,3 +1,13 @@
 {
-    "chatgpt.openOnStartup": true
+    "chatgpt.openOnStartup": true,
+    "chat.tools.terminal.autoApprove": {
+        "/^Test-Path \\.env\\.local; echo \"---\"; Get-Content \\.env\\.example -ErrorAction SilentlyContinue \\| Select-Object -First 10$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^npx tsx scripts/verify-mvp-setup\\.ts 2>&1 \\| Select-Object -First 150$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }

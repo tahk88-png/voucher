@@ -13,19 +13,27 @@ function buildInvoiceNumber() {
 
 export async function POST(
   req: Request,
-  { params }: { params: { orgId: string; orderId: string } }
+  { params }: { params: Promise<{ orgId: string; orderId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId, orderId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin", "finance"])
+    const membership = await requireOrgMembership(session.user.id, orgId, ["owner", "admin", "finance"])
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const order = await prisma.b2BOrder.findFirst({
-      where: { id: params.orderId, orgId: params.orgId },
+      where: { id: orderId, orgId },
     })
     if (!order) return NextResponse.json({ error: "Not found" }, { status: 404 })
+
+    const existingInvoice = await prisma.b2BInvoice.findUnique({
+      where: { orderId: order.id },
+    })
+    if (existingInvoice) {
+      return NextResponse.json({ error: "Invoice already exists for this order" }, { status: 409 })
+    }
 
     const invoice = await prisma.b2BInvoice.create({
       data: {
@@ -40,18 +48,29 @@ export async function POST(
       },
     })
 
+    const beforeOrderStatus = order.status
     await prisma.b2BOrder.update({
       where: { id: order.id },
       data: { status: "invoiced" },
     })
 
     await recordAuditEvent({
-      orgId: params.orgId,
+      orgId,
       actorUserId: session.user.id,
       entityType: "invoice",
       entityId: invoice.id,
       eventType: "create",
       after: invoice,
+    })
+
+    await recordAuditEvent({
+      orgId,
+      actorUserId: session.user.id,
+      entityType: "order",
+      entityId: order.id,
+      eventType: "update",
+      before: { status: beforeOrderStatus },
+      after: { status: "invoiced" },
     })
 
     return NextResponse.json({ invoice })

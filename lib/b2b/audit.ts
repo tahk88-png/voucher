@@ -17,6 +17,7 @@ export async function recordAuditEvent(params: {
     | "pause"
     | "resume"
     | "update"
+    | "reverse"
   before?: unknown
   after?: unknown
 }) {

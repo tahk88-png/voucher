@@ -1,4 +1,5 @@
 import { loggers } from './logger';
+import { withCircuitBreaker, CircuitBreakerError } from './circuit-breaker';
 
 /**
  * Safe email sending wrapper that never throws
@@ -21,7 +22,10 @@ export async function sendEmailSafely<T>(
   const startTime = Date.now();
 
   try {
-    await sendFn();
+    await withCircuitBreaker(
+      { name: 'email', failureThreshold: 5, resetTimeoutMs: 60_000 },
+      sendFn,
+    );
     const duration = Date.now() - startTime;
 
     loggers.email(emailType, context?.recipient as string || 'unknown', true);
@@ -29,6 +33,12 @@ export async function sendEmailSafely<T>(
     return { success: true };
   } catch (error) {
     const duration = Date.now() - startTime;
+
+    if (error instanceof CircuitBreakerError) {
+      loggers.email(emailType, context?.recipient as string || 'unknown', false, 'circuit_breaker_open');
+      return { success: false, error: 'Email service temporarily unavailable' };
+    }
+
     const errorMessage = error instanceof Error ? error.message : String(error);
 
     loggers.email(emailType, context?.recipient as string || 'unknown', false, errorMessage);

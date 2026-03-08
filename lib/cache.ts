@@ -8,6 +8,8 @@
  */
 
 import { getRedisClient } from './redis';
+import { recordCacheHit, recordCacheMiss } from './metrics';
+import { logger } from './logger';
 
 // In-memory fallback cache
 const memoryCache = new Map<string, { value: any; expiresAt: number }>();
@@ -38,9 +40,15 @@ export async function get<T>(key: string): Promise<T | null> {
   if (redisClient) {
     try {
       const value = await redisClient.get(key);
-      return value ? JSON.parse(value) : null;
+      if (value) {
+        recordCacheHit(key);
+        return JSON.parse(value);
+      }
+      recordCacheMiss(key);
+      return null;
     } catch (error) {
-      console.error('Redis get error:', error);
+      logger.error('Redis get error', { key, error: error instanceof Error ? error.message : String(error) });
+      recordCacheMiss(key);
       return null;
     }
   }
@@ -48,11 +56,13 @@ export async function get<T>(key: string): Promise<T | null> {
   // Fallback to memory cache
   const cached = memoryCache.get(key);
   if (cached && cached.expiresAt > Date.now()) {
+    recordCacheHit(key);
     return cached.value as T;
   }
   if (cached) {
     memoryCache.delete(key);
   }
+  recordCacheMiss(key);
   return null;
 }
 
@@ -66,7 +76,7 @@ export async function set(key: string, value: any, ttlSeconds: number = 3600): P
       await redisClient.setEx(key, ttlSeconds, JSON.stringify(value));
       return;
     } catch (error) {
-      console.error('Redis set error:', error);
+      logger.error('Redis set error', { key, error: error instanceof Error ? error.message : String(error) });
     }
   }
 
@@ -86,7 +96,7 @@ export async function invalidateCache(key: string): Promise<void> {
     try {
       await redisClient.del(key);
     } catch (error) {
-      console.error('Redis delete error:', error);
+      logger.error('Redis delete error', { key, error: error instanceof Error ? error.message : String(error) });
     }
   }
 
@@ -105,7 +115,7 @@ export async function invalidatePattern(pattern: string): Promise<void> {
         await redisClient.del(keys);
       }
     } catch (error) {
-      console.error('Redis pattern delete error:', error);
+      logger.error('Redis pattern delete error', { pattern, error: error instanceof Error ? error.message : String(error) });
     }
   }
 

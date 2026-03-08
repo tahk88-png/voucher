@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma"
+import { Prisma } from "@prisma/client"
 
 export type NavigationPosition = "header" | "footer"
 export type NavigationScope = "tenant" | "hub"
@@ -7,6 +8,16 @@ export interface NavigationLinkItem {
   id: string
   label: string
   href: string
+}
+
+const DB_RETRY_COOLDOWN_MS = 30_000
+let dbUnavailableUntil = 0
+let lastDbUnavailableLogAt = 0
+
+function isDatabaseUnavailableError(error: unknown): boolean {
+  if (error instanceof Prisma.PrismaClientInitializationError) return true
+  if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P1001") return true
+  return error instanceof Error && error.message.includes("Can't reach database server")
 }
 
 export async function getNavigationLinks({
@@ -18,6 +29,10 @@ export async function getNavigationLinks({
   scope: NavigationScope
   position: NavigationPosition
 }): Promise<NavigationLinkItem[]> {
+  if (Date.now() < dbUnavailableUntil) {
+    return getFallbackNavigation(scope)[position]
+  }
+
   try {
     const links = await prisma.navigationLink.findMany({
       where: {
@@ -37,8 +52,17 @@ export async function getNavigationLinks({
         seen.add(link.href)
         return true
       })
-  } catch {
-    console.warn("navigation: database unavailable, using fallback links")
+  } catch (error) {
+    const now = Date.now()
+    if (isDatabaseUnavailableError(error)) {
+      dbUnavailableUntil = now + DB_RETRY_COOLDOWN_MS
+      if (now - lastDbUnavailableLogAt > DB_RETRY_COOLDOWN_MS) {
+        lastDbUnavailableLogAt = now
+        console.warn("navigation: database unavailable, using fallback links")
+      }
+    } else {
+      console.warn("navigation: failed to load links, using fallback links")
+    }
     return getFallbackNavigation(scope)[position]
   }
 }

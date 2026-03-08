@@ -251,14 +251,14 @@ export async function redeemVoucher(params: {
             "remainingValueAmount" = "remainingValueAmount" - ${redeemAmount},
             "redeemedCount" = "redeemedCount" + 1,
             status = CASE
-              WHEN ${voucher.campaign.usageType} = 'single' THEN 'redeemed'
-              WHEN ("remainingValueAmount" - ${redeemAmount}) = 0 THEN 'redeemed'
-              ELSE 'active'
+              WHEN ${voucher.campaign.usageType} = 'single' THEN 'redeemed'::"B2BVoucherStatus"
+              WHEN ("remainingValueAmount" - ${redeemAmount}) = 0 THEN 'redeemed'::"B2BVoucherStatus"
+              ELSE 'active'::"B2BVoucherStatus"
             END,
             "activatedAt" = COALESCE("activatedAt", now()),
             "updatedAt" = now()
           WHERE id = ${voucher.id}
-            AND status IN ('active','issued')
+            AND status IN ('active'::"B2BVoucherStatus",'issued'::"B2BVoucherStatus")
             AND "remainingValueAmount" >= ${redeemAmount}
           RETURNING *;
         `

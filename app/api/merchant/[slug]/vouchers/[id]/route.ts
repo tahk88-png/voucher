@@ -27,16 +27,17 @@ const updateVoucherSchema = z.object({
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { slug: string; id: string } }
+  { params }: { params: Promise<{slug: string; id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { slug, id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
     });
 
     if (!merchant) {
@@ -46,7 +47,7 @@ export async function PUT(
     await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
 
     const voucher = await prisma.voucher.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!voucher || voucher.merchantId !== merchant.id) {
@@ -94,7 +95,7 @@ export async function PUT(
     if (data.codePrefix !== undefined) updateData.codePrefix = data.codePrefix;
 
     const updated = await prisma.voucher.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
     });
 
@@ -116,7 +117,7 @@ export async function PUT(
         merchantId: merchant.id,
         actorUserId: session.user.id,
         action: 'voucher.updated',
-        payloadJson: JSON.stringify({ voucherId: params.id, changes: Object.keys(updateData) }),
+        payloadJson: JSON.stringify({ voucherId: id, changes: Object.keys(updateData) }),
       },
     });
 
@@ -128,12 +129,13 @@ export async function PUT(
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string; id: string } }
+  { params }: { params: Promise<{slug: string; id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { slug, id } = await params;
     const session = await auth();
     const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
     });
 
     if (!merchant) {
@@ -141,7 +143,7 @@ export async function GET(
     }
 
     const voucher = await prisma.voucher.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!voucher || voucher.merchantId !== merchant.id) {

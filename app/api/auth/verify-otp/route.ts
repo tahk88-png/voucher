@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
+import { logger } from '@/lib/logger';
 
 export const dynamic = 'force-dynamic';
 
@@ -52,7 +53,7 @@ export async function POST(req: NextRequest) {
         sendWelcomeEmail({
           to: normalizedEmail,
           name: normalizedEmail.split('@')[0],
-        }).catch((err) => console.error('[verify-otp] Welcome email failed:', err));
+        }).catch((err) => logger.error('[verify-otp] Welcome email failed', { error: err instanceof Error ? err.message : String(err) }));
       });
     }
 

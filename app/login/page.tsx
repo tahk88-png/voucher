@@ -231,7 +231,9 @@ function ErrorBanner({ msg }: { msg: string }) {
 
 function LoginForm() {
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get("callbackUrl") ?? "/app/entry"
+  const rawCallback = searchParams.get("callbackUrl") ?? "/app/entry"
+  // Validate callback URL is relative to prevent open redirect
+  const callbackUrl = rawCallback.startsWith("/") && !rawCallback.startsWith("//") ? rawCallback : "/app/entry"
 
   const [lang, setLang] = useState<Lang>("en")
   const [tab, setTab] = useState<Tab>("magic")
@@ -590,9 +592,17 @@ function LoginForm() {
               </div>
             )}
 
-            {/* Social sign-in note */}
+            {/* Social sign-in note + register link */}
             {tab !== "social" && (
-              <p className="text-xs text-[var(--text-muted)] text-center mt-4">{s.noAccountSub}</p>
+              <div className="text-center mt-4 space-y-1">
+                <p className="text-xs text-[var(--text-muted)]">{s.noAccountSub}</p>
+                <p className="text-sm text-[var(--text-muted)]">
+                  {s.noAccount}{" "}
+                  <Link href="/register" className="font-medium text-[var(--primary)] hover:underline">
+                    Create account
+                  </Link>
+                </p>
+              </div>
             )}
           </div>
 

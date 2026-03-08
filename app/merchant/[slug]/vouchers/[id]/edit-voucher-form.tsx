@@ -8,6 +8,7 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { formatCurrency, safeParseJson } from '@/lib/utils';
+import { sanitizeCssValue } from '@/lib/sanitize-css';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { useTranslations } from 'next-intl';
 import { Voucher } from '@prisma/client';
@@ -44,7 +45,7 @@ function VoucherPreview({ form }: { form: FormData }) {
     <div className="voucher-preview w-full max-w-[320px] mx-auto lg:mx-0 rounded-2xl border border-[rgba(139,115,85,0.15)] shadow-warm overflow-hidden bg-[var(--preview-bg)]">
       <style
         dangerouslySetInnerHTML={{
-          __html: `.voucher-preview{--preview-bg:${form.designBackgroundColor};--preview-primary:${form.designPrimaryColor}}`,
+          __html: `.voucher-preview{--preview-bg:${sanitizeCssValue(form.designBackgroundColor)};--preview-primary:${sanitizeCssValue(form.designPrimaryColor)}}`,
         }}
       />
       <div className="px-5 pt-5 pb-4 text-white bg-[var(--preview-primary)]">

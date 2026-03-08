@@ -1,4 +1,6 @@
 import { PrismaClient } from '@prisma/client';
+import { recordDbQuery } from './metrics';
+import { loggers } from './logger';
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
@@ -19,6 +21,22 @@ export const prisma =
     // Example DATABASE_URL with pooling:
     // postgresql://user:pass@host:5432/db?connection_limit=20&pool_timeout=20&connect_timeout=10
   });
+
+// Query timing middleware for metrics and slow query detection
+prisma.$use(async (params, next) => {
+  const start = performance.now();
+  const result = await next(params);
+  const duration = performance.now() - start;
+  recordDbQuery(params.model ?? 'unknown', params.action, duration);
+  if (duration > 500) {
+    loggers.database('Slow query detected', {
+      model: params.model,
+      action: params.action,
+      durationMs: Math.round(duration * 100) / 100,
+    });
+  }
+  return result;
+});
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 

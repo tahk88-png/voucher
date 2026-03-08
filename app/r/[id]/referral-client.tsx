@@ -12,6 +12,7 @@ import { showSuccess } from '@/lib/toast-helpers';
 import { Smartphone } from 'lucide-react';
 import SocialShare from '@/components/social-share';
 import { useTranslations } from 'next-intl';
+import { sanitizeCssValue } from '@/lib/sanitize-css';
 
 interface ReferralClientProps {
   referral: any;
@@ -114,7 +115,7 @@ export default function ReferralClient({
     >
       <style
         dangerouslySetInnerHTML={{
-          __html: `.${scope}{--brand-bg:${brandBg};--brand-primary:${brandPrimary}}`,
+          __html: `.${scope}{--brand-bg:${sanitizeCssValue(brandBg)};--brand-primary:${sanitizeCssValue(brandPrimary)}}`,
         }}
       />
       <p className="text-sm text-[#6B5744] mt-2 mb-4 text-center">

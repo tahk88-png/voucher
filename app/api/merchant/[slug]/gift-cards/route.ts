@@ -18,6 +18,8 @@ const createGiftCardSchema = z.object({
   logoUrl: z.string().url().optional().nullable(),
   designJson: z.record(z.any()).optional(),
   codePrefix: z.string().max(12).optional(),
+  purchasable: z.boolean().optional().default(false),
+  price: z.number().int().positive().optional().nullable(),
 });
 
 async function createGiftCardWithUniqueCode(data: {
@@ -31,6 +33,8 @@ async function createGiftCardWithUniqueCode(data: {
   logoUrl: string | null;
   designJson?: Prisma.InputJsonValue;
   codePrefix?: string;
+  purchasable?: boolean;
+  price?: number | null;
 }) {
   const attempts = 5;
   for (let i = 0; i < attempts; i += 1) {
@@ -48,6 +52,8 @@ async function createGiftCardWithUniqueCode(data: {
           imageUrl: data.imageUrl,
           logoUrl: data.logoUrl,
           designJson: data.designJson,
+          purchasable: data.purchasable ?? false,
+          price: data.price ?? null,
         },
       });
     } catch (error) {
@@ -62,7 +68,7 @@ async function createGiftCardWithUniqueCode(data: {
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
     const session = await auth();
@@ -70,8 +76,9 @@ export async function POST(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { slug } = await params;
     const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
     });
 
     if (!merchant) {
@@ -95,6 +102,8 @@ export async function POST(
       logoUrl: data.logoUrl ?? null,
       designJson: data.designJson ? (data.designJson as Prisma.InputJsonValue) : undefined,
       codePrefix: data.codePrefix,
+      purchasable: data.purchasable,
+      price: data.price ?? null,
     });
 
     return NextResponse.json(giftCard);
@@ -103,7 +112,7 @@ export async function POST(
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
     const session = await auth();
@@ -111,8 +120,9 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { slug } = await params;
     const merchant = await prisma.merchant.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
     });
 
     if (!merchant) {

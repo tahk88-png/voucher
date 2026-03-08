@@ -3,21 +3,23 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { unlockCreditForRedemption } from '@/lib/credits';
+import { logger } from '@/lib/logger';
 import { sendRedemptionConfirmation } from '@/lib/emails';
 import { withErrorHandler } from '@/lib/error-handler';
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const redemption = await prisma.redemption.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         merchant: true,
         voucher: { include: { campaign: true } },
@@ -41,13 +43,13 @@ export async function POST(
     // Confirm redemption
     await prisma.$transaction(async (tx) => {
       await tx.redemption.update({
-        where: { id: params.id },
+        where: { id },
         data: { confirmedAt, redeemedByStaffUserId: session.user.id },
       });
 
       // Unlock credit if referral exists
       if (redemption.referralId) {
-        await unlockCreditForRedemption(params.id, redemption.merchantId);
+        await unlockCreditForRedemption(id, redemption.merchantId);
       }
     });
 
@@ -62,7 +64,7 @@ export async function POST(
         voucherUrl: redemption.voucherId
           ? `${appUrl}/app/voucher/${redemption.voucherId}`
           : `${appUrl}/app/vouchers`,
-      }).catch((err) => console.error('[Email] Redemption confirmation failed:', err));
+      }).catch((err) => logger.error('[Email] Redemption confirmation failed:', { error: err instanceof Error ? err.message : String(err) }));
     }
 
     return NextResponse.json({ success: true });

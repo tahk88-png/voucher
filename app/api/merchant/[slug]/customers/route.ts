@@ -7,10 +7,10 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } | Promise<{ slug: string }> }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   return withErrorHandler(async () => {
-    const { slug } = await Promise.resolve(params);
+    const { slug } = await params;
     const { merchant } = await requireMerchantProfileAccessBySlug(slug);
 
     // Get all purchases grouped by user

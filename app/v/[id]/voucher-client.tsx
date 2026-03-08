@@ -8,6 +8,7 @@ import { formatCurrency, formatPercentage } from '@/lib/utils';
 import QRDownload from '@/components/qr-download';
 import SocialShare from '@/components/social-share';
 import { showSuccess, showInfo, showError } from '@/lib/toast-helpers';
+import { sanitizeCssValue } from '@/lib/sanitize-css';
 import { Copy, Share2, CreditCard, Gift, QrCode } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
@@ -133,7 +134,7 @@ export default function VoucherClient({
     >
       <style
         dangerouslySetInnerHTML={{
-          __html: `.${scope}{--brand-bg:${brandBg};--brand-primary:${brandPrimary};--brand-text:${brandText}}`,
+          __html: `.${scope}{--brand-bg:${sanitizeCssValue(brandBg)};--brand-primary:${sanitizeCssValue(brandPrimary)};--brand-text:${sanitizeCssValue(brandText)}}`,
         }}
       />
       <WarmCard padding="none" className="w-full max-w-[420px] overflow-hidden bg-white">

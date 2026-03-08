@@ -47,6 +47,8 @@ const legacyCredentialProfiles = [
  * Returns the Prisma user ID (used as session.user.id throughout the app).
  */
 async function ensureDbUser(email: string, name?: string | null, image?: string | null) {
+  const defaultName = name ?? email.split('@')[0];
+  const defaultImage = image ?? null;
   const user = await prisma.user.upsert({
     where: { email },
     update: {
@@ -55,8 +57,8 @@ async function ensureDbUser(email: string, name?: string | null, image?: string 
     },
     create: {
       email,
-      name: name ?? email.split('@')[0],
-      image: image ?? null,
+      name: defaultName,
+      image: defaultImage,
     },
   });
   return user;

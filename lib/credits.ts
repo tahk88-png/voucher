@@ -1,5 +1,6 @@
 import { prisma } from './prisma';
 import { sendCreditUnlocked } from './emails';
+import { logger } from './logger';
 
 /**
  * Unlock credit after redemption confirmation
@@ -74,7 +75,7 @@ export async function unlockCreditForRedemption(
       }
     } catch (error) {
       // Don't fail unlock if email fails
-      console.error('Error sending credit unlocked email:', error);
+      logger.error('Error sending credit unlocked email', { error: error instanceof Error ? error.message : String(error) });
     }
   }
 }

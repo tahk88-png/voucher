@@ -26,7 +26,7 @@ import {
   TrendingUp,
   UtensilsCrossed,
   Users,
-  Zap,
+  Zap
 } from "lucide-react"
 
 type LandingFeaturedOffer = {
@@ -721,21 +721,6 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
         </WarmCard>
       </section>
 
-      <footer className="border-t border-[var(--border)] bg-white/70 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)]">
-            <span className="w-6 h-6 rounded-full gradient-brand grid place-items-center border border-[#F2CB80]">
-              <Gift className="h-3.5 w-3.5 text-white" />
-            </span>
-            GiftHub
-          </div>
-          <p className="text-xs text-[var(--text-faint)] inline-flex items-center gap-1">
-            <span>(c) 2026 GiftHub. Made with</span>
-            <Heart className="h-3.5 w-3.5 text-[var(--danger)]" />
-            <span>in Europe.</span>
-          </p>
-        </div>
-      </footer>
     </div>
   )
 }

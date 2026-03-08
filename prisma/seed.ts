@@ -1082,6 +1082,261 @@ async function main() {
     },
   })
 
+  // ── Gift Hub Seed Data ──
+  console.log("Seeding Gift Hub data...")
+
+  // Clean existing gift data
+  await prisma.giftFeedItem.deleteMany({})
+  await prisma.giftFeedModule.deleteMany({})
+  await prisma.userGiftInteraction.deleteMany({})
+  await prisma.userGiftProfile.deleteMany({})
+  await prisma.sponsoredGiftPlacement.deleteMany({})
+  await prisma.giftProductOccasion.deleteMany({})
+  await prisma.giftProductPersona.deleteMany({})
+  await prisma.giftProduct.deleteMany({})
+  await prisma.giftCategory.deleteMany({})
+  await prisma.giftOccasion.deleteMany({})
+  await prisma.giftPersona.deleteMany({})
+
+  // Categories
+  const catExperiences = await prisma.giftCategory.create({
+    data: { name: "Experiences", slug: "experiences", description: "Unforgettable experiences and activities", icon: "🎭", color: "#E17B5C", sortOrder: 0 },
+  })
+  const catFood = await prisma.giftCategory.create({
+    data: { name: "Food & Drink", slug: "food-drink", description: "Gourmet food, wine, and culinary delights", icon: "🍷", color: "#9DB5A5", sortOrder: 1 },
+  })
+  const catWellness = await prisma.giftCategory.create({
+    data: { name: "Wellness & Self-Care", slug: "wellness", description: "Spa, fitness, and wellness gifts", icon: "🧘", color: "#A78BFA", sortOrder: 2 },
+  })
+  const catTech = await prisma.giftCategory.create({
+    data: { name: "Tech & Gadgets", slug: "tech", description: "Smart devices and tech accessories", icon: "💻", color: "#3B82F6", sortOrder: 3 },
+  })
+  const catHome = await prisma.giftCategory.create({
+    data: { name: "Home & Living", slug: "home-living", description: "Decor, plants, and cozy essentials", icon: "🏠", color: "#F5C98E", sortOrder: 4 },
+  })
+
+  // Occasions
+  const occBirthday = await prisma.giftOccasion.create({
+    data: { name: "Birthday", slug: "birthday", description: "Birthday celebrations", icon: "🎂", seasonalityWeight: 1.0, activeMonths: [], sortOrder: 0 },
+  })
+  const occChristmas = await prisma.giftOccasion.create({
+    data: { name: "Christmas", slug: "christmas", description: "Holiday season gifts", icon: "🎄", seasonalityWeight: 2.5, activeMonths: [11, 12], sortOrder: 1 },
+  })
+  const occValentines = await prisma.giftOccasion.create({
+    data: { name: "Valentine's Day", slug: "valentines", description: "Romantic gifts for your special someone", icon: "❤️", seasonalityWeight: 2.0, activeMonths: [1, 2], sortOrder: 2 },
+  })
+  const occThankYou = await prisma.giftOccasion.create({
+    data: { name: "Thank You", slug: "thank-you", description: "Show appreciation", icon: "🙏", seasonalityWeight: 1.0, activeMonths: [], sortOrder: 3 },
+  })
+  const occGraduation = await prisma.giftOccasion.create({
+    data: { name: "Graduation", slug: "graduation", description: "Celebrate academic achievements", icon: "🎓", seasonalityWeight: 1.5, activeMonths: [5, 6], sortOrder: 4 },
+  })
+
+  // Personas
+  const perPartner = await prisma.giftPersona.create({
+    data: { name: "For Partner", slug: "partner", description: "Romantic gifts for your significant other", icon: "💑", tags: ["partner", "husband", "wife", "boyfriend", "girlfriend"], sortOrder: 0 },
+  })
+  const perFriend = await prisma.giftPersona.create({
+    data: { name: "For Friend", slug: "friend", description: "Fun and thoughtful gifts for friends", icon: "👫", tags: ["friend", "bestie", "bff", "pal"], sortOrder: 1 },
+  })
+  const perParent = await prisma.giftPersona.create({
+    data: { name: "For Parent", slug: "parent", description: "Gifts for mom and dad", icon: "👨‍👩‍👧", tags: ["parent", "mom", "dad", "mother", "father"], sortOrder: 2 },
+  })
+  const perColleague = await prisma.giftPersona.create({
+    data: { name: "For Colleague", slug: "colleague", description: "Professional and appropriate gifts", icon: "💼", tags: ["colleague", "coworker", "boss", "employee", "corporate"], sortOrder: 3 },
+  })
+  const perChild = await prisma.giftPersona.create({
+    data: { name: "For Child", slug: "child", description: "Fun gifts for kids and teens", icon: "👶", tags: ["child", "kid", "teen", "teenager", "son", "daughter"], sortOrder: 4 },
+  })
+
+  // Products (20 diverse gifts across merchants)
+  const giftProducts = [
+    { title: "Sunset Wine Tasting", description: "A guided tasting of 6 premium wines at a scenic vineyard with cheese pairing", priceCents: 7500, cat: catFood, tags: ["wine", "experience", "romantic"], featured: true },
+    { title: "Spa Day Retreat", description: "Full-day spa experience with massage, facial, and relaxation pool access", priceCents: 12000, cat: catWellness, tags: ["spa", "relaxation", "self-care"], featured: true },
+    { title: "Smart Home Starter Kit", description: "Smart speaker, 2 smart bulbs, and a smart plug bundle", priceCents: 9900, cat: catTech, tags: ["smart-home", "gadget", "digital"], featured: false },
+    { title: "Gourmet Chocolate Box", description: "Handcrafted artisan chocolates — 24 pieces in a luxury gift box", priceCents: 3500, cat: catFood, tags: ["chocolate", "luxury", "handmade"], featured: true },
+    { title: "Indoor Herb Garden Kit", description: "Self-watering ceramic planter with basil, mint, and rosemary seeds", priceCents: 4500, cat: catHome, tags: ["plants", "garden", "sustainable"], featured: false },
+    { title: "Cooking Masterclass", description: "3-hour hands-on cooking class with a professional chef — choose your cuisine", priceCents: 8500, cat: catExperiences, tags: ["cooking", "experience", "food"], featured: true },
+    { title: "Wireless Noise-Cancelling Earbuds", description: "Premium sound quality with 30-hour battery life and active noise cancellation", priceCents: 11900, cat: catTech, tags: ["audio", "gadget", "wireless"], featured: false },
+    { title: "Scented Candle Collection", description: "Set of 4 hand-poured soy candles — Lavender, Vanilla, Sandalwood, Citrus", priceCents: 2800, cat: catHome, tags: ["candles", "decor", "relaxation"], featured: false },
+    { title: "Adventure Day Pass", description: "Full-day access to zip-lining, rock climbing, and obstacle courses", priceCents: 6500, cat: catExperiences, tags: ["adventure", "outdoor", "experience"], featured: true },
+    { title: "Yoga & Meditation Subscription", description: "3-month premium subscription to online yoga and meditation classes", priceCents: 3900, cat: catWellness, tags: ["yoga", "meditation", "digital", "subscription"], featured: false },
+    { title: "Artisan Coffee Subscription", description: "Monthly delivery of freshly roasted single-origin beans for 3 months", priceCents: 4200, cat: catFood, tags: ["coffee", "subscription", "artisan"], featured: false },
+    { title: "Portable Bluetooth Speaker", description: "Waterproof speaker with 360° sound, perfect for outdoor adventures", priceCents: 5900, cat: catTech, tags: ["audio", "portable", "outdoor"], featured: false },
+    { title: "Luxury Bath Bomb Set", description: "12 handmade bath bombs with essential oils and dried flowers", priceCents: 2400, cat: catWellness, tags: ["bath", "relaxation", "handmade"], featured: false },
+    { title: "Photo Book Creator Voucher", description: "Create a personalized 40-page hardcover photo book — voucher code included", priceCents: 4500, cat: catHome, tags: ["personalized", "photos", "gift-card"], featured: false },
+    { title: "Escape Room Experience", description: "Thrilling 60-minute escape room for up to 4 people — choose your theme", priceCents: 8000, cat: catExperiences, tags: ["escape-room", "experience", "group"], featured: false },
+    { title: "Premium Steak Dinner for Two", description: "3-course dinner with a bottle of wine at a top-rated steakhouse", priceCents: 15000, cat: catFood, tags: ["dinner", "steak", "romantic", "luxury"], featured: true },
+    { title: "Smart Fitness Tracker", description: "Heart rate, sleep tracking, GPS, and 7-day battery life", priceCents: 7900, cat: catTech, tags: ["fitness", "gadget", "health"], featured: false },
+    { title: "Cozy Throw Blanket", description: "Ultra-soft merino wool throw blanket — perfect for movie nights", priceCents: 6500, cat: catHome, tags: ["cozy", "blanket", "comfort"], featured: false },
+    { title: "Hot Air Balloon Ride", description: "Breathtaking sunrise hot air balloon flight with champagne breakfast", priceCents: 25000, cat: catExperiences, tags: ["adventure", "luxury", "experience", "romantic"], featured: true },
+    { title: "Mindfulness Journal & Pen Set", description: "Guided gratitude journal with premium fountain pen in gift box", priceCents: 3200, cat: catWellness, tags: ["journal", "mindfulness", "stationery"], featured: false },
+  ]
+
+  const createdProducts = []
+  const merchants = [merchant1, merchant2]
+
+  for (let i = 0; i < giftProducts.length; i++) {
+    const gp = giftProducts[i]
+    const merchant = merchants[i % merchants.length]
+
+    const product = await prisma.giftProduct.create({
+      data: {
+        title: gp.title,
+        description: gp.description,
+        priceCents: gp.priceCents,
+        currency: "EUR",
+        categoryId: gp.cat.id,
+        merchantId: merchant.id,
+        tags: gp.tags,
+        isFeatured: gp.featured,
+        mediaUrls: [],
+        engagementScore: Math.floor(Math.random() * 100),
+        viewCount: Math.floor(Math.random() * 500),
+        purchaseCount: Math.floor(Math.random() * 50),
+      },
+    })
+    createdProducts.push(product)
+  }
+
+  // Link products to occasions and personas
+  const occasionMap: Record<string, typeof occBirthday[]> = {
+    "experiences": [occBirthday, occChristmas, occGraduation],
+    "food-drink": [occBirthday, occChristmas, occValentines, occThankYou],
+    "wellness": [occBirthday, occValentines, occThankYou],
+    "tech": [occBirthday, occChristmas, occGraduation],
+    "home-living": [occChristmas, occThankYou],
+  }
+
+  const personaMap: Record<string, typeof perPartner[]> = {
+    "experiences": [perPartner, perFriend],
+    "food-drink": [perPartner, perFriend, perParent],
+    "wellness": [perPartner, perParent, perFriend],
+    "tech": [perFriend, perColleague, perChild],
+    "home-living": [perParent, perPartner, perColleague],
+  }
+
+  for (let i = 0; i < createdProducts.length; i++) {
+    const product = createdProducts[i]
+    const catSlug = giftProducts[i].cat.slug
+
+    const occasions = occasionMap[catSlug] || [occBirthday]
+    const personas = personaMap[catSlug] || [perFriend]
+
+    for (const occ of occasions) {
+      await prisma.giftProductOccasion.create({
+        data: { productId: product.id, occasionId: occ.id },
+      }).catch(() => {}) // ignore duplicate
+    }
+
+    for (const per of personas) {
+      await prisma.giftProductPersona.create({
+        data: { productId: product.id, personaId: per.id },
+      }).catch(() => {}) // ignore duplicate
+    }
+  }
+
+  // Feed Modules
+  const trendingModule = await prisma.giftFeedModule.create({
+    data: {
+      title: "Trending Now",
+      subtitle: "Most popular gifts this week",
+      type: "TRENDING",
+      sortOrder: 0,
+      isActive: true,
+    },
+  })
+
+  const seasonalModule = await prisma.giftFeedModule.create({
+    data: {
+      title: "Season's Best",
+      subtitle: "Top picks for the current season",
+      type: "SEASONAL",
+      sortOrder: 1,
+      isActive: true,
+    },
+  })
+
+  const budgetModule = await prisma.giftFeedModule.create({
+    data: {
+      title: "Under €50",
+      subtitle: "Great gifts that won't break the bank",
+      type: "BUDGET_RANGE",
+      sortOrder: 2,
+      isActive: true,
+      config: JSON.stringify({ budgetMax: 5000 }),
+    },
+  })
+
+  const premiumModule = await prisma.giftFeedModule.create({
+    data: {
+      title: "Premium Picks",
+      subtitle: "Luxury gifts for special occasions",
+      type: "EDITORIAL",
+      sortOrder: 3,
+      isActive: true,
+    },
+  })
+
+  const aiModule = await prisma.giftFeedModule.create({
+    data: {
+      title: "AI Recommended",
+      subtitle: "Curated just for you",
+      type: "AI_CURATED",
+      sortOrder: 4,
+      isActive: true,
+    },
+  })
+
+  // Add items to modules
+  const featuredProducts = createdProducts.filter((_, i) => giftProducts[i].featured)
+  const cheapProducts = createdProducts.filter((_, i) => giftProducts[i].priceCents <= 5000)
+
+  for (let i = 0; i < Math.min(featuredProducts.length, 5); i++) {
+    await prisma.giftFeedItem.create({
+      data: { moduleId: trendingModule.id, productId: featuredProducts[i].id, priority: 5 - i },
+    })
+    await prisma.giftFeedItem.create({
+      data: { moduleId: premiumModule.id, productId: featuredProducts[i].id, priority: 5 - i },
+    })
+  }
+
+  for (let i = 0; i < Math.min(cheapProducts.length, 5); i++) {
+    await prisma.giftFeedItem.create({
+      data: { moduleId: budgetModule.id, productId: cheapProducts[i].id, priority: 5 - i },
+    })
+  }
+
+  for (let i = 0; i < Math.min(createdProducts.length, 5); i++) {
+    await prisma.giftFeedItem.create({
+      data: { moduleId: seasonalModule.id, productId: createdProducts[i].id, priority: 5 - i },
+    })
+    await prisma.giftFeedItem.create({
+      data: { moduleId: aiModule.id, productId: createdProducts[i + 5 < createdProducts.length ? i + 5 : i].id, priority: 5 - i },
+    })
+  }
+
+  // Sponsored placements
+  for (let i = 0; i < 3; i++) {
+    const product = featuredProducts[i % featuredProducts.length]
+    const merchant = merchants[i % merchants.length]
+    await prisma.sponsoredGiftPlacement.create({
+      data: {
+        merchantId: merchant.id,
+        productId: product.id,
+        bidCents: (i + 1) * 50,
+        dailyBudgetCents: (i + 1) * 1000,
+        startDate: new Date(),
+        endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+        isActive: true,
+        targetPersonas: [],
+        targetOccasions: [],
+      },
+    })
+  }
+
+  console.log(`Gift Hub seed: ${createdProducts.length} products, 5 categories, 5 occasions, 5 personas, 5 modules, 3 sponsors`)
+
   console.log("Seeding completed.")
   console.log("Sample credentials (email / password):")
   console.log(`  Platform Admin: ${credentials.platformAdmin.email} / ${credentials.platformAdmin.password}`)

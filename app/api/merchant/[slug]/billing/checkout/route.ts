@@ -8,8 +8,10 @@ import { getPriceIdForTier, PLAN_TIERS, type PlanTier } from '@/lib/access-contr
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
+  const { slug } = await params;
+
   if (!isStripeConfigured()) {
     return NextResponse.json({ error: 'Stripe is not configured' }, { status: 503 });
   }
@@ -20,7 +22,7 @@ export async function POST(
   }
 
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   });
   if (!merchant) {
     return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });

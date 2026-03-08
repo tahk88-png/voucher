@@ -6,13 +6,14 @@ import { withErrorHandler } from "@/lib/error-handler"
 
 export async function GET(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId)
+    const membership = await requireOrgMembership(session.user.id, orgId)
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const { searchParams } = new URL(req.url)
@@ -25,7 +26,7 @@ export async function GET(
 
     const vouchers = await prisma.voucherInstance.findMany({
       where: {
-        orgId: params.orgId,
+        orgId,
         ...(status ? { status } : {}),
         ...(campaignId ? { campaignId } : {}),
         ...(q

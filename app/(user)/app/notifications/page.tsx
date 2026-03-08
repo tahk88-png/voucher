@@ -5,16 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { getLocale, getTranslations } from 'next-intl/server';
-
-async function markAllRead() {
-  'use server';
-  const session = await auth();
-  if (!session?.user?.id) return;
-  await prisma.notification.updateMany({
-    where: { userId: session.user.id, readAt: null },
-    data: { readAt: new Date() },
-  });
-}
+import { MarkAllReadButton } from './mark-all-read-button';
 
 export default async function NotificationsPage() {
   const session = await auth();
@@ -39,11 +30,7 @@ export default async function NotificationsPage() {
             <h1 className="text-2xl font-semibold text-[#2D2721]">{tNav('notifications')}</h1>
             <p className="text-sm text-[#6B5744]">{t('description')}</p>
           </div>
-          <form action={markAllRead}>
-            <WarmButton type="submit" variant="outline" size="sm">
-              {t('markAllRead')}
-            </WarmButton>
-          </form>
+          <MarkAllReadButton label={t('markAllRead')} />
         </div>
 
         {notifications.length === 0 ? (

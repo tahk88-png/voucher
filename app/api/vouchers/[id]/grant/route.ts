@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { sendVoucherDelivery } from '@/lib/emails';
 import { withErrorHandler } from '@/lib/error-handler';
+import { logger } from '@/lib/logger';
+import { rateLimitDistributed } from '@/lib/rate-limit';
 import { z } from 'zod';
 
 const grantSchema = z.object({
@@ -13,12 +15,18 @@ const grantSchema = z.object({
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { allowed } = await rateLimitDistributed(`voucher-grant:${session.user.id}`, 20, 60_000);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
     }
 
     const body = await req.json().catch(() => ({}));
@@ -26,7 +34,7 @@ export async function POST(
 
     // Get voucher
     const voucher = await prisma.voucher.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { merchant: true },
     });
 
@@ -91,7 +99,7 @@ export async function POST(
           ? new Date(voucher.validTo).toLocaleDateString()
           : 'No expiry',
         voucherUrl: `${appUrl}/app/voucher/${voucher.id}`,
-      }).catch((err) => console.error('[Email] Voucher grant delivery failed:', err));
+      }).catch((err) => logger.error('[Email] Voucher grant delivery failed:', { error: err instanceof Error ? err.message : String(err) }));
     }
 
     return NextResponse.json({ purchase, message: 'Voucher granted successfully' });

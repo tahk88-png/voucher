@@ -14,10 +14,11 @@ const inviteMemberSchema = z.object({
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
-    const { merchant, profile } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
+    const { slug } = await params;
+    const { merchant, profile } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
     await requireTeamInviteAccess(merchant.id);
 
     const body = await req.json();

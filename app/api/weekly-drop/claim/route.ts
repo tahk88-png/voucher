@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { hashFriendIdentifier, safeParseJson } from '@/lib/utils';
 import { isFeatureEnabled } from '@/lib/merchant-status';
 import { withErrorHandler } from '@/lib/error-handler';
+import { rateLimitDistributed } from '@/lib/rate-limit';
 import { z } from 'zod';
 
 const claimSchema = z.object({
@@ -16,6 +17,11 @@ export async function POST(req: NextRequest) {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { allowed } = await rateLimitDistributed(`weekly-drop:${session.user.id}`, 5, 60_000);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
     }
 
     const body = await req.json();

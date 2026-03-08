@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { withCircuitBreaker } from './circuit-breaker';
 
 function getStripeClient(): Stripe {
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -41,14 +42,17 @@ export async function createCheckoutSession(params: {
   metadata?: Record<string, string>;
   customerEmail?: string;
 }): Promise<Stripe.Checkout.Session> {
-  return await stripe.checkout.sessions.create({
-    mode: 'payment',
-    success_url: params.successUrl,
-    cancel_url: params.cancelUrl,
-    line_items: params.lineItems,
-    metadata: params.metadata,
-    customer_email: params.customerEmail,
-  });
+  return withCircuitBreaker(
+    { name: 'stripe', failureThreshold: 5, resetTimeoutMs: 30_000 },
+    () => stripe.checkout.sessions.create({
+      mode: 'payment',
+      success_url: params.successUrl,
+      cancel_url: params.cancelUrl,
+      line_items: params.lineItems,
+      metadata: params.metadata,
+      customer_email: params.customerEmail,
+    }),
+  );
 }
 
 /**

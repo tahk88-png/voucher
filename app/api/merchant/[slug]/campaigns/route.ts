@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
-import { handleError } from '@/lib/errors';
 import { CacheKeys, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 import { AccessControlError, accessErrorResponse, requireMerchantCapability, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
@@ -39,10 +38,11 @@ function clamp(value: number, min: number, max: number): number {
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
-    const { merchant, profile } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
+    const { slug } = await params;
+    const { merchant, profile } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
     await requireMerchantCapability(merchant.id, merchant.slug, 'campaign.create');
 
     const body = await req.json();
@@ -89,10 +89,11 @@ export async function POST(
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{slug: string}> }
 ) {
   return withErrorHandler(async () => {
-    const { merchant } = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_staff');
+    const { slug } = await params;
+    const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_staff');
     const { searchParams } = new URL(req.url);
 
     const statusFilter = searchParams.get('status');

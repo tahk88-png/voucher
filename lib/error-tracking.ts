@@ -13,9 +13,12 @@ let errorTracker: {
 // Use lazy loading to avoid build-time module resolution errors
 function getSentry() {
   try {
-    // Use eval to avoid build-time module resolution when dependency is absent.
     const req = (0, eval)('require');
-    return req('@sentry/nextjs');
+    // Try server-side first, then browser
+    if (typeof window === 'undefined') {
+      return req('@sentry/node');
+    }
+    return req('@sentry/browser');
   } catch {
     return null;
   }

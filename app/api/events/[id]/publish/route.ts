@@ -3,19 +3,26 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { withErrorHandler } from '@/lib/error-handler';
+import { rateLimitDistributed } from '@/lib/rate-limit';
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { allowed } = await rateLimitDistributed(`event-publish:${session.user.id}`, 20, 60_000);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
+    }
+
     const event = await prisma.event.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { merchant: true },
     });
 
@@ -51,7 +58,7 @@ export async function POST(
 
     // Update status to published
     const updated = await prisma.event.update({
-      where: { id: params.id },
+      where: { id },
       data: { status: 'published' },
     });
 
@@ -61,7 +68,7 @@ export async function POST(
         merchantId: event.merchantId,
         actorUserId: session.user.id,
         action: 'event.published',
-        payloadJson: { eventId: params.id },
+        payloadJson: { eventId: id },
       },
     });
 

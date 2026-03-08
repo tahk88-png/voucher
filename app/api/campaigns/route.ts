@@ -4,7 +4,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireActiveMerchant } from '@/lib/merchant-status';
 import { checkCampaignCreationRateLimit } from '@/lib/fraud';
-import { handleError } from '@/lib/errors';
+import { withErrorHandler } from '@/lib/error-handler';
 import { CacheKeys, getCached, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 import {
@@ -32,7 +32,7 @@ const createCampaignSchema = z.object({
 const PUBLIC_CAMPAIGNS_CACHE_TTL_SECONDS = 60;
 
 export async function POST(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const body = await req.json();
     const data = createCampaignSchema.parse(body);
 
@@ -86,20 +86,11 @@ export async function POST(req: NextRequest) {
     await invalidateCache(CacheKeys.publicMerchantCampaigns(merchant.id));
 
     return NextResponse.json(campaign);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: error.errors }, { status: 400 });
-    }
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    const handled = handleError(error);
-    return NextResponse.json({ error: handled.error, code: handled.code, details: handled.details ?? null }, { status: handled.status });
-  }
+  });
 }
 
 export async function GET(req: NextRequest) {
-  try {
+  return withErrorHandler(async () => {
     const session = await auth();
     const { searchParams } = new URL(req.url);
     const merchantId = searchParams.get('merchantId');
@@ -172,11 +163,5 @@ export async function GET(req: NextRequest) {
     });
 
     return NextResponse.json(campaigns);
-  } catch (error) {
-    if (error instanceof AccessControlError) {
-      return accessErrorResponse(error);
-    }
-    console.error('Error fetching campaigns:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  });
 }

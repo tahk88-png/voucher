@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimit } from '@/lib/rate-limit';
 import crypto from 'crypto';
+import { logger } from '@/lib/logger';
 
 export const dynamic = 'force-dynamic';
 
@@ -92,10 +93,10 @@ export async function POST(req: NextRequest) {
           tags: [{ name: 'type', value: 'password-reset' }],
         });
       } else {
-        console.warn('[forgot-password] Resend not configured. Reset URL:', resetUrl);
+        logger.warn('[forgot-password] Resend not configured', { resetUrl });
       }
     } catch (emailErr) {
-      console.error('[forgot-password] Email failed:', emailErr);
+      logger.error('[forgot-password] Email failed', { error: emailErr instanceof Error ? emailErr.message : String(emailErr) });
     }
 
     return NextResponse.json({ sent: true });

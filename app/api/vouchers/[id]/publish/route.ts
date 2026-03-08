@@ -5,20 +5,27 @@ import { requireMerchantRole } from '@/lib/rbac';
 import { requireActiveMerchant } from '@/lib/merchant-status';
 import { ensureMerchantOwnership } from '@/lib/tenant';
 import { withErrorHandler } from '@/lib/error-handler';
+import { rateLimitDistributed } from '@/lib/rate-limit';
 import { CacheKeys, invalidatePattern } from '@/lib/cache';
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { allowed } = await rateLimitDistributed(`voucher-publish:${session.user.id}`, 20, 60_000);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
+    }
+
     const voucher = await prisma.voucher.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { merchant: true },
     });
 
@@ -40,7 +47,7 @@ export async function POST(
 
     // Update status to published
     const updated = await prisma.voucher.update({
-      where: { id: params.id },
+      where: { id },
       data: { status: 'published' },
     });
 
@@ -50,7 +57,7 @@ export async function POST(
         merchantId: voucher.merchantId,
         actorUserId: session.user.id,
         action: 'voucher.published',
-        payloadJson: JSON.stringify({ voucherId: params.id }),
+        payloadJson: JSON.stringify({ voucherId: id }),
       },
     });
 

@@ -6,17 +6,18 @@ import { withErrorHandler } from "@/lib/error-handler"
 
 export async function POST(
   req: Request,
-  { params }: { params: { orgId: string; voucherId: string } }
+  { params }: { params: Promise<{ orgId: string; voucherId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId, voucherId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin"])
+    const membership = await requireOrgMembership(session.user.id, orgId, ["owner", "admin"])
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const voucher = await prisma.voucherInstance.findFirst({
-      where: { id: params.voucherId, orgId: params.orgId },
+      where: { id: voucherId, orgId },
     })
     if (!voucher) return NextResponse.json({ error: "Not found" }, { status: 404 })
 
@@ -30,7 +31,7 @@ export async function POST(
     })
 
     await recordAuditEvent({
-      orgId: params.orgId,
+      orgId,
       actorUserId: session.user.id,
       entityType: "voucher",
       entityId: updated.id,

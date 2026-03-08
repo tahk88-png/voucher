@@ -1,0 +1,67 @@
+services:
+  app:
+    image: ghcr.io/tahk88-png/voucher-platform:${IMAGE_TAG:-latest}
+    container_name: voucher-app-staging
+    env_file:
+      - env/.env.staging
+    environment:
+      NODE_ENV: production
+      SENTRY_ENVIRONMENT: staging
+      PORT: 3000
+    ports:
+      - "3001:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  migrate:
+    image: ghcr.io/tahk88-png/voucher-platform:${IMAGE_TAG:-latest}
+    container_name: voucher-migrate-staging
+    env_file:
+      - env/.env.staging
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: ["npx", "prisma", "migrate", "deploy"]
+    restart: "no"
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: voucher-postgres-staging
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-voucher_staging}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-voucher_staging}
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data_staging:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-voucher_staging}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: voucher-redis-staging
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data_staging:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data_staging:
+  redis_data_staging:

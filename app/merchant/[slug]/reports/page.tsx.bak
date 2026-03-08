@@ -1,0 +1,118 @@
+import { redirect } from 'next/navigation';
+import { prisma } from '@/lib/prisma';
+import { WarmCard } from '@/components/warm-card';
+import { WarmButton } from '@/components/warm-button';
+import { requireMerchantProfileAccessBySlug, AccessControlError } from '@/lib/access-control';
+import { Download, DollarSign, TrendingUp, Percent, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
+
+export default async function ReportsPage({ params }: { params: { slug: string } }) {
+  let merchant: any;
+  try {
+    const access = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
+    merchant = access.merchant;
+  } catch (error) {
+    if (error instanceof AccessControlError && error.status === 401) redirect('/login');
+    redirect('/app');
+  }
+
+  const now = new Date();
+  const twelveMonthsAgo = new Date(now.getFullYear() - 1, now.getMonth(), 1);
+
+  const [voucherPurchases, ticketPurchases, redemptionCount] = await Promise.all([
+    prisma.voucherPurchase.findMany({
+      where: { merchantId: merchant.id, status: 'paid' },
+      select: { amount: true, platformFeeAmount: true, currency: true, createdAt: true },
+    }),
+    prisma.ticketPurchase.findMany({
+      where: { merchantId: merchant.id, status: 'paid' },
+      select: { amount: true, currency: true, createdAt: true },
+    }),
+    prisma.redemption.count({
+      where: { merchantId: merchant.id, confirmedAt: { not: null } },
+    }),
+  ]);
+
+  const totalVoucherRevenue = voucherPurchases.reduce((sum, p) => sum + p.amount, 0);
+  const totalTicketRevenue = ticketPurchases.reduce((sum, p) => sum + p.amount, 0);
+  const totalRevenue = totalVoucherRevenue + totalTicketRevenue;
+  const totalFees = voucherPurchases.reduce((sum, p) => sum + (p.platformFeeAmount || 0), 0);
+  const netRevenue = totalRevenue - totalFees;
+  const currency = voucherPurchases[0]?.currency || ticketPurchases[0]?.currency || 'EUR';
+
+  // Monthly breakdown (last 12 months)
+  const months: Array<{ month: string; vouchers: number; tickets: number; total: number }> = [];
+  for (let i = 11; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const monthEnd = new Date(d.getFullYear(), d.getMonth() + 1, 0, 23, 59, 59);
+    const label = d.toLocaleDateString('en', { year: 'numeric', month: 'short' });
+
+    const vRev = voucherPurchases
+      .filter((p) => p.createdAt >= d && p.createdAt <= monthEnd)
+      .reduce((sum, p) => sum + p.amount, 0);
+    const tRev = ticketPurchases
+      .filter((p) => p.createdAt >= d && p.createdAt <= monthEnd)
+      .reduce((sum, p) => sum + p.amount, 0);
+
+    months.push({ month: label, vouchers: vRev, tickets: tRev, total: vRev + tRev });
+  }
+
+  const fmt = (v: number) => (v / 100).toFixed(2);
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">Financial Reports</h1>
+          <p className="text-sm text-[var(--text-muted)]">Revenue overview and export</p>
+        </div>
+        <WarmButton asChild variant="outline" size="sm">
+          <Link href={`/api/merchant/${params.slug}/reports/export`}>
+            <Download className="h-4 w-4 mr-2" /> Download CSV
+          </Link>
+        </WarmButton>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {[
+          { label: 'Total Revenue', value: `${fmt(totalRevenue)} ${currency}`, icon: DollarSign, color: 'border-b-[var(--primary)]' },
+          { label: 'Platform Fees', value: `${fmt(totalFees)} ${currency}`, icon: Percent, color: 'border-b-[var(--danger)]' },
+          { label: 'Net Revenue', value: `${fmt(netRevenue)} ${currency}`, icon: TrendingUp, color: 'border-b-[var(--success)]' },
+          { label: 'Redemptions', value: String(redemptionCount), icon: CheckCircle, color: 'border-b-[#9DB5A5]' },
+        ].map((stat) => (
+          <WarmCard key={stat.label} padding="lg" className={`bg-white border-b-4 ${stat.color}`}>
+            <div className="flex items-center gap-2">
+              <stat.icon className="h-4 w-4 text-[var(--text-muted)]" />
+              <span className="text-sm font-medium text-[var(--text-muted)]">{stat.label}</span>
+            </div>
+            <div className="text-2xl font-bold text-[var(--text)] mt-2">{stat.value}</div>
+          </WarmCard>
+        ))}
+      </div>
+
+      <WarmCard padding="lg" className="bg-white overflow-x-auto">
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Monthly Revenue (Last 12 Months)</h2>
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-[var(--border)]">
+              <th className="text-left py-2 text-[var(--text-muted)] font-medium">Month</th>
+              <th className="text-right py-2 text-[var(--text-muted)] font-medium">Vouchers</th>
+              <th className="text-right py-2 text-[var(--text-muted)] font-medium">Tickets</th>
+              <th className="text-right py-2 text-[var(--text-muted)] font-medium">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {months.map((m) => (
+              <tr key={m.month} className="border-b border-[var(--border)] last:border-0">
+                <td className="py-2 text-[var(--text)]">{m.month}</td>
+                <td className="py-2 text-right text-[var(--text)]">{fmt(m.vouchers)}</td>
+                <td className="py-2 text-right text-[var(--text)]">{fmt(m.tickets)}</td>
+                <td className="py-2 text-right font-medium text-[var(--text)]">{fmt(m.total)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </WarmCard>
+    </div>
+  );
+}

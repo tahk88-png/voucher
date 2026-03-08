@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimitDistributed } from '@/lib/rate-limit';
 import crypto from 'crypto';
+import { logger } from '@/lib/logger';
 
 export const dynamic = 'force-dynamic';
 
@@ -74,10 +75,10 @@ export async function POST(req: NextRequest) {
           tags: [{ name: 'type', value: 'otp' }],
         });
       } else {
-        console.warn('[send-otp] Resend not configured, OTP not emailed:', otp);
+        logger.warn('[send-otp] Resend not configured, OTP not emailed');
       }
     } catch (emailErr) {
-      console.error('[send-otp] Email failed:', emailErr);
+      logger.error('[send-otp] Email failed', { error: emailErr instanceof Error ? emailErr.message : String(emailErr) });
     }
 
     return NextResponse.json({ sent: true });

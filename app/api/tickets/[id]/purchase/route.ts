@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { safeParseJson } from '@/lib/utils';
 import { createCheckoutSession, isStripeConfigured } from '@/lib/stripe';
 import { withErrorHandler } from '@/lib/error-handler';
+import { rateLimitDistributed } from '@/lib/rate-limit';
 import { z } from 'zod';
 
 const purchaseSchema = z.object({
@@ -13,12 +14,18 @@ const purchaseSchema = z.object({
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { allowed } = await rateLimitDistributed(`ticket-purchase:${session.user.id}`, 10, 60_000);
+    if (!allowed) {
+      return NextResponse.json({ error: 'Rate limit exceeded' }, { status: 429 });
     }
 
     if (!isStripeConfigured()) {
@@ -33,7 +40,7 @@ export async function POST(
 
     // Get ticket
     const ticket = await prisma.ticket.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         event: {
           include: { merchant: true },

@@ -11,9 +11,10 @@ const schema = z.object({
 
 export async function POST(
   req: Request,
-  { params }: { params: { redemptionId: string } }
+  { params }: { params: Promise<{ redemptionId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { redemptionId } = await params
     const apiKey = await requirePartnerApiKey(req.headers.get("x-partner-key"))
     if (!apiKey) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
@@ -24,7 +25,7 @@ export async function POST(
     }
 
     const redemption = await prisma.voucherRedemption.findFirst({
-      where: { id: params.redemptionId, partnerOrgId: apiKey.orgId },
+      where: { id: redemptionId, partnerOrgId: apiKey.orgId },
       include: { voucher: { include: { campaign: true } } },
     })
     if (!redemption) return NextResponse.json({ error: "Not found" }, { status: 404 })

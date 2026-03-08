@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendCreditExpiryWarning } from '@/lib/emails';
 import { withErrorHandler } from '@/lib/error-handler';
+import { startJobRun, completeJobRun } from '@/lib/admin/jobs';
+import { logger } from '@/lib/logger';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,6 +26,8 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const runId = await startJobRun('credit-expiry-warnings', 'cron');
+    try {
     const now = new Date();
     const sevenDaysFromNow = new Date(now);
     sevenDaysFromNow.setDate(sevenDaysFromNow.getDate() + 7);
@@ -63,68 +67,98 @@ export async function GET(req: NextRequest) {
     let sent7Day = 0;
     let sent1Day = 0;
 
+    // Dedup: check which credits already had warnings sent today
+    const allCreditIds = [
+      ...creditsExpiringIn7Days.map((c) => c.id),
+      ...creditsExpiringIn1Day.map((c) => c.id),
+    ];
+    const todayStart = new Date(now);
+    todayStart.setHours(0, 0, 0, 0);
+    const existingWarnings = allCreditIds.length > 0
+      ? await prisma.notification.findMany({
+          where: {
+            type: { in: ['credit_expiry_7day', 'credit_expiry_1day'] },
+            url: { in: allCreditIds.map((id) => `credit:${id}`) },
+            createdAt: { gte: todayStart },
+          },
+          select: { url: true },
+        })
+      : [];
+    const alreadyWarned = new Set(existingWarnings.map((n) => n.url));
+
     // Send 7-day warnings
     for (const credit of creditsExpiringIn7Days) {
       if (!credit.user.email || !credit.merchant) continue;
+      if (alreadyWarned.has(`credit:${credit.id}`)) continue;
 
-      const daysUntilExpiry = Math.ceil(
-        (credit.expiresAt!.getTime() - now.getTime()) / (24 * 60 * 60 * 1000)
-      );
-
-      if (daysUntilExpiry === 7) {
-        try {
-          const walletUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/app/${credit.merchant.slug}/wallet`;
-          await sendCreditExpiryWarning({
-            to: credit.user.email,
-            merchantName: credit.merchant.name,
-            creditAmount: (credit.amount / 100).toFixed(2),
-            currency: credit.currency.toUpperCase(),
-            daysUntilExpiry: 7,
-            walletUrl,
-          });
-          sent7Day++;
-        } catch (error) {
-          console.error(`Error sending 7-day warning for credit ${credit.id}:`, error);
-        }
+      try {
+        const walletUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/app/${credit.merchant.slug}/wallet`;
+        await sendCreditExpiryWarning({
+          to: credit.user.email,
+          merchantName: credit.merchant.name,
+          creditAmount: (credit.amount / 100).toFixed(2),
+          currency: credit.currency.toUpperCase(),
+          daysUntilExpiry: 7,
+          walletUrl,
+        });
+        // Record that we sent this warning to prevent duplicates
+        await prisma.notification.create({
+          data: {
+            userId: credit.userId,
+            merchantId: credit.merchantId,
+            type: 'credit_expiry_7day',
+            title: 'Credit expiring soon',
+            body: `Your credit of ${(credit.amount / 100).toFixed(2)} ${credit.currency.toUpperCase()} expires in 7 days.`,
+            url: `credit:${credit.id}`,
+          },
+        });
+        sent7Day++;
+      } catch (error) {
+        logger.error(`Error sending 7-day warning for credit ${credit.id}`, { error: error instanceof Error ? error.message : String(error) });
       }
     }
 
     // Send 1-day warnings
     for (const credit of creditsExpiringIn1Day) {
       if (!credit.user.email || !credit.merchant) continue;
+      if (alreadyWarned.has(`credit:${credit.id}`)) continue;
 
-      const daysUntilExpiry = Math.ceil(
-        (credit.expiresAt!.getTime() - now.getTime()) / (24 * 60 * 60 * 1000)
-      );
-
-      if (daysUntilExpiry === 1) {
-        try {
-          const walletUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/app/${credit.merchant.slug}/wallet`;
-          await sendCreditExpiryWarning({
-            to: credit.user.email,
-            merchantName: credit.merchant.name,
-            creditAmount: (credit.amount / 100).toFixed(2),
-            currency: credit.currency.toUpperCase(),
-            daysUntilExpiry: 1,
-            walletUrl,
-          });
-          sent1Day++;
-        } catch (error) {
-          console.error(`Error sending 1-day warning for credit ${credit.id}:`, error);
-        }
+      try {
+        const walletUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/app/${credit.merchant.slug}/wallet`;
+        await sendCreditExpiryWarning({
+          to: credit.user.email,
+          merchantName: credit.merchant.name,
+          creditAmount: (credit.amount / 100).toFixed(2),
+          currency: credit.currency.toUpperCase(),
+          daysUntilExpiry: 1,
+          walletUrl,
+        });
+        await prisma.notification.create({
+          data: {
+            userId: credit.userId,
+            merchantId: credit.merchantId,
+            type: 'credit_expiry_1day',
+            title: 'Credit expiring tomorrow',
+            body: `Your credit of ${(credit.amount / 100).toFixed(2)} ${credit.currency.toUpperCase()} expires tomorrow.`,
+            url: `credit:${credit.id}`,
+          },
+        });
+        sent1Day++;
+      } catch (error) {
+        logger.error(`Error sending 1-day warning for credit ${credit.id}`, { error: error instanceof Error ? error.message : String(error) });
       }
     }
 
-    return NextResponse.json({
-      success: true,
-      sent: {
-        '7day': sent7Day,
-        '1day': sent1Day,
-      },
-      checked: {
-        '7day': creditsExpiringIn7Days.length,
-        '1day': creditsExpiringIn1Day.length,
-      },
-    });
+    const resultData = {
+      sent: { '7day': sent7Day, '1day': sent1Day },
+      checked: { '7day': creditsExpiringIn7Days.length, '1day': creditsExpiringIn1Day.length },
+    };
+
+    await completeJobRun(runId, { status: 'succeeded', result: resultData });
+    return NextResponse.json({ success: true, ...resultData });
+    } catch (error) {
+      await completeJobRun(runId, { status: 'failed', error: error instanceof Error ? error.message : String(error) });
+      throw error;
+    }
   });
 }

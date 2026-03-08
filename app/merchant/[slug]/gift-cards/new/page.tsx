@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { showError } from '@/lib/toast-helpers';
 import { formatCurrency } from '@/lib/utils';
+import { sanitizeCssValue } from '@/lib/sanitize-css';
 import { useTranslations } from 'next-intl';
 
 type FormData = {
@@ -26,6 +27,8 @@ type FormData = {
   backgroundColor: string;
   textColor: string;
   codePrefix: string;
+  purchasable: boolean;
+  price: string;
 };
 
 const initial: FormData = {
@@ -42,6 +45,8 @@ const initial: FormData = {
   backgroundColor: '#fff8e6',
   textColor: '#1f2937',
   codePrefix: '',
+  purchasable: false,
+  price: '',
 };
 
 function GiftCardPreview({ form }: { form: FormData }) {
@@ -52,7 +57,7 @@ function GiftCardPreview({ form }: { form: FormData }) {
     <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] shadow-lg overflow-hidden bg-[var(--bg)]">
       <style
         dangerouslySetInnerHTML={{
-          __html: `.gift-card-preview{--bg:${form.backgroundColor};--accent:${form.accentColor};--text:${form.textColor};}`,
+          __html: `.gift-card-preview{--bg:${sanitizeCssValue(form.backgroundColor)};--accent:${sanitizeCssValue(form.accentColor)};--text:${sanitizeCssValue(form.textColor)};}`,
         }}
       />
       <div className="gift-card-preview">
@@ -111,6 +116,7 @@ export default function NewGiftCardPage() {
         throw new Error('Invalid amount');
       }
 
+      const priceNum = formData.price ? parseInt(formData.price, 10) : null;
       const body = {
         amount: amountNum * 100,
         currency: formData.currency,
@@ -126,6 +132,8 @@ export default function NewGiftCardPage() {
           textColor: formData.textColor,
         },
         codePrefix: formData.codePrefix || undefined,
+        purchasable: formData.purchasable,
+        price: priceNum !== null ? priceNum * 100 : null,
       };
 
       const res = await fetch(`/api/merchant/${merchantSlug}/gift-cards`, {
@@ -235,6 +243,41 @@ export default function NewGiftCardPage() {
                   />
                   <Label htmlFor="no-expiry">No expiry date</Label>
                 </div>
+              </div>
+            </WarmCard>
+
+            <WarmCard padding="lg" className="bg-white">
+              <div>
+                <h2 className="text-base font-semibold text-[#2D2721]">Customer purchase</h2>
+                <p className="text-sm text-[#6B5744]">Allow customers to buy this gift card online</p>
+              </div>
+              <div className="space-y-4 mt-4">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="purchasable"
+                    checked={formData.purchasable}
+                    onChange={(e) => setFormData({ ...formData, purchasable: e.target.checked })}
+                    className="h-4 w-4 rounded border-input"
+                  />
+                  <Label htmlFor="purchasable">Available for customer purchase</Label>
+                </div>
+                {formData.purchasable && (
+                  <div>
+                    <Label htmlFor="gift-price">Sale price (optional, defaults to face value)</Label>
+                    <Input
+                      id="gift-price"
+                      type="number"
+                      value={formData.price}
+                      onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                      placeholder={formData.amount || 'Same as amount'}
+                      className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    />
+                    <p className="text-xs text-[#8B7355] mt-1">
+                      Leave empty to sell at face value. Set a different price for promotions.
+                    </p>
+                  </div>
+                )}
               </div>
             </WarmCard>
 

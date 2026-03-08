@@ -52,14 +52,21 @@ jobs:
               PREV_TAG=latest
             fi
             echo ${IMAGE_TAG} > ${PREV_TAG_FILE}
-            docker compose -f docker-compose.prod.yml pull
-            docker compose -f docker-compose.prod.yml up -d migrate
-            docker compose -f docker-compose.prod.yml up -d app
+            if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+              COMPOSE_FILE=docker-compose.prod.yml
+              HEALTH_PORT=3000
+            else
+              COMPOSE_FILE=docker-compose.staging.yml
+              HEALTH_PORT=3001
+            fi
+            docker compose -f ${COMPOSE_FILE} pull
+            docker compose -f ${COMPOSE_FILE} up -d migrate
+            docker compose -f ${COMPOSE_FILE} up -d app
             sleep 5
-            if ! curl -fsS http://localhost:3000/api/health > /dev/null; then
+            if ! curl -fsS http://localhost:${HEALTH_PORT}/api/health > /dev/null; then
               echo "Healthcheck failed, rolling back..."
               echo ${PREV_TAG} > ${PREV_TAG_FILE}
               export IMAGE_TAG=${PREV_TAG}
-              docker compose -f docker-compose.prod.yml up -d app
+              docker compose -f ${COMPOSE_FILE} up -d app
               exit 1
             fi

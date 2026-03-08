@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { z } from "zod"
 import { requireSession, requireOrgMembership } from "@/lib/b2b/auth"
 import { prisma } from "@/lib/prisma"
+import { recordAuditEvent } from "@/lib/b2b/audit"
 import { withErrorHandler } from "@/lib/error-handler"
 
 const inviteSchema = z.object({
@@ -11,17 +12,18 @@ const inviteSchema = z.object({
 
 export async function GET(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId)
+    const membership = await requireOrgMembership(session.user.id, orgId)
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const members = await prisma.orgMembership.findMany({
-      where: { orgId: params.orgId },
+      where: { orgId },
       include: { user: { select: { id: true, email: true, name: true } } },
       orderBy: { createdAt: "asc" },
     })
@@ -39,13 +41,14 @@ export async function GET(
 
 export async function POST(
   req: Request,
-  { params }: { params: { orgId: string } }
+  { params }: { params: Promise<{ orgId: string }> }
 ) {
   return withErrorHandler(async () => {
+    const { orgId } = await params
     const session = await requireSession()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
-    const membership = await requireOrgMembership(session.user.id, params.orgId, ["owner", "admin"])
+    const membership = await requireOrgMembership(session.user.id, orgId, ["owner", "admin"])
     if (!membership) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
     const body = await req.json().catch(() => null)
@@ -60,7 +63,7 @@ export async function POST(
     }
 
     const existing = await prisma.orgMembership.findUnique({
-      where: { orgId_userId: { orgId: params.orgId, userId: user.id } },
+      where: { orgId_userId: { orgId, userId: user.id } },
     })
 
     if (existing) {
@@ -69,10 +72,19 @@ export async function POST(
 
     const created = await prisma.orgMembership.create({
       data: {
-        orgId: params.orgId,
+        orgId,
         userId: user.id,
         role: parsed.data.role,
       },
+    })
+
+    await recordAuditEvent({
+      orgId,
+      actorUserId: session.user.id,
+      entityType: "org",
+      entityId: orgId,
+      eventType: "update",
+      after: { action: "member_invited", userId: user.id, email: user.email, role: parsed.data.role },
     })
 
     return NextResponse.json({ member: created })

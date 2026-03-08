@@ -18,11 +18,12 @@ function formatVoucherValue(voucher: { type: string; value: number; currency: st
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{id: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { id } = await params;
     const voucher = await prisma.voucher.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { merchant: true },
     });
 

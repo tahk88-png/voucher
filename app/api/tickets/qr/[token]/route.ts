@@ -4,11 +4,12 @@ import { withErrorHandler } from '@/lib/error-handler';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { token: string } }
+  { params }: { params: Promise<{token: string}> }
 ) {
   return withErrorHandler(async () => {
+    const { token } = await params;
     const ticket = await prisma.ticket.findUnique({
-      where: { qrToken: params.token },
+      where: { qrToken: token },
       include: {
         event: {
           include: { merchant: true },
