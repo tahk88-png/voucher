@@ -150,18 +150,22 @@ async function main() {
         data: {
           title: product.title,
           description: product.description,
-          price: product.price,
+          priceCents: product.price,
           currency: 'EUR',
           merchantId: merchant.id,
           categoryId,
           isActive: true,
           isFeatured: Math.random() > 0.7,
           tags: product.tags,
-          occasionIds,
-          personaIds,
           engagementScore: Math.random() * 0.8 + 0.1,
           viewCount: Math.floor(Math.random() * 500),
           purchaseCount: Math.floor(Math.random() * 50),
+          occasions: {
+            create: occasionIds.map(occasionId => ({ occasionId })),
+          },
+          personas: {
+            create: personaIds.map(personaId => ({ personaId })),
+          },
         },
       });
       created++;
