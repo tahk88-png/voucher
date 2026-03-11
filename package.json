@@ -38,7 +38,8 @@
     "validate:env": "tsx scripts/validate-env.ts",
     "db:backup": "bash scripts/db-backup.sh",
     "db:restore": "bash scripts/db-restore.sh",
-    "check:dns": "tsx scripts/check-dns-email.ts"
+    "check:dns": "tsx scripts/check-dns-email.ts",
+    "seed:gifts": "npx tsx scripts/seed-gifts.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.0",

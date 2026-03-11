@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
+import { useNotificationsSSE } from "@/hooks/use-notifications-sse"
 import {
   Award,
   Users,
@@ -50,6 +51,7 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const { selectedCountry } = useCountry()
+  const { unreadCount } = useNotificationsSSE(true)
   const showRoleSwitcher =
     process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_ENABLE_ROLE_SWITCHER === "true"
 
@@ -97,6 +99,8 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
               <div className="p-4 space-y-2">
                 {navItems.map((item) => {
                   const Icon = item.icon
+                  const isNotifications = item.href === "/app/notifications"
+                  const showBadge = isNotifications && unreadCount > 0
                   return (
                     <Link
                       key={item.href}
@@ -109,7 +113,14 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
                           : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]"
                       )}
                     >
-                      <Icon className="h-5 w-5" />
+                      <span className="relative flex-shrink-0">
+                        <Icon className="h-5 w-5" />
+                        {showBadge && (
+                          <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-0.5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center leading-none">
+                            {unreadCount > 99 ? "99+" : unreadCount}
+                          </span>
+                        )}
+                      </span>
                       {getNavLabel(item.labelKey, item.fallback)}
                     </Link>
                   )
@@ -161,6 +172,8 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
           <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto overflow-x-hidden">
             {navItems.map((item) => {
               const Icon = item.icon
+              const isNotifications = item.href === "/app/notifications"
+              const showBadge = isNotifications && unreadCount > 0
               return (
                 <Link
                   key={item.href}
@@ -174,7 +187,14 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
                     collapsed && "justify-center"
                   )}
                 >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
+                  <span className="relative flex-shrink-0">
+                    <Icon className="h-5 w-5" />
+                    {showBadge && (
+                      <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-0.5 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center leading-none">
+                        {unreadCount > 99 ? "99+" : unreadCount}
+                      </span>
+                    )}
+                  </span>
                   <span
                     className={cn(
                       "transition-all duration-300 whitespace-nowrap",

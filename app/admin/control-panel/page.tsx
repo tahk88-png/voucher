@@ -40,9 +40,9 @@ const sections = [
     icon: AlertTriangle,
     color: 'bg-red-100 text-red-700',
     links: [
-      { label: 'Report Queue', api: '/api/admin/moderation/reports', desc: 'Review user reports' },
-      { label: 'Moderation Actions', api: '/api/admin/moderation/actions', desc: 'Bans, warnings, strikes' },
-      { label: 'Appeals', api: '/api/admin/moderation/appeals', desc: 'Review user appeals' },
+      { label: 'Report Queue', href: '/admin/moderation', desc: 'Review user reports' },
+      { label: 'Moderation Actions', api: '/api/admin/moderation/actions', desc: 'Bans, warnings, strikes (API)' },
+      { label: 'Appeals', href: '/admin/appeals', desc: 'Review and resolve user appeals' },
     ],
   },
   {
@@ -50,10 +50,9 @@ const sections = [
     icon: CreditCard,
     color: 'bg-green-100 text-green-700',
     links: [
-      { label: 'Subscriptions', api: '/api/admin/billing/subscriptions', desc: 'Active subscription overview' },
-      { label: 'Failed Payments', api: '/api/admin/billing/failed-payments', desc: 'Payment retry queue' },
-      { label: 'Refunds', api: '/api/admin/billing/refunds', desc: 'Issue and track refunds' },
-      { label: 'Payout Holds', api: '/api/admin/billing/payout-holds', desc: 'Hold/release merchant payouts' },
+      { label: 'Billing Dashboard', href: '/admin/billing', desc: 'Subscriptions, refunds, payout holds' },
+      { label: 'Subscriptions API', api: '/api/admin/billing/subscriptions', desc: 'Active subscription overview' },
+      { label: 'Failed Payments API', api: '/api/admin/billing/failed-payments', desc: 'Payment retry queue' },
     ],
   },
   {
@@ -61,8 +60,8 @@ const sections = [
     icon: Flag,
     color: 'bg-purple-100 text-purple-700',
     links: [
-      { label: 'All Flags', api: '/api/admin/flags', desc: 'Manage feature rollouts' },
-      { label: 'Evaluate Flag', api: '/api/flags/evaluate', desc: 'Test flag evaluation' },
+      { label: 'Feature Flags UI', href: '/admin/flags', desc: 'Manage feature rollouts visually' },
+      { label: 'Evaluate Flag (API)', api: '/api/flags/evaluate', desc: 'Test flag evaluation' },
     ],
   },
   {
@@ -70,9 +69,9 @@ const sections = [
     icon: Activity,
     color: 'bg-teal-100 text-teal-700',
     links: [
-      { label: 'System Health', api: '/api/admin/ops/health', desc: 'DB, Redis, Stripe, Email status' },
-      { label: 'Job History', api: '/api/admin/ops/jobs', desc: 'Cron & background job runs' },
-      { label: 'Migrations', api: '/api/admin/ops/migrations', desc: 'Prisma migration status' },
+      { label: 'Ops Dashboard', href: '/admin/ops', desc: 'Health, jobs, migrations, metrics' },
+      { label: 'Prometheus Metrics', api: '/api/admin/ops/metrics/prometheus', desc: 'Raw Prometheus metrics' },
+      { label: 'DNS Health', api: '/api/admin/ops/dns-health', desc: 'DNS health check' },
     ],
   },
   {
@@ -80,10 +79,8 @@ const sections = [
     icon: BarChart3,
     color: 'bg-indigo-100 text-indigo-700',
     links: [
-      { label: 'KPIs', api: '/api/admin/analytics/kpis', desc: 'DAU, MAU, revenue, churn' },
-      { label: 'Revenue Timeseries', api: '/api/admin/analytics/revenue', desc: 'Revenue over time' },
-      { label: 'Cohort Retention', api: '/api/admin/analytics/cohorts', desc: 'User retention by cohort' },
-      { label: 'Export Analytics', api: '/api/admin/analytics/export', desc: 'Download analytics CSV' },
+      { label: 'Analytics Dashboard', href: '/admin/analytics', desc: 'KPIs, revenue, cohorts' },
+      { label: 'Export CSV', api: '/api/admin/analytics/export', desc: 'Download analytics CSV' },
     ],
   },
   {
@@ -101,7 +98,7 @@ const sections = [
     icon: Eye,
     color: 'bg-cyan-100 text-cyan-700',
     links: [
-      { label: 'Support Cases', api: '/api/admin/support/cases', desc: 'Customer support queue' },
+      { label: 'Support Cases', href: '/admin/support', desc: 'Customer support queue with notes' },
     ],
   },
   {
