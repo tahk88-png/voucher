@@ -272,7 +272,7 @@ export class GdprRepository extends BaseRepository {
     return this.prisma.auditLog.findMany({
       where: {
         merchantId: tenantId,
-        userId,
+        actorUserId: userId,
       },
       orderBy: { createdAt: 'desc' },
       take: limit,
@@ -297,7 +297,7 @@ export class GdprRepository extends BaseRepository {
 
     const [auditLogs, membershipCount, consentCount] = await Promise.all([
       this.prisma.auditLog.count({
-        where: { userId, merchantId: tenantId },
+        where: { actorUserId: userId, merchantId: tenantId },
       }),
       this.prisma.merchantMember.count({
         where: { userId },
@@ -314,3 +314,4 @@ export class GdprRepository extends BaseRepository {
     };
   }
 }
+

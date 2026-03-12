@@ -1,5 +1,7 @@
 {
     "chatgpt.openOnStartup": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
     "chat.tools.terminal.autoApprove": {
         "/^Test-Path \\.env\\.local; echo \"---\"; Get-Content \\.env\\.example -ErrorAction SilentlyContinue \\| Select-Object -First 10$/": {
             "approve": true,

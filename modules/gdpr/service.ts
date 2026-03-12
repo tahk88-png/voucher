@@ -24,6 +24,44 @@ export interface DataExportRequest {
   createdAt: Date;
 }
 
+const dataExportRequestStatuses = [
+  'pending',
+  'processing',
+  'ready',
+  'expired',
+  'failed',
+] as const;
+
+function toDataExportRequest(request: {
+  id: string;
+  userId: string;
+  status: string;
+  downloadUrl: string | null;
+  downloadExpires: Date | null;
+  createdAt: Date;
+}): DataExportRequest {
+  if (
+    !dataExportRequestStatuses.includes(
+      request.status as (typeof dataExportRequestStatuses)[number]
+    )
+  ) {
+    throw new InvalidOperationError(
+      `Unsupported export request status: ${request.status}`
+    );
+  }
+
+  return {
+    id: request.id,
+    userId: request.userId,
+    status: request.status as DataExportRequest['status'],
+    ...(request.downloadUrl ? { downloadUrl: request.downloadUrl } : {}),
+    ...(request.downloadExpires
+      ? { downloadExpires: request.downloadExpires }
+      : {}),
+    createdAt: request.createdAt,
+  };
+}
+
 export class GdprService {
   private repository: GdprRepository;
 
@@ -72,7 +110,7 @@ export class GdprService {
       complianceRelevant: true,
     });
 
-    return request;
+    return toDataExportRequest(request);
   }
 
   /**
@@ -105,19 +143,30 @@ export class GdprService {
 
     try {
       // Collect user data
-      const user = await prisma.user.findUnique({
-        where: { id: request.userId },
-        include: {
-          accounts: true,
-          merchantMembers: true,
-          campaigns: {
-            where: { merchantId: request.merchantId ?? undefined },
+      const [user, merchantCampaigns] = await Promise.all([
+        prisma.user.findUnique({
+          where: { id: request.userId },
+          include: {
+            accounts: true,
+            merchantMembers: true,
+            auditLogs: {
+              where: { merchantId: request.merchantId ?? undefined },
+            },
           },
-          auditLogs: {
-            where: { merchantId: request.merchantId ?? undefined },
-          },
-        },
-      });
+        }),
+        request.merchantId
+          ? prisma.campaign.findMany({
+              where: { merchantId: request.merchantId },
+              orderBy: { createdAt: 'desc' },
+              select: {
+                id: true,
+                name: true,
+                status: true,
+                createdAt: true,
+              },
+            })
+          : Promise.resolve([]),
+      ]);
 
       if (!user) {
         throw new NotFoundError('User not found');
@@ -143,7 +192,7 @@ export class GdprService {
             role: m.role,
             joinedAt: m.createdAt,
           })),
-          campaigns: user.campaigns.map((c) => ({
+          campaigns: merchantCampaigns.map((c) => ({
             id: c.id,
             name: c.name,
             status: c.status,
