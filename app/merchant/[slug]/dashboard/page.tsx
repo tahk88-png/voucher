@@ -12,6 +12,7 @@ import { Calendar, CheckCircle2, Sparkles, Ticket } from 'lucide-react';
 import { DashboardStats } from './dashboard-stats';
 import { RevenueStats } from './revenue-stats';
 import { RecentActivity } from './recent-activity';
+import { LiveStats } from './live-stats';
 
 type ActionItem = {
   label: string;
@@ -216,6 +217,15 @@ export default async function MerchantDashboardPage({
           <div>
             <h1 className="text-3xl font-bold text-[#2D2721]">Merchant Dashboard</h1>
             <p className="text-sm text-[#6B5744]">Welcome back, {merchant.name}</p>
+            <div className="mt-2">
+              <LiveStats
+                slug={params.slug}
+                initialToday={weeklyRedemptions.filter(r =>
+                  new Date(r.createdAt) >= startOfDay(now)
+                ).length}
+                initialPending={pendingRedemptions}
+              />
+            </div>
           </div>
           <div className="flex flex-wrap gap-3">
             <WarmButton asChild variant="outline">
