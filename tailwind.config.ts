@@ -134,12 +134,17 @@ const config = {
           from: { opacity: "1", transform: "translateY(0)" },
           to: { opacity: "0", transform: "translateY(4px)" },
         },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)",
         "accordion-up": "accordion-up 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
         "enter-fade": "enter-fade 0.4s cubic-bezier(0.2, 0, 0, 1) both",
         "exit-fade": "exit-fade 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) both",
+        shimmer: "shimmer 1.5s infinite",
       },
     },
   },

@@ -2557,3 +2557,75 @@ model SystemSetting {
 
   @@index([category])
 }
+
+model SystemMetric {
+  id         String   @id @default(cuid())
+  name       String   // e.g. "active_users", "revenue_per_minute", "error_rate"
+  value      Float
+  dimensions Json?    // optional key-value metadata (merchantId, region, etc.)
+  timestamp  DateTime @default(now())
+
+  @@index([name, timestamp])
+  @@index([timestamp])
+}
+
+// ═══════════════════════════════════════════════
+// ANALYTICS MODELS
+// ═══════════════════════════════════════════════
+
+model AnalyticsEvent {
+  id         String   @id @default(cuid())
+  type       String   // page_view, purchase, redemption, signup, search, click
+  userId     String?
+  merchantId String?
+  sessionId  String?
+  page       String?
+  referrer   String?
+  metadata   Json?
+  country    String?
+  device     String?  // desktop, mobile, tablet
+  browser    String?
+  ipHash     String?  // hashed IP for privacy
+  duration   Int?     // time on page in seconds
+  createdAt  DateTime @default(now())
+
+  @@index([type])
+  @@index([userId])
+  @@index([merchantId])
+  @@index([createdAt])
+  @@index([type, createdAt])
+}
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  userId    String?
+  sessionId String?
+  referrer  String?
+  country   String?
+  device    String?
+  duration  Int?
+  createdAt DateTime @default(now())
+
+  @@index([path])
+  @@index([createdAt])
+  @@index([path, createdAt])
+}
+
+model ApiRequest {
+  id         String   @id @default(cuid())
+  method     String
+  path       String
+  statusCode Int
+  durationMs Int
+  userId     String?
+  ip         String?
+  userAgent  String?
+  error      String?
+  createdAt  DateTime @default(now())
+
+  @@index([path])
+  @@index([createdAt])
+  @@index([statusCode])
+  @@index([path, createdAt])
+}
