@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { sendBulkNotifications } from '@/lib/notifications-smart';
 import { withErrorHandler } from '@/lib/error-handler';
 import { startJobRun, completeJobRun } from '@/lib/admin/jobs';
 
@@ -154,7 +155,55 @@ export async function GET(req: NextRequest) {
         }
 
         if (toCreate.length > 0) {
-          await prisma.notification.createMany({ data: toCreate, skipDuplicates: true });
+          // Group notifications by content so we can use sendBulkNotifications
+          // with per-user smart scheduling. Admin notifications (campaign URL)
+          // are urgent; user reminders are scheduled at optimal times.
+          const adminNotifs = toCreate.filter((n) => n.url.startsWith('/merchant/'));
+          const userNotifs = toCreate.filter((n) => n.url === '/app/vouchers');
+
+          // Admin notifications: urgent — merchants need to act
+          if (adminNotifs.length > 0) {
+            // Group by identical content (title+body+url+merchantId)
+            const adminGroups = new Map<string, { userIds: string[]; sample: typeof adminNotifs[0] }>();
+            for (const n of adminNotifs) {
+              const key = `${n.title}|${n.body}|${n.url}|${n.merchantId}`;
+              const group = adminGroups.get(key) || { userIds: [], sample: n };
+              group.userIds.push(n.userId);
+              adminGroups.set(key, group);
+            }
+            for (const { userIds, sample } of adminGroups.values()) {
+              await sendBulkNotifications(userIds, {
+                merchantId: sample.merchantId,
+                type: sample.type,
+                title: sample.title,
+                body: sample.body,
+                url: sample.url,
+                urgent: true,
+              });
+            }
+          }
+
+          // User notifications: non-urgent — schedule at optimal engagement time
+          if (userNotifs.length > 0) {
+            const userGroups = new Map<string, { userIds: string[]; sample: typeof userNotifs[0] }>();
+            for (const n of userNotifs) {
+              const key = `${n.title}|${n.body}|${n.merchantId}`;
+              const group = userGroups.get(key) || { userIds: [], sample: n };
+              group.userIds.push(n.userId);
+              userGroups.set(key, group);
+            }
+            for (const { userIds, sample } of userGroups.values()) {
+              await sendBulkNotifications(userIds, {
+                merchantId: sample.merchantId,
+                type: sample.type,
+                title: sample.title,
+                body: sample.body,
+                url: sample.url,
+                urgent: false,
+              });
+            }
+          }
+
           notificationCount = toCreate.length;
         }
       }

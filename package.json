@@ -75,6 +75,8 @@
     "@react-pdf/renderer": "^3.4.4",
     "@sentry/browser": "^10.40.0",
     "@sentry/node": "^10.40.0",
+    "@simplewebauthn/browser": "^13.3.0",
+    "@simplewebauthn/server": "^13.3.0",
     "@supabase/supabase-js": "^2.91.1",
     "@tanstack/react-table": "^8.21.3",
     "@tiptap/extension-character-count": "^3.17.1",

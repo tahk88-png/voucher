@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { sendCreditExpiryWarning } from '@/lib/emails';
+import { sendNotification } from '@/lib/notifications-smart';
 import { withErrorHandler } from '@/lib/error-handler';
 import { startJobRun, completeJobRun } from '@/lib/admin/jobs';
 import { logger } from '@/lib/logger';
@@ -101,16 +102,15 @@ export async function GET(req: NextRequest) {
           daysUntilExpiry: 7,
           walletUrl,
         });
-        // Record that we sent this warning to prevent duplicates
-        await prisma.notification.create({
-          data: {
-            userId: credit.userId,
-            merchantId: credit.merchantId,
-            type: 'credit_expiry_7day',
-            title: 'Credit expiring soon',
-            body: `Your credit of ${(credit.amount / 100).toFixed(2)} ${credit.currency.toUpperCase()} expires in 7 days.`,
-            url: `credit:${credit.id}`,
-          },
+        // Smart-scheduled: 7-day warning is not urgent, deliver at optimal time
+        await sendNotification({
+          userId: credit.userId,
+          merchantId: credit.merchantId,
+          type: 'credit_expiry_7day',
+          title: 'Credit expiring soon',
+          body: `Your credit of ${(credit.amount / 100).toFixed(2)} ${credit.currency.toUpperCase()} expires in 7 days.`,
+          url: `credit:${credit.id}`,
+          urgent: false,
         });
         sent7Day++;
       } catch (error) {
@@ -133,15 +133,15 @@ export async function GET(req: NextRequest) {
           daysUntilExpiry: 1,
           walletUrl,
         });
-        await prisma.notification.create({
-          data: {
-            userId: credit.userId,
-            merchantId: credit.merchantId,
-            type: 'credit_expiry_1day',
-            title: 'Credit expiring tomorrow',
-            body: `Your credit of ${(credit.amount / 100).toFixed(2)} ${credit.currency.toUpperCase()} expires tomorrow.`,
-            url: `credit:${credit.id}`,
-          },
+        // Urgent: 1-day warning — deliver immediately so the user sees it in time
+        await sendNotification({
+          userId: credit.userId,
+          merchantId: credit.merchantId,
+          type: 'credit_expiry_1day',
+          title: 'Credit expiring tomorrow',
+          body: `Your credit of ${(credit.amount / 100).toFixed(2)} ${credit.currency.toUpperCase()} expires tomorrow.`,
+          url: `credit:${credit.id}`,
+          urgent: true,
         });
         sent1Day++;
       } catch (error) {

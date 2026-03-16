@@ -6,7 +6,12 @@ import { getLocale, getMessages } from "next-intl/server";
 import Providers from "@/components/providers/session-provider";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import dynamic from "next/dynamic";
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, buildLocaleAlternates, getBaseUrl } from "@/lib/seo";
+
+const ChatWidget = dynamic(() => import("@/components/chat-widget").then((m) => m.ChatWidget), {
+  ssr: false,
+});
 
 const baseUrl = getBaseUrl();
 
@@ -95,10 +100,16 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("theme");var d=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches);if(d)document.documentElement.classList.add("dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",d?"#0c0d12":"#ffffff")}catch(e){}})()`,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://js.stripe.com" />
         <link rel="dns-prefetch" href="https://api.stripe.com" />
+        <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){})}` }} />
       </head>
       <body>
         <Script
@@ -120,6 +131,7 @@ export default async function RootLayout({
               <Footer />
             </div>
             <Toaster />
+            <ChatWidget />
           </Providers>
         </NextIntlClientProvider>
       </body>

@@ -13,10 +13,16 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const unreadOnly = url.searchParams.get('unreadOnly') === 'true';
 
+    const now = new Date();
     const notifications = await prisma.notification.findMany({
       where: {
         userId: session.user.id,
         ...(unreadOnly ? { readAt: null } : {}),
+        // Hide notifications that are scheduled for future delivery
+        OR: [
+          { scheduledAt: null },
+          { scheduledAt: { lte: now } },
+        ],
       },
       orderBy: { createdAt: 'desc' },
       take: 100,

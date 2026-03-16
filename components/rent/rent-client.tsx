@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { Input } from "@/components/ui/input"
-import { useToast } from "@/hooks/use-toast"
+import { showError, showSuccess } from "@/lib/toast-helpers"
 import { formatCurrency } from "@/lib/utils"
 import type { RentalItem } from "@prisma/client"
 
@@ -17,6 +17,32 @@ interface RentalSelection {
   days: number
 }
 
+interface RentalBooking {
+  id: string
+  startDate: string
+  endDate: string
+  days: number
+  dailyRate: number
+  totalPrice: number
+  currency: string
+  status: string
+  notes: string | null
+  rejectionReason: string | null
+  createdAt: string
+  rentalItem: { id: string; name: string; imageUrl: string | null }
+  merchant: { id: string; name: string; slug: string }
+}
+
+const STATUS_COLORS: Record<string, string> = {
+  pending: "bg-yellow-100 text-yellow-800",
+  approved: "bg-blue-100 text-blue-800",
+  rejected: "bg-red-100 text-red-800",
+  paid: "bg-green-100 text-green-800",
+  active: "bg-emerald-100 text-emerald-800",
+  returned: "bg-gray-100 text-gray-700",
+  cancelled: "bg-gray-100 text-gray-500",
+}
+
 export default function RentClient({
   merchantId,
   currency,
@@ -26,11 +52,14 @@ export default function RentClient({
   currency: string
   rentals: RentalItem[]
 }) {
-  const { toast } = useToast()
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
+  const [notes, setNotes] = useState("")
   const [selection, setSelection] = useState<RentalSelection | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [bookings, setBookings] = useState<RentalBooking[]>([])
+  const [bookingsLoading, setBookingsLoading] = useState(true)
+  const [cancellingId, setCancellingId] = useState<string | null>(null)
 
   const days = useMemo(() => {
     if (!startDate || !endDate) return 0
@@ -64,52 +93,87 @@ export default function RentClient({
     })
   }
 
-  const submitQuote = async () => {
+  const fetchBookings = useCallback(() => {
+    setBookingsLoading(true)
+    fetch("/api/rentals")
+      .then((r) => r.json())
+      .then((data) => setBookings(Array.isArray(data.bookings) ? data.bookings : []))
+      .catch(() => {})
+      .finally(() => setBookingsLoading(false))
+  }, [])
+
+  useEffect(() => {
+    fetchBookings()
+  }, [fetchBookings])
+
+  const submitBooking = async () => {
     if (!selection || isSubmitting) return
+    if (!startDate || !endDate) {
+      showError("Please select rental dates.")
+      return
+    }
     setIsSubmitting(true)
     try {
-      const res = await fetch("/api/commerce/checkout", {
+      const res = await fetch("/api/rentals", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: "rental",
           merchantId,
-          currency,
-          items: [
-            {
-              id: selection.id,
-              name: selection.name,
-              quantity: selection.days,
-              unitPrice: selection.dailyRate,
-            },
-          ],
-          meta: {
-            startDate,
-            endDate,
-          },
+          rentalItemId: selection.id,
+          startDate,
+          endDate,
+          notes: notes || undefined,
         }),
       })
 
       if (!res.ok) {
-        throw new Error("Quote failed")
+        const err = await res.json().catch(() => ({}))
+        throw new Error(err.error || "Booking failed")
       }
+
       const data = await res.json()
-      toast({
-        title: "Quote intent created",
-        description: `Intent ${data.intentId} for ${formatCurrency(
-          data.total,
-          currency
-        )}`,
-      })
+      showSuccess(
+        `Booking request created for ${data.booking.rentalItem?.name || selection.name}. Total: ${formatCurrency(data.booking.totalPrice, data.booking.currency)}.`,
+        "Booking submitted"
+      )
+      setSelection(null)
+      setNotes("")
+      fetchBookings()
     } catch (error) {
-      toast({
-        title: "Quote error",
-        description: "Unable to create rental intent.",
-        variant: "destructive",
-      })
+      showError(error instanceof Error ? error.message : "Unable to create rental booking.")
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const cancelBooking = async (id: string) => {
+    setCancellingId(id)
+    try {
+      const res = await fetch(`/api/rentals/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "cancelled" }),
+      })
+      if (res.ok) {
+        showSuccess("Booking cancelled.")
+        fetchBookings()
+      } else {
+        const err = await res.json().catch(() => ({}))
+        showError(err.error || "Failed to cancel booking.")
+      }
+    } catch {
+      showError("Failed to cancel booking.")
+    } finally {
+      setCancellingId(null)
+    }
+  }
+
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString("en", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
   }
 
   return (
@@ -183,11 +247,84 @@ export default function RentClient({
               {formatCurrency(total, selection.currency)}
             </span>
           </div>
-          <WarmButton className="w-full mt-4" onClick={submitQuote} disabled={isSubmitting}>
-            {isSubmitting ? "Creating intent..." : "Request quote"}
+          <div className="mt-3 space-y-1.5">
+            <label htmlFor="rental-notes" className="text-sm font-medium text-[var(--text)]">
+              Notes (optional)
+            </label>
+            <Input
+              id="rental-notes"
+              type="text"
+              placeholder="Any special requests..."
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+            />
+          </div>
+          <WarmButton className="w-full mt-4" onClick={submitBooking} disabled={isSubmitting}>
+            {isSubmitting ? "Submitting booking..." : "Request rental booking"}
           </WarmButton>
         </WarmCard>
       ) : null}
+
+      {/* My Bookings Section */}
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">My Bookings</h2>
+        {bookingsLoading ? (
+          <div className="flex justify-center py-6">
+            <div className="animate-spin h-6 w-6 border-3 border-[var(--primary)] border-t-transparent rounded-full" />
+          </div>
+        ) : bookings.length === 0 ? (
+          <p className="text-sm text-[var(--text-muted)] text-center py-4">
+            No rental bookings yet. Select an item above to get started.
+          </p>
+        ) : (
+          <div className="space-y-3">
+            {bookings.map((booking) => (
+              <div
+                key={booking.id}
+                className="border border-[var(--border)] rounded-xl p-4 bg-white/50"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-semibold text-[var(--text)] truncate">
+                        {booking.rentalItem.name}
+                      </span>
+                      <span
+                        className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${
+                          STATUS_COLORS[booking.status] || "bg-gray-100 text-gray-700"
+                        }`}
+                      >
+                        {booking.status}
+                      </span>
+                    </div>
+                    <p className="text-sm text-[var(--text-muted)]">
+                      {formatDate(booking.startDate)} - {formatDate(booking.endDate)} ({booking.days} days)
+                    </p>
+                    <p className="text-sm text-[var(--text-muted)]">
+                      Total: {formatCurrency(booking.totalPrice, booking.currency)}
+                    </p>
+                    {booking.rejectionReason && (
+                      <p className="text-sm text-red-600 mt-1">
+                        Reason: {booking.rejectionReason}
+                      </p>
+                    )}
+                  </div>
+                  {(booking.status === "pending" || booking.status === "approved") && (
+                    <WarmButton
+                      variant="outline"
+                      size="sm"
+                      onClick={() => cancelBooking(booking.id)}
+                      disabled={cancellingId === booking.id}
+                    >
+                      {cancellingId === booking.id ? "Cancelling..." : "Cancel"}
+                    </WarmButton>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </WarmCard>
     </div>
   )
 }

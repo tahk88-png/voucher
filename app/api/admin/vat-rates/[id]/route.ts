@@ -1,0 +1,78 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { auth } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
+
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth();
+  const adminEmails = (process.env.PLATFORM_ADMIN_EMAILS || '').split(',').map(e => e.trim());
+  const isAdmin = session?.user && (adminEmails.includes(session.user.email!) || (session.user as any).adminRole);
+
+  if (!isAdmin) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  }
+
+  const { id } = await params;
+  const body = await req.json();
+  const { rate, rateType, effectiveFrom, effectiveUntil, isActive } = body;
+
+  const existing = await prisma.vatRate.findUnique({ where: { id } });
+  if (!existing) {
+    return NextResponse.json({ error: 'VAT rate not found' }, { status: 404 });
+  }
+
+  const data: any = {};
+  if (rate !== undefined) {
+    if (typeof rate !== 'number' || rate < 0 || rate > 100) {
+      return NextResponse.json({ error: 'rate must be a number between 0 and 100' }, { status: 400 });
+    }
+    data.rate = rate;
+  }
+  if (rateType !== undefined) {
+    const validRateTypes = ['standard', 'reduced', 'super_reduced', 'zero'];
+    if (!validRateTypes.includes(rateType)) {
+      return NextResponse.json(
+        { error: `rateType must be one of: ${validRateTypes.join(', ')}` },
+        { status: 400 }
+      );
+    }
+    data.rateType = rateType;
+  }
+  if (effectiveFrom !== undefined) data.effectiveFrom = new Date(effectiveFrom);
+  if (effectiveUntil !== undefined) data.effectiveUntil = effectiveUntil ? new Date(effectiveUntil) : null;
+  if (isActive !== undefined) data.isActive = isActive;
+
+  const updated = await prisma.vatRate.update({ where: { id }, data });
+
+  return NextResponse.json({ rate: updated });
+}
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth();
+  const adminEmails = (process.env.PLATFORM_ADMIN_EMAILS || '').split(',').map(e => e.trim());
+  const isAdmin = session?.user && (adminEmails.includes(session.user.email!) || (session.user as any).adminRole);
+
+  if (!isAdmin) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  }
+
+  const { id } = await params;
+
+  const existing = await prisma.vatRate.findUnique({ where: { id } });
+  if (!existing) {
+    return NextResponse.json({ error: 'VAT rate not found' }, { status: 404 });
+  }
+
+  // Soft-delete: deactivate instead of removing
+  await prisma.vatRate.update({
+    where: { id },
+    data: { isActive: false },
+  });
+
+  return NextResponse.json({ success: true });
+}

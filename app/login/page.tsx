@@ -5,8 +5,9 @@ import { signIn, getProviders } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
 import {
   Gift, ArrowLeft, AlertCircle, Mail, Lock, ChevronRight,
-  CheckCircle, Sparkles, Shield, Zap
+  CheckCircle, Sparkles, Shield, Zap, Fingerprint
 } from "lucide-react"
+import { usePasskey } from "@/hooks/use-passkey"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
@@ -49,6 +50,10 @@ const T = {
     forgotPassword: "Forgot password?",
     langLabel: "Language",
     demo: "Demo accounts",
+    tabPasskey: "Passkey",
+    passkeyDesc: "Sign in instantly with your fingerprint, face, or security key.",
+    passkeyButton: "Sign in with Passkey",
+    passkeyAuthenticating: "Authenticating\u2026",
   },
   et: {
     welcome: "Tere tulemast tagasi",
@@ -86,6 +91,10 @@ const T = {
     forgotPassword: "Unustasid parooli?",
     langLabel: "Keel",
     demo: "Demo kontod",
+    tabPasskey: "P\u00e4\u00e4suv\u00f5ti",
+    passkeyDesc: "Logi sisse kohe s\u00f5rmej\u00e4lje, n\u00e4o v\u00f5i turvav\u00f5tmega.",
+    passkeyButton: "Logi sisse p\u00e4\u00e4suv\u00f5tmega",
+    passkeyAuthenticating: "Autendin\u2026",
   },
   ru: {
     welcome: "С возвращением",
@@ -123,6 +132,10 @@ const T = {
     forgotPassword: "Забыли пароль?",
     langLabel: "Язык",
     demo: "Demo аккаунты",
+    tabPasskey: "Пасскей",
+    passkeyDesc: "Войдите мгновенно с помощью отпечатка пальца, лица или ключа безопасности.",
+    passkeyButton: "Войти с Passkey",
+    passkeyAuthenticating: "Аутентификация\u2026",
   },
 } as const
 
@@ -162,7 +175,7 @@ const LANG_OPTIONS: { code: Lang; label: string; flag: string }[] = [
   { code: "ru", label: "Русский", flag: "🇷🇺" },
 ]
 
-type Tab = "magic" | "password" | "social"
+type Tab = "magic" | "password" | "social" | "passkey"
 
 function LangSwitcher({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   const [open, setOpen] = useState(false)
@@ -247,6 +260,7 @@ function LoginForm() {
   const [oauthProviders, setOauthProviders] = useState<string[]>([])
 
   const s = T[lang]
+  const { startAuthentication, isLoading: passkeyLoading, error: passkeyError } = usePasskey()
 
   useEffect(() => {
     getProviders().then((providers) => {
@@ -312,6 +326,26 @@ function LoginForm() {
     }
   }
 
+  const handlePasskeySignIn = async () => {
+    setError(null)
+    const result = await startAuthentication()
+    if (!result) {
+      if (passkeyError) setError(passkeyError)
+      return
+    }
+    const signInRes = await signIn("credentials", {
+      email: result.email,
+      magicToken: result.magicToken,
+      callbackUrl,
+      redirect: false,
+    })
+    if (signInRes?.ok) {
+      window.location.href = signInRes.url ?? callbackUrl
+    } else {
+      setError(s.errorGeneric)
+    }
+  }
+
   const handlePasswordSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
@@ -374,7 +408,7 @@ function LoginForm() {
         <div className="glass rounded-[var(--r-xl)] shadow-xl overflow-hidden">
           {/* Tab bar */}
           <div className="p-1.5 bg-[var(--surface-muted)] mx-4 mt-4 rounded-[14px] flex gap-1">
-            {(["magic", "password", "social"] as Tab[]).map(t => (
+            {(["magic", "password", "social", "passkey"] as Tab[]).map(t => (
               <button
                 key={t}
                 onClick={() => { setTab(t); setError(null); setOtpSent(false) }}
@@ -383,6 +417,7 @@ function LoginForm() {
                 {t === "magic" && s.tabMagic}
                 {t === "password" && s.tabPassword}
                 {t === "social" && s.tabSocial}
+                {t === "passkey" && <span className="flex items-center justify-center gap-1"><Fingerprint className="w-3.5 h-3.5" />{s.tabPasskey}</span>}
               </button>
             ))}
           </div>
@@ -589,6 +624,36 @@ function LoginForm() {
                   <Mail className="w-4 h-4" />
                   {s.tabMagic}
                 </button>
+              </div>
+            )}
+
+            {/* ── PASSKEY TAB ── */}
+            {tab === "passkey" && (
+              <div className="tab-content-enter space-y-4">
+                <p className="text-xs text-[var(--text-muted)] -mt-1 mb-3">{s.passkeyDesc}</p>
+                <div className="flex flex-col items-center py-4">
+                  <div className="w-16 h-16 rounded-2xl bg-[var(--accent)] flex items-center justify-center mb-4">
+                    <Fingerprint className="h-8 w-8 text-[var(--primary)]" />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handlePasskeySignIn}
+                    disabled={passkeyLoading}
+                    className="w-full h-12 rounded-[var(--r-sm)] gradient-brand font-semibold text-[var(--text)] shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-200 btn-press disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {passkeyLoading ? (
+                      <>
+                        <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                        {s.passkeyAuthenticating}
+                      </>
+                    ) : (
+                      <>
+                        <Fingerprint className="w-4 h-4" />
+                        {s.passkeyButton}
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             )}
 

@@ -12,7 +12,8 @@ import {
   type PageBuilderType,
 } from "@/lib/page-builder"
 import { showError, showSuccess } from "@/lib/toast-helpers"
-import { ArrowDown, ArrowUp, Bot, Save, Sparkles } from "lucide-react"
+import { Bot, Save, Sparkles } from "lucide-react"
+import DragDropEditor, { type SectionSettings } from "./drag-drop-editor"
 
 type AgentResult = {
   title: string
@@ -78,6 +79,7 @@ export default function PageBuilderClient({
   const [agentResult, setAgentResult] = useState<AgentResult | null>(null)
   const [vibeUsage, setVibeUsage] = useState<UsageInfo | null>(null)
   const [agentUsage, setAgentUsage] = useState<UsageInfo | null>(null)
+  const [sectionSettings, setSectionSettings] = useState<Record<string, SectionSettings>>({})
 
   const activePage = useMemo(() => {
     return pages.find((page) => page.type === activeType)
@@ -95,15 +97,6 @@ export default function PageBuilderClient({
     )
   }
 
-  const toggleSection = (id: string) => {
-    if (!activePage) return
-    const exists = activePage.sections.includes(id)
-    const next = exists
-      ? activePage.sections.filter((section) => section !== id)
-      : [...activePage.sections, id]
-    updatePage({ sections: next })
-  }
-
   const toggleAddon = (id: string) => {
     if (!activePage) return
     const exists = activePage.addons.includes(id)
@@ -111,17 +104,6 @@ export default function PageBuilderClient({
       ? activePage.addons.filter((addon) => addon !== id)
       : [...activePage.addons, id]
     updatePage({ addons: next })
-  }
-
-  const moveSection = (index: number, direction: "up" | "down") => {
-    if (!activePage) return
-    const next = [...activePage.sections]
-    const target = direction === "up" ? index - 1 : index + 1
-    if (target < 0 || target >= next.length) return
-    const temp = next[index]
-    next[index] = next[target]
-    next[target] = temp
-    updatePage({ sections: next })
   }
 
   const handleSave = async () => {
@@ -250,6 +232,7 @@ export default function PageBuilderClient({
           <TabsContent value={type} key={type}>
             <div className="grid gap-6 lg:grid-cols-[2fr,1fr]">
               <div className="space-y-6">
+                {/* Page details */}
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center justify-between gap-4 mb-4">
                     <div>
@@ -287,11 +270,14 @@ export default function PageBuilderClient({
                   </div>
                 </WarmCard>
 
+                {/* Visual drag-drop editor */}
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center justify-between gap-4 mb-4">
                     <div>
                       <h2 className="text-lg font-semibold text-[var(--text)]">Sections</h2>
-                      <p className="text-sm text-[var(--text-muted)]">Toggle and reorder layout blocks.</p>
+                      <p className="text-sm text-[var(--text-muted)]">
+                        Drag to reorder, expand to configure, or preview your layout.
+                      </p>
                     </div>
                     <WarmButton variant="outline" onClick={handleGenerate} isLoading={isGenerating}>
                       <Sparkles className="h-4 w-4 mr-2" />
@@ -303,63 +289,16 @@ export default function PageBuilderClient({
                       Vibe uses left: {vibeUsage.remaining}/{vibeUsage.limit}
                     </p>
                   )}
-                  <div className="space-y-3">
-                    {sectionOptions.map((section) => {
-                      const enabled = activePage.sections.includes(section.id)
-                      return (
-                        <div
-                          key={section.id}
-                          className="flex items-center justify-between gap-4 rounded-[14px] border border-[#F2EDE3] px-4 py-3"
-                        >
-                          <div>
-                            <div className="font-medium text-[var(--text)]">{section.label}</div>
-                            <div className="text-xs text-[var(--text-faint)]">{section.description}</div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => toggleSection(section.id)}
-                              className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
-                                enabled
-                                  ? "bg-[var(--primary)] text-[var(--text)]"
-                                  : "bg-[var(--surface-dim)] text-[var(--text-muted)]"
-                              }`}
-                              aria-pressed={enabled}
-                              aria-label={`${enabled ? "Disable" : "Enable"} section ${section.label}`}
-                            >
-                              {enabled ? "Enabled" : "Enable"}
-                            </button>
-                            {enabled && (
-                              <div className="flex items-center gap-1">
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    moveSection(activePage.sections.indexOf(section.id), "up")
-                                  }
-                                  className="h-8 w-8 rounded-full border border-[var(--border)] flex items-center justify-center"
-                                  aria-label={`Move ${section.label} section up`}
-                                >
-                                  <ArrowUp className="h-4 w-4 text-[var(--text-muted)]" />
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    moveSection(activePage.sections.indexOf(section.id), "down")
-                                  }
-                                  className="h-8 w-8 rounded-full border border-[var(--border)] flex items-center justify-center"
-                                  aria-label={`Move ${section.label} section down`}
-                                >
-                                  <ArrowDown className="h-4 w-4 text-[var(--text-muted)]" />
-                                </button>
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
+                  <DragDropEditor
+                    sections={activePage.sections}
+                    activeType={activeType}
+                    sectionSettings={sectionSettings}
+                    onSectionsChange={(sections) => updatePage({ sections })}
+                    onSectionSettingsChange={setSectionSettings}
+                  />
                 </WarmCard>
 
+                {/* Add-ons */}
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <h2 className="text-lg font-semibold text-[var(--text)] mb-2">Add-ons</h2>
                   <p className="text-sm text-[var(--text-muted)] mb-4">Extra widgets and marketing layers.</p>
@@ -388,6 +327,7 @@ export default function PageBuilderClient({
                 </WarmCard>
               </div>
 
+              {/* Sidebar */}
               <div className="space-y-6">
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <h3 className="text-base font-semibold text-[var(--text)] mb-2">Live summary</h3>

@@ -1,5 +1,6 @@
 import { prisma } from './prisma';
 import { sendMerchantAnnouncement } from './emails';
+import { sendBulkNotifications } from '@/lib/notifications-smart';
 
 export type MerchantAnnouncementType = 'voucher_published' | 'campaign_started';
 
@@ -26,20 +27,20 @@ export async function dispatchMerchantAnnouncement(input: AnnouncementInput): Pr
 
   if (subscriptions.length === 0) return;
 
-  const notifications = subscriptions
+  // Use smart scheduling: merchant announcements are non-urgent, so each
+  // user receives the notification at their optimal engagement time.
+  const inAppUserIds = subscriptions
     .filter((sub) => sub.inAppEnabled)
-    .map((sub) => ({
-      userId: sub.userId,
+    .map((sub) => sub.userId);
+
+  if (inAppUserIds.length > 0) {
+    await sendBulkNotifications(inAppUserIds, {
       merchantId: input.merchantId,
       type: input.type,
       title: input.title,
       body: input.body,
-      url: input.url || null,
-    }));
-
-  if (notifications.length > 0) {
-    await prisma.notification.createMany({
-      data: notifications,
+      url: input.url || undefined,
+      urgent: false,
     });
   }
 

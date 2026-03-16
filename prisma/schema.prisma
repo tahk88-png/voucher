@@ -107,6 +107,19 @@ model User {
   giftProfile      UserGiftProfile?      @relation("UserGiftProfileUser")
   giftInteractions UserGiftInteraction[] @relation("UserGiftInteractionUser")
 
+  // 2027 features
+  passkeys            Passkey[]
+  reviews             Review[]
+  reviewVotes         ReviewVote[]
+  wishlistItems       WishlistItem[]
+  badges              UserBadge[]
+  streak              UserStreak?
+  abTestAssignments   ABTestAssignment[]
+  chatMessages        ChatMessage[]
+  boxSubscriptions    BoxSubscription[]
+  activityPattern     UserActivityPattern?
+  walletPasses        WalletPass[]
+
   @@index([status])
   @@index([adminRole])
   @@index([deleted])
@@ -610,6 +623,7 @@ model Merchant {
   sitePages                 SitePage[]
   products                  Product[]
   rentalItems               RentalItem[]
+  rentalBookings            RentalBooking[]
   checkoutIntents           CheckoutIntent[]
   webhookEndpoints          WebhookEndpoint[]
   userConsents              UserConsent[]              @relation("UserConsentMerchant")
@@ -625,6 +639,12 @@ model Merchant {
   // Smart Gift Feed relations
   giftProducts        GiftProduct[]            @relation("GiftProductMerchant")
   sponsoredPlacements SponsoredGiftPlacement[] @relation("SponsoredPlacementMerchant")
+
+  // 2027 features
+  reviews          Review[]          @relation("MerchantReviews")
+  wishlistItems    WishlistItem[]
+  pricingRules     PricingRule[]
+  subscriptionBoxes SubscriptionBox[]
 
   @@index([isActive])
   @@index([country])
@@ -671,6 +691,11 @@ model Campaign {
   vouchers  Voucher[]
   purchases VoucherPurchase[]
 
+  // 2027 features
+  reviews       Review[]       @relation("CampaignReviews")
+  wishlistItems WishlistItem[]
+  pricingRules  PricingRule[]
+
   @@index([merchantId])
   @@index([status])
   @@index([startDate, endDate])
@@ -704,6 +729,13 @@ model Voucher {
   redemptions     Redemption[]
   purchases       VoucherPurchase[]
   waitlistEntries WaitlistEntry[]
+
+  // 2027 features
+  reviews       Review[]       @relation("VoucherReviews")
+  wishlistItems WishlistItem[]
+  pricingRules  PricingRule[]
+  boxItems      BoxItem[]
+  walletPasses  WalletPass[]
 
   @@index([merchantId])
   @@index([campaignId])
@@ -871,6 +903,9 @@ model Ticket {
   merchant Merchant        @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   purchase TicketPurchase?
 
+  // 2027 features
+  walletPasses WalletPass[]
+
   @@index([eventId])
   @@index([merchantId])
   @@index([status])
@@ -928,6 +963,9 @@ model GiftCard {
   merchant        Merchant           @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   redeemedByStaff User?              @relation("GiftCardRedeemedByStaff", fields: [redeemedByStaffUserId], references: [id], onDelete: SetNull)
   purchases       GiftCardPurchase[]
+
+  // 2027 features
+  walletPasses WalletPass[]
 
   @@index([merchantId])
   @@index([status])
@@ -1013,15 +1051,17 @@ model AuditLog {
 }
 
 model Notification {
-  id         String    @id @default(cuid())
-  userId     String
-  merchantId String?
-  type       String
-  title      String
-  body       String
-  url        String?
-  readAt     DateTime?
-  createdAt  DateTime  @default(now())
+  id          String    @id @default(cuid())
+  userId      String
+  merchantId  String?
+  type        String
+  title       String
+  body        String
+  url         String?
+  readAt      DateTime?
+  scheduledAt DateTime? // Smart scheduling: when to deliver. null = immediate.
+  deliveredAt DateTime? // When push was actually sent by the cron job.
+  createdAt   DateTime  @default(now())
 
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   merchant Merchant? @relation(fields: [merchantId], references: [id], onDelete: SetNull)
@@ -1030,6 +1070,7 @@ model Notification {
   @@index([merchantId])
   @@index([readAt])
   @@index([createdAt])
+  @@index([scheduledAt])
 }
 
 model NotificationSubscription {
@@ -1160,6 +1201,7 @@ model RentalItem {
   updatedAt     DateTime  @updatedAt
 
   merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  bookings RentalBooking[]
 
   @@index([merchantId])
   @@index([status])
@@ -1955,4 +1997,356 @@ model HealthCheckLog {
 
   @@index([status])
   @@index([createdAt])
+}
+
+// ═══════════════════════════════════════════════
+// 2027 FEATURES
+// ═══════════════════════════════════════════════
+
+// ── Passkey (WebAuthn) ──
+model Passkey {
+  id              String   @id @default(cuid())
+  userId          String
+  credentialId    String   @unique // base64url-encoded credential ID
+  publicKey       String   @db.Text // base64url-encoded public key
+  counter         BigInt   @default(0)
+  deviceType      String?  // "singleDevice" | "multiDevice"
+  backedUp        Boolean  @default(false)
+  transports      String[] // "usb" | "ble" | "nfc" | "internal"
+  friendlyName    String?  // user-given name like "iPhone", "YubiKey"
+  lastUsedAt      DateTime?
+  createdAt       DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// ── Reviews & Ratings ──
+model Review {
+  id         String   @id @default(cuid())
+  userId     String
+  merchantId String?
+  voucherId  String?
+  campaignId String?
+  rating     Int      // 1-5
+  title      String?
+  comment    String?  @db.Text
+  helpful    Int      @default(0) // helpful vote count
+  verified   Boolean  @default(false) // verified purchase
+  status     ReviewStatus @default(published)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  merchant Merchant? @relation("MerchantReviews", fields: [merchantId], references: [id], onDelete: SetNull)
+  voucher  Voucher?  @relation("VoucherReviews", fields: [voucherId], references: [id], onDelete: SetNull)
+  campaign Campaign? @relation("CampaignReviews", fields: [campaignId], references: [id], onDelete: SetNull)
+  votes    ReviewVote[]
+
+  @@index([userId])
+  @@index([merchantId])
+  @@index([voucherId])
+  @@index([campaignId])
+  @@index([rating])
+  @@index([status])
+}
+
+model ReviewVote {
+  id        String   @id @default(cuid())
+  reviewId  String
+  userId    String
+  helpful   Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([reviewId, userId])
+  @@index([reviewId])
+  @@index([userId])
+}
+
+enum ReviewStatus {
+  published
+  hidden
+  flagged
+}
+
+// ── Wishlist & Price Alerts ──
+model WishlistItem {
+  id         String   @id @default(cuid())
+  userId     String
+  voucherId  String?
+  campaignId String?
+  merchantId String?
+  priceAlert Boolean  @default(false) // notify on price drop
+  alertPrice Int?     // trigger when price drops below this (cents)
+  notifiedAt DateTime? // last price alert sent
+  createdAt  DateTime @default(now())
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  voucher  Voucher?  @relation(fields: [voucherId], references: [id], onDelete: Cascade)
+  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  merchant Merchant? @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, voucherId])
+  @@unique([userId, campaignId])
+  @@unique([userId, merchantId])
+  @@index([userId])
+  @@index([priceAlert])
+}
+
+// ── Gamification ──
+model UserBadge {
+  id        String   @id @default(cuid())
+  userId    String
+  badgeType String   // "first_redemption", "10_referrals", "streak_7", "top_merchant", etc.
+  tier      String?  // "bronze", "silver", "gold", "platinum"
+  metadata  Json?    // extra data (count, context)
+  earnedAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeType])
+  @@index([userId])
+  @@index([badgeType])
+}
+
+model UserStreak {
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  currentDays Int       @default(0)
+  longestDays Int       @default(0)
+  lastActiveDate DateTime?
+  totalPoints Int       @default(0)
+  level       Int       @default(1)
+  updatedAt   DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ── A/B Testing ──
+model ABTest {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  status      ABTestStatus @default(draft)
+  targetType  String   // "campaign", "voucher", "page"
+  targetId    String?  // specific target or null for all
+  variants    Json     // [{ id: "A", name: "Control", weight: 50, config: {...} }, ...]
+  metrics     Json?    // { impressions: { A: 100, B: 120 }, conversions: { A: 10, B: 15 } }
+  startedAt   DateTime?
+  endedAt     DateTime?
+  winnerId    String?  // winning variant id
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  assignments ABTestAssignment[]
+
+  @@index([status])
+  @@index([targetType, targetId])
+}
+
+model ABTestAssignment {
+  id        String   @id @default(cuid())
+  testId    String
+  userId    String
+  variantId String   // "A", "B", etc.
+  converted Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  test ABTest @relation(fields: [testId], references: [id], onDelete: Cascade)
+  user User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([testId, userId])
+  @@index([testId])
+  @@index([userId])
+}
+
+enum ABTestStatus {
+  draft
+  running
+  paused
+  completed
+}
+
+// ── AI Chat Messages ──
+model ChatMessage {
+  id           String   @id @default(cuid())
+  sessionId    String   // groups messages in a conversation
+  userId       String?
+  role         String   // "user" | "assistant" | "system"
+  content      String   @db.Text
+  metadata     Json?    // tool calls, sources, etc.
+  createdAt    DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([sessionId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// ── Subscription Boxes ──
+model SubscriptionBox {
+  id          String   @id @default(cuid())
+  merchantId  String
+  name        String
+  description String?  @db.Text
+  priceCents  Int
+  currency    String   @default("EUR")
+  interval    String   @default("monthly") // "weekly" | "monthly" | "quarterly"
+  maxItems    Int      @default(3)
+  isActive    Boolean  @default(true)
+  stripeProductId String?
+  stripePriceId   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  merchant      Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  subscriptions BoxSubscription[]
+  items         BoxItem[]
+
+  @@index([merchantId])
+  @@index([isActive])
+}
+
+model BoxSubscription {
+  id               String   @id @default(cuid())
+  boxId            String
+  userId           String
+  status           String   @default("active") // "active" | "paused" | "cancelled"
+  stripeSubId      String?  @unique
+  currentPeriodEnd DateTime?
+  cancelledAt      DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  box  SubscriptionBox @relation(fields: [boxId], references: [id], onDelete: Cascade)
+  user User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([boxId, userId])
+  @@index([userId])
+  @@index([status])
+}
+
+model BoxItem {
+  id        String   @id @default(cuid())
+  boxId     String
+  voucherId String?
+  month     String   // "2027-03" — delivery month
+  createdAt DateTime @default(now())
+
+  box     SubscriptionBox @relation(fields: [boxId], references: [id], onDelete: Cascade)
+  voucher Voucher?        @relation(fields: [voucherId], references: [id], onDelete: SetNull)
+
+  @@index([boxId])
+  @@index([month])
+}
+
+// ── Dynamic Pricing ──
+model PricingRule {
+  id           String   @id @default(cuid())
+  merchantId   String
+  voucherId    String?
+  campaignId   String?
+  ruleType     String   // "demand", "time_of_day", "inventory", "surge", "loyalty"
+  config       Json     // { peakHours: [11,14], multiplier: 1.2, minPrice: 500, maxPrice: 2000 }
+  isActive     Boolean  @default(true)
+  priority     Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  merchant Merchant  @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  voucher  Voucher?  @relation(fields: [voucherId], references: [id], onDelete: SetNull)
+  campaign Campaign? @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+
+  @@index([merchantId])
+  @@index([voucherId])
+  @@index([campaignId])
+  @@index([isActive])
+}
+
+// ── Smart Notification Timing ──
+model UserActivityPattern {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  preferredHours  Json     // [10, 14, 19] — hours when user is most active
+  preferredDays   Json     // [1, 3, 5] — days of week (1=Mon)
+  timezone        String   @default("UTC")
+  avgResponseTime Int?     // seconds — how fast user responds to notifications
+  openRate        Float    @default(0) // 0-1 — notification open rate
+  lastCalculated  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ── Multi-Currency ──
+model CurrencyRate {
+  id         String   @id @default(cuid())
+  fromCurrency String
+  toCurrency   String
+  rate         Float
+  source       String  @default("ecb") // "ecb" | "stripe" | "manual"
+  fetchedAt    DateTime @default(now())
+
+  @@unique([fromCurrency, toCurrency])
+  @@index([fetchedAt])
+}
+
+// ── Wallet Passes ──
+model WalletPass {
+  id           String   @id @default(cuid())
+  userId       String
+  voucherId    String?
+  ticketId     String?
+  giftCardId   String?
+  passType     String   // "apple" | "google"
+  serialNumber String   @unique
+  passData     Json?    // cached pass metadata
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  voucher  Voucher?  @relation(fields: [voucherId], references: [id], onDelete: SetNull)
+  ticket   Ticket?   @relation(fields: [ticketId], references: [id], onDelete: SetNull)
+  giftCard GiftCard? @relation(fields: [giftCardId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([voucherId])
+  @@index([ticketId])
+  @@index([giftCardId])
+  @@index([passType])
+}
+
+model RentalBooking {
+  id              String    @id @default(cuid())
+  merchantId      String
+  rentalItemId    String
+  userId          String
+  startDate       DateTime
+  endDate         DateTime
+  days            Int
+  dailyRate       Int
+  totalPrice      Int
+  currency        String
+  status          String    @default("pending") // pending | approved | rejected | paid | active | returned | cancelled
+  notes           String?
+  rejectionReason String?
+  approvedAt      DateTime?
+  approvedBy      String?
+  paidAt          DateTime?
+  stripePaymentId String?
+  returnedAt      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  merchant   Merchant   @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  rentalItem RentalItem @relation(fields: [rentalItemId], references: [id])
+
+  @@index([merchantId])
+  @@index([userId])
+  @@index([status])
 }
