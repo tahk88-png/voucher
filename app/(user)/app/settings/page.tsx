@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import Link from 'next/link';
-import { Settings, Bell, Lock, Trash2 } from 'lucide-react';
+import { Settings, Bell, Lock, Trash2, Shield, Monitor } from 'lucide-react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import PushSubscribeButton from '@/components/push-subscribe-button';
 import ChangePasswordForm from '@/components/change-password-form';
@@ -73,6 +73,36 @@ export default async function SettingsPage() {
           </div>
         </div>
         <ChangePasswordForm hasPassword={!!user?.passwordHash} />
+      </WarmCard>
+
+      <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="w-10 h-10 rounded-[12px] bg-[#FFF9ED] flex items-center justify-center shrink-0">
+            <Shield className="h-5 w-5 text-[#8B7355]" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold text-[#2D2721]">Two-factor authentication</div>
+            <div className="text-sm text-[#6B5744]">Add an extra layer of security with an authenticator app</div>
+          </div>
+        </div>
+        <WarmButton asChild variant="outline" size="sm">
+          <Link href="/app/settings/security">Manage 2FA</Link>
+        </WarmButton>
+      </WarmCard>
+
+      <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="w-10 h-10 rounded-[12px] bg-[#FFF9ED] flex items-center justify-center shrink-0">
+            <Monitor className="h-5 w-5 text-[#8B7355]" />
+          </div>
+          <div>
+            <div className="text-sm font-semibold text-[#2D2721]">Active sessions</div>
+            <div className="text-sm text-[#6B5744]">View and manage your active sessions across devices</div>
+          </div>
+        </div>
+        <WarmButton asChild variant="outline" size="sm">
+          <Link href="/app/settings/sessions">View sessions</Link>
+        </WarmButton>
       </WarmCard>
 
       <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">

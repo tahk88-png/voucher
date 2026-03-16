@@ -93,8 +93,62 @@ export async function dispatchWebhook(
 export const WEBHOOK_EVENTS = [
   'voucher.redeemed',
   'voucher.purchased',
+  'voucher.expired',
   'campaign.started',
   'campaign.ended',
   'ticket.redeemed',
   'gift_card.redeemed',
+  'redemption.created',
+  'redemption.confirmed',
+  'review.created',
+  'subscription.created',
+  'booking.created',
 ] as const;
+
+export type WebhookEvent = (typeof WEBHOOK_EVENTS)[number];
+
+/**
+ * Sign a webhook payload using HMAC-SHA256
+ */
+export function signPayload(payload: string, secret: string): string {
+  return crypto.createHmac('sha256', secret).update(payload).digest('hex');
+}
+
+/**
+ * Send a webhook to a single endpoint with retry
+ */
+export async function sendWebhook(
+  url: string,
+  event: string,
+  payload: Record<string, any>,
+  secret: string
+): Promise<{ status: number; text: string }> {
+  const body = JSON.stringify({
+    event,
+    timestamp: new Date().toISOString(),
+    data: payload,
+  });
+  const signature = signPayload(body, secret);
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'X-Webhook-Signature': `sha256=${signature}`,
+    'X-Webhook-Event': event,
+  };
+
+  return deliverWithRetry(url, headers, body);
+}
+
+/**
+ * Queue a webhook for delivery — fire-and-forget dispatch
+ * (wraps dispatchWebhook but doesn't await — logs errors instead of throwing)
+ */
+export function queueWebhook(
+  merchantId: string,
+  event: string,
+  payload: Record<string, any>
+): void {
+  dispatchWebhook(merchantId, event, payload).catch((err) => {
+    console.error(`[webhook] Failed to dispatch ${event} for merchant ${merchantId}:`, err);
+  });
+}

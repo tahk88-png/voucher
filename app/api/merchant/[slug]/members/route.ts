@@ -12,6 +12,33 @@ const inviteMemberSchema = z.object({
   role: z.enum(['merchant_admin', 'merchant_staff']),
 });
 
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{slug: string}> }
+) {
+  return withErrorHandler(async () => {
+    const { slug } = await params;
+    const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_staff');
+
+    const members = await prisma.merchantMember.findMany({
+      where: { merchantId: merchant.id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            image: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'asc' },
+    });
+
+    return NextResponse.json(members);
+  });
+}
+
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{slug: string}> }

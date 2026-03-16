@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
+import { moderateContent } from '@/lib/content-moderation';
 
 export async function GET(req: NextRequest) {
   return withErrorHandler(async () => {
@@ -102,6 +103,18 @@ export async function POST(req: NextRequest) {
       verified = !!purchase;
     }
 
+    // Auto-moderate content before creating the review
+    const textToModerate = [title, comment].filter(Boolean).join(' ');
+    const moderation = moderateContent(textToModerate);
+
+    // Determine initial review status based on moderation
+    let reviewStatus: 'published' | 'flagged' | 'hidden' = 'published';
+    if (moderation.suggestedAction === 'reject') {
+      reviewStatus = 'hidden';
+    } else if (moderation.suggestedAction === 'flag_for_review') {
+      reviewStatus = 'flagged';
+    }
+
     const review = await prisma.review.create({
       data: {
         userId: session.user.id,
@@ -112,12 +125,20 @@ export async function POST(req: NextRequest) {
         title: title || null,
         comment: comment || null,
         verified,
+        status: reviewStatus,
       },
       include: {
         user: { select: { id: true, name: true, image: true } },
       },
     });
 
-    return NextResponse.json({ review }, { status: 201 });
+    return NextResponse.json({
+      review,
+      moderation: {
+        approved: moderation.approved,
+        flags: moderation.flags,
+        status: reviewStatus,
+      },
+    }, { status: 201 });
   });
 }

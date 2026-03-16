@@ -6,6 +6,8 @@ import { Lock, CheckCircle, AlertCircle, ArrowLeft } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import PasswordStrengthMeter from "@/components/password-strength-meter"
+import { checkPasswordStrength } from "@/lib/password-strength"
 
 const T = {
   en: {
@@ -177,6 +179,8 @@ function ResetPasswordContent() {
     );
   }
 
+  const passwordResult = checkPasswordStrength(password);
+
   // Reset password form (token is in URL)
   async function handleReset(e: React.FormEvent) {
     e.preventDefault();
@@ -184,6 +188,10 @@ function ResetPasswordContent() {
 
     if (password.length < 8) {
       setError(t.errorShort);
+      return;
+    }
+    if (passwordResult.score < 2) {
+      setError("Password is too weak. Please choose a stronger password.");
       return;
     }
     if (password !== confirmPw) {
@@ -265,6 +273,7 @@ function ResetPasswordContent() {
               <Label htmlFor="password" className="text-sm font-medium text-[var(--text)]">{t.newPassword}</Label>
               <Input id="password" type="password" required minLength={8} value={password}
                 onChange={(e) => setPassword(e.target.value)} className="mt-1" autoFocus />
+              <PasswordStrengthMeter password={password} />
             </div>
             <div className="mb-6">
               <Label htmlFor="confirm" className="text-sm font-medium text-[var(--text)]">{t.confirmPassword}</Label>

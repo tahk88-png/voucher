@@ -25,6 +25,9 @@ import {
   Building2,
   ScanLine,
   BarChart3,
+  Star,
+  ScrollText,
+  Key,
 } from "lucide-react"
 import { WarmButton } from "@/components/warm-button"
 import { cn } from "@/lib/utils"
@@ -54,8 +57,11 @@ const navItems = [
   { labelKey: "customers", fallback: "Customers", icon: UserCheck, href: (slug: string) => `/merchant/${slug}/customers`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "reports", fallback: "Reports", icon: BarChart3, href: (slug: string) => `/merchant/${slug}/reports`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "b2b", fallback: "B2B", icon: Building2, href: (_slug: string) => `/app/b2b`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "reviews", fallback: "Reviews", icon: Star, href: (slug: string) => `/merchant/${slug}/reviews`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "team", fallback: "Team", icon: Users, href: (slug: string) => `/merchant/${slug}/members`, minRole: "merchant_admin" as TenantMembershipRole },
+  { labelKey: "auditLog", fallback: "Audit Log", icon: ScrollText, href: (slug: string) => `/merchant/${slug}/audit-log`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "pageBuilder", fallback: "Page Builder", icon: LayoutTemplate, href: (slug: string) => `/merchant/${slug}/page-builder`, minRole: "merchant_admin" as TenantMembershipRole },
+  { labelKey: "apiKeys", fallback: "API Keys", icon: Key, href: (slug: string) => `/merchant/${slug}/settings/api-keys`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "settings", fallback: "Settings & Billing", icon: Settings, href: (slug: string) => `/merchant/${slug}/settings`, minRole: "merchant_admin" as TenantMembershipRole },
 ]
 

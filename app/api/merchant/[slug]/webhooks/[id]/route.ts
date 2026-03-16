@@ -3,17 +3,72 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { withErrorHandler } from '@/lib/error-handler';
 
-export async function PATCH(
+export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{slug: string; id: string}> }
+  { params }: { params: Promise<{ slug: string; id: string }> }
 ) {
   return withErrorHandler(async () => {
-  const { slug, id } = await params
+    const { slug, id } = await params;
+    const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
+
+    const endpoint = await prisma.webhookEndpoint.findFirst({
+      where: { id, merchantId: merchant.id },
+      include: {
+        deliveries: {
+          orderBy: { createdAt: 'desc' },
+          take: 50,
+        },
+        _count: { select: { deliveries: true } },
+      },
+    });
+    if (!endpoint) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(endpoint);
+  });
+}
+
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string; id: string }> }
+) {
+  return withErrorHandler(async () => {
+    const { slug, id } = await params;
     const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
     const body = await req.json();
 
     const endpoint = await prisma.webhookEndpoint.findFirst({
-      where: { id: id, merchantId: merchant.id },
+      where: { id, merchantId: merchant.id },
+    });
+    if (!endpoint) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
+    const updated = await prisma.webhookEndpoint.update({
+      where: { id },
+      data: {
+        ...(body.url !== undefined && { url: body.url }),
+        ...(body.events !== undefined && { events: body.events }),
+        ...(body.isActive !== undefined && { isActive: body.isActive }),
+      },
+    });
+
+    return NextResponse.json(updated);
+  });
+}
+
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string; id: string }> }
+) {
+  return withErrorHandler(async () => {
+    const { slug, id } = await params;
+    const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
+    const body = await req.json();
+
+    const endpoint = await prisma.webhookEndpoint.findFirst({
+      where: { id, merchantId: merchant.id },
     });
     if (!endpoint) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -34,14 +89,14 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{slug: string; id: string}> }
+  { params }: { params: Promise<{ slug: string; id: string }> }
 ) {
   return withErrorHandler(async () => {
-  const { slug, id } = await params
+    const { slug, id } = await params;
     const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
 
     const endpoint = await prisma.webhookEndpoint.findFirst({
-      where: { id: id, merchantId: merchant.id },
+      where: { id, merchantId: merchant.id },
     });
     if (!endpoint) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });

@@ -35,6 +35,11 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
+  deviceInfo   String?
+  ipAddress    String?
+  userAgent    String?
+  lastActiveAt DateTime @default(now())
+  createdAt    DateTime @default(now())
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
@@ -108,6 +113,7 @@ model User {
   giftInteractions UserGiftInteraction[] @relation("UserGiftInteractionUser")
 
   // 2027 features
+  totpCredential      TotpCredential?
   passkeys            Passkey[]
   reviews             Review[]
   reviewVotes         ReviewVote[]
@@ -119,6 +125,12 @@ model User {
   boxSubscriptions    BoxSubscription[]
   activityPattern     UserActivityPattern?
   walletPasses        WalletPass[]
+
+  // Commerce features
+  installmentPlans    InstallmentPlan[]
+  loyaltyAccount      LoyaltyAccount?
+  emailCampaignDeliveries EmailCampaignDelivery[]
+  appointments            Appointment[]            @relation("AppointmentUser")
 
   @@index([status])
   @@index([adminRole])
@@ -593,6 +605,10 @@ model Merchant {
   brandColorsJson     Json?
   website             String?
   supportEmail        String?
+  address             String?
+  city                String?
+  latitude            Float?
+  longitude           Float?
   isActive            Boolean   @default(true) // Kill switch for launch mode
   featureFlags        Json? // Per-merchant feature flags
   invitedAt           DateTime? // Track manual invites
@@ -645,6 +661,12 @@ model Merchant {
   wishlistItems    WishlistItem[]
   pricingRules     PricingRule[]
   subscriptionBoxes SubscriptionBox[]
+  apiKeys          MerchantApiKey[]
+  emailCampaigns   EmailCampaign[]
+  appointments     Appointment[]     @relation("AppointmentMerchant")
+
+  // Commerce features
+  installmentPlans InstallmentPlan[]
 
   @@index([isActive])
   @@index([country])
@@ -664,6 +686,25 @@ model MerchantMember {
   @@unique([merchantId, userId])
   @@index([merchantId])
   @@index([userId])
+}
+
+model MerchantApiKey {
+  id          String    @id @default(cuid())
+  merchantId  String
+  name        String
+  keyHash     String    @unique
+  prefix      String    // first 8 chars of key for display (e.g. "mk_a1b2...")
+  permissions String[]  // e.g. ["voucher.read", "voucher.redeem", "campaign.read"]
+  lastUsedAt  DateTime?
+  expiresAt   DateTime?
+  revoked     Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@index([merchantId])
+  @@index([prefix])
 }
 
 model Campaign {
@@ -720,6 +761,8 @@ model Voucher {
   codePrefix        String?
   isFlashSale       Boolean   @default(false)
   flashSaleEndsAt   DateTime?
+  stockQuantity     Int?      // null = unlimited stock
+  lowStockThreshold Int?      @default(10) // alert when stock drops below this
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
@@ -2022,6 +2065,19 @@ model Passkey {
   @@index([userId])
 }
 
+// ── TOTP 2FA ──
+model TotpCredential {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  secret      String   // encrypted TOTP secret
+  enabled     Boolean  @default(false)
+  backupCodes String[] // hashed backup codes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 // ── Reviews & Ratings ──
 model Review {
   id         String   @id @default(cuid())
@@ -2029,14 +2085,16 @@ model Review {
   merchantId String?
   voucherId  String?
   campaignId String?
-  rating     Int      // 1-5
-  title      String?
-  comment    String?  @db.Text
-  helpful    Int      @default(0) // helpful vote count
-  verified   Boolean  @default(false) // verified purchase
-  status     ReviewStatus @default(published)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  rating           Int      // 1-5
+  title            String?
+  comment          String?  @db.Text
+  helpful          Int      @default(0) // helpful vote count
+  verified         Boolean  @default(false) // verified purchase
+  status           ReviewStatus @default(published)
+  merchantReply    String?  @db.Text
+  merchantReplyAt  DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   merchant Merchant? @relation("MerchantReviews", fields: [merchantId], references: [id], onDelete: SetNull)
@@ -2349,4 +2407,141 @@ model RentalBooking {
   @@index([merchantId])
   @@index([userId])
   @@index([status])
+}
+
+// ═══════════════════════════════════════════════
+// COMMERCE FEATURES
+// ═══════════════════════════════════════════════
+
+// ── BNPL / Installment Plans ──
+enum InstallmentPlanStatus {
+  active
+  completed
+  defaulted
+  cancelled
+}
+
+model InstallmentPlan {
+  id                     String                @id @default(cuid())
+  userId                 String
+  voucherId              String?
+  purchaseId             String?
+  merchantId             String
+  totalCents             Int
+  planType               String // "3x" | "6x" | "12x"
+  interestRate           Float  @default(0) // percentage, e.g. 2.5
+  totalWithInterestCents Int
+  installmentsJson       Json // [{ number, amountCents, dueDate, status, stripePaymentIntentId? }]
+  status                 InstallmentPlanStatus @default(active)
+  stripeCustomerId       String?
+  nextInstallmentDate    DateTime?
+  createdAt              DateTime              @default(now())
+  updatedAt              DateTime              @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([merchantId])
+  @@index([status])
+  @@index([nextInstallmentDate])
+}
+
+// ── Loyalty Tiers ──
+model LoyaltyAccount {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  totalPoints    Int      @default(0)
+  lifetimePoints Int      @default(0) // never decreases, used for tier calculation
+  currentTier    String   @default("bronze") // bronze | silver | gold | platinum | diamond
+  tierUpdatedAt  DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pointsHistory LoyaltyPointLog[]
+}
+
+model LoyaltyPointLog {
+  id               String   @id @default(cuid())
+  loyaltyAccountId String
+  points           Int // positive = earned, negative = spent
+  reason           String // "purchase" | "redemption" | "bonus" | "referral" | "review" | "spent"
+  referenceId      String? // purchaseId, redemptionId, etc.
+  description      String?
+  createdAt        DateTime @default(now())
+
+  account LoyaltyAccount @relation(fields: [loyaltyAccountId], references: [id], onDelete: Cascade)
+
+  @@index([loyaltyAccountId])
+  @@index([createdAt])
+}
+
+// ── Email Campaigns ──
+model EmailCampaign {
+  id              String    @id @default(cuid())
+  merchantId      String
+  name            String
+  subject         String
+  sectionsJson    Json      // Array of section blocks
+  recipientFilter String    @default("all") // all | redeemed_30d | inactive
+  status          String    @default("draft") // draft | scheduled | sent
+  scheduledAt     DateTime?
+  sentAt          DateTime?
+  recipientCount  Int       @default(0)
+  openCount       Int       @default(0)
+  clickCount      Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  merchant   Merchant                @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  deliveries EmailCampaignDelivery[]
+
+  @@index([merchantId])
+  @@index([status])
+  @@index([scheduledAt])
+}
+
+model EmailCampaignDelivery {
+  id         String    @id @default(cuid())
+  campaignId String
+  userId     String
+  email      String
+  status     String    @default("sent") // sent | delivered | opened | clicked | bounced
+  sentAt     DateTime  @default(now())
+  openedAt   DateTime?
+  clickedAt  DateTime?
+
+  campaign EmailCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([campaignId])
+  @@index([userId])
+  @@index([status])
+}
+
+// ── Appointments / Calendar Booking ──
+model Appointment {
+  id          String    @id @default(cuid())
+  merchantId  String
+  userId      String?
+  serviceName String
+  startTime   DateTime
+  endTime     DateTime
+  status      String    @default("pending") // pending | confirmed | cancelled | completed
+  priceCents  Int       @default(0)
+  currency    String    @default("EUR")
+  notes       String?
+  isSlot      Boolean   @default(false) // true = availability slot, false = booking
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  merchant Merchant @relation("AppointmentMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
+  user     User?    @relation("AppointmentUser", fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([merchantId])
+  @@index([userId])
+  @@index([startTime, endTime])
+  @@index([status])
+  @@index([isSlot])
 }

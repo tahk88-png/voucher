@@ -9,6 +9,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import PasswordStrengthMeter from "@/components/password-strength-meter";
+import { checkPasswordStrength } from "@/lib/password-strength";
 
 function RegisterForm() {
   const router = useRouter();
@@ -19,9 +21,17 @@ function RegisterForm() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
+  const passwordResult = checkPasswordStrength(password);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (passwordResult.score < 2) {
+      setError("Password is too weak. Please choose a stronger password.");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -164,6 +174,7 @@ function RegisterForm() {
                     required
                   />
                 </div>
+                <PasswordStrengthMeter password={password} />
               </div>
 
               <button

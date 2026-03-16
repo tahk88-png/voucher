@@ -8,16 +8,31 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { showError, showSuccess } from '@/lib/toast-helpers';
-import { Plus, Trash2, Copy } from 'lucide-react';
+import { Plus, Trash2, Copy, Send, ChevronDown, ChevronUp } from 'lucide-react';
 
 const AVAILABLE_EVENTS = [
   'voucher.redeemed',
   'voucher.purchased',
+  'voucher.expired',
   'campaign.started',
   'campaign.ended',
   'ticket.redeemed',
   'gift_card.redeemed',
+  'redemption.created',
+  'redemption.confirmed',
+  'review.created',
+  'subscription.created',
+  'booking.created',
 ];
+
+interface WebhookDelivery {
+  id: string;
+  event: string;
+  statusCode: number | null;
+  response: string | null;
+  attempts: number;
+  createdAt: string;
+}
 
 interface WebhookEndpoint {
   id: string;
@@ -38,6 +53,10 @@ export default function WebhooksPage() {
   const [newUrl, setNewUrl] = useState('');
   const [newEvents, setNewEvents] = useState<string[]>([]);
   const [newSecret, setNewSecret] = useState<string | null>(null);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [deliveries, setDeliveries] = useState<WebhookDelivery[]>([]);
+  const [loadingDeliveries, setLoadingDeliveries] = useState(false);
+  const [testingId, setTestingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`/api/merchant/${slug}/webhooks`)
@@ -94,6 +113,45 @@ export default function WebhooksPage() {
       );
     } catch {
       showError('Failed to update webhook');
+    }
+  };
+
+  const handleTest = async (id: string) => {
+    setTestingId(id);
+    try {
+      const res = await fetch(`/api/merchant/${slug}/webhooks/${id}/test`, {
+        method: 'POST',
+      });
+      const result = await res.json();
+      if (result.success) {
+        showSuccess(`Test delivered! Status: ${result.statusCode}`);
+      } else {
+        showError(`Test failed: ${result.error || `Status ${result.statusCode}`}`);
+      }
+    } catch {
+      showError('Failed to send test webhook');
+    } finally {
+      setTestingId(null);
+    }
+  };
+
+  const handleViewDeliveries = async (id: string) => {
+    if (expandedId === id) {
+      setExpandedId(null);
+      setDeliveries([]);
+      return;
+    }
+    setExpandedId(id);
+    setLoadingDeliveries(true);
+    try {
+      const res = await fetch(`/api/merchant/${slug}/webhooks/${id}`);
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      setDeliveries(data.deliveries || []);
+    } catch {
+      showError('Failed to load deliveries');
+    } finally {
+      setLoadingDeliveries(false);
     }
   };
 
@@ -193,10 +251,29 @@ export default function WebhooksPage() {
                   </div>
                   <p className="text-xs text-[var(--text-faint)] mt-2">
                     Created {new Date(ep.createdAt).toLocaleDateString()}
-                    {ep._count ? ` · ${ep._count.deliveries} deliveries` : ''}
+                    {ep._count ? ` | ${ep._count.deliveries} deliveries` : ''}
                   </p>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <WarmButton
+                    size="sm"
+                    variant="outline"
+                    onClick={() => handleTest(ep.id)}
+                    disabled={testingId === ep.id}
+                  >
+                    <Send className="h-4 w-4" />
+                  </WarmButton>
+                  <WarmButton
+                    size="sm"
+                    variant="outline"
+                    onClick={() => handleViewDeliveries(ep.id)}
+                  >
+                    {expandedId === ep.id ? (
+                      <ChevronUp className="h-4 w-4" />
+                    ) : (
+                      <ChevronDown className="h-4 w-4" />
+                    )}
+                  </WarmButton>
                   <WarmButton
                     size="sm"
                     variant="outline"
@@ -213,6 +290,49 @@ export default function WebhooksPage() {
                   </WarmButton>
                 </div>
               </div>
+
+              {/* Delivery log viewer */}
+              {expandedId === ep.id && (
+                <div className="mt-4 border-t border-[var(--border)] pt-4">
+                  <h3 className="text-sm font-semibold text-[var(--text)] mb-3">
+                    Delivery Log
+                  </h3>
+                  {loadingDeliveries ? (
+                    <p className="text-xs text-[var(--text-muted)]">Loading...</p>
+                  ) : deliveries.length === 0 ? (
+                    <p className="text-xs text-[var(--text-muted)]">No deliveries yet</p>
+                  ) : (
+                    <div className="space-y-2 max-h-80 overflow-y-auto">
+                      {deliveries.map((d) => (
+                        <div
+                          key={d.id}
+                          className="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2 text-xs"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span
+                              className={`w-2 h-2 rounded-full ${
+                                d.statusCode && d.statusCode >= 200 && d.statusCode < 300
+                                  ? 'bg-green-500'
+                                  : d.statusCode
+                                  ? 'bg-red-500'
+                                  : 'bg-gray-400'
+                              }`}
+                            />
+                            <span className="font-medium text-[var(--text)]">{d.event}</span>
+                            <span className="text-[var(--text-muted)]">
+                              {d.statusCode ? `HTTP ${d.statusCode}` : 'Failed'}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-3 text-[var(--text-muted)]">
+                            <span>{d.attempts} attempt(s)</span>
+                            <span>{new Date(d.createdAt).toLocaleString()}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </WarmCard>
           ))}
         </div>
