@@ -174,20 +174,20 @@ async function handleMerchantAction(merchantId: string, action: BulkAction) {
 async function handleReviewAction(reportId: string, action: BulkAction) {
   switch (action) {
     case 'approve':
-      await prisma.moderationReport.update({
+      await prisma.moderationAction.update({
         where: { id: reportId },
         data: { status: 'resolved' },
       });
       break;
     case 'delete':
     case 'ban':
-      await prisma.moderationReport.update({
+      await prisma.moderationAction.update({
         where: { id: reportId },
         data: { status: 'dismissed' },
       });
       break;
     case 'suspend':
-      await prisma.moderationReport.update({
+      await prisma.moderationAction.update({
         where: { id: reportId },
         data: { status: 'under_review' },
       });
