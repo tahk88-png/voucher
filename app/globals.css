@@ -1,3 +1,6 @@
+@import '../styles/design-tokens.css';
+@import '../styles/animations.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -620,6 +623,39 @@
   background: linear-gradient(var(--surface), var(--surface)) padding-box,
               conic-gradient(from var(--border-angle), var(--primary) 0%, transparent 30%, transparent 70%, var(--primary) 100%) border-box;
   animation: border-spin 3s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════
+   DESIGN SYSTEM — 2027 Utilities (--ds-* tokens)
+   ═══════════════════════════════════════════════ */
+
+@layer utilities {
+  /* DS Glassmorphism (non-plugin fallback classes) */
+  .glass-border {
+    background: var(--ds-bg-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--ds-border-hover);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+  .glass-glow {
+    background: var(--ds-bg-glass);
+    backdrop-filter: blur(20px) saturate(200%);
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
+    border: 1px solid var(--ds-border-hover);
+    box-shadow: var(--ds-glow-primary), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* DS Glow shorthand classes */
+  .glow-secondary {
+    box-shadow: var(--ds-glow-secondary);
+  }
+
+  /* DS Gradient mesh */
+  .ds-mesh {
+    background-image: var(--ds-gradient-mesh);
+    background-attachment: fixed;
+  }
 }
 
 /* ═══════════════════════════════════════════════

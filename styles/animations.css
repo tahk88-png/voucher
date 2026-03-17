@@ -1,0 +1,314 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATIONS — Design System Animation Library
+   ═══════════════════════════════════════════════════════════════════
+   CSS-only animations. All keyframes prefixed with ds- to avoid
+   collisions. Utility classes prefixed with ds-animate-.
+   Respects prefers-reduced-motion automatically.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────
+   ENTRANCE ANIMATIONS
+   ───────────────────────────────────────────── */
+
+@keyframes ds-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ds-fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ds-fade-in-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ds-fade-in-left {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ds-fade-in-right {
+  from { opacity: 0; transform: translateX(8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ds-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ds-slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes ds-slide-in-bottom {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   EXIT ANIMATIONS
+   ───────────────────────────────────────────── */
+
+@keyframes ds-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes ds-fade-out-up {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes ds-fade-out-down {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(8px); }
+}
+
+@keyframes ds-scale-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+@keyframes ds-slide-out-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes ds-slide-out-bottom {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+/* ─────────────────────────────────────────────
+   ATTENTION ANIMATIONS
+   ───────────────────────────────────────────── */
+
+@keyframes ds-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes ds-ping {
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes ds-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes ds-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes ds-glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(6, 182, 212, 0); }
+  50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
+}
+
+/* ─────────────────────────────────────────────
+   LOADING ANIMATIONS
+   ───────────────────────────────────────────── */
+
+@keyframes ds-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ds-shimmer {
+  to { background-position: 200% 0; }
+}
+
+@keyframes ds-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes ds-dots {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* ─────────────────────────────────────────────
+   DATA VISUALIZATION ANIMATIONS
+   ───────────────────────────────────────────── */
+
+@keyframes ds-count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ds-chart-grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes ds-chart-draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes ds-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* ─────────────────────────────────────────────
+   SPECIAL EFFECTS
+   ───────────────────────────────────────────── */
+
+@keyframes ds-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes ds-scan-line {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+@keyframes ds-dash-flow {
+  to { stroke-dashoffset: -20; }
+}
+
+@keyframes ds-node-pulse {
+  0%, 100% { r: 3; opacity: 0.6; }
+  50% { r: 5; opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Entrance ── */
+.ds-animate-fade-in       { animation: ds-fade-in 250ms var(--ds-ease-out, ease-out) both; }
+.ds-animate-fade-in-up    { animation: ds-fade-in-up 300ms var(--ds-ease-out, ease-out) both; }
+.ds-animate-fade-in-down  { animation: ds-fade-in-down 300ms var(--ds-ease-out, ease-out) both; }
+.ds-animate-fade-in-left  { animation: ds-fade-in-left 300ms var(--ds-ease-out, ease-out) both; }
+.ds-animate-fade-in-right { animation: ds-fade-in-right 300ms var(--ds-ease-out, ease-out) both; }
+.ds-animate-scale-in      { animation: ds-scale-in 250ms var(--ds-ease-out, ease-out) both; }
+.ds-animate-slide-in-right  { animation: ds-slide-in-right 300ms var(--ds-ease-out, ease-out) both; }
+.ds-animate-slide-in-bottom { animation: ds-slide-in-bottom 300ms var(--ds-ease-out, ease-out) both; }
+
+/* ── Exit ── */
+.ds-animate-fade-out       { animation: ds-fade-out 200ms var(--ds-ease-in, ease-in) both; }
+.ds-animate-fade-out-up    { animation: ds-fade-out-up 200ms var(--ds-ease-in, ease-in) both; }
+.ds-animate-fade-out-down  { animation: ds-fade-out-down 200ms var(--ds-ease-in, ease-in) both; }
+.ds-animate-scale-out      { animation: ds-scale-out 200ms var(--ds-ease-in, ease-in) both; }
+.ds-animate-slide-out-right  { animation: ds-slide-out-right 250ms var(--ds-ease-in, ease-in) both; }
+.ds-animate-slide-out-bottom { animation: ds-slide-out-bottom 250ms var(--ds-ease-in, ease-in) both; }
+
+/* ── Attention ── */
+.ds-animate-pulse      { animation: ds-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.ds-animate-ping       { animation: ds-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; }
+.ds-animate-bounce     { animation: ds-bounce 1s ease infinite; }
+.ds-animate-shake      { animation: ds-shake 500ms ease both; }
+.ds-animate-glow-pulse { animation: ds-glow-pulse 2s ease-in-out infinite; }
+
+/* ── Loading ── */
+.ds-animate-spin     { animation: ds-spin 1s linear infinite; }
+.ds-animate-shimmer  {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.06) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: ds-shimmer 1.5s ease-in-out infinite;
+}
+.ds-animate-progress { animation: ds-progress 2s var(--ds-ease-out, ease-out) both; }
+.ds-animate-dots     { animation: ds-dots 1.4s ease-in-out infinite both; }
+
+/* ── Data Viz ── */
+.ds-animate-count-up   { animation: ds-count-up 600ms var(--ds-ease-out, ease-out) both; }
+.ds-animate-chart-grow {
+  animation: ds-chart-grow 800ms var(--ds-ease-out, ease-out) both;
+  transform-origin: bottom;
+}
+.ds-animate-chart-draw {
+  stroke-dasharray: 1000;
+  animation: ds-chart-draw 1.5s var(--ds-ease-out, ease-out) both;
+}
+.ds-animate-reveal { animation: ds-reveal 600ms var(--ds-ease-out, ease-out) both; }
+
+/* ── Special ── */
+.ds-animate-float     { animation: ds-float 3s ease-in-out infinite; }
+.ds-animate-dash-flow { animation: ds-dash-flow 1s linear infinite; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   STAGGERED CHILDREN
+   ═══════════════════════════════════════════════════════════════════ */
+
+.ds-stagger > :nth-child(1)  { animation-delay: 50ms; }
+.ds-stagger > :nth-child(2)  { animation-delay: 100ms; }
+.ds-stagger > :nth-child(3)  { animation-delay: 150ms; }
+.ds-stagger > :nth-child(4)  { animation-delay: 200ms; }
+.ds-stagger > :nth-child(5)  { animation-delay: 250ms; }
+.ds-stagger > :nth-child(6)  { animation-delay: 300ms; }
+.ds-stagger > :nth-child(7)  { animation-delay: 350ms; }
+.ds-stagger > :nth-child(8)  { animation-delay: 400ms; }
+.ds-stagger > :nth-child(9)  { animation-delay: 450ms; }
+.ds-stagger > :nth-child(10) { animation-delay: 500ms; }
+.ds-stagger > :nth-child(11) { animation-delay: 550ms; }
+.ds-stagger > :nth-child(12) { animation-delay: 600ms; }
+.ds-stagger > :nth-child(13) { animation-delay: 650ms; }
+.ds-stagger > :nth-child(14) { animation-delay: 700ms; }
+.ds-stagger > :nth-child(15) { animation-delay: 750ms; }
+.ds-stagger > :nth-child(16) { animation-delay: 800ms; }
+.ds-stagger > :nth-child(17) { animation-delay: 850ms; }
+.ds-stagger > :nth-child(18) { animation-delay: 900ms; }
+.ds-stagger > :nth-child(19) { animation-delay: 950ms; }
+.ds-stagger > :nth-child(20) { animation-delay: 1000ms; }
+
+/* ── Faster stagger variant ── */
+.ds-stagger-fast > :nth-child(1)  { animation-delay: 30ms; }
+.ds-stagger-fast > :nth-child(2)  { animation-delay: 60ms; }
+.ds-stagger-fast > :nth-child(3)  { animation-delay: 90ms; }
+.ds-stagger-fast > :nth-child(4)  { animation-delay: 120ms; }
+.ds-stagger-fast > :nth-child(5)  { animation-delay: 150ms; }
+.ds-stagger-fast > :nth-child(6)  { animation-delay: 180ms; }
+.ds-stagger-fast > :nth-child(7)  { animation-delay: 210ms; }
+.ds-stagger-fast > :nth-child(8)  { animation-delay: 240ms; }
+.ds-stagger-fast > :nth-child(9)  { animation-delay: 270ms; }
+.ds-stagger-fast > :nth-child(10) { animation-delay: 300ms; }
+.ds-stagger-fast > :nth-child(11) { animation-delay: 330ms; }
+.ds-stagger-fast > :nth-child(12) { animation-delay: 360ms; }
+.ds-stagger-fast > :nth-child(13) { animation-delay: 390ms; }
+.ds-stagger-fast > :nth-child(14) { animation-delay: 420ms; }
+.ds-stagger-fast > :nth-child(15) { animation-delay: 450ms; }
+.ds-stagger-fast > :nth-child(16) { animation-delay: 480ms; }
+.ds-stagger-fast > :nth-child(17) { animation-delay: 510ms; }
+.ds-stagger-fast > :nth-child(18) { animation-delay: 540ms; }
+.ds-stagger-fast > :nth-child(19) { animation-delay: 570ms; }
+.ds-stagger-fast > :nth-child(20) { animation-delay: 600ms; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DURATION MODIFIERS
+   ═══════════════════════════════════════════════════════════════════ */
+
+.ds-duration-fast   { animation-duration: 150ms !important; }
+.ds-duration-normal { animation-duration: 250ms !important; }
+.ds-duration-slow   { animation-duration: 400ms !important; }
+.ds-duration-slower { animation-duration: 600ms !important; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   REDUCED MOTION — Respect user preference
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ds-animate-shimmer {
+    animation: none !important;
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
