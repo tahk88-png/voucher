@@ -21,7 +21,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   return withErrorHandler(async () => {
-    await requireAdminPermission('manage_flags');
+    await requireAdminPermission('admin.flags.manage');
     const { id } = await params;
 
     const mod = await prisma.giftFeedModule.findUnique({
@@ -51,7 +51,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   return withErrorHandler(async () => {
-    await requireAdminPermission('manage_flags');
+    await requireAdminPermission('admin.flags.manage');
     const { id } = await params;
 
     const body = await req.json();
@@ -101,7 +101,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   return withErrorHandler(async () => {
-    await requireAdminPermission('manage_flags');
+    await requireAdminPermission('admin.flags.manage');
     const { id } = await params;
 
     await prisma.$transaction([

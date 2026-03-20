@@ -106,7 +106,7 @@ export async function GET(req: NextRequest) {
  */
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
-    const admin = await requireAdminPermission('admin.ops.write');
+    const admin = await requireAdminPermission('admin.system.manage');
 
     const body = await req.json();
     const { action, ip } = body as { action: 'add' | 'remove'; ip: string };

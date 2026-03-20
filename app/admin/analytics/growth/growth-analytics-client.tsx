@@ -37,19 +37,19 @@ type GrowthAnalyticsData = {
   };
   conversionFunnel: { stage: string; value: number }[];
   periodComparison: {
-    current: { label: string; views: number; purchases: number; conversions: number; revenue: number };
-    previous: { label: string; views: number; purchases: number; conversions: number; revenue: number };
+    current: { header: string; views: number; purchases: number; conversions: number; revenue: number };
+    previous: { header: string; views: number; purchases: number; conversions: number; revenue: number };
   };
   channelAcquisition: { channel: string; value: number }[];
   churnTrend: { date: string; value: number }[];
 };
 
 const navLinks = [
-  { href: '/admin/analytics', label: 'Overview' },
-  { href: '/admin/analytics/users', label: 'Users' },
-  { href: '/admin/analytics/revenue', label: 'Revenue' },
-  { href: '/admin/analytics/growth', label: 'Growth', active: true },
-  { href: '/admin/analytics/activity', label: 'Activity' },
+  { href: '/admin/analytics', header: 'Overview' },
+  { href: '/admin/analytics/users', header: 'Users' },
+  { href: '/admin/analytics/revenue', header: 'Revenue' },
+  { href: '/admin/analytics/growth', header: 'Growth', active: true },
+  { href: '/admin/analytics/activity', header: 'Activity' },
 ];
 
 function formatPct(value: number): string {
@@ -85,8 +85,8 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
           subtitle="Growth rates, funnels, and acquisition channels"
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
-          backHref="/admin/analytics"
-          backLabel="Overview"
+          
+          
         />
 
         {/* Growth Rate Metrics */}
@@ -99,13 +99,13 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
               positive: metrics.userGrowthRate >= 0,
             }}
             icon={<Users className="h-5 w-5" />}
-            color={metrics.userGrowthRate >= 0 ? 'emerald' : 'red'}
+            colors={[metrics.userGrowthRate >= 0 ? 'emerald' : 'red']}
           />
           <MetricCard
             title="Revenue Growth"
             value={formatPct(metrics.revenueGrowthRate)}
             icon={<DollarSign className="h-5 w-5" />}
-            color={metrics.revenueGrowthRate >= 0 ? 'emerald' : 'red'}
+            colors={[metrics.revenueGrowthRate >= 0 ? 'emerald' : 'red']}
           />
           <MetricCard
             title="Merchant Growth"
@@ -115,13 +115,13 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
               positive: metrics.merchantGrowthRate >= 0,
             }}
             icon={<Building2 className="h-5 w-5" />}
-            color={metrics.merchantGrowthRate >= 0 ? 'blue' : 'red'}
+            colors={[metrics.merchantGrowthRate >= 0 ? 'blue' : 'red']}
           />
           <MetricCard
             title="Churn Rate"
             value={`${metrics.churnRate.toFixed(1)}%`}
             icon={<UserMinus className="h-5 w-5" />}
-            color={metrics.churnRate <= 5 ? 'emerald' : 'red'}
+            colors={[metrics.churnRate <= 5 ? 'emerald' : 'red']}
           />
         </div>
 
@@ -149,7 +149,7 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
             <FunnelChart
               data={conversionFunnel}
               stageKey="stage"
-              valueKey="value"
+              
               height={320}
               colors={['#3B82F6', '#6366F1', '#8B5CF6', '#10B981', '#F59E0B']}
             />
@@ -171,9 +171,9 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
           <ChartCard title="Acquisition Channels" subtitle="User signups by channel">
             <AnimatedBarChart
               data={channelAcquisition}
-              xKey="channel"
-              yKey="value"
-              color="#8B5CF6"
+              xAxisKey="channel"
+              dataKeys={["value"
+              colors={["#8B5CF6"]}
               height={280}
               horizontal
             />
@@ -183,11 +183,11 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
           <ChartCard title="Churn Analysis" subtitle="Weekly churn rate (%)">
             <AnimatedLineChart
               data={churnTrend}
-              xKey="date"
-              yKey="value"
-              color="#EF4444"
+              xAxisKey="date"
+              dataKeys={["value"
+              colors={["#EF4444"]}
               height={280}
-              formatY={(v: number) => `${v.toFixed(1)}%`}
+              %`}
               showDots
             />
           </ChartCard>
@@ -198,22 +198,22 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
           <StatComparison
             stats={[
               {
-                label: 'Views',
+                header: 'Views',
                 current: periodComparison.current.views,
                 previous: periodComparison.previous.views,
               },
               {
-                label: 'Purchases',
+                header: 'Purchases',
                 current: periodComparison.current.purchases,
                 previous: periodComparison.previous.purchases,
               },
               {
-                label: 'Conversions',
+                header: 'Conversions',
                 current: periodComparison.current.conversions,
                 previous: periodComparison.previous.conversions,
               },
               {
-                label: 'Revenue',
+                header: 'Revenue',
                 current: periodComparison.current.revenue,
                 previous: periodComparison.previous.revenue,
                 format: (v: number) =>

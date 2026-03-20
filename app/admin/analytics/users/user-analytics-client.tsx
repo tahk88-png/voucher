@@ -24,15 +24,15 @@ type UserAnalyticsData = {
   cohorts: { cohort: string; size: number; retention: number[] }[];
   activityHeatmap: { day: number; hour: number; value: number }[];
   topUsers: { id: string; name: string; purchases: number; totalSpent: number }[];
-  demographics: { label: string; value: number }[];
+  demographics: { header: string; value: number }[];
 };
 
 const navLinks = [
-  { href: '/admin/analytics', label: 'Overview' },
-  { href: '/admin/analytics/users', label: 'Users', active: true },
-  { href: '/admin/analytics/revenue', label: 'Revenue' },
-  { href: '/admin/analytics/growth', label: 'Growth' },
-  { href: '/admin/analytics/activity', label: 'Activity' },
+  { href: '/admin/analytics', header: 'Overview' },
+  { href: '/admin/analytics/users', header: 'Users', active: true },
+  { href: '/admin/analytics/revenue', header: 'Revenue' },
+  { href: '/admin/analytics/growth', header: 'Growth' },
+  { href: '/admin/analytics/activity', header: 'Activity' },
 ];
 
 export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData }) {
@@ -43,11 +43,11 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
   const dauMauRatio = dauWauMau.mau > 0 ? (dauWauMau.dau / dauWauMau.mau * 100).toFixed(1) : '0';
 
   const userColumns = [
-    { key: 'name', label: 'User' },
-    { key: 'purchases', label: 'Purchases' },
+    { key: 'name', header: 'User' },
+    { key: 'purchases', header: 'Purchases' },
     {
       key: 'totalSpent',
-      label: 'Total Spent',
+      header: 'Total Spent',
       render: (row: (typeof topUsers)[0]) =>
         new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(row.totalSpent),
     },
@@ -78,8 +78,8 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
           subtitle="User behavior, retention, and demographics"
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
-          backHref="/admin/analytics"
-          backLabel="Overview"
+          
+          
         />
 
         {/* DAU/WAU/MAU Metrics */}
@@ -88,31 +88,31 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
             title="DAU"
             value={dauWauMau.dau.toLocaleString()}
             icon={<Users className="h-5 w-5" />}
-            color="blue"
+            colors={["blue"]}
           />
           <MetricCard
             title="WAU"
             value={dauWauMau.wau.toLocaleString()}
             icon={<UserPlus className="h-5 w-5" />}
-            color="indigo"
+            colors={["indigo"]}
           />
           <MetricCard
             title="MAU"
             value={dauWauMau.mau.toLocaleString()}
             icon={<UserCheck className="h-5 w-5" />}
-            color="purple"
+            colors={["purple"]}
           />
           <MetricCard
             title="DAU/WAU"
             value={`${dauWauRatio}%`}
             icon={<Activity className="h-5 w-5" />}
-            color="emerald"
+            colors={["emerald"]}
           />
           <MetricCard
             title="DAU/MAU"
             value={`${dauMauRatio}%`}
             icon={<Activity className="h-5 w-5" />}
-            color="orange"
+            colors={["orange"]}
           />
         </div>
 
@@ -121,9 +121,9 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
           <ChartCard title="New Users" subtitle="Daily registrations (30 days)">
             <AnimatedBarChart
               data={newUsersOverTime}
-              xKey="date"
-              yKey="value"
-              color="#3B82F6"
+              xAxisKey="date"
+              dataKeys={["value"
+              colors={["#3B82F6"]}
               height={280}
             />
           </ChartCard>
@@ -133,7 +133,7 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
             <FunnelChart
               data={signupFunnel}
               stageKey="stage"
-              valueKey="value"
+              
               height={280}
               colors={['#3B82F6', '#8B5CF6', '#10B981', '#F59E0B']}
             />
@@ -150,12 +150,12 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
                 value: Math.round(r * 100),
               }))
             )}
-            xKey="x"
-            yKey="y"
-            valueKey="value"
+            xAxisKey="x"
+            dataKeys={["y"
+            
             height={300}
-            colorScale={['#FEF3C7', '#F59E0B', '#D97706', '#92400E']}
-            formatValue={(v: number) => `${v}%`}
+            
+            %`}
           />
         </ChartCard>
 
@@ -168,11 +168,11 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
                 y: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.day],
                 value: d.value,
               }))}
-              xKey="x"
-              yKey="y"
-              valueKey="value"
+              xAxisKey="x"
+              dataKeys={["y"
+              
               height={250}
-              colorScale={['#EFF6FF', '#3B82F6', '#1D4ED8', '#1E3A5F']}
+              
             />
           </ChartCard>
 
@@ -180,8 +180,8 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
           <ChartCard title="User Demographics" subtitle="By country">
             <PieDonutChart
               data={demographics}
-              labelKey="label"
-              valueKey="value"
+              
+              
               height={250}
               donut
             />

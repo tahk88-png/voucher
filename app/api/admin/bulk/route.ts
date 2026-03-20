@@ -17,7 +17,7 @@ const VALID_TARGETS: TargetType[] = ['user', 'merchant', 'review'];
  */
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
-    const admin = await requireAdminPermission('admin.moderation.write');
+    const admin = await requireAdminPermission('admin.moderation.action');
 
     const body = await req.json();
     const { action, targetType, ids, reason } = body as {
@@ -124,7 +124,7 @@ async function handleUserAction(userId: string, action: BulkAction) {
     case 'suspend':
       await prisma.user.update({
         where: { id: userId },
-        data: { status: 'suspended' },
+        data: { status: 'disabled' },
       });
       break;
     case 'approve':
@@ -134,11 +134,11 @@ async function handleUserAction(userId: string, action: BulkAction) {
       });
       break;
     case 'delete':
-      // Soft-delete: set status and anonymize
+      // Soft-delete: disable and anonymize
       await prisma.user.update({
         where: { id: userId },
         data: {
-          status: 'deleted',
+          status: 'disabled',
           email: `deleted_${userId}@deleted.local`,
           name: 'Deleted User',
         },
@@ -151,21 +151,16 @@ async function handleMerchantAction(merchantId: string, action: BulkAction) {
   switch (action) {
     case 'ban':
     case 'suspend':
+    case 'delete':
       await prisma.merchant.update({
         where: { id: merchantId },
-        data: { status: 'inactive' },
+        data: { isActive: false },
       });
       break;
     case 'approve':
       await prisma.merchant.update({
         where: { id: merchantId },
-        data: { status: 'active' },
-      });
-      break;
-    case 'delete':
-      await prisma.merchant.update({
-        where: { id: merchantId },
-        data: { status: 'inactive' },
+        data: { isActive: true },
       });
       break;
   }
@@ -176,21 +171,13 @@ async function handleReviewAction(reportId: string, action: BulkAction) {
     case 'approve':
       await prisma.moderationAction.update({
         where: { id: reportId },
-        data: { status: 'resolved' },
+        data: { reversedAt: new Date(), reversalReason: 'Bulk approved by admin' },
       });
       break;
     case 'delete':
     case 'ban':
-      await prisma.moderationAction.update({
-        where: { id: reportId },
-        data: { status: 'dismissed' },
-      });
-      break;
     case 'suspend':
-      await prisma.moderationAction.update({
-        where: { id: reportId },
-        data: { status: 'under_review' },
-      });
+      // ModerationAction records are immutable action logs — no status field to update
       break;
   }
 }

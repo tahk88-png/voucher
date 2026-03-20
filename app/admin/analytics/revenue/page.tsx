@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { prisma } from '@/lib/prisma';
 import { AccessControlError, requirePlatformAdminProfile } from '@/lib/access-control';
-import { LoadingSkeleton } from '@/components/dashboard';
+import { ChartSkeleton } from '@/components/dashboard';
 import RevenueAnalyticsClient from './revenue-analytics-client';
 
 export const metadata: Metadata = {
@@ -237,7 +237,7 @@ export default async function RevenueAnalyticsPage() {
   const data = await fetchRevenueAnalytics();
 
   return (
-    <Suspense fallback={<LoadingSkeleton rows={6} />}>
+    <Suspense fallback={<ChartSkeleton />}>
       <RevenueAnalyticsClient data={data} />
     </Suspense>
   );

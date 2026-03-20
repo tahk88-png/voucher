@@ -73,7 +73,7 @@ export default async function VoucherPage({ params }: { params: { id: string } }
 
   // Generate voucher code
   const voucherCode = `${voucher.codePrefix || 'V'}-${voucher.id.slice(0, 8).toUpperCase()}`;
-  const headersList = headers();
+  const headersList = await headers();
   const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
   const proto =
     headersList.get('x-forwarded-proto') ||

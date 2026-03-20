@@ -7,6 +7,7 @@ import { rateLimit } from '@/lib/rate-limit';
 import { withErrorHandler } from '@/lib/error-handler';
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{slug: string}> }) {
+  const { slug } = await params;
   // Rate limit: 60 redemptions per minute per merchant slug
   const rl = rateLimit(`redeem:${slug}`, 60, 60_000);
   if (!rl.allowed) {
@@ -14,7 +15,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{slug
   }
 
   return withErrorHandler(async () => {
-  const { slug } = await params
     const { profile, merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_staff');
     const { type, id, amountBeforeDiscount } = await req.json();
 

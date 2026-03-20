@@ -22,14 +22,14 @@ export default async function WishlistPage() {
           status: true,
           validFrom: true,
           validTo: true,
-          merchant: { select: { id: true, name: true, slug: true, logoUrl: true } },
+          merchant: { select: { id: true, name: true, slug: true, brandLogoUrl: true } },
         },
       },
       campaign: {
         select: { id: true, name: true, status: true },
       },
       merchant: {
-        select: { id: true, name: true, slug: true, logoUrl: true },
+        select: { id: true, name: true, slug: true, brandLogoUrl: true },
       },
     },
     orderBy: { createdAt: 'desc' },

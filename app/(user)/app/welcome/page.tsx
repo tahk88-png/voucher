@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { WarmButton } from '@/components/ui/warm-button';
-import { WarmCard } from '@/components/ui/warm-card';
+import { WarmButton } from '@/components/warm-button';
+import { WarmCard } from '@/components/warm-card';
 import {
   Ticket,
   Gift,

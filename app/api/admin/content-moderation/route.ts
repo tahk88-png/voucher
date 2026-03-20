@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
-    const ctx = await requireAdminPermission('admin.moderation.write');
+    const ctx = await requireAdminPermission('admin.moderation.action');
 
     const body = await req.json();
     const { reviewId, action } = body;

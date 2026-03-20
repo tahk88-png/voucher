@@ -687,7 +687,7 @@ export async function POST(req: NextRequest) {
                     currency: charge.currency,
                     isPartial: refundAmount < charge.amount,
                     reason: 'stripe_refund',
-                    status: 'refund_completed',
+                    status: 'refund_succeeded',
                   },
                 });
               }

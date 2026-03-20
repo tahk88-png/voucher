@@ -32,7 +32,7 @@ export async function GET(
 
   const memberCheck = await prisma.merchantMember.findUnique({
     where: {
-      userId_merchantId: { userId: session.user.id, merchantId: merchant.id },
+      merchantId_userId: { merchantId: merchant.id, userId: session.user.id },
     },
     select: { role: true },
   });
@@ -64,7 +64,7 @@ export async function GET(
               where: { merchantId, createdAt: { gte: dayStart } },
             }),
             prisma.redemption.count({
-              where: { merchantId, confirmedAt: null, voidedAt: null },
+              where: { merchantId, confirmedAt: null },
             }),
           ]);
           send({ type: 'stats', today, pending });

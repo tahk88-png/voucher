@@ -38,7 +38,7 @@ type RevenueAnalyticsData = {
   };
   revenueOverTime: { date: string; value: number }[];
   aovTrend: { date: string; value: number }[];
-  revenueByType: { label: string; value: number }[];
+  revenueByType: { header: string; value: number }[];
   topMerchants: {
     id: string;
     name: string;
@@ -48,15 +48,15 @@ type RevenueAnalyticsData = {
     transactions: number;
   }[];
   geoRevenue: { country: string; count: number }[];
-  paymentMethods: { label: string; value: number }[];
+  paymentMethods: { header: string; value: number }[];
 };
 
 const navLinks = [
-  { href: '/admin/analytics', label: 'Overview' },
-  { href: '/admin/analytics/users', label: 'Users' },
-  { href: '/admin/analytics/revenue', label: 'Revenue', active: true },
-  { href: '/admin/analytics/growth', label: 'Growth' },
-  { href: '/admin/analytics/activity', label: 'Activity' },
+  { href: '/admin/analytics', header: 'Overview' },
+  { href: '/admin/analytics/users', header: 'Users' },
+  { href: '/admin/analytics/revenue', header: 'Revenue', active: true },
+  { href: '/admin/analytics/growth', header: 'Growth' },
+  { href: '/admin/analytics/activity', header: 'Activity' },
 ];
 
 function formatCurrency(value: number): string {
@@ -80,7 +80,7 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
   const merchantColumns = [
     {
       key: 'name',
-      label: 'Merchant',
+      header: 'Merchant',
       render: (row: (typeof topMerchants)[0]) => (
         <Link href={`/merchant/${row.slug}`} className="text-[var(--primary)] hover:underline font-medium">
           {row.name}
@@ -89,15 +89,15 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
     },
     {
       key: 'revenue',
-      label: 'Revenue',
+      header: 'Revenue',
       render: (row: (typeof topMerchants)[0]) => formatCurrency(row.revenue),
     },
     {
       key: 'fees',
-      label: 'Platform Fees',
+      header: 'Platform Fees',
       render: (row: (typeof topMerchants)[0]) => formatCurrency(row.fees),
     },
-    { key: 'transactions', label: 'Transactions' },
+    { key: 'transactions', header: 'Transactions' },
   ];
 
   return (
@@ -125,8 +125,8 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           subtitle="Financial performance and revenue breakdown"
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
-          backHref="/admin/analytics"
-          backLabel="Overview"
+          
+          
         />
 
         {/* Key Metrics */}
@@ -136,25 +136,25 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
             value={formatCurrency(metrics.currentRevenue)}
             change={revenueChange}
             icon={<DollarSign className="h-5 w-5" />}
-            color="emerald"
+            colors={["emerald"]}
           />
           <MetricCard
             title="MRR"
             value={formatCurrency(metrics.mrr)}
             icon={<TrendingUp className="h-5 w-5" />}
-            color="blue"
+            colors={["blue"]}
           />
           <MetricCard
             title="ARR"
             value={formatCurrency(metrics.arr)}
             icon={<Building2 className="h-5 w-5" />}
-            color="purple"
+            colors={["purple"]}
           />
           <MetricCard
             title="Avg Order Value"
             value={formatCurrency(metrics.avgOrderValue)}
             icon={<CreditCard className="h-5 w-5" />}
-            color="orange"
+            colors={["orange"]}
           />
         </div>
 
@@ -171,7 +171,7 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
               </p>
             </div>
             <div className="w-24">
-              <Sparkline data={metrics.refundSparkline} color="#EF4444" height={40} />
+              <Sparkline data={metrics.refundSparkline} colors={["#EF4444"]} height={40} />
             </div>
           </div>
           <div className="bg-white rounded-xl border border-[var(--border,#E8E0D4)] p-5 flex items-center gap-4">
@@ -189,12 +189,12 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
         <ChartCard title="Revenue Over Time" subtitle="Daily revenue (30 days)">
           <AnimatedAreaChart
             data={revenueOverTime}
-            xKey="date"
-            yKey="value"
-            color="#10B981"
+            xAxisKey="date"
+            dataKeys={["value"
+            colors={["#10B981"]}
             gradient
             height={320}
-            formatY={(v: number) => formatCurrency(v)}
+            
           />
         </ChartCard>
 
@@ -203,11 +203,11 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           <ChartCard title="Revenue by Product Type" subtitle="Breakdown by category">
             <PieDonutChart
               data={revenueByType}
-              labelKey="label"
-              valueKey="value"
+              
+              
               height={280}
               donut
-              formatValue={(v: number) => formatCurrency(v)}
+              
             />
           </ChartCard>
 
@@ -215,11 +215,11 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           <ChartCard title="Average Order Value" subtitle="Daily trend (30 days)">
             <AnimatedLineChart
               data={aovTrend}
-              xKey="date"
-              yKey="value"
-              color="#F59E0B"
+              xAxisKey="date"
+              dataKeys={["value"
+              colors={["#F59E0B"]}
               height={280}
-              formatY={(v: number) => formatCurrency(v)}
+              
             />
           </ChartCard>
         </AnalyticsGrid>
@@ -229,10 +229,10 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           <ChartCard title="Revenue by Country" subtitle="Geographic distribution">
             <GeoMap
               data={geoRevenue}
-              valueKey="count"
-              labelKey="country"
+              
+              
               height={300}
-              formatValue={(v: number) => formatCurrency(v)}
+              
             />
           </ChartCard>
 
@@ -240,11 +240,11 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           <ChartCard title="Payment Methods" subtitle="Distribution by payment type">
             <PieDonutChart
               data={paymentMethods}
-              labelKey="label"
-              valueKey="value"
+              
+              
               height={300}
               donut
-              formatValue={(v: number) => formatCurrency(v)}
+              
             />
           </ChartCard>
         </AnalyticsGrid>

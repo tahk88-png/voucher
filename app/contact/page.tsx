@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { WarmButton } from '@/components/ui/warm-button';
+import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Mail, MessageSquare, MapPin, Clock } from 'lucide-react';

@@ -22,7 +22,7 @@ export async function GET() {
             status: true,
             validFrom: true,
             validTo: true,
-            merchant: { select: { id: true, name: true, slug: true, logoUrl: true } },
+            merchant: { select: { id: true, name: true, slug: true, brandLogoUrl: true } },
           },
         },
         campaign: {
@@ -37,7 +37,7 @@ export async function GET() {
             id: true,
             name: true,
             slug: true,
-            logoUrl: true,
+            brandLogoUrl: true,
           },
         },
       },

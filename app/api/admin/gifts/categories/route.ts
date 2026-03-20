@@ -27,7 +27,7 @@ export async function GET(_req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
-    await requireAdminPermission('manage_flags');
+    await requireAdminPermission('admin.flags.manage');
 
     const body = await req.json();
     const parsed = createCategorySchema.safeParse(body);

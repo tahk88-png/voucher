@@ -5,6 +5,7 @@ import { rateLimit } from '@/lib/rate-limit';
 import { withErrorHandler } from '@/lib/error-handler';
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{slug: string}> }) {
+  const { slug } = await params;
   // Rate limit: 120 scans per minute per merchant slug
   const rl = rateLimit(`scan:${slug}`, 120, 60_000);
   if (!rl.allowed) {
@@ -12,7 +13,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{slug
   }
 
   return withErrorHandler(async () => {
-  const { slug } = await params
     const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_staff');
     const { code } = await req.json();
 

@@ -51,21 +51,13 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Send OTP for email verification (fire-and-forget)
+    // Send welcome email (fire-and-forget)
     try {
-      const otp = String(Math.floor(100000 + Math.random() * 900000));
-      await prisma.verificationToken.create({
-        data: {
-          email: normalizedEmail,
-          token: otp,
-          expires: new Date(Date.now() + 10 * 60 * 1000),
-        },
-      });
-      import('@/lib/emails').then(({ sendOTPEmail }) => {
-        sendOTPEmail({ to: normalizedEmail, otp }).catch(() => {});
+      import('@/lib/emails').then(({ sendWelcomeEmail }) => {
+        sendWelcomeEmail({ to: normalizedEmail, name: name.trim() }).catch(() => {});
       });
     } catch {
-      // Non-critical — user can request OTP again on login
+      // Non-critical
     }
 
     return NextResponse.json({ ok: true });

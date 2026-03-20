@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(_req: NextRequest) {
   return withErrorHandler(async () => {
-    await requireAdminPermission('view_analytics');
+    await requireAdminPermission('admin.analytics.read');
 
     const [
       totalProducts,

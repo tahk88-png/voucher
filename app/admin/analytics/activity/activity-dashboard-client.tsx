@@ -44,11 +44,11 @@ type ActivityData = {
 };
 
 const navLinks = [
-  { href: '/admin/analytics', label: 'Overview' },
-  { href: '/admin/analytics/users', label: 'Users' },
-  { href: '/admin/analytics/revenue', label: 'Revenue' },
-  { href: '/admin/analytics/growth', label: 'Growth' },
-  { href: '/admin/analytics/activity', label: 'Activity', active: true },
+  { href: '/admin/analytics', header: 'Overview' },
+  { href: '/admin/analytics/users', header: 'Users' },
+  { href: '/admin/analytics/revenue', header: 'Revenue' },
+  { href: '/admin/analytics/growth', header: 'Growth' },
+  { href: '/admin/analytics/activity', header: 'Activity', active: true },
 ];
 
 function formatCurrency(value: number): string {
@@ -90,11 +90,11 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
   }));
 
   const voucherColumns = [
-    { key: 'title', label: 'Voucher' },
-    { key: 'purchases', label: 'Purchases' },
+    { key: 'title', header: 'Voucher' },
+    { key: 'purchases', header: 'Purchases' },
     {
       key: 'revenue',
-      label: 'Revenue',
+      header: 'Revenue',
       render: (row: (typeof topVouchers)[0]) => formatCurrency(row.revenue),
     },
   ];
@@ -124,8 +124,8 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
           subtitle="Real-time platform activity and event monitoring"
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
-          backHref="/admin/analytics"
-          backLabel="Overview"
+          
+          
         />
 
         {/* Live Activity Status */}
@@ -157,7 +157,7 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
             }
           >
             <div className="max-h-[400px] overflow-y-auto">
-              <ActivityFeed events={feedEvents} maxItems={20} />
+              <ActivityFeed events={feedEvents} maxHeight={400} />
             </div>
           </ChartCard>
 
@@ -166,7 +166,7 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
             <LiveActivityChart
               channel="admin-activity"
               height={400}
-              color="#10B981"
+              colors={["#10B981"]}
             />
           </ChartCard>
         </AnalyticsGrid>
@@ -175,9 +175,9 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
         <ChartCard title="Events Per Hour" subtitle="Last 24 hours">
           <AnimatedBarChart
             data={eventsPerHour}
-            xKey="hour"
-            yKey="value"
-            color="#6366F1"
+            xAxisKey="hour"
+            dataKeys={["value"
+            colors={["#6366F1"]}
             height={280}
           />
         </ChartCard>
@@ -201,11 +201,11 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
                 y: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.day],
                 value: d.value,
               }))}
-              xKey="x"
-              yKey="y"
-              valueKey="value"
+              xAxisKey="x"
+              dataKeys={["y"
+              
               height={250}
-              colorScale={['#FEF3C7', '#F59E0B', '#D97706', '#92400E']}
+              
             />
           </ChartCard>
         </AnalyticsGrid>

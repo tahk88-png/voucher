@@ -43,7 +43,7 @@ export default async function AdminGiftsPage() {
     prisma.giftPersona.count(),
     prisma.giftFeedModule.count({ where: { isActive: true } }),
     prisma.sponsoredGiftPlacement.count({
-      where: { isActive: true, startDate: { lte: new Date() }, endDate: { gte: new Date() } },
+      where: { isActive: true, startAt: { lte: new Date() }, endAt: { gte: new Date() } },
     }),
     prisma.userGiftInteraction.count(),
     prisma.giftProduct.findMany({

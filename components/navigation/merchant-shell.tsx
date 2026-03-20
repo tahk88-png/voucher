@@ -28,6 +28,12 @@ import {
   Star,
   ScrollText,
   Key,
+  Mail,
+  CalendarCheck,
+  Package,
+  Webhook,
+  DollarSign,
+  Boxes,
 } from "lucide-react"
 import { WarmButton } from "@/components/warm-button"
 import { cn } from "@/lib/utils"
@@ -46,7 +52,7 @@ interface MerchantShellProps {
 }
 
 const navItems = [
-  { labelKey: "dashboard", fallback: "Dashboard", icon: LayoutDashboard, href: (slug: string) => `/merchant/${slug}/dashboard`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "dashboard", fallback: "Dashboard", icon: LayoutDashboard, href: (slug: string) => `/merchant/${slug}`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "vouchers", fallback: "Vouchers", icon: Gift, href: (slug: string) => `/merchant/${slug}/vouchers`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "giftCards", fallback: "Gift Cards", icon: CreditCard, href: (slug: string) => `/merchant/${slug}/gift-cards`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "campaigns", fallback: "Campaigns", icon: Megaphone, href: (slug: string) => `/merchant/${slug}/campaigns`, minRole: "merchant_staff" as TenantMembershipRole },
@@ -60,6 +66,12 @@ const navItems = [
   { labelKey: "reviews", fallback: "Reviews", icon: Star, href: (slug: string) => `/merchant/${slug}/reviews`, minRole: "merchant_staff" as TenantMembershipRole },
   { labelKey: "team", fallback: "Team", icon: Users, href: (slug: string) => `/merchant/${slug}/members`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "auditLog", fallback: "Audit Log", icon: ScrollText, href: (slug: string) => `/merchant/${slug}/audit-log`, minRole: "merchant_admin" as TenantMembershipRole },
+  { labelKey: "emailCampaigns", fallback: "Email Campaigns", icon: Mail, href: (slug: string) => `/merchant/${slug}/email-campaigns`, minRole: "merchant_admin" as TenantMembershipRole },
+  { labelKey: "appointments", fallback: "Appointments", icon: CalendarCheck, href: (slug: string) => `/merchant/${slug}/appointments`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "rentals", fallback: "Rentals", icon: Package, href: (slug: string) => `/merchant/${slug}/rentals`, minRole: "merchant_staff" as TenantMembershipRole },
+  { labelKey: "subscriptionBoxes", fallback: "Subscription Boxes", icon: Boxes, href: (slug: string) => `/merchant/${slug}/subscription-boxes`, minRole: "merchant_admin" as TenantMembershipRole },
+  { labelKey: "pricing", fallback: "Pricing Rules", icon: DollarSign, href: (slug: string) => `/merchant/${slug}/pricing`, minRole: "merchant_admin" as TenantMembershipRole },
+  { labelKey: "webhooks", fallback: "Webhooks", icon: Webhook, href: (slug: string) => `/merchant/${slug}/settings/webhooks`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "pageBuilder", fallback: "Page Builder", icon: LayoutTemplate, href: (slug: string) => `/merchant/${slug}/page-builder`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "apiKeys", fallback: "API Keys", icon: Key, href: (slug: string) => `/merchant/${slug}/settings/api-keys`, minRole: "merchant_admin" as TenantMembershipRole },
   { labelKey: "settings", fallback: "Settings & Billing", icon: Settings, href: (slug: string) => `/merchant/${slug}/settings`, minRole: "merchant_admin" as TenantMembershipRole },

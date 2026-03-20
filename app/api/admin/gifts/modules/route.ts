@@ -18,7 +18,7 @@ const createModuleSchema = z.object({
 
 export async function GET(_req: NextRequest) {
   return withErrorHandler(async () => {
-    await requireAdminPermission('manage_flags');
+    await requireAdminPermission('admin.flags.manage');
 
     const modules = await prisma.giftFeedModule.findMany({
       include: {
@@ -39,7 +39,7 @@ export async function GET(_req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
-    await requireAdminPermission('manage_flags');
+    await requireAdminPermission('admin.flags.manage');
 
     const body = await req.json();
     const parsed = createModuleSchema.safeParse(body);

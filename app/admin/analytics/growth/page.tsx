@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { prisma } from '@/lib/prisma';
 import { AccessControlError, requirePlatformAdminProfile } from '@/lib/access-control';
-import { LoadingSkeleton } from '@/components/dashboard';
+import { ChartSkeleton } from '@/components/dashboard';
 import GrowthAnalyticsClient from './growth-analytics-client';
 
 export const metadata: Metadata = {
@@ -180,7 +180,7 @@ export default async function GrowthAnalyticsPage() {
   const data = await fetchGrowthAnalytics();
 
   return (
-    <Suspense fallback={<LoadingSkeleton rows={6} />}>
+    <Suspense fallback={<ChartSkeleton />}>
       <GrowthAnalyticsClient data={data} />
     </Suspense>
   );

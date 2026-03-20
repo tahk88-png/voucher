@@ -58,11 +58,11 @@ type OverviewData = {
 };
 
 const navLinks = [
-  { href: '/admin/analytics', label: 'Overview', active: true },
-  { href: '/admin/analytics/users', label: 'Users' },
-  { href: '/admin/analytics/revenue', label: 'Revenue' },
-  { href: '/admin/analytics/growth', label: 'Growth' },
-  { href: '/admin/analytics/activity', label: 'Activity' },
+  { href: '/admin/analytics', header: 'Overview', active: true },
+  { href: '/admin/analytics/users', header: 'Users' },
+  { href: '/admin/analytics/revenue', header: 'Revenue' },
+  { href: '/admin/analytics/growth', header: 'Growth' },
+  { href: '/admin/analytics/activity', header: 'Activity' },
 ];
 
 function formatCurrency(value: number): string {
@@ -90,13 +90,13 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
   const { metrics, revenueTrend, userGrowth, topMerchants, activityFeed, geoData } = data;
 
   const merchantColumns = [
-    { key: 'name', label: 'Merchant', render: (row: (typeof topMerchants)[0]) => (
+    { key: 'name', header: 'Merchant', render: (row: (typeof topMerchants)[0]) => (
       <Link href={`/merchant/${row.slug}`} className="text-[var(--primary)] hover:underline font-medium">
         {row.name}
       </Link>
     )},
-    { key: 'revenue', label: 'Revenue', render: (row: (typeof topMerchants)[0]) => formatCurrency(row.revenue) },
-    { key: 'transactions', label: 'Transactions' },
+    { key: 'revenue', header: 'Revenue', render: (row: (typeof topMerchants)[0]) => formatCurrency(row.revenue) },
+    { key: 'transactions', header: 'Transactions' },
   ];
 
   return (
@@ -146,8 +146,8 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
           subtitle="Platform performance at a glance"
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
-          backHref="/admin"
-          backLabel="Admin"
+          
+          
         />
 
         {/* Metric Cards */}
@@ -157,28 +157,28 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
             value={formatCurrency(metrics.totalRevenue)}
             change={formatChange(metrics.revenueChange)}
             icon={<DollarSign className="h-5 w-5" />}
-            color="emerald"
+            colors={["emerald"]}
           />
           <MetricCard
             title="Active Users"
             value={metrics.activeUsers.toLocaleString()}
             change={formatChange(metrics.usersChange)}
             icon={<Users className="h-5 w-5" />}
-            color="blue"
+            colors={["blue"]}
           />
           <MetricCard
             title="Conversions"
             value={metrics.conversions.toLocaleString()}
             change={formatChange(metrics.conversionsChange)}
             icon={<ShoppingCart className="h-5 w-5" />}
-            color="purple"
+            colors={["purple"]}
           />
           <MetricCard
             title="Avg Order Value"
             value={formatCurrency(metrics.avgOrderValue)}
             change={formatChange(metrics.aovChange)}
             icon={<BarChart3 className="h-5 w-5" />}
-            color="orange"
+            colors={["orange"]}
           />
         </div>
 
@@ -187,12 +187,12 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
           <ChartCard title="Revenue Trend" subtitle="Last 30 days">
             <AnimatedAreaChart
               data={revenueTrend}
-              xKey="date"
-              yKey="value"
-              color="var(--primary, #8B5A2B)"
+              xAxisKey="date"
+              dataKeys={["value"
+              colors={["var(--primary, #8B5A2B)"]}
               gradient
               height={280}
-              formatY={(v: number) => formatCurrency(v)}
+              
             />
           </ChartCard>
 
@@ -200,9 +200,9 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
           <ChartCard title="User Growth" subtitle="New users per day">
             <AnimatedLineChart
               data={userGrowth}
-              xKey="date"
-              yKey="value"
-              color="#3B82F6"
+              xAxisKey="date"
+              dataKeys={["value"
+              colors={["#3B82F6"]}
               height={280}
               showDots
             />
@@ -232,7 +232,7 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
                   : e.actorName,
                 timestamp: e.createdAt,
               }))}
-              maxItems={10}
+              maxHeight={400}
             />
           </ChartCard>
 
@@ -253,8 +253,8 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
         <ChartCard title="Geographic Distribution" subtitle="Users by country">
           <GeoMap
             data={geoData}
-            valueKey="count"
-            labelKey="country"
+            
+            
             height={350}
           />
         </ChartCard>
