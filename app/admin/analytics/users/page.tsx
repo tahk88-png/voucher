@@ -29,9 +29,9 @@ async function fetchUserAnalytics() {
     usersWithPurchases,
   ] = await Promise.all([
     prisma.user.count(),
-    prisma.user.count({ where: { lastActiveAt: { gte: oneDayAgo } } }),
-    prisma.user.count({ where: { lastActiveAt: { gte: sevenDaysAgo } } }),
-    prisma.user.count({ where: { lastActiveAt: { gte: thirtyDaysAgo } } }),
+    prisma.user.count({ where: { updatedAt: { gte: oneDayAgo } } }),
+    prisma.user.count({ where: { updatedAt: { gte: sevenDaysAgo } } }),
+    prisma.user.count({ where: { updatedAt: { gte: thirtyDaysAgo } } }),
     // New users per day (last 30 days)
     prisma.user.findMany({
       where: { createdAt: { gte: thirtyDaysAgo } },
@@ -40,25 +40,25 @@ async function fetchUserAnalytics() {
     }),
     // Top users by activity (purchases)
     prisma.voucherPurchase.groupBy({
-      by: ['buyerId'],
+      by: ['userId'],
       where: { status: 'paid', createdAt: { gte: thirtyDaysAgo } },
       _count: true,
       _sum: { amount: true },
-      orderBy: { _count: { buyerId: 'desc' } },
+      orderBy: { _count: { userId: 'desc' } },
       take: 20,
     }),
-    // Demographics by country
+    // Demographics by language (as geographic proxy)
     prisma.user.groupBy({
-      by: ['country'],
+      by: ['preferredLanguage'],
       _count: true,
-      orderBy: { _count: { country: 'desc' } },
+      orderBy: { _count: { preferredLanguage: 'desc' } },
       take: 15,
     }),
     // Verified users count
     prisma.user.count({ where: { emailVerified: { not: null } } }),
     // Users who made at least one purchase
     prisma.voucherPurchase.groupBy({
-      by: ['buyerId'],
+      by: ['userId'],
       where: { status: 'paid' },
       _count: true,
     }),
@@ -102,7 +102,7 @@ async function fetchUserAnalytics() {
       const activeInMonth = await prisma.user.count({
         where: {
           createdAt: { gte: cohortStart, lt: cohortEnd },
-          lastActiveAt: { gte: checkStart, lt: checkEnd },
+          updatedAt: { gte: checkStart, lt: checkEnd },
         },
       });
       retention.push(cohortUsers > 0 ? activeInMonth / cohortUsers : 0);
@@ -119,14 +119,14 @@ async function fetchUserAnalytics() {
   // Simplified: generate from last 7 days of activity
   const activityHeatmap: { day: number; hour: number; value: number }[] = [];
   const recentActive = await prisma.user.findMany({
-    where: { lastActiveAt: { gte: sevenDaysAgo } },
-    select: { lastActiveAt: true },
+    where: { updatedAt: { gte: sevenDaysAgo } },
+    select: { updatedAt: true },
   });
   const heatmapMap = new Map<string, number>();
   for (const u of recentActive) {
-    if (!u.lastActiveAt) continue;
-    const day = u.lastActiveAt.getDay();
-    const hour = u.lastActiveAt.getHours();
+    if (!u.updatedAt) continue;
+    const day = u.updatedAt.getDay();
+    const hour = u.updatedAt.getHours();
     const key = `${day}-${hour}`;
     heatmapMap.set(key, (heatmapMap.get(key) ?? 0) + 1);
   }
@@ -141,7 +141,7 @@ async function fetchUserAnalytics() {
   }
 
   // Resolve top user names
-  const buyerIds = topUsersByPurchases.map((u) => u.buyerId);
+  const buyerIds = topUsersByPurchases.map((u) => u.userId);
   const buyers = await prisma.user.findMany({
     where: { id: { in: buyerIds } },
     select: { id: true, name: true, email: true },
@@ -149,16 +149,16 @@ async function fetchUserAnalytics() {
   const buyerMap = new Map(buyers.map((b) => [b.id, b]));
 
   const topUsers = topUsersByPurchases.map((u) => ({
-    id: u.buyerId,
-    name: buyerMap.get(u.buyerId)?.name ?? buyerMap.get(u.buyerId)?.email ?? 'Unknown',
+    id: u.userId,
+    name: buyerMap.get(u.userId)?.name ?? buyerMap.get(u.userId)?.email ?? 'Unknown',
     purchases: u._count,
-    totalSpent: (u._sum.amount ?? 0) / 100,
+    totalSpent: (u._sum?.amount ?? 0) / 100,
   }));
 
   const demographics = usersByCountry
-    .filter((u) => u.country)
+    .filter((u) => u.preferredLanguage)
     .map((u) => ({
-      label: u.country!,
+      header: (u.preferredLanguage ?? 'unknown').toUpperCase(),
       value: u._count,
     }));
 

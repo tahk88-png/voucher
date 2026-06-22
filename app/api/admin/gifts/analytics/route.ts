@@ -30,7 +30,7 @@ export async function GET(_req: NextRequest) {
       prisma.giftPersona.count({ where: { isActive: true } }),
       prisma.giftFeedModule.count({ where: { isActive: true } }),
       prisma.sponsoredGiftPlacement.count({
-        where: { isActive: true, startDate: { lte: new Date() }, endDate: { gte: new Date() } },
+        where: { isActive: true, startAt: { lte: new Date() }, endAt: { gte: new Date() } },
       }),
       prisma.giftProduct.findMany({
         where: { isActive: true },

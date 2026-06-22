@@ -18,21 +18,22 @@ const statusLabel: Record<string, string> = {
 };
 
 const statusStyles: Record<string, string> = {
-  created: 'bg-[#F2EDE3] text-[#6B5744]',
-  opened: 'bg-[#FFE5B4] text-[#6B5744]',
-  redeemed: 'bg-[#9DB5A5] text-white',
+  created: 'bg-[#F2EDE3] text-[var(--text-muted)]',
+  opened: 'bg-[#f3e6c9] text-[#8a6420]',
+  redeemed: 'bg-[#6fae73] text-white',
   expired: 'bg-[#E5E7EB] text-[#6B7280]',
-  blocked: 'bg-[#E17B5C] text-white',
+  blocked: 'bg-[var(--danger)] text-white',
 };
 
-export default async function ReferralsPage({ params }: { params: { slug: string } }) {
+export default async function ReferralsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }
 
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   });
 
   if (!merchant) {
@@ -112,14 +113,14 @@ export default async function ReferralsPage({ params }: { params: { slug: string
       <div className="max-w-6xl mx-auto space-y-6">
         <Breadcrumbs
           items={[
-            { label: t('dashboard'), href: `/merchant/${params.slug}/dashboard` },
+            { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
             { label: t('referrals') },
           ]}
         />
 
         <div>
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Referral analytics</h1>
-          <p className="text-sm text-[#6B5744]">Track referral performance and rewards.</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">Referral analytics</h1>
+          <p className="text-sm text-[var(--text-muted)]">Track referral performance and rewards.</p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -150,15 +151,15 @@ export default async function ReferralsPage({ params }: { params: { slug: string
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
-          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+          <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-base font-semibold text-[#2D2721]">Status breakdown</h2>
-                <p className="text-sm text-[#6B5744]">Credits issued {formatCurrency(creditsIssued, merchant.defaultCurrency)}</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">Status breakdown</h2>
+                <p className="text-sm text-[var(--text-muted)]">Credits issued {formatCurrency(creditsIssued, merchant.defaultCurrency)}</p>
               </div>
             </div>
             {referralStats.length === 0 ? (
-              <p className="text-sm text-[#6B5744]">No referral activity yet.</p>
+              <p className="text-sm text-[var(--text-muted)]">No referral activity yet.</p>
             ) : (
               <div className="space-y-3">
                 {referralStats.map((stat) => {
@@ -167,11 +168,11 @@ export default async function ReferralsPage({ params }: { params: { slug: string
                   return (
                     <div key={stat.status}>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-[#6B5744]">{label}</span>
-                        <span className="font-semibold text-[#2D2721]">{stat._count.id}</span>
+                        <span className="text-[var(--text-muted)]">{label}</span>
+                        <span className="font-semibold text-[var(--text)]">{stat._count.id}</span>
                       </div>
                       <div className="mt-2 h-1.5 rounded-full bg-[#F2EDE3] overflow-hidden">
-                        <div className="h-full rounded-full bg-[#FFC857]" style={{ width: `${pct}%` }} />
+                        <div className="h-full rounded-full bg-[#cc785c]" style={{ width: `${pct}%` }} />
                       </div>
                     </div>
                   );
@@ -180,15 +181,15 @@ export default async function ReferralsPage({ params }: { params: { slug: string
             )}
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)] lg:col-span-2">
+          <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)] lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-base font-semibold text-[#2D2721]">Top referrers</h2>
-                <p className="text-sm text-[#6B5744]">Users driving the most referrals.</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">Top referrers</h2>
+                <p className="text-sm text-[var(--text-muted)]">Users driving the most referrals.</p>
               </div>
             </div>
             {topReferrers.length === 0 ? (
-              <p className="text-sm text-[#6B5744]">No referrals yet.</p>
+              <p className="text-sm text-[var(--text-muted)]">No referrals yet.</p>
             ) : (
               <div className="space-y-3">
                 {topReferrers.map((referrer) => {
@@ -196,12 +197,12 @@ export default async function ReferralsPage({ params }: { params: { slug: string
                   return (
                     <div key={referrer.referrerUserId} className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-[#2D2721]">
+                        <p className="text-sm font-medium text-[var(--text)]">
                           {user?.name || user?.email || 'Unknown user'}
                         </p>
-                        <p className="text-xs text-[#6B5744]">{user?.email}</p>
+                        <p className="text-xs text-[var(--text-muted)]">{user?.email}</p>
                       </div>
-                      <span className="text-sm font-semibold text-[#2D2721]">
+                      <span className="text-sm font-semibold text-[var(--text)]">
                         {referrer._count.id} referrals
                       </span>
                     </div>
@@ -212,15 +213,15 @@ export default async function ReferralsPage({ params }: { params: { slug: string
           </WarmCard>
         </div>
 
-        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+        <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-base font-semibold text-[#2D2721]">Recent referrals</h2>
-              <p className="text-sm text-[#6B5744]">Latest referrals from customers.</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">Recent referrals</h2>
+              <p className="text-sm text-[var(--text-muted)]">Latest referrals from customers.</p>
             </div>
           </div>
           {recentReferrals.length === 0 ? (
-            <p className="text-sm text-[#6B5744]">No recent referrals.</p>
+            <p className="text-sm text-[var(--text-muted)]">No recent referrals.</p>
           ) : (
             <div className="space-y-3">
               {recentReferrals.map((referral) => {
@@ -234,16 +235,16 @@ export default async function ReferralsPage({ params }: { params: { slug: string
                     className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3 rounded-[12px] bg-[#FFFBF5]"
                   >
                     <div>
-                      <p className="text-sm font-medium text-[#2D2721]">
+                      <p className="text-sm font-medium text-[var(--text)]">
                         {referral.referrer?.name || referral.referrer?.email || 'Unknown user'}
                       </p>
-                      <p className="text-xs text-[#6B5744]">{headline}</p>
+                      <p className="text-xs text-[var(--text-muted)]">{headline}</p>
                     </div>
                     <div className="flex items-center gap-3">
                       <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${statusClass}`}>
                         {label}
                       </span>
-                      <span className="text-xs text-[#8B7355]">
+                      <span className="text-xs text-[var(--text-faint)]">
                         {new Date(referral.createdAt).toLocaleDateString(undefined, { dateStyle: 'medium' })}
                       </span>
                     </div>

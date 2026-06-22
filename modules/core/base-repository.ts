@@ -103,8 +103,59 @@ export abstract class BaseRepository {
 }
 
 /**
- * Pagination helpers for repository queries
+ * Pagination helpers for repository queries.
+ *
+ * PREFER cursor-based pagination for all list endpoints.
+ * Offset-based kept for backwards compatibility only.
  */
+
+// ─── Cursor-based (preferred) ───
+
+export interface CursorPaginationParams {
+  cursor?: string | null;
+  limit?: number;
+}
+
+export interface CursorPaginatedResult<T> {
+  data: T[];
+  nextCursor: string | null;
+  hasMore: boolean;
+}
+
+const DEFAULT_LIMIT = 20;
+const MAX_LIMIT = 100;
+
+export function getCursorPaginationArgs(params: CursorPaginationParams) {
+  const limit = Math.min(Math.max(1, params.limit ?? DEFAULT_LIMIT), MAX_LIMIT);
+
+  if (!params.cursor) {
+    return { take: limit + 1 };
+  }
+
+  return {
+    take: limit + 1,
+    skip: 1,
+    cursor: { id: params.cursor },
+  };
+}
+
+export function buildCursorPaginatedResult<T extends { id: string }>(
+  items: T[],
+  limit: number = DEFAULT_LIMIT
+): CursorPaginatedResult<T> {
+  const effectiveLimit = Math.min(limit, MAX_LIMIT);
+  const hasMore = items.length > effectiveLimit;
+  const data = hasMore ? items.slice(0, effectiveLimit) : items;
+
+  return {
+    data,
+    nextCursor: hasMore ? data[data.length - 1]?.id ?? null : null,
+    hasMore,
+  };
+}
+
+// ─── Offset-based (legacy, backwards compat) ───
+
 export interface PaginationParams {
   page: number;
   limit: number;
@@ -118,12 +169,7 @@ export interface PaginatedResult<T> {
   pages: number;
 }
 
-/**
- * Apply pagination to query
- *
- * @param params Pagination params
- * @returns { skip, take } for Prisma query
- */
+/** @deprecated Use getCursorPaginationArgs instead for new endpoints. */
 export function getPaginationSkipTake(params: PaginationParams) {
   const page = Math.max(1, params.page);
   const limit = Math.min(100, Math.max(1, params.limit));
@@ -136,9 +182,7 @@ export function getPaginationSkipTake(params: PaginationParams) {
   };
 }
 
-/**
- * Build paginated result
- */
+/** @deprecated Use buildCursorPaginatedResult instead for new endpoints. */
 export function buildPaginatedResult<T>(
   data: T[],
   total: number,

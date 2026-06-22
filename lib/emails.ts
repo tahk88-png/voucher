@@ -315,6 +315,64 @@ If you have any questions, please contact ${params.inviterName}.
 }
 
 /**
+ * Send a B2B organization invitation email. The recipient follows a
+ * token link to /accept-invitation/[token] to join the org.
+ */
+export async function sendOrgInvitation(params: {
+  to: string;
+  orgName: string;
+  role: string;
+  inviterName: string;
+  token: string;
+}): Promise<void> {
+  if (!isResendConfigured()) {
+    console.warn('[Email] Resend not configured, skipping org invitation email');
+    return;
+  }
+
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const acceptUrl = `${baseUrl}/accept-invitation/${params.token}`;
+  const roleLabel = params.role.charAt(0).toUpperCase() + params.role.slice(1);
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <body style="font-family: system-ui, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h1 style="color: #18181b;">You've been invited to ${params.orgName}</h1>
+        <p>Hi there,</p>
+        <p><strong>${params.inviterName}</strong> has invited you to join <strong>${params.orgName}</strong> as a <strong>${roleLabel}</strong>.</p>
+        <p style="margin: 30px 0;">
+          <a href="${acceptUrl}" style="background-color: #18181b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+            Accept invitation
+          </a>
+        </p>
+        <p style="color: #666; font-size: 14px;">
+          This invitation expires in 72 hours. If you weren't expecting it, you can ignore this email.
+        </p>
+      </body>
+    </html>
+  `;
+
+  const text = `
+You've been invited to ${params.orgName}
+
+${params.inviterName} has invited you to join ${params.orgName} as a ${roleLabel}.
+
+Accept the invitation: ${acceptUrl}
+
+This invitation expires in 72 hours. If you weren't expecting it, you can ignore this email.
+  `.trim();
+
+  await sendEmail({
+    to: params.to,
+    subject: `You've been invited to ${params.orgName}`,
+    html,
+    text,
+    tags: [{ name: 'type', value: 'org_invitation' }],
+  });
+}
+
+/**
  * Send merchant announcement email (campaign/voucher)
  */
 export async function sendMerchantAnnouncement(params: {

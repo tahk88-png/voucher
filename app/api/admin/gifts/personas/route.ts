@@ -28,7 +28,8 @@ export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
     await requireAdminPermission('admin.flags.manage');
 
-    const body = await req.json();
+    const body = await req.json().catch(() => null);
+    if (!body) return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
     const parsed = createPersonaSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json({ error: 'Invalid input', details: parsed.error.flatten().fieldErrors }, { status: 400 });

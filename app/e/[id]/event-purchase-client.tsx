@@ -38,7 +38,7 @@ export default function EventPurchaseClient({
   const [attendeeName, setAttendeeName] = useState('');
   const [attendeeEmail, setAttendeeEmail] = useState('');
   const [isPurchasing, setIsPurchasing] = useState(false);
-  const accentColor = brandColors?.primary || '#FFC857';
+  const accentColor = brandColors?.primary || '#cc785c';
 
   const handlePurchase = async () => {
     if (!selectedTicketId) {
@@ -95,7 +95,7 @@ export default function EventPurchaseClient({
                 value={selectedTicketId || ''}
                 onChange={(e) => setSelectedTicketId(e.target.value)}
                 aria-label="Select ticket"
-                className="mt-1 w-full rounded-[14px] border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm text-[#2D2721] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]/60"
+                className="mt-1 w-full rounded-[14px] border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm text-[#2D2721] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/60"
               >
                 {availableTickets.map((ticket) => (
                   <option key={ticket.id} value={ticket.id}>

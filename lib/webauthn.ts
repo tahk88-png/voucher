@@ -5,12 +5,10 @@ import {
   verifyAuthenticationResponse as verifyAuthResp,
   type VerifiedRegistrationResponse,
   type VerifiedAuthenticationResponse,
+  type RegistrationResponseJSON,
+  type AuthenticationResponseJSON,
+  type AuthenticatorTransportFuture,
 } from '@simplewebauthn/server';
-import type {
-  RegistrationResponseJSON,
-  AuthenticationResponseJSON,
-  AuthenticatorTransportFuture,
-} from '@simplewebauthn/server/script/deps';
 
 // ── Relying Party config ──
 

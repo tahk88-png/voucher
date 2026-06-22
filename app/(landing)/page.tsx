@@ -1,6 +1,9 @@
 // ISR: revalidate every 5 minutes — balances freshness with performance
 export const revalidate = 300;
 
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Home', path: '/' });
+
 import HubShell from "@/components/layout/hub-shell"
 import TenantShell from "@/components/layout/tenant-shell"
 import SitePageRenderer from "@/components/site/site-page-renderer"
@@ -10,6 +13,7 @@ import { isMerchantActive } from "@/lib/merchant-status"
 import { getCampaignCategoryId } from "@/lib/campaign-categories"
 import { countryOptions } from "@/lib/locale-config"
 import { formatCurrency, formatPercentage, safeParseJson } from "@/lib/utils"
+import { logger } from "@/lib/logger"
 import { getSitePage } from "@/lib/site-pages"
 import { getTenantContext } from "@/lib/tenant-context"
 
@@ -128,7 +132,7 @@ async function getLandingFeaturedOffers(): Promise<LandingFeaturedOffer[]> {
         }
       })
   } catch {
-    console.warn("landing: database unavailable, rendering without featured offers")
+    logger.warn("landing: database unavailable, rendering without featured offers")
     return []
   }
 }

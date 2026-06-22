@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { withErrorHandler } from '@/lib/error-handler';
+import { CacheKeys, invalidateCache } from '@/lib/cache';
 
 export async function PUT(
   req: NextRequest,
@@ -60,6 +61,8 @@ export async function PUT(
         status: true,
       },
     });
+
+    await invalidateCache(CacheKeys.publicMerchantVouchers(merchant.id));
 
     return NextResponse.json(updated);
   });

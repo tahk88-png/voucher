@@ -5,6 +5,17 @@ import Link from "next/link"
 import Image from "next/image"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
+import { ScrollReveal } from "@/components/animations/scroll-reveal"
+import { StaggerChildren, StaggerItem } from "@/components/animations/stagger-children"
+import { CountUp } from "@/components/animations/count-up"
+import { TiltCard } from "@/components/animations/tilt-card"
+import { GradientText } from "@/components/animations/gradient-text"
+import { ParallaxSection } from "@/components/animations/parallax-section"
+import { LiveActivityFeed } from "@/components/landing/live-activity-feed"
+import { MerchantLogoWall } from "@/components/landing/merchant-logo-wall"
+import { TestimonialsCarousel } from "@/components/landing/testimonials-carousel"
+import { BeforeAfterSlider } from "@/components/landing/before-after-slider"
+import { PricingCalculator } from "@/components/landing/pricing-calculator"
 import {
   ArrowRight,
   Check,
@@ -182,9 +193,9 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
   ]
 
   const heroStats = [
-    { label: "Active campaigns", value: "1,343+", icon: Sparkles },
-    { label: "European merchants", value: "2,500+", icon: Users },
-    { label: "Processed value", value: "EUR 12M+", icon: TrendingUp },
+    { label: "Active campaigns", value: "1,343+", icon: Sparkles, countTarget: 1343, prefix: "", suffix: "+" },
+    { label: "European merchants", value: "2,500+", icon: Users, countTarget: 2500, prefix: "", suffix: "+" },
+    { label: "Processed value", value: "EUR 12M+", icon: TrendingUp, countTarget: 12, prefix: "EUR ", suffix: "M+" },
   ]
 
   const faqs = [
@@ -216,7 +227,7 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
   ]
 
   return (
-    <div className="relative overflow-x-hidden bg-gradient-to-br from-[var(--bg)] via-[var(--bg-2)] to-[#FFE5B4]">
+    <div className="relative overflow-x-hidden bg-gradient-to-br from-[var(--bg)] via-[var(--bg-2)] to-[#ece0cc]">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--primary)] rounded-full blur-3xl" />
@@ -233,9 +244,9 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--text)] mb-6 leading-[1.03]">
               Your Customers Sell
-              <span className="block bg-gradient-to-r from-[var(--primary)] to-[var(--primary-hover)] bg-clip-text text-transparent">
+              <GradientText className="block text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.03]">
                 Your Next Customers
-              </span>
+              </GradientText>
             </h1>
 
             <p className="text-xl sm:text-2xl text-[var(--text-muted)] mb-10 leading-relaxed max-w-3xl mx-auto">
@@ -282,12 +293,14 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
                     className="rounded-2xl border border-[var(--border)] bg-white/75 backdrop-blur-sm px-4 py-3 text-left shadow-warm-sm"
                   >
                     <div className="flex items-center gap-2 text-[var(--text-muted)] text-xs font-semibold">
-                      <span className="w-6 h-6 rounded-full bg-[#FFF4DA] border border-[#F2D08D] grid place-items-center">
+                      <span className="w-6 h-6 rounded-full bg-[var(--surface)] border border-[var(--border)] grid place-items-center">
                         <Icon className="h-3.5 w-3.5 text-[var(--text)]" />
                       </span>
                       {item.label}
                     </div>
-                    <div className="mt-1 text-2xl font-bold text-[var(--text)]">{item.value}</div>
+                    <div className="mt-1 text-2xl font-bold text-[var(--text)]">
+                      <CountUp target={item.countTarget} prefix={item.prefix} suffix={item.suffix} duration={2.5} />
+                    </div>
                   </div>
                 )
               })}
@@ -296,13 +309,22 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
         </div>
       </section>
 
+      {/* Merchant Logo Wall */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <ScrollReveal>
+          <p className="text-center text-sm font-semibold text-[var(--text-faint)] mb-2 uppercase tracking-wider">Trusted by businesses across Europe</p>
+          <MerchantLogoWall />
+        </ScrollReveal>
+      </section>
+
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
           {valueCards.map((card) => {
             const Icon = card.icon
             return (
+              <StaggerItem key={card.title}>
+              <TiltCard maxTilt={6}>
               <WarmCard
-                key={card.title}
                 hover
                 padding="lg"
                 className="cursor-pointer text-center rounded-[18px] border border-[var(--border)] bg-white/92"
@@ -315,16 +337,20 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
                 <h3 className="text-[17px] font-bold text-[var(--text)] mb-2">{card.title}</h3>
                 <p className="text-[13px] leading-relaxed text-[var(--text-muted)]">{card.description}</p>
               </WarmCard>
+              </TiltCard>
+              </StaggerItem>
             )
           })}
-        </div>
+        </StaggerChildren>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <ScrollReveal>
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">How It Works</h2>
           <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">Get started in minutes with our simple three-step process</p>
         </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {howItWorks.map((step, idx) => {
@@ -335,15 +361,15 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
                   <div className="w-10 h-10 rounded-full gradient-brand flex items-center justify-center mx-auto mb-4 text-base font-bold text-white">
                     {step.step}
                   </div>
-                  <span className="w-11 h-11 rounded-xl border border-[#F3DEB0] bg-[#FFF8E8] flex items-center justify-center mx-auto mb-3">
-                    <Icon className="h-5 w-5 text-[#F0AF2E] stroke-[2.25]" />
+                  <span className="w-11 h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mx-auto mb-3">
+                    <Icon className="h-5 w-5 text-[var(--accent)] stroke-[2.25]" />
                   </span>
                   <h3 className="text-xl font-semibold text-[var(--text)] mb-2">{step.title}</h3>
                   <p className="text-sm text-[var(--text-muted)]">{step.description}</p>
                 </WarmCard>
                 {idx < howItWorks.length - 1 && (
                   <div className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2">
-                    <ArrowRight className="h-5 w-5 text-[#F0AF2E]" />
+                    <ArrowRight className="h-5 w-5 text-[var(--accent)]" />
                   </div>
                 )}
               </div>
@@ -353,6 +379,7 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <ScrollReveal>
         <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Explore Popular Campaigns</h2>
           <p className="text-lg text-[var(--text-muted)]">Discover vouchers, deals, and experiences across Europe</p>
@@ -362,8 +389,9 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
             </p>
           )}
         </div>
+        </ScrollReveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 mb-8">
           {categories.map((category) => (
             <WarmCard
               key={category.name}
@@ -385,7 +413,8 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
         {visibleOffers.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
             {visibleOffers.map((offer) => (
-              <WarmCard key={offer.id} hover padding="none" className="rounded-[16px] bg-white/95 overflow-hidden">
+              <TiltCard key={offer.id} maxTilt={5}>
+              <WarmCard hover padding="none" className="rounded-[16px] bg-white/95 overflow-hidden">
                 <div className="relative h-28 bg-[#F6F0E4]">
                   {offer.merchantLogoUrl ? (
                     <Image
@@ -412,7 +441,7 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
                 </div>
 
                 <div className="p-4 flex flex-col min-h-[200px]">
-                  <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--danger)]">{offer.merchantName}</p>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--primary)]">{offer.merchantName}</p>
                   <h3 className="text-base font-bold text-[var(--text)] mt-1 line-clamp-2">{offer.name}</h3>
                   <div className="mt-2 flex flex-wrap items-center gap-2">
                     <span className="inline-flex rounded-full bg-[#FFF8E8] border border-[#F1E1C3] px-2.5 py-1 text-[10px] font-semibold text-[var(--text-muted)]">
@@ -437,6 +466,7 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
                   </div>
                 </div>
               </WarmCard>
+              </TiltCard>
             ))}
           </div>
         ) : (
@@ -454,7 +484,7 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
                   <h3 className="text-lg font-bold text-[var(--text)] mb-3">{topCampaign}</h3>
                   <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--text-faint)]">
                     <span>{category.count} active</span>
-                    <ArrowRight className="h-4 w-4 text-[#F0AF2E]" />
+                    <ArrowRight className="h-4 w-4 text-[var(--accent)]" />
                   </div>
                 </WarmCard>
               )
@@ -473,12 +503,14 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <ScrollReveal>
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Simple, Transparent Pricing</h2>
           <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
             Choose the plan that fits your business. Save 2 months with annual billing.
           </p>
         </div>
+        </ScrollReveal>
 
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 p-1 bg-[var(--surface)] rounded-[12px] shadow-warm border border-[var(--border)]">
@@ -616,6 +648,19 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
             </div>
           </div>
         </div>
+
+        {/* Interactive ROI Calculator */}
+        <ScrollReveal delay={0.1}>
+          <div className="mt-16 max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-[var(--text)] mb-2">Calculate Your ROI</h3>
+              <p className="text-[var(--text-muted)]">Drag the sliders to see how much you could earn with Vouchr</p>
+            </div>
+            <WarmCard padding="xl" className="rounded-[20px]">
+              <PricingCalculator />
+            </WarmCard>
+          </div>
+        </ScrollReveal>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -628,15 +673,15 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
               </p>
               <div className="flex items-center gap-8 mb-8">
                 <div>
-                  <div className="text-4xl font-bold text-white mb-1">2,500+</div>
+                  <div className="text-4xl font-bold text-white mb-1"><CountUp target={2500} suffix="+" duration={2.5} /></div>
                   <div className="text-white/80 text-sm">Active Merchants</div>
                 </div>
                 <div>
-                  <div className="text-4xl font-bold text-white mb-1">EUR 12M+</div>
+                  <div className="text-4xl font-bold text-white mb-1"><CountUp target={12} prefix="EUR " suffix="M+" duration={2.5} /></div>
                   <div className="text-white/80 text-sm">Processed</div>
                 </div>
                 <div>
-                  <div className="text-4xl font-bold text-white mb-1">98%</div>
+                  <div className="text-4xl font-bold text-white mb-1"><CountUp target={98} suffix="%" duration={2.5} /></div>
                   <div className="text-white/80 text-sm">Satisfaction</div>
                 </div>
               </div>
@@ -657,11 +702,56 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
         </WarmCard>
       </section>
 
+      {/* Testimonials */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <ScrollReveal>
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">What Our Merchants Say</h2>
+            <p className="text-lg text-[var(--text-muted)]">Real results from real businesses</p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal delay={0.2}>
+          <TestimonialsCarousel />
+        </ScrollReveal>
+      </section>
+
+      {/* Before / After */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <ScrollReveal>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Groupon vs Vouchr</h2>
+            <p className="text-lg text-[var(--text-muted)]">Drag to compare</p>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal delay={0.15}>
+          <BeforeAfterSlider
+            beforeTitle="With Groupon"
+            afterTitle="With Vouchr"
+            beforeItems={[
+              "40-50% revenue taken by platform",
+              "Platform owns customer relationship",
+              "No access to customer data",
+              "Race to the bottom pricing",
+              "Lost brand identity",
+            ]}
+            afterItems={[
+              "Flat EUR 19-99/mo + 5% fee",
+              "You own all customer data",
+              "Built-in referral engine",
+              "Your brand, your rules",
+              "Real-time ROI analytics",
+            ]}
+          />
+        </ScrollReveal>
+      </section>
+
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <ScrollReveal>
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Frequently Asked Questions</h2>
           <p className="text-lg text-[var(--text-muted)]">Everything you need to know about GiftHub</p>
         </div>
+        </ScrollReveal>
 
         <div className="space-y-3">
           {faqs.map((faq, idx) => (
@@ -721,6 +811,8 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
         </WarmCard>
       </section>
 
+      {/* Live Activity Feed — social proof toasts */}
+      <LiveActivityFeed />
     </div>
   )
 }

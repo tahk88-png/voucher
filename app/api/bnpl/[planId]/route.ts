@@ -51,6 +51,7 @@ export async function GET(
       status: plan.status,
       planType: plan.planType,
       totalCents: plan.totalCents,
+      currency: plan.currency,
       interestRate: plan.interestRate,
       totalWithInterestCents: plan.totalWithInterestCents,
       paidCount,

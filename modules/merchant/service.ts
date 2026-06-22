@@ -80,7 +80,7 @@ export class MerchantService {
 
     // Audit log
     await createAuditLog({
-      tenantId: context.tenantId,
+      merchantId: context.tenantId,
       userId: context.userId || 'system',
       action: 'merchant:settings_updated',
       resourceType: 'merchant',

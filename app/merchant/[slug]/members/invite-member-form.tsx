@@ -48,10 +48,10 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
   };
 
   return (
-    <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+    <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
       <div>
-        <h2 className="text-base font-semibold text-[#2D2721]">Invite team member</h2>
-        <p className="text-sm text-[#6B5744]">Add a team member by their email address.</p>
+        <h2 className="text-base font-semibold text-[var(--text)]">Invite team member</h2>
+        <p className="text-sm text-[var(--text-muted)]">Add a team member by their email address.</p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 mt-4">
         <div>
@@ -63,9 +63,9 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
             onChange={(e) => setEmail(e.target.value)}
             placeholder="member@example.com"
             required
-            className="mt-1 border-[rgba(139,115,85,0.15)]"
+            className="mt-1 border-[var(--border)]"
           />
-          <p className="text-sm text-[#6B5744] mt-1">
+          <p className="text-sm text-[var(--text-muted)] mt-1">
             User must have an account. If they do not have one, they need to sign up first.
           </p>
         </div>
@@ -73,14 +73,14 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
           <Label htmlFor="role">Role</Label>
           <select
             id="role"
-            className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 mt-1 text-sm"
+            className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1 text-sm"
             value={role}
             onChange={(e) => setRole(e.target.value as 'merchant_admin' | 'merchant_staff')}
           >
             <option value="merchant_staff">Staff</option>
             <option value="merchant_admin">Admin</option>
           </select>
-          <p className="text-sm text-[#6B5744] mt-1">
+          <p className="text-sm text-[var(--text-muted)] mt-1">
             Admins can manage vouchers, campaigns, and team members. Staff can confirm redemptions.
           </p>
         </div>

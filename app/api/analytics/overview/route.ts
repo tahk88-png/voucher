@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { isPlatformAdmin } from '@/lib/admin';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 import { getTimeSeries, calculateGrowthRate } from '@/lib/analytics';
 
 export const dynamic = 'force-dynamic';
@@ -132,7 +133,7 @@ export async function GET(req: NextRequest) {
       conversionRate,
     });
   } catch (error) {
-    console.error('[analytics/overview] Error:', error);
+    logger.error('[analytics/overview] Error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

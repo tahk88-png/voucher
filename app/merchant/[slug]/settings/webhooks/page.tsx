@@ -177,7 +177,7 @@ export default function WebhooksPage() {
         <WarmCard padding="lg" className="bg-green-50 border-green-200">
           <p className="text-sm font-medium text-green-800 mb-2">Webhook secret (shown only once):</p>
           <div className="flex items-center gap-2">
-            <code className="text-xs bg-white px-3 py-2 rounded border flex-1 break-all">{newSecret}</code>
+            <code className="text-xs bg-[var(--surface)] px-3 py-2 rounded border flex-1 break-all">{newSecret}</code>
             <WarmButton
               size="sm"
               variant="outline"
@@ -190,7 +190,7 @@ export default function WebhooksPage() {
       )}
 
       {showForm && (
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <h2 className="text-lg font-semibold text-[var(--text)] mb-4">New Webhook</h2>
           <div className="space-y-4">
             <div>
@@ -213,7 +213,7 @@ export default function WebhooksPage() {
                     className={`px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
                       newEvents.includes(event)
                         ? 'bg-[var(--primary)] text-[var(--text)] border-[var(--primary)]'
-                        : 'bg-white text-[var(--text-muted)] border-[var(--border)] hover:border-[var(--primary)]'
+                        : 'bg-[var(--surface)] text-[var(--text-muted)] border-[var(--border)] hover:border-[var(--primary)]'
                     }`}
                   >
                     {event}
@@ -231,13 +231,13 @@ export default function WebhooksPage() {
       {loading ? (
         <p className="text-sm text-[var(--text-muted)]">Loading...</p>
       ) : endpoints.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center">
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <p className="text-[var(--text-muted)]">No webhooks configured</p>
         </WarmCard>
       ) : (
         <div className="space-y-3">
           {endpoints.map((ep) => (
-            <WarmCard key={ep.id} padding="md" className="bg-white">
+            <WarmCard key={ep.id} padding="md" className="bg-[var(--surface)]">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">

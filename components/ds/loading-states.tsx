@@ -18,18 +18,18 @@ const sizeMap = {
 const colorValues: Record<Color, { stroke: string; bg: string; glow: string }> = {
   primary: {
     stroke: 'url(#ds-spinner-gradient-primary)',
-    bg: 'bg-cyan-500',
-    glow: 'rgba(6, 182, 212, 0.4)',
+    bg: 'bg-[#cc785c]',
+    glow: 'rgba(204, 120, 92, 0.4)',
   },
   secondary: {
     stroke: 'url(#ds-spinner-gradient-secondary)',
-    bg: 'bg-violet-500',
-    glow: 'rgba(139, 92, 246, 0.4)',
+    bg: 'bg-[#5e7e92]',
+    glow: 'rgba(94, 126, 146, 0.4)',
   },
   accent: {
     stroke: 'url(#ds-spinner-gradient-accent)',
-    bg: 'bg-amber-500',
-    glow: 'rgba(245, 158, 11, 0.4)',
+    bg: 'bg-[#be8a2e]',
+    glow: 'rgba(190, 138, 46, 0.4)',
   },
   white: {
     stroke: 'url(#ds-spinner-gradient-white)',
@@ -71,16 +71,16 @@ export function Spinner({
       >
         <defs>
           <linearGradient id="ds-spinner-gradient-primary" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#06b6d4" />
-            <stop offset="100%" stopColor="#8b5cf6" />
+            <stop offset="0%" stopColor="#cc785c" />
+            <stop offset="100%" stopColor="#5e7e92" />
           </linearGradient>
           <linearGradient id="ds-spinner-gradient-secondary" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#ec4899" />
+            <stop offset="0%" stopColor="#5e7e92" />
+            <stop offset="100%" stopColor="#7e9cae" />
           </linearGradient>
           <linearGradient id="ds-spinner-gradient-accent" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#ef4444" />
+            <stop offset="0%" stopColor="#be8a2e" />
+            <stop offset="100%" stopColor="#c84b36" />
           </linearGradient>
           <linearGradient id="ds-spinner-gradient-white" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
@@ -212,9 +212,9 @@ export function ProgressBar({
 }: ProgressBarProps) {
   const heightMap = { sm: 'h-1', md: 'h-2', lg: 'h-3' };
   const gradientMap: Record<Color, string> = {
-    primary: 'from-cyan-500 to-violet-500',
-    secondary: 'from-violet-500 to-pink-500',
-    accent: 'from-amber-500 to-red-500',
+    primary: 'from-[#cc785c] to-[#5e7e92]',
+    secondary: 'from-[#5e7e92] to-[#7e9cae]',
+    accent: 'from-[#be8a2e] to-[#c84b36]',
     white: 'from-white/80 to-white/40',
   };
 

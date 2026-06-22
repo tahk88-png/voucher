@@ -100,8 +100,8 @@ export default async function AdminPage() {
     <div className="min-h-screen bg-[#FAF7F2] p-4">
       <div className="container mx-auto max-w-6xl">
         <div className="flex items-center gap-4 mb-8">
-          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
-            <span className="text-[#2D2721] font-bold text-lg">A</span>
+          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+            <span className="text-white font-bold text-lg">A</span>
           </div>
           <div className="flex-1">
             <h1 className="text-3xl font-bold text-[#2D2721]">Platform Admin</h1>
@@ -125,12 +125,12 @@ export default async function AdminPage() {
 
         <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6 mb-6">
           {[
-            { label: 'Merchants', value: String(merchantCount), accent: 'border-b-[#FFC857]' },
-            { label: 'Users', value: String(userCount), accent: 'border-b-[#9DB5A5]' },
-            { label: 'Vouchers', value: String(voucherCount), accent: 'border-b-[#E17B5C]' },
-            { label: 'Redemptions', value: String(redemptionCount), accent: 'border-b-[#F5C98E]' },
-            { label: 'Revenue', value: `€${(totalRevenue / 100).toFixed(0)}`, accent: 'border-b-[#22C55E]' },
-            { label: 'Platform Fees', value: `€${(totalFees / 100).toFixed(0)}`, accent: 'border-b-[#3B82F6]' },
+            { label: 'Merchants', value: String(merchantCount), accent: 'border-b-[#cc785c]' },
+            { label: 'Users', value: String(userCount), accent: 'border-b-[#5e7e92]' },
+            { label: 'Vouchers', value: String(voucherCount), accent: 'border-b-[#be8a2e]' },
+            { label: 'Redemptions', value: String(redemptionCount), accent: 'border-b-[#7e9cae]' },
+            { label: 'Revenue', value: `€${(totalRevenue / 100).toFixed(0)}`, accent: 'border-b-[#4e8a5b]' },
+            { label: 'Platform Fees', value: `€${(totalFees / 100).toFixed(0)}`, accent: 'border-b-[#4b6678]' },
           ].map((stat) => (
             <WarmCard key={stat.label} padding="lg" className={`bg-white border-b-4 ${stat.accent}`}>
               <div className="text-sm font-semibold text-[#8B7355]">{stat.label}</div>

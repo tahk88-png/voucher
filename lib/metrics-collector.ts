@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { broadcastMetric } from '@/lib/realtime';
+import { logger } from '@/lib/logger';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -72,7 +73,7 @@ async function flushBuffer() {
   } catch (err) {
     // Put items back on failure so they're retried next flush
     buffer.unshift(...batch);
-    console.error('[metrics-collector] flush failed:', err);
+    logger.error('[metrics-collector] flush failed', { error: err instanceof Error ? err.message : String(err) });
   }
 }
 
@@ -107,22 +108,16 @@ export async function getMetricTimeSeries(
 ): Promise<MetricPoint[]> {
   const truncExpr = granularityToTrunc(granularity);
 
-  const rows = await prisma.$queryRawUnsafe<
+  const rows = await prisma.$queryRaw<
     Array<{ bucket: Date; avg_value: number }>
-  >(
-    `SELECT date_trunc($1, "timestamp") AS bucket,
-            AVG("value") AS avg_value
-       FROM "SystemMetric"
-      WHERE "name" = $2
-        AND "timestamp" >= $3
-        AND "timestamp" <= $4
-      GROUP BY bucket
-      ORDER BY bucket ASC`,
-    truncExpr,
-    name,
-    from,
-    to,
-  );
+  >`SELECT date_trunc(${truncExpr}, "timestamp") AS bucket,
+          AVG("value") AS avg_value
+     FROM "SystemMetric"
+    WHERE "name" = ${name}
+      AND "timestamp" >= ${from}
+      AND "timestamp" <= ${to}
+    GROUP BY bucket
+    ORDER BY bucket ASC`;
 
   return rows.map((r) => ({
     timestamp: new Date(r.bucket).toISOString(),
@@ -139,15 +134,12 @@ export async function getLatestMetrics(
   if (names.length === 0) return {};
 
   // Use DISTINCT ON to get the latest row per metric name
-  const rows = await prisma.$queryRawUnsafe<
+  const rows = await prisma.$queryRaw<
     Array<{ name: string; value: number; timestamp: Date }>
-  >(
-    `SELECT DISTINCT ON ("name") "name", "value", "timestamp"
-       FROM "SystemMetric"
-      WHERE "name" = ANY($1)
-      ORDER BY "name", "timestamp" DESC`,
-    names,
-  );
+  >`SELECT DISTINCT ON ("name") "name", "value", "timestamp"
+     FROM "SystemMetric"
+    WHERE "name" = ANY(${names})
+    ORDER BY "name", "timestamp" DESC`;
 
   const result: Record<string, { value: number; timestamp: string }> = {};
   for (const row of rows) {

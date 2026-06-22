@@ -100,7 +100,7 @@ export class GdprService {
 
     // Audit - compliance relevant
     await createAuditLog({
-      tenantId: context.tenantId,
+      merchantId: context.tenantId,
       userId: context.userId || userId,
       action: 'gdpr:data_export_requested',
       resourceType: 'user',
@@ -219,7 +219,7 @@ export class GdprService {
 
       // Audit
       await createAuditLog({
-        tenantId: request.merchantId || 'system',
+        merchantId: request.merchantId || 'system',
         userId: 'system',
         action: 'gdpr:data_export_completed',
         resourceType: 'user',
@@ -272,7 +272,7 @@ export class GdprService {
 
     // Audit - highly compliance relevant
     await createAuditLog({
-      tenantId: context.tenantId,
+      merchantId: context.tenantId,
       userId: context.userId || userId,
       action: 'gdpr:data_deletion_requested',
       resourceType: 'user',
@@ -379,7 +379,7 @@ export class GdprService {
 
       // Audit - highest compliance relevance
       await createAuditLog({
-        tenantId: request.merchantId || 'system',
+        merchantId: request.merchantId || 'system',
         userId: 'system',
         action: 'gdpr:data_deletion_executed',
         resourceType: 'user',

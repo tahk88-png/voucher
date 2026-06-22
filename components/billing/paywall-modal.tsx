@@ -41,14 +41,15 @@ export default function PaywallModal({
       <WarmCard padding="xl" className="max-w-md w-full relative">
         <button
           onClick={onClose}
+          aria-label="Close"
           className="absolute top-4 right-4 p-1 rounded-full hover:bg-[#FAF7F2] transition-colors"
         >
           <X className="h-5 w-5 text-[#8B7355]" />
         </button>
 
         <div className="flex items-start gap-3 mb-4">
-          <div className="w-10 h-10 rounded-[12px] bg-[#FFC857]/10 flex items-center justify-center shrink-0">
-            <AlertCircle className="h-5 w-5 text-[#FFC857]" />
+          <div className="w-10 h-10 rounded-[12px] bg-[#cc785c]/10 flex items-center justify-center shrink-0">
+            <AlertCircle className="h-5 w-5 text-[#cc785c]" />
           </div>
           <div>
             <h3 className="text-lg font-bold text-[#2D2721]">{t('upgradeRequired')}</h3>
@@ -57,7 +58,7 @@ export default function PaywallModal({
         </div>
 
         {limit && (
-          <div className="p-3 bg-[#FFF9ED] rounded-[var(--r-sm)] border border-[#FFC857]/30 mb-4">
+          <div className="p-3 bg-[#f6e1d7] rounded-[var(--r-sm)] border border-[#cc785c]/30 mb-4">
             <p className="text-sm text-[#2D2721]">
               <span className="font-semibold">{limit.current}</span> / {limit.max} used
               <span className="text-[#8B7355] ml-1">({limit.key.replace(/([A-Z])/g, ' $1').toLowerCase()})</span>
@@ -72,10 +73,10 @@ export default function PaywallModal({
               <p className="font-bold text-[#2D2721]">{currentPlan.label}</p>
               <p className="text-sm text-[#8B7355]">&euro;{currentPlan.monthlyPriceCents / 100}{t('perMonth')}</p>
             </div>
-            <ArrowUp className="h-5 w-5 text-[#FFC857] rotate-90" />
+            <ArrowUp className="h-5 w-5 text-[#cc785c] rotate-90" />
             <div className="text-center flex-1">
               <p className="text-xs text-[#8B7355]">{t('recommendedLabel')}</p>
-              <p className="font-bold text-[#FFC857]">{targetPlan.label}</p>
+              <p className="font-bold text-[#cc785c]">{targetPlan.label}</p>
               <p className="text-sm text-[#8B7355]">&euro;{targetPlan.monthlyPriceCents / 100}{t('perMonth')}</p>
             </div>
           </div>

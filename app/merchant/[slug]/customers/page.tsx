@@ -1,3 +1,6 @@
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Customers', noIndex: true });
+
 import { redirect } from 'next/navigation';
 import { requireMerchantProfileAccessBySlug, AccessControlError } from '@/lib/access-control';
 import { prisma } from '@/lib/prisma';
@@ -8,9 +11,9 @@ import { formatCurrency } from '@/lib/utils';
 export default async function CustomersPage({
   params,
 }: {
-  params: { slug: string } | Promise<{ slug: string }>
+  params: Promise<{ slug: string }>
 }) {
-  const { slug } = await Promise.resolve(params);
+  const { slug } = await params;
 
   let merchant: { id: string; name: string; defaultCurrency: string };
   try {
@@ -83,39 +86,39 @@ export default async function CustomersPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Customers</h1>
-          <p className="text-sm text-[#6B5744]">
+          <h1 className="text-2xl font-semibold text-[var(--text)]">Customers</h1>
+          <p className="text-sm text-[var(--text-muted)]">
             {totalCustomers} customers &middot; {formatCurrency(totalRevenue, merchant.defaultCurrency)} total revenue
           </p>
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <WarmCard padding="lg" className="bg-white">
-          <div className="text-sm font-semibold text-[#8B7355]">Total Customers</div>
-          <div className="text-3xl font-bold text-[#2D2721] mt-1">{totalCustomers}</div>
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
+          <div className="text-sm font-semibold text-[var(--text-faint)]">Total Customers</div>
+          <div className="text-3xl font-bold text-[var(--text)] mt-1">{totalCustomers}</div>
         </WarmCard>
-        <WarmCard padding="lg" className="bg-white">
-          <div className="text-sm font-semibold text-[#8B7355]">Total Revenue</div>
-          <div className="text-3xl font-bold text-[#2D2721] mt-1">{formatCurrency(totalRevenue, merchant.defaultCurrency)}</div>
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
+          <div className="text-sm font-semibold text-[var(--text-faint)]">Total Revenue</div>
+          <div className="text-3xl font-bold text-[var(--text)] mt-1">{formatCurrency(totalRevenue, merchant.defaultCurrency)}</div>
         </WarmCard>
-        <WarmCard padding="lg" className="bg-white">
-          <div className="text-sm font-semibold text-[#8B7355]">Total Redemptions</div>
-          <div className="text-3xl font-bold text-[#2D2721] mt-1">{customers.reduce((s, c) => s + c.redemptions, 0)}</div>
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
+          <div className="text-sm font-semibold text-[var(--text-faint)]">Total Redemptions</div>
+          <div className="text-3xl font-bold text-[var(--text)] mt-1">{customers.reduce((s, c) => s + c.redemptions, 0)}</div>
         </WarmCard>
       </div>
 
-      <WarmCard padding="none" className="bg-white overflow-hidden">
+      <WarmCard padding="none" className="bg-[var(--surface)] overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-[rgba(139,115,85,0.15)] bg-[#FFF9ED]/50">
-                <th className="text-left px-4 py-3 font-semibold text-[#8B7355]">Customer</th>
-                <th className="text-left px-4 py-3 font-semibold text-[#8B7355]">Email</th>
-                <th className="text-right px-4 py-3 font-semibold text-[#8B7355]">Purchases</th>
-                <th className="text-right px-4 py-3 font-semibold text-[#8B7355]">Total Spent</th>
-                <th className="text-right px-4 py-3 font-semibold text-[#8B7355]">Redemptions</th>
-                <th className="text-right px-4 py-3 font-semibold text-[#8B7355]">Last Purchase</th>
+              <tr className="border-b border-[var(--border)] bg-[#FFF9ED]/50">
+                <th className="text-left px-4 py-3 font-semibold text-[var(--text-faint)]">Customer</th>
+                <th className="text-left px-4 py-3 font-semibold text-[var(--text-faint)]">Email</th>
+                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">Purchases</th>
+                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">Total Spent</th>
+                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">Redemptions</th>
+                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">Last Purchase</th>
               </tr>
             </thead>
             <tbody>
@@ -123,20 +126,20 @@ export default async function CustomersPage({
                 <tr>
                   <td colSpan={6} className="px-4 py-12 text-center">
                     <div className="flex flex-col items-center gap-2">
-                      <Users className="h-8 w-8 text-[#8B7355]/50" />
-                      <span className="text-[#6B5744]">No customers yet</span>
+                      <Users className="h-8 w-8 text-[var(--text-faint)]/50" />
+                      <span className="text-[var(--text-muted)]">No customers yet</span>
                     </div>
                   </td>
                 </tr>
               ) : (
                 customers.map((customer) => (
-                  <tr key={customer.userId} className="border-b border-[rgba(139,115,85,0.08)] hover:bg-[#FFF9ED]/30 transition-colors">
-                    <td className="px-4 py-3 font-medium text-[#2D2721]">{customer.name}</td>
-                    <td className="px-4 py-3 text-[#6B5744]">{customer.email}</td>
-                    <td className="px-4 py-3 text-right text-[#2D2721]">{customer.purchases}</td>
-                    <td className="px-4 py-3 text-right font-semibold text-[#2D2721]">{formatCurrency(customer.totalSpent, merchant.defaultCurrency)}</td>
-                    <td className="px-4 py-3 text-right text-[#2D2721]">{customer.redemptions}</td>
-                    <td className="px-4 py-3 text-right text-[#6B5744]">
+                  <tr key={customer.userId} className="border-b border-[var(--border)] hover:bg-[#FFF9ED]/30 transition-colors">
+                    <td className="px-4 py-3 font-medium text-[var(--text)]">{customer.name}</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)]">{customer.email}</td>
+                    <td className="px-4 py-3 text-right text-[var(--text)]">{customer.purchases}</td>
+                    <td className="px-4 py-3 text-right font-semibold text-[var(--text)]">{formatCurrency(customer.totalSpent, merchant.defaultCurrency)}</td>
+                    <td className="px-4 py-3 text-right text-[var(--text)]">{customer.redemptions}</td>
+                    <td className="px-4 py-3 text-right text-[var(--text-muted)]">
                       {customer.lastPurchase
                         ? new Date(customer.lastPurchase).toLocaleDateString()
                         : '—'}

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { isPlatformAdmin } from '@/lib/admin';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 import { getTimeSeries, getAggregation } from '@/lib/analytics';
 
 export const dynamic = 'force-dynamic';
@@ -38,16 +39,13 @@ export async function GET(req: NextRequest) {
       getTimeSeries('User', 'count', from, to, granularity),
 
       // DAU from analytics events (distinct userId per day)
-      prisma.$queryRawUnsafe<Array<{ date: Date; value: bigint }>>(
-        `SELECT date_trunc('day', "createdAt") as date, COUNT(DISTINCT "userId")::bigint as value
-         FROM "AnalyticsEvent"
-         WHERE "createdAt" >= $1 AND "createdAt" <= $2
-           AND "userId" IS NOT NULL
-         GROUP BY date_trunc('day', "createdAt")
-         ORDER BY date ASC`,
-        from,
-        to
-      ),
+      prisma.$queryRaw<Array<{ date: Date; value: bigint }>>`
+        SELECT date_trunc('day', "createdAt") as date, COUNT(DISTINCT "userId")::bigint as value
+        FROM "AnalyticsEvent"
+        WHERE "createdAt" >= ${from} AND "createdAt" <= ${to}
+          AND "userId" IS NOT NULL
+        GROUP BY date_trunc('day', "createdAt")
+        ORDER BY date ASC`,
 
       // Users by country
       getAggregation('AnalyticsEvent', 'count', from, to, 'country', { limit: 20 }),
@@ -76,30 +74,27 @@ export async function GET(req: NextRequest) {
       }).then((rows) => rows.length),
 
       // Retention cohort — weekly retention for last 8 weeks
-      prisma.$queryRawUnsafe<Array<{ cohort_week: Date; active_week: number; users: bigint }>>(
-        `WITH cohorts AS (
-           SELECT id, date_trunc('week', "createdAt") as cohort_week
-           FROM "User"
-           WHERE "createdAt" >= $1 AND "createdAt" <= $2
-         ),
-         activity AS (
-           SELECT "userId", date_trunc('week', "createdAt") as active_week
-           FROM "AnalyticsEvent"
-           WHERE "createdAt" >= $1 AND "createdAt" <= $2
-             AND "userId" IS NOT NULL
-           GROUP BY "userId", date_trunc('week', "createdAt")
-         )
-         SELECT
-           c.cohort_week,
-           EXTRACT(WEEK FROM (a.active_week - c.cohort_week))::int as active_week,
-           COUNT(DISTINCT c.id)::bigint as users
-         FROM cohorts c
-         JOIN activity a ON c.id = a."userId"
-         GROUP BY c.cohort_week, active_week
-         ORDER BY c.cohort_week, active_week`,
-        from,
-        to
-      ),
+      prisma.$queryRaw<Array<{ cohort_week: Date; active_week: number; users: bigint }>>`
+        WITH cohorts AS (
+          SELECT id, date_trunc('week', "createdAt") as cohort_week
+          FROM "User"
+          WHERE "createdAt" >= ${from} AND "createdAt" <= ${to}
+        ),
+        activity AS (
+          SELECT "userId", date_trunc('week', "createdAt") as active_week
+          FROM "AnalyticsEvent"
+          WHERE "createdAt" >= ${from} AND "createdAt" <= ${to}
+            AND "userId" IS NOT NULL
+          GROUP BY "userId", date_trunc('week', "createdAt")
+        )
+        SELECT
+          c.cohort_week,
+          EXTRACT(WEEK FROM (a.active_week - c.cohort_week))::int as active_week,
+          COUNT(DISTINCT c.id)::bigint as users
+        FROM cohorts c
+        JOIN activity a ON c.id = a."userId"
+        GROUP BY c.cohort_week, active_week
+        ORDER BY c.cohort_week, active_week`,
     ]);
 
     const dauFormatted = dauTimeSeries.map((r) => ({
@@ -131,7 +126,7 @@ export async function GET(req: NextRequest) {
       retentionCohort,
     });
   } catch (error) {
-    console.error('[analytics/users] Error:', error);
+    logger.error('[analytics/users] Error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

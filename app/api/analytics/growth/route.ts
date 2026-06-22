@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { isPlatformAdmin } from '@/lib/admin';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 import { calculateGrowthRate } from '@/lib/analytics';
 
 export const dynamic = 'force-dynamic';
@@ -115,24 +116,18 @@ export async function GET(req: NextRequest) {
       }),
 
       // Distinct active users in previous period
-      prisma.$queryRawUnsafe<[{ count: bigint }]>(
-        `SELECT COUNT(DISTINCT "userId")::bigint as count
-         FROM "AnalyticsEvent"
-         WHERE "createdAt" >= $1 AND "createdAt" <= $2
-           AND "userId" IS NOT NULL`,
-        prevFrom,
-        prevTo
-      ),
+      prisma.$queryRaw<[{ count: bigint }]>`
+        SELECT COUNT(DISTINCT "userId")::bigint as count
+        FROM "AnalyticsEvent"
+        WHERE "createdAt" >= ${prevFrom} AND "createdAt" <= ${prevTo}
+          AND "userId" IS NOT NULL`,
 
       // Distinct active users in current period
-      prisma.$queryRawUnsafe<[{ count: bigint }]>(
-        `SELECT COUNT(DISTINCT "userId")::bigint as count
-         FROM "AnalyticsEvent"
-         WHERE "createdAt" >= $1 AND "createdAt" <= $2
-           AND "userId" IS NOT NULL`,
-        from,
-        to
-      ),
+      prisma.$queryRaw<[{ count: bigint }]>`
+        SELECT COUNT(DISTINCT "userId")::bigint as count
+        FROM "AnalyticsEvent"
+        WHERE "createdAt" >= ${from} AND "createdAt" <= ${to}
+          AND "userId" IS NOT NULL`,
     ]);
 
     const currentRevenueTotal = currentRevenue._sum.amount ?? 0;
@@ -170,7 +165,7 @@ export async function GET(req: NextRequest) {
       churnRate,
     });
   } catch (error) {
-    console.error('[analytics/growth] Error:', error);
+    logger.error('[analytics/growth] Error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

@@ -37,12 +37,12 @@ export function DataFlow({ width = 320, height = 200, className = '' }: DataFlow
     >
       <defs>
         <linearGradient id="df-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="100%" stopColor="#8b5cf6" />
+          <stop offset="0%" stopColor="#cc785c" />
+          <stop offset="100%" stopColor="#5e7e92" />
         </linearGradient>
         <linearGradient id="df-grad-v" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.6" />
+          <stop offset="0%" stopColor="#cc785c" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#5e7e92" stopOpacity="0.6" />
         </linearGradient>
         <filter id="df-glow">
           <feGaussianBlur stdDeviation="4" />
@@ -83,7 +83,7 @@ export function DataFlow({ width = 320, height = 200, className = '' }: DataFlow
 
       {/* Data particle dots traveling along paths */}
       {paths.map((d, i) => (
-        <circle key={`dot-${i}`} r="2" fill="#06b6d4" opacity="0.7">
+        <circle key={`dot-${i}`} r="2" fill="#cc785c" opacity="0.7">
           <animateMotion
             dur={`${2 + i * 0.3}s`}
             repeatCount="indefinite"

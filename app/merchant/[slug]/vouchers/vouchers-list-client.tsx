@@ -109,30 +109,30 @@ export default function VouchersListClient({
 
   return (
     <div className="space-y-4">
-      <WarmCard padding="lg" className="bg-white">
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
         <div className="space-y-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8B7355]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-faint)]" />
             <Input
               type="text"
               placeholder="Search by headline, code prefix, or ID"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 border-[rgba(139,115,85,0.15)] bg-white"
+              className="pl-10 border-[var(--border)] bg-[var(--surface)]"
               aria-label="Search vouchers"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label htmlFor="voucher-status-filter" className="text-sm font-medium mb-2 block text-[#6B5744]">
+              <label htmlFor="voucher-status-filter" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
                 Status
               </label>
               <select
                 id="voucher-status-filter"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
                 <option value="all">All status</option>
                 <option value="published">Active</option>
@@ -142,14 +142,14 @@ export default function VouchersListClient({
               </select>
             </div>
             <div>
-              <label htmlFor="voucher-type-filter" className="text-sm font-medium mb-2 block text-[#6B5744]">
+              <label htmlFor="voucher-type-filter" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
                 Type
               </label>
               <select
                 id="voucher-type-filter"
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
                 <option value="all">All types</option>
                 <option value="percentage">Percentage</option>
@@ -158,14 +158,14 @@ export default function VouchersListClient({
               </select>
             </div>
             <div>
-              <label htmlFor="voucher-sort-by" className="text-sm font-medium mb-2 block text-[#6B5744]">
+              <label htmlFor="voucher-sort-by" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
                 Sort by
               </label>
               <select
                 id="voucher-sort-by"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'date' | 'name' | 'redemptions')}
-                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
                 <option value="date">Date (newest)</option>
                 <option value="name">Name (A-Z)</option>
@@ -175,7 +175,7 @@ export default function VouchersListClient({
           </div>
 
           {searchQuery || statusFilter !== 'all' || typeFilter !== 'all' ? (
-            <div className="flex items-center gap-2 text-sm text-[#8B7355]">
+            <div className="flex items-center gap-2 text-sm text-[var(--text-faint)]">
               <Filter className="h-4 w-4" />
               <span>
                 Showing {filteredAndSorted.length} of {initialVouchers.length} vouchers
@@ -197,8 +197,8 @@ export default function VouchersListClient({
       </WarmCard>
 
       {filteredAndSorted.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center py-16">
-          <p className="text-[#6B5744]">No vouchers match your filters.</p>
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center py-16">
+          <p className="text-[var(--text-muted)]">No vouchers match your filters.</p>
         </WarmCard>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -211,11 +211,11 @@ export default function VouchersListClient({
             const status = statusLabel[voucher.status] || voucher.status;
 
             return (
-              <WarmCard key={voucher.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+              <WarmCard key={voucher.id} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                 <div className="flex justify-between items-start gap-2 mb-2">
                   <div className="min-w-0">
-                    <h3 className="text-lg font-semibold text-[#2D2721] truncate">{headline}</h3>
-                    <p className="text-xs text-[#8B7355] uppercase tracking-wide">
+                    <h3 className="text-lg font-semibold text-[var(--text)] truncate">{headline}</h3>
+                    <p className="text-xs text-[var(--text-faint)] uppercase tracking-wide">
                       {voucher.type} - {voucher.currency}
                     </p>
                   </div>
@@ -223,10 +223,10 @@ export default function VouchersListClient({
                     <span
                       className={`px-2 py-1 text-xs font-bold rounded-full ${
                         voucher.status === 'published'
-                          ? 'bg-[#9DB5A5] text-white'
+                          ? 'bg-[#4e8a5b] text-white'
                           : voucher.status === 'paused'
-                          ? 'bg-[#E17B5C] text-white'
-                          : 'bg-[#F2EDE3] text-[#8B7355]'
+                          ? 'bg-[var(--danger)] text-white'
+                          : 'bg-[#F2EDE3] text-[var(--text-faint)]'
                       }`}
                     >
                       {status}
@@ -247,7 +247,7 @@ export default function VouchersListClient({
                           __html: `.prog-${sanitizeCssValue(String(voucher.id))}{--pct:${sanitizeCssValue(String(pct ?? 0))}%}`,
                         }}
                       />
-                      <div className="flex justify-between text-xs text-[#8B7355] mb-1">
+                      <div className="flex justify-between text-xs text-[var(--text-faint)] mb-1">
                         <span>Usage</span>
                         <span>
                           {used} / {limit}
@@ -256,13 +256,13 @@ export default function VouchersListClient({
                       <div
                         className={`prog-${String(voucher.id).replace(/\\s/g, '')} h-1.5 rounded-full bg-[#F2EDE3] overflow-hidden`}
                       >
-                        <div className="h-full rounded-full bg-[#FFC857] transition-all w-[var(--pct)]" />
+                        <div className="h-full rounded-full bg-[#cc785c] transition-all w-[var(--pct)]" />
                       </div>
                     </div>
                   ) : (
-                    <p className="text-xs text-[#8B7355]">Usage: {used} - Unlimited</p>
+                    <p className="text-xs text-[var(--text-faint)]">Usage: {used} - Unlimited</p>
                   )}
-                  <p className="text-sm text-[#6B5744]">
+                  <p className="text-sm text-[var(--text-muted)]">
                     {new Date(voucher.validFrom).toLocaleDateString(undefined, { dateStyle: 'medium' })} -{' '}
                     {new Date(voucher.validTo).toLocaleDateString(undefined, { dateStyle: 'medium' })}
                   </p>

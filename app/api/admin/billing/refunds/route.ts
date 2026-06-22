@@ -55,11 +55,26 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // Validate a partial-refund amount: must be a positive integer (minor
+    // units). Without this a negative / NaN / float / absurdly-large value
+    // (e.g. Number("1e9")) would flow into Stripe + the RefundRecord ledger.
+    // issueRefund additionally clamps it to the captured charge amount.
+    let refundAmount: number | undefined
+    if (amount != null) {
+      refundAmount = Number(amount)
+      if (!Number.isInteger(refundAmount) || refundAmount <= 0) {
+        return NextResponse.json(
+          { error: "amount must be a positive integer (minor units)" },
+          { status: 400 }
+        )
+      }
+    }
+
     const refund = await issueRefund({
       purchaseId,
       purchaseType,
       actorUserId: admin.userId,
-      amount: amount != null ? Number(amount) : undefined,
+      amount: refundAmount,
       reason,
       idempotencyKey,
     })

@@ -22,7 +22,7 @@ const GENESIS_HASH = '0'.repeat(64); // All-zeros hash for first entry
  * Audit log payload (what gets hashed)
  */
 export interface AuditLogPayload {
-  tenantId: string;
+  merchantId: string;
   userId: string;
   action: string;
   resourceType?: string;
@@ -40,7 +40,7 @@ export interface AuditLogPayload {
  */
 export interface AuditLogEntry {
   id: string;
-  tenantId: string;
+  merchantId: string | null;
   userId: string;
   action: string;
   resourceType?: string;
@@ -49,10 +49,10 @@ export interface AuditLogEntry {
   ipAddress?: string;
   userAgent?: string;
   reason?: string;
-  dataClassification: string;
+  dataClassification: string | null;
   complianceRelevant: boolean;
-  hashSelf: string;
-  hashPrev: string;
+  hashSelf: string | null;
+  hashPrev: string | null;
   deleted: boolean;
   createdAt: Date;
 }
@@ -83,7 +83,7 @@ export async function createAuditLog(
   // Get previous entry to link hash chain
   const previousEntry = await prisma.auditLog.findFirst({
     where: {
-      tenantId: payload.tenantId,
+      merchantId: payload.merchantId,
       deleted: false,
     },
     orderBy: {
@@ -99,7 +99,7 @@ export async function createAuditLog(
 
   // Build hashable object (all fields in deterministic order)
   const hashableData = {
-    tenantId: payload.tenantId,
+    merchantId: payload.merchantId,
     userId: payload.userId,
     action: payload.action,
     resourceType: payload.resourceType,
@@ -119,7 +119,7 @@ export async function createAuditLog(
   // Persist to database
   const entry = await prisma.auditLog.create({
     data: {
-      tenantId: payload.tenantId,
+      merchantId: payload.merchantId,
       actorUserId: payload.userId,
       action: payload.action,
       resourceType: payload.resourceType,
@@ -137,7 +137,7 @@ export async function createAuditLog(
 
   return {
     id: entry.id,
-    tenantId: entry.tenantId,
+    merchantId: entry.merchantId ?? null,
     userId: entry.actorUserId,
     action: entry.action,
     resourceType: entry.resourceType || undefined,
@@ -146,10 +146,10 @@ export async function createAuditLog(
     ipAddress: entry.ipAddress || undefined,
     userAgent: entry.userAgent || undefined,
     reason: entry.reason || undefined,
-    dataClassification: entry.dataClassification,
+    dataClassification: entry.dataClassification ?? null,
     complianceRelevant: entry.complianceRelevant,
-    hashSelf: entry.hashSelf,
-    hashPrev: entry.hashPrev,
+    hashSelf: entry.hashSelf ?? null,
+    hashPrev: entry.hashPrev ?? null,
     deleted: entry.deleted,
     createdAt: entry.createdAt,
   };
@@ -163,10 +163,10 @@ export async function createAuditLog(
  *
  * COMPLIANCE: Run periodically or on-demand to prove audit immutability.
  *
- * @param tenantId Tenant to verify
+ * @param merchantId Tenant to verify
  * @returns Array of any corrupt entries (empty if valid)
  */
-export async function verifyAuditChain(tenantId: string): Promise<
+export async function verifyAuditChain(merchantId: string): Promise<
   Array<{
     id: string;
     expected: string;
@@ -178,7 +178,7 @@ export async function verifyAuditChain(tenantId: string): Promise<
   // Fetch all audit logs in order
   const entries = await prisma.auditLog.findMany({
     where: {
-      tenantId,
+      merchantId,
       deleted: false,
     },
     orderBy: {
@@ -189,18 +189,21 @@ export async function verifyAuditChain(tenantId: string): Promise<
   let expectedHashPrev = GENESIS_HASH;
 
   for (const entry of entries) {
+    const entryHashPrev = entry.hashPrev ?? GENESIS_HASH;
+    const entryHashSelf = entry.hashSelf ?? '';
+
     // Verify hash chain link
-    if (entry.hashPrev !== expectedHashPrev) {
+    if (entryHashPrev !== expectedHashPrev) {
       corrupEntries.push({
         id: entry.id,
         expected: expectedHashPrev,
-        actual: entry.hashPrev,
+        actual: entryHashPrev,
       });
     }
 
     // Recalculate own hash
     const hashableData = {
-      tenantId: entry.tenantId,
+      merchantId: entry.merchantId,
       userId: entry.actorUserId,
       action: entry.action,
       resourceType: entry.resourceType,
@@ -211,20 +214,20 @@ export async function verifyAuditChain(tenantId: string): Promise<
       reason: entry.reason,
       dataClassification: entry.dataClassification,
       complianceRelevant: entry.complianceRelevant,
-      hashPrev: entry.hashPrev,
+      hashPrev: entryHashPrev,
     };
 
     const calculatedHash = sha256(hashableData);
-    if (calculatedHash !== entry.hashSelf) {
+    if (calculatedHash !== entryHashSelf) {
       corrupEntries.push({
         id: entry.id,
         expected: calculatedHash,
-        actual: entry.hashSelf,
+        actual: entryHashSelf,
       });
     }
 
     // Update expected hash for next iteration
-    expectedHashPrev = entry.hashSelf;
+    expectedHashPrev = entryHashSelf;
   }
 
   return corrupEntries;
@@ -288,7 +291,7 @@ export function audit(config: {
 
           // Log after successful execution
           await createAuditLog({
-            tenantId: context.tenantId,
+            merchantId: context.tenantId,
             userId: context.userId || 'system',
             action: config.action,
             resourceType: config.resourceType,
@@ -307,7 +310,7 @@ export function audit(config: {
         const context = getTenantContextOrUndefined();
         if (context && config.complianceRelevant) {
           await createAuditLog({
-            tenantId: context.tenantId,
+            merchantId: context.tenantId,
             userId: context.userId || 'system',
             action: `${config.action}:failed`,
             resourceType: config.resourceType,
@@ -342,7 +345,7 @@ export async function auditFromContext(
   const context = getTenantContext();
 
   return createAuditLog({
-    tenantId: context.tenantId,
+    merchantId: context.tenantId,
     userId: context.userId || 'system',
     action,
     ipAddress: context.ipAddress,
@@ -387,8 +390,8 @@ export class AuditQuery {
     return this;
   }
 
-  tenant(tenantId: string): this {
-    this.query.tenantId = tenantId;
+  tenant(merchantId: string): this {
+    this.query.merchantId = merchantId;
     return this;
   }
 

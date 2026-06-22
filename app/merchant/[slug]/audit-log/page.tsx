@@ -125,13 +125,13 @@ export default function AuditLogPage() {
       </div>
 
       {showFilters && (
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <Label htmlFor="action-filter">Action</Label>
               <select
                 id="action-filter"
-                className="w-full h-10 rounded-md border border-[var(--border)] bg-white px-3 py-2 mt-1 text-sm"
+                className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1 text-sm"
                 value={actionFilter}
                 onChange={(e) => setActionFilter(e.target.value)}
               >
@@ -178,13 +178,13 @@ export default function AuditLogPage() {
       {loading ? (
         <p className="text-sm text-[var(--text-muted)]">Loading audit log...</p>
       ) : !data || data.items.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center">
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <Clock className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
           <p className="text-[var(--text-muted)]">No audit log entries found.</p>
         </WarmCard>
       ) : (
         <>
-          <WarmCard padding="none" className="bg-white overflow-hidden">
+          <WarmCard padding="none" className="bg-[var(--surface)] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

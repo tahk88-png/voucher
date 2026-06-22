@@ -1,11 +1,12 @@
 import { redirect } from "next/navigation"
 import { toQueryString, type SearchParams } from "@/lib/search-params"
 
-export default function LocaleLoginRedirect({
+export default async function LocaleLoginRedirect({
   searchParams,
 }: {
-  searchParams?: SearchParams
+  searchParams?: Promise<SearchParams>
 }) {
-  redirect(`/login${toQueryString(searchParams)}`)
+  const sp = await searchParams
+  redirect(`/login${toQueryString(sp)}`)
 }
 

@@ -99,18 +99,18 @@ export default function TicketRedeemPage() {
     <div className="min-h-screen p-4 sm:p-6 bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
       <div className="max-w-2xl mx-auto space-y-6">
         <div>
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Redeem ticket</h1>
-          <p className="text-sm text-[#6B5744]">Scan QR code or enter ticket number</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">Redeem ticket</h1>
+          <p className="text-sm text-[var(--text-muted)]">Scan QR code or enter ticket number</p>
         </div>
 
         <WarmButton asChild variant="ghost" size="sm" className="w-fit">
           <Link href={`/merchant/${merchantSlug}/events/${eventId}`}>Back to event</Link>
         </WarmButton>
 
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div>
-            <h2 className="text-lg font-semibold text-[#2D2721]">Scan ticket</h2>
-            <p className="text-sm text-[#6B5744]">Enter QR token or ticket number</p>
+            <h2 className="text-lg font-semibold text-[var(--text)]">Scan ticket</h2>
+            <p className="text-sm text-[var(--text-muted)]">Enter QR token or ticket number</p>
           </div>
           <div className="space-y-4 mt-4">
             <div>
@@ -121,7 +121,7 @@ export default function TicketRedeemPage() {
                   value={qrToken}
                   onChange={(e) => setQrToken(e.target.value)}
                   placeholder="Enter QR token or ticket number"
-                  className="border-[rgba(139,115,85,0.15)]"
+                  className="border-[var(--border)]"
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       handleQRScan();
@@ -135,21 +135,21 @@ export default function TicketRedeemPage() {
             </div>
 
             {ticketInfo && (
-              <div className="p-4 bg-[#FFF9ED] rounded-2xl border border-[rgba(139,115,85,0.15)] space-y-2">
-                <p className="font-semibold text-[#2D2721]">Ticket found</p>
-                <p className="text-sm text-[#6B5744]">
-                  <span className="text-[#8B7355]">Number:</span> {ticketInfo.ticketNumber}
+              <div className="p-4 bg-[var(--bg)] rounded-2xl border border-[var(--border)] space-y-2">
+                <p className="font-semibold text-[var(--text)]">Ticket found</p>
+                <p className="text-sm text-[var(--text-muted)]">
+                  <span className="text-[var(--text-faint)]">Number:</span> {ticketInfo.ticketNumber}
                 </p>
-                <p className="text-sm text-[#6B5744]">
-                  <span className="text-[#8B7355]">Event:</span> {ticketInfo.event.name}
+                <p className="text-sm text-[var(--text-muted)]">
+                  <span className="text-[var(--text-faint)]">Event:</span> {ticketInfo.event.name}
                 </p>
-                <p className="text-sm text-[#6B5744]">
-                  <span className="text-[#8B7355]">Status:</span>{' '}
-                  <span className="capitalize text-[#2D2721]">{ticketInfo.status}</span>
+                <p className="text-sm text-[var(--text-muted)]">
+                  <span className="text-[var(--text-faint)]">Status:</span>{' '}
+                  <span className="capitalize text-[var(--text)]">{ticketInfo.status}</span>
                 </p>
                 {ticketInfo.purchase?.attendeeName && (
-                  <p className="text-sm text-[#6B5744]">
-                    <span className="text-[#8B7355]">Attendee:</span>{' '}
+                  <p className="text-sm text-[var(--text-muted)]">
+                    <span className="text-[var(--text-faint)]">Attendee:</span>{' '}
                     {ticketInfo.purchase.attendeeName}
                   </p>
                 )}
@@ -159,10 +159,10 @@ export default function TicketRedeemPage() {
         </WarmCard>
 
         {ticketInfo && ticketInfo.status === 'sold' && (
-          <WarmCard padding="lg" className="bg-white">
+          <WarmCard padding="lg" className="bg-[var(--surface)]">
             <div>
-              <h2 className="text-lg font-semibold text-[#2D2721]">Redeem ticket</h2>
-              <p className="text-sm text-[#6B5744]">Complete the redemption process</p>
+              <h2 className="text-lg font-semibold text-[var(--text)]">Redeem ticket</h2>
+              <p className="text-sm text-[var(--text-muted)]">Complete the redemption process</p>
             </div>
             <div className="space-y-4 mt-4">
               <div>
@@ -172,7 +172,7 @@ export default function TicketRedeemPage() {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="e.g., Main Entrance, Gate A"
-                  className="border-[rgba(139,115,85,0.15)]"
+                  className="border-[var(--border)]"
                 />
               </div>
               <WarmButton onClick={handleRedeem} disabled={isRedeeming} className="w-full" size="lg">
@@ -183,8 +183,8 @@ export default function TicketRedeemPage() {
         )}
 
         {ticketInfo && ticketInfo.status !== 'sold' && (
-          <WarmCard padding="lg" className="bg-white text-center">
-            <p className="text-sm text-[#6B5744]">
+          <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
+            <p className="text-sm text-[var(--text-muted)]">
               This ticket cannot be redeemed. Status: {ticketInfo.status}
             </p>
           </WarmCard>

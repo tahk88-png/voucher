@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 
-export default function MerchantRootPage({ params }: { params: { slug: string } }) {
-  redirect(`/merchant/${params.slug}/dashboard`);
+export default async function MerchantRootPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  redirect(`/merchant/${slug}/dashboard`);
 }

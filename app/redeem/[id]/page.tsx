@@ -5,14 +5,15 @@ import { requireMerchantRole } from '@/lib/rbac';
 import { unlockCreditForRedemption } from '@/lib/credits';
 import { WarmCard } from '@/components/warm-card';
 
-export default async function RedeemByQrPage({ params }: { params: { id: string } }) {
+export default async function RedeemByQrPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }
 
   const redemption = await prisma.redemption.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: { merchant: true },
   });
 

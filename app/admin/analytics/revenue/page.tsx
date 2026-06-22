@@ -75,21 +75,21 @@ async function fetchRevenueAnalytics() {
       orderBy: { _sum: { amount: 'desc' } },
       take: 15,
     }),
-    // Revenue by buyer country
-    prisma.$queryRaw<{ country: string; total: bigint }[]>`
-      SELECT u."country", SUM(vp."amount") as total
+    // Revenue by buyer language (as geographic proxy)
+    prisma.$queryRaw<{ language: string; total: bigint }[]>`
+      SELECT u."preferredLanguage" as language, SUM(vp."amount") as total
       FROM "VoucherPurchase" vp
-      JOIN "User" u ON vp."buyerId" = u."id"
+      JOIN "User" u ON vp."userId" = u."id"
       WHERE vp."status" = 'paid' AND vp."createdAt" >= ${thirtyDaysAgo}
-      AND u."country" IS NOT NULL
-      GROUP BY u."country"
+      AND u."preferredLanguage" IS NOT NULL
+      GROUP BY u."preferredLanguage"
       ORDER BY total DESC
       LIMIT 20
     `,
-    // Payment method distribution
+    // Payment status distribution (as proxy for payment method which doesn't exist)
     prisma.voucherPurchase.groupBy({
-      by: ['paymentMethod'],
-      where: { status: 'paid', createdAt: { gte: thirtyDaysAgo } },
+      by: ['status'],
+      where: { createdAt: { gte: thirtyDaysAgo } },
       _sum: { amount: true },
       _count: true,
     }),
@@ -134,7 +134,7 @@ async function fetchRevenueAnalytics() {
   }
 
   // Revenue by product type (categorize vouchers)
-  const voucherIds = purchasesByType.map((p) => p.voucherId);
+  const voucherIds = purchasesByType.map((p) => p.voucherId).filter((id): id is string => id != null);
   const vouchers = await prisma.voucher.findMany({
     where: { id: { in: voucherIds } },
     select: { id: true, type: true },
@@ -142,11 +142,11 @@ async function fetchRevenueAnalytics() {
   const voucherTypeMap = new Map(vouchers.map((v) => [v.id, v.type ?? 'voucher']));
   const typeRevenue = new Map<string, number>();
   for (const p of purchasesByType) {
-    const type = voucherTypeMap.get(p.voucherId) ?? 'other';
+    const type = (p.voucherId ? voucherTypeMap.get(p.voucherId) : null) ?? 'other';
     typeRevenue.set(type, (typeRevenue.get(type) ?? 0) + (p._sum.amount ?? 0));
   }
   const revenueByType = Array.from(typeRevenue.entries()).map(([label, value]) => ({
-    label: label.charAt(0).toUpperCase() + label.slice(1),
+    header: label.charAt(0).toUpperCase() + label.slice(1),
     value: value / 100,
   }));
 
@@ -192,15 +192,15 @@ async function fetchRevenueAnalytics() {
   ];
 
   const geoRevenue = purchasesByCountry.map((r) => ({
-    country: r.country,
+    country: (r.language ?? 'unknown').toUpperCase(),
     count: Number(r.total) / 100,
   }));
 
   const paymentMethods = purchasesByPaymentMethod
-    .filter((p) => p.paymentMethod)
+    .filter((p) => p.status)
     .map((p) => ({
-      label: p.paymentMethod ?? 'Unknown',
-      value: (p._sum.amount ?? 0) / 100,
+      header: p.status ?? 'Unknown',
+      value: (p._sum?.amount ?? 0) / 100,
     }));
 
   return {

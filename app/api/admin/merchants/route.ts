@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
 import { requireAdminPermission } from '@/lib/admin/guards';
+import { parseCursorParams, buildCursorQuery, buildCursorResult } from '@/lib/cursor-pagination';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,8 +11,7 @@ export async function GET(req: NextRequest) {
     await requireAdminPermission('admin.merchants.read');
 
     const { searchParams } = new URL(req.url);
-    const page = Math.max(1, parseInt(searchParams.get('page') ?? '1', 10));
-    const limit = Math.min(100, Math.max(1, parseInt(searchParams.get('limit') ?? '50', 10)));
+    const { cursor, limit } = parseCursorParams(searchParams);
     const q = searchParams.get('q') ?? undefined;
 
     const where = q ? {
@@ -21,28 +21,29 @@ export async function GET(req: NextRequest) {
       ],
     } : {};
 
-    const [merchants, total] = await Promise.all([
-      prisma.merchant.findMany({
-        where,
-        include: {
-          _count: {
-            select: {
-              vouchers: true,
-              members: true,
-              redemptions: true,
-            },
+    const paginationArgs = buildCursorQuery({ cursor, limit });
+    const merchants = await prisma.merchant.findMany({
+      where,
+      include: {
+        _count: {
+          select: {
+            vouchers: true,
+            members: true,
+            redemptions: true,
           },
         },
-        orderBy: { createdAt: 'desc' },
-        skip: (page - 1) * limit,
-        take: limit,
-      }),
-      prisma.merchant.count({ where }),
-    ]);
+      },
+      orderBy: { createdAt: 'desc' },
+      ...paginationArgs,
+    });
+
+    const result = buildCursorResult(merchants, limit, cursor);
 
     return NextResponse.json({
-      merchants,
-      pagination: { page, limit, total, totalPages: Math.ceil(total / limit) },
+      merchants: result.data,
+      nextCursor: result.nextCursor,
+      prevCursor: result.prevCursor,
+      hasMore: result.hasMore,
     });
   });
 }

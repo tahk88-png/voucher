@@ -148,7 +148,7 @@ export default function MerchantsTable() {
                       type="checkbox"
                       checked={merchant.featureFlags?.weeklyDropsEnabled === true}
                       onChange={(e) => updateFeatureFlag(merchant.id, 'weeklyDropsEnabled', e.target.checked)}
-                      className="h-4 w-4 accent-[#FFC857]"
+                      className="h-4 w-4 accent-[#cc785c]"
                     />
                     Weekly drops
                   </label>
@@ -157,7 +157,7 @@ export default function MerchantsTable() {
                       type="checkbox"
                       checked={merchant.featureFlags?.analyticsEnabled === true}
                       onChange={(e) => updateFeatureFlag(merchant.id, 'analyticsEnabled', e.target.checked)}
-                      className="h-4 w-4 accent-[#FFC857]"
+                      className="h-4 w-4 accent-[#cc785c]"
                     />
                     Analytics (V2)
                   </label>

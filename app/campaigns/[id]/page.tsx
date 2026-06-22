@@ -11,10 +11,11 @@ import CampaignDetailPage, {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }): Promise<Metadata> {
+  const { id } = await params
   return generateLocaleMetadata({
-    params: { locale: routing.defaultLocale, id: params.id },
+    params: { locale: routing.defaultLocale, id },
   })
 }
 
@@ -22,14 +23,16 @@ export default async function CampaignAliasPage({
   params,
   searchParams,
 }: {
-  params: { id: string }
-  searchParams?: SearchParams
+  params: Promise<{ id: string }>
+  searchParams?: Promise<SearchParams>
 }) {
-  const locale = getPreferredLocale()
+  const { id } = await params
+  const sp = await searchParams
+  const locale = await getPreferredLocale()
 
   if (locale !== routing.defaultLocale) {
-    redirect(`/${locale}/campaigns/${params.id}${toQueryString(searchParams)}`)
+    redirect(`/${locale}/campaigns/${id}${toQueryString(sp)}`)
   }
 
-  return <CampaignDetailPage params={{ locale: routing.defaultLocale, id: params.id }} />
+  return <CampaignDetailPage params={{ locale: routing.defaultLocale, id }} />
 }

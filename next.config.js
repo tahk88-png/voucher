@@ -11,9 +11,9 @@ const isProd = process.env.NODE_ENV === 'production';
 const cspDirectives = [
   "default-src 'self'",
   `script-src 'self' ${isDev ? "'unsafe-eval'" : ''} 'unsafe-inline' https://js.stripe.com https://checkout.stripe.com`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
-  "font-src 'self' data: https://fonts.gstatic.com",
+  "font-src 'self' data:",
   [
     "connect-src 'self'",
     "https://api.stripe.com",
@@ -51,8 +51,10 @@ const securityHeaders = [
 const nextConfig = {
   reactStrictMode: true,
   distDir: process.env.NEXT_DIST_DIR || '.next',
+  // Type errors should fail the build. If a specific generated type
+  // (e.g. route.ts PageProps) is broken, fix the source — don't mask it.
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   images: {
     remotePatterns: [
@@ -101,4 +103,20 @@ const nextConfig = {
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+// Optional bundle analyzer — opt-in via ANALYZE=true env var so it
+// stays out of the critical path of normal builds. The package is only
+// required when the flag is on, so installing it is also optional.
+let config = withNextIntl(nextConfig);
+if (process.env.ANALYZE === 'true') {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: true });
+    config = withBundleAnalyzer(config);
+  } catch (err) {
+    // Missing dep shouldn't break the build — just log and move on.
+    // eslint-disable-next-line no-console
+    console.warn('ANALYZE=true but @next/bundle-analyzer is not installed; skipping.');
+  }
+}
+
+module.exports = config;

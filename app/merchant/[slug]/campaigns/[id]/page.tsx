@@ -14,12 +14,13 @@ import CampaignPromotionForm from './campaign-promotion-form';
 export default async function CampaignDetailPage({
   params,
 }: {
-  params: { slug: string; id: string };
+  params: Promise<{ slug: string; id: string }>;
 }) {
+  const { slug, id } = await params;
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
-  const merchant = await prisma.merchant.findUnique({ where: { slug: params.slug } });
+  const merchant = await prisma.merchant.findUnique({ where: { slug } });
   if (!merchant) notFound();
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
@@ -30,7 +31,7 @@ export default async function CampaignDetailPage({
   const isAdmin = member?.role === 'merchant_admin';
 
   const campaign = await prisma.campaign.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       merchant: {
         select: { defaultCurrency: true },
@@ -65,14 +66,14 @@ export default async function CampaignDetailPage({
       <div className="max-w-4xl mx-auto">
         <Breadcrumbs
           items={[
-            { label: t('dashboard'), href: `/merchant/${params.slug}/dashboard` },
-            { label: t('campaigns'), href: `/merchant/${params.slug}/campaigns` },
+            { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
+            { label: t('campaigns'), href: `/merchant/${slug}/campaigns` },
             { label: campaign.name },
           ]}
         />
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-[#2D2721]">{campaign.name}</h1>
-          <p className="text-sm text-[#6B5744]">
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{campaign.name}</h1>
+          <p className="text-sm text-[var(--text-muted)]">
             {campaign.description || 'No description'}
           </p>
         </div>
@@ -93,9 +94,9 @@ export default async function CampaignDetailPage({
               value: campaign.creditPercentage ? `${campaign.creditPercentage / 100}%` : 'None',
             },
           ].map((item) => (
-            <WarmCard key={item.label} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
-              <p className="text-sm font-medium text-[#8B7355]">{item.label}</p>
-              <p className="text-lg font-semibold capitalize text-[#2D2721] mt-2">{item.value}</p>
+            <WarmCard key={item.label} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
+              <p className="text-sm font-medium text-[var(--text-faint)]">{item.label}</p>
+              <p className="text-lg font-semibold capitalize text-[var(--text)] mt-2">{item.value}</p>
             </WarmCard>
           ))}
         </div>
@@ -106,25 +107,25 @@ export default async function CampaignDetailPage({
             { label: 'Total purchases', value: campaign._count.purchases },
             { label: 'Paid purchases', value: paidPurchases },
           ].map((item) => (
-            <WarmCard key={item.label} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
-              <p className="text-sm font-medium text-[#8B7355]">{item.label}</p>
-              <p className="text-2xl font-semibold text-[#2D2721] mt-2">{item.value}</p>
+            <WarmCard key={item.label} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
+              <p className="text-sm font-medium text-[var(--text-faint)]">{item.label}</p>
+              <p className="text-2xl font-semibold text-[var(--text)] mt-2">{item.value}</p>
             </WarmCard>
           ))}
         </div>
 
         {campaign.terms && (
-          <WarmCard padding="lg" className="mb-6 bg-white border border-[rgba(139,115,85,0.15)]">
-            <h2 className="text-sm font-semibold text-[#2D2721]">Terms and conditions</h2>
-            <p className="text-sm text-[#6B5744] whitespace-pre-wrap mt-2">{campaign.terms}</p>
+          <WarmCard padding="lg" className="mb-6 bg-[var(--surface)] border border-[var(--border)]">
+            <h2 className="text-sm font-semibold text-[var(--text)]">Terms and conditions</h2>
+            <p className="text-sm text-[var(--text-muted)] whitespace-pre-wrap mt-2">{campaign.terms}</p>
           </WarmCard>
         )}
 
         {isAdmin && (
-          <WarmCard padding="lg" className="mb-6 bg-white border border-[rgba(139,115,85,0.15)]">
+          <WarmCard padding="lg" className="mb-6 bg-[var(--surface)] border border-[var(--border)]">
             <div>
-              <h2 className="text-sm font-semibold text-[#2D2721]">Promotion</h2>
-              <p className="text-sm text-[#6B5744]">
+              <h2 className="text-sm font-semibold text-[var(--text)]">Promotion</h2>
+              <p className="text-sm text-[var(--text-muted)]">
                 Paid visibility for weekly newsletter and notifications.
               </p>
             </div>
@@ -143,16 +144,16 @@ export default async function CampaignDetailPage({
           </WarmCard>
         )}
 
-        <WarmCard padding="lg" className="relative bg-white border border-[rgba(139,115,85,0.15)]">
+        <WarmCard padding="lg" className="relative bg-[var(--surface)] border border-[var(--border)]">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-base font-semibold text-[#2D2721]">Vouchers</h2>
-              <p className="text-sm text-[#6B5744]">Vouchers generated from this campaign.</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">Vouchers</h2>
+              <p className="text-sm text-[var(--text-muted)]">Vouchers generated from this campaign.</p>
             </div>
             <div className="relative">
               <GenerateVouchersButton
                 campaignId={campaign.id}
-                merchantSlug={params.slug}
+                merchantSlug={slug}
                 campaign={{
                   name: campaign.name,
                   startDate: campaign.startDate.toISOString(),
@@ -166,10 +167,10 @@ export default async function CampaignDetailPage({
           <div className="mt-4">
             {campaign.vouchers.length === 0 ? (
               <div className="text-center py-8">
-                <p className="text-[#6B5744] text-sm mb-4">No vouchers generated yet.</p>
+                <p className="text-[var(--text-muted)] text-sm mb-4">No vouchers generated yet.</p>
                 <GenerateVouchersButton
                   campaignId={campaign.id}
-                  merchantSlug={params.slug}
+                  merchantSlug={slug}
                   campaign={{
                     name: campaign.name,
                     startDate: campaign.startDate.toISOString(),
@@ -184,16 +185,16 @@ export default async function CampaignDetailPage({
                 {campaign.vouchers.map((voucher) => (
                   <div
                     key={voucher.id}
-                    className="flex items-center justify-between p-3 border border-[rgba(139,115,85,0.15)] rounded-lg bg-[#FFF9ED]"
+                    className="flex items-center justify-between p-3 border border-[var(--border)] rounded-lg bg-[var(--bg)]"
                   >
                     <div>
-                      <p className="font-medium text-[#2D2721]">
+                      <p className="font-medium text-[var(--text)]">
                         {voucher.codePrefix || 'V'}-{voucher.id.slice(0, 8).toUpperCase()}
                       </p>
-                      <p className="text-sm text-[#6B5744] capitalize">{voucher.status}</p>
+                      <p className="text-sm text-[var(--text-muted)] capitalize">{voucher.status}</p>
                     </div>
                     <WarmButton asChild variant="outline" size="sm">
-                      <Link href={`/merchant/${params.slug}/vouchers/${voucher.id}`}>View</Link>
+                      <Link href={`/merchant/${slug}/vouchers/${voucher.id}`}>View</Link>
                     </WarmButton>
                   </div>
                 ))}

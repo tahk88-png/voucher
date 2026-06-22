@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
+import { logger } from '@/lib/logger';
 import { withErrorHandler } from '@/lib/error-handler';
 import { buildEmailHtml, type EmailSection } from '@/lib/email-builder';
 
@@ -117,10 +118,15 @@ export async function POST(
     }
 
     // Build email HTML
-    const sections = campaign.sectionsJson as EmailSection[];
+    const sections = campaign.sectionsJson as unknown as EmailSection[];
     const html = buildEmailHtml(sections, { previewText: campaign.subject });
 
-    const fromEmail = merchant.supportEmail || `noreply@${merchant.slug}.vouchr.app`;
+    // Fetch supportEmail separately since the access control guard doesn't return it
+    const merchantDetails = await prisma.merchant.findUnique({
+      where: { id: merchant.id },
+      select: { supportEmail: true },
+    });
+    const fromEmail = merchantDetails?.supportEmail || `noreply@${merchant.slug}.vouchr.app`;
 
     // Send emails in batches
     let sentCount = 0;
@@ -150,7 +156,7 @@ export async function POST(
           sentCount++;
         } catch (err) {
           // Log error but continue sending to other recipients
-          console.error(`Failed to send email to ${recipient.email}:`, err);
+          logger.error('Failed to send email', { recipient: recipient.email, error: err instanceof Error ? err.message : String(err) });
           await prisma.emailCampaignDelivery.create({
             data: {
               campaignId: campaign.id,

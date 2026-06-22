@@ -150,6 +150,7 @@ export function ShareButton({
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
+                    aria-label="Close"
                     className="h-6 w-6 flex items-center justify-center rounded-full hover:bg-[var(--surface-dim)] transition-colors"
                   >
                     <X className="h-3.5 w-3.5 text-[var(--text-muted)]" />
@@ -208,6 +209,7 @@ export function ShareButton({
                     type="text"
                     readOnly
                     value={shareUrl}
+                    aria-label="Share link"
                     className="flex-1 bg-transparent text-xs text-[var(--text-muted)] font-mono outline-none truncate"
                   />
                   <button

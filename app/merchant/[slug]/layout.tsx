@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
+import { logger } from '@/lib/logger';
 import { notFound, redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import MerchantShell from '@/components/navigation/merchant-shell';
 import { AccessControlError, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
+import { setMerchantAccess } from '@/lib/merchant-context';
 
 export const metadata: Metadata = {
   robots: {
@@ -38,6 +40,15 @@ export default async function MerchantLayout({
 
   const { merchant, profile, effectiveRole } = access;
 
+  // Store in request-scoped cache for sub-page access
+  setMerchantAccess({
+    merchantId: merchant.id,
+    merchantSlug: p.slug,
+    merchantName: merchant.name,
+    effectiveRole,
+    userId: profile.userId,
+  });
+
   const now = new Date();
   const [activeUsers, campaigns, vouchers, redemptions] = await Promise.all([
     prisma.merchantMember.count({ where: { merchantId: merchant.id } }),
@@ -58,8 +69,7 @@ export default async function MerchantLayout({
     messages = await getMessages();
   } catch (err) {
     if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.error('[MerchantLayout] getMessages failed:', err);
+      logger.error('[MerchantLayout] getMessages failed', { error: err instanceof Error ? err.message : String(err) });
     }
     messages = {};
   }

@@ -17,6 +17,8 @@ import {
   DashboardHeader,
   DataTable,
 } from '@/components/dashboard';
+import type { Column } from '@/components/dashboard/data-table';
+import type { DateRangeOption } from '@/components/dashboard';
 import {
   AnimatedAreaChart,
   AnimatedLineChart,
@@ -69,7 +71,7 @@ function formatCurrency(value: number): string {
 }
 
 export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalyticsData }) {
-  const [dateRange, setDateRange] = useState('30d');
+  const [dateRange, setDateRange] = useState<DateRangeOption>('30d');
   const { metrics, revenueOverTime, aovTrend, revenueByType, topMerchants, geoRevenue, paymentMethods } = data;
 
   const revenueChange = {
@@ -77,25 +79,25 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
     positive: metrics.revenueChange >= 0,
   };
 
-  const merchantColumns = [
+  const merchantColumns: Column<Record<string, unknown>>[] = [
     {
       key: 'name',
       header: 'Merchant',
-      render: (row: (typeof topMerchants)[0]) => (
+      render: (row) => (
         <Link href={`/merchant/${row.slug}`} className="text-[var(--primary)] hover:underline font-medium">
-          {row.name}
+          {String(row.name)}
         </Link>
       ),
     },
     {
       key: 'revenue',
       header: 'Revenue',
-      render: (row: (typeof topMerchants)[0]) => formatCurrency(row.revenue),
+      render: (row) => formatCurrency(row.revenue as number),
     },
     {
       key: 'fees',
       header: 'Platform Fees',
-      render: (row: (typeof topMerchants)[0]) => formatCurrency(row.fees),
+      render: (row) => formatCurrency(row.fees as number),
     },
     { key: 'transactions', header: 'Transactions' },
   ];
@@ -115,7 +117,7 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
                   : 'border-transparent text-[var(--text-secondary,#6B5744)] hover:text-[var(--text-primary,#2D2721)]'
               }`}
             >
-              {link.label}
+              {link.header}
             </Link>
           ))}
         </nav>
@@ -134,27 +136,24 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           <MetricCard
             title="Revenue (30d)"
             value={formatCurrency(metrics.currentRevenue)}
-            change={revenueChange}
+            change={metrics.revenueChange}
+            trend={metrics.revenueChange >= 0 ? 'up' : 'down'}
             icon={<DollarSign className="h-5 w-5" />}
-            colors={["emerald"]}
           />
           <MetricCard
             title="MRR"
             value={formatCurrency(metrics.mrr)}
             icon={<TrendingUp className="h-5 w-5" />}
-            colors={["blue"]}
           />
           <MetricCard
             title="ARR"
             value={formatCurrency(metrics.arr)}
             icon={<Building2 className="h-5 w-5" />}
-            colors={["purple"]}
           />
           <MetricCard
             title="Avg Order Value"
             value={formatCurrency(metrics.avgOrderValue)}
             icon={<CreditCard className="h-5 w-5" />}
-            colors={["orange"]}
           />
         </div>
 
@@ -171,7 +170,7 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
               </p>
             </div>
             <div className="w-24">
-              <Sparkline data={metrics.refundSparkline} colors={["#EF4444"]} height={40} />
+              <Sparkline data={metrics.refundSparkline} color="#EF4444" height={40} />
             </div>
           </div>
           <div className="bg-white rounded-xl border border-[var(--border,#E8E0D4)] p-5 flex items-center gap-4">
@@ -190,11 +189,10 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           <AnimatedAreaChart
             data={revenueOverTime}
             xAxisKey="date"
-            dataKeys={["value"
+            dataKeys={["value"]}
             colors={["#10B981"]}
             gradient
             height={320}
-            
           />
         </ChartCard>
 
@@ -202,12 +200,9 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           {/* Revenue by Product Type */}
           <ChartCard title="Revenue by Product Type" subtitle="Breakdown by category">
             <PieDonutChart
-              data={revenueByType}
-              
-              
+              data={revenueByType.map((r) => ({ name: r.header, value: r.value }))}
               height={280}
               donut
-              
             />
           </ChartCard>
 
@@ -216,10 +211,9 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
             <AnimatedLineChart
               data={aovTrend}
               xAxisKey="date"
-              dataKeys={["value"
+              dataKeys={["value"]}
               colors={["#F59E0B"]}
               height={280}
-              
             />
           </ChartCard>
         </AnalyticsGrid>
@@ -228,23 +222,17 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
           {/* Revenue by Country */}
           <ChartCard title="Revenue by Country" subtitle="Geographic distribution">
             <GeoMap
-              data={geoRevenue}
-              
-              
+              data={geoRevenue.map((g) => ({ country: g.country, value: g.count }))}
               height={300}
-              
             />
           </ChartCard>
 
           {/* Payment Method Distribution */}
           <ChartCard title="Payment Methods" subtitle="Distribution by payment type">
             <PieDonutChart
-              data={paymentMethods}
-              
-              
+              data={paymentMethods.map((p) => ({ name: p.header, value: p.value }))}
               height={300}
               donut
-              
             />
           </ChartCard>
         </AnalyticsGrid>
@@ -252,10 +240,9 @@ export default function RevenueAnalyticsClient({ data }: { data: RevenueAnalytic
         {/* Top Revenue Generators */}
         <ChartCard title="Top Revenue Generators" subtitle="Merchants by revenue (30 days)">
           <DataTable
-            data={topMerchants}
+            data={topMerchants as unknown as Record<string, unknown>[]}
             columns={merchantColumns}
             pageSize={10}
-            searchable
           />
         </ChartCard>
       </div>

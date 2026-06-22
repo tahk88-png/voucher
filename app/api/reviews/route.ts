@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
 import { moderateContent } from '@/lib/content-moderation';
+import { queueWebhook } from '@/lib/webhooks';
 
 export async function GET(req: NextRequest) {
   return withErrorHandler(async () => {
@@ -131,6 +132,25 @@ export async function POST(req: NextRequest) {
         user: { select: { id: true, name: true, image: true } },
       },
     });
+
+    // Fire merchant webhook only when the review is immediately visible. If
+    // auto-moderation flagged/hid it, we don't notify the merchant — they'll
+    // get a signal via the moderation queue instead, and only once it's
+    // approved for publishing (TODO: emit on moderation approval too).
+    if (reviewStatus === 'published' && merchantId) {
+      queueWebhook(merchantId, 'review.created', {
+        reviewId: review.id,
+        merchantId,
+        voucherId: voucherId || null,
+        campaignId: campaignId || null,
+        rating: review.rating,
+        title: review.title,
+        comment: review.comment,
+        verified: review.verified,
+        userId: session.user.id,
+        createdAt: review.createdAt.toISOString(),
+      });
+    }
 
     return NextResponse.json({
       review,

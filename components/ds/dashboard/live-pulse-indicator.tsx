@@ -28,20 +28,20 @@ const statusConfig: Record<
   { color: string; glow: string; label: string; pulse: boolean }
 > = {
   connected: {
-    color: 'var(--ds-success, #10b981)',
-    glow: 'rgba(16, 185, 129, 0.4)',
+    color: 'var(--ds-success, #4e8a5b)',
+    glow: 'rgba(78, 138, 91, 0.4)',
     label: 'Live',
     pulse: true,
   },
   degraded: {
-    color: 'var(--ds-warning, #f59e0b)',
-    glow: 'rgba(245, 158, 11, 0.4)',
+    color: 'var(--ds-warning, #be8a2e)',
+    glow: 'rgba(190, 138, 46, 0.4)',
     label: 'Degraded',
     pulse: true,
   },
   disconnected: {
-    color: 'var(--ds-error, #f43f5e)',
-    glow: 'rgba(244, 63, 94, 0.3)',
+    color: 'var(--ds-error, #c84b36)',
+    glow: 'rgba(200, 75, 54, 0.3)',
     label: 'Offline',
     pulse: false,
   },

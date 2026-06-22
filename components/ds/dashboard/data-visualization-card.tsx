@@ -28,34 +28,34 @@ export interface DataVisualizationCardProps {
 
 const colorTokens: Record<string, { main: string; bg: string; glow: string }> = {
   primary: {
-    main: 'var(--ds-primary, #06b6d4)',
-    bg: 'rgba(6, 182, 212, 0.08)',
-    glow: 'rgba(6, 182, 212, 0.15)',
+    main: 'var(--ds-primary, #cc785c)',
+    bg: 'rgba(204, 120, 92, 0.08)',
+    glow: 'rgba(204, 120, 92, 0.15)',
   },
   secondary: {
-    main: 'var(--ds-secondary, #8b5cf6)',
-    bg: 'rgba(139, 92, 246, 0.08)',
-    glow: 'rgba(139, 92, 246, 0.15)',
+    main: 'var(--ds-secondary, #5e7e92)',
+    bg: 'rgba(94, 126, 146, 0.08)',
+    glow: 'rgba(94, 126, 146, 0.15)',
   },
   accent: {
-    main: 'var(--ds-accent, #f59e0b)',
-    bg: 'rgba(245, 158, 11, 0.08)',
-    glow: 'rgba(245, 158, 11, 0.15)',
+    main: 'var(--ds-accent, #be8a2e)',
+    bg: 'rgba(190, 138, 46, 0.08)',
+    glow: 'rgba(190, 138, 46, 0.15)',
   },
   success: {
-    main: 'var(--ds-success, #10b981)',
-    bg: 'rgba(16, 185, 129, 0.08)',
-    glow: 'rgba(16, 185, 129, 0.15)',
+    main: 'var(--ds-success, #4e8a5b)',
+    bg: 'rgba(78, 138, 91, 0.08)',
+    glow: 'rgba(78, 138, 91, 0.15)',
   },
   warning: {
-    main: 'var(--ds-warning, #f59e0b)',
-    bg: 'rgba(245, 158, 11, 0.08)',
-    glow: 'rgba(245, 158, 11, 0.15)',
+    main: 'var(--ds-warning, #be8a2e)',
+    bg: 'rgba(190, 138, 46, 0.08)',
+    glow: 'rgba(190, 138, 46, 0.15)',
   },
   error: {
-    main: 'var(--ds-error, #f43f5e)',
-    bg: 'rgba(244, 63, 94, 0.08)',
-    glow: 'rgba(244, 63, 94, 0.15)',
+    main: 'var(--ds-error, #c84b36)',
+    bg: 'rgba(200, 75, 54, 0.08)',
+    glow: 'rgba(200, 75, 54, 0.15)',
   },
 };
 

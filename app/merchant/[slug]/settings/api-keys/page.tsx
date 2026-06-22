@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { showError, showSuccess } from '@/lib/toast-helpers';
+import { showConfirm } from '@/lib/confirm-helpers';
 import { Plus, Trash2, Copy, Key, AlertTriangle } from 'lucide-react';
 
 const AVAILABLE_PERMISSIONS = [
@@ -92,17 +93,19 @@ export default function ApiKeysPage() {
   };
 
   const handleRevoke = async (keyId: string, keyName: string) => {
-    if (!confirm(`Revoke API key "${keyName}"? This action cannot be undone.`)) return;
-    try {
-      const res = await fetch(`/api/merchant/${slug}/api-keys/${keyId}`, {
-        method: 'DELETE',
-      });
-      if (!res.ok) throw new Error();
-      setKeys((prev) => prev.filter((k) => k.id !== keyId));
-      showSuccess('API key revoked');
-    } catch {
-      showError('Failed to revoke API key');
-    }
+    showConfirm(`Revoke API key "${keyName}"? This action cannot be undone.`, async () => {
+      try {
+        const res = await fetch(`/api/merchant/${slug}/api-keys/${keyId}`, {
+          method: 'DELETE',
+        });
+        if (!res.ok) throw new Error();
+        setKeys((prev) => prev.filter((k) => k.id !== keyId));
+        showSuccess('API key revoked');
+      } catch {
+        showError('Failed to revoke API key');
+      }
+    }, { confirmLabel: 'Revoke', variant: 'destructive' });
+    return;
   };
 
   const togglePermission = (perm: string) => {
@@ -155,7 +158,7 @@ export default function ApiKeysPage() {
                 API key created! Copy it now — it will not be shown again.
               </p>
               <div className="flex items-center gap-2">
-                <code className="text-xs bg-white px-3 py-2 rounded border flex-1 break-all font-mono">
+                <code className="text-xs bg-[var(--surface)] px-3 py-2 rounded border flex-1 break-all font-mono">
                   {newKeySecret}
                 </code>
                 <WarmButton
@@ -172,7 +175,7 @@ export default function ApiKeysPage() {
       )}
 
       {showCreate && (
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Create API Key</h2>
           <form onSubmit={handleCreate} className="space-y-4">
             <div>
@@ -203,7 +206,7 @@ export default function ApiKeysPage() {
                           className={`px-3 py-1.5 rounded-md text-xs font-medium border transition-colors ${
                             newPermissions.includes(perm.value)
                               ? 'bg-[var(--primary)] text-white border-[var(--primary)]'
-                              : 'bg-white text-[var(--text-muted)] border-[var(--border)] hover:border-[var(--primary)]'
+                              : 'bg-[var(--surface)] text-[var(--text-muted)] border-[var(--border)] hover:border-[var(--primary)]'
                           }`}
                         >
                           {perm.label}
@@ -229,14 +232,14 @@ export default function ApiKeysPage() {
       {loading ? (
         <p className="text-sm text-[var(--text-muted)]">Loading API keys...</p>
       ) : keys.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center">
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <Key className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
           <p className="text-[var(--text-muted)]">No API keys yet. Create one to get started.</p>
         </WarmCard>
       ) : (
         <div className="space-y-3">
           {keys.map((apiKey) => (
-            <WarmCard key={apiKey.id} padding="md" className="bg-white">
+            <WarmCard key={apiKey.id} padding="md" className="bg-[var(--surface)]">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">

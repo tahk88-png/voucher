@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { activateMerchant, deactivateMerchant } from '@/lib/merchant-status';
 import { withErrorHandler } from '@/lib/error-handler';
+import { CacheKeys, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 import { requireAdminPermission } from '@/lib/admin/guards';
 import { recordAdminAudit } from '@/lib/admin/audit';
@@ -64,6 +65,10 @@ export async function PUT(
       where: { id },
       data: updateData,
     });
+
+    // Invalidate public merchant cache so feature flag / activation
+    // changes are reflected immediately in the storefront.
+    await invalidateCache(CacheKeys.merchant(updated.slug));
 
     return NextResponse.json(updated);
   });

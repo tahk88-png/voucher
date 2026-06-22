@@ -208,7 +208,12 @@ export async function POST(
     const prompt = buildPrompt(data);
 
     const aiJson = await generateAiJson(prompt);
-    const parsed = JSON.parse(aiJson);
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(aiJson);
+    } catch {
+      return NextResponse.json({ error: 'AI returned invalid JSON' }, { status: 502 });
+    }
     const schema = responseSchemas[data.purpose];
     const content = schema.parse(parsed);
 

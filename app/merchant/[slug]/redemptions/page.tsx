@@ -1,3 +1,6 @@
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Redemptions', noIndex: true });
+
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -11,14 +14,15 @@ import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { getTranslations } from 'next-intl/server';
 import { CheckCircle2, Clock, Gift, TrendingUp } from 'lucide-react';
 
-export default async function RedemptionsPage({ params }: { params: { slug: string } }) {
+export default async function RedemptionsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }
 
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   });
 
   if (!merchant) {
@@ -73,16 +77,16 @@ export default async function RedemptionsPage({ params }: { params: { slug: stri
       <div className="max-w-6xl mx-auto space-y-6">
         <Breadcrumbs
           items={[
-            { label: t('dashboard'), href: `/merchant/${params.slug}/dashboard` },
+            { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
             { label: t('redemptions') },
           ]}
         />
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-[#2D2721]">{t('redemptions')}</h1>
-            <p className="text-sm text-[#6B5744]">View and confirm voucher redemptions.</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)]">{t('redemptions')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">View and confirm voucher redemptions.</p>
           </div>
-          {redemptions.length > 0 && <ExportRedemptionsButton merchantSlug={params.slug} />}
+          {redemptions.length > 0 && <ExportRedemptionsButton merchantSlug={slug} />}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -113,14 +117,14 @@ export default async function RedemptionsPage({ params }: { params: { slug: stri
         </div>
 
         {redemptions.length === 0 ? (
-          <WarmCard padding="lg" className="bg-white text-center">
+          <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
             <div className="flex flex-col items-center gap-4 py-8">
-              <div className="w-16 h-16 rounded-full bg-[#FFF9ED] flex items-center justify-center">
-                <CheckCircle2 className="h-8 w-8 text-[#8B7355]" />
+              <div className="w-16 h-16 rounded-full bg-[var(--bg)] flex items-center justify-center">
+                <CheckCircle2 className="h-8 w-8 text-[var(--text-faint)]" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-[#2D2721] mb-2">No redemptions yet</h3>
-                <p className="text-sm text-[#6B5744]">
+                <h3 className="text-lg font-semibold text-[var(--text)] mb-2">No redemptions yet</h3>
+                <p className="text-sm text-[var(--text-muted)]">
                   Redemptions will appear here when customers use vouchers.
                 </p>
               </div>
@@ -132,31 +136,31 @@ export default async function RedemptionsPage({ params }: { params: { slug: stri
               const design = safeParseJson<{ headline?: string }>(redemption.voucher?.designJson);
               const headline = design?.headline ?? 'Voucher';
               return (
-                <WarmCard key={redemption.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+                <WarmCard key={redemption.id} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                      <h2 className="text-base font-semibold text-[#2D2721]">
+                      <h2 className="text-base font-semibold text-[var(--text)]">
                         {formatCurrency(redemption.amountBeforeDiscount, redemption.currency)} order
                       </h2>
-                      <p className="text-sm text-[#6B5744]">
+                      <p className="text-sm text-[var(--text-muted)]">
                         Discount: {formatCurrency(redemption.discountApplied, redemption.currency)}
                         {redemption.referral && (
                           <> - Referred by {redemption.referral.referrer.name || redemption.referral.referrer.email}</>
                         )}
                       </p>
-                      <p className="text-xs text-[#8B7355] mt-1">{headline}</p>
+                      <p className="text-xs text-[var(--text-faint)] mt-1">{headline}</p>
                     </div>
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${
                         redemption.confirmedAt
-                          ? 'bg-[#9DB5A5]/30 text-[#2D2721]'
-                          : 'bg-[#FFE5B4] text-[#6B5744]'
+                          ? 'bg-[#9DB5A5]/30 text-[var(--text)]'
+                          : 'bg-[#FFE5B4] text-[var(--text-muted)]'
                       }`}
                     >
                       {redemption.confirmedAt ? 'Confirmed' : 'Pending'}
                     </span>
                   </div>
-                  <div className="text-sm text-[#6B5744] mt-4 space-y-1">
+                  <div className="text-sm text-[var(--text-muted)] mt-4 space-y-1">
                     <p>Method: {redemption.method}</p>
                     <p>Order: {redemption.orderReference || 'N/A'}</p>
                     {redemption.location && <p>Location: {redemption.location}</p>}
@@ -166,7 +170,7 @@ export default async function RedemptionsPage({ params }: { params: { slug: stri
                     <div className="mt-4">
                       <ConfirmRedemptionButton
                         redemptionId={redemption.id}
-                        merchantSlug={params.slug}
+                        merchantSlug={slug}
                       />
                     </div>
                   )}

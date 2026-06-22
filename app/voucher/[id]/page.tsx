@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation"
 
-export default function VoucherAliasPage({ params }: { params: { id: string } }) {
-  redirect(`/v/${params.id}`)
+export default async function VoucherAliasPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  redirect(`/v/${id}`)
 }
 

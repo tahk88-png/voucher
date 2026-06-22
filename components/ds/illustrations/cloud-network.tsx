@@ -19,8 +19,8 @@ export function CloudNetwork({ width = 300, height = 220, className = '' }: Clou
     >
       <defs>
         <linearGradient id="cn-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="100%" stopColor="#8b5cf6" />
+          <stop offset="0%" stopColor="#cc785c" />
+          <stop offset="100%" stopColor="#5e7e92" />
         </linearGradient>
         <filter id="cn-glow">
           <feGaussianBlur stdDeviation="5" />
@@ -78,7 +78,7 @@ export function CloudNetwork({ width = 300, height = 220, className = '' }: Clou
             />
           </line>
           {/* Data flow dot */}
-          <circle r="1.5" fill="#06b6d4" opacity="0.6">
+          <circle r="1.5" fill="#cc785c" opacity="0.6">
             <animate
               attributeName="cx"
               values={`${x1};${x2}`}
@@ -144,7 +144,7 @@ export function CloudNetwork({ width = 300, height = 220, className = '' }: Clou
             cx={s.x + 10}
             cy={s.y - 4}
             r="1.5"
-            fill="#06b6d4"
+            fill="#cc785c"
             opacity="0.7"
           >
             <animate

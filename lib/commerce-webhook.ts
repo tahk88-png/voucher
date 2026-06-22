@@ -20,9 +20,19 @@ export function signPayload(rawBody: string, secret: string, timestamp: string):
   return crypto.createHmac('sha256', secret).update(payload).digest('hex');
 }
 
+const SIGNATURE_TOLERANCE_MS = 5 * 60 * 1000; // 5 minutes
+
 export function verifySignature(rawBody: string, signatureHeader: string | null, secret: string): boolean {
   const parts = parseSignatureHeader(signatureHeader);
   if (!parts) return false;
+
+  // Reject requests older than the tolerance window to prevent replay attacks.
+  // The timestamp is Unix seconds; compare against the current wall clock.
+  const timestampMs = parseInt(parts.t, 10) * 1000;
+  if (isNaN(timestampMs) || Math.abs(Date.now() - timestampMs) > SIGNATURE_TOLERANCE_MS) {
+    return false;
+  }
+
   const expected = signPayload(rawBody, secret, parts.t);
   try {
     return crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(parts.v1));

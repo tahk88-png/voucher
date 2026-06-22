@@ -84,6 +84,31 @@ export function ListSkeleton({ items = 3 }: { items?: number }) {
   )
 }
 
+export function ChartSkeleton() {
+  return (
+    <div className="space-y-6">
+      <div>
+        <Skeleton className="h-8 w-[200px] mb-2" />
+        <Skeleton className="h-4 w-[300px]" />
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <WarmCard padding="lg">
+          <Skeleton className="h-6 w-[150px] mb-4" />
+          <Skeleton className="h-[250px] w-full" />
+        </WarmCard>
+        <WarmCard padding="lg">
+          <Skeleton className="h-6 w-[150px] mb-4" />
+          <Skeleton className="h-[250px] w-full" />
+        </WarmCard>
+      </div>
+      <WarmCard padding="lg">
+        <Skeleton className="h-6 w-[180px] mb-4" />
+        <Skeleton className="h-[200px] w-full" />
+      </WarmCard>
+    </div>
+  )
+}
+
 export function VoucherCardSkeleton() {
   return (
     <WarmCard padding="none" className="overflow-hidden">

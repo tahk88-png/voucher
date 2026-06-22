@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { getChatHistory, processMessage, createSession } from '@/lib/chat-service';
+import { logger } from '@/lib/logger';
 
 export async function POST(req: NextRequest) {
   try {
@@ -30,7 +31,7 @@ export async function POST(req: NextRequest) {
       message: response,
     });
   } catch (error) {
-    console.error('[Chat API] Error:', error);
+    logger.error('[Chat API] Error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
@@ -48,7 +49,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ sessionId, messages });
   } catch (error) {
-    console.error('[Chat API] Error:', error);
+    logger.error('[Chat API] Error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

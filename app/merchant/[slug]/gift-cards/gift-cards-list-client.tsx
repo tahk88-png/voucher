@@ -77,14 +77,14 @@ export default function GiftCardsListClient({
 
   if (initialGiftCards.length === 0) {
     return (
-      <WarmCard padding="lg" className="bg-white text-center py-16">
+      <WarmCard padding="lg" className="bg-[var(--surface)] text-center py-16">
         <div className="flex flex-col items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-[#FAF7F2] flex items-center justify-center">
-            <Gift className="h-8 w-8 text-[#8B7355]" />
+            <Gift className="h-8 w-8 text-[var(--text-faint)]" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-2 text-[#2D2721]">No gift cards yet</h3>
-            <p className="text-sm text-[#6B5744] mb-4">
+            <h3 className="text-lg font-semibold mb-2 text-[var(--text)]">No gift cards yet</h3>
+            <p className="text-sm text-[var(--text-muted)] mb-4">
               Create a gift card with custom branding and QR redemption.
             </p>
           </div>
@@ -98,30 +98,30 @@ export default function GiftCardsListClient({
 
   return (
     <div className="space-y-4">
-      <WarmCard padding="lg" className="bg-white">
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
         <div className="space-y-4">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8B7355]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-faint)]" />
             <Input
               type="text"
               placeholder="Search by headline, code, or message"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 border-[rgba(139,115,85,0.15)] bg-white"
+              className="pl-10 border-[var(--border)] bg-[var(--surface)]"
               aria-label="Search gift cards"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label htmlFor="gift-card-status-filter" className="text-sm font-medium mb-2 block text-[#6B5744]">
+              <label htmlFor="gift-card-status-filter" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
                 Status
               </label>
               <select
                 id="gift-card-status-filter"
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
                 <option value="all">All status</option>
                 <option value="active">Active</option>
@@ -131,14 +131,14 @@ export default function GiftCardsListClient({
               </select>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="gift-card-sort-by" className="text-sm font-medium mb-2 block text-[#6B5744]">
+              <label htmlFor="gift-card-sort-by" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
                 Sort by
               </label>
               <select
                 id="gift-card-sort-by"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as 'date' | 'amount' | 'status')}
-                className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
+                className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
                 <option value="date">Date (newest)</option>
                 <option value="amount">Amount (high to low)</option>
@@ -148,7 +148,7 @@ export default function GiftCardsListClient({
           </div>
 
           {searchQuery || statusFilter !== 'all' ? (
-            <div className="flex items-center gap-2 text-sm text-[#8B7355]">
+            <div className="flex items-center gap-2 text-sm text-[var(--text-faint)]">
               <Filter className="h-4 w-4" />
               <span>
                 Showing {filteredAndSorted.length} of {initialGiftCards.length} gift cards
@@ -169,8 +169,8 @@ export default function GiftCardsListClient({
       </WarmCard>
 
       {filteredAndSorted.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center py-16">
-          <p className="text-[#6B5744]">No gift cards match your filters.</p>
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center py-16">
+          <p className="text-[var(--text-muted)]">No gift cards match your filters.</p>
         </WarmCard>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -182,11 +182,11 @@ export default function GiftCardsListClient({
               : 'No expiry';
 
             return (
-              <WarmCard key={card.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+              <WarmCard key={card.id} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                 <div className="flex justify-between items-start gap-2 mb-2">
                   <div className="min-w-0">
-                    <h3 className="text-lg font-semibold text-[#2D2721] truncate">{headline}</h3>
-                    <p className="text-xs text-[#8B7355] uppercase tracking-wide">
+                    <h3 className="text-lg font-semibold text-[var(--text)] truncate">{headline}</h3>
+                    <p className="text-xs text-[var(--text-faint)] uppercase tracking-wide">
                       {formatCurrency(card.amount, card.currency)} - {card.code}
                     </p>
                   </div>
@@ -195,15 +195,15 @@ export default function GiftCardsListClient({
                       card.status === 'active'
                         ? 'bg-[#9DB5A5] text-white'
                         : card.status === 'expired'
-                        ? 'bg-[#E17B5C] text-white'
-                        : 'bg-[#F2EDE3] text-[#8B7355]'
+                        ? 'bg-[var(--danger)] text-white'
+                        : 'bg-[#F2EDE3] text-[var(--text-faint)]'
                     }`}
                   >
                     {statusLabel[card.status] || card.status}
                   </span>
                 </div>
 
-                <div className="text-sm text-[#6B5744] space-y-1">
+                <div className="text-sm text-[var(--text-muted)] space-y-1">
                   <p>Valid until: {validTo}</p>
                   {card.redeemedAt ? (
                     <p>Redeemed: {new Date(card.redeemedAt).toLocaleDateString()}</p>

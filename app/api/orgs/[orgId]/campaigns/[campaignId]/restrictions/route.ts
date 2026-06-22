@@ -148,11 +148,18 @@ export async function DELETE(
     })
     if (!campaign) return NextResponse.json({ error: "Campaign not found" }, { status: 404 })
 
+    // SECURITY: Verify the restriction belongs to THIS campaign before deleting
     if (parsed.data.type === "partner") {
+      const existing = await prisma.campaignAllowedPartner.findFirst({ where: { id: parsed.data.id, campaignId } })
+      if (!existing) return NextResponse.json({ error: "Restriction not found" }, { status: 404 })
       await prisma.campaignAllowedPartner.delete({ where: { id: parsed.data.id } })
     } else if (parsed.data.type === "product") {
+      const existing = await prisma.campaignAllowedProduct.findFirst({ where: { id: parsed.data.id, campaignId } })
+      if (!existing) return NextResponse.json({ error: "Restriction not found" }, { status: 404 })
       await prisma.campaignAllowedProduct.delete({ where: { id: parsed.data.id } })
     } else {
+      const existing = await prisma.campaignAllowedLocation.findFirst({ where: { id: parsed.data.id, campaignId } })
+      if (!existing) return NextResponse.json({ error: "Restriction not found" }, { status: 404 })
       await prisma.campaignAllowedLocation.delete({ where: { id: parsed.data.id } })
     }
 

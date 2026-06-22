@@ -113,6 +113,7 @@ export function VoucherCard({
               <h3 className="font-semibold text-[var(--text)]">{title}</h3>
               <button
                 onClick={() => setShowQr(false)}
+                aria-label="Close"
                 className="p-1 rounded-full hover:bg-[var(--surface-dim)] transition-colors"
               >
                 <X className="h-4 w-4 text-[var(--text-muted)]" />

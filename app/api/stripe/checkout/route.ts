@@ -5,6 +5,24 @@ import { withErrorHandler, RateLimitError } from '@/lib/error-handler';
 import { rateLimit } from '@/lib/rate-limit';
 import { z } from 'zod';
 
+// Metadata keys the Stripe webhook trusts to identify/fulfil server-created
+// purchases. They must NEVER be settable by a caller of this generic
+// endpoint — otherwise an attacker could pay a cheap allow-listed price while
+// injecting e.g. a purchaseId, tricking the webhook into marking an unrelated
+// (or under-paid) purchase as paid.
+const RESERVED_METADATA_KEYS = new Set([
+  'purchaseId',
+  'voucherId',
+  'ticketId',
+  'giftCardId',
+  'campaignId',
+  'merchantId',
+  'planId',
+  'intentId',
+  'referrerId',
+  'type',
+]);
+
 const checkoutSchema = z.object({
   lineItems: z.array(
     z.object({
@@ -97,7 +115,9 @@ export async function POST(req: NextRequest) {
       successUrl: data.successUrl,
       cancelUrl: data.cancelUrl,
       metadata: {
-        ...data.metadata,
+        ...Object.fromEntries(
+          Object.entries(data.metadata ?? {}).filter(([k]) => !RESERVED_METADATA_KEYS.has(k)),
+        ),
         userId: session.user.id,
       },
       customerEmail: session.user.email || undefined,

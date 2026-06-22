@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { withErrorHandler } from '@/lib/error-handler';
-import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
+import { requireMerchantProfileAccessBySlug, requireMerchantCapability } from '@/lib/access-control';
 import { interpretQuery, SUGGESTED_QUESTIONS } from '@/lib/ai-analytics';
 
 export const dynamic = 'force-dynamic';
@@ -17,6 +17,9 @@ export async function POST(
   return withErrorHandler(async () => {
     const { slug } = await params;
     const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_staff');
+    // AI ask-your-data is the premium "advanced analytics" surface — gate
+    // it behind the Pro+ capability so it isn't free on Starter.
+    await requireMerchantCapability(merchant.id, merchant.slug, 'analytics.advanced');
 
     const body = await req.json();
     const { question } = body as { question: string };

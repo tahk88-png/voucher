@@ -3,7 +3,8 @@ import { prisma } from '@/lib/prisma';
 import { AccessControlError, accessErrorResponse, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
-import { dispatchWebhook } from '@/lib/webhooks';
+import { queueWebhook } from '@/lib/webhooks';
+import { CacheKeys, invalidateCache } from '@/lib/cache';
 
 const flashSaleSchema = z.object({
   isFlashSale: z.boolean(),
@@ -42,11 +43,16 @@ export async function PUT(
       },
     });
 
+    await invalidateCache(CacheKeys.publicMerchantVouchers(merchant.id));
+
     if (data.isFlashSale) {
-      await dispatchWebhook(merchant.id, 'voucher.flash_sale_started', {
+      // Fire-and-forget so flash-sale activation can't be stalled by a
+      // slow merchant webhook endpoint (delivery retries/logging happen
+      // inside queueWebhook).
+      queueWebhook(merchant.id, 'voucher.flash_sale_started', {
         voucherId: id,
         flashSaleEndsAt: data.flashSaleEndsAt,
-      }).catch(() => {});
+      });
     }
 
     return NextResponse.json(updated);

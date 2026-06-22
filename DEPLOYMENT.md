@@ -107,6 +107,48 @@ Healthcheck gate:
 Deploy fails if `GET /api/health` is not 200.
 Rollback automatically re-runs the previous image tag if health fails.
 
+## EU Data Residency (GDPR Compliance)
+
+All production infrastructure **MUST** be hosted in EU regions. This is a legal requirement for GDPR compliance and data residency.
+
+### Required EU Regions
+
+| Service | Provider | Required Region | Config |
+|---------|----------|----------------|--------|
+| Database (PostgreSQL) | Supabase | `eu-central-1` (Frankfurt) | `DATABASE_URL` must point to EU instance |
+| Deployment | Vercel | `fra1` (Frankfurt) | Set in `vercel.json` → `regions: ["fra1"]` |
+| Redis | Upstash | EU region | `REDIS_URL` → Upstash EU endpoint |
+| Object Storage | Cloudflare R2 | EU jurisdiction | R2 bucket with EU data location hint |
+| Email | Resend | N/A (no storage) | Transactional only, no PII stored |
+| Monitoring | Sentry | EU data center | Set `SENTRY_DSN` to EU project |
+| Logging | Axiom | EU region | `AXIOM_*` env vars → EU organization |
+| Payments | Stripe | N/A | Stripe handles PCI/GDPR compliance independently |
+
+### Deployment Checklist
+
+Before going to production, verify:
+
+- [ ] `DATABASE_URL` points to Supabase EU instance (not US)
+- [ ] `REDIS_URL` points to Upstash EU region
+- [ ] `vercel.json` has `"regions": ["fra1"]`
+- [ ] Sentry project is configured for EU data center
+- [ ] No US-region services in the data path
+- [ ] Cookie consent banner is active (see `CookieConsentBanner` component)
+- [ ] Analytics blocked until user consents (see `lib/cookie-consent.ts`)
+- [ ] DPA (Data Processing Agreement) signed with all sub-processors:
+  - Supabase, Vercel, Upstash, Stripe, Resend, Sentry, Axiom
+
+### Data Retention Policies
+
+| Data | Retention | Action on Expiry |
+|------|-----------|-----------------|
+| User PII | Until deletion request | Anonymize (see `/api/user/delete-account`) |
+| Billing records | 7 years | Retain (legal requirement) |
+| Audit logs | 7 years | Append-only, no deletion |
+| Analytics events | 90 days | Auto-purge via cron |
+| Session data | 30 days | Auto-expire |
+| Cookie consent | 1 year | Re-prompt |
+
 ## Security
 
 Secrets are **never** committed. Use environment variables or GitHub Secrets.

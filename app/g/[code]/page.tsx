@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
@@ -7,8 +8,17 @@ import { safeParseJson, formatCurrency } from '@/lib/utils';
 import { GiftCardDesign } from '@/types';
 import { WarmCard } from '@/components/warm-card';
 
-export default async function GiftCardPublicPage({ params }: { params: { code: string } }) {
-  const code = normalizeGiftCardCode(params.code);
+// A /g/[code] URL embeds the secret gift-card code (a bearer instrument) and
+// renders its value + redemption QR. Keep it out of search indexes — robots.txt
+// disallows /g/, and this is belt-and-suspenders for URLs crawlers discover
+// elsewhere (a leaked link). Do NOT make these indexable.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
+
+export default async function GiftCardPublicPage({ params }: { params: Promise<{ code: string }> }) {
+  const { code: rawCode } = await params;
+  const code = normalizeGiftCardCode(rawCode);
   const giftCard = await prisma.giftCard.findUnique({
     where: { code },
     include: { merchant: true },

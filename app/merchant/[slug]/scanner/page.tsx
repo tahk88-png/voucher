@@ -211,7 +211,7 @@ export default function ScannerPage() {
 
       {/* Camera view */}
       {cameraMode && (
-        <WarmCard padding="none" className="bg-white overflow-hidden">
+        <WarmCard padding="none" className="bg-[var(--surface)] overflow-hidden">
           <div className="relative aspect-video bg-black rounded-2xl overflow-hidden">
             <video
               ref={videoRef}
@@ -251,7 +251,7 @@ export default function ScannerPage() {
 
       {/* Manual input */}
       {!cameraMode && (
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex items-center gap-2 mb-4">
             <ScanLine className="h-5 w-5 text-[var(--primary)]" />
             <h2 className="text-lg font-semibold text-[var(--text)]">Enter code</h2>
@@ -272,7 +272,7 @@ export default function ScannerPage() {
       )}
 
       {result && (
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex items-center gap-2 mb-4">
             <TypeIcon className="h-5 w-5 text-[var(--primary)]" />
             <h2 className="text-lg font-semibold text-[var(--text)] capitalize">{result.type.replace('_', ' ')} found</h2>

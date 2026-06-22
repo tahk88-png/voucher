@@ -79,14 +79,22 @@ export async function generateMetadata({
   }
 }
 
+type CampaignsSearchParams = {
+  category?: string; q?: string; sort?: string;
+  merchant?: string; minPrice?: string; maxPrice?: string;
+}
+
 export default async function CampaignsPage({
   params,
   searchParams,
 }: {
   params: { locale: string } | Promise<{ locale: string }>
-  searchParams?: { category?: string; q?: string; sort?: string; merchant?: string; minPrice?: string; maxPrice?: string }
+  // Accept both Promise (Next.js 15 contract) and plain object (called from
+  // app/campaigns/page.tsx alias). `await Promise.resolve(x)` normalises both.
+  searchParams?: CampaignsSearchParams | Promise<CampaignsSearchParams>
 }) {
   const p = await Promise.resolve(params)
+  const sp = await Promise.resolve(searchParams)
   let locale = p?.locale
   if (!locale || !routing.locales.includes(locale as (typeof routing.locales)[number])) {
     locale = routing.defaultLocale
@@ -97,12 +105,12 @@ export default async function CampaignsPage({
   const context = await getTenantContext()
 
   const now = new Date()
-  const searchQuery = searchParams?.q?.toString().trim() || ""
-  const selectedCategory = searchParams?.category || "all"
-  const sortBy = searchParams?.sort || "newest"
-  const merchantFilter = searchParams?.merchant || ""
-  const minPrice = searchParams?.minPrice ? parseInt(searchParams.minPrice, 10) * 100 : 0
-  const maxPrice = searchParams?.maxPrice ? parseInt(searchParams.maxPrice, 10) * 100 : 0
+  const searchQuery = sp?.q?.toString().trim() || ""
+  const selectedCategory = sp?.category || "all"
+  const sortBy = sp?.sort || "newest"
+  const merchantFilter = sp?.merchant || ""
+  const minPrice = sp?.minPrice ? parseInt(sp.minPrice, 10) * 100 : 0
+  const maxPrice = sp?.maxPrice ? parseInt(sp.maxPrice, 10) * 100 : 0
 
   // Build where clause based on tenant context
   const campaignWhere = {
@@ -147,6 +155,10 @@ export default async function CampaignsPage({
         },
       },
       orderBy: { createdAt: "desc" },
+      // Bound this public, unauthenticated query (merchant join + 2 _count
+      // subqueries per row). Without a cap it scaled with every active
+      // campaign on the platform.
+      take: 60,
     })
   }
 
@@ -220,16 +232,16 @@ export default async function CampaignsPage({
   ).sort((a, b) => a.name.localeCompare(b.name))
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
+    <div className="min-h-screen bg-gradient-to-br from-[#fcfbf8] via-[#f4f1ea] to-[#f6e1d7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="relative overflow-hidden rounded-[32px] bg-[#2D2721] text-white py-12 px-6 sm:px-10 mb-10 shadow-warm-xl">
           <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-6 left-10 w-48 h-48 bg-[#FFC857] rounded-full blur-3xl" />
-            <div className="absolute bottom-6 right-10 w-56 h-56 bg-[#9DB5A5] rounded-full blur-3xl" />
+            <div className="absolute top-6 left-10 w-48 h-48 bg-[#cc785c] rounded-full blur-3xl" />
+            <div className="absolute bottom-6 right-10 w-56 h-56 bg-[#5e7e92] rounded-full blur-3xl" />
           </div>
           <div className="relative max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6">
-              <Sparkles className="h-4 w-4 text-[#FFC857]" />
+              <Sparkles className="h-4 w-4 text-[#e0a487]" />
               <span className="text-sm font-medium text-white/90">Live campaign marketplace</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-bold mb-4">Discover the hottest offers in Europe</h1>
@@ -247,15 +259,15 @@ export default async function CampaignsPage({
             </form>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm">
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
-                <Ticket className="h-4 w-4 text-[#FFC857]" />
+                <Ticket className="h-4 w-4 text-[#e0a487]" />
                 <span className="font-semibold">{campaignCount}</span> campaigns
               </div>
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
-                <Gift className="h-4 w-4 text-[#FFC857]" />
+                <Gift className="h-4 w-4 text-[#e0a487]" />
                 <span className="font-semibold">{voucherCount}</span> vouchers
               </div>
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
-                <ShoppingBag className="h-4 w-4 text-[#FFC857]" />
+                <ShoppingBag className="h-4 w-4 text-[#e0a487]" />
                 <span className="font-semibold">{merchantCount}</span> merchants
               </div>
             </div>
@@ -271,8 +283,8 @@ export default async function CampaignsPage({
                 href={`/campaigns?category=${category.id}${searchQuery ? `&q=${encodeURIComponent(searchQuery)}` : ""}`}
                 className={`flex items-center gap-2 rounded-full px-5 py-2.5 font-bold text-sm whitespace-nowrap transition-all ${
                   isActive
-                    ? "bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm"
-                    : "bg-white text-[#6B5744] hover:bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)]"
+                    ? "bg-gradient-to-br from-[#cc785c] to-[#b5613f] text-white shadow-warm"
+                    : "bg-white text-[#6B5744] hover:bg-[#f6e1d7] border border-[rgba(139,115,85,0.15)]"
                 }`}
               >
                 <Sparkles className="h-4 w-4" />

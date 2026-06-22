@@ -60,10 +60,10 @@ const ENDPOINTS: Endpoint[] = [
 ];
 
 const METHOD_COLORS: Record<string, string> = {
-  GET: 'bg-green-100 text-green-800',
-  POST: 'bg-blue-100 text-blue-800',
-  PUT: 'bg-amber-100 text-amber-800',
-  DELETE: 'bg-red-100 text-red-800',
+  GET: 'bg-[#dfecd9] text-[#3d6e48]',
+  POST: 'bg-[#dde6ec] text-[#3c5263]',
+  PUT: 'bg-[#f4e9d4] text-[#8f6722]',
+  DELETE: 'bg-[#f6ddd6] text-[#a23c2b]',
 };
 
 const CATEGORIES = ['Auth', 'Vouchers', 'Campaigns', 'Events', 'Tickets', 'Gift Cards', 'Redemptions', 'Referrals', 'Commerce', 'Merchants', 'User', 'Utilities'];
@@ -95,8 +95,8 @@ export default function APIDocsPage() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#2D2721]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center">
+              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
             </div>
@@ -111,13 +111,13 @@ export default function APIDocsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search endpoints..."
-              className="flex-1 border border-[#e8e0d8] rounded-xl px-4 py-2.5 bg-white text-[#2D2721] focus:outline-none focus:ring-2 focus:ring-[#FFC857]"
+              className="flex-1 border border-[#e8e0d8] rounded-xl px-4 py-2.5 bg-white text-[#2D2721] focus:outline-none focus:ring-2 focus:ring-[#cc785c]"
             />
             <a
               href="/api/openapi"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-[#b8860b] hover:underline font-medium whitespace-nowrap"
+              className="text-sm text-[#cc785c] hover:underline font-medium whitespace-nowrap"
             >
               OpenAPI JSON
             </a>
@@ -134,6 +134,7 @@ export default function APIDocsPage() {
             <div key={cat} className="mb-4">
               <button
                 onClick={() => toggleSection(cat)}
+                aria-expanded={isOpen}
                 className="w-full flex items-center justify-between bg-white rounded-xl border border-[#e8e0d8] px-5 py-3 hover:bg-[#faf8f5] transition"
               >
                 <span className="font-semibold text-[#2D2721]">{cat}</span>
@@ -153,6 +154,7 @@ export default function APIDocsPage() {
                       <div key={key} className="bg-white rounded-xl border border-[#e8e0d8] overflow-hidden">
                         <button
                           onClick={() => toggleEndpoint(key)}
+                          aria-expanded={!!expanded}
                           className="w-full flex items-center gap-3 px-5 py-3 text-left hover:bg-[#faf8f5] transition"
                         >
                           <span className={`text-xs font-bold px-2 py-0.5 rounded ${METHOD_COLORS[ep.method] || 'bg-gray-100 text-gray-700'}`}>
@@ -170,7 +172,7 @@ export default function APIDocsPage() {
                                 <div className="bg-[#faf8f5] rounded-lg p-3 space-y-1">
                                   {ep.params.map((p) => (
                                     <div key={p.name} className="flex items-start gap-2 text-sm">
-                                      <code className="font-mono text-[#b8860b]">{p.name}</code>
+                                      <code className="font-mono text-[#cc785c]">{p.name}</code>
                                       <span className="text-[#6b5e52]">{p.type}</span>
                                       {p.required && <span className="text-red-500 text-xs">required</span>}
                                       <span className="text-[#6b5e52]">- {p.description}</span>

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState, useCallback } from 'react';
 import { StarRating } from './star-rating';
 import { ReviewForm } from './review-form';
@@ -161,9 +162,11 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
                   {review.user.image ? (
-                    <img
+                    <Image
                       src={review.user.image}
                       alt=""
+                      width={36}
+                      height={36}
                       className="w-9 h-9 rounded-full object-cover"
                     />
                   ) : (

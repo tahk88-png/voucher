@@ -84,6 +84,7 @@ export function NotificationBell({
         onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--ds-text-primary)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--ds-text-secondary)'; }}
         aria-label={`Notifications${unread > 0 ? ` (${unread} unread)` : ''}`}
+        aria-expanded={open}
       >
         <Bell size={20} />
         {/* Badge */}

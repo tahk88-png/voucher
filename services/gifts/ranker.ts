@@ -95,7 +95,7 @@ export async function generateFeed(options: FeedOptions): Promise<FeedResult> {
 
   // ── Load products + occasions for seasonality ──
   const products = await prisma.giftProduct.findMany({
-    where: where as Parameters<typeof prisma.giftProduct.findMany>[0]['where'],
+    where: where as any,
     include: {
       merchant: { select: { id: true, name: true, slug: true } },
       category: { select: { id: true, name: true, slug: true } },

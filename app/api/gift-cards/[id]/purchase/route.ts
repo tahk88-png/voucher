@@ -89,6 +89,11 @@ export async function POST(
       });
     }
 
+    const connectedAccountId =
+      giftCard.merchant.payoutsEnabled && giftCard.merchant.stripeAccountId
+        ? giftCard.merchant.stripeAccountId
+        : null;
+
     const checkoutSession = await createCheckoutSession({
       lineItems: [
         {
@@ -112,8 +117,11 @@ export async function POST(
         userId: session.user.id,
         type: 'gift_card',
         recipientEmail: recipientEmail || '',
+        platformFeeAmount: String(platformFeeAmount),
       },
       customerEmail: session.user.email || undefined,
+      connectedAccountId,
+      applicationFeeAmount: connectedAccountId ? platformFeeAmount : undefined,
     });
 
     await prisma.giftCardPurchase.update({

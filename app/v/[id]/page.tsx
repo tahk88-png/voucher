@@ -6,6 +6,7 @@ import { auth } from '@/lib/auth';
 import { isMerchantActive } from '@/lib/merchant-status';
 import { safeParseJson } from '@/lib/utils';
 import { generateVoucherMetadata } from '@/lib/seo/generate-metadata';
+import { generateProductStructuredData } from '@/lib/seo/structured-data';
 import VoucherClient from './voucher-client';
 import QRCode from 'qrcode';
 
@@ -17,9 +18,10 @@ async function generateQRCode(text: string): Promise<string> {
   }
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
   const voucher = await prisma.voucher.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       merchant: true,
     },
@@ -48,9 +50,10 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   });
 }
 
-export default async function VoucherPage({ params }: { params: { id: string } }) {
+export default async function VoucherPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const voucher = await prisma.voucher.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: { 
       merchant: true,
       campaign: true,
@@ -82,15 +85,30 @@ export default async function VoucherPage({ params }: { params: { id: string } }
   const voucherUrl = `${baseUrl}/v/${voucher.id}`;
   const qrCodeDataUrl = await generateQRCode(voucherUrl);
 
+  const jsonLd = generateProductStructuredData(
+    (design?.headline as string) || 'Special Offer',
+    (design?.subHeadline as string) || 'Exclusive voucher offer',
+    voucher.value,
+    voucher.currency,
+    voucher.merchant.name,
+    design?.image as string | undefined,
+  );
+
   return (
-    <VoucherClient
-      voucher={voucher}
-      design={design}
-      brandColors={brandColors}
-      voucherCode={voucherCode}
-      qrCodeDataUrl={qrCodeDataUrl}
-      isAuthenticated={!!session?.user}
-      campaign={voucher.campaign}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <VoucherClient
+        voucher={voucher}
+        design={design}
+        brandColors={brandColors}
+        voucherCode={voucherCode}
+        qrCodeDataUrl={qrCodeDataUrl}
+        isAuthenticated={!!session?.user}
+        campaign={voucher.campaign}
+      />
+    </>
   );
 }

@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client';
 import { logger } from './logger';
 import { captureException } from './error-tracking';
 import { AccessControlError } from './access-control/guards';
+import { AppError as LegacyAppError } from './errors';
 import { CircuitBreakerError } from './circuit-breaker';
 import { recordHttpRequest } from './metrics';
 
@@ -262,6 +263,35 @@ export function handleError(
         error: error.message,
         code: error.code,
         details: error.details,
+        requestId,
+      },
+      { status: error.statusCode }
+    );
+  }
+
+  // Handle the parallel AppError hierarchy in lib/errors.ts (e.g.
+  // PaymentRequiredError thrown by lib/billing.ts entitlement guards).
+  // These are NOT instanceof THIS module's AppError, so without this block
+  // they fell through to the generic 500 below — turning every paywall into
+  // a 500 and breaking the client's isPaywallError (status === 402) upgrade
+  // prompts. Mirror the AppError handling, preserving statusCode + details.
+  if (error instanceof LegacyAppError) {
+    const level = error.statusCode >= 500 ? 'error' : 'warn';
+    const details = (error as { details?: unknown }).details;
+    logger[level]('Application error', {
+      requestId,
+      statusCode: error.statusCode,
+      code: error.code,
+      message: error.message,
+      details,
+      ...context,
+    });
+
+    return NextResponse.json(
+      {
+        error: error.message,
+        code: error.code,
+        details,
         requestId,
       },
       { status: error.statusCode }

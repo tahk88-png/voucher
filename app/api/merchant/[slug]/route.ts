@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { withErrorHandler } from '@/lib/error-handler';
+import { CacheKeys, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 
 const updateMerchantSchema = z.object({
@@ -71,6 +72,11 @@ export async function PUT(
       updateData.brandColorsJson = data.brandColorsJson ? JSON.stringify(data.brandColorsJson) : null;
     }
 
+    // Mark onboarding complete if not already done
+    if (!merchant.onboardedAt) {
+      updateData.onboardedAt = new Date();
+    }
+
     const updated = await prisma.merchant.update({
       where: { id: merchant.id },
       data: updateData,
@@ -87,6 +93,8 @@ export async function PUT(
         },
       },
     });
+
+    await invalidateCache(CacheKeys.merchant(slug));
 
     return NextResponse.json(updated);
   });

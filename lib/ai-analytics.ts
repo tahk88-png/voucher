@@ -140,7 +140,7 @@ async function executeKeywordQuery(merchantId: string, intent: ParsedIntent): Pr
         const vouchers = await prisma.voucher.findMany({
           where: { merchantId },
           include: {
-            voucherPurchases: {
+            purchases: {
               where: { status: 'paid', createdAt: dateFilter },
               select: { amount: true },
             },
@@ -151,7 +151,7 @@ async function executeKeywordQuery(merchantId: string, intent: ParsedIntent): Pr
         const data = vouchers
           .map((v) => ({
             name: v.type ?? v.id.slice(0, 8),
-            revenue: v.voucherPurchases.reduce((s, p) => s + p.amount, 0) / 100,
+            revenue: v.purchases.reduce((s: number, p: { amount: number }) => s + p.amount, 0) / 100,
           }))
           .sort((a, b) => b.revenue - a.revenue)
           .slice(0, 5);

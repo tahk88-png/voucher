@@ -13,7 +13,7 @@ const PLAN_META: Record<PlanTier, {
 }> = {
   starter: {
     icon: Zap,
-    gradient: 'from-[#9DB5A5] to-[#7FA090]',
+    gradient: 'from-[#7e9cae] to-[#5e7e92]',
     features: [
       '500 vouchers/month',
       '3 active campaigns',
@@ -24,7 +24,7 @@ const PLAN_META: Record<PlanTier, {
   },
   pro: {
     icon: Crown,
-    gradient: 'from-[#FFC857] to-[#FFB627]',
+    gradient: 'from-[#cc785c] to-[#b5613f]',
     features: [
       '5,000 vouchers/month',
       '25 active campaigns',
@@ -36,7 +36,7 @@ const PLAN_META: Record<PlanTier, {
   },
   scale: {
     icon: Rocket,
-    gradient: 'from-[#E17B5C] to-[#D16B4C]',
+    gradient: 'from-[#d0a043] to-[#be8a2e]',
     features: [
       'Unlimited vouchers',
       'Unlimited campaigns',
@@ -75,11 +75,11 @@ export default function PlanSelector({ slug, currentTier, billingState, hasStrip
               key={tier}
               hover={!isCurrent}
               padding="lg"
-              className={`relative ${isPopular ? 'border-2 border-[#FFC857] shadow-lg' : ''}`}
+              className={`relative ${isPopular ? 'border-2 border-[#cc785c] shadow-lg' : ''}`}
             >
               {isPopular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="px-3 py-1 bg-gradient-to-r from-[#FFC857] to-[#FFB627] text-white text-xs font-bold rounded-full flex items-center gap-1">
+                  <span className="px-3 py-1 bg-gradient-to-r from-[#cc785c] to-[#b5613f] text-white text-xs font-bold rounded-full flex items-center gap-1">
                     <Star className="h-3 w-3" />
                     {t('mostPopular')}
                   </span>
@@ -102,7 +102,7 @@ export default function PlanSelector({ slug, currentTier, billingState, hasStrip
               <div className="space-y-2 mb-5">
                 {meta.features.map((f) => (
                   <div key={f} className="flex items-start gap-2">
-                    <Check className={`h-4 w-4 shrink-0 mt-0.5 ${isPopular ? 'text-[#FFC857]' : 'text-[#9DB5A5]'}`} />
+                    <Check className={`h-4 w-4 shrink-0 mt-0.5 ${isPopular ? 'text-[#cc785c]' : 'text-[#5e7e92]'}`} />
                     <span className="text-sm text-[#2D2721]">{f}</span>
                   </div>
                 ))}

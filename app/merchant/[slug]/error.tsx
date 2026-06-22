@@ -21,9 +21,9 @@ export default function MerchantError({
 
   return (
     <div className="min-h-[60vh] flex items-center justify-center p-4">
-      <WarmCard padding="lg" className="max-w-md w-full text-center bg-white">
-        <h1 className="text-xl font-semibold text-[#2D2721]">Something went wrong</h1>
-        <p className="text-sm text-[#6B5744] mt-2">
+      <WarmCard padding="lg" className="max-w-md w-full text-center bg-[var(--surface)]">
+        <h1 className="text-xl font-semibold text-[var(--text)]">Something went wrong</h1>
+        <p className="text-sm text-[var(--text-muted)] mt-2">
           An error occurred in the merchant panel.
         </p>
         <div className="mt-4 flex gap-2 justify-center">

@@ -19,7 +19,7 @@ export default function PrivacyPage() {
           <p><strong>Account data:</strong> Name, email address, password hash, profile picture URL.</p>
           <p><strong>Usage data:</strong> Pages visited, vouchers viewed/purchased/redeemed, search queries, device information, IP address.</p>
           <p><strong>Payment data:</strong> Processed by Stripe — we do not store credit card numbers. We store transaction IDs, amounts, and payment status.</p>
-          <p><strong>Location data:</strong> Only when you explicitly enable "nearby offers" — never collected without consent.</p>
+          <p><strong>Location data:</strong> Only when you explicitly enable &quot;nearby offers&quot; — never collected without consent.</p>
         </section>
 
         <section>

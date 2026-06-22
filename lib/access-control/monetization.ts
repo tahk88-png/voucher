@@ -1,3 +1,8 @@
+// NOTE: This module must stay free of server-only imports (prisma, fs,
+// logger, …) because it is imported by client components such as
+// components/billing/plan-selector.tsx for the pure PLAN_CATALOG data.
+// DB-backed helpers live in ./monetization-db.ts instead.
+
 export const PLAN_TIERS = ["starter", "pro", "scale"] as const;
 export type PlanTier = (typeof PLAN_TIERS)[number];
 
@@ -224,12 +229,17 @@ export function getPriceIdForTier(tier: PlanTier): string | null {
 }
 
 export function resolvePlanTierFromPriceId(priceId: string | null): PlanTier {
-  if (!priceId) return "pro";
+  // Default to the LOWEST tier on a null/unmatched price ID. Defaulting
+  // to "pro" would hand paid features (boosts, advanced analytics, custom
+  // domains, 60 campaigns / 5000 vouchers) to any active subscriber whose
+  // STRIPE_PRICE_ID_* env vars are unset or misconfigured. Trial users
+  // still get "pro" — resolveBilling's trial branch sets that explicitly.
+  if (!priceId) return "starter";
   const configured = getConfiguredPriceIds();
   if (configured.scale.includes(priceId)) return "scale";
   if (configured.pro.includes(priceId)) return "pro";
   if (configured.starter.includes(priceId)) return "starter";
-  return "pro";
+  return "starter";
 }
 
 export function resolveBilling(snapshot: MerchantBillingSnapshot, now: Date = new Date()): BillingResolution {

@@ -20,9 +20,9 @@ export default function Error({
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <WarmCard padding="lg" className="max-w-md w-full text-center bg-white">
-        <h1 className="text-xl font-semibold text-[#2D2721]">Something went wrong</h1>
-        <p className="text-sm text-[#6B5744] mt-2">
+      <WarmCard padding="lg" className="max-w-md w-full text-center bg-[var(--surface)]">
+        <h1 className="text-xl font-semibold text-[var(--text)]">Something went wrong</h1>
+        <p className="text-sm text-[var(--text-muted)] mt-2">
           An error occurred while loading this page.
         </p>
         <div className="mt-4">

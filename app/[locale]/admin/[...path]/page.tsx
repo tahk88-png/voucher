@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 
-type Props = { params: { locale: string; path?: string[] } };
+type Props = { params: Promise<{ locale: string; path?: string[] }> };
 
-export default function LocalizedAdminCatchAll({ params }: Props) {
-  const tail = params.path?.join("/") ?? "";
+export default async function LocalizedAdminCatchAll({ params }: Props) {
+  const { path } = await params;
+  const tail = path?.join("/") ?? "";
   redirect(tail ? `/admin/${tail}` : "/admin");
 }

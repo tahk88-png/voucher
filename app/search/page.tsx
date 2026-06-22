@@ -232,6 +232,7 @@ export default function SearchPage() {
                     </h2>
                     <button
                       onClick={() => setShowMobileFilters(false)}
+                      aria-label="Close filters"
                       className="h-8 w-8 flex items-center justify-center rounded-[var(--r-sm)] hover:bg-[var(--surface-dim)]"
                     >
                       <X className="h-5 w-5 text-[var(--text-muted)]" />

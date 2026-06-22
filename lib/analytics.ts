@@ -1,4 +1,6 @@
+import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 import crypto from 'crypto';
 
 // ─── Event Tracking ───
@@ -28,7 +30,7 @@ export async function trackEvent(
         sessionId: data.sessionId ?? null,
         page: data.page ?? null,
         referrer: data.referrer ?? null,
-        metadata: data.metadata ?? undefined,
+        metadata: (data.metadata ?? undefined) as any,
         country: data.country ?? null,
         device: data.device ?? null,
         browser: data.browser ?? null,
@@ -38,7 +40,7 @@ export async function trackEvent(
     });
   } catch {
     // Silently fail — analytics should never break the main flow
-    console.error('[analytics] Failed to track event:', type);
+    logger.error('[analytics] Failed to track event', { type });
   }
 }
 
@@ -66,7 +68,7 @@ export async function trackPageView(
       },
     });
   } catch {
-    console.error('[analytics] Failed to track page view:', path);
+    logger.error('[analytics] Failed to track page view', { path });
   }
 }
 
@@ -104,21 +106,19 @@ export async function getTimeSeries(
     sumField?: string; // field to SUM when metric is 'sum'
   }
 ): Promise<Array<{ date: string; value: number }>> {
-  const truncExpr = dateToTruncSql(granularity);
-  const tableName = `"${table}"`;
+  const truncExpr = Prisma.raw(dateToTruncSql(granularity));
+  const tableName = Prisma.raw(`"${table}"`);
   const valueExpr = metric === 'sum' && options?.sumField
-    ? `COALESCE(SUM("${options.sumField}"), 0)`
-    : 'COUNT(*)';
-  const extraWhere = options?.where ? `AND ${options.where}` : '';
+    ? Prisma.raw(`COALESCE(SUM("${options.sumField}"), 0)`)
+    : Prisma.raw('COUNT(*)');
+  const extraWhere = options?.where ? Prisma.raw(`AND ${options.where}`) : Prisma.empty;
 
-  const rows = await prisma.$queryRawUnsafe<Array<{ date: Date; value: bigint | number }>>(
-    `SELECT ${truncExpr} as date, ${valueExpr}::bigint as value
+  const rows = await prisma.$queryRaw<Array<{ date: Date; value: bigint | number }>>(
+    Prisma.sql`SELECT ${truncExpr} as date, ${valueExpr}::bigint as value
      FROM ${tableName}
-     WHERE "createdAt" >= $1 AND "createdAt" <= $2 ${extraWhere}
+     WHERE "createdAt" >= ${from} AND "createdAt" <= ${to} ${extraWhere}
      GROUP BY ${truncExpr}
-     ORDER BY date ASC`,
-    from,
-    to
+     ORDER BY date ASC`
   );
 
   return rows.map((r) => ({
@@ -139,22 +139,21 @@ export async function getAggregation(
   groupBy: string,
   options?: { sumField?: string; limit?: number }
 ): Promise<Array<{ group: string; value: number }>> {
-  const tableName = `"${table}"`;
+  const tableName = Prisma.raw(`"${table}"`);
   const valueExpr = metric === 'sum' && options?.sumField
-    ? `COALESCE(SUM("${options.sumField}"), 0)`
-    : 'COUNT(*)';
-  const limitClause = options?.limit ? `LIMIT ${options.limit}` : '';
+    ? Prisma.raw(`COALESCE(SUM("${options.sumField}"), 0)`)
+    : Prisma.raw('COUNT(*)');
+  const limitClause = options?.limit ? Prisma.raw(`LIMIT ${Number(options.limit)}`) : Prisma.empty;
+  const groupByCol = Prisma.raw(`"${groupBy}"`);
 
-  const rows = await prisma.$queryRawUnsafe<Array<{ group: string; value: bigint | number }>>(
-    `SELECT "${groupBy}" as "group", ${valueExpr}::bigint as value
+  const rows = await prisma.$queryRaw<Array<{ group: string; value: bigint | number }>>(
+    Prisma.sql`SELECT ${groupByCol} as "group", ${valueExpr}::bigint as value
      FROM ${tableName}
-     WHERE "createdAt" >= $1 AND "createdAt" <= $2
-       AND "${groupBy}" IS NOT NULL
-     GROUP BY "${groupBy}"
+     WHERE "createdAt" >= ${from} AND "createdAt" <= ${to}
+       AND ${groupByCol} IS NOT NULL
+     GROUP BY ${groupByCol}
      ORDER BY value DESC
-     ${limitClause}`,
-    from,
-    to
+     ${limitClause}`
   );
 
   return rows.map((r) => ({

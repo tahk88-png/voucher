@@ -7,6 +7,7 @@ import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { showConfirm } from '@/lib/confirm-helpers';
 
 type VatRate = {
   id: string;
@@ -157,14 +158,16 @@ export default function VatManagementPage() {
   }
 
   async function deleteRate(id: string) {
-    if (!confirm('Deaktiveerida see VAT rate?')) return;
-    setRateActionLoading(id);
-    try {
-      await fetch(`/api/admin/vat-rates/${id}`, { method: 'DELETE' });
-      fetchRates();
-    } finally {
-      setRateActionLoading(null);
-    }
+    showConfirm('Deaktiveerida see VAT rate?', async () => {
+      setRateActionLoading(id);
+      try {
+        await fetch(`/api/admin/vat-rates/${id}`, { method: 'DELETE' });
+        fetchRates();
+      } finally {
+        setRateActionLoading(null);
+      }
+    }, { variant: 'destructive' });
+    return;
   }
 
   async function createExemption() {

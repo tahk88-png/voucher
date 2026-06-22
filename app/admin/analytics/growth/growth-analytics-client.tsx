@@ -18,6 +18,7 @@ import {
   DashboardHeader,
   StatComparison,
 } from '@/components/dashboard';
+import type { DateRangeOption } from '@/components/dashboard';
 import {
   FunnelChart,
   ConversionChart,
@@ -57,7 +58,7 @@ function formatPct(value: number): string {
 }
 
 export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsData }) {
-  const [dateRange, setDateRange] = useState('30d');
+  const [dateRange, setDateRange] = useState<DateRangeOption>('30d');
   const { metrics, conversionFunnel, periodComparison, channelAcquisition, churnTrend } = data;
 
   return (
@@ -75,7 +76,7 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
                   : 'border-transparent text-[var(--text-secondary,#6B5744)] hover:text-[var(--text-primary,#2D2721)]'
               }`}
             >
-              {link.label}
+              {link.header}
             </Link>
           ))}
         </nav>
@@ -94,34 +95,30 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
           <MetricCard
             title="User Growth"
             value={formatPct(metrics.userGrowthRate)}
-            change={{
-              text: `${metrics.newUsers} new users`,
-              positive: metrics.userGrowthRate >= 0,
-            }}
+            change={metrics.userGrowthRate}
+            trend={metrics.userGrowthRate >= 0 ? 'up' : 'down'}
             icon={<Users className="h-5 w-5" />}
-            colors={[metrics.userGrowthRate >= 0 ? 'emerald' : 'red']}
           />
           <MetricCard
             title="Revenue Growth"
             value={formatPct(metrics.revenueGrowthRate)}
+            change={metrics.revenueGrowthRate}
+            trend={metrics.revenueGrowthRate >= 0 ? 'up' : 'down'}
             icon={<DollarSign className="h-5 w-5" />}
-            colors={[metrics.revenueGrowthRate >= 0 ? 'emerald' : 'red']}
           />
           <MetricCard
             title="Merchant Growth"
             value={formatPct(metrics.merchantGrowthRate)}
-            change={{
-              text: `${metrics.newMerchants} new merchants`,
-              positive: metrics.merchantGrowthRate >= 0,
-            }}
+            change={metrics.merchantGrowthRate}
+            trend={metrics.merchantGrowthRate >= 0 ? 'up' : 'down'}
             icon={<Building2 className="h-5 w-5" />}
-            colors={[metrics.merchantGrowthRate >= 0 ? 'blue' : 'red']}
           />
           <MetricCard
             title="Churn Rate"
             value={`${metrics.churnRate.toFixed(1)}%`}
+            change={metrics.churnRate}
+            trend={metrics.churnRate <= 5 ? 'down' : 'up'}
             icon={<UserMinus className="h-5 w-5" />}
-            colors={[metrics.churnRate <= 5 ? 'emerald' : 'red']}
           />
         </div>
 
@@ -147,20 +144,20 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
           {/* Conversion Funnel */}
           <ChartCard title="Conversion Funnel" subtitle="View to redemption (30 days)">
             <FunnelChart
-              data={conversionFunnel}
-              stageKey="stage"
-              
+              data={conversionFunnel.map((f) => ({ name: f.stage, value: f.value }))}
               height={320}
-              colors={['#3B82F6', '#6366F1', '#8B5CF6', '#10B981', '#F59E0B']}
             />
           </ChartCard>
 
           {/* Period Comparison */}
           <ChartCard title="Period Comparison" subtitle="This month vs last month">
             <ConversionChart
-              current={periodComparison.current}
-              previous={periodComparison.previous}
-              metrics={['views', 'purchases', 'conversions', 'revenue']}
+              data={[
+                { name: 'Views', value: periodComparison.current.views, previousValue: periodComparison.previous.views },
+                { name: 'Purchases', value: periodComparison.current.purchases, previousValue: periodComparison.previous.purchases },
+                { name: 'Conversions', value: periodComparison.current.conversions, previousValue: periodComparison.previous.conversions },
+                { name: 'Revenue', value: periodComparison.current.revenue, previousValue: periodComparison.previous.revenue },
+              ]}
               height={320}
             />
           </ChartCard>
@@ -172,7 +169,7 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
             <AnimatedBarChart
               data={channelAcquisition}
               xAxisKey="channel"
-              dataKeys={["value"
+              dataKeys={["value"]}
               colors={["#8B5CF6"]}
               height={280}
               horizontal
@@ -184,48 +181,37 @@ export default function GrowthAnalyticsClient({ data }: { data: GrowthAnalyticsD
             <AnimatedLineChart
               data={churnTrend}
               xAxisKey="date"
-              dataKeys={["value"
+              dataKeys={["value"]}
               colors={["#EF4444"]}
               height={280}
-              %`}
-              showDots
             />
           </ChartCard>
         </AnalyticsGrid>
 
-        {/* Period Stat Comparison */}
-        <ChartCard title="Detailed Comparison" subtitle="Key metrics — this period vs previous">
+        {/* Period Stat Comparisons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatComparison
-            stats={[
-              {
-                header: 'Views',
-                current: periodComparison.current.views,
-                previous: periodComparison.previous.views,
-              },
-              {
-                header: 'Purchases',
-                current: periodComparison.current.purchases,
-                previous: periodComparison.previous.purchases,
-              },
-              {
-                header: 'Conversions',
-                current: periodComparison.current.conversions,
-                previous: periodComparison.previous.conversions,
-              },
-              {
-                header: 'Revenue',
-                current: periodComparison.current.revenue,
-                previous: periodComparison.previous.revenue,
-                format: (v: number) =>
-                  new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'EUR',
-                    minimumFractionDigits: 0,
-                  }).format(v),
-              },
-            ]}
+            label="Views"
+            current={periodComparison.current.views}
+            previous={periodComparison.previous.views}
           />
-        </ChartCard>
+          <StatComparison
+            label="Purchases"
+            current={periodComparison.current.purchases}
+            previous={periodComparison.previous.purchases}
+          />
+          <StatComparison
+            label="Conversions"
+            current={periodComparison.current.conversions}
+            previous={periodComparison.previous.conversions}
+          />
+          <StatComparison
+            label="Revenue"
+            current={periodComparison.current.revenue}
+            previous={periodComparison.previous.revenue}
+            format="currency"
+          />
+        </div>
       </div>
     </div>
   );

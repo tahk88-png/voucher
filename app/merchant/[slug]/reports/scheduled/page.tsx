@@ -148,7 +148,7 @@ export default function ScheduledReportsPage() {
       </div>
 
       {/* Existing Schedules */}
-      <WarmCard padding="lg" className="bg-white">
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
         <h2 className="text-base font-semibold text-[var(--text)] mb-4">Active Schedules</h2>
         {loading ? (
           <div className="text-sm text-[var(--text-muted)]">Loading...</div>
@@ -163,7 +163,7 @@ export default function ScheduledReportsPage() {
               <div
                 key={s.id}
                 className={`flex items-center justify-between p-4 rounded-xl border transition-colors ${
-                  s.enabled ? 'border-[var(--border)] bg-white' : 'border-gray-200 bg-gray-50 opacity-60'
+                  s.enabled ? 'border-[var(--border)] bg-[var(--surface)]' : 'border-gray-200 bg-gray-50 opacity-60'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -205,7 +205,7 @@ export default function ScheduledReportsPage() {
       </WarmCard>
 
       {/* New Schedule Form */}
-      <WarmCard padding="lg" className="bg-white">
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
         <h2 className="text-base font-semibold text-[var(--text)] mb-4">Create Schedule</h2>
 
         <div className="space-y-4">
@@ -283,7 +283,7 @@ export default function ScheduledReportsPage() {
       </WarmCard>
 
       {/* Preview info */}
-      <WarmCard padding="lg" className="bg-white">
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
         <h2 className="text-base font-semibold text-[var(--text)] mb-3">Report Preview</h2>
         <p className="text-sm text-[var(--text-muted)] mb-4">
           Scheduled reports include revenue, redemption counts, top vouchers, and growth metrics.

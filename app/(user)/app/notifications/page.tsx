@@ -42,8 +42,11 @@ export default async function NotificationsPage() {
             <WarmCard
               key={note.id}
               padding="lg"
-              className={`bg-white ${note.readAt ? 'border border-[rgba(139,115,85,0.15)]' : 'border border-[#FFC857]'}`}
+              className={`relative bg-white ${note.readAt ? 'border border-[rgba(139,115,85,0.15)]' : 'border border-[var(--primary)]'}`}
             >
+              {!note.readAt && (
+                <span className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-[var(--primary)]" />
+              )}
               <div className="space-y-3">
                 <div>
                   <h2 className="text-base font-semibold text-[#2D2721]">{note.title}</h2>

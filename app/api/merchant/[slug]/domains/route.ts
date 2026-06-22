@@ -5,6 +5,7 @@ import { z } from "zod"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { requireMerchantRole } from "@/lib/rbac"
+import { requireMerchantCapability, AccessControlError, accessErrorResponse } from "@/lib/access-control"
 
 const domainSchema = z
   .string()
@@ -77,6 +78,16 @@ export async function POST(
   }
 
   await requireMerchantRole(session.user.id, merchant.id, "merchant_admin")
+
+  // Custom domains are a Pro+ capability — adding one requires the
+  // domain.custom entitlement (this route has no withErrorHandler wrapper,
+  // so convert the thrown AccessControlError into a clean response).
+  try {
+    await requireMerchantCapability(merchant.id, merchant.slug, "domain.custom")
+  } catch (err) {
+    if (err instanceof AccessControlError) return accessErrorResponse(err)
+    throw err
+  }
 
   const body = await req.json().catch(() => ({}))
   const domain = domainSchema.parse(body.domain || "")

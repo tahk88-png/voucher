@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { evaluateEntitlement, resolveBilling } from '@/lib/access-control/monetization';
+import { evaluateEntitlement, resolveBilling, resolvePlanTierFromPriceId } from '@/lib/access-control/monetization';
 
 const originalEnv = {
   STRIPE_PRICE_ID_STARTER: process.env.STRIPE_PRICE_ID_STARTER,
@@ -147,5 +147,71 @@ describe('access-control monetization', () => {
 
     expect(decision.allowed).toBe(true);
     expect(decision.planTier).toBe('scale');
+  });
+
+  // ── Regression: plan-tier default must be the LOWEST tier, not 'pro' ──
+  // A null/unmatched price ID must never resolve to a paid tier, or an
+  // active subscriber with misconfigured STRIPE_PRICE_ID_* env gets paid
+  // features free.
+  describe('resolvePlanTierFromPriceId default safety', () => {
+    it('maps null price to starter (never pro)', () => {
+      expect(resolvePlanTierFromPriceId(null)).toBe('starter');
+    });
+
+    it('maps an unmatched price to starter (never pro)', () => {
+      expect(resolvePlanTierFromPriceId('price_does_not_exist')).toBe('starter');
+    });
+
+    it('maps configured price IDs to their tiers', () => {
+      expect(resolvePlanTierFromPriceId('price_starter')).toBe('starter');
+      expect(resolvePlanTierFromPriceId('price_pro')).toBe('pro');
+      expect(resolvePlanTierFromPriceId('price_scale')).toBe('scale');
+      expect(resolvePlanTierFromPriceId('price_pro_legacy')).toBe('pro');
+    });
+
+    it('resolveBilling gives an active sub with an unmatched price the lowest tier', () => {
+      const billing = resolveBilling(
+        {
+          createdAt: new Date('2026-01-01T00:00:00Z'),
+          subscriptionStatus: 'active',
+          subscriptionPriceId: 'price_garbage_unmatched',
+          trialEndsAt: null,
+          currentPeriodEnd: new Date('2026-04-30T00:00:00Z'),
+        },
+        new Date('2026-03-01T00:00:00Z'), // past trial
+      );
+      expect(billing.billingState).toBe('active');
+      expect(billing.planTier).toBe('starter');
+    });
+  });
+
+  // ── Regression: activeCampaigns cap (the activation-gate's logic) ──
+  // requireCampaignActivationAccess zeroes campaignsCreatedInCycle and
+  // relies on evaluateEntitlement firing the activeCampaigns limit. Lock
+  // that in: a starter merchant under the per-cycle create quota but at the
+  // active-campaign cap must be blocked when activating another.
+  it('blocks activating beyond the activeCampaigns cap even with create quota left', () => {
+    const decision = evaluateEntitlement(
+      'campaign.create',
+      {
+        createdAt: new Date('2026-01-01T00:00:00Z'),
+        subscriptionStatus: 'active',
+        subscriptionPriceId: 'price_starter',
+        trialEndsAt: null,
+        currentPeriodEnd: new Date('2026-04-30T00:00:00Z'),
+      },
+      {
+        ...baseUsage,
+        campaignsCreatedInCycle: 0, // create quota untouched (activation path)
+        activeCampaigns: 3, // starter cap is 3
+      },
+      '/merchant/acme/settings?upgrade=campaign.create',
+      new Date('2026-03-01T00:00:00Z'),
+    );
+
+    expect(decision.allowed).toBe(false);
+    expect(decision.code).toBe('PAYWALL_LIMIT_REACHED');
+    expect(decision.limit?.key).toBe('activeCampaigns');
+    expect(decision.limit?.max).toBe(3);
   });
 });

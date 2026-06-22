@@ -7,6 +7,8 @@ import { WarmCard } from '@/components/warm-card'
 import { WarmButton } from '@/components/warm-button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { showError } from '@/lib/toast-helpers'
+import { showConfirm } from '@/lib/confirm-helpers'
 
 type PricingRule = {
   id: string
@@ -83,14 +85,16 @@ export default function PricingRulesPage() {
   }
 
   async function deleteRule(id: string) {
-    if (!confirm('Delete this pricing rule?')) return
-    setActionLoading(id)
-    try {
-      await fetch(`/api/merchant/${slug}/pricing-rules/${id}`, { method: 'DELETE' })
-      fetchRules()
-    } finally {
-      setActionLoading(null)
-    }
+    showConfirm('Delete this pricing rule?', async () => {
+      setActionLoading(id)
+      try {
+        await fetch(`/api/merchant/${slug}/pricing-rules/${id}`, { method: 'DELETE' })
+        fetchRules()
+      } finally {
+        setActionLoading(null)
+      }
+    }, { confirmLabel: 'Delete', variant: 'destructive' })
+    return
   }
 
   async function handleCreate(e: React.FormEvent) {
@@ -99,7 +103,7 @@ export default function PricingRulesPage() {
     try {
       config = JSON.parse(newConfigJson)
     } catch {
-      alert('Invalid JSON config')
+      showError('The config field must be valid JSON.')
       return
     }
 

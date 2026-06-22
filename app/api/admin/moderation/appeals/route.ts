@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { logger } from "@/lib/logger";
 import { withErrorHandler } from "@/lib/error-handler";
 import { requireAdminPermission } from "@/lib/admin/guards";
+import { parseCursorParams, buildCursorQuery, buildCursorResult } from "@/lib/cursor-pagination";
 
 export async function GET(req: NextRequest) {
   return withErrorHandler(async () => {
@@ -12,9 +13,7 @@ export async function GET(req: NextRequest) {
 
     const { searchParams } = new URL(req.url);
     const status = searchParams.get("status") ?? undefined;
-    const page = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
-    const limit = Math.min(parseInt(searchParams.get("limit") ?? "50", 10), 1000);
-    const offset = (page - 1) * limit;
+    const { cursor, limit } = parseCursorParams(searchParams);
 
     const where: Record<string, unknown> = {};
     if (status) where.status = status;
@@ -22,44 +21,42 @@ export async function GET(req: NextRequest) {
     logger.info("Admin fetching appeals list", {
       adminUserId: admin.userId,
       status,
-      page,
+      cursor,
       limit,
     });
 
-    const [appeals, total] = await Promise.all([
-      prisma.appeal.findMany({
-        where,
-        include: {
-          moderationAction: {
-            select: {
-              id: true,
-              actionType: true,
-              reason: true,
-              targetUserId: true,
-              targetMerchantId: true,
-              createdAt: true,
-            },
-          },
-          appealUser: {
-            select: { id: true, email: true, name: true },
-          },
-          reviewer: {
-            select: { id: true, email: true, name: true },
+    const paginationArgs = buildCursorQuery({ cursor, limit });
+    const appeals = await prisma.appeal.findMany({
+      where,
+      include: {
+        moderationAction: {
+          select: {
+            id: true,
+            actionType: true,
+            reason: true,
+            targetUserId: true,
+            targetMerchantId: true,
+            createdAt: true,
           },
         },
-        orderBy: { createdAt: "desc" },
-        skip: offset,
-        take: limit,
-      }),
-      prisma.appeal.count({ where }),
-    ]);
+        appealUser: {
+          select: { id: true, email: true, name: true },
+        },
+        reviewer: {
+          select: { id: true, email: true, name: true },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+      ...paginationArgs,
+    });
+
+    const result = buildCursorResult(appeals, limit, cursor);
 
     return NextResponse.json({
-      appeals,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
+      appeals: result.data,
+      nextCursor: result.nextCursor,
+      prevCursor: result.prevCursor,
+      hasMore: result.hasMore,
     });
   });
 }

@@ -51,7 +51,7 @@ export default function NewVoucherPage() {
               <Label htmlFor="description">Description</Label>
               <textarea
                 id="description"
-                className="flex min-h-[80px] w-full rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm placeholder:text-[#8B7355] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]/60 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex min-h-[80px] w-full rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm placeholder:text-[#8B7355] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cc785c]/60 disabled:cursor-not-allowed disabled:opacity-50"
                 value={formData.description}
                 onChange={(e) => handleChange("description", e.target.value)}
                 placeholder="Valid on all items. Cannot be combined with other offers."
@@ -84,7 +84,7 @@ export default function NewVoucherPage() {
                   type="checkbox"
                   checked={formData.weekly}
                   onChange={(e) => handleChange("weekly", e.target.checked)}
-                  className="h-4 w-4 rounded border-[rgba(139,115,85,0.15)] accent-[#FFC857]"
+                  className="h-4 w-4 rounded border-[rgba(139,115,85,0.15)] accent-[#cc785c]"
                   aria-label="Weekly Drop - Limited-time weekly availability"
                 />
               </div>
@@ -101,7 +101,7 @@ export default function NewVoucherPage() {
                   type="checkbox"
                   checked={formData.referral}
                   onChange={(e) => handleChange("referral", e.target.checked)}
-                  className="h-4 w-4 rounded border-[rgba(139,115,85,0.15)] accent-[#FFC857]"
+                  className="h-4 w-4 rounded border-[rgba(139,115,85,0.15)] accent-[#cc785c]"
                   aria-label="Enable Referral Credit - Users earn credit when friends redeem"
                 />
               </div>

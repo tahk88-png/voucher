@@ -3,7 +3,7 @@
 import { Trophy, Flame, Star, Zap, ShoppingBag, Ticket, Users, Heart, Lock } from 'lucide-react';
 import { StreakCounter } from '@/components/gamification/streak-counter';
 import { BadgeDisplay } from '@/components/gamification/badge-display';
-import type { BadgeDefinition } from '@/lib/gamification';
+import type { BadgeDefinition } from '@/lib/gamification-constants';
 import { useState } from 'react';
 
 interface AchievementsClientProps {

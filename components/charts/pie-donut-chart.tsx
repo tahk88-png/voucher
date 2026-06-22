@@ -30,13 +30,13 @@ interface PieDonutChartProps {
 
 const FALLBACK_COLORS = [
   "var(--primary)",
-  "#10b981",
-  "#f59e0b",
-  "#ef4444",
-  "#8b5cf6",
-  "#06b6d4",
-  "#ec4899",
-  "#14b8a6",
+  "#5e7e92",
+  "#be8a2e",
+  "#4e8a5b",
+  "#b5613f",
+  "#7e9cae",
+  "#c84b36",
+  "#82a2c0",
 ]
 
 function CustomTooltip({ active, payload }: TooltipProps<number, string>) {
@@ -55,8 +55,9 @@ function CustomTooltip({ active, payload }: TooltipProps<number, string>) {
   )
 }
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-function renderActiveShape(props: any) {
+// Recharts' active-shape callback is loosely typed; props is the
+// sector geometry passed by the library.
+function renderActiveShape(props: Record<string, any>) {
   const {
     cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill,
   } = props

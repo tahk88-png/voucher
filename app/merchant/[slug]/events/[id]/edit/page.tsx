@@ -91,7 +91,7 @@ export default function EditEventPage() {
     return (
       <div className="p-4 sm:p-6">
         <div className="max-w-2xl mx-auto">
-          <p className="text-sm text-[#6B5744]">Loading...</p>
+          <p className="text-sm text-[var(--text-muted)]">Loading...</p>
         </div>
       </div>
     );
@@ -101,7 +101,7 @@ export default function EditEventPage() {
     return (
       <div className="p-4 sm:p-6">
         <div className="max-w-2xl mx-auto">
-          <p className="text-sm text-[#6B5744]">Event not found.</p>
+          <p className="text-sm text-[var(--text-muted)]">Event not found.</p>
         </div>
       </div>
     );
@@ -117,24 +117,24 @@ export default function EditEventPage() {
           <WarmButton asChild variant="ghost" className="mb-4">
             <Link href={`/merchant/${merchantSlug}/events/${eventId}`}>Back to event</Link>
           </WarmButton>
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Edit event</h1>
-          <p className="text-sm text-[#6B5744]">Update your event details.</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">Edit event</h1>
+          <p className="text-sm text-[var(--text-muted)]">Update your event details.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <WarmCard padding="lg" className="bg-white">
-            <h2 className="text-base font-semibold text-[#2D2721]">Basic information</h2>
+          <WarmCard padding="lg" className="bg-[var(--surface)]">
+            <h2 className="text-base font-semibold text-[var(--text)]">Basic information</h2>
             <div className="space-y-4 mt-4">
               <div>
                 <Label htmlFor="name">Event name *</Label>
-                <Input id="name" name="name" required defaultValue={event.name} className="mt-1 border-[rgba(139,115,85,0.15)]" />
+                <Input id="name" name="name" required defaultValue={event.name} className="mt-1 border-[var(--border)]" />
               </div>
               <div>
                 <Label htmlFor="description">Description</Label>
                 <textarea
                   id="description"
                   name="description"
-                  className="w-full min-h-[100px] px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
+                  className="w-full min-h-[100px] px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                   placeholder="Describe your event..."
                   defaultValue={event.description || ''}
                 />
@@ -147,7 +147,7 @@ export default function EditEventPage() {
                   required
                   defaultValue={event.type}
                   aria-label="Event type"
-                  className="w-full px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
+                  className="w-full px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                 >
                   <option value="festival">Festival</option>
                   <option value="internal">Internal event</option>
@@ -159,8 +159,8 @@ export default function EditEventPage() {
             </div>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white">
-            <h2 className="text-base font-semibold text-[#2D2721]">Date and time</h2>
+          <WarmCard padding="lg" className="bg-[var(--surface)]">
+            <h2 className="text-base font-semibold text-[var(--text)]">Date and time</h2>
             <div className="space-y-4 mt-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -171,7 +171,7 @@ export default function EditEventPage() {
                     type="date"
                     required
                     defaultValue={eventDateObj.toISOString().split('T')[0]}
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
@@ -182,7 +182,7 @@ export default function EditEventPage() {
                     type="time"
                     required
                     defaultValue={eventDateObj.toTimeString().slice(0, 5)}
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
               </div>
@@ -194,7 +194,7 @@ export default function EditEventPage() {
                     name="eventEndDate"
                     type="date"
                     defaultValue={eventEndDateObj ? eventEndDateObj.toISOString().split('T')[0] : ''}
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
@@ -204,15 +204,15 @@ export default function EditEventPage() {
                     name="eventEndTime"
                     type="time"
                     defaultValue={eventEndDateObj ? eventEndDateObj.toTimeString().slice(0, 5) : ''}
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
               </div>
             </div>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white">
-            <h2 className="text-base font-semibold text-[#2D2721]">Location</h2>
+          <WarmCard padding="lg" className="bg-[var(--surface)]">
+            <h2 className="text-base font-semibold text-[var(--text)]">Location</h2>
             <div className="space-y-4 mt-4">
               <div>
                 <Label htmlFor="location">Location name</Label>
@@ -221,7 +221,7 @@ export default function EditEventPage() {
                   name="location"
                   placeholder="e.g., Main Hall, Outdoor Stage"
                   defaultValue={event.location || ''}
-                  className="mt-1 border-[rgba(139,115,85,0.15)]"
+                  className="mt-1 border-[var(--border)]"
                 />
               </div>
               <div>
@@ -231,14 +231,14 @@ export default function EditEventPage() {
                   name="locationAddress"
                   placeholder="Street address, City, Country"
                   defaultValue={event.locationAddress || ''}
-                  className="mt-1 border-[rgba(139,115,85,0.15)]"
+                  className="mt-1 border-[var(--border)]"
                 />
               </div>
             </div>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white">
-            <h2 className="text-base font-semibold text-[#2D2721]">Ticket details</h2>
+          <WarmCard padding="lg" className="bg-[var(--surface)]">
+            <h2 className="text-base font-semibold text-[var(--text)]">Ticket details</h2>
             <div className="space-y-4 mt-4">
               <div>
                 <Label htmlFor="maxCapacity">Max capacity (number of tickets) *</Label>
@@ -250,7 +250,7 @@ export default function EditEventPage() {
                   required
                   placeholder="100"
                   defaultValue={event.maxCapacity}
-                  className="mt-1 border-[rgba(139,115,85,0.15)]"
+                  className="mt-1 border-[var(--border)]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -265,7 +265,7 @@ export default function EditEventPage() {
                     required
                     placeholder="0.00"
                     defaultValue={(event.price / 100).toFixed(2)}
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
@@ -276,7 +276,7 @@ export default function EditEventPage() {
                     required
                     defaultValue={event.currency}
                     aria-label="Currency"
-                    className="w-full px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
+                    className="w-full px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                   >
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -302,7 +302,7 @@ export default function EditEventPage() {
                 <textarea
                   id="terms"
                   name="terms"
-                  className="w-full min-h-[80px] px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
+                  className="w-full min-h-[80px] px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                   placeholder="Event terms, refund policy, etc."
                   defaultValue={event.terms || ''}
                 />

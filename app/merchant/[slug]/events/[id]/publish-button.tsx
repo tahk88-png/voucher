@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { WarmButton } from '@/components/warm-button';
 import { showSuccess, showError } from '@/lib/toast-helpers';
+import { showConfirm } from '@/lib/confirm-helpers';
 
 interface PublishEventButtonProps {
   eventId: string;
@@ -18,32 +19,31 @@ export default function PublishEventButton({
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePublish = async () => {
-    if (!confirm('Publish this event? It will be visible to the public and tickets can be purchased.')) {
-      return;
-    }
+    showConfirm('Publish this event? It will be visible to the public and tickets can be purchased.', async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`/api/events/${eventId}/publish`, {
+          method: 'POST',
+        });
 
-    setIsLoading(true);
-    try {
-      const response = await fetch(`/api/events/${eventId}/publish`, {
-        method: 'POST',
-      });
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || 'Failed to publish event');
+        }
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to publish event');
+        router.refresh();
+        showSuccess('Event published successfully!');
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Failed to publish event';
+        showError(message);
+        if (process.env.NODE_ENV === 'development') {
+          console.error(error);
+        }
+      } finally {
+        setIsLoading(false);
       }
-
-      router.refresh();
-      showSuccess('Event published successfully!');
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Failed to publish event';
-      showError(message);
-      if (process.env.NODE_ENV === 'development') {
-        console.error(error);
-      }
-    } finally {
-      setIsLoading(false);
-    }
+    }, { confirmLabel: 'Publish' });
+    return;
   };
 
   if (currentStatus === 'published') {

@@ -1,0 +1,30 @@
+#!/bin/sh
+# Pre-commit guard: block accidental commits of secret-containing files.
+# Enable once with: git config core.hooksPath .githooks
+# (the repo's postinstall script does this automatically).
+
+set -e
+
+blocked=""
+# Files we never want tracked. .env.example is fine — only *.example is allowed.
+staged=$(git diff --cached --name-only --diff-filter=ACMRT)
+
+while IFS= read -r file; do
+  [ -z "$file" ] && continue
+  case "$file" in
+    .env|.env.local|.env.*.local|.env.production|.env.staging)
+      blocked="$blocked\n  $file"
+      ;;
+  esac
+done <<EOF
+$staged
+EOF
+
+if [ -n "$blocked" ]; then
+  printf "\n\033[31m✗ Refusing to commit environment files with secrets:%b\033[0m\n\n" "$blocked"
+  printf "If this is intentional (e.g. committing a sample), rename to *.example first.\n"
+  printf "To bypass once (NOT recommended): git commit --no-verify\n\n"
+  exit 1
+fi
+
+exit 0

@@ -131,6 +131,20 @@ captureMessage('voucher.created', 'info', {
 
 ## Dashboards
 
+### Grafana — Ops dashboard (shipped)
+
+A ready-to-import dashboard lives at
+[`grafana/voucher-platform.json`](./grafana/voucher-platform.json),
+with setup instructions in [`grafana/README.md`](./grafana/README.md).
+It sources everything from `/api/admin/ops/metrics/prometheus` and
+covers: uptime, memory, HTTP rate + latency percentiles, top paths,
+DB query rate by model, cache hit ratio, rate-limit rejections,
+circuit-breaker transitions, email-queue depth, and payout backlog.
+
+Panels map 1:1 to metrics emitted by `lib/metrics.ts` and
+`lib/ops-gauges.ts` — if you add or rename a metric, update the JSON
+in the same PR.
+
 ### Operations Dashboard
 
 - Real-time error rate

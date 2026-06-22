@@ -52,12 +52,9 @@ async function fetchActivityData() {
     // Recent purchases timeline
     prisma.voucherPurchase.findMany({
       where: { status: 'paid', createdAt: { gte: twentyFourHoursAgo } },
-      select: {
-        id: true,
-        amount: true,
-        createdAt: true,
-        buyer: { select: { name: true, email: true } },
-        voucher: { select: { title: true } },
+      include: {
+        user: { select: { name: true, email: true } },
+        voucher: { select: { id: true, codePrefix: true, type: true } },
         merchant: { select: { name: true } },
       },
       orderBy: { createdAt: 'desc' },
@@ -96,16 +93,16 @@ async function fetchActivityData() {
   }
 
   // Resolve voucher names for popular vouchers
-  const voucherIds = popularVouchers.map((v) => v.voucherId);
+  const voucherIds = popularVouchers.map((v) => v.voucherId).filter((id): id is string => id != null);
   const vouchers = await prisma.voucher.findMany({
     where: { id: { in: voucherIds } },
-    select: { id: true, title: true },
+    select: { id: true, codePrefix: true, type: true },
   });
-  const voucherMap = new Map(vouchers.map((v) => [v.id, v.title]));
+  const voucherMap = new Map(vouchers.map((v) => [v.id, v.codePrefix ?? v.type ?? v.id]));
 
   const topVouchers = popularVouchers.map((v) => ({
-    id: v.voucherId,
-    title: voucherMap.get(v.voucherId) ?? 'Unknown',
+    id: v.voucherId ?? 'unknown',
+    title: (v.voucherId ? voucherMap.get(v.voucherId) : null) ?? 'Unknown',
     purchases: v._count,
     revenue: (v._sum.amount ?? 0) / 100,
   }));
@@ -113,8 +110,8 @@ async function fetchActivityData() {
   // Recent purchases timeline
   const purchaseTimeline = recentPurchases.map((p) => ({
     id: p.id,
-    buyerName: p.buyer?.name ?? p.buyer?.email ?? 'Unknown',
-    voucherTitle: p.voucher?.title ?? 'Unknown',
+    buyerName: p.user?.name ?? p.user?.email ?? 'Unknown',
+    voucherTitle: p.voucher?.codePrefix ?? p.voucher?.type ?? 'Unknown',
     merchantName: p.merchant?.name ?? 'Unknown',
     amount: (p.amount ?? 0) / 100,
     createdAt: p.createdAt.toISOString(),

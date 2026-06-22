@@ -1,3 +1,6 @@
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Analytics', noIndex: true });
+
 import { notFound, redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { auth } from '@/lib/auth';
@@ -12,14 +15,15 @@ import { getVoucherPerformance } from '@/lib/analytics/get-voucher-performance';
 import { getCategoryBreakdown } from '@/lib/analytics/get-category-breakdown';
 import { CardSkeleton } from '@/components/ui/loading-skeletons';
 
-export default async function AnalyticsPage({ params }: { params: { slug: string } }) {
+export default async function AnalyticsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }
 
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   });
 
   if (!merchant) {
@@ -102,8 +106,8 @@ export default async function AnalyticsPage({ params }: { params: { slug: string
     <div className="p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         <div>
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Analytics</h1>
-          <p className="text-sm text-[#6B5744]">Track your voucher performance and revenue</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">Analytics</h1>
+          <p className="text-sm text-[var(--text-muted)]">Track your voucher performance and revenue</p>
         </div>
 
         {/* Stats Cards */}

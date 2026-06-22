@@ -19,7 +19,7 @@ export function TrendChart({
   data,
   height = 120,
   width: propWidth,
-  color = '#f59e0b',
+  color = '#cc785c',
   showLabels = false,
   showGrid = false,
 }: TrendChartProps) {

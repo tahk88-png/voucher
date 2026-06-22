@@ -6,6 +6,7 @@ import { WarmCard } from '@/components/warm-card'
 import { WarmButton } from '@/components/warm-button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { showConfirm } from '@/lib/confirm-helpers'
 
 type Variant = {
   id: string
@@ -114,14 +115,16 @@ export default function ABTestsPage() {
   }
 
   async function deleteTest(testId: string) {
-    if (!confirm('Delete this A/B test?')) return
-    setActionLoading(testId)
-    try {
-      await fetch(`/api/admin/ab-tests/${testId}`, { method: 'DELETE' })
-      fetchTests()
-    } finally {
-      setActionLoading(null)
-    }
+    showConfirm('Delete this A/B test?', async () => {
+      setActionLoading(testId)
+      try {
+        await fetch(`/api/admin/ab-tests/${testId}`, { method: 'DELETE' })
+        fetchTests()
+      } finally {
+        setActionLoading(null)
+      }
+    }, { variant: 'destructive' })
+    return
   }
 
   async function handleCreate(e: React.FormEvent) {

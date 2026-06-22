@@ -1,3 +1,6 @@
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Campaigns', noIndex: true });
+
 import { notFound, redirect } from 'next/navigation';
 import { eachDayOfInterval, format, startOfDay, subDays } from 'date-fns';
 import { auth } from '@/lib/auth';
@@ -13,17 +16,25 @@ import { getTranslations } from 'next-intl/server';
 import { Megaphone, TrendingUp, Ticket, DollarSign } from 'lucide-react';
 import { StartSubscriptionButton } from '@/components/billing-actions';
 import { StatsCard } from '@/components/ui/stats-card';
-import { AreaChart } from '@/components/ui/charts/area-chart';
+import { AreaChart } from '@/components/ui/charts';
 import CampaignsListClient from './campaigns-list-client';
 
-export default async function CampaignsPage({ params }: { params: { slug: string } }) {
+export default async function CampaignsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
-  const merchant = await prisma.merchant.findUnique({ where: { slug: params.slug } });
+  const merchant = await prisma.merchant.findUnique({ where: { slug } });
   if (!merchant) notFound();
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
+
+  // Resolve effective role for UI gating
+  const memberRecord = await prisma.merchantMember.findFirst({
+    where: { merchantId: merchant.id, userId: session.user.id },
+    select: { role: true },
+  });
+  const isAdmin = memberRecord?.role === 'merchant_admin';
 
   const t = await getTranslations('nav');
   const billing = await getMerchantBillingStatus(merchant.id);
@@ -124,35 +135,35 @@ export default async function CampaignsPage({ params }: { params: { slug: string
       <div className="max-w-6xl mx-auto space-y-6">
         <Breadcrumbs
           items={[
-            { label: t('dashboard'), href: `/merchant/${params.slug}/dashboard` },
+            { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
             { label: t('campaigns') },
           ]}
         />
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-[#2D2721]">{t('campaigns')}</h1>
-            <p className="text-sm text-[#6B5744]">Manage your voucher campaigns.</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)]">{t('campaigns')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">Manage your voucher campaigns.</p>
           </div>
-          {billing.active || billing.inTrial ? (
+          {isAdmin && (billing.active || billing.inTrial) ? (
             <WarmButton asChild>
-              <Link href={`/merchant/${params.slug}/campaigns/new`}>Create campaign</Link>
+              <Link href={`/merchant/${slug}/campaigns/new`}>Create campaign</Link>
             </WarmButton>
-          ) : (
-            <StartSubscriptionButton slug={params.slug} />
-          )}
+          ) : isAdmin ? (
+            <StartSubscriptionButton slug={slug} />
+          ) : null}
         </div>
 
         {!billing.active && !billing.inTrial ? (
-          <WarmCard padding="lg" className="bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)]">
+          <WarmCard padding="lg" className="bg-[var(--bg)] border border-[var(--border)]">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <p className="text-sm font-medium text-[#2D2721]">Subscription required</p>
-                <p className="text-sm text-[#6B5744]">
+                <p className="text-sm font-medium text-[var(--text)]">Subscription required</p>
+                <p className="text-sm text-[var(--text-muted)]">
                   Your free 60-day campaign trial has ended. Start the 9.90/month plan to create new
                   campaigns.
                 </p>
               </div>
-              <StartSubscriptionButton slug={params.slug} />
+              <StartSubscriptionButton slug={slug} />
             </div>
           </WarmCard>
         ) : null}
@@ -188,20 +199,20 @@ export default async function CampaignsPage({ params }: { params: { slug: string
           <div className="lg:col-span-2">
             <CampaignsListClient
               campaigns={serializedCampaigns}
-              merchantSlug={params.slug}
+              merchantSlug={slug}
               currency={merchant.defaultCurrency}
               canCreate={billing.active || billing.inTrial}
             />
           </div>
 
           <div className="space-y-6">
-            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+            <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[#2D2721]">Weekly revenue</h2>
-                  <p className="text-sm text-[#6B5744]">Paid campaign sales over 7 days.</p>
+                  <h2 className="text-base font-semibold text-[var(--text)]">Weekly revenue</h2>
+                  <p className="text-sm text-[var(--text-muted)]">Paid campaign sales over 7 days.</p>
                 </div>
-                <span className="text-xs uppercase tracking-wide text-[#8B7355]">{merchant.defaultCurrency}</span>
+                <span className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{merchant.defaultCurrency}</span>
               </div>
               <AreaChart
                 data={chartData}

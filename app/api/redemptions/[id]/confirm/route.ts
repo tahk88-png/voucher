@@ -5,6 +5,7 @@ import { requireMerchantRole } from '@/lib/rbac';
 import { unlockCreditForRedemption } from '@/lib/credits';
 import { logger } from '@/lib/logger';
 import { sendRedemptionConfirmation } from '@/lib/emails';
+import { queueWebhook } from '@/lib/webhooks';
 import { withErrorHandler } from '@/lib/error-handler';
 
 export async function POST(
@@ -51,6 +52,24 @@ export async function POST(
       if (redemption.referralId) {
         await unlockCreditForRedemption(id, redemption.merchantId);
       }
+    });
+
+    // Fire redemption.confirmed webhook. Symmetric to redemption.created:
+    // merchants wire both events to track the in-store flow (issued → scanned).
+    queueWebhook(redemption.merchantId, 'redemption.confirmed', {
+      redemptionId: redemption.id,
+      merchantId: redemption.merchantId,
+      voucherId: redemption.voucherId,
+      campaignId: redemption.voucher?.campaignId ?? null,
+      referralId: redemption.referralId || null,
+      userId: redemption.redeemedByUserId || null,
+      staffUserId: session.user.id,
+      method: redemption.method,
+      orderReference: redemption.orderReference || null,
+      amountBeforeDiscount: redemption.amountBeforeDiscount,
+      discountApplied: redemption.discountApplied,
+      currency: redemption.currency,
+      confirmedAt: confirmedAt.toISOString(),
     });
 
     // Send redemption confirmation email to user (non-blocking)

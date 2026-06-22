@@ -1,17 +1,31 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["opsz"],
+  display: "swap",
+  variable: "--font-fraunces",
+});
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-hanken",
+});
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import Providers from "@/components/providers/session-provider";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
-import dynamic from "next/dynamic";
+import { ConfirmHost } from "@/components/ui/confirm-host";
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, buildLocaleAlternates, getBaseUrl } from "@/lib/seo";
-
-const ChatWidget = dynamic(() => import("@/components/chat-widget").then((m) => m.ChatWidget), {
-  ssr: false,
-});
+import { CookieConsentBanner } from "@/components/cookie-consent-banner";
+import { Analytics } from "@vercel/analytics/react";
+import { ChatWidgetLoader } from "@/components/chat-widget-loader";
+import { WebVitalsReporter } from "@/components/web-vitals";
 
 const baseUrl = getBaseUrl();
 
@@ -65,7 +79,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#f4f1ea",
 };
 
 export default async function RootLayout({
@@ -98,15 +112,13 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning className={`${fraunces.variable} ${hankenGrotesk.variable}`}>
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");var d=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches);if(d)document.documentElement.classList.add("dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",d?"#0c0d12":"#ffffff")}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem("theme");var d=t==="dark"||(t!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches);if(d)document.documentElement.classList.add("dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",d?"#1b1a18":"#f4f1ea")}catch(e){}})()`,
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://js.stripe.com" />
         <link rel="dns-prefetch" href="https://api.stripe.com" />
         <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){})}` }} />
@@ -131,7 +143,11 @@ export default async function RootLayout({
               <Footer />
             </div>
             <Toaster />
-            <ChatWidget />
+            <ConfirmHost />
+            <ChatWidgetLoader />
+            <CookieConsentBanner />
+            <Analytics />
+            <WebVitalsReporter />
           </Providers>
         </NextIntlClientProvider>
       </body>

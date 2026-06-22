@@ -1,3 +1,6 @@
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Events', noIndex: true });
+
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { eachDayOfInterval, format, startOfDay, subDays } from 'date-fns';
@@ -11,7 +14,7 @@ import { Calendar, DollarSign, Ticket, TrendingUp } from 'lucide-react';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { StatsCard } from '@/components/ui/stats-card';
-import { AreaChart } from '@/components/ui/charts/area-chart';
+import { AreaChart } from '@/components/ui/charts';
 
 const statusLabel: Record<string, string> = {
   draft: 'Draft',
@@ -22,18 +25,19 @@ const statusLabel: Record<string, string> = {
 };
 
 const statusStyles: Record<string, string> = {
-  draft: 'bg-[#F2EDE3] text-[#6B5744]',
-  published: 'bg-[#9DB5A5] text-white',
-  sold_out: 'bg-[#E17B5C] text-white',
+  draft: 'bg-[#F2EDE3] text-[var(--text-muted)]',
+  published: 'bg-[#4e8a5b] text-white',
+  sold_out: 'bg-[var(--danger)] text-white',
   cancelled: 'bg-[#E5E7EB] text-[#6B7280]',
   ended: 'bg-[#6B5744] text-white',
 };
 
-export default async function EventsPage({ params }: { params: { slug: string } }) {
+export default async function EventsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
-  const merchant = await prisma.merchant.findUnique({ where: { slug: params.slug } });
+  const merchant = await prisma.merchant.findUnique({ where: { slug } });
   if (!merchant) notFound();
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
@@ -121,22 +125,22 @@ export default async function EventsPage({ params }: { params: { slug: string } 
       <div className="max-w-6xl mx-auto">
         <Breadcrumbs
           items={[
-            { label: t('dashboard'), href: `/merchant/${params.slug}/dashboard` },
+            { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
             { label: t('events') },
           ]}
         />
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
-              <Calendar className="h-6 w-6 text-[#2D2721]" />
+            <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+              <Calendar className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-[#2D2721]">{t('events')}</h1>
-              <p className="text-sm text-[#6B5744]">Manage your events and tickets</p>
+              <h1 className="text-2xl font-semibold text-[var(--text)]">{t('events')}</h1>
+              <p className="text-sm text-[var(--text-muted)]">Manage your events and tickets</p>
             </div>
           </div>
           <WarmButton asChild>
-            <Link href={`/merchant/${params.slug}/events/new`}>Create event</Link>
+            <Link href={`/merchant/${slug}/events/new`}>Create event</Link>
           </WarmButton>
         </div>
 
@@ -153,19 +157,19 @@ export default async function EventsPage({ params }: { params: { slug: string } 
         </div>
 
         {eventsWithStats.length === 0 ? (
-          <WarmCard padding="lg" className="bg-white text-center py-16">
+          <WarmCard padding="lg" className="bg-[var(--surface)] text-center py-16">
             <div className="flex flex-col items-center gap-4">
               <div className="w-16 h-16 rounded-full bg-[#FAF7F2] flex items-center justify-center">
-                <Calendar className="h-8 w-8 text-[#8B7355]" />
+                <Calendar className="h-8 w-8 text-[var(--text-faint)]" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2 text-[#2D2721]">No events yet</h3>
-                <p className="text-sm text-[#6B5744] mb-4">
+                <h3 className="text-lg font-semibold mb-2 text-[var(--text)]">No events yet</h3>
+                <p className="text-sm text-[var(--text-muted)] mb-4">
                   Create an event to sell tickets and manage attendance.
                 </p>
               </div>
               <WarmButton asChild>
-                <Link href={`/merchant/${params.slug}/events/new`}>Create your first event</Link>
+                <Link href={`/merchant/${slug}/events/new`}>Create your first event</Link>
               </WarmButton>
             </div>
           </WarmCard>
@@ -178,11 +182,11 @@ export default async function EventsPage({ params }: { params: { slug: string } 
                   const statusClass = statusStyles[event.status] || statusStyles.draft;
                   const pct = event.maxCapacity > 0 ? Math.min(100, (event.soldTickets / event.maxCapacity) * 100) : 0;
                   return (
-                    <WarmCard key={event.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+                    <WarmCard key={event.id} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <h3 className="text-lg font-semibold text-[#2D2721]">{event.name}</h3>
-                          <p className="text-sm text-[#8B7355]">
+                          <h3 className="text-lg font-semibold text-[var(--text)]">{event.name}</h3>
+                          <p className="text-sm text-[var(--text-faint)]">
                             {event.type === 'festival'
                               ? 'Festival'
                               : event.type === 'internal'
@@ -195,28 +199,28 @@ export default async function EventsPage({ params }: { params: { slug: string } 
                         </span>
                       </div>
 
-                      <div className="mt-3 space-y-2 text-sm text-[#6B5744]">
+                      <div className="mt-3 space-y-2 text-sm text-[var(--text-muted)]">
                         <div className="flex justify-between">
                           <span>Date:</span>
-                          <span className="font-medium text-[#2D2721]">
+                          <span className="font-medium text-[var(--text)]">
                             {new Date(event.eventDate).toLocaleDateString(undefined, { dateStyle: 'medium' })}
                           </span>
                         </div>
                         {event.location && (
                           <div className="flex justify-between">
                             <span>Location:</span>
-                            <span className="font-medium text-[#2D2721] truncate ml-2">{event.location}</span>
+                            <span className="font-medium text-[var(--text)] truncate ml-2">{event.location}</span>
                           </div>
                         )}
                         <div className="flex justify-between">
                           <span>Price:</span>
-                          <span className="font-medium text-[#2D2721]">
+                          <span className="font-medium text-[var(--text)]">
                             {event.price > 0 ? formatCurrency(event.price, event.currency) : 'Free'}
                           </span>
                         </div>
                         <div className="flex justify-between">
                           <span>Tickets:</span>
-                          <span className="font-medium text-[#2D2721]">
+                          <span className="font-medium text-[var(--text)]">
                             {event.soldTickets} / {event.maxCapacity} sold
                           </span>
                         </div>
@@ -224,16 +228,16 @@ export default async function EventsPage({ params }: { params: { slug: string } 
 
                       <div className="mt-3">
                         <div className="h-1.5 rounded-full bg-[#F2EDE3] overflow-hidden">
-                          <div className="h-full rounded-full bg-[#FFC857]" style={{ width: `${pct}%` }} />
+                          <div className="h-full rounded-full bg-[#cc785c]" style={{ width: `${pct}%` }} />
                         </div>
                       </div>
 
                       <div className="mt-4 flex gap-2">
                         <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                          <Link href={`/merchant/${params.slug}/events/${event.id}`}>View</Link>
+                          <Link href={`/merchant/${slug}/events/${event.id}`}>View</Link>
                         </WarmButton>
                         <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                          <Link href={`/merchant/${params.slug}/events/${event.id}/edit`}>Edit</Link>
+                          <Link href={`/merchant/${slug}/events/${event.id}/edit`}>Edit</Link>
                         </WarmButton>
                       </div>
                     </WarmCard>
@@ -243,17 +247,17 @@ export default async function EventsPage({ params }: { params: { slug: string } 
             </div>
 
             <div className="space-y-6">
-              <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+              <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h2 className="text-base font-semibold text-[#2D2721]">Weekly ticket revenue</h2>
-                    <p className="text-sm text-[#6B5744]">Paid ticket sales over 7 days.</p>
+                    <h2 className="text-base font-semibold text-[var(--text)]">Weekly ticket revenue</h2>
+                    <p className="text-sm text-[var(--text-muted)]">Paid ticket sales over 7 days.</p>
                   </div>
-                  <span className="text-xs uppercase tracking-wide text-[#8B7355]">{merchant.defaultCurrency}</span>
+                  <span className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{merchant.defaultCurrency}</span>
                 </div>
                 <AreaChart
                   data={chartData}
-                  areas={[{ dataKey: 'revenue', name: 'Revenue', color: '#9DB5A5' }]}
+                  areas={[{ dataKey: 'revenue', name: 'Revenue', color: '#cc785c' }]}
                   xAxisKey="date"
                   height={240}
                   showLegend={false}

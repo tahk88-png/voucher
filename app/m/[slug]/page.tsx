@@ -8,9 +8,10 @@ import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { Gift, Megaphone, Globe, Mail } from 'lucide-react';
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug, isActive: true },
+    where: { slug, isActive: true },
     select: { name: true, slug: true, brandLogoUrl: true },
   });
   if (!merchant) return { title: 'Not Found' };
@@ -25,10 +26,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function MerchantPublicPage({ params }: { params: { slug: string } }) {
+export default async function MerchantPublicPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const now = new Date();
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug, isActive: true },
+    where: { slug, isActive: true },
     include: {
       campaigns: {
         where: { status: 'active', endDate: { gte: now } },

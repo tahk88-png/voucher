@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { Heart, ExternalLink, ShoppingCart } from 'lucide-react';
 import { WarmCard } from '@/components/warm-card';
@@ -63,10 +64,12 @@ export function GiftCard({
         {/* Image */}
         <div className="relative aspect-square bg-[var(--surface-dim)] overflow-hidden">
           {mediaUrl ? (
-            <img
+            <Image
+              fill
               src={mediaUrl}
               alt={title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-[var(--text-muted)]">
@@ -91,6 +94,8 @@ export function GiftCard({
           {/* Save button */}
           <button
             onClick={handleSave}
+            aria-label={saved ? 'Unsave' : 'Save'}
+            aria-pressed={saved}
             className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors"
           >
             <Heart

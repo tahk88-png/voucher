@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { logger } from '@/lib/logger';
 import NextLink from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -85,8 +86,7 @@ export default async function LocaleLayout({
     messages = await getMessages();
   } catch (err) {
     if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.error('[LocaleLayout] getMessages failed:', err);
+      logger.error('[LocaleLayout] getMessages failed', { error: err instanceof Error ? err.message : String(err) });
     }
     throw err;
   }
@@ -100,7 +100,7 @@ export default async function LocaleLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex items-center justify-between gap-4">
               <NextLink href="/" className="flex items-center gap-2">
-                <span className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
+                <span className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
                   <Gift className="h-6 w-6 text-white" />
                 </span>
                 <span className="text-xl font-bold text-[#2D2721]">GiftHub</span>

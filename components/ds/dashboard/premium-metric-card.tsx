@@ -112,15 +112,15 @@ export function PremiumMetricCard({
   const trendDir = trend > 0 ? 'up' : trend < 0 ? 'down' : 'neutral';
   const trendColor =
     trendDir === 'up'
-      ? 'var(--ds-success, #10b981)'
+      ? 'var(--ds-success, #4e8a5b)'
       : trendDir === 'down'
-        ? 'var(--ds-error, #f43f5e)'
+        ? 'var(--ds-error, #c84b36)'
         : 'var(--ds-text-tertiary)';
   const glowColor =
     trendDir === 'up'
-      ? 'rgba(16, 185, 129, 0.06)'
+      ? 'rgba(78, 138, 91, 0.06)'
       : trendDir === 'down'
-        ? 'rgba(244, 63, 94, 0.06)'
+        ? 'rgba(200, 75, 54, 0.06)'
         : 'transparent';
 
   const TrendIcon = trendDir === 'up' ? TrendingUp : trendDir === 'down' ? TrendingDown : Minus;
@@ -197,8 +197,8 @@ export function PremiumMetricCard({
               width: isCompact ? 28 : 36,
               height: isCompact ? 28 : 36,
               background: 'var(--ds-bg-glass)',
-              color: 'var(--ds-primary, #06b6d4)',
-              boxShadow: '0 0 12px rgba(6, 182, 212, 0.15)',
+              color: 'var(--ds-primary, #cc785c)',
+              boxShadow: '0 0 12px rgba(204, 120, 92, 0.15)',
             }}
           >
             {icon}

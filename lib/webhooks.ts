@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 import crypto from 'crypto';
 
 const MAX_RETRIES = 3;
@@ -94,6 +95,7 @@ export const WEBHOOK_EVENTS = [
   'voucher.redeemed',
   'voucher.purchased',
   'voucher.expired',
+  'voucher.flash_sale_started',
   'campaign.started',
   'campaign.ended',
   'ticket.redeemed',
@@ -103,6 +105,7 @@ export const WEBHOOK_EVENTS = [
   'review.created',
   'subscription.created',
   'booking.created',
+  'test.ping',
 ] as const;
 
 export type WebhookEvent = (typeof WEBHOOK_EVENTS)[number];
@@ -149,6 +152,6 @@ export function queueWebhook(
   payload: Record<string, any>
 ): void {
   dispatchWebhook(merchantId, event, payload).catch((err) => {
-    console.error(`[webhook] Failed to dispatch ${event} for merchant ${merchantId}:`, err);
+    logger.error(`[webhook] Failed to dispatch ${event} for merchant ${merchantId}`, { error: err instanceof Error ? err.message : String(err) });
   });
 }

@@ -1,3 +1,6 @@
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Hub', description: 'Explore merchants and offers', path: '/hub' });
+
 import HubShell from "@/components/layout/hub-shell"
 import SitePageRenderer from "@/components/site/site-page-renderer"
 import { getSitePage } from "@/lib/site-pages"

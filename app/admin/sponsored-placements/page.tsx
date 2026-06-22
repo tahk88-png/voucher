@@ -10,6 +10,7 @@ import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
+import { showConfirm } from '@/lib/confirm-helpers';
 
 type Placement = {
   id: string;
@@ -150,14 +151,16 @@ export default function SponsoredPlacementsPage() {
   }
 
   async function deletePlacement(id: string) {
-    if (!confirm('Deactivate this sponsored placement?')) return;
-    setActionLoading(id);
-    try {
-      await fetch(`/api/admin/sponsored-placements/${id}`, { method: 'DELETE' });
-      await fetchPlacements();
-    } finally {
-      setActionLoading(null);
-    }
+    showConfirm('Deactivate this sponsored placement?', async () => {
+      setActionLoading(id);
+      try {
+        await fetch(`/api/admin/sponsored-placements/${id}`, { method: 'DELETE' });
+        await fetchPlacements();
+      } finally {
+        setActionLoading(null);
+      }
+    }, { variant: 'destructive' });
+    return;
   }
 
   function startEditing(p: Placement) {

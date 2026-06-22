@@ -18,6 +18,7 @@ import {
   Download,
 } from "lucide-react";
 import Link from "next/link";
+import { PasskeyManager } from "@/components/settings/passkey-manager";
 
 type SetupStep = "idle" | "scanning" | "verifying" | "complete" | "disabling";
 
@@ -547,6 +548,9 @@ export default function SecurityPage() {
           </form>
         </WarmCard>
       )}
+
+      {/* Passkeys (WebAuthn) */}
+      <PasskeyManager />
 
       {/* Quick links */}
       <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">

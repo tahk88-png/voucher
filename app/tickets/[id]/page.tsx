@@ -5,24 +5,26 @@ import { safeParseJson } from '@/lib/utils';
 import { WarmCard } from '@/components/warm-card';
 import TicketViewClient from './ticket-view-client';
 import QRCode from 'qrcode';
+import { logger } from '@/lib/logger';
 
 async function generateQRCode(text: string): Promise<string> {
   try {
     return await QRCode.toDataURL(text);
   } catch (err) {
-    console.error('QR code generation error:', err);
+    logger.error('QR code generation error', { error: err instanceof Error ? err.message : String(err) });
     return '';
   }
 }
 
-export default async function TicketPage({ params }: { params: { id: string } }) {
+export default async function TicketPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }
 
   const ticket = await prisma.ticket.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       event: {
         include: { merchant: true },

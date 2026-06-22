@@ -11,6 +11,7 @@ import { setRequestLocale } from "next-intl/server"
 import { routing, Link } from "@/routing"
 import { getCampaignCategoryId } from "@/lib/campaign-categories"
 import CampaignShareButton from "../campaign-share-button"
+import { ReviewList } from "@/components/reviews/review-list"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_NAME, getLocalePath } from "@/lib/seo"
 
 export function generateStaticParams() {
@@ -264,10 +265,10 @@ export default async function CampaignDetailPage({
               </div>
 
               <WarmButton asChild fullWidth size="lg" className="mb-3">
-                <Link href={`/campaigns/${campaign.id}?category=${categoryId}`}>
+                <Link href={`/login?callbackUrl=${encodeURIComponent(`/campaigns/${campaign.id}`)}`}>
                   <span className="inline-flex items-center gap-2">
                     <ShoppingBag className="w-4 h-4" />
-                    Add to cart
+                    {campaign.price ? 'Buy Now' : 'Get Free Voucher'}
                   </span>
                 </Link>
               </WarmButton>
@@ -357,6 +358,11 @@ export default async function CampaignDetailPage({
           </div>
 
           <div className="space-y-6">
+            <WarmCard padding="lg" className="bg-white">
+              <h3 className="text-lg font-bold text-[#2D2721] mb-4">Reviews</h3>
+              <ReviewList campaignId={campaign.id} />
+            </WarmCard>
+
             <WarmCard padding="lg" className="bg-white">
               <h3 className="text-lg font-bold text-[#2D2721] mb-4">Campaign stats</h3>
               <div className="space-y-3 text-sm text-[#6B5744]">

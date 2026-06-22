@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 
-type Props = { params: { locale: string } };
+type Props = { params: Promise<{ locale: string }> };
 
-export default function LocalizedAdminRedirect({ params: _params }: Props) {
+export default async function LocalizedAdminRedirect({ params }: Props) {
+  await params;
   redirect("/admin");
 }

@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { safeParseJson } from '@/lib/utils';
 import { createCheckoutSession, isStripeConfigured } from '@/lib/stripe';
+import { PLATFORM_FEE_PERCENT } from '@/lib/access-control/monetization';
 import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimitDistributed } from '@/lib/rate-limit';
 import { z } from 'zod';
@@ -91,53 +92,92 @@ export async function POST(
       }
     }
 
-    // Create purchase record
-    const purchase = await prisma.ticketPurchase.create({
-      data: {
-        ticketId: ticket.id,
-        eventId: ticket.event.id,
-        merchantId: ticket.merchantId,
-        userId: session.user.id,
-        amount: price,
-        currency: ticket.event.currency,
-        status: 'pending',
-        attendeeName: attendeeName || session.user.name || null,
-        attendeeEmail: attendeeEmail || session.user.email || null,
-      },
-    });
+    // Atomically claim the seat and open the purchase in one transaction.
+    // The status CAS (`status: 'available'`) is what prevents a double-sell:
+    // between the read above and this write, two concurrent buyers of the
+    // SAME ticket would both pass the `status === 'available'` check, but only
+    // one can match the row here (count 1) — the loser sees count 0 and is
+    // turned away, so a seat is never sold twice.
+    const purchase = await prisma.$transaction(async (tx) => {
+      const claimed = await tx.ticket.updateMany({
+        where: { id: ticket.id, status: 'available' },
+        data: { status: 'sold', purchasedAt: new Date() },
+      });
+      if (claimed.count === 0) return null;
 
-    // Mark ticket as sold (will be confirmed after payment)
-    await prisma.ticket.update({
-      where: { id: ticket.id },
-      data: { status: 'sold', purchasedAt: new Date() },
-    });
-
-    // Create Stripe checkout session
-    const checkoutSession = await createCheckoutSession({
-      lineItems: [
-        {
-          price_data: {
-            currency: ticket.event.currency.toLowerCase(),
-            product_data: {
-              name: `Ticket: ${ticket.event.name}`,
-              description: ticket.event.description || undefined,
-            },
-            unit_amount: price,
-          },
-          quantity: 1,
+      return tx.ticketPurchase.create({
+        data: {
+          ticketId: ticket.id,
+          eventId: ticket.event.id,
+          merchantId: ticket.merchantId,
+          userId: session.user.id,
+          amount: price,
+          currency: ticket.event.currency,
+          status: 'pending',
+          attendeeName: attendeeName || session.user.name || null,
+          attendeeEmail: attendeeEmail || session.user.email || null,
         },
-      ],
-      successUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/payment/success?session_id={CHECKOUT_SESSION_ID}&event_id=${ticket.event.id}`,
-      cancelUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/payment/cancel?event_id=${ticket.event.id}`,
-      metadata: {
-        purchaseId: purchase.id,
-        ticketId: ticket.id,
-        eventId: ticket.event.id,
-        merchantId: ticket.merchantId,
-        userId: session.user.id,
-      },
-      customerEmail: attendeeEmail || session.user.email || undefined,
+      });
     });
+
+    if (!purchase) {
+      // Lost the race — another buyer claimed this seat first.
+      return NextResponse.json({ error: 'Ticket not available for purchase' }, { status: 400 });
+    }
+
+    // Create Stripe checkout session. If this fails, release the seat we just
+    // claimed (and fail the pending purchase) so it isn't stranded as 'sold'
+    // with no completed payment — otherwise the seat is lost for good.
+    // Route the net-of-fee amount to the merchant's connected account when
+    // they've completed Connect onboarding (mirrors the voucher/gift-card
+    // purchase paths). Un-onboarded merchants keep the direct-charge flow.
+    const platformFeeAmount = Math.round((price * PLATFORM_FEE_PERCENT) / 100);
+    const useConnect =
+      !!ticket.event.merchant.stripeAccountId && ticket.event.merchant.payoutsEnabled;
+
+    let checkoutSession;
+    try {
+      checkoutSession = await createCheckoutSession({
+        lineItems: [
+          {
+            price_data: {
+              currency: ticket.event.currency.toLowerCase(),
+              product_data: {
+                name: `Ticket: ${ticket.event.name}`,
+                description: ticket.event.description || undefined,
+              },
+              unit_amount: price,
+            },
+            quantity: 1,
+          },
+        ],
+        successUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/payment/success?session_id={CHECKOUT_SESSION_ID}&event_id=${ticket.event.id}`,
+        cancelUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/payment/cancel?event_id=${ticket.event.id}`,
+        metadata: {
+          purchaseId: purchase.id,
+          ticketId: ticket.id,
+          eventId: ticket.event.id,
+          merchantId: ticket.merchantId,
+          userId: session.user.id,
+          platformFeeAmount: String(platformFeeAmount),
+        },
+        customerEmail: attendeeEmail || session.user.email || undefined,
+        connectedAccountId: useConnect ? ticket.event.merchant.stripeAccountId : null,
+        applicationFeeAmount: useConnect ? platformFeeAmount : undefined,
+      });
+    } catch (err) {
+      await prisma.$transaction([
+        prisma.ticket.update({
+          where: { id: ticket.id },
+          data: { status: 'available', purchasedAt: null },
+        }),
+        prisma.ticketPurchase.update({
+          where: { id: purchase.id },
+          data: { status: 'failed' },
+        }),
+      ]);
+      throw err;
+    }
 
     // Update purchase with Stripe session ID
     await prisma.ticketPurchase.update({

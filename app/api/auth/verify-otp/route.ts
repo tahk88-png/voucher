@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
 import { logger } from '@/lib/logger';
+import { rateLimitDistributed } from '@/lib/rate-limit';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,6 +14,19 @@ export async function POST(req: NextRequest) {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+
+    const [ipLimit, emailLimit] = await Promise.all([
+      rateLimitDistributed(`otp_verify:ip:${ip}`, 10, 15 * 60 * 1000, 'otp_verify_ip'),
+      rateLimitDistributed(`otp_verify:email:${normalizedEmail}`, 5, 15 * 60 * 1000, 'otp_verify_email'),
+    ]);
+    if (!ipLimit.allowed || !emailLimit.allowed) {
+      const resetAt = Math.max(ipLimit.resetAt, emailLimit.resetAt);
+      return NextResponse.json(
+        { error: 'Too many attempts. Please try again later.' },
+        { status: 429, headers: { 'Retry-After': String(Math.ceil((resetAt - Date.now()) / 1000)) } },
+      );
+    }
 
     const tokenRecord = await prisma.verificationToken.findFirst({
       where: {

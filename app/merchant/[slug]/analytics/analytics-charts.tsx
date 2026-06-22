@@ -1,8 +1,6 @@
 "use client"
 
-import { LineChart } from "@/components/ui/charts/line-chart"
-import { BarChart } from "@/components/ui/charts/bar-chart"
-import { PieChart } from "@/components/ui/charts/pie-chart"
+import { LineChart, BarChart, PieChart } from "@/components/ui/charts"
 import { WarmCard } from "@/components/warm-card"
 
 interface RedemptionTrend {
@@ -37,14 +35,14 @@ export function AnalyticsCharts({
     <div className="space-y-6">
       {/* Redemption Trends */}
       <WarmCard padding="lg">
-        <h3 className="text-lg font-semibold text-[#2D2721] mb-4">
+        <h3 className="text-lg font-semibold text-[var(--text)] mb-4">
           Redemption Trends (Last 30 Days)
         </h3>
         <LineChart
           data={redemptionTrends}
           lines={[
-            { dataKey: "count", name: "Redemptions", color: "#FFC857" },
-            { dataKey: "revenue", name: "Revenue ($)", color: "#9DB5A5" },
+            { dataKey: "count", name: "Redemptions", color: "#cc785c" },
+            { dataKey: "revenue", name: "Revenue ($)", color: "#5e7e92" },
           ]}
           xAxisKey="date"
           height={350}
@@ -56,7 +54,7 @@ export function AnalyticsCharts({
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Top Performing Vouchers */}
         <WarmCard padding="lg">
-          <h3 className="text-lg font-semibold text-[#2D2721] mb-4">
+          <h3 className="text-lg font-semibold text-[var(--text)] mb-4">
             Top Performing Vouchers
           </h3>
           <BarChart
@@ -74,7 +72,7 @@ export function AnalyticsCharts({
 
         {/* Category Breakdown */}
         <WarmCard padding="lg">
-          <h3 className="text-lg font-semibold text-[#2D2721] mb-4">
+          <h3 className="text-lg font-semibold text-[var(--text)] mb-4">
             Redemptions by Category
           </h3>
           {categoryBreakdown.length > 0 ? (
@@ -86,7 +84,7 @@ export function AnalyticsCharts({
               innerRadius={70}
             />
           ) : (
-            <div className="h-[300px] flex items-center justify-center text-[#8B7355]">
+            <div className="h-[300px] flex items-center justify-center text-[var(--text-faint)]">
               No category data available
             </div>
           )}

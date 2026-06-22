@@ -8,6 +8,9 @@ export const dynamic = 'force-dynamic';
 type ComparisonPeriod = 'day' | 'week' | 'month' | 'quarter' | 'year';
 type Metric = 'revenue' | 'redemptions' | 'purchases' | 'referrals' | 'customers';
 
+const VALID_PERIODS: ComparisonPeriod[] = ['day', 'week', 'month', 'quarter', 'year'];
+const VALID_METRICS: Metric[] = ['revenue', 'redemptions', 'purchases', 'referrals', 'customers'];
+
 function getPeriodMs(period: ComparisonPeriod): number {
   switch (period) {
     case 'day': return 24 * 60 * 60 * 1000;
@@ -15,6 +18,10 @@ function getPeriodMs(period: ComparisonPeriod): number {
     case 'month': return 30 * 24 * 60 * 60 * 1000;
     case 'quarter': return 90 * 24 * 60 * 60 * 1000;
     case 'year': return 365 * 24 * 60 * 60 * 1000;
+    // An out-of-range period would otherwise return undefined → NaN dates and a
+    // silently-wrong comparison. Default to 'month' (the request validator
+    // rejects bad values before this is reached, so this is a belt-and-braces).
+    default: return 30 * 24 * 60 * 60 * 1000;
   }
 }
 
@@ -34,6 +41,21 @@ export async function GET(
     const { searchParams } = new URL(req.url);
     const metric = (searchParams.get('metric') ?? 'revenue') as Metric;
     const period = (searchParams.get('period') ?? 'month') as ComparisonPeriod;
+
+    // Reject unknown metric/period rather than silently returning zeros (unknown
+    // metric falls through the switch) or NaN windows (unknown period).
+    if (!VALID_METRICS.includes(metric)) {
+      return NextResponse.json(
+        { error: `Invalid metric. Expected one of: ${VALID_METRICS.join(', ')}` },
+        { status: 400 }
+      );
+    }
+    if (!VALID_PERIODS.includes(period)) {
+      return NextResponse.json(
+        { error: `Invalid period. Expected one of: ${VALID_PERIODS.join(', ')}` },
+        { status: 400 }
+      );
+    }
 
     const periodMs = getPeriodMs(period);
     const now = new Date();

@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
-import { AreaChart } from '@/components/ui/charts/area-chart';
+import { AreaChart } from '@/components/ui/charts';
 import { formatCurrency, safeParseJson } from '@/lib/utils';
 import { Calendar, CheckCircle2, Sparkles, Ticket } from 'lucide-react';
 import { DashboardStats } from './dashboard-stats';
@@ -36,18 +36,20 @@ export default async function MerchantDashboardPage({
   params,
   searchParams,
 }: {
-  params: { slug: string };
-  searchParams?: { range?: string | string[] };
+  params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ range?: string | string[] }>;
 }) {
+  const { slug } = await params;
+  const sp = await searchParams;
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
-  const merchant = await prisma.merchant.findUnique({ where: { slug: params.slug } });
+  const merchant = await prisma.merchant.findUnique({ where: { slug } });
   if (!merchant) notFound();
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
 
-  const rawRange = Array.isArray(searchParams?.range) ? searchParams?.range[0] : searchParams?.range;
+  const rawRange = Array.isArray(sp?.range) ? sp?.range[0] : sp?.range;
   const selectedRange = resolveDashboardRange(rawRange);
   const now = new Date();
   const rangeStart = startOfDay(subDays(now, selectedRange.days - 1));
@@ -170,7 +172,7 @@ export default async function MerchantDashboardPage({
       ? {
           label: `${pendingRedemptions} pending redemptions`,
           detail: 'Confirm in-store redemptions',
-          href: `/merchant/${params.slug}/redemptions`,
+          href: `/merchant/${slug}/redemptions`,
           tone: 'urgent',
         }
       : null,
@@ -178,7 +180,7 @@ export default async function MerchantDashboardPage({
       ? {
           label: `${expiringVouchers} vouchers expiring soon`,
           detail: 'Review voucher validity dates',
-          href: `/merchant/${params.slug}/vouchers`,
+          href: `/merchant/${slug}/vouchers`,
           tone: 'warning',
         }
       : null,
@@ -186,7 +188,7 @@ export default async function MerchantDashboardPage({
       ? {
           label: `${endingCampaigns} campaigns ending this week`,
           detail: 'Extend or duplicate your best campaigns',
-          href: `/merchant/${params.slug}/campaigns`,
+          href: `/merchant/${slug}/campaigns`,
           tone: 'warning',
         }
       : null,
@@ -194,16 +196,16 @@ export default async function MerchantDashboardPage({
       ? {
           label: `${upcomingEvents.length} upcoming events`,
           detail: 'Prepare ticket check-ins and staffing',
-          href: `/merchant/${params.slug}/events`,
+          href: `/merchant/${slug}/events`,
           tone: 'info',
         }
       : null,
   ].filter(Boolean) as ActionItem[];
 
   const toneStyles: Record<ActionItem['tone'], string> = {
-    urgent: 'bg-[#E17B5C]',
-    warning: 'bg-[#FFC857]',
-    info: 'bg-[#9DB5A5]',
+    urgent: 'bg-[var(--danger)]',
+    warning: 'bg-[#be8a2e]',
+    info: 'bg-[#5e7e92]',
   };
 
   const topVoucherMax = topVouchers.reduce((max, voucher) => {
@@ -215,11 +217,11 @@ export default async function MerchantDashboardPage({
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div>
-            <h1 className="text-3xl font-bold text-[#2D2721]">Merchant Dashboard</h1>
-            <p className="text-sm text-[#6B5744]">Welcome back, {merchant.name}</p>
+            <h1 className="text-3xl font-bold text-[var(--text)]">Merchant Dashboard</h1>
+            <p className="text-sm text-[var(--text-muted)]">Welcome back, {merchant.name}</p>
             <div className="mt-2">
               <LiveStats
-                slug={params.slug}
+                slug={slug}
                 initialToday={weeklyRedemptions.filter(r =>
                   new Date(r.createdAt) >= startOfDay(now)
                 ).length}
@@ -229,37 +231,37 @@ export default async function MerchantDashboardPage({
           </div>
           <div className="flex flex-wrap gap-3">
             <WarmButton asChild variant="outline">
-              <Link href={`/merchant/${params.slug}/campaigns`}>View campaigns</Link>
+              <Link href={`/merchant/${slug}/campaigns`}>View campaigns</Link>
             </WarmButton>
             <WarmButton asChild>
-              <Link href={`/merchant/${params.slug}/vouchers/new`}>Create voucher</Link>
+              <Link href={`/merchant/${slug}/vouchers/new`}>Create voucher</Link>
             </WarmButton>
           </div>
         </div>
 
         <section className="space-y-4">
           <div>
-            <h2 className="text-base font-semibold text-[#2D2721]">Performance overview</h2>
-            <p className="text-sm text-[#6B5744]">Live campaign activity and redemptions.</p>
+            <h2 className="text-base font-semibold text-[var(--text)]">Performance overview</h2>
+            <p className="text-sm text-[var(--text-muted)]">Live campaign activity and redemptions.</p>
           </div>
-          <DashboardStats merchantId={merchant.id} merchantSlug={params.slug} />
+          <DashboardStats merchantId={merchant.id} merchantSlug={slug} />
         </section>
 
         <section className="space-y-4">
           <div>
-            <h2 className="text-base font-semibold text-[#2D2721]">Revenue and credits</h2>
-            <p className="text-sm text-[#6B5744]">Sales, credits, and outstanding liability.</p>
+            <h2 className="text-base font-semibold text-[var(--text)]">Revenue and credits</h2>
+            <p className="text-sm text-[var(--text-muted)]">Sales, credits, and outstanding liability.</p>
           </div>
-          <RevenueStats merchantId={merchant.id} merchantSlug={params.slug} currency={merchant.defaultCurrency} />
+          <RevenueStats merchantId={merchant.id} merchantSlug={slug} currency={merchant.defaultCurrency} />
         </section>
 
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-6">
-            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+            <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[#2D2721]">Performance trend</h2>
-                  <p className="text-sm text-[#6B5744]">
+                  <h2 className="text-base font-semibold text-[var(--text)]">Performance trend</h2>
+                  <p className="text-sm text-[var(--text-muted)]">
                     Last {selectedRange.days} days of redemption and revenue activity.
                   </p>
                 </div>
@@ -270,11 +272,11 @@ export default async function MerchantDashboardPage({
                       return (
                         <Link
                           key={option.value}
-                          href={`/merchant/${params.slug}/dashboard?range=${option.value}`}
+                          href={`/merchant/${slug}/dashboard?range=${option.value}`}
                           className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
                             isActive
                               ? 'bg-[#2D2721] text-white'
-                              : 'bg-[#FFF9ED] text-[#6B5744] hover:bg-[#FFECC6]'
+                              : 'bg-[var(--bg)] text-[var(--text-muted)] hover:bg-[#f6e1d7]'
                           }`}
                         >
                           {option.label}
@@ -283,8 +285,8 @@ export default async function MerchantDashboardPage({
                     })}
                   </div>
                   <div className="text-left sm:text-right">
-                    <p className="text-xs uppercase tracking-wide text-[#8B7355]">Revenue</p>
-                    <p className="text-lg font-semibold text-[#2D2721]">
+                    <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Revenue</p>
+                    <p className="text-lg font-semibold text-[var(--text)]">
                       {formatCurrency(weeklyRevenueMinor, merchant.defaultCurrency)}
                     </p>
                   </div>
@@ -293,34 +295,34 @@ export default async function MerchantDashboardPage({
               <AreaChart
                 data={activityData}
                 areas={[
-                  { dataKey: 'redemptions', name: 'Redemptions', color: '#FFC857' },
-                  { dataKey: 'revenue', name: 'Revenue', color: '#9DB5A5' },
+                  { dataKey: 'redemptions', name: 'Redemptions', color: '#cc785c' },
+                  { dataKey: 'revenue', name: 'Revenue', color: '#5e7e92' },
                 ]}
                 xAxisKey="date"
                 height={260}
                 showLegend
               />
               <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] bg-[#FFFDF8] px-4 py-3">
-                  <p className="text-xs uppercase tracking-wide text-[#8B7355]">Paid orders</p>
-                  <p className="text-lg font-semibold text-[#2D2721]">{paidOrderCount}</p>
-                  <Link href={`/merchant/${params.slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#E17B5C]">
+                <div className="rounded-2xl border border-[var(--border)] bg-[#fcfbf8] px-4 py-3">
+                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Paid orders</p>
+                  <p className="text-lg font-semibold text-[var(--text)]">{paidOrderCount}</p>
+                  <Link href={`/merchant/${slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#cc785c]">
                     Open orders view
                   </Link>
                 </div>
-                <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] bg-[#FFFDF8] px-4 py-3">
-                  <p className="text-xs uppercase tracking-wide text-[#8B7355]">Avg order</p>
-                  <p className="text-lg font-semibold text-[#2D2721]">
+                <div className="rounded-2xl border border-[var(--border)] bg-[#fcfbf8] px-4 py-3">
+                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Avg order</p>
+                  <p className="text-lg font-semibold text-[var(--text)]">
                     {formatCurrency(averageOrderValueMinor, merchant.defaultCurrency)}
                   </p>
-                  <Link href={`/merchant/${params.slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#E17B5C]">
+                  <Link href={`/merchant/${slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#cc785c]">
                     Open campaign revenue
                   </Link>
                 </div>
-                <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] bg-[#FFFDF8] px-4 py-3">
-                  <p className="text-xs uppercase tracking-wide text-[#8B7355]">Redemption rate</p>
-                  <p className="text-lg font-semibold text-[#2D2721]">{redemptionRatePct.toFixed(1)}%</p>
-                  <Link href={`/merchant/${params.slug}/redemptions`} className="mt-2 inline-flex text-xs font-semibold text-[#E17B5C]">
+                <div className="rounded-2xl border border-[var(--border)] bg-[#fcfbf8] px-4 py-3">
+                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Redemption rate</p>
+                  <p className="text-lg font-semibold text-[var(--text)]">{redemptionRatePct.toFixed(1)}%</p>
+                  <Link href={`/merchant/${slug}/redemptions`} className="mt-2 inline-flex text-xs font-semibold text-[#cc785c]">
                     Open redemption queue
                   </Link>
                 </div>
@@ -332,15 +334,15 @@ export default async function MerchantDashboardPage({
             {pendingRedemptions > 0 && (
               <WarmCard
                 padding="lg"
-                className="bg-gradient-to-br from-[#FFF9ED] to-[#FFE5B4] border border-[rgba(139,115,85,0.15)]"
+                className="bg-gradient-to-br from-[#fcfbf8] to-[#f6e1d7] border border-[var(--border)]"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div>
-                    <p className="font-medium text-[#2D2721]">{pendingRedemptions} pending confirmation</p>
-                    <p className="text-sm text-[#6B5744]">In-store redemptions waiting for your approval.</p>
+                    <p className="font-medium text-[var(--text)]">{pendingRedemptions} pending confirmation</p>
+                    <p className="text-sm text-[var(--text-muted)]">In-store redemptions waiting for your approval.</p>
                   </div>
                   <WarmButton asChild variant="outline" size="sm" className="shrink-0">
-                    <Link href={`/merchant/${params.slug}/redemptions`}>View redemptions</Link>
+                    <Link href={`/merchant/${slug}/redemptions`}>View redemptions</Link>
                   </WarmButton>
                 </div>
               </WarmCard>
@@ -348,17 +350,17 @@ export default async function MerchantDashboardPage({
           </div>
 
           <div className="space-y-6">
-            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+            <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[#2D2721]">Action center</h2>
-                  <p className="text-sm text-[#6B5744]">Priority items to review.</p>
+                  <h2 className="text-base font-semibold text-[var(--text)]">Action center</h2>
+                  <p className="text-sm text-[var(--text-muted)]">Priority items to review.</p>
                 </div>
-                <Sparkles className="h-5 w-5 text-[#FFC857]" />
+                <Sparkles className="h-5 w-5 text-[#cc785c]" />
               </div>
               {actionItems.length === 0 ? (
-                <div className="flex items-center gap-2 text-sm text-[#6B5744]">
-                  <CheckCircle2 className="h-4 w-4 text-[#9DB5A5]" />
+                <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
+                  <CheckCircle2 className="h-4 w-4 text-[#4e8a5b]" />
                   You are all caught up.
                 </div>
               ) : (
@@ -368,13 +370,13 @@ export default async function MerchantDashboardPage({
                       <div className="flex items-start gap-3">
                         <span className={`mt-2 h-2 w-2 rounded-full ${toneStyles[item.tone]}`} />
                         <div>
-                          <p className="text-sm font-medium text-[#2D2721]">{item.label}</p>
-                          <p className="text-xs text-[#6B5744]">{item.detail}</p>
+                          <p className="text-sm font-medium text-[var(--text)]">{item.label}</p>
+                          <p className="text-xs text-[var(--text-muted)]">{item.detail}</p>
                         </div>
                       </div>
                       <Link
                         href={item.href}
-                        className="text-xs font-semibold text-[#E17B5C] whitespace-nowrap"
+                        className="text-xs font-semibold text-[#cc785c] whitespace-nowrap"
                       >
                         Open
                       </Link>
@@ -384,27 +386,27 @@ export default async function MerchantDashboardPage({
               )}
             </WarmCard>
 
-            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+            <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[#2D2721]">Upcoming events</h2>
-                  <p className="text-sm text-[#6B5744]">Next scheduled events.</p>
+                  <h2 className="text-base font-semibold text-[var(--text)]">Upcoming events</h2>
+                  <p className="text-sm text-[var(--text-muted)]">Next scheduled events.</p>
                 </div>
-                <Calendar className="h-5 w-5 text-[#8B7355]" />
+                <Calendar className="h-5 w-5 text-[var(--text-faint)]" />
               </div>
               {upcomingEvents.length === 0 ? (
-                <p className="text-sm text-[#6B5744]">No upcoming events scheduled.</p>
+                <p className="text-sm text-[var(--text-muted)]">No upcoming events scheduled.</p>
               ) : (
                 <div className="space-y-3">
                   {upcomingEvents.map((event) => (
                     <div key={event.id} className="flex items-center justify-between gap-3">
                       <div>
-                        <p className="text-sm font-medium text-[#2D2721]">{event.name}</p>
-                        <p className="text-xs text-[#6B5744]">
+                        <p className="text-sm font-medium text-[var(--text)]">{event.name}</p>
+                        <p className="text-xs text-[var(--text-muted)]">
                           {format(new Date(event.eventDate), 'MMM d, yyyy')}
                         </p>
                       </div>
-                      <span className="text-xs font-semibold text-[#8B7355] uppercase">
+                      <span className="text-xs font-semibold text-[var(--text-faint)] uppercase">
                         {event.status.replace('_', ' ')}
                       </span>
                     </div>
@@ -413,21 +415,21 @@ export default async function MerchantDashboardPage({
               )}
               <div className="mt-4">
                 <WarmButton asChild variant="outline" size="sm" className="w-full">
-                  <Link href={`/merchant/${params.slug}/events`}>Manage events</Link>
+                  <Link href={`/merchant/${slug}/events`}>Manage events</Link>
                 </WarmButton>
               </div>
             </WarmCard>
 
-            <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+            <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[#2D2721]">Top vouchers</h2>
-                  <p className="text-sm text-[#6B5744]">Most redeemed offers.</p>
+                  <h2 className="text-base font-semibold text-[var(--text)]">Top vouchers</h2>
+                  <p className="text-sm text-[var(--text-muted)]">Most redeemed offers.</p>
                 </div>
-                <Ticket className="h-5 w-5 text-[#8B7355]" />
+                <Ticket className="h-5 w-5 text-[var(--text-faint)]" />
               </div>
               {topVouchers.length === 0 ? (
-                <p className="text-sm text-[#6B5744]">No voucher activity yet.</p>
+                <p className="text-sm text-[var(--text-muted)]">No voucher activity yet.</p>
               ) : (
                 <div className="space-y-3">
                   {topVouchers.map((voucher) => {
@@ -437,12 +439,12 @@ export default async function MerchantDashboardPage({
                     return (
                       <div key={voucher.id}>
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-[#2D2721] font-medium truncate max-w-[160px]">{headline}</span>
-                          <span className="text-[#6B5744]">{voucher._count.redemptions}</span>
+                          <span className="text-[var(--text)] font-medium truncate max-w-[160px]">{headline}</span>
+                          <span className="text-[var(--text-muted)]">{voucher._count.redemptions}</span>
                         </div>
                         <div className="mt-2 h-1.5 rounded-full bg-[#F2EDE3] overflow-hidden">
                           <div
-                            className="h-full rounded-full bg-[#FFC857]"
+                            className="h-full rounded-full bg-[#cc785c]"
                             style={{ width: `${pct}%` }}
                           />
                         </div>

@@ -80,29 +80,29 @@ export default function NewEventPage() {
           ]}
         />
         <div className="mb-6 flex items-start gap-4">
-          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
-            <span className="text-[#2D2721] font-bold text-lg">E</span>
+          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+            <span className="text-white font-bold text-lg">E</span>
           </div>
           <div>
-            <h1 className="text-2xl font-semibold text-[#2D2721]">{t('merchant.createEvent')}</h1>
-            <p className="text-sm text-[#6B5744]">{t('merchant.setUpEvent')}</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)]">{t('merchant.createEvent')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">{t('merchant.setUpEvent')}</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <WarmCard padding="lg" className="bg-white mb-4">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Basic information</h2>
+          <WarmCard padding="lg" className="bg-[var(--surface)] mb-4">
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Basic information</h2>
             <div className="space-y-4">
               <div>
                 <Label htmlFor="name">Event name *</Label>
-                <Input id="name" name="name" required className="border-[rgba(139,115,85,0.15)]" />
+                <Input id="name" name="name" required className="border-[var(--border)]" />
               </div>
               <div>
                 <Label htmlFor="description">Description</Label>
                 <textarea
                   id="description"
                   name="description"
-                  className="w-full min-h-[100px] px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
+                  className="w-full min-h-[100px] px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                   placeholder="Describe your event..."
                 />
               </div>
@@ -113,7 +113,7 @@ export default function NewEventPage() {
                   name="type"
                   required
                   aria-label="Event type"
-                  className="w-full px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
+                  className="w-full px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                 >
                   <option value="festival">Festival</option>
                   <option value="internal">Internal event</option>
@@ -125,48 +125,48 @@ export default function NewEventPage() {
             </div>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white mb-4">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Date and time</h2>
+          <WarmCard padding="lg" className="bg-[var(--surface)] mb-4">
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Date and time</h2>
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="eventDate">Event date *</Label>
-                  <Input id="eventDate" name="eventDate" type="date" required min={today} className="border-[rgba(139,115,85,0.15)]" />
+                  <Input id="eventDate" name="eventDate" type="date" required min={today} className="border-[var(--border)]" />
                 </div>
                 <div>
                   <Label htmlFor="eventTime">Event time *</Label>
-                  <Input id="eventTime" name="eventTime" type="time" required className="border-[rgba(139,115,85,0.15)]" />
+                  <Input id="eventTime" name="eventTime" type="time" required className="border-[var(--border)]" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="eventEndDate">End date (optional)</Label>
-                  <Input id="eventEndDate" name="eventEndDate" type="date" min={today} className="border-[rgba(139,115,85,0.15)]" />
+                  <Input id="eventEndDate" name="eventEndDate" type="date" min={today} className="border-[var(--border)]" />
                 </div>
                 <div>
                   <Label htmlFor="eventEndTime">End time (optional)</Label>
-                  <Input id="eventEndTime" name="eventEndTime" type="time" className="border-[rgba(139,115,85,0.15)]" />
+                  <Input id="eventEndTime" name="eventEndTime" type="time" className="border-[var(--border)]" />
                 </div>
               </div>
             </div>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white mb-4">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Location</h2>
+          <WarmCard padding="lg" className="bg-[var(--surface)] mb-4">
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Location</h2>
             <div className="space-y-4">
               <div>
                 <Label htmlFor="location">Location name</Label>
-                <Input id="location" name="location" placeholder="Main Hall, Outdoor Stage" className="border-[rgba(139,115,85,0.15)]" />
+                <Input id="location" name="location" placeholder="Main Hall, Outdoor Stage" className="border-[var(--border)]" />
               </div>
               <div>
                 <Label htmlFor="locationAddress">Full address</Label>
-                <Input id="locationAddress" name="locationAddress" placeholder="Street address, City, Country" className="border-[rgba(139,115,85,0.15)]" />
+                <Input id="locationAddress" name="locationAddress" placeholder="Street address, City, Country" className="border-[var(--border)]" />
               </div>
             </div>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white mb-4">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Ticket details</h2>
+          <WarmCard padding="lg" className="bg-[var(--surface)] mb-4">
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Ticket details</h2>
             <div className="space-y-4">
               <div>
                 <Label htmlFor="maxCapacity">Max capacity (tickets) *</Label>
@@ -177,7 +177,7 @@ export default function NewEventPage() {
                   min="1"
                   required
                   placeholder="100"
-                  className="border-[rgba(139,115,85,0.15)]"
+                  className="border-[var(--border)]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -191,7 +191,7 @@ export default function NewEventPage() {
                     min="0"
                     required
                     placeholder="0.00"
-                    className="border-[rgba(139,115,85,0.15)]"
+                    className="border-[var(--border)]"
                   />
                 </div>
                 <div>
@@ -201,7 +201,7 @@ export default function NewEventPage() {
                     name="currency"
                     required
                     aria-label="Currency"
-                    className="w-full px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
+                    className="w-full px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                   >
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -227,7 +227,7 @@ export default function NewEventPage() {
                 <textarea
                   id="terms"
                   name="terms"
-                  className="w-full min-h-[80px] px-3 py-2 text-sm border border-[rgba(139,115,85,0.15)] rounded-md bg-white"
+                  className="w-full min-h-[80px] px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                   placeholder="Event terms, refund policy, etc."
                 />
               </div>

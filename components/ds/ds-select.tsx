@@ -5,6 +5,7 @@ import React, {
   useRef,
   useEffect,
   useCallback,
+  useMemo,
   useId,
   type ReactNode,
   type KeyboardEvent,
@@ -58,7 +59,11 @@ export function DsSelect({
   const [highlightIdx, setHighlightIdx] = useState(0);
 
   /* Normalise value to array */
-  const selected: string[] = Array.isArray(value) ? value : value ? [value] : [];
+  const selected = useMemo<string[]>(
+    () => (Array.isArray(value) ? value : value ? [value] : []),
+    [value],
+  );
+  const listboxId = `${id}-listbox`;
 
   /* Filtered options */
   const filtered = search
@@ -173,6 +178,7 @@ export function DsSelect({
         role="combobox"
         id={id}
         aria-expanded={open}
+        aria-controls={listboxId}
         aria-haspopup="listbox"
         disabled={disabled}
         onClick={() => !disabled && setOpen(!open)}
@@ -266,6 +272,7 @@ export function DsSelect({
         {!loading && (
           <ul
             ref={listRef}
+            id={listboxId}
             role="listbox"
             aria-multiselectable={multiple}
             className="max-h-60 overflow-y-auto py-1 scrollbar-thin"

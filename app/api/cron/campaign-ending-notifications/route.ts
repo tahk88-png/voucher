@@ -91,6 +91,7 @@ export async function GET(req: NextRequest) {
         });
         const voucherUsersByCampaign = new Map<string, string[]>();
         for (const vu of allVoucherUsers) {
+          if (!vu.campaignId) continue;
           const list = voucherUsersByCampaign.get(vu.campaignId) || [];
           list.push(vu.userId);
           voucherUsersByCampaign.set(vu.campaignId, list);

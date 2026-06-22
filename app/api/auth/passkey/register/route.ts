@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 import {
   generateRegistrationOptions,
   verifyRegistrationResponse,
@@ -30,7 +31,7 @@ export async function POST() {
 
     return NextResponse.json(options);
   } catch (error) {
-    console.error('Passkey registration options error:', error);
+    logger.error('Passkey registration options error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Failed to generate registration options' }, { status: 500 });
   }
 }
@@ -80,7 +81,7 @@ export async function PUT(req: Request) {
 
     return NextResponse.json({ verified: true });
   } catch (error) {
-    console.error('Passkey registration verify error:', error);
+    logger.error('Passkey registration verify error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Failed to verify registration' }, { status: 500 });
   }
 }

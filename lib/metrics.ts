@@ -160,6 +160,15 @@ export function recordCircuitTransition(
   incrementCounter('circuit_breaker_transitions_total', { name, from: fromState, to: toState });
 }
 
+/**
+ * Record a rate-limit rejection. `scope` is a stable bucket (e.g.
+ * "auth_otp", "api_public", "checkout") so we never feed raw user
+ * identifiers to the metric labels — that would explode cardinality.
+ */
+export function recordRateLimitRejection(scope: string, backend: 'redis' | 'memory'): void {
+  incrementCounter('rate_limit_rejections_total', { scope, backend });
+}
+
 // ---------------------------------------------------------------------------
 // Public API — Reading
 // ---------------------------------------------------------------------------

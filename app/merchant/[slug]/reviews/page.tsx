@@ -180,7 +180,7 @@ export default function ReviewsPage() {
       {/* Stats Overview */}
       {stats && stats.totalReviews > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <WarmCard padding="lg" className="bg-white text-center">
+          <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
             <p className="text-4xl font-bold text-[var(--text)]">{stats.avgRating}</p>
             <StarRating rating={Math.round(stats.avgRating)} size="lg" />
             <p className="text-sm text-[var(--text-muted)] mt-1">
@@ -188,7 +188,7 @@ export default function ReviewsPage() {
             </p>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white">
+          <WarmCard padding="lg" className="bg-[var(--surface)]">
             <p className="text-sm font-medium text-[var(--text)] mb-3">Rating Distribution</p>
             <div className="space-y-1.5">
               {[5, 4, 3, 2, 1].map((r) => (
@@ -202,7 +202,7 @@ export default function ReviewsPage() {
             </div>
           </WarmCard>
 
-          <WarmCard padding="lg" className="bg-white">
+          <WarmCard padding="lg" className="bg-[var(--surface)]">
             <p className="text-sm font-medium text-[var(--text)] mb-3">Response Rate</p>
             <div className="flex items-center justify-center gap-4">
               <div className="text-center">
@@ -225,12 +225,12 @@ export default function ReviewsPage() {
 
       {/* Filters */}
       {showFilters && (
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex flex-wrap gap-4">
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)]">Rating</label>
               <select
-                className="block h-9 rounded-md border border-[var(--border)] bg-white px-3 text-sm mt-1"
+                className="block h-9 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 text-sm mt-1"
                 value={ratingFilter}
                 onChange={(e) => {
                   setRatingFilter(e.target.value);
@@ -248,7 +248,7 @@ export default function ReviewsPage() {
             <div>
               <label className="text-xs font-medium text-[var(--text-muted)]">Reply Status</label>
               <select
-                className="block h-9 rounded-md border border-[var(--border)] bg-white px-3 text-sm mt-1"
+                className="block h-9 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 text-sm mt-1"
                 value={replyFilter}
                 onChange={(e) => {
                   setReplyFilter(e.target.value);
@@ -281,7 +281,7 @@ export default function ReviewsPage() {
       {loading ? (
         <p className="text-sm text-[var(--text-muted)]">Loading reviews...</p>
       ) : !data || data.items.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center">
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <MessageSquare className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
           <p className="text-[var(--text-muted)]">No reviews found.</p>
         </WarmCard>
@@ -289,7 +289,7 @@ export default function ReviewsPage() {
         <>
           <div className="space-y-4">
             {data.items.map((review) => (
-              <WarmCard key={review.id} padding="lg" className="bg-white">
+              <WarmCard key={review.id} padding="lg" className="bg-[var(--surface)]">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     {/* Review header */}
@@ -355,7 +355,7 @@ export default function ReviewsPage() {
                     {replyingTo === review.id && (
                       <div className="mt-3 space-y-2">
                         <textarea
-                          className="w-full rounded-md border border-[var(--border)] bg-white px-3 py-2 text-sm min-h-[80px] resize-y"
+                          className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm min-h-[80px] resize-y"
                           placeholder="Write your reply..."
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}

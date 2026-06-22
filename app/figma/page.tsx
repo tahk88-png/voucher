@@ -83,7 +83,7 @@ export default function FigmaIndexPage() {
                 placeholder="Search routes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-[rgba(139,115,85,0.15)] rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#FFC857]/50"
+                className="w-full pl-10 pr-4 py-2 border border-[rgba(139,115,85,0.15)] rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#cc785c]/50"
               />
             </div>
 
@@ -176,14 +176,14 @@ export default function FigmaIndexPage() {
                   <div className="p-4">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex-1">
-                        <h3 className="font-semibold text-[#2D2721] group-hover:text-[#FFC857] transition-colors">
+                        <h3 className="font-semibold text-[#2D2721] group-hover:text-[#cc785c] transition-colors">
                           {route.title}
                         </h3>
                         <p className="text-sm text-[#8B7355] font-mono mt-1">
                           {route.path}
                         </p>
                         {route.layout && (
-                          <span className="inline-block mt-2 px-2 py-1 text-xs bg-[#FFF9ED] text-[#8B7355] rounded-full">
+                          <span className="inline-block mt-2 px-2 py-1 text-xs bg-[#f6e1d7] text-[#8B7355] rounded-full">
                             {route.layout}
                           </span>
                         )}

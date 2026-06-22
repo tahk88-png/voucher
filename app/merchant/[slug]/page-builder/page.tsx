@@ -5,14 +5,15 @@ import { requireMerchantRole } from "@/lib/rbac"
 import { getDefaultBuilderConfig, type PageBuilderConfig } from "@/lib/page-builder"
 import PageBuilderClient from "@/components/page-builder/page-builder-client"
 
-export default async function PageBuilderPage({ params }: { params: { slug: string } }) {
+export default async function PageBuilderPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const session = await auth()
   if (!session?.user?.id) {
-    redirect(`/login?callbackUrl=${encodeURIComponent(`/merchant/${params.slug}/page-builder`)}`)
+    redirect(`/login?callbackUrl=${encodeURIComponent(`/merchant/${slug}/page-builder`)}`)
   }
 
   const merchant = await prisma.merchant.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   })
   if (!merchant) {
     notFound()

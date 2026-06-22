@@ -20,32 +20,50 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
+  Coins,
+  Crown,
+  Trophy,
+  Heart,
+  MapPin,
+  Tag,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { WarmButton } from "@/components/warm-button"
 import { CountrySelector } from "@/components/navigation/country-selector"
 import { LanguageSelector } from "@/components/navigation/language-selector"
 import { useCountry } from "@/components/contexts/country-context"
+import { RoleSwitcher, type RoleSwitcherMerchant, type RoleSwitcherOrg } from "@/components/navigation/role-switcher"
 
 interface UserShellProps {
   userLabel: string
   stats: Array<{ label: string; value: string }>
+  roles?: string[]
+  merchantMemberships?: RoleSwitcherMerchant[]
+  orgMemberships?: RoleSwitcherOrg[]
+  adminRole?: string | null
   children: React.ReactNode
 }
 
 const navItems = [
   { labelKey: "dashboard", fallback: "My Rewards", icon: Award, href: "/app", bottomNav: true },
   { labelKey: "myVouchers", fallback: "My Vouchers", icon: Ticket, href: "/app/vouchers", bottomNav: true },
+  { labelKey: "deals", fallback: "Deals", icon: Tag, href: "/deals", bottomNav: false },
+  { labelKey: "nearby", fallback: "Nearby", icon: MapPin, href: "/app/nearby", bottomNav: false },
+  { labelKey: "wishlist", fallback: "Wishlist", icon: Heart, href: "/app/wishlist", bottomNav: false },
   { labelKey: "b2b", fallback: "B2B Orgs", icon: Users, href: "/app/b2b", bottomNav: false },
   { labelKey: "referrals", fallback: "Referrals", icon: Users, href: "/app/referrals", bottomNav: true },
   { labelKey: "wallet", fallback: "Wallet", icon: Wallet, href: "/app/wallet", bottomNav: true },
+  { labelKey: "cashback", fallback: "Cashback", icon: Coins, href: "/app/cashback", bottomNav: false },
+  { labelKey: "loyalty", fallback: "Loyalty", icon: Crown, href: "/app/loyalty", bottomNav: false },
+  { labelKey: "achievements", fallback: "Achievements", icon: Trophy, href: "/app/achievements", bottomNav: false },
+  { labelKey: "leaderboard", fallback: "Leaderboard", icon: TrendingUp, href: "/leaderboard", bottomNav: false },
   { labelKey: "notifications", fallback: "Notifications", icon: Bell, href: "/app/notifications", bottomNav: false },
   { labelKey: "settings", fallback: "Settings", icon: Settings, href: "/app/settings", bottomNav: true },
 ]
 
 const bottomNavItems = navItems.filter((item) => item.bottomNav)
 
-export default function UserShell({ userLabel, stats, children }: UserShellProps) {
+export default function UserShell({ userLabel, stats, roles = [], merchantMemberships = [], orgMemberships = [], adminRole, children }: UserShellProps) {
   const pathname = usePathname()
   const tNav = useTranslations("nav")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -214,20 +232,14 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
           </nav>
 
           <div className="p-4 border-t border-[var(--border)]">
-            {!collapsed && showRoleSwitcher && (
-              <div className="mb-4 p-3 bg-[var(--bg-2)] rounded-[12px]">
-                <div className="text-xs font-semibold text-[var(--text-faint)] mb-2">Switch Role (Demo)</div>
-                <div className="grid grid-cols-3 gap-1">
-                  <button className="text-xs py-2 px-2 rounded-lg font-medium transition-all gradient-brand text-[var(--text)]">
-                    User
-                  </button>
-                  <button className="text-xs py-2 px-2 rounded-lg font-medium transition-all bg-[var(--surface)] text-[var(--text-muted)] hover:bg-[#FFE5B4]">
-                    Merchant
-                  </button>
-                  <button className="text-xs py-2 px-2 rounded-lg font-medium transition-all bg-[var(--surface)] text-[var(--text-muted)] hover:bg-[#FFE5B4]">
-                    Admin
-                  </button>
-                </div>
+            {!collapsed && roles.length > 0 && (
+              <div className="mb-4">
+                <RoleSwitcher
+                  roles={roles}
+                  merchantMemberships={merchantMemberships}
+                  orgMemberships={orgMemberships}
+                  adminRole={adminRole}
+                />
               </div>
             )}
 
@@ -316,7 +328,7 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
         <div className="px-4 py-6 sm:px-6 lg:px-8 max-w-7xl mx-auto">{children}</div>
       </main>
 
-      <nav className="lg:hidden fixed bottom-0 inset-x-0 bg-[var(--surface)] border-t border-[var(--border)] shadow-warm-lg z-40">
+      <nav role="navigation" aria-label="Main navigation" className="lg:hidden fixed bottom-0 inset-x-0 bg-[var(--surface)] border-t border-[var(--border)] shadow-warm-lg z-40">
         <div className="grid grid-cols-5 gap-1 px-2 py-2">
           {bottomNavItems.map((item) => {
             const Icon = item.icon
@@ -324,6 +336,7 @@ export default function UserShell({ userLabel, stats, children }: UserShellProps
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
                   "flex flex-col items-center gap-1 py-2 px-1 rounded-[12px] transition-all",
                   isActive(item.href)

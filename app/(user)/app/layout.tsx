@@ -36,6 +36,19 @@ export default async function UserAppLayout({
   const tNav = await getTranslations("nav")
   const tAnalytics = await getTranslations("analytics")
 
+  // Load org memberships for the role switcher
+  let orgMemberships: { orgId: string; orgName: string; role: string }[] = [];
+  if (profile.roles.length > 1 || profile.merchantMemberships.length > 0) {
+    try {
+      const orgs = await prisma.orgMembership.findMany({
+        where: { userId: profile.userId },
+        include: { org: { select: { id: true, name: true } } },
+        take: 10,
+      });
+      orgMemberships = orgs.map((o) => ({ orgId: o.org.id, orgName: o.org.name, role: o.role }));
+    } catch {}
+  }
+
   return (
     <UserShell
       userLabel={user?.name || user?.email || tNav("user")}
@@ -45,6 +58,15 @@ export default async function UserAppLayout({
         { label: tNav("vouchers"), value: vouchers.toString() },
         { label: tAnalytics("engagement"), value: `${engagement}%` },
       ]}
+      roles={profile.roles}
+      merchantMemberships={profile.merchantMemberships.map((m) => ({
+        merchantId: m.merchantId,
+        merchantSlug: m.merchantSlug,
+        merchantName: m.merchantName,
+        role: m.role,
+      }))}
+      orgMemberships={orgMemberships}
+      adminRole={profile.adminRole}
     >
       {children}
     </UserShell>

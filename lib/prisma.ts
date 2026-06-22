@@ -29,13 +29,58 @@ prisma.$use(async (params, next) => {
   const duration = performance.now() - start;
   recordDbQuery(params.model ?? 'unknown', params.action, duration);
   if (duration > 500) {
-    loggers.database('Slow query detected', {
-      model: params.model,
-      action: params.action,
-      durationMs: Math.round(duration * 100) / 100,
-    });
+    loggers.database(params.action, params.model ?? 'unknown', Math.round(duration * 100) / 100);
   }
   return result;
+});
+
+// ─── Soft Delete Middleware ───
+// Automatically filters deletedAt IS NULL on find queries for soft-delete models.
+// To include soft-deleted records, pass { where: { deletedAt: { not: null } } } explicitly.
+const SOFT_DELETE_MODELS = new Set([
+  'User', 'Organization', 'Merchant', 'Campaign', 'Voucher',
+]);
+
+prisma.$use(async (params, next) => {
+  if (!params.model || !SOFT_DELETE_MODELS.has(params.model)) {
+    return next(params);
+  }
+
+  if (params.action === 'findMany' || params.action === 'findFirst') {
+    if (!params.args) params.args = {};
+    if (!params.args.where) params.args.where = {};
+    if (params.args.where.deletedAt === undefined) {
+      params.args.where.deletedAt = null;
+    }
+  }
+
+  if (params.action === 'findUnique' || params.action === 'findUniqueOrThrow') {
+    if (params.args?.where?.deletedAt === undefined) {
+      params.action = 'findFirst' as any;
+      params.args.where = { ...params.args.where, deletedAt: null };
+    }
+  }
+
+  if (params.action === 'count') {
+    if (!params.args) params.args = {};
+    if (!params.args.where) params.args.where = {};
+    if (params.args.where.deletedAt === undefined) {
+      params.args.where.deletedAt = null;
+    }
+  }
+
+  if (params.action === 'delete') {
+    params.action = 'update' as any;
+    params.args.data = { deletedAt: new Date() };
+  }
+
+  if (params.action === 'deleteMany') {
+    params.action = 'updateMany' as any;
+    if (!params.args) params.args = {};
+    params.args.data = { deletedAt: new Date() };
+  }
+
+  return next(params);
 });
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;

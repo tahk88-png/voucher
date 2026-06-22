@@ -50,6 +50,18 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{id
     const email = searchParams.get('email');
     if (!email) return NextResponse.json({ error: 'email required' }, { status: 400 });
 
+    // Require auth and only allow removing your OWN waitlist entry. Without
+    // this, an anonymous caller could remove anyone from a waitlist (denying
+    // them a drop slot) just by knowing their email + the voucher id.
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+    const caller = session.user.email?.toLowerCase();
+    if (!caller || caller !== email.toLowerCase()) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
     await prisma.waitlistEntry.deleteMany({
       where: { voucherId: id, email },
     });

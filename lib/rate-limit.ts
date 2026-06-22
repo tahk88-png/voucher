@@ -4,6 +4,7 @@
  */
 
 import { checkRedisRateLimit } from './redis';
+import { recordRateLimitRejection } from './metrics';
 
 type RateLimitEntry = { count: number; resetAt: number };
 
@@ -40,9 +41,17 @@ function rateLimitMemory(key: string, limit: number, windowMs: number) {
 /**
  * Synchronous rate limit check (in-memory only).
  * Use this for lightweight, non-critical rate limiting.
+ *
+ * `scope` is optional — when provided, rejections get recorded to the
+ * Prometheus counter under that bucket so ops can alert on spikes.
+ * Keep scope low-cardinality (e.g. "auth_password", not the raw key).
  */
-export function rateLimit(key: string, limit: number, windowMs: number) {
-  return rateLimitMemory(key, limit, windowMs);
+export function rateLimit(key: string, limit: number, windowMs: number, scope?: string) {
+  const res = rateLimitMemory(key, limit, windowMs);
+  if (!res.allowed && scope) {
+    recordRateLimitRejection(scope, 'memory');
+  }
+  return res;
 }
 
 /**
@@ -53,12 +62,23 @@ export function rateLimit(key: string, limit: number, windowMs: number) {
 export async function rateLimitDistributed(
   key: string,
   limit: number,
-  windowMs: number
+  windowMs: number,
+  scope?: string
 ): Promise<{ allowed: boolean; remaining: number; resetAt: number }> {
+  let res: { allowed: boolean; remaining: number; resetAt: number };
+  let backend: 'redis' | 'memory';
+
   if (process.env.REDIS_URL) {
     const windowSeconds = Math.ceil(windowMs / 1000);
-    return checkRedisRateLimit(`rl:${key}`, windowSeconds, limit);
+    res = await checkRedisRateLimit(`rl:${key}`, windowSeconds, limit);
+    backend = 'redis';
+  } else {
+    res = rateLimitMemory(key, limit, windowMs);
+    backend = 'memory';
   }
 
-  return rateLimitMemory(key, limit, windowMs);
+  if (!res.allowed && scope) {
+    recordRateLimitRejection(scope, backend);
+  }
+  return res;
 }

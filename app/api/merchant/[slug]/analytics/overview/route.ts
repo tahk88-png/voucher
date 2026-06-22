@@ -82,17 +82,13 @@ export async function GET(
       }),
 
       // Revenue time series
-      prisma.$queryRawUnsafe<Array<{ date: Date; value: bigint }>>(
-        `SELECT date_trunc('day', "createdAt") as date, COALESCE(SUM("amount"), 0)::bigint as value
-         FROM "VoucherPurchase"
-         WHERE "merchantId" = $1 AND "status" = 'paid'
-           AND "createdAt" >= $2 AND "createdAt" <= $3
-         GROUP BY date_trunc('day', "createdAt")
-         ORDER BY date ASC`,
-        merchantId,
-        from,
-        to
-      ),
+      prisma.$queryRaw<Array<{ date: Date; value: bigint }>>`
+        SELECT date_trunc('day', "createdAt") as date, COALESCE(SUM("amount"), 0)::bigint as value
+        FROM "VoucherPurchase"
+        WHERE "merchantId" = ${merchantId} AND "status" = 'paid'
+          AND "createdAt" >= ${from} AND "createdAt" <= ${to}
+        GROUP BY date_trunc('day', "createdAt")
+        ORDER BY date ASC`,
 
       // Top vouchers by revenue
       prisma.voucherPurchase.groupBy({
@@ -105,49 +101,37 @@ export async function GET(
       }),
 
       // Customer demographics: country (from analytics events)
-      prisma.$queryRawUnsafe<Array<{ country: string; count: bigint }>>(
-        `SELECT country, COUNT(DISTINCT "userId")::bigint as count
-         FROM "AnalyticsEvent"
-         WHERE "merchantId" = $1
-           AND "createdAt" >= $2 AND "createdAt" <= $3
-           AND country IS NOT NULL AND "userId" IS NOT NULL
-         GROUP BY country
-         ORDER BY count DESC
-         LIMIT 15`,
-        merchantId,
-        from,
-        to
-      ),
+      prisma.$queryRaw<Array<{ country: string; count: bigint }>>`
+        SELECT country, COUNT(DISTINCT "userId")::bigint as count
+        FROM "AnalyticsEvent"
+        WHERE "merchantId" = ${merchantId}
+          AND "createdAt" >= ${from} AND "createdAt" <= ${to}
+          AND country IS NOT NULL AND "userId" IS NOT NULL
+        GROUP BY country
+        ORDER BY count DESC
+        LIMIT 15`,
 
       // Customer demographics: device
-      prisma.$queryRawUnsafe<Array<{ device: string; count: bigint }>>(
-        `SELECT device, COUNT(*)::bigint as count
-         FROM "AnalyticsEvent"
-         WHERE "merchantId" = $1
-           AND "createdAt" >= $2 AND "createdAt" <= $3
-           AND device IS NOT NULL
-         GROUP BY device
-         ORDER BY count DESC`,
-        merchantId,
-        from,
-        to
-      ),
+      prisma.$queryRaw<Array<{ device: string; count: bigint }>>`
+        SELECT device, COUNT(*)::bigint as count
+        FROM "AnalyticsEvent"
+        WHERE "merchantId" = ${merchantId}
+          AND "createdAt" >= ${from} AND "createdAt" <= ${to}
+          AND device IS NOT NULL
+        GROUP BY device
+        ORDER BY count DESC`,
 
       // Peak hours heatmap (hour of day x day of week)
-      prisma.$queryRawUnsafe<Array<{ dow: number; hour: number; count: bigint }>>(
-        `SELECT
-           EXTRACT(DOW FROM "createdAt")::int as dow,
-           EXTRACT(HOUR FROM "createdAt")::int as hour,
-           COUNT(*)::bigint as count
-         FROM "AnalyticsEvent"
-         WHERE "merchantId" = $1
-           AND "createdAt" >= $2 AND "createdAt" <= $3
-         GROUP BY dow, hour
-         ORDER BY dow, hour`,
-        merchantId,
-        from,
-        to
-      ),
+      prisma.$queryRaw<Array<{ dow: number; hour: number; count: bigint }>>`
+        SELECT
+          EXTRACT(DOW FROM "createdAt")::int as dow,
+          EXTRACT(HOUR FROM "createdAt")::int as hour,
+          COUNT(*)::bigint as count
+        FROM "AnalyticsEvent"
+        WHERE "merchantId" = ${merchantId}
+          AND "createdAt" >= ${from} AND "createdAt" <= ${to}
+        GROUP BY dow, hour
+        ORDER BY dow, hour`,
     ]);
 
     // Enrich top vouchers with names

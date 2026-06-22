@@ -1,5 +1,7 @@
-import { NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
+import { rateLimit } from '@/lib/rate-limit';
 import {
   generateAuthenticationOptions,
   verifyAuthenticationResponse,
@@ -10,13 +12,21 @@ import { randomBytes } from 'crypto';
 /**
  * POST — Generate authentication options (no auth needed)
  */
-export async function POST() {
+export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const limit = rateLimit(`passkey_auth_init:${ip}`, 20, 5 * 60 * 1000, 'passkey_auth_init');
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests' },
+      { status: 429, headers: { 'Retry-After': String(Math.ceil((limit.resetAt - Date.now()) / 1000)) } },
+    );
+  }
   try {
     // Discoverable credentials: no need to specify allowCredentials
     const options = await generateAuthenticationOptions();
     return NextResponse.json(options);
   } catch (error) {
-    console.error('Passkey auth options error:', error);
+    logger.error('Passkey auth options error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Failed to generate authentication options' }, { status: 500 });
   }
 }
@@ -24,7 +34,15 @@ export async function POST() {
 /**
  * PUT — Verify authentication response, find user, create magic token
  */
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const limit = rateLimit(`passkey_auth_verify:${ip}`, 10, 5 * 60 * 1000, 'passkey_auth_verify');
+  if (!limit.allowed) {
+    return NextResponse.json(
+      { error: 'Too many requests' },
+      { status: 429, headers: { 'Retry-After': String(Math.ceil((limit.resetAt - Date.now()) / 1000)) } },
+    );
+  }
   try {
     const body = await req.json();
     const { response } = body;
@@ -101,7 +119,7 @@ export async function PUT(req: Request) {
       magicToken,
     });
   } catch (error) {
-    console.error('Passkey auth verify error:', error);
+    logger.error('Passkey auth verify error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Failed to verify authentication' }, { status: 500 });
   }
 }

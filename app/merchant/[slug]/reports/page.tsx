@@ -10,12 +10,14 @@ export default async function ReportsPage({
   params,
   searchParams,
 }: {
-  params: { slug: string };
-  searchParams: { from?: string; to?: string };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ from?: string; to?: string }>;
 }) {
+  const { slug } = await params;
+  const sp = await searchParams;
   let merchant: any;
   try {
-    const access = await requireMerchantProfileAccessBySlug(params.slug, 'merchant_admin');
+    const access = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
     merchant = access.merchant;
   } catch (error) {
     if (error instanceof AccessControlError && error.status === 401) redirect('/login');
@@ -25,8 +27,8 @@ export default async function ReportsPage({
   const now = new Date();
   const defaultFrom = new Date(now.getFullYear() - 1, now.getMonth(), 1);
 
-  const fromDate = searchParams.from ? new Date(searchParams.from) : defaultFrom;
-  const toDate = searchParams.to ? new Date(searchParams.to + 'T23:59:59') : now;
+  const fromDate = sp.from ? new Date(sp.from) : defaultFrom;
+  const toDate = sp.to ? new Date(sp.to + 'T23:59:59') : now;
   const dateFilter = { gte: fromDate, lte: toDate };
 
   const [voucherPurchases, ticketPurchases, redemptionCount] = await Promise.all([
@@ -85,9 +87,9 @@ export default async function ReportsPage({
   const fmt = (v: number) => (v / 100).toFixed(2);
 
   const exportParams = new URLSearchParams();
-  if (searchParams.from) exportParams.set('from', searchParams.from);
-  if (searchParams.to) exportParams.set('to', searchParams.to);
-  const exportHref = `/api/merchant/${params.slug}/reports/export${exportParams.size ? `?${exportParams}` : ''}`;
+  if (sp.from) exportParams.set('from', sp.from);
+  if (sp.to) exportParams.set('to', sp.to);
+  const exportHref = `/api/merchant/${slug}/reports/export${exportParams.size ? `?${exportParams}` : ''}`;
 
   return (
     <div className="space-y-6">
@@ -104,15 +106,15 @@ export default async function ReportsPage({
       </div>
 
       {/* Date range filter */}
-      <WarmCard padding="md" className="bg-white">
+      <WarmCard padding="md" className="bg-[var(--surface)]">
         <form className="flex flex-wrap gap-3 items-end">
           <div>
             <label className="text-xs font-medium text-[var(--text-muted)] block mb-1">From</label>
             <input
               type="date"
               name="from"
-              defaultValue={searchParams.from ?? fromDate.toISOString().split('T')[0]}
-              className="border border-[var(--border)] rounded-[var(--r-sm)] px-3 py-1.5 text-sm text-[var(--text)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
+              defaultValue={sp.from ?? fromDate.toISOString().split('T')[0]}
+              className="border border-[var(--border)] rounded-[var(--r-sm)] px-3 py-1.5 text-sm text-[var(--text)] bg-[var(--surface)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
             />
           </div>
           <div>
@@ -120,8 +122,8 @@ export default async function ReportsPage({
             <input
               type="date"
               name="to"
-              defaultValue={searchParams.to ?? now.toISOString().split('T')[0]}
-              className="border border-[var(--border)] rounded-[var(--r-sm)] px-3 py-1.5 text-sm text-[var(--text)] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
+              defaultValue={sp.to ?? now.toISOString().split('T')[0]}
+              className="border border-[var(--border)] rounded-[var(--r-sm)] px-3 py-1.5 text-sm text-[var(--text)] bg-[var(--surface)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
             />
           </div>
           <WarmButton type="submit" size="sm">Apply</WarmButton>
@@ -136,7 +138,7 @@ export default async function ReportsPage({
           { label: 'Net Revenue', value: `${fmt(primary.net)} ${primaryCurrency}`, icon: TrendingUp, color: 'border-b-[var(--success)]' },
           { label: 'Redemptions', value: String(redemptionCount), icon: CheckCircle, color: 'border-b-[#9DB5A5]' },
         ].map((stat) => (
-          <WarmCard key={stat.label} padding="lg" className={`bg-white border-b-4 ${stat.color}`}>
+          <WarmCard key={stat.label} padding="lg" className={`bg-[var(--surface)] border-b-4 ${stat.color}`}>
             <div className="flex items-center gap-2">
               <stat.icon className="h-4 w-4 text-[var(--text-muted)]" />
               <span className="text-sm font-medium text-[var(--text-muted)]">{stat.label}</span>
@@ -148,7 +150,7 @@ export default async function ReportsPage({
 
       {/* Multi-currency breakdown */}
       {currencies.length > 1 && (
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <h2 className="text-base font-semibold text-[var(--text)] mb-3">Revenue by Currency</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {currencies.map((cur) => {
@@ -166,7 +168,7 @@ export default async function ReportsPage({
       )}
 
       {/* Monthly table */}
-      <WarmCard padding="lg" className="bg-white overflow-x-auto">
+      <WarmCard padding="lg" className="bg-[var(--surface)] overflow-x-auto">
         <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Monthly Revenue</h2>
         {months.every((m) => m.total === 0) ? (
           <p className="text-sm text-[var(--text-muted)] text-center py-6">No revenue data for this period.</p>

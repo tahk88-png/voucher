@@ -5,9 +5,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = { title: 'Claim Your Gift' };
 
-export default async function ClaimGiftPage({ params }: { params: { token: string } }) {
+export default async function ClaimGiftPage({ params }: { params: Promise<{ token: string }> }) {
+  const { token } = await params;
   const gift = await prisma.giftedVoucher.findUnique({
-    where: { token: params.token },
+    where: { token },
   });
 
   if (!gift) notFound();
@@ -58,7 +59,7 @@ export default async function ClaimGiftPage({ params }: { params: { token: strin
           {session?.user ? 'Click below to add this voucher to your wallet.' : 'Sign in to claim this voucher.'}
         </p>
         {session?.user ? (
-          <form action={`/api/gifts/claim/${params.token}`} method="POST">
+          <form action={`/api/gifts/claim/${token}`} method="POST">
             <button
               type="submit"
               style={{
@@ -78,7 +79,7 @@ export default async function ClaimGiftPage({ params }: { params: { token: strin
           </form>
         ) : (
           <a
-            href={`/login?callbackUrl=/gifts/claim/${params.token}`}
+            href={`/login?callbackUrl=/gifts/claim/${token}`}
             style={{
               display: 'block',
               width: '100%',

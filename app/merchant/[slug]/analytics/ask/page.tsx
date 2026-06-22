@@ -192,7 +192,7 @@ export default function AskAnalyticsPage() {
       </div>
 
       {/* Chat messages */}
-      <WarmCard padding="none" className="bg-white min-h-[400px] flex flex-col">
+      <WarmCard padding="none" className="bg-[var(--surface)] min-h-[400px] flex flex-col">
         <div className="flex-1 p-4 space-y-4 overflow-y-auto max-h-[500px]">
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full py-12 text-[var(--text-muted)]">
@@ -269,7 +269,7 @@ export default function AskAnalyticsPage() {
       </WarmCard>
 
       {/* Suggested Questions */}
-      <WarmCard padding="lg" className="bg-white">
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
         <h3 className="text-sm font-medium text-[var(--text-muted)] mb-3">Suggested Questions</h3>
         <div className="flex flex-wrap gap-2">
           {SUGGESTED_QUESTIONS.map((q) => (

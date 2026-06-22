@@ -7,11 +7,12 @@ import { formatCurrency } from '@/lib/utils';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 
-export default async function WalletPage({ params }: { params: { merchantSlug: string } }) {
+export default async function WalletPage({ params }: { params: Promise<{ merchantSlug: string }> }) {
+  const { merchantSlug } = await params;
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
-  const merchant = await getMerchantBySlug(params.merchantSlug);
+  const merchant = await getMerchantBySlug(merchantSlug);
   if (!merchant) notFound();
 
   const balance = await getCreditBalance(session.user.id, merchant.id);
@@ -35,7 +36,7 @@ export default async function WalletPage({ params }: { params: { merchantSlug: s
             className="mt-4 h-12 px-6 text-base font-medium"
             disabled={!hasAvailable}
           >
-            <Link href={`/app/${params.merchantSlug}/checkout-demo`}>
+            <Link href={`/app/${merchantSlug}/checkout-demo`}>
               {hasAvailable ? 'Use credit' : 'No credit to use'}
             </Link>
           </WarmButton>

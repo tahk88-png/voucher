@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { showError, showSuccess } from '@/lib/toast-helpers';
+import { showConfirm } from '@/lib/confirm-helpers';
 import { Plus, Trash2, Shield, UserCog, Eye, Users } from 'lucide-react';
 
 interface Member {
@@ -116,20 +117,22 @@ export default function MembersPage() {
   };
 
   const handleRemove = async (memberId: string, memberName: string) => {
-    if (!confirm(`Remove ${memberName} from the team?`)) return;
-    try {
-      const res = await fetch(`/api/merchant/${slug}/members/${memberId}`, {
-        method: 'DELETE',
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || 'Failed to remove member');
+    showConfirm(`Remove ${memberName} from the team?`, async () => {
+      try {
+        const res = await fetch(`/api/merchant/${slug}/members/${memberId}`, {
+          method: 'DELETE',
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data?.error || 'Failed to remove member');
+        }
+        setMembers((prev) => prev.filter((m) => m.id !== memberId));
+        showSuccess('Member removed');
+      } catch (err) {
+        showError(err instanceof Error ? err.message : 'Failed to remove member');
       }
-      setMembers((prev) => prev.filter((m) => m.id !== memberId));
-      showSuccess('Member removed');
-    } catch (err) {
-      showError(err instanceof Error ? err.message : 'Failed to remove member');
-    }
+    }, { confirmLabel: 'Remove', variant: 'destructive' });
+    return;
   };
 
   return (
@@ -147,7 +150,7 @@ export default function MembersPage() {
       </div>
 
       {showInvite && (
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Invite Team Member</h2>
           <form onSubmit={handleInvite} className="space-y-4">
             <div>
@@ -169,7 +172,7 @@ export default function MembersPage() {
               <Label htmlFor="invite-role">Role</Label>
               <select
                 id="invite-role"
-                className="w-full h-10 rounded-md border border-[var(--border)] bg-white px-3 py-2 mt-1 text-sm"
+                className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1 text-sm"
                 value={inviteRole}
                 onChange={(e) => setInviteRole(e.target.value)}
               >
@@ -195,12 +198,12 @@ export default function MembersPage() {
       {loading ? (
         <p className="text-sm text-[var(--text-muted)]">Loading team members...</p>
       ) : members.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center">
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <Users className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
           <p className="text-[var(--text-muted)]">No team members yet. Invite your first member above.</p>
         </WarmCard>
       ) : (
-        <WarmCard padding="none" className="bg-white overflow-hidden">
+        <WarmCard padding="none" className="bg-[var(--surface)] overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -231,9 +234,10 @@ export default function MembersPage() {
                       {editingId === member.id ? (
                         <div className="flex items-center gap-2">
                           <select
-                            className="h-8 rounded-md border border-[var(--border)] bg-white px-2 text-sm"
+                            className="h-8 rounded-md border border-[var(--border)] bg-[var(--surface)] px-2 text-sm"
                             value={editRole}
                             onChange={(e) => setEditRole(e.target.value)}
+                            aria-label="Member role"
                           >
                             {ROLE_OPTIONS.map((r) => (
                               <option key={r.value} value={r.value}>{r.label}</option>

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { getNavigationLinks, getFallbackNavigation } from "@/lib/navigation"
 import { Gift } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
 interface HubShellProps {
   children: React.ReactNode
@@ -15,6 +16,7 @@ export default async function HubShell({ children }: HubShellProps) {
     })) || []
 
   const header = headerLinks.length > 0 ? headerLinks : fallback.header
+  const t = await getTranslations("nav")
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
@@ -46,13 +48,13 @@ export default async function HubShell({ children }: HubShellProps) {
                 className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 bg-[var(--surface)] text-[var(--text)] font-medium text-sm rounded-[12px] border-2 border-[var(--border)] hover:border-[var(--border-strong)] hover:shadow-warm transition-all"
               >
                 <Gift className="h-4 w-4 text-[var(--primary)]" />
-                <span>Kampaaniad</span>
+                <span>{t("campaigns")}</span>
               </Link>
               <Link
                 href="/login"
                 className="inline-flex items-center px-6 py-2.5 bg-[var(--danger)] hover:bg-[#D16B4C] text-white font-medium text-sm rounded-[16px] shadow-warm-sm hover:shadow-warm transition-all"
               >
-                Logi sisse
+                {t("login")}
               </Link>
             </div>
           </div>

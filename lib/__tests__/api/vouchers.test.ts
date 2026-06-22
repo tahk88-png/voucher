@@ -51,7 +51,7 @@ describe('API: Merchant Vouchers', () => {
       };
 
       const request = createMockRequest(body);
-      const response = await POST(request, { params: { slug: merchantSlug } });
+      const response = await POST(request, { params: Promise.resolve({ slug: merchantSlug }) });
       const data = await response.json();
 
       expect(response.status).toBe(200);
@@ -73,7 +73,7 @@ describe('API: Merchant Vouchers', () => {
       };
 
       const request = createMockRequest(body);
-      const response = await POST(request, { params: { slug: merchantSlug } });
+      const response = await POST(request, { params: Promise.resolve({ slug: merchantSlug }) });
 
       expect(response.status).toBe(401);
     });
@@ -92,7 +92,7 @@ describe('API: Merchant Vouchers', () => {
       };
 
       const request = createMockRequest(body);
-      const response = await POST(request, { params: { slug: 'non-existent' } });
+      const response = await POST(request, { params: Promise.resolve({ slug: 'non-existent' }) });
 
       expect(response.status).toBe(404);
     });
@@ -108,7 +108,7 @@ describe('API: Merchant Vouchers', () => {
       };
 
       const request = createMockRequest(body);
-      const response = await POST(request, { params: { slug: merchantSlug } });
+      const response = await POST(request, { params: Promise.resolve({ slug: merchantSlug }) });
 
       expect(response.status).toBe(400);
     });
@@ -133,7 +133,7 @@ describe('API: Merchant Vouchers', () => {
       });
 
       const request = createMockRequest();
-      const response = await GET(request, { params: { slug: merchantSlug } });
+      const response = await GET(request, { params: Promise.resolve({ slug: merchantSlug }) });
       const data = await response.json();
 
       expect(response.status).toBe(200);
@@ -161,7 +161,7 @@ describe('API: Merchant Vouchers', () => {
       });
 
       const request = createMockRequest();
-      const response = await GET(request, { params: { slug: merchantSlug } });
+      const response = await GET(request, { params: Promise.resolve({ slug: merchantSlug }) });
       const data = await response.json();
 
       expect(response.status).toBe(200);

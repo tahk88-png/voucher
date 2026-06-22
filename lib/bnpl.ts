@@ -1,3 +1,5 @@
+import type Stripe from 'stripe';
+
 export type BnplPlanType = '3x' | '6x' | '12x';
 
 export interface InstallmentDetail {
@@ -63,6 +65,54 @@ export function calculateInstallments(
     interestRate,
     monthlyAmountCents: baseInstallmentCents,
     totalInterestCents,
+  };
+}
+
+export interface InstallmentChargeInput {
+  amountCents: number;
+  currency: string;
+  stripeCustomerId: string;
+  stripePaymentMethodId: string;
+  planId: string;
+  installmentNumber: number;
+  userId: string;
+  merchantId: string;
+}
+
+/**
+ * Build the Stripe PaymentIntent params to charge a single BNPL installment
+ * off-session (the cron path, run while the user is away).
+ *
+ * Extracted as a pure function so the four fields the original cron got wrong
+ * are unit-testable without hitting Stripe:
+ *   - currency came from a `merchant.name ? 'eur' : 'usd'` ternary (always eur);
+ *   - `customer` / `payment_method` were never persisted, so `confirm` was
+ *     gated off and every installment PaymentIntent was created unconfirmed
+ *     and never charged.
+ * Here currency is the plan's real currency and confirm+off_session are always
+ * on against an explicit saved customer + payment method.
+ */
+export function buildInstallmentChargeParams(
+  input: InstallmentChargeInput
+): Stripe.PaymentIntentCreateParams {
+  return {
+    amount: input.amountCents,
+    currency: input.currency.toLowerCase(),
+    customer: input.stripeCustomerId,
+    payment_method: input.stripePaymentMethodId,
+    // Restrict to card: redirect-based methods can't be charged off-session.
+    payment_method_types: ['card'],
+    // confirm:true charges the saved card now; off_session:true tells Stripe
+    // the customer isn't present to complete any step-up (SCA) challenge.
+    confirm: true,
+    off_session: true,
+    metadata: {
+      type: 'bnpl_installment',
+      planId: input.planId,
+      installmentNumber: String(input.installmentNumber),
+      userId: input.userId,
+      merchantId: input.merchantId,
+    },
   };
 }
 

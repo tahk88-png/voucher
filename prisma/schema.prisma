@@ -65,6 +65,10 @@ model User {
   image             String?
   adminRole         AdminRole?
   preferredLanguage String?    @default("en")
+  // Reusable Stripe Customer for off-session charges (BNPL installments).
+  // One customer per user; saved payment methods are attached to it so the
+  // BNPL cron can charge later installments without the user present.
+  stripeCustomerId  String?
   deleted           Boolean    @default(false)
   deletedAt         DateTime?
   createdAt         DateTime   @default(now())
@@ -113,29 +117,31 @@ model User {
   giftInteractions UserGiftInteraction[] @relation("UserGiftInteractionUser")
 
   // 2027 features
-  totpCredential      TotpCredential?
-  passkeys            Passkey[]
-  reviews             Review[]
-  reviewVotes         ReviewVote[]
-  wishlistItems       WishlistItem[]
-  badges              UserBadge[]
-  streak              UserStreak?
-  abTestAssignments   ABTestAssignment[]
-  chatMessages        ChatMessage[]
-  boxSubscriptions    BoxSubscription[]
-  activityPattern     UserActivityPattern?
-  walletPasses        WalletPass[]
+  totpCredential    TotpCredential?
+  passkeys          Passkey[]
+  reviews           Review[]
+  reviewVotes       ReviewVote[]
+  wishlistItems     WishlistItem[]
+  badges            UserBadge[]
+  streak            UserStreak?
+  abTestAssignments ABTestAssignment[]
+  chatMessages      ChatMessage[]
+  boxSubscriptions  BoxSubscription[]
+  activityPattern   UserActivityPattern?
+  walletPasses      WalletPass[]
 
   // Commerce features
-  installmentPlans    InstallmentPlan[]
-  loyaltyAccount      LoyaltyAccount?
+  installmentPlans        InstallmentPlan[]
+  loyaltyAccount          LoyaltyAccount?
   emailCampaignDeliveries EmailCampaignDelivery[]
-  appointments            Appointment[]            @relation("AppointmentUser")
+  appointments            Appointment[]           @relation("AppointmentUser")
 
   @@index([status])
   @@index([adminRole])
   @@index([deleted])
   @@index([deletedAt])
+  @@index([stripeCustomerId])
+  @@index([createdAt])
 }
 
 enum OrgType {
@@ -363,9 +369,13 @@ model Organization {
   auditEvents          AuditEvent[]
   apiKeys              PartnerApiKey[]
   partnerCampaignLinks CampaignAllowedPartner[]
+  invitations          OrgInvitation[]
+
+  deletedAt DateTime?
 
   @@index([type])
   @@index([status])
+  @@index([deletedAt])
 }
 
 model OrgMembership {
@@ -591,15 +601,15 @@ model PartnerApiKey {
 }
 
 model Merchant {
-  id                  String    @id @default(cuid())
+  id                  String  @id @default(cuid())
   name                String
-  slug                String    @unique
+  slug                String  @unique
   country             String
   registryCode        String? // Company registration number
   vatNumber           String? // VAT/Tax ID
   taxResidenceCountry String?
-  defaultCurrency     String    @default("USD")
-  defaultLocale       String?   @default("en")
+  defaultCurrency     String  @default("USD")
+  defaultLocale       String? @default("en")
   dataResidency       String? // "EU" | "US" for data storage
   brandLogoUrl        String?
   brandColorsJson     Json?
@@ -609,12 +619,25 @@ model Merchant {
   city                String?
   latitude            Float?
   longitude           Float?
-  isActive            Boolean   @default(true) // Kill switch for launch mode
+  isActive            Boolean @default(true) // Kill switch for launch mode
   featureFlags        Json? // Per-merchant feature flags
+
+  // Stripe Connect (Phase 2 - merchant payouts). stripeAccountId is the
+  // connected account (acct_...) created via OAuth express onboarding.
+  // stripeAccountStatus mirrors the account's capabilities state
+  // ("pending" | "restricted" | "enabled" | "disabled"). payoutsEnabled
+  // is a denormalised boolean of capabilities.transfers == "active" and
+  // payouts_enabled == true, kept up to date via the account.updated
+  // webhook. Un-connected merchants keep their legacy direct-charge flow;
+  // connected merchants get transfer_data[destination] + platform fee.
+  stripeAccountId     String?   @unique
+  stripeAccountStatus String?   @default("pending")
+  payoutsEnabled      Boolean   @default(false)
   invitedAt           DateTime? // Track manual invites
   onboardedAt         DateTime? // Track onboarding completion
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime?
 
   members                   MerchantMember[]
   vouchers                  Voucher[]
@@ -647,26 +670,29 @@ model Merchant {
   dataDeletionRequests      DataDeletionRequest[]      @relation("DataDeletionRequestMerchant")
 
   // Compliance relations
-  vatExemptions   VatExemption[]   @relation("VatExemptionMerchant")
-  invoices        Invoice[]        @relation("InvoiceMerchant")
-  refundRequests  RefundRequest[]  @relation("RefundRequestMerchant")
-  payoutRecords   PayoutRecord[]   @relation("PayoutRecordMerchant")
+  vatExemptions  VatExemption[]  @relation("VatExemptionMerchant")
+  invoices       Invoice[]       @relation("InvoiceMerchant")
+  refundRequests RefundRequest[] @relation("RefundRequestMerchant")
+  payoutRecords  PayoutRecord[]  @relation("PayoutRecordMerchant")
 
   // Smart Gift Feed relations
   giftProducts        GiftProduct[]            @relation("GiftProductMerchant")
   sponsoredPlacements SponsoredGiftPlacement[] @relation("SponsoredPlacementMerchant")
 
   // 2027 features
-  reviews          Review[]          @relation("MerchantReviews")
-  wishlistItems    WishlistItem[]
-  pricingRules     PricingRule[]
+  reviews           Review[]          @relation("MerchantReviews")
+  wishlistItems     WishlistItem[]
+  pricingRules      PricingRule[]
   subscriptionBoxes SubscriptionBox[]
-  apiKeys          MerchantApiKey[]
-  emailCampaigns   EmailCampaign[]
-  appointments     Appointment[]     @relation("AppointmentMerchant")
+  apiKeys           MerchantApiKey[]
+  emailCampaigns    EmailCampaign[]
+  appointments      Appointment[]     @relation("AppointmentMerchant")
 
   // Commerce features
   installmentPlans InstallmentPlan[]
+
+  // Email system
+  emailSenderProfiles EmailSenderProfile[] @relation("EmailSenderProfileMerchant")
 
   @@index([isActive])
   @@index([country])
@@ -677,6 +703,12 @@ model MerchantMember {
   merchantId String
   userId     String
   role       String // merchant_admin | merchant_staff
+  // Per-member notification preferences. Keyed by category
+  // (e.g. "orders", "payouts", "fraud", "marketing_digest"); value is
+  // boolean opt-in. Missing keys fall back to the platform default
+  // (see lib/merchant-notifications.ts). Stored as JSON so we can add
+  // new categories without a migration.
+  notificationPrefs Json? @default("{}")
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -693,8 +725,8 @@ model MerchantApiKey {
   merchantId  String
   name        String
   keyHash     String    @unique
-  prefix      String    // first 8 chars of key for display (e.g. "mk_a1b2...")
-  permissions String[]  // e.g. ["voucher.read", "voucher.redeem", "campaign.read"]
+  prefix      String // first 8 chars of key for display (e.g. "mk_a1b2...")
+  permissions String[] // e.g. ["voucher.read", "voucher.redeem", "campaign.read"]
   lastUsedAt  DateTime?
   expiresAt   DateTime?
   revoked     Boolean   @default(false)
@@ -727,6 +759,7 @@ model Campaign {
   status               String    @default("draft") // draft | active | ended
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
+  deletedAt            DateTime?
 
   merchant  Merchant          @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   vouchers  Voucher[]
@@ -740,13 +773,17 @@ model Campaign {
   @@index([merchantId])
   @@index([status])
   @@index([startDate, endDate])
+  // Auto-expire cron filters by (status='active', endDate < now).
+  // Without this composite the cron does a status-bucket scan, which
+  // is fine today but degrades as the campaign table grows.
+  @@index([status, endDate])
 }
 
 model Voucher {
   id                String    @id @default(cuid())
   merchantId        String
   campaignId        String?
-  status            String    @default("draft") // draft | published | paused | ended
+  status            String    @default("draft") // draft | published | paused | ended | expired (set by auto-expire cron once validTo passes)
   type              String // percentage | fixed_amount | credit_amount
   value             Int // minor units for money, basis points for percentage
   currency          String
@@ -761,10 +798,11 @@ model Voucher {
   codePrefix        String?
   isFlashSale       Boolean   @default(false)
   flashSaleEndsAt   DateTime?
-  stockQuantity     Int?      // null = unlimited stock
+  stockQuantity     Int? // null = unlimited stock
   lowStockThreshold Int?      @default(10) // alert when stock drops below this
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
+  deletedAt         DateTime?
 
   merchant        Merchant          @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   campaign        Campaign?         @relation(fields: [campaignId], references: [id], onDelete: SetNull)
@@ -785,6 +823,9 @@ model Voucher {
   @@index([status])
   @@index([validFrom, validTo])
   @@index([isFlashSale])
+  // Auto-expire cron filters by (status='published', validTo < now).
+  // Composite enables an index-only seek for the cron's bulk-expire step.
+  @@index([status, validTo])
 }
 
 model Referral {
@@ -836,6 +877,15 @@ model Redemption {
   @@index([merchantId])
   @@index([referralId])
   @@index([confirmedAt])
+  // Commerce-confirm + revoke filter by orderReference alone; the composite
+  // unique below leads with merchantId so it can't serve that lookup.
+  @@index([orderReference])
+  // Idempotency for the external commerce-confirm webhook: two concurrent
+  // deliveries with the same orderReference can't both create a redemption
+  // (and double-unlock referral credit). orderReference is nullable, and
+  // Postgres treats NULLs as distinct, so the in-store / API paths that
+  // don't set it are unaffected.
+  @@unique([merchantId, orderReference])
 }
 
 model VoucherPurchase {
@@ -861,6 +911,7 @@ model VoucherPurchase {
   @@index([userId])
   @@index([status])
   @@index([stripeSessionId])
+  @@index([createdAt])
 }
 
 model CreditLedger {
@@ -883,6 +934,10 @@ model CreditLedger {
   @@index([userId])
   @@index([status])
   @@index([expiresAt])
+  // Auto-expire cron filters (status='available', expiresAt < now).
+  @@index([status, expiresAt])
+  // Referral-unlock lookup keys on (source, sourceId, status='locked').
+  @@index([sourceId, status])
 }
 
 model CreditUsage {
@@ -981,6 +1036,7 @@ model TicketPurchase {
   @@index([eventId])
   @@index([status])
   @@index([stripeSessionId])
+  @@index([createdAt])
 }
 
 model GiftCard {
@@ -1041,6 +1097,7 @@ model GiftCardPurchase {
   @@index([userId])
   @@index([status])
   @@index([stripeSessionId])
+  @@index([createdAt])
 }
 
 model MerchantSubscription {
@@ -1243,7 +1300,7 @@ model RentalItem {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  merchant Merchant        @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   bookings RentalBooking[]
 
   @@index([merchantId])
@@ -1435,6 +1492,7 @@ model ModerationAction {
   @@index([moderatorUserId])
   @@index([actionType])
   @@index([createdAt])
+  @@index([reportId])
 }
 
 model Appeal {
@@ -1937,6 +1995,7 @@ model PayoutRecord {
   @@index([merchantId])
   @@index([status])
   @@index([scheduledFor])
+  @@index([settlementBatchId])
 }
 
 model SettlementBatch {
@@ -2027,38 +2086,23 @@ model UserConsent {
   @@index([granted])
 }
 
-model HealthCheckLog {
-  id             String   @id @default(cuid())
-  status         String // "healthy" | "degraded" | "unhealthy"
-  databaseHealth Boolean  @default(false)
-  stripeHealth   Boolean  @default(false)
-  redisHealth    Boolean  @default(false)
-  emailHealth    Boolean  @default(false)
-  message        String?
-  metadata       Json?
-  createdAt      DateTime @default(now())
-
-  @@index([status])
-  @@index([createdAt])
-}
-
 // ═══════════════════════════════════════════════
 // 2027 FEATURES
 // ═══════════════════════════════════════════════
 
 // ── Passkey (WebAuthn) ──
 model Passkey {
-  id              String   @id @default(cuid())
-  userId          String
-  credentialId    String   @unique // base64url-encoded credential ID
-  publicKey       String   @db.Text // base64url-encoded public key
-  counter         BigInt   @default(0)
-  deviceType      String?  // "singleDevice" | "multiDevice"
-  backedUp        Boolean  @default(false)
-  transports      String[] // "usb" | "ble" | "nfc" | "internal"
-  friendlyName    String?  // user-given name like "iPhone", "YubiKey"
-  lastUsedAt      DateTime?
-  createdAt       DateTime @default(now())
+  id           String    @id @default(cuid())
+  userId       String
+  credentialId String    @unique // base64url-encoded credential ID
+  publicKey    String    @db.Text // base64url-encoded public key
+  counter      BigInt    @default(0)
+  deviceType   String? // "singleDevice" | "multiDevice"
+  backedUp     Boolean   @default(false)
+  transports   String[] // "usb" | "ble" | "nfc" | "internal"
+  friendlyName String? // user-given name like "iPhone", "YubiKey"
+  lastUsedAt   DateTime?
+  createdAt    DateTime  @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -2069,7 +2113,7 @@ model Passkey {
 model TotpCredential {
   id          String   @id @default(cuid())
   userId      String   @unique
-  secret      String   // encrypted TOTP secret
+  secret      String // encrypted TOTP secret
   enabled     Boolean  @default(false)
   backupCodes String[] // hashed backup codes
   createdAt   DateTime @default(now())
@@ -2080,26 +2124,26 @@ model TotpCredential {
 
 // ── Reviews & Ratings ──
 model Review {
-  id         String   @id @default(cuid())
-  userId     String
-  merchantId String?
-  voucherId  String?
-  campaignId String?
-  rating           Int      // 1-5
-  title            String?
-  comment          String?  @db.Text
-  helpful          Int      @default(0) // helpful vote count
-  verified         Boolean  @default(false) // verified purchase
-  status           ReviewStatus @default(published)
-  merchantReply    String?  @db.Text
-  merchantReplyAt  DateTime?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  id              String       @id @default(cuid())
+  userId          String
+  merchantId      String?
+  voucherId       String?
+  campaignId      String?
+  rating          Int // 1-5
+  title           String?
+  comment         String?      @db.Text
+  helpful         Int          @default(0) // helpful vote count
+  verified        Boolean      @default(false) // verified purchase
+  status          ReviewStatus @default(published)
+  merchantReply   String?      @db.Text
+  merchantReplyAt DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 
-  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  merchant Merchant? @relation("MerchantReviews", fields: [merchantId], references: [id], onDelete: SetNull)
-  voucher  Voucher?  @relation("VoucherReviews", fields: [voucherId], references: [id], onDelete: SetNull)
-  campaign Campaign? @relation("CampaignReviews", fields: [campaignId], references: [id], onDelete: SetNull)
+  user     User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  merchant Merchant?    @relation("MerchantReviews", fields: [merchantId], references: [id], onDelete: SetNull)
+  voucher  Voucher?     @relation("VoucherReviews", fields: [voucherId], references: [id], onDelete: SetNull)
+  campaign Campaign?    @relation("CampaignReviews", fields: [campaignId], references: [id], onDelete: SetNull)
   votes    ReviewVote[]
 
   @@index([userId])
@@ -2133,15 +2177,15 @@ enum ReviewStatus {
 
 // ── Wishlist & Price Alerts ──
 model WishlistItem {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   userId     String
   voucherId  String?
   campaignId String?
   merchantId String?
-  priceAlert Boolean  @default(false) // notify on price drop
-  alertPrice Int?     // trigger when price drops below this (cents)
+  priceAlert Boolean   @default(false) // notify on price drop
+  alertPrice Int? // trigger when price drops below this (cents)
   notifiedAt DateTime? // last price alert sent
-  createdAt  DateTime @default(now())
+  createdAt  DateTime  @default(now())
 
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   voucher  Voucher?  @relation(fields: [voucherId], references: [id], onDelete: Cascade)
@@ -2159,9 +2203,9 @@ model WishlistItem {
 model UserBadge {
   id        String   @id @default(cuid())
   userId    String
-  badgeType String   // "first_redemption", "10_referrals", "streak_7", "top_merchant", etc.
-  tier      String?  // "bronze", "silver", "gold", "platinum"
-  metadata  Json?    // extra data (count, context)
+  badgeType String // "first_redemption", "10_referrals", "streak_7", "top_merchant", etc.
+  tier      String? // "bronze", "silver", "gold", "platinum"
+  metadata  Json? // extra data (count, context)
   earnedAt  DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -2172,33 +2216,33 @@ model UserBadge {
 }
 
 model UserStreak {
-  id          String    @id @default(cuid())
-  userId      String    @unique
-  currentDays Int       @default(0)
-  longestDays Int       @default(0)
+  id             String    @id @default(cuid())
+  userId         String    @unique
+  currentDays    Int       @default(0)
+  longestDays    Int       @default(0)
   lastActiveDate DateTime?
-  totalPoints Int       @default(0)
-  level       Int       @default(1)
-  updatedAt   DateTime  @updatedAt
+  totalPoints    Int       @default(0)
+  level          Int       @default(1)
+  updatedAt      DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // ── A/B Testing ──
 model ABTest {
-  id          String   @id @default(cuid())
-  name        String   @unique
+  id          String       @id @default(cuid())
+  name        String       @unique
   description String?
   status      ABTestStatus @default(draft)
-  targetType  String   // "campaign", "voucher", "page"
-  targetId    String?  // specific target or null for all
-  variants    Json     // [{ id: "A", name: "Control", weight: 50, config: {...} }, ...]
-  metrics     Json?    // { impressions: { A: 100, B: 120 }, conversions: { A: 10, B: 15 } }
+  targetType  String // "campaign", "voucher", "page"
+  targetId    String? // specific target or null for all
+  variants    Json // [{ id: "A", name: "Control", weight: 50, config: {...} }, ...]
+  metrics     Json? // { impressions: { A: 100, B: 120 }, conversions: { A: 10, B: 15 } }
   startedAt   DateTime?
   endedAt     DateTime?
-  winnerId    String?  // winning variant id
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  winnerId    String? // winning variant id
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   assignments ABTestAssignment[]
 
@@ -2210,7 +2254,7 @@ model ABTestAssignment {
   id        String   @id @default(cuid())
   testId    String
   userId    String
-  variantId String   // "A", "B", etc.
+  variantId String // "A", "B", etc.
   converted Boolean  @default(false)
   createdAt DateTime @default(now())
 
@@ -2231,13 +2275,13 @@ enum ABTestStatus {
 
 // ── AI Chat Messages ──
 model ChatMessage {
-  id           String   @id @default(cuid())
-  sessionId    String   // groups messages in a conversation
-  userId       String?
-  role         String   // "user" | "assistant" | "system"
-  content      String   @db.Text
-  metadata     Json?    // tool calls, sources, etc.
-  createdAt    DateTime @default(now())
+  id        String   @id @default(cuid())
+  sessionId String // groups messages in a conversation
+  userId    String?
+  role      String // "user" | "assistant" | "system"
+  content   String   @db.Text
+  metadata  Json? // tool calls, sources, etc.
+  createdAt DateTime @default(now())
 
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
@@ -2248,21 +2292,21 @@ model ChatMessage {
 
 // ── Subscription Boxes ──
 model SubscriptionBox {
-  id          String   @id @default(cuid())
-  merchantId  String
-  name        String
-  description String?  @db.Text
-  priceCents  Int
-  currency    String   @default("EUR")
-  interval    String   @default("monthly") // "weekly" | "monthly" | "quarterly"
-  maxItems    Int      @default(3)
-  isActive    Boolean  @default(true)
+  id              String   @id @default(cuid())
+  merchantId      String
+  name            String
+  description     String?  @db.Text
+  priceCents      Int
+  currency        String   @default("EUR")
+  interval        String   @default("monthly") // "weekly" | "monthly" | "quarterly"
+  maxItems        Int      @default(3)
+  isActive        Boolean  @default(true)
   stripeProductId String?
   stripePriceId   String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
-  merchant      Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  merchant      Merchant          @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   subscriptions BoxSubscription[]
   items         BoxItem[]
 
@@ -2271,15 +2315,15 @@ model SubscriptionBox {
 }
 
 model BoxSubscription {
-  id               String   @id @default(cuid())
+  id               String    @id @default(cuid())
   boxId            String
   userId           String
-  status           String   @default("active") // "active" | "paused" | "cancelled"
-  stripeSubId      String?  @unique
+  status           String    @default("active") // "active" | "paused" | "cancelled"
+  stripeSubId      String?   @unique
   currentPeriodEnd DateTime?
   cancelledAt      DateTime?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 
   box  SubscriptionBox @relation(fields: [boxId], references: [id], onDelete: Cascade)
   user User            @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -2293,7 +2337,7 @@ model BoxItem {
   id        String   @id @default(cuid())
   boxId     String
   voucherId String?
-  month     String   // "2027-03" — delivery month
+  month     String // "2027-03" — delivery month
   createdAt DateTime @default(now())
 
   box     SubscriptionBox @relation(fields: [boxId], references: [id], onDelete: Cascade)
@@ -2305,16 +2349,16 @@ model BoxItem {
 
 // ── Dynamic Pricing ──
 model PricingRule {
-  id           String   @id @default(cuid())
-  merchantId   String
-  voucherId    String?
-  campaignId   String?
-  ruleType     String   // "demand", "time_of_day", "inventory", "surge", "loyalty"
-  config       Json     // { peakHours: [11,14], multiplier: 1.2, minPrice: 500, maxPrice: 2000 }
-  isActive     Boolean  @default(true)
-  priority     Int      @default(0)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id         String   @id @default(cuid())
+  merchantId String
+  voucherId  String?
+  campaignId String?
+  ruleType   String // "demand", "time_of_day", "inventory", "surge", "loyalty"
+  config     Json // { peakHours: [11,14], multiplier: 1.2, minPrice: 500, maxPrice: 2000 }
+  isActive   Boolean  @default(true)
+  priority   Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   merchant Merchant  @relation(fields: [merchantId], references: [id], onDelete: Cascade)
   voucher  Voucher?  @relation(fields: [voucherId], references: [id], onDelete: SetNull)
@@ -2330,10 +2374,10 @@ model PricingRule {
 model UserActivityPattern {
   id              String   @id @default(cuid())
   userId          String   @unique
-  preferredHours  Json     // [10, 14, 19] — hours when user is most active
-  preferredDays   Json     // [1, 3, 5] — days of week (1=Mon)
+  preferredHours  Json // [10, 14, 19] — hours when user is most active
+  preferredDays   Json // [1, 3, 5] — days of week (1=Mon)
   timezone        String   @default("UTC")
-  avgResponseTime Int?     // seconds — how fast user responds to notifications
+  avgResponseTime Int? // seconds — how fast user responds to notifications
   openRate        Float    @default(0) // 0-1 — notification open rate
   lastCalculated  DateTime @default(now())
 
@@ -2342,11 +2386,11 @@ model UserActivityPattern {
 
 // ── Multi-Currency ──
 model CurrencyRate {
-  id         String   @id @default(cuid())
+  id           String   @id @default(cuid())
   fromCurrency String
   toCurrency   String
   rate         Float
-  source       String  @default("ecb") // "ecb" | "stripe" | "manual"
+  source       String   @default("ecb") // "ecb" | "stripe" | "manual"
   fetchedAt    DateTime @default(now())
 
   @@unique([fromCurrency, toCurrency])
@@ -2360,9 +2404,9 @@ model WalletPass {
   voucherId    String?
   ticketId     String?
   giftCardId   String?
-  passType     String   // "apple" | "google"
+  passType     String // "apple" | "google"
   serialNumber String   @unique
-  passData     Json?    // cached pass metadata
+  passData     Json? // cached pass metadata
   isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -2428,12 +2472,14 @@ model InstallmentPlan {
   purchaseId             String?
   merchantId             String
   totalCents             Int
+  currency               String                @default("usd") // ISO currency, lowercased; charged on every installment
   planType               String // "3x" | "6x" | "12x"
-  interestRate           Float  @default(0) // percentage, e.g. 2.5
+  interestRate           Float                 @default(0) // percentage, e.g. 2.5
   totalWithInterestCents Int
   installmentsJson       Json // [{ number, amountCents, dueDate, status, stripePaymentIntentId? }]
   status                 InstallmentPlanStatus @default(active)
-  stripeCustomerId       String?
+  stripeCustomerId       String? // Stripe Customer holding the saved payment method
+  stripePaymentMethodId  String? // off-session-capable PaymentMethod charged each installment
   nextInstallmentDate    DateTime?
   createdAt              DateTime              @default(now())
   updatedAt              DateTime              @updatedAt
@@ -2483,7 +2529,7 @@ model EmailCampaign {
   merchantId      String
   name            String
   subject         String
-  sectionsJson    Json      // Array of section blocks
+  sectionsJson    Json // Array of section blocks
   recipientFilter String    @default("all") // all | redeemed_30d | inactive
   status          String    @default("draft") // draft | scheduled | sent
   scheduledAt     DateTime?
@@ -2522,19 +2568,19 @@ model EmailCampaignDelivery {
 
 // ── Appointments / Calendar Booking ──
 model Appointment {
-  id          String    @id @default(cuid())
+  id          String   @id @default(cuid())
   merchantId  String
   userId      String?
   serviceName String
   startTime   DateTime
   endTime     DateTime
-  status      String    @default("pending") // pending | confirmed | cancelled | completed
-  priceCents  Int       @default(0)
-  currency    String    @default("EUR")
+  status      String   @default("pending") // pending | confirmed | cancelled | completed
+  priceCents  Int      @default(0)
+  currency    String   @default("EUR")
   notes       String?
-  isSlot      Boolean   @default(false) // true = availability slot, false = booking
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  isSlot      Boolean  @default(false) // true = availability slot, false = booking
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   merchant Merchant @relation("AppointmentMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
   user     User?    @relation("AppointmentUser", fields: [userId], references: [id], onDelete: SetNull)
@@ -2560,9 +2606,9 @@ model SystemSetting {
 
 model SystemMetric {
   id         String   @id @default(cuid())
-  name       String   // e.g. "active_users", "revenue_per_minute", "error_rate"
+  name       String // e.g. "active_users", "revenue_per_minute", "error_rate"
   value      Float
-  dimensions Json?    // optional key-value metadata (merchantId, region, etc.)
+  dimensions Json? // optional key-value metadata (merchantId, region, etc.)
   timestamp  DateTime @default(now())
 
   @@index([name, timestamp])
@@ -2575,7 +2621,7 @@ model SystemMetric {
 
 model AnalyticsEvent {
   id         String   @id @default(cuid())
-  type       String   // page_view, purchase, redemption, signup, search, click
+  type       String // page_view, purchase, redemption, signup, search, click
   userId     String?
   merchantId String?
   sessionId  String?
@@ -2583,10 +2629,10 @@ model AnalyticsEvent {
   referrer   String?
   metadata   Json?
   country    String?
-  device     String?  // desktop, mobile, tablet
+  device     String? // desktop, mobile, tablet
   browser    String?
-  ipHash     String?  // hashed IP for privacy
-  duration   Int?     // time on page in seconds
+  ipHash     String? // hashed IP for privacy
+  duration   Int? // time on page in seconds
   createdAt  DateTime @default(now())
 
   @@index([type])
@@ -2628,4 +2674,320 @@ model ApiRequest {
   @@index([createdAt])
   @@index([statusCode])
   @@index([path, createdAt])
+}
+
+// ═══════════════════════════════════════════════
+// BILLING PLANS (DB-driven, not hardcoded)
+// ═══════════════════════════════════════════════
+
+model BillingPlan {
+  id                   String   @id @default(cuid())
+  slug                 String   @unique
+  name                 String
+  priceMonthlyCents    Int
+  priceYearlyCents     Int
+  currency             String   @default("EUR")
+  features             Json     @default("[]")
+  limits               Json     @default("{}")
+  capabilities         Json     @default("{}")
+  isActive             Boolean  @default(true)
+  sortOrder            Int      @default(0)
+  stripePriceIdMonthly String?
+  stripePriceIdYearly  String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([isActive, sortOrder])
+}
+
+// ═══════════════════════════════════════════════
+// STRIPE EVENT LOG (idempotent webhook audit trail)
+// ═══════════════════════════════════════════════
+
+model StripeEvent {
+  id            String    @id @default(cuid())
+  stripeEventId String    @unique
+  eventType     String
+  livemode      Boolean   @default(false)
+  data          Json
+  processedAt   DateTime?
+  error         String?
+  createdAt     DateTime  @default(now())
+
+  @@index([eventType])
+  @@index([processedAt])
+  @@index([createdAt])
+}
+
+// ═══════════════════════════════════════════════
+// ORG INVITATIONS (token-based, 72h expiry)
+// ═══════════════════════════════════════════════
+
+model OrgInvitation {
+  id         String    @id @default(cuid())
+  orgId      String
+  email      String
+  role       OrgRole
+  token      String    @unique @default(cuid())
+  invitedBy  String?
+  expiresAt  DateTime
+  acceptedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  org Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+
+  @@unique([orgId, email])
+  @@index([token])
+  @@index([expiresAt])
+}
+
+// ═══════════════════════════════════════════════
+// COOKIE CONSENT (server-side store, GDPR)
+// ═══════════════════════════════════════════════
+
+model CookieConsent {
+  id          String   @id @default(cuid())
+  sessionId   String?
+  userId      String?
+  necessary   Boolean  @default(true)
+  analytics   Boolean  @default(false)
+  marketing   Boolean  @default(false)
+  preferences Boolean  @default(false)
+  ipAddress   String?
+  userAgent   String?
+  consentedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sessionId])
+  @@index([userId])
+}
+
+// ═══════════════════════════════════════════════
+// EMAIL SENDER SYSTEM
+// ═══════════════════════════════════════════════
+
+enum EmailJobStatus {
+  queued
+  processing
+  completed
+  failed
+  dead
+}
+
+enum EmailJobPriority {
+  urgent
+  normal
+  low
+}
+
+enum EmailEventType {
+  sent
+  delivered
+  opened
+  clicked
+  bounced
+  complained
+  unsubscribed
+  deferred
+}
+
+enum EmailSuppressionReason {
+  hard_bounce
+  soft_bounce
+  complaint
+  unsubscribe
+  manual
+}
+
+enum EmailProviderType {
+  resend
+  smtp
+}
+
+enum EmailTemplateStatus {
+  draft
+  active
+  archived
+}
+
+// Central log of every outgoing email
+model EmailMessage {
+  id           String    @id @default(cuid())
+  jobId        String?
+  providerId   String? // provider's message ID (e.g., Resend "re_xxx")
+  providerType String    @default("resend")
+  from         String
+  to           String
+  subject      String
+  templateSlug String?
+  category     String    @default("transactional") // transactional | marketing | auth | system
+  tags         Json?
+  status       String    @default("sent") // sent | delivered | bounced | failed | suppressed
+  errorMessage String?
+  metadata     Json? // { userId, merchantId, voucherId, campaignId, etc. }
+  sentAt       DateTime?
+  deliveredAt  DateTime?
+  openedAt     DateTime?
+  clickedAt    DateTime?
+  bouncedAt    DateTime?
+  createdAt    DateTime  @default(now())
+
+  job    EmailJob?    @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  events EmailEvent[]
+
+  @@index([to])
+  @@index([category])
+  @@index([templateSlug])
+  @@index([status])
+  @@index([providerId])
+  @@index([createdAt])
+  @@index([jobId])
+}
+
+// Webhook-ingested delivery events
+model EmailEvent {
+  id         String         @id @default(cuid())
+  messageId  String
+  type       EmailEventType
+  provider   String         @default("resend")
+  payload    Json?
+  occurredAt DateTime
+  createdAt  DateTime       @default(now())
+
+  message EmailMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+  @@index([type])
+  @@index([occurredAt])
+}
+
+// Admin-managed email templates stored in DB
+model EmailTemplate {
+  id           String              @id @default(cuid())
+  slug         String              @unique
+  name         String
+  description  String?
+  subject      String
+  sectionsJson Json // EmailSection[] (same format as email-builder.ts)
+  category     String              @default("transactional")
+  status       EmailTemplateStatus @default(draft)
+  variables    Json? // ["name", "amount", "url"] declared merge vars
+  version      Int                 @default(1)
+  createdById  String?
+  updatedById  String?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  @@index([status])
+  @@index([category])
+}
+
+// Sender identity management
+model EmailSenderProfile {
+  id             String   @id @default(cuid())
+  merchantId     String?
+  name           String
+  email          String
+  replyTo        String?
+  domain         String?
+  domainVerified Boolean  @default(false)
+  isDefault      Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  merchant Merchant? @relation("EmailSenderProfileMerchant", fields: [merchantId], references: [id], onDelete: Cascade)
+
+  @@unique([merchantId, email])
+  @@index([merchantId])
+  @@index([isDefault])
+}
+
+// Bounce/complaint/unsubscribe suppression list
+model EmailSuppression {
+  id        String                 @id @default(cuid())
+  email     String
+  reason    EmailSuppressionReason
+  source    String                 @default("webhook") // webhook | manual | import
+  notes     String?
+  expiresAt DateTime?
+  createdBy String?
+  createdAt DateTime               @default(now())
+
+  @@unique([email, reason])
+  @@index([email])
+  @@index([expiresAt])
+}
+
+// Provider configuration (non-secret settings)
+model EmailProviderConfig {
+  id            String            @id @default(cuid())
+  provider      EmailProviderType
+  name          String
+  isActive      Boolean           @default(true)
+  isPrimary     Boolean           @default(false)
+  priority      Int               @default(0)
+  configJson    Json // { rateLimit, region, smtpHost, etc. }
+  healthStatus  String            @default("healthy") // healthy | degraded | down
+  lastCheckedAt DateTime?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@unique([provider, name])
+  @@index([isActive])
+  @@index([isPrimary])
+}
+
+// Database-backed email job queue
+model EmailJob {
+  id           String           @id @default(cuid())
+  priority     EmailJobPriority @default(normal)
+  status       EmailJobStatus   @default(queued)
+  to           String
+  from         String?
+  subject      String
+  html         String?          @db.Text
+  text         String?          @db.Text
+  templateSlug String?
+  templateData Json?
+  category     String           @default("transactional")
+  tags         Json?
+  metadata     Json?
+  provider     String?
+  attempts     Int              @default(0)
+  maxAttempts  Int              @default(3)
+  lastError    String?
+  nextRetryAt  DateTime?
+  lockedAt     DateTime?
+  lockedBy     String?
+  completedAt  DateTime?
+  scheduledAt  DateTime         @default(now())
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  messages EmailMessage[]
+
+  @@index([status, priority, scheduledAt])
+  @@index([status, nextRetryAt])
+  @@index([lockedAt])
+  @@index([createdAt])
+  @@index([category])
+}
+
+// Pre-aggregated daily email stats
+model EmailDailyStats {
+  id         String   @id @default(cuid())
+  date       DateTime @db.Date
+  category   String   @default("all")
+  provider   String   @default("all")
+  sent       Int      @default(0)
+  delivered  Int      @default(0)
+  opened     Int      @default(0)
+  clicked    Int      @default(0)
+  bounced    Int      @default(0)
+  complained Int      @default(0)
+  failed     Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  @@unique([date, category, provider])
+  @@index([date])
 }

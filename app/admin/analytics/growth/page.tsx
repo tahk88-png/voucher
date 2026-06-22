@@ -60,22 +60,22 @@ async function fetchGrowthAnalytics() {
     prisma.auditLog.count({
       where: { action: { contains: 'view' }, createdAt: { gte: thirtyDaysAgo } },
     }),
-    // Referral signups
-    prisma.user.count({
-      where: { referredBy: { not: null }, createdAt: { gte: thirtyDaysAgo } },
+    // Referral count (referrals redeemed in period)
+    prisma.referral.count({
+      where: { status: 'redeemed', createdAt: { gte: thirtyDaysAgo } },
     }),
-    // Churned users (active 60-90 days ago but not active in last 30 days)
+    // Churned users (active 60-90 days ago but not active in last 30 days) — approximated via updatedAt
     prisma.user.count({
       where: {
-        lastActiveAt: { gte: sixtyDaysAgo, lt: thirtyDaysAgo },
-        NOT: { lastActiveAt: { gte: thirtyDaysAgo } },
+        updatedAt: { gte: sixtyDaysAgo, lt: thirtyDaysAgo },
+        NOT: { updatedAt: { gte: thirtyDaysAgo } },
       },
     }),
     // Previous period churn
     prisma.user.count({
       where: {
-        lastActiveAt: { gte: ninetyDaysAgo, lt: sixtyDaysAgo },
-        NOT: { lastActiveAt: { gte: sixtyDaysAgo } },
+        updatedAt: { gte: ninetyDaysAgo, lt: sixtyDaysAgo },
+        NOT: { updatedAt: { gte: sixtyDaysAgo } },
       },
     }),
   ]);
@@ -101,14 +101,14 @@ async function fetchGrowthAnalytics() {
   // Period comparison
   const periodComparison = {
     current: {
-      label: 'This Month',
+      header: 'This Month',
       views: viewEstimate,
       purchases: currentPurchases,
       conversions: currentRedemptions,
       revenue: curRev,
     },
     previous: {
-      label: 'Last Month',
+      header: 'Last Month',
       views: Math.round(viewEstimate * (preRev / (curRev || 1))),
       purchases: prevPurchases,
       conversions: Math.round(currentRedemptions * 0.85),
@@ -125,23 +125,23 @@ async function fetchGrowthAnalytics() {
     { channel: 'Direct', value: Math.max(0, totalSignups - referralCount - Math.round(totalSignups * 0.65)) },
   ];
 
-  // Viral coefficient (K-factor): invites sent * conversion rate
+  // Viral coefficient (K-factor): referrals redeemed / total users
   const totalUsersAll = await prisma.user.count();
-  const totalReferrals = await prisma.user.count({ where: { referredBy: { not: null } } });
+  const totalReferrals = await prisma.referral.count({ where: { status: 'redeemed' } });
   const kFactor = totalUsersAll > 0 ? (totalReferrals / totalUsersAll) : 0;
 
-  // Churn trend (last 90 days, weekly)
+  // Churn trend (last 90 days, weekly) — approximated via updatedAt
   const churnTrend: { date: string; value: number }[] = [];
   for (let i = 12; i >= 0; i--) {
     const weekEnd = new Date(now.getTime() - i * 7 * 24 * 60 * 60 * 1000);
     const weekStart = new Date(weekEnd.getTime() - 7 * 24 * 60 * 60 * 1000);
     const activeLastWeek = await prisma.user.count({
-      where: { lastActiveAt: { gte: weekStart, lt: weekEnd } },
+      where: { updatedAt: { gte: weekStart, lt: weekEnd } },
     });
     const churned = await prisma.user.count({
       where: {
-        lastActiveAt: { gte: weekStart, lt: weekEnd },
-        NOT: { lastActiveAt: { gte: weekEnd } },
+        updatedAt: { gte: weekStart, lt: weekEnd },
+        NOT: { updatedAt: { gte: weekEnd } },
       },
     });
     churnTrend.push({

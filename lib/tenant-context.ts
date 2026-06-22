@@ -2,6 +2,7 @@ import { cache } from "react"
 import { headers } from "next/headers"
 import type { JsonValue } from "@prisma/client/runtime/library"
 import { prisma } from "@/lib/prisma"
+import { logger } from "@/lib/logger"
 
 export type TenantMode = "tenant" | "hub"
 
@@ -90,14 +91,15 @@ export async function resolveTenantByHost(hostHeader: string): Promise<TenantCon
       }
     }
   } catch {
-    console.warn("tenant-context: database unavailable, defaulting to hub mode")
+    logger.warn("tenant-context: database unavailable, defaulting to hub mode")
   }
 
   return { mode: "hub", tenant: null, host: hostHeader }
 }
 
 export const getTenantContext = cache(async (): Promise<TenantContext> => {
-  const host = headers().get("x-forwarded-host") || headers().get("host") || ""
+  const h = await headers()
+  const host = h.get("x-forwarded-host") || h.get("host") || ""
   return resolveTenantByHost(host)
 })
 

@@ -20,18 +20,19 @@ const statusLabel: Record<string, string> = {
 export default async function GiftCardDetailPage({
   params,
 }: {
-  params: { slug: string; id: string };
+  params: Promise<{ slug: string; id: string }>;
 }) {
+  const { slug, id } = await params;
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
-  const merchant = await prisma.merchant.findUnique({ where: { slug: params.slug } });
+  const merchant = await prisma.merchant.findUnique({ where: { slug } });
   if (!merchant) notFound();
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
 
   const giftCard = await prisma.giftCard.findFirst({
-    where: { id: params.id, merchantId: merchant.id },
+    where: { id, merchantId: merchant.id },
   });
 
   if (!giftCard) notFound();
@@ -45,37 +46,37 @@ export default async function GiftCardDetailPage({
       <div className="max-w-3xl mx-auto space-y-6">
         <Breadcrumbs
           items={[
-            { label: 'Dashboard', href: `/merchant/${params.slug}/dashboard` },
-            { label: 'Gift cards', href: `/merchant/${params.slug}/gift-cards` },
+            { label: 'Dashboard', href: `/merchant/${slug}/dashboard` },
+            { label: 'Gift cards', href: `/merchant/${slug}/gift-cards` },
             { label: code },
           ]}
         />
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-[#2D2721]">Gift card</h1>
-            <p className="text-sm text-[#6B5744]">Code {code}</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)]">Gift card</h1>
+            <p className="text-sm text-[var(--text-muted)]">Code {code}</p>
           </div>
           <div className="flex gap-2">
             <WarmButton asChild variant="outline">
               <Link href={`/g/${code}`}>Public view</Link>
             </WarmButton>
             <WarmButton asChild variant="outline">
-              <Link href={`/merchant/${params.slug}/gift-cards/new`}>New gift card</Link>
+              <Link href={`/merchant/${slug}/gift-cards/new`}>New gift card</Link>
             </WarmButton>
           </div>
         </div>
 
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-[#2D2721]">Gift card details</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)]">Gift card details</h2>
             <span
               className={`px-2 py-1 text-xs font-bold rounded-full ${
                 giftCard.status === 'active'
                   ? 'bg-[#9DB5A5] text-white'
                   : giftCard.status === 'expired'
-                  ? 'bg-[#E17B5C] text-white'
-                  : 'bg-[#F2EDE3] text-[#8B7355]'
+                  ? 'bg-[var(--danger)] text-white'
+                  : 'bg-[#F2EDE3] text-[var(--text-faint)]'
               }`}
             >
               {statusLabel[giftCard.status] || giftCard.status}
@@ -83,40 +84,40 @@ export default async function GiftCardDetailPage({
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <p className="text-sm text-[#8B7355]">Value</p>
-              <p className="text-lg font-semibold text-[#2D2721]">
+              <p className="text-sm text-[var(--text-faint)]">Value</p>
+              <p className="text-lg font-semibold text-[var(--text)]">
                 {formatCurrency(giftCard.amount, giftCard.currency)}
               </p>
             </div>
             <div>
-              <p className="text-sm text-[#8B7355]">Valid from</p>
-              <p className="text-lg font-semibold text-[#2D2721]">
+              <p className="text-sm text-[var(--text-faint)]">Valid from</p>
+              <p className="text-lg font-semibold text-[var(--text)]">
                 {giftCard.validFrom.toLocaleDateString()}
               </p>
             </div>
             <div>
-              <p className="text-sm text-[#8B7355]">Valid to</p>
-              <p className="text-lg font-semibold text-[#2D2721]">
+              <p className="text-sm text-[var(--text-faint)]">Valid to</p>
+              <p className="text-lg font-semibold text-[var(--text)]">
                 {giftCard.validTo ? giftCard.validTo.toLocaleDateString() : 'No expiry'}
               </p>
             </div>
             <div>
-              <p className="text-sm text-[#8B7355]">Redeemed at</p>
-              <p className="text-lg font-semibold text-[#2D2721]">
+              <p className="text-sm text-[var(--text-faint)]">Redeemed at</p>
+              <p className="text-lg font-semibold text-[var(--text)]">
                 {giftCard.redeemedAt ? giftCard.redeemedAt.toLocaleDateString() : 'Not redeemed'}
               </p>
             </div>
           </div>
         </WarmCard>
 
-        <WarmCard padding="lg" className="bg-white">
-          <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Staff redemption QR</h2>
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
+          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Staff redemption QR</h2>
           <div className="flex flex-col items-center gap-4 text-center">
             <GiftCardQr qrText={redeemUrl} />
-            <p className="text-sm text-[#6B5744]">
+            <p className="text-sm text-[var(--text-muted)]">
               Staff can scan this QR to redeem and invalidate the gift card.
             </p>
-            <p className="text-xs text-[#8B7355] break-all">{redeemUrl}</p>
+            <p className="text-xs text-[var(--text-faint)] break-all">{redeemUrl}</p>
           </div>
         </WarmCard>
       </div>

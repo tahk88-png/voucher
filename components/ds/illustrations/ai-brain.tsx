@@ -19,12 +19,12 @@ export function AiBrain({ width = 280, height = 280, className = '' }: AiBrainPr
     >
       <defs>
         <linearGradient id="ai-brain-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="100%" stopColor="#8b5cf6" />
+          <stop offset="0%" stopColor="#cc785c" />
+          <stop offset="100%" stopColor="#5e7e92" />
         </linearGradient>
         <radialGradient id="ai-brain-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+          <stop offset="0%" stopColor="#cc785c" stopOpacity="0.15" />
+          <stop offset="100%" stopColor="#cc785c" stopOpacity="0" />
         </radialGradient>
         <filter id="ai-brain-blur">
           <feGaussianBlur stdDeviation="6" />
@@ -163,7 +163,7 @@ export function AiBrain({ width = 280, height = 280, className = '' }: AiBrainPr
           cx={cx}
           cy={cy}
           r={r}
-          fill="#06b6d4"
+          fill="#cc785c"
           opacity="0.3"
         >
           <animate

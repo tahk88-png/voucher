@@ -5,6 +5,7 @@ import { withErrorHandler } from "@/lib/error-handler";
 import { requireAdminPermission } from "@/lib/admin/guards";
 import { recordAdminAudit } from "@/lib/admin/audit";
 import { assignReport, resolveReport } from "@/lib/admin/moderation";
+import { z } from "zod";
 
 export async function GET(
   req: NextRequest,
@@ -53,14 +54,16 @@ export async function PATCH(
     const reportId = id;
 
     const body = await req.json();
-    const { action, resolution, status } = body;
-
-    if (!action || !["assign", "resolve"].includes(action)) {
-      return NextResponse.json(
-        { error: "action must be 'assign' or 'resolve'" },
-        { status: 400 }
-      );
+    const patchSchema = z.object({
+      action: z.enum(["assign", "resolve"]),
+      resolution: z.string().optional(),
+      status: z.enum(["resolved", "dismissed"]).optional(),
+    });
+    const parsed = patchSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
     }
+    const { action, resolution, status } = parsed.data;
 
     logger.info("Admin updating report", {
       adminUserId: admin.userId,

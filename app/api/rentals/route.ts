@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { withErrorHandler } from '@/lib/error-handler'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { queueWebhook } from '@/lib/webhooks'
 
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
@@ -107,6 +108,24 @@ export async function POST(req: NextRequest) {
       include: {
         rentalItem: { select: { name: true } },
       },
+    })
+
+    // Bookings default to status='pending' — merchants wire the webhook
+    // to trigger their approval workflow (email/Slack).
+    queueWebhook(merchantId, 'booking.created', {
+      bookingId: booking.id,
+      merchantId,
+      rentalItemId,
+      rentalItemName: booking.rentalItem.name,
+      userId: session.user.id,
+      startDate: start.toISOString(),
+      endDate: end.toISOString(),
+      days,
+      dailyRate: rentalItem.dailyRate,
+      totalPrice,
+      currency: rentalItem.currency,
+      status: booking.status,
+      createdAt: booking.createdAt.toISOString(),
     })
 
     return NextResponse.json({ booking }, { status: 201 })

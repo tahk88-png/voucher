@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { logger } from '@/lib/logger';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
@@ -33,8 +34,7 @@ export default async function AppLayout({
   } catch (err) {
     // Fallback if i18n fails
     if (process.env.NODE_ENV === 'development') {
-      // eslint-disable-next-line no-console
-      console.error('[AppLayout] getTranslations failed:', err);
+      logger.error('[AppLayout] getTranslations failed', { error: err instanceof Error ? err.message : String(err) });
     }
     t = (key: string) => {
       const fallbacks: Record<string, string> = {

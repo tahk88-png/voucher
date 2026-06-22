@@ -39,6 +39,12 @@ export async function PUT(
     const body = await req.json();
     const data = updateWhiteLabelSchema.parse(body);
 
+    // Fetch current brand settings not included in the access control guard
+    const currentMerchant = await prisma.merchant.findUnique({
+      where: { id: merchant.id },
+      select: { brandColorsJson: true, featureFlags: true },
+    });
+
     // Build update data
     const updateData: Record<string, unknown> = {};
 
@@ -47,12 +53,12 @@ export async function PUT(
     }
 
     if (data.primaryColor !== undefined) {
-      const currentColors = (merchant.brandColorsJson as Record<string, string> | null) ?? {};
+      const currentColors = (currentMerchant?.brandColorsJson as Record<string, string> | null) ?? {};
       updateData.brandColorsJson = { ...currentColors, primary: data.primaryColor };
     }
 
     if (data.hidePlatformBranding !== undefined) {
-      const currentFlags = (merchant.featureFlags as Record<string, unknown> | null) ?? {};
+      const currentFlags = (currentMerchant?.featureFlags as Record<string, unknown> | null) ?? {};
       updateData.featureFlags = { ...currentFlags, hidePlatformBranding: data.hidePlatformBranding };
     }
 

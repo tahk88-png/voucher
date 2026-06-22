@@ -23,12 +23,16 @@ export type AccessProfile = {
   roles: AppRole[];
   highestRole: AppRole;
   merchantMemberships: MerchantMembership[];
+  adminRole?: string | null;
 };
 
 export async function resolveAccessProfile(userId: string, emailHint?: string | null): Promise<AccessProfile | null> {
   const user = await prisma.user.findUnique({
     where: { id: userId },
-    include: {
+    select: {
+      id: true,
+      email: true,
+      adminRole: true,
       merchantMembers: {
         include: {
           merchant: {
@@ -76,6 +80,7 @@ export async function resolveAccessProfile(userId: string, emailHint?: string | 
     roles,
     highestRole,
     merchantMemberships: memberships,
+    adminRole: user.adminRole ?? null,
   };
 }
 

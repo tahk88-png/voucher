@@ -7,14 +7,14 @@ import { z } from 'zod';
 export const dynamic = 'force-dynamic';
 
 const createSponsorSchema = z.object({
-  merchantId: z.string().min(1),
-  productId: z.string().min(1),
-  bidCents: z.number().int().positive(),
-  dailyBudgetCents: z.number().int().positive(),
+  sponsorName: z.string().min(1),
+  merchantId: z.string().optional(),
+  budgetCents: z.number().int().positive(),
   startAt: z.string().datetime(),
   endAt: z.string().datetime(),
-  targetPersonas: z.array(z.string()).optional(),
+  targetCategories: z.array(z.string()).optional(),
   targetOccasions: z.array(z.string()).optional(),
+  priority: z.number().int().min(0).optional(),
 });
 
 export async function GET(req: NextRequest) {
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
     }
 
     const placements = await prisma.sponsoredGiftPlacement.findMany({
-      where: where as Parameters<typeof prisma.sponsoredGiftPlacement.findMany>[0]['where'],
+      where,
       include: {
         merchant: { select: { id: true, name: true, slug: true } },
       },
@@ -47,7 +47,8 @@ export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
     await requireAdminPermission('admin.flags.manage');
 
-    const body = await req.json();
+    const body = await req.json().catch(() => null);
+    if (!body) return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
     const parsed = createSponsorSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json({ error: 'Invalid input', details: parsed.error.flatten().fieldErrors }, { status: 400 });
@@ -55,11 +56,14 @@ export async function POST(req: NextRequest) {
 
     const placement = await prisma.sponsoredGiftPlacement.create({
       data: {
-        ...parsed.data,
+        sponsorName: parsed.data.sponsorName,
+        merchantId: parsed.data.merchantId,
+        budgetCents: parsed.data.budgetCents,
         startAt: new Date(parsed.data.startAt),
         endAt: new Date(parsed.data.endAt),
-        targetPersonas: parsed.data.targetPersonas || [],
+        targetCategories: parsed.data.targetCategories || [],
         targetOccasions: parsed.data.targetOccasions || [],
+        priority: parsed.data.priority ?? 0,
       },
       include: {
         merchant: { select: { id: true, name: true, slug: true } },

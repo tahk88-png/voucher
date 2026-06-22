@@ -14,9 +14,10 @@ async function generateQRCode(text: string): Promise<string> {
   }
 }
 
-export default async function ReferralPage({ params }: { params: { id: string } }) {
+export default async function ReferralPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const referral = await prisma.referral.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       voucher: {
         include: { merchant: true },
@@ -43,7 +44,8 @@ export default async function ReferralPage({ params }: { params: { id: string } 
 
   // Generate voucher code
   const voucherCode = `${referral.voucher.codePrefix || 'V'}-${referral.voucher.id.slice(0, 8).toUpperCase()}`;
-  const qrCodeDataUrl = '';
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const qrCodeDataUrl = await generateQRCode(`${appUrl}/r/${referral.id}`);
 
   // Update referral status to 'opened' if it's still 'created'
   if (referral.status === 'created') {

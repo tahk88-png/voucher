@@ -68,7 +68,7 @@ export default function NotificationSettingsForm({
                 type="checkbox"
                 checked={sub.emailEnabled}
                 onChange={() => toggle(sub.merchantId, 'emailEnabled')}
-                className="h-4 w-4 accent-[#FFC857]"
+                className="h-4 w-4 accent-[var(--primary)]"
               />
               {t('email')}
             </label>
@@ -77,7 +77,7 @@ export default function NotificationSettingsForm({
                 type="checkbox"
                 checked={sub.inAppEnabled}
                 onChange={() => toggle(sub.merchantId, 'inAppEnabled')}
-                className="h-4 w-4 accent-[#FFC857]"
+                className="h-4 w-4 accent-[var(--primary)]"
               />
               {t('inApp')}
             </label>
@@ -86,7 +86,7 @@ export default function NotificationSettingsForm({
                 type="checkbox"
                 checked={sub.pushEnabled}
                 onChange={() => toggle(sub.merchantId, 'pushEnabled')}
-                className="h-4 w-4 accent-[#FFC857]"
+                className="h-4 w-4 accent-[var(--primary)]"
               />
               {t('pushBeta')}
             </label>

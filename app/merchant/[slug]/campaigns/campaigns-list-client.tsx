@@ -32,10 +32,10 @@ const statusLabel: Record<string, string> = {
 };
 
 const statusStyles: Record<string, string> = {
-  active: 'bg-[#9DB5A5] text-white',
-  draft: 'bg-[#F2EDE3] text-[#6B5744]',
+  active: 'bg-[#4e8a5b] text-white',
+  draft: 'bg-[#F2EDE3] text-[var(--text-muted)]',
   ended: 'bg-[#E5E7EB] text-[#6B7280]',
-  paused: 'bg-[#E17B5C] text-white',
+  paused: 'bg-[var(--danger)] text-white',
 };
 
 export default function CampaignsListClient({
@@ -91,16 +91,16 @@ export default function CampaignsListClient({
 
   return (
     <div className="space-y-4">
-      <WarmCard padding="lg" className="bg-white">
+      <WarmCard padding="lg" className="bg-[var(--surface)]">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="relative flex-1 min-w-[240px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8B7355]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-faint)]" />
             <Input
               type="text"
               placeholder="Search campaigns..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 border-[rgba(139,115,85,0.15)] bg-white"
+              className="pl-10 border-[var(--border)] bg-[var(--surface)]"
               aria-label="Search campaigns"
             />
           </div>
@@ -111,8 +111,8 @@ export default function CampaignsListClient({
                 onClick={() => setStatusFilter(status)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   statusFilter === status
-                    ? 'bg-gradient-to-br from-[#FFC857] to-[#FFB627] text-[#2D2721] shadow-warm'
-                    : 'bg-white text-[#6B5744] border border-[rgba(139,115,85,0.15)] hover:border-[rgba(139,115,85,0.3)]'
+                    ? 'bg-gradient-to-br from-[#cc785c] to-[#b5613f] text-white shadow-warm'
+                    : 'bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] hover:border-[rgba(139,115,85,0.3)]'
                 }`}
               >
                 {status === 'all' ? 'All' : statusLabel[status] || status}
@@ -123,8 +123,8 @@ export default function CampaignsListClient({
       </WarmCard>
 
       {filteredCampaigns.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center py-12">
-          <p className="text-[#6B5744]">No campaigns match your filters.</p>
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center py-12">
+          <p className="text-[var(--text-muted)]">No campaigns match your filters.</p>
           <WarmButton
             variant="outline"
             className="mt-4"
@@ -145,17 +145,17 @@ export default function CampaignsListClient({
             const endLabel = new Date(campaign.endDate).toLocaleDateString(undefined, { dateStyle: 'medium' });
 
             return (
-              <WarmCard key={campaign.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+              <WarmCard key={campaign.id} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="text-lg font-semibold text-[#2D2721]">{campaign.name}</h3>
+                      <h3 className="text-lg font-semibold text-[var(--text)]">{campaign.name}</h3>
                       <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${statusClass}`}>
                         {statusText}
                       </span>
                     </div>
-                    <p className="text-sm text-[#6B5744] capitalize">{campaign.type} campaign</p>
-                    <p className="text-xs text-[#8B7355]">Runs {startLabel} - {endLabel}</p>
+                    <p className="text-sm text-[var(--text-muted)] capitalize">{campaign.type} campaign</p>
+                    <p className="text-xs text-[var(--text-faint)]">Runs {startLabel} - {endLabel}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <WarmButton asChild variant="outline" size="sm">
@@ -166,22 +166,22 @@ export default function CampaignsListClient({
 
                 <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
                   <div>
-                    <div className="text-xs text-[#8B7355]">Vouchers</div>
-                    <div className="font-semibold text-[#2D2721]">{campaign.vouchers}</div>
+                    <div className="text-xs text-[var(--text-faint)]">Vouchers</div>
+                    <div className="font-semibold text-[var(--text)]">{campaign.vouchers}</div>
                   </div>
                   <div>
-                    <div className="text-xs text-[#8B7355]">Paid purchases</div>
-                    <div className="font-semibold text-[#2D2721]">{campaign.paidPurchases}</div>
+                    <div className="text-xs text-[var(--text-faint)]">Paid purchases</div>
+                    <div className="font-semibold text-[var(--text)]">{campaign.paidPurchases}</div>
                   </div>
                   <div>
-                    <div className="text-xs text-[#8B7355]">Revenue</div>
-                    <div className="font-semibold text-[#2D2721]">
+                    <div className="text-xs text-[var(--text-faint)]">Revenue</div>
+                    <div className="font-semibold text-[var(--text)]">
                       {formatCurrency(campaign.revenue, currency)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs text-[#8B7355]">Price</div>
-                    <div className="font-semibold text-[#2D2721]">
+                    <div className="text-xs text-[var(--text-faint)]">Price</div>
+                    <div className="font-semibold text-[var(--text)]">
                       {campaign.price != null ? formatCurrency(campaign.price, currency) : 'Free'}
                     </div>
                   </div>

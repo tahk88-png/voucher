@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 import { Prisma } from '@prisma/client';
 
 /**
@@ -178,7 +179,7 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('[search] Error:', error);
+    logger.error('[search] Error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json(
       { error: 'Search failed' },
       { status: 500 }

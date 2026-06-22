@@ -1,3 +1,6 @@
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Gift Cards', noIndex: true });
+
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -11,11 +14,12 @@ import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { getTranslations } from 'next-intl/server';
 import GiftCardsListClient from './gift-cards-list-client';
 
-export default async function GiftCardsListPage({ params }: { params: { slug: string } }) {
+export default async function GiftCardsListPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
-  const merchant = await prisma.merchant.findUnique({ where: { slug: params.slug } });
+  const merchant = await prisma.merchant.findUnique({ where: { slug } });
   if (!merchant) notFound();
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
@@ -49,22 +53,22 @@ export default async function GiftCardsListPage({ params }: { params: { slug: st
       <div className="max-w-6xl mx-auto">
         <Breadcrumbs
           items={[
-            { label: t('dashboard'), href: `/merchant/${params.slug}/dashboard` },
+            { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
             { label: t('giftCards') },
           ]}
         />
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
-              <Gift className="h-6 w-6 text-[#2D2721]" />
+            <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+              <Gift className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-[#2D2721]">Gift cards</h1>
-              <p className="text-sm text-[#6B5744]">Create and manage gift cards</p>
+              <h1 className="text-2xl font-semibold text-[var(--text)]">Gift cards</h1>
+              <p className="text-sm text-[var(--text-muted)]">Create and manage gift cards</p>
             </div>
           </div>
           <WarmButton asChild>
-            <Link href={`/merchant/${params.slug}/gift-cards/new`}>New gift card</Link>
+            <Link href={`/merchant/${slug}/gift-cards/new`}>New gift card</Link>
           </WarmButton>
         </div>
 
@@ -95,7 +99,7 @@ export default async function GiftCardsListPage({ params }: { params: { slug: st
           />
         </div>
 
-        <GiftCardsListClient giftCards={serializedGiftCards} merchantSlug={params.slug} />
+        <GiftCardsListClient giftCards={serializedGiftCards} merchantSlug={slug} />
       </div>
     </div>
   );

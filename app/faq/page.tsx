@@ -155,6 +155,7 @@ export default function FaqPage() {
                   >
                     <button
                       onClick={() => toggle(key)}
+                      aria-expanded={isOpen}
                       className="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium transition-colors"
                       style={{
                         color: 'var(--text)',

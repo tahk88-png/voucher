@@ -69,8 +69,8 @@ export function ConversionChart({
                 className={cn(
                   "rounded-full px-2 py-0.5 text-xs font-semibold",
                   isPositive
-                    ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
-                    : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                    ? "bg-[#d6e6d4] text-[#325a3c] dark:bg-[#1d3422]/30 dark:text-[#6fae73]"
+                    : "bg-[#f6d6cf] text-[#882f21] dark:bg-[#491a13]/30 dark:text-[#e0705a]"
                 )}
               >
                 {isPositive ? "+" : ""}
@@ -84,7 +84,7 @@ export function ConversionChart({
                 className="absolute inset-y-0 left-0 rounded-full transition-all duration-700 ease-out"
                 style={{
                   width: animated ? `${currentPct}%` : "0%",
-                  backgroundColor: isPositive ? "#10b981" : "#ef4444",
+                  backgroundColor: isPositive ? "#4e8a5b" : "#c84b36",
                 }}
               />
               <span className="absolute inset-y-0 left-2 flex items-center text-xs font-medium text-white">

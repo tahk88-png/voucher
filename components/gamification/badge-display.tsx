@@ -12,7 +12,7 @@ import {
   Lock,
   type LucideIcon,
 } from 'lucide-react';
-import { BADGES, type BadgeDefinition } from '@/lib/gamification';
+import { BADGES, type BadgeDefinition } from '@/lib/gamification-constants';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Trophy,

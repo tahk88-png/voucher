@@ -81,17 +81,17 @@ export function AiInsightPanel({
         boxShadow: 'var(--ds-shadow-md)',
       }}
     >
-      {/* Purple gradient accent line */}
+      {/* Dusty-slate gradient accent line */}
       <div
         className="pointer-events-none absolute top-0 left-0 right-0 h-[2px]"
-        style={{ background: 'var(--ds-gradient-secondary, linear-gradient(135deg, #8b5cf6, #ec4899))' }}
+        style={{ background: 'var(--ds-gradient-secondary, linear-gradient(135deg, #5e7e92, #7e9cae))' }}
       />
 
       {/* Background glow */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at 30% 0%, rgba(139, 92, 246, 0.06), transparent 60%)',
+          background: 'radial-gradient(ellipse at 30% 0%, rgba(94, 126, 146, 0.06), transparent 60%)',
         }}
       />
 
@@ -104,13 +104,13 @@ export function AiInsightPanel({
           <span
             className="flex items-center justify-center w-8 h-8 rounded-lg"
             style={{
-              background: 'rgba(139, 92, 246, 0.12)',
-              boxShadow: '0 0 12px rgba(139, 92, 246, 0.2)',
+              background: 'rgba(94, 126, 146, 0.12)',
+              boxShadow: '0 0 12px rgba(94, 126, 146, 0.2)',
             }}
           >
             <Sparkles
               size={16}
-              style={{ color: 'var(--ds-secondary, #8b5cf6)' }}
+              style={{ color: 'var(--ds-secondary, #5e7e92)' }}
             />
           </span>
           <span
@@ -149,7 +149,7 @@ export function AiInsightPanel({
               <span
                 className="inline-block w-0.5 h-4 ml-0.5 align-text-bottom"
                 style={{
-                  background: 'var(--ds-secondary, #8b5cf6)',
+                  background: 'var(--ds-secondary, #5e7e92)',
                   animation: 'ds-blink 0.8s step-end infinite',
                 }}
               />
@@ -175,7 +175,7 @@ export function AiInsightPanel({
                   border: '1px solid var(--ds-border-default)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--ds-secondary, #8b5cf6)';
+                  e.currentTarget.style.borderColor = 'var(--ds-secondary, #5e7e92)';
                   e.currentTarget.style.color = 'var(--ds-text-primary)';
                 }}
                 onMouseLeave={(e) => {
@@ -214,10 +214,11 @@ export function AiInsightPanel({
               <button
                 type="submit"
                 disabled={!input.trim()}
+                aria-label="Send"
                 className="ml-2 shrink-0 rounded-lg p-1.5 transition-all duration-200"
                 style={{
                   background: input.trim()
-                    ? 'var(--ds-secondary, #8b5cf6)'
+                    ? 'var(--ds-secondary, #5e7e92)'
                     : 'transparent',
                   color: input.trim()
                     ? 'white'
@@ -250,7 +251,7 @@ function LoadingDots() {
           key={i}
           className="block w-1 h-1 rounded-full"
           style={{
-            background: 'var(--ds-secondary, #8b5cf6)',
+            background: 'var(--ds-secondary, #5e7e92)',
             animation: `ds-dot-bounce 1.2s ease-in-out ${i * 0.15}s infinite`,
           }}
         />

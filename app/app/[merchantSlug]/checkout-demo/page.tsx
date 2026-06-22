@@ -7,6 +7,7 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { formatCurrency } from '@/lib/utils';
+import { showSuccess } from '@/lib/toast-helpers';
 
 export default function CheckoutDemoPage() {
   const params = useParams();
@@ -58,7 +59,7 @@ export default function CheckoutDemoPage() {
         throw new Error(data.error || 'Failed to apply credit');
       }
 
-      alert(
+      showSuccess(
         `Credit applied successfully! Order total: ${formatCurrency(
           parseInt(orderAmount) * 100 - creditAmountCents,
           balance?.currency || 'USD'

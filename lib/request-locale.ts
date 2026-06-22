@@ -3,13 +3,15 @@ import { routing } from "@/routing"
 
 const LOCALE_COOKIE_NAME = "NEXT_LOCALE"
 
-export function getPreferredLocale(): string {
-  const cookieLocale = cookies().get(LOCALE_COOKIE_NAME)?.value
+export async function getPreferredLocale(): Promise<string> {
+  const cookieStore = await cookies()
+  const cookieLocale = cookieStore.get(LOCALE_COOKIE_NAME)?.value
   if (cookieLocale && routing.locales.includes(cookieLocale as (typeof routing.locales)[number])) {
     return cookieLocale
   }
 
-  const acceptLanguage = headers().get("accept-language") || ""
+  const headerStore = await headers()
+  const acceptLanguage = headerStore.get("accept-language") || ""
   for (const part of acceptLanguage.split(",")) {
     const tag = part.split(";")[0]?.trim().toLowerCase()
     if (!tag) continue

@@ -49,6 +49,7 @@ export default function CampaignFilters({ merchants }: CampaignFiltersProps) {
         <select
           value={currentSort}
           onChange={(e) => updateParams({ sort: e.target.value })}
+          aria-label="Sort by"
           className="text-sm bg-white border border-[rgba(139,115,85,0.15)] rounded-[var(--r-sm)] px-3 py-2 text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
         >
           {sortOptions.map((opt) => (
@@ -62,6 +63,7 @@ export default function CampaignFilters({ merchants }: CampaignFiltersProps) {
         <select
           value={currentMerchant}
           onChange={(e) => updateParams({ merchant: e.target.value })}
+          aria-label="Merchant"
           className="text-sm bg-white border border-[rgba(139,115,85,0.15)] rounded-[var(--r-sm)] px-3 py-2 text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
         >
           <option value="">All merchants</option>
@@ -79,6 +81,7 @@ export default function CampaignFilters({ merchants }: CampaignFiltersProps) {
           placeholder="Min €"
           value={currentMinPrice}
           onChange={(e) => updateParams({ minPrice: e.target.value })}
+          aria-label="Min price"
           className="w-20 text-sm bg-white border border-[rgba(139,115,85,0.15)] rounded-[var(--r-sm)] px-2 py-2 text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
         />
         <span className="text-[#8B7355] text-xs">&ndash;</span>
@@ -88,6 +91,7 @@ export default function CampaignFilters({ merchants }: CampaignFiltersProps) {
           placeholder="Max €"
           value={currentMaxPrice}
           onChange={(e) => updateParams({ maxPrice: e.target.value })}
+          aria-label="Max price"
           className="w-20 text-sm bg-white border border-[rgba(139,115,85,0.15)] rounded-[var(--r-sm)] px-2 py-2 text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
         />
       </div>

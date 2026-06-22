@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { hashPassword } from '@/lib/passwords';
+import { logger } from '@/lib/logger';
 import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimitDistributed } from '@/lib/rate-limit';
 import { z } from 'zod';
@@ -51,10 +52,12 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Send welcome email (fire-and-forget)
+    // Send welcome email (fire-and-forget, but log failures)
     try {
       import('@/lib/emails').then(({ sendWelcomeEmail }) => {
-        sendWelcomeEmail({ to: normalizedEmail, name: name.trim() }).catch(() => {});
+        sendWelcomeEmail({ to: normalizedEmail, name: name.trim() }).catch((err) => {
+          logger.error('[register] Welcome email failed', { error: err instanceof Error ? err.message : String(err) });
+        });
       });
     } catch {
       // Non-critical

@@ -1,3 +1,6 @@
+import { pageMetadata } from '@/lib/seo/page-metadata';
+export const metadata = pageMetadata({ title: 'Rental Marketplace', description: 'Browse items for rent', path: '/rent' });
+
 import { redirect } from "next/navigation"
 import TenantShell from "@/components/layout/tenant-shell"
 import RentClient from "@/components/rent/rent-client"

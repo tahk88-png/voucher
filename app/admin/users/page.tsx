@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default async function AdminUsersPage({
   searchParams,
 }: {
-  searchParams?: { q?: string; page?: string }
+  searchParams?: Promise<{ q?: string; page?: string }>
 }) {
   try {
     await requirePlatformAdminProfile();
@@ -23,8 +23,9 @@ export default async function AdminUsersPage({
     redirect('/app');
   }
 
-  const search = searchParams?.q?.trim() || '';
-  const page = Math.max(1, parseInt(searchParams?.page || '1', 10));
+  const sp = await searchParams;
+  const search = sp?.q?.trim() || '';
+  const page = Math.max(1, parseInt(sp?.page || '1', 10));
   const limit = 50;
   const skip = (page - 1) * limit;
 

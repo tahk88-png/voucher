@@ -5,13 +5,14 @@ import { requireMerchantRole } from '@/lib/rbac';
 import { WarmCard } from '@/components/warm-card';
 import { normalizeGiftCardCode } from '@/lib/gift-cards';
 
-export default async function RedeemGiftCardPage({ params }: { params: { code: string } }) {
+export default async function RedeemGiftCardPage({ params }: { params: Promise<{ code: string }> }) {
+  const { code: rawCode } = await params;
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }
 
-  const code = normalizeGiftCardCode(params.code);
+  const code = normalizeGiftCardCode(rawCode);
   const giftCard = await prisma.giftCard.findUnique({
     where: { code },
     include: { merchant: true },

@@ -1,4 +1,6 @@
 import { Resend } from 'resend';
+import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 
 function getResendClient(): Resend {
   if (!process.env.RESEND_API_KEY) {
@@ -57,7 +59,30 @@ export async function sendEmail(params: {
     throw new Error(`Resend error: ${result.error.message}`);
   }
 
-  return { id: result.data?.id || '' };
+  const messageId = result.data?.id || '';
+  const recipientStr = Array.isArray(params.to) ? params.to[0] : params.to;
+
+  // Synchronous logging — ensures webhook can find the message record
+  try {
+    await prisma.emailMessage.create({
+      data: {
+        providerId: messageId,
+        providerType: 'resend',
+        from,
+        to: recipientStr,
+        subject: params.subject,
+        category: 'transactional',
+        tags: params.tags ? { tags: params.tags } : undefined,
+        status: 'sent',
+        sentAt: new Date(),
+      },
+    });
+  } catch {
+    // Log failure but don't block the send response
+    logger.error('[resend] Failed to log EmailMessage', { messageId });
+  }
+
+  return { id: messageId };
 }
 
 /**

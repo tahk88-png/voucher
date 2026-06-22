@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { isPlatformAdmin } from '@/lib/admin';
 import { prisma } from '@/lib/prisma';
 import { getTimeSeries, calculateGrowthRate } from '@/lib/analytics';
+import { logger } from '@/lib/logger';
 
 export const dynamic = 'force-dynamic';
 
@@ -81,20 +82,17 @@ export async function GET(req: NextRequest) {
       }),
 
       // Revenue by country (from analytics events with type=purchase)
-      prisma.$queryRawUnsafe<Array<{ country: string; revenue: bigint }>>(
-        `SELECT ae.country, COALESCE(SUM(vp.amount), 0)::bigint as revenue
-         FROM "AnalyticsEvent" ae
-         JOIN "VoucherPurchase" vp ON ae."userId" = vp."userId"
-           AND ae.type = 'purchase'
-           AND vp.status = 'paid'
-         WHERE ae."createdAt" >= $1 AND ae."createdAt" <= $2
-           AND ae.country IS NOT NULL
-         GROUP BY ae.country
-         ORDER BY revenue DESC
-         LIMIT 20`,
-        from,
-        to
-      ),
+      prisma.$queryRaw<Array<{ country: string; revenue: bigint }>>`
+        SELECT ae.country, COALESCE(SUM(vp.amount), 0)::bigint as revenue
+        FROM "AnalyticsEvent" ae
+        JOIN "VoucherPurchase" vp ON ae."userId" = vp."userId"
+          AND ae.type = 'purchase'
+          AND vp.status = 'paid'
+        WHERE ae."createdAt" >= ${from} AND ae."createdAt" <= ${to}
+          AND ae.country IS NOT NULL
+        GROUP BY ae.country
+        ORDER BY revenue DESC
+        LIMIT 20`,
 
       // Average order value
       prisma.voucherPurchase.aggregate({
@@ -156,6 +154,25 @@ export async function GET(req: NextRequest) {
       revenue: Number(r.revenue),
     }));
 
+    // Payment-method distribution across the platform's two real payment
+    // rails: regular Stripe Checkout (card) vs BNPL installment plans. We
+    // don't persist the exact card brand per purchase (that would require
+    // storing the Stripe payment_method on every purchase), so this reports
+    // the rails the platform actually offers rather than a fabricated split.
+    const [cardOrders, bnplOrders] = await Promise.all([
+      prisma.voucherPurchase.count({ where: { status: 'paid', createdAt: { gte: from, lte: to } } }),
+      prisma.installmentPlan.count({ where: { createdAt: { gte: from, lte: to } } }).catch(() => 0),
+    ]);
+    const totalMethodOrders = cardOrders + bnplOrders;
+    const paymentMethodDistribution = totalMethodOrders > 0
+      ? [
+          { method: 'card', count: cardOrders, percentage: Math.round((cardOrders / totalMethodOrders) * 1000) / 10 },
+          ...(bnplOrders > 0
+            ? [{ method: 'bnpl', count: bnplOrders, percentage: Math.round((bnplOrders / totalMethodOrders) * 1000) / 10 }]
+            : []),
+        ]
+      : [];
+
     const averageOrderValue = orderStats._avg.amount ?? 0;
     const prevAverageOrderValue = prevOrderStats._avg.amount ?? 0;
     const refundRate = totalPaidCount > 0
@@ -178,10 +195,10 @@ export async function GET(req: NextRequest) {
       ),
       refundRate,
       topRevenueGenerators,
-      paymentMethodDistribution: [], // placeholder — would need Stripe data
+      paymentMethodDistribution,
     });
   } catch (error) {
-    console.error('[analytics/revenue] Error:', error);
+    logger.error('[analytics/revenue] Error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

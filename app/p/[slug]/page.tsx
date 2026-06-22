@@ -9,17 +9,18 @@ import { getTenantContext } from "@/lib/tenant-context"
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
+  const { slug } = await params
   const context = await getTenantContext()
   const page =
     context.mode === "tenant" && context.tenant
       ? await getSitePage({
           merchantId: context.tenant.id,
           scope: "tenant",
-          slug: params.slug,
+          slug,
         })
-      : await getSitePage({ scope: "hub", slug: params.slug })
+      : await getSitePage({ scope: "hub", slug })
 
   if (!page) {
     return {}
@@ -32,14 +33,15 @@ export async function generateMetadata({
   }
 }
 
-export default async function SitePage({ params }: { params: { slug: string } }) {
+export default async function SitePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const context = await getTenantContext()
 
   if (context.mode === "tenant" && context.tenant) {
     const page = await getSitePage({
       merchantId: context.tenant.id,
       scope: "tenant",
-      slug: params.slug,
+      slug,
     })
 
     if (!page) {
@@ -57,7 +59,7 @@ export default async function SitePage({ params }: { params: { slug: string } })
   }
 
   if (context.mode === "hub") {
-    const page = await getSitePage({ scope: "hub", slug: params.slug })
+    const page = await getSitePage({ scope: "hub", slug })
     if (!page) {
       notFound()
     }

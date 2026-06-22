@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { stripe } from '@/lib/stripe';
+import { getOrCreateStripeCustomerForUser } from '@/lib/stripe-customers';
+import { queueWebhook } from '@/lib/webhooks';
 import { withErrorHandler } from '@/lib/error-handler';
 
 type Params = Promise<{ id: string }>;
@@ -29,15 +31,14 @@ export async function POST(req: NextRequest, { params }: { params: Params }) {
 
     // Create or reactivate subscription
     if (box.stripePriceId) {
-      // Create Stripe subscription
-      const user = await prisma.user.findUnique({ where: { id: session.user.id } });
-      const stripeCustomer = await stripe.customers.create({
-        email: user?.email,
-        metadata: { userId: session.user.id, boxId: id },
+      // Reuse the user's existing Stripe Customer (or create+persist one) so
+      // repeated subscribe attempts don't mint duplicate Customer objects.
+      const stripeCustomerId = await getOrCreateStripeCustomerForUser(session.user.id, {
+        metadata: { boxId: id },
       });
 
       const stripeSub = await stripe.subscriptions.create({
-        customer: stripeCustomer.id,
+        customer: stripeCustomerId,
         items: [{ price: box.stripePriceId }],
         metadata: { boxId: id, userId: session.user.id },
       });
@@ -59,6 +60,17 @@ export async function POST(req: NextRequest, { params }: { params: Params }) {
         },
       });
 
+      queueWebhook(box.merchantId, 'subscription.created', {
+        subscriptionId: subscription.id,
+        boxId: id,
+        merchantId: box.merchantId,
+        userId: session.user.id,
+        stripeSubId: stripeSub.id,
+        currentPeriodEnd: subscription.currentPeriodEnd?.toISOString() ?? null,
+        reactivated: Boolean(existing),
+        createdAt: subscription.createdAt.toISOString(),
+      });
+
       return NextResponse.json(subscription, { status: 201 });
     }
 
@@ -67,6 +79,17 @@ export async function POST(req: NextRequest, { params }: { params: Params }) {
       where: { boxId_userId: { boxId: id, userId: session.user.id } },
       update: { status: 'active', cancelledAt: null },
       create: { boxId: id, userId: session.user.id, status: 'active' },
+    });
+
+    queueWebhook(box.merchantId, 'subscription.created', {
+      subscriptionId: subscription.id,
+      boxId: id,
+      merchantId: box.merchantId,
+      userId: session.user.id,
+      stripeSubId: null,
+      currentPeriodEnd: null,
+      reactivated: Boolean(existing),
+      createdAt: subscription.createdAt.toISOString(),
     });
 
     return NextResponse.json(subscription, { status: 201 });

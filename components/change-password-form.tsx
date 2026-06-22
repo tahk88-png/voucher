@@ -83,6 +83,8 @@ export default function ChangePasswordForm({ hasPassword }: { hasPassword: boole
         <div className="relative mt-1">
           <Input id="new-pw" type={showNew ? "text" : "password"} value={newPw} onChange={(e) => setNewPw(e.target.value)} className="pr-10" />
           <button type="button" onClick={() => setShowNew(!showNew)}
+            aria-label={showNew ? "Hide password" : "Show password"}
+            aria-pressed={showNew}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text)]">
             {showNew ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>

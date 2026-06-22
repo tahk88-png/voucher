@@ -7,13 +7,14 @@ import Link from 'next/link';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 
-export default async function VouchersPage({ params }: { params: { merchantSlug: string } }) {
+export default async function VouchersPage({ params }: { params: Promise<{ merchantSlug: string }> }) {
+  const { merchantSlug } = await params;
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }
 
-  const merchant = await getMerchantBySlug(params.merchantSlug);
+  const merchant = await getMerchantBySlug(merchantSlug);
   if (!merchant) {
     notFound();
   }

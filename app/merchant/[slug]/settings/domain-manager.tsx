@@ -87,11 +87,11 @@ export default function DomainManager({
   }
 
   return (
-    <WarmCard padding="lg" className="mb-4 bg-white border border-[rgba(139,115,85,0.15)]">
+    <WarmCard padding="lg" className="mb-4 bg-[var(--surface)] border border-[var(--border)]">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-base font-semibold text-[#2D2721]">Custom domains</h2>
-          <p className="text-sm text-[#6B5744]">
+          <h2 className="text-base font-semibold text-[var(--text)]">Custom domains</h2>
+          <p className="text-sm text-[var(--text-muted)]">
             Connect your own domain and verify it for tenant routing.
           </p>
         </div>
@@ -114,18 +114,18 @@ export default function DomainManager({
       </div>
       <div className="mt-4 space-y-3">
         {domains.length === 0 ? (
-          <p className="text-sm text-[#6B5744]">No domains configured.</p>
+          <p className="text-sm text-[var(--text-muted)]">No domains configured.</p>
         ) : (
           domains.map((domain) => (
             <div
               key={domain.id}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-[rgba(139,115,85,0.15)]/70 rounded-xl p-3"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-[var(--border)]/70 rounded-xl p-3"
             >
               <div>
-                <p className="text-sm font-semibold text-[#2D2721]">{domain.domain}</p>
-                <p className="text-xs text-[#6B5744]">Status: {domain.status}</p>
+                <p className="text-sm font-semibold text-[var(--text)]">{domain.domain}</p>
+                <p className="text-xs text-[var(--text-muted)]">Status: {domain.status}</p>
                 {domain.verificationToken && domain.status !== "verified" ? (
-                  <p className="text-xs text-[#6B5744]">
+                  <p className="text-xs text-[var(--text-muted)]">
                     TXT: _vouchr.{domain.domain} = vouchr-verification={domain.verificationToken}
                   </p>
                 ) : null}

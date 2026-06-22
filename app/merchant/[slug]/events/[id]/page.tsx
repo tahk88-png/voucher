@@ -14,18 +14,19 @@ import { WarmButton } from '@/components/warm-button';
 export default async function EventDetailPage({
   params,
 }: {
-  params: { slug: string; id: string };
+  params: Promise<{ slug: string; id: string }>;
 }) {
+  const { slug, id } = await params;
   const session = await auth();
   if (!session?.user?.id) redirect('/login');
 
-  const merchant = await prisma.merchant.findUnique({ where: { slug: params.slug } });
+  const merchant = await prisma.merchant.findUnique({ where: { slug } });
   if (!merchant) notFound();
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
 
   const event = await prisma.event.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       tickets: {
         orderBy: { createdAt: 'desc' },
@@ -59,20 +60,20 @@ export default async function EventDetailPage({
       <div className="max-w-4xl mx-auto">
         <Breadcrumbs
           items={[
-            { label: t('dashboard'), href: `/merchant/${params.slug}/dashboard` },
-            { label: t('events'), href: `/merchant/${params.slug}/events` },
+            { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
+            { label: t('events'), href: `/merchant/${slug}/events` },
             { label: event.name },
           ]}
         />
         <div className="mb-6">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-semibold text-[#2D2721]">{event.name}</h1>
-              <p className="text-sm text-[#6B5744]">{event.description || 'No description'}</p>
+              <h1 className="text-2xl font-semibold text-[var(--text)]">{event.name}</h1>
+              <p className="text-sm text-[var(--text-muted)]">{event.description || 'No description'}</p>
             </div>
             <div className="flex gap-2">
               <WarmButton asChild variant="outline" size="sm">
-                <Link href={`/merchant/${params.slug}/events/${event.id}/edit`}>Edit</Link>
+                <Link href={`/merchant/${slug}/events/${event.id}/edit`}>Edit</Link>
               </WarmButton>
               <PublishEventButton eventId={event.id} currentStatus={event.status} />
             </div>
@@ -89,9 +90,9 @@ export default async function EventDetailPage({
               value: event.price > 0 ? formatCurrency(event.price, event.currency) : 'Free',
             },
           ].map((item) => (
-            <WarmCard key={item.label} padding="lg" className="bg-white">
-              <p className="text-sm text-[#8B7355]">{item.label}</p>
-              <p className="text-lg font-semibold text-[#2D2721] mt-1 capitalize">{item.value}</p>
+            <WarmCard key={item.label} padding="lg" className="bg-[var(--surface)]">
+              <p className="text-sm text-[var(--text-faint)]">{item.label}</p>
+              <p className="text-lg font-semibold text-[var(--text)] mt-1 capitalize">{item.value}</p>
             </WarmCard>
           ))}
         </div>
@@ -102,39 +103,39 @@ export default async function EventDetailPage({
             { label: 'Sold', value: soldTickets },
             { label: 'Available', value: availableTickets },
           ].map((item) => (
-            <WarmCard key={item.label} padding="lg" className="bg-white text-center">
-              <p className="text-sm text-[#8B7355]">{item.label}</p>
-              <p className="text-2xl font-semibold text-[#2D2721] mt-2">{item.value}</p>
+            <WarmCard key={item.label} padding="lg" className="bg-[var(--surface)] text-center">
+              <p className="text-sm text-[var(--text-faint)]">{item.label}</p>
+              <p className="text-2xl font-semibold text-[var(--text)] mt-2">{item.value}</p>
             </WarmCard>
           ))}
         </div>
 
         {event.location && (
-          <WarmCard padding="lg" className="bg-white mb-6">
-            <p className="text-sm text-[#8B7355]">Location</p>
-            <p className="text-sm text-[#2D2721] mt-1">{event.location}</p>
+          <WarmCard padding="lg" className="bg-[var(--surface)] mb-6">
+            <p className="text-sm text-[var(--text-faint)]">Location</p>
+            <p className="text-sm text-[var(--text)] mt-1">{event.location}</p>
             {event.locationAddress && (
-              <p className="text-sm text-[#6B5744]">{event.locationAddress}</p>
+              <p className="text-sm text-[var(--text-muted)]">{event.locationAddress}</p>
             )}
           </WarmCard>
         )}
 
         {event.terms && (
-          <WarmCard padding="lg" className="bg-white mb-6">
-            <p className="text-sm text-[#8B7355]">Terms and conditions</p>
-            <p className="text-sm text-[#2D2721] mt-1 whitespace-pre-wrap">{event.terms}</p>
+          <WarmCard padding="lg" className="bg-[var(--surface)] mb-6">
+            <p className="text-sm text-[var(--text-faint)]">Terms and conditions</p>
+            <p className="text-sm text-[var(--text)] mt-1 whitespace-pre-wrap">{event.terms}</p>
           </WarmCard>
         )}
 
-        <WarmCard padding="lg" className="bg-white">
+        <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-base font-semibold text-[#2D2721]">Tickets</h2>
-              <p className="text-sm text-[#6B5744]">Tickets for this event</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">Tickets</h2>
+              <p className="text-sm text-[var(--text-muted)]">Tickets for this event</p>
             </div>
             <GenerateTicketsButton
               eventId={event.id}
-              merchantSlug={params.slug}
+              merchantSlug={slug}
               event={{
                 name: event.name,
                 maxCapacity: event.maxCapacity,
@@ -144,10 +145,10 @@ export default async function EventDetailPage({
           </div>
           {event.tickets.length === 0 ? (
             <div className="text-center py-8">
-              <p className="text-[#6B5744] text-sm mb-4">No tickets generated yet.</p>
+              <p className="text-[var(--text-muted)] text-sm mb-4">No tickets generated yet.</p>
               <GenerateTicketsButton
                 eventId={event.id}
-                merchantSlug={params.slug}
+                merchantSlug={slug}
                 event={{
                   name: event.name,
                   maxCapacity: event.maxCapacity,
@@ -160,11 +161,11 @@ export default async function EventDetailPage({
               {event.tickets.map((ticket) => (
                 <div
                   key={ticket.id}
-                  className="flex items-center justify-between p-3 border border-[rgba(139,115,85,0.15)] rounded-lg"
+                  className="flex items-center justify-between p-3 border border-[var(--border)] rounded-lg"
                 >
                   <div>
-                    <p className="font-medium text-[#2D2721]">{ticket.ticketNumber}</p>
-                    <p className="text-sm text-[#8B7355] capitalize">{ticket.status}</p>
+                    <p className="font-medium text-[var(--text)]">{ticket.ticketNumber}</p>
+                    <p className="text-sm text-[var(--text-faint)] capitalize">{ticket.status}</p>
                   </div>
                   <div className="flex gap-2">
                     <WarmButton asChild variant="outline" size="sm">
@@ -172,7 +173,7 @@ export default async function EventDetailPage({
                     </WarmButton>
                     {ticket.status === 'sold' && (
                       <WarmButton asChild variant="outline" size="sm">
-                        <Link href={`/merchant/${params.slug}/events/${event.id}/redeem?ticket=${ticket.id}`}>
+                        <Link href={`/merchant/${slug}/events/${event.id}/redeem?ticket=${ticket.id}`}>
                           Redeem
                         </Link>
                       </WarmButton>

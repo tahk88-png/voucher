@@ -43,13 +43,18 @@ export async function unlockCreditForRedemption(
     return;
   }
 
-  // Unlock the credit
-  await prisma.creditLedger.update({
-    where: { id: lockedCredit.id },
-    data: {
-      status: 'available',
-    },
+  // Unlock atomically: the `status: 'locked'` in the WHERE is a
+  // compare-and-swap guard. If two confirmations race, only one update
+  // matches a still-locked row (count === 1); the loser sees count === 0
+  // and returns early so we don't double-send the unlock email.
+  const unlocked = await prisma.creditLedger.updateMany({
+    where: { id: lockedCredit.id, status: 'locked' },
+    data: { status: 'available' },
   });
+
+  if (unlocked.count === 0) {
+    return;
+  }
 
   // Send email notification
   if (redemption.referral.referrer.email) {
@@ -99,6 +104,7 @@ export async function getCreditBalance(
     createdAt: Date;
   }>;
 }> {
+  const now = new Date();
   const credits = await prisma.creditLedger.findMany({
     where: {
       userId,
@@ -106,6 +112,11 @@ export async function getCreditBalance(
       status: {
         in: ['available', 'locked'],
       },
+      // Defensive: exclude credit already past its expiry even if the
+      // auto-expire cron hasn't flipped its status to 'expired' yet.
+      // Without this the wallet shows a balance the spend path (applyCredit,
+      // which filters expiresAt > now) then refuses to spend.
+      OR: [{ expiresAt: null }, { expiresAt: { gt: now } }],
     },
     orderBy: {
       createdAt: 'desc',
@@ -180,54 +191,67 @@ export async function applyCredit(
     throw new Error('Insufficient credit balance');
   }
 
-  // Use transaction to atomically update credits and create usage record
-  await prisma.$transaction(async (tx) => {
-    // Mark credits as used (or partially used)
-    for (const { id, amount: useAmount } of creditsToUse) {
-      const credit = await tx.creditLedger.findUnique({
-        where: { id },
-      });
+  // Use transaction to atomically update credits and create usage record.
+  // The selection above (findMany) runs OUTSIDE the transaction, so two
+  // concurrent applyCredit calls can pick the same rows. We guard each
+  // flip with a compare-and-swap (`updateMany WHERE status='available'`):
+  // the first committer flips the row, the loser matches 0 rows and we
+  // throw to roll the whole spend back — preventing a double-spend of the
+  // same balance.
+  try {
+    await prisma.$transaction(async (tx) => {
+      for (const { id, amount: useAmount } of creditsToUse) {
+        const credit = await tx.creditLedger.findUnique({ where: { id } });
+        if (!credit) {
+          throw new Error('CREDIT_RACE');
+        }
 
-      if (!credit) continue;
-
-      if (useAmount === credit.amount) {
-        // Fully used
-        await tx.creditLedger.update({
-          where: { id },
+        // Atomic compare-and-swap: only consume if still available.
+        const flipped = await tx.creditLedger.updateMany({
+          where: { id, status: 'available' },
           data: { status: 'used' },
         });
-      } else {
-        // Partially used - create new ledger entry for remaining
-        await tx.creditLedger.update({
-          where: { id },
-          data: { status: 'used' },
-        });
-        await tx.creditLedger.create({
-          data: {
-            merchantId,
-            userId,
-            amount: credit.amount - useAmount,
-            currency: credit.currency,
-            status: 'available',
-            source: credit.source,
-            sourceId: credit.sourceId,
-            expiresAt: credit.expiresAt,
-          },
-        });
+        if (flipped.count === 0) {
+          // A concurrent spend already consumed this credit.
+          throw new Error('CREDIT_RACE');
+        }
+
+        if (useAmount !== credit.amount) {
+          // Partially used — create a new available entry for the remainder.
+          await tx.creditLedger.create({
+            data: {
+              merchantId,
+              userId,
+              amount: credit.amount - useAmount,
+              currency: credit.currency,
+              status: 'available',
+              source: credit.source,
+              sourceId: credit.sourceId,
+              expiresAt: credit.expiresAt,
+            },
+          });
+        }
       }
-    }
 
-    // Create usage record
-    await tx.creditUsage.create({
-      data: {
-        merchantId,
-        userId,
-        creditLedgerIds: creditIds,
-        amountUsed: amount,
-        orderReference,
-      },
+      // Create usage record
+      await tx.creditUsage.create({
+        data: {
+          merchantId,
+          userId,
+          creditLedgerIds: creditIds,
+          amountUsed: amount,
+          orderReference,
+        },
+      });
     });
-  });
+  } catch (err) {
+    if (err instanceof Error && err.message === 'CREDIT_RACE') {
+      // Lost the race for at least one credit — surface as insufficient
+      // balance so the caller retries against the now-correct balance.
+      throw new Error('Insufficient credit balance');
+    }
+    throw err;
+  }
 
   return { success: true, creditIds };
 }

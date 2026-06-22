@@ -43,20 +43,20 @@ export function AbstractGrid({ width = 300, height = 200, className = '' }: Abst
     >
       <defs>
         <linearGradient id="ag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="100%" stopColor="#8b5cf6" />
+          <stop offset="0%" stopColor="#cc785c" />
+          <stop offset="100%" stopColor="#5e7e92" />
         </linearGradient>
         <radialGradient id="ag-glow-1" cx="33%" cy="30%" r="25%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.12" />
-          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+          <stop offset="0%" stopColor="#cc785c" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="#cc785c" stopOpacity="0" />
         </radialGradient>
         <radialGradient id="ag-glow-2" cx="67%" cy="60%" r="20%">
-          <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.1" />
-          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+          <stop offset="0%" stopColor="#5e7e92" stopOpacity="0.1" />
+          <stop offset="100%" stopColor="#5e7e92" stopOpacity="0" />
         </radialGradient>
         <radialGradient id="ag-glow-3" cx="20%" cy="70%" r="18%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0" />
+          <stop offset="0%" stopColor="#cc785c" stopOpacity="0.08" />
+          <stop offset="100%" stopColor="#cc785c" stopOpacity="0" />
         </radialGradient>
         <filter id="ag-blur">
           <feGaussianBlur stdDeviation="3" />

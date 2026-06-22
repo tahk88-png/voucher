@@ -56,7 +56,7 @@ export function HeatmapChart({
   data,
   xLabels,
   yLabels,
-  colorRange = ["#10b981", "#f59e0b", "#ef4444"],
+  colorRange = ["#4e8a5b", "#be8a2e", "#c84b36"],
   height,
   className,
 }: HeatmapChartProps) {

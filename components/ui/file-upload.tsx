@@ -165,6 +165,7 @@ export function FileUpload({
                 type="button"
                 onClick={() => removeFile(index)}
                 disabled={disabled}
+                aria-label={`Remove ${file.name}`}
                 className="text-[var(--text-faint)] hover:text-[var(--danger)] transition-colors disabled:opacity-50"
               >
                 <X className="h-4 w-4" />

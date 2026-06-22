@@ -80,7 +80,15 @@ export async function getMerchantBillingStatus(merchantId: string) {
   };
 }
 
-async function requireCapabilityAccess(merchantId: string, capability: MonetizedCapability) {
+async function requireCapabilityAccess(
+  merchantId: string,
+  capability: MonetizedCapability,
+  // Optionally rewrite the measured usage before evaluation. Used by the
+  // campaign-activation gate to ignore the per-cycle create counter (an
+  // existing draft was already "created") and enforce only the
+  // activeCampaigns limit.
+  usageTransform?: (usage: Awaited<ReturnType<typeof getUsageSnapshot>>) => Awaited<ReturnType<typeof getUsageSnapshot>>,
+) {
   const merchant = await prisma.merchant.findUnique({
     where: { id: merchantId },
     include: { subscription: true },
@@ -91,7 +99,8 @@ async function requireCapabilityAccess(merchantId: string, capability: Monetized
   }
 
   const now = new Date();
-  const usage = await getUsageSnapshot(merchantId, now);
+  const rawUsage = await getUsageSnapshot(merchantId, now);
+  const usage = usageTransform ? usageTransform(rawUsage) : rawUsage;
   const decision = evaluateEntitlement(
     capability,
     {
@@ -132,4 +141,19 @@ export async function requireVoucherCreationAccess(merchantId: string) {
 
 export async function requireTeamInviteAccess(merchantId: string) {
   return requireCapabilityAccess(merchantId, "team.member.invite");
+}
+
+/**
+ * Gate activating a campaign (draft → active) behind the plan's
+ * activeCampaigns limit. Campaigns are created as drafts, so the create-time
+ * check never sees them count toward the active total — without this a
+ * merchant could create unlimited drafts and activate them all, bypassing
+ * the tier's active-campaign cap. We zero campaignsCreatedInCycle so a used-up
+ * per-cycle create quota doesn't wrongly block activating an existing draft.
+ */
+export async function requireCampaignActivationAccess(merchantId: string) {
+  return requireCapabilityAccess(merchantId, "campaign.create", (usage) => ({
+    ...usage,
+    campaignsCreatedInCycle: 0,
+  }));
 }

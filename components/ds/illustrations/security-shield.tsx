@@ -19,12 +19,12 @@ export function SecurityShield({ width = 240, height = 280, className = '' }: Se
     >
       <defs>
         <linearGradient id="ss-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="100%" stopColor="#8b5cf6" />
+          <stop offset="0%" stopColor="#cc785c" />
+          <stop offset="100%" stopColor="#5e7e92" />
         </linearGradient>
         <linearGradient id="ss-grad-fill" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.02" />
+          <stop offset="0%" stopColor="#cc785c" stopOpacity="0.08" />
+          <stop offset="100%" stopColor="#5e7e92" stopOpacity="0.02" />
         </linearGradient>
         <clipPath id="ss-shield-clip">
           <path d="M120 35 L195 70 C195 70 200 155 170 200 C150 228 120 245 120 245 C120 245 90 228 70 200 C40 155 45 70 45 70 Z" />
@@ -164,7 +164,7 @@ export function SecurityShield({ width = 240, height = 280, className = '' }: Se
           cx={dot.x}
           cy={dot.y}
           r="2"
-          fill="#06b6d4"
+          fill="#cc785c"
           opacity="0.4"
         >
           <animate

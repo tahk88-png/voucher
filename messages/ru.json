@@ -303,19 +303,7 @@
     "verifyRequest": "Проверьте почту",
     "verifyRequestDescription": "Мы отправили вам магическую ссылку для входа",
     "emailPlaceholder": "вы@example.com",
-    "passwordPlaceholder": "••••••••",
-    "continueWith": "Войти через {provider}",
-    "magicLinkTab": "Магическая ссылка",
-    "passwordTab": "Пароль",
-    "socialTab": "Соцсети",
-    "enterEmail": "Введите ваш email",
-    "checkEmailTitle": "Проверьте почту!",
-    "checkEmailDesc": "Мы отправили 6-значный код на {email}",
-    "enterCode": "Введите код",
-    "verifyCode": "Подтвердить",
-    "backToLogin": "Назад",
-    "wrongPassword": "Неверный email или пароль.",
-    "backToHome": "На главную"
+    "passwordPlaceholder": "••••••••"
   },
   "errors": {
     "unauthorized": "Нет доступа",
@@ -470,7 +458,17 @@
     "lithuanian": "Литовский",
     "polish": "Польский",
     "ukrainian": "Украинский",
-    "italian": "Итальянский"
+    "italian": "Итальянский",
+    "portuguese": "Португальский",
+    "dutch": "Нидерландский",
+    "czech": "Чешский",
+    "romanian": "Румынский",
+    "hungarian": "Венгерский",
+    "turkish": "Турецкий",
+    "japanese": "Японский",
+    "korean": "Корейский",
+    "chinese": "Китайский",
+    "arabic": "Арабский"
   },
   "share": {
     "share": "Поделиться",

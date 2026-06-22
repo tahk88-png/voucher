@@ -40,10 +40,10 @@ async function fetchOverviewData() {
       _sum: { amount: true },
       _count: true,
     }),
-    // Active users (last 30 days)
-    prisma.user.count({ where: { lastActiveAt: { gte: thirtyDaysAgo } } }),
+    // Active users (last 30 days) — approximated via updatedAt
+    prisma.user.count({ where: { updatedAt: { gte: thirtyDaysAgo } } }),
     // Previous period users
-    prisma.user.count({ where: { lastActiveAt: { gte: sixtyDaysAgo, lt: thirtyDaysAgo } } }),
+    prisma.user.count({ where: { updatedAt: { gte: sixtyDaysAgo, lt: thirtyDaysAgo } } }),
     // Conversions (last 30 days)
     prisma.redemption.count({
       where: { confirmedAt: { not: null }, createdAt: { gte: thirtyDaysAgo } },
@@ -76,11 +76,11 @@ async function fetchOverviewData() {
       },
       orderBy: { createdAt: 'desc' },
     }),
-    // Users by country
+    // Users by language (as geographic proxy)
     prisma.user.groupBy({
-      by: ['country'],
+      by: ['preferredLanguage'],
       _count: true,
-      orderBy: { _count: { country: 'desc' } },
+      orderBy: { _count: { preferredLanguage: 'desc' } },
       take: 20,
     }),
   ]);
@@ -146,9 +146,9 @@ async function fetchOverviewData() {
   }));
 
   const geoData = usersByCountry
-    .filter((u) => u.country)
+    .filter((u) => u.preferredLanguage)
     .map((u) => ({
-      country: u.country!,
+      country: (u.preferredLanguage ?? 'unknown').toUpperCase(),
       count: u._count,
     }));
 

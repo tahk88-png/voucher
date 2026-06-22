@@ -42,7 +42,7 @@ function VoucherPreview({ form }: { form: FormData }) {
     form.type === 'percentage' ? `${val}%` : formatCurrency(val * 100, form.currency);
   const headline = form.designHeadline || 'Voucher';
   return (
-    <div className="voucher-preview w-full max-w-[320px] mx-auto lg:mx-0 rounded-2xl border border-[rgba(139,115,85,0.15)] shadow-warm overflow-hidden bg-[var(--preview-bg)]">
+    <div className="voucher-preview w-full max-w-[320px] mx-auto lg:mx-0 rounded-2xl border border-[var(--border)] shadow-warm overflow-hidden bg-[var(--preview-bg)]">
       <style
         dangerouslySetInnerHTML={{
           __html: `.voucher-preview{--preview-bg:${sanitizeCssValue(form.designBackgroundColor)};--preview-primary:${sanitizeCssValue(form.designPrimaryColor)}}`,
@@ -53,10 +53,10 @@ function VoucherPreview({ form }: { form: FormData }) {
         <p className="mt-2 text-2xl font-semibold tabular-nums">{valueStr}</p>
       </div>
       <div className="px-5 py-4">
-        <p className="text-sm text-[#6B5744]">
+        <p className="text-sm text-[var(--text-muted)]">
           Valid until {new Date(form.validTo).toLocaleDateString(undefined, { dateStyle: 'medium' })}
         </p>
-        {form.designFinePrint && <p className="text-xs text-[#8B7355] mt-2">{form.designFinePrint}</p>}
+        {form.designFinePrint && <p className="text-xs text-[var(--text-faint)] mt-2">{form.designFinePrint}</p>}
       </div>
     </div>
   );
@@ -93,7 +93,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
     weeklyDropDuration: weeklyDrop?.durationMinutes?.toString() || '60',
     designHeadline: design?.headline || '',
     designFinePrint: design?.finePrint || '',
-    designPrimaryColor: design?.primaryColor || '#FFC857',
+    designPrimaryColor: design?.primaryColor || '#cc785c',
     designSecondaryColor: design?.secondaryColor || '#71717a',
     designBackgroundColor: design?.backgroundColor || '#fafafa',
     codePrefix: voucher.codePrefix || '',
@@ -207,10 +207,10 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
     <div className="lg:grid lg:grid-cols-[1fr,360px] lg:gap-10">
       <form onSubmit={handleSubmit} className="space-y-6">
         {step === 1 && (
-          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+          <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
             <div>
-              <h2 className="text-base font-semibold text-[#2D2721]">{tVoucher('typeAndValue')}</h2>
-              <p className="text-sm text-[#6B5744]">{tVoucher('chooseTypeAndValue')}</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">{tVoucher('typeAndValue')}</h2>
+              <p className="text-sm text-[var(--text-muted)]">{tVoucher('chooseTypeAndValue')}</p>
             </div>
             <div className="space-y-4 mt-4">
               <div>
@@ -218,7 +218,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                 <select
                   id="voucher-type"
                   aria-label="Voucher type"
-                  className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 mt-1"
+                  className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1"
                   value={formData.type}
                   onChange={(e) =>
                     setFormData({ ...formData, type: e.target.value as FormData['type'] })
@@ -240,7 +240,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                   required
                   placeholder={formData.type === 'percentage' ? '15' : '5'}
-                  className="mt-1 border-[rgba(139,115,85,0.15)]"
+                  className="mt-1 border-[var(--border)]"
                 />
               </div>
               <div>
@@ -252,7 +252,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
                   required
                   maxLength={3}
-                  className="mt-1 border-[rgba(139,115,85,0.15)]"
+                  className="mt-1 border-[var(--border)]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -264,7 +264,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                     value={formData.validFrom}
                     onChange={(e) => setFormData({ ...formData, validFrom: e.target.value })}
                     required
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
@@ -275,7 +275,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                     value={formData.validTo}
                     onChange={(e) => setFormData({ ...formData, validTo: e.target.value })}
                     required
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
               </div>
@@ -287,7 +287,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                     type="number"
                     value={formData.usageLimitTotal}
                     onChange={(e) => setFormData({ ...formData, usageLimitTotal: e.target.value })}
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
@@ -297,7 +297,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                     type="number"
                     value={formData.usageLimitPerUser}
                     onChange={(e) => setFormData({ ...formData, usageLimitPerUser: e.target.value })}
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
               </div>
@@ -315,10 +315,10 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
         )}
 
         {step === 2 && weeklyDropsEnabled && (
-          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+          <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
             <div>
-              <h2 className="text-base font-semibold text-[#2D2721]">{tVoucher('weeklyDropOptional')}</h2>
-              <p className="text-sm text-[#6B5744]">{tVoucher('limitedTimeOffers')}</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">{tVoucher('weeklyDropOptional')}</h2>
+              <p className="text-sm text-[var(--text-muted)]">{tVoucher('limitedTimeOffers')}</p>
             </div>
             <div className="space-y-4 mt-4">
               <div className="flex items-center gap-2">
@@ -329,7 +329,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   onChange={(e) =>
                     setFormData({ ...formData, weeklyDropEnabled: e.target.checked })
                   }
-                  className="h-4 w-4 accent-[#FFC857]"
+                  className="h-4 w-4 accent-[#cc785c]"
                   aria-label="Enable weekly drop"
                 />
                 <Label htmlFor="weeklyDropEnabled">{tVoucher('enableWeeklyDrop')}</Label>
@@ -341,7 +341,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                     <select
                       id="weeklyDropDay"
                       aria-label="Day of week for weekly drop"
-                      className="w-full h-10 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 mt-1"
+                      className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1"
                       value={formData.weeklyDropDay}
                       onChange={(e) => setFormData({ ...formData, weeklyDropDay: e.target.value })}
                     >
@@ -366,7 +366,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                         type="time"
                         value={formData.weeklyDropTime}
                         onChange={(e) => setFormData({ ...formData, weeklyDropTime: e.target.value })}
-                        className="mt-1 border-[rgba(139,115,85,0.15)]"
+                        className="mt-1 border-[var(--border)]"
                         aria-label="Weekly drop start time"
                       />
                     </div>
@@ -379,7 +379,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                         onChange={(e) =>
                           setFormData({ ...formData, weeklyDropDuration: e.target.value })
                         }
-                        className="mt-1 border-[rgba(139,115,85,0.15)]"
+                        className="mt-1 border-[var(--border)]"
                       />
                     </div>
                   </div>
@@ -390,7 +390,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                       type="number"
                       value={formData.weeklyDropStock}
                       onChange={(e) => setFormData({ ...formData, weeklyDropStock: e.target.value })}
-                      className="mt-1 border-[rgba(139,115,85,0.15)]"
+                      className="mt-1 border-[var(--border)]"
                     />
                   </div>
                 </>
@@ -408,10 +408,10 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
         )}
 
         {step === 3 && (
-          <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+          <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
             <div>
-              <h2 className="text-base font-semibold text-[#2D2721]">{tVoucher('design')}</h2>
-              <p className="text-sm text-[#6B5744]">{tVoucher('headlineColorsFinePrint')}</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">{tVoucher('design')}</h2>
+              <p className="text-sm text-[var(--text-muted)]">{tVoucher('headlineColorsFinePrint')}</p>
             </div>
             <div className="space-y-4 mt-4">
               <div>
@@ -422,7 +422,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   value={formData.designHeadline}
                   onChange={(e) => setFormData({ ...formData, designHeadline: e.target.value })}
                   placeholder="15% off your order"
-                  className="mt-1 border-[rgba(139,115,85,0.15)]"
+                  className="mt-1 border-[var(--border)]"
                 />
               </div>
               <div>
@@ -433,7 +433,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   value={formData.designFinePrint}
                   onChange={(e) => setFormData({ ...formData, designFinePrint: e.target.value })}
                   placeholder="Valid for new customers only"
-                  className="mt-1 border-[rgba(139,115,85,0.15)]"
+                  className="mt-1 border-[var(--border)]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -485,7 +485,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   }
                   placeholder="CH"
                   maxLength={10}
-                  className="mt-1 border-[rgba(139,115,85,0.15)]"
+                  className="mt-1 border-[var(--border)]"
                 />
               </div>
               <div className="flex gap-2 pt-2">
@@ -503,7 +503,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
 
       <aside className="hidden lg:block">
         <div className="sticky top-6">
-          <p className="text-sm font-medium text-[#6B5744] mb-3">{tVoucher('preview')}</p>
+          <p className="text-sm font-medium text-[var(--text-muted)] mb-3">{tVoucher('preview')}</p>
           <VoucherPreview form={formData} />
           <div className="mt-4 space-y-2">
             <WarmButton asChild variant="outline" className="w-full">
@@ -516,7 +516,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
 
       {step === 3 && (
         <div className="mt-8 lg:hidden">
-          <p className="text-sm font-medium text-[#6B5744] mb-3">{tVoucher('preview')}</p>
+          <p className="text-sm font-medium text-[var(--text-muted)] mb-3">{tVoucher('preview')}</p>
           <VoucherPreview form={formData} />
         </div>
       )}

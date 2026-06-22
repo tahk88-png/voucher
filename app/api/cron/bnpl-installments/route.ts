@@ -2,15 +2,22 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { stripe } from '@/lib/stripe';
 import { logger } from '@/lib/logger';
+import { buildInstallmentChargeParams } from '@/lib/bnpl';
 
 /**
  * Cron endpoint that charges due BNPL installments via Stripe.
- * Should be called daily by a cron job.
- * Protected by CRON_SECRET header.
+ * Runs daily via Vercel cron. GET is required for Vercel invocation;
+ * POST is kept for manual/admin triggers.
+ * Protected by CRON_SECRET via Authorization or x-cron-secret header.
  */
+export async function GET(req: NextRequest) {
+  return POST(req);
+}
+
 export async function POST(req: NextRequest) {
-  const cronSecret = req.headers.get('x-cron-secret');
-  if (cronSecret !== process.env.CRON_SECRET) {
+  const authHeader = req.headers.get('authorization');
+  const cronSecret = req.headers.get('x-cron-secret') || authHeader?.replace('Bearer ', '');
+  if (cronSecret !== process.env.CRON_SECRET && process.env.NODE_ENV === 'production') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -25,10 +32,6 @@ export async function POST(req: NextRequest) {
       where: {
         status: 'active',
         nextInstallmentDate: { lte: now },
-      },
-      include: {
-        user: { select: { id: true, email: true } },
-        merchant: { select: { id: true, name: true } },
       },
     });
 
@@ -59,21 +62,30 @@ export async function POST(req: NextRequest) {
       if (dueDate > now) continue;
 
       try {
-        // Create a PaymentIntent for this installment
-        const paymentIntent = await stripe.paymentIntents.create({
-          amount: installment.amountCents,
-          currency: plan.merchant.name ? 'eur' : 'usd',
-          customer: plan.stripeCustomerId || undefined,
-          metadata: {
-            type: 'bnpl_installment',
+        // A plan can only be charged off-session if it carries a saved
+        // customer + payment method (both collected at plan creation). Without
+        // them there is nothing to charge — fail the installment so the plan
+        // moves toward `defaulted` instead of silently retrying forever.
+        if (!plan.stripeCustomerId || !plan.stripePaymentMethodId) {
+          throw new Error('Plan has no saved Stripe customer/payment method');
+        }
+
+        // Create + confirm the off-session charge against the saved card. The
+        // idempotency key is scoped to this exact installment, so a same-day
+        // cron re-run (or a Stripe SDK network retry) cannot double-charge it.
+        const paymentIntent = await stripe.paymentIntents.create(
+          buildInstallmentChargeParams({
+            amountCents: installment.amountCents,
+            currency: plan.currency,
+            stripeCustomerId: plan.stripeCustomerId,
+            stripePaymentMethodId: plan.stripePaymentMethodId,
             planId: plan.id,
-            installmentNumber: String(installment.number),
+            installmentNumber: installment.number,
             userId: plan.userId,
             merchantId: plan.merchantId,
-          },
-          confirm: !!plan.stripeCustomerId,
-          off_session: !!plan.stripeCustomerId,
-        });
+          }),
+          { idempotencyKey: `bnpl_installment_${plan.id}_${installment.number}` }
+        );
 
         // Update installment status
         installments[pendingIdx] = {

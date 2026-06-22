@@ -34,12 +34,12 @@ async function RecentActivityContent({ merchantId }: { merchantId: string }) {
     return (
       <WarmCard padding="lg">
         <div className="flex items-center gap-3 mb-4">
-          <Activity className="h-5 w-5 text-[#8B7355]" />
-          <h3 className="text-lg font-semibold text-[#2D2721]">
+          <Activity className="h-5 w-5 text-[var(--text-faint)]" />
+          <h3 className="text-lg font-semibold text-[var(--text)]">
             Recent Activity
           </h3>
         </div>
-        <div className="text-center py-8 text-[#8B7355]">
+        <div className="text-center py-8 text-[var(--text-faint)]">
           No recent activity
         </div>
       </WarmCard>
@@ -49,8 +49,8 @@ async function RecentActivityContent({ merchantId }: { merchantId: string }) {
   return (
     <WarmCard padding="lg">
       <div className="flex items-center gap-3 mb-4">
-        <Activity className="h-5 w-5 text-[#8B7355]" />
-        <h3 className="text-lg font-semibold text-[#2D2721]">
+        <Activity className="h-5 w-5 text-[var(--text-faint)]" />
+        <h3 className="text-lg font-semibold text-[var(--text)]">
           Recent Activity
         </h3>
       </div>
@@ -61,14 +61,14 @@ async function RecentActivityContent({ merchantId }: { merchantId: string }) {
             className="flex items-center justify-between p-3 rounded-[12px] bg-[#FFFBF5] hover:bg-[#FAF7F2] transition-colors"
           >
             <div>
-              <p className="text-sm font-medium text-[#2D2721]">
+              <p className="text-sm font-medium text-[var(--text)]">
                 {redemption.redeemedBy?.name ||
                   redemption.redeemedBy?.email ||
                   redemption.redeemedByStaff?.name ||
                   redemption.redeemedByStaff?.email ||
                   "Unknown user"}
               </p>
-              <p className="text-xs text-[#6B5744]">
+              <p className="text-xs text-[var(--text-muted)]">
                 Redeemed voucher -{" "}
                 {formatDistanceToNow(new Date(redemption.createdAt), {
                   addSuffix: true,
@@ -78,8 +78,8 @@ async function RecentActivityContent({ merchantId }: { merchantId: string }) {
             <div
               className={`px-2 py-1 rounded-[8px] text-xs font-medium ${
                 redemption.confirmedAt
-                  ? "bg-[#9DB5A5]/20 text-[#9DB5A5]"
-                  : "bg-[#FFC857]/20 text-[#8B7355]"
+                  ? "bg-[#4e8a5b]/20 text-[#4e8a5b]"
+                  : "bg-[#be8a2e]/20 text-[var(--text-faint)]"
               }`}
             >
               {redemption.confirmedAt ? "Confirmed" : "Pending"}

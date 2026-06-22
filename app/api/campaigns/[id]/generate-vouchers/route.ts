@@ -3,7 +3,9 @@ import { Prisma } from '@prisma/client';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
+import { requireMerchantCapability } from '@/lib/access-control';
 import { withErrorHandler } from '@/lib/error-handler';
+import { CacheKeys, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 
 const generateVouchersSchema = z.object({
@@ -42,6 +44,9 @@ export async function POST(
     }
 
     await requireMerchantRole(session.user.id, campaign.merchantId, 'merchant_admin');
+    // Bulk generation (up to 100/call) must respect the plan's
+    // voucher.create entitlement, same as the single-create endpoint.
+    await requireMerchantCapability(campaign.merchantId, campaign.merchant.slug, 'voucher.create');
 
     const body = await req.json();
     const { count, voucherData } = generateVouchersSchema.parse(body);
@@ -80,6 +85,8 @@ export async function POST(
         },
       },
     });
+
+    await invalidateCache(CacheKeys.publicMerchantVouchers(campaign.merchantId));
 
     return NextResponse.json({ vouchers, count: vouchers.length });
   });

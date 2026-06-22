@@ -15,12 +15,12 @@ import {
   DashboardHeader,
   DataTable,
 } from '@/components/dashboard';
+import type { Column } from '@/components/dashboard/data-table';
 import {
   AnimatedBarChart,
-  LiveActivityChart,
   HeatmapChart,
 } from '@/components/charts';
-import { useRealtime } from '@/hooks/use-realtime';
+import type { DateRangeOption } from '@/components/dashboard';
 
 type ActivityData = {
   activityFeed: {
@@ -72,20 +72,16 @@ function timeAgo(dateStr: string): string {
 }
 
 export default function ActivityDashboardClient({ data }: { data: ActivityData }) {
-  const [dateRange, setDateRange] = useState('24h');
+  const [dateRange, setDateRange] = useState<DateRangeOption>('30d');
   const { activityFeed: initialFeed, eventsPerHour, topVouchers, purchaseTimeline, peakHours } = data;
 
-  // Live feed via SSE
-  const liveEvents = useRealtime('admin-activity', {
-    initialData: initialFeed,
-  });
-
-  const feedEvents = (liveEvents ?? initialFeed).map((e: (typeof initialFeed)[0]) => ({
+  const feedEvents = initialFeed.map((e) => ({
     id: e.id,
-    title: e.action.replace(/_/g, ' '),
-    description: e.merchantName
-      ? `${e.actorName} — ${e.merchantName}`
-      : e.actorName,
+    type: 'purchase' as const,
+    user: e.actorName,
+    action: e.merchantName
+      ? `${e.action.replace(/_/g, ' ')} — ${e.merchantName}`
+      : e.action.replace(/_/g, ' '),
     timestamp: e.createdAt,
   }));
 
@@ -114,7 +110,7 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
                   : 'border-transparent text-[var(--text-secondary,#6B5744)] hover:text-[var(--text-primary,#2D2721)]'
               }`}
             >
-              {link.label}
+              {link.header}
             </Link>
           ))}
         </nav>
@@ -149,25 +145,20 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
           <ChartCard
             title="Live Activity Feed"
             subtitle="Real-time platform events"
-            action={
-              <div className="flex items-center gap-1 text-xs text-green-600">
-                <Zap className="h-3 w-3" />
-                Live
-              </div>
-            }
           >
             <div className="max-h-[400px] overflow-y-auto">
               <ActivityFeed events={feedEvents} maxHeight={400} />
             </div>
           </ChartCard>
 
-          {/* Live Activity Graph */}
+          {/* Live Activity Status */}
           <ChartCard title="Live Activity" subtitle="Events streaming">
-            <LiveActivityChart
-              channel="admin-activity"
-              height={400}
-              colors={["#10B981"]}
-            />
+            <div className="flex items-center justify-center h-[400px] text-[var(--text-secondary,#6B5744)]">
+              <div className="text-center space-y-2">
+                <Zap className="h-8 w-8 mx-auto text-green-500" />
+                <p className="text-sm font-medium">{feedEvents.length} recent events</p>
+              </div>
+            </div>
           </ChartCard>
         </AnalyticsGrid>
 
@@ -176,7 +167,7 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
           <AnimatedBarChart
             data={eventsPerHour}
             xAxisKey="hour"
-            dataKeys={["value"
+            dataKeys={["value"]}
             colors={["#6366F1"]}
             height={280}
           />
@@ -186,26 +177,31 @@ export default function ActivityDashboardClient({ data }: { data: ActivityData }
           {/* Most Popular Vouchers */}
           <ChartCard title="Most Popular Vouchers" subtitle="Top sellers (7 days)">
             <DataTable
-              data={topVouchers}
-              columns={voucherColumns}
+              data={topVouchers as unknown as Record<string, unknown>[]}
+              columns={voucherColumns as Column<Record<string, unknown>>[]}
               pageSize={8}
-              searchable
             />
           </ChartCard>
 
           {/* Peak Hours Heatmap */}
           <ChartCard title="Peak Hours" subtitle="Activity by day & hour (7 days)">
             <HeatmapChart
-              data={peakHours.map((d) => ({
-                x: `${d.hour.toString().padStart(2, '0')}:00`,
-                y: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.day],
-                value: d.value,
-              }))}
-              xAxisKey="x"
-              dataKeys={["y"
-              
+              data={(() => {
+                const grid: number[][] = [];
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                for (let d = 0; d < days.length; d++) {
+                  const row: number[] = [];
+                  for (let h = 0; h < 24; h++) {
+                    const entry = peakHours.find((p) => p.day === d && p.hour === h);
+                    row.push(entry?.value ?? 0);
+                  }
+                  grid.push(row);
+                }
+                return grid;
+              })()}
+              xLabels={Array.from({ length: 24 }, (_, i) => `${i.toString().padStart(2, '0')}:00`)}
+              yLabels={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
               height={250}
-              
             />
           </ChartCard>
         </AnalyticsGrid>

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next"
 import { prisma } from "@/lib/prisma"
 import { routing } from "@/routing"
 import { getLocalePath, toAbsoluteUrl } from "@/lib/seo"
+import { logger } from "@/lib/logger"
 
 export const revalidate = 3600
 
@@ -40,8 +41,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         take: 500,
       }),
     ])
-  } catch {
-    console.warn("sitemap: database unavailable, returning static-only sitemap")
+  } catch (err) {
+    // Database unavailable at build/revalidation time — serve static-only sitemap.
+    // Logged so a persistently empty DB-backed sitemap is detectable in monitoring.
+    logger.warn("sitemap: database unavailable, serving static-only", {
+      error: err instanceof Error ? err.message : String(err),
+    })
   }
 
   for (const locale of routing.locales) {
@@ -74,7 +79,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     for (const voucher of vouchers) {
       entries.push({
-        url: toAbsoluteUrl(getLocalePath(locale, `/vouchers/${voucher.id}`)),
+        // Public voucher route is /v/[id] (there is no /vouchers/[id] page) —
+        // the old path 404'd for every voucher × locale in the sitemap.
+        url: toAbsoluteUrl(getLocalePath(locale, `/v/${voucher.id}`)),
         lastModified: voucher.updatedAt,
         changeFrequency: "daily",
         priority: 0.5,

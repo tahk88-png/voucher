@@ -65,6 +65,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Validate alertPrice (minor units) — a price-drop alert threshold. It
+    // feeds the price-alerts cron (voucher.value <= alertPrice), so a
+    // negative / non-integer value would make the alert never (or always)
+    // fire. Reject bad values instead of writing junk to the ledger column.
+    if (alertPrice != null && (!Number.isInteger(alertPrice) || alertPrice < 0)) {
+      return NextResponse.json(
+        { error: 'alertPrice must be a non-negative integer (minor units)' },
+        { status: 400 }
+      );
+    }
+
     // Check for existing wishlist item
     const existingWhere = {
       ...(voucherId && { userId_voucherId: { userId: session.user.id, voucherId } }),

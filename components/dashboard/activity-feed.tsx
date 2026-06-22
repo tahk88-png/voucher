@@ -24,10 +24,10 @@ export interface ActivityFeedProps {
 }
 
 const typeColors: Record<EventType, string> = {
-  purchase: '#16a34a',
-  redemption: '#2563eb',
-  signup: '#7c3aed',
-  alert: '#dc2626',
+  purchase: '#4e8a5b',
+  redemption: '#4b6678',
+  signup: '#5e7e92',
+  alert: '#c84b36',
 }
 
 function getInitials(name: string): string {

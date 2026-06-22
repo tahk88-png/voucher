@@ -20,6 +20,8 @@ import {
   DashboardHeader,
   DataTable,
 } from '@/components/dashboard';
+import type { Column } from '@/components/dashboard/data-table';
+import type { DateRangeOption } from '@/components/dashboard';
 import {
   AnimatedAreaChart,
   AnimatedLineChart,
@@ -83,19 +85,19 @@ function formatChange(value: number): { text: string; positive: boolean } {
 }
 
 export default function AnalyticsOverviewClient({ data }: { data: OverviewData }) {
-  const [dateRange, setDateRange] = useState('30d');
-  const activeUsersNow = useLiveMetric('active-users', 0);
-  const salesPerMin = useLiveMetric('sales-per-minute', 0);
+  const [dateRange, setDateRange] = useState<DateRangeOption>('30d');
+  const activeUsersLive = useLiveMetric('active-users', 0);
+  const salesPerMinLive = useLiveMetric('sales-per-minute', 0);
 
   const { metrics, revenueTrend, userGrowth, topMerchants, activityFeed, geoData } = data;
 
-  const merchantColumns = [
-    { key: 'name', header: 'Merchant', render: (row: (typeof topMerchants)[0]) => (
+  const merchantColumns: Column<Record<string, unknown>>[] = [
+    { key: 'name', header: 'Merchant', render: (row) => (
       <Link href={`/merchant/${row.slug}`} className="text-[var(--primary)] hover:underline font-medium">
-        {row.name}
+        {String(row.name)}
       </Link>
     )},
-    { key: 'revenue', header: 'Revenue', render: (row: (typeof topMerchants)[0]) => formatCurrency(row.revenue) },
+    { key: 'revenue', header: 'Revenue', render: (row) => formatCurrency(row.revenue as number) },
     { key: 'transactions', header: 'Transactions' },
   ];
 
@@ -111,12 +113,12 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
               </span>
               <span className="text-gray-300">Active users now:</span>
-              <span className="font-semibold">{activeUsersNow}</span>
+              <span className="font-semibold">{activeUsersLive.value}</span>
             </div>
             <div className="flex items-center gap-2">
               <Activity className="h-3.5 w-3.5 text-yellow-400" />
               <span className="text-gray-300">Sales/min:</span>
-              <span className="font-semibold">{salesPerMin}</span>
+              <span className="font-semibold">{salesPerMinLive.value}</span>
             </div>
           </div>
           <span className="text-gray-400 text-xs">Live</span>
@@ -136,7 +138,7 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
                   : 'border-transparent text-[var(--text-secondary,#6B5744)] hover:text-[var(--text-primary,#2D2721)]'
               }`}
             >
-              {link.label}
+              {link.header}
             </Link>
           ))}
         </nav>
@@ -155,30 +157,30 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
           <MetricCard
             title="Total Revenue"
             value={formatCurrency(metrics.totalRevenue)}
-            change={formatChange(metrics.revenueChange)}
+            change={metrics.revenueChange}
+            trend={metrics.revenueChange >= 0 ? 'up' : 'down'}
             icon={<DollarSign className="h-5 w-5" />}
-            colors={["emerald"]}
           />
           <MetricCard
             title="Active Users"
             value={metrics.activeUsers.toLocaleString()}
-            change={formatChange(metrics.usersChange)}
+            change={metrics.usersChange}
+            trend={metrics.usersChange >= 0 ? 'up' : 'down'}
             icon={<Users className="h-5 w-5" />}
-            colors={["blue"]}
           />
           <MetricCard
             title="Conversions"
             value={metrics.conversions.toLocaleString()}
-            change={formatChange(metrics.conversionsChange)}
+            change={metrics.conversionsChange}
+            trend={metrics.conversionsChange >= 0 ? 'up' : 'down'}
             icon={<ShoppingCart className="h-5 w-5" />}
-            colors={["purple"]}
           />
           <MetricCard
             title="Avg Order Value"
             value={formatCurrency(metrics.avgOrderValue)}
-            change={formatChange(metrics.aovChange)}
+            change={metrics.aovChange}
+            trend={metrics.aovChange >= 0 ? 'up' : 'down'}
             icon={<BarChart3 className="h-5 w-5" />}
-            colors={["orange"]}
           />
         </div>
 
@@ -188,11 +190,10 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
             <AnimatedAreaChart
               data={revenueTrend}
               xAxisKey="date"
-              dataKeys={["value"
+              dataKeys={["value"]}
               colors={["var(--primary, #8B5A2B)"]}
               gradient
               height={280}
-              
             />
           </ChartCard>
 
@@ -201,10 +202,9 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
             <AnimatedLineChart
               data={userGrowth}
               xAxisKey="date"
-              dataKeys={["value"
+              dataKeys={["value"]}
               colors={["#3B82F6"]}
               height={280}
-              showDots
             />
           </ChartCard>
         </AnalyticsGrid>
@@ -214,22 +214,15 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
           <ChartCard
             title="Recent Activity"
             subtitle="Last 20 events"
-            action={
-              <Link
-                href="/admin/analytics/activity"
-                className="text-sm text-[var(--primary,#8B5A2B)] hover:underline flex items-center gap-1"
-              >
-                View all <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            }
           >
             <ActivityFeed
               events={activityFeed.map((e) => ({
                 id: e.id,
-                title: e.action.replace(/_/g, ' '),
-                description: e.merchantName
-                  ? `${e.actorName} — ${e.merchantName}`
-                  : e.actorName,
+                type: 'purchase' as const,
+                user: e.actorName,
+                action: e.merchantName
+                  ? `${e.action.replace(/_/g, ' ')} — ${e.merchantName}`
+                  : e.action.replace(/_/g, ' '),
                 timestamp: e.createdAt,
               }))}
               maxHeight={400}
@@ -242,7 +235,7 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
             subtitle="By revenue (30 days)"
           >
             <DataTable
-              data={topMerchants}
+              data={topMerchants as unknown as Record<string, unknown>[]}
               columns={merchantColumns}
               pageSize={5}
             />
@@ -252,9 +245,7 @@ export default function AnalyticsOverviewClient({ data }: { data: OverviewData }
         {/* Geographic Distribution */}
         <ChartCard title="Geographic Distribution" subtitle="Users by country">
           <GeoMap
-            data={geoData}
-            
-            
+            data={geoData.map((g) => ({ country: g.country, value: g.count }))}
             height={350}
           />
         </ChartCard>

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -139,9 +140,9 @@ export default function GiftProductPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Image gallery */}
           <div>
-            <div className="aspect-square rounded-2xl overflow-hidden bg-[var(--surface-dim)]">
+            <div className="relative aspect-square rounded-2xl overflow-hidden bg-[var(--surface-dim)]">
               {product.mediaUrl ? (
-                <img src={product.mediaUrl} alt={product.title} className="w-full h-full object-cover" />
+                <Image fill src={product.mediaUrl} alt={product.title} className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <ShoppingCart className="h-16 w-16 text-[var(--text-muted)] opacity-30" />
@@ -151,8 +152,8 @@ export default function GiftProductPage() {
             {product.mediaUrls.length > 1 && (
               <div className="flex gap-2 mt-2 overflow-x-auto">
                 {product.mediaUrls.map((url, i) => (
-                  <div key={i} className="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-[var(--border)]">
-                    <img src={url} alt={`${product.title} ${i + 1}`} className="w-full h-full object-cover" />
+                  <div key={i} className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-[var(--border)]">
+                    <Image fill src={url} alt={`${product.title} ${i + 1}`} className="object-cover" sizes="64px" />
                   </div>
                 ))}
               </div>

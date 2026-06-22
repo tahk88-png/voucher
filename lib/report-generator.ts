@@ -136,14 +136,10 @@ export async function generateMerchantReport(
       include: {
         _count: {
           select: {
-            redemptions: {
-              where: {
-                confirmedAt: { not: null, gte: dates.current.from, lte: dates.current.to },
-              },
-            },
+            redemptions: true,
           },
         },
-        voucherPurchases: {
+        purchases: {
           where: {
             status: 'paid',
             createdAt: { gte: dates.current.from, lte: dates.current.to },
@@ -182,7 +178,7 @@ export async function generateMerchantReport(
     topVouchers: topVouchers.map((v) => ({
       name: v.type ?? v.id,
       redemptions: v._count.redemptions,
-      revenue: v.voucherPurchases.reduce((sum, p) => sum + p.amount, 0),
+      revenue: v.purchases.reduce((sum: number, p: { amount: number }) => sum + p.amount, 0),
     })),
     growthPercent: Math.round(growthPercent * 10) / 10,
   };

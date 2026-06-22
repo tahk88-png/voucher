@@ -62,7 +62,7 @@ export function StatsCard({
             <p className="mt-1 text-xs text-[var(--text-muted)]">{description}</p>
           )}
           {href && (
-            <span className="mt-3 inline-flex text-xs font-semibold text-[#E17B5C]">
+            <span className="mt-3 inline-flex text-xs font-semibold text-primary">
               {actionLabel}
             </span>
           )}
@@ -81,7 +81,7 @@ export function StatsCard({
   }
 
   return (
-    <Link href={href} className="block rounded-[22px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC857]">
+    <Link href={href} className="block rounded-[22px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
       {card}
     </Link>
   )

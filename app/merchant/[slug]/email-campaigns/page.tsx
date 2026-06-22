@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { WarmCard } from '@/components/warm-card';
@@ -8,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, Plus, Send, Eye, Trash2, GripVertical, ArrowUp, ArrowDown, Clock } from 'lucide-react';
+import { showConfirm } from '@/lib/confirm-helpers';
 
 type SectionType = 'header' | 'text' | 'image' | 'button' | 'divider' | 'voucher-card';
 
@@ -71,7 +73,7 @@ function SectionEditor({ section, onChange, onRemove, onMoveUp, onMoveDown, isFi
   isLast: boolean;
 }) {
   return (
-    <div className="border border-[var(--border)] rounded-lg p-3 bg-white">
+    <div className="border border-[var(--border)] rounded-lg p-3 bg-[var(--surface)]">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <GripVertical className="h-4 w-4 text-[var(--text-muted)] cursor-grab" />
@@ -225,30 +227,34 @@ export default function EmailCampaignsPage() {
   };
 
   const handleSend = async (campaignId: string) => {
-    if (!confirm('Are you sure you want to send this campaign now?')) return;
-    try {
-      const res = await fetch(`/api/merchant/${slug}/email-campaigns/${campaignId}/send`, { method: 'POST' });
-      if (!res.ok) {
+    showConfirm('Are you sure you want to send this campaign now?', async () => {
+      try {
+        const res = await fetch(`/api/merchant/${slug}/email-campaigns/${campaignId}/send`, { method: 'POST' });
+        if (!res.ok) {
+          const data = await res.json();
+          throw new Error(data.error || 'Failed to send');
+        }
         const data = await res.json();
-        throw new Error(data.error || 'Failed to send');
+        toast({ title: 'Campaign sent', description: `Delivered to ${data.recipientCount} recipients.` });
+        fetchCampaigns();
+      } catch (err: any) {
+        toast({ title: 'Send failed', description: err.message, variant: 'destructive' });
       }
-      const data = await res.json();
-      toast({ title: 'Campaign sent', description: `Delivered to ${data.recipientCount} recipients.` });
-      fetchCampaigns();
-    } catch (err: any) {
-      toast({ title: 'Send failed', description: err.message, variant: 'destructive' });
-    }
+    }, { confirmLabel: 'Send', variant: 'warning' });
+    return;
   };
 
   const handleDelete = async (campaignId: string) => {
-    if (!confirm('Delete this campaign?')) return;
-    try {
-      await fetch(`/api/merchant/${slug}/email-campaigns/${campaignId}`, { method: 'DELETE' });
-      toast({ title: 'Campaign deleted' });
-      fetchCampaigns();
-    } catch {
-      toast({ title: 'Error', description: 'Failed to delete.', variant: 'destructive' });
-    }
+    showConfirm('Delete this campaign?', async () => {
+      try {
+        await fetch(`/api/merchant/${slug}/email-campaigns/${campaignId}`, { method: 'DELETE' });
+        toast({ title: 'Campaign deleted' });
+        fetchCampaigns();
+      } catch {
+        toast({ title: 'Error', description: 'Failed to delete.', variant: 'destructive' });
+      }
+    }, { confirmLabel: 'Delete', variant: 'destructive' });
+    return;
   };
 
   return (
@@ -283,7 +289,7 @@ export default function EmailCampaignsPage() {
                   id="recipient-filter"
                   value={recipientFilter}
                   onChange={e => setRecipientFilter(e.target.value as 'all' | 'redeemed_30d' | 'inactive')}
-                  className="w-full border border-[var(--border)] rounded-md p-2 text-sm bg-white"
+                  className="w-full border border-[var(--border)] rounded-md p-2 text-sm bg-[var(--surface)]"
                 >
                   <option value="all">All customers</option>
                   <option value="redeemed_30d">Redeemed in last 30 days</option>
@@ -341,20 +347,20 @@ export default function EmailCampaignsPage() {
                   Preview
                 </div>
                 <div className="p-4">
-                  <div className="bg-white rounded-lg shadow-sm p-6 max-w-md mx-auto space-y-4">
+                  <div className="bg-[var(--surface)] rounded-lg shadow-sm p-6 max-w-md mx-auto space-y-4">
                     {sections.map(s => (
                       <div key={s.id}>
                         {s.type === 'header' && (
                           <div className="text-center">
-                            <h2 className="text-xl font-bold text-[#2D2721]">{s.title || 'Header Title'}</h2>
-                            {s.subtitle && <p className="text-sm text-[#6B5744] mt-1">{s.subtitle}</p>}
+                            <h2 className="text-xl font-bold text-[var(--text)]">{s.title || 'Header Title'}</h2>
+                            {s.subtitle && <p className="text-sm text-[var(--text-muted)] mt-1">{s.subtitle}</p>}
                           </div>
                         )}
-                        {s.type === 'text' && <p className="text-sm text-[#2D2721] leading-relaxed">{s.content || 'Text content...'}</p>}
+                        {s.type === 'text' && <p className="text-sm text-[var(--text)] leading-relaxed">{s.content || 'Text content...'}</p>}
                         {s.type === 'image' && (
                           <div className="text-center">
                             {s.src ? (
-                              <img src={s.src} alt={s.alt || ''} className="max-w-full rounded-lg mx-auto" />
+                              <Image src={s.src} alt={s.alt || ''} width={600} height={400} unoptimized className="max-w-full h-auto rounded-lg mx-auto" />
                             ) : (
                               <div className="bg-gray-100 rounded-lg h-32 flex items-center justify-center text-gray-400 text-sm">Image placeholder</div>
                             )}
@@ -370,10 +376,10 @@ export default function EmailCampaignsPage() {
                         {s.type === 'divider' && <hr className="border-t border-[#E8E0D8]" />}
                         {s.type === 'voucher-card' && (
                           <div className="border-2 border-dashed border-[#8B7355] rounded-xl p-4 text-center bg-[#FAF7F4]">
-                            <p className="text-xs text-[#6B5744] uppercase tracking-wider">Voucher</p>
-                            <p className="text-lg font-bold text-[#2D2721]">{s.voucherTitle || 'Voucher'}</p>
-                            <p className="text-2xl font-extrabold text-[#8B7355]">{s.voucherValue || '---'}</p>
-                            {s.voucherCode && <code className="text-sm bg-white px-3 py-1 rounded border border-[#E8E0D8] inline-block mt-1">{s.voucherCode}</code>}
+                            <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Voucher</p>
+                            <p className="text-lg font-bold text-[var(--text)]">{s.voucherTitle || 'Voucher'}</p>
+                            <p className="text-2xl font-extrabold text-[var(--text-faint)]">{s.voucherValue || '---'}</p>
+                            {s.voucherCode && <code className="text-sm bg-[var(--surface)] px-3 py-1 rounded border border-[#E8E0D8] inline-block mt-1">{s.voucherCode}</code>}
                             {s.voucherExpiry && <p className="text-xs text-[#9B8A7A] mt-1">Valid until {s.voucherExpiry}</p>}
                           </div>
                         )}

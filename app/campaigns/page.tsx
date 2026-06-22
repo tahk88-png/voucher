@@ -38,8 +38,9 @@ function normalizeCampaignSearchParams(searchParams?: SearchParams): {
 export default async function CampaignsAliasPage({
   searchParams,
 }: {
-  searchParams?: SearchParams
+  searchParams?: Promise<SearchParams>
 }) {
+  const sp = await searchParams
   const context = await getTenantContext()
   if (context.mode === "tenant" && context.tenant) {
     const tenant = context.tenant
@@ -85,17 +86,17 @@ export default async function CampaignsAliasPage({
     )
   }
 
-  const locale = getPreferredLocale()
+  const locale = await getPreferredLocale()
 
   if (locale !== routing.defaultLocale) {
-    redirect(`/${locale}/campaigns${toQueryString(searchParams)}`)
+    redirect(`/${locale}/campaigns${toQueryString(sp)}`)
   }
 
   return (
     <HubShell>
       <CampaignsPage
         params={{ locale: routing.defaultLocale }}
-        searchParams={normalizeCampaignSearchParams(searchParams)}
+        searchParams={normalizeCampaignSearchParams(sp)}
       />
     </HubShell>
   )

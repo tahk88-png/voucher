@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
@@ -82,7 +82,7 @@ export default function InventoryPage() {
   const [editThreshold, setEditThreshold] = useState<string>('');
   const [saving, setSaving] = useState(false);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/merchant/${slug}/inventory`);
@@ -93,11 +93,11 @@ export default function InventoryPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug]);
 
   useEffect(() => {
     fetchData();
-  }, [slug]);
+  }, [fetchData]);
 
   const handleEdit = (item: InventoryItem) => {
     setEditingId(item.id);
@@ -151,7 +151,7 @@ export default function InventoryPage() {
       {/* Summary cards */}
       {data && (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <WarmCard padding="md" className="bg-white">
+          <WarmCard padding="md" className="bg-[var(--surface)]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
                 <Package className="h-5 w-5 text-blue-600" />
@@ -162,7 +162,7 @@ export default function InventoryPage() {
               </div>
             </div>
           </WarmCard>
-          <WarmCard padding="md" className="bg-white">
+          <WarmCard padding="md" className="bg-[var(--surface)]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-yellow-50 flex items-center justify-center">
                 <AlertTriangle className="h-5 w-5 text-yellow-600" />
@@ -173,7 +173,7 @@ export default function InventoryPage() {
               </div>
             </div>
           </WarmCard>
-          <WarmCard padding="md" className="bg-white">
+          <WarmCard padding="md" className="bg-[var(--surface)]">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
                 <XCircle className="h-5 w-5 text-red-600" />
@@ -200,7 +200,7 @@ export default function InventoryPage() {
             {data.lowStockAlerts.map((alert) => (
               <div
                 key={alert.voucherId}
-                className="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-yellow-200"
+                className="flex items-center justify-between bg-[var(--surface)] rounded-lg px-3 py-2 border border-yellow-200"
               >
                 <div>
                   <span className="text-sm font-medium text-[var(--text)]">
@@ -223,13 +223,13 @@ export default function InventoryPage() {
       {loading ? (
         <p className="text-sm text-[var(--text-muted)]">Loading inventory...</p>
       ) : !data || data.inventory.length === 0 ? (
-        <WarmCard padding="lg" className="bg-white text-center">
+        <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <p className="text-[var(--text-muted)]">No vouchers found</p>
         </WarmCard>
       ) : (
         <div className="space-y-3">
           {data.inventory.map((item) => (
-            <WarmCard key={item.id} padding="md" className="bg-white">
+            <WarmCard key={item.id} padding="md" className="bg-[var(--surface)]">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">

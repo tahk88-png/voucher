@@ -64,23 +64,23 @@ export default async function AdminGiftsPage() {
   ]);
 
   const stats = [
-    { label: 'Total Products', value: productCount, accent: 'border-b-[#FFC857]' },
-    { label: 'Active Products', value: activeProducts, accent: 'border-b-[#22C55E]' },
-    { label: 'Categories', value: categoryCount, accent: 'border-b-[#9DB5A5]' },
-    { label: 'Occasions', value: occasionCount, accent: 'border-b-[#E17B5C]' },
-    { label: 'Personas', value: personaCount, accent: 'border-b-[#3B82F6]' },
-    { label: 'Active Modules', value: moduleCount, accent: 'border-b-[#8B5CF6]' },
-    { label: 'Sponsors', value: sponsorCount, accent: 'border-b-[#F59E0B]' },
-    { label: 'Interactions', value: interactionCount, accent: 'border-b-[#EC4899]' },
+    { label: 'Total Products', value: productCount, accent: 'border-b-[#cc785c]' },
+    { label: 'Active Products', value: activeProducts, accent: 'border-b-[#4e8a5b]' },
+    { label: 'Categories', value: categoryCount, accent: 'border-b-[#5e7e92]' },
+    { label: 'Occasions', value: occasionCount, accent: 'border-b-[#b5613f]' },
+    { label: 'Personas', value: personaCount, accent: 'border-b-[#4b6678]' },
+    { label: 'Active Modules', value: moduleCount, accent: 'border-b-[#7e9cae]' },
+    { label: 'Sponsors', value: sponsorCount, accent: 'border-b-[#be8a2e]' },
+    { label: 'Interactions', value: interactionCount, accent: 'border-b-[#82a2c0]' },
   ];
 
   const sections = [
-    { title: 'Categories', href: '/api/admin/gifts/categories', icon: Tag, color: 'bg-amber-100 text-amber-700', desc: 'Gift categories (Experiences, Food, etc.)' },
-    { title: 'Occasions', href: '/api/admin/gifts/occasions', icon: Calendar, color: 'bg-red-100 text-red-700', desc: 'Birthday, Christmas, Valentine\'s, etc.' },
-    { title: 'Personas', href: '/api/admin/gifts/personas', icon: Users, color: 'bg-blue-100 text-blue-700', desc: 'Gift recipient types' },
-    { title: 'Feed Modules', href: '/api/admin/gifts/modules', icon: LayoutGrid, color: 'bg-purple-100 text-purple-700', desc: 'Curated feed sections' },
-    { title: 'Sponsorships', href: '/api/admin/gifts/sponsors', icon: Megaphone, color: 'bg-green-100 text-green-700', desc: 'Sponsored placements' },
-    { title: 'Analytics', href: '/api/admin/gifts/analytics', icon: BarChart3, color: 'bg-indigo-100 text-indigo-700', desc: 'Gift feed performance' },
+    { title: 'Categories', href: '/api/admin/gifts/categories', icon: Tag, color: 'bg-[#f4e9d4] text-[#be8a2e]', desc: 'Gift categories (Experiences, Food, etc.)' },
+    { title: 'Occasions', href: '/api/admin/gifts/occasions', icon: Calendar, color: 'bg-[#f6ddd6] text-[#c84b36]', desc: 'Birthday, Christmas, Valentine\'s, etc.' },
+    { title: 'Personas', href: '/api/admin/gifts/personas', icon: Users, color: 'bg-[#dde6ec] text-[#4b6678]', desc: 'Gift recipient types' },
+    { title: 'Feed Modules', href: '/api/admin/gifts/modules', icon: LayoutGrid, color: 'bg-[#e2e8ec] text-[#5e7e92]', desc: 'Curated feed sections' },
+    { title: 'Sponsorships', href: '/api/admin/gifts/sponsors', icon: Megaphone, color: 'bg-[#dfecd9] text-[#4e8a5b]', desc: 'Sponsored placements' },
+    { title: 'Analytics', href: '/api/admin/gifts/analytics', icon: BarChart3, color: 'bg-[#dde6ec] text-[#4b6678]', desc: 'Gift feed performance' },
   ];
 
   return (
@@ -88,7 +88,7 @@ export default async function AdminGiftsPage() {
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#E17B5C] flex items-center justify-center shadow-warm">
+          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
             <Gift className="h-6 w-6 text-white" />
           </div>
           <div className="flex-1">

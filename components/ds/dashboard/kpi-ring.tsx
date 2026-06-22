@@ -31,24 +31,24 @@ const sizeMap = {
 
 const colorMap = {
   primary: {
-    start: 'var(--ds-primary, #06b6d4)',
-    end: 'var(--ds-secondary, #8b5cf6)',
-    glow: 'rgba(6, 182, 212, 0.4)',
+    start: 'var(--ds-primary, #cc785c)',
+    end: 'var(--ds-secondary, #5e7e92)',
+    glow: 'rgba(204, 120, 92, 0.4)',
   },
   success: {
-    start: 'var(--ds-success, #10b981)',
-    end: '#34d399',
-    glow: 'rgba(16, 185, 129, 0.4)',
+    start: 'var(--ds-success, #4e8a5b)',
+    end: '#6fae73',
+    glow: 'rgba(78, 138, 91, 0.4)',
   },
   warning: {
-    start: 'var(--ds-warning, #f59e0b)',
-    end: '#fbbf24',
-    glow: 'rgba(245, 158, 11, 0.4)',
+    start: 'var(--ds-warning, #be8a2e)',
+    end: '#d0a043',
+    glow: 'rgba(190, 138, 46, 0.4)',
   },
   error: {
-    start: 'var(--ds-error, #f43f5e)',
-    end: '#fb7185',
-    glow: 'rgba(244, 63, 94, 0.4)',
+    start: 'var(--ds-error, #c84b36)',
+    end: '#e0705a',
+    glow: 'rgba(200, 75, 54, 0.4)',
   },
 };
 

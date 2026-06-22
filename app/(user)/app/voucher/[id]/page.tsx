@@ -3,14 +3,15 @@ import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import VoucherDetailClient from "./voucher-detail-client"
 
-export default async function VoucherDetailPage({ params }: { params: { id: string } }) {
+export default async function VoucherDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const session = await auth()
   if (!session?.user?.id) {
     redirect("/login")
   }
 
   const voucher = await prisma.voucher.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: { merchant: true },
   })
 

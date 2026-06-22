@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
             <div style="font-family: sans-serif; max-width: 400px; margin: 0 auto; padding: 32px;">
               <h2 style="color: #2D2721; margin-bottom: 8px;">Your sign-in code</h2>
               <p style="color: #6B5744; margin-bottom: 24px;">Enter this code to sign in to GiftHub. It expires in 10 minutes.</p>
-              <div style="background: #FFF9ED; border: 2px solid #FFC857; border-radius: 12px; padding: 24px; text-align: center;">
+              <div style="background: #f6e1d7; border: 2px solid #cc785c; border-radius: 12px; padding: 24px; text-align: center;">
                 <span style="font-size: 36px; font-weight: bold; letter-spacing: 8px; color: #2D2721;">${otp}</span>
               </div>
               <p style="color: #6B5744; margin-top: 24px; font-size: 14px;">If you didn&apos;t request this, you can safely ignore this email.</p>

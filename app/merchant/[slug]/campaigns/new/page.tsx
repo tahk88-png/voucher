@@ -78,18 +78,18 @@ export default function NewCampaignPage() {
           ]}
         />
         <div className="mb-6 flex items-start gap-4">
-          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
-            <span className="text-[#2D2721] font-bold text-lg">C</span>
+          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+            <span className="text-white font-bold text-lg">C</span>
           </div>
           <div>
-            <h1 className="text-2xl font-semibold text-[#2D2721]">{t('merchant.createCampaign')}</h1>
-            <p className="text-sm text-[#6B5744]">{t('merchant.setUpCampaign')}</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)]">{t('merchant.createCampaign')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">{t('merchant.setUpCampaign')}</p>
           </div>
         </div>
 
         <form onSubmit={handleSubmit}>
           <WarmCard className="mb-4" padding="lg">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Basic information</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Basic information</h2>
             <div className="space-y-4">
               <div>
                 <Label htmlFor="name">Campaign Name *</Label>
@@ -106,7 +106,7 @@ export default function NewCampaignPage() {
                   name="type"
                   required
                   aria-label="Campaign type"
-                  className="w-full px-3 py-2 border rounded-md border-[rgba(139,115,85,0.15)] bg-white"
+                  className="w-full px-3 py-2 border rounded-md border-[var(--border)] bg-[var(--surface)]"
                 >
                   <option value="limited">Limited</option>
                   <option value="weekly">Weekly</option>
@@ -116,7 +116,7 @@ export default function NewCampaignPage() {
           </WarmCard>
 
           <WarmCard className="mb-4" padding="lg">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Dates</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Dates</h2>
             <div className="space-y-4">
               <div>
                 <Label htmlFor="startDate">Start Date *</Label>
@@ -142,7 +142,7 @@ export default function NewCampaignPage() {
           </WarmCard>
 
           <WarmCard className="mb-4" padding="lg">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Pricing and limits</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Pricing and limits</h2>
             <div className="space-y-4">
               <div>
                 <Label htmlFor="price">Price (leave empty for free vouchers)</Label>
@@ -154,7 +154,7 @@ export default function NewCampaignPage() {
                   min="0"
                   placeholder="0.00"
                 />
-                <p className="text-xs text-[#6B5744] mt-1">Price in major units (e.g., 5.00 for $5.00)</p>
+                <p className="text-xs text-[var(--text-muted)] mt-1">Price in major units (e.g., 5.00 for $5.00)</p>
               </div>
               <div>
                 <Label htmlFor="maxRedemptions">Max Redemptions</Label>
@@ -187,13 +187,13 @@ export default function NewCampaignPage() {
                   step="0.1"
                   placeholder="5"
                 />
-                <p className="text-xs text-[#6B5744] mt-1">Percentage of purchase price as credit (e.g., 5 for 5%)</p>
+                <p className="text-xs text-[var(--text-muted)] mt-1">Percentage of purchase price as credit (e.g., 5 for 5%)</p>
               </div>
             </div>
           </WarmCard>
 
           <WarmCard className="mb-4" padding="lg">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Terms and conditions</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Terms and conditions</h2>
             <div>
               <div>
                 <Label htmlFor="terms">Terms</Label>
@@ -201,7 +201,7 @@ export default function NewCampaignPage() {
                   id="terms"
                   name="terms"
                   rows={4}
-                  className="w-full px-3 py-2 border rounded-md border-[rgba(139,115,85,0.15)] bg-white"
+                  className="w-full px-3 py-2 border rounded-md border-[var(--border)] bg-[var(--surface)]"
                   placeholder="Terms and conditions for this campaign..."
                 />
               </div>

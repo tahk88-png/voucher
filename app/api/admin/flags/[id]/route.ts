@@ -3,6 +3,7 @@ import { withErrorHandler } from "@/lib/error-handler"
 import { requireAdminPermission } from "@/lib/admin/guards"
 import { recordAdminAudit } from "@/lib/admin/audit"
 import { prisma } from "@/lib/prisma"
+import { z } from "zod"
 
 export async function GET(
   req: NextRequest,
@@ -35,7 +36,17 @@ export async function PATCH(
 
     const { id } = await params
     const body = await req.json()
-    const { name, description, status, rules } = body
+    const flagSchema = z.object({
+      name: z.string().min(1).max(100).optional(),
+      description: z.string().max(500).optional(),
+      status: z.enum(["off", "percentage", "allowlist", "on"]).optional(),
+      rules: z.record(z.unknown()).optional(),
+    })
+    const parsed = flagSchema.safeParse(body)
+    if (!parsed.success) {
+      return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 })
+    }
+    const { name, description, status, rules } = parsed.data
 
     const existing = await prisma.featureFlag.findUnique({ where: { id } })
     if (!existing) {
@@ -47,15 +58,7 @@ export async function PATCH(
       await requireAdminPermission("admin.flags.rollout_100")
     }
 
-    const validStatuses = ["off", "percentage", "allowlist", "on"]
-    if (status && !validStatuses.includes(status)) {
-      return NextResponse.json(
-        { error: `status must be one of: ${validStatuses.join(", ")}` },
-        { status: 400 }
-      )
-    }
-
-    const data: any = {}
+    const data: Record<string, unknown> = {}
     if (name !== undefined) data.name = name
     if (description !== undefined) data.description = description
     if (status !== undefined) data.status = status

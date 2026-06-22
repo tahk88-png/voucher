@@ -203,7 +203,7 @@ function LangSwitcher({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => voi
         <svg className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       {open && (
-        <div className="absolute right-0 top-full mt-1.5 w-36 rounded-[var(--r-sm)] border border-[var(--border)] bg-white shadow-lg overflow-hidden z-50 animate-scale-in">
+        <div className="absolute right-0 top-full mt-1.5 w-36 rounded-[var(--r-sm)] border border-[var(--border)] bg-[var(--surface)] shadow-lg overflow-hidden z-50 animate-scale-in">
           {LANG_OPTIONS.map(opt => (
             <button
               key={opt.code}
@@ -225,7 +225,7 @@ function OAuthButton({ providerId, label, onClick }: { providerId: string; label
     <button
       type="button"
       onClick={onClick}
-      className="w-full flex items-center justify-center gap-3 h-12 px-4 rounded-[var(--r-sm)] border border-[var(--border)] bg-white hover:bg-[var(--surface-muted)] hover:border-[var(--border-strong)] hover:shadow-md transition-all duration-200 font-medium text-[var(--text)] btn-press group"
+      className="w-full flex items-center justify-center gap-3 h-12 px-4 rounded-[var(--r-sm)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-muted)] hover:border-[var(--border-strong)] hover:shadow-md transition-all duration-200 font-medium text-[var(--text)] btn-press group"
     >
       {OAUTH_ICONS[providerId]}
       <span className="text-sm">{label}</span>
@@ -362,16 +362,16 @@ function LoginForm() {
   const tabClass = (active: boolean) =>
     `relative flex-1 py-2.5 text-sm font-semibold rounded-[10px] transition-all duration-200 ${
       active
-        ? "bg-white text-[var(--text)] shadow-sm"
+        ? "bg-[var(--surface)] text-[var(--text)] shadow-sm"
         : "text-[var(--text-muted)] hover:text-[var(--text)]"
     }`
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FFF7E0] via-[#FFFBF5] to-[#F0E8FF]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg)] via-[var(--surface)] to-[var(--bg-2)]" />
       <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[var(--primary)] opacity-[0.12] blur-[80px] animate-orb" />
-      <div className="absolute bottom-[-15%] right-[-8%] w-[600px] h-[600px] rounded-full bg-purple-400 opacity-[0.07] blur-[100px] animate-orb-2" />
+      <div className="absolute bottom-[-15%] right-[-8%] w-[600px] h-[600px] rounded-full bg-[var(--secondary)] opacity-[0.08] blur-[100px] animate-orb-2" />
       <div className="absolute top-[40%] right-[10%] w-[300px] h-[300px] rounded-full bg-[var(--success)] opacity-[0.06] blur-[60px] animate-orb-3" />
 
       {/* Language switcher — top right */}
@@ -441,7 +441,7 @@ function LoginForm() {
                           placeholder={s.emailPlaceholder}
                           value={email}
                           onChange={e => setEmail(e.target.value)}
-                          className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-white"
+                          className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-[var(--surface)]"
                           required
                         />
                       </div>
@@ -483,7 +483,7 @@ function LoginForm() {
                         placeholder={s.otpPlaceholder}
                         value={otp}
                         onChange={e => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                        className="h-14 text-center text-2xl font-bold tracking-[0.5em] rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-white"
+                        className="h-14 text-center text-2xl font-bold tracking-[0.5em] rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-[var(--surface)]"
                         maxLength={6}
                         required
                       />
@@ -544,7 +544,7 @@ function LoginForm() {
                         placeholder={s.emailPlaceholder}
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-white"
+                        className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-[var(--surface)]"
                         required
                       />
                     </div>
@@ -558,7 +558,7 @@ function LoginForm() {
                         placeholder={s.passwordPlaceholder}
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-white"
+                        className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-[var(--surface)]"
                         required
                       />
                     </div>
@@ -613,7 +613,7 @@ function LoginForm() {
                     <div className="w-full border-t border-[var(--border)]" />
                   </div>
                   <div className="relative flex justify-center text-xs">
-                    <span className="px-2 bg-white text-[var(--text-muted)]">{s.orContinueWith}</span>
+                    <span className="px-2 bg-[var(--surface)] text-[var(--text-muted)]">{s.orContinueWith}</span>
                   </div>
                 </div>
                 <button
@@ -721,7 +721,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#FFF7E0] via-[#FFFBF5] to-[#F0E8FF]">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--bg)] via-[var(--surface)] to-[var(--bg-2)]">
         <div className="w-10 h-10 rounded-2xl gradient-brand flex items-center justify-center animate-pulse-soft shadow-lg">
           <Gift className="h-6 w-6 text-white" />
         </div>

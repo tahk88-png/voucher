@@ -54,7 +54,7 @@ function GiftCardPreview({ form }: { form: FormData }) {
   const amountStr = formatCurrency(amountNum * 100, form.currency);
   const headline = form.headline || 'Gift card';
   return (
-    <div className="rounded-2xl border border-[rgba(139,115,85,0.15)] shadow-lg overflow-hidden bg-[var(--bg)]">
+    <div className="rounded-2xl border border-[var(--border)] shadow-lg overflow-hidden bg-[var(--bg)]">
       <style
         dangerouslySetInnerHTML={{
           __html: `.gift-card-preview{--bg:${sanitizeCssValue(form.backgroundColor)};--accent:${sanitizeCssValue(form.accentColor)};--text:${sanitizeCssValue(form.textColor)};}`,
@@ -89,9 +89,9 @@ function GiftCardPreview({ form }: { form: FormData }) {
           </div>
           <p className="text-2xl font-semibold text-[var(--accent)]">{amountStr}</p>
           {form.message ? (
-            <p className="text-sm text-[#6B5744]">{form.message}</p>
+            <p className="text-sm text-[var(--text-muted)]">{form.message}</p>
           ) : (
-            <p className="text-sm text-[#6B5744]">Add a personal note</p>
+            <p className="text-sm text-[var(--text-muted)]">Add a personal note</p>
           )}
         </div>
       </div>
@@ -168,21 +168,21 @@ export default function NewGiftCardPage() {
         />
 
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#FFC857] to-[#FFB627] flex items-center justify-center shadow-warm">
-            <span className="text-[#2D2721] font-bold text-lg">G</span>
+          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+            <span className="text-white font-bold text-lg">G</span>
           </div>
           <div>
-            <h1 className="text-2xl font-semibold text-[#2D2721]">New gift card</h1>
-            <p className="text-sm text-[#6B5744]">Customize and issue a gift card</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)]">New gift card</h1>
+            <p className="text-sm text-[var(--text-muted)]">Customize and issue a gift card</p>
           </div>
         </div>
 
         <div className="lg:grid lg:grid-cols-[1fr,360px] lg:gap-10">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <WarmCard padding="lg" className="bg-white">
+            <WarmCard padding="lg" className="bg-[var(--surface)]">
               <div>
-                <h2 className="text-base font-semibold text-[#2D2721]">Value and validity</h2>
-                <p className="text-sm text-[#6B5744]">Set amount, currency, and expiration</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">Value and validity</h2>
+                <p className="text-sm text-[var(--text-muted)]">Set amount, currency, and expiration</p>
               </div>
               <div className="space-y-4 mt-4">
                 <div>
@@ -194,7 +194,7 @@ export default function NewGiftCardPage() {
                     onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                     placeholder="50"
                     required
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
@@ -206,7 +206,7 @@ export default function NewGiftCardPage() {
                     onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
                     maxLength={3}
                     required
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -218,7 +218,7 @@ export default function NewGiftCardPage() {
                       value={formData.validFrom}
                       onChange={(e) => setFormData({ ...formData, validFrom: e.target.value })}
                       required
-                      className="mt-1 border-[rgba(139,115,85,0.15)]"
+                      className="mt-1 border-[var(--border)]"
                     />
                   </div>
                   <div>
@@ -229,7 +229,7 @@ export default function NewGiftCardPage() {
                       value={formData.validTo}
                       onChange={(e) => setFormData({ ...formData, validTo: e.target.value })}
                       disabled={formData.noExpiry}
-                      className="mt-1 border-[rgba(139,115,85,0.15)]"
+                      className="mt-1 border-[var(--border)]"
                     />
                   </div>
                 </div>
@@ -246,10 +246,10 @@ export default function NewGiftCardPage() {
               </div>
             </WarmCard>
 
-            <WarmCard padding="lg" className="bg-white">
+            <WarmCard padding="lg" className="bg-[var(--surface)]">
               <div>
-                <h2 className="text-base font-semibold text-[#2D2721]">Customer purchase</h2>
-                <p className="text-sm text-[#6B5744]">Allow customers to buy this gift card online</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">Customer purchase</h2>
+                <p className="text-sm text-[var(--text-muted)]">Allow customers to buy this gift card online</p>
               </div>
               <div className="space-y-4 mt-4">
                 <div className="flex items-center gap-2">
@@ -271,9 +271,9 @@ export default function NewGiftCardPage() {
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                       placeholder={formData.amount || 'Same as amount'}
-                      className="mt-1 border-[rgba(139,115,85,0.15)]"
+                      className="mt-1 border-[var(--border)]"
                     />
-                    <p className="text-xs text-[#8B7355] mt-1">
+                    <p className="text-xs text-[var(--text-faint)] mt-1">
                       Leave empty to sell at face value. Set a different price for promotions.
                     </p>
                   </div>
@@ -281,10 +281,10 @@ export default function NewGiftCardPage() {
               </div>
             </WarmCard>
 
-            <WarmCard padding="lg" className="bg-white">
+            <WarmCard padding="lg" className="bg-[var(--surface)]">
               <div>
-                <h2 className="text-base font-semibold text-[#2D2721]">Branding and message</h2>
-                <p className="text-sm text-[#6B5744]">Headline, message, images, and colors</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">Branding and message</h2>
+                <p className="text-sm text-[var(--text-muted)]">Headline, message, images, and colors</p>
               </div>
               <div className="space-y-4 mt-4">
                 <div>
@@ -295,7 +295,7 @@ export default function NewGiftCardPage() {
                     value={formData.headline}
                     onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
                     placeholder="Gift for coffee lovers"
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
@@ -306,7 +306,7 @@ export default function NewGiftCardPage() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Add a personal message for the recipient"
                     rows={3}
-                    className="w-full mt-1 rounded-md border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm"
+                    className="w-full mt-1 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -318,7 +318,7 @@ export default function NewGiftCardPage() {
                       value={formData.logoUrl}
                       onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })}
                       placeholder="https://..."
-                      className="mt-1 border-[rgba(139,115,85,0.15)]"
+                      className="mt-1 border-[var(--border)]"
                     />
                   </div>
                   <div>
@@ -329,7 +329,7 @@ export default function NewGiftCardPage() {
                       value={formData.imageUrl}
                       onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                       placeholder="https://..."
-                      className="mt-1 border-[rgba(139,115,85,0.15)]"
+                      className="mt-1 border-[var(--border)]"
                     />
                   </div>
                 </div>
@@ -378,7 +378,7 @@ export default function NewGiftCardPage() {
                     }
                     placeholder="GIFT"
                     maxLength={12}
-                    className="mt-1 border-[rgba(139,115,85,0.15)]"
+                    className="mt-1 border-[var(--border)]"
                   />
                 </div>
               </div>
@@ -401,14 +401,14 @@ export default function NewGiftCardPage() {
 
           <aside className="hidden lg:block">
             <div className="sticky top-6">
-              <p className="text-sm font-medium text-[#8B7355] mb-3">Preview</p>
+              <p className="text-sm font-medium text-[var(--text-faint)] mb-3">Preview</p>
               <GiftCardPreview form={formData} />
             </div>
           </aside>
         </div>
 
         <div className="mt-8 lg:hidden">
-          <p className="text-sm font-medium text-[#8B7355] mb-3">Preview</p>
+          <p className="text-sm font-medium text-[var(--text-faint)] mb-3">Preview</p>
           <GiftCardPreview form={formData} />
         </div>
       </div>

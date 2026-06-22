@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { SUPPORTED_CURRENCIES } from '@/lib/currency';
+import { SUPPORTED_CURRENCIES } from '@/lib/currency-constants';
 
 const CURRENCY_LABELS: Record<string, string> = {
   EUR: '\u20AC EUR', USD: '$ USD', GBP: '\u00A3 GBP', SEK: 'kr SEK', NOK: 'kr NOK',
@@ -36,7 +36,7 @@ export default function CurrencySelector() {
     <select
       value={currency}
       onChange={(e) => setCurrency(e.target.value)}
-      className="border border-[#e8e0d8] rounded-lg px-3 py-2 text-sm bg-white text-[#2D2721] focus:outline-none focus:ring-2 focus:ring-[#FFC857] cursor-pointer"
+      className="border border-[#e8e0d8] rounded-lg px-3 py-2 text-sm bg-white text-[#2D2721] focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
       aria-label="Select currency"
     >
       {SUPPORTED_CURRENCIES.map((c) => (

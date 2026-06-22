@@ -82,11 +82,11 @@ export default function GenerateVouchersButton({
   return (
     <WarmCard
       padding="lg"
-      className="absolute z-10 w-full max-w-sm right-0 top-full mt-2 bg-white border border-[rgba(139,115,85,0.15)] shadow-warm"
+      className="absolute z-10 w-full max-w-sm right-0 top-full mt-2 bg-[var(--surface)] border border-[var(--border)] shadow-warm"
     >
       <div className="space-y-1">
-        <h3 className="text-sm font-semibold text-[#2D2721]">Generate vouchers</h3>
-        <p className="text-xs text-[#6B5744]">Create vouchers from this campaign</p>
+        <h3 className="text-sm font-semibold text-[var(--text)]">Generate vouchers</h3>
+        <p className="text-xs text-[var(--text-muted)]">Create vouchers from this campaign</p>
       </div>
       <div className="space-y-4 mt-4">
         <div>
@@ -99,7 +99,7 @@ export default function GenerateVouchersButton({
             value={count}
             onChange={(e) => setCount(e.target.value)}
             required
-            className="mt-1 border-[rgba(139,115,85,0.15)]"
+            className="mt-1 border-[var(--border)]"
           />
         </div>
         <div className="flex gap-2 justify-end">

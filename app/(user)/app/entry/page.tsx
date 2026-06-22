@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { resolveAccessProfile, resolveDefaultLandingForProfile } from "@/lib/access-control";
+import { logger } from "@/lib/logger";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,7 @@ export default async function AppEntryPage() {
 
     const profile = await resolveAccessProfile(session.user.id, session.user.email ?? null);
     if (!profile) {
-      console.warn(`[AppEntry] Profile resolution failed for user ${session.user.id}`);
+      logger.warn("AppEntry: profile resolution failed", { userId: session.user.id });
       redirect("/login");
     }
 
@@ -29,7 +30,7 @@ export default async function AppEntryPage() {
     if (isRedirectError(error)) {
       throw error;
     }
-    console.error("[AppEntry] Unhandled error:", error);
+    logger.error("AppEntry: unhandled error", { error: error instanceof Error ? error.message : String(error) });
     redirect("/login");
   }
 }

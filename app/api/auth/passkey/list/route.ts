@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 
 /**
  * GET — List user's passkeys (authed)
@@ -29,7 +30,7 @@ export async function GET() {
 
     return NextResponse.json({ passkeys });
   } catch (error) {
-    console.error('Passkey list error:', error);
+    logger.error('Passkey list error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Failed to list passkeys' }, { status: 500 });
   }
 }
@@ -64,7 +65,7 @@ export async function DELETE(req: Request) {
 
     return NextResponse.json({ deleted: true });
   } catch (error) {
-    console.error('Passkey delete error:', error);
+    logger.error('Passkey delete error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ error: 'Failed to delete passkey' }, { status: 500 });
   }
 }

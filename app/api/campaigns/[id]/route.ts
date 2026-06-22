@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
+import { requireMerchantCapability } from '@/lib/access-control';
+import { requireCampaignActivationAccess } from '@/lib/billing';
 import { dispatchMerchantAnnouncement } from '@/lib/notifications';
+import { queueWebhook } from '@/lib/webhooks';
 import { CacheKeys, getCached, invalidateCache } from '@/lib/cache';
 import { withErrorHandler } from '@/lib/error-handler';
 import { z } from 'zod';
@@ -97,6 +100,19 @@ export async function PUT(
     if (data.maxPurchases !== undefined) updateData.maxPurchases = data.maxPurchases;
     if (data.terms !== undefined) updateData.terms = data.terms;
     if (data.creditPercentage !== undefined) updateData.creditPercentage = data.creditPercentage;
+
+    // Promotion boosts (weekly-email feature + push notification + a paid
+    // promoted window) are a Pro+ capability — they place the campaign in
+    // platform-wide channels. Gate ENABLING them behind promotion.boost so
+    // they aren't free on Starter. Turning a boost OFF never needs the
+    // entitlement.
+    const enablingBoost =
+      data.promotedWeeklyEmail === true ||
+      data.promotedNotification === true ||
+      (data.promotedUntil !== undefined && data.promotedUntil !== null);
+    if (enablingBoost) {
+      await requireMerchantCapability(campaign.merchantId, campaign.merchant.slug, 'promotion.boost');
+    }
     if (data.promotedWeeklyEmail !== undefined) updateData.promotedWeeklyEmail = data.promotedWeeklyEmail;
     if (data.promotedNotification !== undefined) updateData.promotedNotification = data.promotedNotification;
     if (data.promotedUntil !== undefined) {
@@ -105,6 +121,14 @@ export async function PUT(
     if (data.status !== undefined) updateData.status = data.status;
 
     const previousStatus = campaign.status;
+
+    // Activating a draft must respect the plan's activeCampaigns limit.
+    // Campaigns are created as drafts (which don't count as active), so the
+    // create-time check can't enforce this — gate the transition here.
+    if (data.status === 'active' && previousStatus !== 'active') {
+      await requireCampaignActivationAccess(campaign.merchantId);
+    }
+
     const updated = await prisma.campaign.update({
       where: { id },
       data: updateData,
@@ -119,6 +143,33 @@ export async function PUT(
         title: `${campaign.merchant.name} launched a new campaign`,
         body: `New campaign: ${updated.name}. Check out the latest offer.`,
         url,
+      });
+      // Notify merchant webhooks subscribed to campaign.started. The
+      // auto-expire cron emits campaign.ended from the reverse side;
+      // merchants can wire both events to track campaign lifecycle.
+      queueWebhook(campaign.merchantId, 'campaign.started', {
+        campaignId: updated.id,
+        merchantId: campaign.merchantId,
+        name: updated.name,
+        type: updated.type,
+        startDate: updated.startDate.toISOString(),
+        endDate: updated.endDate.toISOString(),
+        startedAt: new Date().toISOString(),
+      });
+    }
+
+    // Symmetric path: merchant manually ends a campaign before its
+    // endDate. The cron fires the same event when endDate passes
+    // naturally; either way merchants get one campaign.ended webhook
+    // per campaign-close transition.
+    if (previousStatus !== 'ended' && updated.status === 'ended') {
+      queueWebhook(campaign.merchantId, 'campaign.ended', {
+        campaignId: updated.id,
+        merchantId: campaign.merchantId,
+        name: updated.name,
+        type: updated.type,
+        endDate: updated.endDate.toISOString(),
+        endedAt: new Date().toISOString(),
       });
     }
 

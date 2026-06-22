@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Scale, RefreshCw, ChevronLeft, ChevronRight, CheckCircle, XCircle } from 'lucide-react';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
+import { showError } from '@/lib/toast-helpers';
 
 type Appeal = {
   id: string;
@@ -60,7 +61,7 @@ export default function AppealsPage() {
 
   async function reviewAppeal(id: string, decision: 'approved' | 'rejected') {
     if (!resolutionNote) {
-      alert('Lisa otsuse põhjus');
+      showError('Add a reason for the decision before submitting.');
       return;
     }
     setActionLoading(id);

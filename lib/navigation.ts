@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma"
 import { Prisma } from "@prisma/client"
+import { logger } from "@/lib/logger"
 
 export type NavigationPosition = "header" | "footer"
 export type NavigationScope = "tenant" | "hub"
@@ -58,10 +59,12 @@ export async function getNavigationLinks({
       dbUnavailableUntil = now + DB_RETRY_COOLDOWN_MS
       if (now - lastDbUnavailableLogAt > DB_RETRY_COOLDOWN_MS) {
         lastDbUnavailableLogAt = now
-        console.warn("navigation: database unavailable, using fallback links")
+        logger.warn("navigation: database unavailable, using fallback links")
       }
     } else {
-      console.warn("navigation: failed to load links, using fallback links")
+      logger.warn("navigation: failed to load links, using fallback links", {
+        error: error instanceof Error ? error.message : String(error),
+      })
     }
     return getFallbackNavigation(scope)[position]
   }

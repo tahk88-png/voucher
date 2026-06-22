@@ -28,11 +28,11 @@ interface AnimatedLineChartProps {
 
 const DEFAULT_COLORS = [
   "var(--primary)",
-  "#10b981",
-  "#f59e0b",
-  "#ef4444",
-  "#8b5cf6",
-  "#06b6d4",
+  "#5e7e92",
+  "#be8a2e",
+  "#4e8a5b",
+  "#b5613f",
+  "#7e9cae",
 ]
 
 function CustomTooltip({ active, payload, label }: TooltipProps<number, string>) {

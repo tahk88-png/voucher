@@ -80,7 +80,7 @@ export async function generateGiftSuggestions(
   }
 
   const products = await prisma.giftProduct.findMany({
-    where: where as Parameters<typeof prisma.giftProduct.findMany>[0]['where'],
+    where: where as any,
     include: {
       category: { select: { name: true } },
       occasions: { include: { occasion: { select: { name: true } } } },
@@ -157,7 +157,7 @@ export async function generateGiftBundle(
   }
 
   const candidates = await prisma.giftProduct.findMany({
-    where: where as Parameters<typeof prisma.giftProduct.findMany>[0]['where'],
+    where: where as any,
     orderBy: [{ engagementScore: 'desc' }, { purchaseCount: 'desc' }],
     take: 20,
   });

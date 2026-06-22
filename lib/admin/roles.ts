@@ -79,6 +79,13 @@ export const ADMIN_PERMISSIONS = [
 
   // Legal Hold
   'admin.legal_hold.manage',
+
+  // Email System
+  'admin.email.read',
+  'admin.email.send',
+  'admin.email.templates',
+  'admin.email.suppressions',
+  'admin.email.config',
 ] as const;
 
 export type AdminPermission = (typeof ADMIN_PERMISSIONS)[number];
@@ -93,6 +100,11 @@ export const ADMIN_ROLE_PERMISSIONS: Record<AdminRoleType, readonly AdminPermiss
   super_admin: ALL_PERMISSIONS,
 
   ops_admin: [
+    // Email (full except config)
+    'admin.email.read',
+    'admin.email.send',
+    'admin.email.templates',
+    'admin.email.suppressions',
     // Merchants (full)
     'admin.merchants.read',
     'admin.merchants.activate',
@@ -156,6 +168,9 @@ export const ADMIN_ROLE_PERMISSIONS: Record<AdminRoleType, readonly AdminPermiss
   ],
 
   support_admin: [
+    // Email (read + suppressions)
+    'admin.email.read',
+    'admin.email.suppressions',
     // Support (full)
     'admin.support.read',
     'admin.support.manage',
@@ -185,6 +200,7 @@ export const STEP_UP_ACTIONS: readonly AdminPermission[] = [
   'admin.flags.rollout_100',
   'admin.legal_hold.manage',
   'admin.system.manage',
+  'admin.email.config',
 ] as const;
 
 // ---------------------------------------------------------------------------

@@ -78,7 +78,7 @@ export function withTenantContext<T>(
   context: TenantContext,
   callback: () => T | Promise<T>
 ): Promise<T> {
-  return tenantContextStorage.run(context, callback);
+  return Promise.resolve(tenantContextStorage.run(context, callback));
 }
 
 /**
@@ -149,6 +149,26 @@ export function hasAnyRole(...roles: string[]): boolean {
 export function hasAllRoles(...roles: string[]): boolean {
   const userRoles = getUserRoles();
   return roles.every((role) => userRoles.includes(role));
+}
+
+/**
+ * Check if user has a specific permission
+ *
+ * Permissions are treated as roles for the purpose of this check.
+ * In a full implementation, this would map permissions to roles
+ * or check a permission matrix.
+ *
+ * @param permission Permission string to check (e.g. 'create:campaigns')
+ * @returns True if user has the permission
+ */
+export function hasPermission(permission: string): boolean {
+  const context = getTenantContextOrUndefined();
+  if (!context) return false;
+  const userRoles = context.userRoles;
+  // Admin roles have all permissions
+  if (userRoles.includes('merchant_admin') || userRoles.includes('admin')) return true;
+  // Otherwise check if the permission is listed as a role
+  return userRoles.includes(permission);
 }
 
 /**

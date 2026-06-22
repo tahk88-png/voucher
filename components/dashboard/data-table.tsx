@@ -173,6 +173,7 @@ export function DataTable<T extends Record<string, unknown>>({
             <button
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               disabled={page === 0}
+              aria-label="Previous page"
               className="p-1.5 rounded-lg transition-opacity disabled:opacity-30"
               style={{ color: 'var(--text, #111)' }}
             >
@@ -184,6 +185,7 @@ export function DataTable<T extends Record<string, unknown>>({
             <button
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               disabled={page >= totalPages - 1}
+              aria-label="Next page"
               className="p-1.5 rounded-lg transition-opacity disabled:opacity-30"
               style={{ color: 'var(--text, #111)' }}
             >

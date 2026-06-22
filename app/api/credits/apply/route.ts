@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { applyCredit } from '@/lib/credits';
 import { getMerchantBySlug } from '@/lib/tenant';
 import { withErrorHandler } from '@/lib/error-handler';
+import { rateLimit } from '@/lib/rate-limit';
 import { z } from 'zod';
 
 const applyCreditSchema = z.object({
@@ -16,6 +17,14 @@ export async function POST(req: NextRequest) {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const limit = rateLimit(`credits_apply:${session.user.id}`, 20, 60 * 1000, 'credits_apply');
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: 'Too many requests' },
+        { status: 429, headers: { 'Retry-After': String(Math.ceil((limit.resetAt - Date.now()) / 1000)) } },
+      );
     }
 
     const body = await req.json();

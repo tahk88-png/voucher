@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { pushNotifyUser } from '@/lib/push-notify';
+import { logger } from '@/lib/logger';
 import { withErrorHandler } from '@/lib/error-handler';
 import { startJobRun, completeJobRun } from '@/lib/admin/jobs';
 
@@ -54,7 +55,9 @@ export async function GET(req: NextRequest) {
             title: `Flash Sale at ${voucher.merchant.name}!`,
             body: `Limited time offer — ends ${voucher.flashSaleEndsAt ? new Date(voucher.flashSaleEndsAt).toLocaleTimeString() : 'soon'}`,
             url: `/app`,
-          }).catch(() => {})
+          }).catch((err) => {
+            logger.error('[flash-sale-alerts] Push notify failed', { error: err instanceof Error ? err.message : String(err) });
+          })
         );
         await Promise.all(pushPromises);
         notified += userIds.length;

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { AccessControlError, accessErrorResponse, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { withErrorHandler } from '@/lib/error-handler';
+import { CacheKeys, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
 
 const bundleSchema = z.object({
@@ -40,6 +41,8 @@ export async function PUT(
       where: { id },
       data: { conditionsJson: updatedConditions },
     });
+
+    await invalidateCache(CacheKeys.publicMerchantVouchers(merchant.id));
 
     return NextResponse.json(updated);
   });

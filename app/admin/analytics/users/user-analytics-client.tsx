@@ -10,6 +10,8 @@ import {
   DashboardHeader,
   DataTable,
 } from '@/components/dashboard';
+import type { Column } from '@/components/dashboard/data-table';
+import type { DateRangeOption } from '@/components/dashboard';
 import {
   AnimatedBarChart,
   HeatmapChart,
@@ -36,20 +38,20 @@ const navLinks = [
 ];
 
 export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData }) {
-  const [dateRange, setDateRange] = useState('30d');
+  const [dateRange, setDateRange] = useState<DateRangeOption>('30d');
   const { dauWauMau, newUsersOverTime, signupFunnel, cohorts, activityHeatmap, topUsers, demographics } = data;
 
   const dauWauRatio = dauWauMau.wau > 0 ? (dauWauMau.dau / dauWauMau.wau * 100).toFixed(1) : '0';
   const dauMauRatio = dauWauMau.mau > 0 ? (dauWauMau.dau / dauWauMau.mau * 100).toFixed(1) : '0';
 
-  const userColumns = [
+  const userColumns: Column<Record<string, unknown>>[] = [
     { key: 'name', header: 'User' },
     { key: 'purchases', header: 'Purchases' },
     {
       key: 'totalSpent',
       header: 'Total Spent',
-      render: (row: (typeof topUsers)[0]) =>
-        new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(row.totalSpent),
+      render: (row) =>
+        new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(row.totalSpent as number),
     },
   ];
 
@@ -68,7 +70,7 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
                   : 'border-transparent text-[var(--text-secondary,#6B5744)] hover:text-[var(--text-primary,#2D2721)]'
               }`}
             >
-              {link.label}
+              {link.header}
             </Link>
           ))}
         </nav>
@@ -88,31 +90,26 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
             title="DAU"
             value={dauWauMau.dau.toLocaleString()}
             icon={<Users className="h-5 w-5" />}
-            colors={["blue"]}
           />
           <MetricCard
             title="WAU"
             value={dauWauMau.wau.toLocaleString()}
             icon={<UserPlus className="h-5 w-5" />}
-            colors={["indigo"]}
           />
           <MetricCard
             title="MAU"
             value={dauWauMau.mau.toLocaleString()}
             icon={<UserCheck className="h-5 w-5" />}
-            colors={["purple"]}
           />
           <MetricCard
             title="DAU/WAU"
             value={`${dauWauRatio}%`}
             icon={<Activity className="h-5 w-5" />}
-            colors={["emerald"]}
           />
           <MetricCard
             title="DAU/MAU"
             value={`${dauMauRatio}%`}
             icon={<Activity className="h-5 w-5" />}
-            colors={["orange"]}
           />
         </div>
 
@@ -122,7 +119,7 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
             <AnimatedBarChart
               data={newUsersOverTime}
               xAxisKey="date"
-              dataKeys={["value"
+              dataKeys={["value"]}
               colors={["#3B82F6"]}
               height={280}
             />
@@ -131,11 +128,8 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
           {/* Signup Funnel */}
           <ChartCard title="Signup Funnel" subtitle="Visitor to first purchase">
             <FunnelChart
-              data={signupFunnel}
-              stageKey="stage"
-              
+              data={signupFunnel.map((f) => ({ name: f.stage, value: f.value }))}
               height={280}
-              colors={['#3B82F6', '#8B5CF6', '#10B981', '#F59E0B']}
             />
           </ChartCard>
         </AnalyticsGrid>
@@ -143,19 +137,15 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
         {/* Retention Cohort Heatmap */}
         <ChartCard title="User Retention Cohort" subtitle="Monthly retention by signup cohort">
           <HeatmapChart
-            data={cohorts.flatMap((c) =>
-              c.retention.map((r, i) => ({
-                x: `M${i}`,
-                y: c.cohort,
-                value: Math.round(r * 100),
-              }))
+            data={cohorts.map((c) =>
+              c.retention.map((r) => Math.round(r * 100))
             )}
-            xAxisKey="x"
-            dataKeys={["y"
-            
+            xLabels={cohorts.length > 0
+              ? Array.from({ length: Math.max(...cohorts.map((c) => c.retention.length)) }, (_, i) => `M${i}`)
+              : []
+            }
+            yLabels={cohorts.map((c) => c.cohort)}
             height={300}
-            
-            %`}
           />
         </ChartCard>
 
@@ -163,25 +153,29 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
           {/* Active Users Heatmap */}
           <ChartCard title="Activity Heatmap" subtitle="Active users by day & hour">
             <HeatmapChart
-              data={activityHeatmap.map((d) => ({
-                x: `${d.hour}:00`,
-                y: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.day],
-                value: d.value,
-              }))}
-              xAxisKey="x"
-              dataKeys={["y"
-              
+              data={(() => {
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const grid: number[][] = [];
+                for (let d = 0; d < days.length; d++) {
+                  const row: number[] = [];
+                  for (let h = 0; h < 24; h++) {
+                    const entry = activityHeatmap.find((p) => p.day === d && p.hour === h);
+                    row.push(entry?.value ?? 0);
+                  }
+                  grid.push(row);
+                }
+                return grid;
+              })()}
+              xLabels={Array.from({ length: 24 }, (_, i) => `${i}:00`)}
+              yLabels={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
               height={250}
-              
             />
           </ChartCard>
 
           {/* User Demographics */}
-          <ChartCard title="User Demographics" subtitle="By country">
+          <ChartCard title="User Demographics" subtitle="By language">
             <PieDonutChart
-              data={demographics}
-              
-              
+              data={demographics.map((d) => ({ name: d.header, value: d.value }))}
               height={250}
               donut
             />
@@ -191,10 +185,9 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
         {/* Top Users Table */}
         <ChartCard title="Top Users by Activity" subtitle="Most active purchasers (30 days)">
           <DataTable
-            data={topUsers}
+            data={topUsers as unknown as Record<string, unknown>[]}
             columns={userColumns}
             pageSize={10}
-            searchable
           />
         </ChartCard>
       </div>

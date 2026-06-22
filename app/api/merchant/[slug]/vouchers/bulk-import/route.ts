@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { AccessControlError, accessErrorResponse, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
+import { AccessControlError, accessErrorResponse, requireMerchantProfileAccessBySlug, requireMerchantCapability } from '@/lib/access-control';
 import { withErrorHandler } from '@/lib/error-handler';
+import { CacheKeys, invalidateCache } from '@/lib/cache';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,6 +16,9 @@ export async function POST(
   return withErrorHandler(async () => {
   const { slug } = await params
     const { merchant, profile } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
+    // Gate bulk creation behind the same entitlement as single create —
+    // otherwise a locked/over-limit merchant creates up to 500 free.
+    await requireMerchantCapability(merchant.id, merchant.slug, 'voucher.create');
 
     const contentType = req.headers.get('content-type') || '';
     let rows: Array<{
@@ -91,6 +95,8 @@ export async function POST(
         payloadJson: { count: created.length },
       },
     });
+
+    await invalidateCache(CacheKeys.publicMerchantVouchers(merchant.id));
 
     return NextResponse.json({ imported: created.length, ids: created.map(v => v.id) });
   });

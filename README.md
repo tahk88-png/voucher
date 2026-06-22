@@ -2,40 +2,56 @@
 
 Merchant-owned referral infrastructure: branded vouchers and store credit. Pay for results, not reach. Production-ready, global, multi-tenant; Web and PWA.
 
-**Status**: ✅ MVP Complete - Ready for launch mode testing
-
-See [MVP_COMPLIANCE.md](docs/MVP_COMPLIANCE.md) for full compliance report.
+**Status**: Production-ready. Core commerce, payouts, loyalty, and observability all shipped. See the feature matrix below for the current-state breakdown.
 
 ## Quick Links
 
-- [Testing Guide](docs/TESTING_GUIDE.md) - Test all 8 MVP flows
-- [Launch Mode Guide](docs/LAUNCH_MODE_IMPLEMENTATION.md) - Kill switch & feature flags
-- [Deployment Checklist](docs/DEPLOYMENT_CHECKLIST.md) - Pre-production checklist
-- [Configuration Guide](docs/CONFIGURATION_GUIDE.md) - Complete configuration reference
-- [Setup Verification](docs/SETUP_VERIFICATION.md) - Verify MVP setup
-- [V2 Backlog](docs/V2_BACKLOG.md) - Future features (documented only)
+- [Contributing](CONTRIBUTING.md) — setup, conventions, PR checklist
+- [Architecture Decision Records](docs/adr/README.md) — the "why" behind key choices
+- [Deployment Checklist](docs/DEPLOYMENT_CHECKLIST.md) — pre-production gate
+- [Configuration Guide](docs/CONFIGURATION_GUIDE.md) — every env var explained
+- [API Reference](docs/API.md) — public REST + webhook surface
+- [Monitoring](docs/MONITORING.md) — Sentry, Prometheus, cron telemetry
+- [Security Checklist](docs/SECURITY_CHECKLIST.md) — live hardening list
+- [Backup Strategy](docs/BACKUP_STRATEGY.md) — DB backup + restore runbook
+- [Historical docs](docs/archive/README.md) — MVP-era snapshots (read-only)
 
-## Features
+## Feature matrix
 
-- **Multi-tenant Architecture**: Each merchant is a tenant with isolated data
-- **Voucher Management**: Create, publish, and manage vouchers with custom designs
-- **Campaign Management**: Create campaigns with pricing, limits, and referral credit percentages
-- **Event Management**: Create events with tickets, capacity management, and ticket types
-- **Referral System**: Users share vouchers; referrers earn merchant-specific credit
-- **Credit System**: Non-transferable, per-merchant credits that expire
-- **Weekly Drops**: Limited-time voucher drops with stock management
-- **PWA Support**: Installable web app with offline QR code generation
-- **RBAC**: Role-based access control (platform_admin, merchant_admin, merchant_staff, user)
-- **Fraud Prevention**: Rate limiting, self-referral prevention, risk signals
-- **Stripe Integration**: Payment processing for voucher and ticket purchases
+| Area | State | Notes |
+|---|---|---|
+| Auth (OTP / password / OAuth / Passkeys / TOTP) | Shipped | NextAuth v5, JWT sessions — see [ADR-0003](docs/adr/0003-nextauth-v5-jwt-sessions.md) |
+| Multi-tenant merchant panel (campaigns / vouchers / gift cards / team) | Shipped | `app/merchant/[slug]/*` |
+| Admin control panel (RBAC / audit / moderation / flags / ops / analytics) | Shipped | `app/admin/*`, 5 admin sub-roles |
+| Stripe checkout + webhooks | Shipped | `app/api/stripe/*` |
+| Merchant payouts — Stripe Connect | Shipped | Account onboarding, `transfer_data` + `application_fee_amount` on checkout |
+| Email sender system (queue / suppression / webhook / templates) | Shipped | DB-backed queue — see [ADR-0001](docs/adr/0001-database-backed-email-queue.md), Resend + SES + SMTP — [ADR-0002](docs/adr/0002-resend-primary-email-provider.md) |
+| i18n (15 locales) | Shipped | next-intl with "as-needed" prefix — see [ADR-0004](docs/adr/0004-next-intl-as-needed-locale-prefix.md) |
+| Domain verification (merchant custom domain) | Shipped | DNS TXT record check |
+| Merchant outbound webhooks | Shipped | HMAC-signed, event-filtered, SSRF-blocked |
+| User cashback tracking | Shipped | `app/app/cashback`, reuses `CreditLedger` |
+| Merchant notification preferences | Shipped | Per-member `notificationPrefs` JSONB |
+| Reviews & ratings | Shipped | Wired into campaign detail page |
+| Loyalty tiers (bronze / silver / gold / platinum / diamond) | Shipped | Nightly recompute cron `/api/cron/loyalty-tiers` |
+| Gamification (streaks / badges / levels) | Shipped | Sweep cron `/api/cron/streaks-badges` |
+| PWA (installable, offline QR) | Shipped | `next-pwa` + service worker |
+| Sentry (client / server / edge) | Shipped | `browserTracingIntegration` for WebAPI spans |
+| Web Vitals reporting (CLS / INP / LCP / FCP / TTFB) | Shipped | `components/web-vitals.tsx` → `/api/metrics/vitals` |
+| Prometheus metrics (HTTP / DB / cache / rate-limit / email-queue / payout-backlog) | Shipped | `/api/admin/ops/metrics/prometheus` |
+| Bundle analyzer | Opt-in | `pnpm build:analyze` |
+| Subscription boxes | Models only | Not yet shipped — schema in place |
+| Rentals | Models only | Under review — likely to be removed |
+| Storybook / component docs | Not started | Deferred pending design-system owner |
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14 (App Router), React, TypeScript, TailwindCSS, shadcn/ui
-- **Backend**: Next.js Route Handlers, NextAuth
-- **Database**: PostgreSQL with Prisma ORM
-- **Cache**: Redis (optional for local dev)
-- **Auth**: Email magic link, Google OAuth, Apple OAuth
+- **Frontend**: Next.js 15 (App Router), React 18, TypeScript, Tailwind CSS, Radix UI, warm design tokens — see [ADR-0005](docs/adr/0005-warm-design-tokens.md)
+- **Backend**: Next.js Route Handlers, NextAuth v5
+- **Database**: PostgreSQL + Prisma ORM (40+ models)
+- **Cache / rate limit**: Redis (distributed) with in-memory fallback
+- **Payments**: Stripe Checkout + Stripe Connect (transfer_data)
+- **Email**: Resend (primary) → SES → SMTP failover
+- **Observability**: Sentry + Winston logger + Prometheus scrape endpoint
 
 ## Getting Started
 

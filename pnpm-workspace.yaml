@@ -1,3 +1,10 @@
+# Single-package repo (not a monorepo). pnpm 9.12+ requires a `packages`
+# field whenever pnpm-workspace.yaml exists, otherwise every pnpm command
+# fails with "packages field missing or empty". Declaring the root as the
+# only package satisfies that without changing dependency resolution.
+packages:
+  - '.'
+
 onlyBuiltDependencies:
   - '@prisma/client'
   - '@prisma/engines'

@@ -6,9 +6,10 @@ import { formatCurrency } from '@/lib/utils';
 import { WarmCard } from '@/components/warm-card';
 import EventPurchaseClient from './event-purchase-client';
 
-export default async function PublicEventPage({ params }: { params: { id: string } }) {
+export default async function PublicEventPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const event = await prisma.event.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       merchant: {
         select: {
@@ -28,7 +29,7 @@ export default async function PublicEventPage({ params }: { params: { id: string
 
   if (event.status !== 'published') {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
+      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#fcfbf8] via-[#f4f1ea] to-[#f6e1d7]">
         <WarmCard padding="lg" className="max-w-md text-center bg-white">
           <p className="text-sm text-[#6B5744]">
             This event is not available for ticket purchase.
@@ -64,10 +65,10 @@ export default async function PublicEventPage({ params }: { params: { id: string
     background?: string;
   } | null;
 
-  const accentColor = brandColors?.primary || '#FFC857';
+  const accentColor = brandColors?.primary || '#cc785c';
 
   return (
-    <div className="min-h-screen p-4 sm:p-8 bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
+    <div className="min-h-screen p-4 sm:p-8 bg-gradient-to-br from-[#fcfbf8] via-[#f4f1ea] to-[#f6e1d7]">
       <div className="container mx-auto max-w-4xl space-y-6">
         <WarmCard padding="lg" className="bg-white">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">

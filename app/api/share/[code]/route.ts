@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { logger } from '@/lib/logger';
 
 /**
  * GET /api/share/[code]
@@ -33,7 +34,7 @@ export async function GET(
 
     // Track the share click (fire and forget)
     trackShareClick(type, id, refCode, req).catch((err) =>
-      console.error('[share] Tracking error:', err)
+      logger.error('[share] Tracking error', { error: err instanceof Error ? err.message : String(err) })
     );
 
     // Determine redirect URL
@@ -90,7 +91,7 @@ export async function GET(
 
     return NextResponse.redirect(redirectUrl, { status: 302 });
   } catch (error) {
-    console.error('[share] Error:', error);
+    logger.error('[share] Error', { error: error instanceof Error ? error.message : String(error) });
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
     return NextResponse.redirect(baseUrl, { status: 302 });
   }

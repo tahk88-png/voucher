@@ -147,6 +147,14 @@ export async function issueRefund(input: {
     })
   }
 
+  // Never refund more than was actually captured. A partial-refund amount
+  // larger than the charge would over-refund via Stripe and write an
+  // inflated RefundRecord.amountRefunded; clamp it to the charge total.
+  const capturedAmount = purchase.amount ?? purchase.totalAmount ?? 0
+  if (input.amount != null && input.amount > capturedAmount) {
+    input.amount = capturedAmount
+  }
+
   const stripeSessionId = purchase.stripeSessionId
   let stripeRefundId: string | null = null
   let refundStatus: "refund_pending" | "processing" | "refund_succeeded" | "refund_failed" | "refund_cancelled" = "refund_succeeded"
@@ -191,34 +199,40 @@ export async function issueRefund(input: {
     })
   }
 
-  // Create refund record
-  const refundRecord = await prisma.refundRecord.create({
-    data: {
-      purchaseId: input.purchaseId,
-      purchaseType: input.purchaseType,
-      amountRefunded: input.amount ?? purchase.amount ?? purchase.totalAmount ?? 0,
-      currency: purchase.currency ?? "EUR",
-      reason: input.reason,
-      status: refundStatus,
-      stripeRefundId,
-      actorUserId: input.actorUserId,
-      isPartial: input.amount != null && input.amount < (purchase.amount ?? purchase.totalAmount ?? 0),
-      idempotencyKey: input.idempotencyKey ?? null,
-    },
-  })
+  // Write the refund ledger row and flip the purchase to 'refunded' in one
+  // transaction (the Stripe call already happened above and stays outside).
+  // Otherwise a crash between the two writes leaves a refund record with the
+  // purchase still 'paid' — double-refundable and wrong in reports.
+  const refundRecord = await prisma.$transaction(async (tx) => {
+    const record = await tx.refundRecord.create({
+      data: {
+        purchaseId: input.purchaseId,
+        purchaseType: input.purchaseType,
+        amountRefunded: input.amount ?? purchase.amount ?? purchase.totalAmount ?? 0,
+        currency: purchase.currency ?? "EUR",
+        reason: input.reason,
+        status: refundStatus,
+        stripeRefundId,
+        actorUserId: input.actorUserId,
+        isPartial: input.amount != null && input.amount < (purchase.amount ?? purchase.totalAmount ?? 0),
+        idempotencyKey: input.idempotencyKey ?? null,
+      },
+    })
 
-  // Update purchase status
-  if (input.purchaseType === "voucher_purchase") {
-    await prisma.voucherPurchase.update({
-      where: { id: input.purchaseId },
-      data: { status: "refunded" },
-    })
-  } else {
-    await prisma.ticketPurchase.update({
-      where: { id: input.purchaseId },
-      data: { status: "refunded" },
-    })
-  }
+    if (input.purchaseType === "voucher_purchase") {
+      await tx.voucherPurchase.update({
+        where: { id: input.purchaseId },
+        data: { status: "refunded" },
+      })
+    } else {
+      await tx.ticketPurchase.update({
+        where: { id: input.purchaseId },
+        data: { status: "refunded" },
+      })
+    }
+
+    return record
+  })
 
   return refundRecord
 }

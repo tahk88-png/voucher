@@ -17,12 +17,12 @@ interface FunnelChartProps {
 }
 
 const FALLBACK_COLORS = [
-  "#6366f1",
-  "#8b5cf6",
-  "#a78bfa",
-  "#c4b5fd",
-  "#ddd6fe",
-  "#ede9fe",
+  "#cc785c",
+  "#5e7e92",
+  "#be8a2e",
+  "#4e8a5b",
+  "#b5613f",
+  "#7e9cae",
 ]
 
 export function FunnelChart({
