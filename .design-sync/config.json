@@ -1,0 +1,40 @@
+{
+  "pkg": "voucher-platform",
+  "globalName": "VoucherDS",
+  "shape": "package",
+  "tsconfig": "./tsconfig.json",
+  "cssEntry": "./.design-sync/.cache/ds-tailwind.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "componentSrcMap": {
+    "DsButton": "components/ds/ds-button.tsx",
+    "DsCard": "components/ds/ds-card.tsx",
+    "DsInput": "components/ds/ds-input.tsx",
+    "DsBadge": "components/ds/ds-badge.tsx",
+    "DsAlert": "components/ds/ds-alert.tsx",
+    "DsModal": "components/ds/ds-modal.tsx",
+    "DsSelect": "components/ds/ds-select.tsx",
+    "DsTabs": "components/ds/ds-tabs.tsx",
+    "DsToggle": "components/ds/ds-toggle.tsx",
+    "DsTooltip": "components/ds/ds-tooltip.tsx",
+    "DsSidebar": "components/ds/ds-sidebar.tsx"
+  },
+  "overrides": {
+    "DsModal": { "cardMode": "single", "viewport": "640x520" },
+    "DsAlert": { "cardMode": "column" },
+    "DsTabs": { "cardMode": "column" },
+    "DsTooltip": { "cardMode": "single", "primaryStory": "Triggers" }
+  },
+  "dtsPropsFor": {
+    "DsButton": "variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';\nsize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';\nloading?: boolean;\nfullWidth?: boolean;\niconLeft?: React.ReactNode;\niconRight?: React.ReactNode;\nclassName?: string;\n/** Also accepts standard HTML attributes for the underlying element. */\n[key: string]: unknown;",
+    "DsCard": "variant?: 'default' | 'glass' | 'gradient' | 'elevated';\npadding?: 'none' | 'sm' | 'md' | 'lg';\nhover?: boolean;\nheader?: React.ReactNode;\nfooter?: React.ReactNode;\nclassName?: string;\n/** Also accepts standard HTML attributes for the underlying element. */\n[key: string]: unknown;",
+    "DsInput": "variant?: 'default' | 'glass';\ninputSize?: 'sm' | 'md' | 'lg';\nlabel?: string;\nerror?: string;\nhelperText?: string;\niconLeft?: React.ReactNode;\niconRight?: React.ReactNode;\naddonLeft?: string;\naddonRight?: string;\nshowCount?: boolean;\nclassName?: string;\n/** Also accepts standard HTML attributes for the underlying element. */\n[key: string]: unknown;",
+    "DsBadge": "variant?: 'solid' | 'soft' | 'outline' | 'glass';\ncolor?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'neutral';\nsize?: 'sm' | 'md' | 'lg';\ndot?: boolean;\nicon?: React.ReactNode;\nremovable?: boolean;\nonRemove?: () => void;\nchildren: React.ReactNode;\nclassName?: string;",
+    "DsAlert": "variant?: 'info' | 'success' | 'warning' | 'error';\ntitle?: string;\nchildren: React.ReactNode;\ndismissible?: boolean;\nonDismiss?: () => void;\naction?: React.ReactNode;\nicon?: React.ReactNode;\nclassName?: string;",
+    "DsModal": "open: boolean;\nonClose: () => void;\nsize?: 'sm' | 'md' | 'lg' | 'full';\ntitle?: React.ReactNode;\nfooter?: React.ReactNode;\ncloseOnBackdrop?: boolean;\ncloseOnEscape?: boolean;\nshowClose?: boolean;\nchildren: React.ReactNode;\nclassName?: string;",
+    "DsSelect": "options: { value: string; label: string; icon?: React.ReactNode; disabled?: boolean; }[];\nvalue?: string | string[];\nonChange?: (value: string | string[]) => void;\nplaceholder?: string;\nlabel?: string;\nerror?: string;\nsearchable?: boolean;\nmultiple?: boolean;\ndisabled?: boolean;\nloading?: boolean;\nemptyText?: string;\nclassName?: string;",
+    "DsTabs": "tabs: { id: string; label: string; icon?: React.ReactNode; badge?: number | string; disabled?: boolean; }[];\nvalue?: string;\ndefaultValue?: string;\nonChange?: (id: string) => void;\nvariant?: 'underline' | 'pills' | 'glass';\nclassName?: string;",
+    "DsToggle": "size?: 'sm' | 'md' | 'lg';\nlabel?: string;\nlabelPosition?: 'left' | 'right';\nonColor?: string;\noffColor?: string;\nclassName?: string;\n/** Also accepts standard HTML attributes for the underlying element. */\n[key: string]: unknown;",
+    "DsTooltip": "content: React.ReactNode;\nposition?: 'top' | 'bottom' | 'left' | 'right';\ndelay?: number;\nchildren: React.ReactNode;\nclassName?: string;",
+    "DsSidebar": "sections: { title?: string; items: { id: string; label: string; icon?: React.ReactNode; href?: string; onClick?: () => void; badge?: string | number; disabled?: boolean; }[]; }[];\nactiveId?: string;\ncollapsed?: boolean;\nonCollapsedChange?: (collapsed: boolean) => void;\nheader?: React.ReactNode;\nfooter?: React.ReactNode;\nclassName?: string;"
+  }
+}
