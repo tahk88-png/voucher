@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { createCheckoutSession } from '@/lib/stripe';
 import { withErrorHandler, RateLimitError } from '@/lib/error-handler';
 import { rateLimit } from '@/lib/rate-limit';
+import { getClientIp } from '@/lib/get-client-ip';
 import { z } from 'zod';
 
 // Metadata keys the Stripe webhook trusts to identify/fulfil server-created
@@ -68,7 +69,7 @@ function isAllowedRedirect(url: string, allowedHosts: Set<string>) {
 
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+    const ip = getClientIp(req);
     const rl = rateLimit(`checkout:${ip}`, 10, 60_000);
     if (!rl.allowed) throw new RateLimitError('Too many checkout attempts');
 

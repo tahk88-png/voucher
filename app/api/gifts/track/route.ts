@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimitDistributed } from '@/lib/rate-limit';
+import { getClientIp } from '@/lib/get-client-ip';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';
@@ -21,7 +22,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
     }
 
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const ip = getClientIp(req);
     const { allowed } = await rateLimitDistributed(`gift-track:${ip}`, 60, 60);
     if (!allowed) {
       return NextResponse.json({ error: 'Rate limited' }, { status: 429 });

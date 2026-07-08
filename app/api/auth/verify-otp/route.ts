@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { withErrorHandler } from '@/lib/error-handler';
 import { logger } from '@/lib/logger';
 import { rateLimitDistributed } from '@/lib/rate-limit';
+import { getClientIp } from '@/lib/get-client-ip';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,7 +15,7 @@ export async function POST(req: NextRequest) {
     }
 
     const normalizedEmail = email.trim().toLowerCase();
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+    const ip = getClientIp(req);
 
     const [ipLimit, emailLimit] = await Promise.all([
       rateLimitDistributed(`otp_verify:ip:${ip}`, 10, 15 * 60 * 1000, 'otp_verify_ip'),

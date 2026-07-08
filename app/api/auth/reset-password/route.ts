@@ -3,13 +3,14 @@ import { prisma } from '@/lib/prisma';
 import { hashPassword } from '@/lib/passwords';
 import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimit } from '@/lib/rate-limit';
+import { getClientIp } from '@/lib/get-client-ip';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
     // IP rate limit: 10 per 15 minutes
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const ip = getClientIp(req);
     const ipCheck = rateLimit(`resetVerify:ip:${ip}`, 10, 15 * 60 * 1000);
     if (!ipCheck.allowed) {
       return NextResponse.json(

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
+import { getClientIp } from '@/lib/get-client-ip';
 import { z } from 'zod';
 import {
   trackEvent,
@@ -61,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     const session = await auth();
     const userId = session?.user?.id ?? null;
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? req.headers.get('x-real-ip') ?? 'unknown';
+    const ip = getClientIp(req);
     const rateLimitKey = userId ?? ip;
 
     if (isRateLimited(rateLimitKey)) {

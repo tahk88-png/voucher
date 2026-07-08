@@ -6,6 +6,7 @@ import { requireActiveMerchant } from '@/lib/merchant-status';
 import { calculateReferralReward } from '@/lib/referral-rewards';
 import { queueWebhook } from '@/lib/webhooks';
 import { withErrorHandler } from '@/lib/error-handler';
+import { getClientIp } from '@/lib/get-client-ip';
 import { z } from 'zod';
 
 const createRedemptionSchema = z.object({
@@ -21,9 +22,7 @@ const createRedemptionSchema = z.object({
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
     // IP-based rate limiting for public redemptions
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ||
-               req.headers.get('x-real-ip') ||
-               'unknown';
+    const ip = getClientIp(req);
     const ipRateLimit = await checkIPRateLimit(ip, 60, 50); // 50 per hour per IP
     if (!ipRateLimit.allowed) {
       return NextResponse.json(

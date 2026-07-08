@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { isMerchantActive } from "@/lib/merchant-status"
 import { withErrorHandler, RateLimitError } from "@/lib/error-handler"
 import { rateLimit } from "@/lib/rate-limit"
+import { getClientIp } from "@/lib/get-client-ip"
 
 const checkoutSchema = z.object({
   type: z.enum(["product", "rental"]),
@@ -24,7 +25,7 @@ const checkoutSchema = z.object({
 
 export async function POST(req: Request) {
   return withErrorHandler(async () => {
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || 'unknown';
+    const ip = getClientIp(req);
     const rl = rateLimit(`commerce-checkout:${ip}`, 15, 60_000);
     if (!rl.allowed) throw new RateLimitError('Too many checkout attempts');
 

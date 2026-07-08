@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/logger';
 import { rateLimit } from '@/lib/rate-limit';
+import { getClientIp } from '@/lib/get-client-ip';
 import {
   generateAuthenticationOptions,
   verifyAuthenticationResponse,
@@ -13,7 +14,7 @@ import { randomBytes } from 'crypto';
  * POST — Generate authentication options (no auth needed)
  */
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const ip = getClientIp(req);
   const limit = rateLimit(`passkey_auth_init:${ip}`, 20, 5 * 60 * 1000, 'passkey_auth_init');
   if (!limit.allowed) {
     return NextResponse.json(
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
  * PUT — Verify authentication response, find user, create magic token
  */
 export async function PUT(req: NextRequest) {
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const ip = getClientIp(req);
   const limit = rateLimit(`passkey_auth_verify:${ip}`, 10, 5 * 60 * 1000, 'passkey_auth_verify');
   if (!limit.allowed) {
     return NextResponse.json(

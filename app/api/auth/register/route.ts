@@ -4,6 +4,7 @@ import { hashPassword } from '@/lib/passwords';
 import { logger } from '@/lib/logger';
 import { withErrorHandler } from '@/lib/error-handler';
 import { rateLimitDistributed } from '@/lib/rate-limit';
+import { getClientIp } from '@/lib/get-client-ip';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';
@@ -16,7 +17,7 @@ const registerSchema = z.object({
 
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
-    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    const ip = getClientIp(req);
     const { allowed } = await rateLimitDistributed(`register:${ip}`, 5, 300);
     if (!allowed) {
       return NextResponse.json({ error: 'Too many attempts. Try again later.' }, { status: 429 });
