@@ -4,6 +4,7 @@ import { requireAdminPermission } from "@/lib/admin/guards";
 import { recordAdminAudit } from "@/lib/admin/audit";
 import { prisma } from "@/lib/prisma";
 import { createEmailProvider } from "@/lib/email/providers/factory";
+import { getClientIp } from "@/lib/get-client-ip";
 
 // ---------------------------------------------------------------------------
 // POST — test provider connection
@@ -40,9 +41,10 @@ export async function POST(
       },
     });
 
+    const ipRaw = getClientIp(req);
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get("x-forwarded-for") ?? undefined,
+      actorIp: ipRaw === "unknown" ? undefined : ipRaw,
       actorUserAgent: req.headers.get("user-agent") ?? undefined,
       action: "email.provider.test",
       targetType: "email_provider_config",

@@ -3,6 +3,7 @@ import { withErrorHandler } from "@/lib/error-handler";
 import { requireAdminPermission } from "@/lib/admin/guards";
 import { recordAdminAudit } from "@/lib/admin/audit";
 import { sendEmailDirect } from "@/lib/email/service";
+import { getClientIp } from "@/lib/get-client-ip";
 import { z } from "zod";
 
 const sendTestSchema = z.object({
@@ -36,9 +37,10 @@ export async function POST(req: NextRequest) {
       metadata: { sentBy: admin.userId, isTestEmail: true },
     });
 
+    const ipRaw = getClientIp(req);
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get("x-forwarded-for") ?? undefined,
+      actorIp: ipRaw === "unknown" ? undefined : ipRaw,
       actorUserAgent: req.headers.get("user-agent") ?? undefined,
       action: "email.send_test",
       targetType: "email",

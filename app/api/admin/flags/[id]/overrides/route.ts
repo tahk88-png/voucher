@@ -4,6 +4,7 @@ import { requireAdminPermission } from "@/lib/admin/guards"
 import { recordAdminAudit } from "@/lib/admin/audit"
 import { prisma } from "@/lib/prisma"
 import { cacheDelete } from "@/lib/redis"
+import { getClientIp } from "@/lib/get-client-ip"
 
 export async function GET(
   req: NextRequest,
@@ -71,9 +72,10 @@ export async function POST(
     // Invalidate Redis cache entries for this flag
     await invalidateFlagCache(flag.key, { tenantId, userId, orgId })
 
+    const ipRaw = getClientIp(req)
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get("x-forwarded-for") ?? undefined,
+      actorIp: ipRaw === "unknown" ? undefined : ipRaw,
       actorUserAgent: req.headers.get("user-agent") ?? undefined,
       action: "flag.override.create",
       targetType: "feature_flag_override",
@@ -135,9 +137,10 @@ export async function DELETE(
       })
     }
 
+    const ipRaw = getClientIp(req)
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get("x-forwarded-for") ?? undefined,
+      actorIp: ipRaw === "unknown" ? undefined : ipRaw,
       actorUserAgent: req.headers.get("user-agent") ?? undefined,
       action: "flag.override.delete",
       targetType: "feature_flag_override",

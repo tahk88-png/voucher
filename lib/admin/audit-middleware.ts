@@ -18,6 +18,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server"
+import { getClientIp } from "@/lib/get-client-ip"
 import { withErrorHandler } from "@/lib/error-handler"
 import { requireAdminPermission, type AdminContext } from "@/lib/admin/guards"
 import { recordAdminAudit } from "@/lib/admin/audit"
@@ -106,13 +107,12 @@ export function withAdminAudit(config: WithAdminAuditConfig) {
           ? config.extractTargetId(req, params as Record<string, string> | undefined)
           : undefined
 
-        // 5. Actor metadata from headers
-        const headerList = req.headers
-        const actorIp =
-          headerList.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-          headerList.get("x-real-ip") ??
-          undefined
-        const actorUserAgent = headerList.get("user-agent") ?? undefined
+        // 5. Actor metadata from headers (trusted-IP helper; keep undefined
+        // when no IP header is present rather than storing the literal
+        // 'unknown' in the audit record)
+        const clientIp = getClientIp(req)
+        const actorIp = clientIp === "unknown" ? undefined : clientIp
+        const actorUserAgent = req.headers.get("user-agent") ?? undefined
 
         // 6. Record audit entry
         const auditId = await recordAdminAudit({

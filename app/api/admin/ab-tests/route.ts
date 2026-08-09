@@ -4,6 +4,7 @@ import { requireAdminPermission } from '@/lib/admin/guards'
 import { recordAdminAudit } from '@/lib/admin/audit'
 import { prisma } from '@/lib/prisma'
 import { createTest } from '@/lib/ab-testing'
+import { getClientIp } from '@/lib/get-client-ip'
 
 export async function GET(req: NextRequest) {
   return withErrorHandler(async () => {
@@ -52,9 +53,10 @@ export async function POST(req: NextRequest) {
 
     const test = await createTest({ name, description, targetType, targetId, variants })
 
+    const ipRaw = getClientIp(req)
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get('x-forwarded-for') ?? undefined,
+      actorIp: ipRaw === 'unknown' ? undefined : ipRaw,
       actorUserAgent: req.headers.get('user-agent') ?? undefined,
       action: 'ab_test.create',
       targetType: 'ab_test',

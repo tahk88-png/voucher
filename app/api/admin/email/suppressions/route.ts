@@ -8,6 +8,7 @@ import {
   buildCursorQuery,
   buildCursorResult,
 } from "@/lib/cursor-pagination";
+import { getClientIp } from "@/lib/get-client-ip";
 import { z } from "zod";
 
 // ---------------------------------------------------------------------------
@@ -111,9 +112,10 @@ export async function POST(req: NextRequest) {
       await cacheDelete(`email:suppressed:${normalized}`);
     } catch {}
 
+    const ipRaw = getClientIp(req);
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get("x-forwarded-for") ?? undefined,
+      actorIp: ipRaw === "unknown" ? undefined : ipRaw,
       actorUserAgent: req.headers.get("user-agent") ?? undefined,
       action: "email.suppression.add",
       targetType: "email_suppression",

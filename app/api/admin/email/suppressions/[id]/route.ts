@@ -4,6 +4,7 @@ import { requireAdminPermission } from "@/lib/admin/guards";
 import { recordAdminAudit } from "@/lib/admin/audit";
 import { removeSuppression } from "@/lib/email/suppression";
 import { prisma } from "@/lib/prisma";
+import { getClientIp } from "@/lib/get-client-ip";
 
 // ---------------------------------------------------------------------------
 // DELETE — remove a suppression entry
@@ -30,9 +31,10 @@ export async function DELETE(
 
     await removeSuppression(id);
 
+    const ipRaw = getClientIp(req);
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get("x-forwarded-for") ?? undefined,
+      actorIp: ipRaw === "unknown" ? undefined : ipRaw,
       actorUserAgent: req.headers.get("user-agent") ?? undefined,
       action: "email.suppression.remove",
       targetType: "email_suppression",

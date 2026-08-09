@@ -4,6 +4,7 @@ import { requireAdminPermission } from '@/lib/admin/guards'
 import { recordAdminAudit } from '@/lib/admin/audit'
 import { prisma } from '@/lib/prisma'
 import { getTestResults, updateTestStatus } from '@/lib/ab-testing'
+import { getClientIp } from '@/lib/get-client-ip'
 
 export async function GET(
   req: NextRequest,
@@ -47,9 +48,10 @@ export async function PUT(
 
     const test = await updateTestStatus(id, status, winnerId)
 
+    const ipRaw = getClientIp(req)
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get('x-forwarded-for') ?? undefined,
+      actorIp: ipRaw === 'unknown' ? undefined : ipRaw,
       actorUserAgent: req.headers.get('user-agent') ?? undefined,
       action: 'ab_test.update_status',
       targetType: 'ab_test',
@@ -76,9 +78,10 @@ export async function DELETE(
 
     await prisma.aBTest.delete({ where: { id } })
 
+    const ipRaw = getClientIp(req)
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get('x-forwarded-for') ?? undefined,
+      actorIp: ipRaw === 'unknown' ? undefined : ipRaw,
       actorUserAgent: req.headers.get('user-agent') ?? undefined,
       action: 'ab_test.delete',
       targetType: 'ab_test',

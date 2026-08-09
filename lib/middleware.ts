@@ -3,6 +3,7 @@ import { auth } from './auth';
 import { prisma } from './prisma';
 import { UnauthorizedError, ForbiddenError, NotFoundError } from './error-handler';
 import { checkIPRateLimit } from './fraud';
+import { getClientIp } from './get-client-ip';
 
 /**
  * Get authenticated user from request
@@ -123,7 +124,7 @@ export async function applyIPRateLimit(
   maxAttempts: number = 100,
   windowMinutes: number = 60
 ) {
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || req.headers.get('x-real-ip') || 'unknown';
+  const ip = getClientIp(req);
 
   const { allowed, remaining } = await checkIPRateLimit(ip, windowMinutes, maxAttempts);
 

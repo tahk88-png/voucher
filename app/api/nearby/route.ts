@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/logger';
 import { findNearbyMerchants, getUserLocationFromIP } from '@/lib/geolocation';
+import { getClientIp } from '@/lib/get-client-ip';
 
 /**
  * GET /api/nearby?lat=X&lon=Y&radius=10
@@ -22,8 +23,8 @@ export async function GET(req: NextRequest) {
 
     // If no coordinates provided, try IP-based geolocation
     if (isNaN(lat) || isNaN(lon)) {
-      const forwarded = req.headers.get('x-forwarded-for');
-      const ip = forwarded?.split(',')[0]?.trim();
+      const ipRaw = getClientIp(req);
+      const ip = ipRaw === 'unknown' ? undefined : ipRaw;
       const location = await getUserLocationFromIP(ip);
       lat = location.latitude;
       lon = location.longitude;

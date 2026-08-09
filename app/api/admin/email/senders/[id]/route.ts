@@ -3,6 +3,7 @@ import { withErrorHandler } from "@/lib/error-handler";
 import { requireAdminPermission } from "@/lib/admin/guards";
 import { recordAdminAudit } from "@/lib/admin/audit";
 import { prisma } from "@/lib/prisma";
+import { getClientIp } from "@/lib/get-client-ip";
 import { z } from "zod";
 
 // ---------------------------------------------------------------------------
@@ -59,9 +60,10 @@ export async function PATCH(
       data,
     });
 
+    const ipRaw = getClientIp(req);
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get("x-forwarded-for") ?? undefined,
+      actorIp: ipRaw === "unknown" ? undefined : ipRaw,
       actorUserAgent: req.headers.get("user-agent") ?? undefined,
       action: "email.sender.update",
       targetType: "email_sender_profile",

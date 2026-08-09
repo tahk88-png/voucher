@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/logger';
+import { getClientIp } from '@/lib/get-client-ip';
 
 /**
  * GET /api/share/[code]
@@ -108,8 +109,8 @@ async function trackShareClick(
 ) {
   try {
     const userAgent = req.headers.get('user-agent') || undefined;
-    const forwarded = req.headers.get('x-forwarded-for');
-    const ip = forwarded?.split(',')[0]?.trim() || undefined;
+    const ipRaw = getClientIp(req);
+    const ip = ipRaw === 'unknown' ? undefined : ipRaw;
 
     // Find the merchant ID for audit logging
     let merchantId: string | undefined;

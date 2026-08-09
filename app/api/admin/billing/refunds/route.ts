@@ -4,6 +4,7 @@ import { requireAdminPermission } from "@/lib/admin/guards"
 import { recordAdminAudit } from "@/lib/admin/audit"
 import { issueRefund } from "@/lib/admin/billing"
 import { prisma } from "@/lib/prisma"
+import { getClientIp } from "@/lib/get-client-ip"
 
 export async function GET(req: NextRequest) {
   return withErrorHandler(async () => {
@@ -79,9 +80,10 @@ export async function POST(req: NextRequest) {
       idempotencyKey,
     })
 
+    const ipRaw = getClientIp(req)
     await recordAdminAudit({
       actorUserId: admin.userId,
-      actorIp: req.headers.get("x-forwarded-for") ?? undefined,
+      actorIp: ipRaw === "unknown" ? undefined : ipRaw,
       actorUserAgent: req.headers.get("user-agent") ?? undefined,
       action: "refund.issue",
       targetType: purchaseType,
