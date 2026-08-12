@@ -10,7 +10,10 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const cspDirectives = [
   "default-src 'self'",
-  `script-src 'self' ${isDev ? "'unsafe-eval'" : ''} 'unsafe-inline' https://js.stripe.com https://checkout.stripe.com`,
+  // va.vercel-scripts.com serves the <Analytics /> script from @vercel/analytics
+  // (root layout). Without it the CSP blocks the script and analytics silently
+  // never load — the beacon host is allowed in connect-src below.
+  `script-src 'self' ${isDev ? "'unsafe-eval'" : ''} 'unsafe-inline' https://js.stripe.com https://checkout.stripe.com https://va.vercel-scripts.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
@@ -22,6 +25,7 @@ const cspDirectives = [
     "https://*.supabase.co",
     "wss://*.pusher.com",
     "https://*.pusher.com",
+    "https://vitals.vercel-insights.com",
     isDev ? "ws://localhost:*" : "",
   ].filter(Boolean).join(' '),
   "frame-src 'self' https://js.stripe.com https://checkout.stripe.com",

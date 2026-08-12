@@ -1100,53 +1100,53 @@ async function main() {
 
   // Categories
   const catExperiences = await prisma.giftCategory.create({
-    data: { name: "Experiences", slug: "experiences", description: "Unforgettable experiences and activities", icon: "🎭", color: "#E17B5C", sortOrder: 0 },
+    data: { name: "Experiences", slug: "experiences", icon: "🎭", color: "#E17B5C", sortOrder: 0 },
   })
   const catFood = await prisma.giftCategory.create({
-    data: { name: "Food & Drink", slug: "food-drink", description: "Gourmet food, wine, and culinary delights", icon: "🍷", color: "#9DB5A5", sortOrder: 1 },
+    data: { name: "Food & Drink", slug: "food-drink", icon: "🍷", color: "#9DB5A5", sortOrder: 1 },
   })
   const catWellness = await prisma.giftCategory.create({
-    data: { name: "Wellness & Self-Care", slug: "wellness", description: "Spa, fitness, and wellness gifts", icon: "🧘", color: "#A78BFA", sortOrder: 2 },
+    data: { name: "Wellness & Self-Care", slug: "wellness", icon: "🧘", color: "#A78BFA", sortOrder: 2 },
   })
   const catTech = await prisma.giftCategory.create({
-    data: { name: "Tech & Gadgets", slug: "tech", description: "Smart devices and tech accessories", icon: "💻", color: "#3B82F6", sortOrder: 3 },
+    data: { name: "Tech & Gadgets", slug: "tech", icon: "💻", color: "#3B82F6", sortOrder: 3 },
   })
   const catHome = await prisma.giftCategory.create({
-    data: { name: "Home & Living", slug: "home-living", description: "Decor, plants, and cozy essentials", icon: "🏠", color: "#F5C98E", sortOrder: 4 },
+    data: { name: "Home & Living", slug: "home-living", icon: "🏠", color: "#F5C98E", sortOrder: 4 },
   })
 
   // Occasions
   const occBirthday = await prisma.giftOccasion.create({
-    data: { name: "Birthday", slug: "birthday", description: "Birthday celebrations", icon: "🎂", seasonalityWeight: 1.0, activeMonths: [], sortOrder: 0 },
+    data: { name: "Birthday", slug: "birthday", seasonalityWeight: 1.0, activeMonths: [] },
   })
   const occChristmas = await prisma.giftOccasion.create({
-    data: { name: "Christmas", slug: "christmas", description: "Holiday season gifts", icon: "🎄", seasonalityWeight: 2.5, activeMonths: [11, 12], sortOrder: 1 },
+    data: { name: "Christmas", slug: "christmas", seasonalityWeight: 2.5, activeMonths: [11, 12] },
   })
   const occValentines = await prisma.giftOccasion.create({
-    data: { name: "Valentine's Day", slug: "valentines", description: "Romantic gifts for your special someone", icon: "❤️", seasonalityWeight: 2.0, activeMonths: [1, 2], sortOrder: 2 },
+    data: { name: "Valentine's Day", slug: "valentines", seasonalityWeight: 2.0, activeMonths: [1, 2] },
   })
   const occThankYou = await prisma.giftOccasion.create({
-    data: { name: "Thank You", slug: "thank-you", description: "Show appreciation", icon: "🙏", seasonalityWeight: 1.0, activeMonths: [], sortOrder: 3 },
+    data: { name: "Thank You", slug: "thank-you", seasonalityWeight: 1.0, activeMonths: [] },
   })
   const occGraduation = await prisma.giftOccasion.create({
-    data: { name: "Graduation", slug: "graduation", description: "Celebrate academic achievements", icon: "🎓", seasonalityWeight: 1.5, activeMonths: [5, 6], sortOrder: 4 },
+    data: { name: "Graduation", slug: "graduation", seasonalityWeight: 1.5, activeMonths: [5, 6] },
   })
 
   // Personas
   const perPartner = await prisma.giftPersona.create({
-    data: { name: "For Partner", slug: "partner", description: "Romantic gifts for your significant other", icon: "💑", tags: ["partner", "husband", "wife", "boyfriend", "girlfriend"], sortOrder: 0 },
+    data: { name: "For Partner", slug: "partner", tags: ["partner", "husband", "wife", "boyfriend", "girlfriend"] },
   })
   const perFriend = await prisma.giftPersona.create({
-    data: { name: "For Friend", slug: "friend", description: "Fun and thoughtful gifts for friends", icon: "👫", tags: ["friend", "bestie", "bff", "pal"], sortOrder: 1 },
+    data: { name: "For Friend", slug: "friend", tags: ["friend", "bestie", "bff", "pal"] },
   })
   const perParent = await prisma.giftPersona.create({
-    data: { name: "For Parent", slug: "parent", description: "Gifts for mom and dad", icon: "👨‍👩‍👧", tags: ["parent", "mom", "dad", "mother", "father"], sortOrder: 2 },
+    data: { name: "For Parent", slug: "parent", tags: ["parent", "mom", "dad", "mother", "father"] },
   })
   const perColleague = await prisma.giftPersona.create({
-    data: { name: "For Colleague", slug: "colleague", description: "Professional and appropriate gifts", icon: "💼", tags: ["colleague", "coworker", "boss", "employee", "corporate"], sortOrder: 3 },
+    data: { name: "For Colleague", slug: "colleague", tags: ["colleague", "coworker", "boss", "employee", "corporate"] },
   })
   const perChild = await prisma.giftPersona.create({
-    data: { name: "For Child", slug: "child", description: "Fun gifts for kids and teens", icon: "👶", tags: ["child", "kid", "teen", "teenager", "son", "daughter"], sortOrder: 4 },
+    data: { name: "For Child", slug: "child", tags: ["child", "kid", "teen", "teenager", "son", "daughter"] },
   })
 
   // Products (20 diverse gifts across merchants)
@@ -1240,7 +1240,6 @@ async function main() {
   const trendingModule = await prisma.giftFeedModule.create({
     data: {
       title: "Trending Now",
-      subtitle: "Most popular gifts this week",
       type: "TRENDING",
       sortOrder: 0,
       isActive: true,
@@ -1250,7 +1249,6 @@ async function main() {
   const seasonalModule = await prisma.giftFeedModule.create({
     data: {
       title: "Season's Best",
-      subtitle: "Top picks for the current season",
       type: "SEASONAL",
       sortOrder: 1,
       isActive: true,
@@ -1260,19 +1258,17 @@ async function main() {
   const budgetModule = await prisma.giftFeedModule.create({
     data: {
       title: "Under €50",
-      subtitle: "Great gifts that won't break the bank",
-      type: "BUDGET_RANGE",
+      type: "LAST_MINUTE",
       sortOrder: 2,
       isActive: true,
-      config: JSON.stringify({ budgetMax: 5000 }),
+      configJson: { budgetMax: 5000 },
     },
   })
 
   const premiumModule = await prisma.giftFeedModule.create({
     data: {
       title: "Premium Picks",
-      subtitle: "Luxury gifts for special occasions",
-      type: "EDITORIAL",
+      type: "CORPORATE",
       sortOrder: 3,
       isActive: true,
     },
@@ -1281,7 +1277,6 @@ async function main() {
   const aiModule = await prisma.giftFeedModule.create({
     data: {
       title: "AI Recommended",
-      subtitle: "Curated just for you",
       type: "AI_CURATED",
       sortOrder: 4,
       isActive: true,
@@ -1318,18 +1313,17 @@ async function main() {
 
   // Sponsored placements
   for (let i = 0; i < 3; i++) {
-    const product = featuredProducts[i % featuredProducts.length]
     const merchant = merchants[i % merchants.length]
     await prisma.sponsoredGiftPlacement.create({
       data: {
+        sponsorName: merchant.name,
         merchantId: merchant.id,
-        productId: product.id,
-        bidCents: (i + 1) * 50,
-        dailyBudgetCents: (i + 1) * 1000,
-        startDate: new Date(),
-        endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+        budgetCents: (i + 1) * 1000,
+        priority: i,
+        startAt: new Date(),
+        endAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
         isActive: true,
-        targetPersonas: [],
+        targetCategories: [],
         targetOccasions: [],
       },
     })

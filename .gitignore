@@ -56,3 +56,5 @@ ds-bundle/
 playwright-report/
 test-results/
 coverage/
+docker-compose.override.yml
+.pgdata/
