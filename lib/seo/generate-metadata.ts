@@ -18,12 +18,15 @@ export function generatePageMetadata({
   noIndex = false,
   keywords = [],
 }: PageMetadataOptions): Metadata {
+  // `title` is rendered through the root layout's `%s | SITE_NAME` template, so
+  // it must NOT carry the site name itself or every page reads "… | Vouchr | Vouchr".
+  // OG/Twitter titles bypass that template, so they keep the full form.
   const fullTitle = `${title} | ${SITE_NAME}`
   const url = toAbsoluteUrl(path)
   const ogImage = image || "/opengraph-image"
 
   return {
-    title: fullTitle,
+    title,
     description,
     keywords: keywords.length > 0 ? keywords : undefined,
     robots: noIndex ? "noindex,nofollow" : "index,follow",
@@ -74,14 +77,16 @@ export function generateVoucherMetadata({
   image,
   voucherId,
 }: VoucherMetadataOptions): Metadata {
-  const fullTitle = `${title} - ${merchantName} | ${SITE_NAME}`
+  // pageTitle omits the site name — the root layout template appends it.
+  const pageTitle = `${title} - ${merchantName}`
+  const fullTitle = `${pageTitle} | ${SITE_NAME}`
   const formattedValue = `${currency} ${(value / 100).toFixed(2)}`
   const fullDescription = `${description} Worth ${formattedValue}. ${merchantName} on Vouchr.`
   const path = `/voucher/${voucherId}`
   const url = toAbsoluteUrl(path)
 
   return {
-    title: fullTitle,
+    title: pageTitle,
     description: fullDescription,
     keywords: ["voucher", "discount", "deal", merchantName, title],
     openGraph: {
@@ -124,13 +129,15 @@ export function generateCampaignMetadata({
   image,
   campaignId,
 }: CampaignMetadataOptions): Metadata {
-  const fullTitle = `${title} - ${merchantName} Campaign | ${SITE_NAME}`
+  // pageTitle omits the site name — the root layout template appends it.
+  const pageTitle = `${title} - ${merchantName} Campaign`
+  const fullTitle = `${pageTitle} | ${SITE_NAME}`
   const fullDescription = `${description} Campaign by ${merchantName}. Ends ${endDate.toLocaleDateString()}.`
   const path = `/campaign/${campaignId}`
   const url = toAbsoluteUrl(path)
 
   return {
-    title: fullTitle,
+    title: pageTitle,
     description: fullDescription,
     keywords: ["campaign", "promotion", "deal", merchantName, title],
     openGraph: {
@@ -169,6 +176,7 @@ export function generateMerchantMetadata({
   logo,
   category,
 }: MerchantMetadataOptions): Metadata {
+  // `title` omits the site name — the root layout template appends it.
   const fullTitle = `${name} | ${SITE_NAME}`
   const fullDescription = `${description} Browse vouchers, deals, and campaigns from ${name}.`
   const path = `/merchant/${slug}`
@@ -177,7 +185,7 @@ export function generateMerchantMetadata({
   if (category) keywords.push(category)
 
   return {
-    title: fullTitle,
+    title: name,
     description: fullDescription,
     keywords,
     openGraph: {

@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
+import { SITE_NAME } from '@/lib/seo';
 import Link from 'next/link';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
@@ -15,12 +16,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     select: { name: true, slug: true, brandLogoUrl: true },
   });
   if (!merchant) return { title: 'Not Found' };
+  const description = `Browse vouchers, campaigns, and offers from ${merchant.name}`;
   return {
-    title: `${merchant.name} | Voucher Platform`,
-    description: `Browse vouchers, campaigns, and offers from ${merchant.name}`,
+    // The root layout applies a `%s | Vouchr` template, so `title` must not
+    // carry a site-name suffix of its own. OG titles bypass the template.
+    title: merchant.name,
+    description,
     openGraph: {
-      title: `${merchant.name} | Voucher Platform`,
-      description: `Browse vouchers, campaigns, and offers from ${merchant.name}`,
+      title: `${merchant.name} | ${SITE_NAME}`,
+      description,
       type: 'profile',
     },
   };
