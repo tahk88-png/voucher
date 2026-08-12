@@ -13,50 +13,54 @@ interface Endpoint {
 }
 
 const ENDPOINTS: Endpoint[] = [
-  // Auth
-  { method: 'POST', path: '/api/auth/signin', description: 'Sign in with credentials or OAuth', category: 'Auth', body: { email: 'string', password: 'string' }, response: { user: { id: 'string', email: 'string' }, token: 'string' } },
+  // Auth — session sign-in itself is handled by NextAuth at /api/auth/[...nextauth]
   { method: 'POST', path: '/api/auth/register', description: 'Create a new user account', category: 'Auth', body: { name: 'string', email: 'string', password: 'string' }, response: { user: { id: 'string', email: 'string' } } },
-  { method: 'POST', path: '/api/auth/magic-link', description: 'Send magic link login email', category: 'Auth', body: { email: 'string' }, response: { sent: true } },
-  { method: 'POST', path: '/api/auth/reset-password', description: 'Request password reset', category: 'Auth', body: { email: 'string' }, response: { sent: true } },
-  // Vouchers
-  { method: 'GET', path: '/api/vouchers', description: 'List all published vouchers', category: 'Vouchers', params: [{ name: 'merchantId', type: 'string', description: 'Filter by merchant' }, { name: 'status', type: 'string', description: 'Filter by status (draft|published|paused|ended)' }], response: { vouchers: [{ id: 'string', type: 'string', value: 0, currency: 'EUR' }] } },
-  { method: 'GET', path: '/api/vouchers/[id]', description: 'Get voucher details', category: 'Vouchers', params: [{ name: 'id', type: 'string', required: true, description: 'Voucher ID' }], response: { id: 'string', type: 'string', value: 0, currency: 'EUR', validFrom: 'ISO8601', validTo: 'ISO8601' } },
-  { method: 'POST', path: '/api/vouchers', description: 'Create a new voucher (merchant admin)', category: 'Vouchers', body: { merchantId: 'string', type: 'percentage|fixed_amount|credit_amount', value: 1000, currency: 'EUR', validFrom: 'ISO8601', validTo: 'ISO8601' }, response: { id: 'string' } },
-  { method: 'PUT', path: '/api/vouchers/[id]', description: 'Update voucher details', category: 'Vouchers', body: { status: 'string', value: 0 }, response: { id: 'string', status: 'string' } },
+  { method: 'POST', path: '/api/auth/send-otp', description: 'Email a one-time sign-in code (magic link)', category: 'Auth', body: { email: 'string' }, response: { sent: true } },
+  { method: 'POST', path: '/api/auth/verify-otp', description: 'Verify the OTP and receive a short-lived magic token', category: 'Auth', body: { email: 'string', otp: 'string' }, response: { verified: true, email: 'string', magicToken: 'string' } },
+  { method: 'POST', path: '/api/auth/forgot-password', description: 'Request a password reset email', category: 'Auth', body: { email: 'string' }, response: { sent: true } },
+  { method: 'POST', path: '/api/auth/reset-password', description: 'Complete a password reset with a token', category: 'Auth', body: { token: 'string', password: 'string' }, response: { success: true } },
+  // Vouchers — listing and creation are merchant-scoped
+  { method: 'GET', path: '/api/merchant/[slug]/vouchers', description: 'List vouchers for a merchant', category: 'Vouchers', params: [{ name: 'slug', type: 'string', required: true, description: 'Merchant slug' }], response: { vouchers: [] } },
+  { method: 'POST', path: '/api/merchant/[slug]/vouchers', description: 'Create a voucher for a merchant', category: 'Vouchers', body: { type: 'percentage|fixed_amount|credit_amount', value: 1000, currency: 'EUR', validFrom: 'ISO8601', validTo: 'ISO8601' }, response: { id: 'string' } },
+  { method: 'POST', path: '/api/vouchers/[id]/purchase', description: 'Purchase a voucher (Stripe checkout)', category: 'Vouchers', params: [{ name: 'id', type: 'string', required: true, description: 'Voucher ID' }], response: { checkoutUrl: 'string' } },
+  { method: 'POST', path: '/api/vouchers/[id]/gift', description: 'Gift a purchased voucher to someone', category: 'Vouchers', body: { recipientEmail: 'string', message: 'string (optional)' }, response: { ok: true } },
+  { method: 'GET', path: '/api/vouchers/[id]/waitlist', description: 'Get waitlist status for a voucher', category: 'Vouchers', response: { entries: [] } },
+  { method: 'POST', path: '/api/vouchers/[id]/waitlist', description: 'Join the waitlist for a sold-out voucher', category: 'Vouchers', response: { ok: true } },
+  { method: 'DELETE', path: '/api/vouchers/[id]/waitlist', description: 'Leave the waitlist', category: 'Vouchers', response: { ok: true } },
   // Campaigns
-  { method: 'GET', path: '/api/campaigns', description: 'List campaigns', category: 'Campaigns', params: [{ name: 'merchantId', type: 'string', description: 'Filter by merchant' }], response: { campaigns: [{ id: 'string', name: 'string', status: 'string' }] } },
+  { method: 'GET', path: '/api/campaigns', description: 'List campaigns for a merchant', category: 'Campaigns', params: [{ name: 'merchantId', type: 'string', required: true, description: 'Merchant ID (required)' }], response: { campaigns: [{ id: 'string', name: 'string', status: 'string' }] } },
   { method: 'POST', path: '/api/campaigns', description: 'Create a new campaign', category: 'Campaigns', body: { merchantId: 'string', name: 'string', type: 'weekly|limited', startDate: 'ISO8601', endDate: 'ISO8601' }, response: { id: 'string' } },
   { method: 'GET', path: '/api/campaigns/[id]', description: 'Get campaign details', category: 'Campaigns', params: [{ name: 'id', type: 'string', required: true, description: 'Campaign ID' }], response: { id: 'string', name: 'string', vouchers: [] } },
+  { method: 'PUT', path: '/api/campaigns/[id]', description: 'Update a campaign', category: 'Campaigns', body: { name: 'string', status: 'string' }, response: { id: 'string', status: 'string' } },
   // Events
-  { method: 'GET', path: '/api/events', description: 'List upcoming events', category: 'Events', response: { events: [{ id: 'string', name: 'string', date: 'ISO8601' }] } },
-  { method: 'POST', path: '/api/events', description: 'Create a new event', category: 'Events', body: { merchantId: 'string', name: 'string', date: 'ISO8601', venue: 'string' }, response: { id: 'string' } },
-  { method: 'GET', path: '/api/events/[id]', description: 'Get event details with tickets', category: 'Events', response: { id: 'string', name: 'string', tickets: [] } },
+  { method: 'GET', path: '/api/events/[id]', description: 'Get event details with ticket types', category: 'Events', params: [{ name: 'id', type: 'string', required: true, description: 'Event ID' }], response: { id: 'string', name: 'string', tickets: [] } },
+  { method: 'PUT', path: '/api/events/[id]', description: 'Update an event', category: 'Events', body: { name: 'string', venue: 'string' }, response: { id: 'string' } },
   // Tickets
-  { method: 'GET', path: '/api/tickets', description: 'List tickets for an event', category: 'Tickets', params: [{ name: 'eventId', type: 'string', required: true, description: 'Event ID' }], response: { tickets: [{ id: 'string', code: 'string', status: 'string' }] } },
-  { method: 'POST', path: '/api/tickets/purchase', description: 'Purchase tickets for an event', category: 'Tickets', body: { eventId: 'string', ticketId: 'string', quantity: 1 }, response: { purchaseId: 'string', tickets: [] } },
+  { method: 'GET', path: '/api/tickets/[id]', description: 'Get a ticket by ID', category: 'Tickets', params: [{ name: 'id', type: 'string', required: true, description: 'Ticket ID' }], response: { id: 'string', code: 'string', status: 'string' } },
+  { method: 'POST', path: '/api/tickets/[id]/purchase', description: 'Purchase tickets of this type', category: 'Tickets', body: { quantity: 1 }, response: { checkoutUrl: 'string' } },
   // Gift Cards
-  { method: 'GET', path: '/api/gift-cards', description: 'List gift cards', category: 'Gift Cards', response: { giftCards: [{ id: 'string', code: 'string', amount: 0 }] } },
-  { method: 'POST', path: '/api/gift-cards/purchase', description: 'Purchase a gift card', category: 'Gift Cards', body: { merchantId: 'string', amount: 5000, currency: 'EUR' }, response: { giftCard: { id: 'string', code: 'string' } } },
-  { method: 'POST', path: '/api/gift-cards/redeem', description: 'Redeem a gift card by code', category: 'Gift Cards', body: { code: 'string' }, response: { success: true, remainingBalance: 0 } },
+  { method: 'GET', path: '/api/gift-cards/[id]/details', description: 'Get gift card details and balance', category: 'Gift Cards', params: [{ name: 'id', type: 'string', required: true, description: 'Gift card ID' }], response: { id: 'string', amount: 0, currency: 'EUR' } },
+  { method: 'POST', path: '/api/gift-cards/[id]/purchase', description: 'Purchase a gift card (Stripe checkout)', category: 'Gift Cards', response: { checkoutUrl: 'string' } },
+  // Gift Hub
+  { method: 'GET', path: '/api/gifts/feed', description: 'Personalized gift discovery feed', category: 'Gift Hub', response: { items: [{ id: 'string', title: 'string', priceCents: 0, currency: 'EUR', merchantName: 'string', categoryName: 'string' }] } },
   // Redemptions
-  { method: 'POST', path: '/api/redemptions', description: 'Redeem a voucher', category: 'Redemptions', body: { voucherId: 'string', code: 'string', merchantId: 'string' }, response: { redemptionId: 'string', status: 'confirmed' } },
-  { method: 'GET', path: '/api/redemptions', description: 'List redemptions for a merchant', category: 'Redemptions', params: [{ name: 'merchantId', type: 'string', required: true, description: 'Merchant ID' }], response: { redemptions: [] } },
+  { method: 'POST', path: '/api/redemptions', description: 'Redeem a voucher at a merchant', category: 'Redemptions', body: { voucherId: 'string', code: 'string', merchantId: 'string' }, response: { redemptionId: 'string', status: 'confirmed' } },
+  // Referrals
+  { method: 'POST', path: '/api/referrals/create', description: 'Create a referral link for a voucher', category: 'Referrals', body: { voucherId: 'string' }, response: { referralId: 'string', link: 'string' } },
   // Commerce
-  { method: 'GET', path: '/api/currency/rates', description: 'Get current exchange rates', category: 'Commerce', response: { currencies: ['EUR', 'USD'], rates: [{ from: 'EUR', to: 'USD', rate: 1.08 }] } },
+  { method: 'GET', path: '/api/currency/rates', description: 'Supported currencies and current exchange rates', category: 'Commerce', response: { currencies: ['EUR', 'USD', 'GBP'], rates: [{ from: 'EUR', to: 'USD', rate: 1.08 }] } },
   { method: 'POST', path: '/api/qr-checkout', description: 'Create a QR checkout intent', category: 'Commerce', body: { merchantSlug: 'string', voucherId: 'string (optional)' }, response: { intentId: 'string', checkoutUrl: 'string' } },
   { method: 'GET', path: '/api/subscription-boxes', description: 'List available subscription boxes', category: 'Commerce', response: [{ id: 'string', name: 'string', priceCents: 0, currency: 'EUR' }] },
   { method: 'POST', path: '/api/subscription-boxes/[id]/subscribe', description: 'Subscribe to a box', category: 'Commerce', response: { id: 'string', status: 'active' } },
-  // Referrals
-  { method: 'POST', path: '/api/referrals', description: 'Create a referral link', category: 'Referrals', body: { voucherId: 'string' }, response: { referralId: 'string', link: 'string' } },
-  { method: 'GET', path: '/api/referrals/[id]', description: 'Get referral details and stats', category: 'Referrals', response: { id: 'string', clicks: 0, conversions: 0 } },
-  // QR
-  { method: 'GET', path: '/api/qr', description: 'Generate a QR code data URL', category: 'Utilities', params: [{ name: 'text', type: 'string', required: true, description: 'Text to encode' }], response: { dataUrl: 'data:image/png;base64,...' } },
+  { method: 'DELETE', path: '/api/subscription-boxes/[id]/subscribe', description: 'Cancel a box subscription', category: 'Commerce', response: { ok: true } },
   // Merchants
-  { method: 'GET', path: '/api/merchant/[slug]/vouchers', description: 'List vouchers for a merchant', category: 'Merchants', response: { vouchers: [] } },
   { method: 'GET', path: '/api/merchant/[slug]/subscription-boxes', description: 'List subscription boxes for a merchant', category: 'Merchants', response: [] },
+  { method: 'POST', path: '/api/merchant/[slug]/subscription-boxes', description: 'Create a subscription box for a merchant', category: 'Merchants', body: { name: 'string', priceCents: 0, currency: 'EUR' }, response: { id: 'string' } },
   // User
-  { method: 'GET', path: '/api/user/profile', description: 'Get current user profile', category: 'User', response: { id: 'string', email: 'string', name: 'string' } },
-  { method: 'PUT', path: '/api/user/profile', description: 'Update user profile', category: 'User', body: { name: 'string', preferredLanguage: 'en' }, response: { success: true } },
+  { method: 'PATCH', path: '/api/user/profile', description: 'Update the current user profile', category: 'User', body: { name: 'string', preferredLanguage: 'en' }, response: { success: true } },
+  // Utilities
+  { method: 'GET', path: '/api/qr', description: 'Generate a QR code data URL', category: 'Utilities', params: [{ name: 'text', type: 'string', required: true, description: 'Text to encode' }], response: { dataUrl: 'data:image/png;base64,...' } },
+  { method: 'GET', path: '/api/health', description: 'Service health and database connectivity', category: 'Utilities', response: { status: 'ok', database: 'connected', circuits: [], timestamp: 'ISO8601' } },
 ];
 
 const METHOD_COLORS: Record<string, string> = {
