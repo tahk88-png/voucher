@@ -7,6 +7,7 @@ import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CalendarCheck, Plus, Check, X, Clock } from 'lucide-react';
+import { showError } from '@/lib/toast-helpers';
 
 interface Appointment {
   id: string;
@@ -27,6 +28,7 @@ export default function AppointmentsPage() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const [showForm, setShowForm] = useState(false);
+  const [creating, setCreating] = useState(false);
   const [form, setForm] = useState({
     serviceName: '',
     startTime: '',
@@ -50,19 +52,30 @@ export default function AppointmentsPage() {
 
   async function handleCreate(e: React.FormEvent) {
     e.preventDefault();
-    const res = await fetch(`/api/merchant/${slug}/appointments`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        ...form,
-        startTime: new Date(form.startTime).toISOString(),
-        endTime: new Date(form.endTime).toISOString(),
-      }),
-    });
-    if (res.ok) {
-      setShowForm(false);
-      setForm({ serviceName: '', startTime: '', endTime: '', priceCents: 0, notes: '' });
-      fetchAppointments();
+    // Guard against a double-click creating duplicate availability slots.
+    if (creating) return;
+    setCreating(true);
+    try {
+      const res = await fetch(`/api/merchant/${slug}/appointments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          startTime: new Date(form.startTime).toISOString(),
+          endTime: new Date(form.endTime).toISOString(),
+        }),
+      });
+      if (res.ok) {
+        setShowForm(false);
+        setForm({ serviceName: '', startTime: '', endTime: '', priceCents: 0, notes: '' });
+        fetchAppointments();
+      } else {
+        showError('Could not create the availability slot. Please try again.');
+      }
+    } catch {
+      showError('Could not reach the server. Check your connection and try again.');
+    } finally {
+      setCreating(false);
     }
   }
 
@@ -121,7 +134,9 @@ export default function AppointmentsPage() {
               <Input value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
             </div>
             <div style={{ gridColumn: 'span 2' }}>
-              <WarmButton type="submit">Create Availability Slot</WarmButton>
+              <WarmButton type="submit" disabled={creating} isLoading={creating}>
+                {creating ? 'Creating…' : 'Create Availability Slot'}
+              </WarmButton>
             </div>
           </form>
         </WarmCard>
