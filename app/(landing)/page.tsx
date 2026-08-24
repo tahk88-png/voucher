@@ -29,6 +29,13 @@ type LandingFeaturedOffer = {
   discountLabel: string | null
 }
 
+type LandingStats = {
+  merchantCount: number
+  activeCampaignCount: number
+  /** Total value of paid voucher purchases, in minor units. */
+  processedCents: number
+}
+
 const categoryLabels: Record<string, string> = {
   cafe: "Cafe & Bakery",
   beauty: "Beauty",
@@ -47,6 +54,56 @@ function getMarketLabel(countryName: string, currency: string) {
   const normalizedCountry = countryName.trim().toLowerCase()
   const code = marketCodeByName.get(normalizedCountry) || countryName.slice(0, 2).toUpperCase()
   return `${code} / ${currency}`
+}
+
+/**
+ * Real platform numbers for the landing stat row. These were previously
+ * hardcoded marketing figures ("2,500+ merchants", "EUR 12M+ processed") that
+ * did not correspond to anything in the database. The row renders only when
+ * there is something real to show — see MarketingLanding.
+ */
+async function getPlatformStats(): Promise<LandingStats | null> {
+  try {
+    const now = new Date()
+    const [merchantCount, activeCampaignCount, processed] = await Promise.all([
+      prisma.merchant.count({ where: { isActive: true } }),
+      prisma.campaign.count({
+        where: { status: "active", startDate: { lte: now }, endDate: { gte: now } },
+      }),
+      prisma.voucherPurchase.aggregate({
+        where: { status: "paid" },
+        _sum: { amount: true },
+      }),
+    ])
+
+    return {
+      merchantCount,
+      activeCampaignCount,
+      processedCents: processed._sum.amount ?? 0,
+    }
+  } catch {
+    // Landing must render even when the database is unreachable.
+    logger.warn("landing: database unavailable, hiding platform stats")
+    return null
+  }
+}
+
+/**
+ * Names of real active merchants for the "trusted by" row. Replaces a
+ * hardcoded list of invented businesses.
+ */
+async function getTrustedMerchants(): Promise<string[]> {
+  try {
+    const merchants = await prisma.merchant.findMany({
+      where: { isActive: true },
+      select: { name: true },
+      orderBy: { createdAt: "asc" },
+      take: 12,
+    })
+    return merchants.map((m) => m.name)
+  } catch {
+    return []
+  }
 }
 
 async function getLandingFeaturedOffers(): Promise<LandingFeaturedOffer[]> {
@@ -158,11 +215,19 @@ export default async function LandingPage() {
     )
   }
 
-  const featuredOffers = await getLandingFeaturedOffers()
+  const [featuredOffers, platformStats, trustedMerchants] = await Promise.all([
+    getLandingFeaturedOffers(),
+    getPlatformStats(),
+    getTrustedMerchants(),
+  ])
 
   return (
     <HubShell>
-      <MarketingLanding featuredOffers={featuredOffers} />
+      <MarketingLanding
+        featuredOffers={featuredOffers}
+        stats={platformStats}
+        trustedMerchants={trustedMerchants}
+      />
     </HubShell>
   )
 }

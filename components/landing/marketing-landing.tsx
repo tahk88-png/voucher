@@ -13,7 +13,6 @@ import { GradientText } from "@/components/animations/gradient-text"
 import { ParallaxSection } from "@/components/animations/parallax-section"
 import { LiveActivityFeed } from "@/components/landing/live-activity-feed"
 import { MerchantLogoWall } from "@/components/landing/merchant-logo-wall"
-import { TestimonialsCarousel } from "@/components/landing/testimonials-carousel"
 import { BeforeAfterSlider } from "@/components/landing/before-after-slider"
 import { PricingCalculator } from "@/components/landing/pricing-calculator"
 import {
@@ -52,11 +51,26 @@ type LandingFeaturedOffer = {
   discountLabel: string | null
 }
 
-type MarketingLandingProps = {
-  featuredOffers?: LandingFeaturedOffer[]
+type LandingStats = {
+  merchantCount: number
+  activeCampaignCount: number
+  /** Total value of paid voucher purchases, in minor units. */
+  processedCents: number
 }
 
-export default function MarketingLanding({ featuredOffers = [] }: MarketingLandingProps) {
+type MarketingLandingProps = {
+  featuredOffers?: LandingFeaturedOffer[]
+  /** Real platform figures; null when the database is unreachable. */
+  stats?: LandingStats | null
+  /** Names of real active merchants for the "trusted by" row. */
+  trustedMerchants?: string[]
+}
+
+export default function MarketingLanding({
+  featuredOffers = [],
+  stats = null,
+  trustedMerchants = [],
+}: MarketingLandingProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly")
 
@@ -192,11 +206,36 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
     "5% transaction fee, no hidden costs",
   ]
 
-  const heroStats = [
-    { label: "Active campaigns", value: "1,343+", icon: Sparkles, countTarget: 1343, prefix: "", suffix: "+" },
-    { label: "European merchants", value: "2,500+", icon: Users, countTarget: 2500, prefix: "", suffix: "+" },
-    { label: "Processed value", value: "EUR 12M+", icon: TrendingUp, countTarget: 12, prefix: "EUR ", suffix: "M+" },
-  ]
+  // Real figures from the database. Previously these were invented marketing
+  // numbers ("2,500+ European merchants", "EUR 12M+ processed") that matched
+  // nothing in the system — the row is now hidden entirely until there is
+  // something true to report, rather than shipping fabricated traction.
+  const processedEur = stats ? Math.floor(stats.processedCents / 100) : 0
+  const heroStats = stats
+    ? [
+        {
+          label: "Active campaigns",
+          icon: Sparkles,
+          countTarget: stats.activeCampaignCount,
+          prefix: "",
+          suffix: "",
+        },
+        {
+          label: "Merchants",
+          icon: Users,
+          countTarget: stats.merchantCount,
+          prefix: "",
+          suffix: "",
+        },
+        {
+          label: "Processed value",
+          icon: TrendingUp,
+          countTarget: processedEur,
+          prefix: "EUR ",
+          suffix: "",
+        },
+      ]
+    : []
 
   const faqs = [
     {
@@ -284,7 +323,9 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
               </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
+            <div
+              className={`mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto${heroStats.length === 0 ? ' hidden' : ''}`}
+            >
               {heroStats.map((item) => {
                 const Icon = item.icon
                 return (
@@ -309,13 +350,18 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
         </div>
       </section>
 
-      {/* Merchant Logo Wall */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <ScrollReveal>
-          <p className="text-center text-sm font-semibold text-[var(--text-faint)] mb-2 uppercase tracking-wider">Trusted by businesses across Europe</p>
-          <MerchantLogoWall />
-        </ScrollReveal>
-      </section>
+      {/* Merchant Logo Wall — real merchants only. Hidden until there are
+          enough of them to read as a trust signal rather than a placeholder. */}
+      {trustedMerchants.length >= 3 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <ScrollReveal>
+            <p className="text-center text-sm font-semibold text-[var(--text-faint)] mb-2 uppercase tracking-wider">
+              Merchants on the platform
+            </p>
+            <MerchantLogoWall merchants={trustedMerchants} />
+          </ScrollReveal>
+        </section>
+      )}
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-14">
         <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
@@ -669,22 +715,34 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
             <div className="p-8 lg:p-12 gradient-brand">
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Why Merchants Love GiftHub</h2>
               <p className="text-white/90 text-lg mb-8">
-                Join thousands of European businesses using our platform to grow their customer base and increase revenue.
+                Grow your customer base and increase revenue — while keeping your margins and owning your
+                customer relationships.
               </p>
-              <div className="flex items-center gap-8 mb-8">
-                <div>
-                  <div className="text-4xl font-bold text-white mb-1"><CountUp target={2500} suffix="+" duration={2.5} /></div>
-                  <div className="text-white/80 text-sm">Active Merchants</div>
+              {/* Real figures only. This block previously showed invented
+                  traction (2,500+ merchants, EUR 12M+ processed, 98%
+                  satisfaction — a metric the product does not even collect). */}
+              {stats && (
+                <div className="flex items-center gap-8 mb-8">
+                  <div>
+                    <div className="text-4xl font-bold text-white mb-1">
+                      <CountUp target={stats.merchantCount} duration={2.5} />
+                    </div>
+                    <div className="text-white/80 text-sm">Active Merchants</div>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold text-white mb-1">
+                      <CountUp target={processedEur} prefix="EUR " duration={2.5} />
+                    </div>
+                    <div className="text-white/80 text-sm">Processed</div>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold text-white mb-1">
+                      <CountUp target={stats.activeCampaignCount} duration={2.5} />
+                    </div>
+                    <div className="text-white/80 text-sm">Active Campaigns</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-4xl font-bold text-white mb-1"><CountUp target={12} prefix="EUR " suffix="M+" duration={2.5} /></div>
-                  <div className="text-white/80 text-sm">Processed</div>
-                </div>
-                <div>
-                  <div className="text-4xl font-bold text-white mb-1"><CountUp target={98} suffix="%" duration={2.5} /></div>
-                  <div className="text-white/80 text-sm">Satisfaction</div>
-                </div>
-              </div>
+              )}
             </div>
             <div className="p-8 lg:p-12 bg-[var(--surface)]">
               <div className="space-y-4">
@@ -702,18 +760,12 @@ export default function MarketingLanding({ featuredOffers = [] }: MarketingLandi
         </WarmCard>
       </section>
 
-      {/* Testimonials */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <ScrollReveal>
-          <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">What Our Merchants Say</h2>
-            <p className="text-lg text-[var(--text-muted)]">Real results from real businesses</p>
-          </div>
-        </ScrollReveal>
-        <ScrollReveal delay={0.2}>
-          <TestimonialsCarousel />
-        </ScrollReveal>
-      </section>
+      {/* Testimonials — intentionally not rendered.
+          The carousel shipped invented quotes attributed to named businesses
+          ("Owner, Tallinn Spa & Wellness") that are not customers. Publishing
+          fabricated testimonials is deceptive and, in the EU/UK, unlawful
+          advertising. Restore this section only with real, attributable
+          quotes the merchants have consented to. */}
 
       {/* Before / After */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
