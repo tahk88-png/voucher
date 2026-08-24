@@ -264,6 +264,8 @@ export default function PricingRulesPage() {
                       <WarmButton
                         size="icon"
                         variant="ghost"
+                        aria-label="Delete pricing rule"
+                        title="Delete pricing rule"
                         onClick={() => deleteRule(rule.id)}
                         disabled={actionLoading === rule.id}
                       >

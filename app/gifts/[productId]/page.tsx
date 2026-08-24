@@ -250,11 +250,24 @@ export default function GiftProductPage() {
                 </WarmButton>
               )}
 
-              <WarmButton variant="outline" size="icon" onClick={handleSave}>
+              <WarmButton
+                variant="outline"
+                size="icon"
+                onClick={handleSave}
+                aria-label={saved ? 'Remove from wishlist' : 'Save to wishlist'}
+                aria-pressed={saved}
+                title={saved ? 'Remove from wishlist' : 'Save to wishlist'}
+              >
                 <Heart className={saved ? 'h-5 w-5 fill-red-500 text-red-500' : 'h-5 w-5'} />
               </WarmButton>
 
-              <WarmButton variant="outline" size="icon" onClick={handleShare}>
+              <WarmButton
+                variant="outline"
+                size="icon"
+                onClick={handleShare}
+                aria-label="Share this gift"
+                title="Share this gift"
+              >
                 <Share2 className="h-5 w-5" />
               </WarmButton>
             </div>
