@@ -44,7 +44,10 @@
     "db:backup": "bash scripts/db-backup.sh",
     "db:restore": "bash scripts/db-restore.sh",
     "check:dns": "tsx scripts/check-dns-email.ts",
-    "seed:gifts": "npx tsx scripts/seed-gifts.ts"
+    "seed:gifts": "npx tsx scripts/seed-gifts.ts",
+    "db:local": "node scripts/db-local.cjs start",
+    "db:local:stop": "node scripts/db-local.cjs stop",
+    "db:local:status": "node scripts/db-local.cjs status"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.0",

@@ -438,6 +438,7 @@ function LoginForm() {
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                         <Input
                           type="email"
+                          autoComplete="email"
                           placeholder={s.emailPlaceholder}
                           value={email}
                           onChange={e => setEmail(e.target.value)}
@@ -480,6 +481,7 @@ function LoginForm() {
                       <Input
                         type="text"
                         inputMode="numeric"
+                        autoComplete="one-time-code"
                         placeholder={s.otpPlaceholder}
                         value={otp}
                         onChange={e => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
@@ -541,6 +543,7 @@ function LoginForm() {
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                       <Input
                         type="email"
+                        autoComplete="email"
                         placeholder={s.emailPlaceholder}
                         value={email}
                         onChange={e => setEmail(e.target.value)}
@@ -555,6 +558,7 @@ function LoginForm() {
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                       <Input
                         type="password"
+                        autoComplete="current-password"
                         placeholder={s.passwordPlaceholder}
                         value={password}
                         onChange={e => setPassword(e.target.value)}

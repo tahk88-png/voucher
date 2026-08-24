@@ -9,7 +9,6 @@ export const dynamic = 'force-dynamic';
 const createOccasionSchema = z.object({
   name: z.string().min(1).max(100),
   slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/),
-  description: z.string().max(500).optional(),
   icon: z.string().max(50).optional(),
   seasonalityWeight: z.number().min(0).max(5).default(1),
   activeMonths: z.array(z.number().int().min(1).max(12)).optional(),
@@ -17,6 +16,8 @@ const createOccasionSchema = z.object({
 
 export async function GET(_req: NextRequest) {
   return withErrorHandler(async () => {
+    await requireAdminPermission('admin.flags.read');
+
     const occasions = await prisma.giftOccasion.findMany({
       include: { _count: { select: { products: true } } },
       orderBy: { name: 'asc' },

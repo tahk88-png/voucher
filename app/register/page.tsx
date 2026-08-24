@@ -136,6 +136,7 @@ function RegisterForm() {
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
                     type="text"
+                    autoComplete="name"
                     placeholder="Jane Doe"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -151,6 +152,7 @@ function RegisterForm() {
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
                     type="email"
+                    autoComplete="email"
                     placeholder="you@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -166,6 +168,7 @@ function RegisterForm() {
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
                     type="password"
+                    autoComplete="new-password"
                     placeholder="Min. 8 characters"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

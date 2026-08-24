@@ -9,7 +9,6 @@ export const dynamic = 'force-dynamic';
 const createCategorySchema = z.object({
   name: z.string().min(1).max(100),
   slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/),
-  description: z.string().max(500).optional(),
   icon: z.string().max(50).optional(),
   color: z.string().max(20).optional(),
   sortOrder: z.number().int().min(0).default(0),
@@ -17,6 +16,8 @@ const createCategorySchema = z.object({
 
 export async function GET(_req: NextRequest) {
   return withErrorHandler(async () => {
+    await requireAdminPermission('admin.flags.read');
+
     const categories = await prisma.giftCategory.findMany({
       include: { _count: { select: { products: true } } },
       orderBy: { sortOrder: 'asc' },

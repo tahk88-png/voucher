@@ -157,7 +157,7 @@ function ResetPasswordContent() {
                 }}>
                   <div className="mb-4">
                     <Label htmlFor="email" className="text-sm font-medium text-[var(--text)]">{t.emailLabel}</Label>
-                    <Input id="email" type="email" required value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)}
+                    <Input id="email" type="email" autoComplete="email" required value={forgotEmail} onChange={(e) => setForgotEmail(e.target.value)}
                       placeholder={t.emailPlaceholder} className="mt-1" autoFocus />
                   </div>
                   <button type="submit" disabled={forgotLoading || !forgotEmail}
@@ -271,13 +271,13 @@ function ResetPasswordContent() {
           <form onSubmit={handleReset}>
             <div className="mb-4">
               <Label htmlFor="password" className="text-sm font-medium text-[var(--text)]">{t.newPassword}</Label>
-              <Input id="password" type="password" required minLength={8} value={password}
+              <Input id="password" type="password" autoComplete="new-password" required minLength={8} value={password}
                 onChange={(e) => setPassword(e.target.value)} className="mt-1" autoFocus />
               <PasswordStrengthMeter password={password} />
             </div>
             <div className="mb-6">
               <Label htmlFor="confirm" className="text-sm font-medium text-[var(--text)]">{t.confirmPassword}</Label>
-              <Input id="confirm" type="password" required minLength={8} value={confirmPw}
+              <Input id="confirm" type="password" autoComplete="new-password" required minLength={8} value={confirmPw}
                 onChange={(e) => setConfirmPw(e.target.value)} className="mt-1" />
             </div>
             <button type="submit" disabled={loading || !password || !confirmPw}

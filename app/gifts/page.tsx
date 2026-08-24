@@ -57,17 +57,22 @@ export default function GiftsPage() {
     budgetMax?: number;
   }>({});
 
-  // Load filter options
+  // Load filter options from the public taxonomy endpoint (one request; the
+  // /api/admin/gifts/* endpoints are admin-only and must not be called here).
   useEffect(() => {
-    Promise.all([
-      fetch('/api/admin/gifts/categories').then((r) => r.ok ? r.json() : { categories: [] }),
-      fetch('/api/admin/gifts/occasions').then((r) => r.ok ? r.json() : { occasions: [] }),
-      fetch('/api/admin/gifts/personas').then((r) => r.ok ? r.json() : { personas: [] }),
-    ]).then(([catData, occData, perData]) => {
-      setCategories(catData.categories || []);
-      setOccasions(occData.occasions || []);
-      setPersonas(perData.personas || []);
-    });
+    let cancelled = false;
+    fetch('/api/gifts/taxonomy')
+      .then((r) => (r.ok ? r.json() : { categories: [], occasions: [], personas: [] }))
+      .catch(() => ({ categories: [], occasions: [], personas: [] }))
+      .then((data) => {
+        if (cancelled) return;
+        setCategories(data.categories || []);
+        setOccasions(data.occasions || []);
+        setPersonas(data.personas || []);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Load feed

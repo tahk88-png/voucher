@@ -9,13 +9,14 @@ export const dynamic = 'force-dynamic';
 const createPersonaSchema = z.object({
   name: z.string().min(1).max(100),
   slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/),
-  description: z.string().max(500).optional(),
   icon: z.string().max(50).optional(),
   tags: z.array(z.string()).max(20).optional(),
 });
 
 export async function GET(_req: NextRequest) {
   return withErrorHandler(async () => {
+    await requireAdminPermission('admin.flags.read');
+
     const personas = await prisma.giftPersona.findMany({
       include: { _count: { select: { products: true } } },
       orderBy: { name: 'asc' },
