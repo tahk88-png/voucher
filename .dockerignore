@@ -7,6 +7,9 @@ coverage
 *.log
 npm-debug.log*
 yarn.lock
-pnpm-lock.yaml
+# pnpm-lock.yaml must NOT be ignored: the image installs with
+# `pnpm install --frozen-lockfile`, so excluding it made the COPY step fail
+# with "/pnpm-lock.yaml: not found". It was ignored back when the image
+# installed with npm and package-lock.json.
 Dockerfile*
 docker-compose*.yml
