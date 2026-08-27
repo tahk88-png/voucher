@@ -75,7 +75,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec prisma generate
-      - run: pnpm run build:next
+      - name: Build
         # instrumentation.ts runs validateEnv() during the build, so the build
         # needs these present. They are throwaway build-time placeholders — the
         # server still validates the real values at startup, which is where the
@@ -83,6 +83,19 @@ jobs:
         env:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/build_placeholder"
           AUTH_SECRET: "ci-build-placeholder-secret-not-used-at-runtime"
+        run: |
+          set -o pipefail
+          if ! pnpm run build:next 2>&1 | tee /tmp/build.log; then
+            echo "::group::build failure tail"
+            tail -60 /tmp/build.log
+            echo "::endgroup::"
+            # Surface the failure as annotations so it is visible without
+            # needing repository log-download permissions.
+            tail -25 /tmp/build.log | while IFS= read -r line; do
+              printf '::error::%s\n' "$line"
+            done
+            exit 1
+          fi
 
   schema-drift:
     # Fails the build if prisma/schema.prisma has changed in a way that
