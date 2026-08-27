@@ -86,14 +86,17 @@ jobs:
         run: |
           set -o pipefail
           if ! pnpm run build:next 2>&1 | tee /tmp/build.log; then
-            echo "::group::build failure tail"
-            tail -60 /tmp/build.log
+            echo "::group::full build log"
+            cat /tmp/build.log
             echo "::endgroup::"
-            # Surface the failure as annotations so it is visible without
-            # needing repository log-download permissions.
-            tail -25 /tmp/build.log | while IFS= read -r line; do
-              printf '::error::%s\n' "$line"
-            done
+            # Surface the failure as annotations (logs need admin rights to
+            # download). Pull the lines that actually describe the error rather
+            # than a blind tail, which the long OpenTelemetry warning trace
+            # would otherwise fill.
+            grep -nE "Type error|error TS|Failed to compile|Module not found|Cannot find|SyntaxError|ReferenceError|TypeError:|Error:" /tmp/build.log \
+              | grep -viE "opentelemetry|@sentry|Critical dependency|Import trace|PackFileCacheStrategy" \
+              | head -20 \
+              | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
             exit 1
           fi
 
