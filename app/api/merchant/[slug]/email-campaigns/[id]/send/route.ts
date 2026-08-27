@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+// The shared client is a lazy Proxy: it constructs Resend on first property
+// access (request time) instead of at import time. Constructing it at module
+// scope threw "Missing API key" while `next build` collected page data for
+// this route, which broke the build anywhere RESEND_API_KEY is absent —
+// including CI and the Docker image build.
+import { resend } from '@/lib/resend';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { logger } from '@/lib/logger';
 import { withErrorHandler } from '@/lib/error-handler';
 import { buildEmailHtml, type EmailSection } from '@/lib/email-builder';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function getRecipients(merchantId: string, filter: string) {
   const now = new Date();
