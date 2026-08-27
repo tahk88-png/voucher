@@ -20,7 +20,7 @@ export default async function MerchantLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { slug: string } | Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>;
 }) {
   const p = await Promise.resolve(params);
   let access;

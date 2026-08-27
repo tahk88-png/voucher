@@ -17,8 +17,10 @@ import CampaignsPage, {
 } from "@/app/[locale]/campaigns/page"
 
 export async function generateMetadata(): Promise<Metadata> {
+  // The locale page now follows Next 15's PageProps contract (params and
+  // searchParams are Promises), so this alias hands it resolved promises.
   return generateLocaleMetadata({
-    params: { locale: routing.defaultLocale },
+    params: Promise.resolve({ locale: routing.defaultLocale }),
   })
 }
 
@@ -95,8 +97,8 @@ export default async function CampaignsAliasPage({
   return (
     <HubShell>
       <CampaignsPage
-        params={{ locale: routing.defaultLocale }}
-        searchParams={normalizeCampaignSearchParams(sp)}
+        params={Promise.resolve({ locale: routing.defaultLocale })}
+        searchParams={Promise.resolve(normalizeCampaignSearchParams(sp))}
       />
     </HubShell>
   )

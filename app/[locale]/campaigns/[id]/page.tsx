@@ -21,7 +21,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string; id: string } | Promise<{ locale: string; id: string }>
+  params: Promise<{ locale: string; id: string }>
 }): Promise<Metadata> {
   const p = await Promise.resolve(params)
   let locale = p?.locale
@@ -89,7 +89,7 @@ export async function generateMetadata({
 export default async function CampaignDetailPage({
   params,
 }: {
-  params: { locale: string; id: string } | Promise<{ locale: string; id: string }>
+  params: Promise<{ locale: string; id: string }>
 }) {
   const p = await Promise.resolve(params)
   let locale = p?.locale

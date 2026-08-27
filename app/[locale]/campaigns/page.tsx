@@ -34,7 +34,7 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: string } | Promise<{ locale: string }>
+  params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const p = await Promise.resolve(params)
   let locale = p?.locale
@@ -88,10 +88,10 @@ export default async function CampaignsPage({
   params,
   searchParams,
 }: {
-  params: { locale: string } | Promise<{ locale: string }>
+  params: Promise<{ locale: string }>
   // Accept both Promise (Next.js 15 contract) and plain object (called from
   // app/campaigns/page.tsx alias). `await Promise.resolve(x)` normalises both.
-  searchParams?: CampaignsSearchParams | Promise<CampaignsSearchParams>
+  searchParams?: Promise<CampaignsSearchParams>
 }) {
   const p = await Promise.resolve(params)
   const sp = await Promise.resolve(searchParams)

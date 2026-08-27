@@ -15,7 +15,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params
   return generateLocaleMetadata({
-    params: { locale: routing.defaultLocale, id },
+    params: Promise.resolve({ locale: routing.defaultLocale, id }),
   })
 }
 
@@ -34,5 +34,5 @@ export default async function CampaignAliasPage({
     redirect(`/${locale}/campaigns/${id}${toQueryString(sp)}`)
   }
 
-  return <CampaignDetailPage params={{ locale: routing.defaultLocale, id }} />
+  return <CampaignDetailPage params={Promise.resolve({ locale: routing.defaultLocale, id })} />
 }
