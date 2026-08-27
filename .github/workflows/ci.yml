@@ -118,6 +118,10 @@ jobs:
         image: postgres:16-alpine
         env:
           POSTGRES_PASSWORD: postgres
+          # Without this the service only creates the default `postgres`
+          # database, so every connection to .../shadow above failed and the
+          # drift check could never actually run.
+          POSTGRES_DB: shadow
         ports:
           - 5432:5432
         options: >-
