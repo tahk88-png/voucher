@@ -15,6 +15,11 @@ RUN apk add --no-cache libc6-compat
 RUN corepack enable && corepack prepare pnpm@10.28.1 --activate
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# instrumentation.ts validates env during `next build`. These are throwaway
+# build-time placeholders confined to the builder stage — they never reach the
+# runtime image, which validates the real values at startup.
+ENV DATABASE_URL="postgresql://postgres:postgres@localhost:5432/build_placeholder"
+ENV AUTH_SECRET="docker-build-placeholder-secret-not-used-at-runtime"
 RUN pnpm run build:next
 
 FROM node:20-alpine AS runner

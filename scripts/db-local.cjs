@@ -72,13 +72,19 @@ function isReady() {
   }
 }
 
-function waitReady(seconds = 40) {
+/** Sleep without burning CPU — a busy-wait here competes with the very
+ *  postgres startup (and crash recovery) we are waiting on. */
+function sleep(ms) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
+
+// Generous by default: after an unclean shutdown postgres replays WAL before
+// it accepts connections, which can take well over half a minute.
+function waitReady(seconds = 120) {
   const deadline = Date.now() + seconds * 1000;
   while (Date.now() < deadline) {
     if (isReady()) return true;
-    // busy-wait in 500ms slices — keeps this dependency-free
-    const t = Date.now() + 500;
-    while (Date.now() < t) { /* spin */ }
+    sleep(500);
   }
   return false;
 }

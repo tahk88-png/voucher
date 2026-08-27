@@ -10,12 +10,16 @@
 -- Currency actually charged on every installment. Defaulted to 'usd' only so
 -- the column can be added non-null to any pre-existing rows; the create route
 -- always writes the plan's real (voucher- or request-derived) currency.
-ALTER TABLE "InstallmentPlan" ADD COLUMN "currency" TEXT NOT NULL DEFAULT 'usd';
+-- IF NOT EXISTS throughout: 20260602500000_add_missing_schema_objects creates
+-- "InstallmentPlan" from the current schema, so on a fresh database these
+-- columns already exist by the time this migration runs. Matches the
+-- idempotent style already used by the launch_mode migration.
+ALTER TABLE "InstallmentPlan" ADD COLUMN IF NOT EXISTS "currency" TEXT NOT NULL DEFAULT 'usd';
 
 -- Saved payment method the cron charges off-session for installments 2..N.
-ALTER TABLE "InstallmentPlan" ADD COLUMN "stripePaymentMethodId" TEXT;
+ALTER TABLE "InstallmentPlan" ADD COLUMN IF NOT EXISTS "stripePaymentMethodId" TEXT;
 
 -- One reusable Stripe Customer per user. Saved payment methods attach here so
 -- repeat BNPL plans reuse the same customer instead of orphaning a new one.
-ALTER TABLE "User" ADD COLUMN "stripeCustomerId" TEXT;
-CREATE INDEX "User_stripeCustomerId_idx" ON "User"("stripeCustomerId");
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "stripeCustomerId" TEXT;
+CREATE INDEX IF NOT EXISTS "User_stripeCustomerId_idx" ON "User"("stripeCustomerId");

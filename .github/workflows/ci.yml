@@ -76,6 +76,13 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec prisma generate
       - run: pnpm run build:next
+        # instrumentation.ts runs validateEnv() during the build, so the build
+        # needs these present. They are throwaway build-time placeholders — the
+        # server still validates the real values at startup, which is where the
+        # fail-fast check actually protects a deployment.
+        env:
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/build_placeholder"
+          AUTH_SECRET: "ci-build-placeholder-secret-not-used-at-runtime"
 
   schema-drift:
     # Fails the build if prisma/schema.prisma has changed in a way that
