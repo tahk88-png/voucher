@@ -1,15 +1,21 @@
 FROM node:20-alpine AS deps
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
-COPY package.json package-lock.json* pnpm-lock.yaml* ./
-RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
+# pnpm is this project's package manager: its lockfile is the one that
+# resolves. `npm ci` fails here with an ERESOLVE peer conflict
+# (@vercel/analytics optionally peers on @sveltejs/kit, which drags in a
+# vite@^8 requirement), which previously broke every image build.
+RUN corepack enable && corepack prepare pnpm@10.28.1 --activate
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile
 
 FROM node:20-alpine AS builder
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
+RUN corepack enable && corepack prepare pnpm@10.28.1 --activate
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run build:next
+RUN pnpm run build:next
 
 FROM node:20-alpine AS runner
 WORKDIR /app

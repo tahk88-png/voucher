@@ -10,40 +10,49 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npm run lint
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
 
   typecheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm ci
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       # Prisma client must exist before tsc can resolve @prisma/client types.
-      - run: npx prisma generate
-      - run: npx tsc --noEmit --skipLibCheck
+      - run: pnpm exec prisma generate
+      - run: pnpm exec tsc --noEmit --skipLibCheck
 
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npx prisma generate
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec prisma generate
       # Runs the default Vitest pool (forks, single-fork) with coverage.
       # Integration tests that need a live Postgres are opt-in via
       # VITEST_INCLUDE_INTEGRATION — see vitest.config.ts.
-      - run: npm run test:coverage
+      - run: pnpm run test:coverage
       - name: Upload coverage artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -57,13 +66,16 @@ jobs:
     needs: [lint, typecheck, test]
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npx prisma generate
-      - run: npm run build:next
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec prisma generate
+      - run: pnpm run build:next
 
   schema-drift:
     # Fails the build if prisma/schema.prisma has changed in a way that
@@ -72,17 +84,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm ci
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Check migrations match schema
         # `migrate diff` with equal from/to exits 0 (no drift) or 2 (drift).
         # We compare the applied migrations (`--from-migrations`) against
         # the current schema (`--to-schema-datamodel`). Non-zero = drift.
         run: |
-          npx prisma migrate diff \
+          pnpm exec prisma migrate diff \
             --from-migrations ./prisma/migrations \
             --to-schema-datamodel ./prisma/schema.prisma \
             --shadow-database-url "postgresql://postgres:postgres@localhost:5432/shadow" \
@@ -111,17 +126,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm ci
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - name: Apply migrations to test DB
-        run: npx prisma migrate deploy
+        run: pnpm exec prisma migrate deploy
         env:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/voucher_test"
       - name: Run integration tests
-        run: npm run test:integration
+        run: pnpm run test:integration
         env:
           DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/voucher_test"
           VITEST_INCLUDE_INTEGRATION: "1"
