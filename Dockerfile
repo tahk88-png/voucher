@@ -22,6 +22,12 @@ COPY . .
 # runtime image, which validates the real values at startup.
 ENV DATABASE_URL="postgresql://postgres:postgres@localhost:5432/build_placeholder"
 ENV AUTH_SECRET="docker-build-placeholder-secret-not-used-at-runtime"
+# The client must be generated before `next build` imports @prisma/client.
+# Nothing else does it here: the deps stage installs without prisma/schema.prisma
+# present, and pnpm 10 does not run dependency build scripts by default, so
+# @prisma/client's own postinstall never fires. CI's build job runs this same
+# step explicitly.
+RUN pnpm exec prisma generate
 RUN pnpm run build:next
 
 FROM node:20-alpine AS runner
