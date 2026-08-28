@@ -8,7 +8,12 @@ RUN apk add --no-cache libc6-compat
 # Installed with npm rather than corepack: the corepack bundled with Node 20
 # ships an older signing key and rejects recent pnpm releases.
 RUN npm install -g pnpm@10.28.1
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# .npmrc carries node-linker=hoisted. Without it, pnpm in the image used its
+# default strict layout while local and CI installs were hoisted — so phantom
+# (undeclared transitive) imports resolved everywhere except in Docker, where
+# the build failed with "Cannot find module 'jose'". Copying it keeps install
+# behaviour identical across all environments.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 RUN pnpm install --frozen-lockfile
 
 FROM node:20-alpine AS builder
