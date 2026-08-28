@@ -21,6 +21,7 @@ import Providers from "@/components/providers/session-provider";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 import { ConfirmHost } from "@/components/ui/confirm-host";
+import { CommandPaletteHost } from "@/components/ui/command-palette-host";
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, buildLocaleAlternates, getBaseUrl } from "@/lib/seo";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { Analytics } from "@vercel/analytics/react";
@@ -144,6 +145,7 @@ export default async function RootLayout({
             </div>
             <Toaster />
             <ConfirmHost />
+            <CommandPaletteHost />
             <ChatWidgetLoader />
             <CookieConsentBanner />
             <Analytics />

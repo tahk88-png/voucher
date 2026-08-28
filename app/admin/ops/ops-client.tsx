@@ -107,7 +107,7 @@ export default function OpsClient() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/admin/control-panel">
-              <WarmButton variant="ghost" size="sm">← Tagasi</WarmButton>
+              <WarmButton variant="ghost" size="sm">← Back</WarmButton>
             </Link>
             <Activity className="h-6 w-6 text-green-500" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">System Operations</h1>
@@ -145,7 +145,7 @@ export default function OpsClient() {
 
         {loading ? (
           <WarmCard>
-            <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Laadin...</div>
+            <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Loading...</div>
           </WarmCard>
         ) : (
           <>
@@ -154,7 +154,7 @@ export default function OpsClient() {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                 {(health?.services ?? []).length === 0 ? (
                   <WarmCard className="col-span-full">
-                    <p className="text-[var(--text-secondary)] text-center py-8">Health data puudub</p>
+                    <p className="text-[var(--text-secondary)] text-center py-8">No health data available</p>
                   </WarmCard>
                 ) : (
                   (health?.services ?? []).map((svc, i) => (
@@ -187,18 +187,18 @@ export default function OpsClient() {
             {tab === 'jobs' && (
               <WarmCard padding="none">
                 {jobs.length === 0 ? (
-                  <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Töid ei leitud</div>
+                  <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">No jobs found</div>
                 ) : (
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead className="border-b border-[var(--border)] bg-[var(--surface)]">
                         <tr className="text-left text-[var(--text-secondary)]">
-                          <th className="px-4 py-3 font-semibold">Töö nimi</th>
-                          <th className="px-4 py-3 font-semibold">Staatus</th>
-                          <th className="px-4 py-3 font-semibold">Alustatud</th>
-                          <th className="px-4 py-3 font-semibold">Kestus</th>
-                          <th className="px-4 py-3 font-semibold">Viga</th>
-                          <th className="px-4 py-3 font-semibold">Tegevused</th>
+                          <th className="px-4 py-3 font-semibold">Job name</th>
+                          <th className="px-4 py-3 font-semibold">Status</th>
+                          <th className="px-4 py-3 font-semibold">Started</th>
+                          <th className="px-4 py-3 font-semibold">Duration</th>
+                          <th className="px-4 py-3 font-semibold">Error</th>
+                          <th className="px-4 py-3 font-semibold">Actions</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[var(--border)]">
@@ -211,7 +211,7 @@ export default function OpsClient() {
                               </span>
                             </td>
                             <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">
-                              {new Date(job.startedAt).toLocaleString('et-EE')}
+                              {new Date(job.startedAt).toLocaleString('en-GB')}
                             </td>
                             <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">
                               {job.durationMs != null ? `${job.durationMs}ms` : '—'}
@@ -244,16 +244,16 @@ export default function OpsClient() {
             {tab === 'migrations' && (
               <WarmCard padding="none">
                 {migrations.length === 0 ? (
-                  <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Migratsioone ei leitud</div>
+                  <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">No migrations found</div>
                 ) : (
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead className="border-b border-[var(--border)] bg-[var(--surface)]">
                         <tr className="text-left text-[var(--text-secondary)]">
-                          <th className="px-4 py-3 font-semibold">Migratsioon</th>
-                          <th className="px-4 py-3 font-semibold">Staatus</th>
-                          <th className="px-4 py-3 font-semibold">Sammud</th>
-                          <th className="px-4 py-3 font-semibold">Rakendatud</th>
+                          <th className="px-4 py-3 font-semibold">Migration</th>
+                          <th className="px-4 py-3 font-semibold">Status</th>
+                          <th className="px-4 py-3 font-semibold">Steps</th>
+                          <th className="px-4 py-3 font-semibold">Applied</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-[var(--border)]">
@@ -267,7 +267,7 @@ export default function OpsClient() {
                             </td>
                             <td className="px-4 py-3 text-[var(--text-secondary)]">{m.applied_steps_count}</td>
                             <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">
-                              {m.finished_at ? new Date(m.finished_at).toLocaleDateString('et-EE') : '—'}
+                              {m.finished_at ? new Date(m.finished_at).toLocaleDateString('en-GB') : '—'}
                             </td>
                           </tr>
                         ))}
@@ -282,7 +282,7 @@ export default function OpsClient() {
             {tab === 'metrics' && (
               <WarmCard padding="lg">
                 {!metrics ? (
-                  <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Metriikat ei leitud</div>
+                  <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">No metrics found</div>
                 ) : (
                   <div className="space-y-6">
                     {/* Live gauges — DB-backed, rendered friendly. Raw

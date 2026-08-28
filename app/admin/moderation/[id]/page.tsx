@@ -27,12 +27,12 @@ type Report = {
 };
 
 const ACTION_TYPES = [
-  { value: 'warning', label: 'Hoiatus', color: 'text-yellow-600' },
-  { value: 'content_removal', label: 'Sisu eemaldamine', color: 'text-orange-600' },
-  { value: 'suspension', label: 'Peatamine', color: 'text-red-600' },
-  { value: 'ban', label: 'Blokeerimine', color: 'text-red-700' },
-  { value: 'unban', label: 'Blokeeringu eemaldamine', color: 'text-green-600' },
-  { value: 'feature_restriction', label: 'Funktsiooni piiramine', color: 'text-purple-600' },
+  { value: 'warning', label: 'Warning', color: 'text-yellow-600' },
+  { value: 'content_removal', label: 'Content removal', color: 'text-orange-600' },
+  { value: 'suspension', label: 'Suspension', color: 'text-red-600' },
+  { value: 'ban', label: 'Ban', color: 'text-red-700' },
+  { value: 'unban', label: 'Unban', color: 'text-green-600' },
+  { value: 'feature_restriction', label: 'Feature restriction', color: 'text-purple-600' },
 ];
 
 const STATUS_COLORS: Record<string, string> = {
@@ -87,7 +87,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
       });
       if (!res.ok) {
         const err = await res.json();
-        setActionError(err.error ?? 'Tegevus ebaõnnestus');
+        setActionError(err.error ?? 'Action failed');
         return;
       }
       // Refresh report
@@ -118,7 +118,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-[var(--bg)]">
-        <p className="text-[var(--text-secondary)]">Laadin...</p>
+        <p className="text-[var(--text-secondary)]">Loading...</p>
       </div>
     );
   }
@@ -126,8 +126,8 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
   if (!report) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-[var(--bg)] gap-4">
-        <p className="text-[var(--text-secondary)]">Raportit ei leitud</p>
-        <Link href="/admin/moderation"><WarmButton>← Tagasi</WarmButton></Link>
+        <p className="text-[var(--text-secondary)]">Report not found</p>
+        <Link href="/admin/moderation"><WarmButton>← Back</WarmButton></Link>
       </div>
     );
   }
@@ -138,7 +138,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
         {/* Header */}
         <div className="flex items-center gap-3">
           <Link href="/admin/moderation">
-            <WarmButton variant="ghost" size="sm">← Tagasi</WarmButton>
+            <WarmButton variant="ghost" size="sm">← Back</WarmButton>
           </Link>
           <AlertTriangle className="h-6 w-6 text-orange-500" />
           <h1 className="text-2xl font-bold text-[var(--text-primary)]">Report detail</h1>
@@ -150,19 +150,19 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Report info */}
           <WarmCard padding="lg">
-            <h2 className="font-semibold text-[var(--text-primary)] mb-4">Raporti info</h2>
+            <h2 className="font-semibold text-[var(--text-primary)] mb-4">Report info</h2>
             <dl className="space-y-3 text-sm">
               <div>
-                <dt className="text-[var(--text-secondary)]">Kategooria</dt>
+                <dt className="text-[var(--text-secondary)]">Category</dt>
                 <dd className="font-medium text-[var(--text-primary)] capitalize mt-0.5">{report.category.replace(/_/g, ' ')}</dd>
               </div>
               <div>
-                <dt className="text-[var(--text-secondary)]">Kirjeldus</dt>
+                <dt className="text-[var(--text-secondary)]">Description</dt>
                 <dd className="text-[var(--text-primary)] mt-0.5 whitespace-pre-wrap">{report.description}</dd>
               </div>
               {report.evidenceUrls && report.evidenceUrls.length > 0 && (
                 <div>
-                  <dt className="text-[var(--text-secondary)]">Tõendid</dt>
+                  <dt className="text-[var(--text-secondary)]">Evidence</dt>
                   <dd className="mt-0.5 space-y-1">
                     {report.evidenceUrls.map((url, i) => (
                       <a key={i} href={url} target="_blank" rel="noopener noreferrer"
@@ -174,8 +174,8 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
                 </div>
               )}
               <div>
-                <dt className="text-[var(--text-secondary)]">Kuupäev</dt>
-                <dd className="text-[var(--text-primary)] mt-0.5">{new Date(report.createdAt).toLocaleString('et-EE')}</dd>
+                <dt className="text-[var(--text-secondary)]">Date</dt>
+                <dd className="text-[var(--text-primary)] mt-0.5">{new Date(report.createdAt).toLocaleString('en-GB')}</dd>
               </div>
             </dl>
           </WarmCard>
@@ -184,7 +184,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
           <div className="space-y-4">
             {report.reportedUser && (
               <WarmCard padding="md">
-                <p className="text-xs font-semibold text-[var(--text-secondary)] mb-2">RAPORTEERITUD KASUTAJA</p>
+                <p className="text-xs font-semibold text-[var(--text-secondary)] mb-2">REPORTED USER</p>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-sm">
                     {report.reportedUser.name?.[0] ?? '?'}
@@ -199,7 +199,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
             )}
             {report.reportedBy && (
               <WarmCard padding="md">
-                <p className="text-xs font-semibold text-[var(--text-secondary)] mb-2">RAPORTEERIJA</p>
+                <p className="text-xs font-semibold text-[var(--text-secondary)] mb-2">REPORTED BY</p>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm">
                     {report.reportedBy.name?.[0] ?? '?'}
@@ -217,7 +217,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
         {/* Previous actions */}
         {report.moderationActions && report.moderationActions.length > 0 && (
           <WarmCard padding="lg">
-            <h2 className="font-semibold text-[var(--text-primary)] mb-4">Eelmised tegevused</h2>
+            <h2 className="font-semibold text-[var(--text-primary)] mb-4">Previous actions</h2>
             <div className="space-y-3">
               {report.moderationActions.map(action => (
                 <div key={action.id} className="flex items-start gap-3 p-3 bg-[var(--surface)] rounded-lg">
@@ -225,7 +225,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
                   <div>
                     <p className="text-sm font-medium text-[var(--text-primary)] capitalize">{action.actionType.replace(/_/g, ' ')}</p>
                     <p className="text-xs text-[var(--text-secondary)]">{action.reason}</p>
-                    <p className="text-xs text-[var(--text-secondary)] mt-1">{new Date(action.createdAt).toLocaleString('et-EE')}</p>
+                    <p className="text-xs text-[var(--text-secondary)] mt-1">{new Date(action.createdAt).toLocaleString('en-GB')}</p>
                   </div>
                 </div>
               ))}
@@ -237,10 +237,10 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Take action */}
             <WarmCard padding="lg">
-              <h2 className="font-semibold text-[var(--text-primary)] mb-4">Võta tegevus</h2>
+              <h2 className="font-semibold text-[var(--text-primary)] mb-4">Take action</h2>
               <div className="space-y-4">
                 <div>
-                  <Label>Tegevuse tüüp</Label>
+                  <Label>Action type</Label>
                   <div className="grid grid-cols-2 gap-2 mt-2">
                     {ACTION_TYPES.map(at => (
                       <button
@@ -258,19 +258,19 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="action-reason">Põhjus *</Label>
+                  <Label htmlFor="action-reason">Reason *</Label>
                   <textarea
                     id="action-reason"
                     value={actionReason}
                     onChange={e => setActionReason(e.target.value)}
-                    placeholder="Miks see tegevus võetakse..."
+                    placeholder="Why this action is being taken..."
                     rows={3}
                     className="mt-1 w-full px-3 py-2 text-sm rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] resize-none"
                   />
                 </div>
                 {['suspension', 'ban', 'feature_restriction'].includes(actionType) && (
                   <div>
-                    <Label htmlFor="action-expiry">Aegub (vabatahtlik)</Label>
+                    <Label htmlFor="action-expiry">Expires (optional)</Label>
                     <Input
                       id="action-expiry"
                       type="datetime-local"
@@ -289,14 +289,14 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
                   disabled={!actionReason}
                   onClick={takeAction}
                 >
-                  <UserX className="h-4 w-4 mr-2" /> Rakenda tegevus
+                  <UserX className="h-4 w-4 mr-2" /> Apply action
                 </WarmButton>
               </div>
             </WarmCard>
 
             {/* Resolve */}
             <WarmCard padding="lg">
-              <h2 className="font-semibold text-[var(--text-primary)] mb-4">Sulge raport</h2>
+              <h2 className="font-semibold text-[var(--text-primary)] mb-4">Close report</h2>
               <div className="space-y-4">
                 <div className="flex gap-2">
                   <button
@@ -307,7 +307,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
                         : 'border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--surface)]'
                     }`}
                   >
-                    <CheckCircle className="h-4 w-4" /> Lahendatud
+                    <CheckCircle className="h-4 w-4" /> Resolved
                   </button>
                   <button
                     onClick={() => setResolveStatus('dismissed')}
@@ -317,16 +317,16 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
                         : 'border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--surface)]'
                     }`}
                   >
-                    <XCircle className="h-4 w-4" /> Tagasi lükatud
+                    <XCircle className="h-4 w-4" /> Dismissed
                   </button>
                 </div>
                 <div>
-                  <Label htmlFor="resolution">Resolutsioon *</Label>
+                  <Label htmlFor="resolution">Resolution *</Label>
                   <textarea
                     id="resolution"
                     value={resolution}
                     onChange={e => setResolution(e.target.value)}
-                    placeholder="Kuidas see raport lahendati..."
+                    placeholder="How this report was resolved..."
                     rows={4}
                     className="mt-1 w-full px-3 py-2 text-sm rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] resize-none"
                   />
@@ -338,7 +338,7 @@ export default function ReportDetailPage({ params }: { params: Promise<{ id: str
                   disabled={!resolution}
                   onClick={resolveReport}
                 >
-                  Sulge raport
+                  Close report
                 </WarmButton>
               </div>
             </WarmCard>

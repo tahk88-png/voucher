@@ -153,7 +153,7 @@ export default function BillingClient() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/admin/control-panel">
-              <WarmButton variant="ghost" size="sm">← Tagasi</WarmButton>
+              <WarmButton variant="ghost" size="sm">← Back</WarmButton>
             </Link>
             <CreditCard className="h-6 w-6 text-blue-500" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Billing & Payments</h1>
@@ -183,11 +183,11 @@ export default function BillingClient() {
         {/* Content */}
         <WarmCard padding="none">
           {loading ? (
-            <div className="flex items-center justify-center h-48 text-[var(--text-secondary)]">Laadin...</div>
+            <div className="flex items-center justify-center h-48 text-[var(--text-secondary)]">Loading...</div>
           ) : data.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-48 gap-2 text-[var(--text-secondary)]">
               <CheckCircle className="h-8 w-8 opacity-30" />
-              <p>Andmeid ei leitud</p>
+              <p>No data found</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -196,40 +196,40 @@ export default function BillingClient() {
                   {tab === 'subscriptions' && (
                     <tr className="text-left text-[var(--text-secondary)]">
                       <th className="px-4 py-3 font-semibold">Merchant</th>
-                      <th className="px-4 py-3 font-semibold">Plaan</th>
-                      <th className="px-4 py-3 font-semibold">Staatus</th>
-                      <th className="px-4 py-3 font-semibold">Summa</th>
-                      <th className="px-4 py-3 font-semibold">Periood lõpeb</th>
-                      <th className="px-4 py-3 font-semibold">Tegevused</th>
+                      <th className="px-4 py-3 font-semibold">Plan</th>
+                      <th className="px-4 py-3 font-semibold">Status</th>
+                      <th className="px-4 py-3 font-semibold">Amount</th>
+                      <th className="px-4 py-3 font-semibold">Period ends</th>
+                      <th className="px-4 py-3 font-semibold">Actions</th>
                     </tr>
                   )}
                   {tab === 'failed' && (
                     <tr className="text-left text-[var(--text-secondary)]">
                       <th className="px-4 py-3 font-semibold">Merchant</th>
-                      <th className="px-4 py-3 font-semibold">Summa</th>
-                      <th className="px-4 py-3 font-semibold">Vea põhjus</th>
-                      <th className="px-4 py-3 font-semibold">Katsed</th>
-                      <th className="px-4 py-3 font-semibold">Kuupäev</th>
-                      <th className="px-4 py-3 font-semibold">Tegevused</th>
+                      <th className="px-4 py-3 font-semibold">Amount</th>
+                      <th className="px-4 py-3 font-semibold">Failure reason</th>
+                      <th className="px-4 py-3 font-semibold">Retries</th>
+                      <th className="px-4 py-3 font-semibold">Date</th>
+                      <th className="px-4 py-3 font-semibold">Actions</th>
                     </tr>
                   )}
                   {tab === 'refunds' && (
                     <tr className="text-left text-[var(--text-secondary)]">
                       <th className="px-4 py-3 font-semibold">Merchant</th>
-                      <th className="px-4 py-3 font-semibold">Summa</th>
-                      <th className="px-4 py-3 font-semibold">Põhjus</th>
-                      <th className="px-4 py-3 font-semibold">Staatus</th>
-                      <th className="px-4 py-3 font-semibold">Kuupäev</th>
+                      <th className="px-4 py-3 font-semibold">Amount</th>
+                      <th className="px-4 py-3 font-semibold">Reason</th>
+                      <th className="px-4 py-3 font-semibold">Status</th>
+                      <th className="px-4 py-3 font-semibold">Date</th>
                     </tr>
                   )}
                   {tab === 'holds' && (
                     <tr className="text-left text-[var(--text-secondary)]">
                       <th className="px-4 py-3 font-semibold">Merchant</th>
-                      <th className="px-4 py-3 font-semibold">Summa</th>
-                      <th className="px-4 py-3 font-semibold">Põhjus</th>
-                      <th className="px-4 py-3 font-semibold">Staatus</th>
-                      <th className="px-4 py-3 font-semibold">Kuupäev</th>
-                      <th className="px-4 py-3 font-semibold">Tegevused</th>
+                      <th className="px-4 py-3 font-semibold">Amount</th>
+                      <th className="px-4 py-3 font-semibold">Reason</th>
+                      <th className="px-4 py-3 font-semibold">Status</th>
+                      <th className="px-4 py-3 font-semibold">Date</th>
+                      <th className="px-4 py-3 font-semibold">Actions</th>
                     </tr>
                   )}
                 </thead>
@@ -247,18 +247,18 @@ export default function BillingClient() {
                           </td>
                           <td className="px-4 py-3 font-medium">{item.amount ? cents(item.amount) : '—'}</td>
                           <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">
-                            {item.currentPeriodEnd ? new Date(item.currentPeriodEnd).toLocaleDateString('et-EE') : '—'}
+                            {item.currentPeriodEnd ? new Date(item.currentPeriodEnd).toLocaleDateString('en-GB') : '—'}
                           </td>
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2">
                               <Input
                                 value={refundReason}
                                 onChange={e => setRefundReason(e.target.value)}
-                                placeholder="Tagasimakse põhjus"
+                                placeholder="Refund reason"
                                 className="text-xs h-8 w-36"
                               />
                               <WarmButton size="sm" variant="outline" onClick={() => issueRefund(item.id)} disabled={!refundReason.trim()}>
-                                Tagasimaks
+                                Refund
                               </WarmButton>
                             </div>
                           </td>
@@ -271,7 +271,7 @@ export default function BillingClient() {
                           <td className="px-4 py-3 text-[var(--text-secondary)] text-xs max-w-[200px] truncate">{item.failureReason ?? item.lastError ?? '—'}</td>
                           <td className="px-4 py-3 text-center">{item.retryCount ?? 0}</td>
                           <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">
-                            {item.createdAt ? new Date(item.createdAt).toLocaleDateString('et-EE') : '—'}
+                            {item.createdAt ? new Date(item.createdAt).toLocaleDateString('en-GB') : '—'}
                           </td>
                           <td className="px-4 py-3">
                             <WarmButton
@@ -280,7 +280,7 @@ export default function BillingClient() {
                               isLoading={actionLoading === item.id}
                               onClick={() => retryPayment(item.id)}
                             >
-                              Proovi uuesti
+                              Retry
                             </WarmButton>
                           </td>
                         </>
@@ -296,7 +296,7 @@ export default function BillingClient() {
                             </span>
                           </td>
                           <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">
-                            {item.createdAt ? new Date(item.createdAt).toLocaleDateString('et-EE') : '—'}
+                            {item.createdAt ? new Date(item.createdAt).toLocaleDateString('en-GB') : '—'}
                           </td>
                         </>
                       )}
@@ -311,7 +311,7 @@ export default function BillingClient() {
                             </span>
                           </td>
                           <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">
-                            {item.createdAt ? new Date(item.createdAt).toLocaleDateString('et-EE') : '—'}
+                            {item.createdAt ? new Date(item.createdAt).toLocaleDateString('en-GB') : '—'}
                           </td>
                           <td className="px-4 py-3">
                             {item.status === 'held' && (
@@ -321,7 +321,7 @@ export default function BillingClient() {
                                 isLoading={actionLoading === item.id}
                                 onClick={() => releaseHold(item.id)}
                               >
-                                Vabasta
+                                Release
                               </WarmButton>
                             )}
                           </td>

@@ -88,7 +88,7 @@ export default function AppealsPage() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/admin/control-panel">
-              <WarmButton variant="ghost" size="sm">← Tagasi</WarmButton>
+              <WarmButton variant="ghost" size="sm">← Back</WarmButton>
             </Link>
             <Scale className="h-6 w-6 text-indigo-500" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Moderation Appeals</h1>
@@ -113,7 +113,7 @@ export default function AppealsPage() {
                   : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--border)]'
               }`}
             >
-              {s === '' ? 'Kõik' : s}
+              {s === '' ? 'All' : s}
             </button>
           ))}
         </div>
@@ -121,13 +121,13 @@ export default function AppealsPage() {
         {/* Appeals list */}
         {loading ? (
           <WarmCard>
-            <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Laadin...</div>
+            <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Loading...</div>
           </WarmCard>
         ) : appeals.length === 0 ? (
           <WarmCard>
             <div className="flex flex-col items-center justify-center h-32 gap-2 text-[var(--text-secondary)]">
               <Scale className="h-8 w-8 opacity-30" />
-              <p>Kaebusi ei leitud</p>
+              <p>No appeals found</p>
             </div>
           </WarmCard>
         ) : (
@@ -142,7 +142,7 @@ export default function AppealsPage() {
                       </span>
                       {appeal.moderationAction && (
                         <span className="text-xs text-[var(--text-secondary)] capitalize">
-                          Kaebus: {appeal.moderationAction.actionType.replace(/_/g, ' ')}
+                          Appealing: {appeal.moderationAction.actionType.replace(/_/g, ' ')}
                         </span>
                       )}
                     </div>
@@ -154,12 +154,12 @@ export default function AppealsPage() {
                         </span>
                       )}
                       <span className="text-xs text-[var(--text-secondary)]">
-                        {new Date(appeal.createdAt).toLocaleDateString('et-EE')}
+                        {new Date(appeal.createdAt).toLocaleDateString('en-GB')}
                       </span>
                     </div>
                     {appeal.moderationAction?.reason && (
                       <div className="mt-2 p-2 bg-[var(--surface)] rounded text-xs text-[var(--text-secondary)]">
-                        <span className="font-medium">Algne põhjus:</span> {appeal.moderationAction.reason}
+                        <span className="font-medium">Original reason:</span> {appeal.moderationAction.reason}
                       </div>
                     )}
                   </div>
@@ -171,7 +171,7 @@ export default function AppealsPage() {
                           <textarea
                             value={resolutionNote}
                             onChange={e => setResolutionNote(e.target.value)}
-                            placeholder="Otsuse põhjendus..."
+                            placeholder="Reason for the decision..."
                             rows={3}
                             className="w-full px-2 py-1.5 text-xs rounded-lg border border-[var(--border)] bg-white text-[var(--text-primary)] resize-none"
                           />
@@ -183,7 +183,7 @@ export default function AppealsPage() {
                               onClick={() => reviewAppeal(appeal.id, 'approved')}
                               className="flex-1"
                             >
-                              <CheckCircle className="h-3 w-3 mr-1" /> Kiida heaks
+                              <CheckCircle className="h-3 w-3 mr-1" /> Approve
                             </WarmButton>
                             <WarmButton
                               size="sm"
@@ -192,19 +192,19 @@ export default function AppealsPage() {
                               onClick={() => reviewAppeal(appeal.id, 'rejected')}
                               className="flex-1"
                             >
-                              <XCircle className="h-3 w-3 mr-1" /> Lükka tagasi
+                              <XCircle className="h-3 w-3 mr-1" /> Reject
                             </WarmButton>
                           </div>
                           <button
                             onClick={() => setActiveAppealId(null)}
                             className="text-xs text-[var(--text-secondary)] hover:underline"
                           >
-                            Tühista
+                            Cancel
                           </button>
                         </div>
                       ) : (
                         <WarmButton size="sm" variant="outline" onClick={() => setActiveAppealId(appeal.id)}>
-                          Vaata üle
+                          Review
                         </WarmButton>
                       )}
                     </div>

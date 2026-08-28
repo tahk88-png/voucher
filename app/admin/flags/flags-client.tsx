@@ -74,7 +74,7 @@ export default function FlagsClient() {
   }
 
   async function deleteFlag(id: string) {
-    showConfirm('Kustuta see feature flag?', async () => {
+    showConfirm('Delete this feature flag?', async () => {
       setActionLoading(id);
       try {
         await fetch(`/api/admin/flags/${id}`, { method: 'DELETE' });
@@ -132,7 +132,7 @@ export default function FlagsClient() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/admin/control-panel">
-              <WarmButton variant="ghost" size="sm">← Tagasi</WarmButton>
+              <WarmButton variant="ghost" size="sm">← Back</WarmButton>
             </Link>
             <Flag className="h-6 w-6 text-purple-500" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Feature Flags</h1>
@@ -142,7 +142,7 @@ export default function FlagsClient() {
               <RefreshCw className="h-4 w-4" />
             </WarmButton>
             <WarmButton size="sm" onClick={() => setShowCreate(!showCreate)}>
-              <Plus className="h-4 w-4 mr-1" /> Uus flag
+              <Plus className="h-4 w-4 mr-1" /> New flag
             </WarmButton>
           </div>
         </div>
@@ -150,10 +150,10 @@ export default function FlagsClient() {
         {/* Create form */}
         {showCreate && (
           <WarmCard padding="lg">
-            <h2 className="font-semibold text-[var(--text-primary)] mb-4">Uus Feature Flag</h2>
+            <h2 className="font-semibold text-[var(--text-primary)] mb-4">New Feature Flag</h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="ff-key">Võti (key)</Label>
+                <Label htmlFor="ff-key">Key</Label>
                 <Input
                   id="ff-key"
                   value={newKey}
@@ -163,7 +163,7 @@ export default function FlagsClient() {
                 />
               </div>
               <div>
-                <Label htmlFor="ff-name">Nimi</Label>
+                <Label htmlFor="ff-name">Name</Label>
                 <Input
                   id="ff-name"
                   value={newName}
@@ -173,17 +173,17 @@ export default function FlagsClient() {
                 />
               </div>
               <div className="col-span-2">
-                <Label htmlFor="ff-desc">Kirjeldus (vabatahtlik)</Label>
+                <Label htmlFor="ff-desc">Description (optional)</Label>
                 <Input
                   id="ff-desc"
                   value={newDesc}
                   onChange={e => setNewDesc(e.target.value)}
-                  placeholder="Mida see flag kontrollib..."
+                  placeholder="What this flag controls..."
                   className="mt-1"
                 />
               </div>
               <div>
-                <Label>Algstaatus</Label>
+                <Label>Initial status</Label>
                 <select
                   value={newStatus}
                   onChange={e => setNewStatus(e.target.value)}
@@ -194,7 +194,7 @@ export default function FlagsClient() {
               </div>
               {newStatus === 'percentage' && (
                 <div>
-                  <Label htmlFor="ff-pct">Protsent (0–100)</Label>
+                  <Label htmlFor="ff-pct">Percentage (0–100)</Label>
                   <Input
                     id="ff-pct"
                     type="number"
@@ -208,8 +208,8 @@ export default function FlagsClient() {
               )}
             </div>
             <div className="flex gap-2 mt-4">
-              <WarmButton onClick={createFlag}>Loo flag</WarmButton>
-              <WarmButton variant="outline" onClick={() => setShowCreate(false)}>Tühista</WarmButton>
+              <WarmButton onClick={createFlag}>Create flag</WarmButton>
+              <WarmButton variant="outline" onClick={() => setShowCreate(false)}>Cancel</WarmButton>
             </div>
           </WarmCard>
         )}
@@ -217,13 +217,13 @@ export default function FlagsClient() {
         {/* Flags list */}
         {loading ? (
           <WarmCard>
-            <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Laadin...</div>
+            <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Loading...</div>
           </WarmCard>
         ) : flags.length === 0 ? (
           <WarmCard>
             <div className="flex flex-col items-center justify-center h-32 gap-2 text-[var(--text-secondary)]">
               <Flag className="h-8 w-8 opacity-30" />
-              <p>Feature flags puuduvad</p>
+              <p>No feature flags found</p>
             </div>
           </WarmCard>
         ) : (
@@ -305,10 +305,10 @@ export default function FlagsClient() {
                       {JSON.stringify(flag.rules ?? {}, null, 2)}
                     </pre>
                     <p className="text-xs text-[var(--text-secondary)] mt-2">
-                      Loodud: {new Date(flag.createdAt).toLocaleDateString('et-EE')}
+                      Created: {new Date(flag.createdAt).toLocaleDateString('en-GB')}
                       {' · '}
                       <Link href={`/api/admin/flags/${flag.id}/overrides`} target="_blank" className="text-[var(--primary)] hover:underline">
-                        Vaata overrides →
+                        View overrides →
                       </Link>
                     </p>
                   </div>

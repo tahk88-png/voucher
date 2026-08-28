@@ -72,7 +72,7 @@ export default function ModerationClient() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/admin/control-panel">
-              <WarmButton variant="ghost" size="sm">← Tagasi</WarmButton>
+              <WarmButton variant="ghost" size="sm">← Back</WarmButton>
             </Link>
             <AlertTriangle className="h-6 w-6 text-orange-500" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Moderation Queue</h1>
@@ -101,7 +101,7 @@ export default function ModerationClient() {
                       : 'bg-[var(--surface)] text-[var(--text-secondary)] hover:bg-[var(--border)]'
                   }`}
                 >
-                  {s === '' ? 'Kõik' : s.replace(/_/g, ' ')}
+                  {s === '' ? 'All' : s.replace(/_/g, ' ')}
                 </button>
               ))}
             </div>
@@ -111,7 +111,7 @@ export default function ModerationClient() {
               className="px-3 py-1.5 rounded-lg border border-[var(--border)] text-sm bg-[var(--surface)] text-[var(--text-primary)]"
             >
               {CATEGORIES.map(c => (
-                <option key={c} value={c}>{c === '' ? 'Kõik kategooriad' : c.replace(/_/g, ' ')}</option>
+                <option key={c} value={c}>{c === '' ? 'All categories' : c.replace(/_/g, ' ')}</option>
               ))}
             </select>
           </div>
@@ -121,24 +121,24 @@ export default function ModerationClient() {
         <WarmCard padding="none">
           {loading ? (
             <div className="flex items-center justify-center h-48 text-[var(--text-secondary)]">
-              Laadin...
+              Loading...
             </div>
           ) : reports.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-48 gap-2 text-[var(--text-secondary)]">
               <AlertTriangle className="h-8 w-8 opacity-30" />
-              <p>Raporteid ei leitud</p>
+              <p>No reports found</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead className="border-b border-[var(--border)] bg-[var(--surface)]">
                   <tr className="text-left text-[var(--text-secondary)]">
-                    <th className="px-4 py-3 font-semibold">Kategooria</th>
-                    <th className="px-4 py-3 font-semibold">Raporteeritud kasutaja</th>
-                    <th className="px-4 py-3 font-semibold">Raporteerija</th>
-                    <th className="px-4 py-3 font-semibold">Staatus</th>
-                    <th className="px-4 py-3 font-semibold">Kuupäev</th>
-                    <th className="px-4 py-3 font-semibold">Tegevused</th>
+                    <th className="px-4 py-3 font-semibold">Category</th>
+                    <th className="px-4 py-3 font-semibold">Reported user</th>
+                    <th className="px-4 py-3 font-semibold">Reported by</th>
+                    <th className="px-4 py-3 font-semibold">Status</th>
+                    <th className="px-4 py-3 font-semibold">Date</th>
+                    <th className="px-4 py-3 font-semibold">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--border)]">
@@ -166,18 +166,18 @@ export default function ModerationClient() {
                         </span>
                       </td>
                       <td className="px-4 py-3 text-[var(--text-secondary)] text-xs whitespace-nowrap">
-                        {new Date(r.createdAt).toLocaleDateString('et-EE')}
+                        {new Date(r.createdAt).toLocaleDateString('en-GB')}
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex gap-2">
                           <Link href={`/admin/moderation/${r.id}`}>
                             <WarmButton size="sm" variant="outline">
-                              <Eye className="h-3 w-3 mr-1" /> Vaata
+                              <Eye className="h-3 w-3 mr-1" /> View
                             </WarmButton>
                           </Link>
                           {r.status === 'open' && (
                             <WarmButton size="sm" variant="secondary" onClick={() => assignToMe(r.id)}>
-                              Võta üle
+                              Assign to me
                             </WarmButton>
                           )}
                         </div>

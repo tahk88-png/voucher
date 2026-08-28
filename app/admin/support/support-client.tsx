@@ -127,7 +127,7 @@ export default function SupportClient() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/admin/control-panel">
-              <WarmButton variant="ghost" size="sm">← Tagasi</WarmButton>
+              <WarmButton variant="ghost" size="sm">← Back</WarmButton>
             </Link>
             <HeadphonesIcon className="h-6 w-6 text-teal-500" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Support Cases</h1>
@@ -155,18 +155,18 @@ export default function SupportClient() {
                       : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-secondary)] hover:bg-[var(--border)]'
                   }`}
                 >
-                  {s === '' ? 'Kõik' : s.replace(/_/g, ' ')}
+                  {s === '' ? 'All' : s.replace(/_/g, ' ')}
                 </button>
               ))}
             </div>
 
             <WarmCard padding="none">
               {loading ? (
-                <div className="flex items-center justify-center h-48 text-[var(--text-secondary)]">Laadin...</div>
+                <div className="flex items-center justify-center h-48 text-[var(--text-secondary)]">Loading...</div>
               ) : cases.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-48 gap-2 text-[var(--text-secondary)]">
                   <HeadphonesIcon className="h-8 w-8 opacity-30" />
-                  <p>Support cases puuduvad</p>
+                  <p>No support cases found</p>
                 </div>
               ) : (
                 <div className="divide-y divide-[var(--border)]">
@@ -195,7 +195,7 @@ export default function SupportClient() {
                             ) : null}
                           </div>
                           <p className="text-xs text-[var(--text-secondary)] mt-1">
-                            {c.user?.email ?? c.merchant?.name ?? '—'} · {new Date(c.createdAt).toLocaleDateString('et-EE')}
+                            {c.user?.email ?? c.merchant?.name ?? '—'} · {new Date(c.createdAt).toLocaleDateString('en-GB')}
                           </p>
                         </div>
                       </div>
@@ -262,16 +262,16 @@ export default function SupportClient() {
               {/* Notes */}
               <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 min-h-[200px]">
                 {notesLoading ? (
-                  <p className="text-xs text-[var(--text-secondary)]">Laadin märkmeid...</p>
+                  <p className="text-xs text-[var(--text-secondary)]">Loading notes...</p>
                 ) : notes.length === 0 ? (
-                  <p className="text-xs text-[var(--text-secondary)]">Märkmeid pole</p>
+                  <p className="text-xs text-[var(--text-secondary)]">No notes yet</p>
                 ) : (
                   notes.map(note => (
                     <div key={note.id} className={`rounded-lg p-3 text-sm ${note.isInternal ? 'bg-yellow-50 border border-yellow-200' : 'bg-[var(--surface)]'}`}>
                       <p className="text-[var(--text-primary)]">{note.content}</p>
                       <p className="text-xs text-[var(--text-secondary)] mt-1">
-                        {note.author?.name ?? 'Admin'} · {new Date(note.createdAt).toLocaleString('et-EE')}
-                        {note.isInternal && <span className="ml-2 text-yellow-700 font-medium">Intern</span>}
+                        {note.author?.name ?? 'Admin'} · {new Date(note.createdAt).toLocaleString('en-GB')}
+                        {note.isInternal && <span className="ml-2 text-yellow-700 font-medium">Internal</span>}
                       </p>
                     </div>
                   ))
@@ -283,7 +283,7 @@ export default function SupportClient() {
                 <textarea
                   value={noteText}
                   onChange={e => setNoteText(e.target.value)}
-                  placeholder="Lisa märge..."
+                  placeholder="Add a note..."
                   rows={3}
                   className="w-full px-3 py-2 text-sm rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] resize-none"
                 />
@@ -295,10 +295,10 @@ export default function SupportClient() {
                       onChange={e => setNoteInternal(e.target.checked)}
                       className="rounded"
                     />
-                    Intern märge
+                    Internal note
                   </label>
                   <WarmButton size="sm" onClick={addNote} disabled={!noteText.trim()}>
-                    <Send className="h-3 w-3 mr-1" /> Saada
+                    <Send className="h-3 w-3 mr-1" /> Send
                   </WarmButton>
                 </div>
               </div>

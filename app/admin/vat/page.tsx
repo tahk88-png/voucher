@@ -158,7 +158,7 @@ export default function VatManagementPage() {
   }
 
   async function deleteRate(id: string) {
-    showConfirm('Deaktiveerida see VAT rate?', async () => {
+    showConfirm('Deactivate this VAT rate?', async () => {
       setRateActionLoading(id);
       try {
         await fetch(`/api/admin/vat-rates/${id}`, { method: 'DELETE' });
@@ -203,7 +203,7 @@ export default function VatManagementPage() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link href="/admin/control-panel">
-              <WarmButton variant="ghost" size="sm">&larr; Tagasi</WarmButton>
+              <WarmButton variant="ghost" size="sm">&larr; Back</WarmButton>
             </Link>
             <Receipt className="h-6 w-6 text-blue-500" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">VAT Management</h1>
@@ -274,17 +274,17 @@ export default function VatManagementPage() {
           <div className="space-y-4">
             <div className="flex justify-end">
               <WarmButton size="sm" onClick={() => setShowCreateRate(!showCreateRate)}>
-                <Plus className="h-4 w-4 mr-1" /> Lisa rate
+                <Plus className="h-4 w-4 mr-1" /> Add rate
               </WarmButton>
             </div>
 
             {/* Create rate form */}
             {showCreateRate && (
               <WarmCard padding="lg">
-                <h2 className="font-semibold text-[var(--text-primary)] mb-4">Uus VAT Rate</h2>
+                <h2 className="font-semibold text-[var(--text-primary)] mb-4">New VAT Rate</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div>
-                    <Label htmlFor="vr-country">Riigikood (nt DE)</Label>
+                    <Label htmlFor="vr-country">Country code (e.g. DE)</Label>
                     <Input
                       id="vr-country"
                       value={newCountry}
@@ -319,7 +319,7 @@ export default function VatManagementPage() {
                     </select>
                   </div>
                   <div>
-                    <Label htmlFor="vr-from">Kehtib alates</Label>
+                    <Label htmlFor="vr-from">Effective from</Label>
                     <Input
                       id="vr-from"
                       type="date"
@@ -329,7 +329,7 @@ export default function VatManagementPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="vr-until">Kehtib kuni (valikuline)</Label>
+                    <Label htmlFor="vr-until">Effective until (optional)</Label>
                     <Input
                       id="vr-until"
                       type="date"
@@ -340,8 +340,8 @@ export default function VatManagementPage() {
                   </div>
                 </div>
                 <div className="flex gap-2 mt-4">
-                  <WarmButton onClick={createRate}>Loo rate</WarmButton>
-                  <WarmButton variant="outline" onClick={() => setShowCreateRate(false)}>T&uuml;hista</WarmButton>
+                  <WarmButton onClick={createRate}>Create rate</WarmButton>
+                  <WarmButton variant="outline" onClick={() => setShowCreateRate(false)}>Cancel</WarmButton>
                 </div>
               </WarmCard>
             )}
@@ -349,13 +349,13 @@ export default function VatManagementPage() {
             {/* Rates table */}
             {ratesLoading ? (
               <WarmCard>
-                <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Laadin...</div>
+                <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Loading...</div>
               </WarmCard>
             ) : rates.length === 0 ? (
               <WarmCard>
                 <div className="flex flex-col items-center justify-center h-32 gap-2 text-[var(--text-secondary)]">
                   <Receipt className="h-8 w-8 opacity-30" />
-                  <p>VAT rates puuduvad</p>
+                  <p>No VAT rates found</p>
                 </div>
               </WarmCard>
             ) : (
@@ -364,13 +364,13 @@ export default function VatManagementPage() {
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-[var(--border)] text-[var(--text-secondary)]">
-                        <th className="text-left px-4 py-3 font-medium">Riik</th>
+                        <th className="text-left px-4 py-3 font-medium">Country</th>
                         <th className="text-left px-4 py-3 font-medium">Rate</th>
                         <th className="text-left px-4 py-3 font-medium">Type</th>
-                        <th className="text-left px-4 py-3 font-medium">Kehtib alates</th>
-                        <th className="text-left px-4 py-3 font-medium">Kehtib kuni</th>
-                        <th className="text-left px-4 py-3 font-medium">Aktiivne</th>
-                        <th className="text-right px-4 py-3 font-medium">Tegevused</th>
+                        <th className="text-left px-4 py-3 font-medium">Effective from</th>
+                        <th className="text-left px-4 py-3 font-medium">Effective until</th>
+                        <th className="text-left px-4 py-3 font-medium">Active</th>
+                        <th className="text-right px-4 py-3 font-medium">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -384,10 +384,10 @@ export default function VatManagementPage() {
                             </span>
                           </td>
                           <td className="px-4 py-3 text-[var(--text-secondary)]">
-                            {new Date(rate.effectiveFrom).toLocaleDateString('et-EE')}
+                            {new Date(rate.effectiveFrom).toLocaleDateString('en-GB')}
                           </td>
                           <td className="px-4 py-3 text-[var(--text-secondary)]">
-                            {rate.effectiveUntil ? new Date(rate.effectiveUntil).toLocaleDateString('et-EE') : '—'}
+                            {rate.effectiveUntil ? new Date(rate.effectiveUntil).toLocaleDateString('en-GB') : '—'}
                           </td>
                           <td className="px-4 py-3">
                             <button
@@ -426,14 +426,14 @@ export default function VatManagementPage() {
           <div className="space-y-4">
             <div className="flex justify-end">
               <WarmButton size="sm" onClick={() => setShowCreateExemption(!showCreateExemption)}>
-                <Plus className="h-4 w-4 mr-1" /> Lisa exemption
+                <Plus className="h-4 w-4 mr-1" /> Add exemption
               </WarmButton>
             </div>
 
             {/* Create exemption form */}
             {showCreateExemption && (
               <WarmCard padding="lg">
-                <h2 className="font-semibold text-[var(--text-primary)] mb-4">Uus VAT Exemption</h2>
+                <h2 className="font-semibold text-[var(--text-primary)] mb-4">New VAT Exemption</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div>
                     <Label htmlFor="ve-merchant">Merchant ID</Label>
@@ -446,7 +446,7 @@ export default function VatManagementPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="ve-country">Riigikood (nt DE)</Label>
+                    <Label htmlFor="ve-country">Country code (e.g. DE)</Label>
                     <Input
                       id="ve-country"
                       value={newExCountry}
@@ -467,7 +467,7 @@ export default function VatManagementPage() {
                     </select>
                   </div>
                   <div>
-                    <Label htmlFor="ve-doc">Dokumendi viide (valikuline)</Label>
+                    <Label htmlFor="ve-doc">Document reference (optional)</Label>
                     <Input
                       id="ve-doc"
                       value={newExDocRef}
@@ -477,7 +477,7 @@ export default function VatManagementPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="ve-expires">Aegub (valikuline)</Label>
+                    <Label htmlFor="ve-expires">Expires (optional)</Label>
                     <Input
                       id="ve-expires"
                       type="date"
@@ -488,8 +488,8 @@ export default function VatManagementPage() {
                   </div>
                 </div>
                 <div className="flex gap-2 mt-4">
-                  <WarmButton onClick={createExemption}>Loo exemption</WarmButton>
-                  <WarmButton variant="outline" onClick={() => setShowCreateExemption(false)}>T&uuml;hista</WarmButton>
+                  <WarmButton onClick={createExemption}>Create exemption</WarmButton>
+                  <WarmButton variant="outline" onClick={() => setShowCreateExemption(false)}>Cancel</WarmButton>
                 </div>
               </WarmCard>
             )}
@@ -497,13 +497,13 @@ export default function VatManagementPage() {
             {/* Exemptions table */}
             {exemptionsLoading ? (
               <WarmCard>
-                <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Laadin...</div>
+                <div className="flex items-center justify-center h-32 text-[var(--text-secondary)]">Loading...</div>
               </WarmCard>
             ) : exemptions.length === 0 ? (
               <WarmCard>
                 <div className="flex flex-col items-center justify-center h-32 gap-2 text-[var(--text-secondary)]">
                   <ShieldCheck className="h-8 w-8 opacity-30" />
-                  <p>VAT exemptions puuduvad</p>
+                  <p>No VAT exemptions found</p>
                 </div>
               </WarmCard>
             ) : (
@@ -513,19 +513,19 @@ export default function VatManagementPage() {
                     <thead>
                       <tr className="border-b border-[var(--border)] text-[var(--text-secondary)]">
                         <th className="text-left px-4 py-3 font-medium">Merchant</th>
-                        <th className="text-left px-4 py-3 font-medium">Riik</th>
+                        <th className="text-left px-4 py-3 font-medium">Country</th>
                         <th className="text-left px-4 py-3 font-medium">Type</th>
-                        <th className="text-left px-4 py-3 font-medium">Staatus</th>
-                        <th className="text-left px-4 py-3 font-medium">Dokument</th>
-                        <th className="text-left px-4 py-3 font-medium">Aegub</th>
-                        <th className="text-left px-4 py-3 font-medium">Kinnitatud</th>
+                        <th className="text-left px-4 py-3 font-medium">Status</th>
+                        <th className="text-left px-4 py-3 font-medium">Document</th>
+                        <th className="text-left px-4 py-3 font-medium">Expires</th>
+                        <th className="text-left px-4 py-3 font-medium">Approved</th>
                       </tr>
                     </thead>
                     <tbody>
                       {exemptions.map(ex => {
                         const isExpired = ex.expiresAt && new Date(ex.expiresAt) < new Date();
                         const isApproved = !!ex.approvedAt;
-                        const statusText = isExpired ? 'Aegunud' : isApproved ? 'Aktiivne' : 'Ootel';
+                        const statusText = isExpired ? 'Expired' : isApproved ? 'Active' : 'Pending';
                         const statusColor = isExpired
                           ? 'bg-red-100 text-red-700'
                           : isApproved
@@ -553,11 +553,11 @@ export default function VatManagementPage() {
                               {ex.documentReference ?? '—'}
                             </td>
                             <td className="px-4 py-3 text-[var(--text-secondary)]">
-                              {ex.expiresAt ? new Date(ex.expiresAt).toLocaleDateString('et-EE') : '—'}
+                              {ex.expiresAt ? new Date(ex.expiresAt).toLocaleDateString('en-GB') : '—'}
                             </td>
                             <td className="px-4 py-3 text-[var(--text-secondary)]">
                               {ex.approvedAt
-                                ? `${new Date(ex.approvedAt).toLocaleDateString('et-EE')} (${ex.approvedBy ?? '—'})`
+                                ? `${new Date(ex.approvedAt).toLocaleDateString('en-GB')} (${ex.approvedBy ?? '—'})`
                                 : '—'}
                             </td>
                           </tr>
