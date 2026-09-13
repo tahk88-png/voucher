@@ -122,7 +122,13 @@ export default async function RootLayout({
         />
         <link rel="dns-prefetch" href="https://js.stripe.com" />
         <link rel="dns-prefetch" href="https://api.stripe.com" />
-        <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){})}` }} />
+        {/* Register the service worker in production only. In development the
+            _next/static chunks are not content-hashed, so the SW's cache-first
+            strategy serves stale JS after every code change — a confusing
+            "my edit didn't apply" trap. Production chunks are immutable. */}
+        {process.env.NODE_ENV === "production" && (
+          <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){})}` }} />
+        )}
       </head>
       <body>
         <Script

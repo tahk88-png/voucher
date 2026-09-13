@@ -13,7 +13,7 @@
 ## Authentication & Authorization
 
 - **Auth.js (NextAuth v5)** — credentials, email magic links, OAuth (Google, Apple)
-- **@auth/prisma-adapter** — session/user storage
+- Sessions are **JWT** (no database adapter); users are created on first sign-in via the credentials/OAuth callbacks
 
 ## Payments
 
@@ -45,7 +45,7 @@
 
 ## State Management
 
-- **zustand** — global state (lightweight)
+- React state + server components; no global store. Cross-cutting UI state (toasts, confirm dialog, command palette) uses small module-level stores in `lib/*-helpers.tsx`.
 
 ## Utilities
 
