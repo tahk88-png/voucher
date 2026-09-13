@@ -565,19 +565,19 @@ See `DEPLOYMENT.md` for environment variables, migrations, and rollback.
 
 Ensure all required environment variables are set in production:
 
-- Database connection
-- Auth secrets
-- OAuth provider credentials
-- SMTP settings
+- `DATABASE_URL`, `AUTH_SECRET`, `NEXTAUTH_URL`, `NEXT_PUBLIC_APP_URL`
+- Stripe (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`) and Resend (`RESEND_API_KEY`) — email is via Resend, not SMTP
+- OAuth provider credentials, `OPENAI_API_KEY` for the support chat
+- `METRICS_TOKEN` — **required**: when unset the Prometheus endpoint is served without authentication
 - Object storage (for brand assets)
+
+`.env.example` classifies every variable as required / optional / browser-exposed.
 
 ### Database Migrations
 
-In production, use migrations:
+**Production applies migrations with `prisma migrate deploy`** — the Docker entrypoint (`scripts/entrypoint.sh`) runs it automatically on every container start, before the app boots.
 
-```bash
-npm run db:migrate
-```
+Do **not** run `npm run db:migrate` against production: that is `prisma migrate dev`, a development command that generates new migration files and can offer to reset the database. Use it locally to create a migration, commit the result, and let the deploy apply it.
 
 ### Build
 

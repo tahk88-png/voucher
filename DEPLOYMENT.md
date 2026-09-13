@@ -17,7 +17,7 @@ Environment variable templates:
 ## Local (Fresh Clone)
 
 ```bash
-npm install
+pnpm install --frozen-lockfile   # pnpm is the package manager; npm install does not resolve here
 cp .env.example .env
 npm run db:setup
 npm run dev
@@ -83,20 +83,23 @@ If a migration must be rolled back manually:
 
 ### CI (on PR + main)
 
-- install dependencies
-- lint
-- test
-- build
-- docker build
+- lint, typecheck, unit tests (parallel)
+- **schema-drift** — applies the migration chain to a fresh Postgres and fails if `schema.prisma` has drifted without a migration
+- **integration-test** — `prisma migrate deploy` against a fresh Postgres, then the DB-backed tests
+- build (needs lint/typecheck/test) → docker build (needs build)
+
+Every job must be green; a schema change without a migration, or a route that only builds when a secret is present, is caught here rather than in production.
 
 ### CD
 
 - **staging**: push to `main`
 - **production**: push tag `v*.*.*`
 
-Deployment uses SSH:
+The `build-and-push` job builds the image and pushes it to `ghcr.io/tahk88-png/voucher-platform:<tag>` (`staging-<sha>` for main, the version for tags). The workflow grants `packages: write` to `GITHUB_TOKEN` for this — no extra registry secret is needed.
 
-Required secrets:
+The `deploy` job then rolls the image out over SSH. Its first step checks that the secrets below exist and fails with an explicit message listing any that are missing, so an unconfigured server shows up as a clear error rather than a cryptic SSH failure.
+
+Required repository secrets (Settings → Secrets and variables → Actions):
 
 - `DEPLOY_HOST`
 - `DEPLOY_USER`
