@@ -57,14 +57,14 @@ Merchant-owned referral infrastructure: branded vouchers and store credit. Pay f
 
 ### Prerequisites
 
-- **Node.js 18+** (check with `node --version`)
-- **Docker Desktop** (for local PostgreSQL database)
-- **npm** (comes with Node.js)
+- **Node.js 20+** (check with `node --version`; CI and the Docker image use 20)
+- **pnpm 10** — the project's package manager (`npm install -g pnpm@10.28.1`). `pnpm-lock.yaml` is the only lockfile; `npm install` does **not** work here (an upstream peer-dependency conflict fails npm's resolver).
+- **PostgreSQL 16** — either via Docker Desktop (`docker compose up -d postgres redis`) or a native install (see `npm run db:local` below)
 
 ### Quick Start (One-Liner)
 
 ```bash
-npm install && cp .env.example .env && npm run db:setup && npm run dev
+pnpm install --frozen-lockfile && cp .env.example .env && npm run db:setup && npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000) and verify health at [http://localhost:3000/api/health](http://localhost:3000/api/health).
@@ -76,7 +76,7 @@ Then open [http://localhost:3000](http://localhost:3000) and verify health at [h
 ```bash
 git clone <repository-url>
 cd voucher
-npm install
+pnpm install --frozen-lockfile
 ```
 
 #### 2. Environment Setup
@@ -188,6 +188,27 @@ After setup, verify:
 
 ### Troubleshooting
 
+#### No Docker? Run PostgreSQL natively
+
+Docker is not required. If Docker Desktop is unavailable (or another project already owns the default port), run a local native cluster instead:
+
+```bash
+npm run db:local          # initdb on first run, then starts postgres detached
+npm run db:local:status   # is it accepting connections?
+npm run db:local:stop
+```
+
+The script reads the port and credentials from `DATABASE_URL` in `.env.local` / `.env`, creates the cluster under `./.pgdata` (gitignored), and starts it **detached** so it survives the shell that launched it. Then continue with `npm run db:push && npm run db:seed`. Requires a PostgreSQL 16 install (`initdb`/`pg_ctl` on PATH, or set `PGBIN`).
+
+#### Migrations vs. `db:push`
+
+- **Local development** uses `prisma db push` (fast, no migration files).
+- **Production and CI** use `prisma migrate deploy` — the Docker entrypoint runs it on every start. The migration chain is verified in CI on a fresh database (the `schema-drift` and `integration-test` jobs), so a schema change **must** ship with a migration or CI fails. Generate one with `npm run db:migrate`; never edit an already-applied migration.
+
+#### Windows: building locally
+
+Use `npm run build` (which runs `scripts/build.cjs`), **not** `pnpm run build:next` directly. Node 22+ on Windows throws `EISDIR` from `fs.readlink`; the wrapper preloads `fix-eisdir.js` to work around it. CI and Docker run Linux and are unaffected.
+
 #### Docker Issues
 
 **Problem**: `docker: command not found` or Docker Desktop not running
@@ -295,6 +316,7 @@ npm run db:migrate
 - `npm run db:studio` - Open Prisma Studio (database GUI)
 - `npm run db:check` - Check Docker Desktop status
 - `npm run db:wait` - Wait for database to be ready
+- `npm run db:local` / `db:local:stop` / `db:local:status` - Native PostgreSQL cluster without Docker (see Troubleshooting)
 
 **Docker**:
 

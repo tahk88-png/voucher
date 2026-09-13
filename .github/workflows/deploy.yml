@@ -6,6 +6,14 @@ on:
     tags:
       - "v*.*.*"
 
+# GITHUB_TOKEN defaults to read-only for packages, so the docker push to
+# ghcr.io failed with a 403 on every run even though the image built fine.
+# packages:write lets the login-action token push; contents:read is the
+# minimum the checkout needs. Nothing else is granted.
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
