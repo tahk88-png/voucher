@@ -2,12 +2,11 @@
 # The job list and times mirror "crons" in vercel.json (those only run on Vercel).
 #
 # Install (as the deploy user, after the first successful deploy):
-#   crontab -l                                    # must be empty, see below
-#   crontab /srv/voucher/deploy/crontab.example
-# If DEPLOY_APP_DIR is not /srv/voucher, replace the path while installing:
-#   sed 's|/srv/voucher|/your/app/dir|g' /your/app/dir/deploy/crontab.example | crontab -
-# Installing replaces the user's whole crontab: if `crontab -l` listed
-# entries, add these lines with `crontab -e` instead.
+#   sh /srv/voucher/deploy/install-cron.sh
+# It adds these jobs as one marked block, rewrites /srv/voucher to the actual
+# app directory, leaves every other crontab entry untouched and saves the old
+# crontab to logs/ first. Do not use `crontab <this file>`: that replaces the
+# user's whole crontab, including the jobs of other sites on a shared server.
 # Times are the server's local time; vercel.json's are UTC — check with `date`.
 # Failures are appended to logs/cron.log; successful runs print nothing.
 #

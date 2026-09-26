@@ -3,6 +3,7 @@
 #
 #   sh deploy/init-env.sh <production|staging> [domain]
 #   sh deploy/init-env.sh production app.example.com
+#   APP_PORT=3110 sh deploy/init-env.sh production app.example.com   # other host port
 #
 # Generates POSTGRES_PASSWORD, REDIS_PASSWORD, AUTH_SECRET, CRON_SECRET,
 # METRICS_TOKEN and IP_SALT and writes DATABASE_URL / REDIS_URL to match. With
@@ -57,6 +58,15 @@ s|^CRON_SECRET=change_me\$|CRON_SECRET=$(secret)|
 s|^METRICS_TOKEN=change_me\$|METRICS_TOKEN=$(secret)|
 s|^IP_SALT=change_me\$|IP_SALT=$(secret)|
 "
+# The host port nginx proxies to; the example's default may be taken on a
+# server that already runs other apps.
+if [ -n "${APP_PORT:-}" ]; then
+  case $APP_PORT in
+    *[!0-9]*) fail "APP_PORT must be a port number (got '$APP_PORT')" ;;
+  esac
+  SED_SCRIPT="$SED_SCRIPT
+s|^APP_PORT=.*|APP_PORT=$APP_PORT|"
+fi
 if [ -n "$DOMAIN" ]; then
   EXAMPLE_HOST_RE=$(printf '%s' "$EXAMPLE_HOST" | sed 's/\./\\./g')
   SED_SCRIPT="$SED_SCRIPT
