@@ -30,7 +30,7 @@ const SAVED_CODES = [
   {
     id: '1',
     title: 'Summer Sale 20%',
-    url: 'https://gifthub.eu/voucher/summer-2024',
+    url: 'https://example.com/voucher/summer-2024',
     color: '#2D2721',
     bgColor: '#FFFFFF',
     createdAt: '2024-01-15',
@@ -39,7 +39,7 @@ const SAVED_CODES = [
   {
     id: '2',
     title: 'VIP Event Entry',
-    url: 'https://gifthub.eu/event/vip-night',
+    url: 'https://example.com/event/vip-night',
     color: '#E17B5C',
     bgColor: '#FFF9ED',
     createdAt: '2024-01-20',
@@ -58,7 +58,7 @@ const PRESET_COLORS = [
 
 export function QRCodes() {
   const [activeTab, setActiveTab] = useState('design');
-  const [url, setUrl] = useState('https://gifthub.eu');
+  const [url, setUrl] = useState('https://example.com');
   const [title, setTitle] = useState('');
   const [fgColor, setFgColor] = useState('#2D2721');
   const [bgColor, setBgColor] = useState('#FFFFFF');
@@ -209,9 +209,9 @@ export function QRCodes() {
                         <SelectValue placeholder="Või vali kiirlink..." />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="https://gifthub.eu">Avaleht</SelectItem>
-                        <SelectItem value="https://gifthub.eu/vouchers">Kõik Vautšerid</SelectItem>
-                        <SelectItem value="https://gifthub.eu/campaigns">Kampaaniad</SelectItem>
+                        <SelectItem value="https://example.com">Avaleht</SelectItem>
+                        <SelectItem value="https://example.com/vouchers">Kõik Vautšerid</SelectItem>
+                        <SelectItem value="https://example.com/campaigns">Kampaaniad</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

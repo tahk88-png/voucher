@@ -5,6 +5,7 @@
 
 import type { EmailProvider, EmailSendParams, EmailSendResult, EmailProviderHealth } from './types';
 import { isResendConfigured } from '@/lib/resend';
+import { getSenderEmail } from '@/lib/app-url';
 
 export class ResendProvider implements EmailProvider {
   readonly type = 'resend';
@@ -18,7 +19,7 @@ export class ResendProvider implements EmailProvider {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const sendParams: Record<string, unknown> = {
-      from: params.from || process.env.RESEND_FROM_EMAIL || 'noreply@vouchr.app',
+      from: params.from || getSenderEmail(),
       to: params.to,
       subject: params.subject,
     };

@@ -294,7 +294,7 @@ export function EmailComposer() {
 
               <div>
                 <Label className="text-xs mb-1.5 block text-[#6B5744] font-bold uppercase">Vastuse aadress</Label>
-                <Input defaultValue="hello@gifthub.eu" className="bg-white border-[#E7DCC7]" />
+                <Input defaultValue="hello@example.com" className="bg-white border-[#E7DCC7]" />
               </div>
             </div>
           </WarmCard>

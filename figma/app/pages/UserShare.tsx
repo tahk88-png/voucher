@@ -52,7 +52,7 @@ export function UserShare() {
       description: 'Share this amazing summer sale and earn 5â‚¬ gift card!',
       bonusAmount: 5,
       image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400',
-      url: 'https://vouchers.app/c/summer-sale',
+      url: 'https://example.com/c/summer-sale',
     },
     {
       id: 'beauty-week',
@@ -62,7 +62,7 @@ export function UserShare() {
       description: 'Tell your friends about our beauty week! Get 10â‚¬ bonus.',
       bonusAmount: 10,
       image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400',
-      url: 'https://vouchers.app/c/beauty-week',
+      url: 'https://example.com/c/beauty-week',
     },
     {
       id: 'fitness-promo',
@@ -72,7 +72,7 @@ export function UserShare() {
       description: 'Share our gym and get 15â‚¬ for every signup!',
       bonusAmount: 15,
       image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400',
-      url: 'https://vouchers.app/c/fitness-promo',
+      url: 'https://example.com/c/fitness-promo',
     },
   ];
 

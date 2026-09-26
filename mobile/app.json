@@ -31,9 +31,6 @@
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "apiBaseUrl": "https://gifthub.app"
     }
   }
 }

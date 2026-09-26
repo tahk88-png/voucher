@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     }
 
     const ip = getClientIp(req);
-    const { allowed } = await rateLimitDistributed(`gift-track:${ip}`, 60, 60);
+    const { allowed } = await rateLimitDistributed(`gift-track:${ip}`, 60, 60_000);
     if (!allowed) {
       return NextResponse.json({ error: 'Rate limited' }, { status: 429 });
     }

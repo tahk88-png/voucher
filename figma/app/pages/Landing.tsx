@@ -1048,7 +1048,7 @@ export function Landing() {
                 <button onClick={() => navigate('/b2b-solutions')} className="block hover:text-[#2D2721] transition-colors">
                   B2B Solutions
                 </button>
-                <span className="block text-[#8B7355]">help@gifthub.eu</span>
+                <span className="block text-[#8B7355]">help@example.com</span>
               </div>
             </div>
           </div>

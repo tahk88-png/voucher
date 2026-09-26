@@ -79,6 +79,7 @@ Required:
 - `DATABASE_URL` — PostgreSQL connection string
 - `AUTH_SECRET` — NextAuth secret (min 32 chars)
 - `NEXTAUTH_URL` — app URL (optional, defaults to `http://localhost:3000`)
+- `NEXT_PUBLIC_APP_URL` — public URL of the deployment (required in production; `http://localhost:3000` in development). Absolute links and the default sender/support addresses derive from its host — see `lib/app-url.ts`
 
 Stripe (optional for development):
 
@@ -90,7 +91,8 @@ Stripe (optional for development):
 Resend (optional for development):
 
 - `RESEND_API_KEY` — Resend API key (required for email sending)
-- `RESEND_FROM_EMAIL` — default "from" address (optional, defaults to `noreply@vouchr.app`)
+- `RESEND_FROM_EMAIL` — default "from" address on your own Resend-verified domain (optional, defaults to `noreply@<host of NEXT_PUBLIC_APP_URL>`)
+- `CONTACT_EMAIL` — support address (optional, defaults to `support@<host of NEXT_PUBLIC_APP_URL>`)
 - Note: Resend helpers will throw clear errors if not configured when used
 
 Storage (future):

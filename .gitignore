@@ -10,6 +10,7 @@
 
 # next.js
 /.next/
+/.next-playwright/
 /out/
 
 # production
@@ -18,8 +19,12 @@
 # misc
 .DS_Store
 *.pem
+# `>nul` redirections in Windows-style commands create a literal file named
+# "nul" when run under Git Bash/sh.
+nul
 
 # debug
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -27,6 +32,12 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+# Real per-environment files (docker-compose.prod.yml and
+# docker-compose.staging.yml read env/.env.production and env/.env.staging).
+# Only the *.example templates are committed.
+.env.*
+!.env.example
+!.env.*.example
 
 # vercel
 .vercel
@@ -37,14 +48,18 @@ next-env.d.ts
 
 # prisma
 
-# PWA
-**/public/sw.js
+# PWA build output from the former next-pwa setup. public/sw.js is now a
+# hand-written, committed file (web push only), so it is not ignored.
 **/public/workbox-*.js
 **/public/worker-*.js
-**/public/sw.js.map
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 logs/
+
+# Runtime data written inside the checkout by the deploy scripts:
+# database dumps (scripts/db-backup.sh, customer data) and deployed-tag state.
+/backups/
+/state/
 
 # build backups
 .next_bak*

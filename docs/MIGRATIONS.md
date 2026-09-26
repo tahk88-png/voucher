@@ -49,13 +49,9 @@ The project currently uses `prisma db push` for development, which is fine for r
 
 3. **Test migration on staging** first
 
-4. **Apply to production**:
-
-   ```bash
-   npx prisma migrate deploy
-   ```
-
-   This applies all pending migrations without prompting.
+4. **Commit it and deploy.** Every deploy runs `prisma migrate deploy` to
+   completion before the new version replaces the old one (see "Production
+   Deployment" below). Never run migrations against production by hand.
 
 ## Migration Best Practices
 
@@ -166,48 +162,19 @@ model Voucher {
 
 ## Production Deployment
 
-### Using Vercel
+`deploy/deploy.sh` (run by the Deploy workflow; see
+[DEPLOYMENT.md](../DEPLOYMENT.md)) applies migrations on the server:
 
-1. Add migration step to `package.json`:
+1. backs up the production database (`predeploy_*.sql.gz`)
+2. runs the image's `prisma migrate deploy` in a one-off `migrate` container,
+   to completion. If it fails, the deploy stops and the old version keeps
+   serving
+3. only then replaces the app container
 
-   ```json
-   {
-     "scripts": {
-       "postinstall": "prisma generate",
-       "migrate:deploy": "prisma migrate deploy"
-     }
-   }
-   ```
-
-2. Run migration before deployment or in build step
-
-### Using Docker
-
-Add to Dockerfile:
-
-```dockerfile
-RUN npx prisma migrate deploy
-```
-
-### Manual Deployment
-
-1. **Backup database**:
-
-   ```bash
-   pg_dump $DATABASE_URL > backup_$(date +%Y%m%d_%H%M%S).sql
-   ```
-
-2. **Apply migration**:
-
-   ```bash
-   npx prisma migrate deploy
-   ```
-
-3. **Verify**:
-
-   ```bash
-   npx prisma migrate status
-   ```
+The app container itself does not migrate on start in production
+(`MIGRATE_ON_START=false`), and the Docker image build never touches a
+database. A failed migration and restoring the pre-deploy backup are covered
+in [RUNBOOK.md](../RUNBOOK.md).
 
 ## Troubleshooting
 

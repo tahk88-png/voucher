@@ -1,0 +1,37 @@
+# Crontab for the deploy user: the app's scheduled jobs and the nightly backup.
+# The job list and times mirror "crons" in vercel.json (those only run on Vercel).
+#
+# Install (as the deploy user, after the first successful deploy):
+#   crontab -l                                    # must be empty, see below
+#   crontab /srv/voucher/deploy/crontab.example
+# If DEPLOY_APP_DIR is not /srv/voucher, replace the path while installing:
+#   sed 's|/srv/voucher|/your/app/dir|g' /your/app/dir/deploy/crontab.example | crontab -
+# Installing replaces the user's whole crontab: if `crontab -l` listed
+# entries, add these lines with `crontab -e` instead.
+# Times are the server's local time; vercel.json's are UTC — check with `date`.
+# Failures are appended to logs/cron.log; successful runs print nothing.
+#
+# Staging: copy the lines you need with "staging" instead of "production".
+# Running email-queue there sends real e-mail if a provider is configured.
+#
+# m    h  dom mon dow  command
+*/2  *  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production email-queue >>logs/cron.log 2>&1
+*/10 *  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production email-stale-locks >>logs/cron.log 2>&1
+*/15 *  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production smart-notifications >>logs/cron.log 2>&1
+*/30 *  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production flash-sale-alerts >>logs/cron.log 2>&1
+5    *  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production auto-expire >>logs/cron.log 2>&1
+0    1  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production refresh-currency-rates >>logs/cron.log 2>&1
+0    2  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production email-stats >>logs/cron.log 2>&1
+30   2  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production streaks-badges >>logs/cron.log 2>&1
+0    3  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production loyalty-tiers >>logs/cron.log 2>&1
+0    4  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production bnpl-installments >>logs/cron.log 2>&1
+0    6  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production scheduled-reports >>logs/cron.log 2>&1
+0    9  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production credit-expiry-warnings >>logs/cron.log 2>&1
+0    9  *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production price-alerts >>logs/cron.log 2>&1
+0    10 *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production voucher-expiry-reminders >>logs/cron.log 2>&1
+0    10 *   *   *    cd /srv/voucher && sh deploy/run-cron.sh production campaign-ending-notifications >>logs/cron.log 2>&1
+0    10 *   *   1    cd /srv/voucher && sh deploy/run-cron.sh production weekly-campaign-digest >>logs/cron.log 2>&1
+
+# Nightly database backup to backups/production/, keeping the newest 14
+# (BACKUP_RETENTION). Copy them off the server too — see DEPLOYMENT.md.
+15   3  *   *   *    cd /srv/voucher && sh scripts/db-backup.sh production >>logs/backup.log 2>&1

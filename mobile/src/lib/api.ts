@@ -1,5 +1,3 @@
-import Constants from 'expo-constants';
-
 /**
  * Thin typed REST client for the Vouchr backend (the existing Next.js
  * app/api/* routes). Auth is bearer-token based: the auth context calls
@@ -7,13 +5,28 @@ import Constants from 'expo-constants';
  * `Authorization: Bearer <token>` so the backend's verifyMobileToken path
  * can authenticate the mobile user.
  *
- * Base URL resolves from EXPO_PUBLIC_API_URL (env) → app.json extra.apiBaseUrl.
+ * Base URL comes from EXPO_PUBLIC_API_URL (mobile/.env, or the EAS build
+ * profile's env), which Expo inlines into the bundle at build time. There is
+ * deliberately no production default: the backend's domain is deployment
+ * config, and a guessed one would ship an app talking to someone else's server.
  */
 
-const BASE_URL =
-  process.env.EXPO_PUBLIC_API_URL ||
-  (Constants.expoConfig?.extra?.apiBaseUrl as string | undefined) ||
-  'https://gifthub.app';
+// Dev-only fallback: reachable from the iOS simulator and web. A physical
+// device needs EXPO_PUBLIC_API_URL set to the machine's LAN IP (see README).
+const DEV_API_URL = 'http://localhost:3000';
+
+function resolveBaseUrl(): string | null {
+  const configured = process.env.EXPO_PUBLIC_API_URL;
+  if (configured) return configured.replace(/\/+$/, '');
+  if (__DEV__) {
+    console.warn(`EXPO_PUBLIC_API_URL is not set; using ${DEV_API_URL}.`);
+    return DEV_API_URL;
+  }
+  console.error('EXPO_PUBLIC_API_URL was not set when this build was made; API requests will fail.');
+  return null;
+}
+
+const BASE_URL = resolveBaseUrl();
 
 let authToken: string | null = null;
 
@@ -38,6 +51,10 @@ async function request<T>(
   const headers: Record<string, string> = { Accept: 'application/json' };
   if (body !== undefined) headers['Content-Type'] = 'application/json';
   if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+
+  if (!BASE_URL) {
+    throw new ApiError(0, 'App is not configured: EXPO_PUBLIC_API_URL was not set for this build.');
+  }
 
   let res: Response;
   try {

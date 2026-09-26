@@ -31,8 +31,10 @@ export async function POST() {
   }
 
   const secret = generateTotpSecret();
-  const email = session.user.email || 'user@gifthub.com';
-  const uri = generateTotpUri(secret, email);
+  // Account label shown in the authenticator app. Users without an email
+  // (e.g. some OAuth sign-ins) get their id — never a made-up address.
+  const accountLabel = session.user.email || session.user.id;
+  const uri = generateTotpUri(secret, accountLabel);
 
   // Generate backup codes
   const backupCodes = generateBackupCodes();

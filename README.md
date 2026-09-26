@@ -64,8 +64,12 @@ Merchant-owned referral infrastructure: branded vouchers and store credit. Pay f
 ### Quick Start (One-Liner)
 
 ```bash
-pnpm install --frozen-lockfile && cp .env.example .env && npm run db:setup && npm run dev
+pnpm install --frozen-lockfile && npm run env:init && npm run db:setup && npm run dev
 ```
+
+`env:init` copies `.env.example` to `.env` (never over an existing one) and puts
+a random `AUTH_SECRET` in it: the example's placeholder is rejected at boot.
+`db:setup` needs Docker running; it starts only PostgreSQL and Redis.
 
 Then open [http://localhost:3000](http://localhost:3000) and verify health at [http://localhost:3000/api/health](http://localhost:3000/api/health).
 
@@ -82,19 +86,17 @@ pnpm install --frozen-lockfile
 #### 2. Environment Setup
 
 ```bash
-# Copy example environment file
-cp .env.example .env
+# Copy .env.example to .env with a fresh random AUTH_SECRET
+npm run env:init
 ```
 
 **Required variables** (edit `.env`):
 
 - `DATABASE_URL`: Already set to match docker-compose.yml (`postgresql://voucher_user:voucher_pass@localhost:5433/voucher_db`)
-- `AUTH_SECRET`: Generate a random string (min 32 chars). Example:
-
-  ```bash
-  # On Linux/Mac: openssl rand -base64 32
-  # On Windows: use an online generator or PowerShell
-  ```
+- `AUTH_SECRET`: `env:init` already generated one. When you copy the file by
+  hand instead, replace the placeholder with a random string of at least 32
+  characters (`openssl rand -hex 32`); values starting with `change_me` are
+  rejected at boot.
 
 - `NEXTAUTH_URL`: Set to `http://localhost:3000`
 
@@ -122,10 +124,10 @@ npm run db:setup
 ##### Option B: Manual Steps
 
 ```bash
-# Check Docker Desktop is running
+# Check Docker is running (on Windows it also starts Docker Desktop)
 npm run db:check
 
-# Start Docker containers (PostgreSQL + Redis)
+# Start the PostgreSQL + Redis containers
 npm run docker:up
 
 # Wait for database to be ready
@@ -154,7 +156,7 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 
 ### Figma Design Preview
 
-The merged Figma UI is available under `/figma`. Open [http://localhost:3000/figma](http://localhost:3000/figma) to browse the full design route list. Dynamic routes use `demo` as the placeholder id.
+The merged Figma UI is available under `/figma` in development. Open [http://localhost:3000/figma](http://localhost:3000/figma) to browse the full design route list. Dynamic routes use `demo` as the placeholder id. In production `/figma` answers 404 unless the server sets `ENABLE_DESIGN_PREVIEW=true`.
 
 #### 5. Verify Setup
 
@@ -203,7 +205,7 @@ The script reads the port and credentials from `DATABASE_URL` in `.env.local` / 
 #### Migrations vs. `db:push`
 
 - **Local development** uses `prisma db push` (fast, no migration files).
-- **Production and CI** use `prisma migrate deploy` — the Docker entrypoint runs it on every start. The migration chain is verified in CI on a fresh database (the `schema-drift` and `integration-test` jobs), so a schema change **must** ship with a migration or CI fails. Generate one with `npm run db:migrate`; never edit an already-applied migration.
+- **Production and CI** use `prisma migrate deploy`. On a server, `deploy/deploy.sh` runs it as a separate step before the app is replaced (see "Database Migrations" below); only the local `docker compose` app container runs it on start. The migration chain is verified in CI on a fresh database (the `schema-drift` and `integration-test` jobs), so a schema change **must** ship with a migration or CI fails. Generate one with `npm run db:migrate`; never edit an already-applied migration.
 
 #### Windows: building locally
 
@@ -314,13 +316,14 @@ npm run db:migrate
 - `npm run db:seed` - Seed database with sample data
 - `npm run db:ensure-test-user` - Ensure test user exists
 - `npm run db:studio` - Open Prisma Studio (database GUI)
-- `npm run db:check` - Check Docker Desktop status
-- `npm run db:wait` - Wait for database to be ready
+- `npm run env:init` - Create `.env` from `.env.example` with a random `AUTH_SECRET`
+- `npm run db:check` - Check Docker is running (Windows: starts Docker Desktop)
+- `npm run db:wait` - Wait until PostgreSQL answers on the `DATABASE_URL` port
 - `npm run db:local` / `db:local:stop` / `db:local:status` - Native PostgreSQL cluster without Docker (see Troubleshooting)
 
 **Docker**:
 
-- `npm run docker:up` - Start Docker containers
+- `npm run docker:up` - Start the PostgreSQL and Redis containers (the `app` service in docker-compose.yml builds the production image; start it explicitly with `docker compose up -d app` if you want it)
 - `npm run docker:down` - Stop Docker containers
 - `npm run docker:logs` - View Docker logs
 
@@ -544,38 +547,40 @@ npm test
 
 ## Deployment
 
-Production and CI/CD are fully documented in `DEPLOYMENT.md` with Docker + GitHub Actions.
-Quick reference:
+Production runs as a Docker Compose stack (app, PostgreSQL, Redis) behind the
+server's own nginx, deployed by GitHub Actions over SSH. **[DEPLOYMENT.md](DEPLOYMENT.md)**
+is the step-by-step guide for a shared Ubuntu VPS (DNS, server setup, GitHub
+secrets, first deploy, nginx + HTTPS, backups). Day-to-day operations (logs,
+rollback, restore, secret rotation) are in [RUNBOOK.md](RUNBOOK.md).
 
-```bash
-# Build locally
-npm run build
+- **Staging** (optional, off until the repository variable `STAGING_ENABLED` is `true`): every push to `main`
+- **Production**: push a tag, e.g. `git tag v1.2.3 && git push origin v1.2.3`
 
-# Docker (local)
-docker compose up -d --build
-```
-
-Staging/Prod via GitHub Actions:
-- **staging**: push to `main`
-- **production**: push tag `v*.*.*`
-
-See `DEPLOYMENT.md` for environment variables, migrations, and rollback.
+A deploy pulls the image, runs migrations as a separate blocking step, swaps the
+app container, waits for `/api/health` and a rendered `/login`, and rolls back to the last healthy
+version if that check fails. Vercel, Supabase and Upstash are optional
+alternatives, not requirements.
 
 ### Environment Variables
 
-Ensure all required environment variables are set in production:
+On the server, `sh deploy/init-env.sh production <your-domain>` creates
+`env/.env.production` from [env/.env.production.example](env/.env.production.example)
+with generated secrets. Required there:
 
-- `DATABASE_URL`, `AUTH_SECRET`, `NEXTAUTH_URL`, `NEXT_PUBLIC_APP_URL`
-- Stripe (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`) and Resend (`RESEND_API_KEY`) — email is via Resend, not SMTP
-- OAuth provider credentials, `OPENAI_API_KEY` for the support chat
-- `METRICS_TOKEN` — **required**: when unset the Prometheus endpoint is served without authentication
-- Object storage (for brand assets)
+- `NEXT_PUBLIC_APP_URL`, `NEXTAUTH_URL`, `AUTH_SECRET`, `AUTH_TRUST_HOST=true` (the app is behind nginx)
+- `POSTGRES_*` and `DATABASE_URL` (`postgresql://…@postgres:5432/…`), `REDIS_PASSWORD` and `REDIS_URL` (`redis://:PASSWORD@redis:6379`)
+- `CRON_SECRET` (host cron calls `/api/cron/*` with it) and `METRICS_TOKEN` (when unset, the Prometheus endpoint is served without authentication)
+- Stripe (`STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`) and Resend (`RESEND_API_KEY`) once payments and e-mail should work
 
-`.env.example` classifies every variable as required / optional / browser-exposed.
+The root `.env.example` classifies every variable as required / optional / browser-exposed.
 
 ### Database Migrations
 
-**Production applies migrations with `prisma migrate deploy`** — the Docker entrypoint (`scripts/entrypoint.sh`) runs it automatically on every container start, before the app boots.
+**Production applies migrations with `prisma migrate deploy`**, in the stack's
+`migrate` service, which `deploy/deploy.sh` runs to completion before it
+replaces the app. A failed migration stops the deploy with the old version
+still serving. The production app container doesn't migrate on start
+(`MIGRATE_ON_START=false`); the local `docker compose` setup still does.
 
 Do **not** run `npm run db:migrate` against production: that is `prisma migrate dev`, a development command that generates new migration files and can offer to reset the database. Use it locally to create a migration, commit the result, and let the deploy apply it.
 

@@ -18,7 +18,7 @@ const registerSchema = z.object({
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
     const ip = getClientIp(req);
-    const { allowed } = await rateLimitDistributed(`register:${ip}`, 5, 300);
+    const { allowed } = await rateLimitDistributed(`register:${ip}`, 5, 5 * 60 * 1000);
     if (!allowed) {
       return NextResponse.json({ error: 'Too many attempts. Try again later.' }, { status: 429 });
     }

@@ -50,7 +50,7 @@ const base = (type: string, extra: Record<string, unknown> = {}) => ({
   data: {
     email_id: 'resend-xyz',
     to: ['recipient@example.com'],
-    from: 'noreply@vouchr.app',
+    from: 'noreply@example.com',
     subject: 'Test',
     ...extra,
   },

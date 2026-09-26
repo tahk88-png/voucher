@@ -5,6 +5,7 @@
  */
 
 import type { EmailProvider, EmailSendParams, EmailSendResult, EmailProviderHealth } from './types';
+import { getSenderEmail } from '@/lib/app-url';
 
 export class SmtpProvider implements EmailProvider {
   readonly type = 'smtp';
@@ -26,7 +27,7 @@ export class SmtpProvider implements EmailProvider {
     const transporter = await this.getTransporter();
 
     const info = await transporter.sendMail({
-      from: params.from || process.env.SMTP_FROM || 'noreply@vouchr.app',
+      from: params.from || process.env.SMTP_FROM || getSenderEmail(),
       to: params.to,
       subject: params.subject,
       html: params.html || undefined,

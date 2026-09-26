@@ -333,7 +333,7 @@ function DomainTab() {
                      <span className="font-mono text-[#2D2721]">www</span>
                   </div>
                   <div className="flex items-center gap-4">
-                     <span className="font-mono text-[#6B5744]">cname.gifthub.ee</span>
+                     <span className="font-mono text-[#6B5744]">cname.example.com</span>
                      {status === 'active' ? <Check className="w-4 h-4 text-[#00D098]" /> : <RefreshCw className="w-4 h-4 text-[#FFC857] animate-spin" />}
                   </div>
                </div>

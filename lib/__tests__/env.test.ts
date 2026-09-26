@@ -40,11 +40,28 @@ describe('validateEnv', () => {
     it('applies defaults when optional vars are missing', () => {
       const env = validateEnv(VALID_BASE);
       expect(env.NEXT_PUBLIC_APP_URL).toBe('http://localhost:3000');
-      expect(env.RESEND_FROM_EMAIL).toBe('noreply@vouchr.app');
       expect(env.AXIOM_DATASET).toBe('voucher-logs');
       expect(env.OPENAI_MODEL).toBe('gpt-4o-mini');
       expect(env.WEBAUTHN_RP_NAME).toBe('Vouchr');
-      expect(env.VAPID_SUBJECT).toBe('mailto:admin@vouchr.app');
+    });
+
+    it('has no hardcoded sender/contact domain defaults', () => {
+      // Addresses derive from NEXT_PUBLIC_APP_URL in lib/app-url.ts; the
+      // schema must not invent a domain the owner does not control.
+      const env = validateEnv(VALID_BASE);
+      expect(env.RESEND_FROM_EMAIL).toBeUndefined();
+      expect(env.VAPID_SUBJECT).toBeUndefined();
+      expect(env.CONTACT_EMAIL).toBeUndefined();
+    });
+
+    it('passes explicit sender addresses through unchanged', () => {
+      const env = validateEnv({
+        ...VALID_BASE,
+        RESEND_FROM_EMAIL: 'noreply@example.com',
+        VAPID_SUBJECT: 'mailto:admin@example.com',
+      });
+      expect(env.RESEND_FROM_EMAIL).toBe('noreply@example.com');
+      expect(env.VAPID_SUBJECT).toBe('mailto:admin@example.com');
     });
 
     it('keeps optional fields undefined when not provided', () => {

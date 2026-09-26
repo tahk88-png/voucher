@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { checkIPRateLimit } from '@/lib/fraud';
 import { getClientIp } from '@/lib/request';
 import { logger } from '@/lib/logger';
+import { getContactEmail, getSenderEmail } from '@/lib/app-url';
 
 function escapeHtml(str: string): string {
   return str
@@ -39,25 +40,34 @@ export async function POST(request: NextRequest) {
     }
     const { name, email, subject, message } = parsed.data;
 
-    // Send email via Resend if configured
-    if (process.env.RESEND_API_KEY) {
-      const { Resend } = await import('resend');
-      const resend = new Resend(process.env.RESEND_API_KEY);
+    // Without an email provider the message would go nowhere. Say so instead
+    // of reporting success and silently dropping it.
+    if (!process.env.RESEND_API_KEY) {
+      logger.error('Contact form submitted but RESEND_API_KEY is not set; message not delivered');
+      return NextResponse.json({ error: 'Contact form is not configured' }, { status: 503 });
+    }
 
-      await resend.emails.send({
-        from: process.env.EMAIL_FROM || 'noreply@voucherplatform.com',
-        to: process.env.CONTACT_EMAIL || 'support@voucherplatform.com',
-        reply_to: email,
-        subject: `[Contact Form] ${escapeHtml(subject)}`,
-        html: `
-          <h2>Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
-          <hr />
-          <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>
-        `,
-      });
+    const { Resend } = await import('resend');
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // Resend reports API failures (e.g. an unverified sender domain) in the
+    // result rather than by throwing — surface them instead of claiming success.
+    const { error: sendError } = await resend.emails.send({
+      from: process.env.EMAIL_FROM || getSenderEmail(),
+      to: getContactEmail(),
+      reply_to: email,
+      subject: `[Contact Form] ${escapeHtml(subject)}`,
+      html: `
+        <h2>Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Subject:</strong> ${escapeHtml(subject)}</p>
+        <hr />
+        <p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>
+      `,
+    });
+    if (sendError) {
+      throw new Error(`Resend rejected contact email: ${sendError.message}`);
     }
 
     return NextResponse.json({ success: true });

@@ -39,6 +39,11 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   manifest: "/manifest.json",
+  // Without an explicit icon, browsers request /favicon.ico, which doesn't exist (a 404 on every first visit).
+  icons: {
+    icon: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+    apple: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+  },
   other: {
     "mobile-web-app-capable": "yes",
   },
@@ -122,12 +127,12 @@ export default async function RootLayout({
         />
         <link rel="dns-prefetch" href="https://js.stripe.com" />
         <link rel="dns-prefetch" href="https://api.stripe.com" />
-        {/* Register the service worker in production only. In development the
-            _next/static chunks are not content-hashed, so the SW's cache-first
-            strategy serves stale JS after every code change — a confusing
-            "my edit didn't apply" trap. Production chunks are immutable. */}
+        {/* Register the service worker (public/sw.js: web push only, no
+            caching) in production only, so development never has one to go
+            stale. A failed registration is logged; without a worker the push
+            opt-in in settings cannot work. */}
         {process.env.NODE_ENV === "production" && (
-          <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(){})}` }} />
+          <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(function(e){console.error('Service worker registration failed',e)})}` }} />
         )}
       </head>
       <body>
@@ -154,7 +159,9 @@ export default async function RootLayout({
             <CommandPaletteHost />
             <ChatWidgetLoader />
             <CookieConsentBanner />
-            <Analytics />
+            {/* Vercel Analytics' script only exists on Vercel hosting; on a
+                self-hosted server it is a 404 and a console error per page. */}
+            {process.env.VERCEL && <Analytics />}
             <WebVitalsReporter />
           </Providers>
         </NextIntlClientProvider>

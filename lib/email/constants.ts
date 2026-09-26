@@ -2,7 +2,8 @@
  * Email system constants.
  */
 
-export const DEFAULT_SENDER_EMAIL = process.env.RESEND_FROM_EMAIL || 'noreply@vouchr.app';
+// The default sender address is configuration, not a constant — see
+// getSenderEmail() in lib/app-url.ts.
 export const DEFAULT_SENDER_NAME = 'Vouchr';
 
 export const EMAIL_CATEGORIES = ['transactional', 'marketing', 'auth', 'system'] as const;

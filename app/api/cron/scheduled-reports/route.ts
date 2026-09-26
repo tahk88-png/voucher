@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { generateMerchantReport, formatReportAsHtml } from '@/lib/report-generator';
 import { Resend } from 'resend';
+import { getReportsSenderEmail } from '@/lib/app-url';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -31,7 +32,7 @@ export async function GET(req: NextRequest) {
 
     const resendKey = process.env.RESEND_API_KEY;
     const resend = resendKey ? new Resend(resendKey) : null;
-    const fromEmail = process.env.EMAIL_FROM ?? 'reports@gifthub.ee';
+    const fromEmail = getReportsSenderEmail();
 
     for (const setting of settings) {
       const merchantId = setting.key.replace('report_schedules_', '');
@@ -57,12 +58,14 @@ export async function GET(req: NextRequest) {
 
           // Send via Resend
           if (resend && schedule.recipients?.length > 0) {
-            await resend.emails.send({
+            const { error: sendError } = await resend.emails.send({
               from: fromEmail,
               to: schedule.recipients,
               subject: `${reportData.merchantName} — ${schedule.period} report (${reportData.period.label})`,
               html,
             });
+            // Resend returns API failures instead of throwing them
+            if (sendError) throw new Error(sendError.message);
           }
 
           // Update schedule timestamps

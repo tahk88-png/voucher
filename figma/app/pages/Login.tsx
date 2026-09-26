@@ -17,9 +17,9 @@ type LinkedAccount = {
 };
 
 const linkedAccounts: LinkedAccount[] = [
-  { email: 'maria@gifthub.eu', role: 'user', label: 'Tavakasutaja konto' },
-  { email: 'store@gifthub.eu', role: 'merchant', label: 'Ettevotja konto' },
-  { email: 'admin@gifthub.eu', role: 'admin', label: 'Super admin konto' },
+  { email: 'maria@example.com', role: 'user', label: 'Tavakasutaja konto' },
+  { email: 'store@example.com', role: 'merchant', label: 'Ettevotja konto' },
+  { email: 'admin@example.com', role: 'admin', label: 'Super admin konto' },
 ];
 
 export function Login() {

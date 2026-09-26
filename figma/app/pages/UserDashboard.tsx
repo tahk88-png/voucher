@@ -99,7 +99,7 @@ export function UserDashboard() {
   const [copied, setCopied] = useState(false);
 
   const copy = useMemo(() => userCopy[language], [language]);
-  const referralLink = 'https://gifthub.app/ref/USR12345';
+  const referralLink = 'https://example.com/ref/USR12345';
 
   const userStats = {
     points: 2450,

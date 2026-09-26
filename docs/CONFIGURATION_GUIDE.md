@@ -100,10 +100,10 @@ createdb voucher_db
 ```bash
 # Development (creates migration files)
 npm run db:migrate
-
-# Production (applies existing migrations)
-npx prisma migrate deploy
 ```
+
+Production applies them itself: every deploy runs `prisma migrate deploy`
+before the new version starts ([DEPLOYMENT.md](../DEPLOYMENT.md)).
 
 ### 3. Seed Data
 
@@ -158,30 +158,16 @@ Check `public/manifest.json` exists and has correct values:
 
 ## Cron Job Setup
 
-### Option 1: Vercel Cron (If using Vercel)
+### On your server (the supported setup)
 
-Already configured in `vercel.json`:
+`deploy/crontab.example` schedules every job from `vercel.json` (plus a
+nightly database backup) through `deploy/run-cron.sh`, which sends
+`CRON_SECRET`. Install it as described in [DEPLOYMENT.md](../DEPLOYMENT.md),
+step 7. On Vercel, `vercel.json` does the same.
 
-```json
-{
-  "crons": [{
-    "path": "/api/cron/credit-expiry-warnings",
-    "schedule": "0 9 * * *"
-  }]
-}
-```
+### External Cron Service
 
-Set `CRON_SECRET` environment variable in Vercel dashboard.
-
-### Option 2: External Cron Service
-
-Use a service like:
-
-- GitHub Actions (scheduled workflow)
-- cron-job.org
-- EasyCron
-
-Configure to call:
+Any scheduler can call the endpoints instead:
 
 ```http
 GET https://your-domain.com/api/cron/credit-expiry-warnings
@@ -229,9 +215,12 @@ psql $DATABASE_URL -f prisma/migrations/launch_mode/migration.sql
 
 ### 2. Set Platform Admin
 
+Register your own account first, then put its address in the env file
+(sign-up does not verify e-mail ownership, so never list an address you have
+not registered yourself):
+
 ```bash
-# In .env
-PLATFORM_ADMIN_EMAILS=admin@example.com
+PLATFORM_ADMIN_EMAILS=you@your-domain.example
 ```
 
 ### 3. Create First Merchant
@@ -287,7 +276,7 @@ npm run test:launch-mode
 Before deploying:
 
 - [ ] All environment variables set
-- [ ] Database migrations run
+- [ ] Deployed with a `vX.Y.Z` tag (the deploy runs migrations)
 - [ ] PWA icons generated
 - [ ] Email service configured and tested
 - [ ] Stripe webhook configured

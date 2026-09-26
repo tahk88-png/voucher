@@ -1,15 +1,44 @@
+# Staging stack — same shape as docker-compose.prod.yml, smaller limits,
+# its own env file, port, containers and volumes. See DEPLOYMENT.md.
+#
+# Run it through deploy/compose.sh (or deploy/deploy.sh):
+#   sh deploy/compose.sh staging ps
+# By hand, the env file must be given for ${...} interpolation as well:
+#   IMAGE_TAG=staging-<sha> docker compose --env-file env/.env.staging -f docker-compose.staging.yml ps
+#
+# Only the app is published, on 127.0.0.1; Postgres and Redis have no host
+# ports (Docker's port publishing bypasses ufw/iptables).
+name: voucher-staging
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+# Memory limits: staging shares the VPS with production and ~10 other sites,
+# so it gets less than production (~1.3 GB for the whole stack). Override in
+# env/.env.staging if needed.
+
 services:
   app:
-    image: ghcr.io/tahk88-png/voucher-platform:${IMAGE_TAG:-latest}
+    image: ghcr.io/tahk88-png/voucher-platform:${IMAGE_TAG:?IMAGE_TAG is not set - use deploy/compose.sh or export IMAGE_TAG}
     container_name: voucher-app-staging
+    restart: unless-stopped
+    # tini as PID 1: forwards docker stop's SIGTERM and reaps zombies.
+    init: true
     env_file:
       - env/.env.staging
     environment:
       NODE_ENV: production
       SENTRY_ENVIRONMENT: staging
       PORT: 3000
+      # deploy/deploy.sh runs the migrate service before replacing the app.
+      MIGRATE_ON_START: "false"
     ports:
-      - "3001:3000"
+      - "127.0.0.1:${APP_PORT:-3101}:3000"
+    mem_limit: ${APP_MEM_LIMIT:-768m}
+    logging: *logging
     depends_on:
       postgres:
         condition: service_healthy
@@ -20,9 +49,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
 
   migrate:
-    image: ghcr.io/tahk88-png/voucher-platform:${IMAGE_TAG:-latest}
+    image: ghcr.io/tahk88-png/voucher-platform:${IMAGE_TAG:?IMAGE_TAG is not set - use deploy/compose.sh or export IMAGE_TAG}
     container_name: voucher-migrate-staging
     env_file:
       - env/.env.staging
@@ -31,20 +61,23 @@ services:
         condition: service_healthy
     command: ["npx", "prisma", "migrate", "deploy"]
     restart: "no"
+    mem_limit: ${APP_MEM_LIMIT:-768m}
+    logging: *logging
 
   postgres:
     image: postgres:16-alpine
     container_name: voucher-postgres-staging
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-voucher_staging}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB:-voucher_staging}
-    ports:
-      - "5434:5432"
+      POSTGRES_USER: ${POSTGRES_USER:?POSTGRES_USER must be set in env/.env.staging}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in env/.env.staging}
+      POSTGRES_DB: ${POSTGRES_DB:?POSTGRES_DB must be set in env/.env.staging}
     volumes:
-      - postgres_data_staging:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    mem_limit: ${POSTGRES_MEM_LIMIT:-384m}
+    logging: *logging
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-voucher_staging}"]
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -52,16 +85,31 @@ services:
   redis:
     image: redis:7-alpine
     container_name: voucher-redis-staging
-    ports:
-      - "6380:6379"
+    restart: unless-stopped
+    # Same settings as production; maxmemory stays below mem_limit.
+    command:
+      - redis-server
+      - --requirepass
+      - ${REDIS_PASSWORD:?REDIS_PASSWORD must be set in env/.env.staging}
+      - --appendonly
+      - "yes"
+      - --maxmemory
+      - 96mb
+      - --maxmemory-policy
+      - volatile-lru
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?REDIS_PASSWORD must be set in env/.env.staging}
     volumes:
-      - redis_data_staging:/data
+      - redis_data:/data
+    mem_limit: ${REDIS_MEM_LIMIT:-128m}
+    logging: *logging
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      # Unauthenticated `redis-cli ping` exits 0 on NOAUTH; match the reply.
+      test: ["CMD-SHELL", "redis-cli ping | grep -q PONG"]
       interval: 10s
       timeout: 5s
       retries: 5
 
 volumes:
-  postgres_data_staging:
-  redis_data_staging:
+  postgres_data:
+  redis_data:
