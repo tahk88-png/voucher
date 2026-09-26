@@ -275,6 +275,20 @@ only the Hestia step needs root, once.
    ssh USER@SERVER 'sh ~/apps/voucher/deploy/install-cron.sh'
    ```
 
+## Updating without GitHub Actions deploys
+
+The Deploy workflow's server step is opt-in: it runs only when the repository
+variable `AUTO_DEPLOY` is `true` (Settings → Secrets and variables → Actions →
+Variables). Without it, pushing a tag still builds and pushes the image, and
+you update the server yourself, a few minutes after the tag:
+
+```sh
+ssh USER@SERVER 'sh ~/apps/voucher/deploy/update.sh v1.2.3'
+```
+
+`deploy/update.sh` downloads that release's compose file and scripts and runs
+`deploy/deploy.sh` (backup, migrations, health check, automatic rollback).
+
 ## Everyday use
 
 - **Staging** (once `STAGING_ENABLED` is set): push to `main`.
