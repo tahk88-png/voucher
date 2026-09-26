@@ -42,6 +42,10 @@ Run the commands marked "on your computer" in a terminal: macOS/Linux, or
 **Git Bash** on Windows. Replace `SERVER` with the server's IP address and
 `app.example.com` with your domain throughout.
 
+> **Server with HestiaCP, or without root access?** Follow
+> [Shared server with HestiaCP](#shared-server-with-hestiacp) below instead of
+> steps 2 and 6. Everything else is the same.
+
 ---
 
 ## 1. Point the domain at the server
@@ -203,9 +207,11 @@ every 2 minutes, expiry reminders, reports and so on). On a server, cron has to
 do it. As the `deploy` user:
 
 ```bash
-crontab -l     # should say "no crontab"; otherwise merge by hand with crontab -e
-crontab /srv/voucher/deploy/crontab.example
+sh /srv/voucher/deploy/install-cron.sh           # --print to preview, --remove to undo
 ```
+
+It adds the jobs as one marked block and keeps any other entries in the
+user's crontab (saving the previous crontab to `logs/` first).
 
 This also takes a database backup every night at 03:15 into
 `/srv/voucher/backups/production/`, keeping the last 14. Every production
@@ -222,6 +228,52 @@ scp -i voucher_deploy -r deploy@SERVER:/srv/voucher/backups ./voucher-backups
 Restoring is covered in [RUNBOOK.md](RUNBOOK.md).
 
 ---
+
+## Shared server with HestiaCP
+
+Use this when HestiaCP manages nginx (it regenerates the vhosts it owns, so a
+hand-written site file would drift) or when the account that runs your other
+Docker apps has no sudo. The app then runs under that existing account, and
+only the Hestia step needs root, once.
+
+1. **DNS**: the A record for your domain, as in step 1.
+2. **Pick a free host port** (the defaults 3100/3101 may be taken):
+   `ss -ltn | grep -E ':31[0-9][0-9] '` lists the ones in use. Below: 3110.
+3. **Directory and deploy key**, as the existing Docker user (no root needed):
+
+   ```sh
+   # on your computer (PowerShell works too: nothing here needs Git Bash)
+   ssh USER@SERVER 'curl -fsSL https://raw.githubusercontent.com/tahk88-png/voucher/main/deploy/github-key.sh | sh -s -- ~/apps/voucher' > voucher-deploy-key.txt
+   ```
+
+   It creates `~/apps/voucher` (env/, state/, backups/, logs/) and a key that is
+   authorized with `restrict` (no port forwarding, so it cannot reach the
+   databases other apps expose on localhost). Open `voucher-deploy-key.txt`,
+   add the GitHub secrets it lists (step 3 above), then delete the file.
+4. **First deploy**: push a tag (step 4). It copies the files and stops with
+   "env/.env.production is missing", as intended.
+5. **Settings file** with your port and domain, then re-run the deploy:
+
+   ```sh
+   ssh USER@SERVER 'cd ~/apps/voucher && APP_PORT=3110 sh deploy/init-env.sh production app.example.com'
+   ```
+6. **nginx and HTTPS through Hestia** (as root, once; safe to repeat):
+
+   ```sh
+   sh ~USER/apps/voucher/deploy/hestia-site.sh app.example.com 3110
+   ```
+
+   It copies a Node proxy template this server already uses (`node-3006`,
+   override with `BASE_TEMPLATE=`) to `voucher-3110` with only the port
+   changed, adds the web domain to the Hestia user that owns the parent domain
+   (no `www.` alias), issues the Let's Encrypt certificate and forces https.
+   Hestia tests the nginx config before reloading, so the other sites are not
+   affected by a bad template.
+7. **Scheduled jobs and backups** without touching the other sites' cron jobs:
+
+   ```sh
+   ssh USER@SERVER 'sh ~/apps/voucher/deploy/install-cron.sh'
+   ```
 
 ## Everyday use
 
