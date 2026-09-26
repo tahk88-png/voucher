@@ -66,7 +66,7 @@ GitHub -> repository -> Settings -> Secrets and variables -> Actions -> New repo
   DEPLOY_USER              $(id -un)
   DEPLOY_APP_DIR           $APP_DIR
 ${HOST_KEY:+  DEPLOY_HOST_FINGERPRINT  $HOST_KEY
-}  DEPLOY_SSH_KEY           everything between the two ===== lines below, including the BEGIN and END lines
+}  DEPLOY_SSH_KEY           the whole key below, from its BEGIN line to its END line
 
 Paste it into GitHub only - never into a chat or e-mail. If you saved this
 output to a file, delete that file once the secret is saved. The key is
