@@ -111,6 +111,7 @@ export default async function CampaignDetailPage({
           brandLogoUrl: true,
           brandColorsJson: true,
           website: true,
+          onboardedAt: true,
         },
       },
       vouchers: {
@@ -237,9 +238,12 @@ export default async function CampaignDetailPage({
                 </div>
                 <div>
                   <h3 className="font-bold text-[#2D2721]">{campaign.merchant.name}</h3>
-                  <div className="flex items-center gap-1 text-[#9DB5A5] text-xs font-bold uppercase tracking-wider">
-                    <CheckCircle2 className="w-3 h-3" /> Verified partner
-                  </div>
+                  {/* Only for merchants that completed onboarding; it used to show for everyone. */}
+                  {campaign.merchant.onboardedAt && (
+                    <div className="flex items-center gap-1 text-[#9DB5A5] text-xs font-bold uppercase tracking-wider">
+                      <CheckCircle2 className="w-3 h-3" /> Verified partner
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -264,14 +268,23 @@ export default async function CampaignDetailPage({
                 )}
               </div>
 
-              <WarmButton asChild fullWidth size="lg" className="mb-3">
-                <Link href={`/login?callbackUrl=${encodeURIComponent(`/campaigns/${campaign.id}`)}`}>
-                  <span className="inline-flex items-center gap-2">
-                    <ShoppingBag className="w-4 h-4" />
-                    {campaign.price ? 'Buy Now' : 'Get Free Voucher'}
-                  </span>
-                </Link>
-              </WarmButton>
+              {/* Buying happens on the voucher page (/v/[id]); this button used to
+                  send people to /login and straight back here. With no voucher on
+                  sale (none published yet, or a demo campaign) there is nothing to buy. */}
+              {campaign.vouchers.length > 0 ? (
+                <WarmButton asChild fullWidth size="lg" className="mb-3">
+                  <Link href={`/v/${campaign.vouchers[0].id}`}>
+                    <span className="inline-flex items-center gap-2">
+                      <ShoppingBag className="w-4 h-4" />
+                      {campaign.price ? 'Buy Now' : 'Get Free Voucher'}
+                    </span>
+                  </Link>
+                </WarmButton>
+              ) : (
+                <WarmButton fullWidth size="lg" className="mb-3" disabled>
+                  Not available yet
+                </WarmButton>
+              )}
 
               <CampaignShareButton url={voucherLink} title={campaign.name} />
 
