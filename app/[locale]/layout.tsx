@@ -3,7 +3,7 @@ import { logger } from '@/lib/logger';
 import NextLink from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import { redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { routing } from '@/routing';
 import LanguageSelector from '@/components/language-selector';
 import { Link } from '@/routing';
@@ -76,8 +76,10 @@ export default async function LocaleLayout({
 }) {
   const p = await Promise.resolve(params);
   const locale = p?.locale;
+  // Any unknown top-level path (/foo, a missing /sw.js) lands in this segment.
+  // It is a 404, not a redirect to the home page.
   if (!locale || !routing.locales.includes(locale as (typeof routing.locales)[number])) {
-    redirect(`/${routing.defaultLocale}`);
+    notFound();
   }
   setRequestLocale(locale);
 

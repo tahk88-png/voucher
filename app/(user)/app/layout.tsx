@@ -32,7 +32,9 @@ export default async function UserAppLayout({
     prisma.redemption.count({ where: { confirmedAt: { not: null } } }),
   ])
 
-  const engagement = activeUsers ? Math.min(99, Math.max(10, Math.round((redemptions / activeUsers) * 100))) : 75
+  // The real ratio. It used to be clamped to 10-99% and showed 75% with no users,
+  // which put an invented number on every empty dashboard.
+  const engagement = activeUsers ? `${Math.round((redemptions / activeUsers) * 100)}%` : "—"
   const tNav = await getTranslations("nav")
   const tAnalytics = await getTranslations("analytics")
 
@@ -56,7 +58,7 @@ export default async function UserAppLayout({
         { label: tAnalytics("activeUsers"), value: activeUsers.toString() },
         { label: tNav("campaigns"), value: campaigns.toString() },
         { label: tNav("vouchers"), value: vouchers.toString() },
-        { label: tAnalytics("engagement"), value: `${engagement}%` },
+        { label: tAnalytics("engagement"), value: engagement },
       ]}
       roles={profile.roles}
       merchantMemberships={profile.merchantMemberships.map((m) => ({

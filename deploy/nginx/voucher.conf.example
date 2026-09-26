@@ -1,0 +1,59 @@
+# Host nginx site for the voucher app (production). See DEPLOYMENT.md, step 6.
+#
+# 1. DNS first: an A record for app.example.com pointing at this server's IP
+#    (check: dig +short app.example.com).
+# 2. Install the site (as root), replacing app.example.com with your domain:
+#      sed 's/app\.example\.com/YOUR.DOMAIN/g' /srv/voucher/deploy/nginx/voucher.conf.example \
+#        > /etc/nginx/sites-available/voucher.conf
+#      ln -s /etc/nginx/sites-available/voucher.conf /etc/nginx/sites-enabled/voucher.conf
+#      nginx -t && systemctl reload nginx
+#    nginx -t checks every site on the server; only reload when it passes.
+# 3. HTTPS with Let's Encrypt (certbot edits this file, adds the 443 server
+#    and the http -> https redirect, and renews automatically):
+#      apt-get install certbot python3-certbot-nginx     # if not installed yet
+#      certbot --nginx -d YOUR.DOMAIN
+#      certbot renew --dry-run
+#
+# Staging: same file with the staging host name, port 3101 and the file name
+# voucher-staging.conf — and rename the map variable below so the two files
+# do not define it twice.
+
+# Unique variable name: other sites on this server may already define the
+# common $connection_upgrade, and nginx refuses a duplicate definition.
+map $http_upgrade $voucher_connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name app.example.com;
+
+    # Largest request body (e.g. voucher bulk-import CSVs); nginx's default of
+    # 1 MB is too small for those.
+    client_max_body_size 10m;
+
+    location / {
+        # APP_PORT from env/.env.production
+        proxy_pass http://127.0.0.1:3100;
+        proxy_http_version 1.1;
+
+        proxy_set_header Host $host;
+        # The app takes the client IP from X-Real-IP first (rate limiting,
+        # fraud checks). nginx is the edge here, so both headers are set to the
+        # connecting address — never appended to, which would let a client
+        # forge its IP. Behind a CDN, configure nginx's real_ip module instead.
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+
+        # Pass WebSocket upgrades through (plain requests get Connection: close)
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $voucher_connection_upgrade;
+
+        # Scheduled reports and exports can run for up to a minute
+        proxy_read_timeout 120s;
+    }
+}

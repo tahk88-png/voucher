@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/logger';
+import { getSenderEmail } from '@/lib/app-url';
 
 function getResendClient(): Resend {
   if (!process.env.RESEND_API_KEY) {
@@ -43,7 +44,7 @@ export async function sendEmail(params: {
     return { id: 'test-email' };
   }
 
-  const from = params.from || process.env.RESEND_FROM_EMAIL || 'noreply@vouchr.app';
+  const from = params.from || getSenderEmail();
   
   const result = await resend.emails.send({
     from,

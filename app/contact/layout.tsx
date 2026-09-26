@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo/page-metadata';
 
-// Contact is a client component (form state), so SEO metadata lives here in
-// a co-located server layout.
+// The contact form is a client component (form state); SEO metadata lives
+// here in a co-located server layout.
 export const metadata: Metadata = pageMetadata({
   title: 'Contact Us',
   description:

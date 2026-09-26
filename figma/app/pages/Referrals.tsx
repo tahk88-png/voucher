@@ -41,7 +41,7 @@ export function Referrals() {
   const [showQR, setShowQR] = useState(false);
 
   const referralData = {
-    link: 'https://gifthub.com/ref/FST2024',
+    link: 'https://example.com/ref/FST2024',
     code: 'FST2024',
     totalEarned: 625.00,
     pendingRewards: 125.00,

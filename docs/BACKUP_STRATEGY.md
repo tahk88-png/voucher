@@ -6,26 +6,23 @@
 
 #### Automated Backups
 
-**Production:**
+On the server (set up in [DEPLOYMENT.md](../DEPLOYMENT.md), step 7):
 
-- Daily full backups at 2 AM UTC
-- Retain 7 daily backups
-- Retain 4 weekly backups
-- Retain 12 monthly backups
-
-**Staging:**
-
-- Daily full backups
-- Retain 3 daily backups
+- **Nightly:** `deploy/crontab.example` runs `sh scripts/db-backup.sh production`
+  at 03:15 server time. Dumps go to `backups/production/voucher_*.sql.gz`; the
+  newest 14 are kept (`BACKUP_RETENTION`).
+- **Before every production deploy:** `deploy/deploy.sh` takes a
+  `predeploy_*.sql.gz` dump before it runs migrations (rotated separately).
+- **Staging:** no automatic backups; run the script by hand when needed.
 
 #### Manual Backup
 
-```bash
-# Full database backup
-pg_dump $DATABASE_URL > backup_$(date +%Y%m%d_%H%M%S).sql
+On the server, from the app directory (`/srv/voucher`). The script runs
+`pg_dump` inside the Postgres container, since the database has no port on
+the host:
 
-# Compressed backup
-pg_dump $DATABASE_URL | gzip > backup_$(date +%Y%m%d_%H%M%S).sql.gz
+```bash
+sh scripts/db-backup.sh production
 ```
 
 #### Backup Storage
@@ -47,12 +44,12 @@ pg_dump $DATABASE_URL | gzip > backup_$(date +%Y%m%d_%H%M%S).sql.gz
 
 #### From SQL Dump
 
-```bash
-# Restore from backup
-psql $DATABASE_URL < backup_20250101_020000.sql
+On the server ([RUNBOOK.md](../RUNBOOK.md), "Restore a database backup"): it
+asks for confirmation, stops the app, replaces the database, applies
+migrations and starts the app again.
 
-# Or from compressed
-gunzip < backup_20250101_020000.sql.gz | psql $DATABASE_URL
+```bash
+sh scripts/db-restore.sh backups/production/predeploy_20260101_120000.sql.gz production
 ```
 
 #### Point-in-Time Recovery
@@ -110,32 +107,14 @@ pg_basebackup -D /backup/restore -Ft -z -P
 
 ## Backup Automation
 
-### Using pg_dump with cron
+### On the server
 
-```bash
-#!/bin/bash
-# backup.sh
-
-DATE=$(date +%Y%m%d_%H%M%S)
-BACKUP_DIR="/backups"
-DB_URL="$DATABASE_URL"
-
-# Create backup
-pg_dump $DB_URL | gzip > $BACKUP_DIR/backup_$DATE.sql.gz
-
-# Upload to S3
-aws s3 cp $BACKUP_DIR/backup_$DATE.sql.gz s3://backups-bucket/
-
-# Cleanup old local backups (keep last 7)
-find $BACKUP_DIR -name "backup_*.sql.gz" -mtime +7 -delete
-```
+`scripts/db-backup.sh` and the crontab above are the backup automation.
+Backups on the same disk do not survive losing the server: copy
+`backups/production/` elsewhere regularly (DEPLOYMENT.md, step 7, has an
+`scp` example), e.g. to S3 or another machine.
 
 ### Using Managed Services
-
-**Vercel Postgres:**
-
-- Automatic daily backups
-- Point-in-time recovery available
 
 **AWS RDS:**
 

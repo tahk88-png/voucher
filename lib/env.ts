@@ -82,7 +82,9 @@ const schema = z.object({
 
   // ── Email: Resend (primary) ──────────────────────────────────────────────
   RESEND_API_KEY: optionalString(),
-  RESEND_FROM_EMAIL: z.string().default('noreply@vouchr.app'),
+  // Unset → noreply@<host of NEXT_PUBLIC_APP_URL> (lib/app-url.ts). No default
+  // domain here: a sender must be on a domain the owner has verified.
+  RESEND_FROM_EMAIL: optionalString(),
   RESEND_WEBHOOK_SECRET: optionalString(),
   EMAIL_FROM: optionalString(),
 
@@ -129,7 +131,7 @@ const schema = z.object({
   // ── Web Push (VAPID) ─────────────────────────────────────────────────────
   NEXT_PUBLIC_VAPID_PUBLIC_KEY: optionalString(),
   VAPID_PRIVATE_KEY: optionalString(),
-  VAPID_SUBJECT: z.string().default('mailto:admin@vouchr.app'),
+  VAPID_SUBJECT: optionalString(),
 
   // ── Supabase (optional object storage) ───────────────────────────────────
   NEXT_PUBLIC_SUPABASE_URL: optionalString(),
@@ -158,6 +160,8 @@ const schema = z.object({
   // ── Misc / Dev conveniences ──────────────────────────────────────────────
   ENABLE_TEST_CREDENTIALS: optionalString(),
   NEXT_PUBLIC_ENABLE_ROLE_SWITCHER: optionalString(),
+  // "true" serves the /figma design preview in production (app/figma/design-preview.ts)
+  ENABLE_DESIGN_PREVIEW: optionalString(),
   CONTACT_EMAIL: optionalString(),
   NEXT_DIST_DIR: optionalString(),
   VERCEL_URL: optionalString(),

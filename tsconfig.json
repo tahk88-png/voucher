@@ -43,9 +43,6 @@
       "@/figma/*": [
         "./figma/*"
       ],
-      "@/src/*": [
-        "./src/*"
-      ],
       "@services/*": [
         "./figma/services/*"
       ],
@@ -72,14 +69,8 @@
     "types",
     "figma",
     "modules",
-    "src",
     ".next/types/**/*.ts",
     ".next-playwright/types/**/*.ts"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
   ],
   "exclude": [
     "node_modules",

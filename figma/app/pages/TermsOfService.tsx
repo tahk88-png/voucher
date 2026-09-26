@@ -102,7 +102,7 @@ export function TermsOfService() {
 
           <div className="flex justify-center pt-8">
              <p className="text-center text-[#8B7355] text-sm max-w-lg">
-               KÃ¼simuste korral vÃµtke Ã¼hendust meie klienditoega aadressil <a href="mailto:support@gifthub.ee" className="text-[#E17B5C] font-bold hover:underline">support@gifthub.ee</a>
+               KÃ¼simuste korral vÃµtke Ã¼hendust meie klienditoega aadressil <a href="mailto:support@example.com" className="text-[#E17B5C] font-bold hover:underline">support@example.com</a>
              </p>
           </div>
         </div>

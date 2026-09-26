@@ -9,6 +9,7 @@
  */
 
 import { prisma } from '@/lib/prisma';
+import { getSenderEmail } from '@/lib/app-url';
 import { isEmailSuppressed } from './suppression';
 import { sendWithFailover } from './providers/factory';
 import { renderDbTemplate } from './template-renderer';
@@ -27,7 +28,7 @@ export async function queueEmail(params: QueueEmailParams): Promise<EmailService
     // Log as suppressed
     await prisma.emailMessage.create({
       data: {
-        from: params.from || process.env.RESEND_FROM_EMAIL || 'noreply@vouchr.app',
+        from: params.from || getSenderEmail(),
         to,
         subject: params.subject,
         templateSlug: params.templateSlug,
@@ -78,7 +79,7 @@ export async function sendEmailDirect(params: DirectSendParams): Promise<EmailSe
     if (suppression.suppressed) {
       await prisma.emailMessage.create({
         data: {
-          from: params.from || process.env.RESEND_FROM_EMAIL || 'noreply@vouchr.app',
+          from: params.from || getSenderEmail(),
           to,
           subject: params.subject,
           templateSlug: params.templateSlug,
@@ -112,7 +113,7 @@ export async function sendEmailDirect(params: DirectSendParams): Promise<EmailSe
     }
   }
 
-  const fromAddr = params.from || process.env.RESEND_FROM_EMAIL || 'noreply@vouchr.app';
+  const fromAddr = params.from || getSenderEmail();
 
   try {
     const result = await sendWithFailover({

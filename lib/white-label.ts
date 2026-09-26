@@ -3,6 +3,7 @@
  */
 
 import { prisma } from '@/lib/prisma';
+import { getAppHost } from '@/lib/app-url';
 
 export interface WhiteLabelConfig {
   merchantId: string;
@@ -25,13 +26,9 @@ export async function getWhiteLabelConfig(hostname: string): Promise<WhiteLabelC
   // Strip port if present
   const domain = hostname.split(':')[0].toLowerCase();
 
-  // Skip platform domains
-  const platformDomains = [
-    'localhost',
-    'vouchr.app',
-    'www.vouchr.app',
-    'staging.vouchr.app',
-  ];
+  // Skip the platform's own hosts, derived from the configured app URL
+  const appHost = getAppHost();
+  const platformDomains = ['localhost', appHost, `www.${appHost}`];
   if (platformDomains.includes(domain)) {
     return null;
   }

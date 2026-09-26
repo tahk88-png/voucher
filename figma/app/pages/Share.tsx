@@ -42,7 +42,7 @@ export function Share() {
     type: 'voucher',
     name: 'Summer Sale 25% Off',
     code: 'SUMMER25',
-    url: 'https://vouchers.app/v/summer-sale',
+    url: 'https://example.com/v/summer-sale',
   });
 
   const [copied, setCopied] = useState(false);
@@ -58,25 +58,25 @@ export function Share() {
       type: 'voucher',
       name: 'Summer Sale 25% Off',
       code: 'SUMMER25',
-      url: 'https://vouchers.app/v/summer-sale',
+      url: 'https://example.com/v/summer-sale',
     },
     {
       id: 'winter-campaign',
       type: 'campaign',
       name: 'Winter Collection Launch',
-      url: 'https://vouchers.app/c/winter-collection',
+      url: 'https://example.com/c/winter-collection',
     },
     {
       id: 'gift-50',
       type: 'gift-card',
       name: 'Gift Card €50',
-      url: 'https://vouchers.app/g/gift-50',
+      url: 'https://example.com/g/gift-50',
     },
     {
       id: 'fashion-show',
       type: 'event',
       name: 'VIP Fashion Show',
-      url: 'https://vouchers.app/e/fashion-show',
+      url: 'https://example.com/e/fashion-show',
     },
   ];
 

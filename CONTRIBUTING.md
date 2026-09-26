@@ -6,12 +6,13 @@ you're good.
 
 ## Local setup
 
-Requirements: Node 22.x, pnpm (preferred) or npm, Docker (for local
-Postgres), a `.env.local` (copy from `.env.example`).
+Requirements: Node 20 (what CI and the Docker image use), pnpm 10
+(`npm install` does not work here), Docker (for local Postgres and Redis).
 
 ```bash
-pnpm install
-pnpm db:setup       # starts Docker Postgres, runs migrations, seeds
+pnpm install --frozen-lockfile
+pnpm env:init       # .env from .env.example, with a random AUTH_SECRET
+pnpm db:setup       # starts Docker Postgres + Redis, pushes the schema, seeds
 pnpm dev            # http://localhost:3000
 ```
 
@@ -103,8 +104,12 @@ maintainer immediately — rotation first, history rewrite second.
 ## Release process
 
 - PRs merge to `main` via squash-merge.
-- Vercel auto-deploys `main` to production.
-- Database migrations run automatically in the deploy workflow
-  (`.github/workflows/deploy.yml`).
-- If you need to roll back, revert the merge commit and let the next
-  deploy propagate — do not force-push `main`.
+- A `vX.Y.Z` tag deploys to production (`git tag v1.2.3 && git push origin v1.2.3`).
+  Pushes to `main` deploy to staging only when the repository variable
+  `STAGING_ENABLED` is `true`. See [DEPLOYMENT.md](./DEPLOYMENT.md).
+- Database migrations run in the deploy itself (`deploy/deploy.sh`, started by
+  `.github/workflows/deploy.yml`), to completion, before the new version
+  replaces the old one.
+- To roll back, redeploy the previous tag on the server:
+  `sh deploy/deploy.sh production v1.2.2` (details in
+  [RUNBOOK.md](./RUNBOOK.md)). Do not force-push `main`.

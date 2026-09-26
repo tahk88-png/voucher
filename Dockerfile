@@ -1,5 +1,10 @@
 FROM node:20-alpine AS deps
-WORKDIR /app
+# Not /app: the repo has a route folder app/app/, and webpack first resolves an
+# absolute request like "/app/app/layout.tsx" relative to the project root. With
+# the project at /app that finds /app/app/app/layout.tsx, so the signed-in-only
+# AppLayout silently became every page's root layout (a redirect loop for
+# visitors, 500s for signed-in users). Any directory not named /app avoids it.
+WORKDIR /srv/voucher
 RUN apk add --no-cache libc6-compat
 # pnpm is this project's package manager: its lockfile is the one that
 # resolves. `npm ci` fails here with an ERESOLVE peer conflict
@@ -17,10 +22,14 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
 RUN pnpm install --frozen-lockfile
 
 FROM node:20-alpine AS builder
-WORKDIR /app
-RUN apk add --no-cache libc6-compat
+WORKDIR /srv/voucher
+# openssl lets Prisma detect the image's OpenSSL 3. Without it, current Alpine
+# (libssl3 only, no openssl binary) makes `prisma generate` fall back to the
+# OpenSSL 1.1 engines, which cannot load: every query, /api/health and the
+# migrate step then fail.
+RUN apk add --no-cache libc6-compat openssl
 RUN npm install -g pnpm@10.28.1
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /srv/voucher/node_modules ./node_modules
 COPY . .
 # instrumentation.ts validates env during `next build`. These are throwaway
 # build-time placeholders confined to the builder stage — they never reach the
@@ -36,16 +45,17 @@ RUN pnpm exec prisma generate
 RUN pnpm run build:next
 
 FROM node:20-alpine AS runner
-WORKDIR /app
-RUN apk add --no-cache libc6-compat curl
+WORKDIR /srv/voucher
+# openssl: see the builder stage; runtime engine detection must agree with it.
+RUN apk add --no-cache libc6-compat curl openssl
 ENV NODE_ENV=production
 ENV PORT=3000
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/scripts ./scripts
+COPY --from=builder /srv/voucher/public ./public
+COPY --from=builder /srv/voucher/.next ./.next
+COPY --from=builder /srv/voucher/node_modules ./node_modules
+COPY --from=builder /srv/voucher/package.json ./package.json
+COPY --from=builder /srv/voucher/prisma ./prisma
+COPY --from=builder /srv/voucher/scripts ./scripts
 RUN chmod +x ./scripts/entrypoint.sh
 EXPOSE 3000
 CMD ["sh", "./scripts/entrypoint.sh"]

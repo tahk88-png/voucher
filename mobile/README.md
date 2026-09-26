@@ -14,7 +14,7 @@ It mirrors the web's warm design system, so the apps feel like one product.
 | Routing | `expo-router` (file-based, like Next.js) — see `app/` |
 | Language | TypeScript (strict) |
 | Auth | **Bearer JWT** — `POST /api/auth/mobile/login` issues a token, stored in `expo-secure-store`; every request sends `Authorization: Bearer <token>` |
-| API client | `src/lib/api.ts` (typed fetch wrapper, base URL from env/app.json) |
+| API client | `src/lib/api.ts` (typed fetch wrapper, base URL from `EXPO_PUBLIC_API_URL`) |
 | Theme | `src/theme.ts` — mirrors the web `globals.css` warm tokens |
 | QR redemption | `react-native-qrcode-svg` |
 
@@ -42,7 +42,8 @@ Token signing/verification lives in `lib/mobile-auth.ts` (signed with `AUTH_SECR
 cd mobile
 npm install
 
-# Point the app at your backend (defaults to app.json extra.apiBaseUrl):
+# Point the app at your backend. Required for store builds (set it in the EAS
+# build profile's env too); dev builds fall back to http://localhost:3000.
 echo "EXPO_PUBLIC_API_URL=https://your-deployment.example.com" > .env
 
 npm run typecheck   # tsc --noEmit

@@ -17,6 +17,8 @@
  *      `#/components/responses/*`) for any authenticated route
  */
 
+import { getAppUrl } from '@/lib/app-url';
+
 const unauthorizedResponse = {
   description: 'Authentication required',
   content: {
@@ -63,9 +65,6 @@ export const openApiSpec = {
       'GiftHub public REST API for vouchers, campaigns, events, gift cards, reviews, loyalty, cashback, and merchant integrations. ' +
       'Session-cookie auth is the default; B2B/API-key auth is available for programmatic merchant access — see lib/b2b/auth.ts.',
   },
-  servers: [
-    { url: process.env.NEXTAUTH_URL || 'https://gifthub.app', description: 'Production' },
-  ],
   security: [{ sessionCookie: [] }],
   tags: [
     { name: 'Auth', description: 'Authentication and registration' },
@@ -925,3 +924,14 @@ export const openApiSpec = {
 } as const;
 
 export type OpenApiSpec = typeof openApiSpec;
+
+/**
+ * The document as served. `servers` is the deployment's own configured origin,
+ * resolved per request rather than at import (see lib/app-url.ts).
+ */
+export function getOpenApiSpec() {
+  return {
+    ...openApiSpec,
+    servers: [{ url: getAppUrl(), description: 'This deployment' }],
+  };
+}

@@ -1,5 +1,6 @@
 import { prisma } from './prisma';
 import { isAiConfigured } from './ai';
+import { getContactEmail } from './app-url';
 import OpenAI from 'openai';
 
 const DEFAULT_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini';
@@ -17,7 +18,6 @@ KEY FEATURES:
 - Vouchers: Percentage or fixed-amount discounts issued by merchants. Can be redeemed at checkout using a code or QR scan.
 - Gift Cards: Prepaid store credit cards that can be purchased and sent as gifts. Available in various denominations.
 - Event Tickets: Digital tickets for merchant-hosted events (concerts, workshops, etc.) with QR-code entry.
-- Wallet Passes: Add vouchers, gift cards, or tickets to Apple Wallet or Google Wallet for easy access.
 - Referral Program: Earn rewards by referring friends. Both referrer and referee get benefits.
 - Cashback: Earn cashback on qualifying purchases through Vouchr.
 
@@ -31,7 +31,7 @@ COMMON QUESTIONS:
 
 SUPPORT POLICIES:
 - Be friendly, concise, and helpful.
-- If you don't know the answer, suggest contacting support@vouchr.app.
+- If you don't know the answer, suggest contacting ${getContactEmail()}.
 - Never share personal data or make promises about refunds/compensation.
 - For technical issues, suggest clearing browser cache, trying a different browser, or checking internet connection.
 - Escalate complex billing disputes or account security issues to human support.
@@ -117,7 +117,7 @@ export async function processMessage(
 
       aiContent = response.choices[0]?.message?.content || 'I apologize, I was unable to generate a response. Please try again.';
     } catch {
-      aiContent = 'I apologize, I\'m having trouble connecting right now. Please try again in a moment, or contact support@vouchr.app for immediate help.';
+      aiContent = `I apologize, I'm having trouble connecting right now. Please try again in a moment, or contact ${getContactEmail()} for immediate help.`;
     }
   } else {
     // Fallback when AI is not configured
@@ -149,7 +149,7 @@ function getFallbackResponse(message: string): string {
   const lower = message.toLowerCase();
 
   if (lower.includes('refund') || lower.includes('money back')) {
-    return 'Refund policies are set by each merchant. Please contact the merchant directly for refund requests. If you need further help, reach out to support@vouchr.app.';
+    return `Refund policies are set by each merchant. Please contact the merchant directly for refund requests. If you need further help, reach out to ${getContactEmail()}.`;
   }
   if (lower.includes('gift card') || lower.includes('balance')) {
     return 'You can check your gift card balance in the app under "My Gift Cards". Each card shows its remaining balance and expiry date.';
@@ -163,12 +163,9 @@ function getFallbackResponse(message: string): string {
   if (lower.includes('password') || lower.includes('login') || lower.includes('sign in')) {
     return 'If you\'re having trouble logging in, try the "Forgot Password" link on the login page, or use the magic link option to receive a login link via email.';
   }
-  if (lower.includes('wallet') || lower.includes('apple') || lower.includes('google')) {
-    return 'You can add your vouchers, gift cards, and tickets to Apple Wallet or Google Wallet. Look for the "Add to Wallet" button on any item detail page.';
-  }
   if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
     return 'Hello! Welcome to Vouchr support. How can I help you today?';
   }
 
-  return 'Thank you for your message. For the best assistance, please describe your issue in detail. You can also reach our support team at support@vouchr.app.';
+  return `Thank you for your message. For the best assistance, please describe your issue in detail. You can also reach our support team at ${getContactEmail()}.`;
 }

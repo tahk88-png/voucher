@@ -50,10 +50,6 @@ const faqs = [
         a: 'Open your wallet, select the voucher, and show the QR code to the merchant. They will scan it to confirm redemption. You can also redeem by entering a code manually.',
       },
       {
-        q: 'Can I add vouchers to Apple/Google Wallet?',
-        a: 'Yes! Each voucher has an "Add to Wallet" button that generates a pass for Apple Wallet or Google Wallet. You can then present it directly from your lock screen.',
-      },
-      {
         q: 'What happens when a voucher expires?',
         a: 'Expired vouchers cannot be redeemed. You will receive a notification before expiration. Check your wallet for expiry dates.',
       },

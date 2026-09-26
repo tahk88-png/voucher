@@ -10,6 +10,7 @@ import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { logger } from '@/lib/logger';
 import { withErrorHandler } from '@/lib/error-handler';
 import { buildEmailHtml, type EmailSection } from '@/lib/email-builder';
+import { getSenderEmail } from '@/lib/app-url';
 
 async function getRecipients(merchantId: string, filter: string) {
   const now = new Date();
@@ -129,7 +130,12 @@ export async function POST(
       where: { id: merchant.id },
       select: { supportEmail: true },
     });
-    const fromEmail = merchantDetails?.supportEmail || `noreply@${merchant.slug}.vouchr.app`;
+    // Mail goes out from the platform's verified sender under the merchant's
+    // name; replies reach the merchant. The merchant's own address can't be the
+    // From: its domain isn't verified with our email provider, so every send
+    // from it would be rejected.
+    const fromEmail = getSenderEmail();
+    const replyTo = merchantDetails?.supportEmail || undefined;
 
     // Send emails in batches
     let sentCount = 0;
@@ -140,12 +146,15 @@ export async function POST(
 
       const sendPromises = batch.map(async (recipient) => {
         try {
-          await resend.emails.send({
+          const { error: sendError } = await resend.emails.send({
             from: `${merchant.name} <${fromEmail}>`,
+            reply_to: replyTo,
             to: recipient.email,
             subject: campaign.subject,
             html,
           });
+          // Resend returns API failures instead of throwing them
+          if (sendError) throw new Error(sendError.message);
 
           await prisma.emailCampaignDelivery.create({
             data: {

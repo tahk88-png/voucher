@@ -193,11 +193,57 @@ jobs:
       - name: Docker build
         run: |
           set -o pipefail
-          if ! docker build --progress=plain -t voucher-platform:ci . 2>&1 | tee /tmp/docker.log; then
+          # --load: the buildx builder otherwise keeps the image in its own
+          # cache, and the smoke test below runs it from the local daemon.
+          if ! docker build --load --progress=plain -t voucher-platform:ci . 2>&1 | tee /tmp/docker.log; then
             # Surface the failure as annotations — job logs need repository
             # admin rights to download.
             grep -nE "^#[0-9]+ [0-9.]+ .*(ERR|error|Error|failed|not found|Cannot)|^ERROR:|npm error|pnpm.*ERR" /tmp/docker.log \
               | tail -20 \
               | while IFS= read -r line; do printf '::error::%s\n' "$line"; done
+            exit 1
+          fi
+      - name: Smoke-test the image
+        # An image that builds cleanly can still be unable to run: Prisma
+        # engines that cannot load (every query fails), or a wrong root layout
+        # (every page redirects in a loop). Run it the way a server does:
+        # migrations against an empty Postgres (the entrypoint runs them, as
+        # MIGRATE_ON_START defaults to true), then require the health endpoint
+        # AND real pages to answer 200 without following redirects.
+        run: |
+          docker network create smoke
+          docker run -d --name smoke-db --network smoke \
+            -e POSTGRES_USER=voucher -e POSTGRES_PASSWORD=smoke -e POSTGRES_DB=voucher \
+            postgres:16-alpine
+          # Over TCP: during first-start initialisation Postgres only listens
+          # on its socket, so this passes once the real server is up.
+          for _ in $(seq 1 30); do
+            docker exec smoke-db pg_isready -h 127.0.0.1 -U voucher -d voucher >/dev/null 2>&1 && break
+            sleep 2
+          done
+          docker run -d --name smoke-app --network smoke -p 127.0.0.1:3000:3000 \
+            -e DATABASE_URL=postgresql://voucher:smoke@smoke-db:5432/voucher \
+            -e AUTH_SECRET=ci-smoke-test-only-0123456789abcdef0123456789abcdef \
+            -e AUTH_TRUST_HOST=true \
+            -e NEXT_PUBLIC_APP_URL=http://localhost:3000 \
+            -e NEXTAUTH_URL=http://localhost:3000 \
+            voucher-platform:ci
+          for _ in $(seq 1 60); do
+            curl -fs -o /dev/null --max-time 5 http://127.0.0.1:3000/api/health && break
+            sleep 3
+          done
+          failed=""
+          for path in /api/health / /login /contact /robots.txt; do
+            # A refused or timed-out request prints 000; `|| true` keeps bash -e
+            # from aborting before the log below is shown.
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 "http://127.0.0.1:3000$path") || true
+            echo "$path -> HTTP $code"
+            [ "$code" = 200 ] || failed="$failed $path=$code"
+          done
+          if [ -n "$failed" ]; then
+            echo "::group::app container log"
+            docker logs --tail 200 smoke-app 2>&1
+            echo "::endgroup::"
+            echo "::error::image smoke test failed (expected HTTP 200):$failed"
             exit 1
           fi

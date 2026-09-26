@@ -6,17 +6,25 @@ on:
     tags:
       - "v*.*.*"
 
-# GITHUB_TOKEN defaults to read-only for packages, so the docker push to
-# ghcr.io failed with a 403 on every run even though the image built fine.
-# packages:write lets the login-action token push; contents:read is the
-# minimum the checkout needs. Nothing else is granted.
+# contents:read is the minimum the checkouts need. Each job adds only the
+# package access it uses (below). Nothing else is granted.
 permissions:
   contents: read
-  packages: write
 
 jobs:
   build-and-push:
+    # Staging is opt-in: without an env/.env.staging on the server every push
+    # to main would build a ~3 GB image and end in a failed deploy. Set the
+    # repository variable STAGING_ENABLED=true once staging is set up
+    # (DEPLOYMENT.md, step 3). Tags always deploy to production.
+    if: github.ref_type == 'tag' || vars.STAGING_ENABLED == 'true'
     runs-on: ubuntu-latest
+    # GITHUB_TOKEN defaults to read-only for packages, so the docker push to
+    # ghcr.io failed with a 403 on every run even though the image built fine.
+    # packages:write lets the login-action token push.
+    permissions:
+      contents: read
+      packages: write
     outputs:
       image_tag: ${{ steps.meta.outputs.tag }}
     steps:
@@ -30,9 +38,9 @@ jobs:
       - id: meta
         run: |
           if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-            echo "tag=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
           else
-            echo "tag=staging-${GITHUB_SHA}" >> $GITHUB_OUTPUT
+            echo "tag=staging-${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
           fi
       - run: docker build -t ghcr.io/tahk88-png/voucher-platform:${{ steps.meta.outputs.tag }} .
       - run: docker push ghcr.io/tahk88-png/voucher-platform:${{ steps.meta.outputs.tag }}
@@ -40,7 +48,24 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-push
+    # Tags (v1.2.3) go to production, pushes to main to staging. Decided here,
+    # in the workflow: the remote shell has no GITHUB_* variables, so testing
+    # $GITHUB_REF_TYPE on the server always picked staging.
     environment: ${{ github.ref_type == 'tag' && 'production' || 'staging' }}
+    # The server only pulls. This job's token is sent to it for `docker login`,
+    # so it must not be able to push images.
+    permissions:
+      contents: read
+      packages: read
+    # One rollout per server at a time, production and staging included: both
+    # use the same directory, deploy scripts, registry login and image store,
+    # so overlapping runs would rewrite each other's files, log each other out
+    # and prune each other's images. A newer run waits instead. (GitHub keeps
+    # only the newest waiting run per group: a third run queued behind a
+    # waiting one replaces it, and the replaced one has to be re-run.)
+    concurrency:
+      group: deploy-server
+      cancel-in-progress: false
     steps:
       - name: Check deploy secrets are configured
         # Without this, a missing secret surfaces as an opaque ssh-action error
@@ -61,39 +86,52 @@ jobs:
             exit 1
           fi
           echo "All deploy secrets present."
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.2.5
+
+      - uses: actions/checkout@v5
+
+      - name: Copy compose files and deploy scripts to the server
+        # Every deploy ships the compose files and scripts of the commit being
+        # deployed, so the server never runs a stale compose file. Only these
+        # paths are written; env/.env.*, state/ and backups/ on the server are
+        # never touched (rm is left off). No `overwrite`: its tar --overwrite
+        # rewrites files in place, which changes a script under a shell that
+        # is still reading it; plain tar replaces each file with a new one.
+        uses: appleboy/scp-action@v1.0.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
+          port: ${{ secrets.DEPLOY_PORT || '22' }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
+          fingerprint: ${{ secrets.DEPLOY_HOST_FINGERPRINT }}
+          source: docker-compose.prod.yml,docker-compose.staging.yml,deploy,scripts/db-backup.sh,scripts/db-restore.sh,env/.env.production.example,env/.env.staging.example
+          target: ${{ secrets.DEPLOY_APP_DIR }}
+
+      - name: Deploy on the server
+        # deploy/deploy.sh: env-file check, pull, (production) backup, blocking
+        # migrations, app swap, health poll on 127.0.0.1:$APP_PORT, and
+        # rollback to the last healthy tag if the new one never gets healthy.
+        # The registry login uses this job's short-lived token (the package may
+        # be private) and is removed again afterwards.
+        uses: appleboy/ssh-action@v1.2.5
+        env:
+          DEPLOY_ENV: ${{ github.ref_type == 'tag' && 'production' || 'staging' }}
+          IMAGE_TAG: ${{ needs.build-and-push.outputs.image_tag }}
+          APP_DIR: ${{ secrets.DEPLOY_APP_DIR }}
+          GHCR_USER: ${{ github.actor }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          port: ${{ secrets.DEPLOY_PORT || '22' }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          fingerprint: ${{ secrets.DEPLOY_HOST_FINGERPRINT }}
+          envs: DEPLOY_ENV,IMAGE_TAG,APP_DIR,GHCR_USER,GHCR_TOKEN
+          command_timeout: 20m
           script: |
             set -e
-            APP_DIR=${{ secrets.DEPLOY_APP_DIR }}
-            cd ${APP_DIR}
-            export IMAGE_TAG=${{ needs.build-and-push.outputs.image_tag }}
-            PREV_TAG_FILE=.deploy_prev_tag
-            if [ -f "${PREV_TAG_FILE}" ]; then
-              PREV_TAG=$(cat ${PREV_TAG_FILE})
-            else
-              PREV_TAG=latest
-            fi
-            echo ${IMAGE_TAG} > ${PREV_TAG_FILE}
-            if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-              COMPOSE_FILE=docker-compose.prod.yml
-              HEALTH_PORT=3000
-            else
-              COMPOSE_FILE=docker-compose.staging.yml
-              HEALTH_PORT=3001
-            fi
-            docker compose -f ${COMPOSE_FILE} pull
-            docker compose -f ${COMPOSE_FILE} up -d migrate
-            docker compose -f ${COMPOSE_FILE} up -d app
-            sleep 5
-            if ! curl -fsS http://localhost:${HEALTH_PORT}/api/health > /dev/null; then
-              echo "Healthcheck failed, rolling back..."
-              echo ${PREV_TAG} > ${PREV_TAG_FILE}
-              export IMAGE_TAG=${PREV_TAG}
-              docker compose -f ${COMPOSE_FILE} up -d app
-              exit 1
-            fi
+            cd "$APP_DIR"
+            printf '%s\n' "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin
+            status=0
+            sh deploy/deploy.sh "$DEPLOY_ENV" "$IMAGE_TAG" || status=$?
+            docker logout ghcr.io
+            exit "$status"

@@ -4,7 +4,10 @@ import { routing } from "@/routing"
 import { getLocalePath, toAbsoluteUrl } from "@/lib/seo"
 import { logger } from "@/lib/logger"
 
-export const revalidate = 3600
+// Rendered per request, not prerendered/ISR: `next build` has neither the
+// runtime NEXT_PUBLIC_APP_URL nor a database, so a build-time sitemap lists
+// http://localhost:3000 URLs without any campaigns, merchants or vouchers.
+export const dynamic = "force-dynamic"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()

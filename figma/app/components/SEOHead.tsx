@@ -18,7 +18,7 @@ export interface SEOProps {
 const DEFAULT_SEO: SEOProps = {
   title: 'GiftHub - Euroopa SaaS vautserite ja soovituste platvorm',
   description: 'Jaga, teeni ja lunasta kinkekaarte, vautsereid ja kampaaniaid ule Euroopa. Platvorm kaupmeestele ja kasutajatele.',
-  image: 'https://gifthub.eu/og-image.png',
+  image: 'https://example.com/og-image.png',
   type: 'website',
   keywords: [
     'vautserid',
@@ -42,7 +42,7 @@ export function SEOHead(props: SEOProps) {
   const seo = {
     ...DEFAULT_SEO,
     ...props,
-    url: props.url || `https://gifthub.eu${location.pathname}`,
+    url: props.url || `https://example.com${location.pathname}`,
   };
 
   useEffect(() => {
@@ -148,8 +148,8 @@ export function SEOHead(props: SEOProps) {
         '@type': 'Organization',
         name: 'GiftHub',
         description: DEFAULT_SEO.description,
-        url: 'https://gifthub.eu',
-        logo: 'https://gifthub.eu/logo.png',
+        url: 'https://example.com',
+        logo: 'https://example.com/logo.png',
         sameAs: [
           'https://facebook.com/gifthub',
           'https://twitter.com/gifthub',
@@ -159,7 +159,7 @@ export function SEOHead(props: SEOProps) {
         contactPoint: {
           '@type': 'ContactPoint',
           contactType: 'Customer Support',
-          email: 'support@gifthub.eu',
+          email: 'support@example.com',
           availableLanguage: ['Estonian', 'English', 'Russian']
         }
       };

@@ -30,6 +30,12 @@ RESEND_API_KEY=re_your_api_key
 RESEND_FROM_EMAIL=noreply@yourdomain.com
 ```
 
+Addresses left empty are derived from the host of `NEXT_PUBLIC_APP_URL`
+(`lib/app-url.ts`): sender `noreply@<host>`, reports `reports@<host>`
+(`EMAIL_FROM`), support `support@<host>` (`CONTACT_EMAIL`). They must be on a
+domain you own and have verified with your e-mail provider. Without any
+provider configured, the contact form answers 503 instead of pretending to send.
+
 #### Option 2: SMTP
 
 ```bash
@@ -81,7 +87,34 @@ REDIS_URL=redis://localhost:6379
 
 # Sentry (for error tracking)
 NEXT_PUBLIC_SENTRY_DSN=https://your-sentry-dsn@sentry.io/project-id
+
+# /figma serves the Figma Make prototype (mock data, mock sign-in). It is a
+# 404 in production unless this is set; development always serves it.
+ENABLE_DESIGN_PREVIEW=false
 ```
+
+### Production server (docker-compose.prod.yml)
+
+The server's `env/.env.production` (created by `deploy/init-env.sh`, see
+`DEPLOYMENT.md`) additionally holds:
+
+```bash
+APP_PORT=3100                # host port on 127.0.0.1 that nginx proxies to (staging: 3101)
+POSTGRES_USER=voucher        # POSTGRES_* must match DATABASE_URL (host "postgres")
+POSTGRES_PASSWORD=...
+POSTGRES_DB=voucher
+REDIS_PASSWORD=...           # must match REDIS_URL=redis://:<password>@redis:6379
+AUTH_TRUST_HOST=true         # required behind nginx
+```
+
+Optional memory caps: `APP_MEM_LIMIT`, `POSTGRES_MEM_LIMIT`, `REDIS_MEM_LIMIT`.
+The GitHub repository variable `STAGING_ENABLED=true` turns on staging deploys
+for pushes to `main`; version tags always deploy to production.
+
+### Mobile app
+
+`mobile/` reads the API origin from `EXPO_PUBLIC_API_URL` at build time (see
+`mobile/README.md`). A production build without it refuses to make requests.
 
 ## Database Setup
 
@@ -100,10 +133,10 @@ createdb voucher_db
 ```bash
 # Development (creates migration files)
 npm run db:migrate
-
-# Production (applies existing migrations)
-npx prisma migrate deploy
 ```
+
+Production applies them itself: every deploy runs `prisma migrate deploy`
+before the new version starts ([DEPLOYMENT.md](../DEPLOYMENT.md)).
 
 ### 3. Seed Data
 
@@ -158,30 +191,16 @@ Check `public/manifest.json` exists and has correct values:
 
 ## Cron Job Setup
 
-### Option 1: Vercel Cron (If using Vercel)
+### On your server (the supported setup)
 
-Already configured in `vercel.json`:
+`deploy/crontab.example` schedules every job from `vercel.json` (plus a
+nightly database backup) through `deploy/run-cron.sh`, which sends
+`CRON_SECRET`. Install it as described in [DEPLOYMENT.md](../DEPLOYMENT.md),
+step 7. On Vercel, `vercel.json` does the same.
 
-```json
-{
-  "crons": [{
-    "path": "/api/cron/credit-expiry-warnings",
-    "schedule": "0 9 * * *"
-  }]
-}
-```
+### External Cron Service
 
-Set `CRON_SECRET` environment variable in Vercel dashboard.
-
-### Option 2: External Cron Service
-
-Use a service like:
-
-- GitHub Actions (scheduled workflow)
-- cron-job.org
-- EasyCron
-
-Configure to call:
+Any scheduler can call the endpoints instead:
 
 ```http
 GET https://your-domain.com/api/cron/credit-expiry-warnings
@@ -229,9 +248,12 @@ psql $DATABASE_URL -f prisma/migrations/launch_mode/migration.sql
 
 ### 2. Set Platform Admin
 
+Register your own account first, then put its address in the env file
+(sign-up does not verify e-mail ownership, so never list an address you have
+not registered yourself):
+
 ```bash
-# In .env
-PLATFORM_ADMIN_EMAILS=admin@example.com
+PLATFORM_ADMIN_EMAILS=you@your-domain.example
 ```
 
 ### 3. Create First Merchant
@@ -287,7 +309,7 @@ npm run test:launch-mode
 Before deploying:
 
 - [ ] All environment variables set
-- [ ] Database migrations run
+- [ ] Deployed with a `vX.Y.Z` tag (the deploy runs migrations)
 - [ ] PWA icons generated
 - [ ] Email service configured and tested
 - [ ] Stripe webhook configured

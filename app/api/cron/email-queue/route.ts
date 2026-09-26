@@ -14,6 +14,7 @@ import { isEmailSuppressed } from '@/lib/email/suppression';
 import { sendWithFailover } from '@/lib/email/providers/factory';
 import { renderDbTemplate } from '@/lib/email/template-renderer';
 import { logger } from '@/lib/logger';
+import { getSenderEmail } from '@/lib/app-url';
 
 const BATCH_SIZE = 30; // Reduced from 50 to stay safely under 30s Vercel timeout
 const CONCURRENCY = 10;
@@ -101,6 +102,9 @@ async function processJob(
   job: Awaited<ReturnType<typeof prisma.emailJob.findMany>>[number]
 ): Promise<'sent' | 'suppressed'> {
   try {
+    // One sender for the send and both log rows, so the log shows what was sent
+    const from = job.from || getSenderEmail();
+
     // Check suppression
     const suppression = await isEmailSuppressed(job.to);
     if (suppression.suppressed) {
@@ -112,7 +116,7 @@ async function processJob(
         prisma.emailMessage.create({
           data: {
             jobId: job.id,
-            from: job.from || 'noreply@vouchr.app',
+            from,
             to: job.to,
             subject: job.subject,
             templateSlug: job.templateSlug,
@@ -142,7 +146,7 @@ async function processJob(
     // Send via provider
     const result = await sendWithFailover({
       to: job.to,
-      from: job.from || process.env.RESEND_FROM_EMAIL || 'noreply@vouchr.app',
+      from,
       subject,
       html: html || undefined,
       text: job.text || undefined,
@@ -159,7 +163,7 @@ async function processJob(
           jobId: job.id,
           providerId: result.providerId,
           providerType: result.providerType,
-          from: job.from || 'noreply@vouchr.app',
+          from,
           to: job.to,
           subject,
           templateSlug: job.templateSlug,

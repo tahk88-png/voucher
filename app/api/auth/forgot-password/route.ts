@@ -94,7 +94,11 @@ export async function POST(req: NextRequest) {
           tags: [{ name: 'type', value: 'password-reset' }],
         });
       } else {
-        logger.warn('[forgot-password] Resend not configured', { resetUrl });
+        // The reset URL is a live credential: print it only for local development.
+        logger.warn(
+          '[forgot-password] Resend not configured; reset email not sent',
+          process.env.NODE_ENV === 'production' ? undefined : { resetUrl },
+        );
       }
     } catch (emailErr) {
       logger.error('[forgot-password] Email failed', { error: emailErr instanceof Error ? emailErr.message : String(emailErr) });

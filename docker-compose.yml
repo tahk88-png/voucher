@@ -8,7 +8,11 @@ services:
       NODE_ENV: development
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
       PLATFORM_ROOT_DOMAIN: ${PLATFORM_ROOT_DOMAIN:-localhost:3000}
-      DATABASE_URL: ${DATABASE_URL:-postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}}
+      # Always the compose service names: .env's DATABASE_URL / REDIS_URL are
+      # for `npm run dev` on the host (localhost:5433 / :6379), which inside
+      # this container points at the container itself.
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://redis:6379
       NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
     ports:
       - "3000:3000"

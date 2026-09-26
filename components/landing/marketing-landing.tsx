@@ -11,7 +11,6 @@ import { CountUp } from "@/components/animations/count-up"
 import { TiltCard } from "@/components/animations/tilt-card"
 import { GradientText } from "@/components/animations/gradient-text"
 import { ParallaxSection } from "@/components/animations/parallax-section"
-import { LiveActivityFeed } from "@/components/landing/live-activity-feed"
 import { MerchantLogoWall } from "@/components/landing/merchant-logo-wall"
 import { BeforeAfterSlider } from "@/components/landing/before-after-slider"
 import { PricingCalculator } from "@/components/landing/pricing-calculator"
@@ -126,74 +125,60 @@ export default function MarketingLanding({
     },
   ]
 
+  // Browse tiles only. They used to carry invented per-category counts
+  // ("234 campaigns") and sample deal names that were rendered as if live;
+  // nothing here may claim a number the database did not produce.
   const categories = [
     {
       name: "Food & Drink",
       icon: UtensilsCrossed,
-      count: 234,
       color: "from-[var(--primary)] to-[var(--primary-hover)]",
       iconClass: "text-[var(--text)]",
-      campaigns: ["20% off Pizza", "Lunch deal", "Weekend brunch"],
     },
     {
       name: "Fashion",
       icon: Shirt,
-      count: 189,
       color: "from-[var(--danger)] to-[#D16B4C]",
       iconClass: "text-white",
-      campaigns: ["Summer Sale 50%", "New arrivals", "Outlet specials"],
     },
     {
       name: "Beauty",
       icon: Paintbrush,
-      count: 156,
       color: "from-[#F5C98E] to-[#E5B97E]",
       iconClass: "text-[var(--text)]",
-      campaigns: ["Spa day deals", "Skincare bundles", "Salon packages"],
     },
     {
       name: "Tech",
       icon: Laptop,
-      count: 142,
       color: "from-[var(--success)] to-[#7FA090]",
       iconClass: "text-white",
-      campaigns: ["Tech sale", "Laptop upgrades", "Accessories week"],
     },
     {
       name: "Travel",
       icon: Plane,
-      count: 198,
       color: "from-[var(--primary)] to-[var(--primary-hover)]",
       iconClass: "text-[var(--text)]",
-      campaigns: ["City break offers", "Flight credits", "Hotel packages"],
     },
     {
       name: "Wellness",
       icon: Leaf,
-      count: 123,
       color: "from-[var(--success)] to-[#7FA090]",
       iconClass: "text-white",
-      campaigns: ["Yoga retreat", "Detox weekend", "Massage special"],
     },
     {
       name: "Events",
       icon: PartyPopper,
-      count: 167,
       color: "from-[var(--danger)] to-[#D16B4C]",
       iconClass: "text-white",
-      campaigns: ["Concert tickets", "Festival pass", "Family events"],
     },
     {
       name: "Home",
       icon: Home,
-      count: 134,
       color: "from-[#F5C98E] to-[#E5B97E]",
       iconClass: "text-[var(--text)]",
-      campaigns: ["Home essentials", "Furniture weekend", "Decor bundle"],
     },
   ]
   const visibleOffers = featuredOffers.slice(0, 12)
-  const totalCategoryCampaigns = categories.reduce((sum, category) => sum + category.count, 0)
 
   const benefits = [
     "Built-in referral engine on every campaign",
@@ -442,8 +427,7 @@ export default function MarketingLanding({
             <WarmCard
               key={category.name}
               padding="sm"
-              hover
-              className="text-center cursor-pointer rounded-[14px] border border-[var(--border)] bg-white/92"
+              className="text-center rounded-[14px] border border-[var(--border)] bg-white/92"
             >
               <div
                 className={`w-10 h-10 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mx-auto mb-2 ring-1 ring-white/35`}
@@ -451,7 +435,6 @@ export default function MarketingLanding({
                 <category.icon className={`h-[18px] w-[18px] stroke-[2.25] ${category.iconClass}`} />
               </div>
               <p className="text-xs font-semibold text-[var(--text)]">{category.name}</p>
-              <p className="text-[11px] text-[var(--text-faint)] mt-1">{category.count} campaigns</p>
             </WarmCard>
           ))}
         </div>
@@ -516,32 +499,24 @@ export default function MarketingLanding({
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-            {categories.slice(0, 8).map((category) => {
-              const topCampaign = category.campaigns[0]
-              return (
-                <WarmCard key={category.name} hover padding="lg" className="rounded-[16px] bg-white/92">
-                  <div
-                    className={`w-10 h-10 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mb-3 ring-1 ring-white/35`}
-                  >
-                    <category.icon className={`h-[18px] w-[18px] stroke-[2.25] ${category.iconClass}`} />
-                  </div>
-                  <p className="text-xs text-[var(--text-faint)] mb-1">{category.name}</p>
-                  <h3 className="text-lg font-bold text-[var(--text)] mb-3">{topCampaign}</h3>
-                  <div className="pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--text-faint)]">
-                    <span>{category.count} active</span>
-                    <ArrowRight className="h-4 w-4 text-[var(--accent)]" />
-                  </div>
-                </WarmCard>
-              )
-            })}
-          </div>
+          // No live offers: a fresh deployment, or the database is unreachable.
+          // This used to fill the space with eight invented deals and "N active"
+          // counts, which contradicted the real stats above.
+          <WarmCard padding="lg" className="rounded-[16px] bg-white/92 text-center max-w-xl mx-auto">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#F5C98E] flex items-center justify-center mx-auto mb-3 ring-1 ring-white/35">
+              <Ticket className="h-6 w-6 text-white" />
+            </div>
+            <h3 className="text-lg font-bold text-[var(--text)] mb-1">No live campaigns right now</h3>
+            <p className="text-sm text-[var(--text-muted)]">
+              Offers appear here as soon as merchants publish them.
+            </p>
+          </WarmCard>
         )}
 
         <div className="text-center mt-8">
           <WarmButton size="md" asChild>
             <Link href="/campaigns">
-              {visibleOffers.length > 0 ? "View All Live Campaigns" : `View All ${totalCategoryCampaigns} Campaigns`}
+              View All Campaigns
               <ArrowRight className="h-4 w-4 ml-2" />
             </Link>
           </WarmButton>
@@ -863,8 +838,11 @@ export default function MarketingLanding({
         </WarmCard>
       </section>
 
-      {/* Live Activity Feed — social proof toasts */}
-      <LiveActivityFeed />
+      {/* Live activity toasts — intentionally not rendered.
+          They cycled through invented purchases ("Maria K. from Tallinn
+          purchased Spa Weekend Pass, 2 min ago") presented as live activity,
+          which is fake social proof and unlawful advertising in the EU/UK.
+          Restore only if fed from real, anonymised purchase events. */}
     </div>
   )
 }

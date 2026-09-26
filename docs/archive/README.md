@@ -29,6 +29,11 @@ the current codebase. For anything operational, start at the top-level
 | `LAUNCH_MODE_IMPLEMENTATION.md` | Launch-mode feature build notes | MVP phase |
 | `SETUP_VERIFICATION.md` | One-time setup smoke-test results | MVP phase |
 | `TROUBLESHOOTING_BUILD.md` | Superseded by `../TROUBLESHOOTING.md` | MVP phase |
+| `PRODUCTION_DEPLOYMENT_CHECKLIST.md`, `IMPLEMENTATION_ROADMAP.md`, `EXECUTIVE_SUMMARY.md`, `PRODUCTION_READINESS.md`, `PRODUCTION_READINESS_REPORT.md` | Production-readiness reviews and plans (Vercel-era deploy steps); superseded by `../../DEPLOYMENT.md` and `../../RUNBOOK.md` | 2026-Q1 |
+| `QUICK_START.md` | "Production improvements" setup notes; superseded by `../../QUICKSTART.md` | 2026-Q1 |
+| `UI_SKELETON_*.md` | UI skeleton build status and test notes | MVP phase |
+| `IMPROVEMENTS.md`, `IMPROVEMENTS_SUMMARY.md`, `SUMMARY.md` | Improvement plans and summaries | 2026-Q1 |
+| `I18N_STATUS.md`, `I18N_COMPLETE.md` | i18n progress snapshots; current guide is `../I18N.md` | 2026-Q1 |
 
 ## Do not update files here
 
