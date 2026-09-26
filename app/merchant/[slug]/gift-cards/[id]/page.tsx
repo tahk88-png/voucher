@@ -92,19 +92,19 @@ export default async function GiftCardDetailPage({
             <div>
               <p className="text-sm text-[var(--text-faint)]">Valid from</p>
               <p className="text-lg font-semibold text-[var(--text)]">
-                {giftCard.validFrom.toLocaleDateString()}
+                {giftCard.validFrom.toLocaleDateString('en-GB')}
               </p>
             </div>
             <div>
               <p className="text-sm text-[var(--text-faint)]">Valid to</p>
               <p className="text-lg font-semibold text-[var(--text)]">
-                {giftCard.validTo ? giftCard.validTo.toLocaleDateString() : 'No expiry'}
+                {giftCard.validTo ? giftCard.validTo.toLocaleDateString('en-GB') : 'No expiry'}
               </p>
             </div>
             <div>
               <p className="text-sm text-[var(--text-faint)]">Redeemed at</p>
               <p className="text-lg font-semibold text-[var(--text)]">
-                {giftCard.redeemedAt ? giftCard.redeemedAt.toLocaleDateString() : 'Not redeemed'}
+                {giftCard.redeemedAt ? giftCard.redeemedAt.toLocaleDateString('en-GB') : 'Not redeemed'}
               </p>
             </div>
           </div>

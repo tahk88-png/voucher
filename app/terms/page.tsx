@@ -1,18 +1,29 @@
 import type { Metadata } from 'next';
+import { LegalEntityDetails } from '@/components/site/legal-entity';
+
+// The operator details come from runtime env (see LegalEntityDetails), so
+// render per request instead of baking in build-time values.
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | Voucher Platform',
-  description: 'Terms and conditions for using our voucher platform',
+  title: 'Terms of Service',
+  description: 'Terms and conditions for using GiftHub',
 };
 
 export default function TermsPage() {
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <article className="max-w-3xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-8" style={{ color: 'var(--text)' }}>
         Terms of Service
       </h1>
       <div className="space-y-6 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
         <p><strong>Last updated:</strong> March 2026</p>
+
+        <section aria-labelledby="operator-heading">
+          <h2 id="operator-heading" className="text-xl font-semibold mb-3" style={{ color: 'var(--text)' }}>Who we are</h2>
+          <p className="mb-2">GiftHub is operated by:</p>
+          <LegalEntityDetails />
+        </section>
 
         <section>
           <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text)' }}>1. Acceptance of Terms</h2>
@@ -69,6 +80,6 @@ export default function TermsPage() {
           <p>For questions about these terms, contact us at <a href="/contact" className="underline" style={{ color: 'var(--primary)' }}>our contact page</a>.</p>
         </section>
       </div>
-    </main>
+    </article>
   );
 }

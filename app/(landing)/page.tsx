@@ -1,8 +1,7 @@
 // ISR: revalidate every 5 minutes — balances freshness with performance
 export const revalidate = 300;
 
-import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Home', path: '/' });
+// Metadata (brand-only title, canonical, OG) comes from ./layout.tsx.
 
 import HubShell from "@/components/layout/hub-shell"
 import TenantShell from "@/components/layout/tenant-shell"
@@ -10,7 +9,7 @@ import SitePageRenderer from "@/components/site/site-page-renderer"
 import MarketingLanding from "@/components/landing/marketing-landing"
 import { prisma } from "@/lib/prisma"
 import { isMerchantActive } from "@/lib/merchant-status"
-import { getCampaignCategoryId } from "@/lib/campaign-categories"
+import { getCampaignCategoryId, getCampaignCategoryLabel } from "@/lib/campaign-categories"
 import { countryOptions } from "@/lib/locale-config"
 import { formatCurrency, formatPercentage, safeParseJson } from "@/lib/utils"
 import { logger } from "@/lib/logger"
@@ -27,6 +26,7 @@ type LandingFeaturedOffer = {
   priceLabel: string
   purchases: number
   discountLabel: string | null
+  onSale: boolean
 }
 
 type LandingStats = {
@@ -34,18 +34,6 @@ type LandingStats = {
   activeCampaignCount: number
   /** Total value of paid voucher purchases, in minor units. */
   processedCents: number
-}
-
-const categoryLabels: Record<string, string> = {
-  cafe: "Cafe & Bakery",
-  beauty: "Beauty",
-  fitness: "Fitness",
-  events: "Events",
-  workshops: "Workshops",
-  family: "Family",
-  travel: "Travel",
-  outdoor: "Outdoor",
-  other: "Other",
 }
 
 const marketCodeByName = new Map(countryOptions.map((country) => [country.name.toLowerCase(), country.code]))
@@ -68,7 +56,8 @@ async function getPlatformStats(): Promise<LandingStats | null> {
     const [merchantCount, activeCampaignCount, processed] = await Promise.all([
       prisma.merchant.count({ where: { isActive: true } }),
       prisma.campaign.count({
-        where: { status: "active", startDate: { lte: now }, endDate: { gte: now } },
+        // Same "active" definition as /campaigns.
+        where: { status: "active", startDate: { lte: now }, endDate: { gte: now }, merchant: { isActive: true } },
       }),
       prisma.voucherPurchase.aggregate({
         where: { status: "paid" },
@@ -132,6 +121,15 @@ async function getLandingFeaturedOffers(): Promise<LandingFeaturedOffer[]> {
                 status: "paid",
               },
             },
+            // A campaign can only be bought through a published, currently
+            // valid voucher; without one it is listed but not on sale.
+            vouchers: {
+              where: {
+                status: "published",
+                validFrom: { lte: now },
+                validTo: { gte: now },
+              },
+            },
           },
         },
       },
@@ -156,8 +154,10 @@ async function getLandingFeaturedOffers(): Promise<LandingFeaturedOffer[]> {
       .map((campaign) => {
         const discountRules = safeParseJson<{ type?: string; value?: number; currency?: string }>(campaign.discountRules)
         let discountLabel: string | null = null
+        const isFree = !campaign.price || campaign.price <= 0
 
-        if (discountRules && typeof discountRules.value === "number") {
+        // "50% OFF" next to "FREE" reads as a contradiction; free offers show no discount badge.
+        if (!isFree && discountRules && typeof discountRules.value === "number") {
           if (discountRules.type === "percentage") {
             discountLabel = `${formatPercentage(discountRules.value)} OFF`
           } else {
@@ -178,14 +178,12 @@ async function getLandingFeaturedOffers(): Promise<LandingFeaturedOffer[]> {
           name: campaign.name,
           merchantName: campaign.merchant.name,
           merchantLogoUrl: campaign.merchant.brandLogoUrl,
-          categoryLabel: categoryLabels[categoryId] || "Other",
+          categoryLabel: getCampaignCategoryLabel(categoryId),
           marketLabel: getMarketLabel(campaign.merchant.country, campaign.merchant.defaultCurrency),
-          priceLabel:
-            campaign.price && campaign.price > 0
-              ? formatCurrency(campaign.price, campaign.merchant.defaultCurrency)
-              : "FREE",
+          priceLabel: isFree ? "FREE" : formatCurrency(campaign.price!, campaign.merchant.defaultCurrency),
           purchases: campaign._count.purchases,
           discountLabel,
+          onSale: campaign._count.vouchers > 0,
         }
       })
   } catch {

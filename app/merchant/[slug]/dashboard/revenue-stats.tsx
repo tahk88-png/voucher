@@ -2,7 +2,9 @@ import { Suspense } from "react"
 import { prisma } from "@/lib/prisma"
 import { StatsCard } from "@/components/ui/stats-card"
 import { DollarSign, CreditCard, TrendingUp, AlertCircle } from "lucide-react"
-import { formatCurrency } from "@/lib/utils"
+import { formatPrice } from "@/lib/currency-constants"
+
+const formatCurrency = (minor: number, currency: string) => formatPrice(minor, currency.toUpperCase(), "en-GB")
 
 async function RevenueStatsContent({
   merchantId,

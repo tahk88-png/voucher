@@ -1,6 +1,7 @@
 'use client';
 
 import { Flame } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface StreakCounterProps {
   currentDays: number;
@@ -13,6 +14,7 @@ interface StreakCounterProps {
 }
 
 export function StreakCounter({ currentDays, level, levelProgress }: StreakCounterProps) {
+  const t = useTranslations('achievements');
   const isMilestone = currentDays === 7 || currentDays === 30 || currentDays === 100;
 
   return (
@@ -37,13 +39,13 @@ export function StreakCounter({ currentDays, level, levelProgress }: StreakCount
           />
         </div>
 
-        <div className="flex-1">
-          <div className="flex items-baseline gap-2">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-baseline gap-2 flex-wrap">
+            <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              {t('currentStreak')}
+            </span>
             <span className="text-2xl font-bold" style={{ color: 'var(--text)' }}>
               {currentDays}
-            </span>
-            <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-              day streak
             </span>
           </div>
 
@@ -55,9 +57,17 @@ export function StreakCounter({ currentDays, level, levelProgress }: StreakCount
                 color: 'var(--primary-foreground)',
               }}
             >
-              Level {level}
+              {t('levelValue', { level })}
             </span>
-            <div className="flex-1 h-1.5 rounded-full" style={{ backgroundColor: 'var(--muted)' }}>
+            <div
+              className="flex-1 h-1.5 rounded-full"
+              style={{ backgroundColor: 'var(--muted)' }}
+              role="progressbar"
+              aria-label={t('levelProgress')}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={Math.round(levelProgress.progress)}
+            >
               <div
                 className="h-full rounded-full transition-all duration-500"
                 style={{
@@ -66,7 +76,7 @@ export function StreakCounter({ currentDays, level, levelProgress }: StreakCount
                 }}
               />
             </div>
-            <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+            <span className="text-xs whitespace-nowrap" style={{ color: 'var(--text-secondary)' }}>
               {levelProgress.currentPoints}/{levelProgress.nextLevelPoints}
             </span>
           </div>
@@ -81,7 +91,7 @@ export function StreakCounter({ currentDays, level, levelProgress }: StreakCount
             color: 'var(--primary-foreground)',
           }}
         >
-          {currentDays}-day streak milestone reached!
+          {t('milestone')}
         </div>
       )}
     </div>

@@ -29,10 +29,10 @@ const sections = [
     icon: FileText,
     color: 'bg-amber-100 text-amber-700',
     links: [
-      { label: 'Audit Log', href: '/admin', desc: 'Platform audit trail' },
+      { label: 'Audit Log', href: '/admin/audit-log', desc: 'Platform audit trail' },
       { label: 'Hash-Chain Audit', api: '/api/admin/audit', desc: 'Tamper-proof admin action log' },
       { label: 'Verify Chain Integrity', api: '/api/admin/audit/verify', desc: 'Validate audit hash chain' },
-      { label: 'Export Audit CSV', api: '/api/admin/audit/export', desc: 'Download full audit trail' },
+      { label: 'Export Audit CSV', download: '/api/admin/audit/export', desc: 'Download full audit trail' },
     ],
   },
   {
@@ -51,6 +51,7 @@ const sections = [
     color: 'bg-green-100 text-green-700',
     links: [
       { label: 'Billing Dashboard', href: '/admin/billing', desc: 'Subscriptions, refunds, payout holds' },
+      { label: 'VAT', href: '/admin/vat', desc: 'VAT rates and exemptions' },
       { label: 'Subscriptions API', api: '/api/admin/billing/subscriptions', desc: 'Active subscription overview' },
       { label: 'Failed Payments API', api: '/api/admin/billing/failed-payments', desc: 'Payment retry queue' },
     ],
@@ -80,7 +81,7 @@ const sections = [
     color: 'bg-indigo-100 text-indigo-700',
     links: [
       { label: 'Analytics Dashboard', href: '/admin/analytics', desc: 'KPIs, revenue, cohorts' },
-      { label: 'Export CSV', api: '/api/admin/analytics/export', desc: 'Download analytics CSV' },
+      { label: 'Export CSV', download: '/api/admin/analytics/export', desc: 'Download analytics CSV' },
     ],
   },
   {
@@ -111,7 +112,7 @@ const sections = [
       { label: 'Occasions', api: '/api/admin/gifts/occasions', desc: 'Gift occasions management' },
       { label: 'Personas', api: '/api/admin/gifts/personas', desc: 'Recipient persona management' },
       { label: 'Feed Modules', api: '/api/admin/gifts/modules', desc: 'Curated feed modules' },
-      { label: 'Sponsorships', api: '/api/admin/gifts/sponsors', desc: 'Sponsored gift placements' },
+      { label: 'Sponsored Placements', href: '/admin/sponsored-placements', desc: 'Sponsored placements and gift sponsorships' },
       { label: 'Analytics', api: '/api/admin/gifts/analytics', desc: 'Gift feed performance metrics' },
     ],
   },
@@ -130,11 +131,11 @@ export default async function ControlPanelPage() {
   return (
     <div className="min-h-screen bg-[#FAF7F2] p-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex flex-wrap items-center gap-4 mb-8">
           <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-warm">
             <Shield className="h-6 w-6 text-white" />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             <h1 className="text-3xl font-bold text-[#2D2721]">Super Admin Control Panel</h1>
             <p className="text-[#6B5744]">Full platform control — RBAC, audit, moderation, billing, flags, ops, analytics.</p>
           </div>
@@ -166,31 +167,47 @@ export default async function ControlPanelPage() {
                   <h2 className="text-lg font-semibold text-[#2D2721]">{section.title}</h2>
                 </div>
                 <div className="space-y-2">
-                  {section.links.map((link) => {
-                    const href = link.href || link.api || '#';
-                    const isApi = !!link.api;
-                    return (
-                      <a
-                        key={link.label}
-                        href={href}
-                        target={isApi ? '_blank' : undefined}
-                        rel={isApi ? 'noopener noreferrer' : undefined}
-                        className="block px-3 py-2 rounded-lg hover:bg-[#FAF7F2] transition-colors group"
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-medium text-[#2D2721] group-hover:text-[var(--primary)]">
-                            {link.label}
-                          </span>
-                          {isApi && (
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500 font-mono">
-                              API
+                  {section.links
+                    .filter((link) => !('api' in link && link.api))
+                    .map((link) => {
+                      const isDownload = 'download' in link && !!link.download;
+                      const href = ('href' in link && link.href) || ('download' in link && link.download) || '#';
+                      return (
+                        <a
+                          key={link.label}
+                          href={href}
+                          download={isDownload || undefined}
+                          className="block px-3 py-2 rounded-lg hover:bg-[#FAF7F2] transition-colors group"
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-sm font-medium text-[#2D2721] group-hover:text-[var(--primary)]">
+                              {link.label}
                             </span>
-                          )}
-                        </div>
-                        <p className="text-xs text-[#8B7355] mt-0.5">{link.desc}</p>
-                      </a>
-                    );
-                  })}
+                            {isDownload && (
+                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-600">CSV</span>
+                            )}
+                          </div>
+                          <p className="text-xs text-[#8B7355] mt-0.5">{link.desc}</p>
+                        </a>
+                      );
+                    })}
+                  {section.links.some((link) => 'api' in link && link.api) && (
+                    <details className="px-3 pt-1">
+                      <summary className="cursor-pointer text-xs text-[#8B7355]">
+                        Technical endpoints (raw JSON, for developers)
+                      </summary>
+                      <ul className="mt-2 space-y-1">
+                        {section.links
+                          .filter((link) => 'api' in link && link.api)
+                          .map((link) => (
+                            <li key={link.label} className="text-xs text-[#6B5744]">
+                              <span className="font-medium">{link.label}</span>: {link.desc}{' '}
+                              <code className="break-all text-[10px] text-gray-500">{'api' in link ? link.api : ''}</code>
+                            </li>
+                          ))}
+                      </ul>
+                    </details>
+                  )}
                 </div>
               </WarmCard>
             );
@@ -201,11 +218,11 @@ export default async function ControlPanelPage() {
           <div className="flex items-start gap-3">
             <Database className="h-5 w-5 text-amber-600 mt-0.5" />
             <div>
-              <h3 className="font-semibold text-amber-900">API-First Architecture</h3>
+              <h3 className="font-semibold text-amber-900">Developer endpoints</h3>
               <p className="text-sm text-amber-800 mt-1">
-                All admin subsystems are accessible via REST API endpoints. Links marked &quot;API&quot; open
-                the JSON endpoint directly. Use these for integration testing, automation,
-                or building custom admin UIs.
+                Some tools only exist as REST endpoints for now. They are listed under
+                &quot;Technical endpoints&quot; in each section and return raw JSON, so they are meant for
+                developers and automation rather than day-to-day admin work.
               </p>
             </div>
           </div>

@@ -4,7 +4,6 @@ import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Gift, ArrowLeft, AlertCircle, Mail, Lock, User,
-  CheckCircle, Shield, Sparkles, Zap,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -19,7 +18,6 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
 
   const passwordResult = checkPasswordStrength(password);
 
@@ -58,39 +56,16 @@ function RegisterForm() {
         return;
       }
 
-      setSuccess(true);
+      // Registration does not send a verification e-mail: go straight to
+      // sign-in with the address prefilled.
+      const normalizedEmail = email.trim().toLowerCase();
+      router.push(`/login?registered=1&email=${encodeURIComponent(normalizedEmail)}`);
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
-
-  if (success) {
-    return (
-      <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF7E0] via-[#FFFBF5] to-[#F0E8FF]" />
-        <div className="relative z-10 w-full max-w-[420px] animate-slide-up">
-          <div className="glass rounded-[var(--r-xl)] shadow-xl p-8 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="h-8 w-8 text-green-600" />
-            </div>
-            <h1 className="text-xl font-bold text-[var(--text)] mb-2">Account Created!</h1>
-            <p className="text-sm text-[var(--text-muted)] mb-6">
-              We sent a verification code to <span className="font-medium text-[var(--text)]">{email}</span>.
-              Sign in to verify your email and get started.
-            </p>
-            <button
-              onClick={() => router.push("/login")}
-              className="w-full h-12 rounded-[var(--r-sm)] gradient-brand font-semibold text-[var(--text)] shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-200 btn-press"
-            >
-              Go to Sign In
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
@@ -131,10 +106,11 @@ function RegisterForm() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium text-[var(--text)]">Full name</Label>
+                <Label htmlFor="register-name" className="text-sm font-medium text-[var(--text)]">Full name</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
+                    id="register-name"
                     type="text"
                     autoComplete="name"
                     placeholder="Jane Doe"
@@ -147,10 +123,11 @@ function RegisterForm() {
               </div>
 
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium text-[var(--text)]">Email address</Label>
+                <Label htmlFor="register-email" className="text-sm font-medium text-[var(--text)]">Email address</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
+                    id="register-email"
                     type="email"
                     autoComplete="email"
                     placeholder="you@example.com"
@@ -163,10 +140,11 @@ function RegisterForm() {
               </div>
 
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium text-[var(--text)]">Password</Label>
+                <Label htmlFor="register-password" className="text-sm font-medium text-[var(--text)]">Password</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
+                    id="register-password"
                     type="password"
                     autoComplete="new-password"
                     placeholder="Min. 8 characters"
@@ -183,7 +161,7 @@ function RegisterForm() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-12 rounded-[var(--r-sm)] gradient-brand font-semibold text-[var(--text)] shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-200 btn-press disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full h-12 rounded-[var(--r-sm)] gradient-brand font-semibold text-[var(--primary-foreground)] shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-200 btn-press disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
@@ -206,20 +184,6 @@ function RegisterForm() {
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-4 py-3 px-6 border-t border-[var(--border)] bg-[var(--surface-muted)]">
-            <div className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-              <Shield className="w-3 h-3" />
-              <span>SSL</span>
-            </div>
-            <div className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-              <Sparkles className="w-3 h-3" />
-              <span>GiftHub</span>
-            </div>
-            <div className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-              <Zap className="w-3 h-3" />
-              <span>Fast</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>

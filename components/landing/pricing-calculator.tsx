@@ -1,8 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useId } from "react";
 import { motion } from "motion/react";
-import { TrendingUp, Users, Ticket, DollarSign } from "lucide-react";
+import { TrendingUp, Users, Ticket, Euro } from "lucide-react";
+import { PLAN_CATALOG, PLATFORM_FEE_PERCENT } from "@/lib/access-control/monetization";
+import { formatWholeCurrency } from "@/components/landing/format-price";
+
+const eur = (euros: number) => formatWholeCurrency(Math.round(euros * 100), "EUR");
 
 export function PricingCalculator() {
   const [customers, setCustomers] = useState(200);
@@ -14,8 +18,11 @@ export function PricingCalculator() {
     const monthlyRevenue = monthlyPurchases * avgTicket;
     const referralCustomers = Math.round(monthlyPurchases * (referralRate / 100));
     const referralRevenue = referralCustomers * avgTicket;
-    const platformFee = Math.round(monthlyRevenue * 0.05);
-    const planCost = monthlyRevenue < 5000 ? 19 : monthlyRevenue < 15000 ? 39 : 99;
+    const platformFee = Math.round((monthlyRevenue * PLATFORM_FEE_PERCENT) / 100);
+    // Illustrative plan pick by volume; prices come from the plan catalog.
+    const plan =
+      monthlyRevenue < 5000 ? PLAN_CATALOG.starter : monthlyRevenue < 15000 ? PLAN_CATALOG.pro : PLAN_CATALOG.scale;
+    const planCost = plan.monthlyPriceCents / 100;
     const totalCost = platformFee + planCost;
     const roi = referralRevenue > 0 ? Math.round(((referralRevenue - totalCost) / totalCost) * 100) : 0;
 
@@ -31,7 +38,7 @@ export function PricingCalculator() {
   }, [customers, avgTicket, referralRate]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start min-w-0">
       {/* Sliders */}
       <div className="space-y-6">
         <SliderInput
@@ -50,7 +57,7 @@ export function PricingCalculator() {
           min={5}
           max={200}
           step={5}
-          prefix="EUR "
+          format={eur}
         />
         <SliderInput
           label="Referral conversion rate"
@@ -64,11 +71,11 @@ export function PricingCalculator() {
       </div>
 
       {/* Results */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-3 min-w-0">
         <ResultCard
-          icon={DollarSign}
+          icon={Euro}
           label="Monthly revenue"
-          value={`EUR ${results.monthlyRevenue.toLocaleString()}`}
+          value={eur(results.monthlyRevenue)}
           color="text-[var(--primary)]"
           bgColor="bg-[#f6e1d7]"
         />
@@ -82,7 +89,7 @@ export function PricingCalculator() {
         <ResultCard
           icon={Ticket}
           label="Referral revenue"
-          value={`EUR ${results.referralRevenue.toLocaleString()}`}
+          value={eur(results.referralRevenue)}
           color="text-blue-600"
           bgColor="bg-blue-50"
         />
@@ -94,14 +101,18 @@ export function PricingCalculator() {
           bgColor="bg-red-50"
           highlight
         />
-        <div className="col-span-2 rounded-xl border border-[var(--border)] bg-white/80 px-4 py-3">
-          <div className="flex justify-between items-center text-sm">
+        <div className="min-[400px]:col-span-2 rounded-xl border border-[var(--border)] bg-white/80 px-4 py-3">
+          <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center text-sm">
             <span className="text-[var(--text-muted)]">Platform cost</span>
             <span className="font-semibold text-[var(--text)]">
-              EUR {results.planCost}/mo plan + EUR {results.platformFee} fees = <strong>EUR {results.totalCost}/mo</strong>
+              {eur(results.planCost)}/mo plan + {eur(results.platformFee)} fees ({PLATFORM_FEE_PERCENT}%) ={" "}
+              <strong>{eur(results.totalCost)}/mo</strong>
             </span>
           </div>
         </div>
+        <p className="min-[400px]:col-span-2 text-xs text-[var(--text-muted)]">
+          Illustration only, based on the values you enter — not a forecast.
+        </p>
       </div>
     </div>
   );
@@ -114,8 +125,8 @@ function SliderInput({
   min,
   max,
   step,
-  prefix = "",
   suffix = "",
+  format,
 }: {
   label: string;
   value: number;
@@ -123,28 +134,33 @@ function SliderInput({
   min: number;
   max: number;
   step: number;
-  prefix?: string;
   suffix?: string;
+  format?: (value: number) => string;
 }) {
+  const id = useId();
   const percent = ((value - min) / (max - min)) * 100;
+  const display = format ? format(value) : `${value.toLocaleString("en-GB")}${suffix}`;
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-[var(--text)]">{label}</span>
-        <span className="text-sm font-bold text-[var(--primary)]">
-          {prefix}{value.toLocaleString()}{suffix}
-        </span>
+      <div className="flex flex-wrap justify-between items-center gap-x-3 mb-1">
+        <label htmlFor={id} className="text-sm font-medium text-[var(--text)]">{label}</label>
+        <output htmlFor={id} className="text-sm font-bold text-[var(--primary)]">
+          {display}
+        </output>
       </div>
-      <div className="relative">
+      {/* py-3 gives the thin track a touch-sized hit area. */}
+      <div className="relative py-3">
         <input
+          id={id}
           type="range"
+          aria-valuetext={display}
           min={min}
           max={max}
           step={step}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="w-full h-2 rounded-full appearance-none cursor-pointer bg-[var(--border)]"
+          className="block w-full h-2 rounded-full appearance-none cursor-pointer bg-[var(--border)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-4"
           style={{
             background: `linear-gradient(to right, var(--primary) 0%, var(--primary) ${percent}%, var(--border) ${percent}%, var(--border) 100%)`,
           }}
@@ -171,7 +187,7 @@ function ResultCard({
 }) {
   return (
     <motion.div
-      className={`rounded-xl border p-4 ${highlight ? "border-[var(--primary)] bg-gradient-to-br from-[#f6e1d7] to-[#efd2c4]" : "border-[var(--border)] bg-white/80"}`}
+      className={`min-w-0 rounded-xl border p-4 ${highlight ? "border-[var(--primary)] bg-gradient-to-br from-[#f6e1d7] to-[#efd2c4]" : "border-[var(--border)] bg-white/80"}`}
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
@@ -179,7 +195,7 @@ function ResultCard({
         <Icon className={`h-4 w-4 ${color}`} />
       </div>
       <p className="text-xs text-[var(--text-muted)] mb-0.5">{label}</p>
-      <p className={`text-lg font-bold ${highlight ? "text-[var(--primary)]" : "text-[var(--text)]"}`}>{value}</p>
+      <p className={`text-lg font-bold break-words ${highlight ? "text-[var(--primary)]" : "text-[var(--text)]"}`}>{value}</p>
     </motion.div>
   );
 }

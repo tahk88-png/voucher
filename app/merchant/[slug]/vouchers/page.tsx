@@ -27,7 +27,7 @@ export default async function VouchersListPage({ params }: { params: Promise<{ s
   const tVoucher = await getTranslations('voucher');
 
   const vouchers = await prisma.voucher.findMany({
-    where: { merchantId: merchant.id },
+    where: { merchantId: merchant.id, deletedAt: null },
     orderBy: { createdAt: 'desc' },
     include: { _count: { select: { redemptions: true } } },
   });
@@ -35,6 +35,8 @@ export default async function VouchersListPage({ params }: { params: Promise<{ s
   const totalVouchers = vouchers.length;
   const activeVouchers = vouchers.filter((voucher) => voucher.status === 'published').length;
   const draftVouchers = vouchers.filter((voucher) => voucher.status === 'draft').length;
+  const pausedVouchers = vouchers.filter((voucher) => voucher.status === 'paused').length;
+  const endedVouchers = vouchers.filter((voucher) => voucher.status === 'ended' || voucher.status === 'expired').length;
   const totalRedemptions = vouchers.reduce((sum, voucher) => sum + voucher._count.redemptions, 0);
 
   // Serialize dates to strings and designJson for client component
@@ -78,7 +80,7 @@ export default async function VouchersListPage({ params }: { params: Promise<{ s
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-5 mb-6">
           <StatsCard
             title="Total vouchers"
             value={totalVouchers}
@@ -96,6 +98,12 @@ export default async function VouchersListPage({ params }: { params: Promise<{ s
             value={draftVouchers}
             description="Not yet published"
             icon={Ticket}
+          />
+          <StatsCard
+            title="Paused / ended"
+            value={pausedVouchers + endedVouchers}
+            description={`${pausedVouchers} paused, ${endedVouchers} ended`}
+            icon={Gift}
           />
           <StatsCard
             title="Redemptions"

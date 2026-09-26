@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma';
 import { hashFriendIdentifier } from '@/lib/utils';
 import { checkReferralRateLimit } from '@/lib/fraud';
 import { withErrorHandler } from '@/lib/error-handler';
+import { getAppUrl } from '@/lib/app-url';
 import { z } from 'zod';
 
 const createReferralSchema = z.object({
@@ -61,8 +62,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Generate share URL
-    const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/r/${referral.id}`;
+    // Public landing page for this referral (app/r/[id]); it records the open
+    // and attributes the friend's redemption to the referrer.
+    const shareUrl = `${getAppUrl()}/r/${referral.id}`;
 
     return NextResponse.json({
       referralId: referral.id,

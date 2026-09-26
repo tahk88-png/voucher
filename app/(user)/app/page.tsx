@@ -8,18 +8,15 @@ import Link from 'next/link';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { Award, Flame, Link2, Sparkles, Wallet, Users, Store, Shield, Building2 } from 'lucide-react';
-import { getCreditBalance } from '@/lib/credits';
-import { getLocale } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { getCurrencyLocale } from '@/lib/i18n-utils';
 import { isPlatformAdmin } from '@/lib/admin';
+import { ATTAINABLE_BADGES } from './_components/badges';
+import { getCountryByLocale, isSupportedLocale, defaultCountryCode, getCountryByCode } from '@/lib/locale-config';
+import { summariseCredits } from './_components/credit-summary';
 
-const getVoucherHeadline = (designJson: unknown) => {
-  if (!designJson || typeof designJson !== 'object') {
-    return 'Special Voucher';
-  }
-
-  return (designJson as { headline?: string }).headline ?? 'Special Voucher';
-};
+const CREDIT_STATUSES = ['locked', 'available', 'used', 'expired', 'reversed'] as const;
+const REFERRAL_STATUSES = ['created', 'opened', 'redeemed', 'expired', 'blocked'] as const;
 
 export default async function AppPage() {
   const session = await auth();
@@ -28,161 +25,114 @@ export default async function AppPage() {
   }
   const locale = await getLocale();
   const intlLocale = getCurrencyLocale(locale);
-  const sessionUser = session.user;
-  const userId = sessionUser.id;
+  const t = await getTranslations('dashboard');
+  const userId = session.user.id;
+  const now = new Date();
 
   const user = await prisma.user.findUnique({
-    where: { id: sessionUser.id },
-    include: {
-      merchantMembers: {
-        include: {
-          merchant: true,
-        },
-      },
-    },
+    where: { id: userId },
+    include: { merchantMembers: { include: { merchant: true } } },
   });
   if (!user) {
     redirect('/login');
   }
 
-  let totalReferrals = 0;
-  let redeemedReferrals = 0;
-  try {
-    const referralStats = await prisma.referral.groupBy({
-      by: ['status'],
-      where: {
-        referrerUserId: session.user.id,
-      },
-      _count: true,
-    });
-    totalReferrals = referralStats.reduce((sum, stat) => sum + stat._count, 0);
-    redeemedReferrals = referralStats.find((stat) => stat.status === 'redeemed')?._count || 0;
-  } catch (error) {
-    try {
-      totalReferrals = await prisma.referral.count({
-        where: { referrerUserId: session.user.id },
-      });
-      redeemedReferrals = await prisma.referral.count({
-        where: {
-          referrerUserId: session.user.id,
-          status: 'redeemed',
-        },
-      });
-    } catch {
-      totalReferrals = 0;
-      redeemedReferrals = 0;
-    }
-  }
-
-  let totalAvailable = 0;
-  let totalLocked = 0;
-  let currency = 'USD';
-  const now = new Date();
-  const merchantMembersWithId = (user.merchantMembers ?? []).filter(
-    (member): member is typeof member & { merchant: { id: string } } =>
-      typeof member.merchant?.id === 'string'
-  );
-
-  const balances = await Promise.all(
-    merchantMembersWithId.map(async (member) => {
-      try {
-        return await getCreditBalance(userId, member.merchant!.id);
-      } catch {
-        return null;
-      }
-    })
-  );
-
-  for (const balance of balances) {
-    if (!balance) continue;
-    totalAvailable += balance.available;
-    totalLocked += balance.locked;
-    if (balance.currency) {
-      currency = balance.currency;
-    }
-  }
-
-  const pointsBalance = totalAvailable;
-  const targetPoints = 2500;
-  const pointsToNext = Math.max(0, targetPoints - pointsBalance);
-  const progressPercent =
-    targetPoints > 0 ? Math.min(100, Math.round((pointsBalance / targetPoints) * 100)) : 0;
-  const totalEarned = totalAvailable + totalLocked;
-  const totalEarnedFormatted = new Intl.NumberFormat(intlLocale, {
-    style: 'currency',
-    currency,
-    maximumFractionDigits: 0,
-  }).format(totalEarned / 100);
-  const rewardTargetLabel = new Intl.NumberFormat(intlLocale, {
-    style: 'currency',
-    currency,
-    maximumFractionDigits: 0,
-  }).format(25);
-  const pointsFormatted = new Intl.NumberFormat(intlLocale).format(pointsBalance);
-  const referralsCompleted = redeemedReferrals ? Math.min(30, redeemedReferrals) : 0;
-
-  const [recentReferrals, recentCredits, featuredVouchers] = await Promise.all([
+  const [
+    creditRows,
+    totalReferrals,
+    redeemedReferrals,
+    streak,
+    badgeCount,
+    recentReferrals,
+    recentCredits,
+    activeCampaigns,
+    orgMemberships,
+  ] = await Promise.all([
+    // The user's own credit, across every merchant that issued it.
+    prisma.creditLedger.findMany({
+      where: { userId, status: { in: ['available', 'locked'] } },
+      select: { amount: true, currency: true, status: true, expiresAt: true },
+    }),
+    prisma.referral.count({ where: { referrerUserId: userId } }),
+    prisma.referral.count({ where: { referrerUserId: userId, status: 'redeemed' } }),
+    prisma.userStreak.findUnique({ where: { userId }, select: { totalPoints: true } }),
+    prisma.userBadge.count({ where: { userId } }),
     prisma.referral.findMany({
-      where: { referrerUserId: session.user.id },
-      include: { merchant: true, voucher: true },
+      where: { referrerUserId: userId },
+      include: { merchant: { select: { name: true } } },
       orderBy: { createdAt: 'desc' },
       take: 5,
     }),
     prisma.creditLedger.findMany({
-      where: { userId: session.user.id },
+      where: { userId },
+      include: { merchant: { select: { name: true } } },
       orderBy: { createdAt: 'desc' },
       take: 5,
     }),
-    prisma.voucher.findMany({
+    // Same criteria as the public /campaigns listing.
+    prisma.campaign.findMany({
       where: {
-        status: 'published',
-        validFrom: { lte: now },
-        validTo: { gte: now },
+        status: 'active',
+        startDate: { lte: now },
+        endDate: { gte: now },
+        merchant: { isActive: true },
       },
-      include: {
-        merchant: true,
-      },
+      include: { merchant: { select: { name: true } } },
       orderBy: { createdAt: 'desc' },
       take: 6,
     }),
+    prisma.orgMembership.findMany({
+      where: { userId },
+      include: { org: { select: { id: true, name: true } } },
+      take: 10,
+    }),
   ]);
 
-  // Role cards — show if user has multiple contexts
+  const balances = summariseCredits(creditRows, now);
+  // With no credit yet, show zero in the currency of the visitor's market (EUR by default).
+  const marketCurrency = (
+    isSupportedLocale(locale) ? getCountryByLocale(locale) : getCountryByCode(defaultCountryCode)
+  )?.currency ?? 'EUR';
+  const formatMoney = (amount: number, currency: string) =>
+    new Intl.NumberFormat(intlLocale, { style: 'currency', currency }).format(amount / 100);
+  const primaryBalance = balances[0] ?? { currency: marketCurrency, available: 0, locked: 0 };
+  const otherBalances = balances.slice(1);
+
+  const checkInPoints = streak?.totalPoints ?? 0;
+  const numberFormat = new Intl.NumberFormat(intlLocale);
+
+  const creditStatusLabel = (status: string) =>
+    (CREDIT_STATUSES as readonly string[]).includes(status) ? t(`creditStatus.${status}` as never) : status;
+  const referralStatusLabel = (status: string) =>
+    (REFERRAL_STATUSES as readonly string[]).includes(status) ? t(`referralStatus.${status}` as never) : status;
+
   const isAdmin = isPlatformAdmin(user.email);
   const merchantRoles = user.merchantMembers?.filter((m) => m.merchant) ?? [];
-  const hasMultipleContexts = merchantRoles.length > 0 || isAdmin;
-
-  // Load org memberships for role cards
-  let orgMemberships: { id: string; role: string; org: { id: string; name: string } }[] = [];
-  if (hasMultipleContexts) {
-    try {
-      orgMemberships = await prisma.orgMembership.findMany({
-        where: { userId },
-        include: { org: { select: { id: true, name: true } } },
-        take: 10,
-      });
-    } catch {}
-  }
+  const hasMultipleContexts = merchantRoles.length > 0 || orgMemberships.length > 0 || isAdmin;
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
-      {/* Role Cards — quick switch between contexts */}
+      {/* Role cards — quick switch between contexts */}
       {hasMultipleContexts && (
         <div className="flex flex-wrap gap-3">
-          <Link href="/app" className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[var(--primary)]/10 border-2 border-[var(--primary)] text-sm font-semibold text-[var(--primary)]">
+          <Link
+            href="/app"
+            aria-current="page"
+            className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[var(--primary)]/10 border-2 border-[var(--primary)] text-sm font-semibold text-[var(--primary)]"
+          >
             <Award className="h-4 w-4" />
-            Consumer
+            {t('roleShopper')}
           </Link>
           {merchantRoles.map((m) => (
             <Link
               key={m.merchantId}
-              href={`/merchant/${m.merchant.slug}`}
+              href={`/merchant/${m.merchant.slug}/dashboard`}
               className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white border border-[var(--border)] text-sm font-medium text-[var(--text)] hover:border-[var(--primary)] hover:shadow-warm transition"
             >
               <Store className="h-4 w-4 text-[var(--text-muted)]" />
               {m.merchant.name}
               <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-neutral-100 text-neutral-600">
-                {m.role === 'merchant_admin' ? 'Admin' : 'Staff'}
+                {m.role === 'merchant_admin' ? t('roleAdmin') : t('roleStaff')}
               </span>
             </Link>
           ))}
@@ -194,7 +144,6 @@ export default async function AppPage() {
             >
               <Building2 className="h-4 w-4 text-[var(--text-muted)]" />
               {om.org.name}
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-neutral-100 text-neutral-600">{om.role}</span>
             </Link>
           ))}
           {isAdmin && (
@@ -203,237 +152,213 @@ export default async function AppPage() {
               className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-red-50 border border-red-200 text-sm font-medium text-red-700 hover:border-red-400 hover:shadow-warm transition"
             >
               <Shield className="h-4 w-4" />
-              Platform Admin
+              {t('rolePlatformAdmin')}
             </Link>
           )}
         </div>
       )}
 
       <div className="grid gap-6 lg:grid-cols-3">
+        {/* Credit balance: real merchant credit in its own currency, not "points". */}
         <div className="lg:col-span-2 rounded-[26px] bg-gradient-to-br from-[#fcfbf8] via-[#f6e1d7] to-[#eccab9] p-6 sm:p-8 shadow-warm">
-          <div className="flex items-start justify-between gap-6">
-            <div>
-              <div className="text-sm text-[var(--text-faint)] font-semibold">Your Points Balance</div>
-              <div className="text-5xl sm:text-6xl font-bold text-[var(--text)] mt-3">{pointsFormatted}</div>
-              <div className="text-sm text-[var(--text-faint)] mt-3">
-                {pointsToNext > 0 ? `${pointsToNext} points to next reward` : 'Reward unlocked'}
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <h1 className="text-sm text-[var(--text-faint)] font-semibold">{t('availableCredit')}</h1>
+              <div className="text-4xl sm:text-6xl font-bold text-[var(--text)] mt-3 break-words">
+                {formatMoney(primaryBalance.available, primaryBalance.currency)}
               </div>
+              {primaryBalance.locked > 0 && (
+                <div className="text-sm text-[var(--text-muted)] mt-2">
+                  {t('pendingCredit', { amount: formatMoney(primaryBalance.locked, primaryBalance.currency) })}
+                </div>
+              )}
+              {otherBalances.length > 0 && (
+                <ul className="mt-3 space-y-1 text-sm text-[var(--text-muted)]">
+                  {otherBalances.map((b) => (
+                    <li key={b.currency}>
+                      {formatMoney(b.available, b.currency)}
+                      {b.locked > 0 && ` · ${t('pendingCredit', { amount: formatMoney(b.locked, b.currency) })}`}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <p className="text-sm text-[var(--text-faint)] mt-3 max-w-md">{t('creditExplainer')}</p>
             </div>
-            <div className="w-16 h-16 rounded-[18px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
-              <Award className="h-7 w-7 text-white" />
+            <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-[18px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+              <Wallet className="h-7 w-7 text-white" aria-hidden="true" />
             </div>
           </div>
           <div className="mt-6">
-            <div className="flex items-center justify-between text-sm text-[var(--text-faint)] mb-2">
-              <span>Progress to {rewardTargetLabel} Voucher</span>
-              <span className="font-semibold text-[var(--primary)]">{progressPercent}%</span>
-            </div>
-            <div className="h-3 rounded-full bg-[#e7d3c6] overflow-hidden">
-              <div
-                className="h-full rounded-full bg-gradient-to-r from-[#cc785c] to-[#b5613f]"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
+            <WarmButton asChild size="sm" variant="secondary">
+              <Link href="/app/cashback">{t('viewCreditDetails')}</Link>
+            </WarmButton>
           </div>
         </div>
 
-        <div className="grid gap-6">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
           <div className="rounded-[24px] bg-gradient-to-br from-[#e6efe7] to-[#d8e6da] p-6 shadow-warm">
             <div className="w-12 h-12 rounded-[16px] bg-[var(--success)] text-white flex items-center justify-center mb-4">
-              <Users className="h-6 w-6" />
+              <Users className="h-6 w-6" aria-hidden="true" />
             </div>
-            <div className="text-3xl font-semibold text-[var(--text)]">{redeemedReferrals}</div>
-            <div className="text-sm text-[var(--text-muted)] mt-1">Successful Referrals</div>
+            <div className="text-3xl font-semibold text-[var(--text)]">{numberFormat.format(redeemedReferrals)}</div>
+            <div className="text-sm text-[var(--text-muted)] mt-1">{t('successfulReferrals')}</div>
           </div>
 
-          <div className="rounded-[24px] bg-gradient-to-br from-[#f5ddd7] to-[#eec7bd] p-6 shadow-warm">
-            <div className="w-12 h-12 rounded-[16px] bg-[var(--danger)] text-white flex items-center justify-center mb-4">
-              <Wallet className="h-6 w-6" />
-            </div>
-            <div className="text-3xl font-semibold text-[var(--text)]">{totalEarnedFormatted}</div>
-            <div className="text-sm text-[var(--text-muted)] mt-1">Total Earned</div>
-          </div>
-
-          <div className="rounded-[24px] bg-gradient-to-br from-[#f6e1d7] to-[#eccab9] p-6 shadow-warm">
+          <Link
+            href="/app/achievements"
+            className="block rounded-[24px] bg-gradient-to-br from-[#f6e1d7] to-[#eccab9] p-6 shadow-warm hover:shadow-warm-lg transition"
+          >
             <div className="w-12 h-12 rounded-[16px] bg-[var(--primary)] text-white flex items-center justify-center mb-4">
-              <Flame className="h-6 w-6" />
+              <Flame className="h-6 w-6" aria-hidden="true" />
             </div>
-            <div className="text-3xl font-semibold text-[var(--text)]">{referralsCompleted}</div>
-            <div className="text-sm text-[var(--text-muted)] mt-1">Referrals Completed</div>
-          </div>
+            <div className="text-3xl font-semibold text-[var(--text)]">{numberFormat.format(checkInPoints)}</div>
+            <div className="text-sm text-[var(--text-muted)] mt-1">{t('checkInPoints')}</div>
+          </Link>
         </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)] lg:col-span-2">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-[16px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
-                <Link2 className="h-6 w-6 text-white" />
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex items-start gap-3 min-w-0">
+              <div className="w-12 h-12 shrink-0 rounded-[16px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+                <Link2 className="h-6 w-6 text-white" aria-hidden="true" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-[var(--text)]">Your Referral Link</h3>
-                <p className="text-sm text-[var(--text-muted)]">Share campaigns and earn bonus credits.</p>
+              <div className="min-w-0">
+                <h2 className="text-lg font-semibold text-[var(--text)]">{t('shareTitle')}</h2>
+                <p className="text-sm text-[var(--text-muted)]">{t('shareDescription')}</p>
               </div>
             </div>
-            <WarmButton asChild size="sm">
-              <Link href="/app/share">Open Share Center</Link>
+            <WarmButton asChild size="sm" className="shrink-0 self-start">
+              <Link href="/app/share">{t('openShareCenter')}</Link>
             </WarmButton>
           </div>
-          <div className="rounded-[16px] bg-[#fcfbf8] border border-[rgba(139,115,85,0.15)] px-4 py-3 text-sm text-[var(--text-muted)]">
-            You have shared {totalReferrals} campaigns and earned {totalEarnedFormatted} so far.
+          <div className="mt-4 rounded-[16px] bg-[#fcfbf8] border border-[rgba(139,115,85,0.15)] px-4 py-3 text-sm text-[var(--text-muted)]">
+            {t('sharedSummary', { count: numberFormat.format(totalReferrals), redeemed: numberFormat.format(redeemedReferrals) })}
           </div>
         </WarmCard>
 
         <WarmCard padding="lg" className="bg-gradient-to-br from-[#fcfbf8] to-[#f6e1d7] border border-[rgba(139,115,85,0.15)]">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-[16px] bg-white flex items-center justify-center shadow-warm-sm">
-              <Sparkles className="h-6 w-6 text-[var(--primary)]" />
+          <div className="flex items-start gap-3 mb-4">
+            <div className="w-12 h-12 shrink-0 rounded-[16px] bg-white flex items-center justify-center shadow-warm-sm">
+              <Sparkles className="h-6 w-6 text-[var(--primary)]" aria-hidden="true" />
             </div>
-            <div>
-              <h3 className="text-lg font-semibold text-[var(--text)]">Achievements</h3>
-              <p className="text-sm text-[var(--text-muted)]">Keep sharing to unlock more.</p>
+            <div className="min-w-0">
+              <h2 className="text-lg font-semibold text-[var(--text)]">{t('achievementsTitle')}</h2>
+              <p className="text-sm text-[var(--text-muted)]">
+                {t('badgesEarned', { earned: badgeCount, total: ATTAINABLE_BADGES.length })}
+              </p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3 text-sm">
-            {[
-              { label: 'First Share', active: totalReferrals > 0 },
-              { label: '10 Referrals', active: totalReferrals >= 10 },
-              { label: '7 Referrals', active: referralsCompleted >= 7 },
-              { label: '1000 Points', active: pointsBalance >= 1000 },
-            ].map((badge) => (
-              <div
-                key={badge.label}
-                className={`rounded-[12px] px-3 py-2 text-center font-semibold ${
-                  badge.active ? 'bg-white text-[var(--text)]' : 'bg-white/60 text-[var(--text-faint)]'
-                }`}
-              >
-                {badge.label}
-              </div>
-            ))}
-          </div>
+          <WarmButton asChild size="sm" variant="outline">
+            <Link href="/app/achievements">{t('viewAchievements')}</Link>
+          </WarmButton>
         </WarmCard>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)] lg:col-span-2">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-[var(--text)]">Available Rewards</h2>
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <h2 className="text-lg font-semibold text-[var(--text)]">{t('availableOffers')}</h2>
             <WarmButton asChild size="sm" variant="outline">
-              <Link href="/campaigns">Browse all</Link>
+              <Link href="/campaigns">{t('browseAll')}</Link>
             </WarmButton>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredVouchers.length === 0 ? (
-              <div className="col-span-full text-sm text-[var(--text-muted)]">
-                No active vouchers available yet.
-              </div>
-            ) : (
-              featuredVouchers.map((voucher) => (
-                <WarmCard key={voucher.id} padding="md" className="bg-[#fcfbf8] border border-[rgba(139,115,85,0.15)]">
-                  <div className="text-xs uppercase tracking-wide text-[var(--text-faint)] font-semibold">
-                    {voucher.merchant?.name || 'Merchant'}
+          {activeCampaigns.length === 0 ? (
+            <div className="text-sm text-[var(--text-muted)]">{t('noActiveOffers')}</div>
+          ) : (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {activeCampaigns.map((campaign) => (
+                <Link
+                  key={campaign.id}
+                  href={`/campaigns/${campaign.id}`}
+                  className="block rounded-[var(--r-md)] bg-[#fcfbf8] border border-[rgba(139,115,85,0.15)] p-4 hover:border-[var(--primary)] hover:shadow-warm transition"
+                >
+                  <div className="text-xs uppercase tracking-wide text-[var(--text-faint)] font-semibold truncate">
+                    {campaign.merchant.name}
                   </div>
-                  <div className="text-base font-semibold text-[var(--text)] mt-1">
-                    {getVoucherHeadline(voucher.designJson)}
-                  </div>
+                  <div className="text-base font-semibold text-[var(--text)] mt-1 line-clamp-2">{campaign.name}</div>
                   <div className="text-sm text-[var(--text-muted)] mt-2">
-                    Valid until {voucher.validTo.toLocaleDateString(intlLocale)}
+                    {t('validUntil', { date: campaign.endDate.toLocaleDateString(intlLocale) })}
                   </div>
-                </WarmCard>
-              ))
-            )}
-          </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </WarmCard>
 
         <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
-          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Recent Activity</h2>
+          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t('recentActivity')}</h2>
           <div className="space-y-3">
             {recentReferrals.length === 0 && recentCredits.length === 0 && (
-              <div className="text-sm text-[var(--text-muted)]">No recent activity yet.</div>
+              <div className="text-sm text-[var(--text-muted)]">{t('noRecentActivity')}</div>
             )}
             {recentCredits.map((credit) => (
-              <div key={credit.id} className="flex items-center justify-between text-sm">
-                <span className="text-[var(--text-muted)]">Credit {credit.status}</span>
-                <span className="font-semibold text-[var(--text)]">
-                  {new Intl.NumberFormat(intlLocale, { style: 'currency', currency: credit.currency }).format(
-                    credit.amount / 100
-                  )}
+              <div key={credit.id} className="flex items-center justify-between gap-3 text-sm">
+                <span className="text-[var(--text-muted)] min-w-0 truncate">
+                  {t('creditFrom', { merchant: credit.merchant.name })} · {creditStatusLabel(credit.status)}
+                </span>
+                <span className="font-semibold text-[var(--text)] shrink-0">
+                  {formatMoney(credit.amount, credit.currency)}
                 </span>
               </div>
             ))}
             {recentReferrals.map((referral) => (
-              <div key={referral.id} className="flex items-center justify-between text-sm">
-                <span className="text-[var(--text-muted)]">
-                  Referral - {referral.merchant?.name || 'Merchant'}
+              <div key={referral.id} className="flex items-center justify-between gap-3 text-sm">
+                <span className="text-[var(--text-muted)] min-w-0 truncate">
+                  {t('referralAt', { merchant: referral.merchant.name })}
                 </span>
-                <span className="font-semibold text-[var(--text)]">{referral.status}</span>
+                <span className="font-semibold text-[var(--text)] shrink-0">{referralStatusLabel(referral.status)}</span>
               </div>
             ))}
           </div>
         </WarmCard>
       </div>
 
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-[var(--text)]">My merchants</h2>
-          <WarmButton asChild size="sm" variant="outline">
-            <Link href="/campaigns">Explore campaigns</Link>
-          </WarmButton>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {user?.merchantMembers.map((member) => (
-            <WarmCard key={member.merchantId} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
-              <div className="space-y-3">
-                <div>
-                  <h3 className="text-lg font-semibold text-[var(--text)]">{member.merchant.name}</h3>
-                  <p className="text-sm text-[var(--text-muted)]">Role: {member.role}</p>
-                </div>
-                <div className="space-y-2">
+      {merchantRoles.length > 0 ? (
+        <div>
+          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t('myMerchants')}</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {merchantRoles.map((member) => (
+              <WarmCard key={member.merchantId} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-lg font-semibold text-[var(--text)]">{member.merchant.name}</h3>
+                    <p className="text-sm text-[var(--text-muted)]">
+                      {member.role === 'merchant_admin' ? t('roleAdmin') : t('roleStaff')}
+                    </p>
+                  </div>
                   <WarmButton asChild className="w-full" size="sm">
-                    <Link href="/app/wallet">View wallet</Link>
-                  </WarmButton>
-                  <WarmButton asChild variant="outline" className="w-full" size="sm">
-                    <Link href="/app/vouchers">My vouchers</Link>
-                  </WarmButton>
-                  {member.role === 'merchant_admin' || member.role === 'merchant_staff' ? (
-                    <WarmButton asChild variant="outline" className="w-full" size="sm">
-                      <Link href={`/merchant/${member.merchant.slug}/dashboard`}>Merchant dashboard</Link>
-                    </WarmButton>
-                  ) : null}
-                </div>
-              </div>
-            </WarmCard>
-          ))}
-
-          {(!user?.merchantMembers || user.merchantMembers.length === 0) && (
-            <WarmCard padding="lg" className="md:col-span-2 lg:col-span-3 bg-white">
-              <div className="flex flex-col items-center gap-4 text-center py-10">
-                <div className="w-16 h-16 rounded-full bg-[#f6e1d7] flex items-center justify-center">
-                  <Users className="h-8 w-8 text-[var(--text-faint)]" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-[var(--text)] mb-2">
-                    You are not a member of any merchants yet
-                  </h3>
-                  <p className="text-sm text-[var(--text-muted)] mb-4 max-w-md">
-                    Contact a merchant to get started, or check your email for an invitation.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3 justify-center">
-                  <WarmButton asChild>
-                    <Link href="/login">Become a Merchant</Link>
-                  </WarmButton>
-                  <WarmButton asChild variant="outline">
-                    <Link href="/">Explore vouchers</Link>
+                    <Link href={`/merchant/${member.merchant.slug}/dashboard`}>{t('merchantDashboard')}</Link>
                   </WarmButton>
                 </div>
-              </div>
-            </WarmCard>
-          )}
+              </WarmCard>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-3">
+              <div className="w-12 h-12 shrink-0 rounded-full bg-[#f6e1d7] flex items-center justify-center">
+                <Store className="h-6 w-6 text-[var(--text-faint)]" aria-hidden="true" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-[var(--text)]">{t('sellTitle')}</h2>
+                <p className="text-sm text-[var(--text-muted)] max-w-md">{t('sellDescription')}</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <WarmButton asChild>
+                <Link href="/contact">{t('contactUs')}</Link>
+              </WarmButton>
+              <WarmButton asChild variant="outline">
+                <Link href="/campaigns">{t('exploreVouchers')}</Link>
+              </WarmButton>
+            </div>
+          </div>
+        </WarmCard>
+      )}
     </div>
   );
 }
-

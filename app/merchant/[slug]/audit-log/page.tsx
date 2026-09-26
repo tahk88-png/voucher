@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { showError } from '@/lib/toast-helpers';
 import { ChevronLeft, ChevronRight, Search, Filter, Clock } from 'lucide-react';
+import { describeAuditResource, formatAuditAction } from '@/lib/audit-labels';
 
 interface AuditLogEntry {
   id: string;
@@ -138,7 +139,7 @@ export default function AuditLogPage() {
                 <option value="">All actions</option>
                 {data?.actions.map((action) => (
                   <option key={action} value={action}>
-                    {action}
+                    {formatAuditAction(action)}
                   </option>
                 ))}
               </select>
@@ -201,10 +202,10 @@ export default function AuditLogPage() {
                     <tr key={log.id} className="border-b border-[var(--border)] last:border-0 hover:bg-[var(--surface)]">
                       <td className="px-4 py-3 whitespace-nowrap text-[var(--text-muted)]">
                         <div className="text-xs">
-                          {new Date(log.createdAt).toLocaleDateString()}
+                          {new Date(log.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </div>
                         <div className="text-xs text-[var(--text-muted)]">
-                          {new Date(log.createdAt).toLocaleTimeString()}
+                          {new Date(log.createdAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
                         </div>
                       </td>
                       <td className="px-4 py-3">
@@ -213,20 +214,25 @@ export default function AuditLogPage() {
                       </td>
                       <td className="px-4 py-3">
                         <Badge className={`${getActionColor(log.action)} border-0`}>
-                          {log.action}
+                          {formatAuditAction(log.action)}
                         </Badge>
                       </td>
                       <td className="px-4 py-3 text-[var(--text-muted)]">
-                        {log.resourceType && (
-                          <span className="text-xs">
-                            {log.resourceType}
-                            {log.resourceId && (
-                              <span className="text-[var(--text-muted)] ml-1">
-                                #{log.resourceId.slice(0, 8)}
-                              </span>
-                            )}
-                          </span>
-                        )}
+                        {(() => {
+                          const resource = describeAuditResource(log);
+                          if (!resource) return <span className="text-xs">—</span>;
+                          return (
+                            <span className="text-xs">
+                              {resource.label}
+                              {resource.name && <span className="text-[var(--text)] ml-1">“{resource.name}”</span>}
+                              {resource.id && (
+                                <span className="text-[var(--text-muted)] ml-1 font-mono">
+                                  #{resource.id.slice(0, 8)}
+                                </span>
+                              )}
+                            </span>
+                          );
+                        })()}
                       </td>
                       <td className="px-4 py-3 text-xs text-[var(--text-muted)] max-w-xs truncate">
                         {log.reason || formatPayload(log.payloadJson)}

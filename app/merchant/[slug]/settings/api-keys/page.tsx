@@ -257,13 +257,13 @@ export default function ApiKeysPage() {
                     ))}
                   </div>
                   <div className="flex items-center gap-4 mt-2 text-xs text-[var(--text-muted)]">
-                    <span>Created {new Date(apiKey.createdAt).toLocaleDateString()}</span>
+                    <span>Created {new Date(apiKey.createdAt).toLocaleDateString('en-GB')}</span>
                     {apiKey.lastUsedAt && (
-                      <span>Last used {new Date(apiKey.lastUsedAt).toLocaleDateString()}</span>
+                      <span>Last used {new Date(apiKey.lastUsedAt).toLocaleDateString('en-GB')}</span>
                     )}
                     {apiKey.expiresAt && (
                       <span>
-                        Expires {new Date(apiKey.expiresAt).toLocaleDateString()}
+                        Expires {new Date(apiKey.expiresAt).toLocaleDateString('en-GB')}
                       </span>
                     )}
                   </div>

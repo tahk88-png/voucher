@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
+import PushSubscribeButton from '@/components/push-subscribe-button';
 import {
   Ticket,
   Gift,
@@ -11,71 +13,61 @@ import {
   Bell,
   Shield,
   ChevronRight,
-  CheckCircle2,
   Sparkles,
+  QrCode,
+  Mail,
+  Users,
+  Flame,
+  Trophy,
+  type LucideIcon,
 } from 'lucide-react';
 
-const steps = [
-  {
-    id: 'welcome',
-    title: 'Welcome to Voucher Platform!',
-    subtitle: "Let's get you set up in 60 seconds",
-    icon: Sparkles,
-  },
+interface Step {
+  id: string;
+  icon: LucideIcon;
+  features?: Array<{ icon: LucideIcon; key: string }>;
+}
+
+// Only features that exist today. Offline access, price-drop alerts and
+// loyalty-tier benefits were promised here before but are not available.
+const allSteps: Step[] = [
+  { id: 'welcome', icon: Sparkles },
   {
     id: 'discover',
-    title: 'Discover Deals',
-    subtitle: 'Browse vouchers, gift cards, and events from local merchants',
     icon: Ticket,
     features: [
-      { icon: Ticket, label: 'Digital vouchers & coupons' },
-      { icon: Gift, label: 'Gift cards for friends & family' },
-      { icon: MapPin, label: 'Nearby offers based on your location' },
+      { icon: Ticket, key: 'vouchers' },
+      { icon: Gift, key: 'giftCards' },
+      { icon: MapPin, key: 'nearby' },
     ],
   },
   {
     id: 'wallet',
-    title: 'Your Digital Wallet',
-    subtitle: 'All your purchases in one place',
     icon: Gift,
     features: [
-      { icon: Gift, label: 'QR codes for instant redemption' },
-      { icon: Shield, label: 'Secure & always available offline' },
-      { icon: Bell, label: 'Expiry reminders so you never miss out' },
+      { icon: QrCode, key: 'qr' },
+      { icon: Mail, key: 'expiry' },
     ],
   },
   {
     id: 'rewards',
-    title: 'Earn Rewards',
-    subtitle: 'Level up from Bronze to Diamond with every purchase, review, and referral',
-    icon: Sparkles,
+    icon: Trophy,
     features: [
-      { icon: Sparkles, label: 'Daily check-ins & streaks' },
-      { icon: Shield, label: '10 badges to unlock' },
-      { icon: Gift, label: 'Tier benefits — discounts, early access' },
+      { icon: Users, key: 'referralCredit' },
+      { icon: Flame, key: 'checkIns' },
+      { icon: Trophy, key: 'badges' },
     ],
   },
-  {
-    id: 'notifications',
-    title: 'Stay in the Loop',
-    subtitle: 'Get notified about deals, price drops, and expiring vouchers',
-    icon: Bell,
-    actions: ['enable_notifications'],
-  },
-  {
-    id: 'security',
-    title: 'Secure Your Account',
-    subtitle: 'Enable passkey or 2FA for passwordless, secure access',
-    icon: Shield,
-    actions: ['setup_security'],
-  },
+  { id: 'notifications', icon: Bell },
+  { id: 'security', icon: Shield },
 ];
 
-export default function WelcomeClient({ userName }: { userName: string | null }) {
+export default function WelcomeClient({ userName, pushAvailable }: { userName: string | null; pushAvailable: boolean }) {
   const router = useRouter();
+  const t = useTranslations('welcome');
   const [currentStep, setCurrentStep] = useState(0);
-  const [completedActions, setCompletedActions] = useState<Set<string>>(new Set());
 
+  const steps = allSteps.filter((s) => s.id !== 'notifications' || pushAvailable);
   const step = steps[currentStep];
   const isLast = currentStep === steps.length - 1;
   const Icon = step.icon;
@@ -88,129 +80,101 @@ export default function WelcomeClient({ userName }: { userName: string | null })
     }
   }
 
-  function skip() {
-    router.push('/app');
-  }
-
-  async function handleAction(action: string) {
-    if (action === 'enable_notifications' && 'Notification' in window) {
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        setCompletedActions((prev) => new Set([...prev, action]));
-      }
-    }
-    if (action === 'setup_security') {
-      router.push('/app/settings/security');
-      return;
-    }
-  }
-
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-12">
+    <div className="flex items-center justify-center py-6">
       <div className="w-full max-w-md">
-        {/* Progress dots */}
-        <div className="flex justify-center gap-2 mb-8">
-          {steps.map((_, i) => (
+        <div
+          className="flex justify-center gap-2 mb-8"
+          role="progressbar"
+          aria-label={t('progress')}
+          aria-valuemin={1}
+          aria-valuemax={steps.length}
+          aria-valuenow={currentStep + 1}
+        >
+          {steps.map((s, i) => (
             <div
-              key={i}
+              key={s.id}
               className="h-2 rounded-full transition-all duration-300"
               style={{
                 width: i === currentStep ? 24 : 8,
-                backgroundColor:
-                  i < currentStep
-                    ? 'var(--primary)'
-                    : i === currentStep
-                      ? 'var(--primary)'
-                      : 'var(--border)',
+                backgroundColor: i <= currentStep ? 'var(--primary)' : 'var(--border)',
               }}
             />
           ))}
         </div>
 
-        <WarmCard className="p-8 text-center">
-          {/* Icon */}
+        <WarmCard className="p-6 sm:p-8 text-center">
           <div
             className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
             style={{ backgroundColor: 'var(--surface-dim)' }}
           >
-            <Icon size={32} style={{ color: 'var(--primary)' }} />
+            <Icon size={32} style={{ color: 'var(--primary)' }} aria-hidden="true" />
           </div>
 
-          {/* Greeting */}
           {currentStep === 0 && userName && (
             <p className="text-sm mb-1" style={{ color: 'var(--text-muted)' }}>
-              Hi, {userName}!
+              {t('greeting', { name: userName })}
             </p>
           )}
 
           <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--text)' }}>
-            {step.title}
+            {t(`steps.${step.id}.title` as never)}
           </h1>
           <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>
-            {step.subtitle}
+            {t(`steps.${step.id}.subtitle` as never)}
           </p>
 
-          {/* Features list */}
           {step.features && (
-            <div className="space-y-3 mb-6 text-left">
+            <ul className="space-y-3 mb-6 text-left">
               {step.features.map((f) => (
-                <div key={f.label} className="flex items-center gap-3">
+                <li key={f.key} className="flex items-center gap-3">
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
                     style={{ backgroundColor: 'var(--surface-dim)' }}
                   >
-                    <f.icon size={16} style={{ color: 'var(--primary)' }} />
+                    <f.icon size={16} style={{ color: 'var(--primary)' }} aria-hidden="true" />
                   </div>
                   <span className="text-sm" style={{ color: 'var(--text)' }}>
-                    {f.label}
+                    {t(`steps.${step.id}.features.${f.key}` as never)}
                   </span>
-                </div>
+                </li>
               ))}
+            </ul>
+          )}
+
+          {step.id === 'notifications' && (
+            <div className="flex justify-center mb-6">
+              <PushSubscribeButton />
             </div>
           )}
 
-          {/* Actions */}
-          {step.actions && (
-            <div className="space-y-2 mb-6">
-              {step.actions.map((action) => (
-                <button
-                  key={action}
-                  onClick={() => handleAction(action)}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium transition-colors"
-                  style={{
-                    border: '1px solid var(--border)',
-                    color: completedActions.has(action) ? 'var(--primary)' : 'var(--text)',
-                    backgroundColor: 'var(--surface)',
-                  }}
-                >
-                  <span>
-                    {action === 'enable_notifications' ? 'Enable push notifications' : 'Set up 2FA / Passkey'}
-                  </span>
-                  {completedActions.has(action) ? (
-                    <CheckCircle2 size={18} style={{ color: 'var(--primary)' }} />
-                  ) : (
-                    <ChevronRight size={18} style={{ color: 'var(--text-muted)' }} />
-                  )}
-                </button>
-              ))}
-            </div>
+          {step.id === 'security' && (
+            <button
+              type="button"
+              onClick={() => router.push('/app/settings/security')}
+              className="w-full flex items-center justify-between px-4 py-3 mb-6 rounded-lg text-sm font-medium transition-colors"
+              style={{ border: '1px solid var(--border)', color: 'var(--text)', backgroundColor: 'var(--surface)' }}
+            >
+              <span>{t('setUpSecurity')}</span>
+              <ChevronRight size={18} style={{ color: 'var(--text-muted)' }} aria-hidden="true" />
+            </button>
           )}
 
-          {/* Navigation */}
           <div className="flex gap-3">
             <button
-              onClick={skip}
+              type="button"
+              onClick={() => router.push('/app')}
               className="flex-1 px-4 py-2 rounded-lg text-sm"
               style={{ color: 'var(--text-muted)' }}
             >
-              Skip
+              {t('skip')}
             </button>
             <WarmButton onClick={next} className="flex-1">
-              {isLast ? 'Get Started' : 'Next'}
+              {isLast ? t('getStarted') : t('next')}
             </WarmButton>
           </div>
         </WarmCard>
       </div>
-    </main>
+    </div>
   );
 }

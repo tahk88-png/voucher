@@ -6,10 +6,13 @@ import { WarmButton } from '@/components/warm-button';
 import { showError } from '@/lib/toast-helpers';
 import { captureException } from '@/lib/error-tracking';
 import { AuditLogPayload } from '@/types';
+import { describeAuditResource, formatAuditAction } from '@/lib/audit-labels';
 
 type AuditLog = {
   id: string;
   action: string;
+  resourceType?: string | null;
+  resourceId?: string | null;
   createdAt: string;
   payloadJson: AuditLogPayload | null;
   actor: {
@@ -22,7 +25,17 @@ type AuditLog = {
   } | null;
 };
 
-export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] }) {
+export default function AuditLogView({
+  initialLogs,
+  limit = 20,
+  bare = false,
+}: {
+  initialLogs: AuditLog[];
+  /** How many recent entries to load. */
+  limit?: number;
+  /** Render without the card chrome (when the parent already provides one). */
+  bare?: boolean;
+}) {
   const [logs, setLogs] = useState<AuditLog[]>(initialLogs);
   const [isLoading, setIsLoading] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
@@ -49,7 +62,7 @@ export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] 
   const fetchLogs = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch('/api/admin/audit-log?limit=20');
+      const res = await fetch(`/api/admin/audit-log?limit=${limit}`);
       if (!res.ok) throw new Error('Failed to fetch audit log');
       const data = await res.json();
       setLogs(data.logs);
@@ -65,11 +78,10 @@ export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] 
 
   useEffect(() => {
     fetchLogs();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [limit]);
 
-  const formatAction = (action: string) => {
-    return action.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
-  };
+  const formatAction = formatAuditAction;
 
   const formatPayload = (payload: AuditLogPayload | null) => {
     if (!payload) return null;
@@ -82,7 +94,7 @@ export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] 
   };
 
   return (
-    <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+    <WarmCard padding={bare ? 'none' : 'lg'} className={bare ? 'bg-transparent border-0 shadow-none' : 'bg-white border border-[rgba(139,115,85,0.15)]'}>
       <div className="flex items-start justify-between gap-2">
         <div>
           <h2 className="text-base font-semibold text-[#2D2721]">Audit log</h2>
@@ -112,9 +124,19 @@ export default function AuditLogView({ initialLogs }: { initialLogs: AuditLog[] 
                     {log.actor?.name || log.actor?.email || 'System'}
                     {log.merchant && ` - ${log.merchant.name}`}
                   </p>
+                  {(() => {
+                    const resource = describeAuditResource(log);
+                    return resource ? (
+                      <p className="text-xs text-[#8B7355]">
+                        {resource.label}
+                        {resource.name ? ` “${resource.name}”` : ''}
+                        {resource.id ? ` #${resource.id.slice(0, 8)}` : ''}
+                      </p>
+                    ) : null;
+                  })()}
                 </div>
-                <p className="text-xs text-[#8B7355]">
-                  {new Date(log.createdAt).toLocaleString()}
+                <p className="text-xs text-[#8B7355] whitespace-nowrap">
+                  {new Date(log.createdAt).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}
                 </p>
               </div>
               {log.payloadJson && (

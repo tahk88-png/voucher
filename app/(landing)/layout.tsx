@@ -3,7 +3,8 @@ import type { Metadata } from "next"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: SITE_NAME,
+  // Absolute: the home page is titled just "GiftHub", not "GiftHub | GiftHub".
+  title: { absolute: SITE_NAME },
   description: SITE_DESCRIPTION,
   alternates: {
     canonical: "/",

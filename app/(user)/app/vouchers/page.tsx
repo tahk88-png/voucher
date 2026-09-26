@@ -85,7 +85,7 @@ export default async function MyVouchersPage() {
             </div>
             <div>{tVoucher('noVouchers')}</div>
             <Link
-              href="/app"
+              href="/campaigns"
               className="text-sm text-[var(--primary)] hover:underline font-medium"
             >
               {tVoucher('browseVouchers')}

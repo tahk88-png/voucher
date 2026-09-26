@@ -8,8 +8,12 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { showError } from '@/lib/toast-helpers';
-import { formatCurrency } from '@/lib/utils';
+import { showError, showSuccess } from '@/lib/toast-helpers';
+import { apiErrorMessage } from '@/lib/api-error-message';
+import { formatPrice } from '@/lib/currency-constants';
+import { endOfLocalDay, parseMoneyToMinor, startOfLocalDay, toDateInputValue } from '@/lib/money-input';
+import { CurrencySelect, exampleAmount } from '../../_components/currency-select';
+import { useMerchantSettings } from '../../_components/merchant-settings-context';
 import { sanitizeCssValue } from '@/lib/sanitize-css';
 import { useTranslations } from 'next-intl';
 
@@ -31,11 +35,8 @@ type FormData = {
   price: string;
 };
 
-const initial: FormData = {
+const initial: Omit<FormData, 'currency' | 'validFrom' | 'validTo'> = {
   amount: '',
-  currency: 'USD',
-  validFrom: new Date().toISOString().split('T')[0],
-  validTo: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   noExpiry: false,
   headline: '',
   message: '',
@@ -50,8 +51,8 @@ const initial: FormData = {
 };
 
 function GiftCardPreview({ form }: { form: FormData }) {
-  const amountNum = parseInt(form.amount, 10) || 0;
-  const amountStr = formatCurrency(amountNum * 100, form.currency);
+  const parsed = parseMoneyToMinor(form.amount, form.currency, 'Amount');
+  const amountStr = parsed.ok && parsed.value !== null ? formatPrice(parsed.value, form.currency, 'en-GB') : '—';
   const headline = form.headline || 'Gift card';
   return (
     <div className="rounded-2xl border border-[var(--border)] shadow-lg overflow-hidden bg-[var(--bg)]">
@@ -104,24 +105,38 @@ export default function NewGiftCardPage() {
   const router = useRouter();
   const merchantSlug = params.slug as string;
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<FormData>(initial);
+  const { defaultCurrency } = useMerchantSettings();
+  const [formData, setFormData] = useState<FormData>(() => ({
+    ...initial,
+    currency: defaultCurrency,
+    validFrom: toDateInputValue(new Date()),
+    validTo: toDateInputValue(new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)),
+  }));
+  const amountPreview = parseMoneyToMinor(formData.amount, formData.currency, 'Amount');
+  const pricePreview = parseMoneyToMinor(formData.price, formData.currency, 'Sale price');
   const tNav = useTranslations('nav');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const amountNum = parseInt(formData.amount, 10);
-      if (Number.isNaN(amountNum)) {
-        throw new Error('Invalid amount');
+      const amount = parseMoneyToMinor(formData.amount, formData.currency, 'Amount');
+      if (!amount.ok) throw new Error(amount.error);
+      if (amount.value === null || amount.value <= 0) throw new Error('Enter an amount above 0.');
+      const price = parseMoneyToMinor(formData.price, formData.currency, 'Sale price');
+      if (!price.ok) throw new Error(price.error);
+
+      const validFrom = startOfLocalDay(formData.validFrom);
+      const validTo = formData.noExpiry ? null : endOfLocalDay(formData.validTo);
+      if (validTo && validTo.getTime() < validFrom.getTime()) {
+        throw new Error('The end date must be on or after the start date.');
       }
 
-      const priceNum = formData.price ? parseInt(formData.price, 10) : null;
       const body = {
-        amount: amountNum * 100,
+        amount: amount.value,
         currency: formData.currency,
-        validFrom: new Date(formData.validFrom).toISOString(),
-        validTo: formData.noExpiry ? null : new Date(formData.validTo).toISOString(),
+        validFrom: validFrom.toISOString(),
+        validTo: validTo ? validTo.toISOString() : null,
         message: formData.message || null,
         imageUrl: formData.imageUrl || null,
         logoUrl: formData.logoUrl || null,
@@ -133,7 +148,7 @@ export default function NewGiftCardPage() {
         },
         codePrefix: formData.codePrefix || undefined,
         purchasable: formData.purchasable,
-        price: priceNum !== null ? priceNum * 100 : null,
+        price: formData.purchasable ? price.value : null,
       };
 
       const res = await fetch(`/api/merchant/${merchantSlug}/gift-cards`, {
@@ -144,10 +159,11 @@ export default function NewGiftCardPage() {
 
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
-        throw new Error(d.error || 'Failed to create gift card');
+        throw new Error(apiErrorMessage(d, 'Failed to create gift card'));
       }
 
       const giftCard = await res.json();
+      showSuccess('Gift card created.');
       router.push(`/merchant/${merchantSlug}/gift-cards/${giftCard.id}`);
     } catch (error) {
       showError(error instanceof Error ? error.message : 'Failed to create gift card');
@@ -189,24 +205,34 @@ export default function NewGiftCardPage() {
                   <Label htmlFor="gift-amount">Amount</Label>
                   <Input
                     id="gift-amount"
-                    type="number"
+                    type="text"
+                    inputMode="decimal"
+                    autoComplete="off"
                     value={formData.amount}
                     onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                    placeholder="50"
+                    placeholder="50.00"
                     required
+                    aria-describedby="gift-amount-help"
                     className="mt-1 border-[var(--border)]"
                   />
+                  <p
+                    id="gift-amount-help"
+                    className={`text-xs mt-1 ${amountPreview.ok ? 'text-[var(--text-muted)]' : 'text-[var(--danger)]'}`}
+                  >
+                    {!amountPreview.ok
+                      ? amountPreview.error
+                      : amountPreview.value !== null
+                        ? `Face value: ${formatPrice(amountPreview.value, formData.currency, 'en-GB')}.`
+                        : `Type the amount in ${formData.currency}, e.g. 50 or 49,90 for ${exampleAmount(formData.currency, 49.9)}.`}
+                  </p>
                 </div>
                 <div>
                   <Label htmlFor="gift-currency">Currency</Label>
-                  <Input
+                  <CurrencySelect
                     id="gift-currency"
-                    type="text"
                     value={formData.currency}
-                    onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
-                    maxLength={3}
-                    required
-                    className="mt-1 border-[var(--border)]"
+                    onChange={(currency) => setFormData({ ...formData, currency })}
+                    className="mt-1"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -226,6 +252,7 @@ export default function NewGiftCardPage() {
                     <Input
                       id="gift-valid-to"
                       type="date"
+                      min={formData.validFrom || undefined}
                       value={formData.validTo}
                       onChange={(e) => setFormData({ ...formData, validTo: e.target.value })}
                       disabled={formData.noExpiry}
@@ -267,14 +294,20 @@ export default function NewGiftCardPage() {
                     <Label htmlFor="gift-price">Sale price (optional, defaults to face value)</Label>
                     <Input
                       id="gift-price"
-                      type="number"
+                      type="text"
+                      inputMode="decimal"
+                      autoComplete="off"
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                       placeholder={formData.amount || 'Same as amount'}
                       className="mt-1 border-[var(--border)]"
                     />
-                    <p className="text-xs text-[var(--text-faint)] mt-1">
-                      Leave empty to sell at face value. Set a different price for promotions.
+                    <p className={`text-xs mt-1 ${pricePreview.ok ? 'text-[var(--text-faint)]' : 'text-[var(--danger)]'}`}>
+                      {!pricePreview.ok
+                        ? pricePreview.error
+                        : pricePreview.value !== null
+                          ? `Customers pay ${formatPrice(pricePreview.value, formData.currency, 'en-GB')}.`
+                          : 'Leave empty to sell at face value. Set a different price for promotions.'}
                     </p>
                   </div>
                 )}

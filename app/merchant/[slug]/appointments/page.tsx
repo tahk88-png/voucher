@@ -170,7 +170,7 @@ export default function AppointmentsPage() {
                   <h3 style={{ fontWeight: 600, color: 'var(--text)' }}>{apt.serviceName}</h3>
                   <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
                     <Clock size={14} />
-                    {new Date(apt.startTime).toLocaleString()} — {new Date(apt.endTime).toLocaleTimeString()}
+                    {new Date(apt.startTime).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })} — {new Date(apt.endTime).toLocaleTimeString('en-GB')}
                   </p>
                   {apt.user && <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Booked by: {apt.user.name || apt.user.email}</p>}
                   {apt.priceCents > 0 && <p style={{ fontSize: '0.875rem', fontWeight: 600 }}>{(apt.priceCents / 100).toFixed(2)} {apt.currency}</p>}

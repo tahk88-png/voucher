@@ -250,7 +250,7 @@ export default function WebhooksPage() {
                     ))}
                   </div>
                   <p className="text-xs text-[var(--text-faint)] mt-2">
-                    Created {new Date(ep.createdAt).toLocaleDateString()}
+                    Created {new Date(ep.createdAt).toLocaleDateString('en-GB')}
                     {ep._count ? ` | ${ep._count.deliveries} deliveries` : ''}
                   </p>
                 </div>
@@ -325,7 +325,7 @@ export default function WebhooksPage() {
                           </div>
                           <div className="flex items-center gap-3 text-[var(--text-muted)]">
                             <span>{d.attempts} attempt(s)</span>
-                            <span>{new Date(d.createdAt).toLocaleString()}</span>
+                            <span>{new Date(d.createdAt).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}</span>
                           </div>
                         </div>
                       ))}

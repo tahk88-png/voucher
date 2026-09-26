@@ -24,42 +24,19 @@ export default async function UserAppLayout({
     where: { id: profile.userId },
   })
 
-  const now = new Date()
-  const [activeUsers, campaigns, vouchers, redemptions] = await Promise.all([
-    prisma.user.count(),
-    prisma.campaign.count({ where: { status: "active", endDate: { gte: now } } }),
-    prisma.voucher.count({ where: { status: "published", validFrom: { lte: now }, validTo: { gte: now } } }),
-    prisma.redemption.count({ where: { confirmedAt: { not: null } } }),
-  ])
-
-  // The real ratio. It used to be clamped to 10-99% and showed 75% with no users,
-  // which put an invented number on every empty dashboard.
-  const engagement = activeUsers ? `${Math.round((redemptions / activeUsers) * 100)}%` : "—"
   const tNav = await getTranslations("nav")
-  const tAnalytics = await getTranslations("analytics")
 
-  // Load org memberships for the role switcher
-  let orgMemberships: { orgId: string; orgName: string; role: string }[] = [];
-  if (profile.roles.length > 1 || profile.merchantMemberships.length > 0) {
-    try {
-      const orgs = await prisma.orgMembership.findMany({
-        where: { userId: profile.userId },
-        include: { org: { select: { id: true, name: true } } },
-        take: 10,
-      });
-      orgMemberships = orgs.map((o) => ({ orgId: o.org.id, orgName: o.org.name, role: o.role }));
-    } catch {}
-  }
+  // Organisations are invite-only; the B2B entry is shown only to members.
+  const orgs = await prisma.orgMembership.findMany({
+    where: { userId: profile.userId },
+    include: { org: { select: { id: true, name: true } } },
+    take: 10,
+  })
+  const orgMemberships = orgs.map((o) => ({ orgId: o.org.id, orgName: o.org.name, role: o.role }))
 
   return (
     <UserShell
       userLabel={user?.name || user?.email || tNav("user")}
-      stats={[
-        { label: tAnalytics("activeUsers"), value: activeUsers.toString() },
-        { label: tNav("campaigns"), value: campaigns.toString() },
-        { label: tNav("vouchers"), value: vouchers.toString() },
-        { label: tAnalytics("engagement"), value: engagement },
-      ]}
       roles={profile.roles}
       merchantMemberships={profile.merchantMemberships.map((m) => ({
         merchantId: m.merchantId,
@@ -68,6 +45,7 @@ export default async function UserAppLayout({
         role: m.role,
       }))}
       orgMemberships={orgMemberships}
+      hasOrgs={orgMemberships.length > 0}
       adminRole={profile.adminRole}
     >
       {children}

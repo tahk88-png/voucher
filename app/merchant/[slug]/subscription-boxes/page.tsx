@@ -1,6 +1,10 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import { showError, showSuccess } from '@/lib/toast-helpers';
+import { parseMoneyToMinor } from '@/lib/money-input';
+import { SUPPORTED_CURRENCIES } from '@/lib/currency-constants';
+import { apiErrorMessage } from '@/lib/api-error-message';
 import { useParams } from 'next/navigation';
 
 interface Box {
@@ -35,18 +39,34 @@ export default function MerchantSubscriptionBoxesPage() {
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
+    // form.priceCents holds what the merchant typed in major units (e.g. 19,90).
+    const price = parseMoneyToMinor(form.priceCents, form.currency, 'Price');
+    if (!price.ok) {
+      showError(price.error);
+      return;
+    }
+    if (price.value === null || price.value <= 0) {
+      showError('Enter a price above 0.');
+      return;
+    }
     setSaving(true);
     try {
       const res = await fetch(`/api/merchant/${slug}/subscription-boxes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, priceCents: price.value }),
       });
       if (res.ok) {
+        showSuccess('Subscription box created.');
         setShowForm(false);
         setForm({ name: '', description: '', priceCents: '', currency: 'EUR', interval: 'monthly', maxItems: '3' });
         fetchBoxes();
+      } else {
+        const data = await res.json().catch(() => ({}));
+        showError(apiErrorMessage(data, `Couldn't create the subscription box (error ${res.status}).`));
       }
+    } catch {
+      showError("Couldn't create the subscription box. Check your connection and try again.");
     } finally {
       setSaving(false);
     }
@@ -54,7 +74,7 @@ export default function MerchantSubscriptionBoxesPage() {
 
   const formatPrice = (cents: number, currency: string) => {
     try {
-      return new Intl.NumberFormat('en', { style: 'currency', currency }).format(cents / 100);
+      return new Intl.NumberFormat('en-GB', { style: 'currency', currency }).format(cents / 100);
     } catch {
       return `${(cents / 100).toFixed(2)} ${currency}`;
     }
@@ -105,9 +125,11 @@ export default function MerchantSubscriptionBoxesPage() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium text-[var(--text)] mb-1">Price (cents)</label>
+                <label className="block text-sm font-medium text-[var(--text)] mb-1">Price ({form.currency})</label>
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="decimal"
+                  placeholder="19.90"
                   value={form.priceCents}
                   onChange={(e) => setForm({ ...form, priceCents: e.target.value })}
                   className="w-full border border-[#e8e0d8] rounded-xl px-4 py-2.5 bg-[#faf8f5] focus:outline-none focus:ring-2 focus:ring-[#cc785c]"
@@ -121,7 +143,7 @@ export default function MerchantSubscriptionBoxesPage() {
                   onChange={(e) => setForm({ ...form, currency: e.target.value })}
                   className="w-full border border-[#e8e0d8] rounded-xl px-4 py-2.5 bg-[#faf8f5] focus:outline-none focus:ring-2 focus:ring-[#cc785c]"
                 >
-                  {['EUR', 'USD', 'GBP', 'SEK', 'NOK', 'DKK'].map((c) => <option key={c} value={c}>{c}</option>)}
+                  {SUPPORTED_CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
               <div>

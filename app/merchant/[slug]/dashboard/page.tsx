@@ -7,7 +7,9 @@ import { requireMerchantRole } from '@/lib/rbac';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { AreaChart } from '@/components/ui/charts';
-import { formatCurrency, safeParseJson } from '@/lib/utils';
+import { formatPrice } from '@/lib/currency-constants';
+import { normalizeCurrency } from '@/lib/money-input';
+import { voucherDisplayName } from '@/lib/voucher-display';
 import { Calendar, CheckCircle2, Sparkles, Ticket } from 'lucide-react';
 import { DashboardStats } from './dashboard-stats';
 import { RevenueStats } from './revenue-stats';
@@ -97,8 +99,10 @@ export default async function MerchantDashboardPage({
       orderBy: { eventDate: 'asc' },
       take: 3,
     }),
+    // Only vouchers that were actually redeemed: otherwise the card listed
+    // unnamed vouchers with 0 redemptions as "top".
     prisma.voucher.findMany({
-      where: { merchantId: merchant.id },
+      where: { merchantId: merchant.id, deletedAt: null, redemptions: { some: {} } },
       include: { _count: { select: { redemptions: true } } },
       orderBy: { redemptions: { _count: 'desc' } },
       take: 3,
@@ -208,6 +212,9 @@ export default async function MerchantDashboardPage({
     info: 'bg-[#5e7e92]',
   };
 
+  const currency = normalizeCurrency(merchant.defaultCurrency);
+  const money = (minor: number) => formatPrice(minor, currency, 'en-GB');
+
   const topVoucherMax = topVouchers.reduce((max, voucher) => {
     return Math.max(max, voucher._count.redemptions);
   }, 0);
@@ -252,7 +259,7 @@ export default async function MerchantDashboardPage({
             <h2 className="text-base font-semibold text-[var(--text)]">Revenue and credits</h2>
             <p className="text-sm text-[var(--text-muted)]">Sales, credits, and outstanding liability.</p>
           </div>
-          <RevenueStats merchantId={merchant.id} merchantSlug={slug} currency={merchant.defaultCurrency} />
+          <RevenueStats merchantId={merchant.id} merchantSlug={slug} currency={currency} />
         </section>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -287,7 +294,7 @@ export default async function MerchantDashboardPage({
                   <div className="text-left sm:text-right">
                     <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Revenue</p>
                     <p className="text-lg font-semibold text-[var(--text)]">
-                      {formatCurrency(weeklyRevenueMinor, merchant.defaultCurrency)}
+                      {money(weeklyRevenueMinor)}
                     </p>
                   </div>
                 </div>
@@ -296,7 +303,7 @@ export default async function MerchantDashboardPage({
                 data={activityData}
                 areas={[
                   { dataKey: 'redemptions', name: 'Redemptions', color: '#cc785c' },
-                  { dataKey: 'revenue', name: 'Revenue', color: '#5e7e92' },
+                  { dataKey: 'revenue', name: `Revenue (${currency})`, color: '#5e7e92' },
                 ]}
                 xAxisKey="date"
                 height={260}
@@ -313,7 +320,7 @@ export default async function MerchantDashboardPage({
                 <div className="rounded-2xl border border-[var(--border)] bg-[#fcfbf8] px-4 py-3">
                   <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Avg order</p>
                   <p className="text-lg font-semibold text-[var(--text)]">
-                    {formatCurrency(averageOrderValueMinor, merchant.defaultCurrency)}
+                    {money(averageOrderValueMinor)}
                   </p>
                   <Link href={`/merchant/${slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#cc785c]">
                     Open campaign revenue
@@ -403,7 +410,7 @@ export default async function MerchantDashboardPage({
                       <div>
                         <p className="text-sm font-medium text-[var(--text)]">{event.name}</p>
                         <p className="text-xs text-[var(--text-muted)]">
-                          {format(new Date(event.eventDate), 'MMM d, yyyy')}
+                          {format(new Date(event.eventDate), 'd MMM yyyy')}
                         </p>
                       </div>
                       <span className="text-xs font-semibold text-[var(--text-faint)] uppercase">
@@ -429,12 +436,13 @@ export default async function MerchantDashboardPage({
                 <Ticket className="h-5 w-5 text-[var(--text-faint)]" />
               </div>
               {topVouchers.length === 0 ? (
-                <p className="text-sm text-[var(--text-muted)]">No voucher activity yet.</p>
+                <p className="text-sm text-[var(--text-muted)]">
+                  No vouchers have been redeemed yet. Your most redeemed vouchers will show up here.
+                </p>
               ) : (
                 <div className="space-y-3">
                   {topVouchers.map((voucher) => {
-                    const design = safeParseJson<{ headline?: string }>(voucher.designJson);
-                    const headline = design?.headline ?? 'Voucher';
+                    const headline = voucherDisplayName(voucher);
                     const pct = topVoucherMax > 0 ? (voucher._count.redemptions / topVoucherMax) * 100 : 0;
                     return (
                       <div key={voucher.id}>

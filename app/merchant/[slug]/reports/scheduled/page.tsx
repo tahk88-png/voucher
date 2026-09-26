@@ -181,10 +181,10 @@ export default function ScheduledReportsPage() {
                     <div className="text-xs text-[var(--text-muted)]">
                       {s.recipients.length} recipient{s.recipients.length !== 1 ? 's' : ''}
                       {s.lastSentAt && (
-                        <> &bull; Last sent: {new Date(s.lastSentAt).toLocaleDateString()}</>
+                        <> &bull; Last sent: {new Date(s.lastSentAt).toLocaleDateString('en-GB')}</>
                       )}
                       {s.nextRunAt && (
-                        <> &bull; Next: {new Date(s.nextRunAt).toLocaleDateString()}</>
+                        <> &bull; Next: {new Date(s.nextRunAt).toLocaleDateString('en-GB')}</>
                       )}
                     </div>
                   </div>

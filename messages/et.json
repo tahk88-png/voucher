@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Tellimuskarbid",
     "pricing": "Hinnareeglid",
     "webhooks": "Webhookid",
-    "apiKeys": "API-võtmed"
+    "apiKeys": "API-võtmed",
+    "marketplace": "Turg",
+    "openMenu": "Ava menüü",
+    "closeMenu": "Sulge menüü",
+    "expandSidebar": "Laienda külgriba",
+    "collapseSidebar": "Ahenda külgriba",
+    "sectionShop": "Pood",
+    "sectionRewards": "Preemiad",
+    "sectionAccount": "Konto",
+    "mainNavigation": "Põhinavigatsioon",
+    "quickNavigation": "Kiirnavigatsioon",
+    "logoutFailed": "Väljalogimine ebaõnnestus. Palun proovi uuesti."
   },
   "voucher": {
     "title": "Kupong",
@@ -184,7 +195,11 @@
     "creditApplied": "Rakendatud krediit",
     "finalTotal": "Kokku",
     "pageDescription": "Jälgi oma saadaolevaid ja lukustatud krediite.",
-    "noMerchantWallets": "Kaupmehe rahakotte veel pole."
+    "noMerchantWallets": "Kaupmehe rahakotte veel pole.",
+    "noCreditYet": "Krediiti veel pole",
+    "noCreditYetBody": "Krediiti teenid, kui sõber lunastab sinu jagatud kupongi. See kuvatakse siin iga kaupmehe kohta eraldi.",
+    "shareToEarn": "Jaga kupongi",
+    "findVoucherToShare": "Leia kupong, mida jagada"
   },
   "redemption": {
     "title": "Lunastused",
@@ -244,7 +259,12 @@
     "merchantLabel": "Kaupmees",
     "voucherLabel": "Kupong",
     "linkField": "Link",
-    "codeField": "Kood"
+    "codeField": "Kood",
+    "linkCopied": "Link kopeeritud",
+    "howItWorksTitle": "Kuidas soovitamine toimib",
+    "howItWorksBody": "Ava kupong ja vajuta „Jaga“. Saad selle kupongi jaoks isikliku lingi. Kui sõber selle lunastab, teenid kaupmehelt krediiti.",
+    "findVoucher": "Leia kupong, mida jagada",
+    "linkForVoucher": "Soovituslink: {voucher}"
   },
   "analytics": {
     "title": "Analüütika",
@@ -516,7 +536,9 @@
     "viewVouchers": "Vaata kuponge",
     "redeemed": "Lunastatud",
     "friendLabel": "Sõber",
-    "voucherLabel": "Kupong"
+    "voucherLabel": "Kupong",
+    "offersLinkTitle": "Link kõigile pakkumistele",
+    "offersLinkDescription": "Suuna sõbrad GiftHubi kõigi praeguste pakkumisteni. Selle lingiga krediiti ei teeni – krediidi saamiseks jaga konkreetset kupongi selle lehelt."
   },
   "billing": {
     "upgradeRequired": "Uuendamine vajalik",
@@ -618,14 +640,34 @@
     "inApp": "Rakenduses",
     "pushBeta": "Push (beeta)",
     "saving": "Salvestamine...",
-    "savePreferences": "Salvesta eelistused"
+    "savePreferences": "Salvesta eelistused",
+    "noPreferencesTitle": "Siin pole veel midagi seadistada",
+    "noPreferencesBody": "Teavituste seadeid hallatakse iga kaupmehe kohta eraldi. Sul pole veel ühtegi kaupmeest, millel oleks teavituste seaded.",
+    "saved": "Eelistused salvestatud",
+    "saveFailed": "Eelistuste salvestamine ebaõnnestus. Palun proovi uuesti.",
+    "markAllReadFailed": "Teavituste loetuks märkimine ebaõnnestus. Palun proovi uuesti.",
+    "emptyHint": "Siia ilmuvad uudised sinu kupongide ja pakkumiste kohta.",
+    "browseOffers": "Sirvi pakkumisi"
   },
   "settingsPage": {
     "description": "Halda oma konto eelistusi.",
     "joined": "Liitus",
     "recently": "hiljuti",
     "accountAccessTitle": "Konto ligipääs",
-    "accountAccessDescription": "Kaitse oma kontot ja halda ligipääsu."
+    "accountAccessDescription": "Kaitse oma kontot ja halda ligipääsu.",
+    "pushDescription": "Saa teavitusi selles seadmes ka siis, kui GiftHub pole avatud.",
+    "changePasswordTitle": "Muuda parooli",
+    "changePasswordDescription": "Uuenda oma konto parooli.",
+    "setPasswordTitle": "Määra parool",
+    "setPasswordDescription": "Määra parool, et saaksid sisse logida e-posti ja parooliga.",
+    "twoFactorTitle": "Kaheastmeline autentimine",
+    "twoFactorDescription": "Lisa autentimisrakenduse või pääsuvõtmega täiendav turvakiht.",
+    "twoFactorManage": "Halda turvalisust",
+    "sessionsTitle": "Aktiivsed seansid",
+    "sessionsDescription": "Vaata, kus sinu konto on sisse logitud.",
+    "sessionsView": "Vaata seansse",
+    "deleteTitle": "Kustuta konto",
+    "deleteDescription": "Kustuta oma konto jäädavalt ja anonüümi oma andmed. Seda ei saa tagasi võtta."
   },
   "profile": {
     "title": "Profiil",
@@ -633,5 +675,217 @@
     "accountInformation": "Konto info",
     "emailPreferences": "E-posti eelistused",
     "appSettings": "Rakenduse seaded"
+  },
+  "dashboard": {
+    "roleShopper": "Ostja",
+    "roleAdmin": "Administraator",
+    "roleStaff": "Töötaja",
+    "rolePlatformAdmin": "Platvormi administraator",
+    "availableCredit": "Kasutatav krediit",
+    "pendingCredit": "{amount} ootel",
+    "creditExplainer": "Krediiti teenid siis, kui sõbrad lunastavad sinu jagatud kuponge. Saad seda kasutada selle kaupmehe juures, kes selle väljastas.",
+    "viewCreditDetails": "Vaata krediidi üksikasju",
+    "successfulReferrals": "Õnnestunud soovitused",
+    "checkInPoints": "Sisseregistreerimise punktid",
+    "shareTitle": "Jaga kupongi ja teeni krediiti",
+    "shareDescription": "Ava ükskõik milline kupong ja vajuta „Jaga“, et saada oma isiklik link. Kui sõber selle lunastab, teenid krediiti.",
+    "openShareCenter": "Ava jagamiskeskus",
+    "sharedSummary": "Jagatud kuponge: {count} · Lunastatud: {redeemed}",
+    "achievementsTitle": "Saavutused",
+    "badgesEarned": "Teenitud märke: {earned}/{total}",
+    "viewAchievements": "Vaata saavutusi",
+    "availableOffers": "Saadaval pakkumised",
+    "browseAll": "Vaata kõiki",
+    "noActiveOffers": "Praegu pole ühtegi aktiivset pakkumist. Vaata varsti uuesti.",
+    "validUntil": "Kehtib kuni {date}",
+    "recentActivity": "Viimased tegevused",
+    "noRecentActivity": "Tegevusi veel pole.",
+    "creditFrom": "Krediit: {merchant}",
+    "referralAt": "Soovitus · {merchant}",
+    "creditStatus": {
+      "locked": "ootel",
+      "available": "kasutatav",
+      "used": "kasutatud",
+      "expired": "aegunud",
+      "reversed": "tühistatud"
+    },
+    "referralStatus": {
+      "created": "Link loodud",
+      "opened": "Avatud",
+      "redeemed": "Lunastatud",
+      "expired": "Aegunud",
+      "blocked": "Blokeeritud"
+    },
+    "myMerchants": "Minu kaupmehed",
+    "merchantDashboard": "Kaupmehe töölaud",
+    "sellTitle": "Müü GiftHubis",
+    "sellDescription": "Soovid pakkuda oma klientidele kuponge? Võta meiega ühendust ja aitame sul kaupmehe konto luua.",
+    "contactUs": "Võta ühendust",
+    "exploreVouchers": "Avasta kuponge"
+  },
+  "wishlist": {
+    "title": "Minu soovinimekiri",
+    "emptyTitle": "Sinu soovinimekiri on tühi",
+    "emptyBody": "Salvesta meeldivad kupongid, kaupmehed ja kampaaniad, et need hiljem siit üles leida.",
+    "browseOffers": "Sirvi pakkumisi"
+  },
+  "push": {
+    "enable": "Luba tõuketeavitused",
+    "enabled": "Tõuketeavitused on sisse lülitatud",
+    "enabledToast": "Tõuketeavitused lubatud",
+    "disable": "Lülita välja",
+    "disabledToast": "Tõuketeavitused välja lülitatud",
+    "enableFailed": "Tõuketeavituste lubamine ebaõnnestus. Palun proovi uuesti.",
+    "disableFailed": "Tõuketeavituste väljalülitamine ebaõnnestus. Palun proovi uuesti.",
+    "unsupported": "See brauser ei toeta tõuketeavitusi.",
+    "blocked": "Teavitused on blokeeritud. Nende sisselülitamiseks luba need brauseri seadetes."
+  },
+  "sessions": {
+    "title": "Aktiivsed seansid",
+    "description": "Vaata, kus sinu konto on sisse logitud.",
+    "backToSettings": "Tagasi seadetesse",
+    "deviceOn": "{browser}, {os}",
+    "unknownDevice": "Tundmatu seade",
+    "thisDevice": "See seade",
+    "signedInHere": "Oled praegu siin sisse logitud.",
+    "otherDevicesTitle": "Teised seadmed",
+    "otherDevicesNone": "Me ei saa kuvada teisi seadmeid, kus võid olla sisse logitud. Kui märkad midagi kahtlast, muuda oma parooli ja lülita sisse kaheastmeline autentimine.",
+    "securitySettings": "Turvaseaded",
+    "lastActive": "Viimati aktiivne {time}",
+    "logout": "Logi välja",
+    "logoutAll": "Logi välja kõigist teistest seadmetest",
+    "logoutAllBody": "Lõpeta kõik teiste seadmete seansid.",
+    "loadFailed": "Seansside laadimine ebaõnnestus.",
+    "revokeFailed": "Seansi lõpetamine ebaõnnestus. Palun proovi uuesti.",
+    "revoked": "Seanss lõpetatud.",
+    "revokedAll": "Teiste seadmete seansid lõpetatud."
+  },
+  "achievements": {
+    "title": "Saavutused",
+    "checkIn": "Registreeri end täna",
+    "checkingIn": "Registreerimine…",
+    "checkedInToday": "Täna registreeritud",
+    "checkInFailed": "Registreerimine ebaõnnestus. Palun proovi uuesti.",
+    "checkInSaved": "Registreerimine salvestatud",
+    "newBadge": "Uus märk: {name}",
+    "checkInPoints": "Sisseregistreerimise punktid",
+    "level": "Tase",
+    "levelValue": "Tase {level}",
+    "levelProgress": "Edenemine järgmisele tasemele",
+    "badgesLabel": "Märgid",
+    "noBadgesYet": "Märke pole veel teenitud.",
+    "earnedOn": "Teenitud {date}",
+    "locked": "Veel teenimata",
+    "howToEarn": "Kuidas punkte teenida",
+    "earnRuleCheckIn": "Registreeri end kord päevas",
+    "pointsShort": "+{points} p",
+    "pointsExplainer": "Punktid ja tasemed näitavad, kui aktiivne sa oled. Neid ei saa vahetada raha ega kupongide vastu.",
+    "currentStreak": "Praegune seeria (päevi)",
+    "longestStreak": "Pikim seeria (päevi)",
+    "milestone": "Seeria verstapost saavutatud!",
+    "badges": {
+      "first_purchase": {
+        "name": "Esimene ost",
+        "description": "Ostsid oma esimese kupongi"
+      },
+      "first_redemption": {
+        "name": "Esimene lunastus",
+        "description": "Lunastasid oma esimese kupongi"
+      },
+      "5_referrals": {
+        "name": "Sidepidaja",
+        "description": "Jagasid sõpradega 5 kupongi"
+      },
+      "10_referrals": {
+        "name": "Mõjutaja",
+        "description": "Jagasid sõpradega 10 kupongi"
+      },
+      "streak_7": {
+        "name": "Nädala sõdalane",
+        "description": "Registreerisid end 7 päeva järjest"
+      },
+      "streak_30": {
+        "name": "Kuu meister",
+        "description": "Registreerisid end 30 päeva järjest"
+      },
+      "review_writer": {
+        "name": "Arvustaja",
+        "description": "Avaldasid oma esimese arvustuse"
+      },
+      "big_spender": {
+        "name": "Suur kulutaja",
+        "description": "Kulutasid kupongidele kokku üle 10 000"
+      },
+      "early_adopter": {
+        "name": "Varajane kasutaja",
+        "description": "Liitusid GiftHubiga enne 2028. aastat"
+      },
+      "social_sharer": {
+        "name": "Sotsiaalne jagaja",
+        "description": "Jagasid kupongi sotsiaalmeedias"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Püsikliendiprogramm",
+    "notActiveTitle": "Püsikliendi tasemed pole veel saadaval",
+    "notActiveBody": "Ostud ei too veel püsikliendipunkte ning kassas ei rakendata tasemepõhiseid allahindlusi ega eeliseid, seega pole siin tasemeid, mida näidata.",
+    "earnTodayTitle": "Mida saad juba täna teenida",
+    "earnCreditTitle": "Soovituskrediit",
+    "earnCreditBody": "Jaga kupongi. Kui sõber selle lunastab, saad krediiti, mida kasutada selle kaupmehe juures.",
+    "earnCreditLink": "Vaata oma krediiti",
+    "earnPointsTitle": "Sisseregistreerimise punktid",
+    "earnPointsBody": "Registreeri end iga päev, et kasvatada seeriat, tõusta tasemel ja avada märke.",
+    "earnPointsLink": "Vaata saavutusi",
+    "historyTitle": "Punktide ajalugu",
+    "pointsBalance": "Saldo: {points} punkti"
+  },
+  "welcome": {
+    "greeting": "Tere, {name}!",
+    "progress": "Tutvustuse edenemine",
+    "setUpSecurity": "Seadista 2FA või pääsuvõti",
+    "skip": "Jäta vahele",
+    "next": "Edasi",
+    "getStarted": "Alusta",
+    "steps": {
+      "welcome": {
+        "title": "Tere tulemast GiftHubi!",
+        "subtitle": "Siin on lühike ülevaade sellest, mida saad teha."
+      },
+      "discover": {
+        "title": "Avasta pakkumisi",
+        "subtitle": "Sirvi kohalike kaupmeeste kuponge, kinkekaarte ja üritusi.",
+        "features": {
+          "vouchers": "Digitaalsed kupongid",
+          "giftCards": "Kinkekaardid sõpradele ja perele",
+          "nearby": "Pakkumised sinu lähedal"
+        }
+      },
+      "wallet": {
+        "title": "Kõik sinu kupongid ühes kohas",
+        "subtitle": "Kõik, mida ostad, salvestatakse sinu kontole.",
+        "features": {
+          "qr": "QR-koodid kiireks lunastamiseks poes",
+          "expiry": "E-posti meeldetuletused enne kupongi aegumist"
+        }
+      },
+      "rewards": {
+        "title": "Teeni preemiaid",
+        "subtitle": "Jaga kuponge sõpradega ja teeni krediiti, kui nad need lunastavad.",
+        "features": {
+          "referralCredit": "Kaupmehe krediit õnnestunud soovituste eest",
+          "checkIns": "Igapäevased registreerimised ja seeriad",
+          "badges": "Avatavad märgid"
+        }
+      },
+      "notifications": {
+        "title": "Ole kursis",
+        "subtitle": "Lülita selles seadmes teavitused sisse."
+      },
+      "security": {
+        "title": "Kaitse oma kontot",
+        "subtitle": "Lisa pääsuvõti või kaheastmeline autentimine."
+      }
+    }
   }
 }

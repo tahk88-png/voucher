@@ -1,12 +1,18 @@
 import Link from "next/link"
-import { getNavigationLinks, getFallbackNavigation } from "@/lib/navigation"
+import { getNavigationLinks, getFallbackNavigation, toPublicNavLinks } from "@/lib/navigation"
 import { Gift } from "lucide-react"
 import { getTranslations } from "next-intl/server"
+import { MobileNav } from "@/components/layout/mobile-nav"
 
 interface HubShellProps {
   children: React.ReactNode
 }
 
+/**
+ * Header shared by every public page (landing, campaigns, FAQ, contact, legal,
+ * search, gifts, leaderboard, 404). The site footer is rendered once by the
+ * root layout.
+ */
 export default async function HubShell({ children }: HubShellProps) {
   const fallback = getFallbackNavigation("hub")
   const headerLinks =
@@ -15,22 +21,23 @@ export default async function HubShell({ children }: HubShellProps) {
       position: "header",
     })) || []
 
-  const header = headerLinks.length > 0 ? headerLinks : fallback.header
+  const header = toPublicNavLinks(headerLinks.length > 0 ? headerLinks : fallback.header)
   const t = await getTranslations("nav")
+  const signInLabel = t("login")
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
       <header className="sticky top-0 z-50 bg-[var(--surface)]/80 backdrop-blur-md border-b border-[var(--border)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 gap-3">
             <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
               <div className="w-10 h-10 rounded-xl gradient-brand flex items-center justify-center shadow-warm">
-                <Gift className="h-6 w-6 text-white" />
+                <Gift className="h-6 w-6 text-white" aria-hidden="true" />
               </div>
               <span className="text-xl font-bold text-[var(--text)]">GiftHub</span>
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav aria-label="Main" className="hidden md:flex items-center gap-1">
               {header.map((link) => (
                 <Link
                   key={link.id}
@@ -44,23 +51,18 @@ export default async function HubShell({ children }: HubShellProps) {
 
             <div className="flex items-center gap-2">
               <Link
-                href="/campaigns"
-                className="hidden sm:inline-flex items-center gap-1.5 px-5 py-2.5 bg-[var(--surface)] text-[var(--text)] font-medium text-sm rounded-[12px] border-2 border-[var(--border)] hover:border-[var(--border-strong)] hover:shadow-warm transition-all"
-              >
-                <Gift className="h-4 w-4 text-[var(--primary)]" />
-                <span>{t("campaigns")}</span>
-              </Link>
-              <Link
                 href="/login"
-                className="inline-flex items-center px-6 py-2.5 bg-[var(--danger)] hover:bg-[#D16B4C] text-white font-medium text-sm rounded-[16px] shadow-warm-sm hover:shadow-warm transition-all"
+                className="hidden md:inline-flex items-center px-6 py-2.5 bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-[var(--primary-foreground)] font-medium text-sm rounded-[16px] shadow-warm-sm hover:shadow-warm transition-all"
               >
-                {t("login")}
+                {signInLabel}
               </Link>
+              <MobileNav links={header} signInHref="/login" signInLabel={signInLabel} />
             </div>
           </div>
         </div>
       </header>
-      <main className="flex-1">{children}</main>
+      {/* The root layout already provides the page's <main> landmark. */}
+      <div className="flex-1">{children}</div>
     </div>
   )
 }

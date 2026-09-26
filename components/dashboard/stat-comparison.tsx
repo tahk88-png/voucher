@@ -18,7 +18,7 @@ function formatValue(
 ): string {
   switch (format) {
     case 'currency':
-      return `${currencySymbol}${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+      return `${currencySymbol}${value.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     case 'percent':
       return `${value.toFixed(1)}%`
     case 'number':
@@ -32,7 +32,7 @@ export function StatComparison({
   previous,
   label,
   format = 'number',
-  currencySymbol = '$',
+  currencySymbol = '€',
 }: StatComparisonProps) {
   const [entered, setEntered] = useState(false)
 

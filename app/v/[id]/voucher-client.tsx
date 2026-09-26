@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { formatDisplayDate, formatVoucherValue } from '@/lib/voucher-display';
 import Image from 'next/image';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
-import { formatCurrency, formatPercentage } from '@/lib/utils';
+import { formatCurrency } from '@/lib/utils';
 import QRDownload from '@/components/qr-download';
 import SocialShare from '@/components/social-share';
 import { showSuccess, showInfo, showError } from '@/lib/toast-helpers';
@@ -116,10 +117,8 @@ export default function VoucherClient({
     setIsSharing(false);
   };
 
-  const getVoucherValue = () => {
-    if (voucher.type === 'percentage') return formatPercentage(voucher.value);
-    return formatCurrency(voucher.value, voucher.currency);
-  };
+  // Exact value (12.5%, €4.50) formatted the same way as in the merchant area.
+  const getVoucherValue = () => formatVoucherValue(voucher);
 
   const headline = design?.headline || tVoucher('specialOffer');
   const limitText = voucher.usageLimitTotal
@@ -160,7 +159,7 @@ export default function VoucherClient({
 
         <div className="p-6 pt-5 space-y-5">
           <p className="text-sm text-[#6B5744]">
-            {tVoucher('validUntil')} {new Date(voucher.validTo).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+            {tVoucher('validUntil')} {formatDisplayDate(voucher.validTo)}
             {limitText}
           </p>
 

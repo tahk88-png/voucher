@@ -47,7 +47,9 @@ const securityHeaders = [
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
   { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
-  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()' },
+  // camera: merchant QR scanner; geolocation: /app/nearby "Use my location". Both same-origin only.
+  // payment stays off: Stripe is used via hosted Checkout redirects, never in-page.
+  { key: 'Permissions-Policy', value: 'camera=(self), microphone=(), geolocation=(self), payment=(), usb=(), interest-cohort=()' },
   { key: 'Content-Security-Policy', value: cspDirectives.join('; ') },
 ].filter(Boolean);
 

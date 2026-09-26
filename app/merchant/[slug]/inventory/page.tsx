@@ -253,7 +253,7 @@ export default function InventoryPage() {
                     <span>Purchased: {item.totalPurchases}</span>
                     <span>Redeemed: {item.totalRedemptions}</span>
                     <span>
-                      Valid until {new Date(item.validTo).toLocaleDateString()}
+                      Valid until {new Date(item.validTo).toLocaleDateString('en-GB')}
                     </span>
                   </div>
 

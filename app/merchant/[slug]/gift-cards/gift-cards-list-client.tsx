@@ -206,7 +206,7 @@ export default function GiftCardsListClient({
                 <div className="text-sm text-[var(--text-muted)] space-y-1">
                   <p>Valid until: {validTo}</p>
                   {card.redeemedAt ? (
-                    <p>Redeemed: {new Date(card.redeemedAt).toLocaleDateString()}</p>
+                    <p>Redeemed: {new Date(card.redeemedAt).toLocaleDateString('en-GB')}</p>
                   ) : null}
                 </div>
                 <div className="flex gap-2 mt-4">

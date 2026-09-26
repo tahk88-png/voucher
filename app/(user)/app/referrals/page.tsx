@@ -5,6 +5,7 @@ import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { getTranslations } from "next-intl/server"
+import { getAppUrl } from "@/lib/app-url"
 import ReferralsClient from "./referrals-client"
 
 export default async function ReferralsPage() {
@@ -14,9 +15,10 @@ export default async function ReferralsPage() {
   }
   const tReferral = await getTranslations("referral")
 
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
-  const referralLink = `${baseUrl}/app/share`
-  const referralCode = `GH-${session.user.id.slice(0, 6).toUpperCase()}`
+  // Referrals are per voucher: sharing a voucher creates a Referral whose public
+  // page (/r/<id>) attributes the friend's redemption. There is no account-wide
+  // invite code, so each tracked link is listed with its referral.
+  const appUrl = getAppUrl()
 
   const [referrals, totalReferrals, redeemedReferrals, creditTotals, pendingCredits, latestCredit] =
     await Promise.all([
@@ -51,8 +53,6 @@ export default async function ReferralsPage() {
 
   return (
     <ReferralsClient
-      referralLink={referralLink}
-      referralCode={referralCode}
       currency={currency}
       stats={{
         totalEarned,
@@ -69,6 +69,7 @@ export default async function ReferralsPage() {
           tReferral("voucherLabel"),
         status: referral.status,
         createdAt: referral.createdAt.toISOString(),
+        link: `${appUrl}/r/${referral.id}`,
       }))}
     />
   )

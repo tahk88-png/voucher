@@ -84,7 +84,7 @@ export default async function EventDetailPage({
           {[
             { label: 'Status', value: event.status },
             { label: 'Type', value: event.type },
-            { label: 'Event date', value: new Date(event.eventDate).toLocaleString() },
+            { label: 'Event date', value: new Date(event.eventDate).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }) },
             {
               label: 'Price',
               value: event.price > 0 ? formatCurrency(event.price, event.currency) : 'Free',

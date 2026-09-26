@@ -3,7 +3,7 @@ import { logger } from '@/lib/logger';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
-import { WarmButton } from '@/components/warm-button';
+import { SignOutButton } from '@/app/(user)/app/_components/sign-out-button';
 import { getTranslations } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -73,9 +73,7 @@ export default async function AppLayout({
               <span className="text-sm text-[#6B5744] truncate max-w-[180px]">
                 {session.user.email ?? session.user.name ?? t('user')}
               </span>
-              <WarmButton variant="ghost" size="sm" asChild>
-                <Link href="/api/auth/signout?callbackUrl=/">{t('logout')}</Link>
-              </WarmButton>
+              <SignOutButton variant="ghost" size="sm" showIcon={false} />
             </div>
           </div>
         </header>

@@ -7,6 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { safeParseJson } from '@/lib/utils';
 import { requireMerchantRole } from '@/lib/rbac';
 import { getMerchantBillingStatus } from '@/lib/billing';
+import { isStripeConfigured } from '@/lib/stripe';
 import Link from 'next/link';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
@@ -48,17 +49,25 @@ export default async function SettingsPage({
   } | null;
 
   const billing = await getMerchantBillingStatus(merchant.id);
-  const trialEndsAt = billing.trialEndsAt ? billing.trialEndsAt.toLocaleDateString() : null;
+  const dateFmt: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+  const trialEndsAt = billing.trialEndsAt ? billing.trialEndsAt.toLocaleDateString('en-GB', dateFmt) : null;
   const periodEndsAt = billing.currentPeriodEnd
-    ? billing.currentPeriodEnd.toLocaleDateString()
+    ? billing.currentPeriodEnd.toLocaleDateString('en-GB', dateFmt)
     : null;
+  let countryName = merchant.country;
+  try {
+    countryName = new Intl.DisplayNames(['en-GB'], { type: 'region' }).of(merchant.country.toUpperCase()) ?? merchant.country;
+  } catch {
+    // Not an ISO region code: show it as stored.
+  }
   const trialDaysLeft = billing.trialEndsAt
     ? Math.max(0, Math.ceil((new Date(billing.trialEndsAt).getTime() - Date.now()) / 86400000))
     : 0;
-  const billingStatusLabel = billing.active
-    ? 'Active'
-    : billing.inTrial
-      ? `Trial \u2014 ${trialDaysLeft} day${trialDaysLeft !== 1 ? 's' : ''} remaining`
+  // billing.active is also true during a trial, so check the trial first.
+  const billingStatusLabel = billing.inTrial
+    ? `Free trial \u2014 ${trialDaysLeft} day${trialDaysLeft !== 1 ? 's' : ''} remaining`
+    : billing.active
+      ? 'Active'
       : 'Inactive';
 
   const domains = await prisma.domainMapping.findMany({
@@ -100,7 +109,7 @@ export default async function SettingsPage({
             </div>
             <div>
               <p className="text-sm font-medium text-[var(--text)]">Country</p>
-              <p className="text-[var(--text-muted)]">{merchant.country}</p>
+              <p className="text-[var(--text-muted)]">{countryName}</p>
             </div>
             <div>
               <p className="text-sm font-medium text-[var(--text)]">Default currency</p>
@@ -174,7 +183,7 @@ export default async function SettingsPage({
                 </div>
               ) : null}
             </div>
-            {billing.active && billing.stripeCustomerId ? (
+            {billing.active && billing.stripeCustomerId && isStripeConfigured() ? (
               <ManageBillingButton slug={slug} />
             ) : null}
           </div>
@@ -184,6 +193,7 @@ export default async function SettingsPage({
             currentTier={billing.planTier}
             billingState={billing.billingState}
             hasStripeCustomer={!!billing.stripeCustomerId}
+            billingAvailable={isStripeConfigured()}
           />
         </WarmCard>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo/page-metadata';
+import HubShell from '@/components/layout/hub-shell';
 
 // Gifts catalogue is a client component (filters/search), so SEO metadata
 // lives here in a co-located server layout. Highly indexable commerce page.
@@ -11,5 +12,5 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function GiftsLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <HubShell>{children}</HubShell>;
 }

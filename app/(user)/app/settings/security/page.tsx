@@ -46,22 +46,16 @@ export default function SecurityPage() {
 
   const checkStatus = useCallback(async () => {
     try {
-      // We check if TOTP is enabled by trying setup — if it returns 400 with "already enabled", it's on
-      // Better approach: just try to fetch, and handle the response
-      const res = await fetch("/api/auth/totp/setup", { method: "POST" });
-      const data = await res.json();
-
-      if (res.ok) {
-        // Setup returned successfully, meaning 2FA is NOT yet enabled (or was pending)
-        // Clean up — we don't want to start setup automatically
-        setTotpEnabled(false);
-      } else if (data.error?.includes("already enabled")) {
-        setTotpEnabled(true);
-      } else {
-        setTotpEnabled(false);
+      // Read-only status check. Setup (which generates a new secret) only runs
+      // when the user clicks "Enable 2FA".
+      const res = await fetch("/api/auth/totp/status", { cache: "no-store" });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data) {
+        throw new Error(data?.error || "Could not load your two-factor authentication status");
       }
-    } catch {
-      // ignore
+      setTotpEnabled(Boolean(data.enabled));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not load your two-factor authentication status");
     } finally {
       setLoading(false);
     }

@@ -12,7 +12,7 @@ import { withErrorHandler } from '@/lib/error-handler';
 const createVoucherSchema = z.object({
   type: z.enum(['percentage', 'fixed_amount', 'credit_amount']),
   value: z.number().int().positive(),
-  currency: z.string(),
+  currency: z.string().length(3).transform((c) => c.toUpperCase()),
   validFrom: z.string().datetime(),
   validTo: z.string().datetime(),
   usageLimitTotal: z.number().int().positive().optional(),
@@ -22,6 +22,12 @@ const createVoucherSchema = z.object({
   conditionsJson: z.any().optional(),
   designJson: z.any().optional(),
   codePrefix: z.string().optional(),
+}).refine((d) => new Date(d.validTo).getTime() > new Date(d.validFrom).getTime(), {
+  message: 'The end date must be after the start date.',
+  path: ['validTo'],
+}).refine((d) => d.type !== 'percentage' || d.value <= 10000, {
+  message: "A percentage discount can't be more than 100%.",
+  path: ['value'],
 });
 
 const PUBLIC_VOUCHERS_CACHE_TTL_SECONDS = 60;
@@ -47,7 +53,7 @@ export async function POST(
 ) {
   return withErrorHandler(async () => {
     const { slug } = await params;
-    const { merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
+    const { merchant, profile } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
     await requireActiveMerchant(merchant.id);
     await requireMerchantCapability(merchant.id, merchant.slug, 'voucher.create');
 
@@ -63,7 +69,28 @@ export async function POST(
         validTo: new Date(data.validTo),
         weeklyDropJson: data.weeklyDropJson ? JSON.stringify(data.weeklyDropJson) : Prisma.DbNull,
         conditionsJson: data.conditionsJson ? JSON.stringify(data.conditionsJson) : Prisma.DbNull,
-        designJson: data.designJson ? JSON.stringify(data.designJson) : Prisma.DbNull,
+        // Stored as a JSON object so readers can use designJson.headline directly.
+        designJson: data.designJson ? (data.designJson as Prisma.InputJsonValue) : Prisma.DbNull,
+      },
+    });
+
+    await prisma.auditLog.create({
+      data: {
+        merchantId: merchant.id,
+        actorUserId: profile.userId,
+        action: 'voucher.created',
+        resourceType: 'voucher',
+        resourceId: voucher.id,
+        payloadJson: {
+          voucherId: voucher.id,
+          type: voucher.type,
+          value: voucher.value,
+          currency: voucher.currency,
+          headline:
+            data.designJson && typeof data.designJson === 'object' && typeof data.designJson.headline === 'string'
+              ? data.designJson.headline
+              : null,
+        },
       },
     });
 

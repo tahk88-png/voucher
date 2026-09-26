@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { isResendConfigured } from '@/lib/resend';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
@@ -44,7 +45,8 @@ export async function GET(
       },
     });
 
-    return NextResponse.json({ campaigns });
+    // emailConfigured lets the page disable Send with an explanation.
+    return NextResponse.json({ campaigns, emailConfigured: isResendConfigured() });
   });
 }
 

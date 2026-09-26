@@ -2,22 +2,31 @@
 
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { PLAN_CATALOG, PLATFORM_FEE_PERCENT, TRIAL_DAYS } from '@/lib/access-control/monetization';
+import { SUPPORTED_CURRENCIES } from '@/lib/currency-constants';
+import { formatWholeCurrency } from '@/components/landing/format-price';
+
+const eur = (cents: number) => formatWholeCurrency(cents, 'EUR');
+// Same figures as the pricing section on the landing page (lib/access-control/monetization).
+const PLAN_PRICES = `${PLAN_CATALOG.starter.label} ${eur(PLAN_CATALOG.starter.monthlyPriceCents)}, ${PLAN_CATALOG.pro.label} ${eur(PLAN_CATALOG.pro.monthlyPriceCents)} or ${PLAN_CATALOG.scale.label} ${eur(PLAN_CATALOG.scale.monthlyPriceCents)} per month`;
+/** One messages/<locale>.json per UI language. */
+const LANGUAGE_COUNT = 25;
 
 const faqs = [
   {
     category: 'General',
     items: [
       {
-        q: 'What is this platform?',
-        a: 'We are a digital voucher, gift card, and event ticket marketplace that connects merchants with customers. Merchants can create and sell digital products, and customers can purchase, gift, and redeem them.',
+        q: 'What is GiftHub?',
+        a: 'GiftHub is a digital voucher, gift card, and event ticket marketplace that connects merchants with customers. Merchants can create and sell digital products, and customers can purchase, gift, and redeem them.',
       },
       {
         q: 'Is the platform free to use?',
-        a: 'Browsing and creating an account is free. Merchants pay a small platform fee on sales. Customers pay only for the products they purchase.',
+        a: `Browsing and creating an account is free. Customers pay only for the products they purchase. Merchants pay a monthly plan plus a ${PLATFORM_FEE_PERCENT}% transaction fee on voucher sales.`,
       },
       {
         q: 'Which countries are supported?',
-        a: 'We support merchants and customers across the EU, with multi-currency support for 12 currencies and 25 language translations.',
+        a: `We support merchants and customers across the EU, with ${SUPPORTED_CURRENCIES.length} currencies and ${LANGUAGE_COUNT} languages.`,
       },
     ],
   },
@@ -29,12 +38,8 @@ const faqs = [
         a: 'Browse available vouchers, click "Buy", and complete checkout via Stripe. Your voucher will appear in your wallet immediately after payment.',
       },
       {
-        q: 'Can I pay in installments?',
-        a: 'Yes! We offer Buy Now Pay Later (BNPL) with 3x (0% fee), 6x (2.5%), or 12x (5%) installment plans on eligible purchases.',
-      },
-      {
         q: 'What payment methods are accepted?',
-        a: 'We accept all major credit/debit cards, Apple Pay, Google Pay, and bank transfers through our Stripe integration.',
+        a: 'Payments are processed securely by Stripe. The payment methods available for your purchase are shown at checkout.',
       },
       {
         q: 'Can I get a refund?',
@@ -85,7 +90,7 @@ const faqs = [
       },
       {
         q: 'What are the platform fees?',
-        a: 'Check the merchant billing section for current fee structures. Fees vary by plan and transaction volume.',
+        a: `After a ${TRIAL_DAYS}-day free trial, plans cost ${PLAN_PRICES} (annual billing: 2 months free), plus a ${PLATFORM_FEE_PERCENT}% transaction fee on voucher sales, deducted from the payout.`,
       },
       {
         q: 'Can I integrate with my existing systems?',
@@ -125,7 +130,7 @@ export default function FaqPage() {
   };
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <div className="max-w-3xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text)' }}>
         Frequently Asked Questions
       </h1>
@@ -150,6 +155,7 @@ export default function FaqPage() {
                     style={{ border: '1px solid var(--border)' }}
                   >
                     <button
+                      type="button"
                       onClick={() => toggle(key)}
                       aria-expanded={isOpen}
                       className="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium transition-colors"
@@ -186,6 +192,6 @@ export default function FaqPage() {
           </section>
         ))}
       </div>
-    </main>
+    </div>
   );
 }

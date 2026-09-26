@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { ScanLine, Gift, CreditCard, Ticket, CheckCircle, Camera, CameraOff, Keyboard } from 'lucide-react';
+import { formatPrice } from '@/lib/currency-constants';
+import { formatDisplayDate, formatVoucherCode, formatVoucherValue, voucherDisplayName, voucherStatusLabel, voucherTypeLabel } from '@/lib/voucher-display';
 
 type ScanResult = {
   type: 'voucher' | 'gift_card' | 'ticket';
@@ -111,10 +113,33 @@ export default function ScannerPage() {
       setCameraActive(true);
       animFrameRef.current = requestAnimationFrame(scanFrame);
     } catch (err: any) {
-      setCameraError(err?.message === 'Permission denied' ? 'Camera access denied' : 'Camera not available');
+      const denied = err?.name === 'NotAllowedError' || err?.message === 'Permission denied';
+      setCameraError(
+        denied
+          ? 'Camera access was denied. Allow camera access in your browser settings, or type the code below.'
+          : 'No camera is available. Type the code below instead.'
+      );
       setCameraMode(false);
     }
   }, [scanFrame]);
+
+  // Phones at the till: open straight into camera mode when the device has a
+  // camera. If permission is refused, startCamera falls back to manual entry.
+  useEffect(() => {
+    let cancelled = false;
+    const md = typeof navigator !== 'undefined' ? navigator.mediaDevices : undefined;
+    if (!md?.getUserMedia || !md.enumerateDevices) return;
+    md.enumerateDevices()
+      .then((devices) => {
+        if (!cancelled && devices.some((d) => d.kind === 'videoinput')) setCameraMode(true);
+      })
+      .catch(() => {
+        /* no camera info: stay in manual mode */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (cameraMode) {
@@ -252,15 +277,24 @@ export default function ScannerPage() {
       {/* Manual input */}
       {!cameraMode && (
         <WarmCard padding="lg" className="bg-[var(--surface)]">
+          {cameraError && (
+            <p className="mb-3 flex items-start gap-2 text-sm text-[var(--text-muted)]">
+              <CameraOff className="h-4 w-4 mt-0.5 flex-shrink-0" />
+              {cameraError}
+            </p>
+          )}
           <div className="flex items-center gap-2 mb-4">
             <ScanLine className="h-5 w-5 text-[var(--primary)]" />
             <h2 className="text-lg font-semibold text-[var(--text)]">Enter code</h2>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col sm:flex-row gap-2">
             <Input
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              placeholder="QR code, ticket number, or gift card code"
+              placeholder="Voucher code (e.g. AUD-CMUI0TG1), voucher link, ticket or gift card code"
+              aria-label="Code to scan"
+              autoCapitalize="characters"
+              autoComplete="off"
               className="border-[var(--border)]"
               onKeyDown={(e) => { if (e.key === 'Enter') handleScan(); }}
             />
@@ -277,7 +311,7 @@ export default function ScannerPage() {
             <TypeIcon className="h-5 w-5 text-[var(--primary)]" />
             <h2 className="text-lg font-semibold text-[var(--text)] capitalize">{result.type.replace('_', ' ')} found</h2>
             <Badge variant={canRedeem ? 'default' : 'secondary'} className="ml-auto">
-              {result.data.status}
+              {result.type === 'voucher' ? voucherStatusLabel(result.data.status) : result.data.status}
             </Badge>
           </div>
 
@@ -295,20 +329,18 @@ export default function ScannerPage() {
             {result.type === 'gift_card' && (
               <>
                 <InfoRow label="Code" value={result.data.code} />
-                <InfoRow label="Amount" value={`${(result.data.amount / 100).toFixed(2)} ${result.data.currency}`} />
+                <InfoRow label="Amount" value={formatPrice(result.data.amount, String(result.data.currency || 'EUR').toUpperCase(), 'en-GB')} />
                 {result.data.message && <InfoRow label="Message" value={result.data.message} />}
               </>
             )}
             {result.type === 'voucher' && (
               <>
-                <InfoRow label="Campaign" value={result.data.campaign?.name || 'N/A'} />
-                <InfoRow label="Type" value={result.data.type} />
-                <InfoRow label="Value" value={
-                  result.data.type === 'percentage'
-                    ? `${result.data.value / 100}%`
-                    : `${(result.data.value / 100).toFixed(2)} ${result.data.currency}`
-                } />
-                <InfoRow label="Valid until" value={new Date(result.data.validTo).toLocaleDateString()} />
+                <InfoRow label="Voucher" value={voucherDisplayName(result.data as never)} />
+                <InfoRow label="Code" value={formatVoucherCode(result.data as never)} />
+                <InfoRow label="Campaign" value={result.data.campaign?.name || 'None'} />
+                <InfoRow label="Type" value={voucherTypeLabel(result.data.type)} />
+                <InfoRow label="Value" value={formatVoucherValue(result.data as never)} />
+                <InfoRow label="Valid until" value={formatDisplayDate(result.data.validTo)} />
               </>
             )}
           </div>
@@ -322,7 +354,7 @@ export default function ScannerPage() {
 
           {!canRedeem && (
             <p className="text-sm text-[var(--text-muted)] mt-4 text-center">
-              This item cannot be redeemed (status: {result.data.status})
+              This item can&apos;t be redeemed (status: {result.type === 'voucher' ? voucherStatusLabel(result.data.status) : result.data.status})
             </p>
           )}
         </WarmCard>

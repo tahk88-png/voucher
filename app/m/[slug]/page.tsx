@@ -8,6 +8,13 @@ import { WarmButton } from '@/components/warm-button';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { Gift, Megaphone, Globe, Mail } from 'lucide-react';
+import {
+  CAMPAIGN_TYPE_LABELS,
+  describeVoucherValue,
+  formatDisplayDate,
+  voucherHeadline,
+  voucherTypeLabel,
+} from '@/lib/voucher-display';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -37,12 +44,12 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
     where: { slug, isActive: true },
     include: {
       campaigns: {
-        where: { status: 'active', endDate: { gte: now } },
+        where: { status: 'active', endDate: { gte: now }, deletedAt: null },
         orderBy: { startDate: 'desc' },
         take: 12,
       },
       vouchers: {
-        where: { status: 'published', validTo: { gte: now } },
+        where: { status: 'published', validTo: { gte: now }, deletedAt: null },
         orderBy: { createdAt: 'desc' },
         take: 12,
         include: { campaign: { select: { name: true } } },
@@ -98,13 +105,13 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
                   <WarmCard padding="md" className="bg-white hover:shadow-lg transition-shadow h-full">
                     <div className="flex items-start justify-between">
                       <h3 className="font-semibold text-[var(--text)] line-clamp-2">{campaign.name}</h3>
-                      <Badge variant="secondary">{campaign.type}</Badge>
+                      <Badge variant="secondary">{CAMPAIGN_TYPE_LABELS[campaign.type] ?? campaign.type}</Badge>
                     </div>
                     {campaign.description && (
                       <p className="text-sm text-[var(--text-muted)] mt-2 line-clamp-2">{campaign.description}</p>
                     )}
                     <p className="text-xs text-[var(--text-faint)] mt-3">
-                      {new Date(campaign.startDate).toLocaleDateString()} &ndash; {new Date(campaign.endDate).toLocaleDateString()}
+                      {formatDisplayDate(campaign.startDate)} &ndash; {formatDisplayDate(campaign.endDate)}
                     </p>
                   </WarmCard>
                 </Link>
@@ -126,24 +133,20 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {merchant.vouchers.map((voucher) => (
-                <WarmCard key={voucher.id} padding="md" className="bg-white">
-                  <div className="flex items-start justify-between">
-                    <h3 className="font-semibold text-[var(--text)]">
-                      {voucher.campaign?.name || 'Voucher'}
-                    </h3>
-                    <Badge variant="outline">
-                      {voucher.type === 'percentage' ? 'Discount' : voucher.type === 'credit_amount' ? 'Credit' : 'Fixed'}
-                    </Badge>
-                  </div>
-                  <p className="text-2xl font-bold text-[var(--primary)] mt-2">
-                    {voucher.type === 'percentage'
-                      ? `${voucher.value / 100}% off`
-                      : `${(voucher.value / 100).toFixed(2)} ${voucher.currency}`}
-                  </p>
-                  <p className="text-xs text-[var(--text-faint)] mt-2">
-                    Valid until {new Date(voucher.validTo).toLocaleDateString()}
-                  </p>
-                </WarmCard>
+                <Link key={voucher.id} href={`/v/${voucher.id}`}>
+                  <WarmCard padding="md" className="bg-white hover:shadow-lg transition-shadow h-full">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="font-semibold text-[var(--text)] line-clamp-2">
+                        {voucherHeadline(voucher) || voucher.campaign?.name || describeVoucherValue(voucher)}
+                      </h3>
+                      <Badge variant="outline" className="shrink-0">{voucherTypeLabel(voucher.type)}</Badge>
+                    </div>
+                    <p className="text-2xl font-bold text-[var(--primary)] mt-2">{describeVoucherValue(voucher)}</p>
+                    <p className="text-xs text-[var(--text-faint)] mt-2">
+                      Valid until {formatDisplayDate(voucher.validTo)}
+                    </p>
+                  </WarmCard>
+                </Link>
               ))}
             </div>
           )}

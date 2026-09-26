@@ -8,6 +8,7 @@ import { safeParseJson } from '@/lib/utils';
 import { generateVoucherMetadata } from '@/lib/seo/generate-metadata';
 import { generateProductStructuredData } from '@/lib/seo/structured-data';
 import VoucherClient from './voucher-client';
+import { formatVoucherCode } from '@/lib/voucher-code';
 import QRCode from 'qrcode';
 
 async function generateQRCode(text: string): Promise<string> {
@@ -75,7 +76,8 @@ export default async function VoucherPage({ params }: { params: Promise<{ id: st
   const brandColors = safeParseJson<Record<string, string>>(voucher.merchant.brandColorsJson);
 
   // Generate voucher code
-  const voucherCode = `${voucher.codePrefix || 'V'}-${voucher.id.slice(0, 8).toUpperCase()}`;
+  // Same format the merchant scanner accepts (see lib/voucher-code.ts).
+  const voucherCode = formatVoucherCode(voucher);
   const headersList = await headers();
   const host = headersList.get('x-forwarded-host') || headersList.get('host') || '';
   const proto =

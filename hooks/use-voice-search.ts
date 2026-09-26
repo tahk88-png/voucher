@@ -38,10 +38,12 @@ export function useVoiceSearch(
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
-  // Check browser support
-  const isSupported =
-    typeof window !== "undefined" &&
-    ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+  // Browser support is only known on the client. Detect it after mount so the
+  // server render and the first client render agree (no hydration mismatch).
+  const [isSupported, setIsSupported] = useState(false);
+  useEffect(() => {
+    setIsSupported("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+  }, []);
 
   const createRecognition = useCallback(() => {
     if (!isSupported) return null;

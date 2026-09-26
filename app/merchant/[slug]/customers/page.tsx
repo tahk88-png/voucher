@@ -141,7 +141,7 @@ export default async function CustomersPage({
                     <td className="px-4 py-3 text-right text-[var(--text)]">{customer.redemptions}</td>
                     <td className="px-4 py-3 text-right text-[var(--text-muted)]">
                       {customer.lastPurchase
-                        ? new Date(customer.lastPurchase).toLocaleDateString()
+                        ? new Date(customer.lastPurchase).toLocaleDateString('en-GB')
                         : '—'}
                     </td>
                   </tr>

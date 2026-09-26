@@ -8,7 +8,7 @@ import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
 import { Badge } from '@/components/ui/badge';
 import { Coins, Clock, Lock, TrendingUp, AlertTriangle } from 'lucide-react';
-import { getLocale } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { getCurrencyLocale } from '@/lib/i18n-utils';
 
 /**
@@ -30,6 +30,7 @@ export default async function CashbackPage() {
   }
   const locale = await getLocale();
   const intlLocale = getCurrencyLocale(locale);
+  const tWallet = await getTranslations('wallet');
 
   const now = new Date();
   const soon = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
@@ -124,12 +125,12 @@ export default async function CashbackPage() {
             <div className="w-14 h-14 rounded-full bg-[#FFF9ED] flex items-center justify-center">
               <Coins className="h-6 w-6 text-[#8B7355]" />
             </div>
-            <div>You haven&apos;t earned any credit yet. Refer a friend to get started.</div>
+            <div>{tWallet('noCreditYetBody')}</div>
             <Link
-              href="/app/referrals"
+              href="/campaigns"
               className="text-sm font-medium text-[#8B7355] hover:underline"
             >
-              Browse referral offers →
+              {tWallet('findVoucherToShare')}
             </Link>
           </div>
         </WarmCard>

@@ -69,11 +69,12 @@ async function DashboardStatsContent({
         icon={TrendingUp}
         href={`/merchant/${merchantSlug}/redemptions`}
         actionLabel="Review redemptions"
-        trend={{
-          value: parseFloat(trendValue),
-          label: "of weekly",
-          isPositive: redemptionsToday > 0,
-        }}
+        // No trend arrow for zero: a red "down" arrow on an empty day reads as a drop.
+        trend={
+          redemptionsToday > 0
+            ? { value: parseFloat(trendValue), label: "of weekly", isPositive: true }
+            : undefined
+        }
       />
     </div>
   )

@@ -266,7 +266,7 @@ export default function SystemHealthPage() {
           </div>
           <div className="flex items-center gap-3">
             <span className="text-xs text-[var(--text-secondary)]">
-              Last refresh: {lastRefresh.toLocaleTimeString()} (auto-refresh 30s)
+              Last refresh: {lastRefresh.toLocaleTimeString('en-GB')} (auto-refresh 30s)
             </span>
             <WarmButton variant="outline" size="sm" onClick={fetchAll} disabled={loading}>
               <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
@@ -467,7 +467,7 @@ export default function SystemHealthPage() {
                       {err.message}
                     </span>
                     <span className="text-xs text-[var(--text-secondary)] shrink-0">
-                      {new Date(err.timestamp).toLocaleString()}
+                      {new Date(err.timestamp).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}
                     </span>
                   </button>
                   {expandedErrors.has(err.id) && (

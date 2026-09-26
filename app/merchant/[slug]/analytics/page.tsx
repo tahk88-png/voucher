@@ -6,7 +6,8 @@ import { Suspense } from 'react';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
-import { formatCurrency } from '@/lib/utils';
+import { formatPrice } from '@/lib/currency-constants';
+
 import { StatsCard } from '@/components/ui/stats-card';
 import { BarChart3, DollarSign, TrendingUp, Users } from 'lucide-react';
 import { AnalyticsCharts } from './analytics-charts';
@@ -14,6 +15,8 @@ import { getRedemptionTrends } from '@/lib/analytics/get-redemption-trends';
 import { getVoucherPerformance } from '@/lib/analytics/get-voucher-performance';
 import { getCategoryBreakdown } from '@/lib/analytics/get-category-breakdown';
 import { CardSkeleton } from '@/components/ui/loading-skeletons';
+
+const formatCurrency = (minor: number, currency: string) => formatPrice(minor, currency.toUpperCase(), 'en-GB');
 
 export default async function AnalyticsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -144,6 +147,7 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ slug
             redemptionTrends={redemptionTrends}
             voucherPerformance={voucherPerformance}
             categoryBreakdown={categoryBreakdown}
+            currency={merchant.defaultCurrency.toUpperCase()}
           />
         </Suspense>
       </div>

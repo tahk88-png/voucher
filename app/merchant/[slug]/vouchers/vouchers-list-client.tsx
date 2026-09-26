@@ -12,18 +12,27 @@ import { VoucherRowActions } from './voucher-row-actions';
 import { Gift, Search, Filter, Ticket } from 'lucide-react';
 import { VoucherDesign } from '@/types';
 import { EmptyState } from '@/components/ui/empty-state';
+import { describeVoucherValue, formatDisplayDate, voucherDisplayName, voucherTypeLabel } from '@/lib/voucher-display';
 
 const statusLabel: Record<string, string> = {
   published: 'Active',
   paused: 'Paused',
   draft: 'Draft',
   ended: 'Ended',
+  expired: 'Expired',
+};
+
+// Paused is a temporary, merchant-chosen state: warning tone, not danger.
+const statusClass: Record<string, string> = {
+  published: 'bg-[#4e8a5b] text-white',
+  paused: 'bg-[#F6E7C8] text-[#7a5a14]',
 };
 
 type Voucher = {
   id: string;
   status: string;
   type: string;
+  value: number;
   currency: string;
   validFrom: string;
   validTo: string;
@@ -76,11 +85,7 @@ export default function VouchersListClient({
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'name': {
-          const aDesign = safeParseJson<VoucherDesign>(a.designJson);
-          const bDesign = safeParseJson<VoucherDesign>(b.designJson);
-          const aName = (aDesign?.headline as string) || '';
-          const bName = (bDesign?.headline as string) || '';
-          return aName.localeCompare(bName);
+          return voucherDisplayName(a).localeCompare(voucherDisplayName(b));
         }
         case 'redemptions':
           return b._count.redemptions - a._count.redemptions;
@@ -139,6 +144,7 @@ export default function VouchersListClient({
                 <option value="paused">Paused</option>
                 <option value="draft">Draft</option>
                 <option value="ended">Ended</option>
+                <option value="expired">Expired</option>
               </select>
             </div>
             <div>
@@ -152,9 +158,9 @@ export default function VouchersListClient({
                 className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
                 <option value="all">All types</option>
-                <option value="percentage">Percentage</option>
-                <option value="fixed_amount">Fixed amount</option>
-                <option value="credit_amount">Credit amount</option>
+                <option value="percentage">Percentage off</option>
+                <option value="fixed_amount">Amount off</option>
+                <option value="credit_amount">Store credit</option>
               </select>
             </div>
             <div>
@@ -203,8 +209,7 @@ export default function VouchersListClient({
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filteredAndSorted.map((voucher) => {
-            const design = safeParseJson<Record<string, unknown>>(voucher.designJson);
-            const headline = (design?.headline as string) || 'Voucher';
+            const headline = voucherDisplayName(voucher);
             const used = voucher._count.redemptions;
             const limit = voucher.usageLimitTotal;
             const pct = limit != null && limit > 0 ? Math.min(100, (used / limit) * 100) : null;
@@ -215,18 +220,14 @@ export default function VouchersListClient({
                 <div className="flex justify-between items-start gap-2 mb-2">
                   <div className="min-w-0">
                     <h3 className="text-lg font-semibold text-[var(--text)] truncate">{headline}</h3>
-                    <p className="text-xs text-[var(--text-faint)] uppercase tracking-wide">
-                      {voucher.type} - {voucher.currency}
+                    <p className="text-xs text-[var(--text-faint)]">
+                      {voucherTypeLabel(voucher.type)} · {describeVoucherValue(voucher)}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <span
                       className={`px-2 py-1 text-xs font-bold rounded-full ${
-                        voucher.status === 'published'
-                          ? 'bg-[#4e8a5b] text-white'
-                          : voucher.status === 'paused'
-                          ? 'bg-[var(--danger)] text-white'
-                          : 'bg-[#F2EDE3] text-[var(--text-faint)]'
+                        statusClass[voucher.status] ?? 'bg-[#F2EDE3] text-[#6b5f4f]'
                       }`}
                     >
                       {status}
@@ -263,16 +264,27 @@ export default function VouchersListClient({
                     <p className="text-xs text-[var(--text-faint)]">Usage: {used} - Unlimited</p>
                   )}
                   <p className="text-sm text-[var(--text-muted)]">
-                    {new Date(voucher.validFrom).toLocaleDateString(undefined, { dateStyle: 'medium' })} -{' '}
-                    {new Date(voucher.validTo).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+                    {formatDisplayDate(voucher.validFrom)} – {formatDisplayDate(voucher.validTo)}
                   </p>
                   <div className="flex gap-2">
                     <WarmButton asChild variant="outline" size="sm" className="flex-1">
                       <Link href={`/merchant/${merchantSlug}/vouchers/${voucher.id}`}>Edit</Link>
                     </WarmButton>
-                    <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                      <Link href={`/v/${voucher.id}`}>View</Link>
-                    </WarmButton>
+                    {voucher.status === 'published' ? (
+                      <WarmButton asChild variant="outline" size="sm" className="flex-1">
+                        <Link href={`/v/${voucher.id}`}>View</Link>
+                      </WarmButton>
+                    ) : (
+                      <WarmButton
+                        variant="outline"
+                        size="sm"
+                        className="flex-1"
+                        disabled
+                        title="The public page is available once the voucher is published."
+                      >
+                        View
+                      </WarmButton>
+                    )}
                   </div>
                 </div>
               </WarmCard>

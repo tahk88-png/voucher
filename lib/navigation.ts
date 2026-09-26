@@ -70,6 +70,32 @@ export async function getNavigationLinks({
   }
 }
 
+/**
+ * Links in the site footer. Static on purpose: the footer renders on every
+ * page (root layout) and must not depend on the database.
+ */
+export const PUBLIC_FOOTER_LINKS: NavigationLinkItem[] = [
+  { id: "footer-campaigns", label: "Campaigns", href: "/campaigns" },
+  { id: "footer-faq", label: "FAQ", href: "/faq" },
+  { id: "footer-contact", label: "Contact", href: "/contact" },
+  { id: "footer-privacy", label: "Privacy", href: "/privacy" },
+  { id: "footer-terms", label: "Terms", href: "/terms" },
+]
+
+// Internal platform terms that older seeded navigation rows still carry.
+const PUBLIC_LABELS: Record<string, string> = {
+  hub: "Explore",
+  tenants: "Merchants",
+}
+
+/** Replaces internal jargon in link labels with visitor-facing words. */
+export function toPublicNavLinks(links: NavigationLinkItem[]): NavigationLinkItem[] {
+  return links.map((link) => ({
+    ...link,
+    label: PUBLIC_LABELS[link.label.trim().toLowerCase()] ?? link.label,
+  }))
+}
+
 export function getFallbackNavigation(scope: NavigationScope): {
   header: NavigationLinkItem[]
   footer: NavigationLinkItem[]
@@ -77,13 +103,12 @@ export function getFallbackNavigation(scope: NavigationScope): {
   if (scope === "hub") {
     return {
       header: [
-        { id: "hub-home", label: "Hub", href: "/hub" },
         { id: "hub-campaigns", label: "Campaigns", href: "/campaigns" },
+        { id: "hub-home", label: "Merchants", href: "/hub" },
+        { id: "hub-search", label: "Search", href: "/search" },
+        { id: "hub-faq", label: "FAQ", href: "/faq" },
       ],
-      footer: [
-        { id: "hub-privacy", label: "Privacy", href: "/privacy" },
-        { id: "hub-terms", label: "Terms", href: "/terms" },
-      ],
+      footer: PUBLIC_FOOTER_LINKS,
     }
   }
 

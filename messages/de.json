@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Abo-Boxen",
     "pricing": "Preisregeln",
     "webhooks": "Webhooks",
-    "apiKeys": "API-Schlüssel"
+    "apiKeys": "API-Schlüssel",
+    "marketplace": "Marktplatz",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "expandSidebar": "Seitenleiste ausklappen",
+    "collapseSidebar": "Seitenleiste einklappen",
+    "sectionShop": "Shoppen",
+    "sectionRewards": "Prämien",
+    "sectionAccount": "Konto",
+    "mainNavigation": "Hauptnavigation",
+    "quickNavigation": "Schnellnavigation",
+    "logoutFailed": "Abmelden fehlgeschlagen. Bitte versuchen Sie es erneut."
   },
   "voucher": {
     "title": "Gutschein",
@@ -184,7 +195,11 @@
     "creditApplied": "Angewandtes Guthaben",
     "finalTotal": "Gesamtsumme",
     "pageDescription": "Verfolgen Sie Ihr verfügbares und gesperrtes Guthaben.",
-    "noMerchantWallets": "Noch keine Händler-Wallets."
+    "noMerchantWallets": "Noch keine Händler-Wallets.",
+    "noCreditYet": "Noch kein Guthaben",
+    "noCreditYetBody": "Sie erhalten Guthaben, wenn ein Freund einen von Ihnen geteilten Gutschein einlöst. Es erscheint hier, getrennt nach Händler.",
+    "shareToEarn": "Gutschein teilen",
+    "findVoucherToShare": "Gutschein zum Teilen finden"
   },
   "redemption": {
     "title": "Einlösungen",
@@ -244,7 +259,12 @@
     "merchantLabel": "Händler",
     "voucherLabel": "Gutschein",
     "linkField": "Link",
-    "codeField": "Code"
+    "codeField": "Code",
+    "linkCopied": "Link kopiert",
+    "howItWorksTitle": "So funktionieren Empfehlungen",
+    "howItWorksBody": "Öffnen Sie einen Gutschein und tippen Sie auf „Teilen“. Sie erhalten einen persönlichen Link für diesen Gutschein. Löst ein Freund ihn ein, erhalten Sie Guthaben vom Händler.",
+    "findVoucher": "Gutschein zum Teilen finden",
+    "linkForVoucher": "Empfehlungslink für {voucher}"
   },
   "analytics": {
     "title": "Analysen",
@@ -516,7 +536,9 @@
     "viewVouchers": "Gutscheine anzeigen",
     "redeemed": "Eingelöst",
     "friendLabel": "Freund",
-    "voucherLabel": "Gutschein"
+    "voucherLabel": "Gutschein",
+    "offersLinkTitle": "Link zu aktuellen Angeboten",
+    "offersLinkDescription": "Schicken Sie Freunde zu allen aktuellen Angeboten auf GiftHub. Mit diesem Link verdienen Sie kein Guthaben – dafür teilen Sie einen bestimmten Gutschein von seiner Seite aus."
   },
   "billing": {
     "upgradeRequired": "Upgrade erforderlich",
@@ -618,14 +640,34 @@
     "inApp": "In-App",
     "pushBeta": "Push (Beta)",
     "saving": "Wird gespeichert...",
-    "savePreferences": "Einstellungen speichern"
+    "savePreferences": "Einstellungen speichern",
+    "noPreferencesTitle": "Noch nichts einzurichten",
+    "noPreferencesBody": "Benachrichtigungseinstellungen werden pro Händler verwaltet. Sie haben noch keine Händler mit Benachrichtigungseinstellungen.",
+    "saved": "Einstellungen gespeichert",
+    "saveFailed": "Ihre Einstellungen konnten nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+    "markAllReadFailed": "Benachrichtigungen konnten nicht als gelesen markiert werden. Bitte versuchen Sie es erneut.",
+    "emptyHint": "Neuigkeiten zu Ihren Gutscheinen und Angeboten erscheinen hier.",
+    "browseOffers": "Angebote ansehen"
   },
   "settingsPage": {
     "description": "Verwalten Sie Ihre Kontoeinstellungen.",
     "joined": "Beigetreten",
     "recently": "kürzlich",
     "accountAccessTitle": "Kontozugang",
-    "accountAccessDescription": "Sichern Sie Ihr Konto und verwalten Sie den Zugang."
+    "accountAccessDescription": "Sichern Sie Ihr Konto und verwalten Sie den Zugang.",
+    "pushDescription": "Erhalten Sie Benachrichtigungen auf diesem Gerät, auch wenn GiftHub nicht geöffnet ist.",
+    "changePasswordTitle": "Passwort ändern",
+    "changePasswordDescription": "Aktualisieren Sie das Passwort Ihres Kontos.",
+    "setPasswordTitle": "Passwort festlegen",
+    "setPasswordDescription": "Legen Sie ein Passwort fest, um sich mit E-Mail und Passwort anzumelden.",
+    "twoFactorTitle": "Zwei-Faktor-Authentifizierung",
+    "twoFactorDescription": "Zusätzliche Sicherheit mit einer Authenticator-App oder einem Passkey.",
+    "twoFactorManage": "Sicherheit verwalten",
+    "sessionsTitle": "Aktive Sitzungen",
+    "sessionsDescription": "Sehen Sie, wo Ihr Konto angemeldet ist.",
+    "sessionsView": "Sitzungen ansehen",
+    "deleteTitle": "Konto löschen",
+    "deleteDescription": "Ihr Konto dauerhaft löschen und Ihre Daten anonymisieren. Dies kann nicht rückgängig gemacht werden."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Kontoinformationen",
     "emailPreferences": "E-Mail-Einstellungen",
     "appSettings": "App-Einstellungen"
+  },
+  "dashboard": {
+    "roleShopper": "Käufer",
+    "roleAdmin": "Admin",
+    "roleStaff": "Mitarbeiter",
+    "rolePlatformAdmin": "Plattform-Admin",
+    "availableCredit": "Verfügbares Guthaben",
+    "pendingCredit": "{amount} ausstehend",
+    "creditExplainer": "Guthaben erhalten Sie, wenn Freunde von Ihnen geteilte Gutscheine einlösen. Sie können es beim ausgebenden Händler verwenden.",
+    "viewCreditDetails": "Guthaben-Details ansehen",
+    "successfulReferrals": "Erfolgreiche Empfehlungen",
+    "checkInPoints": "Check-in-Punkte",
+    "shareTitle": "Gutschein teilen, Guthaben verdienen",
+    "shareDescription": "Öffnen Sie einen Gutschein und tippen Sie auf „Teilen“, um Ihren persönlichen Link zu erhalten. Löst ein Freund ihn ein, erhalten Sie Guthaben.",
+    "openShareCenter": "Teilen-Center öffnen",
+    "sharedSummary": "Geteilte Gutscheine: {count} · Eingelöst: {redeemed}",
+    "achievementsTitle": "Erfolge",
+    "badgesEarned": "Abzeichen erhalten: {earned} von {total}",
+    "viewAchievements": "Erfolge ansehen",
+    "availableOffers": "Verfügbare Angebote",
+    "browseAll": "Alle ansehen",
+    "noActiveOffers": "Derzeit sind keine Angebote aktiv. Schauen Sie bald wieder vorbei.",
+    "validUntil": "Gültig bis {date}",
+    "recentActivity": "Letzte Aktivitäten",
+    "noRecentActivity": "Noch keine Aktivitäten.",
+    "creditFrom": "Guthaben von {merchant}",
+    "referralAt": "Empfehlung · {merchant}",
+    "creditStatus": {
+      "locked": "ausstehend",
+      "available": "verfügbar",
+      "used": "verwendet",
+      "expired": "abgelaufen",
+      "reversed": "storniert"
+    },
+    "referralStatus": {
+      "created": "Link erstellt",
+      "opened": "Geöffnet",
+      "redeemed": "Eingelöst",
+      "expired": "Abgelaufen",
+      "blocked": "Gesperrt"
+    },
+    "myMerchants": "Meine Händler",
+    "merchantDashboard": "Händler-Dashboard",
+    "sellTitle": "Auf GiftHub verkaufen",
+    "sellDescription": "Möchten Sie Ihren Kunden Gutscheine anbieten? Kontaktieren Sie uns, und wir helfen Ihnen beim Einrichten eines Händlerkontos.",
+    "contactUs": "Kontakt aufnehmen",
+    "exploreVouchers": "Gutscheine entdecken"
+  },
+  "wishlist": {
+    "title": "Meine Wunschliste",
+    "emptyTitle": "Ihre Wunschliste ist leer",
+    "emptyBody": "Speichern Sie Gutscheine, Händler und Kampagnen, die Ihnen gefallen, um sie hier später wiederzufinden.",
+    "browseOffers": "Angebote ansehen"
+  },
+  "push": {
+    "enable": "Push-Benachrichtigungen aktivieren",
+    "enabled": "Push-Benachrichtigungen sind aktiviert",
+    "enabledToast": "Push-Benachrichtigungen aktiviert",
+    "disable": "Deaktivieren",
+    "disabledToast": "Push-Benachrichtigungen deaktiviert",
+    "enableFailed": "Push-Benachrichtigungen konnten nicht aktiviert werden. Bitte versuchen Sie es erneut.",
+    "disableFailed": "Push-Benachrichtigungen konnten nicht deaktiviert werden. Bitte versuchen Sie es erneut.",
+    "unsupported": "Dieser Browser unterstützt keine Push-Benachrichtigungen.",
+    "blocked": "Benachrichtigungen sind blockiert. Erlauben Sie sie in den Browsereinstellungen, um sie zu aktivieren."
+  },
+  "sessions": {
+    "title": "Aktive Sitzungen",
+    "description": "Sehen Sie, wo Ihr Konto angemeldet ist.",
+    "backToSettings": "Zurück zu den Einstellungen",
+    "deviceOn": "{browser} unter {os}",
+    "unknownDevice": "Unbekanntes Gerät",
+    "thisDevice": "Dieses Gerät",
+    "signedInHere": "Sie sind hier gerade angemeldet.",
+    "otherDevicesTitle": "Andere Geräte",
+    "otherDevicesNone": "Andere Geräte, auf denen Sie eventuell angemeldet sind, können wir nicht auflisten. Wenn Ihnen etwas ungewöhnlich vorkommt, ändern Sie Ihr Passwort und aktivieren Sie die Zwei-Faktor-Authentifizierung.",
+    "securitySettings": "Sicherheitseinstellungen",
+    "lastActive": "Zuletzt aktiv {time}",
+    "logout": "Abmelden",
+    "logoutAll": "Überall sonst abmelden",
+    "logoutAllBody": "Alle Sitzungen auf anderen Geräten beenden.",
+    "loadFailed": "Ihre Sitzungen konnten nicht geladen werden.",
+    "revokeFailed": "Die Sitzung konnte nicht beendet werden. Bitte versuchen Sie es erneut.",
+    "revoked": "Sitzung beendet.",
+    "revokedAll": "Sitzungen auf anderen Geräten beendet."
+  },
+  "achievements": {
+    "title": "Erfolge",
+    "checkIn": "Heute einchecken",
+    "checkingIn": "Check-in läuft…",
+    "checkedInToday": "Heute eingecheckt",
+    "checkInFailed": "Check-in fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "checkInSaved": "Check-in gespeichert",
+    "newBadge": "Neues Abzeichen: {name}",
+    "checkInPoints": "Check-in-Punkte",
+    "level": "Stufe",
+    "levelValue": "Stufe {level}",
+    "levelProgress": "Fortschritt zur nächsten Stufe",
+    "badgesLabel": "Abzeichen",
+    "noBadgesYet": "Noch keine Abzeichen erhalten.",
+    "earnedOn": "Erhalten am {date}",
+    "locked": "Noch nicht erhalten",
+    "howToEarn": "So sammeln Sie Punkte",
+    "earnRuleCheckIn": "Einmal täglich einchecken",
+    "pointsShort": "+{points} Pkt.",
+    "pointsExplainer": "Punkte und Stufen zeigen, wie aktiv Sie sind. Sie können nicht gegen Geld oder Gutscheine eingetauscht werden.",
+    "currentStreak": "Aktuelle Serie (Tage)",
+    "longestStreak": "Längste Serie (Tage)",
+    "milestone": "Serien-Meilenstein erreicht!",
+    "badges": {
+      "first_purchase": {
+        "name": "Erster Kauf",
+        "description": "Ihren ersten Gutschein gekauft"
+      },
+      "first_redemption": {
+        "name": "Erste Einlösung",
+        "description": "Ihren ersten Gutschein eingelöst"
+      },
+      "5_referrals": {
+        "name": "Netzwerker",
+        "description": "5 Gutscheine mit Freunden geteilt"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "10 Gutscheine mit Freunden geteilt"
+      },
+      "streak_7": {
+        "name": "Wochenheld",
+        "description": "7 Tage in Folge eingecheckt"
+      },
+      "streak_30": {
+        "name": "Monatsmeister",
+        "description": "30 Tage in Folge eingecheckt"
+      },
+      "review_writer": {
+        "name": "Rezensent",
+        "description": "Ihre erste Bewertung veröffentlicht"
+      },
+      "big_spender": {
+        "name": "Großeinkäufer",
+        "description": "Insgesamt über 10.000 für Gutscheine ausgegeben"
+      },
+      "early_adopter": {
+        "name": "Early Adopter",
+        "description": "Vor 2028 bei GiftHub registriert"
+      },
+      "social_sharer": {
+        "name": "Social Sharer",
+        "description": "Einen Gutschein in sozialen Medien geteilt"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Treueprogramm",
+    "notActiveTitle": "Treuestufen sind noch nicht verfügbar",
+    "notActiveBody": "Käufe bringen noch keine Treuepunkte, und an der Kasse werden keine Stufenrabatte oder Vorteile angewendet. Daher gibt es hier keine Stufen anzuzeigen.",
+    "earnTodayTitle": "Was Sie heute schon verdienen können",
+    "earnCreditTitle": "Empfehlungsguthaben",
+    "earnCreditBody": "Teilen Sie einen Gutschein. Löst ein Freund ihn ein, erhalten Sie Guthaben für diesen Händler.",
+    "earnCreditLink": "Ihr Guthaben ansehen",
+    "earnPointsTitle": "Check-in-Punkte",
+    "earnPointsBody": "Checken Sie täglich ein, um eine Serie aufzubauen, Stufen aufzusteigen und Abzeichen freizuschalten.",
+    "earnPointsLink": "Erfolge ansehen",
+    "historyTitle": "Punkteverlauf",
+    "pointsBalance": "Stand: {points} Punkte"
+  },
+  "welcome": {
+    "greeting": "Hallo {name}!",
+    "progress": "Fortschritt der Einführung",
+    "setUpSecurity": "2FA oder Passkey einrichten",
+    "skip": "Überspringen",
+    "next": "Weiter",
+    "getStarted": "Los geht's",
+    "steps": {
+      "welcome": {
+        "title": "Willkommen bei GiftHub!",
+        "subtitle": "Ein kurzer Überblick über Ihre Möglichkeiten."
+      },
+      "discover": {
+        "title": "Angebote entdecken",
+        "subtitle": "Stöbern Sie in Gutscheinen, Geschenkkarten und Events von Händlern in Ihrer Nähe.",
+        "features": {
+          "vouchers": "Digitale Gutscheine",
+          "giftCards": "Geschenkkarten für Freunde und Familie",
+          "nearby": "Angebote in Ihrer Nähe"
+        }
+      },
+      "wallet": {
+        "title": "Alle Gutscheine an einem Ort",
+        "subtitle": "Alles, was Sie kaufen, wird in Ihrem Konto gespeichert.",
+        "features": {
+          "qr": "QR-Codes zum schnellen Einlösen im Geschäft",
+          "expiry": "E-Mail-Erinnerungen, bevor ein Gutschein abläuft"
+        }
+      },
+      "rewards": {
+        "title": "Prämien verdienen",
+        "subtitle": "Teilen Sie Gutscheine mit Freunden und erhalten Sie Guthaben, wenn sie diese einlösen.",
+        "features": {
+          "referralCredit": "Händlerguthaben für erfolgreiche Empfehlungen",
+          "checkIns": "Tägliche Check-ins und Serien",
+          "badges": "Abzeichen zum Freischalten"
+        }
+      },
+      "notifications": {
+        "title": "Auf dem Laufenden bleiben",
+        "subtitle": "Aktivieren Sie Benachrichtigungen auf diesem Gerät."
+      },
+      "security": {
+        "title": "Konto schützen",
+        "subtitle": "Fügen Sie einen Passkey oder die Zwei-Faktor-Authentifizierung hinzu."
+      }
+    }
   }
 }

@@ -3,12 +3,14 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { Heart, Bell, BellOff, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
 export default async function WishlistPage() {
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
   }
+  const t = await getTranslations('wishlist');
 
   const items = await prisma.wishlistItem.findMany({
     where: { userId: session.user.id },
@@ -65,7 +67,7 @@ export default async function WishlistPage() {
       <div className="flex items-center gap-3 mb-8">
         <Heart size={28} style={{ color: 'var(--primary)' }} />
         <h1 className="text-2xl font-bold" style={{ color: 'var(--text)' }}>
-          My Wishlist
+          {t('title')}
         </h1>
         <span
           className="text-sm px-2 py-0.5 rounded-full"
@@ -86,11 +88,17 @@ export default async function WishlistPage() {
             style={{ color: 'var(--muted)' }}
           />
           <p className="text-lg font-medium" style={{ color: 'var(--text)' }}>
-            Your wishlist is empty
+            {t('emptyTitle')}
           </p>
           <p className="mt-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
-            Save vouchers, merchants, and campaigns you like.
+            {t('emptyBody')}
           </p>
+          <Link
+            href="/campaigns"
+            className="inline-block mt-4 text-sm font-medium text-[var(--primary)] hover:underline"
+          >
+            {t('browseOffers')}
+          </Link>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

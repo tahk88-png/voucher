@@ -20,10 +20,10 @@ interface FunnelChartProps {
 }
 
 export function FunnelChart({ stages }: FunnelChartProps) {
-  if (!stages || stages.length === 0) {
+  if (!stages || stages.length === 0 || stages.every((s) => !(s.count > 0))) {
     return (
       <div className="flex items-center justify-center h-48 text-[var(--text-muted)]">
-        No funnel data available
+        No activity yet for this period
       </div>
     );
   }
@@ -54,7 +54,7 @@ export function FunnelChart({ stages }: FunnelChartProps) {
                   }}
                 >
                   <span className="text-white text-sm font-bold whitespace-nowrap">
-                    {stage.count.toLocaleString()}
+                    {stage.count.toLocaleString('en-GB')}
                   </span>
                   {widthPercent > 25 && (
                     <span className="text-white/80 text-xs whitespace-nowrap">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo/page-metadata';
+import HubShell from '@/components/layout/hub-shell';
 
 // FAQ is a client component (interactive accordions), so SEO metadata lives
 // here in a co-located server layout. Indexable: it answers buyer-intent
@@ -12,5 +13,5 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function FaqLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <HubShell>{children}</HubShell>;
 }

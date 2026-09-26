@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
-import { requireMerchantCapability } from '@/lib/access-control';
+import { requireMerchantCapability, requireMerchantProfileAccessById } from '@/lib/access-control';
 import { requireCampaignActivationAccess } from '@/lib/billing';
 import { dispatchMerchantAnnouncement } from '@/lib/notifications';
 import { queueWebhook } from '@/lib/webhooks';
@@ -69,24 +67,36 @@ export async function PUT(
 ) {
   return withErrorHandler(async () => {
     const { id } = await params;
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
 
     const campaign = await prisma.campaign.findUnique({
       where: { id },
       include: { merchant: true },
     });
 
-    if (!campaign) {
+    if (!campaign || campaign.deletedAt) {
       return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
     }
 
-    await requireMerchantRole(session.user.id, campaign.merchantId, 'merchant_admin');
+    // Throws AccessControlError (401 not signed in / 403 not an admin member
+    // of THIS campaign's merchant), which withErrorHandler maps to a JSON
+    // response. requireMerchantRole threw a plain Error and surfaced as 500.
+    const { profile } = await requireMerchantProfileAccessById(campaign.merchantId, 'merchant_admin');
+    const userId = profile.userId;
 
     const body = await req.json();
     const data = updateCampaignSchema.parse(body);
+
+    const nextStart = data.startDate !== undefined ? new Date(data.startDate) : campaign.startDate;
+    const nextEnd = data.endDate !== undefined ? new Date(data.endDate) : campaign.endDate;
+    if (nextEnd.getTime() <= nextStart.getTime()) {
+      return NextResponse.json({ error: 'The end date must be after the start date.' }, { status: 400 });
+    }
+    if (data.status === 'active' && campaign.status !== 'active' && nextEnd.getTime() <= Date.now()) {
+      return NextResponse.json(
+        { error: 'This campaign has already ended. Move the end date into the future before publishing it.' },
+        { status: 400 }
+      );
+    }
 
     const updateData: any = {};
     if (data.name !== undefined) updateData.name = data.name;
@@ -177,11 +187,17 @@ export async function PUT(
     await prisma.auditLog.create({
       data: {
         merchantId: campaign.merchantId,
-        actorUserId: session.user.id,
+        actorUserId: userId,
         action: 'campaign.updated',
+        resourceType: 'campaign',
+        resourceId: campaign.id,
         payloadJson: {
           campaignId: campaign.id,
+          name: updated.name,
           changes: Object.keys(updateData),
+          ...(data.status !== undefined && data.status !== previousStatus
+            ? { fromStatus: previousStatus, toStatus: data.status }
+            : {}),
         },
       },
     });

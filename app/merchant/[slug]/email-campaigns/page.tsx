@@ -151,6 +151,8 @@ export default function EmailCampaignsPage() {
   const [scheduledAt, setScheduledAt] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  // null = unknown (older API); false = no email provider on the platform.
+  const [emailConfigured, setEmailConfigured] = useState<boolean | null>(null);
   const previewRef = useRef<HTMLIFrameElement>(null);
 
   const fetchCampaigns = useCallback(async () => {
@@ -160,6 +162,7 @@ export default function EmailCampaignsPage() {
       if (res.ok) {
         const data = await res.json();
         setCampaigns(data.campaigns || []);
+        setEmailConfigured(typeof data.emailConfigured === 'boolean' ? data.emailConfigured : null);
       }
     } finally {
       setLoading(false);
@@ -230,12 +233,26 @@ export default function EmailCampaignsPage() {
     showConfirm('Are you sure you want to send this campaign now?', async () => {
       try {
         const res = await fetch(`/api/merchant/${slug}/email-campaigns/${campaignId}/send`, { method: 'POST' });
+        const data = await res.json().catch(() => ({}));
         if (!res.ok) {
-          const data = await res.json();
-          throw new Error(data.error || 'Failed to send');
+          if (data?.code === 'EMAIL_PROVIDER_NOT_CONFIGURED') setEmailConfigured(false);
+          throw new Error(data.error || `Failed to send (error ${res.status}).`);
         }
-        const data = await res.json();
-        toast({ title: 'Campaign sent', description: `Delivered to ${data.recipientCount} recipients.` });
+        const sent = Number(data.recipientCount) || 0;
+        const failed = Number(data.failedCount) || 0;
+        if (failed > 0) {
+          toast({
+            title: 'Campaign partly sent',
+            description: `Sent to ${sent} of ${sent + failed} recipients. ${failed} ${failed === 1 ? 'email' : 'emails'} could not be sent.`,
+            variant: 'warning',
+          });
+        } else {
+          toast({
+            title: 'Campaign sent',
+            description: `Sent to ${sent} ${sent === 1 ? 'recipient' : 'recipients'}.`,
+            variant: 'success',
+          });
+        }
         fetchCampaigns();
       } catch (err: any) {
         toast({ title: 'Send failed', description: err.message, variant: 'destructive' });
@@ -258,8 +275,8 @@ export default function EmailCampaignsPage() {
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-6xl mx-auto">
-      <div className="flex items-center justify-between">
+    <div className="p-4 sm:p-6 space-y-6 max-w-6xl mx-auto">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <Mail className="h-6 w-6 text-[var(--primary)]" />
           <h1 className="text-2xl font-bold text-[var(--text)]">Email Campaigns</h1>
@@ -268,6 +285,12 @@ export default function EmailCampaignsPage() {
           <Plus className="h-4 w-4 mr-1" /> New Campaign
         </WarmButton>
       </div>
+
+      {emailConfigured === false && (
+        <div role="status" className="rounded-[var(--r-sm)] border border-l-4 border-[var(--border)] border-l-[color:var(--warning)] bg-[var(--surface)] p-4 text-sm text-[var(--text)]">
+          Email sending isn&apos;t set up on this platform yet. You can create and preview campaigns, but they can&apos;t be sent until an email provider is connected.
+        </div>
+      )}
 
       {showCreate && (
         <WarmCard padding="lg">
@@ -428,18 +451,23 @@ export default function EmailCampaignsPage() {
                     </td>
                     <td className="px-4 py-3 text-[var(--text-muted)]">{c.recipientCount}</td>
                     <td className="px-4 py-3 text-[var(--text-muted)]">{c.openCount}</td>
-                    <td className="px-4 py-3 text-[var(--text-muted)] text-xs">{new Date(c.createdAt).toLocaleDateString()}</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)] text-xs">{new Date(c.createdAt).toLocaleDateString('en-GB')}</td>
                     <td className="px-4 py-3">
                       <div className="flex gap-1">
                         {c.status !== 'sent' && (
-                          <WarmButton size="sm" onClick={() => handleSend(c.id)}>
+                          <WarmButton
+                            size="sm"
+                            onClick={() => handleSend(c.id)}
+                            disabled={emailConfigured === false}
+                            title={emailConfigured === false ? "Email sending isn't set up on this platform yet" : undefined}
+                          >
                             <Send className="h-3 w-3 mr-1" /> Send
                           </WarmButton>
                         )}
                         {c.status === 'scheduled' && (
                           <span className="flex items-center text-xs text-blue-600">
                             <Clock className="h-3 w-3 mr-1" />
-                            {c.scheduledAt ? new Date(c.scheduledAt).toLocaleString() : ''}
+                            {c.scheduledAt ? new Date(c.scheduledAt).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }) : ''}
                           </span>
                         )}
                         <WarmButton size="sm" variant="outline" onClick={() => handleDelete(c.id)}>

@@ -1,7 +1,6 @@
 import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
+import { AccessControlError, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import EditVoucherForm from './edit-voucher-form';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { getTranslations } from 'next-intl/server';
@@ -12,20 +11,15 @@ export default async function EditVoucherPage({
   params: Promise<{ slug: string; id: string }>;
 }) {
   const { slug, id: voucherId } = await params;
-  const session = await auth();
-  if (!session?.user?.id) {
-    redirect('/login');
+  let merchant: { id: string };
+  try {
+    ({ merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin'));
+  } catch (error) {
+    if (error instanceof AccessControlError && error.status === 404) notFound();
+    if (error instanceof AccessControlError && error.status === 401) redirect('/login');
+    // Staff can't edit vouchers; send them back to the list instead of a 500.
+    redirect(`/merchant/${slug}/vouchers`);
   }
-
-  const merchant = await prisma.merchant.findUnique({
-    where: { slug },
-  });
-
-  if (!merchant) {
-    notFound();
-  }
-
-  await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
 
   const t = await getTranslations('nav');
   const tVoucher = await getTranslations('voucher');

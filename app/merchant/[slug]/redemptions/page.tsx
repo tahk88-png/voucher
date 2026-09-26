@@ -164,7 +164,7 @@ export default async function RedemptionsPage({ params }: { params: Promise<{ sl
                     <p>Method: {redemption.method}</p>
                     <p>Order: {redemption.orderReference || 'N/A'}</p>
                     {redemption.location && <p>Location: {redemption.location}</p>}
-                    <p>Date: {new Date(redemption.createdAt).toLocaleString()}</p>
+                    <p>Date: {new Date(redemption.createdAt).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}</p>
                   </div>
                   {!redemption.confirmedAt && (
                     <div className="mt-4">

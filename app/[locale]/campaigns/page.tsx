@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { Search, Sparkles, ShoppingBag, Ticket, Gift } from "lucide-react"
-import { campaignCategories, fallbackCampaignCategory, getCampaignCategoryId } from "@/lib/campaign-categories"
+import { allCampaignCategories, getCampaignCategoryId, getCampaignCategoryLabel } from "@/lib/campaign-categories"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link, routing } from "@/routing"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_NAME, getLocalePath } from "@/lib/seo"
@@ -175,22 +175,9 @@ export default async function CampaignsPage({
     }
   }
 
-  const categoryLabels: Record<string, string> = {
-    cafe: "Cafe and bakery",
-    beauty: "Beauty and wellness",
-    fitness: "Fitness and sport",
-    events: "Events and tickets",
-    workshops: "Workshops",
-    family: "Family and kids",
-    travel: "Travel and stay",
-    outdoor: "Outdoor and hikes",
-    other: "Other",
-  }
-
   const categoryOptions = [
     { id: "all", label: "All" },
-    ...campaignCategories.map((cat) => ({ id: cat.id, label: categoryLabels[cat.id] || cat.id })),
-    { id: fallbackCampaignCategory.id, label: categoryLabels[fallbackCampaignCategory.id] || "Other" },
+    ...allCampaignCategories.map((cat) => ({ id: cat.id, label: cat.label })),
   ]
 
   const filteredCampaigns = campaigns.filter((campaign) => {
@@ -248,13 +235,19 @@ export default async function CampaignsPage({
             <p className="text-[#FFF9ED]/80 mb-8 text-lg">
               Browse vouchers, gifts, and experiences curated from top merchants across your market.
             </p>
-            <form className="max-w-2xl mx-auto bg-white rounded-2xl p-2 flex items-center shadow-xl">
-              <Search className="h-5 w-5 text-[#8B7355] ml-4 flex-shrink-0" />
+            <form role="search" className="max-w-2xl mx-auto bg-white rounded-2xl p-2 flex items-center shadow-xl">
+              {selectedCategory !== "all" && <input type="hidden" name="category" value={selectedCategory} />}
+              <label htmlFor="campaign-search" className="sr-only">
+                Search campaigns
+              </label>
+              <Search className="h-5 w-5 text-[#8B7355] ml-4 flex-shrink-0" aria-hidden="true" />
               <Input
+                id="campaign-search"
+                type="search"
                 name="q"
                 defaultValue={searchQuery}
                 placeholder="Search campaigns, merchants, or services..."
-                className="border-0 focus-visible:ring-0 text-[#2D2721] placeholder:text-[#8B7355]/60 h-11 text-base"
+                className="border-0 focus-visible:ring-0 text-[#2D2721] placeholder:text-[#6B5744] h-11 text-base"
               />
             </form>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm">
@@ -262,10 +255,12 @@ export default async function CampaignsPage({
                 <Ticket className="h-4 w-4 text-[#e0a487]" />
                 <span className="font-semibold">{campaignCount}</span> campaigns
               </div>
-              <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
-                <Gift className="h-4 w-4 text-[#e0a487]" />
-                <span className="font-semibold">{voucherCount}</span> vouchers
-              </div>
+              {voucherCount > 0 && (
+                <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
+                  <Gift className="h-4 w-4 text-[#e0a487]" />
+                  <span className="font-semibold">{voucherCount}</span> {voucherCount === 1 ? "voucher" : "vouchers"} on sale
+                </div>
+              )}
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
                 <ShoppingBag className="h-4 w-4 text-[#e0a487]" />
                 <span className="font-semibold">{merchantCount}</span> merchants
@@ -274,25 +269,35 @@ export default async function CampaignsPage({
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-6">
-          {categoryOptions.map((category) => {
-            const isActive = selectedCategory === category.id
-            return (
-              <Link
-                key={category.id}
-                href={`/campaigns?category=${category.id}${searchQuery ? `&q=${encodeURIComponent(searchQuery)}` : ""}`}
-                className={`flex items-center gap-2 rounded-full px-5 py-2.5 font-bold text-sm whitespace-nowrap transition-all ${
-                  isActive
-                    ? "bg-gradient-to-br from-[#cc785c] to-[#b5613f] text-white shadow-warm"
-                    : "bg-white text-[#6B5744] hover:bg-[#f6e1d7] border border-[rgba(139,115,85,0.15)]"
-                }`}
-              >
-                <Sparkles className="h-4 w-4" />
-                {category.label}
-              </Link>
-            )
-          })}
-        </div>
+        {/* One horizontally scrollable row on small screens (it used to wrap
+            into ~10 rows at 320px); wraps and centres from md up. */}
+        <nav aria-label="Categories" className="-mx-4 px-4 mb-6 overflow-x-auto md:overflow-visible">
+          <ul className="flex gap-3 w-max md:w-auto md:flex-wrap md:justify-center pb-1">
+            {categoryOptions.map((category) => {
+              const isActive = selectedCategory === category.id
+              const params = new URLSearchParams()
+              if (category.id !== "all") params.set("category", category.id)
+              if (searchQuery) params.set("q", searchQuery)
+              const qs = params.toString()
+              return (
+                <li key={category.id} className="shrink-0">
+                  <Link
+                    href={qs ? `/campaigns?${qs}` : "/campaigns"}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`flex items-center gap-2 rounded-full px-5 py-2.5 font-bold text-sm whitespace-nowrap transition-all ${
+                      isActive
+                        ? "gradient-brand text-white shadow-warm"
+                        : "bg-white text-[#6B5744] hover:bg-[#f6e1d7] border border-[rgba(139,115,85,0.15)]"
+                    }`}
+                  >
+                    <Sparkles className="h-4 w-4" aria-hidden="true" />
+                    {category.label}
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
 
         <div className="flex justify-center mb-10">
           <Suspense fallback={null}>
@@ -307,20 +312,23 @@ export default async function CampaignsPage({
                 campaign.discountRules
               )
               const brandColors = safeParseJson<Record<string, string>>(campaign.merchant.brandColorsJson)
-              const accent = brandColors?.primary || "#E17B5C"
+              const accent = brandColors?.primary || "#a4563b"
               const categoryId = getCampaignCategoryId({
                 name: campaign.name,
                 description: campaign.description,
               })
-              const categoryLabel =
-                categoryOptions.find((cat) => cat.id === categoryId)?.label || "Other"
+              const categoryLabel = getCampaignCategoryLabel(categoryId)
+              const isFree = !campaign.price || campaign.price <= 0
+              const priceLabel = isFree
+                ? "FREE"
+                : formatCurrency(campaign.price!, campaign.merchant.defaultCurrency)
 
               return (
                 <WarmCard
                   key={campaign.id}
                   hover
                   padding="none"
-                  className="overflow-hidden group cursor-pointer h-full flex flex-col bg-white/90 backdrop-blur"
+                  className="relative overflow-hidden group h-full flex flex-col bg-white/90 backdrop-blur focus-within:ring-2 focus-within:ring-[var(--ring)]"
                 >
                   <div className="relative h-48 overflow-hidden bg-[#FAF7F2] flex items-center justify-center">
                     {campaign.merchant.brandLogoUrl ? (
@@ -347,17 +355,24 @@ export default async function CampaignsPage({
 
                   <div className="p-5 flex flex-col flex-1">
                     <div className="mb-3">
-                      <p className="text-xs font-bold text-[#E17B5C] uppercase tracking-wider mb-1">
+                      <p className="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-1">
                         {campaign.merchant.name}
                       </p>
-                      <h3 className="text-lg font-bold text-[#2D2721] line-clamp-2 group-hover:text-[#E17B5C] transition-colors">
-                        {campaign.name}
+                      <h3 className="text-lg font-bold text-[#2D2721] line-clamp-2 group-hover:text-[var(--primary)] transition-colors">
+                        {/* The whole card is the link (stretched ::after); its
+                            accessible name is the campaign title. */}
+                        <Link
+                          href={`/campaigns/${campaign.id}`}
+                          className="focus:outline-none after:absolute after:inset-0 after:content-['']"
+                        >
+                          {campaign.name}
+                        </Link>
                       </h3>
                     </div>
 
-                    {discountRules && discountRules.type && discountRules.value !== undefined && (
+                    {!isFree && discountRules && discountRules.type && discountRules.value !== undefined && (
                       <div className="mt-1 mb-4 flex items-center gap-2 text-sm text-[#6B5744]">
-                        <Ticket className="h-4 w-4 text-[#E17B5C]" />
+                        <Ticket className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
                         <span className="font-semibold text-[#2D2721]">
                           {discountRules.type === "percentage"
                             ? formatPercentage(discountRules.value)
@@ -373,22 +388,24 @@ export default async function CampaignsPage({
                     <div className="mt-auto pt-4 border-t border-[rgba(139,115,85,0.15)]/50 flex items-center justify-between">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-xl font-bold text-[#2D2721]">
-                            {campaign.price && campaign.price > 0
-                              ? formatCurrency(campaign.price, campaign.merchant.defaultCurrency)
-                              : "FREE"}
-                          </span>
+                          <span className="text-xl font-bold text-[#2D2721]">{priceLabel}</span>
                         </div>
-                        <span className="text-xs font-bold text-[#9DB5A5]">
-                          {campaign._count.purchases} purchases
-                        </span>
+                        {campaign._count.vouchers === 0 ? (
+                          <span className="text-xs font-bold text-[#6B5744]">Not on sale yet</span>
+                        ) : campaign._count.purchases > 0 ? (
+                          <span className="text-xs font-bold text-[#3f7a4c]">
+                            {campaign._count.purchases} {campaign._count.purchases === 1 ? "purchase" : "purchases"}
+                          </span>
+                        ) : null}
                       </div>
 
-                      <WarmButton asChild size="sm" className="rounded-full w-10 h-10 p-0 flex items-center justify-center">
-                        <Link href={`/campaigns/${campaign.id}`}>
-                          <ShoppingBag className="w-4 h-4" />
-                        </Link>
-                      </WarmButton>
+                      {/* Decorative: the card itself is the link. */}
+                      <span
+                        aria-hidden="true"
+                        className="gradient-brand text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md"
+                      >
+                        <ShoppingBag className="w-4 h-4" />
+                      </span>
                     </div>
                   </div>
                 </WarmCard>

@@ -24,13 +24,17 @@ interface AnalyticsChartsProps {
   redemptionTrends: RedemptionTrend[]
   voucherPerformance: VoucherPerformance[]
   categoryBreakdown: CategoryData[]
+  /** ISO currency of the revenue series (the merchant's default currency). */
+  currency?: string
 }
 
 export function AnalyticsCharts({
   redemptionTrends,
   voucherPerformance,
   categoryBreakdown,
+  currency = "EUR",
 }: AnalyticsChartsProps) {
+  const topVouchers = voucherPerformance.filter((v) => v.redemptions > 0).slice(0, 5)
   return (
     <div className="space-y-6">
       {/* Redemption Trends */}
@@ -42,7 +46,7 @@ export function AnalyticsCharts({
           data={redemptionTrends}
           lines={[
             { dataKey: "count", name: "Redemptions", color: "#cc785c" },
-            { dataKey: "revenue", name: "Revenue ($)", color: "#5e7e92" },
+            { dataKey: "revenue", name: `Revenue (${currency})`, color: "#5e7e92" },
           ]}
           xAxisKey="date"
           height={350}
@@ -57,17 +61,23 @@ export function AnalyticsCharts({
           <h3 className="text-lg font-semibold text-[var(--text)] mb-4">
             Top Performing Vouchers
           </h3>
-          <BarChart
-            data={voucherPerformance.slice(0, 5)}
-            bars={[
-              { dataKey: "redemptions", name: "Redemptions", color: "#FFC857" },
-            ]}
-            xAxisKey="name"
-            height={300}
-            showGrid
-            showLegend={false}
-            layout="horizontal"
-          />
+          {topVouchers.length > 0 ? (
+            <BarChart
+              data={topVouchers}
+              bars={[
+                { dataKey: "redemptions", name: "Redemptions", color: "#FFC857" },
+              ]}
+              xAxisKey="name"
+              height={300}
+              showGrid
+              showLegend={false}
+              layout="horizontal"
+            />
+          ) : (
+            <div className="h-[300px] flex items-center justify-center text-center px-6 text-[var(--text-faint)]">
+              No voucher has been redeemed yet. Your best performers will appear here.
+            </div>
+          )}
         </WarmCard>
 
         {/* Category Breakdown */}

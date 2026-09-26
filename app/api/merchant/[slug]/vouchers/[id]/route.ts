@@ -8,12 +8,13 @@ import { dispatchMerchantAnnouncement } from '@/lib/notifications';
 import { CacheKeys, invalidatePattern } from '@/lib/cache';
 import { z } from 'zod';
 import { withErrorHandler } from '@/lib/error-handler';
+import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 
 const updateVoucherSchema = z.object({
   status: z.enum(['draft', 'published', 'paused', 'ended']).optional(),
   type: z.enum(['percentage', 'fixed_amount', 'credit_amount']).optional(),
   value: z.number().int().positive().optional(),
-  currency: z.string().optional(),
+  currency: z.string().length(3).transform((c) => c.toUpperCase()).optional(),
   validFrom: z.string().datetime().optional(),
   validTo: z.string().datetime().optional(),
   usageLimitTotal: z.number().int().positive().nullable().optional(),
@@ -31,20 +32,9 @@ export async function PUT(
 ) {
   return withErrorHandler(async () => {
     const { slug, id } = await params;
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const merchant = await prisma.merchant.findUnique({
-      where: { slug },
-    });
-
-    if (!merchant) {
-      return NextResponse.json({ error: 'Merchant not found' }, { status: 404 });
-    }
-
-    await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
+    // AccessControlError → 401/403/404 JSON (requireMerchantRole threw a plain Error → 500).
+    const { merchant: merchantAccess, profile } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin');
+    const merchant = { id: merchantAccess.id, name: merchantAccess.name };
 
     const voucher = await prisma.voucher.findUnique({
       where: { id },
@@ -57,6 +47,12 @@ export async function PUT(
 
     const body = await req.json();
     const data = updateVoucherSchema.parse(body);
+
+    const nextFrom = data.validFrom !== undefined ? new Date(data.validFrom) : voucher.validFrom;
+    const nextTo = data.validTo !== undefined ? new Date(data.validTo) : voucher.validTo;
+    if (nextTo.getTime() <= nextFrom.getTime()) {
+      return NextResponse.json({ error: 'The end date must be after the start date.' }, { status: 400 });
+    }
 
     // Prepare update data (Prisma.DbNull for clearing Json fields)
     const updateData: {
@@ -71,7 +67,7 @@ export async function PUT(
       weeklyDropEnabled?: boolean;
       weeklyDropJson?: string | typeof Prisma.DbNull;
       conditionsJson?: string | typeof Prisma.DbNull;
-      designJson?: string | typeof Prisma.DbNull;
+      designJson?: Prisma.InputJsonValue | typeof Prisma.DbNull;
       codePrefix?: string | null;
     } = {};
     if (data.status !== undefined) updateData.status = data.status;
@@ -90,7 +86,8 @@ export async function PUT(
       updateData.conditionsJson = data.conditionsJson ? JSON.stringify(data.conditionsJson) : Prisma.DbNull;
     }
     if (data.designJson !== undefined) {
-      updateData.designJson = data.designJson ? JSON.stringify(data.designJson) : Prisma.DbNull;
+      // Store as a JSON object so readers can use designJson.headline directly.
+      updateData.designJson = data.designJson ? (data.designJson as Prisma.InputJsonValue) : Prisma.DbNull;
     }
     if (data.codePrefix !== undefined) updateData.codePrefix = data.codePrefix;
 
@@ -115,8 +112,10 @@ export async function PUT(
     await prisma.auditLog.create({
       data: {
         merchantId: merchant.id,
-        actorUserId: session.user.id,
+        actorUserId: profile.userId,
         action: 'voucher.updated',
+        resourceType: 'voucher',
+        resourceId: id,
         payloadJson: JSON.stringify({ voucherId: id, changes: Object.keys(updateData) }),
       },
     });

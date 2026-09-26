@@ -45,7 +45,10 @@ export function FunnelChart({
     return () => clearInterval(timer)
   }, [data])
 
-  if (!data || data.length === 0) {
+  // All-zero data would divide by zero (NaN widths/percentages): show an empty state instead.
+  const hasData = !!data && data.length > 0 && data.some((d) => Number.isFinite(d.value) && d.value > 0)
+
+  if (!hasData) {
     return (
       <div
         className={cn(
@@ -54,12 +57,12 @@ export function FunnelChart({
         )}
         style={{ height }}
       >
-        <p className="text-sm text-[var(--text-muted)]">No data available</p>
+        <p className="text-sm text-[var(--text-muted)]">No activity yet for this period</p>
       </div>
     )
   }
 
-  const maxValue = data[0]?.value ?? 1
+  const maxValue = Math.max(...data.map((d) => (Number.isFinite(d.value) ? d.value : 0)), 1)
   const stageHeight = height / data.length
   const svgWidth = 600
   const padding = 40
@@ -123,7 +126,7 @@ export function FunnelChart({
                 className="fill-white/80 text-xs"
                 fontSize={11}
               >
-                {stage.value.toLocaleString()}
+                {stage.value.toLocaleString("en-GB")}
                 {showPercentage && index > 0 ? ` (${conversionPct}%)` : ""}
               </text>
             </g>

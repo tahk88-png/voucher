@@ -302,7 +302,7 @@ export default function ReviewsPage() {
                           {review.user.name || 'Anonymous'}
                         </p>
                         <p className="text-xs text-[var(--text-muted)]">
-                          {new Date(review.createdAt).toLocaleDateString()}
+                          {new Date(review.createdAt).toLocaleDateString('en-GB')}
                         </p>
                       </div>
                       <StarRating rating={review.rating} />
@@ -345,7 +345,7 @@ export default function ReviewsPage() {
                         <p className="text-sm text-[var(--text-muted)]">{review.merchantReply}</p>
                         {review.merchantReplyAt && (
                           <p className="text-xs text-[var(--text-muted)] mt-1">
-                            {new Date(review.merchantReplyAt).toLocaleDateString()}
+                            {new Date(review.merchantReplyAt).toLocaleDateString('en-GB')}
                           </p>
                         )}
                       </div>

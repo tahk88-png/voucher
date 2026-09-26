@@ -3,10 +3,12 @@ import { logger } from '@/lib/logger';
 import { notFound, redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getMessages } from 'next-intl/server';
 import MerchantShell from '@/components/navigation/merchant-shell';
 import { AccessControlError, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { setMerchantAccess } from '@/lib/merchant-context';
+import { normalizeCurrency } from '@/lib/money-input';
+import { MerchantSettingsProvider } from './_components/merchant-settings-context';
 
 export const metadata: Metadata = {
   robots: {
@@ -50,20 +52,20 @@ export default async function MerchantLayout({
   });
 
   const now = new Date();
-  const [activeUsers, campaigns, vouchers, redemptions] = await Promise.all([
-    prisma.merchantMember.count({ where: { merchantId: merchant.id } }),
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+  // Real merchant metrics. The bar used to show team members as "Active Users"
+  // and redemptions per team member as "Engagement", which meant nothing.
+  const [merchantSettings, campaigns, vouchers, redemptions30d] = await Promise.all([
+    prisma.merchant.findUnique({ where: { id: merchant.id }, select: { defaultCurrency: true } }),
     prisma.campaign.count({ where: { merchantId: merchant.id, status: 'active', endDate: { gte: now } } }),
     prisma.voucher.count({
       where: { merchantId: merchant.id, status: 'published', validFrom: { lte: now }, validTo: { gte: now } },
     }),
-    prisma.redemption.count({ where: { merchantId: merchant.id, confirmedAt: { not: null } } }),
+    prisma.redemption.count({
+      where: { merchantId: merchant.id, confirmedAt: { not: null, gte: thirtyDaysAgo } },
+    }),
   ]);
-
-  // The real ratio. It used to be clamped to 10-99% and showed 75% with no users,
-  // which put an invented number on every empty dashboard.
-  const engagement = activeUsers ? `${Math.round((redemptions / activeUsers) * 100)}%` : '—';
-  const tNav = await getTranslations('nav');
-  const tAnalytics = await getTranslations('analytics');
+  const defaultCurrency = normalizeCurrency(merchantSettings?.defaultCurrency);
 
   // Get messages for client components
   let messages;
@@ -84,13 +86,12 @@ export default async function MerchantLayout({
         userLabel={profile.email ?? profile.userId}
         tenantRole={effectiveRole}
         stats={[
-          { label: tAnalytics('activeUsers'), value: activeUsers.toString() },
-          { label: tNav('campaigns'), value: campaigns.toString() },
-          { label: tNav('vouchers'), value: vouchers.toString() },
-          { label: tAnalytics('engagement'), value: engagement },
+          { label: 'Active campaigns', value: campaigns.toString(), icon: 'campaigns' },
+          { label: 'Live vouchers', value: vouchers.toString(), icon: 'vouchers' },
+          { label: 'Redemptions (30 days)', value: redemptions30d.toString(), icon: 'redemptions' },
         ]}
       >
-        {children}
+        <MerchantSettingsProvider value={{ slug: p.slug, defaultCurrency }}>{children}</MerchantSettingsProvider>
       </MerchantShell>
     </NextIntlClientProvider>
   );

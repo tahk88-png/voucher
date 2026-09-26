@@ -4,6 +4,6 @@ export const metadata = pageMetadata({ title: 'Deals', description: 'Discover th
 import { redirect } from "next/navigation"
 
 export default function DealsAliasPage() {
-  redirect("/")
+  redirect("/campaigns")
 }
 

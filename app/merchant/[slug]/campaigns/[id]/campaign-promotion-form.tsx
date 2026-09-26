@@ -1,7 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { WarmButton } from '@/components/warm-button';
+import { showError, showSuccess } from '@/lib/toast-helpers';
+import { apiErrorMessage } from '@/lib/api-error-message';
+import { parsePaywallResponse } from '@/lib/paywall-utils';
+import { toDatetimeLocalValue } from '@/lib/money-input';
 
 type PromotionState = {
   promotedWeeklyEmail: boolean;
@@ -14,9 +19,15 @@ export default function CampaignPromotionForm({
   initial,
 }: {
   campaignId: string;
+  /** promotedUntil as an ISO string (or null). */
   initial: PromotionState;
 }) {
-  const [state, setState] = useState<PromotionState>(initial);
+  const router = useRouter();
+  // The input holds local wall-clock time; convert the stored ISO instant.
+  const [state, setState] = useState<PromotionState>({
+    ...initial,
+    promotedUntil: initial.promotedUntil ? toDatetimeLocalValue(new Date(initial.promotedUntil)) : null,
+  });
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
@@ -25,7 +36,7 @@ export default function CampaignPromotionForm({
       const promotedUntil = state.promotedUntil
         ? new Date(state.promotedUntil).toISOString()
         : null;
-      await fetch(`/api/campaigns/${campaignId}`, {
+      const res = await fetch(`/api/campaigns/${campaignId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -34,6 +45,24 @@ export default function CampaignPromotionForm({
           promotedUntil,
         }),
       });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 402) {
+          const paywall = parsePaywallResponse(body);
+          showError(
+            paywall?.message ||
+              'Promotion boosts are part of a higher plan. Upgrade in Settings & Billing to use them.',
+            'Upgrade needed',
+          );
+          return;
+        }
+        showError(apiErrorMessage(body, `Couldn't save promotion settings (error ${res.status}).`));
+        return;
+      }
+      showSuccess('Promotion settings saved.');
+      router.refresh();
+    } catch {
+      showError("Couldn't save promotion settings. Check your connection and try again.");
     } finally {
       setIsSaving(false);
     }

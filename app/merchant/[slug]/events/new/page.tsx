@@ -9,6 +9,10 @@ import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { useTranslations } from 'next-intl';
+import { apiErrorMessage } from '@/lib/api-error-message';
+import { parseMoneyToMinor, toDateInputValue } from '@/lib/money-input';
+import { CurrencySelect, exampleAmount } from '../../_components/currency-select';
+import { useMerchantSettings } from '../../_components/merchant-settings-context';
 
 export default function NewEventPage() {
   const params = useParams();
@@ -17,19 +21,33 @@ export default function NewEventPage() {
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations();
   const tNav = useTranslations('nav');
+  const { defaultCurrency } = useMerchantSettings();
+  const [currency, setCurrency] = useState(defaultCurrency);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const price = parseMoneyToMinor(String(formData.get('price') ?? ''), currency, 'Ticket price');
+    if (!price.ok) {
+      showError(price.error);
+      return;
+    }
+    setIsLoading(true);
     const eventDate = formData.get('eventDate') as string;
     const eventTime = formData.get('eventTime') as string;
     const eventEndDate = formData.get('eventEndDate') as string;
     const eventEndTime = formData.get('eventEndTime') as string;
 
-    const eventDateTime = eventDate && eventTime ? `${eventDate}T${eventTime}:00` : null;
-    const eventEndDateTime = eventEndDate && eventEndTime ? `${eventEndDate}T${eventEndTime}:00` : null;
+    // Local wall-clock time → ISO (UTC) so the server stores the instant the merchant meant.
+    const eventDateTime = eventDate && eventTime ? new Date(`${eventDate}T${eventTime}:00`).toISOString() : null;
+    const eventEndDateTime =
+      eventEndDate && eventEndTime ? new Date(`${eventEndDate}T${eventEndTime}:00`).toISOString() : null;
+    if (eventDateTime && eventEndDateTime && new Date(eventEndDateTime) <= new Date(eventDateTime)) {
+      showError('The end time must be after the start time.');
+      setIsLoading(false);
+      return;
+    }
 
     const data = {
       name: formData.get('name') as string,
@@ -40,8 +58,8 @@ export default function NewEventPage() {
       location: (formData.get('location') as string) || undefined,
       locationAddress: (formData.get('locationAddress') as string) || undefined,
       maxCapacity: parseInt(formData.get('maxCapacity') as string, 10),
-      price: Math.round(parseFloat(formData.get('price') as string) * 100) || 0,
-      currency: (formData.get('currency') as string) || 'USD',
+      price: price.value ?? 0,
+      currency,
       terms: (formData.get('terms') as string) || undefined,
     };
 
@@ -53,8 +71,8 @@ export default function NewEventPage() {
       });
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || 'Failed to create event');
+        const error = await res.json().catch(() => ({}));
+        throw new Error(apiErrorMessage(error, 'Failed to create event'));
       }
 
       const event = await res.json();
@@ -67,7 +85,7 @@ export default function NewEventPage() {
     }
   };
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = toDateInputValue(new Date());
 
   return (
     <div className="p-4 sm:p-6">
@@ -182,44 +200,23 @@ export default function NewEventPage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="price">Price per ticket *</Label>
+                  <Label htmlFor="price">Price per ticket ({currency})</Label>
                   <Input
                     id="price"
                     name="price"
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    required
+                    type="text"
+                    inputMode="decimal"
+                    autoComplete="off"
                     placeholder="0.00"
                     className="border-[var(--border)]"
                   />
+                  <p className="text-xs text-[var(--text-muted)] mt-1">
+                    Leave empty for free tickets. e.g. 12.50 or 12,50 for {exampleAmount(currency, 12.5)}.
+                  </p>
                 </div>
                 <div>
                   <Label htmlFor="currency">Currency *</Label>
-                  <select
-                    id="currency"
-                    name="currency"
-                    required
-                    aria-label="Currency"
-                    className="w-full px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
-                  >
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="SEK">SEK</option>
-                    <option value="NOK">NOK</option>
-                    <option value="DKK">DKK</option>
-                    <option value="PLN">PLN</option>
-                    <option value="CZK">CZK</option>
-                    <option value="HUF">HUF</option>
-                    <option value="RON">RON</option>
-                    <option value="BGN">BGN</option>
-                    <option value="HRK">HRK</option>
-                    <option value="RSD">RSD</option>
-                    <option value="ALL">ALL</option>
-                    <option value="MKD">MKD</option>
-                    <option value="BAM">BAM</option>
-                  </select>
+                  <CurrencySelect id="currency" name="currency" value={currency} onChange={setCurrency} />
                 </div>
               </div>
               <div>

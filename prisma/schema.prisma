@@ -608,7 +608,7 @@ model Merchant {
   registryCode        String? // Company registration number
   vatNumber           String? // VAT/Tax ID
   taxResidenceCountry String?
-  defaultCurrency     String  @default("USD")
+  defaultCurrency     String  @default("EUR")
   defaultLocale       String? @default("en")
   dataResidency       String? // "EU" | "US" for data storage
   brandLogoUrl        String?

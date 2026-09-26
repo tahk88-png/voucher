@@ -5,13 +5,13 @@ import Image from "next/image"
 import { formatCurrency, formatPercentage, safeParseJson } from "@/lib/utils"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
-import { Calendar, CheckCircle2, Clock, Gift, MapPin, ShoppingBag, Ticket } from "lucide-react"
+import { Calendar, CheckCircle2, Clock, Gift, Globe, ShoppingBag, Ticket } from "lucide-react"
 import { isMerchantActive } from "@/lib/merchant-status"
 import { setRequestLocale } from "next-intl/server"
 import { routing, Link } from "@/routing"
-import { getCampaignCategoryId } from "@/lib/campaign-categories"
 import CampaignShareButton from "../campaign-share-button"
 import { ReviewList } from "@/components/reviews/review-list"
+import { auth } from "@/lib/auth"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_NAME, getLocalePath } from "@/lib/seo"
 
 export function generateStaticParams() {
@@ -165,15 +165,29 @@ export default async function CampaignDetailPage({
     notFound()
   }
 
+  const session = await auth()
+  const signedIn = Boolean(session?.user?.id)
+
   const discountRules = safeParseJson<{ type: string; value: number; currency?: string }>(
     campaign.discountRules
   )
   const brandColors = safeParseJson<Record<string, string>>(campaign.merchant.brandColorsJson)
-  const accent = brandColors?.primary || "#E17B5C"
-  const categoryId = getCampaignCategoryId({
-    name: campaign.name,
-    description: campaign.description,
-  })
+  const accent = brandColors?.primary || "#a4563b"
+  const isFree = !campaign.price || campaign.price <= 0
+  const priceLabel = isFree ? "FREE" : formatCurrency(campaign.price!, campaign.merchant.defaultCurrency)
+  // Buying happens through a published, currently valid voucher.
+  const onSale = campaign.vouchers.length > 0
+  let websiteHost: string | null = null
+  if (campaign.merchant.website) {
+    try {
+      const url = new URL(campaign.merchant.website)
+      if (url.protocol === "http:" || url.protocol === "https:") {
+        websiteHost = url.hostname.replace(/^www\./, "")
+      }
+    } catch {
+      websiteHost = null // not a valid absolute URL: don't render a broken link
+    }
+  }
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
   const voucherLink =
     campaign.vouchers.length > 0
@@ -182,40 +196,41 @@ export default async function CampaignDetailPage({
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
-      <div className="bg-white/80 backdrop-blur-sm border-b border-[rgba(139,115,85,0.15)] sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-2 text-sm text-[#8B7355]">
-          <Link href="/campaigns" className="hover:text-[#2D2721]">
-            Campaigns
-          </Link>
-          <span>/</span>
-          <span className="text-[#2D2721] font-medium truncate max-w-[220px]">{campaign.name}</span>
-        </div>
-      </div>
+      {/* Not sticky: the site header is the sticky bar. */}
+      <nav aria-label="Breadcrumb" className="bg-white/80 border-b border-[rgba(139,115,85,0.15)]">
+        <ol className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-2 text-sm text-[#6B5744] min-w-0">
+          <li>
+            <Link href="/campaigns" className="hover:text-[#2D2721]">
+              Campaigns
+            </Link>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="text-[#2D2721] font-medium truncate min-w-0">{campaign.name}</li>
+        </ol>
+      </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          <div className="lg:col-span-2 space-y-6">
-            <div className="relative rounded-3xl overflow-hidden aspect-video shadow-warm-lg group">
+          <div className="lg:col-span-2 space-y-4 min-w-0">
+            <div className="relative rounded-3xl overflow-hidden aspect-video shadow-warm-lg">
               <div
                 className="w-full h-full flex items-center justify-center"
                 style={{ background: `linear-gradient(135deg, ${accent} 0%, #F5C98E 100%)` }}
               >
-                <Gift className="h-20 w-20 text-white/80" />
+                <Gift className="h-20 w-20 text-white/80" aria-hidden="true" />
               </div>
-              <div className="absolute bottom-6 left-6 text-white bg-black/40 backdrop-blur p-4 rounded-xl">
-                <h1 className="text-2xl font-bold mb-1">{campaign.name}</h1>
-                <p>{campaign.merchant.name}</p>
+              {/* Overlay title from sm up; on phones the title sits below the
+                  image so long names can't overflow the box. */}
+              <div className="hidden sm:block absolute bottom-6 left-6 right-6 text-white">
+                <div className="inline-block max-w-full bg-black/45 backdrop-blur p-4 rounded-xl">
+                  <p className="text-2xl font-bold mb-1 break-words" aria-hidden="true">{campaign.name}</p>
+                  <p>{campaign.merchant.name}</p>
+                </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {[0, 1, 2].map((idx) => (
-                <div
-                  key={idx}
-                  className="rounded-xl overflow-hidden aspect-[4/3] shadow-sm cursor-pointer hover:shadow-warm transition-all bg-[#F8F6F1] flex items-center justify-center"
-                >
-                  <Ticket className="h-8 w-8 text-[#8B7355]" />
-                </div>
-              ))}
+            <div className="sm:sr-only">
+              <h1 className="text-2xl font-bold text-[#2D2721] break-words">{campaign.name}</h1>
+              <p className="text-[#6B5744]">{campaign.merchant.name}</p>
             </div>
           </div>
 
@@ -233,14 +248,14 @@ export default async function CampaignDetailPage({
                       unoptimized
                     />
                   ) : (
-                    <Gift className="h-6 w-6 text-[#E17B5C]" />
+                    <Gift className="h-6 w-6 text-[var(--primary)]" aria-hidden="true" />
                   )}
                 </div>
                 <div>
                   <h3 className="font-bold text-[#2D2721]">{campaign.merchant.name}</h3>
                   {/* Only for merchants that completed onboarding; it used to show for everyone. */}
                   {campaign.merchant.onboardedAt && (
-                    <div className="flex items-center gap-1 text-[#9DB5A5] text-xs font-bold uppercase tracking-wider">
+                    <div className="flex items-center gap-1 text-[#3f7a4c] text-xs font-bold uppercase tracking-wider">
                       <CheckCircle2 className="w-3 h-3" /> Verified partner
                     </div>
                   )}
@@ -249,14 +264,10 @@ export default async function CampaignDetailPage({
 
               <div className="mb-8">
                 <div className="flex items-baseline gap-2 mb-1">
-                  <span className="text-3xl font-bold text-[#2D2721]">
-                    {campaign.price && campaign.price > 0
-                      ? formatCurrency(campaign.price, campaign.merchant.defaultCurrency)
-                      : "FREE"}
-                  </span>
+                  <span className="text-3xl font-bold text-[#2D2721]">{priceLabel}</span>
                 </div>
-                {discountRules && discountRules.type && (
-                  <span className="text-sm font-bold text-[#E17B5C] bg-[#FFF9ED] px-2 py-1 rounded-md">
+                {!isFree && discountRules && discountRules.type && (
+                  <span className="text-sm font-bold text-[var(--primary)] bg-[#FFF9ED] px-2 py-1 rounded-md">
                     {discountRules.type === "percentage"
                       ? formatPercentage(discountRules.value)
                       : formatCurrency(
@@ -271,7 +282,7 @@ export default async function CampaignDetailPage({
               {/* Buying happens on the voucher page (/v/[id]); this button used to
                   send people to /login and straight back here. With no voucher on
                   sale (none published yet, or a demo campaign) there is nothing to buy. */}
-              {campaign.vouchers.length > 0 ? (
+              {onSale ? (
                 <WarmButton asChild fullWidth size="lg" className="mb-3">
                   <Link href={`/v/${campaign.vouchers[0].id}`}>
                     <span className="inline-flex items-center gap-2">
@@ -281,20 +292,35 @@ export default async function CampaignDetailPage({
                   </Link>
                 </WarmButton>
               ) : (
-                <WarmButton fullWidth size="lg" className="mb-3" disabled>
-                  Not available yet
-                </WarmButton>
+                <div className="mb-3" role="status">
+                  <WarmButton fullWidth size="lg" disabled aria-describedby="not-on-sale-reason">
+                    Not on sale yet
+                  </WarmButton>
+                  <p id="not-on-sale-reason" className="mt-2 text-sm text-[#6B5744]">
+                    This offer isn&rsquo;t on sale yet &mdash; {campaign.merchant.name} hasn&rsquo;t published a
+                    voucher for it. Check back later.
+                  </p>
+                </div>
               )}
 
               <CampaignShareButton url={voucherLink} title={campaign.name} />
 
               <div className="mt-6 pt-6 border-t border-[rgba(139,115,85,0.15)]/50 space-y-3 text-sm text-[#6B5744]">
+                {websiteHost && (
+                  <div className="flex items-start gap-3 min-w-0">
+                    <Globe className="w-5 h-5 text-[var(--primary)] flex-shrink-0" aria-hidden="true" />
+                    <a
+                      href={campaign.merchant.website!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 hover:text-[#2D2721] break-all"
+                    >
+                      {websiteHost}
+                    </a>
+                  </div>
+                )}
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#E17B5C] flex-shrink-0" />
-                  <span>{campaign.merchant.website || "Merchant location"}</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Clock className="w-5 h-5 text-[#E17B5C] flex-shrink-0" />
+                  <Clock className="w-5 h-5 text-[var(--primary)] flex-shrink-0" aria-hidden="true" />
                   <div className="flex flex-col">
                     <span>Campaign runs</span>
                     <span className="font-semibold text-[#2D2721]">
@@ -327,13 +353,13 @@ export default async function CampaignDetailPage({
 
             <section id="vouchers" className="scroll-mt-24">
               <h2 className="text-2xl font-bold text-[#2D2721] mb-6 flex items-center gap-2">
-                <Ticket className="w-6 h-6 text-[#E17B5C]" />
+                <Ticket className="w-6 h-6 text-[var(--primary)]" aria-hidden="true" />
                 Vouchers
               </h2>
               <div className="space-y-4">
                 {campaign.vouchers.length === 0 ? (
                   <WarmCard padding="lg" className="bg-white">
-                    <p className="text-[#6B5744]">No vouchers available right now.</p>
+                    <p className="text-[#6B5744]">No vouchers on sale for this offer yet.</p>
                   </WarmCard>
                 ) : (
                   campaign.vouchers.map((voucher) => {
@@ -350,11 +376,7 @@ export default async function CampaignDetailPage({
                                 ? `${formatPercentage(voucher.value)} discount`
                                 : `${formatCurrency(voucher.value, voucher.currency)} credit`}
                             </p>
-                            <div className="font-bold text-[#2D2721] text-xl">
-                              {campaign.price && campaign.price > 0
-                                ? formatCurrency(campaign.price, campaign.merchant.defaultCurrency)
-                                : "FREE"}
-                            </div>
+                            <div className="font-bold text-[#2D2721] text-xl">{priceLabel}</div>
                           </div>
                           <div className="flex flex-col justify-center sm:w-40">
                             <WarmButton asChild>
@@ -373,22 +395,31 @@ export default async function CampaignDetailPage({
           <div className="space-y-6">
             <WarmCard padding="lg" className="bg-white">
               <h3 className="text-lg font-bold text-[#2D2721] mb-4">Reviews</h3>
-              <ReviewList campaignId={campaign.id} />
+              <ReviewList campaignId={campaign.id} signedIn={signedIn} />
             </WarmCard>
 
             <WarmCard padding="lg" className="bg-white">
               <h3 className="text-lg font-bold text-[#2D2721] mb-4">Campaign stats</h3>
+              {/* Zero counts ("0 vouchers available") say nothing useful; only non-zero stats show. */}
               <div className="space-y-3 text-sm text-[#6B5744]">
+                {campaign._count.vouchers > 0 && (
+                  <div className="flex items-center gap-2">
+                    <Gift className="h-4 w-4" aria-hidden="true" />
+                    <span>
+                      {campaign._count.vouchers} {campaign._count.vouchers === 1 ? "voucher" : "vouchers"} on sale
+                    </span>
+                  </div>
+                )}
+                {campaign._count.purchases > 0 && (
+                  <div className="flex items-center gap-2">
+                    <ShoppingBag className="h-4 w-4" aria-hidden="true" />
+                    <span>
+                      {campaign._count.purchases} {campaign._count.purchases === 1 ? "purchase" : "purchases"}
+                    </span>
+                  </div>
+                )}
                 <div className="flex items-center gap-2">
-                  <Gift className="h-4 w-4" />
-                  <span>{campaign._count.vouchers} vouchers available</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ShoppingBag className="h-4 w-4" />
-                  <span>{campaign._count.purchases} purchases</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" aria-hidden="true" />
                   <span>
                     Ends{" "}
                     {new Date(campaign.endDate).toLocaleDateString(locale, {
@@ -401,7 +432,7 @@ export default async function CampaignDetailPage({
             </WarmCard>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   )
 }

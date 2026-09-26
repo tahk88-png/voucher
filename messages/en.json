@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Subscription Boxes",
     "pricing": "Pricing Rules",
     "webhooks": "Webhooks",
-    "apiKeys": "API Keys"
+    "apiKeys": "API Keys",
+    "marketplace": "Marketplace",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "expandSidebar": "Expand sidebar",
+    "collapseSidebar": "Collapse sidebar",
+    "sectionShop": "Shop",
+    "sectionRewards": "Rewards",
+    "sectionAccount": "Account",
+    "mainNavigation": "Main navigation",
+    "quickNavigation": "Quick navigation",
+    "logoutFailed": "Could not log out. Please try again."
   },
   "voucher": {
     "title": "Voucher",
@@ -184,7 +195,11 @@
     "creditApplied": "Credit Applied",
     "finalTotal": "Total",
     "pageDescription": "Track your available and locked credits.",
-    "noMerchantWallets": "No merchant wallets yet."
+    "noMerchantWallets": "No merchant wallets yet.",
+    "noCreditYet": "No credit yet",
+    "noCreditYetBody": "You earn credit when a friend redeems a voucher you shared. It shows up here for each merchant.",
+    "shareToEarn": "Share a voucher",
+    "findVoucherToShare": "Find a voucher to share"
   },
   "redemption": {
     "title": "Redemptions",
@@ -244,7 +259,12 @@
     "merchantLabel": "Merchant",
     "voucherLabel": "Voucher",
     "linkField": "Link",
-    "codeField": "Code"
+    "codeField": "Code",
+    "linkCopied": "Link copied",
+    "howItWorksTitle": "How referrals work",
+    "howItWorksBody": "Open a voucher and tap Share. You get a personal link for that voucher. When a friend redeems it, you earn credit from the merchant.",
+    "findVoucher": "Find a voucher to share",
+    "linkForVoucher": "Referral link for {voucher}"
   },
   "analytics": {
     "title": "Analytics",
@@ -516,7 +536,9 @@
     "viewVouchers": "View vouchers",
     "redeemed": "Redeemed",
     "friendLabel": "Friend",
-    "voucherLabel": "Voucher"
+    "voucherLabel": "Voucher",
+    "offersLinkTitle": "Link to current offers",
+    "offersLinkDescription": "Send friends to all current offers on GiftHub. This link doesn't earn credit; to earn, share a specific voucher from its page."
   },
   "billing": {
     "upgradeRequired": "Upgrade Required",
@@ -618,14 +640,34 @@
     "inApp": "In-app",
     "pushBeta": "Push (beta)",
     "saving": "Saving...",
-    "savePreferences": "Save preferences"
+    "savePreferences": "Save preferences",
+    "noPreferencesTitle": "Nothing to set up yet",
+    "noPreferencesBody": "Notification settings are managed per merchant. You don't have any merchants with notification settings yet.",
+    "saved": "Preferences saved",
+    "saveFailed": "Couldn't save your preferences. Please try again.",
+    "markAllReadFailed": "Couldn't mark notifications as read. Please try again.",
+    "emptyHint": "Updates about your vouchers and offers will appear here.",
+    "browseOffers": "Browse offers"
   },
   "settingsPage": {
     "description": "Manage your account preferences.",
     "joined": "Joined",
     "recently": "recently",
     "accountAccessTitle": "Account access",
-    "accountAccessDescription": "Secure your account and manage access."
+    "accountAccessDescription": "Secure your account and manage access.",
+    "pushDescription": "Get notifications on this device, even when GiftHub isn't open.",
+    "changePasswordTitle": "Change password",
+    "changePasswordDescription": "Update your account password.",
+    "setPasswordTitle": "Set a password",
+    "setPasswordDescription": "Set a password to sign in with your email and password.",
+    "twoFactorTitle": "Two-factor authentication",
+    "twoFactorDescription": "Add an extra layer of security with an authenticator app or a passkey.",
+    "twoFactorManage": "Manage security",
+    "sessionsTitle": "Active sessions",
+    "sessionsDescription": "See where your account is signed in.",
+    "sessionsView": "View sessions",
+    "deleteTitle": "Delete account",
+    "deleteDescription": "Permanently delete your account and anonymise your data. This can't be undone."
   },
   "profile": {
     "title": "Profile",
@@ -633,5 +675,217 @@
     "accountInformation": "Account information",
     "emailPreferences": "Email preferences",
     "appSettings": "App settings"
+  },
+  "dashboard": {
+    "roleShopper": "Shopper",
+    "roleAdmin": "Admin",
+    "roleStaff": "Staff",
+    "rolePlatformAdmin": "Platform admin",
+    "availableCredit": "Available credit",
+    "pendingCredit": "{amount} pending",
+    "creditExplainer": "Credit you earn when friends redeem vouchers you shared. You can spend it with the merchant that issued it.",
+    "viewCreditDetails": "View credit details",
+    "successfulReferrals": "Successful referrals",
+    "checkInPoints": "Check-in points",
+    "shareTitle": "Share a voucher, earn credit",
+    "shareDescription": "Open any voucher and tap Share to get your personal link. When a friend redeems it, you earn credit.",
+    "openShareCenter": "Open Share Center",
+    "sharedSummary": "Vouchers shared: {count} · Redeemed: {redeemed}",
+    "achievementsTitle": "Achievements",
+    "badgesEarned": "Badges earned: {earned} of {total}",
+    "viewAchievements": "View achievements",
+    "availableOffers": "Available offers",
+    "browseAll": "Browse all",
+    "noActiveOffers": "No offers are live right now. Check back soon.",
+    "validUntil": "Valid until {date}",
+    "recentActivity": "Recent activity",
+    "noRecentActivity": "No activity yet.",
+    "creditFrom": "Credit from {merchant}",
+    "referralAt": "Referral · {merchant}",
+    "creditStatus": {
+      "locked": "pending",
+      "available": "available",
+      "used": "used",
+      "expired": "expired",
+      "reversed": "reversed"
+    },
+    "referralStatus": {
+      "created": "Link created",
+      "opened": "Opened",
+      "redeemed": "Redeemed",
+      "expired": "Expired",
+      "blocked": "Blocked"
+    },
+    "myMerchants": "My merchants",
+    "merchantDashboard": "Merchant dashboard",
+    "sellTitle": "Sell on GiftHub",
+    "sellDescription": "Want to offer vouchers to your customers? Contact us and we'll help you set up a merchant account.",
+    "contactUs": "Contact us",
+    "exploreVouchers": "Explore vouchers"
+  },
+  "wishlist": {
+    "title": "My wishlist",
+    "emptyTitle": "Your wishlist is empty",
+    "emptyBody": "Save vouchers, merchants and campaigns you like to find them here later.",
+    "browseOffers": "Browse offers"
+  },
+  "push": {
+    "enable": "Enable push notifications",
+    "enabled": "Push notifications are on",
+    "enabledToast": "Push notifications enabled",
+    "disable": "Turn off",
+    "disabledToast": "Push notifications turned off",
+    "enableFailed": "Couldn't enable push notifications. Please try again.",
+    "disableFailed": "Couldn't turn off push notifications. Please try again.",
+    "unsupported": "This browser doesn't support push notifications.",
+    "blocked": "Notifications are blocked. Allow them in your browser settings to turn them on."
+  },
+  "sessions": {
+    "title": "Active sessions",
+    "description": "See where your account is signed in.",
+    "backToSettings": "Back to settings",
+    "deviceOn": "{browser} on {os}",
+    "unknownDevice": "Unknown device",
+    "thisDevice": "This device",
+    "signedInHere": "You're signed in here right now.",
+    "otherDevicesTitle": "Other devices",
+    "otherDevicesNone": "We can't list other devices you may be signed in on. If you notice anything unusual, change your password and turn on two-factor authentication.",
+    "securitySettings": "Security settings",
+    "lastActive": "Last active {time}",
+    "logout": "Log out",
+    "logoutAll": "Log out everywhere else",
+    "logoutAllBody": "End all sessions on other devices.",
+    "loadFailed": "Couldn't load your sessions.",
+    "revokeFailed": "Couldn't end the session. Please try again.",
+    "revoked": "Session ended.",
+    "revokedAll": "Sessions on other devices ended."
+  },
+  "achievements": {
+    "title": "Achievements",
+    "checkIn": "Check in for today",
+    "checkingIn": "Checking in…",
+    "checkedInToday": "Checked in today",
+    "checkInFailed": "Check-in failed. Please try again.",
+    "checkInSaved": "Check-in saved",
+    "newBadge": "New badge: {name}",
+    "checkInPoints": "Check-in points",
+    "level": "Level",
+    "levelValue": "Level {level}",
+    "levelProgress": "Progress to the next level",
+    "badgesLabel": "Badges",
+    "noBadgesYet": "No badges earned yet.",
+    "earnedOn": "Earned {date}",
+    "locked": "Not earned yet",
+    "howToEarn": "How to earn points",
+    "earnRuleCheckIn": "Check in once a day",
+    "pointsShort": "+{points} pts",
+    "pointsExplainer": "Points and levels show how active you are. They can't be exchanged for money or vouchers.",
+    "currentStreak": "Current streak (days)",
+    "longestStreak": "Longest streak (days)",
+    "milestone": "Streak milestone reached!",
+    "badges": {
+      "first_purchase": {
+        "name": "First purchase",
+        "description": "Bought your first voucher"
+      },
+      "first_redemption": {
+        "name": "First redemption",
+        "description": "Redeemed your first voucher"
+      },
+      "5_referrals": {
+        "name": "Connector",
+        "description": "Shared 5 vouchers with friends"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "Shared 10 vouchers with friends"
+      },
+      "streak_7": {
+        "name": "Weekly warrior",
+        "description": "Checked in 7 days in a row"
+      },
+      "streak_30": {
+        "name": "Monthly master",
+        "description": "Checked in 30 days in a row"
+      },
+      "review_writer": {
+        "name": "Reviewer",
+        "description": "Published your first review"
+      },
+      "big_spender": {
+        "name": "Big spender",
+        "description": "Spent over 10,000 on vouchers in total"
+      },
+      "early_adopter": {
+        "name": "Early adopter",
+        "description": "Joined GiftHub before 2028"
+      },
+      "social_sharer": {
+        "name": "Social sharer",
+        "description": "Shared a voucher on social media"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Loyalty",
+    "notActiveTitle": "Loyalty tiers aren't available yet",
+    "notActiveBody": "Purchases don't earn loyalty points yet and no tier discounts or perks are applied at checkout, so there are no tiers to show here.",
+    "earnTodayTitle": "What you can earn today",
+    "earnCreditTitle": "Referral credit",
+    "earnCreditBody": "Share a voucher. When a friend redeems it, you get credit to spend with that merchant.",
+    "earnCreditLink": "View your credit",
+    "earnPointsTitle": "Check-in points",
+    "earnPointsBody": "Check in daily to build a streak, level up and unlock badges.",
+    "earnPointsLink": "View achievements",
+    "historyTitle": "Points history",
+    "pointsBalance": "Balance: {points} points"
+  },
+  "welcome": {
+    "greeting": "Hi, {name}!",
+    "progress": "Onboarding progress",
+    "setUpSecurity": "Set up 2FA or a passkey",
+    "skip": "Skip",
+    "next": "Next",
+    "getStarted": "Get started",
+    "steps": {
+      "welcome": {
+        "title": "Welcome to GiftHub!",
+        "subtitle": "Here's a quick tour of what you can do."
+      },
+      "discover": {
+        "title": "Discover offers",
+        "subtitle": "Browse vouchers, gift cards and events from local merchants.",
+        "features": {
+          "vouchers": "Digital vouchers",
+          "giftCards": "Gift cards for friends and family",
+          "nearby": "Offers near you"
+        }
+      },
+      "wallet": {
+        "title": "Your vouchers in one place",
+        "subtitle": "Everything you buy is saved to your account.",
+        "features": {
+          "qr": "QR codes for quick redemption in store",
+          "expiry": "Email reminders before a voucher expires"
+        }
+      },
+      "rewards": {
+        "title": "Earn rewards",
+        "subtitle": "Share vouchers with friends and earn credit when they redeem them.",
+        "features": {
+          "referralCredit": "Merchant credit for successful referrals",
+          "checkIns": "Daily check-ins and streaks",
+          "badges": "Badges to unlock"
+        }
+      },
+      "notifications": {
+        "title": "Stay in the loop",
+        "subtitle": "Turn on notifications on this device."
+      },
+      "security": {
+        "title": "Secure your account",
+        "subtitle": "Add a passkey or two-factor authentication."
+      }
+    }
   }
 }

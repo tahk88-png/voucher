@@ -9,6 +9,9 @@ import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { apiErrorMessage } from '@/lib/api-error-message';
+import { minorToInputString, parseMoneyToMinor, toDateInputValue } from '@/lib/money-input';
+import { CurrencySelect } from '../../../_components/currency-select';
 
 export default function EditEventPage() {
   const params = useParams();
@@ -25,14 +28,8 @@ export default function EditEventPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.id) {
+          // Keep ISO instants; the inputs below derive local date/time from them.
           setEvent(data);
-          const eventDate = new Date(data.eventDate);
-          const eventEndDate = data.eventEndDate ? new Date(data.eventEndDate) : null;
-          setEvent({
-            ...data,
-            eventDate: eventDate.toISOString().slice(0, 16),
-            eventEndDate: eventEndDate ? eventEndDate.toISOString().slice(0, 16) : '',
-          });
         }
       })
       .catch(console.error)
@@ -41,16 +38,29 @@ export default function EditEventPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const currency = String(formData.get('currency') || event?.currency || 'EUR');
+    const price = parseMoneyToMinor(String(formData.get('price') ?? ''), currency, 'Ticket price');
+    if (!price.ok) {
+      showError(price.error);
+      return;
+    }
+    setIsLoading(true);
     const eventDate = formData.get('eventDate') as string;
     const eventTime = formData.get('eventTime') as string;
     const eventEndDate = formData.get('eventEndDate') as string;
     const eventEndTime = formData.get('eventEndTime') as string;
 
-    const eventDateTime = eventDate && eventTime ? `${eventDate}T${eventTime}:00` : null;
-    const eventEndDateTime = eventEndDate && eventEndTime ? `${eventEndDate}T${eventEndTime}:00` : null;
+    // Local wall-clock time → ISO instant (the API requires a full ISO datetime).
+    const eventDateTime = eventDate && eventTime ? new Date(`${eventDate}T${eventTime}:00`).toISOString() : null;
+    const eventEndDateTime =
+      eventEndDate && eventEndTime ? new Date(`${eventEndDate}T${eventEndTime}:00`).toISOString() : null;
+    if (eventDateTime && eventEndDateTime && new Date(eventEndDateTime) <= new Date(eventDateTime)) {
+      showError('The end time must be after the start time.');
+      setIsLoading(false);
+      return;
+    }
 
     const data = {
       name: formData.get('name') as string,
@@ -61,8 +71,8 @@ export default function EditEventPage() {
       location: (formData.get('location') as string) || undefined,
       locationAddress: (formData.get('locationAddress') as string) || undefined,
       maxCapacity: parseInt(formData.get('maxCapacity') as string, 10),
-      price: Math.round(parseFloat(formData.get('price') as string) * 100) || 0,
-      currency: (formData.get('currency') as string) || 'USD',
+      price: price.value ?? 0,
+      currency,
       terms: (formData.get('terms') as string) || undefined,
     };
 
@@ -74,8 +84,8 @@ export default function EditEventPage() {
       });
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || 'Failed to update event');
+        const error = await res.json().catch(() => ({}));
+        throw new Error(apiErrorMessage(error, 'Failed to update event'));
       }
 
       showSuccess(t('success.eventUpdated'));
@@ -170,7 +180,7 @@ export default function EditEventPage() {
                     name="eventDate"
                     type="date"
                     required
-                    defaultValue={eventDateObj.toISOString().split('T')[0]}
+                    defaultValue={toDateInputValue(eventDateObj)}
                     className="mt-1 border-[var(--border)]"
                   />
                 </div>
@@ -193,7 +203,7 @@ export default function EditEventPage() {
                     id="eventEndDate"
                     name="eventEndDate"
                     type="date"
-                    defaultValue={eventEndDateObj ? eventEndDateObj.toISOString().split('T')[0] : ''}
+                    defaultValue={eventEndDateObj ? toDateInputValue(eventEndDateObj) : ''}
                     className="mt-1 border-[var(--border)]"
                   />
                 </div>
@@ -255,46 +265,21 @@ export default function EditEventPage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="price">Price per ticket *</Label>
+                  <Label htmlFor="price">Price per ticket</Label>
                   <Input
                     id="price"
                     name="price"
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    required
-                    placeholder="0.00"
-                    defaultValue={(event.price / 100).toFixed(2)}
+                    type="text"
+                    inputMode="decimal"
+                    autoComplete="off"
+                    placeholder="0.00 (free)"
+                    defaultValue={minorToInputString(event.price, event.currency)}
                     className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
                   <Label htmlFor="currency">Currency *</Label>
-                  <select
-                    id="currency"
-                    name="currency"
-                    required
-                    defaultValue={event.currency}
-                    aria-label="Currency"
-                    className="w-full px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
-                  >
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="SEK">SEK</option>
-                    <option value="NOK">NOK</option>
-                    <option value="DKK">DKK</option>
-                    <option value="PLN">PLN</option>
-                    <option value="CZK">CZK</option>
-                    <option value="HUF">HUF</option>
-                    <option value="RON">RON</option>
-                    <option value="BGN">BGN</option>
-                    <option value="HRK">HRK</option>
-                    <option value="RSD">RSD</option>
-                    <option value="ALL">ALL</option>
-                    <option value="MKD">MKD</option>
-                    <option value="BAM">BAM</option>
-                  </select>
+                  <CurrencySelect id="currency" name="currency" defaultValue={event.currency} className="mt-1" />
                 </div>
               </div>
               <div>

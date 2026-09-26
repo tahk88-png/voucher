@@ -53,12 +53,23 @@ type PlanSelectorProps = {
   currentTier: PlanTier | null;
   billingState: string;
   hasStripeCustomer: boolean;
+  /** False when online payments (Stripe) aren't configured on the platform. */
+  billingAvailable?: boolean;
 };
 
-export default function PlanSelector({ slug, currentTier, billingState, hasStripeCustomer }: PlanSelectorProps) {
+export default function PlanSelector({
+  slug,
+  currentTier,
+  billingState,
+  hasStripeCustomer,
+  billingAvailable = true,
+}: PlanSelectorProps) {
   const t = useTranslations('billing');
   const tiers: PlanTier[] = ['starter', 'pro', 'scale'];
   const isActive = billingState === 'active';
+  // A trial (or grace period) of a plan is still the plan the merchant is on.
+  const isOnPlan = isActive || billingState === 'trial' || billingState === 'grace';
+  const isTrial = billingState === 'trial';
 
   return (
     <div className="mt-6">
@@ -67,7 +78,7 @@ export default function PlanSelector({ slug, currentTier, billingState, hasStrip
           const plan = PLAN_CATALOG[tier];
           const meta = PLAN_META[tier];
           const Icon = meta.icon;
-          const isCurrent = isActive && currentTier === tier;
+          const isCurrent = isOnPlan && currentTier === tier;
           const isPopular = tier === 'pro';
 
           return (
@@ -112,7 +123,12 @@ export default function PlanSelector({ slug, currentTier, billingState, hasStrip
                 {isCurrent ? (
                   <div className="text-center py-2 px-4 rounded-[var(--r-sm)] bg-[#FAF7F2] text-[#8B7355] font-semibold text-sm">
                     {t('currentPlan')}
+                    {isTrial ? ' (free trial)' : ''}
                   </div>
+                ) : !billingAvailable ? (
+                  <p className="text-center text-xs text-[#8B7355]">
+                    Plan changes aren&apos;t available online right now.
+                  </p>
                 ) : isActive && hasStripeCustomer ? (
                   <ManageBillingButton slug={slug} />
                 ) : (
@@ -127,6 +143,13 @@ export default function PlanSelector({ slug, currentTier, billingState, hasStrip
           );
         })}
       </div>
+
+      {!billingAvailable && (
+        <p role="status" className="mt-4 rounded-[var(--r-sm)] border border-[var(--border)] bg-[var(--surface)] p-3 text-center text-sm text-[var(--text)]">
+          Online payments aren&apos;t set up on this platform yet, so plans can&apos;t be bought or changed here.
+          Contact support if you want to change your plan.
+        </p>
+      )}
 
       <p className="text-center text-sm text-[#8B7355] mt-4">
         {t('trialFooter')}

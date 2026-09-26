@@ -14,29 +14,47 @@ import { ParallaxSection } from "@/components/animations/parallax-section"
 import { MerchantLogoWall } from "@/components/landing/merchant-logo-wall"
 import { BeforeAfterSlider } from "@/components/landing/before-after-slider"
 import { PricingCalculator } from "@/components/landing/pricing-calculator"
+import { formatWholeCurrency } from "@/components/landing/format-price"
+import { campaignCategories } from "@/lib/campaign-categories"
+import { PLAN_CATALOG, PLATFORM_FEE_PERCENT, TRIAL_DAYS } from "@/lib/access-control/monetization"
 import {
   ArrowRight,
+  Baby,
   Check,
   ChevronDown,
-  CreditCard,
+  Coffee,
+  Dumbbell,
   Gift,
-  Heart,
-  Home,
-  Laptop,
-  Leaf,
-  Paintbrush,
+  Mountain,
+  Palette,
   Plane,
   PartyPopper,
   QrCode,
-  Shield,
-  Shirt,
   Sparkles,
   Ticket,
   TrendingUp,
-  UtensilsCrossed,
   Users,
-  Zap
+  type LucideIcon,
 } from "lucide-react"
+
+/** Number of UI languages (one messages/<locale>.json per language). */
+const SUPPORTED_LANGUAGE_COUNT = 25
+
+const eur = (cents: number) => formatWholeCurrency(cents, "EUR")
+const starterMonthly = eur(PLAN_CATALOG.starter.monthlyPriceCents)
+const scaleMonthly = eur(PLAN_CATALOG.scale.monthlyPriceCents)
+
+// Browse tiles: the same categories (ids + labels) the /campaigns filter uses.
+const CATEGORY_TILE_STYLE: Record<string, { icon: LucideIcon; color: string; iconClass: string }> = {
+  cafe: { icon: Coffee, color: "from-[var(--primary)] to-[var(--primary-hover)]", iconClass: "text-white" },
+  beauty: { icon: Sparkles, color: "from-[#F5C98E] to-[#E5B97E]", iconClass: "text-[var(--text)]" },
+  fitness: { icon: Dumbbell, color: "from-[var(--success)] to-[#2f5f3a]", iconClass: "text-white" },
+  events: { icon: PartyPopper, color: "from-[var(--danger)] to-[#a33b29]", iconClass: "text-white" },
+  workshops: { icon: Palette, color: "from-[#F5C98E] to-[#E5B97E]", iconClass: "text-[var(--text)]" },
+  family: { icon: Baby, color: "from-[var(--primary)] to-[var(--primary-hover)]", iconClass: "text-white" },
+  travel: { icon: Plane, color: "from-[var(--success)] to-[#2f5f3a]", iconClass: "text-white" },
+  outdoor: { icon: Mountain, color: "from-[var(--danger)] to-[#a33b29]", iconClass: "text-white" },
+}
 
 type LandingFeaturedOffer = {
   id: string
@@ -48,6 +66,8 @@ type LandingFeaturedOffer = {
   priceLabel: string
   purchases: number
   discountLabel: string | null
+  /** False when the campaign has no published voucher, so nothing can be bought yet. */
+  onSale?: boolean
 }
 
 type LandingStats = {
@@ -79,7 +99,7 @@ export default function MarketingLanding({
       title: "Referral Engine",
       description: "Your customers share deals and bring new customers automatically",
       color: "from-[var(--primary)] to-[var(--primary-hover)]",
-      iconClass: "text-[var(--text)]",
+      iconClass: "text-white",
     },
     {
       icon: Ticket,
@@ -128,67 +148,23 @@ export default function MarketingLanding({
   // Browse tiles only. They used to carry invented per-category counts
   // ("234 campaigns") and sample deal names that were rendered as if live;
   // nothing here may claim a number the database did not produce.
-  const categories = [
-    {
-      name: "Food & Drink",
-      icon: UtensilsCrossed,
-      color: "from-[var(--primary)] to-[var(--primary-hover)]",
-      iconClass: "text-[var(--text)]",
-    },
-    {
-      name: "Fashion",
-      icon: Shirt,
-      color: "from-[var(--danger)] to-[#D16B4C]",
-      iconClass: "text-white",
-    },
-    {
-      name: "Beauty",
-      icon: Paintbrush,
-      color: "from-[#F5C98E] to-[#E5B97E]",
-      iconClass: "text-[var(--text)]",
-    },
-    {
-      name: "Tech",
-      icon: Laptop,
-      color: "from-[var(--success)] to-[#7FA090]",
-      iconClass: "text-white",
-    },
-    {
-      name: "Travel",
-      icon: Plane,
-      color: "from-[var(--primary)] to-[var(--primary-hover)]",
-      iconClass: "text-[var(--text)]",
-    },
-    {
-      name: "Wellness",
-      icon: Leaf,
-      color: "from-[var(--success)] to-[#7FA090]",
-      iconClass: "text-white",
-    },
-    {
-      name: "Events",
-      icon: PartyPopper,
-      color: "from-[var(--danger)] to-[#D16B4C]",
-      iconClass: "text-white",
-    },
-    {
-      name: "Home",
-      icon: Home,
-      color: "from-[#F5C98E] to-[#E5B97E]",
-      iconClass: "text-[var(--text)]",
-    },
-  ]
+  const categories = campaignCategories.map((category) => ({
+    id: category.id,
+    name: category.label,
+    ...(CATEGORY_TILE_STYLE[category.id] ?? CATEGORY_TILE_STYLE.cafe),
+  }))
   const visibleOffers = featuredOffers.slice(0, 12)
+
+  const onSaleCount = visibleOffers.filter((offer) => offer.onSale !== false).length
 
   const benefits = [
     "Built-in referral engine on every campaign",
     "Real-time analytics: cost per acquisition, ROI",
     "QR redemption — no POS hardware needed",
-    "GDPR compliant, EU-hosted",
-    "Multi-language (15 languages)",
-    "Flat SaaS fee — not 50% like Groupon",
+    `Available in ${SUPPORTED_LANGUAGE_COUNT} languages`,
+    "Flat monthly plan — not a revenue share like Groupon",
     "You own your customer data",
-    "5% transaction fee, no hidden costs",
+    `${PLATFORM_FEE_PERCENT}% transaction fee on voucher sales, no hidden costs`,
   ]
 
   // Real figures from the database. Previously these were invented marketing
@@ -196,7 +172,8 @@ export default function MarketingLanding({
   // nothing in the system — the row is now hidden entirely until there is
   // something true to report, rather than shipping fabricated traction.
   const processedEur = stats ? Math.floor(stats.processedCents / 100) : 0
-  const heroStats = stats
+  // A zero ("Processed value €0") is not a trust signal; only non-zero figures show.
+  const heroStats = (stats
     ? [
         {
           label: "Active campaigns",
@@ -216,17 +193,18 @@ export default function MarketingLanding({
           label: "Processed value",
           icon: TrendingUp,
           countTarget: processedEur,
-          prefix: "EUR ",
+          prefix: "€",
           suffix: "",
         },
       ]
     : []
+  ).filter((item) => item.countTarget > 0)
 
   const faqs = [
     {
       question: "How is this different from Groupon?",
       answer:
-        "Groupon takes 40-50% of your revenue and owns the customer relationship. We charge a flat monthly fee (from \u20ac19/mo) plus 5% on transactions. You keep your customers, your data, and your margins.",
+        `Groupon-style deal sites typically keep a large share of each sale and own the customer relationship. We charge a flat monthly fee (from ${starterMonthly}/mo) plus ${PLATFORM_FEE_PERCENT}% on voucher sales. You keep your customers, your data, and your margins.`,
     },
     {
       question: "How does the referral system work?",
@@ -234,7 +212,7 @@ export default function MarketingLanding({
         "Every customer who buys a voucher gets a unique referral link. When they share it and a friend purchases, both earn credit. Each referral chain is tracked so you see exactly how new customers find you.",
     },
     {
-      question: "What happens after the 14-day trial?",
+      question: `What happens after the ${TRIAL_DAYS}-day trial?`,
       answer:
         "You choose a plan (Starter, Pro, or Scale). If you don\u2019t subscribe, your existing published vouchers stay active for customers, but you can\u2019t create new campaigns until you subscribe.",
     },
@@ -244,9 +222,9 @@ export default function MarketingLanding({
         "No. Your staff opens the mobile scanner on any phone browser, scans the customer\u2019s QR code, and it\u2019s done. No app download, no POS integration required.",
     },
     {
-      question: "What is the 5% transaction fee?",
+      question: `What is the ${PLATFORM_FEE_PERCENT}% transaction fee?`,
       answer:
-        "When a customer purchases a voucher through the platform, we deduct 5% from the payout. This covers payment processing and platform costs. There are no other hidden fees.",
+        `When a customer purchases a voucher through the platform, we deduct ${PLATFORM_FEE_PERCENT}% from the payout. There are no other platform fees on top of your plan.`,
     },
   ]
 
@@ -263,7 +241,7 @@ export default function MarketingLanding({
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-[var(--border)] mb-6">
               <Sparkles className="h-4 w-4 text-[var(--primary)]" />
-              <span className="text-sm font-medium text-[var(--text-muted)]">Voucher Platform for Local Businesses</span>
+              <span className="text-sm font-medium text-[var(--text-muted)]">Vouchers &amp; referrals for local businesses</span>
             </div>
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--text)] mb-6 leading-[1.03]">
@@ -280,7 +258,7 @@ export default function MarketingLanding({
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <WarmButton size="lg" asChild>
-                <Link href="/login">
+                <Link href="/register">
                   <Gift className="h-5 w-5 mr-2" />
                   Start as Merchant
                 </Link>
@@ -293,14 +271,14 @@ export default function MarketingLanding({
               </WarmButton>
             </div>
 
-            <div className="mt-10 flex items-center justify-center gap-8 text-sm text-[var(--text-faint)] flex-wrap">
+            <div className="mt-10 flex items-center justify-center gap-x-8 gap-y-2 text-sm text-[var(--text-muted)] flex-wrap">
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[var(--success)]" />
                 No credit card required
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[var(--success)]" />
-                14-day free trial
+                {TRIAL_DAYS}-day free trial
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[var(--success)]" />
@@ -310,6 +288,7 @@ export default function MarketingLanding({
 
             <div
               className={`mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto${heroStats.length === 0 ? ' hidden' : ''}`}
+              data-testid="hero-stats"
             >
               {heroStats.map((item) => {
                 const Icon = item.icon
@@ -340,7 +319,7 @@ export default function MarketingLanding({
       {trustedMerchants.length >= 3 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <ScrollReveal>
-            <p className="text-center text-sm font-semibold text-[var(--text-faint)] mb-2 uppercase tracking-wider">
+            <p className="text-center text-sm font-semibold text-[var(--text-muted)] mb-2 uppercase tracking-wider">
               Merchants on the platform
             </p>
             <MerchantLogoWall merchants={trustedMerchants} />
@@ -358,7 +337,7 @@ export default function MarketingLanding({
               <WarmCard
                 hover
                 padding="lg"
-                className="cursor-pointer text-center rounded-[18px] border border-[var(--border)] bg-white/92"
+                className="text-center rounded-[18px] border border-[var(--border)] bg-white/92"
               >
                 <div
                   className={`w-11 h-11 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 mx-auto shadow-warm ring-1 ring-white/30`}
@@ -393,14 +372,14 @@ export default function MarketingLanding({
                     {step.step}
                   </div>
                   <span className="w-11 h-11 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mx-auto mb-3">
-                    <Icon className="h-5 w-5 text-[var(--accent)] stroke-[2.25]" />
+                    <Icon className="h-5 w-5 text-[var(--primary)] stroke-[2.25]" aria-hidden="true" />
                   </span>
                   <h3 className="text-xl font-semibold text-[var(--text)] mb-2">{step.title}</h3>
                   <p className="text-sm text-[var(--text-muted)]">{step.description}</p>
                 </WarmCard>
                 {idx < howItWorks.length - 1 && (
                   <div className="hidden md:block absolute top-1/2 -right-4 -translate-y-1/2">
-                    <ArrowRight className="h-5 w-5 text-[var(--accent)]" />
+                    <ArrowRight className="h-5 w-5 text-[var(--primary)]" aria-hidden="true" />
                   </div>
                 )}
               </div>
@@ -415,29 +394,37 @@ export default function MarketingLanding({
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Explore Popular Campaigns</h2>
           <p className="text-lg text-[var(--text-muted)]">Discover vouchers, deals, and experiences across Europe</p>
           {visibleOffers.length > 0 && (
-            <p className="text-sm text-[var(--text-faint)] mt-2">
-              Showing {visibleOffers.length} live offers from the marketplace feed.
+            <p className="text-sm text-[var(--text-muted)] mt-2">
+              Showing {visibleOffers.length} active {visibleOffers.length === 1 ? "campaign" : "campaigns"}
+              {onSaleCount < visibleOffers.length ? ` \u2014 ${onSaleCount} on sale now` : ""}.
             </p>
           )}
         </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 mb-8">
+        <ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 mb-8">
           {categories.map((category) => (
-            <WarmCard
-              key={category.name}
-              padding="sm"
-              className="text-center rounded-[14px] border border-[var(--border)] bg-white/92"
-            >
-              <div
-                className={`w-10 h-10 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mx-auto mb-2 ring-1 ring-white/35`}
+            <li key={category.id}>
+              <Link
+                href={`/campaigns?category=${category.id}`}
+                className="block h-full rounded-[14px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
               >
-                <category.icon className={`h-[18px] w-[18px] stroke-[2.25] ${category.iconClass}`} />
-              </div>
-              <p className="text-xs font-semibold text-[var(--text)]">{category.name}</p>
-            </WarmCard>
+                <WarmCard
+                  hover
+                  padding="sm"
+                  className="h-full text-center rounded-[14px] border border-[var(--border)] bg-white/92"
+                >
+                  <div
+                    className={`w-10 h-10 rounded-full bg-gradient-to-br ${category.color} flex items-center justify-center mx-auto mb-2 ring-1 ring-white/35`}
+                  >
+                    <category.icon className={`h-[18px] w-[18px] stroke-[2.25] ${category.iconClass}`} aria-hidden="true" />
+                  </div>
+                  <p className="text-xs font-semibold text-[var(--text)]">{category.name}</p>
+                </WarmCard>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
 
         {visibleOffers.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -462,7 +449,7 @@ export default function MarketingLanding({
                   <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[10px] font-bold text-[var(--text)]">
                     {offer.categoryLabel}
                   </span>
-                  {offer.discountLabel && (
+                  {offer.discountLabel && offer.priceLabel !== "FREE" && (
                     <span className="absolute top-3 right-3 rounded-full bg-[var(--text)] px-2.5 py-1 text-[10px] font-bold text-white">
                       {offer.discountLabel}
                     </span>
@@ -473,9 +460,6 @@ export default function MarketingLanding({
                   <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--primary)]">{offer.merchantName}</p>
                   <h3 className="text-base font-bold text-[var(--text)] mt-1 line-clamp-2">{offer.name}</h3>
                   <div className="mt-2 flex flex-wrap items-center gap-2">
-                    <span className="inline-flex rounded-full bg-[#FFF8E8] border border-[#F1E1C3] px-2.5 py-1 text-[10px] font-semibold text-[var(--text-muted)]">
-                      Category: {offer.categoryLabel}
-                    </span>
                     <span className="inline-flex rounded-full bg-[#EEF6F1] border border-[#D2E5DB] px-2.5 py-1 text-[10px] font-semibold text-[#47695B]">
                       Marketplace: {offer.marketLabel}
                     </span>
@@ -484,12 +468,18 @@ export default function MarketingLanding({
                   <div className="mt-auto pt-3 border-t border-[var(--border)] flex items-center justify-between gap-3">
                     <div>
                       <div className="text-base font-bold text-[var(--text)]">{offer.priceLabel}</div>
-                      <div className="text-[11px] text-[var(--text-faint)]">{offer.purchases} purchases</div>
+                      {offer.onSale === false ? (
+                        <div className="text-[11px] text-[var(--text-muted)]">Not on sale yet</div>
+                      ) : offer.purchases > 0 ? (
+                        <div className="text-[11px] text-[var(--text-muted)]">
+                          {offer.purchases} {offer.purchases === 1 ? "purchase" : "purchases"}
+                        </div>
+                      ) : null}
                     </div>
                     <WarmButton asChild size="sm" className="rounded-full px-4">
-                      <Link href={`/campaigns/${offer.id}`}>
+                      <Link href={`/campaigns/${offer.id}`} aria-label={`Open ${offer.name}`}>
                         Open
-                        <ArrowRight className="h-4 w-4 ml-1.5" />
+                        <ArrowRight className="h-4 w-4 ml-1.5" aria-hidden="true" />
                       </Link>
                     </WarmButton>
                   </div>
@@ -528,33 +518,42 @@ export default function MarketingLanding({
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Simple, Transparent Pricing</h2>
           <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
-            Choose the plan that fits your business. Save 2 months with annual billing.
+            Choose the plan that fits your business. Annual billing costs 10 months&rsquo; worth.
           </p>
         </div>
         </ScrollReveal>
 
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 p-1 bg-[var(--surface)] rounded-[12px] shadow-warm border border-[var(--border)]">
+          <div
+            role="group"
+            aria-label="Billing period"
+            className="inline-flex items-center gap-2 p-1 bg-[var(--surface)] rounded-[12px] shadow-warm border border-[var(--border)]"
+          >
             <button
+              type="button"
+              aria-pressed={billingPeriod === "monthly"}
               onClick={() => setBillingPeriod("monthly")}
               className={`px-6 py-2 rounded-[10px] text-sm font-semibold transition-all ${
                 billingPeriod === "monthly"
                   ? "gradient-brand text-white shadow-warm"
-                  : "text-[var(--text-faint)] hover:text-[var(--text)]"
+                  : "text-[var(--text-muted)] hover:text-[var(--text)]"
               }`}
             >
               Monthly
             </button>
             <button
+              type="button"
+              aria-pressed={billingPeriod === "annual"}
               onClick={() => setBillingPeriod("annual")}
-              className={`px-6 py-2 rounded-[10px] text-sm font-semibold transition-all relative ${
+              className={`inline-flex items-center gap-2 px-4 sm:px-6 py-2 rounded-[10px] text-sm font-semibold transition-all ${
                 billingPeriod === "annual"
                   ? "gradient-brand text-white shadow-warm"
-                  : "text-[var(--text-faint)] hover:text-[var(--text)]"
+                  : "text-[var(--text-muted)] hover:text-[var(--text)]"
               }`}
             >
               Annual
-              <span className="absolute -top-2 right-0 px-1.5 py-0.5 text-[10px] rounded-full bg-[var(--success)] text-white font-bold">
+              {/* Inline, not absolutely positioned: it used to overlap the label. */}
+              <span className="px-1.5 py-0.5 text-[10px] leading-none rounded-full bg-[var(--success)] text-white font-bold">
                 Save 17%
               </span>
             </button>
@@ -564,10 +563,7 @@ export default function MarketingLanding({
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
           {[
             {
-              name: "Starter",
-              monthly: "19",
-              annual: "16",
-              cta: "Start Free Trial",
+              plan: PLAN_CATALOG.starter,
               features: [
                 "500 vouchers/month",
                 "3 active campaigns",
@@ -578,10 +574,7 @@ export default function MarketingLanding({
               highlight: false,
             },
             {
-              name: "Pro",
-              monthly: "39",
-              annual: "33",
-              cta: "Start Free Trial",
+              plan: PLAN_CATALOG.pro,
               features: [
                 "5,000 vouchers/month",
                 "25 active campaigns",
@@ -593,28 +586,23 @@ export default function MarketingLanding({
               highlight: true,
             },
             {
-              name: "Scale",
-              monthly: "99",
-              annual: "83",
-              cta: "Start Free Trial",
+              plan: PLAN_CATALOG.scale,
               features: [
                 "Unlimited vouchers",
                 "Unlimited campaigns",
                 "Unlimited team members",
                 "Everything in Pro",
-                "Priority support",
-                "White-label ready",
               ],
               highlight: false,
             },
-          ].map((plan) => (
+          ].map(({ plan, features, highlight }) => (
             <WarmCard
-              key={plan.name}
+              key={plan.id}
               hover
               padding="xl"
-              className={`relative h-full flex flex-col ${plan.highlight ? "border-2 border-[var(--primary)] shadow-warm-lg" : ""}`}
+              className={`relative h-full flex flex-col ${highlight ? "border-2 border-[var(--primary)] shadow-warm-lg" : ""}`}
             >
-              {plan.highlight && (
+              {highlight && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                   <span className="px-4 py-1 gradient-brand text-white text-sm font-bold rounded-full shadow-warm">
                     Most Popular
@@ -622,52 +610,40 @@ export default function MarketingLanding({
                 </div>
               )}
               <div className="mb-6 text-center pt-2">
-                <h3 className="text-2xl font-bold text-[var(--text)] mb-2">{plan.name}</h3>
-                <div className="flex items-baseline gap-2 mb-4 justify-center">
-                  <span className="text-5xl font-bold text-[var(--text)]">
-                    EUR {billingPeriod === "monthly" ? plan.monthly : plan.annual}
+                <h3 className="text-2xl font-bold text-[var(--text)] mb-2">{plan.label}</h3>
+                <div className="flex flex-wrap items-baseline gap-x-2 mb-4 justify-center">
+                  <span className="text-4xl sm:text-5xl font-bold text-[var(--text)]">
+                    {billingPeriod === "monthly"
+                      ? eur(plan.monthlyPriceCents)
+                      : eur(Math.round(plan.yearlyPriceCents / 12))}
                   </span>
-                  <span className="text-[var(--text-faint)]">/month</span>
+                  <span className="text-[var(--text-muted)]">/month</span>
                 </div>
                 {billingPeriod === "annual" && (
                   <div className="text-sm text-[var(--success)] font-semibold mb-4">
-                    EUR {Number(plan.monthly) * 10}/year (save 2 months)
+                    {eur(plan.yearlyPriceCents)}/year (2 months free)
                   </div>
                 )}
               </div>
               <ul className="space-y-3 mb-8 flex-grow">
-                {plan.features.map((feature) => (
+                {features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
-                    <Check className={`h-5 w-5 flex-shrink-0 mt-0.5 ${plan.highlight ? "text-[var(--primary)]" : "text-[var(--success)]"}`} />
+                    <Check aria-hidden="true" className={`h-5 w-5 flex-shrink-0 mt-0.5 ${highlight ? "text-[var(--primary)]" : "text-[var(--success)]"}`} />
                     <span className="text-[var(--text)]">{feature}</span>
                   </li>
                 ))}
               </ul>
               <WarmButton className="w-full mt-auto" asChild>
-                <Link href="/login">{plan.cta}</Link>
+                <Link href="/register">Start free trial</Link>
               </WarmButton>
             </WarmCard>
           ))}
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-[var(--text-faint)] mb-4">
-            All plans include 14-day free trial | 5% transaction fee on sales | Cancel anytime
+          <p className="text-[var(--text-muted)]">
+            All plans include a {TRIAL_DAYS}-day free trial · {PLATFORM_FEE_PERCENT}% transaction fee on voucher sales · Cancel anytime
           </p>
-          <div className="flex items-center justify-center gap-6 text-sm text-[var(--text-muted)] flex-wrap">
-            <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4 text-[var(--success)]" />
-              <span>GDPR Compliant</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Zap className="h-4 w-4 text-[var(--primary)]" />
-              <span>Instant Setup</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Heart className="h-4 w-4 text-[var(--danger)]" />
-              <span>99.9% Uptime</span>
-            </div>
-          </div>
         </div>
 
         {/* Interactive ROI Calculator */}
@@ -696,27 +672,17 @@ export default function MarketingLanding({
               {/* Real figures only. This block previously showed invented
                   traction (2,500+ merchants, EUR 12M+ processed, 98%
                   satisfaction — a metric the product does not even collect). */}
-              {stats && (
-                <div className="flex items-center gap-8 mb-8">
-                  <div>
-                    <div className="text-4xl font-bold text-white mb-1">
-                      <CountUp target={stats.merchantCount} duration={2.5} />
+              {heroStats.length > 0 && (
+                <dl className="grid grid-cols-1 min-[400px]:grid-cols-3 gap-6 mb-8">
+                  {heroStats.map((item) => (
+                    <div key={item.label} className="min-w-0 flex flex-col">
+                      <dt className="text-white/90 text-sm">{item.label}</dt>
+                      <dd className="order-first text-3xl sm:text-4xl font-bold text-white mb-1 break-words">
+                        <CountUp target={item.countTarget} prefix={item.prefix} duration={2.5} />
+                      </dd>
                     </div>
-                    <div className="text-white/80 text-sm">Active Merchants</div>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-bold text-white mb-1">
-                      <CountUp target={processedEur} prefix="EUR " duration={2.5} />
-                    </div>
-                    <div className="text-white/80 text-sm">Processed</div>
-                  </div>
-                  <div>
-                    <div className="text-4xl font-bold text-white mb-1">
-                      <CountUp target={stats.activeCampaignCount} duration={2.5} />
-                    </div>
-                    <div className="text-white/80 text-sm">Active Campaigns</div>
-                  </div>
-                </div>
+                  ))}
+                </dl>
               )}
             </div>
             <div className="p-8 lg:p-12 bg-[var(--surface)]">
@@ -747,7 +713,7 @@ export default function MarketingLanding({
         <ScrollReveal>
           <div className="text-center mb-8">
             <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Groupon vs GiftHub</h2>
-            <p className="text-lg text-[var(--text-muted)]">Drag to compare</p>
+            <p className="text-lg text-[var(--text-muted)] hidden sm:block">Drag to compare</p>
           </div>
         </ScrollReveal>
         <ScrollReveal delay={0.15}>
@@ -755,14 +721,14 @@ export default function MarketingLanding({
             beforeTitle="With Groupon"
             afterTitle="With GiftHub"
             beforeItems={[
-              "40-50% revenue taken by platform",
+              "Large revenue share taken by the platform",
               "Platform owns customer relationship",
               "No access to customer data",
               "Race to the bottom pricing",
               "Lost brand identity",
             ]}
             afterItems={[
-              "Flat EUR 19-99/mo + 5% fee",
+              `Flat ${starterMonthly}\u2013${scaleMonthly}/mo + ${PLATFORM_FEE_PERCENT}% fee`,
               "You own all customer data",
               "Built-in referral engine",
               "Your brand, your rules",
@@ -820,11 +786,11 @@ export default function MarketingLanding({
               <PartyPopper className="h-16 w-16 text-[var(--primary)] mx-auto mb-6" />
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Stop Renting Customers. Build Your Own Army.</h2>
               <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-                Create your first campaign in 2 minutes. Your customers do the rest. 14-day free trial.
+                Create your first campaign in minutes. Your customers do the rest. {TRIAL_DAYS}-day free trial.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <WarmButton size="lg" asChild>
-                  <Link href="/login">
+                  <Link href="/register">
                     Get Started Free
                     <ArrowRight className="h-5 w-5 ml-2" />
                   </Link>
