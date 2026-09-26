@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!merchant) return { title: 'Not Found' };
   const description = `Browse vouchers, campaigns, and offers from ${merchant.name}`;
   return {
-    // The root layout applies a `%s | Vouchr` template, so `title` must not
+    // The root layout applies a `%s | GiftHub` template, so `title` must not
     // carry a site-name suffix of its own. OG titles bypass the template.
     title: merchant.name,
     description,

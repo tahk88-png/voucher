@@ -675,7 +675,7 @@ export default function MarketingLanding({
           <div className="mt-16 max-w-5xl mx-auto">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-[var(--text)] mb-2">Calculate Your ROI</h3>
-              <p className="text-[var(--text-muted)]">Drag the sliders to see how much you could earn with Vouchr</p>
+              <p className="text-[var(--text-muted)]">Drag the sliders to see how much you could earn with GiftHub</p>
             </div>
             <WarmCard padding="xl" className="rounded-[20px]">
               <PricingCalculator />
@@ -746,14 +746,14 @@ export default function MarketingLanding({
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <ScrollReveal>
           <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Groupon vs Vouchr</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Groupon vs GiftHub</h2>
             <p className="text-lg text-[var(--text-muted)]">Drag to compare</p>
           </div>
         </ScrollReveal>
         <ScrollReveal delay={0.15}>
           <BeforeAfterSlider
             beforeTitle="With Groupon"
-            afterTitle="With Vouchr"
+            afterTitle="With GiftHub"
             beforeItems={[
               "40-50% revenue taken by platform",
               "Platform owns customer relationship",

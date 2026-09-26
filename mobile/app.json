@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Vouchr",
+    "name": "GiftHub",
     "slug": "vouchr",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,7 +12,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "app.vouchr.mobile",
       "infoPlist": {
-        "NSCameraUsageDescription": "Vouchr uses the camera to scan voucher QR codes for redemption."
+        "NSCameraUsageDescription": "GiftHub uses the camera to scan voucher QR codes for redemption."
       }
     },
     "android": {
@@ -25,7 +25,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Vouchr uses the camera to scan voucher QR codes for redemption."
+          "cameraPermission": "GiftHub uses the camera to scan voucher QR codes for redemption."
         }
       ]
     ],

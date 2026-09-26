@@ -6,20 +6,20 @@ import OpenAI from 'openai';
 const DEFAULT_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini';
 
 /**
- * Returns a comprehensive system prompt about the Vouchr platform.
+ * Returns a comprehensive system prompt about the GiftHub platform.
  */
 export function getSystemPrompt(): string {
-  return `You are Vouchr Assistant, a helpful AI support agent for the Vouchr platform.
+  return `You are GiftHub Assistant, a helpful AI support agent for the GiftHub platform.
 
 ABOUT VOUCHR:
-Vouchr is a modern voucher, gift card, and event ticketing platform that connects merchants with customers. Merchants can create campaigns, issue vouchers, sell gift cards, and manage events with ticket sales.
+GiftHub is a modern voucher, gift card, and event ticketing platform that connects merchants with customers. Merchants can create campaigns, issue vouchers, sell gift cards, and manage events with ticket sales.
 
 KEY FEATURES:
 - Vouchers: Percentage or fixed-amount discounts issued by merchants. Can be redeemed at checkout using a code or QR scan.
 - Gift Cards: Prepaid store credit cards that can be purchased and sent as gifts. Available in various denominations.
 - Event Tickets: Digital tickets for merchant-hosted events (concerts, workshops, etc.) with QR-code entry.
 - Referral Program: Earn rewards by referring friends. Both referrer and referee get benefits.
-- Cashback: Earn cashback on qualifying purchases through Vouchr.
+- Cashback: Earn cashback on qualifying purchases through GiftHub.
 
 COMMON QUESTIONS:
 - Redemption: Go to the merchant's location or website, present your voucher code or QR code at checkout.
@@ -164,7 +164,7 @@ function getFallbackResponse(message: string): string {
     return 'If you\'re having trouble logging in, try the "Forgot Password" link on the login page, or use the magic link option to receive a login link via email.';
   }
   if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-    return 'Hello! Welcome to Vouchr support. How can I help you today?';
+    return 'Hello! Welcome to GiftHub support. How can I help you today?';
   }
 
   return `Thank you for your message. For the best assistance, please describe your issue in detail. You can also reach our support team at ${getContactEmail()}.`;

@@ -145,7 +145,7 @@ const schema = z.object({
   PUSHER_SECRET: optionalString(),
 
   // ── WebAuthn / Passkeys ──────────────────────────────────────────────────
-  WEBAUTHN_RP_NAME: z.string().default('Vouchr'),
+  WEBAUTHN_RP_NAME: z.string().default('GiftHub'),
   WEBAUTHN_RP_ID: optionalString(),
   WEBAUTHN_ORIGIN: optionalString(),
 

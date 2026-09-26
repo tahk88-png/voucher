@@ -184,7 +184,7 @@ export function ChatWidget() {
               </svg>
             </div>
             <div>
-              <h3 className="font-semibold text-sm">Vouchr Support</h3>
+              <h3 className="font-semibold text-sm">GiftHub Support</h3>
               <p className="text-xs text-white/70">Typically replies instantly</p>
             </div>
           </div>

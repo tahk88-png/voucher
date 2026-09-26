@@ -42,7 +42,7 @@ describe('validateEnv', () => {
       expect(env.NEXT_PUBLIC_APP_URL).toBe('http://localhost:3000');
       expect(env.AXIOM_DATASET).toBe('voucher-logs');
       expect(env.OPENAI_MODEL).toBe('gpt-4o-mini');
-      expect(env.WEBAUTHN_RP_NAME).toBe('Vouchr');
+      expect(env.WEBAUTHN_RP_NAME).toBe('GiftHub');
     });
 
     it('has no hardcoded sender/contact domain defaults', () => {

@@ -58,7 +58,7 @@ export const MERCHANT_NOTIFICATION_CATEGORIES: MerchantNotificationCategory[] = 
   },
   {
     key: 'product_updates',
-    label: 'Product news from Vouchr',
+    label: 'Product news from GiftHub',
     description: 'New features, roadmap, occasional tips. No more than 1/month.',
     defaultEnabled: false,
   },

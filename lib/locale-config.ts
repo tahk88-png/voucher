@@ -48,7 +48,7 @@ export interface LanguageOption {
 }
 
 export const languageOptions: LanguageOption[] = [
-  { code: "en", name: "English", nativeName: "English", flag: "US", emoji: "\u{1F1FA}\u{1F1F8}" },
+  { code: "en", name: "English", nativeName: "English", flag: "GB", emoji: "\u{1F1EC}\u{1F1E7}" },
   { code: "et", name: "Estonian", nativeName: "Eesti", flag: "EE", emoji: "\u{1F1EA}\u{1F1EA}" },
   { code: "es", name: "Spanish", nativeName: "Espa\u00f1ol", flag: "ES", emoji: "\u{1F1EA}\u{1F1F8}" },
   { code: "fr", name: "French", nativeName: "Fran\u00e7ais", flag: "FR", emoji: "\u{1F1EB}\u{1F1F7}" },
@@ -85,7 +85,6 @@ export interface CountryOption {
 }
 
 export const countryOptions: CountryOption[] = [
-  { code: "US", name: "United States", flag: "US", currency: "$", localeTag: "en-US", language: "en" },
   { code: "EE", name: "Estonia", flag: "EE", currency: "EUR", localeTag: "et-EE", language: "et" },
   { code: "ES", name: "Spain", flag: "ES", currency: "EUR", localeTag: "es-ES", language: "es" },
   { code: "FR", name: "France", flag: "FR", currency: "EUR", localeTag: "fr-FR", language: "fr" },
@@ -110,12 +109,15 @@ export const countryOptions: CountryOption[] = [
   { code: "KR", name: "South Korea", flag: "KR", currency: "KRW", localeTag: "ko-KR", language: "ko" },
   { code: "CN", name: "China", flag: "CN", currency: "CNY", localeTag: "zh-CN", language: "zh" },
   { code: "SA", name: "Saudi Arabia", flag: "SA", currency: "SAR", localeTag: "ar-SA", language: "ar" },
+  { code: "US", name: "United States", flag: "US", currency: "$", localeTag: "en-US", language: "en" },
 ]
 
-export const defaultCountryCode = "US"
+// A European marketplace: visitors without a stored choice start in Estonia
+// (EUR). English maps to the same default rather than to the United States.
+export const defaultCountryCode = "EE"
 
 export const localeToCountryCode: Record<SupportedLocale, string> = {
-  en: "US",
+  en: "EE",
   et: "EE",
   es: "ES",
   fr: "FR",
@@ -153,7 +155,8 @@ export function getCountryByLocale(locale: SupportedLocale): CountryOption {
 }
 
 export const localeToIntlLocale: Record<SupportedLocale, string> = {
-  en: "en-US",
+  // British English: day-first dates and "€" formatting for a European audience
+  en: "en-GB",
   et: "et-EE",
   es: "es-ES",
   fr: "fr-FR",

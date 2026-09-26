@@ -1,6 +1,6 @@
 import { routing } from '@/routing';
 
-export const SITE_NAME = 'Vouchr';
+export const SITE_NAME = 'GiftHub';
 export const SITE_TAGLINE = 'Pay for results, not reach.';
 export const SITE_DESCRIPTION =
   'Pay for results, not reach. Merchant-owned referral infrastructure: branded vouchers and store credit.';
