@@ -76,8 +76,8 @@ export default function EditProfileForm({ initialName, email }: EditProfileFormP
       </div>
 
       <div>
-        <Label className="text-sm text-[var(--text)]">Email</Label>
-        <Input value={email} disabled className="mt-1 opacity-60" />
+        <Label htmlFor="profile-email" className="text-sm text-[var(--text)]">Email</Label>
+        <Input id="profile-email" value={email} disabled className="mt-1 opacity-60" />
         <p className="text-xs text-[var(--text-muted)] mt-1">Email cannot be changed</p>
       </div>
 

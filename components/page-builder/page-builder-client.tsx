@@ -67,6 +67,11 @@ const processOptions = [
   },
 ]
 
+/** Human-readable name for a stored section/add-on id. */
+function labelFor(catalog: ReadonlyArray<{ id: string; label: string }>, id: string): string {
+  return catalog.find((item) => item.id === id)?.label ?? id
+}
+
 export default function PageBuilderClient({
   merchantSlug,
   merchantName,
@@ -221,7 +226,7 @@ export default function PageBuilderClient({
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold text-[var(--text)]">Page Builder</h1>
         <p className="text-[var(--text-muted)]">
-          Build fast storefront and rental pages with modular sections, add-ons, and AI help.
+          Build fast storefront and rental pages with modular sections and add-ons{aiEnabled ? ", with optional AI suggestions" : ""}.
         </p>
       </div>
 
@@ -337,16 +342,18 @@ export default function PageBuilderClient({
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <h3 className="text-base font-semibold text-[var(--text)] mb-2">Live summary</h3>
                   <p className="text-sm text-[var(--text-muted)] mb-4">
-                    {activePage.title} - {activePage.sections.length} sections - {activePage.addons.length} add-ons
+                    {activePage.title} · {activePage.sections.length} sections · {activePage.addons.length} add-ons
                   </p>
                   <div className="space-y-2 text-xs text-[var(--text-faint)]">
                     <div>
                       <span className="font-semibold text-[var(--text)]">Sections:</span>{" "}
-                      {activePage.sections.join(", ")}
+                      {activePage.sections.map((id) => labelFor(PAGE_SECTION_CATALOG, id)).join(", ")}
                     </div>
                     <div>
                       <span className="font-semibold text-[var(--text)]">Add-ons:</span>{" "}
-                      {activePage.addons.length ? activePage.addons.join(", ") : "None"}
+                      {activePage.addons.length
+                        ? activePage.addons.map((id) => labelFor(PAGE_ADDON_CATALOG, id)).join(", ")
+                        : "None"}
                     </div>
                   </div>
                 </WarmCard>
