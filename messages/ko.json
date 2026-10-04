@@ -64,7 +64,18 @@
     "subscriptionBoxes": "구독 박스",
     "pricing": "가격 규칙",
     "webhooks": "웹훅",
-    "apiKeys": "API 키"
+    "apiKeys": "API 키",
+    "marketplace": "마켓플레이스",
+    "openMenu": "메뉴 열기",
+    "closeMenu": "메뉴 닫기",
+    "expandSidebar": "사이드바 펼치기",
+    "collapseSidebar": "사이드바 접기",
+    "sectionShop": "쇼핑",
+    "sectionRewards": "리워드",
+    "sectionAccount": "계정",
+    "mainNavigation": "메인 내비게이션",
+    "quickNavigation": "빠른 내비게이션",
+    "logoutFailed": "로그아웃하지 못했습니다. 다시 시도해 주세요."
   },
   "voucher": {
     "title": "바우처",
@@ -184,7 +195,11 @@
     "creditApplied": "적용된 크레딧",
     "finalTotal": "합계",
     "pageDescription": "사용 가능한 크레딧과 잠긴 크레딧을 확인하세요.",
-    "noMerchantWallets": "판매자 지갑이 아직 없습니다."
+    "noMerchantWallets": "판매자 지갑이 아직 없습니다.",
+    "noCreditYet": "아직 크레딧이 없습니다",
+    "noCreditYetBody": "내가 공유한 바우처를 친구가 사용하면 크레딧을 받습니다. 크레딧은 판매자별로 여기에 표시됩니다.",
+    "shareToEarn": "바우처 공유하기",
+    "findVoucherToShare": "공유할 바우처 찾기"
   },
   "redemption": {
     "title": "사용 내역",
@@ -244,7 +259,12 @@
     "merchantLabel": "판매자",
     "voucherLabel": "바우처",
     "linkField": "링크",
-    "codeField": "코드"
+    "codeField": "코드",
+    "linkCopied": "링크가 복사되었습니다",
+    "howItWorksTitle": "추천 방법",
+    "howItWorksBody": "바우처를 열고 공유를 탭하세요. 해당 바우처의 개인 링크가 생성됩니다. 친구가 이를 사용하면 판매자로부터 크레딧을 받습니다.",
+    "findVoucher": "공유할 바우처 찾기",
+    "linkForVoucher": "{voucher} 추천 링크"
   },
   "analytics": {
     "title": "분석",
@@ -516,7 +536,9 @@
     "viewVouchers": "바우처 보기",
     "redeemed": "사용됨",
     "friendLabel": "친구",
-    "voucherLabel": "바우처"
+    "voucherLabel": "바우처",
+    "offersLinkTitle": "현재 혜택 링크",
+    "offersLinkDescription": "친구에게 GiftHub의 모든 현재 혜택을 알려 주세요. 이 링크로는 크레딧을 받을 수 없습니다. 크레딧을 받으려면 바우처 페이지에서 특정 바우처를 공유하세요."
   },
   "billing": {
     "upgradeRequired": "업그레이드가 필요합니다",
@@ -618,14 +640,34 @@
     "inApp": "앱 내",
     "pushBeta": "푸시 알림 (베타)",
     "saving": "저장 중...",
-    "savePreferences": "설정 저장"
+    "savePreferences": "설정 저장",
+    "noPreferencesTitle": "아직 설정할 항목이 없습니다",
+    "noPreferencesBody": "알림 설정은 판매자별로 관리됩니다. 아직 알림 설정이 있는 판매자가 없습니다.",
+    "saved": "설정이 저장되었습니다",
+    "saveFailed": "설정을 저장하지 못했습니다. 다시 시도해 주세요.",
+    "markAllReadFailed": "알림을 읽음으로 표시하지 못했습니다. 다시 시도해 주세요.",
+    "emptyHint": "바우처와 혜택에 관한 소식이 여기에 표시됩니다.",
+    "browseOffers": "혜택 둘러보기"
   },
   "settingsPage": {
     "description": "계정 환경설정을 관리합니다.",
     "joined": "가입일",
     "recently": "최근",
     "accountAccessTitle": "계정 접근",
-    "accountAccessDescription": "계정을 보호하고 접근을 관리합니다."
+    "accountAccessDescription": "계정을 보호하고 접근을 관리합니다.",
+    "pushDescription": "GiftHub가 열려 있지 않을 때도 이 기기에서 알림을 받으세요.",
+    "changePasswordTitle": "비밀번호 변경",
+    "changePasswordDescription": "계정 비밀번호를 업데이트합니다.",
+    "setPasswordTitle": "비밀번호 설정",
+    "setPasswordDescription": "비밀번호를 설정하면 이메일과 비밀번호로 로그인할 수 있습니다.",
+    "twoFactorTitle": "2단계 인증",
+    "twoFactorDescription": "인증 앱이나 패스키로 보안을 한층 강화하세요.",
+    "twoFactorManage": "보안 관리",
+    "sessionsTitle": "활성 세션",
+    "sessionsDescription": "계정에 로그인된 위치를 확인하세요.",
+    "sessionsView": "세션 보기",
+    "deleteTitle": "계정 삭제",
+    "deleteDescription": "계정을 영구적으로 삭제하고 데이터를 익명화합니다. 이 작업은 되돌릴 수 없습니다."
   },
   "profile": {
     "title": "프로필",
@@ -633,5 +675,217 @@
     "accountInformation": "계정 정보",
     "emailPreferences": "이메일 환경설정",
     "appSettings": "앱 설정"
+  },
+  "dashboard": {
+    "roleShopper": "구매자",
+    "roleAdmin": "관리자",
+    "roleStaff": "직원",
+    "rolePlatformAdmin": "플랫폼 관리자",
+    "availableCredit": "사용 가능한 크레딧",
+    "pendingCredit": "{amount} 대기 중",
+    "creditExplainer": "내가 공유한 바우처를 친구가 사용하면 받는 크레딧입니다. 크레딧을 발행한 판매자에서 사용할 수 있습니다.",
+    "viewCreditDetails": "크레딧 상세 보기",
+    "successfulReferrals": "성공한 추천",
+    "checkInPoints": "출석 포인트",
+    "shareTitle": "바우처를 공유하고 크레딧을 받으세요",
+    "shareDescription": "바우처를 열고 공유를 탭하면 개인 링크가 생성됩니다. 친구가 이를 사용하면 크레딧을 받습니다.",
+    "openShareCenter": "공유 센터 열기",
+    "sharedSummary": "공유한 바우처: {count} · 사용됨: {redeemed}",
+    "achievementsTitle": "업적",
+    "badgesEarned": "획득한 배지: {earned} / {total}",
+    "viewAchievements": "업적 보기",
+    "availableOffers": "이용 가능한 혜택",
+    "browseAll": "전체 보기",
+    "noActiveOffers": "현재 진행 중인 혜택이 없습니다. 곧 다시 확인해 주세요.",
+    "validUntil": "{date}까지 유효",
+    "recentActivity": "최근 활동",
+    "noRecentActivity": "아직 활동이 없습니다.",
+    "creditFrom": "{merchant} 크레딧",
+    "referralAt": "추천 · {merchant}",
+    "creditStatus": {
+      "locked": "대기 중",
+      "available": "사용 가능",
+      "used": "사용됨",
+      "expired": "만료됨",
+      "reversed": "취소됨"
+    },
+    "referralStatus": {
+      "created": "링크 생성됨",
+      "opened": "조회됨",
+      "redeemed": "사용됨",
+      "expired": "만료됨",
+      "blocked": "차단됨"
+    },
+    "myMerchants": "내 판매자",
+    "merchantDashboard": "판매자 대시보드",
+    "sellTitle": "GiftHub에서 판매하기",
+    "sellDescription": "고객에게 바우처를 제공하고 싶으신가요? 문의해 주시면 판매자 계정 설정을 도와드리겠습니다.",
+    "contactUs": "문의하기",
+    "exploreVouchers": "바우처 둘러보기"
+  },
+  "wishlist": {
+    "title": "내 위시리스트",
+    "emptyTitle": "위시리스트가 비어 있습니다",
+    "emptyBody": "마음에 드는 바우처, 판매자, 캠페인을 저장하면 나중에 여기에서 찾을 수 있습니다.",
+    "browseOffers": "혜택 둘러보기"
+  },
+  "push": {
+    "enable": "푸시 알림 켜기",
+    "enabled": "푸시 알림이 켜져 있습니다",
+    "enabledToast": "푸시 알림이 켜졌습니다",
+    "disable": "끄기",
+    "disabledToast": "푸시 알림이 꺼졌습니다",
+    "enableFailed": "푸시 알림을 켜지 못했습니다. 다시 시도해 주세요.",
+    "disableFailed": "푸시 알림을 끄지 못했습니다. 다시 시도해 주세요.",
+    "unsupported": "이 브라우저는 푸시 알림을 지원하지 않습니다.",
+    "blocked": "알림이 차단되어 있습니다. 알림을 켜려면 브라우저 설정에서 허용해 주세요."
+  },
+  "sessions": {
+    "title": "활성 세션",
+    "description": "계정에 로그인된 위치를 확인하세요.",
+    "backToSettings": "설정으로 돌아가기",
+    "deviceOn": "{os}의 {browser}",
+    "unknownDevice": "알 수 없는 기기",
+    "thisDevice": "이 기기",
+    "signedInHere": "현재 이 기기에서 로그인되어 있습니다.",
+    "otherDevicesTitle": "다른 기기",
+    "otherDevicesNone": "로그인되어 있을 수 있는 다른 기기 목록은 표시할 수 없습니다. 이상한 점이 보이면 비밀번호를 변경하고 2단계 인증을 켜세요.",
+    "securitySettings": "보안 설정",
+    "lastActive": "마지막 활동: {time}",
+    "logout": "로그아웃",
+    "logoutAll": "다른 모든 기기에서 로그아웃",
+    "logoutAllBody": "다른 기기의 모든 세션을 종료합니다.",
+    "loadFailed": "세션을 불러오지 못했습니다.",
+    "revokeFailed": "세션을 종료하지 못했습니다. 다시 시도해 주세요.",
+    "revoked": "세션이 종료되었습니다.",
+    "revokedAll": "다른 기기의 세션이 종료되었습니다."
+  },
+  "achievements": {
+    "title": "업적",
+    "checkIn": "오늘 출석 체크",
+    "checkingIn": "출석 체크 중…",
+    "checkedInToday": "오늘 출석 완료",
+    "checkInFailed": "출석 체크에 실패했습니다. 다시 시도해 주세요.",
+    "checkInSaved": "출석이 저장되었습니다",
+    "newBadge": "새 배지: {name}",
+    "checkInPoints": "출석 포인트",
+    "level": "레벨",
+    "levelValue": "레벨 {level}",
+    "levelProgress": "다음 레벨까지 진행률",
+    "badgesLabel": "배지",
+    "noBadgesYet": "아직 획득한 배지가 없습니다.",
+    "earnedOn": "{date} 획득",
+    "locked": "아직 획득하지 않음",
+    "howToEarn": "포인트 획득 방법",
+    "earnRuleCheckIn": "하루에 한 번 출석 체크",
+    "pointsShort": "+{points}P",
+    "pointsExplainer": "포인트와 레벨은 활동 정도를 보여 줍니다. 현금이나 바우처로 교환할 수 없습니다.",
+    "currentStreak": "현재 연속 출석(일)",
+    "longestStreak": "최장 연속 출석(일)",
+    "milestone": "연속 출석 목표를 달성했습니다!",
+    "badges": {
+      "first_purchase": {
+        "name": "첫 구매",
+        "description": "첫 바우처를 구매했습니다"
+      },
+      "first_redemption": {
+        "name": "첫 사용",
+        "description": "첫 바우처를 사용했습니다"
+      },
+      "5_referrals": {
+        "name": "커넥터",
+        "description": "친구에게 바우처 5개를 공유했습니다"
+      },
+      "10_referrals": {
+        "name": "인플루언서",
+        "description": "친구에게 바우처 10개를 공유했습니다"
+      },
+      "streak_7": {
+        "name": "주간 전사",
+        "description": "7일 연속 출석했습니다"
+      },
+      "streak_30": {
+        "name": "월간 마스터",
+        "description": "30일 연속 출석했습니다"
+      },
+      "review_writer": {
+        "name": "리뷰어",
+        "description": "첫 리뷰를 게시했습니다"
+      },
+      "big_spender": {
+        "name": "큰손",
+        "description": "바우처에 누적 10,000 이상 사용했습니다"
+      },
+      "early_adopter": {
+        "name": "얼리 어답터",
+        "description": "2028년 이전에 GiftHub에 가입했습니다"
+      },
+      "social_sharer": {
+        "name": "소셜 공유왕",
+        "description": "소셜 미디어에 바우처를 공유했습니다"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "로열티",
+    "notActiveTitle": "로열티 등급은 아직 이용할 수 없습니다",
+    "notActiveBody": "아직 구매 시 로열티 포인트가 적립되지 않으며 결제 시 등급 할인이나 혜택도 적용되지 않으므로, 여기에 표시할 등급이 없습니다.",
+    "earnTodayTitle": "지금 받을 수 있는 혜택",
+    "earnCreditTitle": "추천 크레딧",
+    "earnCreditBody": "바우처를 공유하세요. 친구가 이를 사용하면 해당 판매자에서 쓸 수 있는 크레딧을 받습니다.",
+    "earnCreditLink": "내 크레딧 보기",
+    "earnPointsTitle": "출석 포인트",
+    "earnPointsBody": "매일 출석해 연속 기록을 쌓고, 레벨을 올리고, 배지를 잠금 해제하세요.",
+    "earnPointsLink": "업적 보기",
+    "historyTitle": "포인트 내역",
+    "pointsBalance": "잔액: {points}포인트"
+  },
+  "welcome": {
+    "greeting": "안녕하세요, {name}님!",
+    "progress": "온보딩 진행률",
+    "setUpSecurity": "2단계 인증 또는 패스키 설정",
+    "skip": "건너뛰기",
+    "next": "다음",
+    "getStarted": "시작하기",
+    "steps": {
+      "welcome": {
+        "title": "GiftHub에 오신 것을 환영합니다!",
+        "subtitle": "이용할 수 있는 기능을 간단히 둘러보세요."
+      },
+      "discover": {
+        "title": "혜택 찾기",
+        "subtitle": "지역 판매자의 바우처, 기프트카드, 이벤트를 둘러보세요.",
+        "features": {
+          "vouchers": "디지털 바우처",
+          "giftCards": "친구와 가족을 위한 기프트카드",
+          "nearby": "내 주변 혜택"
+        }
+      },
+      "wallet": {
+        "title": "모든 바우처를 한곳에",
+        "subtitle": "구매한 모든 항목이 계정에 저장됩니다.",
+        "features": {
+          "qr": "매장에서 빠르게 사용할 수 있는 QR 코드",
+          "expiry": "바우처 만료 전 이메일 알림"
+        }
+      },
+      "rewards": {
+        "title": "리워드 받기",
+        "subtitle": "친구에게 바우처를 공유하고 친구가 사용하면 크레딧을 받으세요.",
+        "features": {
+          "referralCredit": "추천 성공 시 판매자 크레딧 지급",
+          "checkIns": "매일 출석 체크와 연속 기록",
+          "badges": "잠금 해제할 수 있는 배지"
+        }
+      },
+      "notifications": {
+        "title": "최신 소식 받기",
+        "subtitle": "이 기기에서 알림을 켜세요."
+      },
+      "security": {
+        "title": "계정 보호하기",
+        "subtitle": "패스키 또는 2단계 인증을 추가하세요."
+      }
+    }
   }
 }

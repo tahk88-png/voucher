@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Előfizetéses dobozok",
     "pricing": "Árazási szabályok",
     "webhooks": "Webhookok",
-    "apiKeys": "API-kulcsok"
+    "apiKeys": "API-kulcsok",
+    "marketplace": "Piactér",
+    "openMenu": "Menü megnyitása",
+    "closeMenu": "Menü bezárása",
+    "expandSidebar": "Oldalsáv kibontása",
+    "collapseSidebar": "Oldalsáv összecsukása",
+    "sectionShop": "Vásárlás",
+    "sectionRewards": "Jutalmak",
+    "sectionAccount": "Fiók",
+    "mainNavigation": "Fő navigáció",
+    "quickNavigation": "Gyors navigáció",
+    "logoutFailed": "Nem sikerült kijelentkezni. Kérjük, próbálja újra."
   },
   "voucher": {
     "title": "Utalvány",
@@ -184,7 +195,11 @@
     "creditApplied": "Kredit alkalmazva",
     "finalTotal": "Összesen",
     "pageDescription": "Kövesse nyomon elérhető és zárolt kreditjeit.",
-    "noMerchantWallets": "Még nincsenek kereskedői pénztárcák."
+    "noMerchantWallets": "Még nincsenek kereskedői pénztárcák.",
+    "noCreditYet": "Még nincs kredit",
+    "noCreditYetBody": "Kreditet kap, amikor egy ismerőse bevált egy Ön által megosztott utalványt. A kredit itt jelenik meg kereskedőnként.",
+    "shareToEarn": "Utalvány megosztása",
+    "findVoucherToShare": "Megosztható utalvány keresése"
   },
   "redemption": {
     "title": "Beváltások",
@@ -244,7 +259,12 @@
     "merchantLabel": "Kereskedő",
     "voucherLabel": "Utalvány",
     "linkField": "Link",
-    "codeField": "Kód"
+    "codeField": "Kód",
+    "linkCopied": "Link másolva",
+    "howItWorksTitle": "Hogyan működnek az ajánlások",
+    "howItWorksBody": "Nyisson meg egy utalványt, és koppintson a Megosztás gombra. Személyes linket kap az adott utalványhoz. Amikor egy ismerőse beváltja, kreditet kap a kereskedőtől.",
+    "findVoucher": "Megosztható utalvány keresése",
+    "linkForVoucher": "Ajánlói link ehhez: {voucher}"
   },
   "analytics": {
     "title": "Elemzések",
@@ -516,7 +536,9 @@
     "viewVouchers": "Utalványok megtekintése",
     "redeemed": "Beváltva",
     "friendLabel": "Barát",
-    "voucherLabel": "Utalvány"
+    "voucherLabel": "Utalvány",
+    "offersLinkTitle": "Link az aktuális ajánlatokhoz",
+    "offersLinkDescription": "Küldje el ismerőseinek a GiftHub összes aktuális ajánlatát. Ezzel a linkkel nem szerez kreditet; ehhez egy adott utalványt kell megosztania annak oldaláról."
   },
   "billing": {
     "upgradeRequired": "Frissítés szükséges",
@@ -618,14 +640,34 @@
     "inApp": "Alkalmazásban",
     "pushBeta": "Push (béta)",
     "saving": "Mentés...",
-    "savePreferences": "Beállítások mentése"
+    "savePreferences": "Beállítások mentése",
+    "noPreferencesTitle": "Még nincs mit beállítani",
+    "noPreferencesBody": "Az értesítési beállítások kereskedőnként kezelhetők. Még nincs olyan kereskedője, amelyhez értesítési beállítások tartoznak.",
+    "saved": "Beállítások mentve",
+    "saveFailed": "Nem sikerült menteni a beállításait. Kérjük, próbálja újra.",
+    "markAllReadFailed": "Nem sikerült olvasottnak jelölni az értesítéseket. Kérjük, próbálja újra.",
+    "emptyHint": "Az utalványaival és ajánlataival kapcsolatos hírek itt jelennek meg.",
+    "browseOffers": "Ajánlatok böngészése"
   },
   "settingsPage": {
     "description": "Kezelje fiókbeállításait.",
     "joined": "Csatlakozott",
     "recently": "nemrég",
     "accountAccessTitle": "Fiók hozzáférés",
-    "accountAccessDescription": "Védje fiókját és kezelje a hozzáférést."
+    "accountAccessDescription": "Védje fiókját és kezelje a hozzáférést.",
+    "pushDescription": "Kapjon értesítéseket ezen az eszközön, akkor is, ha a GiftHub nincs megnyitva.",
+    "changePasswordTitle": "Jelszó módosítása",
+    "changePasswordDescription": "Frissítse fiókja jelszavát.",
+    "setPasswordTitle": "Jelszó beállítása",
+    "setPasswordDescription": "Állítson be jelszót, hogy e-mail-címével és jelszavával jelentkezhessen be.",
+    "twoFactorTitle": "Kétlépcsős azonosítás",
+    "twoFactorDescription": "Adjon hozzá egy további biztonsági réteget hitelesítő alkalmazással vagy passkey-vel.",
+    "twoFactorManage": "Biztonság kezelése",
+    "sessionsTitle": "Aktív munkamenetek",
+    "sessionsDescription": "Nézze meg, hol van bejelentkezve a fiókjába.",
+    "sessionsView": "Munkamenetek megtekintése",
+    "deleteTitle": "Fiók törlése",
+    "deleteDescription": "Fiókja végleges törlése és adatai anonimizálása. Ez a művelet nem vonható vissza."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Fiók adatok",
     "emailPreferences": "E-mail beállítások",
     "appSettings": "Alkalmazás beállítások"
+  },
+  "dashboard": {
+    "roleShopper": "Vásárló",
+    "roleAdmin": "Adminisztrátor",
+    "roleStaff": "Munkatárs",
+    "rolePlatformAdmin": "Platformadminisztrátor",
+    "availableCredit": "Elérhető kredit",
+    "pendingCredit": "{amount} függőben",
+    "creditExplainer": "Kredit, amelyet akkor kap, amikor ismerősei beváltják az Ön által megosztott utalványokat. A kibocsátó kereskedőnél használhatja fel.",
+    "viewCreditDetails": "Kredit részletei",
+    "successfulReferrals": "Sikeres ajánlások",
+    "checkInPoints": "Bejelentkezési pontok",
+    "shareTitle": "Ossza meg az utalványt, és szerezzen kreditet",
+    "shareDescription": "Nyisson meg bármely utalványt, és koppintson a Megosztás gombra a személyes linkjéért. Amikor egy ismerőse beváltja, kreditet kap.",
+    "openShareCenter": "Megosztási központ megnyitása",
+    "sharedSummary": "Megosztott utalványok: {count} · Beváltva: {redeemed}",
+    "achievementsTitle": "Eredmények",
+    "badgesEarned": "Megszerzett jelvények: {earned} / {total}",
+    "viewAchievements": "Eredmények megtekintése",
+    "availableOffers": "Elérhető ajánlatok",
+    "browseAll": "Összes böngészése",
+    "noActiveOffers": "Jelenleg nincs aktív ajánlat. Nézzen vissza hamarosan.",
+    "validUntil": "Érvényes: {date}",
+    "recentActivity": "Legutóbbi tevékenység",
+    "noRecentActivity": "Még nincs tevékenység.",
+    "creditFrom": "Kredit: {merchant}",
+    "referralAt": "Ajánlás · {merchant}",
+    "creditStatus": {
+      "locked": "függőben",
+      "available": "elérhető",
+      "used": "felhasználva",
+      "expired": "lejárt",
+      "reversed": "visszavonva"
+    },
+    "referralStatus": {
+      "created": "Link létrehozva",
+      "opened": "Megnyitva",
+      "redeemed": "Beváltva",
+      "expired": "Lejárt",
+      "blocked": "Letiltva"
+    },
+    "myMerchants": "Kereskedőim",
+    "merchantDashboard": "Kereskedői irányítópult",
+    "sellTitle": "Értékesítsen a GiftHubon",
+    "sellDescription": "Szeretne utalványokat kínálni ügyfeleinek? Lépjen kapcsolatba velünk, és segítünk létrehozni egy kereskedői fiókot.",
+    "contactUs": "Kapcsolatfelvétel",
+    "exploreVouchers": "Utalványok felfedezése"
+  },
+  "wishlist": {
+    "title": "Kívánságlistám",
+    "emptyTitle": "A kívánságlistája üres",
+    "emptyBody": "Mentse el a tetsző utalványokat, kereskedőket és kampányokat, hogy később itt megtalálja őket.",
+    "browseOffers": "Ajánlatok böngészése"
+  },
+  "push": {
+    "enable": "Push-értesítések bekapcsolása",
+    "enabled": "A push-értesítések be vannak kapcsolva",
+    "enabledToast": "Push-értesítések bekapcsolva",
+    "disable": "Kikapcsolás",
+    "disabledToast": "Push-értesítések kikapcsolva",
+    "enableFailed": "Nem sikerült bekapcsolni a push-értesítéseket. Kérjük, próbálja újra.",
+    "disableFailed": "Nem sikerült kikapcsolni a push-értesítéseket. Kérjük, próbálja újra.",
+    "unsupported": "Ez a böngésző nem támogatja a push-értesítéseket.",
+    "blocked": "Az értesítések le vannak tiltva. Engedélyezze őket a böngésző beállításaiban a bekapcsoláshoz."
+  },
+  "sessions": {
+    "title": "Aktív munkamenetek",
+    "description": "Nézze meg, hol van bejelentkezve a fiókjába.",
+    "backToSettings": "Vissza a beállításokhoz",
+    "deviceOn": "{browser} – {os}",
+    "unknownDevice": "Ismeretlen eszköz",
+    "thisDevice": "Ez az eszköz",
+    "signedInHere": "Jelenleg itt van bejelentkezve.",
+    "otherDevicesTitle": "Más eszközök",
+    "otherDevicesNone": "Nem tudjuk megjeleníteni azokat a más eszközöket, amelyeken esetleg be van jelentkezve. Ha bármi szokatlant észlel, módosítsa jelszavát, és kapcsolja be a kétlépcsős azonosítást.",
+    "securitySettings": "Biztonsági beállítások",
+    "lastActive": "Utoljára aktív: {time}",
+    "logout": "Kijelentkezés",
+    "logoutAll": "Kijelentkezés minden más eszközről",
+    "logoutAllBody": "Az összes munkamenet befejezése a többi eszközön.",
+    "loadFailed": "Nem sikerült betölteni a munkameneteit.",
+    "revokeFailed": "Nem sikerült befejezni a munkamenetet. Kérjük, próbálja újra.",
+    "revoked": "Munkamenet befejezve.",
+    "revokedAll": "A többi eszközön lévő munkamenetek befejezve."
+  },
+  "achievements": {
+    "title": "Eredmények",
+    "checkIn": "Mai bejelentkezés",
+    "checkingIn": "Bejelentkezés…",
+    "checkedInToday": "Ma már bejelentkezett",
+    "checkInFailed": "A bejelentkezés nem sikerült. Kérjük, próbálja újra.",
+    "checkInSaved": "Bejelentkezés mentve",
+    "newBadge": "Új jelvény: {name}",
+    "checkInPoints": "Bejelentkezési pontok",
+    "level": "Szint",
+    "levelValue": "{level}. szint",
+    "levelProgress": "Haladás a következő szintig",
+    "badgesLabel": "Jelvények",
+    "noBadgesYet": "Még nincs megszerzett jelvény.",
+    "earnedOn": "Megszerezve: {date}",
+    "locked": "Még nincs megszerezve",
+    "howToEarn": "Hogyan szerezhet pontokat",
+    "earnRuleCheckIn": "Jelentkezzen be naponta egyszer",
+    "pointsShort": "+{points} pont",
+    "pointsExplainer": "A pontok és szintek azt mutatják, mennyire aktív. Nem válthatók be pénzre vagy utalványra.",
+    "currentStreak": "Jelenlegi sorozat (nap)",
+    "longestStreak": "Leghosszabb sorozat (nap)",
+    "milestone": "Sorozat-mérföldkő elérve!",
+    "badges": {
+      "first_purchase": {
+        "name": "Első vásárlás",
+        "description": "Megvásárolta első utalványát"
+      },
+      "first_redemption": {
+        "name": "Első beváltás",
+        "description": "Beváltotta első utalványát"
+      },
+      "5_referrals": {
+        "name": "Kapcsolatépítő",
+        "description": "5 utalványt osztott meg ismerőseivel"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "10 utalványt osztott meg ismerőseivel"
+      },
+      "streak_7": {
+        "name": "A hét harcosa",
+        "description": "7 egymást követő napon jelentkezett be"
+      },
+      "streak_30": {
+        "name": "A hónap mestere",
+        "description": "30 egymást követő napon jelentkezett be"
+      },
+      "review_writer": {
+        "name": "Értékelő",
+        "description": "Közzétette első értékelését"
+      },
+      "big_spender": {
+        "name": "Nagy költekező",
+        "description": "Összesen több mint 10 000-et költött utalványokra"
+      },
+      "early_adopter": {
+        "name": "Korai felhasználó",
+        "description": "2028 előtt csatlakozott a GiftHubhoz"
+      },
+      "social_sharer": {
+        "name": "Közösségi megosztó",
+        "description": "Megosztott egy utalványt a közösségi médiában"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Hűségprogram",
+    "notActiveTitle": "A hűségszintek még nem érhetők el",
+    "notActiveBody": "A vásárlásokért még nem jár hűségpont, és fizetéskor nem érvényesül szintkedvezmény vagy -előny, ezért itt nincsenek megjeleníthető szintek.",
+    "earnTodayTitle": "Amit már ma megszerezhet",
+    "earnCreditTitle": "Ajánlói kredit",
+    "earnCreditBody": "Osszon meg egy utalványt. Amikor egy ismerőse beváltja, kreditet kap, amelyet az adott kereskedőnél költhet el.",
+    "earnCreditLink": "Kredit megtekintése",
+    "earnPointsTitle": "Bejelentkezési pontok",
+    "earnPointsBody": "Jelentkezzen be naponta, építsen sorozatot, lépjen szintet, és oldjon fel jelvényeket.",
+    "earnPointsLink": "Eredmények megtekintése",
+    "historyTitle": "Pontelőzmények",
+    "pointsBalance": "Egyenleg: {points} pont"
+  },
+  "welcome": {
+    "greeting": "Üdvözöljük, {name}!",
+    "progress": "Bevezetés állapota",
+    "setUpSecurity": "2FA vagy passkey beállítása",
+    "skip": "Kihagyás",
+    "next": "Tovább",
+    "getStarted": "Kezdés",
+    "steps": {
+      "welcome": {
+        "title": "Üdvözöljük a GiftHubon!",
+        "subtitle": "Íme egy rövid áttekintés arról, mit tehet."
+      },
+      "discover": {
+        "title": "Fedezzen fel ajánlatokat",
+        "subtitle": "Böngésszen a helyi kereskedők utalványai, ajándékkártyái és eseményei között.",
+        "features": {
+          "vouchers": "Digitális utalványok",
+          "giftCards": "Ajándékkártyák barátoknak és családtagoknak",
+          "nearby": "Ajánlatok a közelében"
+        }
+      },
+      "wallet": {
+        "title": "Utalványai egy helyen",
+        "subtitle": "Minden vásárlása a fiókjába mentődik.",
+        "features": {
+          "qr": "QR-kódok a gyors üzleti beváltáshoz",
+          "expiry": "E-mailes emlékeztetők az utalvány lejárata előtt"
+        }
+      },
+      "rewards": {
+        "title": "Szerezzen jutalmakat",
+        "subtitle": "Ossza meg az utalványokat ismerőseivel, és szerezzen kreditet, amikor beváltják őket.",
+        "features": {
+          "referralCredit": "Kereskedői kredit a sikeres ajánlásokért",
+          "checkIns": "Napi bejelentkezések és sorozatok",
+          "badges": "Feloldható jelvények"
+        }
+      },
+      "notifications": {
+        "title": "Maradjon naprakész",
+        "subtitle": "Kapcsolja be az értesítéseket ezen az eszközön."
+      },
+      "security": {
+        "title": "Védje fiókját",
+        "subtitle": "Adjon hozzá passkey-t vagy kétlépcsős azonosítást."
+      }
+    }
   }
 }

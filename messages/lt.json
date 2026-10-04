@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Prenumeratos dėžutės",
     "pricing": "Kainodaros taisyklės",
     "webhooks": "Webhooks",
-    "apiKeys": "API raktai"
+    "apiKeys": "API raktai",
+    "marketplace": "Prekyvietė",
+    "openMenu": "Atidaryti meniu",
+    "closeMenu": "Uždaryti meniu",
+    "expandSidebar": "Išskleisti šoninę juostą",
+    "collapseSidebar": "Suskleisti šoninę juostą",
+    "sectionShop": "Parduotuvė",
+    "sectionRewards": "Apdovanojimai",
+    "sectionAccount": "Paskyra",
+    "mainNavigation": "Pagrindinė navigacija",
+    "quickNavigation": "Greitoji navigacija",
+    "logoutFailed": "Nepavyko atsijungti. Bandykite dar kartą."
   },
   "voucher": {
     "title": "Kuponas",
@@ -184,7 +195,11 @@
     "creditApplied": "Pritaikytas kreditas",
     "finalTotal": "Iš viso",
     "pageDescription": "Sekite savo turimus ir užrakintus kreditus.",
-    "noMerchantWallets": "Prekybininkų piniginių dar nėra."
+    "noMerchantWallets": "Prekybininkų piniginių dar nėra.",
+    "noCreditYet": "Kreditų dar nėra",
+    "noCreditYetBody": "Kreditą gaunate, kai draugas panaudoja jūsų pasidalintą kuponą. Jis rodomas čia pagal kiekvieną prekybininką.",
+    "shareToEarn": "Pasidalinti kuponu",
+    "findVoucherToShare": "Rasti kuponą, kuriuo galima pasidalinti"
   },
   "redemption": {
     "title": "Panaudojimai",
@@ -244,7 +259,12 @@
     "merchantLabel": "Prekybininkas",
     "voucherLabel": "Kuponas",
     "linkField": "Nuoroda",
-    "codeField": "Kodas"
+    "codeField": "Kodas",
+    "linkCopied": "Nuoroda nukopijuota",
+    "howItWorksTitle": "Kaip veikia rekomendacijos",
+    "howItWorksBody": "Atidarykite kuponą ir bakstelėkite „Dalintis“. Gausite asmeninę to kupono nuorodą. Kai draugas jį panaudos, gausite prekybininko kreditą.",
+    "findVoucher": "Rasti kuponą, kuriuo galima pasidalinti",
+    "linkForVoucher": "Rekomendacijos nuoroda: {voucher}"
   },
   "analytics": {
     "title": "Analitika",
@@ -516,7 +536,9 @@
     "viewVouchers": "Peržiūrėti kuponus",
     "redeemed": "Panaudota",
     "friendLabel": "Draugas",
-    "voucherLabel": "Kuponas"
+    "voucherLabel": "Kuponas",
+    "offersLinkTitle": "Nuoroda į dabartinius pasiūlymus",
+    "offersLinkDescription": "Nukreipkite draugus į visus dabartinius GiftHub pasiūlymus. Ši nuoroda kredito neuždirba; norėdami uždirbti, pasidalinkite konkrečiu kuponu iš jo puslapio."
   },
   "billing": {
     "upgradeRequired": "Reikalingas naujovinimas",
@@ -618,14 +640,34 @@
     "inApp": "Programėlėje",
     "pushBeta": "Push (beta)",
     "saving": "Saugoma...",
-    "savePreferences": "Išsaugoti nuostatas"
+    "savePreferences": "Išsaugoti nuostatas",
+    "noPreferencesTitle": "Kol kas nėra ką nustatyti",
+    "noPreferencesBody": "Pranešimų nustatymai valdomi kiekvienam prekybininkui atskirai. Kol kas neturite prekybininkų su pranešimų nustatymais.",
+    "saved": "Nuostatos išsaugotos",
+    "saveFailed": "Nepavyko išsaugoti jūsų nuostatų. Bandykite dar kartą.",
+    "markAllReadFailed": "Nepavyko pažymėti pranešimų kaip perskaitytų. Bandykite dar kartą.",
+    "emptyHint": "Čia bus rodomos naujienos apie jūsų kuponus ir pasiūlymus.",
+    "browseOffers": "Naršyti pasiūlymus"
   },
   "settingsPage": {
     "description": "Valdykite savo paskyros nustatymus.",
     "joined": "Prisijungė",
     "recently": "neseniai",
     "accountAccessTitle": "Prieiga prie paskyros",
-    "accountAccessDescription": "Apsaugokite savo paskyrą ir valdykite prieigą."
+    "accountAccessDescription": "Apsaugokite savo paskyrą ir valdykite prieigą.",
+    "pushDescription": "Gaukite pranešimus šiame įrenginyje, net kai GiftHub neatidarytas.",
+    "changePasswordTitle": "Keisti slaptažodį",
+    "changePasswordDescription": "Atnaujinkite savo paskyros slaptažodį.",
+    "setPasswordTitle": "Nustatyti slaptažodį",
+    "setPasswordDescription": "Nustatykite slaptažodį, kad galėtumėte prisijungti el. paštu ir slaptažodžiu.",
+    "twoFactorTitle": "Dviejų veiksnių autentifikavimas",
+    "twoFactorDescription": "Pridėkite papildomą apsaugos lygmenį naudodami autentifikavimo programėlę arba prieigos raktą.",
+    "twoFactorManage": "Valdyti saugumą",
+    "sessionsTitle": "Aktyvios sesijos",
+    "sessionsDescription": "Peržiūrėkite, kur esate prisijungę prie savo paskyros.",
+    "sessionsView": "Peržiūrėti sesijas",
+    "deleteTitle": "Ištrinti paskyrą",
+    "deleteDescription": "Visam laikui ištrinkite savo paskyrą ir anonimizuokite duomenis. Šio veiksmo atšaukti negalima."
   },
   "profile": {
     "title": "Profilis",
@@ -633,5 +675,217 @@
     "accountInformation": "Paskyros informacija",
     "emailPreferences": "El. pašto nustatymai",
     "appSettings": "Programėlės nustatymai"
+  },
+  "dashboard": {
+    "roleShopper": "Pirkėjas",
+    "roleAdmin": "Administratorius",
+    "roleStaff": "Darbuotojas",
+    "rolePlatformAdmin": "Platformos administratorius",
+    "availableCredit": "Galimas kreditas",
+    "pendingCredit": "Laukiama: {amount}",
+    "creditExplainer": "Kreditas, kurį gaunate, kai draugai panaudoja jūsų pasidalintus kuponus. Jį galite išleisti pas jį išdavusį prekybininką.",
+    "viewCreditDetails": "Peržiūrėti kredito informaciją",
+    "successfulReferrals": "Sėkmingos rekomendacijos",
+    "checkInPoints": "Registravimosi taškai",
+    "shareTitle": "Pasidalinkite kuponu ir uždirbkite kreditą",
+    "shareDescription": "Atidarykite bet kurį kuponą ir bakstelėkite „Dalintis“, kad gautumėte asmeninę nuorodą. Kai draugas jį panaudos, uždirbsite kreditą.",
+    "openShareCenter": "Atidaryti dalinimosi centrą",
+    "sharedSummary": "Pasidalinti kuponai: {count} · Panaudoti: {redeemed}",
+    "achievementsTitle": "Pasiekimai",
+    "badgesEarned": "Gauti ženkleliai: {earned} iš {total}",
+    "viewAchievements": "Peržiūrėti pasiekimus",
+    "availableOffers": "Galimi pasiūlymai",
+    "browseAll": "Naršyti viską",
+    "noActiveOffers": "Šiuo metu aktyvių pasiūlymų nėra. Užsukite netrukus.",
+    "validUntil": "Galioja iki {date}",
+    "recentActivity": "Naujausia veikla",
+    "noRecentActivity": "Veiklos dar nėra.",
+    "creditFrom": "Prekybininko {merchant} kreditas",
+    "referralAt": "Rekomendacija · {merchant}",
+    "creditStatus": {
+      "locked": "laukiama",
+      "available": "galimas",
+      "used": "panaudotas",
+      "expired": "nebegalioja",
+      "reversed": "atšauktas"
+    },
+    "referralStatus": {
+      "created": "Nuoroda sukurta",
+      "opened": "Atidaryta",
+      "redeemed": "Panaudota",
+      "expired": "Nebegalioja",
+      "blocked": "Užblokuota"
+    },
+    "myMerchants": "Mano prekybininkai",
+    "merchantDashboard": "Prekybininko skydelis",
+    "sellTitle": "Parduokite per GiftHub",
+    "sellDescription": "Norite siūlyti kuponus savo klientams? Susisiekite su mumis ir padėsime susikurti prekybininko paskyrą.",
+    "contactUs": "Susisiekite su mumis",
+    "exploreVouchers": "Naršyti kuponus"
+  },
+  "wishlist": {
+    "title": "Mano norų sąrašas",
+    "emptyTitle": "Jūsų norų sąrašas tuščias",
+    "emptyBody": "Išsaugokite patinkančius kuponus, prekybininkus ir kampanijas, kad vėliau rastumėte juos čia.",
+    "browseOffers": "Naršyti pasiūlymus"
+  },
+  "push": {
+    "enable": "Įjungti tiesioginius pranešimus",
+    "enabled": "Tiesioginiai pranešimai įjungti",
+    "enabledToast": "Tiesioginiai pranešimai įjungti",
+    "disable": "Išjungti",
+    "disabledToast": "Tiesioginiai pranešimai išjungti",
+    "enableFailed": "Nepavyko įjungti tiesioginių pranešimų. Bandykite dar kartą.",
+    "disableFailed": "Nepavyko išjungti tiesioginių pranešimų. Bandykite dar kartą.",
+    "unsupported": "Ši naršyklė nepalaiko tiesioginių pranešimų.",
+    "blocked": "Pranešimai užblokuoti. Norėdami juos įjungti, leiskite juos naršyklės nustatymuose."
+  },
+  "sessions": {
+    "title": "Aktyvios sesijos",
+    "description": "Peržiūrėkite, kur esate prisijungę prie savo paskyros.",
+    "backToSettings": "Grįžti į nustatymus",
+    "deviceOn": "{browser}, {os}",
+    "unknownDevice": "Nežinomas įrenginys",
+    "thisDevice": "Šis įrenginys",
+    "signedInHere": "Šiuo metu esate prisijungę čia.",
+    "otherDevicesTitle": "Kiti įrenginiai",
+    "otherDevicesNone": "Negalime parodyti kitų įrenginių, kuriuose galite būti prisijungę. Jei pastebėsite ką nors neįprasto, pakeiskite slaptažodį ir įjunkite dviejų veiksnių autentifikavimą.",
+    "securitySettings": "Saugumo nustatymai",
+    "lastActive": "Paskutinį kartą aktyvus {time}",
+    "logout": "Atsijungti",
+    "logoutAll": "Atsijungti visur kitur",
+    "logoutAllBody": "Baigti visas sesijas kituose įrenginiuose.",
+    "loadFailed": "Nepavyko įkelti jūsų sesijų.",
+    "revokeFailed": "Nepavyko baigti sesijos. Bandykite dar kartą.",
+    "revoked": "Sesija baigta.",
+    "revokedAll": "Sesijos kituose įrenginiuose baigtos."
+  },
+  "achievements": {
+    "title": "Pasiekimai",
+    "checkIn": "Užsiregistruoti šiandien",
+    "checkingIn": "Registruojama…",
+    "checkedInToday": "Šiandien užsiregistruota",
+    "checkInFailed": "Užsiregistruoti nepavyko. Bandykite dar kartą.",
+    "checkInSaved": "Registracija išsaugota",
+    "newBadge": "Naujas ženklelis: {name}",
+    "checkInPoints": "Registravimosi taškai",
+    "level": "Lygis",
+    "levelValue": "{level} lygis",
+    "levelProgress": "Pažanga iki kito lygio",
+    "badgesLabel": "Ženkleliai",
+    "noBadgesYet": "Ženklelių dar negauta.",
+    "earnedOn": "Gauta {date}",
+    "locked": "Dar negauta",
+    "howToEarn": "Kaip uždirbti taškų",
+    "earnRuleCheckIn": "Užsiregistruokite kartą per dieną",
+    "pointsShort": "+{points} tšk.",
+    "pointsExplainer": "Taškai ir lygiai rodo, kiek esate aktyvūs. Jų negalima iškeisti į pinigus ar kuponus.",
+    "currentStreak": "Dabartinė serija (dienos)",
+    "longestStreak": "Ilgiausia serija (dienos)",
+    "milestone": "Pasiektas serijos etapas!",
+    "badges": {
+      "first_purchase": {
+        "name": "Pirmasis pirkinys",
+        "description": "Įsigijote pirmąjį kuponą"
+      },
+      "first_redemption": {
+        "name": "Pirmasis panaudojimas",
+        "description": "Panaudojote pirmąjį kuponą"
+      },
+      "5_referrals": {
+        "name": "Jungėjas",
+        "description": "Pasidalinote 5 kuponais su draugais"
+      },
+      "10_referrals": {
+        "name": "Influenceris",
+        "description": "Pasidalinote 10 kuponų su draugais"
+      },
+      "streak_7": {
+        "name": "Savaitės karys",
+        "description": "Registravotės 7 dienas iš eilės"
+      },
+      "streak_30": {
+        "name": "Mėnesio meistras",
+        "description": "Registravotės 30 dienų iš eilės"
+      },
+      "review_writer": {
+        "name": "Recenzentas",
+        "description": "Paskelbėte pirmąjį atsiliepimą"
+      },
+      "big_spender": {
+        "name": "Didysis pirkėjas",
+        "description": "Iš viso kuponams išleidote daugiau nei 10 000"
+      },
+      "early_adopter": {
+        "name": "Pradininkas",
+        "description": "Prisijungėte prie GiftHub iki 2028 m."
+      },
+      "social_sharer": {
+        "name": "Socialinis dalintojas",
+        "description": "Pasidalinote kuponu socialiniuose tinkluose"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Lojalumas",
+    "notActiveTitle": "Lojalumo lygiai dar neprieinami",
+    "notActiveBody": "Už pirkinius lojalumo taškai dar nesuteikiami, o atsiskaitant netaikomos jokios lygių nuolaidos ar privalumai, todėl čia nėra rodomų lygių.",
+    "earnTodayTitle": "Ką galite uždirbti jau šiandien",
+    "earnCreditTitle": "Rekomendacijų kreditas",
+    "earnCreditBody": "Pasidalinkite kuponu. Kai draugas jį panaudos, gausite kreditą, kurį galėsite išleisti pas tą prekybininką.",
+    "earnCreditLink": "Peržiūrėti savo kreditą",
+    "earnPointsTitle": "Registravimosi taškai",
+    "earnPointsBody": "Registruokitės kasdien, kad sukurtumėte seriją, kiltumėte lygiais ir atrakintumėte ženklelius.",
+    "earnPointsLink": "Peržiūrėti pasiekimus",
+    "historyTitle": "Taškų istorija",
+    "pointsBalance": "Taškų likutis: {points}"
+  },
+  "welcome": {
+    "greeting": "Sveiki, {name}!",
+    "progress": "Pradinės sąrankos eiga",
+    "setUpSecurity": "Nustatyti 2FA arba prieigos raktą",
+    "skip": "Praleisti",
+    "next": "Toliau",
+    "getStarted": "Pradėti",
+    "steps": {
+      "welcome": {
+        "title": "Sveiki atvykę į GiftHub!",
+        "subtitle": "Štai trumpa apžvalga, ką galite daryti."
+      },
+      "discover": {
+        "title": "Atraskite pasiūlymus",
+        "subtitle": "Naršykite vietinių prekybininkų kuponus, dovanų korteles ir renginius.",
+        "features": {
+          "vouchers": "Skaitmeniniai kuponai",
+          "giftCards": "Dovanų kortelės draugams ir šeimai",
+          "nearby": "Pasiūlymai netoliese"
+        }
+      },
+      "wallet": {
+        "title": "Visi jūsų kuponai vienoje vietoje",
+        "subtitle": "Viskas, ką perkate, išsaugoma jūsų paskyroje.",
+        "features": {
+          "qr": "QR kodai greitam panaudojimui parduotuvėje",
+          "expiry": "Priminimai el. paštu prieš baigiantis kupono galiojimui"
+        }
+      },
+      "rewards": {
+        "title": "Uždirbkite apdovanojimų",
+        "subtitle": "Dalinkitės kuponais su draugais ir uždirbkite kreditą, kai jie juos panaudoja.",
+        "features": {
+          "referralCredit": "Prekybininko kreditas už sėkmingas rekomendacijas",
+          "checkIns": "Kasdienės registracijos ir serijos",
+          "badges": "Atrakinami ženkleliai"
+        }
+      },
+      "notifications": {
+        "title": "Būkite informuoti",
+        "subtitle": "Įjunkite pranešimus šiame įrenginyje."
+      },
+      "security": {
+        "title": "Apsaugokite savo paskyrą",
+        "subtitle": "Pridėkite prieigos raktą arba dviejų veiksnių autentifikavimą."
+      }
+    }
   }
 }

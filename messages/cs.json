@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Předplatitelské boxy",
     "pricing": "Cenová pravidla",
     "webhooks": "Webhooky",
-    "apiKeys": "Klíče API"
+    "apiKeys": "Klíče API",
+    "marketplace": "Tržiště",
+    "openMenu": "Otevřít menu",
+    "closeMenu": "Zavřít menu",
+    "expandSidebar": "Rozbalit postranní panel",
+    "collapseSidebar": "Sbalit postranní panel",
+    "sectionShop": "Nákupy",
+    "sectionRewards": "Odměny",
+    "sectionAccount": "Účet",
+    "mainNavigation": "Hlavní navigace",
+    "quickNavigation": "Rychlá navigace",
+    "logoutFailed": "Odhlášení se nezdařilo. Zkuste to prosím znovu."
   },
   "voucher": {
     "title": "Poukázka",
@@ -184,7 +195,11 @@
     "creditApplied": "Kredit použit",
     "finalTotal": "Celkem",
     "pageDescription": "Sledujte své dostupné a zablokované kredity.",
-    "noMerchantWallets": "Zatím žádné peněženky obchodníků."
+    "noMerchantWallets": "Zatím žádné peněženky obchodníků.",
+    "noCreditYet": "Zatím žádný kredit",
+    "noCreditYetBody": "Kredit získáte, když přítel uplatní poukázku, kterou jste sdíleli. Zobrazuje se zde pro každého obchodníka.",
+    "shareToEarn": "Sdílet poukázku",
+    "findVoucherToShare": "Najít poukázku ke sdílení"
   },
   "redemption": {
     "title": "Uplatnění",
@@ -244,7 +259,12 @@
     "merchantLabel": "Obchodník",
     "voucherLabel": "Poukázka",
     "linkField": "Odkaz",
-    "codeField": "Kód"
+    "codeField": "Kód",
+    "linkCopied": "Odkaz zkopírován",
+    "howItWorksTitle": "Jak fungují doporučení",
+    "howItWorksBody": "Otevřete poukázku a klepněte na Sdílet. Získáte osobní odkaz na tuto poukázku. Když ji přítel uplatní, získáte kredit od obchodníka.",
+    "findVoucher": "Najít poukázku ke sdílení",
+    "linkForVoucher": "Doporučující odkaz pro {voucher}"
   },
   "analytics": {
     "title": "Analýzy",
@@ -516,7 +536,9 @@
     "viewVouchers": "Zobrazit poukázky",
     "redeemed": "Uplatněno",
     "friendLabel": "Přítel",
-    "voucherLabel": "Poukázka"
+    "voucherLabel": "Poukázka",
+    "offersLinkTitle": "Odkaz na aktuální nabídky",
+    "offersLinkDescription": "Pošlete přátelům odkaz na všechny aktuální nabídky na GiftHub. Za tento odkaz nezískáte kredit; pokud chcete kredit získat, sdílejte konkrétní poukázku z její stránky."
   },
   "billing": {
     "upgradeRequired": "Vyžadován upgrade",
@@ -618,14 +640,34 @@
     "inApp": "V aplikaci",
     "pushBeta": "Push (beta)",
     "saving": "Ukládání...",
-    "savePreferences": "Uložit předvolby"
+    "savePreferences": "Uložit předvolby",
+    "noPreferencesTitle": "Zatím není co nastavovat",
+    "noPreferencesBody": "Nastavení oznámení se spravuje pro každého obchodníka zvlášť. Zatím nemáte žádné obchodníky s nastavením oznámení.",
+    "saved": "Předvolby uloženy",
+    "saveFailed": "Předvolby se nepodařilo uložit. Zkuste to prosím znovu.",
+    "markAllReadFailed": "Oznámení se nepodařilo označit jako přečtená. Zkuste to prosím znovu.",
+    "emptyHint": "Zde se zobrazí novinky o vašich poukázkách a nabídkách.",
+    "browseOffers": "Procházet nabídky"
   },
   "settingsPage": {
     "description": "Spravujte předvolby svého účtu.",
     "joined": "Registrace",
     "recently": "nedávno",
     "accountAccessTitle": "Přístup k účtu",
-    "accountAccessDescription": "Zabezpečte svůj účet a spravujte přístup."
+    "accountAccessDescription": "Zabezpečte svůj účet a spravujte přístup.",
+    "pushDescription": "Dostávejte oznámení na toto zařízení, i když GiftHub není otevřený.",
+    "changePasswordTitle": "Změnit heslo",
+    "changePasswordDescription": "Aktualizujte heslo ke svému účtu.",
+    "setPasswordTitle": "Nastavit heslo",
+    "setPasswordDescription": "Nastavte si heslo, abyste se mohli přihlašovat e-mailem a heslem.",
+    "twoFactorTitle": "Dvoufázové ověření",
+    "twoFactorDescription": "Přidejte další úroveň zabezpečení pomocí ověřovací aplikace nebo přístupového klíče.",
+    "twoFactorManage": "Spravovat zabezpečení",
+    "sessionsTitle": "Aktivní relace",
+    "sessionsDescription": "Podívejte se, kde jste přihlášeni ke svému účtu.",
+    "sessionsView": "Zobrazit relace",
+    "deleteTitle": "Smazat účet",
+    "deleteDescription": "Trvale smažte svůj účet a anonymizujte svá data. Tuto akci nelze vrátit zpět."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Informace o účtu",
     "emailPreferences": "E-mailové předvolby",
     "appSettings": "Nastavení aplikace"
+  },
+  "dashboard": {
+    "roleShopper": "Nakupující",
+    "roleAdmin": "Administrátor",
+    "roleStaff": "Zaměstnanec",
+    "rolePlatformAdmin": "Administrátor platformy",
+    "availableCredit": "Dostupný kredit",
+    "pendingCredit": "{amount} čeká na připsání",
+    "creditExplainer": "Kredit, který získáte, když přátelé uplatní poukázky, které jste sdíleli. Můžete ho utratit u obchodníka, který ho vydal.",
+    "viewCreditDetails": "Zobrazit podrobnosti kreditu",
+    "successfulReferrals": "Úspěšná doporučení",
+    "checkInPoints": "Body za check-in",
+    "shareTitle": "Sdílejte poukázku a získejte kredit",
+    "shareDescription": "Otevřete libovolnou poukázku a klepnutím na Sdílet získáte svůj osobní odkaz. Když ji přítel uplatní, získáte kredit.",
+    "openShareCenter": "Otevřít centrum sdílení",
+    "sharedSummary": "Sdílené poukázky: {count} · Uplatněné: {redeemed}",
+    "achievementsTitle": "Úspěchy",
+    "badgesEarned": "Získané odznaky: {earned} z {total}",
+    "viewAchievements": "Zobrazit úspěchy",
+    "availableOffers": "Dostupné nabídky",
+    "browseAll": "Procházet vše",
+    "noActiveOffers": "Momentálně nejsou k dispozici žádné nabídky. Brzy se vraťte.",
+    "validUntil": "Platí do {date}",
+    "recentActivity": "Nedávná aktivita",
+    "noRecentActivity": "Zatím žádná aktivita.",
+    "creditFrom": "Kredit od obchodníka {merchant}",
+    "referralAt": "Doporučení · {merchant}",
+    "creditStatus": {
+      "locked": "čeká",
+      "available": "dostupný",
+      "used": "použitý",
+      "expired": "vypršel",
+      "reversed": "stornovaný"
+    },
+    "referralStatus": {
+      "created": "Odkaz vytvořen",
+      "opened": "Otevřeno",
+      "redeemed": "Uplatněno",
+      "expired": "Vypršelo",
+      "blocked": "Zablokováno"
+    },
+    "myMerchants": "Moji obchodníci",
+    "merchantDashboard": "Přehled obchodníka",
+    "sellTitle": "Prodávejte na GiftHub",
+    "sellDescription": "Chcete nabízet poukázky svým zákazníkům? Kontaktujte nás a pomůžeme vám založit obchodnický účet.",
+    "contactUs": "Kontaktujte nás",
+    "exploreVouchers": "Prozkoumat poukázky"
+  },
+  "wishlist": {
+    "title": "Můj seznam přání",
+    "emptyTitle": "Váš seznam přání je prázdný",
+    "emptyBody": "Ukládejte si poukázky, obchodníky a kampaně, které se vám líbí, a později je najdete zde.",
+    "browseOffers": "Procházet nabídky"
+  },
+  "push": {
+    "enable": "Zapnout push oznámení",
+    "enabled": "Push oznámení jsou zapnutá",
+    "enabledToast": "Push oznámení zapnuta",
+    "disable": "Vypnout",
+    "disabledToast": "Push oznámení vypnuta",
+    "enableFailed": "Push oznámení se nepodařilo zapnout. Zkuste to prosím znovu.",
+    "disableFailed": "Push oznámení se nepodařilo vypnout. Zkuste to prosím znovu.",
+    "unsupported": "Tento prohlížeč nepodporuje push oznámení.",
+    "blocked": "Oznámení jsou blokována. Pokud je chcete zapnout, povolte je v nastavení prohlížeče."
+  },
+  "sessions": {
+    "title": "Aktivní relace",
+    "description": "Podívejte se, kde jste přihlášeni ke svému účtu.",
+    "backToSettings": "Zpět do nastavení",
+    "deviceOn": "{browser} v systému {os}",
+    "unknownDevice": "Neznámé zařízení",
+    "thisDevice": "Toto zařízení",
+    "signedInHere": "Právě jste zde přihlášeni.",
+    "otherDevicesTitle": "Další zařízení",
+    "otherDevicesNone": "Nemůžeme zobrazit další zařízení, na kterých můžete být přihlášeni. Pokud si všimnete čehokoli neobvyklého, změňte heslo a zapněte dvoufázové ověření.",
+    "securitySettings": "Nastavení zabezpečení",
+    "lastActive": "Naposledy aktivní {time}",
+    "logout": "Odhlásit",
+    "logoutAll": "Odhlásit všude jinde",
+    "logoutAllBody": "Ukončit všechny relace na ostatních zařízeních.",
+    "loadFailed": "Relace se nepodařilo načíst.",
+    "revokeFailed": "Relaci se nepodařilo ukončit. Zkuste to prosím znovu.",
+    "revoked": "Relace ukončena.",
+    "revokedAll": "Relace na ostatních zařízeních byly ukončeny."
+  },
+  "achievements": {
+    "title": "Úspěchy",
+    "checkIn": "Provést dnešní check-in",
+    "checkingIn": "Provádí se check-in…",
+    "checkedInToday": "Dnešní check-in hotov",
+    "checkInFailed": "Check-in se nezdařil. Zkuste to prosím znovu.",
+    "checkInSaved": "Check-in uložen",
+    "newBadge": "Nový odznak: {name}",
+    "checkInPoints": "Body za check-in",
+    "level": "Úroveň",
+    "levelValue": "Úroveň {level}",
+    "levelProgress": "Postup na další úroveň",
+    "badgesLabel": "Odznaky",
+    "noBadgesYet": "Zatím jste nezískali žádné odznaky.",
+    "earnedOn": "Získáno {date}",
+    "locked": "Zatím nezískáno",
+    "howToEarn": "Jak získat body",
+    "earnRuleCheckIn": "Proveďte check-in jednou denně",
+    "pointsShort": "+{points} b.",
+    "pointsExplainer": "Body a úrovně ukazují, jak jste aktivní. Nelze je vyměnit za peníze ani poukázky.",
+    "currentStreak": "Aktuální série (dny)",
+    "longestStreak": "Nejdelší série (dny)",
+    "milestone": "Dosáhli jste milníku série!",
+    "badges": {
+      "first_purchase": {
+        "name": "První nákup",
+        "description": "Koupili jste svou první poukázku"
+      },
+      "first_redemption": {
+        "name": "První uplatnění",
+        "description": "Uplatnili jste svou první poukázku"
+      },
+      "5_referrals": {
+        "name": "Propojovatel",
+        "description": "Sdíleli jste 5 poukázek s přáteli"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "Sdíleli jste 10 poukázek s přáteli"
+      },
+      "streak_7": {
+        "name": "Týdenní bojovník",
+        "description": "Check-in 7 dní po sobě"
+      },
+      "streak_30": {
+        "name": "Mistr měsíce",
+        "description": "Check-in 30 dní po sobě"
+      },
+      "review_writer": {
+        "name": "Recenzent",
+        "description": "Zveřejnili jste svou první recenzi"
+      },
+      "big_spender": {
+        "name": "Velký utrácač",
+        "description": "Celkem jste za poukázky utratili přes 10 000"
+      },
+      "early_adopter": {
+        "name": "Průkopník",
+        "description": "Připojili jste se ke GiftHub před rokem 2028"
+      },
+      "social_sharer": {
+        "name": "Sociální sdílející",
+        "description": "Sdíleli jste poukázku na sociálních sítích"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Věrnost",
+    "notActiveTitle": "Věrnostní úrovně zatím nejsou k dispozici",
+    "notActiveBody": "Za nákupy zatím nezískáváte věrnostní body a při platbě se neuplatňují žádné slevy ani výhody úrovní, takže zde nejsou žádné úrovně k zobrazení.",
+    "earnTodayTitle": "Co můžete získat už dnes",
+    "earnCreditTitle": "Kredit za doporučení",
+    "earnCreditBody": "Sdílejte poukázku. Když ji přítel uplatní, získáte kredit, který můžete utratit u daného obchodníka.",
+    "earnCreditLink": "Zobrazit kredit",
+    "earnPointsTitle": "Body za check-in",
+    "earnPointsBody": "Provádějte check-in každý den, budujte sérii, postupujte na vyšší úrovně a odemykejte odznaky.",
+    "earnPointsLink": "Zobrazit úspěchy",
+    "historyTitle": "Historie bodů",
+    "pointsBalance": "Zůstatek bodů: {points}"
+  },
+  "welcome": {
+    "greeting": "Ahoj, {name}!",
+    "progress": "Průběh úvodního nastavení",
+    "setUpSecurity": "Nastavit 2FA nebo přístupový klíč",
+    "skip": "Přeskočit",
+    "next": "Další",
+    "getStarted": "Začít",
+    "steps": {
+      "welcome": {
+        "title": "Vítejte na GiftHub!",
+        "subtitle": "Zde je rychlá prohlídka toho, co můžete dělat."
+      },
+      "discover": {
+        "title": "Objevujte nabídky",
+        "subtitle": "Procházejte poukázky, dárkové karty a akce od místních obchodníků.",
+        "features": {
+          "vouchers": "Digitální poukázky",
+          "giftCards": "Dárkové karty pro přátele a rodinu",
+          "nearby": "Nabídky ve vašem okolí"
+        }
+      },
+      "wallet": {
+        "title": "Vaše poukázky na jednom místě",
+        "subtitle": "Vše, co koupíte, se uloží do vašeho účtu.",
+        "features": {
+          "qr": "QR kódy pro rychlé uplatnění v prodejně",
+          "expiry": "E-mailová připomenutí před vypršením poukázky"
+        }
+      },
+      "rewards": {
+        "title": "Získávejte odměny",
+        "subtitle": "Sdílejte poukázky s přáteli a získejte kredit, když je uplatní.",
+        "features": {
+          "referralCredit": "Kredit u obchodníka za úspěšná doporučení",
+          "checkIns": "Denní check-iny a série",
+          "badges": "Odznaky k odemčení"
+        }
+      },
+      "notifications": {
+        "title": "Buďte v obraze",
+        "subtitle": "Zapněte oznámení na tomto zařízení."
+      },
+      "security": {
+        "title": "Zabezpečte svůj účet",
+        "subtitle": "Přidejte přístupový klíč nebo dvoufázové ověření."
+      }
+    }
   }
 }

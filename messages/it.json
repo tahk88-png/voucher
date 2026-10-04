@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Box in abbonamento",
     "pricing": "Regole di prezzo",
     "webhooks": "Webhook",
-    "apiKeys": "Chiavi API"
+    "apiKeys": "Chiavi API",
+    "marketplace": "Marketplace",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu",
+    "expandSidebar": "Espandi barra laterale",
+    "collapseSidebar": "Comprimi barra laterale",
+    "sectionShop": "Shop",
+    "sectionRewards": "Premi",
+    "sectionAccount": "Account",
+    "mainNavigation": "Navigazione principale",
+    "quickNavigation": "Navigazione rapida",
+    "logoutFailed": "Impossibile uscire. Riprova."
   },
   "voucher": {
     "title": "Voucher",
@@ -184,7 +195,11 @@
     "creditApplied": "Credito applicato",
     "finalTotal": "Totale",
     "pageDescription": "Monitora i tuoi crediti disponibili e bloccati.",
-    "noMerchantWallets": "Nessun portafoglio merchant ancora."
+    "noMerchantWallets": "Nessun portafoglio merchant ancora.",
+    "noCreditYet": "Nessun credito ancora",
+    "noCreditYetBody": "Guadagni credito quando un amico riscatta un voucher che hai condiviso. Lo trovi qui, diviso per merchant.",
+    "shareToEarn": "Condividi un voucher",
+    "findVoucherToShare": "Trova un voucher da condividere"
   },
   "redemption": {
     "title": "Riscatti",
@@ -244,7 +259,12 @@
     "merchantLabel": "Merchant",
     "voucherLabel": "Voucher",
     "linkField": "Link",
-    "codeField": "Codice"
+    "codeField": "Codice",
+    "linkCopied": "Link copiato",
+    "howItWorksTitle": "Come funzionano i referral",
+    "howItWorksBody": "Apri un voucher e tocca Condividi. Riceverai un link personale per quel voucher. Quando un amico lo riscatta, guadagni credito dal merchant.",
+    "findVoucher": "Trova un voucher da condividere",
+    "linkForVoucher": "Link referral per {voucher}"
   },
   "analytics": {
     "title": "Analitiche",
@@ -516,7 +536,9 @@
     "viewVouchers": "Vedi voucher",
     "redeemed": "Riscattato",
     "friendLabel": "Amico",
-    "voucherLabel": "Voucher"
+    "voucherLabel": "Voucher",
+    "offersLinkTitle": "Link alle offerte attuali",
+    "offersLinkDescription": "Invia agli amici tutte le offerte attuali su GiftHub. Questo link non fa guadagnare credito; per guadagnarlo, condividi un voucher specifico dalla sua pagina."
   },
   "billing": {
     "upgradeRequired": "Aggiornamento richiesto",
@@ -618,14 +640,34 @@
     "inApp": "In-app",
     "pushBeta": "Push (beta)",
     "saving": "Salvataggio...",
-    "savePreferences": "Salva preferenze"
+    "savePreferences": "Salva preferenze",
+    "noPreferencesTitle": "Ancora niente da configurare",
+    "noPreferencesBody": "Le impostazioni delle notifiche sono gestite per merchant. Non hai ancora merchant con impostazioni di notifica.",
+    "saved": "Preferenze salvate",
+    "saveFailed": "Impossibile salvare le preferenze. Riprova.",
+    "markAllReadFailed": "Impossibile segnare le notifiche come lette. Riprova.",
+    "emptyHint": "Qui compariranno gli aggiornamenti sui tuoi voucher e sulle offerte.",
+    "browseOffers": "Sfoglia le offerte"
   },
   "settingsPage": {
     "description": "Gestisci le preferenze del tuo account.",
     "joined": "Iscritto",
     "recently": "di recente",
     "accountAccessTitle": "Accesso all'account",
-    "accountAccessDescription": "Proteggi il tuo account e gestisci l'accesso."
+    "accountAccessDescription": "Proteggi il tuo account e gestisci l'accesso.",
+    "pushDescription": "Ricevi notifiche su questo dispositivo, anche quando GiftHub non è aperto.",
+    "changePasswordTitle": "Cambia password",
+    "changePasswordDescription": "Aggiorna la password del tuo account.",
+    "setPasswordTitle": "Imposta una password",
+    "setPasswordDescription": "Imposta una password per accedere con email e password.",
+    "twoFactorTitle": "Autenticazione a due fattori",
+    "twoFactorDescription": "Aggiungi un ulteriore livello di sicurezza con un'app di autenticazione o una passkey.",
+    "twoFactorManage": "Gestisci sicurezza",
+    "sessionsTitle": "Sessioni attive",
+    "sessionsDescription": "Scopri dove è stato effettuato l'accesso al tuo account.",
+    "sessionsView": "Visualizza sessioni",
+    "deleteTitle": "Elimina account",
+    "deleteDescription": "Elimina definitivamente il tuo account e rendi anonimi i tuoi dati. L'operazione non può essere annullata."
   },
   "profile": {
     "title": "Profilo",
@@ -633,5 +675,217 @@
     "accountInformation": "Informazioni account",
     "emailPreferences": "Preferenze email",
     "appSettings": "Impostazioni app"
+  },
+  "dashboard": {
+    "roleShopper": "Acquirente",
+    "roleAdmin": "Amministratore",
+    "roleStaff": "Staff",
+    "rolePlatformAdmin": "Amministratore della piattaforma",
+    "availableCredit": "Credito disponibile",
+    "pendingCredit": "{amount} in sospeso",
+    "creditExplainer": "Il credito che guadagni quando gli amici riscattano i voucher che hai condiviso. Puoi spenderlo presso il merchant che lo ha emesso.",
+    "viewCreditDetails": "Visualizza dettagli del credito",
+    "successfulReferrals": "Referral riusciti",
+    "checkInPoints": "Punti check-in",
+    "shareTitle": "Condividi un voucher, guadagna credito",
+    "shareDescription": "Apri un voucher qualsiasi e tocca Condividi per ottenere il tuo link personale. Quando un amico lo riscatta, guadagni credito.",
+    "openShareCenter": "Apri il centro condivisione",
+    "sharedSummary": "Voucher condivisi: {count} · Riscattati: {redeemed}",
+    "achievementsTitle": "Obiettivi",
+    "badgesEarned": "Badge ottenuti: {earned} su {total}",
+    "viewAchievements": "Visualizza obiettivi",
+    "availableOffers": "Offerte disponibili",
+    "browseAll": "Sfoglia tutto",
+    "noActiveOffers": "Al momento non ci sono offerte attive. Torna a trovarci presto.",
+    "validUntil": "Valido fino al {date}",
+    "recentActivity": "Attività recente",
+    "noRecentActivity": "Ancora nessuna attività.",
+    "creditFrom": "Credito da {merchant}",
+    "referralAt": "Referral · {merchant}",
+    "creditStatus": {
+      "locked": "in sospeso",
+      "available": "disponibile",
+      "used": "utilizzato",
+      "expired": "scaduto",
+      "reversed": "stornato"
+    },
+    "referralStatus": {
+      "created": "Link creato",
+      "opened": "Aperto",
+      "redeemed": "Riscattato",
+      "expired": "Scaduto",
+      "blocked": "Bloccato"
+    },
+    "myMerchants": "I miei merchant",
+    "merchantDashboard": "Dashboard merchant",
+    "sellTitle": "Vendi su GiftHub",
+    "sellDescription": "Vuoi offrire voucher ai tuoi clienti? Contattaci e ti aiuteremo a configurare un account merchant.",
+    "contactUs": "Contattaci",
+    "exploreVouchers": "Esplora i voucher"
+  },
+  "wishlist": {
+    "title": "La mia lista dei desideri",
+    "emptyTitle": "La tua lista dei desideri è vuota",
+    "emptyBody": "Salva voucher, merchant e campagne che ti piacciono per ritrovarli qui in seguito.",
+    "browseOffers": "Sfoglia le offerte"
+  },
+  "push": {
+    "enable": "Attiva le notifiche push",
+    "enabled": "Le notifiche push sono attive",
+    "enabledToast": "Notifiche push attivate",
+    "disable": "Disattiva",
+    "disabledToast": "Notifiche push disattivate",
+    "enableFailed": "Impossibile attivare le notifiche push. Riprova.",
+    "disableFailed": "Impossibile disattivare le notifiche push. Riprova.",
+    "unsupported": "Questo browser non supporta le notifiche push.",
+    "blocked": "Le notifiche sono bloccate. Consentile nelle impostazioni del browser per attivarle."
+  },
+  "sessions": {
+    "title": "Sessioni attive",
+    "description": "Scopri dove è stato effettuato l'accesso al tuo account.",
+    "backToSettings": "Torna alle impostazioni",
+    "deviceOn": "{browser} su {os}",
+    "unknownDevice": "Dispositivo sconosciuto",
+    "thisDevice": "Questo dispositivo",
+    "signedInHere": "Hai effettuato l'accesso qui in questo momento.",
+    "otherDevicesTitle": "Altri dispositivi",
+    "otherDevicesNone": "Non possiamo elencare gli altri dispositivi su cui potresti aver effettuato l'accesso. Se noti qualcosa di insolito, cambia la password e attiva l'autenticazione a due fattori.",
+    "securitySettings": "Impostazioni di sicurezza",
+    "lastActive": "Ultima attività {time}",
+    "logout": "Esci",
+    "logoutAll": "Esci da tutti gli altri dispositivi",
+    "logoutAllBody": "Termina tutte le sessioni sugli altri dispositivi.",
+    "loadFailed": "Impossibile caricare le sessioni.",
+    "revokeFailed": "Impossibile terminare la sessione. Riprova.",
+    "revoked": "Sessione terminata.",
+    "revokedAll": "Sessioni sugli altri dispositivi terminate."
+  },
+  "achievements": {
+    "title": "Obiettivi",
+    "checkIn": "Fai il check-in di oggi",
+    "checkingIn": "Check-in in corso…",
+    "checkedInToday": "Check-in di oggi effettuato",
+    "checkInFailed": "Check-in non riuscito. Riprova.",
+    "checkInSaved": "Check-in salvato",
+    "newBadge": "Nuovo badge: {name}",
+    "checkInPoints": "Punti check-in",
+    "level": "Livello",
+    "levelValue": "Livello {level}",
+    "levelProgress": "Progresso verso il livello successivo",
+    "badgesLabel": "Badge",
+    "noBadgesYet": "Nessun badge ottenuto finora.",
+    "earnedOn": "Ottenuto il {date}",
+    "locked": "Non ancora ottenuto",
+    "howToEarn": "Come guadagnare punti",
+    "earnRuleCheckIn": "Fai il check-in una volta al giorno",
+    "pointsShort": "+{points} pt",
+    "pointsExplainer": "Punti e livelli mostrano quanto sei attivo. Non possono essere convertiti in denaro o voucher.",
+    "currentStreak": "Serie attuale (giorni)",
+    "longestStreak": "Serie più lunga (giorni)",
+    "milestone": "Traguardo della serie raggiunto!",
+    "badges": {
+      "first_purchase": {
+        "name": "Primo acquisto",
+        "description": "Hai acquistato il tuo primo voucher"
+      },
+      "first_redemption": {
+        "name": "Primo riscatto",
+        "description": "Hai riscattato il tuo primo voucher"
+      },
+      "5_referrals": {
+        "name": "Connettore",
+        "description": "Hai condiviso 5 voucher con gli amici"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "Hai condiviso 10 voucher con gli amici"
+      },
+      "streak_7": {
+        "name": "Guerriero della settimana",
+        "description": "Check-in per 7 giorni di fila"
+      },
+      "streak_30": {
+        "name": "Maestro del mese",
+        "description": "Check-in per 30 giorni di fila"
+      },
+      "review_writer": {
+        "name": "Recensore",
+        "description": "Hai pubblicato la tua prima recensione"
+      },
+      "big_spender": {
+        "name": "Grande spendaccione",
+        "description": "Hai speso oltre 10.000 in voucher in totale"
+      },
+      "early_adopter": {
+        "name": "Pioniere",
+        "description": "Ti sei iscritto a GiftHub prima del 2028"
+      },
+      "social_sharer": {
+        "name": "Condivisore social",
+        "description": "Hai condiviso un voucher sui social media"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Fedeltà",
+    "notActiveTitle": "I livelli fedeltà non sono ancora disponibili",
+    "notActiveBody": "Gli acquisti non fanno ancora guadagnare punti fedeltà e al checkout non vengono applicati sconti o vantaggi di livello, quindi qui non ci sono livelli da mostrare.",
+    "earnTodayTitle": "Cosa puoi guadagnare oggi",
+    "earnCreditTitle": "Credito referral",
+    "earnCreditBody": "Condividi un voucher. Quando un amico lo riscatta, ricevi credito da spendere presso quel merchant.",
+    "earnCreditLink": "Visualizza il tuo credito",
+    "earnPointsTitle": "Punti check-in",
+    "earnPointsBody": "Fai il check-in ogni giorno per costruire una serie, salire di livello e sbloccare badge.",
+    "earnPointsLink": "Visualizza obiettivi",
+    "historyTitle": "Cronologia punti",
+    "pointsBalance": "Saldo: {points} punti"
+  },
+  "welcome": {
+    "greeting": "Ciao, {name}!",
+    "progress": "Avanzamento configurazione iniziale",
+    "setUpSecurity": "Configura la 2FA o una passkey",
+    "skip": "Salta",
+    "next": "Avanti",
+    "getStarted": "Inizia",
+    "steps": {
+      "welcome": {
+        "title": "Benvenuto su GiftHub!",
+        "subtitle": "Ecco un breve tour di ciò che puoi fare."
+      },
+      "discover": {
+        "title": "Scopri le offerte",
+        "subtitle": "Sfoglia voucher, gift card ed eventi dei merchant locali.",
+        "features": {
+          "vouchers": "Voucher digitali",
+          "giftCards": "Gift card per amici e familiari",
+          "nearby": "Offerte vicino a te"
+        }
+      },
+      "wallet": {
+        "title": "I tuoi voucher in un unico posto",
+        "subtitle": "Tutto ciò che acquisti viene salvato nel tuo account.",
+        "features": {
+          "qr": "Codici QR per un riscatto rapido in negozio",
+          "expiry": "Promemoria via email prima della scadenza di un voucher"
+        }
+      },
+      "rewards": {
+        "title": "Guadagna premi",
+        "subtitle": "Condividi voucher con gli amici e guadagna credito quando li riscattano.",
+        "features": {
+          "referralCredit": "Credito presso il merchant per i referral riusciti",
+          "checkIns": "Check-in giornalieri e serie",
+          "badges": "Badge da sbloccare"
+        }
+      },
+      "notifications": {
+        "title": "Resta aggiornato",
+        "subtitle": "Attiva le notifiche su questo dispositivo."
+      },
+      "security": {
+        "title": "Proteggi il tuo account",
+        "subtitle": "Aggiungi una passkey o l'autenticazione a due fattori."
+      }
+    }
   }
 }

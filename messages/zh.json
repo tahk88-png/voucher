@@ -64,7 +64,18 @@
     "subscriptionBoxes": "订阅盒",
     "pricing": "定价规则",
     "webhooks": "Webhooks",
-    "apiKeys": "API 密钥"
+    "apiKeys": "API 密钥",
+    "marketplace": "市场",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "expandSidebar": "展开侧边栏",
+    "collapseSidebar": "收起侧边栏",
+    "sectionShop": "购物",
+    "sectionRewards": "奖励",
+    "sectionAccount": "账户",
+    "mainNavigation": "主导航",
+    "quickNavigation": "快速导航",
+    "logoutFailed": "无法退出登录，请重试。"
   },
   "voucher": {
     "title": "优惠券",
@@ -184,7 +195,11 @@
     "creditApplied": "已用积分",
     "finalTotal": "合计",
     "pageDescription": "查看您的可用积分和冻结积分。",
-    "noMerchantWallets": "还没有商家钱包。"
+    "noMerchantWallets": "还没有商家钱包。",
+    "noCreditYet": "还没有积分",
+    "noCreditYetBody": "当好友使用您分享的优惠券时，您即可获得积分。积分会按商家分别显示在这里。",
+    "shareToEarn": "分享优惠券",
+    "findVoucherToShare": "查找可分享的优惠券"
   },
   "redemption": {
     "title": "使用记录",
@@ -244,7 +259,12 @@
     "merchantLabel": "商家",
     "voucherLabel": "优惠券",
     "linkField": "链接",
-    "codeField": "代码"
+    "codeField": "代码",
+    "linkCopied": "链接已复制",
+    "howItWorksTitle": "推荐如何运作",
+    "howItWorksBody": "打开一张优惠券并点击“分享”，即可获得该优惠券的专属链接。当好友使用后，您将获得该商家提供的积分。",
+    "findVoucher": "查找可分享的优惠券",
+    "linkForVoucher": "{voucher} 的推荐链接"
   },
   "analytics": {
     "title": "数据分析",
@@ -516,7 +536,9 @@
     "viewVouchers": "查看优惠券",
     "redeemed": "已使用",
     "friendLabel": "朋友",
-    "voucherLabel": "优惠券"
+    "voucherLabel": "优惠券",
+    "offersLinkTitle": "当前优惠链接",
+    "offersLinkDescription": "将 GiftHub 上所有当前优惠分享给好友。此链接不会为您赚取积分；如需赚取积分，请在具体优惠券页面分享该优惠券。"
   },
   "billing": {
     "upgradeRequired": "需要升级",
@@ -618,14 +640,34 @@
     "inApp": "应用内",
     "pushBeta": "推送通知（测试版）",
     "saving": "保存中...",
-    "savePreferences": "保存偏好设置"
+    "savePreferences": "保存偏好设置",
+    "noPreferencesTitle": "暂无可设置的内容",
+    "noPreferencesBody": "通知设置按商家分别管理。您目前还没有设置了通知选项的商家。",
+    "saved": "偏好设置已保存",
+    "saveFailed": "无法保存您的偏好设置，请重试。",
+    "markAllReadFailed": "无法将通知标记为已读，请重试。",
+    "emptyHint": "有关您的优惠券和优惠的动态将显示在这里。",
+    "browseOffers": "浏览优惠"
   },
   "settingsPage": {
     "description": "管理您的账户偏好设置。",
     "joined": "注册时间",
     "recently": "最近",
     "accountAccessTitle": "账户访问",
-    "accountAccessDescription": "保护您的账户并管理访问权限。"
+    "accountAccessDescription": "保护您的账户并管理访问权限。",
+    "pushDescription": "即使未打开 GiftHub，也能在此设备上接收通知。",
+    "changePasswordTitle": "修改密码",
+    "changePasswordDescription": "更新您的账户密码。",
+    "setPasswordTitle": "设置密码",
+    "setPasswordDescription": "设置密码后即可使用邮箱和密码登录。",
+    "twoFactorTitle": "双重身份验证",
+    "twoFactorDescription": "使用身份验证器应用或通行密钥，为账户增加一层额外保护。",
+    "twoFactorManage": "管理安全设置",
+    "sessionsTitle": "活跃会话",
+    "sessionsDescription": "查看您的账户在哪些地方处于登录状态。",
+    "sessionsView": "查看会话",
+    "deleteTitle": "删除账户",
+    "deleteDescription": "永久删除您的账户并对数据进行匿名化处理。此操作无法撤销。"
   },
   "profile": {
     "title": "个人资料",
@@ -633,5 +675,217 @@
     "accountInformation": "账户信息",
     "emailPreferences": "邮件偏好",
     "appSettings": "应用设置"
+  },
+  "dashboard": {
+    "roleShopper": "购物者",
+    "roleAdmin": "管理员",
+    "roleStaff": "员工",
+    "rolePlatformAdmin": "平台管理员",
+    "availableCredit": "可用积分",
+    "pendingCredit": "{amount} 待确认",
+    "creditExplainer": "当好友使用您分享的优惠券时获得的积分，可在发放该积分的商家处使用。",
+    "viewCreditDetails": "查看积分详情",
+    "successfulReferrals": "成功推荐",
+    "checkInPoints": "签到积分",
+    "shareTitle": "分享优惠券，赚取积分",
+    "shareDescription": "打开任意优惠券并点击“分享”即可获得专属链接。好友使用后，您即可获得积分。",
+    "openShareCenter": "打开分享中心",
+    "sharedSummary": "已分享优惠券：{count} · 已使用：{redeemed}",
+    "achievementsTitle": "成就",
+    "badgesEarned": "已获得徽章：{earned} / {total}",
+    "viewAchievements": "查看成就",
+    "availableOffers": "可用优惠",
+    "browseAll": "查看全部",
+    "noActiveOffers": "目前没有进行中的优惠，请稍后再来看看。",
+    "validUntil": "有效期至 {date}",
+    "recentActivity": "最近动态",
+    "noRecentActivity": "暂无动态。",
+    "creditFrom": "来自 {merchant} 的积分",
+    "referralAt": "推荐 · {merchant}",
+    "creditStatus": {
+      "locked": "待确认",
+      "available": "可用",
+      "used": "已使用",
+      "expired": "已过期",
+      "reversed": "已撤销"
+    },
+    "referralStatus": {
+      "created": "链接已创建",
+      "opened": "已打开",
+      "redeemed": "已使用",
+      "expired": "已过期",
+      "blocked": "已屏蔽"
+    },
+    "myMerchants": "我的商家",
+    "merchantDashboard": "商家后台",
+    "sellTitle": "在 GiftHub 上销售",
+    "sellDescription": "想为您的顾客提供优惠券？联系我们，我们将协助您开通商家账户。",
+    "contactUs": "联系我们",
+    "exploreVouchers": "探索优惠券"
+  },
+  "wishlist": {
+    "title": "我的心愿单",
+    "emptyTitle": "您的心愿单是空的",
+    "emptyBody": "收藏喜欢的优惠券、商家和活动，之后可在这里找到它们。",
+    "browseOffers": "浏览优惠"
+  },
+  "push": {
+    "enable": "开启推送通知",
+    "enabled": "推送通知已开启",
+    "enabledToast": "已开启推送通知",
+    "disable": "关闭",
+    "disabledToast": "已关闭推送通知",
+    "enableFailed": "无法开启推送通知，请重试。",
+    "disableFailed": "无法关闭推送通知，请重试。",
+    "unsupported": "此浏览器不支持推送通知。",
+    "blocked": "通知已被屏蔽。请在浏览器设置中允许通知以开启此功能。"
+  },
+  "sessions": {
+    "title": "活跃会话",
+    "description": "查看您的账户在哪些地方处于登录状态。",
+    "backToSettings": "返回设置",
+    "deviceOn": "{os} 上的 {browser}",
+    "unknownDevice": "未知设备",
+    "thisDevice": "此设备",
+    "signedInHere": "您当前已在此设备登录。",
+    "otherDevicesTitle": "其他设备",
+    "otherDevicesNone": "我们无法列出您可能已登录的其他设备。如发现任何异常，请修改密码并开启双重身份验证。",
+    "securitySettings": "安全设置",
+    "lastActive": "最近活跃：{time}",
+    "logout": "退出登录",
+    "logoutAll": "退出所有其他设备",
+    "logoutAllBody": "结束其他设备上的所有会话。",
+    "loadFailed": "无法加载您的会话。",
+    "revokeFailed": "无法结束该会话，请重试。",
+    "revoked": "会话已结束。",
+    "revokedAll": "其他设备上的会话已结束。"
+  },
+  "achievements": {
+    "title": "成就",
+    "checkIn": "今日签到",
+    "checkingIn": "正在签到…",
+    "checkedInToday": "今日已签到",
+    "checkInFailed": "签到失败，请重试。",
+    "checkInSaved": "签到成功",
+    "newBadge": "新徽章：{name}",
+    "checkInPoints": "签到积分",
+    "level": "等级",
+    "levelValue": "等级 {level}",
+    "levelProgress": "距下一等级的进度",
+    "badgesLabel": "徽章",
+    "noBadgesYet": "还没有获得徽章。",
+    "earnedOn": "获得于 {date}",
+    "locked": "尚未获得",
+    "howToEarn": "如何赚取积分",
+    "earnRuleCheckIn": "每天签到一次",
+    "pointsShort": "+{points} 分",
+    "pointsExplainer": "积分和等级体现您的活跃程度，不能兑换现金或优惠券。",
+    "currentStreak": "当前连续签到（天）",
+    "longestStreak": "最长连续签到（天）",
+    "milestone": "达成连续签到里程碑！",
+    "badges": {
+      "first_purchase": {
+        "name": "首次购买",
+        "description": "购买了第一张优惠券"
+      },
+      "first_redemption": {
+        "name": "首次使用",
+        "description": "使用了第一张优惠券"
+      },
+      "5_referrals": {
+        "name": "人脉达人",
+        "description": "与好友分享了 5 张优惠券"
+      },
+      "10_referrals": {
+        "name": "影响力达人",
+        "description": "与好友分享了 10 张优惠券"
+      },
+      "streak_7": {
+        "name": "每周勇士",
+        "description": "连续签到 7 天"
+      },
+      "streak_30": {
+        "name": "月度大师",
+        "description": "连续签到 30 天"
+      },
+      "review_writer": {
+        "name": "评论家",
+        "description": "发布了第一条评价"
+      },
+      "big_spender": {
+        "name": "消费达人",
+        "description": "累计在优惠券上消费超过 10,000"
+      },
+      "early_adopter": {
+        "name": "早期用户",
+        "description": "在 2028 年之前加入 GiftHub"
+      },
+      "social_sharer": {
+        "name": "社交分享达人",
+        "description": "在社交媒体上分享了优惠券"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "会员忠诚",
+    "notActiveTitle": "会员等级暂未开放",
+    "notActiveBody": "目前购物尚不能获得会员积分，结账时也不会应用等级折扣或权益，因此这里暂无可显示的等级。",
+    "earnTodayTitle": "您现在可以获得的奖励",
+    "earnCreditTitle": "推荐积分",
+    "earnCreditBody": "分享一张优惠券。好友使用后，您将获得可在该商家处使用的积分。",
+    "earnCreditLink": "查看您的积分",
+    "earnPointsTitle": "签到积分",
+    "earnPointsBody": "每天签到，累积连续签到天数、提升等级并解锁徽章。",
+    "earnPointsLink": "查看成就",
+    "historyTitle": "积分记录",
+    "pointsBalance": "余额：{points} 分"
+  },
+  "welcome": {
+    "greeting": "您好，{name}！",
+    "progress": "新手引导进度",
+    "setUpSecurity": "设置双重验证或通行密钥",
+    "skip": "跳过",
+    "next": "下一步",
+    "getStarted": "开始使用",
+    "steps": {
+      "welcome": {
+        "title": "欢迎来到 GiftHub！",
+        "subtitle": "快速了解您可以在这里做什么。"
+      },
+      "discover": {
+        "title": "发现优惠",
+        "subtitle": "浏览本地商家的优惠券、礼品卡和活动。",
+        "features": {
+          "vouchers": "电子优惠券",
+          "giftCards": "送给亲友的礼品卡",
+          "nearby": "您附近的优惠"
+        }
+      },
+      "wallet": {
+        "title": "优惠券集中管理",
+        "subtitle": "您购买的所有商品都会保存到您的账户中。",
+        "features": {
+          "qr": "二维码，到店快速核销",
+          "expiry": "优惠券到期前的邮件提醒"
+        }
+      },
+      "rewards": {
+        "title": "赚取奖励",
+        "subtitle": "与好友分享优惠券，好友使用后即可获得积分。",
+        "features": {
+          "referralCredit": "成功推荐可获得商家积分",
+          "checkIns": "每日签到与连续签到",
+          "badges": "可解锁的徽章"
+        }
+      },
+      "notifications": {
+        "title": "随时掌握动态",
+        "subtitle": "在此设备上开启通知。"
+      },
+      "security": {
+        "title": "保护您的账户",
+        "subtitle": "添加通行密钥或双重身份验证。"
+      }
+    }
   }
 }

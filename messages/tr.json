@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Abonelik kutuları",
     "pricing": "Fiyat kuralları",
     "webhooks": "Webhook'lar",
-    "apiKeys": "API anahtarları"
+    "apiKeys": "API anahtarları",
+    "marketplace": "Pazar yeri",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "expandSidebar": "Kenar çubuğunu genişlet",
+    "collapseSidebar": "Kenar çubuğunu daralt",
+    "sectionShop": "Alışveriş",
+    "sectionRewards": "Ödüller",
+    "sectionAccount": "Hesap",
+    "mainNavigation": "Ana gezinme",
+    "quickNavigation": "Hızlı gezinme",
+    "logoutFailed": "Çıkış yapılamadı. Lütfen tekrar deneyin."
   },
   "voucher": {
     "title": "Kupon",
@@ -184,7 +195,11 @@
     "creditApplied": "Kredi uygulandı",
     "finalTotal": "Toplam",
     "pageDescription": "Kullanılabilir ve kilitli kredilerinizi takip edin.",
-    "noMerchantWallets": "Henüz işletme cüzdanı yok."
+    "noMerchantWallets": "Henüz işletme cüzdanı yok.",
+    "noCreditYet": "Henüz krediniz yok",
+    "noCreditYetBody": "Paylaştığınız bir kuponu bir arkadaşınız kullandığında kredi kazanırsınız. Kredi burada her işletme için ayrı ayrı görünür.",
+    "shareToEarn": "Kupon paylaş",
+    "findVoucherToShare": "Paylaşmak için kupon bul"
   },
   "redemption": {
     "title": "Kullanımlar",
@@ -244,7 +259,12 @@
     "merchantLabel": "İşletme",
     "voucherLabel": "Kupon",
     "linkField": "Bağlantı",
-    "codeField": "Kod"
+    "codeField": "Kod",
+    "linkCopied": "Bağlantı kopyalandı",
+    "howItWorksTitle": "Tavsiyeler nasıl çalışır?",
+    "howItWorksBody": "Bir kupon açın ve Paylaş'a dokunun. O kupon için size özel bir bağlantı alırsınız. Bir arkadaşınız kuponu kullandığında işletmeden kredi kazanırsınız.",
+    "findVoucher": "Paylaşmak için kupon bul",
+    "linkForVoucher": "{voucher} için tavsiye bağlantısı"
   },
   "analytics": {
     "title": "Analizler",
@@ -516,7 +536,9 @@
     "viewVouchers": "Kuponları görüntüle",
     "redeemed": "Kullanıldı",
     "friendLabel": "Arkadaş",
-    "voucherLabel": "Kupon"
+    "voucherLabel": "Kupon",
+    "offersLinkTitle": "Güncel fırsatların bağlantısı",
+    "offersLinkDescription": "Arkadaşlarınızı GiftHub'daki tüm güncel fırsatlara yönlendirin. Bu bağlantı kredi kazandırmaz; kredi kazanmak için belirli bir kuponu kendi sayfasından paylaşın."
   },
   "billing": {
     "upgradeRequired": "Yükseltme gerekli",
@@ -618,14 +640,34 @@
     "inApp": "Uygulama içi",
     "pushBeta": "Push (beta)",
     "saving": "Kaydediliyor...",
-    "savePreferences": "Tercihleri kaydet"
+    "savePreferences": "Tercihleri kaydet",
+    "noPreferencesTitle": "Henüz ayarlanacak bir şey yok",
+    "noPreferencesBody": "Bildirim ayarları her işletme için ayrı yönetilir. Henüz bildirim ayarı olan bir işletmeniz yok.",
+    "saved": "Tercihler kaydedildi",
+    "saveFailed": "Tercihleriniz kaydedilemedi. Lütfen tekrar deneyin.",
+    "markAllReadFailed": "Bildirimler okundu olarak işaretlenemedi. Lütfen tekrar deneyin.",
+    "emptyHint": "Kuponlarınız ve fırsatlarla ilgili güncellemeler burada görünecek.",
+    "browseOffers": "Fırsatlara göz at"
   },
   "settingsPage": {
     "description": "Hesap tercihlerinizi yönetin.",
     "joined": "Katılım",
     "recently": "yakın zamanda",
     "accountAccessTitle": "Hesap erişimi",
-    "accountAccessDescription": "Hesabınızı güvence altına alın ve erişimi yönetin."
+    "accountAccessDescription": "Hesabınızı güvence altına alın ve erişimi yönetin.",
+    "pushDescription": "GiftHub açık olmasa bile bu cihazda bildirim alın.",
+    "changePasswordTitle": "Şifreyi değiştir",
+    "changePasswordDescription": "Hesap şifrenizi güncelleyin.",
+    "setPasswordTitle": "Şifre belirle",
+    "setPasswordDescription": "E-posta adresiniz ve şifrenizle giriş yapmak için bir şifre belirleyin.",
+    "twoFactorTitle": "İki faktörlü kimlik doğrulama",
+    "twoFactorDescription": "Bir doğrulama uygulaması veya geçiş anahtarıyla ekstra bir güvenlik katmanı ekleyin.",
+    "twoFactorManage": "Güvenliği yönet",
+    "sessionsTitle": "Etkin oturumlar",
+    "sessionsDescription": "Hesabınızın nerelerde açık olduğunu görün.",
+    "sessionsView": "Oturumları görüntüle",
+    "deleteTitle": "Hesabı sil",
+    "deleteDescription": "Hesabınızı kalıcı olarak silin ve verilerinizi anonimleştirin. Bu işlem geri alınamaz."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Hesap bilgileri",
     "emailPreferences": "E-posta tercihleri",
     "appSettings": "Uygulama ayarları"
+  },
+  "dashboard": {
+    "roleShopper": "Alışveriş yapan",
+    "roleAdmin": "Yönetici",
+    "roleStaff": "Personel",
+    "rolePlatformAdmin": "Platform yöneticisi",
+    "availableCredit": "Kullanılabilir kredi",
+    "pendingCredit": "{amount} beklemede",
+    "creditExplainer": "Paylaştığınız kuponları arkadaşlarınız kullandığında kazandığınız kredi. Krediyi, onu veren işletmede harcayabilirsiniz.",
+    "viewCreditDetails": "Kredi ayrıntılarını görüntüle",
+    "successfulReferrals": "Başarılı tavsiyeler",
+    "checkInPoints": "Check-in puanları",
+    "shareTitle": "Kupon paylaşın, kredi kazanın",
+    "shareDescription": "Size özel bağlantıyı almak için herhangi bir kuponu açıp Paylaş'a dokunun. Bir arkadaşınız kuponu kullandığında kredi kazanırsınız.",
+    "openShareCenter": "Paylaşım Merkezi'ni aç",
+    "sharedSummary": "Paylaşılan kuponlar: {count} · Kullanılan: {redeemed}",
+    "achievementsTitle": "Başarılar",
+    "badgesEarned": "Kazanılan rozetler: {earned} / {total}",
+    "viewAchievements": "Başarıları görüntüle",
+    "availableOffers": "Mevcut fırsatlar",
+    "browseAll": "Tümüne göz at",
+    "noActiveOffers": "Şu anda yayında fırsat yok. Yakında tekrar bakın.",
+    "validUntil": "Son geçerlilik: {date}",
+    "recentActivity": "Son etkinlikler",
+    "noRecentActivity": "Henüz etkinlik yok.",
+    "creditFrom": "{merchant} kredisi",
+    "referralAt": "Tavsiye · {merchant}",
+    "creditStatus": {
+      "locked": "beklemede",
+      "available": "kullanılabilir",
+      "used": "kullanıldı",
+      "expired": "süresi doldu",
+      "reversed": "iptal edildi"
+    },
+    "referralStatus": {
+      "created": "Bağlantı oluşturuldu",
+      "opened": "Açıldı",
+      "redeemed": "Kullanıldı",
+      "expired": "Süresi doldu",
+      "blocked": "Engellendi"
+    },
+    "myMerchants": "İşletmelerim",
+    "merchantDashboard": "İşletme paneli",
+    "sellTitle": "GiftHub'da satış yapın",
+    "sellDescription": "Müşterilerinize kupon sunmak mı istiyorsunuz? Bizimle iletişime geçin, işletme hesabınızı kurmanıza yardımcı olalım.",
+    "contactUs": "Bize ulaşın",
+    "exploreVouchers": "Kuponları keşfet"
+  },
+  "wishlist": {
+    "title": "İstek listem",
+    "emptyTitle": "İstek listeniz boş",
+    "emptyBody": "Beğendiğiniz kuponları, işletmeleri ve kampanyaları kaydedin; daha sonra burada bulun.",
+    "browseOffers": "Fırsatlara göz at"
+  },
+  "push": {
+    "enable": "Anlık bildirimleri aç",
+    "enabled": "Anlık bildirimler açık",
+    "enabledToast": "Anlık bildirimler açıldı",
+    "disable": "Kapat",
+    "disabledToast": "Anlık bildirimler kapatıldı",
+    "enableFailed": "Anlık bildirimler açılamadı. Lütfen tekrar deneyin.",
+    "disableFailed": "Anlık bildirimler kapatılamadı. Lütfen tekrar deneyin.",
+    "unsupported": "Bu tarayıcı anlık bildirimleri desteklemiyor.",
+    "blocked": "Bildirimler engellendi. Açmak için tarayıcı ayarlarınızdan bildirimlere izin verin."
+  },
+  "sessions": {
+    "title": "Etkin oturumlar",
+    "description": "Hesabınızın nerelerde açık olduğunu görün.",
+    "backToSettings": "Ayarlara dön",
+    "deviceOn": "{os} üzerinde {browser}",
+    "unknownDevice": "Bilinmeyen cihaz",
+    "thisDevice": "Bu cihaz",
+    "signedInHere": "Şu anda bu cihazda oturum açmış durumdasınız.",
+    "otherDevicesTitle": "Diğer cihazlar",
+    "otherDevicesNone": "Oturum açmış olabileceğiniz diğer cihazları listeleyemiyoruz. Olağan dışı bir şey fark ederseniz şifrenizi değiştirin ve iki faktörlü kimlik doğrulamayı açın.",
+    "securitySettings": "Güvenlik ayarları",
+    "lastActive": "Son etkinlik: {time}",
+    "logout": "Çıkış yap",
+    "logoutAll": "Diğer tüm cihazlardan çıkış yap",
+    "logoutAllBody": "Diğer cihazlardaki tüm oturumları sonlandırın.",
+    "loadFailed": "Oturumlarınız yüklenemedi.",
+    "revokeFailed": "Oturum sonlandırılamadı. Lütfen tekrar deneyin.",
+    "revoked": "Oturum sonlandırıldı.",
+    "revokedAll": "Diğer cihazlardaki oturumlar sonlandırıldı."
+  },
+  "achievements": {
+    "title": "Başarılar",
+    "checkIn": "Bugün için check-in yap",
+    "checkingIn": "Check-in yapılıyor…",
+    "checkedInToday": "Bugün check-in yapıldı",
+    "checkInFailed": "Check-in başarısız oldu. Lütfen tekrar deneyin.",
+    "checkInSaved": "Check-in kaydedildi",
+    "newBadge": "Yeni rozet: {name}",
+    "checkInPoints": "Check-in puanları",
+    "level": "Seviye",
+    "levelValue": "Seviye {level}",
+    "levelProgress": "Sonraki seviyeye ilerleme",
+    "badgesLabel": "Rozetler",
+    "noBadgesYet": "Henüz rozet kazanılmadı.",
+    "earnedOn": "Kazanıldı: {date}",
+    "locked": "Henüz kazanılmadı",
+    "howToEarn": "Nasıl puan kazanılır?",
+    "earnRuleCheckIn": "Günde bir kez check-in yapın",
+    "pointsShort": "+{points} puan",
+    "pointsExplainer": "Puanlar ve seviyeler ne kadar aktif olduğunuzu gösterir. Paraya veya kupona dönüştürülemezler.",
+    "currentStreak": "Mevcut seri (gün)",
+    "longestStreak": "En uzun seri (gün)",
+    "milestone": "Seri hedefine ulaşıldı!",
+    "badges": {
+      "first_purchase": {
+        "name": "İlk satın alma",
+        "description": "İlk kuponunuzu satın aldınız"
+      },
+      "first_redemption": {
+        "name": "İlk kullanım",
+        "description": "İlk kuponunuzu kullandınız"
+      },
+      "5_referrals": {
+        "name": "Bağlantı ustası",
+        "description": "Arkadaşlarınızla 5 kupon paylaştınız"
+      },
+      "10_referrals": {
+        "name": "Fenomen",
+        "description": "Arkadaşlarınızla 10 kupon paylaştınız"
+      },
+      "streak_7": {
+        "name": "Haftanın savaşçısı",
+        "description": "Art arda 7 gün check-in yaptınız"
+      },
+      "streak_30": {
+        "name": "Ayın ustası",
+        "description": "Art arda 30 gün check-in yaptınız"
+      },
+      "review_writer": {
+        "name": "Eleştirmen",
+        "description": "İlk yorumunuzu yayınladınız"
+      },
+      "big_spender": {
+        "name": "Büyük harcamacı",
+        "description": "Kuponlara toplamda 10.000'den fazla harcadınız"
+      },
+      "early_adopter": {
+        "name": "Erken katılımcı",
+        "description": "GiftHub'a 2028'den önce katıldınız"
+      },
+      "social_sharer": {
+        "name": "Sosyal paylaşımcı",
+        "description": "Sosyal medyada bir kupon paylaştınız"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Sadakat",
+    "notActiveTitle": "Sadakat seviyeleri henüz kullanılamıyor",
+    "notActiveBody": "Satın alımlar henüz sadakat puanı kazandırmıyor ve ödeme sırasında seviye indirimleri veya ayrıcalıkları uygulanmıyor; bu nedenle burada gösterilecek bir seviye yok.",
+    "earnTodayTitle": "Bugün neler kazanabilirsiniz?",
+    "earnCreditTitle": "Tavsiye kredisi",
+    "earnCreditBody": "Bir kupon paylaşın. Bir arkadaşınız onu kullandığında, o işletmede harcayabileceğiniz kredi kazanırsınız.",
+    "earnCreditLink": "Kredinizi görüntüleyin",
+    "earnPointsTitle": "Check-in puanları",
+    "earnPointsBody": "Seri oluşturmak, seviye atlamak ve rozetlerin kilidini açmak için her gün check-in yapın.",
+    "earnPointsLink": "Başarıları görüntüle",
+    "historyTitle": "Puan geçmişi",
+    "pointsBalance": "Bakiye: {points} puan"
+  },
+  "welcome": {
+    "greeting": "Merhaba {name}!",
+    "progress": "Başlangıç ilerlemesi",
+    "setUpSecurity": "2FA veya geçiş anahtarı ayarla",
+    "skip": "Atla",
+    "next": "İleri",
+    "getStarted": "Başlayın",
+    "steps": {
+      "welcome": {
+        "title": "GiftHub'a hoş geldiniz!",
+        "subtitle": "Neler yapabileceğinize hızlı bir bakış."
+      },
+      "discover": {
+        "title": "Fırsatları keşfedin",
+        "subtitle": "Yerel işletmelerin kuponlarına, hediye kartlarına ve etkinliklerine göz atın.",
+        "features": {
+          "vouchers": "Dijital kuponlar",
+          "giftCards": "Arkadaşlar ve aile için hediye kartları",
+          "nearby": "Yakınınızdaki fırsatlar"
+        }
+      },
+      "wallet": {
+        "title": "Tüm kuponlarınız tek bir yerde",
+        "subtitle": "Satın aldığınız her şey hesabınıza kaydedilir.",
+        "features": {
+          "qr": "Mağazada hızlı kullanım için QR kodları",
+          "expiry": "Kuponun süresi dolmadan önce e-posta hatırlatıcıları"
+        }
+      },
+      "rewards": {
+        "title": "Ödüller kazanın",
+        "subtitle": "Kuponları arkadaşlarınızla paylaşın, onlar kullandığında kredi kazanın.",
+        "features": {
+          "referralCredit": "Başarılı tavsiyeler için işletme kredisi",
+          "checkIns": "Günlük check-in'ler ve seriler",
+          "badges": "Kilidi açılacak rozetler"
+        }
+      },
+      "notifications": {
+        "title": "Haberdar olun",
+        "subtitle": "Bu cihazda bildirimleri açın."
+      },
+      "security": {
+        "title": "Hesabınızı güvenceye alın",
+        "subtitle": "Bir geçiş anahtarı veya iki faktörlü kimlik doğrulama ekleyin."
+      }
+    }
   }
 }

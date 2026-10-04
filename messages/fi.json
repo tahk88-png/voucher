@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Tilauslaatikot",
     "pricing": "Hinnoittelusäännöt",
     "webhooks": "Webhookit",
-    "apiKeys": "API-avaimet"
+    "apiKeys": "API-avaimet",
+    "marketplace": "Kauppapaikka",
+    "openMenu": "Avaa valikko",
+    "closeMenu": "Sulje valikko",
+    "expandSidebar": "Laajenna sivupalkki",
+    "collapseSidebar": "Pienennä sivupalkki",
+    "sectionShop": "Kauppa",
+    "sectionRewards": "Palkinnot",
+    "sectionAccount": "Tili",
+    "mainNavigation": "Päänavigaatio",
+    "quickNavigation": "Pikanavigaatio",
+    "logoutFailed": "Uloskirjautuminen epäonnistui. Yritä uudelleen."
   },
   "voucher": {
     "title": "Kuponki",
@@ -184,7 +195,11 @@
     "creditApplied": "Käytetty krediitti",
     "finalTotal": "Loppusumma",
     "pageDescription": "Seuraa käytettävissä olevia ja lukittuja krediittejäsi.",
-    "noMerchantWallets": "Ei vielä kauppiaslompakoita."
+    "noMerchantWallets": "Ei vielä kauppiaslompakoita.",
+    "noCreditYet": "Ei vielä krediittiä",
+    "noCreditYetBody": "Ansaitset krediittiä, kun ystäväsi lunastaa jakamasi kupongin. Krediitti näkyy täällä kauppiaskohtaisesti.",
+    "shareToEarn": "Jaa kuponki",
+    "findVoucherToShare": "Etsi jaettava kuponki"
   },
   "redemption": {
     "title": "Lunastukset",
@@ -244,7 +259,12 @@
     "merchantLabel": "Kauppias",
     "voucherLabel": "Kuponki",
     "linkField": "Linkki",
-    "codeField": "Koodi"
+    "codeField": "Koodi",
+    "linkCopied": "Linkki kopioitu",
+    "howItWorksTitle": "Näin suosittelu toimii",
+    "howItWorksBody": "Avaa kuponki ja napauta Jaa. Saat kuponkiin henkilökohtaisen linkin. Kun ystäväsi lunastaa sen, ansaitset krediittiä kauppiaalta.",
+    "findVoucher": "Etsi jaettava kuponki",
+    "linkForVoucher": "Suosittelulinkki: {voucher}"
   },
   "analytics": {
     "title": "Analytiikka",
@@ -516,7 +536,9 @@
     "viewVouchers": "Näytä kupongit",
     "redeemed": "Lunastettu",
     "friendLabel": "Ystävä",
-    "voucherLabel": "Kuponki"
+    "voucherLabel": "Kuponki",
+    "offersLinkTitle": "Linkki ajankohtaisiin tarjouksiin",
+    "offersLinkDescription": "Ohjaa ystäväsi kaikkiin GiftHubin ajankohtaisiin tarjouksiin. Tällä linkillä et ansaitse krediittiä; ansaitaksesi jaa tietty kuponki sen omalta sivulta."
   },
   "billing": {
     "upgradeRequired": "Päivitys vaaditaan",
@@ -618,14 +640,34 @@
     "inApp": "Sovelluksessa",
     "pushBeta": "Push (beta)",
     "saving": "Tallennetaan...",
-    "savePreferences": "Tallenna asetukset"
+    "savePreferences": "Tallenna asetukset",
+    "noPreferencesTitle": "Ei vielä mitään asetettavaa",
+    "noPreferencesBody": "Ilmoitusasetuksia hallitaan kauppiaskohtaisesti. Sinulla ei vielä ole kauppiaita, joilla on ilmoitusasetuksia.",
+    "saved": "Asetukset tallennettu",
+    "saveFailed": "Asetuksia ei voitu tallentaa. Yritä uudelleen.",
+    "markAllReadFailed": "Ilmoituksia ei voitu merkitä luetuiksi. Yritä uudelleen.",
+    "emptyHint": "Kuponkeihisi ja tarjouksiin liittyvät päivitykset näkyvät täällä.",
+    "browseOffers": "Selaa tarjouksia"
   },
   "settingsPage": {
     "description": "Hallinnoi tilisi asetuksia.",
     "joined": "Liittynyt",
     "recently": "äskettäin",
     "accountAccessTitle": "Tilin käyttöoikeus",
-    "accountAccessDescription": "Suojaa tilisi ja hallinnoi pääsyä."
+    "accountAccessDescription": "Suojaa tilisi ja hallinnoi pääsyä.",
+    "pushDescription": "Vastaanota ilmoituksia tällä laitteella, vaikka GiftHub ei olisi auki.",
+    "changePasswordTitle": "Vaihda salasana",
+    "changePasswordDescription": "Päivitä tilisi salasana.",
+    "setPasswordTitle": "Aseta salasana",
+    "setPasswordDescription": "Aseta salasana, jotta voit kirjautua sisään sähköpostiosoitteella ja salasanalla.",
+    "twoFactorTitle": "Kaksivaiheinen tunnistautuminen",
+    "twoFactorDescription": "Lisää ylimääräinen suojaustaso todennussovelluksella tai pääsyavaimella.",
+    "twoFactorManage": "Hallinnoi suojausta",
+    "sessionsTitle": "Aktiiviset istunnot",
+    "sessionsDescription": "Katso, missä tilillesi on kirjauduttu.",
+    "sessionsView": "Näytä istunnot",
+    "deleteTitle": "Poista tili",
+    "deleteDescription": "Poista tilisi pysyvästi ja anonymisoi tietosi. Tätä ei voi perua."
   },
   "profile": {
     "title": "Profiili",
@@ -633,5 +675,217 @@
     "accountInformation": "Tilitiedot",
     "emailPreferences": "Sähköpostiasetukset",
     "appSettings": "Sovelluksen asetukset"
+  },
+  "dashboard": {
+    "roleShopper": "Ostaja",
+    "roleAdmin": "Ylläpitäjä",
+    "roleStaff": "Henkilökunta",
+    "rolePlatformAdmin": "Alustan ylläpitäjä",
+    "availableCredit": "Käytettävissä oleva krediitti",
+    "pendingCredit": "{amount} odottaa",
+    "creditExplainer": "Krediittiä ansaitset, kun ystäväsi lunastavat jakamiasi kuponkeja. Voit käyttää sen kauppiaalla, joka sen myönsi.",
+    "viewCreditDetails": "Näytä krediitin tiedot",
+    "successfulReferrals": "Onnistuneet suosittelut",
+    "checkInPoints": "Käyntipisteet",
+    "shareTitle": "Jaa kuponki, ansaitse krediittiä",
+    "shareDescription": "Avaa mikä tahansa kuponki ja napauta Jaa saadaksesi henkilökohtaisen linkkisi. Kun ystäväsi lunastaa sen, ansaitset krediittiä.",
+    "openShareCenter": "Avaa jakokeskus",
+    "sharedSummary": "Jaetut kupongit: {count} · Lunastetut: {redeemed}",
+    "achievementsTitle": "Saavutukset",
+    "badgesEarned": "Ansaitut merkit: {earned}/{total}",
+    "viewAchievements": "Näytä saavutukset",
+    "availableOffers": "Saatavilla olevat tarjoukset",
+    "browseAll": "Selaa kaikkia",
+    "noActiveOffers": "Voimassa olevia tarjouksia ei juuri nyt ole. Palaa pian uudelleen.",
+    "validUntil": "Voimassa {date} asti",
+    "recentActivity": "Viimeaikainen toiminta",
+    "noRecentActivity": "Ei vielä toimintaa.",
+    "creditFrom": "Krediitti: {merchant}",
+    "referralAt": "Suosittelu · {merchant}",
+    "creditStatus": {
+      "locked": "odottaa",
+      "available": "käytettävissä",
+      "used": "käytetty",
+      "expired": "vanhentunut",
+      "reversed": "peruttu"
+    },
+    "referralStatus": {
+      "created": "Linkki luotu",
+      "opened": "Avattu",
+      "redeemed": "Lunastettu",
+      "expired": "Vanhentunut",
+      "blocked": "Estetty"
+    },
+    "myMerchants": "Omat kauppiaat",
+    "merchantDashboard": "Kauppiaan hallintapaneeli",
+    "sellTitle": "Myy GiftHubissa",
+    "sellDescription": "Haluatko tarjota kuponkeja asiakkaillesi? Ota meihin yhteyttä, niin autamme sinua luomaan kauppiastilin.",
+    "contactUs": "Ota yhteyttä",
+    "exploreVouchers": "Tutustu kuponkeihin"
+  },
+  "wishlist": {
+    "title": "Oma toivelista",
+    "emptyTitle": "Toivelistasi on tyhjä",
+    "emptyBody": "Tallenna pitämäsi kupongit, kauppiaat ja kampanjat, niin löydät ne myöhemmin täältä.",
+    "browseOffers": "Selaa tarjouksia"
+  },
+  "push": {
+    "enable": "Ota push-ilmoitukset käyttöön",
+    "enabled": "Push-ilmoitukset ovat käytössä",
+    "enabledToast": "Push-ilmoitukset otettu käyttöön",
+    "disable": "Poista käytöstä",
+    "disabledToast": "Push-ilmoitukset poistettu käytöstä",
+    "enableFailed": "Push-ilmoituksia ei voitu ottaa käyttöön. Yritä uudelleen.",
+    "disableFailed": "Push-ilmoituksia ei voitu poistaa käytöstä. Yritä uudelleen.",
+    "unsupported": "Tämä selain ei tue push-ilmoituksia.",
+    "blocked": "Ilmoitukset on estetty. Salli ne selaimen asetuksista ottaaksesi ne käyttöön."
+  },
+  "sessions": {
+    "title": "Aktiiviset istunnot",
+    "description": "Katso, missä tilillesi on kirjauduttu.",
+    "backToSettings": "Takaisin asetuksiin",
+    "deviceOn": "{browser} – {os}",
+    "unknownDevice": "Tuntematon laite",
+    "thisDevice": "Tämä laite",
+    "signedInHere": "Olet kirjautuneena tällä laitteella juuri nyt.",
+    "otherDevicesTitle": "Muut laitteet",
+    "otherDevicesNone": "Emme voi näyttää muita laitteita, joilla saatat olla kirjautuneena. Jos huomaat jotain epätavallista, vaihda salasanasi ja ota kaksivaiheinen tunnistautuminen käyttöön.",
+    "securitySettings": "Suojausasetukset",
+    "lastActive": "Viimeksi aktiivinen {time}",
+    "logout": "Kirjaudu ulos",
+    "logoutAll": "Kirjaudu ulos kaikkialta muualta",
+    "logoutAllBody": "Lopeta kaikki istunnot muilla laitteilla.",
+    "loadFailed": "Istuntoja ei voitu ladata.",
+    "revokeFailed": "Istuntoa ei voitu lopettaa. Yritä uudelleen.",
+    "revoked": "Istunto lopetettu.",
+    "revokedAll": "Muiden laitteiden istunnot lopetettu."
+  },
+  "achievements": {
+    "title": "Saavutukset",
+    "checkIn": "Kirjaa tämän päivän käynti",
+    "checkingIn": "Kirjataan käyntiä…",
+    "checkedInToday": "Käynti kirjattu tänään",
+    "checkInFailed": "Käynnin kirjaus epäonnistui. Yritä uudelleen.",
+    "checkInSaved": "Käynti kirjattu",
+    "newBadge": "Uusi merkki: {name}",
+    "checkInPoints": "Käyntipisteet",
+    "level": "Taso",
+    "levelValue": "Taso {level}",
+    "levelProgress": "Eteneminen seuraavalle tasolle",
+    "badgesLabel": "Merkit",
+    "noBadgesYet": "Ei vielä ansaittuja merkkejä.",
+    "earnedOn": "Ansaittu {date}",
+    "locked": "Ei vielä ansaittu",
+    "howToEarn": "Näin ansaitset pisteitä",
+    "earnRuleCheckIn": "Kirjaa käynti kerran päivässä",
+    "pointsShort": "+{points} p",
+    "pointsExplainer": "Pisteet ja tasot kertovat, kuinka aktiivinen olet. Niitä ei voi vaihtaa rahaksi tai kupongeiksi.",
+    "currentStreak": "Nykyinen putki (päivää)",
+    "longestStreak": "Pisin putki (päivää)",
+    "milestone": "Putken virstanpylväs saavutettu!",
+    "badges": {
+      "first_purchase": {
+        "name": "Ensimmäinen ostos",
+        "description": "Ostit ensimmäisen kuponkisi"
+      },
+      "first_redemption": {
+        "name": "Ensimmäinen lunastus",
+        "description": "Lunastit ensimmäisen kuponkisi"
+      },
+      "5_referrals": {
+        "name": "Yhdistäjä",
+        "description": "Jaoit 5 kuponkia ystävillesi"
+      },
+      "10_referrals": {
+        "name": "Vaikuttaja",
+        "description": "Jaoit 10 kuponkia ystävillesi"
+      },
+      "streak_7": {
+        "name": "Viikon soturi",
+        "description": "Kirjasit käynnin 7 päivänä peräkkäin"
+      },
+      "streak_30": {
+        "name": "Kuukauden mestari",
+        "description": "Kirjasit käynnin 30 päivänä peräkkäin"
+      },
+      "review_writer": {
+        "name": "Arvostelija",
+        "description": "Julkaisit ensimmäisen arvostelusi"
+      },
+      "big_spender": {
+        "name": "Suurkuluttaja",
+        "description": "Käytit kuponkeihin yhteensä yli 10 000"
+      },
+      "early_adopter": {
+        "name": "Edelläkävijä",
+        "description": "Liityit GiftHubiin ennen vuotta 2028"
+      },
+      "social_sharer": {
+        "name": "Somejakaja",
+        "description": "Jaoit kupongin sosiaalisessa mediassa"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Kanta-asiakasohjelma",
+    "notActiveTitle": "Kanta-asiakastasot eivät ole vielä käytettävissä",
+    "notActiveBody": "Ostoksista ei vielä kerry kanta-asiakaspisteitä, eikä kassalla sovelleta tasoalennuksia tai -etuja, joten täällä ei ole näytettäviä tasoja.",
+    "earnTodayTitle": "Mitä voit ansaita jo tänään",
+    "earnCreditTitle": "Suosittelukrediitti",
+    "earnCreditBody": "Jaa kuponki. Kun ystäväsi lunastaa sen, saat krediittiä käytettäväksi kyseisellä kauppiaalla.",
+    "earnCreditLink": "Näytä krediittisi",
+    "earnPointsTitle": "Käyntipisteet",
+    "earnPointsBody": "Kirjaa käynti päivittäin, kerrytä putkea, nouse tasolta toiselle ja avaa merkkejä.",
+    "earnPointsLink": "Näytä saavutukset",
+    "historyTitle": "Pistehistoria",
+    "pointsBalance": "Saldo: {points} pistettä"
+  },
+  "welcome": {
+    "greeting": "Hei, {name}!",
+    "progress": "Käyttöönoton edistyminen",
+    "setUpSecurity": "Ota käyttöön 2FA tai pääsyavain",
+    "skip": "Ohita",
+    "next": "Seuraava",
+    "getStarted": "Aloita",
+    "steps": {
+      "welcome": {
+        "title": "Tervetuloa GiftHubiin!",
+        "subtitle": "Tässä lyhyt esittely siitä, mitä voit tehdä."
+      },
+      "discover": {
+        "title": "Löydä tarjouksia",
+        "subtitle": "Selaa paikallisten kauppiaiden kuponkeja, lahjakortteja ja tapahtumia.",
+        "features": {
+          "vouchers": "Digitaaliset kupongit",
+          "giftCards": "Lahjakortit ystäville ja perheelle",
+          "nearby": "Tarjoukset lähelläsi"
+        }
+      },
+      "wallet": {
+        "title": "Kuponkisi yhdessä paikassa",
+        "subtitle": "Kaikki ostamasi tallentuu tilillesi.",
+        "features": {
+          "qr": "QR-koodit nopeaan lunastukseen myymälässä",
+          "expiry": "Sähköpostimuistutukset ennen kupongin vanhenemista"
+        }
+      },
+      "rewards": {
+        "title": "Ansaitse palkintoja",
+        "subtitle": "Jaa kuponkeja ystävillesi ja ansaitse krediittiä, kun he lunastavat ne.",
+        "features": {
+          "referralCredit": "Kauppiaskrediitti onnistuneista suositteluista",
+          "checkIns": "Päivittäiset käyntikirjaukset ja putket",
+          "badges": "Avattavia merkkejä"
+        }
+      },
+      "notifications": {
+        "title": "Pysy ajan tasalla",
+        "subtitle": "Ota ilmoitukset käyttöön tällä laitteella."
+      },
+      "security": {
+        "title": "Suojaa tilisi",
+        "subtitle": "Lisää pääsyavain tai kaksivaiheinen tunnistautuminen."
+      }
+    }
   }
 }

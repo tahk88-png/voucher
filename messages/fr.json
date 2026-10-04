@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Box d'abonnement",
     "pricing": "Règles de prix",
     "webhooks": "Webhooks",
-    "apiKeys": "Clés API"
+    "apiKeys": "Clés API",
+    "marketplace": "Marketplace",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "expandSidebar": "Déplier la barre latérale",
+    "collapseSidebar": "Replier la barre latérale",
+    "sectionShop": "Boutique",
+    "sectionRewards": "Récompenses",
+    "sectionAccount": "Compte",
+    "mainNavigation": "Navigation principale",
+    "quickNavigation": "Navigation rapide",
+    "logoutFailed": "Impossible de se déconnecter. Veuillez réessayer."
   },
   "voucher": {
     "title": "Bon",
@@ -184,7 +195,11 @@
     "creditApplied": "Crédit appliqué",
     "finalTotal": "Total",
     "pageDescription": "Suivez vos crédits disponibles et bloqués.",
-    "noMerchantWallets": "Pas encore de portefeuilles commerçant."
+    "noMerchantWallets": "Pas encore de portefeuilles commerçant.",
+    "noCreditYet": "Pas encore de crédit",
+    "noCreditYetBody": "Vous gagnez du crédit lorsqu'un ami utilise un bon que vous avez partagé. Il apparaît ici pour chaque commerçant.",
+    "shareToEarn": "Partager un bon",
+    "findVoucherToShare": "Trouver un bon à partager"
   },
   "redemption": {
     "title": "Utilisations",
@@ -244,7 +259,12 @@
     "merchantLabel": "Commerçant",
     "voucherLabel": "Bon",
     "linkField": "Lien",
-    "codeField": "Code"
+    "codeField": "Code",
+    "linkCopied": "Lien copié",
+    "howItWorksTitle": "Comment fonctionne le parrainage",
+    "howItWorksBody": "Ouvrez un bon et appuyez sur Partager. Vous obtenez un lien personnel pour ce bon. Lorsqu'un ami l'utilise, vous gagnez du crédit auprès du commerçant.",
+    "findVoucher": "Trouver un bon à partager",
+    "linkForVoucher": "Lien de parrainage pour {voucher}"
   },
   "analytics": {
     "title": "Analyses",
@@ -516,7 +536,9 @@
     "viewVouchers": "Voir les bons",
     "redeemed": "Utilisé",
     "friendLabel": "Ami",
-    "voucherLabel": "Bon"
+    "voucherLabel": "Bon",
+    "offersLinkTitle": "Lien vers les offres en cours",
+    "offersLinkDescription": "Envoyez vos amis vers toutes les offres en cours sur GiftHub. Ce lien ne rapporte pas de crédit ; pour en gagner, partagez un bon précis depuis sa page."
   },
   "billing": {
     "upgradeRequired": "Mise à niveau requise",
@@ -618,14 +640,34 @@
     "inApp": "Dans l'application",
     "pushBeta": "Push (bêta)",
     "saving": "Enregistrement...",
-    "savePreferences": "Enregistrer les préférences"
+    "savePreferences": "Enregistrer les préférences",
+    "noPreferencesTitle": "Rien à configurer pour l'instant",
+    "noPreferencesBody": "Les paramètres de notification sont gérés par commerçant. Vous n'avez encore aucun commerçant avec des paramètres de notification.",
+    "saved": "Préférences enregistrées",
+    "saveFailed": "Impossible d'enregistrer vos préférences. Veuillez réessayer.",
+    "markAllReadFailed": "Impossible de marquer les notifications comme lues. Veuillez réessayer.",
+    "emptyHint": "Les actualités concernant vos bons et offres apparaîtront ici.",
+    "browseOffers": "Parcourir les offres"
   },
   "settingsPage": {
     "description": "Gérez les préférences de votre compte.",
     "joined": "Inscrit",
     "recently": "récemment",
     "accountAccessTitle": "Accès au compte",
-    "accountAccessDescription": "Sécurisez votre compte et gérez l'accès."
+    "accountAccessDescription": "Sécurisez votre compte et gérez l'accès.",
+    "pushDescription": "Recevez des notifications sur cet appareil, même lorsque GiftHub n'est pas ouvert.",
+    "changePasswordTitle": "Changer le mot de passe",
+    "changePasswordDescription": "Mettez à jour le mot de passe de votre compte.",
+    "setPasswordTitle": "Définir un mot de passe",
+    "setPasswordDescription": "Définissez un mot de passe pour vous connecter avec votre e-mail et votre mot de passe.",
+    "twoFactorTitle": "Authentification à deux facteurs",
+    "twoFactorDescription": "Ajoutez une couche de sécurité supplémentaire avec une application d'authentification ou une clé d'accès.",
+    "twoFactorManage": "Gérer la sécurité",
+    "sessionsTitle": "Sessions actives",
+    "sessionsDescription": "Voyez où votre compte est connecté.",
+    "sessionsView": "Voir les sessions",
+    "deleteTitle": "Supprimer le compte",
+    "deleteDescription": "Supprimez définitivement votre compte et anonymisez vos données. Cette action est irréversible."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Informations du compte",
     "emailPreferences": "Préférences e-mail",
     "appSettings": "Paramètres de l'application"
+  },
+  "dashboard": {
+    "roleShopper": "Acheteur",
+    "roleAdmin": "Administrateur",
+    "roleStaff": "Personnel",
+    "rolePlatformAdmin": "Administrateur de la plateforme",
+    "availableCredit": "Crédit disponible",
+    "pendingCredit": "{amount} en attente",
+    "creditExplainer": "Le crédit que vous gagnez lorsque vos amis utilisent des bons que vous avez partagés. Vous pouvez le dépenser chez le commerçant qui l'a émis.",
+    "viewCreditDetails": "Voir le détail du crédit",
+    "successfulReferrals": "Parrainages réussis",
+    "checkInPoints": "Points de check-in",
+    "shareTitle": "Partagez un bon, gagnez du crédit",
+    "shareDescription": "Ouvrez n'importe quel bon et appuyez sur Partager pour obtenir votre lien personnel. Lorsqu'un ami l'utilise, vous gagnez du crédit.",
+    "openShareCenter": "Ouvrir le centre de partage",
+    "sharedSummary": "Bons partagés : {count} · Utilisés : {redeemed}",
+    "achievementsTitle": "Succès",
+    "badgesEarned": "Badges obtenus : {earned} sur {total}",
+    "viewAchievements": "Voir les succès",
+    "availableOffers": "Offres disponibles",
+    "browseAll": "Tout parcourir",
+    "noActiveOffers": "Aucune offre en cours pour le moment. Revenez bientôt.",
+    "validUntil": "Valable jusqu'au {date}",
+    "recentActivity": "Activité récente",
+    "noRecentActivity": "Aucune activité pour l'instant.",
+    "creditFrom": "Crédit de {merchant}",
+    "referralAt": "Parrainage · {merchant}",
+    "creditStatus": {
+      "locked": "en attente",
+      "available": "disponible",
+      "used": "utilisé",
+      "expired": "expiré",
+      "reversed": "annulé"
+    },
+    "referralStatus": {
+      "created": "Lien créé",
+      "opened": "Ouvert",
+      "redeemed": "Utilisé",
+      "expired": "Expiré",
+      "blocked": "Bloqué"
+    },
+    "myMerchants": "Mes commerçants",
+    "merchantDashboard": "Tableau de bord commerçant",
+    "sellTitle": "Vendez sur GiftHub",
+    "sellDescription": "Vous souhaitez proposer des bons à vos clients ? Contactez-nous et nous vous aiderons à créer un compte commerçant.",
+    "contactUs": "Nous contacter",
+    "exploreVouchers": "Découvrir les bons"
+  },
+  "wishlist": {
+    "title": "Ma liste de souhaits",
+    "emptyTitle": "Votre liste de souhaits est vide",
+    "emptyBody": "Enregistrez les bons, commerçants et campagnes qui vous plaisent pour les retrouver ici plus tard.",
+    "browseOffers": "Parcourir les offres"
+  },
+  "push": {
+    "enable": "Activer les notifications push",
+    "enabled": "Les notifications push sont activées",
+    "enabledToast": "Notifications push activées",
+    "disable": "Désactiver",
+    "disabledToast": "Notifications push désactivées",
+    "enableFailed": "Impossible d'activer les notifications push. Veuillez réessayer.",
+    "disableFailed": "Impossible de désactiver les notifications push. Veuillez réessayer.",
+    "unsupported": "Ce navigateur ne prend pas en charge les notifications push.",
+    "blocked": "Les notifications sont bloquées. Autorisez-les dans les paramètres de votre navigateur pour les activer."
+  },
+  "sessions": {
+    "title": "Sessions actives",
+    "description": "Voyez où votre compte est connecté.",
+    "backToSettings": "Retour aux paramètres",
+    "deviceOn": "{browser} sur {os}",
+    "unknownDevice": "Appareil inconnu",
+    "thisDevice": "Cet appareil",
+    "signedInHere": "Vous êtes actuellement connecté ici.",
+    "otherDevicesTitle": "Autres appareils",
+    "otherDevicesNone": "Nous ne pouvons pas afficher les autres appareils sur lesquels vous êtes peut-être connecté. Si vous remarquez quoi que ce soit d'inhabituel, changez votre mot de passe et activez l'authentification à deux facteurs.",
+    "securitySettings": "Paramètres de sécurité",
+    "lastActive": "Dernière activité : {time}",
+    "logout": "Se déconnecter",
+    "logoutAll": "Se déconnecter de tous les autres appareils",
+    "logoutAllBody": "Mettre fin à toutes les sessions sur les autres appareils.",
+    "loadFailed": "Impossible de charger vos sessions.",
+    "revokeFailed": "Impossible de mettre fin à la session. Veuillez réessayer.",
+    "revoked": "Session terminée.",
+    "revokedAll": "Les sessions sur les autres appareils ont été terminées."
+  },
+  "achievements": {
+    "title": "Succès",
+    "checkIn": "Faire le check-in du jour",
+    "checkingIn": "Check-in en cours…",
+    "checkedInToday": "Check-in effectué aujourd'hui",
+    "checkInFailed": "Échec du check-in. Veuillez réessayer.",
+    "checkInSaved": "Check-in enregistré",
+    "newBadge": "Nouveau badge : {name}",
+    "checkInPoints": "Points de check-in",
+    "level": "Niveau",
+    "levelValue": "Niveau {level}",
+    "levelProgress": "Progression vers le niveau suivant",
+    "badgesLabel": "Badges",
+    "noBadgesYet": "Aucun badge obtenu pour l'instant.",
+    "earnedOn": "Obtenu le {date}",
+    "locked": "Pas encore obtenu",
+    "howToEarn": "Comment gagner des points",
+    "earnRuleCheckIn": "Faites un check-in une fois par jour",
+    "pointsShort": "+{points} pts",
+    "pointsExplainer": "Les points et les niveaux reflètent votre activité. Ils ne peuvent pas être échangés contre de l'argent ou des bons.",
+    "currentStreak": "Série en cours (jours)",
+    "longestStreak": "Plus longue série (jours)",
+    "milestone": "Palier de série atteint !",
+    "badges": {
+      "first_purchase": {
+        "name": "Premier achat",
+        "description": "Vous avez acheté votre premier bon"
+      },
+      "first_redemption": {
+        "name": "Première utilisation",
+        "description": "Vous avez utilisé votre premier bon"
+      },
+      "5_referrals": {
+        "name": "Connecteur",
+        "description": "Vous avez partagé 5 bons avec des amis"
+      },
+      "10_referrals": {
+        "name": "Influenceur",
+        "description": "Vous avez partagé 10 bons avec des amis"
+      },
+      "streak_7": {
+        "name": "Guerrier de la semaine",
+        "description": "Check-in 7 jours d'affilée"
+      },
+      "streak_30": {
+        "name": "Maître du mois",
+        "description": "Check-in 30 jours d'affilée"
+      },
+      "review_writer": {
+        "name": "Critique",
+        "description": "Vous avez publié votre premier avis"
+      },
+      "big_spender": {
+        "name": "Grand dépensier",
+        "description": "Plus de 10 000 dépensés en bons au total"
+      },
+      "early_adopter": {
+        "name": "Pionnier",
+        "description": "Inscrit sur GiftHub avant 2028"
+      },
+      "social_sharer": {
+        "name": "Partageur social",
+        "description": "Vous avez partagé un bon sur les réseaux sociaux"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Fidélité",
+    "notActiveTitle": "Les niveaux de fidélité ne sont pas encore disponibles",
+    "notActiveBody": "Les achats ne rapportent pas encore de points de fidélité et aucune remise ni aucun avantage de niveau n'est appliqué au paiement ; il n'y a donc aucun niveau à afficher ici.",
+    "earnTodayTitle": "Ce que vous pouvez gagner dès aujourd'hui",
+    "earnCreditTitle": "Crédit de parrainage",
+    "earnCreditBody": "Partagez un bon. Lorsqu'un ami l'utilise, vous recevez du crédit à dépenser chez ce commerçant.",
+    "earnCreditLink": "Voir votre crédit",
+    "earnPointsTitle": "Points de check-in",
+    "earnPointsBody": "Faites un check-in chaque jour pour construire une série, monter de niveau et débloquer des badges.",
+    "earnPointsLink": "Voir les succès",
+    "historyTitle": "Historique des points",
+    "pointsBalance": "Solde : {points} points"
+  },
+  "welcome": {
+    "greeting": "Bonjour {name} !",
+    "progress": "Progression de la prise en main",
+    "setUpSecurity": "Configurer la 2FA ou une clé d'accès",
+    "skip": "Passer",
+    "next": "Suivant",
+    "getStarted": "Commencer",
+    "steps": {
+      "welcome": {
+        "title": "Bienvenue sur GiftHub !",
+        "subtitle": "Voici un aperçu rapide de ce que vous pouvez faire."
+      },
+      "discover": {
+        "title": "Découvrez des offres",
+        "subtitle": "Parcourez les bons, cartes cadeaux et événements des commerçants locaux.",
+        "features": {
+          "vouchers": "Bons numériques",
+          "giftCards": "Cartes cadeaux pour vos amis et votre famille",
+          "nearby": "Offres près de chez vous"
+        }
+      },
+      "wallet": {
+        "title": "Tous vos bons au même endroit",
+        "subtitle": "Tout ce que vous achetez est enregistré dans votre compte.",
+        "features": {
+          "qr": "Codes QR pour une utilisation rapide en magasin",
+          "expiry": "Rappels par e-mail avant l'expiration d'un bon"
+        }
+      },
+      "rewards": {
+        "title": "Gagnez des récompenses",
+        "subtitle": "Partagez des bons avec vos amis et gagnez du crédit lorsqu'ils les utilisent.",
+        "features": {
+          "referralCredit": "Crédit commerçant pour les parrainages réussis",
+          "checkIns": "Check-ins quotidiens et séries",
+          "badges": "Des badges à débloquer"
+        }
+      },
+      "notifications": {
+        "title": "Restez informé",
+        "subtitle": "Activez les notifications sur cet appareil."
+      },
+      "security": {
+        "title": "Sécurisez votre compte",
+        "subtitle": "Ajoutez une clé d'accès ou l'authentification à deux facteurs."
+      }
+    }
   }
 }

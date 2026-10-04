@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Cajas de suscripción",
     "pricing": "Reglas de precios",
     "webhooks": "Webhooks",
-    "apiKeys": "Claves API"
+    "apiKeys": "Claves API",
+    "marketplace": "Marketplace",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "expandSidebar": "Expandir barra lateral",
+    "collapseSidebar": "Contraer barra lateral",
+    "sectionShop": "Tienda",
+    "sectionRewards": "Recompensas",
+    "sectionAccount": "Cuenta",
+    "mainNavigation": "Navegación principal",
+    "quickNavigation": "Navegación rápida",
+    "logoutFailed": "No se pudo cerrar la sesión. Inténtalo de nuevo."
   },
   "voucher": {
     "title": "Cupón",
@@ -184,7 +195,11 @@
     "creditApplied": "Crédito aplicado",
     "finalTotal": "Total",
     "pageDescription": "Consulta tus créditos disponibles y bloqueados.",
-    "noMerchantWallets": "Aún no hay monederos de comerciante."
+    "noMerchantWallets": "Aún no hay monederos de comerciante.",
+    "noCreditYet": "Aún no tienes crédito",
+    "noCreditYetBody": "Ganas crédito cuando un amigo canjea un cupón que compartiste. Aparece aquí para cada comerciante.",
+    "shareToEarn": "Compartir un cupón",
+    "findVoucherToShare": "Buscar un cupón para compartir"
   },
   "redemption": {
     "title": "Canjes",
@@ -244,7 +259,12 @@
     "merchantLabel": "Comerciante",
     "voucherLabel": "Cupón",
     "linkField": "Enlace",
-    "codeField": "Código"
+    "codeField": "Código",
+    "linkCopied": "Enlace copiado",
+    "howItWorksTitle": "Cómo funcionan los referidos",
+    "howItWorksBody": "Abre un cupón y toca Compartir. Obtendrás un enlace personal para ese cupón. Cuando un amigo lo canjee, ganarás crédito del comerciante.",
+    "findVoucher": "Buscar un cupón para compartir",
+    "linkForVoucher": "Enlace de referido para {voucher}"
   },
   "analytics": {
     "title": "Analíticas",
@@ -516,7 +536,9 @@
     "viewVouchers": "Ver cupones",
     "redeemed": "Canjeado",
     "friendLabel": "Amigo",
-    "voucherLabel": "Cupón"
+    "voucherLabel": "Cupón",
+    "offersLinkTitle": "Enlace a las ofertas actuales",
+    "offersLinkDescription": "Envía a tus amigos a todas las ofertas actuales de GiftHub. Este enlace no genera crédito; para ganarlo, comparte un cupón concreto desde su página."
   },
   "billing": {
     "upgradeRequired": "Mejora necesaria",
@@ -618,14 +640,34 @@
     "inApp": "En la app",
     "pushBeta": "Push (beta)",
     "saving": "Guardando...",
-    "savePreferences": "Guardar preferencias"
+    "savePreferences": "Guardar preferencias",
+    "noPreferencesTitle": "Aún no hay nada que configurar",
+    "noPreferencesBody": "Los ajustes de notificaciones se gestionan por comerciante. Todavía no tienes ningún comerciante con ajustes de notificaciones.",
+    "saved": "Preferencias guardadas",
+    "saveFailed": "No se pudieron guardar tus preferencias. Inténtalo de nuevo.",
+    "markAllReadFailed": "No se pudieron marcar las notificaciones como leídas. Inténtalo de nuevo.",
+    "emptyHint": "Aquí aparecerán las novedades sobre tus cupones y ofertas.",
+    "browseOffers": "Ver ofertas"
   },
   "settingsPage": {
     "description": "Gestiona las preferencias de tu cuenta.",
     "joined": "Registrado",
     "recently": "recientemente",
     "accountAccessTitle": "Acceso a la cuenta",
-    "accountAccessDescription": "Protege tu cuenta y gestiona el acceso."
+    "accountAccessDescription": "Protege tu cuenta y gestiona el acceso.",
+    "pushDescription": "Recibe notificaciones en este dispositivo, incluso cuando GiftHub no esté abierto.",
+    "changePasswordTitle": "Cambiar contraseña",
+    "changePasswordDescription": "Actualiza la contraseña de tu cuenta.",
+    "setPasswordTitle": "Establecer una contraseña",
+    "setPasswordDescription": "Establece una contraseña para iniciar sesión con tu correo electrónico y contraseña.",
+    "twoFactorTitle": "Autenticación en dos pasos",
+    "twoFactorDescription": "Añade una capa extra de seguridad con una app de autenticación o una llave de acceso.",
+    "twoFactorManage": "Gestionar seguridad",
+    "sessionsTitle": "Sesiones activas",
+    "sessionsDescription": "Consulta dónde has iniciado sesión con tu cuenta.",
+    "sessionsView": "Ver sesiones",
+    "deleteTitle": "Eliminar cuenta",
+    "deleteDescription": "Elimina tu cuenta de forma permanente y anonimiza tus datos. Esta acción no se puede deshacer."
   },
   "profile": {
     "title": "Perfil",
@@ -633,5 +675,217 @@
     "accountInformation": "Información de la cuenta",
     "emailPreferences": "Preferencias de correo",
     "appSettings": "Configuración de la app"
+  },
+  "dashboard": {
+    "roleShopper": "Comprador",
+    "roleAdmin": "Administrador",
+    "roleStaff": "Personal",
+    "rolePlatformAdmin": "Administrador de la plataforma",
+    "availableCredit": "Crédito disponible",
+    "pendingCredit": "{amount} pendiente",
+    "creditExplainer": "Crédito que ganas cuando tus amigos canjean cupones que compartiste. Puedes gastarlo con el comerciante que lo emitió.",
+    "viewCreditDetails": "Ver detalles del crédito",
+    "successfulReferrals": "Referidos con éxito",
+    "checkInPoints": "Puntos de check-in",
+    "shareTitle": "Comparte un cupón y gana crédito",
+    "shareDescription": "Abre cualquier cupón y toca Compartir para obtener tu enlace personal. Cuando un amigo lo canjee, ganarás crédito.",
+    "openShareCenter": "Abrir el centro de compartir",
+    "sharedSummary": "Cupones compartidos: {count} · Canjeados: {redeemed}",
+    "achievementsTitle": "Logros",
+    "badgesEarned": "Insignias obtenidas: {earned} de {total}",
+    "viewAchievements": "Ver logros",
+    "availableOffers": "Ofertas disponibles",
+    "browseAll": "Ver todo",
+    "noActiveOffers": "No hay ofertas activas en este momento. Vuelve pronto.",
+    "validUntil": "Válido hasta el {date}",
+    "recentActivity": "Actividad reciente",
+    "noRecentActivity": "Aún no hay actividad.",
+    "creditFrom": "Crédito de {merchant}",
+    "referralAt": "Referido · {merchant}",
+    "creditStatus": {
+      "locked": "pendiente",
+      "available": "disponible",
+      "used": "usado",
+      "expired": "caducado",
+      "reversed": "revertido"
+    },
+    "referralStatus": {
+      "created": "Enlace creado",
+      "opened": "Abierto",
+      "redeemed": "Canjeado",
+      "expired": "Caducado",
+      "blocked": "Bloqueado"
+    },
+    "myMerchants": "Mis comerciantes",
+    "merchantDashboard": "Panel del comerciante",
+    "sellTitle": "Vende en GiftHub",
+    "sellDescription": "¿Quieres ofrecer cupones a tus clientes? Contáctanos y te ayudaremos a configurar una cuenta de comerciante.",
+    "contactUs": "Contáctanos",
+    "exploreVouchers": "Explorar cupones"
+  },
+  "wishlist": {
+    "title": "Mi lista de deseos",
+    "emptyTitle": "Tu lista de deseos está vacía",
+    "emptyBody": "Guarda los cupones, comerciantes y campañas que te gusten para encontrarlos aquí más tarde.",
+    "browseOffers": "Ver ofertas"
+  },
+  "push": {
+    "enable": "Activar notificaciones push",
+    "enabled": "Las notificaciones push están activadas",
+    "enabledToast": "Notificaciones push activadas",
+    "disable": "Desactivar",
+    "disabledToast": "Notificaciones push desactivadas",
+    "enableFailed": "No se pudieron activar las notificaciones push. Inténtalo de nuevo.",
+    "disableFailed": "No se pudieron desactivar las notificaciones push. Inténtalo de nuevo.",
+    "unsupported": "Este navegador no admite notificaciones push.",
+    "blocked": "Las notificaciones están bloqueadas. Permítelas en la configuración de tu navegador para activarlas."
+  },
+  "sessions": {
+    "title": "Sesiones activas",
+    "description": "Consulta dónde has iniciado sesión con tu cuenta.",
+    "backToSettings": "Volver a la configuración",
+    "deviceOn": "{browser} en {os}",
+    "unknownDevice": "Dispositivo desconocido",
+    "thisDevice": "Este dispositivo",
+    "signedInHere": "Has iniciado sesión aquí en este momento.",
+    "otherDevicesTitle": "Otros dispositivos",
+    "otherDevicesNone": "No podemos mostrar otros dispositivos en los que puedas haber iniciado sesión. Si notas algo inusual, cambia tu contraseña y activa la autenticación en dos pasos.",
+    "securitySettings": "Configuración de seguridad",
+    "lastActive": "Última actividad: {time}",
+    "logout": "Cerrar sesión",
+    "logoutAll": "Cerrar sesión en todos los demás dispositivos",
+    "logoutAllBody": "Finaliza todas las sesiones en otros dispositivos.",
+    "loadFailed": "No se pudieron cargar tus sesiones.",
+    "revokeFailed": "No se pudo finalizar la sesión. Inténtalo de nuevo.",
+    "revoked": "Sesión finalizada.",
+    "revokedAll": "Se han finalizado las sesiones en otros dispositivos."
+  },
+  "achievements": {
+    "title": "Logros",
+    "checkIn": "Haz check-in hoy",
+    "checkingIn": "Haciendo check-in…",
+    "checkedInToday": "Check-in hecho hoy",
+    "checkInFailed": "El check-in ha fallado. Inténtalo de nuevo.",
+    "checkInSaved": "Check-in guardado",
+    "newBadge": "Nueva insignia: {name}",
+    "checkInPoints": "Puntos de check-in",
+    "level": "Nivel",
+    "levelValue": "Nivel {level}",
+    "levelProgress": "Progreso hacia el siguiente nivel",
+    "badgesLabel": "Insignias",
+    "noBadgesYet": "Aún no has obtenido insignias.",
+    "earnedOn": "Obtenida el {date}",
+    "locked": "Aún no obtenida",
+    "howToEarn": "Cómo ganar puntos",
+    "earnRuleCheckIn": "Haz check-in una vez al día",
+    "pointsShort": "+{points} pts",
+    "pointsExplainer": "Los puntos y niveles muestran lo activo que eres. No se pueden canjear por dinero ni por cupones.",
+    "currentStreak": "Racha actual (días)",
+    "longestStreak": "Racha más larga (días)",
+    "milestone": "¡Has alcanzado un hito de racha!",
+    "badges": {
+      "first_purchase": {
+        "name": "Primera compra",
+        "description": "Compraste tu primer cupón"
+      },
+      "first_redemption": {
+        "name": "Primer canje",
+        "description": "Canjeaste tu primer cupón"
+      },
+      "5_referrals": {
+        "name": "Conector",
+        "description": "Compartiste 5 cupones con amigos"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "Compartiste 10 cupones con amigos"
+      },
+      "streak_7": {
+        "name": "Guerrero semanal",
+        "description": "Hiciste check-in 7 días seguidos"
+      },
+      "streak_30": {
+        "name": "Maestro del mes",
+        "description": "Hiciste check-in 30 días seguidos"
+      },
+      "review_writer": {
+        "name": "Reseñador",
+        "description": "Publicaste tu primera reseña"
+      },
+      "big_spender": {
+        "name": "Gran comprador",
+        "description": "Gastaste más de 10.000 en cupones en total"
+      },
+      "early_adopter": {
+        "name": "Pionero",
+        "description": "Te uniste a GiftHub antes de 2028"
+      },
+      "social_sharer": {
+        "name": "Compartidor social",
+        "description": "Compartiste un cupón en redes sociales"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Fidelidad",
+    "notActiveTitle": "Los niveles de fidelidad aún no están disponibles",
+    "notActiveBody": "Las compras todavía no suman puntos de fidelidad y no se aplican descuentos ni ventajas por nivel al pagar, así que no hay niveles que mostrar aquí.",
+    "earnTodayTitle": "Lo que puedes ganar hoy",
+    "earnCreditTitle": "Crédito por referidos",
+    "earnCreditBody": "Comparte un cupón. Cuando un amigo lo canjee, recibirás crédito para gastar con ese comerciante.",
+    "earnCreditLink": "Ver tu crédito",
+    "earnPointsTitle": "Puntos de check-in",
+    "earnPointsBody": "Haz check-in a diario para crear una racha, subir de nivel y desbloquear insignias.",
+    "earnPointsLink": "Ver logros",
+    "historyTitle": "Historial de puntos",
+    "pointsBalance": "Saldo: {points} puntos"
+  },
+  "welcome": {
+    "greeting": "¡Hola, {name}!",
+    "progress": "Progreso de la bienvenida",
+    "setUpSecurity": "Configura 2FA o una llave de acceso",
+    "skip": "Omitir",
+    "next": "Siguiente",
+    "getStarted": "Empezar",
+    "steps": {
+      "welcome": {
+        "title": "¡Te damos la bienvenida a GiftHub!",
+        "subtitle": "Aquí tienes un recorrido rápido por lo que puedes hacer."
+      },
+      "discover": {
+        "title": "Descubre ofertas",
+        "subtitle": "Explora cupones, tarjetas regalo y eventos de comerciantes locales.",
+        "features": {
+          "vouchers": "Cupones digitales",
+          "giftCards": "Tarjetas regalo para amigos y familia",
+          "nearby": "Ofertas cerca de ti"
+        }
+      },
+      "wallet": {
+        "title": "Tus cupones en un solo lugar",
+        "subtitle": "Todo lo que compras se guarda en tu cuenta.",
+        "features": {
+          "qr": "Códigos QR para canjear rápidamente en tienda",
+          "expiry": "Recordatorios por correo antes de que caduque un cupón"
+        }
+      },
+      "rewards": {
+        "title": "Gana recompensas",
+        "subtitle": "Comparte cupones con tus amigos y gana crédito cuando los canjeen.",
+        "features": {
+          "referralCredit": "Crédito con el comerciante por referidos con éxito",
+          "checkIns": "Check-ins diarios y rachas",
+          "badges": "Insignias por desbloquear"
+        }
+      },
+      "notifications": {
+        "title": "Mantente al día",
+        "subtitle": "Activa las notificaciones en este dispositivo."
+      },
+      "security": {
+        "title": "Protege tu cuenta",
+        "subtitle": "Añade una llave de acceso o la autenticación en dos pasos."
+      }
+    }
   }
 }

@@ -64,7 +64,18 @@
     "subscriptionBoxes": "定期便ボックス",
     "pricing": "価格ルール",
     "webhooks": "Webhook",
-    "apiKeys": "API キー"
+    "apiKeys": "API キー",
+    "marketplace": "マーケットプレイス",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "expandSidebar": "サイドバーを展開",
+    "collapseSidebar": "サイドバーを折りたたむ",
+    "sectionShop": "ショップ",
+    "sectionRewards": "リワード",
+    "sectionAccount": "アカウント",
+    "mainNavigation": "メインナビゲーション",
+    "quickNavigation": "クイックナビゲーション",
+    "logoutFailed": "ログアウトできませんでした。もう一度お試しください。"
   },
   "voucher": {
     "title": "バウチャー",
@@ -184,7 +195,11 @@
     "creditApplied": "適用済みクレジット",
     "finalTotal": "合計",
     "pageDescription": "利用可能なクレジットとロック中のクレジットを確認できます。",
-    "noMerchantWallets": "マーチャントウォレットはまだありません。"
+    "noMerchantWallets": "マーチャントウォレットはまだありません。",
+    "noCreditYet": "クレジットはまだありません",
+    "noCreditYetBody": "あなたが共有したバウチャーを友達が利用すると、クレジットを獲得できます。クレジットはマーチャントごとにここに表示されます。",
+    "shareToEarn": "バウチャーを共有",
+    "findVoucherToShare": "共有するバウチャーを探す"
   },
   "redemption": {
     "title": "利用履歴",
@@ -244,7 +259,12 @@
     "merchantLabel": "マーチャント",
     "voucherLabel": "バウチャー",
     "linkField": "リンク",
-    "codeField": "コード"
+    "codeField": "コード",
+    "linkCopied": "リンクをコピーしました",
+    "howItWorksTitle": "紹介のしくみ",
+    "howItWorksBody": "バウチャーを開いて「共有」をタップすると、そのバウチャー専用の個人リンクが発行されます。友達がそれを利用すると、マーチャントからクレジットを獲得できます。",
+    "findVoucher": "共有するバウチャーを探す",
+    "linkForVoucher": "{voucher} の紹介リンク"
   },
   "analytics": {
     "title": "分析",
@@ -516,7 +536,9 @@
     "viewVouchers": "バウチャーを見る",
     "redeemed": "利用済み",
     "friendLabel": "友人",
-    "voucherLabel": "バウチャー"
+    "voucherLabel": "バウチャー",
+    "offersLinkTitle": "現在のオファーへのリンク",
+    "offersLinkDescription": "GiftHub の現在のすべてのオファーを友達に紹介できます。このリンクではクレジットは獲得できません。クレジットを獲得するには、各バウチャーのページから個別に共有してください。"
   },
   "billing": {
     "upgradeRequired": "アップグレードが必要です",
@@ -618,14 +640,34 @@
     "inApp": "アプリ内",
     "pushBeta": "プッシュ通知（ベータ版）",
     "saving": "保存中...",
-    "savePreferences": "設定を保存"
+    "savePreferences": "設定を保存",
+    "noPreferencesTitle": "まだ設定する項目はありません",
+    "noPreferencesBody": "通知設定はマーチャントごとに管理されます。通知設定のあるマーチャントはまだありません。",
+    "saved": "設定を保存しました",
+    "saveFailed": "設定を保存できませんでした。もう一度お試しください。",
+    "markAllReadFailed": "通知を既読にできませんでした。もう一度お試しください。",
+    "emptyHint": "バウチャーやオファーに関するお知らせがここに表示されます。",
+    "browseOffers": "オファーを見る"
   },
   "settingsPage": {
     "description": "アカウント設定を管理します。",
     "joined": "登録日",
     "recently": "最近",
     "accountAccessTitle": "アカウントアクセス",
-    "accountAccessDescription": "アカウントの保護とアクセス管理。"
+    "accountAccessDescription": "アカウントの保護とアクセス管理。",
+    "pushDescription": "GiftHub を開いていないときも、このデバイスで通知を受け取れます。",
+    "changePasswordTitle": "パスワードを変更",
+    "changePasswordDescription": "アカウントのパスワードを更新します。",
+    "setPasswordTitle": "パスワードを設定",
+    "setPasswordDescription": "パスワードを設定すると、メールアドレスとパスワードでログインできます。",
+    "twoFactorTitle": "二要素認証",
+    "twoFactorDescription": "認証アプリまたはパスキーでセキュリティを強化します。",
+    "twoFactorManage": "セキュリティを管理",
+    "sessionsTitle": "アクティブなセッション",
+    "sessionsDescription": "アカウントにログインしている場所を確認します。",
+    "sessionsView": "セッションを表示",
+    "deleteTitle": "アカウントを削除",
+    "deleteDescription": "アカウントを完全に削除し、データを匿名化します。この操作は元に戻せません。"
   },
   "profile": {
     "title": "プロフィール",
@@ -633,5 +675,217 @@
     "accountInformation": "アカウント情報",
     "emailPreferences": "メール設定",
     "appSettings": "アプリ設定"
+  },
+  "dashboard": {
+    "roleShopper": "ショッパー",
+    "roleAdmin": "管理者",
+    "roleStaff": "スタッフ",
+    "rolePlatformAdmin": "プラットフォーム管理者",
+    "availableCredit": "利用可能なクレジット",
+    "pendingCredit": "{amount} 保留中",
+    "creditExplainer": "あなたが共有したバウチャーを友達が利用すると獲得できるクレジットです。発行したマーチャントで利用できます。",
+    "viewCreditDetails": "クレジットの詳細を見る",
+    "successfulReferrals": "成功した紹介",
+    "checkInPoints": "チェックインポイント",
+    "shareTitle": "バウチャーを共有してクレジットを獲得",
+    "shareDescription": "バウチャーを開いて「共有」をタップすると、あなた専用のリンクが発行されます。友達がそれを利用すると、クレジットを獲得できます。",
+    "openShareCenter": "シェアセンターを開く",
+    "sharedSummary": "共有したバウチャー: {count} · 利用済み: {redeemed}",
+    "achievementsTitle": "実績",
+    "badgesEarned": "獲得したバッジ: {earned} / {total}",
+    "viewAchievements": "実績を見る",
+    "availableOffers": "利用可能なオファー",
+    "browseAll": "すべて見る",
+    "noActiveOffers": "現在公開中のオファーはありません。また後でご確認ください。",
+    "validUntil": "{date} まで有効",
+    "recentActivity": "最近のアクティビティ",
+    "noRecentActivity": "アクティビティはまだありません。",
+    "creditFrom": "{merchant} からのクレジット",
+    "referralAt": "紹介 · {merchant}",
+    "creditStatus": {
+      "locked": "保留中",
+      "available": "利用可能",
+      "used": "使用済み",
+      "expired": "期限切れ",
+      "reversed": "取り消し済み"
+    },
+    "referralStatus": {
+      "created": "リンク作成済み",
+      "opened": "閲覧済み",
+      "redeemed": "利用済み",
+      "expired": "期限切れ",
+      "blocked": "ブロック済み"
+    },
+    "myMerchants": "マイマーチャント",
+    "merchantDashboard": "マーチャントダッシュボード",
+    "sellTitle": "GiftHub で販売する",
+    "sellDescription": "お客様にバウチャーを提供しませんか？お問い合わせいただければ、マーチャントアカウントの開設をお手伝いします。",
+    "contactUs": "お問い合わせ",
+    "exploreVouchers": "バウチャーを探す"
+  },
+  "wishlist": {
+    "title": "マイウィッシュリスト",
+    "emptyTitle": "ウィッシュリストは空です",
+    "emptyBody": "気に入ったバウチャー、マーチャント、キャンペーンを保存すると、後でここから確認できます。",
+    "browseOffers": "オファーを見る"
+  },
+  "push": {
+    "enable": "プッシュ通知を有効にする",
+    "enabled": "プッシュ通知はオンです",
+    "enabledToast": "プッシュ通知を有効にしました",
+    "disable": "オフにする",
+    "disabledToast": "プッシュ通知をオフにしました",
+    "enableFailed": "プッシュ通知を有効にできませんでした。もう一度お試しください。",
+    "disableFailed": "プッシュ通知をオフにできませんでした。もう一度お試しください。",
+    "unsupported": "このブラウザはプッシュ通知に対応していません。",
+    "blocked": "通知がブロックされています。オンにするには、ブラウザの設定で通知を許可してください。"
+  },
+  "sessions": {
+    "title": "アクティブなセッション",
+    "description": "アカウントにログインしている場所を確認します。",
+    "backToSettings": "設定に戻る",
+    "deviceOn": "{os} 上の {browser}",
+    "unknownDevice": "不明なデバイス",
+    "thisDevice": "このデバイス",
+    "signedInHere": "現在このデバイスでログインしています。",
+    "otherDevicesTitle": "その他のデバイス",
+    "otherDevicesNone": "ログインしている可能性のある他のデバイスは一覧表示できません。不審な点に気づいた場合は、パスワードを変更し、二要素認証を有効にしてください。",
+    "securitySettings": "セキュリティ設定",
+    "lastActive": "最終アクティブ: {time}",
+    "logout": "ログアウト",
+    "logoutAll": "他のすべてのデバイスからログアウト",
+    "logoutAllBody": "他のデバイスのすべてのセッションを終了します。",
+    "loadFailed": "セッションを読み込めませんでした。",
+    "revokeFailed": "セッションを終了できませんでした。もう一度お試しください。",
+    "revoked": "セッションを終了しました。",
+    "revokedAll": "他のデバイスのセッションを終了しました。"
+  },
+  "achievements": {
+    "title": "実績",
+    "checkIn": "今日のチェックイン",
+    "checkingIn": "チェックイン中…",
+    "checkedInToday": "今日はチェックイン済み",
+    "checkInFailed": "チェックインに失敗しました。もう一度お試しください。",
+    "checkInSaved": "チェックインを記録しました",
+    "newBadge": "新しいバッジ: {name}",
+    "checkInPoints": "チェックインポイント",
+    "level": "レベル",
+    "levelValue": "レベル {level}",
+    "levelProgress": "次のレベルまでの進捗",
+    "badgesLabel": "バッジ",
+    "noBadgesYet": "獲得したバッジはまだありません。",
+    "earnedOn": "{date} に獲得",
+    "locked": "未獲得",
+    "howToEarn": "ポイントの獲得方法",
+    "earnRuleCheckIn": "1日1回チェックイン",
+    "pointsShort": "+{points} pt",
+    "pointsExplainer": "ポイントとレベルはあなたのアクティビティの度合いを示すものです。お金やバウチャーと交換することはできません。",
+    "currentStreak": "現在の連続日数",
+    "longestStreak": "最長連続日数",
+    "milestone": "連続記録のマイルストーンを達成しました！",
+    "badges": {
+      "first_purchase": {
+        "name": "初めての購入",
+        "description": "初めてバウチャーを購入しました"
+      },
+      "first_redemption": {
+        "name": "初めての利用",
+        "description": "初めてバウチャーを利用しました"
+      },
+      "5_referrals": {
+        "name": "コネクター",
+        "description": "友達にバウチャーを5件共有しました"
+      },
+      "10_referrals": {
+        "name": "インフルエンサー",
+        "description": "友達にバウチャーを10件共有しました"
+      },
+      "streak_7": {
+        "name": "ウィークリーウォリアー",
+        "description": "7日連続でチェックインしました"
+      },
+      "streak_30": {
+        "name": "マンスリーマスター",
+        "description": "30日連続でチェックインしました"
+      },
+      "review_writer": {
+        "name": "レビュアー",
+        "description": "初めてのレビューを投稿しました"
+      },
+      "big_spender": {
+        "name": "ビッグスペンダー",
+        "description": "バウチャーに累計10,000以上を使いました"
+      },
+      "early_adopter": {
+        "name": "アーリーアダプター",
+        "description": "2028年より前に GiftHub に参加しました"
+      },
+      "social_sharer": {
+        "name": "ソーシャルシェアラー",
+        "description": "SNS でバウチャーを共有しました"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "ロイヤルティ",
+    "notActiveTitle": "ロイヤルティランクはまだご利用いただけません",
+    "notActiveBody": "現在、購入によるロイヤルティポイントの付与はなく、チェックアウト時のランク割引や特典も適用されないため、ここに表示するランクはありません。",
+    "earnTodayTitle": "今すぐ獲得できるもの",
+    "earnCreditTitle": "紹介クレジット",
+    "earnCreditBody": "バウチャーを共有しましょう。友達がそれを利用すると、そのマーチャントで使えるクレジットを獲得できます。",
+    "earnCreditLink": "クレジットを見る",
+    "earnPointsTitle": "チェックインポイント",
+    "earnPointsBody": "毎日チェックインして連続記録を伸ばし、レベルアップしてバッジを獲得しましょう。",
+    "earnPointsLink": "実績を見る",
+    "historyTitle": "ポイント履歴",
+    "pointsBalance": "残高: {points} ポイント"
+  },
+  "welcome": {
+    "greeting": "こんにちは、{name} さん！",
+    "progress": "オンボーディングの進捗",
+    "setUpSecurity": "2FA またはパスキーを設定",
+    "skip": "スキップ",
+    "next": "次へ",
+    "getStarted": "はじめる",
+    "steps": {
+      "welcome": {
+        "title": "GiftHub へようこそ！",
+        "subtitle": "できることを簡単にご紹介します。"
+      },
+      "discover": {
+        "title": "オファーを見つける",
+        "subtitle": "地元のマーチャントのバウチャー、ギフトカード、イベントを探せます。",
+        "features": {
+          "vouchers": "デジタルバウチャー",
+          "giftCards": "友達や家族へのギフトカード",
+          "nearby": "近くのオファー"
+        }
+      },
+      "wallet": {
+        "title": "バウチャーをまとめて管理",
+        "subtitle": "購入したものはすべてアカウントに保存されます。",
+        "features": {
+          "qr": "店舗ですばやく利用できる QR コード",
+          "expiry": "バウチャーの有効期限前にメールでお知らせ"
+        }
+      },
+      "rewards": {
+        "title": "リワードを獲得",
+        "subtitle": "友達にバウチャーを共有し、利用されるとクレジットを獲得できます。",
+        "features": {
+          "referralCredit": "紹介成功でマーチャントクレジットを獲得",
+          "checkIns": "毎日のチェックインと連続記録",
+          "badges": "獲得できるバッジ"
+        }
+      },
+      "notifications": {
+        "title": "最新情報を受け取る",
+        "subtitle": "このデバイスで通知をオンにしましょう。"
+      },
+      "security": {
+        "title": "アカウントを保護",
+        "subtitle": "パスキーまたは二要素認証を追加しましょう。"
+      }
+    }
   }
 }

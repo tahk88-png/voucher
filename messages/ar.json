@@ -64,7 +64,18 @@
     "subscriptionBoxes": "صناديق الاشتراك",
     "pricing": "قواعد التسعير",
     "webhooks": "Webhooks",
-    "apiKeys": "مفاتيح API"
+    "apiKeys": "مفاتيح API",
+    "marketplace": "السوق",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "expandSidebar": "توسيع الشريط الجانبي",
+    "collapseSidebar": "طي الشريط الجانبي",
+    "sectionShop": "التسوق",
+    "sectionRewards": "المكافآت",
+    "sectionAccount": "الحساب",
+    "mainNavigation": "التنقل الرئيسي",
+    "quickNavigation": "التنقل السريع",
+    "logoutFailed": "تعذّر تسجيل الخروج. يُرجى المحاولة مرة أخرى."
   },
   "voucher": {
     "title": "قسيمة",
@@ -184,7 +195,11 @@
     "creditApplied": "الرصيد المطبّق",
     "finalTotal": "الإجمالي",
     "pageDescription": "تتبع رصيدك المتاح والمجمّد.",
-    "noMerchantWallets": "لا توجد محافظ تجار بعد."
+    "noMerchantWallets": "لا توجد محافظ تجار بعد.",
+    "noCreditYet": "لا يوجد رصيد بعد",
+    "noCreditYetBody": "تحصل على رصيد عندما يستخدم صديقك قسيمة شاركتها معه. يظهر الرصيد هنا لكل تاجر.",
+    "shareToEarn": "شارك قسيمة",
+    "findVoucherToShare": "ابحث عن قسيمة لمشاركتها"
   },
   "redemption": {
     "title": "سجل الاستخدام",
@@ -244,7 +259,12 @@
     "merchantLabel": "التاجر",
     "voucherLabel": "القسيمة",
     "linkField": "الرابط",
-    "codeField": "الرمز"
+    "codeField": "الرمز",
+    "linkCopied": "تم نسخ الرابط",
+    "howItWorksTitle": "كيف تعمل الإحالات",
+    "howItWorksBody": "افتح قسيمة واضغط على «مشاركة». ستحصل على رابط شخصي لتلك القسيمة. عندما يستخدمها صديقك، تحصل على رصيد من التاجر.",
+    "findVoucher": "ابحث عن قسيمة لمشاركتها",
+    "linkForVoucher": "رابط الإحالة لـ {voucher}"
   },
   "analytics": {
     "title": "التحليلات",
@@ -516,7 +536,9 @@
     "viewVouchers": "عرض القسائم",
     "redeemed": "مستخدمة",
     "friendLabel": "صديق",
-    "voucherLabel": "قسيمة"
+    "voucherLabel": "قسيمة",
+    "offersLinkTitle": "رابط العروض الحالية",
+    "offersLinkDescription": "أرسل لأصدقائك رابطًا لجميع العروض الحالية على GiftHub. لا يمنحك هذا الرابط رصيدًا؛ لكسب الرصيد، شارك قسيمة محددة من صفحتها."
   },
   "billing": {
     "upgradeRequired": "الترقية مطلوبة",
@@ -618,14 +640,34 @@
     "inApp": "داخل التطبيق",
     "pushBeta": "إشعارات فورية (تجريبي)",
     "saving": "جارٍ الحفظ...",
-    "savePreferences": "حفظ التفضيلات"
+    "savePreferences": "حفظ التفضيلات",
+    "noPreferencesTitle": "لا يوجد ما يمكن إعداده بعد",
+    "noPreferencesBody": "تُدار إعدادات الإشعارات لكل تاجر على حدة. ليس لديك أي تجار لديهم إعدادات إشعارات بعد.",
+    "saved": "تم حفظ التفضيلات",
+    "saveFailed": "تعذّر حفظ تفضيلاتك. يُرجى المحاولة مرة أخرى.",
+    "markAllReadFailed": "تعذّر تعليم الإشعارات كمقروءة. يُرجى المحاولة مرة أخرى.",
+    "emptyHint": "ستظهر هنا التحديثات المتعلقة بقسائمك وعروضك.",
+    "browseOffers": "تصفّح العروض"
   },
   "settingsPage": {
     "description": "إدارة تفضيلات حسابك.",
     "joined": "تاريخ الانضمام",
     "recently": "مؤخراً",
     "accountAccessTitle": "الوصول للحساب",
-    "accountAccessDescription": "حماية حسابك وإدارة الوصول."
+    "accountAccessDescription": "حماية حسابك وإدارة الوصول.",
+    "pushDescription": "تلقَّ الإشعارات على هذا الجهاز، حتى عندما يكون GiftHub مغلقًا.",
+    "changePasswordTitle": "تغيير كلمة المرور",
+    "changePasswordDescription": "حدّث كلمة مرور حسابك.",
+    "setPasswordTitle": "تعيين كلمة مرور",
+    "setPasswordDescription": "عيّن كلمة مرور لتسجيل الدخول باستخدام بريدك الإلكتروني وكلمة المرور.",
+    "twoFactorTitle": "المصادقة الثنائية",
+    "twoFactorDescription": "أضف طبقة أمان إضافية باستخدام تطبيق مصادقة أو مفتاح مرور.",
+    "twoFactorManage": "إدارة الأمان",
+    "sessionsTitle": "الجلسات النشطة",
+    "sessionsDescription": "اطّلع على الأماكن التي سُجّل فيها الدخول إلى حسابك.",
+    "sessionsView": "عرض الجلسات",
+    "deleteTitle": "حذف الحساب",
+    "deleteDescription": "احذف حسابك نهائيًا واجعل بياناتك مجهولة الهوية. لا يمكن التراجع عن ذلك."
   },
   "profile": {
     "title": "الملف الشخصي",
@@ -633,5 +675,217 @@
     "accountInformation": "معلومات الحساب",
     "emailPreferences": "تفضيلات البريد الإلكتروني",
     "appSettings": "إعدادات التطبيق"
+  },
+  "dashboard": {
+    "roleShopper": "متسوّق",
+    "roleAdmin": "مسؤول",
+    "roleStaff": "موظف",
+    "rolePlatformAdmin": "مسؤول المنصة",
+    "availableCredit": "الرصيد المتاح",
+    "pendingCredit": "{amount} قيد الانتظار",
+    "creditExplainer": "رصيد تكسبه عندما يستخدم أصدقاؤك قسائم شاركتها معهم. يمكنك إنفاقه لدى التاجر الذي أصدره.",
+    "viewCreditDetails": "عرض تفاصيل الرصيد",
+    "successfulReferrals": "الإحالات الناجحة",
+    "checkInPoints": "نقاط تسجيل الحضور",
+    "shareTitle": "شارك قسيمة واكسب رصيدًا",
+    "shareDescription": "افتح أي قسيمة واضغط على «مشاركة» للحصول على رابطك الشخصي. عندما يستخدمها صديقك، تكسب رصيدًا.",
+    "openShareCenter": "فتح مركز المشاركة",
+    "sharedSummary": "القسائم المُشارَكة: {count} · المُستخدَمة: {redeemed}",
+    "achievementsTitle": "الإنجازات",
+    "badgesEarned": "الشارات المكتسبة: {earned} من {total}",
+    "viewAchievements": "عرض الإنجازات",
+    "availableOffers": "العروض المتاحة",
+    "browseAll": "تصفّح الكل",
+    "noActiveOffers": "لا توجد عروض متاحة حاليًا. عُد قريبًا.",
+    "validUntil": "صالح حتى {date}",
+    "recentActivity": "النشاط الأخير",
+    "noRecentActivity": "لا يوجد نشاط بعد.",
+    "creditFrom": "رصيد من {merchant}",
+    "referralAt": "إحالة · {merchant}",
+    "creditStatus": {
+      "locked": "قيد الانتظار",
+      "available": "متاح",
+      "used": "مُستخدَم",
+      "expired": "منتهي الصلاحية",
+      "reversed": "مُلغى"
+    },
+    "referralStatus": {
+      "created": "تم إنشاء الرابط",
+      "opened": "تم الفتح",
+      "redeemed": "تم الاستخدام",
+      "expired": "منتهي الصلاحية",
+      "blocked": "محظور"
+    },
+    "myMerchants": "تجّاري",
+    "merchantDashboard": "لوحة تحكم التاجر",
+    "sellTitle": "بِع على GiftHub",
+    "sellDescription": "هل تريد تقديم قسائم لعملائك؟ تواصل معنا وسنساعدك في إعداد حساب تاجر.",
+    "contactUs": "تواصل معنا",
+    "exploreVouchers": "استكشف القسائم"
+  },
+  "wishlist": {
+    "title": "قائمة أمنياتي",
+    "emptyTitle": "قائمة أمنياتك فارغة",
+    "emptyBody": "احفظ القسائم والتجار والحملات التي تعجبك لتجدها هنا لاحقًا.",
+    "browseOffers": "تصفّح العروض"
+  },
+  "push": {
+    "enable": "تفعيل الإشعارات الفورية",
+    "enabled": "الإشعارات الفورية مفعّلة",
+    "enabledToast": "تم تفعيل الإشعارات الفورية",
+    "disable": "إيقاف",
+    "disabledToast": "تم إيقاف الإشعارات الفورية",
+    "enableFailed": "تعذّر تفعيل الإشعارات الفورية. يُرجى المحاولة مرة أخرى.",
+    "disableFailed": "تعذّر إيقاف الإشعارات الفورية. يُرجى المحاولة مرة أخرى.",
+    "unsupported": "هذا المتصفح لا يدعم الإشعارات الفورية.",
+    "blocked": "الإشعارات محظورة. اسمح بها في إعدادات المتصفح لتفعيلها."
+  },
+  "sessions": {
+    "title": "الجلسات النشطة",
+    "description": "اطّلع على الأماكن التي سُجّل فيها الدخول إلى حسابك.",
+    "backToSettings": "العودة إلى الإعدادات",
+    "deviceOn": "{browser} على {os}",
+    "unknownDevice": "جهاز غير معروف",
+    "thisDevice": "هذا الجهاز",
+    "signedInHere": "أنت مسجّل الدخول هنا الآن.",
+    "otherDevicesTitle": "أجهزة أخرى",
+    "otherDevicesNone": "لا يمكننا عرض الأجهزة الأخرى التي قد تكون مسجّلًا الدخول عليها. إذا لاحظت أي شيء غير معتاد، فغيّر كلمة المرور وفعّل المصادقة الثنائية.",
+    "securitySettings": "إعدادات الأمان",
+    "lastActive": "آخر نشاط {time}",
+    "logout": "تسجيل الخروج",
+    "logoutAll": "تسجيل الخروج من جميع الأجهزة الأخرى",
+    "logoutAllBody": "إنهاء جميع الجلسات على الأجهزة الأخرى.",
+    "loadFailed": "تعذّر تحميل جلساتك.",
+    "revokeFailed": "تعذّر إنهاء الجلسة. يُرجى المحاولة مرة أخرى.",
+    "revoked": "تم إنهاء الجلسة.",
+    "revokedAll": "تم إنهاء الجلسات على الأجهزة الأخرى."
+  },
+  "achievements": {
+    "title": "الإنجازات",
+    "checkIn": "سجّل حضورك اليوم",
+    "checkingIn": "جارٍ تسجيل الحضور…",
+    "checkedInToday": "تم تسجيل الحضور اليوم",
+    "checkInFailed": "فشل تسجيل الحضور. يُرجى المحاولة مرة أخرى.",
+    "checkInSaved": "تم حفظ تسجيل الحضور",
+    "newBadge": "شارة جديدة: {name}",
+    "checkInPoints": "نقاط تسجيل الحضور",
+    "level": "المستوى",
+    "levelValue": "المستوى {level}",
+    "levelProgress": "التقدّم نحو المستوى التالي",
+    "badgesLabel": "الشارات",
+    "noBadgesYet": "لم تكتسب أي شارات بعد.",
+    "earnedOn": "اكتُسبت في {date}",
+    "locked": "لم تُكتسب بعد",
+    "howToEarn": "كيف تكسب النقاط",
+    "earnRuleCheckIn": "سجّل حضورك مرة واحدة يوميًا",
+    "pointsShort": "+{points} نقطة",
+    "pointsExplainer": "تُظهر النقاط والمستويات مدى نشاطك. لا يمكن استبدالها بالمال أو بالقسائم.",
+    "currentStreak": "السلسلة الحالية (أيام)",
+    "longestStreak": "أطول سلسلة (أيام)",
+    "milestone": "لقد بلغت إنجازًا جديدًا في سلسلتك!",
+    "badges": {
+      "first_purchase": {
+        "name": "أول عملية شراء",
+        "description": "اشتريت قسيمتك الأولى"
+      },
+      "first_redemption": {
+        "name": "أول استخدام",
+        "description": "استخدمت قسيمتك الأولى"
+      },
+      "5_referrals": {
+        "name": "حلقة الوصل",
+        "description": "شاركت 5 قسائم مع أصدقائك"
+      },
+      "10_referrals": {
+        "name": "المؤثّر",
+        "description": "شاركت 10 قسائم مع أصدقائك"
+      },
+      "streak_7": {
+        "name": "بطل الأسبوع",
+        "description": "سجّلت حضورك 7 أيام متتالية"
+      },
+      "streak_30": {
+        "name": "سيد الشهر",
+        "description": "سجّلت حضورك 30 يومًا متتاليًا"
+      },
+      "review_writer": {
+        "name": "المُقيِّم",
+        "description": "نشرت أول تقييم لك"
+      },
+      "big_spender": {
+        "name": "المنفق الكبير",
+        "description": "أنفقت أكثر من 10,000 على القسائم إجمالًا"
+      },
+      "early_adopter": {
+        "name": "من الأوائل",
+        "description": "انضممت إلى GiftHub قبل عام 2028"
+      },
+      "social_sharer": {
+        "name": "ناشر اجتماعي",
+        "description": "شاركت قسيمة على وسائل التواصل الاجتماعي"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "الولاء",
+    "notActiveTitle": "مستويات الولاء غير متاحة بعد",
+    "notActiveBody": "لا تمنحك المشتريات نقاط ولاء بعد، ولا تُطبَّق أي خصومات أو مزايا للمستويات عند الدفع، لذلك لا توجد مستويات لعرضها هنا.",
+    "earnTodayTitle": "ما يمكنك كسبه اليوم",
+    "earnCreditTitle": "رصيد الإحالة",
+    "earnCreditBody": "شارك قسيمة. عندما يستخدمها صديقك، تحصل على رصيد لإنفاقه لدى ذلك التاجر.",
+    "earnCreditLink": "عرض رصيدك",
+    "earnPointsTitle": "نقاط تسجيل الحضور",
+    "earnPointsBody": "سجّل حضورك يوميًا لبناء سلسلة، والارتقاء في المستوى، وفتح الشارات.",
+    "earnPointsLink": "عرض الإنجازات",
+    "historyTitle": "سجل النقاط",
+    "pointsBalance": "رصيد النقاط: {points}"
+  },
+  "welcome": {
+    "greeting": "مرحبًا، {name}!",
+    "progress": "تقدّم الإعداد",
+    "setUpSecurity": "إعداد المصادقة الثنائية أو مفتاح مرور",
+    "skip": "تخطٍّ",
+    "next": "التالي",
+    "getStarted": "ابدأ الآن",
+    "steps": {
+      "welcome": {
+        "title": "مرحبًا بك في GiftHub!",
+        "subtitle": "إليك جولة سريعة على ما يمكنك فعله."
+      },
+      "discover": {
+        "title": "اكتشف العروض",
+        "subtitle": "تصفّح القسائم وبطاقات الهدايا والفعاليات من التجار المحليين.",
+        "features": {
+          "vouchers": "قسائم رقمية",
+          "giftCards": "بطاقات هدايا للأصدقاء والعائلة",
+          "nearby": "عروض بالقرب منك"
+        }
+      },
+      "wallet": {
+        "title": "قسائمك في مكان واحد",
+        "subtitle": "كل ما تشتريه يُحفظ في حسابك.",
+        "features": {
+          "qr": "رموز QR للاستخدام السريع في المتجر",
+          "expiry": "تذكيرات بالبريد الإلكتروني قبل انتهاء صلاحية القسيمة"
+        }
+      },
+      "rewards": {
+        "title": "اكسب المكافآت",
+        "subtitle": "شارك القسائم مع أصدقائك واكسب رصيدًا عندما يستخدمونها.",
+        "features": {
+          "referralCredit": "رصيد لدى التاجر مقابل الإحالات الناجحة",
+          "checkIns": "تسجيل حضور يومي وسلاسل متتالية",
+          "badges": "شارات لفتحها"
+        }
+      },
+      "notifications": {
+        "title": "ابقَ على اطلاع",
+        "subtitle": "فعّل الإشعارات على هذا الجهاز."
+      },
+      "security": {
+        "title": "أمّن حسابك",
+        "subtitle": "أضف مفتاح مرور أو المصادقة الثنائية."
+      }
+    }
   }
 }
