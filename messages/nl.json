@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Abonnementsboxen",
     "pricing": "Prijsregels",
     "webhooks": "Webhooks",
-    "apiKeys": "API-sleutels"
+    "apiKeys": "API-sleutels",
+    "marketplace": "Marktplaats",
+    "openMenu": "Menu openen",
+    "closeMenu": "Menu sluiten",
+    "expandSidebar": "Zijbalk uitklappen",
+    "collapseSidebar": "Zijbalk inklappen",
+    "sectionShop": "Winkelen",
+    "sectionRewards": "Beloningen",
+    "sectionAccount": "Account",
+    "mainNavigation": "Hoofdnavigatie",
+    "quickNavigation": "Snelle navigatie",
+    "logoutFailed": "Uitloggen is mislukt. Probeer het opnieuw."
   },
   "voucher": {
     "title": "Voucher",
@@ -184,7 +195,11 @@
     "creditApplied": "Tegoed toegepast",
     "finalTotal": "Totaal",
     "pageDescription": "Bekijk uw beschikbare en vergrendelde tegoeden.",
-    "noMerchantWallets": "Nog geen handelaarsportemonnees."
+    "noMerchantWallets": "Nog geen handelaarsportemonnees.",
+    "noCreditYet": "Nog geen tegoed",
+    "noCreditYetBody": "Je verdient tegoed wanneer een vriend een voucher inwisselt die jij hebt gedeeld. Het verschijnt hier per handelaar.",
+    "shareToEarn": "Deel een voucher",
+    "findVoucherToShare": "Zoek een voucher om te delen"
   },
   "redemption": {
     "title": "Inwisselingen",
@@ -244,7 +259,12 @@
     "merchantLabel": "Handelaar",
     "voucherLabel": "Voucher",
     "linkField": "Link",
-    "codeField": "Code"
+    "codeField": "Code",
+    "linkCopied": "Link gekopieerd",
+    "howItWorksTitle": "Zo werken verwijzingen",
+    "howItWorksBody": "Open een voucher en tik op Delen. Je krijgt een persoonlijke link voor die voucher. Wisselt een vriend hem in, dan verdien je tegoed bij de handelaar.",
+    "findVoucher": "Zoek een voucher om te delen",
+    "linkForVoucher": "Verwijzingslink voor {voucher}"
   },
   "analytics": {
     "title": "Analyses",
@@ -516,7 +536,9 @@
     "viewVouchers": "Vouchers bekijken",
     "redeemed": "Ingewisseld",
     "friendLabel": "Vriend",
-    "voucherLabel": "Voucher"
+    "voucherLabel": "Voucher",
+    "offersLinkTitle": "Link naar actuele aanbiedingen",
+    "offersLinkDescription": "Stuur vrienden naar alle actuele aanbiedingen op GiftHub. Met deze link verdien je geen tegoed; deel daarvoor een specifieke voucher vanaf de pagina ervan."
   },
   "billing": {
     "upgradeRequired": "Upgrade vereist",
@@ -618,14 +640,34 @@
     "inApp": "In-app",
     "pushBeta": "Push (bèta)",
     "saving": "Opslaan...",
-    "savePreferences": "Voorkeuren opslaan"
+    "savePreferences": "Voorkeuren opslaan",
+    "noPreferencesTitle": "Nog niets in te stellen",
+    "noPreferencesBody": "Meldingsinstellingen worden per handelaar beheerd. Je hebt nog geen handelaars met meldingsinstellingen.",
+    "saved": "Voorkeuren opgeslagen",
+    "saveFailed": "Je voorkeuren konden niet worden opgeslagen. Probeer het opnieuw.",
+    "markAllReadFailed": "Meldingen konden niet als gelezen worden gemarkeerd. Probeer het opnieuw.",
+    "emptyHint": "Updates over je vouchers en aanbiedingen verschijnen hier.",
+    "browseOffers": "Aanbiedingen bekijken"
   },
   "settingsPage": {
     "description": "Beheer uw accountvoorkeuren.",
     "joined": "Lid sinds",
     "recently": "onlangs",
     "accountAccessTitle": "Accounttoegang",
-    "accountAccessDescription": "Beveilig uw account en beheer toegang."
+    "accountAccessDescription": "Beveilig uw account en beheer toegang.",
+    "pushDescription": "Ontvang meldingen op dit apparaat, ook als GiftHub niet geopend is.",
+    "changePasswordTitle": "Wachtwoord wijzigen",
+    "changePasswordDescription": "Werk het wachtwoord van je account bij.",
+    "setPasswordTitle": "Wachtwoord instellen",
+    "setPasswordDescription": "Stel een wachtwoord in om in te loggen met je e-mailadres en wachtwoord.",
+    "twoFactorTitle": "Tweestapsverificatie",
+    "twoFactorDescription": "Voeg een extra beveiligingslaag toe met een authenticator-app of een passkey.",
+    "twoFactorManage": "Beveiliging beheren",
+    "sessionsTitle": "Actieve sessies",
+    "sessionsDescription": "Bekijk waar je account is ingelogd.",
+    "sessionsView": "Sessies bekijken",
+    "deleteTitle": "Account verwijderen",
+    "deleteDescription": "Verwijder je account definitief en anonimiseer je gegevens. Dit kan niet ongedaan worden gemaakt."
   },
   "profile": {
     "title": "Profiel",
@@ -633,5 +675,217 @@
     "accountInformation": "Accountgegevens",
     "emailPreferences": "E-mailvoorkeuren",
     "appSettings": "App-instellingen"
+  },
+  "dashboard": {
+    "roleShopper": "Shopper",
+    "roleAdmin": "Beheerder",
+    "roleStaff": "Medewerker",
+    "rolePlatformAdmin": "Platformbeheerder",
+    "availableCredit": "Beschikbaar tegoed",
+    "pendingCredit": "{amount} in behandeling",
+    "creditExplainer": "Tegoed dat je verdient wanneer vrienden vouchers inwisselen die jij hebt gedeeld. Je kunt het besteden bij de handelaar die het heeft uitgegeven.",
+    "viewCreditDetails": "Tegoeddetails bekijken",
+    "successfulReferrals": "Geslaagde verwijzingen",
+    "checkInPoints": "Check-inpunten",
+    "shareTitle": "Deel een voucher, verdien tegoed",
+    "shareDescription": "Open een voucher en tik op Delen om je persoonlijke link te krijgen. Wisselt een vriend hem in, dan verdien je tegoed.",
+    "openShareCenter": "Deelcentrum openen",
+    "sharedSummary": "Gedeelde vouchers: {count} · Ingewisseld: {redeemed}",
+    "achievementsTitle": "Prestaties",
+    "badgesEarned": "Verdiende badges: {earned} van {total}",
+    "viewAchievements": "Prestaties bekijken",
+    "availableOffers": "Beschikbare aanbiedingen",
+    "browseAll": "Alles bekijken",
+    "noActiveOffers": "Er zijn momenteel geen actieve aanbiedingen. Kom binnenkort terug.",
+    "validUntil": "Geldig tot {date}",
+    "recentActivity": "Recente activiteit",
+    "noRecentActivity": "Nog geen activiteit.",
+    "creditFrom": "Tegoed van {merchant}",
+    "referralAt": "Verwijzing · {merchant}",
+    "creditStatus": {
+      "locked": "in behandeling",
+      "available": "beschikbaar",
+      "used": "gebruikt",
+      "expired": "verlopen",
+      "reversed": "teruggedraaid"
+    },
+    "referralStatus": {
+      "created": "Link aangemaakt",
+      "opened": "Geopend",
+      "redeemed": "Ingewisseld",
+      "expired": "Verlopen",
+      "blocked": "Geblokkeerd"
+    },
+    "myMerchants": "Mijn handelaars",
+    "merchantDashboard": "Handelaarsdashboard",
+    "sellTitle": "Verkopen op GiftHub",
+    "sellDescription": "Wil je vouchers aanbieden aan je klanten? Neem contact met ons op en we helpen je een handelaarsaccount op te zetten.",
+    "contactUs": "Contact opnemen",
+    "exploreVouchers": "Vouchers ontdekken"
+  },
+  "wishlist": {
+    "title": "Mijn verlanglijst",
+    "emptyTitle": "Je verlanglijst is leeg",
+    "emptyBody": "Bewaar vouchers, handelaars en campagnes die je leuk vindt, zodat je ze hier later terugvindt.",
+    "browseOffers": "Aanbiedingen bekijken"
+  },
+  "push": {
+    "enable": "Pushmeldingen inschakelen",
+    "enabled": "Pushmeldingen staan aan",
+    "enabledToast": "Pushmeldingen ingeschakeld",
+    "disable": "Uitschakelen",
+    "disabledToast": "Pushmeldingen uitgeschakeld",
+    "enableFailed": "Pushmeldingen konden niet worden ingeschakeld. Probeer het opnieuw.",
+    "disableFailed": "Pushmeldingen konden niet worden uitgeschakeld. Probeer het opnieuw.",
+    "unsupported": "Deze browser ondersteunt geen pushmeldingen.",
+    "blocked": "Meldingen zijn geblokkeerd. Sta ze toe in je browserinstellingen om ze in te schakelen."
+  },
+  "sessions": {
+    "title": "Actieve sessies",
+    "description": "Bekijk waar je account is ingelogd.",
+    "backToSettings": "Terug naar instellingen",
+    "deviceOn": "{browser} op {os}",
+    "unknownDevice": "Onbekend apparaat",
+    "thisDevice": "Dit apparaat",
+    "signedInHere": "Je bent hier nu ingelogd.",
+    "otherDevicesTitle": "Andere apparaten",
+    "otherDevicesNone": "We kunnen geen andere apparaten tonen waarop je mogelijk bent ingelogd. Zie je iets ongewoons, wijzig dan je wachtwoord en schakel tweestapsverificatie in.",
+    "securitySettings": "Beveiligingsinstellingen",
+    "lastActive": "Laatst actief {time}",
+    "logout": "Uitloggen",
+    "logoutAll": "Overal elders uitloggen",
+    "logoutAllBody": "Beëindig alle sessies op andere apparaten.",
+    "loadFailed": "Je sessies konden niet worden geladen.",
+    "revokeFailed": "De sessie kon niet worden beëindigd. Probeer het opnieuw.",
+    "revoked": "Sessie beëindigd.",
+    "revokedAll": "Sessies op andere apparaten beëindigd."
+  },
+  "achievements": {
+    "title": "Prestaties",
+    "checkIn": "Inchecken voor vandaag",
+    "checkingIn": "Bezig met inchecken…",
+    "checkedInToday": "Vandaag ingecheckt",
+    "checkInFailed": "Inchecken mislukt. Probeer het opnieuw.",
+    "checkInSaved": "Check-in opgeslagen",
+    "newBadge": "Nieuwe badge: {name}",
+    "checkInPoints": "Check-inpunten",
+    "level": "Niveau",
+    "levelValue": "Niveau {level}",
+    "levelProgress": "Voortgang naar het volgende niveau",
+    "badgesLabel": "Badges",
+    "noBadgesYet": "Nog geen badges verdiend.",
+    "earnedOn": "Verdiend op {date}",
+    "locked": "Nog niet verdiend",
+    "howToEarn": "Zo verdien je punten",
+    "earnRuleCheckIn": "Check één keer per dag in",
+    "pointsShort": "+{points} ptn",
+    "pointsExplainer": "Punten en niveaus laten zien hoe actief je bent. Ze kunnen niet worden ingewisseld voor geld of vouchers.",
+    "currentStreak": "Huidige reeks (dagen)",
+    "longestStreak": "Langste reeks (dagen)",
+    "milestone": "Mijlpaal in je reeks bereikt!",
+    "badges": {
+      "first_purchase": {
+        "name": "Eerste aankoop",
+        "description": "Je eerste voucher gekocht"
+      },
+      "first_redemption": {
+        "name": "Eerste inwisseling",
+        "description": "Je eerste voucher ingewisseld"
+      },
+      "5_referrals": {
+        "name": "Verbinder",
+        "description": "5 vouchers met vrienden gedeeld"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "10 vouchers met vrienden gedeeld"
+      },
+      "streak_7": {
+        "name": "Weekkampioen",
+        "description": "7 dagen op rij ingecheckt"
+      },
+      "streak_30": {
+        "name": "Maandmeester",
+        "description": "30 dagen op rij ingecheckt"
+      },
+      "review_writer": {
+        "name": "Recensent",
+        "description": "Je eerste beoordeling gepubliceerd"
+      },
+      "big_spender": {
+        "name": "Grote besteder",
+        "description": "In totaal meer dan 10.000 aan vouchers besteed"
+      },
+      "early_adopter": {
+        "name": "Early adopter",
+        "description": "Lid geworden van GiftHub vóór 2028"
+      },
+      "social_sharer": {
+        "name": "Sociale deler",
+        "description": "Een voucher gedeeld op sociale media"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Loyaliteit",
+    "notActiveTitle": "Loyaliteitsniveaus zijn nog niet beschikbaar",
+    "notActiveBody": "Aankopen leveren nog geen loyaliteitspunten op en er worden bij het afrekenen geen niveaukortingen of voordelen toegepast, dus er zijn hier nog geen niveaus te tonen.",
+    "earnTodayTitle": "Wat je vandaag kunt verdienen",
+    "earnCreditTitle": "Verwijzingstegoed",
+    "earnCreditBody": "Deel een voucher. Wisselt een vriend hem in, dan krijg je tegoed om bij die handelaar te besteden.",
+    "earnCreditLink": "Je tegoed bekijken",
+    "earnPointsTitle": "Check-inpunten",
+    "earnPointsBody": "Check elke dag in om een reeks op te bouwen, een niveau te stijgen en badges te ontgrendelen.",
+    "earnPointsLink": "Prestaties bekijken",
+    "historyTitle": "Puntengeschiedenis",
+    "pointsBalance": "Puntensaldo: {points}"
+  },
+  "welcome": {
+    "greeting": "Hoi {name}!",
+    "progress": "Voortgang onboarding",
+    "setUpSecurity": "2FA of een passkey instellen",
+    "skip": "Overslaan",
+    "next": "Volgende",
+    "getStarted": "Aan de slag",
+    "steps": {
+      "welcome": {
+        "title": "Welkom bij GiftHub!",
+        "subtitle": "Hier is een korte rondleiding langs wat je kunt doen."
+      },
+      "discover": {
+        "title": "Ontdek aanbiedingen",
+        "subtitle": "Bekijk vouchers, cadeaukaarten en evenementen van lokale handelaars.",
+        "features": {
+          "vouchers": "Digitale vouchers",
+          "giftCards": "Cadeaukaarten voor vrienden en familie",
+          "nearby": "Aanbiedingen bij jou in de buurt"
+        }
+      },
+      "wallet": {
+        "title": "Je vouchers op één plek",
+        "subtitle": "Alles wat je koopt, wordt in je account bewaard.",
+        "features": {
+          "qr": "QR-codes om snel in de winkel in te wisselen",
+          "expiry": "Herinneringen per e-mail voordat een voucher verloopt"
+        }
+      },
+      "rewards": {
+        "title": "Verdien beloningen",
+        "subtitle": "Deel vouchers met vrienden en verdien tegoed wanneer zij ze inwisselen.",
+        "features": {
+          "referralCredit": "Handelaarstegoed voor geslaagde verwijzingen",
+          "checkIns": "Dagelijkse check-ins en reeksen",
+          "badges": "Badges om te ontgrendelen"
+        }
+      },
+      "notifications": {
+        "title": "Blijf op de hoogte",
+        "subtitle": "Schakel meldingen in op dit apparaat."
+      },
+      "security": {
+        "title": "Beveilig je account",
+        "subtitle": "Voeg een passkey of tweestapsverificatie toe."
+      }
+    }
   }
 }

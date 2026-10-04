@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Cutii cu abonament",
     "pricing": "Reguli de preț",
     "webhooks": "Webhook-uri",
-    "apiKeys": "Chei API"
+    "apiKeys": "Chei API",
+    "marketplace": "Marketplace",
+    "openMenu": "Deschideți meniul",
+    "closeMenu": "Închideți meniul",
+    "expandSidebar": "Extindeți bara laterală",
+    "collapseSidebar": "Restrângeți bara laterală",
+    "sectionShop": "Cumpărături",
+    "sectionRewards": "Recompense",
+    "sectionAccount": "Cont",
+    "mainNavigation": "Navigare principală",
+    "quickNavigation": "Navigare rapidă",
+    "logoutFailed": "Deconectarea nu a reușit. Încercați din nou."
   },
   "voucher": {
     "title": "Voucher",
@@ -184,7 +195,11 @@
     "creditApplied": "Credit aplicat",
     "finalTotal": "Total",
     "pageDescription": "Urmăriți creditele disponibile și blocate.",
-    "noMerchantWallets": "Încă nu aveți portofele de comerciant."
+    "noMerchantWallets": "Încă nu aveți portofele de comerciant.",
+    "noCreditYet": "Încă nu aveți credit",
+    "noCreditYetBody": "Câștigați credit atunci când un prieten valorifică un voucher pe care l-ați distribuit. Creditul apare aici, separat pentru fiecare comerciant.",
+    "shareToEarn": "Distribuiți un voucher",
+    "findVoucherToShare": "Găsiți un voucher de distribuit"
   },
   "redemption": {
     "title": "Valorificări",
@@ -244,7 +259,12 @@
     "merchantLabel": "Comerciant",
     "voucherLabel": "Voucher",
     "linkField": "Link",
-    "codeField": "Cod"
+    "codeField": "Cod",
+    "linkCopied": "Link copiat",
+    "howItWorksTitle": "Cum funcționează recomandările",
+    "howItWorksBody": "Deschideți un voucher și atingeți Distribuie. Primiți un link personal pentru acel voucher. Când un prieten îl valorifică, câștigați credit de la comerciant.",
+    "findVoucher": "Găsiți un voucher de distribuit",
+    "linkForVoucher": "Link de recomandare pentru {voucher}"
   },
   "analytics": {
     "title": "Analize",
@@ -516,7 +536,9 @@
     "viewVouchers": "Vizualizare vouchere",
     "redeemed": "Valorificat",
     "friendLabel": "Prieten",
-    "voucherLabel": "Voucher"
+    "voucherLabel": "Voucher",
+    "offersLinkTitle": "Link către ofertele curente",
+    "offersLinkDescription": "Trimiteți prietenilor un link către toate ofertele curente de pe GiftHub. Acest link nu aduce credit; pentru a câștiga credit, distribuiți un anumit voucher de pe pagina sa."
   },
   "billing": {
     "upgradeRequired": "Upgrade necesar",
@@ -618,14 +640,34 @@
     "inApp": "În aplicație",
     "pushBeta": "Push (beta)",
     "saving": "Se salvează...",
-    "savePreferences": "Salvare preferințe"
+    "savePreferences": "Salvare preferințe",
+    "noPreferencesTitle": "Deocamdată nu este nimic de configurat",
+    "noPreferencesBody": "Setările de notificare sunt gestionate separat pentru fiecare comerciant. Încă nu aveți comercianți cu setări de notificare.",
+    "saved": "Preferințe salvate",
+    "saveFailed": "Preferințele nu au putut fi salvate. Încercați din nou.",
+    "markAllReadFailed": "Notificările nu au putut fi marcate ca citite. Încercați din nou.",
+    "emptyHint": "Noutățile despre voucherele și ofertele dvs. vor apărea aici.",
+    "browseOffers": "Vedeți ofertele"
   },
   "settingsPage": {
     "description": "Gestionați preferințele contului dvs.",
     "joined": "Înscris",
     "recently": "recent",
     "accountAccessTitle": "Acces cont",
-    "accountAccessDescription": "Securizați contul și gestionați accesul."
+    "accountAccessDescription": "Securizați contul și gestionați accesul.",
+    "pushDescription": "Primiți notificări pe acest dispozitiv, chiar și atunci când GiftHub nu este deschis.",
+    "changePasswordTitle": "Schimbați parola",
+    "changePasswordDescription": "Actualizați parola contului dvs.",
+    "setPasswordTitle": "Setați o parolă",
+    "setPasswordDescription": "Setați o parolă pentru a vă conecta cu adresa de e-mail și parola.",
+    "twoFactorTitle": "Autentificare în doi pași",
+    "twoFactorDescription": "Adăugați un nivel suplimentar de securitate cu o aplicație de autentificare sau o cheie de acces.",
+    "twoFactorManage": "Gestionați securitatea",
+    "sessionsTitle": "Sesiuni active",
+    "sessionsDescription": "Vedeți unde este conectat contul dvs.",
+    "sessionsView": "Vedeți sesiunile",
+    "deleteTitle": "Ștergeți contul",
+    "deleteDescription": "Ștergeți definitiv contul și anonimizați-vă datele. Această acțiune nu poate fi anulată."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Informații cont",
     "emailPreferences": "Preferințe e-mail",
     "appSettings": "Setări aplicație"
+  },
+  "dashboard": {
+    "roleShopper": "Cumpărător",
+    "roleAdmin": "Administrator",
+    "roleStaff": "Personal",
+    "rolePlatformAdmin": "Administrator platformă",
+    "availableCredit": "Credit disponibil",
+    "pendingCredit": "{amount} în așteptare",
+    "creditExplainer": "Credit pe care îl câștigați atunci când prietenii valorifică vouchere distribuite de dvs. Îl puteți folosi la comerciantul care l-a emis.",
+    "viewCreditDetails": "Vedeți detaliile creditului",
+    "successfulReferrals": "Recomandări reușite",
+    "checkInPoints": "Puncte de check-in",
+    "shareTitle": "Distribuiți un voucher, câștigați credit",
+    "shareDescription": "Deschideți orice voucher și atingeți Distribuie pentru a obține linkul personal. Când un prieten îl valorifică, câștigați credit.",
+    "openShareCenter": "Deschideți Centrul de distribuire",
+    "sharedSummary": "Vouchere distribuite: {count} · Valorificate: {redeemed}",
+    "achievementsTitle": "Realizări",
+    "badgesEarned": "Insigne obținute: {earned} din {total}",
+    "viewAchievements": "Vedeți realizările",
+    "availableOffers": "Oferte disponibile",
+    "browseAll": "Vedeți toate",
+    "noActiveOffers": "Momentan nu există oferte active. Reveniți în curând.",
+    "validUntil": "Valabil până la {date}",
+    "recentActivity": "Activitate recentă",
+    "noRecentActivity": "Încă nu există activitate.",
+    "creditFrom": "Credit de la {merchant}",
+    "referralAt": "Recomandare · {merchant}",
+    "creditStatus": {
+      "locked": "în așteptare",
+      "available": "disponibil",
+      "used": "utilizat",
+      "expired": "expirat",
+      "reversed": "anulat"
+    },
+    "referralStatus": {
+      "created": "Link creat",
+      "opened": "Deschis",
+      "redeemed": "Valorificat",
+      "expired": "Expirat",
+      "blocked": "Blocat"
+    },
+    "myMerchants": "Comercianții mei",
+    "merchantDashboard": "Dashboard comerciant",
+    "sellTitle": "Vindeți pe GiftHub",
+    "sellDescription": "Doriți să oferiți vouchere clienților dvs.? Contactați-ne și vă ajutăm să configurați un cont de comerciant.",
+    "contactUs": "Contactați-ne",
+    "exploreVouchers": "Explorați voucherele"
+  },
+  "wishlist": {
+    "title": "Lista mea de dorințe",
+    "emptyTitle": "Lista dvs. de dorințe este goală",
+    "emptyBody": "Salvați voucherele, comercianții și campaniile care vă plac pentru a le găsi aici mai târziu.",
+    "browseOffers": "Vedeți ofertele"
+  },
+  "push": {
+    "enable": "Activați notificările push",
+    "enabled": "Notificările push sunt activate",
+    "enabledToast": "Notificări push activate",
+    "disable": "Dezactivați",
+    "disabledToast": "Notificări push dezactivate",
+    "enableFailed": "Notificările push nu au putut fi activate. Încercați din nou.",
+    "disableFailed": "Notificările push nu au putut fi dezactivate. Încercați din nou.",
+    "unsupported": "Acest browser nu acceptă notificări push.",
+    "blocked": "Notificările sunt blocate. Permiteți-le în setările browserului pentru a le activa."
+  },
+  "sessions": {
+    "title": "Sesiuni active",
+    "description": "Vedeți unde este conectat contul dvs.",
+    "backToSettings": "Înapoi la setări",
+    "deviceOn": "{browser} pe {os}",
+    "unknownDevice": "Dispozitiv necunoscut",
+    "thisDevice": "Acest dispozitiv",
+    "signedInHere": "Sunteți conectat aici în acest moment.",
+    "otherDevicesTitle": "Alte dispozitive",
+    "otherDevicesNone": "Nu putem afișa alte dispozitive pe care ați putea fi conectat. Dacă observați ceva neobișnuit, schimbați parola și activați autentificarea în doi pași.",
+    "securitySettings": "Setări de securitate",
+    "lastActive": "Ultima activitate {time}",
+    "logout": "Deconectare",
+    "logoutAll": "Deconectați-vă de pe toate celelalte dispozitive",
+    "logoutAllBody": "Încheiați toate sesiunile de pe alte dispozitive.",
+    "loadFailed": "Sesiunile dvs. nu au putut fi încărcate.",
+    "revokeFailed": "Sesiunea nu a putut fi încheiată. Încercați din nou.",
+    "revoked": "Sesiune încheiată.",
+    "revokedAll": "Sesiunile de pe alte dispozitive au fost încheiate."
+  },
+  "achievements": {
+    "title": "Realizări",
+    "checkIn": "Faceți check-in pentru azi",
+    "checkingIn": "Se face check-in…",
+    "checkedInToday": "Check-in efectuat azi",
+    "checkInFailed": "Check-in-ul nu a reușit. Încercați din nou.",
+    "checkInSaved": "Check-in salvat",
+    "newBadge": "Insignă nouă: {name}",
+    "checkInPoints": "Puncte de check-in",
+    "level": "Nivel",
+    "levelValue": "Nivelul {level}",
+    "levelProgress": "Progres către nivelul următor",
+    "badgesLabel": "Insigne",
+    "noBadgesYet": "Încă nu ați obținut insigne.",
+    "earnedOn": "Obținută pe {date}",
+    "locked": "Încă neobținută",
+    "howToEarn": "Cum câștigați puncte",
+    "earnRuleCheckIn": "Faceți check-in o dată pe zi",
+    "pointsShort": "+{points} pct.",
+    "pointsExplainer": "Punctele și nivelurile arată cât de activ sunteți. Nu pot fi schimbate pe bani sau vouchere.",
+    "currentStreak": "Serie curentă (zile)",
+    "longestStreak": "Cea mai lungă serie (zile)",
+    "milestone": "Ați atins o etapă a seriei!",
+    "badges": {
+      "first_purchase": {
+        "name": "Prima achiziție",
+        "description": "Ați cumpărat primul voucher"
+      },
+      "first_redemption": {
+        "name": "Prima valorificare",
+        "description": "Ați valorificat primul voucher"
+      },
+      "5_referrals": {
+        "name": "Conector",
+        "description": "Ați distribuit 5 vouchere prietenilor"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "Ați distribuit 10 vouchere prietenilor"
+      },
+      "streak_7": {
+        "name": "Războinicul săptămânii",
+        "description": "Ați făcut check-in 7 zile la rând"
+      },
+      "streak_30": {
+        "name": "Maestrul lunii",
+        "description": "Ați făcut check-in 30 de zile la rând"
+      },
+      "review_writer": {
+        "name": "Recenzent",
+        "description": "Ați publicat prima recenzie"
+      },
+      "big_spender": {
+        "name": "Mare cumpărător",
+        "description": "Ați cheltuit în total peste 10.000 pe vouchere"
+      },
+      "early_adopter": {
+        "name": "Pionier",
+        "description": "V-ați alăturat GiftHub înainte de 2028"
+      },
+      "social_sharer": {
+        "name": "Distribuitor social",
+        "description": "Ați distribuit un voucher pe rețelele sociale"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Loialitate",
+    "notActiveTitle": "Nivelurile de loialitate nu sunt încă disponibile",
+    "notActiveBody": "Achizițiile nu aduc încă puncte de loialitate și nu se aplică reduceri sau beneficii de nivel la plată, așa că nu există niveluri de afișat aici.",
+    "earnTodayTitle": "Ce puteți câștiga astăzi",
+    "earnCreditTitle": "Credit de recomandare",
+    "earnCreditBody": "Distribuiți un voucher. Când un prieten îl valorifică, primiți credit pe care îl puteți folosi la acel comerciant.",
+    "earnCreditLink": "Vedeți creditul dvs.",
+    "earnPointsTitle": "Puncte de check-in",
+    "earnPointsBody": "Faceți check-in zilnic pentru a construi o serie, a avansa în nivel și a debloca insigne.",
+    "earnPointsLink": "Vedeți realizările",
+    "historyTitle": "Istoric puncte",
+    "pointsBalance": "Sold de puncte: {points}"
+  },
+  "welcome": {
+    "greeting": "Bună, {name}!",
+    "progress": "Progres inițiere",
+    "setUpSecurity": "Configurați 2FA sau o cheie de acces",
+    "skip": "Omiteți",
+    "next": "Înainte",
+    "getStarted": "Începeți",
+    "steps": {
+      "welcome": {
+        "title": "Bun venit pe GiftHub!",
+        "subtitle": "Iată un tur rapid al lucrurilor pe care le puteți face."
+      },
+      "discover": {
+        "title": "Descoperiți oferte",
+        "subtitle": "Răsfoiți vouchere, carduri cadou și evenimente de la comercianți locali.",
+        "features": {
+          "vouchers": "Vouchere digitale",
+          "giftCards": "Carduri cadou pentru prieteni și familie",
+          "nearby": "Oferte în apropierea dvs."
+        }
+      },
+      "wallet": {
+        "title": "Voucherele dvs. într-un singur loc",
+        "subtitle": "Tot ce cumpărați este salvat în contul dvs.",
+        "features": {
+          "qr": "Coduri QR pentru valorificare rapidă în magazin",
+          "expiry": "Mementouri pe e-mail înainte de expirarea unui voucher"
+        }
+      },
+      "rewards": {
+        "title": "Câștigați recompense",
+        "subtitle": "Distribuiți vouchere prietenilor și câștigați credit atunci când le valorifică.",
+        "features": {
+          "referralCredit": "Credit de la comercianți pentru recomandări reușite",
+          "checkIns": "Check-in-uri zilnice și serii",
+          "badges": "Insigne de deblocat"
+        }
+      },
+      "notifications": {
+        "title": "Rămâneți la curent",
+        "subtitle": "Activați notificările pe acest dispozitiv."
+      },
+      "security": {
+        "title": "Securizați-vă contul",
+        "subtitle": "Adăugați o cheie de acces sau autentificarea în doi pași."
+      }
+    }
   }
 }

@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Abonnementsbokser",
     "pricing": "Prisregler",
     "webhooks": "Webhooks",
-    "apiKeys": "API-nøkler"
+    "apiKeys": "API-nøkler",
+    "marketplace": "Markedsplass",
+    "openMenu": "Åpne meny",
+    "closeMenu": "Lukk meny",
+    "expandSidebar": "Vis sidepanel",
+    "collapseSidebar": "Skjul sidepanel",
+    "sectionShop": "Handle",
+    "sectionRewards": "Belønninger",
+    "sectionAccount": "Konto",
+    "mainNavigation": "Hovednavigasjon",
+    "quickNavigation": "Hurtignavigasjon",
+    "logoutFailed": "Kunne ikke logge ut. Prøv igjen."
   },
   "voucher": {
     "title": "Kupong",
@@ -184,7 +195,11 @@
     "creditApplied": "Brukt kreditt",
     "finalTotal": "Totalt",
     "pageDescription": "Følg med på tilgjengelige og låste kreditter.",
-    "noMerchantWallets": "Ingen handlerlommebøker ennå."
+    "noMerchantWallets": "Ingen handlerlommebøker ennå.",
+    "noCreditYet": "Ingen kreditt ennå",
+    "noCreditYetBody": "Du tjener kreditt når en venn løser inn en kupong du har delt. Den vises her for hver handler.",
+    "shareToEarn": "Del en kupong",
+    "findVoucherToShare": "Finn en kupong å dele"
   },
   "redemption": {
     "title": "Innløsninger",
@@ -244,7 +259,12 @@
     "merchantLabel": "Handler",
     "voucherLabel": "Kupong",
     "linkField": "Lenke",
-    "codeField": "Kode"
+    "codeField": "Kode",
+    "linkCopied": "Lenke kopiert",
+    "howItWorksTitle": "Slik fungerer anbefalinger",
+    "howItWorksBody": "Åpne en kupong og trykk på Del. Du får en personlig lenke til den kupongen. Når en venn løser den inn, tjener du kreditt hos handleren.",
+    "findVoucher": "Finn en kupong å dele",
+    "linkForVoucher": "Anbefalingslenke for {voucher}"
   },
   "analytics": {
     "title": "Analyse",
@@ -516,7 +536,9 @@
     "viewVouchers": "Se kuponger",
     "redeemed": "Innløst",
     "friendLabel": "Venn",
-    "voucherLabel": "Kupong"
+    "voucherLabel": "Kupong",
+    "offersLinkTitle": "Lenke til aktuelle tilbud",
+    "offersLinkDescription": "Send venner til alle aktuelle tilbud på GiftHub. Denne lenken gir ikke kreditt; for å tjene kreditt må du dele en bestemt kupong fra siden dens."
   },
   "billing": {
     "upgradeRequired": "Oppgradering nødvendig",
@@ -618,14 +640,34 @@
     "inApp": "I appen",
     "pushBeta": "Push (beta)",
     "saving": "Lagrer...",
-    "savePreferences": "Lagre innstillinger"
+    "savePreferences": "Lagre innstillinger",
+    "noPreferencesTitle": "Ingenting å sette opp ennå",
+    "noPreferencesBody": "Varslingsinnstillinger administreres per handler. Du har ingen handlere med varslingsinnstillinger ennå.",
+    "saved": "Innstillinger lagret",
+    "saveFailed": "Kunne ikke lagre innstillingene dine. Prøv igjen.",
+    "markAllReadFailed": "Kunne ikke merke varsler som lest. Prøv igjen.",
+    "emptyHint": "Oppdateringer om kupongene og tilbudene dine vises her.",
+    "browseOffers": "Se tilbud"
   },
   "settingsPage": {
     "description": "Administrer kontinnstillingene dine.",
     "joined": "Ble med",
     "recently": "nylig",
     "accountAccessTitle": "Kontotilgang",
-    "accountAccessDescription": "Sikre kontoen din og administrer tilgang."
+    "accountAccessDescription": "Sikre kontoen din og administrer tilgang.",
+    "pushDescription": "Få varsler på denne enheten, selv når GiftHub ikke er åpent.",
+    "changePasswordTitle": "Endre passord",
+    "changePasswordDescription": "Oppdater passordet for kontoen din.",
+    "setPasswordTitle": "Angi et passord",
+    "setPasswordDescription": "Angi et passord for å logge inn med e-post og passord.",
+    "twoFactorTitle": "Tofaktorautentisering",
+    "twoFactorDescription": "Legg til et ekstra sikkerhetslag med en autentiseringsapp eller en passnøkkel.",
+    "twoFactorManage": "Administrer sikkerhet",
+    "sessionsTitle": "Aktive økter",
+    "sessionsDescription": "Se hvor kontoen din er pålogget.",
+    "sessionsView": "Se økter",
+    "deleteTitle": "Slett konto",
+    "deleteDescription": "Slett kontoen din permanent og anonymiser dataene dine. Dette kan ikke angres."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Kontoinformasjon",
     "emailPreferences": "E-postinnstillinger",
     "appSettings": "Appinnstillinger"
+  },
+  "dashboard": {
+    "roleShopper": "Kunde",
+    "roleAdmin": "Administrator",
+    "roleStaff": "Ansatt",
+    "rolePlatformAdmin": "Plattformadministrator",
+    "availableCredit": "Tilgjengelig kreditt",
+    "pendingCredit": "{amount} venter",
+    "creditExplainer": "Kreditt du tjener når venner løser inn kuponger du har delt. Du kan bruke den hos handleren som utstedte den.",
+    "viewCreditDetails": "Se kredittdetaljer",
+    "successfulReferrals": "Vellykkede anbefalinger",
+    "checkInPoints": "Innsjekkingspoeng",
+    "shareTitle": "Del en kupong, tjen kreditt",
+    "shareDescription": "Åpne en kupong og trykk på Del for å få din personlige lenke. Når en venn løser den inn, tjener du kreditt.",
+    "openShareCenter": "Åpne delingssenteret",
+    "sharedSummary": "Delte kuponger: {count} · Innløst: {redeemed}",
+    "achievementsTitle": "Prestasjoner",
+    "badgesEarned": "Opptjente merker: {earned} av {total}",
+    "viewAchievements": "Se prestasjoner",
+    "availableOffers": "Tilgjengelige tilbud",
+    "browseAll": "Se alle",
+    "noActiveOffers": "Ingen tilbud er aktive akkurat nå. Kom tilbake snart.",
+    "validUntil": "Gyldig til {date}",
+    "recentActivity": "Nylig aktivitet",
+    "noRecentActivity": "Ingen aktivitet ennå.",
+    "creditFrom": "Kreditt fra {merchant}",
+    "referralAt": "Anbefaling · {merchant}",
+    "creditStatus": {
+      "locked": "venter",
+      "available": "tilgjengelig",
+      "used": "brukt",
+      "expired": "utløpt",
+      "reversed": "tilbakeført"
+    },
+    "referralStatus": {
+      "created": "Lenke opprettet",
+      "opened": "Åpnet",
+      "redeemed": "Innløst",
+      "expired": "Utløpt",
+      "blocked": "Blokkert"
+    },
+    "myMerchants": "Mine handlere",
+    "merchantDashboard": "Handlerdashbord",
+    "sellTitle": "Selg på GiftHub",
+    "sellDescription": "Vil du tilby kuponger til kundene dine? Kontakt oss, så hjelper vi deg med å opprette en handlerkonto.",
+    "contactUs": "Kontakt oss",
+    "exploreVouchers": "Utforsk kuponger"
+  },
+  "wishlist": {
+    "title": "Min ønskeliste",
+    "emptyTitle": "Ønskelisten din er tom",
+    "emptyBody": "Lagre kuponger, handlere og kampanjer du liker, så finner du dem her senere.",
+    "browseOffers": "Se tilbud"
+  },
+  "push": {
+    "enable": "Slå på push-varsler",
+    "enabled": "Push-varsler er på",
+    "enabledToast": "Push-varsler slått på",
+    "disable": "Slå av",
+    "disabledToast": "Push-varsler slått av",
+    "enableFailed": "Kunne ikke slå på push-varsler. Prøv igjen.",
+    "disableFailed": "Kunne ikke slå av push-varsler. Prøv igjen.",
+    "unsupported": "Denne nettleseren støtter ikke push-varsler.",
+    "blocked": "Varsler er blokkert. Tillat dem i nettleserinnstillingene for å slå dem på."
+  },
+  "sessions": {
+    "title": "Aktive økter",
+    "description": "Se hvor kontoen din er pålogget.",
+    "backToSettings": "Tilbake til innstillinger",
+    "deviceOn": "{browser} på {os}",
+    "unknownDevice": "Ukjent enhet",
+    "thisDevice": "Denne enheten",
+    "signedInHere": "Du er pålogget her akkurat nå.",
+    "otherDevicesTitle": "Andre enheter",
+    "otherDevicesNone": "Vi kan ikke vise andre enheter du kan være pålogget på. Hvis du merker noe uvanlig, bør du endre passordet og slå på tofaktorautentisering.",
+    "securitySettings": "Sikkerhetsinnstillinger",
+    "lastActive": "Sist aktiv {time}",
+    "logout": "Logg ut",
+    "logoutAll": "Logg ut alle andre steder",
+    "logoutAllBody": "Avslutt alle økter på andre enheter.",
+    "loadFailed": "Kunne ikke laste inn øktene dine.",
+    "revokeFailed": "Kunne ikke avslutte økten. Prøv igjen.",
+    "revoked": "Økten er avsluttet.",
+    "revokedAll": "Økter på andre enheter er avsluttet."
+  },
+  "achievements": {
+    "title": "Prestasjoner",
+    "checkIn": "Sjekk inn for i dag",
+    "checkingIn": "Sjekker inn…",
+    "checkedInToday": "Sjekket inn i dag",
+    "checkInFailed": "Innsjekkingen mislyktes. Prøv igjen.",
+    "checkInSaved": "Innsjekking lagret",
+    "newBadge": "Nytt merke: {name}",
+    "checkInPoints": "Innsjekkingspoeng",
+    "level": "Nivå",
+    "levelValue": "Nivå {level}",
+    "levelProgress": "Fremgang til neste nivå",
+    "badgesLabel": "Merker",
+    "noBadgesYet": "Ingen merker opptjent ennå.",
+    "earnedOn": "Opptjent {date}",
+    "locked": "Ikke opptjent ennå",
+    "howToEarn": "Slik tjener du poeng",
+    "earnRuleCheckIn": "Sjekk inn én gang om dagen",
+    "pointsShort": "+{points} p",
+    "pointsExplainer": "Poeng og nivåer viser hvor aktiv du er. De kan ikke byttes mot penger eller kuponger.",
+    "currentStreak": "Nåværende rekke (dager)",
+    "longestStreak": "Lengste rekke (dager)",
+    "milestone": "Milepæl for rekken nådd!",
+    "badges": {
+      "first_purchase": {
+        "name": "Første kjøp",
+        "description": "Kjøpte din første kupong"
+      },
+      "first_redemption": {
+        "name": "Første innløsning",
+        "description": "Løste inn din første kupong"
+      },
+      "5_referrals": {
+        "name": "Kobleren",
+        "description": "Delte 5 kuponger med venner"
+      },
+      "10_referrals": {
+        "name": "Influenser",
+        "description": "Delte 10 kuponger med venner"
+      },
+      "streak_7": {
+        "name": "Ukeskriger",
+        "description": "Sjekket inn 7 dager på rad"
+      },
+      "streak_30": {
+        "name": "Månedsmester",
+        "description": "Sjekket inn 30 dager på rad"
+      },
+      "review_writer": {
+        "name": "Anmelder",
+        "description": "Publiserte din første anmeldelse"
+      },
+      "big_spender": {
+        "name": "Storforbruker",
+        "description": "Brukte over 10 000 på kuponger totalt"
+      },
+      "early_adopter": {
+        "name": "Tidlig ute",
+        "description": "Ble med i GiftHub før 2028"
+      },
+      "social_sharer": {
+        "name": "Sosial deler",
+        "description": "Delte en kupong i sosiale medier"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Lojalitet",
+    "notActiveTitle": "Lojalitetsnivåer er ikke tilgjengelige ennå",
+    "notActiveBody": "Kjøp gir ennå ikke lojalitetspoeng, og ingen nivårabatter eller fordeler brukes i kassen, så det finnes ingen nivåer å vise her.",
+    "earnTodayTitle": "Dette kan du tjene i dag",
+    "earnCreditTitle": "Anbefalingskreditt",
+    "earnCreditBody": "Del en kupong. Når en venn løser den inn, får du kreditt du kan bruke hos den handleren.",
+    "earnCreditLink": "Se kreditten din",
+    "earnPointsTitle": "Innsjekkingspoeng",
+    "earnPointsBody": "Sjekk inn daglig for å bygge en rekke, gå opp i nivå og låse opp merker.",
+    "earnPointsLink": "Se prestasjoner",
+    "historyTitle": "Poenghistorikk",
+    "pointsBalance": "Saldo: {points} poeng"
+  },
+  "welcome": {
+    "greeting": "Hei, {name}!",
+    "progress": "Fremgang i introduksjonen",
+    "setUpSecurity": "Sett opp 2FA eller en passnøkkel",
+    "skip": "Hopp over",
+    "next": "Neste",
+    "getStarted": "Kom i gang",
+    "steps": {
+      "welcome": {
+        "title": "Velkommen til GiftHub!",
+        "subtitle": "Her er en rask omvisning i hva du kan gjøre."
+      },
+      "discover": {
+        "title": "Oppdag tilbud",
+        "subtitle": "Bla gjennom kuponger, gavekort og arrangementer fra lokale handlere.",
+        "features": {
+          "vouchers": "Digitale kuponger",
+          "giftCards": "Gavekort til venner og familie",
+          "nearby": "Tilbud i nærheten av deg"
+        }
+      },
+      "wallet": {
+        "title": "Kupongene dine på ett sted",
+        "subtitle": "Alt du kjøper, lagres på kontoen din.",
+        "features": {
+          "qr": "QR-koder for rask innløsning i butikk",
+          "expiry": "E-postpåminnelser før en kupong utløper"
+        }
+      },
+      "rewards": {
+        "title": "Tjen belønninger",
+        "subtitle": "Del kuponger med venner og tjen kreditt når de løser dem inn.",
+        "features": {
+          "referralCredit": "Handlerkreditt for vellykkede anbefalinger",
+          "checkIns": "Daglige innsjekkinger og rekker",
+          "badges": "Merker å låse opp"
+        }
+      },
+      "notifications": {
+        "title": "Hold deg oppdatert",
+        "subtitle": "Slå på varsler på denne enheten."
+      },
+      "security": {
+        "title": "Sikre kontoen din",
+        "subtitle": "Legg til en passnøkkel eller tofaktorautentisering."
+      }
+    }
   }
 }

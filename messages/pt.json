@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Caixas de subscrição",
     "pricing": "Regras de preços",
     "webhooks": "Webhooks",
-    "apiKeys": "Chaves API"
+    "apiKeys": "Chaves API",
+    "marketplace": "Mercado",
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "expandSidebar": "Expandir barra lateral",
+    "collapseSidebar": "Recolher barra lateral",
+    "sectionShop": "Comprar",
+    "sectionRewards": "Recompensas",
+    "sectionAccount": "Conta",
+    "mainNavigation": "Navegação principal",
+    "quickNavigation": "Navegação rápida",
+    "logoutFailed": "Não foi possível terminar a sessão. Tente novamente."
   },
   "voucher": {
     "title": "Vale",
@@ -184,7 +195,11 @@
     "creditApplied": "Crédito aplicado",
     "finalTotal": "Total",
     "pageDescription": "Acompanhe os seus créditos disponíveis e bloqueados.",
-    "noMerchantWallets": "Ainda sem carteiras de comerciantes."
+    "noMerchantWallets": "Ainda sem carteiras de comerciantes.",
+    "noCreditYet": "Ainda sem crédito",
+    "noCreditYetBody": "Ganha crédito quando um amigo resgata um vale que partilhou. Aparece aqui, separado por comerciante.",
+    "shareToEarn": "Partilhar um vale",
+    "findVoucherToShare": "Encontrar um vale para partilhar"
   },
   "redemption": {
     "title": "Resgates",
@@ -244,7 +259,12 @@
     "merchantLabel": "Comerciante",
     "voucherLabel": "Vale",
     "linkField": "Link",
-    "codeField": "Código"
+    "codeField": "Código",
+    "linkCopied": "Link copiado",
+    "howItWorksTitle": "Como funcionam as referências",
+    "howItWorksBody": "Abra um vale e toque em Partilhar. Recebe um link pessoal para esse vale. Quando um amigo o resgatar, ganha crédito junto do comerciante.",
+    "findVoucher": "Encontrar um vale para partilhar",
+    "linkForVoucher": "Link de referência para {voucher}"
   },
   "analytics": {
     "title": "Análises",
@@ -516,7 +536,9 @@
     "viewVouchers": "Ver vales",
     "redeemed": "Resgatado",
     "friendLabel": "Amigo",
-    "voucherLabel": "Vale"
+    "voucherLabel": "Vale",
+    "offersLinkTitle": "Link para as ofertas atuais",
+    "offersLinkDescription": "Envie aos seus amigos um link para todas as ofertas atuais no GiftHub. Este link não gera crédito; para ganhar crédito, partilhe um vale específico a partir da respetiva página."
   },
   "billing": {
     "upgradeRequired": "Atualização necessária",
@@ -618,14 +640,34 @@
     "inApp": "Na app",
     "pushBeta": "Push (beta)",
     "saving": "A guardar...",
-    "savePreferences": "Guardar preferências"
+    "savePreferences": "Guardar preferências",
+    "noPreferencesTitle": "Ainda não há nada para configurar",
+    "noPreferencesBody": "As definições de notificações são geridas por comerciante. Ainda não tem comerciantes com definições de notificações.",
+    "saved": "Preferências guardadas",
+    "saveFailed": "Não foi possível guardar as suas preferências. Tente novamente.",
+    "markAllReadFailed": "Não foi possível marcar as notificações como lidas. Tente novamente.",
+    "emptyHint": "As novidades sobre os seus vales e ofertas aparecerão aqui.",
+    "browseOffers": "Ver ofertas"
   },
   "settingsPage": {
     "description": "Gira as preferências da sua conta.",
     "joined": "Membro desde",
     "recently": "recentemente",
     "accountAccessTitle": "Acesso à conta",
-    "accountAccessDescription": "Proteja a sua conta e gira o acesso."
+    "accountAccessDescription": "Proteja a sua conta e gira o acesso.",
+    "pushDescription": "Receba notificações neste dispositivo, mesmo quando o GiftHub não está aberto.",
+    "changePasswordTitle": "Alterar palavra-passe",
+    "changePasswordDescription": "Atualize a palavra-passe da sua conta.",
+    "setPasswordTitle": "Definir uma palavra-passe",
+    "setPasswordDescription": "Defina uma palavra-passe para iniciar sessão com o seu email e palavra-passe.",
+    "twoFactorTitle": "Autenticação de dois fatores",
+    "twoFactorDescription": "Adicione uma camada extra de segurança com uma app de autenticação ou uma chave de acesso.",
+    "twoFactorManage": "Gerir segurança",
+    "sessionsTitle": "Sessões ativas",
+    "sessionsDescription": "Veja onde a sua conta tem sessão iniciada.",
+    "sessionsView": "Ver sessões",
+    "deleteTitle": "Eliminar conta",
+    "deleteDescription": "Elimine permanentemente a sua conta e anonimize os seus dados. Esta ação não pode ser anulada."
   },
   "profile": {
     "title": "Perfil",
@@ -633,5 +675,217 @@
     "accountInformation": "Informações da conta",
     "emailPreferences": "Preferências de e-mail",
     "appSettings": "Definições da app"
+  },
+  "dashboard": {
+    "roleShopper": "Comprador",
+    "roleAdmin": "Administrador",
+    "roleStaff": "Funcionário",
+    "rolePlatformAdmin": "Administrador da plataforma",
+    "availableCredit": "Crédito disponível",
+    "pendingCredit": "{amount} pendente",
+    "creditExplainer": "Crédito que ganha quando os amigos resgatam vales que partilhou. Pode usá-lo junto do comerciante que o emitiu.",
+    "viewCreditDetails": "Ver detalhes do crédito",
+    "successfulReferrals": "Referências bem-sucedidas",
+    "checkInPoints": "Pontos de check-in",
+    "shareTitle": "Partilhe um vale e ganhe crédito",
+    "shareDescription": "Abra qualquer vale e toque em Partilhar para obter o seu link pessoal. Quando um amigo o resgatar, ganha crédito.",
+    "openShareCenter": "Abrir Centro de Partilha",
+    "sharedSummary": "Vales partilhados: {count} · Resgatados: {redeemed}",
+    "achievementsTitle": "Conquistas",
+    "badgesEarned": "Distintivos obtidos: {earned} de {total}",
+    "viewAchievements": "Ver conquistas",
+    "availableOffers": "Ofertas disponíveis",
+    "browseAll": "Ver tudo",
+    "noActiveOffers": "Não há ofertas ativas neste momento. Volte em breve.",
+    "validUntil": "Válido até {date}",
+    "recentActivity": "Atividade recente",
+    "noRecentActivity": "Ainda sem atividade.",
+    "creditFrom": "Crédito de {merchant}",
+    "referralAt": "Referência · {merchant}",
+    "creditStatus": {
+      "locked": "pendente",
+      "available": "disponível",
+      "used": "utilizado",
+      "expired": "expirado",
+      "reversed": "revertido"
+    },
+    "referralStatus": {
+      "created": "Link criado",
+      "opened": "Aberto",
+      "redeemed": "Resgatado",
+      "expired": "Expirado",
+      "blocked": "Bloqueado"
+    },
+    "myMerchants": "Os meus comerciantes",
+    "merchantDashboard": "Painel do comerciante",
+    "sellTitle": "Venda no GiftHub",
+    "sellDescription": "Quer oferecer vales aos seus clientes? Contacte-nos e ajudamos a criar uma conta de comerciante.",
+    "contactUs": "Contacte-nos",
+    "exploreVouchers": "Explorar vales"
+  },
+  "wishlist": {
+    "title": "A minha lista de desejos",
+    "emptyTitle": "A sua lista de desejos está vazia",
+    "emptyBody": "Guarde os vales, comerciantes e campanhas de que gosta para os encontrar aqui mais tarde.",
+    "browseOffers": "Ver ofertas"
+  },
+  "push": {
+    "enable": "Ativar notificações push",
+    "enabled": "As notificações push estão ativadas",
+    "enabledToast": "Notificações push ativadas",
+    "disable": "Desativar",
+    "disabledToast": "Notificações push desativadas",
+    "enableFailed": "Não foi possível ativar as notificações push. Tente novamente.",
+    "disableFailed": "Não foi possível desativar as notificações push. Tente novamente.",
+    "unsupported": "Este navegador não suporta notificações push.",
+    "blocked": "As notificações estão bloqueadas. Permita-as nas definições do navegador para as ativar."
+  },
+  "sessions": {
+    "title": "Sessões ativas",
+    "description": "Veja onde a sua conta tem sessão iniciada.",
+    "backToSettings": "Voltar às definições",
+    "deviceOn": "{browser} em {os}",
+    "unknownDevice": "Dispositivo desconhecido",
+    "thisDevice": "Este dispositivo",
+    "signedInHere": "Tem sessão iniciada aqui neste momento.",
+    "otherDevicesTitle": "Outros dispositivos",
+    "otherDevicesNone": "Não conseguimos listar outros dispositivos onde possa ter sessão iniciada. Se notar algo invulgar, altere a sua palavra-passe e ative a autenticação de dois fatores.",
+    "securitySettings": "Definições de segurança",
+    "lastActive": "Última atividade {time}",
+    "logout": "Terminar sessão",
+    "logoutAll": "Terminar sessão em todos os outros locais",
+    "logoutAllBody": "Terminar todas as sessões noutros dispositivos.",
+    "loadFailed": "Não foi possível carregar as suas sessões.",
+    "revokeFailed": "Não foi possível terminar a sessão. Tente novamente.",
+    "revoked": "Sessão terminada.",
+    "revokedAll": "Sessões noutros dispositivos terminadas."
+  },
+  "achievements": {
+    "title": "Conquistas",
+    "checkIn": "Fazer check-in hoje",
+    "checkingIn": "A fazer check-in…",
+    "checkedInToday": "Check-in feito hoje",
+    "checkInFailed": "O check-in falhou. Tente novamente.",
+    "checkInSaved": "Check-in guardado",
+    "newBadge": "Novo distintivo: {name}",
+    "checkInPoints": "Pontos de check-in",
+    "level": "Nível",
+    "levelValue": "Nível {level}",
+    "levelProgress": "Progresso até ao próximo nível",
+    "badgesLabel": "Distintivos",
+    "noBadgesYet": "Ainda não obteve distintivos.",
+    "earnedOn": "Obtido a {date}",
+    "locked": "Ainda não obtido",
+    "howToEarn": "Como ganhar pontos",
+    "earnRuleCheckIn": "Faça check-in uma vez por dia",
+    "pointsShort": "+{points} pts",
+    "pointsExplainer": "Os pontos e níveis mostram o quão ativo é. Não podem ser trocados por dinheiro nem por vales.",
+    "currentStreak": "Sequência atual (dias)",
+    "longestStreak": "Sequência mais longa (dias)",
+    "milestone": "Marco de sequência alcançado!",
+    "badges": {
+      "first_purchase": {
+        "name": "Primeira compra",
+        "description": "Comprou o seu primeiro vale"
+      },
+      "first_redemption": {
+        "name": "Primeiro resgate",
+        "description": "Resgatou o seu primeiro vale"
+      },
+      "5_referrals": {
+        "name": "Conector",
+        "description": "Partilhou 5 vales com amigos"
+      },
+      "10_referrals": {
+        "name": "Influenciador",
+        "description": "Partilhou 10 vales com amigos"
+      },
+      "streak_7": {
+        "name": "Guerreiro semanal",
+        "description": "Fez check-in 7 dias seguidos"
+      },
+      "streak_30": {
+        "name": "Mestre do mês",
+        "description": "Fez check-in 30 dias seguidos"
+      },
+      "review_writer": {
+        "name": "Crítico",
+        "description": "Publicou a sua primeira avaliação"
+      },
+      "big_spender": {
+        "name": "Grande comprador",
+        "description": "Gastou mais de 10 000 em vales no total"
+      },
+      "early_adopter": {
+        "name": "Pioneiro",
+        "description": "Aderiu ao GiftHub antes de 2028"
+      },
+      "social_sharer": {
+        "name": "Partilhador social",
+        "description": "Partilhou um vale nas redes sociais"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Fidelização",
+    "notActiveTitle": "Os níveis de fidelização ainda não estão disponíveis",
+    "notActiveBody": "As compras ainda não dão pontos de fidelização e não são aplicados descontos nem vantagens de nível no pagamento, por isso não há níveis para mostrar aqui.",
+    "earnTodayTitle": "O que pode ganhar hoje",
+    "earnCreditTitle": "Crédito de referência",
+    "earnCreditBody": "Partilhe um vale. Quando um amigo o resgatar, recebe crédito para usar junto desse comerciante.",
+    "earnCreditLink": "Ver o seu crédito",
+    "earnPointsTitle": "Pontos de check-in",
+    "earnPointsBody": "Faça check-in diariamente para criar uma sequência, subir de nível e desbloquear distintivos.",
+    "earnPointsLink": "Ver conquistas",
+    "historyTitle": "Histórico de pontos",
+    "pointsBalance": "Saldo de pontos: {points}"
+  },
+  "welcome": {
+    "greeting": "Olá, {name}!",
+    "progress": "Progresso da introdução",
+    "setUpSecurity": "Configurar 2FA ou uma chave de acesso",
+    "skip": "Saltar",
+    "next": "Seguinte",
+    "getStarted": "Começar",
+    "steps": {
+      "welcome": {
+        "title": "Bem-vindo ao GiftHub!",
+        "subtitle": "Eis uma visita rápida ao que pode fazer."
+      },
+      "discover": {
+        "title": "Descubra ofertas",
+        "subtitle": "Explore vales, cartões-presente e eventos de comerciantes locais.",
+        "features": {
+          "vouchers": "Vales digitais",
+          "giftCards": "Cartões-presente para amigos e família",
+          "nearby": "Ofertas perto de si"
+        }
+      },
+      "wallet": {
+        "title": "Os seus vales num só lugar",
+        "subtitle": "Tudo o que compra fica guardado na sua conta.",
+        "features": {
+          "qr": "Códigos QR para resgate rápido na loja",
+          "expiry": "Lembretes por email antes de um vale expirar"
+        }
+      },
+      "rewards": {
+        "title": "Ganhe recompensas",
+        "subtitle": "Partilhe vales com amigos e ganhe crédito quando eles os resgatarem.",
+        "features": {
+          "referralCredit": "Crédito do comerciante por referências bem-sucedidas",
+          "checkIns": "Check-ins diários e sequências",
+          "badges": "Distintivos para desbloquear"
+        }
+      },
+      "notifications": {
+        "title": "Mantenha-se informado",
+        "subtitle": "Ative as notificações neste dispositivo."
+      },
+      "security": {
+        "title": "Proteja a sua conta",
+        "subtitle": "Adicione uma chave de acesso ou autenticação de dois fatores."
+      }
+    }
   }
 }

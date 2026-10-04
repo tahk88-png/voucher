@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Boxy subskrypcyjne",
     "pricing": "Reguły cenowe",
     "webhooks": "Webhooki",
-    "apiKeys": "Klucze API"
+    "apiKeys": "Klucze API",
+    "marketplace": "Marketplace",
+    "openMenu": "Otwórz menu",
+    "closeMenu": "Zamknij menu",
+    "expandSidebar": "Rozwiń panel boczny",
+    "collapseSidebar": "Zwiń panel boczny",
+    "sectionShop": "Zakupy",
+    "sectionRewards": "Nagrody",
+    "sectionAccount": "Konto",
+    "mainNavigation": "Główna nawigacja",
+    "quickNavigation": "Szybka nawigacja",
+    "logoutFailed": "Nie udało się wylogować. Spróbuj ponownie."
   },
   "voucher": {
     "title": "Kupon",
@@ -184,7 +195,11 @@
     "creditApplied": "Zastosowany kredyt",
     "finalTotal": "Razem",
     "pageDescription": "Śledź dostępne i zablokowane kredyty.",
-    "noMerchantWallets": "Brak portfeli sprzedawców."
+    "noMerchantWallets": "Brak portfeli sprzedawców.",
+    "noCreditYet": "Nie masz jeszcze kredytu",
+    "noCreditYetBody": "Kredyt zdobywasz, gdy znajomy zrealizuje udostępniony przez Ciebie kupon. Pojawia się tutaj osobno dla każdego sprzedawcy.",
+    "shareToEarn": "Udostępnij kupon",
+    "findVoucherToShare": "Znajdź kupon do udostępnienia"
   },
   "redemption": {
     "title": "Realizacje",
@@ -244,7 +259,12 @@
     "merchantLabel": "Sprzedawca",
     "voucherLabel": "Kupon",
     "linkField": "Link",
-    "codeField": "Kod"
+    "codeField": "Kod",
+    "linkCopied": "Link skopiowany",
+    "howItWorksTitle": "Jak działają polecenia",
+    "howItWorksBody": "Otwórz kupon i stuknij Udostępnij. Otrzymasz osobisty link do tego kuponu. Gdy znajomy go zrealizuje, zdobędziesz kredyt od sprzedawcy.",
+    "findVoucher": "Znajdź kupon do udostępnienia",
+    "linkForVoucher": "Link polecający do {voucher}"
   },
   "analytics": {
     "title": "Analityka",
@@ -516,7 +536,9 @@
     "viewVouchers": "Zobacz kupony",
     "redeemed": "Zrealizowano",
     "friendLabel": "Znajomy",
-    "voucherLabel": "Kupon"
+    "voucherLabel": "Kupon",
+    "offersLinkTitle": "Link do aktualnych ofert",
+    "offersLinkDescription": "Wyślij znajomym link do wszystkich aktualnych ofert w GiftHub. Ten link nie przynosi kredytu; aby go zdobyć, udostępnij konkretny kupon z jego strony."
   },
   "billing": {
     "upgradeRequired": "Wymagana aktualizacja",
@@ -618,14 +640,34 @@
     "inApp": "W aplikacji",
     "pushBeta": "Push (beta)",
     "saving": "Zapisywanie...",
-    "savePreferences": "Zapisz preferencje"
+    "savePreferences": "Zapisz preferencje",
+    "noPreferencesTitle": "Na razie nie ma nic do ustawienia",
+    "noPreferencesBody": "Ustawienia powiadomień są zarządzane osobno dla każdego sprzedawcy. Nie masz jeszcze żadnych sprzedawców z ustawieniami powiadomień.",
+    "saved": "Preferencje zapisane",
+    "saveFailed": "Nie udało się zapisać preferencji. Spróbuj ponownie.",
+    "markAllReadFailed": "Nie udało się oznaczyć powiadomień jako przeczytanych. Spróbuj ponownie.",
+    "emptyHint": "Tutaj pojawią się informacje o Twoich kuponach i ofertach.",
+    "browseOffers": "Przeglądaj oferty"
   },
   "settingsPage": {
     "description": "Zarządzaj ustawieniami konta.",
     "joined": "Dołączył",
     "recently": "niedawno",
     "accountAccessTitle": "Dostęp do konta",
-    "accountAccessDescription": "Zabezpiecz swoje konto i zarządzaj dostępem."
+    "accountAccessDescription": "Zabezpiecz swoje konto i zarządzaj dostępem.",
+    "pushDescription": "Otrzymuj powiadomienia na tym urządzeniu, nawet gdy GiftHub nie jest otwarty.",
+    "changePasswordTitle": "Zmień hasło",
+    "changePasswordDescription": "Zaktualizuj hasło do swojego konta.",
+    "setPasswordTitle": "Ustaw hasło",
+    "setPasswordDescription": "Ustaw hasło, aby logować się za pomocą adresu e-mail i hasła.",
+    "twoFactorTitle": "Uwierzytelnianie dwuskładnikowe",
+    "twoFactorDescription": "Dodaj dodatkową warstwę zabezpieczeń za pomocą aplikacji uwierzytelniającej lub klucza dostępu.",
+    "twoFactorManage": "Zarządzaj bezpieczeństwem",
+    "sessionsTitle": "Aktywne sesje",
+    "sessionsDescription": "Sprawdź, gdzie jesteś zalogowany na swoje konto.",
+    "sessionsView": "Zobacz sesje",
+    "deleteTitle": "Usuń konto",
+    "deleteDescription": "Trwale usuń swoje konto i zanonimizuj swoje dane. Tej operacji nie można cofnąć."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Informacje o koncie",
     "emailPreferences": "Ustawienia email",
     "appSettings": "Ustawienia aplikacji"
+  },
+  "dashboard": {
+    "roleShopper": "Klient",
+    "roleAdmin": "Administrator",
+    "roleStaff": "Personel",
+    "rolePlatformAdmin": "Administrator platformy",
+    "availableCredit": "Dostępny kredyt",
+    "pendingCredit": "{amount} oczekuje",
+    "creditExplainer": "Kredyt, który zdobywasz, gdy znajomi realizują udostępnione przez Ciebie kupony. Możesz go wykorzystać u sprzedawcy, który go wydał.",
+    "viewCreditDetails": "Zobacz szczegóły kredytu",
+    "successfulReferrals": "Udane polecenia",
+    "checkInPoints": "Punkty za meldowanie się",
+    "shareTitle": "Udostępnij kupon i zdobądź kredyt",
+    "shareDescription": "Otwórz dowolny kupon i stuknij Udostępnij, aby otrzymać osobisty link. Gdy znajomy go zrealizuje, zdobędziesz kredyt.",
+    "openShareCenter": "Otwórz Centrum udostępniania",
+    "sharedSummary": "Udostępnione kupony: {count} · Zrealizowane: {redeemed}",
+    "achievementsTitle": "Osiągnięcia",
+    "badgesEarned": "Zdobyte odznaki: {earned} z {total}",
+    "viewAchievements": "Zobacz osiągnięcia",
+    "availableOffers": "Dostępne oferty",
+    "browseAll": "Przeglądaj wszystkie",
+    "noActiveOffers": "Obecnie nie ma aktywnych ofert. Zajrzyj wkrótce.",
+    "validUntil": "Ważny do {date}",
+    "recentActivity": "Ostatnia aktywność",
+    "noRecentActivity": "Brak aktywności.",
+    "creditFrom": "Kredyt od {merchant}",
+    "referralAt": "Polecenie · {merchant}",
+    "creditStatus": {
+      "locked": "oczekujący",
+      "available": "dostępny",
+      "used": "wykorzystany",
+      "expired": "wygasły",
+      "reversed": "cofnięty"
+    },
+    "referralStatus": {
+      "created": "Link utworzony",
+      "opened": "Otwarty",
+      "redeemed": "Zrealizowany",
+      "expired": "Wygasły",
+      "blocked": "Zablokowany"
+    },
+    "myMerchants": "Moi sprzedawcy",
+    "merchantDashboard": "Panel sprzedawcy",
+    "sellTitle": "Sprzedawaj w GiftHub",
+    "sellDescription": "Chcesz oferować kupony swoim klientom? Skontaktuj się z nami, a pomożemy Ci założyć konto sprzedawcy.",
+    "contactUs": "Skontaktuj się z nami",
+    "exploreVouchers": "Odkrywaj kupony"
+  },
+  "wishlist": {
+    "title": "Moja lista życzeń",
+    "emptyTitle": "Twoja lista życzeń jest pusta",
+    "emptyBody": "Zapisuj kupony, sprzedawców i kampanie, które Ci się podobają, aby później znaleźć je tutaj.",
+    "browseOffers": "Przeglądaj oferty"
+  },
+  "push": {
+    "enable": "Włącz powiadomienia push",
+    "enabled": "Powiadomienia push są włączone",
+    "enabledToast": "Powiadomienia push włączone",
+    "disable": "Wyłącz",
+    "disabledToast": "Powiadomienia push wyłączone",
+    "enableFailed": "Nie udało się włączyć powiadomień push. Spróbuj ponownie.",
+    "disableFailed": "Nie udało się wyłączyć powiadomień push. Spróbuj ponownie.",
+    "unsupported": "Ta przeglądarka nie obsługuje powiadomień push.",
+    "blocked": "Powiadomienia są zablokowane. Zezwól na nie w ustawieniach przeglądarki, aby je włączyć."
+  },
+  "sessions": {
+    "title": "Aktywne sesje",
+    "description": "Sprawdź, gdzie jesteś zalogowany na swoje konto.",
+    "backToSettings": "Powrót do ustawień",
+    "deviceOn": "{browser} w systemie {os}",
+    "unknownDevice": "Nieznane urządzenie",
+    "thisDevice": "To urządzenie",
+    "signedInHere": "Jesteś teraz zalogowany na tym urządzeniu.",
+    "otherDevicesTitle": "Inne urządzenia",
+    "otherDevicesNone": "Nie możemy wyświetlić innych urządzeń, na których możesz być zalogowany. Jeśli zauważysz coś niepokojącego, zmień hasło i włącz uwierzytelnianie dwuskładnikowe.",
+    "securitySettings": "Ustawienia bezpieczeństwa",
+    "lastActive": "Ostatnio aktywny {time}",
+    "logout": "Wyloguj",
+    "logoutAll": "Wyloguj ze wszystkich innych urządzeń",
+    "logoutAllBody": "Zakończ wszystkie sesje na innych urządzeniach.",
+    "loadFailed": "Nie udało się wczytać sesji.",
+    "revokeFailed": "Nie udało się zakończyć sesji. Spróbuj ponownie.",
+    "revoked": "Sesja zakończona.",
+    "revokedAll": "Sesje na innych urządzeniach zostały zakończone."
+  },
+  "achievements": {
+    "title": "Osiągnięcia",
+    "checkIn": "Zamelduj się dzisiaj",
+    "checkingIn": "Meldowanie…",
+    "checkedInToday": "Zameldowano dzisiaj",
+    "checkInFailed": "Meldowanie nie powiodło się. Spróbuj ponownie.",
+    "checkInSaved": "Meldowanie zapisane",
+    "newBadge": "Nowa odznaka: {name}",
+    "checkInPoints": "Punkty za meldowanie się",
+    "level": "Poziom",
+    "levelValue": "Poziom {level}",
+    "levelProgress": "Postęp do następnego poziomu",
+    "badgesLabel": "Odznaki",
+    "noBadgesYet": "Nie zdobyto jeszcze żadnych odznak.",
+    "earnedOn": "Zdobyto {date}",
+    "locked": "Jeszcze nie zdobyto",
+    "howToEarn": "Jak zdobywać punkty",
+    "earnRuleCheckIn": "Melduj się raz dziennie",
+    "pointsShort": "+{points} pkt",
+    "pointsExplainer": "Punkty i poziomy pokazują, jak bardzo jesteś aktywny. Nie można ich wymienić na pieniądze ani kupony.",
+    "currentStreak": "Obecna seria (dni)",
+    "longestStreak": "Najdłuższa seria (dni)",
+    "milestone": "Osiągnięto kamień milowy serii!",
+    "badges": {
+      "first_purchase": {
+        "name": "Pierwszy zakup",
+        "description": "Kupiono pierwszy kupon"
+      },
+      "first_redemption": {
+        "name": "Pierwsza realizacja",
+        "description": "Zrealizowano pierwszy kupon"
+      },
+      "5_referrals": {
+        "name": "Łącznik",
+        "description": "Udostępniono 5 kuponów znajomym"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "Udostępniono 10 kuponów znajomym"
+      },
+      "streak_7": {
+        "name": "Tygodniowy wojownik",
+        "description": "Meldowanie przez 7 dni z rzędu"
+      },
+      "streak_30": {
+        "name": "Mistrz miesiąca",
+        "description": "Meldowanie przez 30 dni z rzędu"
+      },
+      "review_writer": {
+        "name": "Recenzent",
+        "description": "Opublikowano pierwszą opinię"
+      },
+      "big_spender": {
+        "name": "Hojny klient",
+        "description": "Wydano łącznie ponad 10 000 na kupony"
+      },
+      "early_adopter": {
+        "name": "Pionier",
+        "description": "Dołączenie do GiftHub przed 2028 rokiem"
+      },
+      "social_sharer": {
+        "name": "Społecznościowiec",
+        "description": "Udostępniono kupon w mediach społecznościowych"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Lojalność",
+    "notActiveTitle": "Poziomy lojalnościowe nie są jeszcze dostępne",
+    "notActiveBody": "Zakupy nie przynoszą jeszcze punktów lojalnościowych, a przy płatności nie są stosowane rabaty ani korzyści związane z poziomami, więc nie ma tu żadnych poziomów do wyświetlenia.",
+    "earnTodayTitle": "Co możesz zdobyć już dziś",
+    "earnCreditTitle": "Kredyt za polecenia",
+    "earnCreditBody": "Udostępnij kupon. Gdy znajomy go zrealizuje, otrzymasz kredyt do wykorzystania u tego sprzedawcy.",
+    "earnCreditLink": "Zobacz swój kredyt",
+    "earnPointsTitle": "Punkty za meldowanie się",
+    "earnPointsBody": "Melduj się codziennie, aby budować serię, awansować na wyższy poziom i odblokowywać odznaki.",
+    "earnPointsLink": "Zobacz osiągnięcia",
+    "historyTitle": "Historia punktów",
+    "pointsBalance": "Saldo: {points} pkt"
+  },
+  "welcome": {
+    "greeting": "Cześć, {name}!",
+    "progress": "Postęp wprowadzenia",
+    "setUpSecurity": "Skonfiguruj 2FA lub klucz dostępu",
+    "skip": "Pomiń",
+    "next": "Dalej",
+    "getStarted": "Zaczynamy",
+    "steps": {
+      "welcome": {
+        "title": "Witaj w GiftHub!",
+        "subtitle": "Oto krótki przegląd tego, co możesz zrobić."
+      },
+      "discover": {
+        "title": "Odkrywaj oferty",
+        "subtitle": "Przeglądaj kupony, karty podarunkowe i wydarzenia od lokalnych sprzedawców.",
+        "features": {
+          "vouchers": "Kupony cyfrowe",
+          "giftCards": "Karty podarunkowe dla przyjaciół i rodziny",
+          "nearby": "Oferty w Twojej okolicy"
+        }
+      },
+      "wallet": {
+        "title": "Twoje kupony w jednym miejscu",
+        "subtitle": "Wszystko, co kupisz, jest zapisywane na Twoim koncie.",
+        "features": {
+          "qr": "Kody QR do szybkiej realizacji w sklepie",
+          "expiry": "Przypomnienia e-mail przed wygaśnięciem kuponu"
+        }
+      },
+      "rewards": {
+        "title": "Zdobywaj nagrody",
+        "subtitle": "Udostępniaj kupony znajomym i zdobywaj kredyt, gdy je zrealizują.",
+        "features": {
+          "referralCredit": "Kredyt u sprzedawcy za udane polecenia",
+          "checkIns": "Codzienne meldowanie i serie",
+          "badges": "Odznaki do odblokowania"
+        }
+      },
+      "notifications": {
+        "title": "Bądź na bieżąco",
+        "subtitle": "Włącz powiadomienia na tym urządzeniu."
+      },
+      "security": {
+        "title": "Zabezpiecz swoje konto",
+        "subtitle": "Dodaj klucz dostępu lub uwierzytelnianie dwuskładnikowe."
+      }
+    }
   }
 }

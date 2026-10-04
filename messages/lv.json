@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Abonēšanas kastes",
     "pricing": "Cenu noteikumi",
     "webhooks": "Webhooks",
-    "apiKeys": "API atslēgas"
+    "apiKeys": "API atslēgas",
+    "marketplace": "Tirgus vieta",
+    "openMenu": "Atvērt izvēlni",
+    "closeMenu": "Aizvērt izvēlni",
+    "expandSidebar": "Izvērst sānjoslu",
+    "collapseSidebar": "Sakļaut sānjoslu",
+    "sectionShop": "Veikals",
+    "sectionRewards": "Atlīdzības",
+    "sectionAccount": "Konts",
+    "mainNavigation": "Galvenā navigācija",
+    "quickNavigation": "Ātrā navigācija",
+    "logoutFailed": "Neizdevās iziet. Lūdzu, mēģiniet vēlreiz."
   },
   "voucher": {
     "title": "Kupons",
@@ -184,7 +195,11 @@
     "creditApplied": "Piemērotais kredīts",
     "finalTotal": "Kopā",
     "pageDescription": "Sekojiet pieejamajiem un bloķētajiem kredītiem.",
-    "noMerchantWallets": "Vēl nav tirgotāju maciņu."
+    "noMerchantWallets": "Vēl nav tirgotāju maciņu.",
+    "noCreditYet": "Vēl nav kredīta",
+    "noCreditYetBody": "Jūs nopelnāt kredītu, kad draugs izmanto kuponu, kuru esat kopīgojis. Tas šeit tiek parādīts katram tirgotājam atsevišķi.",
+    "shareToEarn": "Kopīgot kuponu",
+    "findVoucherToShare": "Atrast kuponu kopīgošanai"
   },
   "redemption": {
     "title": "Izmantošanas",
@@ -244,7 +259,12 @@
     "merchantLabel": "Tirgotājs",
     "voucherLabel": "Kupons",
     "linkField": "Saite",
-    "codeField": "Kods"
+    "codeField": "Kods",
+    "linkCopied": "Saite nokopēta",
+    "howItWorksTitle": "Kā darbojas ieteikumi",
+    "howItWorksBody": "Atveriet kuponu un pieskarieties “Kopīgot”. Jūs saņemsiet personīgu saiti šim kuponam. Kad draugs to izmanto, jūs nopelnāt kredītu no tirgotāja.",
+    "findVoucher": "Atrast kuponu kopīgošanai",
+    "linkForVoucher": "Ieteikuma saite kuponam {voucher}"
   },
   "analytics": {
     "title": "Analītika",
@@ -516,7 +536,9 @@
     "viewVouchers": "Skatīt kuponus",
     "redeemed": "Izmantots",
     "friendLabel": "Draugs",
-    "voucherLabel": "Kupons"
+    "voucherLabel": "Kupons",
+    "offersLinkTitle": "Saite uz aktuālajiem piedāvājumiem",
+    "offersLinkDescription": "Nosūtiet draugiem saiti uz visiem aktuālajiem GiftHub piedāvājumiem. Ar šo saiti kredīts netiek nopelnīts; lai nopelnītu, kopīgojiet konkrētu kuponu no tā lapas."
   },
   "billing": {
     "upgradeRequired": "Nepieciešams jauninājums",
@@ -618,14 +640,34 @@
     "inApp": "Lietotnē",
     "pushBeta": "Push (beta)",
     "saving": "Saglabā...",
-    "savePreferences": "Saglabāt izvēles"
+    "savePreferences": "Saglabāt izvēles",
+    "noPreferencesTitle": "Pagaidām nav ko iestatīt",
+    "noPreferencesBody": "Paziņojumu iestatījumi tiek pārvaldīti katram tirgotājam atsevišķi. Jums vēl nav neviena tirgotāja ar paziņojumu iestatījumiem.",
+    "saved": "Iestatījumi saglabāti",
+    "saveFailed": "Neizdevās saglabāt jūsu iestatījumus. Lūdzu, mēģiniet vēlreiz.",
+    "markAllReadFailed": "Neizdevās atzīmēt paziņojumus kā izlasītus. Lūdzu, mēģiniet vēlreiz.",
+    "emptyHint": "Šeit parādīsies jaunumi par jūsu kuponiem un piedāvājumiem.",
+    "browseOffers": "Skatīt piedāvājumus"
   },
   "settingsPage": {
     "description": "Pārvaldiet sava konta iestatījumus.",
     "joined": "Pievienojies",
     "recently": "nesen",
     "accountAccessTitle": "Piekļuve kontam",
-    "accountAccessDescription": "Aizsargājiet savu kontu un pārvaldiet piekļuvi."
+    "accountAccessDescription": "Aizsargājiet savu kontu un pārvaldiet piekļuvi.",
+    "pushDescription": "Saņemiet paziņojumus šajā ierīcē arī tad, kad GiftHub nav atvērts.",
+    "changePasswordTitle": "Mainīt paroli",
+    "changePasswordDescription": "Atjauniniet sava konta paroli.",
+    "setPasswordTitle": "Iestatīt paroli",
+    "setPasswordDescription": "Iestatiet paroli, lai pieteiktos ar e-pastu un paroli.",
+    "twoFactorTitle": "Divfaktoru autentifikācija",
+    "twoFactorDescription": "Pievienojiet papildu drošības līmeni ar autentifikatora lietotni vai piekļuves atslēgu.",
+    "twoFactorManage": "Pārvaldīt drošību",
+    "sessionsTitle": "Aktīvās sesijas",
+    "sessionsDescription": "Skatiet, kur jūsu konts ir pieteicies.",
+    "sessionsView": "Skatīt sesijas",
+    "deleteTitle": "Dzēst kontu",
+    "deleteDescription": "Neatgriezeniski dzēsiet savu kontu un anonimizējiet savus datus. To nevar atsaukt."
   },
   "profile": {
     "title": "Profils",
@@ -633,5 +675,217 @@
     "accountInformation": "Konta informācija",
     "emailPreferences": "E-pasta iestatījumi",
     "appSettings": "Lietotnes iestatījumi"
+  },
+  "dashboard": {
+    "roleShopper": "Pircējs",
+    "roleAdmin": "Administrators",
+    "roleStaff": "Darbinieks",
+    "rolePlatformAdmin": "Platformas administrators",
+    "availableCredit": "Pieejamais kredīts",
+    "pendingCredit": "{amount} gaida apstiprinājumu",
+    "creditExplainer": "Kredīts, ko nopelnāt, kad draugi izmanto jūsu kopīgotos kuponus. To varat izlietot pie tirgotāja, kas to izsniedza.",
+    "viewCreditDetails": "Skatīt kredīta informāciju",
+    "successfulReferrals": "Veiksmīgi ieteikumi",
+    "checkInPoints": "Atzīmēšanās punkti",
+    "shareTitle": "Kopīgojiet kuponu, nopelniet kredītu",
+    "shareDescription": "Atveriet jebkuru kuponu un pieskarieties “Kopīgot”, lai saņemtu personīgo saiti. Kad draugs to izmanto, jūs nopelnāt kredītu.",
+    "openShareCenter": "Atvērt kopīgošanas centru",
+    "sharedSummary": "Kopīgoti kuponi: {count} · Izmantoti: {redeemed}",
+    "achievementsTitle": "Sasniegumi",
+    "badgesEarned": "Iegūtās nozīmītes: {earned} no {total}",
+    "viewAchievements": "Skatīt sasniegumus",
+    "availableOffers": "Pieejamie piedāvājumi",
+    "browseAll": "Skatīt visus",
+    "noActiveOffers": "Pašlaik nav aktīvu piedāvājumu. Ieskatieties drīzumā vēlreiz.",
+    "validUntil": "Derīgs līdz {date}",
+    "recentActivity": "Nesenās darbības",
+    "noRecentActivity": "Vēl nav darbību.",
+    "creditFrom": "Kredīts no {merchant}",
+    "referralAt": "Ieteikums · {merchant}",
+    "creditStatus": {
+      "locked": "gaida",
+      "available": "pieejams",
+      "used": "izmantots",
+      "expired": "beidzies",
+      "reversed": "atcelts"
+    },
+    "referralStatus": {
+      "created": "Saite izveidota",
+      "opened": "Atvērta",
+      "redeemed": "Izmantota",
+      "expired": "Beigusies",
+      "blocked": "Bloķēta"
+    },
+    "myMerchants": "Mani tirgotāji",
+    "merchantDashboard": "Tirgotāja panelis",
+    "sellTitle": "Pārdodiet GiftHub platformā",
+    "sellDescription": "Vēlaties piedāvāt kuponus saviem klientiem? Sazinieties ar mums, un mēs palīdzēsim izveidot tirgotāja kontu.",
+    "contactUs": "Sazināties ar mums",
+    "exploreVouchers": "Apskatīt kuponus"
+  },
+  "wishlist": {
+    "title": "Mans vēlmju saraksts",
+    "emptyTitle": "Jūsu vēlmju saraksts ir tukšs",
+    "emptyBody": "Saglabājiet iecienītos kuponus, tirgotājus un kampaņas, lai vēlāk tos atrastu šeit.",
+    "browseOffers": "Skatīt piedāvājumus"
+  },
+  "push": {
+    "enable": "Ieslēgt push paziņojumus",
+    "enabled": "Push paziņojumi ir ieslēgti",
+    "enabledToast": "Push paziņojumi ieslēgti",
+    "disable": "Izslēgt",
+    "disabledToast": "Push paziņojumi izslēgti",
+    "enableFailed": "Neizdevās ieslēgt push paziņojumus. Lūdzu, mēģiniet vēlreiz.",
+    "disableFailed": "Neizdevās izslēgt push paziņojumus. Lūdzu, mēģiniet vēlreiz.",
+    "unsupported": "Šī pārlūkprogramma neatbalsta push paziņojumus.",
+    "blocked": "Paziņojumi ir bloķēti. Atļaujiet tos pārlūkprogrammas iestatījumos, lai tos ieslēgtu."
+  },
+  "sessions": {
+    "title": "Aktīvās sesijas",
+    "description": "Skatiet, kur jūsu konts ir pieteicies.",
+    "backToSettings": "Atpakaļ uz iestatījumiem",
+    "deviceOn": "{browser} uz {os}",
+    "unknownDevice": "Nezināma ierīce",
+    "thisDevice": "Šī ierīce",
+    "signedInHere": "Jūs pašlaik esat pieteicies šeit.",
+    "otherDevicesTitle": "Citas ierīces",
+    "otherDevicesNone": "Mēs nevaram parādīt citas ierīces, kurās jūs, iespējams, esat pieteicies. Ja pamanāt ko neparastu, nomainiet paroli un ieslēdziet divfaktoru autentifikāciju.",
+    "securitySettings": "Drošības iestatījumi",
+    "lastActive": "Pēdējoreiz aktīvs {time}",
+    "logout": "Iziet",
+    "logoutAll": "Iziet visās citās ierīcēs",
+    "logoutAllBody": "Beigt visas sesijas citās ierīcēs.",
+    "loadFailed": "Neizdevās ielādēt jūsu sesijas.",
+    "revokeFailed": "Neizdevās beigt sesiju. Lūdzu, mēģiniet vēlreiz.",
+    "revoked": "Sesija beigta.",
+    "revokedAll": "Sesijas citās ierīcēs beigtas."
+  },
+  "achievements": {
+    "title": "Sasniegumi",
+    "checkIn": "Atzīmēties šodien",
+    "checkingIn": "Notiek atzīmēšanās…",
+    "checkedInToday": "Šodien jau atzīmējies",
+    "checkInFailed": "Atzīmēšanās neizdevās. Lūdzu, mēģiniet vēlreiz.",
+    "checkInSaved": "Atzīmēšanās saglabāta",
+    "newBadge": "Jauna nozīmīte: {name}",
+    "checkInPoints": "Atzīmēšanās punkti",
+    "level": "Līmenis",
+    "levelValue": "{level}. līmenis",
+    "levelProgress": "Progress līdz nākamajam līmenim",
+    "badgesLabel": "Nozīmītes",
+    "noBadgesYet": "Vēl nav iegūta neviena nozīmīte.",
+    "earnedOn": "Iegūta {date}",
+    "locked": "Vēl nav iegūta",
+    "howToEarn": "Kā nopelnīt punktus",
+    "earnRuleCheckIn": "Atzīmējieties reizi dienā",
+    "pointsShort": "+{points} p.",
+    "pointsExplainer": "Punkti un līmeņi parāda, cik aktīvs esat. Tos nevar apmainīt pret naudu vai kuponiem.",
+    "currentStreak": "Pašreizējā sērija (dienas)",
+    "longestStreak": "Garākā sērija (dienas)",
+    "milestone": "Sērijas atskaites punkts sasniegts!",
+    "badges": {
+      "first_purchase": {
+        "name": "Pirmais pirkums",
+        "description": "Iegādājāties savu pirmo kuponu"
+      },
+      "first_redemption": {
+        "name": "Pirmā izmantošana",
+        "description": "Izmantojāt savu pirmo kuponu"
+      },
+      "5_referrals": {
+        "name": "Savienotājs",
+        "description": "Kopīgojāt 5 kuponus ar draugiem"
+      },
+      "10_referrals": {
+        "name": "Influenceris",
+        "description": "Kopīgojāt 10 kuponus ar draugiem"
+      },
+      "streak_7": {
+        "name": "Nedēļas varonis",
+        "description": "Atzīmējāties 7 dienas pēc kārtas"
+      },
+      "streak_30": {
+        "name": "Mēneša meistars",
+        "description": "Atzīmējāties 30 dienas pēc kārtas"
+      },
+      "review_writer": {
+        "name": "Recenzents",
+        "description": "Publicējāt savu pirmo atsauksmi"
+      },
+      "big_spender": {
+        "name": "Lielais tērētājs",
+        "description": "Kopā iztērējāt vairāk nekā 10 000 kuponiem"
+      },
+      "early_adopter": {
+        "name": "Agrīnais lietotājs",
+        "description": "Pievienojāties GiftHub pirms 2028. gada"
+      },
+      "social_sharer": {
+        "name": "Sociālais dalītājs",
+        "description": "Kopīgojāt kuponu sociālajos tīklos"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Lojalitāte",
+    "notActiveTitle": "Lojalitātes līmeņi vēl nav pieejami",
+    "notActiveBody": "Pirkumi pagaidām nedod lojalitātes punktus, un norēķinoties netiek piemērotas līmeņu atlaides vai priekšrocības, tāpēc šeit nav līmeņu, ko parādīt.",
+    "earnTodayTitle": "Ko varat nopelnīt jau šodien",
+    "earnCreditTitle": "Ieteikumu kredīts",
+    "earnCreditBody": "Kopīgojiet kuponu. Kad draugs to izmanto, jūs saņemat kredītu, ko izlietot pie šī tirgotāja.",
+    "earnCreditLink": "Skatīt savu kredītu",
+    "earnPointsTitle": "Atzīmēšanās punkti",
+    "earnPointsBody": "Atzīmējieties katru dienu, lai veidotu sēriju, paaugstinātu līmeni un atbloķētu nozīmītes.",
+    "earnPointsLink": "Skatīt sasniegumus",
+    "historyTitle": "Punktu vēsture",
+    "pointsBalance": "Punktu atlikums: {points}"
+  },
+  "welcome": {
+    "greeting": "Sveiki, {name}!",
+    "progress": "Ievadkursa progress",
+    "setUpSecurity": "Iestatīt 2FA vai piekļuves atslēgu",
+    "skip": "Izlaist",
+    "next": "Tālāk",
+    "getStarted": "Sākt",
+    "steps": {
+      "welcome": {
+        "title": "Laipni lūdzam GiftHub!",
+        "subtitle": "Īss pārskats par to, ko varat darīt."
+      },
+      "discover": {
+        "title": "Atklājiet piedāvājumus",
+        "subtitle": "Pārlūkojiet vietējo tirgotāju kuponus, dāvanu kartes un pasākumus.",
+        "features": {
+          "vouchers": "Digitālie kuponi",
+          "giftCards": "Dāvanu kartes draugiem un ģimenei",
+          "nearby": "Piedāvājumi jūsu tuvumā"
+        }
+      },
+      "wallet": {
+        "title": "Jūsu kuponi vienuviet",
+        "subtitle": "Viss, ko iegādājaties, tiek saglabāts jūsu kontā.",
+        "features": {
+          "qr": "QR kodi ātrai izmantošanai veikalā",
+          "expiry": "E-pasta atgādinājumi pirms kupona derīguma beigām"
+        }
+      },
+      "rewards": {
+        "title": "Nopelniet atlīdzības",
+        "subtitle": "Kopīgojiet kuponus ar draugiem un nopelniet kredītu, kad viņi tos izmanto.",
+        "features": {
+          "referralCredit": "Tirgotāju kredīts par veiksmīgiem ieteikumiem",
+          "checkIns": "Ikdienas atzīmēšanās un sērijas",
+          "badges": "Atbloķējamas nozīmītes"
+        }
+      },
+      "notifications": {
+        "title": "Esiet lietas kursā",
+        "subtitle": "Ieslēdziet paziņojumus šajā ierīcē."
+      },
+      "security": {
+        "title": "Aizsargājiet savu kontu",
+        "subtitle": "Pievienojiet piekļuves atslēgu vai divfaktoru autentifikāciju."
+      }
+    }
   }
 }
