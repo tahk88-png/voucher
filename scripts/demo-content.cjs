@@ -20,6 +20,7 @@
  */
 const { PrismaClient } = require('@prisma/client');
 
+// Must match DEMO_SLUG_PREFIX in lib/demo-content.ts (sitemap + noindex rely on it).
 const SLUG_PREFIX = 'demo-';
 const DAY = 24 * 60 * 60 * 1000;
 

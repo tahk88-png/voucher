@@ -413,8 +413,8 @@ Sign a data processing agreement (DPA) with every sub-processor you actually
 use (hosting provider, Stripe, Resend, and any of the above). Before launch,
 also check:
 
-- [ ] Cookie consent banner is active (see `CookieConsentBanner` component)
-- [ ] Analytics blocked until user consents (see `lib/cookie-consent.ts`)
+- [x] Cookie consent banner is active (`CookieConsentBanner` in the root layout)
+- [x] Analytics blocked until user consents — enforced server-side in both `/api/analytics/*` routes and client-side by `ConsentGatedAnalytics`; guarded by `lib/__tests__/analytics-consent.test.ts`
 
 ### Data retention policies
 

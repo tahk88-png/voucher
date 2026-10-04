@@ -24,7 +24,7 @@ import { ConfirmHost } from "@/components/ui/confirm-host";
 import { CommandPaletteHost } from "@/components/ui/command-palette-host";
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, buildLocaleAlternates, getBaseUrl } from "@/lib/seo";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
-import { Analytics } from "@vercel/analytics/react";
+import { ConsentGatedAnalytics } from "@/components/consent-gated-analytics";
 import { ChatWidgetLoader } from "@/components/chat-widget-loader";
 import { WebVitalsReporter } from "@/components/web-vitals";
 
@@ -160,7 +160,8 @@ export default async function RootLayout({
             <CookieConsentBanner />
             {/* Vercel Analytics' script only exists on Vercel hosting; on a
                 self-hosted server it is a 404 and a console error per page. */}
-            {process.env.VERCEL && <Analytics />}
+            {/* …and only after the visitor opts in to analytics (GDPR). */}
+            {process.env.VERCEL && <ConsentGatedAnalytics />}
             <WebVitalsReporter />
           </Providers>
         </NextIntlClientProvider>

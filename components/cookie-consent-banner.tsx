@@ -4,11 +4,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-type ConsentState = {
+export type ConsentChoice = {
   analytics: boolean;
   marketing: boolean;
   preferences: boolean;
-} | null;
+};
+
+type ConsentState = ConsentChoice | null;
+
+/** Fired on window after the visitor saves a choice; detail is the ConsentChoice. */
+export const CONSENT_CHANGE_EVENT = 'cookie-consent-change';
 
 export function CookieConsentBanner() {
   const [consent, setConsent] = useState<ConsentState | undefined>(undefined);
@@ -59,6 +64,7 @@ export function CookieConsentBanner() {
       });
       if (!res.ok) throw new Error(`cookie-consent POST ${res.status}`);
       setConsent(payload);
+      window.dispatchEvent(new CustomEvent(CONSENT_CHANGE_EVENT, { detail: payload }));
     } catch (err) {
       console.error("Saving cookie preferences failed", err);
       setSaveError(true);
