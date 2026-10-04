@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import { WarmButton } from '@/components/warm-button';
 import { cn } from '@/lib/utils';
@@ -56,7 +56,15 @@ export function GiftFilters({
   const [bMin, setBMin] = useState(budgetMin);
   const [bMax, setBMax] = useState(budgetMax);
 
+  // Report only real changes. The initial values come from the parent's own
+  // filters, so emitting on mount handed back an equal-but-new object, and the
+  // parent re-ran its feed query: every /gifts visit hit the API twice.
+  const isFirstRun = useRef(true);
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
     onFilterChange({
       category: cat || undefined,
       occasion: occ || undefined,

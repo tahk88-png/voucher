@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { getClientIp } from '@/lib/get-client-ip';
+import { isAnalyticsAllowed } from '@/lib/cookie-consent';
 import { z } from 'zod';
 import {
   trackEvent,
@@ -58,6 +59,12 @@ export async function POST(req: NextRequest) {
         { error: 'Invalid payload', details: parsed.error.flatten().fieldErrors },
         { status: 400 }
       );
+    }
+
+    // GDPR: record nothing unless the visitor opted in to analytics in the
+    // cookie banner. Answered with 200 so callers need no special handling.
+    if (!(await isAnalyticsAllowed())) {
+      return NextResponse.json({ tracked: false, reason: 'no_consent' });
     }
 
     const session = await auth();

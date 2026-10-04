@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { routing } from "@/routing"
 import { getLocalePath, toAbsoluteUrl } from "@/lib/seo"
 import { logger } from "@/lib/logger"
+import { notDemoMerchant } from "@/lib/demo-content"
 
 // Rendered per request, not prerendered/ISR: `next build` has neither the
 // runtime NEXT_PUBLIC_APP_URL nor a database, so a build-time sitemap lists
@@ -25,12 +26,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           status: "active",
           startDate: { lte: now },
           endDate: { gte: now },
+          // Demo content is for visitors, not search engines.
+          merchant: notDemoMerchant,
         },
         select: { id: true, updatedAt: true },
         orderBy: { updatedAt: "desc" },
       }),
       prisma.merchant.findMany({
-        where: { isActive: true },
+        where: { isActive: true, ...notDemoMerchant },
         select: { slug: true, updatedAt: true },
         orderBy: { updatedAt: "desc" },
       }),
@@ -38,6 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         where: {
           status: "published",
           validTo: { gte: now },
+          merchant: notDemoMerchant,
         },
         select: { id: true, updatedAt: true },
         orderBy: { updatedAt: "desc" },

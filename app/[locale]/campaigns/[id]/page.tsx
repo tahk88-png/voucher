@@ -7,6 +7,7 @@ import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { Calendar, CheckCircle2, Clock, Gift, MapPin, ShoppingBag, Ticket } from "lucide-react"
 import { isMerchantActive } from "@/lib/merchant-status"
+import { isDemoMerchantSlug } from "@/lib/demo-content"
 import { setRequestLocale } from "next-intl/server"
 import { routing, Link } from "@/routing"
 import { getCampaignCategoryId } from "@/lib/campaign-categories"
@@ -43,6 +44,7 @@ export async function generateMetadata({
       merchant: {
         select: {
           name: true,
+          slug: true,
           brandLogoUrl: true,
         },
       },
@@ -64,6 +66,9 @@ export async function generateMetadata({
   return {
     title,
     description,
+    // Demo campaigns (scripts/demo-content.cjs) are shown to visitors as
+    // labelled samples but must not be indexed as real offers.
+    ...(isDemoMerchantSlug(campaign.merchant.slug) ? { robots: { index: false, follow: false } } : {}),
     alternates: {
       canonical: canonicalPath,
       languages: buildLocaleAlternates(`/campaigns/${campaign.id}`),

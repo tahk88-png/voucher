@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { SITE_NAME } from '@/lib/seo';
+import { isDemoMerchantSlug } from '@/lib/demo-content';
 import Link from 'next/link';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
@@ -22,6 +23,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     // carry a site-name suffix of its own. OG titles bypass the template.
     title: merchant.name,
     description,
+    // Demo merchants (scripts/demo-content.cjs) are labelled samples, not real businesses.
+    ...(isDemoMerchantSlug(merchant.slug) ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: `${merchant.name} | ${SITE_NAME}`,
       description,

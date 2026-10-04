@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
+import { isAnalyticsAllowed } from '@/lib/cookie-consent';
+import { getClientIp } from '@/lib/get-client-ip';
+import { rateLimit } from '@/lib/rate-limit';
 import { z } from 'zod';
 import {
   trackPageView,
@@ -18,6 +21,15 @@ const pageviewSchema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    // Public, unauthenticated, and each call writes a row: cap it per IP.
+    const limit = rateLimit(`analytics_pageview:${getClientIp(req)}`, 120, 60_000, 'analytics_pageview');
+    if (!limit.allowed) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded' },
+        { status: 429, headers: { 'Retry-After': String(Math.ceil((limit.resetAt - Date.now()) / 1000)) } },
+      );
+    }
+
     const body = await req.json();
     const parsed = pageviewSchema.safeParse(body);
     if (!parsed.success) {
@@ -25,6 +37,12 @@ export async function POST(req: NextRequest) {
         { error: 'Invalid payload', details: parsed.error.flatten().fieldErrors },
         { status: 400 }
       );
+    }
+
+    // GDPR: record nothing unless the visitor opted in to analytics in the
+    // cookie banner. Answered with 200 so callers need no special handling.
+    if (!(await isAnalyticsAllowed())) {
+      return NextResponse.json({ tracked: false, reason: 'no_consent' });
     }
 
     const session = await auth();
