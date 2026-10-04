@@ -46,6 +46,18 @@ SMTP_PASSWORD=your-password
 SMTP_FROM=noreply@yourdomain.com
 ```
 
+### Operator details (privacy policy and terms)
+
+```bash
+LEGAL_ENTITY_NAME="Your Company OÜ"
+LEGAL_ENTITY_ADDRESS="Street 1, 10111 Tallinn, Estonia"
+LEGAL_REGISTRY_CODE=12345678
+```
+
+Shown on `/privacy` and `/terms` as the operator of the service
+(`components/site/legal-entity.tsx`). While empty, those pages say the operator
+details are not filled in yet; fill them in before taking real customers.
+
 ### Stripe (For Payments)
 
 ```bash
