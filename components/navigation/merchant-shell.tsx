@@ -214,7 +214,12 @@ export default function MerchantShell({
       <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-[var(--surface)] border-b border-[var(--border)] shadow-warm-sm">
         <div className="flex items-center justify-between gap-2 px-4 h-16">
           <Link href={`/merchant/${slug}/dashboard`} className="flex items-center gap-2 min-w-0">
-            <span className="w-10 h-10 rounded-[12px] gradient-brand flex items-center justify-center shadow-warm flex-shrink-0" />
+            <span
+              aria-hidden="true"
+              className="w-10 h-10 rounded-[12px] gradient-brand flex items-center justify-center shadow-warm flex-shrink-0 text-base font-bold text-[var(--primary-foreground)]"
+            >
+              {merchantName.slice(0, 2).toUpperCase()}
+            </span>
             <span className="text-xl font-bold text-[var(--text)] truncate">{merchantName}</span>
           </Link>
           <button
@@ -288,7 +293,12 @@ export default function MerchantShell({
       >
         <div className="flex flex-col flex-1 min-h-0">
           <div className="relative flex items-center gap-3 px-6 py-6 border-b border-[var(--border)]">
-            <div className="w-12 h-12 rounded-[14px] gradient-brand flex items-center justify-center shadow-warm flex-shrink-0" />
+            <div
+              aria-hidden="true"
+              className="w-12 h-12 rounded-[14px] gradient-brand flex items-center justify-center shadow-warm flex-shrink-0 text-lg font-bold text-[var(--primary-foreground)]"
+            >
+              {merchantName.slice(0, 2).toUpperCase()}
+            </div>
             <span
               className={cn(
                 "text-2xl font-bold text-[var(--text)] transition-opacity duration-300 truncate",

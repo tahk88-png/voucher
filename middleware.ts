@@ -34,7 +34,8 @@ export default function middleware(req: NextRequest) {
   const hasSession = !!getSessionCookie(req);
 
   // Redirect unauthenticated users away from protected routes
-  const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
+  // Whole path segments only: "/merchant/x" is protected, "/merchants" is not.
+  const isProtected = PROTECTED_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
   if (isProtected && !hasSession) {
     const loginUrl = new URL("/login", req.url);
     loginUrl.searchParams.set("callbackUrl", pathname);

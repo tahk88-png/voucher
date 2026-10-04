@@ -1,3 +1,5 @@
+import { DemoBadge } from '@/components/campaign/campaign-card';
+import { getCategoryVisual, toCampaignCardData } from '@/lib/campaign-presentation';
 import { pageMetadata } from '@/lib/seo/page-metadata';
 export const metadata = pageMetadata({ title: 'My Dashboard', noIndex: true });
 
@@ -77,7 +79,15 @@ export default async function AppPage() {
         endDate: { gte: now },
         merchant: { isActive: true },
       },
-      include: { merchant: { select: { name: true } } },
+      include: {
+        merchant: { select: { name: true, slug: true, city: true, defaultCurrency: true, brandLogoUrl: true } },
+        _count: {
+          select: {
+            vouchers: { where: { status: 'published', validFrom: { lte: now }, validTo: { gte: now } } },
+            purchases: { where: { status: 'paid' } },
+          },
+        },
+      },
       orderBy: { createdAt: 'desc' },
       take: 6,
     }),
@@ -268,21 +278,44 @@ export default async function AppPage() {
             <div className="text-sm text-[var(--text-muted)]">{t('noActiveOffers')}</div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {activeCampaigns.map((campaign) => (
-                <Link
-                  key={campaign.id}
-                  href={`/campaigns/${campaign.id}`}
-                  className="block rounded-[var(--r-md)] bg-[#fcfbf8] border border-[rgba(139,115,85,0.15)] p-4 hover:border-[var(--primary)] hover:shadow-warm transition"
-                >
-                  <div className="text-xs uppercase tracking-wide text-[var(--text-faint)] font-semibold truncate">
-                    {campaign.merchant.name}
-                  </div>
-                  <div className="text-base font-semibold text-[var(--text)] mt-1 line-clamp-2">{campaign.name}</div>
-                  <div className="text-sm text-[var(--text-muted)] mt-2">
-                    {t('validUntil', { date: campaign.endDate.toLocaleDateString(intlLocale) })}
-                  </div>
-                </Link>
-              ))}
+              {activeCampaigns.map((campaign) => {
+                const card = toCampaignCardData(campaign)
+                const visual = getCategoryVisual(card.categoryId)
+                return (
+                  <Link
+                    key={campaign.id}
+                    href={card.href}
+                    className="group flex flex-col rounded-[var(--r-md)] border border-[var(--border)] bg-[var(--surface)] p-4 transition hover:border-[var(--primary)] hover:shadow-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="grid h-9 w-9 place-items-center rounded-xl"
+                        style={{ background: visual.gradient }}
+                      >
+                        <visual.icon className="h-4 w-4 text-white" />
+                      </span>
+                      {card.isDemo ? (
+                        <DemoBadge />
+                      ) : card.discountLabel ? (
+                        <span className="rounded-full bg-[#2d2721] px-2.5 py-1 text-xs font-bold text-white">{card.discountLabel}</span>
+                      ) : null}
+                    </div>
+                    <div className="mt-3 truncate text-xs font-semibold uppercase tracking-wide text-[var(--text-faint)]">
+                      {card.merchantName}
+                    </div>
+                    <div className="mt-1 line-clamp-2 text-base font-semibold text-[var(--text)] group-hover:text-[var(--primary)]">
+                      {card.title}
+                    </div>
+                    <div className="mt-auto pt-3 text-sm">
+                      <div className="font-bold text-[var(--text)]">{card.priceLabel}</div>
+                      <div className="text-xs text-[var(--text-muted)]">
+                        {t('validUntil', { date: campaign.endDate.toLocaleDateString(intlLocale) })}
+                      </div>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           )}
         </WarmCard>

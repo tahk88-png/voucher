@@ -10,6 +10,21 @@ afterAll(() => {
 });
 
 import MarketingLanding from '../marketing-landing';
+import { toCampaignCardData, type CampaignCardSource } from '@/lib/campaign-presentation';
+
+function source(overrides: Partial<CampaignCardSource> & { vouchers?: number; purchases?: number } = {}) {
+  const { vouchers = 1, purchases = 0, ...rest } = overrides;
+  return {
+    id: 'cmp_2',
+    name: 'Yoga class pass',
+    description: 'yoga for beginners',
+    price: 1900,
+    discountRules: { type: 'percentage', value: 2000 },
+    merchant: { name: 'Studio', slug: 'studio', city: 'Tallinn', defaultCurrency: 'EUR', brandLogoUrl: null },
+    _count: { purchases, vouchers },
+    ...rest,
+  };
+}
 
 // What a fresh deployment's landing page receives: a reachable, empty database.
 const emptyStats = { merchantCount: 0, activeCampaignCount: 0, processedCents: 0 };
@@ -40,17 +55,9 @@ describe('MarketingLanding campaigns section', () => {
     const html = renderToStaticMarkup(
       <MarketingLanding
         featuredOffers={[
-          {
-            id: 'cmp_1',
-            name: 'Two coffees for one',
-            merchantName: 'Corner Cafe',
-            merchantLogoUrl: null,
-            categoryLabel: 'Cafe & Bakery',
-            marketLabel: 'EE / EUR',
-            priceLabel: 'FREE',
-            purchases: 3,
-            discountLabel: '50% OFF',
-          },
+          toCampaignCardData(
+            source({ id: 'cmp_1', name: 'Two coffees for one', price: null, discountRules: { type: 'percentage', value: 5000 }, purchases: 3 })
+          ),
         ]}
         stats={{ merchantCount: 1, activeCampaignCount: 1, processedCents: 0 }}
       />
@@ -63,18 +70,7 @@ describe('MarketingLanding campaigns section', () => {
   });
 });
 
-const offer = {
-  id: 'cmp_2',
-  name: 'Yoga class pass',
-  merchantName: 'Studio',
-  merchantLogoUrl: null,
-  categoryLabel: 'Fitness & sport',
-  marketLabel: 'EE / EUR',
-  priceLabel: '€19.00',
-  purchases: 0,
-  discountLabel: '20% OFF',
-  onSale: true,
-};
+const offer = toCampaignCardData(source());
 
 describe('MarketingLanding honesty', () => {
   it('does not call listed campaigns "live" and flags ones that are not on sale', () => {
@@ -90,12 +86,26 @@ describe('MarketingLanding honesty', () => {
     expect(html).toContain('Not on sale yet');
   });
 
-  it('hides the discount badge on free offers', () => {
-    const html = renderToStaticMarkup(
-      <MarketingLanding featuredOffers={[{ ...offer, priceLabel: 'FREE', discountLabel: '50% OFF' }]} stats={null} />
+  it('shows a free offer\'s discount as its value, not as "Free" next to a discount badge', () => {
+    const free = toCampaignCardData(source({ price: null, discountRules: { type: 'percentage', value: 5000 } }));
+    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[free]} stats={null} />);
+    expect(html).toContain('50% off');
+    expect(html).not.toContain('−50%');
+    expect(html).not.toContain('>Free<');
+  });
+
+  it('labels demo merchants\' offers as samples and drops the text marker from titles', () => {
+    const demo = toCampaignCardData(
+      source({
+        name: 'NÄIDIS · Joogatund',
+        merchant: { name: 'Stuudio (näidis)', slug: 'demo-stuudio', city: 'Tartu', defaultCurrency: 'EUR', brandLogoUrl: null },
+      })
     );
-    expect(html).toContain('FREE');
-    expect(html).not.toContain('50% OFF');
+    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[demo]} stats={null} />);
+    expect(html).toContain('>Joogatund<');
+    expect(html).toContain('>Demo<');
+    expect(html).toContain('Sample offer · not for sale');
+    expect(html).not.toContain('NÄIDIS ·');
   });
 
   it('hides zero-valued stats instead of advertising them', () => {

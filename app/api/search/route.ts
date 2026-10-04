@@ -156,8 +156,11 @@ export async function GET(req: NextRequest) {
     if (category) {
       const { campaignCategories } = await import('@/lib/campaign-categories');
       const cat = campaignCategories.find((c) => c.id === category);
-      if (cat && cat.keywords.length > 0) {
-        const categoryConditions = cat.keywords.map((kw) => ({
+      // A database substring match: looser than getCampaignCategoryId's
+      // word-start rule for English keywords, but a reasonable search filter.
+      const terms = cat ? [...cat.keywords, ...cat.stems] : [];
+      if (terms.length > 0) {
+        const categoryConditions = terms.map((kw) => ({
           campaign: {
             OR: [
               { name: { contains: kw, mode: 'insensitive' as const } },

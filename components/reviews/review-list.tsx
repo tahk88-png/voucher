@@ -50,11 +50,13 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
   const [avgRating, setAvgRating] = useState(0);
   const [sort, setSort] = useState<SortOption>('newest');
   const [loading, setLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [offset, setOffset] = useState(0);
   const limit = 10;
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
+    setLoadFailed(false);
     try {
       const params = new URLSearchParams();
       if (merchantId) params.set('merchantId', merchantId);
@@ -72,7 +74,7 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
       setTotal(data.total);
       setAvgRating(data.avgRating);
     } catch {
-      // Silently fail — empty state is shown
+      setLoadFailed(true);
     } finally {
       setLoading(false);
     }
@@ -100,7 +102,9 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
 
   return (
     <div className="space-y-6">
-      {/* Summary */}
+      {/* Summary and sorting only mean something once there are reviews;
+          "0.0" with sort buttons over an empty list read as a bad rating. */}
+      {total > 0 && (
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="flex items-center gap-3">
           <StarRating rating={avgRating} size="lg" showCount={total} />
@@ -113,6 +117,8 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
           {(['newest', 'highest', 'helpful'] as SortOption[]).map((s) => (
             <button
               key={s}
+              type="button"
+              aria-pressed={sort === s}
               onClick={() => { setSort(s); setOffset(0); }}
               className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
               style={{
@@ -126,6 +132,7 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
           ))}
         </div>
       </div>
+      )}
 
       {/* Review Form — signed-out visitors used to get the form and then an
           "Unauthorized" error on submit. */}
@@ -162,12 +169,28 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
             </div>
           ))}
         </div>
+      ) : loadFailed ? (
+        <div
+          role="alert"
+          className="rounded-xl p-6 text-center"
+          style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
+        >
+          <p style={{ color: 'var(--text-muted)' }}>Reviews couldn&apos;t be loaded.</p>
+          <button
+            type="button"
+            onClick={fetchReviews}
+            className="mt-2 text-sm font-medium underline underline-offset-2"
+            style={{ color: 'var(--primary)' }}
+          >
+            Try again
+          </button>
+        </div>
       ) : reviews.length === 0 ? (
         <div
           className="rounded-xl p-8 text-center"
           style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
         >
-          <p style={{ color: 'var(--text-muted)' }}>No reviews yet. Be the first to review!</p>
+          <p style={{ color: 'var(--text-muted)' }}>No reviews yet.</p>
         </div>
       ) : (
         <div className="space-y-4">

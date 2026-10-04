@@ -1,8 +1,10 @@
 "use client"
 
+import { CampaignCard } from "@/components/campaign/campaign-card"
+import type { CampaignCardData } from "@/lib/campaign-presentation"
+
 import { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import { ScrollReveal } from "@/components/animations/scroll-reveal"
@@ -56,20 +58,6 @@ const CATEGORY_TILE_STYLE: Record<string, { icon: LucideIcon; color: string; ico
   outdoor: { icon: Mountain, color: "from-[var(--danger)] to-[#a33b29]", iconClass: "text-white" },
 }
 
-type LandingFeaturedOffer = {
-  id: string
-  name: string
-  merchantName: string
-  merchantLogoUrl: string | null
-  categoryLabel: string
-  marketLabel: string
-  priceLabel: string
-  purchases: number
-  discountLabel: string | null
-  /** False when the campaign has no published voucher, so nothing can be bought yet. */
-  onSale?: boolean
-}
-
 type LandingStats = {
   merchantCount: number
   activeCampaignCount: number
@@ -78,7 +66,7 @@ type LandingStats = {
 }
 
 type MarketingLandingProps = {
-  featuredOffers?: LandingFeaturedOffer[]
+  featuredOffers?: CampaignCardData[]
   /** Real platform figures; null when the database is unreachable. */
   stats?: LandingStats | null
   /** Names of real active merchants for the "trusted by" row. */
@@ -428,64 +416,13 @@ export default function MarketingLanding({
 
         {visibleOffers.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-            {visibleOffers.map((offer) => (
-              <TiltCard key={offer.id} maxTilt={5}>
-              <WarmCard hover padding="none" className="rounded-[16px] bg-white/95 overflow-hidden">
-                <div className="relative h-28 bg-[#F6F0E4]">
-                  {offer.merchantLogoUrl ? (
-                    <Image
-                      src={offer.merchantLogoUrl}
-                      alt={offer.merchantName}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 25vw"
-                      className="object-cover"
-                      unoptimized
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--primary)] to-[#F5C98E]">
-                      <Ticket className="h-8 w-8 text-white/85" />
-                    </div>
-                  )}
-                  <span className="absolute top-3 left-3 rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-[10px] font-bold text-[var(--text)]">
-                    {offer.categoryLabel}
-                  </span>
-                  {offer.discountLabel && offer.priceLabel !== "FREE" && (
-                    <span className="absolute top-3 right-3 rounded-full bg-[var(--text)] px-2.5 py-1 text-[10px] font-bold text-white">
-                      {offer.discountLabel}
-                    </span>
-                  )}
-                </div>
-
-                <div className="p-4 flex flex-col min-h-[200px]">
-                  <p className="text-[11px] font-bold uppercase tracking-wide text-[var(--primary)]">{offer.merchantName}</p>
-                  <h3 className="text-base font-bold text-[var(--text)] mt-1 line-clamp-2">{offer.name}</h3>
-                  <div className="mt-2 flex flex-wrap items-center gap-2">
-                    <span className="inline-flex rounded-full bg-[#EEF6F1] border border-[#D2E5DB] px-2.5 py-1 text-[10px] font-semibold text-[#47695B]">
-                      Marketplace: {offer.marketLabel}
-                    </span>
-                  </div>
-
-                  <div className="mt-auto pt-3 border-t border-[var(--border)] flex items-center justify-between gap-3">
-                    <div>
-                      <div className="text-base font-bold text-[var(--text)]">{offer.priceLabel}</div>
-                      {offer.onSale === false ? (
-                        <div className="text-[11px] text-[var(--text-muted)]">Not on sale yet</div>
-                      ) : offer.purchases > 0 ? (
-                        <div className="text-[11px] text-[var(--text-muted)]">
-                          {offer.purchases} {offer.purchases === 1 ? "purchase" : "purchases"}
-                        </div>
-                      ) : null}
-                    </div>
-                    <WarmButton asChild size="sm" className="rounded-full px-4">
-                      <Link href={`/campaigns/${offer.id}`} aria-label={`Open ${offer.name}`}>
-                        Open
-                        <ArrowRight className="h-4 w-4 ml-1.5" aria-hidden="true" />
-                      </Link>
-                    </WarmButton>
-                  </div>
-                </div>
-              </WarmCard>
-              </TiltCard>
+            {visibleOffers.map((offer, index) => (
+              <CampaignCard
+                key={offer.id}
+                campaign={offer}
+                // A short preview on small screens; "View All Campaigns" has the rest.
+                className={index >= 8 ? "hidden xl:flex" : index >= 4 ? "hidden md:flex" : undefined}
+              />
             ))}
           </div>
         ) : (

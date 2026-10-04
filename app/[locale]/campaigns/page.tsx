@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import { Prisma } from "@prisma/client"
 import { prisma } from "@/lib/prisma"
-import Image from "next/image"
-import { formatCurrency, formatPercentage, safeParseJson } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { Search, Sparkles, ShoppingBag, Ticket, Gift } from "lucide-react"
-import { allCampaignCategories, getCampaignCategoryId, getCampaignCategoryLabel } from "@/lib/campaign-categories"
+import { CampaignCard } from "@/components/campaign/campaign-card"
+import { toCampaignCardData } from "@/lib/campaign-presentation"
+import { allCampaignCategories, getCampaignCategoryId } from "@/lib/campaign-categories"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link, routing } from "@/routing"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_NAME, getLocalePath } from "@/lib/seo"
@@ -133,6 +133,7 @@ export default async function CampaignsPage({
             name: true,
             slug: true,
             defaultCurrency: true,
+            city: true,
             brandLogoUrl: true,
             brandColorsJson: true,
           },
@@ -307,110 +308,9 @@ export default async function CampaignsPage({
 
         {visibleCampaigns.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleCampaigns.map((campaign) => {
-              const discountRules = safeParseJson<{ type: string; value: number; currency?: string }>(
-                campaign.discountRules
-              )
-              const brandColors = safeParseJson<Record<string, string>>(campaign.merchant.brandColorsJson)
-              const accent = brandColors?.primary || "#a4563b"
-              const categoryId = getCampaignCategoryId({
-                name: campaign.name,
-                description: campaign.description,
-              })
-              const categoryLabel = getCampaignCategoryLabel(categoryId)
-              const isFree = !campaign.price || campaign.price <= 0
-              const priceLabel = isFree
-                ? "FREE"
-                : formatCurrency(campaign.price!, campaign.merchant.defaultCurrency)
-
-              return (
-                <WarmCard
-                  key={campaign.id}
-                  hover
-                  padding="none"
-                  className="relative overflow-hidden group h-full flex flex-col bg-white/90 backdrop-blur focus-within:ring-2 focus-within:ring-[var(--ring)]"
-                >
-                  <div className="relative h-48 overflow-hidden bg-[#FAF7F2] flex items-center justify-center">
-                    {campaign.merchant.brandLogoUrl ? (
-                      <Image
-                        src={campaign.merchant.brandLogoUrl}
-                        alt={campaign.merchant.name}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 360px"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        unoptimized
-                      />
-                    ) : (
-                      <div
-                        className="w-full h-full flex items-center justify-center"
-                        style={{ background: `linear-gradient(135deg, ${accent} 0%, #F5C98E 100%)` }}
-                      >
-                        <Ticket className="h-12 w-12 text-white/80" />
-                      </div>
-                    )}
-                    <div className="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#2D2721] shadow-sm">
-                      {categoryLabel}
-                    </div>
-                  </div>
-
-                  <div className="p-5 flex flex-col flex-1">
-                    <div className="mb-3">
-                      <p className="text-xs font-bold text-[var(--primary)] uppercase tracking-wider mb-1">
-                        {campaign.merchant.name}
-                      </p>
-                      <h3 className="text-lg font-bold text-[#2D2721] line-clamp-2 group-hover:text-[var(--primary)] transition-colors">
-                        {/* The whole card is the link (stretched ::after); its
-                            accessible name is the campaign title. */}
-                        <Link
-                          href={`/campaigns/${campaign.id}`}
-                          className="focus:outline-none after:absolute after:inset-0 after:content-['']"
-                        >
-                          {campaign.name}
-                        </Link>
-                      </h3>
-                    </div>
-
-                    {!isFree && discountRules && discountRules.type && discountRules.value !== undefined && (
-                      <div className="mt-1 mb-4 flex items-center gap-2 text-sm text-[#6B5744]">
-                        <Ticket className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
-                        <span className="font-semibold text-[#2D2721]">
-                          {discountRules.type === "percentage"
-                            ? formatPercentage(discountRules.value)
-                            : formatCurrency(
-                                discountRules.value,
-                                discountRules.currency || campaign.merchant.defaultCurrency
-                              )}{" "}
-                          discount
-                        </span>
-                      </div>
-                    )}
-
-                    <div className="mt-auto pt-4 border-t border-[rgba(139,115,85,0.15)]/50 flex items-center justify-between">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xl font-bold text-[#2D2721]">{priceLabel}</span>
-                        </div>
-                        {campaign._count.vouchers === 0 ? (
-                          <span className="text-xs font-bold text-[#6B5744]">Not on sale yet</span>
-                        ) : campaign._count.purchases > 0 ? (
-                          <span className="text-xs font-bold text-[#3f7a4c]">
-                            {campaign._count.purchases} {campaign._count.purchases === 1 ? "purchase" : "purchases"}
-                          </span>
-                        ) : null}
-                      </div>
-
-                      {/* Decorative: the card itself is the link. */}
-                      <span
-                        aria-hidden="true"
-                        className="gradient-brand text-white rounded-full w-10 h-10 flex items-center justify-center shadow-md"
-                      >
-                        <ShoppingBag className="w-4 h-4" />
-                      </span>
-                    </div>
-                  </div>
-                </WarmCard>
-              )
-            })}
+            {visibleCampaigns.map((campaign) => (
+              <CampaignCard key={campaign.id} campaign={toCampaignCardData(campaign)} headingLevel="h2" />
+            ))}
           </div>
         ) : (
           <WarmCard padding="lg" className="text-center py-16 bg-white">

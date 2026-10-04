@@ -8,9 +8,11 @@ import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
-import { Gift, Megaphone, Globe, Mail } from 'lucide-react';
+import { Gift, Globe, Info, Mail, MapPin, Tag } from 'lucide-react';
+import HubShell from '@/components/layout/hub-shell';
+import { CampaignCard, DemoBadge } from '@/components/campaign/campaign-card';
+import { getCategoryVisual, stripDemoMarker, toCampaignCardData } from '@/lib/campaign-presentation';
 import {
-  CAMPAIGN_TYPE_LABELS,
   describeVoucherValue,
   formatDisplayDate,
   voucherHeadline,
@@ -24,7 +26,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     select: { name: true, slug: true, brandLogoUrl: true },
   });
   if (!merchant) return { title: 'Not Found' };
-  const description = `Browse vouchers, campaigns, and offers from ${merchant.name}`;
+  const name = stripDemoMarker(merchant.name, isDemoMerchantSlug(merchant.slug));
+  const description = `Browse vouchers, campaigns, and offers from ${name}`;
   return {
     // The root layout applies a `%s | GiftHub` template, so `title` must not
     // carry a site-name suffix of its own. OG titles bypass the template.
@@ -43,16 +46,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function MerchantPublicPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const now = new Date();
+  const liveVoucherWhere = { status: 'published', validFrom: { lte: now }, validTo: { gte: now } };
   const merchant = await prisma.merchant.findUnique({
     where: { slug, isActive: true },
     include: {
       campaigns: {
-        where: { status: 'active', endDate: { gte: now }, deletedAt: null },
+        // Same "live" definition as the campaign page, so every card opens.
+        where: { status: 'active', startDate: { lte: now }, endDate: { gte: now }, deletedAt: null },
         orderBy: { startDate: 'desc' },
         take: 12,
+        include: {
+          _count: {
+            select: {
+              vouchers: { where: liveVoucherWhere },
+              purchases: { where: { status: 'paid' } },
+            },
+          },
+        },
       },
       vouchers: {
-        where: { status: 'published', validTo: { gte: now }, deletedAt: null },
+        // Vouchers sold outside any campaign; campaign vouchers are reached through their campaign card.
+        where: { ...liveVoucherWhere, campaignId: null, deletedAt: null },
         orderBy: { createdAt: 'desc' },
         take: 12,
         include: { campaign: { select: { name: true } } },
@@ -62,99 +76,152 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
 
   if (!merchant) notFound();
 
-  return (
-    <div className="min-h-screen bg-[var(--bg)]">
-      <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
-        {/* Header */}
-        <div className="flex items-center gap-4">
-          {merchant.brandLogoUrl ? (
-            <Image src={merchant.brandLogoUrl} alt={merchant.name} width={64} height={64} className="rounded-2xl object-cover" />
-          ) : (
-            <div className="w-16 h-16 rounded-2xl gradient-brand flex items-center justify-center text-2xl font-bold text-[var(--primary-foreground)]">
-              {merchant.name.slice(0, 2).toUpperCase()}
-            </div>
-          )}
-          <div>
-            <h1 className="text-3xl font-bold text-[var(--text)]">{merchant.name}</h1>
-            <div className="flex items-center gap-3 mt-1 text-sm text-[var(--text-muted)]">
-              {merchant.website && (
-                <a href={merchant.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-[var(--primary)]">
-                  <Globe className="h-3.5 w-3.5" /> Website
-                </a>
-              )}
-              {merchant.supportEmail && (
-                <a href={`mailto:${merchant.supportEmail}`} className="flex items-center gap-1 hover:text-[var(--primary)]">
-                  <Mail className="h-3.5 w-3.5" /> Contact
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Active Campaigns */}
-        <section>
-          <div className="flex items-center gap-2 mb-4">
-            <Megaphone className="h-5 w-5 text-[var(--primary)]" />
-            <h2 className="text-xl font-semibold text-[var(--text)]">Active Campaigns</h2>
-          </div>
-          {merchant.campaigns.length === 0 ? (
-            <WarmCard padding="lg" className="bg-white text-center">
-              <p className="text-[var(--text-muted)]">No active campaigns right now</p>
-            </WarmCard>
-          ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {merchant.campaigns.map((campaign) => (
-                <Link key={campaign.id} href={`/campaigns/${campaign.id}`}>
-                  <WarmCard padding="md" className="bg-white hover:shadow-lg transition-shadow h-full">
-                    <div className="flex items-start justify-between">
-                      <h3 className="font-semibold text-[var(--text)] line-clamp-2">{campaign.name}</h3>
-                      <Badge variant="secondary">{CAMPAIGN_TYPE_LABELS[campaign.type] ?? campaign.type}</Badge>
-                    </div>
-                    {campaign.description && (
-                      <p className="text-sm text-[var(--text-muted)] mt-2 line-clamp-2">{campaign.description}</p>
-                    )}
-                    <p className="text-xs text-[var(--text-faint)] mt-3">
-                      {formatDisplayDate(campaign.startDate)} &ndash; {formatDisplayDate(campaign.endDate)}
-                    </p>
-                  </WarmCard>
-                </Link>
-              ))}
-            </div>
-          )}
-        </section>
-
-        {/* Available Vouchers */}
-        <section>
-          <div className="flex items-center gap-2 mb-4">
-            <Gift className="h-5 w-5 text-[var(--primary)]" />
-            <h2 className="text-xl font-semibold text-[var(--text)]">Available Vouchers</h2>
-          </div>
-          {merchant.vouchers.length === 0 ? (
-            <WarmCard padding="lg" className="bg-white text-center">
-              <p className="text-[var(--text-muted)]">No vouchers available right now</p>
-            </WarmCard>
-          ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {merchant.vouchers.map((voucher) => (
-                <Link key={voucher.id} href={`/v/${voucher.id}`}>
-                  <WarmCard padding="md" className="bg-white hover:shadow-lg transition-shadow h-full">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="font-semibold text-[var(--text)] line-clamp-2">
-                        {voucherHeadline(voucher) || voucher.campaign?.name || describeVoucherValue(voucher)}
-                      </h3>
-                      <Badge variant="outline" className="shrink-0">{voucherTypeLabel(voucher.type)}</Badge>
-                    </div>
-                    <p className="text-2xl font-bold text-[var(--primary)] mt-2">{describeVoucherValue(voucher)}</p>
-                    <p className="text-xs text-[var(--text-faint)] mt-2">
-                      Valid until {formatDisplayDate(voucher.validTo)}
-                    </p>
-                  </WarmCard>
-                </Link>
-              ))}
-            </div>
-          )}
-        </section>
-      </div>
-    </div>
+  const isDemo = isDemoMerchantSlug(merchant.slug);
+  const displayName = stripDemoMarker(merchant.name, isDemo);
+  const cards = merchant.campaigns.map((campaign) =>
+    toCampaignCardData({
+      ...campaign,
+      merchant: {
+        name: merchant.name,
+        slug: merchant.slug,
+        city: merchant.city,
+        defaultCurrency: merchant.defaultCurrency,
+        brandLogoUrl: merchant.brandLogoUrl,
+      },
+    })
   );
+  // The banner takes the look of the merchant's main category.
+  const banner = getCategoryVisual(cards[0]?.categoryId ?? 'other');
+  const offerCount = cards.length + merchant.vouchers.length;
+
+  return (
+    <HubShell>
+      <div className="min-h-screen bg-[var(--bg)]">
+        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          <section aria-labelledby="merchant-name" className="overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--surface)] shadow-warm-sm">
+            <div className="relative h-28 sm:h-40" style={{ background: banner.gradient }} aria-hidden="true">
+              <banner.icon className="absolute -bottom-10 right-6 h-44 w-44 rotate-[-12deg] text-white/15 stroke-[1.25]" />
+            </div>
+            <div className="px-5 pb-6 sm:px-8">
+              {/* relative: keeps the overlapping logo above the (positioned) banner. */}
+              <div className="relative -mt-10 sm:-mt-12">
+                {merchant.brandLogoUrl ? (
+                  <Image
+                    src={merchant.brandLogoUrl}
+                    alt=""
+                    width={96}
+                    height={96}
+                    className="h-20 w-20 rounded-2xl border-4 border-[var(--surface)] object-cover shadow-warm sm:h-24 sm:w-24"
+                    unoptimized
+                  />
+                ) : (
+                  <div className="grid h-20 w-20 place-items-center rounded-2xl border-4 border-[var(--surface)] bg-[var(--primary)] text-2xl font-bold text-[var(--primary-foreground)] shadow-warm sm:h-24 sm:w-24">
+                    {initials(displayName)}
+                  </div>
+                )}
+              </div>
+              <div className="mt-3 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h1 id="merchant-name" className="break-words text-2xl font-bold text-[var(--text)] sm:text-3xl">
+                      {displayName}
+                    </h1>
+                    {isDemo && <DemoBadge />}
+                  </div>
+                  <p className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-[var(--text-muted)]">
+                    {(merchant.address || merchant.city) && (
+                      <span className="inline-flex items-center gap-1">
+                        <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                        {[merchant.address, merchant.city].filter(Boolean).join(', ')}
+                      </span>
+                    )}
+                    <span className="inline-flex items-center gap-1">
+                      <Tag className="h-3.5 w-3.5" aria-hidden="true" />
+                      {offerCount} {offerCount === 1 ? 'offer' : 'offers'}
+                    </span>
+                  </p>
+                </div>
+                {(merchant.website || merchant.supportEmail) && !isDemo && (
+                  <div className="flex flex-wrap gap-2">
+                    {merchant.website && (
+                      <WarmButton asChild variant="outline" size="sm">
+                        <a href={merchant.website} target="_blank" rel="noopener noreferrer">
+                          <Globe className="mr-1.5 h-4 w-4" aria-hidden="true" /> Website
+                        </a>
+                      </WarmButton>
+                    )}
+                    {merchant.supportEmail && (
+                      <WarmButton asChild variant="outline" size="sm">
+                        <a href={`mailto:${merchant.supportEmail}`}>
+                          <Mail className="mr-1.5 h-4 w-4" aria-hidden="true" /> Contact
+                        </a>
+                      </WarmButton>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+
+          {isDemo && (
+            <p
+              role="note"
+              className="mt-6 flex items-start gap-3 rounded-[var(--r-md)] border border-[var(--border)] border-l-4 border-l-[color:var(--warning)] bg-[var(--surface)] p-4 text-sm text-[var(--text)]"
+            >
+              <Info className="mt-0.5 h-4 w-4 shrink-0 text-[var(--warning)]" aria-hidden="true" />
+              <span>
+                <strong>Sample business.</strong> This page shows how a merchant looks on GiftHub. Its offers are
+                examples and can&apos;t be bought.
+              </span>
+            </p>
+          )}
+
+          <section aria-labelledby="merchant-offers" className="mt-10">
+            <h2 id="merchant-offers" className="mb-5 text-2xl font-bold text-[var(--text)]">
+              Offers
+            </h2>
+            {cards.length === 0 && merchant.vouchers.length === 0 ? (
+              <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
+                <Gift className="mx-auto mb-3 h-8 w-8 text-[var(--text-faint)]" aria-hidden="true" />
+                <p className="font-semibold text-[var(--text)]">No offers right now</p>
+                <p className="mt-1 text-sm text-[var(--text-muted)]">New offers from {displayName} will appear here.</p>
+                <WarmButton asChild variant="outline" size="sm" className="mt-4">
+                  <Link href="/campaigns">Browse other offers</Link>
+                </WarmButton>
+              </WarmCard>
+            ) : (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {cards.map((card) => (
+                  <CampaignCard key={card.id} campaign={card} />
+                ))}
+                {merchant.vouchers.map((voucher) => (
+                  <Link
+                    key={voucher.id}
+                    href={`/v/${voucher.id}`}
+                    className="group rounded-[18px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
+                  >
+                    <WarmCard padding="lg" className="h-full bg-[var(--surface)] transition-shadow group-hover:shadow-warm">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="line-clamp-2 font-semibold text-[var(--text)]">
+                          {voucherHeadline(voucher) || voucher.campaign?.name || describeVoucherValue(voucher)}
+                        </h3>
+                        <Badge variant="outline" className="shrink-0">{voucherTypeLabel(voucher.type)}</Badge>
+                      </div>
+                      <p className="mt-3 text-2xl font-bold text-[var(--primary)]">{describeVoucherValue(voucher)}</p>
+                      <p className="mt-2 text-xs text-[var(--text-muted)]">Valid until {formatDisplayDate(voucher.validTo)}</p>
+                    </WarmCard>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </section>
+        </div>
+      </div>
+    </HubShell>
+  );
+}
+
+function initials(name: string): string {
+  const parts = name.split(/\s+/).filter(Boolean);
+  return ((parts[0]?.[0] ?? '') + (parts[1]?.[0] ?? '')).toUpperCase() || '?';
 }
