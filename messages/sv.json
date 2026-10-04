@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Prenumerationslådor",
     "pricing": "Prisregler",
     "webhooks": "Webhooks",
-    "apiKeys": "API-nycklar"
+    "apiKeys": "API-nycklar",
+    "marketplace": "Marknadsplats",
+    "openMenu": "Öppna meny",
+    "closeMenu": "Stäng meny",
+    "expandSidebar": "Expandera sidofältet",
+    "collapseSidebar": "Fäll ihop sidofältet",
+    "sectionShop": "Handla",
+    "sectionRewards": "Belöningar",
+    "sectionAccount": "Konto",
+    "mainNavigation": "Huvudnavigering",
+    "quickNavigation": "Snabbnavigering",
+    "logoutFailed": "Det gick inte att logga ut. Försök igen."
   },
   "voucher": {
     "title": "Kupong",
@@ -184,7 +195,11 @@
     "creditApplied": "Tillämpad kredit",
     "finalTotal": "Totalt",
     "pageDescription": "Följ dina tillgängliga och låsta krediter.",
-    "noMerchantWallets": "Inga handlarplånböcker ännu."
+    "noMerchantWallets": "Inga handlarplånböcker ännu.",
+    "noCreditYet": "Ingen kredit ännu",
+    "noCreditYetBody": "Du tjänar kredit när en vän löser in en kupong som du har delat. Den visas här för varje handlare.",
+    "shareToEarn": "Dela en kupong",
+    "findVoucherToShare": "Hitta en kupong att dela"
   },
   "redemption": {
     "title": "Inlösningar",
@@ -244,7 +259,12 @@
     "merchantLabel": "Handlare",
     "voucherLabel": "Kupong",
     "linkField": "Länk",
-    "codeField": "Kod"
+    "codeField": "Kod",
+    "linkCopied": "Länken har kopierats",
+    "howItWorksTitle": "Så fungerar rekommendationer",
+    "howItWorksBody": "Öppna en kupong och tryck på Dela. Du får en personlig länk till kupongen. När en vän löser in den tjänar du kredit hos handlaren.",
+    "findVoucher": "Hitta en kupong att dela",
+    "linkForVoucher": "Rekommendationslänk för {voucher}"
   },
   "analytics": {
     "title": "Analys",
@@ -516,7 +536,9 @@
     "viewVouchers": "Visa kuponger",
     "redeemed": "Inlöst",
     "friendLabel": "Vän",
-    "voucherLabel": "Kupong"
+    "voucherLabel": "Kupong",
+    "offersLinkTitle": "Länk till aktuella erbjudanden",
+    "offersLinkDescription": "Skicka vänner till alla aktuella erbjudanden på GiftHub. Den här länken ger ingen kredit; för att tjäna kredit delar du en specifik kupong från dess sida."
   },
   "billing": {
     "upgradeRequired": "Uppgradering krävs",
@@ -618,14 +640,34 @@
     "inApp": "I appen",
     "pushBeta": "Push (beta)",
     "saving": "Sparar...",
-    "savePreferences": "Spara inställningar"
+    "savePreferences": "Spara inställningar",
+    "noPreferencesTitle": "Inget att ställa in ännu",
+    "noPreferencesBody": "Notisinställningar hanteras per handlare. Du har inga handlare med notisinställningar ännu.",
+    "saved": "Inställningarna har sparats",
+    "saveFailed": "Det gick inte att spara dina inställningar. Försök igen.",
+    "markAllReadFailed": "Det gick inte att markera notiserna som lästa. Försök igen.",
+    "emptyHint": "Uppdateringar om dina kuponger och erbjudanden visas här.",
+    "browseOffers": "Bläddra bland erbjudanden"
   },
   "settingsPage": {
     "description": "Hantera dina kontoinställningar.",
     "joined": "Gick med",
     "recently": "nyligen",
     "accountAccessTitle": "Kontoåtkomst",
-    "accountAccessDescription": "Säkra ditt konto och hantera åtkomst."
+    "accountAccessDescription": "Säkra ditt konto och hantera åtkomst.",
+    "pushDescription": "Få notiser på den här enheten, även när GiftHub inte är öppet.",
+    "changePasswordTitle": "Byt lösenord",
+    "changePasswordDescription": "Uppdatera lösenordet för ditt konto.",
+    "setPasswordTitle": "Ange ett lösenord",
+    "setPasswordDescription": "Ange ett lösenord för att logga in med din e-postadress och ditt lösenord.",
+    "twoFactorTitle": "Tvåfaktorsautentisering",
+    "twoFactorDescription": "Lägg till ett extra säkerhetslager med en autentiseringsapp eller en passkey.",
+    "twoFactorManage": "Hantera säkerhet",
+    "sessionsTitle": "Aktiva sessioner",
+    "sessionsDescription": "Se var ditt konto är inloggat.",
+    "sessionsView": "Visa sessioner",
+    "deleteTitle": "Radera konto",
+    "deleteDescription": "Radera ditt konto permanent och anonymisera dina uppgifter. Det går inte att ångra."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,217 @@
     "accountInformation": "Kontoinformation",
     "emailPreferences": "E-postinställningar",
     "appSettings": "Appinställningar"
+  },
+  "dashboard": {
+    "roleShopper": "Kund",
+    "roleAdmin": "Administratör",
+    "roleStaff": "Personal",
+    "rolePlatformAdmin": "Plattformsadministratör",
+    "availableCredit": "Tillgänglig kredit",
+    "pendingCredit": "{amount} väntande",
+    "creditExplainer": "Kredit som du tjänar när vänner löser in kuponger som du har delat. Du kan använda den hos handlaren som utfärdade den.",
+    "viewCreditDetails": "Visa kreditinformation",
+    "successfulReferrals": "Lyckade rekommendationer",
+    "checkInPoints": "Incheckningspoäng",
+    "shareTitle": "Dela en kupong, tjäna kredit",
+    "shareDescription": "Öppna valfri kupong och tryck på Dela för att få din personliga länk. När en vän löser in den tjänar du kredit.",
+    "openShareCenter": "Öppna delningscentret",
+    "sharedSummary": "Delade kuponger: {count} · Inlösta: {redeemed}",
+    "achievementsTitle": "Prestationer",
+    "badgesEarned": "Intjänade märken: {earned} av {total}",
+    "viewAchievements": "Visa prestationer",
+    "availableOffers": "Tillgängliga erbjudanden",
+    "browseAll": "Visa alla",
+    "noActiveOffers": "Inga erbjudanden är aktiva just nu. Titta in igen snart.",
+    "validUntil": "Giltig till {date}",
+    "recentActivity": "Senaste aktivitet",
+    "noRecentActivity": "Ingen aktivitet ännu.",
+    "creditFrom": "Kredit från {merchant}",
+    "referralAt": "Rekommendation · {merchant}",
+    "creditStatus": {
+      "locked": "väntande",
+      "available": "tillgänglig",
+      "used": "använd",
+      "expired": "utgången",
+      "reversed": "återförd"
+    },
+    "referralStatus": {
+      "created": "Länk skapad",
+      "opened": "Öppnad",
+      "redeemed": "Inlöst",
+      "expired": "Utgången",
+      "blocked": "Blockerad"
+    },
+    "myMerchants": "Mina handlare",
+    "merchantDashboard": "Handlarpanel",
+    "sellTitle": "Sälj på GiftHub",
+    "sellDescription": "Vill du erbjuda kuponger till dina kunder? Kontakta oss så hjälper vi dig att skapa ett handlarkonto.",
+    "contactUs": "Kontakta oss",
+    "exploreVouchers": "Utforska kuponger"
+  },
+  "wishlist": {
+    "title": "Min önskelista",
+    "emptyTitle": "Din önskelista är tom",
+    "emptyBody": "Spara kuponger, handlare och kampanjer du gillar så hittar du dem här senare.",
+    "browseOffers": "Bläddra bland erbjudanden"
+  },
+  "push": {
+    "enable": "Aktivera push-notiser",
+    "enabled": "Push-notiser är på",
+    "enabledToast": "Push-notiser har aktiverats",
+    "disable": "Stäng av",
+    "disabledToast": "Push-notiser har stängts av",
+    "enableFailed": "Det gick inte att aktivera push-notiser. Försök igen.",
+    "disableFailed": "Det gick inte att stänga av push-notiser. Försök igen.",
+    "unsupported": "Den här webbläsaren har inte stöd för push-notiser.",
+    "blocked": "Notiser är blockerade. Tillåt dem i webbläsarens inställningar för att aktivera dem."
+  },
+  "sessions": {
+    "title": "Aktiva sessioner",
+    "description": "Se var ditt konto är inloggat.",
+    "backToSettings": "Tillbaka till inställningar",
+    "deviceOn": "{browser} på {os}",
+    "unknownDevice": "Okänd enhet",
+    "thisDevice": "Den här enheten",
+    "signedInHere": "Du är inloggad här just nu.",
+    "otherDevicesTitle": "Andra enheter",
+    "otherDevicesNone": "Vi kan inte visa andra enheter där du kan vara inloggad. Om du märker något ovanligt bör du byta lösenord och aktivera tvåfaktorsautentisering.",
+    "securitySettings": "Säkerhetsinställningar",
+    "lastActive": "Senast aktiv {time}",
+    "logout": "Logga ut",
+    "logoutAll": "Logga ut överallt annars",
+    "logoutAllBody": "Avsluta alla sessioner på andra enheter.",
+    "loadFailed": "Det gick inte att läsa in dina sessioner.",
+    "revokeFailed": "Det gick inte att avsluta sessionen. Försök igen.",
+    "revoked": "Sessionen har avslutats.",
+    "revokedAll": "Sessioner på andra enheter har avslutats."
+  },
+  "achievements": {
+    "title": "Prestationer",
+    "checkIn": "Checka in för i dag",
+    "checkingIn": "Checkar in…",
+    "checkedInToday": "Incheckad i dag",
+    "checkInFailed": "Incheckningen misslyckades. Försök igen.",
+    "checkInSaved": "Incheckningen har sparats",
+    "newBadge": "Nytt märke: {name}",
+    "checkInPoints": "Incheckningspoäng",
+    "level": "Nivå",
+    "levelValue": "Nivå {level}",
+    "levelProgress": "Framsteg mot nästa nivå",
+    "badgesLabel": "Märken",
+    "noBadgesYet": "Inga märken intjänade ännu.",
+    "earnedOn": "Intjänat {date}",
+    "locked": "Inte intjänat ännu",
+    "howToEarn": "Så tjänar du poäng",
+    "earnRuleCheckIn": "Checka in en gång om dagen",
+    "pointsShort": "+{points} p",
+    "pointsExplainer": "Poäng och nivåer visar hur aktiv du är. De kan inte bytas mot pengar eller kuponger.",
+    "currentStreak": "Nuvarande svit (dagar)",
+    "longestStreak": "Längsta svit (dagar)",
+    "milestone": "Milstolpe för sviten uppnådd!",
+    "badges": {
+      "first_purchase": {
+        "name": "Första köpet",
+        "description": "Köpte din första kupong"
+      },
+      "first_redemption": {
+        "name": "Första inlösen",
+        "description": "Löste in din första kupong"
+      },
+      "5_referrals": {
+        "name": "Kontaktskapare",
+        "description": "Delade 5 kuponger med vänner"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "Delade 10 kuponger med vänner"
+      },
+      "streak_7": {
+        "name": "Veckans krigare",
+        "description": "Checkade in 7 dagar i rad"
+      },
+      "streak_30": {
+        "name": "Månadens mästare",
+        "description": "Checkade in 30 dagar i rad"
+      },
+      "review_writer": {
+        "name": "Recensent",
+        "description": "Publicerade din första recension"
+      },
+      "big_spender": {
+        "name": "Storhandlare",
+        "description": "Har spenderat över 10 000 på kuponger totalt"
+      },
+      "early_adopter": {
+        "name": "Tidig användare",
+        "description": "Gick med i GiftHub före 2028"
+      },
+      "social_sharer": {
+        "name": "Social delare",
+        "description": "Delade en kupong i sociala medier"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Lojalitet",
+    "notActiveTitle": "Lojalitetsnivåer är inte tillgängliga ännu",
+    "notActiveBody": "Köp ger ännu inga lojalitetspoäng och inga nivårabatter eller förmåner tillämpas i kassan, så det finns inga nivåer att visa här.",
+    "earnTodayTitle": "Det här kan du tjäna i dag",
+    "earnCreditTitle": "Rekommendationskredit",
+    "earnCreditBody": "Dela en kupong. När en vän löser in den får du kredit att använda hos den handlaren.",
+    "earnCreditLink": "Visa din kredit",
+    "earnPointsTitle": "Incheckningspoäng",
+    "earnPointsBody": "Checka in varje dag för att bygga en svit, gå upp i nivå och låsa upp märken.",
+    "earnPointsLink": "Visa prestationer",
+    "historyTitle": "Poänghistorik",
+    "pointsBalance": "Saldo: {points} poäng"
+  },
+  "welcome": {
+    "greeting": "Hej {name}!",
+    "progress": "Introduktionsförlopp",
+    "setUpSecurity": "Konfigurera 2FA eller en passkey",
+    "skip": "Hoppa över",
+    "next": "Nästa",
+    "getStarted": "Kom igång",
+    "steps": {
+      "welcome": {
+        "title": "Välkommen till GiftHub!",
+        "subtitle": "Här är en snabb genomgång av vad du kan göra."
+      },
+      "discover": {
+        "title": "Upptäck erbjudanden",
+        "subtitle": "Bläddra bland kuponger, presentkort och evenemang från lokala handlare.",
+        "features": {
+          "vouchers": "Digitala kuponger",
+          "giftCards": "Presentkort till vänner och familj",
+          "nearby": "Erbjudanden nära dig"
+        }
+      },
+      "wallet": {
+        "title": "Dina kuponger på ett ställe",
+        "subtitle": "Allt du köper sparas på ditt konto.",
+        "features": {
+          "qr": "QR-koder för snabb inlösen i butik",
+          "expiry": "Påminnelser via e-post innan en kupong går ut"
+        }
+      },
+      "rewards": {
+        "title": "Tjäna belöningar",
+        "subtitle": "Dela kuponger med vänner och tjäna kredit när de löser in dem.",
+        "features": {
+          "referralCredit": "Handlarkredit för lyckade rekommendationer",
+          "checkIns": "Dagliga incheckningar och sviter",
+          "badges": "Märken att låsa upp"
+        }
+      },
+      "notifications": {
+        "title": "Håll dig uppdaterad",
+        "subtitle": "Aktivera notiser på den här enheten."
+      },
+      "security": {
+        "title": "Skydda ditt konto",
+        "subtitle": "Lägg till en passkey eller tvåfaktorsautentisering."
+      }
+    }
   }
 }
