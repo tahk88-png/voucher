@@ -3,7 +3,7 @@ import { logger } from '@/lib/logger';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
-import { SignOutButton } from '@/app/(user)/app/_components/sign-out-button';
+import { SignOutButton } from '@/components/sign-out-button';
 import { getTranslations } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';

@@ -40,6 +40,8 @@ interface PageBuilderClientProps {
   merchantSlug: string
   merchantName: string
   initialPages: PageBuilderConfig[]
+  /** False when no AI provider is configured: the AI tools are hidden. */
+  aiEnabled: boolean
 }
 
 const processOptions = [
@@ -69,6 +71,7 @@ export default function PageBuilderClient({
   merchantSlug,
   merchantName,
   initialPages,
+  aiEnabled,
 }: PageBuilderClientProps) {
   const [pages, setPages] = useState<PageBuilderConfig[]>(initialPages)
   const [activeType, setActiveType] = useState<PageBuilderType>("store")
@@ -279,14 +282,16 @@ export default function PageBuilderClient({
                         Drag to reorder, expand to configure, or preview your layout.
                       </p>
                     </div>
-                    <WarmButton variant="outline" onClick={handleGenerate} isLoading={isGenerating}>
-                      <Sparkles className="h-4 w-4 mr-2" />
-                      Vibe generate
-                    </WarmButton>
+                    {aiEnabled && (
+                      <WarmButton variant="outline" onClick={handleGenerate} isLoading={isGenerating}>
+                        <Sparkles className="h-4 w-4 mr-2" />
+                        Suggest a layout
+                      </WarmButton>
+                    )}
                   </div>
                   {vibeUsage && (
                     <p className="text-xs text-[var(--text-faint)] mb-4">
-                      Vibe uses left: {vibeUsage.remaining}/{vibeUsage.limit}
+                      AI layout suggestions left: {vibeUsage.remaining}/{vibeUsage.limit}
                     </p>
                   )}
                   <DragDropEditor
@@ -346,10 +351,11 @@ export default function PageBuilderClient({
                   </div>
                 </WarmCard>
 
+                {aiEnabled && (
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center gap-2 mb-3">
                     <Bot className="h-4 w-4 text-[var(--danger)]" />
-                  <h3 className="text-base font-semibold text-[var(--text)]">GPT process agent</h3>
+                  <h3 className="text-base font-semibold text-[var(--text)]">Launch checklist assistant</h3>
                 </div>
                 <p className="text-sm text-[var(--text-muted)] mb-4">
                   Generate action plans and operational checklists.
@@ -375,14 +381,15 @@ export default function PageBuilderClient({
                     variant="outline"
                     className="w-full mt-3"
                   >
-                    Run agent
+                    Create checklist
                   </WarmButton>
                   {agentUsage && (
                     <p className="text-xs text-[var(--text-faint)] mt-2">
-                      Agent uses left: {agentUsage.remaining}/{agentUsage.limit}
+                      Checklists left: {agentUsage.remaining}/{agentUsage.limit}
                     </p>
                   )}
                 </WarmCard>
+                )}
 
                 {agentResult && (
                   <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">

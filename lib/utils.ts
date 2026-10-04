@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Format currency amount (minor units to major units)
  */
-export function formatCurrency(amount: number, currency: string = 'USD'): string {
+export function formatCurrency(amount: number, currency: string = 'EUR'): string {
   const major = amount / 100;
   return new Intl.NumberFormat('en-US', {
     style: 'currency',

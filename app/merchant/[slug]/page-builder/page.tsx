@@ -51,14 +51,15 @@ export default async function PageBuilderPage({ params }: { params: Promise<{ sl
           role="status"
           className="mb-4 rounded-[var(--r-sm)] border border-l-4 border-[var(--border)] border-l-[color:var(--warning)] bg-[var(--surface)] p-3 text-sm text-[var(--text)]"
         >
-          AI suggestions aren&apos;t set up on this platform yet, so the automatic layout and assistant tools
-          below won&apos;t work. You can still edit your pages by hand.
+          AI suggestions aren&apos;t set up on this platform yet, so the automatic layout and checklist tools
+          are hidden. You can still build and edit your pages by hand.
         </p>
       )}
       <PageBuilderClient
         merchantSlug={merchant.slug}
         merchantName={merchant.name}
         initialPages={merged}
+        aiEnabled={isAiConfigured()}
       />
     </div>
   )

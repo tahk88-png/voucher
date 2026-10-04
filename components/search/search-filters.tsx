@@ -4,7 +4,7 @@ import { WarmCard } from "@/components/warm-card";
 import { WarmButton } from "@/components/warm-button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { campaignCategories } from "@/lib/campaign-categories";
+import { allCampaignCategories, campaignCategories } from "@/lib/campaign-categories";
 import { SlidersHorizontal, X } from "lucide-react";
 
 export interface SearchFilters {
@@ -35,17 +35,10 @@ const SORT_OPTIONS = [
   { value: "expiring", label: "Expiring soon" },
 ];
 
+// Same ids and labels as /campaigns and the landing page.
 const ALL_CATEGORIES = [
   { id: "", label: "All categories" },
-  { id: "cafe", label: "Cafe & Coffee" },
-  { id: "beauty", label: "Beauty & Spa" },
-  { id: "fitness", label: "Fitness & Sport" },
-  { id: "events", label: "Events" },
-  { id: "workshops", label: "Workshops" },
-  { id: "family", label: "Family & Kids" },
-  { id: "travel", label: "Travel & Hotels" },
-  { id: "outdoor", label: "Outdoor & Adventure" },
-  { id: "other", label: "Other" },
+  ...allCampaignCategories.map((category) => ({ id: category.id, label: category.label })),
 ];
 
 export function SearchFiltersPanel({
@@ -153,6 +146,7 @@ export function SearchFiltersPanel({
           </div>
           <Input
             type="range"
+            aria-label="Minimum discount"
             min={0}
             max={100}
             step={5}
@@ -177,12 +171,13 @@ export function SearchFiltersPanel({
             </Label>
             {filters.maxPrice > 0 && (
               <span className="text-xs font-semibold text-[var(--primary)]">
-                {(filters.maxPrice / 100).toFixed(0)} EUR
+                €{(filters.maxPrice / 100).toFixed(0)}
               </span>
             )}
           </div>
           <Input
             type="range"
+            aria-label="Maximum price in euros"
             min={0}
             max={10000}
             step={500}
@@ -194,8 +189,8 @@ export function SearchFiltersPanel({
           />
           <div className="flex justify-between text-xs text-[var(--text-faint)]">
             <span>Any</span>
-            <span>50 EUR</span>
-            <span>100 EUR</span>
+            <span>€50</span>
+            <span>€100</span>
           </div>
         </div>
 

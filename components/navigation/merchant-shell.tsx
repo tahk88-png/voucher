@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { SignOutButton } from "@/components/sign-out-button"
 import { usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
 import {
@@ -15,7 +16,6 @@ import {
   LayoutTemplate,
   Menu,
   X,
-  LogOut,
   ChevronLeft,
   ChevronRight,
   TrendingUp,
@@ -255,7 +255,7 @@ export default function MerchantShell({
                           className={cn(
                             "w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium transition-all",
                             isActive(href)
-                              ? "gradient-brand text-[var(--text)] shadow-warm"
+                              ? "gradient-brand text-[var(--primary-foreground)] shadow-warm"
                               : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]"
                           )}
                         >
@@ -271,13 +271,7 @@ export default function MerchantShell({
                     })}
                   </div>
                 ))}
-                <Link
-                  href="/api/auth/signout?callbackUrl=/"
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium text-[var(--danger)] hover:bg-[#FEE2E2] transition-all"
-                >
-                  <LogOut className="h-5 w-5" />
-                  {tNav("logout")}
-                </Link>
+                <SignOutButton className="w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium text-[var(--danger)] hover:bg-[#FEE2E2] transition-all" />
               </div>
             </div>
           </>
@@ -336,7 +330,7 @@ export default function MerchantShell({
                       className={cn(
                         "w-full flex items-center gap-3 px-4 py-2.5 rounded-[14px] font-medium transition-all relative group",
                         isActive(href)
-                          ? "gradient-brand text-[var(--text)] shadow-warm"
+                          ? "gradient-brand text-[var(--primary-foreground)] shadow-warm"
                           : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]",
                         collapsed && "justify-center"
                       )}
@@ -373,7 +367,7 @@ export default function MerchantShell({
               )}
             >
               <div className={cn("flex items-center gap-3", collapsed ? "justify-center" : "mb-1")}>
-                <div className="w-10 h-10 rounded-full gradient-brand flex items-center justify-center font-semibold text-[var(--text)] flex-shrink-0">
+                <div className="w-10 h-10 rounded-full gradient-brand flex items-center justify-center font-semibold text-[var(--primary-foreground)] flex-shrink-0">
                   {merchantName.slice(0, 2).toUpperCase()}
                 </div>
                 {!collapsed && (
@@ -384,18 +378,13 @@ export default function MerchantShell({
                 )}
               </div>
             </div>
-            <WarmButton
+            <SignOutButton
               variant="outline"
               size="sm"
               fullWidth
-              asChild
+              iconOnly={collapsed}
               className={collapsed ? "px-0 justify-center" : ""}
-            >
-              <Link href="/api/auth/signout?callbackUrl=/">
-                <LogOut className={cn("h-4 w-4", collapsed ? "" : "mr-2")} />
-                {!collapsed && tNav("logout")}
-              </Link>
-            </WarmButton>
+            />
           </div>
         </div>
       </aside>
@@ -435,7 +424,7 @@ export default function MerchantShell({
                 className={cn(
                   "flex flex-col items-center justify-center gap-1 h-12 px-1 rounded-[12px] transition-all min-w-0",
                   isActive(href)
-                    ? "gradient-brand text-[var(--text)]"
+                    ? "gradient-brand text-[var(--primary-foreground)]"
                     : "text-[var(--text-faint)] hover:bg-[var(--surface-dim)]"
                 )}
               >

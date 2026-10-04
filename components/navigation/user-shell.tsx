@@ -11,7 +11,7 @@ import { CountrySelector } from "@/components/navigation/country-selector"
 import { LanguageSelector } from "@/components/navigation/language-selector"
 import { useCountry } from "@/components/contexts/country-context"
 import { RoleSwitcher, type RoleSwitcherMerchant, type RoleSwitcherOrg } from "@/components/navigation/role-switcher"
-import { SignOutButton } from "@/app/(user)/app/_components/sign-out-button"
+import { SignOutButton } from "@/components/sign-out-button"
 import {
   userNavItems,
   isNavItemActive,
@@ -108,7 +108,7 @@ export default function UserShell({
         title={collapsed ? label(item.labelKey) : undefined}
         className={cn(
           "w-full flex items-center gap-3 px-4 py-2.5 rounded-[14px] font-medium transition-all relative group",
-          active ? "gradient-brand text-[var(--text)] shadow-warm" : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]",
+          active ? "gradient-brand text-[var(--primary-foreground)] shadow-warm" : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]",
           collapsed && "justify-center"
         )}
       >
@@ -139,7 +139,7 @@ export default function UserShell({
         onClick={() => setMobileMenuOpen(false)}
         className={cn(
           "w-full flex items-center gap-3 px-4 py-3 rounded-[12px] font-medium transition-all",
-          active ? "gradient-brand text-[var(--text)] shadow-warm" : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]"
+          active ? "gradient-brand text-[var(--primary-foreground)] shadow-warm" : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)]"
         )}
       >
         <span className="relative flex-shrink-0">
@@ -276,7 +276,7 @@ export default function UserShell({
 
             <div className={cn("flex items-center gap-3 pt-3", collapsed && "justify-center")}>
               <div
-                className="w-9 h-9 rounded-full gradient-brand flex items-center justify-center text-sm font-semibold text-[var(--text)] flex-shrink-0"
+                className="w-9 h-9 rounded-full gradient-brand flex items-center justify-center text-sm font-semibold text-[var(--primary-foreground)] flex-shrink-0"
                 aria-hidden="true"
               >
                 {userLabel.slice(0, 2).toUpperCase()}
@@ -339,7 +339,7 @@ export default function UserShell({
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "flex flex-col items-center justify-center gap-1 h-14 px-1 rounded-[12px] transition-all min-w-0",
-                  active ? "gradient-brand text-[var(--text)]" : "text-[var(--text-faint)] hover:bg-[var(--surface-dim)]"
+                  active ? "gradient-brand text-[var(--primary-foreground)]" : "text-[var(--text-faint)] hover:bg-[var(--surface-dim)]"
                 )}
               >
                 <Icon className="h-5 w-5 shrink-0" aria-hidden="true" />

@@ -1,3 +1,4 @@
+import { safeParseJson } from "@/lib/utils"
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
@@ -30,10 +31,10 @@ export default async function VoucherDetailPage({ params }: { params: Promise<{ 
       voucher={{
         id: voucher.id,
         title:
-          (voucher.designJson as { headline?: string } | null)?.headline ||
+          safeParseJson<{ headline?: string }>(voucher.designJson)?.headline ||
           voucher.type ||
           "Voucher",
-        description: (voucher.designJson as { description?: string } | null)?.description || null,
+        description: safeParseJson<{ description?: string }>(voucher.designJson)?.description || null,
         expiryDate: voucher.validTo.toISOString(),
         status,
         code,

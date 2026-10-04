@@ -67,7 +67,7 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
           {merchant.brandLogoUrl ? (
             <Image src={merchant.brandLogoUrl} alt={merchant.name} width={64} height={64} className="rounded-2xl object-cover" />
           ) : (
-            <div className="w-16 h-16 rounded-2xl gradient-brand flex items-center justify-center text-2xl font-bold text-[var(--text)]">
+            <div className="w-16 h-16 rounded-2xl gradient-brand flex items-center justify-center text-2xl font-bold text-[var(--primary-foreground)]">
               {merchant.name.slice(0, 2).toUpperCase()}
             </div>
           )}

@@ -1,3 +1,4 @@
+import { safeParseJson } from "@/lib/utils"
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
@@ -28,7 +29,7 @@ export default async function SharePage() {
     id: referral.id,
     merchantName: referral.merchant.name,
     voucherTitle:
-      (referral.voucher?.designJson as { headline?: string } | null)?.headline ||
+      safeParseJson<{ headline?: string }>(referral.voucher?.designJson)?.headline ||
       referral.voucher?.type ||
       tShare("voucherLabel"),
     createdAt: referral.createdAt.toISOString(),

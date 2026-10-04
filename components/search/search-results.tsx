@@ -1,6 +1,7 @@
 "use client";
 
 import { WarmCard } from "@/components/warm-card";
+import { formatCurrency } from "@/lib/utils";
 import { WarmButton } from "@/components/warm-button";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Search, X, Ticket, Clock, Zap } from "lucide-react";
@@ -54,9 +55,9 @@ function formatDiscount(type: string, value: number, currency: string): string {
     case "percentage":
       return `${(value / 100).toFixed(0)}% off`;
     case "fixed_amount":
-      return `${(value / 100).toFixed(2)} ${currency} off`;
+      return `${formatCurrency(value, currency)} off`;
     case "credit_amount":
-      return `${(value / 100).toFixed(2)} ${currency} credit`;
+      return `${formatCurrency(value, currency)} credit`;
     default:
       return `${value}`;
   }
@@ -117,7 +118,7 @@ export function SearchResults({
   if (filters.maxPrice > 0) {
     activeFilterChips.push({
       key: "maxPrice",
-      label: `Max ${(filters.maxPrice / 100).toFixed(0)} EUR`,
+      label: `Max €${(filters.maxPrice / 100).toFixed(0)}`,
     });
   }
   if (filters.sort !== "newest") {
@@ -183,9 +184,8 @@ export function SearchResults({
             <Link
               key={result.id}
               href={
-                result.campaign
-                  ? `/m/${result.merchant.slug}/campaigns/${result.campaign.id}`
-                  : `/m/${result.merchant.slug}`
+                // /m/<slug>/campaigns/<id> does not exist; the voucher page does.
+                `/v/${result.id}`
               }
               className="block"
             >
@@ -256,7 +256,7 @@ export function SearchResults({
                         <span className="font-semibold text-[var(--text)]">
                           {result.campaign.price === 0
                             ? "Free"
-                            : `${(result.campaign.price / 100).toFixed(2)} EUR`}
+                            : formatCurrency(result.campaign.price, result.currency)}
                         </span>
                       )}
                   </div>

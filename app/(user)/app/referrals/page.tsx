@@ -1,3 +1,4 @@
+import { safeParseJson } from "@/lib/utils"
 import { pageMetadata } from '@/lib/seo/page-metadata';
 export const metadata = pageMetadata({ title: 'My Referrals', noIndex: true });
 
@@ -64,7 +65,7 @@ export default async function ReferralsPage() {
         id: referral.id,
         merchantName: referral.merchant?.name || tReferral("merchantLabel"),
         voucherTitle:
-          (referral.voucher?.designJson as { headline?: string } | null)?.headline ||
+          safeParseJson<{ headline?: string }>(referral.voucher?.designJson)?.headline ||
           referral.voucher?.type ||
           tReferral("voucherLabel"),
         status: referral.status,

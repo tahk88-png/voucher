@@ -51,7 +51,7 @@ export function MerchantSidebar() {
               className={cn(
                 "flex items-center gap-3 px-4 py-3 rounded-[14px] text-sm font-medium transition-all",
                 isActive
-                  ? "gradient-brand text-[var(--text)] shadow-warm"
+                  ? "gradient-brand text-[var(--primary-foreground)] shadow-warm"
                   : "text-[var(--text-muted)] hover:bg-[var(--surface-dim)] hover:text-[var(--text)]"
               )}
             >

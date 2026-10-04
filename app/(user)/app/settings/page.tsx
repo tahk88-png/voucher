@@ -10,7 +10,7 @@ import PushSubscribeButton from '@/components/push-subscribe-button';
 import ChangePasswordForm from '@/components/change-password-form';
 import DeleteAccountDialog from '@/components/delete-account-dialog';
 import EditProfileForm from '@/components/edit-profile-form';
-import { SignOutButton } from '../_components/sign-out-button';
+import { SignOutButton } from '@/components/sign-out-button';
 import { isWebPushConfigured } from '../_components/push-config';
 
 function SectionHeader({ icon: Icon, title, description, danger = false }: {

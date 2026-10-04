@@ -83,7 +83,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
                     onClick={() => handleLanguageSelect(lang.code)}
                     className={`w-full flex items-center justify-between gap-3 px-3 py-2 rounded-[10px] transition-all duration-150 ease-smooth ${
                       language === lang.code
-                        ? "gradient-brand text-[var(--text)]"
+                        ? "gradient-brand text-[var(--primary-foreground)]"
                         : "hover:bg-[var(--bg)] text-[var(--text-muted)]"
                     }`}
                   >
@@ -144,7 +144,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
                   onClick={() => handleLanguageSelect(lang.code)}
                   className={`w-full flex items-center justify-between gap-3 px-4 py-2.5 rounded-[12px] transition-all duration-150 ease-smooth ${
                     language === lang.code
-                      ? "gradient-brand text-[var(--text)] shadow-warm"
+                      ? "gradient-brand text-[var(--primary-foreground)] shadow-warm"
                       : "hover:bg-[var(--bg)] text-[var(--text-muted)]"
                   }`}
                 >
