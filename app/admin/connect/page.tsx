@@ -69,13 +69,13 @@ export default async function AdminConnectPage() {
     <div className="p-4 sm:p-6">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">
-          Stripe Connect oversight
+          Merchant payouts (Stripe Connect)
         </h1>
         <p className="text-sm text-[var(--text-muted)] mb-6">
-          Per-merchant onboarding state. The figures on this page come from
-          cached columns on the Merchant model; Stripe is authoritative and
-          updates flow through the <code className="font-mono">account.updated</code>{' '}
-          webhook.
+          Where each merchant is in setting up payouts. These figures are our
+          last saved copy of each merchant&apos;s Stripe status and update
+          automatically when Stripe notifies us of a change. If something looks
+          out of date, Stripe&apos;s own dashboard is the source of truth.
         </p>
 
         <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">

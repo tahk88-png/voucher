@@ -45,7 +45,7 @@ export default async function PageBuilderPage({ params }: { params: Promise<{ sl
   })
 
   return (
-    <div className="p-4 sm:p-6 min-w-0 overflow-x-hidden">
+    <div className="p-4 sm:p-6 min-w-0">
       {!isAiConfigured() && (
         <p
           role="status"

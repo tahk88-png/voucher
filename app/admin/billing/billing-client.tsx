@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { CreditCard, RefreshCw, AlertCircle, CheckCircle, Clock, DollarSign } from 'lucide-react';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
-import { Input } from '@/components/ui/input';
 
 type Tab = 'subscriptions' | 'failed' | 'refunds' | 'holds';
 
@@ -57,7 +56,17 @@ const TAB_LABELS: Record<Tab, string> = {
   holds: 'Payout Holds',
 };
 
+const SUBSCRIPTION_STATUS_LABELS: Record<string, string> = {
+  trial: 'Free trial',
+  active: 'Active',
+  grace: 'Payment overdue (grace period)',
+  locked: 'Locked',
+};
+
 const STATUS_COLORS: Record<string, string> = {
+  trial: 'bg-blue-100 text-blue-700',
+  grace: 'bg-orange-100 text-orange-700',
+  locked: 'bg-gray-100 text-gray-600',
   active: 'bg-green-100 text-green-700',
   past_due: 'bg-red-100 text-red-700',
   canceled: 'bg-gray-100 text-gray-500',
@@ -77,7 +86,6 @@ export default function BillingClient() {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
-  const [refundReason, setRefundReason] = useState('');
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -130,27 +138,11 @@ export default function BillingClient() {
     }
   }
 
-  async function issueRefund(id: string) {
-    if (!refundReason.trim()) return;
-    setActionLoading(id);
-    try {
-      await fetch('/api/admin/billing/refunds', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subscriptionId: id, reason: refundReason }),
-      });
-      setRefundReason('');
-      fetchData();
-    } finally {
-      setActionLoading(null);
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-[var(--bg)] p-6">
+    <div className="min-h-screen bg-[var(--bg)] p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <Link href="/admin/control-panel">
               <WarmButton variant="ghost" size="sm">← Back</WarmButton>
@@ -164,7 +156,7 @@ export default function BillingClient() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 border-b border-[var(--border)]">
+        <div className="flex gap-1 border-b border-[var(--border)] overflow-x-auto">
           {(Object.keys(TAB_LABELS) as Tab[]).map(t => (
             <button
               key={t}
@@ -238,29 +230,28 @@ export default function BillingClient() {
                     <tr key={item.id} className="hover:bg-[var(--surface)] transition-colors">
                       {tab === 'subscriptions' && (
                         <>
-                          <td className="px-4 py-3 font-medium text-[var(--text-primary)]">{item.merchantName ?? item.merchantId}</td>
-                          <td className="px-4 py-3 text-[var(--text-secondary)] capitalize">{item.plan}</td>
+                          <td className="px-4 py-3 font-medium text-[var(--text)]">{item.merchantName ?? item.merchantId}</td>
+                          <td className="px-4 py-3 text-[var(--text-muted)]">{item.plan}</td>
                           <td className="px-4 py-3">
                             <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[item.status] ?? 'bg-gray-100 text-gray-600'}`}>
-                              {item.status}
+                              {SUBSCRIPTION_STATUS_LABELS[item.status] ?? item.status}
+                            </span>
+                            <span className="block text-[10px] text-[var(--text-muted)] mt-1">
+                              {item.source === 'stripe' ? 'Billed via Stripe' : 'No payment set up'}
                             </span>
                           </td>
-                          <td className="px-4 py-3 font-medium">{item.amount ? cents(item.amount) : '—'}</td>
-                          <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">
-                            {item.currentPeriodEnd ? new Date(item.currentPeriodEnd).toLocaleDateString('en-GB') : '—'}
+                          <td className="px-4 py-3 font-medium">{item.amount ? `${cents(item.amount)}/month` : '—'}</td>
+                          <td className="px-4 py-3 text-[var(--text-muted)] text-xs">
+                            {item.status === 'trial' && item.trialEndsAt
+                              ? `Trial ends ${new Date(item.trialEndsAt).toLocaleDateString('en-GB')}`
+                              : item.currentPeriodEnd
+                                ? new Date(item.currentPeriodEnd).toLocaleDateString('en-GB')
+                                : '—'}
                           </td>
-                          <td className="px-4 py-3">
-                            <div className="flex items-center gap-2">
-                              <Input
-                                value={refundReason}
-                                onChange={e => setRefundReason(e.target.value)}
-                                placeholder="Refund reason"
-                                className="text-xs h-8 w-36"
-                              />
-                              <WarmButton size="sm" variant="outline" onClick={() => issueRefund(item.id)} disabled={!refundReason.trim()}>
-                                Refund
-                              </WarmButton>
-                            </div>
+                          <td className="px-4 py-3 text-xs text-[var(--text-muted)]">
+                            {/* Refunds are issued per purchase (Refunds tab); the old
+                                per-subscription refund button posted a body the API rejects. */}
+                            —
                           </td>
                         </>
                       )}

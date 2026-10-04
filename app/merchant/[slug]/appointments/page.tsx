@@ -8,6 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CalendarCheck, Plus, Check, X, Clock } from 'lucide-react';
 import { showError } from '@/lib/toast-helpers';
+import { parseMoneyToMinor } from '@/lib/money-input';
+import { formatPrice } from '@/lib/currency-constants';
+import { useMerchantSettings } from '../_components/merchant-settings-context';
 
 interface Appointment {
   id: string;
@@ -29,11 +32,12 @@ export default function AppointmentsPage() {
   const [filter, setFilter] = useState('all');
   const [showForm, setShowForm] = useState(false);
   const [creating, setCreating] = useState(false);
+  const { defaultCurrency } = useMerchantSettings();
   const [form, setForm] = useState({
     serviceName: '',
     startTime: '',
     endTime: '',
-    priceCents: 0,
+    price: '', // typed in major units, e.g. 25 or 24,90
     notes: '',
   });
 
@@ -54,20 +58,32 @@ export default function AppointmentsPage() {
     e.preventDefault();
     // Guard against a double-click creating duplicate availability slots.
     if (creating) return;
+    const price = parseMoneyToMinor(form.price, defaultCurrency, 'Price');
+    if (!price.ok) {
+      showError(price.error);
+      return;
+    }
+    if (new Date(form.endTime).getTime() <= new Date(form.startTime).getTime()) {
+      showError('The end time must be after the start time.');
+      return;
+    }
     setCreating(true);
     try {
       const res = await fetch(`/api/merchant/${slug}/appointments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...form,
+          serviceName: form.serviceName,
+          notes: form.notes,
+          priceCents: price.value ?? 0,
+          currency: defaultCurrency,
           startTime: new Date(form.startTime).toISOString(),
           endTime: new Date(form.endTime).toISOString(),
         }),
       });
       if (res.ok) {
         setShowForm(false);
-        setForm({ serviceName: '', startTime: '', endTime: '', priceCents: 0, notes: '' });
+        setForm({ serviceName: '', startTime: '', endTime: '', price: '', notes: '' });
         fetchAppointments();
       } else {
         showError('Could not create the availability slot. Please try again.');
@@ -80,11 +96,16 @@ export default function AppointmentsPage() {
   }
 
   async function updateStatus(id: string, status: string) {
-    await fetch(`/api/merchant/${slug}/appointments/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status }),
-    });
+    try {
+      const res = await fetch(`/api/merchant/${slug}/appointments/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status }),
+      });
+      if (!res.ok) showError(`Couldn't update the appointment (error ${res.status}).`);
+    } catch {
+      showError("Couldn't reach the server. Check your connection and try again.");
+    }
     fetchAppointments();
   }
 
@@ -97,7 +118,7 @@ export default function AppointmentsPage() {
 
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px 16px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
         <div>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>
             <CalendarCheck style={{ display: 'inline', marginRight: 8 }} size={24} />
@@ -112,14 +133,14 @@ export default function AppointmentsPage() {
 
       {showForm && (
         <WarmCard style={{ marginBottom: 24, padding: 24 }}>
-          <form onSubmit={handleCreate} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <form onSubmit={handleCreate} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <Label>Service Name</Label>
               <Input value={form.serviceName} onChange={e => setForm(f => ({ ...f, serviceName: e.target.value }))} required />
             </div>
             <div>
-              <Label>Price (cents)</Label>
-              <Input type="number" value={form.priceCents} onChange={e => setForm(f => ({ ...f, priceCents: Number(e.target.value) }))} />
+              <Label>Price ({defaultCurrency}, leave empty if free)</Label>
+              <Input type="text" inputMode="decimal" placeholder="25.00" value={form.price} onChange={e => setForm(f => ({ ...f, price: e.target.value }))} />
             </div>
             <div>
               <Label>Start Time</Label>
@@ -129,11 +150,11 @@ export default function AppointmentsPage() {
               <Label>End Time</Label>
               <Input type="datetime-local" value={form.endTime} onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))} required />
             </div>
-            <div style={{ gridColumn: 'span 2' }}>
+            <div className="sm:col-span-2">
               <Label>Notes</Label>
               <Input value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
             </div>
-            <div style={{ gridColumn: 'span 2' }}>
+            <div className="sm:col-span-2">
               <WarmButton type="submit" disabled={creating} isLoading={creating}>
                 {creating ? 'Creating…' : 'Create Availability Slot'}
               </WarmButton>
@@ -142,7 +163,7 @@ export default function AppointmentsPage() {
         </WarmCard>
       )}
 
-      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
         {['all', 'pending', 'confirmed', 'cancelled', 'completed'].map(s => (
           <button key={s} onClick={() => setFilter(s)} style={{
             padding: '6px 14px', borderRadius: 8, fontSize: '0.875rem', fontWeight: 500, border: '1px solid var(--border)',
@@ -165,7 +186,7 @@ export default function AppointmentsPage() {
         <div style={{ display: 'grid', gap: 12 }}>
           {appointments.map(apt => (
             <WarmCard key={apt.id} style={{ padding: 16 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <h3 style={{ fontWeight: 600, color: 'var(--text)' }}>{apt.serviceName}</h3>
                   <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
@@ -173,19 +194,19 @@ export default function AppointmentsPage() {
                     {new Date(apt.startTime).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })} — {new Date(apt.endTime).toLocaleTimeString('en-GB')}
                   </p>
                   {apt.user && <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Booked by: {apt.user.name || apt.user.email}</p>}
-                  {apt.priceCents > 0 && <p style={{ fontSize: '0.875rem', fontWeight: 600 }}>{(apt.priceCents / 100).toFixed(2)} {apt.currency}</p>}
+                  {apt.priceCents > 0 && <p style={{ fontSize: '0.875rem', fontWeight: 600 }}>{formatPrice(apt.priceCents, (apt.currency || 'EUR').toUpperCase(), 'en-GB')}</p>}
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{
                     padding: '4px 10px', borderRadius: 999, fontSize: '0.75rem', fontWeight: 600,
                     background: `${statusColors[apt.status] || '#888'}22`, color: statusColors[apt.status] || '#888',
                   }}>
-                    {apt.status}
+                    {apt.status.charAt(0).toUpperCase() + apt.status.slice(1)}
                   </span>
                   {apt.status === 'pending' && (
                     <>
-                      <button onClick={() => updateStatus(apt.id, 'confirmed')} style={{ padding: 4, cursor: 'pointer', color: '#10b981', background: 'none', border: 'none' }}><Check size={18} /></button>
-                      <button onClick={() => updateStatus(apt.id, 'cancelled')} style={{ padding: 4, cursor: 'pointer', color: '#ef4444', background: 'none', border: 'none' }}><X size={18} /></button>
+                      <button aria-label="Confirm appointment" title="Confirm" onClick={() => updateStatus(apt.id, 'confirmed')} style={{ padding: 4, cursor: 'pointer', color: '#10b981', background: 'none', border: 'none' }}><Check size={18} /></button>
+                      <button aria-label="Cancel appointment" title="Cancel" onClick={() => updateStatus(apt.id, 'cancelled')} style={{ padding: 4, cursor: 'pointer', color: '#ef4444', background: 'none', border: 'none' }}><X size={18} /></button>
                     </>
                   )}
                 </div>

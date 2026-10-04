@@ -176,13 +176,13 @@ export default async function PayoutsSettingsPage({
               and hold it on Stripe&apos;s side.
             </li>
             <li>
-              On successful capture, Stripe transfers the net (sale price minus
-              our 5% fee) directly to your connected account via
-              <span className="font-mono"> transfer_data</span>.
+              When a payment goes through, Stripe sends the sale price minus our
+              5% fee straight to your payout account.
             </li>
             <li>
-              Stripe pays out to your bank on the cadence configured in your
-              Express dashboard (typically daily, with a 2-day rolling reserve).
+              Stripe then pays that money into your bank account on the schedule
+              you choose in your Stripe payout settings (usually daily, a couple
+              of days after the sale).
             </li>
             <li>
               Chargebacks and refunds net out of your next payout; the admin
