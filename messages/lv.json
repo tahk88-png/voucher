@@ -1463,7 +1463,1144 @@
       "referralRevenue": "Ieņēmumi no ieteikumiem",
       "estimatedRoi": "Aptuvenais ROI",
       "platformCost": "Platformas izmaksas",
-      "platformCostValue": "{plan}/mēn. plāns + {fees} komisijas ({percent}%) = <strong>{total}/mēn.</strong>"
+      "platformCostValue": "{plan}/mēn. plāns + {fees} komisijas ({percent}%) = <strong>{total}/mēn.</strong>",
+      "disclaimer": "Tikai ilustrācija, balstīta uz jūsu ievadītajām vērtībām, nevis prognoze."
+    },
+    "why": {
+      "title": "Kāpēc tirgotāji izvēlas GiftHub",
+      "body": "Paplašiniet klientu loku un palieliniet ieņēmumus, saglabājot savas peļņas normas un attiecības ar klientiem.",
+      "benefits": {
+        "referralEngine": "Iebūvēta ieteikumu sistēma katrā kampaņā",
+        "analytics": "Reāllaika analītika: klienta piesaistes izmaksas, ROI",
+        "qr": "Izmantošana ar QR kodu, bez kases aparatūras",
+        "languages": "Pieejams {count, plural, zero {# valodās} one {# valodā} other {# valodās}}",
+        "flatPlan": "Fiksēta mēneša maksa, nevis ieņēmumu daļa kā Groupon",
+        "ownData": "Klientu dati pieder jums",
+        "fee": "{percent}% darījumu komisija no kuponu pārdošanas, bez slēptām izmaksām"
+      }
+    },
+    "compare": {
+      "title": "Groupon pret GiftHub",
+      "hint": "Velciet, lai salīdzinātu",
+      "beforeTitle": "Ar Groupon",
+      "afterTitle": "Ar GiftHub",
+      "sliderLabel": "Salīdzināt {before} un {after}",
+      "before": {
+        "revenueShare": "Platforma paņem lielu ieņēmumu daļu",
+        "ownsRelationship": "Attiecības ar klientu pieder platformai",
+        "noDataAccess": "Nav piekļuves klientu datiem",
+        "raceToBottom": "Cenu sacensība uz leju",
+        "lostBrand": "Zaudēta zīmola identitāte"
+      },
+      "after": {
+        "flatFee": "Fiksēti {minPrice}–{maxPrice}/mēn. + {percent}% komisija",
+        "ownData": "Visi klientu dati pieder jums",
+        "referralEngine": "Iebūvēta ieteikumu sistēma",
+        "yourBrand": "Jūsu zīmols, jūsu noteikumi",
+        "roiAnalytics": "Reāllaika ROI analītika"
+      }
+    },
+    "faq": {
+      "title": "Biežāk uzdotie jautājumi",
+      "subtitle": "Viss, kas jums jāzina par GiftHub",
+      "items": {
+        "groupon": {
+          "question": "Ar ko tas atšķiras no Groupon?",
+          "answer": "Groupon tipa piedāvājumu vietnes parasti patur lielu daļu no katra pārdošanas darījuma, un attiecības ar klientu pieder tām. Mēs iekasējam fiksētu mēneša maksu (no {price}/mēn.) plus {percent}% no kuponu pārdošanas. Jūsu klienti, dati un peļņas normas paliek jums."
+        },
+        "referral": {
+          "question": "Kā darbojas ieteikumu sistēma?",
+          "answer": "Katrs klients, kurš iegādājas kuponu, saņem unikālu ieteikuma saiti. Kad viņš to kopīgo un draugs veic pirkumu, abi nopelna kredītu. Katra ieteikumu ķēde tiek izsekota, tāpēc jūs precīzi redzat, kā jauni klienti jūs atrod."
+        },
+        "trial": {
+          "question": "Kas notiek pēc {days} dienu izmēģinājuma?",
+          "answer": "Jūs izvēlaties plānu ({starter}, {pro} vai {scale}). Ja neabonējat, jūsu jau publicētie kuponi paliek aktīvi klientiem, taču jaunas kampaņas nevarēsiet izveidot, līdz būsiet abonējis."
+        },
+        "qr": {
+          "question": "Vai QR koda izmantošanai ir nepieciešama īpaša aparatūra?",
+          "answer": "Nē. Jūsu darbinieki atver mobilo skeneri jebkura tālruņa pārlūkprogrammā, noskenē klienta QR kodu, un viss ir paveikts. Nav jālejupielādē lietotne, nav nepieciešama integrācija ar kases sistēmu."
+        },
+        "fee": {
+          "question": "Kas ir {percent}% darījumu komisija?",
+          "answer": "Kad klients iegādājas kuponu platformā, mēs ieturam {percent}% no izmaksas. Papildus jūsu plānam citu platformas maksu nav."
+        }
+      }
+    },
+    "cta": {
+      "title": "Pārstājiet īrēt klientus. Veidojiet savu armiju.",
+      "body": "Izveidojiet savu pirmo kampaņu dažu minūšu laikā. Pārējo paveiks jūsu klienti. {days} dienu bezmaksas izmēģinājums.",
+      "getStarted": "Sākt bez maksas",
+      "browse": "Pārlūkot kampaņas"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Norēķinu demonstrācija",
+      "subtitle": "Demonstrācijas norēķinu lapa",
+      "creditBalance": "Kredīta atlikums",
+      "availableAmount": "Pieejams: {amount}",
+      "lockedAmount": "Bloķēts: {amount}",
+      "orderSummary": "Pasūtījuma kopsavilkums",
+      "orderAmount": "Pasūtījuma summa",
+      "creditToApply": "Izmantojamais kredīts",
+      "maxAmount": "Maks.: {amount}",
+      "subtotal": "Starpsumma",
+      "creditAppliedLine": "Izmantotais kredīts",
+      "total": "Kopā",
+      "processing": "Apstrādā...",
+      "submit": "Izmantot kredītu un pabeigt pasūtījumu",
+      "creditApplied": "Kredīts veiksmīgi izmantots! Pasūtījuma summa: {total}",
+      "errors": {
+        "missingAmounts": "Lūdzu, ievadiet gan pasūtījuma summu, gan kredīta summu",
+        "applyFailed": "Neizdevās izmantot kredītu"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} – pieejamie kuponi",
+      "emptyTitle": "Nav pieejamu kuponu",
+      "emptyDescription": "Ieskatieties vēlāk, lai redzētu jaunus {merchant} kuponu piedāvājumus.",
+      "specialOffer": "Īpašais piedāvājums",
+      "validUntil": "Derīgs līdz {date}",
+      "viewAndShare": "Skatīt un kopīgot"
+    },
+    "wallet": {
+      "subtitle": "Kredītu maciņš",
+      "availableToUse": "Pieejams izmantošanai",
+      "useCredit": "Izmantot kredītu",
+      "noCreditToUse": "Nav izmantojama kredīta",
+      "locked": "Bloķēts",
+      "lockedDescription": "Tiks atbloķēts, kad saistītais pirkums būs apstiprināts.",
+      "historyTitle": "Kredītu vēsture",
+      "historyDescription": "{merchant} darījumu žurnāls",
+      "historyEmpty": "Kredītu vēstures vēl nav.",
+      "expires": "Derīgs līdz {date}",
+      "creditStatus": {
+        "locked": "bloķēts",
+        "available": "pieejams",
+        "used": "izmantots",
+        "expired": "beidzies",
+        "reversed": "atcelts"
+      }
+    },
+    "error": {
+      "title": "Kaut kas nogāja greizi",
+      "description": "Portālu neizdevās ielādēt. Lūdzu, atsvaidziniet lapu vai mēģiniet vēlāk.",
+      "backToPortal": "Atpakaļ uz portālu"
+    },
+    "payments": {
+      "voucherFallback": "Kupons",
+      "status": {
+        "pending": "gaida",
+        "paid": "apmaksāts",
+        "failed": "neizdevās",
+        "refunded": "atmaksāts"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "pieejama",
+        "sold": "pārdota",
+        "used": "izmantota",
+        "cancelled": "atcelta",
+        "refunded": "atmaksāta"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Kaut kas nogāja greizi",
+      "description": "Ielādējot šo lapu, radās kļūda."
+    },
+    "notFound": {
+      "metaTitle": "Lapa nav atrasta"
+    },
+    "header": {
+      "mainNavLabel": "Galvenā",
+      "signIn": "Pieteikties"
+    },
+    "footer": {
+      "navLabel": "Kājene",
+      "copyright": "© {year} GiftHub. Radīts Eiropā."
+    },
+    "navLinks": {
+      "campaigns": "Kampaņas",
+      "merchants": "Tirgotāji",
+      "explore": "Atklāt",
+      "search": "Meklēt",
+      "faq": "BUJ",
+      "contact": "Kontakti",
+      "privacy": "Privātums",
+      "terms": "Noteikumi",
+      "home": "Sākums",
+      "about": "Par mums",
+      "vouchers": "Kuponi",
+      "shop": "Veikals",
+      "rent": "Noma"
+    },
+    "chat": {
+      "openAssistant": "Atvērt automātisko asistentu",
+      "closeAssistant": "Aizvērt automātisko asistentu",
+      "dialogLabel": "GiftHub automātiskais asistents",
+      "title": "GiftHub asistents",
+      "subtitle": "Automātiskais asistents",
+      "newChat": "Jauna saruna",
+      "closeChat": "Aizvērt sarunu",
+      "greeting": "Sveiki!",
+      "intro": "Esmu automātiskais asistents. Jautājiet par kuponiem, dāvanu kartēm, biļetēm vai savu kontu.",
+      "inputLabel": "Ziņa automātiskajam asistentam",
+      "placeholder": "Rakstiet ziņu...",
+      "send": "Sūtīt ziņu",
+      "sendError": "Atvainojiet, neizdevās nosūtīt jūsu ziņu. Lūdzu, mēģiniet vēlreiz."
+    },
+    "cookies": {
+      "regionLabel": "Sīkdatņu preferences",
+      "intro": "Mēs izmantojam sīkdatnes, lai uzlabotu jūsu pieredzi. Nepieciešamās sīkdatnes vienmēr ir aktīvas; jūs izvēlaties, kuras izvēles sīkdatnes atļaut. <link>Privātuma politika</link>",
+      "optionalLegend": "Izvēles sīkdatnes",
+      "necessary": "Nepieciešamās",
+      "alwaysOn": "(vienmēr ieslēgtas)",
+      "analytics": "Analītika",
+      "marketing": "Mārketings",
+      "preferences": "Preferences",
+      "saveError": "Neizdevās saglabāt jūsu izvēli. Lūdzu, mēģiniet vēlreiz.",
+      "acceptAll": "Pieņemt visas",
+      "declineOptional": "Noraidīt izvēles",
+      "customize": "Pielāgot",
+      "savePreferences": "Saglabāt preferences"
+    },
+    "currency": {
+      "selectLabel": "Izvēlēties valūtu"
+    },
+    "language": {
+      "selectLabel": "Izvēlēties valodu",
+      "selectInterfaceLabel": "Izvēlēties saskarnes valodu ({language})",
+      "unknown": "nezināma",
+      "interfaceOnly": "Maina tikai saskarnes tekstu",
+      "uiName": "{name} (saskarne)"
+    },
+    "country": {
+      "selectLabel": "Izvēlēties tirgu ({country})",
+      "heading": "Izvēlieties tirgu",
+      "description": "Maina tikai valsti, valūtu un tirgus datus",
+      "tip": "<strong>Padoms:</strong> tirgus filtrē datus un valūtu. Saskarnes valoda tiek iestatīta atsevišķi."
+    },
+    "roleSwitcher": {
+      "myDashboard": "Mans panelis",
+      "platformAdmin": "Platformas administrators",
+      "admin": "Administrators",
+      "staff": "Darbinieks",
+      "switchContext": "Mainīt kontekstu"
+    },
+    "legalEntity": {
+      "operator": "Operators",
+      "registeredAddress": "Juridiskā adrese",
+      "registryCode": "Reģistrācijas numurs",
+      "operatorPlaceholder": "[uzņēmuma nosaukums tiks pievienots]",
+      "addressPlaceholder": "[juridiskā adrese tiks pievienota]",
+      "registryCodePlaceholder": "[reģistrācijas numurs tiks pievienots]"
+    },
+    "theme": {
+      "dark": "Tumšais režīms",
+      "light": "Gaišais režīms",
+      "system": "Sistēmas motīvs"
+    },
+    "voiceSearch": {
+      "start": "Sākt balss meklēšanu",
+      "stop": "Pārtraukt klausīšanos",
+      "tooltip": "Balss meklēšana",
+      "tapToStop": "Pieskarieties, lai apturētu"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Neizdevās ielādēt centru",
+      "description": "Ielādējot tirgotājus, radās neparedzēta kļūda.",
+      "retry": "Mēģināt vēlreiz"
+    },
+    "hub": {
+      "metaTitle": "Tirgotāji",
+      "metaDescription": "Vietējie uzņēmumi GiftHub platformā un to aktuālie piedāvājumi",
+      "title": "Vietējie tirgotāji",
+      "subtitle": "Kafejnīcas, saloni, studijas un daudz kas cits: uzziniet, kas ir GiftHub un ko viņi šobrīd piedāvā.",
+      "loadError": "Neizdevās ielādēt tirgotājus",
+      "loadErrorHint": "Lūdzu, mēģiniet vēlreiz pēc brīža.",
+      "retry": "Mēģināt vēlreiz",
+      "emptyTitle": "Vēl nav tirgotāju",
+      "emptyHint": "Uzņēmumi šeit parādās, tiklīdz tie pievienojas.",
+      "joinCta": "Pievienoties kā tirgotājs",
+      "noOffers": "Šobrīd nav piedāvājumu",
+      "offerCount": "{count, plural, zero {# piedāvājumu} one {# piedāvājums} other {# piedāvājumi}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Nav atrasts",
+      "metaDescription": "Pārlūkojiet {name} kuponus, kampaņas un piedāvājumus",
+      "offerCount": "{count, plural, zero {# piedāvājumu} one {# piedāvājums} other {# piedāvājumi}}",
+      "website": "Tīmekļa vietne",
+      "contact": "Kontakti",
+      "sampleNotice": "<strong>Parauga uzņēmums.</strong> Šī lapa parāda, kā tirgotājs izskatās GiftHub platformā. Tā piedāvājumi ir piemēri, un tos nevar iegādāties.",
+      "offersHeading": "Piedāvājumi",
+      "noOffers": "Šobrīd nav piedāvājumu",
+      "noOffersHint": "Šeit parādīsies jauni {name} piedāvājumi.",
+      "browseOther": "Pārlūkot citus piedāvājumus",
+      "validUntil": "Derīgs līdz {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Kampaņas",
+      "mainNav": "Galvenā",
+      "signIn": "Pieteikties"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Atklājiet vietējos tirgotājus",
+      "hubHeroSubtitle": "Pārlūkojiet GiftHub tirgotāju kampaņas, kuponus, nomas piedāvājumus un veikalus.",
+      "tenantHeroSubtitle": "Izpētiet produktus, nomas piedāvājumus un kuponus vienuviet.",
+      "browseCampaigns": "Pārlūkot kampaņas",
+      "getStarted": "Sākt",
+      "featuredMerchants": "Izceltie tirgotāji",
+      "noMerchants": "Vēl nav tirgotāju.",
+      "visitNamed": "Apmeklēt {name}",
+      "visitMerchant": "Apmeklēt tirgotāju",
+      "featuredProducts": "Izceltie produkti",
+      "noProducts": "Nav pieejamu produktu.",
+      "rentalHighlights": "Izceltie nomas piedāvājumi",
+      "noRentals": "Nav pieejamu nomas piedāvājumu.",
+      "perDay": "{price} / dienā",
+      "activeVouchers": "Aktīvie kuponi",
+      "noStandaloneVouchers": "Šobrīd šeit nav atsevišķu kuponu — <link>pārlūkojiet {count, plural, zero {# aktīvās kampaņas} one {# aktīvo kampaņu} other {# aktīvās kampaņas}}</link>.",
+      "noVouchers": "Nav pieejamu kuponu.",
+      "voucher": "Kupons",
+      "viewVoucher": "Skatīt kuponu",
+      "stats": {
+        "campaigns": "Kampaņas",
+        "vouchers": "Kuponi",
+        "products": "Produkti",
+        "rentals": "Noma"
+      },
+      "statsUnavailable": "Statistika nav pieejama."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Veikals",
+      "subtitle": "Pārlūkojiet produktus un pievienojiet tos grozam."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Norēķinu pieprasījums izveidots",
+      "intentCreatedDescription": "Pieprasījums {id} par {amount}",
+      "checkoutErrorTitle": "Norēķinu kļūda",
+      "checkoutErrorDescription": "Neizdevās izveidot norēķinu pieprasījumu.",
+      "empty": "Vēl nav pieejamu produktu.",
+      "productHighlight": "Izceltais produkts",
+      "add": "Pievienot",
+      "cart": "Grozs",
+      "cartEmpty": "Grozs ir tukšs.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Noņemt",
+      "total": "Kopā",
+      "creatingIntent": "Izveido pieprasījumu...",
+      "checkoutIntent": "Norēķinu pieprasījums"
+    },
+    "rentPage": {
+      "metaTitle": "Nomas tirgus",
+      "metaDescription": "Pārlūkojiet nomājamās preces",
+      "title": "Noma",
+      "subtitle": "Izvēlieties datumus un pieprasiet nomas cenas piedāvājumu."
+    },
+    "rentClient": {
+      "selectDatesError": "Lūdzu, izvēlieties nomas datumus.",
+      "bookingFailed": "Rezervācija neizdevās",
+      "bookingCreated": "Rezervācijas pieprasījums izveidots: {name}. Kopā: {total}.",
+      "bookingSubmitted": "Rezervācija iesniegta",
+      "bookingCreateFailed": "Neizdevās izveidot nomas rezervāciju.",
+      "bookingCancelled": "Rezervācija atcelta.",
+      "cancelFailed": "Neizdevās atcelt rezervāciju.",
+      "datesHeading": "Nomas datumi",
+      "startDate": "Sākuma datums",
+      "endDate": "Beigu datums",
+      "daysSelected": "{count, plural, zero {Izvēlētas # nomas dienas.} one {Izvēlēta # nomas diena.} other {Izvēlētas # nomas dienas.}}",
+      "selectDatesHint": "Izvēlieties datumus, lai aprēķinātu cenu.",
+      "empty": "Vēl nav pieejamu nomas piedāvājumu.",
+      "rentalHighlight": "Izceltais nomas piedāvājums",
+      "perDay": "{price} / dienā",
+      "weeklyRate": "Nedēļā: {price}",
+      "select": "Izvēlēties",
+      "selectedHeading": "Izvēlētā noma",
+      "estimatedTotal": "Aptuvenā kopsumma",
+      "notesLabel": "Piezīmes (neobligāti)",
+      "notesPlaceholder": "Īpašas vēlmes...",
+      "submitting": "Iesniedz rezervāciju...",
+      "requestBooking": "Pieprasīt nomas rezervāciju",
+      "myBookings": "Manas rezervācijas",
+      "noBookings": "Vēl nav nomas rezervāciju. Izvēlieties preci augstāk, lai sāktu.",
+      "bookingRange": "{start} - {end} ({days, plural, zero {# dienas} one {# diena} other {# dienas}})",
+      "bookingTotal": "Kopā: {total}",
+      "rejectionReason": "Iemesls: {reason}",
+      "cancelling": "Atceļ...",
+      "cancel": "Atcelt",
+      "status": {
+        "pending": "gaida",
+        "approved": "apstiprināta",
+        "rejected": "noraidīta",
+        "paid": "apmaksāta",
+        "active": "aktīva",
+        "returned": "atgriezta",
+        "cancelled": "atcelta"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Abonēšanas kastes",
+      "metaDescription": "Abonējiet atlasītas ikmēneša kuponu kastes no saviem iecienītajiem vietējiem tirgotājiem — jauni piedāvājumi katrā periodā, atcelt var jebkurā laikā.",
+      "title": "Abonēšanas kastes",
+      "subtitle": "Regulāri saņemiet atlasītus kuponus no labākajiem tirgotājiem.",
+      "empty": "Vēl nav pieejamu abonēšanas kastu. Ieskatieties drīzumā!",
+      "byMerchant": "no {name}",
+      "perInterval": "/{interval}",
+      "details": "Sīkāk",
+      "subscribe": "Abonēt",
+      "subscribedTitle": "Abonēts",
+      "subscribedMessage": "Abonements ir aktivizēts. Sīkāka informācija ir nosūtīta uz jūsu e-pastu.",
+      "subscribeFailed": "Neizdevās abonēt. Lūdzu, mēģiniet vēlreiz.",
+      "notFoundTitle": "Kaste nav atrasta",
+      "notFoundHint": "Šī abonēšanas kaste nav pieejama.",
+      "browseAll": "← Pārlūkot visas kastes",
+      "backToAll": "← Visas abonēšanas kastes",
+      "subscriberCount": "{count, plural, zero {# abonentu} one {# abonents} other {# abonenti}}",
+      "whatsInside": "Kas ir iekšā",
+      "curatingNext": "Līdz {count, plural, zero {# atlasītiem kuponiem} one {# atlasītam kuponam} other {# atlasītiem kuponiem}} katru periodu ({period}). Nākamā piegāde tiek sagatavota.",
+      "percentVoucher": "Kupons ar {value}% atlaidi",
+      "amountVoucher": "Kupons {amount} vērtībā",
+      "curatedVoucher": "Atlasīts kupons",
+      "subscribing": "Abonē…",
+      "subscribeWithPrice": "Abonēt — {price}/{interval}",
+      "interval": {
+        "weekly": "nedēļā",
+        "monthly": "mēnesī",
+        "quarterly": "ceturksnī"
+      },
+      "intervalEach": {
+        "weekly": "katru nedēļu",
+        "monthly": "katru mēnesi",
+        "quarterly": "katru ceturksni"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Meklēšana",
+    "metaDescription": "Meklējiet aktuālās GiftHub tirgotāju kampaņas un kuponus.",
+    "loadingSearch": "Ielādē meklēšanu",
+    "title": "Meklēt piedāvājumus",
+    "subtitle": "Atrodiet GiftHub tirgotāju kampaņas un kuponus",
+    "queryLabel": "Meklēt kampaņas, kuponus un tirgotājus",
+    "queryPlaceholder": "Meklēt kampaņas, kuponus, tirgotājus...",
+    "toggleFilters": "Rādīt/slēpt filtrus",
+    "filtersTitle": "Filtri",
+    "closeFilters": "Aizvērt filtrus",
+    "error": "Meklēšana šobrīd nav pieejama. Lūdzu, mēģiniet vēlreiz pēc brīža.",
+    "campaignsHeading": "Kampaņas",
+    "vouchersHeading": "Kuponi",
+    "browseMarketplace": "Pārlūkojiet visu, kas ir pārdošanā, <link>kampaņu tirgū</link>.",
+    "campaignEnds": "Beidzas {date}",
+    "filters": {
+      "title": "Filtri",
+      "clearAll": "Notīrīt visus",
+      "category": "Kategorija",
+      "discountType": "Atlaides veids",
+      "minDiscount": "Min. atlaide",
+      "minDiscountAria": "Minimālā atlaide",
+      "maxPrice": "Maks. cena",
+      "maxPriceAria": "Maksimālā cena eiro",
+      "any": "Jebkura",
+      "sortBy": "Kārtot pēc",
+      "types": {
+        "all": "Visi veidi",
+        "percentage": "Procentuālā atlaide",
+        "fixed_amount": "Fiksēta summa",
+        "credit_amount": "Veikala kredīts"
+      },
+      "sort": {
+        "newest": "Jaunākie vispirms",
+        "popular": "Populārākie",
+        "expiring": "Drīz beigsies"
+      }
+    },
+    "results": {
+      "chipCategory": "Kategorija: {value}",
+      "chipType": "Veids: {value}",
+      "chipMinDiscount": "Min. {value}% atlaide",
+      "chipMaxPrice": "Maks. €{value}",
+      "chipSort": "Kārtot: {value}",
+      "removeFilter": "Noņemt filtru {label}",
+      "searching": "Meklē...",
+      "count": "{total, plural, zero {<num>#</num> rezultātu} one {<num>#</num> rezultāts} other {<num>#</num> rezultāti}}",
+      "countForQuery": "{total, plural, zero {<num>#</num> rezultātu vaicājumam “<hl>{query}</hl>”} one {<num>#</num> rezultāts vaicājumam “<hl>{query}</hl>”} other {<num>#</num> rezultāti vaicājumam “<hl>{query}</hl>”}}",
+      "flash": "Zibakcija",
+      "voucherFallback": "Kupons",
+      "expires": "Derīgs līdz {date}",
+      "redeemed": "Izmantoti: {count}",
+      "noResultsTitle": "Nekas netika atrasts",
+      "noResultsQuery": "Vaicājumam “{query}” neatbilst neviens kupons. Mēģiniet mainīt filtrus.",
+      "noResultsHint": "Mēģiniet meklēt konkrētu kuponu, tirgotāju vai kategoriju."
+    }
+  },
+  "faq": {
+    "metaTitle": "Biežāk uzdotie jautājumi",
+    "metaDescription": "Atbildes uz biežākajiem jautājumiem par kuponu un dāvanu karšu iegādi, izmantošanu un pārvaldību — maksājumi, atmaksas, derīguma termiņi un atbalsts tirgotājiem.",
+    "title": "Biežāk uzdotie jautājumi",
+    "subtitle": "Atrodiet atbildes uz biežākajiem jautājumiem par mūsu platformu.",
+    "categories": {
+      "general": "Vispārīgi",
+      "purchasing": "Pirkumi un maksājumi",
+      "vouchers": "Kuponi un izmantošana",
+      "account": "Konts un drošība",
+      "merchants": "Tirgotājiem",
+      "loyalty": "Lojalitāte un balvas"
+    },
+    "items": {
+      "whatIs": {
+        "q": "Kas ir GiftHub?",
+        "a": "GiftHub ir digitālo kuponu, dāvanu karšu un pasākumu biļešu tirgus, kas savieno tirgotājus ar klientiem. Tirgotāji var veidot un pārdot digitālos produktus, bet klienti tos var iegādāties, dāvināt un izmantot."
+      },
+      "isFree": {
+        "q": "Vai platformas lietošana ir bez maksas?",
+        "a": "Pārlūkošana un konta izveide ir bez maksas. Klienti maksā tikai par iegādātajiem produktiem. Tirgotāji maksā ikmēneša plāna maksu plus {fee}% darījumu komisiju no kuponu pārdošanas."
+      },
+      "countries": {
+        "q": "Kuras valstis tiek atbalstītas?",
+        "a": "Mēs atbalstām tirgotājus un klientus visā ES ar {currencies} valūtām un {languages} valodām."
+      },
+      "howToBuy": {
+        "q": "Kā iegādāties kuponu?",
+        "a": "Pārlūkojiet pieejamos kuponus, noklikšķiniet uz “Pirkt” un pabeidziet norēķinu ar Stripe. Kupons parādīsies jūsu maciņā uzreiz pēc apmaksas."
+      },
+      "paymentMethods": {
+        "q": "Kādas maksājumu metodes tiek pieņemtas?",
+        "a": "Maksājumus droši apstrādā Stripe. Jūsu pirkumam pieejamās maksājumu metodes tiek parādītas norēķinu laikā."
+      },
+      "refund": {
+        "q": "Vai varu saņemt naudas atmaksu?",
+        "a": "Atmaksas politiku nosaka katrs tirgotājs. Pirms pirkuma pārbaudiet konkrēto atmaksas politiku kupona informācijas lapā."
+      },
+      "howToRedeem": {
+        "q": "Kā izmantot kuponu?",
+        "a": "Atveriet maciņu, izvēlieties kuponu un parādiet QR kodu tirgotājam. Tirgotājs to noskenēs, lai apstiprinātu izmantošanu. Kuponu var izmantot arī, manuāli ievadot kodu."
+      },
+      "expiry": {
+        "q": "Kas notiek, kad kupona derīguma termiņš beidzas?",
+        "a": "Kuponus ar beigušos derīguma termiņu nevar izmantot. Pirms termiņa beigām jūs saņemsiet paziņojumu. Derīguma termiņus varat pārbaudīt savā maciņā."
+      },
+      "gift": {
+        "q": "Vai varu kādam uzdāvināt kuponu?",
+        "a": "Jā! Pērkot izvēlieties “Sūtīt kā dāvanu” un ievadiet saņēmēja e-pasta adresi. Saņēmējs saņems kuponu ar personalizētu ziņu."
+      },
+      "twoFactor": {
+        "q": "Kā ieslēgt divfaktoru autentifikāciju?",
+        "a": "Atveriet Iestatījumi → Drošība → Divfaktoru autentifikācija. Varat iestatīt TOTP (Google Authenticator) vai izmantot piekļuves atslēgas (biometrisko) autentifikāciju."
+      },
+      "biometrics": {
+        "q": "Vai varu pieteikties ar biometriju?",
+        "a": "Jā! Mēs atbalstām autentifikāciju ar piekļuves atslēgu — piesakieties ar Face ID, pirksta nospiedumu vai Windows Hello. Iestatiet to sadaļā Iestatījumi → Drošība."
+      },
+      "deleteAccount": {
+        "q": "Kā dzēst savu kontu?",
+        "a": "Atveriet Iestatījumi → Privātums → Dzēst kontu. Saskaņā ar mūsu VDAR atbilstības politiku visi jūsu dati tiks dzēsti 30 dienu laikā. Vispirms varat eksportēt savus datus."
+      },
+      "startSelling": {
+        "q": "Kā sākt pārdot?",
+        "a": "Reģistrējieties kā tirgotājs, pabeidziet ievadprocesu un izveidojiet savu pirmo kuponu. Pārdot varat sākt uzreiz pēc profila apstiprināšanas."
+      },
+      "fees": {
+        "q": "Kādas ir platformas maksas?",
+        "a": "Pēc {trialDays} dienu bezmaksas izmēģinājuma plāni maksā: {starter} {starterPrice}, {pro} {proPrice} vai {scale} {scalePrice} mēnesī (maksājot par gadu, 2 mēneši bez maksas), plus {fee}% darījumu komisija no kuponu pārdošanas, ko ietur no izmaksas."
+      },
+      "integrations": {
+        "q": "Vai varu integrēt platformu ar savām esošajām sistēmām?",
+        "a": "Jā! Mēs piedāvājam tīmekļa āķus (reāllaika notikumu paziņojumiem), API atslēgas (programmatiskai piekļuvei) un integrācijas ar Zapier/Slack/Discord."
+      },
+      "trackSales": {
+        "q": "Kā sekot līdzi saviem pārdošanas rezultātiem?",
+        "a": "Jūsu tirgotāja panelis rāda reāllaika analītiku, tostarp ieņēmumus, izmantošanas, klientu ieskatus un MI vaicājumus dabiskā valodā (“parādi pagājušās nedēļas ieņēmumus”)."
+      },
+      "loyalty": {
+        "q": "Kā darbojas lojalitātes programma?",
+        "a": "Nopelniet punktus, veicot pirkumus, ikdienas atzīmēšanās, ieteikumos un rakstot atsauksmes. Punkti atbloķē līmeņus (Bronza → Sudrabs → Zelts → Platīns → Dimants) ar arvien lielākām priekšrocībām."
+      },
+      "badges": {
+        "q": "Kas ir nozīmītes un sērijas?",
+        "a": "Nozīmītes ir sasniegumi, ko nopelnāt par atskaites punktiem (pirmais pirkums, 10 ieteikumi utt.). Sērijas uzskaita secīgas aktivitātes dienas un atalgo regularitāti."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Sazinieties ar mums",
+    "metaDescription": "Sazinieties ar GiftHub komandu — jautājumi par jūsu kuponiem, tirgotāju pievienošanos, rēķiniem vai sadarbības piedāvājumiem.",
+    "title": "Sazinieties ar mums",
+    "subtitle": "Vai jums ir jautājums? Mēs labprāt jūs uzklausīsim.",
+    "email": "E-pasts",
+    "assistantTitle": "Automātiskais asistents",
+    "assistantText": "Ātras atbildes par kuponiem un jūsu kontu, izmantojot tērzēšanas pogu stūrī. Tas ir automatizēts, nevis cilvēks.",
+    "name": "Vārds",
+    "subject": "Temats",
+    "message": "Ziņa",
+    "sent": "Ziņa nosūtīta! Mēs drīz ar jums sazināsimies.",
+    "unavailableWithEmail": "Saziņas forma šobrīd nav pieejama. Lūdzu, rakstiet mums uz {email}.",
+    "unavailable": "Saziņas forma šobrīd nav pieejama. Lūdzu, mēģiniet vēlāk.",
+    "error": "Neizdevās nosūtīt. Lūdzu, mēģiniet vēlreiz pēc brīža.",
+    "sending": "Sūta...",
+    "send": "Sūtīt ziņu"
+  },
+  "leaderboardPage": {
+    "metaTitle": "Populārākie tirgotāji",
+    "metaDescription": "Tirgotāji ar visvairāk kuponu izmantošanām GiftHub platformā pēdējo 30 dienu laikā",
+    "title": "Populārākie tirgotāji",
+    "subtitle": "Visvairāk kuponu izmantošanu pēdējo 30 dienu laikā",
+    "rank": "{rank}. vieta",
+    "redemptions": "{count, plural, zero {<num>#</num><label>izmantošanu</label>} one {<num>#</num><label>izmantošana</label>} other {<num>#</num><label>izmantošanas</label>}}",
+    "empty": "Pēdējo 30 dienu laikā vēl nav izmantošanu, tāpēc reitingu nav ko rādīt.",
+    "browseCampaigns": "Pārlūkot aktuālās kampaņas"
+  },
+  "ui": {
+    "close": "Aizvērt",
+    "more": "Vairāk",
+    "loading": "Ielādē...",
+    "breadcrumb": {
+      "label": "navigācijas ceļš"
+    },
+    "pagination": {
+      "label": "lapošana",
+      "previousAria": "Uz iepriekšējo lapu",
+      "previous": "Iepriekšējā",
+      "nextAria": "Uz nākamo lapu",
+      "next": "Nākamā",
+      "morePages": "Vairāk lapu"
+    },
+    "toast": {
+      "dismiss": "Aizvērt paziņojumu"
+    },
+    "calendar": {
+      "previousMonth": "Uz iepriekšējo mēnesi",
+      "nextMonth": "Uz nākamo mēnesi"
+    },
+    "datePicker": {
+      "placeholder": "Izvēlieties datumu"
+    },
+    "combobox": {
+      "placeholder": "Izvēlieties opciju...",
+      "empty": "Opcija nav atrasta.",
+      "search": "Meklēt..."
+    },
+    "searchInput": {
+      "clear": "Notīrīt meklēšanu"
+    },
+    "searchResults": {
+      "empty": "Nekas netika atrasts",
+      "noResultsFor": "Vaicājumam “{query}” nekas netika atrasts. Izmēģiniet citus atslēgvārdus."
+    },
+    "commandPalette": {
+      "placeholder": "Meklēt...",
+      "noResults": "Nekas netika atrasts",
+      "toOpen": "lai atvērtu",
+      "other": "Citi",
+      "hostPlaceholder": "Kurp vēlaties doties?",
+      "categories": {
+        "navigate": "Navigācija",
+        "discover": "Atklāt",
+        "account": "Konts"
+      },
+      "items": {
+        "home": {
+          "label": "Sākums",
+          "description": "Sākumlapa"
+        },
+        "app": {
+          "label": "Mans panelis",
+          "description": "Jūsu kuponi, maciņš un aktivitāte"
+        },
+        "vouchers": {
+          "label": "Mani kuponi"
+        },
+        "wallet": {
+          "label": "Maciņš",
+          "description": "Kredītu atlikumi"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "Pārlūkojiet un sūtiet dāvanas"
+        },
+        "campaigns": {
+          "label": "Kampaņas",
+          "description": "Aktīvās kuponu kampaņas"
+        },
+        "hub": {
+          "label": "Tirgotāju centrs",
+          "description": "Pārlūkot tirgotājus"
+        },
+        "deals": {
+          "label": "Piedāvājumi"
+        },
+        "settings": {
+          "label": "Iestatījumi",
+          "description": "Konts un preferences"
+        },
+        "admin": {
+          "label": "Administrēšana",
+          "description": "Platformas administrēšana"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Apstiprināt",
+      "cancel": "Atcelt"
+    },
+    "dataTable": {
+      "noResults": "Nav rezultātu."
+    },
+    "fileUpload": {
+      "maxFiles": "Atļauts ne vairāk kā {maxFiles, plural, zero {# failu} one {# fails} other {# faili}}",
+      "tooLarge": "Failiem jābūt mazākiem par {maxSize} MB",
+      "dropHere": "Nometiet failus šeit",
+      "dragDrop": "Velciet un nometiet failus šeit",
+      "browseHint": "vai noklikšķiniet, lai pārlūkotu (maks. {maxSize} MB katram failam)",
+      "select": "Izvēlēties failus",
+      "remove": "Noņemt {name}"
+    },
+    "imageUpload": {
+      "notImage": "Lūdzu, augšupielādējiet attēla failu",
+      "tooLarge": "Attēlam jābūt mazākam par {maxSize} MB",
+      "previewAlt": "Priekšskatījums",
+      "remove": "Noņemt attēlu",
+      "dropHere": "Nometiet attēlu šeit",
+      "upload": "Augšupielādēt attēlu",
+      "hint": "PNG, JPG, GIF līdz {maxSize} MB",
+      "select": "Izvēlēties attēlu"
+    },
+    "statsCard": {
+      "open": "Atvērt"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% naudas atmaksa"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Aktīvs",
+        "redeemed": "Izmantots",
+        "expired": "Beidzies"
+      },
+      "redeem": "Izmantot",
+      "expires": "Derīgs līdz {date}",
+      "merchantAlt": "Tirgotājs"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Pieteikties",
+      "register": "Izveidot kontu",
+      "resetPassword": "Atiestatīt paroli"
+    },
+    "error": {
+      "title": "Kaut kas nogāja greizi",
+      "fallback": "Radās neparedzēta kļūda.",
+      "tryAgain": "Mēģināt vēlreiz"
+    },
+    "login": {
+      "welcome": "Laipni lūdzam atpakaļ",
+      "subtitle": "Piesakieties savā GiftHub kontā",
+      "tabMagic": "Burvju saite",
+      "tabPassword": "Parole",
+      "tabSocial": "Sociālie tīkli",
+      "tabPasskey": "Piekļuves atslēga",
+      "emailLabel": "E-pasta adrese",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Parole",
+      "sendCode": "Sūtīt pieteikšanās kodu",
+      "sending": "Sūta…",
+      "signIn": "Pieteikties",
+      "signingIn": "Piesakās…",
+      "otpTitle": "Pārbaudiet e-pastu!",
+      "otpDesc": "Mēs nosūtījām 6 ciparu kodu uz <b>{email}</b>",
+      "otpLabel": "Ievadiet kodu",
+      "verify": "Pārbaudīt kodu",
+      "verifying": "Pārbauda…",
+      "resend": "Sūtīt kodu vēlreiz",
+      "backToEmail": "Atpakaļ",
+      "orContinueWith": "Vai turpiniet ar",
+      "continueWith": "Turpināt ar {provider}",
+      "errorWrongCode": "Nederīgs vai novecojis kods. Lūdzu, mēģiniet vēlreiz.",
+      "errorWrongPass": "Nepareiza e-pasta adrese vai parole.",
+      "errorGeneric": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.",
+      "errorEmailUnavailable": "Pieteikšanās ar e-pastu šobrīd nav pieejama — izmantojiet paroli.",
+      "errorCredentialsSignin": "Nepareiza e-pasta adrese vai parole.",
+      "errorAuthGeneric": "Pieteikšanās neizdevās. Lūdzu, mēģiniet vēlreiz.",
+      "backToHome": "Atpakaļ uz sākumlapu",
+      "socialDesc": "Piesakieties uzreiz ar sev ērtāko kontu",
+      "noAccount": "Vēl nav konta?",
+      "createAccount": "Izveidot kontu",
+      "noAccountSub": "Piesakoties ar kodu, jaunai e-pasta adresei tiek izveidots konts.",
+      "registered": "Konts izveidots — piesakieties ar savu e-pasta adresi un paroli.",
+      "magicDesc": "Mēs nosūtīsim 6 ciparu kodu uz jūsu e-pastu. Parole nav nepieciešama.",
+      "passwordDesc": "Piesakieties ar savu e-pasta adresi un paroli.",
+      "forgotPassword": "Aizmirsāt paroli?",
+      "demo": "Demo konti",
+      "demoRole": {
+        "platformAdmin": "Platformas administrators",
+        "merchantAdmin": "Tirgotāja administrators",
+        "merchantStaff": "Tirgotāja darbinieks",
+        "endUser": "Gala lietotājs"
+      },
+      "passkeyDesc": "Piesakieties uzreiz ar pirksta nospiedumu, seju vai drošības atslēgu.",
+      "passkeyButton": "Pieteikties ar piekļuves atslēgu",
+      "passkeyAuthenticating": "Autentificē…"
+    },
+    "register": {
+      "backToHome": "Atpakaļ uz sākumlapu",
+      "title": "Izveidojiet savu kontu",
+      "subtitle": "Sāciet atklāt un pārvaldīt kuponus",
+      "nameLabel": "Vārds un uzvārds",
+      "namePlaceholder": "Jānis Bērziņš",
+      "emailLabel": "E-pasta adrese",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Parole",
+      "passwordPlaceholder": "Vismaz 8 rakstzīmes",
+      "submit": "Izveidot kontu",
+      "submitting": "Izveido kontu...",
+      "haveAccount": "Jau ir konts?",
+      "signIn": "Pieteikties",
+      "errorWeak": "Parole ir pārāk vāja. Lūdzu, izvēlieties drošāku paroli.",
+      "errorInvalid": "Nederīga ievade.",
+      "errorFallback": "Kaut kas nogāja greizi.",
+      "errorGeneric": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz."
+    },
+    "resetPassword": {
+      "title": "Atiestatiet paroli",
+      "subtitle": "Ievadiet savu jauno paroli",
+      "newPassword": "Jaunā parole",
+      "confirmPassword": "Apstipriniet paroli",
+      "submit": "Iestatīt jauno paroli",
+      "submitting": "Atiestata…",
+      "success": "Parole atiestatīta!",
+      "successDesc": "Jūsu parole ir atjaunināta. Tagad varat pieteikties.",
+      "goToLogin": "Uz pieteikšanos",
+      "errorMismatch": "Paroles nesakrīt",
+      "errorShort": "Parolei jābūt vismaz 8 rakstzīmes garai",
+      "errorWeak": "Parole ir pārāk vāja. Lūdzu, izvēlieties drošāku paroli.",
+      "errorExpired": "Šī atiestatīšanas saite ir nederīga vai beigusies.",
+      "forgotTitle": "Aizmirsāt paroli?",
+      "forgotSubtitle": "Ievadiet savu e-pasta adresi, un mēs nosūtīsim atiestatīšanas saiti",
+      "emailLabel": "E-pasta adrese",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Sūtīt atiestatīšanas saiti",
+      "sending": "Sūta…",
+      "linkSent": "Pārbaudiet e-pastu!",
+      "linkSentDesc": "Ja ar šo e-pasta adresi ir saistīts konts, mēs nosūtījām atiestatīšanas saiti.",
+      "backToLogin": "Atpakaļ uz pieteikšanos"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Laipni lūdzam!",
+      "joined": "Jūs pievienojāties {orgName}. Novirza…",
+      "accepted": "Ielūgums pieņemts. Novirza…",
+      "problemTitle": "Problēma ar ielūgumu",
+      "errorNotAccepted": "Šo ielūgumu neizdevās pieņemt.",
+      "errorGeneric": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz.",
+      "goToOrgs": "Uz jūsu organizācijām",
+      "invitedTitle": "Jūs esat uzaicināts",
+      "invitedDesc": "Pieņemiet šo ielūgumu, lai pievienotos organizācijai. Iespējams, vispirms būs jāpiesakās.",
+      "accepting": "Pieņem…",
+      "accept": "Pieņemt ielūgumu"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Dāvanu kartes un dāvināšana",
+      "description": "Pārlūkojiet un iegādājieties vietējo tirgotāju digitālās dāvanu kartes. Nosūtiet pārdomātu dāvanu dažu sekunžu laikā — piegāde pa e-pastu, izmantojama veikalā vai tiešsaistē."
+    },
+    "publicCard": {
+      "defaultHeadline": "Dāvanu karte",
+      "imageAlt": "Dāvanu karte",
+      "logoAlt": "Zīmola logotips",
+      "merchant": "Tirgotājs: {name}",
+      "merchantFallback": "Tirgotājs",
+      "code": "Kods: {code}",
+      "validUntil": "Derīga līdz: {date}",
+      "noExpiry": "Bez derīguma termiņa",
+      "showQr": "Parādiet šo QR kodu darbiniekam, lai izmantotu dāvanu karti.",
+      "statusMessage": "Šīs dāvanu kartes statuss: {status}.",
+      "status": {
+        "active": "aktīva",
+        "redeemed": "izmantota",
+        "expired": "beigusies",
+        "cancelled": "atcelta"
+      }
+    },
+    "purchase": {
+      "title": "Iegādāties dāvanu karti",
+      "loading": "Ielādē...",
+      "notAvailable": "Dāvanu karte nav pieejama",
+      "defaultHeadline": "Dāvanu karte",
+      "imageAlt": "Dāvanu karte",
+      "logoAlt": "Zīmols",
+      "fromMerchant": "no {merchant}",
+      "form": {
+        "recipientEmail": "Saņēmēja e-pasts (neobligāti)",
+        "recipientEmailPlaceholder": "Sūtīt dāvanu karti uz šo e-pastu",
+        "recipientName": "Saņēmēja vārds",
+        "recipientNamePlaceholder": "Kam",
+        "senderName": "Jūsu vārds",
+        "senderNamePlaceholder": "No kā",
+        "message": "Personīga ziņa (neobligāti)",
+        "messagePlaceholder": "Pievienojiet personīgu ziņu..."
+      },
+      "total": "Kopā:",
+      "processing": "Apstrādā...",
+      "buy": "Pirkt dāvanu karti",
+      "errors": {
+        "notFound": "Dāvanu karte nav atrasta vai nav pieejama iegādei",
+        "loadFailed": "Neizdevās ielādēt dāvanu karti",
+        "purchaseFailed": "Pirkums neizdevās",
+        "generic": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz."
+      }
+    },
+    "product": {
+      "notFound": "Dāvana nav atrasta",
+      "backToHub": "Atpakaļ uz Gift Hub",
+      "imageAlt": "{title} {index}",
+      "featured": "Izcelts",
+      "lowStock": "Krājumā palikuši tikai {count}",
+      "buyNow": "Pirkt tagad",
+      "addToCart": "Pievienot grozam",
+      "saveToWishlist": "Saglabāt vēlmju sarakstā",
+      "removeFromWishlist": "Noņemt no vēlmju saraksta",
+      "share": "Kopīgot šo dāvanu",
+      "upsellsTitle": "Jums varētu patikt arī"
+    },
+    "claim": {
+      "metaTitle": "Saņemiet savu dāvanu",
+      "alreadyClaimedTitle": "Dāvana jau saņemta",
+      "alreadyClaimedBody": "Šī dāvana jau ir saņemta.",
+      "expiredTitle": "Dāvanas derīgums beidzies",
+      "expiredBody": "Atvainojiet, šīs dāvanas saites derīgums ir beidzies.",
+      "title": "Jums ir dāvana!",
+      "signedInHint": "Noklikšķiniet zemāk, lai pievienotu šo kuponu savam maciņam.",
+      "signedOutHint": "Piesakieties, lai saņemtu šo kuponu.",
+      "claimButton": "Saņemt dāvanu",
+      "signInButton": "Pieteikties, lai saņemtu"
+    },
+    "error": {
+      "title": "Neizdevās ielādēt Gift Hub",
+      "fallback": "Ielādējot dāvanas, radās neparedzēta kļūda.",
+      "retry": "Mēģināt vēlreiz"
+    },
+    "hub": {
+      "title": "Dāvanas",
+      "subtitle": "Atrodiet ideālo dāvanu jebkuram gadījumam",
+      "loadError": "Neizdevās ielādēt dāvanas",
+      "retry": "Mēģināt vēlreiz",
+      "emptyCatalog": {
+        "title": "Vēl nav pievienotu dāvanu",
+        "body": "Tikmēr arī vietējo tirgotāju kuponi ir lieliskas dāvanas."
+      },
+      "noMatches": "Šiem filtriem neatbilst neviena dāvana",
+      "clearFilters": "Notīrīt filtrus",
+      "browseCampaigns": "Pārlūkot kampaņas",
+      "allGifts": "Visas dāvanas",
+      "loadMore": "Ielādēt vairāk"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Dāvanu karte nav atrasta",
+        "body": "QR kods ir nederīgs vai beidzies."
+      },
+      "notActive": {
+        "title": "Dāvanu karte vēl nav aktīva",
+        "body": "Šī dāvanu karte kļūs derīga vēlāk."
+      },
+      "expired": {
+        "title": "Dāvanu kartes derīgums beidzies",
+        "body": "Šī dāvanu karte vairs nav derīga."
+      },
+      "result": {
+        "title": "Dāvanu karte izmantota",
+        "confirmed": "Izmantošana veiksmīgi apstiprināta.",
+        "alreadyRedeemedOrCancelled": "Šī dāvanu karte jau ir izmantota vai atcelta.",
+        "alreadyRedeemedOrInvalid": "Šī dāvanu karte jau ir izmantota vai nav derīga."
+      }
+    },
+    "qr": {
+      "error": "Neizdevās ģenerēt QR kodu",
+      "generating": "Ģenerē QR kodu...",
+      "alt": "QR kods"
+    },
+    "wizard": {
+      "title": "MI dāvanu meklētājs",
+      "subtitle": "Pastāstiet mums par saņēmēju, un mēs atradīsim ideālo dāvanu",
+      "steps": {
+        "recipient": "Kam ir paredzēta dāvana?",
+        "occasion": "Kāds ir notikums?",
+        "budget": "Kāds ir jūsu budžets?"
+      },
+      "recipients": {
+        "partner": "Partnerim",
+        "friend": "Draugam",
+        "parent": "Vecākam",
+        "colleague": "Kolēģim",
+        "child": "Bērnam",
+        "teacher": "Skolotājam"
+      },
+      "occasions": {
+        "birthday": "Dzimšanas diena",
+        "christmas": "Ziemassvētki",
+        "anniversary": "Gadadiena",
+        "thankYou": "Pateicība",
+        "justBecause": "Tāpat vien",
+        "graduation": "Izlaidums"
+      },
+      "summary": {
+        "for": "Kam: {recipient}",
+        "budget": "Budžets: {amount}"
+      },
+      "submit": "Atrast ideālās dāvanas",
+      "error": "Neizdevās sagatavot ieteikumus. Lūdzu, mēģiniet vēlreiz.",
+      "results": {
+        "found": "Mēs jums atradām {count, plural, zero {# dāvanu} one {# dāvanu} other {# dāvanas}}:",
+        "empty": "Atbilstoši produkti netika atrasti. Mēģiniet mainīt kritērijus."
+      },
+      "startOver": "Sākt no jauna"
+    },
+    "card": {
+      "featured": "Izcelts",
+      "save": "Saglabāt",
+      "unsave": "Noņemt",
+      "buyNow": "Pirkt tagad"
+    },
+    "feedSection": {
+      "viewAll": "Skatīt visu"
+    },
+    "filters": {
+      "toggle": "Filtri",
+      "clear": "Notīrīt",
+      "occasion": "Notikums",
+      "persona": "Kam tā paredzēta?",
+      "budget": "Budžets",
+      "budgetUnder": "Līdz {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Kopīgojiet piedāvājumus un nopelniet atlīdzības"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Radās neparedzēta kļūda."
+    },
+    "logoAlt": "{name} logotips",
+    "merchantFallback": "Tirgotājs",
+    "validUntil": "Derīgs līdz {date}",
+    "validUntilWithLimit": "Derīgs līdz {date} – pirmās {count, plural, zero {# izmantošanas} one {# izmantošana} other {# izmantošanas}}",
+    "offAtMerchant": "{value} atlaide pie {merchant}",
+    "fields": {
+      "event": "Pasākums",
+      "dateTime": "Datums un laiks",
+      "location": "Vieta",
+      "price": "Cena",
+      "status": "Statuss",
+      "attendee": "Dalībnieks",
+      "usedAt": "Izmantota"
+    },
+    "ticketStatus": {
+      "available": "Pieejama",
+      "sold": "Pārdota",
+      "used": "Izmantota",
+      "cancelled": "Atcelta",
+      "refunded": "Atmaksāta"
+    },
+    "event": {
+      "notAvailable": "Šim pasākumam biļetes nav pieejamas iegādei.",
+      "descriptionFallback": "Pievienojieties mums šajā lieliskajā pasākumā!",
+      "availableTickets": "Pieejamās biļetes",
+      "soldOut": "Izpārdots",
+      "availableCount": "Pieejamas: {count}",
+      "terms": "Noteikumi un nosacījumi",
+      "soldOutTitle": "Šis pasākums ir izpārdots",
+      "soldOutDescription": "Visas biļetes ir iegādātas."
+    },
+    "eventPurchase": {
+      "title": "Iegādāties biļeti",
+      "description": "Izvēlieties biļeti un pabeidziet pirkumu",
+      "selectTicket": "Izvēlieties biļeti",
+      "attendeeNameLabel": "Dalībnieka vārds (neobligāti)",
+      "attendeeNamePlaceholder": "Personas, kas apmeklēs pasākumu, vārds",
+      "attendeeEmailLabel": "Dalībnieka e-pasts (neobligāti)",
+      "attendeeEmailPlaceholder": "E-pasts biļetes piegādei",
+      "total": "Kopā",
+      "submit": "Iegādāties biļeti",
+      "noTickets": "Šobrīd nav pieejamu biļešu.",
+      "checkBackLater": "Lūdzu, ieskatieties vēlāk vai sazinieties ar pasākuma organizatoru.",
+      "selectTicketError": "Lūdzu, izvēlieties biļeti",
+      "purchaseFailed": "Neizdevās iegādāties biļeti"
+    },
+    "ticket": {
+      "noPermission": "Jums nav atļaujas skatīt šo biļeti.",
+      "heading": "Biļete Nr. {number}",
+      "qrTitle": "QR kods",
+      "qrDescription": "Uzrādiet šo QR kodu pasākuma ieejā",
+      "qrAlt": "Biļetes QR kods",
+      "qrUnavailable": "QR kods nav pieejams",
+      "ticketNumber": "Biļetes numurs: <strong>{number}</strong>",
+      "used": "Biļete ir izmantota",
+      "detailsTitle": "Biļetes informācija",
+      "detailsDescription": "Svarīga informācija par jūsu biļeti",
+      "staffCanRedeem": "Kā tirgotāja darbinieks jūs varat izmantot šo biļeti pasākumā."
+    },
+    "redeem": {
+      "notFoundTitle": "Izmantošana nav atrasta",
+      "notFoundDescription": "QR kods ir nederīgs vai beidzies.",
+      "title": "Kupons izmantots",
+      "alreadyRedeemed": "Šis kupons jau ir izmantots.",
+      "confirmed": "Izmantošana veiksmīgi apstiprināta."
+    },
+    "qrCheckout": {
+      "title": "QR norēķins",
+      "completeTitle": "Norēķins pabeigts",
+      "completeDescription": "Jūsu pirkums ir apstiprināts. Sīkāka informācija ir nosūtīta uz jūsu e-pastu.",
+      "payNow": "Maksāt tagad",
+      "confirming": "Apstiprina..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Kupons nav atrasts",
+      "notFoundDescription": "Meklēto kuponu neizdevās atrast.",
+      "descriptionFallback": "Ekskluzīvs kupona piedāvājums",
+      "shareText": "Apskatiet šo {merchant} kuponu",
+      "copyCode": "Kopēt kupona kodu",
+      "qrAlt": "Kupona {code} QR kods",
+      "print": "Drukāt kuponu"
+    },
+    "referralPage": {
+      "voucherFrom": "Jūs saņēmāt kuponu no <highlight>{name}</highlight>",
+      "qrAlt": "Kupona {code} izmantošanas QR kods",
+      "offAtMerchantShared": "{value} atlaide pie {merchant} – kopīgojis draugs!"
+    },
+    "bnpl": {
+      "title": "Maksāt pa daļām",
+      "description": "Sadaliet savu {amount} maksājumu ērtos ikmēneša maksājumos.",
+      "perMonth": "/mēn.",
+      "planNoInterest": "{months}x (0% procentu)",
+      "planWithFee": "{months}x ({rate}% komisija)",
+      "monthlyPayments": "{count, plural, zero {# ikmēneša maksājumu} one {# ikmēneša maksājums} other {# ikmēneša maksājumi}}",
+      "total": "Kopā: {amount}",
+      "noExtraCost": "Bez papildu izmaksām",
+      "payNow": "Maksāt {amount} tagad"
+    },
+    "qrPanel": {
+      "qrAlt": "QR kods",
+      "generateFailed": "Neizdevās ģenerēt QR kodu",
+      "placeholder": "Šeit parādīsies QR kods",
+      "generating": "Ģenerē QR kodu...",
+      "unavailable": "QR nav pieejams",
+      "hideCode": "Slēpt kodu",
+      "showCode": "Rādīt kodu",
+      "expires": "Derīgs līdz {date}",
+      "refreshNote": "Kods atjaunojas ik pēc 30 sekundēm"
+    },
+    "qrDownload": {
+      "success": "QR kods veiksmīgi lejupielādēts!",
+      "failed": "Neizdevās lejupielādēt QR kodu",
+      "downloading": "Lejupielādē...",
+      "download": "Lejupielādēt QR"
     }
   }
 }
