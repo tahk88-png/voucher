@@ -887,5 +887,283 @@
         "subtitle": "Pievienojiet piekļuves atslēgu vai divfaktoru autentifikāciju."
       }
     }
+  },
+  "labels": {
+    "free": "Bezmaksas",
+    "valueOff": "{value} atlaide",
+    "valueCredit": "{value} kredīts",
+    "valueDiscount": "{value} atlaide",
+    "demo": "Demo",
+    "demoHint": "Parauga saturs, kas parāda, kā platforma darbojas. Tas nav īsts piedāvājums.",
+    "category": {
+      "cafe": "Kafejnīcas un konditorejas",
+      "beauty": "Skaistumkopšana un labsajūta",
+      "fitness": "Fitness un sports",
+      "events": "Pasākumi un biļetes",
+      "workshops": "Darbnīcas un nodarbības",
+      "family": "Ģimene un bērni",
+      "travel": "Ceļojumi un naktsmītnes",
+      "outdoor": "Brīvdaba un piedzīvojumi",
+      "other": "Cits",
+      "all": "Visas kategorijas"
+    },
+    "voucherType": {
+      "percentage": "Procentuālā atlaide",
+      "fixed_amount": "Summas atlaide",
+      "credit_amount": "Veikala kredīts"
+    },
+    "voucherStatus": {
+      "draft": "Melnraksts",
+      "published": "Publicēts",
+      "paused": "Apturēts",
+      "ended": "Beidzies",
+      "expired": "Derīgums beidzies"
+    },
+    "campaignStatus": {
+      "draft": "Melnraksts",
+      "active": "Aktīva",
+      "ended": "Beigusies"
+    },
+    "campaignType": {
+      "limited": "Vienreizējs piedāvājums",
+      "weekly": "Nedēļas piedāvājums"
+    },
+    "campaignTypeHelp": {
+      "limited": "Darbojas vienu reizi no sākuma līdz beigu datumam, kamēr krājumi pietiek.",
+      "weekly": "Atkārtots iknedēļas piedāvājums, pie kura klienti var atgriezties katru nedēļu līdz beigu datumam."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Parauga piedāvājums · nav pārdošanā",
+    "notOnSale": "Vēl nav pārdošanā",
+    "purchases": "{count, plural, zero {# pirkumu} one {# pirkums} other {# pirkumi}}",
+    "freeToClaim": "Saņem bez maksas",
+    "onSaleNow": "Jau pārdošanā"
+  },
+  "account": {
+    "error": {
+      "title": "Kaut kas nogāja greizi",
+      "fallback": "Radās neparedzēta kļūda.",
+      "retry": "Mēģināt vēlreiz"
+    },
+    "dashboard": {
+      "metaTitle": "Mans panelis"
+    },
+    "cashback": {
+      "metaTitle": "Naudas atmaksa un kredīti",
+      "title": "Naudas atmaksa un kredīti",
+      "description": "Viss jūsu nopelnītais kredīts pie visiem tirgotājiem, kuros iepērkaties.",
+      "lockedPending": "Bloķēts (gaida)",
+      "used": "Izmantots",
+      "expiringTitle": "Beidzas 30 dienu laikā",
+      "expiresOn": "{merchant} — derīgs līdz {date}",
+      "expiresSoon": "{merchant} — drīz beigsies",
+      "byMerchant": "Pēc tirgotāja",
+      "lastActivity": "Pēdējā darbība {date}",
+      "readyToSpend": "Gatavs izlietošanai",
+      "viewMerchantWallet": "Skatīt tirgotāja maciņu →"
+    },
+    "nearby": {
+      "title": "Piedāvājumi tuvumā",
+      "subtitle": "Atrodiet piedāvājumus un kuponus no tirgotājiem jūsu tuvumā",
+      "useMyLocation": "Izmantot manu atrašanās vietu",
+      "approximateLocation": "Aptuvena atrašanās vieta (pēc IP)",
+      "searchRadius": "Meklēšanas rādiuss",
+      "yourLocation": "Jūsu atrašanās vieta",
+      "mapLabel": "{count, plural, zero {# tirgotāju} one {# tirgotājs} other {# tirgotāji}} {radius} km rādiusā",
+      "merchantsNearby": "{count, plural, zero {# tirgotāju} one {# tirgotājs} other {# tirgotāji}} tuvumā",
+      "activeVouchers": "{count, plural, zero {# aktīvu kuponu} one {# aktīvs kupons} other {# aktīvi kuponi}}",
+      "emptyTitle": "Tuvumā nav tirgotāju",
+      "emptyBody": "Mēģiniet palielināt meklēšanas rādiusu vai ieskatieties vēlāk, lai redzētu jaunus piedāvājumus jūsu apkārtnē.",
+      "expandRadius": "Paplašināt līdz {radius} km",
+      "errors": {
+        "fetchFailed": "Neizdevās ielādēt tuvākos tirgotājus. Lūdzu, mēģiniet vēlreiz.",
+        "geolocationUnsupported": "Jūsu pārlūkprogramma neatbalsta ģeolokāciju.",
+        "permissionDenied": "Piekļuve atrašanās vietai liegta. Lūdzu, atļaujiet to pārlūkprogrammas iestatījumos.",
+        "positionUnavailable": "Atrašanās vieta nav pieejama. Mēģiniet vēlāk.",
+        "timeout": "Atrašanās vietas pieprasījumam beidzās laiks. Mēģiniet vēlreiz.",
+        "locationFailed": "Neizdevās noteikt jūsu atrašanās vietu.",
+        "ipLocationFailed": "Neizdevās noteikt jūsu atrašanās vietu."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Paziņojumu iestatījumi"
+    },
+    "redeem": {
+      "notFound": "Kupons nav atrasts.",
+      "codeUnavailable": "Kupona kods nav pieejams.",
+      "backToWallet": "Atpakaļ uz maciņu",
+      "back": "Atpakaļ"
+    },
+    "referrals": {
+      "metaTitle": "Mani ieteikumi",
+      "completedCount": "Pabeigti: {count}"
+    },
+    "voucherDetail": {
+      "back": "Atpakaļ",
+      "merchantFallback": "Tirgotājs",
+      "termsTitle": "Noteikumi un nosacījumi",
+      "terms1": "Šis kupons ir derīgs līdz augstāk norādītajam datumam. To nevar apvienot ar citiem piedāvājumiem vai akcijām, ja vien nav norādīts citādi.",
+      "terms2": "Kupons jāuzrāda pirkuma brīdī. Tam nav naudas vērtības. To nevar apmainīt pret naudu vai atmaksāt.",
+      "terms3": "Tirgotājs patur tiesības atteikt izmantošanu, ja kupons šķiet dublēts, pārveidots vai izmantots krāpnieciski.",
+      "terms4": "Jautājumu vai problēmu gadījumā, lūdzu, sazinieties tieši ar tirgotāju."
+    },
+    "vouchers": {
+      "unknownMerchant": "Nezināms",
+      "paidAmount": "Samaksāts: {amount}",
+      "activeCount": "Aktīvie ({count})",
+      "pastCount": "Iepriekšējie ({count})"
+    },
+    "voucherCard": {
+      "showQr": "Rādīt QR kodu",
+      "close": "Aizvērt",
+      "qrHint": "Parādiet šo QR kodu tirgotājam, lai izmantotu kuponu veikalā."
+    },
+    "wallet": {
+      "metaTitle": "Mans maciņš"
+    },
+    "wishlist": {
+      "unknownItem": "Nezināms vienums",
+      "merchant": "Tirgotājs",
+      "campaign": "Kampaņa",
+      "validUntil": "Derīgs līdz {date}",
+      "alertOn": "Paziņojums ieslēgts",
+      "noAlert": "Bez paziņojuma",
+      "view": "Skatīt"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Kampaņa nav pieejama",
+      "metaDescriptionFallback": "Piedāvājums no {merchant}.",
+      "breadcrumbLabel": "Navigācijas ceļš",
+      "breadcrumbCampaigns": "Kampaņas",
+      "demoNotice": "<strong>Parauga piedāvājums.</strong> Šī lapa parāda, kā piedāvājums izskatās GiftHub. Uzņēmums un piedāvājums ir piemēri: šeit neko nevar nopirkt vai izmantot.",
+      "verifiedPartner": "Pārbaudīts partneris",
+      "aboutTitle": "Par šo piedāvājumu",
+      "descriptionFallback": "Īpašs tirgotāja piedāvājums GiftHub platformā.",
+      "howItWorks": {
+        "title": "Kā tas darbojas",
+        "claimTitle": "Saņemiet kuponu",
+        "buyTitle": "Iegādājieties kuponu",
+        "buyText": "Droši samaksājiet tiešsaistē vai saņemiet to bez maksas, ja piedāvājums ir bezmaksas.",
+        "qrTitle": "Saņemiet savu QR kodu",
+        "qrText": "Kupons tiek saglabāts jūsu GiftHub maciņā ar personīgu QR kodu.",
+        "showTitle": "Uzrādiet to uz vietas",
+        "showText": "{merchant} noskenē kodu, un atlaide tiek piemērota."
+      },
+      "termsTitle": "Noteikumi",
+      "voucherOptionsTitle": "Kuponu iespējas",
+      "voucherFallbackTitle": "Kupons",
+      "viewVoucher": "Skatīt kuponu",
+      "reviewsTitle": "Atsauksmes",
+      "purchaseLabel": "Pirkums",
+      "buyNow": "Pirkt tagad",
+      "getFreeVoucher": "Saņemt bezmaksas kuponu",
+      "sampleOffer": "Parauga piedāvājums",
+      "notOnSaleYet": "Vēl nav pārdošanā",
+      "demoNotForSale": "Šis ir parauga saturs, tāpēc to nevar iegādāties.",
+      "noVoucherYet": "{merchant} vēl nav publicējis kuponu šim piedāvājumam. Ieskatieties vēlāk.",
+      "offerRuns": "Piedāvājums spēkā",
+      "bought": "Iegādāts",
+      "boughtCount": "{count, plural, zero {# reižu} one {# reizi} other {# reizes}}",
+      "website": "Tīmekļa vietne",
+      "allOffersFrom": "Visi {merchant} piedāvājumi",
+      "moreFrom": "Vairāk no {merchant}"
+    },
+    "list": {
+      "allCategories": "Visas",
+      "badge": "Aktīvo kampaņu tirgus vieta",
+      "heroTitle": "Atklājiet karstākos piedāvājumus Eiropā",
+      "heroSubtitle": "Pārlūkojiet kuponus, dāvanas un pieredzes, ko atlasījuši labākie tirgotāji jūsu tirgū.",
+      "searchLabel": "Meklēt kampaņas",
+      "searchPlaceholder": "Meklējiet kampaņas, tirgotājus vai pakalpojumus...",
+      "campaignCount": "{count, plural, zero {<b>#</b> kampaņu} one {<b>#</b> kampaņa} other {<b>#</b> kampaņas}}",
+      "voucherCount": "{count, plural, zero {<b>#</b> kuponu pārdošanā} one {<b>#</b> kupons pārdošanā} other {<b>#</b> kuponi pārdošanā}}",
+      "merchantCount": "{count, plural, zero {<b>#</b> tirgotāju} one {<b>#</b> tirgotājs} other {<b>#</b> tirgotāji}}",
+      "categoriesLabel": "Kategorijas",
+      "unavailableTitle": "Kampaņas īslaicīgi nav pieejamas",
+      "unavailableText": "Neizdevās izveidot savienojumu ar datubāzi. Lūdzu, mēģiniet vēlreiz pēc brīža.",
+      "emptyTitle": "Piedāvājumi nav atrasti",
+      "emptyText": "Izmēģiniet citu meklēšanas vaicājumu vai izvēlieties citu kategoriju.",
+      "tryAgain": "Mēģināt vēlreiz",
+      "clearFilters": "Notīrīt filtrus"
+    },
+    "listError": {
+      "title": "Neizdevās ielādēt kampaņas",
+      "fallbackMessage": "Ielādējot kampaņas, radās neparedzēta kļūda.",
+      "tryAgain": "Mēģināt vēlreiz"
+    },
+    "filters": {
+      "sortBy": "Kārtot pēc",
+      "sort": {
+        "newest": "Jaunākie",
+        "oldest": "Vecākie",
+        "priceLow": "Cena: no zemākās",
+        "priceHigh": "Cena: no augstākās",
+        "popular": "Populārākie",
+        "expiring": "Drīz beigsies"
+      },
+      "merchant": "Tirgotājs",
+      "allMerchants": "Visi tirgotāji",
+      "minPrice": "Min. cena",
+      "minPricePlaceholder": "Min. €",
+      "maxPrice": "Maks. cena",
+      "maxPricePlaceholder": "Maks. €"
+    },
+    "tenantList": {
+      "title": "Kuponi",
+      "subtitle": "Aktīvie {merchant} piedāvājumi.",
+      "empty": "Vēl nav pieejamu kuponu.",
+      "voucher": "Kupons",
+      "viewVoucher": "Skatīt kuponu"
+    },
+    "deals": {
+      "metaTitle": "Piedāvājumi",
+      "metaDescription": "Atklājiet labākos kuponu piedāvājumus"
+    },
+    "campaignShare": {
+      "share": "Dalīties",
+      "copied": "Nokopēts",
+      "linkCopied": "Saite nokopēta",
+      "copyFailed": "Neizdevās nokopēt"
+    },
+    "shareSheet": {
+      "share": "Dalīties",
+      "title": {
+        "voucher": "Dalīties ar šo kuponu",
+        "campaign": "Dalīties ar šo kampaņu",
+        "merchant": "Dalīties ar šo tirgotāju"
+      },
+      "close": "Aizvērt",
+      "referralShareText": "{title} - dalieties un saņemiet 10% atpakaļ!",
+      "referralNote": "<b>Dalieties un nopelniet 10%</b>, kad draugi izmanto kuponu!",
+      "targets": {
+        "email": "E-pasts",
+        "copy": "Kopēt saiti"
+      },
+      "copied": "Nokopēts!",
+      "linkCopiedToClipboard": "Saite nokopēta starpliktuvē!",
+      "linkCopied": "Saite nokopēta!",
+      "shareLinkLabel": "Kopīgošanas saite",
+      "copyLink": "Kopēt saiti"
+    },
+    "wishlistButton": {
+      "add": "Pievienot vēlmju sarakstam",
+      "remove": "Noņemt no vēlmju saraksta"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, zero {# zvaigžņu} one {# zvaigzne} other {# zvaigznes}}"
+    },
+    "form": {
+      "title": "Rakstīt atsauksmi",
+      "ratingLabel": "Vērtējums",
+      "titleLabel": "Virsraksts (neobligāts)",
+      "titlePlaceholder": "Īsi aprakstiet savu pieredzi",
+      "commentLabel": "Komentārs (neobligāts)",
+      "commentPlaceholder": "Dalieties savā pieredzē..."
+    }
   }
 }

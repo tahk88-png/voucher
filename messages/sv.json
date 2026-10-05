@@ -887,5 +887,497 @@
         "subtitle": "Lägg till en passkey eller tvåfaktorsautentisering."
       }
     }
+  },
+  "labels": {
+    "free": "Gratis",
+    "valueOff": "{value} rabatt",
+    "valueCredit": "{value} i kredit",
+    "valueDiscount": "{value} rabatt",
+    "demo": "Demo",
+    "demoHint": "Exempelinnehåll som visar hur plattformen fungerar. Inget riktigt erbjudande.",
+    "category": {
+      "cafe": "Kafé och bageri",
+      "beauty": "Skönhet och välmående",
+      "fitness": "Träning och sport",
+      "events": "Evenemang och biljetter",
+      "workshops": "Workshoppar och kurser",
+      "family": "Familj och barn",
+      "travel": "Resor och boende",
+      "outdoor": "Friluftsliv och äventyr",
+      "other": "Övrigt",
+      "all": "Alla kategorier"
+    },
+    "voucherType": {
+      "percentage": "Procentrabatt",
+      "fixed_amount": "Beloppsrabatt",
+      "credit_amount": "Butikskredit"
+    },
+    "voucherStatus": {
+      "draft": "Utkast",
+      "published": "Publicerad",
+      "paused": "Pausad",
+      "ended": "Avslutad",
+      "expired": "Utgången"
+    },
+    "campaignStatus": {
+      "draft": "Utkast",
+      "active": "Aktiv",
+      "ended": "Avslutad"
+    },
+    "campaignType": {
+      "limited": "Engångserbjudande",
+      "weekly": "Veckoerbjudande"
+    },
+    "campaignTypeHelp": {
+      "limited": "Gäller en gång mellan start- och slutdatum, så länge lagret räcker.",
+      "weekly": "Ett återkommande veckoerbjudande som kunderna kan komma tillbaka till varje vecka fram till slutdatum."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Exempelerbjudande · säljs inte",
+    "notOnSale": "Inte till salu än",
+    "purchases": "{count, plural, one {# köp} other {# köp}}",
+    "freeToClaim": "Hämta gratis",
+    "onSaleNow": "Till salu nu"
+  },
+  "account": {
+    "error": {
+      "title": "Något gick fel",
+      "fallback": "Ett oväntat fel uppstod.",
+      "retry": "Försök igen"
+    },
+    "dashboard": {
+      "metaTitle": "Min översikt"
+    },
+    "cashback": {
+      "metaTitle": "Cashback och krediter",
+      "title": "Cashback och krediter",
+      "description": "All kredit du har tjänat, hos alla handlare du handlar hos.",
+      "lockedPending": "Låst (väntande)",
+      "used": "Använd",
+      "expiringTitle": "Går ut inom 30 dagar",
+      "expiresOn": "{merchant} – går ut {date}",
+      "expiresSoon": "{merchant} – går snart ut",
+      "byMerchant": "Per handlare",
+      "lastActivity": "Senaste aktivitet {date}",
+      "readyToSpend": "Redo att användas",
+      "viewMerchantWallet": "Visa handlarens plånbok →"
+    },
+    "nearby": {
+      "title": "Erbjudanden i närheten",
+      "subtitle": "Hitta erbjudanden och kuponger från handlare nära dig",
+      "useMyLocation": "Använd min plats",
+      "approximateLocation": "Ungefärlig plats (IP-baserad)",
+      "searchRadius": "Sökradie",
+      "yourLocation": "Din plats",
+      "mapLabel": "{count, plural, one {# handlare} other {# handlare}} inom {radius} km",
+      "merchantsNearby": "{count, plural, one {# handlare} other {# handlare}} i närheten",
+      "activeVouchers": "{count, plural, one {# aktiv kupong} other {# aktiva kuponger}}",
+      "emptyTitle": "Inga handlare i närheten",
+      "emptyBody": "Prova att öka sökradien eller kom tillbaka senare för nya erbjudanden i ditt område.",
+      "expandRadius": "Utöka till {radius} km",
+      "errors": {
+        "fetchFailed": "Det gick inte att läsa in handlare i närheten. Försök igen.",
+        "geolocationUnsupported": "Din webbläsare stöder inte platstjänster.",
+        "permissionDenied": "Platsåtkomst nekad. Aktivera plats i webbläsarens inställningar.",
+        "positionUnavailable": "Platsen är inte tillgänglig. Försök igen senare.",
+        "timeout": "Platsförfrågan tog för lång tid. Försök igen.",
+        "locationFailed": "Det gick inte att hämta din plats.",
+        "ipLocationFailed": "Det gick inte att avgöra din plats."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Notisinställningar"
+    },
+    "redeem": {
+      "notFound": "Kupongen hittades inte.",
+      "codeUnavailable": "Kupongkoden är inte tillgänglig.",
+      "backToWallet": "Tillbaka till plånboken",
+      "back": "Tillbaka"
+    },
+    "referrals": {
+      "metaTitle": "Mina rekommendationer",
+      "completedCount": "Slutförda: {count}"
+    },
+    "voucherDetail": {
+      "back": "Tillbaka",
+      "merchantFallback": "Handlare",
+      "termsTitle": "Villkor",
+      "terms1": "Kupongen gäller till och med utgångsdatumet ovan. Den kan inte kombineras med andra erbjudanden eller kampanjer om inget annat anges.",
+      "terms2": "Kupongen ska visas upp vid köpet. Den har inget kontantvärde och kan inte växlas in mot kontanter eller återbetalas.",
+      "terms3": "Handlaren förbehåller sig rätten att neka inlösen om kupongen verkar vara kopierad, manipulerad eller använd i bedrägligt syfte.",
+      "terms4": "Kontakta handlaren direkt vid frågor eller problem."
+    },
+    "vouchers": {
+      "unknownMerchant": "Okänd",
+      "paidAmount": "Betalt: {amount}",
+      "activeCount": "Aktiva ({count})",
+      "pastCount": "Tidigare ({count})"
+    },
+    "voucherCard": {
+      "showQr": "Visa QR-kod",
+      "close": "Stäng",
+      "qrHint": "Visa den här QR-koden för handlaren för att lösa in i butik."
+    },
+    "wallet": {
+      "metaTitle": "Min plånbok"
+    },
+    "wishlist": {
+      "unknownItem": "Okänd artikel",
+      "merchant": "Handlare",
+      "campaign": "Kampanj",
+      "validUntil": "Giltig till {date}",
+      "alertOn": "Bevakning på",
+      "noAlert": "Ingen bevakning",
+      "view": "Visa"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Kampanjen är inte tillgänglig",
+      "metaDescriptionFallback": "Erbjudande från {merchant}.",
+      "breadcrumbLabel": "Brödsmulor",
+      "breadcrumbCampaigns": "Kampanjer",
+      "demoNotice": "<strong>Exempelerbjudande.</strong> Den här sidan visar hur ett erbjudande ser ut på GiftHub. Företaget och erbjudandet är exempel: inget här kan köpas eller lösas in.",
+      "verifiedPartner": "Verifierad partner",
+      "aboutTitle": "Om erbjudandet",
+      "descriptionFallback": "Specialerbjudande från en handlare på GiftHub.",
+      "howItWorks": {
+        "title": "Så fungerar det",
+        "claimTitle": "Hämta kupongen",
+        "buyTitle": "Köp kupongen",
+        "buyText": "Betala säkert online, eller hämta den gratis när erbjudandet är gratis.",
+        "qrTitle": "Få din QR-kod",
+        "qrText": "Kupongen sparas i din GiftHub-plånbok med en personlig QR-kod.",
+        "showTitle": "Visa den på plats",
+        "showText": "{merchant} skannar koden och rabatten dras av."
+      },
+      "termsTitle": "Villkor",
+      "voucherOptionsTitle": "Kupongalternativ",
+      "voucherFallbackTitle": "Kupong",
+      "viewVoucher": "Visa kupong",
+      "reviewsTitle": "Recensioner",
+      "purchaseLabel": "Köp",
+      "buyNow": "Köp nu",
+      "getFreeVoucher": "Hämta gratis kupong",
+      "sampleOffer": "Exempelerbjudande",
+      "notOnSaleYet": "Inte till salu än",
+      "demoNotForSale": "Det här är exempelinnehåll och kan inte köpas.",
+      "noVoucherYet": "{merchant} har inte publicerat någon kupong för det här erbjudandet än. Kom tillbaka senare.",
+      "offerRuns": "Erbjudandet gäller",
+      "bought": "Köpt",
+      "boughtCount": "{count, plural, one {# gång} other {# gånger}}",
+      "website": "Webbplats",
+      "allOffersFrom": "Alla erbjudanden från {merchant}",
+      "moreFrom": "Mer från {merchant}"
+    },
+    "list": {
+      "allCategories": "Alla",
+      "badge": "Marknadsplats för aktiva kampanjer",
+      "heroTitle": "Upptäck Europas hetaste erbjudanden",
+      "heroSubtitle": "Bläddra bland kuponger, presenter och upplevelser från utvalda handlare på din marknad.",
+      "searchLabel": "Sök kampanjer",
+      "searchPlaceholder": "Sök kampanjer, handlare eller tjänster...",
+      "campaignCount": "{count, plural, one {<b>#</b> kampanj} other {<b>#</b> kampanjer}}",
+      "voucherCount": "{count, plural, one {<b>#</b> kupong till salu} other {<b>#</b> kuponger till salu}}",
+      "merchantCount": "{count, plural, one {<b>#</b> handlare} other {<b>#</b> handlare}}",
+      "categoriesLabel": "Kategorier",
+      "unavailableTitle": "Kampanjerna är tillfälligt otillgängliga",
+      "unavailableText": "Det gick inte att ansluta till databasen. Försök igen om en stund.",
+      "emptyTitle": "Inga erbjudanden hittades",
+      "emptyText": "Prova en annan sökning eller välj en annan kategori.",
+      "tryAgain": "Försök igen",
+      "clearFilters": "Rensa filter"
+    },
+    "listError": {
+      "title": "Det gick inte att läsa in kampanjer",
+      "fallbackMessage": "Ett oväntat fel uppstod när kampanjerna lästes in.",
+      "tryAgain": "Försök igen"
+    },
+    "filters": {
+      "sortBy": "Sortera efter",
+      "sort": {
+        "newest": "Nyaste",
+        "oldest": "Äldsta",
+        "priceLow": "Pris: lägst först",
+        "priceHigh": "Pris: högst först",
+        "popular": "Populärast",
+        "expiring": "Går snart ut"
+      },
+      "merchant": "Handlare",
+      "allMerchants": "Alla handlare",
+      "minPrice": "Lägsta pris",
+      "minPricePlaceholder": "Min €",
+      "maxPrice": "Högsta pris",
+      "maxPricePlaceholder": "Max €"
+    },
+    "tenantList": {
+      "title": "Kuponger",
+      "subtitle": "Aktiva erbjudanden från {merchant}.",
+      "empty": "Inga kuponger tillgängliga än.",
+      "voucher": "Kupong",
+      "viewVoucher": "Visa kupong"
+    },
+    "deals": {
+      "metaTitle": "Erbjudanden",
+      "metaDescription": "Upptäck de bästa kupongerbjudandena"
+    },
+    "campaignShare": {
+      "share": "Dela",
+      "copied": "Kopierat",
+      "linkCopied": "Länken har kopierats",
+      "copyFailed": "Kopieringen misslyckades"
+    },
+    "shareSheet": {
+      "share": "Dela",
+      "title": {
+        "voucher": "Dela den här kupongen",
+        "campaign": "Dela den här kampanjen",
+        "merchant": "Dela den här handlaren"
+      },
+      "close": "Stäng",
+      "referralShareText": "{title} – Dela och få 10 % tillbaka!",
+      "referralNote": "<b>Dela och tjäna 10 %</b> när dina vänner löser in!",
+      "targets": {
+        "email": "E-post",
+        "copy": "Kopiera länk"
+      },
+      "copied": "Kopierat!",
+      "linkCopiedToClipboard": "Länken har kopierats till urklipp!",
+      "linkCopied": "Länken har kopierats!",
+      "shareLinkLabel": "Delningslänk",
+      "copyLink": "Kopiera länk"
+    },
+    "wishlistButton": {
+      "add": "Lägg till i önskelistan",
+      "remove": "Ta bort från önskelistan"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# stjärna} other {# stjärnor}}"
+    },
+    "form": {
+      "title": "Skriv en recension",
+      "ratingLabel": "Betyg",
+      "titleLabel": "Rubrik (valfritt)",
+      "titlePlaceholder": "Sammanfatta din upplevelse",
+      "commentLabel": "Kommentar (valfritt)",
+      "commentPlaceholder": "Berätta om din upplevelse...",
+      "submit": "Skicka recension",
+      "submitting": "Skickar...",
+      "ratingRequired": "Välj ett betyg",
+      "submitFailed": "Det gick inte att skicka recensionen",
+      "alreadyReviewed": "Du har redan recenserat det här",
+      "signInRequired": "Logga in för att skriva en recension",
+      "thankYou": "Tack för din recension!",
+      "writeAnother": "Skriv en till recension"
+    },
+    "list": {
+      "sort": {
+        "newest": "Nyaste",
+        "highest": "Högst betyg",
+        "helpful": "Mest hjälpsamma"
+      },
+      "signInToReview": "Logga in för att skriva en recension",
+      "loadFailed": "Det gick inte att läsa in recensionerna.",
+      "tryAgain": "Försök igen",
+      "empty": "Inga recensioner än.",
+      "anonymous": "Anonym",
+      "verified": "Verifierad",
+      "helpfulButton": "Hjälpsam ({count})",
+      "foundHelpful": "{count} tyckte att detta var hjälpsamt",
+      "previous": "Föregående",
+      "next": "Nästa",
+      "pageOf": "Sida {current} av {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Avbryt",
+      "saving": "Sparar…",
+      "somethingWentWrong": "Något gick fel"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Inte inloggad",
+      "unauthorized": "Obehörig",
+      "tooManyAttempts": "För många försök",
+      "validationFailed": "Valideringen misslyckades",
+      "unexpected": "Ett oväntat fel uppstod",
+      "databaseFailed": "Databasåtgärden misslyckades",
+      "serviceUnavailable": "Tjänsten är tillfälligt otillgänglig",
+      "newPasswordTooShort": "Det nya lösenordet måste vara minst 8 tecken",
+      "userNotFound": "Användaren hittades inte",
+      "currentPasswordRequired": "Nuvarande lösenord krävs",
+      "currentPasswordIncorrect": "Nuvarande lösenord är felaktigt",
+      "deletionUnavailable": "Det går tillfälligt inte att radera konton. Kontakta supporten.",
+      "totpAlreadyEnabledReconfigure": "Tvåstegsverifiering är redan aktiverad. Inaktivera den först för att konfigurera om.",
+      "sixDigitCodeRequired": "En sexsiffrig kod krävs",
+      "totpSetupMissing": "Ingen TOTP-konfiguration hittades. Starta konfigurationen först.",
+      "totpAlreadyEnabled": "Tvåstegsverifiering är redan aktiverad",
+      "invalidSetupCode": "Ogiltig kod. Kontrollera din autentiseringsapp och försök igen.",
+      "verificationCodeRequired": "En verifieringskod krävs",
+      "totpNotEnabled": "Tvåstegsverifiering är inte aktiverad",
+      "invalidDisableCode": "Ogiltig kod. Ange din aktuella TOTP-kod eller en reservkod.",
+      "passkeyOptionsFailed": "Det gick inte att hämta registreringsalternativ",
+      "passkeyGenerateOptionsFailed": "Det gick inte att skapa registreringsalternativ",
+      "registrationFailed": "Registreringen misslyckades",
+      "passkeyRegistrationFailed": "Registreringen av nyckeln misslyckades",
+      "passkeyChallengeExpired": "Utmaningen har gått ut eller hittades inte",
+      "verificationFailed": "Verifieringen misslyckades",
+      "passkeyVerifyFailed": "Det gick inte att verifiera registreringen"
+    },
+    "settings": {
+      "joinedOn": "Medlem sedan {date}",
+      "joinedRecently": "Nyligen ansluten"
+    },
+    "profileForm": {
+      "nameLabel": "Namn",
+      "namePlaceholder": "Ditt namn",
+      "emailLabel": "E-post",
+      "emailLocked": "E-postadressen kan inte ändras",
+      "save": "Spara ändringar",
+      "updated": "Profilen har uppdaterats",
+      "nameRequired": "Namn krävs",
+      "updateFailed": "Det gick inte att uppdatera profilen"
+    },
+    "passwordForm": {
+      "currentLabel": "Nuvarande lösenord",
+      "newLabel": "Nytt lösenord",
+      "setLabel": "Ange lösenord",
+      "confirmLabel": "Bekräfta lösenord",
+      "showPassword": "Visa lösenord",
+      "hidePassword": "Dölj lösenord",
+      "change": "Byt lösenord",
+      "set": "Ange lösenord",
+      "updated": "Lösenordet har uppdaterats",
+      "tooShort": "Lösenordet måste vara minst {min} tecken",
+      "mismatch": "Lösenorden matchar inte",
+      "changeFailed": "Det gick inte att byta lösenord"
+    },
+    "deleteDialog": {
+      "trigger": "Radera konto",
+      "title": "Radera ditt konto?",
+      "description": "Åtgärden är permanent. Din profil, dina sessioner och notisinställningar raderas. Köphistoriken anonymiseras.",
+      "typeToConfirm": "Skriv <strong>{word}</strong> för att bekräfta:",
+      "confirm": "Radera permanent",
+      "deleting": "Raderar…",
+      "failed": "Det gick inte att radera kontot"
+    },
+    "passkeys": {
+      "title": "Nycklar (passkeys)",
+      "description": "Logga in utan lösenord med enhetens fingeravtryck, ansiktsigenkänning eller PIN-kod.",
+      "add": "Lägg till nyckel",
+      "namePlaceholder": "t.ex. ”MacBook Touch ID”",
+      "addSubmit": "Lägg till",
+      "adding": "Lägger till…",
+      "unsupported": "Den här webbläsaren stöder inte nycklar (passkeys). Prova en ny version av Chrome, Safari eller Edge.",
+      "empty": "Inga nycklar än. Lägg till en för att logga in utan lösenord.",
+      "devicePasskey": "Enhetsnyckel",
+      "passkey": "Nyckel",
+      "added": "Tillagd {date}",
+      "lastUsed": "Senast använd {date}",
+      "synced": "Synkad",
+      "removeConfirm": "Ta bort?",
+      "remove": "Ta bort",
+      "removeLabel": "Ta bort nyckel",
+      "loadFailed": "Det gick inte att läsa in nycklar",
+      "removeFailed": "Det gick inte att ta bort nyckeln"
+    },
+    "security": {
+      "title": "Säkerhet",
+      "description": "Hantera tvåstegsverifiering och säkerhetsinställningar",
+      "loading": "Laddar...",
+      "backToSettings": "Tillbaka till inställningar",
+      "enabledMessage": "Tvåstegsverifiering är nu aktiverad!",
+      "disabledMessage": "Tvåstegsverifiering har inaktiverats",
+      "errors": {
+        "statusLoadFailed": "Det gick inte att läsa in status för tvåstegsverifiering",
+        "setupFailed": "Det gick inte att starta konfigurationen",
+        "verifyFailed": "Verifieringen misslyckades",
+        "disableFailed": "Det gick inte att inaktivera tvåstegsverifiering"
+      },
+      "status": {
+        "title": "Tvåstegsverifiering",
+        "enabledBody": "Ditt konto skyddas med en autentiseringsapp.",
+        "disabledBody": "Lägg till ett extra säkerhetslager genom att kräva en kod från din autentiseringsapp.",
+        "enabled": "Aktiverad",
+        "notEnabled": "Inte aktiverad"
+      },
+      "setup": {
+        "title": "Konfigurera autentiseringsapp",
+        "description": "Använd en app som Google Authenticator, Authy eller 1Password för att generera verifieringskoder.",
+        "enable": "Aktivera 2FA"
+      },
+      "scan": {
+        "title": "Skanna QR-koden eller ange nyckeln manuellt",
+        "qrAlt": "Skanna den här QR-koden med din autentiseringsapp",
+        "manualKey": "Eller ange den här nyckeln manuellt:",
+        "copySecret": "Kopiera nyckel"
+      },
+      "verify": {
+        "title": "Ange verifieringskod",
+        "codeLabel": "Sexsiffrig kod från din app",
+        "submit": "Verifiera och aktivera"
+      },
+      "backupCodes": {
+        "title": "Spara dina reservkoder",
+        "description": "Förvara koderna säkert. Om du förlorar åtkomsten till din autentiseringsapp kan du logga in med en av dem. Varje kod kan bara användas en gång.",
+        "copy": "Kopiera koder",
+        "copied": "Kopierat!",
+        "download": "Ladda ner",
+        "done": "Klar"
+      },
+      "backupFile": {
+        "title": "GiftHub – reservkoder för tvåstegsverifiering",
+        "instructions": "Spara koderna på ett säkert ställe. Varje kod kan bara användas en gång.",
+        "generated": "Skapad: {date}"
+      },
+      "disable": {
+        "title": "Inaktivera tvåstegsverifiering",
+        "description": "Det här tar bort det extra säkerhetslagret från ditt konto.",
+        "button": "Inaktivera 2FA",
+        "confirmTitle": "Bekräfta inaktivering av 2FA",
+        "confirmDescription": "Ange den aktuella sexsiffriga koden från din autentiseringsapp eller en reservkod.",
+        "codeLabel": "Verifieringskod",
+        "codePlaceholder": "000000 eller XXXX-XXXX",
+        "confirm": "Bekräfta inaktivering"
+      },
+      "quickLinks": {
+        "title": "Snabblänkar för säkerhet",
+        "sessions": "Visa aktiva sessioner",
+        "changePassword": "Byt lösenord"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Betala för resultat, inte räckvidd. Handlarägd rekommendationsinfrastruktur: varumärkeskuponger och butikskredit."
+    },
+    "error": {
+      "unexpected": "Ett oväntat fel uppstod."
+    },
+    "hero": {
+      "badge": "Kuponger och rekommendationer för lokala företag",
+      "title": "Dina kunder säljer in <highlight>dina nästa kunder</highlight>",
+      "subtitle": "Skapa kupongkampanjer. Dina kunder delar dem, tjänar kredit och tar med vänner. Följ varje rekommendation. Se exakt vad varje ny kund kostar.",
+      "ctaMerchant": "Starta som handlare",
+      "ctaExplore": "Utforska kampanjer",
+      "noCardRequired": "Inget kreditkort krävs",
+      "freeTrial": "{days} dagars gratis provperiod",
+      "cancelAnytime": "Avsluta när du vill"
+    },
+    "stats": {
+      "activeCampaigns": "Aktiva kampanjer",
+      "merchants": "Handlare",
+      "processedValue": "Hanterat värde"
+    },
+    "merchantsTitle": "Handlare på plattformen",
+    "values": {
+      "referral": {
+        "title": "Rekommendationsmotor",
+        "description": "Dina kunder delar erbjudanden och tar automatiskt in nya kunder"
+      }
+    }
   }
 }
