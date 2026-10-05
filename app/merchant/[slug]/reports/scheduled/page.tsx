@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
@@ -27,15 +28,14 @@ interface Schedule {
   createdAt: string;
 }
 
-const PERIOD_LABELS: Record<string, string> = {
-  daily: 'Daily',
-  weekly: 'Weekly',
-  monthly: 'Monthly',
-};
+const PERIODS = ['daily', 'weekly', 'monthly'] as const;
 
 export default function ScheduledReportsPage() {
   const params = useParams();
   const slug = params.slug as string;
+  const t = useTranslations('merchantDashboard.scheduled');
+  // Dates follow the UI language (English unless Estonian is active).
+  const dateLocale = useLocale() === 'et' ? 'et' : 'en-GB';
 
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [loading, setLoading] = useState(true);
@@ -70,11 +70,11 @@ export default function ScheduledReportsPage() {
     if (!email) return;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError('Invalid email address');
+      setError(t('invalidEmail'));
       return;
     }
     if (recipients.includes(email)) {
-      setError('Email already added');
+      setError(t('emailAlreadyAdded'));
       return;
     }
     setRecipients([...recipients, email]);
@@ -88,7 +88,7 @@ export default function ScheduledReportsPage() {
 
   async function handleSave() {
     if (recipients.length === 0) {
-      setError('Add at least one recipient');
+      setError(t('addAtLeastOne'));
       return;
     }
 
@@ -104,12 +104,12 @@ export default function ScheduledReportsPage() {
       });
 
       if (res.ok) {
-        setSuccess('Report schedule saved successfully');
+        setSuccess(t('saved'));
         setRecipients([]);
         fetchSchedules();
       } else {
         const data = await res.json();
-        setError(data.error ?? 'Failed to save schedule');
+        setError(data.error ?? t('saveFailed'));
       }
     } finally {
       setSaving(false);
@@ -137,25 +137,25 @@ export default function ScheduledReportsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Scheduled Reports</h1>
-          <p className="text-sm text-[var(--text-muted)]">Configure automatic email reports</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
+          <p className="text-sm text-[var(--text-muted)]">{t('subtitle')}</p>
         </div>
         <Link href={`/merchant/${slug}/reports`}>
           <WarmButton variant="outline" size="sm">
-            ← Financial Reports
+            {t('backToReports')}
           </WarmButton>
         </Link>
       </div>
 
       {/* Existing Schedules */}
       <WarmCard padding="lg" className="bg-[var(--surface)]">
-        <h2 className="text-base font-semibold text-[var(--text)] mb-4">Active Schedules</h2>
+        <h2 className="text-base font-semibold text-[var(--text)] mb-4">{t('activeSchedules')}</h2>
         {loading ? (
-          <div className="text-sm text-[var(--text-muted)]">Loading...</div>
+          <div className="text-sm text-[var(--text-muted)]">{t('loading')}</div>
         ) : schedules.length === 0 ? (
           <div className="text-center py-8 text-[var(--text-muted)]">
             <Calendar className="h-8 w-8 mx-auto mb-2 opacity-30" />
-            <p className="text-sm">No schedules configured yet</p>
+            <p className="text-sm">{t('noSchedules')}</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -176,15 +176,15 @@ export default function ScheduledReportsPage() {
                   </div>
                   <div>
                     <div className="font-medium text-[var(--text)]">
-                      {PERIOD_LABELS[s.period]} Report
+                      {PERIODS.includes(s.period) ? t(`reportTitle.${s.period}`) : s.period}
                     </div>
                     <div className="text-xs text-[var(--text-muted)]">
-                      {s.recipients.length} recipient{s.recipients.length !== 1 ? 's' : ''}
+                      {t('recipientCount', { count: s.recipients.length })}
                       {s.lastSentAt && (
-                        <> &bull; Last sent: {new Date(s.lastSentAt).toLocaleDateString('en-GB')}</>
+                        <> &bull; {t('lastSent', { date: new Date(s.lastSentAt).toLocaleDateString(dateLocale) })}</>
                       )}
                       {s.nextRunAt && (
-                        <> &bull; Next: {new Date(s.nextRunAt).toLocaleDateString('en-GB')}</>
+                        <> &bull; {t('nextRun', { date: new Date(s.nextRunAt).toLocaleDateString(dateLocale) })}</>
                       )}
                     </div>
                   </div>
@@ -195,7 +195,7 @@ export default function ScheduledReportsPage() {
                     variant={s.enabled ? 'secondary' : 'primary'}
                     onClick={() => toggleSchedule(s)}
                   >
-                    {s.enabled ? 'Pause' : 'Resume'}
+                    {s.enabled ? t('pause') : t('resume')}
                   </WarmButton>
                 </div>
               </div>
@@ -206,14 +206,14 @@ export default function ScheduledReportsPage() {
 
       {/* New Schedule Form */}
       <WarmCard padding="lg" className="bg-[var(--surface)]">
-        <h2 className="text-base font-semibold text-[var(--text)] mb-4">Create Schedule</h2>
+        <h2 className="text-base font-semibold text-[var(--text)] mb-4">{t('createSchedule')}</h2>
 
         <div className="space-y-4">
           {/* Period Selector */}
           <div>
-            <Label className="text-sm font-medium text-[var(--text-muted)]">Frequency</Label>
+            <Label className="text-sm font-medium text-[var(--text-muted)]">{t('frequency')}</Label>
             <div className="flex gap-2 mt-1.5">
-              {(['daily', 'weekly', 'monthly'] as const).map((p) => (
+              {PERIODS.map((p) => (
                 <button
                   key={p}
                   onClick={() => setPeriod(p)}
@@ -223,7 +223,7 @@ export default function ScheduledReportsPage() {
                       : 'bg-[var(--surface-dim)] text-[var(--text-muted)] hover:bg-[var(--border)]'
                   }`}
                 >
-                  {PERIOD_LABELS[p]}
+                  {t(`period.${p}`)}
                 </button>
               ))}
             </div>
@@ -231,7 +231,7 @@ export default function ScheduledReportsPage() {
 
           {/* Recipients */}
           <div>
-            <Label className="text-sm font-medium text-[var(--text-muted)]">Recipients</Label>
+            <Label className="text-sm font-medium text-[var(--text-muted)]">{t('recipients')}</Label>
             <div className="flex gap-2 mt-1.5">
               <Input
                 value={recipientInput}
@@ -277,30 +277,29 @@ export default function ScheduledReportsPage() {
           )}
 
           <WarmButton onClick={handleSave} isLoading={saving} fullWidth>
-            Save Schedule
+            {t('save')}
           </WarmButton>
         </div>
       </WarmCard>
 
       {/* Preview info */}
       <WarmCard padding="lg" className="bg-[var(--surface)]">
-        <h2 className="text-base font-semibold text-[var(--text)] mb-3">Report Preview</h2>
+        <h2 className="text-base font-semibold text-[var(--text)] mb-3">{t('previewTitle')}</h2>
         <p className="text-sm text-[var(--text-muted)] mb-4">
-          Scheduled reports include revenue, redemption counts, top vouchers, and growth metrics.
-          Reports are sent as beautifully formatted HTML emails at 8:00 AM UTC.
+          {t('previewBody')}
         </p>
         <div className="grid gap-3 sm:grid-cols-3">
           <div className="p-3 bg-[var(--surface-dim)] rounded-xl text-center">
-            <div className="text-xs text-[var(--text-muted)]">Daily</div>
-            <div className="text-sm font-medium text-[var(--text)]">Every morning</div>
+            <div className="text-xs text-[var(--text-muted)]">{t('period.daily')}</div>
+            <div className="text-sm font-medium text-[var(--text)]">{t('everyMorning')}</div>
           </div>
           <div className="p-3 bg-[var(--surface-dim)] rounded-xl text-center">
-            <div className="text-xs text-[var(--text-muted)]">Weekly</div>
-            <div className="text-sm font-medium text-[var(--text)]">Every Monday</div>
+            <div className="text-xs text-[var(--text-muted)]">{t('period.weekly')}</div>
+            <div className="text-sm font-medium text-[var(--text)]">{t('everyMonday')}</div>
           </div>
           <div className="p-3 bg-[var(--surface-dim)] rounded-xl text-center">
-            <div className="text-xs text-[var(--text-muted)]">Monthly</div>
-            <div className="text-sm font-medium text-[var(--text)]">1st of each month</div>
+            <div className="text-xs text-[var(--text-muted)]">{t('period.monthly')}</div>
+            <div className="text-sm font-medium text-[var(--text)]">{t('firstOfMonth')}</div>
           </div>
         </div>
       </WarmCard>

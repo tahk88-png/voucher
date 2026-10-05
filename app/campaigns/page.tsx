@@ -11,6 +11,7 @@ import { formatCurrency } from "@/lib/utils"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import Link from "next/link"
+import { getTranslations } from "next-intl/server"
 
 import CampaignsPage, {
   generateMetadata as generateLocaleMetadata,
@@ -46,6 +47,7 @@ export default async function CampaignsAliasPage({
   const context = await getTenantContext()
   if (context.mode === "tenant" && context.tenant) {
     const tenant = context.tenant
+    const t = await getTranslations("offers")
     const now = new Date()
     const vouchers = await prisma.voucher.findMany({
       where: {
@@ -61,23 +63,23 @@ export default async function CampaignsAliasPage({
       <TenantShell merchant={tenant}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="mb-6">
-            <h1 className="text-2xl font-semibold text-[#2D2721]">Vouchers</h1>
-            <p className="text-sm text-[#6B5744]">Active offers from {tenant.name}.</p>
+            <h1 className="text-2xl font-semibold text-[#2D2721]">{t("tenantList.title")}</h1>
+            <p className="text-sm text-[#6B5744]">{t("tenantList.subtitle", { merchant: tenant.name })}</p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {vouchers.length === 0 ? (
               <WarmCard padding="lg" className="bg-white col-span-full text-center">
-                <p className="text-[#6B5744]">No vouchers available yet.</p>
+                <p className="text-[#6B5744]">{t("tenantList.empty")}</p>
               </WarmCard>
             ) : (
               vouchers.map((voucher) => (
                 <WarmCard key={voucher.id} padding="lg" className="bg-white">
-                  <p className="font-semibold text-[#2D2721]">Voucher</p>
+                  <p className="font-semibold text-[#2D2721]">{t("tenantList.voucher")}</p>
                   <p className="text-sm text-[#6B5744] mt-2">
                     {formatCurrency(voucher.value, voucher.currency || tenant.defaultCurrency)}
                   </p>
                   <WarmButton asChild className="mt-3">
-                    <Link href={`/v/${voucher.id}`}>View voucher</Link>
+                    <Link href={`/v/${voucher.id}`}>{t("tenantList.viewVoucher")}</Link>
                   </WarmButton>
                 </WarmCard>
               ))

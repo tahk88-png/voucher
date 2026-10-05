@@ -5,6 +5,7 @@ import type { CampaignCardData } from "@/lib/campaign-presentation"
 
 import { useState } from "react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import { ScrollReveal } from "@/components/animations/scroll-reveal"
@@ -18,7 +19,13 @@ import { BeforeAfterSlider } from "@/components/landing/before-after-slider"
 import { PricingCalculator } from "@/components/landing/pricing-calculator"
 import { formatWholeCurrency } from "@/components/landing/format-price"
 import { campaignCategories } from "@/lib/campaign-categories"
-import { PLAN_CATALOG, PLATFORM_FEE_PERCENT, TRIAL_DAYS } from "@/lib/access-control/monetization"
+import {
+  PLAN_CATALOG,
+  PLATFORM_FEE_PERCENT,
+  TRIAL_DAYS,
+  type PlanDefinition,
+  type PlanTier,
+} from "@/lib/access-control/monetization"
 import {
   ArrowRight,
   Baby,
@@ -78,35 +85,43 @@ export default function MarketingLanding({
   stats = null,
   trustedMerchants = [],
 }: MarketingLandingProps) {
+  const t = useTranslations("home")
+  const tLabels = useTranslations("labels")
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly")
 
+  const planName = (id: PlanTier) => t(`pricing.planName.${id}`)
+
   const valueCards = [
     {
+      id: "referral",
       icon: Users,
-      title: "Referral Engine",
-      description: "Your customers share deals and bring new customers automatically",
+      title: t("values.referral.title"),
+      description: t("values.referral.description"),
       color: "from-[var(--primary)] to-[var(--primary-hover)]",
       iconClass: "text-white",
     },
     {
+      id: "vouchers",
       icon: Ticket,
-      title: "Digital Vouchers",
-      description: "Create discount campaigns with flexible rules in minutes",
+      title: t("values.vouchers.title"),
+      description: t("values.vouchers.description"),
       color: "from-[var(--success)] to-[#7FA090]",
       iconClass: "text-white",
     },
     {
+      id: "qr",
       icon: QrCode,
-      title: "QR Redemption",
-      description: "Scan and validate in-store with just a phone. No hardware needed",
+      title: t("values.qr.title"),
+      description: t("values.qr.description"),
       color: "from-[var(--danger)] to-[#D16B4C]",
       iconClass: "text-white",
     },
     {
+      id: "analytics",
       icon: TrendingUp,
-      title: "Real-time Analytics",
-      description: "See exactly what each campaign costs and returns. No guesswork",
+      title: t("values.analytics.title"),
+      description: t("values.analytics.description"),
       color: "from-[#F5C98E] to-[#E5B97E]",
       iconClass: "text-[var(--text)]",
     },
@@ -115,20 +130,20 @@ export default function MarketingLanding({
   const howItWorks = [
     {
       step: 1,
-      title: "Create a Campaign",
-      description: "Set up a voucher in 2 minutes: discount, date range, max uses. Done.",
+      title: t("howItWorks.steps.create.title"),
+      description: t("howItWorks.steps.create.description"),
       icon: Sparkles,
     },
     {
       step: 2,
-      title: "Customers Share It",
-      description: "Every buyer gets a referral link. They share it, earn credit, bring friends.",
+      title: t("howItWorks.steps.share.title"),
+      description: t("howItWorks.steps.share.description"),
       icon: Users,
     },
     {
       step: 3,
-      title: "Watch It Grow",
-      description: "Track every referral chain, see your cost per new customer, measure ROI.",
+      title: t("howItWorks.steps.grow.title"),
+      description: t("howItWorks.steps.grow.description"),
       icon: TrendingUp,
     },
   ]
@@ -138,7 +153,7 @@ export default function MarketingLanding({
   // nothing here may claim a number the database did not produce.
   const categories = campaignCategories.map((category) => ({
     id: category.id,
-    name: category.label,
+    name: tLabels(`category.${category.id}`),
     ...(CATEGORY_TILE_STYLE[category.id] ?? CATEGORY_TILE_STYLE.cafe),
   }))
   const visibleOffers = featuredOffers.slice(0, 12)
@@ -146,13 +161,13 @@ export default function MarketingLanding({
   const onSaleCount = visibleOffers.filter((offer) => offer.onSale !== false).length
 
   const benefits = [
-    "Built-in referral engine on every campaign",
-    "Real-time analytics: cost per acquisition, ROI",
-    "QR redemption — no POS hardware needed",
-    `Available in ${SUPPORTED_LANGUAGE_COUNT} languages`,
-    "Flat monthly plan — not a revenue share like Groupon",
-    "You own your customer data",
-    `${PLATFORM_FEE_PERCENT}% transaction fee on voucher sales, no hidden costs`,
+    { id: "referralEngine", text: t("why.benefits.referralEngine") },
+    { id: "analytics", text: t("why.benefits.analytics") },
+    { id: "qr", text: t("why.benefits.qr") },
+    { id: "languages", text: t("why.benefits.languages", { count: SUPPORTED_LANGUAGE_COUNT }) },
+    { id: "flatPlan", text: t("why.benefits.flatPlan") },
+    { id: "ownData", text: t("why.benefits.ownData") },
+    { id: "fee", text: t("why.benefits.fee", { percent: PLATFORM_FEE_PERCENT }) },
   ]
 
   // Real figures from the database. Previously these were invented marketing
@@ -164,21 +179,24 @@ export default function MarketingLanding({
   const heroStats = (stats
     ? [
         {
-          label: "Active campaigns",
+          id: "activeCampaigns",
+          label: t("stats.activeCampaigns"),
           icon: Sparkles,
           countTarget: stats.activeCampaignCount,
           prefix: "",
           suffix: "",
         },
         {
-          label: "Merchants",
+          id: "merchants",
+          label: t("stats.merchants"),
           icon: Users,
           countTarget: stats.merchantCount,
           prefix: "",
           suffix: "",
         },
         {
-          label: "Processed value",
+          id: "processedValue",
+          label: t("stats.processedValue"),
           icon: TrendingUp,
           countTarget: processedEur,
           prefix: "€",
@@ -190,29 +208,74 @@ export default function MarketingLanding({
 
   const faqs = [
     {
-      question: "How is this different from Groupon?",
-      answer:
-        `Groupon-style deal sites typically keep a large share of each sale and own the customer relationship. We charge a flat monthly fee (from ${starterMonthly}/mo) plus ${PLATFORM_FEE_PERCENT}% on voucher sales. You keep your customers, your data, and your margins.`,
+      id: "groupon",
+      question: t("faq.items.groupon.question"),
+      answer: t("faq.items.groupon.answer", { price: starterMonthly, percent: PLATFORM_FEE_PERCENT }),
     },
     {
-      question: "How does the referral system work?",
-      answer:
-        "Every customer who buys a voucher gets a unique referral link. When they share it and a friend purchases, both earn credit. Each referral chain is tracked so you see exactly how new customers find you.",
+      id: "referral",
+      question: t("faq.items.referral.question"),
+      answer: t("faq.items.referral.answer"),
     },
     {
-      question: `What happens after the ${TRIAL_DAYS}-day trial?`,
-      answer:
-        "You choose a plan (Starter, Pro, or Scale). If you don\u2019t subscribe, your existing published vouchers stay active for customers, but you can\u2019t create new campaigns until you subscribe.",
+      id: "trial",
+      question: t("faq.items.trial.question", { days: TRIAL_DAYS }),
+      answer: t("faq.items.trial.answer", {
+        starter: planName("starter"),
+        pro: planName("pro"),
+        scale: planName("scale"),
+      }),
     },
     {
-      question: "Do I need special hardware for QR redemption?",
-      answer:
-        "No. Your staff opens the mobile scanner on any phone browser, scans the customer\u2019s QR code, and it\u2019s done. No app download, no POS integration required.",
+      id: "qr",
+      question: t("faq.items.qr.question"),
+      answer: t("faq.items.qr.answer"),
     },
     {
-      question: `What is the ${PLATFORM_FEE_PERCENT}% transaction fee?`,
-      answer:
-        `When a customer purchases a voucher through the platform, we deduct ${PLATFORM_FEE_PERCENT}% from the payout. There are no other platform fees on top of your plan.`,
+      id: "fee",
+      question: t("faq.items.fee.question", { percent: PLATFORM_FEE_PERCENT }),
+      answer: t("faq.items.fee.answer", { percent: PLATFORM_FEE_PERCENT }),
+    },
+  ]
+
+  // Plan features. The counts mirror the plan limits in PLAN_CATALOG.
+  const pricingPlans: Array<{
+    plan: PlanDefinition
+    features: Array<{ id: string; values?: Record<string, string | number> }>
+    highlight: boolean
+  }> = [
+    {
+      plan: PLAN_CATALOG.starter,
+      features: [
+        { id: "vouchersPerMonth", values: { count: 500 } },
+        { id: "activeCampaigns", values: { count: 3 } },
+        { id: "teamMembers", values: { count: 2 } },
+        { id: "qrRedemption" },
+        { id: "basicAnalytics" },
+      ],
+      highlight: false,
+    },
+    {
+      plan: PLAN_CATALOG.pro,
+      features: [
+        { id: "vouchersPerMonth", values: { count: 5000 } },
+        { id: "activeCampaigns", values: { count: 25 } },
+        { id: "teamMembers", values: { count: 10 } },
+        { id: "advancedAnalytics" },
+        { id: "customDomain" },
+        { id: "promoBoosts" },
+      ],
+      highlight: true,
+    },
+    {
+      plan: PLAN_CATALOG.scale,
+      features: [
+        { id: "unlimitedVouchers" },
+        { id: "unlimitedCampaigns" },
+        { id: "unlimitedTeamMembers" },
+        { id: "everythingInPlan", values: { plan: planName("pro") } },
+      ],
+      highlight: false,
     },
   ]
 
@@ -229,31 +292,33 @@ export default function MarketingLanding({
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-[var(--border)] mb-6">
               <Sparkles className="h-4 w-4 text-[var(--primary)]" />
-              <span className="text-sm font-medium text-[var(--text-muted)]">Vouchers &amp; referrals for local businesses</span>
+              <span className="text-sm font-medium text-[var(--text-muted)]">{t("hero.badge")}</span>
             </div>
 
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--text)] mb-6 leading-[1.03]">
-              Your Customers Sell
-              <GradientText className="block text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.03]">
-                Your Next Customers
-              </GradientText>
+              {t.rich("hero.title", {
+                highlight: (chunks) => (
+                  <GradientText className="block text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.03]">
+                    {chunks}
+                  </GradientText>
+                ),
+              })}
             </h1>
 
             <p className="text-xl sm:text-2xl text-[var(--text-muted)] mb-10 leading-relaxed max-w-3xl mx-auto">
-              Create voucher campaigns. Your customers share them, earn credits, and bring friends.
-              Track every referral. See your exact cost per new customer.
+              {t("hero.subtitle")}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <WarmButton size="lg" asChild>
                 <Link href="/register">
                   <Gift className="h-5 w-5 mr-2" />
-                  Start as Merchant
+                  {t("hero.ctaMerchant")}
                 </Link>
               </WarmButton>
               <WarmButton size="lg" variant="outline" asChild>
                 <Link href="/campaigns">
-                  Explore Campaigns
+                  {t("hero.ctaExplore")}
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </Link>
               </WarmButton>
@@ -262,15 +327,15 @@ export default function MarketingLanding({
             <div className="mt-10 flex items-center justify-center gap-x-8 gap-y-2 text-sm text-[var(--text-muted)] flex-wrap">
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[var(--success)]" />
-                No credit card required
+                {t("hero.noCardRequired")}
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[var(--success)]" />
-                {TRIAL_DAYS}-day free trial
+                {t("hero.freeTrial", { days: TRIAL_DAYS })}
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-[var(--success)]" />
-                Cancel anytime
+                {t("hero.cancelAnytime")}
               </div>
             </div>
 
@@ -282,7 +347,7 @@ export default function MarketingLanding({
                 const Icon = item.icon
                 return (
                   <div
-                    key={item.label}
+                    key={item.id}
                     className="rounded-2xl border border-[var(--border)] bg-white/75 backdrop-blur-sm px-4 py-3 text-left shadow-warm-sm"
                   >
                     <div className="flex items-center gap-2 text-[var(--text-muted)] text-xs font-semibold">
@@ -308,7 +373,7 @@ export default function MarketingLanding({
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <ScrollReveal>
             <p className="text-center text-sm font-semibold text-[var(--text-muted)] mb-2 uppercase tracking-wider">
-              Merchants on the platform
+              {t("merchantsTitle")}
             </p>
             <MerchantLogoWall merchants={trustedMerchants} />
           </ScrollReveal>
@@ -320,7 +385,7 @@ export default function MarketingLanding({
           {valueCards.map((card) => {
             const Icon = card.icon
             return (
-              <StaggerItem key={card.title}>
+              <StaggerItem key={card.id}>
               <TiltCard maxTilt={6}>
               <WarmCard
                 hover
@@ -345,8 +410,8 @@ export default function MarketingLanding({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <ScrollReveal>
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">How It Works</h2>
-          <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">Get started in minutes with our simple three-step process</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">{t("howItWorks.title")}</h2>
+          <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">{t("howItWorks.subtitle")}</p>
         </div>
         </ScrollReveal>
 
@@ -379,12 +444,13 @@ export default function MarketingLanding({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <ScrollReveal>
         <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Explore Popular Campaigns</h2>
-          <p className="text-lg text-[var(--text-muted)]">Discover vouchers, deals, and experiences across Europe</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">{t("campaigns.title")}</h2>
+          <p className="text-lg text-[var(--text-muted)]">{t("campaigns.subtitle")}</p>
           {visibleOffers.length > 0 && (
             <p className="text-sm text-[var(--text-muted)] mt-2">
-              Showing {visibleOffers.length} active {visibleOffers.length === 1 ? "campaign" : "campaigns"}
-              {onSaleCount < visibleOffers.length ? ` \u2014 ${onSaleCount} on sale now` : ""}.
+              {onSaleCount < visibleOffers.length
+                ? t("campaigns.showingWithOnSale", { count: visibleOffers.length, onSale: onSaleCount })
+                : t("campaigns.showing", { count: visibleOffers.length })}
             </p>
           )}
         </div>
@@ -433,9 +499,9 @@ export default function MarketingLanding({
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--primary)] to-[#F5C98E] flex items-center justify-center mx-auto mb-3 ring-1 ring-white/35">
               <Ticket className="h-6 w-6 text-white" />
             </div>
-            <h3 className="text-lg font-bold text-[var(--text)] mb-1">No live campaigns right now</h3>
+            <h3 className="text-lg font-bold text-[var(--text)] mb-1">{t("campaigns.emptyTitle")}</h3>
             <p className="text-sm text-[var(--text-muted)]">
-              Offers appear here as soon as merchants publish them.
+              {t("campaigns.emptyBody")}
             </p>
           </WarmCard>
         )}
@@ -443,7 +509,7 @@ export default function MarketingLanding({
         <div className="text-center mt-8">
           <WarmButton size="md" asChild>
             <Link href="/campaigns">
-              View All Campaigns
+              {t("campaigns.viewAll")}
               <ArrowRight className="h-4 w-4 ml-2" />
             </Link>
           </WarmButton>
@@ -453,9 +519,9 @@ export default function MarketingLanding({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <ScrollReveal>
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Simple, Transparent Pricing</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">{t("pricing.title")}</h2>
           <p className="text-lg text-[var(--text-muted)] max-w-2xl mx-auto">
-            Choose the plan that fits your business. Annual billing costs 10 months&rsquo; worth.
+            {t("pricing.subtitle")}
           </p>
         </div>
         </ScrollReveal>
@@ -463,7 +529,7 @@ export default function MarketingLanding({
         <div className="text-center mb-8">
           <div
             role="group"
-            aria-label="Billing period"
+            aria-label={t("pricing.billingPeriod")}
             className="inline-flex items-center gap-2 p-1 bg-[var(--surface)] rounded-[12px] shadow-warm border border-[var(--border)]"
           >
             <button
@@ -476,7 +542,7 @@ export default function MarketingLanding({
                   : "text-[var(--text-muted)] hover:text-[var(--text)]"
               }`}
             >
-              Monthly
+              {t("pricing.monthly")}
             </button>
             <button
               type="button"
@@ -488,51 +554,17 @@ export default function MarketingLanding({
                   : "text-[var(--text-muted)] hover:text-[var(--text)]"
               }`}
             >
-              Annual
+              {t("pricing.annual")}
               {/* Inline, not absolutely positioned: it used to overlap the label. */}
               <span className="px-1.5 py-0.5 text-[10px] leading-none rounded-full bg-[var(--success)] text-white font-bold">
-                Save 17%
+                {t("pricing.save")}
               </span>
             </button>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
-          {[
-            {
-              plan: PLAN_CATALOG.starter,
-              features: [
-                "500 vouchers/month",
-                "3 active campaigns",
-                "2 team members",
-                "QR code redemption",
-                "Basic analytics",
-              ],
-              highlight: false,
-            },
-            {
-              plan: PLAN_CATALOG.pro,
-              features: [
-                "5,000 vouchers/month",
-                "25 active campaigns",
-                "10 team members",
-                "Advanced analytics",
-                "Custom domain",
-                "Promo boosts (email + push)",
-              ],
-              highlight: true,
-            },
-            {
-              plan: PLAN_CATALOG.scale,
-              features: [
-                "Unlimited vouchers",
-                "Unlimited campaigns",
-                "Unlimited team members",
-                "Everything in Pro",
-              ],
-              highlight: false,
-            },
-          ].map(({ plan, features, highlight }) => (
+          {pricingPlans.map(({ plan, features, highlight }) => (
             <WarmCard
               key={plan.id}
               hover
@@ -542,36 +574,36 @@ export default function MarketingLanding({
               {highlight && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                   <span className="px-4 py-1 gradient-brand text-white text-sm font-bold rounded-full shadow-warm">
-                    Most Popular
+                    {t("pricing.mostPopular")}
                   </span>
                 </div>
               )}
               <div className="mb-6 text-center pt-2">
-                <h3 className="text-2xl font-bold text-[var(--text)] mb-2">{plan.label}</h3>
+                <h3 className="text-2xl font-bold text-[var(--text)] mb-2">{planName(plan.id)}</h3>
                 <div className="flex flex-wrap items-baseline gap-x-2 mb-4 justify-center">
                   <span className="text-4xl sm:text-5xl font-bold text-[var(--text)]">
                     {billingPeriod === "monthly"
                       ? eur(plan.monthlyPriceCents)
                       : eur(Math.round(plan.yearlyPriceCents / 12))}
                   </span>
-                  <span className="text-[var(--text-muted)]">/month</span>
+                  <span className="text-[var(--text-muted)]">{t("pricing.perMonth")}</span>
                 </div>
                 {billingPeriod === "annual" && (
                   <div className="text-sm text-[var(--success)] font-semibold mb-4">
-                    {eur(plan.yearlyPriceCents)}/year (2 months free)
+                    {t("pricing.perYear", { price: eur(plan.yearlyPriceCents) })}
                   </div>
                 )}
               </div>
               <ul className="space-y-3 mb-8 flex-grow">
                 {features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
+                  <li key={feature.id} className="flex items-start gap-3">
                     <Check aria-hidden="true" className={`h-5 w-5 flex-shrink-0 mt-0.5 ${highlight ? "text-[var(--primary)]" : "text-[var(--success)]"}`} />
-                    <span className="text-[var(--text)]">{feature}</span>
+                    <span className="text-[var(--text)]">{t(`pricing.features.${feature.id}`, feature.values)}</span>
                   </li>
                 ))}
               </ul>
               <WarmButton className="w-full mt-auto" asChild>
-                <Link href="/register">Start free trial</Link>
+                <Link href="/register">{t("pricing.startTrial")}</Link>
               </WarmButton>
             </WarmCard>
           ))}
@@ -579,7 +611,7 @@ export default function MarketingLanding({
 
         <div className="mt-12 text-center">
           <p className="text-[var(--text-muted)]">
-            All plans include a {TRIAL_DAYS}-day free trial · {PLATFORM_FEE_PERCENT}% transaction fee on voucher sales · Cancel anytime
+            {t("pricing.footer", { days: TRIAL_DAYS, percent: PLATFORM_FEE_PERCENT })}
           </p>
         </div>
 
@@ -587,8 +619,8 @@ export default function MarketingLanding({
         <ScrollReveal delay={0.1}>
           <div className="mt-16 max-w-5xl mx-auto">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-[var(--text)] mb-2">Calculate Your ROI</h3>
-              <p className="text-[var(--text-muted)]">Drag the sliders to see how much you could earn with GiftHub</p>
+              <h3 className="text-2xl font-bold text-[var(--text)] mb-2">{t("calculator.title")}</h3>
+              <p className="text-[var(--text-muted)]">{t("calculator.subtitle")}</p>
             </div>
             <WarmCard padding="xl" className="rounded-[20px]">
               <PricingCalculator />
@@ -601,10 +633,9 @@ export default function MarketingLanding({
         <WarmCard padding="none" className="overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="p-8 lg:p-12 gradient-brand">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Why Merchants Love GiftHub</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">{t("why.title")}</h2>
               <p className="text-white/90 text-lg mb-8">
-                Grow your customer base and increase revenue — while keeping your margins and owning your
-                customer relationships.
+                {t("why.body")}
               </p>
               {/* Real figures only. This block previously showed invented
                   traction (2,500+ merchants, EUR 12M+ processed, 98%
@@ -612,7 +643,7 @@ export default function MarketingLanding({
               {heroStats.length > 0 && (
                 <dl className="grid grid-cols-1 min-[400px]:grid-cols-3 gap-6 mb-8">
                   {heroStats.map((item) => (
-                    <div key={item.label} className="min-w-0 flex flex-col">
+                    <div key={item.id} className="min-w-0 flex flex-col">
                       <dt className="text-white/90 text-sm">{item.label}</dt>
                       <dd className="order-first text-3xl sm:text-4xl font-bold text-white mb-1 break-words">
                         <CountUp target={item.countTarget} prefix={item.prefix} duration={2.5} />
@@ -625,11 +656,11 @@ export default function MarketingLanding({
             <div className="p-8 lg:p-12 bg-[var(--surface)]">
               <div className="space-y-4">
                 {benefits.map((benefit) => (
-                  <div key={benefit} className="flex items-center gap-3">
+                  <div key={benefit.id} className="flex items-center gap-3">
                     <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[var(--success)] to-[#7FA090] flex items-center justify-center flex-shrink-0">
                       <Check className="h-4 w-4 text-white" />
                     </div>
-                    <span className="text-[var(--text)] font-medium">{benefit}</span>
+                    <span className="text-[var(--text)] font-medium">{benefit.text}</span>
                   </div>
                 ))}
               </div>
@@ -649,27 +680,31 @@ export default function MarketingLanding({
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <ScrollReveal>
           <div className="text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Groupon vs GiftHub</h2>
-            <p className="text-lg text-[var(--text-muted)] hidden sm:block">Drag to compare</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">{t("compare.title")}</h2>
+            <p className="text-lg text-[var(--text-muted)] hidden sm:block">{t("compare.hint")}</p>
           </div>
         </ScrollReveal>
         <ScrollReveal delay={0.15}>
           <BeforeAfterSlider
-            beforeTitle="With Groupon"
-            afterTitle="With GiftHub"
+            beforeTitle={t("compare.beforeTitle")}
+            afterTitle={t("compare.afterTitle")}
             beforeItems={[
-              "Large revenue share taken by the platform",
-              "Platform owns customer relationship",
-              "No access to customer data",
-              "Race to the bottom pricing",
-              "Lost brand identity",
+              t("compare.before.revenueShare"),
+              t("compare.before.ownsRelationship"),
+              t("compare.before.noDataAccess"),
+              t("compare.before.raceToBottom"),
+              t("compare.before.lostBrand"),
             ]}
             afterItems={[
-              `Flat ${starterMonthly}\u2013${scaleMonthly}/mo + ${PLATFORM_FEE_PERCENT}% fee`,
-              "You own all customer data",
-              "Built-in referral engine",
-              "Your brand, your rules",
-              "Real-time ROI analytics",
+              t("compare.after.flatFee", {
+                minPrice: starterMonthly,
+                maxPrice: scaleMonthly,
+                percent: PLATFORM_FEE_PERCENT,
+              }),
+              t("compare.after.ownData"),
+              t("compare.after.referralEngine"),
+              t("compare.after.yourBrand"),
+              t("compare.after.roiAnalytics"),
             ]}
           />
         </ScrollReveal>
@@ -678,14 +713,14 @@ export default function MarketingLanding({
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <ScrollReveal>
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg text-[var(--text-muted)]">Everything you need to know about GiftHub</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-4">{t("faq.title")}</h2>
+          <p className="text-lg text-[var(--text-muted)]">{t("faq.subtitle")}</p>
         </div>
         </ScrollReveal>
 
         <div className="space-y-3">
           {faqs.map((faq, idx) => (
-            <WarmCard key={faq.question} padding="lg" hover>
+            <WarmCard key={faq.id} padding="lg" hover>
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
                 className="w-full flex items-start justify-between gap-4 text-left"
@@ -721,19 +756,19 @@ export default function MarketingLanding({
 
             <div className="relative z-10">
               <PartyPopper className="h-16 w-16 text-[var(--primary)] mx-auto mb-6" />
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Stop Renting Customers. Build Your Own Army.</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">{t("cta.title")}</h2>
               <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-                Create your first campaign in minutes. Your customers do the rest. {TRIAL_DAYS}-day free trial.
+                {t("cta.body", { days: TRIAL_DAYS })}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <WarmButton size="lg" asChild>
                   <Link href="/register">
-                    Get Started Free
+                    {t("cta.getStarted")}
                     <ArrowRight className="h-5 w-5 ml-2" />
                   </Link>
                 </WarmButton>
                 <WarmButton size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20" asChild>
-                  <Link href="/campaigns">Browse Campaigns</Link>
+                  <Link href="/campaigns">{t("cta.browse")}</Link>
                 </WarmButton>
               </div>
             </div>

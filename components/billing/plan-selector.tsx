@@ -9,42 +9,23 @@ import { useTranslations } from 'next-intl';
 const PLAN_META: Record<PlanTier, {
   icon: typeof Zap;
   gradient: string;
+  /** Keys under merchantDashboard.billing.features.<tier>. */
   features: string[];
 }> = {
   starter: {
     icon: Zap,
     gradient: 'from-[#7e9cae] to-[#5e7e92]',
-    features: [
-      '500 vouchers/month',
-      '3 active campaigns',
-      '2 team members',
-      'QR code redemption',
-      'Basic analytics',
-    ],
+    features: ['vouchers', 'campaigns', 'teamMembers', 'qrRedemption', 'basicAnalytics'],
   },
   pro: {
     icon: Crown,
     gradient: 'from-[#cc785c] to-[#b5613f]',
-    features: [
-      '5,000 vouchers/month',
-      '25 active campaigns',
-      '10 team members',
-      'Advanced analytics',
-      'Custom domain',
-      'Promo boosts',
-    ],
+    features: ['vouchers', 'campaigns', 'teamMembers', 'advancedAnalytics', 'customDomain', 'promoBoosts'],
   },
   scale: {
     icon: Rocket,
     gradient: 'from-[#d0a043] to-[#be8a2e]',
-    features: [
-      'Unlimited vouchers',
-      'Unlimited campaigns',
-      'Unlimited team members',
-      'Everything in Pro',
-      'White-label ready',
-      'Priority support',
-    ],
+    features: ['vouchers', 'campaigns', 'teamMembers', 'everythingInPro', 'whiteLabel', 'prioritySupport'],
   },
 };
 
@@ -65,6 +46,7 @@ export default function PlanSelector({
   billingAvailable = true,
 }: PlanSelectorProps) {
   const t = useTranslations('billing');
+  const tm = useTranslations('merchantDashboard.billing');
   const tiers: PlanTier[] = ['starter', 'pro', 'scale'];
   const isActive = billingState === 'active';
   // A trial (or grace period) of a plan is still the plan the merchant is on.
@@ -114,7 +96,7 @@ export default function PlanSelector({
                 {meta.features.map((f) => (
                   <div key={f} className="flex items-start gap-2">
                     <Check className={`h-4 w-4 shrink-0 mt-0.5 ${isPopular ? 'text-[#cc785c]' : 'text-[#5e7e92]'}`} />
-                    <span className="text-sm text-[#2D2721]">{f}</span>
+                    <span className="text-sm text-[#2D2721]">{tm(`features.${tier}.${f}`)}</span>
                   </div>
                 ))}
               </div>
@@ -122,12 +104,11 @@ export default function PlanSelector({
               <div className="mt-auto">
                 {isCurrent ? (
                   <div className="text-center py-2 px-4 rounded-[var(--r-sm)] bg-[#FAF7F2] text-[#8B7355] font-semibold text-sm">
-                    {t('currentPlan')}
-                    {isTrial ? ' (free trial)' : ''}
+                    {isTrial ? tm('currentPlanTrial') : t('currentPlan')}
                   </div>
                 ) : !billingAvailable ? (
                   <p className="text-center text-xs text-[#8B7355]">
-                    Plan changes aren&apos;t available online right now.
+                    {tm('planChangesUnavailable')}
                   </p>
                 ) : isActive && hasStripeCustomer ? (
                   <ManageBillingButton slug={slug} />
@@ -146,8 +127,7 @@ export default function PlanSelector({
 
       {!billingAvailable && (
         <p role="status" className="mt-4 rounded-[var(--r-sm)] border border-[var(--border)] bg-[var(--surface)] p-3 text-center text-sm text-[var(--text)]">
-          Online payments aren&apos;t set up on this platform yet, so plans can&apos;t be bought or changed here.
-          Contact support if you want to change your plan.
+          {tm('paymentsNotSetUp')}
         </p>
       )}
 

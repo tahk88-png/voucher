@@ -1,6 +1,8 @@
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
 import { addDays, eachDayOfInterval, format, startOfDay, subDays } from 'date-fns';
+import { et } from 'date-fns/locale';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
@@ -9,7 +11,7 @@ import { WarmButton } from '@/components/warm-button';
 import { AreaChart } from '@/components/ui/charts';
 import { formatPrice } from '@/lib/currency-constants';
 import { normalizeCurrency } from '@/lib/money-input';
-import { voucherDisplayName } from '@/lib/voucher-display';
+import { formatVoucherValue, voucherHeadline } from '@/lib/voucher-display';
 import { Calendar, CheckCircle2, Sparkles, Ticket } from 'lucide-react';
 import { DashboardStats } from './dashboard-stats';
 import { RevenueStats } from './revenue-stats';
@@ -25,12 +27,12 @@ type ActionItem = {
 
 type DashboardRange = '7d' | '30d';
 
-const rangeOptions: { value: DashboardRange; label: string; days: number }[] = [
-  { value: '7d', label: '7D', days: 7 },
-  { value: '30d', label: '30D', days: 30 },
+const rangeOptions: { value: DashboardRange; days: number }[] = [
+  { value: '7d', days: 7 },
+  { value: '30d', days: 30 },
 ];
 
-function resolveDashboardRange(rawRange: string | undefined): { value: DashboardRange; label: string; days: number } {
+function resolveDashboardRange(rawRange: string | undefined): { value: DashboardRange; days: number } {
   return rangeOptions.find((option) => option.value === rawRange) ?? rangeOptions[0];
 }
 
@@ -50,6 +52,11 @@ export default async function MerchantDashboardPage({
   if (!merchant) notFound();
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
+
+  const t = await getTranslations('merchantDashboard.dashboard');
+  const tLabels = await getTranslations('labels');
+  // Day and date names follow the UI language (English unless Estonian is active).
+  const dateLocale = (await getLocale()) === 'et' ? et : undefined;
 
   const rawRange = Array.isArray(sp?.range) ? sp?.range[0] : sp?.range;
   const selectedRange = resolveDashboardRange(rawRange);
@@ -135,7 +142,7 @@ export default async function MerchantDashboardPage({
   const dayBuckets = eachDayOfInterval({ start: rangeStart, end: rangeEnd });
   const dayIndex = new Map(dayBuckets.map((day, index) => [format(day, 'yyyy-MM-dd'), index]));
   const activityData = dayBuckets.map((day) => ({
-    date: format(day, 'EEE'),
+    date: format(day, 'EEE', { locale: dateLocale }),
     redemptions: 0,
     revenue: 0,
   }));
@@ -174,32 +181,32 @@ export default async function MerchantDashboardPage({
   const actionItems: ActionItem[] = [
     pendingRedemptions > 0
       ? {
-          label: `${pendingRedemptions} pending redemptions`,
-          detail: 'Confirm in-store redemptions',
+          label: t('actions.pendingRedemptions', { count: pendingRedemptions }),
+          detail: t('actions.pendingRedemptionsDetail'),
           href: `/merchant/${slug}/redemptions`,
           tone: 'urgent',
         }
       : null,
     expiringVouchers > 0
       ? {
-          label: `${expiringVouchers} vouchers expiring soon`,
-          detail: 'Review voucher validity dates',
+          label: t('actions.expiringVouchers', { count: expiringVouchers }),
+          detail: t('actions.expiringVouchersDetail'),
           href: `/merchant/${slug}/vouchers`,
           tone: 'warning',
         }
       : null,
     endingCampaigns > 0
       ? {
-          label: `${endingCampaigns} campaigns ending this week`,
-          detail: 'Extend or duplicate your best campaigns',
+          label: t('actions.endingCampaigns', { count: endingCampaigns }),
+          detail: t('actions.endingCampaignsDetail'),
           href: `/merchant/${slug}/campaigns`,
           tone: 'warning',
         }
       : null,
     upcomingEvents.length > 0
       ? {
-          label: `${upcomingEvents.length} upcoming events`,
-          detail: 'Prepare ticket check-ins and staffing',
+          label: t('actions.upcomingEvents', { count: upcomingEvents.length }),
+          detail: t('actions.upcomingEventsDetail'),
           href: `/merchant/${slug}/events`,
           tone: 'info',
         }
@@ -224,8 +231,8 @@ export default async function MerchantDashboardPage({
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div>
-            <h1 className="text-3xl font-bold text-[var(--text)]">Merchant Dashboard</h1>
-            <p className="text-sm text-[var(--text-muted)]">Welcome back, {merchant.name}</p>
+            <h1 className="text-3xl font-bold text-[var(--text)]">{t('title')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">{t('welcomeBack', { name: merchant.name })}</p>
             <div className="mt-2">
               <LiveStats
                 slug={slug}
@@ -238,26 +245,26 @@ export default async function MerchantDashboardPage({
           </div>
           <div className="flex flex-wrap gap-3">
             <WarmButton asChild variant="outline">
-              <Link href={`/merchant/${slug}/campaigns`}>View campaigns</Link>
+              <Link href={`/merchant/${slug}/campaigns`}>{t('viewCampaigns')}</Link>
             </WarmButton>
             <WarmButton asChild>
-              <Link href={`/merchant/${slug}/vouchers/new`}>Create voucher</Link>
+              <Link href={`/merchant/${slug}/vouchers/new`}>{t('createVoucher')}</Link>
             </WarmButton>
           </div>
         </div>
 
         <section className="space-y-4">
           <div>
-            <h2 className="text-base font-semibold text-[var(--text)]">Performance overview</h2>
-            <p className="text-sm text-[var(--text-muted)]">Live campaign activity and redemptions.</p>
+            <h2 className="text-base font-semibold text-[var(--text)]">{t('performanceOverview')}</h2>
+            <p className="text-sm text-[var(--text-muted)]">{t('performanceOverviewHint')}</p>
           </div>
           <DashboardStats merchantId={merchant.id} merchantSlug={slug} />
         </section>
 
         <section className="space-y-4">
           <div>
-            <h2 className="text-base font-semibold text-[var(--text)]">Revenue and credits</h2>
-            <p className="text-sm text-[var(--text-muted)]">Sales, credits, and outstanding liability.</p>
+            <h2 className="text-base font-semibold text-[var(--text)]">{t('revenueAndCredits')}</h2>
+            <p className="text-sm text-[var(--text-muted)]">{t('revenueAndCreditsHint')}</p>
           </div>
           <RevenueStats merchantId={merchant.id} merchantSlug={slug} currency={currency} />
         </section>
@@ -267,9 +274,9 @@ export default async function MerchantDashboardPage({
             <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[var(--text)]">Performance trend</h2>
+                  <h2 className="text-base font-semibold text-[var(--text)]">{t('performanceTrend')}</h2>
                   <p className="text-sm text-[var(--text-muted)]">
-                    Last {selectedRange.days} days of redemption and revenue activity.
+                    {t('performanceTrendHint', { days: selectedRange.days })}
                   </p>
                 </div>
                 <div className="flex flex-col sm:items-end gap-2">
@@ -286,13 +293,13 @@ export default async function MerchantDashboardPage({
                               : 'bg-[var(--bg)] text-[var(--text-muted)] hover:bg-[#f6e1d7]'
                           }`}
                         >
-                          {option.label}
+                          {t('rangeShort', { days: option.days })}
                         </Link>
                       );
                     })}
                   </div>
                   <div className="text-left sm:text-right">
-                    <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Revenue</p>
+                    <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{t('revenue')}</p>
                     <p className="text-lg font-semibold text-[var(--text)]">
                       {money(weeklyRevenueMinor)}
                     </p>
@@ -302,8 +309,8 @@ export default async function MerchantDashboardPage({
               <AreaChart
                 data={activityData}
                 areas={[
-                  { dataKey: 'redemptions', name: 'Redemptions', color: '#cc785c' },
-                  { dataKey: 'revenue', name: `Revenue (${currency})`, color: '#5e7e92' },
+                  { dataKey: 'redemptions', name: t('chartRedemptions'), color: '#cc785c' },
+                  { dataKey: 'revenue', name: t('chartRevenue', { currency }), color: '#5e7e92' },
                 ]}
                 xAxisKey="date"
                 height={260}
@@ -311,26 +318,26 @@ export default async function MerchantDashboardPage({
               />
               <div className="mt-5 grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl border border-[var(--border)] bg-[#fcfbf8] px-4 py-3">
-                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Paid orders</p>
+                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{t('paidOrders')}</p>
                   <p className="text-lg font-semibold text-[var(--text)]">{paidOrderCount}</p>
                   <Link href={`/merchant/${slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#cc785c]">
-                    Open orders view
+                    {t('openOrdersView')}
                   </Link>
                 </div>
                 <div className="rounded-2xl border border-[var(--border)] bg-[#fcfbf8] px-4 py-3">
-                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Avg order</p>
+                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{t('avgOrder')}</p>
                   <p className="text-lg font-semibold text-[var(--text)]">
                     {money(averageOrderValueMinor)}
                   </p>
                   <Link href={`/merchant/${slug}/campaigns`} className="mt-2 inline-flex text-xs font-semibold text-[#cc785c]">
-                    Open campaign revenue
+                    {t('openCampaignRevenue')}
                   </Link>
                 </div>
                 <div className="rounded-2xl border border-[var(--border)] bg-[#fcfbf8] px-4 py-3">
-                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Redemption rate</p>
+                  <p className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{t('redemptionRate')}</p>
                   <p className="text-lg font-semibold text-[var(--text)]">{redemptionRatePct.toFixed(1)}%</p>
                   <Link href={`/merchant/${slug}/redemptions`} className="mt-2 inline-flex text-xs font-semibold text-[#cc785c]">
-                    Open redemption queue
+                    {t('openRedemptionQueue')}
                   </Link>
                 </div>
               </div>
@@ -345,11 +352,11 @@ export default async function MerchantDashboardPage({
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div>
-                    <p className="font-medium text-[var(--text)]">{pendingRedemptions} pending confirmation</p>
-                    <p className="text-sm text-[var(--text-muted)]">In-store redemptions waiting for your approval.</p>
+                    <p className="font-medium text-[var(--text)]">{t('pendingConfirmation', { count: pendingRedemptions })}</p>
+                    <p className="text-sm text-[var(--text-muted)]">{t('pendingConfirmationHint')}</p>
                   </div>
                   <WarmButton asChild variant="outline" size="sm" className="shrink-0">
-                    <Link href={`/merchant/${slug}/redemptions`}>View redemptions</Link>
+                    <Link href={`/merchant/${slug}/redemptions`}>{t('viewRedemptions')}</Link>
                   </WarmButton>
                 </div>
               </WarmCard>
@@ -360,15 +367,15 @@ export default async function MerchantDashboardPage({
             <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[var(--text)]">Action center</h2>
-                  <p className="text-sm text-[var(--text-muted)]">Priority items to review.</p>
+                  <h2 className="text-base font-semibold text-[var(--text)]">{t('actionCenter')}</h2>
+                  <p className="text-sm text-[var(--text-muted)]">{t('actionCenterHint')}</p>
                 </div>
                 <Sparkles className="h-5 w-5 text-[#cc785c]" />
               </div>
               {actionItems.length === 0 ? (
                 <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
                   <CheckCircle2 className="h-4 w-4 text-[#4e8a5b]" />
-                  You are all caught up.
+                  {t('allCaughtUp')}
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -385,7 +392,7 @@ export default async function MerchantDashboardPage({
                         href={item.href}
                         className="text-xs font-semibold text-[#cc785c] whitespace-nowrap"
                       >
-                        Open
+                        {t('open')}
                       </Link>
                     </div>
                   ))}
@@ -396,13 +403,13 @@ export default async function MerchantDashboardPage({
             <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[var(--text)]">Upcoming events</h2>
-                  <p className="text-sm text-[var(--text-muted)]">Next scheduled events.</p>
+                  <h2 className="text-base font-semibold text-[var(--text)]">{t('upcomingEventsTitle')}</h2>
+                  <p className="text-sm text-[var(--text-muted)]">{t('upcomingEventsHint')}</p>
                 </div>
                 <Calendar className="h-5 w-5 text-[var(--text-faint)]" />
               </div>
               {upcomingEvents.length === 0 ? (
-                <p className="text-sm text-[var(--text-muted)]">No upcoming events scheduled.</p>
+                <p className="text-sm text-[var(--text-muted)]">{t('noUpcomingEvents')}</p>
               ) : (
                 <div className="space-y-3">
                   {upcomingEvents.map((event) => (
@@ -410,11 +417,15 @@ export default async function MerchantDashboardPage({
                       <div>
                         <p className="text-sm font-medium text-[var(--text)]">{event.name}</p>
                         <p className="text-xs text-[var(--text-muted)]">
-                          {format(new Date(event.eventDate), 'd MMM yyyy')}
+                          {format(new Date(event.eventDate), 'd MMM yyyy', { locale: dateLocale })}
                         </p>
                       </div>
                       <span className="text-xs font-semibold text-[var(--text-faint)] uppercase">
-                        {event.status.replace('_', ' ')}
+                        {event.status === 'published'
+                          ? t('eventStatus.published')
+                          : event.status === 'sold_out'
+                            ? t('eventStatus.soldOut')
+                            : event.status.replace('_', ' ')}
                       </span>
                     </div>
                   ))}
@@ -422,7 +433,7 @@ export default async function MerchantDashboardPage({
               )}
               <div className="mt-4">
                 <WarmButton asChild variant="outline" size="sm" className="w-full">
-                  <Link href={`/merchant/${slug}/events`}>Manage events</Link>
+                  <Link href={`/merchant/${slug}/events`}>{t('manageEvents')}</Link>
                 </WarmButton>
               </div>
             </WarmCard>
@@ -430,19 +441,23 @@ export default async function MerchantDashboardPage({
             <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[var(--text)]">Top vouchers</h2>
-                  <p className="text-sm text-[var(--text-muted)]">Most redeemed offers.</p>
+                  <h2 className="text-base font-semibold text-[var(--text)]">{t('topVouchers')}</h2>
+                  <p className="text-sm text-[var(--text-muted)]">{t('topVouchersHint')}</p>
                 </div>
                 <Ticket className="h-5 w-5 text-[var(--text-faint)]" />
               </div>
               {topVouchers.length === 0 ? (
                 <p className="text-sm text-[var(--text-muted)]">
-                  No vouchers have been redeemed yet. Your most redeemed vouchers will show up here.
+                  {t('noTopVouchers')}
                 </p>
               ) : (
                 <div className="space-y-3">
                   {topVouchers.map((voucher) => {
-                    const headline = voucherDisplayName(voucher);
+                    const headline =
+                      voucherHeadline(voucher) ??
+                      tLabels(voucher.type.toLowerCase() === 'credit_amount' ? 'valueCredit' : 'valueOff', {
+                        value: formatVoucherValue(voucher),
+                      });
                     const pct = topVoucherMax > 0 ? (voucher._count.redemptions / topVoucherMax) * 100 : 0;
                     return (
                       <div key={voucher.id}>

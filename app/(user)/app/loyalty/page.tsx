@@ -1,6 +1,5 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Loyalty', noIndex: true });
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getLocale, getTranslations } from 'next-intl/server';
@@ -10,6 +9,11 @@ import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { getCurrencyLocale } from '@/lib/i18n-utils';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('loyalty');
+  return pageMetadata({ title: t('title'), noIndex: true });
+}
 
 /**
  * Loyalty tiers (lib/loyalty-tiers.ts) are defined but not wired up: no flow

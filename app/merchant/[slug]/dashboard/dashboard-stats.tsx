@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { startOfDay, startOfWeek } from "date-fns"
 import { StatsCard } from "@/components/ui/stats-card"
 import { Ticket, Tag, Calendar, TrendingUp } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
 async function DashboardStatsContent({
   merchantId,
@@ -11,6 +12,7 @@ async function DashboardStatsContent({
   merchantId: string
   merchantSlug: string
 }) {
+  const t = await getTranslations("merchantDashboard.stats")
   const now = new Date()
   const dayStart = startOfDay(now)
   const weekStart = startOfWeek(now, { weekStartsOn: 1 })
@@ -39,40 +41,40 @@ async function DashboardStatsContent({
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <StatsCard
-        title="Active Vouchers"
+        title={t("activeVouchers")}
         value={activeVouchers}
-        description="Published vouchers"
+        description={t("publishedVouchers")}
         icon={Ticket}
         href={`/merchant/${merchantSlug}/vouchers`}
-        actionLabel="Open vouchers"
+        actionLabel={t("openVouchers")}
       />
       <StatsCard
-        title="Active Campaigns"
+        title={t("activeCampaigns")}
         value={activeCampaigns}
-        description="Running campaigns"
+        description={t("runningCampaigns")}
         icon={Tag}
         href={`/merchant/${merchantSlug}/campaigns`}
-        actionLabel="Open campaigns"
+        actionLabel={t("openCampaigns")}
       />
       <StatsCard
-        title="Active Events"
+        title={t("activeEvents")}
         value={activeEvents}
-        description="Published events"
+        description={t("publishedEvents")}
         icon={Calendar}
         href={`/merchant/${merchantSlug}/events`}
-        actionLabel="Open events"
+        actionLabel={t("openEvents")}
       />
       <StatsCard
-        title="Today's Redemptions"
+        title={t("todaysRedemptions")}
         value={redemptionsToday}
-        description={`This week: ${redemptionsThisWeek}`}
+        description={t("thisWeek", { count: redemptionsThisWeek })}
         icon={TrendingUp}
         href={`/merchant/${merchantSlug}/redemptions`}
-        actionLabel="Review redemptions"
+        actionLabel={t("reviewRedemptions")}
         // No trend arrow for zero: a red "down" arrow on an empty day reads as a drop.
         trend={
           redemptionsToday > 0
-            ? { value: parseFloat(trendValue), label: "of weekly", isPositive: true }
+            ? { value: parseFloat(trendValue), label: t("ofWeekly"), isPositive: true }
             : undefined
         }
       />

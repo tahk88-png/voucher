@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { WarmCard } from "@/components/warm-card";
 import { WarmButton } from "@/components/warm-button";
@@ -58,13 +59,17 @@ export function ShareButton({
   variant = "outline",
   size = "md",
 }: ShareButtonProps) {
+  const t = useTranslations("offers.shareSheet");
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const shareUrl = generateShareUrl(type, id, referralCode);
   const shareText = referralCode
-    ? `${title} - Share & earn 10% back!`
+    ? t("referralShareText", { title })
     : title;
+  // Brand names (WhatsApp, Facebook, X, Telegram) stay as lib/social-sharing names them.
+  const targetLabel = (targetId: string, name: string) =>
+    targetId === "email" ? t("targets.email") : targetId === "copy" ? t("targets.copy") : name;
 
   const handleShare = async (targetId: string) => {
     const target = shareTargets.find((t) => t.id === targetId);
@@ -74,7 +79,7 @@ export function ShareButton({
       try {
         await navigator.clipboard.writeText(shareUrl);
         setCopied(true);
-        showSuccess("Link copied to clipboard!");
+        showSuccess(t("linkCopiedToClipboard"));
         setTimeout(() => setCopied(false), 2000);
       } catch {
         // Fallback: select text from hidden input
@@ -85,7 +90,7 @@ export function ShareButton({
         document.execCommand("copy");
         document.body.removeChild(input);
         setCopied(true);
-        showSuccess("Link copied!");
+        showSuccess(t("linkCopied"));
         setTimeout(() => setCopied(false), 2000);
       }
       return;
@@ -124,7 +129,7 @@ export function ShareButton({
         className={className}
       >
         <Share2 className="h-4 w-4 mr-1.5" />
-        Share
+        {t("share")}
       </WarmButton>
 
       {/* Share sheet overlay */}
@@ -145,12 +150,12 @@ export function ShareButton({
                   <div className="flex items-center gap-2">
                     <Share2 className="h-4 w-4 text-[var(--primary)]" />
                     <h3 className="text-sm font-semibold text-[var(--text)]">
-                      Share this {type}
+                      {t(`title.${type}`)}
                     </h3>
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
-                    aria-label="Close"
+                    aria-label={t("close")}
                     className="h-6 w-6 flex items-center justify-center rounded-full hover:bg-[var(--surface-dim)] transition-colors"
                   >
                     <X className="h-3.5 w-3.5 text-[var(--text-muted)]" />
@@ -164,10 +169,11 @@ export function ShareButton({
                   <div className="flex items-center gap-2">
                     <Gift className="h-4 w-4 text-[var(--success)]" />
                     <p className="text-xs text-[var(--text-muted)]">
-                      <span className="font-semibold text-[var(--success)]">
-                        Share &amp; earn 10%
-                      </span>{" "}
-                      when your friends redeem!
+                      {t.rich("referralNote", {
+                        b: (chunks) => (
+                          <span className="font-semibold text-[var(--success)]">{chunks}</span>
+                        ),
+                      })}
                     </p>
                   </div>
                 </div>
@@ -194,8 +200,8 @@ export function ShareButton({
                       </div>
                       <span className="text-[10px] font-medium text-[var(--text-muted)] group-hover:text-[var(--text)]">
                         {target.id === "copy" && copied
-                          ? "Copied!"
-                          : target.name}
+                          ? t("copied")
+                          : targetLabel(target.id, target.name)}
                       </span>
                     </button>
                   ))}
@@ -209,13 +215,13 @@ export function ShareButton({
                     type="text"
                     readOnly
                     value={shareUrl}
-                    aria-label="Share link"
+                    aria-label={t("shareLinkLabel")}
                     className="flex-1 bg-transparent text-xs text-[var(--text-muted)] font-mono outline-none truncate"
                   />
                   <button
                     onClick={() => handleShare("copy")}
                     className="shrink-0 p-1 rounded hover:bg-[var(--surface)] transition-colors"
-                    aria-label="Copy link"
+                    aria-label={t("copyLink")}
                   >
                     {copied ? (
                       <Check className="h-3.5 w-3.5 text-[var(--success)]" />

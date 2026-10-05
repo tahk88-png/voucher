@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { StarRating } from './star-rating';
 
 interface ReviewFormProps {
@@ -11,6 +12,7 @@ interface ReviewFormProps {
 }
 
 export function ReviewForm({ merchantId, voucherId, campaignId, onSubmit }: ReviewFormProps) {
+  const t = useTranslations('reviews.form');
   const [rating, setRating] = useState(0);
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
@@ -21,7 +23,7 @@ export function ReviewForm({ merchantId, voucherId, campaignId, onSubmit }: Revi
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (rating === 0) {
-      setError('Please select a rating');
+      setError(t('ratingRequired'));
       return;
     }
 
@@ -43,8 +45,15 @@ export function ReviewForm({ merchantId, voucherId, campaignId, onSubmit }: Revi
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Failed to submit review');
+        // The API's error text is English; show our own message for its status.
+        setError(
+          res.status === 409
+            ? t('alreadyReviewed')
+            : res.status === 401
+              ? t('signInRequired')
+              : t('submitFailed')
+        );
+        return;
       }
 
       setSuccess(true);
@@ -52,8 +61,8 @@ export function ReviewForm({ merchantId, voucherId, campaignId, onSubmit }: Revi
       setTitle('');
       setComment('');
       onSubmit?.();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to submit review');
+    } catch {
+      setError(t('submitFailed'));
     } finally {
       setLoading(false);
     }
@@ -66,14 +75,14 @@ export function ReviewForm({ merchantId, voucherId, campaignId, onSubmit }: Revi
         style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
       >
         <p className="text-lg font-medium" style={{ color: 'var(--text)' }}>
-          Thank you for your review!
+          {t('thankYou')}
         </p>
         <button
           onClick={() => setSuccess(false)}
           className="mt-3 text-sm underline"
           style={{ color: 'var(--primary)' }}
         >
-          Write another review
+          {t('writeAnother')}
         </button>
       </div>
     );
@@ -86,26 +95,26 @@ export function ReviewForm({ merchantId, voucherId, campaignId, onSubmit }: Revi
       style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
     >
       <h3 className="text-lg font-semibold" style={{ color: 'var(--text)' }}>
-        Write a Review
+        {t('title')}
       </h3>
 
       <div>
         <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
-          Rating
+          {t('ratingLabel')}
         </label>
         <StarRating rating={rating} size="lg" interactive onChange={setRating} />
       </div>
 
       <div>
         <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
-          Title (optional)
+          {t('titleLabel')}
         </label>
         <input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           maxLength={100}
-          placeholder="Summarize your experience"
+          placeholder={t('titlePlaceholder')}
           className="w-full rounded-lg px-3 py-2 text-sm outline-none transition-colors"
           style={{
             backgroundColor: 'var(--background)',
@@ -117,14 +126,14 @@ export function ReviewForm({ merchantId, voucherId, campaignId, onSubmit }: Revi
 
       <div>
         <label className="block text-sm font-medium mb-1" style={{ color: 'var(--text-secondary)' }}>
-          Comment (optional)
+          {t('commentLabel')}
         </label>
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           maxLength={2000}
           rows={4}
-          placeholder="Share your experience..."
+          placeholder={t('commentPlaceholder')}
           className="w-full rounded-lg px-3 py-2 text-sm outline-none transition-colors resize-none"
           style={{
             backgroundColor: 'var(--background)',
@@ -149,7 +158,7 @@ export function ReviewForm({ merchantId, voucherId, campaignId, onSubmit }: Revi
           color: 'var(--primary-foreground)',
         }}
       >
-        {loading ? 'Submitting...' : 'Submit Review'}
+        {loading ? t('submitting') : t('submit')}
       </button>
     </form>
   );

@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { VoucherCard } from "@/components/ui/voucher-card"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
@@ -22,6 +23,7 @@ interface VoucherDetailProps {
 
 export default function VoucherDetailClient({ voucher }: VoucherDetailProps) {
   const router = useRouter()
+  const t = useTranslations("account")
 
   return (
     <div className="min-h-screen bg-[#FAF7F2]">
@@ -30,14 +32,14 @@ export default function VoucherDetailClient({ voucher }: VoucherDetailProps) {
           <Link href="/app">
             <span className="inline-flex items-center gap-2">
               <ArrowLeft className="h-4 w-4" />
-              Back
+              {t("voucherDetail.back")}
             </span>
           </Link>
         </WarmButton>
 
         <div className="space-y-6">
           <VoucherCard
-            merchantName={voucher.merchantName || "Merchant"}
+            merchantName={voucher.merchantName || t("voucherDetail.merchantFallback")}
             merchantLogoUrl={voucher.merchantLogoUrl || undefined}
             title={voucher.title}
             description={voucher.description || undefined}
@@ -50,23 +52,12 @@ export default function VoucherDetailClient({ voucher }: VoucherDetailProps) {
           />
 
           <WarmCard padding="lg" className="bg-white">
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-3">Terms and conditions</h2>
+            <h2 className="text-lg font-semibold text-[#2D2721] mb-3">{t("voucherDetail.termsTitle")}</h2>
             <div className="space-y-3 text-sm text-[#6B5744]">
-              <p>
-                This voucher is valid until the expiry date shown above. It cannot be
-                combined with other offers or promotions unless otherwise stated.
-              </p>
-              <p>
-                The voucher must be presented at the time of purchase. No cash value.
-                Cannot be exchanged for cash or refunded.
-              </p>
-              <p>
-                The merchant reserves the right to refuse redemption if the voucher
-                appears to be duplicated, tampered with, or used fraudulently.
-              </p>
-              <p>
-                For questions or issues, please contact the merchant directly.
-              </p>
+              <p>{t("voucherDetail.terms1")}</p>
+              <p>{t("voucherDetail.terms2")}</p>
+              <p>{t("voucherDetail.terms3")}</p>
+              <p>{t("voucherDetail.terms4")}</p>
             </div>
           </WarmCard>
         </div>

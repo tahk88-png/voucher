@@ -1,6 +1,5 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Notification Settings', noIndex: true });
-
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -8,6 +7,11 @@ import { getTranslations } from 'next-intl/server';
 import { WarmCard } from '@/components/warm-card';
 import { isWebPushConfigured } from '../../_components/push-config';
 import NotificationSettingsForm from './notification-settings-form';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const tAccount = await getTranslations('account');
+  return pageMetadata({ title: tAccount('notificationSettings.metaTitle'), noIndex: true });
+}
 
 export default async function NotificationSettingsPage() {
   const session = await auth();

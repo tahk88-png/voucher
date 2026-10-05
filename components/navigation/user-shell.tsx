@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { useNotificationsSSE } from "@/hooks/use-notifications-sse"
 import { Menu, X, Gift, ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -42,6 +42,7 @@ export default function UserShell({
 }: UserShellProps) {
   const pathname = usePathname()
   const tNav = useTranslations("nav")
+  const locale = useLocale()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const { selectedCountry } = useCountry()
@@ -89,6 +90,17 @@ export default function UserShell({
   }, [mobileMenuOpen, closeMobileMenu])
 
   const label = (labelKey: string) => tNav(labelKey as never)
+
+  // Market names in lib/locale-config are English; other languages take the
+  // region name from Intl.
+  const countryName = (() => {
+    if (locale === "en") return selectedCountry.name
+    try {
+      return new Intl.DisplayNames([locale], { type: "region" }).of(selectedCountry.code) ?? selectedCountry.name
+    } catch {
+      return selectedCountry.name
+    }
+  })()
 
   const renderBadge = (item: NavItem) =>
     item.href === "/app/notifications" && unreadCount > 0 ? (
@@ -307,7 +319,7 @@ export default function UserShell({
               </span>
               <div className="min-w-0">
                 <div className="text-xs text-[var(--text-faint)]">{tNav("marketplace")}</div>
-                <div className="font-semibold text-[var(--text)] text-sm truncate">{selectedCountry.name}</div>
+                <div className="font-semibold text-[var(--text)] text-sm truncate">{countryName}</div>
               </div>
             </div>
             <div className="flex items-center gap-2 ml-auto">

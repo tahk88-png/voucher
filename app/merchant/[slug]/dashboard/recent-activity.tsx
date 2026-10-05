@@ -2,9 +2,14 @@ import { Suspense } from "react"
 import { prisma } from "@/lib/prisma"
 import { WarmCard } from "@/components/warm-card"
 import { formatDistanceToNow } from "date-fns"
+import { et } from "date-fns/locale"
+import { getLocale, getTranslations } from "next-intl/server"
 import { Activity } from "lucide-react"
 
 async function RecentActivityContent({ merchantId }: { merchantId: string }) {
+  const t = await getTranslations("merchantDashboard.recentActivity")
+  // Relative times follow the UI language (English unless Estonian is active).
+  const dateLocale = (await getLocale()) === "et" ? et : undefined
   const recentRedemptions = await prisma.redemption.findMany({
     where: { merchantId },
     orderBy: { createdAt: "desc" },
@@ -36,11 +41,11 @@ async function RecentActivityContent({ merchantId }: { merchantId: string }) {
         <div className="flex items-center gap-3 mb-4">
           <Activity className="h-5 w-5 text-[var(--text-faint)]" />
           <h3 className="text-lg font-semibold text-[var(--text)]">
-            Recent Activity
+            {t("title")}
           </h3>
         </div>
         <div className="text-center py-8 text-[var(--text-faint)]">
-          No recent activity
+          {t("empty")}
         </div>
       </WarmCard>
     )
@@ -51,7 +56,7 @@ async function RecentActivityContent({ merchantId }: { merchantId: string }) {
       <div className="flex items-center gap-3 mb-4">
         <Activity className="h-5 w-5 text-[var(--text-faint)]" />
         <h3 className="text-lg font-semibold text-[var(--text)]">
-          Recent Activity
+          {t("title")}
         </h3>
       </div>
       <div className="space-y-3">
@@ -66,12 +71,14 @@ async function RecentActivityContent({ merchantId }: { merchantId: string }) {
                   redemption.redeemedBy?.email ||
                   redemption.redeemedByStaff?.name ||
                   redemption.redeemedByStaff?.email ||
-                  "Unknown user"}
+                  t("unknownUser")}
               </p>
               <p className="text-xs text-[var(--text-muted)]">
-                Redeemed voucher -{" "}
-                {formatDistanceToNow(new Date(redemption.createdAt), {
-                  addSuffix: true,
+                {t("redeemedVoucher", {
+                  time: formatDistanceToNow(new Date(redemption.createdAt), {
+                    addSuffix: true,
+                    locale: dateLocale,
+                  }),
                 })}
               </p>
             </div>
@@ -82,7 +89,7 @@ async function RecentActivityContent({ merchantId }: { merchantId: string }) {
                   : "bg-[#be8a2e]/20 text-[var(--text-faint)]"
               }`}
             >
-              {redemption.confirmedAt ? "Confirmed" : "Pending"}
+              {redemption.confirmedAt ? t("confirmed") : t("pending")}
             </div>
           </div>
         ))}

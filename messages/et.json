@@ -939,5 +939,1129 @@
     "purchases": "{count, plural, one {# ost} other {# ostu}}",
     "freeToClaim": "Tasuta saadaval",
     "onSaleNow": "Müügil"
+  },
+  "account": {
+    "error": {
+      "title": "Midagi läks valesti",
+      "fallback": "Tekkis ootamatu viga.",
+      "retry": "Proovi uuesti"
+    },
+    "dashboard": {
+      "metaTitle": "Minu töölaud"
+    },
+    "cashback": {
+      "metaTitle": "Raha tagasi ja krediit",
+      "title": "Raha tagasi ja krediit",
+      "description": "Kogu sinu teenitud krediit kõigilt kaupmeestelt, kelle juures sa ostled.",
+      "lockedPending": "Lukustatud (ootel)",
+      "used": "Kasutatud",
+      "expiringTitle": "Aegub 30 päeva jooksul",
+      "expiresOn": "{merchant} — aegub {date}",
+      "expiresSoon": "{merchant} — aegub varsti",
+      "byMerchant": "Kaupmeeste kaupa",
+      "lastActivity": "Viimane tegevus {date}",
+      "readyToSpend": "Kasutamiseks valmis",
+      "viewMerchantWallet": "Vaata kaupmehe rahakotti →"
+    },
+    "nearby": {
+      "title": "Pakkumised lähedal",
+      "subtitle": "Leia pakkumisi ja kuponge enda lähedal asuvatelt kaupmeestelt",
+      "useMyLocation": "Kasuta minu asukohta",
+      "approximateLocation": "Ligikaudne asukoht (IP-aadressi põhjal)",
+      "searchRadius": "Otsingu raadius",
+      "yourLocation": "Sinu asukoht",
+      "mapLabel": "{count, plural, one {# kaupmees} other {# kaupmeest}} {radius} km raadiuses",
+      "merchantsNearby": "{count, plural, one {# kaupmees} other {# kaupmeest}} lähedal",
+      "activeVouchers": "{count, plural, one {# aktiivne kupong} other {# aktiivset kupongi}}",
+      "emptyTitle": "Läheduses pole kaupmehi",
+      "emptyBody": "Suurenda otsingu raadiust või vaata hiljem uuesti – sinu piirkonda võib lisanduda uusi pakkumisi.",
+      "expandRadius": "Laienda {radius} km-ni",
+      "errors": {
+        "fetchFailed": "Lähedalasuvaid kaupmehi ei õnnestunud laadida. Palun proovi uuesti.",
+        "geolocationUnsupported": "Sinu brauser ei toeta asukoha tuvastamist.",
+        "permissionDenied": "Juurdepääs asukohale on keelatud. Luba asukoht oma brauseri seadetes.",
+        "positionUnavailable": "Asukoht pole saadaval. Proovi hiljem uuesti.",
+        "timeout": "Asukoha päring aegus. Proovi uuesti.",
+        "locationFailed": "Sinu asukohta ei õnnestunud tuvastada.",
+        "ipLocationFailed": "Sinu asukohta ei õnnestunud määrata."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Teavituste seaded"
+    },
+    "redeem": {
+      "notFound": "Kupongi ei leitud.",
+      "codeUnavailable": "Kupongi kood pole saadaval.",
+      "backToWallet": "Tagasi rahakotti",
+      "back": "Tagasi"
+    },
+    "referrals": {
+      "metaTitle": "Minu soovitused",
+      "completedCount": "Lõpetatud: {count}"
+    },
+    "voucherDetail": {
+      "back": "Tagasi",
+      "merchantFallback": "Kaupmees",
+      "termsTitle": "Tingimused",
+      "terms1": "Kupong kehtib ülal näidatud aegumiskuupäevani. Seda ei saa kombineerida teiste pakkumiste ega kampaaniatega, kui pole märgitud teisiti.",
+      "terms2": "Kupong tuleb esitada ostu sooritamisel. Kupongil puudub rahaline väärtus ning seda ei saa rahaks vahetada ega tagastada.",
+      "terms3": "Kaupmehel on õigus lunastamisest keelduda, kui kupong näib olevat kopeeritud, rikutud või pettuse eesmärgil kasutatud.",
+      "terms4": "Küsimuste või probleemide korral võta otse ühendust kaupmehega."
+    },
+    "vouchers": {
+      "unknownMerchant": "Tundmatu",
+      "paidAmount": "Makstud: {amount}",
+      "activeCount": "Aktiivsed ({count})",
+      "pastCount": "Varasemad ({count})"
+    },
+    "voucherCard": {
+      "showQr": "Näita QR-koodi",
+      "close": "Sulge",
+      "qrHint": "Poes lunastamiseks näita seda QR-koodi kaupmehele."
+    },
+    "wallet": {
+      "metaTitle": "Minu rahakott"
+    },
+    "wishlist": {
+      "unknownItem": "Tundmatu üksus",
+      "merchant": "Kaupmees",
+      "campaign": "Kampaania",
+      "validUntil": "Kehtib kuni {date}",
+      "alertOn": "Teavitus sees",
+      "noAlert": "Teavitus väljas",
+      "view": "Vaata"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Kampaania pole saadaval",
+      "metaDescriptionFallback": "Pakkumine ettevõttelt {merchant}.",
+      "breadcrumbLabel": "Navigatsioonirada",
+      "breadcrumbCampaigns": "Kampaaniad",
+      "demoNotice": "<strong>Näidispakkumine.</strong> See leht näitab, kuidas pakkumine GiftHubis välja näeb. Ettevõte ja pakkumine on näidised: siin ei saa midagi osta ega lunastada.",
+      "verifiedPartner": "Kinnitatud partner",
+      "aboutTitle": "Pakkumisest",
+      "descriptionFallback": "Kaupmehe eripakkumine GiftHubis.",
+      "howItWorks": {
+        "title": "Kuidas see toimib",
+        "claimTitle": "Hangi kupong",
+        "buyTitle": "Osta kupong",
+        "buyText": "Maksa turvaliselt veebis või hangi kupong tasuta, kui pakkumine on tasuta.",
+        "qrTitle": "Saa oma QR-kood",
+        "qrText": "Kupong salvestatakse sinu GiftHubi rahakotti koos isikliku QR-koodiga.",
+        "showTitle": "Näita seda kohapeal",
+        "showText": "{merchant} skannib koodi ja soodustus rakendub."
+      },
+      "termsTitle": "Tingimused",
+      "voucherOptionsTitle": "Kupongivalikud",
+      "voucherFallbackTitle": "Kupong",
+      "viewVoucher": "Vaata kupongi",
+      "reviewsTitle": "Arvustused",
+      "purchaseLabel": "Ost",
+      "buyNow": "Osta kohe",
+      "getFreeVoucher": "Hangi tasuta kupong",
+      "sampleOffer": "Näidispakkumine",
+      "notOnSaleYet": "Pole veel müügil",
+      "demoNotForSale": "See on näidissisu, seega seda osta ei saa.",
+      "noVoucherYet": "{merchant} pole selle pakkumise kupongi veel avaldanud. Vaata hiljem uuesti.",
+      "offerRuns": "Pakkumine kehtib",
+      "bought": "Ostetud",
+      "boughtCount": "{count, plural, one {# kord} other {# korda}}",
+      "website": "Veebileht",
+      "allOffersFrom": "Kõik pakkumised ettevõttelt {merchant}",
+      "moreFrom": "Veel ettevõttelt {merchant}"
+    },
+    "list": {
+      "allCategories": "Kõik",
+      "badge": "Aktiivsete kampaaniate turg",
+      "heroTitle": "Avasta Euroopa kuumimad pakkumised",
+      "heroSubtitle": "Sirvi kuponge, kingitusi ja elamusi, mille oleme valinud sinu piirkonna parimatelt kaupmeestelt.",
+      "searchLabel": "Otsi kampaaniaid",
+      "searchPlaceholder": "Otsi kampaaniaid, kaupmehi või teenuseid...",
+      "campaignCount": "{count, plural, one {<b>#</b> kampaania} other {<b>#</b> kampaaniat}}",
+      "voucherCount": "{count, plural, one {<b>#</b> kupong müügil} other {<b>#</b> kupongi müügil}}",
+      "merchantCount": "{count, plural, one {<b>#</b> kaupmees} other {<b>#</b> kaupmeest}}",
+      "categoriesLabel": "Kategooriad",
+      "unavailableTitle": "Kampaaniad pole ajutiselt saadaval",
+      "unavailableText": "Andmebaasiga ei õnnestunud ühendust luua. Proovi hetke pärast uuesti.",
+      "emptyTitle": "Pakkumisi ei leitud",
+      "emptyText": "Proovi teist otsingut või vali muu kategooria.",
+      "tryAgain": "Proovi uuesti",
+      "clearFilters": "Tühjenda filtrid"
+    },
+    "listError": {
+      "title": "Kampaaniate laadimine ebaõnnestus",
+      "fallbackMessage": "Kampaaniate laadimisel tekkis ootamatu viga.",
+      "tryAgain": "Proovi uuesti"
+    },
+    "filters": {
+      "sortBy": "Sorteeri",
+      "sort": {
+        "newest": "Uusimad",
+        "oldest": "Vanimad",
+        "priceLow": "Hind: odavamad enne",
+        "priceHigh": "Hind: kallimad enne",
+        "popular": "Populaarseimad",
+        "expiring": "Peagi aeguvad"
+      },
+      "merchant": "Kaupmees",
+      "allMerchants": "Kõik kaupmehed",
+      "minPrice": "Miinimumhind",
+      "minPricePlaceholder": "Min €",
+      "maxPrice": "Maksimumhind",
+      "maxPricePlaceholder": "Max €"
+    },
+    "tenantList": {
+      "title": "Kupongid",
+      "subtitle": "Aktiivsed pakkumised ettevõttelt {merchant}.",
+      "empty": "Kuponge pole veel saadaval.",
+      "voucher": "Kupong",
+      "viewVoucher": "Vaata kupongi"
+    },
+    "deals": {
+      "metaTitle": "Pakkumised",
+      "metaDescription": "Avasta parimad kupongipakkumised"
+    },
+    "campaignShare": {
+      "share": "Jaga",
+      "copied": "Kopeeritud",
+      "linkCopied": "Link kopeeritud",
+      "copyFailed": "Kopeerimine ebaõnnestus"
+    },
+    "shareSheet": {
+      "share": "Jaga",
+      "title": {
+        "voucher": "Jaga seda kupongi",
+        "campaign": "Jaga seda kampaaniat",
+        "merchant": "Jaga seda kaupmeest"
+      },
+      "close": "Sulge",
+      "referralShareText": "{title} – jaga ja saa 10% tagasi!",
+      "referralNote": "<b>Jaga ja teeni 10%</b>, kui sõbrad lunastavad!",
+      "targets": {
+        "email": "E-post",
+        "copy": "Kopeeri link"
+      },
+      "copied": "Kopeeritud!",
+      "linkCopiedToClipboard": "Link kopeeritud lõikelauale!",
+      "linkCopied": "Link kopeeritud!",
+      "shareLinkLabel": "Jagamislink",
+      "copyLink": "Kopeeri link"
+    },
+    "wishlistButton": {
+      "add": "Lisa soovinimekirja",
+      "remove": "Eemalda soovinimekirjast"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# täht} other {# tähte}}"
+    },
+    "form": {
+      "title": "Kirjuta arvustus",
+      "ratingLabel": "Hinnang",
+      "titleLabel": "Pealkiri (valikuline)",
+      "titlePlaceholder": "Võta oma kogemus kokku",
+      "commentLabel": "Kommentaar (valikuline)",
+      "commentPlaceholder": "Jaga oma kogemust...",
+      "submit": "Saada arvustus",
+      "submitting": "Saatmine...",
+      "ratingRequired": "Palun vali hinnang",
+      "submitFailed": "Arvustuse saatmine ebaõnnestus",
+      "alreadyReviewed": "Oled seda juba arvustanud",
+      "signInRequired": "Arvustuse kirjutamiseks logi sisse",
+      "thankYou": "Aitäh arvustuse eest!",
+      "writeAnother": "Kirjuta veel üks arvustus"
+    },
+    "list": {
+      "sort": {
+        "newest": "Uusimad",
+        "highest": "Parimad",
+        "helpful": "Kasulikumad"
+      },
+      "signInToReview": "Arvustuse kirjutamiseks logi sisse",
+      "loadFailed": "Arvustusi ei õnnestunud laadida.",
+      "tryAgain": "Proovi uuesti",
+      "empty": "Arvustusi veel pole.",
+      "anonymous": "Anonüümne",
+      "verified": "Kinnitatud",
+      "helpfulButton": "Kasulik ({count})",
+      "foundHelpful": "{count, plural, one {# inimene pidas seda kasulikuks} other {# inimest pidas seda kasulikuks}}",
+      "previous": "Eelmine",
+      "next": "Järgmine",
+      "pageOf": "Leht {current}/{total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Tühista",
+      "saving": "Salvestamine…",
+      "somethingWentWrong": "Midagi läks valesti"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Sa pole sisse logitud",
+      "unauthorized": "Sa pole sisse logitud",
+      "tooManyAttempts": "Liiga palju katseid. Proovi hiljem uuesti.",
+      "validationFailed": "Sisestatud andmed pole korrektsed",
+      "unexpected": "Tekkis ootamatu viga",
+      "databaseFailed": "Andmete salvestamine ebaõnnestus",
+      "serviceUnavailable": "Teenus pole ajutiselt saadaval",
+      "newPasswordTooShort": "Uus parool peab olema vähemalt 8 tähemärki",
+      "userNotFound": "Kasutajat ei leitud",
+      "currentPasswordRequired": "Sisesta praegune parool",
+      "currentPasswordIncorrect": "Praegune parool on vale",
+      "deletionUnavailable": "Konto kustutamine pole praegu võimalik. Palun võta ühendust klienditoega.",
+      "totpAlreadyEnabledReconfigure": "2FA on juba sisse lülitatud. Uuesti seadistamiseks lülita see enne välja.",
+      "sixDigitCodeRequired": "Sisesta 6-kohaline kood",
+      "totpSetupMissing": "Seadistust ei leitud. Alusta palun seadistamist algusest.",
+      "totpAlreadyEnabled": "2FA on juba sisse lülitatud",
+      "invalidSetupCode": "Vale kood. Kontrolli autentimisrakendust ja proovi uuesti.",
+      "verificationCodeRequired": "Sisesta kinnituskood",
+      "totpNotEnabled": "2FA pole praegu sisse lülitatud",
+      "invalidDisableCode": "Vale kood. Sisesta autentimisrakenduse praegune kood või varukood.",
+      "passkeyOptionsFailed": "Pääsuvõtme lisamist ei õnnestunud alustada",
+      "passkeyGenerateOptionsFailed": "Pääsuvõtme lisamist ei õnnestunud alustada",
+      "registrationFailed": "Registreerimine ebaõnnestus",
+      "passkeyRegistrationFailed": "Pääsuvõtme registreerimine ebaõnnestus",
+      "passkeyChallengeExpired": "Kinnituspäring aegus. Proovi uuesti.",
+      "verificationFailed": "Kinnitamine ebaõnnestus",
+      "passkeyVerifyFailed": "Pääsuvõtme kinnitamine ebaõnnestus"
+    },
+    "settings": {
+      "joinedOn": "Liitunud {date}",
+      "joinedRecently": "Liitunud hiljuti"
+    },
+    "profileForm": {
+      "nameLabel": "Nimi",
+      "namePlaceholder": "Sinu nimi",
+      "emailLabel": "E-post",
+      "emailLocked": "E-posti aadressi ei saa muuta",
+      "save": "Salvesta muudatused",
+      "updated": "Profiil uuendatud",
+      "nameRequired": "Nimi on kohustuslik",
+      "updateFailed": "Profiili uuendamine ebaõnnestus"
+    },
+    "passwordForm": {
+      "currentLabel": "Praegune parool",
+      "newLabel": "Uus parool",
+      "setLabel": "Parool",
+      "confirmLabel": "Korda parooli",
+      "showPassword": "Näita parooli",
+      "hidePassword": "Peida parool",
+      "change": "Muuda parooli",
+      "set": "Määra parool",
+      "updated": "Parool on uuendatud",
+      "tooShort": "Parool peab olema vähemalt {min} tähemärki",
+      "mismatch": "Paroolid ei ühti",
+      "changeFailed": "Parooli muutmine ebaõnnestus"
+    },
+    "deleteDialog": {
+      "trigger": "Kustuta konto",
+      "title": "Kas kustutada konto?",
+      "description": "Seda toimingut ei saa tagasi võtta. Sinu profiil, seansid ja teavituste seaded kustutatakse. Ostuajalugu anonüümitakse.",
+      "typeToConfirm": "Kinnitamiseks sisesta <strong>{word}</strong>:",
+      "confirm": "Kustuta jäädavalt",
+      "deleting": "Kustutamine…",
+      "failed": "Konto kustutamine ebaõnnestus"
+    },
+    "passkeys": {
+      "title": "Pääsuvõtmed",
+      "description": "Logi sisse ilma paroolita, kasutades oma seadme sõrmejälge, näotuvastust või PIN-koodi.",
+      "add": "Lisa pääsuvõti",
+      "namePlaceholder": "nt „MacBook Touch ID“",
+      "addSubmit": "Lisa",
+      "adding": "Lisamine…",
+      "unsupported": "See brauser ei toeta pääsuvõtmeid. Proovi Chrome'i, Safari või Edge'i uuemat versiooni.",
+      "empty": "Pääsuvõtmeid veel pole. Lisa üks, et saaksid ilma paroolita sisse logida.",
+      "devicePasskey": "Seadme pääsuvõti",
+      "passkey": "Pääsuvõti",
+      "added": "Lisatud {date}",
+      "lastUsed": "Viimati kasutatud {date}",
+      "synced": "Sünkroonitud",
+      "removeConfirm": "Eemaldada?",
+      "remove": "Eemalda",
+      "removeLabel": "Eemalda pääsuvõti",
+      "loadFailed": "Pääsuvõtmete laadimine ebaõnnestus",
+      "removeFailed": "Pääsuvõtme eemaldamine ebaõnnestus"
+    },
+    "security": {
+      "title": "Turvalisus",
+      "description": "Halda kaheastmelist autentimist ja turvaseadeid",
+      "loading": "Laadimine...",
+      "backToSettings": "Tagasi seadetesse",
+      "enabledMessage": "Kaheastmeline autentimine on nüüd sisse lülitatud!",
+      "disabledMessage": "Kaheastmeline autentimine on välja lülitatud",
+      "errors": {
+        "statusLoadFailed": "Kaheastmelise autentimise oleku laadimine ebaõnnestus",
+        "setupFailed": "Seadistamise alustamine ebaõnnestus",
+        "verifyFailed": "Kinnitamine ebaõnnestus",
+        "disableFailed": "2FA väljalülitamine ebaõnnestus"
+      },
+      "status": {
+        "title": "Kaheastmeline autentimine",
+        "enabledBody": "Sinu konto on kaitstud autentimisrakendusega.",
+        "disabledBody": "Lisa oma kontole täiendav turvakiht: sisselogimisel küsitakse koodi sinu autentimisrakendusest.",
+        "enabled": "Sisse lülitatud",
+        "notEnabled": "Pole sisse lülitatud"
+      },
+      "setup": {
+        "title": "Seadista autentimisrakendus",
+        "description": "Kinnituskoodide loomiseks kasuta rakendust, näiteks Google Authenticator, Authy või 1Password.",
+        "enable": "Lülita 2FA sisse"
+      },
+      "scan": {
+        "title": "Skanni QR-kood või sisesta võti käsitsi",
+        "qrAlt": "Skanni see QR-kood oma autentimisrakendusega",
+        "manualKey": "Või sisesta see võti käsitsi:",
+        "copySecret": "Kopeeri salavõti"
+      },
+      "verify": {
+        "title": "Sisesta kinnituskood",
+        "codeLabel": "6-kohaline kood rakendusest",
+        "submit": "Kinnita ja lülita sisse"
+      },
+      "backupCodes": {
+        "title": "Salvesta oma varukoodid",
+        "description": "Hoia neid koode turvaliselt. Kui kaotad ligipääsu autentimisrakendusele, saad mõne neist koodidest kasutades sisse logida. Iga koodi saab kasutada ainult üks kord.",
+        "copy": "Kopeeri koodid",
+        "copied": "Kopeeritud!",
+        "download": "Laadi alla",
+        "done": "Valmis"
+      },
+      "backupFile": {
+        "title": "GiftHub - kaheastmelise autentimise varukoodid",
+        "instructions": "Hoia neid koode turvalises kohas. Iga koodi saab kasutada ainult üks kord.",
+        "generated": "Loodud: {date}"
+      },
+      "disable": {
+        "title": "Lülita kaheastmeline autentimine välja",
+        "description": "See eemaldab sinu kontolt täiendava turvakihi.",
+        "button": "Lülita 2FA välja",
+        "confirmTitle": "Kinnita 2FA väljalülitamine",
+        "confirmDescription": "Sisesta autentimisrakenduse praegune 6-kohaline kood või varukood.",
+        "codeLabel": "Kinnituskood",
+        "codePlaceholder": "000000 või XXXX-XXXX",
+        "confirm": "Kinnita väljalülitamine"
+      },
+      "quickLinks": {
+        "title": "Turvalisuse kiirlingid",
+        "sessions": "Vaata aktiivseid seansse",
+        "changePassword": "Muuda parooli"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Maksa tulemuste, mitte ulatuse eest. Kaupmehe hallatav soovituste infrastruktuur: bränditud kupongid ja poe krediit."
+    },
+    "error": {
+      "unexpected": "Tekkis ootamatu viga."
+    },
+    "hero": {
+      "badge": "Kupongid ja soovitused kohalikele ettevõtetele",
+      "title": "Sinu kliendid toovad sulle <highlight>järgmised kliendid</highlight>",
+      "subtitle": "Loo kupongikampaaniaid. Sinu kliendid jagavad neid, teenivad krediiti ja toovad sõpru. Jälgi iga soovitust. Näed täpselt, mis iga uus klient sulle maksma läheb.",
+      "ctaMerchant": "Alusta kaupmehena",
+      "ctaExplore": "Vaata kampaaniaid",
+      "noCardRequired": "Krediitkaarti pole vaja",
+      "freeTrial": "{days}-päevane tasuta prooviperiood",
+      "cancelAnytime": "Tühista igal ajal"
+    },
+    "stats": {
+      "activeCampaigns": "Aktiivsed kampaaniad",
+      "merchants": "Kaupmehed",
+      "processedValue": "Tehingute maht"
+    },
+    "merchantsTitle": "Kaupmehed platvormil",
+    "values": {
+      "referral": {
+        "title": "Soovitusmootor",
+        "description": "Sinu kliendid jagavad pakkumisi ja toovad uusi kliente automaatselt"
+      },
+      "vouchers": {
+        "title": "Digitaalsed kupongid",
+        "description": "Loo paindlike reeglitega sooduskampaaniaid minutitega"
+      },
+      "qr": {
+        "title": "QR-lunastus",
+        "description": "Skanni ja kinnita poes vaid telefoniga. Lisaseadmeid pole vaja"
+      },
+      "analytics": {
+        "title": "Reaalajas analüütika",
+        "description": "Näed täpselt, mida iga kampaania maksab ja tagasi toob. Ilma oletusteta"
+      }
+    },
+    "howItWorks": {
+      "title": "Kuidas see töötab",
+      "subtitle": "Alusta mõne minutiga – kõigest kolm lihtsat sammu",
+      "steps": {
+        "create": {
+          "title": "Loo kampaania",
+          "description": "Seadista kupong 2 minutiga: soodustus, kehtivusaeg, kasutuskordade piir. Valmis."
+        },
+        "share": {
+          "title": "Kliendid jagavad",
+          "description": "Iga ostja saab soovituslingi. Ta jagab seda, teenib krediiti ja toob sõpru."
+        },
+        "grow": {
+          "title": "Vaata, kuidas see kasvab",
+          "description": "Jälgi iga soovitusahelat, vaata uue kliendi hinda ja mõõda ROI-d."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Avasta populaarseid kampaaniaid",
+      "subtitle": "Leia kuponge, pakkumisi ja elamusi üle Euroopa",
+      "showing": "Kuvatakse {count, plural, one {# aktiivne kampaania} other {# aktiivset kampaaniat}}.",
+      "showingWithOnSale": "Kuvatakse {count, plural, one {# aktiivne kampaania} other {# aktiivset kampaaniat}} — neist {onSale} on praegu müügil.",
+      "emptyTitle": "Praegu pole aktiivseid kampaaniaid",
+      "emptyBody": "Pakkumised ilmuvad siia kohe, kui kaupmehed need avaldavad.",
+      "viewAll": "Vaata kõiki kampaaniaid"
+    },
+    "pricing": {
+      "title": "Lihtne ja läbipaistev hinnastus",
+      "subtitle": "Vali oma ettevõttele sobiv plaan. Aastase arvelduse korral maksad vaid 10 kuu eest.",
+      "billingPeriod": "Arveldusperiood",
+      "monthly": "Igakuine",
+      "annual": "Aastane",
+      "save": "Säästa 17%",
+      "mostPopular": "Populaarseim",
+      "perMonth": "/kuu",
+      "perYear": "{price}/aasta (2 kuud tasuta)",
+      "startTrial": "Alusta tasuta prooviperioodi",
+      "footer": "Kõigil plaanidel on {days}-päevane tasuta prooviperiood · {percent}% tehingutasu kupongimüügilt · Tühista igal ajal",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# kupong kuus} other {# kupongi kuus}}",
+        "activeCampaigns": "{count, plural, one {# aktiivne kampaania} other {# aktiivset kampaaniat}}",
+        "teamMembers": "{count, plural, one {# meeskonnaliige} other {# meeskonnaliiget}}",
+        "qrRedemption": "Lunastamine QR-koodiga",
+        "basicAnalytics": "Põhianalüütika",
+        "advancedAnalytics": "Täiustatud analüütika",
+        "customDomain": "Oma domeen",
+        "promoBoosts": "Pakkumiste esiletõstmine (e-post + push)",
+        "unlimitedVouchers": "Piiramatult kuponge",
+        "unlimitedCampaigns": "Piiramatult kampaaniaid",
+        "unlimitedTeamMembers": "Piiramatult meeskonnaliikmeid",
+        "everythingInPlan": "Kõik {plan} plaani võimalused"
+      }
+    },
+    "calculator": {
+      "title": "Arvuta oma ROI",
+      "subtitle": "Liiguta liugureid ja vaata, kui palju võiksid GiftHubiga teenida",
+      "monthlyPurchases": "Kupongiostud kuus",
+      "purchasesValue": "{count, plural, one {# ost} other {# ostu}}",
+      "averageTicket": "Keskmine ostusumma",
+      "referralRate": "Soovituste konversioonimäär",
+      "monthlyRevenue": "Kuukäive",
+      "referralCustomers": "Uued kliendid soovitustest",
+      "perMonthValue": "{value}/kuu",
+      "referralRevenue": "Tulu soovitustest",
+      "estimatedRoi": "Hinnanguline ROI",
+      "platformCost": "Platvormi kulu",
+      "platformCostValue": "{plan}/kuu plaan + {fees} tasud ({percent}%) = <strong>{total}/kuu</strong>",
+      "disclaimer": "Ainult illustratsioon sinu sisestatud väärtuste põhjal — mitte prognoos."
+    },
+    "why": {
+      "title": "Miks kaupmehed GiftHubi armastavad",
+      "body": "Kasvata kliendibaasi ja suurenda tulu — nii, et marginaalid ja kliendisuhted jäävad sulle.",
+      "benefits": {
+        "referralEngine": "Sisseehitatud soovitusmootor igas kampaanias",
+        "analytics": "Reaalajas analüütika: kliendi hankimise hind, ROI",
+        "qr": "QR-lunastus — kassaseadmeid pole vaja",
+        "languages": "Saadaval {count, plural, one {# keeles} other {# keeles}}",
+        "flatPlan": "Fikseeritud kuutasu — mitte tulu jagamine nagu Grouponis",
+        "ownData": "Kliendiandmed kuuluvad sulle",
+        "fee": "{percent}% tehingutasu kupongimüügilt, varjatud kulusid pole"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "Lohista, et võrrelda",
+      "beforeTitle": "Grouponiga",
+      "afterTitle": "GiftHubiga",
+      "sliderLabel": "Võrdle: {before} ja {after}",
+      "before": {
+        "revenueShare": "Platvorm võtab suure osa tulust",
+        "ownsRelationship": "Kliendisuhe kuulub platvormile",
+        "noDataAccess": "Ligipääs kliendiandmetele puudub",
+        "raceToBottom": "Lõputu hinnalangetamine",
+        "lostBrand": "Brändi identiteet kaob"
+      },
+      "after": {
+        "flatFee": "Fikseeritud {minPrice}–{maxPrice}/kuu + {percent}% tasu",
+        "ownData": "Kõik kliendiandmed kuuluvad sulle",
+        "referralEngine": "Sisseehitatud soovitusmootor",
+        "yourBrand": "Sinu bränd, sinu reeglid",
+        "roiAnalytics": "ROI-analüütika reaalajas"
+      }
+    },
+    "faq": {
+      "title": "Korduma kippuvad küsimused",
+      "subtitle": "Kõik, mida pead GiftHubi kohta teadma",
+      "items": {
+        "groupon": {
+          "question": "Mille poolest see Grouponist erineb?",
+          "answer": "Grouponi-laadsed pakkumisportaalid võtavad tavaliselt suure osa igast müügist ja kliendisuhe jääb neile. Meie küsime fikseeritud kuutasu (alates {price}/kuu) ja {percent}% kupongimüügilt. Kliendid, andmed ja marginaalid jäävad sulle."
+        },
+        "referral": {
+          "question": "Kuidas soovitussüsteem töötab?",
+          "answer": "Iga klient, kes ostab kupongi, saab unikaalse soovituslingi. Kui ta seda jagab ja sõber ostab, teenivad mõlemad krediiti. Iga soovitusahelat jälgitakse, nii et näed täpselt, kuidas uued kliendid sinuni jõuavad."
+        },
+        "trial": {
+          "question": "Mis saab pärast {days}-päevast prooviperioodi?",
+          "answer": "Valid plaani ({starter}, {pro} või {scale}). Kui sa tellimust ei vormista, jäävad sinu avaldatud kupongid klientidele kehtima, kuid uusi kampaaniaid saad luua alles pärast tellimist."
+        },
+        "qr": {
+          "question": "Kas QR-lunastuseks on vaja eriseadmeid?",
+          "answer": "Ei. Sinu töötaja avab mobiilse skanneri mis tahes telefoni brauseris, skannib kliendi QR-koodi ja ongi valmis. Rakendust pole vaja alla laadida ega kassasüsteemiga liidestada."
+        },
+        "fee": {
+          "question": "Mis on {percent}% tehingutasu?",
+          "answer": "Kui klient ostab platvormi kaudu kupongi, peame väljamaksest kinni {percent}%. Lisaks plaanile muid platvormitasusid pole."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ära rendi kliente. Ehita oma armee.",
+      "body": "Loo oma esimene kampaania minutitega. Ülejäänu teevad sinu kliendid. {days}-päevane tasuta prooviperiood.",
+      "getStarted": "Alusta tasuta",
+      "browse": "Sirvi kampaaniaid"
+    }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Halda oma kupongikampaaniaid.",
+      "createCampaign": "Loo kampaania",
+      "subscriptionRequired": "Vaja on tellimust",
+      "trialEnded": "Kampaaniate 60-päevane tasuta prooviperiood on lõppenud. Uute kampaaniate loomiseks vali pakett hinnaga 9,90 kuus.",
+      "stats": {
+        "totalTitle": "Kampaaniaid kokku",
+        "totalDescription": "Kõik kampaaniad",
+        "activeTitle": "Aktiivsed",
+        "activeDescription": "Praegu käimas",
+        "paidTitle": "Tasutud ostud",
+        "paidDescription": "Lõpetatud tellimused",
+        "revenueTitle": "Tulu",
+        "revenueDescription": "Tasutud kupongimüük"
+      },
+      "weeklyRevenue": {
+        "title": "Nädala tulu",
+        "description": "Tasutud kampaaniamüük viimase 7 päeva jooksul.",
+        "series": "Tulu"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Kampaaniaid veel pole",
+        "descriptionCanCreate": "Loo kampaania, et oma kuponge korraldada ja hallata.",
+        "descriptionNeedsSubscription": "Uute kampaaniate loomiseks alusta tellimust.",
+        "action": "Loo oma esimene kampaania"
+      },
+      "searchPlaceholder": "Otsi kampaaniaid...",
+      "searchLabel": "Otsi kampaaniaid",
+      "filterAll": "Kõik",
+      "status": {
+        "active": "Aktiivne",
+        "draft": "Mustand",
+        "ended": "Lõppenud",
+        "paused": "Peatatud"
+      },
+      "noMatches": "Filtritele vastavaid kampaaniaid pole.",
+      "clearFilters": "Tühjenda filtrid",
+      "type": {
+        "weekly": "Iganädalane kampaania",
+        "limited": "Piiratud kampaania",
+        "other": "{type} kampaania"
+      },
+      "runs": "Kestab {start} – {end}",
+      "view": "Vaata",
+      "stats": {
+        "vouchers": "Kupongid",
+        "paidPurchases": "Tasutud ostud",
+        "revenue": "Tulu",
+        "price": "Hind"
+      },
+      "free": "Tasuta"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Uus kampaania luuakse mustandina. Kliendid näevad seda alles siis, kui avaldad selle kampaania lehelt."
+    },
+    "edit": {
+      "breadcrumb": "Muuda",
+      "title": "Muuda kampaaniat"
+    },
+    "form": {
+      "basicInfo": "Põhiandmed",
+      "nameLabel": "Kampaania nimi *",
+      "namePlaceholder": "Pühade eripakkumine",
+      "descriptionLabel": "Kirjeldus",
+      "descriptionPlaceholder": "Piiratud ajaga pakkumine",
+      "typeLabel": "Tüüp *",
+      "typeOptions": {
+        "limited": "Ühekordne (piiratud)",
+        "weekly": "Iganädalane"
+      },
+      "dates": "Kuupäevad",
+      "startDate": "Alguskuupäev *",
+      "endDate": "Lõppkuupäev *",
+      "timezoneHint": "Kellaajad on sinu kohalikus ajavööndis.",
+      "pricing": "Hind ja piirangud",
+      "priceLabel": "Hind valuutas {currency} (tasuta kupongide puhul jäta tühjaks)",
+      "pricePreview": "Kliendid maksavad {price}.",
+      "priceHint": "Sisesta summa valuutas {currency}, nt {example} puhul 4.50 või 4,50.",
+      "maxRedemptions": "Lunastuste ülempiir",
+      "maxPurchases": "Ostude ülempiir",
+      "unlimited": "Piiramatu",
+      "creditLabel": "Soovitaja krediit (%)",
+      "creditPreview": "Soovitajad saavad krediidina {percent}% ostuhinnast.",
+      "creditHint": "Ostuhinna osa, mille soovitaja saab krediidina, nt 5 või 2,5.",
+      "termsSection": "Tingimused",
+      "termsLabel": "Tingimused",
+      "termsPlaceholder": "Selle kampaania tingimused...",
+      "saving": "Salvestan...",
+      "saveChanges": "Salvesta muudatused",
+      "creating": "Loon...",
+      "create": "Loo kampaania",
+      "saved": "Kampaania muudatused on salvestatud.",
+      "errors": {
+        "invalidDates": "Sisesta kehtiv algus- ja lõppkuupäev.",
+        "endBeforeStart": "Lõppkuupäev peab olema pärast alguskuupäeva.",
+        "maxRedemptions": "Lunastuste ülempiir peab olema täisarv, mis on vähemalt 1.",
+        "maxPurchases": "Ostude ülempiir peab olema täisarv, mis on vähemalt 1.",
+        "saveFailed": "Kampaania salvestamine ebaõnnestus"
+      },
+      "priceErrors": {
+        "negative": "Hind ei saa olla negatiivne.",
+        "invalid": "Hind ei ole korrektne arv.",
+        "wholeNumber": "Hind peab olema täisarv.",
+        "decimals": "Hinnal võib olla kuni {decimals} komakohta.",
+        "tooLarge": "Hind on liiga suur."
+      },
+      "creditErrors": {
+        "negative": "Soovitaja krediit ei saa olla negatiivne.",
+        "invalid": "Soovitaja krediit ei ole korrektne arv.",
+        "decimals": "Soovitaja krediidil võib olla kuni {decimals} komakohta.",
+        "tooLarge": "Soovitaja krediit on liiga suur.",
+        "tooHigh": "Soovitaja krediit ei saa olla üle 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "Kirjeldus puudub",
+      "draftNotice": "See kampaania on mustand, seega kliendid seda veel ei näe.",
+      "draftNoticeAdmin": "See kampaania on mustand, seega kliendid seda veel ei näe. Avalda see, kui oled valmis.",
+      "status": "Olek",
+      "type": "Tüüp",
+      "price": "Hind",
+      "referrerCredit": "Soovitaja krediit",
+      "none": "Puudub",
+      "stats": {
+        "vouchers": "Kupongid",
+        "totalPurchases": "Oste kokku",
+        "paidPurchases": "Tasutud ostud"
+      },
+      "terms": "Tingimused",
+      "promotion": {
+        "title": "Esiletõstmine",
+        "description": "Tasuline nähtavus iganädalases uudiskirjas ja teavitustes."
+      },
+      "vouchers": {
+        "title": "Kupongid",
+        "description": "Selle kampaania põhjal loodud kupongid.",
+        "empty": "Kuponge pole veel loodud.",
+        "view": "Vaata"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Lisa iganädalasse uudiskirja (tasuline)",
+      "notification": "Tõsta teavitustes esile (tasuline)",
+      "endDate": "Esiletõstmise lõppkuupäev",
+      "saving": "Salvestan...",
+      "save": "Salvesta esiletõstmise seaded",
+      "saved": "Esiletõstmise seaded on salvestatud.",
+      "upgradeNeededTitle": "Vaja on kõrgemat paketti",
+      "upgradeNeeded": "Esiletõstmine kuulub kõrgemasse paketti. Selle kasutamiseks vali kõrgem pakett jaotises Seaded.",
+      "saveFailedStatus": "Esiletõstmise seadeid ei õnnestunud salvestada (viga {status}).",
+      "saveFailedNetwork": "Esiletõstmise seadeid ei õnnestunud salvestada. Kontrolli ühendust ja proovi uuesti."
+    },
+    "actions": {
+      "adminOnly": "Kampaaniaid saavad avaldada, peatada ja muuta ainult kaupmehe administraatorid.",
+      "edit": "Muuda",
+      "publish": {
+        "label": "Avalda",
+        "title": "Kas avaldada see kampaania?",
+        "description": "Kliendid näevad seda kampaaniat kohe ja saavad sealt kuponge osta.",
+        "success": "Kampaania on avaldatud ja nüüd klientidele nähtav."
+      },
+      "pause": {
+        "label": "Peata",
+        "title": "Kas peatada see kampaania?",
+        "description": "Kampaania muutub uuesti mustandiks ja on klientide eest peidetud, kuni selle taas avaldad. Juba müüdud kupongid jäävad kehtima.",
+        "success": "Kampaania on peatatud ja klientide eest peidetud."
+      },
+      "end": {
+        "label": "Lõpeta kampaania",
+        "title": "Kas lõpetada kampaania kohe?",
+        "description": "Kampaania lõpeb kohe ja seda ei saa uuesti avaldada. Juba müüdud kupongid jäävad kehtima.",
+        "success": "Kampaania on lõpetatud."
+      },
+      "updateFailedStatus": "Kampaaniat ei õnnestunud uuendada (viga {status}).",
+      "updateFailed": "Kampaaniat ei õnnestunud uuendada."
+    },
+    "generate": {
+      "open": "Loo kuponge",
+      "title": "Kupongide loomine",
+      "descriptionPriced": "Loob kupongide mustandid {value} soodustusega, kehtivusega {start} – {end}. Iga kupong saab oma koodi. Need on peidetud, kuni need avaldad.",
+      "descriptionFree": "See kampaania on tasuta, seega pole kupongidele summat määrata. Määra kampaaniale esmalt hind.",
+      "countLabel": "Kupongide arv (1–100)",
+      "generating": "Loon...",
+      "submit": "Loo",
+      "invalidCount": "Sisesta täisarv vahemikus 1–100",
+      "needsPrice": "Määra kampaaniale esmalt hind. Loodud kupongide väärtus võrdub kampaania hinnaga.",
+      "failed": "Kupongide loomine ebaõnnestus",
+      "success": "{count, plural, one {# kupong loodi mustandina. Avalda see kupongi lehelt, kui oled valmis.} other {# kupongi loodi mustandina. Avalda need kupongide lehelt, kui oled valmis.}}"
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktiivsed kampaaniad",
+      "statLiveVouchers": "Kehtivad kupongid",
+      "statRedemptions30d": "Lunastused (30 päeva)"
+    },
+    "error": {
+      "title": "Midagi läks valesti",
+      "description": "Kaupmehe paneelis tekkis viga.",
+      "tryAgain": "Proovi uuesti",
+      "backToMerchants": "Tagasi kaupmeeste juurde"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Ülevaade",
+        "offers": "Pakkumised",
+        "inStore": "Poes",
+        "customers": "Kliendid",
+        "settings": "Seaded"
+      },
+      "language": "Keel",
+      "opensAppArea": "Avaneb rakenduses",
+      "externalLinkTitle": "{label} (avaneb rakenduses, väljaspool seda kaupmeest)",
+      "opensOutside": "Avaneb väljaspool kaupmehe vaadet",
+      "merchantNavigation": "Kaupmees",
+      "more": "Rohkem"
+    },
+    "dashboard": {
+      "title": "Kaupmehe töölaud",
+      "welcomeBack": "Tere tulemast tagasi, {name}",
+      "viewCampaigns": "Vaata kampaaniaid",
+      "createVoucher": "Loo kupong",
+      "performanceOverview": "Tulemuste ülevaade",
+      "performanceOverviewHint": "Kampaaniate tegevus ja lunastused reaalajas.",
+      "revenueAndCredits": "Tulu ja krediit",
+      "revenueAndCreditsHint": "Müük, krediit ja lunastamata kohustused.",
+      "performanceTrend": "Tulemuste trend",
+      "performanceTrendHint": "Lunastused ja tulu viimase {days} päeva jooksul.",
+      "rangeShort": "{days} p",
+      "revenue": "Tulu",
+      "chartRedemptions": "Lunastused",
+      "chartRevenue": "Tulu ({currency})",
+      "paidOrders": "Makstud tellimused",
+      "openOrdersView": "Ava tellimused",
+      "avgOrder": "Keskm. tellimus",
+      "openCampaignRevenue": "Ava kampaaniate tulu",
+      "redemptionRate": "Lunastusmäär",
+      "openRedemptionQueue": "Ava lunastuste järjekord",
+      "pendingConfirmation": "{count, plural, one {# ootab kinnitust} other {# ootavad kinnitust}}",
+      "pendingConfirmationHint": "Poes tehtud lunastused ootavad sinu kinnitust.",
+      "viewRedemptions": "Vaata lunastusi",
+      "actionCenter": "Tegevuskeskus",
+      "actionCenterHint": "Esmatähtsad asjad ülevaatamiseks.",
+      "allCaughtUp": "Kõik on tehtud.",
+      "open": "Ava",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# ootel lunastus} other {# ootel lunastust}}",
+        "pendingRedemptionsDetail": "Kinnita poes tehtud lunastused",
+        "expiringVouchers": "{count, plural, one {# kupong aegub peagi} other {# kupongi aegub peagi}}",
+        "expiringVouchersDetail": "Vaata üle kupongide kehtivusajad",
+        "endingCampaigns": "{count, plural, one {# kampaania lõpeb sel nädalal} other {# kampaaniat lõpeb sel nädalal}}",
+        "endingCampaignsDetail": "Pikenda või kopeeri oma parimaid kampaaniaid",
+        "upcomingEvents": "{count, plural, one {# eelseisev üritus} other {# eelseisvat üritust}}",
+        "upcomingEventsDetail": "Valmista ette piletikontroll ja personal"
+      },
+      "upcomingEventsTitle": "Eelseisvad üritused",
+      "upcomingEventsHint": "Järgmised planeeritud üritused.",
+      "noUpcomingEvents": "Eelseisvaid üritusi pole planeeritud.",
+      "eventStatus": {
+        "published": "avaldatud",
+        "soldOut": "välja müüdud"
+      },
+      "manageEvents": "Halda üritusi",
+      "topVouchers": "Populaarseimad kupongid",
+      "topVouchersHint": "Enim lunastatud pakkumised.",
+      "noTopVouchers": "Ühtegi kupongi pole veel lunastatud. Sinu enim lunastatud kupongid ilmuvad siia."
+    },
+    "stats": {
+      "activeVouchers": "Aktiivsed kupongid",
+      "publishedVouchers": "Avaldatud kupongid",
+      "openVouchers": "Ava kupongid",
+      "activeCampaigns": "Aktiivsed kampaaniad",
+      "runningCampaigns": "Käimasolevad kampaaniad",
+      "openCampaigns": "Ava kampaaniad",
+      "activeEvents": "Aktiivsed üritused",
+      "publishedEvents": "Avaldatud üritused",
+      "openEvents": "Ava üritused",
+      "todaysRedemptions": "Tänased lunastused",
+      "thisWeek": "Sel nädalal: {count}",
+      "reviewRedemptions": "Vaata lunastused üle",
+      "ofWeekly": "nädala kogusest"
+    },
+    "revenue": {
+      "voucherRevenue": "Kupongide tulu",
+      "paidVoucherSales": "Makstud kupongimüük",
+      "openCampaignSales": "Ava kampaaniate müük",
+      "ticketRevenue": "Piletitulu",
+      "paidTicketSales": "Makstud piletimüük",
+      "openEventSales": "Ava ürituste müük",
+      "creditsIssued": "Väljastatud krediit",
+      "totalCreditsDistributed": "Kokku jagatud krediit",
+      "openReferralCredits": "Ava soovituskrediit",
+      "outstandingLiability": "Lunastamata kohustus",
+      "unredeemedValue": "Lunastamata kupongide väärtus",
+      "openVoucherLiability": "Ava kupongide kohustused"
+    },
+    "recentActivity": {
+      "title": "Hiljutine tegevus",
+      "empty": "Hiljutist tegevust pole",
+      "unknownUser": "Tundmatu kasutaja",
+      "redeemedVoucher": "Lunastas kupongi – {time}",
+      "confirmed": "Kinnitatud",
+      "pending": "Ootel"
+    },
+    "liveStats": {
+      "live": "Reaalajas",
+      "connecting": "Ühendan…",
+      "redeemedToday": "<value>{count}</value> <label>lunastatud täna</label>",
+      "pending": "<value>{count}</value> <label>ootel</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analüütika",
+      "title": "Analüütika",
+      "subtitle": "Jälgi oma kupongide tulemusi ja tulu",
+      "totalRedemptions": "Lunastusi kokku",
+      "confirmedRedemptions": "Kinnitatud lunastused",
+      "totalDiscounts": "Soodustusi kokku",
+      "givenToCustomers": "Antud klientidele",
+      "creditsIssued": "Väljastatud krediit",
+      "totalCreditsDistributed": "Kokku jagatud krediit",
+      "activeVouchers": "Aktiivsed kupongid",
+      "withRedemptions": "Lunastustega",
+      "charts": {
+        "redemptionTrends": "Lunastuste trend (viimased 30 päeva)",
+        "redemptions": "Lunastused",
+        "revenue": "Tulu ({currency})",
+        "topPerforming": "Parimad kupongid",
+        "noRedeemed": "Ühtegi kupongi pole veel lunastatud. Sinu parimad kupongid ilmuvad siia.",
+        "byCategory": "Lunastused kategooriate kaupa",
+        "noCategoryData": "Kategooriate andmed puuduvad"
+      }
+    },
+    "ask": {
+      "title": "Küsi oma andmetelt",
+      "subtitle": "Esita küsimusi oma äriandmete kohta tavakeeles",
+      "emptyTitle": "Küsi oma andmete kohta mida iganes",
+      "emptyHint": "Proovi mõnda allolevat soovitust",
+      "placeholder": "Esita küsimus oma andmete kohta...",
+      "suggestedTitle": "Soovitatud küsimused",
+      "suggestions": {
+        "revenueLastWeek": "Kui suur oli mu tulu eelmisel nädalal?",
+        "dailyRedemptionsThisMonth": "Näita selle kuu lunastusi päevade kaupa",
+        "topVouchersByRevenue": "Eelmise kuu enim tulu toonud kupongid",
+        "customersPurchasedLastWeek": "Mitu klienti ostis eelmisel nädalal?",
+        "referralConversionRate": "Milline on mu soovituste konversioonimäär?",
+        "dailyRevenueTrend": "Näita selle kuu tulu trendi päevade kaupa",
+        "purchasesYesterday": "Mitu ostu eile tehti?",
+        "bestPerformingVouchers": "Millised on mu parimad kupongid?"
+      },
+      "errorFallback": "Vabandust, ma ei suutnud seda küsimust töödelda.",
+      "networkError": "Võrguviga. Palun proovi uuesti.",
+      "itemLabel": "Kirje {n}"
+    },
+    "reports": {
+      "title": "Finantsaruanded",
+      "subtitle": "Tulu ülevaade ja eksport",
+      "downloadCsv": "Laadi alla CSV",
+      "from": "Alates",
+      "to": "Kuni",
+      "apply": "Rakenda",
+      "totalRevenue": "Kogutulu",
+      "platformFees": "Platvormi tasud",
+      "netRevenue": "Netotulu",
+      "redemptions": "Lunastused",
+      "revenueByCurrency": "Tulu valuutade kaupa",
+      "netAndFees": "Neto: {net} • Tasud: {fees}",
+      "monthlyRevenue": "Tulu kuude kaupa",
+      "noRevenue": "Selle perioodi kohta tuluandmed puuduvad.",
+      "month": "Kuu",
+      "vouchers": "Kupongid",
+      "tickets": "Piletid",
+      "total": "Kokku"
+    },
+    "scheduled": {
+      "title": "Ajastatud aruanded",
+      "subtitle": "Seadista automaatsed e-posti aruanded",
+      "backToReports": "← Finantsaruanded",
+      "activeSchedules": "Aktiivsed ajakavad",
+      "loading": "Laadimine...",
+      "noSchedules": "Ühtegi ajakava pole veel seadistatud",
+      "period": {
+        "daily": "Igapäevane",
+        "weekly": "Iganädalane",
+        "monthly": "Igakuine"
+      },
+      "reportTitle": {
+        "daily": "Päevaaruanne",
+        "weekly": "Nädalaaruanne",
+        "monthly": "Kuuaruanne"
+      },
+      "recipientCount": "{count, plural, one {# saaja} other {# saajat}}",
+      "lastSent": "Viimati saadetud: {date}",
+      "nextRun": "Järgmine: {date}",
+      "pause": "Peata",
+      "resume": "Jätka",
+      "createSchedule": "Loo ajakava",
+      "frequency": "Sagedus",
+      "recipients": "Saajad",
+      "invalidEmail": "Vigane e-posti aadress",
+      "emailAlreadyAdded": "See e-posti aadress on juba lisatud",
+      "addAtLeastOne": "Lisa vähemalt üks saaja",
+      "saved": "Aruande ajakava on salvestatud",
+      "saveFailed": "Ajakava salvestamine ebaõnnestus",
+      "save": "Salvesta ajakava",
+      "previewTitle": "Aruande eelvaade",
+      "previewBody": "Ajastatud aruanded sisaldavad tulu, lunastuste arvu, populaarseimaid kuponge ja kasvunäitajaid. Aruanded saadetakse kenasti vormindatud HTML-e-kirjadena kell 8:00 UTC.",
+      "everyMorning": "Igal hommikul",
+      "everyMonday": "Igal esmaspäeval",
+      "firstOfMonth": "Iga kuu 1. kuupäeval"
+    },
+    "billing": {
+      "subscribeTo": "Telli plaan {plan}",
+      "startFailed": "Tellimuse alustamine ebaõnnestus",
+      "portalFailed": "Arveldusportaali avamine ebaõnnestus",
+      "manageBilling": "Halda arveldust",
+      "errorTitle": "Viga",
+      "close": "Sulge",
+      "usage": "<b>{current}</b> / {max} kasutatud",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "loodud kampaaniad perioodis",
+        "activeCampaigns": "aktiivsed kampaaniad",
+        "voucherCreatesPerCycle": "loodud kupongid perioodis",
+        "teamMembers": "tiimiliikmed"
+      },
+      "currentPlanTrial": "Praegune plaan (tasuta prooviperiood)",
+      "planChangesUnavailable": "Plaani ei saa praegu veebis muuta.",
+      "paymentsNotSetUp": "Veebimaksed pole sellel platvormil veel seadistatud, seega ei saa siin plaane osta ega muuta. Kui soovid plaani muuta, võta ühendust klienditoega.",
+      "features": {
+        "starter": {
+          "vouchers": "500 kupongi kuus",
+          "campaigns": "3 aktiivset kampaaniat",
+          "teamMembers": "2 tiimiliiget",
+          "qrRedemption": "Lunastamine QR-koodiga",
+          "basicAnalytics": "Põhianalüütika"
+        },
+        "pro": {
+          "vouchers": "5000 kupongi kuus",
+          "campaigns": "25 aktiivset kampaaniat",
+          "teamMembers": "10 tiimiliiget",
+          "advancedAnalytics": "Täpsem analüütika",
+          "customDomain": "Oma domeen",
+          "promoBoosts": "Pakkumiste esiletõstmine"
+        },
+        "scale": {
+          "vouchers": "Piiramatult kuponge",
+          "campaigns": "Piiramatult kampaaniaid",
+          "teamMembers": "Piiramatult tiimiliikmeid",
+          "everythingInPro": "Kõik Pro plaani võimalused",
+          "whiteLabel": "Valmis oma brändi alla (white-label)",
+          "prioritySupport": "Eelisjärjekorras tugi"
+        }
+      }
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Maksmise demo",
+      "subtitle": "Demo-maksmisleht",
+      "creditBalance": "Krediidi saldo",
+      "availableAmount": "{amount} saadaval",
+      "lockedAmount": "{amount} lukus",
+      "orderSummary": "Tellimuse kokkuvõte",
+      "orderAmount": "Tellimuse summa",
+      "creditToApply": "Kasutatav krediit",
+      "maxAmount": "Max: {amount}",
+      "subtotal": "Vahesumma",
+      "creditAppliedLine": "Krediit rakendatud",
+      "total": "Kokku",
+      "processing": "Töötlemine...",
+      "submit": "Rakenda krediit ja vormista tellimus",
+      "creditApplied": "Krediit rakendatud! Tellimuse summa: {total}",
+      "errors": {
+        "missingAmounts": "Sisesta nii tellimuse summa kui ka krediidi summa",
+        "applyFailed": "Krediidi rakendamine ebaõnnestus"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} – saadaolevad kupongid",
+      "emptyTitle": "Kuponge pole saadaval",
+      "emptyDescription": "Vaata hiljem uuesti – uued kupongipakkumised ({merchant}) ilmuvad siia.",
+      "specialOffer": "Eripakkumine",
+      "validUntil": "Kehtib kuni {date}",
+      "viewAndShare": "Vaata ja jaga"
+    },
+    "wallet": {
+      "subtitle": "Krediidi rahakott",
+      "availableToUse": "Kasutamiseks saadaval",
+      "useCredit": "Kasuta krediiti",
+      "noCreditToUse": "Krediiti pole",
+      "locked": "Lukus",
+      "lockedDescription": "Avaneb, kui seotud ost on kinnitatud.",
+      "historyTitle": "Krediidi ajalugu",
+      "historyDescription": "Kanded: {merchant}",
+      "historyEmpty": "Krediidi ajalugu veel pole.",
+      "expires": "Aegub {date}",
+      "creditStatus": {
+        "locked": "lukus",
+        "available": "saadaval",
+        "used": "kasutatud",
+        "expired": "aegunud",
+        "reversed": "tühistatud"
+      }
+    },
+    "error": {
+      "title": "Midagi läks valesti",
+      "description": "Portaali laadimine ebaõnnestus. Värskenda lehte või proovi hiljem uuesti.",
+      "backToPortal": "Tagasi portaali"
+    },
+    "payments": {
+      "voucherFallback": "Kupong",
+      "status": {
+        "pending": "ootel",
+        "paid": "makstud",
+        "failed": "ebaõnnestunud",
+        "refunded": "tagastatud"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "saadaval",
+        "sold": "müüdud",
+        "used": "kasutatud",
+        "cancelled": "tühistatud",
+        "refunded": "tagastatud"
+      }
+    }
   }
 }

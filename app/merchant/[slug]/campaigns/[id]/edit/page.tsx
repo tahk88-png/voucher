@@ -30,6 +30,7 @@ export default async function EditCampaignPage({
   if (!campaign) notFound();
 
   const t = await getTranslations('nav');
+  const tc = await getTranslations('merchantCampaigns');
   const currency = normalizeCurrency(campaign.merchant.defaultCurrency);
 
   return (
@@ -40,10 +41,10 @@ export default async function EditCampaignPage({
             { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
             { label: t('campaigns'), href: `/merchant/${slug}/campaigns` },
             { label: campaign.name, href: `/merchant/${slug}/campaigns/${campaign.id}` },
-            { label: 'Edit' },
+            { label: tc('edit.breadcrumb') },
           ]}
         />
-        <h1 className="text-2xl font-semibold text-[var(--text)] mb-6">Edit campaign</h1>
+        <h1 className="text-2xl font-semibold text-[var(--text)] mb-6">{tc('edit.title')}</h1>
         <CampaignForm
           merchantSlug={slug}
           currency={currency}

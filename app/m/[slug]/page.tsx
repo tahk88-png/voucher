@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { prisma } from '@/lib/prisma';
 import { SITE_NAME } from '@/lib/seo';
 import { isDemoMerchantSlug } from '@/lib/demo-content';
@@ -13,11 +14,13 @@ import HubShell from '@/components/layout/hub-shell';
 import { CampaignCard, DemoBadge } from '@/components/campaign/campaign-card';
 import { getCategoryVisual, stripDemoMarker, toCampaignCardData } from '@/lib/campaign-presentation';
 import {
-  describeVoucherValue,
+  DISPLAY_LOCALE,
   formatDisplayDate,
+  formatVoucherValue,
   voucherHeadline,
-  voucherTypeLabel,
 } from '@/lib/voucher-display';
+
+const VOUCHER_TYPES = ['percentage', 'fixed_amount', 'credit_amount'];
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -25,9 +28,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     where: { slug, isActive: true },
     select: { name: true, slug: true, brandLogoUrl: true },
   });
-  if (!merchant) return { title: 'Not Found' };
+  const t = await getTranslations('directory.merchantPage');
+  if (!merchant) return { title: t('notFoundTitle') };
   const name = stripDemoMarker(merchant.name, isDemoMerchantSlug(merchant.slug));
-  const description = `Browse vouchers, campaigns, and offers from ${name}`;
+  const description = t('metaDescription', { name });
   return {
     // The root layout applies a `%s | GiftHub` template, so `title` must not
     // carry a site-name suffix of its own. OG titles bypass the template.
@@ -76,6 +80,17 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
 
   if (!merchant) notFound();
 
+  const t = await getTranslations('directory.merchantPage');
+  const tLabels = await getTranslations('labels');
+  const locale = await getLocale();
+  // English keeps the existing en-GB date style; other locales format natively.
+  const dateLocale = locale === 'en' ? DISPLAY_LOCALE : locale;
+  const typeLabel = (type: string) =>
+    VOUCHER_TYPES.includes(type.toLowerCase()) ? tLabels(`voucherType.${type.toLowerCase()}`) : type.replace(/_/g, ' ');
+  const valueLabel = (voucher: { type: string; value: number; currency: string }) =>
+    tLabels(voucher.type.toLowerCase() === 'credit_amount' ? 'valueCredit' : 'valueOff', {
+      value: formatVoucherValue(voucher),
+    });
   const isDemo = isDemoMerchantSlug(merchant.slug);
   const displayName = stripDemoMarker(merchant.name, isDemo);
   const cards = merchant.campaigns.map((campaign) =>
@@ -137,7 +152,7 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
                     )}
                     <span className="inline-flex items-center gap-1">
                       <Tag className="h-3.5 w-3.5" aria-hidden="true" />
-                      {offerCount} {offerCount === 1 ? 'offer' : 'offers'}
+                      {t('offerCount', { count: offerCount })}
                     </span>
                   </p>
                 </div>
@@ -146,14 +161,14 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
                     {merchant.website && (
                       <WarmButton asChild variant="outline" size="sm">
                         <a href={merchant.website} target="_blank" rel="noopener noreferrer">
-                          <Globe className="mr-1.5 h-4 w-4" aria-hidden="true" /> Website
+                          <Globe className="mr-1.5 h-4 w-4" aria-hidden="true" /> {t('website')}
                         </a>
                       </WarmButton>
                     )}
                     {merchant.supportEmail && (
                       <WarmButton asChild variant="outline" size="sm">
                         <a href={`mailto:${merchant.supportEmail}`}>
-                          <Mail className="mr-1.5 h-4 w-4" aria-hidden="true" /> Contact
+                          <Mail className="mr-1.5 h-4 w-4" aria-hidden="true" /> {t('contact')}
                         </a>
                       </WarmButton>
                     )}
@@ -170,23 +185,22 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
             >
               <Info className="mt-0.5 h-4 w-4 shrink-0 text-[var(--warning)]" aria-hidden="true" />
               <span>
-                <strong>Sample business.</strong> This page shows how a merchant looks on GiftHub. Its offers are
-                examples and can&apos;t be bought.
+                {t.rich('sampleNotice', { strong: (chunks) => <strong>{chunks}</strong> })}
               </span>
             </p>
           )}
 
           <section aria-labelledby="merchant-offers" className="mt-10">
             <h2 id="merchant-offers" className="mb-5 text-2xl font-bold text-[var(--text)]">
-              Offers
+              {t('offersHeading')}
             </h2>
             {cards.length === 0 && merchant.vouchers.length === 0 ? (
               <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
                 <Gift className="mx-auto mb-3 h-8 w-8 text-[var(--text-faint)]" aria-hidden="true" />
-                <p className="font-semibold text-[var(--text)]">No offers right now</p>
-                <p className="mt-1 text-sm text-[var(--text-muted)]">New offers from {displayName} will appear here.</p>
+                <p className="font-semibold text-[var(--text)]">{t('noOffers')}</p>
+                <p className="mt-1 text-sm text-[var(--text-muted)]">{t('noOffersHint', { name: displayName })}</p>
                 <WarmButton asChild variant="outline" size="sm" className="mt-4">
-                  <Link href="/campaigns">Browse other offers</Link>
+                  <Link href="/campaigns">{t('browseOther')}</Link>
                 </WarmButton>
               </WarmCard>
             ) : (
@@ -203,12 +217,12 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
                     <WarmCard padding="lg" className="h-full bg-[var(--surface)] transition-shadow group-hover:shadow-warm">
                       <div className="flex items-start justify-between gap-2">
                         <h3 className="line-clamp-2 font-semibold text-[var(--text)]">
-                          {voucherHeadline(voucher) || voucher.campaign?.name || describeVoucherValue(voucher)}
+                          {voucherHeadline(voucher) || voucher.campaign?.name || valueLabel(voucher)}
                         </h3>
-                        <Badge variant="outline" className="shrink-0">{voucherTypeLabel(voucher.type)}</Badge>
+                        <Badge variant="outline" className="shrink-0">{typeLabel(voucher.type)}</Badge>
                       </div>
-                      <p className="mt-3 text-2xl font-bold text-[var(--primary)]">{describeVoucherValue(voucher)}</p>
-                      <p className="mt-2 text-xs text-[var(--text-muted)]">Valid until {formatDisplayDate(voucher.validTo)}</p>
+                      <p className="mt-3 text-2xl font-bold text-[var(--primary)]">{valueLabel(voucher)}</p>
+                      <p className="mt-2 text-xs text-[var(--text-muted)]">{t('validUntil', { date: formatDisplayDate(voucher.validTo, dateLocale) })}</p>
                     </WarmCard>
                   </Link>
                 ))}

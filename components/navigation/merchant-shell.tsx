@@ -62,14 +62,15 @@ type NavItem = {
   alsoActive?: (slug: string) => string[]
 }
 
-type NavGroup = { title: string; items: NavItem[] }
+/** titleKey: key under merchantDashboard.shell.groups. */
+type NavGroup = { titleKey: string; items: NavItem[] }
 
 const staff = "merchant_staff" as TenantMembershipRole
 const admin = "merchant_admin" as TenantMembershipRole
 
 const navGroups: NavGroup[] = [
   {
-    title: "Overview",
+    titleKey: "overview",
     items: [
       { labelKey: "dashboard", fallback: "Dashboard", icon: LayoutDashboard, href: (slug) => `/merchant/${slug}`, minRole: staff, alsoActive: (slug) => [`/merchant/${slug}/dashboard`] },
       { labelKey: "analytics", fallback: "Analytics", icon: TrendingUp, href: (slug) => `/merchant/${slug}/analytics`, minRole: staff },
@@ -77,7 +78,7 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    title: "Offers",
+    titleKey: "offers",
     items: [
       { labelKey: "vouchers", fallback: "Vouchers", icon: Gift, href: (slug) => `/merchant/${slug}/vouchers`, minRole: staff },
       { labelKey: "campaigns", fallback: "Campaigns", icon: Megaphone, href: (slug) => `/merchant/${slug}/campaigns`, minRole: staff },
@@ -88,7 +89,7 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    title: "In store",
+    titleKey: "inStore",
     items: [
       { labelKey: "scanner", fallback: "Scanner", icon: ScanLine, href: (slug) => `/merchant/${slug}/scanner`, minRole: staff },
       { labelKey: "redemptions", fallback: "Redemptions", icon: CheckCircle, href: (slug) => `/merchant/${slug}/redemptions`, minRole: staff },
@@ -97,7 +98,7 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    title: "Customers",
+    titleKey: "customers",
     items: [
       { labelKey: "customers", fallback: "Customers", icon: UserCheck, href: (slug) => `/merchant/${slug}/customers`, minRole: admin },
       { labelKey: "reviews", fallback: "Reviews", icon: Star, href: (slug) => `/merchant/${slug}/reviews`, minRole: staff },
@@ -106,7 +107,7 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
-    title: "Settings",
+    titleKey: "settings",
     items: [
       { labelKey: "settings", fallback: "Settings & Billing", icon: Settings, href: (slug) => `/merchant/${slug}/settings`, minRole: admin },
       { labelKey: "team", fallback: "Team", icon: Users, href: (slug) => `/merchant/${slug}/members`, minRole: admin },
@@ -139,6 +140,7 @@ export default function MerchantShell({
 }: MerchantShellProps) {
   const pathname = usePathname() ?? ""
   const tNav = useTranslations("nav")
+  const t = useTranslations("merchantDashboard.shell")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
 
@@ -225,7 +227,7 @@ export default function MerchantShell({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="w-10 h-10 rounded-[12px] flex items-center justify-center hover:bg-[var(--surface-dim)] transition-colors flex-shrink-0"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileMenuOpen ? tNav("closeMenu") : tNav("openMenu")}
             aria-expanded={mobileMenuOpen}
             aria-controls="merchant-mobile-menu"
           >
@@ -242,12 +244,12 @@ export default function MerchantShell({
             >
               <div className="p-4 space-y-4">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-xs uppercase tracking-wide text-[var(--text-faint)]">Language</span>
+                  <span className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{t("language")}</span>
                   <LanguageSelector variant="compact" />
                 </div>
                 {visibleGroups.map((group) => (
-                  <div key={group.title} className="space-y-1">
-                    <p className="px-4 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-faint)]">{group.title}</p>
+                  <div key={group.titleKey} className="space-y-1">
+                    <p className="px-4 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-faint)]">{t(`groups.${group.titleKey}`)}</p>
                     {group.items.map((item) => {
                       const href = item.href(slug)
                       const Icon = item.icon
@@ -268,7 +270,7 @@ export default function MerchantShell({
                           <span className="flex-1">{getNavLabel(item.labelKey, item.fallback)}</span>
                           {item.external && (
                             <span className="flex items-center gap-1 text-[11px] text-[var(--text-faint)]">
-                              Opens app area <ArrowUpRight className="h-3.5 w-3.5" />
+                              {t("opensAppArea")} <ArrowUpRight className="h-3.5 w-3.5" />
                             </span>
                           )}
                         </Link>
@@ -310,21 +312,21 @@ export default function MerchantShell({
             <button
               onClick={() => setCollapsed(!collapsed)}
               className="absolute -right-3 top-9 bg-[var(--surface)] border border-[var(--border)] rounded-full p-1 text-[var(--text-muted)] hover:text-[var(--danger)] shadow-sm hover:shadow-md transition-transform"
-              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              aria-label={collapsed ? tNav("expandSidebar") : tNav("collapseSidebar")}
               aria-expanded={!collapsed}
             >
               {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
             </button>
           </div>
 
-          <nav className="flex-1 px-4 py-4 space-y-4 overflow-y-auto overflow-x-hidden" aria-label="Merchant">
+          <nav className="flex-1 px-4 py-4 space-y-4 overflow-y-auto overflow-x-hidden" aria-label={t("merchantNavigation")}>
             {visibleGroups.map((group) => (
-              <div key={group.title} className="space-y-1">
+              <div key={group.titleKey} className="space-y-1">
                 {collapsed ? (
                   <div className="mx-auto my-1 h-px w-8 bg-[var(--border)]" aria-hidden="true" />
                 ) : (
                   <p className="px-4 pb-1 text-[11px] font-semibold uppercase tracking-wide text-[var(--text-faint)]">
-                    {group.title}
+                    {t(`groups.${group.titleKey}`)}
                   </p>
                 )}
                 {group.items.map((item) => {
@@ -335,7 +337,7 @@ export default function MerchantShell({
                     <Link
                       key={href}
                       href={href}
-                      title={item.external ? `${label} (opens the app area, outside this merchant)` : collapsed ? label : undefined}
+                      title={item.external ? t("externalLinkTitle", { label }) : collapsed ? label : undefined}
                       aria-current={isActive(href) ? "page" : undefined}
                       className={cn(
                         "w-full flex items-center gap-3 px-4 py-2.5 rounded-[14px] font-medium transition-all relative group",
@@ -355,7 +357,7 @@ export default function MerchantShell({
                         {label}
                       </span>
                       {item.external && !collapsed && (
-                        <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-[var(--text-faint)]" aria-label="Opens outside the merchant area" />
+                        <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-[var(--text-faint)]" aria-label={t("opensOutside")} />
                       )}
                       {collapsed && (
                         <div className="absolute left-full ml-2 px-2 py-1 bg-[var(--text)] text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-lg">
@@ -409,7 +411,7 @@ export default function MerchantShell({
           <div className="px-4 py-3 sm:px-6 lg:px-8 max-w-7xl mx-auto flex items-center justify-between gap-6 bg-gradient-to-r from-[var(--bg-2)] to-[#FFE5B4]/30">
             <div className="flex-1 min-w-0 max-w-2xl">{renderStats(false)}</div>
             <div className="flex items-center gap-2 flex-shrink-0">
-              <span className="text-[10px] uppercase tracking-wide text-[var(--text-faint)]">Language</span>
+              <span className="text-[10px] uppercase tracking-wide text-[var(--text-faint)]">{t("language")}</span>
               <LanguageSelector variant="compact" />
             </div>
           </div>
@@ -419,7 +421,7 @@ export default function MerchantShell({
       </main>
 
       <nav
-        aria-label="Quick navigation"
+        aria-label={tNav("quickNavigation")}
         className="lg:hidden fixed bottom-0 inset-x-0 bg-[var(--surface)] border-t border-[var(--border)] shadow-warm-lg z-40 pb-[env(safe-area-inset-bottom)]"
       >
         <div className="grid grid-cols-5 gap-1 px-2 h-16 items-center">
@@ -451,7 +453,7 @@ export default function MerchantShell({
             className="flex flex-col items-center justify-center gap-1 h-12 px-1 rounded-[12px] text-[var(--text-faint)] hover:bg-[var(--surface-dim)] transition-all"
           >
             <Menu className="h-5 w-5" />
-            <span className="text-[10px] font-medium">More</span>
+            <span className="text-[10px] font-medium">{t("more")}</span>
           </button>
         </div>
       </nav>

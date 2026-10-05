@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Heart } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface WishlistButtonProps {
   voucherId?: string;
@@ -10,6 +11,7 @@ interface WishlistButtonProps {
 }
 
 export function WishlistButton({ voucherId, campaignId, merchantId }: WishlistButtonProps) {
+  const t = useTranslations('offers.wishlistButton');
   const [wishlisted, setWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [animating, setAnimating] = useState(false);
@@ -71,7 +73,7 @@ export function WishlistButton({ voucherId, campaignId, merchantId }: WishlistBu
       disabled={loading && !animating}
       className="relative p-2 rounded-full transition-all hover:scale-110"
       style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
-      aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+      aria-label={wishlisted ? t('remove') : t('add')}
     >
       <Heart
         size={20}

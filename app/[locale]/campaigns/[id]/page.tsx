@@ -36,6 +36,7 @@ export async function generateMetadata({
     locale = routing.defaultLocale
   }
 
+  const t = await getTranslations({ locale, namespace: "offers" })
   const now = new Date()
   const campaign = await prisma.campaign.findUnique({
     where: { id: p.id },
@@ -59,13 +60,13 @@ export async function generateMetadata({
 
   if (!campaign || campaign.status !== "active" || campaign.startDate > now || campaign.endDate < now) {
     return {
-      title: "Campaign unavailable",
+      title: t("detail.unavailableTitle"),
       robots: { index: false, follow: false },
     }
   }
 
   const title = campaign.name
-  const description = campaign.description || `Offer from ${campaign.merchant.name}.`
+  const description = campaign.description || t("detail.metaDescriptionFallback", { merchant: campaign.merchant.name })
   const canonicalPath = getLocalePath(locale, `/campaigns/${campaign.id}`)
   const imageUrl = campaign.merchant.brandLogoUrl || DEFAULT_OG_IMAGE
 
@@ -181,6 +182,7 @@ export default async function CampaignDetailPage({
 
   const card = toCampaignCardData(campaign)
   const tLabels = await getTranslations("labels")
+  const t = await getTranslations("offers")
   const isDemo = card.isDemo
   // Buying happens through a published, currently valid voucher.
   const onSale = campaign.vouchers.length > 0 && !isDemo
@@ -231,11 +233,11 @@ export default async function CampaignDetailPage({
   return (
     <div className="min-h-screen bg-[var(--bg)]">
       {/* Not sticky: the site header is the sticky bar. */}
-      <nav aria-label="Breadcrumb" className="border-b border-[var(--border)] bg-[var(--surface)]/80">
+      <nav aria-label={t("detail.breadcrumbLabel")} className="border-b border-[var(--border)] bg-[var(--surface)]/80">
         <ol className="mx-auto flex max-w-7xl min-w-0 items-center gap-2 px-4 py-3 text-sm text-[var(--text-muted)] sm:px-6 lg:px-8">
           <li>
             <Link href="/campaigns" className="hover:text-[var(--text)]">
-              Campaigns
+              {t("detail.breadcrumbCampaigns")}
             </Link>
           </li>
           <li aria-hidden="true">/</li>
@@ -253,8 +255,7 @@ export default async function CampaignDetailPage({
           >
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-[var(--warning)]" aria-hidden="true" />
             <p>
-              <strong>Sample offer.</strong> This page shows how an offer looks on GiftHub. The business and offer
-              are examples: nothing here can be bought or redeemed.
+              {t.rich("detail.demoNotice", { strong: (chunks) => <strong>{chunks}</strong> })}
             </p>
           </div>
         )}
@@ -293,7 +294,7 @@ export default async function CampaignDetailPage({
                 )}
                 {campaign.merchant.onboardedAt && !isDemo && (
                   <span className="inline-flex items-center gap-1 text-[var(--success)]">
-                    <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" /> Verified partner
+                    <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" /> {t("detail.verifiedPartner")}
                   </span>
                 )}
               </p>
@@ -302,24 +303,34 @@ export default async function CampaignDetailPage({
 
             <section aria-labelledby="offer-details">
               <h2 id="offer-details" className="mb-3 text-xl font-bold text-[var(--text)]">
-                About this offer
+                {t("detail.aboutTitle")}
               </h2>
               <p className="whitespace-pre-line leading-relaxed text-[var(--text-muted)]">
-                {campaign.description || "Special offer from a merchant on GiftHub."}
+                {campaign.description || t("detail.descriptionFallback")}
               </p>
             </section>
 
             <section aria-labelledby="how-it-works">
               <h2 id="how-it-works" className="mb-4 text-xl font-bold text-[var(--text)]">
-                How it works
+                {t("detail.howItWorks.title")}
               </h2>
               <ol className="grid gap-3 sm:grid-cols-3">
                 {[
-                  { icon: ShoppingBag, title: card.isFree ? "Claim the voucher" : "Buy the voucher", text: "Pay securely online, or claim it for free when the offer is free." },
-                  { icon: QrCode, title: "Get your QR code", text: "The voucher is saved in your GiftHub wallet with a personal QR code." },
-                  { icon: Store, title: "Show it on site", text: `${card.merchantName} scans the code and the discount is applied.` },
+                  {
+                    id: "buy",
+                    icon: ShoppingBag,
+                    title: card.isFree ? t("detail.howItWorks.claimTitle") : t("detail.howItWorks.buyTitle"),
+                    text: t("detail.howItWorks.buyText"),
+                  },
+                  { id: "qr", icon: QrCode, title: t("detail.howItWorks.qrTitle"), text: t("detail.howItWorks.qrText") },
+                  {
+                    id: "show",
+                    icon: Store,
+                    title: t("detail.howItWorks.showTitle"),
+                    text: t("detail.howItWorks.showText", { merchant: card.merchantName }),
+                  },
                 ].map((step, index) => (
-                  <li key={step.title} className="rounded-[var(--r-md)] border border-[var(--border)] bg-[var(--surface)] p-4">
+                  <li key={step.id} className="rounded-[var(--r-md)] border border-[var(--border)] bg-[var(--surface)] p-4">
                     <div className="mb-2 flex items-center gap-2">
                       <span className="grid h-7 w-7 place-items-center rounded-full bg-[var(--primary)] text-xs font-bold text-[var(--primary-foreground)]">
                         {index + 1}
@@ -336,7 +347,7 @@ export default async function CampaignDetailPage({
             {campaign.terms && (
               <section aria-labelledby="offer-terms">
                 <h2 id="offer-terms" className="mb-3 text-xl font-bold text-[var(--text)]">
-                  Terms
+                  {t("detail.termsTitle")}
                 </h2>
                 <p className="whitespace-pre-line text-sm leading-relaxed text-[var(--text-muted)]">{campaign.terms}</p>
               </section>
@@ -346,7 +357,7 @@ export default async function CampaignDetailPage({
               <section id="vouchers" aria-labelledby="voucher-options" className="scroll-mt-24">
                 <h2 id="voucher-options" className="mb-4 flex items-center gap-2 text-xl font-bold text-[var(--text)]">
                   <Ticket className="h-5 w-5 text-[var(--primary)]" aria-hidden="true" />
-                  Voucher options
+                  {t("detail.voucherOptionsTitle")}
                 </h2>
                 <div className="space-y-3">
                   {campaign.vouchers.map((voucher) => {
@@ -355,15 +366,15 @@ export default async function CampaignDetailPage({
                       <WarmCard key={voucher.id} padding="md" hover className="bg-[var(--surface)]">
                         <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                           <div>
-                            <h3 className="font-bold text-[var(--text)]">{design?.headline || "Voucher"}</h3>
+                            <h3 className="font-bold text-[var(--text)]">{design?.headline || t("detail.voucherFallbackTitle")}</h3>
                             <p className="text-sm text-[var(--text-muted)]">
                               {voucher.type === "percentage"
-                                ? `${formatPercentage(voucher.value)} discount`
-                                : `${formatCurrency(voucher.value, voucher.currency)} credit`}
+                                ? tLabels("valueDiscount", { value: formatPercentage(voucher.value) })
+                                : tLabels("valueCredit", { value: formatCurrency(voucher.value, voucher.currency) })}
                             </p>
                           </div>
                           <WarmButton asChild size="sm">
-                            <Link href={`/v/${voucher.id}`}>View voucher</Link>
+                            <Link href={`/v/${voucher.id}`}>{t("detail.viewVoucher")}</Link>
                           </WarmButton>
                         </div>
                       </WarmCard>
@@ -375,7 +386,7 @@ export default async function CampaignDetailPage({
 
             <section aria-labelledby="reviews-heading">
               <h2 id="reviews-heading" className="mb-4 text-xl font-bold text-[var(--text)]">
-                Reviews
+                {t("detail.reviewsTitle")}
               </h2>
               <WarmCard padding="lg" className="bg-[var(--surface)]">
                 <ReviewList campaignId={campaign.id} signedIn={signedIn} />
@@ -383,7 +394,7 @@ export default async function CampaignDetailPage({
             </section>
           </div>
 
-          <aside className="space-y-6" aria-label="Purchase">
+          <aside className="space-y-6" aria-label={t("detail.purchaseLabel")}>
             <WarmCard padding="lg" className="bg-[var(--surface)] lg:sticky lg:top-24">
               <div className="mb-5">
                 <div className="text-3xl font-bold text-[var(--text)]">{campaignPriceText(card, tLabels)}</div>
@@ -399,19 +410,19 @@ export default async function CampaignDetailPage({
                   <Link href={`/v/${campaign.vouchers[0].id}`}>
                     <span className="inline-flex items-center gap-2">
                       <ShoppingBag className="h-4 w-4" aria-hidden="true" />
-                      {campaign.price ? "Buy now" : "Get free voucher"}
+                      {campaign.price ? t("detail.buyNow") : t("detail.getFreeVoucher")}
                     </span>
                   </Link>
                 </WarmButton>
               ) : (
                 <div className="mb-3" role="status">
                   <WarmButton fullWidth size="lg" disabled aria-describedby="not-on-sale-reason">
-                    {isDemo ? "Sample offer" : "Not on sale yet"}
+                    {isDemo ? t("detail.sampleOffer") : t("detail.notOnSaleYet")}
                   </WarmButton>
                   <p id="not-on-sale-reason" className="mt-2 text-sm text-[var(--text-muted)]">
                     {isDemo
-                      ? "This is example content, so it can't be bought."
-                      : `${card.merchantName} hasn’t published a voucher for this offer yet. Check back later.`}
+                      ? t("detail.demoNotForSale")
+                      : t("detail.noVoucherYet", { merchant: card.merchantName })}
                   </p>
                 </div>
               )}
@@ -422,7 +433,7 @@ export default async function CampaignDetailPage({
                 <div className="flex items-start gap-3">
                   <Clock className="h-5 w-5 shrink-0 text-[var(--primary)]" aria-hidden="true" />
                   <div>
-                    <dt>Offer runs</dt>
+                    <dt>{t("detail.offerRuns")}</dt>
                     <dd className="font-semibold text-[var(--text)]">{dateRange}</dd>
                   </div>
                 </div>
@@ -430,9 +441,9 @@ export default async function CampaignDetailPage({
                   <div className="flex items-start gap-3">
                     <ShoppingBag className="h-5 w-5 shrink-0 text-[var(--primary)]" aria-hidden="true" />
                     <div>
-                      <dt>Bought</dt>
+                      <dt>{t("detail.bought")}</dt>
                       <dd className="font-semibold text-[var(--text)]">
-                        {campaign._count.purchases} {campaign._count.purchases === 1 ? "time" : "times"}
+                        {t("detail.boughtCount", { count: campaign._count.purchases })}
                       </dd>
                     </div>
                   </div>
@@ -441,7 +452,7 @@ export default async function CampaignDetailPage({
                   <div className="flex min-w-0 items-start gap-3">
                     <Globe className="h-5 w-5 shrink-0 text-[var(--primary)]" aria-hidden="true" />
                     <div className="min-w-0">
-                      <dt>Website</dt>
+                      <dt>{t("detail.website")}</dt>
                       <dd>
                         <a
                           href={campaign.merchant.website!}
@@ -461,7 +472,7 @@ export default async function CampaignDetailPage({
                 href={merchantHref}
                 className="mt-5 flex items-center justify-between gap-3 rounded-[var(--r-md)] border border-[var(--border)] p-3 text-sm font-semibold text-[var(--text)] transition-colors hover:bg-[var(--surface-dim)]"
               >
-                <span className="min-w-0 truncate">All offers from {card.merchantName}</span>
+                <span className="min-w-0 truncate">{t("detail.allOffersFrom", { merchant: card.merchantName })}</span>
                 <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
               </Link>
             </WarmCard>
@@ -471,7 +482,7 @@ export default async function CampaignDetailPage({
         {moreFromMerchant.length > 0 && (
           <section aria-labelledby="more-offers" className="mt-14">
             <h2 id="more-offers" className="mb-5 text-2xl font-bold text-[var(--text)]">
-              More from {card.merchantName}
+              {t("detail.moreFrom", { merchant: card.merchantName })}
             </h2>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {moreFromMerchant.map((other) => (

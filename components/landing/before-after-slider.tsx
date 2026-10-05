@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { GripVertical } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type Props = {
   beforeTitle: string;
@@ -45,6 +46,7 @@ const MIN_SPLIT = 15;
 const MAX_SPLIT = 85;
 
 export function BeforeAfterSlider({ beforeTitle, afterTitle, beforeItems, afterItems }: Props) {
+  const t = useTranslations("home.compare");
   const containerRef = useRef<HTMLDivElement>(null);
   const [split, setSplit] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -120,7 +122,7 @@ export function BeforeAfterSlider({ beforeTitle, afterTitle, beforeItems, afterI
           <div
             role="slider"
             tabIndex={0}
-            aria-label={`Compare ${beforeTitle} and ${afterTitle}`}
+            aria-label={t("sliderLabel", { before: beforeTitle, after: afterTitle })}
             aria-valuemin={MIN_SPLIT}
             aria-valuemax={MAX_SPLIT}
             aria-valuenow={Math.round(split)}

@@ -3,21 +3,24 @@
 import { useRouter, useSearchParams } from "next/navigation"
 import { useCallback } from "react"
 import { ArrowUpDown } from "lucide-react"
+import { useTranslations } from "next-intl"
 
+// value: the ?sort= param the campaigns page reads; labelKey: offers.filters.sort.*
 const sortOptions = [
-  { value: "newest", label: "Newest" },
-  { value: "oldest", label: "Oldest" },
-  { value: "price_low", label: "Price: Low to High" },
-  { value: "price_high", label: "Price: High to Low" },
-  { value: "popular", label: "Most Popular" },
-  { value: "expiring", label: "Expiring Soon" },
-]
+  { value: "newest", labelKey: "newest" },
+  { value: "oldest", labelKey: "oldest" },
+  { value: "price_low", labelKey: "priceLow" },
+  { value: "price_high", labelKey: "priceHigh" },
+  { value: "popular", labelKey: "popular" },
+  { value: "expiring", labelKey: "expiring" },
+] as const
 
 interface CampaignFiltersProps {
   merchants: Array<{ slug: string; name: string }>
 }
 
 export default function CampaignFilters({ merchants }: CampaignFiltersProps) {
+  const t = useTranslations("offers.filters")
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -49,11 +52,11 @@ export default function CampaignFilters({ merchants }: CampaignFiltersProps) {
         <select
           value={currentSort}
           onChange={(e) => updateParams({ sort: e.target.value })}
-          aria-label="Sort by"
+          aria-label={t("sortBy")}
           className="text-sm bg-white border border-[rgba(139,115,85,0.15)] rounded-[var(--r-sm)] px-3 py-2 text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
         >
           {sortOptions.map((opt) => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
+            <option key={opt.value} value={opt.value}>{t(`sort.${opt.labelKey}`)}</option>
           ))}
         </select>
       </div>
@@ -63,10 +66,10 @@ export default function CampaignFilters({ merchants }: CampaignFiltersProps) {
         <select
           value={currentMerchant}
           onChange={(e) => updateParams({ merchant: e.target.value })}
-          aria-label="Merchant"
+          aria-label={t("merchant")}
           className="text-sm bg-white border border-[rgba(139,115,85,0.15)] rounded-[var(--r-sm)] px-3 py-2 text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
         >
-          <option value="">All merchants</option>
+          <option value="">{t("allMerchants")}</option>
           {merchants.map((m) => (
             <option key={m.slug} value={m.slug}>{m.name}</option>
           ))}
@@ -78,20 +81,20 @@ export default function CampaignFilters({ merchants }: CampaignFiltersProps) {
         <input
           type="number"
           min="0"
-          placeholder="Min €"
+          placeholder={t("minPricePlaceholder")}
           value={currentMinPrice}
           onChange={(e) => updateParams({ minPrice: e.target.value })}
-          aria-label="Min price"
+          aria-label={t("minPrice")}
           className="w-20 text-sm bg-white border border-[rgba(139,115,85,0.15)] rounded-[var(--r-sm)] px-2 py-2 text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
         />
         <span className="text-[#8B7355] text-xs">&ndash;</span>
         <input
           type="number"
           min="0"
-          placeholder="Max €"
+          placeholder={t("maxPricePlaceholder")}
           value={currentMaxPrice}
           onChange={(e) => updateParams({ maxPrice: e.target.value })}
-          aria-label="Max price"
+          aria-label={t("maxPrice")}
           className="w-20 text-sm bg-white border border-[rgba(139,115,85,0.15)] rounded-[var(--r-sm)] px-2 py-2 text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
         />
       </div>

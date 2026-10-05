@@ -176,9 +176,12 @@ export default async function CampaignsPage({
     }
   }
 
+  const t = await getTranslations("offers")
+  const tLabels = await getTranslations("labels")
+
   const categoryOptions = [
-    { id: "all", label: "All" },
-    ...allCampaignCategories.map((cat) => ({ id: cat.id, label: cat.label })),
+    { id: "all", label: t("list.allCategories") },
+    ...allCampaignCategories.map((cat) => ({ id: cat.id, label: tLabels(`category.${cat.id}`) })),
   ]
 
   const filteredCampaigns = campaigns.filter((campaign) => {
@@ -219,6 +222,8 @@ export default async function CampaignsPage({
     new Map(campaigns.map((c) => [c.merchant.slug, { slug: c.merchant.slug, name: c.merchant.name }])).values()
   ).sort((a, b) => a.name.localeCompare(b.name))
 
+  const bold = (chunks: React.ReactNode) => <span className="font-semibold">{chunks}</span>
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#fcfbf8] via-[#f4f1ea] to-[#f6e1d7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -230,16 +235,14 @@ export default async function CampaignsPage({
           <div className="relative max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-6">
               <Sparkles className="h-4 w-4 text-[#e0a487]" />
-              <span className="text-sm font-medium text-white/90">Live campaign marketplace</span>
+              <span className="text-sm font-medium text-white/90">{t("list.badge")}</span>
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">Discover the hottest offers in Europe</h1>
-            <p className="text-[#FFF9ED]/80 mb-8 text-lg">
-              Browse vouchers, gifts, and experiences curated from top merchants across your market.
-            </p>
+            <h1 className="text-3xl md:text-5xl font-bold mb-4">{t("list.heroTitle")}</h1>
+            <p className="text-[#FFF9ED]/80 mb-8 text-lg">{t("list.heroSubtitle")}</p>
             <form role="search" className="max-w-2xl mx-auto bg-white rounded-2xl p-2 flex items-center shadow-xl">
               {selectedCategory !== "all" && <input type="hidden" name="category" value={selectedCategory} />}
               <label htmlFor="campaign-search" className="sr-only">
-                Search campaigns
+                {t("list.searchLabel")}
               </label>
               <Search className="h-5 w-5 text-[#8B7355] ml-4 flex-shrink-0" aria-hidden="true" />
               <Input
@@ -247,24 +250,24 @@ export default async function CampaignsPage({
                 type="search"
                 name="q"
                 defaultValue={searchQuery}
-                placeholder="Search campaigns, merchants, or services..."
+                placeholder={t("list.searchPlaceholder")}
                 className="border-0 focus-visible:ring-0 text-[#2D2721] placeholder:text-[#6B5744] h-11 text-base"
               />
             </form>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm">
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
                 <Ticket className="h-4 w-4 text-[#e0a487]" />
-                <span className="font-semibold">{campaignCount}</span> campaigns
+                {t.rich("list.campaignCount", { count: campaignCount, b: bold })}
               </div>
               {voucherCount > 0 && (
                 <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
                   <Gift className="h-4 w-4 text-[#e0a487]" />
-                  <span className="font-semibold">{voucherCount}</span> {voucherCount === 1 ? "voucher" : "vouchers"} on sale
+                  {t.rich("list.voucherCount", { count: voucherCount, b: bold })}
                 </div>
               )}
               <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full">
                 <ShoppingBag className="h-4 w-4 text-[#e0a487]" />
-                <span className="font-semibold">{merchantCount}</span> merchants
+                {t.rich("list.merchantCount", { count: merchantCount, b: bold })}
               </div>
             </div>
           </div>
@@ -272,7 +275,7 @@ export default async function CampaignsPage({
 
         {/* One horizontally scrollable row on small screens (it used to wrap
             into ~10 rows at 320px); wraps and centres from md up. */}
-        <nav aria-label="Categories" className="-mx-4 px-4 mb-6 overflow-x-auto md:overflow-visible">
+        <nav aria-label={t("list.categoriesLabel")} className="-mx-4 px-4 mb-6 overflow-x-auto md:overflow-visible">
           <ul className="flex gap-3 w-max md:w-auto md:flex-wrap md:justify-center pb-1">
             {categoryOptions.map((category) => {
               const isActive = selectedCategory === category.id
@@ -318,15 +321,13 @@ export default async function CampaignsPage({
               <Sparkles className="h-8 w-8 text-[#8B7355]" />
             </div>
             <h3 className="text-xl font-bold text-[#2D2721] mb-2">
-              {databaseUnavailable ? "Campaigns temporarily unavailable" : "No offers found"}
+              {databaseUnavailable ? t("list.unavailableTitle") : t("list.emptyTitle")}
             </h3>
             <p className="text-[#6B5744] mb-6">
-              {databaseUnavailable
-                ? "Could not connect to the database. Please try again in a moment."
-                : "Try a different search or choose another category."}
+              {databaseUnavailable ? t("list.unavailableText") : t("list.emptyText")}
             </p>
             <WarmButton asChild variant="outline">
-              <Link href="/campaigns">{databaseUnavailable ? "Try again" : "Clear filters"}</Link>
+              <Link href="/campaigns">{databaseUnavailable ? t("list.tryAgain") : t("list.clearFilters")}</Link>
             </WarmButton>
           </WarmCard>
         )}

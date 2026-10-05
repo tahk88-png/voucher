@@ -1,8 +1,7 @@
 import { DemoBadge } from '@/components/campaign/campaign-card';
 import { campaignPriceText, getCategoryVisual, toCampaignCardData } from '@/lib/campaign-presentation';
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'My Dashboard', noIndex: true });
-
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -16,6 +15,11 @@ import { isPlatformAdmin } from '@/lib/admin';
 import { ATTAINABLE_BADGES } from './_components/badges';
 import { getCountryByLocale, isSupportedLocale, defaultCountryCode, getCountryByCode } from '@/lib/locale-config';
 import { summariseCredits } from './_components/credit-summary';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const tAccount = await getTranslations('account');
+  return pageMetadata({ title: tAccount('dashboard.metaTitle'), noIndex: true });
+}
 
 const CREDIT_STATUSES = ['locked', 'available', 'used', 'expired', 'reversed'] as const;
 const REFERRAL_STATUSES = ['created', 'opened', 'redeemed', 'expired', 'blocked'] as const;

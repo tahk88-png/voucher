@@ -1,6 +1,5 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Cashback & Credits', noIndex: true });
-
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { auth } from '@/lib/auth';
@@ -10,6 +9,11 @@ import { Badge } from '@/components/ui/badge';
 import { Coins, Clock, Lock, TrendingUp, AlertTriangle } from 'lucide-react';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getCurrencyLocale } from '@/lib/i18n-utils';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('account');
+  return pageMetadata({ title: t('cashback.metaTitle'), noIndex: true });
+}
 
 /**
  * /app/cashback
@@ -31,6 +35,7 @@ export default async function CashbackPage() {
   const locale = await getLocale();
   const intlLocale = getCurrencyLocale(locale);
   const tWallet = await getTranslations('wallet');
+  const t = await getTranslations('account');
 
   const now = new Date();
   const soon = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
@@ -113,10 +118,8 @@ export default async function CashbackPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-[#2D2721]">Cashback & Credits</h1>
-        <p className="text-sm text-[#6B5744]">
-          Every bit of credit you&apos;ve earned, across every merchant you shop with.
-        </p>
+        <h1 className="text-2xl font-semibold text-[#2D2721]">{t('cashback.title')}</h1>
+        <p className="text-sm text-[#6B5744]">{t('cashback.description')}</p>
       </div>
 
       {credits.length === 0 ? (
@@ -144,7 +147,7 @@ export default async function CashbackPage() {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">
-                    Available
+                    {tWallet('available')}
                   </div>
                   <div className="text-xl font-semibold text-[#2D2721]">
                     {renderHeadline(totalAvailable)}
@@ -160,7 +163,7 @@ export default async function CashbackPage() {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">
-                    Locked (pending)
+                    {t('cashback.lockedPending')}
                   </div>
                   <div className="text-xl font-semibold text-[#2D2721]">
                     {renderHeadline(totalLocked)}
@@ -176,7 +179,7 @@ export default async function CashbackPage() {
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">
-                    Used
+                    {t('cashback.used')}
                   </div>
                   <div className="text-xl font-semibold text-[#2D2721]">
                     {renderHeadline(totalUsed)}
@@ -192,16 +195,18 @@ export default async function CashbackPage() {
                 <AlertTriangle className="h-5 w-5 text-amber-700 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
                   <h2 className="text-sm font-semibold text-amber-900">
-                    Expiring within 30 days
+                    {t('cashback.expiringTitle')}
                   </h2>
                   <ul className="mt-2 space-y-1 text-sm text-amber-900">
                     {expiringSoon.map((c) => (
                       <li key={c.id} className="flex justify-between gap-4">
                         <span>
-                          {c.merchant.name} — expires{' '}
                           {c.expiresAt
-                            ? new Intl.DateTimeFormat(intlLocale).format(c.expiresAt)
-                            : 'soon'}
+                            ? t('cashback.expiresOn', {
+                                merchant: c.merchant.name,
+                                date: new Intl.DateTimeFormat(intlLocale).format(c.expiresAt),
+                              })
+                            : t('cashback.expiresSoon', { merchant: c.merchant.name })}
                         </span>
                         <span className="font-medium">
                           {formatCurrency(c.amount, c.currency)}
@@ -215,7 +220,7 @@ export default async function CashbackPage() {
           )}
 
           <div>
-            <h2 className="text-lg font-semibold text-[#2D2721] mb-3">By merchant</h2>
+            <h2 className="text-lg font-semibold text-[#2D2721] mb-3">{t('cashback.byMerchant')}</h2>
             <div className="grid gap-4 md:grid-cols-2">
               {merchantList.map((m) => (
                 <WarmCard
@@ -227,32 +232,33 @@ export default async function CashbackPage() {
                     <div>
                       <h3 className="text-base font-semibold text-[#2D2721]">{m.name}</h3>
                       <p className="text-xs text-[#8B7355]">
-                        Last activity{' '}
-                        {new Intl.DateTimeFormat(intlLocale).format(m.latestActivity)}
+                        {t('cashback.lastActivity', {
+                          date: new Intl.DateTimeFormat(intlLocale).format(m.latestActivity),
+                        })}
                       </p>
                     </div>
                     {m.available > 0 ? (
                       <Badge variant="secondary" className="bg-[#FFF9ED] text-[#8B7355]">
-                        Ready to spend
+                        {t('cashback.readyToSpend')}
                       </Badge>
                     ) : null}
                   </div>
 
                   <div className="mt-4 grid grid-cols-3 gap-2 text-sm">
                     <div>
-                      <div className="text-xs text-[#8B7355]">Available</div>
+                      <div className="text-xs text-[#8B7355]">{tWallet('available')}</div>
                       <div className="font-semibold text-[#2D2721]">
                         {formatCurrency(m.available, m.currency)}
                       </div>
                     </div>
                     <div>
-                      <div className="text-xs text-[#8B7355]">Locked</div>
+                      <div className="text-xs text-[#8B7355]">{tWallet('locked')}</div>
                       <div className="font-semibold text-[#2D2721]">
                         {formatCurrency(m.locked, m.currency)}
                       </div>
                     </div>
                     <div>
-                      <div className="text-xs text-[#8B7355]">Used</div>
+                      <div className="text-xs text-[#8B7355]">{t('cashback.used')}</div>
                       <div className="font-semibold text-[#2D2721]">
                         {formatCurrency(m.used, m.currency)}
                       </div>
@@ -263,7 +269,7 @@ export default async function CashbackPage() {
                     href={`/app/${m.slug}/wallet`}
                     className="mt-4 inline-block text-sm font-medium text-[#8B7355] hover:underline"
                   >
-                    View merchant wallet →
+                    {t('cashback.viewMerchantWallet')}
                   </Link>
                 </WarmCard>
               ))}

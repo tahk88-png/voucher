@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { Heart, Bell, BellOff, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 export default async function WishlistPage() {
   const session = await auth();
@@ -11,6 +11,9 @@ export default async function WishlistPage() {
     redirect('/login');
   }
   const t = await getTranslations('wishlist');
+  const tAccount = await getTranslations('account');
+  const tLabels = await getTranslations('labels');
+  const locale = await getLocale();
 
   const items = await prisma.wishlistItem.findMany({
     where: { userId: session.user.id },
@@ -41,12 +44,12 @@ export default async function WishlistPage() {
     if (item.voucher) {
       const v = item.voucher;
       return v.type === 'percentage'
-        ? `${v.value / 100}% off`
+        ? tLabels('valueOff', { value: `${v.value / 100}%` })
         : `${(v.value / 100).toFixed(2)} ${v.currency}`;
     }
     if (item.campaign) return item.campaign.name;
     if (item.merchant) return item.merchant.name;
-    return 'Unknown item';
+    return tAccount('wishlist.unknownItem');
   }
 
   function getItemLink(item: (typeof items)[0]) {
@@ -57,8 +60,8 @@ export default async function WishlistPage() {
 
   function getItemSubtitle(item: (typeof items)[0]) {
     if (item.voucher?.merchant) return item.voucher.merchant.name;
-    if (item.merchant) return 'Merchant';
-    if (item.campaign) return 'Campaign';
+    if (item.merchant) return tAccount('wishlist.merchant');
+    if (item.campaign) return tAccount('wishlist.campaign');
     return '';
   }
 
@@ -126,11 +129,12 @@ export default async function WishlistPage() {
 
                 {item.voucher && (
                   <p className="text-xs mt-2" style={{ color: 'var(--text-secondary)' }}>
-                    Valid until{' '}
-                    {new Date(item.voucher.validTo).toLocaleDateString(undefined, {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric',
+                    {tAccount('wishlist.validUntil', {
+                      date: new Date(item.voucher.validTo).toLocaleDateString(locale, {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      }),
                     })}
                   </p>
                 )}
@@ -146,7 +150,7 @@ export default async function WishlistPage() {
                   }}
                 >
                   {item.priceAlert ? <Bell size={12} /> : <BellOff size={12} />}
-                  {item.priceAlert ? 'Alert on' : 'No alert'}
+                  {item.priceAlert ? tAccount('wishlist.alertOn') : tAccount('wishlist.noAlert')}
                 </div>
 
                 <Link
@@ -154,7 +158,7 @@ export default async function WishlistPage() {
                   className="inline-flex items-center gap-1 text-sm font-medium hover:underline"
                   style={{ color: 'var(--primary)' }}
                 >
-                  View <ExternalLink size={13} />
+                  {tAccount('wishlist.view')} <ExternalLink size={13} />
                 </Link>
               </div>
             </div>

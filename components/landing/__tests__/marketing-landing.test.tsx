@@ -10,7 +10,10 @@ afterAll(() => {
 });
 
 import MarketingLanding from '../marketing-landing';
+import { NextIntlClientProvider } from 'next-intl';
 import { withIntl } from '@/test-utils/intl';
+import en from '@/messages/en.json';
+import et from '@/messages/et.json';
 import { toCampaignCardData, type CampaignCardSource } from '@/lib/campaign-presentation';
 
 function source(overrides: Partial<CampaignCardSource> & { vouchers?: number; purchases?: number } = {}) {
@@ -136,5 +139,55 @@ describe('MarketingLanding honesty', () => {
       expect(html).toContain(`href="/campaigns?category=${id}"`);
     }
     expect(html).toContain('Cafe &amp; bakery');
+  });
+});
+
+type Messages = Record<string, unknown>;
+function deepMerge(base: Messages, override: Messages): Messages {
+  const out: Messages = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    const current = out[key];
+    out[key] =
+      current && typeof current === 'object' && value && typeof value === 'object'
+        ? deepMerge(current as Messages, value as Messages)
+        : value;
+  }
+  return out;
+}
+
+// Estonian as the app loads it (English overlaid with et.json). withIntl(node, 'et')
+// require()s '@/messages/et.json', which the test runner's alias doesn't resolve.
+function withEt(node: React.ReactNode) {
+  return (
+    <NextIntlClientProvider locale="et" messages={deepMerge(en as Messages, et as Messages) as never} timeZone="UTC">
+      {node}
+    </NextIntlClientProvider>
+  );
+}
+
+describe('MarketingLanding in Estonian', () => {
+  it('renders the landing copy, plan features and category tiles in Estonian', () => {
+    const html = renderToStaticMarkup(
+      withEt(
+        <MarketingLanding
+          featuredOffers={[offer, { ...offer, id: 'cmp_3', onSale: false }]}
+          stats={{ merchantCount: 3, activeCampaignCount: 2, processedCents: 0 }}
+        />
+      )
+    );
+    expect(html).toContain('Vaata kõiki kampaaniaid');
+    expect(html).toContain('Kuvatakse 2 aktiivset kampaaniat — neist 1 on praegu müügil.');
+    expect(html).toContain('Kohvikud ja pagarid');
+    expect(html).toContain('5000 kupongi kuus');
+    expect(html).toContain('Saadaval 25 keeles');
+    expect(html).toContain('Kaupmehed');
+    expect(html).not.toContain('View All Campaigns');
+    expect(html).not.toContain('No live campaigns right now');
+  });
+
+  it('shows the Estonian empty state when nothing is live', () => {
+    const html = renderToStaticMarkup(withEt(<MarketingLanding featuredOffers={[]} stats={null} />));
+    expect(html).toContain('Praegu pole aktiivseid kampaaniaid');
+    expect(html).toContain('href="/register"');
   });
 });

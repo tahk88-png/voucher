@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { Receipt, Ticket, Gift } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 export default async function PaymentsPage() {
   const session = await auth();
@@ -15,6 +15,8 @@ export default async function PaymentsPage() {
   }
 
   const t = await getTranslations('payment');
+  const tPortal = await getTranslations('portal.payments');
+  const locale = await getLocale();
 
   const [voucherPurchases, ticketPurchases] = await Promise.all([
     prisma.voucherPurchase.findMany({
@@ -54,7 +56,7 @@ export default async function PaymentsPage() {
       createdAt: p.createdAt,
       item: p.voucher
         ? {
-            name: p.campaign?.name || 'Voucher',
+            name: p.campaign?.name || tPortal('voucherFallback'),
             id: p.voucher.id,
             merchant: p.voucher.merchant.name,
             url: `/v/${p.voucher.id}`,
@@ -121,12 +123,14 @@ export default async function PaymentsPage() {
                         <span
                           className={`text-xs px-2 py-0.5 rounded-full ${statusStyles[payment.status] || 'bg-[#FFF9ED] text-[#8B7355]'}`}
                         >
-                          {payment.status}
+                          {tPortal.has(`status.${payment.status}`)
+                            ? tPortal(`status.${payment.status}`)
+                            : payment.status}
                         </span>
                       </div>
                       <p className="text-sm text-[#6B5744] mb-1">{payment.item?.merchant}</p>
                       <p className="text-xs text-[#8B7355]">
-                        {new Date(payment.createdAt).toLocaleDateString(undefined, {
+                        {new Date(payment.createdAt).toLocaleDateString(locale, {
                           dateStyle: 'long',
                         })}
                       </p>

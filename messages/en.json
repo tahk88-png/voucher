@@ -939,5 +939,1129 @@
     "purchases": "{count, plural, one {# purchase} other {# purchases}}",
     "freeToClaim": "Free to claim",
     "onSaleNow": "On sale now"
+  },
+  "account": {
+    "error": {
+      "title": "Something went wrong",
+      "fallback": "An unexpected error occurred.",
+      "retry": "Try again"
+    },
+    "dashboard": {
+      "metaTitle": "My Dashboard"
+    },
+    "cashback": {
+      "metaTitle": "Cashback & Credits",
+      "title": "Cashback & Credits",
+      "description": "Every bit of credit you've earned, across every merchant you shop with.",
+      "lockedPending": "Locked (pending)",
+      "used": "Used",
+      "expiringTitle": "Expiring within 30 days",
+      "expiresOn": "{merchant} — expires {date}",
+      "expiresSoon": "{merchant} — expires soon",
+      "byMerchant": "By merchant",
+      "lastActivity": "Last activity {date}",
+      "readyToSpend": "Ready to spend",
+      "viewMerchantWallet": "View merchant wallet →"
+    },
+    "nearby": {
+      "title": "Nearby Offers",
+      "subtitle": "Find deals and vouchers from merchants near you",
+      "useMyLocation": "Use my location",
+      "approximateLocation": "Approximate location (IP-based)",
+      "searchRadius": "Search radius",
+      "yourLocation": "Your location",
+      "mapLabel": "{count, plural, one {# merchant} other {# merchants}} within {radius} km",
+      "merchantsNearby": "{count, plural, one {# merchant} other {# merchants}} nearby",
+      "activeVouchers": "{count, plural, one {# active voucher} other {# active vouchers}}",
+      "emptyTitle": "No merchants nearby",
+      "emptyBody": "Try increasing the search radius or check back later for new offers in your area.",
+      "expandRadius": "Expand to {radius} km",
+      "errors": {
+        "fetchFailed": "Could not load nearby merchants. Please try again.",
+        "geolocationUnsupported": "Geolocation is not supported by your browser.",
+        "permissionDenied": "Location access denied. Please enable location in your browser settings.",
+        "positionUnavailable": "Location unavailable. Try again later.",
+        "timeout": "Location request timed out. Try again.",
+        "locationFailed": "Could not get your location.",
+        "ipLocationFailed": "Could not determine your location."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Notification Settings"
+    },
+    "redeem": {
+      "notFound": "Voucher not found.",
+      "codeUnavailable": "Voucher code not available.",
+      "backToWallet": "Back to wallet",
+      "back": "Back"
+    },
+    "referrals": {
+      "metaTitle": "My Referrals",
+      "completedCount": "Completed: {count}"
+    },
+    "voucherDetail": {
+      "back": "Back",
+      "merchantFallback": "Merchant",
+      "termsTitle": "Terms and conditions",
+      "terms1": "This voucher is valid until the expiry date shown above. It cannot be combined with other offers or promotions unless otherwise stated.",
+      "terms2": "The voucher must be presented at the time of purchase. No cash value. Cannot be exchanged for cash or refunded.",
+      "terms3": "The merchant reserves the right to refuse redemption if the voucher appears to be duplicated, tampered with, or used fraudulently.",
+      "terms4": "For questions or issues, please contact the merchant directly."
+    },
+    "vouchers": {
+      "unknownMerchant": "Unknown",
+      "paidAmount": "Paid: {amount}",
+      "activeCount": "Active ({count})",
+      "pastCount": "Past ({count})"
+    },
+    "voucherCard": {
+      "showQr": "Show QR code",
+      "close": "Close",
+      "qrHint": "Show this QR code to the merchant to redeem in-store."
+    },
+    "wallet": {
+      "metaTitle": "My Wallet"
+    },
+    "wishlist": {
+      "unknownItem": "Unknown item",
+      "merchant": "Merchant",
+      "campaign": "Campaign",
+      "validUntil": "Valid until {date}",
+      "alertOn": "Alert on",
+      "noAlert": "No alert",
+      "view": "View"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Campaign unavailable",
+      "metaDescriptionFallback": "Offer from {merchant}.",
+      "breadcrumbLabel": "Breadcrumb",
+      "breadcrumbCampaigns": "Campaigns",
+      "demoNotice": "<strong>Sample offer.</strong> This page shows how an offer looks on GiftHub. The business and offer are examples: nothing here can be bought or redeemed.",
+      "verifiedPartner": "Verified partner",
+      "aboutTitle": "About this offer",
+      "descriptionFallback": "Special offer from a merchant on GiftHub.",
+      "howItWorks": {
+        "title": "How it works",
+        "claimTitle": "Claim the voucher",
+        "buyTitle": "Buy the voucher",
+        "buyText": "Pay securely online, or claim it for free when the offer is free.",
+        "qrTitle": "Get your QR code",
+        "qrText": "The voucher is saved in your GiftHub wallet with a personal QR code.",
+        "showTitle": "Show it on site",
+        "showText": "{merchant} scans the code and the discount is applied."
+      },
+      "termsTitle": "Terms",
+      "voucherOptionsTitle": "Voucher options",
+      "voucherFallbackTitle": "Voucher",
+      "viewVoucher": "View voucher",
+      "reviewsTitle": "Reviews",
+      "purchaseLabel": "Purchase",
+      "buyNow": "Buy now",
+      "getFreeVoucher": "Get free voucher",
+      "sampleOffer": "Sample offer",
+      "notOnSaleYet": "Not on sale yet",
+      "demoNotForSale": "This is example content, so it can't be bought.",
+      "noVoucherYet": "{merchant} hasn’t published a voucher for this offer yet. Check back later.",
+      "offerRuns": "Offer runs",
+      "bought": "Bought",
+      "boughtCount": "{count, plural, one {# time} other {# times}}",
+      "website": "Website",
+      "allOffersFrom": "All offers from {merchant}",
+      "moreFrom": "More from {merchant}"
+    },
+    "list": {
+      "allCategories": "All",
+      "badge": "Live campaign marketplace",
+      "heroTitle": "Discover the hottest offers in Europe",
+      "heroSubtitle": "Browse vouchers, gifts, and experiences curated from top merchants across your market.",
+      "searchLabel": "Search campaigns",
+      "searchPlaceholder": "Search campaigns, merchants, or services...",
+      "campaignCount": "{count, plural, one {<b>#</b> campaign} other {<b>#</b> campaigns}}",
+      "voucherCount": "{count, plural, one {<b>#</b> voucher on sale} other {<b>#</b> vouchers on sale}}",
+      "merchantCount": "{count, plural, one {<b>#</b> merchant} other {<b>#</b> merchants}}",
+      "categoriesLabel": "Categories",
+      "unavailableTitle": "Campaigns temporarily unavailable",
+      "unavailableText": "Could not connect to the database. Please try again in a moment.",
+      "emptyTitle": "No offers found",
+      "emptyText": "Try a different search or choose another category.",
+      "tryAgain": "Try again",
+      "clearFilters": "Clear filters"
+    },
+    "listError": {
+      "title": "Couldn't load campaigns",
+      "fallbackMessage": "An unexpected error occurred while loading campaigns.",
+      "tryAgain": "Try again"
+    },
+    "filters": {
+      "sortBy": "Sort by",
+      "sort": {
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "priceLow": "Price: Low to High",
+        "priceHigh": "Price: High to Low",
+        "popular": "Most Popular",
+        "expiring": "Expiring Soon"
+      },
+      "merchant": "Merchant",
+      "allMerchants": "All merchants",
+      "minPrice": "Min price",
+      "minPricePlaceholder": "Min €",
+      "maxPrice": "Max price",
+      "maxPricePlaceholder": "Max €"
+    },
+    "tenantList": {
+      "title": "Vouchers",
+      "subtitle": "Active offers from {merchant}.",
+      "empty": "No vouchers available yet.",
+      "voucher": "Voucher",
+      "viewVoucher": "View voucher"
+    },
+    "deals": {
+      "metaTitle": "Deals",
+      "metaDescription": "Discover the best voucher deals"
+    },
+    "campaignShare": {
+      "share": "Share",
+      "copied": "Copied",
+      "linkCopied": "Link copied",
+      "copyFailed": "Copy failed"
+    },
+    "shareSheet": {
+      "share": "Share",
+      "title": {
+        "voucher": "Share this voucher",
+        "campaign": "Share this campaign",
+        "merchant": "Share this merchant"
+      },
+      "close": "Close",
+      "referralShareText": "{title} - Share & earn 10% back!",
+      "referralNote": "<b>Share & earn 10%</b> when your friends redeem!",
+      "targets": {
+        "email": "Email",
+        "copy": "Copy Link"
+      },
+      "copied": "Copied!",
+      "linkCopiedToClipboard": "Link copied to clipboard!",
+      "linkCopied": "Link copied!",
+      "shareLinkLabel": "Share link",
+      "copyLink": "Copy link"
+    },
+    "wishlistButton": {
+      "add": "Add to wishlist",
+      "remove": "Remove from wishlist"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# star} other {# stars}}"
+    },
+    "form": {
+      "title": "Write a Review",
+      "ratingLabel": "Rating",
+      "titleLabel": "Title (optional)",
+      "titlePlaceholder": "Summarize your experience",
+      "commentLabel": "Comment (optional)",
+      "commentPlaceholder": "Share your experience...",
+      "submit": "Submit Review",
+      "submitting": "Submitting...",
+      "ratingRequired": "Please select a rating",
+      "submitFailed": "Failed to submit review",
+      "alreadyReviewed": "You have already reviewed this item",
+      "signInRequired": "Sign in to write a review",
+      "thankYou": "Thank you for your review!",
+      "writeAnother": "Write another review"
+    },
+    "list": {
+      "sort": {
+        "newest": "Newest",
+        "highest": "Highest",
+        "helpful": "Most Helpful"
+      },
+      "signInToReview": "Sign in to write a review",
+      "loadFailed": "Reviews couldn't be loaded.",
+      "tryAgain": "Try again",
+      "empty": "No reviews yet.",
+      "anonymous": "Anonymous",
+      "verified": "Verified",
+      "helpfulButton": "Helpful ({count})",
+      "foundHelpful": "{count} found this helpful",
+      "previous": "Previous",
+      "next": "Next",
+      "pageOf": "Page {current} of {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Cancel",
+      "saving": "Saving…",
+      "somethingWentWrong": "Something went wrong"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Not authenticated",
+      "unauthorized": "Unauthorized",
+      "tooManyAttempts": "Too many attempts",
+      "validationFailed": "Validation failed",
+      "unexpected": "An unexpected error occurred",
+      "databaseFailed": "Database operation failed",
+      "serviceUnavailable": "Service temporarily unavailable",
+      "newPasswordTooShort": "New password must be at least 8 characters",
+      "userNotFound": "User not found",
+      "currentPasswordRequired": "Current password is required",
+      "currentPasswordIncorrect": "Current password is incorrect",
+      "deletionUnavailable": "Account deletion is temporarily unavailable. Please contact support.",
+      "totpAlreadyEnabledReconfigure": "2FA is already enabled. Disable it first to reconfigure.",
+      "sixDigitCodeRequired": "A 6-digit code is required",
+      "totpSetupMissing": "No TOTP setup found. Please start the setup process first.",
+      "totpAlreadyEnabled": "2FA is already enabled",
+      "invalidSetupCode": "Invalid code. Please check your authenticator app and try again.",
+      "verificationCodeRequired": "A verification code is required",
+      "totpNotEnabled": "2FA is not currently enabled",
+      "invalidDisableCode": "Invalid code. Enter your current TOTP code or a backup code.",
+      "passkeyOptionsFailed": "Failed to get registration options",
+      "passkeyGenerateOptionsFailed": "Failed to generate registration options",
+      "registrationFailed": "Registration failed",
+      "passkeyRegistrationFailed": "Passkey registration failed",
+      "passkeyChallengeExpired": "Challenge expired or not found",
+      "verificationFailed": "Verification failed",
+      "passkeyVerifyFailed": "Failed to verify registration"
+    },
+    "settings": {
+      "joinedOn": "Joined {date}",
+      "joinedRecently": "Joined recently"
+    },
+    "profileForm": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailLocked": "Email cannot be changed",
+      "save": "Save changes",
+      "updated": "Profile updated",
+      "nameRequired": "Name is required",
+      "updateFailed": "Failed to update profile"
+    },
+    "passwordForm": {
+      "currentLabel": "Current password",
+      "newLabel": "New password",
+      "setLabel": "Set password",
+      "confirmLabel": "Confirm password",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "change": "Change password",
+      "set": "Set password",
+      "updated": "Password updated successfully",
+      "tooShort": "Password must be at least {min} characters",
+      "mismatch": "Passwords do not match",
+      "changeFailed": "Failed to change password"
+    },
+    "deleteDialog": {
+      "trigger": "Delete account",
+      "title": "Delete your account?",
+      "description": "This action is permanent. Your profile, sessions, and notification settings will be deleted. Purchase history will be anonymized.",
+      "typeToConfirm": "Type <strong>{word}</strong> to confirm:",
+      "confirm": "Delete permanently",
+      "deleting": "Deleting…",
+      "failed": "Failed to delete account"
+    },
+    "passkeys": {
+      "title": "Passkeys",
+      "description": "Sign in without a password using your device's fingerprint, face, or PIN.",
+      "add": "Add passkey",
+      "namePlaceholder": "e.g. \"MacBook Touch ID\"",
+      "addSubmit": "Add",
+      "adding": "Adding…",
+      "unsupported": "This browser doesn't support passkeys. Try a recent version of Chrome, Safari, or Edge.",
+      "empty": "No passkeys yet. Add one to enable passwordless sign-in.",
+      "devicePasskey": "Device passkey",
+      "passkey": "Passkey",
+      "added": "Added {date}",
+      "lastUsed": "Last used {date}",
+      "synced": "Synced",
+      "removeConfirm": "Remove?",
+      "remove": "Remove",
+      "removeLabel": "Remove passkey",
+      "loadFailed": "Failed to load passkeys",
+      "removeFailed": "Failed to remove passkey"
+    },
+    "security": {
+      "title": "Security",
+      "description": "Manage two-factor authentication and security settings",
+      "loading": "Loading...",
+      "backToSettings": "Back to settings",
+      "enabledMessage": "Two-factor authentication is now enabled!",
+      "disabledMessage": "Two-factor authentication has been disabled",
+      "errors": {
+        "statusLoadFailed": "Could not load your two-factor authentication status",
+        "setupFailed": "Failed to start setup",
+        "verifyFailed": "Verification failed",
+        "disableFailed": "Failed to disable 2FA"
+      },
+      "status": {
+        "title": "Two-Factor Authentication",
+        "enabledBody": "Your account is protected with an authenticator app.",
+        "disabledBody": "Add an extra layer of security to your account by requiring a code from your authenticator app.",
+        "enabled": "Enabled",
+        "notEnabled": "Not enabled"
+      },
+      "setup": {
+        "title": "Set up authenticator app",
+        "description": "Use an app like Google Authenticator, Authy, or 1Password to generate verification codes.",
+        "enable": "Enable 2FA"
+      },
+      "scan": {
+        "title": "Scan QR code or enter key manually",
+        "qrAlt": "Scan this QR code with your authenticator app",
+        "manualKey": "Or enter this key manually:",
+        "copySecret": "Copy secret"
+      },
+      "verify": {
+        "title": "Enter verification code",
+        "codeLabel": "6-digit code from your app",
+        "submit": "Verify and enable"
+      },
+      "backupCodes": {
+        "title": "Save your backup codes",
+        "description": "Store these codes safely. If you lose access to your authenticator app, you can use one of these codes to sign in. Each code can only be used once.",
+        "copy": "Copy codes",
+        "copied": "Copied!",
+        "download": "Download",
+        "done": "Done"
+      },
+      "backupFile": {
+        "title": "GiftHub - Two-Factor Authentication Backup Codes",
+        "instructions": "Save these codes in a safe place. Each code can only be used once.",
+        "generated": "Generated: {date}"
+      },
+      "disable": {
+        "title": "Disable two-factor authentication",
+        "description": "This will remove the extra security layer from your account.",
+        "button": "Disable 2FA",
+        "confirmTitle": "Confirm disable 2FA",
+        "confirmDescription": "Enter your current 6-digit code from your authenticator app, or a backup code.",
+        "codeLabel": "Verification code",
+        "codePlaceholder": "000000 or XXXX-XXXX",
+        "confirm": "Confirm disable"
+      },
+      "quickLinks": {
+        "title": "Security quick links",
+        "sessions": "View active sessions",
+        "changePassword": "Change password"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Pay for results, not reach. Merchant-owned referral infrastructure: branded vouchers and store credit."
+    },
+    "error": {
+      "unexpected": "An unexpected error occurred."
+    },
+    "hero": {
+      "badge": "Vouchers & referrals for local businesses",
+      "title": "Your Customers Sell <highlight>Your Next Customers</highlight>",
+      "subtitle": "Create voucher campaigns. Your customers share them, earn credits, and bring friends. Track every referral. See your exact cost per new customer.",
+      "ctaMerchant": "Start as Merchant",
+      "ctaExplore": "Explore Campaigns",
+      "noCardRequired": "No credit card required",
+      "freeTrial": "{days}-day free trial",
+      "cancelAnytime": "Cancel anytime"
+    },
+    "stats": {
+      "activeCampaigns": "Active campaigns",
+      "merchants": "Merchants",
+      "processedValue": "Processed value"
+    },
+    "merchantsTitle": "Merchants on the platform",
+    "values": {
+      "referral": {
+        "title": "Referral Engine",
+        "description": "Your customers share deals and bring new customers automatically"
+      },
+      "vouchers": {
+        "title": "Digital Vouchers",
+        "description": "Create discount campaigns with flexible rules in minutes"
+      },
+      "qr": {
+        "title": "QR Redemption",
+        "description": "Scan and validate in-store with just a phone. No hardware needed"
+      },
+      "analytics": {
+        "title": "Real-time Analytics",
+        "description": "See exactly what each campaign costs and returns. No guesswork"
+      }
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "Get started in minutes with our simple three-step process",
+      "steps": {
+        "create": {
+          "title": "Create a Campaign",
+          "description": "Set up a voucher in 2 minutes: discount, date range, max uses. Done."
+        },
+        "share": {
+          "title": "Customers Share It",
+          "description": "Every buyer gets a referral link. They share it, earn credit, bring friends."
+        },
+        "grow": {
+          "title": "Watch It Grow",
+          "description": "Track every referral chain, see your cost per new customer, measure ROI."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Explore Popular Campaigns",
+      "subtitle": "Discover vouchers, deals, and experiences across Europe",
+      "showing": "Showing {count, plural, one {# active campaign} other {# active campaigns}}.",
+      "showingWithOnSale": "Showing {count, plural, one {# active campaign} other {# active campaigns}} — {onSale} on sale now.",
+      "emptyTitle": "No live campaigns right now",
+      "emptyBody": "Offers appear here as soon as merchants publish them.",
+      "viewAll": "View All Campaigns"
+    },
+    "pricing": {
+      "title": "Simple, Transparent Pricing",
+      "subtitle": "Choose the plan that fits your business. Annual billing costs 10 months’ worth.",
+      "billingPeriod": "Billing period",
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "save": "Save 17%",
+      "mostPopular": "Most Popular",
+      "perMonth": "/month",
+      "perYear": "{price}/year (2 months free)",
+      "startTrial": "Start free trial",
+      "footer": "All plans include a {days}-day free trial · {percent}% transaction fee on voucher sales · Cancel anytime",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# voucher/month} other {# vouchers/month}}",
+        "activeCampaigns": "{count, plural, one {# active campaign} other {# active campaigns}}",
+        "teamMembers": "{count, plural, one {# team member} other {# team members}}",
+        "qrRedemption": "QR code redemption",
+        "basicAnalytics": "Basic analytics",
+        "advancedAnalytics": "Advanced analytics",
+        "customDomain": "Custom domain",
+        "promoBoosts": "Promo boosts (email + push)",
+        "unlimitedVouchers": "Unlimited vouchers",
+        "unlimitedCampaigns": "Unlimited campaigns",
+        "unlimitedTeamMembers": "Unlimited team members",
+        "everythingInPlan": "Everything in {plan}"
+      }
+    },
+    "calculator": {
+      "title": "Calculate Your ROI",
+      "subtitle": "Drag the sliders to see how much you could earn with GiftHub",
+      "monthlyPurchases": "Monthly voucher purchases",
+      "purchasesValue": "{count, plural, one {# purchase} other {# purchases}}",
+      "averageTicket": "Average ticket value",
+      "referralRate": "Referral conversion rate",
+      "monthlyRevenue": "Monthly revenue",
+      "referralCustomers": "New referral customers",
+      "perMonthValue": "{value}/mo",
+      "referralRevenue": "Referral revenue",
+      "estimatedRoi": "Estimated ROI",
+      "platformCost": "Platform cost",
+      "platformCostValue": "{plan}/mo plan + {fees} fees ({percent}%) = <strong>{total}/mo</strong>",
+      "disclaimer": "Illustration only, based on the values you enter — not a forecast."
+    },
+    "why": {
+      "title": "Why Merchants Love GiftHub",
+      "body": "Grow your customer base and increase revenue — while keeping your margins and owning your customer relationships.",
+      "benefits": {
+        "referralEngine": "Built-in referral engine on every campaign",
+        "analytics": "Real-time analytics: cost per acquisition, ROI",
+        "qr": "QR redemption — no POS hardware needed",
+        "languages": "Available in {count, plural, one {# language} other {# languages}}",
+        "flatPlan": "Flat monthly plan — not a revenue share like Groupon",
+        "ownData": "You own your customer data",
+        "fee": "{percent}% transaction fee on voucher sales, no hidden costs"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "Drag to compare",
+      "beforeTitle": "With Groupon",
+      "afterTitle": "With GiftHub",
+      "sliderLabel": "Compare {before} and {after}",
+      "before": {
+        "revenueShare": "Large revenue share taken by the platform",
+        "ownsRelationship": "Platform owns customer relationship",
+        "noDataAccess": "No access to customer data",
+        "raceToBottom": "Race to the bottom pricing",
+        "lostBrand": "Lost brand identity"
+      },
+      "after": {
+        "flatFee": "Flat {minPrice}–{maxPrice}/mo + {percent}% fee",
+        "ownData": "You own all customer data",
+        "referralEngine": "Built-in referral engine",
+        "yourBrand": "Your brand, your rules",
+        "roiAnalytics": "Real-time ROI analytics"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything you need to know about GiftHub",
+      "items": {
+        "groupon": {
+          "question": "How is this different from Groupon?",
+          "answer": "Groupon-style deal sites typically keep a large share of each sale and own the customer relationship. We charge a flat monthly fee (from {price}/mo) plus {percent}% on voucher sales. You keep your customers, your data, and your margins."
+        },
+        "referral": {
+          "question": "How does the referral system work?",
+          "answer": "Every customer who buys a voucher gets a unique referral link. When they share it and a friend purchases, both earn credit. Each referral chain is tracked so you see exactly how new customers find you."
+        },
+        "trial": {
+          "question": "What happens after the {days}-day trial?",
+          "answer": "You choose a plan ({starter}, {pro}, or {scale}). If you don’t subscribe, your existing published vouchers stay active for customers, but you can’t create new campaigns until you subscribe."
+        },
+        "qr": {
+          "question": "Do I need special hardware for QR redemption?",
+          "answer": "No. Your staff opens the mobile scanner on any phone browser, scans the customer’s QR code, and it’s done. No app download, no POS integration required."
+        },
+        "fee": {
+          "question": "What is the {percent}% transaction fee?",
+          "answer": "When a customer purchases a voucher through the platform, we deduct {percent}% from the payout. There are no other platform fees on top of your plan."
+        }
+      }
+    },
+    "cta": {
+      "title": "Stop Renting Customers. Build Your Own Army.",
+      "body": "Create your first campaign in minutes. Your customers do the rest. {days}-day free trial.",
+      "getStarted": "Get Started Free",
+      "browse": "Browse Campaigns"
+    }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Manage your voucher campaigns.",
+      "createCampaign": "Create campaign",
+      "subscriptionRequired": "Subscription required",
+      "trialEnded": "Your free 60-day campaign trial has ended. Start the 9.90/month plan to create new campaigns.",
+      "stats": {
+        "totalTitle": "Total campaigns",
+        "totalDescription": "All campaigns",
+        "activeTitle": "Active",
+        "activeDescription": "Currently running",
+        "paidTitle": "Paid purchases",
+        "paidDescription": "Completed orders",
+        "revenueTitle": "Revenue",
+        "revenueDescription": "Paid voucher sales"
+      },
+      "weeklyRevenue": {
+        "title": "Weekly revenue",
+        "description": "Paid campaign sales over 7 days.",
+        "series": "Revenue"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "No campaigns yet",
+        "descriptionCanCreate": "Create a campaign to organize and manage your vouchers.",
+        "descriptionNeedsSubscription": "Start a subscription to create new campaigns.",
+        "action": "Create your first campaign"
+      },
+      "searchPlaceholder": "Search campaigns...",
+      "searchLabel": "Search campaigns",
+      "filterAll": "All",
+      "status": {
+        "active": "Active",
+        "draft": "Draft",
+        "ended": "Ended",
+        "paused": "Paused"
+      },
+      "noMatches": "No campaigns match your filters.",
+      "clearFilters": "Clear filters",
+      "type": {
+        "weekly": "Weekly campaign",
+        "limited": "Limited campaign",
+        "other": "{type} campaign"
+      },
+      "runs": "Runs {start} - {end}",
+      "view": "View",
+      "stats": {
+        "vouchers": "Vouchers",
+        "paidPurchases": "Paid purchases",
+        "revenue": "Revenue",
+        "price": "Price"
+      },
+      "free": "Free"
+    },
+    "new": {
+      "iconLetter": "C",
+      "draftNotice": "New campaigns start as a draft. Customers can't see them until you publish from the campaign page."
+    },
+    "edit": {
+      "breadcrumb": "Edit",
+      "title": "Edit campaign"
+    },
+    "form": {
+      "basicInfo": "Basic information",
+      "nameLabel": "Campaign name *",
+      "namePlaceholder": "Holiday Special",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Limited time promotion",
+      "typeLabel": "Type *",
+      "typeOptions": {
+        "limited": "One-off (limited)",
+        "weekly": "Weekly"
+      },
+      "dates": "Dates",
+      "startDate": "Start date *",
+      "endDate": "End date *",
+      "timezoneHint": "Times are in your local time zone.",
+      "pricing": "Pricing and limits",
+      "priceLabel": "Price in {currency} (leave empty for free vouchers)",
+      "pricePreview": "Customers pay {price}.",
+      "priceHint": "Type the amount in {currency}, e.g. 4.50 or 4,50 for {example}.",
+      "maxRedemptions": "Max redemptions",
+      "maxPurchases": "Max purchases",
+      "unlimited": "Unlimited",
+      "creditLabel": "Referrer credit (%)",
+      "creditPreview": "Referrers earn {percent}% of the purchase price as credit.",
+      "creditHint": "Share of the purchase price paid to the referrer as credit, e.g. 5 or 2,5.",
+      "termsSection": "Terms and conditions",
+      "termsLabel": "Terms",
+      "termsPlaceholder": "Terms and conditions for this campaign...",
+      "saving": "Saving...",
+      "saveChanges": "Save changes",
+      "creating": "Creating...",
+      "create": "Create campaign",
+      "saved": "Campaign changes saved.",
+      "errors": {
+        "invalidDates": "Please enter a valid start and end date.",
+        "endBeforeStart": "The end date must be after the start date.",
+        "maxRedemptions": "Max redemptions must be a whole number of 1 or more.",
+        "maxPurchases": "Max purchases must be a whole number of 1 or more.",
+        "saveFailed": "Failed to save campaign"
+      },
+      "priceErrors": {
+        "negative": "Price can't be negative.",
+        "invalid": "Price isn't a valid number.",
+        "wholeNumber": "Price must be a whole number.",
+        "decimals": "Price can have at most {decimals} decimal places.",
+        "tooLarge": "Price is too large."
+      },
+      "creditErrors": {
+        "negative": "Referrer credit can't be negative.",
+        "invalid": "Referrer credit isn't a valid number.",
+        "decimals": "Referrer credit can have at most {decimals} decimal places.",
+        "tooLarge": "Referrer credit is too large.",
+        "tooHigh": "Referrer credit can't be more than 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "No description",
+      "draftNotice": "This campaign is a draft, so customers can't see it yet.",
+      "draftNoticeAdmin": "This campaign is a draft, so customers can't see it yet. Publish it when you are ready.",
+      "status": "Status",
+      "type": "Type",
+      "price": "Price",
+      "referrerCredit": "Referrer credit",
+      "none": "None",
+      "stats": {
+        "vouchers": "Vouchers",
+        "totalPurchases": "Total purchases",
+        "paidPurchases": "Paid purchases"
+      },
+      "terms": "Terms and conditions",
+      "promotion": {
+        "title": "Promotion",
+        "description": "Paid visibility for weekly newsletter and notifications."
+      },
+      "vouchers": {
+        "title": "Vouchers",
+        "description": "Vouchers generated from this campaign.",
+        "empty": "No vouchers generated yet.",
+        "view": "View"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Include in weekly newsletter (paid)",
+      "notification": "Boost in notifications (paid)",
+      "endDate": "Promotion end date",
+      "saving": "Saving...",
+      "save": "Save promotion settings",
+      "saved": "Promotion settings saved.",
+      "upgradeNeededTitle": "Upgrade needed",
+      "upgradeNeeded": "Promotion boosts are part of a higher plan. Upgrade in Settings & Billing to use them.",
+      "saveFailedStatus": "Couldn't save promotion settings (error {status}).",
+      "saveFailedNetwork": "Couldn't save promotion settings. Check your connection and try again."
+    },
+    "actions": {
+      "adminOnly": "Only merchant admins can publish, pause or edit campaigns.",
+      "edit": "Edit",
+      "publish": {
+        "label": "Publish",
+        "title": "Publish this campaign?",
+        "description": "Customers will be able to see and buy vouchers from this campaign straight away.",
+        "success": "Campaign published. It is now live for customers."
+      },
+      "pause": {
+        "label": "Pause",
+        "title": "Pause this campaign?",
+        "description": "The campaign goes back to draft and is hidden from customers until you publish it again. Vouchers already sold stay valid.",
+        "success": "Campaign paused. It is hidden from customers."
+      },
+      "end": {
+        "label": "End campaign",
+        "title": "End this campaign now?",
+        "description": "The campaign stops immediately and cannot be published again. Vouchers already sold stay valid.",
+        "success": "Campaign ended."
+      },
+      "updateFailedStatus": "Couldn't update the campaign (error {status}).",
+      "updateFailed": "Couldn't update the campaign."
+    },
+    "generate": {
+      "open": "Generate Vouchers",
+      "title": "Generate vouchers",
+      "descriptionPriced": "Creates draft vouchers worth {value} off, valid {start} – {end}. Each voucher gets its own code. They stay hidden until you publish them.",
+      "descriptionFree": "This campaign is free, so there is no amount to put on the vouchers. Set a price on the campaign first.",
+      "countLabel": "Number of vouchers (1-100)",
+      "generating": "Generating...",
+      "submit": "Generate",
+      "invalidCount": "Please enter a whole number between 1 and 100",
+      "needsPrice": "Set a price on this campaign first. Generated vouchers are worth the campaign price.",
+      "failed": "Failed to generate vouchers",
+      "success": "Generated {count, plural, one {# draft voucher. Publish it} other {# draft vouchers. Publish them}} from the voucher page when you're ready."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Active campaigns",
+      "statLiveVouchers": "Live vouchers",
+      "statRedemptions30d": "Redemptions (30 days)"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "An error occurred in the merchant panel.",
+      "tryAgain": "Try again",
+      "backToMerchants": "Back to merchants"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Overview",
+        "offers": "Offers",
+        "inStore": "In store",
+        "customers": "Customers",
+        "settings": "Settings"
+      },
+      "language": "Language",
+      "opensAppArea": "Opens app area",
+      "externalLinkTitle": "{label} (opens the app area, outside this merchant)",
+      "opensOutside": "Opens outside the merchant area",
+      "merchantNavigation": "Merchant",
+      "more": "More"
+    },
+    "dashboard": {
+      "title": "Merchant Dashboard",
+      "welcomeBack": "Welcome back, {name}",
+      "viewCampaigns": "View campaigns",
+      "createVoucher": "Create voucher",
+      "performanceOverview": "Performance overview",
+      "performanceOverviewHint": "Live campaign activity and redemptions.",
+      "revenueAndCredits": "Revenue and credits",
+      "revenueAndCreditsHint": "Sales, credits, and outstanding liability.",
+      "performanceTrend": "Performance trend",
+      "performanceTrendHint": "Last {days} days of redemption and revenue activity.",
+      "rangeShort": "{days}D",
+      "revenue": "Revenue",
+      "chartRedemptions": "Redemptions",
+      "chartRevenue": "Revenue ({currency})",
+      "paidOrders": "Paid orders",
+      "openOrdersView": "Open orders view",
+      "avgOrder": "Avg order",
+      "openCampaignRevenue": "Open campaign revenue",
+      "redemptionRate": "Redemption rate",
+      "openRedemptionQueue": "Open redemption queue",
+      "pendingConfirmation": "{count} pending confirmation",
+      "pendingConfirmationHint": "In-store redemptions waiting for your approval.",
+      "viewRedemptions": "View redemptions",
+      "actionCenter": "Action center",
+      "actionCenterHint": "Priority items to review.",
+      "allCaughtUp": "You are all caught up.",
+      "open": "Open",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# pending redemption} other {# pending redemptions}}",
+        "pendingRedemptionsDetail": "Confirm in-store redemptions",
+        "expiringVouchers": "{count, plural, one {# voucher expiring soon} other {# vouchers expiring soon}}",
+        "expiringVouchersDetail": "Review voucher validity dates",
+        "endingCampaigns": "{count, plural, one {# campaign ending this week} other {# campaigns ending this week}}",
+        "endingCampaignsDetail": "Extend or duplicate your best campaigns",
+        "upcomingEvents": "{count, plural, one {# upcoming event} other {# upcoming events}}",
+        "upcomingEventsDetail": "Prepare ticket check-ins and staffing"
+      },
+      "upcomingEventsTitle": "Upcoming events",
+      "upcomingEventsHint": "Next scheduled events.",
+      "noUpcomingEvents": "No upcoming events scheduled.",
+      "eventStatus": {
+        "published": "published",
+        "soldOut": "sold out"
+      },
+      "manageEvents": "Manage events",
+      "topVouchers": "Top vouchers",
+      "topVouchersHint": "Most redeemed offers.",
+      "noTopVouchers": "No vouchers have been redeemed yet. Your most redeemed vouchers will show up here."
+    },
+    "stats": {
+      "activeVouchers": "Active Vouchers",
+      "publishedVouchers": "Published vouchers",
+      "openVouchers": "Open vouchers",
+      "activeCampaigns": "Active Campaigns",
+      "runningCampaigns": "Running campaigns",
+      "openCampaigns": "Open campaigns",
+      "activeEvents": "Active Events",
+      "publishedEvents": "Published events",
+      "openEvents": "Open events",
+      "todaysRedemptions": "Today's Redemptions",
+      "thisWeek": "This week: {count}",
+      "reviewRedemptions": "Review redemptions",
+      "ofWeekly": "of weekly"
+    },
+    "revenue": {
+      "voucherRevenue": "Voucher Revenue",
+      "paidVoucherSales": "Paid voucher sales",
+      "openCampaignSales": "Open campaign sales",
+      "ticketRevenue": "Ticket Revenue",
+      "paidTicketSales": "Paid ticket sales",
+      "openEventSales": "Open event sales",
+      "creditsIssued": "Credits Issued",
+      "totalCreditsDistributed": "Total credits distributed",
+      "openReferralCredits": "Open referral credits",
+      "outstandingLiability": "Outstanding Liability",
+      "unredeemedValue": "Unredeemed voucher value",
+      "openVoucherLiability": "Open voucher liability"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "empty": "No recent activity",
+      "unknownUser": "Unknown user",
+      "redeemedVoucher": "Redeemed voucher - {time}",
+      "confirmed": "Confirmed",
+      "pending": "Pending"
+    },
+    "liveStats": {
+      "live": "Live",
+      "connecting": "Connecting…",
+      "redeemedToday": "<value>{count}</value> <label>redeemed today</label>",
+      "pending": "<value>{count}</value> <label>pending</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analytics",
+      "title": "Analytics",
+      "subtitle": "Track your voucher performance and revenue",
+      "totalRedemptions": "Total Redemptions",
+      "confirmedRedemptions": "Confirmed redemptions",
+      "totalDiscounts": "Total Discounts",
+      "givenToCustomers": "Given to customers",
+      "creditsIssued": "Credits Issued",
+      "totalCreditsDistributed": "Total credits distributed",
+      "activeVouchers": "Active Vouchers",
+      "withRedemptions": "With redemptions",
+      "charts": {
+        "redemptionTrends": "Redemption Trends (Last 30 Days)",
+        "redemptions": "Redemptions",
+        "revenue": "Revenue ({currency})",
+        "topPerforming": "Top Performing Vouchers",
+        "noRedeemed": "No voucher has been redeemed yet. Your best performers will appear here.",
+        "byCategory": "Redemptions by Category",
+        "noCategoryData": "No category data available"
+      }
+    },
+    "ask": {
+      "title": "Ask Your Data",
+      "subtitle": "Ask questions about your business data in natural language",
+      "emptyTitle": "Ask anything about your data",
+      "emptyHint": "Try one of the suggestions below",
+      "placeholder": "Ask a question about your data...",
+      "suggestedTitle": "Suggested Questions",
+      "suggestions": {
+        "revenueLastWeek": "What was my revenue last week?",
+        "dailyRedemptionsThisMonth": "Show daily redemptions this month",
+        "topVouchersByRevenue": "Top vouchers by revenue last month",
+        "customersPurchasedLastWeek": "How many customers purchased last week?",
+        "referralConversionRate": "What is my referral conversion rate?",
+        "dailyRevenueTrend": "Show daily revenue trend this month",
+        "purchasesYesterday": "How many purchases were made yesterday?",
+        "bestPerformingVouchers": "What are my best performing vouchers?"
+      },
+      "errorFallback": "Sorry, I could not process that question.",
+      "networkError": "Network error. Please try again.",
+      "itemLabel": "Item {n}"
+    },
+    "reports": {
+      "title": "Financial Reports",
+      "subtitle": "Revenue overview and export",
+      "downloadCsv": "Download CSV",
+      "from": "From",
+      "to": "To",
+      "apply": "Apply",
+      "totalRevenue": "Total Revenue",
+      "platformFees": "Platform Fees",
+      "netRevenue": "Net Revenue",
+      "redemptions": "Redemptions",
+      "revenueByCurrency": "Revenue by Currency",
+      "netAndFees": "Net: {net} • Fees: {fees}",
+      "monthlyRevenue": "Monthly Revenue",
+      "noRevenue": "No revenue data for this period.",
+      "month": "Month",
+      "vouchers": "Vouchers",
+      "tickets": "Tickets",
+      "total": "Total"
+    },
+    "scheduled": {
+      "title": "Scheduled Reports",
+      "subtitle": "Configure automatic email reports",
+      "backToReports": "← Financial Reports",
+      "activeSchedules": "Active Schedules",
+      "loading": "Loading...",
+      "noSchedules": "No schedules configured yet",
+      "period": {
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly"
+      },
+      "reportTitle": {
+        "daily": "Daily Report",
+        "weekly": "Weekly Report",
+        "monthly": "Monthly Report"
+      },
+      "recipientCount": "{count, plural, one {# recipient} other {# recipients}}",
+      "lastSent": "Last sent: {date}",
+      "nextRun": "Next: {date}",
+      "pause": "Pause",
+      "resume": "Resume",
+      "createSchedule": "Create Schedule",
+      "frequency": "Frequency",
+      "recipients": "Recipients",
+      "invalidEmail": "Invalid email address",
+      "emailAlreadyAdded": "Email already added",
+      "addAtLeastOne": "Add at least one recipient",
+      "saved": "Report schedule saved successfully",
+      "saveFailed": "Failed to save schedule",
+      "save": "Save Schedule",
+      "previewTitle": "Report Preview",
+      "previewBody": "Scheduled reports include revenue, redemption counts, top vouchers, and growth metrics. Reports are sent as beautifully formatted HTML emails at 8:00 AM UTC.",
+      "everyMorning": "Every morning",
+      "everyMonday": "Every Monday",
+      "firstOfMonth": "1st of each month"
+    },
+    "billing": {
+      "subscribeTo": "Subscribe to {plan}",
+      "startFailed": "Failed to start subscription",
+      "portalFailed": "Failed to open billing portal",
+      "manageBilling": "Manage billing",
+      "errorTitle": "Error",
+      "close": "Close",
+      "usage": "<b>{current}</b> / {max} used",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "campaign creates per cycle",
+        "activeCampaigns": "active campaigns",
+        "voucherCreatesPerCycle": "voucher creates per cycle",
+        "teamMembers": "team members"
+      },
+      "currentPlanTrial": "Current plan (free trial)",
+      "planChangesUnavailable": "Plan changes aren't available online right now.",
+      "paymentsNotSetUp": "Online payments aren't set up on this platform yet, so plans can't be bought or changed here. Contact support if you want to change your plan.",
+      "features": {
+        "starter": {
+          "vouchers": "500 vouchers/month",
+          "campaigns": "3 active campaigns",
+          "teamMembers": "2 team members",
+          "qrRedemption": "QR code redemption",
+          "basicAnalytics": "Basic analytics"
+        },
+        "pro": {
+          "vouchers": "5,000 vouchers/month",
+          "campaigns": "25 active campaigns",
+          "teamMembers": "10 team members",
+          "advancedAnalytics": "Advanced analytics",
+          "customDomain": "Custom domain",
+          "promoBoosts": "Promo boosts"
+        },
+        "scale": {
+          "vouchers": "Unlimited vouchers",
+          "campaigns": "Unlimited campaigns",
+          "teamMembers": "Unlimited team members",
+          "everythingInPro": "Everything in Pro",
+          "whiteLabel": "White-label ready",
+          "prioritySupport": "Priority support"
+        }
+      }
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Checkout demo",
+      "subtitle": "Demo checkout page",
+      "creditBalance": "Credit balance",
+      "availableAmount": "{amount} available",
+      "lockedAmount": "{amount} locked",
+      "orderSummary": "Order summary",
+      "orderAmount": "Order amount",
+      "creditToApply": "Credit to apply",
+      "maxAmount": "Max: {amount}",
+      "subtotal": "Subtotal",
+      "creditAppliedLine": "Credit applied",
+      "total": "Total",
+      "processing": "Processing...",
+      "submit": "Apply credit and complete order",
+      "creditApplied": "Credit applied successfully! Order total: {total}",
+      "errors": {
+        "missingAmounts": "Please enter both order amount and credit amount",
+        "applyFailed": "Failed to apply credit"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - Available vouchers",
+      "emptyTitle": "No vouchers available",
+      "emptyDescription": "Check back later for new voucher offers from {merchant}.",
+      "specialOffer": "Special offer",
+      "validUntil": "Valid until {date}",
+      "viewAndShare": "View and share"
+    },
+    "wallet": {
+      "subtitle": "Credit wallet",
+      "availableToUse": "Available to use",
+      "useCredit": "Use credit",
+      "noCreditToUse": "No credit to use",
+      "locked": "Locked",
+      "lockedDescription": "Unlocks when the linked purchase is confirmed.",
+      "historyTitle": "Credit history",
+      "historyDescription": "Ledger for {merchant}",
+      "historyEmpty": "No credit history yet.",
+      "expires": "Expires {date}",
+      "creditStatus": {
+        "locked": "locked",
+        "available": "available",
+        "used": "used",
+        "expired": "expired",
+        "reversed": "reversed"
+      }
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "The portal failed to load. Please refresh the page or try again later.",
+      "backToPortal": "Back to portal"
+    },
+    "payments": {
+      "voucherFallback": "Voucher",
+      "status": {
+        "pending": "pending",
+        "paid": "paid",
+        "failed": "failed",
+        "refunded": "refunded"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "available",
+        "sold": "sold",
+        "used": "used",
+        "cancelled": "cancelled",
+        "refunded": "refunded"
+      }
+    }
   }
 }

@@ -3,7 +3,7 @@ import { logger } from '@/lib/logger';
 import { notFound, redirect } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import MerchantShell from '@/components/navigation/merchant-shell';
 import { AccessControlError, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { setMerchantAccess } from '@/lib/merchant-context';
@@ -66,6 +66,7 @@ export default async function MerchantLayout({
     }),
   ]);
   const defaultCurrency = normalizeCurrency(merchantSettings?.defaultCurrency);
+  const t = await getTranslations('merchantDashboard.layout');
 
   // Get messages for client components
   let messages;
@@ -86,9 +87,9 @@ export default async function MerchantLayout({
         userLabel={profile.email ?? profile.userId}
         tenantRole={effectiveRole}
         stats={[
-          { label: 'Active campaigns', value: campaigns.toString(), icon: 'campaigns' },
-          { label: 'Live vouchers', value: vouchers.toString(), icon: 'vouchers' },
-          { label: 'Redemptions (30 days)', value: redemptions30d.toString(), icon: 'redemptions' },
+          { label: t('statActiveCampaigns'), value: campaigns.toString(), icon: 'campaigns' },
+          { label: t('statLiveVouchers'), value: vouchers.toString(), icon: 'vouchers' },
+          { label: t('statRedemptions30d'), value: redemptions30d.toString(), icon: 'redemptions' },
         ]}
       >
         <MerchantSettingsProvider value={{ slug: p.slug, defaultCurrency }}>{children}</MerchantSettingsProvider>

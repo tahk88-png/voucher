@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
@@ -21,16 +22,18 @@ interface Message {
   chartType?: string;
 }
 
+// `query` is what the analytics API receives (it parses English); `key` is the
+// translated text shown to the merchant.
 const SUGGESTED_QUESTIONS = [
-  'What was my revenue last week?',
-  'Show daily redemptions this month',
-  'Top vouchers by revenue last month',
-  'How many customers purchased last week?',
-  'What is my referral conversion rate?',
-  'Show daily revenue trend this month',
-  'How many purchases were made yesterday?',
-  'What are my best performing vouchers?',
-];
+  { key: 'revenueLastWeek', query: 'What was my revenue last week?' },
+  { key: 'dailyRedemptionsThisMonth', query: 'Show daily redemptions this month' },
+  { key: 'topVouchersByRevenue', query: 'Top vouchers by revenue last month' },
+  { key: 'customersPurchasedLastWeek', query: 'How many customers purchased last week?' },
+  { key: 'referralConversionRate', query: 'What is my referral conversion rate?' },
+  { key: 'dailyRevenueTrend', query: 'Show daily revenue trend this month' },
+  { key: 'purchasesYesterday', query: 'How many purchases were made yesterday?' },
+  { key: 'bestPerformingVouchers', query: 'What are my best performing vouchers?' },
+] as const;
 
 const CHART_ICONS: Record<string, typeof BarChart3> = {
   bar: BarChart3,
@@ -43,6 +46,7 @@ const CHART_ICONS: Record<string, typeof BarChart3> = {
 export default function AskAnalyticsPage() {
   const params = useParams();
   const slug = params.slug as string;
+  const t = useTranslations('merchantDashboard.ask');
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -53,12 +57,12 @@ export default function AskAnalyticsPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  async function handleSubmit(question?: string) {
+  async function handleSubmit(question?: string, displayText?: string) {
     const q = (question ?? input).trim();
     if (!q || loading) return;
 
     setInput('');
-    setMessages((prev) => [...prev, { role: 'user', content: q }]);
+    setMessages((prev) => [...prev, { role: 'user', content: displayText ?? q }]);
     setLoading(true);
 
     try {
@@ -83,13 +87,13 @@ export default function AskAnalyticsPage() {
         const err = await res.json();
         setMessages((prev) => [
           ...prev,
-          { role: 'assistant', content: err.error ?? 'Sorry, I could not process that question.' },
+          { role: 'assistant', content: err.error ?? t('errorFallback') },
         ]);
       }
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: 'Network error. Please try again.' },
+        { role: 'assistant', content: t('networkError') },
       ]);
     } finally {
       setLoading(false);
@@ -151,7 +155,7 @@ export default function AskAnalyticsPage() {
         <div className="mt-3 space-y-1.5">
           {data.map((item: any, i: number) => {
             const val = item.revenue ?? item.amount ?? item.count ?? item.value ?? 0;
-            const label = item.name ?? item.date ?? `Item ${i + 1}`;
+            const label = item.name ?? item.date ?? t('itemLabel', { n: i + 1 });
             const widthPct = (val / maxVal) * 100;
             return (
               <div key={i} className="flex items-center gap-2">
@@ -184,10 +188,10 @@ export default function AskAnalyticsPage() {
       <div>
         <div className="flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-[var(--primary)]" />
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Ask Your Data</h1>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
         </div>
         <p className="text-sm text-[var(--text-muted)] mt-1">
-          Ask questions about your business data in natural language
+          {t('subtitle')}
         </p>
       </div>
 
@@ -197,8 +201,8 @@ export default function AskAnalyticsPage() {
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full py-12 text-[var(--text-muted)]">
               <Sparkles className="h-10 w-10 mb-3 opacity-30" />
-              <p className="text-base font-medium mb-1">Ask anything about your data</p>
-              <p className="text-sm">Try one of the suggestions below</p>
+              <p className="text-base font-medium mb-1">{t('emptyTitle')}</p>
+              <p className="text-sm">{t('emptyHint')}</p>
             </div>
           )}
 
@@ -257,7 +261,7 @@ export default function AskAnalyticsPage() {
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask a question about your data..."
+              placeholder={t('placeholder')}
               disabled={loading}
               className="flex-1"
             />
@@ -270,18 +274,21 @@ export default function AskAnalyticsPage() {
 
       {/* Suggested Questions */}
       <WarmCard padding="lg" className="bg-[var(--surface)]">
-        <h3 className="text-sm font-medium text-[var(--text-muted)] mb-3">Suggested Questions</h3>
+        <h3 className="text-sm font-medium text-[var(--text-muted)] mb-3">{t('suggestedTitle')}</h3>
         <div className="flex flex-wrap gap-2">
-          {SUGGESTED_QUESTIONS.map((q) => (
-            <button
-              key={q}
-              onClick={() => handleSubmit(q)}
-              disabled={loading}
-              className="px-3 py-1.5 rounded-lg text-sm bg-[var(--surface-dim)] text-[var(--text)] hover:bg-[var(--border)] transition-colors disabled:opacity-50"
-            >
-              {q}
-            </button>
-          ))}
+          {SUGGESTED_QUESTIONS.map((q) => {
+            const label = t(`suggestions.${q.key}`);
+            return (
+              <button
+                key={q.key}
+                onClick={() => handleSubmit(q.query, label)}
+                disabled={loading}
+                className="px-3 py-1.5 rounded-lg text-sm bg-[var(--surface-dim)] text-[var(--text)] hover:bg-[var(--border)] transition-colors disabled:opacity-50"
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
       </WarmCard>
     </div>

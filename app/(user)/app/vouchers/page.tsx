@@ -16,6 +16,7 @@ export default async function MyVouchersPage() {
 
   const locale = await getLocale();
   const tVoucher = await getTranslations('voucher');
+  const t = await getTranslations('account');
 
   const purchases = await prisma.voucherPurchase.findMany({
     where: {
@@ -97,12 +98,12 @@ export default async function MyVouchersPage() {
           {activeVouchers.length > 0 && (
             <div>
               <h2 className="text-lg font-semibold text-[var(--text)] mb-3">
-                {tVoucher('activeVouchers')} ({activeVouchers.length})
+                {t('vouchers.activeCount', { count: activeVouchers.length })}
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {activeVouchers.map((purchase) => {
                   const voucher = purchase.voucher;
-                  const merchantName = voucher?.merchant?.name || purchase.merchant?.name || 'Unknown';
+                  const merchantName = voucher?.merchant?.name || purchase.merchant?.name || t('vouchers.unknownMerchant');
                   const statusConfig = {
                     active: { variant: 'success' as const, label: tVoucher('published') },
                     expired: { variant: 'muted' as const, label: tVoucher('expired') },
@@ -125,7 +126,7 @@ export default async function MyVouchersPage() {
                       statusVariant={s.variant}
                       paidLabel={tVoucher('paid')}
                       freeLabel={tVoucher('free')}
-                      formattedAmount={`${tVoucher('paid')}: ${formatCurrency(purchase.amount, purchase.currency)}`}
+                      formattedAmount={t('vouchers.paidAmount', { amount: formatCurrency(purchase.amount, purchase.currency) })}
                       formattedDate={purchase.validTo ? formatDate(purchase.validTo) : null}
                     />
                   );
@@ -137,12 +138,12 @@ export default async function MyVouchersPage() {
           {pastVouchers.length > 0 && (
             <div>
               <h2 className="text-lg font-semibold text-[var(--text)] mb-3">
-                {tVoucher('pastVouchers')} ({pastVouchers.length})
+                {t('vouchers.pastCount', { count: pastVouchers.length })}
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {pastVouchers.map((purchase) => {
                   const voucher = purchase.voucher;
-                  const merchantName = voucher?.merchant?.name || purchase.merchant?.name || 'Unknown';
+                  const merchantName = voucher?.merchant?.name || purchase.merchant?.name || t('vouchers.unknownMerchant');
                   const statusConfig = {
                     active: { variant: 'success' as const, label: tVoucher('published') },
                     expired: { variant: 'muted' as const, label: tVoucher('expired') },
@@ -165,7 +166,7 @@ export default async function MyVouchersPage() {
                       statusVariant={s.variant}
                       paidLabel={tVoucher('paid')}
                       freeLabel={tVoucher('free')}
-                      formattedAmount={`${tVoucher('paid')}: ${formatCurrency(purchase.amount, purchase.currency)}`}
+                      formattedAmount={t('vouchers.paidAmount', { amount: formatCurrency(purchase.amount, purchase.currency) })}
                       formattedDate={purchase.validTo ? formatDate(purchase.validTo) : null}
                     />
                   );

@@ -8,8 +8,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { formatCurrency } from '@/lib/utils';
 import { showSuccess } from '@/lib/toast-helpers';
+import { useTranslations } from 'next-intl';
 
 export default function CheckoutDemoPage() {
+  const t = useTranslations('portal.checkoutDemo');
+  const tCommon = useTranslations('common');
   const params = useParams();
   const merchantSlug = params.merchantSlug as string;
   const [orderAmount, setOrderAmount] = useState('');
@@ -34,7 +37,7 @@ export default function CheckoutDemoPage() {
 
   const handleApplyCredit = async () => {
     if (!creditAmount || !orderAmount) {
-      setError('Please enter both order amount and credit amount');
+      setError(t('errors.missingAmounts'));
       return;
     }
 
@@ -56,14 +59,16 @@ export default function CheckoutDemoPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to apply credit');
+        throw new Error(data.error || t('errors.applyFailed'));
       }
 
       showSuccess(
-        `Credit applied successfully! Order total: ${formatCurrency(
-          parseInt(orderAmount) * 100 - creditAmountCents,
-          balance?.currency || 'USD'
-        )}`
+        t('creditApplied', {
+          total: formatCurrency(
+            parseInt(orderAmount) * 100 - creditAmountCents,
+            balance?.currency || 'USD'
+          ),
+        })
       );
 
       const balanceRes = await fetch(`/api/wallet/${merchantSlug}`);
@@ -71,7 +76,7 @@ export default function CheckoutDemoPage() {
       setBalance(balanceData);
       setCreditAmount(String(balanceData.available / 100));
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to apply credit';
+      const message = err instanceof Error ? err.message : t('errors.applyFailed');
       setError(message);
     } finally {
       setIsLoading(false);
@@ -85,36 +90,36 @@ export default function CheckoutDemoPage() {
   return (
     <div className="p-4 sm:p-6">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-semibold text-[#2D2721] mb-6">Checkout demo</h1>
+        <h1 className="text-3xl font-semibold text-[#2D2721] mb-6">{t('title')}</h1>
 
         <WarmCard padding="lg" className="mb-6 bg-white border border-[rgba(139,115,85,0.15)]">
-          <h2 className="text-lg font-semibold text-[#2D2721]">Credit balance</h2>
+          <h2 className="text-lg font-semibold text-[#2D2721]">{t('creditBalance')}</h2>
           <div className="mt-3">
             {balance ? (
               <div>
                 <p className="text-2xl font-semibold text-[#2D2721]">
-                  {formatCurrency(balance.available, balance.currency)} available
+                  {t('availableAmount', { amount: formatCurrency(balance.available, balance.currency) })}
                 </p>
                 {balance.locked > 0 && (
                   <p className="text-sm text-[#6B5744] mt-1">
-                    {formatCurrency(balance.locked, balance.currency)} locked
+                    {t('lockedAmount', { amount: formatCurrency(balance.locked, balance.currency) })}
                   </p>
                 )}
               </div>
             ) : (
-              <p className="text-sm text-[#6B5744]">Loading...</p>
+              <p className="text-sm text-[#6B5744]">{tCommon('loading')}</p>
             )}
           </div>
         </WarmCard>
 
         <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <div>
-            <h2 className="text-lg font-semibold text-[#2D2721]">Order summary</h2>
-            <p className="text-sm text-[#6B5744]">Demo checkout page</p>
+            <h2 className="text-lg font-semibold text-[#2D2721]">{t('orderSummary')}</h2>
+            <p className="text-sm text-[#6B5744]">{t('subtitle')}</p>
           </div>
           <div className="space-y-4 mt-4">
             <div>
-              <Label htmlFor="orderAmount">Order amount</Label>
+              <Label htmlFor="orderAmount">{t('orderAmount')}</Label>
               <Input
                 id="orderAmount"
                 type="number"
@@ -126,7 +131,7 @@ export default function CheckoutDemoPage() {
             </div>
 
             <div>
-              <Label htmlFor="creditAmount">Credit to apply</Label>
+              <Label htmlFor="creditAmount">{t('creditToApply')}</Label>
               <Input
                 id="creditAmount"
                 type="number"
@@ -138,7 +143,7 @@ export default function CheckoutDemoPage() {
               />
               {balance && (
                 <p className="text-sm text-[#6B5744] mt-1">
-                  Max: {formatCurrency(balance.available, balance.currency)}
+                  {t('maxAmount', { amount: formatCurrency(balance.available, balance.currency) })}
                 </p>
               )}
             </div>
@@ -151,7 +156,7 @@ export default function CheckoutDemoPage() {
 
             <div className="border-t border-[rgba(139,115,85,0.15)] pt-4 space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-[#6B5744]">Subtotal</span>
+                <span className="text-[#6B5744]">{t('subtotal')}</span>
                 <span className="text-[#2D2721]">
                   {orderAmount
                     ? formatCurrency(parseInt(orderAmount) * 100, balance?.currency || 'USD')
@@ -159,7 +164,7 @@ export default function CheckoutDemoPage() {
                 </span>
               </div>
               <div className="flex justify-between text-[#8B7355]">
-                <span>Credit applied</span>
+                <span>{t('creditAppliedLine')}</span>
                 <span>
                   -
                   {creditAmount
@@ -168,7 +173,7 @@ export default function CheckoutDemoPage() {
                 </span>
               </div>
               <div className="flex justify-between font-semibold text-lg border-t border-[rgba(139,115,85,0.15)] pt-2">
-                <span className="text-[#2D2721]">Total</span>
+                <span className="text-[#2D2721]">{t('total')}</span>
                 <span className="text-[#2D2721]">
                   {formatCurrency(finalAmount * 100, balance?.currency || 'USD')}
                 </span>
@@ -180,7 +185,7 @@ export default function CheckoutDemoPage() {
               onClick={handleApplyCredit}
               disabled={!orderAmount || !creditAmount || isLoading || !balance || balance.available === 0}
             >
-              {isLoading ? 'Processing...' : 'Apply credit and complete order'}
+              {isLoading ? t('processing') : t('submit')}
             </WarmButton>
           </div>
         </WarmCard>

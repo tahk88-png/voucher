@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import { StarRating } from './star-rating';
 import { ReviewForm } from './review-form';
 import { ThumbsUp } from 'lucide-react';
@@ -44,6 +45,8 @@ interface ReviewListProps {
 type SortOption = 'newest' | 'highest' | 'helpful';
 
 export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: ReviewListProps) {
+  const t = useTranslations('reviews.list');
+  const locale = useLocale();
   const pathname = usePathname();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [total, setTotal] = useState(0);
@@ -127,7 +130,7 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
                 border: sort === s ? 'none' : '1px solid var(--border)',
               }}
             >
-              {s === 'newest' ? 'Newest' : s === 'highest' ? 'Highest' : 'Most Helpful'}
+              {t(`sort.${s}`)}
             </button>
           ))}
         </div>
@@ -150,7 +153,7 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
             className="font-medium underline underline-offset-2"
             style={{ color: 'var(--primary)' }}
           >
-            Sign in to write a review
+            {t('signInToReview')}
           </Link>
         </p>
       )}
@@ -175,14 +178,14 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
           className="rounded-xl p-6 text-center"
           style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
         >
-          <p style={{ color: 'var(--text-muted)' }}>Reviews couldn&apos;t be loaded.</p>
+          <p style={{ color: 'var(--text-muted)' }}>{t('loadFailed')}</p>
           <button
             type="button"
             onClick={fetchReviews}
             className="mt-2 text-sm font-medium underline underline-offset-2"
             style={{ color: 'var(--primary)' }}
           >
-            Try again
+            {t('tryAgain')}
           </button>
         </div>
       ) : reviews.length === 0 ? (
@@ -190,7 +193,7 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
           className="rounded-xl p-8 text-center"
           style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
         >
-          <p style={{ color: 'var(--text-muted)' }}>No reviews yet.</p>
+          <p style={{ color: 'var(--text-muted)' }}>{t('empty')}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -220,18 +223,18 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
                   )}
                   <div>
                     <p className="text-sm font-medium" style={{ color: 'var(--text)' }}>
-                      {review.user.name || 'Anonymous'}
+                      {review.user.name || t('anonymous')}
                       {review.verified && (
                         <span
                           className="ml-2 text-xs px-1.5 py-0.5 rounded"
                           style={{ backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
                         >
-                          Verified
+                          {t('verified')}
                         </span>
                       )}
                     </p>
                     <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                      {new Date(review.createdAt).toLocaleDateString(undefined, {
+                      {new Date(review.createdAt).toLocaleDateString(locale, {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric',
@@ -267,11 +270,11 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
                   }}
                 >
                   <ThumbsUp size={13} aria-hidden="true" />
-                  Helpful ({review.helpful})
+                  {t('helpfulButton', { count: review.helpful })}
                 </button>
                 ) : review.helpful > 0 ? (
                   <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
-                    {review.helpful} found this helpful
+                    {t('foundHelpful', { count: review.helpful })}
                   </span>
                 ) : null}
               </div>
@@ -289,10 +292,10 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
             className="px-3 py-1.5 rounded-lg text-sm transition-opacity disabled:opacity-30"
             style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text)' }}
           >
-            Previous
+            {t('previous')}
           </button>
           <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
-            Page {currentPage} of {totalPages}
+            {t('pageOf', { current: currentPage, total: totalPages })}
           </span>
           <button
             onClick={() => setOffset(offset + limit)}
@@ -300,7 +303,7 @@ export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: Revi
             className="px-3 py-1.5 rounded-lg text-sm transition-opacity disabled:opacity-30"
             style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text)' }}
           >
-            Next
+            {t('next')}
           </button>
         </div>
       )}

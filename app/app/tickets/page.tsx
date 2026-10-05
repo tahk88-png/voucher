@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 export default async function MyTicketsPage() {
   const session = await auth();
@@ -13,6 +13,8 @@ export default async function MyTicketsPage() {
   }
 
   const t = await getTranslations('analytics');
+  const tPortal = await getTranslations('portal.tickets');
+  const locale = await getLocale();
 
   const ticketPurchases = await prisma.ticketPurchase.findMany({
     where: {
@@ -85,13 +87,15 @@ export default async function MyTicketsPage() {
                     <div className="flex justify-between">
                       <span className="text-[#8B7355]">{t('date')}:</span>
                       <span className="font-medium text-[#2D2721]">
-                        {new Date(purchase.ticket.event.eventDate).toLocaleDateString()}
+                        {new Date(purchase.ticket.event.eventDate).toLocaleDateString(locale)}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-[#8B7355]">{t('status')}:</span>
                       <span className="font-medium capitalize text-[#2D2721]">
-                        {purchase.ticket.status}
+                        {tPortal.has(`status.${purchase.ticket.status}`)
+                          ? tPortal(`status.${purchase.ticket.status}`)
+                          : purchase.ticket.status}
                       </span>
                     </div>
                     {purchase.ticket.event.location && (

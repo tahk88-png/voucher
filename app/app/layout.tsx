@@ -40,6 +40,7 @@ export default async function AppLayout({
       const fallbacks: Record<string, string> = {
         portal: 'Portal',
         tickets: 'Tickets',
+        payments: 'Payments',
         logout: 'Logout',
         user: 'User',
       };

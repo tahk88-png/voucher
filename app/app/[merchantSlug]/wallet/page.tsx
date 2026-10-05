@@ -6,6 +6,7 @@ import { getMerchantBySlug } from '@/lib/tenant';
 import { formatCurrency } from '@/lib/utils';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 export default async function WalletPage({ params }: { params: Promise<{ merchantSlug: string }> }) {
   const { merchantSlug } = await params;
@@ -15,7 +16,11 @@ export default async function WalletPage({ params }: { params: Promise<{ merchan
   const merchant = await getMerchantBySlug(merchantSlug);
   if (!merchant) notFound();
 
-  const balance = await getCreditBalance(session.user.id, merchant.id);
+  const [balance, t, locale] = await Promise.all([
+    getCreditBalance(session.user.id, merchant.id),
+    getTranslations('portal.wallet'),
+    getLocale(),
+  ]);
   const available = balance.available;
   const locked = balance.locked;
   const hasAvailable = available > 0;
@@ -24,10 +29,10 @@ export default async function WalletPage({ params }: { params: Promise<{ merchan
     <div className="p-4 sm:p-6">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-xl font-semibold text-[#2D2721] mb-1">{merchant.name}</h1>
-        <p className="text-sm text-[#6B5744] mb-6">Credit wallet</p>
+        <p className="text-sm text-[#6B5744] mb-6">{t('subtitle')}</p>
 
         <WarmCard padding="lg" className="bg-white mb-8 border border-[rgba(139,115,85,0.15)]">
-          <p className="text-sm font-medium text-[#8B7355] mb-1">Available to use</p>
+          <p className="text-sm font-medium text-[#8B7355] mb-1">{t('availableToUse')}</p>
           <p className="text-4xl sm:text-5xl font-semibold tabular-nums tracking-tight text-[#2D2721]">
             {formatCurrency(available, balance.currency)}
           </p>
@@ -37,27 +42,27 @@ export default async function WalletPage({ params }: { params: Promise<{ merchan
             disabled={!hasAvailable}
           >
             <Link href={`/app/${merchantSlug}/checkout-demo`}>
-              {hasAvailable ? 'Use credit' : 'No credit to use'}
+              {hasAvailable ? t('useCredit') : t('noCreditToUse')}
             </Link>
           </WarmButton>
         </WarmCard>
 
         {locked > 0 && (
           <WarmCard padding="lg" className="mb-8 bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)]">
-            <p className="text-sm font-medium text-[#8B7355]">Locked</p>
+            <p className="text-sm font-medium text-[#8B7355]">{t('locked')}</p>
             <p className="text-2xl font-semibold tabular-nums text-[#2D2721] mt-2">
               {formatCurrency(locked, balance.currency)}
             </p>
             <p className="text-sm text-[#6B5744] mt-1">
-              Unlocks when the linked purchase is confirmed.
+              {t('lockedDescription')}
             </p>
           </WarmCard>
         )}
 
         <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <div className="mb-4">
-            <h2 className="text-base font-semibold text-[#2D2721]">Credit history</h2>
-            <p className="text-sm text-[#6B5744]">Ledger for {merchant.name}</p>
+            <h2 className="text-base font-semibold text-[#2D2721]">{t('historyTitle')}</h2>
+            <p className="text-sm text-[#6B5744]">{t('historyDescription', { merchant: merchant.name })}</p>
           </div>
           {balance.credits.length === 0 ? (
             <div className="py-8 text-center">
@@ -78,7 +83,7 @@ export default async function WalletPage({ params }: { params: Promise<{ merchan
                     />
                   </svg>
                 </div>
-                <p className="text-sm text-[#6B5744]">No credit history yet.</p>
+                <p className="text-sm text-[#6B5744]">{t('historyEmpty')}</p>
               </div>
             </div>
           ) : (
@@ -92,13 +97,18 @@ export default async function WalletPage({ params }: { params: Promise<{ merchan
                     <p className="font-medium tabular-nums text-[#2D2721]">
                       {formatCurrency(credit.amount, balance.currency)}
                     </p>
-                    <p className="text-sm text-[#8B7355] capitalize">{credit.status}</p>
+                    <p className="text-sm text-[#8B7355] capitalize">
+                      {t.has(`creditStatus.${credit.status}`)
+                        ? t(`creditStatus.${credit.status}`)
+                        : credit.status}
+                    </p>
                   </div>
                   {credit.expiresAt && (
                     <p className="text-xs text-[#8B7355]">
-                      Expires{' '}
-                      {new Date(credit.expiresAt).toLocaleDateString(undefined, {
-                        dateStyle: 'medium',
+                      {t('expires', {
+                        date: new Date(credit.expiresAt).toLocaleDateString(locale, {
+                          dateStyle: 'medium',
+                        }),
                       })}
                     </p>
                   )}

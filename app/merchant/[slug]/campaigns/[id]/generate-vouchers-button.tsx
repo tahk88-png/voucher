@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
@@ -10,7 +11,8 @@ import { showError, showSuccess } from '@/lib/toast-helpers';
 import { apiErrorMessage } from '@/lib/api-error-message';
 import { formatPrice } from '@/lib/currency-constants';
 import { normalizeCurrency } from '@/lib/money-input';
-import { formatDisplayDate } from '@/lib/voucher-display';
+import { DISPLAY_LOCALE, formatDisplayDate } from '@/lib/voucher-display';
+import { isSupportedLocale, localeToIntlLocale } from '@/lib/locale-config';
 
 interface GenerateVouchersButtonProps {
   campaignId: string;
@@ -30,6 +32,10 @@ export default function GenerateVouchersButton({
   campaign,
 }: GenerateVouchersButtonProps) {
   const router = useRouter();
+  const t = useTranslations('merchantCampaigns');
+  const tCommon = useTranslations('common');
+  const locale = useLocale();
+  const dateLocale = isSupportedLocale(locale) ? localeToIntlLocale[locale] : DISPLAY_LOCALE;
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState('1');
@@ -39,11 +45,11 @@ export default function GenerateVouchersButton({
 
   const handleGenerate = async () => {
     if (!/^\d+$/.test(count) || parseInt(count, 10) < 1 || parseInt(count, 10) > 100) {
-      showError('Please enter a whole number between 1 and 100');
+      showError(t('generate.invalidCount'), tCommon('error'));
       return;
     }
     if (!hasPrice) {
-      showError('Set a price on this campaign first. Generated vouchers are worth the campaign price.');
+      showError(t('generate.needsPrice'), tCommon('error'));
       return;
     }
 
@@ -69,18 +75,16 @@ export default function GenerateVouchersButton({
 
       if (!res.ok) {
         const error = await res.json().catch(() => ({}));
-        throw new Error(apiErrorMessage(error, 'Failed to generate vouchers'));
+        throw new Error(apiErrorMessage(error, t('generate.failed')));
       }
 
       const result = await res.json();
       const n = Number(result.count) || 0;
-      showSuccess(
-        `Generated ${n} draft ${n === 1 ? 'voucher' : 'vouchers'}. Publish ${n === 1 ? 'it' : 'them'} from the voucher page when you're ready.`,
-      );
+      showSuccess(t('generate.success', { count: n }), tCommon('success'));
       setIsOpen(false);
       router.refresh(); // Refresh to show new vouchers
     } catch (error) {
-      showError(error instanceof Error ? error.message : 'Failed to generate vouchers');
+      showError(error instanceof Error ? error.message : t('generate.failed'), tCommon('error'));
     } finally {
       setIsLoading(false);
     }
@@ -89,7 +93,7 @@ export default function GenerateVouchersButton({
   if (!isOpen) {
     return (
       <WarmButton onClick={() => setIsOpen(true)} size="sm">
-        Generate Vouchers
+        {t('generate.open')}
       </WarmButton>
     );
   }
@@ -100,16 +104,20 @@ export default function GenerateVouchersButton({
       className="absolute z-10 w-[min(24rem,calc(100vw-2rem))] right-0 top-full mt-2 bg-[var(--surface)] border border-[var(--border)] shadow-warm"
     >
       <div className="space-y-1">
-        <h3 className="text-sm font-semibold text-[var(--text)]">Generate vouchers</h3>
+        <h3 className="text-sm font-semibold text-[var(--text)]">{t('generate.title')}</h3>
         <p className="text-xs text-[var(--text-muted)]">
           {hasPrice
-            ? `Creates draft vouchers worth ${valueLabel} off, valid ${formatDisplayDate(campaign.startDate)} – ${formatDisplayDate(campaign.endDate)}. Each voucher gets its own code. They stay hidden until you publish them.`
-            : 'This campaign is free, so there is no amount to put on the vouchers. Set a price on the campaign first.'}
+            ? t('generate.descriptionPriced', {
+                value: valueLabel ?? '',
+                start: formatDisplayDate(campaign.startDate, dateLocale),
+                end: formatDisplayDate(campaign.endDate, dateLocale),
+              })
+            : t('generate.descriptionFree')}
         </p>
       </div>
       <div className="space-y-4 mt-4">
         <div>
-          <Label htmlFor="count">Number of vouchers (1-100)</Label>
+          <Label htmlFor="count">{t('generate.countLabel')}</Label>
           <Input
             id="count"
             type="number"
@@ -123,10 +131,10 @@ export default function GenerateVouchersButton({
         </div>
         <div className="flex gap-2 justify-end">
           <WarmButton onClick={() => setIsOpen(false)} variant="outline" size="sm">
-            Cancel
+            {tCommon('cancel')}
           </WarmButton>
           <WarmButton onClick={handleGenerate} disabled={isLoading || !hasPrice} size="sm">
-            {isLoading ? 'Generating...' : 'Generate'}
+            {isLoading ? t('generate.generating') : t('generate.submit')}
           </WarmButton>
         </div>
       </div>

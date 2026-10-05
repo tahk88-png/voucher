@@ -1,7 +1,6 @@
 import { safeParseJson } from "@/lib/utils"
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'My Referrals', noIndex: true });
-
+import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
@@ -9,12 +8,22 @@ import { getTranslations } from "next-intl/server"
 import { getAppUrl } from "@/lib/app-url"
 import ReferralsClient from "./referrals-client"
 
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("account")
+  return pageMetadata({ title: t("referrals.metaTitle"), noIndex: true })
+}
+
+const VOUCHER_TYPES = ["percentage", "fixed_amount", "credit_amount"]
+
 export default async function ReferralsPage() {
   const session = await auth()
   if (!session?.user?.id) {
     redirect("/login")
   }
   const tReferral = await getTranslations("referral")
+  const tLabels = await getTranslations("labels")
+  const voucherTypeLabel = (type: string) =>
+    VOUCHER_TYPES.includes(type.toLowerCase()) ? tLabels(`voucherType.${type.toLowerCase()}`) : type
 
   // Referrals are per voucher: sharing a voucher creates a Referral whose public
   // page (/r/<id>) attributes the friend's redemption. There is no account-wide
@@ -66,7 +75,7 @@ export default async function ReferralsPage() {
         merchantName: referral.merchant?.name || tReferral("merchantLabel"),
         voucherTitle:
           safeParseJson<{ headline?: string }>(referral.voucher?.designJson)?.headline ||
-          referral.voucher?.type ||
+          (referral.voucher?.type ? voucherTypeLabel(referral.voucher.type) : "") ||
           tReferral("voucherLabel"),
         status: referral.status,
         createdAt: referral.createdAt.toISOString(),

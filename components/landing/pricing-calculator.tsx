@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useId } from "react";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { TrendingUp, Users, Ticket, Euro } from "lucide-react";
 import { PLAN_CATALOG, PLATFORM_FEE_PERCENT } from "@/lib/access-control/monetization";
 import { formatWholeCurrency } from "@/components/landing/format-price";
@@ -9,6 +10,7 @@ import { formatWholeCurrency } from "@/components/landing/format-price";
 const eur = (euros: number) => formatWholeCurrency(Math.round(euros * 100), "EUR");
 
 export function PricingCalculator() {
+  const t = useTranslations("home.calculator");
   const [customers, setCustomers] = useState(200);
   const [avgTicket, setAvgTicket] = useState(25);
   const [referralRate, setReferralRate] = useState(15);
@@ -42,16 +44,16 @@ export function PricingCalculator() {
       {/* Sliders */}
       <div className="space-y-6">
         <SliderInput
-          label="Monthly voucher purchases"
+          label={t("monthlyPurchases")}
           value={customers}
           onChange={setCustomers}
           min={10}
           max={2000}
           step={10}
-          suffix=" purchases"
+          format={(value) => t("purchasesValue", { count: value })}
         />
         <SliderInput
-          label="Average ticket value"
+          label={t("averageTicket")}
           value={avgTicket}
           onChange={setAvgTicket}
           min={5}
@@ -60,7 +62,7 @@ export function PricingCalculator() {
           format={eur}
         />
         <SliderInput
-          label="Referral conversion rate"
+          label={t("referralRate")}
           value={referralRate}
           onChange={setReferralRate}
           min={5}
@@ -74,28 +76,28 @@ export function PricingCalculator() {
       <div className="grid grid-cols-1 min-[400px]:grid-cols-2 gap-3 min-w-0">
         <ResultCard
           icon={Euro}
-          label="Monthly revenue"
+          label={t("monthlyRevenue")}
           value={eur(results.monthlyRevenue)}
           color="text-[var(--primary)]"
           bgColor="bg-[#f6e1d7]"
         />
         <ResultCard
           icon={Users}
-          label="New referral customers"
-          value={`${results.referralCustomers}/mo`}
+          label={t("referralCustomers")}
+          value={t("perMonthValue", { value: results.referralCustomers })}
           color="text-[var(--success)]"
           bgColor="bg-green-50"
         />
         <ResultCard
           icon={Ticket}
-          label="Referral revenue"
+          label={t("referralRevenue")}
           value={eur(results.referralRevenue)}
           color="text-blue-600"
           bgColor="bg-blue-50"
         />
         <ResultCard
           icon={TrendingUp}
-          label="Estimated ROI"
+          label={t("estimatedRoi")}
           value={`${results.roi}%`}
           color="text-[var(--danger)]"
           bgColor="bg-red-50"
@@ -103,15 +105,20 @@ export function PricingCalculator() {
         />
         <div className="min-[400px]:col-span-2 rounded-xl border border-[var(--border)] bg-white/80 px-4 py-3">
           <div className="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center text-sm">
-            <span className="text-[var(--text-muted)]">Platform cost</span>
+            <span className="text-[var(--text-muted)]">{t("platformCost")}</span>
             <span className="font-semibold text-[var(--text)]">
-              {eur(results.planCost)}/mo plan + {eur(results.platformFee)} fees ({PLATFORM_FEE_PERCENT}%) ={" "}
-              <strong>{eur(results.totalCost)}/mo</strong>
+              {t.rich("platformCostValue", {
+                plan: eur(results.planCost),
+                fees: eur(results.platformFee),
+                percent: PLATFORM_FEE_PERCENT,
+                total: eur(results.totalCost),
+                strong: (chunks) => <strong>{chunks}</strong>,
+              })}
             </span>
           </div>
         </div>
         <p className="min-[400px]:col-span-2 text-xs text-[var(--text-muted)]">
-          Illustration only, based on the values you enter — not a forecast.
+          {t("disclaimer")}
         </p>
       </div>
     </div>

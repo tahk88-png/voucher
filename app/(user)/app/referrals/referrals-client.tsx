@@ -44,6 +44,7 @@ export default function ReferralsClient({ currency, stats, referrals }: Referral
   const locale = useLocale();
   const t = useTranslations('referral');
   const tDashboard = useTranslations('dashboard');
+  const tAccount = useTranslations('account');
 
   const formatMoney = (value: number) =>
     new Intl.NumberFormat(getCurrencyLocale(locale), { style: 'currency', currency }).format(value / 100);
@@ -98,7 +99,7 @@ export default function ReferralsClient({ currency, stats, referrals }: Referral
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-xl font-semibold text-[#2D2721]">{t('yourReferrals')}</h2>
           <div className="text-sm text-[#8B7355] font-semibold">
-            {t('completed')}: {stats.completedReferrals}
+            {tAccount('referrals.completedCount', { count: stats.completedReferrals })}
           </div>
         </div>
         {referrals.length === 0 ? (

@@ -12,6 +12,7 @@ export default function NewCampaignPage() {
   const { defaultCurrency } = useMerchantSettings();
   const t = useTranslations();
   const tNav = useTranslations('nav');
+  const tc = useTranslations('merchantCampaigns');
 
   return (
     <div className="p-4 sm:p-6">
@@ -25,7 +26,9 @@ export default function NewCampaignPage() {
         />
         <div className="mb-6 flex items-start gap-4">
           <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm flex-shrink-0">
-            <span className="text-white font-bold text-lg">C</span>
+            <span className="text-white font-bold text-lg" aria-hidden="true">
+              {tc('new.iconLetter')}
+            </span>
           </div>
           <div>
             <h1 className="text-2xl font-semibold text-[var(--text)]">{t('merchant.createCampaign')}</h1>
@@ -33,9 +36,7 @@ export default function NewCampaignPage() {
           </div>
         </div>
 
-        <p className="mb-4 text-sm text-[var(--text-muted)]">
-          New campaigns start as a draft. Customers can&apos;t see them until you publish from the campaign page.
-        </p>
+        <p className="mb-4 text-sm text-[var(--text-muted)]">{tc('new.draftNotice')}</p>
 
         <CampaignForm merchantSlug={merchantSlug} currency={defaultCurrency} />
       </div>

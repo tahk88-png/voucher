@@ -44,6 +44,7 @@ export default async function SettingsPage() {
   const t = await getTranslations('settingsPage');
   const tProfile = await getTranslations('profile');
   const tNotifications = await getTranslations('notifications');
+  const tAccount = await getTranslations('accountSecurity');
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
@@ -64,7 +65,11 @@ export default async function SettingsPage() {
         <SectionHeader
           icon={User}
           title={tProfile('accountInformation')}
-          description={`${t('joined')} ${user?.createdAt ? user.createdAt.toLocaleDateString(locale) : t('recently')}`}
+          description={
+            user?.createdAt
+              ? tAccount('settings.joinedOn', { date: user.createdAt.toLocaleDateString(locale) })
+              : tAccount('settings.joinedRecently')
+          }
         />
         <EditProfileForm initialName={user?.name || ''} email={user?.email || ''} />
       </WarmCard>

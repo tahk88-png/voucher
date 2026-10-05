@@ -6,6 +6,7 @@ import { safeParseJson } from '@/lib/utils';
 import Link from 'next/link';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 export default async function VouchersPage({ params }: { params: Promise<{ merchantSlug: string }> }) {
   const { merchantSlug } = await params;
@@ -18,6 +19,8 @@ export default async function VouchersPage({ params }: { params: Promise<{ merch
   if (!merchant) {
     notFound();
   }
+
+  const [t, locale] = await Promise.all([getTranslations('portal.vouchers'), getLocale()]);
 
   const vouchers = await prisma.voucher.findMany({
     where: {
@@ -33,7 +36,7 @@ export default async function VouchersPage({ params }: { params: Promise<{ merch
     <div className="p-4 sm:p-6">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl font-semibold text-[#2D2721] mb-6">
-          {merchant.name} - Available vouchers
+          {t('title', { merchant: merchant.name })}
         </h1>
 
         {vouchers.length === 0 ? (
@@ -57,9 +60,9 @@ export default async function VouchersPage({ params }: { params: Promise<{ merch
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-[#2D2721] mb-2">No vouchers available</h3>
+                  <h3 className="text-lg font-semibold text-[#2D2721] mb-2">{t('emptyTitle')}</h3>
                   <p className="text-sm text-[#6B5744]">
-                    Check back later for new voucher offers from {merchant.name}.
+                    {t('emptyDescription', { merchant: merchant.name })}
                   </p>
                 </div>
               </div>
@@ -75,15 +78,15 @@ export default async function VouchersPage({ params }: { params: Promise<{ merch
                   <div className="space-y-4">
                     <div>
                       <h2 className="text-lg font-semibold text-[#2D2721]">
-                        {design?.headline || 'Special offer'}
+                        {design?.headline || t('specialOffer')}
                       </h2>
                       <p className="text-sm text-[#6B5744]">
                         {design?.finePrint ||
-                          `Valid until ${new Date(voucher.validTo).toLocaleDateString()}`}
+                          t('validUntil', { date: new Date(voucher.validTo).toLocaleDateString(locale) })}
                       </p>
                     </div>
                     <WarmButton asChild className="w-full">
-                      <Link href={`/v/${voucher.id}`}>View and share</Link>
+                      <Link href={`/v/${voucher.id}`}>{t('viewAndShare')}</Link>
                     </WarmButton>
                   </div>
                 </WarmCard>

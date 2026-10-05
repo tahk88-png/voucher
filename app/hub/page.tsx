@@ -1,9 +1,15 @@
+import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({
-  title: 'Merchants',
-  description: 'Local businesses on GiftHub and their current offers',
-  path: '/hub',
-});
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("directory.hub")
+  return pageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    path: '/hub',
+  })
+}
 
 import Link from "next/link"
 import { ArrowRight, MapPin, Store, Tag } from "lucide-react"
@@ -12,7 +18,7 @@ import SitePageRenderer from "@/components/site/site-page-renderer"
 import { DemoBadge } from "@/components/campaign/campaign-card"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
-import { getCampaignCategoryId, getCampaignCategoryLabel } from "@/lib/campaign-categories"
+import { getCampaignCategoryId } from "@/lib/campaign-categories"
 import { getCategoryVisual, stripDemoMarker } from "@/lib/campaign-presentation"
 import { isDemoMerchantSlug } from "@/lib/demo-content"
 import { logger } from "@/lib/logger"
@@ -26,7 +32,6 @@ type DirectoryMerchant = {
   isDemo: boolean
   offerCount: number
   categoryId: string
-  categoryLabel: string
 }
 
 async function getDirectory(): Promise<DirectoryMerchant[] | null> {
@@ -60,7 +65,6 @@ async function getDirectory(): Promise<DirectoryMerchant[] | null> {
           isDemo,
           offerCount: merchant.campaigns.length,
           categoryId,
-          categoryLabel: getCampaignCategoryLabel(categoryId),
         }
       })
       // Businesses with something to offer first; real ones before samples.
@@ -70,6 +74,8 @@ async function getDirectory(): Promise<DirectoryMerchant[] | null> {
     return null
   }
 }
+
+const CATEGORY_IDS = ["cafe", "beauty", "fitness", "events", "workshops", "family", "travel", "outdoor", "other"]
 
 function initials(name: string): string {
   const parts = name.split(/\s+/).filter(Boolean)
@@ -90,32 +96,36 @@ export default async function HubPage() {
   }
 
   const merchants = await getDirectory()
+  const t = await getTranslations("directory.hub")
+  const tLabels = await getTranslations("labels")
+  const categoryLabel = (id: string) =>
+    CATEGORY_IDS.includes(id) ? tLabels(`category.${id}`) : tLabels("category.other")
 
   return (
     <HubShell>
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <header className="mx-auto mb-10 max-w-2xl text-center">
-          <h1 className="text-3xl font-bold text-[var(--text)] sm:text-5xl">Local merchants</h1>
+          <h1 className="text-3xl font-bold text-[var(--text)] sm:text-5xl">{t("title")}</h1>
           <p className="mt-3 text-lg text-[var(--text-muted)]">
-            Cafés, salons, studios and more: see who is on GiftHub and what they offer right now.
+            {t("subtitle")}
           </p>
         </header>
 
         {merchants === null ? (
           <WarmCard padding="lg" className="mx-auto max-w-xl bg-[var(--surface)] text-center" role="alert">
-            <p className="font-semibold text-[var(--text)]">Merchants couldn&apos;t be loaded</p>
-            <p className="mt-1 text-sm text-[var(--text-muted)]">Please try again in a moment.</p>
+            <p className="font-semibold text-[var(--text)]">{t("loadError")}</p>
+            <p className="mt-1 text-sm text-[var(--text-muted)]">{t("loadErrorHint")}</p>
             <WarmButton asChild variant="outline" size="sm" className="mt-4">
-              <Link href="/hub">Try again</Link>
+              <Link href="/hub">{t("retry")}</Link>
             </WarmButton>
           </WarmCard>
         ) : merchants.length === 0 ? (
           <WarmCard padding="lg" className="mx-auto max-w-xl bg-[var(--surface)] text-center">
             <Store className="mx-auto mb-3 h-8 w-8 text-[var(--text-faint)]" aria-hidden="true" />
-            <p className="font-semibold text-[var(--text)]">No merchants yet</p>
-            <p className="mt-1 text-sm text-[var(--text-muted)]">Businesses appear here as soon as they join.</p>
+            <p className="font-semibold text-[var(--text)]">{t("emptyTitle")}</p>
+            <p className="mt-1 text-sm text-[var(--text-muted)]">{t("emptyHint")}</p>
             <WarmButton asChild size="sm" className="mt-4">
-              <Link href="/register">Join as a merchant</Link>
+              <Link href="/register">{t("joinCta")}</Link>
             </WarmButton>
           </WarmCard>
         ) : (
@@ -150,14 +160,14 @@ export default async function HubPage() {
                             {merchant.city}
                           </span>
                         )}
-                        {merchant.offerCount > 0 && <span>{merchant.categoryLabel}</span>}
+                        {merchant.offerCount > 0 && <span>{categoryLabel(merchant.categoryId)}</span>}
                       </p>
                       <div className="mt-auto flex items-center justify-between gap-3 pt-5">
                         <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--text)]">
                           <Tag className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
                           {merchant.offerCount === 0
-                            ? "No offers right now"
-                            : `${merchant.offerCount} ${merchant.offerCount === 1 ? "offer" : "offers"}`}
+                            ? t("noOffers")
+                            : t("offerCount", { count: merchant.offerCount })}
                         </span>
                         <ArrowRight
                           className="h-4 w-4 text-[var(--primary)] transition-transform group-hover:translate-x-0.5"

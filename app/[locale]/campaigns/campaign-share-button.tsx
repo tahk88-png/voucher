@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { WarmButton } from '@/components/warm-button';
 import { Share2, Check } from 'lucide-react';
 import { showSuccess, showError } from '@/lib/toast-helpers';
+import { useTranslations } from 'next-intl';
 
 export default function CampaignShareButton({
   url,
@@ -12,6 +13,7 @@ export default function CampaignShareButton({
   url: string;
   title: string;
 }) {
+  const t = useTranslations('offers.campaignShare');
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
@@ -26,17 +28,17 @@ export default function CampaignShareButton({
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
-      showSuccess('Link copied');
+      showSuccess(t('linkCopied'));
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      showError('Copy failed');
+      showError(t('copyFailed'));
     }
   };
 
   return (
     <WarmButton variant="outline" size="sm" onClick={handleShare}>
       {copied ? <Check className="h-4 w-4 mr-2" /> : <Share2 className="h-4 w-4 mr-2" />}
-      {copied ? 'Copied' : 'Share'}
+      {copied ? t('copied') : t('share')}
     </WarmButton>
   );
 }

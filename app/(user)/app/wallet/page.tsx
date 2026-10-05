@@ -1,6 +1,5 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'My Wallet', noIndex: true });
-
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -11,6 +10,11 @@ import { WarmButton } from '@/components/warm-button';
 import { getCreditBalance } from '@/lib/credits';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getCurrencyLocale } from '@/lib/i18n-utils';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('account');
+  return pageMetadata({ title: t('wallet.metaTitle'), noIndex: true });
+}
 
 export default async function WalletPage() {
   const session = await auth();
