@@ -1,7 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin } from "lucide-react"
-import { getCategoryVisual, type CampaignCardData } from "@/lib/campaign-presentation"
+import { useTranslations } from "next-intl"
+import { campaignPriceText, getCategoryVisual, type CampaignCardData } from "@/lib/campaign-presentation"
 import { cn } from "@/lib/utils"
 
 /** Cover artwork for a campaign: the merchant's image, or its category's gradient and icon. */
@@ -60,30 +61,28 @@ export function CampaignCover({
 }
 
 export function DemoBadge({ className }: { className?: string }) {
+  const t = useTranslations("labels")
   return (
     <span
       className={cn(
         "inline-flex items-center rounded-full bg-[var(--text)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white",
         className
       )}
-      title="Sample content to show how the platform works. Not a real offer."
+      title={t("demoHint")}
     >
-      Demo
+      {t("demo")}
     </span>
   )
 }
 
+type StatusKey = "sampleOffer" | "notOnSale" | "freeToClaim" | "onSaleNow"
+
 /** Status line under the price: honest about whether the offer can be bought. */
-function statusLine(campaign: CampaignCardData): { text: string; tone: "muted" | "success" } | null {
-  if (campaign.isDemo) return { text: "Sample offer · not for sale", tone: "muted" }
-  if (!campaign.onSale) return { text: "Not on sale yet", tone: "muted" }
-  if (campaign.purchases > 0) {
-    return {
-      text: `${campaign.purchases} ${campaign.purchases === 1 ? "purchase" : "purchases"}`,
-      tone: "success",
-    }
-  }
-  return { text: campaign.isFree ? "Free to claim" : "On sale now", tone: "success" }
+function statusLine(campaign: CampaignCardData): { key: StatusKey | "purchases"; tone: "muted" | "success" } {
+  if (campaign.isDemo) return { key: "sampleOffer", tone: "muted" }
+  if (!campaign.onSale) return { key: "notOnSale", tone: "muted" }
+  if (campaign.purchases > 0) return { key: "purchases", tone: "success" }
+  return { key: campaign.isFree ? "freeToClaim" : "onSaleNow", tone: "success" }
 }
 
 export function CampaignCard({
@@ -96,7 +95,10 @@ export function CampaignCard({
   className?: string
 }) {
   const Heading = headingLevel
+  const t = useTranslations("campaignCard")
+  const tLabels = useTranslations("labels")
   const status = statusLine(campaign)
+  const statusText = status.key === "purchases" ? t("purchases", { count: campaign.purchases }) : t(status.key)
   return (
     <article
       className={cn(
@@ -111,7 +113,7 @@ export function CampaignCard({
         className="h-36 sm:h-40"
       >
         <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-bold text-[#2d2721] shadow-sm backdrop-blur">
-          {campaign.categoryLabel}
+          {tLabels(`category.${campaign.categoryId}`)}
         </span>
         {campaign.discountLabel && (
           <span className="absolute right-3 top-3 rounded-full bg-[#2d2721] px-3 py-1 text-sm font-bold text-white shadow-md">
@@ -141,17 +143,15 @@ export function CampaignCard({
         <div className="mt-auto pt-4">
         <div className="flex items-end justify-between gap-3 border-t border-[var(--border)] pt-4">
           <div className="min-w-0">
-            <div className="text-xl font-bold text-[var(--text)]">{campaign.priceLabel}</div>
-            {status && (
-              <div
-                className={cn(
-                  "text-xs font-semibold",
-                  status.tone === "success" ? "text-[var(--success)]" : "text-[var(--text-muted)]"
-                )}
-              >
-                {status.text}
-              </div>
-            )}
+            <div className="text-xl font-bold text-[var(--text)]">{campaignPriceText(campaign, tLabels)}</div>
+            <div
+              className={cn(
+                "text-xs font-semibold",
+                status.tone === "success" ? "text-[var(--success)]" : "text-[var(--text-muted)]"
+              )}
+            >
+              {statusText}
+            </div>
           </div>
           <span
             aria-hidden="true"

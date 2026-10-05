@@ -10,7 +10,7 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react"
-import { getCampaignCategoryId, getCampaignCategoryLabel } from "@/lib/campaign-categories"
+import { getCampaignCategoryId } from "@/lib/campaign-categories"
 import { isDemoMerchantSlug } from "@/lib/demo-content"
 import { formatCurrency, formatPercentage, safeParseJson } from "@/lib/utils"
 
@@ -68,14 +68,15 @@ export type CampaignCardData = {
   imageUrl: string | null
   isDemo: boolean
   categoryId: string
-  categoryLabel: string
   /**
    * Cover badge for paid offers, e.g. "−20%"; null when there is no discount
    * or the offer is free (its value is then the price line itself).
    */
   discountLabel: string | null
-  /** A formatted price; for free offers the discount ("20% off") or "Free". */
-  priceLabel: string
+  /** "20%" or "€5.00"; null without a discount rule. */
+  discountValue: string | null
+  /** Formatted price; null for free offers. Turn into text with campaignPriceText(). */
+  price: string | null
   isFree: boolean
   onSale: boolean
   purchases: number
@@ -120,17 +121,22 @@ export function toCampaignCardData(campaign: CampaignCardSource): CampaignCardDa
     imageUrl: campaign.merchant.brandLogoUrl,
     isDemo,
     categoryId,
-    categoryLabel: getCampaignCategoryLabel(categoryId),
     // "Free" next to a "−50%" badge reads as a contradiction, so a free
-    // offer's discount becomes its price line instead.
+    // offer's discount becomes its price line instead (campaignPriceText).
     discountLabel: !isFree && discount ? `−${discount}` : null,
-    priceLabel: isFree
-      ? discount
-        ? `${discount} off`
-        : "Free"
-      : formatCurrency(campaign.price!, campaign.merchant.defaultCurrency),
+    discountValue: discount,
+    price: isFree ? null : formatCurrency(campaign.price!, campaign.merchant.defaultCurrency),
     isFree,
     onSale: campaign._count.vouchers > 0,
     purchases: campaign._count.purchases,
   }
+}
+
+/** Translator for the "labels" namespace, from useTranslations or getTranslations. */
+type LabelsT = (key: "free" | "valueOff", values?: Record<string, string>) => string
+
+/** Price line: the price, or for a free offer its discount ("20% off") or "Free". */
+export function campaignPriceText(card: Pick<CampaignCardData, "price" | "discountValue">, t: LabelsT): string {
+  if (card.price) return card.price
+  return card.discountValue ? t("valueOff", { value: card.discountValue }) : t("free")
 }

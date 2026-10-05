@@ -1,4 +1,4 @@
-import { cookies } from "next/headers"
+import { cookies, headers } from "next/headers"
 import { notFound } from "next/navigation"
 import { getRequestConfig } from "next-intl/server"
 import type { AbstractIntlMessages } from "use-intl"
@@ -6,6 +6,7 @@ import {
   defaultLocale,
   isSupportedLocale,
   languageCookieName,
+  localeFromAcceptLanguage,
   localeCookieName,
   supportedLocales,
   type SupportedLocale,
@@ -53,7 +54,12 @@ export default getRequestConfig(async ({ requestLocale }) => {
     }
 
     const cookieStore = await cookies()
-    const fallbackLocale = getLocaleFromCookies(cookieStore) ?? defaultLocale
+    // A chosen language (cookie) wins; otherwise the browser's language when we
+    // support it, so a visitor from Estonia sees Estonian without choosing it.
+    const fallbackLocale =
+      getLocaleFromCookies(cookieStore) ??
+      localeFromAcceptLanguage((await headers()).get("accept-language")) ??
+      defaultLocale
     const locale: SupportedLocale =
       requestedLocale && isSupportedLocale(requestedLocale) ? requestedLocale : fallbackLocale
 

@@ -1,5 +1,5 @@
 import { DemoBadge } from '@/components/campaign/campaign-card';
-import { getCategoryVisual, toCampaignCardData } from '@/lib/campaign-presentation';
+import { campaignPriceText, getCategoryVisual, toCampaignCardData } from '@/lib/campaign-presentation';
 import { pageMetadata } from '@/lib/seo/page-metadata';
 export const metadata = pageMetadata({ title: 'My Dashboard', noIndex: true });
 
@@ -28,6 +28,7 @@ export default async function AppPage() {
   const locale = await getLocale();
   const intlLocale = getCurrencyLocale(locale);
   const t = await getTranslations('dashboard');
+  const tLabels = await getTranslations('labels');
   const userId = session.user.id;
   const now = new Date();
 
@@ -308,7 +309,7 @@ export default async function AppPage() {
                       {card.title}
                     </div>
                     <div className="mt-auto pt-3 text-sm">
-                      <div className="font-bold text-[var(--text)]">{card.priceLabel}</div>
+                      <div className="font-bold text-[var(--text)]">{campaignPriceText(card, tLabels)}</div>
                       <div className="text-xs text-[var(--text-muted)]">
                         {t('validUntil', { date: campaign.endDate.toLocaleDateString(intlLocale) })}
                       </div>

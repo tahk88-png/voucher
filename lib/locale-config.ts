@@ -39,6 +39,37 @@ export function isSupportedLocale(locale: string): locale is SupportedLocale {
   return (supportedLocales as readonly string[]).includes(locale)
 }
 
+// Browser language tags whose base differs from our locale code.
+const LANGUAGE_ALIASES: Record<string, SupportedLocale> = {
+  nb: "no", // Norwegian Bokmål
+  nn: "no", // Norwegian Nynorsk
+}
+
+/**
+ * First supported language in an Accept-Language header, in the visitor's
+ * order of preference ("et-EE,et;q=0.9,en;q=0.8" → "et"); null when none is
+ * supported. Quality values are respected; "*" is ignored.
+ */
+export function localeFromAcceptLanguage(header: string | null | undefined): SupportedLocale | null {
+  if (!header) return null
+  const ranked = header
+    .split(",")
+    .map((part, index) => {
+      const [tag, ...params] = part.trim().toLowerCase().split(";")
+      const q = params.map((p) => p.trim()).find((p) => p.startsWith("q="))
+      const quality = q ? Number.parseFloat(q.slice(2)) : 1
+      return { tag: tag.trim(), quality: Number.isFinite(quality) ? quality : 0, index }
+    })
+    .filter((entry) => entry.tag && entry.tag !== "*" && entry.quality > 0)
+    .sort((a, b) => b.quality - a.quality || a.index - b.index)
+  for (const { tag } of ranked) {
+    const base = tag.split("-")[0]
+    const locale = LANGUAGE_ALIASES[base] ?? base
+    if (isSupportedLocale(locale)) return locale
+  }
+  return null
+}
+
 export interface LanguageOption {
   code: SupportedLocale
   name: string

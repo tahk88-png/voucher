@@ -10,6 +10,7 @@ afterAll(() => {
 });
 
 import MarketingLanding from '../marketing-landing';
+import { withIntl } from '@/test-utils/intl';
 import { toCampaignCardData, type CampaignCardSource } from '@/lib/campaign-presentation';
 
 function source(overrides: Partial<CampaignCardSource> & { vouchers?: number; purchases?: number } = {}) {
@@ -31,7 +32,7 @@ const emptyStats = { merchantCount: 0, activeCampaignCount: 0, processedCents: 0
 
 describe('MarketingLanding campaigns section', () => {
   it('shows an honest empty state instead of invented deals when nothing is live', () => {
-    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[]} stats={emptyStats} />);
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding featuredOffers={[]} stats={emptyStats} />));
 
     expect(html).toContain('No live campaigns right now');
     expect(html).toContain('View All Campaigns');
@@ -45,23 +46,21 @@ describe('MarketingLanding campaigns section', () => {
   });
 
   it('shows the same honest empty state when the database is unreachable', () => {
-    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[]} stats={null} />);
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding featuredOffers={[]} stats={null} />));
 
     expect(html).toContain('No live campaigns right now');
     expect(html).not.toMatch(/\b\d[\d,]* campaigns\b/);
   });
 
   it('renders real offers and no empty state when campaigns are live', () => {
-    const html = renderToStaticMarkup(
-      <MarketingLanding
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding
         featuredOffers={[
           toCampaignCardData(
             source({ id: 'cmp_1', name: 'Two coffees for one', price: null, discountRules: { type: 'percentage', value: 5000 }, purchases: 3 })
           ),
         ]}
         stats={{ merchantCount: 1, activeCampaignCount: 1, processedCents: 0 }}
-      />
-    );
+      />));
 
     expect(html).toContain('Two coffees for one');
     expect(html).toContain('href="/campaigns/cmp_1"');
@@ -74,12 +73,10 @@ const offer = toCampaignCardData(source());
 
 describe('MarketingLanding honesty', () => {
   it('does not call listed campaigns "live" and flags ones that are not on sale', () => {
-    const html = renderToStaticMarkup(
-      <MarketingLanding
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding
         featuredOffers={[offer, { ...offer, id: 'cmp_3', onSale: false }]}
         stats={{ merchantCount: 1, activeCampaignCount: 2, processedCents: 0 }}
-      />
-    );
+      />));
     expect(html).not.toMatch(/live offers/i);
     expect(html).toContain('Showing 2 active campaigns');
     expect(html).toContain('1 on sale now');
@@ -88,7 +85,7 @@ describe('MarketingLanding honesty', () => {
 
   it('shows a free offer\'s discount as its value, not as "Free" next to a discount badge', () => {
     const free = toCampaignCardData(source({ price: null, discountRules: { type: 'percentage', value: 5000 } }));
-    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[free]} stats={null} />);
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding featuredOffers={[free]} stats={null} />));
     expect(html).toContain('50% off');
     expect(html).not.toContain('−50%');
     expect(html).not.toContain('>Free<');
@@ -101,7 +98,7 @@ describe('MarketingLanding honesty', () => {
         merchant: { name: 'Stuudio (näidis)', slug: 'demo-stuudio', city: 'Tartu', defaultCurrency: 'EUR', brandLogoUrl: null },
       })
     );
-    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[demo]} stats={null} />);
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding featuredOffers={[demo]} stats={null} />));
     expect(html).toContain('>Joogatund<');
     expect(html).toContain('>Demo<');
     expect(html).toContain('Sample offer · not for sale');
@@ -109,16 +106,14 @@ describe('MarketingLanding honesty', () => {
   });
 
   it('hides zero-valued stats instead of advertising them', () => {
-    const html = renderToStaticMarkup(
-      <MarketingLanding featuredOffers={[]} stats={{ merchantCount: 3, activeCampaignCount: 0, processedCents: 0 }} />
-    );
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding featuredOffers={[]} stats={{ merchantCount: 3, activeCampaignCount: 0, processedCents: 0 }} />));
     expect(html).not.toContain('Processed value');
     expect(html).not.toContain('Active campaigns');
     expect(html).toContain('Merchants');
   });
 
   it('makes no unverifiable claims and states the real language count', () => {
-    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[]} stats={null} />);
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding featuredOffers={[]} stats={null} />));
     expect(html).not.toContain('99.9%');
     expect(html).not.toMatch(/GDPR compliant/i);
     expect(html).not.toMatch(/EU-hosted/i);
@@ -130,13 +125,13 @@ describe('MarketingLanding honesty', () => {
   });
 
   it('sends sign-up CTAs to registration, not the sign-in page', () => {
-    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[]} stats={null} />);
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding featuredOffers={[]} stats={null} />));
     expect(html).toContain('href="/register"');
     expect(html).not.toContain('href="/login"');
   });
 
   it('links every category tile to the matching /campaigns filter', () => {
-    const html = renderToStaticMarkup(<MarketingLanding featuredOffers={[]} stats={null} />);
+    const html = renderToStaticMarkup(withIntl(<MarketingLanding featuredOffers={[]} stats={null} />));
     for (const id of ['cafe', 'beauty', 'fitness', 'events', 'workshops', 'family', 'travel', 'outdoor']) {
       expect(html).toContain(`href="/campaigns?category=${id}"`);
     }

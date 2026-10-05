@@ -887,5 +887,57 @@
         "subtitle": "Add a passkey or two-factor authentication."
       }
     }
+  },
+  "labels": {
+    "free": "Free",
+    "valueOff": "{value} off",
+    "valueCredit": "{value} credit",
+    "valueDiscount": "{value} discount",
+    "demo": "Demo",
+    "demoHint": "Sample content that shows how the platform works. Not a real offer.",
+    "category": {
+      "cafe": "Cafe & bakery",
+      "beauty": "Beauty & wellness",
+      "fitness": "Fitness & sport",
+      "events": "Events & tickets",
+      "workshops": "Workshops & classes",
+      "family": "Family & kids",
+      "travel": "Travel & stays",
+      "outdoor": "Outdoor & adventure",
+      "other": "Other",
+      "all": "All categories"
+    },
+    "voucherType": {
+      "percentage": "Percentage off",
+      "fixed_amount": "Amount off",
+      "credit_amount": "Store credit"
+    },
+    "voucherStatus": {
+      "draft": "Draft",
+      "published": "Published",
+      "paused": "Paused",
+      "ended": "Ended",
+      "expired": "Expired"
+    },
+    "campaignStatus": {
+      "draft": "Draft",
+      "active": "Live",
+      "ended": "Ended"
+    },
+    "campaignType": {
+      "limited": "One-off offer",
+      "weekly": "Weekly offer"
+    },
+    "campaignTypeHelp": {
+      "limited": "Runs once between the start and end date, while stock lasts.",
+      "weekly": "A recurring weekly offer that customers can come back for every week until the end date."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Sample offer · not for sale",
+    "notOnSale": "Not on sale yet",
+    "purchases": "{count, plural, one {# purchase} other {# purchases}}",
+    "freeToClaim": "Free to claim",
+    "onSaleNow": "On sale now"
   }
 }

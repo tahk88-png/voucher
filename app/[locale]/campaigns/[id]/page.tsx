@@ -6,10 +6,10 @@ import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { ArrowRight, CheckCircle2, Clock, Globe, Info, MapPin, QrCode, ShoppingBag, Store, Ticket } from "lucide-react"
 import { CampaignCard, CampaignCover, DemoBadge } from "@/components/campaign/campaign-card"
-import { toCampaignCardData } from "@/lib/campaign-presentation"
+import { campaignPriceText, toCampaignCardData } from "@/lib/campaign-presentation"
 import { isMerchantActive } from "@/lib/merchant-status"
 import { isDemoMerchantSlug } from "@/lib/demo-content"
-import { setRequestLocale } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 import { routing, Link } from "@/routing"
 import CampaignShareButton from "../campaign-share-button"
 import { ReviewList } from "@/components/reviews/review-list"
@@ -180,6 +180,7 @@ export default async function CampaignDetailPage({
   const signedIn = Boolean(session?.user?.id)
 
   const card = toCampaignCardData(campaign)
+  const tLabels = await getTranslations("labels")
   const isDemo = card.isDemo
   // Buying happens through a published, currently valid voucher.
   const onSale = campaign.vouchers.length > 0 && !isDemo
@@ -269,7 +270,7 @@ export default async function CampaignDetailPage({
               sizes="(max-width: 1024px) 100vw, 800px"
             >
               <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-[#2d2721] shadow-sm backdrop-blur">
-                {card.categoryLabel}
+                {tLabels(`category.${card.categoryId}`)}
               </span>
               {card.discountLabel && (
                 <span className="absolute right-4 top-4 rounded-full bg-[#2d2721] px-3.5 py-1.5 text-base font-bold text-white shadow-md">
@@ -385,9 +386,9 @@ export default async function CampaignDetailPage({
           <aside className="space-y-6" aria-label="Purchase">
             <WarmCard padding="lg" className="bg-[var(--surface)] lg:sticky lg:top-24">
               <div className="mb-5">
-                <div className="text-3xl font-bold text-[var(--text)]">{card.priceLabel}</div>
+                <div className="text-3xl font-bold text-[var(--text)]">{campaignPriceText(card, tLabels)}</div>
                 {card.discountLabel && (
-                  <p className="mt-1 text-sm font-semibold text-[var(--primary)]">{card.discountLabel.replace("−", "")} discount</p>
+                  <p className="mt-1 text-sm font-semibold text-[var(--primary)]">{tLabels("valueDiscount", { value: card.discountValue ?? "" })}</p>
                 )}
               </div>
 

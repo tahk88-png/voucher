@@ -887,5 +887,57 @@
         "subtitle": "Lisa pääsuvõti või kaheastmeline autentimine."
       }
     }
+  },
+  "labels": {
+    "free": "Tasuta",
+    "valueOff": "{value} soodustust",
+    "valueCredit": "{value} krediiti",
+    "valueDiscount": "{value} soodustust",
+    "demo": "Näidis",
+    "demoHint": "Näidissisu, mis näitab, kuidas platvorm töötab. See ei ole päris pakkumine.",
+    "category": {
+      "cafe": "Kohvikud ja pagarid",
+      "beauty": "Ilu ja heaolu",
+      "fitness": "Sport ja treening",
+      "events": "Üritused ja piletid",
+      "workshops": "Töötoad ja kursused",
+      "family": "Pere ja lapsed",
+      "travel": "Reisid ja majutus",
+      "outdoor": "Loodus ja seiklus",
+      "other": "Muu",
+      "all": "Kõik kategooriad"
+    },
+    "voucherType": {
+      "percentage": "Protsendiline soodustus",
+      "fixed_amount": "Summaline soodustus",
+      "credit_amount": "Poe krediit"
+    },
+    "voucherStatus": {
+      "draft": "Mustand",
+      "published": "Avaldatud",
+      "paused": "Peatatud",
+      "ended": "Lõppenud",
+      "expired": "Aegunud"
+    },
+    "campaignStatus": {
+      "draft": "Mustand",
+      "active": "Aktiivne",
+      "ended": "Lõppenud"
+    },
+    "campaignType": {
+      "limited": "Ühekordne pakkumine",
+      "weekly": "Iganädalane pakkumine"
+    },
+    "campaignTypeHelp": {
+      "limited": "Kehtib üks kord alguse ja lõpu kuupäeva vahel, kuni kaupa jätkub.",
+      "weekly": "Korduv iganädalane pakkumine, mille juurde kliendid saavad iga nädal tagasi tulla kuni lõppkuupäevani."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Näidispakkumine · ei ole müügil",
+    "notOnSale": "Pole veel müügil",
+    "purchases": "{count, plural, one {# ost} other {# ostu}}",
+    "freeToClaim": "Tasuta saadaval",
+    "onSaleNow": "Müügil"
   }
 }
