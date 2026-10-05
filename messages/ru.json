@@ -2361,7 +2361,246 @@
       "backToHub": "Назад в Gift Hub",
       "imageAlt": "{title} {index}",
       "featured": "Рекомендуем",
-      "lowStock": "Осталось всего: {count}"
+      "lowStock": "Осталось всего: {count}",
+      "buyNow": "Купить",
+      "addToCart": "В корзину",
+      "saveToWishlist": "В избранное",
+      "removeFromWishlist": "Удалить из избранного",
+      "share": "Поделиться подарком",
+      "upsellsTitle": "Вам также может понравиться"
+    },
+    "claim": {
+      "metaTitle": "Получите подарок",
+      "alreadyClaimedTitle": "Подарок уже получен",
+      "alreadyClaimedBody": "Этот подарок уже был получен.",
+      "expiredTitle": "Срок подарка истёк",
+      "expiredBody": "К сожалению, срок действия этой ссылки на подарок истёк.",
+      "title": "Вам подарок!",
+      "signedInHint": "Нажмите ниже, чтобы добавить ваучер в кошелёк.",
+      "signedOutHint": "Войдите, чтобы получить этот ваучер.",
+      "claimButton": "Получить подарок",
+      "signInButton": "Войти и получить"
+    },
+    "error": {
+      "title": "Не удалось загрузить Gift Hub",
+      "fallback": "При загрузке подарков произошла непредвиденная ошибка.",
+      "retry": "Попробовать снова"
+    },
+    "hub": {
+      "title": "Подарки",
+      "subtitle": "Идеальный подарок для любого повода",
+      "loadError": "Не удалось загрузить подарки",
+      "retry": "Попробовать снова",
+      "emptyCatalog": {
+        "title": "Подарков пока нет",
+        "body": "А пока ваучеры местных продавцов — тоже отличный подарок."
+      },
+      "noMatches": "Нет подарков, подходящих под фильтры",
+      "clearFilters": "Сбросить фильтры",
+      "browseCampaigns": "Смотреть кампании",
+      "allGifts": "Все подарки",
+      "loadMore": "Показать ещё"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Подарочная карта не найдена",
+        "body": "QR-код недействителен или устарел."
+      },
+      "notActive": {
+        "title": "Подарочная карта ещё не активна",
+        "body": "Эта подарочная карта начнёт действовать позже."
+      },
+      "expired": {
+        "title": "Срок подарочной карты истёк",
+        "body": "Эта подарочная карта больше не действительна."
+      },
+      "result": {
+        "title": "Подарочная карта погашена",
+        "confirmed": "Погашение успешно подтверждено.",
+        "alreadyRedeemedOrCancelled": "Эта подарочная карта уже погашена или отменена.",
+        "alreadyRedeemedOrInvalid": "Эта подарочная карта уже погашена или недействительна."
+      }
+    },
+    "qr": {
+      "error": "Не удалось создать QR-код",
+      "generating": "Создание QR-кода...",
+      "alt": "QR-код"
+    },
+    "wizard": {
+      "title": "ИИ-подбор подарков",
+      "subtitle": "Расскажите о получателе, и мы подберём идеальный подарок",
+      "steps": {
+        "recipient": "Кому подарок?",
+        "occasion": "Какой повод?",
+        "budget": "Какой у вас бюджет?"
+      },
+      "recipients": {
+        "partner": "Партнёру",
+        "friend": "Другу",
+        "parent": "Родителю",
+        "colleague": "Коллеге",
+        "child": "Ребёнку",
+        "teacher": "Учителю"
+      },
+      "occasions": {
+        "birthday": "День рождения",
+        "christmas": "Рождество",
+        "anniversary": "Годовщина",
+        "thankYou": "Благодарность",
+        "justBecause": "Просто так",
+        "graduation": "Выпускной"
+      },
+      "summary": {
+        "for": "Кому: {recipient}",
+        "budget": "Бюджет: {amount}"
+      },
+      "submit": "Подобрать подарки",
+      "error": "Не удалось подобрать рекомендации. Попробуйте ещё раз.",
+      "results": {
+        "found": "Мы нашли для вас {count, plural, one {# подарок} few {# подарка} many {# подарков} other {# подарка}}:",
+        "empty": "Подходящих товаров не найдено. Попробуйте изменить критерии."
+      },
+      "startOver": "Начать заново"
+    },
+    "card": {
+      "featured": "Рекомендуем",
+      "save": "Сохранить",
+      "unsave": "Убрать",
+      "buyNow": "Купить"
+    },
+    "feedSection": {
+      "viewAll": "Смотреть все"
+    },
+    "filters": {
+      "toggle": "Фильтры",
+      "clear": "Сбросить",
+      "occasion": "Повод",
+      "persona": "Для кого?",
+      "budget": "Бюджет",
+      "budgetUnder": "До {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Делитесь предложениями и получайте награды"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Произошла непредвиденная ошибка."
+    },
+    "logoAlt": "Логотип {name}",
+    "merchantFallback": "Продавец",
+    "validUntil": "Действует до {date}",
+    "validUntilWithLimit": "Действует до {date} — {count, plural, one {первое # использование} few {первые # использования} many {первые # использований} other {первые # использования}}",
+    "offAtMerchant": "Скидка {value} у {merchant}",
+    "fields": {
+      "event": "Мероприятие",
+      "dateTime": "Дата и время",
+      "location": "Место",
+      "price": "Цена",
+      "status": "Статус",
+      "attendee": "Участник",
+      "usedAt": "Использован"
+    },
+    "ticketStatus": {
+      "available": "Доступен",
+      "sold": "Продан",
+      "used": "Использован",
+      "cancelled": "Отменён",
+      "refunded": "Возвращён"
+    },
+    "event": {
+      "notAvailable": "Билеты на это мероприятие недоступны для покупки.",
+      "descriptionFallback": "Присоединяйтесь к этому замечательному мероприятию!",
+      "availableTickets": "Доступные билеты",
+      "soldOut": "Распродано",
+      "availableCount": "Доступно: {count}",
+      "terms": "Условия",
+      "soldOutTitle": "Все билеты распроданы",
+      "soldOutDescription": "Все билеты на это мероприятие куплены."
+    },
+    "eventPurchase": {
+      "title": "Покупка билета",
+      "description": "Выберите билет и завершите покупку",
+      "selectTicket": "Выберите билет",
+      "attendeeNameLabel": "Имя участника (необязательно)",
+      "attendeeNamePlaceholder": "Имя человека, который придёт",
+      "attendeeEmailLabel": "Email участника (необязательно)",
+      "attendeeEmailPlaceholder": "Email для отправки билета",
+      "total": "Итого",
+      "submit": "Купить билет",
+      "noTickets": "Сейчас нет доступных билетов.",
+      "checkBackLater": "Загляните позже или свяжитесь с организатором мероприятия.",
+      "selectTicketError": "Выберите билет",
+      "purchaseFailed": "Не удалось купить билет"
+    },
+    "ticket": {
+      "noPermission": "У вас нет доступа к этому билету.",
+      "heading": "Билет № {number}",
+      "qrTitle": "QR-код",
+      "qrDescription": "Покажите этот QR-код на входе",
+      "qrAlt": "QR-код билета",
+      "qrUnavailable": "QR-код недоступен",
+      "ticketNumber": "Номер билета: <strong>{number}</strong>",
+      "used": "Билет использован",
+      "detailsTitle": "Информация о билете",
+      "detailsDescription": "Важная информация о вашем билете",
+      "staffCanRedeem": "Как сотрудник продавца, вы можете погасить этот билет на мероприятии."
+    },
+    "redeem": {
+      "notFoundTitle": "Погашение не найдено",
+      "notFoundDescription": "QR-код недействителен или устарел.",
+      "title": "Ваучер погашен",
+      "alreadyRedeemed": "Этот ваучер уже погашен.",
+      "confirmed": "Погашение успешно подтверждено."
+    },
+    "qrCheckout": {
+      "title": "Оплата по QR",
+      "completeTitle": "Заказ оформлен",
+      "completeDescription": "Покупка подтверждена. Подробности отправлены вам на email.",
+      "payNow": "Оплатить",
+      "confirming": "Подтверждение..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Ваучер не найден",
+      "notFoundDescription": "Не удалось найти запрашиваемый ваучер.",
+      "descriptionFallback": "Эксклюзивное предложение",
+      "shareText": "Посмотрите этот ваучер от {merchant}",
+      "copyCode": "Скопировать код ваучера",
+      "qrAlt": "QR-код ваучера {code}",
+      "print": "Распечатать ваучер"
+    },
+    "referralPage": {
+      "voucherFrom": "Вы получили ваучер от <highlight>{name}</highlight>",
+      "qrAlt": "QR-код для погашения ваучера {code}",
+      "offAtMerchantShared": "Скидка {value} у {merchant} — подарок от друга!"
+    },
+    "bnpl": {
+      "title": "Оплата частями",
+      "description": "Разделите платёж на {amount} на удобные ежемесячные части.",
+      "perMonth": "/мес.",
+      "planNoInterest": "{months}× (0%)",
+      "planWithFee": "{months}× (комиссия {rate}%)",
+      "monthlyPayments": "{count, plural, one {# ежемесячный платёж} few {# ежемесячных платежа} many {# ежемесячных платежей} other {# ежемесячного платежа}}",
+      "total": "Итого: {amount}",
+      "noExtraCost": "Без переплаты",
+      "payNow": "Оплатить {amount} сейчас"
+    },
+    "qrPanel": {
+      "qrAlt": "QR-код",
+      "generateFailed": "Не удалось создать QR-код",
+      "placeholder": "Здесь появится QR-код",
+      "generating": "Создание QR-кода...",
+      "unavailable": "QR-код недоступен",
+      "hideCode": "Скрыть код",
+      "showCode": "Показать код",
+      "expires": "Истекает {date}",
+      "refreshNote": "Код обновляется каждые 30 секунд"
+    },
+    "qrDownload": {
+      "success": "QR-код успешно скачан!",
+      "failed": "Не удалось скачать QR-код",
+      "downloading": "Скачивание...",
+      "download": "Скачать QR"
     }
   }
 }

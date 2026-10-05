@@ -887,5 +887,1720 @@
         "subtitle": "Dodaj klucz dostępu lub uwierzytelnianie dwuskładnikowe."
       }
     }
+  },
+  "labels": {
+    "free": "Za darmo",
+    "valueOff": "{value} taniej",
+    "valueCredit": "{value} kredytu",
+    "valueDiscount": "{value} zniżki",
+    "demo": "Demo",
+    "demoHint": "Przykładowa treść pokazująca, jak działa platforma. To nie jest prawdziwa oferta.",
+    "category": {
+      "cafe": "Kawiarnie i piekarnie",
+      "beauty": "Uroda i wellness",
+      "fitness": "Fitness i sport",
+      "events": "Wydarzenia i bilety",
+      "workshops": "Warsztaty i zajęcia",
+      "family": "Rodzina i dzieci",
+      "travel": "Podróże i noclegi",
+      "outdoor": "Outdoor i przygoda",
+      "other": "Inne",
+      "all": "Wszystkie kategorie"
+    },
+    "voucherType": {
+      "percentage": "Zniżka procentowa",
+      "fixed_amount": "Zniżka kwotowa",
+      "credit_amount": "Kredyt sklepowy"
+    },
+    "voucherStatus": {
+      "draft": "Szkic",
+      "published": "Opublikowany",
+      "paused": "Wstrzymany",
+      "ended": "Zakończony",
+      "expired": "Wygasły"
+    },
+    "campaignStatus": {
+      "draft": "Szkic",
+      "active": "Aktywna",
+      "ended": "Zakończona"
+    },
+    "campaignType": {
+      "limited": "Oferta jednorazowa",
+      "weekly": "Oferta tygodniowa"
+    },
+    "campaignTypeHelp": {
+      "limited": "Trwa jednorazowo między datą rozpoczęcia a zakończenia, do wyczerpania zapasów.",
+      "weekly": "Cykliczna oferta tygodniowa, do której klienci mogą wracać co tydzień aż do daty zakończenia."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Przykładowa oferta · nie na sprzedaż",
+    "notOnSale": "Jeszcze niedostępna w sprzedaży",
+    "purchases": "{count, plural, one {# zakup} few {# zakupy} many {# zakupów} other {# zakupu}}",
+    "freeToClaim": "Do odebrania za darmo",
+    "onSaleNow": "W sprzedaży"
+  },
+  "account": {
+    "error": {
+      "title": "Coś poszło nie tak",
+      "fallback": "Wystąpił nieoczekiwany błąd.",
+      "retry": "Spróbuj ponownie"
+    },
+    "dashboard": {
+      "metaTitle": "Mój panel"
+    },
+    "cashback": {
+      "metaTitle": "Cashback i kredyty",
+      "title": "Cashback i kredyty",
+      "description": "Cały zdobyty przez Ciebie kredyt u wszystkich sprzedawców, u których robisz zakupy.",
+      "lockedPending": "Zablokowane (oczekujące)",
+      "used": "Wykorzystane",
+      "expiringTitle": "Wygasające w ciągu 30 dni",
+      "expiresOn": "{merchant} — wygasa {date}",
+      "expiresSoon": "{merchant} — wkrótce wygasa",
+      "byMerchant": "Według sprzedawcy",
+      "lastActivity": "Ostatnia aktywność: {date}",
+      "readyToSpend": "Do wykorzystania",
+      "viewMerchantWallet": "Zobacz portfel sprzedawcy →"
+    },
+    "nearby": {
+      "title": "Oferty w pobliżu",
+      "subtitle": "Znajdź okazje i kupony od sprzedawców w Twojej okolicy",
+      "useMyLocation": "Użyj mojej lokalizacji",
+      "approximateLocation": "Przybliżona lokalizacja (na podstawie IP)",
+      "searchRadius": "Promień wyszukiwania",
+      "yourLocation": "Twoja lokalizacja",
+      "mapLabel": "{count, plural, one {# sprzedawca} few {# sprzedawcy} many {# sprzedawców} other {# sprzedawcy}} w promieniu {radius} km",
+      "merchantsNearby": "{count, plural, one {# sprzedawca} few {# sprzedawcy} many {# sprzedawców} other {# sprzedawcy}} w pobliżu",
+      "activeVouchers": "{count, plural, one {# aktywny kupon} few {# aktywne kupony} many {# aktywnych kuponów} other {# aktywnego kuponu}}",
+      "emptyTitle": "Brak sprzedawców w pobliżu",
+      "emptyBody": "Zwiększ promień wyszukiwania lub zajrzyj później po nowe oferty w Twojej okolicy.",
+      "expandRadius": "Rozszerz do {radius} km",
+      "errors": {
+        "fetchFailed": "Nie udało się wczytać sprzedawców w pobliżu. Spróbuj ponownie.",
+        "geolocationUnsupported": "Twoja przeglądarka nie obsługuje geolokalizacji.",
+        "permissionDenied": "Odmówiono dostępu do lokalizacji. Włącz lokalizację w ustawieniach przeglądarki.",
+        "positionUnavailable": "Lokalizacja niedostępna. Spróbuj później.",
+        "timeout": "Przekroczono czas oczekiwania na lokalizację. Spróbuj ponownie.",
+        "locationFailed": "Nie udało się ustalić Twojej lokalizacji.",
+        "ipLocationFailed": "Nie udało się określić Twojej lokalizacji."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Ustawienia powiadomień"
+    },
+    "redeem": {
+      "notFound": "Nie znaleziono kuponu.",
+      "codeUnavailable": "Kod kuponu jest niedostępny.",
+      "backToWallet": "Wróć do portfela",
+      "back": "Wstecz"
+    },
+    "referrals": {
+      "metaTitle": "Moje polecenia",
+      "completedCount": "Zakończone: {count}"
+    },
+    "voucherDetail": {
+      "back": "Wstecz",
+      "merchantFallback": "Sprzedawca",
+      "termsTitle": "Regulamin",
+      "terms1": "Kupon jest ważny do daty wygaśnięcia podanej powyżej. Nie łączy się z innymi ofertami ani promocjami, chyba że zaznaczono inaczej.",
+      "terms2": "Kupon należy okazać przy zakupie. Nie ma wartości pieniężnej. Nie podlega wymianie na gotówkę ani zwrotowi.",
+      "terms3": "Sprzedawca zastrzega sobie prawo do odmowy realizacji, jeśli kupon wygląda na zduplikowany, zmieniony lub użyty w sposób nieuczciwy.",
+      "terms4": "W razie pytań lub problemów skontaktuj się bezpośrednio ze sprzedawcą."
+    },
+    "vouchers": {
+      "unknownMerchant": "Nieznany",
+      "paidAmount": "Zapłacono: {amount}",
+      "activeCount": "Aktywne ({count})",
+      "pastCount": "Archiwalne ({count})"
+    },
+    "voucherCard": {
+      "showQr": "Pokaż kod QR",
+      "close": "Zamknij",
+      "qrHint": "Pokaż ten kod QR sprzedawcy, aby zrealizować kupon w sklepie."
+    },
+    "wallet": {
+      "metaTitle": "Mój portfel"
+    },
+    "wishlist": {
+      "unknownItem": "Nieznana pozycja",
+      "merchant": "Sprzedawca",
+      "campaign": "Kampania",
+      "validUntil": "Ważny do {date}",
+      "alertOn": "Alert włączony",
+      "noAlert": "Bez alertu",
+      "view": "Zobacz"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Kampania niedostępna",
+      "metaDescriptionFallback": "Oferta od {merchant}.",
+      "breadcrumbLabel": "Ścieżka nawigacji",
+      "breadcrumbCampaigns": "Kampanie",
+      "demoNotice": "<strong>Przykładowa oferta.</strong> Ta strona pokazuje, jak oferta wygląda w GiftHub. Firma i oferta są przykładowe: niczego tutaj nie można kupić ani zrealizować.",
+      "verifiedPartner": "Zweryfikowany partner",
+      "aboutTitle": "O tej ofercie",
+      "descriptionFallback": "Oferta specjalna od sprzedawcy w GiftHub.",
+      "howItWorks": {
+        "title": "Jak to działa",
+        "claimTitle": "Odbierz kupon",
+        "buyTitle": "Kup kupon",
+        "buyText": "Zapłać bezpiecznie online lub odbierz go za darmo, jeśli oferta jest bezpłatna.",
+        "qrTitle": "Otrzymaj kod QR",
+        "qrText": "Kupon trafia do Twojego portfela GiftHub wraz z osobistym kodem QR.",
+        "showTitle": "Pokaż go na miejscu",
+        "showText": "{merchant} skanuje kod, a zniżka zostaje naliczona."
+      },
+      "termsTitle": "Warunki",
+      "voucherOptionsTitle": "Warianty kuponu",
+      "voucherFallbackTitle": "Kupon",
+      "viewVoucher": "Zobacz kupon",
+      "reviewsTitle": "Opinie",
+      "purchaseLabel": "Zakup",
+      "buyNow": "Kup teraz",
+      "getFreeVoucher": "Odbierz darmowy kupon",
+      "sampleOffer": "Przykładowa oferta",
+      "notOnSaleYet": "Jeszcze niedostępna w sprzedaży",
+      "demoNotForSale": "To przykładowa treść, więc nie można jej kupić.",
+      "noVoucherYet": "{merchant} nie opublikował jeszcze kuponu dla tej oferty. Zajrzyj później.",
+      "offerRuns": "Czas trwania oferty",
+      "bought": "Kupiono",
+      "boughtCount": "{count, plural, one {# raz} few {# razy} many {# razy} other {# razy}}",
+      "website": "Strona internetowa",
+      "allOffersFrom": "Wszystkie oferty: {merchant}",
+      "moreFrom": "Więcej od: {merchant}"
+    },
+    "list": {
+      "allCategories": "Wszystkie",
+      "badge": "Aktywny rynek kampanii",
+      "heroTitle": "Odkryj najgorętsze oferty w Europie",
+      "heroSubtitle": "Przeglądaj kupony, prezenty i doświadczenia wybrane od najlepszych sprzedawców na Twoim rynku.",
+      "searchLabel": "Szukaj kampanii",
+      "searchPlaceholder": "Szukaj kampanii, sprzedawców lub usług...",
+      "campaignCount": "{count, plural, one {<b>#</b> kampania} few {<b>#</b> kampanie} many {<b>#</b> kampanii} other {<b>#</b> kampanii}}",
+      "voucherCount": "{count, plural, one {<b>#</b> kupon w sprzedaży} few {<b>#</b> kupony w sprzedaży} many {<b>#</b> kuponów w sprzedaży} other {<b>#</b> kuponu w sprzedaży}}",
+      "merchantCount": "{count, plural, one {<b>#</b> sprzedawca} few {<b>#</b> sprzedawcy} many {<b>#</b> sprzedawców} other {<b>#</b> sprzedawcy}}",
+      "categoriesLabel": "Kategorie",
+      "unavailableTitle": "Kampanie chwilowo niedostępne",
+      "unavailableText": "Nie udało się połączyć z bazą danych. Spróbuj ponownie za chwilę.",
+      "emptyTitle": "Nie znaleziono ofert",
+      "emptyText": "Spróbuj innego wyszukiwania lub wybierz inną kategorię.",
+      "tryAgain": "Spróbuj ponownie",
+      "clearFilters": "Wyczyść filtry"
+    },
+    "listError": {
+      "title": "Nie udało się wczytać kampanii",
+      "fallbackMessage": "Podczas wczytywania kampanii wystąpił nieoczekiwany błąd.",
+      "tryAgain": "Spróbuj ponownie"
+    },
+    "filters": {
+      "sortBy": "Sortuj według",
+      "sort": {
+        "newest": "Najnowsze",
+        "oldest": "Najstarsze",
+        "priceLow": "Cena: od najniższej",
+        "priceHigh": "Cena: od najwyższej",
+        "popular": "Najpopularniejsze",
+        "expiring": "Wkrótce wygasające"
+      },
+      "merchant": "Sprzedawca",
+      "allMerchants": "Wszyscy sprzedawcy",
+      "minPrice": "Cena min.",
+      "minPricePlaceholder": "Min €",
+      "maxPrice": "Cena maks.",
+      "maxPricePlaceholder": "Maks. €"
+    },
+    "tenantList": {
+      "title": "Kupony",
+      "subtitle": "Aktywne oferty: {merchant}.",
+      "empty": "Brak dostępnych kuponów.",
+      "voucher": "Kupon",
+      "viewVoucher": "Zobacz kupon"
+    },
+    "deals": {
+      "metaTitle": "Okazje",
+      "metaDescription": "Odkryj najlepsze okazje na kupony"
+    },
+    "campaignShare": {
+      "share": "Udostępnij",
+      "copied": "Skopiowano",
+      "linkCopied": "Link skopiowany",
+      "copyFailed": "Nie udało się skopiować"
+    },
+    "shareSheet": {
+      "share": "Udostępnij",
+      "title": {
+        "voucher": "Udostępnij ten kupon",
+        "campaign": "Udostępnij tę kampanię",
+        "merchant": "Udostępnij tego sprzedawcę"
+      },
+      "close": "Zamknij",
+      "referralShareText": "{title} – Udostępnij i odbierz 10% zwrotu!",
+      "referralNote": "<b>Udostępnij i zarób 10%</b>, gdy Twoi znajomi zrealizują kupon!",
+      "targets": {
+        "email": "E-mail",
+        "copy": "Kopiuj link"
+      },
+      "copied": "Skopiowano!",
+      "linkCopiedToClipboard": "Link skopiowany do schowka!",
+      "linkCopied": "Link skopiowany!",
+      "shareLinkLabel": "Link do udostępnienia",
+      "copyLink": "Kopiuj link"
+    },
+    "wishlistButton": {
+      "add": "Dodaj do listy życzeń",
+      "remove": "Usuń z listy życzeń"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# gwiazdka} few {# gwiazdki} many {# gwiazdek} other {# gwiazdki}}"
+    },
+    "form": {
+      "title": "Napisz opinię",
+      "ratingLabel": "Ocena",
+      "titleLabel": "Tytuł (opcjonalnie)",
+      "titlePlaceholder": "Podsumuj swoje wrażenia",
+      "commentLabel": "Komentarz (opcjonalnie)",
+      "commentPlaceholder": "Podziel się swoimi wrażeniami...",
+      "submit": "Wyślij opinię",
+      "submitting": "Wysyłanie...",
+      "ratingRequired": "Wybierz ocenę",
+      "submitFailed": "Nie udało się wysłać opinii",
+      "alreadyReviewed": "Ta pozycja ma już Twoją opinię",
+      "signInRequired": "Zaloguj się, aby napisać opinię",
+      "thankYou": "Dziękujemy za opinię!",
+      "writeAnother": "Napisz kolejną opinię"
+    },
+    "list": {
+      "sort": {
+        "newest": "Najnowsze",
+        "highest": "Najwyżej oceniane",
+        "helpful": "Najbardziej pomocne"
+      },
+      "signInToReview": "Zaloguj się, aby napisać opinię",
+      "loadFailed": "Nie udało się wczytać opinii.",
+      "tryAgain": "Spróbuj ponownie",
+      "empty": "Brak opinii.",
+      "anonymous": "Anonim",
+      "verified": "Zweryfikowana",
+      "helpfulButton": "Pomocne ({count})",
+      "foundHelpful": "Pomocne dla: {count}",
+      "previous": "Poprzednia",
+      "next": "Następna",
+      "pageOf": "Strona {current} z {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Anuluj",
+      "saving": "Zapisywanie…",
+      "somethingWentWrong": "Coś poszło nie tak"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Brak uwierzytelnienia",
+      "unauthorized": "Brak uprawnień",
+      "tooManyAttempts": "Zbyt wiele prób",
+      "validationFailed": "Walidacja nie powiodła się",
+      "unexpected": "Wystąpił nieoczekiwany błąd",
+      "databaseFailed": "Operacja na bazie danych nie powiodła się",
+      "serviceUnavailable": "Usługa chwilowo niedostępna",
+      "newPasswordTooShort": "Nowe hasło musi mieć co najmniej 8 znaków",
+      "userNotFound": "Nie znaleziono użytkownika",
+      "currentPasswordRequired": "Obecne hasło jest wymagane",
+      "currentPasswordIncorrect": "Obecne hasło jest nieprawidłowe",
+      "deletionUnavailable": "Usuwanie konta jest chwilowo niedostępne. Skontaktuj się z pomocą techniczną.",
+      "totpAlreadyEnabledReconfigure": "2FA jest już włączone. Najpierw je wyłącz, aby skonfigurować ponownie.",
+      "sixDigitCodeRequired": "Wymagany jest 6-cyfrowy kod",
+      "totpSetupMissing": "Nie znaleziono konfiguracji TOTP. Najpierw rozpocznij proces konfiguracji.",
+      "totpAlreadyEnabled": "2FA jest już włączone",
+      "invalidSetupCode": "Nieprawidłowy kod. Sprawdź aplikację uwierzytelniającą i spróbuj ponownie.",
+      "verificationCodeRequired": "Wymagany jest kod weryfikacyjny",
+      "totpNotEnabled": "2FA nie jest obecnie włączone",
+      "invalidDisableCode": "Nieprawidłowy kod. Wpisz aktualny kod TOTP lub kod zapasowy.",
+      "passkeyOptionsFailed": "Nie udało się pobrać opcji rejestracji",
+      "passkeyGenerateOptionsFailed": "Nie udało się wygenerować opcji rejestracji",
+      "registrationFailed": "Rejestracja nie powiodła się",
+      "passkeyRegistrationFailed": "Rejestracja klucza dostępu nie powiodła się",
+      "passkeyChallengeExpired": "Wyzwanie wygasło lub nie istnieje",
+      "verificationFailed": "Weryfikacja nie powiodła się",
+      "passkeyVerifyFailed": "Nie udało się zweryfikować rejestracji"
+    },
+    "settings": {
+      "joinedOn": "Dołączono {date}",
+      "joinedRecently": "Dołączono niedawno"
+    },
+    "profileForm": {
+      "nameLabel": "Imię i nazwisko",
+      "namePlaceholder": "Twoje imię i nazwisko",
+      "emailLabel": "E-mail",
+      "emailLocked": "Adresu e-mail nie można zmienić",
+      "save": "Zapisz zmiany",
+      "updated": "Profil zaktualizowany",
+      "nameRequired": "Imię i nazwisko jest wymagane",
+      "updateFailed": "Nie udało się zaktualizować profilu"
+    },
+    "passwordForm": {
+      "currentLabel": "Obecne hasło",
+      "newLabel": "Nowe hasło",
+      "setLabel": "Ustaw hasło",
+      "confirmLabel": "Potwierdź hasło",
+      "showPassword": "Pokaż hasło",
+      "hidePassword": "Ukryj hasło",
+      "change": "Zmień hasło",
+      "set": "Ustaw hasło",
+      "updated": "Hasło zostało zaktualizowane",
+      "tooShort": "Hasło musi mieć co najmniej {min} znaków",
+      "mismatch": "Hasła nie są zgodne",
+      "changeFailed": "Nie udało się zmienić hasła"
+    },
+    "deleteDialog": {
+      "trigger": "Usuń konto",
+      "title": "Usunąć Twoje konto?",
+      "description": "Tej operacji nie można cofnąć. Twój profil, sesje i ustawienia powiadomień zostaną usunięte. Historia zakupów zostanie zanonimizowana.",
+      "typeToConfirm": "Wpisz <strong>{word}</strong>, aby potwierdzić:",
+      "confirm": "Usuń trwale",
+      "deleting": "Usuwanie…",
+      "failed": "Nie udało się usunąć konta"
+    },
+    "passkeys": {
+      "title": "Klucze dostępu",
+      "description": "Loguj się bez hasła za pomocą odcisku palca, rozpoznawania twarzy lub kodu PIN urządzenia.",
+      "add": "Dodaj klucz dostępu",
+      "namePlaceholder": "np. „MacBook Touch ID”",
+      "addSubmit": "Dodaj",
+      "adding": "Dodawanie…",
+      "unsupported": "Ta przeglądarka nie obsługuje kluczy dostępu. Użyj aktualnej wersji Chrome, Safari lub Edge.",
+      "empty": "Brak kluczy dostępu. Dodaj klucz, aby logować się bez hasła.",
+      "devicePasskey": "Klucz dostępu urządzenia",
+      "passkey": "Klucz dostępu",
+      "added": "Dodano {date}",
+      "lastUsed": "Ostatnio użyty {date}",
+      "synced": "Synchronizowany",
+      "removeConfirm": "Usunąć?",
+      "remove": "Usuń",
+      "removeLabel": "Usuń klucz dostępu",
+      "loadFailed": "Nie udało się wczytać kluczy dostępu",
+      "removeFailed": "Nie udało się usunąć klucza dostępu"
+    },
+    "security": {
+      "title": "Bezpieczeństwo",
+      "description": "Zarządzaj uwierzytelnianiem dwuskładnikowym i ustawieniami bezpieczeństwa",
+      "loading": "Wczytywanie...",
+      "backToSettings": "Wróć do ustawień",
+      "enabledMessage": "Uwierzytelnianie dwuskładnikowe jest teraz włączone!",
+      "disabledMessage": "Uwierzytelnianie dwuskładnikowe zostało wyłączone",
+      "errors": {
+        "statusLoadFailed": "Nie udało się wczytać stanu uwierzytelniania dwuskładnikowego",
+        "setupFailed": "Nie udało się rozpocząć konfiguracji",
+        "verifyFailed": "Weryfikacja nie powiodła się",
+        "disableFailed": "Nie udało się wyłączyć 2FA"
+      },
+      "status": {
+        "title": "Uwierzytelnianie dwuskładnikowe",
+        "enabledBody": "Twoje konto jest chronione aplikacją uwierzytelniającą.",
+        "disabledBody": "Dodaj dodatkową warstwę ochrony konta, wymagając kodu z aplikacji uwierzytelniającej.",
+        "enabled": "Włączone",
+        "notEnabled": "Wyłączone"
+      },
+      "setup": {
+        "title": "Skonfiguruj aplikację uwierzytelniającą",
+        "description": "Użyj aplikacji takiej jak Google Authenticator, Authy lub 1Password, aby generować kody weryfikacyjne.",
+        "enable": "Włącz 2FA"
+      },
+      "scan": {
+        "title": "Zeskanuj kod QR lub wpisz klucz ręcznie",
+        "qrAlt": "Zeskanuj ten kod QR aplikacją uwierzytelniającą",
+        "manualKey": "Lub wpisz ten klucz ręcznie:",
+        "copySecret": "Kopiuj klucz"
+      },
+      "verify": {
+        "title": "Wpisz kod weryfikacyjny",
+        "codeLabel": "6-cyfrowy kod z aplikacji",
+        "submit": "Zweryfikuj i włącz"
+      },
+      "backupCodes": {
+        "title": "Zapisz kody zapasowe",
+        "description": "Przechowuj te kody w bezpiecznym miejscu. Jeśli stracisz dostęp do aplikacji uwierzytelniającej, możesz zalogować się jednym z nich. Każdego kodu można użyć tylko raz.",
+        "copy": "Kopiuj kody",
+        "copied": "Skopiowano!",
+        "download": "Pobierz",
+        "done": "Gotowe"
+      },
+      "backupFile": {
+        "title": "GiftHub – kody zapasowe uwierzytelniania dwuskładnikowego",
+        "instructions": "Zapisz te kody w bezpiecznym miejscu. Każdego kodu można użyć tylko raz.",
+        "generated": "Wygenerowano: {date}"
+      },
+      "disable": {
+        "title": "Wyłącz uwierzytelnianie dwuskładnikowe",
+        "description": "Spowoduje to usunięcie dodatkowej warstwy ochrony z Twojego konta.",
+        "button": "Wyłącz 2FA",
+        "confirmTitle": "Potwierdź wyłączenie 2FA",
+        "confirmDescription": "Wpisz aktualny 6-cyfrowy kod z aplikacji uwierzytelniającej lub kod zapasowy.",
+        "codeLabel": "Kod weryfikacyjny",
+        "codePlaceholder": "000000 lub XXXX-XXXX",
+        "confirm": "Potwierdź wyłączenie"
+      },
+      "quickLinks": {
+        "title": "Szybkie linki bezpieczeństwa",
+        "sessions": "Zobacz aktywne sesje",
+        "changePassword": "Zmień hasło"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Płać za wyniki, nie za zasięg. Własna infrastruktura poleceń sprzedawcy: firmowe kupony i kredyt sklepowy."
+    },
+    "error": {
+      "unexpected": "Wystąpił nieoczekiwany błąd."
+    },
+    "hero": {
+      "badge": "Kupony i polecenia dla lokalnych firm",
+      "title": "Twoi klienci zdobywają <highlight>Twoich kolejnych klientów</highlight>",
+      "subtitle": "Twórz kampanie kuponowe. Twoi klienci je udostępniają, zdobywają kredyty i przyprowadzają znajomych. Śledź każde polecenie. Poznaj dokładny koszt pozyskania nowego klienta.",
+      "ctaMerchant": "Zacznij jako sprzedawca",
+      "ctaExplore": "Przeglądaj kampanie",
+      "noCardRequired": "Bez karty kredytowej",
+      "freeTrial": "{days} dni za darmo",
+      "cancelAnytime": "Rezygnacja w każdej chwili"
+    },
+    "stats": {
+      "activeCampaigns": "Aktywne kampanie",
+      "merchants": "Sprzedawcy",
+      "processedValue": "Przetworzona wartość"
+    },
+    "merchantsTitle": "Sprzedawcy na platformie",
+    "values": {
+      "referral": {
+        "title": "Silnik poleceń",
+        "description": "Twoi klienci udostępniają oferty i automatycznie przyprowadzają nowych klientów"
+      },
+      "vouchers": {
+        "title": "Kupony cyfrowe",
+        "description": "Twórz kampanie rabatowe z elastycznymi regułami w kilka minut"
+      },
+      "qr": {
+        "title": "Realizacja przez QR",
+        "description": "Skanuj i weryfikuj w sklepie samym telefonem. Bez dodatkowego sprzętu"
+      },
+      "analytics": {
+        "title": "Analityka w czasie rzeczywistym",
+        "description": "Zobacz dokładnie, ile kosztuje i ile zwraca każda kampania. Bez zgadywania"
+      }
+    },
+    "howItWorks": {
+      "title": "Jak to działa",
+      "subtitle": "Zacznij w kilka minut dzięki prostemu procesowi w trzech krokach",
+      "steps": {
+        "create": {
+          "title": "Utwórz kampanię",
+          "description": "Skonfiguruj kupon w 2 minuty: zniżka, okres ważności, maks. liczba użyć. Gotowe."
+        },
+        "share": {
+          "title": "Klienci go udostępniają",
+          "description": "Każdy kupujący dostaje link polecający. Udostępnia go, zdobywa kredyt i przyprowadza znajomych."
+        },
+        "grow": {
+          "title": "Obserwuj wzrost",
+          "description": "Śledź każdy łańcuch poleceń, sprawdzaj koszt pozyskania nowego klienta i mierz ROI."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Poznaj popularne kampanie",
+      "subtitle": "Odkrywaj kupony, okazje i doświadczenia w całej Europie",
+      "showing": "Wyświetlono {count, plural, one {# aktywną kampanię} few {# aktywne kampanie} many {# aktywnych kampanii} other {# aktywnej kampanii}}.",
+      "showingWithOnSale": "Wyświetlono {count, plural, one {# aktywną kampanię} few {# aktywne kampanie} many {# aktywnych kampanii} other {# aktywnej kampanii}} — w sprzedaży: {onSale}.",
+      "emptyTitle": "Brak aktywnych kampanii",
+      "emptyBody": "Oferty pojawią się tutaj, gdy tylko sprzedawcy je opublikują.",
+      "viewAll": "Zobacz wszystkie kampanie"
+    },
+    "pricing": {
+      "title": "Proste, przejrzyste ceny",
+      "subtitle": "Wybierz plan dopasowany do Twojej firmy. Rozliczenie roczne kosztuje tyle co 10 miesięcy.",
+      "billingPeriod": "Okres rozliczeniowy",
+      "monthly": "Miesięcznie",
+      "annual": "Rocznie",
+      "save": "Oszczędź 17%",
+      "mostPopular": "Najpopularniejszy",
+      "perMonth": "/mies.",
+      "perYear": "{price}/rok (2 miesiące gratis)",
+      "startTrial": "Rozpocznij darmowy okres próbny",
+      "footer": "Każdy plan obejmuje {days} dni okresu próbnego · {percent}% prowizji od sprzedaży kuponów · Rezygnacja w każdej chwili",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# kupon/mies.} few {# kupony/mies.} many {# kuponów/mies.} other {# kuponu/mies.}}",
+        "activeCampaigns": "{count, plural, one {# aktywna kampania} few {# aktywne kampanie} many {# aktywnych kampanii} other {# aktywnej kampanii}}",
+        "teamMembers": "{count, plural, one {# członek zespołu} few {# członków zespołu} many {# członków zespołu} other {# członka zespołu}}",
+        "qrRedemption": "Realizacja kodem QR",
+        "basicAnalytics": "Podstawowa analityka",
+        "advancedAnalytics": "Zaawansowana analityka",
+        "customDomain": "Własna domena",
+        "promoBoosts": "Promocje wzmacniające (e-mail + push)",
+        "unlimitedVouchers": "Nielimitowane kupony",
+        "unlimitedCampaigns": "Nielimitowane kampanie",
+        "unlimitedTeamMembers": "Nielimitowani członkowie zespołu",
+        "everythingInPlan": "Wszystko z planu {plan}"
+      }
+    },
+    "calculator": {
+      "title": "Oblicz swój ROI",
+      "subtitle": "Przesuń suwaki, aby zobaczyć, ile możesz zarobić z GiftHub",
+      "monthlyPurchases": "Miesięczne zakupy kuponów",
+      "purchasesValue": "{count, plural, one {# zakup} few {# zakupy} many {# zakupów} other {# zakupu}}",
+      "averageTicket": "Średnia wartość zakupu",
+      "referralRate": "Konwersja poleceń",
+      "monthlyRevenue": "Miesięczny przychód",
+      "referralCustomers": "Nowi klienci z poleceń",
+      "perMonthValue": "{value}/mies.",
+      "referralRevenue": "Przychód z poleceń",
+      "estimatedRoi": "Szacowany ROI",
+      "platformCost": "Koszt platformy",
+      "platformCostValue": "Plan {plan}/mies. + {fees} opłat ({percent}%) = <strong>{total}/mies.</strong>",
+      "disclaimer": "Wyłącznie ilustracja oparta na wprowadzonych wartościach — nie prognoza."
+    },
+    "why": {
+      "title": "Dlaczego sprzedawcy kochają GiftHub",
+      "body": "Powiększaj bazę klientów i zwiększaj przychody — zachowując marże i własne relacje z klientami.",
+      "benefits": {
+        "referralEngine": "Wbudowany silnik poleceń w każdej kampanii",
+        "analytics": "Analityka w czasie rzeczywistym: koszt pozyskania, ROI",
+        "qr": "Realizacja przez QR — bez sprzętu POS",
+        "languages": "Dostępne w {count, plural, one {# języku} few {# językach} many {# językach} other {# języka}}",
+        "flatPlan": "Stały abonament miesięczny — bez udziału w przychodach jak w Groupon",
+        "ownData": "Dane klientów należą do Ciebie",
+        "fee": "{percent}% prowizji od sprzedaży kuponów, bez ukrytych kosztów"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "Przeciągnij, aby porównać",
+      "beforeTitle": "Z Groupon",
+      "afterTitle": "Z GiftHub",
+      "sliderLabel": "Porównaj {before} i {after}",
+      "before": {
+        "revenueShare": "Platforma zabiera dużą część przychodu",
+        "ownsRelationship": "Relacja z klientem należy do platformy",
+        "noDataAccess": "Brak dostępu do danych klientów",
+        "raceToBottom": "Wyścig na najniższe ceny",
+        "lostBrand": "Utrata tożsamości marki"
+      },
+      "after": {
+        "flatFee": "Stała opłata {minPrice}–{maxPrice}/mies. + {percent}% prowizji",
+        "ownData": "Wszystkie dane klientów należą do Ciebie",
+        "referralEngine": "Wbudowany silnik poleceń",
+        "yourBrand": "Twoja marka, Twoje zasady",
+        "roiAnalytics": "Analityka ROI w czasie rzeczywistym"
+      }
+    },
+    "faq": {
+      "title": "Najczęściej zadawane pytania",
+      "subtitle": "Wszystko, co musisz wiedzieć o GiftHub",
+      "items": {
+        "groupon": {
+          "question": "Czym to się różni od Groupon?",
+          "answer": "Serwisy z okazjami w stylu Groupon zwykle zatrzymują dużą część każdej sprzedaży i przejmują relację z klientem. My pobieramy stałą opłatę miesięczną (od {price}/mies.) plus {percent}% od sprzedaży kuponów. Zachowujesz swoich klientów, dane i marże."
+        },
+        "referral": {
+          "question": "Jak działa system poleceń?",
+          "answer": "Każdy klient, który kupi kupon, otrzymuje unikalny link polecający. Gdy go udostępni, a znajomy dokona zakupu, obaj zdobywają kredyt. Każdy łańcuch poleceń jest śledzony, więc dokładnie widzisz, jak trafiają do Ciebie nowi klienci."
+        },
+        "trial": {
+          "question": "Co się stanie po {days}-dniowym okresie próbnym?",
+          "answer": "Wybierasz plan ({starter}, {pro} lub {scale}). Jeśli nie wykupisz subskrypcji, opublikowane kupony pozostaną aktywne dla klientów, ale nie utworzysz nowych kampanii, dopóki jej nie wykupisz."
+        },
+        "qr": {
+          "question": "Czy do realizacji przez QR potrzebuję specjalnego sprzętu?",
+          "answer": "Nie. Twój personel otwiera mobilny skaner w przeglądarce dowolnego telefonu, skanuje kod QR klienta i gotowe. Bez pobierania aplikacji i bez integracji z POS."
+        },
+        "fee": {
+          "question": "Czym jest prowizja {percent}%?",
+          "answer": "Gdy klient kupuje kupon przez platformę, potrącamy {percent}% z wypłaty. Poza planem nie ma żadnych innych opłat platformy."
+        }
+      }
+    },
+    "cta": {
+      "title": "Przestań wynajmować klientów. Zbuduj własną armię.",
+      "body": "Utwórz pierwszą kampanię w kilka minut. Resztą zajmą się Twoi klienci. {days} dni za darmo.",
+      "getStarted": "Zacznij za darmo",
+      "browse": "Przeglądaj kampanie"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Demo kasy",
+      "subtitle": "Demonstracyjna strona płatności",
+      "creditBalance": "Saldo kredytu",
+      "availableAmount": "Dostępne: {amount}",
+      "lockedAmount": "Zablokowane: {amount}",
+      "orderSummary": "Podsumowanie zamówienia",
+      "orderAmount": "Kwota zamówienia",
+      "creditToApply": "Kredyt do zastosowania",
+      "maxAmount": "Maks.: {amount}",
+      "subtotal": "Suma częściowa",
+      "creditAppliedLine": "Zastosowany kredyt",
+      "total": "Razem",
+      "processing": "Przetwarzanie...",
+      "submit": "Zastosuj kredyt i złóż zamówienie",
+      "creditApplied": "Kredyt zastosowany! Suma zamówienia: {total}",
+      "errors": {
+        "missingAmounts": "Wpisz kwotę zamówienia i kwotę kredytu",
+        "applyFailed": "Nie udało się zastosować kredytu"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} – dostępne kupony",
+      "emptyTitle": "Brak dostępnych kuponów",
+      "emptyDescription": "Zajrzyj później po nowe kupony od {merchant}.",
+      "specialOffer": "Oferta specjalna",
+      "validUntil": "Ważny do {date}",
+      "viewAndShare": "Zobacz i udostępnij"
+    },
+    "wallet": {
+      "subtitle": "Portfel kredytowy",
+      "availableToUse": "Do wykorzystania",
+      "useCredit": "Użyj kredytu",
+      "noCreditToUse": "Brak kredytu do wykorzystania",
+      "locked": "Zablokowane",
+      "lockedDescription": "Odblokuje się po potwierdzeniu powiązanego zakupu.",
+      "historyTitle": "Historia kredytów",
+      "historyDescription": "Rejestr operacji: {merchant}",
+      "historyEmpty": "Brak historii kredytów.",
+      "expires": "Wygasa {date}",
+      "creditStatus": {
+        "locked": "zablokowany",
+        "available": "dostępny",
+        "used": "wykorzystany",
+        "expired": "wygasły",
+        "reversed": "cofnięty"
+      }
+    },
+    "error": {
+      "title": "Coś poszło nie tak",
+      "description": "Nie udało się wczytać portalu. Odśwież stronę lub spróbuj ponownie później.",
+      "backToPortal": "Wróć do portalu"
+    },
+    "payments": {
+      "voucherFallback": "Kupon",
+      "status": {
+        "pending": "oczekuje",
+        "paid": "opłacona",
+        "failed": "nieudana",
+        "refunded": "zwrócona"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "dostępny",
+        "sold": "sprzedany",
+        "used": "wykorzystany",
+        "cancelled": "anulowany",
+        "refunded": "zwrócony"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Coś poszło nie tak",
+      "description": "Podczas wczytywania tej strony wystąpił błąd."
+    },
+    "notFound": {
+      "metaTitle": "Nie znaleziono strony"
+    },
+    "header": {
+      "mainNavLabel": "Główna",
+      "signIn": "Zaloguj się"
+    },
+    "footer": {
+      "navLabel": "Stopka",
+      "copyright": "© {year} GiftHub. Stworzone w Europie."
+    },
+    "navLinks": {
+      "campaigns": "Kampanie",
+      "merchants": "Sprzedawcy",
+      "explore": "Odkrywaj",
+      "search": "Szukaj",
+      "faq": "FAQ",
+      "contact": "Kontakt",
+      "privacy": "Prywatność",
+      "terms": "Regulamin",
+      "home": "Strona główna",
+      "about": "O nas",
+      "vouchers": "Kupony",
+      "shop": "Sklep",
+      "rent": "Wynajem"
+    },
+    "chat": {
+      "openAssistant": "Otwórz automatycznego asystenta",
+      "closeAssistant": "Zamknij automatycznego asystenta",
+      "dialogLabel": "Automatyczny asystent GiftHub",
+      "title": "Asystent GiftHub",
+      "subtitle": "Automatyczny asystent",
+      "newChat": "Nowy czat",
+      "closeChat": "Zamknij czat",
+      "greeting": "Cześć!",
+      "intro": "Jestem automatycznym asystentem. Zapytaj o kupony, karty podarunkowe, bilety lub swoje konto.",
+      "inputLabel": "Wiadomość do automatycznego asystenta",
+      "placeholder": "Napisz wiadomość...",
+      "send": "Wyślij wiadomość",
+      "sendError": "Przepraszamy, nie udało się wysłać wiadomości. Spróbuj ponownie."
+    },
+    "cookies": {
+      "regionLabel": "Ustawienia plików cookie",
+      "intro": "Używamy plików cookie, aby ulepszać Twoje doświadczenia. Niezbędne pliki cookie są zawsze aktywne; Ty decydujesz, na które opcjonalne pozwalasz. <link>Polityka prywatności</link>",
+      "optionalLegend": "Opcjonalne pliki cookie",
+      "necessary": "Niezbędne",
+      "alwaysOn": "(zawsze włączone)",
+      "analytics": "Analityczne",
+      "marketing": "Marketingowe",
+      "preferences": "Preferencje",
+      "saveError": "Nie udało się zapisać wyboru. Spróbuj ponownie.",
+      "acceptAll": "Akceptuj wszystkie",
+      "declineOptional": "Odrzuć opcjonalne",
+      "customize": "Dostosuj",
+      "savePreferences": "Zapisz preferencje"
+    },
+    "currency": {
+      "selectLabel": "Wybierz walutę"
+    },
+    "language": {
+      "selectLabel": "Wybierz język",
+      "selectInterfaceLabel": "Wybierz język interfejsu ({language})",
+      "unknown": "nieznany",
+      "interfaceOnly": "Zmienia tylko teksty interfejsu",
+      "uiName": "{name} (UI)"
+    },
+    "country": {
+      "selectLabel": "Wybierz rynek ({country})",
+      "heading": "Wybierz rynek",
+      "description": "Zmienia tylko kraj, walutę i dane rynkowe",
+      "tip": "<strong>Wskazówka:</strong> Rynek filtruje dane i walutę. Język interfejsu ustawia się osobno."
+    },
+    "roleSwitcher": {
+      "myDashboard": "Mój panel",
+      "platformAdmin": "Administrator platformy",
+      "admin": "Administrator",
+      "staff": "Personel",
+      "switchContext": "Przełącz kontekst"
+    },
+    "legalEntity": {
+      "operator": "Operator",
+      "registeredAddress": "Adres siedziby",
+      "registryCode": "Numer rejestrowy",
+      "operatorPlaceholder": "[nazwa firmy do uzupełnienia]",
+      "addressPlaceholder": "[adres siedziby do uzupełnienia]",
+      "registryCodePlaceholder": "[numer rejestrowy do uzupełnienia]"
+    },
+    "theme": {
+      "dark": "Tryb ciemny",
+      "light": "Tryb jasny",
+      "system": "Motyw systemowy"
+    },
+    "voiceSearch": {
+      "start": "Rozpocznij wyszukiwanie głosowe",
+      "stop": "Zatrzymaj nasłuchiwanie",
+      "tooltip": "Wyszukiwanie głosowe",
+      "tapToStop": "Stuknij, aby zatrzymać"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Nie udało się wczytać katalogu",
+      "description": "Podczas wczytywania sprzedawców wystąpił nieoczekiwany błąd.",
+      "retry": "Spróbuj ponownie"
+    },
+    "hub": {
+      "metaTitle": "Sprzedawcy",
+      "metaDescription": "Lokalne firmy w GiftHub i ich aktualne oferty",
+      "title": "Lokalni sprzedawcy",
+      "subtitle": "Kawiarnie, salony, studia i nie tylko: zobacz, kto jest w GiftHub i co teraz oferuje.",
+      "loadError": "Nie udało się wczytać sprzedawców",
+      "loadErrorHint": "Spróbuj ponownie za chwilę.",
+      "retry": "Spróbuj ponownie",
+      "emptyTitle": "Brak sprzedawców",
+      "emptyHint": "Firmy pojawią się tutaj, gdy tylko dołączą.",
+      "joinCta": "Dołącz jako sprzedawca",
+      "noOffers": "Brak aktualnych ofert",
+      "offerCount": "{count, plural, one {# oferta} few {# oferty} many {# ofert} other {# oferty}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Nie znaleziono",
+      "metaDescription": "Przeglądaj kupony, kampanie i oferty: {name}",
+      "offerCount": "{count, plural, one {# oferta} few {# oferty} many {# ofert} other {# oferty}}",
+      "website": "Strona internetowa",
+      "contact": "Kontakt",
+      "sampleNotice": "<strong>Przykładowa firma.</strong> Ta strona pokazuje, jak sprzedawca wygląda w GiftHub. Jej oferty są przykładowe i nie można ich kupić.",
+      "offersHeading": "Oferty",
+      "noOffers": "Brak aktualnych ofert",
+      "noOffersHint": "Nowe oferty od {name} pojawią się tutaj.",
+      "browseOther": "Przeglądaj inne oferty",
+      "validUntil": "Ważny do {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Kampanie",
+      "mainNav": "Główna",
+      "signIn": "Zaloguj się"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Odkryj lokalnych sprzedawców",
+      "hubHeroSubtitle": "Przeglądaj kampanie, kupony, wynajem i sklepy sprzedawców w GiftHub.",
+      "tenantHeroSubtitle": "Produkty, wynajem i kupony w jednym miejscu.",
+      "browseCampaigns": "Przeglądaj kampanie",
+      "getStarted": "Zacznij",
+      "featuredMerchants": "Polecani sprzedawcy",
+      "noMerchants": "Brak sprzedawców.",
+      "visitNamed": "Odwiedź: {name}",
+      "visitMerchant": "Odwiedź sprzedawcę",
+      "featuredProducts": "Polecane produkty",
+      "noProducts": "Brak dostępnych produktów.",
+      "rentalHighlights": "Wyróżnione do wynajęcia",
+      "noRentals": "Brak ofert wynajmu.",
+      "perDay": "{price} / dzień",
+      "activeVouchers": "Aktywne kupony",
+      "noStandaloneVouchers": "Brak tu teraz samodzielnych kuponów — <link>przeglądaj {count, plural, one {# aktywną kampanię} few {# aktywne kampanie} many {# aktywnych kampanii} other {# aktywnej kampanii}}</link>.",
+      "noVouchers": "Brak dostępnych kuponów.",
+      "voucher": "Kupon",
+      "viewVoucher": "Zobacz kupon",
+      "stats": {
+        "campaigns": "Kampanie",
+        "vouchers": "Kupony",
+        "products": "Produkty",
+        "rentals": "Wynajem"
+      },
+      "statsUnavailable": "Statystyki niedostępne."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Sklep",
+      "subtitle": "Przeglądaj produkty i dodawaj je do koszyka."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Utworzono intencję płatności",
+      "intentCreatedDescription": "Intencja {id} na kwotę {amount}",
+      "checkoutErrorTitle": "Błąd płatności",
+      "checkoutErrorDescription": "Nie udało się utworzyć intencji płatności.",
+      "empty": "Brak dostępnych produktów.",
+      "productHighlight": "Wyróżniony produkt",
+      "add": "Dodaj",
+      "cart": "Koszyk",
+      "cartEmpty": "Koszyk jest pusty.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Usuń",
+      "total": "Razem",
+      "creatingIntent": "Tworzenie intencji...",
+      "checkoutIntent": "Intencja płatności"
+    },
+    "rentPage": {
+      "metaTitle": "Wypożyczalnia",
+      "metaDescription": "Przeglądaj przedmioty do wypożyczenia",
+      "title": "Wynajem",
+      "subtitle": "Wybierz daty i poproś o wycenę wynajmu."
+    },
+    "rentClient": {
+      "selectDatesError": "Wybierz daty wynajmu.",
+      "bookingFailed": "Rezerwacja nie powiodła się",
+      "bookingCreated": "Utworzono prośbę o rezerwację: {name}. Razem: {total}.",
+      "bookingSubmitted": "Rezerwacja wysłana",
+      "bookingCreateFailed": "Nie udało się utworzyć rezerwacji.",
+      "bookingCancelled": "Rezerwacja anulowana.",
+      "cancelFailed": "Nie udało się anulować rezerwacji.",
+      "datesHeading": "Daty wynajmu",
+      "startDate": "Data rozpoczęcia",
+      "endDate": "Data zakończenia",
+      "daysSelected": "{count, plural, one {Wybrano # dzień wynajmu.} few {Wybrano # dni wynajmu.} many {Wybrano # dni wynajmu.} other {Wybrano # dnia wynajmu.}}",
+      "selectDatesHint": "Wybierz daty, aby obliczyć cenę.",
+      "empty": "Brak ofert wynajmu.",
+      "rentalHighlight": "Wyróżniony wynajem",
+      "perDay": "{price} / dzień",
+      "weeklyRate": "Tygodniowo: {price}",
+      "select": "Wybierz",
+      "selectedHeading": "Wybrany wynajem",
+      "estimatedTotal": "Szacowana suma",
+      "notesLabel": "Uwagi (opcjonalnie)",
+      "notesPlaceholder": "Specjalne życzenia...",
+      "submitting": "Wysyłanie rezerwacji...",
+      "requestBooking": "Poproś o rezerwację",
+      "myBookings": "Moje rezerwacje",
+      "noBookings": "Brak rezerwacji. Wybierz przedmiot powyżej, aby zacząć.",
+      "bookingRange": "{start} - {end} ({days, plural, one {# dzień} few {# dni} many {# dni} other {# dnia}})",
+      "bookingTotal": "Razem: {total}",
+      "rejectionReason": "Powód: {reason}",
+      "cancelling": "Anulowanie...",
+      "cancel": "Anuluj",
+      "status": {
+        "pending": "oczekuje",
+        "approved": "zatwierdzona",
+        "rejected": "odrzucona",
+        "paid": "opłacona",
+        "active": "aktywna",
+        "returned": "zwrócona",
+        "cancelled": "anulowana"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Pudełka subskrypcyjne",
+      "metaDescription": "Subskrybuj comiesięczne pudełka z wybranymi kuponami od ulubionych lokalnych sprzedawców — nowe oferty w każdym cyklu, rezygnacja w każdej chwili.",
+      "title": "Pudełka subskrypcyjne",
+      "subtitle": "Otrzymuj regularnie wybrane kupony od najlepszych sprzedawców.",
+      "empty": "Brak dostępnych pudełek subskrypcyjnych. Zajrzyj wkrótce!",
+      "byMerchant": "od {name}",
+      "perInterval": "/{interval}",
+      "details": "Szczegóły",
+      "subscribe": "Subskrybuj",
+      "subscribedTitle": "Zasubskrybowano",
+      "subscribedMessage": "Subskrypcja jest aktywna. Szczegóły znajdziesz w e-mailu.",
+      "subscribeFailed": "Nie udało się zasubskrybować. Spróbuj ponownie.",
+      "notFoundTitle": "Nie znaleziono pudełka",
+      "notFoundHint": "To pudełko subskrypcyjne jest niedostępne.",
+      "browseAll": "← Przeglądaj wszystkie pudełka",
+      "backToAll": "← Wszystkie pudełka subskrypcyjne",
+      "subscriberCount": "{count, plural, one {# subskrybent} few {# subskrybentów} many {# subskrybentów} other {# subskrybenta}}",
+      "whatsInside": "Co jest w środku",
+      "curatingNext": "Do {count, plural, one {# wybranego kuponu} few {# wybranych kuponów} many {# wybranych kuponów} other {# wybranego kuponu}} co {period}. Trwa kompletowanie kolejnej dostawy.",
+      "percentVoucher": "Kupon -{value}%",
+      "amountVoucher": "Kupon na {amount}",
+      "curatedVoucher": "Wybrany kupon",
+      "subscribing": "Subskrybowanie…",
+      "subscribeWithPrice": "Subskrybuj — {price}/{interval}",
+      "interval": {
+        "weekly": "tydzień",
+        "monthly": "miesiąc",
+        "quarterly": "kwartał"
+      },
+      "intervalEach": {
+        "weekly": "tydzień",
+        "monthly": "miesiąc",
+        "quarterly": "kwartał"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Szukaj",
+    "metaDescription": "Wyszukuj aktywne kampanie i kupony sprzedawców w GiftHub.",
+    "loadingSearch": "Wczytywanie wyszukiwania",
+    "title": "Szukaj ofert",
+    "subtitle": "Znajdź kampanie i kupony sprzedawców w GiftHub",
+    "queryLabel": "Szukaj kampanii, kuponów i sprzedawców",
+    "queryPlaceholder": "Szukaj kampanii, kuponów, sprzedawców...",
+    "toggleFilters": "Pokaż/ukryj filtry",
+    "filtersTitle": "Filtry",
+    "closeFilters": "Zamknij filtry",
+    "error": "Wyszukiwanie jest teraz niedostępne. Spróbuj ponownie za chwilę.",
+    "campaignsHeading": "Kampanie",
+    "vouchersHeading": "Kupony",
+    "browseMarketplace": "Przeglądaj wszystko, co jest w sprzedaży, na <link>rynku kampanii</link>.",
+    "campaignEnds": "Kończy się {date}",
+    "filters": {
+      "title": "Filtry",
+      "clearAll": "Wyczyść wszystko",
+      "category": "Kategoria",
+      "discountType": "Rodzaj zniżki",
+      "minDiscount": "Min. zniżka",
+      "minDiscountAria": "Minimalna zniżka",
+      "maxPrice": "Maks. cena",
+      "maxPriceAria": "Maksymalna cena w euro",
+      "any": "Dowolna",
+      "sortBy": "Sortuj według",
+      "types": {
+        "all": "Wszystkie typy",
+        "percentage": "Zniżka procentowa",
+        "fixed_amount": "Stała kwota",
+        "credit_amount": "Kredyt sklepowy"
+      },
+      "sort": {
+        "newest": "Od najnowszych",
+        "popular": "Najpopularniejsze",
+        "expiring": "Wkrótce wygasające"
+      }
+    },
+    "results": {
+      "chipCategory": "Kategoria: {value}",
+      "chipType": "Typ: {value}",
+      "chipMinDiscount": "Min. {value}% zniżki",
+      "chipMaxPrice": "Maks. €{value}",
+      "chipSort": "Sortowanie: {value}",
+      "removeFilter": "Usuń filtr {label}",
+      "searching": "Wyszukiwanie...",
+      "count": "{total, plural, one {<num>#</num> wynik} few {<num>#</num> wyniki} many {<num>#</num> wyników} other {<num>#</num> wyniku}}",
+      "countForQuery": "{total, plural, one {<num>#</num> wynik dla „<hl>{query}</hl>”} few {<num>#</num> wyniki dla „<hl>{query}</hl>”} many {<num>#</num> wyników dla „<hl>{query}</hl>”} other {<num>#</num> wyniku dla „<hl>{query}</hl>”}}",
+      "flash": "Błyskawiczna",
+      "voucherFallback": "Kupon",
+      "expires": "Wygasa {date}",
+      "redeemed": "Zrealizowano: {count}",
+      "noResultsTitle": "Brak wyników",
+      "noResultsQuery": "Żaden kupon nie pasuje do „{query}”. Spróbuj zmienić filtry.",
+      "noResultsHint": "Wyszukaj konkretny kupon, sprzedawcę lub kategorię."
+    }
+  },
+  "faq": {
+    "metaTitle": "Najczęściej zadawane pytania",
+    "metaDescription": "Odpowiedzi na częste pytania o kupowanie, realizację i zarządzanie kuponami oraz kartami podarunkowymi — płatności, zwroty, ważność i wsparcie sprzedawców.",
+    "title": "Najczęściej zadawane pytania",
+    "subtitle": "Znajdź odpowiedzi na częste pytania o naszą platformę.",
+    "categories": {
+      "general": "Ogólne",
+      "purchasing": "Zakupy i płatności",
+      "vouchers": "Kupony i realizacja",
+      "account": "Konto i bezpieczeństwo",
+      "merchants": "Dla sprzedawców",
+      "loyalty": "Lojalność i nagrody"
+    },
+    "items": {
+      "whatIs": {
+        "q": "Czym jest GiftHub?",
+        "a": "GiftHub to rynek cyfrowych kuponów, kart podarunkowych i biletów na wydarzenia, który łączy sprzedawców z klientami. Sprzedawcy tworzą i sprzedają produkty cyfrowe, a klienci mogą je kupować, podarować i realizować."
+      },
+      "isFree": {
+        "q": "Czy korzystanie z platformy jest bezpłatne?",
+        "a": "Przeglądanie i założenie konta są bezpłatne. Klienci płacą tylko za kupowane produkty. Sprzedawcy płacą miesięczny abonament oraz {fee}% prowizji od sprzedaży kuponów."
+      },
+      "countries": {
+        "q": "Które kraje są obsługiwane?",
+        "a": "Obsługujemy sprzedawców i klientów w całej UE — waluty: {currencies}, języki: {languages}."
+      },
+      "howToBuy": {
+        "q": "Jak kupić kupon?",
+        "a": "Przeglądaj dostępne kupony, kliknij „Kup” i dokończ płatność przez Stripe. Kupon pojawi się w Twoim portfelu zaraz po zapłacie."
+      },
+      "paymentMethods": {
+        "q": "Jakie metody płatności są akceptowane?",
+        "a": "Płatności są bezpiecznie obsługiwane przez Stripe. Dostępne metody płatności zobaczysz przy kasie."
+      },
+      "refund": {
+        "q": "Czy mogę otrzymać zwrot pieniędzy?",
+        "a": "Zasady zwrotów ustala każdy sprzedawca. Przed zakupem sprawdź zasady zwrotu na stronie szczegółów kuponu."
+      },
+      "howToRedeem": {
+        "q": "Jak zrealizować kupon?",
+        "a": "Otwórz portfel, wybierz kupon i pokaż kod QR sprzedawcy. Sprzedawca zeskanuje go, aby potwierdzić realizację. Możesz też zrealizować kupon, wpisując kod ręcznie."
+      },
+      "expiry": {
+        "q": "Co się dzieje, gdy kupon wygaśnie?",
+        "a": "Wygasłych kuponów nie można zrealizować. Przed wygaśnięciem otrzymasz powiadomienie. Daty ważności sprawdzisz w portfelu."
+      },
+      "gift": {
+        "q": "Czy mogę podarować komuś kupon?",
+        "a": "Tak! Przy zakupie wybierz „Wyślij jako prezent” i podaj e-mail odbiorcy. Otrzyma on kupon wraz ze spersonalizowaną wiadomością."
+      },
+      "twoFactor": {
+        "q": "Jak włączyć uwierzytelnianie dwuskładnikowe?",
+        "a": "Przejdź do Ustawienia → Bezpieczeństwo → Uwierzytelnianie dwuskładnikowe. Możesz skonfigurować TOTP (Google Authenticator) lub użyć klucza dostępu (biometria)."
+      },
+      "biometrics": {
+        "q": "Czy mogę logować się biometrycznie?",
+        "a": "Tak! Obsługujemy klucze dostępu — loguj się za pomocą Face ID, odcisku palca lub Windows Hello. Skonfigurujesz to w Ustawienia → Bezpieczeństwo."
+      },
+      "deleteAccount": {
+        "q": "Jak usunąć konto?",
+        "a": "Przejdź do Ustawienia → Prywatność → Usuń konto. Zgodnie z naszą polityką RODO wszystkie Twoje dane zostaną usunięte w ciągu 30 dni. Wcześniej możesz je wyeksportować."
+      },
+      "startSelling": {
+        "q": "Jak zacząć sprzedawać?",
+        "a": "Zarejestruj się jako sprzedawca, przejdź proces wdrożenia i utwórz pierwszy kupon. Sprzedaż możesz rozpocząć zaraz po zatwierdzeniu profilu."
+      },
+      "fees": {
+        "q": "Jakie są opłaty platformy?",
+        "a": "Po {trialDays}-dniowym bezpłatnym okresie próbnym plany kosztują miesięcznie: {starter} {starterPrice}, {pro} {proPrice} lub {scale} {scalePrice} (rozliczenie roczne: 2 miesiące gratis), plus {fee}% prowizji od sprzedaży kuponów, potrącanej z wypłaty."
+      },
+      "integrations": {
+        "q": "Czy mogę zintegrować platformę z moimi systemami?",
+        "a": "Tak! Oferujemy webhooki (powiadomienia o zdarzeniach w czasie rzeczywistym), klucze API (dostęp programowy) oraz integracje z Zapier/Slack/Discord."
+      },
+      "trackSales": {
+        "q": "Jak śledzić sprzedaż?",
+        "a": "Panel sprzedawcy pokazuje analitykę w czasie rzeczywistym, w tym przychody, realizacje, informacje o klientach i zapytania w języku naturalnym wspierane przez AI („pokaż przychód z zeszłego tygodnia”)."
+      },
+      "loyalty": {
+        "q": "Jak działa program lojalnościowy?",
+        "a": "Zdobywaj punkty za zakupy, codzienne meldowanie się, polecenia i pisanie opinii. Punkty odblokowują kolejne poziomy (Brąz → Srebro → Złoto → Platyna → Diament) z coraz większymi korzyściami."
+      },
+      "badges": {
+        "q": "Czym są odznaki i serie?",
+        "a": "Odznaki to osiągnięcia zdobywane za kamienie milowe (pierwszy zakup, 10 poleceń itp.). Serie śledzą kolejne dni aktywności i nagradzają regularność."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Kontakt",
+    "metaDescription": "Skontaktuj się z zespołem GiftHub — pytania o kupony, wdrożenie sprzedawcy, rozliczenia lub współpracę partnerską.",
+    "title": "Kontakt",
+    "subtitle": "Masz pytanie? Chętnie Ci pomożemy.",
+    "email": "E-mail",
+    "assistantTitle": "Automatyczny asystent",
+    "assistantText": "Szybkie odpowiedzi o kuponach i koncie pod przyciskiem czatu w rogu. To automat, nie człowiek.",
+    "name": "Imię i nazwisko",
+    "subject": "Temat",
+    "message": "Wiadomość",
+    "sent": "Wiadomość wysłana! Wkrótce się odezwiemy.",
+    "unavailableWithEmail": "Formularz kontaktowy jest teraz niedostępny. Napisz do nas na {email}.",
+    "unavailable": "Formularz kontaktowy jest teraz niedostępny. Spróbuj ponownie później.",
+    "error": "Nie udało się wysłać. Spróbuj ponownie za chwilę.",
+    "sending": "Wysyłanie...",
+    "send": "Wyślij wiadomość"
+  },
+  "leaderboardPage": {
+    "metaTitle": "Najlepsi sprzedawcy",
+    "metaDescription": "Sprzedawcy z największą liczbą zrealizowanych kuponów w GiftHub w ostatnich 30 dniach",
+    "title": "Najlepsi sprzedawcy",
+    "subtitle": "Najwięcej realizacji kuponów w ostatnich 30 dniach",
+    "rank": "Miejsce {rank}",
+    "redemptions": "{count, plural, one {<num>#</num><label>realizacja</label>} few {<num>#</num><label>realizacje</label>} many {<num>#</num><label>realizacji</label>} other {<num>#</num><label>realizacji</label>}}",
+    "empty": "W ostatnich 30 dniach nie było jeszcze realizacji, więc nie ma rankingu do pokazania.",
+    "browseCampaigns": "Przeglądaj aktywne kampanie"
+  },
+  "ui": {
+    "close": "Zamknij",
+    "more": "Więcej",
+    "loading": "Wczytywanie...",
+    "breadcrumb": {
+      "label": "ścieżka nawigacji"
+    },
+    "pagination": {
+      "label": "paginacja",
+      "previousAria": "Przejdź do poprzedniej strony",
+      "previous": "Poprzednia",
+      "nextAria": "Przejdź do następnej strony",
+      "next": "Następna",
+      "morePages": "Więcej stron"
+    },
+    "toast": {
+      "dismiss": "Zamknij powiadomienie"
+    },
+    "calendar": {
+      "previousMonth": "Przejdź do poprzedniego miesiąca",
+      "nextMonth": "Przejdź do następnego miesiąca"
+    },
+    "datePicker": {
+      "placeholder": "Wybierz datę"
+    },
+    "combobox": {
+      "placeholder": "Wybierz opcję...",
+      "empty": "Nie znaleziono opcji.",
+      "search": "Szukaj..."
+    },
+    "searchInput": {
+      "clear": "Wyczyść wyszukiwanie"
+    },
+    "searchResults": {
+      "empty": "Brak wyników",
+      "noResultsFor": "Brak wyników dla „{query}”. Spróbuj innych słów kluczowych."
+    },
+    "commandPalette": {
+      "placeholder": "Szukaj...",
+      "noResults": "Brak wyników",
+      "toOpen": "aby otworzyć",
+      "other": "Inne",
+      "hostPlaceholder": "Dokąd chcesz przejść?",
+      "categories": {
+        "navigate": "Nawigacja",
+        "discover": "Odkrywaj",
+        "account": "Konto"
+      },
+      "items": {
+        "home": {
+          "label": "Strona główna",
+          "description": "Strona startowa"
+        },
+        "app": {
+          "label": "Mój panel",
+          "description": "Twoje kupony, portfel i aktywność"
+        },
+        "vouchers": {
+          "label": "Moje kupony"
+        },
+        "wallet": {
+          "label": "Portfel",
+          "description": "Salda kredytów"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "Przeglądaj i wysyłaj prezenty"
+        },
+        "campaigns": {
+          "label": "Kampanie",
+          "description": "Aktywne kampanie kuponowe"
+        },
+        "hub": {
+          "label": "Katalog sprzedawców",
+          "description": "Przeglądaj sprzedawców"
+        },
+        "deals": {
+          "label": "Okazje"
+        },
+        "settings": {
+          "label": "Ustawienia",
+          "description": "Konto i preferencje"
+        },
+        "admin": {
+          "label": "Administracja",
+          "description": "Administracja platformą"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Potwierdź",
+      "cancel": "Anuluj"
+    },
+    "dataTable": {
+      "noResults": "Brak wyników."
+    },
+    "fileUpload": {
+      "maxFiles": "Dozwolone maksymalnie {maxFiles, plural, one {# plik} few {# pliki} many {# plików} other {# pliku}}",
+      "tooLarge": "Pliki muszą być mniejsze niż {maxSize} MB",
+      "dropHere": "Upuść pliki tutaj",
+      "dragDrop": "Przeciągnij i upuść pliki tutaj",
+      "browseHint": "lub kliknij, aby wybrać (maks. {maxSize} MB na plik)",
+      "select": "Wybierz pliki",
+      "remove": "Usuń {name}"
+    },
+    "imageUpload": {
+      "notImage": "Prześlij plik graficzny",
+      "tooLarge": "Obraz musi być mniejszy niż {maxSize} MB",
+      "previewAlt": "Podgląd",
+      "remove": "Usuń obraz",
+      "dropHere": "Upuść obraz tutaj",
+      "upload": "Prześlij obraz",
+      "hint": "PNG, JPG, GIF do {maxSize} MB",
+      "select": "Wybierz obraz"
+    },
+    "statsCard": {
+      "open": "Otwórz"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% cashbacku"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Aktywny",
+        "redeemed": "Wykorzystany",
+        "expired": "Wygasły"
+      },
+      "redeem": "Zrealizuj",
+      "expires": "Wygasa {date}",
+      "merchantAlt": "Sprzedawca"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Logowanie",
+      "register": "Załóż konto",
+      "resetPassword": "Resetowanie hasła"
+    },
+    "error": {
+      "title": "Coś poszło nie tak",
+      "fallback": "Wystąpił nieoczekiwany błąd.",
+      "tryAgain": "Spróbuj ponownie"
+    },
+    "login": {
+      "welcome": "Witaj ponownie",
+      "subtitle": "Zaloguj się do konta GiftHub",
+      "tabMagic": "Kod e-mail",
+      "tabPassword": "Hasło",
+      "tabSocial": "Społecznościowe",
+      "tabPasskey": "Klucz dostępu",
+      "emailLabel": "Adres e-mail",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Hasło",
+      "sendCode": "Wyślij kod logowania",
+      "sending": "Wysyłanie…",
+      "signIn": "Zaloguj się",
+      "signingIn": "Logowanie…",
+      "otpTitle": "Sprawdź skrzynkę e-mail!",
+      "otpDesc": "Wysłaliśmy 6-cyfrowy kod na <b>{email}</b>",
+      "otpLabel": "Wpisz kod",
+      "verify": "Zweryfikuj kod",
+      "verifying": "Weryfikacja…",
+      "resend": "Wyślij kod ponownie",
+      "backToEmail": "Wstecz",
+      "orContinueWith": "Lub kontynuuj przez",
+      "continueWith": "Kontynuuj przez {provider}",
+      "errorWrongCode": "Nieprawidłowy lub wygasły kod. Spróbuj ponownie.",
+      "errorWrongPass": "Nieprawidłowy e-mail lub hasło.",
+      "errorGeneric": "Coś poszło nie tak. Spróbuj ponownie.",
+      "errorEmailUnavailable": "Logowanie przez e-mail jest teraz niedostępne — użyj hasła.",
+      "errorCredentialsSignin": "Błędny e-mail lub hasło.",
+      "errorAuthGeneric": "Logowanie nie powiodło się. Spróbuj ponownie.",
+      "backToHome": "Wróć na stronę główną",
+      "socialDesc": "Zaloguj się od razu przez wybrane konto",
+      "noAccount": "Nie masz jeszcze konta?",
+      "createAccount": "Załóż konto",
+      "noAccountSub": "Logowanie kodem dla nowego adresu e-mail tworzy konto.",
+      "registered": "Konto utworzone — zaloguj się adresem e-mail i hasłem.",
+      "magicDesc": "Wyślemy 6-cyfrowy kod na Twój e-mail. Hasło nie jest potrzebne.",
+      "passwordDesc": "Zaloguj się adresem e-mail i hasłem.",
+      "forgotPassword": "Nie pamiętasz hasła?",
+      "demo": "Konta demo",
+      "demoRole": {
+        "platformAdmin": "Administrator platformy",
+        "merchantAdmin": "Administrator sprzedawcy",
+        "merchantStaff": "Personel sprzedawcy",
+        "endUser": "Użytkownik końcowy"
+      },
+      "passkeyDesc": "Zaloguj się od razu odciskiem palca, twarzą lub kluczem bezpieczeństwa.",
+      "passkeyButton": "Zaloguj się kluczem dostępu",
+      "passkeyAuthenticating": "Uwierzytelnianie…"
+    },
+    "register": {
+      "backToHome": "Wróć na stronę główną",
+      "title": "Załóż konto",
+      "subtitle": "Zacznij odkrywać kupony i nimi zarządzać",
+      "nameLabel": "Imię i nazwisko",
+      "namePlaceholder": "Jan Kowalski",
+      "emailLabel": "Adres e-mail",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Hasło",
+      "passwordPlaceholder": "Min. 8 znaków",
+      "submit": "Załóż konto",
+      "submitting": "Tworzenie konta...",
+      "haveAccount": "Masz już konto?",
+      "signIn": "Zaloguj się",
+      "errorWeak": "Hasło jest zbyt słabe. Wybierz silniejsze hasło.",
+      "errorInvalid": "Nieprawidłowe dane.",
+      "errorFallback": "Coś poszło nie tak.",
+      "errorGeneric": "Coś poszło nie tak. Spróbuj ponownie."
+    },
+    "resetPassword": {
+      "title": "Zresetuj hasło",
+      "subtitle": "Wpisz poniżej nowe hasło",
+      "newPassword": "Nowe hasło",
+      "confirmPassword": "Potwierdź hasło",
+      "submit": "Ustaw nowe hasło",
+      "submitting": "Resetowanie…",
+      "success": "Hasło zresetowane!",
+      "successDesc": "Twoje hasło zostało zaktualizowane. Możesz się teraz zalogować.",
+      "goToLogin": "Przejdź do logowania",
+      "errorMismatch": "Hasła nie są zgodne",
+      "errorShort": "Hasło musi mieć co najmniej 8 znaków",
+      "errorWeak": "Hasło jest zbyt słabe. Wybierz silniejsze hasło.",
+      "errorExpired": "Ten link do resetowania jest nieprawidłowy lub wygasł.",
+      "forgotTitle": "Nie pamiętasz hasła?",
+      "forgotSubtitle": "Podaj e-mail, a wyślemy Ci link do resetowania hasła",
+      "emailLabel": "Adres e-mail",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Wyślij link resetujący",
+      "sending": "Wysyłanie…",
+      "linkSent": "Sprawdź skrzynkę e-mail!",
+      "linkSentDesc": "Jeśli istnieje konto z tym adresem e-mail, wysłaliśmy link do resetowania hasła.",
+      "backToLogin": "Wróć do logowania"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Witaj na pokładzie!",
+      "joined": "Dołączono do {orgName}. Przekierowywanie…",
+      "accepted": "Zaproszenie przyjęte. Przekierowywanie…",
+      "problemTitle": "Problem z zaproszeniem",
+      "errorNotAccepted": "Nie udało się przyjąć tego zaproszenia.",
+      "errorGeneric": "Coś poszło nie tak. Spróbuj ponownie.",
+      "goToOrgs": "Przejdź do swoich organizacji",
+      "invitedTitle": "Otrzymujesz zaproszenie",
+      "invitedDesc": "Przyjmij zaproszenie, aby dołączyć do organizacji. Może być konieczne wcześniejsze zalogowanie.",
+      "accepting": "Przyjmowanie…",
+      "accept": "Przyjmij zaproszenie"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Karty podarunkowe i prezenty",
+      "description": "Przeglądaj i kupuj cyfrowe karty podarunkowe od lokalnych sprzedawców. Wyślij przemyślany prezent w kilka sekund — dostarczany e-mailem, do realizacji w sklepie lub online."
+    },
+    "publicCard": {
+      "defaultHeadline": "Karta podarunkowa",
+      "imageAlt": "Karta podarunkowa",
+      "logoAlt": "Logo marki",
+      "merchant": "Sprzedawca: {name}",
+      "merchantFallback": "Sprzedawca",
+      "code": "Kod: {code}",
+      "validUntil": "Ważna do: {date}",
+      "noExpiry": "Bezterminowa",
+      "showQr": "Pokaż ten kod QR personelowi, aby zrealizować kartę podarunkową.",
+      "statusMessage": "Status karty podarunkowej: {status}.",
+      "status": {
+        "active": "aktywna",
+        "redeemed": "zrealizowana",
+        "expired": "wygasła",
+        "cancelled": "anulowana"
+      }
+    },
+    "purchase": {
+      "title": "Kup kartę podarunkową",
+      "loading": "Wczytywanie...",
+      "notAvailable": "Karta podarunkowa niedostępna",
+      "defaultHeadline": "Karta podarunkowa",
+      "imageAlt": "Karta podarunkowa",
+      "logoAlt": "Marka",
+      "fromMerchant": "od {merchant}",
+      "form": {
+        "recipientEmail": "E-mail odbiorcy (opcjonalnie)",
+        "recipientEmailPlaceholder": "Wyślij kartę podarunkową na ten adres",
+        "recipientName": "Imię odbiorcy",
+        "recipientNamePlaceholder": "Dla",
+        "senderName": "Twoje imię",
+        "senderNamePlaceholder": "Od",
+        "message": "Osobista wiadomość (opcjonalnie)",
+        "messagePlaceholder": "Dodaj osobistą wiadomość..."
+      },
+      "total": "Razem:",
+      "processing": "Przetwarzanie...",
+      "buy": "Kup kartę podarunkową",
+      "errors": {
+        "notFound": "Nie znaleziono karty podarunkowej lub nie jest dostępna w sprzedaży",
+        "loadFailed": "Nie udało się wczytać karty podarunkowej",
+        "purchaseFailed": "Zakup nie powiódł się",
+        "generic": "Coś poszło nie tak. Spróbuj ponownie."
+      }
+    },
+    "product": {
+      "notFound": "Nie znaleziono prezentu",
+      "backToHub": "Wróć do Gift Hub",
+      "imageAlt": "{title} {index}",
+      "featured": "Wyróżniony",
+      "lowStock": "Zostało tylko {count} szt.",
+      "buyNow": "Kup teraz",
+      "addToCart": "Dodaj do koszyka",
+      "saveToWishlist": "Zapisz na liście życzeń",
+      "removeFromWishlist": "Usuń z listy życzeń",
+      "share": "Udostępnij ten prezent",
+      "upsellsTitle": "Może Ci się spodobać"
+    },
+    "claim": {
+      "metaTitle": "Odbierz prezent",
+      "alreadyClaimedTitle": "Prezent już odebrany",
+      "alreadyClaimedBody": "Ten prezent został już odebrany.",
+      "expiredTitle": "Prezent wygasł",
+      "expiredBody": "Niestety ten link do prezentu wygasł.",
+      "title": "Masz prezent!",
+      "signedInHint": "Kliknij poniżej, aby dodać ten kupon do portfela.",
+      "signedOutHint": "Zaloguj się, aby odebrać ten kupon.",
+      "claimButton": "Odbierz prezent",
+      "signInButton": "Zaloguj się, aby odebrać"
+    },
+    "error": {
+      "title": "Nie udało się wczytać Gift Hub",
+      "fallback": "Podczas wczytywania prezentów wystąpił nieoczekiwany błąd.",
+      "retry": "Spróbuj ponownie"
+    },
+    "hub": {
+      "title": "Prezenty",
+      "subtitle": "Znajdź idealny prezent na każdą okazję",
+      "loadError": "Nie udało się wczytać prezentów",
+      "retry": "Spróbuj ponownie",
+      "emptyCatalog": {
+        "title": "Nie ma jeszcze żadnych prezentów",
+        "body": "W międzyczasie kupony od lokalnych sprzedawców też są świetnym prezentem."
+      },
+      "noMatches": "Żaden prezent nie pasuje do tych filtrów",
+      "clearFilters": "Wyczyść filtry",
+      "browseCampaigns": "Przeglądaj kampanie",
+      "allGifts": "Wszystkie prezenty",
+      "loadMore": "Wczytaj więcej"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Nie znaleziono karty podarunkowej",
+        "body": "Kod QR jest nieprawidłowy lub wygasł."
+      },
+      "notActive": {
+        "title": "Karta podarunkowa jeszcze nieaktywna",
+        "body": "Ta karta podarunkowa zacznie obowiązywać później."
+      },
+      "expired": {
+        "title": "Karta podarunkowa wygasła",
+        "body": "Ta karta podarunkowa nie jest już ważna."
+      },
+      "result": {
+        "title": "Karta podarunkowa zrealizowana",
+        "confirmed": "Realizacja potwierdzona.",
+        "alreadyRedeemedOrCancelled": "Ta karta podarunkowa została już zrealizowana lub anulowana.",
+        "alreadyRedeemedOrInvalid": "Ta karta podarunkowa została już zrealizowana lub jest nieważna."
+      }
+    },
+    "qr": {
+      "error": "Nie udało się wygenerować kodu QR",
+      "generating": "Generowanie kodu QR...",
+      "alt": "Kod QR"
+    },
+    "wizard": {
+      "title": "Wyszukiwarka prezentów AI",
+      "subtitle": "Opowiedz nam o odbiorcy, a znajdziemy idealny prezent",
+      "steps": {
+        "recipient": "Dla kogo jest prezent?",
+        "occasion": "Jaka to okazja?",
+        "budget": "Jaki masz budżet?"
+      },
+      "recipients": {
+        "partner": "Partner",
+        "friend": "Przyjaciel",
+        "parent": "Rodzic",
+        "colleague": "Współpracownik",
+        "child": "Dziecko",
+        "teacher": "Nauczyciel"
+      },
+      "occasions": {
+        "birthday": "Urodziny",
+        "christmas": "Boże Narodzenie",
+        "anniversary": "Rocznica",
+        "thankYou": "Podziękowanie",
+        "justBecause": "Bez okazji",
+        "graduation": "Ukończenie szkoły"
+      },
+      "summary": {
+        "for": "Dla: {recipient}",
+        "budget": "Budżet: {amount}"
+      },
+      "submit": "Znajdź idealne prezenty",
+      "error": "Nie udało się wygenerować rekomendacji. Spróbuj ponownie.",
+      "results": {
+        "found": "Znaleźliśmy dla Ciebie {count, plural, one {# prezent} few {# prezenty} many {# prezentów} other {# prezentu}}:",
+        "empty": "Nie znaleziono pasujących produktów. Spróbuj zmienić kryteria."
+      },
+      "startOver": "Zacznij od nowa"
+    },
+    "card": {
+      "featured": "Wyróżniony",
+      "save": "Zapisz",
+      "unsave": "Usuń z zapisanych",
+      "buyNow": "Kup teraz"
+    },
+    "feedSection": {
+      "viewAll": "Zobacz wszystkie"
+    },
+    "filters": {
+      "toggle": "Filtry",
+      "clear": "Wyczyść",
+      "occasion": "Okazja",
+      "persona": "Dla kogo?",
+      "budget": "Budżet",
+      "budgetUnder": "Poniżej {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Udostępniaj okazje i zdobywaj nagrody"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Wystąpił nieoczekiwany błąd."
+    },
+    "logoAlt": "Logo {name}",
+    "merchantFallback": "Sprzedawca",
+    "validUntil": "Ważny do {date}",
+    "validUntilWithLimit": "Ważny do {date} – dla {count, plural, one {pierwszego # użycia} few {pierwszych # użyć} many {pierwszych # użyć} other {pierwszych # użycia}}",
+    "offAtMerchant": "{value} taniej u {merchant}",
+    "fields": {
+      "event": "Wydarzenie",
+      "dateTime": "Data i godzina",
+      "location": "Miejsce",
+      "price": "Cena",
+      "status": "Status",
+      "attendee": "Uczestnik",
+      "usedAt": "Data użycia"
+    },
+    "ticketStatus": {
+      "available": "Dostępny",
+      "sold": "Sprzedany",
+      "used": "Wykorzystany",
+      "cancelled": "Anulowany",
+      "refunded": "Zwrócony"
+    },
+    "event": {
+      "notAvailable": "Bilety na to wydarzenie nie są dostępne w sprzedaży.",
+      "descriptionFallback": "Dołącz do nas na tym wyjątkowym wydarzeniu!",
+      "availableTickets": "Dostępne bilety",
+      "soldOut": "Wyprzedane",
+      "availableCount": "Dostępne: {count}",
+      "terms": "Regulamin",
+      "soldOutTitle": "To wydarzenie jest wyprzedane",
+      "soldOutDescription": "Wszystkie bilety zostały sprzedane."
+    },
+    "eventPurchase": {
+      "title": "Kup bilet",
+      "description": "Wybierz bilet i dokończ zakup",
+      "selectTicket": "Wybierz bilet",
+      "attendeeNameLabel": "Imię i nazwisko uczestnika (opcjonalnie)",
+      "attendeeNamePlaceholder": "Imię i nazwisko osoby uczestniczącej",
+      "attendeeEmailLabel": "E-mail uczestnika (opcjonalnie)",
+      "attendeeEmailPlaceholder": "E-mail do wysyłki biletu",
+      "total": "Razem",
+      "submit": "Kup bilet",
+      "noTickets": "Obecnie brak dostępnych biletów.",
+      "checkBackLater": "Zajrzyj później lub skontaktuj się z organizatorem wydarzenia.",
+      "selectTicketError": "Wybierz bilet",
+      "purchaseFailed": "Nie udało się kupić biletu"
+    },
+    "ticket": {
+      "noPermission": "Nie masz uprawnień do wyświetlenia tego biletu.",
+      "heading": "Bilet nr {number}",
+      "qrTitle": "Kod QR",
+      "qrDescription": "Pokaż ten kod QR przy wejściu na wydarzenie",
+      "qrAlt": "Kod QR biletu",
+      "qrUnavailable": "Kod QR niedostępny",
+      "ticketNumber": "Numer biletu: <strong>{number}</strong>",
+      "used": "Bilet został wykorzystany",
+      "detailsTitle": "Szczegóły biletu",
+      "detailsDescription": "Ważne informacje o Twoim bilecie",
+      "staffCanRedeem": "Jako personel sprzedawcy możesz zrealizować ten bilet na wydarzeniu."
+    },
+    "redeem": {
+      "notFoundTitle": "Nie znaleziono realizacji",
+      "notFoundDescription": "Kod QR jest nieprawidłowy lub wygasł.",
+      "title": "Kupon zrealizowany",
+      "alreadyRedeemed": "Ten kupon został już zrealizowany.",
+      "confirmed": "Realizacja potwierdzona."
+    },
+    "qrCheckout": {
+      "title": "Płatność QR",
+      "completeTitle": "Płatność zakończona",
+      "completeDescription": "Twój zakup został potwierdzony. Szczegóły znajdziesz w e-mailu.",
+      "payNow": "Zapłać teraz",
+      "confirming": "Potwierdzanie..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Nie znaleziono kuponu",
+      "notFoundDescription": "Nie udało się znaleźć szukanego kuponu.",
+      "descriptionFallback": "Ekskluzywna oferta kuponowa",
+      "shareText": "Sprawdź ten kupon od {merchant}",
+      "copyCode": "Kopiuj kod kuponu",
+      "qrAlt": "Kod QR kuponu {code}",
+      "print": "Drukuj kupon"
+    },
+    "referralPage": {
+      "voucherFrom": "Masz kupon od <highlight>{name}</highlight>",
+      "qrAlt": "Kod QR do realizacji kuponu {code}",
+      "offAtMerchantShared": "{value} taniej u {merchant} – od znajomego!"
+    },
+    "bnpl": {
+      "title": "Zapłać w ratach",
+      "description": "Podziel płatność {amount} na wygodne raty miesięczne.",
+      "perMonth": "/mies.",
+      "planNoInterest": "{months}x (0% odsetek)",
+      "planWithFee": "{months}x ({rate}% opłaty)",
+      "monthlyPayments": "{count, plural, one {# rata miesięczna} few {# raty miesięczne} many {# rat miesięcznych} other {# raty miesięcznej}}",
+      "total": "Razem: {amount}",
+      "noExtraCost": "Bez dodatkowych kosztów",
+      "payNow": "Zapłać teraz {amount}"
+    },
+    "qrPanel": {
+      "qrAlt": "Kod QR",
+      "generateFailed": "Nie udało się wygenerować kodu QR",
+      "placeholder": "Tutaj pojawi się kod QR",
+      "generating": "Generowanie kodu QR...",
+      "unavailable": "Kod QR niedostępny",
+      "hideCode": "Ukryj kod",
+      "showCode": "Pokaż kod",
+      "expires": "Wygasa {date}",
+      "refreshNote": "Kod odświeża się co 30 sekund"
+    },
+    "qrDownload": {
+      "success": "Kod QR pobrany!",
+      "failed": "Nie udało się pobrać kodu QR",
+      "downloading": "Pobieranie...",
+      "download": "Pobierz QR"
+    }
   }
 }

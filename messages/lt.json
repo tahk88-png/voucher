@@ -2121,9 +2121,486 @@
           "description": "Kreditų likučiai"
         },
         "gifts": {
-          "label": "Dovanų centras"
+          "label": "Dovanų centras",
+          "description": "Naršykite ir siųskite dovanas"
+        },
+        "campaigns": {
+          "label": "Kampanijos",
+          "description": "Aktyvios kuponų kampanijos"
+        },
+        "hub": {
+          "label": "Prekybininkų katalogas",
+          "description": "Naršyti prekybininkus"
+        },
+        "deals": {
+          "label": "Pasiūlymai"
+        },
+        "settings": {
+          "label": "Nustatymai",
+          "description": "Paskyra ir nuostatos"
+        },
+        "admin": {
+          "label": "Administravimas",
+          "description": "Platformos administravimas"
         }
       }
+    },
+    "confirmDialog": {
+      "confirm": "Patvirtinti",
+      "cancel": "Atšaukti"
+    },
+    "dataTable": {
+      "noResults": "Rezultatų nėra."
+    },
+    "fileUpload": {
+      "maxFiles": "Leidžiama daugiausia {maxFiles, plural, one {# failas} few {# failai} many {# failo} other {# failų}}",
+      "tooLarge": "Failai turi būti mažesni nei {maxSize} MB",
+      "dropHere": "Numeskite failus čia",
+      "dragDrop": "Nutempkite failus čia",
+      "browseHint": "arba spustelėkite ir pasirinkite (iki {maxSize} MB vienam failui)",
+      "select": "Pasirinkti failus",
+      "remove": "Pašalinti {name}"
+    },
+    "imageUpload": {
+      "notImage": "Įkelkite paveikslėlio failą",
+      "tooLarge": "Paveikslėlis turi būti mažesnis nei {maxSize} MB",
+      "previewAlt": "Peržiūra",
+      "remove": "Pašalinti paveikslėlį",
+      "dropHere": "Numeskite paveikslėlį čia",
+      "upload": "Įkelti paveikslėlį",
+      "hint": "PNG, JPG, GIF iki {maxSize} MB",
+      "select": "Pasirinkti paveikslėlį"
+    },
+    "statsCard": {
+      "open": "Atidaryti"
+    },
+    "cashbackBadge": {
+      "label": "{percent} % pinigų grąžinimas"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Aktyvus",
+        "redeemed": "Panaudotas",
+        "expired": "Nebegalioja"
+      },
+      "redeem": "Panaudoti",
+      "expires": "Galioja iki {date}",
+      "merchantAlt": "Prekybininkas"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Prisijungti",
+      "register": "Sukurti paskyrą",
+      "resetPassword": "Atkurti slaptažodį"
+    },
+    "error": {
+      "title": "Kažkas nutiko",
+      "fallback": "Įvyko netikėta klaida.",
+      "tryAgain": "Bandyti dar kartą"
+    },
+    "login": {
+      "welcome": "Sveiki sugrįžę",
+      "subtitle": "Prisijunkite prie savo GiftHub paskyros",
+      "tabMagic": "Vienkartinis kodas",
+      "tabPassword": "Slaptažodis",
+      "tabSocial": "Socialiniai tinklai",
+      "tabPasskey": "Prieigos raktas",
+      "emailLabel": "El. pašto adresas",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Slaptažodis",
+      "sendCode": "Siųsti prisijungimo kodą",
+      "sending": "Siunčiama…",
+      "signIn": "Prisijungti",
+      "signingIn": "Jungiamasi…",
+      "otpTitle": "Patikrinkite el. paštą!",
+      "otpDesc": "Išsiuntėme 6 skaitmenų kodą adresu <b>{email}</b>",
+      "otpLabel": "Įveskite kodą",
+      "verify": "Patvirtinti kodą",
+      "verifying": "Tikrinama…",
+      "resend": "Siųsti kodą iš naujo",
+      "backToEmail": "Atgal",
+      "orContinueWith": "Arba tęskite su",
+      "continueWith": "Tęsti su {provider}",
+      "errorWrongCode": "Kodas neteisingas arba nebegalioja. Bandykite dar kartą.",
+      "errorWrongPass": "Neteisingas el. pašto adresas arba slaptažodis.",
+      "errorGeneric": "Kažkas nutiko. Bandykite dar kartą.",
+      "errorEmailUnavailable": "Prisijungimas el. paštu šiuo metu negalimas – naudokite slaptažodį.",
+      "errorCredentialsSignin": "Neteisingas el. pašto adresas arba slaptažodis.",
+      "errorAuthGeneric": "Prisijungti nepavyko. Bandykite dar kartą.",
+      "backToHome": "Atgal į pradžią",
+      "socialDesc": "Prisijunkite akimirksniu su pageidaujama paskyra",
+      "noAccount": "Dar neturite paskyros?",
+      "createAccount": "Sukurti paskyrą",
+      "noAccountSub": "Prisijungus kodu su nauju el. pašto adresu, paskyra sukuriama automatiškai.",
+      "registered": "Paskyra sukurta – prisijunkite el. pašto adresu ir slaptažodžiu.",
+      "magicDesc": "Išsiųsime 6 skaitmenų kodą į jūsų el. paštą. Slaptažodžio nereikia.",
+      "passwordDesc": "Prisijunkite el. pašto adresu ir slaptažodžiu.",
+      "forgotPassword": "Pamiršote slaptažodį?",
+      "demo": "Demonstracinės paskyros",
+      "demoRole": {
+        "platformAdmin": "Platformos administratorius",
+        "merchantAdmin": "Prekybininko administratorius",
+        "merchantStaff": "Prekybininko darbuotojas",
+        "endUser": "Galutinis vartotojas"
+      },
+      "passkeyDesc": "Prisijunkite akimirksniu piršto atspaudu, veido atpažinimu arba saugos raktu.",
+      "passkeyButton": "Prisijungti prieigos raktu",
+      "passkeyAuthenticating": "Autentifikuojama…"
+    },
+    "register": {
+      "backToHome": "Atgal į pradžią",
+      "title": "Susikurkite paskyrą",
+      "subtitle": "Pradėkite atrasti ir valdyti kuponus",
+      "nameLabel": "Vardas ir pavardė",
+      "namePlaceholder": "Vardenis Pavardenis",
+      "emailLabel": "El. pašto adresas",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Slaptažodis",
+      "passwordPlaceholder": "Ne mažiau kaip 8 simboliai",
+      "submit": "Sukurti paskyrą",
+      "submitting": "Kuriama paskyra...",
+      "haveAccount": "Jau turite paskyrą?",
+      "signIn": "Prisijungti",
+      "errorWeak": "Slaptažodis per silpnas. Pasirinkite stipresnį slaptažodį.",
+      "errorInvalid": "Neteisingi duomenys.",
+      "errorFallback": "Kažkas nutiko.",
+      "errorGeneric": "Kažkas nutiko. Bandykite dar kartą."
+    },
+    "resetPassword": {
+      "title": "Atkurkite slaptažodį",
+      "subtitle": "Žemiau įveskite naują slaptažodį",
+      "newPassword": "Naujas slaptažodis",
+      "confirmPassword": "Pakartokite slaptažodį",
+      "submit": "Nustatyti naują slaptažodį",
+      "submitting": "Atkuriama…",
+      "success": "Slaptažodis atkurtas!",
+      "successDesc": "Jūsų slaptažodis atnaujintas. Dabar galite prisijungti.",
+      "goToLogin": "Eiti į prisijungimą",
+      "errorMismatch": "Slaptažodžiai nesutampa",
+      "errorShort": "Slaptažodis turi būti bent 8 simbolių",
+      "errorWeak": "Slaptažodis per silpnas. Pasirinkite stipresnį slaptažodį.",
+      "errorExpired": "Ši atkūrimo nuoroda neteisinga arba nebegalioja.",
+      "forgotTitle": "Pamiršote slaptažodį?",
+      "forgotSubtitle": "Įveskite el. pašto adresą ir atsiųsime atkūrimo nuorodą",
+      "emailLabel": "El. pašto adresas",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Siųsti atkūrimo nuorodą",
+      "sending": "Siunčiama…",
+      "linkSent": "Patikrinkite el. paštą!",
+      "linkSentDesc": "Jei paskyra su šiuo el. pašto adresu egzistuoja, išsiuntėme atkūrimo nuorodą.",
+      "backToLogin": "Atgal į prisijungimą"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Sveiki prisijungę!",
+      "joined": "Prisijungėte prie {orgName}. Nukreipiama…",
+      "accepted": "Kvietimas priimtas. Nukreipiama…",
+      "problemTitle": "Kvietimo problema",
+      "errorNotAccepted": "Šio kvietimo priimti nepavyko.",
+      "errorGeneric": "Kažkas nutiko. Bandykite dar kartą.",
+      "goToOrgs": "Eiti į jūsų organizacijas",
+      "invitedTitle": "Jus pakvietė",
+      "invitedDesc": "Priimkite kvietimą ir prisijunkite prie organizacijos. Gali tekti pirmiausia prisijungti prie paskyros.",
+      "accepting": "Priimama…",
+      "accept": "Priimti kvietimą"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Dovanų kortelės ir dovanos",
+      "description": "Naršykite ir pirkite skaitmenines vietos prekybininkų dovanų korteles. Išsiųskite apgalvotą dovaną per kelias sekundes – ji pristatoma el. paštu, panaudojama parduotuvėje arba internetu."
+    },
+    "publicCard": {
+      "defaultHeadline": "Dovanų kortelė",
+      "imageAlt": "Dovanų kortelė",
+      "logoAlt": "Prekės ženklo logotipas",
+      "merchant": "Prekybininkas: {name}",
+      "merchantFallback": "Prekybininkas",
+      "code": "Kodas: {code}",
+      "validUntil": "Galioja iki: {date}",
+      "noExpiry": "Neterminuota",
+      "showQr": "Parodykite šį QR kodą darbuotojui, kad panaudotumėte dovanų kortelę.",
+      "statusMessage": "Ši dovanų kortelė yra {status}.",
+      "status": {
+        "active": "aktyvi",
+        "redeemed": "panaudota",
+        "expired": "nebegaliojanti",
+        "cancelled": "atšaukta"
+      }
+    },
+    "purchase": {
+      "title": "Pirkti dovanų kortelę",
+      "loading": "Kraunama...",
+      "notAvailable": "Dovanų kortelė nepasiekiama",
+      "defaultHeadline": "Dovanų kortelė",
+      "imageAlt": "Dovanų kortelė",
+      "logoAlt": "Prekės ženklas",
+      "fromMerchant": "iš {merchant}",
+      "form": {
+        "recipientEmail": "Gavėjo el. paštas (neprivaloma)",
+        "recipientEmailPlaceholder": "Siųsti dovanų kortelę šiuo adresu",
+        "recipientName": "Gavėjo vardas",
+        "recipientNamePlaceholder": "Kam",
+        "senderName": "Jūsų vardas",
+        "senderNamePlaceholder": "Nuo",
+        "message": "Asmeninė žinutė (neprivaloma)",
+        "messagePlaceholder": "Pridėkite asmeninę žinutę..."
+      },
+      "total": "Iš viso:",
+      "processing": "Apdorojama...",
+      "buy": "Pirkti dovanų kortelę",
+      "errors": {
+        "notFound": "Dovanų kortelė nerasta arba jos negalima įsigyti",
+        "loadFailed": "Nepavyko įkelti dovanų kortelės",
+        "purchaseFailed": "Pirkimas nepavyko",
+        "generic": "Kažkas nutiko. Bandykite dar kartą."
+      }
+    },
+    "product": {
+      "notFound": "Dovana nerasta",
+      "backToHub": "Atgal į Dovanų centrą",
+      "imageAlt": "{title} {index}",
+      "featured": "Rekomenduojama",
+      "lowStock": "Liko tik {count} vnt.",
+      "buyNow": "Pirkti dabar",
+      "addToCart": "Į krepšelį",
+      "saveToWishlist": "Išsaugoti norų sąraše",
+      "removeFromWishlist": "Pašalinti iš norų sąrašo",
+      "share": "Dalintis šia dovana",
+      "upsellsTitle": "Jums taip pat gali patikti"
+    },
+    "claim": {
+      "metaTitle": "Atsiimkite dovaną",
+      "alreadyClaimedTitle": "Dovana jau atsiimta",
+      "alreadyClaimedBody": "Ši dovana jau atsiimta.",
+      "expiredTitle": "Dovana nebegalioja",
+      "expiredBody": "Atsiprašome, ši dovanos nuoroda nebegalioja.",
+      "title": "Jūs gavote dovaną!",
+      "signedInHint": "Spustelėkite žemiau, kad įtrauktumėte šį kuponą į savo piniginę.",
+      "signedOutHint": "Prisijunkite, kad atsiimtumėte šį kuponą.",
+      "claimButton": "Atsiimti dovaną",
+      "signInButton": "Prisijungti ir atsiimti"
+    },
+    "error": {
+      "title": "Nepavyko įkelti Dovanų centro",
+      "fallback": "Įkeliant dovanas įvyko netikėta klaida.",
+      "retry": "Bandyti dar kartą"
+    },
+    "hub": {
+      "title": "Dovanos",
+      "subtitle": "Raskite tobulą dovaną kiekvienai progai",
+      "loadError": "Nepavyko įkelti dovanų",
+      "retry": "Bandyti dar kartą",
+      "emptyCatalog": {
+        "title": "Dovanų dar nėra",
+        "body": "Kol kas puikia dovana gali tapti ir vietos prekybininkų kuponai."
+      },
+      "noMatches": "Pagal šiuos filtrus dovanų nerasta",
+      "clearFilters": "Išvalyti filtrus",
+      "browseCampaigns": "Naršyti kampanijas",
+      "allGifts": "Visos dovanos",
+      "loadMore": "Įkelti daugiau"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Dovanų kortelė nerasta",
+        "body": "QR kodas neteisingas arba nebegalioja."
+      },
+      "notActive": {
+        "title": "Dovanų kortelė dar neaktyvi",
+        "body": "Ši dovanų kortelė įsigalios vėliau."
+      },
+      "expired": {
+        "title": "Dovanų kortelė nebegalioja",
+        "body": "Ši dovanų kortelė nebegalioja."
+      },
+      "result": {
+        "title": "Dovanų kortelė panaudota",
+        "confirmed": "Panaudojimas sėkmingai patvirtintas.",
+        "alreadyRedeemedOrCancelled": "Ši dovanų kortelė jau panaudota arba atšaukta.",
+        "alreadyRedeemedOrInvalid": "Ši dovanų kortelė jau panaudota arba negalioja."
+      }
+    },
+    "qr": {
+      "error": "Nepavyko sugeneruoti QR kodo",
+      "generating": "Generuojamas QR...",
+      "alt": "QR kodas"
+    },
+    "wizard": {
+      "title": "DI dovanų paieška",
+      "subtitle": "Papasakokite apie gavėją, o mes rasime tobulą dovaną",
+      "steps": {
+        "recipient": "Kam skirta dovana?",
+        "occasion": "Kokia proga?",
+        "budget": "Koks jūsų biudžetas?"
+      },
+      "recipients": {
+        "partner": "Partneriui",
+        "friend": "Draugui",
+        "parent": "Tėvams",
+        "colleague": "Kolegai",
+        "child": "Vaikui",
+        "teacher": "Mokytojui"
+      },
+      "occasions": {
+        "birthday": "Gimtadienis",
+        "christmas": "Kalėdos",
+        "anniversary": "Jubiliejus",
+        "thankYou": "Padėka",
+        "justBecause": "Be progos",
+        "graduation": "Mokslų baigimas"
+      },
+      "summary": {
+        "for": "Kam: {recipient}",
+        "budget": "Biudžetas: {amount}"
+      },
+      "submit": "Rasti tobulas dovanas",
+      "error": "Nepavyko sugeneruoti rekomendacijų. Bandykite dar kartą.",
+      "results": {
+        "found": "Radome jums {count, plural, one {# dovaną} few {# dovanas} many {# dovanos} other {# dovanų}}:",
+        "empty": "Tinkamų produktų nerasta. Pabandykite pakeisti kriterijus."
+      },
+      "startOver": "Pradėti iš naujo"
+    },
+    "card": {
+      "featured": "Rekomenduojama",
+      "save": "Išsaugoti",
+      "unsave": "Pašalinti",
+      "buyNow": "Pirkti dabar"
+    },
+    "feedSection": {
+      "viewAll": "Žiūrėti visus"
+    },
+    "filters": {
+      "toggle": "Filtrai",
+      "clear": "Išvalyti",
+      "occasion": "Proga",
+      "persona": "Kam skirta?",
+      "budget": "Biudžetas",
+      "budgetUnder": "Iki {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Dalinkitės pasiūlymais ir gaukite apdovanojimų"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Įvyko netikėta klaida."
+    },
+    "logoAlt": "{name} logotipas",
+    "merchantFallback": "Prekybininkas",
+    "validUntil": "Galioja iki {date}",
+    "validUntilWithLimit": "Galioja iki {date} – {count, plural, one {pirmas # panaudojimas} few {pirmi # panaudojimai} many {pirmo # panaudojimo} other {pirmų # panaudojimų}}",
+    "offAtMerchant": "{value} nuolaida pas {merchant}",
+    "fields": {
+      "event": "Renginys",
+      "dateTime": "Data ir laikas",
+      "location": "Vieta",
+      "price": "Kaina",
+      "status": "Būsena",
+      "attendee": "Dalyvis",
+      "usedAt": "Panaudota"
+    },
+    "ticketStatus": {
+      "available": "Laisvas",
+      "sold": "Parduotas",
+      "used": "Panaudotas",
+      "cancelled": "Atšauktas",
+      "refunded": "Grąžintas"
+    },
+    "event": {
+      "notAvailable": "Bilietų į šį renginį įsigyti negalima.",
+      "descriptionFallback": "Prisijunkite prie šio nuostabaus renginio!",
+      "availableTickets": "Laisvi bilietai",
+      "soldOut": "Išparduota",
+      "availableCount": "Laisva: {count}",
+      "terms": "Taisyklės ir sąlygos",
+      "soldOutTitle": "Šis renginys išparduotas",
+      "soldOutDescription": "Visi bilietai jau nupirkti."
+    },
+    "eventPurchase": {
+      "title": "Pirkti bilietą",
+      "description": "Pasirinkite bilietą ir užbaikite pirkimą",
+      "selectTicket": "Pasirinkite bilietą",
+      "attendeeNameLabel": "Dalyvio vardas (neprivaloma)",
+      "attendeeNamePlaceholder": "Renginyje dalyvausiančio asmens vardas",
+      "attendeeEmailLabel": "Dalyvio el. paštas (neprivaloma)",
+      "attendeeEmailPlaceholder": "El. paštas bilietui pristatyti",
+      "total": "Iš viso",
+      "submit": "Pirkti bilietą",
+      "noTickets": "Šiuo metu laisvų bilietų nėra.",
+      "checkBackLater": "Užsukite vėliau arba susisiekite su renginio organizatoriumi.",
+      "selectTicketError": "Pasirinkite bilietą",
+      "purchaseFailed": "Nepavyko įsigyti bilieto"
+    },
+    "ticket": {
+      "noPermission": "Neturite teisės peržiūrėti šio bilieto.",
+      "heading": "Bilietas #{number}",
+      "qrTitle": "QR kodas",
+      "qrDescription": "Parodykite šį QR kodą prie renginio įėjimo",
+      "qrAlt": "Bilieto QR kodas",
+      "qrUnavailable": "QR kodas nepasiekiamas",
+      "ticketNumber": "Bilieto numeris: <strong>{number}</strong>",
+      "used": "Bilietas jau panaudotas",
+      "detailsTitle": "Bilieto informacija",
+      "detailsDescription": "Svarbi informacija apie jūsų bilietą",
+      "staffCanRedeem": "Kaip prekybininko darbuotojas galite panaudoti šį bilietą renginyje."
+    },
+    "redeem": {
+      "notFoundTitle": "Panaudojimas nerastas",
+      "notFoundDescription": "QR kodas neteisingas arba nebegalioja.",
+      "title": "Kuponas panaudotas",
+      "alreadyRedeemed": "Šis kuponas jau panaudotas.",
+      "confirmed": "Panaudojimas sėkmingai patvirtintas."
+    },
+    "qrCheckout": {
+      "title": "Atsiskaitymas QR kodu",
+      "completeTitle": "Atsiskaitymas baigtas",
+      "completeDescription": "Jūsų pirkimas patvirtintas. Išsamią informaciją rasite el. pašte.",
+      "payNow": "Mokėti dabar",
+      "confirming": "Tvirtinama..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Kuponas nerastas",
+      "notFoundDescription": "Ieškomo kupono rasti nepavyko.",
+      "descriptionFallback": "Išskirtinis kupono pasiūlymas",
+      "shareText": "Pažiūrėkite šį {merchant} kuponą",
+      "copyCode": "Kopijuoti kupono kodą",
+      "qrAlt": "Kupono {code} QR kodas",
+      "print": "Spausdinti kuponą"
+    },
+    "referralPage": {
+      "voucherFrom": "Gavote kuponą nuo <highlight>{name}</highlight>",
+      "qrAlt": "Kupono {code} panaudojimo QR kodas",
+      "offAtMerchantShared": "{value} nuolaida pas {merchant} – pasidalino draugas!"
+    },
+    "bnpl": {
+      "title": "Mokėkite dalimis",
+      "description": "Padalinkite {amount} mokėjimą į patogias mėnesines įmokas.",
+      "perMonth": "/mėn.",
+      "planNoInterest": "{months}x (0 % palūkanų)",
+      "planWithFee": "{months}x ({rate} % mokestis)",
+      "monthlyPayments": "{count, plural, one {# mėnesinė įmoka} few {# mėnesinės įmokos} many {# mėnesinės įmokos} other {# mėnesinių įmokų}}",
+      "total": "Iš viso: {amount}",
+      "noExtraCost": "Be papildomų išlaidų",
+      "payNow": "Mokėti {amount} dabar"
+    },
+    "qrPanel": {
+      "qrAlt": "QR kodas",
+      "generateFailed": "Nepavyko sugeneruoti QR kodo",
+      "placeholder": "QR kodas bus rodomas čia",
+      "generating": "Generuojamas QR...",
+      "unavailable": "QR nepasiekiamas",
+      "hideCode": "Slėpti kodą",
+      "showCode": "Rodyti kodą",
+      "expires": "Galioja iki {date}",
+      "refreshNote": "Kodas atnaujinamas kas 30 sekundžių"
+    },
+    "qrDownload": {
+      "success": "QR kodas sėkmingai atsisiųstas!",
+      "failed": "Nepavyko atsisiųsti QR kodo",
+      "downloading": "Atsisiunčiama...",
+      "download": "Atsisiųsti QR"
     }
   }
 }
