@@ -9,7 +9,9 @@ import { WarmCard } from '@/components/warm-card';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { apiErrorMessage } from '@/lib/api-error-message';
 import { parseVoucherCsv, VOUCHER_CSV_COLUMNS, VOUCHER_CSV_SAMPLE, type VoucherCsvRow } from '@/lib/voucher-csv';
-import { describeVoucherValue, formatDisplayDate } from '@/lib/voucher-display';
+import { formatDisplayDate } from '@/lib/voucher-display';
+import { useLocale, useTranslations } from 'next-intl';
+import { describeVoucherValueT, displayLocaleFor } from '../voucher-i18n';
 import { useMerchantSettings } from '../../_components/merchant-settings-context';
 
 export default function BulkImportPage() {
@@ -21,6 +23,9 @@ export default function BulkImportPage() {
   const [errors, setErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [imported, setImported] = useState<number | null>(null);
+  const t = useTranslations('merchantVouchers.bulkImport');
+  const tLabels = useTranslations('labels');
+  const displayLocale = displayLocaleFor(useLocale());
 
   const handleFile = async (file: File | null) => {
     setImported(null);
@@ -55,15 +60,15 @@ export default function BulkImportPage() {
         body: JSON.stringify(rows),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(apiErrorMessage(data, `Import failed (error ${res.status}).`));
+      if (!res.ok) throw new Error(apiErrorMessage(data, t('importFailedStatus', { status: res.status })));
       const n = Number(data.imported) || 0;
       setImported(n);
-      showSuccess(`Imported ${n} ${n === 1 ? 'voucher' : 'vouchers'} as drafts.`);
+      showSuccess(t('imported', { count: n }));
       setRows([]);
       setFileName(null);
       if (inputRef.current) inputRef.current.value = '';
     } catch (e) {
-      showError(e instanceof Error ? e.message : 'Import failed');
+      showError(e instanceof Error ? e.message : t('importFailed'));
     } finally {
       setLoading(false);
     }
@@ -72,34 +77,35 @@ export default function BulkImportPage() {
   return (
     <div className="max-w-2xl mx-auto p-4 sm:p-6 space-y-4 min-w-0">
       <Link href={`/merchant/${slug}/vouchers`} className="text-sm text-[var(--text-muted)] hover:text-[var(--text)]">
-        &larr; Back to vouchers
+        &larr; {t('back')}
       </Link>
 
       <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
-        <h1 className="text-2xl font-semibold text-[var(--text)]">Import vouchers from a spreadsheet</h1>
+        <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
         <p className="text-sm text-[var(--text-muted)] mt-1">
-          Upload a CSV file (up to 500 rows). Every voucher is created as a draft, so nothing goes live until you
-          publish it.
+          {t('intro')}
         </p>
 
         <div className="mt-5 rounded-[var(--r-md)] border border-[var(--border)] bg-[var(--bg)] p-4 text-sm">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <h2 className="font-semibold text-[var(--text)]">Columns</h2>
+            <h2 className="font-semibold text-[var(--text)]">{t('columns')}</h2>
             <WarmButton type="button" size="sm" variant="outline" onClick={downloadSample}>
-              <Download className="h-4 w-4" /> Download sample CSV
+              <Download className="h-4 w-4" /> {t('downloadSample')}
             </WarmButton>
           </div>
           <ul className="mt-3 space-y-1.5 text-[var(--text-muted)]">
             {VOUCHER_CSV_COLUMNS.map((col) => (
               <li key={col.name} className="break-words">
-                <code className="font-mono text-[var(--text)]">{col.name}</code>
-                {col.required ? ' (required)' : ' (optional)'}: {col.help}
+                {t.rich(col.required ? 'columnRequired' : 'columnOptional', {
+                  name: col.name,
+                  help: t.has(`columnHelp.${col.name}`) ? t(`columnHelp.${col.name}`) : col.help,
+                  code: (chunks) => <code className="font-mono text-[var(--text)]">{chunks}</code>,
+                })}
               </li>
             ))}
           </ul>
           <p className="mt-3 text-[var(--text-muted)]">
-            Separate columns with commas or semicolons. If you use commas, put decimal amounts in quotes
-            (&quot;4,50&quot;) or use a dot (4.50).
+            {t('separatorHint')}
           </p>
         </div>
 
@@ -110,10 +116,10 @@ export default function BulkImportPage() {
           >
             <FileUp className="h-6 w-6 text-[var(--text-muted)]" />
             <span className="text-sm font-medium text-[var(--text)] break-all">
-              {fileName ?? 'Choose a CSV file'}
+              {fileName ?? t('chooseFile')}
             </span>
             <span className="text-xs text-[var(--text-muted)]">
-              {fileName ? 'Click to choose a different file' : 'Click to browse'}
+              {fileName ? t('chooseDifferent') : t('browse')}
             </span>
             <input
               ref={inputRef}
@@ -128,39 +134,45 @@ export default function BulkImportPage() {
 
         {errors.length > 0 && (
           <div role="alert" className="mt-4 rounded-[var(--r-sm)] border border-l-4 border-[var(--border)] border-l-[color:var(--danger)] bg-[var(--surface)] p-3 text-sm text-[var(--text)]">
-            <p className="font-medium">Fix these rows and upload the file again:</p>
+            <p className="font-medium">{t('fixRows')}</p>
             <ul className="mt-2 list-disc space-y-1 pl-5">
               {errors.slice(0, 20).map((err) => (
                 <li key={err} className="break-words">{err}</li>
               ))}
             </ul>
-            {errors.length > 20 && <p className="mt-2">…and {errors.length - 20} more.</p>}
+            {errors.length > 20 && <p className="mt-2">{t('andMore', { count: errors.length - 20 })}</p>}
           </div>
         )}
 
         {rows.length > 0 && errors.length === 0 && (
           <div className="mt-4 text-sm">
             <p className="font-medium text-[var(--text)]">
-              Ready to import {rows.length} {rows.length === 1 ? 'voucher' : 'vouchers'}:
+              {t('readyToImport', { count: rows.length })}
             </p>
             <ul className="mt-2 max-h-60 space-y-1 overflow-y-auto text-[var(--text-muted)]">
               {rows.slice(0, 50).map((row, i) => (
                 <li key={i} className="break-words">
-                  {row.name ? `${row.name}: ` : ''}
-                  {describeVoucherValue(row)}, {formatDisplayDate(row.validFrom)} – {formatDisplayDate(row.validTo)}
-                  {row.usageLimitTotal ? `, up to ${row.usageLimitTotal} uses` : ''}
+                  {t('rowSummary', {
+                    hasName: row.name ? 'yes' : 'no',
+                    name: row.name ?? '',
+                    value: describeVoucherValueT(tLabels, row, displayLocale),
+                    from: formatDisplayDate(row.validFrom, displayLocale),
+                    to: formatDisplayDate(row.validTo, displayLocale),
+                    hasLimit: row.usageLimitTotal ? 'yes' : 'no',
+                    limit: row.usageLimitTotal ?? 0,
+                  })}
                 </li>
               ))}
-              {rows.length > 50 && <li>…and {rows.length - 50} more.</li>}
+              {rows.length > 50 && <li>{t('andMore', { count: rows.length - 50 })}</li>}
             </ul>
           </div>
         )}
 
         {imported !== null && (
           <div role="status" className="mt-4 rounded-[var(--r-sm)] border border-l-4 border-[var(--border)] border-l-[color:var(--success)] bg-[var(--surface)] p-3 text-sm text-[var(--text)]">
-            Imported {imported} {imported === 1 ? 'voucher' : 'vouchers'} as drafts.{' '}
+            {t('imported', { count: imported })}{' '}
             <Link href={`/merchant/${slug}/vouchers`} className="font-semibold underline">
-              View vouchers
+              {t('viewVouchers')}
             </Link>
           </div>
         )}
@@ -171,7 +183,7 @@ export default function BulkImportPage() {
           onClick={handleUpload}
           disabled={loading || rows.length === 0 || errors.length > 0}
         >
-          {loading ? 'Importing...' : rows.length > 0 ? `Import ${rows.length} ${rows.length === 1 ? 'voucher' : 'vouchers'}` : 'Import vouchers'}
+          {loading ? t('importing') : rows.length > 0 ? t('importCount', { count: rows.length }) : t('importVouchers')}
         </WarmButton>
       </WarmCard>
     </div>

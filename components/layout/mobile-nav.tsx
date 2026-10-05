@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export interface MobileNavLink {
   id: string
@@ -26,6 +27,8 @@ export function MobileNav({
   signInHref: string
   signInLabel: string
 }) {
+  const tNav = useTranslations("nav")
+  const tSite = useTranslations("site")
   const [open, setOpen] = React.useState(false)
   const pathname = usePathname()
   const toggleRef = React.useRef<HTMLButtonElement>(null)
@@ -68,7 +71,7 @@ export function MobileNav({
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? tNav("closeMenu") : tNav("openMenu")}
         onClick={() => setOpen((value) => !value)}
         className="inline-flex h-11 w-11 items-center justify-center rounded-[12px] text-[var(--text)] hover:bg-[var(--surface-dim)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
       >
@@ -81,7 +84,7 @@ export function MobileNav({
         hidden={!open}
         className="absolute inset-x-0 top-full border-b border-[var(--border)] bg-[var(--surface)] shadow-warm"
       >
-        <nav aria-label="Main" className="mx-auto flex max-w-7xl flex-col px-4 py-3">
+        <nav aria-label={tSite("header.mainNavLabel")} className="mx-auto flex max-w-7xl flex-col px-4 py-3">
           {links.map((link) => {
             const current = pathname === link.href
             return (

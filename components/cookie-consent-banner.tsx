@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
 export type ConsentChoice = {
@@ -16,6 +17,7 @@ type ConsentState = ConsentChoice | null;
 export const CONSENT_CHANGE_EVENT = 'cookie-consent-change';
 
 export function CookieConsentBanner() {
+  const t = useTranslations("site.cookies");
   const [consent, setConsent] = useState<ConsentState | undefined>(undefined);
   const [showSettings, setShowSettings] = useState(false);
   const [analytics, setAnalytics] = useState(false);
@@ -78,26 +80,28 @@ export function CookieConsentBanner() {
     // the middle of the screen.
     <div
       role="region"
-      aria-label="Cookie preferences"
+      aria-label={t("regionLabel")}
       className="fixed bottom-0 inset-x-0 z-50 p-2 sm:p-4 md:p-6 pb-[max(0.5rem,env(safe-area-inset-bottom))]"
     >
       <div className="mx-auto max-w-2xl rounded-xl border border-[var(--border)] bg-[var(--surface)]/95 backdrop-blur shadow-lg p-3 sm:p-5 max-h-[60vh] overflow-y-auto">
         <div className="space-y-2 sm:space-y-3">
           <p className="text-xs sm:text-sm text-[var(--text)]">
-            We use cookies to improve your experience. Necessary cookies are always active; you choose which optional
-            ones to allow.{" "}
-            <Link href="/privacy" className="underline underline-offset-2">
-              Privacy policy
-            </Link>
+            {t.rich("intro", {
+              link: (chunks) => (
+                <Link href="/privacy" className="underline underline-offset-2">
+                  {chunks}
+                </Link>
+              ),
+            })}
           </p>
 
           {showSettings && (
             <fieldset className="space-y-2 border-t border-[var(--border)] pt-3">
-              <legend className="sr-only">Optional cookies</legend>
+              <legend className="sr-only">{t("optionalLegend")}</legend>
               <label className="flex items-center gap-2 text-sm">
                 <input type="checkbox" checked disabled className="accent-[var(--primary)]" />
-                <span className="font-medium">Necessary</span>
-                <span className="text-[var(--text-muted)]">(always on)</span>
+                <span className="font-medium">{t("necessary")}</span>
+                <span className="text-[var(--text-muted)]">{t("alwaysOn")}</span>
               </label>
               <label className="flex items-center gap-2 text-sm">
                 <input
@@ -106,7 +110,7 @@ export function CookieConsentBanner() {
                   onChange={(e) => setAnalytics(e.target.checked)}
                   className="accent-[var(--primary)]"
                 />
-                <span className="font-medium">Analytics</span>
+                <span className="font-medium">{t("analytics")}</span>
               </label>
               <label className="flex items-center gap-2 text-sm">
                 <input
@@ -115,7 +119,7 @@ export function CookieConsentBanner() {
                   onChange={(e) => setMarketing(e.target.checked)}
                   className="accent-[var(--primary)]"
                 />
-                <span className="font-medium">Marketing</span>
+                <span className="font-medium">{t("marketing")}</span>
               </label>
               <label className="flex items-center gap-2 text-sm">
                 <input
@@ -124,14 +128,14 @@ export function CookieConsentBanner() {
                   onChange={(e) => setPreferences(e.target.checked)}
                   className="accent-[var(--primary)]"
                 />
-                <span className="font-medium">Preferences</span>
+                <span className="font-medium">{t("preferences")}</span>
               </label>
             </fieldset>
           )}
 
           {saveError && (
             <p role="alert" className="text-xs sm:text-sm text-[var(--danger)]">
-              Couldn&apos;t save your choice. Please try again.
+              {t("saveError")}
             </p>
           )}
 
@@ -143,18 +147,18 @@ export function CookieConsentBanner() {
               onClick={() => submit("accept")}
               className="bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-[var(--primary-foreground)]"
             >
-              Accept all
+              {t("acceptAll")}
             </Button>
             <Button size="sm" variant="outline" disabled={saving} onClick={() => submit("decline")}>
-              Decline optional
+              {t("declineOptional")}
             </Button>
             {!showSettings ? (
               <Button size="sm" variant="ghost" onClick={() => setShowSettings(true)}>
-                Customize
+                {t("customize")}
               </Button>
             ) : (
               <Button size="sm" variant="ghost" disabled={saving} onClick={() => submit("custom")}>
-                Save preferences
+                {t("savePreferences")}
               </Button>
             )}
           </div>

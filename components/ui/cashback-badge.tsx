@@ -1,9 +1,12 @@
+import { useTranslations } from "next-intl";
+
 interface CashbackBadgeProps {
   creditPercentage: number; // basis points
   currency?: string;
 }
 
 export function CashbackBadge({ creditPercentage, currency = 'EUR' }: CashbackBadgeProps) {
+  const t = useTranslations('ui');
   if (!creditPercentage || creditPercentage <= 0) return null;
   const percent = (creditPercentage / 100).toFixed(0);
 
@@ -20,7 +23,7 @@ export function CashbackBadge({ creditPercentage, currency = 'EUR' }: CashbackBa
       fontWeight: 600,
       color: '#16a34a',
     }}>
-      {percent}% cashback
+      {t("cashbackBadge.label", { percent })}
     </span>
   );
 }

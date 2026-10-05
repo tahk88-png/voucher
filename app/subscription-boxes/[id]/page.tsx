@@ -3,8 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { showSuccess, showError } from '@/lib/toast-helpers';
+
+const INTERVALS = ['weekly', 'monthly', 'quarterly'];
 
 interface BoxItem {
   id: string;
@@ -26,27 +29,28 @@ interface BoxDetail {
   items: BoxItem[];
 }
 
-function formatPrice(cents: number, currency: string) {
+function formatPrice(cents: number, currency: string, locale = 'en') {
   try {
-    return new Intl.NumberFormat('en', { style: 'currency', currency }).format(cents / 100);
+    return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(cents / 100);
   } catch {
     return `${(cents / 100).toFixed(2)} ${currency}`;
   }
 }
 
-function voucherLabel(v: NonNullable<BoxItem['voucher']>) {
-  if (v.type === 'percentage') return `${v.value}% off voucher`;
-  return `${formatPrice(v.value, v.currency)} voucher`;
-}
-
-function formatMonth(month: string) {
+function formatMonth(month: string, locale = 'en') {
   // "2027-03" → "March 2027"
   const [y, m] = month.split('-').map(Number);
   if (!y || !m) return month;
-  return new Date(y, m - 1, 1).toLocaleDateString('en', { month: 'long', year: 'numeric' });
+  return new Date(y, m - 1, 1).toLocaleDateString(locale, { month: 'long', year: 'numeric' });
 }
 
 export default function SubscriptionBoxDetailPage() {
+  const t = useTranslations('shop.boxes');
+  const locale = useLocale();
+  const intervalLabel = (interval: string) =>
+    INTERVALS.includes(interval) ? t(`interval.${interval}`) : interval;
+  const intervalEachLabel = (interval: string) =>
+    INTERVALS.includes(interval) ? t(`intervalEach.${interval}`) : interval;
   const params = useParams<{ id: string }>();
   const id = params?.id;
   const [box, setBox] = useState<BoxDetail | null>(null);
@@ -82,10 +86,10 @@ export default function SubscriptionBoxDetailPage() {
         return;
       }
       if (res.ok) {
-        showSuccess('You are now subscribed. Check your email for details.', 'Subscribed');
+        showSuccess(t('subscribedMessage'), t('subscribedTitle'));
       } else {
         const data = await res.json().catch(() => ({}));
-        showError(data.error || 'Failed to subscribe. Please try again.');
+        showError(data.error || t('subscribeFailed'));
       }
     } finally {
       setSubscribing(false);
@@ -103,10 +107,10 @@ export default function SubscriptionBoxDetailPage() {
   if (notFound || !box) {
     return (
       <div className="min-h-screen bg-[var(--bg)] flex flex-col items-center justify-center px-4 text-center">
-        <h1 className="text-2xl font-bold text-[var(--text)] mb-2">Box not found</h1>
-        <p className="text-[var(--text-muted)] mb-6">This subscription box is unavailable.</p>
+        <h1 className="text-2xl font-bold text-[var(--text)] mb-2">{t('notFoundTitle')}</h1>
+        <p className="text-[var(--text-muted)] mb-6">{t('notFoundHint')}</p>
         <Link href="/subscription-boxes" className="text-[var(--primary-hover)] font-semibold hover:underline">
-          ← Browse all boxes
+          {t('browseAll')}
         </Link>
       </div>
     );
@@ -123,36 +127,35 @@ export default function SubscriptionBoxDetailPage() {
     <div className="min-h-screen bg-[var(--bg)] [background-image:var(--gradient-mesh-1),var(--gradient-mesh-3)]">
       <div className="max-w-3xl mx-auto px-4 py-8 sm:py-12">
         <Link href="/subscription-boxes" className="text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors">
-          ← All subscription boxes
+          {t('backToAll')}
         </Link>
 
         <div className="mt-4 bg-[var(--surface)] rounded-[var(--r-xl)] border border-[var(--border)] overflow-hidden shadow-[var(--shadow-lg)]">
           <div className="bg-[var(--accent)] p-6 sm:p-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-[var(--text)]">{box.name}</h1>
-            <p className="text-sm text-[var(--text-muted)] mt-1">by {box.merchantName}</p>
+            <p className="text-sm text-[var(--text-muted)] mt-1">{t('byMerchant', { name: box.merchantName })}</p>
             <div className="mt-4 flex items-baseline gap-1">
-              <span className="text-3xl font-bold text-[var(--text)]">{formatPrice(box.priceCents, box.currency)}</span>
-              <span className="text-[var(--text-muted)]">/{box.interval}</span>
+              <span className="text-3xl font-bold text-[var(--text)]">{formatPrice(box.priceCents, box.currency, locale)}</span>
+              <span className="text-[var(--text-muted)]">{t('perInterval', { interval: intervalLabel(box.interval) })}</span>
             </div>
             {box.subscriberCount > 0 && (
-              <p className="text-xs text-[var(--text-muted)] mt-1">{box.subscriberCount} subscriber{box.subscriberCount === 1 ? '' : 's'}</p>
+              <p className="text-xs text-[var(--text-muted)] mt-1">{t('subscriberCount', { count: box.subscriberCount })}</p>
             )}
           </div>
 
           <div className="p-6 sm:p-8">
             {box.description && <p className="text-[var(--text-muted)] mb-6">{box.description}</p>}
 
-            <h2 className="text-lg font-semibold text-[var(--text)] mb-3">What&apos;s inside</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-3">{t('whatsInside')}</h2>
             {months.length === 0 ? (
               <p className="text-sm text-[var(--text-muted)]">
-                Up to {box.maxItems} curated voucher{box.maxItems === 1 ? '' : 's'} each {box.interval}. The next
-                delivery is being curated.
+                {t('curatingNext', { count: box.maxItems, period: intervalEachLabel(box.interval) })}
               </p>
             ) : (
               <div className="space-y-5">
                 {months.map((month) => (
                   <div key={month}>
-                    <p className="text-sm font-medium text-[var(--text)] mb-2">{formatMonth(month)}</p>
+                    <p className="text-sm font-medium text-[var(--text)] mb-2">{formatMonth(month, locale)}</p>
                     <ul className="space-y-2">
                       {byMonth.get(month)!.map((it) => (
                         <li
@@ -165,7 +168,11 @@ export default function SubscriptionBoxDetailPage() {
                             </svg>
                           </div>
                           <span className="text-sm text-[var(--text)]">
-                            {it.voucher ? voucherLabel(it.voucher) : 'Curated voucher'}
+                            {it.voucher
+                              ? it.voucher.type === 'percentage'
+                                ? t('percentVoucher', { value: it.voucher.value })
+                                : t('amountVoucher', { amount: formatPrice(it.voucher.value, it.voucher.currency, locale) })
+                              : t('curatedVoucher')}
                           </span>
                         </li>
                       ))}
@@ -182,7 +189,9 @@ export default function SubscriptionBoxDetailPage() {
               size="lg"
               className="mt-8"
             >
-              {subscribing ? 'Subscribing…' : `Subscribe — ${formatPrice(box.priceCents, box.currency)}/${box.interval}`}
+              {subscribing
+                ? t('subscribing')
+                : t('subscribeWithPrice', { price: formatPrice(box.priceCents, box.currency, locale), interval: intervalLabel(box.interval) })}
             </WarmButton>
           </div>
         </div>

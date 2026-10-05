@@ -5,6 +5,7 @@ import { requireMerchantRole } from "@/lib/rbac"
 import { getDefaultBuilderConfig, type PageBuilderConfig } from "@/lib/page-builder"
 import PageBuilderClient from "@/components/page-builder/page-builder-client"
 import { isAiConfigured } from "@/lib/ai"
+import { getTranslations } from "next-intl/server"
 
 export default async function PageBuilderPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -26,6 +27,7 @@ export default async function PageBuilderPage({ params }: { params: Promise<{ sl
     where: { merchantId: merchant.id },
   })
 
+  const t = await getTranslations("merchantCatalog.pageBuilder")
   const storeConfig = getDefaultBuilderConfig("store")
   const rentalConfig = getDefaultBuilderConfig("rental")
 
@@ -51,8 +53,7 @@ export default async function PageBuilderPage({ params }: { params: Promise<{ sl
           role="status"
           className="mb-4 rounded-[var(--r-sm)] border border-l-4 border-[var(--border)] border-l-[color:var(--warning)] bg-[var(--surface)] p-3 text-sm text-[var(--text)]"
         >
-          AI suggestions aren&apos;t set up on this platform yet, so the automatic layout and checklist tools
-          are hidden. You can still build and edit your pages by hand.
+          {t("aiNotConfigured")}
         </p>
       )}
       <PageBuilderClient

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronDown, User, Store, Shield, Building2 } from "lucide-react";
 
 export type RoleSwitcherMerchant = {
@@ -26,6 +27,7 @@ type Props = {
 };
 
 export function RoleSwitcher({ roles, merchantMemberships, adminRole, orgMemberships = [] }: Props) {
+  const t = useTranslations("site.roleSwitcher");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -34,7 +36,7 @@ export function RoleSwitcher({ roles, merchantMemberships, adminRole, orgMembers
 
   // Consumer context
   contexts.push({
-    label: "My Dashboard",
+    label: t("myDashboard"),
     href: "/app",
     icon: User,
     active: pathname.startsWith("/app") && !pathname.startsWith("/app/b2b"),
@@ -46,7 +48,7 @@ export function RoleSwitcher({ roles, merchantMemberships, adminRole, orgMembers
       label: m.merchantName,
       href: `/merchant/${m.merchantSlug}`,
       icon: Store,
-      badge: m.role === "merchant_admin" ? "Admin" : "Staff",
+      badge: m.role === "merchant_admin" ? t("admin") : t("staff"),
       active: pathname.startsWith(`/merchant/${m.merchantSlug}`),
     });
   }
@@ -65,7 +67,7 @@ export function RoleSwitcher({ roles, merchantMemberships, adminRole, orgMembers
   // Admin context
   if (roles.includes("platform_admin")) {
     contexts.push({
-      label: "Platform Admin",
+      label: t("platformAdmin"),
       href: "/admin",
       icon: Shield,
       badge: adminRole ?? undefined,
@@ -98,7 +100,7 @@ export function RoleSwitcher({ roles, merchantMemberships, adminRole, orgMembers
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div className="absolute left-0 right-0 bottom-full mb-1 z-50 rounded-lg border border-[var(--border)] bg-white shadow-lg overflow-hidden">
             <p className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--text-faint)] border-b border-[var(--border)]">
-              Switch context
+              {t("switchContext")}
             </p>
             {contexts.map((ctx) => {
               const Icon = ctx.icon;

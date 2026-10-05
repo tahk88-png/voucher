@@ -2,11 +2,16 @@ import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = { title: 'Claim Your Gift' };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('giftsPages.claim');
+  return { title: t('metaTitle') };
+}
 
 export default async function ClaimGiftPage({ params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
+  const t = await getTranslations('giftsPages.claim');
   const gift = await prisma.giftedVoucher.findUnique({
     where: { token },
   });
@@ -21,9 +26,9 @@ export default async function ClaimGiftPage({ params }: { params: Promise<{ toke
         <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r-xl)', padding: '2.5rem', maxWidth: '420px', width: '100%', textAlign: 'center' }}>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎁</div>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.5rem' }}>
-            Gift Already Claimed
+            {t('alreadyClaimedTitle')}
           </h1>
-          <p style={{ color: 'var(--text-muted)' }}>This gift has already been claimed.</p>
+          <p style={{ color: 'var(--text-muted)' }}>{t('alreadyClaimedBody')}</p>
         </div>
       </div>
     );
@@ -35,9 +40,9 @@ export default async function ClaimGiftPage({ params }: { params: Promise<{ toke
         <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r-xl)', padding: '2.5rem', maxWidth: '420px', width: '100%', textAlign: 'center' }}>
           <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>😔</div>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.5rem' }}>
-            Gift Expired
+            {t('expiredTitle')}
           </h1>
-          <p style={{ color: 'var(--text-muted)' }}>Sorry, this gift link has expired.</p>
+          <p style={{ color: 'var(--text-muted)' }}>{t('expiredBody')}</p>
         </div>
       </div>
     );
@@ -48,7 +53,7 @@ export default async function ClaimGiftPage({ params }: { params: Promise<{ toke
       <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r-xl)', padding: '2.5rem', maxWidth: '420px', width: '100%', textAlign: 'center' }}>
         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎁</div>
         <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.5rem' }}>
-          You&apos;ve Got a Gift!
+          {t('title')}
         </h1>
         {gift.giftMessage && (
           <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 'var(--r-md)', padding: '1rem', margin: '1rem 0', fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
@@ -56,7 +61,7 @@ export default async function ClaimGiftPage({ params }: { params: Promise<{ toke
           </div>
         )}
         <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-          {session?.user ? 'Click below to add this voucher to your wallet.' : 'Sign in to claim this voucher.'}
+          {session?.user ? t('signedInHint') : t('signedOutHint')}
         </p>
         {session?.user ? (
           <form action={`/api/gifts/claim/${token}`} method="POST">
@@ -74,7 +79,7 @@ export default async function ClaimGiftPage({ params }: { params: Promise<{ toke
                 fontSize: '1rem',
               }}
             >
-              Claim Gift
+              {t('claimButton')}
             </button>
           </form>
         ) : (
@@ -95,7 +100,7 @@ export default async function ClaimGiftPage({ params }: { params: Promise<{ toke
               boxSizing: 'border-box',
             }}
           >
-            Sign In to Claim
+            {t('signInButton')}
           </a>
         )}
       </div>

@@ -1,11 +1,15 @@
 import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
-export const metadata: Metadata = {
-  title: "Create account",
-  robots: {
-    index: false,
-    follow: false,
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("authPages.meta")
+  return {
+    title: t("register"),
+    robots: {
+      index: false,
+      follow: false,
+    },
+  }
 }
 
 export default function RegisterLayout({ children }: { children: React.ReactNode }) {

@@ -1,11 +1,15 @@
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: 'Top Merchants',
-  description: 'The merchants with the most voucher redemptions on GiftHub in the last 30 days',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('leaderboardPage');
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+  };
+}
 
 export const revalidate = 300; // 5 min cache
 
@@ -47,16 +51,17 @@ const MEDALS = ['🥇', '🥈', '🥉'];
 
 export default async function LeaderboardPage() {
   const merchants = await getLeaderboard();
+  const t = await getTranslations('leaderboardPage');
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', padding: '2rem 1rem' }}>
       <div style={{ maxWidth: '720px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <h1 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text)', marginBottom: '0.5rem' }}>
-            Top Merchants
+            {t('title')}
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>
-            Most voucher redemptions in the last 30 days
+            {t('subtitle')}
           </p>
         </div>
 
@@ -86,7 +91,7 @@ export default async function LeaderboardPage() {
                   color: index < 3 ? 'var(--primary)' : 'var(--text-muted)',
                   flexShrink: 0,
                 }}>
-                  {index < 3 ? <span role="img" aria-label={`Rank ${index + 1}`}>{MEDALS[index]}</span> : `#${index + 1}`}
+                  {index < 3 ? <span role="img" aria-label={t('rank', { rank: index + 1 })}>{MEDALS[index]}</span> : `#${index + 1}`}
                 </div>
 
                 {merchant.brandLogoUrl ? (
@@ -117,12 +122,15 @@ export default async function LeaderboardPage() {
                 </div>
 
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                  <div style={{ fontWeight: 700, color: 'var(--text)', fontSize: '1rem' }}>
-                    {merchant.recentRedemptions}
-                  </div>
-                  <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>
-                    {merchant.recentRedemptions === 1 ? 'redemption' : 'redemptions'}
-                  </div>
+                  {t.rich('redemptions', {
+                    count: merchant.recentRedemptions,
+                    num: (chunks) => (
+                      <div style={{ fontWeight: 700, color: 'var(--text)', fontSize: '1rem' }}>{chunks}</div>
+                    ),
+                    label: (chunks) => (
+                      <div style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>{chunks}</div>
+                    ),
+                  })}
                 </div>
               </div>
             </Link>
@@ -130,10 +138,10 @@ export default async function LeaderboardPage() {
 
           {merchants.length === 0 && (
             <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
-              <p>No redemptions in the last 30 days yet, so there is no ranking to show.</p>
+              <p>{t('empty')}</p>
               <p style={{ marginTop: '0.75rem' }}>
                 <Link href="/campaigns" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                  Browse live campaigns
+                  {t('browseCampaigns')}
                 </Link>
               </p>
             </div>

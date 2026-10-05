@@ -1,6 +1,4 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Vouchers', noIndex: true });
-
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -12,6 +10,11 @@ import { CheckCircle2, Gift, Ticket, TrendingUp } from 'lucide-react';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { getTranslations } from 'next-intl/server';
 import VouchersListClient from './vouchers-list-client';
+
+export async function generateMetadata() {
+  const t = await getTranslations('merchantVouchers');
+  return pageMetadata({ title: t('list.metaTitle'), noIndex: true });
+}
 
 export default async function VouchersListPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -25,6 +28,7 @@ export default async function VouchersListPage({ params }: { params: Promise<{ s
 
   const t = await getTranslations('nav');
   const tVoucher = await getTranslations('voucher');
+  const tPage = await getTranslations('merchantVouchers.list');
 
   const vouchers = await prisma.voucher.findMany({
     where: { merchantId: merchant.id, deletedAt: null },
@@ -67,12 +71,12 @@ export default async function VouchersListPage({ params }: { params: Promise<{ s
             </div>
             <div>
               <h1 className="text-2xl font-semibold text-[var(--text)]">{t('vouchers')}</h1>
-              <p className="text-sm text-[var(--text-muted)]">Manage and create vouchers</p>
+              <p className="text-sm text-[var(--text-muted)]">{tPage('subtitle')}</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
             <WarmButton asChild variant="outline">
-              <Link href={`/merchant/${slug}/vouchers/bulk-import`}>Bulk Import CSV</Link>
+              <Link href={`/merchant/${slug}/vouchers/bulk-import`}>{tPage('bulkImport')}</Link>
             </WarmButton>
             <WarmButton asChild>
               <Link href={`/merchant/${slug}/vouchers/new`}>{tVoucher('create')}</Link>
@@ -82,33 +86,33 @@ export default async function VouchersListPage({ params }: { params: Promise<{ s
 
         <div className="grid gap-4 grid-cols-2 lg:grid-cols-5 mb-6">
           <StatsCard
-            title="Total vouchers"
+            title={tPage('stats.totalTitle')}
             value={totalVouchers}
-            description="All created vouchers"
+            description={tPage('stats.totalDescription')}
             icon={Gift}
           />
           <StatsCard
-            title="Active"
+            title={tPage('stats.activeTitle')}
             value={activeVouchers}
-            description="Published vouchers"
+            description={tPage('stats.activeDescription')}
             icon={TrendingUp}
           />
           <StatsCard
-            title="Drafts"
+            title={tPage('stats.draftsTitle')}
             value={draftVouchers}
-            description="Not yet published"
+            description={tPage('stats.draftsDescription')}
             icon={Ticket}
           />
           <StatsCard
-            title="Paused / ended"
+            title={tPage('stats.pausedEndedTitle')}
             value={pausedVouchers + endedVouchers}
-            description={`${pausedVouchers} paused, ${endedVouchers} ended`}
+            description={tPage('stats.pausedEndedDescription', { paused: pausedVouchers, ended: endedVouchers })}
             icon={Gift}
           />
           <StatsCard
-            title="Redemptions"
+            title={tPage('stats.redemptionsTitle')}
             value={totalRedemptions}
-            description="Total redemptions"
+            description={tPage('stats.redemptionsDescription')}
             icon={CheckCircle2}
           />
         </div>

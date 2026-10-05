@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { SUPPORTED_CURRENCIES } from '@/lib/currency-constants';
 
 const CURRENCY_LABELS: Record<string, string> = {
@@ -30,6 +31,7 @@ export function useCurrency() {
 }
 
 export default function CurrencySelector() {
+  const t = useTranslations('site.currency');
   const { currency, setCurrency } = useCurrency();
 
   return (
@@ -37,7 +39,7 @@ export default function CurrencySelector() {
       value={currency}
       onChange={(e) => setCurrency(e.target.value)}
       className="border border-[#e8e0d8] rounded-lg px-3 py-2 text-sm bg-white text-[#2D2721] focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
-      aria-label="Select currency"
+      aria-label={t('selectLabel')}
     >
       {SUPPORTED_CURRENCIES.map((c) => (
         <option key={c} value={c}>

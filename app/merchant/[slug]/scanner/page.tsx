@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
@@ -9,7 +10,10 @@ import { Badge } from '@/components/ui/badge';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { ScanLine, Gift, CreditCard, Ticket, CheckCircle, Camera, CameraOff, Keyboard } from 'lucide-react';
 import { formatPrice } from '@/lib/currency-constants';
-import { formatDisplayDate, formatVoucherCode, formatVoucherValue, voucherDisplayName, voucherStatusLabel, voucherTypeLabel } from '@/lib/voucher-display';
+import { formatDisplayDate, formatVoucherCode, formatVoucherValue, voucherHeadline } from '@/lib/voucher-display';
+
+const VOUCHER_TYPES = ['percentage', 'fixed_amount', 'credit_amount'];
+const VOUCHER_STATUSES = ['draft', 'published', 'paused', 'ended', 'expired'];
 
 type ScanResult = {
   type: 'voucher' | 'gift_card' | 'ticket';
@@ -19,12 +23,14 @@ type ScanResult = {
 export default function ScannerPage() {
   const params = useParams();
   const slug = params.slug as string;
+  const t = useTranslations('merchantStore.scanner');
+  const tLabels = useTranslations('labels');
   const [code, setCode] = useState('');
   const [scanning, setScanning] = useState(false);
   const [redeeming, setRedeeming] = useState(false);
   const [result, setResult] = useState<ScanResult | null>(null);
   const [cameraMode, setCameraMode] = useState(false);
-  const [cameraError, setCameraError] = useState<string | null>(null);
+  const [cameraError, setCameraError] = useState<'denied' | 'unavailable' | null>(null);
   const [cameraActive, setCameraActive] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -79,7 +85,7 @@ export default function ScannerPage() {
         });
         if (!res.ok) {
           const err = await res.json();
-          showError(err.error || 'Not found');
+          showError(err.error || t('errors.notFound'));
           lastScannedRef.current = ''; // allow retry
         } else {
           const data = await res.json();
@@ -88,7 +94,7 @@ export default function ScannerPage() {
           setCameraMode(false);
         }
       } catch {
-        showError('Scan failed');
+        showError(t('errors.scanFailed'));
         lastScannedRef.current = '';
       } finally {
         setScanning(false);
@@ -97,7 +103,7 @@ export default function ScannerPage() {
     }
 
     animFrameRef.current = requestAnimationFrame(scanFrame);
-  }, [slug, stopCamera]);
+  }, [slug, stopCamera, t]);
 
   const startCamera = useCallback(async () => {
     setCameraError(null);
@@ -114,11 +120,7 @@ export default function ScannerPage() {
       animFrameRef.current = requestAnimationFrame(scanFrame);
     } catch (err: any) {
       const denied = err?.name === 'NotAllowedError' || err?.message === 'Permission denied';
-      setCameraError(
-        denied
-          ? 'Camera access was denied. Allow camera access in your browser settings, or type the code below.'
-          : 'No camera is available. Type the code below instead.'
-      );
+      setCameraError(denied ? 'denied' : 'unavailable');
       setCameraMode(false);
     }
   }, [scanFrame]);
@@ -152,7 +154,7 @@ export default function ScannerPage() {
 
   const handleScan = async () => {
     if (!code.trim()) {
-      showError('Please enter a code');
+      showError(t('errors.enterCode'));
       return;
     }
     setScanning(true);
@@ -165,12 +167,12 @@ export default function ScannerPage() {
       });
       if (!res.ok) {
         const err = await res.json();
-        throw new Error(err.error || 'Not found');
+        throw new Error(err.error || t('errors.notFound'));
       }
       const data = await res.json();
       setResult(data);
     } catch (error) {
-      showError(error instanceof Error ? error.message : 'Scan failed');
+      showError(error instanceof Error ? error.message : t('errors.scanFailed'));
     } finally {
       setScanning(false);
     }
@@ -187,13 +189,13 @@ export default function ScannerPage() {
       });
       if (!res.ok) {
         const err = await res.json();
-        throw new Error(err.error || 'Redeem failed');
+        throw new Error(err.error || t('errors.redeemFailed'));
       }
-      showSuccess(`${result.type === 'gift_card' ? 'Gift card' : result.type === 'ticket' ? 'Ticket' : 'Voucher'} redeemed successfully!`);
+      showSuccess(t(`redeemed.${result.type === 'gift_card' ? 'gift_card' : result.type === 'ticket' ? 'ticket' : 'voucher'}`));
       setResult(null);
       setCode('');
     } catch (error) {
-      showError(error instanceof Error ? error.message : 'Redeem failed');
+      showError(error instanceof Error ? error.message : t('errors.redeemFailed'));
     } finally {
       setRedeeming(false);
     }
@@ -205,13 +207,37 @@ export default function ScannerPage() {
     (result.type === 'voucher' && result.data.status === 'published')
   );
 
+  const cameraErrorText =
+    cameraError === 'denied' ? t('cameraDenied') : cameraError === 'unavailable' ? t('cameraUnavailable') : null;
+
+  const voucherStatusText = (status: string) =>
+    VOUCHER_STATUSES.includes(status) ? tLabels(`voucherStatus.${status}`) : status;
+
+  const statusText = result
+    ? result.type === 'voucher'
+      ? voucherStatusText(result.data.status)
+      : result.data.status
+    : '';
+
+  const voucherName = (data: Record<string, any>) => {
+    const headline = voucherHeadline(data as never);
+    if (headline) return headline;
+    const value = formatVoucherValue(data as never);
+    return String(data.type).toLowerCase() === 'credit_amount'
+      ? tLabels('valueCredit', { value })
+      : tLabels('valueOff', { value });
+  };
+
+  const voucherTypeText = (type: string) =>
+    VOUCHER_TYPES.includes(type.toLowerCase()) ? tLabels(`voucherType.${type.toLowerCase()}`) : type.replace(/_/g, ' ');
+
   const TypeIcon = result?.type === 'ticket' ? Ticket : result?.type === 'gift_card' ? CreditCard : Gift;
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-[var(--text)]">Scanner</h1>
-        <p className="text-sm text-[var(--text-muted)]">Scan vouchers, gift cards, and tickets</p>
+        <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
+        <p className="text-sm text-[var(--text-muted)]">{t('subtitle')}</p>
       </div>
 
       {/* Mode toggle */}
@@ -222,7 +248,7 @@ export default function ScannerPage() {
           onClick={() => { setCameraMode(false); setResult(null); }}
         >
           <Keyboard className="h-4 w-4 mr-2" />
-          Manual
+          {t('manual')}
         </WarmButton>
         <WarmButton
           variant={cameraMode ? 'default' : 'outline'}
@@ -230,7 +256,7 @@ export default function ScannerPage() {
           onClick={() => { setCameraMode(true); setResult(null); setCode(''); }}
         >
           <Camera className="h-4 w-4 mr-2" />
-          Camera
+          {t('camera')}
         </WarmButton>
       </div>
 
@@ -257,19 +283,19 @@ export default function ScannerPage() {
             )}
             {scanning && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                <p className="text-white font-medium">Scanning...</p>
+                <p className="text-white font-medium">{t('scanning')}</p>
               </div>
             )}
-            {cameraError && (
+            {cameraErrorText && (
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80 gap-2">
                 <CameraOff className="h-10 w-10 text-white/60" />
-                <p className="text-white text-sm">{cameraError}</p>
+                <p className="text-white text-sm">{cameraErrorText}</p>
               </div>
             )}
           </div>
           <canvas ref={canvasRef} className="hidden" />
           <p className="text-xs text-center text-[var(--text-muted)] p-3">
-            Point at a QR code to scan automatically
+            {t('pointAtCode')}
           </p>
         </WarmCard>
       )}
@@ -277,29 +303,29 @@ export default function ScannerPage() {
       {/* Manual input */}
       {!cameraMode && (
         <WarmCard padding="lg" className="bg-[var(--surface)]">
-          {cameraError && (
+          {cameraErrorText && (
             <p className="mb-3 flex items-start gap-2 text-sm text-[var(--text-muted)]">
               <CameraOff className="h-4 w-4 mt-0.5 flex-shrink-0" />
-              {cameraError}
+              {cameraErrorText}
             </p>
           )}
           <div className="flex items-center gap-2 mb-4">
             <ScanLine className="h-5 w-5 text-[var(--primary)]" />
-            <h2 className="text-lg font-semibold text-[var(--text)]">Enter code</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)]">{t('enterCode')}</h2>
           </div>
           <div className="flex flex-col sm:flex-row gap-2">
             <Input
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              placeholder="Voucher code (e.g. AUD-CMUI0TG1), voucher link, ticket or gift card code"
-              aria-label="Code to scan"
+              placeholder={t('codePlaceholder')}
+              aria-label={t('codeAriaLabel')}
               autoCapitalize="characters"
               autoComplete="off"
               className="border-[var(--border)]"
               onKeyDown={(e) => { if (e.key === 'Enter') handleScan(); }}
             />
             <WarmButton onClick={handleScan} disabled={scanning || !code.trim()}>
-              {scanning ? 'Scanning...' : 'Scan'}
+              {scanning ? t('scanning') : t('scan')}
             </WarmButton>
           </div>
         </WarmCard>
@@ -309,38 +335,38 @@ export default function ScannerPage() {
         <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex items-center gap-2 mb-4">
             <TypeIcon className="h-5 w-5 text-[var(--primary)]" />
-            <h2 className="text-lg font-semibold text-[var(--text)] capitalize">{result.type.replace('_', ' ')} found</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)]">{t(`found.${result.type}`)}</h2>
             <Badge variant={canRedeem ? 'default' : 'secondary'} className="ml-auto">
-              {result.type === 'voucher' ? voucherStatusLabel(result.data.status) : result.data.status}
+              {statusText}
             </Badge>
           </div>
 
           <div className="space-y-2 p-4 bg-[var(--surface-dim)] rounded-2xl">
             {result.type === 'ticket' && (
               <>
-                <InfoRow label="Ticket #" value={result.data.ticketNumber} />
-                <InfoRow label="Event" value={result.data.event?.name} />
-                <InfoRow label="Type" value={result.data.ticketType || 'Standard'} />
+                <InfoRow label={t('info.ticketNumber')} value={result.data.ticketNumber} />
+                <InfoRow label={t('info.event')} value={result.data.event?.name} />
+                <InfoRow label={t('info.type')} value={result.data.ticketType || t('info.standard')} />
                 {result.data.purchase?.attendeeName && (
-                  <InfoRow label="Attendee" value={result.data.purchase.attendeeName} />
+                  <InfoRow label={t('info.attendee')} value={result.data.purchase.attendeeName} />
                 )}
               </>
             )}
             {result.type === 'gift_card' && (
               <>
-                <InfoRow label="Code" value={result.data.code} />
-                <InfoRow label="Amount" value={formatPrice(result.data.amount, String(result.data.currency || 'EUR').toUpperCase(), 'en-GB')} />
-                {result.data.message && <InfoRow label="Message" value={result.data.message} />}
+                <InfoRow label={t('info.code')} value={result.data.code} />
+                <InfoRow label={t('info.amount')} value={formatPrice(result.data.amount, String(result.data.currency || 'EUR').toUpperCase(), 'en-GB')} />
+                {result.data.message && <InfoRow label={t('info.message')} value={result.data.message} />}
               </>
             )}
             {result.type === 'voucher' && (
               <>
-                <InfoRow label="Voucher" value={voucherDisplayName(result.data as never)} />
-                <InfoRow label="Code" value={formatVoucherCode(result.data as never)} />
-                <InfoRow label="Campaign" value={result.data.campaign?.name || 'None'} />
-                <InfoRow label="Type" value={voucherTypeLabel(result.data.type)} />
-                <InfoRow label="Value" value={formatVoucherValue(result.data as never)} />
-                <InfoRow label="Valid until" value={formatDisplayDate(result.data.validTo)} />
+                <InfoRow label={t('info.voucher')} value={voucherName(result.data)} />
+                <InfoRow label={t('info.code')} value={formatVoucherCode(result.data as never)} />
+                <InfoRow label={t('info.campaign')} value={result.data.campaign?.name || t('info.none')} />
+                <InfoRow label={t('info.type')} value={voucherTypeText(result.data.type)} />
+                <InfoRow label={t('info.value')} value={formatVoucherValue(result.data as never)} />
+                <InfoRow label={t('info.validUntil')} value={formatDisplayDate(result.data.validTo)} />
               </>
             )}
           </div>
@@ -348,13 +374,13 @@ export default function ScannerPage() {
           {canRedeem && (
             <WarmButton onClick={handleRedeem} disabled={redeeming} className="w-full mt-4" size="lg">
               <CheckCircle className="h-5 w-5 mr-2" />
-              {redeeming ? 'Redeeming...' : 'Redeem'}
+              {redeeming ? t('redeeming') : t('redeem')}
             </WarmButton>
           )}
 
           {!canRedeem && (
             <p className="text-sm text-[var(--text-muted)] mt-4 text-center">
-              This item can&apos;t be redeemed (status: {result.type === 'voucher' ? voucherStatusLabel(result.data.status) : result.data.status})
+              {t('cannotRedeem', { status: statusText })}
             </p>
           )}
         </WarmCard>

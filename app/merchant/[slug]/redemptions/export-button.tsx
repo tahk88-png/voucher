@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import { WarmButton } from '@/components/warm-button';
 import { Download } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { showSuccess, showError } from '@/lib/toast-helpers';
 
 export default function ExportRedemptionsButton({ merchantSlug }: { merchantSlug: string }) {
+  const t = useTranslations('merchantStore.redemptions.export');
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExport = async () => {
@@ -27,9 +29,9 @@ export default function ExportRedemptionsButton({ merchantSlug }: { merchantSlug
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
 
-      showSuccess('Redemptions exported successfully!');
+      showSuccess(t('success'));
     } catch (error) {
-      showError('Failed to export redemptions');
+      showError(t('error'));
       console.error(error);
     } finally {
       setIsExporting(false);
@@ -39,7 +41,7 @@ export default function ExportRedemptionsButton({ merchantSlug }: { merchantSlug
   return (
     <WarmButton variant="outline" onClick={handleExport} disabled={isExporting}>
       <Download className="h-4 w-4 mr-2" />
-      {isExporting ? 'Exporting...' : 'Export CSV'}
+      {isExporting ? t('exporting') : t('button')}
     </WarmButton>
   );
 }

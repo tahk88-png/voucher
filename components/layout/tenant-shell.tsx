@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { getTranslations } from "next-intl/server"
 import { WarmButton } from "@/components/warm-button"
 import { getNavigationLinks, getFallbackNavigation } from "@/lib/navigation"
 import { Gift } from "lucide-react"
@@ -17,6 +18,7 @@ interface TenantShellProps {
 }
 
 export default async function TenantShell({ merchant, children }: TenantShellProps) {
+  const t = await getTranslations("directory.tenantShell")
   const fallback = getFallbackNavigation("tenant")
   const headerLinks =
     (await getNavigationLinks({
@@ -29,7 +31,7 @@ export default async function TenantShell({ merchant, children }: TenantShellPro
   // Campaigns must stay reachable now that the separate header button is gone.
   const header = configured.some((link) => link.href === "/campaigns")
     ? configured
-    : [...configured, { id: "tenant-campaigns", label: "Campaigns", href: "/campaigns" }]
+    : [...configured, { id: "tenant-campaigns", label: t("campaigns"), href: "/campaigns" }]
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)]">
@@ -50,7 +52,7 @@ export default async function TenantShell({ merchant, children }: TenantShellPro
             )}
             <span className="text-xl font-bold text-[var(--text)]">{merchant.name}</span>
           </Link>
-          <nav aria-label="Main" className="hidden md:flex items-center gap-2">
+          <nav aria-label={t("mainNav")} className="hidden md:flex items-center gap-2">
             {header.map((link) => (
               <WarmButton key={link.id} asChild variant="ghost">
                 <Link href={link.href}>{link.label}</Link>
@@ -59,9 +61,9 @@ export default async function TenantShell({ merchant, children }: TenantShellPro
           </nav>
           <div className="flex items-center gap-3">
             <WarmButton asChild className="hidden md:inline-flex">
-              <Link href="/login">Sign in</Link>
+              <Link href="/login">{t("signIn")}</Link>
             </WarmButton>
-            <MobileNav links={header} signInHref="/login" signInLabel="Sign in" />
+            <MobileNav links={header} signInHref="/login" signInLabel={t("signIn")} />
           </div>
         </div>
       </header>

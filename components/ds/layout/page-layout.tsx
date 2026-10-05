@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useCallback, useEffect, type ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 
 export interface PageLayoutProps {
   sidebar?: boolean;
@@ -9,6 +10,7 @@ export interface PageLayoutProps {
 }
 
 export function PageLayout({ sidebar = false, header, children }: PageLayoutProps) {
+  const t = useTranslations('dsComponents.sidebar');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -52,7 +54,7 @@ export function PageLayout({ sidebar = false, header, children }: PageLayoutProp
               onClick={toggleSidebar}
               className="inline-flex items-center justify-center w-9 h-9 rounded-md transition-colors"
               style={{ color: 'var(--ds-text-secondary)' }}
-              aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+              aria-label={sidebarOpen ? t('collapse') : t('expand')}
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="3" y1="6" x2="21" y2="6" />

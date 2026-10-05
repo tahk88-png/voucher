@@ -1,11 +1,13 @@
 'use client';
 
 import { Sun, Moon, Monitor } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useTheme } from '@/components/providers/theme-provider';
 
 const themeOrder = ['light', 'dark', 'system'] as const;
 
 export default function ThemeToggle() {
+  const t = useTranslations('site.theme');
   const { theme, setTheme } = useTheme();
 
   const cycle = () => {
@@ -15,8 +17,7 @@ export default function ThemeToggle() {
   };
 
   const Icon = theme === 'dark' ? Moon : theme === 'light' ? Sun : Monitor;
-  const label =
-    theme === 'dark' ? 'Dark mode' : theme === 'light' ? 'Light mode' : 'System theme';
+  const label = theme === 'dark' ? t('dark') : theme === 'light' ? t('light') : t('system');
 
   return (
     <button

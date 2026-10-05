@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { DollarSign, Plus, Trash2, ToggleLeft, ToggleRight } from 'lucide-react'
 import { WarmCard } from '@/components/warm-card'
 import { WarmButton } from '@/components/warm-button'
@@ -22,13 +23,14 @@ type PricingRule = {
   createdAt: string
 }
 
+// value is what the API stores; key is the translation key under pricing.ruleTypes.
 const RULE_TYPES = [
-  { value: 'demand', label: 'Demand-based', desc: 'Adjust price based on view/purchase ratio' },
-  { value: 'time_of_day', label: 'Time of Day', desc: 'Peak vs off-peak hour pricing' },
-  { value: 'inventory', label: 'Inventory', desc: 'Price changes based on remaining stock' },
-  { value: 'surge', label: 'Surge', desc: 'Special events/holidays markup' },
-  { value: 'loyalty', label: 'Loyalty', desc: 'Discounts for repeat customers' },
-]
+  { value: 'demand', key: 'demand' },
+  { value: 'time_of_day', key: 'timeOfDay' },
+  { value: 'inventory', key: 'inventory' },
+  { value: 'surge', key: 'surge' },
+  { value: 'loyalty', key: 'loyalty' },
+] as const
 
 const DEFAULT_CONFIGS: Record<string, Record<string, unknown>> = {
   demand: { threshold: 50, highDemandMultiplier: 1.1, lowDemandMultiplier: 0.95 },
@@ -39,6 +41,7 @@ const DEFAULT_CONFIGS: Record<string, Record<string, unknown>> = {
 }
 
 export default function PricingRulesPage() {
+  const t = useTranslations('merchantCatalog.pricing')
   const params = useParams()
   const slug = params.slug as string
   const [rules, setRules] = useState<PricingRule[]>([])
@@ -85,7 +88,7 @@ export default function PricingRulesPage() {
   }
 
   async function deleteRule(id: string) {
-    showConfirm('Delete this pricing rule?', async () => {
+    showConfirm(t('deleteConfirm'), async () => {
       setActionLoading(id)
       try {
         await fetch(`/api/merchant/${slug}/pricing-rules/${id}`, { method: 'DELETE' })
@@ -93,7 +96,7 @@ export default function PricingRulesPage() {
       } finally {
         setActionLoading(null)
       }
-    }, { confirmLabel: 'Delete', variant: 'destructive' })
+    }, { confirmLabel: t('delete'), variant: 'destructive' })
     return
   }
 
@@ -103,7 +106,7 @@ export default function PricingRulesPage() {
     try {
       config = JSON.parse(newConfigJson)
     } catch {
-      showError('The config field must be valid JSON.')
+      showError(t('errors.invalidJson'))
       return
     }
 
@@ -140,22 +143,22 @@ export default function PricingRulesPage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <DollarSign className="h-6 w-6 text-[var(--primary)]" />
-          <h1 className="text-2xl font-bold text-[var(--text)]">Dynamic Pricing</h1>
+          <h1 className="text-2xl font-bold text-[var(--text)]">{t('title')}</h1>
         </div>
         <WarmButton size="sm" onClick={() => setShowCreate(!showCreate)}>
           <Plus className="h-4 w-4" />
-          New Rule
+          {t('newRule')}
         </WarmButton>
       </div>
 
       {showCreate && (
         <WarmCard>
           <form onSubmit={handleCreate} className="space-y-4">
-            <h2 className="text-lg font-semibold text-[var(--text)]">Create Pricing Rule</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)]">{t('form.title')}</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label>Rule Type</Label>
+                <Label>{t('form.ruleType')}</Label>
                 <select
                   value={newRuleType}
                   onChange={(e) => handleRuleTypeChange(e.target.value)}
@@ -163,27 +166,30 @@ export default function PricingRulesPage() {
                 >
                   {RULE_TYPES.map((rt) => (
                     <option key={rt.value} value={rt.value}>
-                      {rt.label}
+                      {t(`ruleTypes.${rt.key}.label`)}
                     </option>
                   ))}
                 </select>
                 <p className="text-xs text-[var(--text-muted)] mt-1">
-                  {RULE_TYPES.find((rt) => rt.value === newRuleType)?.desc}
+                  {(() => {
+                    const selected = RULE_TYPES.find((rt) => rt.value === newRuleType)
+                    return selected ? t(`ruleTypes.${selected.key}.desc`) : null
+                  })()}
                 </p>
               </div>
               <div>
-                <Label>Priority</Label>
+                <Label>{t('form.priority')}</Label>
                 <Input
                   type="number"
                   value={newPriority}
                   onChange={(e) => setNewPriority(e.target.value)}
-                  placeholder="Higher = applied first"
+                  placeholder={t('form.priorityPlaceholder')}
                 />
               </div>
             </div>
 
             <div>
-              <Label>Configuration (JSON)</Label>
+              <Label>{t('form.config')}</Label>
               <textarea
                 value={newConfigJson}
                 onChange={(e) => setNewConfigJson(e.target.value)}
@@ -194,10 +200,10 @@ export default function PricingRulesPage() {
 
             <div className="flex gap-2">
               <WarmButton type="submit" size="sm" isLoading={actionLoading === 'create'}>
-                Create Rule
+                {t('form.submit')}
               </WarmButton>
               <WarmButton type="button" variant="ghost" size="sm" onClick={() => setShowCreate(false)}>
-                Cancel
+                {t('form.cancel')}
               </WarmButton>
             </div>
           </form>
@@ -205,11 +211,11 @@ export default function PricingRulesPage() {
       )}
 
       {loading ? (
-        <p className="text-[var(--text-muted)]">Loading rules...</p>
+        <p className="text-[var(--text-muted)]">{t('loading')}</p>
       ) : rules.length === 0 ? (
         <WarmCard>
           <p className="text-center text-[var(--text-muted)] py-8">
-            No pricing rules yet. Create one to enable dynamic pricing.
+            {t('empty')}
           </p>
         </WarmCard>
       ) : (
@@ -217,11 +223,11 @@ export default function PricingRulesPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[var(--border)]">
-                <th className="text-left py-3 px-4 text-[var(--text-muted)] font-medium">Type</th>
-                <th className="text-left py-3 px-4 text-[var(--text-muted)] font-medium">Priority</th>
-                <th className="text-left py-3 px-4 text-[var(--text-muted)] font-medium">Config</th>
-                <th className="text-left py-3 px-4 text-[var(--text-muted)] font-medium">Status</th>
-                <th className="text-right py-3 px-4 text-[var(--text-muted)] font-medium">Actions</th>
+                <th className="text-left py-3 px-4 text-[var(--text-muted)] font-medium">{t('table.type')}</th>
+                <th className="text-left py-3 px-4 text-[var(--text-muted)] font-medium">{t('table.priority')}</th>
+                <th className="text-left py-3 px-4 text-[var(--text-muted)] font-medium">{t('table.config')}</th>
+                <th className="text-left py-3 px-4 text-[var(--text-muted)] font-medium">{t('table.status')}</th>
+                <th className="text-right py-3 px-4 text-[var(--text-muted)] font-medium">{t('table.actions')}</th>
               </tr>
             </thead>
             <tbody>
@@ -231,7 +237,7 @@ export default function PricingRulesPage() {
                   <tr key={rule.id} className="border-b border-[var(--border)] hover:bg-[var(--surface-dim)]">
                     <td className="py-3 px-4">
                       <span className="font-medium text-[var(--text)]">
-                        {typeInfo?.label ?? rule.ruleType}
+                        {typeInfo ? t(`ruleTypes.${typeInfo.key}.label`) : rule.ruleType}
                       </span>
                     </td>
                     <td className="py-3 px-4 text-[var(--text-muted)]">{rule.priority}</td>
@@ -250,12 +256,12 @@ export default function PricingRulesPage() {
                         {rule.isActive ? (
                           <>
                             <ToggleRight className="h-5 w-5 text-green-600" />
-                            <span className="text-green-600">Active</span>
+                            <span className="text-green-600">{t('active')}</span>
                           </>
                         ) : (
                           <>
                             <ToggleLeft className="h-5 w-5 text-[var(--text-muted)]" />
-                            <span className="text-[var(--text-muted)]">Inactive</span>
+                            <span className="text-[var(--text-muted)]">{t('inactive')}</span>
                           </>
                         )}
                       </button>
@@ -264,8 +270,8 @@ export default function PricingRulesPage() {
                       <WarmButton
                         size="icon"
                         variant="ghost"
-                        aria-label="Delete pricing rule"
-                        title="Delete pricing rule"
+                        aria-label={t('deleteAria')}
+                        title={t('deleteAria')}
                         onClick={() => deleteRule(rule.id)}
                         disabled={actionLoading === rule.id}
                       >
@@ -282,17 +288,17 @@ export default function PricingRulesPage() {
 
       {/* Price preview section */}
       <WarmCard>
-        <h2 className="text-lg font-semibold text-[var(--text)] mb-3">Price Preview</h2>
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-3">{t('preview.title')}</h2>
         <p className="text-sm text-[var(--text-muted)] mb-3">
-          Enter a voucher ID to see how active rules would affect its price.
+          {t('preview.description')}
         </p>
         <div className="flex gap-2 items-end">
           <div className="flex-1">
-            <Label>Voucher ID</Label>
+            <Label>{t('preview.voucherId')}</Label>
             <Input
               value={previewPrice}
               onChange={(e) => setPreviewPrice(e.target.value)}
-              placeholder="Enter voucher ID"
+              placeholder={t('preview.voucherIdPlaceholder')}
             />
           </div>
           <WarmButton
@@ -305,18 +311,18 @@ export default function PricingRulesPage() {
                 const data = await res.json()
                 setPreviewResult(data.price)
               } else {
-                setPreviewResult({ error: 'Could not calculate price' })
+                setPreviewResult({ error: t('preview.error') })
               }
             }}
           >
-            Calculate
+            {t('preview.calculate')}
           </WarmButton>
         </div>
 
         {previewResult && !previewResult.error && (
           <div className="mt-4 space-y-2">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-[var(--text-muted)]">Base Price</span>
+              <span className="text-[var(--text-muted)]">{t('preview.basePrice')}</span>
               <span className="text-[var(--text)] font-mono">{previewResult.basePrice}</span>
             </div>
             {previewResult.adjustments?.map((adj: any, i: number) => (
@@ -328,7 +334,7 @@ export default function PricingRulesPage() {
               </div>
             ))}
             <div className="flex items-center justify-between text-sm font-semibold border-t border-[var(--border)] pt-2">
-              <span className="text-[var(--text)]">Final Price</span>
+              <span className="text-[var(--text)]">{t('preview.finalPrice')}</span>
               <span className="text-[var(--text)] font-mono">{previewResult.finalPrice}</span>
             </div>
           </div>

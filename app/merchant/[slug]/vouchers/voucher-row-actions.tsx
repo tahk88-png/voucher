@@ -7,6 +7,7 @@ import { showSuccess, showError } from '@/lib/toast-helpers';
 import { safeParseJson } from '@/lib/utils';
 import { Pause, Copy } from 'lucide-react';
 import { useConfirmation } from '@/components/ui/confirmation-dialog';
+import { useTranslations } from 'next-intl';
 
 type VoucherStatus = 'draft' | 'published' | 'paused' | 'ended';
 
@@ -21,12 +22,15 @@ export function VoucherRowActions({ slug, voucherId, status }: VoucherRowActions
   const [pausing, setPausing] = useState(false);
   const [duplicating, setDuplicating] = useState(false);
   const { confirm, dialog } = useConfirmation();
+  const t = useTranslations('merchantVouchers.rowActions');
+  const tCommon = useTranslations('common');
 
   const handlePause = async () => {
     const confirmed = await confirm({
-      title: 'Pause voucher',
-      description: 'Are you sure you want to pause this voucher? Users will not be able to purchase or redeem it while paused.',
-      confirmLabel: 'Pause',
+      title: t('pauseTitle'),
+      description: t('pauseDescription'),
+      confirmLabel: t('pauseConfirm'),
+      cancelLabel: tCommon('cancel'),
       variant: 'warning',
     });
 
@@ -40,10 +44,10 @@ export function VoucherRowActions({ slug, voucherId, status }: VoucherRowActions
         body: JSON.stringify({ status: 'paused' }),
       });
       if (!res.ok) throw new Error('Failed to pause');
-      showSuccess('Voucher paused');
+      showSuccess(t('paused'));
       router.refresh();
     } catch {
-      showError('Failed to pause voucher');
+      showError(t('pauseFailed'));
     } finally {
       setPausing(false);
     }
@@ -53,7 +57,7 @@ export function VoucherRowActions({ slug, voucherId, status }: VoucherRowActions
     setDuplicating(true);
     try {
       const getRes = await fetch(`/api/merchant/${slug}/vouchers/${voucherId}`);
-      if (!getRes.ok) throw new Error('Failed to load voucher');
+      if (!getRes.ok) throw new Error(t('loadFailed'));
       const v = await getRes.json();
 
       const designJson = v.designJson != null ? safeParseJson(v.designJson) : undefined;
@@ -82,13 +86,13 @@ export function VoucherRowActions({ slug, voucherId, status }: VoucherRowActions
       });
       if (!postRes.ok) {
         const d = await postRes.json().catch(() => ({}));
-        throw new Error(d.error || 'Failed to duplicate');
+        throw new Error(d.error || t('duplicateFailed'));
       }
       const created = await postRes.json();
-      showSuccess('Voucher duplicated');
+      showSuccess(t('duplicated'));
       router.push(`/merchant/${slug}/vouchers/${created.id}`);
     } catch (e) {
-      showError(e instanceof Error ? e.message : 'Failed to duplicate');
+      showError(e instanceof Error ? e.message : t('duplicateFailed'));
     } finally {
       setDuplicating(false);
     }
@@ -105,7 +109,7 @@ export function VoucherRowActions({ slug, voucherId, status }: VoucherRowActions
             onClick={handlePause}
             disabled={pausing}
             className="h-8 px-2"
-            aria-label="Pause voucher"
+            aria-label={t('pauseTitle')}
           >
             <Pause className="h-4 w-4" />
           </WarmButton>
@@ -116,7 +120,7 @@ export function VoucherRowActions({ slug, voucherId, status }: VoucherRowActions
           onClick={handleDuplicate}
           disabled={duplicating}
           className="h-8 px-2"
-          aria-label="Duplicate voucher"
+          aria-label={t('duplicateLabel')}
         >
           <Copy className="h-4 w-4" />
         </WarmButton>

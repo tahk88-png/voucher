@@ -11,6 +11,7 @@ import {
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { showConfirm } from '@/lib/confirm-helpers';
+import { useTranslations } from 'next-intl';
 
 interface GiftProduct {
   id: string;
@@ -35,6 +36,7 @@ export default function MerchantGiftsPage() {
   const { slug } = useParams<{ slug: string }>();
   const [products, setProducts] = useState<GiftProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const t = useTranslations('merchantGiftCards.gifts');
 
   useEffect(() => {
     fetch(`/api/merchant/${slug}/gifts`)
@@ -55,7 +57,7 @@ export default function MerchantGiftsPage() {
   };
 
   const handleDelete = async (id: string) => {
-    showConfirm('Are you sure? This will deactivate the product.', async () => {
+    showConfirm(t('confirmDelete'), async () => {
       const res = await fetch(`/api/merchant/${slug}/gifts/${id}`, { method: 'DELETE' });
       if (res.ok) {
         setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, isActive: false } : p)));
@@ -77,12 +79,12 @@ export default function MerchantGiftsPage() {
             <Gift className="h-5 w-5 text-white" />
           </div>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-[var(--text)]">Gift Products</h1>
-            <p className="text-sm text-[var(--text-muted)]">Manage your products in the Gift Hub</p>
+            <h1 className="text-2xl font-bold text-[var(--text)]">{t('title')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">{t('subtitle')}</p>
           </div>
           <WarmButton asChild variant="outline" size="sm">
             <Link href={`/merchant/${slug}/dashboard`}>
-              <ArrowLeft className="h-4 w-4 mr-1" /> Dashboard
+              <ArrowLeft className="h-4 w-4 mr-1" /> {t('dashboard')}
             </Link>
           </WarmButton>
         </div>
@@ -90,12 +92,12 @@ export default function MerchantGiftsPage() {
         {/* Stats */}
         <div className="grid gap-4 grid-cols-4 mb-6">
           {[
-            { label: 'Total', value: products.length, icon: Package },
-            { label: 'Active', value: activeCount, icon: Eye },
-            { label: 'Views', value: totalViews, icon: TrendingUp },
-            { label: 'Purchases', value: totalPurchases, icon: Gift },
+            { key: 'total', label: t('stats.total'), value: products.length, icon: Package },
+            { key: 'active', label: t('stats.active'), value: activeCount, icon: Eye },
+            { key: 'views', label: t('stats.views'), value: totalViews, icon: TrendingUp },
+            { key: 'purchases', label: t('stats.purchases'), value: totalPurchases, icon: Gift },
           ].map((s) => (
-            <WarmCard key={s.label} padding="md" className="bg-[var(--surface)]">
+            <WarmCard key={s.key} padding="md" className="bg-[var(--surface)]">
               <div className="flex items-center gap-2">
                 <s.icon className="h-4 w-4 text-[var(--text-faint)]" />
                 <span className="text-xs font-medium text-[var(--text-faint)]">{s.label}</span>
@@ -113,12 +115,15 @@ export default function MerchantGiftsPage() {
         ) : products.length === 0 ? (
           <WarmCard padding="xl" className="bg-[var(--surface)] text-center">
             <Gift className="h-12 w-12 mx-auto text-[var(--text-faint)] mb-3" />
-            <h2 className="text-lg font-semibold text-[var(--text)]">No gift products yet</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)]">{t('emptyTitle')}</h2>
             <p className="text-sm text-[var(--text-muted)] mb-4">
-              Add your first product to appear in the Gift Hub feed.
+              {t('emptyDescription')}
             </p>
             <p className="text-xs text-[var(--text-faint)]">
-              Use the API at <code className="bg-gray-100 px-1.5 py-0.5 rounded">POST /api/merchant/{slug}/gifts</code> to create products.
+              {t.rich('emptyApiHint', {
+                endpoint: `POST /api/merchant/${slug}/gifts`,
+                code: (chunks) => <code className="bg-gray-100 px-1.5 py-0.5 rounded">{chunks}</code>,
+              })}
             </p>
           </WarmCard>
         ) : (
@@ -143,21 +148,21 @@ export default function MerchantGiftsPage() {
                       <h3 className="font-semibold text-[var(--text)] truncate">{p.title}</h3>
                       {!p.isActive && (
                         <span className="px-1.5 py-0.5 rounded text-[10px] bg-[#f5ddd7] text-[#a23a28] font-medium">
-                          Inactive
+                          {t('inactive')}
                         </span>
                       )}
                       {p.isFeatured && (
                         <span className="px-1.5 py-0.5 rounded text-[10px] bg-[#f3e7cc] text-[#8a6420] font-medium">
-                          Featured
+                          {t('featured')}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center gap-3 text-xs text-[var(--text-faint)] mt-1">
                       <span>€{(p.priceCents / 100).toFixed(2)}</span>
                       <span>{p.category.name}</span>
-                      <span>{p.viewCount} views</span>
-                      <span>{p.purchaseCount} purchases</span>
-                      <span>{(p.conversionRate * 100).toFixed(1)}% CVR</span>
+                      <span>{t('views', { count: p.viewCount })}</span>
+                      <span>{t('purchases', { count: p.purchaseCount })}</span>
+                      <span>{t('conversionRate', { rate: (p.conversionRate * 100).toFixed(1) })}</span>
                     </div>
                   </div>
 
@@ -167,7 +172,7 @@ export default function MerchantGiftsPage() {
                       variant="ghost"
                       size="icon"
                       onClick={() => handleToggleActive(p.id, p.isActive)}
-                      title={p.isActive ? 'Deactivate' : 'Activate'}
+                      title={p.isActive ? t('deactivate') : t('activate')}
                     >
                       {p.isActive ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </WarmButton>
@@ -175,7 +180,7 @@ export default function MerchantGiftsPage() {
                       variant="ghost"
                       size="icon"
                       onClick={() => handleDelete(p.id)}
-                      title="Delete"
+                      title={t('delete')}
                     >
                       <Trash2 className="h-4 w-4 text-[#c84b36]" />
                     </WarmButton>

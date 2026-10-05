@@ -7,6 +7,7 @@ import { GiftCard } from '@/components/gifts/gift-card';
 import { GiftFilters } from '@/components/gifts/gift-filters';
 import { GiftFeedSection } from '@/components/gifts/gift-feed-section';
 import { AIGiftWizard } from '@/components/gifts/ai-gift-wizard';
+import { useTranslations } from 'next-intl';
 
 interface FeedItem {
   id: string;
@@ -42,6 +43,7 @@ interface FilterOption {
 }
 
 export default function GiftsPage() {
+  const t = useTranslations('giftsPages.hub');
   const [items, setItems] = useState<FeedItem[]>([]);
   const [modules, setModules] = useState<Module[]>([]);
   const [loading, setLoading] = useState(true);
@@ -153,8 +155,8 @@ export default function GiftsPage() {
             <Gift className="h-5 w-5 text-[var(--primary-foreground)]" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-[var(--text)]">Gifts</h1>
-            <p className="text-sm text-[var(--text-muted)]">Find the perfect gift for every occasion</p>
+            <h1 className="text-2xl font-bold text-[var(--text)]">{t('title')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">{t('subtitle')}</p>
           </div>
         </div>
 
@@ -199,13 +201,13 @@ export default function GiftsPage() {
           </div>
         ) : feedError ? (
           <div role="alert" className="text-center py-20">
-            <p className="text-lg font-medium text-[var(--text)]">Gifts couldn&apos;t be loaded</p>
+            <p className="text-lg font-medium text-[var(--text)]">{t('loadError')}</p>
             <button
               type="button"
               onClick={() => loadFeed(false)}
               className="mt-3 text-sm font-medium text-[var(--primary)] underline underline-offset-2"
             >
-              Try again
+              {t('retry')}
             </button>
           </div>
         ) : items.length === 0 ? (
@@ -213,20 +215,20 @@ export default function GiftsPage() {
             <Gift className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" aria-hidden="true" />
             {catalogEmpty ? (
               <>
-                <p className="text-lg font-medium text-[var(--text)]">No gifts are listed yet</p>
+                <p className="text-lg font-medium text-[var(--text)]">{t('emptyCatalog.title')}</p>
                 <p className="text-sm text-[var(--text-muted)] mt-1">
-                  In the meantime, vouchers from local merchants make good gifts too.
+                  {t('emptyCatalog.body')}
                 </p>
               </>
             ) : (
               <>
-                <p className="text-lg font-medium text-[var(--text)]">No gifts match these filters</p>
+                <p className="text-lg font-medium text-[var(--text)]">{t('noMatches')}</p>
                 <button
                   type="button"
                   onClick={() => setFilters({})}
                   className="mt-2 text-sm font-medium text-[var(--primary)] underline underline-offset-2"
                 >
-                  Clear filters
+                  {t('clearFilters')}
                 </button>
               </>
             )}
@@ -235,13 +237,13 @@ export default function GiftsPage() {
                 href="/campaigns"
                 className="inline-flex items-center px-5 py-2.5 rounded-xl bg-[var(--primary)] text-[var(--primary-foreground)] text-sm font-semibold hover:bg-[var(--primary-hover)]"
               >
-                Browse campaigns
+                {t('browseCampaigns')}
               </Link>
             </div>
           </div>
         ) : (
           <>
-            <h2 className="text-xl font-bold text-[var(--text)] mb-4">All Gifts</h2>
+            <h2 className="text-xl font-bold text-[var(--text)] mb-4">{t('allGifts')}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
               {items.map((item) => (
                 <GiftCard key={item.id} {...item} onTrack={handleTrack} />
@@ -260,7 +262,7 @@ export default function GiftsPage() {
                   {loadingMore ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
-                    'Load more'
+                    t('loadMore')
                   )}
                 </button>
               </div>

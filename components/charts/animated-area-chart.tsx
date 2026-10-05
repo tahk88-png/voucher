@@ -12,6 +12,7 @@ import {
   Legend,
   type TooltipProps,
 } from "recharts"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 interface AnimatedAreaChartProps {
@@ -86,6 +87,7 @@ export function AnimatedAreaChart({
   xAxisKey = "name",
   className,
 }: AnimatedAreaChartProps) {
+  const t = useTranslations("dsComponents.common")
   const resolvedColors = useResolvedColors(colors)
 
   if (!data || data.length === 0) {
@@ -97,7 +99,7 @@ export function AnimatedAreaChart({
         )}
         style={{ height }}
       >
-        <p className="text-sm text-[var(--text-muted)]">No data available</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("noData")}</p>
       </div>
     )
   }

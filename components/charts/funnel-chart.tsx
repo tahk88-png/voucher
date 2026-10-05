@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 interface FunnelDatum {
@@ -31,6 +32,7 @@ export function FunnelChart({
   showPercentage = true,
   className,
 }: FunnelChartProps) {
+  const t = useTranslations("dsComponents.funnelChart")
   const [visibleCount, setVisibleCount] = React.useState(0)
 
   React.useEffect(() => {
@@ -57,7 +59,7 @@ export function FunnelChart({
         )}
         style={{ height }}
       >
-        <p className="text-sm text-[var(--text-muted)]">No activity yet for this period</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("empty")}</p>
       </div>
     )
   }

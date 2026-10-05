@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { Upload, X, File, Image as ImageIcon, FileText } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { WarmButton } from "@/components/warm-button"
@@ -26,6 +27,7 @@ export function FileUpload({
   className,
   disabled,
 }: FileUploadProps) {
+  const t = useTranslations("ui")
   const [files, setFiles] = React.useState<File[]>(value)
   const [dragActive, setDragActive] = React.useState(false)
   const [error, setError] = React.useState<string>("")
@@ -36,7 +38,7 @@ export function FileUpload({
 
     // Check max files
     if (files.length + newFiles.length > maxFiles) {
-      setError(`Maximum ${maxFiles} files allowed`)
+      setError(t("fileUpload.maxFiles", { maxFiles }))
       return []
     }
 
@@ -45,7 +47,7 @@ export function FileUpload({
       (file) => file.size > maxSize * 1024 * 1024
     )
     if (oversizedFiles.length > 0) {
-      setError(`Files must be smaller than ${maxSize}MB`)
+      setError(t("fileUpload.tooLarge", { maxSize }))
       return []
     }
 
@@ -124,10 +126,10 @@ export function FileUpload({
           <Upload className="h-6 w-6 text-[var(--text-faint)]" />
         </div>
         <div className="mb-2 text-sm font-medium text-[var(--text)]">
-          {dragActive ? "Drop files here" : "Drag & drop files here"}
+          {dragActive ? t("fileUpload.dropHere") : t("fileUpload.dragDrop")}
         </div>
         <div className="mb-4 text-xs text-[var(--text-muted)]">
-          or click to browse (max {maxSize}MB per file)
+          {t("fileUpload.browseHint", { maxSize })}
         </div>
         <WarmButton
           type="button"
@@ -135,7 +137,7 @@ export function FileUpload({
           onClick={() => inputRef.current?.click()}
           disabled={disabled}
         >
-          Select files
+          {t("fileUpload.select")}
         </WarmButton>
       </div>
 
@@ -165,7 +167,7 @@ export function FileUpload({
                 type="button"
                 onClick={() => removeFile(index)}
                 disabled={disabled}
-                aria-label={`Remove ${file.name}`}
+                aria-label={t("fileUpload.remove", { name: file.name })}
                 className="text-[var(--text-faint)] hover:text-[var(--danger)] transition-colors disabled:opacity-50"
               >
                 <X className="h-4 w-4" />

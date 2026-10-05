@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
+import { useTranslations } from 'next-intl';
 
 interface Product {
   id: string;
@@ -43,6 +44,7 @@ interface Upsell {
 export default function GiftProductPage() {
   const { productId } = useParams<{ productId: string }>();
   const router = useRouter();
+  const t = useTranslations('giftsPages.product');
   const [product, setProduct] = useState<Product | null>(null);
   const [upsells, setUpsells] = useState<Upsell[]>([]);
   const [loading, setLoading] = useState(true);
@@ -118,9 +120,9 @@ export default function GiftProductPage() {
     return (
       <div className="min-h-screen bg-[var(--bg)] flex flex-col items-center justify-center gap-4">
         <Gift className="h-12 w-12 text-[var(--text-muted)]" />
-        <p className="text-lg font-medium text-[var(--text)]">Gift not found</p>
+        <p className="text-lg font-medium text-[var(--text)]">{t('notFound')}</p>
         <WarmButton variant="outline" onClick={() => router.push('/gifts')}>
-          <ArrowLeft className="h-4 w-4 mr-2" /> Back to Gift Hub
+          <ArrowLeft className="h-4 w-4 mr-2" /> {t('backToHub')}
         </WarmButton>
       </div>
     );
@@ -134,7 +136,7 @@ export default function GiftProductPage() {
       <div className="container mx-auto max-w-5xl px-4 py-6">
         {/* Back nav */}
         <Link href="/gifts" className="inline-flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-[var(--primary)] mb-4">
-          <ArrowLeft className="h-4 w-4" /> Back to Gift Hub
+          <ArrowLeft className="h-4 w-4" /> {t('backToHub')}
         </Link>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -153,7 +155,7 @@ export default function GiftProductPage() {
               <div className="flex gap-2 mt-2 overflow-x-auto">
                 {product.mediaUrls.map((url, i) => (
                   <div key={i} className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-[var(--border)]">
-                    <Image fill src={url} alt={`${product.title} ${i + 1}`} className="object-cover" sizes="64px" />
+                    <Image fill src={url} alt={t('imageAlt', { title: product.title, index: i + 1 })} className="object-cover" sizes="64px" />
                   </div>
                 ))}
               </div>
@@ -164,7 +166,7 @@ export default function GiftProductPage() {
           <div>
             {product.isFeatured && (
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-[var(--primary)] text-[var(--primary-foreground)] mb-2">
-                <Sparkles className="h-3 w-3" /> Featured
+                <Sparkles className="h-3 w-3" /> {t('featured')}
               </span>
             )}
 
@@ -215,7 +217,7 @@ export default function GiftProductPage() {
             {/* Stock */}
             {product.stock !== null && product.stock <= 10 && (
               <p className="text-sm text-red-600 font-medium mt-3">
-                Only {product.stock} left in stock
+                {t('lowStock', { count: product.stock })}
               </p>
             )}
 
@@ -233,7 +235,7 @@ export default function GiftProductPage() {
                     window.open(product.affiliateUrl!, '_blank');
                   }}
                 >
-                  <ExternalLink className="h-4 w-4 mr-2" /> Buy Now
+                  <ExternalLink className="h-4 w-4 mr-2" /> {t('buyNow')}
                 </WarmButton>
               ) : (
                 <WarmButton
@@ -246,7 +248,7 @@ export default function GiftProductPage() {
                     }).catch(() => {});
                   }}
                 >
-                  <ShoppingCart className="h-4 w-4 mr-2" /> Add to Cart
+                  <ShoppingCart className="h-4 w-4 mr-2" /> {t('addToCart')}
                 </WarmButton>
               )}
 
@@ -254,9 +256,9 @@ export default function GiftProductPage() {
                 variant="outline"
                 size="icon"
                 onClick={handleSave}
-                aria-label={saved ? 'Remove from wishlist' : 'Save to wishlist'}
+                aria-label={saved ? t('removeFromWishlist') : t('saveToWishlist')}
                 aria-pressed={saved}
-                title={saved ? 'Remove from wishlist' : 'Save to wishlist'}
+                title={saved ? t('removeFromWishlist') : t('saveToWishlist')}
               >
                 <Heart className={saved ? 'h-5 w-5 fill-red-500 text-red-500' : 'h-5 w-5'} />
               </WarmButton>
@@ -265,8 +267,8 @@ export default function GiftProductPage() {
                 variant="outline"
                 size="icon"
                 onClick={handleShare}
-                aria-label="Share this gift"
-                title="Share this gift"
+                aria-label={t('share')}
+                title={t('share')}
               >
                 <Share2 className="h-5 w-5" />
               </WarmButton>
@@ -277,7 +279,7 @@ export default function GiftProductPage() {
         {/* Upsells */}
         {upsells.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-xl font-bold text-[var(--text)] mb-4">You might also like</h2>
+            <h2 className="text-xl font-bold text-[var(--text)] mb-4">{t('upsellsTitle')}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {upsells.map((u) => (
                 <Link key={u.productId} href={`/gifts/${u.productId}`}>

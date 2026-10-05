@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, useId, type FormEvent, type KeyboardEvent } from 'react';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 /** Areas with a fixed bottom tab bar (h-16) below the lg breakpoint. */
@@ -18,6 +19,7 @@ interface ChatMessage {
 }
 
 export function ChatWidget() {
+  const t = useTranslations('site.chat');
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
@@ -117,14 +119,14 @@ export function ChatWidget() {
         {
           id: `error-${Date.now()}`,
           role: 'assistant',
-          content: 'Sorry, I had trouble sending your message. Please try again.',
+          content: t('sendError'),
           createdAt: new Date().toISOString(),
         },
       ]);
     } finally {
       setIsTyping(false);
     }
-  }, [input, isTyping, sessionId]);
+  }, [input, isTyping, sessionId, t]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -172,7 +174,7 @@ export function ChatWidget() {
           'hover:scale-110 hover:shadow-xl active:scale-95',
           isOpen && 'rotate-0'
         )}
-        aria-label={isOpen ? 'Close automated assistant' : 'Open automated assistant'}
+        aria-label={isOpen ? t('closeAssistant') : t('openAssistant')}
       >
         {isOpen ? (
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -200,7 +202,7 @@ export function ChatWidget() {
             : 'opacity-0 translate-y-4 scale-95 pointer-events-none sm:translate-y-8'
         )}
         role="dialog"
-        aria-label="GiftHub automated assistant"
+        aria-label={t('dialogLabel')}
         aria-hidden={!isOpen}
         onKeyDown={(e) => {
           if (e.key === 'Escape') close();
@@ -215,8 +217,8 @@ export function ChatWidget() {
               </svg>
             </div>
             <div>
-              <h3 className="font-semibold text-sm">GiftHub Assistant</h3>
-              <p className="text-xs text-white/90">Automated assistant</p>
+              <h3 className="font-semibold text-sm">{t('title')}</h3>
+              <p className="text-xs text-white/90">{t('subtitle')}</p>
             </div>
           </div>
           <div className="flex items-center gap-1">
@@ -225,8 +227,8 @@ export function ChatWidget() {
               tabIndex={isOpen ? 0 : -1}
               onClick={startNewChat}
               className="p-1.5 rounded-lg hover:bg-white/20 transition-colors"
-              aria-label="New chat"
-              title="New chat"
+              aria-label={t('newChat')}
+              title={t('newChat')}
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -237,7 +239,7 @@ export function ChatWidget() {
               tabIndex={isOpen ? 0 : -1}
               onClick={close}
               className="p-1.5 rounded-lg hover:bg-white/20 transition-colors sm:hidden"
-              aria-label="Close chat"
+              aria-label={t('closeChat')}
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -255,9 +257,9 @@ export function ChatWidget() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
                 </svg>
               </div>
-              <p className="text-sm font-medium text-[var(--text,#111827)]">Hi there!</p>
+              <p className="text-sm font-medium text-[var(--text,#111827)]">{t('greeting')}</p>
               <p className="text-xs text-[var(--text-muted,#6b7280)] mt-1">
-                I&apos;m an automated assistant. Ask about vouchers, gift cards, tickets, or your account.
+                {t('intro')}
               </p>
             </div>
           )}
@@ -305,7 +307,7 @@ export function ChatWidget() {
           className="shrink-0 border-t border-[var(--border,#e5e7eb)] px-3 py-2.5 flex items-end gap-2 bg-[var(--surface,#ffffff)]"
         >
           <label htmlFor={inputId} className="sr-only">
-            Message to the automated assistant
+            {t('inputLabel')}
           </label>
           <textarea
             id={inputId}
@@ -314,7 +316,7 @@ export function ChatWidget() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type a message..."
+            placeholder={t('placeholder')}
             rows={1}
             className={cn(
               'flex-1 resize-none bg-[var(--surface-dim,#f3f4f6)] rounded-xl px-3.5 py-2.5',
@@ -342,7 +344,7 @@ export function ChatWidget() {
               'hover:opacity-90 active:scale-95',
               'disabled:opacity-40 disabled:cursor-not-allowed'
             )}
-            aria-label="Send message"
+            aria-label={t('send')}
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />

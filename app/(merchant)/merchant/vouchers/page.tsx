@@ -1,5 +1,10 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Manage Vouchers', noIndex: true });
+import { getTranslations } from "next-intl/server"
+
+export async function generateMetadata() {
+  const t = await getTranslations("merchantLegacy.metadata")
+  return pageMetadata({ title: t("vouchersTitle"), noIndex: true })
+}
 
 import { redirect } from "next/navigation"
 import { auth } from "@/lib/auth"
@@ -22,18 +27,19 @@ export default async function MerchantVouchersAliasPage() {
   })
 
   if (!member?.merchant) {
+    const t = await getTranslations("merchantLegacy")
     return (
       <WarmCard padding="lg" className="bg-white text-center border border-[rgba(139,115,85,0.15)]">
         <Gift className="h-12 w-12 mx-auto text-[#8B7355] mb-4" />
-        <h3 className="text-lg font-semibold text-[#2D2721] mb-2">No merchant access</h3>
+        <h3 className="text-lg font-semibold text-[#2D2721] mb-2">{t("noAccess.title")}</h3>
         <p className="text-sm text-[#6B5744] mb-4">
-          Connect to a merchant account to manage vouchers.
+          {t("noAccess.vouchersHint")}
         </p>
         <WarmButton asChild>
           <Link href="/campaigns">
             <span className="inline-flex items-center gap-2">
               <Plus className="h-4 w-4" />
-              Explore campaigns
+              {t("noAccess.exploreCampaigns")}
             </span>
           </Link>
         </WarmButton>

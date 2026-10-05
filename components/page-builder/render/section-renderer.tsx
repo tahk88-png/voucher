@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { Input } from "@/components/ui/input"
@@ -27,6 +28,9 @@ export default function SectionRenderer({
   rentals = [],
   vouchers = [],
 }: SectionRendererProps) {
+  // Only fixed UI chrome and default placeholder copy is translated here;
+  // merchant-entered content (names, descriptions) is rendered as-is.
+  const t = useTranslations("pageBuilder.renderer")
   switch (id) {
     case "hero":
       return (
@@ -36,14 +40,14 @@ export default function SectionRenderer({
               {merchant.name}
             </h1>
             <p className="mt-4 text-lg text-[var(--text-muted)]">
-              Curated offers, rentals, and vouchers from {merchant.name}.
+              {t("hero.subtitle", { name: merchant.name })}
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <WarmButton asChild>
-                <Link href="/shop">Shop products</Link>
+                <Link href="/shop">{t("hero.shopProducts")}</Link>
               </WarmButton>
               <WarmButton asChild variant="outline">
-                <Link href="/rent">Browse rentals</Link>
+                <Link href="/rent">{t("hero.browseRentals")}</Link>
               </WarmButton>
             </div>
           </div>
@@ -54,11 +58,11 @@ export default function SectionRenderer({
         <section className="py-12 bg-white/60">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-6 md:grid-cols-3">
             {[
-              { icon: Gift, title: "Rewards", text: "Voucher incentives built-in." },
-              { icon: Package, title: "Reliable stock", text: "Updated pricing and availability." },
-              { icon: Calendar, title: "Flexible dates", text: "Plan rentals with ease." },
+              { key: "rewards", icon: Gift, title: t("valueProps.rewardsTitle"), text: t("valueProps.rewardsText") },
+              { key: "stock", icon: Package, title: t("valueProps.stockTitle"), text: t("valueProps.stockText") },
+              { key: "dates", icon: Calendar, title: t("valueProps.datesTitle"), text: t("valueProps.datesText") },
             ].map((item) => (
-              <WarmCard key={item.title} padding="lg" className="bg-[var(--surface)]">
+              <WarmCard key={item.key} padding="lg" className="bg-[var(--surface)]">
                 <item.icon className="h-6 w-6 text-[var(--danger)]" />
                 <h3 className="mt-3 font-semibold text-[var(--text)]">{item.title}</h3>
                 <p className="text-sm text-[var(--text-muted)] mt-2">{item.text}</p>
@@ -72,15 +76,15 @@ export default function SectionRenderer({
         <section className="py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-[var(--text)]">Featured products</h2>
+              <h2 className="text-2xl font-bold text-[var(--text)]">{t("products.title")}</h2>
               <WarmButton asChild variant="ghost">
-                <Link href="/shop">View all</Link>
+                <Link href="/shop">{t("viewAll")}</Link>
               </WarmButton>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {products.length === 0 ? (
                 <WarmCard padding="lg" className="col-span-full text-center">
-                  <p className="text-[var(--text-muted)]">No products yet.</p>
+                  <p className="text-[var(--text-muted)]">{t("products.empty")}</p>
                 </WarmCard>
               ) : (
                 products.map((product) => (
@@ -89,7 +93,7 @@ export default function SectionRenderer({
                       <div>
                         <p className="font-semibold text-[var(--text)]">{product.name}</p>
                         <p className="text-sm text-[var(--text-muted)] line-clamp-2">
-                          {product.description || "Product highlight"}
+                          {product.description || t("products.fallbackDescription")}
                         </p>
                       </div>
                       <p className="text-lg font-bold text-[var(--text)]">
@@ -108,25 +112,25 @@ export default function SectionRenderer({
         <section className="py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-[var(--text)]">Rental packages</h2>
+              <h2 className="text-2xl font-bold text-[var(--text)]">{t("rentals.title")}</h2>
               <WarmButton asChild variant="ghost">
-                <Link href="/rent">View all</Link>
+                <Link href="/rent">{t("viewAll")}</Link>
               </WarmButton>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {rentals.length === 0 ? (
                 <WarmCard padding="lg" className="col-span-full text-center">
-                  <p className="text-[var(--text-muted)]">No rentals yet.</p>
+                  <p className="text-[var(--text-muted)]">{t("rentals.empty")}</p>
                 </WarmCard>
               ) : (
                 rentals.map((item) => (
                   <WarmCard key={item.id} padding="lg" className="bg-[var(--surface)]">
                     <p className="font-semibold text-[var(--text)]">{item.name}</p>
                     <p className="text-sm text-[var(--text-muted)] line-clamp-2">
-                      {item.description || "Rental highlight"}
+                      {item.description || t("rentals.fallbackDescription")}
                     </p>
                     <p className="mt-3 text-[var(--text)] font-bold">
-                      {formatCurrency(item.dailyRate, item.currency)} / day
+                      {t("rentals.perDay", { price: formatCurrency(item.dailyRate, item.currency) })}
                     </p>
                   </WarmCard>
                 ))
@@ -139,11 +143,11 @@ export default function SectionRenderer({
       return (
         <section className="py-12 bg-white/60">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">Browse categories</h2>
+            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">{t("categories.title")}</h2>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-              {["Popular", "Business", "Events", "Seasonal", "Corporate", "Custom"].map((label) => (
-                <WarmCard key={label} padding="lg" className="bg-[var(--surface)] text-center">
-                  <p className="font-semibold text-[var(--text)]">{label}</p>
+              {(["popular", "business", "events", "seasonal", "corporate", "custom"] as const).map((key) => (
+                <WarmCard key={key} padding="lg" className="bg-[var(--surface)] text-center">
+                  <p className="font-semibold text-[var(--text)]">{t(`categories.${key}`)}</p>
                 </WarmCard>
               ))}
             </div>
@@ -156,12 +160,12 @@ export default function SectionRenderer({
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <WarmCard padding="lg" className="bg-[var(--surface)]">
               <Calendar className="h-6 w-6 text-[var(--danger)] mx-auto" />
-              <h3 className="mt-3 font-semibold text-[var(--text)]">Live availability</h3>
+              <h3 className="mt-3 font-semibold text-[var(--text)]">{t("availability.title")}</h3>
               <p className="text-sm text-[var(--text-muted)] mt-2">
-                Check availability and request a quote in minutes.
+                {t("availability.text")}
               </p>
               <WarmButton asChild className="mt-4">
-                <Link href="/rent">See calendar</Link>
+                <Link href="/rent">{t("availability.seeCalendar")}</Link>
               </WarmButton>
             </WarmCard>
           </div>
@@ -171,12 +175,12 @@ export default function SectionRenderer({
       return (
         <section className="py-12 bg-white/60">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">What customers say</h2>
+            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">{t("testimonials.title")}</h2>
             <div className="grid gap-6 md:grid-cols-3">
-              {["Smooth process", "Loved the voucher", "Great support"].map((quote) => (
-                <WarmCard key={quote} padding="lg" className="bg-[var(--surface)]">
+              {(["smooth", "lovedVoucher", "support"] as const).map((key) => (
+                <WarmCard key={key} padding="lg" className="bg-[var(--surface)]">
                   <Star className="h-5 w-5 text-[var(--primary)]" />
-                  <p className="text-sm text-[var(--text-muted)] mt-2">&ldquo;{quote}&rdquo;</p>
+                  <p className="text-sm text-[var(--text-muted)] mt-2">&ldquo;{t(`testimonials.${key}`)}&rdquo;</p>
                 </WarmCard>
               ))}
             </div>
@@ -187,7 +191,7 @@ export default function SectionRenderer({
       return (
         <section className="py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">Gallery</h2>
+            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">{t("gallery.title")}</h2>
             <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
               {Array.from({ length: 6 }).map((_, index) => (
                 <div key={index} className="h-36 rounded-2xl bg-[#FFE5B4]/60" />
@@ -200,12 +204,12 @@ export default function SectionRenderer({
       return (
         <section className="py-12 bg-white/60">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">Pricing</h2>
+            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">{t("pricing.title")}</h2>
             <div className="grid gap-6 md:grid-cols-3">
-              {["Starter", "Growth", "Enterprise"].map((tier) => (
+              {(["starter", "growth", "enterprise"] as const).map((tier) => (
                 <WarmCard key={tier} padding="lg" className="bg-[var(--surface)]">
-                  <p className="font-semibold text-[var(--text)]">{tier}</p>
-                  <p className="text-sm text-[var(--text-muted)] mt-2">Custom pricing &amp; support</p>
+                  <p className="font-semibold text-[var(--text)]">{t(`pricing.${tier}`)}</p>
+                  <p className="text-sm text-[var(--text-muted)] mt-2">{t("pricing.tierText")}</p>
                 </WarmCard>
               ))}
             </div>
@@ -217,9 +221,9 @@ export default function SectionRenderer({
         <section className="py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <WarmCard padding="lg" className="bg-[var(--surface)]">
-              <h3 className="text-lg font-semibold text-[var(--text)]">Rental terms</h3>
+              <h3 className="text-lg font-semibold text-[var(--text)]">{t("rentalTerms.title")}</h3>
               <p className="text-sm text-[var(--text-muted)] mt-2">
-                Clear deposits, pickup rules, and return policy shared upfront.
+                {t("rentalTerms.text")}
               </p>
             </WarmCard>
           </div>
@@ -229,11 +233,11 @@ export default function SectionRenderer({
       return (
         <section className="py-12 bg-white/60">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">FAQ</h2>
+            <h2 className="text-2xl font-bold text-[var(--text)] mb-6">{t("faq.title")}</h2>
             <div className="space-y-3">
-              {["How do I redeem?", "Can I reschedule?", "Do you offer support?"].map((q) => (
+              {(["redeem", "reschedule", "support"] as const).map((q) => (
                 <WarmCard key={q} padding="lg" className="bg-[var(--surface)]">
-                  <p className="font-semibold text-[var(--text)]">{q}</p>
+                  <p className="font-semibold text-[var(--text)]">{t(`faq.${q}`)}</p>
                 </WarmCard>
               ))}
             </div>
@@ -245,16 +249,16 @@ export default function SectionRenderer({
         <section className="py-12">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
-              <h3 className="text-lg font-semibold text-[var(--text)]">Stay updated</h3>
+              <h3 className="text-lg font-semibold text-[var(--text)]">{t("newsletter.title")}</h3>
               <p className="text-sm text-[var(--text-muted)] mt-2">
-                Get new offers and rental releases in your inbox.
+                {t("newsletter.text")}
               </p>
               <div className="mt-4 flex flex-col sm:flex-row gap-2">
                 <label htmlFor="newsletter-email" className="sr-only">
-                  Email address
+                  {t("newsletter.emailLabel")}
                 </label>
                 <Input id="newsletter-email" type="email" placeholder="you@example.com" />
-                <WarmButton>Subscribe</WarmButton>
+                <WarmButton>{t("newsletter.subscribe")}</WarmButton>
               </div>
             </WarmCard>
           </div>
@@ -265,9 +269,11 @@ export default function SectionRenderer({
         <section className="py-12">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <WarmCard padding="lg" className="bg-[var(--surface)]">
-              <h3 className="text-lg font-semibold text-[var(--text)]">Contact</h3>
+              <h3 className="text-lg font-semibold text-[var(--text)]">{t("contact.title")}</h3>
               <p className="text-sm text-[var(--text-muted)] mt-2">
-                Email us at {merchant.supportEmail || "support@" + merchant.slug + ".com"}
+                {t("contact.emailUs", {
+                  email: merchant.supportEmail || "support@" + merchant.slug + ".com",
+                })}
               </p>
               {merchant.website ? (
                 <p className="text-sm text-[var(--text-muted)] mt-2">
@@ -284,7 +290,7 @@ export default function SectionRenderer({
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
               <MapPin className="h-6 w-6 text-[var(--danger)] mx-auto" />
-              <p className="text-sm text-[var(--text-muted)] mt-2">Pickup location shared after booking.</p>
+              <p className="text-sm text-[var(--text-muted)] mt-2">{t("map.text")}</p>
             </WarmCard>
           </div>
         </section>
@@ -294,25 +300,25 @@ export default function SectionRenderer({
         <section className="py-12">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-[var(--text)]">Active vouchers</h2>
+              <h2 className="text-2xl font-bold text-[var(--text)]">{t("vouchers.title")}</h2>
               <WarmButton asChild variant="ghost">
-                <Link href="/campaigns">See all</Link>
+                <Link href="/campaigns">{t("seeAll")}</Link>
               </WarmButton>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {vouchers.length === 0 ? (
                 <WarmCard padding="lg" className="col-span-full text-center">
-                  <p className="text-[var(--text-muted)]">No vouchers available.</p>
+                  <p className="text-[var(--text-muted)]">{t("vouchers.empty")}</p>
                 </WarmCard>
               ) : (
                 vouchers.map((voucher) => (
                   <WarmCard key={voucher.id} padding="lg" className="bg-[var(--surface)]">
-                    <p className="font-semibold text-[var(--text)]">Voucher</p>
+                    <p className="font-semibold text-[var(--text)]">{t("vouchers.voucher")}</p>
                     <p className="text-sm text-[var(--text-muted)] mt-2">
                       {formatCurrency(voucher.value, voucher.currency)}
                     </p>
                     <WarmButton asChild className="mt-3">
-                      <Link href={`/v/${voucher.id}`}>View voucher</Link>
+                      <Link href={`/v/${voucher.id}`}>{t("vouchers.view")}</Link>
                     </WarmButton>
                   </WarmCard>
                 ))

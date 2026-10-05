@@ -96,6 +96,46 @@ export function toPublicNavLinks(links: NavigationLinkItem[]): NavigationLinkIte
   }))
 }
 
+/** Keys under the `site.navLinks` messages for the platform's standard link labels. */
+export const NAV_LINK_LABEL_KEYS = [
+  "campaigns",
+  "merchants",
+  "explore",
+  "search",
+  "faq",
+  "contact",
+  "privacy",
+  "terms",
+  "home",
+  "about",
+  "vouchers",
+  "shop",
+  "rent",
+] as const
+export type NavLinkLabelKey = (typeof NAV_LINK_LABEL_KEYS)[number]
+
+/**
+ * The translation key for a standard link label (fallback links and seeded
+ * rows such as "Campaigns" or "Hub"), or null for a custom label configured in
+ * the database, which is shown as entered.
+ */
+export function navLinkLabelKey(label: string): NavLinkLabelKey | null {
+  const normalized = label.trim().toLowerCase()
+  const publicLabel = (PUBLIC_LABELS[normalized] ?? normalized).toLowerCase()
+  return (NAV_LINK_LABEL_KEYS as readonly string[]).includes(publicLabel) ? (publicLabel as NavLinkLabelKey) : null
+}
+
+/** Shows standard link labels in the visitor's language; custom labels stay as configured. */
+export function localizeNavLinks(
+  links: NavigationLinkItem[],
+  translate: (key: NavLinkLabelKey) => string,
+): NavigationLinkItem[] {
+  return links.map((link) => {
+    const key = navLinkLabelKey(link.label)
+    return key ? { ...link, label: translate(key) } : link
+  })
+}
+
 export function getFallbackNavigation(scope: NavigationScope): {
   header: NavigationLinkItem[]
   footer: NavigationLinkItem[]

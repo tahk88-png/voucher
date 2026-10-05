@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 import { FeedSkeleton } from './loading-skeleton'
 
 export type EventType = 'purchase' | 'redemption' | 'signup' | 'alert'
@@ -39,22 +40,27 @@ function getInitials(name: string): string {
     .toUpperCase()
 }
 
-function relativeTime(date: Date | string): string {
+type RelativeTime =
+  | { key: 'justNow' }
+  | { key: 'minutesAgo' | 'hoursAgo' | 'daysAgo'; count: number }
+
+function relativeTime(date: Date | string): RelativeTime {
   const now = Date.now()
   const then = new Date(date).getTime()
   const diff = Math.max(0, now - then)
   const seconds = Math.floor(diff / 1000)
 
-  if (seconds < 60) return 'just now'
+  if (seconds < 60) return { key: 'justNow' }
   const minutes = Math.floor(seconds / 60)
-  if (minutes < 60) return `${minutes}m ago`
+  if (minutes < 60) return { key: 'minutesAgo', count: minutes }
   const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours}h ago`
+  if (hours < 24) return { key: 'hoursAgo', count: hours }
   const days = Math.floor(hours / 24)
-  return `${days}d ago`
+  return { key: 'daysAgo', count: days }
 }
 
 function EventItem({ event, isNew }: { event: FeedEvent; isNew: boolean }) {
+  const t = useTranslations('dsComponents.activityFeed')
   const [entered, setEntered] = useState(!isNew)
   const color = typeColors[event.type]
 
@@ -89,7 +95,10 @@ function EventItem({ event, isNew }: { event: FeedEvent; isNew: boolean }) {
           <span style={{ color: 'var(--text-muted, #6b7280)' }}>{event.action}</span>
         </p>
         <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted, #6b7280)' }}>
-          {relativeTime(event.timestamp)}
+          {(() => {
+            const rel = relativeTime(event.timestamp)
+            return rel.key === 'justNow' ? t('justNow') : t(rel.key, { count: rel.count })
+          })()}
         </p>
       </div>
 
@@ -97,7 +106,7 @@ function EventItem({ event, isNew }: { event: FeedEvent; isNew: boolean }) {
       <span
         className="w-2 h-2 rounded-full shrink-0 mt-2"
         style={{ backgroundColor: color }}
-        title={event.type}
+        title={t(`eventType.${event.type}`)}
       />
     </div>
   )
@@ -110,6 +119,7 @@ export function ActivityFeed({
   onLoadMore,
   hasMore = false,
 }: ActivityFeedProps) {
+  const t = useTranslations('dsComponents.activityFeed')
   const prevCountRef = useRef(events.length)
   const [newIds, setNewIds] = useState<Set<string>>(new Set())
 
@@ -130,7 +140,7 @@ export function ActivityFeed({
     return (
       <div className="flex flex-col items-center justify-center py-12">
         <p className="text-sm" style={{ color: 'var(--text-muted, #6b7280)' }}>
-          No activity yet
+          {t('empty')}
         </p>
       </div>
     )
@@ -157,7 +167,7 @@ export function ActivityFeed({
             className="text-sm font-medium px-4 py-2 rounded-lg transition-opacity hover:opacity-80"
             style={{ color: 'var(--primary, #6366f1)' }}
           >
-            Load more
+            {t('loadMore')}
           </button>
         </div>
       )}

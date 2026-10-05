@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from 'react'
 import { ArrowUp, ArrowDown, ChevronsUpDown, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { TableSkeleton } from './loading-skeleton'
 
 export interface Column<T> {
@@ -31,8 +32,9 @@ export function DataTable<T extends Record<string, unknown>>({
   pagination = true,
   pageSize = 10,
   loading = false,
-  emptyMessage = 'No data available',
+  emptyMessage,
 }: DataTableProps<T>) {
+  const t = useTranslations('dsComponents.dataTable')
   const [sortKey, setSortKey] = useState<string | null>(null)
   const [sortDir, setSortDir] = useState<SortDir>(null)
   const [page, setPage] = useState(0)
@@ -125,7 +127,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   className="text-center py-12"
                   style={{ color: 'var(--text-muted, #6b7280)' }}
                 >
-                  {emptyMessage}
+                  {emptyMessage ?? t('empty')}
                 </td>
               </tr>
             ) : (
@@ -166,14 +168,17 @@ export function DataTable<T extends Record<string, unknown>>({
           style={{ borderTop: '1px solid var(--border, #e5e7eb)' }}
         >
           <span className="text-xs" style={{ color: 'var(--text-muted, #6b7280)' }}>
-            Showing {page * pageSize + 1}–{Math.min((page + 1) * pageSize, sorted.length)} of{' '}
-            {sorted.length}
+            {t('showing', {
+              from: page * pageSize + 1,
+              to: Math.min((page + 1) * pageSize, sorted.length),
+              total: sorted.length,
+            })}
           </span>
           <div className="flex items-center gap-1">
             <button
               onClick={() => setPage((p) => Math.max(0, p - 1))}
               disabled={page === 0}
-              aria-label="Previous page"
+              aria-label={t('previousPage')}
               className="p-1.5 rounded-lg transition-opacity disabled:opacity-30"
               style={{ color: 'var(--text, #111)' }}
             >
@@ -185,7 +190,7 @@ export function DataTable<T extends Record<string, unknown>>({
             <button
               onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
               disabled={page >= totalPages - 1}
-              aria-label="Next page"
+              aria-label={t('nextPage')}
               className="p-1.5 rounded-lg transition-opacity disabled:opacity-30"
               style={{ color: 'var(--text, #111)' }}
             >

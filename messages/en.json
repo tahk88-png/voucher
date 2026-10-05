@@ -2063,5 +2063,2503 @@
         "refunded": "refunded"
       }
     }
+  },
+  "site": {
+    "error": {
+      "title": "Something went wrong",
+      "description": "An error occurred while loading this page."
+    },
+    "notFound": {
+      "metaTitle": "Page not found"
+    },
+    "header": {
+      "mainNavLabel": "Main",
+      "signIn": "Sign in"
+    },
+    "footer": {
+      "navLabel": "Footer",
+      "copyright": "© {year} GiftHub. Made in Europe."
+    },
+    "navLinks": {
+      "campaigns": "Campaigns",
+      "merchants": "Merchants",
+      "explore": "Explore",
+      "search": "Search",
+      "faq": "FAQ",
+      "contact": "Contact",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "home": "Home",
+      "about": "About",
+      "vouchers": "Vouchers",
+      "shop": "Shop",
+      "rent": "Rent"
+    },
+    "chat": {
+      "openAssistant": "Open automated assistant",
+      "closeAssistant": "Close automated assistant",
+      "dialogLabel": "GiftHub automated assistant",
+      "title": "GiftHub Assistant",
+      "subtitle": "Automated assistant",
+      "newChat": "New chat",
+      "closeChat": "Close chat",
+      "greeting": "Hi there!",
+      "intro": "I'm an automated assistant. Ask about vouchers, gift cards, tickets, or your account.",
+      "inputLabel": "Message to the automated assistant",
+      "placeholder": "Type a message...",
+      "send": "Send message",
+      "sendError": "Sorry, I had trouble sending your message. Please try again."
+    },
+    "cookies": {
+      "regionLabel": "Cookie preferences",
+      "intro": "We use cookies to improve your experience. Necessary cookies are always active; you choose which optional ones to allow. <link>Privacy policy</link>",
+      "optionalLegend": "Optional cookies",
+      "necessary": "Necessary",
+      "alwaysOn": "(always on)",
+      "analytics": "Analytics",
+      "marketing": "Marketing",
+      "preferences": "Preferences",
+      "saveError": "Couldn't save your choice. Please try again.",
+      "acceptAll": "Accept all",
+      "declineOptional": "Decline optional",
+      "customize": "Customize",
+      "savePreferences": "Save preferences"
+    },
+    "currency": {
+      "selectLabel": "Select currency"
+    },
+    "language": {
+      "selectLabel": "Select language",
+      "selectInterfaceLabel": "Select interface language ({language})",
+      "unknown": "unknown",
+      "interfaceOnly": "Changes interface text only",
+      "uiName": "{name} (UI)"
+    },
+    "country": {
+      "selectLabel": "Select marketplace ({country})",
+      "heading": "Select Marketplace",
+      "description": "Changes country, currency, and market data only",
+      "tip": "<strong>Tip:</strong> Marketplace filters data and currency. Interface language is configured separately."
+    },
+    "roleSwitcher": {
+      "myDashboard": "My Dashboard",
+      "platformAdmin": "Platform Admin",
+      "admin": "Admin",
+      "staff": "Staff",
+      "switchContext": "Switch context"
+    },
+    "legalEntity": {
+      "operator": "Operator",
+      "registeredAddress": "Registered address",
+      "registryCode": "Registry code",
+      "operatorPlaceholder": "[company name to be added]",
+      "addressPlaceholder": "[registered address to be added]",
+      "registryCodePlaceholder": "[registry code to be added]"
+    },
+    "theme": {
+      "dark": "Dark mode",
+      "light": "Light mode",
+      "system": "System theme"
+    },
+    "voiceSearch": {
+      "start": "Start voice search",
+      "stop": "Stop listening",
+      "tooltip": "Voice search",
+      "tapToStop": "Tap to stop"
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "finance": "Finance",
+      "marketing": "Marketing",
+      "support": "Support",
+      "partner_cashier": "Cashier",
+      "auditor": "Auditor"
+    },
+    "orgs": {
+      "title": "B2B Organizations",
+      "subtitle": "Company workspaces with campaigns, vouchers, and orders.",
+      "loading": "Loading organizations...",
+      "loadFailed": "Failed to load orgs",
+      "empty": "No organizations found. Ask an admin to invite you.",
+      "open": "Open"
+    },
+    "workspace": {
+      "fallbackName": "Organization",
+      "subtitle": "B2B workspace overview",
+      "reports": "Reports",
+      "audit": "Audit",
+      "partnerKeys": "Partner Keys",
+      "backToOrgs": "Back to orgs",
+      "loading": "Loading workspace...",
+      "errors": {
+        "loadOrg": "Failed to load org",
+        "loadCampaigns": "Failed to load campaigns",
+        "loadVouchers": "Failed to load vouchers",
+        "loadOrders": "Failed to load orders",
+        "load": "Failed to load",
+        "createCampaign": "Failed to create campaign",
+        "issueVouchers": "Failed to issue vouchers",
+        "updateCampaign": "Failed to update campaign",
+        "activateCampaign": "Failed to activate campaign",
+        "pauseCampaign": "Failed to pause campaign",
+        "archiveCampaign": "Failed to archive campaign"
+      },
+      "stats": {
+        "campaigns": "Campaigns",
+        "vouchers": "Vouchers",
+        "orders": "Orders"
+      },
+      "create": {
+        "title": "Create campaign",
+        "name": "Campaign name",
+        "value": "Value (minor units)",
+        "currency": "Currency",
+        "submit": "Create"
+      },
+      "campaigns": {
+        "title": "Campaigns",
+        "empty": "No campaigns yet.",
+        "name": "Name",
+        "value": "Value",
+        "activate": "Activate",
+        "pause": "Pause",
+        "resume": "Resume",
+        "archive": "Archive",
+        "issue": "Issue {count}"
+      },
+      "recentVouchers": "Recent Vouchers",
+      "noVouchers": "No vouchers issued.",
+      "recentOrders": "Recent Orders",
+      "noOrders": "No orders yet."
+    },
+    "audit": {
+      "title": "Audit Log",
+      "subtitle": "Track voucher lifecycle and changes.",
+      "entityType": "Entity type (voucher, campaign, order)",
+      "entityId": "Entity ID",
+      "loading": "Loading audit...",
+      "loadFailed": "Failed to load audit",
+      "empty": "No events."
+    },
+    "billing": {
+      "metaTitle": "Organization Billing",
+      "title": "Billing & Finance",
+      "totalPaidOrders": "Total Paid Orders",
+      "totalRevenue": "Total Revenue",
+      "vatNumber": "VAT Number",
+      "notSet": "Not set",
+      "recentOrders": "Recent Orders",
+      "noOrders": "No orders yet.",
+      "table": {
+        "date": "Date",
+        "qty": "Qty",
+        "total": "Total",
+        "status": "Status",
+        "invoice": "Invoice"
+      }
+    },
+    "keys": {
+      "title": "Partner API Keys",
+      "subtitle": "Use these for partner voucher validation & redemption.",
+      "label": "Key label (optional)",
+      "create": "Create key",
+      "newKey": "New key (copy now)",
+      "loading": "Loading keys...",
+      "empty": "No keys yet.",
+      "untitled": "Untitled key",
+      "created": "Created {created}",
+      "createdAndLastUsed": "Created {created} • Last used {lastUsed}",
+      "revoke": "Revoke",
+      "errors": {
+        "load": "Failed to load keys",
+        "create": "Failed to create key",
+        "revoke": "Failed to revoke key"
+      }
+    },
+    "members": {
+      "metaTitle": "Organization Members",
+      "title": "Members",
+      "count": "{count, plural, one {# member} other {# members}}",
+      "pendingInvitations": "Pending Invitations",
+      "expires": "Expires {date}"
+    },
+    "invite": {
+      "title": "Invite a member",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "Admin",
+        "finance": "Finance",
+        "marketing": "Marketing",
+        "support": "Support",
+        "partner_cashier": "Partner Cashier",
+        "auditor": "Auditor"
+      },
+      "sending": "Sending…",
+      "submit": "Send invite",
+      "sent": "Invitation sent to {email}.",
+      "failed": "Could not send the invitation. Please check the email and try again.",
+      "error": "Something went wrong. Please try again."
+    },
+    "reports": {
+      "title": "Reports",
+      "subtitle": "Redemption and voucher reports",
+      "backToWorkspace": "Back to workspace",
+      "loadFailed": "Failed to load",
+      "tabs": {
+        "redemptions": "Redemptions",
+        "vouchers": "Vouchers"
+      },
+      "totalRedemptions": "Total Redemptions",
+      "totalAmountRedeemed": "Total Amount Redeemed",
+      "from": "From",
+      "to": "To",
+      "filter": "Filter",
+      "pageInfo": "Page {page} of {totalPages} ({total} total)",
+      "redemptionTable": {
+        "date": "Date",
+        "partner": "Partner",
+        "amount": "Amount",
+        "status": "Status",
+        "location": "Location"
+      },
+      "noRedemptions": "No redemptions found.",
+      "voucherTable": {
+        "campaign": "Campaign",
+        "status": "Status",
+        "type": "Type",
+        "value": "Value",
+        "remaining": "Remaining",
+        "redeemed": "Redeemed",
+        "issuedTo": "Issued To",
+        "expires": "Expires"
+      },
+      "noVouchers": "No vouchers found."
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Events"
+    },
+    "status": {
+      "draft": "Draft",
+      "published": "Active",
+      "sold_out": "Sold out",
+      "cancelled": "Cancelled",
+      "ended": "Ended"
+    },
+    "statusName": {
+      "draft": "Draft",
+      "published": "Published",
+      "sold_out": "Sold out",
+      "cancelled": "Cancelled",
+      "ended": "Ended"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Internal event",
+      "concert": "Concert",
+      "workshop": "Workshop",
+      "other": "Other"
+    },
+    "ticketStatus": {
+      "available": "Available",
+      "sold": "Sold",
+      "used": "Used",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded"
+    },
+    "list": {
+      "subtitle": "Manage your events and tickets",
+      "createEvent": "Create event",
+      "stats": {
+        "totalTitle": "Total events",
+        "totalDescription": "All events",
+        "activeTitle": "Active",
+        "activeDescription": "Published or sold out",
+        "soldTitle": "Tickets sold",
+        "soldDescription": "Across all events",
+        "revenueTitle": "Revenue",
+        "revenueDescription": "Paid ticket sales"
+      },
+      "empty": {
+        "title": "No events yet",
+        "description": "Create an event to sell tickets and manage attendance.",
+        "cta": "Create your first event"
+      },
+      "card": {
+        "date": "Date:",
+        "location": "Location:",
+        "price": "Price:",
+        "tickets": "Tickets:",
+        "sold": "{sold} / {capacity} sold",
+        "free": "Free",
+        "view": "View",
+        "edit": "Edit"
+      },
+      "weeklyRevenue": {
+        "title": "Weekly ticket revenue",
+        "description": "Paid ticket sales over 7 days.",
+        "series": "Revenue"
+      }
+    },
+    "detail": {
+      "noDescription": "No description",
+      "edit": "Edit",
+      "status": "Status",
+      "type": "Type",
+      "eventDate": "Event date",
+      "price": "Price",
+      "free": "Free",
+      "totalTickets": "Total tickets",
+      "sold": "Sold",
+      "available": "Available",
+      "location": "Location",
+      "terms": "Terms and conditions",
+      "ticketsTitle": "Tickets",
+      "ticketsDescription": "Tickets for this event",
+      "noTickets": "No tickets generated yet.",
+      "view": "View",
+      "redeem": "Redeem"
+    },
+    "form": {
+      "basicInfo": "Basic information",
+      "name": "Event name *",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe your event...",
+      "type": "Event type *",
+      "typeAria": "Event type",
+      "dateTime": "Date and time",
+      "eventDate": "Event date *",
+      "eventTime": "Event time *",
+      "endDate": "End date (optional)",
+      "endTime": "End time (optional)",
+      "location": "Location",
+      "locationName": "Location name",
+      "locationPlaceholder": "Main Hall, Outdoor Stage",
+      "locationPlaceholderExample": "e.g., Main Hall, Outdoor Stage",
+      "address": "Full address",
+      "addressPlaceholder": "Street address, City, Country",
+      "ticketDetails": "Ticket details",
+      "maxCapacity": "Max capacity (tickets) *",
+      "maxCapacityLong": "Max capacity (number of tickets) *",
+      "pricePerTicketCurrency": "Price per ticket ({currency})",
+      "pricePerTicket": "Price per ticket",
+      "pricePlaceholderFree": "0.00 (free)",
+      "priceHint": "Leave empty for free tickets. e.g. 12.50 or 12,50 for {example}.",
+      "currency": "Currency *",
+      "terms": "Terms and conditions",
+      "termsPlaceholder": "Event terms, refund policy, etc.",
+      "ticketPrice": "Ticket price",
+      "endBeforeStart": "The end time must be after the start time.",
+      "cancel": "Cancel"
+    },
+    "create": {
+      "submit": "Create event",
+      "submitting": "Creating..."
+    },
+    "edit": {
+      "loading": "Loading...",
+      "notFound": "Event not found.",
+      "back": "Back to event",
+      "title": "Edit event",
+      "subtitle": "Update your event details.",
+      "submit": "Save changes",
+      "submitting": "Saving..."
+    },
+    "publish": {
+      "confirm": "Publish this event? It will be visible to the public and tickets can be purchased.",
+      "confirmLabel": "Publish",
+      "failed": "Failed to publish event",
+      "success": "Event published successfully!",
+      "published": "Published",
+      "cannotPublish": "Cannot Publish",
+      "button": "Publish Event",
+      "publishing": "Publishing..."
+    },
+    "generate": {
+      "invalidCount": "Please enter a number between 1 and 1000",
+      "tooMany": "Cannot generate {count} tickets. Maximum available: {max}",
+      "failed": "Failed to generate tickets",
+      "success": "Generated {count, plural, one {# ticket} other {# tickets}} successfully!",
+      "open": "Generate Tickets",
+      "title": "Generate tickets",
+      "description": "Create tickets for this event",
+      "countLabel": "Number of tickets (max: {max})",
+      "cancel": "Cancel",
+      "submit": "Generate",
+      "submitting": "Generating..."
+    },
+    "redeem": {
+      "title": "Redeem ticket",
+      "subtitle": "Scan QR code or enter ticket number",
+      "back": "Back to event",
+      "scanTitle": "Scan ticket",
+      "scanDescription": "Enter QR token or ticket number",
+      "tokenLabel": "QR Token / Ticket Number",
+      "tokenPlaceholder": "Enter QR token or ticket number",
+      "scan": "Scan",
+      "notFound": "Ticket not found",
+      "found": "Ticket found",
+      "number": "Number:",
+      "event": "Event:",
+      "status": "Status:",
+      "attendee": "Attendee:",
+      "redeemDescription": "Complete the redemption process",
+      "locationLabel": "Location (optional)",
+      "locationPlaceholder": "e.g., Main Entrance, Gate A",
+      "submit": "Redeem ticket",
+      "submitting": "Redeeming...",
+      "failed": "Failed to redeem ticket",
+      "cannotRedeem": "This ticket cannot be redeemed. Status: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Merchant Dashboard",
+      "vouchersTitle": "Manage Vouchers"
+    },
+    "sidebar": {
+      "title": "Merchant",
+      "subtitle": "GiftHub console",
+      "openMenu": "Open menu",
+      "nav": {
+        "overview": "Overview",
+        "vouchers": "Vouchers",
+        "giftCards": "Gift cards",
+        "credits": "Credits",
+        "brand": "Brand"
+      }
+    },
+    "overview": {
+      "title": "Merchant dashboard",
+      "notConnected": "You are not connected to any merchants yet."
+    },
+    "noAccess": {
+      "title": "No merchant access",
+      "overviewHint": "Ask a merchant admin to invite you, or create a merchant account to start.",
+      "creditsHint": "Connect to a merchant account to view revenue and payouts.",
+      "vouchersHint": "Connect to a merchant account to manage vouchers.",
+      "exploreCampaigns": "Explore campaigns"
+    },
+    "brand": {
+      "title": "Brand Settings",
+      "description": "Customize your brand appearance across vouchers",
+      "logoHeading": "Logo",
+      "logoHint": "Upload your merchant logo (recommended: 200x200px, PNG or SVG).",
+      "logoPreviewAlt": "Logo preview",
+      "uploadLogo": "Upload Logo",
+      "colorHeading": "Brand color",
+      "colorHint": "Set your primary brand color for vouchers and buttons.",
+      "colorLabel": "Color",
+      "colorHexLabel": "Brand color hex value",
+      "save": "Save changes",
+      "previewHeading": "Preview",
+      "previewHint": "See how your brand appears on vouchers.",
+      "sampleMerchant": "Your Merchant",
+      "sampleTitle": "20% Off Your Next Purchase",
+      "sampleDescription": "Valid on all items. Cannot be combined with other offers."
+    },
+    "credits": {
+      "availableBalance": "Available Balance",
+      "availableBalanceHint": "Ready for payout",
+      "pendingRevenue": "Pending Revenue",
+      "pendingRevenueHint": "Processing",
+      "recentRevenue": "Recent revenue",
+      "ticketSale": "Ticket sale",
+      "voucherSale": "Voucher sale",
+      "noRevenue": "No revenue recorded yet",
+      "payoutRequests": "Payout requests",
+      "noPayoutRequests": "No payout requests yet",
+      "requestPayoutHeading": "Request payout",
+      "minimumPayout": "Minimum payout amount: {amount}",
+      "submitting": "Submitting...",
+      "requestPayout": "Request payout",
+      "requestSubmitted": "Payout request submitted",
+      "requestFailed": "Failed to request payout",
+      "status": {
+        "paid": "paid",
+        "pending": "pending",
+        "requested": "requested",
+        "completed": "completed",
+        "failed": "failed"
+      }
+    },
+    "newVoucher": {
+      "title": "Create Voucher",
+      "description": "Design and configure your new voucher campaign",
+      "detailsHeading": "Voucher details",
+      "titleLabel": "Title",
+      "titlePlaceholder": "e.g., 20% Off Your Next Purchase",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Valid on all items. Cannot be combined with other offers.",
+      "expiryDateLabel": "Expiry Date",
+      "weeklyLabel": "Weekly Drop",
+      "weeklyHint": "Limited-time weekly availability",
+      "weeklyAria": "Weekly Drop - Limited-time weekly availability",
+      "referralLabel": "Enable Referral Credit",
+      "referralHint": "Users earn credit when friends redeem",
+      "referralAria": "Enable Referral Credit - Users earn credit when friends redeem",
+      "brandColorLabel": "Brand Color",
+      "brandColorHexLabel": "Brand color hex value",
+      "saveDraft": "Save Draft",
+      "createAndPublish": "Create & Publish",
+      "previewHeading": "Preview",
+      "sampleMerchant": "Your Merchant",
+      "sampleTitle": "Voucher Title",
+      "sampleDescription": "Voucher description will appear here"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Couldn't load the hub",
+      "description": "An unexpected error occurred while loading merchants.",
+      "retry": "Try again"
+    },
+    "hub": {
+      "metaTitle": "Merchants",
+      "metaDescription": "Local businesses on GiftHub and their current offers",
+      "title": "Local merchants",
+      "subtitle": "Cafés, salons, studios and more: see who is on GiftHub and what they offer right now.",
+      "loadError": "Merchants couldn't be loaded",
+      "loadErrorHint": "Please try again in a moment.",
+      "retry": "Try again",
+      "emptyTitle": "No merchants yet",
+      "emptyHint": "Businesses appear here as soon as they join.",
+      "joinCta": "Join as a merchant",
+      "noOffers": "No offers right now",
+      "offerCount": "{count, plural, one {# offer} other {# offers}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Not Found",
+      "metaDescription": "Browse vouchers, campaigns, and offers from {name}",
+      "offerCount": "{count, plural, one {# offer} other {# offers}}",
+      "website": "Website",
+      "contact": "Contact",
+      "sampleNotice": "<strong>Sample business.</strong> This page shows how a merchant looks on GiftHub. Its offers are examples and can't be bought.",
+      "offersHeading": "Offers",
+      "noOffers": "No offers right now",
+      "noOffersHint": "New offers from {name} will appear here.",
+      "browseOther": "Browse other offers",
+      "validUntil": "Valid until {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Campaigns",
+      "mainNav": "Main",
+      "signIn": "Sign in"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Discover local merchants",
+      "hubHeroSubtitle": "Browse campaigns, vouchers, rentals, and storefronts from merchants on GiftHub.",
+      "tenantHeroSubtitle": "Explore products, rentals, and vouchers in one place.",
+      "browseCampaigns": "Browse campaigns",
+      "getStarted": "Get started",
+      "featuredMerchants": "Featured merchants",
+      "noMerchants": "No merchants yet.",
+      "visitNamed": "Visit {name}",
+      "visitMerchant": "Visit merchant",
+      "featuredProducts": "Featured products",
+      "noProducts": "No products available.",
+      "rentalHighlights": "Rental highlights",
+      "noRentals": "No rentals available.",
+      "perDay": "{price} / day",
+      "activeVouchers": "Active vouchers",
+      "noStandaloneVouchers": "No standalone vouchers here right now — <link>browse {count, plural, one {# active campaign} other {# active campaigns}}</link>.",
+      "noVouchers": "No vouchers available.",
+      "voucher": "Voucher",
+      "viewVoucher": "View voucher",
+      "stats": {
+        "campaigns": "Campaigns",
+        "vouchers": "Vouchers",
+        "products": "Products",
+        "rentals": "Rentals"
+      },
+      "statsUnavailable": "Stats unavailable."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Shop",
+      "subtitle": "Browse products and add them to cart."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Checkout intent created",
+      "intentCreatedDescription": "Intent {id} for {amount}",
+      "checkoutErrorTitle": "Checkout error",
+      "checkoutErrorDescription": "Unable to create checkout intent.",
+      "empty": "No products available yet.",
+      "productHighlight": "Product highlight",
+      "add": "Add",
+      "cart": "Cart",
+      "cartEmpty": "Cart is empty.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Remove",
+      "total": "Total",
+      "creatingIntent": "Creating intent...",
+      "checkoutIntent": "Checkout intent"
+    },
+    "rentPage": {
+      "metaTitle": "Rental Marketplace",
+      "metaDescription": "Browse items for rent",
+      "title": "Rentals",
+      "subtitle": "Pick dates and request a rental quote."
+    },
+    "rentClient": {
+      "selectDatesError": "Please select rental dates.",
+      "bookingFailed": "Booking failed",
+      "bookingCreated": "Booking request created for {name}. Total: {total}.",
+      "bookingSubmitted": "Booking submitted",
+      "bookingCreateFailed": "Unable to create rental booking.",
+      "bookingCancelled": "Booking cancelled.",
+      "cancelFailed": "Failed to cancel booking.",
+      "datesHeading": "Rental dates",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "daysSelected": "{count, plural, one {# rental day selected.} other {# rental days selected.}}",
+      "selectDatesHint": "Select dates to calculate pricing.",
+      "empty": "No rentals available yet.",
+      "rentalHighlight": "Rental highlight",
+      "perDay": "{price} / day",
+      "weeklyRate": "Weekly: {price}",
+      "select": "Select",
+      "selectedHeading": "Selected rental",
+      "estimatedTotal": "Estimated total",
+      "notesLabel": "Notes (optional)",
+      "notesPlaceholder": "Any special requests...",
+      "submitting": "Submitting booking...",
+      "requestBooking": "Request rental booking",
+      "myBookings": "My Bookings",
+      "noBookings": "No rental bookings yet. Select an item above to get started.",
+      "bookingRange": "{start} - {end} ({days, plural, one {# day} other {# days}})",
+      "bookingTotal": "Total: {total}",
+      "rejectionReason": "Reason: {reason}",
+      "cancelling": "Cancelling...",
+      "cancel": "Cancel",
+      "status": {
+        "pending": "pending",
+        "approved": "approved",
+        "rejected": "rejected",
+        "paid": "paid",
+        "active": "active",
+        "returned": "returned",
+        "cancelled": "cancelled"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Subscription Boxes",
+      "metaDescription": "Subscribe to curated monthly voucher boxes from your favourite local merchants — new offers delivered every cycle, cancel anytime.",
+      "title": "Subscription Boxes",
+      "subtitle": "Receive curated vouchers delivered to you on a recurring basis from top merchants.",
+      "empty": "No subscription boxes available yet. Check back soon!",
+      "byMerchant": "by {name}",
+      "perInterval": "/{interval}",
+      "details": "Details",
+      "subscribe": "Subscribe",
+      "subscribedTitle": "Subscribed",
+      "subscribedMessage": "You are now subscribed. Check your email for details.",
+      "subscribeFailed": "Failed to subscribe. Please try again.",
+      "notFoundTitle": "Box not found",
+      "notFoundHint": "This subscription box is unavailable.",
+      "browseAll": "← Browse all boxes",
+      "backToAll": "← All subscription boxes",
+      "subscriberCount": "{count, plural, one {# subscriber} other {# subscribers}}",
+      "whatsInside": "What's inside",
+      "curatingNext": "Up to {count, plural, one {# curated voucher} other {# curated vouchers}} each {period}. The next delivery is being curated.",
+      "percentVoucher": "{value}% off voucher",
+      "amountVoucher": "{amount} voucher",
+      "curatedVoucher": "Curated voucher",
+      "subscribing": "Subscribing…",
+      "subscribeWithPrice": "Subscribe — {price}/{interval}",
+      "interval": {
+        "weekly": "weekly",
+        "monthly": "monthly",
+        "quarterly": "quarterly"
+      },
+      "intervalEach": {
+        "weekly": "weekly",
+        "monthly": "monthly",
+        "quarterly": "quarterly"
+      }
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "The public page is available once the voucher is published.",
+    "list": {
+      "metaTitle": "Vouchers",
+      "subtitle": "Manage and create vouchers",
+      "bulkImport": "Bulk Import CSV",
+      "stats": {
+        "totalTitle": "Total vouchers",
+        "totalDescription": "All created vouchers",
+        "activeTitle": "Active",
+        "activeDescription": "Published vouchers",
+        "draftsTitle": "Drafts",
+        "draftsDescription": "Not yet published",
+        "pausedEndedTitle": "Paused / ended",
+        "pausedEndedDescription": "{paused} paused, {ended} ended",
+        "redemptionsTitle": "Redemptions",
+        "redemptionsDescription": "Total redemptions"
+      },
+      "empty": {
+        "title": "No vouchers yet",
+        "description": "Get started by creating your first voucher.",
+        "action": "Create your first voucher"
+      },
+      "searchPlaceholder": "Search by headline, code prefix, or ID",
+      "searchLabel": "Search vouchers",
+      "statusLabel": "Status",
+      "statusAll": "All status",
+      "status": {
+        "published": "Active",
+        "paused": "Paused",
+        "draft": "Draft",
+        "ended": "Ended",
+        "expired": "Expired"
+      },
+      "typeLabel": "Type",
+      "typeAll": "All types",
+      "sortLabel": "Sort by",
+      "sort": {
+        "date": "Date (newest)",
+        "name": "Name (A-Z)",
+        "redemptions": "Redemptions"
+      },
+      "showing": "Showing {shown} of {total} vouchers",
+      "clearFilters": "Clear filters",
+      "noMatches": "No vouchers match your filters.",
+      "usage": "Usage",
+      "usageUnlimited": "Usage: {used} - Unlimited",
+      "view": "View"
+    },
+    "rowActions": {
+      "pauseTitle": "Pause voucher",
+      "pauseDescription": "Are you sure you want to pause this voucher? Users will not be able to purchase or redeem it while paused.",
+      "pauseConfirm": "Pause",
+      "paused": "Voucher paused",
+      "pauseFailed": "Failed to pause voucher",
+      "loadFailed": "Failed to load voucher",
+      "duplicateLabel": "Duplicate voucher",
+      "duplicated": "Voucher duplicated",
+      "duplicateFailed": "Failed to duplicate"
+    },
+    "publish": {
+      "confirmMessage": "Publish this voucher? It will be visible to the public.",
+      "confirmLabel": "Publish",
+      "failed": "Failed to publish voucher",
+      "success": "Voucher published successfully!",
+      "publishing": "Publishing...",
+      "button": "Publish Voucher"
+    },
+    "new": {
+      "iconLetter": "V",
+      "created": "Voucher created as a draft. Publish it when you are ready for customers to see it."
+    },
+    "edit": {
+      "iconLetter": "E",
+      "subtitle": "Update voucher details and availability.",
+      "updated": "Voucher updated successfully",
+      "updateFailed": "Failed to update voucher",
+      "updateFailedRetry": "Failed to update voucher. Please try again.",
+      "updating": "Updating...",
+      "update": "Update voucher",
+      "viewPublicPage": "View public page"
+    },
+    "form": {
+      "stepOf": "Step {current} of {total}",
+      "typeLabel": "Type",
+      "typeAria": "Voucher type",
+      "customersGetOff": "Customers get {value} off.",
+      "customersGetCredit": "Customers get {value} credit.",
+      "percentHint": "Type the percentage, e.g. 15 or 12,5.",
+      "amountHint": "Type the amount in {currency}, e.g. 4.50 or 4,50 for {example}.",
+      "validityHint": "The voucher can be used from the start of the first day until the end of the last day.",
+      "enableWeeklyDropAria": "Enable weekly drop",
+      "weeklyDropDayAria": "Day of week for weekly drop",
+      "weeklyDropTimeAria": "Weekly drop start time",
+      "headlinePlaceholder": "15% off your order",
+      "finePrintPlaceholder": "Valid for new customers only",
+      "previewFallbackHeadline": "Your voucher",
+      "previewValidUntil": "Valid until {date}",
+      "errors": {
+        "discountAboveZero": "Enter a discount above 0%.",
+        "valueAboveZero": "Enter a value above 0.",
+        "chooseDates": "Choose when the voucher starts and ends.",
+        "endBeforeStart": "The end date must be on or after the start date.",
+        "invalidValue": "Enter a valid value.",
+        "valueMustBePositive": "Value must be greater than 0",
+        "totalLimitPositive": "Total usage limit must be a positive number",
+        "perUserLimitPositive": "Per user limit must be a positive number"
+      },
+      "discountErrors": {
+        "negative": "Discount can't be negative.",
+        "invalid": "Discount isn't a valid number.",
+        "decimals": "Discount can have at most {decimals} decimal places.",
+        "tooLarge": "Discount is too large.",
+        "tooHigh": "Discount can't be more than 100%."
+      },
+      "valueErrors": {
+        "negative": "Value can't be negative.",
+        "invalid": "Value isn't a valid number.",
+        "wholeNumber": "Value must be a whole number.",
+        "decimals": "Value can have at most {decimals} decimal places.",
+        "tooLarge": "Value is too large."
+      }
+    },
+    "bulkImport": {
+      "back": "Back to vouchers",
+      "title": "Import vouchers from a spreadsheet",
+      "intro": "Upload a CSV file (up to 500 rows). Every voucher is created as a draft, so nothing goes live until you publish it.",
+      "columns": "Columns",
+      "downloadSample": "Download sample CSV",
+      "columnRequired": "<code>{name}</code> (required): {help}",
+      "columnOptional": "<code>{name}</code> (optional): {help}",
+      "columnHelp": {
+        "name": "What customers see as the voucher title, e.g. \"Spring coffee deal\".",
+        "type": "\"amount\" (money off), \"percent\" (percentage off) or \"credit\" (store credit).",
+        "value": "Euros for amount/credit (10 or 10.50), percent for percent (15 or 12.5).",
+        "currency": "Three-letter code such as EUR. Defaults to your shop currency.",
+        "valid_from": "First day the voucher works: 2026-10-01 or 01.10.2026.",
+        "valid_to": "Last day the voucher works (it stays valid until the end of that day).",
+        "code_prefix": "Letters at the start of each code, e.g. SPRING.",
+        "usage_limit": "How many times it can be used in total. Leave empty for unlimited."
+      },
+      "separatorHint": "Separate columns with commas or semicolons. If you use commas, put decimal amounts in quotes (\"4,50\") or use a dot (4.50).",
+      "chooseFile": "Choose a CSV file",
+      "chooseDifferent": "Click to choose a different file",
+      "browse": "Click to browse",
+      "fixRows": "Fix these rows and upload the file again:",
+      "andMore": "…and {count} more.",
+      "readyToImport": "Ready to import {count, plural, one {# voucher} other {# vouchers}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, up to {limit} uses} other {}}",
+      "imported": "Imported {count, plural, one {# voucher} other {# vouchers}} as drafts.",
+      "viewVouchers": "View vouchers",
+      "importing": "Importing...",
+      "importCount": "Import {count, plural, one {# voucher} other {# vouchers}}",
+      "importVouchers": "Import vouchers",
+      "importFailedStatus": "Import failed (error {status}).",
+      "importFailed": "Import failed"
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Search",
+    "metaDescription": "Search live campaigns and vouchers from merchants on GiftHub.",
+    "loadingSearch": "Loading search",
+    "title": "Search offers",
+    "subtitle": "Find campaigns and vouchers from merchants on GiftHub",
+    "queryLabel": "Search campaigns, vouchers and merchants",
+    "queryPlaceholder": "Search campaigns, vouchers, merchants...",
+    "toggleFilters": "Toggle filters",
+    "filtersTitle": "Filters",
+    "closeFilters": "Close filters",
+    "error": "Search is unavailable right now. Please try again in a moment.",
+    "campaignsHeading": "Campaigns",
+    "vouchersHeading": "Vouchers",
+    "browseMarketplace": "Browse everything on sale in the <link>campaign marketplace</link>.",
+    "campaignEnds": "Ends {date}",
+    "filters": {
+      "title": "Filters",
+      "clearAll": "Clear all",
+      "category": "Category",
+      "discountType": "Discount Type",
+      "minDiscount": "Min. Discount",
+      "minDiscountAria": "Minimum discount",
+      "maxPrice": "Max Price",
+      "maxPriceAria": "Maximum price in euros",
+      "any": "Any",
+      "sortBy": "Sort By",
+      "types": {
+        "all": "All types",
+        "percentage": "Percentage off",
+        "fixed_amount": "Fixed amount",
+        "credit_amount": "Store credit"
+      },
+      "sort": {
+        "newest": "Newest first",
+        "popular": "Most popular",
+        "expiring": "Expiring soon"
+      }
+    },
+    "results": {
+      "chipCategory": "Category: {value}",
+      "chipType": "Type: {value}",
+      "chipMinDiscount": "Min {value}% off",
+      "chipMaxPrice": "Max €{value}",
+      "chipSort": "Sort: {value}",
+      "removeFilter": "Remove {label} filter",
+      "searching": "Searching...",
+      "count": "{total, plural, one {<num>#</num> result} other {<num>#</num> results}}",
+      "countForQuery": "{total, plural, one {<num>#</num> result for “<hl>{query}</hl>”} other {<num>#</num> results for “<hl>{query}</hl>”}}",
+      "flash": "Flash",
+      "voucherFallback": "Voucher",
+      "expires": "Expires {date}",
+      "redeemed": "{count} redeemed",
+      "noResultsTitle": "No results found",
+      "noResultsQuery": "No vouchers match \"{query}\". Try adjusting your filters.",
+      "noResultsHint": "Try searching for a specific voucher, merchant, or category."
+    }
+  },
+  "faq": {
+    "metaTitle": "Frequently Asked Questions",
+    "metaDescription": "Answers to common questions about buying, redeeming, and managing vouchers and gift cards — payments, refunds, expiry, and merchant support.",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our platform.",
+    "categories": {
+      "general": "General",
+      "purchasing": "Purchasing & Payments",
+      "vouchers": "Vouchers & Redemption",
+      "account": "Account & Security",
+      "merchants": "For Merchants",
+      "loyalty": "Loyalty & Rewards"
+    },
+    "items": {
+      "whatIs": {
+        "q": "What is GiftHub?",
+        "a": "GiftHub is a digital voucher, gift card, and event ticket marketplace that connects merchants with customers. Merchants can create and sell digital products, and customers can purchase, gift, and redeem them."
+      },
+      "isFree": {
+        "q": "Is the platform free to use?",
+        "a": "Browsing and creating an account is free. Customers pay only for the products they purchase. Merchants pay a monthly plan plus a {fee}% transaction fee on voucher sales."
+      },
+      "countries": {
+        "q": "Which countries are supported?",
+        "a": "We support merchants and customers across the EU, with {currencies} currencies and {languages} languages."
+      },
+      "howToBuy": {
+        "q": "How do I buy a voucher?",
+        "a": "Browse available vouchers, click \"Buy\", and complete checkout via Stripe. Your voucher will appear in your wallet immediately after payment."
+      },
+      "paymentMethods": {
+        "q": "What payment methods are accepted?",
+        "a": "Payments are processed securely by Stripe. The payment methods available for your purchase are shown at checkout."
+      },
+      "refund": {
+        "q": "Can I get a refund?",
+        "a": "Refund policies are set by individual merchants. Check the voucher details page for the specific refund policy before purchasing."
+      },
+      "howToRedeem": {
+        "q": "How do I redeem a voucher?",
+        "a": "Open your wallet, select the voucher, and show the QR code to the merchant. They will scan it to confirm redemption. You can also redeem by entering a code manually."
+      },
+      "expiry": {
+        "q": "What happens when a voucher expires?",
+        "a": "Expired vouchers cannot be redeemed. You will receive a notification before expiration. Check your wallet for expiry dates."
+      },
+      "gift": {
+        "q": "Can I gift a voucher to someone?",
+        "a": "Yes! When purchasing, select \"Send as gift\" and enter the recipient's email. They will receive the voucher with a personalized message."
+      },
+      "twoFactor": {
+        "q": "How do I enable two-factor authentication?",
+        "a": "Go to Settings → Security → Two-Factor Authentication. You can set up TOTP (Google Authenticator) or use passkey (biometric) authentication."
+      },
+      "biometrics": {
+        "q": "Can I sign in with biometrics?",
+        "a": "Yes! We support Passkey authentication — sign in with Face ID, fingerprint, or Windows Hello. Set it up in Settings → Security."
+      },
+      "deleteAccount": {
+        "q": "How do I delete my account?",
+        "a": "Go to Settings → Privacy → Delete Account. All your data will be erased within 30 days per our GDPR compliance policy. You can export your data first."
+      },
+      "startSelling": {
+        "q": "How do I start selling?",
+        "a": "Register as a merchant, complete the onboarding process, and create your first voucher. You can start selling immediately after profile approval."
+      },
+      "fees": {
+        "q": "What are the platform fees?",
+        "a": "After a {trialDays}-day free trial, plans cost {starter} {starterPrice}, {pro} {proPrice} or {scale} {scalePrice} per month (annual billing: 2 months free), plus a {fee}% transaction fee on voucher sales, deducted from the payout."
+      },
+      "integrations": {
+        "q": "Can I integrate with my existing systems?",
+        "a": "Yes! We offer webhooks (for real-time event notifications), API keys (for programmatic access), and Zapier/Slack/Discord integrations."
+      },
+      "trackSales": {
+        "q": "How do I track my sales?",
+        "a": "Your merchant dashboard shows real-time analytics including revenue, redemptions, customer insights, and AI-powered natural language queries (\"show me last week's revenue\")."
+      },
+      "loyalty": {
+        "q": "How does the loyalty program work?",
+        "a": "Earn points by making purchases, daily check-ins, referrals, and writing reviews. Points unlock tier levels (Bronze → Silver → Gold → Platinum → Diamond) with increasing benefits."
+      },
+      "badges": {
+        "q": "What are badges and streaks?",
+        "a": "Badges are achievements earned for milestones (first purchase, 10 referrals, etc.). Streaks track consecutive days of activity and reward consistency."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Contact Us",
+    "metaDescription": "Get in touch with the GiftHub team — questions about your vouchers, merchant onboarding, billing, or partnership enquiries.",
+    "title": "Contact Us",
+    "subtitle": "Have a question? We'd love to hear from you.",
+    "email": "Email",
+    "assistantTitle": "Automated assistant",
+    "assistantText": "Quick answers about vouchers and your account from the chat button in the corner. It is automated, not a person.",
+    "name": "Name",
+    "subject": "Subject",
+    "message": "Message",
+    "sent": "Message sent! We'll get back to you soon.",
+    "unavailableWithEmail": "The contact form isn't available right now. Please email us at {email}.",
+    "unavailable": "The contact form isn't available right now. Please try again later.",
+    "error": "Failed to send. Please try again in a moment.",
+    "sending": "Sending...",
+    "send": "Send Message"
+  },
+  "leaderboardPage": {
+    "metaTitle": "Top Merchants",
+    "metaDescription": "The merchants with the most voucher redemptions on GiftHub in the last 30 days",
+    "title": "Top Merchants",
+    "subtitle": "Most voucher redemptions in the last 30 days",
+    "rank": "Rank {rank}",
+    "redemptions": "{count, plural, one {<num>#</num><label>redemption</label>} other {<num>#</num><label>redemptions</label>}}",
+    "empty": "No redemptions in the last 30 days yet, so there is no ranking to show.",
+    "browseCampaigns": "Browse live campaigns"
+  },
+  "ui": {
+    "close": "Close",
+    "more": "More",
+    "loading": "Loading...",
+    "breadcrumb": {
+      "label": "breadcrumb"
+    },
+    "pagination": {
+      "label": "pagination",
+      "previousAria": "Go to previous page",
+      "previous": "Previous",
+      "nextAria": "Go to next page",
+      "next": "Next",
+      "morePages": "More pages"
+    },
+    "toast": {
+      "dismiss": "Dismiss notification"
+    },
+    "calendar": {
+      "previousMonth": "Go to previous month",
+      "nextMonth": "Go to next month"
+    },
+    "datePicker": {
+      "placeholder": "Pick a date"
+    },
+    "combobox": {
+      "placeholder": "Select option...",
+      "empty": "No option found.",
+      "search": "Search..."
+    },
+    "searchInput": {
+      "clear": "Clear search"
+    },
+    "searchResults": {
+      "empty": "No results found",
+      "noResultsFor": "No results found for \"{query}\". Try different keywords."
+    },
+    "commandPalette": {
+      "placeholder": "Search...",
+      "noResults": "No results found",
+      "toOpen": "to open",
+      "other": "Other",
+      "hostPlaceholder": "Where do you want to go?",
+      "categories": {
+        "navigate": "Navigate",
+        "discover": "Discover",
+        "account": "Account"
+      },
+      "items": {
+        "home": {
+          "label": "Home",
+          "description": "Landing page"
+        },
+        "app": {
+          "label": "My dashboard",
+          "description": "Your vouchers, wallet and activity"
+        },
+        "vouchers": {
+          "label": "My vouchers"
+        },
+        "wallet": {
+          "label": "Wallet",
+          "description": "Credit balances"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "Browse and send gifts"
+        },
+        "campaigns": {
+          "label": "Campaigns",
+          "description": "Active voucher campaigns"
+        },
+        "hub": {
+          "label": "Merchant hub",
+          "description": "Browse merchants"
+        },
+        "deals": {
+          "label": "Deals"
+        },
+        "settings": {
+          "label": "Settings",
+          "description": "Account and preferences"
+        },
+        "admin": {
+          "label": "Admin",
+          "description": "Platform administration"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "dataTable": {
+      "noResults": "No results."
+    },
+    "fileUpload": {
+      "maxFiles": "Maximum {maxFiles} files allowed",
+      "tooLarge": "Files must be smaller than {maxSize}MB",
+      "dropHere": "Drop files here",
+      "dragDrop": "Drag & drop files here",
+      "browseHint": "or click to browse (max {maxSize}MB per file)",
+      "select": "Select files",
+      "remove": "Remove {name}"
+    },
+    "imageUpload": {
+      "notImage": "Please upload an image file",
+      "tooLarge": "Image must be smaller than {maxSize}MB",
+      "previewAlt": "Preview",
+      "remove": "Remove image",
+      "dropHere": "Drop image here",
+      "upload": "Upload image",
+      "hint": "PNG, JPG, GIF up to {maxSize}MB",
+      "select": "Select image"
+    },
+    "statsCard": {
+      "open": "Open"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% cashback"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Active",
+        "redeemed": "Used",
+        "expired": "Expired"
+      },
+      "redeem": "Redeem",
+      "expires": "Expires {date}",
+      "merchantAlt": "Merchant"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Above-the-fold headline with primary action."
+        },
+        "value_props": {
+          "label": "Value props",
+          "description": "Quick benefits and guarantees."
+        },
+        "featured_products": {
+          "label": "Featured products",
+          "description": "Top products with pricing and tags."
+        },
+        "featured_vouchers": {
+          "label": "Featured vouchers",
+          "description": "Active voucher cards for promotions."
+        },
+        "rental_packages": {
+          "label": "Rental packages",
+          "description": "Rental bundles and day-based pricing."
+        },
+        "categories": {
+          "label": "Categories grid",
+          "description": "Browse by type, use, or audience."
+        },
+        "availability": {
+          "label": "Availability calendar",
+          "description": "Live availability and booking slots."
+        },
+        "testimonials": {
+          "label": "Testimonials",
+          "description": "Customer quotes and star ratings."
+        },
+        "gallery": {
+          "label": "Gallery",
+          "description": "Lifestyle imagery or use cases."
+        },
+        "pricing": {
+          "label": "Pricing table",
+          "description": "Transparent pricing tiers."
+        },
+        "rental_terms": {
+          "label": "Rental terms",
+          "description": "Deposit, insurance, and return policy."
+        },
+        "faq": {
+          "label": "FAQ",
+          "description": "Answer common objections."
+        },
+        "newsletter": {
+          "label": "Newsletter opt-in",
+          "description": "Collect emails for campaigns."
+        },
+        "contact": {
+          "label": "Contact block",
+          "description": "Chat, email, or phone support."
+        },
+        "map": {
+          "label": "Location map",
+          "description": "Pickup point or store location."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Promo bar",
+          "description": "Sticky top bar for offers and alerts."
+        },
+        "sticky_cta": {
+          "label": "Sticky CTA",
+          "description": "Persistent action button on scroll."
+        },
+        "chat_widget": {
+          "label": "Chat widget",
+          "description": "Live chat or WhatsApp integration."
+        },
+        "trust_badges": {
+          "label": "Trust badges",
+          "description": "Payment, safety, or quality badges."
+        },
+        "social_proof": {
+          "label": "Social proof popup",
+          "description": "Recent activity and purchases."
+        },
+        "countdown": {
+          "label": "Countdown timer",
+          "description": "Urgency for limited offers."
+        },
+        "reviews_widget": {
+          "label": "Reviews widget",
+          "description": "Embed Google or Trustpilot."
+        },
+        "language_switch": {
+          "label": "Language switcher",
+          "description": "Quick locale toggle on page."
+        },
+        "analytics": {
+          "label": "Analytics snippets",
+          "description": "Pixel slots for tracking."
+        },
+        "cookie_banner": {
+          "label": "Cookie banner",
+          "description": "GDPR consent banner."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Preview",
+      "edit": "Edit",
+      "previewEmpty": "No sections added yet. Switch to edit mode to add sections.",
+      "title": "Visual editor",
+      "preview": "Preview",
+      "empty": "No sections yet. Click \"Add section\" below to start building.",
+      "collapseSettings": "Collapse settings",
+      "expandSettings": "Expand settings",
+      "removeSection": "Remove {label} section",
+      "sectionTitle": "Section title",
+      "description": "Description",
+      "descriptionPlaceholder": "Optional description",
+      "backgroundColor": "Background color",
+      "layoutVariant": "Layout variant",
+      "layout": {
+        "default": "Default",
+        "centered": "Centered",
+        "wide": "Wide",
+        "compact": "Compact"
+      },
+      "addSection": "Add section",
+      "availableSections": "Available sections",
+      "closeCatalog": "Close",
+      "allAdded": "All available sections have been added.",
+      "count": "{configured, plural, one {# section configured} other {# sections configured}} / {available} available to add"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Storefront launch checklist",
+        "rental_launch": "Rental page launch checklist",
+        "campaign_ops": "Weekly campaign operations",
+        "support_ops": "Support readiness checklist"
+      },
+      "toast": {
+        "saved": "Page builder updated.",
+        "saveFailed": "Failed to save page",
+        "vibeFailed": "Vibe agent failed",
+        "layoutGenerated": "Vibe layout generated.",
+        "generateFailed": "Failed to generate layout",
+        "agentFailed": "Agent failed",
+        "planGenerated": "Process plan generated.",
+        "runAgentFailed": "Failed to run agent"
+      },
+      "noData": "No page builder data available.",
+      "title": "Page Builder",
+      "intro": "Build fast storefront and rental pages with modular sections and add-ons.",
+      "introAi": "Build fast storefront and rental pages with modular sections and add-ons, with optional AI suggestions.",
+      "tabs": {
+        "store": "Storefront",
+        "rental": "Rental"
+      },
+      "details": {
+        "title": "Page details",
+        "subtitle": "Title, subtitle, and layout.",
+        "save": "Save",
+        "pageTitle": "Page title",
+        "subtitleLabel": "Subtitle"
+      },
+      "sections": {
+        "title": "Sections",
+        "subtitle": "Drag to reorder, expand to configure, or preview your layout.",
+        "suggestLayout": "Suggest a layout",
+        "suggestionsLeft": "AI layout suggestions left: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Add-ons",
+        "subtitle": "Extra widgets and marketing layers.",
+        "enable": "Enable add-on {label}",
+        "disable": "Disable add-on {label}"
+      },
+      "summary": {
+        "title": "Live summary",
+        "line": "{title} · {sections, plural, one {# section} other {# sections}} · {addons, plural, one {# add-on} other {# add-ons}}",
+        "sectionsLabel": "Sections:",
+        "addonsLabel": "Add-ons:",
+        "none": "None"
+      },
+      "assistant": {
+        "title": "Launch checklist assistant",
+        "subtitle": "Generate action plans and operational checklists.",
+        "goalLabel": "Process goal",
+        "createChecklist": "Create checklist",
+        "checklistsLeft": "Checklists left: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Curated offers, rentals, and vouchers from {name}.",
+        "shopProducts": "Shop products",
+        "browseRentals": "Browse rentals"
+      },
+      "valueProps": {
+        "rewardsTitle": "Rewards",
+        "rewardsText": "Voucher incentives built-in.",
+        "stockTitle": "Reliable stock",
+        "stockText": "Updated pricing and availability.",
+        "datesTitle": "Flexible dates",
+        "datesText": "Plan rentals with ease."
+      },
+      "viewAll": "View all",
+      "seeAll": "See all",
+      "products": {
+        "title": "Featured products",
+        "empty": "No products yet.",
+        "fallbackDescription": "Product highlight"
+      },
+      "rentals": {
+        "title": "Rental packages",
+        "empty": "No rentals yet.",
+        "fallbackDescription": "Rental highlight",
+        "perDay": "{price} / day"
+      },
+      "categories": {
+        "title": "Browse categories",
+        "popular": "Popular",
+        "business": "Business",
+        "events": "Events",
+        "seasonal": "Seasonal",
+        "corporate": "Corporate",
+        "custom": "Custom"
+      },
+      "availability": {
+        "title": "Live availability",
+        "text": "Check availability and request a quote in minutes.",
+        "seeCalendar": "See calendar"
+      },
+      "testimonials": {
+        "title": "What customers say",
+        "smooth": "Smooth process",
+        "lovedVoucher": "Loved the voucher",
+        "support": "Great support"
+      },
+      "gallery": {
+        "title": "Gallery"
+      },
+      "pricing": {
+        "title": "Pricing",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Enterprise",
+        "tierText": "Custom pricing & support"
+      },
+      "rentalTerms": {
+        "title": "Rental terms",
+        "text": "Clear deposits, pickup rules, and return policy shared upfront."
+      },
+      "faq": {
+        "title": "FAQ",
+        "redeem": "How do I redeem?",
+        "reschedule": "Can I reschedule?",
+        "support": "Do you offer support?"
+      },
+      "newsletter": {
+        "title": "Stay updated",
+        "text": "Get new offers and rental releases in your inbox.",
+        "emailLabel": "Email address",
+        "subscribe": "Subscribe"
+      },
+      "contact": {
+        "title": "Contact",
+        "emailUs": "Email us at {email}"
+      },
+      "map": {
+        "text": "Pickup location shared after booking."
+      },
+      "vouchers": {
+        "title": "Active vouchers",
+        "empty": "No vouchers available.",
+        "voucher": "Voucher",
+        "view": "View voucher"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Active",
+      "redeemed": "Redeemed",
+      "expired": "Expired",
+      "cancelled": "Cancelled"
+    },
+    "list": {
+      "metaTitle": "Gift Cards",
+      "title": "Gift cards",
+      "subtitle": "Create and manage gift cards",
+      "newGiftCard": "New gift card",
+      "stats": {
+        "total": "Total gift cards",
+        "totalDescription": "All issued gift cards",
+        "active": "Active",
+        "activeDescription": "Currently redeemable",
+        "redeemed": "Redeemed",
+        "redeemedDescription": "Completed redemptions",
+        "totalValue": "Total value",
+        "totalValueDescription": "Issued gift card value"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "No gift cards yet",
+      "emptyDescription": "Create a gift card with custom branding and QR redemption.",
+      "createFirst": "Create your first gift card",
+      "searchPlaceholder": "Search by headline, code, or message",
+      "searchLabel": "Search gift cards",
+      "status": "Status",
+      "allStatus": "All status",
+      "sortBy": "Sort by",
+      "sortDate": "Date (newest)",
+      "sortAmount": "Amount (high to low)",
+      "showing": "Showing {shown} of {total, plural, one {# gift card} other {# gift cards}}",
+      "clearFilters": "Clear filters",
+      "noMatches": "No gift cards match your filters.",
+      "defaultHeadline": "Gift card",
+      "noExpiry": "No expiry",
+      "validUntil": "Valid until: {date}",
+      "redeemedOn": "Redeemed: {date}",
+      "details": "Details",
+      "view": "View"
+    },
+    "detail": {
+      "title": "Gift card",
+      "code": "Code {code}",
+      "publicView": "Public view",
+      "newGiftCard": "New gift card",
+      "detailsTitle": "Gift card details",
+      "value": "Value",
+      "validFrom": "Valid from",
+      "validTo": "Valid to",
+      "noExpiry": "No expiry",
+      "redeemedAt": "Redeemed at",
+      "notRedeemed": "Not redeemed",
+      "qrTitle": "Staff redemption QR",
+      "qrHelp": "Staff can scan this QR to redeem and invalidate the gift card."
+    },
+    "new": {
+      "title": "New gift card",
+      "subtitle": "Customize and issue a gift card",
+      "created": "Gift card created.",
+      "cancel": "Cancel",
+      "creating": "Creating...",
+      "submit": "Create gift card",
+      "errors": {
+        "amountRequired": "Enter an amount above 0.",
+        "endBeforeStart": "The end date must be on or after the start date.",
+        "createFailed": "Failed to create gift card"
+      },
+      "amountErrors": {
+        "negative": "Amount can't be negative.",
+        "invalid": "Amount isn't a valid number.",
+        "wholeNumber": "Amount must be a whole number.",
+        "decimals": "Amount can have at most {decimals} decimal places.",
+        "tooLarge": "Amount is too large."
+      },
+      "priceErrors": {
+        "negative": "Sale price can't be negative.",
+        "invalid": "Sale price isn't a valid number.",
+        "wholeNumber": "Sale price must be a whole number.",
+        "decimals": "Sale price can have at most {decimals} decimal places.",
+        "tooLarge": "Sale price is too large."
+      },
+      "valueSection": {
+        "title": "Value and validity",
+        "description": "Set amount, currency, and expiration",
+        "amount": "Amount",
+        "faceValue": "Face value: {value}.",
+        "amountHelp": "Type the amount in {currency}, e.g. 50 or 49,90 for {example}.",
+        "currency": "Currency",
+        "validFrom": "Valid from",
+        "validTo": "Valid to",
+        "noExpiry": "No expiry date"
+      },
+      "purchaseSection": {
+        "title": "Customer purchase",
+        "description": "Allow customers to buy this gift card online",
+        "purchasable": "Available for customer purchase",
+        "salePrice": "Sale price (optional, defaults to face value)",
+        "salePricePlaceholder": "Same as amount",
+        "customersPay": "Customers pay {value}.",
+        "salePriceHelp": "Leave empty to sell at face value. Set a different price for promotions."
+      },
+      "brandingSection": {
+        "title": "Branding and message",
+        "description": "Headline, message, images, and colors",
+        "headline": "Headline",
+        "headlinePlaceholder": "Gift for coffee lovers",
+        "message": "Message",
+        "messagePlaceholder": "Add a personal message for the recipient",
+        "logoUrl": "Logo URL",
+        "imageUrl": "Image URL",
+        "accentColor": "Accent color",
+        "backgroundColor": "Background color",
+        "textColor": "Text color",
+        "codePrefix": "Code prefix (optional)"
+      },
+      "preview": {
+        "title": "Preview",
+        "defaultHeadline": "Gift card",
+        "imageAlt": "Gift card",
+        "logoAlt": "Brand logo",
+        "notePlaceholder": "Add a personal note"
+      }
+    },
+    "gifts": {
+      "title": "Gift Products",
+      "subtitle": "Manage your products in the Gift Hub",
+      "dashboard": "Dashboard",
+      "confirmDelete": "Are you sure? This will deactivate the product.",
+      "stats": {
+        "total": "Total",
+        "active": "Active",
+        "views": "Views",
+        "purchases": "Purchases"
+      },
+      "emptyTitle": "No gift products yet",
+      "emptyDescription": "Add your first product to appear in the Gift Hub feed.",
+      "emptyApiHint": "Use the API at <code>{endpoint}</code> to create products.",
+      "inactive": "Inactive",
+      "featured": "Featured",
+      "views": "{count, plural, one {# view} other {# views}}",
+      "purchases": "{count, plural, one {# purchase} other {# purchases}}",
+      "conversionRate": "{rate}% CVR",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "delete": "Delete"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "No data available",
+      "value": "Value: <strong>{value}</strong>",
+      "dismiss": "Dismiss",
+      "remove": "Remove",
+      "dialog": "Dialog",
+      "close": "Close",
+      "loading": "Loading"
+    },
+    "analyticsFunnel": {
+      "empty": "No activity yet for this period",
+      "top": "Top",
+      "drop": "-{rate}% drop"
+    },
+    "periodComparison": {
+      "title": "Period Comparison",
+      "loading": "Loading...",
+      "previous": "Previous: {value}",
+      "noData": "No data available",
+      "period": {
+        "day": "Day",
+        "week": "Week",
+        "month": "Month",
+        "quarter": "Quarter",
+        "year": "Year"
+      },
+      "metric": {
+        "revenue": "Revenue",
+        "redemptions": "Redemptions",
+        "purchases": "Purchases",
+        "referrals": "Referrals",
+        "customers": "Customers"
+      }
+    },
+    "trendChart": {
+      "noData": "No data"
+    },
+    "conversionChart": {
+      "noData": "No data available",
+      "previous": "prev: {value}"
+    },
+    "funnelChart": {
+      "empty": "No activity yet for this period"
+    },
+    "geoMap": {
+      "noData": "No data available",
+      "value": "Value: <strong>{value}</strong>",
+      "country": {
+        "GB": "United Kingdom",
+        "IE": "Ireland",
+        "FR": "France",
+        "DE": "Germany",
+        "ES": "Spain",
+        "PT": "Portugal",
+        "IT": "Italy",
+        "NL": "Netherlands",
+        "BE": "Belgium",
+        "CH": "Switzerland",
+        "AT": "Austria",
+        "PL": "Poland",
+        "CZ": "Czech Republic",
+        "SE": "Sweden",
+        "NO": "Norway",
+        "FI": "Finland",
+        "DK": "Denmark",
+        "EE": "Estonia",
+        "LV": "Latvia",
+        "LT": "Lithuania",
+        "HU": "Hungary",
+        "RO": "Romania",
+        "BG": "Bulgaria",
+        "GR": "Greece",
+        "HR": "Croatia",
+        "SK": "Slovakia",
+        "SI": "Slovenia",
+        "RS": "Serbia",
+        "UA": "Ukraine",
+        "BY": "Belarus"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Waiting for data..."
+    },
+    "pieDonutChart": {
+      "noData": "No data available",
+      "total": "Total"
+    },
+    "activityFeed": {
+      "justNow": "just now",
+      "minutesAgo": "{count}m ago",
+      "hoursAgo": "{count}h ago",
+      "daysAgo": "{count}d ago",
+      "empty": "No activity yet",
+      "loadMore": "Load more",
+      "eventType": {
+        "purchase": "Purchase",
+        "redemption": "Redemption",
+        "signup": "Sign-up",
+        "alert": "Alert"
+      }
+    },
+    "dateRange": {
+      "days7": "7 days",
+      "days30": "30 days",
+      "days90": "90 days",
+      "year1": "1 year",
+      "custom": "Custom"
+    },
+    "chartCard": {
+      "fullscreen": "Fullscreen",
+      "exitFullscreen": "Exit fullscreen",
+      "retry": "Retry"
+    },
+    "dashboardHeader": {
+      "export": "Export",
+      "exportAs": "Export as {format}"
+    },
+    "dataTable": {
+      "empty": "No data available",
+      "showing": "Showing {from}–{to} of {total}",
+      "previousPage": "Previous page",
+      "nextPage": "Next page"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Live",
+        "reconnecting": "Reconnecting",
+        "disconnected": "Disconnected"
+      },
+      "status": {
+        "connected": "Connected",
+        "reconnecting": "Reconnecting",
+        "disconnected": "Disconnected"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "vs prev period"
+    },
+    "statComparison": {
+      "current": "Current",
+      "previous": "Previous",
+      "change": "change"
+    },
+    "aiInsightPanel": {
+      "title": "AI Insights",
+      "placeholder": "Ask AI a question...",
+      "send": "Send"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Live",
+        "degraded": "Degraded",
+        "disconnected": "Offline"
+      },
+      "latency": "Latency: {ms}ms",
+      "lastUpdate": "Last update: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Notifications",
+      "title": "Notifications",
+      "markAllRead": "Mark all read",
+      "empty": "No notifications",
+      "ariaLabelUnread": "Notifications ({count} unread)"
+    },
+    "premiumChartCard": {
+      "info": "Info",
+      "fullscreen": "Fullscreen",
+      "exitFullscreen": "Exit fullscreen",
+      "moreOptions": "More options",
+      "empty": "No data available for this period"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "vs last period"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Operational",
+        "degraded": "Degraded",
+        "outage": "Outage"
+      }
+    },
+    "select": {
+      "placeholder": "Select...",
+      "search": "Search...",
+      "empty": "No options found",
+      "removeOption": "Remove {label}"
+    },
+    "sidebar": {
+      "expand": "Expand sidebar",
+      "collapse": "Collapse sidebar",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    },
+    "iconSystem": {
+      "notFound": "Icon \"{name}\" not found",
+      "badge": "{count, plural, one {# notification} other {# notifications}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Side panel",
+      "closePanel": "Close panel"
+    },
+    "codeBlock": {
+      "copyCode": "Copy code",
+      "copied": "Copied",
+      "copy": "Copy"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Sign in",
+      "register": "Create account",
+      "resetPassword": "Reset password"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "fallback": "An unexpected error occurred.",
+      "tryAgain": "Try again"
+    },
+    "login": {
+      "welcome": "Welcome back",
+      "subtitle": "Sign in to your GiftHub account",
+      "tabMagic": "Magic Link",
+      "tabPassword": "Password",
+      "tabSocial": "Social",
+      "tabPasskey": "Passkey",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "sendCode": "Send sign-in code",
+      "sending": "Sending…",
+      "signIn": "Sign in",
+      "signingIn": "Signing in…",
+      "otpTitle": "Check your email!",
+      "otpDesc": "We sent a 6-digit code to <b>{email}</b>",
+      "otpLabel": "Enter code",
+      "verify": "Verify code",
+      "verifying": "Verifying…",
+      "resend": "Resend code",
+      "backToEmail": "Back",
+      "orContinueWith": "Or continue with",
+      "continueWith": "Continue with {provider}",
+      "errorWrongCode": "Invalid or expired code. Please try again.",
+      "errorWrongPass": "Invalid email or password.",
+      "errorGeneric": "Something went wrong. Please try again.",
+      "errorEmailUnavailable": "Email sign-in isn’t available right now — use your password.",
+      "errorCredentialsSignin": "Wrong email or password.",
+      "errorAuthGeneric": "Sign-in failed. Please try again.",
+      "backToHome": "Back to homepage",
+      "socialDesc": "Sign in instantly with your preferred account",
+      "noAccount": "No account yet?",
+      "createAccount": "Create account",
+      "noAccountSub": "Signing in with a code creates an account for a new email.",
+      "registered": "Account created — sign in with your email and password.",
+      "magicDesc": "We’ll send a 6-digit code to your email. No password needed.",
+      "passwordDesc": "Sign in with your email and password.",
+      "forgotPassword": "Forgot password?",
+      "demo": "Demo accounts",
+      "demoRole": {
+        "platformAdmin": "Platform Admin",
+        "merchantAdmin": "Merchant Admin",
+        "merchantStaff": "Merchant Staff",
+        "endUser": "End User"
+      },
+      "passkeyDesc": "Sign in instantly with your fingerprint, face, or security key.",
+      "passkeyButton": "Sign in with Passkey",
+      "passkeyAuthenticating": "Authenticating…"
+    },
+    "register": {
+      "backToHome": "Back to homepage",
+      "title": "Create your account",
+      "subtitle": "Start discovering and managing vouchers",
+      "nameLabel": "Full name",
+      "namePlaceholder": "Jane Doe",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Min. 8 characters",
+      "submit": "Create account",
+      "submitting": "Creating account...",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "errorWeak": "Password is too weak. Please choose a stronger password.",
+      "errorInvalid": "Invalid input.",
+      "errorFallback": "Something went wrong.",
+      "errorGeneric": "Something went wrong. Please try again."
+    },
+    "resetPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter your new password below",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "submit": "Set new password",
+      "submitting": "Resetting…",
+      "success": "Password reset!",
+      "successDesc": "Your password has been updated. You can now sign in.",
+      "goToLogin": "Go to sign in",
+      "errorMismatch": "Passwords do not match",
+      "errorShort": "Password must be at least 8 characters",
+      "errorWeak": "Password is too weak. Please choose a stronger password.",
+      "errorExpired": "This reset link is invalid or has expired.",
+      "forgotTitle": "Forgot your password?",
+      "forgotSubtitle": "Enter your email and we’ll send you a reset link",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Send reset link",
+      "sending": "Sending…",
+      "linkSent": "Check your email!",
+      "linkSentDesc": "If an account exists with that email, we’ve sent a reset link.",
+      "backToLogin": "Back to sign in"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Welcome aboard!",
+      "joined": "You’ve joined {orgName}. Redirecting…",
+      "accepted": "Invitation accepted. Redirecting…",
+      "problemTitle": "Invitation problem",
+      "errorNotAccepted": "This invitation could not be accepted.",
+      "errorGeneric": "Something went wrong. Please try again.",
+      "goToOrgs": "Go to your organizations",
+      "invitedTitle": "You’ve been invited",
+      "invitedDesc": "Accept this invitation to join the organization. You may be asked to sign in first.",
+      "accepting": "Accepting…",
+      "accept": "Accept invitation"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Customers",
+      "title": "Customers",
+      "summary": "{count, plural, one {# customer} other {# customers}} · {revenue} total revenue",
+      "stats": {
+        "totalCustomers": "Total Customers",
+        "totalRevenue": "Total Revenue",
+        "totalRedemptions": "Total Redemptions"
+      },
+      "table": {
+        "customer": "Customer",
+        "email": "Email",
+        "purchases": "Purchases",
+        "totalSpent": "Total Spent",
+        "redemptions": "Redemptions",
+        "lastPurchase": "Last Purchase"
+      },
+      "empty": "No customers yet",
+      "unknown": "Unknown"
+    },
+    "qrCheckout": {
+      "title": "QR Instant Checkout",
+      "subtitle": "Generate QR codes for instant customer checkout",
+      "voucherLabel": "Link to voucher (optional)",
+      "generalOption": "General checkout (no specific voucher)",
+      "voucherOption": "{type} - {value} {currency} ({status})",
+      "generating": "Generating...",
+      "generate": "Generate QR Code",
+      "qrAlt": "Checkout QR Code",
+      "scanToCheckout": "Scan to checkout",
+      "print": "Print QR Code"
+    },
+    "redemptions": {
+      "metaTitle": "Redemptions",
+      "subtitle": "View and confirm voucher redemptions.",
+      "stats": {
+        "totalTitle": "Total redemptions",
+        "totalDescription": "All submitted redemptions",
+        "pendingTitle": "Pending",
+        "pendingDescription": "Awaiting confirmation",
+        "confirmedTitle": "Confirmed",
+        "confirmedDescription": "Approved redemptions",
+        "discountsTitle": "Discounts given",
+        "discountsDescription": "Confirmed discounts"
+      },
+      "empty": {
+        "title": "No redemptions yet",
+        "description": "Redemptions will appear here when customers use vouchers."
+      },
+      "voucherFallback": "Voucher",
+      "card": {
+        "order": "{amount} order",
+        "discount": "Discount: {amount}",
+        "discountReferred": "Discount: {amount} - Referred by {name}",
+        "confirmed": "Confirmed",
+        "pending": "Pending",
+        "method": "Method: {method}",
+        "methods": {
+          "online": "Online",
+          "in_store": "In store"
+        },
+        "orderReference": "Order: {reference}",
+        "notAvailable": "N/A",
+        "location": "Location: {location}",
+        "date": "Date: {date}"
+      },
+      "confirm": {
+        "prompt": "Confirm this redemption? This will unlock credit for the referrer.",
+        "confirmLabel": "Confirm",
+        "success": "Redemption confirmed. Credit unlocked for the referrer.",
+        "error": "Failed to confirm redemption. Please try again.",
+        "confirming": "Confirming...",
+        "button": "Confirm Redemption"
+      },
+      "export": {
+        "success": "Redemptions exported successfully!",
+        "error": "Failed to export redemptions",
+        "exporting": "Exporting...",
+        "button": "Export CSV"
+      }
+    },
+    "reviews": {
+      "title": "Reviews",
+      "subtitle": "Monitor and respond to customer reviews",
+      "filters": "Filters",
+      "reviewCount": "{count, plural, one {# review} other {# reviews}}",
+      "ratingDistribution": "Rating Distribution",
+      "responseRate": "Response Rate",
+      "replied": "Replied",
+      "pending": "Pending",
+      "responseRatePercent": "{percent}% response rate",
+      "filter": {
+        "rating": "Rating",
+        "allRatings": "All ratings",
+        "stars": "{count, plural, one {# Star} other {# Stars}}",
+        "replyStatus": "Reply Status",
+        "all": "All",
+        "needsReply": "Needs reply",
+        "replied": "Replied",
+        "clear": "Clear"
+      },
+      "loading": "Loading reviews...",
+      "empty": "No reviews found.",
+      "anonymous": "Anonymous",
+      "verified": "Verified",
+      "campaign": "Campaign: {name}",
+      "voucher": "Voucher: {code}",
+      "foundHelpful": "{count} found helpful",
+      "yourReply": "Your reply",
+      "replyPlaceholder": "Write your reply...",
+      "posting": "Posting...",
+      "postReply": "Post Reply",
+      "cancel": "Cancel",
+      "reply": "Reply",
+      "showing": "Showing {from}–{to} of {total}",
+      "pageOf": "Page {page} of {totalPages}",
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "loadFailed": "Failed to load reviews",
+      "replyFailed": "Failed to reply",
+      "replyPosted": "Reply posted"
+    },
+    "scanner": {
+      "title": "Scanner",
+      "subtitle": "Scan vouchers, gift cards, and tickets",
+      "manual": "Manual",
+      "camera": "Camera",
+      "scanning": "Scanning...",
+      "cameraDenied": "Camera access was denied. Allow camera access in your browser settings, or type the code below.",
+      "cameraUnavailable": "No camera is available. Type the code below instead.",
+      "pointAtCode": "Point at a QR code to scan automatically",
+      "enterCode": "Enter code",
+      "codePlaceholder": "Voucher code (e.g. AUD-CMUI0TG1), voucher link, ticket or gift card code",
+      "codeAriaLabel": "Code to scan",
+      "scan": "Scan",
+      "found": {
+        "voucher": "Voucher found",
+        "gift_card": "Gift card found",
+        "ticket": "Ticket found"
+      },
+      "info": {
+        "ticketNumber": "Ticket #",
+        "event": "Event",
+        "type": "Type",
+        "standard": "Standard",
+        "attendee": "Attendee",
+        "code": "Code",
+        "amount": "Amount",
+        "message": "Message",
+        "voucher": "Voucher",
+        "campaign": "Campaign",
+        "none": "None",
+        "value": "Value",
+        "validUntil": "Valid until"
+      },
+      "redeem": "Redeem",
+      "redeeming": "Redeeming...",
+      "cannotRedeem": "This item can't be redeemed (status: {status})",
+      "redeemed": {
+        "voucher": "Voucher redeemed successfully!",
+        "gift_card": "Gift card redeemed successfully!",
+        "ticket": "Ticket redeemed successfully!"
+      },
+      "errors": {
+        "enterCode": "Please enter a code",
+        "notFound": "Not found",
+        "scanFailed": "Scan failed",
+        "redeemFailed": "Redeem failed"
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Price can't be negative.",
+      "invalid": "Price isn't a valid number.",
+      "wholeNumber": "Price must be a whole number.",
+      "decimals": "Price can have at most {decimals} decimal places.",
+      "tooLarge": "Price is too large."
+    },
+    "appointments": {
+      "title": "Appointments",
+      "subtitle": "Manage bookings and availability",
+      "createSlot": "Create Slot",
+      "form": {
+        "serviceName": "Service Name",
+        "price": "Price ({currency}, leave empty if free)",
+        "startTime": "Start Time",
+        "endTime": "End Time",
+        "notes": "Notes",
+        "creating": "Creating…",
+        "submit": "Create Availability Slot"
+      },
+      "status": {
+        "all": "All",
+        "pending": "Pending",
+        "confirmed": "Confirmed",
+        "cancelled": "Cancelled",
+        "completed": "Completed"
+      },
+      "loading": "Loading...",
+      "empty": "No appointments found",
+      "bookedBy": "Booked by: {name}",
+      "confirm": "Confirm",
+      "confirmAria": "Confirm appointment",
+      "cancel": "Cancel",
+      "cancelAria": "Cancel appointment",
+      "errors": {
+        "endBeforeStart": "The end time must be after the start time.",
+        "createFailed": "Could not create the availability slot. Please try again.",
+        "network": "Could not reach the server. Check your connection and try again.",
+        "updateFailed": "Couldn't update the appointment (error {status})."
+      }
+    },
+    "inventory": {
+      "title": "Inventory",
+      "subtitle": "Track stock levels and manage voucher availability",
+      "refresh": "Refresh",
+      "summary": {
+        "totalItems": "Total items",
+        "lowStock": "Low stock",
+        "outOfStock": "Out of stock"
+      },
+      "alerts": {
+        "title": "Low Stock Alerts ({count})",
+        "threshold": "{stock} / {threshold} threshold"
+      },
+      "loading": "Loading inventory...",
+      "empty": "No vouchers found",
+      "typeVoucher": "{type} voucher",
+      "stockStatus": {
+        "unlimited": "Unlimited",
+        "outOfStock": "Out of stock",
+        "lowStock": "Low stock",
+        "inStock": "In stock"
+      },
+      "stock": "Stock: {stock}",
+      "purchased": "Purchased: {count}",
+      "redeemed": "Redeemed: {count}",
+      "validUntil": "Valid until {date}",
+      "edit": {
+        "button": "Edit Stock",
+        "stockQuantity": "Stock quantity",
+        "threshold": "Low stock threshold",
+        "save": "Save",
+        "saving": "Saving...",
+        "cancel": "Cancel"
+      },
+      "stockUpdated": "Stock updated",
+      "errors": {
+        "loadFailed": "Failed to load inventory",
+        "updateFailed": "Failed to update stock"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "AI suggestions aren't set up on this platform yet, so the automatic layout and checklist tools are hidden. You can still build and edit your pages by hand."
+    },
+    "pricing": {
+      "title": "Dynamic Pricing",
+      "newRule": "New Rule",
+      "ruleTypes": {
+        "demand": {
+          "label": "Demand-based",
+          "desc": "Adjust price based on view/purchase ratio"
+        },
+        "timeOfDay": {
+          "label": "Time of Day",
+          "desc": "Peak vs off-peak hour pricing"
+        },
+        "inventory": {
+          "label": "Inventory",
+          "desc": "Price changes based on remaining stock"
+        },
+        "surge": {
+          "label": "Surge",
+          "desc": "Special events/holidays markup"
+        },
+        "loyalty": {
+          "label": "Loyalty",
+          "desc": "Discounts for repeat customers"
+        }
+      },
+      "form": {
+        "title": "Create Pricing Rule",
+        "ruleType": "Rule Type",
+        "priority": "Priority",
+        "priorityPlaceholder": "Higher = applied first",
+        "config": "Configuration (JSON)",
+        "submit": "Create Rule",
+        "cancel": "Cancel"
+      },
+      "loading": "Loading rules...",
+      "empty": "No pricing rules yet. Create one to enable dynamic pricing.",
+      "table": {
+        "type": "Type",
+        "priority": "Priority",
+        "config": "Config",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "active": "Active",
+      "inactive": "Inactive",
+      "deleteAria": "Delete pricing rule",
+      "deleteConfirm": "Delete this pricing rule?",
+      "delete": "Delete",
+      "errors": {
+        "invalidJson": "The config field must be valid JSON."
+      },
+      "preview": {
+        "title": "Price Preview",
+        "description": "Enter a voucher ID to see how active rules would affect its price.",
+        "voucherId": "Voucher ID",
+        "voucherIdPlaceholder": "Enter voucher ID",
+        "calculate": "Calculate",
+        "error": "Could not calculate price",
+        "basePrice": "Base Price",
+        "finalPrice": "Final Price"
+      }
+    },
+    "rentals": {
+      "title": "Rental Bookings",
+      "subtitle": "Manage rental requests and returns",
+      "status": {
+        "all": "All",
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "paid": "Paid",
+        "active": "Active",
+        "returned": "Returned",
+        "cancelled": "Cancelled"
+      },
+      "empty": "No rental bookings found.",
+      "dates": "{start} - {end} ({days, plural, one {# day} other {# days}})",
+      "total": "Total: <strong>{total}</strong> ({rate}/day)",
+      "note": "Note: {note}",
+      "rejectedReason": "Rejected: {reason}",
+      "bookedMeta": "Booked: {date} | User: {user}...",
+      "approve": "Approve",
+      "reasonPlaceholder": "Reason (optional)",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "reject": "Reject",
+      "markReturned": "Mark Returned"
+    },
+    "subscriptionBoxes": {
+      "title": "Subscription Boxes",
+      "subtitle": "Manage recurring voucher boxes",
+      "newBox": "+ New Box",
+      "cancel": "Cancel",
+      "form": {
+        "name": "Name",
+        "description": "Description",
+        "price": "Price ({currency})",
+        "currency": "Currency",
+        "interval": "Interval",
+        "maxItems": "Max Items",
+        "creating": "Creating...",
+        "submit": "Create Box"
+      },
+      "interval": {
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "quarterly": "Quarterly"
+      },
+      "created": "Subscription box created.",
+      "empty": "No subscription boxes yet. Create your first one.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# subscriber} other {# subscribers}}",
+      "items": "{count, plural, one {# item} other {# items}}",
+      "errors": {
+        "priceAboveZero": "Enter a price above 0.",
+        "createFailed": "Couldn't create the subscription box (error {status}).",
+        "network": "Couldn't create the subscription box. Check your connection and try again."
+      },
+      "intervalUnit": {
+        "weekly": "weekly",
+        "monthly": "monthly",
+        "quarterly": "quarterly"
+      }
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Gift Cards & Gifting",
+      "description": "Browse and buy digital gift cards from local merchants. Send a thoughtful gift in seconds — delivered by email, redeemable in-store or online."
+    },
+    "publicCard": {
+      "defaultHeadline": "Gift card",
+      "imageAlt": "Gift card",
+      "logoAlt": "Brand logo",
+      "merchant": "Merchant: {name}",
+      "merchantFallback": "Merchant",
+      "code": "Code: {code}",
+      "validUntil": "Valid until: {date}",
+      "noExpiry": "No expiry",
+      "showQr": "Show this QR to staff to redeem the gift card.",
+      "statusMessage": "This gift card is {status}.",
+      "status": {
+        "active": "active",
+        "redeemed": "redeemed",
+        "expired": "expired",
+        "cancelled": "cancelled"
+      }
+    },
+    "purchase": {
+      "title": "Purchase Gift Card",
+      "loading": "Loading...",
+      "notAvailable": "Gift card not available",
+      "defaultHeadline": "Gift Card",
+      "imageAlt": "Gift card",
+      "logoAlt": "Brand",
+      "fromMerchant": "from {merchant}",
+      "form": {
+        "recipientEmail": "Recipient email (optional)",
+        "recipientEmailPlaceholder": "Send gift card to this email",
+        "recipientName": "Recipient name",
+        "recipientNamePlaceholder": "To",
+        "senderName": "Your name",
+        "senderNamePlaceholder": "From",
+        "message": "Personal message (optional)",
+        "messagePlaceholder": "Add a personal message..."
+      },
+      "total": "Total:",
+      "processing": "Processing...",
+      "buy": "Buy Gift Card",
+      "errors": {
+        "notFound": "Gift card not found or not available for purchase",
+        "loadFailed": "Failed to load gift card",
+        "purchaseFailed": "Purchase failed",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "product": {
+      "notFound": "Gift not found",
+      "backToHub": "Back to Gift Hub",
+      "imageAlt": "{title} {index}",
+      "featured": "Featured",
+      "lowStock": "Only {count} left in stock",
+      "buyNow": "Buy Now",
+      "addToCart": "Add to Cart",
+      "saveToWishlist": "Save to wishlist",
+      "removeFromWishlist": "Remove from wishlist",
+      "share": "Share this gift",
+      "upsellsTitle": "You might also like"
+    },
+    "claim": {
+      "metaTitle": "Claim Your Gift",
+      "alreadyClaimedTitle": "Gift Already Claimed",
+      "alreadyClaimedBody": "This gift has already been claimed.",
+      "expiredTitle": "Gift Expired",
+      "expiredBody": "Sorry, this gift link has expired.",
+      "title": "You've Got a Gift!",
+      "signedInHint": "Click below to add this voucher to your wallet.",
+      "signedOutHint": "Sign in to claim this voucher.",
+      "claimButton": "Claim Gift",
+      "signInButton": "Sign In to Claim"
+    },
+    "error": {
+      "title": "Couldn't load the Gift Hub",
+      "fallback": "An unexpected error occurred while loading gifts.",
+      "retry": "Try again"
+    },
+    "hub": {
+      "title": "Gifts",
+      "subtitle": "Find the perfect gift for every occasion",
+      "loadError": "Gifts couldn't be loaded",
+      "retry": "Try again",
+      "emptyCatalog": {
+        "title": "No gifts are listed yet",
+        "body": "In the meantime, vouchers from local merchants make good gifts too."
+      },
+      "noMatches": "No gifts match these filters",
+      "clearFilters": "Clear filters",
+      "browseCampaigns": "Browse campaigns",
+      "allGifts": "All Gifts",
+      "loadMore": "Load more"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Gift card not found",
+        "body": "The QR code is invalid or expired."
+      },
+      "notActive": {
+        "title": "Gift card not active yet",
+        "body": "This gift card becomes valid later."
+      },
+      "expired": {
+        "title": "Gift card expired",
+        "body": "This gift card is no longer valid."
+      },
+      "result": {
+        "title": "Gift card redeemed",
+        "confirmed": "Redemption confirmed successfully.",
+        "alreadyRedeemedOrCancelled": "This gift card was already redeemed or cancelled.",
+        "alreadyRedeemedOrInvalid": "This gift card was already redeemed or invalid."
+      }
+    },
+    "qr": {
+      "error": "Failed to generate QR code",
+      "generating": "Generating QR...",
+      "alt": "QR code"
+    },
+    "wizard": {
+      "title": "AI Gift Finder",
+      "subtitle": "Tell us about the recipient and we'll find the perfect gift",
+      "steps": {
+        "recipient": "Who is the gift for?",
+        "occasion": "What's the occasion?",
+        "budget": "What's your budget?"
+      },
+      "recipients": {
+        "partner": "Partner",
+        "friend": "Friend",
+        "parent": "Parent",
+        "colleague": "Colleague",
+        "child": "Child",
+        "teacher": "Teacher"
+      },
+      "occasions": {
+        "birthday": "Birthday",
+        "christmas": "Christmas",
+        "anniversary": "Anniversary",
+        "thankYou": "Thank You",
+        "justBecause": "Just Because",
+        "graduation": "Graduation"
+      },
+      "summary": {
+        "for": "For: {recipient}",
+        "budget": "Budget: {amount}"
+      },
+      "submit": "Find Perfect Gifts",
+      "error": "Could not generate recommendations. Please try again.",
+      "results": {
+        "found": "We found {count, plural, one {# gift} other {# gifts}} for you:",
+        "empty": "No matching products found. Try adjusting your criteria."
+      },
+      "startOver": "Start over"
+    },
+    "card": {
+      "featured": "Featured",
+      "save": "Save",
+      "unsave": "Unsave",
+      "buyNow": "Buy now"
+    },
+    "feedSection": {
+      "viewAll": "View all"
+    },
+    "filters": {
+      "toggle": "Filters",
+      "clear": "Clear",
+      "occasion": "Occasion",
+      "persona": "Who is it for?",
+      "budget": "Budget",
+      "budgetUnder": "Under {amount}"
+    }
   }
 }

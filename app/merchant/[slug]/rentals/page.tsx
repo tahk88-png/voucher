@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Booking {
   id: string;
@@ -31,9 +32,13 @@ const STATUS_COLORS: Record<string, string> = {
   cancelled: 'bg-gray-100 text-gray-500',
 };
 
-const STATUSES = ['all', 'pending', 'approved', 'rejected', 'paid', 'active', 'returned', 'cancelled'];
+const STATUSES = ['all', 'pending', 'approved', 'rejected', 'paid', 'active', 'returned', 'cancelled'] as const;
+const KNOWN_STATUSES: readonly string[] = STATUSES;
 
 export default function MerchantRentalsPage() {
+  const t = useTranslations('merchantCatalog.rentals');
+  const locale = useLocale();
+  const displayLocale = locale || 'en';
   const { slug } = useParams<{ slug: string }>();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -104,14 +109,14 @@ export default function MerchantRentalsPage() {
 
   const formatPrice = (cents: number, currency: string) => {
     try {
-      return new Intl.NumberFormat('en', { style: 'currency', currency }).format(cents / 100);
+      return new Intl.NumberFormat(displayLocale, { style: 'currency', currency }).format(cents / 100);
     } catch {
       return `${(cents / 100).toFixed(2)} ${currency}`;
     }
   };
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en', {
+    return new Date(dateStr).toLocaleDateString(displayLocale, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -128,8 +133,8 @@ export default function MerchantRentalsPage() {
             </svg>
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-[var(--text)]">Rental Bookings</h1>
-            <p className="text-[#6b5e52]">Manage rental requests and returns</p>
+            <h1 className="text-2xl font-bold text-[var(--text)]">{t('title')}</h1>
+            <p className="text-[#6b5e52]">{t('subtitle')}</p>
           </div>
         </div>
 
@@ -145,7 +150,7 @@ export default function MerchantRentalsPage() {
                   : 'bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] hover:bg-[var(--bg)]'
               }`}
             >
-              {s.charAt(0).toUpperCase() + s.slice(1)}
+              {t(`status.${s}`)}
             </button>
           ))}
         </div>
@@ -156,7 +161,7 @@ export default function MerchantRentalsPage() {
           </div>
         ) : bookings.length === 0 ? (
           <div className="text-center py-12 bg-[var(--surface)] rounded-2xl border border-[#e8e0d8]">
-            <p className="text-[#6b5e52]">No rental bookings found.</p>
+            <p className="text-[#6b5e52]">{t('empty')}</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -176,25 +181,30 @@ export default function MerchantRentalsPage() {
                           STATUS_COLORS[booking.status] || 'bg-gray-100 text-gray-700'
                         }`}
                       >
-                        {booking.status}
+                        {KNOWN_STATUSES.includes(booking.status)
+                          ? t(`status.${booking.status as (typeof STATUSES)[number]}`)
+                          : booking.status}
                       </span>
                     </div>
                     <div className="text-sm text-[#6b5e52] space-y-0.5">
                       <p>
-                        {formatDate(booking.startDate)} - {formatDate(booking.endDate)} ({booking.days} days)
+                        {t('dates', { start: formatDate(booking.startDate), end: formatDate(booking.endDate), days: booking.days })}
                       </p>
                       <p>
-                        Total: <span className="font-semibold text-[#cc785c]">{formatPrice(booking.totalPrice, booking.currency)}</span>
-                        {' '}({formatPrice(booking.dailyRate, booking.currency)}/day)
+                        {t.rich('total', {
+                          total: formatPrice(booking.totalPrice, booking.currency),
+                          rate: formatPrice(booking.dailyRate, booking.currency),
+                          strong: (chunks) => <span className="font-semibold text-[#cc785c]">{chunks}</span>,
+                        })}
                       </p>
                       {booking.notes && (
-                        <p className="text-[#8a7e74]">Note: {booking.notes}</p>
+                        <p className="text-[#8a7e74]">{t('note', { note: booking.notes })}</p>
                       )}
                       {booking.rejectionReason && (
-                        <p className="text-[#c84b36]">Rejected: {booking.rejectionReason}</p>
+                        <p className="text-[#c84b36]">{t('rejectedReason', { reason: booking.rejectionReason })}</p>
                       )}
                       <p className="text-xs text-[#a89e94]">
-                        Booked: {formatDate(booking.createdAt)} | User: {booking.userId.slice(0, 8)}...
+                        {t('bookedMeta', { date: formatDate(booking.createdAt), user: booking.userId.slice(0, 8) })}
                       </p>
                     </div>
                   </div>
@@ -207,13 +217,13 @@ export default function MerchantRentalsPage() {
                           disabled={actionLoading === booking.id}
                           className="bg-[#4e8a5b] hover:bg-[#3f7049] text-white font-medium py-2 px-4 rounded-xl text-sm transition disabled:opacity-50"
                         >
-                          Approve
+                          {t('approve')}
                         </button>
                         {rejectId === booking.id ? (
                           <div className="flex items-center gap-2">
                             <input
                               type="text"
-                              placeholder="Reason (optional)"
+                              placeholder={t('reasonPlaceholder')}
                               value={rejectReason}
                               onChange={(e) => setRejectReason(e.target.value)}
                               className="border border-[#e8e0d8] rounded-xl px-3 py-2 text-sm bg-[#faf8f5] focus:outline-none focus:ring-2 focus:ring-[#cc785c] w-40"
@@ -223,13 +233,13 @@ export default function MerchantRentalsPage() {
                               disabled={actionLoading === booking.id}
                               className="bg-[#c84b36] hover:bg-[#a93d2b] text-white font-medium py-2 px-4 rounded-xl text-sm transition disabled:opacity-50"
                             >
-                              Confirm
+                              {t('confirm')}
                             </button>
                             <button
                               onClick={() => { setRejectId(null); setRejectReason(''); }}
                               className="text-[#6b5e52] hover:text-[var(--text)] text-sm"
                             >
-                              Cancel
+                              {t('cancel')}
                             </button>
                           </div>
                         ) : (
@@ -237,7 +247,7 @@ export default function MerchantRentalsPage() {
                             onClick={() => setRejectId(booking.id)}
                             className="bg-[#f6ddd7] hover:bg-[#efc9c0] text-[#a93d2b] font-medium py-2 px-4 rounded-xl text-sm transition"
                           >
-                            Reject
+                            {t('reject')}
                           </button>
                         )}
                       </>
@@ -248,7 +258,7 @@ export default function MerchantRentalsPage() {
                         disabled={actionLoading === booking.id}
                         className="bg-gradient-to-r from-[#cc785c] to-[#b5613f] text-white font-semibold py-2 px-4 rounded-xl text-sm shadow-md hover:opacity-90 transition disabled:opacity-50"
                       >
-                        Mark Returned
+                        {t('markReturned')}
                       </button>
                     )}
                   </div>

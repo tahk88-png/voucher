@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { SearchInput } from "@/components/ui/search-input"
 import { cn } from "@/lib/utils"
@@ -26,8 +27,10 @@ export function CommandPalette({
   items,
   open,
   onOpenChange,
-  placeholder = "Search...",
+  placeholder,
 }: CommandPaletteProps) {
+  const t = useTranslations("ui")
+  const otherLabel = t("commandPalette.other")
   const [query, setQuery] = React.useState("")
 
   const filteredItems = React.useMemo(() => {
@@ -43,14 +46,14 @@ export function CommandPalette({
   const groupedItems = React.useMemo(() => {
     const groups: Record<string, CommandItem[]> = {}
     filteredItems.forEach((item) => {
-      const category = item.category || "Other"
+      const category = item.category || otherLabel
       if (!groups[category]) {
         groups[category] = []
       }
       groups[category].push(item)
     })
     return groups
-  }, [filteredItems])
+  }, [filteredItems, otherLabel])
 
   const handleSelect = (item: CommandItem) => {
     item.onSelect()
@@ -75,7 +78,7 @@ export function CommandPalette({
       <DialogContent className="max-w-2xl p-0 gap-0">
         <div className="p-4 border-b border-[var(--border)]">
           <SearchInput
-            placeholder={placeholder}
+            placeholder={placeholder ?? t("commandPalette.placeholder")}
             onChange={setQuery}
             autoFocus
           />
@@ -115,7 +118,7 @@ export function CommandPalette({
           ))}
           {filteredItems.length === 0 && query && (
             <div className="py-12 text-center text-sm text-[var(--text-faint)]">
-              No results found
+              {t("commandPalette.noResults")}
             </div>
           )}
         </div>
@@ -123,7 +126,7 @@ export function CommandPalette({
           <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-[var(--border)] bg-white px-1.5 font-mono text-[10px] font-medium text-[var(--text-faint)]">
             <span className="text-xs">⌘</span>K
           </kbd>
-          <span className="text-xs text-[var(--text-faint)]">to open</span>
+          <span className="text-xs text-[var(--text-faint)]">{t("commandPalette.toOpen")}</span>
         </div>
       </DialogContent>
     </Dialog>

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { Search, X, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
@@ -23,6 +24,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
     debounceMs = 300,
     ...props
   }, ref) => {
+    const t = useTranslations("ui")
     const [value, setValue] = React.useState("")
     const debounceTimer = React.useRef<NodeJS.Timeout>()
 
@@ -73,7 +75,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           <button
             type="button"
             onClick={handleClear}
-            aria-label="Clear search"
+            aria-label={t("searchInput.clear")}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-faint)] hover:text-[var(--text)] transition-colors"
           >
             <X className="h-4 w-4" />

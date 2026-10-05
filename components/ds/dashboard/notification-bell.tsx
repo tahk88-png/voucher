@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { Bell, Check, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 /* ═══════════════════════════════════════════════════════════════
    NOTIFICATION BELL — Premium notification indicator + dropdown
@@ -43,6 +44,7 @@ export function NotificationBell({
   hasNew = false,
   className = '',
 }: NotificationBellProps) {
+  const t = useTranslations('dsComponents.notificationBell');
   const [open, setOpen] = useState(false);
   const [shaking, setShaking] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,7 +85,7 @@ export function NotificationBell({
         }}
         onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--ds-text-primary)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--ds-text-secondary)'; }}
-        aria-label={`Notifications${unread > 0 ? ` (${unread} unread)` : ''}`}
+        aria-label={unread > 0 ? t('ariaLabelUnread', { count: unread }) : t('ariaLabel')}
         aria-expanded={open}
       >
         <Bell size={20} />
@@ -137,7 +139,7 @@ export function NotificationBell({
             className="text-sm font-semibold"
             style={{ color: 'var(--ds-text-primary)' }}
           >
-            Notifications
+            {t('title')}
           </span>
           {unread > 0 && onMarkAllRead && (
             <button
@@ -146,7 +148,7 @@ export function NotificationBell({
               style={{ color: 'var(--ds-primary)' }}
             >
               <Check size={12} />
-              Mark all read
+              {t('markAllRead')}
             </button>
           )}
         </div>
@@ -165,7 +167,7 @@ export function NotificationBell({
                 className="text-sm"
                 style={{ color: 'var(--ds-text-tertiary)' }}
               >
-                No notifications
+                {t('empty')}
               </span>
             </div>
           ) : (

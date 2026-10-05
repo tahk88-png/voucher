@@ -3,6 +3,7 @@
 import { Suspense, useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { VoiceSearchButton } from "@/components/voice-search-button";
 import {
   SearchFiltersPanel,
@@ -16,6 +17,7 @@ import { WarmButton } from "@/components/warm-button";
 import { WarmCard } from "@/components/warm-card";
 import { Input } from "@/components/ui/input";
 import { formatCurrency } from "@/lib/utils";
+import { isCampaignCategoryId } from "@/lib/campaign-categories";
 import { Loader2, Search, SlidersHorizontal, Ticket, X } from "lucide-react";
 
 /** An active campaign matching the query (see /api/search). */
@@ -26,13 +28,25 @@ interface CampaignResult {
   price: number | null;
   currency: string;
   endDate: string;
+  /** Stable category id (labels.category.<id>); categoryLabel is the API's English label. */
+  categoryId?: string;
   categoryLabel: string;
   merchant: { id: string; name: string; slug: string; brandLogoUrl: string | null };
 }
 
 function CampaignResultCard({ campaign }: { campaign: CampaignResult }) {
+  const t = useTranslations("searchPage");
+  const tLabels = useTranslations("labels");
+  const locale = useLocale();
   const priceLabel =
-    campaign.price && campaign.price > 0 ? formatCurrency(campaign.price, campaign.currency) : "Free";
+    campaign.price && campaign.price > 0 ? formatCurrency(campaign.price, campaign.currency) : tLabels("free");
+  const categoryLabel = isCampaignCategoryId(campaign.categoryId)
+    ? tLabels(`category.${campaign.categoryId}`)
+    : campaign.categoryLabel;
+  const endDate = new Date(campaign.endDate).toLocaleDateString(locale === "en" ? "en-GB" : locale, {
+    day: "numeric",
+    month: "short",
+  });
   return (
     <Link
       href={`/campaigns/${campaign.id}`}
@@ -43,7 +57,7 @@ function CampaignResultCard({ campaign }: { campaign: CampaignResult }) {
           <div className="flex items-center justify-between gap-2">
             <span className="text-xs font-medium text-[var(--text-muted)] truncate">{campaign.merchant.name}</span>
             <span className="shrink-0 rounded-full bg-[var(--surface-dim)] px-2 py-0.5 text-[11px] font-medium text-[var(--text-muted)]">
-              {campaign.categoryLabel}
+              {categoryLabel}
             </span>
           </div>
           <h3 className="text-sm font-semibold text-[var(--text)] line-clamp-2">{campaign.name}</h3>
@@ -51,10 +65,7 @@ function CampaignResultCard({ campaign }: { campaign: CampaignResult }) {
             <p className="text-xs text-[var(--text-muted)] line-clamp-2">{campaign.description}</p>
           )}
           <div className="flex items-center justify-between text-xs text-[var(--text-muted)] pt-1">
-            <span>
-              Ends{" "}
-              {new Date(campaign.endDate).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}
-            </span>
+            <span>{t("campaignEnds", { date: endDate })}</span>
             <span className="font-semibold text-[var(--text)]">{priceLabel}</span>
           </div>
         </div>
@@ -72,11 +83,12 @@ const DEFAULT_FILTERS: SearchFilters = {
 };
 
 export default function SearchPage() {
+  const t = useTranslations("searchPage");
   return (
     <Suspense
       fallback={
         <div className="flex items-center justify-center py-24">
-          <Loader2 className="h-8 w-8 animate-spin text-[var(--primary)]" aria-label="Loading search" />
+          <Loader2 className="h-8 w-8 animate-spin text-[var(--primary)]" aria-label={t("loadingSearch")} />
         </div>
       }
     >
@@ -86,6 +98,7 @@ export default function SearchPage() {
 }
 
 function SearchPageContent() {
+  const t = useTranslations("searchPage");
   const searchParams = useSearchParams();
 
   const [query, setQuery] = useState(searchParams.get("q") || "");
@@ -242,10 +255,10 @@ function SearchPageContent() {
         {/* Header */}
         <div>
           <h1 className="text-2xl font-semibold text-[var(--text)]">
-            Search offers
+            {t("title")}
           </h1>
           <p className="text-sm text-[var(--text-muted)]">
-            Find campaigns and vouchers from merchants on GiftHub
+            {t("subtitle")}
           </p>
         </div>
 
@@ -262,7 +275,7 @@ function SearchPageContent() {
         >
           <div className="flex-1 relative">
             <label htmlFor="search-query" className="sr-only">
-              Search campaigns, vouchers and merchants
+              {t("queryLabel")}
             </label>
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-muted)] pointer-events-none" aria-hidden="true" />
             <Input
@@ -270,7 +283,7 @@ function SearchPageContent() {
               type="search"
               value={query}
               onChange={(e) => handleQueryChange(e.target.value)}
-              placeholder="Search campaigns, vouchers, merchants..."
+              placeholder={t("queryPlaceholder")}
               className="pl-9 pr-9"
             />
             {loading && (
@@ -285,7 +298,7 @@ function SearchPageContent() {
               variant="outline"
               size="icon"
               onClick={() => setShowMobileFilters(!showMobileFilters)}
-              aria-label="Toggle filters"
+              aria-label={t("toggleFilters")}
               aria-expanded={showMobileFilters}
             >
               {showMobileFilters ? (
@@ -321,11 +334,11 @@ function SearchPageContent() {
                 <div className="p-4">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-semibold text-[var(--text)]">
-                      Filters
+                      {t("filtersTitle")}
                     </h2>
                     <button
                       onClick={() => setShowMobileFilters(false)}
-                      aria-label="Close filters"
+                      aria-label={t("closeFilters")}
                       className="h-8 w-8 flex items-center justify-center rounded-[var(--r-sm)] hover:bg-[var(--surface-dim)]"
                     >
                       <X className="h-5 w-5 text-[var(--text-muted)]" />
@@ -351,14 +364,14 @@ function SearchPageContent() {
           <div className="flex-1 min-w-0 space-y-8">
             {searchError && (
               <p role="alert" className="text-sm text-[var(--danger)]">
-                Search is unavailable right now. Please try again in a moment.
+                {t("error")}
               </p>
             )}
 
             {campaigns.length > 0 && (
               <section aria-labelledby="search-campaigns-heading" className="space-y-3">
                 <h2 id="search-campaigns-heading" className="text-lg font-semibold text-[var(--text)]">
-                  Campaigns{" "}
+                  {t("campaignsHeading")}{" "}
                   <span className="text-sm font-normal text-[var(--text-muted)]">({campaigns.length})</span>
                 </h2>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -372,9 +385,9 @@ function SearchPageContent() {
             {/* Voucher results. When campaigns matched but no vouchers did,
                 skip the voucher list so the page doesn't claim "No results". */}
             {(results.length > 0 || campaigns.length === 0 || page > 1) && (
-              <section aria-label="Vouchers" className="space-y-3">
+              <section aria-label={t("vouchersHeading")} className="space-y-3">
                 {campaigns.length > 0 && (
-                  <h2 className="text-lg font-semibold text-[var(--text)]">Vouchers</h2>
+                  <h2 className="text-lg font-semibold text-[var(--text)]">{t("vouchersHeading")}</h2>
                 )}
                 <SearchResults
               results={results}
@@ -394,11 +407,13 @@ function SearchPageContent() {
               <WarmCard padding="lg" className="text-center">
                 <p className="text-sm text-[var(--text-muted)]">
                   <Ticket className="inline h-4 w-4 mr-1 align-[-2px]" aria-hidden="true" />
-                  Browse everything on sale in the{" "}
-                  <Link href="/campaigns" className="font-medium text-[var(--primary)] hover:underline">
-                    campaign marketplace
-                  </Link>
-                  .
+                  {t.rich("browseMarketplace", {
+                    link: (chunks) => (
+                      <Link href="/campaigns" className="font-medium text-[var(--primary)] hover:underline">
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
                 </p>
               </WarmCard>
             )}

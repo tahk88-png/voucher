@@ -10,6 +10,7 @@ import React, {
   type ReactNode,
   type KeyboardEvent,
 } from 'react';
+import { useTranslations } from 'next-intl';
 
 /* ─── Types ─── */
 export interface DsSelectOption {
@@ -39,16 +40,17 @@ export function DsSelect({
   options,
   value,
   onChange,
-  placeholder = 'Select...',
+  placeholder,
   label,
   error,
   searchable = false,
   multiple = false,
   disabled = false,
   loading = false,
-  emptyText = 'No options found',
+  emptyText,
   className = '',
 }: DsSelectProps) {
+  const t = useTranslations('dsComponents.select');
   const id = useId();
   const containerRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -209,7 +211,7 @@ export function DsSelect({
                       type="button"
                       onClick={(e) => removeChip(val, e)}
                       className="hover:text-[var(--danger)] transition-colors"
-                      aria-label={`Remove ${opt?.label}`}
+                      aria-label={t('removeOption', { label: opt?.label ?? val })}
                     >
                       <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
                         <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -220,7 +222,7 @@ export function DsSelect({
               })
             : displayLabel
               ? <span className="text-[var(--text)] truncate">{displayLabel}</span>
-              : <span className="text-[var(--text-faint)]">{placeholder}</span>}
+              : <span className="text-[var(--text-faint)]">{placeholder ?? t('placeholder')}</span>}
         </span>
 
         {/* Chevron */}
@@ -252,7 +254,7 @@ export function DsSelect({
               ref={searchRef}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search..."
+              placeholder={t('search')}
               className="w-full bg-[var(--surface-dim)] rounded-sm px-2.5 py-1.5 text-sm text-[var(--text)] placeholder:text-[var(--text-faint)] outline-none focus:ring-1 focus:ring-[var(--ring)]"
             />
           </div>
@@ -278,7 +280,7 @@ export function DsSelect({
             className="max-h-60 overflow-y-auto py-1 scrollbar-thin"
           >
             {filtered.length === 0 ? (
-              <li className="px-3 py-4 text-sm text-center text-[var(--text-faint)]">{emptyText}</li>
+              <li className="px-3 py-4 text-sm text-center text-[var(--text-faint)]">{emptyText ?? t('empty')}</li>
             ) : (
               filtered.map((opt, idx) => {
                 const isSelected = selected.includes(opt.value);

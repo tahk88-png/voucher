@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,6 +9,7 @@ import { Mail, MessageSquare } from 'lucide-react';
 import { publicContactEmail } from '@/lib/contact-address';
 
 export default function ContactClient({ contactEmail }: { contactEmail: string }) {
+  const t = useTranslations('contact');
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error' | 'unavailable'>('idle');
   // A dev/placeholder address (support@example.com, support@localhost) is
@@ -39,10 +41,10 @@ export default function ContactClient({ contactEmail }: { contactEmail: string }
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text)' }}>
-        Contact Us
+        {t('title')}
       </h1>
       <p className="mb-8" style={{ color: 'var(--text-muted)' }}>
-        Have a question? We&apos;d love to hear from you.
+        {t('subtitle')}
       </p>
 
       <div className="grid md:grid-cols-3 gap-8">
@@ -52,7 +54,7 @@ export default function ContactClient({ contactEmail }: { contactEmail: string }
             <div className="flex items-start gap-3">
               <Mail size={20} style={{ color: 'var(--primary)' }} aria-hidden="true" />
               <div className="min-w-0">
-                <p className="font-medium text-sm" style={{ color: 'var(--text)' }}>Email</p>
+                <p className="font-medium text-sm" style={{ color: 'var(--text)' }}>{t('email')}</p>
                 <a
                   href={`mailto:${shownEmail}`}
                   className="text-sm underline underline-offset-2 break-all"
@@ -66,9 +68,9 @@ export default function ContactClient({ contactEmail }: { contactEmail: string }
           <div className="flex items-start gap-3">
             <MessageSquare size={20} style={{ color: 'var(--primary)' }} aria-hidden="true" />
             <div>
-              <p className="font-medium text-sm" style={{ color: 'var(--text)' }}>Automated assistant</p>
+              <p className="font-medium text-sm" style={{ color: 'var(--text)' }}>{t('assistantTitle')}</p>
               <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                Quick answers about vouchers and your account from the chat button in the corner. It is automated, not a person.
+                {t('assistantText')}
               </p>
             </div>
           </div>
@@ -79,7 +81,7 @@ export default function ContactClient({ contactEmail }: { contactEmail: string }
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">{t('name')}</Label>
                 <Input
                   id="name"
                   value={form.name}
@@ -88,7 +90,7 @@ export default function ContactClient({ contactEmail }: { contactEmail: string }
                 />
               </div>
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('email')}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -99,7 +101,7 @@ export default function ContactClient({ contactEmail }: { contactEmail: string }
               </div>
             </div>
             <div>
-              <Label htmlFor="subject">Subject</Label>
+              <Label htmlFor="subject">{t('subject')}</Label>
               <Input
                 id="subject"
                 value={form.subject}
@@ -108,7 +110,7 @@ export default function ContactClient({ contactEmail }: { contactEmail: string }
               />
             </div>
             <div>
-              <Label htmlFor="message">Message</Label>
+              <Label htmlFor="message">{t('message')}</Label>
               <textarea
                 id="message"
                 rows={5}
@@ -125,20 +127,19 @@ export default function ContactClient({ contactEmail }: { contactEmail: string }
             </div>
 
             {status === 'sent' && (
-              <p role="status" className="text-sm text-green-800">Message sent! We&apos;ll get back to you soon.</p>
+              <p role="status" className="text-sm text-green-800">{t('sent')}</p>
             )}
             {status === 'unavailable' && (
               <p role="alert" className="text-sm text-red-700">
-                The contact form isn&apos;t available right now.
-                {shownEmail ? <> Please email us at {shownEmail}.</> : ' Please try again later.'}
+                {shownEmail ? t('unavailableWithEmail', { email: shownEmail }) : t('unavailable')}
               </p>
             )}
             {status === 'error' && (
-              <p role="alert" className="text-sm text-red-700">Failed to send. Please try again in a moment.</p>
+              <p role="alert" className="text-sm text-red-700">{t('error')}</p>
             )}
 
             <WarmButton type="submit" disabled={status === 'sending'}>
-              {status === 'sending' ? 'Sending...' : 'Send Message'}
+              {status === 'sending' ? t('sending') : t('send')}
             </WarmButton>
           </form>
         </div>

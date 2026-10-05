@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { Upload, X, ImageIcon } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -23,6 +24,7 @@ export function ImageUpload({
   className,
   disabled,
 }: ImageUploadProps) {
+  const t = useTranslations("ui")
   const [preview, setPreview] = React.useState<string>("")
   const [error, setError] = React.useState<string>("")
   const [dragActive, setDragActive] = React.useState(false)
@@ -46,12 +48,12 @@ export function ImageUpload({
     setError("")
 
     if (!file.type.startsWith("image/")) {
-      setError("Please upload an image file")
+      setError(t("imageUpload.notImage"))
       return false
     }
 
     if (file.size > maxSize * 1024 * 1024) {
-      setError(`Image must be smaller than ${maxSize}MB`)
+      setError(t("imageUpload.tooLarge", { maxSize }))
       return false
     }
 
@@ -128,7 +130,7 @@ export function ImageUpload({
           <div className="relative w-full h-full min-h-[200px]">
             <Image
               src={preview}
-              alt="Preview"
+              alt={t("imageUpload.previewAlt")}
               fill
               className="object-cover"
               unoptimized
@@ -137,7 +139,7 @@ export function ImageUpload({
               type="button"
               onClick={handleRemove}
               disabled={disabled}
-              aria-label="Remove image"
+              aria-label={t("imageUpload.remove")}
               className="absolute top-2 right-2 rounded-full bg-[var(--text)]/80 p-2 text-white hover:bg-[var(--text)] transition-colors disabled:opacity-50"
             >
               <X className="h-4 w-4" />
@@ -149,10 +151,10 @@ export function ImageUpload({
               <ImageIcon className="h-6 w-6 text-[var(--text-faint)]" />
             </div>
             <div className="mb-2 text-sm font-medium text-[var(--text)]">
-              {dragActive ? "Drop image here" : "Upload image"}
+              {dragActive ? t("imageUpload.dropHere") : t("imageUpload.upload")}
             </div>
             <div className="mb-4 text-xs text-[var(--text-muted)]">
-              PNG, JPG, GIF up to {maxSize}MB
+              {t("imageUpload.hint", { maxSize })}
             </div>
             <WarmButton
               type="button"
@@ -160,7 +162,7 @@ export function ImageUpload({
               onClick={() => inputRef.current?.click()}
               disabled={disabled}
             >
-              Select image
+              {t("imageUpload.select")}
             </WarmButton>
           </div>
         )}

@@ -1,5 +1,10 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Merchant Dashboard', noIndex: true });
+import { getTranslations } from "next-intl/server"
+
+export async function generateMetadata() {
+  const t = await getTranslations("merchantLegacy.metadata")
+  return pageMetadata({ title: t("overviewTitle"), noIndex: true })
+}
 
 import Link from "next/link"
 import { redirect } from "next/navigation"
@@ -22,23 +27,24 @@ export default async function MerchantOverviewPage() {
   })
 
   if (!member?.merchant) {
+    const t = await getTranslations("merchantLegacy")
     return (
       <div className="space-y-8">
         <div>
-          <h1 className="text-3xl font-bold text-[#2D2721]">Merchant dashboard</h1>
-          <p className="text-[#6B5744] mt-1">You are not connected to any merchants yet.</p>
+          <h1 className="text-3xl font-bold text-[#2D2721]">{t("overview.title")}</h1>
+          <p className="text-[#6B5744] mt-1">{t("overview.notConnected")}</p>
         </div>
         <WarmCard padding="lg" className="bg-white text-center border border-[rgba(139,115,85,0.15)]">
           <Gift className="h-12 w-12 mx-auto text-[#8B7355] mb-4" />
-          <h3 className="text-lg font-semibold text-[#2D2721] mb-2">No merchant access</h3>
+          <h3 className="text-lg font-semibold text-[#2D2721] mb-2">{t("noAccess.title")}</h3>
           <p className="text-sm text-[#6B5744] mb-4">
-            Ask a merchant admin to invite you, or create a merchant account to start.
+            {t("noAccess.overviewHint")}
           </p>
           <WarmButton asChild>
             <Link href="/campaigns">
               <span className="inline-flex items-center gap-2">
                 <Plus className="h-4 w-4" />
-                Explore campaigns
+                {t("noAccess.exploreCampaigns")}
               </span>
             </Link>
           </WarmButton>

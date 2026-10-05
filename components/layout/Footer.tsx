@@ -1,8 +1,12 @@
 import Link from "next/link"
 import { Gift } from "lucide-react"
-import { PUBLIC_FOOTER_LINKS } from "@/lib/navigation"
+import { useTranslations } from "next-intl"
+import { PUBLIC_FOOTER_LINKS, localizeNavLinks } from "@/lib/navigation"
 
 export default function Footer() {
+  const t = useTranslations("site")
+  const links = localizeNavLinks(PUBLIC_FOOTER_LINKS, (key) => t(`navLinks.${key}`))
+
   return (
     <footer className="bg-[var(--surface)]/50 backdrop-blur-sm border-t border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -13,9 +17,9 @@ export default function Footer() {
             </span>
             <span className="font-semibold">GiftHub</span>
           </Link>
-          <nav aria-label="Footer">
+          <nav aria-label={t("footer.navLabel")}>
             <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-              {PUBLIC_FOOTER_LINKS.map((link) => (
+              {links.map((link) => (
                 <li key={link.id}>
                   <Link
                     href={link.href}
@@ -27,7 +31,7 @@ export default function Footer() {
               ))}
             </ul>
           </nav>
-          <p className="text-sm text-[var(--text-muted)]">© {new Date().getFullYear()} GiftHub. Made in Europe.</p>
+          <p className="text-sm text-[var(--text-muted)]">{t("footer.copyright", { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </footer>

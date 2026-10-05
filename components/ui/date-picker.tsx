@@ -2,6 +2,8 @@
 
 import * as React from "react"
 import { format } from "date-fns"
+import { et as etLocale } from "date-fns/locale"
+import { useLocale, useTranslations } from "next-intl"
 import { Calendar as CalendarIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -24,10 +26,12 @@ interface DatePickerProps {
 export function DatePicker({
   date,
   onSelect,
-  placeholder = "Pick a date",
+  placeholder,
   disabled,
   className,
 }: DatePickerProps) {
+  const t = useTranslations("ui")
+  const locale = useLocale()
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -41,7 +45,11 @@ export function DatePicker({
           disabled={disabled}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>{placeholder}</span>}
+          {date ? (
+            format(date, "PPP", locale === "et" ? { locale: etLocale } : undefined)
+          ) : (
+            <span>{placeholder ?? t("datePicker.placeholder")}</span>
+          )}
         </WarmButton>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { Download, ChevronDown } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export type DateRangeOption = '7d' | '30d' | '90d' | '1y' | 'custom'
 
@@ -22,13 +23,15 @@ export interface DashboardHeaderProps {
   onExport?: (format: 'csv' | 'pdf') => void
 }
 
-const rangeLabels: Record<DateRangeOption, string> = {
-  '7d': '7 days',
-  '30d': '30 days',
-  '90d': '90 days',
-  '1y': '1 year',
-  custom: 'Custom',
-}
+const RANGE_OPTIONS: DateRangeOption[] = ['7d', '30d', '90d', '1y', 'custom']
+
+const rangeLabelKeys = {
+  '7d': 'days7',
+  '30d': 'days30',
+  '90d': 'days90',
+  '1y': 'year1',
+  custom: 'custom',
+} as const satisfies Record<DateRangeOption, string>
 
 export function DashboardHeader({
   title,
@@ -39,6 +42,8 @@ export function DashboardHeader({
   onFilterChange,
   onExport,
 }: DashboardHeaderProps) {
+  const t = useTranslations('dsComponents.dashboardHeader')
+  const tRange = useTranslations('dsComponents.dateRange')
   const [exportOpen, setExportOpen] = useState(false)
 
   return (
@@ -63,7 +68,7 @@ export function DashboardHeader({
             className="flex rounded-lg overflow-hidden text-sm shrink-0"
             style={{ border: '1px solid var(--border, #e5e7eb)' }}
           >
-            {(Object.keys(rangeLabels) as DateRangeOption[]).map((key) => (
+            {RANGE_OPTIONS.map((key) => (
               <button
                 key={key}
                 onClick={() => onDateRangeChange(key)}
@@ -74,7 +79,7 @@ export function DashboardHeader({
                   color: dateRange === key ? '#fff' : 'var(--text-muted, #6b7280)',
                 }}
               >
-                {rangeLabels[key]}
+                {tRange(rangeLabelKeys[key])}
               </button>
             ))}
           </div>
@@ -124,7 +129,7 @@ export function DashboardHeader({
               }}
             >
               <Download size={14} />
-              Export
+              {t('export')}
               <ChevronDown size={14} />
             </button>
             {exportOpen && (
@@ -145,7 +150,7 @@ export function DashboardHeader({
                     className="w-full text-left px-4 py-2 text-sm hover:opacity-80 transition-opacity"
                     style={{ color: 'var(--text, #111)' }}
                   >
-                    Export as {fmt.toUpperCase()}
+                    {t('exportAs', { format: fmt.toUpperCase() })}
                   </button>
                 ))}
               </div>

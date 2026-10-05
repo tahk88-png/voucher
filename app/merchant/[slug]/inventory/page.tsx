@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
@@ -58,11 +59,17 @@ function getStockColor(item: InventoryItem): string {
   return 'text-green-600 bg-green-50 border-green-200';
 }
 
-function getStockLabel(item: InventoryItem): string {
-  if (item.stockQuantity === null) return 'Unlimited';
-  if (item.isOutOfStock) return 'Out of stock';
-  if (item.isLowStock) return 'Low stock';
-  return 'In stock';
+function getStockStatus(item: InventoryItem): 'unlimited' | 'outOfStock' | 'lowStock' | 'inStock' {
+  if (item.stockQuantity === null) return 'unlimited';
+  if (item.isOutOfStock) return 'outOfStock';
+  if (item.isLowStock) return 'lowStock';
+  return 'inStock';
+}
+
+const VOUCHER_TYPES = ['percentage', 'fixed_amount', 'credit_amount'] as const;
+type VoucherTypeKey = (typeof VOUCHER_TYPES)[number];
+function isVoucherType(type: string): type is VoucherTypeKey {
+  return (VOUCHER_TYPES as readonly string[]).includes(type);
 }
 
 function getStockIcon(item: InventoryItem) {
@@ -73,6 +80,11 @@ function getStockIcon(item: InventoryItem) {
 }
 
 export default function InventoryPage() {
+  const t = useTranslations('merchantCatalog.inventory');
+  const tLabels = useTranslations('labels');
+  const locale = useLocale();
+  const displayLocale = !locale || locale === 'en' ? 'en-GB' : locale;
+  const typeLabel = (type: string) => (isVoucherType(type) ? tLabels(`voucherType.${type}`) : type);
   const params = useParams();
   const slug = params.slug as string;
   const [data, setData] = useState<InventoryData | null>(null);
@@ -89,11 +101,11 @@ export default function InventoryPage() {
       if (!res.ok) throw new Error();
       setData(await res.json());
     } catch {
-      showError('Failed to load inventory');
+      showError(t('errors.loadFailed'));
     } finally {
       setLoading(false);
     }
-  }, [slug]);
+  }, [slug, t]);
 
   useEffect(() => {
     fetchData();
@@ -121,13 +133,13 @@ export default function InventoryPage() {
       });
       if (!res.ok) {
         const err = await res.json();
-        throw new Error(err.error || 'Failed');
+        throw new Error(err.error || t('errors.updateFailed'));
       }
-      showSuccess('Stock updated');
+      showSuccess(t('stockUpdated'));
       setEditingId(null);
       fetchData();
     } catch (err) {
-      showError(err instanceof Error ? err.message : 'Failed to update stock');
+      showError(err instanceof Error ? err.message : t('errors.updateFailed'));
     } finally {
       setSaving(false);
     }
@@ -137,14 +149,14 @@ export default function InventoryPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Inventory</h1>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
           <p className="text-sm text-[var(--text-muted)]">
-            Track stock levels and manage voucher availability
+            {t('subtitle')}
           </p>
         </div>
         <WarmButton size="sm" variant="outline" onClick={fetchData} disabled={loading}>
           <RefreshCw className={`h-4 w-4 mr-1 ${loading ? 'animate-spin' : ''}`} />
-          Refresh
+          {t('refresh')}
         </WarmButton>
       </div>
 
@@ -158,7 +170,7 @@ export default function InventoryPage() {
               </div>
               <div>
                 <p className="text-2xl font-bold text-[var(--text)]">{data.totalItems}</p>
-                <p className="text-xs text-[var(--text-muted)]">Total items</p>
+                <p className="text-xs text-[var(--text-muted)]">{t('summary.totalItems')}</p>
               </div>
             </div>
           </WarmCard>
@@ -169,7 +181,7 @@ export default function InventoryPage() {
               </div>
               <div>
                 <p className="text-2xl font-bold text-yellow-600">{data.lowStockCount}</p>
-                <p className="text-xs text-[var(--text-muted)]">Low stock</p>
+                <p className="text-xs text-[var(--text-muted)]">{t('summary.lowStock')}</p>
               </div>
             </div>
           </WarmCard>
@@ -180,7 +192,7 @@ export default function InventoryPage() {
               </div>
               <div>
                 <p className="text-2xl font-bold text-red-600">{data.outOfStockCount}</p>
-                <p className="text-xs text-[var(--text-muted)]">Out of stock</p>
+                <p className="text-xs text-[var(--text-muted)]">{t('summary.outOfStock')}</p>
               </div>
             </div>
           </WarmCard>
@@ -193,7 +205,7 @@ export default function InventoryPage() {
           <div className="flex items-center gap-2 mb-3">
             <AlertTriangle className="h-5 w-5 text-yellow-600" />
             <h2 className="text-base font-semibold text-yellow-800">
-              Low Stock Alerts ({data.lowStockAlerts.length})
+              {t('alerts.title', { count: data.lowStockAlerts.length })}
             </h2>
           </div>
           <div className="space-y-2">
@@ -204,14 +216,14 @@ export default function InventoryPage() {
               >
                 <div>
                   <span className="text-sm font-medium text-[var(--text)]">
-                    {alert.campaignName || alert.voucherType}
+                    {alert.campaignName || typeLabel(alert.voucherType)}
                   </span>
                   <span className="text-xs text-[var(--text-muted)] ml-2">
                     ({alert.voucherValue / 100} {alert.currency})
                   </span>
                 </div>
                 <Badge variant="secondary" className="text-yellow-700 bg-yellow-100">
-                  {alert.stockQuantity} / {alert.lowStockThreshold} threshold
+                  {t('alerts.threshold', { stock: alert.stockQuantity, threshold: alert.lowStockThreshold })}
                 </Badge>
               </div>
             ))}
@@ -221,10 +233,10 @@ export default function InventoryPage() {
 
       {/* Inventory table */}
       {loading ? (
-        <p className="text-sm text-[var(--text-muted)]">Loading inventory...</p>
+        <p className="text-sm text-[var(--text-muted)]">{t('loading')}</p>
       ) : !data || data.inventory.length === 0 ? (
         <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
-          <p className="text-[var(--text-muted)]">No vouchers found</p>
+          <p className="text-[var(--text-muted)]">{t('empty')}</p>
         </WarmCard>
       ) : (
         <div className="space-y-3">
@@ -234,7 +246,7 @@ export default function InventoryPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-sm font-medium text-[var(--text)]">
-                      {item.campaignName || `${item.type} voucher`}
+                      {item.campaignName || t('typeVoucher', { type: typeLabel(item.type) })}
                     </span>
                     <Badge variant="secondary" className="text-xs">
                       {item.value / 100} {item.currency}
@@ -243,35 +255,35 @@ export default function InventoryPage() {
                       className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${getStockColor(item)}`}
                     >
                       {getStockIcon(item)}
-                      {getStockLabel(item)}
+                      {t(`stockStatus.${getStockStatus(item)}`)}
                     </span>
                   </div>
                   <div className="flex items-center gap-4 mt-2 text-xs text-[var(--text-muted)]">
                     <span>
-                      Stock: {item.stockQuantity === null ? 'Unlimited' : item.stockQuantity}
+                      {t('stock', { stock: item.stockQuantity === null ? t('stockStatus.unlimited') : item.stockQuantity })}
                     </span>
-                    <span>Purchased: {item.totalPurchases}</span>
-                    <span>Redeemed: {item.totalRedemptions}</span>
+                    <span>{t('purchased', { count: item.totalPurchases })}</span>
+                    <span>{t('redeemed', { count: item.totalRedemptions })}</span>
                     <span>
-                      Valid until {new Date(item.validTo).toLocaleDateString('en-GB')}
+                      {t('validUntil', { date: new Date(item.validTo).toLocaleDateString(displayLocale) })}
                     </span>
                   </div>
 
                   {editingId === item.id && (
                     <div className="mt-3 flex items-end gap-3 flex-wrap">
                       <div>
-                        <Label className="text-xs">Stock quantity</Label>
+                        <Label className="text-xs">{t('edit.stockQuantity')}</Label>
                         <Input
                           type="number"
                           min="0"
                           value={editStock}
                           onChange={(e) => setEditStock(e.target.value)}
-                          placeholder="Unlimited"
+                          placeholder={t('stockStatus.unlimited')}
                           className="w-28 border-[var(--border)]"
                         />
                       </div>
                       <div>
-                        <Label className="text-xs">Low stock threshold</Label>
+                        <Label className="text-xs">{t('edit.threshold')}</Label>
                         <Input
                           type="number"
                           min="0"
@@ -286,14 +298,14 @@ export default function InventoryPage() {
                         onClick={() => handleSave(item.id)}
                         disabled={saving}
                       >
-                        {saving ? 'Saving...' : 'Save'}
+                        {saving ? t('edit.saving') : t('edit.save')}
                       </WarmButton>
                       <WarmButton
                         size="sm"
                         variant="outline"
                         onClick={() => setEditingId(null)}
                       >
-                        Cancel
+                        {t('edit.cancel')}
                       </WarmButton>
                     </div>
                   )}
@@ -305,7 +317,7 @@ export default function InventoryPage() {
                       variant="outline"
                       onClick={() => handleEdit(item)}
                     >
-                      Edit Stock
+                      {t('edit.button')}
                     </WarmButton>
                   )}
                 </div>

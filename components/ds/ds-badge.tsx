@@ -1,6 +1,7 @@
 'use client';
 
 import React, { type ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 
 /* ─── Types ─── */
 export type DsBadgeVariant = 'solid' | 'soft' | 'outline' | 'glass';
@@ -83,6 +84,7 @@ export function DsBadge({
   children,
   className = '',
 }: DsBadgeProps) {
+  const t = useTranslations('dsComponents.common');
   const tokens = colorTokens[color];
 
   return (
@@ -116,7 +118,7 @@ export function DsBadge({
           type="button"
           onClick={onRemove}
           className="flex-shrink-0 -mr-0.5 p-0.5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
-          aria-label="Remove"
+          aria-label={t('remove')}
         >
           <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none">
             <path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

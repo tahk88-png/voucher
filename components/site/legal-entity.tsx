@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl"
+
 /**
  * The legal operator of this deployment, for the privacy policy and terms.
  *
@@ -43,11 +45,12 @@ function Field({ label, value, placeholder }: { label: string; value: string | n
 
 /** "Who we are" block. Renders placeholders when the env vars are unset. */
 export function LegalEntityDetails({ entity = getLegalEntity() }: { entity?: LegalEntity }) {
+  const t = useTranslations("site.legalEntity")
   return (
     <div className="space-y-1">
-      <Field label="Operator" value={entity.name} placeholder="[company name to be added]" />
-      <Field label="Registered address" value={entity.address} placeholder="[registered address to be added]" />
-      <Field label="Registry code" value={entity.registryCode} placeholder="[registry code to be added]" />
+      <Field label={t("operator")} value={entity.name} placeholder={t("operatorPlaceholder")} />
+      <Field label={t("registeredAddress")} value={entity.address} placeholder={t("addressPlaceholder")} />
+      <Field label={t("registryCode")} value={entity.registryCode} placeholder={t("registryCodePlaceholder")} />
     </div>
   )
 }

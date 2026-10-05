@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getNavigationLinks, getFallbackNavigation, toPublicNavLinks } from "@/lib/navigation"
+import { getNavigationLinks, getFallbackNavigation, localizeNavLinks, toPublicNavLinks } from "@/lib/navigation"
 import { Gift } from "lucide-react"
 import { getTranslations } from "next-intl/server"
 import { MobileNav } from "@/components/layout/mobile-nav"
@@ -21,8 +21,11 @@ export default async function HubShell({ children }: HubShellProps) {
       position: "header",
     })) || []
 
-  const header = toPublicNavLinks(headerLinks.length > 0 ? headerLinks : fallback.header)
   const t = await getTranslations("nav")
+  const tSite = await getTranslations("site")
+  const header = localizeNavLinks(toPublicNavLinks(headerLinks.length > 0 ? headerLinks : fallback.header), (key) =>
+    tSite(`navLinks.${key}`),
+  )
   const signInLabel = t("login")
 
   return (
@@ -37,7 +40,7 @@ export default async function HubShell({ children }: HubShellProps) {
               <span className="text-xl font-bold text-[var(--text)]">GiftHub</span>
             </Link>
 
-            <nav aria-label="Main" className="hidden md:flex items-center gap-1">
+            <nav aria-label={tSite("header.mainNavLabel")} className="hidden md:flex items-center gap-1">
               {header.map((link) => (
                 <Link
                   key={link.id}

@@ -8,6 +8,7 @@ import { StatCard } from "@/components/stat-card"
 import { Badge } from "@/components/ui/badge"
 import { showError, showSuccess } from "@/lib/toast-helpers"
 import { DollarSign, TrendingUp } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 
 interface RevenueItem {
   id: string
@@ -43,12 +44,38 @@ export default function CreditsClient({
   revenueHistory,
   payoutRequests,
 }: CreditsClientProps) {
+  const t = useTranslations("merchantLegacy.credits")
+  const locale = useLocale()
   const router = useRouter()
   const [isRequesting, setIsRequesting] = useState(false)
   const canRequest = availableBalance >= 10000 && !isRequesting
 
   const formatMoney = (value: number) =>
-    new Intl.NumberFormat("en-US", { style: "currency", currency }).format(value / 100)
+    new Intl.NumberFormat(locale, { style: "currency", currency }).format(value / 100)
+
+  const formatDate = (value: string) =>
+    new Date(value).toLocaleDateString(locale, {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    })
+
+  const statusLabel = (status: string) => {
+    switch (status) {
+      case "paid":
+        return t("status.paid")
+      case "pending":
+        return t("status.pending")
+      case "requested":
+        return t("status.requested")
+      case "completed":
+        return t("status.completed")
+      case "failed":
+        return t("status.failed")
+      default:
+        return status
+    }
+  }
 
   const requestPayout = async () => {
     if (!canRequest) return
@@ -61,12 +88,12 @@ export default function CreditsClient({
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
-        throw new Error(data.error || "Failed to request payout")
+        throw new Error(data.error || t("requestFailed"))
       }
-      showSuccess("Payout request submitted")
+      showSuccess(t("requestSubmitted"))
       router.refresh()
     } catch (error) {
-      showError(error instanceof Error ? error.message : "Failed to request payout")
+      showError(error instanceof Error ? error.message : t("requestFailed"))
     } finally {
       setIsRequesting(false)
     }
@@ -76,21 +103,21 @@ export default function CreditsClient({
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <StatCard
-          title="Available Balance"
+          title={t("availableBalance")}
           value={formatMoney(availableBalance)}
           icon={DollarSign}
-          description="Ready for payout"
+          description={t("availableBalanceHint")}
         />
         <StatCard
-          title="Pending Revenue"
+          title={t("pendingRevenue")}
           value={formatMoney(pendingBalance)}
           icon={TrendingUp}
-          description="Processing"
+          description={t("pendingRevenueHint")}
         />
       </div>
 
       <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
-        <h2 className="text-base font-semibold text-[#2D2721]">Recent revenue</h2>
+        <h2 className="text-base font-semibold text-[#2D2721]">{t("recentRevenue")}</h2>
         <div className="space-y-4 mt-4">
           {revenueHistory.length > 0 ? (
             revenueHistory.map((entry) => (
@@ -101,27 +128,23 @@ export default function CreditsClient({
                 <div>
                   <p className="font-medium text-[#2D2721]">{formatMoney(entry.amount)}</p>
                   <p className="text-sm text-[#6B5744]">
-                    {new Date(entry.createdAt).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}{" "}
-                    · {entry.type === "ticket" ? "Ticket sale" : "Voucher sale"}
+                    {formatDate(entry.createdAt)}{" "}
+                    · {entry.type === "ticket" ? t("ticketSale") : t("voucherSale")}
                   </p>
                 </div>
-                <Badge variant="success">{entry.status}</Badge>
+                <Badge variant="success">{statusLabel(entry.status)}</Badge>
               </div>
             ))
           ) : (
             <div className="text-center py-12 text-[#6B5744]">
-              <p className="text-sm">No revenue recorded yet</p>
+              <p className="text-sm">{t("noRevenue")}</p>
             </div>
           )}
         </div>
       </WarmCard>
 
       <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
-        <h2 className="text-base font-semibold text-[#2D2721]">Payout requests</h2>
+        <h2 className="text-base font-semibold text-[#2D2721]">{t("payoutRequests")}</h2>
         <div className="space-y-4 mt-4">
           {payoutRequests.length > 0 ? (
             payoutRequests.map((payout) => (
@@ -132,31 +155,27 @@ export default function CreditsClient({
                 <div>
                   <p className="font-medium text-[#2D2721]">{formatMoney(payout.amount)}</p>
                   <p className="text-sm text-[#6B5744]">
-                    {new Date(payout.createdAt).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
+                    {formatDate(payout.createdAt)}
                   </p>
                 </div>
                 <Badge variant={payout.status === "completed" ? "success" : "warning"}>
-                  {payout.status}
+                  {statusLabel(payout.status)}
                 </Badge>
               </div>
             ))
           ) : (
             <div className="text-center py-12 text-[#6B5744]">
-              <p className="text-sm">No payout requests yet</p>
+              <p className="text-sm">{t("noPayoutRequests")}</p>
             </div>
           )}
         </div>
       </WarmCard>
 
       <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
-        <h2 className="text-base font-semibold text-[#2D2721]">Request payout</h2>
-        <p className="text-sm text-[#6B5744] mb-4 mt-2">Minimum payout amount: {formatMoney(10000)}</p>
+        <h2 className="text-base font-semibold text-[#2D2721]">{t("requestPayoutHeading")}</h2>
+        <p className="text-sm text-[#6B5744] mb-4 mt-2">{t("minimumPayout", { amount: formatMoney(10000) })}</p>
         <WarmButton disabled={!canRequest} onClick={requestPayout}>
-          {isRequesting ? "Submitting..." : "Request payout"}
+          {isRequesting ? t("submitting") : t("requestPayout")}
         </WarmButton>
       </WarmCard>
     </div>

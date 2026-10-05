@@ -1,5 +1,11 @@
+import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Rental Marketplace', description: 'Browse items for rent', path: '/rent' });
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("shop.rentPage")
+  return pageMetadata({ title: t("metaTitle"), description: t("metaDescription"), path: '/rent' })
+}
 
 import { redirect } from "next/navigation"
 import TenantShell from "@/components/layout/tenant-shell"
@@ -13,6 +19,7 @@ export default async function RentPage() {
     redirect("/hub")
   }
 
+  const t = await getTranslations("shop.rentPage")
   const rentals = await prisma.rentalItem.findMany({
     where: { merchantId: context.tenant.id, status: "active" },
     orderBy: { createdAt: "desc" },
@@ -22,8 +29,8 @@ export default async function RentPage() {
     <TenantShell merchant={context.tenant}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Rentals</h1>
-          <p className="text-sm text-[#6B5744]">Pick dates and request a rental quote.</p>
+          <h1 className="text-2xl font-semibold text-[#2D2721]">{t("title")}</h1>
+          <p className="text-sm text-[#6B5744]">{t("subtitle")}</p>
         </div>
         <RentClient
           merchantId={context.tenant.id}

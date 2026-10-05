@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { EmptyState } from "@/components/ui/empty-state"
@@ -28,9 +29,10 @@ export function SearchResults({
   isLoading,
   query,
   onResultClick,
-  emptyMessage = "No results found",
+  emptyMessage,
   className,
 }: SearchResultsProps) {
+  const t = useTranslations("ui")
   if (isLoading) {
     return (
       <div className={cn("flex items-center justify-center py-12", className)}>
@@ -43,8 +45,8 @@ export function SearchResults({
     return (
       <EmptyState
         icon={Search}
-        title={emptyMessage}
-        description={`No results found for "${query}". Try different keywords.`}
+        title={emptyMessage ?? t("searchResults.empty")}
+        description={t("searchResults.noResultsFor", { query })}
         className={className}
       />
     )

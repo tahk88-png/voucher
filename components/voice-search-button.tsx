@@ -3,6 +3,7 @@
 import { useVoiceSearch } from "@/hooks/use-voice-search";
 import { cn } from "@/lib/utils";
 import { Mic, MicOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface VoiceSearchButtonProps {
   onResult: (transcript: string) => void;
@@ -19,6 +20,7 @@ export function VoiceSearchButton({
   lang,
   className,
 }: VoiceSearchButtonProps) {
+  const t = useTranslations("site.voiceSearch");
   const {
     transcript,
     isListening,
@@ -45,8 +47,8 @@ export function VoiceSearchButton({
             ? "bg-[var(--danger)]/10 text-[var(--danger)] border border-[var(--danger)]/30"
             : "bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] hover:border-[var(--border-strong)] hover:text-[var(--text)]"
         )}
-        aria-label={isListening ? "Stop listening" : "Start voice search"}
-        title={isListening ? "Tap to stop" : "Voice search"}
+        aria-label={isListening ? t("stop") : t("start")}
+        title={isListening ? t("tapToStop") : t("tooltip")}
       >
         {/* Pulsing ring animation when listening */}
         {isListening && (

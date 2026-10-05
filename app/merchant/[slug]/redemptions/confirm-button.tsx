@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { showConfirm } from '@/lib/confirm-helpers';
@@ -14,10 +15,11 @@ export default function ConfirmRedemptionButton({
   merchantSlug: string;
 }) {
   const router = useRouter();
+  const t = useTranslations('merchantStore.redemptions.confirm');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleConfirm = async () => {
-    showConfirm('Confirm this redemption? This will unlock credit for the referrer.', async () => {
+    showConfirm(t('prompt'), async () => {
       setIsLoading(true);
       try {
         const response = await fetch(`/api/redemptions/${redemptionId}/confirm`, {
@@ -28,20 +30,20 @@ export default function ConfirmRedemptionButton({
           throw new Error('Failed to confirm redemption');
         }
 
-        showSuccess('Redemption confirmed. Credit unlocked for the referrer.');
+        showSuccess(t('success'));
         router.refresh();
       } catch {
-        showError('Failed to confirm redemption. Please try again.');
+        showError(t('error'));
       } finally {
         setIsLoading(false);
       }
-    }, { confirmLabel: 'Confirm' });
+    }, { confirmLabel: t('confirmLabel') });
     return;
   };
 
   return (
     <WarmButton onClick={handleConfirm} disabled={isLoading}>
-      {isLoading ? 'Confirming...' : 'Confirm Redemption'}
+      {isLoading ? t('confirming') : t('button')}
     </WarmButton>
   );
 }

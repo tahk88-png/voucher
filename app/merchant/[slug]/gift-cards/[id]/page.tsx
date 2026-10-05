@@ -9,13 +9,9 @@ import { WarmCard } from '@/components/warm-card';
 import GiftCardQr from '@/components/gift-card-qr';
 import { formatCurrency } from '@/lib/utils';
 import { normalizeGiftCardCode } from '@/lib/gift-cards';
+import { getLocale, getTranslations } from 'next-intl/server';
 
-const statusLabel: Record<string, string> = {
-  active: 'Active',
-  redeemed: 'Redeemed',
-  expired: 'Expired',
-  cancelled: 'Cancelled',
-};
+const KNOWN_STATUSES = ['active', 'redeemed', 'expired', 'cancelled'];
 
 export default async function GiftCardDetailPage({
   params,
@@ -41,35 +37,43 @@ export default async function GiftCardDetailPage({
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
   const redeemUrl = `${baseUrl}/redeem/gift-card/${code}`;
 
+  const t = await getTranslations('merchantGiftCards');
+  const tNav = await getTranslations('nav');
+  const locale = await getLocale();
+  const dateLocale = locale === 'en' ? 'en-GB' : locale;
+  const statusText = KNOWN_STATUSES.includes(giftCard.status)
+    ? t(`status.${giftCard.status}`)
+    : giftCard.status;
+
   return (
     <div className="p-4 sm:p-6">
       <div className="max-w-3xl mx-auto space-y-6">
         <Breadcrumbs
           items={[
-            { label: 'Dashboard', href: `/merchant/${slug}/dashboard` },
-            { label: 'Gift cards', href: `/merchant/${slug}/gift-cards` },
+            { label: tNav('dashboard'), href: `/merchant/${slug}/dashboard` },
+            { label: tNav('giftCards'), href: `/merchant/${slug}/gift-cards` },
             { label: code },
           ]}
         />
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-[var(--text)]">Gift card</h1>
-            <p className="text-sm text-[var(--text-muted)]">Code {code}</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)]">{t('detail.title')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">{t('detail.code', { code })}</p>
           </div>
           <div className="flex gap-2">
             <WarmButton asChild variant="outline">
-              <Link href={`/g/${code}`}>Public view</Link>
+              <Link href={`/g/${code}`}>{t('detail.publicView')}</Link>
             </WarmButton>
             <WarmButton asChild variant="outline">
-              <Link href={`/merchant/${slug}/gift-cards/new`}>New gift card</Link>
+              <Link href={`/merchant/${slug}/gift-cards/new`}>{t('detail.newGiftCard')}</Link>
             </WarmButton>
           </div>
         </div>
 
         <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-[var(--text)]">Gift card details</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)]">{t('detail.detailsTitle')}</h2>
             <span
               className={`px-2 py-1 text-xs font-bold rounded-full ${
                 giftCard.status === 'active'
@@ -79,43 +83,43 @@ export default async function GiftCardDetailPage({
                   : 'bg-[#F2EDE3] text-[var(--text-faint)]'
               }`}
             >
-              {statusLabel[giftCard.status] || giftCard.status}
+              {statusText}
             </span>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <p className="text-sm text-[var(--text-faint)]">Value</p>
+              <p className="text-sm text-[var(--text-faint)]">{t('detail.value')}</p>
               <p className="text-lg font-semibold text-[var(--text)]">
                 {formatCurrency(giftCard.amount, giftCard.currency)}
               </p>
             </div>
             <div>
-              <p className="text-sm text-[var(--text-faint)]">Valid from</p>
+              <p className="text-sm text-[var(--text-faint)]">{t('detail.validFrom')}</p>
               <p className="text-lg font-semibold text-[var(--text)]">
-                {giftCard.validFrom.toLocaleDateString('en-GB')}
+                {giftCard.validFrom.toLocaleDateString(dateLocale)}
               </p>
             </div>
             <div>
-              <p className="text-sm text-[var(--text-faint)]">Valid to</p>
+              <p className="text-sm text-[var(--text-faint)]">{t('detail.validTo')}</p>
               <p className="text-lg font-semibold text-[var(--text)]">
-                {giftCard.validTo ? giftCard.validTo.toLocaleDateString('en-GB') : 'No expiry'}
+                {giftCard.validTo ? giftCard.validTo.toLocaleDateString(dateLocale) : t('detail.noExpiry')}
               </p>
             </div>
             <div>
-              <p className="text-sm text-[var(--text-faint)]">Redeemed at</p>
+              <p className="text-sm text-[var(--text-faint)]">{t('detail.redeemedAt')}</p>
               <p className="text-lg font-semibold text-[var(--text)]">
-                {giftCard.redeemedAt ? giftCard.redeemedAt.toLocaleDateString('en-GB') : 'Not redeemed'}
+                {giftCard.redeemedAt ? giftCard.redeemedAt.toLocaleDateString(dateLocale) : t('detail.notRedeemed')}
               </p>
             </div>
           </div>
         </WarmCard>
 
         <WarmCard padding="lg" className="bg-[var(--surface)]">
-          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Staff redemption QR</h2>
+          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t('detail.qrTitle')}</h2>
           <div className="flex flex-col items-center gap-4 text-center">
             <GiftCardQr qrText={redeemUrl} />
             <p className="text-sm text-[var(--text-muted)]">
-              Staff can scan this QR to redeem and invalidate the gift card.
+              {t('detail.qrHelp')}
             </p>
             <p className="text-xs text-[var(--text-faint)] break-all">{redeemUrl}</p>
           </div>

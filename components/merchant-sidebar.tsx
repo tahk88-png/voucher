@@ -14,16 +14,18 @@ import {
 import { cn } from "@/lib/utils"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { WarmButton } from "@/components/warm-button"
+import { useTranslations } from "next-intl"
 
 const navItems = [
-  { href: "/merchant", label: "Overview", icon: LayoutDashboard },
-  { href: "/merchant/vouchers", label: "Vouchers", icon: Ticket },
-  { href: "/merchant/gift-cards", label: "Gift cards", icon: Gift },
-  { href: "/merchant/credits", label: "Credits", icon: CreditCard },
-  { href: "/merchant/brand", label: "Brand", icon: Palette },
-]
+  { href: "/merchant", labelKey: "overview", icon: LayoutDashboard },
+  { href: "/merchant/vouchers", labelKey: "vouchers", icon: Ticket },
+  { href: "/merchant/gift-cards", labelKey: "giftCards", icon: Gift },
+  { href: "/merchant/credits", labelKey: "credits", icon: CreditCard },
+  { href: "/merchant/brand", labelKey: "brand", icon: Palette },
+] as const
 
 export function MerchantSidebar() {
+  const t = useTranslations("merchantLegacy.sidebar")
   const pathname = usePathname()
 
   const SidebarContent = () => (
@@ -34,8 +36,8 @@ export function MerchantSidebar() {
             <Gift className="h-5 w-5 text-white" />
           </div>
           <div>
-            <div className="text-lg font-semibold text-[var(--text)]">Merchant</div>
-            <div className="text-xs text-[var(--text-faint)]">GiftHub console</div>
+            <div className="text-lg font-semibold text-[var(--text)]">{t("title")}</div>
+            <div className="text-xs text-[var(--text-faint)]">{t("subtitle")}</div>
           </div>
         </div>
       </div>
@@ -57,7 +59,7 @@ export function MerchantSidebar() {
             >
               <span className="flex items-center gap-3">
                 <Icon className="h-5 w-5" />
-                {item.label}
+                {t(`nav.${item.labelKey}`)}
               </span>
             </Link>
           )
@@ -78,7 +80,7 @@ export function MerchantSidebar() {
         <Sheet>
           <SheetTrigger asChild>
             <WarmButton variant="ghost" size="sm" className="md:hidden h-10 w-10 p-0">
-              <span className="flex items-center justify-center gap-2"><Menu className="h-5 w-5" /><span className="sr-only">Open menu</span></span>
+              <span className="flex items-center justify-center gap-2"><Menu className="h-5 w-5" /><span className="sr-only">{t("openMenu")}</span></span>
             </WarmButton>
           </SheetTrigger>
           <SheetContent side="left" className="w-64 p-0">

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { Input } from '@/components/ui/input';
@@ -11,6 +12,25 @@ import { showError } from '@/lib/toast-helpers';
 import { parseMoneyToMinor } from '@/lib/money-input';
 import { formatPrice } from '@/lib/currency-constants';
 import { useMerchantSettings } from '../_components/merchant-settings-context';
+
+// Label passed to lib/money-input. Its error messages are English sentences
+// built from the label; moneyErrorKind maps them back to a translation key.
+const PRICE_LABEL = 'Price';
+
+type MoneyErrorKind = 'negative' | 'invalid' | 'wholeNumber' | 'decimals' | 'tooLarge';
+
+function moneyErrorKind(error: string, label: string): { kind: MoneyErrorKind; decimals: number } | null {
+  if (error === `${label} can't be negative.`) return { kind: 'negative', decimals: 0 };
+  if (error === `${label} isn't a valid number.`) return { kind: 'invalid', decimals: 0 };
+  if (error === `${label} must be a whole number.`) return { kind: 'wholeNumber', decimals: 0 };
+  if (error === `${label} is too large.`) return { kind: 'tooLarge', decimals: 0 };
+  const match = /at most (\d+) decimal places\.$/.exec(error);
+  if (error.startsWith(`${label} can have at most `) && match) return { kind: 'decimals', decimals: Number(match[1]) };
+  return null;
+}
+
+const STATUS_FILTERS = ['all', 'pending', 'confirmed', 'cancelled', 'completed'] as const;
+const KNOWN_STATUSES: readonly string[] = STATUS_FILTERS;
 
 interface Appointment {
   id: string;
@@ -25,6 +45,10 @@ interface Appointment {
 }
 
 export default function AppointmentsPage() {
+  const t = useTranslations('merchantCatalog.appointments');
+  const tPrice = useTranslations('merchantCatalog.priceErrors');
+  const locale = useLocale();
+  const displayLocale = !locale || locale === 'en' ? 'en-GB' : locale;
   const params = useParams();
   const slug = params.slug as string;
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -58,13 +82,14 @@ export default function AppointmentsPage() {
     e.preventDefault();
     // Guard against a double-click creating duplicate availability slots.
     if (creating) return;
-    const price = parseMoneyToMinor(form.price, defaultCurrency, 'Price');
+    const price = parseMoneyToMinor(form.price, defaultCurrency, PRICE_LABEL);
     if (!price.ok) {
-      showError(price.error);
+      const parsed = moneyErrorKind(price.error, PRICE_LABEL);
+      showError(parsed ? tPrice(parsed.kind, { decimals: parsed.decimals }) : price.error);
       return;
     }
     if (new Date(form.endTime).getTime() <= new Date(form.startTime).getTime()) {
-      showError('The end time must be after the start time.');
+      showError(t('errors.endBeforeStart'));
       return;
     }
     setCreating(true);
@@ -86,10 +111,10 @@ export default function AppointmentsPage() {
         setForm({ serviceName: '', startTime: '', endTime: '', price: '', notes: '' });
         fetchAppointments();
       } else {
-        showError('Could not create the availability slot. Please try again.');
+        showError(t('errors.createFailed'));
       }
     } catch {
-      showError('Could not reach the server. Check your connection and try again.');
+      showError(t('errors.network'));
     } finally {
       setCreating(false);
     }
@@ -102,9 +127,9 @@ export default function AppointmentsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status }),
       });
-      if (!res.ok) showError(`Couldn't update the appointment (error ${res.status}).`);
+      if (!res.ok) showError(t('errors.updateFailed', { status: res.status }));
     } catch {
-      showError("Couldn't reach the server. Check your connection and try again.");
+      showError(t('errors.network'));
     }
     fetchAppointments();
   }
@@ -122,12 +147,12 @@ export default function AppointmentsPage() {
         <div>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>
             <CalendarCheck style={{ display: 'inline', marginRight: 8 }} size={24} />
-            Appointments
+            {t('title')}
           </h1>
-          <p style={{ color: 'var(--text-muted)', marginTop: 4 }}>Manage bookings and availability</p>
+          <p style={{ color: 'var(--text-muted)', marginTop: 4 }}>{t('subtitle')}</p>
         </div>
         <WarmButton onClick={() => setShowForm(!showForm)}>
-          <Plus size={16} /> Create Slot
+          <Plus size={16} /> {t('createSlot')}
         </WarmButton>
       </div>
 
@@ -135,28 +160,28 @@ export default function AppointmentsPage() {
         <WarmCard style={{ marginBottom: 24, padding: 24 }}>
           <form onSubmit={handleCreate} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Label>Service Name</Label>
+              <Label>{t('form.serviceName')}</Label>
               <Input value={form.serviceName} onChange={e => setForm(f => ({ ...f, serviceName: e.target.value }))} required />
             </div>
             <div>
-              <Label>Price ({defaultCurrency}, leave empty if free)</Label>
+              <Label>{t('form.price', { currency: defaultCurrency })}</Label>
               <Input type="text" inputMode="decimal" placeholder="25.00" value={form.price} onChange={e => setForm(f => ({ ...f, price: e.target.value }))} />
             </div>
             <div>
-              <Label>Start Time</Label>
+              <Label>{t('form.startTime')}</Label>
               <Input type="datetime-local" value={form.startTime} onChange={e => setForm(f => ({ ...f, startTime: e.target.value }))} required />
             </div>
             <div>
-              <Label>End Time</Label>
+              <Label>{t('form.endTime')}</Label>
               <Input type="datetime-local" value={form.endTime} onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))} required />
             </div>
             <div className="sm:col-span-2">
-              <Label>Notes</Label>
+              <Label>{t('form.notes')}</Label>
               <Input value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} />
             </div>
             <div className="sm:col-span-2">
               <WarmButton type="submit" disabled={creating} isLoading={creating}>
-                {creating ? 'Creating…' : 'Create Availability Slot'}
+                {creating ? t('form.creating') : t('form.submit')}
               </WarmButton>
             </div>
           </form>
@@ -164,23 +189,23 @@ export default function AppointmentsPage() {
       )}
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-        {['all', 'pending', 'confirmed', 'cancelled', 'completed'].map(s => (
+        {STATUS_FILTERS.map(s => (
           <button key={s} onClick={() => setFilter(s)} style={{
             padding: '6px 14px', borderRadius: 8, fontSize: '0.875rem', fontWeight: 500, border: '1px solid var(--border)',
             background: filter === s ? 'var(--primary)' : 'var(--surface)', color: filter === s ? '#fff' : 'var(--text)',
             cursor: 'pointer',
           }}>
-            {s.charAt(0).toUpperCase() + s.slice(1)}
+            {t(`status.${s}`)}
           </button>
         ))}
       </div>
 
       {loading ? (
-        <p style={{ color: 'var(--text-muted)' }}>Loading...</p>
+        <p style={{ color: 'var(--text-muted)' }}>{t('loading')}</p>
       ) : appointments.length === 0 ? (
         <WarmCard style={{ padding: 48, textAlign: 'center' }}>
           <CalendarCheck size={48} style={{ color: 'var(--text-muted)', margin: '0 auto 16px' }} />
-          <p style={{ color: 'var(--text-muted)' }}>No appointments found</p>
+          <p style={{ color: 'var(--text-muted)' }}>{t('empty')}</p>
         </WarmCard>
       ) : (
         <div style={{ display: 'grid', gap: 12 }}>
@@ -191,22 +216,24 @@ export default function AppointmentsPage() {
                   <h3 style={{ fontWeight: 600, color: 'var(--text)' }}>{apt.serviceName}</h3>
                   <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
                     <Clock size={14} />
-                    {new Date(apt.startTime).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })} — {new Date(apt.endTime).toLocaleTimeString('en-GB')}
+                    {new Date(apt.startTime).toLocaleString(displayLocale, { dateStyle: 'medium', timeStyle: 'short' })} — {new Date(apt.endTime).toLocaleTimeString(displayLocale)}
                   </p>
-                  {apt.user && <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Booked by: {apt.user.name || apt.user.email}</p>}
-                  {apt.priceCents > 0 && <p style={{ fontSize: '0.875rem', fontWeight: 600 }}>{formatPrice(apt.priceCents, (apt.currency || 'EUR').toUpperCase(), 'en-GB')}</p>}
+                  {apt.user && <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>{t('bookedBy', { name: apt.user.name || apt.user.email })}</p>}
+                  {apt.priceCents > 0 && <p style={{ fontSize: '0.875rem', fontWeight: 600 }}>{formatPrice(apt.priceCents, (apt.currency || 'EUR').toUpperCase(), displayLocale)}</p>}
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{
                     padding: '4px 10px', borderRadius: 999, fontSize: '0.75rem', fontWeight: 600,
                     background: `${statusColors[apt.status] || '#888'}22`, color: statusColors[apt.status] || '#888',
                   }}>
-                    {apt.status.charAt(0).toUpperCase() + apt.status.slice(1)}
+                    {KNOWN_STATUSES.includes(apt.status)
+                      ? t(`status.${apt.status as (typeof STATUS_FILTERS)[number]}`)
+                      : apt.status.charAt(0).toUpperCase() + apt.status.slice(1)}
                   </span>
                   {apt.status === 'pending' && (
                     <>
-                      <button aria-label="Confirm appointment" title="Confirm" onClick={() => updateStatus(apt.id, 'confirmed')} style={{ padding: 4, cursor: 'pointer', color: '#10b981', background: 'none', border: 'none' }}><Check size={18} /></button>
-                      <button aria-label="Cancel appointment" title="Cancel" onClick={() => updateStatus(apt.id, 'cancelled')} style={{ padding: 4, cursor: 'pointer', color: '#ef4444', background: 'none', border: 'none' }}><X size={18} /></button>
+                      <button aria-label={t('confirmAria')} title={t('confirm')} onClick={() => updateStatus(apt.id, 'confirmed')} style={{ padding: 4, cursor: 'pointer', color: '#10b981', background: 'none', border: 'none' }}><Check size={18} /></button>
+                      <button aria-label={t('cancelAria')} title={t('cancel')} onClick={() => updateStatus(apt.id, 'cancelled')} style={{ padding: 4, cursor: 'pointer', color: '#ef4444', background: 'none', border: 'none' }}><X size={18} /></button>
                     </>
                   )}
                 </div>

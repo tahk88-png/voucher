@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { WarmCard } from "@/components/warm-card";
 import { formatCurrency } from "@/lib/utils";
 import { WarmButton } from "@/components/warm-button";
@@ -7,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, Search, X, Ticket, Clock, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { isCampaignCategoryId } from "@/lib/campaign-categories";
 import type { SearchFilters } from "./search-filters";
 
 export interface SearchResult {
@@ -50,18 +52,26 @@ interface SearchResultsProps {
   onRemoveFilter: (key: keyof SearchFilters) => void;
 }
 
-function formatDiscount(type: string, value: number, currency: string): string {
+function formatDiscount(
+  tLabels: ReturnType<typeof useTranslations<"labels">>,
+  type: string,
+  value: number,
+  currency: string
+): string {
   switch (type) {
     case "percentage":
-      return `${(value / 100).toFixed(0)}% off`;
+      return tLabels("valueOff", { value: `${(value / 100).toFixed(0)}%` });
     case "fixed_amount":
-      return `${formatCurrency(value, currency)} off`;
+      return tLabels("valueOff", { value: formatCurrency(value, currency) });
     case "credit_amount":
-      return `${formatCurrency(value, currency)} credit`;
+      return tLabels("valueCredit", { value: formatCurrency(value, currency) });
     default:
       return `${value}`;
   }
 }
+
+const VOUCHER_TYPES = ["percentage", "fixed_amount", "credit_amount"] as const;
+const SORT_VALUES = ["newest", "popular", "expiring"] as const;
 
 function FilterChip({
   label,
@@ -70,13 +80,14 @@ function FilterChip({
   label: string;
   onRemove: () => void;
 }) {
+  const t = useTranslations("searchPage.results");
   return (
     <span className="inline-flex items-center gap-1 rounded-[var(--r-full)] px-2.5 py-1 text-xs font-medium bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20">
       {label}
       <button
         onClick={onRemove}
         className="hover:bg-[var(--primary)]/20 rounded-full p-0.5 transition-colors"
-        aria-label={`Remove ${label} filter`}
+        aria-label={t("removeFilter", { label })}
       >
         <X className="h-3 w-3" />
       </button>
@@ -95,36 +106,54 @@ export function SearchResults({
   onPageChange,
   onRemoveFilter,
 }: SearchResultsProps) {
+  const t = useTranslations("searchPage.results");
+  const tFilters = useTranslations("searchPage.filters");
+  const tLabels = useTranslations("labels");
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
+  const dateLocale = locale === "en" ? "en-US" : locale;
   // Build active filter chips
   const activeFilterChips: { key: keyof SearchFilters; label: string }[] = [];
   if (filters.category) {
     activeFilterChips.push({
       key: "category",
-      label: `Category: ${filters.category}`,
+      label: t("chipCategory", {
+        value: isCampaignCategoryId(filters.category)
+          ? tLabels(`category.${filters.category}`)
+          : filters.category,
+      }),
     });
   }
   if (filters.type) {
     activeFilterChips.push({
       key: "type",
-      label: `Type: ${filters.type.replace("_", " ")}`,
+      label: t("chipType", {
+        value: (VOUCHER_TYPES as readonly string[]).includes(filters.type)
+          ? tFilters(`types.${filters.type as (typeof VOUCHER_TYPES)[number]}`)
+          : filters.type.replace("_", " "),
+      }),
     });
   }
   if (filters.minDiscount > 0) {
     activeFilterChips.push({
       key: "minDiscount",
-      label: `Min ${filters.minDiscount}% off`,
+      label: t("chipMinDiscount", { value: filters.minDiscount }),
     });
   }
   if (filters.maxPrice > 0) {
     activeFilterChips.push({
       key: "maxPrice",
-      label: `Max €${(filters.maxPrice / 100).toFixed(0)}`,
+      label: t("chipMaxPrice", { value: (filters.maxPrice / 100).toFixed(0) }),
     });
   }
   if (filters.sort !== "newest") {
     activeFilterChips.push({
       key: "sort",
-      label: `Sort: ${filters.sort}`,
+      label: t("chipSort", {
+        value: (SORT_VALUES as readonly string[]).includes(filters.sort)
+          ? tFilters(`sort.${filters.sort as (typeof SORT_VALUES)[number]}`)
+          : filters.sort,
+      }),
     });
   }
 
@@ -137,24 +166,19 @@ export function SearchResults({
             {loading ? (
               <span className="flex items-center gap-2">
                 <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                Searching...
+                {t("searching")}
               </span>
             ) : (
-              <>
-                <span className="font-semibold text-[var(--text)]">
-                  {total}
-                </span>{" "}
-                result{total !== 1 ? "s" : ""}{" "}
-                {query && (
-                  <>
-                    for &ldquo;
-                    <span className="font-medium text-[var(--text)]">
-                      {query}
-                    </span>
-                    &rdquo;
-                  </>
-                )}
-              </>
+              t.rich(query ? "countForQuery" : "count", {
+                total,
+                query,
+                num: (chunks) => (
+                  <span className="font-semibold text-[var(--text)]">{chunks}</span>
+                ),
+                hl: (chunks) => (
+                  <span className="font-medium text-[var(--text)]">{chunks}</span>
+                ),
+              })
             )}
           </p>
         </div>
@@ -217,11 +241,12 @@ export function SearchResults({
                       {result.isFlashSale && (
                         <Badge variant="warning" className="text-[10px]">
                           <Zap className="h-2.5 w-2.5 mr-0.5" />
-                          Flash
+                          {t("flash")}
                         </Badge>
                       )}
                       <Badge variant="success" className="text-[10px]">
                         {formatDiscount(
+                          tLabels,
                           result.type,
                           result.value,
                           result.currency
@@ -234,7 +259,7 @@ export function SearchResults({
                 {/* Content */}
                 <div className="p-4 space-y-2">
                   <h3 className="text-sm font-semibold text-[var(--text)] line-clamp-1">
-                    {result.campaign?.name || "Voucher"}
+                    {result.campaign?.name || t("voucherFallback")}
                   </h3>
                   {result.campaign?.description && (
                     <p className="text-xs text-[var(--text-muted)] line-clamp-2">
@@ -245,17 +270,18 @@ export function SearchResults({
                   <div className="flex items-center justify-between text-xs text-[var(--text-faint)]">
                     <span className="flex items-center gap-1">
                       <Clock className="h-3 w-3" />
-                      Expires{" "}
-                      {new Date(result.validTo).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
+                      {t("expires", {
+                        date: new Date(result.validTo).toLocaleDateString(dateLocale, {
+                          month: "short",
+                          day: "numeric",
+                        }),
                       })}
                     </span>
                     {result.campaign?.price !== null &&
                       result.campaign?.price !== undefined && (
                         <span className="font-semibold text-[var(--text)]">
                           {result.campaign.price === 0
-                            ? "Free"
+                            ? tLabels("free")
                             : formatCurrency(result.campaign.price, result.currency)}
                         </span>
                       )}
@@ -263,7 +289,7 @@ export function SearchResults({
 
                   {result.redemptionCount > 0 && (
                     <p className="text-[10px] text-[var(--text-faint)]">
-                      {result.redemptionCount} redeemed
+                      {t("redeemed", { count: result.redemptionCount })}
                     </p>
                   )}
                 </div>
@@ -277,12 +303,12 @@ export function SearchResults({
             <div className="py-10 text-center">
               <Search className="h-12 w-12 mx-auto text-[var(--text-faint)] mb-4" />
               <h3 className="text-lg font-semibold text-[var(--text)] mb-2">
-                No results found
+                {t("noResultsTitle")}
               </h3>
               <p className="text-sm text-[var(--text-muted)]">
                 {query
-                  ? `No vouchers match "${query}". Try adjusting your filters.`
-                  : "Try searching for a specific voucher, merchant, or category."}
+                  ? t("noResultsQuery", { query })
+                  : t("noResultsHint")}
               </p>
             </div>
           </WarmCard>
@@ -298,7 +324,7 @@ export function SearchResults({
             disabled={page <= 1}
             onClick={() => onPageChange(page - 1)}
           >
-            Previous
+            {tCommon("previous")}
           </WarmButton>
 
           <div className="flex items-center gap-1">
@@ -336,7 +362,7 @@ export function SearchResults({
             disabled={page >= totalPages}
             onClick={() => onPageChange(page + 1)}
           >
-            Next
+            {tCommon("next")}
           </WarmButton>
         </div>
       )}

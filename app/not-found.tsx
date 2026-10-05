@@ -6,10 +6,13 @@ import { getTranslations } from 'next-intl/server';
 import HubShell from '@/components/layout/hub-shell';
 
 // Rendered under the root title template: "Page not found | GiftHub".
-export const metadata: Metadata = {
-  title: 'Page not found',
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('site.notFound');
+  return {
+    title: t('metaTitle'),
+    robots: { index: false, follow: false },
+  };
+}
 
 export default async function NotFound() {
   const t = await getTranslations('errors');

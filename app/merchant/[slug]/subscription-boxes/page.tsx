@@ -6,6 +6,28 @@ import { parseMoneyToMinor } from '@/lib/money-input';
 import { SUPPORTED_CURRENCIES } from '@/lib/currency-constants';
 import { apiErrorMessage } from '@/lib/api-error-message';
 import { useParams } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
+
+// Label passed to lib/money-input. Its error messages are English sentences
+// built from the label; moneyErrorKind maps them back to a translation key.
+const PRICE_LABEL = 'Price';
+
+type MoneyErrorKind = 'negative' | 'invalid' | 'wholeNumber' | 'decimals' | 'tooLarge';
+
+function moneyErrorKind(error: string, label: string): { kind: MoneyErrorKind; decimals: number } | null {
+  if (error === `${label} can't be negative.`) return { kind: 'negative', decimals: 0 };
+  if (error === `${label} isn't a valid number.`) return { kind: 'invalid', decimals: 0 };
+  if (error === `${label} must be a whole number.`) return { kind: 'wholeNumber', decimals: 0 };
+  if (error === `${label} is too large.`) return { kind: 'tooLarge', decimals: 0 };
+  const match = /at most (\d+) decimal places\.$/.exec(error);
+  if (error.startsWith(`${label} can have at most `) && match) return { kind: 'decimals', decimals: Number(match[1]) };
+  return null;
+}
+
+const INTERVALS = ['weekly', 'monthly', 'quarterly'] as const;
+function isInterval(value: string): value is (typeof INTERVALS)[number] {
+  return (INTERVALS as readonly string[]).includes(value);
+}
 
 interface Box {
   id: string;
@@ -20,6 +42,10 @@ interface Box {
 }
 
 export default function MerchantSubscriptionBoxesPage() {
+  const t = useTranslations('merchantCatalog.subscriptionBoxes');
+  const tPrice = useTranslations('merchantCatalog.priceErrors');
+  const locale = useLocale();
+  const displayLocale = !locale || locale === 'en' ? 'en-GB' : locale;
   const { slug } = useParams<{ slug: string }>();
   const [boxes, setBoxes] = useState<Box[]>([]);
   const [loading, setLoading] = useState(true);
@@ -40,13 +66,14 @@ export default function MerchantSubscriptionBoxesPage() {
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     // form.priceCents holds what the merchant typed in major units (e.g. 19,90).
-    const price = parseMoneyToMinor(form.priceCents, form.currency, 'Price');
+    const price = parseMoneyToMinor(form.priceCents, form.currency, PRICE_LABEL);
     if (!price.ok) {
-      showError(price.error);
+      const parsed = moneyErrorKind(price.error, PRICE_LABEL);
+      showError(parsed ? tPrice(parsed.kind, { decimals: parsed.decimals }) : price.error);
       return;
     }
     if (price.value === null || price.value <= 0) {
-      showError('Enter a price above 0.');
+      showError(t('errors.priceAboveZero'));
       return;
     }
     setSaving(true);
@@ -57,16 +84,16 @@ export default function MerchantSubscriptionBoxesPage() {
         body: JSON.stringify({ ...form, priceCents: price.value }),
       });
       if (res.ok) {
-        showSuccess('Subscription box created.');
+        showSuccess(t('created'));
         setShowForm(false);
         setForm({ name: '', description: '', priceCents: '', currency: 'EUR', interval: 'monthly', maxItems: '3' });
         fetchBoxes();
       } else {
         const data = await res.json().catch(() => ({}));
-        showError(apiErrorMessage(data, `Couldn't create the subscription box (error ${res.status}).`));
+        showError(apiErrorMessage(data, t('errors.createFailed', { status: res.status })));
       }
     } catch {
-      showError("Couldn't create the subscription box. Check your connection and try again.");
+      showError(t('errors.network'));
     } finally {
       setSaving(false);
     }
@@ -74,7 +101,7 @@ export default function MerchantSubscriptionBoxesPage() {
 
   const formatPrice = (cents: number, currency: string) => {
     try {
-      return new Intl.NumberFormat('en-GB', { style: 'currency', currency }).format(cents / 100);
+      return new Intl.NumberFormat(displayLocale, { style: 'currency', currency }).format(cents / 100);
     } catch {
       return `${(cents / 100).toFixed(2)} ${currency}`;
     }
@@ -91,22 +118,22 @@ export default function MerchantSubscriptionBoxesPage() {
               </svg>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-[var(--text)]">Subscription Boxes</h1>
-              <p className="text-[#6b5e52]">Manage recurring voucher boxes</p>
+              <h1 className="text-2xl font-bold text-[var(--text)]">{t('title')}</h1>
+              <p className="text-[#6b5e52]">{t('subtitle')}</p>
             </div>
           </div>
           <button
             onClick={() => setShowForm(!showForm)}
             className="bg-gradient-to-r from-[#cc785c] to-[#b5613f] text-white font-semibold py-2.5 px-5 rounded-xl shadow-md hover:opacity-90 transition"
           >
-            {showForm ? 'Cancel' : '+ New Box'}
+            {showForm ? t('cancel') : t('newBox')}
           </button>
         </div>
 
         {showForm && (
           <form onSubmit={handleCreate} className="bg-[var(--surface)] rounded-2xl border border-[#e8e0d8] p-6 mb-6 space-y-4">
             <div>
-              <label className="block text-sm font-medium text-[var(--text)] mb-1">Name</label>
+              <label className="block text-sm font-medium text-[var(--text)] mb-1">{t('form.name')}</label>
               <input
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -115,7 +142,7 @@ export default function MerchantSubscriptionBoxesPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[var(--text)] mb-1">Description</label>
+              <label className="block text-sm font-medium text-[var(--text)] mb-1">{t('form.description')}</label>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -125,7 +152,7 @@ export default function MerchantSubscriptionBoxesPage() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium text-[var(--text)] mb-1">Price ({form.currency})</label>
+                <label className="block text-sm font-medium text-[var(--text)] mb-1">{t('form.price', { currency: form.currency })}</label>
                 <input
                   type="text"
                   inputMode="decimal"
@@ -137,7 +164,7 @@ export default function MerchantSubscriptionBoxesPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-[var(--text)] mb-1">Currency</label>
+                <label className="block text-sm font-medium text-[var(--text)] mb-1">{t('form.currency')}</label>
                 <select
                   value={form.currency}
                   onChange={(e) => setForm({ ...form, currency: e.target.value })}
@@ -147,19 +174,19 @@ export default function MerchantSubscriptionBoxesPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-[var(--text)] mb-1">Interval</label>
+                <label className="block text-sm font-medium text-[var(--text)] mb-1">{t('form.interval')}</label>
                 <select
                   value={form.interval}
                   onChange={(e) => setForm({ ...form, interval: e.target.value })}
                   className="w-full border border-[#e8e0d8] rounded-xl px-4 py-2.5 bg-[#faf8f5] focus:outline-none focus:ring-2 focus:ring-[#cc785c]"
                 >
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                  <option value="quarterly">Quarterly</option>
+                  <option value="weekly">{t('interval.weekly')}</option>
+                  <option value="monthly">{t('interval.monthly')}</option>
+                  <option value="quarterly">{t('interval.quarterly')}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-[var(--text)] mb-1">Max Items</label>
+                <label className="block text-sm font-medium text-[var(--text)] mb-1">{t('form.maxItems')}</label>
                 <input
                   type="number"
                   value={form.maxItems}
@@ -173,7 +200,7 @@ export default function MerchantSubscriptionBoxesPage() {
               disabled={saving}
               className="bg-gradient-to-r from-[#cc785c] to-[#b5613f] text-white font-semibold py-2.5 px-6 rounded-xl shadow-md hover:opacity-90 transition disabled:opacity-50"
             >
-              {saving ? 'Creating...' : 'Create Box'}
+              {saving ? t('form.creating') : t('form.submit')}
             </button>
           </form>
         )}
@@ -184,7 +211,7 @@ export default function MerchantSubscriptionBoxesPage() {
           </div>
         ) : boxes.length === 0 ? (
           <div className="text-center py-12 bg-[var(--surface)] rounded-2xl border border-[#e8e0d8]">
-            <p className="text-[#6b5e52]">No subscription boxes yet. Create your first one.</p>
+            <p className="text-[#6b5e52]">{t('empty')}</p>
           </div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2">
@@ -193,9 +220,12 @@ export default function MerchantSubscriptionBoxesPage() {
                 <h3 className="text-lg font-bold text-[var(--text)] mb-1">{box.name}</h3>
                 {box.description && <p className="text-sm text-[#6b5e52] mb-3">{box.description}</p>}
                 <div className="flex items-center gap-4 text-sm text-[#6b5e52]">
-                  <span className="font-semibold text-[#cc785c]">{formatPrice(box.priceCents, box.currency)}/{box.interval}</span>
-                  <span>{box.subscriberCount} subscriber{box.subscriberCount !== 1 ? 's' : ''}</span>
-                  <span>{box.itemCount} item{box.itemCount !== 1 ? 's' : ''}</span>
+                  <span className="font-semibold text-[#cc785c]">{t('pricePerInterval', {
+                    price: formatPrice(box.priceCents, box.currency),
+                    interval: isInterval(box.interval) ? t(`intervalUnit.${box.interval}`) : box.interval,
+                  })}</span>
+                  <span>{t('subscribers', { count: box.subscriberCount })}</span>
+                  <span>{t('items', { count: box.itemCount })}</span>
                 </div>
               </div>
             ))}

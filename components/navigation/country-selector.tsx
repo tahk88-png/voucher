@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 import { Check, ChevronDown, Globe } from "lucide-react"
 import { useCountry, type Country } from "@/components/contexts/country-context"
 import { WarmCard } from "@/components/warm-card"
@@ -11,6 +12,7 @@ interface CountrySelectorProps {
 }
 
 export function CountrySelector({ variant = "default" }: CountrySelectorProps) {
+  const t = useTranslations("site.country")
   const { selectedCountry, setSelectedCountry, availableCountries } = useCountry()
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
@@ -48,7 +50,7 @@ export function CountrySelector({ variant = "default" }: CountrySelectorProps) {
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-controls={menuId}
-          aria-label={`Select marketplace (${selectedCountry.code})`}
+          aria-label={t("selectLabel", { country: selectedCountry.code })}
         >
           <div className="flex items-center gap-2">
             <span className="text-2xl">{selectedCountry.flag}</span>
@@ -64,7 +66,7 @@ export function CountrySelector({ variant = "default" }: CountrySelectorProps) {
             role="listbox"
           >
             <div className="px-3 py-2 border-b border-[var(--border)]">
-              <p className="text-xs font-semibold text-[var(--text-faint)] uppercase tracking-wide">Select Marketplace</p>
+              <p className="text-xs font-semibold text-[var(--text-faint)] uppercase tracking-wide">{t("heading")}</p>
             </div>
             {availableCountries.map((country) => (
               <button
@@ -99,8 +101,8 @@ export function CountrySelector({ variant = "default" }: CountrySelectorProps) {
           <Globe className="h-6 w-6 text-white" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-[var(--text)]">Select Marketplace</h3>
-          <p className="text-sm text-[var(--text-faint)]">Changes country, currency, and market data only</p>
+          <h3 className="text-lg font-semibold text-[var(--text)]">{t("heading")}</h3>
+          <p className="text-sm text-[var(--text-faint)]">{t("description")}</p>
         </div>
       </div>
 
@@ -111,7 +113,7 @@ export function CountrySelector({ variant = "default" }: CountrySelectorProps) {
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-controls={menuId}
-          aria-label={`Select marketplace (${selectedCountry.name})`}
+          aria-label={t("selectLabel", { country: selectedCountry.name })}
         >
           <div className="flex items-center gap-3">
             <span className="text-3xl">{selectedCountry.flag}</span>
@@ -157,7 +159,7 @@ export function CountrySelector({ variant = "default" }: CountrySelectorProps) {
 
       <div className="mt-4 p-3 rounded-lg bg-[var(--bg-2)] border border-[var(--border)]">
         <div className="text-xs text-[var(--text-faint)]">
-          <strong>Tip:</strong> Marketplace filters data and currency. Interface language is configured separately.
+          {t.rich("tip", { strong: (chunks) => <strong>{chunks}</strong> })}
         </div>
       </div>
     </WarmCard>

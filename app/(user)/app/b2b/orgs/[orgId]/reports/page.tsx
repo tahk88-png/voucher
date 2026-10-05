@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import { Input } from "@/components/ui/input"
@@ -46,6 +47,8 @@ type Tab = "redemptions" | "vouchers"
 
 export default function B2BReportsPage() {
   const params = useParams()
+  const t = useTranslations("b2b.reports")
+  const tc = useTranslations("common")
   const orgId = typeof params?.orgId === "string" ? params.orgId : params?.orgId?.[0]
 
   const [tab, setTab] = useState<Tab>("redemptions")
@@ -75,16 +78,16 @@ export default function B2BReportsPage() {
       if (toDate) qs.set("to", toDate)
       const res = await fetch(`/api/orgs/${orgId}/reports/redemptions?${qs}`)
       const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || "Failed to load")
+      if (!res.ok) throw new Error(data?.error || t("loadFailed"))
       setRedemptions(data.redemptions)
       setRedemptionPagination(data.pagination)
       setRedemptionSummary(data.summary)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load")
+      setError(err instanceof Error ? err.message : t("loadFailed"))
     } finally {
       setLoading(false)
     }
-  }, [orgId, fromDate, toDate])
+  }, [orgId, fromDate, toDate, t])
 
   const loadVouchers = useCallback(async (page = 1) => {
     if (!orgId) return
@@ -95,16 +98,16 @@ export default function B2BReportsPage() {
       if (statusFilter) qs.set("status", statusFilter)
       const res = await fetch(`/api/orgs/${orgId}/reports/vouchers?${qs}`)
       const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || "Failed to load")
+      if (!res.ok) throw new Error(data?.error || t("loadFailed"))
       setVouchers(data.vouchers)
       setVoucherPagination(data.pagination)
       setStatusBreakdown(data.statusBreakdown)
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load")
+      setError(err instanceof Error ? err.message : t("loadFailed"))
     } finally {
       setLoading(false)
     }
-  }, [orgId, statusFilter])
+  }, [orgId, statusFilter, t])
 
   useEffect(() => {
     if (tab === "redemptions") loadRedemptions()
@@ -119,11 +122,11 @@ export default function B2BReportsPage() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#2D2721]">Reports</h1>
-          <p className="text-[#6B5744]">Redemption and voucher reports</p>
+          <h1 className="text-3xl font-bold text-[#2D2721]">{t("title")}</h1>
+          <p className="text-[#6B5744]">{t("subtitle")}</p>
         </div>
         <WarmButton asChild variant="outline" size="sm">
-          <Link href={`/app/b2b/orgs/${orgId}`}>Back to workspace</Link>
+          <Link href={`/app/b2b/orgs/${orgId}`}>{t("backToWorkspace")}</Link>
         </WarmButton>
       </div>
 
@@ -132,10 +135,10 @@ export default function B2BReportsPage() {
       {/* Tab Switcher */}
       <div className="flex gap-2">
         <WarmButton variant={tab === "redemptions" ? "default" : "outline"} size="sm" onClick={() => setTab("redemptions")}>
-          Redemptions
+          {t("tabs.redemptions")}
         </WarmButton>
         <WarmButton variant={tab === "vouchers" ? "default" : "outline"} size="sm" onClick={() => setTab("vouchers")}>
-          Vouchers
+          {t("tabs.vouchers")}
         </WarmButton>
       </div>
 
@@ -145,11 +148,11 @@ export default function B2BReportsPage() {
           {/* Summary */}
           <div className="grid gap-4 md:grid-cols-2">
             <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-              <div className="text-xs text-[#8B7355] uppercase">Total Redemptions</div>
+              <div className="text-xs text-[#8B7355] uppercase">{t("totalRedemptions")}</div>
               <div className="text-2xl font-semibold text-[#2D2721] mt-2">{redemptionSummary.totalRedemptions}</div>
             </WarmCard>
             <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-              <div className="text-xs text-[#8B7355] uppercase">Total Amount Redeemed</div>
+              <div className="text-xs text-[#8B7355] uppercase">{t("totalAmountRedeemed")}</div>
               <div className="text-2xl font-semibold text-[#2D2721] mt-2">{formatAmount(redemptionSummary.totalAmountRedeemed, "EUR")}</div>
             </WarmCard>
           </div>
@@ -158,29 +161,29 @@ export default function B2BReportsPage() {
           <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
             <div className="grid gap-3 md:grid-cols-3">
               <div className="space-y-1.5">
-                <label htmlFor="from-date" className="text-sm font-medium text-[#2D2721]">From</label>
+                <label htmlFor="from-date" className="text-sm font-medium text-[#2D2721]">{t("from")}</label>
                 <Input id="from-date" type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
               </div>
               <div className="space-y-1.5">
-                <label htmlFor="to-date" className="text-sm font-medium text-[#2D2721]">To</label>
+                <label htmlFor="to-date" className="text-sm font-medium text-[#2D2721]">{t("to")}</label>
                 <Input id="to-date" type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
               </div>
-              <WarmButton onClick={() => loadRedemptions(1)} className="self-end">Filter</WarmButton>
+              <WarmButton onClick={() => loadRedemptions(1)} className="self-end">{t("filter")}</WarmButton>
             </div>
           </WarmCard>
 
           {/* Redemption Table */}
           <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-            {loading && <div className="text-sm text-[#8B7355]">Loading...</div>}
+            {loading && <div className="text-sm text-[#8B7355]">{tc("loading")}</div>}
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-[rgba(139,115,85,0.15)] text-left">
-                    <th className="p-2 text-[#8B7355] font-medium">Date</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Partner</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Amount</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Status</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Location</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("redemptionTable.date")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("redemptionTable.partner")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("redemptionTable.amount")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("redemptionTable.status")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("redemptionTable.location")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -194,7 +197,7 @@ export default function B2BReportsPage() {
                     </tr>
                   ))}
                   {!loading && redemptions.length === 0 && (
-                    <tr><td colSpan={5} className="p-4 text-center text-[#8B7355]">No redemptions found.</td></tr>
+                    <tr><td colSpan={5} className="p-4 text-center text-[#8B7355]">{t("noRedemptions")}</td></tr>
                   )}
                 </tbody>
               </table>
@@ -204,14 +207,14 @@ export default function B2BReportsPage() {
             {redemptionPagination.totalPages > 1 && (
               <div className="flex items-center justify-between mt-4">
                 <div className="text-xs text-[#8B7355]">
-                  Page {redemptionPagination.page} of {redemptionPagination.totalPages} ({redemptionPagination.total} total)
+                  {t("pageInfo", { page: redemptionPagination.page, totalPages: redemptionPagination.totalPages, total: redemptionPagination.total })}
                 </div>
                 <div className="flex gap-2">
                   <WarmButton size="sm" variant="outline" disabled={redemptionPagination.page <= 1} onClick={() => loadRedemptions(redemptionPagination.page - 1)}>
-                    Previous
+                    {tc("previous")}
                   </WarmButton>
                   <WarmButton size="sm" variant="outline" disabled={redemptionPagination.page >= redemptionPagination.totalPages} onClick={() => loadRedemptions(redemptionPagination.page + 1)}>
-                    Next
+                    {tc("next")}
                   </WarmButton>
                 </div>
               </div>
@@ -235,19 +238,19 @@ export default function B2BReportsPage() {
 
           {/* Voucher Table */}
           <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-            {loading && <div className="text-sm text-[#8B7355]">Loading...</div>}
+            {loading && <div className="text-sm text-[#8B7355]">{tc("loading")}</div>}
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-[rgba(139,115,85,0.15)] text-left">
-                    <th className="p-2 text-[#8B7355] font-medium">Campaign</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Status</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Type</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Value</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Remaining</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Redeemed</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Issued To</th>
-                    <th className="p-2 text-[#8B7355] font-medium">Expires</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("voucherTable.campaign")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("voucherTable.status")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("voucherTable.type")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("voucherTable.value")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("voucherTable.remaining")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("voucherTable.redeemed")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("voucherTable.issuedTo")}</th>
+                    <th className="p-2 text-[#8B7355] font-medium">{t("voucherTable.expires")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -272,7 +275,7 @@ export default function B2BReportsPage() {
                     </tr>
                   ))}
                   {!loading && vouchers.length === 0 && (
-                    <tr><td colSpan={8} className="p-4 text-center text-[#8B7355]">No vouchers found.</td></tr>
+                    <tr><td colSpan={8} className="p-4 text-center text-[#8B7355]">{t("noVouchers")}</td></tr>
                   )}
                 </tbody>
               </table>
@@ -282,14 +285,14 @@ export default function B2BReportsPage() {
             {voucherPagination.totalPages > 1 && (
               <div className="flex items-center justify-between mt-4">
                 <div className="text-xs text-[#8B7355]">
-                  Page {voucherPagination.page} of {voucherPagination.totalPages} ({voucherPagination.total} total)
+                  {t("pageInfo", { page: voucherPagination.page, totalPages: voucherPagination.totalPages, total: voucherPagination.total })}
                 </div>
                 <div className="flex gap-2">
                   <WarmButton size="sm" variant="outline" disabled={voucherPagination.page <= 1} onClick={() => loadVouchers(voucherPagination.page - 1)}>
-                    Previous
+                    {tc("previous")}
                   </WarmButton>
                   <WarmButton size="sm" variant="outline" disabled={voucherPagination.page >= voucherPagination.totalPages} onClick={() => loadVouchers(voucherPagination.page + 1)}>
-                    Next
+                    {tc("next")}
                   </WarmButton>
                 </div>
               </div>

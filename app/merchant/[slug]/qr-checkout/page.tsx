@@ -3,6 +3,10 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+
+const VOUCHER_TYPES = ['percentage', 'fixed_amount', 'credit_amount'];
+const VOUCHER_STATUSES = ['draft', 'published', 'paused', 'ended', 'expired'];
 
 interface VoucherOption {
   id: string;
@@ -14,6 +18,8 @@ interface VoucherOption {
 
 export default function MerchantQRCheckoutPage() {
   const { slug } = useParams<{ slug: string }>();
+  const t = useTranslations('merchantStore.qrCheckout');
+  const tLabels = useTranslations('labels');
   const [vouchers, setVouchers] = useState<VoucherOption[]>([]);
   const [selectedVoucher, setSelectedVoucher] = useState('');
   const [qrDataUrl, setQrDataUrl] = useState('');
@@ -54,24 +60,31 @@ export default function MerchantQRCheckoutPage() {
             </svg>
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-[var(--text)]">QR Instant Checkout</h1>
-            <p className="text-[#6b5e52]">Generate QR codes for instant customer checkout</p>
+            <h1 className="text-2xl font-bold text-[var(--text)]">{t('title')}</h1>
+            <p className="text-[#6b5e52]">{t('subtitle')}</p>
           </div>
         </div>
 
         <div className="bg-[var(--surface)] rounded-2xl border border-[#e8e0d8] p-6 mb-6">
           <label className="block text-sm font-medium text-[var(--text)] mb-2">
-            Link to voucher (optional)
+            {t('voucherLabel')}
           </label>
           <select
             value={selectedVoucher}
             onChange={(e) => setSelectedVoucher(e.target.value)}
             className="w-full border border-[#e8e0d8] rounded-xl px-4 py-3 text-[var(--text)] bg-[#faf8f5] focus:outline-none focus:ring-2 focus:ring-[#cc785c] mb-4"
           >
-            <option value="">General checkout (no specific voucher)</option>
+            <option value="">{t('generalOption')}</option>
             {vouchers.map((v) => (
               <option key={v.id} value={v.id}>
-                {v.type} - {v.value / 100} {v.currency} ({v.status})
+                {t('voucherOption', {
+                  type: VOUCHER_TYPES.includes(v.type.toLowerCase())
+                    ? tLabels(`voucherType.${v.type.toLowerCase()}`)
+                    : v.type,
+                  value: v.value / 100,
+                  currency: v.currency,
+                  status: VOUCHER_STATUSES.includes(v.status) ? tLabels(`voucherStatus.${v.status}`) : v.status,
+                })}
               </option>
             ))}
           </select>
@@ -81,19 +94,19 @@ export default function MerchantQRCheckoutPage() {
             disabled={generating || loading}
             className="w-full bg-gradient-to-r from-[#cc785c] to-[#b5613f] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:opacity-90 transition disabled:opacity-50"
           >
-            {generating ? 'Generating...' : 'Generate QR Code'}
+            {generating ? t('generating') : t('generate')}
           </button>
         </div>
 
         {qrDataUrl && (
           <div className="bg-[var(--surface)] rounded-2xl border border-[#e8e0d8] p-8 text-center print:border-none print:shadow-none">
-            <Image src={qrDataUrl} alt="Checkout QR Code" width={240} height={240} unoptimized className="mx-auto mb-4" />
-            <p className="text-sm text-[#6b5e52] mb-4">Scan to checkout</p>
+            <Image src={qrDataUrl} alt={t('qrAlt')} width={240} height={240} unoptimized className="mx-auto mb-4" />
+            <p className="text-sm text-[#6b5e52] mb-4">{t('scanToCheckout')}</p>
             <button
               onClick={() => window.print()}
               className="text-sm text-[#cc785c] hover:underline font-medium"
             >
-              Print QR Code
+              {t('print')}
             </button>
           </div>
         )}

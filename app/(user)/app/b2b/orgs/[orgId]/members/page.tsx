@@ -2,12 +2,16 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { requireOrgMembership } from "@/lib/b2b/auth";
 import { hasOrgPermission, ORG_ROLE_LABELS, type OrgRoleType } from "@/lib/b2b/roles";
+import { getTranslations } from "next-intl/server";
 import { notFound, redirect } from "next/navigation";
 import { WarmCard } from "@/components/warm-card";
 import { InviteMemberForm } from "@/components/b2b/invite-member-form";
 import { pageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata = pageMetadata({ title: "Organization Members", noIndex: true });
+export async function generateMetadata() {
+  const t = await getTranslations("b2b.members");
+  return pageMetadata({ title: t("metaTitle"), noIndex: true });
+}
 
 export default async function OrgMembersPage({
   params,
@@ -41,11 +45,15 @@ export default async function OrgMembersPage({
     orderBy: { createdAt: "desc" },
   });
 
+  const t = await getTranslations("b2b");
+  const roleLabel = (r: string) =>
+    r in ORG_ROLE_LABELS ? t(`roles.${r as OrgRoleType}`) : r;
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-[var(--text)]">Members</h1>
-        <span className="text-sm text-[var(--text-muted)]">{members.length} members</span>
+        <h1 className="text-2xl font-bold text-[var(--text)]">{t("members.title")}</h1>
+        <span className="text-sm text-[var(--text-muted)]">{t("members.count", { count: members.length })}</span>
       </div>
 
       {/* Only owners/admins can create invitations (enforced by the API too). */}
@@ -67,7 +75,7 @@ export default async function OrgMembersPage({
                 m.role === "admin" ? "bg-blue-100 text-blue-700" :
                 "bg-gray-100 text-gray-600"
               }`}>
-                {ORG_ROLE_LABELS[m.role as OrgRoleType] ?? m.role}
+                {roleLabel(m.role)}
               </span>
             </div>
           ))}
@@ -76,18 +84,18 @@ export default async function OrgMembersPage({
 
       {pendingInvitations.length > 0 && (
         <WarmCard padding="lg">
-          <h2 className="text-lg font-semibold text-[var(--text)] mb-3">Pending Invitations</h2>
+          <h2 className="text-lg font-semibold text-[var(--text)] mb-3">{t("members.pendingInvitations")}</h2>
           <div className="space-y-2">
             {pendingInvitations.map((inv) => (
               <div key={inv.id} className="flex items-center justify-between py-2 border-b border-[var(--border)] last:border-0">
                 <div>
                   <p className="text-sm font-medium text-[var(--text)]">{inv.email}</p>
                   <p className="text-xs text-[var(--text-faint)]">
-                    Expires {new Date(inv.expiresAt).toLocaleDateString()}
+                    {t("members.expires", { date: new Date(inv.expiresAt).toLocaleDateString() })}
                   </p>
                 </div>
                 <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">
-                  {inv.role}
+                  {roleLabel(inv.role)}
                 </span>
               </div>
             ))}

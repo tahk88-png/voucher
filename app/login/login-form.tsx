@@ -1,8 +1,9 @@
 "use client"
 
-import { Suspense, useState, useEffect, useRef } from "react"
+import { Suspense, useState, useEffect } from "react"
 import { signIn, getProviders } from "next-auth/react"
 import { useSearchParams } from "next/navigation"
+import { useTranslations } from "next-intl"
 import {
   Gift, ArrowLeft, AlertCircle, Mail, Lock, ChevronRight,
   CheckCircle, Zap, Fingerprint
@@ -12,156 +13,28 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { authErrorKey } from "./auth-error"
+import { LanguageSelector } from "@/components/navigation/language-selector"
 
-/* ─── Inline i18n for 3 required languages ─── */
-const T = {
-  en: {
-    welcome: "Welcome back",
-    subtitle: "Sign in to your GiftHub account",
-    tabMagic: "Magic Link",
-    tabPassword: "Password",
-    tabSocial: "Social",
-    emailLabel: "Email address",
-    emailPlaceholder: "you@example.com",
-    passwordLabel: "Password",
-    passwordPlaceholder: "••••••••",
-    sendCode: "Send sign-in code",
-    sending: "Sending…",
-    signIn: "Sign in",
-    signingIn: "Signing in…",
-    otpTitle: "Check your email!",
-    otpDesc: "We sent a 6-digit code to",
-    otpLabel: "Enter code",
-    otpPlaceholder: "000000",
-    verify: "Verify code",
-    verifying: "Verifying…",
-    resend: "Resend code",
-    backToEmail: "Back",
-    orContinueWith: "Or continue with",
-    continueWith: "Continue with",
-    errorWrongCode: "Invalid or expired code. Please try again.",
-    errorWrongPass: "Invalid email or password.",
-    errorGeneric: "Something went wrong. Please try again.",
-    backToHome: "Back to homepage",
-    socialDesc: "Sign in instantly with your preferred account",
-    noAccount: "No account yet?",
-    createAccount: "Create account",
-    noAccountSub: "Signing in with a code creates an account for a new email.",
-    errorEmailUnavailable: "Email sign-in isn\u2019t available right now \u2014 use your password.",
-    errorCredentialsSignin: "Wrong email or password.",
-    errorAuthGeneric: "Sign-in failed. Please try again.",
-    registered: "Account created \u2014 sign in with your email and password.",
-    magicDesc: "We&rsquo;ll send a 6-digit code to your email. No password needed.",
-    passwordDesc: "Sign in with your email and password.",
-    forgotPassword: "Forgot password?",
-    langLabel: "Language",
-    demo: "Demo accounts",
-    tabPasskey: "Passkey",
-    passkeyDesc: "Sign in instantly with your fingerprint, face, or security key.",
-    passkeyButton: "Sign in with Passkey",
-    passkeyAuthenticating: "Authenticating\u2026",
-  },
-  et: {
-    welcome: "Tere tulemast tagasi",
-    subtitle: "Logi sisse oma GiftHub kontoga",
-    tabMagic: "Maagiline link",
-    tabPassword: "Parool",
-    tabSocial: "Sotsiaal",
-    emailLabel: "E-posti aadress",
-    emailPlaceholder: "sina@näide.ee",
-    passwordLabel: "Parool",
-    passwordPlaceholder: "••••••••",
-    sendCode: "Saada sisselogimiskood",
-    sending: "Saadan…",
-    signIn: "Logi sisse",
-    signingIn: "Loginud sisse…",
-    otpTitle: "Kontrolli oma e-posti!",
-    otpDesc: "Saatsime 6-kohalise koodi aadressile",
-    otpLabel: "Sisesta kood",
-    otpPlaceholder: "000000",
-    verify: "Kinnita kood",
-    verifying: "Kontrollin…",
-    resend: "Saada kood uuesti",
-    backToEmail: "Tagasi",
-    orContinueWith: "Või jätka järgmisega",
-    continueWith: "Jätka järgmisega",
-    errorWrongCode: "Vale või aegunud kood. Palun proovi uuesti.",
-    errorWrongPass: "Vale e-post või parool.",
-    errorGeneric: "Midagi läks valesti. Palun proovi uuesti.",
-    backToHome: "Tagasi avalehele",
-    socialDesc: "Logi sisse oma eelistatud kontoga",
-    noAccount: "Pole kontot?",
-    createAccount: "Loo konto",
-    noAccountSub: "Koodiga sisselogimine loob sellele e-postile konto, kui seda veel pole.",
-    errorEmailUnavailable: "E-postiga sisselogimine pole praegu saadaval \u2014 kasuta parooli.",
-    errorCredentialsSignin: "Vale e-post v\u00f5i parool.",
-    errorAuthGeneric: "Sisselogimine eba\u00f5nnestus. Palun proovi uuesti.",
-    registered: "Konto loodud \u2014 logi sisse e-posti ja parooliga.",
-    magicDesc: "Saadame 6-kohalise koodi sinu e-postile. Parooli pole vaja.",
-    passwordDesc: "Logi sisse e-posti ja parooliga.",
-    forgotPassword: "Unustasid parooli?",
-    langLabel: "Keel",
-    demo: "Demo kontod",
-    tabPasskey: "P\u00e4\u00e4suv\u00f5ti",
-    passkeyDesc: "Logi sisse kohe s\u00f5rmej\u00e4lje, n\u00e4o v\u00f5i turvav\u00f5tmega.",
-    passkeyButton: "Logi sisse p\u00e4\u00e4suv\u00f5tmega",
-    passkeyAuthenticating: "Autendin\u2026",
-  },
-  ru: {
-    welcome: "С возвращением",
-    subtitle: "Войдите в свой аккаунт GiftHub",
-    tabMagic: "Магический код",
-    tabPassword: "Пароль",
-    tabSocial: "Соцсети",
-    emailLabel: "Email адрес",
-    emailPlaceholder: "вы@example.com",
-    passwordLabel: "Пароль",
-    passwordPlaceholder: "••••••••",
-    sendCode: "Отправить код для входа",
-    sending: "Отправляем…",
-    signIn: "Войти",
-    signingIn: "Входим…",
-    otpTitle: "Проверьте почту!",
-    otpDesc: "Мы отправили 6-значный код на",
-    otpLabel: "Введите код",
-    otpPlaceholder: "000000",
-    verify: "Подтвердить",
-    verifying: "Проверяем…",
-    resend: "Отправить повторно",
-    backToEmail: "Назад",
-    orContinueWith: "Или продолжить через",
-    continueWith: "Войти через",
-    errorWrongCode: "Неверный или просроченный код. Попробуйте снова.",
-    errorWrongPass: "Неверный email или пароль.",
-    errorGeneric: "Что-то пошло не так. Попробуйте снова.",
-    backToHome: "На главную",
-    socialDesc: "Войдите через удобный аккаунт",
-    noAccount: "Нет аккаунта?",
-    createAccount: "Создать аккаунт",
-    noAccountSub: "Вход по коду создаст аккаунт для нового email.",
-    errorEmailUnavailable: "Вход по email сейчас недоступен \u2014 используйте пароль.",
-    errorCredentialsSignin: "Неверный email или пароль.",
-    errorAuthGeneric: "Не удалось войти. Попробуйте снова.",
-    registered: "Аккаунт создан \u2014 войдите с email и паролем.",
-    magicDesc: "Отправим 6-значный код на ваш email. Пароль не нужен.",
-    passwordDesc: "Войдите с помощью email и пароля.",
-    forgotPassword: "Забыли пароль?",
-    langLabel: "Язык",
-    demo: "Demo аккаунты",
-    tabPasskey: "Пасскей",
-    passkeyDesc: "Войдите мгновенно с помощью отпечатка пальца, лица или ключа безопасности.",
-    passkeyButton: "Войти с Passkey",
-    passkeyAuthenticating: "Аутентификация\u2026",
-  },
-} as const
+/** Keys under authPages.login that the error banner can show. */
+type LoginErrorKey =
+  | "errorWrongCode"
+  | "errorWrongPass"
+  | "errorGeneric"
+  | "errorEmailUnavailable"
+  | "errorCredentialsSignin"
+  | "errorAuthGeneric"
 
-type Lang = keyof typeof T
+/**
+ * An error is kept as a message key (translated at render, so it follows a
+ * language switch) or as text that came from the server / passkey hook.
+ */
+type LoginError = { key: LoginErrorKey } | { raw: string }
 
 const DEMO_CREDENTIALS = [
-  { role: "Platform Admin", email: "platform-admin@gifthub.local", password: "platform123" },
-  { role: "Merchant Admin", email: "admin@coffee-house.com", password: "admin123" },
-  { role: "Merchant Staff", email: "staff@coffee-house.com", password: "staff123" },
-  { role: "End User", email: "test@example.com", password: "test123" },
+  { role: "platformAdmin", email: "platform-admin@gifthub.local", password: "platform123" },
+  { role: "merchantAdmin", email: "admin@coffee-house.com", password: "admin123" },
+  { role: "merchantStaff", email: "staff@coffee-house.com", password: "staff123" },
+  { role: "endUser", email: "test@example.com", password: "test123" },
 ] as const
 
 const OAUTH_ICONS: Record<string, React.ReactNode> = {
@@ -185,56 +58,7 @@ const OAUTH_ICONS: Record<string, React.ReactNode> = {
   ),
 }
 
-const LANG_OPTIONS: { code: Lang; label: string; flag: string }[] = [
-  { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "et", label: "Eesti", flag: "🇪🇪" },
-  { code: "ru", label: "Русский", flag: "🇷🇺" },
-]
-
 type Tab = "magic" | "password" | "social" | "passkey"
-
-function LangSwitcher({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
-  const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
-    }
-    document.addEventListener("mousedown", handler)
-    return () => document.removeEventListener("mousedown", handler)
-  }, [])
-
-  const current = LANG_OPTIONS.find(l => l.code === lang)!
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        onClick={() => setOpen(v => !v)}
-        className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-full border border-[var(--border)] bg-white/60 hover:bg-white hover:border-[var(--primary)] transition-all backdrop-blur-sm text-[var(--text-muted)] hover:text-[var(--text)]"
-        aria-label="Select language"
-      >
-        <span className="text-base leading-none">{current.flag}</span>
-        <span>{current.label}</span>
-        <svg className={`w-3.5 h-3.5 transition-transform ${open ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-      {open && (
-        <div className="absolute right-0 top-full mt-1.5 w-36 rounded-[var(--r-sm)] border border-[var(--border)] bg-[var(--surface)] shadow-lg overflow-hidden z-50 animate-scale-in">
-          {LANG_OPTIONS.map(opt => (
-            <button
-              key={opt.code}
-              onClick={() => { setLang(opt.code); setOpen(false) }}
-              className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm text-left hover:bg-[var(--surface-muted)] transition-colors ${lang === opt.code ? "font-semibold text-[var(--text)] bg-[var(--accent)]" : "text-[var(--text-muted)]"}`}
-            >
-              <span>{opt.flag}</span>
-              <span>{opt.label}</span>
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  )
-}
 
 function OAuthButton({ providerId, label, onClick }: { providerId: string; label: string; onClick: () => void }) {
   return (
@@ -268,7 +92,6 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
   // Validate callback URL is relative to prevent open redirect
   const callbackUrl = rawCallback.startsWith("/") && !rawCallback.startsWith("//") ? rawCallback : "/app/entry"
 
-  const [lang, setLang] = useState<Lang>("en")
   const [tab, setTab] = useState<Tab>(emailSignInEnabled ? "magic" : "password")
   const [email, setEmail] = useState(() => searchParams.get("email") ?? "")
   const [password, setPassword] = useState("")
@@ -279,15 +102,10 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
   const [oauthProviders, setOauthProviders] = useState<{ id: string; name: string }[]>([])
   const justRegistered = searchParams.get("registered") === "1"
   const initialErrorKey = authErrorKey(searchParams.get("error"))
-  const [error, setError] = useState<string | null>(initialErrorKey ? T.en[initialErrorKey] : null)
+  const [error, setError] = useState<LoginError | null>(initialErrorKey ? { key: initialErrorKey } : null)
 
-  const s = T[lang]
+  const s = useTranslations("authPages.login")
   const { startAuthentication, isLoading: passkeyLoading, error: passkeyError } = usePasskey()
-
-  // Re-localize the initial ?error= message when the language changes.
-  useEffect(() => {
-    if (initialErrorKey) setError(T[lang][initialErrorKey])
-  }, [lang, initialErrorKey])
 
   useEffect(() => {
     let cancelled = false
@@ -326,18 +144,18 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
         body: JSON.stringify({ email: email.trim().toLowerCase() }),
       })
       if (res.status === 503) {
-        setError(s.errorEmailUnavailable)
+        setError({ key: "errorEmailUnavailable" })
         return
       }
       if (!res.ok) {
         const data = await res.json().catch(() => null)
-        setError(typeof data?.error === "string" ? data.error : s.errorGeneric)
+        setError(typeof data?.error === "string" ? { raw: data.error } : { key: "errorGeneric" })
         return
       }
       setOtpEmail(email.trim().toLowerCase())
       setOtpSent(true)
     } catch {
-      setError(s.errorGeneric)
+      setError({ key: "errorGeneric" })
     } finally {
       setIsLoading(false)
     }
@@ -355,7 +173,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
       })
       const data = await res.json()
       if (!res.ok || !data.verified) {
-        setError(s.errorWrongCode)
+        setError({ key: "errorWrongCode" })
         setIsLoading(false)
         return
       }
@@ -368,11 +186,11 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
       if (signInRes?.ok) {
         window.location.href = signInRes.url ?? callbackUrl
       } else {
-        setError(s.errorWrongCode)
+        setError({ key: "errorWrongCode" })
         setIsLoading(false)
       }
     } catch {
-      setError(s.errorGeneric)
+      setError({ key: "errorGeneric" })
       setIsLoading(false)
     }
   }
@@ -381,7 +199,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
     setError(null)
     const result = await startAuthentication()
     if (!result) {
-      if (passkeyError) setError(passkeyError)
+      if (passkeyError) setError({ raw: passkeyError })
       return
     }
     const signInRes = await signIn("credentials", {
@@ -393,7 +211,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
     if (signInRes?.ok) {
       window.location.href = signInRes.url ?? callbackUrl
     } else {
-      setError(s.errorGeneric)
+      setError({ key: "errorGeneric" })
     }
   }
 
@@ -404,7 +222,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
     const res = await signIn("credentials", { email, password, callbackUrl, redirect: false })
     setIsLoading(false)
     if (res?.error) {
-      setError(s.errorWrongPass)
+      setError({ key: "errorWrongPass" })
       return
     }
     if (res?.ok) window.location.href = res.url ?? callbackUrl
@@ -427,7 +245,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
 
       {/* Language switcher — top right */}
       <div className="absolute top-4 right-4 z-20">
-        <LangSwitcher lang={lang} setLang={setLang} />
+        <LanguageSelector variant="compact" />
       </div>
 
       {/* Back to home — top left */}
@@ -437,7 +255,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
           className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors px-3 py-1.5 rounded-full hover:bg-white/60 backdrop-blur-sm"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          <span>{s.backToHome}</span>
+          <span>{s("backToHome")}</span>
         </Link>
       </div>
 
@@ -451,8 +269,8 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
             </div>
             <span className="text-2xl font-bold text-[var(--text)] tracking-tight">GiftHub</span>
           </div>
-          <h1 className="text-xl font-bold text-[var(--text)]">{s.welcome}</h1>
-          <p className="text-sm text-[var(--text-muted)] mt-0.5">{s.subtitle}</p>
+          <h1 className="text-xl font-bold text-[var(--text)]">{s("welcome")}</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-0.5">{s("subtitle")}</p>
         </div>
 
         {/* Glass card */}
@@ -467,10 +285,10 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                 onClick={() => { setTab(t); setError(null); setOtpSent(false) }}
                 className={tabClass(tab === t)}
               >
-                {t === "magic" && s.tabMagic}
-                {t === "password" && s.tabPassword}
-                {t === "social" && s.tabSocial}
-                {t === "passkey" && <span className="flex items-center justify-center gap-1"><Fingerprint className="w-3.5 h-3.5" />{s.tabPasskey}</span>}
+                {t === "magic" && s("tabMagic")}
+                {t === "password" && s("tabPassword")}
+                {t === "social" && s("tabSocial")}
+                {t === "passkey" && <span className="flex items-center justify-center gap-1"><Fingerprint className="w-3.5 h-3.5" />{s("tabPasskey")}</span>}
               </button>
             ))}
           </div>
@@ -479,27 +297,26 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
             {justRegistered && !error && (
               <div role="status" className="mb-4 flex items-start gap-2 text-sm text-green-800 bg-green-50 border border-green-200 rounded-[var(--r-sm)] px-3 py-2.5">
                 <CheckCircle className="h-4 w-4 shrink-0 mt-0.5" />
-                <span>{s.registered}</span>
+                <span>{s("registered")}</span>
               </div>
             )}
-            {error && <div className="mb-4" role="alert"><ErrorBanner msg={error} /></div>}
+            {error && <div className="mb-4" role="alert"><ErrorBanner msg={"key" in error ? s(error.key) : error.raw} /></div>}
 
             {/* ── MAGIC LINK TAB ── */}
             {tab === "magic" && emailSignInEnabled && (
               <div className="tab-content-enter">
                 {!otpSent ? (
                   <form onSubmit={handleSendOtp} className="space-y-4">
-                    <p className="text-xs text-[var(--text-muted)] -mt-1 mb-3"
-                       dangerouslySetInnerHTML={{ __html: s.magicDesc.replace("&rsquo;", "\u2019") }} />
+                    <p className="text-xs text-[var(--text-muted)] -mt-1 mb-3">{s("magicDesc")}</p>
                     <div className="space-y-1.5">
-                      <Label htmlFor="login-magic-email" className="text-sm font-medium text-[var(--text)]">{s.emailLabel}</Label>
+                      <Label htmlFor="login-magic-email" className="text-sm font-medium text-[var(--text)]">{s("emailLabel")}</Label>
                       <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                         <Input
                           id="login-magic-email"
                           type="email"
                           autoComplete="email"
-                          placeholder={s.emailPlaceholder}
+                          placeholder={s("emailPlaceholder")}
                           value={email}
                           onChange={e => setEmail(e.target.value)}
                           className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-[var(--surface)]"
@@ -515,12 +332,12 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                       {isLoading ? (
                         <>
                           <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-                          {s.sending}
+                          {s("sending")}
                         </>
                       ) : (
                         <>
                           <Zap className="w-4 h-4" />
-                          {s.sendCode}
+                          {s("sendCode")}
                         </>
                       )}
                     </button>
@@ -531,19 +348,22 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                       <div className="w-12 h-12 rounded-2xl bg-[var(--accent)] flex items-center justify-center mx-auto mb-3">
                         <Mail className="h-6 w-6 text-[var(--primary)]" />
                       </div>
-                      <p className="font-semibold text-[var(--text)]">{s.otpTitle}</p>
+                      <p className="font-semibold text-[var(--text)]">{s("otpTitle")}</p>
                       <p className="text-sm text-[var(--text-muted)] mt-1">
-                        {s.otpDesc} <span className="font-medium text-[var(--text)]">{otpEmail}</span>
+                        {s.rich("otpDesc", {
+                          email: otpEmail,
+                          b: (chunks) => <span className="font-medium text-[var(--text)]">{chunks}</span>,
+                        })}
                       </p>
                     </div>
                     <div className="space-y-1.5">
-                      <Label htmlFor="login-otp" className="text-sm font-medium text-[var(--text)]">{s.otpLabel}</Label>
+                      <Label htmlFor="login-otp" className="text-sm font-medium text-[var(--text)]">{s("otpLabel")}</Label>
                       <Input
                         id="login-otp"
                         type="text"
                         inputMode="numeric"
                         autoComplete="one-time-code"
-                        placeholder={s.otpPlaceholder}
+                        placeholder="000000"
                         value={otp}
                         onChange={e => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
                         className="h-14 text-center text-2xl font-bold tracking-[0.5em] rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-[var(--surface)]"
@@ -559,12 +379,12 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                       {isLoading ? (
                         <>
                           <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-                          {s.verifying}
+                          {s("verifying")}
                         </>
                       ) : (
                         <>
                           <CheckCircle className="w-4 h-4" />
-                          {s.verify}
+                          {s("verify")}
                         </>
                       )}
                     </button>
@@ -575,14 +395,14 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                         className="text-[var(--text-muted)] hover:text-[var(--text)] transition-colors flex items-center gap-1"
                       >
                         <ArrowLeft className="w-3.5 h-3.5" />
-                        {s.backToEmail}
+                        {s("backToEmail")}
                       </button>
                       <button
                         type="button"
                         onClick={() => { setOtp(""); setError(null); handleSendOtp({ preventDefault: () => {} } as React.FormEvent) }}
                         className="text-[var(--primary)] hover:text-[var(--primary-hover)] font-medium transition-colors"
                       >
-                        {s.resend}
+                        {s("resend")}
                       </button>
                     </div>
                   </form>
@@ -595,18 +415,18 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
               <div className="tab-content-enter">
                 <form onSubmit={handlePasswordSignIn} className="space-y-4">
                   <div className="flex items-center justify-between -mt-1 mb-3">
-                    <p className="text-xs text-[var(--text-muted)]">{s.passwordDesc}</p>
-                    <Link href="/reset-password" className="text-xs font-medium text-[var(--primary)] hover:underline">{s.forgotPassword}</Link>
+                    <p className="text-xs text-[var(--text-muted)]">{s("passwordDesc")}</p>
+                    <Link href="/reset-password" className="text-xs font-medium text-[var(--primary)] hover:underline">{s("forgotPassword")}</Link>
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="login-password-email" className="text-sm font-medium text-[var(--text)]">{s.emailLabel}</Label>
+                    <Label htmlFor="login-password-email" className="text-sm font-medium text-[var(--text)]">{s("emailLabel")}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                       <Input
                         id="login-password-email"
                         type="email"
                         autoComplete="email"
-                        placeholder={s.emailPlaceholder}
+                        placeholder={s("emailPlaceholder")}
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-[var(--surface)]"
@@ -615,14 +435,14 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                     </div>
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="login-password" className="text-sm font-medium text-[var(--text)]">{s.passwordLabel}</Label>
+                    <Label htmlFor="login-password" className="text-sm font-medium text-[var(--text)]">{s("passwordLabel")}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                       <Input
                         id="login-password"
                         type="password"
                         autoComplete="current-password"
-                        placeholder={s.passwordPlaceholder}
+                        placeholder="••••••••"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-[var(--surface)]"
@@ -638,12 +458,12 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                     {isLoading ? (
                       <>
                         <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-                        {s.signingIn}
+                        {s("signingIn")}
                       </>
                     ) : (
                       <>
                         <ChevronRight className="w-4 h-4" />
-                        {s.signIn}
+                        {s("signIn")}
                       </>
                     )}
                   </button>
@@ -654,12 +474,12 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
             {/* ── SOCIAL TAB ── */}
             {tab === "social" && oauthProviders.length > 0 && (
               <div className="tab-content-enter space-y-3">
-                <p className="text-xs text-[var(--text-muted)] -mt-1 mb-3">{s.socialDesc}</p>
+                <p className="text-xs text-[var(--text-muted)] -mt-1 mb-3">{s("socialDesc")}</p>
                 {oauthProviders.map(provider => (
                   <OAuthButton
                     key={provider.id}
                     providerId={provider.id}
-                    label={`${s.continueWith} ${provider.name || titleCaseProvider(provider.id)}`}
+                    label={s("continueWith", { provider: provider.name || titleCaseProvider(provider.id) })}
                     onClick={() => signIn(provider.id, { callbackUrl })}
                   />
                 ))}
@@ -668,7 +488,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                     <div className="w-full border-t border-[var(--border)]" />
                   </div>
                   <div className="relative flex justify-center text-xs">
-                    <span className="px-2 bg-[var(--surface)] text-[var(--text-muted)]">{s.orContinueWith}</span>
+                    <span className="px-2 bg-[var(--surface)] text-[var(--text-muted)]">{s("orContinueWith")}</span>
                   </div>
                 </div>
                 <button
@@ -677,7 +497,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                   className="w-full flex items-center justify-center gap-2 h-11 px-4 rounded-[var(--r-sm)] border border-dashed border-[var(--border)] hover:border-[var(--primary)] hover:bg-[var(--accent)] transition-all text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text)]"
                 >
                   {emailSignInEnabled ? <Mail className="w-4 h-4" /> : <Lock className="w-4 h-4" />}
-                  {emailSignInEnabled ? s.tabMagic : s.tabPassword}
+                  {emailSignInEnabled ? s("tabMagic") : s("tabPassword")}
                 </button>
               </div>
             )}
@@ -685,7 +505,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
             {/* ── PASSKEY TAB ── */}
             {tab === "passkey" && (
               <div className="tab-content-enter space-y-4">
-                <p className="text-xs text-[var(--text-muted)] -mt-1 mb-3">{s.passkeyDesc}</p>
+                <p className="text-xs text-[var(--text-muted)] -mt-1 mb-3">{s("passkeyDesc")}</p>
                 <div className="flex flex-col items-center py-4">
                   <div className="w-16 h-16 rounded-2xl bg-[var(--accent)] flex items-center justify-center mb-4">
                     <Fingerprint className="h-8 w-8 text-[var(--primary)]" />
@@ -699,12 +519,12 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                     {passkeyLoading ? (
                       <>
                         <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-                        {s.passkeyAuthenticating}
+                        {s("passkeyAuthenticating")}
                       </>
                     ) : (
                       <>
                         <Fingerprint className="w-4 h-4" />
-                        {s.passkeyButton}
+                        {s("passkeyButton")}
                       </>
                     )}
                   </button>
@@ -717,12 +537,12 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
               <div className="text-center mt-4 space-y-1">
                 {/* verify-otp creates the account on first code sign-in, so this is only true on the code tab */}
                 {tab === "magic" && emailSignInEnabled && (
-                  <p className="text-xs text-[var(--text-muted)]">{s.noAccountSub}</p>
+                  <p className="text-xs text-[var(--text-muted)]">{s("noAccountSub")}</p>
                 )}
                 <p className="text-sm text-[var(--text-muted)]">
-                  {s.noAccount}{" "}
+                  {s("noAccount")}{" "}
                   <Link href="/register" className="font-medium text-[var(--primary)] hover:underline">
-                    {s.createAccount}
+                    {s("createAccount")}
                   </Link>
                 </p>
               </div>
@@ -735,7 +555,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
           <div className="mt-4 rounded-[var(--r-sm)] border border-amber-200 bg-amber-50/80 backdrop-blur-sm px-4 py-3 text-sm text-amber-900">
             <p className="font-semibold mb-1.5 flex items-center gap-1.5">
               <span>🔑</span>
-              {s.demo}
+              {s("demo")}
             </p>
             <div className="space-y-0.5">
               {DEMO_CREDENTIALS.map(c => (
@@ -749,7 +569,7 @@ export function LoginForm({ emailSignInEnabled }: { emailSignInEnabled: boolean 
                   }}
                   className="block w-full text-left text-xs hover:text-amber-950 hover:font-medium transition-colors py-0.5"
                 >
-                  {c.role}: <span className="font-mono">{c.email}</span>
+                  {s(`demoRole.${c.role}`)}: <span className="font-mono">{c.email}</span>
                 </button>
               ))}
             </div>

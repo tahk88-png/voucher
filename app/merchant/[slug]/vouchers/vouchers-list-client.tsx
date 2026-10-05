@@ -12,15 +12,12 @@ import { VoucherRowActions } from './voucher-row-actions';
 import { Gift, Search, Filter, Ticket } from 'lucide-react';
 import { VoucherDesign } from '@/types';
 import { EmptyState } from '@/components/ui/empty-state';
-import { describeVoucherValue, formatDisplayDate, voucherDisplayName, voucherTypeLabel } from '@/lib/voucher-display';
+import { formatDisplayDate, voucherDisplayName, voucherHeadline } from '@/lib/voucher-display';
+import { useLocale, useTranslations } from 'next-intl';
+import { describeVoucherValueT, displayLocaleFor } from './voucher-i18n';
 
-const statusLabel: Record<string, string> = {
-  published: 'Active',
-  paused: 'Paused',
-  draft: 'Draft',
-  ended: 'Ended',
-  expired: 'Expired',
-};
+const STATUS_KEYS = ['published', 'paused', 'draft', 'ended', 'expired'];
+const TYPE_KEYS = ['percentage', 'fixed_amount', 'credit_amount'];
 
 // Paused is a temporary, merchant-chosen state: warning tone, not danger.
 const statusClass: Record<string, string> = {
@@ -56,6 +53,10 @@ export default function VouchersListClient({
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'date' | 'name' | 'redemptions'>('date');
+  const t = useTranslations('merchantVouchers');
+  const tLabels = useTranslations('labels');
+  const tCommon = useTranslations('common');
+  const displayLocale = displayLocaleFor(useLocale());
 
   const filteredAndSorted = useMemo(() => {
     let filtered = [...initialVouchers];
@@ -102,10 +103,10 @@ export default function VouchersListClient({
     return (
       <EmptyState
         icon={Gift}
-        title="No vouchers yet"
-        description="Get started by creating your first voucher."
+        title={t('list.empty.title')}
+        description={t('list.empty.description')}
         action={{
-          label: 'Create your first voucher',
+          label: t('list.empty.action'),
           onClick: () => router.push(`/merchant/${merchantSlug}/vouchers/new`),
         }}
       />
@@ -120,18 +121,18 @@ export default function VouchersListClient({
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-faint)]" />
             <Input
               type="text"
-              placeholder="Search by headline, code prefix, or ID"
+              placeholder={t('list.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 border-[var(--border)] bg-[var(--surface)]"
-              aria-label="Search vouchers"
+              aria-label={t('list.searchLabel')}
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="voucher-status-filter" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
-                Status
+                {t('list.statusLabel')}
               </label>
               <select
                 id="voucher-status-filter"
@@ -139,17 +140,17 @@ export default function VouchersListClient({
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
-                <option value="all">All status</option>
-                <option value="published">Active</option>
-                <option value="paused">Paused</option>
-                <option value="draft">Draft</option>
-                <option value="ended">Ended</option>
-                <option value="expired">Expired</option>
+                <option value="all">{t('list.statusAll')}</option>
+                {STATUS_KEYS.map((key) => (
+                  <option key={key} value={key}>
+                    {t(`list.status.${key}`)}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
               <label htmlFor="voucher-type-filter" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
-                Type
+                {t('list.typeLabel')}
               </label>
               <select
                 id="voucher-type-filter"
@@ -157,15 +158,17 @@ export default function VouchersListClient({
                 onChange={(e) => setTypeFilter(e.target.value)}
                 className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
-                <option value="all">All types</option>
-                <option value="percentage">Percentage off</option>
-                <option value="fixed_amount">Amount off</option>
-                <option value="credit_amount">Store credit</option>
+                <option value="all">{t('list.typeAll')}</option>
+                {TYPE_KEYS.map((key) => (
+                  <option key={key} value={key}>
+                    {tLabels(`voucherType.${key}`)}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
               <label htmlFor="voucher-sort-by" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
-                Sort by
+                {t('list.sortLabel')}
               </label>
               <select
                 id="voucher-sort-by"
@@ -173,9 +176,9 @@ export default function VouchersListClient({
                 onChange={(e) => setSortBy(e.target.value as 'date' | 'name' | 'redemptions')}
                 className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
-                <option value="date">Date (newest)</option>
-                <option value="name">Name (A-Z)</option>
-                <option value="redemptions">Redemptions</option>
+                <option value="date">{t('list.sort.date')}</option>
+                <option value="name">{t('list.sort.name')}</option>
+                <option value="redemptions">{t('list.sort.redemptions')}</option>
               </select>
             </div>
           </div>
@@ -184,7 +187,7 @@ export default function VouchersListClient({
             <div className="flex items-center gap-2 text-sm text-[var(--text-faint)]">
               <Filter className="h-4 w-4" />
               <span>
-                Showing {filteredAndSorted.length} of {initialVouchers.length} vouchers
+                {t('list.showing', { shown: filteredAndSorted.length, total: initialVouchers.length })}
               </span>
               <WarmButton
                 variant="ghost"
@@ -195,7 +198,7 @@ export default function VouchersListClient({
                   setTypeFilter('all');
                 }}
               >
-                Clear filters
+                {t('list.clearFilters')}
               </WarmButton>
             </div>
           ) : null}
@@ -204,16 +207,19 @@ export default function VouchersListClient({
 
       {filteredAndSorted.length === 0 ? (
         <WarmCard padding="lg" className="bg-[var(--surface)] text-center py-16">
-          <p className="text-[var(--text-muted)]">No vouchers match your filters.</p>
+          <p className="text-[var(--text-muted)]">{t('list.noMatches')}</p>
         </WarmCard>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filteredAndSorted.map((voucher) => {
-            const headline = voucherDisplayName(voucher);
+            const valueText = describeVoucherValueT(tLabels, voucher, displayLocale);
+            const headline = voucherHeadline(voucher) ?? valueText;
             const used = voucher._count.redemptions;
             const limit = voucher.usageLimitTotal;
             const pct = limit != null && limit > 0 ? Math.min(100, (used / limit) * 100) : null;
-            const status = statusLabel[voucher.status] || voucher.status;
+            const status = STATUS_KEYS.includes(voucher.status) ? t(`list.status.${voucher.status}`) : voucher.status;
+            const typeKey = voucher.type.toLowerCase();
+            const typeText = TYPE_KEYS.includes(typeKey) ? tLabels(`voucherType.${typeKey}`) : voucher.type.replace(/_/g, ' ');
 
             return (
               <WarmCard key={voucher.id} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
@@ -221,7 +227,7 @@ export default function VouchersListClient({
                   <div className="min-w-0">
                     <h3 className="text-lg font-semibold text-[var(--text)] truncate">{headline}</h3>
                     <p className="text-xs text-[var(--text-faint)]">
-                      {voucherTypeLabel(voucher.type)} · {describeVoucherValue(voucher)}
+                      {typeText} · {valueText}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
@@ -249,7 +255,7 @@ export default function VouchersListClient({
                         }}
                       />
                       <div className="flex justify-between text-xs text-[var(--text-faint)] mb-1">
-                        <span>Usage</span>
+                        <span>{t('list.usage')}</span>
                         <span>
                           {used} / {limit}
                         </span>
@@ -261,18 +267,18 @@ export default function VouchersListClient({
                       </div>
                     </div>
                   ) : (
-                    <p className="text-xs text-[var(--text-faint)]">Usage: {used} - Unlimited</p>
+                    <p className="text-xs text-[var(--text-faint)]">{t('list.usageUnlimited', { used })}</p>
                   )}
                   <p className="text-sm text-[var(--text-muted)]">
-                    {formatDisplayDate(voucher.validFrom)} – {formatDisplayDate(voucher.validTo)}
+                    {formatDisplayDate(voucher.validFrom, displayLocale)} – {formatDisplayDate(voucher.validTo, displayLocale)}
                   </p>
                   <div className="flex gap-2">
                     <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                      <Link href={`/merchant/${merchantSlug}/vouchers/${voucher.id}`}>Edit</Link>
+                      <Link href={`/merchant/${merchantSlug}/vouchers/${voucher.id}`}>{tCommon('edit')}</Link>
                     </WarmButton>
                     {voucher.status === 'published' ? (
                       <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                        <Link href={`/v/${voucher.id}`}>View</Link>
+                        <Link href={`/v/${voucher.id}`}>{t('list.view')}</Link>
                       </WarmButton>
                     ) : (
                       <WarmButton
@@ -280,9 +286,9 @@ export default function VouchersListClient({
                         size="sm"
                         className="flex-1"
                         disabled
-                        title="The public page is available once the voucher is published."
+                        title={t('publicPageHint')}
                       >
-                        View
+                        {t('list.view')}
                       </WarmButton>
                     )}
                   </div>

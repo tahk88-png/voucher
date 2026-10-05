@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, type ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 
 /* ─── Types ─── */
 export type DsAlertVariant = 'info' | 'success' | 'warning' | 'error';
@@ -79,6 +80,7 @@ export function DsAlert({
   icon,
   className = '',
 }: DsAlertProps) {
+  const t = useTranslations('dsComponents.common');
   const [dismissed, setDismissed] = useState(false);
 
   if (dismissed) return null;
@@ -121,7 +123,7 @@ export function DsAlert({
             onDismiss?.();
           }}
           className="flex-shrink-0 p-1 rounded-md text-[var(--text-faint)] hover:text-[var(--text)] hover:bg-[var(--surface-dim)] transition-colors"
-          aria-label="Dismiss"
+          aria-label={t('dismiss')}
         >
           <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
             <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import {
   LayoutDashboard,
   Ticket,
@@ -23,22 +24,23 @@ import { CommandPalette, useCommandPalette } from '@/components/ui/command-palet
  * duplicated here.
  */
 export function CommandPaletteHost() {
+  const t = useTranslations('ui.commandPalette');
   const router = useRouter();
   const { open, setOpen } = useCommandPalette();
 
   const go = (path: string) => () => router.push(path);
 
   const items = [
-    { id: 'home', label: 'Home', description: 'Landing page', icon: <Home className="h-4 w-4" />, onSelect: go('/'), category: 'Navigate' },
-    { id: 'app', label: 'My dashboard', description: 'Your vouchers, wallet and activity', icon: <LayoutDashboard className="h-4 w-4" />, onSelect: go('/app'), category: 'Navigate' },
-    { id: 'vouchers', label: 'My vouchers', icon: <Ticket className="h-4 w-4" />, onSelect: go('/app/vouchers'), category: 'Navigate' },
-    { id: 'wallet', label: 'Wallet', description: 'Credit balances', icon: <Wallet className="h-4 w-4" />, onSelect: go('/app/wallet'), category: 'Navigate' },
-    { id: 'gifts', label: 'Gift Hub', description: 'Browse and send gifts', icon: <Gift className="h-4 w-4" />, onSelect: go('/gifts'), category: 'Discover' },
-    { id: 'campaigns', label: 'Campaigns', description: 'Active voucher campaigns', icon: <Megaphone className="h-4 w-4" />, onSelect: go('/campaigns'), category: 'Discover' },
-    { id: 'hub', label: 'Merchant hub', description: 'Browse merchants', icon: <Store className="h-4 w-4" />, onSelect: go('/hub'), category: 'Discover' },
-    { id: 'deals', label: 'Deals', icon: <Search className="h-4 w-4" />, onSelect: go('/deals'), category: 'Discover' },
-    { id: 'settings', label: 'Settings', description: 'Account and preferences', icon: <Settings className="h-4 w-4" />, onSelect: go('/app/settings'), category: 'Account' },
-    { id: 'admin', label: 'Admin', description: 'Platform administration', icon: <Shield className="h-4 w-4" />, onSelect: go('/admin'), category: 'Account' },
+    { id: 'home', label: t('items.home.label'), description: t('items.home.description'), icon: <Home className="h-4 w-4" />, onSelect: go('/'), category: t('categories.navigate') },
+    { id: 'app', label: t('items.app.label'), description: t('items.app.description'), icon: <LayoutDashboard className="h-4 w-4" />, onSelect: go('/app'), category: t('categories.navigate') },
+    { id: 'vouchers', label: t('items.vouchers.label'), icon: <Ticket className="h-4 w-4" />, onSelect: go('/app/vouchers'), category: t('categories.navigate') },
+    { id: 'wallet', label: t('items.wallet.label'), description: t('items.wallet.description'), icon: <Wallet className="h-4 w-4" />, onSelect: go('/app/wallet'), category: t('categories.navigate') },
+    { id: 'gifts', label: t('items.gifts.label'), description: t('items.gifts.description'), icon: <Gift className="h-4 w-4" />, onSelect: go('/gifts'), category: t('categories.discover') },
+    { id: 'campaigns', label: t('items.campaigns.label'), description: t('items.campaigns.description'), icon: <Megaphone className="h-4 w-4" />, onSelect: go('/campaigns'), category: t('categories.discover') },
+    { id: 'hub', label: t('items.hub.label'), description: t('items.hub.description'), icon: <Store className="h-4 w-4" />, onSelect: go('/hub'), category: t('categories.discover') },
+    { id: 'deals', label: t('items.deals.label'), icon: <Search className="h-4 w-4" />, onSelect: go('/deals'), category: t('categories.discover') },
+    { id: 'settings', label: t('items.settings.label'), description: t('items.settings.description'), icon: <Settings className="h-4 w-4" />, onSelect: go('/app/settings'), category: t('categories.account') },
+    { id: 'admin', label: t('items.admin.label'), description: t('items.admin.description'), icon: <Shield className="h-4 w-4" />, onSelect: go('/admin'), category: t('categories.account') },
   ];
 
   return (
@@ -46,7 +48,7 @@ export function CommandPaletteHost() {
       items={items}
       open={open}
       onOpenChange={setOpen}
-      placeholder="Where do you want to go?"
+      placeholder={t('hostPlaceholder')}
     />
   );
 }

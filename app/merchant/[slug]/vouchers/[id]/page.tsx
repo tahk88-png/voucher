@@ -23,6 +23,7 @@ export default async function EditVoucherPage({
 
   const t = await getTranslations('nav');
   const tVoucher = await getTranslations('voucher');
+  const tPage = await getTranslations('merchantVouchers.edit');
 
   const voucher = await prisma.voucher.findUnique({
     where: { id: voucherId },
@@ -44,11 +45,11 @@ export default async function EditVoucherPage({
         />
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
-            <span className="text-white font-bold text-lg">E</span>
+            <span className="text-white font-bold text-lg">{tPage('iconLetter')}</span>
           </div>
           <div>
             <h1 className="text-2xl font-semibold text-[var(--text)]">{tVoucher('edit')}</h1>
-            <p className="text-sm text-[var(--text-muted)]">Update voucher details and availability.</p>
+            <p className="text-sm text-[var(--text-muted)]">{tPage('subtitle')}</p>
           </div>
         </div>
 

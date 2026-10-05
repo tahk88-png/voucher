@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 interface GeoMapDatum {
@@ -162,6 +163,7 @@ export function GeoMap({
   height = 500,
   className,
 }: GeoMapProps) {
+  const t = useTranslations("dsComponents.geoMap")
   const [tooltip, setTooltip] = React.useState<{
     x: number
     y: number
@@ -178,7 +180,7 @@ export function GeoMap({
         )}
         style={{ height }}
       >
-        <p className="text-sm text-[var(--text-muted)]">No data available</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("noData")}</p>
       </div>
     )
   }
@@ -191,8 +193,8 @@ export function GeoMap({
   const getColor = (code: string): string => {
     const val = valueMap.get(code)
     if (val === undefined) return "var(--border)"
-    const t = max === min ? 0.5 : (val - min) / (max - min)
-    return interpolateHex(colorRange[0], colorRange[1], t)
+    const ratio = max === min ? 0.5 : (val - min) / (max - min)
+    return interpolateHex(colorRange[0], colorRange[1], ratio)
   }
 
   return (
@@ -204,7 +206,9 @@ export function GeoMap({
         className="block"
         preserveAspectRatio="xMidYMid meet"
       >
-        {Object.entries(EUROPE_PATHS).map(([code, { d, name }]) => (
+        {Object.entries(EUROPE_PATHS).map(([code, { d }]) => {
+          const name = t(`country.${code}`)
+          return (
           <path
             key={code}
             d={d}
@@ -225,7 +229,8 @@ export function GeoMap({
           >
             <title>{name}</title>
           </path>
-        ))}
+          )
+        })}
       </svg>
 
       {/* Tooltip */}
@@ -240,7 +245,10 @@ export function GeoMap({
         >
           <p className="text-xs font-semibold text-[var(--text)]">{tooltip.name}</p>
           <p className="text-xs text-[var(--text-muted)]">
-            Value: <span className="font-medium text-[var(--text)]">{tooltip.value.toLocaleString()}</span>
+            {t.rich("value", {
+              value: tooltip.value.toLocaleString(),
+              strong: (chunks) => <span className="font-medium text-[var(--text)]">{chunks}</span>,
+            })}
           </p>
         </div>
       )}

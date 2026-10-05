@@ -2,6 +2,7 @@ import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
 
@@ -77,10 +78,12 @@ ToastAction.displayName = ToastPrimitives.Action.displayName
 const ToastClose = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Close>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Close>
->(({ className, ...props }, ref) => (
+>(({ className, ...props }, ref) => {
+  const t = useTranslations("ui")
+  return (
   <ToastPrimitives.Close
     ref={ref}
-    aria-label="Dismiss notification"
+    aria-label={t("toast.dismiss")}
     className={cn(
       "absolute right-2 top-2 rounded-[var(--r-sm)] p-1 text-[var(--text-muted)] opacity-100 transition-opacity hover:text-[var(--text)] hover:bg-[var(--surface-muted)] focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-[var(--ring)] sm:opacity-0 sm:group-hover:opacity-100",
       className
@@ -90,7 +93,8 @@ const ToastClose = React.forwardRef<
   >
     <X className="h-4 w-4" />
   </ToastPrimitives.Close>
-))
+  )
+})
 ToastClose.displayName = ToastPrimitives.Close.displayName
 
 const ToastTitle = React.forwardRef<
