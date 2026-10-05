@@ -16,9 +16,14 @@ import { ReviewList } from "@/components/reviews/review-list"
 import { auth } from "@/lib/auth"
 import { buildLocaleAlternates, DEFAULT_OG_IMAGE, SITE_NAME, getLocalePath } from "@/lib/seo"
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }))
-}
+// Rendered per request. This page used to export generateStaticParams()
+// (returning only { locale }, no id), which made Next build it as a static
+// (SSG) route; at request time something in its tree reads cookies/headers,
+// and a static render may not, so every /<locale>/campaigns/<id> answered 500
+// in production (digest DYNAMIC_SERVER_USAGE) while /campaigns/<id> worked.
+// The page shows live voucher validity and purchase counts, so dynamic is
+// what it needs anyway.
+export const dynamic = "force-dynamic"
 
 export async function generateMetadata({
   params,

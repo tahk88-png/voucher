@@ -4,21 +4,38 @@
     {
       "name": "nextjs-dev",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["scripts/dev.cjs"],
+      "runtimeArgs": [
+        "scripts/dev.cjs"
+      ],
       "port": 3000,
       "autoPort": true
     },
     {
       "name": "prisma-studio",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["db:studio"],
+      "runtimeArgs": [
+        "db:studio"
+      ],
       "port": 5555
     },
     {
       "name": "vitest-ui",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["test:ui"],
+      "runtimeArgs": [
+        "test:ui"
+      ],
       "port": 51204
+    },
+    {
+      "name": "nextjs-prod",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "start",
+        "-p",
+        "3200"
+      ],
+      "port": 3200
     }
   ]
 }
