@@ -1,5 +1,8 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
+// /m/* and /v/* have no locale prefix; the locale-aware Link would send
+// /et/... visitors to a 404. Only /campaigns routes are localized.
+import NextLink from "next/link"
 import { prisma } from "@/lib/prisma"
 import { formatCurrency, formatPercentage, safeParseJson } from "@/lib/utils"
 import { WarmButton } from "@/components/warm-button"
@@ -283,9 +286,9 @@ export default async function CampaignDetailPage({
 
             <header>
               <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-semibold text-[var(--text-muted)]">
-                <Link href={merchantHref} className="font-bold uppercase tracking-wide text-[var(--primary)] hover:underline">
+                <NextLink href={merchantHref} className="font-bold uppercase tracking-wide text-[var(--primary)] hover:underline">
                   {card.merchantName}
-                </Link>
+                </NextLink>
                 {card.merchantCity && (
                   <span className="inline-flex items-center gap-1">
                     <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
@@ -374,7 +377,7 @@ export default async function CampaignDetailPage({
                             </p>
                           </div>
                           <WarmButton asChild size="sm">
-                            <Link href={`/v/${voucher.id}`}>{t("detail.viewVoucher")}</Link>
+                            <NextLink href={`/v/${voucher.id}`}>{t("detail.viewVoucher")}</NextLink>
                           </WarmButton>
                         </div>
                       </WarmCard>
@@ -407,12 +410,12 @@ export default async function CampaignDetailPage({
                   sale (none published yet, or a demo campaign) there is nothing to buy. */}
               {onSale ? (
                 <WarmButton asChild fullWidth size="lg" className="mb-3">
-                  <Link href={`/v/${campaign.vouchers[0].id}`}>
+                  <NextLink href={`/v/${campaign.vouchers[0].id}`}>
                     <span className="inline-flex items-center gap-2">
                       <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                       {campaign.price ? t("detail.buyNow") : t("detail.getFreeVoucher")}
                     </span>
-                  </Link>
+                  </NextLink>
                 </WarmButton>
               ) : (
                 <div className="mb-3" role="status">
@@ -468,13 +471,13 @@ export default async function CampaignDetailPage({
                 )}
               </dl>
 
-              <Link
+              <NextLink
                 href={merchantHref}
                 className="mt-5 flex items-center justify-between gap-3 rounded-[var(--r-md)] border border-[var(--border)] p-3 text-sm font-semibold text-[var(--text)] transition-colors hover:bg-[var(--surface-dim)]"
               >
                 <span className="min-w-0 truncate">{t("detail.allOffersFrom", { merchant: card.merchantName })}</span>
                 <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-              </Link>
+              </NextLink>
             </WarmCard>
           </aside>
         </div>
