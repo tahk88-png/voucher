@@ -1377,7 +1377,275 @@
       "referral": {
         "title": "Rekommendationsmotor",
         "description": "Dina kunder delar erbjudanden och tar automatiskt in nya kunder"
+      },
+      "vouchers": {
+        "title": "Digitala kuponger",
+        "description": "Skapa rabattkampanjer med flexibla regler på några minuter"
+      },
+      "qr": {
+        "title": "QR-inlösning",
+        "description": "Skanna och validera i butik med bara en telefon. Ingen extra hårdvara behövs"
+      },
+      "analytics": {
+        "title": "Analys i realtid",
+        "description": "Se exakt vad varje kampanj kostar och ger. Inga gissningar"
       }
+    },
+    "howItWorks": {
+      "title": "Så fungerar det",
+      "subtitle": "Kom igång på några minuter med tre enkla steg",
+      "steps": {
+        "create": {
+          "title": "Skapa en kampanj",
+          "description": "Skapa en kupong på 2 minuter: rabatt, datumintervall, max antal användningar. Klart."
+        },
+        "share": {
+          "title": "Kunderna delar den",
+          "description": "Varje köpare får en rekommendationslänk. De delar den, tjänar kredit och tar med vänner."
+        },
+        "grow": {
+          "title": "Se den växa",
+          "description": "Följ varje rekommendationskedja, se kostnaden per ny kund och mät avkastningen."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Utforska populära kampanjer",
+      "subtitle": "Upptäck kuponger, erbjudanden och upplevelser i hela Europa",
+      "showing": "Visar {count, plural, one {# aktiv kampanj} other {# aktiva kampanjer}}.",
+      "showingWithOnSale": "Visar {count, plural, one {# aktiv kampanj} other {# aktiva kampanjer}} – {onSale} till salu nu.",
+      "emptyTitle": "Inga aktiva kampanjer just nu",
+      "emptyBody": "Erbjudanden visas här så snart handlarna publicerar dem.",
+      "viewAll": "Visa alla kampanjer"
+    },
+    "pricing": {
+      "title": "Enkel och tydlig prissättning",
+      "subtitle": "Välj den plan som passar ditt företag. Årsbetalning kostar som 10 månader.",
+      "billingPeriod": "Faktureringsperiod",
+      "monthly": "Månadsvis",
+      "annual": "Årsvis",
+      "save": "Spara 17 %",
+      "mostPopular": "Populärast",
+      "perMonth": "/mån",
+      "perYear": "{price}/år (2 månader gratis)",
+      "startTrial": "Starta gratis provperiod",
+      "footer": "Alla planer inkluderar {days} dagars gratis provperiod · {percent} % transaktionsavgift på kupongförsäljning · Avsluta när du vill",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# kupong/mån} other {# kuponger/mån}}",
+        "activeCampaigns": "{count, plural, one {# aktiv kampanj} other {# aktiva kampanjer}}",
+        "teamMembers": "{count, plural, one {# teammedlem} other {# teammedlemmar}}",
+        "qrRedemption": "Inlösen med QR-kod",
+        "basicAnalytics": "Grundläggande analys",
+        "advancedAnalytics": "Avancerad analys",
+        "customDomain": "Egen domän",
+        "promoBoosts": "Kampanjlyft (e-post + push)",
+        "unlimitedVouchers": "Obegränsat antal kuponger",
+        "unlimitedCampaigns": "Obegränsat antal kampanjer",
+        "unlimitedTeamMembers": "Obegränsat antal teammedlemmar",
+        "everythingInPlan": "Allt i {plan}"
+      }
+    },
+    "calculator": {
+      "title": "Räkna ut din avkastning",
+      "subtitle": "Dra i reglagen för att se hur mycket du kan tjäna med GiftHub",
+      "monthlyPurchases": "Kupongköp per månad",
+      "purchasesValue": "{count, plural, one {# köp} other {# köp}}",
+      "averageTicket": "Genomsnittligt köpvärde",
+      "referralRate": "Konverteringsgrad för rekommendationer",
+      "monthlyRevenue": "Intäkter per månad",
+      "referralCustomers": "Nya kunder via rekommendationer",
+      "perMonthValue": "{value}/mån",
+      "referralRevenue": "Intäkter från rekommendationer",
+      "estimatedRoi": "Beräknad avkastning",
+      "platformCost": "Plattformskostnad",
+      "platformCostValue": "{plan}/mån plan + {fees} avgifter ({percent} %) = <strong>{total}/mån</strong>",
+      "disclaimer": "Endast en illustration baserad på värdena du anger – ingen prognos."
+    },
+    "why": {
+      "title": "Därför älskar handlare GiftHub",
+      "body": "Väx din kundbas och öka intäkterna – samtidigt som du behåller dina marginaler och äger dina kundrelationer.",
+      "benefits": {
+        "referralEngine": "Inbyggd rekommendationsmotor i varje kampanj",
+        "analytics": "Analys i realtid: kostnad per kund, avkastning",
+        "qr": "QR-inlösning – ingen kassahårdvara behövs",
+        "languages": "Tillgänglig på {count, plural, one {# språk} other {# språk}}",
+        "flatPlan": "Fast månadsavgift – ingen intäktsdelning som hos Groupon",
+        "ownData": "Du äger din kunddata",
+        "fee": "{percent} % transaktionsavgift på kupongförsäljning, inga dolda kostnader"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "Dra för att jämföra",
+      "beforeTitle": "Med Groupon",
+      "afterTitle": "Med GiftHub",
+      "sliderLabel": "Jämför {before} och {after}",
+      "before": {
+        "revenueShare": "Plattformen tar en stor del av intäkterna",
+        "ownsRelationship": "Plattformen äger kundrelationen",
+        "noDataAccess": "Ingen tillgång till kunddata",
+        "raceToBottom": "Prispress mot botten",
+        "lostBrand": "Förlorad varumärkesidentitet"
+      },
+      "after": {
+        "flatFee": "Fast {minPrice}–{maxPrice}/mån + {percent} % avgift",
+        "ownData": "Du äger all kunddata",
+        "referralEngine": "Inbyggd rekommendationsmotor",
+        "yourBrand": "Ditt varumärke, dina regler",
+        "roiAnalytics": "Avkastningsanalys i realtid"
+      }
+    },
+    "faq": {
+      "title": "Vanliga frågor",
+      "subtitle": "Allt du behöver veta om GiftHub",
+      "items": {
+        "groupon": {
+          "question": "Hur skiljer sig detta från Groupon?",
+          "answer": "Erbjudandesajter som Groupon behåller oftast en stor del av varje försäljning och äger kundrelationen. Vi tar en fast månadsavgift (från {price}/mån) plus {percent} % på kupongförsäljning. Du behåller dina kunder, din data och dina marginaler."
+        },
+        "referral": {
+          "question": "Hur fungerar rekommendationssystemet?",
+          "answer": "Varje kund som köper en kupong får en unik rekommendationslänk. När de delar den och en vän köper tjänar båda kredit. Varje rekommendationskedja spåras så att du ser exakt hur nya kunder hittar dig."
+        },
+        "trial": {
+          "question": "Vad händer efter provperioden på {days} dagar?",
+          "answer": "Du väljer en plan ({starter}, {pro} eller {scale}). Om du inte prenumererar förblir dina publicerade kuponger aktiva för kunderna, men du kan inte skapa nya kampanjer förrän du prenumererar."
+        },
+        "qr": {
+          "question": "Behöver jag särskild hårdvara för QR-inlösning?",
+          "answer": "Nej. Personalen öppnar den mobila skannern i valfri mobilwebbläsare, skannar kundens QR-kod och klart. Ingen app att ladda ner, ingen kassaintegration krävs."
+        },
+        "fee": {
+          "question": "Vad är transaktionsavgiften på {percent} %?",
+          "answer": "När en kund köper en kupong via plattformen drar vi {percent} % från utbetalningen. Det finns inga andra plattformsavgifter utöver din plan."
+        }
+      }
+    },
+    "cta": {
+      "title": "Sluta hyra kunder. Bygg din egen armé.",
+      "body": "Skapa din första kampanj på några minuter. Dina kunder gör resten. {days} dagars gratis provperiod.",
+      "getStarted": "Kom igång gratis",
+      "browse": "Bläddra bland kampanjer"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Kassademo",
+      "subtitle": "Demosida för kassan",
+      "creditBalance": "Kreditsaldo",
+      "availableAmount": "{amount} tillgängligt",
+      "lockedAmount": "{amount} låst",
+      "orderSummary": "Beställningsöversikt",
+      "orderAmount": "Beställningsbelopp",
+      "creditToApply": "Kredit att tillämpa",
+      "maxAmount": "Max: {amount}",
+      "subtotal": "Delsumma",
+      "creditAppliedLine": "Tillämpad kredit",
+      "total": "Totalt",
+      "processing": "Bearbetar...",
+      "submit": "Tillämpa kredit och slutför beställningen",
+      "creditApplied": "Krediten har tillämpats! Beställningens summa: {total}",
+      "errors": {
+        "missingAmounts": "Ange både beställningsbelopp och kreditbelopp",
+        "applyFailed": "Det gick inte att tillämpa krediten"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} – tillgängliga kuponger",
+      "emptyTitle": "Inga kuponger tillgängliga",
+      "emptyDescription": "Kom tillbaka senare för nya kupongerbjudanden från {merchant}.",
+      "specialOffer": "Specialerbjudande",
+      "validUntil": "Giltig till {date}",
+      "viewAndShare": "Visa och dela"
+    },
+    "wallet": {
+      "subtitle": "Kreditplånbok",
+      "availableToUse": "Tillgängligt att använda",
+      "useCredit": "Använd kredit",
+      "noCreditToUse": "Ingen kredit att använda",
+      "locked": "Låst",
+      "lockedDescription": "Låses upp när det kopplade köpet bekräftas.",
+      "historyTitle": "Kredithistorik",
+      "historyDescription": "Transaktioner hos {merchant}",
+      "historyEmpty": "Ingen kredithistorik än.",
+      "expires": "Går ut {date}",
+      "creditStatus": {
+        "locked": "låst",
+        "available": "tillgänglig",
+        "used": "använd",
+        "expired": "utgången",
+        "reversed": "återförd"
+      }
+    },
+    "error": {
+      "title": "Något gick fel",
+      "description": "Portalen kunde inte läsas in. Ladda om sidan eller försök igen senare.",
+      "backToPortal": "Tillbaka till portalen"
+    },
+    "payments": {
+      "voucherFallback": "Kupong",
+      "status": {
+        "pending": "väntande",
+        "paid": "betald",
+        "failed": "misslyckad",
+        "refunded": "återbetald"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "tillgänglig",
+        "sold": "såld",
+        "used": "använd",
+        "cancelled": "avbokad",
+        "refunded": "återbetald"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Något gick fel",
+      "description": "Ett fel uppstod när sidan lästes in."
+    },
+    "notFound": {
+      "metaTitle": "Sidan hittades inte"
+    },
+    "header": {
+      "mainNavLabel": "Huvudmeny",
+      "signIn": "Logga in"
+    },
+    "footer": {
+      "navLabel": "Sidfot",
+      "copyright": "© {year} GiftHub. Skapat i Europa."
+    },
+    "navLinks": {
+      "campaigns": "Kampanjer",
+      "merchants": "Handlare",
+      "explore": "Utforska",
+      "search": "Sök",
+      "faq": "Vanliga frågor",
+      "contact": "Kontakt",
+      "privacy": "Integritet",
+      "terms": "Villkor",
+      "home": "Hem",
+      "about": "Om oss",
+      "vouchers": "Kuponger",
+      "shop": "Butik",
+      "rent": "Hyr"
+    },
+    "chat": {
+      "openAssistant": "Öppna den automatiska assistenten",
+      "closeAssistant": "Stäng den automatiska assistenten",
+      "dialogLabel": "GiftHubs automatiska assistent",
+      "title": "GiftHub-assistenten",
+      "subtitle": "Automatisk assistent",
+      "newChat": "Ny chatt",
+      "closeChat": "Stäng chatten",
+      "greeting": "Hej!"
     }
   }
 }

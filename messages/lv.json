@@ -1163,7 +1163,307 @@
       "titleLabel": "Virsraksts (neobligāts)",
       "titlePlaceholder": "Īsi aprakstiet savu pieredzi",
       "commentLabel": "Komentārs (neobligāts)",
-      "commentPlaceholder": "Dalieties savā pieredzē..."
+      "commentPlaceholder": "Dalieties savā pieredzē...",
+      "submit": "Iesniegt atsauksmi",
+      "submitting": "Iesniedz...",
+      "ratingRequired": "Lūdzu, izvēlieties vērtējumu",
+      "submitFailed": "Neizdevās iesniegt atsauksmi",
+      "alreadyReviewed": "Jūs jau esat novērtējis šo vienumu",
+      "signInRequired": "Piesakieties, lai rakstītu atsauksmi",
+      "thankYou": "Paldies par jūsu atsauksmi!",
+      "writeAnother": "Rakstīt vēl vienu atsauksmi"
+    },
+    "list": {
+      "sort": {
+        "newest": "Jaunākās",
+        "highest": "Augstākais vērtējums",
+        "helpful": "Noderīgākās"
+      },
+      "signInToReview": "Piesakieties, lai rakstītu atsauksmi",
+      "loadFailed": "Neizdevās ielādēt atsauksmes.",
+      "tryAgain": "Mēģināt vēlreiz",
+      "empty": "Vēl nav atsauksmju.",
+      "anonymous": "Anonīms",
+      "verified": "Pārbaudīts",
+      "helpfulButton": "Noderīgi ({count})",
+      "foundHelpful": "Noderīgi atzinuši: {count}",
+      "previous": "Iepriekšējā",
+      "next": "Nākamā",
+      "pageOf": "{current}. lapa no {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Atcelt",
+      "saving": "Saglabā…",
+      "somethingWentWrong": "Kaut kas nogāja greizi"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Nav autentificēts",
+      "unauthorized": "Nav autorizēts",
+      "tooManyAttempts": "Pārāk daudz mēģinājumu",
+      "validationFailed": "Validācija neizdevās",
+      "unexpected": "Radās neparedzēta kļūda",
+      "databaseFailed": "Datubāzes darbība neizdevās",
+      "serviceUnavailable": "Pakalpojums īslaicīgi nav pieejams",
+      "newPasswordTooShort": "Jaunajai parolei jābūt vismaz 8 rakstzīmēm",
+      "userNotFound": "Lietotājs nav atrasts",
+      "currentPasswordRequired": "Jānorāda pašreizējā parole",
+      "currentPasswordIncorrect": "Pašreizējā parole ir nepareiza",
+      "deletionUnavailable": "Konta dzēšana īslaicīgi nav pieejama. Lūdzu, sazinieties ar atbalstu.",
+      "totpAlreadyEnabledReconfigure": "2FA jau ir ieslēgta. Lai to iestatītu no jauna, vispirms to izslēdziet.",
+      "sixDigitCodeRequired": "Nepieciešams 6 ciparu kods",
+      "totpSetupMissing": "TOTP iestatīšana nav atrasta. Lūdzu, vispirms sāciet iestatīšanu.",
+      "totpAlreadyEnabled": "2FA jau ir ieslēgta",
+      "invalidSetupCode": "Nederīgs kods. Pārbaudiet autentifikatora lietotni un mēģiniet vēlreiz.",
+      "verificationCodeRequired": "Nepieciešams verifikācijas kods",
+      "totpNotEnabled": "2FA pašlaik nav ieslēgta",
+      "invalidDisableCode": "Nederīgs kods. Ievadiet pašreizējo TOTP kodu vai rezerves kodu.",
+      "passkeyOptionsFailed": "Neizdevās iegūt reģistrācijas opcijas",
+      "passkeyGenerateOptionsFailed": "Neizdevās izveidot reģistrācijas opcijas",
+      "registrationFailed": "Reģistrācija neizdevās",
+      "passkeyRegistrationFailed": "Piekļuves atslēgas reģistrācija neizdevās",
+      "passkeyChallengeExpired": "Pieprasījuma derīgums beidzies vai tas nav atrasts",
+      "verificationFailed": "Verifikācija neizdevās",
+      "passkeyVerifyFailed": "Neizdevās verificēt reģistrāciju"
+    },
+    "settings": {
+      "joinedOn": "Pievienojās {date}",
+      "joinedRecently": "Pievienojās nesen"
+    },
+    "profileForm": {
+      "nameLabel": "Vārds",
+      "namePlaceholder": "Jūsu vārds",
+      "emailLabel": "E-pasts",
+      "emailLocked": "E-pastu nevar mainīt",
+      "save": "Saglabāt izmaiņas",
+      "updated": "Profils atjaunināts",
+      "nameRequired": "Vārds ir obligāts",
+      "updateFailed": "Neizdevās atjaunināt profilu"
+    },
+    "passwordForm": {
+      "currentLabel": "Pašreizējā parole",
+      "newLabel": "Jaunā parole",
+      "setLabel": "Iestatīt paroli",
+      "confirmLabel": "Apstipriniet paroli",
+      "showPassword": "Rādīt paroli",
+      "hidePassword": "Slēpt paroli",
+      "change": "Mainīt paroli",
+      "set": "Iestatīt paroli",
+      "updated": "Parole veiksmīgi atjaunināta",
+      "tooShort": "Parolei jābūt vismaz {min} rakstzīmēm",
+      "mismatch": "Paroles nesakrīt",
+      "changeFailed": "Neizdevās nomainīt paroli"
+    },
+    "deleteDialog": {
+      "trigger": "Dzēst kontu",
+      "title": "Dzēst jūsu kontu?",
+      "description": "Šī darbība ir neatgriezeniska. Jūsu profils, sesijas un paziņojumu iestatījumi tiks dzēsti. Pirkumu vēsture tiks anonimizēta.",
+      "typeToConfirm": "Ierakstiet <strong>{word}</strong>, lai apstiprinātu:",
+      "confirm": "Dzēst neatgriezeniski",
+      "deleting": "Dzēš…",
+      "failed": "Neizdevās dzēst kontu"
+    },
+    "passkeys": {
+      "title": "Piekļuves atslēgas",
+      "description": "Piesakieties bez paroles, izmantojot ierīces pirkstu nospiedumu, sejas atpazīšanu vai PIN.",
+      "add": "Pievienot piekļuves atslēgu",
+      "namePlaceholder": "piem., “MacBook Touch ID”",
+      "addSubmit": "Pievienot",
+      "adding": "Pievieno…",
+      "unsupported": "Šī pārlūkprogramma neatbalsta piekļuves atslēgas. Izmēģiniet jaunāko Chrome, Safari vai Edge versiju.",
+      "empty": "Vēl nav piekļuves atslēgu. Pievienojiet tādu, lai pieteiktos bez paroles.",
+      "devicePasskey": "Ierīces piekļuves atslēga",
+      "passkey": "Piekļuves atslēga",
+      "added": "Pievienota {date}",
+      "lastUsed": "Pēdējoreiz izmantota {date}",
+      "synced": "Sinhronizēta",
+      "removeConfirm": "Noņemt?",
+      "remove": "Noņemt",
+      "removeLabel": "Noņemt piekļuves atslēgu",
+      "loadFailed": "Neizdevās ielādēt piekļuves atslēgas",
+      "removeFailed": "Neizdevās noņemt piekļuves atslēgu"
+    },
+    "security": {
+      "title": "Drošība",
+      "description": "Pārvaldiet divfaktoru autentifikāciju un drošības iestatījumus",
+      "loading": "Ielādē...",
+      "backToSettings": "Atpakaļ uz iestatījumiem",
+      "enabledMessage": "Divfaktoru autentifikācija ir ieslēgta!",
+      "disabledMessage": "Divfaktoru autentifikācija ir izslēgta",
+      "errors": {
+        "statusLoadFailed": "Neizdevās ielādēt divfaktoru autentifikācijas statusu",
+        "setupFailed": "Neizdevās sākt iestatīšanu",
+        "verifyFailed": "Verifikācija neizdevās",
+        "disableFailed": "Neizdevās izslēgt 2FA"
+      },
+      "status": {
+        "title": "Divfaktoru autentifikācija",
+        "enabledBody": "Jūsu konts ir aizsargāts ar autentifikatora lietotni.",
+        "disabledBody": "Pievienojiet kontam papildu drošības līmeni, pieprasot kodu no autentifikatora lietotnes.",
+        "enabled": "Ieslēgta",
+        "notEnabled": "Nav ieslēgta"
+      },
+      "setup": {
+        "title": "Iestatiet autentifikatora lietotni",
+        "description": "Izmantojiet tādu lietotni kā Google Authenticator, Authy vai 1Password, lai ģenerētu verifikācijas kodus.",
+        "enable": "Ieslēgt 2FA"
+      },
+      "scan": {
+        "title": "Noskenējiet QR kodu vai ievadiet atslēgu manuāli",
+        "qrAlt": "Noskenējiet šo QR kodu ar autentifikatora lietotni",
+        "manualKey": "Vai ievadiet šo atslēgu manuāli:",
+        "copySecret": "Kopēt atslēgu"
+      },
+      "verify": {
+        "title": "Ievadiet verifikācijas kodu",
+        "codeLabel": "6 ciparu kods no lietotnes",
+        "submit": "Verificēt un ieslēgt"
+      },
+      "backupCodes": {
+        "title": "Saglabājiet rezerves kodus",
+        "description": "Glabājiet šos kodus drošā vietā. Ja zaudēsiet piekļuvi autentifikatora lietotnei, varēsiet pieteikties ar kādu no šiem kodiem. Katru kodu var izmantot tikai vienu reizi.",
+        "copy": "Kopēt kodus",
+        "copied": "Nokopēts!",
+        "download": "Lejupielādēt",
+        "done": "Gatavs"
+      },
+      "backupFile": {
+        "title": "GiftHub - divfaktoru autentifikācijas rezerves kodi",
+        "instructions": "Saglabājiet šos kodus drošā vietā. Katru kodu var izmantot tikai vienu reizi.",
+        "generated": "Izveidoti: {date}"
+      },
+      "disable": {
+        "title": "Izslēgt divfaktoru autentifikāciju",
+        "description": "Tādējādi no jūsu konta tiks noņemts papildu drošības līmenis.",
+        "button": "Izslēgt 2FA",
+        "confirmTitle": "Apstipriniet 2FA izslēgšanu",
+        "confirmDescription": "Ievadiet pašreizējo 6 ciparu kodu no autentifikatora lietotnes vai rezerves kodu.",
+        "codeLabel": "Verifikācijas kods",
+        "codePlaceholder": "000000 vai XXXX-XXXX",
+        "confirm": "Apstiprināt izslēgšanu"
+      },
+      "quickLinks": {
+        "title": "Drošības ātrās saites",
+        "sessions": "Skatīt aktīvās sesijas",
+        "changePassword": "Mainīt paroli"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Maksājiet par rezultātiem, nevis par sasniedzamību. Tirgotāju pārvaldīta ieteikumu infrastruktūra: zīmola kuponi un veikala kredīts."
+    },
+    "error": {
+      "unexpected": "Radās neparedzēta kļūda."
+    },
+    "hero": {
+      "badge": "Kuponi un ieteikumi vietējiem uzņēmumiem",
+      "title": "Jūsu klienti pārdod <highlight>jūsu nākamajiem klientiem</highlight>",
+      "subtitle": "Veidojiet kuponu kampaņas. Jūsu klienti ar tām dalās, nopelna kredītus un atved draugus. Sekojiet katram ieteikumam. Redziet precīzas izmaksas par katru jaunu klientu.",
+      "ctaMerchant": "Sākt kā tirgotājs",
+      "ctaExplore": "Izpētīt kampaņas",
+      "noCardRequired": "Kredītkarte nav nepieciešama",
+      "freeTrial": "{days} dienu bezmaksas izmēģinājums",
+      "cancelAnytime": "Atceliet jebkurā laikā"
+    },
+    "stats": {
+      "activeCampaigns": "Aktīvās kampaņas",
+      "merchants": "Tirgotāji",
+      "processedValue": "Apstrādātā vērtība"
+    },
+    "merchantsTitle": "Tirgotāji platformā",
+    "values": {
+      "referral": {
+        "title": "Ieteikumu dzinējs",
+        "description": "Jūsu klienti dalās ar piedāvājumiem un automātiski piesaista jaunus klientus"
+      },
+      "vouchers": {
+        "title": "Digitālie kuponi",
+        "description": "Izveidojiet atlaižu kampaņas ar elastīgiem noteikumiem dažu minūšu laikā"
+      },
+      "qr": {
+        "title": "QR izmantošana",
+        "description": "Skenējiet un pārbaudiet veikalā tikai ar tālruni. Papildu aparatūra nav vajadzīga"
+      },
+      "analytics": {
+        "title": "Reāllaika analītika",
+        "description": "Redziet precīzi, cik katra kampaņa maksā un ko tā atnes. Bez minējumiem"
+      }
+    },
+    "howItWorks": {
+      "title": "Kā tas darbojas",
+      "subtitle": "Sāciet dažu minūšu laikā ar vienkāršu trīs soļu procesu",
+      "steps": {
+        "create": {
+          "title": "Izveidojiet kampaņu",
+          "description": "Iestatiet kuponu 2 minūtēs: atlaide, datumu diapazons, maksimālais lietojumu skaits. Gatavs."
+        },
+        "share": {
+          "title": "Klienti ar to dalās",
+          "description": "Katrs pircējs saņem ieteikuma saiti. Viņi ar to dalās, nopelna kredītu un atved draugus."
+        },
+        "grow": {
+          "title": "Vērojiet izaugsmi",
+          "description": "Sekojiet katrai ieteikumu ķēdei, redziet izmaksas par jaunu klientu un mēriet ROI."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Izpētiet populārākās kampaņas",
+      "subtitle": "Atklājiet kuponus, piedāvājumus un pieredzes visā Eiropā",
+      "showing": "Rāda {count, plural, zero {# aktīvu kampaņu} one {# aktīvu kampaņu} other {# aktīvas kampaņas}}.",
+      "showingWithOnSale": "Rāda {count, plural, zero {# aktīvu kampaņu} one {# aktīvu kampaņu} other {# aktīvas kampaņas}} — {onSale} jau pārdošanā.",
+      "emptyTitle": "Pašlaik nav aktīvu kampaņu",
+      "emptyBody": "Piedāvājumi šeit parādās, tiklīdz tirgotāji tos publicē.",
+      "viewAll": "Skatīt visas kampaņas"
+    },
+    "pricing": {
+      "title": "Vienkārša, caurskatāma cenu politika",
+      "subtitle": "Izvēlieties plānu, kas atbilst jūsu uzņēmumam. Gada norēķins maksā kā 10 mēneši.",
+      "billingPeriod": "Norēķinu periods",
+      "monthly": "Mēneša",
+      "annual": "Gada",
+      "save": "Ietaupiet 17%",
+      "mostPopular": "Populārākais",
+      "perMonth": "/mēn.",
+      "perYear": "{price}/gadā (2 mēneši bez maksas)",
+      "startTrial": "Sākt bezmaksas izmēģinājumu",
+      "footer": "Visi plāni ietver {days} dienu bezmaksas izmēģinājumu · {percent}% komisija par kuponu pārdošanu · Atceliet jebkurā laikā",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, zero {# kuponu mēnesī} one {# kupons mēnesī} other {# kuponi mēnesī}}",
+        "activeCampaigns": "{count, plural, zero {# aktīvu kampaņu} one {# aktīva kampaņa} other {# aktīvas kampaņas}}",
+        "teamMembers": "{count, plural, zero {# komandas locekļu} one {# komandas loceklis} other {# komandas locekļi}}",
+        "qrRedemption": "Izmantošana ar QR kodu",
+        "basicAnalytics": "Pamata analītika",
+        "advancedAnalytics": "Paplašināta analītika",
+        "customDomain": "Pielāgots domēns",
+        "promoBoosts": "Reklāmas pastiprinājumi (e-pasts + push)",
+        "unlimitedVouchers": "Neierobežoti kuponi",
+        "unlimitedCampaigns": "Neierobežotas kampaņas",
+        "unlimitedTeamMembers": "Neierobežoti komandas locekļi",
+        "everythingInPlan": "Viss, kas ir {plan}"
+      }
+    },
+    "calculator": {
+      "title": "Aprēķiniet savu ROI",
+      "subtitle": "Velciet slīdņus, lai redzētu, cik jūs varētu nopelnīt ar GiftHub",
+      "monthlyPurchases": "Kuponu pirkumi mēnesī",
+      "purchasesValue": "{count, plural, zero {# pirkumu} one {# pirkums} other {# pirkumi}}",
+      "averageTicket": "Vidējā pirkuma vērtība",
+      "referralRate": "Ieteikumu konversijas līmenis",
+      "monthlyRevenue": "Ieņēmumi mēnesī",
+      "referralCustomers": "Jauni klienti no ieteikumiem",
+      "perMonthValue": "{value}/mēn.",
+      "referralRevenue": "Ieņēmumi no ieteikumiem",
+      "estimatedRoi": "Aptuvenais ROI",
+      "platformCost": "Platformas izmaksas",
+      "platformCostValue": "{plan}/mēn. plāns + {fees} komisijas ({percent}%) = <strong>{total}/mēn.</strong>"
     }
   }
 }
