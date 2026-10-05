@@ -27,6 +27,22 @@ builds and publishes `ghcr.io/tahk88-png/voucher-platform:<tag>`.
   `noindex`. The live sitemap listed all eight "NÄIDIS" sample campaigns in
   every locale, inviting search engines to index them as real offers.
 
+### Fixed (live-site crawl)
+A crawl of every URL in the live sitemap found only 38 of 350 answering 200;
+default-language pages had no failures, every failure was localized.
+- Every campaign page in a non-default language (`/<locale>/campaigns/<id>`)
+  answered **500** (`DYNAMIC_SERVER_USAGE`): the page exported
+  `generateStaticParams()` (returning only `{ locale }`), so it was built as a
+  static route, and its render reads request data. It is now `force-dynamic`.
+  Reproduced and verified with a local production build.
+- The sitemap no longer lists `/<locale>` roots (they redirect to `/`) or
+  `/<locale>/m/…` and `/<locale>/v/…` (those pages exist only unprefixed).
+
+### Safety
+- `prisma/seed.ts` refuses to run when `NODE_ENV=production` unless
+  `SEED_ALLOW_PRODUCTION=yes`: it deletes data first and creates accounts whose
+  passwords are published in `DEMO_USERS.md`, including a platform admin.
+
 ## [1.1.2] - 2026-09-26
 
 ### Changed

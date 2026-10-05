@@ -56,8 +56,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   }
 
+  // Only URLs that actually exist. Under /[locale] there are just the campaign
+  // list and campaign pages: `/<locale>` itself redirects to `/`, and the
+  // merchant (/m) and voucher (/v) pages exist only without a locale prefix.
+  // The sitemap used to prefix everything with every locale, so for each of
+  // the non-default locales it listed a redirect plus a 404 for every merchant
+  // and voucher.
   for (const locale of routing.locales) {
+    const isDefaultLocale = locale === routing.defaultLocale
+
     for (const path of staticPaths) {
+      if (path === "/" && !isDefaultLocale) continue
       entries.push({
         url: toAbsoluteUrl(getLocalePath(locale, path)),
         lastModified: now,
@@ -75,9 +84,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
     }
 
+    if (!isDefaultLocale) continue
+
     for (const merchant of merchants) {
       entries.push({
-        url: toAbsoluteUrl(getLocalePath(locale, `/m/${merchant.slug}`)),
+        url: toAbsoluteUrl(`/m/${merchant.slug}`),
         lastModified: merchant.updatedAt,
         changeFrequency: "weekly",
         priority: 0.6,
@@ -88,7 +99,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       entries.push({
         // Public voucher route is /v/[id] (there is no /vouchers/[id] page) —
         // the old path 404'd for every voucher × locale in the sitemap.
-        url: toAbsoluteUrl(getLocalePath(locale, `/v/${voucher.id}`)),
+        url: toAbsoluteUrl(`/v/${voucher.id}`),
         lastModified: voucher.updatedAt,
         changeFrequency: "daily",
         priority: 0.5,

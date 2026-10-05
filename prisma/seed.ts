@@ -5,7 +5,28 @@ import { hashPassword } from "../lib/passwords"
 
 const prisma = new PrismaClient()
 
+/**
+ * The seed is DEVELOPMENT data. It deletes rows first (12 deleteMany calls,
+ * including the whole gift catalog) and creates accounts whose passwords are
+ * published in DEMO_USERS.md — including a platform admin. Running it against
+ * a production database would wipe data and open an admin login to anyone.
+ * The production image sets NODE_ENV=production, so refuse there unless the
+ * operator explicitly opts in. (For sample content on a live site, use
+ * scripts/demo-content.cjs, which is non-destructive and creates no logins.)
+ */
+function refuseInProduction() {
+  if (process.env.NODE_ENV === "production" && process.env.SEED_ALLOW_PRODUCTION !== "yes") {
+    console.error(
+      "Refusing to seed: NODE_ENV=production. This seed deletes data and creates accounts with " +
+        "publicly documented passwords. Use scripts/demo-content.cjs for sample content, or set " +
+        "SEED_ALLOW_PRODUCTION=yes if this really is a disposable database.",
+    )
+    process.exit(1)
+  }
+}
+
 async function main() {
+  refuseInProduction()
   console.log("Seeding database...")
 
   await prisma.merchant.deleteMany({
