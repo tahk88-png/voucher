@@ -25,7 +25,7 @@
   },
   "nav": {
     "home": "Avaleht",
-    "dashboard": "Dashboard",
+    "dashboard": "Töölaud",
     "vouchers": "Kupongid",
     "campaigns": "Kampaaniad",
     "events": "Üritused",
@@ -5008,7 +5008,7 @@
       "save": "Salvesta",
       "loading": "Meeskonnaliikmete laadimine...",
       "loadFailed": "Meeskonnaliikmete laadimine ebaõnnestus",
-      "empty": "Meeskonnaliikmeid veel pole. Kutsu ülal oma esimene liige.",
+      "empty": "Meeskonnaliikmeid veel pole. Kutsu oma esimene liige ülalt.",
       "columns": {
         "member": "Liige",
         "role": "Roll",
@@ -5049,7 +5049,7 @@
         "opened": "Avatud",
         "openedHint": "Vaadatud või lunastatud",
         "redeemed": "Lunastatud",
-        "redeemedHint": "Konverteerunud soovitused",
+        "redeemedHint": "Lunastuseni jõudnud soovitused",
         "conversionRate": "Konversioonimäär",
         "conversionRateHint": "Lunastatud / kokku"
       },
@@ -5116,7 +5116,7 @@
         "buttonUrl": "Nupu URL",
         "dividerHint": "Horisontaalne eraldusjoon",
         "voucherTitle": "Kupongi pealkiri",
-        "voucherValue": "Väärtus (nt 20% SOODSAMALT)",
+        "voucherValue": "Väärtus (nt −20%)",
         "voucherCode": "Kood (nt SAVE20)",
         "voucherExpiry": "Kehtivus (nt 31.12.2026)"
       },
@@ -5167,7 +5167,7 @@
     },
     "apiKeys": {
       "title": "API-võtmed",
-      "subtitle": "Halda API-võtmeid, et pääseda oma kaupmehe andmetele ligi programmiliselt",
+      "subtitle": "Halda API-võtmeid, millega pääsed oma kaupmehe andmetele programmiliselt ligi",
       "createKey": "Loo võti",
       "createdNotice": "API-võti loodud! Kopeeri see kohe — seda ei näidata enam uuesti.",
       "copyKey": "Kopeeri võti",
@@ -5212,7 +5212,7 @@
         "customerRead": "Klientide lugemine",
         "analyticsRead": "Analüütika lugemine",
         "eventRead": "Ürituste lugemine",
-        "eventCheckin": "Üritustele registreerimine"
+        "eventCheckin": "Ürituste sisseregistreerimine"
       }
     },
     "webhooks": {
@@ -5250,7 +5250,7 @@
       "testDelivered": "Test edastatud! Olek: {status}",
       "testFailed": "Test ebaõnnestus: {error}",
       "statusCode": "Olek {status}",
-      "testSendFailed": "Testwebhooki saatmine ebaõnnestus",
+      "testSendFailed": "Test-webhooki saatmine ebaõnnestus",
       "loadDeliveriesFailed": "Saatmiste laadimine ebaõnnestus"
     }
   }
