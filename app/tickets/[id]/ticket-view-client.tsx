@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { WarmCard } from '@/components/warm-card';
+import { useTranslations } from 'next-intl';
 
 interface TicketViewClientProps {
   ticket: {
@@ -35,6 +36,7 @@ export default function TicketViewClient({
   brandColors,
   isMerchantStaff,
 }: TicketViewClientProps) {
+  const t = useTranslations('purchase');
   const canRedeem = ticket.status === 'sold' && !ticket.usedAt && isMerchantStaff;
 
   return (
@@ -42,28 +44,31 @@ export default function TicketViewClient({
       <WarmCard padding="lg" className="bg-white">
         <div className="flex flex-col gap-3">
           <div>
-            <h2 className="text-lg font-semibold text-[#2D2721]">QR code</h2>
-            <p className="text-sm text-[#6B5744]">Show this QR code at the event entrance</p>
+            <h2 className="text-lg font-semibold text-[#2D2721]">{t('ticket.qrTitle')}</h2>
+            <p className="text-sm text-[#6B5744]">{t('ticket.qrDescription')}</p>
           </div>
           <div className="flex flex-col items-center gap-4">
             {qrCodeDataUrl ? (
               <div className="p-4 bg-white rounded-2xl border border-[rgba(139,115,85,0.15)] shadow-warm-sm">
                 <Image
                   src={qrCodeDataUrl}
-                  alt="Ticket QR code"
+                  alt={t('ticket.qrAlt')}
                   width={200}
                   height={200}
                   className="w-full h-auto"
                 />
               </div>
             ) : (
-              <p className="text-sm text-[#8B7355]">QR code not available</p>
+              <p className="text-sm text-[#8B7355]">{t('ticket.qrUnavailable')}</p>
             )}
             <p className="text-sm text-[#6B5744] text-center">
-              Ticket number: <strong className="text-[#2D2721]">{ticket.ticketNumber}</strong>
+              {t.rich('ticket.ticketNumber', {
+                number: ticket.ticketNumber,
+                strong: (chunks) => <strong className="text-[#2D2721]">{chunks}</strong>,
+              })}
             </p>
             {ticket.status === 'used' && (
-              <p className="text-sm font-semibold text-[#2D2721]">Ticket has been used</p>
+              <p className="text-sm font-semibold text-[#2D2721]">{t('ticket.used')}</p>
             )}
           </div>
         </div>
@@ -72,39 +77,39 @@ export default function TicketViewClient({
       <WarmCard padding="lg" className="bg-white">
         <div className="flex flex-col gap-4">
           <div>
-            <h2 className="text-lg font-semibold text-[#2D2721]">Ticket details</h2>
-            <p className="text-sm text-[#6B5744]">Important information about your ticket</p>
+            <h2 className="text-lg font-semibold text-[#2D2721]">{t('ticket.detailsTitle')}</h2>
+            <p className="text-sm text-[#6B5744]">{t('ticket.detailsDescription')}</p>
           </div>
           <div className="space-y-4 text-sm">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Event</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.event')}</p>
               <p className="text-lg font-semibold text-[#2D2721]">{ticket.event.name}</p>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Date & Time</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.dateTime')}</p>
               <p className="text-lg font-semibold text-[#2D2721]">
                 {new Date(ticket.event.eventDate).toLocaleString()}
               </p>
             </div>
             {ticket.event.location && (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Location</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.location')}</p>
                 <p className="text-lg font-semibold text-[#2D2721]">{ticket.event.location}</p>
               </div>
             )}
             {ticket.purchase?.attendeeName && (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Attendee</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.attendee')}</p>
                 <p className="text-lg font-semibold text-[#2D2721]">{ticket.purchase.attendeeName}</p>
               </div>
             )}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Status</p>
-              <p className="text-lg font-semibold capitalize text-[#2D2721]">{ticket.status}</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.status')}</p>
+              <p className="text-lg font-semibold capitalize text-[#2D2721]">{t.has(`ticketStatus.${ticket.status}`) ? t(`ticketStatus.${ticket.status}`) : ticket.status}</p>
             </div>
             {ticket.usedAt && (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Used At</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.usedAt')}</p>
                 <p className="text-lg font-semibold text-[#2D2721]">
                   {new Date(ticket.usedAt).toLocaleString()}
                 </p>
@@ -113,7 +118,7 @@ export default function TicketViewClient({
             {canRedeem && (
               <div className="pt-4 border-t border-[rgba(139,115,85,0.15)]">
                 <p className="text-sm text-[#6B5744]">
-                  As merchant staff, you can redeem this ticket at the event.
+                  {t('ticket.staffCanRedeem')}
                 </p>
               </div>
             )}

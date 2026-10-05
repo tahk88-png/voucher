@@ -17,6 +17,33 @@ const ACTION_LABELS: Record<string, string> = {
   'api_key.revoked': 'API key revoked',
 };
 
+/**
+ * Message keys (merchantTeam.auditLog.actions.*) for actions the UI translates.
+ * Actions not listed here fall back to formatAuditAction().
+ */
+export const AUDIT_ACTION_MESSAGE_KEYS: Record<string, string> = {
+  'voucher.created': 'voucherCreated',
+  'voucher.updated': 'voucherUpdated',
+  'voucher.published': 'voucherPublished',
+  'vouchers.generated': 'vouchersGenerated',
+  'campaign.created': 'campaignCreated',
+  'campaign.updated': 'campaignUpdated',
+  'member.invited': 'memberInvited',
+  'member.removed': 'memberRemoved',
+  'member.role_changed': 'memberRoleChanged',
+  'api_key.created': 'apiKeyCreated',
+  'api_key.revoked': 'apiKeyRevoked',
+  'api_key.updated': 'apiKeyUpdated',
+  'event.created': 'eventCreated',
+  'event.updated': 'eventUpdated',
+  'event.published': 'eventPublished',
+  'merchant.updated': 'merchantUpdated',
+  'review.replied': 'reviewReplied',
+  'settings.update': 'settingsUpdate',
+  'settings.view': 'settingsView',
+  'ticket.redeemed': 'ticketRedeemed',
+};
+
 export function formatAuditAction(action: string): string {
   if (ACTION_LABELS[action]) return ACTION_LABELS[action];
   const words = action
@@ -27,27 +54,45 @@ export function formatAuditAction(action: string): string {
   return words ? words.charAt(0).toUpperCase() + words.slice(1) : action;
 }
 
-const RESOURCE_KEYS: Array<[string, string]> = [
-  ['voucherId', 'Voucher'],
-  ['campaignId', 'Campaign'],
-  ['giftCardId', 'Gift card'],
-  ['eventId', 'Event'],
-  ['memberId', 'Team member'],
-  ['apiKeyId', 'API key'],
-  ['webhookId', 'Webhook'],
-  ['merchantId', 'Merchant'],
-  ['userId', 'User'],
+// [payload key, English label, stable kind (merchantTeam.auditLog.resources.*)]
+const RESOURCE_KEYS: Array<[string, string, string]> = [
+  ['voucherId', 'Voucher', 'voucher'],
+  ['campaignId', 'Campaign', 'campaign'],
+  ['giftCardId', 'Gift card', 'giftCard'],
+  ['eventId', 'Event', 'event'],
+  ['memberId', 'Team member', 'teamMember'],
+  ['apiKeyId', 'API key', 'apiKey'],
+  ['webhookId', 'Webhook', 'webhook'],
+  ['merchantId', 'Merchant', 'merchant'],
+  ['userId', 'User', 'user'],
 ];
+
+// resourceType column value -> stable kind (merchantTeam.auditLog.resources.*)
+const RESOURCE_TYPE_KINDS: Record<string, string> = {
+  voucher: 'voucher',
+  campaign: 'campaign',
+  gift_card: 'giftCard',
+  event: 'event',
+  member: 'member',
+  api_key: 'apiKey',
+  webhook: 'webhook',
+  merchant: 'merchant',
+  user: 'user',
+  review: 'review',
+};
+
+export type AuditResource = { label: string; id: string | null; name: string | null };
 
 /**
  * Resource for an entry: the explicit resourceType/resourceId columns, or
  * (for older entries that only logged a payload) the first known *Id key.
+ * `kind` is a stable id for translating the label (null when unknown).
  */
-export function describeAuditResource(entry: {
+export function resolveAuditResource(entry: {
   resourceType?: string | null;
   resourceId?: string | null;
   payloadJson?: unknown;
-}): { label: string; id: string | null; name: string | null } | null {
+}): (AuditResource & { kind: string | null }) | null {
   let payload: Record<string, unknown> | null = null;
   if (entry.payloadJson && typeof entry.payloadJson === 'object') {
     payload = entry.payloadJson as Record<string, unknown>;
@@ -68,12 +113,28 @@ export function describeAuditResource(entry: {
 
   if (entry.resourceType) {
     const t = entry.resourceType.replace(/[._]+/g, ' ');
-    return { label: t.charAt(0).toUpperCase() + t.slice(1), id: entry.resourceId ?? null, name };
+    return {
+      label: t.charAt(0).toUpperCase() + t.slice(1),
+      id: entry.resourceId ?? null,
+      name,
+      kind: RESOURCE_TYPE_KINDS[entry.resourceType] ?? null,
+    };
   }
   if (!payload) return null;
-  for (const [key, label] of RESOURCE_KEYS) {
+  for (const [key, label, kind] of RESOURCE_KEYS) {
     const v = payload[key];
-    if (typeof v === 'string' && v) return { label, id: v, name };
+    if (typeof v === 'string' && v) return { label, id: v, name, kind };
   }
   return null;
+}
+
+/** English resource description (see resolveAuditResource). */
+export function describeAuditResource(entry: {
+  resourceType?: string | null;
+  resourceId?: string | null;
+  payloadJson?: unknown;
+}): AuditResource | null {
+  const resolved = resolveAuditResource(entry);
+  if (!resolved) return null;
+  return { label: resolved.label, id: resolved.id, name: resolved.name };
 }

@@ -49,6 +49,9 @@ export default function B2BReportsPage() {
   const params = useParams()
   const t = useTranslations("b2b.reports")
   const tc = useTranslations("common")
+  const te = useTranslations("b2b.enums")
+  const enumLabel = (group: string, value: string) =>
+    te.has(`${group}.${value}`) ? te(`${group}.${value}`) : value
   const orgId = typeof params?.orgId === "string" ? params.orgId : params?.orgId?.[0]
 
   const [tab, setTab] = useState<Tab>("redemptions")
@@ -192,7 +195,7 @@ export default function B2BReportsPage() {
                       <td className="p-2 text-[#2D2721]">{new Date(r.createdAt).toLocaleDateString()}</td>
                       <td className="p-2 text-[#2D2721]">{r.partnerOrg.name}</td>
                       <td className="p-2 text-[#2D2721]">{formatAmount(r.amountRedeemed, r.currency)}</td>
-                      <td className="p-2"><span className={`px-2 py-0.5 rounded text-xs ${r.status === "approved" ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}`}>{r.status}</span></td>
+                      <td className="p-2"><span className={`px-2 py-0.5 rounded text-xs ${r.status === "approved" ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"}`}>{enumLabel("redemptionStatus", r.status)}</span></td>
                       <td className="p-2 text-[#6B5744]">{r.locationId ?? "-"}</td>
                     </tr>
                   ))}
@@ -230,7 +233,7 @@ export default function B2BReportsPage() {
           <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
             {Object.entries(statusBreakdown).map(([status, count]) => (
               <WarmCard key={status} padding="lg" className="border border-[rgba(139,115,85,0.15)] cursor-pointer" onClick={() => setStatusFilter(status === statusFilter ? "" : status)}>
-                <div className="text-xs text-[#8B7355] uppercase">{status}</div>
+                <div className="text-xs text-[#8B7355] uppercase">{enumLabel("voucherStatus", status)}</div>
                 <div className={`text-2xl font-semibold mt-2 ${status === statusFilter ? "text-[#8B4513]" : "text-[#2D2721]"}`}>{count}</div>
               </WarmCard>
             ))}
@@ -264,9 +267,9 @@ export default function B2BReportsPage() {
                           v.status === "expired" ? "bg-yellow-100 text-yellow-800" :
                           v.status === "voided" ? "bg-red-100 text-red-800" :
                           "bg-gray-100 text-gray-800"
-                        }`}>{v.status}</span>
+                        }`}>{enumLabel("voucherStatus", v.status)}</span>
                       </td>
-                      <td className="p-2 text-[#6B5744]">{v.valueType}</td>
+                      <td className="p-2 text-[#6B5744]">{enumLabel("valueType", v.valueType)}</td>
                       <td className="p-2 text-[#2D2721]">{formatAmount(v.initialValue, v.currency)}</td>
                       <td className="p-2 text-[#2D2721]">{v.remainingValue != null ? formatAmount(v.remainingValue, v.currency) : "-"}</td>
                       <td className="p-2 text-[#2D2721]">{v.redeemedCount}</td>

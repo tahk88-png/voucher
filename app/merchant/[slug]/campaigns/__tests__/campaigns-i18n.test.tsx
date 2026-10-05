@@ -14,35 +14,8 @@ vi.mock('next/navigation', () => ({
 
 import CampaignForm, { CREDIT_LABEL, PRICE_LABEL, parseErrorKind } from '../campaign-form';
 import CampaignsListClient from '../campaigns-list-client';
-import { NextIntlClientProvider } from 'next-intl';
 import { withIntl } from '@/test-utils/intl';
 import { parseMoneyToMinor, parsePercentToBasisPoints } from '@/lib/money-input';
-import en from '@/messages/en.json';
-import et from '@/messages/et.json';
-
-type Messages = Record<string, unknown>;
-function deepMerge(base: Messages, override: Messages): Messages {
-  const out: Messages = { ...base };
-  for (const [key, value] of Object.entries(override)) {
-    const current = out[key];
-    out[key] =
-      current && typeof current === 'object' && value && typeof value === 'object' && !Array.isArray(value)
-        ? deepMerge(current as Messages, value as Messages)
-        : value;
-  }
-  return out;
-}
-
-// Estonian as the app loads it (English overlaid with et.json). withIntl(node, 'et')
-// require()s '@/messages/et.json', which the test runner's alias doesn't resolve.
-function withEstonian(node: React.ReactNode) {
-  return (
-    <NextIntlClientProvider locale="et" messages={deepMerge(en as Messages, et as Messages) as never} timeZone="UTC">
-      {node}
-    </NextIntlClientProvider>
-  );
-}
-
 const campaign = {
   id: 'cmp_1',
   name: 'Autumn brunch',
@@ -67,7 +40,7 @@ describe('CampaignForm translations', () => {
   });
 
   it('renders Estonian labels', () => {
-    const html = renderToStaticMarkup(withEstonian(<CampaignForm merchantSlug="cafe" currency="EUR" />));
+    const html = renderToStaticMarkup(withIntl(<CampaignForm merchantSlug="cafe" currency="EUR" />, 'et'));
     expect(html).toContain('Põhiandmed');
     expect(html).toContain('Loo kampaania');
     expect(html).not.toContain('Basic information');
@@ -103,7 +76,7 @@ describe('CampaignsListClient translations', () => {
 
   it('renders the Estonian empty state', () => {
     const html = renderToStaticMarkup(
-      withEstonian(<CampaignsListClient campaigns={[]} merchantSlug="cafe" currency="EUR" canCreate />),
+      withIntl(<CampaignsListClient campaigns={[]} merchantSlug="cafe" currency="EUR" canCreate />, 'et'),
     );
     expect(html).toContain('Kampaaniaid veel pole');
     expect(html).toContain('Loo oma esimene kampaania');

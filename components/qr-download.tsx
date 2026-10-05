@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { WarmButton } from '@/components/warm-button';
 import { Download } from 'lucide-react';
 import { showSuccess, showError } from '@/lib/toast-helpers';
+import { useTranslations } from 'next-intl';
 
 interface QRDownloadProps {
   qrCodeDataUrl: string;
@@ -11,6 +12,7 @@ interface QRDownloadProps {
 }
 
 export default function QRDownload({ qrCodeDataUrl, filename = 'voucher-qr' }: QRDownloadProps) {
+  const t = useTranslations('purchase');
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
@@ -31,9 +33,9 @@ export default function QRDownload({ qrCodeDataUrl, filename = 'voucher-qr' }: Q
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      showSuccess('QR code downloaded successfully!');
+      showSuccess(t('qrDownload.success'));
     } catch (error) {
-      showError('Failed to download QR code');
+      showError(t('qrDownload.failed'));
       console.error(error);
     } finally {
       setIsDownloading(false);
@@ -48,7 +50,7 @@ export default function QRDownload({ qrCodeDataUrl, filename = 'voucher-qr' }: Q
       size="sm"
     >
       <Download className="h-4 w-4 mr-2" />
-      {isDownloading ? 'Downloading...' : 'Download QR'}
+      {isDownloading ? t('qrDownload.downloading') : t('qrDownload.download')}
     </WarmButton>
   );
 }

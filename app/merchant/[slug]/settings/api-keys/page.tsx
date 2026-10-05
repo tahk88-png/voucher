@@ -10,20 +10,23 @@ import { Badge } from '@/components/ui/badge';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { showConfirm } from '@/lib/confirm-helpers';
 import { Plus, Trash2, Copy, Key, AlertTriangle } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 
 const AVAILABLE_PERMISSIONS = [
-  { value: 'voucher.read', label: 'Read Vouchers', group: 'Vouchers' },
-  { value: 'voucher.create', label: 'Create Vouchers', group: 'Vouchers' },
-  { value: 'voucher.redeem', label: 'Redeem Vouchers', group: 'Vouchers' },
-  { value: 'campaign.read', label: 'Read Campaigns', group: 'Campaigns' },
-  { value: 'campaign.create', label: 'Create Campaigns', group: 'Campaigns' },
-  { value: 'gift_card.read', label: 'Read Gift Cards', group: 'Gift Cards' },
-  { value: 'gift_card.redeem', label: 'Redeem Gift Cards', group: 'Gift Cards' },
-  { value: 'customer.read', label: 'Read Customers', group: 'Customers' },
-  { value: 'analytics.read', label: 'Read Analytics', group: 'Analytics' },
-  { value: 'event.read', label: 'Read Events', group: 'Events' },
-  { value: 'event.checkin', label: 'Check In Events', group: 'Events' },
-];
+  { value: 'voucher.read', labelKey: 'voucherRead', group: 'vouchers' },
+  { value: 'voucher.create', labelKey: 'voucherCreate', group: 'vouchers' },
+  { value: 'voucher.redeem', labelKey: 'voucherRedeem', group: 'vouchers' },
+  { value: 'campaign.read', labelKey: 'campaignRead', group: 'campaigns' },
+  { value: 'campaign.create', labelKey: 'campaignCreate', group: 'campaigns' },
+  { value: 'gift_card.read', labelKey: 'giftCardRead', group: 'giftCards' },
+  { value: 'gift_card.redeem', labelKey: 'giftCardRedeem', group: 'giftCards' },
+  { value: 'customer.read', labelKey: 'customerRead', group: 'customers' },
+  { value: 'analytics.read', labelKey: 'analyticsRead', group: 'analytics' },
+  { value: 'event.read', labelKey: 'eventRead', group: 'events' },
+  { value: 'event.checkin', labelKey: 'eventCheckin', group: 'events' },
+] as const;
+
+type PermissionGroup = (typeof AVAILABLE_PERMISSIONS)[number]['group'];
 
 interface ApiKeyItem {
   id: string;
@@ -46,6 +49,9 @@ export default function ApiKeysPage() {
   const [newPermissions, setNewPermissions] = useState<string[]>([]);
   const [creating, setCreating] = useState(false);
   const [newKeySecret, setNewKeySecret] = useState<string | null>(null);
+  const t = useTranslations('merchantTeam.apiKeys');
+  const locale = useLocale();
+  const dateLocale = locale === 'en' ? 'en-GB' : locale;
 
   const fetchKeys = useCallback(() => {
     fetch(`/api/merchant/${slug}/api-keys`)
@@ -53,9 +59,9 @@ export default function ApiKeysPage() {
       .then((data) => {
         if (Array.isArray(data)) setKeys(data);
       })
-      .catch(() => showError('Failed to load API keys'))
+      .catch(() => showError(t('loadFailed')))
       .finally(() => setLoading(false));
-  }, [slug]);
+  }, [slug, t]);
 
   useEffect(() => {
     fetchKeys();
@@ -64,7 +70,7 @@ export default function ApiKeysPage() {
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newName || newPermissions.length === 0) {
-      showError('Name and at least one permission are required');
+      showError(t('required'));
       return;
     }
     setCreating(true);
@@ -76,7 +82,7 @@ export default function ApiKeysPage() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || 'Failed to create API key');
+        throw new Error(data?.error || t('createFailed'));
       }
       const created = await res.json();
       setNewKeySecret(created.key);
@@ -84,27 +90,27 @@ export default function ApiKeysPage() {
       setNewName('');
       setNewPermissions([]);
       setShowCreate(false);
-      showSuccess('API key created');
+      showSuccess(t('created'));
     } catch (err) {
-      showError(err instanceof Error ? err.message : 'Failed to create API key');
+      showError(err instanceof Error ? err.message : t('createFailed'));
     } finally {
       setCreating(false);
     }
   };
 
   const handleRevoke = async (keyId: string, keyName: string) => {
-    showConfirm(`Revoke API key "${keyName}"? This action cannot be undone.`, async () => {
+    showConfirm(t('revokeConfirm', { name: keyName }), async () => {
       try {
         const res = await fetch(`/api/merchant/${slug}/api-keys/${keyId}`, {
           method: 'DELETE',
         });
         if (!res.ok) throw new Error();
         setKeys((prev) => prev.filter((k) => k.id !== keyId));
-        showSuccess('API key revoked');
+        showSuccess(t('revoked'));
       } catch {
-        showError('Failed to revoke API key');
+        showError(t('revokeFailed'));
       }
-    }, { confirmLabel: 'Revoke', variant: 'destructive' });
+    }, { confirmLabel: t('revoke'), variant: 'destructive' });
     return;
   };
 
@@ -116,7 +122,7 @@ export default function ApiKeysPage() {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    showSuccess('Copied to clipboard');
+    showSuccess(t('copied'));
   };
 
   // Group permissions for display
@@ -126,16 +132,16 @@ export default function ApiKeysPage() {
       groups[perm.group].push(perm);
       return groups;
     },
-    {} as Record<string, typeof AVAILABLE_PERMISSIONS>
+    {} as Record<PermissionGroup, Array<(typeof AVAILABLE_PERMISSIONS)[number]>>
   );
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">API Keys</h1>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
           <p className="text-sm text-[var(--text-muted)]">
-            Manage API keys for programmatic access to your merchant data
+            {t('subtitle')}
           </p>
         </div>
         <WarmButton
@@ -145,7 +151,7 @@ export default function ApiKeysPage() {
             setNewKeySecret(null);
           }}
         >
-          <Plus className="h-4 w-4 mr-1" /> Create Key
+          <Plus className="h-4 w-4 mr-1" /> {t('createKey')}
         </WarmButton>
       </div>
 
@@ -155,7 +161,7 @@ export default function ApiKeysPage() {
             <AlertTriangle className="h-5 w-5 text-green-700 mt-0.5 flex-shrink-0" />
             <div className="flex-1">
               <p className="text-sm font-medium text-green-800 mb-2">
-                API key created! Copy it now — it will not be shown again.
+                {t('createdNotice')}
               </p>
               <div className="flex items-center gap-2">
                 <code className="text-xs bg-[var(--surface)] px-3 py-2 rounded border flex-1 break-all font-mono">
@@ -165,6 +171,7 @@ export default function ApiKeysPage() {
                   size="sm"
                   variant="outline"
                   onClick={() => copyToClipboard(newKeySecret)}
+                  aria-label={t('copyKey')}
                 >
                   <Copy className="h-4 w-4" />
                 </WarmButton>
@@ -176,26 +183,26 @@ export default function ApiKeysPage() {
 
       {showCreate && (
         <WarmCard padding="lg" className="bg-[var(--surface)]">
-          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Create API Key</h2>
+          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t('createTitle')}</h2>
           <form onSubmit={handleCreate} className="space-y-4">
             <div>
-              <Label htmlFor="key-name">Key Name</Label>
+              <Label htmlFor="key-name">{t('keyName')}</Label>
               <Input
                 id="key-name"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                placeholder="e.g., Production POS Integration"
+                placeholder={t('keyNamePlaceholder')}
                 required
                 className="border-[var(--border)]"
               />
             </div>
             <div>
-              <Label>Permissions</Label>
+              <Label>{t('permissions')}</Label>
               <div className="mt-2 space-y-4">
-                {Object.entries(permissionGroups).map(([group, perms]) => (
+                {(Object.entries(permissionGroups) as Array<[PermissionGroup, Array<(typeof AVAILABLE_PERMISSIONS)[number]>]>).map(([group, perms]) => (
                   <div key={group}>
                     <p className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wide mb-2">
-                      {group}
+                      {t(`groups.${group}`)}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {perms.map((perm) => (
@@ -209,7 +216,7 @@ export default function ApiKeysPage() {
                               : 'bg-[var(--surface)] text-[var(--text-muted)] border-[var(--border)] hover:border-[var(--primary)]'
                           }`}
                         >
-                          {perm.label}
+                          {t(`permissionLabels.${perm.labelKey}`)}
                         </button>
                       ))}
                     </div>
@@ -219,10 +226,10 @@ export default function ApiKeysPage() {
             </div>
             <div className="flex gap-2">
               <WarmButton type="submit" disabled={creating || !newName || newPermissions.length === 0}>
-                {creating ? 'Creating...' : 'Create API Key'}
+                {creating ? t('creating') : t('submit')}
               </WarmButton>
               <WarmButton type="button" variant="outline" onClick={() => setShowCreate(false)}>
-                Cancel
+                {t('cancel')}
               </WarmButton>
             </div>
           </form>
@@ -230,11 +237,11 @@ export default function ApiKeysPage() {
       )}
 
       {loading ? (
-        <p className="text-sm text-[var(--text-muted)]">Loading API keys...</p>
+        <p className="text-sm text-[var(--text-muted)]">{t('loading')}</p>
       ) : keys.length === 0 ? (
         <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <Key className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
-          <p className="text-[var(--text-muted)]">No API keys yet. Create one to get started.</p>
+          <p className="text-[var(--text-muted)]">{t('empty')}</p>
         </WarmCard>
       ) : (
         <div className="space-y-3">
@@ -257,13 +264,13 @@ export default function ApiKeysPage() {
                     ))}
                   </div>
                   <div className="flex items-center gap-4 mt-2 text-xs text-[var(--text-muted)]">
-                    <span>Created {new Date(apiKey.createdAt).toLocaleDateString('en-GB')}</span>
+                    <span>{t('createdOn', { date: new Date(apiKey.createdAt).toLocaleDateString(dateLocale) })}</span>
                     {apiKey.lastUsedAt && (
-                      <span>Last used {new Date(apiKey.lastUsedAt).toLocaleDateString('en-GB')}</span>
+                      <span>{t('lastUsed', { date: new Date(apiKey.lastUsedAt).toLocaleDateString(dateLocale) })}</span>
                     )}
                     {apiKey.expiresAt && (
                       <span>
-                        Expires {new Date(apiKey.expiresAt).toLocaleDateString('en-GB')}
+                        {t('expires', { date: new Date(apiKey.expiresAt).toLocaleDateString(dateLocale) })}
                       </span>
                     )}
                   </div>
@@ -272,7 +279,7 @@ export default function ApiKeysPage() {
                   size="sm"
                   variant="outline"
                   onClick={() => handleRevoke(apiKey.id, apiKey.name)}
-                  title="Revoke key"
+                  title={t('revokeKey')}
                 >
                   <Trash2 className="h-4 w-4" />
                 </WarmButton>

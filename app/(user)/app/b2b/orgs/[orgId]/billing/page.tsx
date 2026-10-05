@@ -45,6 +45,9 @@ export default async function OrgBillingPage({
     .reduce((sum, o) => sum + o.totalAmount, 0);
 
   const t = await getTranslations("b2b.billing");
+  const te = await getTranslations("b2b.enums");
+  const orderStatusLabel = (value: string) =>
+    te.has(`orderStatus.${value}`) ? te(`orderStatus.${value}`) : value;
 
   return (
     <div className="space-y-6">
@@ -93,7 +96,7 @@ export default async function OrgBillingPage({
                         order.status === "cancelled" ? "bg-red-100 text-red-700" :
                         "bg-amber-100 text-amber-700"
                       }`}>
-                        {order.status}
+                        {orderStatusLabel(order.status)}
                       </span>
                     </td>
                     <td className="py-2 text-[var(--text-muted)]">

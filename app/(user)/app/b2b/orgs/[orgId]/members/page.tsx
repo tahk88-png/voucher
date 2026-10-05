@@ -47,7 +47,7 @@ export default async function OrgMembersPage({
 
   const t = await getTranslations("b2b");
   const roleLabel = (r: string) =>
-    r in ORG_ROLE_LABELS ? t(`roles.${r as OrgRoleType}`) : r;
+    Object.prototype.hasOwnProperty.call(ORG_ROLE_LABELS, r) ? t(`roles.${r as OrgRoleType}`) : r;
 
   return (
     <div className="space-y-6">

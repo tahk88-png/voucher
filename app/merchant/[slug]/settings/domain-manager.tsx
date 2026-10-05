@@ -5,6 +5,7 @@ import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
+import { useTranslations } from "next-intl"
 
 interface DomainMapping {
   id: string
@@ -22,6 +23,7 @@ export default function DomainManager({
   initialDomains: DomainMapping[]
 }) {
   const { toast } = useToast()
+  const t = useTranslations("merchantSettings.domains")
   const [domains, setDomains] = useState<DomainMapping[]>(initialDomains)
   const [newDomain, setNewDomain] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -46,9 +48,9 @@ export default function DomainManager({
       if (!res.ok) throw new Error("Failed")
       await refresh()
       setNewDomain("")
-      toast({ title: "Domain added", description: "Verify DNS before switching traffic." })
+      toast({ title: t("addedTitle"), description: t("addedDescription") })
     } catch {
-      toast({ title: "Domain error", description: "Unable to add domain.", variant: "destructive" })
+      toast({ title: t("addErrorTitle"), description: t("addErrorDescription"), variant: "destructive" })
     } finally {
       setIsSubmitting(false)
     }
@@ -63,11 +65,11 @@ export default function DomainManager({
       })
       if (!res.ok) throw new Error("Failed")
       await refresh()
-      toast({ title: "Domain verified", description: "Tenant routing is now active." })
+      toast({ title: t("verifiedTitle"), description: t("verifiedDescription") })
     } catch {
       toast({
-        title: "Verification error",
-        description: "Unable to verify domain.",
+        title: t("verifyErrorTitle"),
+        description: t("verifyErrorDescription"),
         variant: "destructive",
       })
     }
@@ -80,9 +82,9 @@ export default function DomainManager({
       })
       if (!res.ok) throw new Error("Failed")
       await refresh()
-      toast({ title: "Domain removed" })
+      toast({ title: t("removedTitle") })
     } catch {
-      toast({ title: "Remove error", description: "Unable to remove domain.", variant: "destructive" })
+      toast({ title: t("removeErrorTitle"), description: t("removeErrorDescription"), variant: "destructive" })
     }
   }
 
@@ -90,16 +92,16 @@ export default function DomainManager({
     <WarmCard padding="lg" className="mb-4 bg-[var(--surface)] border border-[var(--border)]">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-base font-semibold text-[var(--text)]">Custom domains</h2>
+          <h2 className="text-base font-semibold text-[var(--text)]">{t("title")}</h2>
           <p className="text-sm text-[var(--text-muted)]">
-            Connect your own domain and verify it for tenant routing.
+            {t("subtitle")}
           </p>
         </div>
       </div>
       <div className="mt-4 flex flex-col sm:flex-row gap-3">
         <div className="flex-1">
           <label htmlFor="custom-domain" className="sr-only">
-            Custom domain
+            {t("inputLabel")}
           </label>
           <Input
             id="custom-domain"
@@ -109,12 +111,12 @@ export default function DomainManager({
           />
         </div>
         <WarmButton onClick={addDomain} disabled={isSubmitting}>
-          {isSubmitting ? "Adding..." : "Add domain"}
+          {isSubmitting ? t("adding") : t("add")}
         </WarmButton>
       </div>
       <div className="mt-4 space-y-3">
         {domains.length === 0 ? (
-          <p className="text-sm text-[var(--text-muted)]">No domains configured.</p>
+          <p className="text-sm text-[var(--text-muted)]">{t("empty")}</p>
         ) : (
           domains.map((domain) => (
             <div
@@ -123,7 +125,14 @@ export default function DomainManager({
             >
               <div>
                 <p className="text-sm font-semibold text-[var(--text)]">{domain.domain}</p>
-                <p className="text-xs text-[var(--text-muted)]">Status: {domain.status}</p>
+                <p className="text-xs text-[var(--text-muted)]">
+                  {t("statusLine", {
+                    status:
+                      domain.status === "pending" || domain.status === "verified"
+                        ? t(`statusValue.${domain.status}`)
+                        : domain.status,
+                  })}
+                </p>
                 {domain.verificationToken && domain.status !== "verified" ? (
                   <p className="text-xs text-[var(--text-muted)]">
                     TXT: _vouchr.{domain.domain} = vouchr-verification={domain.verificationToken}
@@ -133,11 +142,11 @@ export default function DomainManager({
               <div className="flex flex-wrap gap-2">
                 {domain.status !== "verified" ? (
                   <WarmButton size="sm" onClick={() => verifyDomain(domain.domain)}>
-                    Verify
+                    {t("verify")}
                   </WarmButton>
                 ) : null}
                 <WarmButton size="sm" variant="outline" onClick={() => removeDomain(domain.domain)}>
-                  Remove
+                  {t("remove")}
                 </WarmButton>
               </div>
             </div>

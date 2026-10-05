@@ -4,6 +4,23 @@ import { useState } from 'react';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslations } from 'next-intl';
+
+// Category keys with translated label/description in merchantSettings.notifications.category.
+// Unknown keys fall back to the label/description supplied by the server.
+const TRANSLATED_CATEGORY_KEYS = [
+  'orders',
+  'payouts',
+  'fraud_alerts',
+  'campaign_updates',
+  'weekly_digest',
+  'product_updates',
+] as const;
+type TranslatedCategoryKey = (typeof TRANSLATED_CATEGORY_KEYS)[number];
+
+function isTranslatedCategoryKey(key: string): key is TranslatedCategoryKey {
+  return (TRANSLATED_CATEGORY_KEYS as readonly string[]).includes(key);
+}
 
 interface Category {
   key: string;
@@ -23,6 +40,7 @@ export default function NotificationPreferencesForm({
   initialPreferences: Record<string, boolean>;
 }) {
   const { toast } = useToast();
+  const t = useTranslations('merchantSettings.notifications');
   const [prefs, setPrefs] = useState<Record<string, boolean>>(initialPreferences);
   const [saving, setSaving] = useState(false);
   const [dirty, setDirty] = useState(false);
@@ -52,11 +70,11 @@ export default function NotificationPreferencesForm({
       const data = await res.json();
       setPrefs(data.preferences);
       setDirty(false);
-      toast({ title: 'Preferences saved' });
+      toast({ title: t('savedTitle') });
     } catch {
       toast({
-        title: 'Save failed',
-        description: 'Could not update your notification preferences.',
+        title: t('saveFailedTitle'),
+        description: t('saveFailedDescription'),
         variant: 'destructive',
       });
     } finally {
@@ -69,6 +87,10 @@ export default function NotificationPreferencesForm({
       <ul className="space-y-4">
         {categories.map((cat) => {
           const enabled = !!prefs[cat.key];
+          const label = isTranslatedCategoryKey(cat.key) ? t(`category.${cat.key}.label`) : cat.label;
+          const description = isTranslatedCategoryKey(cat.key)
+            ? t(`category.${cat.key}.description`)
+            : cat.description;
           return (
             <li
               key={cat.key}
@@ -76,17 +98,17 @@ export default function NotificationPreferencesForm({
             >
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <p className="text-sm font-semibold text-[var(--text)]">{cat.label}</p>
+                  <p className="text-sm font-semibold text-[var(--text)]">{label}</p>
                   {cat.required ? (
                     <span className="text-[10px] uppercase tracking-wide text-amber-700 bg-amber-50 border border-amber-200 rounded px-1.5 py-0.5">
-                      Required
+                      {t('required')}
                     </span>
                   ) : null}
                 </div>
-                <p className="text-xs text-[var(--text-muted)] mt-1">{cat.description}</p>
+                <p className="text-xs text-[var(--text-muted)] mt-1">{description}</p>
               </div>
               <label className="inline-flex items-center cursor-pointer select-none">
-                <span className="sr-only">Toggle {cat.label}</span>
+                <span className="sr-only">{t('toggle', { label })}</span>
                 <input
                   type="checkbox"
                   className="sr-only peer"
@@ -116,10 +138,10 @@ export default function NotificationPreferencesForm({
 
       <div className="mt-6 flex items-center justify-end gap-3">
         <span className="text-xs text-[var(--text-muted)]">
-          {dirty ? 'Unsaved changes' : 'All changes saved'}
+          {dirty ? t('unsaved') : t('allSaved')}
         </span>
         <WarmButton onClick={save} disabled={!dirty || saving}>
-          {saving ? 'Saving…' : 'Save preferences'}
+          {saving ? t('saving') : t('save')}
         </WarmButton>
       </div>
     </WarmCard>

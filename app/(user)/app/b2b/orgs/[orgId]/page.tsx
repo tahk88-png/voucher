@@ -45,6 +45,9 @@ export default function B2BOrgDetailPage() {
   const params = useParams()
   const t = useTranslations("b2b.workspace")
   const tc = useTranslations("common")
+  const te = useTranslations("b2b.enums")
+  const enumLabel = (group: string, value: string) =>
+    te.has(`${group}.${value}`) ? te(`${group}.${value}`) : value
   const orgId = typeof params?.orgId === "string" ? params.orgId : params?.orgId?.[0]
 
   const [org, setOrg] = useState<OrgItem | null>(null)
@@ -314,7 +317,7 @@ export default function B2BOrgDetailPage() {
                   <div>
                     <div className="font-medium text-[#2D2721]">{campaign.name}</div>
                     <div className="text-xs text-[#8B7355]">
-                      {campaign.status} &bull; {campaign.valueType} &bull; {campaign.valueAmount} {campaign.currency}
+                      {enumLabel("campaignStatus", campaign.status)} &bull; {enumLabel("valueType", campaign.valueType)} &bull; {campaign.valueAmount} {campaign.currency}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -348,7 +351,7 @@ export default function B2BOrgDetailPage() {
               <div key={voucher.id} className="flex items-center justify-between text-sm">
                 <div>
                   <div className="font-medium text-[#2D2721]">{voucher.code}</div>
-                  <div className="text-xs text-[#8B7355]">{voucher.status}</div>
+                  <div className="text-xs text-[#8B7355]">{enumLabel("voucherStatus", voucher.status)}</div>
                 </div>
                 <div className="text-[#6B5744]">
                   {voucher.remainingValueAmount ?? voucher.initialValueAmount}
@@ -365,7 +368,7 @@ export default function B2BOrgDetailPage() {
               <div key={order.id} className="flex items-center justify-between text-sm">
                 <div>
                   <div className="font-medium text-[#2D2721]">{order.id.slice(0, 8)}</div>
-                  <div className="text-xs text-[#8B7355]">{order.status}</div>
+                  <div className="text-xs text-[#8B7355]">{enumLabel("orderStatus", order.status)}</div>
                 </div>
                 <div className="text-[#6B5744]">
                   {order.totalAmount} {order.currency}

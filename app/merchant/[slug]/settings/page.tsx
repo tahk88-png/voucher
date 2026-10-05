@@ -1,5 +1,10 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Merchant Settings', noIndex: true });
+import { getLocale, getTranslations } from 'next-intl/server';
+
+export async function generateMetadata() {
+  const t = await getTranslations('merchantSettings.page');
+  return pageMetadata({ title: t('metaTitle'), noIndex: true });
+}
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
@@ -13,7 +18,6 @@ import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import BrandProfileEditor from './brand-profile-editor';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { getTranslations } from 'next-intl/server';
 import { ManageBillingButton } from '@/components/billing-actions';
 import PlanSelector from '@/components/billing/plan-selector';
 import DomainManager from './domain-manager';
@@ -41,6 +45,9 @@ export default async function SettingsPage({
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
 
   const t = await getTranslations('nav');
+  const tp = await getTranslations('merchantSettings.page');
+  const locale = await getLocale();
+  const displayLocale = locale === 'et' ? 'et-EE' : 'en-GB';
 
   const brandColors = safeParseJson(merchant.brandColorsJson) as {
     primary?: string;
@@ -50,13 +57,13 @@ export default async function SettingsPage({
 
   const billing = await getMerchantBillingStatus(merchant.id);
   const dateFmt: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
-  const trialEndsAt = billing.trialEndsAt ? billing.trialEndsAt.toLocaleDateString('en-GB', dateFmt) : null;
+  const trialEndsAt = billing.trialEndsAt ? billing.trialEndsAt.toLocaleDateString(displayLocale, dateFmt) : null;
   const periodEndsAt = billing.currentPeriodEnd
-    ? billing.currentPeriodEnd.toLocaleDateString('en-GB', dateFmt)
+    ? billing.currentPeriodEnd.toLocaleDateString(displayLocale, dateFmt)
     : null;
   let countryName = merchant.country;
   try {
-    countryName = new Intl.DisplayNames(['en-GB'], { type: 'region' }).of(merchant.country.toUpperCase()) ?? merchant.country;
+    countryName = new Intl.DisplayNames([displayLocale], { type: 'region' }).of(merchant.country.toUpperCase()) ?? merchant.country;
   } catch {
     // Not an ISO region code: show it as stored.
   }
@@ -65,10 +72,10 @@ export default async function SettingsPage({
     : 0;
   // billing.active is also true during a trial, so check the trial first.
   const billingStatusLabel = billing.inTrial
-    ? `Free trial \u2014 ${trialDaysLeft} day${trialDaysLeft !== 1 ? 's' : ''} remaining`
+    ? tp('trialStatus', { days: trialDaysLeft })
     : billing.active
-      ? 'Active'
-      : 'Inactive';
+      ? tp('statusActive')
+      : tp('statusInactive');
 
   const domains = await prisma.domainMapping.findMany({
     where: { merchantId: merchant.id },
@@ -95,29 +102,29 @@ export default async function SettingsPage({
 
         <WarmCard padding="lg" className="mb-4 bg-[var(--surface)] border border-[var(--border)]">
           <div>
-            <h2 className="text-base font-semibold text-[var(--text)]">Merchant information</h2>
-            <p className="text-sm text-[var(--text-muted)]">Basic merchant details</p>
+            <h2 className="text-base font-semibold text-[var(--text)]">{tp('infoTitle')}</h2>
+            <p className="text-sm text-[var(--text-muted)]">{tp('infoSubtitle')}</p>
           </div>
           <div className="space-y-4 mt-4">
             <div>
-              <p className="text-sm font-medium text-[var(--text)]">Name</p>
+              <p className="text-sm font-medium text-[var(--text)]">{tp('name')}</p>
               <p className="text-[var(--text-muted)]">{merchant.name}</p>
             </div>
             <div>
-              <p className="text-sm font-medium text-[var(--text)]">Slug</p>
+              <p className="text-sm font-medium text-[var(--text)]">{tp('slug')}</p>
               <p className="text-[var(--text-muted)]">{merchant.slug}</p>
             </div>
             <div>
-              <p className="text-sm font-medium text-[var(--text)]">Country</p>
+              <p className="text-sm font-medium text-[var(--text)]">{tp('country')}</p>
               <p className="text-[var(--text-muted)]">{countryName}</p>
             </div>
             <div>
-              <p className="text-sm font-medium text-[var(--text)]">Default currency</p>
+              <p className="text-sm font-medium text-[var(--text)]">{tp('defaultCurrency')}</p>
               <p className="text-[var(--text-muted)]">{merchant.defaultCurrency}</p>
             </div>
             {merchant.website && (
               <div>
-                <p className="text-sm font-medium text-[var(--text)]">Website</p>
+                <p className="text-sm font-medium text-[var(--text)]">{tp('website')}</p>
                 <p className="text-[var(--text-muted)]">
                   <a
                     href={merchant.website}
@@ -132,7 +139,7 @@ export default async function SettingsPage({
             )}
             {merchant.supportEmail && (
               <div>
-                <p className="text-sm font-medium text-[var(--text)]">Support email</p>
+                <p className="text-sm font-medium text-[var(--text)]">{tp('supportEmail')}</p>
                 <p className="text-[var(--text-muted)]">
                   <a
                     href={`mailto:${merchant.supportEmail}`}
@@ -147,7 +154,7 @@ export default async function SettingsPage({
           {!merchant.onboardedAt && (
             <div className="mt-4">
               <WarmButton asChild>
-                <Link href={`/merchant/${slug}/onboarding`}>Complete onboarding</Link>
+                <Link href={`/merchant/${slug}/onboarding`}>{tp('completeOnboarding')}</Link>
               </WarmButton>
             </div>
           )}
@@ -155,30 +162,30 @@ export default async function SettingsPage({
 
         <WarmCard padding="lg" className="mb-4 bg-[var(--surface)] border border-[var(--border)]">
           <div>
-            <h2 className="text-base font-semibold text-[var(--text)]">Billing</h2>
+            <h2 className="text-base font-semibold text-[var(--text)]">{tp('billingTitle')}</h2>
             <p className="text-sm text-[var(--text-muted)]">
-              14-day free trial, then plans from &euro;19/month. 5% transaction fee on voucher sales.
+              {tp('billingSubtitle')}
             </p>
           </div>
           <div className="space-y-4 mt-4">
             <div className="flex flex-wrap gap-4">
               <div>
-                <p className="text-sm font-medium text-[var(--text)]">Status</p>
+                <p className="text-sm font-medium text-[var(--text)]">{tp('status')}</p>
                 <p className="text-[var(--text-muted)]">{billingStatusLabel}</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-[var(--text)]">Current plan</p>
+                <p className="text-sm font-medium text-[var(--text)]">{tp('currentPlan')}</p>
                 <p className="text-[var(--text-muted)]">{billing.plan.label}</p>
               </div>
               {trialEndsAt && billing.inTrial ? (
                 <div>
-                  <p className="text-sm font-medium text-[var(--text)]">Trial ends</p>
+                  <p className="text-sm font-medium text-[var(--text)]">{tp('trialEnds')}</p>
                   <p className="text-[var(--text-muted)]">{trialEndsAt}</p>
                 </div>
               ) : null}
               {periodEndsAt && billing.active ? (
                 <div>
-                  <p className="text-sm font-medium text-[var(--text)]">Current period ends</p>
+                  <p className="text-sm font-medium text-[var(--text)]">{tp('periodEnds')}</p>
                   <p className="text-[var(--text-muted)]">{periodEndsAt}</p>
                 </div>
               ) : null}
@@ -206,18 +213,18 @@ export default async function SettingsPage({
                 <Banknote className="h-5 w-5 text-[var(--text-faint)]" />
               </div>
               <div>
-                <h2 className="text-base font-semibold text-[var(--text)]">Payouts</h2>
+                <h2 className="text-base font-semibold text-[var(--text)]">{tp('payoutsTitle')}</h2>
                 <p className="text-sm text-[var(--text-muted)]">
                   {merchant.payoutsEnabled
-                    ? 'Stripe account connected and enabled'
+                    ? tp('payoutsEnabled')
                     : merchant.stripeAccountId
-                      ? 'Onboarding in progress — finish to enable payouts'
-                      : 'Connect Stripe to receive voucher sale payouts'}
+                      ? tp('payoutsInProgress')
+                      : tp('payoutsNotConnected')}
                 </p>
               </div>
             </div>
             <WarmButton asChild size="sm" variant="outline">
-              <Link href={`/merchant/${slug}/settings/payouts`}>Manage</Link>
+              <Link href={`/merchant/${slug}/settings/payouts`}>{tp('manage')}</Link>
             </WarmButton>
           </div>
         </WarmCard>
@@ -229,12 +236,12 @@ export default async function SettingsPage({
                 <Webhook className="h-5 w-5 text-[var(--text-faint)]" />
               </div>
               <div>
-                <h2 className="text-base font-semibold text-[var(--text)]">Webhooks</h2>
-                <p className="text-sm text-[var(--text-muted)]">Receive real-time event notifications via HTTP</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">{tp('webhooksTitle')}</h2>
+                <p className="text-sm text-[var(--text-muted)]">{tp('webhooksSubtitle')}</p>
               </div>
             </div>
             <WarmButton asChild size="sm" variant="outline">
-              <Link href={`/merchant/${slug}/settings/webhooks`}>Manage</Link>
+              <Link href={`/merchant/${slug}/settings/webhooks`}>{tp('manage')}</Link>
             </WarmButton>
           </div>
         </WarmCard>
@@ -246,14 +253,14 @@ export default async function SettingsPage({
                 <Bell className="h-5 w-5 text-[var(--text-faint)]" />
               </div>
               <div>
-                <h2 className="text-base font-semibold text-[var(--text)]">Notifications</h2>
+                <h2 className="text-base font-semibold text-[var(--text)]">{tp('notificationsTitle')}</h2>
                 <p className="text-sm text-[var(--text-muted)]">
-                  Choose which email categories you receive as a team member.
+                  {tp('notificationsSubtitle')}
                 </p>
               </div>
             </div>
             <WarmButton asChild size="sm" variant="outline">
-              <Link href={`/merchant/${slug}/settings/notifications`}>Manage</Link>
+              <Link href={`/merchant/${slug}/settings/notifications`}>{tp('manage')}</Link>
             </WarmButton>
           </div>
         </WarmCard>

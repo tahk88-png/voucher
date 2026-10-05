@@ -37,6 +37,8 @@ export default function VoucherClient({
   const [isPurchasing, setIsPurchasing] = useState(false);
   const t = useTranslations('payment');
   const tVoucher = useTranslations('voucher');
+  const tReferral = useTranslations('referral');
+  const tPurchase = useTranslations('purchase');
 
   const brandBg = brandColors?.background || design?.backgroundColor || '#FFFBF5';
   const brandPrimary = brandColors?.primary || design?.primaryColor || '#2D2721';
@@ -103,7 +105,7 @@ export default function VoucherClient({
       try {
         await navigator.share({
           title: design?.headline || tVoucher('specialOffer'),
-          text: `${tVoucher('checkOutVoucher')} ${voucher.merchant.name}`,
+          text: tPurchase('voucherPage.shareText', { merchant: voucher.merchant.name }),
           url,
         });
         showSuccess(tVoucher('linkShared'));
@@ -121,9 +123,6 @@ export default function VoucherClient({
   const getVoucherValue = () => formatVoucherValue(voucher);
 
   const headline = design?.headline || tVoucher('specialOffer');
-  const limitText = voucher.usageLimitTotal
-    ? ` - ${tVoucher('firstUses', { count: voucher.usageLimitTotal })}`
-    : '';
 
   const scope = `voucher-theme-${String(voucher.id).replace(/\\s/g, '')}`;
 
@@ -141,7 +140,7 @@ export default function VoucherClient({
           {voucher.merchant.brandLogoUrl ? (
             <Image
               src={voucher.merchant.brandLogoUrl}
-              alt={`${voucher.merchant.name} logo`}
+              alt={tPurchase('logoAlt', { name: voucher.merchant.name })}
               width={160}
               height={40}
               className="h-10 w-auto object-contain mb-4"
@@ -159,8 +158,12 @@ export default function VoucherClient({
 
         <div className="p-6 pt-5 space-y-5">
           <p className="text-sm text-[#6B5744]">
-            {tVoucher('validUntil')} {formatDisplayDate(voucher.validTo)}
-            {limitText}
+            {voucher.usageLimitTotal
+              ? tPurchase('validUntilWithLimit', {
+                  date: formatDisplayDate(voucher.validTo),
+                  count: voucher.usageLimitTotal,
+                })
+              : tPurchase('validUntil', { date: formatDisplayDate(voucher.validTo) })}
           </p>
 
           <div className="flex items-center justify-between gap-3 py-2 px-3 rounded-lg bg-[#FFF9ED] border border-[rgba(139,115,85,0.15)]">
@@ -170,7 +173,7 @@ export default function VoucherClient({
               variant="ghost"
               onClick={handleGet}
               className="shrink-0 h-9"
-              aria-label="Copy voucher code"
+              aria-label={tPurchase('voucherPage.copyCode')}
             >
               {got ? <span className="text-[#9DB5A5] text-sm font-medium">{t('codeCopied')}</span> : <Copy className="h-4 w-4 text-[#8B7355]" />}
             </WarmButton>
@@ -181,7 +184,7 @@ export default function VoucherClient({
               <div className="rounded-[14px] border border-[rgba(139,115,85,0.15)] bg-white p-3 shadow-warm-sm">
                 <Image
                   src={qrCodeDataUrl}
-                  alt={`QR code for voucher ${voucherCode}`}
+                  alt={tPurchase('voucherPage.qrAlt', { code: voucherCode })}
                   width={152}
                   height={152}
                   className="rounded-md"
@@ -230,11 +233,11 @@ export default function VoucherClient({
           </div>
 
           <div className="pt-4 border-t border-[rgba(139,115,85,0.15)]">
-            <p className="text-sm font-medium mb-3 text-center text-[#6B5744]">Share on social media</p>
+            <p className="text-sm font-medium mb-3 text-center text-[#6B5744]">{tReferral('shareOnSocialMedia')}</p>
             <SocialShare
               url={typeof window !== 'undefined' ? window.location.href : ''}
               title={headline}
-              description={`${getVoucherValue()} off at ${voucher.merchant.name}`}
+              description={tPurchase('offAtMerchant', { value: getVoucherValue(), merchant: voucher.merchant.name })}
               variant="outline"
               size="sm"
               className="justify-center"
@@ -247,7 +250,7 @@ export default function VoucherClient({
               onClick={() => window.print()}
               className="text-sm text-[#8B7355] hover:text-[#2D2721] underline-offset-2 hover:underline"
             >
-              Print voucher
+              {tPurchase('voucherPage.print')}
             </button>
           </p>
         </div>

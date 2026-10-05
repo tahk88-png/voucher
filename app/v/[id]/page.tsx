@@ -10,6 +10,7 @@ import { generateProductStructuredData } from '@/lib/seo/structured-data';
 import VoucherClient from './voucher-client';
 import { formatVoucherCode } from '@/lib/voucher-code';
 import QRCode from 'qrcode';
+import { getTranslations } from 'next-intl/server';
 
 async function generateQRCode(text: string): Promise<string> {
   try {
@@ -21,6 +22,8 @@ async function generateQRCode(text: string): Promise<string> {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
+  const t = await getTranslations('purchase');
+  const tVoucher = await getTranslations('voucher');
   const voucher = await prisma.voucher.findUnique({
     where: { id },
     include: {
@@ -30,14 +33,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   if (!voucher || voucher.status !== 'published') {
     return {
-      title: 'Voucher Not Found',
-      description: 'The voucher you are looking for could not be found.',
+      title: t('voucherPage.notFoundTitle'),
+      description: t('voucherPage.notFoundDescription'),
     };
   }
 
   const design = safeParseJson<Record<string, any>>(voucher.designJson);
-  const title = (design?.headline as string) || 'Special Offer';
-  const description = (design?.subHeadline as string) || 'Exclusive voucher offer';
+  const title = (design?.headline as string) || tVoucher('specialOffer');
+  const description = (design?.subHeadline as string) || t('voucherPage.descriptionFallback');
   const image = (design?.image as string) || undefined;
 
   return generateVoucherMetadata({
@@ -53,6 +56,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function VoucherPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const t = await getTranslations('purchase');
+  const tVoucher = await getTranslations('voucher');
   const voucher = await prisma.voucher.findUnique({
     where: { id },
     include: { 
@@ -88,8 +93,8 @@ export default async function VoucherPage({ params }: { params: Promise<{ id: st
   const qrCodeDataUrl = await generateQRCode(voucherUrl);
 
   const jsonLd = generateProductStructuredData(
-    (design?.headline as string) || 'Special Offer',
-    (design?.subHeadline as string) || 'Exclusive voucher offer',
+    (design?.headline as string) || tVoucher('specialOffer'),
+    (design?.subHeadline as string) || t('voucherPage.descriptionFallback'),
     voucher.value,
     voucher.currency,
     voucher.merchant.name,

@@ -19,8 +19,8 @@ function deepMerge(base: Messages, override: Messages): Messages {
 /** Messages as the app loads them (i18n.ts): English, overlaid with the locale's own. */
 export function loadMessages(locale = 'en'): Messages {
   if (locale === 'en') return en as Messages;
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const localized = require(`@/messages/${locale}.json`) as Messages;
+  // Relative path: vitest does not apply the "@" alias inside require().
+  const localized = require(`../messages/${locale}.json`) as Messages;
   return deepMerge(en as Messages, localized);
 }
 
@@ -31,10 +31,8 @@ export function loadMessages(locale = 'en'): Messages {
  *   renderToStaticMarkup(withIntl(<Footer />, 'et'))
  */
 export function withIntl(node: React.ReactNode, locale = 'en'): React.ReactElement {
-  return React.createElement(NextIntlClientProvider, {
-    locale,
-    messages: loadMessages(locale) as never,
-    timeZone: 'UTC',
-    children: node,
-  });
+  const props = { locale, messages: loadMessages(locale), timeZone: 'UTC' } as unknown as React.ComponentProps<
+    typeof NextIntlClientProvider
+  >;
+  return React.createElement(NextIntlClientProvider, props, node);
 }

@@ -16,6 +16,8 @@ interface OrgItem {
 
 export default function B2BOrgsPage() {
   const t = useTranslations("b2b")
+  const enumLabel = (group: string, value: string) =>
+    t.has(`enums.${group}.${value}`) ? t(`enums.${group}.${value}`) : value
   const [orgs, setOrgs] = useState<OrgItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -65,7 +67,7 @@ export default function B2BOrgsPage() {
               <div>
                 <h2 className="text-xl font-semibold text-[#2D2721]">{org.name}</h2>
                 <div className="text-xs text-[#8B7355] uppercase tracking-wide mt-1">
-                  {org.type} · {org.status} · {t.has(`roles.${org.role}`) ? t(`roles.${org.role}`) : org.role}
+                  {enumLabel("orgType", org.type)} · {enumLabel("orgStatus", org.status)} · {t.has(`roles.${org.role}`) ? t(`roles.${org.role}`) : org.role}
                 </div>
               </div>
               <WarmButton asChild size="sm">

@@ -2337,6 +2337,48 @@
         "expires": "Expires"
       },
       "noVouchers": "No vouchers found."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "buyer",
+        "partner": "partner",
+        "platform_owner": "platform_owner"
+      },
+      "orgStatus": {
+        "active": "active",
+        "suspended": "suspended"
+      },
+      "campaignStatus": {
+        "draft": "draft",
+        "active": "active",
+        "paused": "paused",
+        "archived": "archived"
+      },
+      "voucherStatus": {
+        "created": "created",
+        "issued": "issued",
+        "active": "active",
+        "redeemed": "redeemed",
+        "expired": "expired",
+        "voided": "voided"
+      },
+      "valueType": {
+        "fixed": "fixed",
+        "percent": "percent"
+      },
+      "orderStatus": {
+        "draft": "draft",
+        "submitted": "submitted",
+        "invoiced": "invoiced",
+        "paid": "paid",
+        "cancelled": "cancelled",
+        "refunded": "refunded"
+      },
+      "redemptionStatus": {
+        "approved": "approved",
+        "reversed": "reversed",
+        "failed": "failed"
+      }
     }
   },
   "merchantEvents": {
@@ -4560,6 +4602,640 @@
       "persona": "Who is it for?",
       "budget": "Budget",
       "budgetUnder": "Under {amount}"
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Website",
+      "supportEmail": "Support email",
+      "logoUrl": "Logo URL",
+      "primaryColor": "Primary color",
+      "secondaryColor": "Secondary color",
+      "backgroundColor": "Background color",
+      "primaryColorHex": "Primary color hex value",
+      "secondaryColorHex": "Secondary color hex value",
+      "backgroundColorHex": "Background color hex value",
+      "saving": "Saving..."
+    },
+    "page": {
+      "metaTitle": "Merchant Settings",
+      "infoTitle": "Merchant information",
+      "infoSubtitle": "Basic merchant details",
+      "name": "Name",
+      "slug": "Slug",
+      "country": "Country",
+      "defaultCurrency": "Default currency",
+      "website": "Website",
+      "supportEmail": "Support email",
+      "completeOnboarding": "Complete onboarding",
+      "billingTitle": "Billing",
+      "billingSubtitle": "14-day free trial, then plans from €19/month. 5% transaction fee on voucher sales.",
+      "status": "Status",
+      "trialStatus": "Free trial — {days, plural, one {# day} other {# days}} remaining",
+      "statusActive": "Active",
+      "statusInactive": "Inactive",
+      "currentPlan": "Current plan",
+      "trialEnds": "Trial ends",
+      "periodEnds": "Current period ends",
+      "manage": "Manage",
+      "payoutsTitle": "Payouts",
+      "payoutsEnabled": "Stripe account connected and enabled",
+      "payoutsInProgress": "Onboarding in progress — finish to enable payouts",
+      "payoutsNotConnected": "Connect Stripe to receive voucher sale payouts",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "Receive real-time event notifications via HTTP",
+      "notificationsTitle": "Notifications",
+      "notificationsSubtitle": "Choose which email categories you receive as a team member."
+    },
+    "brandProfile": {
+      "title": "Brand profile",
+      "subtitle": "Customize your brand colors, logo, and contact information.",
+      "updated": "Brand profile updated successfully!",
+      "updateFailed": "Failed to update brand profile",
+      "save": "Save changes"
+    },
+    "domains": {
+      "title": "Custom domains",
+      "subtitle": "Connect your own domain and verify it for tenant routing.",
+      "inputLabel": "Custom domain",
+      "adding": "Adding...",
+      "add": "Add domain",
+      "empty": "No domains configured.",
+      "statusLine": "Status: {status}",
+      "statusValue": {
+        "pending": "pending",
+        "verified": "verified"
+      },
+      "verify": "Verify",
+      "remove": "Remove",
+      "addedTitle": "Domain added",
+      "addedDescription": "Verify DNS before switching traffic.",
+      "addErrorTitle": "Domain error",
+      "addErrorDescription": "Unable to add domain.",
+      "verifiedTitle": "Domain verified",
+      "verifiedDescription": "Tenant routing is now active.",
+      "verifyErrorTitle": "Verification error",
+      "verifyErrorDescription": "Unable to verify domain.",
+      "removedTitle": "Domain removed",
+      "removeErrorTitle": "Remove error",
+      "removeErrorDescription": "Unable to remove domain."
+    },
+    "notifications": {
+      "metaTitle": "Notification preferences",
+      "title": "Notification preferences",
+      "intro": "Control which email categories arrive in your inbox as a member of <name>{merchantName}</name>. Preferences are personal — each team member manages their own.",
+      "required": "Required",
+      "toggle": "Toggle {label}",
+      "unsaved": "Unsaved changes",
+      "allSaved": "All changes saved",
+      "saving": "Saving…",
+      "save": "Save preferences",
+      "savedTitle": "Preferences saved",
+      "saveFailedTitle": "Save failed",
+      "saveFailedDescription": "Could not update your notification preferences.",
+      "category": {
+        "orders": {
+          "label": "New orders & redemptions",
+          "description": "Email when a voucher is purchased, redeemed, or gifted."
+        },
+        "payouts": {
+          "label": "Payouts",
+          "description": "Stripe payout arrivals, failures, and holds."
+        },
+        "fraud_alerts": {
+          "label": "Fraud & security alerts",
+          "description": "Unusual redemption patterns, chargebacks, team login anomalies. Cannot be disabled."
+        },
+        "campaign_updates": {
+          "label": "Campaign lifecycle",
+          "description": "Campaign published, expiring in 7 days, ended."
+        },
+        "weekly_digest": {
+          "label": "Weekly performance digest",
+          "description": "Monday recap of last week’s revenue, redemptions, and top vouchers."
+        },
+        "product_updates": {
+          "label": "Product news from GiftHub",
+          "description": "New features, roadmap, occasional tips. No more than 1/month."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Merchant Payouts",
+      "title": "Payouts",
+      "intro": "Connect a Stripe account so voucher sales are paid directly to your bank. We take a 5% platform fee; the rest is transferred to your connected account automatically at checkout time.",
+      "stripeAccount": "Stripe account",
+      "capabilityState": "Capability state",
+      "accountStatus": {
+        "pending": "pending",
+        "restricted": "restricted",
+        "enabled": "enabled",
+        "disabled": "disabled"
+      },
+      "backToSettings": "Back to settings",
+      "howTitle": "How payouts work",
+      "how1": "Customers pay on the platform checkout. We collect the full amount and hold it on Stripe's side.",
+      "how2": "When a payment goes through, Stripe sends the sale price minus our 5% fee straight to your payout account.",
+      "how3": "Stripe then pays that money into your bank account on the schedule you choose in your Stripe payout settings (usually daily, a couple of days after the sale).",
+      "how4": "Chargebacks and refunds net out of your next payout; the admin team can place a manual hold on your balance if we detect fraud.",
+      "badge": {
+        "enabled": {
+          "label": "Payouts enabled",
+          "description": "Funds from voucher sales are transferred to your bank account by Stripe on the scheduled payout cadence."
+        },
+        "restricted": {
+          "label": "Additional info required",
+          "description": "Stripe needs more information before payouts can be enabled. Open the onboarding link below to continue."
+        },
+        "disabled": {
+          "label": "Payouts disabled",
+          "description": "Stripe has disabled payouts on this account. Open the Stripe dashboard to resolve the outstanding requirements."
+        },
+        "notConnected": {
+          "label": "Not connected",
+          "description": "You haven't connected a Stripe account yet. Payouts are held until onboarding is complete — in the meantime voucher sales still process but funds stay on the platform balance."
+        }
+      },
+      "actions": {
+        "startFailed": "Failed to start Stripe onboarding",
+        "startNetworkError": "Network error starting onboarding",
+        "dashboardFailed": "Unable to open Stripe dashboard",
+        "dashboardNetworkError": "Network error opening dashboard",
+        "disconnectConfirm": "Disconnect this Stripe account? Payouts will pause until you reconnect.",
+        "disconnected": "Stripe account disconnected",
+        "disconnectFailed": "Failed to disconnect",
+        "disconnect": "Disconnect",
+        "setUp": "Set up payouts with Stripe",
+        "openDashboard": "Open Stripe dashboard",
+        "continueOnboarding": "Continue onboarding"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Failed to load merchant data.",
+      "retry": "Retry",
+      "loading": "Loading...",
+      "title": "Complete your profile",
+      "subtitle": "Set up your merchant brand profile.",
+      "basicInfo": "Basic information",
+      "merchantName": "Merchant name *",
+      "brandTitle": "Brand profile",
+      "brandSubtitle": "Customize your brand colors and logo.",
+      "updateFailed": "Failed to update merchant",
+      "submit": "Complete onboarding",
+      "skip": "Skip for now"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Share deals and earn rewards"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "An unexpected error occurred."
+    },
+    "logoAlt": "{name} logo",
+    "merchantFallback": "Merchant",
+    "validUntil": "Valid until {date}",
+    "validUntilWithLimit": "Valid until {date} - First {count, plural, one {# use} other {# uses}}",
+    "offAtMerchant": "{value} off at {merchant}",
+    "fields": {
+      "event": "Event",
+      "dateTime": "Date & Time",
+      "location": "Location",
+      "price": "Price",
+      "status": "Status",
+      "attendee": "Attendee",
+      "usedAt": "Used At"
+    },
+    "ticketStatus": {
+      "available": "Available",
+      "sold": "Sold",
+      "used": "Used",
+      "cancelled": "Cancelled",
+      "refunded": "Refunded"
+    },
+    "event": {
+      "notAvailable": "This event is not available for ticket purchase.",
+      "descriptionFallback": "Join us for this amazing event!",
+      "availableTickets": "Available Tickets",
+      "soldOut": "Sold Out",
+      "availableCount": "{count} available",
+      "terms": "Terms & Conditions",
+      "soldOutTitle": "This event is sold out",
+      "soldOutDescription": "All tickets have been purchased."
+    },
+    "eventPurchase": {
+      "title": "Purchase ticket",
+      "description": "Select a ticket and complete your purchase",
+      "selectTicket": "Select ticket",
+      "attendeeNameLabel": "Attendee name (optional)",
+      "attendeeNamePlaceholder": "Name of the person attending",
+      "attendeeEmailLabel": "Attendee email (optional)",
+      "attendeeEmailPlaceholder": "Email for ticket delivery",
+      "total": "Total",
+      "submit": "Purchase ticket",
+      "noTickets": "No tickets available at the moment.",
+      "checkBackLater": "Please check back later or contact the event organizer.",
+      "selectTicketError": "Please select a ticket",
+      "purchaseFailed": "Failed to purchase ticket"
+    },
+    "ticket": {
+      "noPermission": "You don't have permission to view this ticket.",
+      "heading": "Ticket #{number}",
+      "qrTitle": "QR code",
+      "qrDescription": "Show this QR code at the event entrance",
+      "qrAlt": "Ticket QR code",
+      "qrUnavailable": "QR code not available",
+      "ticketNumber": "Ticket number: <strong>{number}</strong>",
+      "used": "Ticket has been used",
+      "detailsTitle": "Ticket details",
+      "detailsDescription": "Important information about your ticket",
+      "staffCanRedeem": "As merchant staff, you can redeem this ticket at the event."
+    },
+    "redeem": {
+      "notFoundTitle": "Redemption not found",
+      "notFoundDescription": "The QR code is invalid or expired.",
+      "title": "Voucher redeemed",
+      "alreadyRedeemed": "This voucher was already redeemed.",
+      "confirmed": "Redemption confirmed successfully."
+    },
+    "qrCheckout": {
+      "title": "QR Checkout",
+      "completeTitle": "Checkout Complete",
+      "completeDescription": "Your purchase has been confirmed. Check your email for details.",
+      "payNow": "Pay Now",
+      "confirming": "Confirming..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Voucher Not Found",
+      "notFoundDescription": "The voucher you are looking for could not be found.",
+      "descriptionFallback": "Exclusive voucher offer",
+      "shareText": "Check out this voucher from {merchant}",
+      "copyCode": "Copy voucher code",
+      "qrAlt": "QR code for voucher {code}",
+      "print": "Print voucher"
+    },
+    "referralPage": {
+      "voucherFrom": "You got a voucher from <highlight>{name}</highlight>",
+      "qrAlt": "Redemption QR code for voucher {code}",
+      "offAtMerchantShared": "{value} off at {merchant} - Shared by a friend!"
+    },
+    "bnpl": {
+      "title": "Pay in installments",
+      "description": "Split your payment of {amount} into easy monthly installments.",
+      "perMonth": "/month",
+      "planNoInterest": "{months}x (0% interest)",
+      "planWithFee": "{months}x ({rate}% fee)",
+      "monthlyPayments": "{count, plural, one {# monthly payment} other {# monthly payments}}",
+      "total": "Total: {amount}",
+      "noExtraCost": "No extra cost",
+      "payNow": "Pay {amount} now"
+    },
+    "qrPanel": {
+      "qrAlt": "QR code",
+      "generateFailed": "Failed to generate QR code",
+      "placeholder": "QR code will appear here",
+      "generating": "Generating QR...",
+      "unavailable": "QR unavailable",
+      "hideCode": "Hide code",
+      "showCode": "Show code",
+      "expires": "Expires {date}",
+      "refreshNote": "Code refreshes every 30 seconds"
+    },
+    "qrDownload": {
+      "success": "QR code downloaded successfully!",
+      "failed": "Failed to download QR code",
+      "downloading": "Downloading...",
+      "download": "Download QR"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Audit Log",
+      "subtitle": "Track all actions performed on your merchant account",
+      "filters": "Filters",
+      "action": "Action",
+      "allActions": "All actions",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "apply": "Apply",
+      "clear": "Clear",
+      "loading": "Loading audit log...",
+      "loadFailed": "Failed to load audit log",
+      "empty": "No audit log entries found.",
+      "columns": {
+        "timestamp": "Timestamp",
+        "actor": "Actor",
+        "action": "Action",
+        "resource": "Resource",
+        "details": "Details"
+      },
+      "unknownActor": "Unknown",
+      "showing": "Showing {from}–{to} of {total}",
+      "pageOf": "Page {page} of {totalPages}",
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "actions": {
+        "voucherCreated": "Voucher created",
+        "voucherUpdated": "Voucher updated",
+        "voucherPublished": "Voucher published",
+        "vouchersGenerated": "Vouchers generated",
+        "campaignCreated": "Campaign created",
+        "campaignUpdated": "Campaign updated",
+        "memberInvited": "Team member invited",
+        "memberRemoved": "Team member removed",
+        "memberRoleChanged": "Team member role changed",
+        "apiKeyCreated": "API key created",
+        "apiKeyRevoked": "API key revoked",
+        "apiKeyUpdated": "API key updated",
+        "eventCreated": "Event created",
+        "eventUpdated": "Event updated",
+        "eventPublished": "Event published",
+        "merchantUpdated": "Merchant updated",
+        "reviewReplied": "Review replied",
+        "settingsUpdate": "Settings update",
+        "settingsView": "Settings view",
+        "ticketRedeemed": "Ticket redeemed"
+      },
+      "resources": {
+        "voucher": "Voucher",
+        "campaign": "Campaign",
+        "giftCard": "Gift card",
+        "event": "Event",
+        "member": "Member",
+        "teamMember": "Team member",
+        "apiKey": "API key",
+        "webhook": "Webhook",
+        "merchant": "Merchant",
+        "user": "User",
+        "review": "Review"
+      }
+    },
+    "roles": {
+      "admin": "Admin",
+      "adminDescription": "Full access — manage vouchers, campaigns, members, and settings",
+      "staff": "Staff",
+      "staffDescription": "Operational access — confirm redemptions and view data",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Team Members",
+      "subtitle": "Manage your team and their access levels",
+      "inviteMember": "Invite Member",
+      "inviteTitle": "Invite Team Member",
+      "emailAddress": "Email Address",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "The user must have an existing account.",
+      "role": "Role",
+      "inviting": "Inviting...",
+      "sendInvitation": "Send Invitation",
+      "cancel": "Cancel",
+      "save": "Save",
+      "loading": "Loading team members...",
+      "loadFailed": "Failed to load team members",
+      "empty": "No team members yet. Invite your first member above.",
+      "columns": {
+        "member": "Member",
+        "role": "Role",
+        "joined": "Joined",
+        "actions": "Actions"
+      },
+      "unnamed": "Unnamed",
+      "memberRole": "Member role",
+      "changeRole": "Change role",
+      "removeMember": "Remove member",
+      "inviteFailed": "Failed to invite member",
+      "invited": "Member invited successfully",
+      "updateRoleFailed": "Failed to update role",
+      "roleUpdated": "Role updated",
+      "removeConfirm": "Remove {name} from the team?",
+      "remove": "Remove",
+      "removeFailed": "Failed to remove member",
+      "removed": "Member removed"
+    },
+    "inviteForm": {
+      "title": "Invite team member",
+      "subtitle": "Add a team member by their email address.",
+      "email": "Email",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "User must have an account. If they do not have one, they need to sign up first.",
+      "role": "Role",
+      "roleHint": "Admins can manage vouchers, campaigns, and team members. Staff can confirm redemptions.",
+      "inviting": "Inviting...",
+      "submit": "Invite member",
+      "redirectingToBilling": "{message} Redirecting to billing..."
+    },
+    "referrals": {
+      "title": "Referral analytics",
+      "subtitle": "Track referral performance and rewards.",
+      "stats": {
+        "total": "Total referrals",
+        "totalHint": "All tracked referrals",
+        "opened": "Opened",
+        "openedHint": "Viewed or redeemed",
+        "redeemed": "Redeemed",
+        "redeemedHint": "Converted referrals",
+        "conversionRate": "Conversion rate",
+        "conversionRateHint": "Redeemed / total"
+      },
+      "statusBreakdown": "Status breakdown",
+      "creditsIssued": "Credits issued {amount}",
+      "noActivity": "No referral activity yet.",
+      "topReferrers": "Top referrers",
+      "topReferrersHint": "Users driving the most referrals.",
+      "noReferrals": "No referrals yet.",
+      "unknownUser": "Unknown user",
+      "referralCount": "{count, plural, one {# referral} other {# referrals}}",
+      "recent": "Recent referrals",
+      "recentHint": "Latest referrals from customers.",
+      "noRecent": "No recent referrals.",
+      "voucherFallback": "Voucher",
+      "status": {
+        "created": "Created",
+        "opened": "Opened",
+        "redeemed": "Redeemed",
+        "expired": "Expired",
+        "blocked": "Blocked"
+      }
+    },
+    "emailCampaigns": {
+      "title": "Email Campaigns",
+      "newCampaign": "New Campaign",
+      "notConfigured": "Email sending isn't set up on this platform yet. You can create and preview campaigns, but they can't be sent until an email provider is connected.",
+      "notConfiguredShort": "Email sending isn't set up on this platform yet",
+      "createTitle": "Create Campaign",
+      "campaignName": "Campaign Name",
+      "campaignNamePlaceholder": "Summer Sale Newsletter",
+      "subjectLine": "Subject Line",
+      "subjectPlaceholder": "Don't miss our summer deals!",
+      "recipients": "Recipients",
+      "recipientFilter": {
+        "all": "All customers",
+        "redeemed30d": "Redeemed in last 30 days",
+        "inactive": "Inactive customers"
+      },
+      "schedule": "Schedule (optional)",
+      "emailSections": "Email Sections",
+      "sectionTypes": {
+        "header": "Header",
+        "text": "Text",
+        "image": "Image",
+        "button": "Button",
+        "divider": "Divider",
+        "voucherCard": "Voucher"
+      },
+      "creating": "Creating...",
+      "scheduleCampaign": "Schedule Campaign",
+      "saveDraft": "Save as Draft",
+      "preview": "Preview",
+      "editor": {
+        "moveUp": "Move up",
+        "moveDown": "Move down",
+        "removeSection": "Remove section",
+        "title": "Title",
+        "subtitle": "Subtitle (optional)",
+        "textContent": "Enter text content...",
+        "imageUrl": "Image URL",
+        "altText": "Alt text",
+        "buttonLabel": "Button label",
+        "buttonUrl": "Button URL",
+        "dividerHint": "Horizontal divider line",
+        "voucherTitle": "Voucher title",
+        "voucherValue": "Value (e.g. 20% OFF)",
+        "voucherCode": "Code (e.g. SAVE20)",
+        "voucherExpiry": "Expiry (e.g. Dec 31, 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Header Title",
+        "textContent": "Text content...",
+        "imagePlaceholder": "Image placeholder",
+        "button": "Button",
+        "voucher": "Voucher",
+        "validUntil": "Valid until {date}"
+      },
+      "loading": "Loading...",
+      "empty": "No email campaigns yet",
+      "columns": {
+        "name": "Name",
+        "subject": "Subject",
+        "status": "Status",
+        "recipients": "Recipients",
+        "opens": "Opens",
+        "created": "Created",
+        "actions": "Actions"
+      },
+      "status": {
+        "draft": "draft",
+        "scheduled": "scheduled",
+        "sent": "sent"
+      },
+      "send": "Send",
+      "delete": "Delete",
+      "deleteCampaign": "Delete campaign",
+      "toasts": {
+        "missingFields": "Missing fields",
+        "missingFieldsDescription": "Name and subject are required.",
+        "created": "Campaign created",
+        "error": "Error",
+        "createFailed": "Failed to create campaign.",
+        "sendConfirm": "Are you sure you want to send this campaign now?",
+        "sendFailedStatus": "Failed to send (error {status}).",
+        "partlySent": "Campaign partly sent",
+        "partlySentDescription": "Sent to {sent} of {total} recipients. {failed, plural, one {# email} other {# emails}} could not be sent.",
+        "sent": "Campaign sent",
+        "sentDescription": "Sent to {sent, plural, one {# recipient} other {# recipients}}.",
+        "sendFailed": "Send failed",
+        "deleteConfirm": "Delete this campaign?",
+        "deleted": "Campaign deleted",
+        "deleteFailed": "Failed to delete."
+      }
+    },
+    "apiKeys": {
+      "title": "API Keys",
+      "subtitle": "Manage API keys for programmatic access to your merchant data",
+      "createKey": "Create Key",
+      "createdNotice": "API key created! Copy it now — it will not be shown again.",
+      "copyKey": "Copy key",
+      "createTitle": "Create API Key",
+      "keyName": "Key Name",
+      "keyNamePlaceholder": "e.g., Production POS Integration",
+      "permissions": "Permissions",
+      "creating": "Creating...",
+      "submit": "Create API Key",
+      "cancel": "Cancel",
+      "loading": "Loading API keys...",
+      "empty": "No API keys yet. Create one to get started.",
+      "createdOn": "Created {date}",
+      "lastUsed": "Last used {date}",
+      "expires": "Expires {date}",
+      "revokeKey": "Revoke key",
+      "loadFailed": "Failed to load API keys",
+      "required": "Name and at least one permission are required",
+      "createFailed": "Failed to create API key",
+      "created": "API key created",
+      "revokeConfirm": "Revoke API key \"{name}\"? This action cannot be undone.",
+      "revoke": "Revoke",
+      "revoked": "API key revoked",
+      "revokeFailed": "Failed to revoke API key",
+      "copied": "Copied to clipboard",
+      "groups": {
+        "vouchers": "Vouchers",
+        "campaigns": "Campaigns",
+        "giftCards": "Gift Cards",
+        "customers": "Customers",
+        "analytics": "Analytics",
+        "events": "Events"
+      },
+      "permissionLabels": {
+        "voucherRead": "Read Vouchers",
+        "voucherCreate": "Create Vouchers",
+        "voucherRedeem": "Redeem Vouchers",
+        "campaignRead": "Read Campaigns",
+        "campaignCreate": "Create Campaigns",
+        "giftCardRead": "Read Gift Cards",
+        "giftCardRedeem": "Redeem Gift Cards",
+        "customerRead": "Read Customers",
+        "analyticsRead": "Read Analytics",
+        "eventRead": "Read Events",
+        "eventCheckin": "Check In Events"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "Receive event notifications via HTTP",
+      "addWebhook": "Add Webhook",
+      "secretNotice": "Webhook secret (shown only once):",
+      "copySecret": "Copy secret",
+      "copied": "Copied!",
+      "newTitle": "New Webhook",
+      "endpointUrl": "Endpoint URL",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Events",
+      "submit": "Create Webhook",
+      "loading": "Loading...",
+      "empty": "No webhooks configured",
+      "createdOn": "Created {date}",
+      "deliveriesCount": "{count, plural, one {# delivery} other {# deliveries}}",
+      "sendTest": "Send test",
+      "viewDeliveries": "Delivery log",
+      "disable": "Disable",
+      "enable": "Enable",
+      "deleteWebhook": "Delete webhook",
+      "deliveryLog": "Delivery Log",
+      "noDeliveries": "No deliveries yet",
+      "deliveryFailed": "Failed",
+      "attempts": "{count, plural, one {# attempt} other {# attempts}}",
+      "loadFailed": "Failed to load webhooks",
+      "required": "URL and at least one event required",
+      "created": "Webhook created",
+      "createFailed": "Failed to create webhook",
+      "deleted": "Webhook deleted",
+      "deleteFailed": "Failed to delete webhook",
+      "updateFailed": "Failed to update webhook",
+      "testDelivered": "Test delivered! Status: {status}",
+      "testFailed": "Test failed: {error}",
+      "statusCode": "Status {status}",
+      "testSendFailed": "Failed to send test webhook",
+      "loadDeliveriesFailed": "Failed to load deliveries"
     }
   }
 }

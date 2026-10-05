@@ -7,9 +7,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function InviteMemberForm({ merchantSlug }: { merchantSlug: string }) {
   const router = useRouter();
+  const t = useTranslations('merchantTeam.inviteForm');
+  const tMembers = useTranslations('merchantTeam.members');
+  const tRoles = useTranslations('merchantTeam.roles');
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState<'merchant_admin' | 'merchant_staff'>('merchant_staff');
@@ -26,22 +30,22 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        const message = data?.error || 'Failed to invite member';
+        const message = data?.error || tMembers('inviteFailed');
         const upgradePath = data?.details?.upgradePath as string | undefined;
         if (res.status === 402 && upgradePath) {
-          showError(`${message} Redirecting to billing...`);
+          showError(t('redirectingToBilling', { message }));
           router.push(upgradePath);
           return;
         }
         throw new Error(message);
       }
 
-      showSuccess('Member invited successfully');
+      showSuccess(tMembers('invited'));
       setEmail('');
       setRole('merchant_staff');
       window.location.reload();
     } catch (e) {
-      showError(e instanceof Error ? e.message : 'Failed to invite member');
+      showError(e instanceof Error ? e.message : tMembers('inviteFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -50,42 +54,42 @@ export default function InviteMemberForm({ merchantSlug }: { merchantSlug: strin
   return (
     <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
       <div>
-        <h2 className="text-base font-semibold text-[var(--text)]">Invite team member</h2>
-        <p className="text-sm text-[var(--text-muted)]">Add a team member by their email address.</p>
+        <h2 className="text-base font-semibold text-[var(--text)]">{t('title')}</h2>
+        <p className="text-sm text-[var(--text-muted)]">{t('subtitle')}</p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 mt-4">
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{t('email')}</Label>
           <Input
             id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="member@example.com"
+            placeholder={t('emailPlaceholder')}
             required
             className="mt-1 border-[var(--border)]"
           />
           <p className="text-sm text-[var(--text-muted)] mt-1">
-            User must have an account. If they do not have one, they need to sign up first.
+            {t('emailHint')}
           </p>
         </div>
         <div>
-          <Label htmlFor="role">Role</Label>
+          <Label htmlFor="role">{t('role')}</Label>
           <select
             id="role"
             className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1 text-sm"
             value={role}
             onChange={(e) => setRole(e.target.value as 'merchant_admin' | 'merchant_staff')}
           >
-            <option value="merchant_staff">Staff</option>
-            <option value="merchant_admin">Admin</option>
+            <option value="merchant_staff">{tRoles('staff')}</option>
+            <option value="merchant_admin">{tRoles('admin')}</option>
           </select>
           <p className="text-sm text-[var(--text-muted)] mt-1">
-            Admins can manage vouchers, campaigns, and team members. Staff can confirm redemptions.
+            {t('roleHint')}
           </p>
         </div>
         <WarmButton type="submit" disabled={isLoading} className="w-full">
-          {isLoading ? 'Inviting...' : 'Invite member'}
+          {isLoading ? t('inviting') : t('submit')}
         </WarmButton>
       </form>
     </WarmCard>

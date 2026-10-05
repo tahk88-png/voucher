@@ -5,6 +5,7 @@ import { WarmButton } from '@/components/warm-button';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { showConfirm } from '@/lib/confirm-helpers';
 import { ExternalLink, Loader2, Link2, Unlink } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 /**
  * Client shim for the Stripe Connect buttons on the payouts settings
@@ -25,6 +26,7 @@ export default function PayoutActions({
   hasAccount: boolean;
   payoutsEnabled: boolean;
 }) {
+  const t = useTranslations('merchantSettings.payouts.actions');
   const [busy, setBusy] = useState<null | 'start' | 'dashboard' | 'disconnect'>(null);
 
   const startOnboarding = async () => {
@@ -33,14 +35,14 @@ export default function PayoutActions({
       const res = await fetch(`/api/merchant/${slug}/stripe/connect`, { method: 'POST' });
       const body = await res.json();
       if (!res.ok || !body.url) {
-        showError(body.message || 'Failed to start Stripe onboarding');
+        showError(body.message || t('startFailed'));
         return;
       }
       // Full navigation — Stripe redirects back to /api/.../connect/return
       // which re-syncs our cache and lands on this page.
       window.location.href = body.url;
     } catch {
-      showError('Network error starting onboarding');
+      showError(t('startNetworkError'));
     } finally {
       setBusy(null);
     }
@@ -52,31 +54,31 @@ export default function PayoutActions({
       const res = await fetch(`/api/merchant/${slug}/stripe/connect/dashboard`, { method: 'POST' });
       const body = await res.json();
       if (!res.ok || !body.url) {
-        showError(body.message || 'Unable to open Stripe dashboard');
+        showError(body.message || t('dashboardFailed'));
         return;
       }
       window.open(body.url, '_blank', 'noopener,noreferrer');
     } catch {
-      showError('Network error opening dashboard');
+      showError(t('dashboardNetworkError'));
     } finally {
       setBusy(null);
     }
   };
 
   const disconnect = async () => {
-    showConfirm('Disconnect this Stripe account? Payouts will pause until you reconnect.', async () => {
+    showConfirm(t('disconnectConfirm'), async () => {
       setBusy('disconnect');
       try {
         const res = await fetch(`/api/merchant/${slug}/stripe/connect`, { method: 'DELETE' });
         if (!res.ok) throw new Error();
-        showSuccess('Stripe account disconnected');
+        showSuccess(t('disconnected'));
         window.location.reload();
       } catch {
-        showError('Failed to disconnect');
+        showError(t('disconnectFailed'));
       } finally {
         setBusy(null);
       }
-    }, { confirmLabel: 'Disconnect', variant: 'destructive' });
+    }, { confirmLabel: t('disconnect'), variant: 'destructive' });
     return;
   };
 
@@ -90,7 +92,7 @@ export default function PayoutActions({
         ) : (
           <Link2 className="mr-2 h-4 w-4" />
         )}
-        Set up payouts with Stripe
+        {t('setUp')}
       </WarmButton>
     );
   }
@@ -104,7 +106,7 @@ export default function PayoutActions({
           ) : (
             <ExternalLink className="mr-2 h-4 w-4" />
           )}
-          Open Stripe dashboard
+          {t('openDashboard')}
         </WarmButton>
       ) : (
         <WarmButton onClick={startOnboarding} disabled={busy !== null}>
@@ -113,7 +115,7 @@ export default function PayoutActions({
           ) : (
             <Link2 className="mr-2 h-4 w-4" />
           )}
-          Continue onboarding
+          {t('continueOnboarding')}
         </WarmButton>
       )}
       <WarmButton onClick={disconnect} variant="outline" disabled={busy !== null}>
@@ -122,7 +124,7 @@ export default function PayoutActions({
         ) : (
           <Unlink className="mr-2 h-4 w-4" />
         )}
-        Disconnect
+        {t('disconnect')}
       </WarmButton>
     </>
   );

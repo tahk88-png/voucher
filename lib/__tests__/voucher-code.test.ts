@@ -78,7 +78,7 @@ describe('voucher display helpers', () => {
   });
 });
 
-import { describeAuditResource, formatAuditAction } from '../audit-labels';
+import { AUDIT_ACTION_MESSAGE_KEYS, describeAuditResource, formatAuditAction, resolveAuditResource } from '../audit-labels';
 
 describe('audit labels', () => {
   it('formats actions readably', () => {
@@ -93,5 +93,11 @@ describe('audit labels', () => {
       name: 'Spring',
     });
     expect(describeAuditResource({ payloadJson: null })).toBeNull();
+  });
+  it('exposes a stable kind for translating the resource label', () => {
+    expect(resolveAuditResource({ resourceType: 'api_key', resourceId: 'k1' })?.kind).toBe('apiKey');
+    expect(resolveAuditResource({ payloadJson: { memberId: 'm1' } })?.kind).toBe('teamMember');
+    expect(resolveAuditResource({ resourceType: 'something_else' })?.kind).toBeNull();
+    expect(AUDIT_ACTION_MESSAGE_KEYS['member.role_changed']).toBe('memberRoleChanged');
   });
 });

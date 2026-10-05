@@ -6,16 +6,15 @@ import { formatCurrency, safeParseJson } from '@/lib/utils';
 import { WarmCard } from '@/components/warm-card';
 import { StatsCard } from '@/components/ui/stats-card';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { CheckCircle2, Gift, TrendingUp, Users } from 'lucide-react';
 
-const statusLabel: Record<string, string> = {
-  created: 'Created',
-  opened: 'Opened',
-  redeemed: 'Redeemed',
-  expired: 'Expired',
-  blocked: 'Blocked',
-};
+const REFERRAL_STATUSES = ['created', 'opened', 'redeemed', 'expired', 'blocked'] as const;
+type ReferralStatus = (typeof REFERRAL_STATUSES)[number];
+
+function isReferralStatus(status: string): status is ReferralStatus {
+  return (REFERRAL_STATUSES as readonly string[]).includes(status);
+}
 
 const statusStyles: Record<string, string> = {
   created: 'bg-[#F2EDE3] text-[var(--text-muted)]',
@@ -43,6 +42,9 @@ export default async function ReferralsPage({ params }: { params: Promise<{ slug
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
 
   const t = await getTranslations('nav');
+  const tr = await getTranslations('merchantTeam.referrals');
+  const locale = await getLocale();
+  const statusLabel = (status: string) => (isReferralStatus(status) ? tr(`status.${status}`) : status);
 
   const [
     totalReferrals,
@@ -119,33 +121,33 @@ export default async function ReferralsPage({ params }: { params: Promise<{ slug
         />
 
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Referral analytics</h1>
-          <p className="text-sm text-[var(--text-muted)]">Track referral performance and rewards.</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{tr('title')}</h1>
+          <p className="text-sm text-[var(--text-muted)]">{tr('subtitle')}</p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatsCard
-            title="Total referrals"
+            title={tr('stats.total')}
             value={totalReferrals}
-            description="All tracked referrals"
+            description={tr('stats.totalHint')}
             icon={Users}
           />
           <StatsCard
-            title="Opened"
+            title={tr('stats.opened')}
             value={openedReferrals}
-            description="Viewed or redeemed"
+            description={tr('stats.openedHint')}
             icon={TrendingUp}
           />
           <StatsCard
-            title="Redeemed"
+            title={tr('stats.redeemed')}
             value={redeemedReferrals}
-            description="Converted referrals"
+            description={tr('stats.redeemedHint')}
             icon={CheckCircle2}
           />
           <StatsCard
-            title="Conversion rate"
+            title={tr('stats.conversionRate')}
             value={`${conversionRate}%`}
-            description="Redeemed / total"
+            description={tr('stats.conversionRateHint')}
             icon={Gift}
           />
         </div>
@@ -154,17 +156,17 @@ export default async function ReferralsPage({ params }: { params: Promise<{ slug
           <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-base font-semibold text-[var(--text)]">Status breakdown</h2>
-                <p className="text-sm text-[var(--text-muted)]">Credits issued {formatCurrency(creditsIssued, merchant.defaultCurrency)}</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">{tr('statusBreakdown')}</h2>
+                <p className="text-sm text-[var(--text-muted)]">{tr('creditsIssued', { amount: formatCurrency(creditsIssued, merchant.defaultCurrency) })}</p>
               </div>
             </div>
             {referralStats.length === 0 ? (
-              <p className="text-sm text-[var(--text-muted)]">No referral activity yet.</p>
+              <p className="text-sm text-[var(--text-muted)]">{tr('noActivity')}</p>
             ) : (
               <div className="space-y-3">
                 {referralStats.map((stat) => {
                   const pct = statusMax > 0 ? (stat._count.id / statusMax) * 100 : 0;
-                  const label = statusLabel[stat.status] || stat.status;
+                  const label = statusLabel(stat.status);
                   return (
                     <div key={stat.status}>
                       <div className="flex items-center justify-between text-sm">
@@ -184,12 +186,12 @@ export default async function ReferralsPage({ params }: { params: Promise<{ slug
           <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)] lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-base font-semibold text-[var(--text)]">Top referrers</h2>
-                <p className="text-sm text-[var(--text-muted)]">Users driving the most referrals.</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">{tr('topReferrers')}</h2>
+                <p className="text-sm text-[var(--text-muted)]">{tr('topReferrersHint')}</p>
               </div>
             </div>
             {topReferrers.length === 0 ? (
-              <p className="text-sm text-[var(--text-muted)]">No referrals yet.</p>
+              <p className="text-sm text-[var(--text-muted)]">{tr('noReferrals')}</p>
             ) : (
               <div className="space-y-3">
                 {topReferrers.map((referrer) => {
@@ -198,12 +200,12 @@ export default async function ReferralsPage({ params }: { params: Promise<{ slug
                     <div key={referrer.referrerUserId} className="flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-[var(--text)]">
-                          {user?.name || user?.email || 'Unknown user'}
+                          {user?.name || user?.email || tr('unknownUser')}
                         </p>
                         <p className="text-xs text-[var(--text-muted)]">{user?.email}</p>
                       </div>
                       <span className="text-sm font-semibold text-[var(--text)]">
-                        {referrer._count.id} referrals
+                        {tr('referralCount', { count: referrer._count.id })}
                       </span>
                     </div>
                   );
@@ -216,18 +218,18 @@ export default async function ReferralsPage({ params }: { params: Promise<{ slug
         <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-base font-semibold text-[var(--text)]">Recent referrals</h2>
-              <p className="text-sm text-[var(--text-muted)]">Latest referrals from customers.</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">{tr('recent')}</h2>
+              <p className="text-sm text-[var(--text-muted)]">{tr('recentHint')}</p>
             </div>
           </div>
           {recentReferrals.length === 0 ? (
-            <p className="text-sm text-[var(--text-muted)]">No recent referrals.</p>
+            <p className="text-sm text-[var(--text-muted)]">{tr('noRecent')}</p>
           ) : (
             <div className="space-y-3">
               {recentReferrals.map((referral) => {
                 const design = safeParseJson<{ headline?: string }>(referral.voucher?.designJson);
-                const headline = design?.headline ?? 'Voucher';
-                const label = statusLabel[referral.status] || referral.status;
+                const headline = design?.headline ?? tr('voucherFallback');
+                const label = statusLabel(referral.status);
                 const statusClass = statusStyles[referral.status] || statusStyles.created;
                 return (
                   <div
@@ -236,7 +238,7 @@ export default async function ReferralsPage({ params }: { params: Promise<{ slug
                   >
                     <div>
                       <p className="text-sm font-medium text-[var(--text)]">
-                        {referral.referrer?.name || referral.referrer?.email || 'Unknown user'}
+                        {referral.referrer?.name || referral.referrer?.email || tr('unknownUser')}
                       </p>
                       <p className="text-xs text-[var(--text-muted)]">{headline}</p>
                     </div>
@@ -245,7 +247,7 @@ export default async function ReferralsPage({ params }: { params: Promise<{ slug
                         {label}
                       </span>
                       <span className="text-xs text-[var(--text-faint)]">
-                        {new Date(referral.createdAt).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+                        {new Date(referral.createdAt).toLocaleDateString(locale, { dateStyle: 'medium' })}
                       </span>
                     </div>
                   </div>

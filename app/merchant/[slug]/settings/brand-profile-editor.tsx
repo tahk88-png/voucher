@@ -7,6 +7,7 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
+import { useTranslations } from 'next-intl';
 
 interface BrandProfileEditorProps {
   merchant: {
@@ -27,6 +28,8 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
   const router = useRouter();
   const merchantSlug = params.slug as string;
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations('merchantSettings.brandProfile');
+  const tf = useTranslations('merchantSettings.form');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,13 +56,13 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
 
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.error || 'Failed to update brand profile');
+        throw new Error(error.error || t('updateFailed'));
       }
 
-      showSuccess('Brand profile updated successfully!');
+      showSuccess(t('updated'));
       router.refresh();
     } catch (error) {
-      showError(error instanceof Error ? error.message : 'Failed to update brand profile');
+      showError(error instanceof Error ? error.message : t('updateFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -68,14 +71,14 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
   return (
     <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
       <div>
-        <h2 className="text-base font-semibold text-[var(--text)]">Brand profile</h2>
+        <h2 className="text-base font-semibold text-[var(--text)]">{t('title')}</h2>
         <p className="text-sm text-[var(--text-muted)]">
-          Customize your brand colors, logo, and contact information.
+          {t('subtitle')}
         </p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4 mt-4">
         <div>
-          <Label htmlFor="website">Website</Label>
+          <Label htmlFor="website">{tf('website')}</Label>
           <Input
             id="website"
             name="website"
@@ -86,7 +89,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
           />
         </div>
         <div>
-          <Label htmlFor="supportEmail">Support email</Label>
+          <Label htmlFor="supportEmail">{tf('supportEmail')}</Label>
           <Input
             id="supportEmail"
             name="supportEmail"
@@ -97,7 +100,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
           />
         </div>
         <div>
-          <Label htmlFor="brandLogoUrl">Logo URL</Label>
+          <Label htmlFor="brandLogoUrl">{tf('logoUrl')}</Label>
           <Input
             id="brandLogoUrl"
             name="brandLogoUrl"
@@ -108,7 +111,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
           />
         </div>
         <div>
-          <Label htmlFor="primaryColor">Primary color</Label>
+          <Label htmlFor="primaryColor">{tf('primaryColor')}</Label>
           <div className="flex gap-2">
             <Input
               id="primaryColor"
@@ -122,7 +125,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
               defaultValue={brandColors?.primary || '#FFC857'}
               placeholder="#FFC857"
               className="flex-1 border-[var(--border)]"
-              aria-label="Primary color hex value"
+              aria-label={tf('primaryColorHex')}
               onChange={(e) => {
                 const colorInput = document.getElementById('primaryColor') as HTMLInputElement;
                 if (colorInput) colorInput.value = e.target.value;
@@ -131,7 +134,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
           </div>
         </div>
         <div>
-          <Label htmlFor="secondaryColor">Secondary color</Label>
+          <Label htmlFor="secondaryColor">{tf('secondaryColor')}</Label>
           <div className="flex gap-2">
             <Input
               id="secondaryColor"
@@ -145,7 +148,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
               defaultValue={brandColors?.secondary || '#71717a'}
               placeholder="#71717a"
               className="flex-1 border-[var(--border)]"
-              aria-label="Secondary color hex value"
+              aria-label={tf('secondaryColorHex')}
               onChange={(e) => {
                 const colorInput = document.getElementById('secondaryColor') as HTMLInputElement;
                 if (colorInput) colorInput.value = e.target.value;
@@ -154,7 +157,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
           </div>
         </div>
         <div>
-          <Label htmlFor="backgroundColor">Background color</Label>
+          <Label htmlFor="backgroundColor">{tf('backgroundColor')}</Label>
           <div className="flex gap-2">
             <Input
               id="backgroundColor"
@@ -168,7 +171,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
               defaultValue={brandColors?.background || '#fafafa'}
               placeholder="#fafafa"
               className="flex-1 border-[var(--border)]"
-              aria-label="Background color hex value"
+              aria-label={tf('backgroundColorHex')}
               onChange={(e) => {
                 const colorInput = document.getElementById('backgroundColor') as HTMLInputElement;
                 if (colorInput) colorInput.value = e.target.value;
@@ -177,7 +180,7 @@ export default function BrandProfileEditor({ merchant, brandColors }: BrandProfi
           </div>
         </div>
         <WarmButton type="submit" disabled={isLoading}>
-          {isLoading ? 'Saving...' : 'Save changes'}
+          {isLoading ? tf('saving') : t('save')}
         </WarmButton>
       </form>
     </WarmCard>
