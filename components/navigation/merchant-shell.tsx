@@ -182,6 +182,8 @@ export default function MerchantShell({
   const isActive = (href: string) => activeHref === href
 
   const getNavLabel = (labelKey: string, fallback: string) => {
+    // nav.dashboard is untranslated ("Dashboard") in et.json; use the shell's own label.
+    if (labelKey === "dashboard") return t("navDashboard")
     const translated = tNav(labelKey as never)
     return translated === labelKey || translated === `nav.${labelKey}` ? fallback : translated
   }

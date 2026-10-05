@@ -17,34 +17,8 @@ import VouchersListClient from '../vouchers-list-client';
 import BulkImportPage from '../bulk-import/page';
 import NewVoucherPage from '../new/page';
 import { valueErrorKind, PERCENT_LABEL, AMOUNT_LABEL } from '../voucher-i18n';
-import { NextIntlClientProvider } from 'next-intl';
 import { withIntl } from '@/test-utils/intl';
 import { parseMoneyToMinor, parsePercentToBasisPoints } from '@/lib/money-input';
-import en from '@/messages/en.json';
-import et from '@/messages/et.json';
-
-type Messages = Record<string, unknown>;
-function deepMerge(base: Messages, override: Messages): Messages {
-  const out: Messages = { ...base };
-  for (const [key, value] of Object.entries(override)) {
-    const current = out[key];
-    out[key] =
-      current && typeof current === 'object' && value && typeof value === 'object' && !Array.isArray(value)
-        ? deepMerge(current as Messages, value as Messages)
-        : value;
-  }
-  return out;
-}
-
-// Estonian as the app loads it (English overlaid with et.json).
-function withEstonian(node: React.ReactNode) {
-  return (
-    <NextIntlClientProvider locale="et" messages={deepMerge(en as Messages, et as Messages) as never} timeZone="UTC">
-      {node}
-    </NextIntlClientProvider>
-  );
-}
-
 const vouchers = [
   {
     id: 'v_1',
@@ -85,7 +59,7 @@ describe('VouchersListClient translations', () => {
   });
 
   it('renders Estonian labels', () => {
-    const html = renderToStaticMarkup(withEstonian(<VouchersListClient vouchers={vouchers} merchantSlug="cafe" />));
+    const html = renderToStaticMarkup(withIntl(<VouchersListClient vouchers={vouchers} merchantSlug="cafe" />, 'et'));
     expect(html).toContain('Otsi pealkirja, koodi eesliite või ID järgi');
     expect(html).toContain('Kasutus: 0 – piiramatu');
     expect(html).not.toContain('Clear filters');
@@ -93,7 +67,7 @@ describe('VouchersListClient translations', () => {
   });
 
   it('renders the empty state in Estonian', () => {
-    const html = renderToStaticMarkup(withEstonian(<VouchersListClient vouchers={[]} merchantSlug="cafe" />));
+    const html = renderToStaticMarkup(withIntl(<VouchersListClient vouchers={[]} merchantSlug="cafe" />, 'et'));
     expect(html).toContain('Kuponge veel pole');
   });
 });
@@ -104,7 +78,7 @@ describe('Voucher forms translations', () => {
     expect(enHtml).toContain('Step 1 of 2');
     expect(enHtml).toContain('Type the percentage, e.g. 15 or 12,5.');
 
-    const etHtml = renderToStaticMarkup(withEstonian(<NewVoucherPage />));
+    const etHtml = renderToStaticMarkup(withIntl(<NewVoucherPage />, 'et'));
     expect(etHtml).toContain('Samm 1/2');
     expect(etHtml).toContain('Sisesta protsent, nt 15 või 12,5.');
   });
@@ -114,7 +88,7 @@ describe('Voucher forms translations', () => {
     expect(enHtml).toContain('Import vouchers from a spreadsheet');
     expect(enHtml).toContain('<code class="font-mono text-[var(--text)]">valid_from</code> (required)');
 
-    const etHtml = renderToStaticMarkup(withEstonian(<BulkImportPage />));
+    const etHtml = renderToStaticMarkup(withIntl(<BulkImportPage />, 'et'));
     expect(etHtml).toContain('Impordi kupongid tabelist');
     expect(etHtml).toContain('(kohustuslik)');
   });

@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { ConfirmationDialog } from '@/components/ui/confirmation-dialog';
 import { useConfirmStore } from '@/lib/confirm-helpers';
 
@@ -10,7 +11,15 @@ import { useConfirmStore } from '@/lib/confirm-helpers';
  * auto-dismissing toast.
  */
 export function ConfirmHost() {
+  const t = useTranslations('ui');
   const { state, close, runConfirm } = useConfirmStore();
+
+  // lib/confirm-helpers fills in the English defaults 'Confirm' / 'Cancel' when a
+  // caller passes none; show those defaults in the viewer's language.
+  const confirmText = t('confirmDialog.confirm');
+  const cancelText = t('confirmDialog.cancel');
+  const localizeDefault = (value: string, english: string, translated: string) =>
+    value === english ? translated : value;
 
   return (
     <ConfirmationDialog
@@ -18,10 +27,10 @@ export function ConfirmHost() {
       onOpenChange={(open) => {
         if (!open) close();
       }}
-      title={state.title}
+      title={localizeDefault(state.title, 'Confirm', confirmText)}
       description={state.description}
-      confirmLabel={state.confirmLabel}
-      cancelLabel={state.cancelLabel}
+      confirmLabel={localizeDefault(state.confirmLabel, 'Confirm', confirmText)}
+      cancelLabel={localizeDefault(state.cancelLabel, 'Cancel', cancelText)}
       variant={state.variant}
       onConfirm={runConfirm}
     />

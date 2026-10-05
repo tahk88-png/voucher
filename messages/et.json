@@ -1751,8 +1751,9 @@
       "opensAppArea": "Avaneb rakenduses",
       "externalLinkTitle": "{label} (avaneb rakenduses, väljaspool seda kaupmeest)",
       "opensOutside": "Avaneb väljaspool kaupmehe vaadet",
-      "merchantNavigation": "Kaupmees",
-      "more": "Rohkem"
+      "merchantNavigation": "Kaupmehe menüü",
+      "more": "Rohkem",
+      "navDashboard": "Töölaud"
     },
     "dashboard": {
       "title": "Kaupmehe töölaud",
@@ -1779,8 +1780,8 @@
       "pendingConfirmationHint": "Poes tehtud lunastused ootavad sinu kinnitust.",
       "viewRedemptions": "Vaata lunastusi",
       "actionCenter": "Tegevuskeskus",
-      "actionCenterHint": "Esmatähtsad asjad ülevaatamiseks.",
-      "allCaughtUp": "Kõik on tehtud.",
+      "actionCenterHint": "Olulisemad asjad, mis vajavad tähelepanu.",
+      "allCaughtUp": "Kõik on korras, midagi pole ootel.",
       "open": "Ava",
       "actions": {
         "pendingRedemptions": "{count, plural, one {# ootel lunastus} other {# ootel lunastust}}",
@@ -1844,7 +1845,7 @@
     "liveStats": {
       "live": "Reaalajas",
       "connecting": "Ühendan…",
-      "redeemedToday": "<value>{count}</value> <label>lunastatud täna</label>",
+      "redeemedToday": "<value>{count}</value> <label>täna lunastatud</label>",
       "pending": "<value>{count}</value> <label>ootel</label>"
     },
     "analytics": {
@@ -1872,7 +1873,7 @@
     "ask": {
       "title": "Küsi oma andmetelt",
       "subtitle": "Esita küsimusi oma äriandmete kohta tavakeeles",
-      "emptyTitle": "Küsi oma andmete kohta mida iganes",
+      "emptyTitle": "Küsi oma andmete kohta ükskõik mida",
       "emptyHint": "Proovi mõnda allolevat soovitust",
       "placeholder": "Esita küsimus oma andmete kohta...",
       "suggestedTitle": "Soovitatud küsimused",
@@ -1956,9 +1957,9 @@
       "close": "Sulge",
       "usage": "<b>{current}</b> / {max} kasutatud",
       "limitKeys": {
-        "campaignCreatesPerCycle": "loodud kampaaniad perioodis",
+        "campaignCreatesPerCycle": "loodud kampaaniaid arveldusperioodis",
         "activeCampaigns": "aktiivsed kampaaniad",
-        "voucherCreatesPerCycle": "loodud kupongid perioodis",
+        "voucherCreatesPerCycle": "loodud kuponge arveldusperioodis",
         "teamMembers": "tiimiliikmed"
       },
       "currentPlanTrial": "Praegune plaan (tasuta prooviperiood)",
@@ -2077,8 +2078,8 @@
       "signIn": "Logi sisse"
     },
     "footer": {
-      "navLabel": "Jalus",
-      "copyright": "© {year} GiftHub. Valmistatud Euroopas."
+      "navLabel": "Jaluse menüü",
+      "copyright": "© {year} GiftHub. Tehtud Euroopas."
     },
     "navLinks": {
       "campaigns": "Kampaaniad",
@@ -2093,7 +2094,7 @@
       "about": "Meist",
       "vouchers": "Kupongid",
       "shop": "Pood",
-      "rent": "Rent"
+      "rent": "Rentimine"
     },
     "chat": {
       "openAssistant": "Ava automaatne assistent",
@@ -2112,7 +2113,7 @@
     },
     "cookies": {
       "regionLabel": "Küpsiste eelistused",
-      "intro": "Kasutame küpsiseid, et sinu kogemust parandada. Vajalikud küpsised on alati aktiivsed; valikulised saad ise lubada. <link>Privaatsuspoliitika</link>",
+      "intro": "Kasutame küpsiseid, et sinu kogemust parandada. Vajalikud küpsised on alati aktiivsed, valikulised saad ise lubada. <link>Privaatsuspoliitika</link>",
       "optionalLegend": "Valikulised küpsised",
       "necessary": "Vajalikud",
       "alwaysOn": "(alati sees)",
@@ -2146,15 +2147,15 @@
       "platformAdmin": "Platvormi admin",
       "admin": "Admin",
       "staff": "Töötaja",
-      "switchContext": "Vaheta konteksti"
+      "switchContext": "Vaheta vaadet"
     },
     "legalEntity": {
       "operator": "Haldaja",
       "registeredAddress": "Registrijärgne aadress",
       "registryCode": "Registrikood",
-      "operatorPlaceholder": "[ettevõtte nimi lisatakse]",
-      "addressPlaceholder": "[registrijärgne aadress lisatakse]",
-      "registryCodePlaceholder": "[registrikood lisatakse]"
+      "operatorPlaceholder": "[ettevõtte nimi lisatakse hiljem]",
+      "addressPlaceholder": "[registrijärgne aadress lisatakse hiljem]",
+      "registryCodePlaceholder": "[registrikood lisatakse hiljem]"
     },
     "theme": {
       "dark": "Tume režiim",
@@ -2523,7 +2524,7 @@
     },
     "generate": {
       "invalidCount": "Sisesta arv vahemikus 1 kuni 1000",
-      "tooMany": "{count} piletit ei saa luua. Maksimaalselt saadaval: {max}",
+      "tooMany": "Nii palju pileteid ({count}) ei saa luua. Saadaval on kuni {max}.",
       "failed": "Piletite loomine ebaõnnestus",
       "success": "Loodi {count, plural, one {# pilet} other {# piletit}}!",
       "open": "Loo piletid",
@@ -2704,7 +2705,7 @@
       "visitMerchant": "Külasta kaupmeest",
       "featuredProducts": "Esiletõstetud tooted",
       "noProducts": "Tooteid pole saadaval.",
-      "rentalHighlights": "Rendi esiletõstud",
+      "rentalHighlights": "Esiletõstetud rendiesemed",
       "noRentals": "Rendiesemeid pole saadaval.",
       "perDay": "{price} / päev",
       "activeVouchers": "Aktiivsed kupongid",
@@ -2732,20 +2733,20 @@
       "checkoutErrorTitle": "Maksmise viga",
       "checkoutErrorDescription": "Maksekavatsust ei õnnestunud luua.",
       "empty": "Tooteid veel pole.",
-      "productHighlight": "Toote esiletõst",
+      "productHighlight": "Esiletõstetud toode",
       "add": "Lisa",
       "cart": "Ostukorv",
       "cartEmpty": "Ostukorv on tühi.",
       "lineQuantity": "{quantity} x {price}",
       "remove": "Eemalda",
       "total": "Kokku",
-      "creatingIntent": "Loon kavatsust...",
+      "creatingIntent": "Loon maksekavatsust...",
       "checkoutIntent": "Loo maksekavatsus"
     },
     "rentPage": {
       "metaTitle": "Renditurg",
       "metaDescription": "Sirvi renditavaid esemeid",
-      "title": "Rendid",
+      "title": "Rendiesemed",
       "subtitle": "Vali kuupäevad ja küsi rendipakkumist."
     },
     "rentClient": {
@@ -2762,16 +2763,16 @@
       "daysSelected": "{count, plural, one {# rendipäev valitud.} other {# rendipäeva valitud.}}",
       "selectDatesHint": "Hinna arvutamiseks vali kuupäevad.",
       "empty": "Rendiesemeid veel pole.",
-      "rentalHighlight": "Rendi esiletõst",
+      "rentalHighlight": "Esiletõstetud rendiese",
       "perDay": "{price} / päev",
-      "weeklyRate": "Nädal: {price}",
+      "weeklyRate": "Nädalahind: {price}",
       "select": "Vali",
       "selectedHeading": "Valitud rendiese",
       "estimatedTotal": "Hinnanguline summa",
       "notesLabel": "Märkused (valikuline)",
       "notesPlaceholder": "Erisoovid...",
       "submitting": "Saadan broneeringut...",
-      "requestBooking": "Küsi rendibroneeringut",
+      "requestBooking": "Saada broneerimistaotlus",
       "myBookings": "Minu broneeringud",
       "noBookings": "Rendibroneeringuid veel pole. Alustamiseks vali ülalt ese.",
       "bookingRange": "{start} - {end} ({days, plural, one {# päev} other {# päeva}})",
@@ -2791,11 +2792,11 @@
     },
     "boxes": {
       "metaTitle": "Tellimuskarbid",
-      "metaDescription": "Telli oma lemmikkohalikelt kaupmeestelt kureeritud igakuised kupongikarbid — uued pakkumised igal perioodil, loobu igal ajal.",
+      "metaDescription": "Telli oma lemmikutelt kohalikelt kaupmeestelt hoolikalt valitud igakuiseid kupongikarpe — uued pakkumised igal perioodil, tühista igal ajal.",
       "title": "Tellimuskarbid",
       "subtitle": "Saa parimatelt kaupmeestelt regulaarselt hoolikalt valitud kuponge.",
       "empty": "Tellimuskarpe veel pole. Vaata varsti uuesti!",
-      "byMerchant": "{name}",
+      "byMerchant": "Pakub {name}",
       "perInterval": "/{interval}",
       "details": "Üksikasjad",
       "subscribe": "Telli",
@@ -2810,7 +2811,7 @@
       "whatsInside": "Mis karbis on",
       "curatingNext": "Kuni {count, plural, one {# valitud kupong} other {# valitud kupongi}} {period}. Järgmist saadetist alles koostatakse.",
       "percentVoucher": "{value}% soodustusega kupong",
-      "amountVoucher": "{amount} kupong",
+      "amountVoucher": "{amount} väärtusega kupong",
       "curatedVoucher": "Valitud kupong",
       "subscribing": "Tellin…",
       "subscribeWithPrice": "Telli — {price}/{interval}",
@@ -2864,7 +2865,7 @@
       "typeAll": "Kõik tüübid",
       "sortLabel": "Sorteeri",
       "sort": {
-        "date": "Kuupäev (uuemad)",
+        "date": "Kuupäev (uusimad)",
         "name": "Nimi (A–Z)",
         "redemptions": "Lunastused"
       },
@@ -2891,7 +2892,7 @@
       "confirmLabel": "Avalda",
       "failed": "Kupongi avaldamine ebaõnnestus",
       "success": "Kupong on avaldatud!",
-      "publishing": "Avaldan...",
+      "publishing": "Avaldamine...",
       "button": "Avalda kupong"
     },
     "new": {
@@ -2904,7 +2905,7 @@
       "updated": "Kupong on uuendatud",
       "updateFailed": "Kupongi uuendamine ebaõnnestus",
       "updateFailedRetry": "Kupongi uuendamine ebaõnnestus. Proovi uuesti.",
-      "updating": "Uuendan...",
+      "updating": "Uuendamine...",
       "update": "Uuenda kupongi",
       "viewPublicPage": "Vaata avalikku lehte"
     },
@@ -2932,7 +2933,7 @@
         "invalidValue": "Sisesta korrektne väärtus.",
         "valueMustBePositive": "Väärtus peab olema suurem kui 0",
         "totalLimitPositive": "Kogulimiit peab olema positiivne arv",
-        "perUserLimitPositive": "Kasutaja limiit peab olema positiivne arv"
+        "perUserLimitPositive": "Limiit kasutaja kohta peab olema positiivne arv"
       },
       "discountErrors": {
         "negative": "Soodustus ei saa olla negatiivne.",
@@ -2959,7 +2960,7 @@
       "columnOptional": "<code>{name}</code> (valikuline): {help}",
       "columnHelp": {
         "name": "Kupongi pealkiri, mida kliendid näevad, nt \"Kevadine kohvipakkumine\".",
-        "type": "\"amount\" (summa soodustus), \"percent\" (protsendiline soodustus) või \"credit\" (poe krediit).",
+        "type": "\"amount\" (summaline soodustus), \"percent\" (protsendiline soodustus) või \"credit\" (poe krediit).",
         "value": "Summa/krediidi puhul eurodes (10 või 10.50), protsendi puhul protsentides (15 või 12.5).",
         "currency": "Kolmetäheline kood, nt EUR. Vaikimisi sinu poe valuuta.",
         "valid_from": "Kupongi esimene kehtivuspäev: 2026-10-01 või 01.10.2026.",
@@ -2975,9 +2976,9 @@
       "andMore": "…ja veel {count}.",
       "readyToImport": "Valmis importima {count, plural, one {# kupongi} other {# kupongi}}:",
       "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, kuni {limit} kasutust} other {}}",
-      "imported": "Imporditi {count, plural, one {# kupong} other {# kupongi}} mustandina.",
+      "imported": "Imporditi {count, plural, one {# kupong mustandina} other {# kupongi mustanditena}}.",
       "viewVouchers": "Vaata kuponge",
-      "importing": "Impordin...",
+      "importing": "Importimine...",
       "importCount": "Impordi {count, plural, one {# kupong} other {# kupongi}}",
       "importVouchers": "Impordi kupongid",
       "importFailedStatus": "Import ebaõnnestus (viga {status}).",
@@ -3026,8 +3027,8 @@
     "results": {
       "chipCategory": "Kategooria: {value}",
       "chipType": "Tüüp: {value}",
-      "chipMinDiscount": "Min {value}% soodsam",
-      "chipMaxPrice": "Max €{value}",
+      "chipMinDiscount": "Min {value}% soodustust",
+      "chipMaxPrice": "Max {value} €",
       "chipSort": "Järjestus: {value}",
       "removeFilter": "Eemalda filter {label}",
       "searching": "Otsin...",
@@ -3036,7 +3037,7 @@
       "flash": "Välkmüük",
       "voucherFallback": "Kupong",
       "expires": "Aegub {date}",
-      "redeemed": "{count} lunastatud",
+      "redeemed": "Lunastatud {count} korda",
       "noResultsTitle": "Tulemusi ei leitud",
       "noResultsQuery": "Päringule „{query}” ei vasta ükski kupong. Proovi filtreid muuta.",
       "noResultsHint": "Otsi kindlat kupongi, kaupmeest või kategooriat."
@@ -3073,7 +3074,7 @@
         "a": "Sirvi saadaolevaid kuponge, klõpsa „Osta” ja vii makse lõpuni Stripe'i kaudu. Kupong ilmub sinu rahakotti kohe pärast makset."
       },
       "paymentMethods": {
-        "q": "Milliseid makseviise aktsepteeritakse?",
+        "q": "Milliseid makseviise saab kasutada?",
         "a": "Makseid töötleb turvaliselt Stripe. Sinu ostu jaoks saadaolevad makseviisid kuvatakse maksmisel."
       },
       "refund": {
@@ -3093,8 +3094,8 @@
         "a": "Jah! Ostes vali „Saada kingitusena” ja sisesta saaja e-posti aadress. Saaja saab kupongi koos isikliku sõnumiga."
       },
       "twoFactor": {
-        "q": "Kuidas lülitada sisse kaheastmeline autentimine?",
-        "a": "Ava Seaded → Turvalisus → Kaheastmeline autentimine. Saad seadistada TOTP (Google Authenticator) või kasutada pääsuvõtit (biomeetriline autentimine)."
+        "q": "Kuidas kaheastmelist autentimist sisse lülitada?",
+        "a": "Ava Seaded → Turvalisus → Kaheastmeline autentimine. Saad seadistada TOTP-autentimise (Google Authenticator) või kasutada pääsuvõtit (biomeetriline autentimine)."
       },
       "biometrics": {
         "q": "Kas saan sisse logida biomeetriaga?",
@@ -3114,7 +3115,7 @@
       },
       "integrations": {
         "q": "Kas saan ühendada oma olemasolevate süsteemidega?",
-        "a": "Jah! Pakume veebihaake (reaalajas sündmuste teavitusteks), API-võtmeid (programmiliseks ligipääsuks) ning Zapieri, Slacki ja Discordi integratsioone."
+        "a": "Jah! Pakume webhooke (reaalajas sündmuste teavitusteks), API-võtmeid (programmiliseks ligipääsuks) ning Zapieri, Slacki ja Discordi integratsioone."
       },
       "trackSales": {
         "q": "Kuidas oma müüki jälgida?",
@@ -3134,7 +3135,7 @@
     "metaTitle": "Võta ühendust",
     "metaDescription": "Võta ühendust GiftHubi meeskonnaga — küsimused kupongide, kaupmeheks liitumise, arvelduse või koostöö kohta.",
     "title": "Võta ühendust",
-    "subtitle": "Kas sul on küsimus? Kuuleme sinust hea meelega.",
+    "subtitle": "Kas sul on küsimus? Kirjuta meile julgelt.",
     "email": "E-post",
     "assistantTitle": "Automaatne assistent",
     "assistantText": "Kiired vastused kupongide ja sinu konto kohta nurgas olevast vestlusnupust. See on automaatne, mitte inimene.",
@@ -3163,10 +3164,10 @@
     "more": "Rohkem",
     "loading": "Laadimine...",
     "breadcrumb": {
-      "label": "navigeerimistee"
+      "label": "Navigatsioonirada"
     },
     "pagination": {
-      "label": "lehekülgede navigeerimine",
+      "label": "Lehekülgede navigeerimine",
       "previousAria": "Mine eelmisele lehele",
       "previous": "Eelmine",
       "nextAria": "Mine järgmisele lehele",
@@ -3177,8 +3178,8 @@
       "dismiss": "Sulge teavitus"
     },
     "calendar": {
-      "previousMonth": "Eelmine kuu",
-      "nextMonth": "Järgmine kuu"
+      "previousMonth": "Mine eelmisele kuule",
+      "nextMonth": "Mine järgmisele kuule"
     },
     "datePicker": {
       "placeholder": "Vali kuupäev"
@@ -3193,7 +3194,7 @@
     },
     "searchResults": {
       "empty": "Tulemusi ei leitud",
-      "noResultsFor": "Päringule „{query}” tulemusi ei leitud. Proovi teisi märksõnu."
+      "noResultsFor": "Päringule „{query}“ tulemusi ei leitud. Proovi teisi märksõnu."
     },
     "commandPalette": {
       "placeholder": "Otsi...",
@@ -3255,7 +3256,7 @@
       "noResults": "Tulemusi pole."
     },
     "fileUpload": {
-      "maxFiles": "Lubatud on kuni {maxFiles} faili",
+      "maxFiles": "Lubatud on kuni {maxFiles, plural, one {# fail} other {# faili}}",
       "tooLarge": "Failid peavad olema väiksemad kui {maxSize} MB",
       "dropHere": "Lase failid siia lahti",
       "dragDrop": "Lohista failid siia",
@@ -3603,8 +3604,8 @@
       "status": "Olek",
       "allStatus": "Kõik olekud",
       "sortBy": "Sorteeri",
-      "sortDate": "Kuupäev (uusimad)",
-      "sortAmount": "Summa (suurimad enne)",
+      "sortDate": "Kuupäev (uusimad eespool)",
+      "sortAmount": "Summa (suurimad eespool)",
       "showing": "Kuvatakse {shown} / {total, plural, one {# kinkekaart} other {# kinkekaarti}}",
       "clearFilters": "Tühjenda filtrid",
       "noMatches": "Filtritele vastavaid kinkekaarte pole.",
@@ -3625,9 +3626,9 @@
       "validFrom": "Kehtib alates",
       "validTo": "Kehtib kuni",
       "noExpiry": "Tähtajatu",
-      "redeemedAt": "Lunastatud",
+      "redeemedAt": "Lunastamise aeg",
       "notRedeemed": "Lunastamata",
-      "qrTitle": "Töötaja lunastus-QR",
+      "qrTitle": "QR-kood töötajale lunastamiseks",
       "qrHelp": "Töötaja saab selle QR-koodi skannida, et kinkekaart lunastada ja kehtetuks muuta."
     },
     "new": {
@@ -3665,16 +3666,16 @@
         "currency": "Valuuta",
         "validFrom": "Kehtib alates",
         "validTo": "Kehtib kuni",
-        "noExpiry": "Ilma aegumiskuupäevata"
+        "noExpiry": "Tähtajatu"
       },
       "purchaseSection": {
-        "title": "Ostmine klientidele",
+        "title": "Müük klientidele",
         "description": "Luba klientidel seda kinkekaarti veebis osta",
         "purchasable": "Klientidele ostmiseks saadaval",
         "salePrice": "Müügihind (valikuline, vaikimisi nimiväärtus)",
         "salePricePlaceholder": "Sama mis summa",
         "customersPay": "Kliendid maksavad {value}.",
-        "salePriceHelp": "Jäta tühjaks, et müüa nimiväärtusega. Kampaaniate jaoks määra erinev hind."
+        "salePriceHelp": "Jäta tühjaks, et müüa nimiväärtusega. Sooduspakkumiste jaoks määra teine hind."
       },
       "brandingSection": {
         "title": "Bränding ja sõnum",
@@ -3700,7 +3701,7 @@
     },
     "gifts": {
       "title": "Kinketooted",
-      "subtitle": "Halda oma tooteid Gift Hubis",
+      "subtitle": "Halda oma tooteid kinkekeskuses",
       "dashboard": "Töölaud",
       "confirmDelete": "Kas oled kindel? Toode muudetakse mitteaktiivseks.",
       "stats": {
@@ -3710,7 +3711,7 @@
         "purchases": "Ostud"
       },
       "emptyTitle": "Kinketooteid veel pole",
-      "emptyDescription": "Lisa oma esimene toode, et see ilmuks Gift Hubi voos.",
+      "emptyDescription": "Lisa oma esimene toode, et see ilmuks kinkekeskuse voos.",
       "emptyApiHint": "Toodete loomiseks kasuta API-t: <code>{endpoint}</code>.",
       "inactive": "Mitteaktiivne",
       "featured": "Esile tõstetud",
@@ -3946,7 +3947,7 @@
       "subtitle": "Logi sisse oma GiftHubi kontole",
       "tabMagic": "Kood e-postile",
       "tabPassword": "Parool",
-      "tabSocial": "Sotsiaalne",
+      "tabSocial": "Sotsiaalmeedia",
       "tabPasskey": "Pääsuvõti",
       "emailLabel": "E-posti aadress",
       "emailPlaceholder": "sina@näide.ee",
@@ -3963,7 +3964,7 @@
       "resend": "Saada kood uuesti",
       "backToEmail": "Tagasi",
       "orContinueWith": "Või jätka muul viisil",
-      "continueWith": "Jätka: {provider}",
+      "continueWith": "Jätka teenusega {provider}",
       "errorWrongCode": "Vale või aegunud kood. Proovi uuesti.",
       "errorWrongPass": "Vale e-post või parool.",
       "errorGeneric": "Midagi läks valesti. Proovi uuesti.",
@@ -3988,12 +3989,12 @@
       },
       "passkeyDesc": "Logi kohe sisse sõrmejälje, näotuvastuse või turvavõtmega.",
       "passkeyButton": "Logi sisse pääsuvõtmega",
-      "passkeyAuthenticating": "Autendin…"
+      "passkeyAuthenticating": "Tuvastan…"
     },
     "register": {
       "backToHome": "Tagasi avalehele",
       "title": "Loo oma konto",
-      "subtitle": "Avasta ja halda kuponge",
+      "subtitle": "Hakka kuponge avastama ja haldama",
       "nameLabel": "Täisnimi",
       "namePlaceholder": "Mari Maasikas",
       "emailLabel": "E-posti aadress",
@@ -4018,7 +4019,7 @@
       "submitting": "Lähtestan…",
       "success": "Parool lähtestatud!",
       "successDesc": "Sinu parool on uuendatud. Nüüd saad sisse logida.",
-      "goToLogin": "Mine sisse logima",
+      "goToLogin": "Logi sisse",
       "errorMismatch": "Paroolid ei kattu",
       "errorShort": "Parool peab olema vähemalt 8 tähemärki",
       "errorWeak": "Parool on liiga nõrk. Vali tugevam parool.",
@@ -4031,7 +4032,7 @@
       "sending": "Saadan…",
       "linkSent": "Vaata oma e-posti!",
       "linkSentDesc": "Kui selle e-postiga konto on olemas, saatsime sulle lähtestuslingi.",
-      "backToLogin": "Tagasi sisselogimisse"
+      "backToLogin": "Tagasi sisselogimise juurde"
     },
     "acceptInvitation": {
       "welcomeTitle": "Tere tulemast!",
@@ -4040,7 +4041,7 @@
       "problemTitle": "Probleem kutsega",
       "errorNotAccepted": "Seda kutset ei saanud vastu võtta.",
       "errorGeneric": "Midagi läks valesti. Proovi uuesti.",
-      "goToOrgs": "Mine oma organisatsioonidesse",
+      "goToOrgs": "Ava oma organisatsioonid",
       "invitedTitle": "Sind on kutsutud",
       "invitedDesc": "Võta kutse vastu, et organisatsiooniga liituda. Võimalik, et pead esmalt sisse logima.",
       "accepting": "Võtan vastu…",
@@ -4110,14 +4111,14 @@
           "in_store": "Poes"
         },
         "orderReference": "Tellimus: {reference}",
-        "notAvailable": "–",
+        "notAvailable": "puudub",
         "location": "Asukoht: {location}",
         "date": "Kuupäev: {date}"
       },
       "confirm": {
-        "prompt": "Kas kinnitad selle lunastuse? See avab soovitajale krediidi.",
+        "prompt": "Kas kinnitad selle lunastuse? See vabastab soovitaja krediidi.",
         "confirmLabel": "Kinnita",
-        "success": "Lunastus kinnitatud. Soovitaja krediit on avatud.",
+        "success": "Lunastus kinnitatud. Soovitaja krediit on vabastatud.",
         "error": "Lunastuse kinnitamine ebaõnnestus. Proovi uuesti.",
         "confirming": "Kinnitamine...",
         "button": "Kinnita lunastus"
@@ -4155,7 +4156,7 @@
       "verified": "Kinnitatud",
       "campaign": "Kampaania: {name}",
       "voucher": "Kupong: {code}",
-      "foundHelpful": "{count} pidas kasulikuks",
+      "foundHelpful": "{count, plural, one {# inimene pidas kasulikuks} other {# inimest pidas kasulikuks}}",
       "yourReply": "Sinu vastus",
       "replyPlaceholder": "Kirjuta oma vastus...",
       "posting": "Postitamine...",
@@ -4176,8 +4177,8 @@
       "manual": "Käsitsi",
       "camera": "Kaamera",
       "scanning": "Skannimine...",
-      "cameraDenied": "Kaamera kasutamine keelati. Luba kaamera brauseri seadetes või sisesta kood allpool.",
-      "cameraUnavailable": "Kaamerat pole saadaval. Sisesta kood allpool.",
+      "cameraDenied": "Kaamera kasutamine on keelatud. Luba kaamera brauseri seadetes või sisesta kood allpool.",
+      "cameraUnavailable": "Kaamera pole saadaval. Sisesta kood allpool.",
       "pointAtCode": "Suuna kaamera QR-koodile, et see automaatselt skannida",
       "enterCode": "Sisesta kood",
       "codePlaceholder": "Kupongi kood (nt AUD-CMUI0TG1), kupongi link, pileti või kinkekaardi kood",
@@ -4216,6 +4217,21 @@
         "notFound": "Ei leitud",
         "scanFailed": "Skannimine ebaõnnestus",
         "redeemFailed": "Lunastamine ebaõnnestus"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktiivne",
+          "redeemed": "lunastatud",
+          "expired": "aegunud",
+          "cancelled": "tühistatud"
+        },
+        "ticket": {
+          "available": "saadaval",
+          "sold": "müüdud",
+          "used": "kasutatud",
+          "cancelled": "tühistatud",
+          "refunded": "tagastatud"
+        }
       }
     }
   },
@@ -4224,7 +4240,7 @@
       "negative": "Hind ei saa olla negatiivne.",
       "invalid": "Hind ei ole korrektne arv.",
       "wholeNumber": "Hind peab olema täisarv.",
-      "decimals": "Hinnal võib olla kuni {decimals} kohta pärast koma.",
+      "decimals": "Hinnal võib olla kuni {decimals} komakohta.",
       "tooLarge": "Hind on liiga suur."
     },
     "appointments": {
@@ -4266,8 +4282,8 @@
       "subtitle": "Jälgi laoseisu ja halda kupongide saadavust",
       "refresh": "Värskenda",
       "summary": {
-        "totalItems": "Kokku tooteid",
-        "lowStock": "Laoseis madal",
+        "totalItems": "Tooteid kokku",
+        "lowStock": "Madal laoseis",
         "outOfStock": "Otsas"
       },
       "alerts": {
@@ -4280,7 +4296,7 @@
       "stockStatus": {
         "unlimited": "Piiramatu",
         "outOfStock": "Otsas",
-        "lowStock": "Laoseis madal",
+        "lowStock": "Madal laoseis",
         "inStock": "Laos"
       },
       "stock": "Laoseis: {stock}",
@@ -4372,7 +4388,7 @@
       "status": {
         "all": "Kõik",
         "pending": "Ootel",
-        "approved": "Kinnitatud",
+        "approved": "Heaks kiidetud",
         "rejected": "Tagasi lükatud",
         "paid": "Makstud",
         "active": "Aktiivne",
@@ -4385,7 +4401,7 @@
       "note": "Märkus: {note}",
       "rejectedReason": "Tagasi lükatud: {reason}",
       "bookedMeta": "Broneeritud: {date} | Kasutaja: {user}...",
-      "approve": "Kinnita",
+      "approve": "Kiida heaks",
       "reasonPlaceholder": "Põhjus (valikuline)",
       "confirm": "Kinnita",
       "cancel": "Tühista",
@@ -4403,13 +4419,13 @@
         "price": "Hind ({currency})",
         "currency": "Valuuta",
         "interval": "Sagedus",
-        "maxItems": "Max tooteid",
+        "maxItems": "Max toodete arv",
         "creating": "Loomine...",
         "submit": "Loo karp"
       },
       "interval": {
-        "weekly": "Iganädalane",
-        "monthly": "Igakuine",
+        "weekly": "Kord nädalas",
+        "monthly": "Kord kuus",
         "quarterly": "Kord kvartalis"
       },
       "created": "Tellimuskarp loodud.",
@@ -4432,7 +4448,7 @@
   "giftsPages": {
     "meta": {
       "title": "Kinkekaardid ja kingitused",
-      "description": "Sirvi ja osta kohalike kaupmeeste digitaalseid kinkekaarte. Saada läbimõeldud kingitus sekunditega – kohale toimetatakse e-postiga, lunastada saab poes või veebis."
+      "description": "Sirvi ja osta kohalike kaupmeeste digitaalseid kinkekaarte. Saada läbimõeldud kingitus mõne sekundiga – see jõuab saajani e-postiga ja seda saab lunastada kohapeal või veebis."
     },
     "publicCard": {
       "defaultHeadline": "Kinkekaart",
@@ -4459,7 +4475,7 @@
       "defaultHeadline": "Kinkekaart",
       "imageAlt": "Kinkekaart",
       "logoAlt": "Bränd",
-      "fromMerchant": "Kaupmehelt {merchant}",
+      "fromMerchant": "kaupmehelt {merchant}",
       "form": {
         "recipientEmail": "Saaja e-post (valikuline)",
         "recipientEmailPlaceholder": "Saada kinkekaart sellele e-postile",
@@ -4485,7 +4501,7 @@
       "backToHub": "Tagasi kinkekeskusesse",
       "imageAlt": "{title} {index}",
       "featured": "Esiletõstetud",
-      "lowStock": "Laos on alles vaid {count}",
+      "lowStock": "Laos vaid {count} tk",
       "buyNow": "Osta kohe",
       "addToCart": "Lisa ostukorvi",
       "saveToWishlist": "Salvesta soovinimekirja",
@@ -4512,7 +4528,7 @@
     },
     "hub": {
       "title": "Kingitused",
-      "subtitle": "Leia igaks sündmuseks täiuslik kingitus",
+      "subtitle": "Leia igaks puhuks täiuslik kingitus",
       "loadError": "Kingitusi ei õnnestunud laadida",
       "retry": "Proovi uuesti",
       "emptyCatalog": {
@@ -4551,10 +4567,10 @@
       "alt": "QR-kood"
     },
     "wizard": {
-      "title": "AI kingitusteleidja",
+      "title": "AI-kingiotsija",
       "subtitle": "Räägi meile saajast ja me leiame täiusliku kingituse",
       "steps": {
-        "recipient": "Kellele kingitus on?",
+        "recipient": "Kellele kingitus on mõeldud?",
         "occasion": "Mis puhul?",
         "budget": "Milline on sinu eelarve?"
       },
@@ -4572,7 +4588,7 @@
         "anniversary": "Aastapäev",
         "thankYou": "Tänutäheks",
         "justBecause": "Lihtsalt niisama",
-        "graduation": "Lõpetamine"
+        "graduation": "Kooli lõpetamine"
       },
       "summary": {
         "for": "Kellele: {recipient}",
@@ -4599,7 +4615,7 @@
       "toggle": "Filtrid",
       "clear": "Tühjenda",
       "occasion": "Sündmus",
-      "persona": "Kellele see on?",
+      "persona": "Kellele see on mõeldud?",
       "budget": "Eelarve",
       "budgetUnder": "Alla {amount}"
     }
@@ -4796,7 +4812,7 @@
     "merchantFallback": "Kaupmees",
     "validUntil": "Kehtib kuni {date}",
     "validUntilWithLimit": "Kehtib kuni {date} – esimesed {count, plural, one {# kasutus} other {# kasutust}}",
-    "offAtMerchant": "{value} soodsamalt kaupmehelt {merchant}",
+    "offAtMerchant": "{value} soodustust – {merchant}",
     "fields": {
       "event": "Üritus",
       "dateTime": "Kuupäev ja kellaaeg",
@@ -4804,7 +4820,7 @@
       "price": "Hind",
       "status": "Olek",
       "attendee": "Osaleja",
-      "usedAt": "Kasutatud"
+      "usedAt": "Kasutamise aeg"
     },
     "ticketStatus": {
       "available": "Saadaval",
@@ -4842,7 +4858,7 @@
       "noPermission": "Sul pole õigust seda piletit vaadata.",
       "heading": "Pilet nr {number}",
       "qrTitle": "QR-kood",
-      "qrDescription": "Näita seda QR-koodi ürituse sissepääsus",
+      "qrDescription": "Näita seda QR-koodi ürituse sissepääsul",
       "qrAlt": "Pileti QR-kood",
       "qrUnavailable": "QR-kood pole saadaval",
       "ticketNumber": "Pileti number: <strong>{number}</strong>",
@@ -4861,7 +4877,7 @@
     "qrCheckout": {
       "title": "QR-makse",
       "completeTitle": "Makse tehtud",
-      "completeDescription": "Sinu ost on kinnitatud. Üksikasjad saatsime sinu e-postile.",
+      "completeDescription": "Sinu ost on kinnitatud. Üksikasjad leiad oma e-postist.",
       "payNow": "Maksa kohe",
       "confirming": "Kinnitan..."
     },
@@ -4869,21 +4885,21 @@
       "notFoundTitle": "Kupongi ei leitud",
       "notFoundDescription": "Otsitud kupongi ei leitud.",
       "descriptionFallback": "Eksklusiivne kupongipakkumine",
-      "shareText": "Vaata seda kupongi: {merchant}",
+      "shareText": "Vaata kupongi, mida pakub {merchant}",
       "copyCode": "Kopeeri kupongi kood",
       "qrAlt": "Kupongi {code} QR-kood",
       "print": "Prindi kupong"
     },
     "referralPage": {
-      "voucherFrom": "Said kupongi sõbralt <highlight>{name}</highlight>",
+      "voucherFrom": "Kupongi saatis sulle <highlight>{name}</highlight>",
       "qrAlt": "Kupongi {code} lunastamise QR-kood",
-      "offAtMerchantShared": "{value} soodsamalt kaupmehelt {merchant} – sõbra soovitus!"
+      "offAtMerchantShared": "{value} soodustust – {merchant}. Sõbra soovitus!"
     },
     "bnpl": {
       "title": "Maksa osamaksetena",
-      "description": "Jaga makse {amount} mugavateks igakuisteks osamakseteks.",
+      "description": "Jaga {amount} suurune makse mugavateks kuumakseteks.",
       "perMonth": "/kuus",
-      "planNoInterest": "{months}x (0% intress)",
+      "planNoInterest": "{months}x (0% intressi)",
       "planWithFee": "{months}x ({rate}% tasu)",
       "monthlyPayments": "{count, plural, one {# kuumakse} other {# kuumakset}}",
       "total": "Kokku: {amount}",

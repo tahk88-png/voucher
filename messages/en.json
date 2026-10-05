@@ -1752,7 +1752,8 @@
       "externalLinkTitle": "{label} (opens the app area, outside this merchant)",
       "opensOutside": "Opens outside the merchant area",
       "merchantNavigation": "Merchant",
-      "more": "More"
+      "more": "More",
+      "navDashboard": "Dashboard"
     },
     "dashboard": {
       "title": "Merchant Dashboard",
@@ -3255,7 +3256,7 @@
       "noResults": "No results."
     },
     "fileUpload": {
-      "maxFiles": "Maximum {maxFiles} files allowed",
+      "maxFiles": "Maximum {maxFiles, plural, one {# file} other {# files}} allowed",
       "tooLarge": "Files must be smaller than {maxSize}MB",
       "dropHere": "Drop files here",
       "dragDrop": "Drag & drop files here",
@@ -4216,6 +4217,21 @@
         "notFound": "Not found",
         "scanFailed": "Scan failed",
         "redeemFailed": "Redeem failed"
+      },
+      "status": {
+        "giftCard": {
+          "active": "active",
+          "redeemed": "redeemed",
+          "expired": "expired",
+          "cancelled": "cancelled"
+        },
+        "ticket": {
+          "available": "available",
+          "sold": "sold",
+          "used": "used",
+          "cancelled": "cancelled",
+          "refunded": "refunded"
+        }
       }
     }
   },

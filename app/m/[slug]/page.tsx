@@ -89,7 +89,7 @@ export default async function MerchantPublicPage({ params }: { params: Promise<{
     VOUCHER_TYPES.includes(type.toLowerCase()) ? tLabels(`voucherType.${type.toLowerCase()}`) : type.replace(/_/g, ' ');
   const valueLabel = (voucher: { type: string; value: number; currency: string }) =>
     tLabels(voucher.type.toLowerCase() === 'credit_amount' ? 'valueCredit' : 'valueOff', {
-      value: formatVoucherValue(voucher),
+      value: formatVoucherValue(voucher, dateLocale),
     });
   const isDemo = isDemoMerchantSlug(merchant.slug);
   const displayName = stripDemoMarker(merchant.name, isDemo);

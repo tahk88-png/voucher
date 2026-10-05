@@ -12,32 +12,6 @@ vi.mock('@/lib/prisma', () => ({ prisma: {} }));
 
 import Footer from '../Footer';
 import { withIntl } from '@/test-utils/intl';
-import { NextIntlClientProvider } from 'next-intl';
-import enMessages from '@/messages/en.json';
-import etMessages from '@/messages/et.json';
-
-type Messages = Record<string, unknown>;
-function deepMerge(base: Messages, override: Messages): Messages {
-  const out: Messages = { ...base };
-  for (const [key, value] of Object.entries(override)) {
-    const current = out[key];
-    out[key] =
-      current && typeof current === 'object' && value && typeof value === 'object' && !Array.isArray(value)
-        ? deepMerge(current as Messages, value as Messages)
-        : value;
-  }
-  return out;
-}
-
-// Estonian as the app loads it (English overlaid with et.json). withIntl(node, 'et')
-// loads et.json through a require() that vitest can't resolve.
-function withEt(node: React.ReactNode) {
-  return (
-    <NextIntlClientProvider locale="et" messages={deepMerge(enMessages as Messages, etMessages as Messages) as never} timeZone="UTC">
-      {node}
-    </NextIntlClientProvider>
-  );
-}
 import { localizeNavLinks, toPublicNavLinks } from '@/lib/navigation';
 
 describe('Footer', () => {
@@ -50,9 +24,9 @@ describe('Footer', () => {
   });
 
   it('renders in Estonian', () => {
-    const html = renderToStaticMarkup(withEt(<Footer />));
+    const html = renderToStaticMarkup(withIntl(<Footer />, 'et'));
     expect(html).toContain('Kampaaniad');
-    expect(html).toContain('Valmistatud Euroopas.');
+    expect(html).toContain('Tehtud Euroopas.');
   });
 });
 

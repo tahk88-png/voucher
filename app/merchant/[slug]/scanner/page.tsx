@@ -14,6 +14,8 @@ import { formatDisplayDate, formatVoucherCode, formatVoucherValue, voucherHeadli
 
 const VOUCHER_TYPES = ['percentage', 'fixed_amount', 'credit_amount'];
 const VOUCHER_STATUSES = ['draft', 'published', 'paused', 'ended', 'expired'];
+const GIFT_CARD_STATUSES = ['active', 'redeemed', 'expired', 'cancelled'];
+const TICKET_STATUSES = ['available', 'sold', 'used', 'cancelled', 'refunded'];
 
 type ScanResult = {
   type: 'voucher' | 'gift_card' | 'ticket';
@@ -216,7 +218,11 @@ export default function ScannerPage() {
   const statusText = result
     ? result.type === 'voucher'
       ? voucherStatusText(result.data.status)
-      : result.data.status
+      : result.type === 'gift_card' && GIFT_CARD_STATUSES.includes(result.data.status)
+        ? t(`status.giftCard.${result.data.status}`)
+        : result.type === 'ticket' && TICKET_STATUSES.includes(result.data.status)
+          ? t(`status.ticket.${result.data.status}`)
+          : result.data.status
     : '';
 
   const voucherName = (data: Record<string, any>) => {
