@@ -5,6 +5,10 @@ builds and publishes `ghcr.io/tahk88-png/voucher-platform:<tag>`.
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-10-05
+
+Hotfix release: everything below was found by checking the live site.
+
 ### Privacy
 - Analytics now honour cookie consent. `/api/analytics/track` and
   `/api/analytics/pageview` record nothing unless the visitor opted in to
