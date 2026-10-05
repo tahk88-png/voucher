@@ -887,5 +887,1720 @@
         "subtitle": "Voeg een passkey of tweestapsverificatie toe."
       }
     }
+  },
+  "labels": {
+    "free": "Gratis",
+    "valueOff": "{value} korting",
+    "valueCredit": "{value} tegoed",
+    "valueDiscount": "{value} korting",
+    "demo": "Demo",
+    "demoHint": "Voorbeeldinhoud die laat zien hoe het platform werkt. Geen echte aanbieding.",
+    "category": {
+      "cafe": "Café & bakkerij",
+      "beauty": "Beauty & wellness",
+      "fitness": "Fitness & sport",
+      "events": "Evenementen & tickets",
+      "workshops": "Workshops & cursussen",
+      "family": "Gezin & kinderen",
+      "travel": "Reizen & verblijven",
+      "outdoor": "Buiten & avontuur",
+      "other": "Overig",
+      "all": "Alle categorieën"
+    },
+    "voucherType": {
+      "percentage": "Percentage korting",
+      "fixed_amount": "Bedrag korting",
+      "credit_amount": "Winkeltegoed"
+    },
+    "voucherStatus": {
+      "draft": "Concept",
+      "published": "Gepubliceerd",
+      "paused": "Gepauzeerd",
+      "ended": "Beëindigd",
+      "expired": "Verlopen"
+    },
+    "campaignStatus": {
+      "draft": "Concept",
+      "active": "Live",
+      "ended": "Beëindigd"
+    },
+    "campaignType": {
+      "limited": "Eenmalige aanbieding",
+      "weekly": "Wekelijkse aanbieding"
+    },
+    "campaignTypeHelp": {
+      "limited": "Loopt eenmalig tussen de start- en einddatum, zolang de voorraad strekt.",
+      "weekly": "Een terugkerende wekelijkse aanbieding waarvoor klanten elke week terug kunnen komen tot de einddatum."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Voorbeeldaanbieding · niet te koop",
+    "notOnSale": "Nog niet te koop",
+    "purchases": "{count, plural, one {# aankoop} other {# aankopen}}",
+    "freeToClaim": "Gratis te claimen",
+    "onSaleNow": "Nu te koop"
+  },
+  "account": {
+    "error": {
+      "title": "Er is iets misgegaan",
+      "fallback": "Er is een onverwachte fout opgetreden.",
+      "retry": "Opnieuw proberen"
+    },
+    "dashboard": {
+      "metaTitle": "Mijn dashboard"
+    },
+    "cashback": {
+      "metaTitle": "Cashback & tegoed",
+      "title": "Cashback & tegoed",
+      "description": "Al het tegoed dat je hebt verdiend, bij elke handelaar waar je winkelt.",
+      "lockedPending": "Vergrendeld (in behandeling)",
+      "used": "Gebruikt",
+      "expiringTitle": "Verloopt binnen 30 dagen",
+      "expiresOn": "{merchant} — verloopt op {date}",
+      "expiresSoon": "{merchant} — verloopt binnenkort",
+      "byMerchant": "Per handelaar",
+      "lastActivity": "Laatste activiteit {date}",
+      "readyToSpend": "Klaar om te besteden",
+      "viewMerchantWallet": "Handelaarsportemonnee bekijken →"
+    },
+    "nearby": {
+      "title": "Aanbiedingen in de buurt",
+      "subtitle": "Vind deals en vouchers van handelaars bij jou in de buurt",
+      "useMyLocation": "Mijn locatie gebruiken",
+      "approximateLocation": "Geschatte locatie (op basis van IP)",
+      "searchRadius": "Zoekstraal",
+      "yourLocation": "Jouw locatie",
+      "mapLabel": "{count, plural, one {# handelaar} other {# handelaars}} binnen {radius} km",
+      "merchantsNearby": "{count, plural, one {# handelaar} other {# handelaars}} in de buurt",
+      "activeVouchers": "{count, plural, one {# actieve voucher} other {# actieve vouchers}}",
+      "emptyTitle": "Geen handelaars in de buurt",
+      "emptyBody": "Vergroot de zoekstraal of kom later terug voor nieuwe aanbiedingen in jouw omgeving.",
+      "expandRadius": "Uitbreiden naar {radius} km",
+      "errors": {
+        "fetchFailed": "Kan handelaars in de buurt niet laden. Probeer het opnieuw.",
+        "geolocationUnsupported": "Je browser ondersteunt geen locatiebepaling.",
+        "permissionDenied": "Toegang tot locatie geweigerd. Schakel locatie in via je browserinstellingen.",
+        "positionUnavailable": "Locatie niet beschikbaar. Probeer het later opnieuw.",
+        "timeout": "Locatieverzoek is verlopen. Probeer het opnieuw.",
+        "locationFailed": "Kan je locatie niet ophalen.",
+        "ipLocationFailed": "Kan je locatie niet bepalen."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Meldingsinstellingen"
+    },
+    "redeem": {
+      "notFound": "Voucher niet gevonden.",
+      "codeUnavailable": "Vouchercode niet beschikbaar.",
+      "backToWallet": "Terug naar portemonnee",
+      "back": "Terug"
+    },
+    "referrals": {
+      "metaTitle": "Mijn verwijzingen",
+      "completedCount": "Voltooid: {count}"
+    },
+    "voucherDetail": {
+      "back": "Terug",
+      "merchantFallback": "Handelaar",
+      "termsTitle": "Algemene voorwaarden",
+      "terms1": "Deze voucher is geldig tot de hierboven vermelde vervaldatum. Hij kan niet worden gecombineerd met andere aanbiedingen of acties, tenzij anders vermeld.",
+      "terms2": "De voucher moet bij aankoop worden getoond. Geen geldwaarde. Kan niet worden ingewisseld voor contant geld of worden terugbetaald.",
+      "terms3": "De handelaar behoudt zich het recht voor inwisseling te weigeren als de voucher gekopieerd, gemanipuleerd of frauduleus gebruikt lijkt te zijn.",
+      "terms4": "Neem voor vragen of problemen rechtstreeks contact op met de handelaar."
+    },
+    "vouchers": {
+      "unknownMerchant": "Onbekend",
+      "paidAmount": "Betaald: {amount}",
+      "activeCount": "Actief ({count})",
+      "pastCount": "Eerder ({count})"
+    },
+    "voucherCard": {
+      "showQr": "QR-code tonen",
+      "close": "Sluiten",
+      "qrHint": "Toon deze QR-code aan de handelaar om in de winkel in te wisselen."
+    },
+    "wallet": {
+      "metaTitle": "Mijn portemonnee"
+    },
+    "wishlist": {
+      "unknownItem": "Onbekend item",
+      "merchant": "Handelaar",
+      "campaign": "Campagne",
+      "validUntil": "Geldig tot {date}",
+      "alertOn": "Melding aan",
+      "noAlert": "Geen melding",
+      "view": "Bekijken"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Campagne niet beschikbaar",
+      "metaDescriptionFallback": "Aanbieding van {merchant}.",
+      "breadcrumbLabel": "Kruimelpad",
+      "breadcrumbCampaigns": "Campagnes",
+      "demoNotice": "<strong>Voorbeeldaanbieding.</strong> Deze pagina laat zien hoe een aanbieding eruitziet op GiftHub. Het bedrijf en de aanbieding zijn voorbeelden: niets hier kan worden gekocht of ingewisseld.",
+      "verifiedPartner": "Geverifieerde partner",
+      "aboutTitle": "Over deze aanbieding",
+      "descriptionFallback": "Speciale aanbieding van een handelaar op GiftHub.",
+      "howItWorks": {
+        "title": "Hoe het werkt",
+        "claimTitle": "Claim de voucher",
+        "buyTitle": "Koop de voucher",
+        "buyText": "Betaal veilig online, of claim hem gratis als de aanbieding gratis is.",
+        "qrTitle": "Ontvang je QR-code",
+        "qrText": "De voucher wordt in je GiftHub-portemonnee bewaard met een persoonlijke QR-code.",
+        "showTitle": "Toon hem ter plekke",
+        "showText": "{merchant} scant de code en de korting wordt toegepast."
+      },
+      "termsTitle": "Voorwaarden",
+      "voucherOptionsTitle": "Voucheropties",
+      "voucherFallbackTitle": "Voucher",
+      "viewVoucher": "Voucher bekijken",
+      "reviewsTitle": "Beoordelingen",
+      "purchaseLabel": "Aankoop",
+      "buyNow": "Nu kopen",
+      "getFreeVoucher": "Gratis voucher ophalen",
+      "sampleOffer": "Voorbeeldaanbieding",
+      "notOnSaleYet": "Nog niet te koop",
+      "demoNotForSale": "Dit is voorbeeldinhoud en kan dus niet worden gekocht.",
+      "noVoucherYet": "{merchant} heeft nog geen voucher voor deze aanbieding gepubliceerd. Kom later terug.",
+      "offerRuns": "Looptijd aanbieding",
+      "bought": "Gekocht",
+      "boughtCount": "{count, plural, one {# keer} other {# keer}}",
+      "website": "Website",
+      "allOffersFrom": "Alle aanbiedingen van {merchant}",
+      "moreFrom": "Meer van {merchant}"
+    },
+    "list": {
+      "allCategories": "Alle",
+      "badge": "Live campagnemarktplaats",
+      "heroTitle": "Ontdek de populairste aanbiedingen van Europa",
+      "heroSubtitle": "Bekijk vouchers, cadeaus en belevenissen, zorgvuldig geselecteerd van topwinkels in jouw markt.",
+      "searchLabel": "Campagnes zoeken",
+      "searchPlaceholder": "Zoek campagnes, handelaars of diensten...",
+      "campaignCount": "{count, plural, one {<b>#</b> campagne} other {<b>#</b> campagnes}}",
+      "voucherCount": "{count, plural, one {<b>#</b> voucher te koop} other {<b>#</b> vouchers te koop}}",
+      "merchantCount": "{count, plural, one {<b>#</b> handelaar} other {<b>#</b> handelaars}}",
+      "categoriesLabel": "Categorieën",
+      "unavailableTitle": "Campagnes tijdelijk niet beschikbaar",
+      "unavailableText": "Kan geen verbinding maken met de database. Probeer het zo opnieuw.",
+      "emptyTitle": "Geen aanbiedingen gevonden",
+      "emptyText": "Probeer een andere zoekopdracht of kies een andere categorie.",
+      "tryAgain": "Opnieuw proberen",
+      "clearFilters": "Filters wissen"
+    },
+    "listError": {
+      "title": "Kan campagnes niet laden",
+      "fallbackMessage": "Er is een onverwachte fout opgetreden bij het laden van campagnes.",
+      "tryAgain": "Opnieuw proberen"
+    },
+    "filters": {
+      "sortBy": "Sorteren op",
+      "sort": {
+        "newest": "Nieuwste",
+        "oldest": "Oudste",
+        "priceLow": "Prijs: laag naar hoog",
+        "priceHigh": "Prijs: hoog naar laag",
+        "popular": "Populairste",
+        "expiring": "Verloopt binnenkort"
+      },
+      "merchant": "Handelaar",
+      "allMerchants": "Alle handelaars",
+      "minPrice": "Min. prijs",
+      "minPricePlaceholder": "Min. €",
+      "maxPrice": "Max. prijs",
+      "maxPricePlaceholder": "Max. €"
+    },
+    "tenantList": {
+      "title": "Vouchers",
+      "subtitle": "Actieve aanbiedingen van {merchant}.",
+      "empty": "Nog geen vouchers beschikbaar.",
+      "voucher": "Voucher",
+      "viewVoucher": "Voucher bekijken"
+    },
+    "deals": {
+      "metaTitle": "Deals",
+      "metaDescription": "Ontdek de beste voucherdeals"
+    },
+    "campaignShare": {
+      "share": "Delen",
+      "copied": "Gekopieerd",
+      "linkCopied": "Link gekopieerd",
+      "copyFailed": "Kopiëren mislukt"
+    },
+    "shareSheet": {
+      "share": "Delen",
+      "title": {
+        "voucher": "Deel deze voucher",
+        "campaign": "Deel deze campagne",
+        "merchant": "Deel deze handelaar"
+      },
+      "close": "Sluiten",
+      "referralShareText": "{title} - Deel en krijg 10% terug!",
+      "referralNote": "<b>Deel en verdien 10%</b> wanneer je vrienden inwisselen!",
+      "targets": {
+        "email": "E-mail",
+        "copy": "Link kopiëren"
+      },
+      "copied": "Gekopieerd!",
+      "linkCopiedToClipboard": "Link naar klembord gekopieerd!",
+      "linkCopied": "Link gekopieerd!",
+      "shareLinkLabel": "Deellink",
+      "copyLink": "Link kopiëren"
+    },
+    "wishlistButton": {
+      "add": "Toevoegen aan verlanglijst",
+      "remove": "Verwijderen van verlanglijst"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# ster} other {# sterren}}"
+    },
+    "form": {
+      "title": "Schrijf een beoordeling",
+      "ratingLabel": "Beoordeling",
+      "titleLabel": "Titel (optioneel)",
+      "titlePlaceholder": "Vat je ervaring samen",
+      "commentLabel": "Opmerking (optioneel)",
+      "commentPlaceholder": "Deel je ervaring...",
+      "submit": "Beoordeling plaatsen",
+      "submitting": "Plaatsen...",
+      "ratingRequired": "Kies een beoordeling",
+      "submitFailed": "Beoordeling plaatsen mislukt",
+      "alreadyReviewed": "Je hebt dit item al beoordeeld",
+      "signInRequired": "Log in om een beoordeling te schrijven",
+      "thankYou": "Bedankt voor je beoordeling!",
+      "writeAnother": "Nog een beoordeling schrijven"
+    },
+    "list": {
+      "sort": {
+        "newest": "Nieuwste",
+        "highest": "Hoogste",
+        "helpful": "Meest nuttig"
+      },
+      "signInToReview": "Log in om een beoordeling te schrijven",
+      "loadFailed": "Beoordelingen konden niet worden geladen.",
+      "tryAgain": "Opnieuw proberen",
+      "empty": "Nog geen beoordelingen.",
+      "anonymous": "Anoniem",
+      "verified": "Geverifieerd",
+      "helpfulButton": "Nuttig ({count})",
+      "foundHelpful": "{count} vond dit nuttig",
+      "previous": "Vorige",
+      "next": "Volgende",
+      "pageOf": "Pagina {current} van {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Annuleren",
+      "saving": "Opslaan…",
+      "somethingWentWrong": "Er is iets misgegaan"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Niet ingelogd",
+      "unauthorized": "Geen toegang",
+      "tooManyAttempts": "Te veel pogingen",
+      "validationFailed": "Validatie mislukt",
+      "unexpected": "Er is een onverwachte fout opgetreden",
+      "databaseFailed": "Databasebewerking mislukt",
+      "serviceUnavailable": "Dienst tijdelijk niet beschikbaar",
+      "newPasswordTooShort": "Nieuw wachtwoord moet minimaal 8 tekens bevatten",
+      "userNotFound": "Gebruiker niet gevonden",
+      "currentPasswordRequired": "Huidig wachtwoord is verplicht",
+      "currentPasswordIncorrect": "Huidig wachtwoord is onjuist",
+      "deletionUnavailable": "Account verwijderen is tijdelijk niet mogelijk. Neem contact op met support.",
+      "totpAlreadyEnabledReconfigure": "2FA is al ingeschakeld. Schakel het eerst uit om het opnieuw in te stellen.",
+      "sixDigitCodeRequired": "Een 6-cijferige code is verplicht",
+      "totpSetupMissing": "Geen TOTP-instelling gevonden. Start eerst het instelproces.",
+      "totpAlreadyEnabled": "2FA is al ingeschakeld",
+      "invalidSetupCode": "Ongeldige code. Controleer je authenticator-app en probeer het opnieuw.",
+      "verificationCodeRequired": "Een verificatiecode is verplicht",
+      "totpNotEnabled": "2FA is momenteel niet ingeschakeld",
+      "invalidDisableCode": "Ongeldige code. Voer je huidige TOTP-code of een back-upcode in.",
+      "passkeyOptionsFailed": "Kan registratieopties niet ophalen",
+      "passkeyGenerateOptionsFailed": "Kan registratieopties niet genereren",
+      "registrationFailed": "Registratie mislukt",
+      "passkeyRegistrationFailed": "Registratie van passkey mislukt",
+      "passkeyChallengeExpired": "Challenge verlopen of niet gevonden",
+      "verificationFailed": "Verificatie mislukt",
+      "passkeyVerifyFailed": "Kan registratie niet verifiëren"
+    },
+    "settings": {
+      "joinedOn": "Lid sinds {date}",
+      "joinedRecently": "Onlangs lid geworden"
+    },
+    "profileForm": {
+      "nameLabel": "Naam",
+      "namePlaceholder": "Je naam",
+      "emailLabel": "E-mail",
+      "emailLocked": "E-mailadres kan niet worden gewijzigd",
+      "save": "Wijzigingen opslaan",
+      "updated": "Profiel bijgewerkt",
+      "nameRequired": "Naam is verplicht",
+      "updateFailed": "Profiel bijwerken mislukt"
+    },
+    "passwordForm": {
+      "currentLabel": "Huidig wachtwoord",
+      "newLabel": "Nieuw wachtwoord",
+      "setLabel": "Wachtwoord instellen",
+      "confirmLabel": "Wachtwoord bevestigen",
+      "showPassword": "Wachtwoord tonen",
+      "hidePassword": "Wachtwoord verbergen",
+      "change": "Wachtwoord wijzigen",
+      "set": "Wachtwoord instellen",
+      "updated": "Wachtwoord bijgewerkt",
+      "tooShort": "Wachtwoord moet minimaal {min} tekens bevatten",
+      "mismatch": "Wachtwoorden komen niet overeen",
+      "changeFailed": "Wachtwoord wijzigen mislukt"
+    },
+    "deleteDialog": {
+      "trigger": "Account verwijderen",
+      "title": "Je account verwijderen?",
+      "description": "Deze actie is definitief. Je profiel, sessies en meldingsinstellingen worden verwijderd. Je aankoopgeschiedenis wordt geanonimiseerd.",
+      "typeToConfirm": "Typ <strong>{word}</strong> ter bevestiging:",
+      "confirm": "Definitief verwijderen",
+      "deleting": "Verwijderen…",
+      "failed": "Account verwijderen mislukt"
+    },
+    "passkeys": {
+      "title": "Passkeys",
+      "description": "Log in zonder wachtwoord met de vingerafdruk, gezichtsherkenning of pincode van je apparaat.",
+      "add": "Passkey toevoegen",
+      "namePlaceholder": "bijv. \"MacBook Touch ID\"",
+      "addSubmit": "Toevoegen",
+      "adding": "Toevoegen…",
+      "unsupported": "Deze browser ondersteunt geen passkeys. Probeer een recente versie van Chrome, Safari of Edge.",
+      "empty": "Nog geen passkeys. Voeg er een toe om zonder wachtwoord in te loggen.",
+      "devicePasskey": "Apparaatpasskey",
+      "passkey": "Passkey",
+      "added": "Toegevoegd op {date}",
+      "lastUsed": "Laatst gebruikt {date}",
+      "synced": "Gesynchroniseerd",
+      "removeConfirm": "Verwijderen?",
+      "remove": "Verwijderen",
+      "removeLabel": "Passkey verwijderen",
+      "loadFailed": "Kan passkeys niet laden",
+      "removeFailed": "Passkey verwijderen mislukt"
+    },
+    "security": {
+      "title": "Beveiliging",
+      "description": "Beheer tweestapsverificatie en beveiligingsinstellingen",
+      "loading": "Laden...",
+      "backToSettings": "Terug naar instellingen",
+      "enabledMessage": "Tweestapsverificatie is nu ingeschakeld!",
+      "disabledMessage": "Tweestapsverificatie is uitgeschakeld",
+      "errors": {
+        "statusLoadFailed": "Kan de status van je tweestapsverificatie niet laden",
+        "setupFailed": "Instellen starten mislukt",
+        "verifyFailed": "Verificatie mislukt",
+        "disableFailed": "2FA uitschakelen mislukt"
+      },
+      "status": {
+        "title": "Tweestapsverificatie",
+        "enabledBody": "Je account is beveiligd met een authenticator-app.",
+        "disabledBody": "Voeg een extra beveiligingslaag toe aan je account door een code uit je authenticator-app te vereisen.",
+        "enabled": "Ingeschakeld",
+        "notEnabled": "Niet ingeschakeld"
+      },
+      "setup": {
+        "title": "Authenticator-app instellen",
+        "description": "Gebruik een app zoals Google Authenticator, Authy of 1Password om verificatiecodes te genereren.",
+        "enable": "2FA inschakelen"
+      },
+      "scan": {
+        "title": "Scan de QR-code of voer de sleutel handmatig in",
+        "qrAlt": "Scan deze QR-code met je authenticator-app",
+        "manualKey": "Of voer deze sleutel handmatig in:",
+        "copySecret": "Geheime sleutel kopiëren"
+      },
+      "verify": {
+        "title": "Voer de verificatiecode in",
+        "codeLabel": "6-cijferige code uit je app",
+        "submit": "Verifiëren en inschakelen"
+      },
+      "backupCodes": {
+        "title": "Bewaar je back-upcodes",
+        "description": "Bewaar deze codes op een veilige plek. Als je geen toegang meer hebt tot je authenticator-app, kun je met een van deze codes inloggen. Elke code kan maar één keer worden gebruikt.",
+        "copy": "Codes kopiëren",
+        "copied": "Gekopieerd!",
+        "download": "Downloaden",
+        "done": "Klaar"
+      },
+      "backupFile": {
+        "title": "GiftHub - Back-upcodes voor tweestapsverificatie",
+        "instructions": "Bewaar deze codes op een veilige plek. Elke code kan maar één keer worden gebruikt.",
+        "generated": "Gegenereerd: {date}"
+      },
+      "disable": {
+        "title": "Tweestapsverificatie uitschakelen",
+        "description": "Hiermee verwijder je de extra beveiligingslaag van je account.",
+        "button": "2FA uitschakelen",
+        "confirmTitle": "2FA uitschakelen bevestigen",
+        "confirmDescription": "Voer je huidige 6-cijferige code uit je authenticator-app of een back-upcode in.",
+        "codeLabel": "Verificatiecode",
+        "codePlaceholder": "000000 of XXXX-XXXX",
+        "confirm": "Uitschakelen bevestigen"
+      },
+      "quickLinks": {
+        "title": "Snelkoppelingen beveiliging",
+        "sessions": "Actieve sessies bekijken",
+        "changePassword": "Wachtwoord wijzigen"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Betaal voor resultaten, niet voor bereik. Verwijzingsinfrastructuur in eigen beheer: merkgebonden vouchers en winkeltegoed."
+    },
+    "error": {
+      "unexpected": "Er is een onverwachte fout opgetreden."
+    },
+    "hero": {
+      "badge": "Vouchers & verwijzingen voor lokale ondernemers",
+      "title": "Uw klanten verkopen <highlight>uw volgende klanten</highlight>",
+      "subtitle": "Maak vouchercampagnes. Uw klanten delen ze, verdienen tegoed en brengen vrienden mee. Volg elke verwijzing. Zie precies wat elke nieuwe klant u kost.",
+      "ctaMerchant": "Start als handelaar",
+      "ctaExplore": "Campagnes ontdekken",
+      "noCardRequired": "Geen creditcard nodig",
+      "freeTrial": "{days} dagen gratis proberen",
+      "cancelAnytime": "Altijd opzegbaar"
+    },
+    "stats": {
+      "activeCampaigns": "Actieve campagnes",
+      "merchants": "Handelaars",
+      "processedValue": "Verwerkte waarde"
+    },
+    "merchantsTitle": "Handelaars op het platform",
+    "values": {
+      "referral": {
+        "title": "Verwijzingsmotor",
+        "description": "Uw klanten delen deals en brengen automatisch nieuwe klanten"
+      },
+      "vouchers": {
+        "title": "Digitale vouchers",
+        "description": "Maak binnen enkele minuten kortingscampagnes met flexibele regels"
+      },
+      "qr": {
+        "title": "Inwisselen via QR",
+        "description": "Scan en valideer in de winkel met alleen een telefoon. Geen hardware nodig"
+      },
+      "analytics": {
+        "title": "Realtime analyses",
+        "description": "Zie precies wat elke campagne kost en oplevert. Geen giswerk"
+      }
+    },
+    "howItWorks": {
+      "title": "Hoe het werkt",
+      "subtitle": "Binnen enkele minuten aan de slag in drie eenvoudige stappen",
+      "steps": {
+        "create": {
+          "title": "Maak een campagne",
+          "description": "Stel een voucher in binnen 2 minuten: korting, periode, maximaal gebruik. Klaar."
+        },
+        "share": {
+          "title": "Klanten delen hem",
+          "description": "Elke koper krijgt een verwijzingslink. Ze delen hem, verdienen tegoed en brengen vrienden mee."
+        },
+        "grow": {
+          "title": "Zie het groeien",
+          "description": "Volg elke verwijzingsketen, zie uw kosten per nieuwe klant en meet uw ROI."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Ontdek populaire campagnes",
+      "subtitle": "Ontdek vouchers, deals en belevenissen in heel Europa",
+      "showing": "{count, plural, one {# actieve campagne} other {# actieve campagnes}} weergegeven.",
+      "showingWithOnSale": "{count, plural, one {# actieve campagne} other {# actieve campagnes}} weergegeven — {onSale} nu te koop.",
+      "emptyTitle": "Momenteel geen live campagnes",
+      "emptyBody": "Aanbiedingen verschijnen hier zodra handelaars ze publiceren.",
+      "viewAll": "Alle campagnes bekijken"
+    },
+    "pricing": {
+      "title": "Eenvoudige, transparante prijzen",
+      "subtitle": "Kies het abonnement dat bij uw bedrijf past. Jaarlijks betalen kost slechts 10 maanden.",
+      "billingPeriod": "Factuurperiode",
+      "monthly": "Maandelijks",
+      "annual": "Jaarlijks",
+      "save": "Bespaar 17%",
+      "mostPopular": "Populairst",
+      "perMonth": "/maand",
+      "perYear": "{price}/jaar (2 maanden gratis)",
+      "startTrial": "Gratis proefperiode starten",
+      "footer": "Alle abonnementen inclusief {days} dagen gratis proberen · {percent}% transactiekosten op voucherverkopen · Altijd opzegbaar",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# voucher/maand} other {# vouchers/maand}}",
+        "activeCampaigns": "{count, plural, one {# actieve campagne} other {# actieve campagnes}}",
+        "teamMembers": "{count, plural, one {# teamlid} other {# teamleden}}",
+        "qrRedemption": "Inwisselen via QR-code",
+        "basicAnalytics": "Basisanalyses",
+        "advancedAnalytics": "Geavanceerde analyses",
+        "customDomain": "Eigen domein",
+        "promoBoosts": "Promotieboosts (e-mail + push)",
+        "unlimitedVouchers": "Onbeperkt vouchers",
+        "unlimitedCampaigns": "Onbeperkt campagnes",
+        "unlimitedTeamMembers": "Onbeperkt teamleden",
+        "everythingInPlan": "Alles uit {plan}"
+      }
+    },
+    "calculator": {
+      "title": "Bereken uw ROI",
+      "subtitle": "Versleep de schuifregelaars om te zien hoeveel u met GiftHub kunt verdienen",
+      "monthlyPurchases": "Maandelijkse voucheraankopen",
+      "purchasesValue": "{count, plural, one {# aankoop} other {# aankopen}}",
+      "averageTicket": "Gemiddelde besteding",
+      "referralRate": "Conversieratio verwijzingen",
+      "monthlyRevenue": "Maandelijkse omzet",
+      "referralCustomers": "Nieuwe klanten via verwijzing",
+      "perMonthValue": "{value}/mnd",
+      "referralRevenue": "Omzet uit verwijzingen",
+      "estimatedRoi": "Geschatte ROI",
+      "platformCost": "Platformkosten",
+      "platformCostValue": "{plan}/mnd abonnement + {fees} kosten ({percent}%) = <strong>{total}/mnd</strong>",
+      "disclaimer": "Alleen ter illustratie, gebaseerd op de waarden die u invoert — geen prognose."
+    },
+    "why": {
+      "title": "Waarom handelaars GiftHub waarderen",
+      "body": "Laat uw klantenbestand groeien en verhoog uw omzet — terwijl u uw marges behoudt en zelf eigenaar blijft van uw klantrelaties.",
+      "benefits": {
+        "referralEngine": "Ingebouwde verwijzingsmotor bij elke campagne",
+        "analytics": "Realtime analyses: kosten per acquisitie, ROI",
+        "qr": "Inwisselen via QR — geen kassahardware nodig",
+        "languages": "Beschikbaar in {count, plural, one {# taal} other {# talen}}",
+        "flatPlan": "Vast maandabonnement — geen omzetdeling zoals bij Groupon",
+        "ownData": "U bent eigenaar van uw klantgegevens",
+        "fee": "{percent}% transactiekosten op voucherverkopen, geen verborgen kosten"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "Sleep om te vergelijken",
+      "beforeTitle": "Met Groupon",
+      "afterTitle": "Met GiftHub",
+      "sliderLabel": "Vergelijk {before} en {after}",
+      "before": {
+        "revenueShare": "Groot deel van de omzet gaat naar het platform",
+        "ownsRelationship": "Platform is eigenaar van de klantrelatie",
+        "noDataAccess": "Geen toegang tot klantgegevens",
+        "raceToBottom": "Prijzenslag naar de bodem",
+        "lostBrand": "Verlies van merkidentiteit"
+      },
+      "after": {
+        "flatFee": "Vast {minPrice}–{maxPrice}/mnd + {percent}% kosten",
+        "ownData": "U bent eigenaar van alle klantgegevens",
+        "referralEngine": "Ingebouwde verwijzingsmotor",
+        "yourBrand": "Uw merk, uw regels",
+        "roiAnalytics": "Realtime ROI-analyses"
+      }
+    },
+    "faq": {
+      "title": "Veelgestelde vragen",
+      "subtitle": "Alles wat u moet weten over GiftHub",
+      "items": {
+        "groupon": {
+          "question": "Wat is het verschil met Groupon?",
+          "answer": "Dealsites zoals Groupon houden doorgaans een groot deel van elke verkoop in en zijn eigenaar van de klantrelatie. Wij rekenen een vast maandbedrag (vanaf {price}/mnd) plus {percent}% op voucherverkopen. U houdt uw klanten, uw gegevens en uw marges."
+        },
+        "referral": {
+          "question": "Hoe werkt het verwijzingssysteem?",
+          "answer": "Elke klant die een voucher koopt, krijgt een unieke verwijzingslink. Deelt de klant die en koopt een vriend iets, dan verdienen beiden tegoed. Elke verwijzingsketen wordt bijgehouden, zodat u precies ziet hoe nieuwe klanten u vinden."
+        },
+        "trial": {
+          "question": "Wat gebeurt er na de proefperiode van {days} dagen?",
+          "answer": "U kiest een abonnement ({starter}, {pro} of {scale}). Als u geen abonnement neemt, blijven uw gepubliceerde vouchers actief voor klanten, maar kunt u pas nieuwe campagnes maken als u een abonnement afsluit."
+        },
+        "qr": {
+          "question": "Heb ik speciale hardware nodig om via QR in te wisselen?",
+          "answer": "Nee. Uw medewerkers openen de mobiele scanner in een browser op elke telefoon, scannen de QR-code van de klant en klaar. Geen app downloaden, geen kassakoppeling nodig."
+        },
+        "fee": {
+          "question": "Wat zijn de transactiekosten van {percent}%?",
+          "answer": "Wanneer een klant via het platform een voucher koopt, houden wij {percent}% in op de uitbetaling. Bovenop uw abonnement zijn er geen andere platformkosten."
+        }
+      }
+    },
+    "cta": {
+      "title": "Stop met klanten huren. Bouw uw eigen leger.",
+      "body": "Maak binnen enkele minuten uw eerste campagne. Uw klanten doen de rest. {days} dagen gratis proberen.",
+      "getStarted": "Gratis beginnen",
+      "browse": "Campagnes bekijken"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Afrekendemo",
+      "subtitle": "Demo-afrekenpagina",
+      "creditBalance": "Tegoedsaldo",
+      "availableAmount": "{amount} beschikbaar",
+      "lockedAmount": "{amount} vergrendeld",
+      "orderSummary": "Besteloverzicht",
+      "orderAmount": "Bestelbedrag",
+      "creditToApply": "Toe te passen tegoed",
+      "maxAmount": "Max.: {amount}",
+      "subtotal": "Subtotaal",
+      "creditAppliedLine": "Toegepast tegoed",
+      "total": "Totaal",
+      "processing": "Verwerken...",
+      "submit": "Tegoed toepassen en bestelling afronden",
+      "creditApplied": "Tegoed toegepast! Totaal bestelling: {total}",
+      "errors": {
+        "missingAmounts": "Voer zowel het bestelbedrag als het tegoedbedrag in",
+        "applyFailed": "Tegoed toepassen mislukt"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - Beschikbare vouchers",
+      "emptyTitle": "Geen vouchers beschikbaar",
+      "emptyDescription": "Kom later terug voor nieuwe voucheraanbiedingen van {merchant}.",
+      "specialOffer": "Speciale aanbieding",
+      "validUntil": "Geldig tot {date}",
+      "viewAndShare": "Bekijken en delen"
+    },
+    "wallet": {
+      "subtitle": "Tegoedportemonnee",
+      "availableToUse": "Beschikbaar om te gebruiken",
+      "useCredit": "Tegoed gebruiken",
+      "noCreditToUse": "Geen tegoed om te gebruiken",
+      "locked": "Vergrendeld",
+      "lockedDescription": "Wordt ontgrendeld zodra de gekoppelde aankoop is bevestigd.",
+      "historyTitle": "Tegoedgeschiedenis",
+      "historyDescription": "Overzicht voor {merchant}",
+      "historyEmpty": "Nog geen tegoedgeschiedenis.",
+      "expires": "Verloopt op {date}",
+      "creditStatus": {
+        "locked": "vergrendeld",
+        "available": "beschikbaar",
+        "used": "gebruikt",
+        "expired": "verlopen",
+        "reversed": "teruggedraaid"
+      }
+    },
+    "error": {
+      "title": "Er is iets misgegaan",
+      "description": "Het portaal kon niet worden geladen. Vernieuw de pagina of probeer het later opnieuw.",
+      "backToPortal": "Terug naar portaal"
+    },
+    "payments": {
+      "voucherFallback": "Voucher",
+      "status": {
+        "pending": "in behandeling",
+        "paid": "betaald",
+        "failed": "mislukt",
+        "refunded": "terugbetaald"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "beschikbaar",
+        "sold": "verkocht",
+        "used": "gebruikt",
+        "cancelled": "geannuleerd",
+        "refunded": "terugbetaald"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Er is iets misgegaan",
+      "description": "Er is een fout opgetreden bij het laden van deze pagina."
+    },
+    "notFound": {
+      "metaTitle": "Pagina niet gevonden"
+    },
+    "header": {
+      "mainNavLabel": "Hoofdmenu",
+      "signIn": "Inloggen"
+    },
+    "footer": {
+      "navLabel": "Footer",
+      "copyright": "© {year} GiftHub. Made in Europe."
+    },
+    "navLinks": {
+      "campaigns": "Campagnes",
+      "merchants": "Handelaars",
+      "explore": "Ontdekken",
+      "search": "Zoeken",
+      "faq": "FAQ",
+      "contact": "Contact",
+      "privacy": "Privacy",
+      "terms": "Voorwaarden",
+      "home": "Home",
+      "about": "Over ons",
+      "vouchers": "Vouchers",
+      "shop": "Winkel",
+      "rent": "Huren"
+    },
+    "chat": {
+      "openAssistant": "Automatische assistent openen",
+      "closeAssistant": "Automatische assistent sluiten",
+      "dialogLabel": "Automatische assistent van GiftHub",
+      "title": "GiftHub-assistent",
+      "subtitle": "Automatische assistent",
+      "newChat": "Nieuwe chat",
+      "closeChat": "Chat sluiten",
+      "greeting": "Hallo!",
+      "intro": "Ik ben een automatische assistent. Stel je vraag over vouchers, cadeaukaarten, tickets of je account.",
+      "inputLabel": "Bericht aan de automatische assistent",
+      "placeholder": "Typ een bericht...",
+      "send": "Bericht versturen",
+      "sendError": "Sorry, je bericht kon niet worden verzonden. Probeer het opnieuw."
+    },
+    "cookies": {
+      "regionLabel": "Cookievoorkeuren",
+      "intro": "We gebruiken cookies om je ervaring te verbeteren. Noodzakelijke cookies zijn altijd actief; jij kiest welke optionele cookies je toestaat. <link>Privacybeleid</link>",
+      "optionalLegend": "Optionele cookies",
+      "necessary": "Noodzakelijk",
+      "alwaysOn": "(altijd aan)",
+      "analytics": "Analyse",
+      "marketing": "Marketing",
+      "preferences": "Voorkeuren",
+      "saveError": "Je keuze kon niet worden opgeslagen. Probeer het opnieuw.",
+      "acceptAll": "Alles accepteren",
+      "declineOptional": "Optionele weigeren",
+      "customize": "Aanpassen",
+      "savePreferences": "Voorkeuren opslaan"
+    },
+    "currency": {
+      "selectLabel": "Valuta kiezen"
+    },
+    "language": {
+      "selectLabel": "Taal kiezen",
+      "selectInterfaceLabel": "Interfacetaal kiezen ({language})",
+      "unknown": "onbekend",
+      "interfaceOnly": "Wijzigt alleen de interfacetekst",
+      "uiName": "{name} (UI)"
+    },
+    "country": {
+      "selectLabel": "Marktplaats kiezen ({country})",
+      "heading": "Marktplaats kiezen",
+      "description": "Wijzigt alleen land, valuta en marktgegevens",
+      "tip": "<strong>Tip:</strong> De marktplaats filtert gegevens en valuta. De interfacetaal stel je apart in."
+    },
+    "roleSwitcher": {
+      "myDashboard": "Mijn dashboard",
+      "platformAdmin": "Platformbeheerder",
+      "admin": "Beheerder",
+      "staff": "Medewerker",
+      "switchContext": "Context wisselen"
+    },
+    "legalEntity": {
+      "operator": "Exploitant",
+      "registeredAddress": "Statutair adres",
+      "registryCode": "Registratienummer",
+      "operatorPlaceholder": "[bedrijfsnaam volgt]",
+      "addressPlaceholder": "[statutair adres volgt]",
+      "registryCodePlaceholder": "[registratienummer volgt]"
+    },
+    "theme": {
+      "dark": "Donkere modus",
+      "light": "Lichte modus",
+      "system": "Systeemthema"
+    },
+    "voiceSearch": {
+      "start": "Spraakgestuurd zoeken starten",
+      "stop": "Stoppen met luisteren",
+      "tooltip": "Zoeken met spraak",
+      "tapToStop": "Tik om te stoppen"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Kan de hub niet laden",
+      "description": "Er is een onverwachte fout opgetreden bij het laden van handelaars.",
+      "retry": "Opnieuw proberen"
+    },
+    "hub": {
+      "metaTitle": "Handelaars",
+      "metaDescription": "Lokale ondernemers op GiftHub en hun actuele aanbiedingen",
+      "title": "Lokale handelaars",
+      "subtitle": "Cafés, salons, studio's en meer: zie wie er op GiftHub staat en wat ze nu aanbieden.",
+      "loadError": "Handelaars konden niet worden geladen",
+      "loadErrorHint": "Probeer het zo opnieuw.",
+      "retry": "Opnieuw proberen",
+      "emptyTitle": "Nog geen handelaars",
+      "emptyHint": "Bedrijven verschijnen hier zodra ze zich aansluiten.",
+      "joinCta": "Aansluiten als handelaar",
+      "noOffers": "Momenteel geen aanbiedingen",
+      "offerCount": "{count, plural, one {# aanbieding} other {# aanbiedingen}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Niet gevonden",
+      "metaDescription": "Bekijk vouchers, campagnes en aanbiedingen van {name}",
+      "offerCount": "{count, plural, one {# aanbieding} other {# aanbiedingen}}",
+      "website": "Website",
+      "contact": "Contact",
+      "sampleNotice": "<strong>Voorbeeldbedrijf.</strong> Deze pagina laat zien hoe een handelaar eruitziet op GiftHub. De aanbiedingen zijn voorbeelden en kunnen niet worden gekocht.",
+      "offersHeading": "Aanbiedingen",
+      "noOffers": "Momenteel geen aanbiedingen",
+      "noOffersHint": "Nieuwe aanbiedingen van {name} verschijnen hier.",
+      "browseOther": "Andere aanbiedingen bekijken",
+      "validUntil": "Geldig tot {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Campagnes",
+      "mainNav": "Hoofdmenu",
+      "signIn": "Inloggen"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Ontdek lokale handelaars",
+      "hubHeroSubtitle": "Bekijk campagnes, vouchers, verhuur en winkels van handelaars op GiftHub.",
+      "tenantHeroSubtitle": "Ontdek producten, verhuur en vouchers op één plek.",
+      "browseCampaigns": "Campagnes bekijken",
+      "getStarted": "Aan de slag",
+      "featuredMerchants": "Uitgelichte handelaars",
+      "noMerchants": "Nog geen handelaars.",
+      "visitNamed": "Bezoek {name}",
+      "visitMerchant": "Handelaar bezoeken",
+      "featuredProducts": "Uitgelichte producten",
+      "noProducts": "Geen producten beschikbaar.",
+      "rentalHighlights": "Uitgelichte verhuur",
+      "noRentals": "Geen verhuur beschikbaar.",
+      "perDay": "{price} / dag",
+      "activeVouchers": "Actieve vouchers",
+      "noStandaloneVouchers": "Hier zijn momenteel geen losse vouchers — <link>bekijk {count, plural, one {# actieve campagne} other {# actieve campagnes}}</link>.",
+      "noVouchers": "Geen vouchers beschikbaar.",
+      "voucher": "Voucher",
+      "viewVoucher": "Voucher bekijken",
+      "stats": {
+        "campaigns": "Campagnes",
+        "vouchers": "Vouchers",
+        "products": "Producten",
+        "rentals": "Verhuur"
+      },
+      "statsUnavailable": "Statistieken niet beschikbaar."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Winkel",
+      "subtitle": "Bekijk producten en voeg ze toe aan je winkelwagen."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Afrekenintentie aangemaakt",
+      "intentCreatedDescription": "Intentie {id} voor {amount}",
+      "checkoutErrorTitle": "Fout bij afrekenen",
+      "checkoutErrorDescription": "Kan afrekenintentie niet aanmaken.",
+      "empty": "Nog geen producten beschikbaar.",
+      "productHighlight": "Uitgelicht product",
+      "add": "Toevoegen",
+      "cart": "Winkelwagen",
+      "cartEmpty": "Winkelwagen is leeg.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Verwijderen",
+      "total": "Totaal",
+      "creatingIntent": "Intentie aanmaken...",
+      "checkoutIntent": "Afrekenintentie"
+    },
+    "rentPage": {
+      "metaTitle": "Verhuurmarktplaats",
+      "metaDescription": "Bekijk artikelen om te huren",
+      "title": "Verhuur",
+      "subtitle": "Kies data en vraag een huurofferte aan."
+    },
+    "rentClient": {
+      "selectDatesError": "Kies de huurdata.",
+      "bookingFailed": "Boeking mislukt",
+      "bookingCreated": "Boekingsaanvraag aangemaakt voor {name}. Totaal: {total}.",
+      "bookingSubmitted": "Boeking verzonden",
+      "bookingCreateFailed": "Kan huurboeking niet aanmaken.",
+      "bookingCancelled": "Boeking geannuleerd.",
+      "cancelFailed": "Boeking annuleren mislukt.",
+      "datesHeading": "Huurdata",
+      "startDate": "Startdatum",
+      "endDate": "Einddatum",
+      "daysSelected": "{count, plural, one {# huurdag geselecteerd.} other {# huurdagen geselecteerd.}}",
+      "selectDatesHint": "Kies data om de prijs te berekenen.",
+      "empty": "Nog geen huurartikelen beschikbaar.",
+      "rentalHighlight": "Uitgelicht huurartikel",
+      "perDay": "{price} / dag",
+      "weeklyRate": "Per week: {price}",
+      "select": "Kiezen",
+      "selectedHeading": "Gekozen huurartikel",
+      "estimatedTotal": "Geschat totaal",
+      "notesLabel": "Opmerkingen (optioneel)",
+      "notesPlaceholder": "Eventuele speciale wensen...",
+      "submitting": "Boeking verzenden...",
+      "requestBooking": "Huurboeking aanvragen",
+      "myBookings": "Mijn boekingen",
+      "noBookings": "Nog geen huurboekingen. Kies hierboven een artikel om te beginnen.",
+      "bookingRange": "{start} - {end} ({days, plural, one {# dag} other {# dagen}})",
+      "bookingTotal": "Totaal: {total}",
+      "rejectionReason": "Reden: {reason}",
+      "cancelling": "Annuleren...",
+      "cancel": "Annuleren",
+      "status": {
+        "pending": "in behandeling",
+        "approved": "goedgekeurd",
+        "rejected": "afgewezen",
+        "paid": "betaald",
+        "active": "actief",
+        "returned": "teruggebracht",
+        "cancelled": "geannuleerd"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Abonnementsboxen",
+      "metaDescription": "Neem een abonnement op samengestelde maandelijkse voucherboxen van je favoriete lokale handelaars — elke periode nieuwe aanbiedingen, altijd opzegbaar.",
+      "title": "Abonnementsboxen",
+      "subtitle": "Ontvang regelmatig zorgvuldig geselecteerde vouchers van tophandelaars.",
+      "empty": "Nog geen abonnementsboxen beschikbaar. Kom snel terug!",
+      "byMerchant": "door {name}",
+      "perInterval": "/{interval}",
+      "details": "Details",
+      "subscribe": "Abonneren",
+      "subscribedTitle": "Geabonneerd",
+      "subscribedMessage": "Je bent nu geabonneerd. Bekijk je e-mail voor de details.",
+      "subscribeFailed": "Abonneren mislukt. Probeer het opnieuw.",
+      "notFoundTitle": "Box niet gevonden",
+      "notFoundHint": "Deze abonnementsbox is niet beschikbaar.",
+      "browseAll": "← Alle boxen bekijken",
+      "backToAll": "← Alle abonnementsboxen",
+      "subscriberCount": "{count, plural, one {# abonnee} other {# abonnees}}",
+      "whatsInside": "Wat zit erin",
+      "curatingNext": "Tot {count, plural, one {# geselecteerde voucher} other {# geselecteerde vouchers}} per {period}. De volgende levering wordt samengesteld.",
+      "percentVoucher": "Voucher met {value}% korting",
+      "amountVoucher": "Voucher van {amount}",
+      "curatedVoucher": "Geselecteerde voucher",
+      "subscribing": "Abonneren…",
+      "subscribeWithPrice": "Abonneren — {price}/{interval}",
+      "interval": {
+        "weekly": "week",
+        "monthly": "maand",
+        "quarterly": "kwartaal"
+      },
+      "intervalEach": {
+        "weekly": "week",
+        "monthly": "maand",
+        "quarterly": "kwartaal"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Zoeken",
+    "metaDescription": "Zoek live campagnes en vouchers van handelaars op GiftHub.",
+    "loadingSearch": "Zoeken laden",
+    "title": "Aanbiedingen zoeken",
+    "subtitle": "Vind campagnes en vouchers van handelaars op GiftHub",
+    "queryLabel": "Zoek campagnes, vouchers en handelaars",
+    "queryPlaceholder": "Zoek campagnes, vouchers, handelaars...",
+    "toggleFilters": "Filters tonen/verbergen",
+    "filtersTitle": "Filters",
+    "closeFilters": "Filters sluiten",
+    "error": "Zoeken is momenteel niet beschikbaar. Probeer het zo opnieuw.",
+    "campaignsHeading": "Campagnes",
+    "vouchersHeading": "Vouchers",
+    "browseMarketplace": "Bekijk alles wat te koop is op de <link>campagnemarktplaats</link>.",
+    "campaignEnds": "Eindigt op {date}",
+    "filters": {
+      "title": "Filters",
+      "clearAll": "Alles wissen",
+      "category": "Categorie",
+      "discountType": "Soort korting",
+      "minDiscount": "Min. korting",
+      "minDiscountAria": "Minimale korting",
+      "maxPrice": "Max. prijs",
+      "maxPriceAria": "Maximale prijs in euro",
+      "any": "Alle",
+      "sortBy": "Sorteren op",
+      "types": {
+        "all": "Alle soorten",
+        "percentage": "Percentage korting",
+        "fixed_amount": "Vast bedrag",
+        "credit_amount": "Winkeltegoed"
+      },
+      "sort": {
+        "newest": "Nieuwste eerst",
+        "popular": "Populairste",
+        "expiring": "Verloopt binnenkort"
+      }
+    },
+    "results": {
+      "chipCategory": "Categorie: {value}",
+      "chipType": "Soort: {value}",
+      "chipMinDiscount": "Min. {value}% korting",
+      "chipMaxPrice": "Max. €{value}",
+      "chipSort": "Sortering: {value}",
+      "removeFilter": "Filter {label} verwijderen",
+      "searching": "Zoeken...",
+      "count": "{total, plural, one {<num>#</num> resultaat} other {<num>#</num> resultaten}}",
+      "countForQuery": "{total, plural, one {<num>#</num> resultaat voor ‘<hl>{query}</hl>’} other {<num>#</num> resultaten voor ‘<hl>{query}</hl>’}}",
+      "flash": "Flash",
+      "voucherFallback": "Voucher",
+      "expires": "Verloopt op {date}",
+      "redeemed": "{count} ingewisseld",
+      "noResultsTitle": "Geen resultaten gevonden",
+      "noResultsQuery": "Geen vouchers gevonden voor \"{query}\". Pas je filters aan.",
+      "noResultsHint": "Zoek op een specifieke voucher, handelaar of categorie."
+    }
+  },
+  "faq": {
+    "metaTitle": "Veelgestelde vragen",
+    "metaDescription": "Antwoorden op veelgestelde vragen over het kopen, inwisselen en beheren van vouchers en cadeaukaarten — betalingen, terugbetalingen, vervaldata en ondersteuning voor handelaars.",
+    "title": "Veelgestelde vragen",
+    "subtitle": "Vind antwoorden op veelgestelde vragen over ons platform.",
+    "categories": {
+      "general": "Algemeen",
+      "purchasing": "Kopen & betalen",
+      "vouchers": "Vouchers & inwisselen",
+      "account": "Account & beveiliging",
+      "merchants": "Voor handelaars",
+      "loyalty": "Loyaliteit & beloningen"
+    },
+    "items": {
+      "whatIs": {
+        "q": "Wat is GiftHub?",
+        "a": "GiftHub is een marktplaats voor digitale vouchers, cadeaukaarten en evenemententickets die handelaars en klanten met elkaar verbindt. Handelaars kunnen digitale producten maken en verkopen, en klanten kunnen ze kopen, cadeau geven en inwisselen."
+      },
+      "isFree": {
+        "q": "Is het platform gratis te gebruiken?",
+        "a": "Rondkijken en een account aanmaken is gratis. Klanten betalen alleen voor de producten die ze kopen. Handelaars betalen een maandabonnement plus {fee}% transactiekosten op voucherverkopen."
+      },
+      "countries": {
+        "q": "Welke landen worden ondersteund?",
+        "a": "We ondersteunen handelaars en klanten in de hele EU, met {currencies} valuta's en {languages} talen."
+      },
+      "howToBuy": {
+        "q": "Hoe koop ik een voucher?",
+        "a": "Bekijk de beschikbare vouchers, klik op \"Kopen\" en rond de betaling af via Stripe. Je voucher verschijnt direct na betaling in je portemonnee."
+      },
+      "paymentMethods": {
+        "q": "Welke betaalmethoden worden geaccepteerd?",
+        "a": "Betalingen worden veilig verwerkt door Stripe. De betaalmethoden die beschikbaar zijn voor je aankoop zie je bij het afrekenen."
+      },
+      "refund": {
+        "q": "Kan ik mijn geld terugkrijgen?",
+        "a": "Het terugbetalingsbeleid wordt door elke handelaar zelf bepaald. Bekijk vóór aankoop het specifieke terugbetalingsbeleid op de detailpagina van de voucher."
+      },
+      "howToRedeem": {
+        "q": "Hoe wissel ik een voucher in?",
+        "a": "Open je portemonnee, kies de voucher en toon de QR-code aan de handelaar. Die scant hem om de inwisseling te bevestigen. Je kunt ook inwisselen door handmatig een code in te voeren."
+      },
+      "expiry": {
+        "q": "Wat gebeurt er als een voucher verloopt?",
+        "a": "Verlopen vouchers kunnen niet worden ingewisseld. Je krijgt een melding voordat een voucher verloopt. Bekijk de vervaldata in je portemonnee."
+      },
+      "gift": {
+        "q": "Kan ik een voucher cadeau geven?",
+        "a": "Ja! Kies bij het kopen \"Als cadeau versturen\" en voer het e-mailadres van de ontvanger in. Die ontvangt de voucher met een persoonlijk bericht."
+      },
+      "twoFactor": {
+        "q": "Hoe schakel ik tweestapsverificatie in?",
+        "a": "Ga naar Instellingen → Beveiliging → Tweestapsverificatie. Je kunt TOTP (Google Authenticator) instellen of een passkey (biometrisch) gebruiken."
+      },
+      "biometrics": {
+        "q": "Kan ik inloggen met biometrie?",
+        "a": "Ja! We ondersteunen passkeys — log in met Face ID, je vingerafdruk of Windows Hello. Stel het in via Instellingen → Beveiliging."
+      },
+      "deleteAccount": {
+        "q": "Hoe verwijder ik mijn account?",
+        "a": "Ga naar Instellingen → Privacy → Account verwijderen. Al je gegevens worden binnen 30 dagen gewist, conform ons AVG-beleid. Je kunt je gegevens eerst exporteren."
+      },
+      "startSelling": {
+        "q": "Hoe begin ik met verkopen?",
+        "a": "Registreer je als handelaar, doorloop de onboarding en maak je eerste voucher. Je kunt direct beginnen met verkopen zodra je profiel is goedgekeurd."
+      },
+      "fees": {
+        "q": "Wat zijn de platformkosten?",
+        "a": "Na een gratis proefperiode van {trialDays} dagen kosten de abonnementen {starter} {starterPrice}, {pro} {proPrice} of {scale} {scalePrice} per maand (jaarlijks betalen: 2 maanden gratis), plus {fee}% transactiekosten op voucherverkopen, ingehouden op de uitbetaling."
+      },
+      "integrations": {
+        "q": "Kan ik koppelen met mijn bestaande systemen?",
+        "a": "Ja! We bieden webhooks (voor realtime meldingen van gebeurtenissen), API-sleutels (voor programmatische toegang) en koppelingen met Zapier, Slack en Discord."
+      },
+      "trackSales": {
+        "q": "Hoe volg ik mijn verkopen?",
+        "a": "Je handelaarsdashboard toont realtime analyses, waaronder omzet, inwisselingen, klantinzichten en AI-vragen in gewone taal (\"toon de omzet van vorige week\")."
+      },
+      "loyalty": {
+        "q": "Hoe werkt het loyaliteitsprogramma?",
+        "a": "Verdien punten met aankopen, dagelijkse check-ins, verwijzingen en het schrijven van beoordelingen. Met punten ontgrendel je niveaus (Brons → Zilver → Goud → Platina → Diamant) met steeds meer voordelen."
+      },
+      "badges": {
+        "q": "Wat zijn badges en reeksen?",
+        "a": "Badges zijn prestaties die je verdient bij mijlpalen (eerste aankoop, 10 verwijzingen, enz.). Reeksen houden opeenvolgende dagen met activiteit bij en belonen regelmaat."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Neem contact op met het GiftHub-team — vragen over je vouchers, onboarding van handelaars, facturering of samenwerkingen.",
+    "title": "Contact",
+    "subtitle": "Heb je een vraag? We horen graag van je.",
+    "email": "E-mail",
+    "assistantTitle": "Automatische assistent",
+    "assistantText": "Snelle antwoorden over vouchers en je account via de chatknop in de hoek. Dit is een automatische assistent, geen persoon.",
+    "name": "Naam",
+    "subject": "Onderwerp",
+    "message": "Bericht",
+    "sent": "Bericht verzonden! We nemen snel contact met je op.",
+    "unavailableWithEmail": "Het contactformulier is momenteel niet beschikbaar. Mail ons op {email}.",
+    "unavailable": "Het contactformulier is momenteel niet beschikbaar. Probeer het later opnieuw.",
+    "error": "Verzenden mislukt. Probeer het zo opnieuw.",
+    "sending": "Verzenden...",
+    "send": "Bericht versturen"
+  },
+  "leaderboardPage": {
+    "metaTitle": "Tophandelaars",
+    "metaDescription": "De handelaars met de meeste voucherinwisselingen op GiftHub in de afgelopen 30 dagen",
+    "title": "Tophandelaars",
+    "subtitle": "Meeste voucherinwisselingen in de afgelopen 30 dagen",
+    "rank": "Plaats {rank}",
+    "redemptions": "{count, plural, one {<num>#</num><label>inwisseling</label>} other {<num>#</num><label>inwisselingen</label>}}",
+    "empty": "Nog geen inwisselingen in de afgelopen 30 dagen, dus er is nog geen ranglijst.",
+    "browseCampaigns": "Live campagnes bekijken"
+  },
+  "ui": {
+    "close": "Sluiten",
+    "more": "Meer",
+    "loading": "Laden...",
+    "breadcrumb": {
+      "label": "kruimelpad"
+    },
+    "pagination": {
+      "label": "paginering",
+      "previousAria": "Naar vorige pagina",
+      "previous": "Vorige",
+      "nextAria": "Naar volgende pagina",
+      "next": "Volgende",
+      "morePages": "Meer pagina's"
+    },
+    "toast": {
+      "dismiss": "Melding sluiten"
+    },
+    "calendar": {
+      "previousMonth": "Naar vorige maand",
+      "nextMonth": "Naar volgende maand"
+    },
+    "datePicker": {
+      "placeholder": "Kies een datum"
+    },
+    "combobox": {
+      "placeholder": "Kies een optie...",
+      "empty": "Geen optie gevonden.",
+      "search": "Zoeken..."
+    },
+    "searchInput": {
+      "clear": "Zoekopdracht wissen"
+    },
+    "searchResults": {
+      "empty": "Geen resultaten gevonden",
+      "noResultsFor": "Geen resultaten gevonden voor \"{query}\". Probeer andere zoekwoorden."
+    },
+    "commandPalette": {
+      "placeholder": "Zoeken...",
+      "noResults": "Geen resultaten gevonden",
+      "toOpen": "om te openen",
+      "other": "Overig",
+      "hostPlaceholder": "Waar wil je naartoe?",
+      "categories": {
+        "navigate": "Navigeren",
+        "discover": "Ontdekken",
+        "account": "Account"
+      },
+      "items": {
+        "home": {
+          "label": "Home",
+          "description": "Startpagina"
+        },
+        "app": {
+          "label": "Mijn dashboard",
+          "description": "Je vouchers, portemonnee en activiteit"
+        },
+        "vouchers": {
+          "label": "Mijn vouchers"
+        },
+        "wallet": {
+          "label": "Portemonnee",
+          "description": "Tegoedsaldi"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "Cadeaus bekijken en versturen"
+        },
+        "campaigns": {
+          "label": "Campagnes",
+          "description": "Actieve vouchercampagnes"
+        },
+        "hub": {
+          "label": "Handelaarshub",
+          "description": "Handelaars bekijken"
+        },
+        "deals": {
+          "label": "Deals"
+        },
+        "settings": {
+          "label": "Instellingen",
+          "description": "Account en voorkeuren"
+        },
+        "admin": {
+          "label": "Beheer",
+          "description": "Platformbeheer"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Bevestigen",
+      "cancel": "Annuleren"
+    },
+    "dataTable": {
+      "noResults": "Geen resultaten."
+    },
+    "fileUpload": {
+      "maxFiles": "Maximaal {maxFiles, plural, one {# bestand} other {# bestanden}} toegestaan",
+      "tooLarge": "Bestanden moeten kleiner zijn dan {maxSize} MB",
+      "dropHere": "Zet bestanden hier neer",
+      "dragDrop": "Sleep bestanden hierheen",
+      "browseHint": "of klik om te bladeren (max. {maxSize} MB per bestand)",
+      "select": "Bestanden kiezen",
+      "remove": "{name} verwijderen"
+    },
+    "imageUpload": {
+      "notImage": "Upload een afbeeldingsbestand",
+      "tooLarge": "Afbeelding moet kleiner zijn dan {maxSize} MB",
+      "previewAlt": "Voorbeeld",
+      "remove": "Afbeelding verwijderen",
+      "dropHere": "Zet afbeelding hier neer",
+      "upload": "Afbeelding uploaden",
+      "hint": "PNG, JPG, GIF tot {maxSize} MB",
+      "select": "Afbeelding kiezen"
+    },
+    "statsCard": {
+      "open": "Openen"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% cashback"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Actief",
+        "redeemed": "Gebruikt",
+        "expired": "Verlopen"
+      },
+      "redeem": "Inwisselen",
+      "expires": "Verloopt op {date}",
+      "merchantAlt": "Handelaar"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Inloggen",
+      "register": "Account aanmaken",
+      "resetPassword": "Wachtwoord opnieuw instellen"
+    },
+    "error": {
+      "title": "Er is iets misgegaan",
+      "fallback": "Er is een onverwachte fout opgetreden.",
+      "tryAgain": "Opnieuw proberen"
+    },
+    "login": {
+      "welcome": "Welkom terug",
+      "subtitle": "Log in op je GiftHub-account",
+      "tabMagic": "Magische link",
+      "tabPassword": "Wachtwoord",
+      "tabSocial": "Sociaal",
+      "tabPasskey": "Passkey",
+      "emailLabel": "E-mailadres",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Wachtwoord",
+      "sendCode": "Inlogcode versturen",
+      "sending": "Versturen…",
+      "signIn": "Inloggen",
+      "signingIn": "Inloggen…",
+      "otpTitle": "Controleer je e-mail!",
+      "otpDesc": "We hebben een 6-cijferige code gestuurd naar <b>{email}</b>",
+      "otpLabel": "Voer de code in",
+      "verify": "Code verifiëren",
+      "verifying": "Verifiëren…",
+      "resend": "Code opnieuw versturen",
+      "backToEmail": "Terug",
+      "orContinueWith": "Of ga verder met",
+      "continueWith": "Doorgaan met {provider}",
+      "errorWrongCode": "Ongeldige of verlopen code. Probeer het opnieuw.",
+      "errorWrongPass": "Ongeldig e-mailadres of wachtwoord.",
+      "errorGeneric": "Er is iets misgegaan. Probeer het opnieuw.",
+      "errorEmailUnavailable": "Inloggen via e-mail is momenteel niet beschikbaar — gebruik je wachtwoord.",
+      "errorCredentialsSignin": "Onjuist e-mailadres of wachtwoord.",
+      "errorAuthGeneric": "Inloggen mislukt. Probeer het opnieuw.",
+      "backToHome": "Terug naar de startpagina",
+      "socialDesc": "Log direct in met je favoriete account",
+      "noAccount": "Nog geen account?",
+      "createAccount": "Account aanmaken",
+      "noAccountSub": "Inloggen met een code maakt een account aan voor een nieuw e-mailadres.",
+      "registered": "Account aangemaakt — log in met je e-mailadres en wachtwoord.",
+      "magicDesc": "We sturen een 6-cijferige code naar je e-mail. Geen wachtwoord nodig.",
+      "passwordDesc": "Log in met je e-mailadres en wachtwoord.",
+      "forgotPassword": "Wachtwoord vergeten?",
+      "demo": "Demo-accounts",
+      "demoRole": {
+        "platformAdmin": "Platformbeheerder",
+        "merchantAdmin": "Handelaarsbeheerder",
+        "merchantStaff": "Medewerker handelaar",
+        "endUser": "Eindgebruiker"
+      },
+      "passkeyDesc": "Log direct in met je vingerafdruk, gezicht of beveiligingssleutel.",
+      "passkeyButton": "Inloggen met passkey",
+      "passkeyAuthenticating": "Verifiëren…"
+    },
+    "register": {
+      "backToHome": "Terug naar de startpagina",
+      "title": "Maak je account aan",
+      "subtitle": "Begin met het ontdekken en beheren van vouchers",
+      "nameLabel": "Volledige naam",
+      "namePlaceholder": "Jan Jansen",
+      "emailLabel": "E-mailadres",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Wachtwoord",
+      "passwordPlaceholder": "Min. 8 tekens",
+      "submit": "Account aanmaken",
+      "submitting": "Account aanmaken...",
+      "haveAccount": "Heb je al een account?",
+      "signIn": "Inloggen",
+      "errorWeak": "Wachtwoord is te zwak. Kies een sterker wachtwoord.",
+      "errorInvalid": "Ongeldige invoer.",
+      "errorFallback": "Er is iets misgegaan.",
+      "errorGeneric": "Er is iets misgegaan. Probeer het opnieuw."
+    },
+    "resetPassword": {
+      "title": "Wachtwoord opnieuw instellen",
+      "subtitle": "Voer hieronder je nieuwe wachtwoord in",
+      "newPassword": "Nieuw wachtwoord",
+      "confirmPassword": "Wachtwoord bevestigen",
+      "submit": "Nieuw wachtwoord instellen",
+      "submitting": "Opnieuw instellen…",
+      "success": "Wachtwoord opnieuw ingesteld!",
+      "successDesc": "Je wachtwoord is bijgewerkt. Je kunt nu inloggen.",
+      "goToLogin": "Naar inloggen",
+      "errorMismatch": "Wachtwoorden komen niet overeen",
+      "errorShort": "Wachtwoord moet minimaal 8 tekens bevatten",
+      "errorWeak": "Wachtwoord is te zwak. Kies een sterker wachtwoord.",
+      "errorExpired": "Deze resetlink is ongeldig of verlopen.",
+      "forgotTitle": "Wachtwoord vergeten?",
+      "forgotSubtitle": "Voer je e-mailadres in en we sturen je een resetlink",
+      "emailLabel": "E-mailadres",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Resetlink versturen",
+      "sending": "Versturen…",
+      "linkSent": "Controleer je e-mail!",
+      "linkSentDesc": "Als er een account met dit e-mailadres bestaat, hebben we een resetlink gestuurd.",
+      "backToLogin": "Terug naar inloggen"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Welkom aan boord!",
+      "joined": "Je bent lid geworden van {orgName}. Je wordt doorgestuurd…",
+      "accepted": "Uitnodiging geaccepteerd. Je wordt doorgestuurd…",
+      "problemTitle": "Probleem met uitnodiging",
+      "errorNotAccepted": "Deze uitnodiging kon niet worden geaccepteerd.",
+      "errorGeneric": "Er is iets misgegaan. Probeer het opnieuw.",
+      "goToOrgs": "Naar je organisaties",
+      "invitedTitle": "Je bent uitgenodigd",
+      "invitedDesc": "Accepteer deze uitnodiging om lid te worden van de organisatie. Mogelijk moet je eerst inloggen.",
+      "accepting": "Accepteren…",
+      "accept": "Uitnodiging accepteren"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Cadeaukaarten & cadeaus",
+      "description": "Bekijk en koop digitale cadeaukaarten van lokale handelaars. Verstuur in een paar seconden een attent cadeau — bezorgd per e-mail, in te wisselen in de winkel of online."
+    },
+    "publicCard": {
+      "defaultHeadline": "Cadeaukaart",
+      "imageAlt": "Cadeaukaart",
+      "logoAlt": "Merklogo",
+      "merchant": "Handelaar: {name}",
+      "merchantFallback": "Handelaar",
+      "code": "Code: {code}",
+      "validUntil": "Geldig tot: {date}",
+      "noExpiry": "Verloopt niet",
+      "showQr": "Toon deze QR aan het personeel om de cadeaukaart in te wisselen.",
+      "statusMessage": "Deze cadeaukaart is {status}.",
+      "status": {
+        "active": "actief",
+        "redeemed": "ingewisseld",
+        "expired": "verlopen",
+        "cancelled": "geannuleerd"
+      }
+    },
+    "purchase": {
+      "title": "Cadeaukaart kopen",
+      "loading": "Laden...",
+      "notAvailable": "Cadeaukaart niet beschikbaar",
+      "defaultHeadline": "Cadeaukaart",
+      "imageAlt": "Cadeaukaart",
+      "logoAlt": "Merk",
+      "fromMerchant": "van {merchant}",
+      "form": {
+        "recipientEmail": "E-mailadres ontvanger (optioneel)",
+        "recipientEmailPlaceholder": "Stuur de cadeaukaart naar dit e-mailadres",
+        "recipientName": "Naam ontvanger",
+        "recipientNamePlaceholder": "Aan",
+        "senderName": "Je naam",
+        "senderNamePlaceholder": "Van",
+        "message": "Persoonlijk bericht (optioneel)",
+        "messagePlaceholder": "Voeg een persoonlijk bericht toe..."
+      },
+      "total": "Totaal:",
+      "processing": "Verwerken...",
+      "buy": "Cadeaukaart kopen",
+      "errors": {
+        "notFound": "Cadeaukaart niet gevonden of niet te koop",
+        "loadFailed": "Kan cadeaukaart niet laden",
+        "purchaseFailed": "Aankoop mislukt",
+        "generic": "Er is iets misgegaan. Probeer het opnieuw."
+      }
+    },
+    "product": {
+      "notFound": "Cadeau niet gevonden",
+      "backToHub": "Terug naar Gift Hub",
+      "imageAlt": "{title} {index}",
+      "featured": "Uitgelicht",
+      "lowStock": "Nog maar {count} op voorraad",
+      "buyNow": "Nu kopen",
+      "addToCart": "In winkelwagen",
+      "saveToWishlist": "Bewaren op verlanglijst",
+      "removeFromWishlist": "Verwijderen van verlanglijst",
+      "share": "Deel dit cadeau",
+      "upsellsTitle": "Misschien vind je dit ook leuk"
+    },
+    "claim": {
+      "metaTitle": "Claim je cadeau",
+      "alreadyClaimedTitle": "Cadeau al geclaimd",
+      "alreadyClaimedBody": "Dit cadeau is al geclaimd.",
+      "expiredTitle": "Cadeau verlopen",
+      "expiredBody": "Sorry, deze cadeaulink is verlopen.",
+      "title": "Je hebt een cadeau gekregen!",
+      "signedInHint": "Klik hieronder om deze voucher aan je portemonnee toe te voegen.",
+      "signedOutHint": "Log in om deze voucher te claimen.",
+      "claimButton": "Cadeau claimen",
+      "signInButton": "Inloggen om te claimen"
+    },
+    "error": {
+      "title": "Kan de Gift Hub niet laden",
+      "fallback": "Er is een onverwachte fout opgetreden bij het laden van cadeaus.",
+      "retry": "Opnieuw proberen"
+    },
+    "hub": {
+      "title": "Cadeaus",
+      "subtitle": "Vind het perfecte cadeau voor elke gelegenheid",
+      "loadError": "Cadeaus konden niet worden geladen",
+      "retry": "Opnieuw proberen",
+      "emptyCatalog": {
+        "title": "Er staan nog geen cadeaus online",
+        "body": "Vouchers van lokale handelaars zijn intussen ook een mooi cadeau."
+      },
+      "noMatches": "Geen cadeaus gevonden met deze filters",
+      "clearFilters": "Filters wissen",
+      "browseCampaigns": "Campagnes bekijken",
+      "allGifts": "Alle cadeaus",
+      "loadMore": "Meer laden"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Cadeaukaart niet gevonden",
+        "body": "De QR-code is ongeldig of verlopen."
+      },
+      "notActive": {
+        "title": "Cadeaukaart nog niet actief",
+        "body": "Deze cadeaukaart wordt later geldig."
+      },
+      "expired": {
+        "title": "Cadeaukaart verlopen",
+        "body": "Deze cadeaukaart is niet meer geldig."
+      },
+      "result": {
+        "title": "Cadeaukaart ingewisseld",
+        "confirmed": "Inwisseling bevestigd.",
+        "alreadyRedeemedOrCancelled": "Deze cadeaukaart is al ingewisseld of geannuleerd.",
+        "alreadyRedeemedOrInvalid": "Deze cadeaukaart is al ingewisseld of ongeldig."
+      }
+    },
+    "qr": {
+      "error": "QR-code genereren mislukt",
+      "generating": "QR genereren...",
+      "alt": "QR-code"
+    },
+    "wizard": {
+      "title": "AI-cadeauzoeker",
+      "subtitle": "Vertel ons over de ontvanger en wij vinden het perfecte cadeau",
+      "steps": {
+        "recipient": "Voor wie is het cadeau?",
+        "occasion": "Wat is de gelegenheid?",
+        "budget": "Wat is je budget?"
+      },
+      "recipients": {
+        "partner": "Partner",
+        "friend": "Vriend(in)",
+        "parent": "Ouder",
+        "colleague": "Collega",
+        "child": "Kind",
+        "teacher": "Leraar"
+      },
+      "occasions": {
+        "birthday": "Verjaardag",
+        "christmas": "Kerst",
+        "anniversary": "Jubileum",
+        "thankYou": "Bedankje",
+        "justBecause": "Zomaar",
+        "graduation": "Diploma-uitreiking"
+      },
+      "summary": {
+        "for": "Voor: {recipient}",
+        "budget": "Budget: {amount}"
+      },
+      "submit": "Vind perfecte cadeaus",
+      "error": "Kan geen aanbevelingen genereren. Probeer het opnieuw.",
+      "results": {
+        "found": "We hebben {count, plural, one {# cadeau} other {# cadeaus}} voor je gevonden:",
+        "empty": "Geen passende producten gevonden. Pas je criteria aan."
+      },
+      "startOver": "Opnieuw beginnen"
+    },
+    "card": {
+      "featured": "Uitgelicht",
+      "save": "Bewaren",
+      "unsave": "Niet meer bewaren",
+      "buyNow": "Nu kopen"
+    },
+    "feedSection": {
+      "viewAll": "Alles bekijken"
+    },
+    "filters": {
+      "toggle": "Filters",
+      "clear": "Wissen",
+      "occasion": "Gelegenheid",
+      "persona": "Voor wie is het?",
+      "budget": "Budget",
+      "budgetUnder": "Onder {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Deel deals en verdien beloningen"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Er is een onverwachte fout opgetreden."
+    },
+    "logoAlt": "Logo van {name}",
+    "merchantFallback": "Handelaar",
+    "validUntil": "Geldig tot {date}",
+    "validUntilWithLimit": "Geldig tot {date} - Eerste {count, plural, one {# gebruik} other {# gebruiken}}",
+    "offAtMerchant": "{value} korting bij {merchant}",
+    "fields": {
+      "event": "Evenement",
+      "dateTime": "Datum & tijd",
+      "location": "Locatie",
+      "price": "Prijs",
+      "status": "Status",
+      "attendee": "Deelnemer",
+      "usedAt": "Gebruikt op"
+    },
+    "ticketStatus": {
+      "available": "Beschikbaar",
+      "sold": "Verkocht",
+      "used": "Gebruikt",
+      "cancelled": "Geannuleerd",
+      "refunded": "Terugbetaald"
+    },
+    "event": {
+      "notAvailable": "Voor dit evenement kunnen geen tickets worden gekocht.",
+      "descriptionFallback": "Kom naar dit geweldige evenement!",
+      "availableTickets": "Beschikbare tickets",
+      "soldOut": "Uitverkocht",
+      "availableCount": "{count} beschikbaar",
+      "terms": "Algemene voorwaarden",
+      "soldOutTitle": "Dit evenement is uitverkocht",
+      "soldOutDescription": "Alle tickets zijn verkocht."
+    },
+    "eventPurchase": {
+      "title": "Ticket kopen",
+      "description": "Kies een ticket en rond je aankoop af",
+      "selectTicket": "Ticket kiezen",
+      "attendeeNameLabel": "Naam deelnemer (optioneel)",
+      "attendeeNamePlaceholder": "Naam van de persoon die komt",
+      "attendeeEmailLabel": "E-mailadres deelnemer (optioneel)",
+      "attendeeEmailPlaceholder": "E-mailadres voor het ticket",
+      "total": "Totaal",
+      "submit": "Ticket kopen",
+      "noTickets": "Momenteel geen tickets beschikbaar.",
+      "checkBackLater": "Kom later terug of neem contact op met de organisator.",
+      "selectTicketError": "Kies een ticket",
+      "purchaseFailed": "Ticket kopen mislukt"
+    },
+    "ticket": {
+      "noPermission": "Je hebt geen toestemming om dit ticket te bekijken.",
+      "heading": "Ticket #{number}",
+      "qrTitle": "QR-code",
+      "qrDescription": "Toon deze QR-code bij de ingang van het evenement",
+      "qrAlt": "QR-code van ticket",
+      "qrUnavailable": "QR-code niet beschikbaar",
+      "ticketNumber": "Ticketnummer: <strong>{number}</strong>",
+      "used": "Ticket is gebruikt",
+      "detailsTitle": "Ticketgegevens",
+      "detailsDescription": "Belangrijke informatie over je ticket",
+      "staffCanRedeem": "Als medewerker van de handelaar kun je dit ticket op het evenement inwisselen."
+    },
+    "redeem": {
+      "notFoundTitle": "Inwisseling niet gevonden",
+      "notFoundDescription": "De QR-code is ongeldig of verlopen.",
+      "title": "Voucher ingewisseld",
+      "alreadyRedeemed": "Deze voucher is al ingewisseld.",
+      "confirmed": "Inwisseling bevestigd."
+    },
+    "qrCheckout": {
+      "title": "Afrekenen via QR",
+      "completeTitle": "Betaling voltooid",
+      "completeDescription": "Je aankoop is bevestigd. Bekijk je e-mail voor de details.",
+      "payNow": "Nu betalen",
+      "confirming": "Bevestigen..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Voucher niet gevonden",
+      "notFoundDescription": "De voucher die je zoekt, kon niet worden gevonden.",
+      "descriptionFallback": "Exclusieve voucheraanbieding",
+      "shareText": "Bekijk deze voucher van {merchant}",
+      "copyCode": "Vouchercode kopiëren",
+      "qrAlt": "QR-code voor voucher {code}",
+      "print": "Voucher afdrukken"
+    },
+    "referralPage": {
+      "voucherFrom": "Je hebt een voucher gekregen van <highlight>{name}</highlight>",
+      "qrAlt": "QR-code om voucher {code} in te wisselen",
+      "offAtMerchantShared": "{value} korting bij {merchant} - Gedeeld door een vriend!"
+    },
+    "bnpl": {
+      "title": "Betalen in termijnen",
+      "description": "Verdeel je betaling van {amount} in eenvoudige maandelijkse termijnen.",
+      "perMonth": "/maand",
+      "planNoInterest": "{months}x (0% rente)",
+      "planWithFee": "{months}x ({rate}% kosten)",
+      "monthlyPayments": "{count, plural, one {# maandelijkse betaling} other {# maandelijkse betalingen}}",
+      "total": "Totaal: {amount}",
+      "noExtraCost": "Geen extra kosten",
+      "payNow": "Nu {amount} betalen"
+    },
+    "qrPanel": {
+      "qrAlt": "QR-code",
+      "generateFailed": "QR-code genereren mislukt",
+      "placeholder": "De QR-code verschijnt hier",
+      "generating": "QR genereren...",
+      "unavailable": "QR niet beschikbaar",
+      "hideCode": "Code verbergen",
+      "showCode": "Code tonen",
+      "expires": "Verloopt op {date}",
+      "refreshNote": "De code wordt elke 30 seconden vernieuwd"
+    },
+    "qrDownload": {
+      "success": "QR-code gedownload!",
+      "failed": "QR-code downloaden mislukt",
+      "downloading": "Downloaden...",
+      "download": "QR downloaden"
+    }
   }
 }

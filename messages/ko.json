@@ -887,5 +887,1720 @@
         "subtitle": "패스키 또는 2단계 인증을 추가하세요."
       }
     }
+  },
+  "labels": {
+    "free": "무료",
+    "valueOff": "{value} 할인",
+    "valueCredit": "{value} 크레딧",
+    "valueDiscount": "{value} 할인",
+    "demo": "데모",
+    "demoHint": "플랫폼 작동 방식을 보여 주는 샘플 콘텐츠입니다. 실제 혜택이 아닙니다.",
+    "category": {
+      "cafe": "카페 & 베이커리",
+      "beauty": "뷰티 & 웰니스",
+      "fitness": "피트니스 & 스포츠",
+      "events": "이벤트 & 티켓",
+      "workshops": "워크숍 & 클래스",
+      "family": "가족 & 키즈",
+      "travel": "여행 & 숙박",
+      "outdoor": "아웃도어 & 어드벤처",
+      "other": "기타",
+      "all": "전체 카테고리"
+    },
+    "voucherType": {
+      "percentage": "퍼센트 할인",
+      "fixed_amount": "금액 할인",
+      "credit_amount": "매장 크레딧"
+    },
+    "voucherStatus": {
+      "draft": "초안",
+      "published": "공개됨",
+      "paused": "일시 중지됨",
+      "ended": "종료됨",
+      "expired": "만료됨"
+    },
+    "campaignStatus": {
+      "draft": "초안",
+      "active": "진행 중",
+      "ended": "종료됨"
+    },
+    "campaignType": {
+      "limited": "1회성 혜택",
+      "weekly": "주간 혜택"
+    },
+    "campaignTypeHelp": {
+      "limited": "시작일과 종료일 사이에 재고가 소진될 때까지 한 번 진행됩니다.",
+      "weekly": "종료일까지 고객이 매주 다시 이용할 수 있는 반복 주간 혜택입니다."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "샘플 혜택 · 판매용 아님",
+    "notOnSale": "아직 판매 전",
+    "purchases": "{count, plural, other {구매 #건}}",
+    "freeToClaim": "무료로 받기",
+    "onSaleNow": "지금 판매 중"
+  },
+  "account": {
+    "error": {
+      "title": "문제가 발생했습니다",
+      "fallback": "예기치 않은 오류가 발생했습니다.",
+      "retry": "다시 시도"
+    },
+    "dashboard": {
+      "metaTitle": "내 대시보드"
+    },
+    "cashback": {
+      "metaTitle": "캐시백 & 크레딧",
+      "title": "캐시백 & 크레딧",
+      "description": "이용하는 모든 판매자에서 적립한 크레딧을 한눈에 확인하세요.",
+      "lockedPending": "잠김 (대기 중)",
+      "used": "사용됨",
+      "expiringTitle": "30일 이내 만료",
+      "expiresOn": "{merchant} — {date} 만료",
+      "expiresSoon": "{merchant} — 곧 만료",
+      "byMerchant": "판매자별",
+      "lastActivity": "최근 활동 {date}",
+      "readyToSpend": "사용 가능",
+      "viewMerchantWallet": "판매자 지갑 보기 →"
+    },
+    "nearby": {
+      "title": "내 주변 혜택",
+      "subtitle": "가까운 판매자의 특가와 바우처를 찾아보세요",
+      "useMyLocation": "내 위치 사용",
+      "approximateLocation": "대략적인 위치 (IP 기반)",
+      "searchRadius": "검색 반경",
+      "yourLocation": "내 위치",
+      "mapLabel": "{radius}km 이내 {count, plural, other {판매자 #곳}}",
+      "merchantsNearby": "주변 {count, plural, other {판매자 #곳}}",
+      "activeVouchers": "{count, plural, other {활성 바우처 #개}}",
+      "emptyTitle": "주변에 판매자가 없습니다",
+      "emptyBody": "검색 반경을 넓히거나 나중에 다시 확인해 주세요.",
+      "expandRadius": "{radius}km로 확장",
+      "errors": {
+        "fetchFailed": "주변 판매자를 불러오지 못했습니다. 다시 시도해 주세요.",
+        "geolocationUnsupported": "이 브라우저는 위치 정보를 지원하지 않습니다.",
+        "permissionDenied": "위치 접근이 거부되었습니다. 브라우저 설정에서 위치를 허용해 주세요.",
+        "positionUnavailable": "위치를 확인할 수 없습니다. 나중에 다시 시도해 주세요.",
+        "timeout": "위치 요청 시간이 초과되었습니다. 다시 시도해 주세요.",
+        "locationFailed": "위치를 가져올 수 없습니다.",
+        "ipLocationFailed": "위치를 확인할 수 없습니다."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "알림 설정"
+    },
+    "redeem": {
+      "notFound": "바우처를 찾을 수 없습니다.",
+      "codeUnavailable": "바우처 코드를 사용할 수 없습니다.",
+      "backToWallet": "지갑으로 돌아가기",
+      "back": "뒤로"
+    },
+    "referrals": {
+      "metaTitle": "내 추천",
+      "completedCount": "완료: {count}"
+    },
+    "voucherDetail": {
+      "back": "뒤로",
+      "merchantFallback": "판매자",
+      "termsTitle": "이용 약관",
+      "terms1": "이 바우처는 위에 표시된 만료일까지 유효합니다. 별도 명시가 없는 한 다른 혜택이나 프로모션과 함께 사용할 수 없습니다.",
+      "terms2": "바우처는 구매 시 제시해야 합니다. 현금 가치가 없으며 현금으로 교환하거나 환불할 수 없습니다.",
+      "terms3": "바우처가 복제, 위변조 또는 부정 사용된 것으로 보이는 경우 판매자는 사용을 거부할 수 있습니다.",
+      "terms4": "문의 사항이나 문제가 있으면 판매자에게 직접 연락해 주세요."
+    },
+    "vouchers": {
+      "unknownMerchant": "알 수 없음",
+      "paidAmount": "결제: {amount}",
+      "activeCount": "사용 가능 ({count})",
+      "pastCount": "지난 바우처 ({count})"
+    },
+    "voucherCard": {
+      "showQr": "QR 코드 보기",
+      "close": "닫기",
+      "qrHint": "매장에서 사용하려면 이 QR 코드를 판매자에게 보여 주세요."
+    },
+    "wallet": {
+      "metaTitle": "내 지갑"
+    },
+    "wishlist": {
+      "unknownItem": "알 수 없는 항목",
+      "merchant": "판매자",
+      "campaign": "캠페인",
+      "validUntil": "{date}까지 유효",
+      "alertOn": "알림 켜짐",
+      "noAlert": "알림 없음",
+      "view": "보기"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "이용할 수 없는 캠페인",
+      "metaDescriptionFallback": "{merchant}의 혜택.",
+      "breadcrumbLabel": "이동 경로",
+      "breadcrumbCampaigns": "캠페인",
+      "demoNotice": "<strong>샘플 혜택입니다.</strong> 이 페이지는 GiftHub에서 혜택이 어떻게 보이는지 보여 줍니다. 업체와 혜택은 예시이며, 구매하거나 사용할 수 없습니다.",
+      "verifiedPartner": "인증 파트너",
+      "aboutTitle": "혜택 소개",
+      "descriptionFallback": "GiftHub 판매자의 특별 혜택.",
+      "howItWorks": {
+        "title": "이용 방법",
+        "claimTitle": "바우처 받기",
+        "buyTitle": "바우처 구매",
+        "buyText": "온라인으로 안전하게 결제하거나, 무료 혜택이라면 무료로 받으세요.",
+        "qrTitle": "QR 코드 받기",
+        "qrText": "바우처는 개인 QR 코드와 함께 GiftHub 지갑에 저장됩니다.",
+        "showTitle": "현장에서 제시",
+        "showText": "{merchant}에서 코드를 스캔하면 할인이 적용됩니다."
+      },
+      "termsTitle": "약관",
+      "voucherOptionsTitle": "바우처 옵션",
+      "voucherFallbackTitle": "바우처",
+      "viewVoucher": "바우처 보기",
+      "reviewsTitle": "리뷰",
+      "purchaseLabel": "구매",
+      "buyNow": "지금 구매",
+      "getFreeVoucher": "무료 바우처 받기",
+      "sampleOffer": "샘플 혜택",
+      "notOnSaleYet": "아직 판매 전",
+      "demoNotForSale": "예시 콘텐츠이므로 구매할 수 없습니다.",
+      "noVoucherYet": "{merchant}에서 아직 이 혜택의 바우처를 공개하지 않았습니다. 나중에 다시 확인해 주세요.",
+      "offerRuns": "혜택 기간",
+      "bought": "구매 횟수",
+      "boughtCount": "{count, plural, other {#회}}",
+      "website": "웹사이트",
+      "allOffersFrom": "{merchant}의 모든 혜택",
+      "moreFrom": "{merchant}의 다른 혜택"
+    },
+    "list": {
+      "allCategories": "전체",
+      "badge": "실시간 캠페인 마켓플레이스",
+      "heroTitle": "유럽에서 가장 인기 있는 혜택을 만나 보세요",
+      "heroSubtitle": "우리 지역 최고의 판매자들이 엄선한 바우처, 선물, 체험을 둘러보세요.",
+      "searchLabel": "캠페인 검색",
+      "searchPlaceholder": "캠페인, 판매자, 서비스 검색...",
+      "campaignCount": "{count, plural, other {캠페인 <b>#</b>개}}",
+      "voucherCount": "{count, plural, other {판매 중인 바우처 <b>#</b>개}}",
+      "merchantCount": "{count, plural, other {판매자 <b>#</b>곳}}",
+      "categoriesLabel": "카테고리",
+      "unavailableTitle": "캠페인을 일시적으로 이용할 수 없습니다",
+      "unavailableText": "데이터베이스에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.",
+      "emptyTitle": "혜택을 찾을 수 없습니다",
+      "emptyText": "다른 검색어를 입력하거나 다른 카테고리를 선택해 보세요.",
+      "tryAgain": "다시 시도",
+      "clearFilters": "필터 초기화"
+    },
+    "listError": {
+      "title": "캠페인을 불러오지 못했습니다",
+      "fallbackMessage": "캠페인을 불러오는 중 예기치 않은 오류가 발생했습니다.",
+      "tryAgain": "다시 시도"
+    },
+    "filters": {
+      "sortBy": "정렬",
+      "sort": {
+        "newest": "최신순",
+        "oldest": "오래된순",
+        "priceLow": "가격 낮은순",
+        "priceHigh": "가격 높은순",
+        "popular": "인기순",
+        "expiring": "마감 임박순"
+      },
+      "merchant": "판매자",
+      "allMerchants": "전체 판매자",
+      "minPrice": "최소 가격",
+      "minPricePlaceholder": "최소 €",
+      "maxPrice": "최대 가격",
+      "maxPricePlaceholder": "최대 €"
+    },
+    "tenantList": {
+      "title": "바우처",
+      "subtitle": "{merchant}의 진행 중인 혜택.",
+      "empty": "아직 이용 가능한 바우처가 없습니다.",
+      "voucher": "바우처",
+      "viewVoucher": "바우처 보기"
+    },
+    "deals": {
+      "metaTitle": "특가",
+      "metaDescription": "최고의 바우처 특가를 만나 보세요"
+    },
+    "campaignShare": {
+      "share": "공유",
+      "copied": "복사됨",
+      "linkCopied": "링크가 복사되었습니다",
+      "copyFailed": "복사 실패"
+    },
+    "shareSheet": {
+      "share": "공유",
+      "title": {
+        "voucher": "이 바우처 공유하기",
+        "campaign": "이 캠페인 공유하기",
+        "merchant": "이 판매자 공유하기"
+      },
+      "close": "닫기",
+      "referralShareText": "{title} - 공유하고 10% 돌려받으세요!",
+      "referralNote": "친구가 사용하면 <b>공유하고 10% 적립</b>!",
+      "targets": {
+        "email": "이메일",
+        "copy": "링크 복사"
+      },
+      "copied": "복사되었습니다!",
+      "linkCopiedToClipboard": "링크가 클립보드에 복사되었습니다!",
+      "linkCopied": "링크가 복사되었습니다!",
+      "shareLinkLabel": "공유 링크",
+      "copyLink": "링크 복사"
+    },
+    "wishlistButton": {
+      "add": "위시리스트에 추가",
+      "remove": "위시리스트에서 삭제"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, other {별 #개}}"
+    },
+    "form": {
+      "title": "리뷰 작성",
+      "ratingLabel": "평점",
+      "titleLabel": "제목 (선택)",
+      "titlePlaceholder": "경험을 한 줄로 요약해 주세요",
+      "commentLabel": "내용 (선택)",
+      "commentPlaceholder": "경험을 공유해 주세요...",
+      "submit": "리뷰 등록",
+      "submitting": "등록 중...",
+      "ratingRequired": "평점을 선택해 주세요",
+      "submitFailed": "리뷰 등록에 실패했습니다",
+      "alreadyReviewed": "이미 이 항목에 리뷰를 작성했습니다",
+      "signInRequired": "리뷰를 작성하려면 로그인하세요",
+      "thankYou": "리뷰를 남겨 주셔서 감사합니다!",
+      "writeAnother": "다른 리뷰 작성"
+    },
+    "list": {
+      "sort": {
+        "newest": "최신순",
+        "highest": "평점 높은순",
+        "helpful": "도움순"
+      },
+      "signInToReview": "리뷰를 작성하려면 로그인하세요",
+      "loadFailed": "리뷰를 불러오지 못했습니다.",
+      "tryAgain": "다시 시도",
+      "empty": "아직 리뷰가 없습니다.",
+      "anonymous": "익명",
+      "verified": "인증됨",
+      "helpfulButton": "도움됨 ({count})",
+      "foundHelpful": "{count}명이 도움이 됐다고 평가했습니다",
+      "previous": "이전",
+      "next": "다음",
+      "pageOf": "{total}페이지 중 {current}페이지"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "취소",
+      "saving": "저장 중…",
+      "somethingWentWrong": "문제가 발생했습니다"
+    },
+    "apiErrors": {
+      "notAuthenticated": "인증되지 않았습니다",
+      "unauthorized": "권한이 없습니다",
+      "tooManyAttempts": "시도 횟수가 너무 많습니다",
+      "validationFailed": "유효성 검사에 실패했습니다",
+      "unexpected": "예기치 않은 오류가 발생했습니다",
+      "databaseFailed": "데이터베이스 작업에 실패했습니다",
+      "serviceUnavailable": "서비스를 일시적으로 이용할 수 없습니다",
+      "newPasswordTooShort": "새 비밀번호는 8자 이상이어야 합니다",
+      "userNotFound": "사용자를 찾을 수 없습니다",
+      "currentPasswordRequired": "현재 비밀번호를 입력해 주세요",
+      "currentPasswordIncorrect": "현재 비밀번호가 올바르지 않습니다",
+      "deletionUnavailable": "계정 삭제를 일시적으로 이용할 수 없습니다. 고객 지원팀에 문의해 주세요.",
+      "totpAlreadyEnabledReconfigure": "2단계 인증이 이미 켜져 있습니다. 다시 설정하려면 먼저 해제하세요.",
+      "sixDigitCodeRequired": "6자리 코드를 입력해 주세요",
+      "totpSetupMissing": "TOTP 설정을 찾을 수 없습니다. 먼저 설정을 시작해 주세요.",
+      "totpAlreadyEnabled": "2단계 인증이 이미 켜져 있습니다",
+      "invalidSetupCode": "잘못된 코드입니다. 인증 앱을 확인한 후 다시 시도해 주세요.",
+      "verificationCodeRequired": "인증 코드를 입력해 주세요",
+      "totpNotEnabled": "2단계 인증이 켜져 있지 않습니다",
+      "invalidDisableCode": "잘못된 코드입니다. 현재 TOTP 코드 또는 백업 코드를 입력하세요.",
+      "passkeyOptionsFailed": "등록 옵션을 가져오지 못했습니다",
+      "passkeyGenerateOptionsFailed": "등록 옵션을 생성하지 못했습니다",
+      "registrationFailed": "등록에 실패했습니다",
+      "passkeyRegistrationFailed": "패스키 등록에 실패했습니다",
+      "passkeyChallengeExpired": "챌린지가 만료되었거나 찾을 수 없습니다",
+      "verificationFailed": "인증에 실패했습니다",
+      "passkeyVerifyFailed": "등록을 확인하지 못했습니다"
+    },
+    "settings": {
+      "joinedOn": "{date} 가입",
+      "joinedRecently": "최근 가입"
+    },
+    "profileForm": {
+      "nameLabel": "이름",
+      "namePlaceholder": "이름",
+      "emailLabel": "이메일",
+      "emailLocked": "이메일은 변경할 수 없습니다",
+      "save": "변경사항 저장",
+      "updated": "프로필이 업데이트되었습니다",
+      "nameRequired": "이름을 입력해 주세요",
+      "updateFailed": "프로필 업데이트에 실패했습니다"
+    },
+    "passwordForm": {
+      "currentLabel": "현재 비밀번호",
+      "newLabel": "새 비밀번호",
+      "setLabel": "비밀번호 설정",
+      "confirmLabel": "비밀번호 확인",
+      "showPassword": "비밀번호 표시",
+      "hidePassword": "비밀번호 숨기기",
+      "change": "비밀번호 변경",
+      "set": "비밀번호 설정",
+      "updated": "비밀번호가 변경되었습니다",
+      "tooShort": "비밀번호는 {min}자 이상이어야 합니다",
+      "mismatch": "비밀번호가 일치하지 않습니다",
+      "changeFailed": "비밀번호 변경에 실패했습니다"
+    },
+    "deleteDialog": {
+      "trigger": "계정 삭제",
+      "title": "계정을 삭제하시겠습니까?",
+      "description": "이 작업은 되돌릴 수 없습니다. 프로필, 세션, 알림 설정이 삭제되며 구매 내역은 익명화됩니다.",
+      "typeToConfirm": "확인하려면 <strong>{word}</strong>을(를) 입력하세요:",
+      "confirm": "영구 삭제",
+      "deleting": "삭제 중…",
+      "failed": "계정 삭제에 실패했습니다"
+    },
+    "passkeys": {
+      "title": "패스키",
+      "description": "기기의 지문, 얼굴 인식 또는 PIN으로 비밀번호 없이 로그인하세요.",
+      "add": "패스키 추가",
+      "namePlaceholder": "예: \"MacBook Touch ID\"",
+      "addSubmit": "추가",
+      "adding": "추가 중…",
+      "unsupported": "이 브라우저는 패스키를 지원하지 않습니다. 최신 버전의 Chrome, Safari 또는 Edge를 사용해 보세요.",
+      "empty": "아직 패스키가 없습니다. 패스키를 추가하면 비밀번호 없이 로그인할 수 있습니다.",
+      "devicePasskey": "기기 패스키",
+      "passkey": "패스키",
+      "added": "{date} 추가",
+      "lastUsed": "마지막 사용 {date}",
+      "synced": "동기화됨",
+      "removeConfirm": "삭제할까요?",
+      "remove": "삭제",
+      "removeLabel": "패스키 삭제",
+      "loadFailed": "패스키를 불러오지 못했습니다",
+      "removeFailed": "패스키 삭제에 실패했습니다"
+    },
+    "security": {
+      "title": "보안",
+      "description": "2단계 인증 및 보안 설정을 관리합니다",
+      "loading": "불러오는 중...",
+      "backToSettings": "설정으로 돌아가기",
+      "enabledMessage": "2단계 인증이 켜졌습니다!",
+      "disabledMessage": "2단계 인증이 해제되었습니다",
+      "errors": {
+        "statusLoadFailed": "2단계 인증 상태를 불러올 수 없습니다",
+        "setupFailed": "설정을 시작하지 못했습니다",
+        "verifyFailed": "인증에 실패했습니다",
+        "disableFailed": "2단계 인증 해제에 실패했습니다"
+      },
+      "status": {
+        "title": "2단계 인증",
+        "enabledBody": "계정이 인증 앱으로 보호되고 있습니다.",
+        "disabledBody": "인증 앱의 코드를 요구하도록 설정해 계정 보안을 한층 강화하세요.",
+        "enabled": "사용 중",
+        "notEnabled": "사용 안 함"
+      },
+      "setup": {
+        "title": "인증 앱 설정",
+        "description": "Google Authenticator, Authy, 1Password 같은 앱으로 인증 코드를 생성하세요.",
+        "enable": "2단계 인증 켜기"
+      },
+      "scan": {
+        "title": "QR 코드를 스캔하거나 키를 직접 입력하세요",
+        "qrAlt": "인증 앱으로 이 QR 코드를 스캔하세요",
+        "manualKey": "또는 이 키를 직접 입력하세요:",
+        "copySecret": "비밀 키 복사"
+      },
+      "verify": {
+        "title": "인증 코드 입력",
+        "codeLabel": "앱에 표시된 6자리 코드",
+        "submit": "확인 후 켜기"
+      },
+      "backupCodes": {
+        "title": "백업 코드를 저장하세요",
+        "description": "이 코드를 안전하게 보관하세요. 인증 앱을 사용할 수 없게 되면 이 코드 중 하나로 로그인할 수 있습니다. 각 코드는 한 번만 사용할 수 있습니다.",
+        "copy": "코드 복사",
+        "copied": "복사되었습니다!",
+        "download": "다운로드",
+        "done": "완료"
+      },
+      "backupFile": {
+        "title": "GiftHub - 2단계 인증 백업 코드",
+        "instructions": "이 코드를 안전한 곳에 보관하세요. 각 코드는 한 번만 사용할 수 있습니다.",
+        "generated": "생성일: {date}"
+      },
+      "disable": {
+        "title": "2단계 인증 해제",
+        "description": "계정의 추가 보안 단계가 제거됩니다.",
+        "button": "2단계 인증 해제",
+        "confirmTitle": "2단계 인증 해제 확인",
+        "confirmDescription": "인증 앱의 현재 6자리 코드 또는 백업 코드를 입력하세요.",
+        "codeLabel": "인증 코드",
+        "codePlaceholder": "000000 또는 XXXX-XXXX",
+        "confirm": "해제 확인"
+      },
+      "quickLinks": {
+        "title": "보안 바로가기",
+        "sessions": "활성 세션 보기",
+        "changePassword": "비밀번호 변경"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "도달이 아닌 성과에 비용을 지불하세요. 판매자 주도의 추천 인프라: 브랜드 바우처와 매장 크레딧."
+    },
+    "error": {
+      "unexpected": "예기치 않은 오류가 발생했습니다."
+    },
+    "hero": {
+      "badge": "지역 비즈니스를 위한 바우처 & 추천",
+      "title": "고객이 <highlight>다음 고객</highlight>을 데려옵니다",
+      "subtitle": "바우처 캠페인을 만드세요. 고객이 공유하고, 크레딧을 받고, 친구를 데려옵니다. 모든 추천을 추적하고 신규 고객당 정확한 비용을 확인하세요.",
+      "ctaMerchant": "판매자로 시작하기",
+      "ctaExplore": "캠페인 둘러보기",
+      "noCardRequired": "신용카드 불필요",
+      "freeTrial": "{days}일 무료 체험",
+      "cancelAnytime": "언제든 해지 가능"
+    },
+    "stats": {
+      "activeCampaigns": "진행 중인 캠페인",
+      "merchants": "판매자",
+      "processedValue": "처리 금액"
+    },
+    "merchantsTitle": "플랫폼의 판매자",
+    "values": {
+      "referral": {
+        "title": "추천 엔진",
+        "description": "고객이 특가를 공유하며 새로운 고객을 자동으로 데려옵니다"
+      },
+      "vouchers": {
+        "title": "디지털 바우처",
+        "description": "유연한 규칙의 할인 캠페인을 몇 분 만에 만드세요"
+      },
+      "qr": {
+        "title": "QR 사용",
+        "description": "휴대폰 하나로 매장에서 스캔하고 확인하세요. 별도 장비가 필요 없습니다"
+      },
+      "analytics": {
+        "title": "실시간 분석",
+        "description": "캠페인별 비용과 수익을 정확히 확인하세요. 추측은 이제 그만"
+      }
+    },
+    "howItWorks": {
+      "title": "이용 방법",
+      "subtitle": "간단한 3단계로 몇 분 만에 시작하세요",
+      "steps": {
+        "create": {
+          "title": "캠페인 만들기",
+          "description": "할인, 기간, 최대 사용 횟수만 정하면 2분 만에 바우처가 완성됩니다."
+        },
+        "share": {
+          "title": "고객이 공유",
+          "description": "모든 구매자가 추천 링크를 받습니다. 공유하고, 크레딧을 받고, 친구를 데려옵니다."
+        },
+        "grow": {
+          "title": "성장을 확인",
+          "description": "모든 추천 경로를 추적하고, 신규 고객당 비용을 확인하고, ROI를 측정하세요."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "인기 캠페인 둘러보기",
+      "subtitle": "유럽 곳곳의 바우처, 특가, 체험을 만나 보세요",
+      "showing": "{count, plural, other {진행 중인 캠페인 #개}} 표시 중.",
+      "showingWithOnSale": "{count, plural, other {진행 중인 캠페인 #개}} 표시 중 — 현재 {onSale}개 판매 중.",
+      "emptyTitle": "현재 진행 중인 캠페인이 없습니다",
+      "emptyBody": "판매자가 혜택을 공개하면 바로 여기에 표시됩니다.",
+      "viewAll": "모든 캠페인 보기"
+    },
+    "pricing": {
+      "title": "간단하고 투명한 요금",
+      "subtitle": "비즈니스에 맞는 플랜을 선택하세요. 연간 결제는 10개월 요금만 청구됩니다.",
+      "billingPeriod": "결제 주기",
+      "monthly": "월간",
+      "annual": "연간",
+      "save": "17% 절약",
+      "mostPopular": "가장 인기",
+      "perMonth": "/월",
+      "perYear": "{price}/년 (2개월 무료)",
+      "startTrial": "무료 체험 시작",
+      "footer": "모든 플랜에 {days}일 무료 체험 포함 · 바우처 판매 수수료 {percent}% · 언제든 해지 가능",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, other {월 바우처 #개}}",
+        "activeCampaigns": "{count, plural, other {진행 중인 캠페인 #개}}",
+        "teamMembers": "{count, plural, other {팀원 #명}}",
+        "qrRedemption": "QR 코드 사용",
+        "basicAnalytics": "기본 분석",
+        "advancedAnalytics": "고급 분석",
+        "customDomain": "맞춤 도메인",
+        "promoBoosts": "프로모션 부스트 (이메일 + 푸시)",
+        "unlimitedVouchers": "바우처 무제한",
+        "unlimitedCampaigns": "캠페인 무제한",
+        "unlimitedTeamMembers": "팀원 무제한",
+        "everythingInPlan": "{plan}의 모든 기능"
+      }
+    },
+    "calculator": {
+      "title": "ROI 계산하기",
+      "subtitle": "슬라이더를 움직여 GiftHub로 얼마나 벌 수 있는지 확인하세요",
+      "monthlyPurchases": "월간 바우처 구매 수",
+      "purchasesValue": "{count, plural, other {구매 #건}}",
+      "averageTicket": "평균 객단가",
+      "referralRate": "추천 전환율",
+      "monthlyRevenue": "월 매출",
+      "referralCustomers": "추천 신규 고객",
+      "perMonthValue": "{value}/월",
+      "referralRevenue": "추천 매출",
+      "estimatedRoi": "예상 ROI",
+      "platformCost": "플랫폼 비용",
+      "platformCostValue": "{plan}/월 플랜 + 수수료 {fees} ({percent}%) = <strong>{total}/월</strong>",
+      "disclaimer": "입력한 값을 바탕으로 한 예시이며, 예측이 아닙니다."
+    },
+    "why": {
+      "title": "판매자들이 GiftHub를 선택하는 이유",
+      "body": "마진을 지키고 고객 관계를 직접 소유하면서 고객층을 넓히고 매출을 늘리세요.",
+      "benefits": {
+        "referralEngine": "모든 캠페인에 추천 엔진 내장",
+        "analytics": "실시간 분석: 고객 획득 비용, ROI",
+        "qr": "QR 사용 — POS 장비 불필요",
+        "languages": "{count, plural, other {#개 언어}} 지원",
+        "flatPlan": "정액 월 요금제 — Groupon 같은 수익 배분 없음",
+        "ownData": "고객 데이터는 판매자 소유",
+        "fee": "바우처 판매 수수료 {percent}%, 숨은 비용 없음"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "드래그하여 비교",
+      "beforeTitle": "Groupon 사용 시",
+      "afterTitle": "GiftHub 사용 시",
+      "sliderLabel": "{before}와(과) {after} 비교",
+      "before": {
+        "revenueShare": "플랫폼이 가져가는 큰 수익 배분",
+        "ownsRelationship": "플랫폼이 고객 관계를 소유",
+        "noDataAccess": "고객 데이터 접근 불가",
+        "raceToBottom": "끝없는 가격 인하 경쟁",
+        "lostBrand": "브랜드 정체성 상실"
+      },
+      "after": {
+        "flatFee": "월 {minPrice}–{maxPrice} 정액 + 수수료 {percent}%",
+        "ownData": "모든 고객 데이터를 직접 소유",
+        "referralEngine": "추천 엔진 내장",
+        "yourBrand": "나의 브랜드, 나의 규칙",
+        "roiAnalytics": "실시간 ROI 분석"
+      }
+    },
+    "faq": {
+      "title": "자주 묻는 질문",
+      "subtitle": "GiftHub에 대해 알아야 할 모든 것",
+      "items": {
+        "groupon": {
+          "question": "Groupon과 무엇이 다른가요?",
+          "answer": "Groupon 같은 특가 사이트는 보통 판매액의 큰 비중을 가져가고 고객 관계도 소유합니다. GiftHub는 정액 월 요금(월 {price}부터)과 바우처 판매액의 {percent}%만 청구합니다. 고객, 데이터, 마진은 모두 판매자의 것입니다."
+        },
+        "referral": {
+          "question": "추천 시스템은 어떻게 작동하나요?",
+          "answer": "바우처를 구매한 모든 고객은 고유한 추천 링크를 받습니다. 이 링크를 공유해 친구가 구매하면 두 사람 모두 크레딧을 받습니다. 모든 추천 경로가 추적되므로 신규 고객이 어떻게 찾아왔는지 정확히 알 수 있습니다."
+        },
+        "trial": {
+          "question": "{days}일 체험 기간이 끝나면 어떻게 되나요?",
+          "answer": "플랜({starter}, {pro}, {scale})을 선택하세요. 구독하지 않아도 이미 공개된 바우처는 고객에게 계속 유효하지만, 구독하기 전까지 새 캠페인은 만들 수 없습니다."
+        },
+        "qr": {
+          "question": "QR 사용에 특별한 장비가 필요한가요?",
+          "answer": "아니요. 직원이 휴대폰 브라우저에서 모바일 스캐너를 열고 고객의 QR 코드를 스캔하면 끝입니다. 앱 설치나 POS 연동이 필요 없습니다."
+        },
+        "fee": {
+          "question": "{percent}% 거래 수수료란 무엇인가요?",
+          "answer": "고객이 플랫폼을 통해 바우처를 구매하면 정산 금액에서 {percent}%가 차감됩니다. 요금제 외에 다른 플랫폼 수수료는 없습니다."
+        }
+      }
+    },
+    "cta": {
+      "title": "고객을 빌리지 말고, 나만의 고객군을 만드세요.",
+      "body": "몇 분 만에 첫 캠페인을 만드세요. 나머지는 고객이 해 줍니다. {days}일 무료 체험.",
+      "getStarted": "무료로 시작하기",
+      "browse": "캠페인 둘러보기"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "결제 데모",
+      "subtitle": "데모 결제 페이지",
+      "creditBalance": "크레딧 잔액",
+      "availableAmount": "{amount} 사용 가능",
+      "lockedAmount": "{amount} 잠김",
+      "orderSummary": "주문 요약",
+      "orderAmount": "주문 금액",
+      "creditToApply": "적용할 크레딧",
+      "maxAmount": "최대: {amount}",
+      "subtotal": "소계",
+      "creditAppliedLine": "적용된 크레딧",
+      "total": "합계",
+      "processing": "처리 중...",
+      "submit": "크레딧 적용 후 주문 완료",
+      "creditApplied": "크레딧이 적용되었습니다! 주문 합계: {total}",
+      "errors": {
+        "missingAmounts": "주문 금액과 크레딧 금액을 모두 입력해 주세요",
+        "applyFailed": "크레딧 적용에 실패했습니다"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - 사용 가능한 바우처",
+      "emptyTitle": "사용 가능한 바우처가 없습니다",
+      "emptyDescription": "{merchant}의 새 바우처 혜택을 나중에 다시 확인해 주세요.",
+      "specialOffer": "특별 혜택",
+      "validUntil": "{date}까지 유효",
+      "viewAndShare": "보기 및 공유"
+    },
+    "wallet": {
+      "subtitle": "크레딧 지갑",
+      "availableToUse": "사용 가능",
+      "useCredit": "크레딧 사용",
+      "noCreditToUse": "사용할 크레딧이 없습니다",
+      "locked": "잠김",
+      "lockedDescription": "연결된 구매가 확인되면 잠금이 해제됩니다.",
+      "historyTitle": "크레딧 내역",
+      "historyDescription": "{merchant} 원장",
+      "historyEmpty": "크레딧 내역이 아직 없습니다.",
+      "expires": "{date} 만료",
+      "creditStatus": {
+        "locked": "잠김",
+        "available": "사용 가능",
+        "used": "사용됨",
+        "expired": "만료됨",
+        "reversed": "취소됨"
+      }
+    },
+    "error": {
+      "title": "문제가 발생했습니다",
+      "description": "포털을 불러오지 못했습니다. 페이지를 새로고침하거나 나중에 다시 시도해 주세요.",
+      "backToPortal": "포털로 돌아가기"
+    },
+    "payments": {
+      "voucherFallback": "바우처",
+      "status": {
+        "pending": "대기 중",
+        "paid": "결제 완료",
+        "failed": "실패",
+        "refunded": "환불됨"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "구매 가능",
+        "sold": "판매됨",
+        "used": "사용됨",
+        "cancelled": "취소됨",
+        "refunded": "환불됨"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "문제가 발생했습니다",
+      "description": "이 페이지를 불러오는 중 오류가 발생했습니다."
+    },
+    "notFound": {
+      "metaTitle": "페이지를 찾을 수 없습니다"
+    },
+    "header": {
+      "mainNavLabel": "메인",
+      "signIn": "로그인"
+    },
+    "footer": {
+      "navLabel": "푸터",
+      "copyright": "© {year} GiftHub. Made in Europe."
+    },
+    "navLinks": {
+      "campaigns": "캠페인",
+      "merchants": "판매자",
+      "explore": "둘러보기",
+      "search": "검색",
+      "faq": "FAQ",
+      "contact": "문의",
+      "privacy": "개인정보처리방침",
+      "terms": "이용약관",
+      "home": "홈",
+      "about": "소개",
+      "vouchers": "바우처",
+      "shop": "쇼핑",
+      "rent": "대여"
+    },
+    "chat": {
+      "openAssistant": "자동 도우미 열기",
+      "closeAssistant": "자동 도우미 닫기",
+      "dialogLabel": "GiftHub 자동 도우미",
+      "title": "GiftHub 도우미",
+      "subtitle": "자동 도우미",
+      "newChat": "새 대화",
+      "closeChat": "대화 닫기",
+      "greeting": "안녕하세요!",
+      "intro": "자동 도우미입니다. 바우처, 기프트카드, 티켓 또는 계정에 대해 물어보세요.",
+      "inputLabel": "자동 도우미에게 보낼 메시지",
+      "placeholder": "메시지를 입력하세요...",
+      "send": "메시지 보내기",
+      "sendError": "죄송합니다. 메시지를 보내지 못했습니다. 다시 시도해 주세요."
+    },
+    "cookies": {
+      "regionLabel": "쿠키 설정",
+      "intro": "더 나은 경험을 위해 쿠키를 사용합니다. 필수 쿠키는 항상 활성화되며, 선택 쿠키는 직접 허용 여부를 정할 수 있습니다. <link>개인정보처리방침</link>",
+      "optionalLegend": "선택 쿠키",
+      "necessary": "필수",
+      "alwaysOn": "(항상 켜짐)",
+      "analytics": "분석",
+      "marketing": "마케팅",
+      "preferences": "환경설정",
+      "saveError": "선택을 저장하지 못했습니다. 다시 시도해 주세요.",
+      "acceptAll": "모두 허용",
+      "declineOptional": "선택 쿠키 거부",
+      "customize": "직접 설정",
+      "savePreferences": "설정 저장"
+    },
+    "currency": {
+      "selectLabel": "통화 선택"
+    },
+    "language": {
+      "selectLabel": "언어 선택",
+      "selectInterfaceLabel": "인터페이스 언어 선택 ({language})",
+      "unknown": "알 수 없음",
+      "interfaceOnly": "인터페이스 텍스트만 변경됩니다",
+      "uiName": "{name} (UI)"
+    },
+    "country": {
+      "selectLabel": "마켓 선택 ({country})",
+      "heading": "마켓 선택",
+      "description": "국가, 통화, 시장 데이터만 변경됩니다",
+      "tip": "<strong>팁:</strong> 마켓은 데이터와 통화를 필터링합니다. 인터페이스 언어는 별도로 설정합니다."
+    },
+    "roleSwitcher": {
+      "myDashboard": "내 대시보드",
+      "platformAdmin": "플랫폼 관리자",
+      "admin": "관리자",
+      "staff": "직원",
+      "switchContext": "컨텍스트 전환"
+    },
+    "legalEntity": {
+      "operator": "운영자",
+      "registeredAddress": "등록 주소",
+      "registryCode": "사업자 등록번호",
+      "operatorPlaceholder": "[회사명 추가 예정]",
+      "addressPlaceholder": "[등록 주소 추가 예정]",
+      "registryCodePlaceholder": "[사업자 등록번호 추가 예정]"
+    },
+    "theme": {
+      "dark": "다크 모드",
+      "light": "라이트 모드",
+      "system": "시스템 테마"
+    },
+    "voiceSearch": {
+      "start": "음성 검색 시작",
+      "stop": "듣기 중지",
+      "tooltip": "음성 검색",
+      "tapToStop": "탭하여 중지"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "허브를 불러오지 못했습니다",
+      "description": "판매자를 불러오는 중 예기치 않은 오류가 발생했습니다.",
+      "retry": "다시 시도"
+    },
+    "hub": {
+      "metaTitle": "판매자",
+      "metaDescription": "GiftHub의 지역 비즈니스와 현재 진행 중인 혜택",
+      "title": "지역 판매자",
+      "subtitle": "카페, 살롱, 스튜디오 등 GiftHub에 있는 판매자와 지금 제공하는 혜택을 확인하세요.",
+      "loadError": "판매자를 불러오지 못했습니다",
+      "loadErrorHint": "잠시 후 다시 시도해 주세요.",
+      "retry": "다시 시도",
+      "emptyTitle": "아직 판매자가 없습니다",
+      "emptyHint": "비즈니스가 가입하면 바로 여기에 표시됩니다.",
+      "joinCta": "판매자로 가입하기",
+      "noOffers": "현재 혜택 없음",
+      "offerCount": "{count, plural, other {혜택 #개}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "찾을 수 없음",
+      "metaDescription": "{name}의 바우처, 캠페인, 혜택을 둘러보세요",
+      "offerCount": "{count, plural, other {혜택 #개}}",
+      "website": "웹사이트",
+      "contact": "연락처",
+      "sampleNotice": "<strong>샘플 비즈니스입니다.</strong> 이 페이지는 GiftHub에서 판매자가 어떻게 보이는지 보여 줍니다. 혜택은 예시이며 구매할 수 없습니다.",
+      "offersHeading": "혜택",
+      "noOffers": "현재 혜택 없음",
+      "noOffersHint": "{name}의 새 혜택이 여기에 표시됩니다.",
+      "browseOther": "다른 혜택 둘러보기",
+      "validUntil": "{date}까지 유효"
+    },
+    "tenantShell": {
+      "campaigns": "캠페인",
+      "mainNav": "메인",
+      "signIn": "로그인"
+    },
+    "sitePage": {
+      "hubHeroTitle": "지역 판매자 찾아보기",
+      "hubHeroSubtitle": "GiftHub 판매자의 캠페인, 바우처, 대여 상품, 스토어를 둘러보세요.",
+      "tenantHeroSubtitle": "상품, 대여, 바우처를 한곳에서 둘러보세요.",
+      "browseCampaigns": "캠페인 둘러보기",
+      "getStarted": "시작하기",
+      "featuredMerchants": "추천 판매자",
+      "noMerchants": "아직 판매자가 없습니다.",
+      "visitNamed": "{name} 방문하기",
+      "visitMerchant": "판매자 방문하기",
+      "featuredProducts": "추천 상품",
+      "noProducts": "이용 가능한 상품이 없습니다.",
+      "rentalHighlights": "추천 대여 상품",
+      "noRentals": "이용 가능한 대여 상품이 없습니다.",
+      "perDay": "{price} / 일",
+      "activeVouchers": "사용 가능한 바우처",
+      "noStandaloneVouchers": "현재 단독 바우처가 없습니다 — <link>{count, plural, other {진행 중인 캠페인 #개}} 둘러보기</link>.",
+      "noVouchers": "사용 가능한 바우처가 없습니다.",
+      "voucher": "바우처",
+      "viewVoucher": "바우처 보기",
+      "stats": {
+        "campaigns": "캠페인",
+        "vouchers": "바우처",
+        "products": "상품",
+        "rentals": "대여"
+      },
+      "statsUnavailable": "통계를 이용할 수 없습니다."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "쇼핑",
+      "subtitle": "상품을 둘러보고 장바구니에 담으세요."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "결제 요청이 생성되었습니다",
+      "intentCreatedDescription": "{amount} 결제 요청 {id}",
+      "checkoutErrorTitle": "결제 오류",
+      "checkoutErrorDescription": "결제 요청을 생성할 수 없습니다.",
+      "empty": "아직 이용 가능한 상품이 없습니다.",
+      "productHighlight": "추천 상품",
+      "add": "담기",
+      "cart": "장바구니",
+      "cartEmpty": "장바구니가 비어 있습니다.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "삭제",
+      "total": "합계",
+      "creatingIntent": "결제 요청 생성 중...",
+      "checkoutIntent": "결제 요청"
+    },
+    "rentPage": {
+      "metaTitle": "대여 마켓플레이스",
+      "metaDescription": "대여 상품 둘러보기",
+      "title": "대여",
+      "subtitle": "날짜를 선택하고 대여 견적을 요청하세요."
+    },
+    "rentClient": {
+      "selectDatesError": "대여 날짜를 선택해 주세요.",
+      "bookingFailed": "예약 실패",
+      "bookingCreated": "{name} 예약 요청이 생성되었습니다. 합계: {total}.",
+      "bookingSubmitted": "예약 요청 완료",
+      "bookingCreateFailed": "대여 예약을 생성할 수 없습니다.",
+      "bookingCancelled": "예약이 취소되었습니다.",
+      "cancelFailed": "예약 취소에 실패했습니다.",
+      "datesHeading": "대여 날짜",
+      "startDate": "시작일",
+      "endDate": "종료일",
+      "daysSelected": "{count, plural, other {대여 기간 #일 선택됨.}}",
+      "selectDatesHint": "날짜를 선택하면 요금이 계산됩니다.",
+      "empty": "아직 이용 가능한 대여 상품이 없습니다.",
+      "rentalHighlight": "추천 대여 상품",
+      "perDay": "{price} / 일",
+      "weeklyRate": "주간: {price}",
+      "select": "선택",
+      "selectedHeading": "선택한 대여 상품",
+      "estimatedTotal": "예상 합계",
+      "notesLabel": "메모 (선택)",
+      "notesPlaceholder": "요청 사항이 있으면 입력하세요...",
+      "submitting": "예약 요청 중...",
+      "requestBooking": "대여 예약 요청",
+      "myBookings": "내 예약",
+      "noBookings": "아직 대여 예약이 없습니다. 위에서 상품을 선택해 시작하세요.",
+      "bookingRange": "{start} - {end} ({days, plural, other {#일}})",
+      "bookingTotal": "합계: {total}",
+      "rejectionReason": "사유: {reason}",
+      "cancelling": "취소 중...",
+      "cancel": "취소",
+      "status": {
+        "pending": "대기 중",
+        "approved": "승인됨",
+        "rejected": "거절됨",
+        "paid": "결제 완료",
+        "active": "대여 중",
+        "returned": "반납됨",
+        "cancelled": "취소됨"
+      }
+    },
+    "boxes": {
+      "metaTitle": "구독 박스",
+      "metaDescription": "좋아하는 지역 판매자의 엄선된 월간 바우처 박스를 구독하세요. 매 주기마다 새로운 혜택이 도착하며, 언제든 해지할 수 있습니다.",
+      "title": "구독 박스",
+      "subtitle": "최고의 판매자가 엄선한 바우처를 정기적으로 받아 보세요.",
+      "empty": "아직 이용 가능한 구독 박스가 없습니다. 곧 다시 확인해 주세요!",
+      "byMerchant": "{name} 제공",
+      "perInterval": "/{interval}",
+      "details": "자세히",
+      "subscribe": "구독하기",
+      "subscribedTitle": "구독 완료",
+      "subscribedMessage": "구독이 완료되었습니다. 자세한 내용은 이메일을 확인하세요.",
+      "subscribeFailed": "구독에 실패했습니다. 다시 시도해 주세요.",
+      "notFoundTitle": "박스를 찾을 수 없습니다",
+      "notFoundHint": "이 구독 박스는 이용할 수 없습니다.",
+      "browseAll": "← 모든 박스 둘러보기",
+      "backToAll": "← 전체 구독 박스",
+      "subscriberCount": "{count, plural, other {구독자 #명}}",
+      "whatsInside": "구성품",
+      "curatingNext": "{period} 최대 {count, plural, other {엄선된 바우처 #개}}. 다음 구성을 준비하고 있습니다.",
+      "percentVoucher": "{value}% 할인 바우처",
+      "amountVoucher": "{amount} 바우처",
+      "curatedVoucher": "엄선된 바우처",
+      "subscribing": "구독 중…",
+      "subscribeWithPrice": "구독하기 — {price}/{interval}",
+      "interval": {
+        "weekly": "주",
+        "monthly": "월",
+        "quarterly": "분기"
+      },
+      "intervalEach": {
+        "weekly": "매주",
+        "monthly": "매월",
+        "quarterly": "분기마다"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "검색",
+    "metaDescription": "GiftHub 판매자의 진행 중인 캠페인과 바우처를 검색하세요.",
+    "loadingSearch": "검색 불러오는 중",
+    "title": "혜택 검색",
+    "subtitle": "GiftHub 판매자의 캠페인과 바우처를 찾아보세요",
+    "queryLabel": "캠페인, 바우처, 판매자 검색",
+    "queryPlaceholder": "캠페인, 바우처, 판매자 검색...",
+    "toggleFilters": "필터 열기/닫기",
+    "filtersTitle": "필터",
+    "closeFilters": "필터 닫기",
+    "error": "지금은 검색을 이용할 수 없습니다. 잠시 후 다시 시도해 주세요.",
+    "campaignsHeading": "캠페인",
+    "vouchersHeading": "바우처",
+    "browseMarketplace": "<link>캠페인 마켓플레이스</link>에서 판매 중인 모든 상품을 둘러보세요.",
+    "campaignEnds": "{date} 종료",
+    "filters": {
+      "title": "필터",
+      "clearAll": "모두 지우기",
+      "category": "카테고리",
+      "discountType": "할인 유형",
+      "minDiscount": "최소 할인",
+      "minDiscountAria": "최소 할인율",
+      "maxPrice": "최대 가격",
+      "maxPriceAria": "최대 가격(유로)",
+      "any": "전체",
+      "sortBy": "정렬",
+      "types": {
+        "all": "모든 유형",
+        "percentage": "퍼센트 할인",
+        "fixed_amount": "정액 할인",
+        "credit_amount": "매장 크레딧"
+      },
+      "sort": {
+        "newest": "최신순",
+        "popular": "인기순",
+        "expiring": "마감 임박순"
+      }
+    },
+    "results": {
+      "chipCategory": "카테고리: {value}",
+      "chipType": "유형: {value}",
+      "chipMinDiscount": "최소 {value}% 할인",
+      "chipMaxPrice": "최대 €{value}",
+      "chipSort": "정렬: {value}",
+      "removeFilter": "{label} 필터 삭제",
+      "searching": "검색 중...",
+      "count": "{total, plural, other {결과 <num>#</num>개}}",
+      "countForQuery": "{total, plural, other {“<hl>{query}</hl>” 검색 결과 <num>#</num>개}}",
+      "flash": "반짝 특가",
+      "voucherFallback": "바우처",
+      "expires": "{date} 만료",
+      "redeemed": "{count}회 사용됨",
+      "noResultsTitle": "검색 결과가 없습니다",
+      "noResultsQuery": "\"{query}\"와(과) 일치하는 바우처가 없습니다. 필터를 조정해 보세요.",
+      "noResultsHint": "특정 바우처, 판매자 또는 카테고리를 검색해 보세요."
+    }
+  },
+  "faq": {
+    "metaTitle": "자주 묻는 질문",
+    "metaDescription": "바우처와 기프트카드의 구매, 사용, 관리에 관한 자주 묻는 질문 — 결제, 환불, 만료, 판매자 지원.",
+    "title": "자주 묻는 질문",
+    "subtitle": "플랫폼에 관한 자주 묻는 질문의 답변을 확인하세요.",
+    "categories": {
+      "general": "일반",
+      "purchasing": "구매 & 결제",
+      "vouchers": "바우처 & 사용",
+      "account": "계정 & 보안",
+      "merchants": "판매자용",
+      "loyalty": "로열티 & 리워드"
+    },
+    "items": {
+      "whatIs": {
+        "q": "GiftHub는 무엇인가요?",
+        "a": "GiftHub는 판매자와 고객을 연결하는 디지털 바우처, 기프트카드, 이벤트 티켓 마켓플레이스입니다. 판매자는 디지털 상품을 만들어 판매하고, 고객은 이를 구매하고 선물하고 사용할 수 있습니다."
+      },
+      "isFree": {
+        "q": "플랫폼은 무료로 이용할 수 있나요?",
+        "a": "둘러보기와 계정 생성은 무료입니다. 고객은 구매한 상품에 대해서만 결제합니다. 판매자는 월 요금과 바우처 판매 수수료 {fee}%를 지불합니다."
+      },
+      "countries": {
+        "q": "어떤 국가를 지원하나요?",
+        "a": "EU 전역의 판매자와 고객을 지원하며, {currencies}개 통화와 {languages}개 언어를 제공합니다."
+      },
+      "howToBuy": {
+        "q": "바우처는 어떻게 구매하나요?",
+        "a": "이용 가능한 바우처를 둘러보고 \"구매\"를 클릭한 뒤 Stripe로 결제를 완료하세요. 결제 즉시 바우처가 지갑에 표시됩니다."
+      },
+      "paymentMethods": {
+        "q": "어떤 결제 수단을 사용할 수 있나요?",
+        "a": "결제는 Stripe를 통해 안전하게 처리됩니다. 사용 가능한 결제 수단은 결제 단계에서 표시됩니다."
+      },
+      "refund": {
+        "q": "환불받을 수 있나요?",
+        "a": "환불 정책은 판매자마다 다릅니다. 구매 전에 바우처 상세 페이지에서 환불 정책을 확인하세요."
+      },
+      "howToRedeem": {
+        "q": "바우처는 어떻게 사용하나요?",
+        "a": "지갑을 열고 바우처를 선택한 뒤 판매자에게 QR 코드를 보여 주세요. 판매자가 스캔하면 사용이 확정됩니다. 코드를 직접 입력해 사용할 수도 있습니다."
+      },
+      "expiry": {
+        "q": "바우처가 만료되면 어떻게 되나요?",
+        "a": "만료된 바우처는 사용할 수 없습니다. 만료 전에 알림을 보내 드립니다. 만료일은 지갑에서 확인하세요."
+      },
+      "gift": {
+        "q": "바우처를 다른 사람에게 선물할 수 있나요?",
+        "a": "네! 구매할 때 \"선물로 보내기\"를 선택하고 받는 사람의 이메일을 입력하세요. 받는 사람은 개인 메시지와 함께 바우처를 받게 됩니다."
+      },
+      "twoFactor": {
+        "q": "2단계 인증은 어떻게 켜나요?",
+        "a": "설정 → 보안 → 2단계 인증으로 이동하세요. TOTP(Google Authenticator)를 설정하거나 패스키(생체 인증)를 사용할 수 있습니다."
+      },
+      "biometrics": {
+        "q": "생체 인증으로 로그인할 수 있나요?",
+        "a": "네! 패스키 인증을 지원합니다. Face ID, 지문 또는 Windows Hello로 로그인하세요. 설정 → 보안에서 설정할 수 있습니다."
+      },
+      "deleteAccount": {
+        "q": "계정은 어떻게 삭제하나요?",
+        "a": "설정 → 개인정보 → 계정 삭제로 이동하세요. GDPR 준수 정책에 따라 모든 데이터는 30일 이내에 삭제됩니다. 삭제 전에 데이터를 내보낼 수 있습니다."
+      },
+      "startSelling": {
+        "q": "판매는 어떻게 시작하나요?",
+        "a": "판매자로 가입하고 온보딩을 마친 뒤 첫 바우처를 만드세요. 프로필이 승인되면 바로 판매를 시작할 수 있습니다."
+      },
+      "fees": {
+        "q": "플랫폼 수수료는 얼마인가요?",
+        "a": "{trialDays}일 무료 체험 후 요금은 월 {starter} {starterPrice}, {pro} {proPrice}, {scale} {scalePrice}입니다(연간 결제 시 2개월 무료). 여기에 바우처 판매 수수료 {fee}%가 정산 금액에서 차감됩니다."
+      },
+      "integrations": {
+        "q": "기존 시스템과 연동할 수 있나요?",
+        "a": "네! 웹훅(실시간 이벤트 알림), API 키(프로그래밍 방식 접근), Zapier/Slack/Discord 연동을 제공합니다."
+      },
+      "trackSales": {
+        "q": "판매 현황은 어떻게 확인하나요?",
+        "a": "판매자 대시보드에서 매출, 사용 현황, 고객 인사이트 등 실시간 분석을 확인할 수 있으며, AI 기반 자연어 질의(\"지난주 매출 보여 줘\")도 지원합니다."
+      },
+      "loyalty": {
+        "q": "로열티 프로그램은 어떻게 운영되나요?",
+        "a": "구매, 매일 출석, 추천, 리뷰 작성으로 포인트를 적립하세요. 포인트가 쌓이면 등급(브론즈 → 실버 → 골드 → 플래티넘 → 다이아몬드)이 올라가며 혜택도 커집니다."
+      },
+      "badges": {
+        "q": "배지와 연속 기록은 무엇인가요?",
+        "a": "배지는 마일스톤(첫 구매, 추천 10회 등)을 달성하면 받는 업적입니다. 연속 기록은 연속 활동 일수를 집계해 꾸준한 활동에 보상합니다."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "문의하기",
+    "metaDescription": "바우처, 판매자 온보딩, 결제, 제휴 등에 관해 GiftHub 팀에 문의하세요.",
+    "title": "문의하기",
+    "subtitle": "궁금한 점이 있으신가요? 언제든 문의해 주세요.",
+    "email": "이메일",
+    "assistantTitle": "자동 도우미",
+    "assistantText": "화면 모서리의 채팅 버튼으로 바우처와 계정에 관한 빠른 답변을 받으세요. 사람이 아닌 자동 도우미입니다.",
+    "name": "이름",
+    "subject": "제목",
+    "message": "메시지",
+    "sent": "메시지를 보냈습니다! 곧 답변드리겠습니다.",
+    "unavailableWithEmail": "현재 문의 양식을 이용할 수 없습니다. {email}로 이메일을 보내 주세요.",
+    "unavailable": "현재 문의 양식을 이용할 수 없습니다. 나중에 다시 시도해 주세요.",
+    "error": "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+    "sending": "보내는 중...",
+    "send": "메시지 보내기"
+  },
+  "leaderboardPage": {
+    "metaTitle": "인기 판매자",
+    "metaDescription": "최근 30일간 GiftHub에서 바우처 사용이 가장 많은 판매자",
+    "title": "인기 판매자",
+    "subtitle": "최근 30일간 바우처 사용이 가장 많은 판매자",
+    "rank": "{rank}위",
+    "redemptions": "{count, plural, other {<num>#</num><label>회 사용</label>}}",
+    "empty": "최근 30일간 바우처 사용 내역이 없어 표시할 순위가 없습니다.",
+    "browseCampaigns": "진행 중인 캠페인 둘러보기"
+  },
+  "ui": {
+    "close": "닫기",
+    "more": "더보기",
+    "loading": "불러오는 중...",
+    "breadcrumb": {
+      "label": "이동 경로"
+    },
+    "pagination": {
+      "label": "페이지 이동",
+      "previousAria": "이전 페이지로 이동",
+      "previous": "이전",
+      "nextAria": "다음 페이지로 이동",
+      "next": "다음",
+      "morePages": "더 많은 페이지"
+    },
+    "toast": {
+      "dismiss": "알림 닫기"
+    },
+    "calendar": {
+      "previousMonth": "이전 달로 이동",
+      "nextMonth": "다음 달로 이동"
+    },
+    "datePicker": {
+      "placeholder": "날짜 선택"
+    },
+    "combobox": {
+      "placeholder": "옵션 선택...",
+      "empty": "옵션이 없습니다.",
+      "search": "검색..."
+    },
+    "searchInput": {
+      "clear": "검색어 지우기"
+    },
+    "searchResults": {
+      "empty": "검색 결과가 없습니다",
+      "noResultsFor": "\"{query}\"에 대한 검색 결과가 없습니다. 다른 키워드로 검색해 보세요."
+    },
+    "commandPalette": {
+      "placeholder": "검색...",
+      "noResults": "검색 결과가 없습니다",
+      "toOpen": "열기",
+      "other": "기타",
+      "hostPlaceholder": "어디로 이동할까요?",
+      "categories": {
+        "navigate": "이동",
+        "discover": "둘러보기",
+        "account": "계정"
+      },
+      "items": {
+        "home": {
+          "label": "홈",
+          "description": "랜딩 페이지"
+        },
+        "app": {
+          "label": "내 대시보드",
+          "description": "내 바우처, 지갑, 활동"
+        },
+        "vouchers": {
+          "label": "내 바우처"
+        },
+        "wallet": {
+          "label": "지갑",
+          "description": "크레딧 잔액"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "선물 둘러보기 및 보내기"
+        },
+        "campaigns": {
+          "label": "캠페인",
+          "description": "진행 중인 바우처 캠페인"
+        },
+        "hub": {
+          "label": "판매자 허브",
+          "description": "판매자 둘러보기"
+        },
+        "deals": {
+          "label": "특가"
+        },
+        "settings": {
+          "label": "설정",
+          "description": "계정 및 환경설정"
+        },
+        "admin": {
+          "label": "관리자",
+          "description": "플랫폼 관리"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "확인",
+      "cancel": "취소"
+    },
+    "dataTable": {
+      "noResults": "결과가 없습니다."
+    },
+    "fileUpload": {
+      "maxFiles": "최대 {maxFiles, plural, other {#개 파일}}까지 업로드할 수 있습니다",
+      "tooLarge": "파일은 {maxSize}MB 미만이어야 합니다",
+      "dropHere": "여기에 파일을 놓으세요",
+      "dragDrop": "파일을 여기로 끌어다 놓으세요",
+      "browseHint": "또는 클릭하여 찾아보기 (파일당 최대 {maxSize}MB)",
+      "select": "파일 선택",
+      "remove": "{name} 삭제"
+    },
+    "imageUpload": {
+      "notImage": "이미지 파일을 업로드해 주세요",
+      "tooLarge": "이미지는 {maxSize}MB 미만이어야 합니다",
+      "previewAlt": "미리보기",
+      "remove": "이미지 삭제",
+      "dropHere": "여기에 이미지를 놓으세요",
+      "upload": "이미지 업로드",
+      "hint": "PNG, JPG, GIF 최대 {maxSize}MB",
+      "select": "이미지 선택"
+    },
+    "statsCard": {
+      "open": "열기"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% 캐시백"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "사용 가능",
+        "redeemed": "사용됨",
+        "expired": "만료됨"
+      },
+      "redeem": "사용하기",
+      "expires": "{date} 만료",
+      "merchantAlt": "판매자"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "로그인",
+      "register": "계정 만들기",
+      "resetPassword": "비밀번호 재설정"
+    },
+    "error": {
+      "title": "문제가 발생했습니다",
+      "fallback": "예기치 않은 오류가 발생했습니다.",
+      "tryAgain": "다시 시도"
+    },
+    "login": {
+      "welcome": "다시 오신 것을 환영합니다",
+      "subtitle": "GiftHub 계정에 로그인하세요",
+      "tabMagic": "매직 링크",
+      "tabPassword": "비밀번호",
+      "tabSocial": "소셜",
+      "tabPasskey": "패스키",
+      "emailLabel": "이메일 주소",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "비밀번호",
+      "sendCode": "로그인 코드 보내기",
+      "sending": "보내는 중…",
+      "signIn": "로그인",
+      "signingIn": "로그인 중…",
+      "otpTitle": "이메일을 확인하세요!",
+      "otpDesc": "<b>{email}</b>(으)로 6자리 코드를 보냈습니다",
+      "otpLabel": "코드 입력",
+      "verify": "코드 확인",
+      "verifying": "확인 중…",
+      "resend": "코드 다시 보내기",
+      "backToEmail": "뒤로",
+      "orContinueWith": "또는 다음으로 계속",
+      "continueWith": "{provider}(으)로 계속하기",
+      "errorWrongCode": "코드가 잘못되었거나 만료되었습니다. 다시 시도해 주세요.",
+      "errorWrongPass": "이메일 또는 비밀번호가 올바르지 않습니다.",
+      "errorGeneric": "문제가 발생했습니다. 다시 시도해 주세요.",
+      "errorEmailUnavailable": "지금은 이메일 로그인을 이용할 수 없습니다. 비밀번호로 로그인하세요.",
+      "errorCredentialsSignin": "이메일 또는 비밀번호가 올바르지 않습니다.",
+      "errorAuthGeneric": "로그인에 실패했습니다. 다시 시도해 주세요.",
+      "backToHome": "홈으로 돌아가기",
+      "socialDesc": "원하는 계정으로 바로 로그인하세요",
+      "noAccount": "아직 계정이 없으신가요?",
+      "createAccount": "계정 만들기",
+      "noAccountSub": "새 이메일로 코드 로그인을 하면 계정이 자동으로 생성됩니다.",
+      "registered": "계정이 생성되었습니다. 이메일과 비밀번호로 로그인하세요.",
+      "magicDesc": "이메일로 6자리 코드를 보내 드립니다. 비밀번호가 필요 없습니다.",
+      "passwordDesc": "이메일과 비밀번호로 로그인하세요.",
+      "forgotPassword": "비밀번호를 잊으셨나요?",
+      "demo": "데모 계정",
+      "demoRole": {
+        "platformAdmin": "플랫폼 관리자",
+        "merchantAdmin": "판매자 관리자",
+        "merchantStaff": "판매자 직원",
+        "endUser": "일반 사용자"
+      },
+      "passkeyDesc": "지문, 얼굴 인식 또는 보안 키로 바로 로그인하세요.",
+      "passkeyButton": "패스키로 로그인",
+      "passkeyAuthenticating": "인증 중…"
+    },
+    "register": {
+      "backToHome": "홈으로 돌아가기",
+      "title": "계정 만들기",
+      "subtitle": "바우처를 찾고 관리해 보세요",
+      "nameLabel": "이름",
+      "namePlaceholder": "홍길동",
+      "emailLabel": "이메일 주소",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "비밀번호",
+      "passwordPlaceholder": "8자 이상",
+      "submit": "계정 만들기",
+      "submitting": "계정 만드는 중...",
+      "haveAccount": "이미 계정이 있으신가요?",
+      "signIn": "로그인",
+      "errorWeak": "비밀번호가 너무 약합니다. 더 강력한 비밀번호를 선택해 주세요.",
+      "errorInvalid": "입력값이 올바르지 않습니다.",
+      "errorFallback": "문제가 발생했습니다.",
+      "errorGeneric": "문제가 발생했습니다. 다시 시도해 주세요."
+    },
+    "resetPassword": {
+      "title": "비밀번호 재설정",
+      "subtitle": "아래에 새 비밀번호를 입력하세요",
+      "newPassword": "새 비밀번호",
+      "confirmPassword": "비밀번호 확인",
+      "submit": "새 비밀번호 설정",
+      "submitting": "재설정 중…",
+      "success": "비밀번호가 재설정되었습니다!",
+      "successDesc": "비밀번호가 변경되었습니다. 이제 로그인할 수 있습니다.",
+      "goToLogin": "로그인하러 가기",
+      "errorMismatch": "비밀번호가 일치하지 않습니다",
+      "errorShort": "비밀번호는 8자 이상이어야 합니다",
+      "errorWeak": "비밀번호가 너무 약합니다. 더 강력한 비밀번호를 선택해 주세요.",
+      "errorExpired": "재설정 링크가 유효하지 않거나 만료되었습니다.",
+      "forgotTitle": "비밀번호를 잊으셨나요?",
+      "forgotSubtitle": "이메일을 입력하시면 재설정 링크를 보내 드립니다",
+      "emailLabel": "이메일 주소",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "재설정 링크 보내기",
+      "sending": "보내는 중…",
+      "linkSent": "이메일을 확인하세요!",
+      "linkSentDesc": "해당 이메일로 가입된 계정이 있으면 재설정 링크를 보냈습니다.",
+      "backToLogin": "로그인으로 돌아가기"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "환영합니다!",
+      "joined": "{orgName}에 참여했습니다. 이동 중…",
+      "accepted": "초대를 수락했습니다. 이동 중…",
+      "problemTitle": "초대 오류",
+      "errorNotAccepted": "이 초대를 수락할 수 없습니다.",
+      "errorGeneric": "문제가 발생했습니다. 다시 시도해 주세요.",
+      "goToOrgs": "내 조직으로 이동",
+      "invitedTitle": "초대를 받았습니다",
+      "invitedDesc": "초대를 수락하고 조직에 참여하세요. 먼저 로그인해야 할 수 있습니다.",
+      "accepting": "수락 중…",
+      "accept": "초대 수락"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "기프트카드 & 선물하기",
+      "description": "지역 판매자의 디지털 기프트카드를 둘러보고 구매하세요. 몇 초 만에 마음을 담은 선물을 보내세요. 이메일로 전달되며 매장이나 온라인에서 사용할 수 있습니다."
+    },
+    "publicCard": {
+      "defaultHeadline": "기프트카드",
+      "imageAlt": "기프트카드",
+      "logoAlt": "브랜드 로고",
+      "merchant": "판매자: {name}",
+      "merchantFallback": "판매자",
+      "code": "코드: {code}",
+      "validUntil": "유효기간: {date}",
+      "noExpiry": "유효기간 없음",
+      "showQr": "기프트카드를 사용하려면 이 QR 코드를 직원에게 보여 주세요.",
+      "statusMessage": "이 기프트카드는 {status} 상태입니다.",
+      "status": {
+        "active": "사용 가능",
+        "redeemed": "사용 완료",
+        "expired": "만료",
+        "cancelled": "취소"
+      }
+    },
+    "purchase": {
+      "title": "기프트카드 구매",
+      "loading": "불러오는 중...",
+      "notAvailable": "이용할 수 없는 기프트카드입니다",
+      "defaultHeadline": "기프트카드",
+      "imageAlt": "기프트카드",
+      "logoAlt": "브랜드",
+      "fromMerchant": "{merchant} 제공",
+      "form": {
+        "recipientEmail": "받는 사람 이메일 (선택)",
+        "recipientEmailPlaceholder": "이 이메일로 기프트카드 보내기",
+        "recipientName": "받는 사람 이름",
+        "recipientNamePlaceholder": "받는 사람",
+        "senderName": "보내는 사람 이름",
+        "senderNamePlaceholder": "보내는 사람",
+        "message": "메시지 (선택)",
+        "messagePlaceholder": "전하고 싶은 메시지를 입력하세요..."
+      },
+      "total": "합계:",
+      "processing": "처리 중...",
+      "buy": "기프트카드 구매",
+      "errors": {
+        "notFound": "기프트카드를 찾을 수 없거나 구매할 수 없습니다",
+        "loadFailed": "기프트카드를 불러오지 못했습니다",
+        "purchaseFailed": "구매에 실패했습니다",
+        "generic": "문제가 발생했습니다. 다시 시도해 주세요."
+      }
+    },
+    "product": {
+      "notFound": "선물을 찾을 수 없습니다",
+      "backToHub": "Gift Hub로 돌아가기",
+      "imageAlt": "{title} {index}",
+      "featured": "추천",
+      "lowStock": "재고 {count}개 남음",
+      "buyNow": "지금 구매",
+      "addToCart": "장바구니에 담기",
+      "saveToWishlist": "위시리스트에 저장",
+      "removeFromWishlist": "위시리스트에서 삭제",
+      "share": "이 선물 공유하기",
+      "upsellsTitle": "이런 상품은 어떠세요?"
+    },
+    "claim": {
+      "metaTitle": "선물 받기",
+      "alreadyClaimedTitle": "이미 받은 선물입니다",
+      "alreadyClaimedBody": "이 선물은 이미 수령되었습니다.",
+      "expiredTitle": "선물이 만료되었습니다",
+      "expiredBody": "죄송합니다. 이 선물 링크는 만료되었습니다.",
+      "title": "선물이 도착했습니다!",
+      "signedInHint": "아래를 클릭하면 이 바우처가 지갑에 추가됩니다.",
+      "signedOutHint": "이 바우처를 받으려면 로그인하세요.",
+      "claimButton": "선물 받기",
+      "signInButton": "로그인하고 받기"
+    },
+    "error": {
+      "title": "Gift Hub를 불러오지 못했습니다",
+      "fallback": "선물을 불러오는 중 예기치 않은 오류가 발생했습니다.",
+      "retry": "다시 시도"
+    },
+    "hub": {
+      "title": "선물",
+      "subtitle": "모든 순간에 어울리는 완벽한 선물을 찾아보세요",
+      "loadError": "선물을 불러오지 못했습니다",
+      "retry": "다시 시도",
+      "emptyCatalog": {
+        "title": "아직 등록된 선물이 없습니다",
+        "body": "그동안 지역 판매자의 바우처도 좋은 선물이 됩니다."
+      },
+      "noMatches": "필터와 일치하는 선물이 없습니다",
+      "clearFilters": "필터 초기화",
+      "browseCampaigns": "캠페인 둘러보기",
+      "allGifts": "전체 선물",
+      "loadMore": "더 보기"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "기프트카드를 찾을 수 없습니다",
+        "body": "QR 코드가 유효하지 않거나 만료되었습니다."
+      },
+      "notActive": {
+        "title": "아직 사용할 수 없는 기프트카드입니다",
+        "body": "이 기프트카드는 나중에 유효해집니다."
+      },
+      "expired": {
+        "title": "만료된 기프트카드입니다",
+        "body": "이 기프트카드는 더 이상 유효하지 않습니다."
+      },
+      "result": {
+        "title": "기프트카드 사용 완료",
+        "confirmed": "사용이 확인되었습니다.",
+        "alreadyRedeemedOrCancelled": "이 기프트카드는 이미 사용되었거나 취소되었습니다.",
+        "alreadyRedeemedOrInvalid": "이 기프트카드는 이미 사용되었거나 유효하지 않습니다."
+      }
+    },
+    "qr": {
+      "error": "QR 코드 생성에 실패했습니다",
+      "generating": "QR 생성 중...",
+      "alt": "QR 코드"
+    },
+    "wizard": {
+      "title": "AI 선물 찾기",
+      "subtitle": "받는 분에 대해 알려 주시면 딱 맞는 선물을 찾아 드립니다",
+      "steps": {
+        "recipient": "누구에게 줄 선물인가요?",
+        "occasion": "어떤 날인가요?",
+        "budget": "예산은 얼마인가요?"
+      },
+      "recipients": {
+        "partner": "연인/배우자",
+        "friend": "친구",
+        "parent": "부모님",
+        "colleague": "동료",
+        "child": "아이",
+        "teacher": "선생님"
+      },
+      "occasions": {
+        "birthday": "생일",
+        "christmas": "크리스마스",
+        "anniversary": "기념일",
+        "thankYou": "감사 선물",
+        "justBecause": "그냥",
+        "graduation": "졸업"
+      },
+      "summary": {
+        "for": "받는 분: {recipient}",
+        "budget": "예산: {amount}"
+      },
+      "submit": "딱 맞는 선물 찾기",
+      "error": "추천을 생성하지 못했습니다. 다시 시도해 주세요.",
+      "results": {
+        "found": "{count, plural, other {선물 #개}}를 찾았습니다:",
+        "empty": "일치하는 상품이 없습니다. 조건을 바꿔 보세요."
+      },
+      "startOver": "처음부터 다시"
+    },
+    "card": {
+      "featured": "추천",
+      "save": "저장",
+      "unsave": "저장 취소",
+      "buyNow": "지금 구매"
+    },
+    "feedSection": {
+      "viewAll": "전체 보기"
+    },
+    "filters": {
+      "toggle": "필터",
+      "clear": "지우기",
+      "occasion": "기념일",
+      "persona": "누구를 위한 선물인가요?",
+      "budget": "예산",
+      "budgetUnder": "{amount} 미만"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "특가를 공유하고 리워드를 받으세요"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "예기치 않은 오류가 발생했습니다."
+    },
+    "logoAlt": "{name} 로고",
+    "merchantFallback": "판매자",
+    "validUntil": "{date}까지 유효",
+    "validUntilWithLimit": "{date}까지 유효 - 선착순 {count, plural, other {#회}}",
+    "offAtMerchant": "{merchant}에서 {value} 할인",
+    "fields": {
+      "event": "이벤트",
+      "dateTime": "날짜 및 시간",
+      "location": "장소",
+      "price": "가격",
+      "status": "상태",
+      "attendee": "참석자",
+      "usedAt": "사용 일시"
+    },
+    "ticketStatus": {
+      "available": "구매 가능",
+      "sold": "판매됨",
+      "used": "사용됨",
+      "cancelled": "취소됨",
+      "refunded": "환불됨"
+    },
+    "event": {
+      "notAvailable": "이 이벤트는 티켓을 구매할 수 없습니다.",
+      "descriptionFallback": "멋진 이벤트에 함께하세요!",
+      "availableTickets": "구매 가능한 티켓",
+      "soldOut": "매진",
+      "availableCount": "{count}매 남음",
+      "terms": "이용 약관",
+      "soldOutTitle": "매진된 이벤트입니다",
+      "soldOutDescription": "모든 티켓이 판매되었습니다."
+    },
+    "eventPurchase": {
+      "title": "티켓 구매",
+      "description": "티켓을 선택하고 구매를 완료하세요",
+      "selectTicket": "티켓 선택",
+      "attendeeNameLabel": "참석자 이름 (선택)",
+      "attendeeNamePlaceholder": "참석하실 분의 이름",
+      "attendeeEmailLabel": "참석자 이메일 (선택)",
+      "attendeeEmailPlaceholder": "티켓을 받을 이메일",
+      "total": "합계",
+      "submit": "티켓 구매",
+      "noTickets": "현재 구매 가능한 티켓이 없습니다.",
+      "checkBackLater": "나중에 다시 확인하거나 이벤트 주최자에게 문의해 주세요.",
+      "selectTicketError": "티켓을 선택해 주세요",
+      "purchaseFailed": "티켓 구매에 실패했습니다"
+    },
+    "ticket": {
+      "noPermission": "이 티켓을 볼 수 있는 권한이 없습니다.",
+      "heading": "티켓 #{number}",
+      "qrTitle": "QR 코드",
+      "qrDescription": "이벤트 입구에서 이 QR 코드를 보여 주세요",
+      "qrAlt": "티켓 QR 코드",
+      "qrUnavailable": "QR 코드를 사용할 수 없습니다",
+      "ticketNumber": "티켓 번호: <strong>{number}</strong>",
+      "used": "사용된 티켓입니다",
+      "detailsTitle": "티켓 상세 정보",
+      "detailsDescription": "티켓에 관한 중요한 정보",
+      "staffCanRedeem": "판매자 직원은 이벤트 현장에서 이 티켓을 사용 처리할 수 있습니다."
+    },
+    "redeem": {
+      "notFoundTitle": "사용 내역을 찾을 수 없습니다",
+      "notFoundDescription": "QR 코드가 유효하지 않거나 만료되었습니다.",
+      "title": "바우처 사용 완료",
+      "alreadyRedeemed": "이미 사용된 바우처입니다.",
+      "confirmed": "사용이 확인되었습니다."
+    },
+    "qrCheckout": {
+      "title": "QR 결제",
+      "completeTitle": "결제 완료",
+      "completeDescription": "구매가 확인되었습니다. 자세한 내용은 이메일을 확인하세요.",
+      "payNow": "지금 결제",
+      "confirming": "확인 중..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "바우처를 찾을 수 없습니다",
+      "notFoundDescription": "찾으시는 바우처를 찾을 수 없습니다.",
+      "descriptionFallback": "단독 바우처 혜택",
+      "shareText": "{merchant}의 바우처를 확인해 보세요",
+      "copyCode": "바우처 코드 복사",
+      "qrAlt": "바우처 {code} QR 코드",
+      "print": "바우처 인쇄"
+    },
+    "referralPage": {
+      "voucherFrom": "<highlight>{name}</highlight>님에게서 바우처를 받았습니다",
+      "qrAlt": "바우처 {code} 사용 QR 코드",
+      "offAtMerchantShared": "{merchant}에서 {value} 할인 - 친구가 공유했어요!"
+    },
+    "bnpl": {
+      "title": "할부 결제",
+      "description": "{amount} 결제를 부담 없는 월 할부로 나눠 내세요.",
+      "perMonth": "/월",
+      "planNoInterest": "{months}개월 (무이자)",
+      "planWithFee": "{months}개월 (수수료 {rate}%)",
+      "monthlyPayments": "{count, plural, other {월 #회 납부}}",
+      "total": "합계: {amount}",
+      "noExtraCost": "추가 비용 없음",
+      "payNow": "지금 {amount} 결제"
+    },
+    "qrPanel": {
+      "qrAlt": "QR 코드",
+      "generateFailed": "QR 코드 생성에 실패했습니다",
+      "placeholder": "여기에 QR 코드가 표시됩니다",
+      "generating": "QR 생성 중...",
+      "unavailable": "QR 사용 불가",
+      "hideCode": "코드 숨기기",
+      "showCode": "코드 보기",
+      "expires": "{date} 만료",
+      "refreshNote": "코드는 30초마다 갱신됩니다"
+    },
+    "qrDownload": {
+      "success": "QR 코드가 다운로드되었습니다!",
+      "failed": "QR 코드 다운로드에 실패했습니다",
+      "downloading": "다운로드 중...",
+      "download": "QR 다운로드"
+    }
   }
 }

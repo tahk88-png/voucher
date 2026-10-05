@@ -887,5 +887,1720 @@
         "subtitle": "パスキーまたは二要素認証を追加しましょう。"
       }
     }
+  },
+  "labels": {
+    "free": "無料",
+    "valueOff": "{value} オフ",
+    "valueCredit": "{value} クレジット",
+    "valueDiscount": "{value} 割引",
+    "demo": "デモ",
+    "demoHint": "プラットフォームの仕組みを示すサンプルです。実際のオファーではありません。",
+    "category": {
+      "cafe": "カフェ・ベーカリー",
+      "beauty": "美容・ウェルネス",
+      "fitness": "フィットネス・スポーツ",
+      "events": "イベント・チケット",
+      "workshops": "ワークショップ・教室",
+      "family": "ファミリー・キッズ",
+      "travel": "旅行・宿泊",
+      "outdoor": "アウトドア・アドベンチャー",
+      "other": "その他",
+      "all": "すべてのカテゴリー"
+    },
+    "voucherType": {
+      "percentage": "割合割引",
+      "fixed_amount": "定額割引",
+      "credit_amount": "ストアクレジット"
+    },
+    "voucherStatus": {
+      "draft": "下書き",
+      "published": "公開中",
+      "paused": "一時停止",
+      "ended": "終了",
+      "expired": "期限切れ"
+    },
+    "campaignStatus": {
+      "draft": "下書き",
+      "active": "開催中",
+      "ended": "終了"
+    },
+    "campaignType": {
+      "limited": "単発オファー",
+      "weekly": "週替わりオファー"
+    },
+    "campaignTypeHelp": {
+      "limited": "開始日から終了日までの期間に1回だけ、在庫がなくなり次第終了します。",
+      "weekly": "終了日まで毎週繰り返し提供され、顧客が毎週利用できるオファーです。"
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "サンプルオファー · 販売対象外",
+    "notOnSale": "販売開始前",
+    "purchases": "{count, plural, other {購入 # 件}}",
+    "freeToClaim": "無料で入手",
+    "onSaleNow": "販売中"
+  },
+  "account": {
+    "error": {
+      "title": "問題が発生しました",
+      "fallback": "予期しないエラーが発生しました。",
+      "retry": "もう一度試す"
+    },
+    "dashboard": {
+      "metaTitle": "マイダッシュボード"
+    },
+    "cashback": {
+      "metaTitle": "キャッシュバックとクレジット",
+      "title": "キャッシュバックとクレジット",
+      "description": "利用しているすべてのマーチャントで獲得したクレジットを一覧できます。",
+      "lockedPending": "ロック中（保留）",
+      "used": "使用済み",
+      "expiringTitle": "30日以内に期限切れ",
+      "expiresOn": "{merchant} — {date} に期限切れ",
+      "expiresSoon": "{merchant} — まもなく期限切れ",
+      "byMerchant": "マーチャント別",
+      "lastActivity": "最終アクティビティ {date}",
+      "readyToSpend": "利用可能",
+      "viewMerchantWallet": "マーチャントのウォレットを見る →"
+    },
+    "nearby": {
+      "title": "近くのオファー",
+      "subtitle": "近くのマーチャントのお得な情報やバウチャーを探す",
+      "useMyLocation": "現在地を使用",
+      "approximateLocation": "おおよその位置（IP ベース）",
+      "searchRadius": "検索範囲",
+      "yourLocation": "現在地",
+      "mapLabel": "{radius} km 以内に {count, plural, other {# 件のマーチャント}}",
+      "merchantsNearby": "近くに {count, plural, other {# 件のマーチャント}}",
+      "activeVouchers": "{count, plural, other {有効なバウチャー # 件}}",
+      "emptyTitle": "近くにマーチャントがありません",
+      "emptyBody": "検索範囲を広げるか、後ほどお住まいの地域の新しいオファーをご確認ください。",
+      "expandRadius": "{radius} km に拡大",
+      "errors": {
+        "fetchFailed": "近くのマーチャントを読み込めませんでした。もう一度お試しください。",
+        "geolocationUnsupported": "お使いのブラウザは位置情報に対応していません。",
+        "permissionDenied": "位置情報へのアクセスが拒否されました。ブラウザの設定で位置情報を有効にしてください。",
+        "positionUnavailable": "位置情報を取得できません。後ほどもう一度お試しください。",
+        "timeout": "位置情報の取得がタイムアウトしました。もう一度お試しください。",
+        "locationFailed": "現在地を取得できませんでした。",
+        "ipLocationFailed": "現在地を特定できませんでした。"
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "通知設定"
+    },
+    "redeem": {
+      "notFound": "バウチャーが見つかりません。",
+      "codeUnavailable": "バウチャーコードを利用できません。",
+      "backToWallet": "ウォレットに戻る",
+      "back": "戻る"
+    },
+    "referrals": {
+      "metaTitle": "マイ紹介",
+      "completedCount": "完了：{count}"
+    },
+    "voucherDetail": {
+      "back": "戻る",
+      "merchantFallback": "マーチャント",
+      "termsTitle": "利用規約",
+      "terms1": "このバウチャーは上記の有効期限まで有効です。特に記載がない限り、他のオファーやプロモーションとの併用はできません。",
+      "terms2": "バウチャーはご購入時に提示してください。換金価値はなく、現金との交換や返金はできません。",
+      "terms3": "バウチャーの複製、改ざん、不正使用が疑われる場合、マーチャントは利用をお断りすることがあります。",
+      "terms4": "ご質問やお困りの点は、マーチャントに直接お問い合わせください。"
+    },
+    "vouchers": {
+      "unknownMerchant": "不明",
+      "paidAmount": "支払額：{amount}",
+      "activeCount": "有効（{count}）",
+      "pastCount": "過去（{count}）"
+    },
+    "voucherCard": {
+      "showQr": "QR コードを表示",
+      "close": "閉じる",
+      "qrHint": "店舗で利用するには、この QR コードをマーチャントに提示してください。"
+    },
+    "wallet": {
+      "metaTitle": "マイウォレット"
+    },
+    "wishlist": {
+      "unknownItem": "不明なアイテム",
+      "merchant": "マーチャント",
+      "campaign": "キャンペーン",
+      "validUntil": "{date} まで有効",
+      "alertOn": "通知オン",
+      "noAlert": "通知なし",
+      "view": "表示"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "キャンペーンは利用できません",
+      "metaDescriptionFallback": "{merchant} のオファー。",
+      "breadcrumbLabel": "パンくずリスト",
+      "breadcrumbCampaigns": "キャンペーン",
+      "demoNotice": "<strong>サンプルオファーです。</strong>このページは GiftHub でのオファーの表示例です。事業者とオファーは架空のもので、購入や利用はできません。",
+      "verifiedPartner": "認証済みパートナー",
+      "aboutTitle": "このオファーについて",
+      "descriptionFallback": "GiftHub のマーチャントによる特別オファー。",
+      "howItWorks": {
+        "title": "ご利用の流れ",
+        "claimTitle": "バウチャーを入手",
+        "buyTitle": "バウチャーを購入",
+        "buyText": "オンラインで安全にお支払い。無料オファーなら無料で入手できます。",
+        "qrTitle": "QR コードを受け取る",
+        "qrText": "バウチャーは個人用 QR コード付きで GiftHub ウォレットに保存されます。",
+        "showTitle": "店頭で提示",
+        "showText": "{merchant} がコードをスキャンすると割引が適用されます。"
+      },
+      "termsTitle": "条件",
+      "voucherOptionsTitle": "バウチャーの種類",
+      "voucherFallbackTitle": "バウチャー",
+      "viewVoucher": "バウチャーを見る",
+      "reviewsTitle": "レビュー",
+      "purchaseLabel": "購入",
+      "buyNow": "今すぐ購入",
+      "getFreeVoucher": "無料バウチャーを入手",
+      "sampleOffer": "サンプルオファー",
+      "notOnSaleYet": "販売開始前",
+      "demoNotForSale": "これはサンプルのため、購入できません。",
+      "noVoucherYet": "{merchant} はこのオファーのバウチャーをまだ公開していません。後ほどご確認ください。",
+      "offerRuns": "オファー期間",
+      "bought": "購入数",
+      "boughtCount": "{count, plural, other {# 回}}",
+      "website": "ウェブサイト",
+      "allOffersFrom": "{merchant} のすべてのオファー",
+      "moreFrom": "{merchant} のその他のオファー"
+    },
+    "list": {
+      "allCategories": "すべて",
+      "badge": "開催中キャンペーンのマーケットプレイス",
+      "heroTitle": "ヨーロッパで話題のオファーを見つけよう",
+      "heroSubtitle": "地域の人気マーチャントから厳選したバウチャー、ギフト、体験を探せます。",
+      "searchLabel": "キャンペーンを検索",
+      "searchPlaceholder": "キャンペーン、マーチャント、サービスを検索...",
+      "campaignCount": "{count, plural, other {<b>#</b> 件のキャンペーン}}",
+      "voucherCount": "{count, plural, other {<b>#</b> 件のバウチャーを販売中}}",
+      "merchantCount": "{count, plural, other {<b>#</b> 件のマーチャント}}",
+      "categoriesLabel": "カテゴリー",
+      "unavailableTitle": "キャンペーンを一時的に表示できません",
+      "unavailableText": "データベースに接続できませんでした。しばらくしてからもう一度お試しください。",
+      "emptyTitle": "オファーが見つかりません",
+      "emptyText": "別のキーワードで検索するか、別のカテゴリーを選択してください。",
+      "tryAgain": "もう一度試す",
+      "clearFilters": "フィルターをクリア"
+    },
+    "listError": {
+      "title": "キャンペーンを読み込めませんでした",
+      "fallbackMessage": "キャンペーンの読み込み中に予期しないエラーが発生しました。",
+      "tryAgain": "もう一度試す"
+    },
+    "filters": {
+      "sortBy": "並べ替え",
+      "sort": {
+        "newest": "新しい順",
+        "oldest": "古い順",
+        "priceLow": "価格：安い順",
+        "priceHigh": "価格：高い順",
+        "popular": "人気順",
+        "expiring": "終了間近"
+      },
+      "merchant": "マーチャント",
+      "allMerchants": "すべてのマーチャント",
+      "minPrice": "最低価格",
+      "minPricePlaceholder": "最低 €",
+      "maxPrice": "最高価格",
+      "maxPricePlaceholder": "最高 €"
+    },
+    "tenantList": {
+      "title": "バウチャー",
+      "subtitle": "{merchant} の有効なオファー。",
+      "empty": "利用可能なバウチャーはまだありません。",
+      "voucher": "バウチャー",
+      "viewVoucher": "バウチャーを見る"
+    },
+    "deals": {
+      "metaTitle": "お得な情報",
+      "metaDescription": "お得なバウチャーを見つけよう"
+    },
+    "campaignShare": {
+      "share": "共有",
+      "copied": "コピー済み",
+      "linkCopied": "リンクをコピーしました",
+      "copyFailed": "コピーに失敗しました"
+    },
+    "shareSheet": {
+      "share": "共有",
+      "title": {
+        "voucher": "このバウチャーを共有",
+        "campaign": "このキャンペーンを共有",
+        "merchant": "このマーチャントを共有"
+      },
+      "close": "閉じる",
+      "referralShareText": "{title} - 共有して10%還元！",
+      "referralNote": "友達が利用すると<b>共有で10%獲得</b>！",
+      "targets": {
+        "email": "メール",
+        "copy": "リンクをコピー"
+      },
+      "copied": "コピーしました！",
+      "linkCopiedToClipboard": "リンクをクリップボードにコピーしました！",
+      "linkCopied": "リンクをコピーしました！",
+      "shareLinkLabel": "共有リンク",
+      "copyLink": "リンクをコピー"
+    },
+    "wishlistButton": {
+      "add": "ウィッシュリストに追加",
+      "remove": "ウィッシュリストから削除"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, other {星 #}}"
+    },
+    "form": {
+      "title": "レビューを書く",
+      "ratingLabel": "評価",
+      "titleLabel": "タイトル（任意）",
+      "titlePlaceholder": "体験を一言で",
+      "commentLabel": "コメント（任意）",
+      "commentPlaceholder": "体験をシェアしてください...",
+      "submit": "レビューを投稿",
+      "submitting": "投稿中...",
+      "ratingRequired": "評価を選択してください",
+      "submitFailed": "レビューの投稿に失敗しました",
+      "alreadyReviewed": "このアイテムはすでにレビュー済みです",
+      "signInRequired": "レビューを書くにはログインしてください",
+      "thankYou": "レビューありがとうございます！",
+      "writeAnother": "別のレビューを書く"
+    },
+    "list": {
+      "sort": {
+        "newest": "新しい順",
+        "highest": "評価の高い順",
+        "helpful": "参考になった順"
+      },
+      "signInToReview": "レビューを書くにはログインしてください",
+      "loadFailed": "レビューを読み込めませんでした。",
+      "tryAgain": "もう一度試す",
+      "empty": "レビューはまだありません。",
+      "anonymous": "匿名",
+      "verified": "認証済み",
+      "helpfulButton": "参考になった（{count}）",
+      "foundHelpful": "{count} 人が参考になったと評価",
+      "previous": "前へ",
+      "next": "次へ",
+      "pageOf": "{current} / {total} ページ"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "キャンセル",
+      "saving": "保存中…",
+      "somethingWentWrong": "問題が発生しました"
+    },
+    "apiErrors": {
+      "notAuthenticated": "認証されていません",
+      "unauthorized": "権限がありません",
+      "tooManyAttempts": "試行回数が多すぎます",
+      "validationFailed": "入力内容の検証に失敗しました",
+      "unexpected": "予期しないエラーが発生しました",
+      "databaseFailed": "データベース処理に失敗しました",
+      "serviceUnavailable": "サービスは一時的に利用できません",
+      "newPasswordTooShort": "新しいパスワードは8文字以上にしてください",
+      "userNotFound": "ユーザーが見つかりません",
+      "currentPasswordRequired": "現在のパスワードを入力してください",
+      "currentPasswordIncorrect": "現在のパスワードが正しくありません",
+      "deletionUnavailable": "アカウントの削除は一時的に利用できません。サポートにお問い合わせください。",
+      "totpAlreadyEnabledReconfigure": "二要素認証はすでに有効です。再設定するには、まず無効にしてください。",
+      "sixDigitCodeRequired": "6桁のコードを入力してください",
+      "totpSetupMissing": "TOTP の設定が見つかりません。まず設定を開始してください。",
+      "totpAlreadyEnabled": "二要素認証はすでに有効です",
+      "invalidSetupCode": "コードが無効です。認証アプリを確認して、もう一度お試しください。",
+      "verificationCodeRequired": "確認コードを入力してください",
+      "totpNotEnabled": "二要素認証は現在有効になっていません",
+      "invalidDisableCode": "コードが無効です。現在の TOTP コードまたはバックアップコードを入力してください。",
+      "passkeyOptionsFailed": "登録オプションを取得できませんでした",
+      "passkeyGenerateOptionsFailed": "登録オプションを生成できませんでした",
+      "registrationFailed": "登録に失敗しました",
+      "passkeyRegistrationFailed": "パスキーの登録に失敗しました",
+      "passkeyChallengeExpired": "チャレンジの有効期限が切れているか、見つかりません",
+      "verificationFailed": "認証に失敗しました",
+      "passkeyVerifyFailed": "登録を確認できませんでした"
+    },
+    "settings": {
+      "joinedOn": "{date} に登録",
+      "joinedRecently": "最近登録"
+    },
+    "profileForm": {
+      "nameLabel": "名前",
+      "namePlaceholder": "お名前",
+      "emailLabel": "メール",
+      "emailLocked": "メールアドレスは変更できません",
+      "save": "変更を保存",
+      "updated": "プロフィールを更新しました",
+      "nameRequired": "名前を入力してください",
+      "updateFailed": "プロフィールの更新に失敗しました"
+    },
+    "passwordForm": {
+      "currentLabel": "現在のパスワード",
+      "newLabel": "新しいパスワード",
+      "setLabel": "パスワードを設定",
+      "confirmLabel": "パスワード（確認）",
+      "showPassword": "パスワードを表示",
+      "hidePassword": "パスワードを隠す",
+      "change": "パスワードを変更",
+      "set": "パスワードを設定",
+      "updated": "パスワードを更新しました",
+      "tooShort": "パスワードは {min} 文字以上にしてください",
+      "mismatch": "パスワードが一致しません",
+      "changeFailed": "パスワードの変更に失敗しました"
+    },
+    "deleteDialog": {
+      "trigger": "アカウントを削除",
+      "title": "アカウントを削除しますか？",
+      "description": "この操作は取り消せません。プロフィール、セッション、通知設定は削除され、購入履歴は匿名化されます。",
+      "typeToConfirm": "確認のため <strong>{word}</strong> と入力してください：",
+      "confirm": "完全に削除",
+      "deleting": "削除中…",
+      "failed": "アカウントの削除に失敗しました"
+    },
+    "passkeys": {
+      "title": "パスキー",
+      "description": "デバイスの指紋認証、顔認証、PIN を使って、パスワードなしでログインできます。",
+      "add": "パスキーを追加",
+      "namePlaceholder": "例：「MacBook Touch ID」",
+      "addSubmit": "追加",
+      "adding": "追加中…",
+      "unsupported": "このブラウザはパスキーに対応していません。最新版の Chrome、Safari、Edge をお試しください。",
+      "empty": "パスキーはまだありません。追加するとパスワードなしでログインできます。",
+      "devicePasskey": "デバイスのパスキー",
+      "passkey": "パスキー",
+      "added": "{date} に追加",
+      "lastUsed": "最終使用 {date}",
+      "synced": "同期済み",
+      "removeConfirm": "削除しますか？",
+      "remove": "削除",
+      "removeLabel": "パスキーを削除",
+      "loadFailed": "パスキーを読み込めませんでした",
+      "removeFailed": "パスキーの削除に失敗しました"
+    },
+    "security": {
+      "title": "セキュリティ",
+      "description": "二要素認証とセキュリティ設定を管理",
+      "loading": "読み込み中...",
+      "backToSettings": "設定に戻る",
+      "enabledMessage": "二要素認証が有効になりました！",
+      "disabledMessage": "二要素認証を無効にしました",
+      "errors": {
+        "statusLoadFailed": "二要素認証のステータスを読み込めませんでした",
+        "setupFailed": "設定を開始できませんでした",
+        "verifyFailed": "認証に失敗しました",
+        "disableFailed": "二要素認証を無効にできませんでした"
+      },
+      "status": {
+        "title": "二要素認証",
+        "enabledBody": "アカウントは認証アプリで保護されています。",
+        "disabledBody": "認証アプリのコード入力を必須にして、アカウントのセキュリティを強化しましょう。",
+        "enabled": "有効",
+        "notEnabled": "無効"
+      },
+      "setup": {
+        "title": "認証アプリを設定",
+        "description": "Google Authenticator、Authy、1Password などのアプリで確認コードを生成します。",
+        "enable": "二要素認証を有効にする"
+      },
+      "scan": {
+        "title": "QR コードをスキャンするか、キーを手動で入力",
+        "qrAlt": "認証アプリでこの QR コードをスキャンしてください",
+        "manualKey": "または、このキーを手動で入力：",
+        "copySecret": "シークレットをコピー"
+      },
+      "verify": {
+        "title": "確認コードを入力",
+        "codeLabel": "アプリに表示された6桁のコード",
+        "submit": "確認して有効にする"
+      },
+      "backupCodes": {
+        "title": "バックアップコードを保存",
+        "description": "これらのコードは安全な場所に保管してください。認証アプリにアクセスできなくなった場合、いずれかのコードでログインできます。各コードは1回のみ使用できます。",
+        "copy": "コードをコピー",
+        "copied": "コピーしました！",
+        "download": "ダウンロード",
+        "done": "完了"
+      },
+      "backupFile": {
+        "title": "GiftHub - 二要素認証バックアップコード",
+        "instructions": "これらのコードは安全な場所に保管してください。各コードは1回のみ使用できます。",
+        "generated": "生成日：{date}"
+      },
+      "disable": {
+        "title": "二要素認証を無効にする",
+        "description": "アカウントの追加のセキュリティ保護が解除されます。",
+        "button": "二要素認証を無効にする",
+        "confirmTitle": "二要素認証の無効化を確認",
+        "confirmDescription": "認証アプリに表示されている6桁のコード、またはバックアップコードを入力してください。",
+        "codeLabel": "確認コード",
+        "codePlaceholder": "000000 または XXXX-XXXX",
+        "confirm": "無効化を確定"
+      },
+      "quickLinks": {
+        "title": "セキュリティのクイックリンク",
+        "sessions": "アクティブなセッションを表示",
+        "changePassword": "パスワードを変更"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "リーチではなく成果に対してお支払い。マーチャント主導の紹介インフラ：ブランドバウチャーとストアクレジット。"
+    },
+    "error": {
+      "unexpected": "予期しないエラーが発生しました。"
+    },
+    "hero": {
+      "badge": "地域ビジネスのためのバウチャーと紹介",
+      "title": "お客様が<highlight>次のお客様</highlight>を連れてくる",
+      "subtitle": "バウチャーキャンペーンを作成。お客様が共有してクレジットを獲得し、友達を連れてきます。すべての紹介を追跡し、新規顧客1人あたりのコストを正確に把握できます。",
+      "ctaMerchant": "マーチャントとして始める",
+      "ctaExplore": "キャンペーンを見る",
+      "noCardRequired": "クレジットカード不要",
+      "freeTrial": "{days}日間の無料トライアル",
+      "cancelAnytime": "いつでも解約可能"
+    },
+    "stats": {
+      "activeCampaigns": "開催中のキャンペーン",
+      "merchants": "マーチャント",
+      "processedValue": "取扱額"
+    },
+    "merchantsTitle": "参加マーチャント",
+    "values": {
+      "referral": {
+        "title": "紹介エンジン",
+        "description": "お客様がお得な情報を共有し、新しいお客様を自動的に呼び込みます"
+      },
+      "vouchers": {
+        "title": "デジタルバウチャー",
+        "description": "柔軟なルールの割引キャンペーンを数分で作成"
+      },
+      "qr": {
+        "title": "QR で利用",
+        "description": "スマートフォンだけで店頭でスキャン・確認。専用機器は不要です"
+      },
+      "analytics": {
+        "title": "リアルタイム分析",
+        "description": "各キャンペーンのコストと成果を正確に把握。推測は不要です"
+      }
+    },
+    "howItWorks": {
+      "title": "仕組み",
+      "subtitle": "シンプルな3ステップで、数分で始められます",
+      "steps": {
+        "create": {
+          "title": "キャンペーンを作成",
+          "description": "割引、期間、利用上限を決めるだけ。2分でバウチャーを設定できます。"
+        },
+        "share": {
+          "title": "お客様が共有",
+          "description": "購入者全員に紹介リンクが届きます。共有してクレジットを獲得し、友達を連れてきます。"
+        },
+        "grow": {
+          "title": "成長を実感",
+          "description": "すべての紹介の流れを追跡し、新規顧客1人あたりのコストと ROI を測定します。"
+        }
+      }
+    },
+    "campaigns": {
+      "title": "人気のキャンペーンを見る",
+      "subtitle": "ヨーロッパ各地のバウチャー、お得な情報、体験を見つけよう",
+      "showing": "{count, plural, other {開催中のキャンペーン # 件}}を表示しています。",
+      "showingWithOnSale": "{count, plural, other {開催中のキャンペーン # 件}}を表示しています（うち {onSale} 件が販売中）。",
+      "emptyTitle": "現在開催中のキャンペーンはありません",
+      "emptyBody": "マーチャントがオファーを公開すると、ここに表示されます。",
+      "viewAll": "すべてのキャンペーンを見る"
+    },
+    "pricing": {
+      "title": "シンプルで明確な料金体系",
+      "subtitle": "ビジネスに合ったプランをお選びください。年払いは10か月分の料金です。",
+      "billingPeriod": "請求期間",
+      "monthly": "月払い",
+      "annual": "年払い",
+      "save": "17%お得",
+      "mostPopular": "人気No.1",
+      "perMonth": "/月",
+      "perYear": "{price}/年（2か月分無料）",
+      "startTrial": "無料トライアルを開始",
+      "footer": "全プランに{days}日間の無料トライアル付き · バウチャー販売の取引手数料 {percent}% · いつでも解約可能",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, other {バウチャー # 件/月}}",
+        "activeCampaigns": "{count, plural, other {開催中キャンペーン # 件}}",
+        "teamMembers": "{count, plural, other {チームメンバー # 人}}",
+        "qrRedemption": "QR コードでの利用",
+        "basicAnalytics": "基本分析",
+        "advancedAnalytics": "高度な分析",
+        "customDomain": "カスタムドメイン",
+        "promoBoosts": "プロモーションブースト（メール＋プッシュ）",
+        "unlimitedVouchers": "バウチャー無制限",
+        "unlimitedCampaigns": "キャンペーン無制限",
+        "unlimitedTeamMembers": "チームメンバー無制限",
+        "everythingInPlan": "{plan} のすべての機能"
+      }
+    },
+    "calculator": {
+      "title": "ROI を計算",
+      "subtitle": "スライダーを動かして、GiftHub でどれだけ収益を得られるか確認しましょう",
+      "monthlyPurchases": "月間バウチャー購入数",
+      "purchasesValue": "{count, plural, other {# 件}}",
+      "averageTicket": "平均購入単価",
+      "referralRate": "紹介のコンバージョン率",
+      "monthlyRevenue": "月間売上",
+      "referralCustomers": "紹介による新規顧客",
+      "perMonthValue": "{value}/月",
+      "referralRevenue": "紹介による売上",
+      "estimatedRoi": "推定 ROI",
+      "platformCost": "プラットフォーム費用",
+      "platformCostValue": "{plan}/月のプラン + 手数料 {fees}（{percent}%）= <strong>{total}/月</strong>",
+      "disclaimer": "入力した値に基づく参考値であり、予測ではありません。"
+    },
+    "why": {
+      "title": "マーチャントに GiftHub が選ばれる理由",
+      "body": "利益率を守り、顧客との関係を自社で保ちながら、顧客基盤を広げて売上を伸ばしましょう。",
+      "benefits": {
+        "referralEngine": "すべてのキャンペーンに紹介エンジンを搭載",
+        "analytics": "リアルタイム分析：顧客獲得単価、ROI",
+        "qr": "QR で利用 — POS 機器は不要",
+        "languages": "{count, plural, other {# 言語}}に対応",
+        "flatPlan": "定額の月額プラン — Groupon のようなレベニューシェアではありません",
+        "ownData": "顧客データはあなたのもの",
+        "fee": "バウチャー販売の取引手数料 {percent}%、隠れたコストなし"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "ドラッグして比較",
+      "beforeTitle": "Groupon の場合",
+      "afterTitle": "GiftHub の場合",
+      "sliderLabel": "{before} と {after} を比較",
+      "before": {
+        "revenueShare": "プラットフォームが売上の大部分を取得",
+        "ownsRelationship": "顧客との関係はプラットフォームのもの",
+        "noDataAccess": "顧客データにアクセスできない",
+        "raceToBottom": "値下げ競争に陥る",
+        "lostBrand": "ブランドの個性が失われる"
+      },
+      "after": {
+        "flatFee": "定額 {minPrice}–{maxPrice}/月 + 手数料 {percent}%",
+        "ownData": "顧客データはすべてあなたのもの",
+        "referralEngine": "紹介エンジンを標準搭載",
+        "yourBrand": "あなたのブランド、あなたのルール",
+        "roiAnalytics": "リアルタイムの ROI 分析"
+      }
+    },
+    "faq": {
+      "title": "よくある質問",
+      "subtitle": "GiftHub について知っておきたいこと",
+      "items": {
+        "groupon": {
+          "question": "Groupon との違いは何ですか？",
+          "answer": "Groupon のようなクーポンサイトは、通常、売上の大部分を受け取り、顧客との関係も握ります。GiftHub は定額の月額料金（{price}/月から）とバウチャー販売額の {percent}% のみ。顧客、データ、利益はあなたのものです。"
+        },
+        "referral": {
+          "question": "紹介の仕組みはどうなっていますか？",
+          "answer": "バウチャーを購入したお客様には、それぞれ専用の紹介リンクが発行されます。リンクを共有して友達が購入すると、双方にクレジットが付与されます。紹介の流れはすべて追跡されるため、新規顧客がどこから来たのか正確に把握できます。"
+        },
+        "trial": {
+          "question": "{days}日間のトライアル終了後はどうなりますか？",
+          "answer": "プラン（{starter}、{pro}、{scale}）をお選びいただきます。登録しない場合も公開済みのバウチャーはお客様向けに引き続き有効ですが、新しいキャンペーンは登録するまで作成できません。"
+        },
+        "qr": {
+          "question": "QR での利用に専用機器は必要ですか？",
+          "answer": "いいえ。スタッフがスマートフォンのブラウザでモバイルスキャナーを開き、お客様の QR コードをスキャンするだけです。アプリのダウンロードや POS 連携は不要です。"
+        },
+        "fee": {
+          "question": "{percent}% の取引手数料とは何ですか？",
+          "answer": "お客様がプラットフォームでバウチャーを購入すると、支払額から {percent}% を差し引きます。プラン料金以外にプラットフォーム手数料はかかりません。"
+        }
+      }
+    },
+    "cta": {
+      "title": "顧客を借りるのはやめて、自分のファンを育てよう。",
+      "body": "最初のキャンペーンは数分で作成できます。あとはお客様にお任せ。{days}日間の無料トライアル付き。",
+      "getStarted": "無料で始める",
+      "browse": "キャンペーンを見る"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "チェックアウトのデモ",
+      "subtitle": "デモ用チェックアウトページ",
+      "creditBalance": "クレジット残高",
+      "availableAmount": "{amount} 利用可能",
+      "lockedAmount": "{amount} ロック中",
+      "orderSummary": "注文概要",
+      "orderAmount": "注文金額",
+      "creditToApply": "適用するクレジット",
+      "maxAmount": "最大：{amount}",
+      "subtotal": "小計",
+      "creditAppliedLine": "適用済みクレジット",
+      "total": "合計",
+      "processing": "処理中...",
+      "submit": "クレジットを適用して注文を確定",
+      "creditApplied": "クレジットを適用しました！注文合計：{total}",
+      "errors": {
+        "missingAmounts": "注文金額とクレジット額の両方を入力してください",
+        "applyFailed": "クレジットの適用に失敗しました"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - 利用可能なバウチャー",
+      "emptyTitle": "利用可能なバウチャーはありません",
+      "emptyDescription": "{merchant} の新しいバウチャーは後ほどご確認ください。",
+      "specialOffer": "特別オファー",
+      "validUntil": "{date} まで有効",
+      "viewAndShare": "表示して共有"
+    },
+    "wallet": {
+      "subtitle": "クレジットウォレット",
+      "availableToUse": "利用可能",
+      "useCredit": "クレジットを使う",
+      "noCreditToUse": "利用できるクレジットはありません",
+      "locked": "ロック中",
+      "lockedDescription": "関連する購入が確認されるとロック解除されます。",
+      "historyTitle": "クレジット履歴",
+      "historyDescription": "{merchant} の取引履歴",
+      "historyEmpty": "クレジット履歴はまだありません。",
+      "expires": "{date} に期限切れ",
+      "creditStatus": {
+        "locked": "ロック中",
+        "available": "利用可能",
+        "used": "使用済み",
+        "expired": "期限切れ",
+        "reversed": "取り消し"
+      }
+    },
+    "error": {
+      "title": "問題が発生しました",
+      "description": "ポータルを読み込めませんでした。ページを再読み込みするか、後ほどもう一度お試しください。",
+      "backToPortal": "ポータルに戻る"
+    },
+    "payments": {
+      "voucherFallback": "バウチャー",
+      "status": {
+        "pending": "保留中",
+        "paid": "支払い済み",
+        "failed": "失敗",
+        "refunded": "返金済み"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "購入可能",
+        "sold": "売り切れ",
+        "used": "使用済み",
+        "cancelled": "キャンセル済み",
+        "refunded": "返金済み"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "問題が発生しました",
+      "description": "このページの読み込み中にエラーが発生しました。"
+    },
+    "notFound": {
+      "metaTitle": "ページが見つかりません"
+    },
+    "header": {
+      "mainNavLabel": "メイン",
+      "signIn": "ログイン"
+    },
+    "footer": {
+      "navLabel": "フッター",
+      "copyright": "© {year} GiftHub. Made in Europe."
+    },
+    "navLinks": {
+      "campaigns": "キャンペーン",
+      "merchants": "マーチャント",
+      "explore": "探す",
+      "search": "検索",
+      "faq": "よくある質問",
+      "contact": "お問い合わせ",
+      "privacy": "プライバシー",
+      "terms": "利用規約",
+      "home": "ホーム",
+      "about": "概要",
+      "vouchers": "バウチャー",
+      "shop": "ショップ",
+      "rent": "レンタル"
+    },
+    "chat": {
+      "openAssistant": "自動アシスタントを開く",
+      "closeAssistant": "自動アシスタントを閉じる",
+      "dialogLabel": "GiftHub 自動アシスタント",
+      "title": "GiftHub アシスタント",
+      "subtitle": "自動アシスタント",
+      "newChat": "新しいチャット",
+      "closeChat": "チャットを閉じる",
+      "greeting": "こんにちは！",
+      "intro": "自動アシスタントです。バウチャー、ギフトカード、チケット、アカウントについてお気軽にご質問ください。",
+      "inputLabel": "自動アシスタントへのメッセージ",
+      "placeholder": "メッセージを入力...",
+      "send": "メッセージを送信",
+      "sendError": "申し訳ありません。メッセージを送信できませんでした。もう一度お試しください。"
+    },
+    "cookies": {
+      "regionLabel": "Cookie 設定",
+      "intro": "より良い体験のために Cookie を使用しています。必須の Cookie は常に有効で、任意の Cookie は許可するものを選択できます。<link>プライバシーポリシー</link>",
+      "optionalLegend": "任意の Cookie",
+      "necessary": "必須",
+      "alwaysOn": "（常に有効）",
+      "analytics": "分析",
+      "marketing": "マーケティング",
+      "preferences": "設定",
+      "saveError": "選択を保存できませんでした。もう一度お試しください。",
+      "acceptAll": "すべて許可",
+      "declineOptional": "任意の Cookie を拒否",
+      "customize": "カスタマイズ",
+      "savePreferences": "設定を保存"
+    },
+    "currency": {
+      "selectLabel": "通貨を選択"
+    },
+    "language": {
+      "selectLabel": "言語を選択",
+      "selectInterfaceLabel": "表示言語を選択（{language}）",
+      "unknown": "不明",
+      "interfaceOnly": "画面の表示テキストのみ変更します",
+      "uiName": "{name}（UI）"
+    },
+    "country": {
+      "selectLabel": "マーケットプレイスを選択（{country}）",
+      "heading": "マーケットプレイスを選択",
+      "description": "国、通貨、市場データのみ変更します",
+      "tip": "<strong>ヒント：</strong>マーケットプレイスはデータと通貨を絞り込みます。表示言語は別途設定します。"
+    },
+    "roleSwitcher": {
+      "myDashboard": "マイダッシュボード",
+      "platformAdmin": "プラットフォーム管理者",
+      "admin": "管理者",
+      "staff": "スタッフ",
+      "switchContext": "表示を切り替え"
+    },
+    "legalEntity": {
+      "operator": "運営者",
+      "registeredAddress": "登記住所",
+      "registryCode": "登記番号",
+      "operatorPlaceholder": "[会社名を追加予定]",
+      "addressPlaceholder": "[登記住所を追加予定]",
+      "registryCodePlaceholder": "[登記番号を追加予定]"
+    },
+    "theme": {
+      "dark": "ダークモード",
+      "light": "ライトモード",
+      "system": "システム設定"
+    },
+    "voiceSearch": {
+      "start": "音声検索を開始",
+      "stop": "聞き取りを停止",
+      "tooltip": "音声検索",
+      "tapToStop": "タップして停止"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "ハブを読み込めませんでした",
+      "description": "マーチャントの読み込み中に予期しないエラーが発生しました。",
+      "retry": "もう一度試す"
+    },
+    "hub": {
+      "metaTitle": "マーチャント",
+      "metaDescription": "GiftHub に参加している地元のお店と現在のオファー",
+      "title": "地元のマーチャント",
+      "subtitle": "カフェ、サロン、スタジオなど。GiftHub に参加しているお店と現在のオファーをご覧ください。",
+      "loadError": "マーチャントを読み込めませんでした",
+      "loadErrorHint": "しばらくしてからもう一度お試しください。",
+      "retry": "もう一度試す",
+      "emptyTitle": "マーチャントはまだいません",
+      "emptyHint": "お店が参加すると、ここに表示されます。",
+      "joinCta": "マーチャントとして参加",
+      "noOffers": "現在オファーはありません",
+      "offerCount": "{count, plural, other {# 件のオファー}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "見つかりません",
+      "metaDescription": "{name} のバウチャー、キャンペーン、オファーを見る",
+      "offerCount": "{count, plural, other {# 件のオファー}}",
+      "website": "ウェブサイト",
+      "contact": "お問い合わせ",
+      "sampleNotice": "<strong>サンプルのお店です。</strong>このページは GiftHub でのマーチャントの表示例です。オファーは架空のもので、購入できません。",
+      "offersHeading": "オファー",
+      "noOffers": "現在オファーはありません",
+      "noOffersHint": "{name} の新しいオファーはここに表示されます。",
+      "browseOther": "他のオファーを見る",
+      "validUntil": "{date} まで有効"
+    },
+    "tenantShell": {
+      "campaigns": "キャンペーン",
+      "mainNav": "メイン",
+      "signIn": "ログイン"
+    },
+    "sitePage": {
+      "hubHeroTitle": "地元のマーチャントを見つけよう",
+      "hubHeroSubtitle": "GiftHub のマーチャントによるキャンペーン、バウチャー、レンタル、ショップをご覧ください。",
+      "tenantHeroSubtitle": "商品、レンタル、バウチャーをまとめてチェック。",
+      "browseCampaigns": "キャンペーンを見る",
+      "getStarted": "始める",
+      "featuredMerchants": "注目のマーチャント",
+      "noMerchants": "マーチャントはまだいません。",
+      "visitNamed": "{name} を見る",
+      "visitMerchant": "マーチャントを見る",
+      "featuredProducts": "注目の商品",
+      "noProducts": "利用可能な商品はありません。",
+      "rentalHighlights": "注目のレンタル",
+      "noRentals": "利用可能なレンタルはありません。",
+      "perDay": "{price} / 日",
+      "activeVouchers": "有効なバウチャー",
+      "noStandaloneVouchers": "現在、単独のバウチャーはありません — <link>{count, plural, other {開催中のキャンペーン # 件}}を見る</link>。",
+      "noVouchers": "利用可能なバウチャーはありません。",
+      "voucher": "バウチャー",
+      "viewVoucher": "バウチャーを見る",
+      "stats": {
+        "campaigns": "キャンペーン",
+        "vouchers": "バウチャー",
+        "products": "商品",
+        "rentals": "レンタル"
+      },
+      "statsUnavailable": "統計を表示できません。"
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "ショップ",
+      "subtitle": "商品を見てカートに追加しましょう。"
+    },
+    "shopClient": {
+      "intentCreatedTitle": "チェックアウトインテントを作成しました",
+      "intentCreatedDescription": "インテント {id}（{amount}）",
+      "checkoutErrorTitle": "チェックアウトエラー",
+      "checkoutErrorDescription": "チェックアウトインテントを作成できませんでした。",
+      "empty": "利用可能な商品はまだありません。",
+      "productHighlight": "注目の商品",
+      "add": "追加",
+      "cart": "カート",
+      "cartEmpty": "カートは空です。",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "削除",
+      "total": "合計",
+      "creatingIntent": "インテントを作成中...",
+      "checkoutIntent": "チェックアウトインテント"
+    },
+    "rentPage": {
+      "metaTitle": "レンタルマーケットプレイス",
+      "metaDescription": "レンタル可能なアイテムを見る",
+      "title": "レンタル",
+      "subtitle": "日程を選んでレンタルの見積もりを依頼しましょう。"
+    },
+    "rentClient": {
+      "selectDatesError": "レンタル期間を選択してください。",
+      "bookingFailed": "予約に失敗しました",
+      "bookingCreated": "{name} の予約リクエストを作成しました。合計：{total}。",
+      "bookingSubmitted": "予約を送信しました",
+      "bookingCreateFailed": "レンタル予約を作成できませんでした。",
+      "bookingCancelled": "予約をキャンセルしました。",
+      "cancelFailed": "予約のキャンセルに失敗しました。",
+      "datesHeading": "レンタル期間",
+      "startDate": "開始日",
+      "endDate": "終了日",
+      "daysSelected": "{count, plural, other {レンタル日数：# 日}}",
+      "selectDatesHint": "日程を選択すると料金が計算されます。",
+      "empty": "利用可能なレンタルはまだありません。",
+      "rentalHighlight": "注目のレンタル",
+      "perDay": "{price} / 日",
+      "weeklyRate": "週単位：{price}",
+      "select": "選択",
+      "selectedHeading": "選択したレンタル",
+      "estimatedTotal": "概算合計",
+      "notesLabel": "備考（任意）",
+      "notesPlaceholder": "ご要望があればご記入ください...",
+      "submitting": "予約を送信中...",
+      "requestBooking": "レンタルを予約リクエスト",
+      "myBookings": "マイ予約",
+      "noBookings": "レンタル予約はまだありません。上のアイテムを選択して始めましょう。",
+      "bookingRange": "{start} - {end}（{days, plural, other {# 日間}}）",
+      "bookingTotal": "合計：{total}",
+      "rejectionReason": "理由：{reason}",
+      "cancelling": "キャンセル中...",
+      "cancel": "キャンセル",
+      "status": {
+        "pending": "保留中",
+        "approved": "承認済み",
+        "rejected": "却下",
+        "paid": "支払い済み",
+        "active": "レンタル中",
+        "returned": "返却済み",
+        "cancelled": "キャンセル済み"
+      }
+    },
+    "boxes": {
+      "metaTitle": "サブスクリプションボックス",
+      "metaDescription": "お気に入りの地元マーチャントが厳選したバウチャーボックスを定期購入。毎回新しいオファーが届き、いつでも解約できます。",
+      "title": "サブスクリプションボックス",
+      "subtitle": "人気マーチャントが厳選したバウチャーを定期的にお届けします。",
+      "empty": "利用可能なサブスクリプションボックスはまだありません。またチェックしてください！",
+      "byMerchant": "提供：{name}",
+      "perInterval": "/{interval}",
+      "details": "詳細",
+      "subscribe": "購読する",
+      "subscribedTitle": "購読しました",
+      "subscribedMessage": "購読が完了しました。詳細はメールをご確認ください。",
+      "subscribeFailed": "購読に失敗しました。もう一度お試しください。",
+      "notFoundTitle": "ボックスが見つかりません",
+      "notFoundHint": "このサブスクリプションボックスは利用できません。",
+      "browseAll": "← すべてのボックスを見る",
+      "backToAll": "← サブスクリプションボックス一覧",
+      "subscriberCount": "{count, plural, other {購読者 # 人}}",
+      "whatsInside": "内容",
+      "curatingNext": "{period}最大 {count, plural, other {# 件の厳選バウチャー}}をお届け。次回分を厳選中です。",
+      "percentVoucher": "{value}% オフバウチャー",
+      "amountVoucher": "{amount} バウチャー",
+      "curatedVoucher": "厳選バウチャー",
+      "subscribing": "購読中…",
+      "subscribeWithPrice": "購読する — {price}/{interval}",
+      "interval": {
+        "weekly": "週",
+        "monthly": "月",
+        "quarterly": "四半期"
+      },
+      "intervalEach": {
+        "weekly": "毎週",
+        "monthly": "毎月",
+        "quarterly": "四半期ごとに"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "検索",
+    "metaDescription": "GiftHub のマーチャントによる開催中のキャンペーンとバウチャーを検索。",
+    "loadingSearch": "検索を読み込み中",
+    "title": "オファーを検索",
+    "subtitle": "GiftHub のマーチャントのキャンペーンやバウチャーを探す",
+    "queryLabel": "キャンペーン、バウチャー、マーチャントを検索",
+    "queryPlaceholder": "キャンペーン、バウチャー、マーチャントを検索...",
+    "toggleFilters": "フィルターの表示切替",
+    "filtersTitle": "フィルター",
+    "closeFilters": "フィルターを閉じる",
+    "error": "現在検索を利用できません。しばらくしてからもう一度お試しください。",
+    "campaignsHeading": "キャンペーン",
+    "vouchersHeading": "バウチャー",
+    "browseMarketplace": "販売中のすべての商品は<link>キャンペーンマーケットプレイス</link>でご覧いただけます。",
+    "campaignEnds": "{date} 終了",
+    "filters": {
+      "title": "フィルター",
+      "clearAll": "すべてクリア",
+      "category": "カテゴリー",
+      "discountType": "割引タイプ",
+      "minDiscount": "最低割引率",
+      "minDiscountAria": "最低割引率",
+      "maxPrice": "最高価格",
+      "maxPriceAria": "最高価格（ユーロ）",
+      "any": "指定なし",
+      "sortBy": "並べ替え",
+      "types": {
+        "all": "すべてのタイプ",
+        "percentage": "割合割引",
+        "fixed_amount": "定額",
+        "credit_amount": "ストアクレジット"
+      },
+      "sort": {
+        "newest": "新しい順",
+        "popular": "人気順",
+        "expiring": "終了間近"
+      }
+    },
+    "results": {
+      "chipCategory": "カテゴリー：{value}",
+      "chipType": "タイプ：{value}",
+      "chipMinDiscount": "{value}% オフ以上",
+      "chipMaxPrice": "€{value} 以下",
+      "chipSort": "並べ替え：{value}",
+      "removeFilter": "{label} フィルターを削除",
+      "searching": "検索中...",
+      "count": "{total, plural, other {<num>#</num> 件の結果}}",
+      "countForQuery": "{total, plural, other {「<hl>{query}</hl>」の検索結果 <num>#</num> 件}}",
+      "flash": "フラッシュ",
+      "voucherFallback": "バウチャー",
+      "expires": "{date} に期限切れ",
+      "redeemed": "{count} 件利用済み",
+      "noResultsTitle": "結果が見つかりません",
+      "noResultsQuery": "「{query}」に一致するバウチャーはありません。フィルターを調整してみてください。",
+      "noResultsHint": "特定のバウチャー、マーチャント、カテゴリーで検索してみてください。"
+    }
+  },
+  "faq": {
+    "metaTitle": "よくある質問",
+    "metaDescription": "バウチャーやギフトカードの購入、利用、管理に関するよくある質問への回答 — 支払い、返金、有効期限、マーチャントサポートなど。",
+    "title": "よくある質問",
+    "subtitle": "プラットフォームに関するよくある質問への回答をご覧ください。",
+    "categories": {
+      "general": "一般",
+      "purchasing": "購入と支払い",
+      "vouchers": "バウチャーと利用",
+      "account": "アカウントとセキュリティ",
+      "merchants": "マーチャント向け",
+      "loyalty": "ロイヤルティとリワード"
+    },
+    "items": {
+      "whatIs": {
+        "q": "GiftHub とは何ですか？",
+        "a": "GiftHub は、マーチャントとお客様をつなぐデジタルバウチャー、ギフトカード、イベントチケットのマーケットプレイスです。マーチャントはデジタル商品を作成・販売でき、お客様はそれらを購入、ギフト、利用できます。"
+      },
+      "isFree": {
+        "q": "プラットフォームは無料で使えますか？",
+        "a": "閲覧とアカウント作成は無料です。お客様は購入した商品の代金のみお支払いいただきます。マーチャントは月額プラン料金と、バウチャー販売額の {fee}% の取引手数料をお支払いいただきます。"
+      },
+      "countries": {
+        "q": "どの国に対応していますか？",
+        "a": "EU 全域のマーチャントとお客様に対応しており、{currencies} 通貨・{languages} 言語をサポートしています。"
+      },
+      "howToBuy": {
+        "q": "バウチャーはどうやって購入しますか？",
+        "a": "利用可能なバウチャーを探して「購入」をクリックし、Stripe でチェックアウトを完了してください。お支払い後すぐにバウチャーがウォレットに表示されます。"
+      },
+      "paymentMethods": {
+        "q": "どの支払い方法に対応していますか？",
+        "a": "お支払いは Stripe によって安全に処理されます。ご利用いただける支払い方法はチェックアウト時に表示されます。"
+      },
+      "refund": {
+        "q": "返金は可能ですか？",
+        "a": "返金ポリシーは各マーチャントが定めています。購入前にバウチャー詳細ページで返金ポリシーをご確認ください。"
+      },
+      "howToRedeem": {
+        "q": "バウチャーはどうやって利用しますか？",
+        "a": "ウォレットを開いてバウチャーを選択し、QR コードをマーチャントに提示してください。マーチャントがスキャンして利用を確認します。コードを手動で入力して利用することもできます。"
+      },
+      "expiry": {
+        "q": "バウチャーの有効期限が切れるとどうなりますか？",
+        "a": "期限切れのバウチャーは利用できません。期限が切れる前に通知が届きます。有効期限はウォレットでご確認ください。"
+      },
+      "gift": {
+        "q": "バウチャーを誰かにプレゼントできますか？",
+        "a": "はい！購入時に「ギフトとして送る」を選択し、受取人のメールアドレスを入力してください。受取人にはメッセージ付きでバウチャーが届きます。"
+      },
+      "twoFactor": {
+        "q": "二要素認証を有効にするには？",
+        "a": "設定 → セキュリティ → 二要素認証 に進んでください。TOTP（Google Authenticator）またはパスキー（生体認証）を設定できます。"
+      },
+      "biometrics": {
+        "q": "生体認証でログインできますか？",
+        "a": "はい！パスキー認証に対応しており、Face ID、指紋認証、Windows Hello でログインできます。設定 → セキュリティ から設定してください。"
+      },
+      "deleteAccount": {
+        "q": "アカウントを削除するには？",
+        "a": "設定 → プライバシー → アカウントを削除 に進んでください。GDPR 準拠ポリシーに基づき、すべてのデータは30日以内に消去されます。事前にデータをエクスポートすることもできます。"
+      },
+      "startSelling": {
+        "q": "販売を始めるには？",
+        "a": "マーチャントとして登録し、オンボーディングを完了して、最初のバウチャーを作成してください。プロフィールが承認されるとすぐに販売を開始できます。"
+      },
+      "fees": {
+        "q": "プラットフォームの手数料はいくらですか？",
+        "a": "{trialDays}日間の無料トライアル後、プラン料金は月額 {starter} {starterPrice}、{pro} {proPrice}、{scale} {scalePrice} です（年払いは2か月分無料）。さらに、バウチャー販売額の {fee}% の取引手数料が支払額から差し引かれます。"
+      },
+      "integrations": {
+        "q": "既存のシステムと連携できますか？",
+        "a": "はい！Webhook（リアルタイムのイベント通知）、API キー（プログラムからのアクセス）、Zapier/Slack/Discord 連携をご用意しています。"
+      },
+      "trackSales": {
+        "q": "売上はどうやって確認しますか？",
+        "a": "マーチャントダッシュボードでは、売上、利用状況、顧客インサイトなどのリアルタイム分析に加え、AI による自然言語での問い合わせ（「先週の売上を表示」など）が利用できます。"
+      },
+      "loyalty": {
+        "q": "ロイヤルティプログラムの仕組みは？",
+        "a": "購入、毎日のチェックイン、紹介、レビュー投稿でポイントが貯まります。ポイントに応じてランク（ブロンズ → シルバー → ゴールド → プラチナ → ダイヤモンド）が上がり、特典も充実します。"
+      },
+      "badges": {
+        "q": "バッジと連続記録とは？",
+        "a": "バッジは節目（初めての購入、紹介10件など）を達成すると獲得できる実績です。連続記録はアクティビティの連続日数を記録し、継続した利用に報酬を与えます。"
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "お問い合わせ",
+    "metaDescription": "GiftHub チームへのお問い合わせ — バウチャー、マーチャントのオンボーディング、請求、パートナーシップに関するご質問はこちら。",
+    "title": "お問い合わせ",
+    "subtitle": "ご質問がありましたら、お気軽にお問い合わせください。",
+    "email": "メール",
+    "assistantTitle": "自動アシスタント",
+    "assistantText": "画面隅のチャットボタンから、バウチャーやアカウントについてすぐに回答を得られます。人ではなく自動応答です。",
+    "name": "名前",
+    "subject": "件名",
+    "message": "メッセージ",
+    "sent": "メッセージを送信しました！折り返しご連絡いたします。",
+    "unavailableWithEmail": "現在お問い合わせフォームは利用できません。{email} までメールでご連絡ください。",
+    "unavailable": "現在お問い合わせフォームは利用できません。後ほどもう一度お試しください。",
+    "error": "送信に失敗しました。しばらくしてからもう一度お試しください。",
+    "sending": "送信中...",
+    "send": "メッセージを送信"
+  },
+  "leaderboardPage": {
+    "metaTitle": "トップマーチャント",
+    "metaDescription": "過去30日間に GiftHub でバウチャー利用数が最も多かったマーチャント",
+    "title": "トップマーチャント",
+    "subtitle": "過去30日間のバウチャー利用数ランキング",
+    "rank": "{rank} 位",
+    "redemptions": "{count, plural, other {<num>#</num><label>件の利用</label>}}",
+    "empty": "過去30日間の利用はまだないため、表示できるランキングはありません。",
+    "browseCampaigns": "開催中のキャンペーンを見る"
+  },
+  "ui": {
+    "close": "閉じる",
+    "more": "その他",
+    "loading": "読み込み中...",
+    "breadcrumb": {
+      "label": "パンくずリスト"
+    },
+    "pagination": {
+      "label": "ページ送り",
+      "previousAria": "前のページへ",
+      "previous": "前へ",
+      "nextAria": "次のページへ",
+      "next": "次へ",
+      "morePages": "その他のページ"
+    },
+    "toast": {
+      "dismiss": "通知を閉じる"
+    },
+    "calendar": {
+      "previousMonth": "前の月へ",
+      "nextMonth": "次の月へ"
+    },
+    "datePicker": {
+      "placeholder": "日付を選択"
+    },
+    "combobox": {
+      "placeholder": "選択してください...",
+      "empty": "該当する項目がありません。",
+      "search": "検索..."
+    },
+    "searchInput": {
+      "clear": "検索をクリア"
+    },
+    "searchResults": {
+      "empty": "結果が見つかりません",
+      "noResultsFor": "「{query}」の結果は見つかりませんでした。別のキーワードをお試しください。"
+    },
+    "commandPalette": {
+      "placeholder": "検索...",
+      "noResults": "結果が見つかりません",
+      "toOpen": "で開く",
+      "other": "その他",
+      "hostPlaceholder": "どこに移動しますか？",
+      "categories": {
+        "navigate": "移動",
+        "discover": "探す",
+        "account": "アカウント"
+      },
+      "items": {
+        "home": {
+          "label": "ホーム",
+          "description": "トップページ"
+        },
+        "app": {
+          "label": "マイダッシュボード",
+          "description": "バウチャー、ウォレット、アクティビティ"
+        },
+        "vouchers": {
+          "label": "マイバウチャー"
+        },
+        "wallet": {
+          "label": "ウォレット",
+          "description": "クレジット残高"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "ギフトを探して贈る"
+        },
+        "campaigns": {
+          "label": "キャンペーン",
+          "description": "開催中のバウチャーキャンペーン"
+        },
+        "hub": {
+          "label": "マーチャントハブ",
+          "description": "マーチャントを見る"
+        },
+        "deals": {
+          "label": "お得な情報"
+        },
+        "settings": {
+          "label": "設定",
+          "description": "アカウントと各種設定"
+        },
+        "admin": {
+          "label": "管理",
+          "description": "プラットフォーム管理"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "確認",
+      "cancel": "キャンセル"
+    },
+    "dataTable": {
+      "noResults": "結果がありません。"
+    },
+    "fileUpload": {
+      "maxFiles": "アップロードできるのは最大 {maxFiles, plural, other {# ファイル}}です",
+      "tooLarge": "ファイルサイズは {maxSize}MB 未満にしてください",
+      "dropHere": "ここにファイルをドロップ",
+      "dragDrop": "ここにファイルをドラッグ＆ドロップ",
+      "browseHint": "またはクリックして選択（1ファイルあたり最大 {maxSize}MB）",
+      "select": "ファイルを選択",
+      "remove": "{name} を削除"
+    },
+    "imageUpload": {
+      "notImage": "画像ファイルをアップロードしてください",
+      "tooLarge": "画像サイズは {maxSize}MB 未満にしてください",
+      "previewAlt": "プレビュー",
+      "remove": "画像を削除",
+      "dropHere": "ここに画像をドロップ",
+      "upload": "画像をアップロード",
+      "hint": "PNG、JPG、GIF（最大 {maxSize}MB）",
+      "select": "画像を選択"
+    },
+    "statsCard": {
+      "open": "開く"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% キャッシュバック"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "有効",
+        "redeemed": "使用済み",
+        "expired": "期限切れ"
+      },
+      "redeem": "利用する",
+      "expires": "{date} に期限切れ",
+      "merchantAlt": "マーチャント"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "ログイン",
+      "register": "アカウント作成",
+      "resetPassword": "パスワードの再設定"
+    },
+    "error": {
+      "title": "問題が発生しました",
+      "fallback": "予期しないエラーが発生しました。",
+      "tryAgain": "もう一度試す"
+    },
+    "login": {
+      "welcome": "おかえりなさい",
+      "subtitle": "GiftHub アカウントにログイン",
+      "tabMagic": "マジックリンク",
+      "tabPassword": "パスワード",
+      "tabSocial": "ソーシャル",
+      "tabPasskey": "パスキー",
+      "emailLabel": "メールアドレス",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "パスワード",
+      "sendCode": "ログインコードを送信",
+      "sending": "送信中…",
+      "signIn": "ログイン",
+      "signingIn": "ログイン中…",
+      "otpTitle": "メールを確認してください！",
+      "otpDesc": "<b>{email}</b> に6桁のコードを送信しました",
+      "otpLabel": "コードを入力",
+      "verify": "コードを確認",
+      "verifying": "確認中…",
+      "resend": "コードを再送信",
+      "backToEmail": "戻る",
+      "orContinueWith": "または次の方法で続行",
+      "continueWith": "{provider} で続行",
+      "errorWrongCode": "コードが無効か期限切れです。もう一度お試しください。",
+      "errorWrongPass": "メールアドレスまたはパスワードが正しくありません。",
+      "errorGeneric": "問題が発生しました。もう一度お試しください。",
+      "errorEmailUnavailable": "現在メールでのログインは利用できません。パスワードをご利用ください。",
+      "errorCredentialsSignin": "メールアドレスまたはパスワードが違います。",
+      "errorAuthGeneric": "ログインに失敗しました。もう一度お試しください。",
+      "backToHome": "ホームページに戻る",
+      "socialDesc": "お好みのアカウントですぐにログイン",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "createAccount": "アカウントを作成",
+      "noAccountSub": "新しいメールアドレスでコードログインすると、アカウントが作成されます。",
+      "registered": "アカウントを作成しました。メールアドレスとパスワードでログインしてください。",
+      "magicDesc": "メールに6桁のコードをお送りします。パスワードは不要です。",
+      "passwordDesc": "メールアドレスとパスワードでログインします。",
+      "forgotPassword": "パスワードをお忘れですか？",
+      "demo": "デモアカウント",
+      "demoRole": {
+        "platformAdmin": "プラットフォーム管理者",
+        "merchantAdmin": "マーチャント管理者",
+        "merchantStaff": "マーチャントスタッフ",
+        "endUser": "一般ユーザー"
+      },
+      "passkeyDesc": "指紋、顔、セキュリティキーですぐにログインできます。",
+      "passkeyButton": "パスキーでログイン",
+      "passkeyAuthenticating": "認証中…"
+    },
+    "register": {
+      "backToHome": "ホームページに戻る",
+      "title": "アカウントを作成",
+      "subtitle": "バウチャーを見つけて管理しましょう",
+      "nameLabel": "氏名",
+      "namePlaceholder": "山田 花子",
+      "emailLabel": "メールアドレス",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "パスワード",
+      "passwordPlaceholder": "8文字以上",
+      "submit": "アカウントを作成",
+      "submitting": "アカウントを作成中...",
+      "haveAccount": "すでにアカウントをお持ちですか？",
+      "signIn": "ログイン",
+      "errorWeak": "パスワードが弱すぎます。より強力なパスワードを選択してください。",
+      "errorInvalid": "入力内容が無効です。",
+      "errorFallback": "問題が発生しました。",
+      "errorGeneric": "問題が発生しました。もう一度お試しください。"
+    },
+    "resetPassword": {
+      "title": "パスワードを再設定",
+      "subtitle": "新しいパスワードを入力してください",
+      "newPassword": "新しいパスワード",
+      "confirmPassword": "パスワード（確認）",
+      "submit": "新しいパスワードを設定",
+      "submitting": "再設定中…",
+      "success": "パスワードを再設定しました！",
+      "successDesc": "パスワードが更新されました。ログインできます。",
+      "goToLogin": "ログインへ",
+      "errorMismatch": "パスワードが一致しません",
+      "errorShort": "パスワードは8文字以上にしてください",
+      "errorWeak": "パスワードが弱すぎます。より強力なパスワードを選択してください。",
+      "errorExpired": "この再設定リンクは無効か、有効期限が切れています。",
+      "forgotTitle": "パスワードをお忘れですか？",
+      "forgotSubtitle": "メールアドレスを入力すると、再設定リンクをお送りします",
+      "emailLabel": "メールアドレス",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "再設定リンクを送信",
+      "sending": "送信中…",
+      "linkSent": "メールを確認してください！",
+      "linkSentDesc": "このメールアドレスのアカウントが存在する場合、再設定リンクを送信しました。",
+      "backToLogin": "ログインに戻る"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "ようこそ！",
+      "joined": "{orgName} に参加しました。リダイレクトしています…",
+      "accepted": "招待を承認しました。リダイレクトしています…",
+      "problemTitle": "招待に問題があります",
+      "errorNotAccepted": "この招待を承認できませんでした。",
+      "errorGeneric": "問題が発生しました。もう一度お試しください。",
+      "goToOrgs": "組織一覧へ",
+      "invitedTitle": "招待が届いています",
+      "invitedDesc": "この招待を承認して組織に参加しましょう。先にログインが必要な場合があります。",
+      "accepting": "承認中…",
+      "accept": "招待を承認"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "ギフトカードとギフト",
+      "description": "地元マーチャントのデジタルギフトカードを探して購入。心のこもったギフトを数秒で贈れます。メールで届き、店舗またはオンラインで利用できます。"
+    },
+    "publicCard": {
+      "defaultHeadline": "ギフトカード",
+      "imageAlt": "ギフトカード",
+      "logoAlt": "ブランドロゴ",
+      "merchant": "マーチャント：{name}",
+      "merchantFallback": "マーチャント",
+      "code": "コード：{code}",
+      "validUntil": "有効期限：{date}",
+      "noExpiry": "有効期限なし",
+      "showQr": "ギフトカードを利用するには、この QR をスタッフに提示してください。",
+      "statusMessage": "このギフトカードは{status}です。",
+      "status": {
+        "active": "有効",
+        "redeemed": "利用済み",
+        "expired": "期限切れ",
+        "cancelled": "キャンセル済み"
+      }
+    },
+    "purchase": {
+      "title": "ギフトカードを購入",
+      "loading": "読み込み中...",
+      "notAvailable": "このギフトカードは利用できません",
+      "defaultHeadline": "ギフトカード",
+      "imageAlt": "ギフトカード",
+      "logoAlt": "ブランド",
+      "fromMerchant": "{merchant} より",
+      "form": {
+        "recipientEmail": "受取人のメールアドレス（任意）",
+        "recipientEmailPlaceholder": "このメールアドレスにギフトカードを送信",
+        "recipientName": "受取人の名前",
+        "recipientNamePlaceholder": "宛先",
+        "senderName": "あなたの名前",
+        "senderNamePlaceholder": "差出人",
+        "message": "メッセージ（任意）",
+        "messagePlaceholder": "メッセージを追加..."
+      },
+      "total": "合計：",
+      "processing": "処理中...",
+      "buy": "ギフトカードを購入",
+      "errors": {
+        "notFound": "ギフトカードが見つからないか、購入できません",
+        "loadFailed": "ギフトカードを読み込めませんでした",
+        "purchaseFailed": "購入に失敗しました",
+        "generic": "問題が発生しました。もう一度お試しください。"
+      }
+    },
+    "product": {
+      "notFound": "ギフトが見つかりません",
+      "backToHub": "Gift Hub に戻る",
+      "imageAlt": "{title} {index}",
+      "featured": "注目",
+      "lowStock": "残り {count} 点のみ",
+      "buyNow": "今すぐ購入",
+      "addToCart": "カートに追加",
+      "saveToWishlist": "ウィッシュリストに保存",
+      "removeFromWishlist": "ウィッシュリストから削除",
+      "share": "このギフトを共有",
+      "upsellsTitle": "こちらもおすすめ"
+    },
+    "claim": {
+      "metaTitle": "ギフトを受け取る",
+      "alreadyClaimedTitle": "受け取り済みのギフト",
+      "alreadyClaimedBody": "このギフトはすでに受け取られています。",
+      "expiredTitle": "ギフトの期限切れ",
+      "expiredBody": "申し訳ありません。このギフトリンクは有効期限が切れています。",
+      "title": "ギフトが届いています！",
+      "signedInHint": "下のボタンをクリックして、このバウチャーをウォレットに追加してください。",
+      "signedOutHint": "このバウチャーを受け取るにはログインしてください。",
+      "claimButton": "ギフトを受け取る",
+      "signInButton": "ログインして受け取る"
+    },
+    "error": {
+      "title": "Gift Hub を読み込めませんでした",
+      "fallback": "ギフトの読み込み中に予期しないエラーが発生しました。",
+      "retry": "もう一度試す"
+    },
+    "hub": {
+      "title": "ギフト",
+      "subtitle": "あらゆるシーンにぴったりのギフトを見つけよう",
+      "loadError": "ギフトを読み込めませんでした",
+      "retry": "もう一度試す",
+      "emptyCatalog": {
+        "title": "掲載中のギフトはまだありません",
+        "body": "それまでの間、地元マーチャントのバウチャーもギフトにおすすめです。"
+      },
+      "noMatches": "条件に一致するギフトはありません",
+      "clearFilters": "フィルターをクリア",
+      "browseCampaigns": "キャンペーンを見る",
+      "allGifts": "すべてのギフト",
+      "loadMore": "さらに読み込む"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "ギフトカードが見つかりません",
+        "body": "QR コードが無効か、有効期限が切れています。"
+      },
+      "notActive": {
+        "title": "ギフトカードはまだ有効ではありません",
+        "body": "このギフトカードは後日有効になります。"
+      },
+      "expired": {
+        "title": "ギフトカードの期限切れ",
+        "body": "このギフトカードは有効期限が切れています。"
+      },
+      "result": {
+        "title": "ギフトカードを利用しました",
+        "confirmed": "利用を確認しました。",
+        "alreadyRedeemedOrCancelled": "このギフトカードはすでに利用済みか、キャンセルされています。",
+        "alreadyRedeemedOrInvalid": "このギフトカードはすでに利用済みか、無効です。"
+      }
+    },
+    "qr": {
+      "error": "QR コードを生成できませんでした",
+      "generating": "QR を生成中...",
+      "alt": "QR コード"
+    },
+    "wizard": {
+      "title": "AI ギフトファインダー",
+      "subtitle": "贈る相手について教えていただければ、ぴったりのギフトをお探しします",
+      "steps": {
+        "recipient": "誰に贈りますか？",
+        "occasion": "どんな機会ですか？",
+        "budget": "ご予算は？"
+      },
+      "recipients": {
+        "partner": "パートナー",
+        "friend": "友達",
+        "parent": "親",
+        "colleague": "同僚",
+        "child": "子ども",
+        "teacher": "先生"
+      },
+      "occasions": {
+        "birthday": "誕生日",
+        "christmas": "クリスマス",
+        "anniversary": "記念日",
+        "thankYou": "お礼",
+        "justBecause": "なんとなく",
+        "graduation": "卒業"
+      },
+      "summary": {
+        "for": "贈る相手：{recipient}",
+        "budget": "予算：{amount}"
+      },
+      "submit": "ぴったりのギフトを探す",
+      "error": "おすすめを生成できませんでした。もう一度お試しください。",
+      "results": {
+        "found": "{count, plural, other {# 件のギフト}}が見つかりました：",
+        "empty": "一致する商品が見つかりません。条件を変えてお試しください。"
+      },
+      "startOver": "最初からやり直す"
+    },
+    "card": {
+      "featured": "注目",
+      "save": "保存",
+      "unsave": "保存を解除",
+      "buyNow": "今すぐ購入"
+    },
+    "feedSection": {
+      "viewAll": "すべて見る"
+    },
+    "filters": {
+      "toggle": "フィルター",
+      "clear": "クリア",
+      "occasion": "シーン",
+      "persona": "誰に贈りますか？",
+      "budget": "予算",
+      "budgetUnder": "{amount} 未満"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "お得な情報を共有してリワードを獲得"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "予期しないエラーが発生しました。"
+    },
+    "logoAlt": "{name} のロゴ",
+    "merchantFallback": "マーチャント",
+    "validUntil": "{date} まで有効",
+    "validUntilWithLimit": "{date} まで有効 - 先着 {count, plural, other {# 回}}",
+    "offAtMerchant": "{merchant} で {value} オフ",
+    "fields": {
+      "event": "イベント",
+      "dateTime": "日時",
+      "location": "場所",
+      "price": "価格",
+      "status": "ステータス",
+      "attendee": "参加者",
+      "usedAt": "使用日時"
+    },
+    "ticketStatus": {
+      "available": "購入可能",
+      "sold": "売り切れ",
+      "used": "使用済み",
+      "cancelled": "キャンセル済み",
+      "refunded": "返金済み"
+    },
+    "event": {
+      "notAvailable": "このイベントのチケットは購入できません。",
+      "descriptionFallback": "素敵なイベントにぜひご参加ください！",
+      "availableTickets": "購入可能なチケット",
+      "soldOut": "完売",
+      "availableCount": "残り {count} 枚",
+      "terms": "利用規約",
+      "soldOutTitle": "このイベントは完売しました",
+      "soldOutDescription": "すべてのチケットが購入されました。"
+    },
+    "eventPurchase": {
+      "title": "チケットを購入",
+      "description": "チケットを選択して購入を完了してください",
+      "selectTicket": "チケットを選択",
+      "attendeeNameLabel": "参加者の名前（任意）",
+      "attendeeNamePlaceholder": "参加する方のお名前",
+      "attendeeEmailLabel": "参加者のメールアドレス（任意）",
+      "attendeeEmailPlaceholder": "チケット送付先のメールアドレス",
+      "total": "合計",
+      "submit": "チケットを購入",
+      "noTickets": "現在購入できるチケットはありません。",
+      "checkBackLater": "後ほどご確認いただくか、イベント主催者にお問い合わせください。",
+      "selectTicketError": "チケットを選択してください",
+      "purchaseFailed": "チケットの購入に失敗しました"
+    },
+    "ticket": {
+      "noPermission": "このチケットを表示する権限がありません。",
+      "heading": "チケット #{number}",
+      "qrTitle": "QR コード",
+      "qrDescription": "イベント会場の入口でこの QR コードを提示してください",
+      "qrAlt": "チケットの QR コード",
+      "qrUnavailable": "QR コードは利用できません",
+      "ticketNumber": "チケット番号：<strong>{number}</strong>",
+      "used": "このチケットは使用済みです",
+      "detailsTitle": "チケットの詳細",
+      "detailsDescription": "チケットに関する重要なお知らせ",
+      "staffCanRedeem": "マーチャントのスタッフとして、イベント会場でこのチケットを利用処理できます。"
+    },
+    "redeem": {
+      "notFoundTitle": "利用情報が見つかりません",
+      "notFoundDescription": "QR コードが無効か、有効期限が切れています。",
+      "title": "バウチャーを利用しました",
+      "alreadyRedeemed": "このバウチャーはすでに利用済みです。",
+      "confirmed": "利用を確認しました。"
+    },
+    "qrCheckout": {
+      "title": "QR チェックアウト",
+      "completeTitle": "チェックアウト完了",
+      "completeDescription": "ご購入が確定しました。詳細はメールをご確認ください。",
+      "payNow": "今すぐ支払う",
+      "confirming": "確認中..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "バウチャーが見つかりません",
+      "notFoundDescription": "お探しのバウチャーは見つかりませんでした。",
+      "descriptionFallback": "限定バウチャーオファー",
+      "shareText": "{merchant} のバウチャーをチェック",
+      "copyCode": "バウチャーコードをコピー",
+      "qrAlt": "バウチャー {code} の QR コード",
+      "print": "バウチャーを印刷"
+    },
+    "referralPage": {
+      "voucherFrom": "<highlight>{name}</highlight> さんからバウチャーが届きました",
+      "qrAlt": "バウチャー {code} の利用用 QR コード",
+      "offAtMerchantShared": "{merchant} で {value} オフ - 友達からの共有です！"
+    },
+    "bnpl": {
+      "title": "分割払い",
+      "description": "{amount} のお支払いを、無理のない月々の分割払いにできます。",
+      "perMonth": "/月",
+      "planNoInterest": "{months}回払い（金利0%）",
+      "planWithFee": "{months}回払い（手数料 {rate}%）",
+      "monthlyPayments": "{count, plural, other {月々 # 回払い}}",
+      "total": "合計：{amount}",
+      "noExtraCost": "追加費用なし",
+      "payNow": "今すぐ {amount} を支払う"
+    },
+    "qrPanel": {
+      "qrAlt": "QR コード",
+      "generateFailed": "QR コードを生成できませんでした",
+      "placeholder": "ここに QR コードが表示されます",
+      "generating": "QR を生成中...",
+      "unavailable": "QR は利用できません",
+      "hideCode": "コードを隠す",
+      "showCode": "コードを表示",
+      "expires": "{date} に期限切れ",
+      "refreshNote": "コードは30秒ごとに更新されます"
+    },
+    "qrDownload": {
+      "success": "QR コードをダウンロードしました！",
+      "failed": "QR コードのダウンロードに失敗しました",
+      "downloading": "ダウンロード中...",
+      "download": "QR をダウンロード"
+    }
   }
 }

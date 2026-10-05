@@ -887,5 +887,1720 @@
         "subtitle": "Adjon hozzá passkey-t vagy kétlépcsős azonosítást."
       }
     }
+  },
+  "labels": {
+    "free": "Ingyenes",
+    "valueOff": "{value} kedvezmény",
+    "valueCredit": "{value} kredit",
+    "valueDiscount": "{value} kedvezmény",
+    "demo": "Demó",
+    "demoHint": "Mintatartalom, amely bemutatja a platform működését. Nem valódi ajánlat.",
+    "category": {
+      "cafe": "Kávézó és pékség",
+      "beauty": "Szépség és wellness",
+      "fitness": "Fitnesz és sport",
+      "events": "Események és jegyek",
+      "workshops": "Workshopok és tanfolyamok",
+      "family": "Család és gyerekek",
+      "travel": "Utazás és szállás",
+      "outdoor": "Szabadtér és kaland",
+      "other": "Egyéb",
+      "all": "Minden kategória"
+    },
+    "voucherType": {
+      "percentage": "Százalékos kedvezmény",
+      "fixed_amount": "Összegkedvezmény",
+      "credit_amount": "Bolti kredit"
+    },
+    "voucherStatus": {
+      "draft": "Vázlat",
+      "published": "Közzétéve",
+      "paused": "Szüneteltetve",
+      "ended": "Befejezett",
+      "expired": "Lejárt"
+    },
+    "campaignStatus": {
+      "draft": "Vázlat",
+      "active": "Élő",
+      "ended": "Befejezett"
+    },
+    "campaignType": {
+      "limited": "Egyszeri ajánlat",
+      "weekly": "Heti ajánlat"
+    },
+    "campaignTypeHelp": {
+      "limited": "Egyszer fut a kezdő és záró dátum között, amíg a készlet tart.",
+      "weekly": "Hetente ismétlődő ajánlat, amelyre az ügyfelek a záró dátumig minden héten visszatérhetnek."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Mintaajánlat · nem megvásárolható",
+    "notOnSale": "Még nem kapható",
+    "purchases": "{count, plural, one {# vásárlás} other {# vásárlás}}",
+    "freeToClaim": "Ingyen igényelhető",
+    "onSaleNow": "Most kapható"
+  },
+  "account": {
+    "error": {
+      "title": "Valami hiba történt",
+      "fallback": "Váratlan hiba történt.",
+      "retry": "Próbálja újra"
+    },
+    "dashboard": {
+      "metaTitle": "Saját dashboard"
+    },
+    "cashback": {
+      "metaTitle": "Pénzvisszatérítés és kreditek",
+      "title": "Pénzvisszatérítés és kreditek",
+      "description": "Minden megszerzett kreditje, az összes kereskedőnél, ahol vásárol.",
+      "lockedPending": "Zárolt (függő)",
+      "used": "Felhasznált",
+      "expiringTitle": "30 napon belül lejár",
+      "expiresOn": "{merchant} — lejár: {date}",
+      "expiresSoon": "{merchant} — hamarosan lejár",
+      "byMerchant": "Kereskedőnként",
+      "lastActivity": "Utolsó aktivitás: {date}",
+      "readyToSpend": "Felhasználható",
+      "viewMerchantWallet": "Kereskedői pénztárca megtekintése →"
+    },
+    "nearby": {
+      "title": "Ajánlatok a közelben",
+      "subtitle": "Fedezzen fel ajánlatokat és utalványokat a közeli kereskedőktől",
+      "useMyLocation": "Saját helyzetem használata",
+      "approximateLocation": "Hozzávetőleges helyzet (IP alapján)",
+      "searchRadius": "Keresési sugár",
+      "yourLocation": "Az Ön helyzete",
+      "mapLabel": "{count, plural, one {# kereskedő} other {# kereskedő}} {radius} km-en belül",
+      "merchantsNearby": "{count, plural, one {# kereskedő} other {# kereskedő}} a közelben",
+      "activeVouchers": "{count, plural, one {# aktív utalvány} other {# aktív utalvány}}",
+      "emptyTitle": "Nincs kereskedő a közelben",
+      "emptyBody": "Növelje a keresési sugarat, vagy nézzen vissza később új ajánlatokért a környékén.",
+      "expandRadius": "Bővítés {radius} km-re",
+      "errors": {
+        "fetchFailed": "Nem sikerült betölteni a közeli kereskedőket. Kérjük, próbálja újra.",
+        "geolocationUnsupported": "A böngészője nem támogatja a helymeghatározást.",
+        "permissionDenied": "A helyhozzáférés megtagadva. Kérjük, engedélyezze a helymeghatározást a böngésző beállításaiban.",
+        "positionUnavailable": "A helyzet nem érhető el. Próbálja újra később.",
+        "timeout": "A helymeghatározás túllépte az időkorlátot. Próbálja újra.",
+        "locationFailed": "Nem sikerült meghatározni a helyzetét.",
+        "ipLocationFailed": "Nem sikerült megállapítani a helyzetét."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Értesítési beállítások"
+    },
+    "redeem": {
+      "notFound": "Az utalvány nem található.",
+      "codeUnavailable": "Az utalványkód nem érhető el.",
+      "backToWallet": "Vissza a pénztárcához",
+      "back": "Vissza"
+    },
+    "referrals": {
+      "metaTitle": "Ajánlásaim",
+      "completedCount": "Befejezett: {count}"
+    },
+    "voucherDetail": {
+      "back": "Vissza",
+      "merchantFallback": "Kereskedő",
+      "termsTitle": "Felhasználási feltételek",
+      "terms1": "Az utalvány a fent feltüntetett lejárati dátumig érvényes. Más ajánlatokkal vagy akciókkal nem vonható össze, kivéve, ha ez kifejezetten szerepel.",
+      "terms2": "Az utalványt a vásárláskor kell bemutatni. Készpénzre nem váltható, és nem téríthető vissza.",
+      "terms3": "A kereskedő fenntartja a jogot, hogy megtagadja a beváltást, ha az utalvány másoltnak, manipuláltnak vagy csalárd módon felhasználtnak tűnik.",
+      "terms4": "Kérdés vagy probléma esetén forduljon közvetlenül a kereskedőhöz."
+    },
+    "vouchers": {
+      "unknownMerchant": "Ismeretlen",
+      "paidAmount": "Fizetve: {amount}",
+      "activeCount": "Aktív ({count})",
+      "pastCount": "Korábbi ({count})"
+    },
+    "voucherCard": {
+      "showQr": "QR kód megjelenítése",
+      "close": "Bezárás",
+      "qrHint": "A bolti beváltáshoz mutassa meg ezt a QR kódot a kereskedőnek."
+    },
+    "wallet": {
+      "metaTitle": "Pénztárcám"
+    },
+    "wishlist": {
+      "unknownItem": "Ismeretlen tétel",
+      "merchant": "Kereskedő",
+      "campaign": "Kampány",
+      "validUntil": "Érvényes eddig: {date}",
+      "alertOn": "Értesítés be",
+      "noAlert": "Nincs értesítés",
+      "view": "Megtekintés"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "A kampány nem érhető el",
+      "metaDescriptionFallback": "Ajánlat tőle: {merchant}.",
+      "breadcrumbLabel": "Navigációs útvonal",
+      "breadcrumbCampaigns": "Kampányok",
+      "demoNotice": "<strong>Mintaajánlat.</strong> Ez az oldal azt mutatja be, hogyan néz ki egy ajánlat a GiftHubon. A vállalkozás és az ajánlat csak példa: itt semmi sem vásárolható meg vagy váltható be.",
+      "verifiedPartner": "Ellenőrzött partner",
+      "aboutTitle": "Az ajánlatról",
+      "descriptionFallback": "Különleges ajánlat egy GiftHub-kereskedőtől.",
+      "howItWorks": {
+        "title": "Hogyan működik",
+        "claimTitle": "Igényelje az utalványt",
+        "buyTitle": "Vásárolja meg az utalványt",
+        "buyText": "Fizessen biztonságosan online, vagy igényelje ingyen, ha az ajánlat ingyenes.",
+        "qrTitle": "Megkapja QR kódját",
+        "qrText": "Az utalvány személyes QR kóddal együtt bekerül GiftHub pénztárcájába.",
+        "showTitle": "Mutassa meg a helyszínen",
+        "showText": "A(z) {merchant} beolvassa a kódot, és érvényesíti a kedvezményt."
+      },
+      "termsTitle": "Feltételek",
+      "voucherOptionsTitle": "Utalványváltozatok",
+      "voucherFallbackTitle": "Utalvány",
+      "viewVoucher": "Utalvány megtekintése",
+      "reviewsTitle": "Értékelések",
+      "purchaseLabel": "Vásárlás",
+      "buyNow": "Megveszem",
+      "getFreeVoucher": "Ingyenes utalvány igénylése",
+      "sampleOffer": "Mintaajánlat",
+      "notOnSaleYet": "Még nem kapható",
+      "demoNotForSale": "Ez példatartalom, ezért nem vásárolható meg.",
+      "noVoucherYet": "A(z) {merchant} még nem tett közzé utalványt ehhez az ajánlathoz. Nézzen vissza később.",
+      "offerRuns": "Az ajánlat időtartama",
+      "bought": "Megvásárolva",
+      "boughtCount": "{count, plural, one {# alkalommal} other {# alkalommal}}",
+      "website": "Weboldal",
+      "allOffersFrom": "A(z) {merchant} összes ajánlata",
+      "moreFrom": "Továbbiak tőle: {merchant}"
+    },
+    "list": {
+      "allCategories": "Összes",
+      "badge": "Élő kampánypiactér",
+      "heroTitle": "Fedezze fel Európa legjobb ajánlatait",
+      "heroSubtitle": "Böngésszen a piaca legjobb kereskedőitől válogatott utalványok, ajándékok és élmények között.",
+      "searchLabel": "Kampányok keresése",
+      "searchPlaceholder": "Kampányok, kereskedők vagy szolgáltatások keresése...",
+      "campaignCount": "{count, plural, one {<b>#</b> kampány} other {<b>#</b> kampány}}",
+      "voucherCount": "{count, plural, one {<b>#</b> megvásárolható utalvány} other {<b>#</b> megvásárolható utalvány}}",
+      "merchantCount": "{count, plural, one {<b>#</b> kereskedő} other {<b>#</b> kereskedő}}",
+      "categoriesLabel": "Kategóriák",
+      "unavailableTitle": "A kampányok átmenetileg nem érhetők el",
+      "unavailableText": "Nem sikerült csatlakozni az adatbázishoz. Kérjük, próbálja újra egy kis idő múlva.",
+      "emptyTitle": "Nincs találat",
+      "emptyText": "Próbáljon másik keresést, vagy válasszon másik kategóriát.",
+      "tryAgain": "Próbálja újra",
+      "clearFilters": "Szűrők törlése"
+    },
+    "listError": {
+      "title": "Nem sikerült betölteni a kampányokat",
+      "fallbackMessage": "Váratlan hiba történt a kampányok betöltésekor.",
+      "tryAgain": "Próbálja újra"
+    },
+    "filters": {
+      "sortBy": "Rendezés",
+      "sort": {
+        "newest": "Legújabb",
+        "oldest": "Legrégebbi",
+        "priceLow": "Ár: növekvő",
+        "priceHigh": "Ár: csökkenő",
+        "popular": "Legnépszerűbb",
+        "expiring": "Hamarosan lejár"
+      },
+      "merchant": "Kereskedő",
+      "allMerchants": "Minden kereskedő",
+      "minPrice": "Min. ár",
+      "minPricePlaceholder": "Min. €",
+      "maxPrice": "Max. ár",
+      "maxPricePlaceholder": "Max. €"
+    },
+    "tenantList": {
+      "title": "Utalványok",
+      "subtitle": "A(z) {merchant} aktív ajánlatai.",
+      "empty": "Még nincs elérhető utalvány.",
+      "voucher": "Utalvány",
+      "viewVoucher": "Utalvány megtekintése"
+    },
+    "deals": {
+      "metaTitle": "Ajánlatok",
+      "metaDescription": "Fedezze fel a legjobb utalványajánlatokat"
+    },
+    "campaignShare": {
+      "share": "Megosztás",
+      "copied": "Másolva",
+      "linkCopied": "Link másolva",
+      "copyFailed": "A másolás sikertelen"
+    },
+    "shareSheet": {
+      "share": "Megosztás",
+      "title": {
+        "voucher": "Utalvány megosztása",
+        "campaign": "Kampány megosztása",
+        "merchant": "Kereskedő megosztása"
+      },
+      "close": "Bezárás",
+      "referralShareText": "{title} – Ossza meg, és kapjon vissza 10%-ot!",
+      "referralNote": "<b>Ossza meg, és kapjon 10%-ot</b>, amikor ismerősei beváltják!",
+      "targets": {
+        "email": "E-mail",
+        "copy": "Link másolása"
+      },
+      "copied": "Másolva!",
+      "linkCopiedToClipboard": "Link a vágólapra másolva!",
+      "linkCopied": "Link másolva!",
+      "shareLinkLabel": "Megosztási link",
+      "copyLink": "Link másolása"
+    },
+    "wishlistButton": {
+      "add": "Hozzáadás a kívánságlistához",
+      "remove": "Eltávolítás a kívánságlistáról"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# csillag} other {# csillag}}"
+    },
+    "form": {
+      "title": "Értékelés írása",
+      "ratingLabel": "Értékelés",
+      "titleLabel": "Cím (opcionális)",
+      "titlePlaceholder": "Foglalja össze tapasztalatát",
+      "commentLabel": "Megjegyzés (opcionális)",
+      "commentPlaceholder": "Ossza meg tapasztalatait...",
+      "submit": "Értékelés elküldése",
+      "submitting": "Küldés...",
+      "ratingRequired": "Kérjük, válasszon értékelést",
+      "submitFailed": "Nem sikerült elküldeni az értékelést",
+      "alreadyReviewed": "Ezt a tételt már értékelte",
+      "signInRequired": "Értékelés írásához jelentkezzen be",
+      "thankYou": "Köszönjük az értékelését!",
+      "writeAnother": "Újabb értékelés írása"
+    },
+    "list": {
+      "sort": {
+        "newest": "Legújabb",
+        "highest": "Legjobb",
+        "helpful": "Leghasznosabb"
+      },
+      "signInToReview": "Értékelés írásához jelentkezzen be",
+      "loadFailed": "Nem sikerült betölteni az értékeléseket.",
+      "tryAgain": "Próbálja újra",
+      "empty": "Még nincsenek értékelések.",
+      "anonymous": "Névtelen",
+      "verified": "Ellenőrzött",
+      "helpfulButton": "Hasznos ({count})",
+      "foundHelpful": "{count} személy hasznosnak találta",
+      "previous": "Előző",
+      "next": "Következő",
+      "pageOf": "{current}. oldal / {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Mégse",
+      "saving": "Mentés…",
+      "somethingWentWrong": "Valami hiba történt"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Nincs bejelentkezve",
+      "unauthorized": "Jogosulatlan",
+      "tooManyAttempts": "Túl sok próbálkozás",
+      "validationFailed": "Az ellenőrzés sikertelen",
+      "unexpected": "Váratlan hiba történt",
+      "databaseFailed": "Az adatbázis-művelet sikertelen",
+      "serviceUnavailable": "A szolgáltatás átmenetileg nem érhető el",
+      "newPasswordTooShort": "Az új jelszónak legalább 8 karakterből kell állnia",
+      "userNotFound": "A felhasználó nem található",
+      "currentPasswordRequired": "A jelenlegi jelszó megadása kötelező",
+      "currentPasswordIncorrect": "A jelenlegi jelszó helytelen",
+      "deletionUnavailable": "A fiók törlése átmenetileg nem érhető el. Kérjük, forduljon az ügyfélszolgálathoz.",
+      "totpAlreadyEnabledReconfigure": "A kétlépcsős azonosítás már be van kapcsolva. Az újrabeállításhoz előbb kapcsolja ki.",
+      "sixDigitCodeRequired": "6 jegyű kód megadása szükséges",
+      "totpSetupMissing": "Nem található TOTP-beállítás. Kérjük, először indítsa el a beállítást.",
+      "totpAlreadyEnabled": "A kétlépcsős azonosítás már be van kapcsolva",
+      "invalidSetupCode": "Érvénytelen kód. Ellenőrizze a hitelesítő alkalmazást, és próbálja újra.",
+      "verificationCodeRequired": "Ellenőrző kód megadása szükséges",
+      "totpNotEnabled": "A kétlépcsős azonosítás jelenleg nincs bekapcsolva",
+      "invalidDisableCode": "Érvénytelen kód. Adja meg aktuális TOTP-kódját vagy egy tartalékkódot.",
+      "passkeyOptionsFailed": "Nem sikerült lekérni a regisztrációs beállításokat",
+      "passkeyGenerateOptionsFailed": "Nem sikerült létrehozni a regisztrációs beállításokat",
+      "registrationFailed": "A regisztráció sikertelen",
+      "passkeyRegistrationFailed": "A hozzáférési kulcs regisztrálása sikertelen",
+      "passkeyChallengeExpired": "A kihívás lejárt vagy nem található",
+      "verificationFailed": "Az ellenőrzés sikertelen",
+      "passkeyVerifyFailed": "Nem sikerült ellenőrizni a regisztrációt"
+    },
+    "settings": {
+      "joinedOn": "Csatlakozott: {date}",
+      "joinedRecently": "Nemrég csatlakozott"
+    },
+    "profileForm": {
+      "nameLabel": "Név",
+      "namePlaceholder": "Az Ön neve",
+      "emailLabel": "E-mail",
+      "emailLocked": "Az e-mail-cím nem módosítható",
+      "save": "Módosítások mentése",
+      "updated": "Profil frissítve",
+      "nameRequired": "A név megadása kötelező",
+      "updateFailed": "Nem sikerült frissíteni a profilt"
+    },
+    "passwordForm": {
+      "currentLabel": "Jelenlegi jelszó",
+      "newLabel": "Új jelszó",
+      "setLabel": "Jelszó beállítása",
+      "confirmLabel": "Jelszó megerősítése",
+      "showPassword": "Jelszó megjelenítése",
+      "hidePassword": "Jelszó elrejtése",
+      "change": "Jelszó módosítása",
+      "set": "Jelszó beállítása",
+      "updated": "A jelszó sikeresen frissítve",
+      "tooShort": "A jelszónak legalább {min} karakterből kell állnia",
+      "mismatch": "A jelszavak nem egyeznek",
+      "changeFailed": "Nem sikerült módosítani a jelszót"
+    },
+    "deleteDialog": {
+      "trigger": "Fiók törlése",
+      "title": "Törli a fiókját?",
+      "description": "Ez a művelet végleges. Profilja, munkamenetei és értesítési beállításai törlődnek. Vásárlási előzményei anonimizálásra kerülnek.",
+      "typeToConfirm": "A megerősítéshez írja be: <strong>{word}</strong>",
+      "confirm": "Végleges törlés",
+      "deleting": "Törlés…",
+      "failed": "Nem sikerült törölni a fiókot"
+    },
+    "passkeys": {
+      "title": "Hozzáférési kulcsok",
+      "description": "Jelentkezzen be jelszó nélkül, eszköze ujjlenyomat-olvasójával, arcfelismerésével vagy PIN-kódjával.",
+      "add": "Hozzáférési kulcs hozzáadása",
+      "namePlaceholder": "pl. „MacBook Touch ID”",
+      "addSubmit": "Hozzáadás",
+      "adding": "Hozzáadás…",
+      "unsupported": "Ez a böngésző nem támogatja a hozzáférési kulcsokat. Próbálja a Chrome, a Safari vagy az Edge egy friss verziójával.",
+      "empty": "Még nincs hozzáférési kulcsa. Adjon hozzá egyet a jelszó nélküli bejelentkezéshez.",
+      "devicePasskey": "Eszköz hozzáférési kulcsa",
+      "passkey": "Hozzáférési kulcs",
+      "added": "Hozzáadva: {date}",
+      "lastUsed": "Utoljára használva: {date}",
+      "synced": "Szinkronizálva",
+      "removeConfirm": "Eltávolítja?",
+      "remove": "Eltávolítás",
+      "removeLabel": "Hozzáférési kulcs eltávolítása",
+      "loadFailed": "Nem sikerült betölteni a hozzáférési kulcsokat",
+      "removeFailed": "Nem sikerült eltávolítani a hozzáférési kulcsot"
+    },
+    "security": {
+      "title": "Biztonság",
+      "description": "Kétlépcsős azonosítás és biztonsági beállítások kezelése",
+      "loading": "Betöltés...",
+      "backToSettings": "Vissza a beállításokhoz",
+      "enabledMessage": "A kétlépcsős azonosítás bekapcsolva!",
+      "disabledMessage": "A kétlépcsős azonosítás kikapcsolva",
+      "errors": {
+        "statusLoadFailed": "Nem sikerült betölteni a kétlépcsős azonosítás állapotát",
+        "setupFailed": "Nem sikerült elindítani a beállítást",
+        "verifyFailed": "Az ellenőrzés sikertelen",
+        "disableFailed": "Nem sikerült kikapcsolni a kétlépcsős azonosítást"
+      },
+      "status": {
+        "title": "Kétlépcsős azonosítás",
+        "enabledBody": "Fiókját hitelesítő alkalmazás védi.",
+        "disabledBody": "Tegye még biztonságosabbá fiókját: bejelentkezéskor kérjen kódot a hitelesítő alkalmazásból.",
+        "enabled": "Bekapcsolva",
+        "notEnabled": "Nincs bekapcsolva"
+      },
+      "setup": {
+        "title": "Hitelesítő alkalmazás beállítása",
+        "description": "Ellenőrző kódok generálásához használjon például Google Authenticator, Authy vagy 1Password alkalmazást.",
+        "enable": "2FA bekapcsolása"
+      },
+      "scan": {
+        "title": "Olvassa be a QR kódot, vagy adja meg kézzel a kulcsot",
+        "qrAlt": "Olvassa be ezt a QR kódot a hitelesítő alkalmazással",
+        "manualKey": "Vagy adja meg kézzel ezt a kulcsot:",
+        "copySecret": "Titkos kulcs másolása"
+      },
+      "verify": {
+        "title": "Adja meg az ellenőrző kódot",
+        "codeLabel": "6 jegyű kód az alkalmazásból",
+        "submit": "Ellenőrzés és bekapcsolás"
+      },
+      "backupCodes": {
+        "title": "Mentse el tartalékkódjait",
+        "description": "Tárolja biztonságos helyen ezeket a kódokat. Ha elveszíti hozzáférését a hitelesítő alkalmazáshoz, ezek egyikével bejelentkezhet. Minden kód csak egyszer használható.",
+        "copy": "Kódok másolása",
+        "copied": "Másolva!",
+        "download": "Letöltés",
+        "done": "Kész"
+      },
+      "backupFile": {
+        "title": "GiftHub – Kétlépcsős azonosítás tartalékkódjai",
+        "instructions": "Tárolja ezeket a kódokat biztonságos helyen. Minden kód csak egyszer használható.",
+        "generated": "Létrehozva: {date}"
+      },
+      "disable": {
+        "title": "Kétlépcsős azonosítás kikapcsolása",
+        "description": "Ezzel eltávolítja fiókja további biztonsági rétegét.",
+        "button": "2FA kikapcsolása",
+        "confirmTitle": "2FA kikapcsolásának megerősítése",
+        "confirmDescription": "Adja meg a hitelesítő alkalmazás aktuális 6 jegyű kódját vagy egy tartalékkódot.",
+        "codeLabel": "Ellenőrző kód",
+        "codePlaceholder": "000000 vagy XXXX-XXXX",
+        "confirm": "Kikapcsolás megerősítése"
+      },
+      "quickLinks": {
+        "title": "Biztonsági gyorslinkek",
+        "sessions": "Aktív munkamenetek megtekintése",
+        "changePassword": "Jelszó módosítása"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Fizessen eredményekért, ne elérésért. Kereskedő által kezelt ajánlási infrastruktúra: márkás utalványok és bolti kredit."
+    },
+    "error": {
+      "unexpected": "Váratlan hiba történt."
+    },
+    "hero": {
+      "badge": "Utalványok és ajánlások helyi vállalkozásoknak",
+      "title": "Ügyfelei hozzák el <highlight>következő ügyfeleit</highlight>",
+      "subtitle": "Hozzon létre utalványkampányokat. Ügyfelei megosztják őket, kreditet szereznek, és elhozzák ismerőseiket. Kövessen nyomon minden ajánlást, és lássa pontosan, mennyibe kerül egy új ügyfél.",
+      "ctaMerchant": "Kezdés kereskedőként",
+      "ctaExplore": "Kampányok felfedezése",
+      "noCardRequired": "Nem kell bankkártya",
+      "freeTrial": "{days} napos ingyenes próbaidőszak",
+      "cancelAnytime": "Bármikor lemondható"
+    },
+    "stats": {
+      "activeCampaigns": "Aktív kampányok",
+      "merchants": "Kereskedők",
+      "processedValue": "Feldolgozott érték"
+    },
+    "merchantsTitle": "Kereskedők a platformon",
+    "values": {
+      "referral": {
+        "title": "Ajánlási motor",
+        "description": "Ügyfelei megosztják az ajánlatokat, és automatikusan új ügyfeleket hoznak"
+      },
+      "vouchers": {
+        "title": "Digitális utalványok",
+        "description": "Hozzon létre kedvezménykampányokat rugalmas szabályokkal percek alatt"
+      },
+      "qr": {
+        "title": "QR beváltás",
+        "description": "Beolvasás és érvényesítés a boltban egy telefonnal. Nincs szükség külön eszközre"
+      },
+      "analytics": {
+        "title": "Valós idejű elemzések",
+        "description": "Lássa pontosan, mennyibe kerül és mennyit hoz egy-egy kampány. Találgatás nélkül"
+      }
+    },
+    "howItWorks": {
+      "title": "Hogyan működik",
+      "subtitle": "Kezdje el percek alatt, egyszerű, háromlépéses folyamattal",
+      "steps": {
+        "create": {
+          "title": "Hozzon létre kampányt",
+          "description": "Állítson be egy utalványt 2 perc alatt: kedvezmény, időszak, maximális felhasználás. Kész."
+        },
+        "share": {
+          "title": "Az ügyfelek megosztják",
+          "description": "Minden vásárló ajánlói linket kap. Megosztja, kreditet szerez, és elhozza ismerőseit."
+        },
+        "grow": {
+          "title": "Figyelje a növekedést",
+          "description": "Kövessen nyomon minden ajánlási láncot, lássa az egy új ügyfélre jutó költséget, és mérje a megtérülést."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Népszerű kampányok",
+      "subtitle": "Fedezzen fel utalványokat, ajánlatokat és élményeket Európa-szerte",
+      "showing": "{count, plural, one {# aktív kampány} other {# aktív kampány}} látható.",
+      "showingWithOnSale": "{count, plural, one {# aktív kampány} other {# aktív kampány}} látható — ebből {onSale} most kapható.",
+      "emptyTitle": "Jelenleg nincs élő kampány",
+      "emptyBody": "Az ajánlatok itt jelennek meg, amint a kereskedők közzéteszik őket.",
+      "viewAll": "Összes kampány megtekintése"
+    },
+    "pricing": {
+      "title": "Egyszerű, átlátható árazás",
+      "subtitle": "Válassza a vállalkozásához illő csomagot. Éves számlázásnál csak 10 hónapot fizet.",
+      "billingPeriod": "Számlázási időszak",
+      "monthly": "Havi",
+      "annual": "Éves",
+      "save": "17% megtakarítás",
+      "mostPopular": "Legnépszerűbb",
+      "perMonth": "/hó",
+      "perYear": "{price}/év (2 hónap ingyen)",
+      "startTrial": "Ingyenes próba indítása",
+      "footer": "Minden csomag tartalmaz {days} napos ingyenes próbaidőszakot · {percent}% tranzakciós díj az utalványeladások után · Bármikor lemondható",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# utalvány/hó} other {# utalvány/hó}}",
+        "activeCampaigns": "{count, plural, one {# aktív kampány} other {# aktív kampány}}",
+        "teamMembers": "{count, plural, one {# csapattag} other {# csapattag}}",
+        "qrRedemption": "QR kódos beváltás",
+        "basicAnalytics": "Alapszintű elemzések",
+        "advancedAnalytics": "Haladó elemzések",
+        "customDomain": "Egyedi domain",
+        "promoBoosts": "Promóciós kiemelések (e-mail + push)",
+        "unlimitedVouchers": "Korlátlan utalvány",
+        "unlimitedCampaigns": "Korlátlan kampány",
+        "unlimitedTeamMembers": "Korlátlan csapattag",
+        "everythingInPlan": "A(z) {plan} csomag minden funkciója"
+      }
+    },
+    "calculator": {
+      "title": "Számolja ki a megtérülést",
+      "subtitle": "Húzza a csúszkákat, és nézze meg, mennyit kereshet a GiftHubbal",
+      "monthlyPurchases": "Havi utalványvásárlások",
+      "purchasesValue": "{count, plural, one {# vásárlás} other {# vásárlás}}",
+      "averageTicket": "Átlagos kosárérték",
+      "referralRate": "Ajánlási konverziós arány",
+      "monthlyRevenue": "Havi bevétel",
+      "referralCustomers": "Új ügyfelek ajánlásból",
+      "perMonthValue": "{value}/hó",
+      "referralRevenue": "Bevétel ajánlásokból",
+      "estimatedRoi": "Becsült ROI",
+      "platformCost": "Platformköltség",
+      "platformCostValue": "{plan}/hó csomag + {fees} díj ({percent}%) = <strong>{total}/hó</strong>",
+      "disclaimer": "Csak szemléltetés a megadott értékek alapján — nem előrejelzés."
+    },
+    "why": {
+      "title": "Miért szeretik a kereskedők a GiftHubot",
+      "body": "Bővítse ügyfélkörét és növelje bevételét — miközben megtartja árrését, és az ügyfélkapcsolatok is az Öné maradnak.",
+      "benefits": {
+        "referralEngine": "Beépített ajánlási motor minden kampányban",
+        "analytics": "Valós idejű elemzések: ügyfélszerzési költség, ROI",
+        "qr": "QR beváltás — nincs szükség POS-eszközre",
+        "languages": "{count, plural, one {# nyelven} other {# nyelven}} elérhető",
+        "flatPlan": "Fix havidíj — nem bevételmegosztás, mint a Grouponnál",
+        "ownData": "Az ügyféladatok az Öné",
+        "fee": "{percent}% tranzakciós díj az utalványeladások után, rejtett költségek nélkül"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs. GiftHub",
+      "hint": "Húzza az összehasonlításhoz",
+      "beforeTitle": "Grouponnal",
+      "afterTitle": "GiftHubbal",
+      "sliderLabel": "{before} és {after} összehasonlítása",
+      "before": {
+        "revenueShare": "A platform nagy részt vesz el a bevételből",
+        "ownsRelationship": "Az ügyfélkapcsolat a platformé",
+        "noDataAccess": "Nincs hozzáférés az ügyféladatokhoz",
+        "raceToBottom": "Lefelé licitáló árak",
+        "lostBrand": "Elvesző márkaidentitás"
+      },
+      "after": {
+        "flatFee": "Fix {minPrice}–{maxPrice}/hó + {percent}% díj",
+        "ownData": "Minden ügyféladat az Öné",
+        "referralEngine": "Beépített ajánlási motor",
+        "yourBrand": "Az Ön márkája, az Ön szabályai",
+        "roiAnalytics": "Valós idejű ROI-elemzés"
+      }
+    },
+    "faq": {
+      "title": "Gyakori kérdések",
+      "subtitle": "Minden, amit a GiftHubról tudni érdemes",
+      "items": {
+        "groupon": {
+          "question": "Miben különbözik a Groupontól?",
+          "answer": "A Groupon-típusú kuponoldalak jellemzően minden eladás nagy részét megtartják, és az ügyfélkapcsolat is az övék. Mi fix havidíjat számítunk fel ({price}/hótól), plusz {percent}%-ot az utalványeladások után. Az ügyfelei, az adatai és az árrése az Öné marad."
+        },
+        "referral": {
+          "question": "Hogyan működik az ajánlási rendszer?",
+          "answer": "Minden ügyfél, aki utalványt vásárol, egyedi ajánlói linket kap. Ha megosztja, és egy ismerőse vásárol, mindketten kreditet kapnak. Minden ajánlási láncot nyomon követünk, így pontosan látja, hogyan találnak Önre az új ügyfelek."
+        },
+        "trial": {
+          "question": "Mi történik a {days} napos próbaidőszak után?",
+          "answer": "Választ egy csomagot ({starter}, {pro} vagy {scale}). Ha nem fizet elő, a már közzétett utalványai aktívak maradnak az ügyfelek számára, de új kampányt csak előfizetés után hozhat létre."
+        },
+        "qr": {
+          "question": "Szükségem van speciális eszközre a QR beváltáshoz?",
+          "answer": "Nem. A munkatársai bármely telefon böngészőjében megnyitják a mobil szkennert, beolvassák az ügyfél QR kódját, és kész. Nem kell alkalmazást letölteni, és POS-integráció sem szükséges."
+        },
+        "fee": {
+          "question": "Mi az a {percent}%-os tranzakciós díj?",
+          "answer": "Amikor egy ügyfél a platformon keresztül utalványt vásárol, a kifizetésből {percent}%-ot levonunk. A csomag díján felül nincs más platformdíj."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ne béreljen ügyfeleket. Építse fel saját seregét.",
+      "body": "Hozza létre első kampányát percek alatt. A többit ügyfelei elvégzik. {days} napos ingyenes próbaidőszak.",
+      "getStarted": "Ingyenes kezdés",
+      "browse": "Kampányok böngészése"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Pénztár demó",
+      "subtitle": "Demó pénztároldal",
+      "creditBalance": "Kreditegyenleg",
+      "availableAmount": "{amount} elérhető",
+      "lockedAmount": "{amount} zárolva",
+      "orderSummary": "Rendelés összesítése",
+      "orderAmount": "Rendelés összege",
+      "creditToApply": "Alkalmazandó kredit",
+      "maxAmount": "Max.: {amount}",
+      "subtotal": "Részösszeg",
+      "creditAppliedLine": "Alkalmazott kredit",
+      "total": "Összesen",
+      "processing": "Feldolgozás...",
+      "submit": "Kredit alkalmazása és rendelés leadása",
+      "creditApplied": "Kredit sikeresen alkalmazva! Rendelés végösszege: {total}",
+      "errors": {
+        "missingAmounts": "Kérjük, adja meg a rendelés és a kredit összegét is",
+        "applyFailed": "Nem sikerült alkalmazni a kreditet"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} – Elérhető utalványok",
+      "emptyTitle": "Nincs elérhető utalvány",
+      "emptyDescription": "Nézzen vissza később a(z) {merchant} új utalványajánlataiért.",
+      "specialOffer": "Különleges ajánlat",
+      "validUntil": "Érvényes eddig: {date}",
+      "viewAndShare": "Megtekintés és megosztás"
+    },
+    "wallet": {
+      "subtitle": "Kredit pénztárca",
+      "availableToUse": "Felhasználható",
+      "useCredit": "Kredit felhasználása",
+      "noCreditToUse": "Nincs felhasználható kredit",
+      "locked": "Zárolt",
+      "lockedDescription": "A kapcsolódó vásárlás megerősítésekor felszabadul.",
+      "historyTitle": "Kredit előzmények",
+      "historyDescription": "Főkönyv: {merchant}",
+      "historyEmpty": "Még nincs kredit előzmény.",
+      "expires": "Lejár: {date}",
+      "creditStatus": {
+        "locked": "zárolt",
+        "available": "elérhető",
+        "used": "felhasznált",
+        "expired": "lejárt",
+        "reversed": "visszavont"
+      }
+    },
+    "error": {
+      "title": "Valami hiba történt",
+      "description": "A portál betöltése nem sikerült. Kérjük, frissítse az oldalt, vagy próbálja újra később.",
+      "backToPortal": "Vissza a portálra"
+    },
+    "payments": {
+      "voucherFallback": "Utalvány",
+      "status": {
+        "pending": "függő",
+        "paid": "fizetve",
+        "failed": "sikertelen",
+        "refunded": "visszatérítve"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "elérhető",
+        "sold": "eladva",
+        "used": "felhasznált",
+        "cancelled": "törölve",
+        "refunded": "visszatérítve"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Valami hiba történt",
+      "description": "Hiba történt az oldal betöltésekor."
+    },
+    "notFound": {
+      "metaTitle": "Az oldal nem található"
+    },
+    "header": {
+      "mainNavLabel": "Fő",
+      "signIn": "Bejelentkezés"
+    },
+    "footer": {
+      "navLabel": "Lábléc",
+      "copyright": "© {year} GiftHub. Európában készült."
+    },
+    "navLinks": {
+      "campaigns": "Kampányok",
+      "merchants": "Kereskedők",
+      "explore": "Felfedezés",
+      "search": "Keresés",
+      "faq": "GYIK",
+      "contact": "Kapcsolat",
+      "privacy": "Adatvédelem",
+      "terms": "Feltételek",
+      "home": "Kezdőlap",
+      "about": "Rólunk",
+      "vouchers": "Utalványok",
+      "shop": "Bolt",
+      "rent": "Bérlés"
+    },
+    "chat": {
+      "openAssistant": "Automatikus asszisztens megnyitása",
+      "closeAssistant": "Automatikus asszisztens bezárása",
+      "dialogLabel": "GiftHub automatikus asszisztens",
+      "title": "GiftHub asszisztens",
+      "subtitle": "Automatikus asszisztens",
+      "newChat": "Új csevegés",
+      "closeChat": "Csevegés bezárása",
+      "greeting": "Üdvözlöm!",
+      "intro": "Automatikus asszisztens vagyok. Kérdezzen utalványokról, ajándékkártyákról, jegyekről vagy a fiókjáról.",
+      "inputLabel": "Üzenet az automatikus asszisztensnek",
+      "placeholder": "Írjon üzenetet...",
+      "send": "Üzenet küldése",
+      "sendError": "Elnézést, nem sikerült elküldeni az üzenetét. Kérjük, próbálja újra."
+    },
+    "cookies": {
+      "regionLabel": "Sütibeállítások",
+      "intro": "Sütiket használunk az élmény javítására. A szükséges sütik mindig aktívak; az opcionálisakról Ön dönt. <link>Adatvédelmi tájékoztató</link>",
+      "optionalLegend": "Opcionális sütik",
+      "necessary": "Szükséges",
+      "alwaysOn": "(mindig aktív)",
+      "analytics": "Analitika",
+      "marketing": "Marketing",
+      "preferences": "Beállítások",
+      "saveError": "Nem sikerült menteni a választását. Kérjük, próbálja újra.",
+      "acceptAll": "Összes elfogadása",
+      "declineOptional": "Opcionálisak elutasítása",
+      "customize": "Testreszabás",
+      "savePreferences": "Beállítások mentése"
+    },
+    "currency": {
+      "selectLabel": "Pénznem kiválasztása"
+    },
+    "language": {
+      "selectLabel": "Nyelv kiválasztása",
+      "selectInterfaceLabel": "Felület nyelvének kiválasztása ({language})",
+      "unknown": "ismeretlen",
+      "interfaceOnly": "Csak a felület szövegét módosítja",
+      "uiName": "{name} (felület)"
+    },
+    "country": {
+      "selectLabel": "Piac kiválasztása ({country})",
+      "heading": "Piac kiválasztása",
+      "description": "Csak az országot, a pénznemet és a piaci adatokat módosítja",
+      "tip": "<strong>Tipp:</strong> A piac az adatokat és a pénznemet szűri. A felület nyelve külön állítható be."
+    },
+    "roleSwitcher": {
+      "myDashboard": "Saját dashboard",
+      "platformAdmin": "Platformadminisztrátor",
+      "admin": "Adminisztrátor",
+      "staff": "Munkatárs",
+      "switchContext": "Nézet váltása"
+    },
+    "legalEntity": {
+      "operator": "Üzemeltető",
+      "registeredAddress": "Székhely",
+      "registryCode": "Cégjegyzékszám",
+      "operatorPlaceholder": "[cégnév később kerül megadásra]",
+      "addressPlaceholder": "[székhely később kerül megadásra]",
+      "registryCodePlaceholder": "[cégjegyzékszám később kerül megadásra]"
+    },
+    "theme": {
+      "dark": "Sötét mód",
+      "light": "Világos mód",
+      "system": "Rendszertéma"
+    },
+    "voiceSearch": {
+      "start": "Hangalapú keresés indítása",
+      "stop": "Hallgatás leállítása",
+      "tooltip": "Hangalapú keresés",
+      "tapToStop": "Koppintson a leállításhoz"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Nem sikerült betölteni a központot",
+      "description": "Váratlan hiba történt a kereskedők betöltésekor.",
+      "retry": "Próbálja újra"
+    },
+    "hub": {
+      "metaTitle": "Kereskedők",
+      "metaDescription": "Helyi vállalkozások a GiftHubon és aktuális ajánlataik",
+      "title": "Helyi kereskedők",
+      "subtitle": "Kávézók, szalonok, stúdiók és még sok más: nézze meg, kik vannak a GiftHubon, és mit kínálnak most.",
+      "loadError": "Nem sikerült betölteni a kereskedőket",
+      "loadErrorHint": "Kérjük, próbálja újra egy kis idő múlva.",
+      "retry": "Próbálja újra",
+      "emptyTitle": "Még nincsenek kereskedők",
+      "emptyHint": "A vállalkozások itt jelennek meg, amint csatlakoznak.",
+      "joinCta": "Csatlakozás kereskedőként",
+      "noOffers": "Jelenleg nincs ajánlat",
+      "offerCount": "{count, plural, one {# ajánlat} other {# ajánlat}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Nem található",
+      "metaDescription": "Böngésszen {name} utalványai, kampányai és ajánlatai között",
+      "offerCount": "{count, plural, one {# ajánlat} other {# ajánlat}}",
+      "website": "Weboldal",
+      "contact": "Kapcsolat",
+      "sampleNotice": "<strong>Minta vállalkozás.</strong> Ez az oldal azt mutatja be, hogyan jelenik meg egy kereskedő a GiftHubon. Ajánlatai csak példák, és nem vásárolhatók meg.",
+      "offersHeading": "Ajánlatok",
+      "noOffers": "Jelenleg nincs ajánlat",
+      "noOffersHint": "{name} új ajánlatai itt jelennek meg.",
+      "browseOther": "További ajánlatok böngészése",
+      "validUntil": "Érvényes eddig: {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Kampányok",
+      "mainNav": "Fő",
+      "signIn": "Bejelentkezés"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Fedezze fel a helyi kereskedőket",
+      "hubHeroSubtitle": "Böngésszen a GiftHub kereskedőinek kampányai, utalványai, bérelhető termékei és webáruházai között.",
+      "tenantHeroSubtitle": "Termékek, bérlések és utalványok egy helyen.",
+      "browseCampaigns": "Kampányok böngészése",
+      "getStarted": "Kezdés",
+      "featuredMerchants": "Kiemelt kereskedők",
+      "noMerchants": "Még nincsenek kereskedők.",
+      "visitNamed": "{name} megtekintése",
+      "visitMerchant": "Kereskedő megtekintése",
+      "featuredProducts": "Kiemelt termékek",
+      "noProducts": "Nincs elérhető termék.",
+      "rentalHighlights": "Kiemelt bérlések",
+      "noRentals": "Nincs elérhető bérlés.",
+      "perDay": "{price} / nap",
+      "activeVouchers": "Aktív utalványok",
+      "noStandaloneVouchers": "Jelenleg nincs önálló utalvány — <link>böngésszen {count, plural, one {# aktív kampány} other {# aktív kampány}} között</link>.",
+      "noVouchers": "Nincs elérhető utalvány.",
+      "voucher": "Utalvány",
+      "viewVoucher": "Utalvány megtekintése",
+      "stats": {
+        "campaigns": "Kampányok",
+        "vouchers": "Utalványok",
+        "products": "Termékek",
+        "rentals": "Bérlések"
+      },
+      "statsUnavailable": "A statisztikák nem érhetők el."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Bolt",
+      "subtitle": "Böngésszen a termékek között, és tegye őket a kosárba."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Fizetési szándék létrehozva",
+      "intentCreatedDescription": "{id} szándék, összeg: {amount}",
+      "checkoutErrorTitle": "Pénztárhiba",
+      "checkoutErrorDescription": "Nem sikerült létrehozni a fizetési szándékot.",
+      "empty": "Még nincs elérhető termék.",
+      "productHighlight": "Kiemelt termék",
+      "add": "Hozzáadás",
+      "cart": "Kosár",
+      "cartEmpty": "A kosár üres.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Eltávolítás",
+      "total": "Összesen",
+      "creatingIntent": "Szándék létrehozása...",
+      "checkoutIntent": "Fizetési szándék"
+    },
+    "rentPage": {
+      "metaTitle": "Bérlési piactér",
+      "metaDescription": "Bérelhető tételek böngészése",
+      "title": "Bérlések",
+      "subtitle": "Válasszon dátumokat, és kérjen bérlési ajánlatot."
+    },
+    "rentClient": {
+      "selectDatesError": "Kérjük, válassza ki a bérlés dátumait.",
+      "bookingFailed": "A foglalás sikertelen",
+      "bookingCreated": "Foglalási kérés létrehozva: {name}. Összesen: {total}.",
+      "bookingSubmitted": "Foglalás elküldve",
+      "bookingCreateFailed": "Nem sikerült létrehozni a bérlési foglalást.",
+      "bookingCancelled": "Foglalás lemondva.",
+      "cancelFailed": "Nem sikerült lemondani a foglalást.",
+      "datesHeading": "Bérlés dátumai",
+      "startDate": "Kezdő dátum",
+      "endDate": "Záró dátum",
+      "daysSelected": "{count, plural, one {# bérlési nap kiválasztva.} other {# bérlési nap kiválasztva.}}",
+      "selectDatesHint": "Az ár kiszámításához válasszon dátumokat.",
+      "empty": "Még nincs elérhető bérlés.",
+      "rentalHighlight": "Kiemelt bérlés",
+      "perDay": "{price} / nap",
+      "weeklyRate": "Heti: {price}",
+      "select": "Kiválasztás",
+      "selectedHeading": "Kiválasztott bérlés",
+      "estimatedTotal": "Becsült végösszeg",
+      "notesLabel": "Megjegyzés (opcionális)",
+      "notesPlaceholder": "Különleges kérések...",
+      "submitting": "Foglalás küldése...",
+      "requestBooking": "Bérlés foglalása",
+      "myBookings": "Foglalásaim",
+      "noBookings": "Még nincs bérlési foglalása. A kezdéshez válasszon egy tételt fent.",
+      "bookingRange": "{start} – {end} ({days, plural, one {# nap} other {# nap}})",
+      "bookingTotal": "Összesen: {total}",
+      "rejectionReason": "Indok: {reason}",
+      "cancelling": "Lemondás...",
+      "cancel": "Lemondás",
+      "status": {
+        "pending": "függő",
+        "approved": "jóváhagyva",
+        "rejected": "elutasítva",
+        "paid": "fizetve",
+        "active": "aktív",
+        "returned": "visszahozva",
+        "cancelled": "lemondva"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Előfizetéses dobozok",
+      "metaDescription": "Fizessen elő kedvenc helyi kereskedői válogatott havi utalványdobozaira — minden ciklusban új ajánlatok, bármikor lemondható.",
+      "title": "Előfizetéses dobozok",
+      "subtitle": "Kapjon rendszeresen válogatott utalványokat a legjobb kereskedőktől.",
+      "empty": "Még nincs elérhető előfizetéses doboz. Nézzen vissza hamarosan!",
+      "byMerchant": "Kereskedő: {name}",
+      "perInterval": "/{interval}",
+      "details": "Részletek",
+      "subscribe": "Előfizetés",
+      "subscribedTitle": "Előfizetve",
+      "subscribedMessage": "Sikeresen előfizetett. A részleteket e-mailben küldtük el.",
+      "subscribeFailed": "Az előfizetés sikertelen. Kérjük, próbálja újra.",
+      "notFoundTitle": "A doboz nem található",
+      "notFoundHint": "Ez az előfizetéses doboz nem érhető el.",
+      "browseAll": "← Összes doboz böngészése",
+      "backToAll": "← Összes előfizetéses doboz",
+      "subscriberCount": "{count, plural, one {# előfizető} other {# előfizető}}",
+      "whatsInside": "Mi van benne",
+      "curatingNext": "{period} legfeljebb {count, plural, one {# válogatott utalvány} other {# válogatott utalvány}}. A következő szállítmány összeállítása folyamatban.",
+      "percentVoucher": "{value}% kedvezményes utalvány",
+      "amountVoucher": "{amount} értékű utalvány",
+      "curatedVoucher": "Válogatott utalvány",
+      "subscribing": "Előfizetés…",
+      "subscribeWithPrice": "Előfizetés — {price}/{interval}",
+      "interval": {
+        "weekly": "hét",
+        "monthly": "hó",
+        "quarterly": "negyedév"
+      },
+      "intervalEach": {
+        "weekly": "Hetente",
+        "monthly": "Havonta",
+        "quarterly": "Negyedévente"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Keresés",
+    "metaDescription": "Keressen a GiftHub kereskedőinek élő kampányai és utalványai között.",
+    "loadingSearch": "Keresés betöltése",
+    "title": "Ajánlatok keresése",
+    "subtitle": "Kampányok és utalványok a GiftHub kereskedőitől",
+    "queryLabel": "Kampányok, utalványok és kereskedők keresése",
+    "queryPlaceholder": "Kampányok, utalványok, kereskedők keresése...",
+    "toggleFilters": "Szűrők megjelenítése/elrejtése",
+    "filtersTitle": "Szűrők",
+    "closeFilters": "Szűrők bezárása",
+    "error": "A keresés jelenleg nem érhető el. Kérjük, próbálja újra egy kis idő múlva.",
+    "campaignsHeading": "Kampányok",
+    "vouchersHeading": "Utalványok",
+    "browseMarketplace": "Böngésszen minden kapható ajánlat között a <link>kampánypiactéren</link>.",
+    "campaignEnds": "Vége: {date}",
+    "filters": {
+      "title": "Szűrők",
+      "clearAll": "Összes törlése",
+      "category": "Kategória",
+      "discountType": "Kedvezmény típusa",
+      "minDiscount": "Min. kedvezmény",
+      "minDiscountAria": "Minimális kedvezmény",
+      "maxPrice": "Max. ár",
+      "maxPriceAria": "Maximális ár euróban",
+      "any": "Bármely",
+      "sortBy": "Rendezés",
+      "types": {
+        "all": "Minden típus",
+        "percentage": "Százalékos kedvezmény",
+        "fixed_amount": "Fix összeg",
+        "credit_amount": "Bolti kredit"
+      },
+      "sort": {
+        "newest": "Legújabb elöl",
+        "popular": "Legnépszerűbb",
+        "expiring": "Hamarosan lejár"
+      }
+    },
+    "results": {
+      "chipCategory": "Kategória: {value}",
+      "chipType": "Típus: {value}",
+      "chipMinDiscount": "Min. {value}% kedvezmény",
+      "chipMaxPrice": "Max. {value} €",
+      "chipSort": "Rendezés: {value}",
+      "removeFilter": "{label} szűrő eltávolítása",
+      "searching": "Keresés...",
+      "count": "{total, plural, one {<num>#</num> találat} other {<num>#</num> találat}}",
+      "countForQuery": "{total, plural, one {<num>#</num> találat erre: „<hl>{query}</hl>”} other {<num>#</num> találat erre: „<hl>{query}</hl>”}}",
+      "flash": "Villám",
+      "voucherFallback": "Utalvány",
+      "expires": "Lejár: {date}",
+      "redeemed": "{count} beváltva",
+      "noResultsTitle": "Nincs találat",
+      "noResultsQuery": "Egy utalvány sem felel meg ennek: „{query}”. Próbálja módosítani a szűrőket.",
+      "noResultsHint": "Keressen konkrét utalványra, kereskedőre vagy kategóriára."
+    }
+  },
+  "faq": {
+    "metaTitle": "Gyakori kérdések",
+    "metaDescription": "Válaszok az utalványok és ajándékkártyák vásárlásával, beváltásával és kezelésével kapcsolatos gyakori kérdésekre — fizetés, visszatérítés, lejárat és kereskedői támogatás.",
+    "title": "Gyakori kérdések",
+    "subtitle": "Válaszok a platformmal kapcsolatos gyakori kérdésekre.",
+    "categories": {
+      "general": "Általános",
+      "purchasing": "Vásárlás és fizetés",
+      "vouchers": "Utalványok és beváltás",
+      "account": "Fiók és biztonság",
+      "merchants": "Kereskedőknek",
+      "loyalty": "Hűségprogram és jutalmak"
+    },
+    "items": {
+      "whatIs": {
+        "q": "Mi az a GiftHub?",
+        "a": "A GiftHub digitális utalványok, ajándékkártyák és eseményjegyek piactere, amely összeköti a kereskedőket az ügyfelekkel. A kereskedők digitális termékeket hozhatnak létre és értékesíthetnek, az ügyfelek pedig megvásárolhatják, elajándékozhatják és beválthatják azokat."
+      },
+      "isFree": {
+        "q": "Ingyenes a platform használata?",
+        "a": "A böngészés és a fiók létrehozása ingyenes. Az ügyfelek csak a megvásárolt termékekért fizetnek. A kereskedők havidíjat fizetnek, valamint {fee}% tranzakciós díjat az utalványeladások után."
+      },
+      "countries": {
+        "q": "Mely országok támogatottak?",
+        "a": "Az EU egész területén támogatjuk a kereskedőket és az ügyfeleket, {currencies} pénznemmel és {languages} nyelven."
+      },
+      "howToBuy": {
+        "q": "Hogyan vásárolhatok utalványt?",
+        "a": "Böngésszen az elérhető utalványok között, kattintson a „Vásárlás” gombra, és fizessen a Stripe-on keresztül. Az utalvány a fizetés után azonnal megjelenik a pénztárcájában."
+      },
+      "paymentMethods": {
+        "q": "Milyen fizetési módokat fogadnak el?",
+        "a": "A fizetéseket biztonságosan a Stripe dolgozza fel. A vásárlásnál elérhető fizetési módok a pénztárban jelennek meg."
+      },
+      "refund": {
+        "q": "Kérhetek visszatérítést?",
+        "a": "A visszatérítési szabályokat az egyes kereskedők határozzák meg. Vásárlás előtt nézze meg az utalvány részletes oldalán a vonatkozó szabályokat."
+      },
+      "howToRedeem": {
+        "q": "Hogyan válthatok be egy utalványt?",
+        "a": "Nyissa meg a pénztárcáját, válassza ki az utalványt, és mutassa meg a QR kódot a kereskedőnek. A kereskedő beolvassa, és megerősíti a beváltást. A kód kézi megadásával is beválthatja."
+      },
+      "expiry": {
+        "q": "Mi történik, ha egy utalvány lejár?",
+        "a": "A lejárt utalványok nem válthatók be. A lejárat előtt értesítést kap. A lejárati dátumokat a pénztárcájában találja."
+      },
+      "gift": {
+        "q": "Elajándékozhatok egy utalványt?",
+        "a": "Igen! Vásárláskor válassza a „Küldés ajándékként” lehetőséget, és adja meg a címzett e-mail-címét. A címzett személyes üzenettel együtt kapja meg az utalványt."
+      },
+      "twoFactor": {
+        "q": "Hogyan kapcsolhatom be a kétlépcsős azonosítást?",
+        "a": "Lépjen a Beállítások → Biztonság → Kétlépcsős azonosítás menüpontra. Beállíthat TOTP-t (Google Authenticator), vagy használhat hozzáférési kulcsos (biometrikus) azonosítást."
+      },
+      "biometrics": {
+        "q": "Bejelentkezhetek biometrikus azonosítással?",
+        "a": "Igen! Támogatjuk a hozzáférési kulcsos (passkey) azonosítást — jelentkezzen be Face ID-val, ujjlenyomattal vagy Windows Hellóval. A Beállítások → Biztonság menüben állíthatja be."
+      },
+      "deleteAccount": {
+        "q": "Hogyan törölhetem a fiókomat?",
+        "a": "Lépjen a Beállítások → Adatvédelem → Fiók törlése menüpontra. GDPR-megfelelőségi szabályzatunk szerint minden adatát 30 napon belül töröljük. Előtte exportálhatja adatait."
+      },
+      "startSelling": {
+        "q": "Hogyan kezdhetek el értékesíteni?",
+        "a": "Regisztráljon kereskedőként, végezze el a bevezetési folyamatot, és hozza létre első utalványát. A profil jóváhagyása után azonnal elkezdheti az értékesítést."
+      },
+      "fees": {
+        "q": "Milyen díjai vannak a platformnak?",
+        "a": "A {trialDays} napos ingyenes próbaidőszak után a csomagok havidíja: {starter} {starterPrice}, {pro} {proPrice} vagy {scale} {scalePrice} (éves számlázásnál 2 hónap ingyen), plusz {fee}% tranzakciós díj az utalványeladások után, amelyet a kifizetésből vonunk le."
+      },
+      "integrations": {
+        "q": "Összekapcsolhatom a meglévő rendszereimmel?",
+        "a": "Igen! Kínálunk webhookokat (valós idejű eseményértesítésekhez), API-kulcsokat (programozott hozzáféréshez), valamint Zapier-, Slack- és Discord-integrációt."
+      },
+      "trackSales": {
+        "q": "Hogyan követhetem nyomon az eladásaimat?",
+        "a": "A kereskedői dashboard valós idejű elemzéseket mutat, többek között bevételt, beváltásokat, ügyfélbetekintéseket, valamint MI-alapú, természetes nyelvű lekérdezéseket („mutasd a múlt heti bevételt”)."
+      },
+      "loyalty": {
+        "q": "Hogyan működik a hűségprogram?",
+        "a": "Pontokat gyűjthet vásárlással, napi bejelentkezéssel, ajánlásokkal és értékelések írásával. A pontokkal egyre több előnyt kínáló szinteket érhet el (Bronz → Ezüst → Arany → Platina → Gyémánt)."
+      },
+      "badges": {
+        "q": "Mik azok a jelvények és sorozatok?",
+        "a": "A jelvények mérföldkövekért járó eredmények (első vásárlás, 10 ajánlás stb.). A sorozatok az egymást követő aktív napokat számolják, és jutalmazzák a kitartást."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Kapcsolat",
+    "metaDescription": "Lépjen kapcsolatba a GiftHub csapatával — kérdések utalványokról, kereskedői csatlakozásról, számlázásról vagy partnerségről.",
+    "title": "Kapcsolat",
+    "subtitle": "Kérdése van? Örömmel segítünk.",
+    "email": "E-mail",
+    "assistantTitle": "Automatikus asszisztens",
+    "assistantText": "Gyors válaszok utalványokról és a fiókjáról a sarokban lévő csevegés gombbal. Automatikus asszisztens, nem élő személy.",
+    "name": "Név",
+    "subject": "Tárgy",
+    "message": "Üzenet",
+    "sent": "Üzenet elküldve! Hamarosan válaszolunk.",
+    "unavailableWithEmail": "A kapcsolatfelvételi űrlap jelenleg nem érhető el. Kérjük, írjon nekünk ide: {email}.",
+    "unavailable": "A kapcsolatfelvételi űrlap jelenleg nem érhető el. Kérjük, próbálja újra később.",
+    "error": "A küldés sikertelen. Kérjük, próbálja újra egy kis idő múlva.",
+    "sending": "Küldés...",
+    "send": "Üzenet küldése"
+  },
+  "leaderboardPage": {
+    "metaTitle": "Top kereskedők",
+    "metaDescription": "Az elmúlt 30 napban a legtöbb utalványbeváltást elért kereskedők a GiftHubon",
+    "title": "Top kereskedők",
+    "subtitle": "A legtöbb utalványbeváltás az elmúlt 30 napban",
+    "rank": "{rank}. hely",
+    "redemptions": "{count, plural, one {<num>#</num><label>beváltás</label>} other {<num>#</num><label>beváltás</label>}}",
+    "empty": "Az elmúlt 30 napban még nem volt beváltás, így nincs megjeleníthető rangsor.",
+    "browseCampaigns": "Élő kampányok böngészése"
+  },
+  "ui": {
+    "close": "Bezárás",
+    "more": "Továbbiak",
+    "loading": "Betöltés...",
+    "breadcrumb": {
+      "label": "navigációs útvonal"
+    },
+    "pagination": {
+      "label": "lapozás",
+      "previousAria": "Ugrás az előző oldalra",
+      "previous": "Előző",
+      "nextAria": "Ugrás a következő oldalra",
+      "next": "Következő",
+      "morePages": "További oldalak"
+    },
+    "toast": {
+      "dismiss": "Értesítés elvetése"
+    },
+    "calendar": {
+      "previousMonth": "Ugrás az előző hónapra",
+      "nextMonth": "Ugrás a következő hónapra"
+    },
+    "datePicker": {
+      "placeholder": "Válasszon dátumot"
+    },
+    "combobox": {
+      "placeholder": "Válasszon...",
+      "empty": "Nincs találat.",
+      "search": "Keresés..."
+    },
+    "searchInput": {
+      "clear": "Keresés törlése"
+    },
+    "searchResults": {
+      "empty": "Nincs találat",
+      "noResultsFor": "Nincs találat erre: „{query}”. Próbálkozzon más kulcsszavakkal."
+    },
+    "commandPalette": {
+      "placeholder": "Keresés...",
+      "noResults": "Nincs találat",
+      "toOpen": "a megnyitáshoz",
+      "other": "Egyéb",
+      "hostPlaceholder": "Hová szeretne menni?",
+      "categories": {
+        "navigate": "Navigáció",
+        "discover": "Felfedezés",
+        "account": "Fiók"
+      },
+      "items": {
+        "home": {
+          "label": "Kezdőlap",
+          "description": "Nyitóoldal"
+        },
+        "app": {
+          "label": "Saját dashboard",
+          "description": "Utalványai, pénztárcája és tevékenységei"
+        },
+        "vouchers": {
+          "label": "Utalványaim"
+        },
+        "wallet": {
+          "label": "Pénztárca",
+          "description": "Kreditegyenlegek"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "Ajándékok böngészése és küldése"
+        },
+        "campaigns": {
+          "label": "Kampányok",
+          "description": "Aktív utalványkampányok"
+        },
+        "hub": {
+          "label": "Kereskedői központ",
+          "description": "Kereskedők böngészése"
+        },
+        "deals": {
+          "label": "Ajánlatok"
+        },
+        "settings": {
+          "label": "Beállítások",
+          "description": "Fiók és preferenciák"
+        },
+        "admin": {
+          "label": "Adminisztráció",
+          "description": "Platformadminisztráció"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Megerősítés",
+      "cancel": "Mégse"
+    },
+    "dataTable": {
+      "noResults": "Nincs találat."
+    },
+    "fileUpload": {
+      "maxFiles": "Legfeljebb {maxFiles, plural, one {# fájl} other {# fájl}} engedélyezett",
+      "tooLarge": "A fájlok mérete legfeljebb {maxSize} MB lehet",
+      "dropHere": "Ejtse ide a fájlokat",
+      "dragDrop": "Húzza ide a fájlokat",
+      "browseHint": "vagy kattintson a tallózáshoz (fájlonként max. {maxSize} MB)",
+      "select": "Fájlok kiválasztása",
+      "remove": "{name} eltávolítása"
+    },
+    "imageUpload": {
+      "notImage": "Kérjük, képfájlt töltsön fel",
+      "tooLarge": "A kép mérete legfeljebb {maxSize} MB lehet",
+      "previewAlt": "Előnézet",
+      "remove": "Kép eltávolítása",
+      "dropHere": "Ejtse ide a képet",
+      "upload": "Kép feltöltése",
+      "hint": "PNG, JPG, GIF, max. {maxSize} MB",
+      "select": "Kép kiválasztása"
+    },
+    "statsCard": {
+      "open": "Megnyitás"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% pénzvisszatérítés"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Aktív",
+        "redeemed": "Felhasznált",
+        "expired": "Lejárt"
+      },
+      "redeem": "Beváltás",
+      "expires": "Lejár: {date}",
+      "merchantAlt": "Kereskedő"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Bejelentkezés",
+      "register": "Fiók létrehozása",
+      "resetPassword": "Jelszó visszaállítása"
+    },
+    "error": {
+      "title": "Valami hiba történt",
+      "fallback": "Váratlan hiba történt.",
+      "tryAgain": "Próbálja újra"
+    },
+    "login": {
+      "welcome": "Üdvözöljük újra",
+      "subtitle": "Jelentkezzen be GiftHub-fiókjába",
+      "tabMagic": "Mágikus link",
+      "tabPassword": "Jelszó",
+      "tabSocial": "Közösségi",
+      "tabPasskey": "Hozzáférési kulcs",
+      "emailLabel": "E-mail-cím",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Jelszó",
+      "sendCode": "Bejelentkezési kód küldése",
+      "sending": "Küldés…",
+      "signIn": "Bejelentkezés",
+      "signingIn": "Bejelentkezés…",
+      "otpTitle": "Ellenőrizze e-mailjét!",
+      "otpDesc": "6 jegyű kódot küldtünk ide: <b>{email}</b>",
+      "otpLabel": "Adja meg a kódot",
+      "verify": "Kód ellenőrzése",
+      "verifying": "Ellenőrzés…",
+      "resend": "Kód újraküldése",
+      "backToEmail": "Vissza",
+      "orContinueWith": "Vagy folytassa ezzel",
+      "continueWith": "Folytatás ezzel: {provider}",
+      "errorWrongCode": "Érvénytelen vagy lejárt kód. Kérjük, próbálja újra.",
+      "errorWrongPass": "Érvénytelen e-mail-cím vagy jelszó.",
+      "errorGeneric": "Valami hiba történt. Kérjük, próbálja újra.",
+      "errorEmailUnavailable": "Az e-mailes bejelentkezés jelenleg nem érhető el — használja jelszavát.",
+      "errorCredentialsSignin": "Hibás e-mail-cím vagy jelszó.",
+      "errorAuthGeneric": "A bejelentkezés sikertelen. Kérjük, próbálja újra.",
+      "backToHome": "Vissza a kezdőlapra",
+      "socialDesc": "Jelentkezzen be azonnal kedvenc fiókjával",
+      "noAccount": "Még nincs fiókja?",
+      "createAccount": "Fiók létrehozása",
+      "noAccountSub": "Ha új e-mail-címmel jelentkezik be kóddal, automatikusan fiókot hozunk létre.",
+      "registered": "Fiók létrehozva — jelentkezzen be e-mail-címével és jelszavával.",
+      "magicDesc": "6 jegyű kódot küldünk az e-mail-címére. Nincs szükség jelszóra.",
+      "passwordDesc": "Jelentkezzen be e-mail-címével és jelszavával.",
+      "forgotPassword": "Elfelejtette jelszavát?",
+      "demo": "Demófiókok",
+      "demoRole": {
+        "platformAdmin": "Platformadminisztrátor",
+        "merchantAdmin": "Kereskedői adminisztrátor",
+        "merchantStaff": "Kereskedői munkatárs",
+        "endUser": "Végfelhasználó"
+      },
+      "passkeyDesc": "Jelentkezzen be azonnal ujjlenyomattal, arcfelismeréssel vagy biztonsági kulccsal.",
+      "passkeyButton": "Bejelentkezés hozzáférési kulccsal",
+      "passkeyAuthenticating": "Hitelesítés…"
+    },
+    "register": {
+      "backToHome": "Vissza a kezdőlapra",
+      "title": "Hozza létre fiókját",
+      "subtitle": "Kezdje el felfedezni és kezelni az utalványokat",
+      "nameLabel": "Teljes név",
+      "namePlaceholder": "Kovács Anna",
+      "emailLabel": "E-mail-cím",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Jelszó",
+      "passwordPlaceholder": "Min. 8 karakter",
+      "submit": "Fiók létrehozása",
+      "submitting": "Fiók létrehozása...",
+      "haveAccount": "Már van fiókja?",
+      "signIn": "Bejelentkezés",
+      "errorWeak": "A jelszó túl gyenge. Kérjük, válasszon erősebb jelszót.",
+      "errorInvalid": "Érvénytelen adatok.",
+      "errorFallback": "Valami hiba történt.",
+      "errorGeneric": "Valami hiba történt. Kérjük, próbálja újra."
+    },
+    "resetPassword": {
+      "title": "Jelszó visszaállítása",
+      "subtitle": "Adja meg új jelszavát alább",
+      "newPassword": "Új jelszó",
+      "confirmPassword": "Jelszó megerősítése",
+      "submit": "Új jelszó beállítása",
+      "submitting": "Visszaállítás…",
+      "success": "Jelszó visszaállítva!",
+      "successDesc": "Jelszava frissült. Most már bejelentkezhet.",
+      "goToLogin": "Tovább a bejelentkezéshez",
+      "errorMismatch": "A jelszavak nem egyeznek",
+      "errorShort": "A jelszónak legalább 8 karakterből kell állnia",
+      "errorWeak": "A jelszó túl gyenge. Kérjük, válasszon erősebb jelszót.",
+      "errorExpired": "Ez a visszaállítási link érvénytelen vagy lejárt.",
+      "forgotTitle": "Elfelejtette jelszavát?",
+      "forgotSubtitle": "Adja meg e-mail-címét, és küldünk egy visszaállítási linket",
+      "emailLabel": "E-mail-cím",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Visszaállítási link küldése",
+      "sending": "Küldés…",
+      "linkSent": "Ellenőrizze e-mailjét!",
+      "linkSentDesc": "Ha létezik fiók ezzel az e-mail-címmel, elküldtük a visszaállítási linket.",
+      "backToLogin": "Vissza a bejelentkezéshez"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Üdvözöljük a fedélzeten!",
+      "joined": "Csatlakozott ehhez: {orgName}. Átirányítás…",
+      "accepted": "Meghívás elfogadva. Átirányítás…",
+      "problemTitle": "Probléma a meghívással",
+      "errorNotAccepted": "Ezt a meghívást nem sikerült elfogadni.",
+      "errorGeneric": "Valami hiba történt. Kérjük, próbálja újra.",
+      "goToOrgs": "Tovább a szervezeteihez",
+      "invitedTitle": "Meghívást kapott",
+      "invitedDesc": "Fogadja el a meghívást a szervezethez való csatlakozáshoz. Előfordulhat, hogy előbb be kell jelentkeznie.",
+      "accepting": "Elfogadás…",
+      "accept": "Meghívás elfogadása"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Ajándékkártyák és ajándékozás",
+      "description": "Böngésszen és vásároljon digitális ajándékkártyákat helyi kereskedőktől. Küldjön figyelmes ajándékot másodpercek alatt — e-mailben kézbesítve, boltban vagy online beváltható."
+    },
+    "publicCard": {
+      "defaultHeadline": "Ajándékkártya",
+      "imageAlt": "Ajándékkártya",
+      "logoAlt": "Márkalogó",
+      "merchant": "Kereskedő: {name}",
+      "merchantFallback": "Kereskedő",
+      "code": "Kód: {code}",
+      "validUntil": "Érvényes eddig: {date}",
+      "noExpiry": "Nem jár le",
+      "showQr": "Az ajándékkártya beváltásához mutassa meg ezt a QR-t a személyzetnek.",
+      "statusMessage": "Az ajándékkártya állapota: {status}.",
+      "status": {
+        "active": "aktív",
+        "redeemed": "beváltva",
+        "expired": "lejárt",
+        "cancelled": "törölve"
+      }
+    },
+    "purchase": {
+      "title": "Ajándékkártya vásárlása",
+      "loading": "Betöltés...",
+      "notAvailable": "Az ajándékkártya nem érhető el",
+      "defaultHeadline": "Ajándékkártya",
+      "imageAlt": "Ajándékkártya",
+      "logoAlt": "Márka",
+      "fromMerchant": "Kereskedő: {merchant}",
+      "form": {
+        "recipientEmail": "Címzett e-mail-címe (opcionális)",
+        "recipientEmailPlaceholder": "Az ajándékkártya erre a címre megy",
+        "recipientName": "Címzett neve",
+        "recipientNamePlaceholder": "Kinek",
+        "senderName": "Az Ön neve",
+        "senderNamePlaceholder": "Kitől",
+        "message": "Személyes üzenet (opcionális)",
+        "messagePlaceholder": "Írjon személyes üzenetet..."
+      },
+      "total": "Összesen:",
+      "processing": "Feldolgozás...",
+      "buy": "Ajándékkártya vásárlása",
+      "errors": {
+        "notFound": "Az ajándékkártya nem található, vagy nem vásárolható meg",
+        "loadFailed": "Nem sikerült betölteni az ajándékkártyát",
+        "purchaseFailed": "A vásárlás sikertelen",
+        "generic": "Valami hiba történt. Kérjük, próbálja újra."
+      }
+    },
+    "product": {
+      "notFound": "Az ajándék nem található",
+      "backToHub": "Vissza a Gift Hubhoz",
+      "imageAlt": "{title} {index}",
+      "featured": "Kiemelt",
+      "lowStock": "Már csak {count} db van készleten",
+      "buyNow": "Megveszem",
+      "addToCart": "Kosárba",
+      "saveToWishlist": "Mentés a kívánságlistára",
+      "removeFromWishlist": "Eltávolítás a kívánságlistáról",
+      "share": "Ajándék megosztása",
+      "upsellsTitle": "Ez is tetszhet"
+    },
+    "claim": {
+      "metaTitle": "Váltsa át ajándékát",
+      "alreadyClaimedTitle": "Az ajándékot már átvették",
+      "alreadyClaimedBody": "Ezt az ajándékot már átvették.",
+      "expiredTitle": "Az ajándék lejárt",
+      "expiredBody": "Sajnáljuk, ez az ajándéklink lejárt.",
+      "title": "Ajándékot kapott!",
+      "signedInHint": "Kattintson alább, hogy az utalványt hozzáadja pénztárcájához.",
+      "signedOutHint": "Az utalvány átvételéhez jelentkezzen be.",
+      "claimButton": "Ajándék átvétele",
+      "signInButton": "Bejelentkezés az átvételhez"
+    },
+    "error": {
+      "title": "Nem sikerült betölteni a Gift Hubot",
+      "fallback": "Váratlan hiba történt az ajándékok betöltésekor.",
+      "retry": "Próbálja újra"
+    },
+    "hub": {
+      "title": "Ajándékok",
+      "subtitle": "Találja meg a tökéletes ajándékot minden alkalomra",
+      "loadError": "Nem sikerült betölteni az ajándékokat",
+      "retry": "Próbálja újra",
+      "emptyCatalog": {
+        "title": "Még nincsenek ajándékok",
+        "body": "Addig is a helyi kereskedők utalványai is remek ajándékok."
+      },
+      "noMatches": "Egy ajándék sem felel meg ezeknek a szűrőknek",
+      "clearFilters": "Szűrők törlése",
+      "browseCampaigns": "Kampányok böngészése",
+      "allGifts": "Összes ajándék",
+      "loadMore": "Továbbiak betöltése"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Az ajándékkártya nem található",
+        "body": "A QR kód érvénytelen vagy lejárt."
+      },
+      "notActive": {
+        "title": "Az ajándékkártya még nem aktív",
+        "body": "Ez az ajándékkártya később válik érvényessé."
+      },
+      "expired": {
+        "title": "Az ajándékkártya lejárt",
+        "body": "Ez az ajándékkártya már nem érvényes."
+      },
+      "result": {
+        "title": "Ajándékkártya beváltva",
+        "confirmed": "A beváltás sikeresen megerősítve.",
+        "alreadyRedeemedOrCancelled": "Ezt az ajándékkártyát már beváltották vagy törölték.",
+        "alreadyRedeemedOrInvalid": "Ezt az ajándékkártyát már beváltották, vagy érvénytelen."
+      }
+    },
+    "qr": {
+      "error": "Nem sikerült létrehozni a QR kódot",
+      "generating": "QR létrehozása...",
+      "alt": "QR kód"
+    },
+    "wizard": {
+      "title": "MI-alapú ajándékkereső",
+      "subtitle": "Meséljen a megajándékozottról, mi pedig megtaláljuk a tökéletes ajándékot",
+      "steps": {
+        "recipient": "Kinek szól az ajándék?",
+        "occasion": "Mi az alkalom?",
+        "budget": "Mekkora a költségkerete?"
+      },
+      "recipients": {
+        "partner": "Partner",
+        "friend": "Barát",
+        "parent": "Szülő",
+        "colleague": "Kolléga",
+        "child": "Gyermek",
+        "teacher": "Tanár"
+      },
+      "occasions": {
+        "birthday": "Születésnap",
+        "christmas": "Karácsony",
+        "anniversary": "Évforduló",
+        "thankYou": "Köszönet",
+        "justBecause": "Csak úgy",
+        "graduation": "Ballagás"
+      },
+      "summary": {
+        "for": "Kinek: {recipient}",
+        "budget": "Költségkeret: {amount}"
+      },
+      "submit": "Tökéletes ajándékok keresése",
+      "error": "Nem sikerült ajánlásokat készíteni. Kérjük, próbálja újra.",
+      "results": {
+        "found": "{count, plural, one {# ajándékot} other {# ajándékot}} találtunk Önnek:",
+        "empty": "Nincs megfelelő termék. Próbálja módosítani a feltételeket."
+      },
+      "startOver": "Újrakezdés"
+    },
+    "card": {
+      "featured": "Kiemelt",
+      "save": "Mentés",
+      "unsave": "Mentés visszavonása",
+      "buyNow": "Megveszem"
+    },
+    "feedSection": {
+      "viewAll": "Összes megtekintése"
+    },
+    "filters": {
+      "toggle": "Szűrők",
+      "clear": "Törlés",
+      "occasion": "Alkalom",
+      "persona": "Kinek szól?",
+      "budget": "Költségkeret",
+      "budgetUnder": "{amount} alatt"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Ossza meg az ajánlatokat, és szerezzen jutalmakat"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Váratlan hiba történt."
+    },
+    "logoAlt": "{name} logója",
+    "merchantFallback": "Kereskedő",
+    "validUntil": "Érvényes eddig: {date}",
+    "validUntilWithLimit": "Érvényes eddig: {date} – Első {count, plural, one {# felhasználás} other {# felhasználás}}",
+    "offAtMerchant": "{value} kedvezmény itt: {merchant}",
+    "fields": {
+      "event": "Esemény",
+      "dateTime": "Dátum és idő",
+      "location": "Helyszín",
+      "price": "Ár",
+      "status": "Állapot",
+      "attendee": "Résztvevő",
+      "usedAt": "Felhasználva"
+    },
+    "ticketStatus": {
+      "available": "Elérhető",
+      "sold": "Eladva",
+      "used": "Felhasznált",
+      "cancelled": "Törölve",
+      "refunded": "Visszatérítve"
+    },
+    "event": {
+      "notAvailable": "Erre az eseményre nem lehet jegyet vásárolni.",
+      "descriptionFallback": "Csatlakozzon hozzánk ezen a nagyszerű eseményen!",
+      "availableTickets": "Elérhető jegyek",
+      "soldOut": "Elfogyott",
+      "availableCount": "{count} elérhető",
+      "terms": "Általános feltételek",
+      "soldOutTitle": "Erre az eseményre minden jegy elfogyott",
+      "soldOutDescription": "Az összes jegyet megvásárolták."
+    },
+    "eventPurchase": {
+      "title": "Jegyvásárlás",
+      "description": "Válasszon jegyet, és fejezze be a vásárlást",
+      "selectTicket": "Jegy kiválasztása",
+      "attendeeNameLabel": "Résztvevő neve (opcionális)",
+      "attendeeNamePlaceholder": "A résztvevő személy neve",
+      "attendeeEmailLabel": "Résztvevő e-mail-címe (opcionális)",
+      "attendeeEmailPlaceholder": "E-mail-cím a jegy kézbesítéséhez",
+      "total": "Összesen",
+      "submit": "Jegy vásárlása",
+      "noTickets": "Jelenleg nincs elérhető jegy.",
+      "checkBackLater": "Kérjük, nézzen vissza később, vagy forduljon az esemény szervezőjéhez.",
+      "selectTicketError": "Kérjük, válasszon jegyet",
+      "purchaseFailed": "Nem sikerült megvásárolni a jegyet"
+    },
+    "ticket": {
+      "noPermission": "Nincs jogosultsága a jegy megtekintéséhez.",
+      "heading": "#{number} számú jegy",
+      "qrTitle": "QR kód",
+      "qrDescription": "Mutassa fel ezt a QR kódot az esemény bejáratánál",
+      "qrAlt": "Jegy QR kódja",
+      "qrUnavailable": "A QR kód nem érhető el",
+      "ticketNumber": "Jegyszám: <strong>{number}</strong>",
+      "used": "A jegyet már felhasználták",
+      "detailsTitle": "Jegy részletei",
+      "detailsDescription": "Fontos tudnivalók a jegyéről",
+      "staffCanRedeem": "Kereskedői munkatársként beválthatja ezt a jegyet az eseményen."
+    },
+    "redeem": {
+      "notFoundTitle": "A beváltás nem található",
+      "notFoundDescription": "A QR kód érvénytelen vagy lejárt.",
+      "title": "Utalvány beváltva",
+      "alreadyRedeemed": "Ezt az utalványt már beváltották.",
+      "confirmed": "A beváltás sikeresen megerősítve."
+    },
+    "qrCheckout": {
+      "title": "QR fizetés",
+      "completeTitle": "Fizetés kész",
+      "completeDescription": "Vásárlását megerősítettük. A részleteket e-mailben küldtük el.",
+      "payNow": "Fizetés most",
+      "confirming": "Megerősítés..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Az utalvány nem található",
+      "notFoundDescription": "A keresett utalvány nem található.",
+      "descriptionFallback": "Exkluzív utalványajánlat",
+      "shareText": "Nézze meg ezt az utalványt: {merchant}",
+      "copyCode": "Utalványkód másolása",
+      "qrAlt": "QR kód a(z) {code} utalványhoz",
+      "print": "Utalvány nyomtatása"
+    },
+    "referralPage": {
+      "voucherFrom": "Utalványt kapott tőle: <highlight>{name}</highlight>",
+      "qrAlt": "Beváltási QR kód a(z) {code} utalványhoz",
+      "offAtMerchantShared": "{value} kedvezmény itt: {merchant} – Egy barát osztotta meg!"
+    },
+    "bnpl": {
+      "title": "Fizetés részletekben",
+      "description": "Ossza fel {amount} összegű fizetését kényelmes havi részletekre.",
+      "perMonth": "/hó",
+      "planNoInterest": "{months}x (0% kamat)",
+      "planWithFee": "{months}x ({rate}% díj)",
+      "monthlyPayments": "{count, plural, one {# havi részlet} other {# havi részlet}}",
+      "total": "Összesen: {amount}",
+      "noExtraCost": "Többletköltség nélkül",
+      "payNow": "{amount} fizetése most"
+    },
+    "qrPanel": {
+      "qrAlt": "QR kód",
+      "generateFailed": "Nem sikerült létrehozni a QR kódot",
+      "placeholder": "A QR kód itt jelenik meg",
+      "generating": "QR létrehozása...",
+      "unavailable": "A QR nem érhető el",
+      "hideCode": "Kód elrejtése",
+      "showCode": "Kód megjelenítése",
+      "expires": "Lejár: {date}",
+      "refreshNote": "A kód 30 másodpercenként frissül"
+    },
+    "qrDownload": {
+      "success": "QR kód sikeresen letöltve!",
+      "failed": "Nem sikerült letölteni a QR kódot",
+      "downloading": "Letöltés...",
+      "download": "QR letöltése"
+    }
   }
 }

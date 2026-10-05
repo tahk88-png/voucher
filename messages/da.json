@@ -887,5 +887,1720 @@
         "subtitle": "Tilføj en adgangsnøgle eller totrinsgodkendelse."
       }
     }
+  },
+  "labels": {
+    "free": "Gratis",
+    "valueOff": "{value} rabat",
+    "valueCredit": "{value} i kredit",
+    "valueDiscount": "{value} rabat",
+    "demo": "Demo",
+    "demoHint": "Eksempelindhold, der viser, hvordan platformen fungerer. Ikke et rigtigt tilbud.",
+    "category": {
+      "cafe": "Café & bageri",
+      "beauty": "Skønhed & velvære",
+      "fitness": "Fitness & sport",
+      "events": "Events & billetter",
+      "workshops": "Workshops & kurser",
+      "family": "Familie & børn",
+      "travel": "Rejser & ophold",
+      "outdoor": "Udendørs & eventyr",
+      "other": "Andet",
+      "all": "Alle kategorier"
+    },
+    "voucherType": {
+      "percentage": "Procentrabat",
+      "fixed_amount": "Beløbsrabat",
+      "credit_amount": "Butikskredit"
+    },
+    "voucherStatus": {
+      "draft": "Kladde",
+      "published": "Publiceret",
+      "paused": "Sat på pause",
+      "ended": "Afsluttet",
+      "expired": "Udløbet"
+    },
+    "campaignStatus": {
+      "draft": "Kladde",
+      "active": "Aktiv",
+      "ended": "Afsluttet"
+    },
+    "campaignType": {
+      "limited": "Engangstilbud",
+      "weekly": "Ugentligt tilbud"
+    },
+    "campaignTypeHelp": {
+      "limited": "Kører én gang mellem start- og slutdatoen, så længe lager haves.",
+      "weekly": "Et tilbagevendende ugentligt tilbud, som kunderne kan vende tilbage til hver uge indtil slutdatoen."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Eksempeltilbud · ikke til salg",
+    "notOnSale": "Ikke til salg endnu",
+    "purchases": "{count, plural, one {# køb} other {# køb}}",
+    "freeToClaim": "Gratis at hente",
+    "onSaleNow": "Til salg nu"
+  },
+  "account": {
+    "error": {
+      "title": "Noget gik galt",
+      "fallback": "Der opstod en uventet fejl.",
+      "retry": "Prøv igen"
+    },
+    "dashboard": {
+      "metaTitle": "Mit dashboard"
+    },
+    "cashback": {
+      "metaTitle": "Cashback & kreditter",
+      "title": "Cashback & kreditter",
+      "description": "Al den kredit, du har optjent, hos alle de forhandlere, du handler hos.",
+      "lockedPending": "Låst (afventer)",
+      "used": "Brugt",
+      "expiringTitle": "Udløber inden for 30 dage",
+      "expiresOn": "{merchant} — udløber {date}",
+      "expiresSoon": "{merchant} — udløber snart",
+      "byMerchant": "Pr. forhandler",
+      "lastActivity": "Seneste aktivitet {date}",
+      "readyToSpend": "Klar til brug",
+      "viewMerchantWallet": "Se forhandlerpung →"
+    },
+    "nearby": {
+      "title": "Tilbud i nærheden",
+      "subtitle": "Find tilbud og kuponer fra forhandlere i nærheden",
+      "useMyLocation": "Brug min placering",
+      "approximateLocation": "Omtrentlig placering (IP-baseret)",
+      "searchRadius": "Søgeradius",
+      "yourLocation": "Din placering",
+      "mapLabel": "{count, plural, one {# forhandler} other {# forhandlere}} inden for {radius} km",
+      "merchantsNearby": "{count, plural, one {# forhandler} other {# forhandlere}} i nærheden",
+      "activeVouchers": "{count, plural, one {# aktiv kupon} other {# aktive kuponer}}",
+      "emptyTitle": "Ingen forhandlere i nærheden",
+      "emptyBody": "Prøv at øge søgeradius, eller kig forbi senere for nye tilbud i dit område.",
+      "expandRadius": "Udvid til {radius} km",
+      "errors": {
+        "fetchFailed": "Kunne ikke indlæse forhandlere i nærheden. Prøv igen.",
+        "geolocationUnsupported": "Din browser understøtter ikke geolokation.",
+        "permissionDenied": "Adgang til placering blev nægtet. Aktivér placering i dine browserindstillinger.",
+        "positionUnavailable": "Placering er ikke tilgængelig. Prøv igen senere.",
+        "timeout": "Anmodningen om placering fik timeout. Prøv igen.",
+        "locationFailed": "Kunne ikke hente din placering.",
+        "ipLocationFailed": "Kunne ikke bestemme din placering."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Notifikationsindstillinger"
+    },
+    "redeem": {
+      "notFound": "Kuponen blev ikke fundet.",
+      "codeUnavailable": "Kuponkoden er ikke tilgængelig.",
+      "backToWallet": "Tilbage til pungen",
+      "back": "Tilbage"
+    },
+    "referrals": {
+      "metaTitle": "Mine anbefalinger",
+      "completedCount": "Fuldført: {count}"
+    },
+    "voucherDetail": {
+      "back": "Tilbage",
+      "merchantFallback": "Forhandler",
+      "termsTitle": "Vilkår og betingelser",
+      "terms1": "Denne kupon er gyldig indtil den udløbsdato, der er vist ovenfor. Den kan ikke kombineres med andre tilbud eller kampagner, medmindre andet er angivet.",
+      "terms2": "Kuponen skal fremvises ved købet. Har ingen kontantværdi. Kan ikke ombyttes til kontanter eller refunderes.",
+      "terms3": "Forhandleren forbeholder sig retten til at afvise indløsning, hvis kuponen ser ud til at være kopieret, manipuleret eller brugt svigagtigt.",
+      "terms4": "Kontakt forhandleren direkte ved spørgsmål eller problemer."
+    },
+    "vouchers": {
+      "unknownMerchant": "Ukendt",
+      "paidAmount": "Betalt: {amount}",
+      "activeCount": "Aktive ({count})",
+      "pastCount": "Tidligere ({count})"
+    },
+    "voucherCard": {
+      "showQr": "Vis QR-kode",
+      "close": "Luk",
+      "qrHint": "Vis denne QR-kode til forhandleren for at indløse i butikken."
+    },
+    "wallet": {
+      "metaTitle": "Min pung"
+    },
+    "wishlist": {
+      "unknownItem": "Ukendt element",
+      "merchant": "Forhandler",
+      "campaign": "Kampagne",
+      "validUntil": "Gyldig indtil {date}",
+      "alertOn": "Påmindelse til",
+      "noAlert": "Ingen påmindelse",
+      "view": "Se"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Kampagnen er ikke tilgængelig",
+      "metaDescriptionFallback": "Tilbud fra {merchant}.",
+      "breadcrumbLabel": "Brødkrumme",
+      "breadcrumbCampaigns": "Kampagner",
+      "demoNotice": "<strong>Eksempeltilbud.</strong> Denne side viser, hvordan et tilbud ser ud på GiftHub. Virksomheden og tilbuddet er eksempler: Intet her kan købes eller indløses.",
+      "verifiedPartner": "Verificeret partner",
+      "aboutTitle": "Om dette tilbud",
+      "descriptionFallback": "Specialtilbud fra en forhandler på GiftHub.",
+      "howItWorks": {
+        "title": "Sådan fungerer det",
+        "claimTitle": "Hent kuponen",
+        "buyTitle": "Køb kuponen",
+        "buyText": "Betal sikkert online, eller hent den gratis, når tilbuddet er gratis.",
+        "qrTitle": "Få din QR-kode",
+        "qrText": "Kuponen gemmes i din GiftHub-pung med en personlig QR-kode.",
+        "showTitle": "Vis den på stedet",
+        "showText": "{merchant} scanner koden, og rabatten bliver trukket fra."
+      },
+      "termsTitle": "Vilkår",
+      "voucherOptionsTitle": "Kuponmuligheder",
+      "voucherFallbackTitle": "Kupon",
+      "viewVoucher": "Se kupon",
+      "reviewsTitle": "Anmeldelser",
+      "purchaseLabel": "Køb",
+      "buyNow": "Køb nu",
+      "getFreeVoucher": "Hent gratis kupon",
+      "sampleOffer": "Eksempeltilbud",
+      "notOnSaleYet": "Ikke til salg endnu",
+      "demoNotForSale": "Dette er eksempelindhold, så det kan ikke købes.",
+      "noVoucherYet": "{merchant} har endnu ikke publiceret en kupon til dette tilbud. Kig forbi senere.",
+      "offerRuns": "Tilbuddet løber",
+      "bought": "Købt",
+      "boughtCount": "{count, plural, one {# gang} other {# gange}}",
+      "website": "Website",
+      "allOffersFrom": "Alle tilbud fra {merchant}",
+      "moreFrom": "Mere fra {merchant}"
+    },
+    "list": {
+      "allCategories": "Alle",
+      "badge": "Markedsplads for aktive kampagner",
+      "heroTitle": "Opdag de hotteste tilbud i Europa",
+      "heroSubtitle": "Gennemse kuponer, gaver og oplevelser udvalgt fra de bedste forhandlere på dit marked.",
+      "searchLabel": "Søg i kampagner",
+      "searchPlaceholder": "Søg efter kampagner, forhandlere eller tjenester...",
+      "campaignCount": "{count, plural, one {<b>#</b> kampagne} other {<b>#</b> kampagner}}",
+      "voucherCount": "{count, plural, one {<b>#</b> kupon til salg} other {<b>#</b> kuponer til salg}}",
+      "merchantCount": "{count, plural, one {<b>#</b> forhandler} other {<b>#</b> forhandlere}}",
+      "categoriesLabel": "Kategorier",
+      "unavailableTitle": "Kampagner er midlertidigt utilgængelige",
+      "unavailableText": "Kunne ikke oprette forbindelse til databasen. Prøv igen om et øjeblik.",
+      "emptyTitle": "Ingen tilbud fundet",
+      "emptyText": "Prøv en anden søgning, eller vælg en anden kategori.",
+      "tryAgain": "Prøv igen",
+      "clearFilters": "Ryd filtre"
+    },
+    "listError": {
+      "title": "Kunne ikke indlæse kampagner",
+      "fallbackMessage": "Der opstod en uventet fejl under indlæsning af kampagner.",
+      "tryAgain": "Prøv igen"
+    },
+    "filters": {
+      "sortBy": "Sortér efter",
+      "sort": {
+        "newest": "Nyeste",
+        "oldest": "Ældste",
+        "priceLow": "Pris: lav til høj",
+        "priceHigh": "Pris: høj til lav",
+        "popular": "Mest populære",
+        "expiring": "Udløber snart"
+      },
+      "merchant": "Forhandler",
+      "allMerchants": "Alle forhandlere",
+      "minPrice": "Min. pris",
+      "minPricePlaceholder": "Min. €",
+      "maxPrice": "Maks. pris",
+      "maxPricePlaceholder": "Maks. €"
+    },
+    "tenantList": {
+      "title": "Kuponer",
+      "subtitle": "Aktive tilbud fra {merchant}.",
+      "empty": "Ingen kuponer tilgængelige endnu.",
+      "voucher": "Kupon",
+      "viewVoucher": "Se kupon"
+    },
+    "deals": {
+      "metaTitle": "Tilbud",
+      "metaDescription": "Opdag de bedste kupontilbud"
+    },
+    "campaignShare": {
+      "share": "Del",
+      "copied": "Kopieret",
+      "linkCopied": "Link kopieret",
+      "copyFailed": "Kopiering mislykkedes"
+    },
+    "shareSheet": {
+      "share": "Del",
+      "title": {
+        "voucher": "Del denne kupon",
+        "campaign": "Del denne kampagne",
+        "merchant": "Del denne forhandler"
+      },
+      "close": "Luk",
+      "referralShareText": "{title} - Del og få 10 % tilbage!",
+      "referralNote": "<b>Del og tjen 10 %</b>, når dine venner indløser!",
+      "targets": {
+        "email": "E-mail",
+        "copy": "Kopiér link"
+      },
+      "copied": "Kopieret!",
+      "linkCopiedToClipboard": "Link kopieret til udklipsholderen!",
+      "linkCopied": "Link kopieret!",
+      "shareLinkLabel": "Delingslink",
+      "copyLink": "Kopiér link"
+    },
+    "wishlistButton": {
+      "add": "Føj til ønskeliste",
+      "remove": "Fjern fra ønskeliste"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# stjerne} other {# stjerner}}"
+    },
+    "form": {
+      "title": "Skriv en anmeldelse",
+      "ratingLabel": "Bedømmelse",
+      "titleLabel": "Titel (valgfri)",
+      "titlePlaceholder": "Opsummer din oplevelse",
+      "commentLabel": "Kommentar (valgfri)",
+      "commentPlaceholder": "Del din oplevelse...",
+      "submit": "Send anmeldelse",
+      "submitting": "Sender...",
+      "ratingRequired": "Vælg en bedømmelse",
+      "submitFailed": "Kunne ikke sende anmeldelsen",
+      "alreadyReviewed": "Du har allerede anmeldt dette",
+      "signInRequired": "Log ind for at skrive en anmeldelse",
+      "thankYou": "Tak for din anmeldelse!",
+      "writeAnother": "Skriv en anmeldelse mere"
+    },
+    "list": {
+      "sort": {
+        "newest": "Nyeste",
+        "highest": "Højeste",
+        "helpful": "Mest nyttige"
+      },
+      "signInToReview": "Log ind for at skrive en anmeldelse",
+      "loadFailed": "Anmeldelserne kunne ikke indlæses.",
+      "tryAgain": "Prøv igen",
+      "empty": "Ingen anmeldelser endnu.",
+      "anonymous": "Anonym",
+      "verified": "Verificeret",
+      "helpfulButton": "Nyttig ({count})",
+      "foundHelpful": "{count} fandt dette nyttigt",
+      "previous": "Forrige",
+      "next": "Næste",
+      "pageOf": "Side {current} af {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Annuller",
+      "saving": "Gemmer…",
+      "somethingWentWrong": "Noget gik galt"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Ikke logget ind",
+      "unauthorized": "Ingen adgang",
+      "tooManyAttempts": "For mange forsøg",
+      "validationFailed": "Validering mislykkedes",
+      "unexpected": "Der opstod en uventet fejl",
+      "databaseFailed": "Databasehandlingen mislykkedes",
+      "serviceUnavailable": "Tjenesten er midlertidigt utilgængelig",
+      "newPasswordTooShort": "Den nye adgangskode skal være på mindst 8 tegn",
+      "userNotFound": "Brugeren blev ikke fundet",
+      "currentPasswordRequired": "Nuværende adgangskode er påkrævet",
+      "currentPasswordIncorrect": "Den nuværende adgangskode er forkert",
+      "deletionUnavailable": "Sletning af konto er midlertidigt utilgængelig. Kontakt support.",
+      "totpAlreadyEnabledReconfigure": "2FA er allerede aktiveret. Deaktivér det først for at konfigurere igen.",
+      "sixDigitCodeRequired": "En 6-cifret kode er påkrævet",
+      "totpSetupMissing": "Ingen TOTP-opsætning fundet. Start opsætningen først.",
+      "totpAlreadyEnabled": "2FA er allerede aktiveret",
+      "invalidSetupCode": "Ugyldig kode. Tjek din godkendelsesapp, og prøv igen.",
+      "verificationCodeRequired": "En bekræftelseskode er påkrævet",
+      "totpNotEnabled": "2FA er ikke aktiveret i øjeblikket",
+      "invalidDisableCode": "Ugyldig kode. Indtast din nuværende TOTP-kode eller en backupkode.",
+      "passkeyOptionsFailed": "Kunne ikke hente registreringsindstillinger",
+      "passkeyGenerateOptionsFailed": "Kunne ikke generere registreringsindstillinger",
+      "registrationFailed": "Registrering mislykkedes",
+      "passkeyRegistrationFailed": "Registrering af adgangsnøgle mislykkedes",
+      "passkeyChallengeExpired": "Udfordringen er udløbet eller blev ikke fundet",
+      "verificationFailed": "Bekræftelse mislykkedes",
+      "passkeyVerifyFailed": "Kunne ikke bekræfte registreringen"
+    },
+    "settings": {
+      "joinedOn": "Medlem siden {date}",
+      "joinedRecently": "Nyt medlem"
+    },
+    "profileForm": {
+      "nameLabel": "Navn",
+      "namePlaceholder": "Dit navn",
+      "emailLabel": "E-mail",
+      "emailLocked": "E-mail kan ikke ændres",
+      "save": "Gem ændringer",
+      "updated": "Profil opdateret",
+      "nameRequired": "Navn er påkrævet",
+      "updateFailed": "Kunne ikke opdatere profilen"
+    },
+    "passwordForm": {
+      "currentLabel": "Nuværende adgangskode",
+      "newLabel": "Ny adgangskode",
+      "setLabel": "Angiv adgangskode",
+      "confirmLabel": "Bekræft adgangskode",
+      "showPassword": "Vis adgangskode",
+      "hidePassword": "Skjul adgangskode",
+      "change": "Skift adgangskode",
+      "set": "Angiv adgangskode",
+      "updated": "Adgangskoden er opdateret",
+      "tooShort": "Adgangskoden skal være på mindst {min} tegn",
+      "mismatch": "Adgangskoderne stemmer ikke overens",
+      "changeFailed": "Kunne ikke skifte adgangskode"
+    },
+    "deleteDialog": {
+      "trigger": "Slet konto",
+      "title": "Vil du slette din konto?",
+      "description": "Denne handling er permanent. Din profil, dine sessioner og dine notifikationsindstillinger slettes. Købshistorikken anonymiseres.",
+      "typeToConfirm": "Skriv <strong>{word}</strong> for at bekræfte:",
+      "confirm": "Slet permanent",
+      "deleting": "Sletter…",
+      "failed": "Kunne ikke slette kontoen"
+    },
+    "passkeys": {
+      "title": "Adgangsnøgler",
+      "description": "Log ind uden adgangskode med din enheds fingeraftryk, ansigtsgenkendelse eller PIN-kode.",
+      "add": "Tilføj adgangsnøgle",
+      "namePlaceholder": "f.eks. \"MacBook Touch ID\"",
+      "addSubmit": "Tilføj",
+      "adding": "Tilføjer…",
+      "unsupported": "Denne browser understøtter ikke adgangsnøgler. Prøv en nyere version af Chrome, Safari eller Edge.",
+      "empty": "Ingen adgangsnøgler endnu. Tilføj en for at logge ind uden adgangskode.",
+      "devicePasskey": "Enhedens adgangsnøgle",
+      "passkey": "Adgangsnøgle",
+      "added": "Tilføjet {date}",
+      "lastUsed": "Sidst brugt {date}",
+      "synced": "Synkroniseret",
+      "removeConfirm": "Fjern?",
+      "remove": "Fjern",
+      "removeLabel": "Fjern adgangsnøgle",
+      "loadFailed": "Kunne ikke indlæse adgangsnøgler",
+      "removeFailed": "Kunne ikke fjerne adgangsnøglen"
+    },
+    "security": {
+      "title": "Sikkerhed",
+      "description": "Administrer totrinsbekræftelse og sikkerhedsindstillinger",
+      "loading": "Indlæser...",
+      "backToSettings": "Tilbage til indstillinger",
+      "enabledMessage": "Totrinsbekræftelse er nu aktiveret!",
+      "disabledMessage": "Totrinsbekræftelse er blevet deaktiveret",
+      "errors": {
+        "statusLoadFailed": "Kunne ikke indlæse status for din totrinsbekræftelse",
+        "setupFailed": "Kunne ikke starte opsætningen",
+        "verifyFailed": "Bekræftelse mislykkedes",
+        "disableFailed": "Kunne ikke deaktivere 2FA"
+      },
+      "status": {
+        "title": "Totrinsbekræftelse",
+        "enabledBody": "Din konto er beskyttet med en godkendelsesapp.",
+        "disabledBody": "Tilføj et ekstra lag sikkerhed til din konto ved at kræve en kode fra din godkendelsesapp.",
+        "enabled": "Aktiveret",
+        "notEnabled": "Ikke aktiveret"
+      },
+      "setup": {
+        "title": "Konfigurer godkendelsesapp",
+        "description": "Brug en app som Google Authenticator, Authy eller 1Password til at generere bekræftelseskoder.",
+        "enable": "Aktivér 2FA"
+      },
+      "scan": {
+        "title": "Scan QR-koden, eller indtast nøglen manuelt",
+        "qrAlt": "Scan denne QR-kode med din godkendelsesapp",
+        "manualKey": "Eller indtast denne nøgle manuelt:",
+        "copySecret": "Kopiér hemmelig nøgle"
+      },
+      "verify": {
+        "title": "Indtast bekræftelseskode",
+        "codeLabel": "6-cifret kode fra din app",
+        "submit": "Bekræft og aktivér"
+      },
+      "backupCodes": {
+        "title": "Gem dine backupkoder",
+        "description": "Opbevar disse koder sikkert. Hvis du mister adgangen til din godkendelsesapp, kan du bruge en af koderne til at logge ind. Hver kode kan kun bruges én gang.",
+        "copy": "Kopiér koder",
+        "copied": "Kopieret!",
+        "download": "Download",
+        "done": "Færdig"
+      },
+      "backupFile": {
+        "title": "GiftHub - Backupkoder til totrinsbekræftelse",
+        "instructions": "Gem disse koder et sikkert sted. Hver kode kan kun bruges én gang.",
+        "generated": "Genereret: {date}"
+      },
+      "disable": {
+        "title": "Deaktivér totrinsbekræftelse",
+        "description": "Dette fjerner det ekstra sikkerhedslag fra din konto.",
+        "button": "Deaktivér 2FA",
+        "confirmTitle": "Bekræft deaktivering af 2FA",
+        "confirmDescription": "Indtast din nuværende 6-cifrede kode fra din godkendelsesapp eller en backupkode.",
+        "codeLabel": "Bekræftelseskode",
+        "codePlaceholder": "000000 eller XXXX-XXXX",
+        "confirm": "Bekræft deaktivering"
+      },
+      "quickLinks": {
+        "title": "Hurtige links til sikkerhed",
+        "sessions": "Se aktive sessioner",
+        "changePassword": "Skift adgangskode"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Betal for resultater, ikke rækkevidde. Anbefalingsinfrastruktur ejet af forhandleren: brandede kuponer og butikskredit."
+    },
+    "error": {
+      "unexpected": "Der opstod en uventet fejl."
+    },
+    "hero": {
+      "badge": "Kuponer og anbefalinger til lokale virksomheder",
+      "title": "Dine kunder sælger til <highlight>dine næste kunder</highlight>",
+      "subtitle": "Opret kuponkampagner. Dine kunder deler dem, optjener kredit og tager venner med. Følg hver anbefaling. Se præcis, hvad hver ny kunde koster.",
+      "ctaMerchant": "Kom i gang som forhandler",
+      "ctaExplore": "Udforsk kampagner",
+      "noCardRequired": "Intet betalingskort påkrævet",
+      "freeTrial": "{days} dages gratis prøveperiode",
+      "cancelAnytime": "Opsig når som helst"
+    },
+    "stats": {
+      "activeCampaigns": "Aktive kampagner",
+      "merchants": "Forhandlere",
+      "processedValue": "Behandlet værdi"
+    },
+    "merchantsTitle": "Forhandlere på platformen",
+    "values": {
+      "referral": {
+        "title": "Anbefalingsmotor",
+        "description": "Dine kunder deler tilbud og bringer automatisk nye kunder"
+      },
+      "vouchers": {
+        "title": "Digitale kuponer",
+        "description": "Opret rabatkampagner med fleksible regler på få minutter"
+      },
+      "qr": {
+        "title": "QR-indløsning",
+        "description": "Scan og valider i butikken med blot en telefon. Intet ekstra udstyr nødvendigt"
+      },
+      "analytics": {
+        "title": "Analyser i realtid",
+        "description": "Se præcis, hvad hver kampagne koster og giver. Intet gætværk"
+      }
+    },
+    "howItWorks": {
+      "title": "Sådan fungerer det",
+      "subtitle": "Kom i gang på få minutter med vores enkle proces i tre trin",
+      "steps": {
+        "create": {
+          "title": "Opret en kampagne",
+          "description": "Opsæt en kupon på 2 minutter: rabat, periode, maks. antal anvendelser. Færdig."
+        },
+        "share": {
+          "title": "Kunderne deler den",
+          "description": "Hver køber får et anbefalingslink. De deler det, optjener kredit og tager venner med."
+        },
+        "grow": {
+          "title": "Se den vokse",
+          "description": "Følg hver anbefalingskæde, se din pris pr. ny kunde, og mål dit ROI."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Udforsk populære kampagner",
+      "subtitle": "Opdag kuponer, tilbud og oplevelser i hele Europa",
+      "showing": "Viser {count, plural, one {# aktiv kampagne} other {# aktive kampagner}}.",
+      "showingWithOnSale": "Viser {count, plural, one {# aktiv kampagne} other {# aktive kampagner}} — {onSale} til salg nu.",
+      "emptyTitle": "Ingen aktive kampagner lige nu",
+      "emptyBody": "Tilbud vises her, så snart forhandlerne publicerer dem.",
+      "viewAll": "Se alle kampagner"
+    },
+    "pricing": {
+      "title": "Enkle, gennemskuelige priser",
+      "subtitle": "Vælg den plan, der passer til din virksomhed. Årlig betaling koster det samme som 10 måneder.",
+      "billingPeriod": "Betalingsperiode",
+      "monthly": "Månedlig",
+      "annual": "Årlig",
+      "save": "Spar 17 %",
+      "mostPopular": "Mest populær",
+      "perMonth": "/måned",
+      "perYear": "{price}/år (2 måneder gratis)",
+      "startTrial": "Start gratis prøveperiode",
+      "footer": "Alle planer inkluderer {days} dages gratis prøveperiode · {percent} % transaktionsgebyr på kuponsalg · Opsig når som helst",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# kupon/måned} other {# kuponer/måned}}",
+        "activeCampaigns": "{count, plural, one {# aktiv kampagne} other {# aktive kampagner}}",
+        "teamMembers": "{count, plural, one {# teammedlem} other {# teammedlemmer}}",
+        "qrRedemption": "Indløsning med QR-kode",
+        "basicAnalytics": "Grundlæggende analyser",
+        "advancedAnalytics": "Avancerede analyser",
+        "customDomain": "Eget domæne",
+        "promoBoosts": "Kampagneboost (e-mail + push)",
+        "unlimitedVouchers": "Ubegrænsede kuponer",
+        "unlimitedCampaigns": "Ubegrænsede kampagner",
+        "unlimitedTeamMembers": "Ubegrænset antal teammedlemmer",
+        "everythingInPlan": "Alt i {plan}"
+      }
+    },
+    "calculator": {
+      "title": "Beregn dit ROI",
+      "subtitle": "Træk i skyderne for at se, hvor meget du kan tjene med GiftHub",
+      "monthlyPurchases": "Månedlige kuponkøb",
+      "purchasesValue": "{count, plural, one {# køb} other {# køb}}",
+      "averageTicket": "Gennemsnitlig købsværdi",
+      "referralRate": "Konverteringsrate for anbefalinger",
+      "monthlyRevenue": "Månedlig omsætning",
+      "referralCustomers": "Nye kunder via anbefalinger",
+      "perMonthValue": "{value}/md.",
+      "referralRevenue": "Omsætning fra anbefalinger",
+      "estimatedRoi": "Anslået ROI",
+      "platformCost": "Platformsomkostning",
+      "platformCostValue": "{plan}/md. plan + {fees} i gebyrer ({percent} %) = <strong>{total}/md.</strong>",
+      "disclaimer": "Kun til illustration, baseret på de værdier, du indtaster — ikke en prognose."
+    },
+    "why": {
+      "title": "Derfor elsker forhandlere GiftHub",
+      "body": "Udvid din kundebase og øg omsætningen — mens du beholder dine marginer og ejer dine kunderelationer.",
+      "benefits": {
+        "referralEngine": "Indbygget anbefalingsmotor i hver kampagne",
+        "analytics": "Analyser i realtid: pris pr. ny kunde, ROI",
+        "qr": "QR-indløsning — intet kasseudstyr nødvendigt",
+        "languages": "Tilgængelig på {count, plural, one {# sprog} other {# sprog}}",
+        "flatPlan": "Fast månedlig plan — ikke omsætningsdeling som hos Groupon",
+        "ownData": "Du ejer dine kundedata",
+        "fee": "{percent} % transaktionsgebyr på kuponsalg, ingen skjulte omkostninger"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs. GiftHub",
+      "hint": "Træk for at sammenligne",
+      "beforeTitle": "Med Groupon",
+      "afterTitle": "Med GiftHub",
+      "sliderLabel": "Sammenlign {before} og {after}",
+      "before": {
+        "revenueShare": "Platformen tager en stor andel af omsætningen",
+        "ownsRelationship": "Platformen ejer kunderelationen",
+        "noDataAccess": "Ingen adgang til kundedata",
+        "raceToBottom": "Priskrig mod bunden",
+        "lostBrand": "Tabt brandidentitet"
+      },
+      "after": {
+        "flatFee": "Fast {minPrice}–{maxPrice}/md. + {percent} % gebyr",
+        "ownData": "Du ejer alle kundedata",
+        "referralEngine": "Indbygget anbefalingsmotor",
+        "yourBrand": "Dit brand, dine regler",
+        "roiAnalytics": "ROI-analyser i realtid"
+      }
+    },
+    "faq": {
+      "title": "Ofte stillede spørgsmål",
+      "subtitle": "Alt, du skal vide om GiftHub",
+      "items": {
+        "groupon": {
+          "question": "Hvordan adskiller det sig fra Groupon?",
+          "answer": "Tilbudssider som Groupon beholder typisk en stor del af hvert salg og ejer kunderelationen. Vi opkræver et fast månedligt gebyr (fra {price}/md.) plus {percent} % af kuponsalget. Du beholder dine kunder, dine data og dine marginer."
+        },
+        "referral": {
+          "question": "Hvordan fungerer anbefalingssystemet?",
+          "answer": "Alle kunder, der køber en kupon, får et unikt anbefalingslink. Når de deler det, og en ven køber, optjener begge kredit. Hver anbefalingskæde spores, så du kan se præcis, hvordan nye kunder finder dig."
+        },
+        "trial": {
+          "question": "Hvad sker der efter prøveperioden på {days} dage?",
+          "answer": "Du vælger en plan ({starter}, {pro} eller {scale}). Hvis du ikke tegner et abonnement, forbliver dine publicerede kuponer aktive for kunderne, men du kan ikke oprette nye kampagner, før du abonnerer."
+        },
+        "qr": {
+          "question": "Skal jeg bruge særligt udstyr til QR-indløsning?",
+          "answer": "Nej. Dit personale åbner mobilscanneren i browseren på en hvilken som helst telefon, scanner kundens QR-kode, og så er det klaret. Ingen app-download, ingen kasseintegration påkrævet."
+        },
+        "fee": {
+          "question": "Hvad er transaktionsgebyret på {percent} %?",
+          "answer": "Når en kunde køber en kupon via platformen, trækker vi {percent} % fra udbetalingen. Der er ingen andre platformsgebyrer ud over din plan."
+        }
+      }
+    },
+    "cta": {
+      "title": "Stop med at leje kunder. Byg din egen hær.",
+      "body": "Opret din første kampagne på få minutter. Dine kunder klarer resten. {days} dages gratis prøveperiode.",
+      "getStarted": "Kom gratis i gang",
+      "browse": "Gennemse kampagner"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Checkout-demo",
+      "subtitle": "Demo af checkout-side",
+      "creditBalance": "Kreditsaldo",
+      "availableAmount": "{amount} tilgængelig",
+      "lockedAmount": "{amount} låst",
+      "orderSummary": "Ordreoversigt",
+      "orderAmount": "Ordrebeløb",
+      "creditToApply": "Kredit, der skal anvendes",
+      "maxAmount": "Maks.: {amount}",
+      "subtotal": "Subtotal",
+      "creditAppliedLine": "Anvendt kredit",
+      "total": "I alt",
+      "processing": "Behandler...",
+      "submit": "Anvend kredit og gennemfør ordren",
+      "creditApplied": "Kreditten er anvendt! Ordretotal: {total}",
+      "errors": {
+        "missingAmounts": "Indtast både ordrebeløb og kreditbeløb",
+        "applyFailed": "Kunne ikke anvende kredit"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - Tilgængelige kuponer",
+      "emptyTitle": "Ingen tilgængelige kuponer",
+      "emptyDescription": "Kig forbi senere for nye kupontilbud fra {merchant}.",
+      "specialOffer": "Specialtilbud",
+      "validUntil": "Gyldig indtil {date}",
+      "viewAndShare": "Se og del"
+    },
+    "wallet": {
+      "subtitle": "Kreditpung",
+      "availableToUse": "Klar til brug",
+      "useCredit": "Brug kredit",
+      "noCreditToUse": "Ingen kredit at bruge",
+      "locked": "Låst",
+      "lockedDescription": "Låses op, når det tilknyttede køb er bekræftet.",
+      "historyTitle": "Kredithistorik",
+      "historyDescription": "Posteringer for {merchant}",
+      "historyEmpty": "Ingen kredithistorik endnu.",
+      "expires": "Udløber {date}",
+      "creditStatus": {
+        "locked": "låst",
+        "available": "tilgængelig",
+        "used": "brugt",
+        "expired": "udløbet",
+        "reversed": "tilbageført"
+      }
+    },
+    "error": {
+      "title": "Noget gik galt",
+      "description": "Portalen kunne ikke indlæses. Opdater siden, eller prøv igen senere.",
+      "backToPortal": "Tilbage til portalen"
+    },
+    "payments": {
+      "voucherFallback": "Kupon",
+      "status": {
+        "pending": "afventer",
+        "paid": "betalt",
+        "failed": "mislykkedes",
+        "refunded": "refunderet"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "tilgængelig",
+        "sold": "solgt",
+        "used": "brugt",
+        "cancelled": "annulleret",
+        "refunded": "refunderet"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Noget gik galt",
+      "description": "Der opstod en fejl under indlæsning af siden."
+    },
+    "notFound": {
+      "metaTitle": "Siden blev ikke fundet"
+    },
+    "header": {
+      "mainNavLabel": "Hovedmenu",
+      "signIn": "Log ind"
+    },
+    "footer": {
+      "navLabel": "Sidefod",
+      "copyright": "© {year} GiftHub. Lavet i Europa."
+    },
+    "navLinks": {
+      "campaigns": "Kampagner",
+      "merchants": "Forhandlere",
+      "explore": "Udforsk",
+      "search": "Søg",
+      "faq": "FAQ",
+      "contact": "Kontakt",
+      "privacy": "Privatliv",
+      "terms": "Vilkår",
+      "home": "Forside",
+      "about": "Om os",
+      "vouchers": "Kuponer",
+      "shop": "Butik",
+      "rent": "Udlejning"
+    },
+    "chat": {
+      "openAssistant": "Åbn automatisk assistent",
+      "closeAssistant": "Luk automatisk assistent",
+      "dialogLabel": "GiftHubs automatiske assistent",
+      "title": "GiftHub-assistent",
+      "subtitle": "Automatisk assistent",
+      "newChat": "Ny chat",
+      "closeChat": "Luk chat",
+      "greeting": "Hej!",
+      "intro": "Jeg er en automatisk assistent. Spørg om kuponer, gavekort, billetter eller din konto.",
+      "inputLabel": "Besked til den automatiske assistent",
+      "placeholder": "Skriv en besked...",
+      "send": "Send besked",
+      "sendError": "Beklager, din besked kunne ikke sendes. Prøv igen."
+    },
+    "cookies": {
+      "regionLabel": "Cookiepræferencer",
+      "intro": "Vi bruger cookies til at forbedre din oplevelse. Nødvendige cookies er altid aktive; du vælger, hvilke valgfrie cookies du vil tillade. <link>Privatlivspolitik</link>",
+      "optionalLegend": "Valgfrie cookies",
+      "necessary": "Nødvendige",
+      "alwaysOn": "(altid aktive)",
+      "analytics": "Statistik",
+      "marketing": "Marketing",
+      "preferences": "Præferencer",
+      "saveError": "Dit valg kunne ikke gemmes. Prøv igen.",
+      "acceptAll": "Accepter alle",
+      "declineOptional": "Afvis valgfrie",
+      "customize": "Tilpas",
+      "savePreferences": "Gem præferencer"
+    },
+    "currency": {
+      "selectLabel": "Vælg valuta"
+    },
+    "language": {
+      "selectLabel": "Vælg sprog",
+      "selectInterfaceLabel": "Vælg sprog for brugerfladen ({language})",
+      "unknown": "ukendt",
+      "interfaceOnly": "Ændrer kun brugerfladens tekst",
+      "uiName": "{name} (UI)"
+    },
+    "country": {
+      "selectLabel": "Vælg markedsplads ({country})",
+      "heading": "Vælg markedsplads",
+      "description": "Ændrer kun land, valuta og markedsdata",
+      "tip": "<strong>Tip:</strong> Markedspladsen filtrerer data og valuta. Brugerfladens sprog indstilles separat."
+    },
+    "roleSwitcher": {
+      "myDashboard": "Mit dashboard",
+      "platformAdmin": "Platformadministrator",
+      "admin": "Administrator",
+      "staff": "Personale",
+      "switchContext": "Skift kontekst"
+    },
+    "legalEntity": {
+      "operator": "Operatør",
+      "registeredAddress": "Registreret adresse",
+      "registryCode": "CVR-nummer",
+      "operatorPlaceholder": "[firmanavn tilføjes]",
+      "addressPlaceholder": "[registreret adresse tilføjes]",
+      "registryCodePlaceholder": "[CVR-nummer tilføjes]"
+    },
+    "theme": {
+      "dark": "Mørk tilstand",
+      "light": "Lys tilstand",
+      "system": "Systemtema"
+    },
+    "voiceSearch": {
+      "start": "Start stemmesøgning",
+      "stop": "Stop med at lytte",
+      "tooltip": "Stemmesøgning",
+      "tapToStop": "Tryk for at stoppe"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Kunne ikke indlæse oversigten",
+      "description": "Der opstod en uventet fejl under indlæsning af forhandlere.",
+      "retry": "Prøv igen"
+    },
+    "hub": {
+      "metaTitle": "Forhandlere",
+      "metaDescription": "Lokale virksomheder på GiftHub og deres aktuelle tilbud",
+      "title": "Lokale forhandlere",
+      "subtitle": "Caféer, saloner, studier og meget mere: Se, hvem der er på GiftHub, og hvad de tilbyder lige nu.",
+      "loadError": "Forhandlerne kunne ikke indlæses",
+      "loadErrorHint": "Prøv igen om et øjeblik.",
+      "retry": "Prøv igen",
+      "emptyTitle": "Ingen forhandlere endnu",
+      "emptyHint": "Virksomheder vises her, så snart de tilmelder sig.",
+      "joinCta": "Tilmeld dig som forhandler",
+      "noOffers": "Ingen tilbud lige nu",
+      "offerCount": "{count, plural, one {# tilbud} other {# tilbud}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Ikke fundet",
+      "metaDescription": "Gennemse kuponer, kampagner og tilbud fra {name}",
+      "offerCount": "{count, plural, one {# tilbud} other {# tilbud}}",
+      "website": "Website",
+      "contact": "Kontakt",
+      "sampleNotice": "<strong>Eksempelvirksomhed.</strong> Denne side viser, hvordan en forhandler ser ud på GiftHub. Tilbuddene er eksempler og kan ikke købes.",
+      "offersHeading": "Tilbud",
+      "noOffers": "Ingen tilbud lige nu",
+      "noOffersHint": "Nye tilbud fra {name} vises her.",
+      "browseOther": "Gennemse andre tilbud",
+      "validUntil": "Gyldig indtil {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Kampagner",
+      "mainNav": "Hovedmenu",
+      "signIn": "Log ind"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Opdag lokale forhandlere",
+      "hubHeroSubtitle": "Gennemse kampagner, kuponer, udlejning og butikker fra forhandlere på GiftHub.",
+      "tenantHeroSubtitle": "Udforsk produkter, udlejning og kuponer samlet ét sted.",
+      "browseCampaigns": "Gennemse kampagner",
+      "getStarted": "Kom i gang",
+      "featuredMerchants": "Udvalgte forhandlere",
+      "noMerchants": "Ingen forhandlere endnu.",
+      "visitNamed": "Besøg {name}",
+      "visitMerchant": "Besøg forhandler",
+      "featuredProducts": "Udvalgte produkter",
+      "noProducts": "Ingen produkter tilgængelige.",
+      "rentalHighlights": "Udvalgt udlejning",
+      "noRentals": "Intet til udlejning.",
+      "perDay": "{price} / dag",
+      "activeVouchers": "Aktive kuponer",
+      "noStandaloneVouchers": "Ingen selvstændige kuponer her lige nu — <link>gennemse {count, plural, one {# aktiv kampagne} other {# aktive kampagner}}</link>.",
+      "noVouchers": "Ingen kuponer tilgængelige.",
+      "voucher": "Kupon",
+      "viewVoucher": "Se kupon",
+      "stats": {
+        "campaigns": "Kampagner",
+        "vouchers": "Kuponer",
+        "products": "Produkter",
+        "rentals": "Udlejning"
+      },
+      "statsUnavailable": "Statistik er ikke tilgængelig."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Butik",
+      "subtitle": "Gennemse produkter, og læg dem i kurven."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Checkout-intent oprettet",
+      "intentCreatedDescription": "Intent {id} på {amount}",
+      "checkoutErrorTitle": "Fejl ved checkout",
+      "checkoutErrorDescription": "Kunne ikke oprette checkout-intent.",
+      "empty": "Ingen produkter tilgængelige endnu.",
+      "productHighlight": "Udvalgt produkt",
+      "add": "Tilføj",
+      "cart": "Kurv",
+      "cartEmpty": "Kurven er tom.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Fjern",
+      "total": "I alt",
+      "creatingIntent": "Opretter intent...",
+      "checkoutIntent": "Checkout-intent"
+    },
+    "rentPage": {
+      "metaTitle": "Udlejningsmarked",
+      "metaDescription": "Gennemse ting til leje",
+      "title": "Udlejning",
+      "subtitle": "Vælg datoer, og anmod om et lejetilbud."
+    },
+    "rentClient": {
+      "selectDatesError": "Vælg lejedatoer.",
+      "bookingFailed": "Booking mislykkedes",
+      "bookingCreated": "Bookinganmodning oprettet for {name}. I alt: {total}.",
+      "bookingSubmitted": "Booking sendt",
+      "bookingCreateFailed": "Kunne ikke oprette lejebookingen.",
+      "bookingCancelled": "Bookingen er annulleret.",
+      "cancelFailed": "Kunne ikke annullere bookingen.",
+      "datesHeading": "Lejedatoer",
+      "startDate": "Startdato",
+      "endDate": "Slutdato",
+      "daysSelected": "{count, plural, one {# lejedag valgt.} other {# lejedage valgt.}}",
+      "selectDatesHint": "Vælg datoer for at beregne prisen.",
+      "empty": "Intet til udlejning endnu.",
+      "rentalHighlight": "Udvalgt udlejning",
+      "perDay": "{price} / dag",
+      "weeklyRate": "Pr. uge: {price}",
+      "select": "Vælg",
+      "selectedHeading": "Valgt lejeobjekt",
+      "estimatedTotal": "Anslået i alt",
+      "notesLabel": "Noter (valgfrit)",
+      "notesPlaceholder": "Eventuelle særlige ønsker...",
+      "submitting": "Sender booking...",
+      "requestBooking": "Anmod om lejebooking",
+      "myBookings": "Mine bookinger",
+      "noBookings": "Ingen lejebookinger endnu. Vælg en ting ovenfor for at komme i gang.",
+      "bookingRange": "{start} - {end} ({days, plural, one {# dag} other {# dage}})",
+      "bookingTotal": "I alt: {total}",
+      "rejectionReason": "Årsag: {reason}",
+      "cancelling": "Annullerer...",
+      "cancel": "Annuller",
+      "status": {
+        "pending": "afventer",
+        "approved": "godkendt",
+        "rejected": "afvist",
+        "paid": "betalt",
+        "active": "aktiv",
+        "returned": "returneret",
+        "cancelled": "annulleret"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Abonnementsbokse",
+      "metaDescription": "Abonner på udvalgte månedlige kuponbokse fra dine lokale yndlingsforhandlere — nye tilbud hver periode, opsig når som helst.",
+      "title": "Abonnementsbokse",
+      "subtitle": "Modtag udvalgte kuponer fra de bedste forhandlere med faste mellemrum.",
+      "empty": "Ingen abonnementsbokse tilgængelige endnu. Kig snart forbi igen!",
+      "byMerchant": "fra {name}",
+      "perInterval": "/{interval}",
+      "details": "Detaljer",
+      "subscribe": "Abonner",
+      "subscribedTitle": "Abonnement oprettet",
+      "subscribedMessage": "Du abonnerer nu. Tjek din e-mail for detaljer.",
+      "subscribeFailed": "Kunne ikke oprette abonnement. Prøv igen.",
+      "notFoundTitle": "Boksen blev ikke fundet",
+      "notFoundHint": "Denne abonnementsboks er ikke tilgængelig.",
+      "browseAll": "← Gennemse alle bokse",
+      "backToAll": "← Alle abonnementsbokse",
+      "subscriberCount": "{count, plural, one {# abonnent} other {# abonnenter}}",
+      "whatsInside": "Det får du",
+      "curatingNext": "Op til {count, plural, one {# udvalgt kupon} other {# udvalgte kuponer}} {period}. Næste levering er ved at blive sammensat.",
+      "percentVoucher": "Kupon med {value} % rabat",
+      "amountVoucher": "Kupon på {amount}",
+      "curatedVoucher": "Udvalgt kupon",
+      "subscribing": "Opretter abonnement…",
+      "subscribeWithPrice": "Abonner — {price}/{interval}",
+      "interval": {
+        "weekly": "uge",
+        "monthly": "måned",
+        "quarterly": "kvartal"
+      },
+      "intervalEach": {
+        "weekly": "hver uge",
+        "monthly": "hver måned",
+        "quarterly": "hvert kvartal"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Søg",
+    "metaDescription": "Søg i aktive kampagner og kuponer fra forhandlere på GiftHub.",
+    "loadingSearch": "Indlæser søgning",
+    "title": "Søg i tilbud",
+    "subtitle": "Find kampagner og kuponer fra forhandlere på GiftHub",
+    "queryLabel": "Søg i kampagner, kuponer og forhandlere",
+    "queryPlaceholder": "Søg efter kampagner, kuponer, forhandlere...",
+    "toggleFilters": "Vis/skjul filtre",
+    "filtersTitle": "Filtre",
+    "closeFilters": "Luk filtre",
+    "error": "Søgning er ikke tilgængelig lige nu. Prøv igen om et øjeblik.",
+    "campaignsHeading": "Kampagner",
+    "vouchersHeading": "Kuponer",
+    "browseMarketplace": "Gennemse alt, der er til salg, på <link>kampagnemarkedspladsen</link>.",
+    "campaignEnds": "Slutter {date}",
+    "filters": {
+      "title": "Filtre",
+      "clearAll": "Ryd alle",
+      "category": "Kategori",
+      "discountType": "Rabattype",
+      "minDiscount": "Min. rabat",
+      "minDiscountAria": "Minimumsrabat",
+      "maxPrice": "Maks. pris",
+      "maxPriceAria": "Maksimumspris i euro",
+      "any": "Alle",
+      "sortBy": "Sortér efter",
+      "types": {
+        "all": "Alle typer",
+        "percentage": "Procentrabat",
+        "fixed_amount": "Fast beløb",
+        "credit_amount": "Butikskredit"
+      },
+      "sort": {
+        "newest": "Nyeste først",
+        "popular": "Mest populære",
+        "expiring": "Udløber snart"
+      }
+    },
+    "results": {
+      "chipCategory": "Kategori: {value}",
+      "chipType": "Type: {value}",
+      "chipMinDiscount": "Min. {value} % rabat",
+      "chipMaxPrice": "Maks. €{value}",
+      "chipSort": "Sortering: {value}",
+      "removeFilter": "Fjern filteret {label}",
+      "searching": "Søger...",
+      "count": "{total, plural, one {<num>#</num> resultat} other {<num>#</num> resultater}}",
+      "countForQuery": "{total, plural, one {<num>#</num> resultat for “<hl>{query}</hl>”} other {<num>#</num> resultater for “<hl>{query}</hl>”}}",
+      "flash": "Flash",
+      "voucherFallback": "Kupon",
+      "expires": "Udløber {date}",
+      "redeemed": "{count} indløst",
+      "noResultsTitle": "Ingen resultater fundet",
+      "noResultsQuery": "Ingen kuponer matcher \"{query}\". Prøv at justere dine filtre.",
+      "noResultsHint": "Prøv at søge efter en bestemt kupon, forhandler eller kategori."
+    }
+  },
+  "faq": {
+    "metaTitle": "Ofte stillede spørgsmål",
+    "metaDescription": "Svar på almindelige spørgsmål om køb, indløsning og administration af kuponer og gavekort — betalinger, refusioner, udløb og forhandlersupport.",
+    "title": "Ofte stillede spørgsmål",
+    "subtitle": "Find svar på almindelige spørgsmål om vores platform.",
+    "categories": {
+      "general": "Generelt",
+      "purchasing": "Køb og betaling",
+      "vouchers": "Kuponer og indløsning",
+      "account": "Konto og sikkerhed",
+      "merchants": "For forhandlere",
+      "loyalty": "Loyalitet og belønninger"
+    },
+    "items": {
+      "whatIs": {
+        "q": "Hvad er GiftHub?",
+        "a": "GiftHub er en markedsplads for digitale kuponer, gavekort og eventbilletter, der forbinder forhandlere med kunder. Forhandlere kan oprette og sælge digitale produkter, og kunder kan købe, give og indløse dem."
+      },
+      "isFree": {
+        "q": "Er platformen gratis at bruge?",
+        "a": "Det er gratis at browse og oprette en konto. Kunder betaler kun for de produkter, de køber. Forhandlere betaler en månedlig plan plus et transaktionsgebyr på {fee} % af kuponsalget."
+      },
+      "countries": {
+        "q": "Hvilke lande understøttes?",
+        "a": "Vi understøtter forhandlere og kunder i hele EU med {currencies} valutaer og {languages} sprog."
+      },
+      "howToBuy": {
+        "q": "Hvordan køber jeg en kupon?",
+        "a": "Gennemse de tilgængelige kuponer, klik på \"Køb\", og gennemfør betalingen via Stripe. Din kupon vises i din pung, straks efter du har betalt."
+      },
+      "paymentMethods": {
+        "q": "Hvilke betalingsmetoder accepteres?",
+        "a": "Betalinger behandles sikkert af Stripe. De betalingsmetoder, der er tilgængelige for dit køb, vises ved checkout."
+      },
+      "refund": {
+        "q": "Kan jeg få pengene tilbage?",
+        "a": "Refusionspolitikker fastsættes af den enkelte forhandler. Tjek kuponens detaljeside for den konkrete refusionspolitik, før du køber."
+      },
+      "howToRedeem": {
+        "q": "Hvordan indløser jeg en kupon?",
+        "a": "Åbn din pung, vælg kuponen, og vis QR-koden til forhandleren. Forhandleren scanner den for at bekræfte indløsningen. Du kan også indløse ved at indtaste en kode manuelt."
+      },
+      "expiry": {
+        "q": "Hvad sker der, når en kupon udløber?",
+        "a": "Udløbne kuponer kan ikke indløses. Du får en notifikation, inden de udløber. Tjek udløbsdatoerne i din pung."
+      },
+      "gift": {
+        "q": "Kan jeg give en kupon i gave?",
+        "a": "Ja! Vælg \"Send som gave\", når du køber, og indtast modtagerens e-mail. Modtageren får kuponen med en personlig besked."
+      },
+      "twoFactor": {
+        "q": "Hvordan aktiverer jeg totrinsbekræftelse?",
+        "a": "Gå til Indstillinger → Sikkerhed → Totrinsbekræftelse. Du kan konfigurere TOTP (Google Authenticator) eller bruge adgangsnøgler (biometri)."
+      },
+      "biometrics": {
+        "q": "Kan jeg logge ind med biometri?",
+        "a": "Ja! Vi understøtter adgangsnøgler — log ind med Face ID, fingeraftryk eller Windows Hello. Konfigurer det under Indstillinger → Sikkerhed."
+      },
+      "deleteAccount": {
+        "q": "Hvordan sletter jeg min konto?",
+        "a": "Gå til Indstillinger → Privatliv → Slet konto. Alle dine data slettes inden for 30 dage i henhold til vores GDPR-politik. Du kan eksportere dine data først."
+      },
+      "startSelling": {
+        "q": "Hvordan begynder jeg at sælge?",
+        "a": "Registrer dig som forhandler, gennemfør onboardingen, og opret din første kupon. Du kan begynde at sælge, så snart din profil er godkendt."
+      },
+      "fees": {
+        "q": "Hvad er platformens gebyrer?",
+        "a": "Efter en gratis prøveperiode på {trialDays} dage koster planerne {starter} {starterPrice}, {pro} {proPrice} eller {scale} {scalePrice} pr. måned (årlig betaling: 2 måneder gratis) plus et transaktionsgebyr på {fee} % af kuponsalget, som trækkes fra udbetalingen."
+      },
+      "integrations": {
+        "q": "Kan jeg integrere med mine eksisterende systemer?",
+        "a": "Ja! Vi tilbyder webhooks (notifikationer om hændelser i realtid), API-nøgler (programmatisk adgang) og integrationer med Zapier/Slack/Discord."
+      },
+      "trackSales": {
+        "q": "Hvordan følger jeg mit salg?",
+        "a": "Dit forhandlerdashboard viser analyser i realtid, herunder omsætning, indløsninger, kundeindsigt og AI-drevne forespørgsler på almindeligt sprog (\"vis mig sidste uges omsætning\")."
+      },
+      "loyalty": {
+        "q": "Hvordan fungerer loyalitetsprogrammet?",
+        "a": "Optjen point ved at handle, tjekke ind dagligt, anbefale venner og skrive anmeldelser. Point låser op for niveauer (Bronze → Sølv → Guld → Platin → Diamant) med stigende fordele."
+      },
+      "badges": {
+        "q": "Hvad er badges og streaks?",
+        "a": "Badges er præstationer, du optjener for milepæle (første køb, 10 anbefalinger osv.). Streaks tæller dage i træk med aktivitet og belønner vedholdenhed."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Kontakt os",
+    "metaDescription": "Kontakt GiftHub-teamet — spørgsmål om dine kuponer, onboarding af forhandlere, fakturering eller partnerskaber.",
+    "title": "Kontakt os",
+    "subtitle": "Har du et spørgsmål? Vi vil meget gerne høre fra dig.",
+    "email": "E-mail",
+    "assistantTitle": "Automatisk assistent",
+    "assistantText": "Hurtige svar om kuponer og din konto via chatknappen i hjørnet. Den er automatisk, ikke et menneske.",
+    "name": "Navn",
+    "subject": "Emne",
+    "message": "Besked",
+    "sent": "Beskeden er sendt! Vi vender tilbage hurtigst muligt.",
+    "unavailableWithEmail": "Kontaktformularen er ikke tilgængelig lige nu. Skriv til os på {email}.",
+    "unavailable": "Kontaktformularen er ikke tilgængelig lige nu. Prøv igen senere.",
+    "error": "Kunne ikke sende. Prøv igen om et øjeblik.",
+    "sending": "Sender...",
+    "send": "Send besked"
+  },
+  "leaderboardPage": {
+    "metaTitle": "Topforhandlere",
+    "metaDescription": "De forhandlere med flest kuponindløsninger på GiftHub de seneste 30 dage",
+    "title": "Topforhandlere",
+    "subtitle": "Flest kuponindløsninger de seneste 30 dage",
+    "rank": "Nr. {rank}",
+    "redemptions": "{count, plural, one {<num>#</num><label>indløsning</label>} other {<num>#</num><label>indløsninger</label>}}",
+    "empty": "Ingen indløsninger de seneste 30 dage endnu, så der er ingen rangliste at vise.",
+    "browseCampaigns": "Gennemse aktive kampagner"
+  },
+  "ui": {
+    "close": "Luk",
+    "more": "Mere",
+    "loading": "Indlæser...",
+    "breadcrumb": {
+      "label": "brødkrumme"
+    },
+    "pagination": {
+      "label": "sideinddeling",
+      "previousAria": "Gå til forrige side",
+      "previous": "Forrige",
+      "nextAria": "Gå til næste side",
+      "next": "Næste",
+      "morePages": "Flere sider"
+    },
+    "toast": {
+      "dismiss": "Afvis notifikation"
+    },
+    "calendar": {
+      "previousMonth": "Gå til forrige måned",
+      "nextMonth": "Gå til næste måned"
+    },
+    "datePicker": {
+      "placeholder": "Vælg en dato"
+    },
+    "combobox": {
+      "placeholder": "Vælg mulighed...",
+      "empty": "Ingen mulighed fundet.",
+      "search": "Søg..."
+    },
+    "searchInput": {
+      "clear": "Ryd søgning"
+    },
+    "searchResults": {
+      "empty": "Ingen resultater fundet",
+      "noResultsFor": "Ingen resultater for \"{query}\". Prøv andre søgeord."
+    },
+    "commandPalette": {
+      "placeholder": "Søg...",
+      "noResults": "Ingen resultater fundet",
+      "toOpen": "for at åbne",
+      "other": "Andet",
+      "hostPlaceholder": "Hvor vil du hen?",
+      "categories": {
+        "navigate": "Navigér",
+        "discover": "Opdag",
+        "account": "Konto"
+      },
+      "items": {
+        "home": {
+          "label": "Forside",
+          "description": "Startside"
+        },
+        "app": {
+          "label": "Mit dashboard",
+          "description": "Dine kuponer, din pung og din aktivitet"
+        },
+        "vouchers": {
+          "label": "Mine kuponer"
+        },
+        "wallet": {
+          "label": "Pung",
+          "description": "Kreditsaldi"
+        },
+        "gifts": {
+          "label": "Gaver",
+          "description": "Gennemse og send gaver"
+        },
+        "campaigns": {
+          "label": "Kampagner",
+          "description": "Aktive kuponkampagner"
+        },
+        "hub": {
+          "label": "Forhandleroversigt",
+          "description": "Gennemse forhandlere"
+        },
+        "deals": {
+          "label": "Tilbud"
+        },
+        "settings": {
+          "label": "Indstillinger",
+          "description": "Konto og præferencer"
+        },
+        "admin": {
+          "label": "Administration",
+          "description": "Platformadministration"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Bekræft",
+      "cancel": "Annuller"
+    },
+    "dataTable": {
+      "noResults": "Ingen resultater."
+    },
+    "fileUpload": {
+      "maxFiles": "Højst {maxFiles, plural, one {# fil} other {# filer}} tilladt",
+      "tooLarge": "Filerne skal være mindre end {maxSize} MB",
+      "dropHere": "Slip filerne her",
+      "dragDrop": "Træk og slip filer her",
+      "browseHint": "eller klik for at gennemse (maks. {maxSize} MB pr. fil)",
+      "select": "Vælg filer",
+      "remove": "Fjern {name}"
+    },
+    "imageUpload": {
+      "notImage": "Upload en billedfil",
+      "tooLarge": "Billedet skal være mindre end {maxSize} MB",
+      "previewAlt": "Forhåndsvisning",
+      "remove": "Fjern billede",
+      "dropHere": "Slip billedet her",
+      "upload": "Upload billede",
+      "hint": "PNG, JPG, GIF op til {maxSize} MB",
+      "select": "Vælg billede"
+    },
+    "statsCard": {
+      "open": "Åbn"
+    },
+    "cashbackBadge": {
+      "label": "{percent} % cashback"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Aktiv",
+        "redeemed": "Brugt",
+        "expired": "Udløbet"
+      },
+      "redeem": "Indløs",
+      "expires": "Udløber {date}",
+      "merchantAlt": "Forhandler"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Log ind",
+      "register": "Opret konto",
+      "resetPassword": "Nulstil adgangskode"
+    },
+    "error": {
+      "title": "Noget gik galt",
+      "fallback": "Der opstod en uventet fejl.",
+      "tryAgain": "Prøv igen"
+    },
+    "login": {
+      "welcome": "Velkommen tilbage",
+      "subtitle": "Log ind på din GiftHub-konto",
+      "tabMagic": "Magisk link",
+      "tabPassword": "Adgangskode",
+      "tabSocial": "Socialt",
+      "tabPasskey": "Adgangsnøgle",
+      "emailLabel": "E-mailadresse",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Adgangskode",
+      "sendCode": "Send loginkode",
+      "sending": "Sender…",
+      "signIn": "Log ind",
+      "signingIn": "Logger ind…",
+      "otpTitle": "Tjek din e-mail!",
+      "otpDesc": "Vi har sendt en 6-cifret kode til <b>{email}</b>",
+      "otpLabel": "Indtast kode",
+      "verify": "Bekræft kode",
+      "verifying": "Bekræfter…",
+      "resend": "Send kode igen",
+      "backToEmail": "Tilbage",
+      "orContinueWith": "Eller fortsæt med",
+      "continueWith": "Fortsæt med {provider}",
+      "errorWrongCode": "Ugyldig eller udløbet kode. Prøv igen.",
+      "errorWrongPass": "Ugyldig e-mail eller adgangskode.",
+      "errorGeneric": "Noget gik galt. Prøv igen.",
+      "errorEmailUnavailable": "Login via e-mail er ikke tilgængeligt lige nu — brug din adgangskode.",
+      "errorCredentialsSignin": "Forkert e-mail eller adgangskode.",
+      "errorAuthGeneric": "Login mislykkedes. Prøv igen.",
+      "backToHome": "Tilbage til forsiden",
+      "socialDesc": "Log ind med det samme med din foretrukne konto",
+      "noAccount": "Har du ikke en konto?",
+      "createAccount": "Opret konto",
+      "noAccountSub": "Når du logger ind med en kode, oprettes der en konto til en ny e-mail.",
+      "registered": "Kontoen er oprettet — log ind med din e-mail og adgangskode.",
+      "magicDesc": "Vi sender en 6-cifret kode til din e-mail. Ingen adgangskode nødvendig.",
+      "passwordDesc": "Log ind med din e-mail og adgangskode.",
+      "forgotPassword": "Glemt adgangskode?",
+      "demo": "Demokonti",
+      "demoRole": {
+        "platformAdmin": "Platformadministrator",
+        "merchantAdmin": "Forhandleradministrator",
+        "merchantStaff": "Forhandlerpersonale",
+        "endUser": "Slutbruger"
+      },
+      "passkeyDesc": "Log ind med det samme med dit fingeraftryk, ansigt eller din sikkerhedsnøgle.",
+      "passkeyButton": "Log ind med adgangsnøgle",
+      "passkeyAuthenticating": "Godkender…"
+    },
+    "register": {
+      "backToHome": "Tilbage til forsiden",
+      "title": "Opret din konto",
+      "subtitle": "Begynd at opdage og administrere kuponer",
+      "nameLabel": "Fulde navn",
+      "namePlaceholder": "Jens Hansen",
+      "emailLabel": "E-mailadresse",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Adgangskode",
+      "passwordPlaceholder": "Mindst 8 tegn",
+      "submit": "Opret konto",
+      "submitting": "Opretter konto...",
+      "haveAccount": "Har du allerede en konto?",
+      "signIn": "Log ind",
+      "errorWeak": "Adgangskoden er for svag. Vælg en stærkere adgangskode.",
+      "errorInvalid": "Ugyldigt input.",
+      "errorFallback": "Noget gik galt.",
+      "errorGeneric": "Noget gik galt. Prøv igen."
+    },
+    "resetPassword": {
+      "title": "Nulstil din adgangskode",
+      "subtitle": "Indtast din nye adgangskode nedenfor",
+      "newPassword": "Ny adgangskode",
+      "confirmPassword": "Bekræft adgangskode",
+      "submit": "Angiv ny adgangskode",
+      "submitting": "Nulstiller…",
+      "success": "Adgangskoden er nulstillet!",
+      "successDesc": "Din adgangskode er opdateret. Du kan nu logge ind.",
+      "goToLogin": "Gå til login",
+      "errorMismatch": "Adgangskoderne stemmer ikke overens",
+      "errorShort": "Adgangskoden skal være på mindst 8 tegn",
+      "errorWeak": "Adgangskoden er for svag. Vælg en stærkere adgangskode.",
+      "errorExpired": "Dette nulstillingslink er ugyldigt eller udløbet.",
+      "forgotTitle": "Har du glemt din adgangskode?",
+      "forgotSubtitle": "Indtast din e-mail, så sender vi dig et link til nulstilling",
+      "emailLabel": "E-mailadresse",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Send nulstillingslink",
+      "sending": "Sender…",
+      "linkSent": "Tjek din e-mail!",
+      "linkSentDesc": "Hvis der findes en konto med den e-mail, har vi sendt et nulstillingslink.",
+      "backToLogin": "Tilbage til login"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Velkommen om bord!",
+      "joined": "Du er nu med i {orgName}. Omdirigerer…",
+      "accepted": "Invitationen er accepteret. Omdirigerer…",
+      "problemTitle": "Problem med invitationen",
+      "errorNotAccepted": "Invitationen kunne ikke accepteres.",
+      "errorGeneric": "Noget gik galt. Prøv igen.",
+      "goToOrgs": "Gå til dine organisationer",
+      "invitedTitle": "Du er blevet inviteret",
+      "invitedDesc": "Accepter invitationen for at blive medlem af organisationen. Du bliver muligvis bedt om at logge ind først.",
+      "accepting": "Accepterer…",
+      "accept": "Accepter invitation"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Gavekort og gaver",
+      "description": "Gennemse og køb digitale gavekort fra lokale forhandlere. Send en gennemtænkt gave på få sekunder — leveret via e-mail og kan indløses i butikken eller online."
+    },
+    "publicCard": {
+      "defaultHeadline": "Gavekort",
+      "imageAlt": "Gavekort",
+      "logoAlt": "Brandlogo",
+      "merchant": "Forhandler: {name}",
+      "merchantFallback": "Forhandler",
+      "code": "Kode: {code}",
+      "validUntil": "Gyldigt indtil: {date}",
+      "noExpiry": "Udløber ikke",
+      "showQr": "Vis denne QR-kode til personalet for at indløse gavekortet.",
+      "statusMessage": "Dette gavekort er {status}.",
+      "status": {
+        "active": "aktivt",
+        "redeemed": "indløst",
+        "expired": "udløbet",
+        "cancelled": "annulleret"
+      }
+    },
+    "purchase": {
+      "title": "Køb gavekort",
+      "loading": "Indlæser...",
+      "notAvailable": "Gavekortet er ikke tilgængeligt",
+      "defaultHeadline": "Gavekort",
+      "imageAlt": "Gavekort",
+      "logoAlt": "Brand",
+      "fromMerchant": "fra {merchant}",
+      "form": {
+        "recipientEmail": "Modtagerens e-mail (valgfri)",
+        "recipientEmailPlaceholder": "Send gavekortet til denne e-mail",
+        "recipientName": "Modtagerens navn",
+        "recipientNamePlaceholder": "Til",
+        "senderName": "Dit navn",
+        "senderNamePlaceholder": "Fra",
+        "message": "Personlig besked (valgfri)",
+        "messagePlaceholder": "Tilføj en personlig besked..."
+      },
+      "total": "I alt:",
+      "processing": "Behandler...",
+      "buy": "Køb gavekort",
+      "errors": {
+        "notFound": "Gavekortet blev ikke fundet eller kan ikke købes",
+        "loadFailed": "Kunne ikke indlæse gavekortet",
+        "purchaseFailed": "Købet mislykkedes",
+        "generic": "Noget gik galt. Prøv igen."
+      }
+    },
+    "product": {
+      "notFound": "Gaven blev ikke fundet",
+      "backToHub": "Tilbage til gaver",
+      "imageAlt": "{title} {index}",
+      "featured": "Udvalgt",
+      "lowStock": "Kun {count} tilbage på lager",
+      "buyNow": "Køb nu",
+      "addToCart": "Læg i kurv",
+      "saveToWishlist": "Gem på ønskelisten",
+      "removeFromWishlist": "Fjern fra ønskelisten",
+      "share": "Del denne gave",
+      "upsellsTitle": "Du vil måske også kunne lide"
+    },
+    "claim": {
+      "metaTitle": "Hent din gave",
+      "alreadyClaimedTitle": "Gaven er allerede hentet",
+      "alreadyClaimedBody": "Denne gave er allerede blevet hentet.",
+      "expiredTitle": "Gaven er udløbet",
+      "expiredBody": "Beklager, dette gavelink er udløbet.",
+      "title": "Du har fået en gave!",
+      "signedInHint": "Klik nedenfor for at føje kuponen til din pung.",
+      "signedOutHint": "Log ind for at hente kuponen.",
+      "claimButton": "Hent gave",
+      "signInButton": "Log ind for at hente"
+    },
+    "error": {
+      "title": "Kunne ikke indlæse gaver",
+      "fallback": "Der opstod en uventet fejl under indlæsning af gaver.",
+      "retry": "Prøv igen"
+    },
+    "hub": {
+      "title": "Gaver",
+      "subtitle": "Find den perfekte gave til enhver lejlighed",
+      "loadError": "Gaverne kunne ikke indlæses",
+      "retry": "Prøv igen",
+      "emptyCatalog": {
+        "title": "Der er ingen gaver endnu",
+        "body": "I mellemtiden er kuponer fra lokale forhandlere også gode gaver."
+      },
+      "noMatches": "Ingen gaver matcher disse filtre",
+      "clearFilters": "Ryd filtre",
+      "browseCampaigns": "Gennemse kampagner",
+      "allGifts": "Alle gaver",
+      "loadMore": "Indlæs flere"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Gavekortet blev ikke fundet",
+        "body": "QR-koden er ugyldig eller udløbet."
+      },
+      "notActive": {
+        "title": "Gavekortet er ikke aktivt endnu",
+        "body": "Dette gavekort bliver gyldigt senere."
+      },
+      "expired": {
+        "title": "Gavekortet er udløbet",
+        "body": "Dette gavekort er ikke længere gyldigt."
+      },
+      "result": {
+        "title": "Gavekort indløst",
+        "confirmed": "Indløsningen er bekræftet.",
+        "alreadyRedeemedOrCancelled": "Dette gavekort er allerede indløst eller annulleret.",
+        "alreadyRedeemedOrInvalid": "Dette gavekort er allerede indløst eller ugyldigt."
+      }
+    },
+    "qr": {
+      "error": "Kunne ikke generere QR-kode",
+      "generating": "Genererer QR...",
+      "alt": "QR-kode"
+    },
+    "wizard": {
+      "title": "AI-gavefinder",
+      "subtitle": "Fortæl os om modtageren, så finder vi den perfekte gave",
+      "steps": {
+        "recipient": "Hvem er gaven til?",
+        "occasion": "Hvad er anledningen?",
+        "budget": "Hvad er dit budget?"
+      },
+      "recipients": {
+        "partner": "Partner",
+        "friend": "Ven",
+        "parent": "Forælder",
+        "colleague": "Kollega",
+        "child": "Barn",
+        "teacher": "Lærer"
+      },
+      "occasions": {
+        "birthday": "Fødselsdag",
+        "christmas": "Jul",
+        "anniversary": "Jubilæum",
+        "thankYou": "Tak",
+        "justBecause": "Bare fordi",
+        "graduation": "Dimission"
+      },
+      "summary": {
+        "for": "Til: {recipient}",
+        "budget": "Budget: {amount}"
+      },
+      "submit": "Find perfekte gaver",
+      "error": "Kunne ikke generere anbefalinger. Prøv igen.",
+      "results": {
+        "found": "Vi fandt {count, plural, one {# gave} other {# gaver}} til dig:",
+        "empty": "Ingen matchende produkter fundet. Prøv at justere dine kriterier."
+      },
+      "startOver": "Start forfra"
+    },
+    "card": {
+      "featured": "Udvalgt",
+      "save": "Gem",
+      "unsave": "Fjern",
+      "buyNow": "Køb nu"
+    },
+    "feedSection": {
+      "viewAll": "Se alle"
+    },
+    "filters": {
+      "toggle": "Filtre",
+      "clear": "Ryd",
+      "occasion": "Anledning",
+      "persona": "Hvem er det til?",
+      "budget": "Budget",
+      "budgetUnder": "Under {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Del tilbud, og optjen belønninger"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Der opstod en uventet fejl."
+    },
+    "logoAlt": "{name}-logo",
+    "merchantFallback": "Forhandler",
+    "validUntil": "Gyldig indtil {date}",
+    "validUntilWithLimit": "Gyldig indtil {date} - Første {count, plural, one {# anvendelse} other {# anvendelser}}",
+    "offAtMerchant": "{value} rabat hos {merchant}",
+    "fields": {
+      "event": "Event",
+      "dateTime": "Dato og tid",
+      "location": "Sted",
+      "price": "Pris",
+      "status": "Status",
+      "attendee": "Deltager",
+      "usedAt": "Brugt"
+    },
+    "ticketStatus": {
+      "available": "Tilgængelig",
+      "sold": "Solgt",
+      "used": "Brugt",
+      "cancelled": "Annulleret",
+      "refunded": "Refunderet"
+    },
+    "event": {
+      "notAvailable": "Der kan ikke købes billetter til dette event.",
+      "descriptionFallback": "Vær med til dette fantastiske event!",
+      "availableTickets": "Tilgængelige billetter",
+      "soldOut": "Udsolgt",
+      "availableCount": "{count} tilgængelige",
+      "terms": "Vilkår og betingelser",
+      "soldOutTitle": "Dette event er udsolgt",
+      "soldOutDescription": "Alle billetter er solgt."
+    },
+    "eventPurchase": {
+      "title": "Køb billet",
+      "description": "Vælg en billet, og gennemfør dit køb",
+      "selectTicket": "Vælg billet",
+      "attendeeNameLabel": "Deltagerens navn (valgfrit)",
+      "attendeeNamePlaceholder": "Navnet på den person, der deltager",
+      "attendeeEmailLabel": "Deltagerens e-mail (valgfri)",
+      "attendeeEmailPlaceholder": "E-mail til levering af billetten",
+      "total": "I alt",
+      "submit": "Køb billet",
+      "noTickets": "Ingen billetter tilgængelige i øjeblikket.",
+      "checkBackLater": "Kig forbi senere, eller kontakt arrangøren.",
+      "selectTicketError": "Vælg en billet",
+      "purchaseFailed": "Kunne ikke købe billetten"
+    },
+    "ticket": {
+      "noPermission": "Du har ikke tilladelse til at se denne billet.",
+      "heading": "Billet nr. {number}",
+      "qrTitle": "QR-kode",
+      "qrDescription": "Vis denne QR-kode ved indgangen til eventet",
+      "qrAlt": "Billettens QR-kode",
+      "qrUnavailable": "QR-koden er ikke tilgængelig",
+      "ticketNumber": "Billetnummer: <strong>{number}</strong>",
+      "used": "Billetten er brugt",
+      "detailsTitle": "Billetdetaljer",
+      "detailsDescription": "Vigtige oplysninger om din billet",
+      "staffCanRedeem": "Som forhandlerpersonale kan du indløse denne billet ved eventet."
+    },
+    "redeem": {
+      "notFoundTitle": "Indløsningen blev ikke fundet",
+      "notFoundDescription": "QR-koden er ugyldig eller udløbet.",
+      "title": "Kupon indløst",
+      "alreadyRedeemed": "Denne kupon er allerede indløst.",
+      "confirmed": "Indløsningen er bekræftet."
+    },
+    "qrCheckout": {
+      "title": "QR-checkout",
+      "completeTitle": "Checkout gennemført",
+      "completeDescription": "Dit køb er bekræftet. Tjek din e-mail for detaljer.",
+      "payNow": "Betal nu",
+      "confirming": "Bekræfter..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Kuponen blev ikke fundet",
+      "notFoundDescription": "Den kupon, du leder efter, kunne ikke findes.",
+      "descriptionFallback": "Eksklusivt kupontilbud",
+      "shareText": "Se denne kupon fra {merchant}",
+      "copyCode": "Kopiér kuponkode",
+      "qrAlt": "QR-kode til kupon {code}",
+      "print": "Udskriv kupon"
+    },
+    "referralPage": {
+      "voucherFrom": "Du har fået en kupon fra <highlight>{name}</highlight>",
+      "qrAlt": "QR-kode til indløsning af kupon {code}",
+      "offAtMerchantShared": "{value} rabat hos {merchant} - Delt af en ven!"
+    },
+    "bnpl": {
+      "title": "Betal i rater",
+      "description": "Del din betaling på {amount} op i nemme månedlige rater.",
+      "perMonth": "/måned",
+      "planNoInterest": "{months}x (0 % rente)",
+      "planWithFee": "{months}x ({rate} % gebyr)",
+      "monthlyPayments": "{count, plural, one {# månedlig betaling} other {# månedlige betalinger}}",
+      "total": "I alt: {amount}",
+      "noExtraCost": "Ingen ekstra omkostninger",
+      "payNow": "Betal {amount} nu"
+    },
+    "qrPanel": {
+      "qrAlt": "QR-kode",
+      "generateFailed": "Kunne ikke generere QR-kode",
+      "placeholder": "QR-koden vises her",
+      "generating": "Genererer QR...",
+      "unavailable": "QR ikke tilgængelig",
+      "hideCode": "Skjul kode",
+      "showCode": "Vis kode",
+      "expires": "Udløber {date}",
+      "refreshNote": "Koden opdateres hvert 30. sekund"
+    },
+    "qrDownload": {
+      "success": "QR-koden er downloadet!",
+      "failed": "Kunne ikke downloade QR-koden",
+      "downloading": "Downloader...",
+      "download": "Download QR"
+    }
   }
 }
