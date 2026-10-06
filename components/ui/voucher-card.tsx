@@ -59,7 +59,7 @@ export function VoucherCard({
   const displayStatusLabel = statusLabel || t(`voucherCard.status.${statusInfo.labelKey}`)
 
   const expiryDateObj = typeof expiryDate === "string" ? new Date(expiryDate) : expiryDate
-  const formattedExpiry = expiryDateObj.toLocaleDateString(locale === "et" ? "et-EE" : "en-US", {
+  const formattedExpiry = expiryDateObj.toLocaleDateString(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",

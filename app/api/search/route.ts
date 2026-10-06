@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { logger } from '@/lib/logger';
 import { Prisma } from '@prisma/client';
-import { getCampaignCategoryId, getCampaignCategoryLabel } from '@/lib/campaign-categories';
+import { campaignCategories, getCampaignCategoryId, getCampaignCategoryLabel } from '@/lib/campaign-categories';
 
 /** Upper bound on campaign matches returned alongside the voucher page. */
 const CAMPAIGN_RESULT_LIMIT = 24;
@@ -17,10 +17,12 @@ async function searchCampaigns({
   q,
   category,
   maxPrice,
+  sort,
 }: {
   q: string;
   category: string;
   maxPrice: number;
+  sort: string;
 }) {
   const now = new Date();
   const where: Prisma.CampaignWhereInput = {
@@ -42,12 +44,35 @@ async function searchCampaigns({
   if (maxPrice > 0) {
     and.push({ OR: [{ price: { lte: maxPrice } }, { price: null }] });
   }
+  // Narrow to the category in the database before the row cap, so older
+  // matching campaigns are not crowded out by newer ones from other
+  // categories. The substring match is a superset of getCampaignCategoryId
+  // (word-start rule, category precedence); the exact filter runs below.
+  const cat = category ? campaignCategories.find((c) => c.id === category) : undefined;
+  if (cat) {
+    const terms = [...cat.keywords, ...cat.stems];
+    and.push({
+      OR: terms.flatMap((term) => [
+        { name: { contains: term, mode: 'insensitive' as const } },
+        { description: { contains: term, mode: 'insensitive' as const } },
+      ]),
+    });
+  }
   if (and.length > 0) where.AND = and;
+
+  // Same ordering choices as the voucher results, so one Sort control means
+  // the same thing for both sections.
+  const orderBy: Prisma.CampaignOrderByWithRelationInput =
+    sort === 'expiring'
+      ? { endDate: 'asc' }
+      : sort === 'popular'
+        ? { purchases: { _count: 'desc' } }
+        : { createdAt: 'desc' };
 
   const campaigns = await prisma.campaign.findMany({
     where,
-    orderBy: { createdAt: 'desc' },
-    // Over-fetch when filtering by derived category, which happens in memory.
+    orderBy,
+    // Headroom for the exact in-memory category check below.
     take: category ? CAMPAIGN_RESULT_LIMIT * 4 : CAMPAIGN_RESULT_LIMIT,
     select: {
       id: true,
@@ -234,7 +259,7 @@ export async function GET(req: NextRequest) {
         },
       }),
       prisma.voucher.count({ where: voucherWhere }),
-      includeCampaigns ? searchCampaigns({ q, category, maxPrice }) : Promise.resolve([]),
+      includeCampaigns ? searchCampaigns({ q, category, maxPrice, sort }) : Promise.resolve([]),
     ]);
 
     const results = vouchers.map((v) => ({

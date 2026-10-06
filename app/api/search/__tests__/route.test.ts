@@ -58,6 +58,26 @@ describe('GET /api/search', () => {
     expect(body.campaigns.map((c: { id: string }) => c.id)).toEqual(['c2']);
   });
 
+  it('narrows to the category in the database before the row cap', async () => {
+    await get('category=outdoor');
+    const where = campaignFindMany.mock.calls[0][0].where;
+    // Category terms are part of the query, so older matches are not cut off
+    // by newer campaigns from other categories.
+    expect(JSON.stringify(where.AND)).toContain('hike');
+    expect(JSON.stringify(where.AND)).toContain('matk');
+  });
+
+  it('orders campaigns by the same Sort choice as vouchers', async () => {
+    await get('sort=expiring');
+    expect(campaignFindMany.mock.calls[0][0].orderBy).toEqual({ endDate: 'asc' });
+    campaignFindMany.mockClear();
+    await get('sort=popular');
+    expect(campaignFindMany.mock.calls[0][0].orderBy).toEqual({ purchases: { _count: 'desc' } });
+    campaignFindMany.mockClear();
+    await get('');
+    expect(campaignFindMany.mock.calls[0][0].orderBy).toEqual({ createdAt: 'desc' });
+  });
+
   it('leaves campaigns out when a voucher-only filter is set', async () => {
     const body = await (await get('type=percentage')).json();
     expect(body.campaigns).toEqual([]);
