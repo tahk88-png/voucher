@@ -2602,5 +2602,1619 @@
       "downloading": "Téléchargement...",
       "download": "Télécharger le QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Gérez vos campagnes de bons.",
+      "createCampaign": "Créer une campagne",
+      "subscriptionRequired": "Abonnement requis",
+      "trialEnded": "Votre essai gratuit de 60 jours pour les campagnes est terminé. Souscrivez la formule à 9,90/mois pour créer de nouvelles campagnes.",
+      "stats": {
+        "totalTitle": "Total des campagnes",
+        "totalDescription": "Toutes les campagnes",
+        "activeTitle": "Actives",
+        "activeDescription": "En cours actuellement",
+        "paidTitle": "Achats payés",
+        "paidDescription": "Commandes finalisées",
+        "revenueTitle": "Chiffre d'affaires",
+        "revenueDescription": "Ventes de bons payés"
+      },
+      "weeklyRevenue": {
+        "title": "Chiffre d'affaires hebdomadaire",
+        "description": "Ventes payées des campagnes sur 7 jours.",
+        "series": "Chiffre d'affaires"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Pas encore de campagnes",
+        "descriptionCanCreate": "Créez une campagne pour organiser et gérer vos bons.",
+        "descriptionNeedsSubscription": "Souscrivez un abonnement pour créer de nouvelles campagnes.",
+        "action": "Créer votre première campagne"
+      },
+      "searchPlaceholder": "Rechercher des campagnes...",
+      "searchLabel": "Rechercher des campagnes",
+      "filterAll": "Toutes",
+      "status": {
+        "active": "Active",
+        "draft": "Brouillon",
+        "ended": "Terminée",
+        "paused": "En pause"
+      },
+      "noMatches": "Aucune campagne ne correspond à vos filtres.",
+      "clearFilters": "Effacer les filtres",
+      "type": {
+        "weekly": "Campagne hebdomadaire",
+        "limited": "Campagne limitée",
+        "other": "Campagne {type}"
+      },
+      "runs": "Du {start} au {end}",
+      "view": "Voir",
+      "stats": {
+        "vouchers": "Bons",
+        "paidPurchases": "Achats payés",
+        "revenue": "Chiffre d'affaires",
+        "price": "Prix"
+      },
+      "free": "Gratuit"
+    },
+    "new": {
+      "iconLetter": "C",
+      "draftNotice": "Les nouvelles campagnes sont créées en brouillon. Les clients ne les voient pas tant que vous ne les publiez pas depuis la page de la campagne."
+    },
+    "edit": {
+      "breadcrumb": "Modifier",
+      "title": "Modifier la campagne"
+    },
+    "form": {
+      "basicInfo": "Informations générales",
+      "nameLabel": "Nom de la campagne *",
+      "namePlaceholder": "Spécial fêtes",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Promotion à durée limitée",
+      "typeLabel": "Type *",
+      "typeOptions": {
+        "limited": "Ponctuelle (limitée)",
+        "weekly": "Hebdomadaire"
+      },
+      "dates": "Dates",
+      "startDate": "Date de début *",
+      "endDate": "Date de fin *",
+      "timezoneHint": "Les heures sont dans votre fuseau horaire local.",
+      "pricing": "Prix et limites",
+      "priceLabel": "Prix en {currency} (laisser vide pour des bons gratuits)",
+      "pricePreview": "Les clients paient {price}.",
+      "priceHint": "Saisissez le montant en {currency}, p. ex. 4.50 ou 4,50 pour {example}.",
+      "maxRedemptions": "Utilisations max.",
+      "maxPurchases": "Achats max.",
+      "unlimited": "Illimité",
+      "creditLabel": "Crédit parrain (%)",
+      "creditPreview": "Les parrains gagnent {percent} % du prix d'achat en crédit.",
+      "creditHint": "Part du prix d'achat versée au parrain sous forme de crédit, p. ex. 5 ou 2,5.",
+      "termsSection": "Conditions générales",
+      "termsLabel": "Conditions",
+      "termsPlaceholder": "Conditions générales de cette campagne...",
+      "saving": "Enregistrement...",
+      "saveChanges": "Enregistrer les modifications",
+      "creating": "Création...",
+      "create": "Créer la campagne",
+      "saved": "Modifications de la campagne enregistrées.",
+      "errors": {
+        "invalidDates": "Veuillez saisir une date de début et une date de fin valides.",
+        "endBeforeStart": "La date de fin doit être postérieure à la date de début.",
+        "maxRedemptions": "Le nombre max. d'utilisations doit être un nombre entier supérieur ou égal à 1.",
+        "maxPurchases": "Le nombre max. d'achats doit être un nombre entier supérieur ou égal à 1.",
+        "saveFailed": "Échec de l'enregistrement de la campagne"
+      },
+      "priceErrors": {
+        "negative": "Le prix ne peut pas être négatif.",
+        "invalid": "Le prix n'est pas un nombre valide.",
+        "wholeNumber": "Le prix doit être un nombre entier.",
+        "decimals": "Le prix peut avoir au maximum {decimals} décimales.",
+        "tooLarge": "Le prix est trop élevé."
+      },
+      "creditErrors": {
+        "negative": "Le crédit parrain ne peut pas être négatif.",
+        "invalid": "Le crédit parrain n'est pas un nombre valide.",
+        "decimals": "Le crédit parrain peut avoir au maximum {decimals} décimales.",
+        "tooLarge": "Le crédit parrain est trop élevé.",
+        "tooHigh": "Le crédit parrain ne peut pas dépasser 100 %."
+      }
+    },
+    "detail": {
+      "noDescription": "Aucune description",
+      "draftNotice": "Cette campagne est un brouillon : les clients ne peuvent pas encore la voir.",
+      "draftNoticeAdmin": "Cette campagne est un brouillon : les clients ne peuvent pas encore la voir. Publiez-la quand vous êtes prêt.",
+      "status": "Statut",
+      "type": "Type",
+      "price": "Prix",
+      "referrerCredit": "Crédit parrain",
+      "none": "Aucun",
+      "stats": {
+        "vouchers": "Bons",
+        "totalPurchases": "Total des achats",
+        "paidPurchases": "Achats payés"
+      },
+      "terms": "Conditions générales",
+      "promotion": {
+        "title": "Promotion",
+        "description": "Visibilité payante dans la newsletter hebdomadaire et les notifications."
+      },
+      "vouchers": {
+        "title": "Bons",
+        "description": "Bons générés à partir de cette campagne.",
+        "empty": "Aucun bon généré pour l'instant.",
+        "view": "Voir"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Inclure dans la newsletter hebdomadaire (payant)",
+      "notification": "Mettre en avant dans les notifications (payant)",
+      "endDate": "Date de fin de la promotion",
+      "saving": "Enregistrement...",
+      "save": "Enregistrer les paramètres de promotion",
+      "saved": "Paramètres de promotion enregistrés.",
+      "upgradeNeededTitle": "Mise à niveau requise",
+      "upgradeNeeded": "La mise en avant est incluse dans une formule supérieure. Passez à une formule supérieure dans Paramètres et facturation pour l'utiliser.",
+      "saveFailedStatus": "Impossible d'enregistrer les paramètres de promotion (erreur {status}).",
+      "saveFailedNetwork": "Impossible d'enregistrer les paramètres de promotion. Vérifiez votre connexion et réessayez."
+    },
+    "actions": {
+      "adminOnly": "Seuls les administrateurs du commerçant peuvent publier, mettre en pause ou modifier des campagnes.",
+      "edit": "Modifier",
+      "publish": {
+        "label": "Publier",
+        "title": "Publier cette campagne ?",
+        "description": "Les clients pourront immédiatement voir et acheter les bons de cette campagne.",
+        "success": "Campagne publiée. Elle est désormais visible par les clients."
+      },
+      "pause": {
+        "label": "Mettre en pause",
+        "title": "Mettre cette campagne en pause ?",
+        "description": "La campagne repasse en brouillon et reste masquée aux clients jusqu'à ce que vous la publiiez à nouveau. Les bons déjà vendus restent valables.",
+        "success": "Campagne mise en pause. Elle est masquée aux clients."
+      },
+      "end": {
+        "label": "Terminer la campagne",
+        "title": "Terminer cette campagne maintenant ?",
+        "description": "La campagne s'arrête immédiatement et ne pourra plus être publiée. Les bons déjà vendus restent valables.",
+        "success": "Campagne terminée."
+      },
+      "updateFailedStatus": "Impossible de mettre à jour la campagne (erreur {status}).",
+      "updateFailed": "Impossible de mettre à jour la campagne."
+    },
+    "generate": {
+      "open": "Générer des bons",
+      "title": "Générer des bons",
+      "descriptionPriced": "Crée des bons brouillons d'une valeur de {value} de remise, valables du {start} au {end}. Chaque bon reçoit son propre code. Ils restent masqués jusqu'à leur publication.",
+      "descriptionFree": "Cette campagne est gratuite : il n'y a donc aucun montant à attribuer aux bons. Définissez d'abord un prix pour la campagne.",
+      "countLabel": "Nombre de bons (1-100)",
+      "generating": "Génération...",
+      "submit": "Générer",
+      "invalidCount": "Veuillez saisir un nombre entier entre 1 et 100",
+      "needsPrice": "Définissez d'abord un prix pour cette campagne. Les bons générés valent le prix de la campagne.",
+      "failed": "Échec de la génération des bons",
+      "success": "{count, plural, one {# bon brouillon généré. Publiez-le} other {# bons brouillons générés. Publiez-les}} depuis la page des bons quand vous êtes prêt."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Campagnes actives",
+      "statLiveVouchers": "Bons en ligne",
+      "statRedemptions30d": "Utilisations (30 jours)"
+    },
+    "error": {
+      "title": "Une erreur s'est produite",
+      "description": "Une erreur s'est produite dans l'espace commerçant.",
+      "tryAgain": "Réessayer",
+      "backToMerchants": "Retour aux commerçants"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Vue d'ensemble",
+        "offers": "Offres",
+        "inStore": "En magasin",
+        "customers": "Clients",
+        "settings": "Paramètres"
+      },
+      "language": "Langue",
+      "opensAppArea": "Ouvre l'espace application",
+      "externalLinkTitle": "{label} (ouvre l'espace application, hors de ce commerçant)",
+      "opensOutside": "S'ouvre hors de l'espace commerçant",
+      "merchantNavigation": "Commerçant",
+      "more": "Plus",
+      "navDashboard": "Tableau de bord"
+    },
+    "dashboard": {
+      "title": "Tableau de bord commerçant",
+      "welcomeBack": "Bon retour, {name}",
+      "viewCampaigns": "Voir les campagnes",
+      "createVoucher": "Créer un bon",
+      "performanceOverview": "Aperçu des performances",
+      "performanceOverviewHint": "Activité des campagnes et utilisations en direct.",
+      "revenueAndCredits": "Chiffre d'affaires et crédits",
+      "revenueAndCreditsHint": "Ventes, crédits et engagements en cours.",
+      "performanceTrend": "Évolution des performances",
+      "performanceTrendHint": "Utilisations et chiffre d'affaires des {days} derniers jours.",
+      "rangeShort": "{days} j",
+      "revenue": "Chiffre d'affaires",
+      "chartRedemptions": "Utilisations",
+      "chartRevenue": "Chiffre d'affaires ({currency})",
+      "paidOrders": "Commandes payées",
+      "openOrdersView": "Ouvrir la vue des commandes",
+      "avgOrder": "Panier moyen",
+      "openCampaignRevenue": "Ouvrir le chiffre d'affaires des campagnes",
+      "redemptionRate": "Taux d'utilisation",
+      "openRedemptionQueue": "Ouvrir la file des utilisations",
+      "pendingConfirmation": "{count} en attente de confirmation",
+      "pendingConfirmationHint": "Utilisations en magasin en attente de votre validation.",
+      "viewRedemptions": "Voir les utilisations",
+      "actionCenter": "Centre d'actions",
+      "actionCenterHint": "Éléments prioritaires à vérifier.",
+      "allCaughtUp": "Vous êtes à jour.",
+      "open": "Ouvrir",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# utilisation en attente} other {# utilisations en attente}}",
+        "pendingRedemptionsDetail": "Confirmer les utilisations en magasin",
+        "expiringVouchers": "{count, plural, one {# bon expire bientôt} other {# bons expirent bientôt}}",
+        "expiringVouchersDetail": "Vérifier les dates de validité des bons",
+        "endingCampaigns": "{count, plural, one {# campagne se termine cette semaine} other {# campagnes se terminent cette semaine}}",
+        "endingCampaignsDetail": "Prolongez ou dupliquez vos meilleures campagnes",
+        "upcomingEvents": "{count, plural, one {# événement à venir} other {# événements à venir}}",
+        "upcomingEventsDetail": "Préparez l'enregistrement des billets et le personnel"
+      },
+      "upcomingEventsTitle": "Événements à venir",
+      "upcomingEventsHint": "Prochains événements programmés.",
+      "noUpcomingEvents": "Aucun événement à venir.",
+      "eventStatus": {
+        "published": "publié",
+        "soldOut": "complet"
+      },
+      "manageEvents": "Gérer les événements",
+      "topVouchers": "Meilleurs bons",
+      "topVouchersHint": "Offres les plus utilisées.",
+      "noTopVouchers": "Aucun bon n'a encore été utilisé. Vos bons les plus utilisés apparaîtront ici."
+    },
+    "stats": {
+      "activeVouchers": "Bons actifs",
+      "publishedVouchers": "Bons publiés",
+      "openVouchers": "Ouvrir les bons",
+      "activeCampaigns": "Campagnes actives",
+      "runningCampaigns": "Campagnes en cours",
+      "openCampaigns": "Ouvrir les campagnes",
+      "activeEvents": "Événements actifs",
+      "publishedEvents": "Événements publiés",
+      "openEvents": "Ouvrir les événements",
+      "todaysRedemptions": "Utilisations du jour",
+      "thisWeek": "Cette semaine : {count}",
+      "reviewRedemptions": "Vérifier les utilisations",
+      "ofWeekly": "de la semaine"
+    },
+    "revenue": {
+      "voucherRevenue": "Chiffre d'affaires des bons",
+      "paidVoucherSales": "Ventes de bons payés",
+      "openCampaignSales": "Ouvrir les ventes des campagnes",
+      "ticketRevenue": "Chiffre d'affaires des billets",
+      "paidTicketSales": "Ventes de billets payés",
+      "openEventSales": "Ouvrir les ventes des événements",
+      "creditsIssued": "Crédits émis",
+      "totalCreditsDistributed": "Total des crédits distribués",
+      "openReferralCredits": "Ouvrir les crédits de parrainage",
+      "outstandingLiability": "Engagements en cours",
+      "unredeemedValue": "Valeur des bons non utilisés",
+      "openVoucherLiability": "Ouvrir les engagements sur bons"
+    },
+    "recentActivity": {
+      "title": "Activité récente",
+      "empty": "Aucune activité récente",
+      "unknownUser": "Utilisateur inconnu",
+      "redeemedVoucher": "Bon utilisé - {time}",
+      "confirmed": "Confirmé",
+      "pending": "En attente"
+    },
+    "liveStats": {
+      "live": "En direct",
+      "connecting": "Connexion…",
+      "redeemedToday": "<value>{count}</value> <label>utilisés aujourd'hui</label>",
+      "pending": "<value>{count}</value> <label>en attente</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analyses",
+      "title": "Analyses",
+      "subtitle": "Suivez les performances et le chiffre d'affaires de vos bons",
+      "totalRedemptions": "Total des utilisations",
+      "confirmedRedemptions": "Utilisations confirmées",
+      "totalDiscounts": "Total des remises",
+      "givenToCustomers": "Accordées aux clients",
+      "creditsIssued": "Crédits émis",
+      "totalCreditsDistributed": "Total des crédits distribués",
+      "activeVouchers": "Bons actifs",
+      "withRedemptions": "Avec utilisations",
+      "charts": {
+        "redemptionTrends": "Tendance des utilisations (30 derniers jours)",
+        "redemptions": "Utilisations",
+        "revenue": "Chiffre d'affaires ({currency})",
+        "topPerforming": "Bons les plus performants",
+        "noRedeemed": "Aucun bon n'a encore été utilisé. Vos bons les plus performants apparaîtront ici.",
+        "byCategory": "Utilisations par catégorie",
+        "noCategoryData": "Aucune donnée par catégorie disponible"
+      }
+    },
+    "ask": {
+      "title": "Interrogez vos données",
+      "subtitle": "Posez des questions sur les données de votre activité en langage naturel",
+      "emptyTitle": "Posez n'importe quelle question sur vos données",
+      "emptyHint": "Essayez l'une des suggestions ci-dessous",
+      "placeholder": "Posez une question sur vos données...",
+      "suggestedTitle": "Questions suggérées",
+      "suggestions": {
+        "revenueLastWeek": "Quel a été mon chiffre d'affaires la semaine dernière ?",
+        "dailyRedemptionsThisMonth": "Afficher les utilisations quotidiennes ce mois-ci",
+        "topVouchersByRevenue": "Meilleurs bons par chiffre d'affaires le mois dernier",
+        "customersPurchasedLastWeek": "Combien de clients ont acheté la semaine dernière ?",
+        "referralConversionRate": "Quel est mon taux de conversion des parrainages ?",
+        "dailyRevenueTrend": "Afficher l'évolution quotidienne du chiffre d'affaires ce mois-ci",
+        "purchasesYesterday": "Combien d'achats ont été effectués hier ?",
+        "bestPerformingVouchers": "Quels sont mes bons les plus performants ?"
+      },
+      "errorFallback": "Désolé, je n'ai pas pu traiter cette question.",
+      "networkError": "Erreur réseau. Veuillez réessayer.",
+      "itemLabel": "Élément {n}"
+    },
+    "reports": {
+      "title": "Rapports financiers",
+      "subtitle": "Aperçu et export du chiffre d'affaires",
+      "downloadCsv": "Télécharger le CSV",
+      "from": "Du",
+      "to": "Au",
+      "apply": "Appliquer",
+      "totalRevenue": "Chiffre d'affaires total",
+      "platformFees": "Frais de plateforme",
+      "netRevenue": "Chiffre d'affaires net",
+      "redemptions": "Utilisations",
+      "revenueByCurrency": "Chiffre d'affaires par devise",
+      "netAndFees": "Net : {net} • Frais : {fees}",
+      "monthlyRevenue": "Chiffre d'affaires mensuel",
+      "noRevenue": "Aucune donnée de chiffre d'affaires pour cette période.",
+      "month": "Mois",
+      "vouchers": "Bons",
+      "tickets": "Billets",
+      "total": "Total"
+    },
+    "scheduled": {
+      "title": "Rapports programmés",
+      "subtitle": "Configurez des rapports automatiques par e-mail",
+      "backToReports": "← Rapports financiers",
+      "activeSchedules": "Programmations actives",
+      "loading": "Chargement...",
+      "noSchedules": "Aucune programmation configurée pour l'instant",
+      "period": {
+        "daily": "Quotidien",
+        "weekly": "Hebdomadaire",
+        "monthly": "Mensuel"
+      },
+      "reportTitle": {
+        "daily": "Rapport quotidien",
+        "weekly": "Rapport hebdomadaire",
+        "monthly": "Rapport mensuel"
+      },
+      "recipientCount": "{count, plural, one {# destinataire} other {# destinataires}}",
+      "lastSent": "Dernier envoi : {date}",
+      "nextRun": "Prochain : {date}",
+      "pause": "Mettre en pause",
+      "resume": "Reprendre",
+      "createSchedule": "Créer une programmation",
+      "frequency": "Fréquence",
+      "recipients": "Destinataires",
+      "invalidEmail": "Adresse e-mail invalide",
+      "emailAlreadyAdded": "E-mail déjà ajouté",
+      "addAtLeastOne": "Ajoutez au moins un destinataire",
+      "saved": "Programmation du rapport enregistrée",
+      "saveFailed": "Échec de l'enregistrement de la programmation",
+      "save": "Enregistrer la programmation",
+      "previewTitle": "Aperçu du rapport",
+      "previewBody": "Les rapports programmés incluent le chiffre d'affaires, le nombre d'utilisations, les meilleurs bons et les indicateurs de croissance. Ils sont envoyés sous forme d'e-mails HTML soignés à 8 h 00 UTC.",
+      "everyMorning": "Chaque matin",
+      "everyMonday": "Chaque lundi",
+      "firstOfMonth": "Le 1er de chaque mois"
+    },
+    "billing": {
+      "subscribeTo": "S'abonner à {plan}",
+      "startFailed": "Impossible de démarrer l'abonnement",
+      "portalFailed": "Impossible d'ouvrir le portail de facturation",
+      "manageBilling": "Gérer la facturation",
+      "errorTitle": "Erreur",
+      "close": "Fermer",
+      "usage": "<b>{current}</b> / {max} utilisés",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "créations de campagnes par cycle",
+        "activeCampaigns": "campagnes actives",
+        "voucherCreatesPerCycle": "créations de bons par cycle",
+        "teamMembers": "membres d'équipe"
+      },
+      "currentPlanTrial": "Formule actuelle (essai gratuit)",
+      "planChangesUnavailable": "Les changements de formule ne sont pas disponibles en ligne pour le moment.",
+      "paymentsNotSetUp": "Les paiements en ligne ne sont pas encore configurés sur cette plateforme : les formules ne peuvent donc pas être achetées ou modifiées ici. Contactez le support si vous souhaitez changer de formule.",
+      "features": {
+        "starter": {
+          "vouchers": "500 bons/mois",
+          "campaigns": "3 campagnes actives",
+          "teamMembers": "2 membres d'équipe",
+          "qrRedemption": "Utilisation par QR code",
+          "basicAnalytics": "Analyses de base"
+        },
+        "pro": {
+          "vouchers": "5 000 bons/mois",
+          "campaigns": "25 campagnes actives",
+          "teamMembers": "10 membres d'équipe",
+          "advancedAnalytics": "Analyses avancées",
+          "customDomain": "Domaine personnalisé",
+          "promoBoosts": "Mises en avant promotionnelles"
+        },
+        "scale": {
+          "vouchers": "Bons illimités",
+          "campaigns": "Campagnes illimitées",
+          "teamMembers": "Membres d'équipe illimités",
+          "everythingInPro": "Tout ce qu'inclut Pro",
+          "whiteLabel": "Prêt pour la marque blanche",
+          "prioritySupport": "Support prioritaire"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Propriétaire",
+      "admin": "Admin",
+      "finance": "Finance",
+      "marketing": "Marketing",
+      "support": "Support",
+      "partner_cashier": "Caissier",
+      "auditor": "Auditeur"
+    },
+    "orgs": {
+      "title": "Organisations B2B",
+      "subtitle": "Espaces de travail d'entreprise avec campagnes, bons et commandes.",
+      "loading": "Chargement des organisations...",
+      "loadFailed": "Impossible de charger les organisations",
+      "empty": "Aucune organisation trouvée. Demandez à un administrateur de vous inviter.",
+      "open": "Ouvrir"
+    },
+    "workspace": {
+      "fallbackName": "Organisation",
+      "subtitle": "Aperçu de l'espace de travail B2B",
+      "reports": "Rapports",
+      "audit": "Audit",
+      "partnerKeys": "Clés partenaires",
+      "backToOrgs": "Retour aux organisations",
+      "loading": "Chargement de l'espace de travail...",
+      "errors": {
+        "loadOrg": "Impossible de charger l'organisation",
+        "loadCampaigns": "Impossible de charger les campagnes",
+        "loadVouchers": "Impossible de charger les bons",
+        "loadOrders": "Impossible de charger les commandes",
+        "load": "Échec du chargement",
+        "createCampaign": "Impossible de créer la campagne",
+        "issueVouchers": "Impossible d'émettre les bons",
+        "updateCampaign": "Impossible de mettre à jour la campagne",
+        "activateCampaign": "Impossible d'activer la campagne",
+        "pauseCampaign": "Impossible de mettre la campagne en pause",
+        "archiveCampaign": "Impossible d'archiver la campagne"
+      },
+      "stats": {
+        "campaigns": "Campagnes",
+        "vouchers": "Bons",
+        "orders": "Commandes"
+      },
+      "create": {
+        "title": "Créer une campagne",
+        "name": "Nom de la campagne",
+        "value": "Valeur (unités mineures)",
+        "currency": "Devise",
+        "submit": "Créer"
+      },
+      "campaigns": {
+        "title": "Campagnes",
+        "empty": "Pas encore de campagnes.",
+        "name": "Nom",
+        "value": "Valeur",
+        "activate": "Activer",
+        "pause": "Mettre en pause",
+        "resume": "Reprendre",
+        "archive": "Archiver",
+        "issue": "Émettre {count}"
+      },
+      "recentVouchers": "Bons récents",
+      "noVouchers": "Aucun bon émis.",
+      "recentOrders": "Commandes récentes",
+      "noOrders": "Pas encore de commandes."
+    },
+    "audit": {
+      "title": "Journal d'audit",
+      "subtitle": "Suivez le cycle de vie et les modifications des bons.",
+      "entityType": "Type d'entité (bon, campagne, commande)",
+      "entityId": "ID de l'entité",
+      "loading": "Chargement de l'audit...",
+      "loadFailed": "Impossible de charger l'audit",
+      "empty": "Aucun événement."
+    },
+    "billing": {
+      "metaTitle": "Facturation de l'organisation",
+      "title": "Facturation et finances",
+      "totalPaidOrders": "Total des commandes payées",
+      "totalRevenue": "Chiffre d'affaires total",
+      "vatNumber": "Numéro de TVA",
+      "notSet": "Non renseigné",
+      "recentOrders": "Commandes récentes",
+      "noOrders": "Pas encore de commandes.",
+      "table": {
+        "date": "Date",
+        "qty": "Qté",
+        "total": "Total",
+        "status": "Statut",
+        "invoice": "Facture"
+      }
+    },
+    "keys": {
+      "title": "Clés API partenaires",
+      "subtitle": "Utilisez-les pour la validation et l'utilisation des bons chez les partenaires.",
+      "label": "Libellé de la clé (facultatif)",
+      "create": "Créer une clé",
+      "newKey": "Nouvelle clé (copiez-la maintenant)",
+      "loading": "Chargement des clés...",
+      "empty": "Pas encore de clés.",
+      "untitled": "Clé sans nom",
+      "created": "Créée le {created}",
+      "createdAndLastUsed": "Créée le {created} • Dernière utilisation le {lastUsed}",
+      "revoke": "Révoquer",
+      "errors": {
+        "load": "Impossible de charger les clés",
+        "create": "Impossible de créer la clé",
+        "revoke": "Impossible de révoquer la clé"
+      }
+    },
+    "members": {
+      "metaTitle": "Membres de l'organisation",
+      "title": "Membres",
+      "count": "{count, plural, one {# membre} other {# membres}}",
+      "pendingInvitations": "Invitations en attente",
+      "expires": "Expire le {date}"
+    },
+    "invite": {
+      "title": "Inviter un membre",
+      "emailPlaceholder": "collegue@example.com",
+      "roles": {
+        "admin": "Admin",
+        "finance": "Finance",
+        "marketing": "Marketing",
+        "support": "Support",
+        "partner_cashier": "Caissier partenaire",
+        "auditor": "Auditeur"
+      },
+      "sending": "Envoi…",
+      "submit": "Envoyer l'invitation",
+      "sent": "Invitation envoyée à {email}.",
+      "failed": "Impossible d'envoyer l'invitation. Vérifiez l'adresse e-mail et réessayez.",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "reports": {
+      "title": "Rapports",
+      "subtitle": "Rapports d'utilisations et de bons",
+      "backToWorkspace": "Retour à l'espace de travail",
+      "loadFailed": "Échec du chargement",
+      "tabs": {
+        "redemptions": "Utilisations",
+        "vouchers": "Bons"
+      },
+      "totalRedemptions": "Total des utilisations",
+      "totalAmountRedeemed": "Montant total utilisé",
+      "from": "Du",
+      "to": "Au",
+      "filter": "Filtrer",
+      "pageInfo": "Page {page} sur {totalPages} ({total} au total)",
+      "redemptionTable": {
+        "date": "Date",
+        "partner": "Partenaire",
+        "amount": "Montant",
+        "status": "Statut",
+        "location": "Lieu"
+      },
+      "noRedemptions": "Aucune utilisation trouvée.",
+      "voucherTable": {
+        "campaign": "Campagne",
+        "status": "Statut",
+        "type": "Type",
+        "value": "Valeur",
+        "remaining": "Restant",
+        "redeemed": "Utilisé",
+        "issuedTo": "Émis pour",
+        "expires": "Expire"
+      },
+      "noVouchers": "Aucun bon trouvé."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "acheteur",
+        "partner": "partenaire",
+        "platform_owner": "propriétaire de la plateforme"
+      },
+      "orgStatus": {
+        "active": "active",
+        "suspended": "suspendue"
+      },
+      "campaignStatus": {
+        "draft": "brouillon",
+        "active": "active",
+        "paused": "en pause",
+        "archived": "archivée"
+      },
+      "voucherStatus": {
+        "created": "créé",
+        "issued": "émis",
+        "active": "actif",
+        "redeemed": "utilisé",
+        "expired": "expiré",
+        "voided": "annulé"
+      },
+      "valueType": {
+        "fixed": "fixe",
+        "percent": "pourcentage"
+      },
+      "orderStatus": {
+        "draft": "brouillon",
+        "submitted": "soumise",
+        "invoiced": "facturée",
+        "paid": "payée",
+        "cancelled": "annulée",
+        "refunded": "remboursée"
+      },
+      "redemptionStatus": {
+        "approved": "approuvée",
+        "reversed": "annulée",
+        "failed": "échouée"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Événements"
+    },
+    "status": {
+      "draft": "Brouillon",
+      "published": "Actif",
+      "sold_out": "Complet",
+      "cancelled": "Annulé",
+      "ended": "Terminé"
+    },
+    "statusName": {
+      "draft": "Brouillon",
+      "published": "Publié",
+      "sold_out": "Complet",
+      "cancelled": "Annulé",
+      "ended": "Terminé"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Événement interne",
+      "concert": "Concert",
+      "workshop": "Atelier",
+      "other": "Autre"
+    },
+    "ticketStatus": {
+      "available": "Disponible",
+      "sold": "Vendu",
+      "used": "Utilisé",
+      "cancelled": "Annulé",
+      "refunded": "Remboursé"
+    },
+    "list": {
+      "subtitle": "Gérez vos événements et billets",
+      "createEvent": "Créer un événement",
+      "stats": {
+        "totalTitle": "Total des événements",
+        "totalDescription": "Tous les événements",
+        "activeTitle": "Actifs",
+        "activeDescription": "Publiés ou complets",
+        "soldTitle": "Billets vendus",
+        "soldDescription": "Sur tous les événements",
+        "revenueTitle": "Chiffre d'affaires",
+        "revenueDescription": "Ventes de billets payés"
+      },
+      "empty": {
+        "title": "Pas encore d'événements",
+        "description": "Créez un événement pour vendre des billets et gérer les participants.",
+        "cta": "Créer votre premier événement"
+      },
+      "card": {
+        "date": "Date :",
+        "location": "Lieu :",
+        "price": "Prix :",
+        "tickets": "Billets :",
+        "sold": "{sold} / {capacity} vendus",
+        "free": "Gratuit",
+        "view": "Voir",
+        "edit": "Modifier"
+      },
+      "weeklyRevenue": {
+        "title": "Chiffre d'affaires hebdomadaire des billets",
+        "description": "Ventes de billets payés sur 7 jours.",
+        "series": "Chiffre d'affaires"
+      }
+    },
+    "detail": {
+      "noDescription": "Aucune description",
+      "edit": "Modifier",
+      "status": "Statut",
+      "type": "Type",
+      "eventDate": "Date de l'événement",
+      "price": "Prix",
+      "free": "Gratuit",
+      "totalTickets": "Total des billets",
+      "sold": "Vendus",
+      "available": "Disponibles",
+      "location": "Lieu",
+      "terms": "Conditions générales",
+      "ticketsTitle": "Billets",
+      "ticketsDescription": "Billets de cet événement",
+      "noTickets": "Aucun billet généré pour l'instant.",
+      "view": "Voir",
+      "redeem": "Utiliser"
+    },
+    "form": {
+      "basicInfo": "Informations générales",
+      "name": "Nom de l'événement *",
+      "description": "Description",
+      "descriptionPlaceholder": "Décrivez votre événement...",
+      "type": "Type d'événement *",
+      "typeAria": "Type d'événement",
+      "dateTime": "Date et heure",
+      "eventDate": "Date de l'événement *",
+      "eventTime": "Heure de l'événement *",
+      "endDate": "Date de fin (facultatif)",
+      "endTime": "Heure de fin (facultatif)",
+      "location": "Lieu",
+      "locationName": "Nom du lieu",
+      "locationPlaceholder": "Grande salle, scène extérieure",
+      "locationPlaceholderExample": "p. ex. Grande salle, scène extérieure",
+      "address": "Adresse complète",
+      "addressPlaceholder": "Rue, ville, pays",
+      "ticketDetails": "Détails des billets",
+      "maxCapacity": "Capacité max. (billets) *",
+      "maxCapacityLong": "Capacité max. (nombre de billets) *",
+      "pricePerTicketCurrency": "Prix par billet ({currency})",
+      "pricePerTicket": "Prix par billet",
+      "pricePlaceholderFree": "0,00 (gratuit)",
+      "priceHint": "Laissez vide pour des billets gratuits. P. ex. 12.50 ou 12,50 pour {example}.",
+      "currency": "Devise *",
+      "terms": "Conditions générales",
+      "termsPlaceholder": "Conditions de l'événement, politique de remboursement, etc.",
+      "ticketPrice": "Prix du billet",
+      "endBeforeStart": "L'heure de fin doit être postérieure à l'heure de début.",
+      "cancel": "Annuler"
+    },
+    "create": {
+      "submit": "Créer l'événement",
+      "submitting": "Création..."
+    },
+    "edit": {
+      "loading": "Chargement...",
+      "notFound": "Événement introuvable.",
+      "back": "Retour à l'événement",
+      "title": "Modifier l'événement",
+      "subtitle": "Mettez à jour les détails de votre événement.",
+      "submit": "Enregistrer les modifications",
+      "submitting": "Enregistrement..."
+    },
+    "publish": {
+      "confirm": "Publier cet événement ? Il sera visible publiquement et les billets pourront être achetés.",
+      "confirmLabel": "Publier",
+      "failed": "Échec de la publication de l'événement",
+      "success": "Événement publié !",
+      "published": "Publié",
+      "cannotPublish": "Publication impossible",
+      "button": "Publier l'événement",
+      "publishing": "Publication..."
+    },
+    "generate": {
+      "invalidCount": "Veuillez saisir un nombre entre 1 et 1000",
+      "tooMany": "Impossible de générer {count} billets. Maximum disponible : {max}",
+      "failed": "Échec de la génération des billets",
+      "success": "{count, plural, one {# billet généré} other {# billets générés}} !",
+      "open": "Générer des billets",
+      "title": "Générer des billets",
+      "description": "Créez des billets pour cet événement",
+      "countLabel": "Nombre de billets (max. : {max})",
+      "cancel": "Annuler",
+      "submit": "Générer",
+      "submitting": "Génération..."
+    },
+    "redeem": {
+      "title": "Valider un billet",
+      "subtitle": "Scannez le QR code ou saisissez le numéro du billet",
+      "back": "Retour à l'événement",
+      "scanTitle": "Scanner un billet",
+      "scanDescription": "Saisissez le jeton QR ou le numéro du billet",
+      "tokenLabel": "Jeton QR / Numéro du billet",
+      "tokenPlaceholder": "Saisissez le jeton QR ou le numéro du billet",
+      "scan": "Scanner",
+      "notFound": "Billet introuvable",
+      "found": "Billet trouvé",
+      "number": "Numéro :",
+      "event": "Événement :",
+      "status": "Statut :",
+      "attendee": "Participant :",
+      "redeemDescription": "Finalisez la validation",
+      "locationLabel": "Lieu (facultatif)",
+      "locationPlaceholder": "p. ex. Entrée principale, Porte A",
+      "submit": "Valider le billet",
+      "submitting": "Validation...",
+      "failed": "Échec de la validation du billet",
+      "cannotRedeem": "Ce billet ne peut pas être validé. Statut : {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Tableau de bord commerçant",
+      "vouchersTitle": "Gérer les bons"
+    },
+    "sidebar": {
+      "title": "Commerçant",
+      "subtitle": "Console GiftHub",
+      "openMenu": "Ouvrir le menu",
+      "nav": {
+        "overview": "Vue d'ensemble",
+        "vouchers": "Bons",
+        "giftCards": "Cartes cadeaux",
+        "credits": "Crédits",
+        "brand": "Marque"
+      }
+    },
+    "overview": {
+      "title": "Tableau de bord commerçant",
+      "notConnected": "Vous n'êtes encore associé à aucun commerçant."
+    },
+    "noAccess": {
+      "title": "Aucun accès commerçant",
+      "overviewHint": "Demandez à un administrateur commerçant de vous inviter, ou créez un compte commerçant pour commencer.",
+      "creditsHint": "Associez-vous à un compte commerçant pour voir le chiffre d'affaires et les versements.",
+      "vouchersHint": "Associez-vous à un compte commerçant pour gérer les bons.",
+      "exploreCampaigns": "Découvrir les campagnes"
+    },
+    "brand": {
+      "title": "Paramètres de marque",
+      "description": "Personnalisez l'apparence de votre marque sur vos bons",
+      "logoHeading": "Logo",
+      "logoHint": "Importez le logo de votre commerce (recommandé : 200x200 px, PNG ou SVG).",
+      "logoPreviewAlt": "Aperçu du logo",
+      "uploadLogo": "Importer un logo",
+      "colorHeading": "Couleur de marque",
+      "colorHint": "Définissez la couleur principale de votre marque pour les bons et les boutons.",
+      "colorLabel": "Couleur",
+      "colorHexLabel": "Valeur hexadécimale de la couleur de marque",
+      "save": "Enregistrer les modifications",
+      "previewHeading": "Aperçu",
+      "previewHint": "Voyez comment votre marque apparaît sur les bons.",
+      "sampleMerchant": "Votre commerce",
+      "sampleTitle": "-20 % sur votre prochain achat",
+      "sampleDescription": "Valable sur tous les articles. Non cumulable avec d'autres offres."
+    },
+    "credits": {
+      "availableBalance": "Solde disponible",
+      "availableBalanceHint": "Prêt pour le versement",
+      "pendingRevenue": "Chiffre d'affaires en attente",
+      "pendingRevenueHint": "En cours de traitement",
+      "recentRevenue": "Chiffre d'affaires récent",
+      "ticketSale": "Vente de billet",
+      "voucherSale": "Vente de bon",
+      "noRevenue": "Aucun chiffre d'affaires enregistré pour l'instant",
+      "payoutRequests": "Demandes de versement",
+      "noPayoutRequests": "Aucune demande de versement pour l'instant",
+      "requestPayoutHeading": "Demander un versement",
+      "minimumPayout": "Montant minimum de versement : {amount}",
+      "submitting": "Envoi...",
+      "requestPayout": "Demander un versement",
+      "requestSubmitted": "Demande de versement envoyée",
+      "requestFailed": "Échec de la demande de versement",
+      "status": {
+        "paid": "payé",
+        "pending": "en attente",
+        "requested": "demandé",
+        "completed": "terminé",
+        "failed": "échoué"
+      }
+    },
+    "newVoucher": {
+      "title": "Créer un bon",
+      "description": "Concevez et configurez votre nouvelle campagne de bons",
+      "detailsHeading": "Détails du bon",
+      "titleLabel": "Titre",
+      "titlePlaceholder": "p. ex. -20 % sur votre prochain achat",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Valable sur tous les articles. Non cumulable avec d'autres offres.",
+      "expiryDateLabel": "Date d'expiration",
+      "weeklyLabel": "Drop hebdomadaire",
+      "weeklyHint": "Disponibilité hebdomadaire à durée limitée",
+      "weeklyAria": "Drop hebdomadaire - Disponibilité hebdomadaire à durée limitée",
+      "referralLabel": "Activer le crédit de parrainage",
+      "referralHint": "Les utilisateurs gagnent du crédit lorsque leurs amis utilisent le bon",
+      "referralAria": "Activer le crédit de parrainage - Les utilisateurs gagnent du crédit lorsque leurs amis utilisent le bon",
+      "brandColorLabel": "Couleur de marque",
+      "brandColorHexLabel": "Valeur hexadécimale de la couleur de marque",
+      "saveDraft": "Enregistrer le brouillon",
+      "createAndPublish": "Créer et publier",
+      "previewHeading": "Aperçu",
+      "sampleMerchant": "Votre commerce",
+      "sampleTitle": "Titre du bon",
+      "sampleDescription": "La description du bon apparaîtra ici"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "La page publique est disponible une fois le bon publié.",
+    "list": {
+      "metaTitle": "Bons",
+      "subtitle": "Gérez et créez des bons",
+      "bulkImport": "Import CSV en masse",
+      "stats": {
+        "totalTitle": "Total des bons",
+        "totalDescription": "Tous les bons créés",
+        "activeTitle": "Actifs",
+        "activeDescription": "Bons publiés",
+        "draftsTitle": "Brouillons",
+        "draftsDescription": "Pas encore publiés",
+        "pausedEndedTitle": "En pause / terminés",
+        "pausedEndedDescription": "{paused} en pause, {ended} terminés",
+        "redemptionsTitle": "Utilisations",
+        "redemptionsDescription": "Total des utilisations"
+      },
+      "empty": {
+        "title": "Pas encore de bons",
+        "description": "Commencez par créer votre premier bon.",
+        "action": "Créer votre premier bon"
+      },
+      "searchPlaceholder": "Rechercher par titre, préfixe de code ou ID",
+      "searchLabel": "Rechercher des bons",
+      "statusLabel": "Statut",
+      "statusAll": "Tous les statuts",
+      "status": {
+        "published": "Actif",
+        "paused": "En pause",
+        "draft": "Brouillon",
+        "ended": "Terminé",
+        "expired": "Expiré"
+      },
+      "typeLabel": "Type",
+      "typeAll": "Tous les types",
+      "sortLabel": "Trier par",
+      "sort": {
+        "date": "Date (plus récents)",
+        "name": "Nom (A-Z)",
+        "redemptions": "Utilisations"
+      },
+      "showing": "{shown} bons affichés sur {total}",
+      "clearFilters": "Effacer les filtres",
+      "noMatches": "Aucun bon ne correspond à vos filtres.",
+      "usage": "Utilisation",
+      "usageUnlimited": "Utilisation : {used} - Illimité",
+      "view": "Voir"
+    },
+    "rowActions": {
+      "pauseTitle": "Mettre le bon en pause",
+      "pauseDescription": "Voulez-vous vraiment mettre ce bon en pause ? Les utilisateurs ne pourront ni l'acheter ni l'utiliser pendant la pause.",
+      "pauseConfirm": "Mettre en pause",
+      "paused": "Bon mis en pause",
+      "pauseFailed": "Impossible de mettre le bon en pause",
+      "loadFailed": "Impossible de charger le bon",
+      "duplicateLabel": "Dupliquer le bon",
+      "duplicated": "Bon dupliqué",
+      "duplicateFailed": "Échec de la duplication"
+    },
+    "publish": {
+      "confirmMessage": "Publier ce bon ? Il sera visible publiquement.",
+      "confirmLabel": "Publier",
+      "failed": "Échec de la publication du bon",
+      "success": "Bon publié !",
+      "publishing": "Publication...",
+      "button": "Publier le bon"
+    },
+    "new": {
+      "iconLetter": "B",
+      "created": "Bon créé en brouillon. Publiez-le quand vous êtes prêt à le montrer aux clients."
+    },
+    "edit": {
+      "iconLetter": "M",
+      "subtitle": "Mettez à jour les détails et la disponibilité du bon.",
+      "updated": "Bon mis à jour",
+      "updateFailed": "Échec de la mise à jour du bon",
+      "updateFailedRetry": "Échec de la mise à jour du bon. Veuillez réessayer.",
+      "updating": "Mise à jour...",
+      "update": "Mettre à jour le bon",
+      "viewPublicPage": "Voir la page publique"
+    },
+    "form": {
+      "stepOf": "Étape {current} sur {total}",
+      "typeLabel": "Type",
+      "typeAria": "Type de bon",
+      "customersGetOff": "Les clients bénéficient de {value} de remise.",
+      "customersGetCredit": "Les clients reçoivent {value} de crédit.",
+      "percentHint": "Saisissez le pourcentage, p. ex. 15 ou 12,5.",
+      "amountHint": "Saisissez le montant en {currency}, p. ex. 4.50 ou 4,50 pour {example}.",
+      "validityHint": "Le bon est utilisable du début du premier jour jusqu'à la fin du dernier jour.",
+      "enableWeeklyDropAria": "Activer le drop hebdomadaire",
+      "weeklyDropDayAria": "Jour de la semaine du drop hebdomadaire",
+      "weeklyDropTimeAria": "Heure de début du drop hebdomadaire",
+      "headlinePlaceholder": "-15 % sur votre commande",
+      "finePrintPlaceholder": "Valable uniquement pour les nouveaux clients",
+      "previewFallbackHeadline": "Votre bon",
+      "previewValidUntil": "Valable jusqu'au {date}",
+      "errors": {
+        "discountAboveZero": "Saisissez une remise supérieure à 0 %.",
+        "valueAboveZero": "Saisissez une valeur supérieure à 0.",
+        "chooseDates": "Choisissez les dates de début et de fin du bon.",
+        "endBeforeStart": "La date de fin doit être identique ou postérieure à la date de début.",
+        "invalidValue": "Saisissez une valeur valide.",
+        "valueMustBePositive": "La valeur doit être supérieure à 0",
+        "totalLimitPositive": "La limite d'utilisation totale doit être un nombre positif",
+        "perUserLimitPositive": "La limite par utilisateur doit être un nombre positif"
+      },
+      "discountErrors": {
+        "negative": "La remise ne peut pas être négative.",
+        "invalid": "La remise n'est pas un nombre valide.",
+        "decimals": "La remise peut avoir au maximum {decimals} décimales.",
+        "tooLarge": "La remise est trop élevée.",
+        "tooHigh": "La remise ne peut pas dépasser 100 %."
+      },
+      "valueErrors": {
+        "negative": "La valeur ne peut pas être négative.",
+        "invalid": "La valeur n'est pas un nombre valide.",
+        "wholeNumber": "La valeur doit être un nombre entier.",
+        "decimals": "La valeur peut avoir au maximum {decimals} décimales.",
+        "tooLarge": "La valeur est trop élevée."
+      }
+    },
+    "bulkImport": {
+      "back": "Retour aux bons",
+      "title": "Importer des bons depuis un tableur",
+      "intro": "Importez un fichier CSV (jusqu'à 500 lignes). Chaque bon est créé en brouillon : rien n'est mis en ligne avant que vous ne le publiiez.",
+      "columns": "Colonnes",
+      "downloadSample": "Télécharger un exemple de CSV",
+      "columnRequired": "<code>{name}</code> (obligatoire) : {help}",
+      "columnOptional": "<code>{name}</code> (facultatif) : {help}",
+      "columnHelp": {
+        "name": "Le titre du bon vu par les clients, p. ex. « Offre café du printemps ».",
+        "type": "\"amount\" (remise en montant), \"percent\" (remise en pourcentage) ou \"credit\" (crédit en magasin).",
+        "value": "En euros pour amount/credit (10 ou 10.50), en pourcentage pour percent (15 ou 12.5).",
+        "currency": "Code à trois lettres, comme EUR. Par défaut, la devise de votre boutique.",
+        "valid_from": "Premier jour de validité du bon : 2026-10-01 ou 01.10.2026.",
+        "valid_to": "Dernier jour de validité du bon (il reste valable jusqu'à la fin de ce jour).",
+        "code_prefix": "Lettres au début de chaque code, p. ex. SPRING.",
+        "usage_limit": "Nombre total d'utilisations possibles. Laissez vide pour un nombre illimité."
+      },
+      "separatorHint": "Séparez les colonnes par des virgules ou des points-virgules. Si vous utilisez des virgules, mettez les montants décimaux entre guillemets (\"4,50\") ou utilisez un point (4.50).",
+      "chooseFile": "Choisir un fichier CSV",
+      "chooseDifferent": "Cliquez pour choisir un autre fichier",
+      "browse": "Cliquez pour parcourir",
+      "fixRows": "Corrigez ces lignes et importez à nouveau le fichier :",
+      "andMore": "…et {count} de plus.",
+      "readyToImport": "Prêt à importer {count, plural, one {# bon} other {# bons}} :",
+      "rowSummary": "{hasName, select, yes {{name} : } other {}}{value}, {from} – {to}{hasLimit, select, yes {, jusqu'à {limit} utilisations} other {}}",
+      "imported": "{count, plural, one {# bon importé} other {# bons importés}} en brouillon.",
+      "viewVouchers": "Voir les bons",
+      "importing": "Importation...",
+      "importCount": "Importer {count, plural, one {# bon} other {# bons}}",
+      "importVouchers": "Importer des bons",
+      "importFailedStatus": "Échec de l'importation (erreur {status}).",
+      "importFailed": "Échec de l'importation"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Bannière + CTA",
+          "description": "Titre en haut de page avec action principale."
+        },
+        "value_props": {
+          "label": "Atouts",
+          "description": "Avantages et garanties en un coup d'œil."
+        },
+        "featured_products": {
+          "label": "Produits à la une",
+          "description": "Meilleurs produits avec prix et étiquettes."
+        },
+        "featured_vouchers": {
+          "label": "Bons à la une",
+          "description": "Cartes de bons actifs pour les promotions."
+        },
+        "rental_packages": {
+          "label": "Formules de location",
+          "description": "Packs de location et tarifs à la journée."
+        },
+        "categories": {
+          "label": "Grille de catégories",
+          "description": "Parcourir par type, usage ou public."
+        },
+        "availability": {
+          "label": "Calendrier des disponibilités",
+          "description": "Disponibilités et créneaux de réservation en direct."
+        },
+        "testimonials": {
+          "label": "Témoignages",
+          "description": "Citations de clients et notes en étoiles."
+        },
+        "gallery": {
+          "label": "Galerie",
+          "description": "Photos d'ambiance ou cas d'usage."
+        },
+        "pricing": {
+          "label": "Grille tarifaire",
+          "description": "Niveaux de prix transparents."
+        },
+        "rental_terms": {
+          "label": "Conditions de location",
+          "description": "Caution, assurance et politique de retour."
+        },
+        "faq": {
+          "label": "FAQ",
+          "description": "Répondez aux objections courantes."
+        },
+        "newsletter": {
+          "label": "Inscription à la newsletter",
+          "description": "Collectez des e-mails pour vos campagnes."
+        },
+        "contact": {
+          "label": "Bloc contact",
+          "description": "Support par chat, e-mail ou téléphone."
+        },
+        "map": {
+          "label": "Carte de localisation",
+          "description": "Point de retrait ou adresse du magasin."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Barre promo",
+          "description": "Barre fixe en haut de page pour les offres et alertes."
+        },
+        "sticky_cta": {
+          "label": "CTA fixe",
+          "description": "Bouton d'action toujours visible au défilement."
+        },
+        "chat_widget": {
+          "label": "Widget de chat",
+          "description": "Chat en direct ou intégration WhatsApp."
+        },
+        "trust_badges": {
+          "label": "Badges de confiance",
+          "description": "Badges de paiement, de sécurité ou de qualité."
+        },
+        "social_proof": {
+          "label": "Pop-up de preuve sociale",
+          "description": "Activité et achats récents."
+        },
+        "countdown": {
+          "label": "Compte à rebours",
+          "description": "Crée l'urgence pour les offres limitées."
+        },
+        "reviews_widget": {
+          "label": "Widget d'avis",
+          "description": "Intégrez Google ou Trustpilot."
+        },
+        "language_switch": {
+          "label": "Sélecteur de langue",
+          "description": "Changement rapide de langue sur la page."
+        },
+        "analytics": {
+          "label": "Extraits d'analyse",
+          "description": "Emplacements de pixels de suivi."
+        },
+        "cookie_banner": {
+          "label": "Bannière cookies",
+          "description": "Bannière de consentement RGPD."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Aperçu",
+      "edit": "Modifier",
+      "previewEmpty": "Aucune section ajoutée. Passez en mode édition pour ajouter des sections.",
+      "title": "Éditeur visuel",
+      "preview": "Aperçu",
+      "empty": "Aucune section pour l'instant. Cliquez sur « Ajouter une section » ci-dessous pour commencer.",
+      "collapseSettings": "Réduire les paramètres",
+      "expandSettings": "Développer les paramètres",
+      "removeSection": "Supprimer la section {label}",
+      "sectionTitle": "Titre de la section",
+      "description": "Description",
+      "descriptionPlaceholder": "Description facultative",
+      "backgroundColor": "Couleur de fond",
+      "layoutVariant": "Variante de mise en page",
+      "layout": {
+        "default": "Par défaut",
+        "centered": "Centrée",
+        "wide": "Large",
+        "compact": "Compacte"
+      },
+      "addSection": "Ajouter une section",
+      "availableSections": "Sections disponibles",
+      "closeCatalog": "Fermer",
+      "allAdded": "Toutes les sections disponibles ont été ajoutées.",
+      "count": "{configured, plural, one {# section configurée} other {# sections configurées}} / {available} disponibles à ajouter"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Checklist de lancement de la vitrine",
+        "rental_launch": "Checklist de lancement de la page de location",
+        "campaign_ops": "Opérations hebdomadaires des campagnes",
+        "support_ops": "Checklist de préparation du support"
+      },
+      "toast": {
+        "saved": "Constructeur de pages mis à jour.",
+        "saveFailed": "Échec de l'enregistrement de la page",
+        "vibeFailed": "Échec de l'agent Vibe",
+        "layoutGenerated": "Mise en page Vibe générée.",
+        "generateFailed": "Échec de la génération de la mise en page",
+        "agentFailed": "Échec de l'agent",
+        "planGenerated": "Plan de processus généré.",
+        "runAgentFailed": "Impossible d'exécuter l'agent"
+      },
+      "noData": "Aucune donnée de constructeur de pages disponible.",
+      "title": "Constructeur de pages",
+      "intro": "Créez rapidement des pages de vitrine et de location grâce à des sections modulaires et des modules complémentaires.",
+      "introAi": "Créez rapidement des pages de vitrine et de location grâce à des sections modulaires et des modules complémentaires, avec des suggestions IA facultatives.",
+      "tabs": {
+        "store": "Vitrine",
+        "rental": "Location"
+      },
+      "details": {
+        "title": "Détails de la page",
+        "subtitle": "Titre, sous-titre et mise en page.",
+        "save": "Enregistrer",
+        "pageTitle": "Titre de la page",
+        "subtitleLabel": "Sous-titre"
+      },
+      "sections": {
+        "title": "Sections",
+        "subtitle": "Faites glisser pour réorganiser, développez pour configurer ou prévisualisez votre mise en page.",
+        "suggestLayout": "Suggérer une mise en page",
+        "suggestionsLeft": "Suggestions de mise en page IA restantes : {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Modules complémentaires",
+        "subtitle": "Widgets supplémentaires et couches marketing.",
+        "enable": "Activer le module {label}",
+        "disable": "Désactiver le module {label}"
+      },
+      "summary": {
+        "title": "Résumé en direct",
+        "line": "{title} · {sections, plural, one {# section} other {# sections}} · {addons, plural, one {# module} other {# modules}}",
+        "sectionsLabel": "Sections :",
+        "addonsLabel": "Modules :",
+        "none": "Aucun"
+      },
+      "assistant": {
+        "title": "Assistant de checklist de lancement",
+        "subtitle": "Générez des plans d'action et des checklists opérationnelles.",
+        "goalLabel": "Objectif du processus",
+        "createChecklist": "Créer une checklist",
+        "checklistsLeft": "Checklists restantes : {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Offres, locations et bons sélectionnés par {name}.",
+        "shopProducts": "Voir les produits",
+        "browseRentals": "Voir les locations"
+      },
+      "valueProps": {
+        "rewardsTitle": "Récompenses",
+        "rewardsText": "Avantages en bons intégrés.",
+        "stockTitle": "Stock fiable",
+        "stockText": "Prix et disponibilités à jour.",
+        "datesTitle": "Dates flexibles",
+        "datesText": "Planifiez vos locations facilement."
+      },
+      "viewAll": "Tout voir",
+      "seeAll": "Tout voir",
+      "products": {
+        "title": "Produits à la une",
+        "empty": "Pas encore de produits.",
+        "fallbackDescription": "Produit phare"
+      },
+      "rentals": {
+        "title": "Formules de location",
+        "empty": "Pas encore de locations.",
+        "fallbackDescription": "Location phare",
+        "perDay": "{price} / jour"
+      },
+      "categories": {
+        "title": "Parcourir les catégories",
+        "popular": "Populaires",
+        "business": "Professionnel",
+        "events": "Événements",
+        "seasonal": "Saisonnier",
+        "corporate": "Entreprises",
+        "custom": "Sur mesure"
+      },
+      "availability": {
+        "title": "Disponibilités en direct",
+        "text": "Vérifiez les disponibilités et demandez un devis en quelques minutes.",
+        "seeCalendar": "Voir le calendrier"
+      },
+      "testimonials": {
+        "title": "Ce qu'en disent les clients",
+        "smooth": "Processus fluide",
+        "lovedVoucher": "J'ai adoré le bon",
+        "support": "Excellent support"
+      },
+      "gallery": {
+        "title": "Galerie"
+      },
+      "pricing": {
+        "title": "Tarifs",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Entreprise",
+        "tierText": "Tarifs et support sur mesure"
+      },
+      "rentalTerms": {
+        "title": "Conditions de location",
+        "text": "Caution, règles de retrait et politique de retour clairement communiquées à l'avance."
+      },
+      "faq": {
+        "title": "FAQ",
+        "redeem": "Comment utiliser mon bon ?",
+        "reschedule": "Puis-je changer de date ?",
+        "support": "Proposez-vous du support ?"
+      },
+      "newsletter": {
+        "title": "Restez informé",
+        "text": "Recevez les nouvelles offres et locations dans votre boîte mail.",
+        "emailLabel": "Adresse e-mail",
+        "subscribe": "S'abonner"
+      },
+      "contact": {
+        "title": "Contact",
+        "emailUs": "Écrivez-nous à {email}"
+      },
+      "map": {
+        "text": "Lieu de retrait communiqué après la réservation."
+      },
+      "vouchers": {
+        "title": "Bons actifs",
+        "empty": "Aucun bon disponible.",
+        "voucher": "Bon",
+        "view": "Voir le bon"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Active",
+      "redeemed": "Utilisée",
+      "expired": "Expirée",
+      "cancelled": "Annulée"
+    },
+    "list": {
+      "metaTitle": "Cartes cadeaux",
+      "title": "Cartes cadeaux",
+      "subtitle": "Créez et gérez des cartes cadeaux",
+      "newGiftCard": "Nouvelle carte cadeau",
+      "stats": {
+        "total": "Total des cartes cadeaux",
+        "totalDescription": "Toutes les cartes cadeaux émises",
+        "active": "Actives",
+        "activeDescription": "Utilisables actuellement",
+        "redeemed": "Utilisées",
+        "redeemedDescription": "Utilisations finalisées",
+        "totalValue": "Valeur totale",
+        "totalValueDescription": "Valeur des cartes cadeaux émises"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Pas encore de cartes cadeaux",
+      "emptyDescription": "Créez une carte cadeau à vos couleurs, utilisable par QR.",
+      "createFirst": "Créer votre première carte cadeau",
+      "searchPlaceholder": "Rechercher par titre, code ou message",
+      "searchLabel": "Rechercher des cartes cadeaux",
+      "status": "Statut",
+      "allStatus": "Tous les statuts",
+      "sortBy": "Trier par",
+      "sortDate": "Date (plus récentes)",
+      "sortAmount": "Montant (décroissant)",
+      "showing": "{shown} sur {total, plural, one {# carte cadeau} other {# cartes cadeaux}}",
+      "clearFilters": "Effacer les filtres",
+      "noMatches": "Aucune carte cadeau ne correspond à vos filtres.",
+      "defaultHeadline": "Carte cadeau",
+      "noExpiry": "Sans expiration",
+      "validUntil": "Valable jusqu'au : {date}",
+      "redeemedOn": "Utilisée le : {date}",
+      "details": "Détails",
+      "view": "Voir"
+    },
+    "detail": {
+      "title": "Carte cadeau",
+      "code": "Code {code}",
+      "publicView": "Vue publique",
+      "newGiftCard": "Nouvelle carte cadeau",
+      "detailsTitle": "Détails de la carte cadeau",
+      "value": "Valeur",
+      "validFrom": "Valable à partir du",
+      "validTo": "Valable jusqu'au",
+      "noExpiry": "Sans expiration",
+      "redeemedAt": "Utilisée le",
+      "notRedeemed": "Non utilisée",
+      "qrTitle": "QR d'utilisation pour le personnel",
+      "qrHelp": "Le personnel peut scanner ce QR pour utiliser et invalider la carte cadeau."
+    },
+    "new": {
+      "title": "Nouvelle carte cadeau",
+      "subtitle": "Personnalisez et émettez une carte cadeau",
+      "created": "Carte cadeau créée.",
+      "cancel": "Annuler",
+      "creating": "Création...",
+      "submit": "Créer la carte cadeau",
+      "errors": {
+        "amountRequired": "Saisissez un montant supérieur à 0.",
+        "endBeforeStart": "La date de fin doit être identique ou postérieure à la date de début.",
+        "createFailed": "Échec de la création de la carte cadeau"
+      },
+      "amountErrors": {
+        "negative": "Le montant ne peut pas être négatif.",
+        "invalid": "Le montant n'est pas un nombre valide.",
+        "wholeNumber": "Le montant doit être un nombre entier.",
+        "decimals": "Le montant peut avoir au maximum {decimals} décimales.",
+        "tooLarge": "Le montant est trop élevé."
+      },
+      "priceErrors": {
+        "negative": "Le prix de vente ne peut pas être négatif.",
+        "invalid": "Le prix de vente n'est pas un nombre valide.",
+        "wholeNumber": "Le prix de vente doit être un nombre entier.",
+        "decimals": "Le prix de vente peut avoir au maximum {decimals} décimales.",
+        "tooLarge": "Le prix de vente est trop élevé."
+      },
+      "valueSection": {
+        "title": "Valeur et validité",
+        "description": "Définissez le montant, la devise et l'expiration",
+        "amount": "Montant",
+        "faceValue": "Valeur nominale : {value}.",
+        "amountHelp": "Saisissez le montant en {currency}, p. ex. 50 ou 49,90 pour {example}.",
+        "currency": "Devise",
+        "validFrom": "Valable à partir du",
+        "validTo": "Valable jusqu'au",
+        "noExpiry": "Sans date d'expiration"
+      },
+      "purchaseSection": {
+        "title": "Achat par les clients",
+        "description": "Permettez aux clients d'acheter cette carte cadeau en ligne",
+        "purchasable": "Disponible à l'achat pour les clients",
+        "salePrice": "Prix de vente (facultatif, valeur nominale par défaut)",
+        "salePricePlaceholder": "Identique au montant",
+        "customersPay": "Les clients paient {value}.",
+        "salePriceHelp": "Laissez vide pour vendre à la valeur nominale. Définissez un autre prix pour des promotions."
+      },
+      "brandingSection": {
+        "title": "Personnalisation et message",
+        "description": "Titre, message, images et couleurs",
+        "headline": "Titre",
+        "headlinePlaceholder": "Un cadeau pour les amateurs de café",
+        "message": "Message",
+        "messagePlaceholder": "Ajoutez un message personnel pour le destinataire",
+        "logoUrl": "URL du logo",
+        "imageUrl": "URL de l'image",
+        "accentColor": "Couleur d'accent",
+        "backgroundColor": "Couleur de fond",
+        "textColor": "Couleur du texte",
+        "codePrefix": "Préfixe du code (facultatif)"
+      },
+      "preview": {
+        "title": "Aperçu",
+        "defaultHeadline": "Carte cadeau",
+        "imageAlt": "Carte cadeau",
+        "logoAlt": "Logo de la marque",
+        "notePlaceholder": "Ajoutez un mot personnel"
+      }
+    },
+    "gifts": {
+      "title": "Produits cadeaux",
+      "subtitle": "Gérez vos produits dans le Gift Hub",
+      "dashboard": "Tableau de bord",
+      "confirmDelete": "Êtes-vous sûr ? Le produit sera désactivé.",
+      "stats": {
+        "total": "Total",
+        "active": "Actifs",
+        "views": "Vues",
+        "purchases": "Achats"
+      },
+      "emptyTitle": "Pas encore de produits cadeaux",
+      "emptyDescription": "Ajoutez votre premier produit pour apparaître dans le fil du Gift Hub.",
+      "emptyApiHint": "Utilisez l'API <code>{endpoint}</code> pour créer des produits.",
+      "inactive": "Inactif",
+      "featured": "À la une",
+      "views": "{count, plural, one {# vue} other {# vues}}",
+      "purchases": "{count, plural, one {# achat} other {# achats}}",
+      "conversionRate": "{rate} % de conversion",
+      "activate": "Activer",
+      "deactivate": "Désactiver",
+      "delete": "Supprimer"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Aucune donnée disponible",
+      "value": "Valeur : <strong>{value}</strong>",
+      "dismiss": "Ignorer",
+      "remove": "Supprimer",
+      "dialog": "Boîte de dialogue",
+      "close": "Fermer",
+      "loading": "Chargement"
+    },
+    "analyticsFunnel": {
+      "empty": "Aucune activité pour cette période",
+      "top": "Haut",
+      "drop": "-{rate} % de perte"
+    },
+    "periodComparison": {
+      "title": "Comparaison de périodes",
+      "loading": "Chargement...",
+      "previous": "Précédent : {value}",
+      "noData": "Aucune donnée disponible",
+      "period": {
+        "day": "Jour",
+        "week": "Semaine",
+        "month": "Mois",
+        "quarter": "Trimestre",
+        "year": "Année"
+      },
+      "metric": {
+        "revenue": "Chiffre d'affaires",
+        "redemptions": "Utilisations",
+        "purchases": "Achats",
+        "referrals": "Parrainages",
+        "customers": "Clients"
+      }
+    },
+    "trendChart": {
+      "noData": "Aucune donnée"
+    },
+    "conversionChart": {
+      "noData": "Aucune donnée disponible",
+      "previous": "préc. : {value}"
+    },
+    "funnelChart": {
+      "empty": "Aucune activité pour cette période"
+    },
+    "geoMap": {
+      "noData": "Aucune donnée disponible",
+      "value": "Valeur : <strong>{value}</strong>",
+      "country": {
+        "GB": "Royaume-Uni",
+        "IE": "Irlande",
+        "FR": "France",
+        "DE": "Allemagne",
+        "ES": "Espagne",
+        "PT": "Portugal",
+        "IT": "Italie",
+        "NL": "Pays-Bas",
+        "BE": "Belgique",
+        "CH": "Suisse",
+        "AT": "Autriche",
+        "PL": "Pologne",
+        "CZ": "République tchèque",
+        "SE": "Suède",
+        "NO": "Norvège",
+        "FI": "Finlande",
+        "DK": "Danemark",
+        "EE": "Estonie",
+        "LV": "Lettonie",
+        "LT": "Lituanie",
+        "HU": "Hongrie",
+        "RO": "Roumanie",
+        "BG": "Bulgarie",
+        "GR": "Grèce",
+        "HR": "Croatie",
+        "SK": "Slovaquie",
+        "SI": "Slovénie"
+      }
+    }
   }
 }
