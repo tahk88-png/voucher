@@ -2602,5 +2602,2383 @@
       "downloading": "Ladataan...",
       "download": "Lataa QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Hallinnoi kuponkikampanjoitasi.",
+      "createCampaign": "Luo kampanja",
+      "subscriptionRequired": "Tilaus vaaditaan",
+      "trialEnded": "Ilmainen 60 päivän kampanjakokeilusi on päättynyt. Ota käyttöön 9,90/kk-paketti luodaksesi uusia kampanjoita.",
+      "stats": {
+        "totalTitle": "Kampanjoita yhteensä",
+        "totalDescription": "Kaikki kampanjat",
+        "activeTitle": "Aktiiviset",
+        "activeDescription": "Käynnissä nyt",
+        "paidTitle": "Maksetut ostot",
+        "paidDescription": "Valmiit tilaukset",
+        "revenueTitle": "Tulot",
+        "revenueDescription": "Maksettu kuponkimyynti"
+      },
+      "weeklyRevenue": {
+        "title": "Viikoittaiset tulot",
+        "description": "Maksettu kampanjamyynti 7 päivän ajalta.",
+        "series": "Tulot"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Ei vielä kampanjoita",
+        "descriptionCanCreate": "Luo kampanja kuponkiesi järjestämistä ja hallintaa varten.",
+        "descriptionNeedsSubscription": "Aloita tilaus luodaksesi uusia kampanjoita.",
+        "action": "Luo ensimmäinen kampanjasi"
+      },
+      "searchPlaceholder": "Hae kampanjoita...",
+      "searchLabel": "Hae kampanjoita",
+      "filterAll": "Kaikki",
+      "status": {
+        "active": "Aktiivinen",
+        "draft": "Luonnos",
+        "ended": "Päättynyt",
+        "paused": "Keskeytetty"
+      },
+      "noMatches": "Suodattimia vastaavia kampanjoita ei löytynyt.",
+      "clearFilters": "Tyhjennä suodattimet",
+      "type": {
+        "weekly": "Viikkokampanja",
+        "limited": "Rajoitettu kampanja",
+        "other": "Kampanja: {type}"
+      },
+      "runs": "Voimassa {start} – {end}",
+      "view": "Näytä",
+      "stats": {
+        "vouchers": "Kupongit",
+        "paidPurchases": "Maksetut ostot",
+        "revenue": "Tulot",
+        "price": "Hinta"
+      },
+      "free": "Ilmainen"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Uudet kampanjat luodaan luonnoksina. Asiakkaat näkevät ne vasta, kun julkaiset ne kampanjasivulta."
+    },
+    "edit": {
+      "breadcrumb": "Muokkaa",
+      "title": "Muokkaa kampanjaa"
+    },
+    "form": {
+      "basicInfo": "Perustiedot",
+      "nameLabel": "Kampanjan nimi *",
+      "namePlaceholder": "Joulutarjous",
+      "descriptionLabel": "Kuvaus",
+      "descriptionPlaceholder": "Rajoitetun ajan kampanja",
+      "typeLabel": "Tyyppi *",
+      "typeOptions": {
+        "limited": "Kertaluonteinen (rajoitettu)",
+        "weekly": "Viikoittainen"
+      },
+      "dates": "Päivämäärät",
+      "startDate": "Alkupäivä *",
+      "endDate": "Loppupäivä *",
+      "timezoneHint": "Ajat ovat paikallisella aikavyöhykkeelläsi.",
+      "pricing": "Hinnoittelu ja rajat",
+      "priceLabel": "Hinta ({currency}) (jätä tyhjäksi ilmaisille kupongeille)",
+      "pricePreview": "Asiakkaat maksavat {price}.",
+      "priceHint": "Syötä summa valuutassa {currency}, esim. 4.50 tai 4,50 = {example}.",
+      "maxRedemptions": "Lunastuksia enintään",
+      "maxPurchases": "Ostoja enintään",
+      "unlimited": "Rajaton",
+      "creditLabel": "Suosittelijan krediitti (%)",
+      "creditPreview": "Suosittelijat ansaitsevat {percent} % ostohinnasta krediittinä.",
+      "creditHint": "Ostohinnan osuus, joka maksetaan suosittelijalle krediittinä, esim. 5 tai 2,5.",
+      "termsSection": "Käyttöehdot",
+      "termsLabel": "Ehdot",
+      "termsPlaceholder": "Tämän kampanjan käyttöehdot...",
+      "saving": "Tallennetaan...",
+      "saveChanges": "Tallenna muutokset",
+      "creating": "Luodaan...",
+      "create": "Luo kampanja",
+      "saved": "Kampanjan muutokset tallennettu.",
+      "errors": {
+        "invalidDates": "Syötä kelvollinen alku- ja loppupäivä.",
+        "endBeforeStart": "Loppupäivän on oltava alkupäivän jälkeen.",
+        "maxRedemptions": "Lunastusten enimmäismäärän on oltava kokonaisluku, vähintään 1.",
+        "maxPurchases": "Ostojen enimmäismäärän on oltava kokonaisluku, vähintään 1.",
+        "saveFailed": "Kampanjan tallennus epäonnistui"
+      },
+      "priceErrors": {
+        "negative": "Hinta ei voi olla negatiivinen.",
+        "invalid": "Hinta ei ole kelvollinen luku.",
+        "wholeNumber": "Hinnan on oltava kokonaisluku.",
+        "decimals": "Hinnassa voi olla enintään {decimals} desimaalia.",
+        "tooLarge": "Hinta on liian suuri."
+      },
+      "creditErrors": {
+        "negative": "Suosittelijan krediitti ei voi olla negatiivinen.",
+        "invalid": "Suosittelijan krediitti ei ole kelvollinen luku.",
+        "decimals": "Suosittelijan krediitissä voi olla enintään {decimals} desimaalia.",
+        "tooLarge": "Suosittelijan krediitti on liian suuri.",
+        "tooHigh": "Suosittelijan krediitti voi olla enintään 100 %."
+      }
+    },
+    "detail": {
+      "noDescription": "Ei kuvausta",
+      "draftNotice": "Tämä kampanja on luonnos, joten asiakkaat eivät vielä näe sitä.",
+      "draftNoticeAdmin": "Tämä kampanja on luonnos, joten asiakkaat eivät vielä näe sitä. Julkaise se, kun olet valmis.",
+      "status": "Tila",
+      "type": "Tyyppi",
+      "price": "Hinta",
+      "referrerCredit": "Suosittelijan krediitti",
+      "none": "Ei mitään",
+      "stats": {
+        "vouchers": "Kupongit",
+        "totalPurchases": "Ostot yhteensä",
+        "paidPurchases": "Maksetut ostot"
+      },
+      "terms": "Käyttöehdot",
+      "promotion": {
+        "title": "Mainostus",
+        "description": "Maksullista näkyvyyttä viikkouutiskirjeessä ja ilmoituksissa."
+      },
+      "vouchers": {
+        "title": "Kupongit",
+        "description": "Tästä kampanjasta luodut kupongit.",
+        "empty": "Kuponkeja ei ole vielä luotu.",
+        "view": "Näytä"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Mukaan viikkouutiskirjeeseen (maksullinen)",
+      "notification": "Nosto ilmoituksissa (maksullinen)",
+      "endDate": "Mainostuksen loppupäivä",
+      "saving": "Tallennetaan...",
+      "save": "Tallenna mainostusasetukset",
+      "saved": "Mainostusasetukset tallennettu.",
+      "upgradeNeededTitle": "Päivitys tarvitaan",
+      "upgradeNeeded": "Mainostusnostot kuuluvat ylempään pakettiin. Päivitä kohdassa Asetukset ja laskutus ottaaksesi ne käyttöön.",
+      "saveFailedStatus": "Mainostusasetuksia ei voitu tallentaa (virhe {status}).",
+      "saveFailedNetwork": "Mainostusasetuksia ei voitu tallentaa. Tarkista yhteytesi ja yritä uudelleen."
+    },
+    "actions": {
+      "adminOnly": "Vain kauppiaan ylläpitäjät voivat julkaista, keskeyttää tai muokata kampanjoita.",
+      "edit": "Muokkaa",
+      "publish": {
+        "label": "Julkaise",
+        "title": "Julkaistaanko tämä kampanja?",
+        "description": "Asiakkaat näkevät kampanjan ja voivat ostaa sen kuponkeja heti.",
+        "success": "Kampanja julkaistu. Se näkyy nyt asiakkaille."
+      },
+      "pause": {
+        "label": "Keskeytä",
+        "title": "Keskeytetäänkö tämä kampanja?",
+        "description": "Kampanja palautuu luonnokseksi ja on piilossa asiakkailta, kunnes julkaiset sen uudelleen. Jo myydyt kupongit pysyvät voimassa.",
+        "success": "Kampanja keskeytetty. Se on piilossa asiakkailta."
+      },
+      "end": {
+        "label": "Päätä kampanja",
+        "title": "Päätetäänkö kampanja nyt?",
+        "description": "Kampanja päättyy välittömästi, eikä sitä voi julkaista uudelleen. Jo myydyt kupongit pysyvät voimassa.",
+        "success": "Kampanja päätetty."
+      },
+      "updateFailedStatus": "Kampanjaa ei voitu päivittää (virhe {status}).",
+      "updateFailed": "Kampanjaa ei voitu päivittää."
+    },
+    "generate": {
+      "open": "Luo kupongit",
+      "title": "Luo kupongit",
+      "descriptionPriced": "Luo kuponkiluonnoksia, joiden arvo on {value} alennusta ja jotka ovat voimassa {start} – {end}. Jokainen kuponki saa oman koodin. Ne pysyvät piilossa, kunnes julkaiset ne.",
+      "descriptionFree": "Tämä kampanja on ilmainen, joten kupongeille ei ole asetettavaa summaa. Aseta kampanjalle ensin hinta.",
+      "countLabel": "Kuponkien määrä (1–100)",
+      "generating": "Luodaan...",
+      "submit": "Luo",
+      "invalidCount": "Syötä kokonaisluku väliltä 1–100",
+      "needsPrice": "Aseta tälle kampanjalle ensin hinta. Luotujen kuponkien arvo on kampanjan hinta.",
+      "failed": "Kuponkien luonti epäonnistui",
+      "success": "Luotiin {count, plural, one {# kuponkiluonnos. Julkaise se} other {# kuponkiluonnosta. Julkaise ne}} kuponkisivulta, kun olet valmis."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktiiviset kampanjat",
+      "statLiveVouchers": "Julkaistut kupongit",
+      "statRedemptions30d": "Lunastukset (30 päivää)"
+    },
+    "error": {
+      "title": "Jokin meni pieleen",
+      "description": "Kauppiaspaneelissa tapahtui virhe.",
+      "tryAgain": "Yritä uudelleen",
+      "backToMerchants": "Takaisin kauppiaisiin"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Yleiskatsaus",
+        "offers": "Tarjoukset",
+        "inStore": "Myymälässä",
+        "customers": "Asiakkaat",
+        "settings": "Asetukset"
+      },
+      "language": "Kieli",
+      "opensAppArea": "Avaa sovellusalueen",
+      "externalLinkTitle": "{label} (avaa sovellusalueen tämän kauppiaan ulkopuolella)",
+      "opensOutside": "Avautuu kauppiasalueen ulkopuolelle",
+      "merchantNavigation": "Kauppias",
+      "more": "Lisää",
+      "navDashboard": "Hallintapaneeli"
+    },
+    "dashboard": {
+      "title": "Kauppiaan hallintapaneeli",
+      "welcomeBack": "Tervetuloa takaisin, {name}",
+      "viewCampaigns": "Näytä kampanjat",
+      "createVoucher": "Luo kuponki",
+      "performanceOverview": "Tulosten yleiskatsaus",
+      "performanceOverviewHint": "Kampanjoiden toiminta ja lunastukset reaaliajassa.",
+      "revenueAndCredits": "Tulot ja krediitit",
+      "revenueAndCreditsHint": "Myynti, krediitit ja avoimet vastuut.",
+      "performanceTrend": "Tulostrendi",
+      "performanceTrendHint": "Lunastukset ja tulot viimeisten {days} päivän ajalta.",
+      "rangeShort": "{days} pv",
+      "revenue": "Tulot",
+      "chartRedemptions": "Lunastukset",
+      "chartRevenue": "Tulot ({currency})",
+      "paidOrders": "Maksetut tilaukset",
+      "openOrdersView": "Avaa tilausnäkymä",
+      "avgOrder": "Keskiostos",
+      "openCampaignRevenue": "Avaa kampanjatulot",
+      "redemptionRate": "Lunastusaste",
+      "openRedemptionQueue": "Avaa lunastusjono",
+      "pendingConfirmation": "{count} odottaa vahvistusta",
+      "pendingConfirmationHint": "Myymälälunastukset, jotka odottavat hyväksyntääsi.",
+      "viewRedemptions": "Näytä lunastukset",
+      "actionCenter": "Toimintokeskus",
+      "actionCenterHint": "Tärkeimmät tarkistettavat asiat.",
+      "allCaughtUp": "Kaikki on hoidettu.",
+      "open": "Avaa",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# odottava lunastus} other {# odottavaa lunastusta}}",
+        "pendingRedemptionsDetail": "Vahvista myymälälunastukset",
+        "expiringVouchers": "{count, plural, one {# kuponki vanhenee pian} other {# kuponkia vanhenee pian}}",
+        "expiringVouchersDetail": "Tarkista kuponkien voimassaoloajat",
+        "endingCampaigns": "{count, plural, one {# kampanja päättyy tällä viikolla} other {# kampanjaa päättyy tällä viikolla}}",
+        "endingCampaignsDetail": "Jatka tai monista parhaat kampanjasi",
+        "upcomingEvents": "{count, plural, one {# tuleva tapahtuma} other {# tulevaa tapahtumaa}}",
+        "upcomingEventsDetail": "Valmistele lippujen tarkastus ja henkilöstö"
+      },
+      "upcomingEventsTitle": "Tulevat tapahtumat",
+      "upcomingEventsHint": "Seuraavat ajastetut tapahtumat.",
+      "noUpcomingEvents": "Ei tulevia tapahtumia.",
+      "eventStatus": {
+        "published": "julkaistu",
+        "soldOut": "loppuunmyyty"
+      },
+      "manageEvents": "Hallinnoi tapahtumia",
+      "topVouchers": "Suosituimmat kupongit",
+      "topVouchersHint": "Eniten lunastetut tarjoukset.",
+      "noTopVouchers": "Kuponkeja ei ole vielä lunastettu. Eniten lunastetut kuponkisi näkyvät täällä."
+    },
+    "stats": {
+      "activeVouchers": "Aktiiviset kupongit",
+      "publishedVouchers": "Julkaistut kupongit",
+      "openVouchers": "Avaa kupongit",
+      "activeCampaigns": "Aktiiviset kampanjat",
+      "runningCampaigns": "Käynnissä olevat kampanjat",
+      "openCampaigns": "Avaa kampanjat",
+      "activeEvents": "Aktiiviset tapahtumat",
+      "publishedEvents": "Julkaistut tapahtumat",
+      "openEvents": "Avaa tapahtumat",
+      "todaysRedemptions": "Tämän päivän lunastukset",
+      "thisWeek": "Tällä viikolla: {count}",
+      "reviewRedemptions": "Tarkista lunastukset",
+      "ofWeekly": "viikon kokonaismäärästä"
+    },
+    "revenue": {
+      "voucherRevenue": "Kuponkitulot",
+      "paidVoucherSales": "Maksettu kuponkimyynti",
+      "openCampaignSales": "Avaa kampanjamyynti",
+      "ticketRevenue": "Lipputulot",
+      "paidTicketSales": "Maksettu lippumyynti",
+      "openEventSales": "Avaa tapahtumamyynti",
+      "creditsIssued": "Myönnetyt krediitit",
+      "totalCreditsDistributed": "Jaetut krediitit yhteensä",
+      "openReferralCredits": "Avaa suosittelukrediitit",
+      "outstandingLiability": "Avoin vastuu",
+      "unredeemedValue": "Lunastamattomien kuponkien arvo",
+      "openVoucherLiability": "Avaa kuponkivastuut"
+    },
+    "recentActivity": {
+      "title": "Viimeaikainen toiminta",
+      "empty": "Ei viimeaikaista toimintaa",
+      "unknownUser": "Tuntematon käyttäjä",
+      "redeemedVoucher": "Lunasti kupongin – {time}",
+      "confirmed": "Vahvistettu",
+      "pending": "Odottaa"
+    },
+    "liveStats": {
+      "live": "Live",
+      "connecting": "Yhdistetään…",
+      "redeemedToday": "<value>{count}</value> <label>lunastettu tänään</label>",
+      "pending": "<value>{count}</value> <label>odottaa</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analytiikka",
+      "title": "Analytiikka",
+      "subtitle": "Seuraa kuponkiesi tuloksia ja tuloja",
+      "totalRedemptions": "Lunastukset yhteensä",
+      "confirmedRedemptions": "Vahvistetut lunastukset",
+      "totalDiscounts": "Alennukset yhteensä",
+      "givenToCustomers": "Annettu asiakkaille",
+      "creditsIssued": "Myönnetyt krediitit",
+      "totalCreditsDistributed": "Jaetut krediitit yhteensä",
+      "activeVouchers": "Aktiiviset kupongit",
+      "withRedemptions": "Joilla lunastuksia",
+      "charts": {
+        "redemptionTrends": "Lunastustrendit (viim. 30 päivää)",
+        "redemptions": "Lunastukset",
+        "revenue": "Tulot ({currency})",
+        "topPerforming": "Parhaiten menestyvät kupongit",
+        "noRedeemed": "Yhtään kuponkia ei ole vielä lunastettu. Parhaiten menestyvät kuponkisi näkyvät täällä.",
+        "byCategory": "Lunastukset kategorioittain",
+        "noCategoryData": "Kategoriatietoja ei ole saatavilla"
+      }
+    },
+    "ask": {
+      "title": "Kysy datalta",
+      "subtitle": "Kysy liiketoimintadatastasi luonnollisella kielellä",
+      "emptyTitle": "Kysy mitä tahansa datastasi",
+      "emptyHint": "Kokeile jotakin alla olevista ehdotuksista",
+      "placeholder": "Kysy jotain datastasi...",
+      "suggestedTitle": "Ehdotetut kysymykset",
+      "suggestions": {
+        "revenueLastWeek": "Paljonko tuloni olivat viime viikolla?",
+        "dailyRedemptionsThisMonth": "Näytä päivittäiset lunastukset tässä kuussa",
+        "topVouchersByRevenue": "Tuottoisimmat kupongit viime kuussa",
+        "customersPurchasedLastWeek": "Kuinka moni asiakas osti viime viikolla?",
+        "referralConversionRate": "Mikä on suosittelujeni konversioaste?",
+        "dailyRevenueTrend": "Näytä päivittäisten tulojen trendi tässä kuussa",
+        "purchasesYesterday": "Montako ostoa eilen tehtiin?",
+        "bestPerformingVouchers": "Mitkä ovat parhaiten menestyvät kuponkini?"
+      },
+      "errorFallback": "Valitettavasti en pystynyt käsittelemään kysymystä.",
+      "networkError": "Verkkovirhe. Yritä uudelleen.",
+      "itemLabel": "Kohde {n}"
+    },
+    "reports": {
+      "title": "Talousraportit",
+      "subtitle": "Tulojen yleiskatsaus ja vienti",
+      "downloadCsv": "Lataa CSV",
+      "from": "Alkaen",
+      "to": "Päättyen",
+      "apply": "Käytä",
+      "totalRevenue": "Tulot yhteensä",
+      "platformFees": "Alustamaksut",
+      "netRevenue": "Nettotulot",
+      "redemptions": "Lunastukset",
+      "revenueByCurrency": "Tulot valuutoittain",
+      "netAndFees": "Netto: {net} • Maksut: {fees}",
+      "monthlyRevenue": "Kuukausitulot",
+      "noRevenue": "Tältä ajanjaksolta ei ole tulotietoja.",
+      "month": "Kuukausi",
+      "vouchers": "Kupongit",
+      "tickets": "Liput",
+      "total": "Yhteensä"
+    },
+    "scheduled": {
+      "title": "Ajastetut raportit",
+      "subtitle": "Määritä automaattiset sähköpostiraportit",
+      "backToReports": "← Talousraportit",
+      "activeSchedules": "Aktiiviset ajastukset",
+      "loading": "Ladataan...",
+      "noSchedules": "Ajastuksia ei ole vielä määritetty",
+      "period": {
+        "daily": "Päivittäin",
+        "weekly": "Viikoittain",
+        "monthly": "Kuukausittain"
+      },
+      "reportTitle": {
+        "daily": "Päiväraportti",
+        "weekly": "Viikkoraportti",
+        "monthly": "Kuukausiraportti"
+      },
+      "recipientCount": "{count, plural, one {# vastaanottaja} other {# vastaanottajaa}}",
+      "lastSent": "Viimeksi lähetetty: {date}",
+      "nextRun": "Seuraava: {date}",
+      "pause": "Keskeytä",
+      "resume": "Jatka",
+      "createSchedule": "Luo ajastus",
+      "frequency": "Tiheys",
+      "recipients": "Vastaanottajat",
+      "invalidEmail": "Virheellinen sähköpostiosoite",
+      "emailAlreadyAdded": "Sähköposti on jo lisätty",
+      "addAtLeastOne": "Lisää vähintään yksi vastaanottaja",
+      "saved": "Raporttiajastus tallennettu",
+      "saveFailed": "Ajastuksen tallennus epäonnistui",
+      "save": "Tallenna ajastus",
+      "previewTitle": "Raportin esikatselu",
+      "previewBody": "Ajastetut raportit sisältävät tulot, lunastusmäärät, suosituimmat kupongit ja kasvumittarit. Raportit lähetetään selkeästi muotoiltuina HTML-sähköposteina klo 8.00 UTC.",
+      "everyMorning": "Joka aamu",
+      "everyMonday": "Joka maanantai",
+      "firstOfMonth": "Kuukauden 1. päivä"
+    },
+    "billing": {
+      "subscribeTo": "Tilaa {plan}",
+      "startFailed": "Tilauksen aloittaminen epäonnistui",
+      "portalFailed": "Laskutusportaalin avaaminen epäonnistui",
+      "manageBilling": "Hallinnoi laskutusta",
+      "errorTitle": "Virhe",
+      "close": "Sulje",
+      "usage": "<b>{current}</b> / {max} käytetty",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "kampanjan luontia per jakso",
+        "activeCampaigns": "aktiivista kampanjaa",
+        "voucherCreatesPerCycle": "kupongin luontia per jakso",
+        "teamMembers": "tiimin jäsentä"
+      },
+      "currentPlanTrial": "Nykyinen paketti (ilmainen kokeilu)",
+      "planChangesUnavailable": "Paketin vaihto ei ole juuri nyt mahdollista verkossa.",
+      "paymentsNotSetUp": "Verkkomaksuja ei ole vielä otettu käyttöön tällä alustalla, joten paketteja ei voi ostaa tai vaihtaa täällä. Ota yhteyttä tukeen, jos haluat vaihtaa pakettia.",
+      "features": {
+        "starter": {
+          "vouchers": "500 kuponkia/kk",
+          "campaigns": "3 aktiivista kampanjaa",
+          "teamMembers": "2 tiimin jäsentä",
+          "qrRedemption": "Lunastus QR-koodilla",
+          "basicAnalytics": "Perusanalytiikka"
+        },
+        "pro": {
+          "vouchers": "5 000 kuponkia/kk",
+          "campaigns": "25 aktiivista kampanjaa",
+          "teamMembers": "10 tiimin jäsentä",
+          "advancedAnalytics": "Edistynyt analytiikka",
+          "customDomain": "Oma verkkotunnus",
+          "promoBoosts": "Mainostusnostot"
+        },
+        "scale": {
+          "vouchers": "Rajattomasti kuponkeja",
+          "campaigns": "Rajattomasti kampanjoita",
+          "teamMembers": "Rajattomasti tiimin jäseniä",
+          "everythingInPro": "Kaikki Pro-paketin ominaisuudet",
+          "whiteLabel": "White label -valmius",
+          "prioritySupport": "Ensisijainen tuki"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Omistaja",
+      "admin": "Ylläpitäjä",
+      "finance": "Talous",
+      "marketing": "Markkinointi",
+      "support": "Tuki",
+      "partner_cashier": "Kassa",
+      "auditor": "Tarkastaja"
+    },
+    "orgs": {
+      "title": "B2B-organisaatiot",
+      "subtitle": "Yritysten työtilat kampanjoineen, kuponkeineen ja tilauksineen.",
+      "loading": "Ladataan organisaatioita...",
+      "loadFailed": "Organisaatioiden lataus epäonnistui",
+      "empty": "Organisaatioita ei löytynyt. Pyydä ylläpitäjää kutsumaan sinut.",
+      "open": "Avaa"
+    },
+    "workspace": {
+      "fallbackName": "Organisaatio",
+      "subtitle": "B2B-työtilan yleiskatsaus",
+      "reports": "Raportit",
+      "audit": "Auditointi",
+      "partnerKeys": "Kumppaniavaimet",
+      "backToOrgs": "Takaisin organisaatioihin",
+      "loading": "Ladataan työtilaa...",
+      "errors": {
+        "loadOrg": "Organisaation lataus epäonnistui",
+        "loadCampaigns": "Kampanjoiden lataus epäonnistui",
+        "loadVouchers": "Kuponkien lataus epäonnistui",
+        "loadOrders": "Tilausten lataus epäonnistui",
+        "load": "Lataus epäonnistui",
+        "createCampaign": "Kampanjan luonti epäonnistui",
+        "issueVouchers": "Kuponkien myöntäminen epäonnistui",
+        "updateCampaign": "Kampanjan päivitys epäonnistui",
+        "activateCampaign": "Kampanjan aktivointi epäonnistui",
+        "pauseCampaign": "Kampanjan keskeytys epäonnistui",
+        "archiveCampaign": "Kampanjan arkistointi epäonnistui"
+      },
+      "stats": {
+        "campaigns": "Kampanjat",
+        "vouchers": "Kupongit",
+        "orders": "Tilaukset"
+      },
+      "create": {
+        "title": "Luo kampanja",
+        "name": "Kampanjan nimi",
+        "value": "Arvo (pienin yksikkö)",
+        "currency": "Valuutta",
+        "submit": "Luo"
+      },
+      "campaigns": {
+        "title": "Kampanjat",
+        "empty": "Ei vielä kampanjoita.",
+        "name": "Nimi",
+        "value": "Arvo",
+        "activate": "Aktivoi",
+        "pause": "Keskeytä",
+        "resume": "Jatka",
+        "archive": "Arkistoi",
+        "issue": "Myönnä {count}"
+      },
+      "recentVouchers": "Viimeisimmät kupongit",
+      "noVouchers": "Kuponkeja ei ole myönnetty.",
+      "recentOrders": "Viimeisimmät tilaukset",
+      "noOrders": "Ei vielä tilauksia."
+    },
+    "audit": {
+      "title": "Tapahtumaloki",
+      "subtitle": "Seuraa kuponkien elinkaarta ja muutoksia.",
+      "entityType": "Kohteen tyyppi (voucher, campaign, order)",
+      "entityId": "Kohteen tunnus",
+      "loading": "Ladataan lokia...",
+      "loadFailed": "Lokin lataus epäonnistui",
+      "empty": "Ei tapahtumia."
+    },
+    "billing": {
+      "metaTitle": "Organisaation laskutus",
+      "title": "Laskutus ja talous",
+      "totalPaidOrders": "Maksetut tilaukset yhteensä",
+      "totalRevenue": "Tulot yhteensä",
+      "vatNumber": "ALV-numero",
+      "notSet": "Ei asetettu",
+      "recentOrders": "Viimeisimmät tilaukset",
+      "noOrders": "Ei vielä tilauksia.",
+      "table": {
+        "date": "Päivämäärä",
+        "qty": "Määrä",
+        "total": "Yhteensä",
+        "status": "Tila",
+        "invoice": "Lasku"
+      }
+    },
+    "keys": {
+      "title": "Kumppanien API-avaimet",
+      "subtitle": "Käytä näitä kumppanien kuponkien tarkistukseen ja lunastukseen.",
+      "label": "Avaimen nimi (valinnainen)",
+      "create": "Luo avain",
+      "newKey": "Uusi avain (kopioi nyt)",
+      "loading": "Ladataan avaimia...",
+      "empty": "Ei vielä avaimia.",
+      "untitled": "Nimetön avain",
+      "created": "Luotu {created}",
+      "createdAndLastUsed": "Luotu {created} • Viimeksi käytetty {lastUsed}",
+      "revoke": "Mitätöi",
+      "errors": {
+        "load": "Avainten lataus epäonnistui",
+        "create": "Avaimen luonti epäonnistui",
+        "revoke": "Avaimen mitätöinti epäonnistui"
+      }
+    },
+    "members": {
+      "metaTitle": "Organisaation jäsenet",
+      "title": "Jäsenet",
+      "count": "{count, plural, one {# jäsen} other {# jäsentä}}",
+      "pendingInvitations": "Odottavat kutsut",
+      "expires": "Vanhenee {date}"
+    },
+    "invite": {
+      "title": "Kutsu jäsen",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "Ylläpitäjä",
+        "finance": "Talous",
+        "marketing": "Markkinointi",
+        "support": "Tuki",
+        "partner_cashier": "Kumppanin kassa",
+        "auditor": "Tarkastaja"
+      },
+      "sending": "Lähetetään…",
+      "submit": "Lähetä kutsu",
+      "sent": "Kutsu lähetetty osoitteeseen {email}.",
+      "failed": "Kutsua ei voitu lähettää. Tarkista sähköpostiosoite ja yritä uudelleen.",
+      "error": "Jokin meni pieleen. Yritä uudelleen."
+    },
+    "reports": {
+      "title": "Raportit",
+      "subtitle": "Lunastus- ja kuponkiraportit",
+      "backToWorkspace": "Takaisin työtilaan",
+      "loadFailed": "Lataus epäonnistui",
+      "tabs": {
+        "redemptions": "Lunastukset",
+        "vouchers": "Kupongit"
+      },
+      "totalRedemptions": "Lunastukset yhteensä",
+      "totalAmountRedeemed": "Lunastettu summa yhteensä",
+      "from": "Alkaen",
+      "to": "Päättyen",
+      "filter": "Suodata",
+      "pageInfo": "Sivu {page}/{totalPages} (yhteensä {total})",
+      "redemptionTable": {
+        "date": "Päivämäärä",
+        "partner": "Kumppani",
+        "amount": "Summa",
+        "status": "Tila",
+        "location": "Sijainti"
+      },
+      "noRedemptions": "Lunastuksia ei löytynyt.",
+      "voucherTable": {
+        "campaign": "Kampanja",
+        "status": "Tila",
+        "type": "Tyyppi",
+        "value": "Arvo",
+        "remaining": "Jäljellä",
+        "redeemed": "Lunastettu",
+        "issuedTo": "Myönnetty",
+        "expires": "Vanhenee"
+      },
+      "noVouchers": "Kuponkeja ei löytynyt."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "ostaja",
+        "partner": "kumppani",
+        "platform_owner": "alustan omistaja"
+      },
+      "orgStatus": {
+        "active": "aktiivinen",
+        "suspended": "jäädytetty"
+      },
+      "campaignStatus": {
+        "draft": "luonnos",
+        "active": "aktiivinen",
+        "paused": "keskeytetty",
+        "archived": "arkistoitu"
+      },
+      "voucherStatus": {
+        "created": "luotu",
+        "issued": "myönnetty",
+        "active": "aktiivinen",
+        "redeemed": "lunastettu",
+        "expired": "vanhentunut",
+        "voided": "mitätöity"
+      },
+      "valueType": {
+        "fixed": "kiinteä",
+        "percent": "prosentti"
+      },
+      "orderStatus": {
+        "draft": "luonnos",
+        "submitted": "lähetetty",
+        "invoiced": "laskutettu",
+        "paid": "maksettu",
+        "cancelled": "peruttu",
+        "refunded": "hyvitetty"
+      },
+      "redemptionStatus": {
+        "approved": "hyväksytty",
+        "reversed": "peruttu",
+        "failed": "epäonnistui"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Tapahtumat"
+    },
+    "status": {
+      "draft": "Luonnos",
+      "published": "Aktiivinen",
+      "sold_out": "Loppuunmyyty",
+      "cancelled": "Peruttu",
+      "ended": "Päättynyt"
+    },
+    "statusName": {
+      "draft": "Luonnos",
+      "published": "Julkaistu",
+      "sold_out": "Loppuunmyyty",
+      "cancelled": "Peruttu",
+      "ended": "Päättynyt"
+    },
+    "type": {
+      "festival": "Festivaali",
+      "internal": "Sisäinen tapahtuma",
+      "concert": "Konsertti",
+      "workshop": "Työpaja",
+      "other": "Muu"
+    },
+    "ticketStatus": {
+      "available": "Saatavilla",
+      "sold": "Myyty",
+      "used": "Käytetty",
+      "cancelled": "Peruttu",
+      "refunded": "Hyvitetty"
+    },
+    "list": {
+      "subtitle": "Hallinnoi tapahtumiasi ja lippujasi",
+      "createEvent": "Luo tapahtuma",
+      "stats": {
+        "totalTitle": "Tapahtumia yhteensä",
+        "totalDescription": "Kaikki tapahtumat",
+        "activeTitle": "Aktiiviset",
+        "activeDescription": "Julkaistut tai loppuunmyydyt",
+        "soldTitle": "Myydyt liput",
+        "soldDescription": "Kaikista tapahtumista",
+        "revenueTitle": "Tulot",
+        "revenueDescription": "Maksettu lippumyynti"
+      },
+      "empty": {
+        "title": "Ei vielä tapahtumia",
+        "description": "Luo tapahtuma myydäksesi lippuja ja hallitaksesi osallistujia.",
+        "cta": "Luo ensimmäinen tapahtumasi"
+      },
+      "card": {
+        "date": "Päivämäärä:",
+        "location": "Sijainti:",
+        "price": "Hinta:",
+        "tickets": "Liput:",
+        "sold": "{sold} / {capacity} myyty",
+        "free": "Ilmainen",
+        "view": "Näytä",
+        "edit": "Muokkaa"
+      },
+      "weeklyRevenue": {
+        "title": "Viikoittaiset lipputulot",
+        "description": "Maksettu lippumyynti 7 päivän ajalta.",
+        "series": "Tulot"
+      }
+    },
+    "detail": {
+      "noDescription": "Ei kuvausta",
+      "edit": "Muokkaa",
+      "status": "Tila",
+      "type": "Tyyppi",
+      "eventDate": "Tapahtumapäivä",
+      "price": "Hinta",
+      "free": "Ilmainen",
+      "totalTickets": "Lippuja yhteensä",
+      "sold": "Myyty",
+      "available": "Saatavilla",
+      "location": "Sijainti",
+      "terms": "Käyttöehdot",
+      "ticketsTitle": "Liput",
+      "ticketsDescription": "Tämän tapahtuman liput",
+      "noTickets": "Lippuja ei ole vielä luotu.",
+      "view": "Näytä",
+      "redeem": "Lunasta"
+    },
+    "form": {
+      "basicInfo": "Perustiedot",
+      "name": "Tapahtuman nimi *",
+      "description": "Kuvaus",
+      "descriptionPlaceholder": "Kuvaile tapahtumaasi...",
+      "type": "Tapahtuman tyyppi *",
+      "typeAria": "Tapahtuman tyyppi",
+      "dateTime": "Päivämäärä ja aika",
+      "eventDate": "Tapahtumapäivä *",
+      "eventTime": "Kellonaika *",
+      "endDate": "Loppupäivä (valinnainen)",
+      "endTime": "Päättymisaika (valinnainen)",
+      "location": "Sijainti",
+      "locationName": "Paikan nimi",
+      "locationPlaceholder": "Pääsali, ulkolava",
+      "locationPlaceholderExample": "esim. Pääsali, ulkolava",
+      "address": "Koko osoite",
+      "addressPlaceholder": "Katuosoite, kaupunki, maa",
+      "ticketDetails": "Lipputiedot",
+      "maxCapacity": "Enimmäiskapasiteetti (lippuja) *",
+      "maxCapacityLong": "Enimmäiskapasiteetti (lippujen määrä) *",
+      "pricePerTicketCurrency": "Lipun hinta ({currency})",
+      "pricePerTicket": "Lipun hinta",
+      "pricePlaceholderFree": "0,00 (ilmainen)",
+      "priceHint": "Jätä tyhjäksi ilmaisille lipuille. Esim. 12.50 tai 12,50 = {example}.",
+      "currency": "Valuutta *",
+      "terms": "Käyttöehdot",
+      "termsPlaceholder": "Tapahtuman ehdot, palautuskäytäntö jne.",
+      "ticketPrice": "Lipun hinta",
+      "endBeforeStart": "Päättymisajan on oltava alkamisajan jälkeen.",
+      "cancel": "Peruuta"
+    },
+    "create": {
+      "submit": "Luo tapahtuma",
+      "submitting": "Luodaan..."
+    },
+    "edit": {
+      "loading": "Ladataan...",
+      "notFound": "Tapahtumaa ei löytynyt.",
+      "back": "Takaisin tapahtumaan",
+      "title": "Muokkaa tapahtumaa",
+      "subtitle": "Päivitä tapahtumasi tiedot.",
+      "submit": "Tallenna muutokset",
+      "submitting": "Tallennetaan..."
+    },
+    "publish": {
+      "confirm": "Julkaistaanko tämä tapahtuma? Se näkyy kaikille ja lippuja voi ostaa.",
+      "confirmLabel": "Julkaise",
+      "failed": "Tapahtuman julkaisu epäonnistui",
+      "success": "Tapahtuma julkaistu onnistuneesti!",
+      "published": "Julkaistu",
+      "cannotPublish": "Ei voi julkaista",
+      "button": "Julkaise tapahtuma",
+      "publishing": "Julkaistaan..."
+    },
+    "generate": {
+      "invalidCount": "Syötä luku väliltä 1–1000",
+      "tooMany": "{count} lippua ei voi luoda. Enintään saatavilla: {max}",
+      "failed": "Lippujen luonti epäonnistui",
+      "success": "{count, plural, one {# lippu luotu} other {# lippua luotu}} onnistuneesti!",
+      "open": "Luo liput",
+      "title": "Luo liput",
+      "description": "Luo lippuja tähän tapahtumaan",
+      "countLabel": "Lippujen määrä (enintään {max})",
+      "cancel": "Peruuta",
+      "submit": "Luo",
+      "submitting": "Luodaan..."
+    },
+    "redeem": {
+      "title": "Lunasta lippu",
+      "subtitle": "Skannaa QR-koodi tai syötä lippunumero",
+      "back": "Takaisin tapahtumaan",
+      "scanTitle": "Skannaa lippu",
+      "scanDescription": "Syötä QR-tunnus tai lippunumero",
+      "tokenLabel": "QR-tunnus / lippunumero",
+      "tokenPlaceholder": "Syötä QR-tunnus tai lippunumero",
+      "scan": "Skannaa",
+      "notFound": "Lippua ei löytynyt",
+      "found": "Lippu löytyi",
+      "number": "Numero:",
+      "event": "Tapahtuma:",
+      "status": "Tila:",
+      "attendee": "Osallistuja:",
+      "redeemDescription": "Viimeistele lunastus",
+      "locationLabel": "Sijainti (valinnainen)",
+      "locationPlaceholder": "esim. pääsisäänkäynti, portti A",
+      "submit": "Lunasta lippu",
+      "submitting": "Lunastetaan...",
+      "failed": "Lipun lunastus epäonnistui",
+      "cannotRedeem": "Tätä lippua ei voi lunastaa. Tila: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Kauppiaan hallintapaneeli",
+      "vouchersTitle": "Hallinnoi kuponkeja"
+    },
+    "sidebar": {
+      "title": "Kauppias",
+      "subtitle": "GiftHub-konsoli",
+      "openMenu": "Avaa valikko",
+      "nav": {
+        "overview": "Yleiskatsaus",
+        "vouchers": "Kupongit",
+        "giftCards": "Lahjakortit",
+        "credits": "Krediitit",
+        "brand": "Brändi"
+      }
+    },
+    "overview": {
+      "title": "Kauppiaan hallintapaneeli",
+      "notConnected": "Et ole vielä yhteydessä yhteenkään kauppiaaseen."
+    },
+    "noAccess": {
+      "title": "Ei kauppiaskäyttöoikeutta",
+      "overviewHint": "Pyydä kauppiaan ylläpitäjää kutsumaan sinut tai luo kauppiastili aloittaaksesi.",
+      "creditsHint": "Yhdistä kauppiastiliin nähdäksesi tulot ja maksut.",
+      "vouchersHint": "Yhdistä kauppiastiliin hallitaksesi kuponkeja.",
+      "exploreCampaigns": "Tutustu kampanjoihin"
+    },
+    "brand": {
+      "title": "Brändiasetukset",
+      "description": "Mukauta brändisi ulkoasua kupongeissa",
+      "logoHeading": "Logo",
+      "logoHint": "Lataa kauppiaslogosi (suositus: 200x200 px, PNG tai SVG).",
+      "logoPreviewAlt": "Logon esikatselu",
+      "uploadLogo": "Lataa logo",
+      "colorHeading": "Brändiväri",
+      "colorHint": "Aseta brändisi pääväri kupongeille ja painikkeille.",
+      "colorLabel": "Väri",
+      "colorHexLabel": "Brändivärin hex-arvo",
+      "save": "Tallenna muutokset",
+      "previewHeading": "Esikatselu",
+      "previewHint": "Katso, miltä brändisi näyttää kupongeissa.",
+      "sampleMerchant": "Yrityksesi",
+      "sampleTitle": "-20 % seuraavasta ostoksestasi",
+      "sampleDescription": "Voimassa kaikkiin tuotteisiin. Ei voi yhdistää muihin tarjouksiin."
+    },
+    "credits": {
+      "availableBalance": "Käytettävissä oleva saldo",
+      "availableBalanceHint": "Valmis maksettavaksi",
+      "pendingRevenue": "Odottavat tulot",
+      "pendingRevenueHint": "Käsittelyssä",
+      "recentRevenue": "Viimeaikaiset tulot",
+      "ticketSale": "Lippumyynti",
+      "voucherSale": "Kuponkimyynti",
+      "noRevenue": "Tuloja ei ole vielä kirjattu",
+      "payoutRequests": "Maksupyynnöt",
+      "noPayoutRequests": "Ei vielä maksupyyntöjä",
+      "requestPayoutHeading": "Pyydä maksua",
+      "minimumPayout": "Maksun vähimmäissumma: {amount}",
+      "submitting": "Lähetetään...",
+      "requestPayout": "Pyydä maksua",
+      "requestSubmitted": "Maksupyyntö lähetetty",
+      "requestFailed": "Maksupyyntö epäonnistui",
+      "status": {
+        "paid": "maksettu",
+        "pending": "odottaa",
+        "requested": "pyydetty",
+        "completed": "valmis",
+        "failed": "epäonnistui"
+      }
+    },
+    "newVoucher": {
+      "title": "Luo kuponki",
+      "description": "Suunnittele ja määritä uusi kuponkikampanjasi",
+      "detailsHeading": "Kupongin tiedot",
+      "titleLabel": "Otsikko",
+      "titlePlaceholder": "esim. -20 % seuraavasta ostoksestasi",
+      "descriptionLabel": "Kuvaus",
+      "descriptionPlaceholder": "Voimassa kaikkiin tuotteisiin. Ei voi yhdistää muihin tarjouksiin.",
+      "expiryDateLabel": "Viimeinen voimassaolopäivä",
+      "weeklyLabel": "Viikkotarjous",
+      "weeklyHint": "Saatavilla rajoitetun ajan joka viikko",
+      "weeklyAria": "Viikkotarjous – saatavilla rajoitetun ajan joka viikko",
+      "referralLabel": "Ota suosittelukrediitti käyttöön",
+      "referralHint": "Käyttäjät ansaitsevat krediittiä, kun ystävät lunastavat",
+      "referralAria": "Ota suosittelukrediitti käyttöön – käyttäjät ansaitsevat krediittiä, kun ystävät lunastavat",
+      "brandColorLabel": "Brändiväri",
+      "brandColorHexLabel": "Brändivärin hex-arvo",
+      "saveDraft": "Tallenna luonnos",
+      "createAndPublish": "Luo ja julkaise",
+      "previewHeading": "Esikatselu",
+      "sampleMerchant": "Yrityksesi",
+      "sampleTitle": "Kupongin otsikko",
+      "sampleDescription": "Kupongin kuvaus näkyy tässä"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Julkinen sivu on käytettävissä, kun kuponki on julkaistu.",
+    "list": {
+      "metaTitle": "Kupongit",
+      "subtitle": "Hallinnoi ja luo kuponkeja",
+      "bulkImport": "Joukkotuonti CSV:stä",
+      "stats": {
+        "totalTitle": "Kuponkeja yhteensä",
+        "totalDescription": "Kaikki luodut kupongit",
+        "activeTitle": "Aktiiviset",
+        "activeDescription": "Julkaistut kupongit",
+        "draftsTitle": "Luonnokset",
+        "draftsDescription": "Ei vielä julkaistu",
+        "pausedEndedTitle": "Keskeytetyt / päättyneet",
+        "pausedEndedDescription": "{paused} keskeytetty, {ended} päättynyt",
+        "redemptionsTitle": "Lunastukset",
+        "redemptionsDescription": "Lunastukset yhteensä"
+      },
+      "empty": {
+        "title": "Ei vielä kuponkeja",
+        "description": "Aloita luomalla ensimmäinen kuponkisi.",
+        "action": "Luo ensimmäinen kuponkisi"
+      },
+      "searchPlaceholder": "Hae otsikolla, koodin etuliitteellä tai tunnuksella",
+      "searchLabel": "Hae kuponkeja",
+      "statusLabel": "Tila",
+      "statusAll": "Kaikki tilat",
+      "status": {
+        "published": "Aktiivinen",
+        "paused": "Keskeytetty",
+        "draft": "Luonnos",
+        "ended": "Päättynyt",
+        "expired": "Vanhentunut"
+      },
+      "typeLabel": "Tyyppi",
+      "typeAll": "Kaikki tyypit",
+      "sortLabel": "Järjestä",
+      "sort": {
+        "date": "Päivämäärä (uusin)",
+        "name": "Nimi (A–Ö)",
+        "redemptions": "Lunastukset"
+      },
+      "showing": "Näytetään {shown}/{total} kuponkia",
+      "clearFilters": "Tyhjennä suodattimet",
+      "noMatches": "Suodattimia vastaavia kuponkeja ei löytynyt.",
+      "usage": "Käyttö",
+      "usageUnlimited": "Käyttö: {used} – rajaton",
+      "view": "Näytä"
+    },
+    "rowActions": {
+      "pauseTitle": "Keskeytä kuponki",
+      "pauseDescription": "Haluatko varmasti keskeyttää tämän kupongin? Käyttäjät eivät voi ostaa tai lunastaa sitä keskeytyksen aikana.",
+      "pauseConfirm": "Keskeytä",
+      "paused": "Kuponki keskeytetty",
+      "pauseFailed": "Kupongin keskeytys epäonnistui",
+      "loadFailed": "Kupongin lataus epäonnistui",
+      "duplicateLabel": "Monista kuponki",
+      "duplicated": "Kuponki monistettu",
+      "duplicateFailed": "Monistaminen epäonnistui"
+    },
+    "publish": {
+      "confirmMessage": "Julkaistaanko tämä kuponki? Se näkyy kaikille.",
+      "confirmLabel": "Julkaise",
+      "failed": "Kupongin julkaisu epäonnistui",
+      "success": "Kuponki julkaistu onnistuneesti!",
+      "publishing": "Julkaistaan...",
+      "button": "Julkaise kuponki"
+    },
+    "new": {
+      "iconLetter": "K",
+      "created": "Kuponki luotu luonnoksena. Julkaise se, kun haluat asiakkaiden näkevän sen."
+    },
+    "edit": {
+      "iconLetter": "M",
+      "subtitle": "Päivitä kupongin tiedot ja saatavuus.",
+      "updated": "Kuponki päivitetty onnistuneesti",
+      "updateFailed": "Kupongin päivitys epäonnistui",
+      "updateFailedRetry": "Kupongin päivitys epäonnistui. Yritä uudelleen.",
+      "updating": "Päivitetään...",
+      "update": "Päivitä kuponki",
+      "viewPublicPage": "Näytä julkinen sivu"
+    },
+    "form": {
+      "stepOf": "Vaihe {current}/{total}",
+      "typeLabel": "Tyyppi",
+      "typeAria": "Kupongin tyyppi",
+      "customersGetOff": "Asiakkaat saavat {value} alennusta.",
+      "customersGetCredit": "Asiakkaat saavat {value} krediittiä.",
+      "percentHint": "Syötä prosentti, esim. 15 tai 12,5.",
+      "amountHint": "Syötä summa valuutassa {currency}, esim. 4.50 tai 4,50 = {example}.",
+      "validityHint": "Kuponkia voi käyttää ensimmäisen päivän alusta viimeisen päivän loppuun.",
+      "enableWeeklyDropAria": "Ota viikkotarjous käyttöön",
+      "weeklyDropDayAria": "Viikkotarjouksen viikonpäivä",
+      "weeklyDropTimeAria": "Viikkotarjouksen alkamisaika",
+      "headlinePlaceholder": "-15 % tilauksestasi",
+      "finePrintPlaceholder": "Voimassa vain uusille asiakkaille",
+      "previewFallbackHeadline": "Kuponkisi",
+      "previewValidUntil": "Voimassa {date} asti",
+      "errors": {
+        "discountAboveZero": "Syötä yli 0 %:n alennus.",
+        "valueAboveZero": "Syötä arvo, joka on yli 0.",
+        "chooseDates": "Valitse kupongin alkamis- ja päättymispäivä.",
+        "endBeforeStart": "Loppupäivän on oltava sama kuin alkupäivä tai sen jälkeen.",
+        "invalidValue": "Syötä kelvollinen arvo.",
+        "valueMustBePositive": "Arvon on oltava suurempi kuin 0",
+        "totalLimitPositive": "Kokonaiskäyttörajan on oltava positiivinen luku",
+        "perUserLimitPositive": "Käyttäjäkohtaisen rajan on oltava positiivinen luku"
+      },
+      "discountErrors": {
+        "negative": "Alennus ei voi olla negatiivinen.",
+        "invalid": "Alennus ei ole kelvollinen luku.",
+        "decimals": "Alennuksessa voi olla enintään {decimals} desimaalia.",
+        "tooLarge": "Alennus on liian suuri.",
+        "tooHigh": "Alennus voi olla enintään 100 %."
+      },
+      "valueErrors": {
+        "negative": "Arvo ei voi olla negatiivinen.",
+        "invalid": "Arvo ei ole kelvollinen luku.",
+        "wholeNumber": "Arvon on oltava kokonaisluku.",
+        "decimals": "Arvossa voi olla enintään {decimals} desimaalia.",
+        "tooLarge": "Arvo on liian suuri."
+      }
+    },
+    "bulkImport": {
+      "back": "Takaisin kuponkeihin",
+      "title": "Tuo kuponkeja taulukosta",
+      "intro": "Lataa CSV-tiedosto (enintään 500 riviä). Jokainen kuponki luodaan luonnoksena, joten mikään ei tule näkyviin ennen kuin julkaiset sen.",
+      "columns": "Sarakkeet",
+      "downloadSample": "Lataa esimerkki-CSV",
+      "columnRequired": "<code>{name}</code> (pakollinen): {help}",
+      "columnOptional": "<code>{name}</code> (valinnainen): {help}",
+      "columnHelp": {
+        "name": "Kupongin otsikko, jonka asiakkaat näkevät, esim. \"Kevään kahvitarjous\".",
+        "type": "\"amount\" (rahasumma pois), \"percent\" (prosenttialennus) tai \"credit\" (myymäläkrediitti).",
+        "value": "Euroina tyypeille amount/credit (10 tai 10.50), prosentteina tyypille percent (15 tai 12.5).",
+        "currency": "Kolmikirjaiminen koodi, kuten EUR. Oletuksena kauppasi valuutta.",
+        "valid_from": "Kupongin ensimmäinen voimassaolopäivä: 2026-10-01 tai 01.10.2026.",
+        "valid_to": "Kupongin viimeinen voimassaolopäivä (voimassa kyseisen päivän loppuun).",
+        "code_prefix": "Kirjaimet jokaisen koodin alussa, esim. SPRING.",
+        "usage_limit": "Kuinka monta kertaa kuponkia voi käyttää yhteensä. Jätä tyhjäksi, jos rajaton."
+      },
+      "separatorHint": "Erota sarakkeet pilkuilla tai puolipisteillä. Jos käytät pilkkuja, laita desimaalisummat lainausmerkkeihin (\"4,50\") tai käytä pistettä (4.50).",
+      "chooseFile": "Valitse CSV-tiedosto",
+      "chooseDifferent": "Valitse toinen tiedosto napsauttamalla",
+      "browse": "Selaa napsauttamalla",
+      "fixRows": "Korjaa nämä rivit ja lataa tiedosto uudelleen:",
+      "andMore": "…ja {count} muuta.",
+      "readyToImport": "Valmiina tuotavaksi {count, plural, one {# kuponki} other {# kuponkia}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, enintään {limit} käyttökertaa} other {}}",
+      "imported": "{count, plural, one {# kuponki tuotu} other {# kuponkia tuotu}} luonnoksina.",
+      "viewVouchers": "Näytä kupongit",
+      "importing": "Tuodaan...",
+      "importCount": "Tuo {count, plural, one {# kuponki} other {# kuponkia}}",
+      "importVouchers": "Tuo kupongit",
+      "importFailedStatus": "Tuonti epäonnistui (virhe {status}).",
+      "importFailed": "Tuonti epäonnistui"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Näkyvä pääotsikko ja päätoiminto heti sivun yläosassa."
+        },
+        "value_props": {
+          "label": "Arvolupaukset",
+          "description": "Tärkeimmät hyödyt ja takuut lyhyesti."
+        },
+        "featured_products": {
+          "label": "Esittelyssä olevat tuotteet",
+          "description": "Suosituimmat tuotteet hintoineen ja tunnisteineen."
+        },
+        "featured_vouchers": {
+          "label": "Esittelyssä olevat kupongit",
+          "description": "Aktiiviset kuponkikortit kampanjoille."
+        },
+        "rental_packages": {
+          "label": "Vuokrauspaketit",
+          "description": "Vuokrauspaketit ja päiväkohtainen hinnoittelu."
+        },
+        "categories": {
+          "label": "Kategoriaruudukko",
+          "description": "Selaa tyypin, käyttötarkoituksen tai kohderyhmän mukaan."
+        },
+        "availability": {
+          "label": "Saatavuuskalenteri",
+          "description": "Reaaliaikainen saatavuus ja varattavat ajat."
+        },
+        "testimonials": {
+          "label": "Asiakaskokemukset",
+          "description": "Asiakkaiden lainauksia ja tähtiarvioita."
+        },
+        "gallery": {
+          "label": "Galleria",
+          "description": "Tunnelmakuvia tai käyttöesimerkkejä."
+        },
+        "pricing": {
+          "label": "Hintataulukko",
+          "description": "Selkeät hintatasot."
+        },
+        "rental_terms": {
+          "label": "Vuokrausehdot",
+          "description": "Vakuus, vakuutus ja palautuskäytäntö."
+        },
+        "faq": {
+          "label": "UKK",
+          "description": "Vastaa yleisimpiin epäilyksiin."
+        },
+        "newsletter": {
+          "label": "Uutiskirjeen tilaus",
+          "description": "Kerää sähköpostiosoitteita kampanjoita varten."
+        },
+        "contact": {
+          "label": "Yhteystiedot",
+          "description": "Tuki chatissa, sähköpostitse tai puhelimitse."
+        },
+        "map": {
+          "label": "Sijaintikartta",
+          "description": "Noutopiste tai myymälän sijainti."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Tarjouspalkki",
+          "description": "Kiinteä yläpalkki tarjouksille ja ilmoituksille."
+        },
+        "sticky_cta": {
+          "label": "Kiinteä CTA",
+          "description": "Toimintopainike, joka pysyy näkyvissä vierittäessä."
+        },
+        "chat_widget": {
+          "label": "Chat-widget",
+          "description": "Livechat- tai WhatsApp-integraatio."
+        },
+        "trust_badges": {
+          "label": "Luottamusmerkit",
+          "description": "Maksu-, turvallisuus- tai laatumerkit."
+        },
+        "social_proof": {
+          "label": "Sosiaalisen todisteen ponnahdusikkuna",
+          "description": "Viimeaikainen toiminta ja ostot."
+        },
+        "countdown": {
+          "label": "Ajastinlaskuri",
+          "description": "Kiireen tuntua rajoitettuihin tarjouksiin."
+        },
+        "reviews_widget": {
+          "label": "Arvostelu-widget",
+          "description": "Upota Google tai Trustpilot."
+        },
+        "language_switch": {
+          "label": "Kielivalitsin",
+          "description": "Nopea kielenvaihto sivulla."
+        },
+        "analytics": {
+          "label": "Analytiikkakoodit",
+          "description": "Paikat seurantapikseleille."
+        },
+        "cookie_banner": {
+          "label": "Evästebanneri",
+          "description": "GDPR-suostumusbanneri."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Esikatselu",
+      "edit": "Muokkaa",
+      "previewEmpty": "Osioita ei ole vielä lisätty. Siirry muokkaustilaan lisätäksesi osioita.",
+      "title": "Visuaalinen editori",
+      "preview": "Esikatselu",
+      "empty": "Ei vielä osioita. Aloita napsauttamalla alta \"Lisää osio\".",
+      "collapseSettings": "Pienennä asetukset",
+      "expandSettings": "Laajenna asetukset",
+      "removeSection": "Poista osio {label}",
+      "sectionTitle": "Osion otsikko",
+      "description": "Kuvaus",
+      "descriptionPlaceholder": "Valinnainen kuvaus",
+      "backgroundColor": "Taustaväri",
+      "layoutVariant": "Asettelu",
+      "layout": {
+        "default": "Oletus",
+        "centered": "Keskitetty",
+        "wide": "Leveä",
+        "compact": "Tiivis"
+      },
+      "addSection": "Lisää osio",
+      "availableSections": "Saatavilla olevat osiot",
+      "closeCatalog": "Sulje",
+      "allAdded": "Kaikki saatavilla olevat osiot on lisätty.",
+      "count": "{configured, plural, one {# osio määritetty} other {# osiota määritetty}} / {available} lisättävissä"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Verkkokaupan julkaisun tarkistuslista",
+        "rental_launch": "Vuokraussivun julkaisun tarkistuslista",
+        "campaign_ops": "Viikoittaiset kampanjatoimet",
+        "support_ops": "Tukivalmiuden tarkistuslista"
+      },
+      "toast": {
+        "saved": "Sivueditori päivitetty.",
+        "saveFailed": "Sivun tallennus epäonnistui",
+        "vibeFailed": "Vibe-agentti epäonnistui",
+        "layoutGenerated": "Vibe-asettelu luotu.",
+        "generateFailed": "Asettelun luonti epäonnistui",
+        "agentFailed": "Agentti epäonnistui",
+        "planGenerated": "Prosessisuunnitelma luotu.",
+        "runAgentFailed": "Agentin suorittaminen epäonnistui"
+      },
+      "noData": "Sivueditorin tietoja ei ole saatavilla.",
+      "title": "Sivueditori",
+      "intro": "Rakenna nopeita verkkokauppa- ja vuokraussivuja valmiista osioista ja lisäosista.",
+      "introAi": "Rakenna nopeita verkkokauppa- ja vuokraussivuja valmiista osioista ja lisäosista, halutessasi tekoälyn ehdotusten avulla.",
+      "tabs": {
+        "store": "Verkkokauppa",
+        "rental": "Vuokraus"
+      },
+      "details": {
+        "title": "Sivun tiedot",
+        "subtitle": "Otsikko, alaotsikko ja asettelu.",
+        "save": "Tallenna",
+        "pageTitle": "Sivun otsikko",
+        "subtitleLabel": "Alaotsikko"
+      },
+      "sections": {
+        "title": "Osiot",
+        "subtitle": "Järjestä vetämällä, laajenna määrittääksesi tai esikatsele asettelua.",
+        "suggestLayout": "Ehdota asettelua",
+        "suggestionsLeft": "Tekoälyn asetteluehdotuksia jäljellä: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Lisäosat",
+        "subtitle": "Lisäwidgetit ja markkinointielementit.",
+        "enable": "Ota lisäosa {label} käyttöön",
+        "disable": "Poista lisäosa {label} käytöstä"
+      },
+      "summary": {
+        "title": "Reaaliaikainen yhteenveto",
+        "line": "{title} · {sections, plural, one {# osio} other {# osiota}} · {addons, plural, one {# lisäosa} other {# lisäosaa}}",
+        "sectionsLabel": "Osiot:",
+        "addonsLabel": "Lisäosat:",
+        "none": "Ei mitään"
+      },
+      "assistant": {
+        "title": "Julkaisun tarkistuslistan avustaja",
+        "subtitle": "Luo toimintasuunnitelmia ja tarkistuslistoja.",
+        "goalLabel": "Prosessin tavoite",
+        "createChecklist": "Luo tarkistuslista",
+        "checklistsLeft": "Tarkistuslistoja jäljellä: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Valikoituja tarjouksia, vuokrattavia ja kuponkeja: {name}.",
+        "shopProducts": "Osta tuotteita",
+        "browseRentals": "Selaa vuokrattavia"
+      },
+      "valueProps": {
+        "rewardsTitle": "Palkinnot",
+        "rewardsText": "Kuponkiedut sisäänrakennettuina.",
+        "stockTitle": "Luotettava saatavuus",
+        "stockText": "Ajantasaiset hinnat ja saatavuus.",
+        "datesTitle": "Joustavat päivät",
+        "datesText": "Suunnittele vuokraukset vaivatta."
+      },
+      "viewAll": "Näytä kaikki",
+      "seeAll": "Katso kaikki",
+      "products": {
+        "title": "Esittelyssä olevat tuotteet",
+        "empty": "Ei vielä tuotteita.",
+        "fallbackDescription": "Tuotenosto"
+      },
+      "rentals": {
+        "title": "Vuokrauspaketit",
+        "empty": "Ei vielä vuokrattavia.",
+        "fallbackDescription": "Vuokrausnosto",
+        "perDay": "{price} / päivä"
+      },
+      "categories": {
+        "title": "Selaa kategorioita",
+        "popular": "Suositut",
+        "business": "Yritykset",
+        "events": "Tapahtumat",
+        "seasonal": "Sesonki",
+        "corporate": "Yritysasiakkaat",
+        "custom": "Räätälöity"
+      },
+      "availability": {
+        "title": "Reaaliaikainen saatavuus",
+        "text": "Tarkista saatavuus ja pyydä tarjous minuuteissa.",
+        "seeCalendar": "Katso kalenteri"
+      },
+      "testimonials": {
+        "title": "Asiakkaiden kokemuksia",
+        "smooth": "Sujuva prosessi",
+        "lovedVoucher": "Kuponki oli loistava",
+        "support": "Erinomainen tuki"
+      },
+      "gallery": {
+        "title": "Galleria"
+      },
+      "pricing": {
+        "title": "Hinnoittelu",
+        "starter": "Starter",
+        "growth": "Kasvu",
+        "enterprise": "Yritys",
+        "tierText": "Räätälöity hinnoittelu ja tuki"
+      },
+      "rentalTerms": {
+        "title": "Vuokrausehdot",
+        "text": "Vakuudet, noutosäännöt ja palautuskäytäntö kerrotaan selkeästi etukäteen."
+      },
+      "faq": {
+        "title": "UKK",
+        "redeem": "Miten lunastan?",
+        "reschedule": "Voinko vaihtaa ajankohtaa?",
+        "support": "Tarjoatteko tukea?"
+      },
+      "newsletter": {
+        "title": "Pysy ajan tasalla",
+        "text": "Saat uudet tarjoukset ja vuokrauskohteet suoraan sähköpostiisi.",
+        "emailLabel": "Sähköpostiosoite",
+        "subscribe": "Tilaa"
+      },
+      "contact": {
+        "title": "Yhteystiedot",
+        "emailUs": "Lähetä meille sähköpostia: {email}"
+      },
+      "map": {
+        "text": "Noutopaikka kerrotaan varauksen jälkeen."
+      },
+      "vouchers": {
+        "title": "Aktiiviset kupongit",
+        "empty": "Ei kuponkeja saatavilla.",
+        "voucher": "Kuponki",
+        "view": "Näytä kuponki"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Aktiivinen",
+      "redeemed": "Lunastettu",
+      "expired": "Vanhentunut",
+      "cancelled": "Peruttu"
+    },
+    "list": {
+      "metaTitle": "Lahjakortit",
+      "title": "Lahjakortit",
+      "subtitle": "Luo ja hallinnoi lahjakortteja",
+      "newGiftCard": "Uusi lahjakortti",
+      "stats": {
+        "total": "Lahjakortteja yhteensä",
+        "totalDescription": "Kaikki myönnetyt lahjakortit",
+        "active": "Aktiiviset",
+        "activeDescription": "Lunastettavissa nyt",
+        "redeemed": "Lunastetut",
+        "redeemedDescription": "Valmiit lunastukset",
+        "totalValue": "Kokonaisarvo",
+        "totalValueDescription": "Myönnettyjen lahjakorttien arvo"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Ei vielä lahjakortteja",
+      "emptyDescription": "Luo lahjakortti omalla brändäyksellä ja QR-lunastuksella.",
+      "createFirst": "Luo ensimmäinen lahjakorttisi",
+      "searchPlaceholder": "Hae otsikolla, koodilla tai viestillä",
+      "searchLabel": "Hae lahjakortteja",
+      "status": "Tila",
+      "allStatus": "Kaikki tilat",
+      "sortBy": "Järjestä",
+      "sortDate": "Päivämäärä (uusin)",
+      "sortAmount": "Summa (suurin ensin)",
+      "showing": "Näytetään {shown}/{total, plural, one {# lahjakortti} other {# lahjakorttia}}",
+      "clearFilters": "Tyhjennä suodattimet",
+      "noMatches": "Suodattimia vastaavia lahjakortteja ei löytynyt.",
+      "defaultHeadline": "Lahjakortti",
+      "noExpiry": "Ei vanhenemispäivää",
+      "validUntil": "Voimassa: {date} asti",
+      "redeemedOn": "Lunastettu: {date}",
+      "details": "Tiedot",
+      "view": "Näytä"
+    },
+    "detail": {
+      "title": "Lahjakortti",
+      "code": "Koodi {code}",
+      "publicView": "Julkinen näkymä",
+      "newGiftCard": "Uusi lahjakortti",
+      "detailsTitle": "Lahjakortin tiedot",
+      "value": "Arvo",
+      "validFrom": "Voimassa alkaen",
+      "validTo": "Voimassa asti",
+      "noExpiry": "Ei vanhenemispäivää",
+      "redeemedAt": "Lunastettu",
+      "notRedeemed": "Ei lunastettu",
+      "qrTitle": "Henkilökunnan lunastus-QR",
+      "qrHelp": "Henkilökunta voi skannata tämän QR-koodin lunastaakseen ja mitätöidäkseen lahjakortin."
+    },
+    "new": {
+      "title": "Uusi lahjakortti",
+      "subtitle": "Mukauta ja myönnä lahjakortti",
+      "created": "Lahjakortti luotu.",
+      "cancel": "Peruuta",
+      "creating": "Luodaan...",
+      "submit": "Luo lahjakortti",
+      "errors": {
+        "amountRequired": "Syötä summa, joka on yli 0.",
+        "endBeforeStart": "Loppupäivän on oltava sama kuin alkupäivä tai sen jälkeen.",
+        "createFailed": "Lahjakortin luonti epäonnistui"
+      },
+      "amountErrors": {
+        "negative": "Summa ei voi olla negatiivinen.",
+        "invalid": "Summa ei ole kelvollinen luku.",
+        "wholeNumber": "Summan on oltava kokonaisluku.",
+        "decimals": "Summassa voi olla enintään {decimals} desimaalia.",
+        "tooLarge": "Summa on liian suuri."
+      },
+      "priceErrors": {
+        "negative": "Myyntihinta ei voi olla negatiivinen.",
+        "invalid": "Myyntihinta ei ole kelvollinen luku.",
+        "wholeNumber": "Myyntihinnan on oltava kokonaisluku.",
+        "decimals": "Myyntihinnassa voi olla enintään {decimals} desimaalia.",
+        "tooLarge": "Myyntihinta on liian suuri."
+      },
+      "valueSection": {
+        "title": "Arvo ja voimassaolo",
+        "description": "Aseta summa, valuutta ja vanhenemispäivä",
+        "amount": "Summa",
+        "faceValue": "Nimellisarvo: {value}.",
+        "amountHelp": "Syötä summa valuutassa {currency}, esim. 50 tai 49,90 = {example}.",
+        "currency": "Valuutta",
+        "validFrom": "Voimassa alkaen",
+        "validTo": "Voimassa asti",
+        "noExpiry": "Ei vanhenemispäivää"
+      },
+      "purchaseSection": {
+        "title": "Asiakkaan osto",
+        "description": "Salli asiakkaiden ostaa tämä lahjakortti verkossa",
+        "purchasable": "Asiakkaiden ostettavissa",
+        "salePrice": "Myyntihinta (valinnainen, oletuksena nimellisarvo)",
+        "salePricePlaceholder": "Sama kuin summa",
+        "customersPay": "Asiakkaat maksavat {value}.",
+        "salePriceHelp": "Jätä tyhjäksi myydäksesi nimellisarvoon. Aseta eri hinta kampanjoita varten."
+      },
+      "brandingSection": {
+        "title": "Brändäys ja viesti",
+        "description": "Otsikko, viesti, kuvat ja värit",
+        "headline": "Otsikko",
+        "headlinePlaceholder": "Lahja kahvin ystävälle",
+        "message": "Viesti",
+        "messagePlaceholder": "Lisää henkilökohtainen viesti vastaanottajalle",
+        "logoUrl": "Logon URL",
+        "imageUrl": "Kuvan URL",
+        "accentColor": "Korostusväri",
+        "backgroundColor": "Taustaväri",
+        "textColor": "Tekstin väri",
+        "codePrefix": "Koodin etuliite (valinnainen)"
+      },
+      "preview": {
+        "title": "Esikatselu",
+        "defaultHeadline": "Lahjakortti",
+        "imageAlt": "Lahjakortti",
+        "logoAlt": "Brändin logo",
+        "notePlaceholder": "Lisää henkilökohtainen viesti"
+      }
+    },
+    "gifts": {
+      "title": "Lahjatuotteet",
+      "subtitle": "Hallinnoi tuotteitasi Gift Hubissa",
+      "dashboard": "Hallintapaneeli",
+      "confirmDelete": "Oletko varma? Tuote poistetaan käytöstä.",
+      "stats": {
+        "total": "Yhteensä",
+        "active": "Aktiiviset",
+        "views": "Katselut",
+        "purchases": "Ostot"
+      },
+      "emptyTitle": "Ei vielä lahjatuotteita",
+      "emptyDescription": "Lisää ensimmäinen tuotteesi, niin se näkyy Gift Hub -syötteessä.",
+      "emptyApiHint": "Luo tuotteita API:n kautta osoitteessa <code>{endpoint}</code>.",
+      "inactive": "Ei aktiivinen",
+      "featured": "Esittelyssä",
+      "views": "{count, plural, one {# katselu} other {# katselua}}",
+      "purchases": "{count, plural, one {# osto} other {# ostoa}}",
+      "conversionRate": "{rate} % konversio",
+      "activate": "Aktivoi",
+      "deactivate": "Poista käytöstä",
+      "delete": "Poista"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Tietoja ei ole saatavilla",
+      "value": "Arvo: <strong>{value}</strong>",
+      "dismiss": "Hylkää",
+      "remove": "Poista",
+      "dialog": "Valintaikkuna",
+      "close": "Sulje",
+      "loading": "Ladataan"
+    },
+    "analyticsFunnel": {
+      "empty": "Tällä ajanjaksolla ei vielä toimintaa",
+      "top": "Alku",
+      "drop": "-{rate} % pudotus"
+    },
+    "periodComparison": {
+      "title": "Jaksovertailu",
+      "loading": "Ladataan...",
+      "previous": "Edellinen: {value}",
+      "noData": "Tietoja ei ole saatavilla",
+      "period": {
+        "day": "Päivä",
+        "week": "Viikko",
+        "month": "Kuukausi",
+        "quarter": "Neljännes",
+        "year": "Vuosi"
+      },
+      "metric": {
+        "revenue": "Tulot",
+        "redemptions": "Lunastukset",
+        "purchases": "Ostot",
+        "referrals": "Suosittelut",
+        "customers": "Asiakkaat"
+      }
+    },
+    "trendChart": {
+      "noData": "Ei tietoja"
+    },
+    "conversionChart": {
+      "noData": "Tietoja ei ole saatavilla",
+      "previous": "ed.: {value}"
+    },
+    "funnelChart": {
+      "empty": "Tällä ajanjaksolla ei vielä toimintaa"
+    },
+    "geoMap": {
+      "noData": "Tietoja ei ole saatavilla",
+      "value": "Arvo: <strong>{value}</strong>",
+      "country": {
+        "GB": "Yhdistynyt kuningaskunta",
+        "IE": "Irlanti",
+        "FR": "Ranska",
+        "DE": "Saksa",
+        "ES": "Espanja",
+        "PT": "Portugali",
+        "IT": "Italia",
+        "NL": "Alankomaat",
+        "BE": "Belgia",
+        "CH": "Sveitsi",
+        "AT": "Itävalta",
+        "PL": "Puola",
+        "CZ": "Tšekki",
+        "SE": "Ruotsi",
+        "NO": "Norja",
+        "FI": "Suomi",
+        "DK": "Tanska",
+        "EE": "Viro",
+        "LV": "Latvia",
+        "LT": "Liettua",
+        "HU": "Unkari",
+        "RO": "Romania",
+        "BG": "Bulgaria",
+        "GR": "Kreikka",
+        "HR": "Kroatia",
+        "SK": "Slovakia",
+        "SI": "Slovenia",
+        "RS": "Serbia",
+        "UA": "Ukraina",
+        "BY": "Valko-Venäjä"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Odotetaan tietoja..."
+    },
+    "pieDonutChart": {
+      "noData": "Tietoja ei ole saatavilla",
+      "total": "Yhteensä"
+    },
+    "activityFeed": {
+      "justNow": "juuri nyt",
+      "minutesAgo": "{count} min sitten",
+      "hoursAgo": "{count} t sitten",
+      "daysAgo": "{count} pv sitten",
+      "empty": "Ei vielä toimintaa",
+      "loadMore": "Lataa lisää",
+      "eventType": {
+        "purchase": "Osto",
+        "redemption": "Lunastus",
+        "signup": "Rekisteröityminen",
+        "alert": "Hälytys"
+      }
+    },
+    "dateRange": {
+      "days7": "7 päivää",
+      "days30": "30 päivää",
+      "days90": "90 päivää",
+      "year1": "1 vuosi",
+      "custom": "Mukautettu"
+    },
+    "chartCard": {
+      "fullscreen": "Koko näyttö",
+      "exitFullscreen": "Poistu koko näytöstä",
+      "retry": "Yritä uudelleen"
+    },
+    "dashboardHeader": {
+      "export": "Vie",
+      "exportAs": "Vie muodossa {format}"
+    },
+    "dataTable": {
+      "empty": "Tietoja ei ole saatavilla",
+      "showing": "Näytetään {from}–{to}/{total}",
+      "previousPage": "Edellinen sivu",
+      "nextPage": "Seuraava sivu"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Live",
+        "reconnecting": "Yhdistetään uudelleen",
+        "disconnected": "Yhteys katkennut"
+      },
+      "status": {
+        "connected": "Yhdistetty",
+        "reconnecting": "Yhdistetään uudelleen",
+        "disconnected": "Yhteys katkennut"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "vs. edellinen jakso"
+    },
+    "statComparison": {
+      "current": "Nykyinen",
+      "previous": "Edellinen",
+      "change": "muutos"
+    },
+    "aiInsightPanel": {
+      "title": "Tekoälyn havainnot",
+      "placeholder": "Kysy tekoälyltä...",
+      "send": "Lähetä"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Live",
+        "degraded": "Heikentynyt",
+        "disconnected": "Offline"
+      },
+      "latency": "Viive: {ms} ms",
+      "lastUpdate": "Viimeisin päivitys: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Ilmoitukset",
+      "title": "Ilmoitukset",
+      "markAllRead": "Merkitse kaikki luetuiksi",
+      "empty": "Ei ilmoituksia",
+      "ariaLabelUnread": "Ilmoitukset ({count} lukematonta)"
+    },
+    "premiumChartCard": {
+      "info": "Tietoa",
+      "fullscreen": "Koko näyttö",
+      "exitFullscreen": "Poistu koko näytöstä",
+      "moreOptions": "Lisää valintoja",
+      "empty": "Tältä ajanjaksolta ei ole tietoja"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "vs. edellinen jakso"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Toiminnassa",
+        "degraded": "Heikentynyt",
+        "outage": "Katkos"
+      }
+    },
+    "select": {
+      "placeholder": "Valitse...",
+      "search": "Hae...",
+      "empty": "Vaihtoehtoja ei löytynyt",
+      "removeOption": "Poista {label}"
+    },
+    "sidebar": {
+      "expand": "Laajenna sivupalkki",
+      "collapse": "Pienennä sivupalkki",
+      "openMenu": "Avaa valikko",
+      "closeMenu": "Sulje valikko"
+    },
+    "iconSystem": {
+      "notFound": "Kuvaketta \"{name}\" ei löytynyt",
+      "badge": "{count, plural, one {# ilmoitus} other {# ilmoitusta}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Sivupaneeli",
+      "closePanel": "Sulje paneeli"
+    },
+    "codeBlock": {
+      "copyCode": "Kopioi koodi",
+      "copied": "Kopioitu",
+      "copy": "Kopioi"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Asiakkaat",
+      "title": "Asiakkaat",
+      "summary": "{count, plural, one {# asiakas} other {# asiakasta}} · tulot yhteensä {revenue}",
+      "stats": {
+        "totalCustomers": "Asiakkaita yhteensä",
+        "totalRevenue": "Tulot yhteensä",
+        "totalRedemptions": "Lunastukset yhteensä"
+      },
+      "table": {
+        "customer": "Asiakas",
+        "email": "Sähköposti",
+        "purchases": "Ostot",
+        "totalSpent": "Käytetty yhteensä",
+        "redemptions": "Lunastukset",
+        "lastPurchase": "Viimeisin osto"
+      },
+      "empty": "Ei vielä asiakkaita",
+      "unknown": "Tuntematon"
+    },
+    "qrCheckout": {
+      "title": "QR-pikakassa",
+      "subtitle": "Luo QR-koodeja asiakkaiden pikamaksuun",
+      "voucherLabel": "Linkitä kuponkiin (valinnainen)",
+      "generalOption": "Yleinen kassa (ei tiettyä kuponkia)",
+      "voucherOption": "{type} – {value} {currency} ({status})",
+      "generating": "Luodaan...",
+      "generate": "Luo QR-koodi",
+      "qrAlt": "Kassan QR-koodi",
+      "scanToCheckout": "Skannaa ja maksa",
+      "print": "Tulosta QR-koodi"
+    },
+    "redemptions": {
+      "metaTitle": "Lunastukset",
+      "subtitle": "Tarkastele ja vahvista kuponkien lunastuksia.",
+      "stats": {
+        "totalTitle": "Lunastukset yhteensä",
+        "totalDescription": "Kaikki lähetetyt lunastukset",
+        "pendingTitle": "Odottaa",
+        "pendingDescription": "Odottaa vahvistusta",
+        "confirmedTitle": "Vahvistetut",
+        "confirmedDescription": "Hyväksytyt lunastukset",
+        "discountsTitle": "Annetut alennukset",
+        "discountsDescription": "Vahvistetut alennukset"
+      },
+      "empty": {
+        "title": "Ei vielä lunastuksia",
+        "description": "Lunastukset näkyvät täällä, kun asiakkaat käyttävät kuponkeja."
+      },
+      "voucherFallback": "Kuponki",
+      "card": {
+        "order": "Tilaus {amount}",
+        "discount": "Alennus: {amount}",
+        "discountReferred": "Alennus: {amount} – suosittelija {name}",
+        "confirmed": "Vahvistettu",
+        "pending": "Odottaa",
+        "method": "Tapa: {method}",
+        "methods": {
+          "online": "Verkossa",
+          "in_store": "Myymälässä"
+        },
+        "orderReference": "Tilaus: {reference}",
+        "notAvailable": "–",
+        "location": "Sijainti: {location}",
+        "date": "Päivämäärä: {date}"
+      },
+      "confirm": {
+        "prompt": "Vahvistetaanko tämä lunastus? Suosittelijan krediitti vapautuu.",
+        "confirmLabel": "Vahvista",
+        "success": "Lunastus vahvistettu. Suosittelijan krediitti vapautettu.",
+        "error": "Lunastuksen vahvistus epäonnistui. Yritä uudelleen.",
+        "confirming": "Vahvistetaan...",
+        "button": "Vahvista lunastus"
+      },
+      "export": {
+        "success": "Lunastukset viety onnistuneesti!",
+        "error": "Lunastusten vienti epäonnistui",
+        "exporting": "Viedään...",
+        "button": "Vie CSV"
+      }
+    },
+    "reviews": {
+      "title": "Arvostelut",
+      "subtitle": "Seuraa asiakasarvosteluja ja vastaa niihin",
+      "filters": "Suodattimet",
+      "reviewCount": "{count, plural, one {# arvostelu} other {# arvostelua}}",
+      "ratingDistribution": "Arvosanojen jakauma",
+      "responseRate": "Vastausprosentti",
+      "replied": "Vastattu",
+      "pending": "Odottaa",
+      "responseRatePercent": "Vastausprosentti {percent} %",
+      "filter": {
+        "rating": "Arvosana",
+        "allRatings": "Kaikki arvosanat",
+        "stars": "{count, plural, one {# tähti} other {# tähteä}}",
+        "replyStatus": "Vastauksen tila",
+        "all": "Kaikki",
+        "needsReply": "Vaatii vastauksen",
+        "replied": "Vastattu",
+        "clear": "Tyhjennä"
+      },
+      "loading": "Ladataan arvosteluja...",
+      "empty": "Arvosteluja ei löytynyt.",
+      "anonymous": "Anonyymi",
+      "verified": "Vahvistettu",
+      "campaign": "Kampanja: {name}",
+      "voucher": "Kuponki: {code}",
+      "foundHelpful": "{count} piti hyödyllisenä",
+      "yourReply": "Vastauksesi",
+      "replyPlaceholder": "Kirjoita vastauksesi...",
+      "posting": "Julkaistaan...",
+      "postReply": "Julkaise vastaus",
+      "cancel": "Peruuta",
+      "reply": "Vastaa",
+      "showing": "Näytetään {from}–{to}/{total}",
+      "pageOf": "Sivu {page}/{totalPages}",
+      "previousPage": "Edellinen sivu",
+      "nextPage": "Seuraava sivu",
+      "loadFailed": "Arvostelujen lataus epäonnistui",
+      "replyFailed": "Vastaaminen epäonnistui",
+      "replyPosted": "Vastaus julkaistu"
+    },
+    "scanner": {
+      "title": "Skanneri",
+      "subtitle": "Skannaa kuponkeja, lahjakortteja ja lippuja",
+      "manual": "Manuaalinen",
+      "camera": "Kamera",
+      "scanning": "Skannataan...",
+      "cameraDenied": "Kameran käyttö estettiin. Salli kameran käyttö selaimen asetuksista tai kirjoita koodi alle.",
+      "cameraUnavailable": "Kameraa ei ole käytettävissä. Kirjoita koodi alle.",
+      "pointAtCode": "Osoita QR-koodia skannataksesi automaattisesti",
+      "enterCode": "Syötä koodi",
+      "codePlaceholder": "Kuponkikoodi (esim. AUD-CMUI0TG1), kuponkilinkki, lippu- tai lahjakorttikoodi",
+      "codeAriaLabel": "Skannattava koodi",
+      "scan": "Skannaa",
+      "found": {
+        "voucher": "Kuponki löytyi",
+        "gift_card": "Lahjakortti löytyi",
+        "ticket": "Lippu löytyi"
+      },
+      "info": {
+        "ticketNumber": "Lippunro",
+        "event": "Tapahtuma",
+        "type": "Tyyppi",
+        "standard": "Vakio",
+        "attendee": "Osallistuja",
+        "code": "Koodi",
+        "amount": "Summa",
+        "message": "Viesti",
+        "voucher": "Kuponki",
+        "campaign": "Kampanja",
+        "none": "Ei mitään",
+        "value": "Arvo",
+        "validUntil": "Voimassa asti"
+      },
+      "redeem": "Lunasta",
+      "redeeming": "Lunastetaan...",
+      "cannotRedeem": "Tätä kohdetta ei voi lunastaa (tila: {status})",
+      "redeemed": {
+        "voucher": "Kuponki lunastettu onnistuneesti!",
+        "gift_card": "Lahjakortti lunastettu onnistuneesti!",
+        "ticket": "Lippu lunastettu onnistuneesti!"
+      },
+      "errors": {
+        "enterCode": "Syötä koodi",
+        "notFound": "Ei löytynyt",
+        "scanFailed": "Skannaus epäonnistui",
+        "redeemFailed": "Lunastus epäonnistui"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktiivinen",
+          "redeemed": "lunastettu",
+          "expired": "vanhentunut",
+          "cancelled": "peruttu"
+        },
+        "ticket": {
+          "available": "saatavilla",
+          "sold": "myyty",
+          "used": "käytetty",
+          "cancelled": "peruttu",
+          "refunded": "hyvitetty"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Hinta ei voi olla negatiivinen.",
+      "invalid": "Hinta ei ole kelvollinen luku.",
+      "wholeNumber": "Hinnan on oltava kokonaisluku.",
+      "decimals": "Hinnassa voi olla enintään {decimals} desimaalia.",
+      "tooLarge": "Hinta on liian suuri."
+    },
+    "appointments": {
+      "title": "Ajanvaraukset",
+      "subtitle": "Hallinnoi varauksia ja vapaita aikoja",
+      "createSlot": "Luo aika",
+      "form": {
+        "serviceName": "Palvelun nimi",
+        "price": "Hinta ({currency}, jätä tyhjäksi, jos ilmainen)",
+        "startTime": "Alkamisaika",
+        "endTime": "Päättymisaika",
+        "notes": "Muistiinpanot",
+        "creating": "Luodaan…",
+        "submit": "Luo vapaa aika"
+      },
+      "status": {
+        "all": "Kaikki",
+        "pending": "Odottaa",
+        "confirmed": "Vahvistettu",
+        "cancelled": "Peruttu",
+        "completed": "Valmis"
+      },
+      "loading": "Ladataan...",
+      "empty": "Ajanvarauksia ei löytynyt",
+      "bookedBy": "Varaaja: {name}",
+      "confirm": "Vahvista",
+      "confirmAria": "Vahvista ajanvaraus",
+      "cancel": "Peru",
+      "cancelAria": "Peru ajanvaraus",
+      "errors": {
+        "endBeforeStart": "Päättymisajan on oltava alkamisajan jälkeen.",
+        "createFailed": "Vapaata aikaa ei voitu luoda. Yritä uudelleen.",
+        "network": "Palvelimeen ei saatu yhteyttä. Tarkista yhteytesi ja yritä uudelleen.",
+        "updateFailed": "Ajanvarausta ei voitu päivittää (virhe {status})."
+      }
+    },
+    "inventory": {
+      "title": "Varasto",
+      "subtitle": "Seuraa varastosaldoja ja hallinnoi kuponkien saatavuutta",
+      "refresh": "Päivitä",
+      "summary": {
+        "totalItems": "Tuotteita yhteensä",
+        "lowStock": "Vähissä",
+        "outOfStock": "Loppu"
+      },
+      "alerts": {
+        "title": "Vähäisen varaston hälytykset ({count})",
+        "threshold": "{stock} / raja {threshold}"
+      },
+      "loading": "Ladataan varastoa...",
+      "empty": "Kuponkeja ei löytynyt",
+      "typeVoucher": "Kuponki: {type}",
+      "stockStatus": {
+        "unlimited": "Rajaton",
+        "outOfStock": "Loppu",
+        "lowStock": "Vähissä",
+        "inStock": "Varastossa"
+      },
+      "stock": "Varasto: {stock}",
+      "purchased": "Ostettu: {count}",
+      "redeemed": "Lunastettu: {count}",
+      "validUntil": "Voimassa {date} asti",
+      "edit": {
+        "button": "Muokkaa varastoa",
+        "stockQuantity": "Varastomäärä",
+        "threshold": "Vähäisen varaston raja",
+        "save": "Tallenna",
+        "saving": "Tallennetaan...",
+        "cancel": "Peruuta"
+      },
+      "stockUpdated": "Varasto päivitetty",
+      "errors": {
+        "loadFailed": "Varaston lataus epäonnistui",
+        "updateFailed": "Varaston päivitys epäonnistui"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "Tekoälyehdotuksia ei ole vielä otettu käyttöön tällä alustalla, joten automaattiset asettelu- ja tarkistuslistatyökalut on piilotettu. Voit silti rakentaa ja muokata sivujasi itse."
+    },
+    "pricing": {
+      "title": "Dynaaminen hinnoittelu",
+      "newRule": "Uusi sääntö",
+      "ruleTypes": {
+        "demand": {
+          "label": "Kysyntäpohjainen",
+          "desc": "Säädä hintaa katselujen ja ostojen suhteen perusteella"
+        },
+        "timeOfDay": {
+          "label": "Kellonaika",
+          "desc": "Eri hinnat ruuhka- ja hiljaisille tunneille"
+        },
+        "inventory": {
+          "label": "Varasto",
+          "desc": "Hinta muuttuu jäljellä olevan varaston mukaan"
+        },
+        "surge": {
+          "label": "Ruuhkahinta",
+          "desc": "Lisähinta erikoistapahtumille ja pyhäpäiville"
+        },
+        "loyalty": {
+          "label": "Kanta-asiakas",
+          "desc": "Alennuksia palaaville asiakkaille"
+        }
+      },
+      "form": {
+        "title": "Luo hinnoittelusääntö",
+        "ruleType": "Säännön tyyppi",
+        "priority": "Prioriteetti",
+        "priorityPlaceholder": "Suurempi = sovelletaan ensin",
+        "config": "Määritys (JSON)",
+        "submit": "Luo sääntö",
+        "cancel": "Peruuta"
+      },
+      "loading": "Ladataan sääntöjä...",
+      "empty": "Ei vielä hinnoittelusääntöjä. Luo sääntö ottaaksesi dynaamisen hinnoittelun käyttöön.",
+      "table": {
+        "type": "Tyyppi",
+        "priority": "Prioriteetti",
+        "config": "Määritys",
+        "status": "Tila",
+        "actions": "Toiminnot"
+      },
+      "active": "Aktiivinen",
+      "inactive": "Ei aktiivinen",
+      "deleteAria": "Poista hinnoittelusääntö",
+      "deleteConfirm": "Poistetaanko tämä hinnoittelusääntö?",
+      "delete": "Poista",
+      "errors": {
+        "invalidJson": "Määrityskentän on oltava kelvollista JSONia."
+      },
+      "preview": {
+        "title": "Hinnan esikatselu",
+        "description": "Syötä kupongin tunnus nähdäksesi, miten aktiiviset säännöt vaikuttavat sen hintaan.",
+        "voucherId": "Kupongin tunnus",
+        "voucherIdPlaceholder": "Syötä kupongin tunnus",
+        "calculate": "Laske",
+        "error": "Hintaa ei voitu laskea",
+        "basePrice": "Perushinta",
+        "finalPrice": "Lopullinen hinta"
+      }
+    },
+    "rentals": {
+      "title": "Vuokravaraukset",
+      "subtitle": "Hallinnoi vuokrauspyyntöjä ja palautuksia",
+      "status": {
+        "all": "Kaikki",
+        "pending": "Odottaa",
+        "approved": "Hyväksytty",
+        "rejected": "Hylätty",
+        "paid": "Maksettu",
+        "active": "Aktiivinen",
+        "returned": "Palautettu",
+        "cancelled": "Peruttu"
+      },
+      "empty": "Vuokravarauksia ei löytynyt.",
+      "dates": "{start} – {end} ({days, plural, one {# päivä} other {# päivää}})",
+      "total": "Yhteensä: <strong>{total}</strong> ({rate}/päivä)",
+      "note": "Huomautus: {note}",
+      "rejectedReason": "Hylätty: {reason}",
+      "bookedMeta": "Varattu: {date} | Käyttäjä: {user}...",
+      "approve": "Hyväksy",
+      "reasonPlaceholder": "Syy (valinnainen)",
+      "confirm": "Vahvista",
+      "cancel": "Peruuta",
+      "reject": "Hylkää",
+      "markReturned": "Merkitse palautetuksi"
+    },
+    "subscriptionBoxes": {
+      "title": "Tilauslaatikot",
+      "subtitle": "Hallinnoi toistuvia kuponkilaatikoita",
+      "newBox": "+ Uusi laatikko",
+      "cancel": "Peruuta",
+      "form": {
+        "name": "Nimi",
+        "description": "Kuvaus",
+        "price": "Hinta ({currency})",
+        "currency": "Valuutta",
+        "interval": "Jakso",
+        "maxItems": "Tuotteita enintään",
+        "creating": "Luodaan...",
+        "submit": "Luo laatikko"
+      },
+      "interval": {
+        "weekly": "Viikoittain",
+        "monthly": "Kuukausittain",
+        "quarterly": "Neljännesvuosittain"
+      },
+      "created": "Tilauslaatikko luotu.",
+      "empty": "Ei vielä tilauslaatikoita. Luo ensimmäinen.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# tilaaja} other {# tilaajaa}}",
+      "items": "{count, plural, one {# tuote} other {# tuotetta}}",
+      "errors": {
+        "priceAboveZero": "Syötä hinta, joka on yli 0.",
+        "createFailed": "Tilauslaatikkoa ei voitu luoda (virhe {status}).",
+        "network": "Tilauslaatikkoa ei voitu luoda. Tarkista yhteytesi ja yritä uudelleen."
+      },
+      "intervalUnit": {
+        "weekly": "vko",
+        "monthly": "kk",
+        "quarterly": "neljännes"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Verkkosivusto",
+      "supportEmail": "Tuen sähköposti",
+      "logoUrl": "Logon URL",
+      "primaryColor": "Pääväri",
+      "secondaryColor": "Toissijainen väri",
+      "backgroundColor": "Taustaväri",
+      "primaryColorHex": "Päävärin hex-arvo",
+      "secondaryColorHex": "Toissijaisen värin hex-arvo",
+      "backgroundColorHex": "Taustavärin hex-arvo",
+      "saving": "Tallennetaan..."
+    },
+    "page": {
+      "metaTitle": "Kauppiaan asetukset",
+      "infoTitle": "Kauppiaan tiedot",
+      "infoSubtitle": "Kauppiaan perustiedot",
+      "name": "Nimi",
+      "slug": "Polkutunniste",
+      "country": "Maa",
+      "defaultCurrency": "Oletusvaluutta",
+      "website": "Verkkosivusto",
+      "supportEmail": "Tuen sähköposti",
+      "completeOnboarding": "Viimeistele käyttöönotto",
+      "billingTitle": "Laskutus",
+      "billingSubtitle": "14 päivän ilmainen kokeilu, jonka jälkeen paketit alkaen 19 €/kk. 5 %:n transaktiomaksu kuponkimyynnistä.",
+      "status": "Tila",
+      "trialStatus": "Ilmainen kokeilu – {days, plural, one {# päivä} other {# päivää}} jäljellä",
+      "statusActive": "Aktiivinen",
+      "statusInactive": "Ei aktiivinen",
+      "currentPlan": "Nykyinen paketti",
+      "trialEnds": "Kokeilu päättyy",
+      "periodEnds": "Nykyinen jakso päättyy",
+      "manage": "Hallinnoi",
+      "payoutsTitle": "Tilitykset",
+      "payoutsEnabled": "Stripe-tili yhdistetty ja käytössä",
+      "payoutsInProgress": "Käyttöönotto kesken – viimeistele se ottaaksesi tilitykset käyttöön",
+      "payoutsNotConnected": "Yhdistä Stripe vastaanottaaksesi kuponkimyynnin tilitykset",
+      "webhooksTitle": "Webhookit",
+      "webhooksSubtitle": "Vastaanota reaaliaikaisia tapahtumailmoituksia HTTP:n kautta",
+      "notificationsTitle": "Ilmoitukset",
+      "notificationsSubtitle": "Valitse, mitä sähköpostiluokkia vastaanotat tiimin jäsenenä."
+    },
+    "brandProfile": {
+      "title": "Brändiprofiili",
+      "subtitle": "Mukauta brändisi värejä, logoa ja yhteystietoja.",
+      "updated": "Brändiprofiili päivitetty onnistuneesti!",
+      "updateFailed": "Brändiprofiilin päivitys epäonnistui",
+      "save": "Tallenna muutokset"
+    },
+    "domains": {
+      "title": "Omat verkkotunnukset",
+      "subtitle": "Yhdistä oma verkkotunnuksesi ja vahvista se ohjausta varten.",
+      "inputLabel": "Oma verkkotunnus",
+      "adding": "Lisätään...",
+      "add": "Lisää verkkotunnus",
+      "empty": "Verkkotunnuksia ei ole määritetty.",
+      "statusLine": "Tila: {status}",
+      "statusValue": {
+        "pending": "odottaa",
+        "verified": "vahvistettu"
+      },
+      "verify": "Vahvista",
+      "remove": "Poista",
+      "addedTitle": "Verkkotunnus lisätty",
+      "addedDescription": "Vahvista DNS ennen liikenteen ohjaamista.",
+      "addErrorTitle": "Verkkotunnusvirhe",
+      "addErrorDescription": "Verkkotunnusta ei voitu lisätä.",
+      "verifiedTitle": "Verkkotunnus vahvistettu",
+      "verifiedDescription": "Ohjaus on nyt käytössä.",
+      "verifyErrorTitle": "Vahvistusvirhe",
+      "verifyErrorDescription": "Verkkotunnusta ei voitu vahvistaa.",
+      "removedTitle": "Verkkotunnus poistettu",
+      "removeErrorTitle": "Poistovirhe",
+      "removeErrorDescription": "Verkkotunnusta ei voitu poistaa."
+    },
+    "notifications": {
+      "metaTitle": "Ilmoitusasetukset",
+      "title": "Ilmoitusasetukset",
+      "intro": "Valitse, mitkä sähköpostiluokat saapuvat postilaatikkoosi kauppiaan <name>{merchantName}</name> jäsenenä. Asetukset ovat henkilökohtaisia – jokainen tiimin jäsen hallinnoi omiaan.",
+      "required": "Pakollinen",
+      "toggle": "Vaihda: {label}",
+      "unsaved": "Tallentamattomia muutoksia",
+      "allSaved": "Kaikki muutokset tallennettu",
+      "saving": "Tallennetaan…",
+      "save": "Tallenna asetukset",
+      "savedTitle": "Asetukset tallennettu",
+      "saveFailedTitle": "Tallennus epäonnistui",
+      "saveFailedDescription": "Ilmoitusasetuksiasi ei voitu päivittää.",
+      "category": {
+        "orders": {
+          "label": "Uudet tilaukset ja lunastukset",
+          "description": "Sähköposti, kun kuponki ostetaan, lunastetaan tai lahjoitetaan."
+        },
+        "payouts": {
+          "label": "Tilitykset",
+          "description": "Stripe-tilitysten saapumiset, epäonnistumiset ja pidätykset."
+        },
+        "fraud_alerts": {
+          "label": "Petos- ja tietoturvahälytykset",
+          "description": "Epätavalliset lunastuskuviot, takaisinperinnät ja tiimin kirjautumispoikkeamat. Ei voi poistaa käytöstä."
+        },
+        "campaign_updates": {
+          "label": "Kampanjan elinkaari",
+          "description": "Kampanja julkaistu, päättymässä 7 päivän kuluttua, päättynyt."
+        },
+        "weekly_digest": {
+          "label": "Viikoittainen tuloskooste",
+          "description": "Maanantainen yhteenveto edellisen viikon tuloista, lunastuksista ja suosituimmista kupongeista."
+        },
+        "product_updates": {
+          "label": "GiftHubin tuoteuutiset",
+          "description": "Uudet ominaisuudet, tiekartta ja satunnaiset vinkit. Enintään kerran kuussa."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Kauppiaan tilitykset",
+      "title": "Tilitykset",
+      "intro": "Yhdistä Stripe-tili, niin kuponkimyynti maksetaan suoraan pankkitilillesi. Perimme 5 %:n alustamaksun; loput siirretään yhdistetylle tilillesi automaattisesti maksun yhteydessä.",
+      "stripeAccount": "Stripe-tili",
+      "capabilityState": "Ominaisuuden tila",
+      "accountStatus": {
+        "pending": "odottaa",
+        "restricted": "rajoitettu",
+        "enabled": "käytössä",
+        "disabled": "poistettu käytöstä"
+      },
+      "backToSettings": "Takaisin asetuksiin",
+      "howTitle": "Näin tilitykset toimivat",
+      "how1": "Asiakkaat maksavat alustan kassalla. Keräämme koko summan ja säilytämme sen Stripessä.",
+      "how2": "Kun maksu menee läpi, Stripe lähettää myyntihinnan 5 %:n maksullamme vähennettynä suoraan tilitystilillesi.",
+      "how3": "Stripe maksaa rahat pankkitilillesi Stripen tilitysasetuksissa valitsemasi aikataulun mukaan (yleensä päivittäin, pari päivää myynnin jälkeen).",
+      "how4": "Takaisinperinnät ja hyvitykset vähennetään seuraavasta tilityksestäsi; ylläpito voi jäädyttää saldosi manuaalisesti, jos havaitsemme petoksen.",
+      "badge": {
+        "enabled": {
+          "label": "Tilitykset käytössä",
+          "description": "Stripe siirtää kuponkimyynnin varat pankkitilillesi tilitysaikataulun mukaisesti."
+        },
+        "restricted": {
+          "label": "Lisätietoja tarvitaan",
+          "description": "Stripe tarvitsee lisätietoja ennen kuin tilitykset voidaan ottaa käyttöön. Jatka avaamalla alla oleva käyttöönottolinkki."
+        },
+        "disabled": {
+          "label": "Tilitykset poistettu käytöstä",
+          "description": "Stripe on poistanut tilitykset käytöstä tällä tilillä. Avaa Stripen hallintapaneeli ja täytä puuttuvat vaatimukset."
+        },
+        "notConnected": {
+          "label": "Ei yhdistetty",
+          "description": "Et ole vielä yhdistänyt Stripe-tiliä. Tilitykset pidätetään, kunnes käyttöönotto on valmis – sillä välin kuponkimyynti toimii, mutta varat pysyvät alustan saldolla."
+        }
+      },
+      "actions": {
+        "startFailed": "Stripe-käyttöönoton aloitus epäonnistui",
+        "startNetworkError": "Verkkovirhe käyttöönoton aloituksessa",
+        "dashboardFailed": "Stripen hallintapaneelia ei voitu avata",
+        "dashboardNetworkError": "Verkkovirhe hallintapaneelin avaamisessa",
+        "disconnectConfirm": "Katkaistaanko yhteys tähän Stripe-tiliin? Tilitykset keskeytyvät, kunnes yhdistät uudelleen.",
+        "disconnected": "Stripe-tilin yhteys katkaistu",
+        "disconnectFailed": "Yhteyden katkaisu epäonnistui",
+        "disconnect": "Katkaise yhteys",
+        "setUp": "Ota tilitykset käyttöön Stripellä",
+        "openDashboard": "Avaa Stripen hallintapaneeli",
+        "continueOnboarding": "Jatka käyttöönottoa"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Kauppiaan tietojen lataus epäonnistui.",
+      "retry": "Yritä uudelleen",
+      "loading": "Ladataan...",
+      "title": "Viimeistele profiilisi",
+      "subtitle": "Määritä kauppiaasi brändiprofiili.",
+      "basicInfo": "Perustiedot",
+      "merchantName": "Kauppiaan nimi *",
+      "brandTitle": "Brändiprofiili",
+      "brandSubtitle": "Mukauta brändisi värejä ja logoa.",
+      "updateFailed": "Kauppiaan päivitys epäonnistui",
+      "submit": "Viimeistele käyttöönotto",
+      "skip": "Ohita toistaiseksi"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Tapahtumaloki",
+      "subtitle": "Seuraa kaikkia kauppiastililläsi tehtyjä toimintoja",
+      "filters": "Suodattimet",
+      "action": "Toiminto",
+      "allActions": "Kaikki toiminnot",
+      "fromDate": "Alkaen",
+      "toDate": "Päättyen",
+      "apply": "Käytä",
+      "clear": "Tyhjennä",
+      "loading": "Ladataan tapahtumalokia...",
+      "loadFailed": "Tapahtumalokin lataus epäonnistui",
+      "empty": "Tapahtumalokista ei löytynyt merkintöjä.",
+      "columns": {
+        "timestamp": "Aikaleima",
+        "actor": "Tekijä",
+        "action": "Toiminto",
+        "resource": "Kohde",
+        "details": "Tiedot"
+      },
+      "unknownActor": "Tuntematon",
+      "showing": "Näytetään {from}–{to}/{total}",
+      "pageOf": "Sivu {page}/{totalPages}",
+      "previousPage": "Edellinen sivu",
+      "nextPage": "Seuraava sivu",
+      "actions": {
+        "voucherCreated": "Kuponki luotu",
+        "voucherUpdated": "Kuponki päivitetty",
+        "voucherPublished": "Kuponki julkaistu",
+        "vouchersGenerated": "Kupongit luotu",
+        "campaignCreated": "Kampanja luotu",
+        "campaignUpdated": "Kampanja päivitetty",
+        "memberInvited": "Tiimin jäsen kutsuttu",
+        "memberRemoved": "Tiimin jäsen poistettu",
+        "memberRoleChanged": "Tiimin jäsenen rooli muutettu",
+        "apiKeyCreated": "API-avain luotu",
+        "apiKeyRevoked": "API-avain mitätöity",
+        "apiKeyUpdated": "API-avain päivitetty",
+        "eventCreated": "Tapahtuma luotu",
+        "eventUpdated": "Tapahtuma päivitetty",
+        "eventPublished": "Tapahtuma julkaistu",
+        "merchantUpdated": "Kauppias päivitetty",
+        "reviewReplied": "Arvosteluun vastattu",
+        "settingsUpdate": "Asetusten päivitys",
+        "settingsView": "Asetusten katselu",
+        "ticketRedeemed": "Lippu lunastettu"
+      },
+      "resources": {
+        "voucher": "Kuponki",
+        "campaign": "Kampanja",
+        "giftCard": "Lahjakortti",
+        "event": "Tapahtuma",
+        "member": "Jäsen"
+      }
+    }
   }
 }
