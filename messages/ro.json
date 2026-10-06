@@ -2602,5 +2602,2656 @@
       "downloading": "Se descarcă...",
       "download": "Descărcați QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Gestionați campaniile de vouchere.",
+      "createCampaign": "Creare campanie",
+      "subscriptionRequired": "Abonament necesar",
+      "trialEnded": "Perioada de probă gratuită de 60 de zile pentru campanii s-a încheiat. Activați planul de 9,90/lună pentru a crea campanii noi.",
+      "stats": {
+        "totalTitle": "Total campanii",
+        "totalDescription": "Toate campaniile",
+        "activeTitle": "Active",
+        "activeDescription": "În desfășurare",
+        "paidTitle": "Achiziții plătite",
+        "paidDescription": "Comenzi finalizate",
+        "revenueTitle": "Venituri",
+        "revenueDescription": "Vânzări de vouchere plătite"
+      },
+      "weeklyRevenue": {
+        "title": "Venituri săptămânale",
+        "description": "Vânzări plătite din campanii în ultimele 7 zile.",
+        "series": "Venituri"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Nicio campanie încă",
+        "descriptionCanCreate": "Creați o campanie pentru a organiza și gestiona voucherele.",
+        "descriptionNeedsSubscription": "Activați un abonament pentru a crea campanii noi.",
+        "action": "Creați prima campanie"
+      },
+      "searchPlaceholder": "Căutați campanii...",
+      "searchLabel": "Căutare campanii",
+      "filterAll": "Toate",
+      "status": {
+        "active": "Activă",
+        "draft": "Ciornă",
+        "ended": "Încheiată",
+        "paused": "Întreruptă"
+      },
+      "noMatches": "Nicio campanie nu corespunde filtrelor.",
+      "clearFilters": "Ștergeți filtrele",
+      "type": {
+        "weekly": "Campanie săptămânală",
+        "limited": "Campanie limitată",
+        "other": "Campanie {type}"
+      },
+      "runs": "Perioadă: {start} - {end}",
+      "view": "Vizualizare",
+      "stats": {
+        "vouchers": "Vouchere",
+        "paidPurchases": "Achiziții plătite",
+        "revenue": "Venituri",
+        "price": "Preț"
+      },
+      "free": "Gratuit"
+    },
+    "new": {
+      "iconLetter": "C",
+      "draftNotice": "Campaniile noi pornesc ca ciornă. Clienții nu le văd până când nu le publicați din pagina campaniei."
+    },
+    "edit": {
+      "breadcrumb": "Editare",
+      "title": "Editare campanie"
+    },
+    "form": {
+      "basicInfo": "Informații de bază",
+      "nameLabel": "Numele campaniei *",
+      "namePlaceholder": "Ofertă de sărbători",
+      "descriptionLabel": "Descriere",
+      "descriptionPlaceholder": "Promoție pe timp limitat",
+      "typeLabel": "Tip *",
+      "typeOptions": {
+        "limited": "Unică (limitată)",
+        "weekly": "Săptămânală"
+      },
+      "dates": "Date",
+      "startDate": "Data de început *",
+      "endDate": "Data de sfârșit *",
+      "timezoneHint": "Orele sunt afișate în fusul dvs. orar local.",
+      "pricing": "Prețuri și limite",
+      "priceLabel": "Preț în {currency} (lăsați gol pentru vouchere gratuite)",
+      "pricePreview": "Clienții plătesc {price}.",
+      "priceHint": "Introduceți suma în {currency}, de ex. 4.50 sau 4,50 pentru {example}.",
+      "maxRedemptions": "Număr maxim de valorificări",
+      "maxPurchases": "Număr maxim de achiziții",
+      "unlimited": "Nelimitat",
+      "creditLabel": "Credit pentru recomandare (%)",
+      "creditPreview": "Cei care recomandă primesc {percent}% din prețul de achiziție sub formă de credit.",
+      "creditHint": "Procentul din prețul de achiziție acordat ca credit celui care recomandă, de ex. 5 sau 2,5.",
+      "termsSection": "Termeni și condiții",
+      "termsLabel": "Termeni",
+      "termsPlaceholder": "Termenii și condițiile acestei campanii...",
+      "saving": "Se salvează...",
+      "saveChanges": "Salvați modificările",
+      "creating": "Se creează...",
+      "create": "Creare campanie",
+      "saved": "Modificările campaniei au fost salvate.",
+      "errors": {
+        "invalidDates": "Introduceți o dată de început și una de sfârșit valide.",
+        "endBeforeStart": "Data de sfârșit trebuie să fie după data de început.",
+        "maxRedemptions": "Numărul maxim de valorificări trebuie să fie un număr întreg de cel puțin 1.",
+        "maxPurchases": "Numărul maxim de achiziții trebuie să fie un număr întreg de cel puțin 1.",
+        "saveFailed": "Campania nu a putut fi salvată"
+      },
+      "priceErrors": {
+        "negative": "Prețul nu poate fi negativ.",
+        "invalid": "Prețul nu este un număr valid.",
+        "wholeNumber": "Prețul trebuie să fie un număr întreg.",
+        "decimals": "Prețul poate avea cel mult {decimals} zecimale.",
+        "tooLarge": "Prețul este prea mare."
+      },
+      "creditErrors": {
+        "negative": "Creditul pentru recomandare nu poate fi negativ.",
+        "invalid": "Creditul pentru recomandare nu este un număr valid.",
+        "decimals": "Creditul pentru recomandare poate avea cel mult {decimals} zecimale.",
+        "tooLarge": "Creditul pentru recomandare este prea mare.",
+        "tooHigh": "Creditul pentru recomandare nu poate depăși 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "Fără descriere",
+      "draftNotice": "Această campanie este o ciornă, deci clienții nu o pot vedea încă.",
+      "draftNoticeAdmin": "Această campanie este o ciornă, deci clienții nu o pot vedea încă. Publicați-o când sunteți gata.",
+      "status": "Stare",
+      "type": "Tip",
+      "price": "Preț",
+      "referrerCredit": "Credit pentru recomandare",
+      "none": "Niciunul",
+      "stats": {
+        "vouchers": "Vouchere",
+        "totalPurchases": "Total achiziții",
+        "paidPurchases": "Achiziții plătite"
+      },
+      "terms": "Termeni și condiții",
+      "promotion": {
+        "title": "Promovare",
+        "description": "Vizibilitate plătită în newsletterul săptămânal și în notificări."
+      },
+      "vouchers": {
+        "title": "Vouchere",
+        "description": "Vouchere generate din această campanie.",
+        "empty": "Încă nu au fost generate vouchere.",
+        "view": "Vizualizare"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Includeți în newsletterul săptămânal (plătit)",
+      "notification": "Evidențiere în notificări (plătit)",
+      "endDate": "Data de încheiere a promovării",
+      "saving": "Se salvează...",
+      "save": "Salvați setările de promovare",
+      "saved": "Setările de promovare au fost salvate.",
+      "upgradeNeededTitle": "Upgrade necesar",
+      "upgradeNeeded": "Promovările fac parte dintr-un plan superior. Faceți upgrade din Setări și facturare pentru a le folosi.",
+      "saveFailedStatus": "Setările de promovare nu au putut fi salvate (eroare {status}).",
+      "saveFailedNetwork": "Setările de promovare nu au putut fi salvate. Verificați conexiunea și încercați din nou."
+    },
+    "actions": {
+      "adminOnly": "Doar administratorii comerciantului pot publica, întrerupe sau edita campanii.",
+      "edit": "Editare",
+      "publish": {
+        "label": "Publicare",
+        "title": "Publicați această campanie?",
+        "description": "Clienții vor putea vedea și cumpăra imediat vouchere din această campanie.",
+        "success": "Campania a fost publicată și este acum vizibilă pentru clienți."
+      },
+      "pause": {
+        "label": "Întrerupere",
+        "title": "Întrerupeți această campanie?",
+        "description": "Campania revine la stadiul de ciornă și este ascunsă clienților până când o publicați din nou. Voucherele deja vândute rămân valabile.",
+        "success": "Campania a fost întreruptă și este ascunsă clienților."
+      },
+      "end": {
+        "label": "Încheiere campanie",
+        "title": "Încheiați această campanie acum?",
+        "description": "Campania se oprește imediat și nu mai poate fi publicată. Voucherele deja vândute rămân valabile.",
+        "success": "Campania a fost încheiată."
+      },
+      "updateFailedStatus": "Campania nu a putut fi actualizată (eroare {status}).",
+      "updateFailed": "Campania nu a putut fi actualizată."
+    },
+    "generate": {
+      "open": "Generare vouchere",
+      "title": "Generare vouchere",
+      "descriptionPriced": "Creează vouchere ciornă cu o reducere de {value}, valabile {start} – {end}. Fiecare voucher primește propriul cod. Rămân ascunse până când le publicați.",
+      "descriptionFree": "Această campanie este gratuită, deci nu există o sumă de pus pe vouchere. Setați mai întâi un preț pentru campanie.",
+      "countLabel": "Număr de vouchere (1-100)",
+      "generating": "Se generează...",
+      "submit": "Generare",
+      "invalidCount": "Introduceți un număr întreg între 1 și 100",
+      "needsPrice": "Setați mai întâi un preț pentru această campanie. Voucherele generate au valoarea prețului campaniei.",
+      "failed": "Voucherele nu au putut fi generate",
+      "success": "{count, plural, one {A fost generat # voucher ciornă. Publicați-l} few {Au fost generate # vouchere ciornă. Publicați-le} other {Au fost generate # de vouchere ciornă. Publicați-le}} din pagina voucherelor când sunteți gata."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Campanii active",
+      "statLiveVouchers": "Vouchere active",
+      "statRedemptions30d": "Valorificări (30 de zile)"
+    },
+    "error": {
+      "title": "Ceva nu a mers bine",
+      "description": "A apărut o eroare în panoul comerciantului.",
+      "tryAgain": "Încercați din nou",
+      "backToMerchants": "Înapoi la comercianți"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Prezentare generală",
+        "offers": "Oferte",
+        "inStore": "În magazin",
+        "customers": "Clienți",
+        "settings": "Setări"
+      },
+      "language": "Limbă",
+      "opensAppArea": "Deschide zona aplicației",
+      "externalLinkTitle": "{label} (deschide zona aplicației, în afara acestui comerciant)",
+      "opensOutside": "Se deschide în afara zonei comerciantului",
+      "merchantNavigation": "Comerciant",
+      "more": "Mai mult",
+      "navDashboard": "Dashboard"
+    },
+    "dashboard": {
+      "title": "Dashboard comerciant",
+      "welcomeBack": "Bine ați revenit, {name}",
+      "viewCampaigns": "Vizualizare campanii",
+      "createVoucher": "Creare voucher",
+      "performanceOverview": "Prezentare performanță",
+      "performanceOverviewHint": "Activitatea campaniilor și valorificările în timp real.",
+      "revenueAndCredits": "Venituri și credite",
+      "revenueAndCreditsHint": "Vânzări, credite și obligații în curs.",
+      "performanceTrend": "Evoluția performanței",
+      "performanceTrendHint": "Valorificări și venituri din ultimele {days} zile.",
+      "rangeShort": "{days}Z",
+      "revenue": "Venituri",
+      "chartRedemptions": "Valorificări",
+      "chartRevenue": "Venituri ({currency})",
+      "paidOrders": "Comenzi plătite",
+      "openOrdersView": "Deschideți vizualizarea comenzilor",
+      "avgOrder": "Comandă medie",
+      "openCampaignRevenue": "Deschideți veniturile campaniilor",
+      "redemptionRate": "Rata de valorificare",
+      "openRedemptionQueue": "Deschideți coada de valorificări",
+      "pendingConfirmation": "{count} în așteptarea confirmării",
+      "pendingConfirmationHint": "Valorificări în magazin care așteaptă aprobarea dvs.",
+      "viewRedemptions": "Vizualizare valorificări",
+      "actionCenter": "Centru de acțiuni",
+      "actionCenterHint": "Elemente prioritare de verificat.",
+      "allCaughtUp": "Totul este la zi.",
+      "open": "Deschidere",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# valorificare în așteptare} few {# valorificări în așteptare} other {# de valorificări în așteptare}}",
+        "pendingRedemptionsDetail": "Confirmați valorificările în magazin",
+        "expiringVouchers": "{count, plural, one {# voucher expiră în curând} few {# vouchere expiră în curând} other {# de vouchere expiră în curând}}",
+        "expiringVouchersDetail": "Verificați perioadele de valabilitate ale voucherelor",
+        "endingCampaigns": "{count, plural, one {# campanie se încheie săptămâna aceasta} few {# campanii se încheie săptămâna aceasta} other {# de campanii se încheie săptămâna aceasta}}",
+        "endingCampaignsDetail": "Prelungiți sau duplicați cele mai bune campanii",
+        "upcomingEvents": "{count, plural, one {# eveniment viitor} few {# evenimente viitoare} other {# de evenimente viitoare}}",
+        "upcomingEventsDetail": "Pregătiți check-in-ul biletelor și personalul"
+      },
+      "upcomingEventsTitle": "Evenimente viitoare",
+      "upcomingEventsHint": "Următoarele evenimente programate.",
+      "noUpcomingEvents": "Nu există evenimente programate.",
+      "eventStatus": {
+        "published": "publicat",
+        "soldOut": "epuizat"
+      },
+      "manageEvents": "Gestionare evenimente",
+      "topVouchers": "Top vouchere",
+      "topVouchersHint": "Cele mai valorificate oferte.",
+      "noTopVouchers": "Încă nu a fost valorificat niciun voucher. Cele mai valorificate vouchere vor apărea aici."
+    },
+    "stats": {
+      "activeVouchers": "Vouchere active",
+      "publishedVouchers": "Vouchere publicate",
+      "openVouchers": "Deschideți voucherele",
+      "activeCampaigns": "Campanii active",
+      "runningCampaigns": "Campanii în desfășurare",
+      "openCampaigns": "Deschideți campaniile",
+      "activeEvents": "Evenimente active",
+      "publishedEvents": "Evenimente publicate",
+      "openEvents": "Deschideți evenimentele",
+      "todaysRedemptions": "Valorificări azi",
+      "thisWeek": "Săptămâna aceasta: {count}",
+      "reviewRedemptions": "Verificați valorificările",
+      "ofWeekly": "din săptămână"
+    },
+    "revenue": {
+      "voucherRevenue": "Venituri din vouchere",
+      "paidVoucherSales": "Vânzări de vouchere plătite",
+      "openCampaignSales": "Deschideți vânzările campaniilor",
+      "ticketRevenue": "Venituri din bilete",
+      "paidTicketSales": "Vânzări de bilete plătite",
+      "openEventSales": "Deschideți vânzările evenimentelor",
+      "creditsIssued": "Credite emise",
+      "totalCreditsDistributed": "Total credite distribuite",
+      "openReferralCredits": "Deschideți creditele din recomandări",
+      "outstandingLiability": "Obligații în curs",
+      "unredeemedValue": "Valoarea voucherelor nevalorificate",
+      "openVoucherLiability": "Deschideți obligațiile pentru vouchere"
+    },
+    "recentActivity": {
+      "title": "Activitate recentă",
+      "empty": "Nicio activitate recentă",
+      "unknownUser": "Utilizator necunoscut",
+      "redeemedVoucher": "Voucher valorificat - {time}",
+      "confirmed": "Confirmat",
+      "pending": "În așteptare"
+    },
+    "liveStats": {
+      "live": "Live",
+      "connecting": "Se conectează…",
+      "redeemedToday": "<value>{count}</value> <label>valorificate azi</label>",
+      "pending": "<value>{count}</value> <label>în așteptare</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analize",
+      "title": "Analize",
+      "subtitle": "Urmăriți performanța voucherelor și veniturile",
+      "totalRedemptions": "Total valorificări",
+      "confirmedRedemptions": "Valorificări confirmate",
+      "totalDiscounts": "Total reduceri",
+      "givenToCustomers": "Acordate clienților",
+      "creditsIssued": "Credite emise",
+      "totalCreditsDistributed": "Total credite distribuite",
+      "activeVouchers": "Vouchere active",
+      "withRedemptions": "Cu valorificări",
+      "charts": {
+        "redemptionTrends": "Evoluția valorificărilor (ultimele 30 de zile)",
+        "redemptions": "Valorificări",
+        "revenue": "Venituri ({currency})",
+        "topPerforming": "Voucherele cu cea mai bună performanță",
+        "noRedeemed": "Încă nu a fost valorificat niciun voucher. Voucherele cu cea mai bună performanță vor apărea aici.",
+        "byCategory": "Valorificări pe categorii",
+        "noCategoryData": "Nu există date pe categorii"
+      }
+    },
+    "ask": {
+      "title": "Întrebați datele",
+      "subtitle": "Puneți întrebări despre datele afacerii în limbaj natural",
+      "emptyTitle": "Întrebați orice despre datele dvs.",
+      "emptyHint": "Încercați una dintre sugestiile de mai jos",
+      "placeholder": "Puneți o întrebare despre datele dvs....",
+      "suggestedTitle": "Întrebări sugerate",
+      "suggestions": {
+        "revenueLastWeek": "Care au fost veniturile mele săptămâna trecută?",
+        "dailyRedemptionsThisMonth": "Arată valorificările zilnice din această lună",
+        "topVouchersByRevenue": "Top vouchere după venituri luna trecută",
+        "customersPurchasedLastWeek": "Câți clienți au cumpărat săptămâna trecută?",
+        "referralConversionRate": "Care este rata de conversie a recomandărilor?",
+        "dailyRevenueTrend": "Arată evoluția zilnică a veniturilor în această lună",
+        "purchasesYesterday": "Câte achiziții au fost făcute ieri?",
+        "bestPerformingVouchers": "Care sunt voucherele mele cu cea mai bună performanță?"
+      },
+      "errorFallback": "Ne pare rău, nu am putut procesa această întrebare.",
+      "networkError": "Eroare de rețea. Încercați din nou.",
+      "itemLabel": "Elementul {n}"
+    },
+    "reports": {
+      "title": "Rapoarte financiare",
+      "subtitle": "Prezentarea veniturilor și export",
+      "downloadCsv": "Descărcați CSV",
+      "from": "De la",
+      "to": "Până la",
+      "apply": "Aplicare",
+      "totalRevenue": "Venituri totale",
+      "platformFees": "Comisioane platformă",
+      "netRevenue": "Venituri nete",
+      "redemptions": "Valorificări",
+      "revenueByCurrency": "Venituri pe monede",
+      "netAndFees": "Net: {net} • Comisioane: {fees}",
+      "monthlyRevenue": "Venituri lunare",
+      "noRevenue": "Nu există date despre venituri pentru această perioadă.",
+      "month": "Lună",
+      "vouchers": "Vouchere",
+      "tickets": "Bilete",
+      "total": "Total"
+    },
+    "scheduled": {
+      "title": "Rapoarte programate",
+      "subtitle": "Configurați rapoarte automate prin e-mail",
+      "backToReports": "← Rapoarte financiare",
+      "activeSchedules": "Programări active",
+      "loading": "Se încarcă...",
+      "noSchedules": "Nu există încă programări configurate",
+      "period": {
+        "daily": "Zilnic",
+        "weekly": "Săptămânal",
+        "monthly": "Lunar"
+      },
+      "reportTitle": {
+        "daily": "Raport zilnic",
+        "weekly": "Raport săptămânal",
+        "monthly": "Raport lunar"
+      },
+      "recipientCount": "{count, plural, one {# destinatar} few {# destinatari} other {# de destinatari}}",
+      "lastSent": "Ultima trimitere: {date}",
+      "nextRun": "Următoarea: {date}",
+      "pause": "Întrerupere",
+      "resume": "Reluare",
+      "createSchedule": "Creare programare",
+      "frequency": "Frecvență",
+      "recipients": "Destinatari",
+      "invalidEmail": "Adresă de e-mail nevalidă",
+      "emailAlreadyAdded": "Adresa de e-mail a fost deja adăugată",
+      "addAtLeastOne": "Adăugați cel puțin un destinatar",
+      "saved": "Programarea raportului a fost salvată",
+      "saveFailed": "Programarea nu a putut fi salvată",
+      "save": "Salvare programare",
+      "previewTitle": "Previzualizare raport",
+      "previewBody": "Rapoartele programate includ venituri, numărul de valorificări, top vouchere și indicatori de creștere. Rapoartele sunt trimise ca e-mailuri HTML bine formatate la ora 8:00 UTC.",
+      "everyMorning": "În fiecare dimineață",
+      "everyMonday": "În fiecare luni",
+      "firstOfMonth": "Pe 1 a fiecărei luni"
+    },
+    "billing": {
+      "subscribeTo": "Abonați-vă la {plan}",
+      "startFailed": "Abonamentul nu a putut fi pornit",
+      "portalFailed": "Portalul de facturare nu a putut fi deschis",
+      "manageBilling": "Gestionare facturare",
+      "errorTitle": "Eroare",
+      "close": "Închidere",
+      "usage": "<b>{current}</b> / {max} utilizat",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "campanii create pe ciclu",
+        "activeCampaigns": "campanii active",
+        "voucherCreatesPerCycle": "vouchere create pe ciclu",
+        "teamMembers": "membri ai echipei"
+      },
+      "currentPlanTrial": "Plan curent (perioadă de probă gratuită)",
+      "planChangesUnavailable": "Schimbarea planului nu este disponibilă online momentan.",
+      "paymentsNotSetUp": "Plățile online nu sunt încă configurate pe această platformă, deci planurile nu pot fi cumpărate sau schimbate aici. Contactați asistența dacă doriți să vă schimbați planul.",
+      "features": {
+        "starter": {
+          "vouchers": "500 de vouchere/lună",
+          "campaigns": "3 campanii active",
+          "teamMembers": "2 membri ai echipei",
+          "qrRedemption": "Valorificare prin cod QR",
+          "basicAnalytics": "Analize de bază"
+        },
+        "pro": {
+          "vouchers": "5.000 de vouchere/lună",
+          "campaigns": "25 de campanii active",
+          "teamMembers": "10 membri ai echipei",
+          "advancedAnalytics": "Analize avansate",
+          "customDomain": "Domeniu personalizat",
+          "promoBoosts": "Promovări suplimentare"
+        },
+        "scale": {
+          "vouchers": "Vouchere nelimitate",
+          "campaigns": "Campanii nelimitate",
+          "teamMembers": "Membri nelimitați ai echipei",
+          "everythingInPro": "Tot ce include Pro",
+          "whiteLabel": "Pregătit pentru white-label",
+          "prioritySupport": "Asistență prioritară"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Proprietar",
+      "admin": "Administrator",
+      "finance": "Financiar",
+      "marketing": "Marketing",
+      "support": "Asistență",
+      "partner_cashier": "Casier",
+      "auditor": "Auditor"
+    },
+    "orgs": {
+      "title": "Organizații B2B",
+      "subtitle": "Spații de lucru ale companiilor, cu campanii, vouchere și comenzi.",
+      "loading": "Se încarcă organizațiile...",
+      "loadFailed": "Organizațiile nu au putut fi încărcate",
+      "empty": "Nu s-au găsit organizații. Cereți unui administrator să vă invite.",
+      "open": "Deschidere"
+    },
+    "workspace": {
+      "fallbackName": "Organizație",
+      "subtitle": "Prezentarea spațiului de lucru B2B",
+      "reports": "Rapoarte",
+      "audit": "Audit",
+      "partnerKeys": "Chei de partener",
+      "backToOrgs": "Înapoi la organizații",
+      "loading": "Se încarcă spațiul de lucru...",
+      "errors": {
+        "loadOrg": "Organizația nu a putut fi încărcată",
+        "loadCampaigns": "Campaniile nu au putut fi încărcate",
+        "loadVouchers": "Voucherele nu au putut fi încărcate",
+        "loadOrders": "Comenzile nu au putut fi încărcate",
+        "load": "Încărcarea a eșuat",
+        "createCampaign": "Campania nu a putut fi creată",
+        "issueVouchers": "Voucherele nu au putut fi emise",
+        "updateCampaign": "Campania nu a putut fi actualizată",
+        "activateCampaign": "Campania nu a putut fi activată",
+        "pauseCampaign": "Campania nu a putut fi întreruptă",
+        "archiveCampaign": "Campania nu a putut fi arhivată"
+      },
+      "stats": {
+        "campaigns": "Campanii",
+        "vouchers": "Vouchere",
+        "orders": "Comenzi"
+      },
+      "create": {
+        "title": "Creare campanie",
+        "name": "Numele campaniei",
+        "value": "Valoare (subunități)",
+        "currency": "Monedă",
+        "submit": "Creare"
+      },
+      "campaigns": {
+        "title": "Campanii",
+        "empty": "Nicio campanie încă.",
+        "name": "Nume",
+        "value": "Valoare",
+        "activate": "Activare",
+        "pause": "Întrerupere",
+        "resume": "Reluare",
+        "archive": "Arhivare",
+        "issue": "Emiteți {count}"
+      },
+      "recentVouchers": "Vouchere recente",
+      "noVouchers": "Niciun voucher emis.",
+      "recentOrders": "Comenzi recente",
+      "noOrders": "Nicio comandă încă."
+    },
+    "audit": {
+      "title": "Jurnal de audit",
+      "subtitle": "Urmăriți ciclul de viață și modificările voucherelor.",
+      "entityType": "Tip entitate (voucher, campanie, comandă)",
+      "entityId": "ID entitate",
+      "loading": "Se încarcă auditul...",
+      "loadFailed": "Auditul nu a putut fi încărcat",
+      "empty": "Niciun eveniment."
+    },
+    "billing": {
+      "metaTitle": "Facturarea organizației",
+      "title": "Facturare și finanțe",
+      "totalPaidOrders": "Total comenzi plătite",
+      "totalRevenue": "Venituri totale",
+      "vatNumber": "Cod de TVA",
+      "notSet": "Nesetat",
+      "recentOrders": "Comenzi recente",
+      "noOrders": "Nicio comandă încă.",
+      "table": {
+        "date": "Dată",
+        "qty": "Cant.",
+        "total": "Total",
+        "status": "Stare",
+        "invoice": "Factură"
+      }
+    },
+    "keys": {
+      "title": "Chei API pentru parteneri",
+      "subtitle": "Folosiți-le pentru validarea și valorificarea voucherelor de către parteneri.",
+      "label": "Etichetă cheie (opțional)",
+      "create": "Creare cheie",
+      "newKey": "Cheie nouă (copiați-o acum)",
+      "loading": "Se încarcă cheile...",
+      "empty": "Nicio cheie încă.",
+      "untitled": "Cheie fără nume",
+      "created": "Creată {created}",
+      "createdAndLastUsed": "Creată {created} • Ultima utilizare {lastUsed}",
+      "revoke": "Revocare",
+      "errors": {
+        "load": "Cheile nu au putut fi încărcate",
+        "create": "Cheia nu a putut fi creată",
+        "revoke": "Cheia nu a putut fi revocată"
+      }
+    },
+    "members": {
+      "metaTitle": "Membrii organizației",
+      "title": "Membri",
+      "count": "{count, plural, one {# membru} few {# membri} other {# de membri}}",
+      "pendingInvitations": "Invitații în așteptare",
+      "expires": "Expiră {date}"
+    },
+    "invite": {
+      "title": "Invitați un membru",
+      "emailPlaceholder": "coleg@example.com",
+      "roles": {
+        "admin": "Administrator",
+        "finance": "Financiar",
+        "marketing": "Marketing",
+        "support": "Asistență",
+        "partner_cashier": "Casier partener",
+        "auditor": "Auditor"
+      },
+      "sending": "Se trimite…",
+      "submit": "Trimiteți invitația",
+      "sent": "Invitația a fost trimisă către {email}.",
+      "failed": "Invitația nu a putut fi trimisă. Verificați adresa de e-mail și încercați din nou.",
+      "error": "Ceva nu a mers bine. Încercați din nou."
+    },
+    "reports": {
+      "title": "Rapoarte",
+      "subtitle": "Rapoarte de valorificări și vouchere",
+      "backToWorkspace": "Înapoi la spațiul de lucru",
+      "loadFailed": "Încărcarea a eșuat",
+      "tabs": {
+        "redemptions": "Valorificări",
+        "vouchers": "Vouchere"
+      },
+      "totalRedemptions": "Total valorificări",
+      "totalAmountRedeemed": "Suma totală valorificată",
+      "from": "De la",
+      "to": "Până la",
+      "filter": "Filtrare",
+      "pageInfo": "Pagina {page} din {totalPages} ({total} în total)",
+      "redemptionTable": {
+        "date": "Dată",
+        "partner": "Partener",
+        "amount": "Sumă",
+        "status": "Stare",
+        "location": "Locație"
+      },
+      "noRedemptions": "Nu s-au găsit valorificări.",
+      "voucherTable": {
+        "campaign": "Campanie",
+        "status": "Stare",
+        "type": "Tip",
+        "value": "Valoare",
+        "remaining": "Rămas",
+        "redeemed": "Valorificat",
+        "issuedTo": "Emis către",
+        "expires": "Expiră"
+      },
+      "noVouchers": "Nu s-au găsit vouchere."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "cumpărător",
+        "partner": "partener",
+        "platform_owner": "proprietar platformă"
+      },
+      "orgStatus": {
+        "active": "activă",
+        "suspended": "suspendată"
+      },
+      "campaignStatus": {
+        "draft": "ciornă",
+        "active": "activă",
+        "paused": "întreruptă",
+        "archived": "arhivată"
+      },
+      "voucherStatus": {
+        "created": "creat",
+        "issued": "emis",
+        "active": "activ",
+        "redeemed": "valorificat",
+        "expired": "expirat",
+        "voided": "anulat"
+      },
+      "valueType": {
+        "fixed": "fix",
+        "percent": "procent"
+      },
+      "orderStatus": {
+        "draft": "ciornă",
+        "submitted": "trimisă",
+        "invoiced": "facturată",
+        "paid": "plătită",
+        "cancelled": "anulată",
+        "refunded": "rambursată"
+      },
+      "redemptionStatus": {
+        "approved": "aprobată",
+        "reversed": "stornată",
+        "failed": "eșuată"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Evenimente"
+    },
+    "status": {
+      "draft": "Ciornă",
+      "published": "Activ",
+      "sold_out": "Epuizat",
+      "cancelled": "Anulat",
+      "ended": "Încheiat"
+    },
+    "statusName": {
+      "draft": "Ciornă",
+      "published": "Publicat",
+      "sold_out": "Epuizat",
+      "cancelled": "Anulat",
+      "ended": "Încheiat"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Eveniment intern",
+      "concert": "Concert",
+      "workshop": "Atelier",
+      "other": "Altele"
+    },
+    "ticketStatus": {
+      "available": "Disponibil",
+      "sold": "Vândut",
+      "used": "Utilizat",
+      "cancelled": "Anulat",
+      "refunded": "Rambursat"
+    },
+    "list": {
+      "subtitle": "Gestionați evenimentele și biletele",
+      "createEvent": "Creare eveniment",
+      "stats": {
+        "totalTitle": "Total evenimente",
+        "totalDescription": "Toate evenimentele",
+        "activeTitle": "Active",
+        "activeDescription": "Publicate sau epuizate",
+        "soldTitle": "Bilete vândute",
+        "soldDescription": "La toate evenimentele",
+        "revenueTitle": "Venituri",
+        "revenueDescription": "Vânzări de bilete plătite"
+      },
+      "empty": {
+        "title": "Niciun eveniment încă",
+        "description": "Creați un eveniment pentru a vinde bilete și a gestiona participarea.",
+        "cta": "Creați primul eveniment"
+      },
+      "card": {
+        "date": "Dată:",
+        "location": "Locație:",
+        "price": "Preț:",
+        "tickets": "Bilete:",
+        "sold": "{sold} / {capacity} vândute",
+        "free": "Gratuit",
+        "view": "Vizualizare",
+        "edit": "Editare"
+      },
+      "weeklyRevenue": {
+        "title": "Venituri săptămânale din bilete",
+        "description": "Vânzări de bilete plătite în ultimele 7 zile.",
+        "series": "Venituri"
+      }
+    },
+    "detail": {
+      "noDescription": "Fără descriere",
+      "edit": "Editare",
+      "status": "Stare",
+      "type": "Tip",
+      "eventDate": "Data evenimentului",
+      "price": "Preț",
+      "free": "Gratuit",
+      "totalTickets": "Total bilete",
+      "sold": "Vândute",
+      "available": "Disponibile",
+      "location": "Locație",
+      "terms": "Termeni și condiții",
+      "ticketsTitle": "Bilete",
+      "ticketsDescription": "Biletele pentru acest eveniment",
+      "noTickets": "Încă nu au fost generate bilete.",
+      "view": "Vizualizare",
+      "redeem": "Valorificare"
+    },
+    "form": {
+      "basicInfo": "Informații de bază",
+      "name": "Numele evenimentului *",
+      "description": "Descriere",
+      "descriptionPlaceholder": "Descrieți evenimentul...",
+      "type": "Tipul evenimentului *",
+      "typeAria": "Tipul evenimentului",
+      "dateTime": "Dată și oră",
+      "eventDate": "Data evenimentului *",
+      "eventTime": "Ora evenimentului *",
+      "endDate": "Data de sfârșit (opțional)",
+      "endTime": "Ora de sfârșit (opțional)",
+      "location": "Locație",
+      "locationName": "Numele locației",
+      "locationPlaceholder": "Sala mare, Scena în aer liber",
+      "locationPlaceholderExample": "de ex. Sala mare, Scena în aer liber",
+      "address": "Adresa completă",
+      "addressPlaceholder": "Stradă și număr, Oraș, Țară",
+      "ticketDetails": "Detalii bilete",
+      "maxCapacity": "Capacitate maximă (bilete) *",
+      "maxCapacityLong": "Capacitate maximă (număr de bilete) *",
+      "pricePerTicketCurrency": "Preț per bilet ({currency})",
+      "pricePerTicket": "Preț per bilet",
+      "pricePlaceholderFree": "0.00 (gratuit)",
+      "priceHint": "Lăsați gol pentru bilete gratuite. De ex. 12.50 sau 12,50 pentru {example}.",
+      "currency": "Monedă *",
+      "terms": "Termeni și condiții",
+      "termsPlaceholder": "Termenii evenimentului, politica de rambursare etc.",
+      "ticketPrice": "Prețul biletului",
+      "endBeforeStart": "Ora de sfârșit trebuie să fie după ora de început.",
+      "cancel": "Anulare"
+    },
+    "create": {
+      "submit": "Creare eveniment",
+      "submitting": "Se creează..."
+    },
+    "edit": {
+      "loading": "Se încarcă...",
+      "notFound": "Evenimentul nu a fost găsit.",
+      "back": "Înapoi la eveniment",
+      "title": "Editare eveniment",
+      "subtitle": "Actualizați detaliile evenimentului.",
+      "submit": "Salvați modificările",
+      "submitting": "Se salvează..."
+    },
+    "publish": {
+      "confirm": "Publicați acest eveniment? Va fi vizibil public, iar biletele vor putea fi cumpărate.",
+      "confirmLabel": "Publicare",
+      "failed": "Evenimentul nu a putut fi publicat",
+      "success": "Evenimentul a fost publicat!",
+      "published": "Publicat",
+      "cannotPublish": "Nu se poate publica",
+      "button": "Publicare eveniment",
+      "publishing": "Se publică..."
+    },
+    "generate": {
+      "invalidCount": "Introduceți un număr între 1 și 1000",
+      "tooMany": "Nu se pot genera {count} bilete. Maximum disponibil: {max}",
+      "failed": "Biletele nu au putut fi generate",
+      "success": "{count, plural, one {A fost generat # bilet!} few {Au fost generate # bilete!} other {Au fost generate # de bilete!}}",
+      "open": "Generare bilete",
+      "title": "Generare bilete",
+      "description": "Creați bilete pentru acest eveniment",
+      "countLabel": "Număr de bilete (max.: {max})",
+      "cancel": "Anulare",
+      "submit": "Generare",
+      "submitting": "Se generează..."
+    },
+    "redeem": {
+      "title": "Valorificare bilet",
+      "subtitle": "Scanați codul QR sau introduceți numărul biletului",
+      "back": "Înapoi la eveniment",
+      "scanTitle": "Scanare bilet",
+      "scanDescription": "Introduceți tokenul QR sau numărul biletului",
+      "tokenLabel": "Token QR / Număr bilet",
+      "tokenPlaceholder": "Introduceți tokenul QR sau numărul biletului",
+      "scan": "Scanare",
+      "notFound": "Biletul nu a fost găsit",
+      "found": "Bilet găsit",
+      "number": "Număr:",
+      "event": "Eveniment:",
+      "status": "Stare:",
+      "attendee": "Participant:",
+      "redeemDescription": "Finalizați procesul de valorificare",
+      "locationLabel": "Locație (opțional)",
+      "locationPlaceholder": "de ex. Intrarea principală, Poarta A",
+      "submit": "Valorificare bilet",
+      "submitting": "Se valorifică...",
+      "failed": "Biletul nu a putut fi valorificat",
+      "cannotRedeem": "Acest bilet nu poate fi valorificat. Stare: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Dashboard comerciant",
+      "vouchersTitle": "Gestionare vouchere"
+    },
+    "sidebar": {
+      "title": "Comerciant",
+      "subtitle": "Consola GiftHub",
+      "openMenu": "Deschideți meniul",
+      "nav": {
+        "overview": "Prezentare generală",
+        "vouchers": "Vouchere",
+        "giftCards": "Carduri cadou",
+        "credits": "Credite",
+        "brand": "Brand"
+      }
+    },
+    "overview": {
+      "title": "Dashboard comerciant",
+      "notConnected": "Nu sunteți încă asociat cu niciun comerciant."
+    },
+    "noAccess": {
+      "title": "Fără acces de comerciant",
+      "overviewHint": "Cereți unui administrator al comerciantului să vă invite sau creați un cont de comerciant pentru a începe.",
+      "creditsHint": "Conectați-vă la un cont de comerciant pentru a vedea veniturile și plățile.",
+      "vouchersHint": "Conectați-vă la un cont de comerciant pentru a gestiona voucherele.",
+      "exploreCampaigns": "Explorați campaniile"
+    },
+    "brand": {
+      "title": "Setări brand",
+      "description": "Personalizați aspectul brandului pe vouchere",
+      "logoHeading": "Logo",
+      "logoHint": "Încărcați logoul comerciantului (recomandat: 200x200px, PNG sau SVG).",
+      "logoPreviewAlt": "Previzualizare logo",
+      "uploadLogo": "Încărcare logo",
+      "colorHeading": "Culoarea brandului",
+      "colorHint": "Setați culoarea principală a brandului pentru vouchere și butoane.",
+      "colorLabel": "Culoare",
+      "colorHexLabel": "Valoarea hex a culorii brandului",
+      "save": "Salvați modificările",
+      "previewHeading": "Previzualizare",
+      "previewHint": "Vedeți cum apare brandul dvs. pe vouchere.",
+      "sampleMerchant": "Comerciantul dvs.",
+      "sampleTitle": "20% reducere la următoarea achiziție",
+      "sampleDescription": "Valabil pentru toate produsele. Nu se cumulează cu alte oferte."
+    },
+    "credits": {
+      "availableBalance": "Sold disponibil",
+      "availableBalanceHint": "Gata pentru plată",
+      "pendingRevenue": "Venituri în așteptare",
+      "pendingRevenueHint": "În procesare",
+      "recentRevenue": "Venituri recente",
+      "ticketSale": "Vânzare bilet",
+      "voucherSale": "Vânzare voucher",
+      "noRevenue": "Încă nu au fost înregistrate venituri",
+      "payoutRequests": "Cereri de plată",
+      "noPayoutRequests": "Nicio cerere de plată încă",
+      "requestPayoutHeading": "Solicitați plata",
+      "minimumPayout": "Suma minimă de plată: {amount}",
+      "submitting": "Se trimite...",
+      "requestPayout": "Solicitați plata",
+      "requestSubmitted": "Cererea de plată a fost trimisă",
+      "requestFailed": "Cererea de plată nu a putut fi trimisă",
+      "status": {
+        "paid": "plătită",
+        "pending": "în așteptare",
+        "requested": "solicitată",
+        "completed": "finalizată",
+        "failed": "eșuată"
+      }
+    },
+    "newVoucher": {
+      "title": "Creare voucher",
+      "description": "Proiectați și configurați noua campanie de vouchere",
+      "detailsHeading": "Detalii voucher",
+      "titleLabel": "Titlu",
+      "titlePlaceholder": "de ex. 20% reducere la următoarea achiziție",
+      "descriptionLabel": "Descriere",
+      "descriptionPlaceholder": "Valabil pentru toate produsele. Nu se cumulează cu alte oferte.",
+      "expiryDateLabel": "Data expirării",
+      "weeklyLabel": "Ofertă săptămânală",
+      "weeklyHint": "Disponibilitate săptămânală pe timp limitat",
+      "weeklyAria": "Ofertă săptămânală - Disponibilitate săptămânală pe timp limitat",
+      "referralLabel": "Activați creditul pentru recomandări",
+      "referralHint": "Utilizatorii primesc credit când prietenii valorifică",
+      "referralAria": "Activați creditul pentru recomandări - Utilizatorii primesc credit când prietenii valorifică",
+      "brandColorLabel": "Culoarea brandului",
+      "brandColorHexLabel": "Valoarea hex a culorii brandului",
+      "saveDraft": "Salvare ciornă",
+      "createAndPublish": "Creare și publicare",
+      "previewHeading": "Previzualizare",
+      "sampleMerchant": "Comerciantul dvs.",
+      "sampleTitle": "Titlul voucherului",
+      "sampleDescription": "Descrierea voucherului va apărea aici"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Pagina publică este disponibilă după publicarea voucherului.",
+    "list": {
+      "metaTitle": "Vouchere",
+      "subtitle": "Gestionați și creați vouchere",
+      "bulkImport": "Import în bloc CSV",
+      "stats": {
+        "totalTitle": "Total vouchere",
+        "totalDescription": "Toate voucherele create",
+        "activeTitle": "Active",
+        "activeDescription": "Vouchere publicate",
+        "draftsTitle": "Ciorne",
+        "draftsDescription": "Încă nepublicate",
+        "pausedEndedTitle": "Întrerupte / încheiate",
+        "pausedEndedDescription": "{paused} întrerupte, {ended} încheiate",
+        "redemptionsTitle": "Valorificări",
+        "redemptionsDescription": "Total valorificări"
+      },
+      "empty": {
+        "title": "Niciun voucher încă",
+        "description": "Începeți prin a crea primul voucher.",
+        "action": "Creați primul voucher"
+      },
+      "searchPlaceholder": "Căutați după titlu, prefix de cod sau ID",
+      "searchLabel": "Căutare vouchere",
+      "statusLabel": "Stare",
+      "statusAll": "Toate stările",
+      "status": {
+        "published": "Activ",
+        "paused": "Întrerupt",
+        "draft": "Ciornă",
+        "ended": "Încheiat",
+        "expired": "Expirat"
+      },
+      "typeLabel": "Tip",
+      "typeAll": "Toate tipurile",
+      "sortLabel": "Sortare după",
+      "sort": {
+        "date": "Dată (cele mai noi)",
+        "name": "Nume (A-Z)",
+        "redemptions": "Valorificări"
+      },
+      "showing": "Se afișează {shown} din {total} vouchere",
+      "clearFilters": "Ștergeți filtrele",
+      "noMatches": "Niciun voucher nu corespunde filtrelor.",
+      "usage": "Utilizare",
+      "usageUnlimited": "Utilizare: {used} - Nelimitat",
+      "view": "Vizualizare"
+    },
+    "rowActions": {
+      "pauseTitle": "Întrerupeți voucherul",
+      "pauseDescription": "Sigur doriți să întrerupeți acest voucher? Utilizatorii nu îl vor putea cumpăra sau valorifica cât timp este întrerupt.",
+      "pauseConfirm": "Întrerupere",
+      "paused": "Voucherul a fost întrerupt",
+      "pauseFailed": "Voucherul nu a putut fi întrerupt",
+      "loadFailed": "Voucherul nu a putut fi încărcat",
+      "duplicateLabel": "Duplicare voucher",
+      "duplicated": "Voucherul a fost duplicat",
+      "duplicateFailed": "Duplicarea a eșuat"
+    },
+    "publish": {
+      "confirmMessage": "Publicați acest voucher? Va fi vizibil public.",
+      "confirmLabel": "Publicare",
+      "failed": "Voucherul nu a putut fi publicat",
+      "success": "Voucherul a fost publicat!",
+      "publishing": "Se publică...",
+      "button": "Publicare voucher"
+    },
+    "new": {
+      "iconLetter": "V",
+      "created": "Voucherul a fost creat ca ciornă. Publicați-l când sunteți gata ca clienții să îl vadă."
+    },
+    "edit": {
+      "iconLetter": "E",
+      "subtitle": "Actualizați detaliile și disponibilitatea voucherului.",
+      "updated": "Voucherul a fost actualizat",
+      "updateFailed": "Voucherul nu a putut fi actualizat",
+      "updateFailedRetry": "Voucherul nu a putut fi actualizat. Încercați din nou.",
+      "updating": "Se actualizează...",
+      "update": "Actualizare voucher",
+      "viewPublicPage": "Vedeți pagina publică"
+    },
+    "form": {
+      "stepOf": "Pasul {current} din {total}",
+      "typeLabel": "Tip",
+      "typeAria": "Tipul voucherului",
+      "customersGetOff": "Clienții primesc o reducere de {value}.",
+      "customersGetCredit": "Clienții primesc {value} credit.",
+      "percentHint": "Introduceți procentul, de ex. 15 sau 12,5.",
+      "amountHint": "Introduceți suma în {currency}, de ex. 4.50 sau 4,50 pentru {example}.",
+      "validityHint": "Voucherul poate fi folosit de la începutul primei zile până la sfârșitul ultimei zile.",
+      "enableWeeklyDropAria": "Activați oferta săptămânală",
+      "weeklyDropDayAria": "Ziua săptămânii pentru oferta săptămânală",
+      "weeklyDropTimeAria": "Ora de început a ofertei săptămânale",
+      "headlinePlaceholder": "15% reducere la comandă",
+      "finePrintPlaceholder": "Valabil doar pentru clienții noi",
+      "previewFallbackHeadline": "Voucherul dvs.",
+      "previewValidUntil": "Valabil până la {date}",
+      "errors": {
+        "discountAboveZero": "Introduceți o reducere mai mare de 0%.",
+        "valueAboveZero": "Introduceți o valoare mai mare de 0.",
+        "chooseDates": "Alegeți când începe și când se încheie voucherul.",
+        "endBeforeStart": "Data de sfârșit trebuie să fie aceeași cu data de început sau ulterioară.",
+        "invalidValue": "Introduceți o valoare validă.",
+        "valueMustBePositive": "Valoarea trebuie să fie mai mare de 0",
+        "totalLimitPositive": "Limita totală de utilizare trebuie să fie un număr pozitiv",
+        "perUserLimitPositive": "Limita per utilizator trebuie să fie un număr pozitiv"
+      },
+      "discountErrors": {
+        "negative": "Reducerea nu poate fi negativă.",
+        "invalid": "Reducerea nu este un număr valid.",
+        "decimals": "Reducerea poate avea cel mult {decimals} zecimale.",
+        "tooLarge": "Reducerea este prea mare.",
+        "tooHigh": "Reducerea nu poate depăși 100%."
+      },
+      "valueErrors": {
+        "negative": "Valoarea nu poate fi negativă.",
+        "invalid": "Valoarea nu este un număr valid.",
+        "wholeNumber": "Valoarea trebuie să fie un număr întreg.",
+        "decimals": "Valoarea poate avea cel mult {decimals} zecimale.",
+        "tooLarge": "Valoarea este prea mare."
+      }
+    },
+    "bulkImport": {
+      "back": "Înapoi la vouchere",
+      "title": "Importați vouchere dintr-un tabel",
+      "intro": "Încărcați un fișier CSV (până la 500 de rânduri). Fiecare voucher este creat ca ciornă, deci nimic nu devine public până nu îl publicați.",
+      "columns": "Coloane",
+      "downloadSample": "Descărcați un CSV exemplu",
+      "columnRequired": "<code>{name}</code> (obligatoriu): {help}",
+      "columnOptional": "<code>{name}</code> (opțional): {help}",
+      "columnHelp": {
+        "name": "Titlul voucherului văzut de clienți, de ex. „Ofertă de cafea de primăvară”.",
+        "type": "„amount” (reducere în bani), „percent” (reducere procentuală) sau „credit” (credit în magazin).",
+        "value": "Euro pentru amount/credit (10 sau 10.50), procent pentru percent (15 sau 12.5).",
+        "currency": "Cod din trei litere, de ex. EUR. Implicit, moneda magazinului dvs.",
+        "valid_from": "Prima zi în care voucherul este valabil: 2026-10-01 sau 01.10.2026.",
+        "valid_to": "Ultima zi în care voucherul este valabil (rămâne valabil până la sfârșitul zilei).",
+        "code_prefix": "Literele de la începutul fiecărui cod, de ex. SPRING.",
+        "usage_limit": "De câte ori poate fi folosit în total. Lăsați gol pentru nelimitat."
+      },
+      "separatorHint": "Separați coloanele prin virgulă sau punct și virgulă. Dacă folosiți virgula, puneți sumele cu zecimale între ghilimele (\"4,50\") sau folosiți punctul (4.50).",
+      "chooseFile": "Alegeți un fișier CSV",
+      "chooseDifferent": "Faceți clic pentru a alege alt fișier",
+      "browse": "Faceți clic pentru a răsfoi",
+      "fixRows": "Corectați aceste rânduri și încărcați din nou fișierul:",
+      "andMore": "…și încă {count}.",
+      "readyToImport": "{count, plural, one {Gata de importat # voucher:} few {Gata de importat # vouchere:} other {Gata de importat # de vouchere:}}",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, până la {limit} utilizări} other {}}",
+      "imported": "{count, plural, one {A fost importat # voucher ca ciornă.} few {Au fost importate # vouchere ca ciorne.} other {Au fost importate # de vouchere ca ciorne.}}",
+      "viewVouchers": "Vizualizare vouchere",
+      "importing": "Se importă...",
+      "importCount": "{count, plural, one {Importați # voucher} few {Importați # vouchere} other {Importați # de vouchere}}",
+      "importVouchers": "Import vouchere",
+      "importFailedStatus": "Importul a eșuat (eroare {status}).",
+      "importFailed": "Importul a eșuat"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Titlu principal vizibil imediat, cu acțiunea principală."
+        },
+        "value_props": {
+          "label": "Avantaje",
+          "description": "Beneficii și garanții pe scurt."
+        },
+        "featured_products": {
+          "label": "Produse recomandate",
+          "description": "Produse de top, cu prețuri și etichete."
+        },
+        "featured_vouchers": {
+          "label": "Vouchere recomandate",
+          "description": "Carduri de vouchere active pentru promoții."
+        },
+        "rental_packages": {
+          "label": "Pachete de închiriere",
+          "description": "Pachete de închiriere și prețuri pe zi."
+        },
+        "categories": {
+          "label": "Grilă de categorii",
+          "description": "Navigare după tip, utilizare sau public."
+        },
+        "availability": {
+          "label": "Calendar de disponibilitate",
+          "description": "Disponibilitate în timp real și intervale de rezervare."
+        },
+        "testimonials": {
+          "label": "Testimoniale",
+          "description": "Citate de la clienți și evaluări cu stele."
+        },
+        "gallery": {
+          "label": "Galerie",
+          "description": "Imagini lifestyle sau exemple de utilizare."
+        },
+        "pricing": {
+          "label": "Tabel de prețuri",
+          "description": "Niveluri de preț transparente."
+        },
+        "rental_terms": {
+          "label": "Condiții de închiriere",
+          "description": "Garanție, asigurare și politica de returnare."
+        },
+        "faq": {
+          "label": "Întrebări frecvente",
+          "description": "Răspundeți la obiecțiile frecvente."
+        },
+        "newsletter": {
+          "label": "Abonare la newsletter",
+          "description": "Colectați adrese de e-mail pentru campanii."
+        },
+        "contact": {
+          "label": "Bloc de contact",
+          "description": "Asistență prin chat, e-mail sau telefon."
+        },
+        "map": {
+          "label": "Hartă locație",
+          "description": "Punct de ridicare sau locația magazinului."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Bară promoțională",
+          "description": "Bară fixă în partea de sus pentru oferte și anunțuri."
+        },
+        "sticky_cta": {
+          "label": "CTA fix",
+          "description": "Buton de acțiune vizibil permanent la derulare."
+        },
+        "chat_widget": {
+          "label": "Widget de chat",
+          "description": "Chat live sau integrare WhatsApp."
+        },
+        "trust_badges": {
+          "label": "Insigne de încredere",
+          "description": "Insigne de plată, siguranță sau calitate."
+        },
+        "social_proof": {
+          "label": "Pop-up de dovadă socială",
+          "description": "Activitate și achiziții recente."
+        },
+        "countdown": {
+          "label": "Cronometru invers",
+          "description": "Sentiment de urgență pentru ofertele limitate."
+        },
+        "reviews_widget": {
+          "label": "Widget de recenzii",
+          "description": "Integrați Google sau Trustpilot."
+        },
+        "language_switch": {
+          "label": "Selector de limbă",
+          "description": "Schimbare rapidă a limbii pe pagină."
+        },
+        "analytics": {
+          "label": "Fragmente de analiză",
+          "description": "Spații pentru pixeli de urmărire."
+        },
+        "cookie_banner": {
+          "label": "Banner cookie-uri",
+          "description": "Banner de consimțământ GDPR."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Previzualizare",
+      "edit": "Editare",
+      "previewEmpty": "Nu a fost adăugată nicio secțiune. Treceți în modul de editare pentru a adăuga secțiuni.",
+      "title": "Editor vizual",
+      "preview": "Previzualizare",
+      "empty": "Nicio secțiune încă. Faceți clic pe „Adăugați secțiune” mai jos pentru a începe.",
+      "collapseSettings": "Restrângeți setările",
+      "expandSettings": "Extindeți setările",
+      "removeSection": "Eliminați secțiunea {label}",
+      "sectionTitle": "Titlul secțiunii",
+      "description": "Descriere",
+      "descriptionPlaceholder": "Descriere opțională",
+      "backgroundColor": "Culoare de fundal",
+      "layoutVariant": "Varianta de aspect",
+      "layout": {
+        "default": "Implicit",
+        "centered": "Centrat",
+        "wide": "Lat",
+        "compact": "Compact"
+      },
+      "addSection": "Adăugați secțiune",
+      "availableSections": "Secțiuni disponibile",
+      "closeCatalog": "Închidere",
+      "allAdded": "Toate secțiunile disponibile au fost adăugate.",
+      "count": "{configured, plural, one {# secțiune configurată} few {# secțiuni configurate} other {# de secțiuni configurate}} / {available} disponibile de adăugat"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Listă de verificare pentru lansarea magazinului",
+        "rental_launch": "Listă de verificare pentru lansarea paginii de închirieri",
+        "campaign_ops": "Operațiuni săptămânale pentru campanii",
+        "support_ops": "Listă de verificare pentru pregătirea asistenței"
+      },
+      "toast": {
+        "saved": "Constructorul de pagini a fost actualizat.",
+        "saveFailed": "Pagina nu a putut fi salvată",
+        "vibeFailed": "Agentul Vibe a eșuat",
+        "layoutGenerated": "Aspectul Vibe a fost generat.",
+        "generateFailed": "Aspectul nu a putut fi generat",
+        "agentFailed": "Agentul a eșuat",
+        "planGenerated": "Planul de proces a fost generat.",
+        "runAgentFailed": "Agentul nu a putut fi rulat"
+      },
+      "noData": "Nu există date pentru constructorul de pagini.",
+      "title": "Constructor de pagini",
+      "intro": "Construiți rapid pagini de magazin și de închirieri, cu secțiuni modulare și extensii.",
+      "introAi": "Construiți rapid pagini de magazin și de închirieri, cu secțiuni modulare, extensii și sugestii AI opționale.",
+      "tabs": {
+        "store": "Magazin",
+        "rental": "Închiriere"
+      },
+      "details": {
+        "title": "Detaliile paginii",
+        "subtitle": "Titlu, subtitlu și aspect.",
+        "save": "Salvare",
+        "pageTitle": "Titlul paginii",
+        "subtitleLabel": "Subtitlu"
+      },
+      "sections": {
+        "title": "Secțiuni",
+        "subtitle": "Trageți pentru a reordona, extindeți pentru a configura sau previzualizați aspectul.",
+        "suggestLayout": "Sugerați un aspect",
+        "suggestionsLeft": "Sugestii AI de aspect rămase: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Extensii",
+        "subtitle": "Widgeturi suplimentare și elemente de marketing.",
+        "enable": "Activați extensia {label}",
+        "disable": "Dezactivați extensia {label}"
+      },
+      "summary": {
+        "title": "Rezumat live",
+        "line": "{title} · {sections, plural, one {# secțiune} few {# secțiuni} other {# de secțiuni}} · {addons, plural, one {# extensie} few {# extensii} other {# de extensii}}",
+        "sectionsLabel": "Secțiuni:",
+        "addonsLabel": "Extensii:",
+        "none": "Niciuna"
+      },
+      "assistant": {
+        "title": "Asistent pentru lista de lansare",
+        "subtitle": "Generați planuri de acțiune și liste de verificare operaționale.",
+        "goalLabel": "Obiectivul procesului",
+        "createChecklist": "Creare listă de verificare",
+        "checklistsLeft": "Liste de verificare rămase: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Oferte, închirieri și vouchere selectate de la {name}.",
+        "shopProducts": "Cumpărați produse",
+        "browseRentals": "Vedeți închirierile"
+      },
+      "valueProps": {
+        "rewardsTitle": "Recompense",
+        "rewardsText": "Stimulente prin vouchere incluse.",
+        "stockTitle": "Stoc sigur",
+        "stockText": "Prețuri și disponibilitate actualizate.",
+        "datesTitle": "Date flexibile",
+        "datesText": "Planificați ușor închirierile."
+      },
+      "viewAll": "Vedeți tot",
+      "seeAll": "Vedeți tot",
+      "products": {
+        "title": "Produse recomandate",
+        "empty": "Niciun produs încă.",
+        "fallbackDescription": "Produs evidențiat"
+      },
+      "rentals": {
+        "title": "Pachete de închiriere",
+        "empty": "Nicio închiriere încă.",
+        "fallbackDescription": "Închiriere evidențiată",
+        "perDay": "{price} / zi"
+      },
+      "categories": {
+        "title": "Răsfoiți categoriile",
+        "popular": "Populare",
+        "business": "Business",
+        "events": "Evenimente",
+        "seasonal": "Sezoniere",
+        "corporate": "Corporate",
+        "custom": "Personalizate"
+      },
+      "availability": {
+        "title": "Disponibilitate în timp real",
+        "text": "Verificați disponibilitatea și cereți o ofertă în câteva minute.",
+        "seeCalendar": "Vedeți calendarul"
+      },
+      "testimonials": {
+        "title": "Ce spun clienții",
+        "smooth": "Proces fără probleme",
+        "lovedVoucher": "Mi-a plăcut mult voucherul",
+        "support": "Asistență excelentă"
+      },
+      "gallery": {
+        "title": "Galerie"
+      },
+      "pricing": {
+        "title": "Prețuri",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Enterprise",
+        "tierText": "Prețuri și asistență personalizate"
+      },
+      "rentalTerms": {
+        "title": "Condiții de închiriere",
+        "text": "Garanții, reguli de ridicare și politica de returnare comunicate clar de la început."
+      },
+      "faq": {
+        "title": "Întrebări frecvente",
+        "redeem": "Cum valorific?",
+        "reschedule": "Pot reprograma?",
+        "support": "Oferiți asistență?"
+      },
+      "newsletter": {
+        "title": "Rămâneți la curent",
+        "text": "Primiți oferte noi și noutăți despre închirieri în inbox.",
+        "emailLabel": "Adresă de e-mail",
+        "subscribe": "Abonare"
+      },
+      "contact": {
+        "title": "Contact",
+        "emailUs": "Scrieți-ne la {email}"
+      },
+      "map": {
+        "text": "Locația de ridicare este comunicată după rezervare."
+      },
+      "vouchers": {
+        "title": "Vouchere active",
+        "empty": "Nu există vouchere disponibile.",
+        "voucher": "Voucher",
+        "view": "Vizualizare voucher"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Activ",
+      "redeemed": "Valorificat",
+      "expired": "Expirat",
+      "cancelled": "Anulat"
+    },
+    "list": {
+      "metaTitle": "Carduri cadou",
+      "title": "Carduri cadou",
+      "subtitle": "Creați și gestionați carduri cadou",
+      "newGiftCard": "Card cadou nou",
+      "stats": {
+        "total": "Total carduri cadou",
+        "totalDescription": "Toate cardurile cadou emise",
+        "active": "Active",
+        "activeDescription": "Valorificabile în prezent",
+        "redeemed": "Valorificate",
+        "redeemedDescription": "Valorificări finalizate",
+        "totalValue": "Valoare totală",
+        "totalValueDescription": "Valoarea cardurilor cadou emise"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Niciun card cadou încă",
+      "emptyDescription": "Creați un card cadou cu branding personalizat și valorificare prin QR.",
+      "createFirst": "Creați primul card cadou",
+      "searchPlaceholder": "Căutați după titlu, cod sau mesaj",
+      "searchLabel": "Căutare carduri cadou",
+      "status": "Stare",
+      "allStatus": "Toate stările",
+      "sortBy": "Sortare după",
+      "sortDate": "Dată (cele mai noi)",
+      "sortAmount": "Sumă (descrescător)",
+      "showing": "Se afișează {shown} din {total, plural, one {# card cadou} few {# carduri cadou} other {# de carduri cadou}}",
+      "clearFilters": "Ștergeți filtrele",
+      "noMatches": "Niciun card cadou nu corespunde filtrelor.",
+      "defaultHeadline": "Card cadou",
+      "noExpiry": "Fără expirare",
+      "validUntil": "Valabil până la: {date}",
+      "redeemedOn": "Valorificat: {date}",
+      "details": "Detalii",
+      "view": "Vizualizare"
+    },
+    "detail": {
+      "title": "Card cadou",
+      "code": "Cod {code}",
+      "publicView": "Vizualizare publică",
+      "newGiftCard": "Card cadou nou",
+      "detailsTitle": "Detalii card cadou",
+      "value": "Valoare",
+      "validFrom": "Valabil de la",
+      "validTo": "Valabil până la",
+      "noExpiry": "Fără expirare",
+      "redeemedAt": "Valorificat la",
+      "notRedeemed": "Nevalorificat",
+      "qrTitle": "Cod QR de valorificare pentru personal",
+      "qrHelp": "Personalul poate scana acest cod QR pentru a valorifica și invalida cardul cadou."
+    },
+    "new": {
+      "title": "Card cadou nou",
+      "subtitle": "Personalizați și emiteți un card cadou",
+      "created": "Cardul cadou a fost creat.",
+      "cancel": "Anulare",
+      "creating": "Se creează...",
+      "submit": "Creare card cadou",
+      "errors": {
+        "amountRequired": "Introduceți o sumă mai mare de 0.",
+        "endBeforeStart": "Data de sfârșit trebuie să fie aceeași cu data de început sau ulterioară.",
+        "createFailed": "Cardul cadou nu a putut fi creat"
+      },
+      "amountErrors": {
+        "negative": "Suma nu poate fi negativă.",
+        "invalid": "Suma nu este un număr valid.",
+        "wholeNumber": "Suma trebuie să fie un număr întreg.",
+        "decimals": "Suma poate avea cel mult {decimals} zecimale.",
+        "tooLarge": "Suma este prea mare."
+      },
+      "priceErrors": {
+        "negative": "Prețul de vânzare nu poate fi negativ.",
+        "invalid": "Prețul de vânzare nu este un număr valid.",
+        "wholeNumber": "Prețul de vânzare trebuie să fie un număr întreg.",
+        "decimals": "Prețul de vânzare poate avea cel mult {decimals} zecimale.",
+        "tooLarge": "Prețul de vânzare este prea mare."
+      },
+      "valueSection": {
+        "title": "Valoare și valabilitate",
+        "description": "Setați suma, moneda și data expirării",
+        "amount": "Sumă",
+        "faceValue": "Valoare nominală: {value}.",
+        "amountHelp": "Introduceți suma în {currency}, de ex. 50 sau 49,90 pentru {example}.",
+        "currency": "Monedă",
+        "validFrom": "Valabil de la",
+        "validTo": "Valabil până la",
+        "noExpiry": "Fără dată de expirare"
+      },
+      "purchaseSection": {
+        "title": "Achiziție de către clienți",
+        "description": "Permiteți clienților să cumpere online acest card cadou",
+        "purchasable": "Disponibil pentru cumpărare de către clienți",
+        "salePrice": "Preț de vânzare (opțional, implicit valoarea nominală)",
+        "salePricePlaceholder": "Egal cu suma",
+        "customersPay": "Clienții plătesc {value}.",
+        "salePriceHelp": "Lăsați gol pentru a vinde la valoarea nominală. Setați un alt preț pentru promoții."
+      },
+      "brandingSection": {
+        "title": "Branding și mesaj",
+        "description": "Titlu, mesaj, imagini și culori",
+        "headline": "Titlu",
+        "headlinePlaceholder": "Cadou pentru iubitorii de cafea",
+        "message": "Mesaj",
+        "messagePlaceholder": "Adăugați un mesaj personal pentru destinatar",
+        "logoUrl": "URL logo",
+        "imageUrl": "URL imagine",
+        "accentColor": "Culoare de accent",
+        "backgroundColor": "Culoare de fundal",
+        "textColor": "Culoarea textului",
+        "codePrefix": "Prefix de cod (opțional)"
+      },
+      "preview": {
+        "title": "Previzualizare",
+        "defaultHeadline": "Card cadou",
+        "imageAlt": "Card cadou",
+        "logoAlt": "Logoul brandului",
+        "notePlaceholder": "Adăugați o notă personală"
+      }
+    },
+    "gifts": {
+      "title": "Produse cadou",
+      "subtitle": "Gestionați produsele din Gift Hub",
+      "dashboard": "Dashboard",
+      "confirmDelete": "Sigur? Produsul va fi dezactivat.",
+      "stats": {
+        "total": "Total",
+        "active": "Active",
+        "views": "Vizualizări",
+        "purchases": "Achiziții"
+      },
+      "emptyTitle": "Niciun produs cadou încă",
+      "emptyDescription": "Adăugați primul produs pentru a apărea în fluxul Gift Hub.",
+      "emptyApiHint": "Folosiți API-ul de la <code>{endpoint}</code> pentru a crea produse.",
+      "inactive": "Inactiv",
+      "featured": "Recomandat",
+      "views": "{count, plural, one {# vizualizare} few {# vizualizări} other {# de vizualizări}}",
+      "purchases": "{count, plural, one {# achiziție} few {# achiziții} other {# de achiziții}}",
+      "conversionRate": "{rate}% CVR",
+      "activate": "Activare",
+      "deactivate": "Dezactivare",
+      "delete": "Ștergere"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Nu există date",
+      "value": "Valoare: <strong>{value}</strong>",
+      "dismiss": "Închidere",
+      "remove": "Eliminare",
+      "dialog": "Dialog",
+      "close": "Închidere",
+      "loading": "Se încarcă"
+    },
+    "analyticsFunnel": {
+      "empty": "Nicio activitate în această perioadă",
+      "top": "Început",
+      "drop": "-{rate}% scădere"
+    },
+    "periodComparison": {
+      "title": "Comparație între perioade",
+      "loading": "Se încarcă...",
+      "previous": "Anterior: {value}",
+      "noData": "Nu există date",
+      "period": {
+        "day": "Zi",
+        "week": "Săptămână",
+        "month": "Lună",
+        "quarter": "Trimestru",
+        "year": "An"
+      },
+      "metric": {
+        "revenue": "Venituri",
+        "redemptions": "Valorificări",
+        "purchases": "Achiziții",
+        "referrals": "Recomandări",
+        "customers": "Clienți"
+      }
+    },
+    "trendChart": {
+      "noData": "Nu există date"
+    },
+    "conversionChart": {
+      "noData": "Nu există date",
+      "previous": "ant.: {value}"
+    },
+    "funnelChart": {
+      "empty": "Nicio activitate în această perioadă"
+    },
+    "geoMap": {
+      "noData": "Nu există date",
+      "value": "Valoare: <strong>{value}</strong>",
+      "country": {
+        "GB": "Regatul Unit",
+        "IE": "Irlanda",
+        "FR": "Franța",
+        "DE": "Germania",
+        "ES": "Spania",
+        "PT": "Portugalia",
+        "IT": "Italia",
+        "NL": "Țările de Jos",
+        "BE": "Belgia",
+        "CH": "Elveția",
+        "AT": "Austria",
+        "PL": "Polonia",
+        "CZ": "Cehia",
+        "SE": "Suedia",
+        "NO": "Norvegia",
+        "FI": "Finlanda",
+        "DK": "Danemarca",
+        "EE": "Estonia",
+        "LV": "Letonia",
+        "LT": "Lituania",
+        "HU": "Ungaria",
+        "RO": "România",
+        "BG": "Bulgaria",
+        "GR": "Grecia",
+        "HR": "Croația",
+        "SK": "Slovacia",
+        "SI": "Slovenia",
+        "RS": "Serbia",
+        "UA": "Ucraina",
+        "BY": "Belarus"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Se așteaptă datele..."
+    },
+    "pieDonutChart": {
+      "noData": "Nu există date",
+      "total": "Total"
+    },
+    "activityFeed": {
+      "justNow": "chiar acum",
+      "minutesAgo": "acum {count} min",
+      "hoursAgo": "acum {count} h",
+      "daysAgo": "acum {count} z",
+      "empty": "Nicio activitate încă",
+      "loadMore": "Încărcați mai multe",
+      "eventType": {
+        "purchase": "Achiziție",
+        "redemption": "Valorificare",
+        "signup": "Înregistrare",
+        "alert": "Alertă"
+      }
+    },
+    "dateRange": {
+      "days7": "7 zile",
+      "days30": "30 de zile",
+      "days90": "90 de zile",
+      "year1": "1 an",
+      "custom": "Personalizat"
+    },
+    "chartCard": {
+      "fullscreen": "Ecran complet",
+      "exitFullscreen": "Ieșire din ecran complet",
+      "retry": "Reîncercare"
+    },
+    "dashboardHeader": {
+      "export": "Export",
+      "exportAs": "Export ca {format}"
+    },
+    "dataTable": {
+      "empty": "Nu există date",
+      "showing": "Se afișează {from}–{to} din {total}",
+      "previousPage": "Pagina anterioară",
+      "nextPage": "Pagina următoare"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Live",
+        "reconnecting": "Reconectare",
+        "disconnected": "Deconectat"
+      },
+      "status": {
+        "connected": "Conectat",
+        "reconnecting": "Reconectare",
+        "disconnected": "Deconectat"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "față de perioada anterioară"
+    },
+    "statComparison": {
+      "current": "Curent",
+      "previous": "Anterior",
+      "change": "variație"
+    },
+    "aiInsightPanel": {
+      "title": "Informații AI",
+      "placeholder": "Puneți o întrebare AI-ului...",
+      "send": "Trimitere"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Live",
+        "degraded": "Funcționare redusă",
+        "disconnected": "Offline"
+      },
+      "latency": "Latență: {ms} ms",
+      "lastUpdate": "Ultima actualizare: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Notificări",
+      "title": "Notificări",
+      "markAllRead": "Marcați toate ca citite",
+      "empty": "Nicio notificare",
+      "ariaLabelUnread": "Notificări ({count} necitite)"
+    },
+    "premiumChartCard": {
+      "info": "Informații",
+      "fullscreen": "Ecran complet",
+      "exitFullscreen": "Ieșire din ecran complet",
+      "moreOptions": "Mai multe opțiuni",
+      "empty": "Nu există date pentru această perioadă"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "față de perioada anterioară"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Funcțional",
+        "degraded": "Funcționare redusă",
+        "outage": "Întrerupere"
+      }
+    },
+    "select": {
+      "placeholder": "Selectați...",
+      "search": "Căutare...",
+      "empty": "Nu s-au găsit opțiuni",
+      "removeOption": "Eliminați {label}"
+    },
+    "sidebar": {
+      "expand": "Extindeți bara laterală",
+      "collapse": "Restrângeți bara laterală",
+      "openMenu": "Deschideți meniul",
+      "closeMenu": "Închideți meniul"
+    },
+    "iconSystem": {
+      "notFound": "Pictograma „{name}” nu a fost găsită",
+      "badge": "{count, plural, one {# notificare} few {# notificări} other {# de notificări}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Panou lateral",
+      "closePanel": "Închideți panoul"
+    },
+    "codeBlock": {
+      "copyCode": "Copiați codul",
+      "copied": "Copiat",
+      "copy": "Copiere"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Clienți",
+      "title": "Clienți",
+      "summary": "{count, plural, one {# client} few {# clienți} other {# de clienți}} · {revenue} venituri totale",
+      "stats": {
+        "totalCustomers": "Total clienți",
+        "totalRevenue": "Venituri totale",
+        "totalRedemptions": "Total valorificări"
+      },
+      "table": {
+        "customer": "Client",
+        "email": "E-mail",
+        "purchases": "Achiziții",
+        "totalSpent": "Total cheltuit",
+        "redemptions": "Valorificări",
+        "lastPurchase": "Ultima achiziție"
+      },
+      "empty": "Niciun client încă",
+      "unknown": "Necunoscut"
+    },
+    "qrCheckout": {
+      "title": "Plată instant prin QR",
+      "subtitle": "Generați coduri QR pentru plata instant a clienților",
+      "voucherLabel": "Asociere cu un voucher (opțional)",
+      "generalOption": "Plată generală (fără voucher anume)",
+      "voucherOption": "{type} - {value} {currency} ({status})",
+      "generating": "Se generează...",
+      "generate": "Generare cod QR",
+      "qrAlt": "Cod QR de plată",
+      "scanToCheckout": "Scanați pentru a plăti",
+      "print": "Tipărire cod QR"
+    },
+    "redemptions": {
+      "metaTitle": "Valorificări",
+      "subtitle": "Vizualizați și confirmați valorificările voucherelor.",
+      "stats": {
+        "totalTitle": "Total valorificări",
+        "totalDescription": "Toate valorificările trimise",
+        "pendingTitle": "În așteptare",
+        "pendingDescription": "Așteaptă confirmarea",
+        "confirmedTitle": "Confirmate",
+        "confirmedDescription": "Valorificări aprobate",
+        "discountsTitle": "Reduceri acordate",
+        "discountsDescription": "Reduceri confirmate"
+      },
+      "empty": {
+        "title": "Nicio valorificare încă",
+        "description": "Valorificările vor apărea aici când clienții folosesc vouchere."
+      },
+      "voucherFallback": "Voucher",
+      "card": {
+        "order": "Comandă de {amount}",
+        "discount": "Reducere: {amount}",
+        "discountReferred": "Reducere: {amount} - Recomandat de {name}",
+        "confirmed": "Confirmată",
+        "pending": "În așteptare",
+        "method": "Metodă: {method}",
+        "methods": {
+          "online": "Online",
+          "in_store": "În magazin"
+        },
+        "orderReference": "Comandă: {reference}",
+        "notAvailable": "N/A",
+        "location": "Locație: {location}",
+        "date": "Dată: {date}"
+      },
+      "confirm": {
+        "prompt": "Confirmați această valorificare? Creditul va fi deblocat pentru cel care a recomandat.",
+        "confirmLabel": "Confirmare",
+        "success": "Valorificarea a fost confirmată. Creditul a fost deblocat pentru cel care a recomandat.",
+        "error": "Valorificarea nu a putut fi confirmată. Încercați din nou.",
+        "confirming": "Se confirmă...",
+        "button": "Confirmare valorificare"
+      },
+      "export": {
+        "success": "Valorificările au fost exportate!",
+        "error": "Valorificările nu au putut fi exportate",
+        "exporting": "Se exportă...",
+        "button": "Export CSV"
+      }
+    },
+    "reviews": {
+      "title": "Recenzii",
+      "subtitle": "Monitorizați recenziile clienților și răspundeți la ele",
+      "filters": "Filtre",
+      "reviewCount": "{count, plural, one {# recenzie} few {# recenzii} other {# de recenzii}}",
+      "ratingDistribution": "Distribuția evaluărilor",
+      "responseRate": "Rata de răspuns",
+      "replied": "Cu răspuns",
+      "pending": "În așteptare",
+      "responseRatePercent": "Rată de răspuns {percent}%",
+      "filter": {
+        "rating": "Evaluare",
+        "allRatings": "Toate evaluările",
+        "stars": "{count, plural, one {# stea} few {# stele} other {# de stele}}",
+        "replyStatus": "Stare răspuns",
+        "all": "Toate",
+        "needsReply": "Necesită răspuns",
+        "replied": "Cu răspuns",
+        "clear": "Ștergere"
+      },
+      "loading": "Se încarcă recenziile...",
+      "empty": "Nu s-au găsit recenzii.",
+      "anonymous": "Anonim",
+      "verified": "Verificat",
+      "campaign": "Campanie: {name}",
+      "voucher": "Voucher: {code}",
+      "foundHelpful": "Utilă pentru {count}",
+      "yourReply": "Răspunsul dvs.",
+      "replyPlaceholder": "Scrieți răspunsul...",
+      "posting": "Se publică...",
+      "postReply": "Publicați răspunsul",
+      "cancel": "Anulare",
+      "reply": "Răspuns",
+      "showing": "Se afișează {from}–{to} din {total}",
+      "pageOf": "Pagina {page} din {totalPages}",
+      "previousPage": "Pagina anterioară",
+      "nextPage": "Pagina următoare",
+      "loadFailed": "Recenziile nu au putut fi încărcate",
+      "replyFailed": "Răspunsul nu a putut fi trimis",
+      "replyPosted": "Răspunsul a fost publicat"
+    },
+    "scanner": {
+      "title": "Scaner",
+      "subtitle": "Scanați vouchere, carduri cadou și bilete",
+      "manual": "Manual",
+      "camera": "Cameră",
+      "scanning": "Se scanează...",
+      "cameraDenied": "Accesul la cameră a fost refuzat. Permiteți accesul la cameră din setările browserului sau introduceți codul mai jos.",
+      "cameraUnavailable": "Nu este disponibilă nicio cameră. Introduceți codul mai jos.",
+      "pointAtCode": "Îndreptați camera spre un cod QR pentru scanare automată",
+      "enterCode": "Introduceți codul",
+      "codePlaceholder": "Cod voucher (de ex. AUD-CMUI0TG1), link voucher, cod bilet sau card cadou",
+      "codeAriaLabel": "Cod de scanat",
+      "scan": "Scanare",
+      "found": {
+        "voucher": "Voucher găsit",
+        "gift_card": "Card cadou găsit",
+        "ticket": "Bilet găsit"
+      },
+      "info": {
+        "ticketNumber": "Bilet nr.",
+        "event": "Eveniment",
+        "type": "Tip",
+        "standard": "Standard",
+        "attendee": "Participant",
+        "code": "Cod",
+        "amount": "Sumă",
+        "message": "Mesaj",
+        "voucher": "Voucher",
+        "campaign": "Campanie",
+        "none": "Niciuna",
+        "value": "Valoare",
+        "validUntil": "Valabil până la"
+      },
+      "redeem": "Valorificare",
+      "redeeming": "Se valorifică...",
+      "cannotRedeem": "Acest element nu poate fi valorificat (stare: {status})",
+      "redeemed": {
+        "voucher": "Voucherul a fost valorificat!",
+        "gift_card": "Cardul cadou a fost valorificat!",
+        "ticket": "Biletul a fost valorificat!"
+      },
+      "errors": {
+        "enterCode": "Introduceți un cod",
+        "notFound": "Nu a fost găsit",
+        "scanFailed": "Scanarea a eșuat",
+        "redeemFailed": "Valorificarea a eșuat"
+      },
+      "status": {
+        "giftCard": {
+          "active": "activ",
+          "redeemed": "valorificat",
+          "expired": "expirat",
+          "cancelled": "anulat"
+        },
+        "ticket": {
+          "available": "disponibil",
+          "sold": "vândut",
+          "used": "utilizat",
+          "cancelled": "anulat",
+          "refunded": "rambursat"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Prețul nu poate fi negativ.",
+      "invalid": "Prețul nu este un număr valid.",
+      "wholeNumber": "Prețul trebuie să fie un număr întreg.",
+      "decimals": "Prețul poate avea cel mult {decimals} zecimale.",
+      "tooLarge": "Prețul este prea mare."
+    },
+    "appointments": {
+      "title": "Programări",
+      "subtitle": "Gestionați rezervările și disponibilitatea",
+      "createSlot": "Creare interval",
+      "form": {
+        "serviceName": "Numele serviciului",
+        "price": "Preț ({currency}, lăsați gol dacă este gratuit)",
+        "startTime": "Ora de început",
+        "endTime": "Ora de sfârșit",
+        "notes": "Note",
+        "creating": "Se creează…",
+        "submit": "Creare interval disponibil"
+      },
+      "status": {
+        "all": "Toate",
+        "pending": "În așteptare",
+        "confirmed": "Confirmate",
+        "cancelled": "Anulate",
+        "completed": "Finalizate"
+      },
+      "loading": "Se încarcă...",
+      "empty": "Nu s-au găsit programări",
+      "bookedBy": "Rezervat de: {name}",
+      "confirm": "Confirmare",
+      "confirmAria": "Confirmați programarea",
+      "cancel": "Anulare",
+      "cancelAria": "Anulați programarea",
+      "errors": {
+        "endBeforeStart": "Ora de sfârșit trebuie să fie după ora de început.",
+        "createFailed": "Intervalul disponibil nu a putut fi creat. Încercați din nou.",
+        "network": "Serverul nu a putut fi contactat. Verificați conexiunea și încercați din nou.",
+        "updateFailed": "Programarea nu a putut fi actualizată (eroare {status})."
+      }
+    },
+    "inventory": {
+      "title": "Inventar",
+      "subtitle": "Urmăriți nivelul stocurilor și gestionați disponibilitatea voucherelor",
+      "refresh": "Reîmprospătare",
+      "summary": {
+        "totalItems": "Total articole",
+        "lowStock": "Stoc redus",
+        "outOfStock": "Stoc epuizat"
+      },
+      "alerts": {
+        "title": "Alerte de stoc redus ({count})",
+        "threshold": "{stock} / prag {threshold}"
+      },
+      "loading": "Se încarcă inventarul...",
+      "empty": "Nu s-au găsit vouchere",
+      "typeVoucher": "Voucher {type}",
+      "stockStatus": {
+        "unlimited": "Nelimitat",
+        "outOfStock": "Stoc epuizat",
+        "lowStock": "Stoc redus",
+        "inStock": "În stoc"
+      },
+      "stock": "Stoc: {stock}",
+      "purchased": "Cumpărate: {count}",
+      "redeemed": "Valorificate: {count}",
+      "validUntil": "Valabil până la {date}",
+      "edit": {
+        "button": "Editare stoc",
+        "stockQuantity": "Cantitate în stoc",
+        "threshold": "Prag de stoc redus",
+        "save": "Salvare",
+        "saving": "Se salvează...",
+        "cancel": "Anulare"
+      },
+      "stockUpdated": "Stocul a fost actualizat",
+      "errors": {
+        "loadFailed": "Inventarul nu a putut fi încărcat",
+        "updateFailed": "Stocul nu a putut fi actualizat"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "Sugestiile AI nu sunt încă configurate pe această platformă, deci instrumentele automate pentru aspect și liste de verificare sunt ascunse. Puteți totuși construi și edita paginile manual."
+    },
+    "pricing": {
+      "title": "Prețuri dinamice",
+      "newRule": "Regulă nouă",
+      "ruleTypes": {
+        "demand": {
+          "label": "În funcție de cerere",
+          "desc": "Ajustați prețul după raportul vizualizări/achiziții"
+        },
+        "timeOfDay": {
+          "label": "Ora din zi",
+          "desc": "Prețuri diferite pentru orele de vârf și cele liniștite"
+        },
+        "inventory": {
+          "label": "Inventar",
+          "desc": "Prețul se modifică în funcție de stocul rămas"
+        },
+        "surge": {
+          "label": "Cerere de vârf",
+          "desc": "Adaos pentru evenimente speciale/sărbători"
+        },
+        "loyalty": {
+          "label": "Fidelitate",
+          "desc": "Reduceri pentru clienții fideli"
+        }
+      },
+      "form": {
+        "title": "Creare regulă de preț",
+        "ruleType": "Tipul regulii",
+        "priority": "Prioritate",
+        "priorityPlaceholder": "Mai mare = aplicată prima",
+        "config": "Configurare (JSON)",
+        "submit": "Creare regulă",
+        "cancel": "Anulare"
+      },
+      "loading": "Se încarcă regulile...",
+      "empty": "Nicio regulă de preț încă. Creați una pentru a activa prețurile dinamice.",
+      "table": {
+        "type": "Tip",
+        "priority": "Prioritate",
+        "config": "Configurare",
+        "status": "Stare",
+        "actions": "Acțiuni"
+      },
+      "active": "Activă",
+      "inactive": "Inactivă",
+      "deleteAria": "Ștergeți regula de preț",
+      "deleteConfirm": "Ștergeți această regulă de preț?",
+      "delete": "Ștergere",
+      "errors": {
+        "invalidJson": "Câmpul de configurare trebuie să conțină JSON valid."
+      },
+      "preview": {
+        "title": "Previzualizare preț",
+        "description": "Introduceți ID-ul unui voucher pentru a vedea cum i-ar afecta prețul regulile active.",
+        "voucherId": "ID voucher",
+        "voucherIdPlaceholder": "Introduceți ID-ul voucherului",
+        "calculate": "Calculare",
+        "error": "Prețul nu a putut fi calculat",
+        "basePrice": "Preț de bază",
+        "finalPrice": "Preț final"
+      }
+    },
+    "rentals": {
+      "title": "Rezervări de închiriere",
+      "subtitle": "Gestionați cererile de închiriere și returnările",
+      "status": {
+        "all": "Toate",
+        "pending": "În așteptare",
+        "approved": "Aprobate",
+        "rejected": "Respinse",
+        "paid": "Plătite",
+        "active": "Active",
+        "returned": "Returnate",
+        "cancelled": "Anulate"
+      },
+      "empty": "Nu s-au găsit rezervări de închiriere.",
+      "dates": "{start} - {end} ({days, plural, one {# zi} few {# zile} other {# de zile}})",
+      "total": "Total: <strong>{total}</strong> ({rate}/zi)",
+      "note": "Notă: {note}",
+      "rejectedReason": "Respinsă: {reason}",
+      "bookedMeta": "Rezervat: {date} | Utilizator: {user}...",
+      "approve": "Aprobare",
+      "reasonPlaceholder": "Motiv (opțional)",
+      "confirm": "Confirmare",
+      "cancel": "Anulare",
+      "reject": "Respingere",
+      "markReturned": "Marcare ca returnat"
+    },
+    "subscriptionBoxes": {
+      "title": "Cutii cu abonament",
+      "subtitle": "Gestionați cutiile recurente cu vouchere",
+      "newBox": "+ Cutie nouă",
+      "cancel": "Anulare",
+      "form": {
+        "name": "Nume",
+        "description": "Descriere",
+        "price": "Preț ({currency})",
+        "currency": "Monedă",
+        "interval": "Interval",
+        "maxItems": "Nr. maxim de articole",
+        "creating": "Se creează...",
+        "submit": "Creare cutie"
+      },
+      "interval": {
+        "weekly": "Săptămânal",
+        "monthly": "Lunar",
+        "quarterly": "Trimestrial"
+      },
+      "created": "Cutia cu abonament a fost creată.",
+      "empty": "Nicio cutie cu abonament încă. Creați-o pe prima.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# abonat} few {# abonați} other {# de abonați}}",
+      "items": "{count, plural, one {# articol} few {# articole} other {# de articole}}",
+      "errors": {
+        "priceAboveZero": "Introduceți un preț mai mare de 0.",
+        "createFailed": "Cutia cu abonament nu a putut fi creată (eroare {status}).",
+        "network": "Cutia cu abonament nu a putut fi creată. Verificați conexiunea și încercați din nou."
+      },
+      "intervalUnit": {
+        "weekly": "săptămână",
+        "monthly": "lună",
+        "quarterly": "trimestru"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Site web",
+      "supportEmail": "E-mail de asistență",
+      "logoUrl": "URL logo",
+      "primaryColor": "Culoare principală",
+      "secondaryColor": "Culoare secundară",
+      "backgroundColor": "Culoare de fundal",
+      "primaryColorHex": "Valoarea hex a culorii principale",
+      "secondaryColorHex": "Valoarea hex a culorii secundare",
+      "backgroundColorHex": "Valoarea hex a culorii de fundal",
+      "saving": "Se salvează..."
+    },
+    "page": {
+      "metaTitle": "Setări comerciant",
+      "infoTitle": "Informații despre comerciant",
+      "infoSubtitle": "Detalii de bază ale comerciantului",
+      "name": "Nume",
+      "slug": "Slug",
+      "country": "Țară",
+      "defaultCurrency": "Moneda implicită",
+      "website": "Site web",
+      "supportEmail": "E-mail de asistență",
+      "completeOnboarding": "Finalizați configurarea inițială",
+      "billingTitle": "Facturare",
+      "billingSubtitle": "Perioadă de probă gratuită de 14 zile, apoi planuri de la 19 €/lună. Comision de 5% pe vânzările de vouchere.",
+      "status": "Stare",
+      "trialStatus": "Perioadă de probă gratuită — {days, plural, one {# zi rămasă} few {# zile rămase} other {# de zile rămase}}",
+      "statusActive": "Activ",
+      "statusInactive": "Inactiv",
+      "currentPlan": "Plan curent",
+      "trialEnds": "Perioada de probă se încheie",
+      "periodEnds": "Perioada curentă se încheie",
+      "manage": "Gestionare",
+      "payoutsTitle": "Plăți",
+      "payoutsEnabled": "Contul Stripe este conectat și activat",
+      "payoutsInProgress": "Configurare în curs — finalizați-o pentru a activa plățile",
+      "payoutsNotConnected": "Conectați Stripe pentru a primi plățile din vânzarea voucherelor",
+      "webhooksTitle": "Webhookuri",
+      "webhooksSubtitle": "Primiți notificări despre evenimente în timp real prin HTTP",
+      "notificationsTitle": "Notificări",
+      "notificationsSubtitle": "Alegeți ce categorii de e-mailuri primiți ca membru al echipei."
+    },
+    "brandProfile": {
+      "title": "Profilul brandului",
+      "subtitle": "Personalizați culorile brandului, logoul și datele de contact.",
+      "updated": "Profilul brandului a fost actualizat!",
+      "updateFailed": "Profilul brandului nu a putut fi actualizat",
+      "save": "Salvați modificările"
+    },
+    "domains": {
+      "title": "Domenii personalizate",
+      "subtitle": "Conectați propriul domeniu și verificați-l pentru rutarea către magazinul dvs.",
+      "inputLabel": "Domeniu personalizat",
+      "adding": "Se adaugă...",
+      "add": "Adăugare domeniu",
+      "empty": "Niciun domeniu configurat.",
+      "statusLine": "Stare: {status}",
+      "statusValue": {
+        "pending": "în așteptare",
+        "verified": "verificat"
+      },
+      "verify": "Verificare",
+      "remove": "Eliminare",
+      "addedTitle": "Domeniul a fost adăugat",
+      "addedDescription": "Verificați DNS-ul înainte de a redirecționa traficul.",
+      "addErrorTitle": "Eroare de domeniu",
+      "addErrorDescription": "Domeniul nu a putut fi adăugat.",
+      "verifiedTitle": "Domeniul a fost verificat",
+      "verifiedDescription": "Rutarea către magazinul dvs. este acum activă.",
+      "verifyErrorTitle": "Eroare de verificare",
+      "verifyErrorDescription": "Domeniul nu a putut fi verificat.",
+      "removedTitle": "Domeniul a fost eliminat",
+      "removeErrorTitle": "Eroare la eliminare",
+      "removeErrorDescription": "Domeniul nu a putut fi eliminat."
+    },
+    "notifications": {
+      "metaTitle": "Preferințe de notificare",
+      "title": "Preferințe de notificare",
+      "intro": "Alegeți ce categorii de e-mailuri primiți ca membru al <name>{merchantName}</name>. Preferințele sunt personale — fiecare membru al echipei le gestionează pe ale sale.",
+      "required": "Obligatoriu",
+      "toggle": "Comutați {label}",
+      "unsaved": "Modificări nesalvate",
+      "allSaved": "Toate modificările au fost salvate",
+      "saving": "Se salvează…",
+      "save": "Salvați preferințele",
+      "savedTitle": "Preferințele au fost salvate",
+      "saveFailedTitle": "Salvarea a eșuat",
+      "saveFailedDescription": "Preferințele de notificare nu au putut fi actualizate.",
+      "category": {
+        "orders": {
+          "label": "Comenzi și valorificări noi",
+          "description": "E-mail când un voucher este cumpărat, valorificat sau oferit cadou."
+        },
+        "payouts": {
+          "label": "Plăți",
+          "description": "Plăți Stripe primite, eșuate sau blocate."
+        },
+        "fraud_alerts": {
+          "label": "Alerte de fraudă și securitate",
+          "description": "Tipare neobișnuite de valorificare, rambursări contestate, anomalii la autentificarea echipei. Nu pot fi dezactivate."
+        },
+        "campaign_updates": {
+          "label": "Ciclul de viață al campaniilor",
+          "description": "Campanie publicată, care expiră în 7 zile sau încheiată."
+        },
+        "weekly_digest": {
+          "label": "Rezumat săptămânal al performanței",
+          "description": "Recapitulare lunea a veniturilor, valorificărilor și voucherelor de top din săptămâna trecută."
+        },
+        "product_updates": {
+          "label": "Noutăți despre produs de la GiftHub",
+          "description": "Funcții noi, planuri de dezvoltare, sfaturi ocazionale. Cel mult 1 pe lună."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Plățile comerciantului",
+      "title": "Plăți",
+      "intro": "Conectați un cont Stripe pentru ca vânzările de vouchere să fie plătite direct în contul dvs. bancar. Reținem un comision de platformă de 5%; restul este transferat automat în contul conectat la momentul plății.",
+      "stripeAccount": "Cont Stripe",
+      "capabilityState": "Starea capabilităților",
+      "accountStatus": {
+        "pending": "în așteptare",
+        "restricted": "restricționat",
+        "enabled": "activat",
+        "disabled": "dezactivat"
+      },
+      "backToSettings": "Înapoi la setări",
+      "howTitle": "Cum funcționează plățile",
+      "how1": "Clienții plătesc prin checkout-ul platformei. Încasăm suma integrală și o păstrăm la Stripe.",
+      "how2": "Când o plată este procesată, Stripe trimite prețul de vânzare minus comisionul nostru de 5% direct în contul dvs. de plăți.",
+      "how3": "Apoi Stripe virează banii în contul dvs. bancar conform programului ales în setările de plăți Stripe (de obicei zilnic, la câteva zile după vânzare).",
+      "how4": "Rambursările și contestațiile se deduc din următoarea plată; echipa de administrare poate bloca manual soldul dacă detectăm o fraudă.",
+      "badge": {
+        "enabled": {
+          "label": "Plăți activate",
+          "description": "Sumele din vânzarea voucherelor sunt transferate de Stripe în contul dvs. bancar conform programului de plăți."
+        },
+        "restricted": {
+          "label": "Sunt necesare informații suplimentare",
+          "description": "Stripe are nevoie de mai multe informații înainte de a activa plățile. Deschideți linkul de configurare de mai jos pentru a continua."
+        },
+        "disabled": {
+          "label": "Plăți dezactivate",
+          "description": "Stripe a dezactivat plățile pentru acest cont. Deschideți dashboardul Stripe pentru a rezolva cerințele restante."
+        },
+        "notConnected": {
+          "label": "Neconectat",
+          "description": "Nu ați conectat încă un cont Stripe. Plățile sunt reținute până la finalizarea configurării — între timp vânzările de vouchere sunt procesate, dar sumele rămân în soldul platformei."
+        }
+      },
+      "actions": {
+        "startFailed": "Configurarea Stripe nu a putut fi pornită",
+        "startNetworkError": "Eroare de rețea la pornirea configurării",
+        "dashboardFailed": "Dashboardul Stripe nu a putut fi deschis",
+        "dashboardNetworkError": "Eroare de rețea la deschiderea dashboardului",
+        "disconnectConfirm": "Deconectați acest cont Stripe? Plățile vor fi suspendate până la reconectare.",
+        "disconnected": "Contul Stripe a fost deconectat",
+        "disconnectFailed": "Deconectarea a eșuat",
+        "disconnect": "Deconectare",
+        "setUp": "Configurați plățile cu Stripe",
+        "openDashboard": "Deschideți dashboardul Stripe",
+        "continueOnboarding": "Continuați configurarea"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Datele comerciantului nu au putut fi încărcate.",
+      "retry": "Reîncercare",
+      "loading": "Se încarcă...",
+      "title": "Completați profilul",
+      "subtitle": "Configurați profilul de brand al comerciantului.",
+      "basicInfo": "Informații de bază",
+      "merchantName": "Numele comerciantului *",
+      "brandTitle": "Profilul brandului",
+      "brandSubtitle": "Personalizați culorile și logoul brandului.",
+      "updateFailed": "Comerciantul nu a putut fi actualizat",
+      "submit": "Finalizați configurarea",
+      "skip": "Omiteți deocamdată"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Jurnal de audit",
+      "subtitle": "Urmăriți toate acțiunile efectuate în contul de comerciant",
+      "filters": "Filtre",
+      "action": "Acțiune",
+      "allActions": "Toate acțiunile",
+      "fromDate": "De la data",
+      "toDate": "Până la data",
+      "apply": "Aplicare",
+      "clear": "Ștergere",
+      "loading": "Se încarcă jurnalul de audit...",
+      "loadFailed": "Jurnalul de audit nu a putut fi încărcat",
+      "empty": "Nu s-au găsit intrări în jurnalul de audit.",
+      "columns": {
+        "timestamp": "Marcaj de timp",
+        "actor": "Autor",
+        "action": "Acțiune",
+        "resource": "Resursă",
+        "details": "Detalii"
+      },
+      "unknownActor": "Necunoscut",
+      "showing": "Se afișează {from}–{to} din {total}",
+      "pageOf": "Pagina {page} din {totalPages}",
+      "previousPage": "Pagina anterioară",
+      "nextPage": "Pagina următoare",
+      "actions": {
+        "voucherCreated": "Voucher creat",
+        "voucherUpdated": "Voucher actualizat",
+        "voucherPublished": "Voucher publicat",
+        "vouchersGenerated": "Vouchere generate",
+        "campaignCreated": "Campanie creată",
+        "campaignUpdated": "Campanie actualizată",
+        "memberInvited": "Membru al echipei invitat",
+        "memberRemoved": "Membru al echipei eliminat",
+        "memberRoleChanged": "Rolul membrului schimbat",
+        "apiKeyCreated": "Cheie API creată",
+        "apiKeyRevoked": "Cheie API revocată",
+        "apiKeyUpdated": "Cheie API actualizată",
+        "eventCreated": "Eveniment creat",
+        "eventUpdated": "Eveniment actualizat",
+        "eventPublished": "Eveniment publicat",
+        "merchantUpdated": "Comerciant actualizat",
+        "reviewReplied": "Răspuns la recenzie",
+        "settingsUpdate": "Actualizare setări",
+        "settingsView": "Vizualizare setări",
+        "ticketRedeemed": "Bilet valorificat"
+      },
+      "resources": {
+        "voucher": "Voucher",
+        "campaign": "Campanie",
+        "giftCard": "Card cadou",
+        "event": "Eveniment",
+        "member": "Membru",
+        "teamMember": "Membru al echipei",
+        "apiKey": "Cheie API",
+        "webhook": "Webhook",
+        "merchant": "Comerciant",
+        "user": "Utilizator",
+        "review": "Recenzie"
+      }
+    },
+    "roles": {
+      "admin": "Administrator",
+      "adminDescription": "Acces complet — gestionează vouchere, campanii, membri și setări",
+      "staff": "Personal",
+      "staffDescription": "Acces operațional — confirmă valorificări și vizualizează date",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Membrii echipei",
+      "subtitle": "Gestionați echipa și nivelurile de acces",
+      "inviteMember": "Invitare membru",
+      "inviteTitle": "Invitați un membru al echipei",
+      "emailAddress": "Adresă de e-mail",
+      "emailPlaceholder": "coleg@companie.ro",
+      "emailHint": "Utilizatorul trebuie să aibă deja un cont.",
+      "role": "Rol",
+      "inviting": "Se trimite invitația...",
+      "sendInvitation": "Trimiteți invitația",
+      "cancel": "Anulare",
+      "save": "Salvare",
+      "loading": "Se încarcă membrii echipei...",
+      "loadFailed": "Membrii echipei nu au putut fi încărcați",
+      "empty": "Niciun membru al echipei încă. Invitați primul membru mai sus.",
+      "columns": {
+        "member": "Membru",
+        "role": "Rol",
+        "joined": "Alăturat",
+        "actions": "Acțiuni"
+      },
+      "unnamed": "Fără nume",
+      "memberRole": "Rolul membrului",
+      "changeRole": "Schimbați rolul",
+      "removeMember": "Eliminați membrul",
+      "inviteFailed": "Membrul nu a putut fi invitat",
+      "invited": "Membrul a fost invitat",
+      "updateRoleFailed": "Rolul nu a putut fi actualizat",
+      "roleUpdated": "Rolul a fost actualizat",
+      "removeConfirm": "Eliminați pe {name} din echipă?",
+      "remove": "Eliminare",
+      "removeFailed": "Membrul nu a putut fi eliminat",
+      "removed": "Membrul a fost eliminat"
+    },
+    "inviteForm": {
+      "title": "Invitați un membru al echipei",
+      "subtitle": "Adăugați un membru al echipei după adresa de e-mail.",
+      "email": "E-mail",
+      "emailPlaceholder": "membru@example.com",
+      "emailHint": "Utilizatorul trebuie să aibă un cont. Dacă nu are, trebuie mai întâi să se înregistreze.",
+      "role": "Rol",
+      "roleHint": "Administratorii pot gestiona vouchere, campanii și membri ai echipei. Personalul poate confirma valorificări.",
+      "inviting": "Se trimite invitația...",
+      "submit": "Invitare membru",
+      "redirectingToBilling": "{message} Redirecționare către facturare..."
+    },
+    "referrals": {
+      "title": "Analiză recomandări",
+      "subtitle": "Urmăriți performanța recomandărilor și recompensele.",
+      "stats": {
+        "total": "Total recomandări",
+        "totalHint": "Toate recomandările urmărite",
+        "opened": "Deschise",
+        "openedHint": "Vizualizate sau valorificate",
+        "redeemed": "Valorificate",
+        "redeemedHint": "Recomandări convertite",
+        "conversionRate": "Rată de conversie",
+        "conversionRateHint": "Valorificate / total"
+      },
+      "statusBreakdown": "Distribuție pe stări",
+      "creditsIssued": "Credite emise {amount}",
+      "noActivity": "Nicio activitate de recomandare încă.",
+      "topReferrers": "Cei mai activi recomandatori",
+      "topReferrersHint": "Utilizatorii care aduc cele mai multe recomandări.",
+      "noReferrals": "Nicio recomandare încă.",
+      "unknownUser": "Utilizator necunoscut",
+      "referralCount": "{count, plural, one {# recomandare} few {# recomandări} other {# de recomandări}}",
+      "recent": "Recomandări recente",
+      "recentHint": "Cele mai noi recomandări de la clienți.",
+      "noRecent": "Nicio recomandare recentă.",
+      "voucherFallback": "Voucher",
+      "status": {
+        "created": "Creată",
+        "opened": "Deschisă",
+        "redeemed": "Valorificată",
+        "expired": "Expirată",
+        "blocked": "Blocată"
+      }
+    },
+    "emailCampaigns": {
+      "title": "Campanii prin e-mail",
+      "newCampaign": "Campanie nouă",
+      "notConfigured": "Trimiterea e-mailurilor nu este încă configurată pe această platformă. Puteți crea și previzualiza campanii, dar nu pot fi trimise până nu este conectat un furnizor de e-mail.",
+      "notConfiguredShort": "Trimiterea e-mailurilor nu este încă configurată pe această platformă",
+      "createTitle": "Creare campanie",
+      "campaignName": "Numele campaniei",
+      "campaignNamePlaceholder": "Newsletter reduceri de vară",
+      "subjectLine": "Subiect",
+      "subjectPlaceholder": "Nu ratați ofertele noastre de vară!",
+      "recipients": "Destinatari",
+      "recipientFilter": {
+        "all": "Toți clienții",
+        "redeemed30d": "Au valorificat în ultimele 30 de zile",
+        "inactive": "Clienți inactivi"
+      },
+      "schedule": "Programare (opțional)",
+      "emailSections": "Secțiunile e-mailului",
+      "sectionTypes": {
+        "header": "Antet",
+        "text": "Text",
+        "image": "Imagine",
+        "button": "Buton",
+        "divider": "Separator",
+        "voucherCard": "Voucher"
+      },
+      "creating": "Se creează...",
+      "scheduleCampaign": "Programare campanie",
+      "saveDraft": "Salvare ca ciornă",
+      "preview": "Previzualizare",
+      "editor": {
+        "moveUp": "Mutare în sus",
+        "moveDown": "Mutare în jos",
+        "removeSection": "Eliminați secțiunea",
+        "title": "Titlu",
+        "subtitle": "Subtitlu (opțional)",
+        "textContent": "Introduceți textul...",
+        "imageUrl": "URL imagine",
+        "altText": "Text alternativ",
+        "buttonLabel": "Eticheta butonului",
+        "buttonUrl": "URL buton",
+        "dividerHint": "Linie de separare orizontală",
+        "voucherTitle": "Titlul voucherului",
+        "voucherValue": "Valoare (de ex. 20% REDUCERE)",
+        "voucherCode": "Cod (de ex. SAVE20)",
+        "voucherExpiry": "Expirare (de ex. 31 dec. 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Titlul antetului",
+        "textContent": "Conținut text...",
+        "imagePlaceholder": "Substituent imagine",
+        "button": "Buton",
+        "voucher": "Voucher",
+        "validUntil": "Valabil până la {date}"
+      },
+      "loading": "Se încarcă...",
+      "empty": "Nicio campanie prin e-mail încă",
+      "columns": {
+        "name": "Nume",
+        "subject": "Subiect",
+        "status": "Stare",
+        "recipients": "Destinatari",
+        "opens": "Deschideri",
+        "created": "Creată",
+        "actions": "Acțiuni"
+      },
+      "status": {
+        "draft": "ciornă",
+        "scheduled": "programată",
+        "sent": "trimisă"
+      },
+      "send": "Trimitere",
+      "delete": "Ștergere",
+      "deleteCampaign": "Ștergeți campania",
+      "toasts": {
+        "missingFields": "Câmpuri lipsă",
+        "missingFieldsDescription": "Numele și subiectul sunt obligatorii.",
+        "created": "Campania a fost creată",
+        "error": "Eroare",
+        "createFailed": "Campania nu a putut fi creată.",
+        "sendConfirm": "Sigur doriți să trimiteți această campanie acum?",
+        "sendFailedStatus": "Trimiterea a eșuat (eroare {status}).",
+        "partlySent": "Campanie trimisă parțial",
+        "partlySentDescription": "Trimisă către {sent} din {total} destinatari. {failed, plural, one {# e-mail nu a putut fi trimis} few {# e-mailuri nu au putut fi trimise} other {# de e-mailuri nu au putut fi trimise}}.",
+        "sent": "Campania a fost trimisă",
+        "sentDescription": "Trimisă către {sent, plural, one {# destinatar} few {# destinatari} other {# de destinatari}}.",
+        "sendFailed": "Trimiterea a eșuat",
+        "deleteConfirm": "Ștergeți această campanie?",
+        "deleted": "Campania a fost ștearsă",
+        "deleteFailed": "Ștergerea a eșuat."
+      }
+    },
+    "apiKeys": {
+      "title": "Chei API",
+      "subtitle": "Gestionați cheile API pentru accesul programatic la datele comerciantului",
+      "createKey": "Creare cheie",
+      "createdNotice": "Cheia API a fost creată! Copiați-o acum — nu va mai fi afișată.",
+      "copyKey": "Copiați cheia",
+      "createTitle": "Creare cheie API",
+      "keyName": "Numele cheii",
+      "keyNamePlaceholder": "de ex. Integrare POS producție",
+      "permissions": "Permisiuni",
+      "creating": "Se creează...",
+      "submit": "Creare cheie API",
+      "cancel": "Anulare",
+      "loading": "Se încarcă cheile API...",
+      "empty": "Nicio cheie API încă. Creați una pentru a începe.",
+      "createdOn": "Creată {date}",
+      "lastUsed": "Ultima utilizare {date}",
+      "expires": "Expiră {date}",
+      "revokeKey": "Revocați cheia",
+      "loadFailed": "Cheile API nu au putut fi încărcate",
+      "required": "Sunt necesare un nume și cel puțin o permisiune",
+      "createFailed": "Cheia API nu a putut fi creată",
+      "created": "Cheia API a fost creată",
+      "revokeConfirm": "Revocați cheia API „{name}”? Această acțiune este ireversibilă.",
+      "revoke": "Revocare",
+      "revoked": "Cheia API a fost revocată",
+      "revokeFailed": "Cheia API nu a putut fi revocată",
+      "copied": "Copiat în clipboard",
+      "groups": {
+        "vouchers": "Vouchere",
+        "campaigns": "Campanii",
+        "giftCards": "Carduri cadou",
+        "customers": "Clienți",
+        "analytics": "Analize",
+        "events": "Evenimente"
+      },
+      "permissionLabels": {
+        "voucherRead": "Citire vouchere",
+        "voucherCreate": "Creare vouchere",
+        "voucherRedeem": "Valorificare vouchere",
+        "campaignRead": "Citire campanii",
+        "campaignCreate": "Creare campanii",
+        "giftCardRead": "Citire carduri cadou",
+        "giftCardRedeem": "Valorificare carduri cadou",
+        "customerRead": "Citire clienți",
+        "analyticsRead": "Citire analize",
+        "eventRead": "Citire evenimente",
+        "eventCheckin": "Check-in la evenimente"
+      }
+    },
+    "webhooks": {
+      "title": "Webhookuri",
+      "subtitle": "Primiți notificări despre evenimente prin HTTP",
+      "addWebhook": "Adăugare webhook",
+      "secretNotice": "Secretul webhookului (afișat o singură dată):",
+      "copySecret": "Copiați secretul",
+      "copied": "Copiat!",
+      "newTitle": "Webhook nou",
+      "endpointUrl": "URL endpoint",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Evenimente",
+      "submit": "Creare webhook",
+      "loading": "Se încarcă...",
+      "empty": "Niciun webhook configurat",
+      "createdOn": "Creat {date}",
+      "deliveriesCount": "{count, plural, one {# livrare} few {# livrări} other {# de livrări}}",
+      "sendTest": "Trimiteți test",
+      "viewDeliveries": "Jurnal de livrări",
+      "disable": "Dezactivare",
+      "enable": "Activare",
+      "deleteWebhook": "Ștergeți webhookul",
+      "deliveryLog": "Jurnal de livrări",
+      "noDeliveries": "Nicio livrare încă",
+      "deliveryFailed": "Eșuat",
+      "attempts": "{count, plural, one {# încercare} few {# încercări} other {# de încercări}}",
+      "loadFailed": "Webhookurile nu au putut fi încărcate",
+      "required": "Sunt necesare un URL și cel puțin un eveniment",
+      "created": "Webhookul a fost creat",
+      "createFailed": "Webhookul nu a putut fi creat",
+      "deleted": "Webhookul a fost șters",
+      "deleteFailed": "Webhookul nu a putut fi șters",
+      "updateFailed": "Webhookul nu a putut fi actualizat",
+      "testDelivered": "Testul a fost livrat! Stare: {status}",
+      "testFailed": "Testul a eșuat: {error}",
+      "statusCode": "Stare {status}",
+      "testSendFailed": "Webhookul de test nu a putut fi trimis",
+      "loadDeliveriesFailed": "Livrările nu au putut fi încărcate"
+    }
   }
 }

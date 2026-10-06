@@ -2602,5 +2602,2656 @@
       "downloading": "Завантаження...",
       "download": "Завантажити QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Керуйте кампаніями купонів.",
+      "createCampaign": "Створити кампанію",
+      "subscriptionRequired": "Потрібна підписка",
+      "trialEnded": "Ваш безкоштовний 60-денний пробний період для кампаній завершився. Оформіть план за 9.90/місяць, щоб створювати нові кампанії.",
+      "stats": {
+        "totalTitle": "Усього кампаній",
+        "totalDescription": "Усі кампанії",
+        "activeTitle": "Активні",
+        "activeDescription": "Тривають зараз",
+        "paidTitle": "Оплачені покупки",
+        "paidDescription": "Завершені замовлення",
+        "revenueTitle": "Дохід",
+        "revenueDescription": "Оплачені продажі купонів"
+      },
+      "weeklyRevenue": {
+        "title": "Дохід за тиждень",
+        "description": "Оплачені продажі кампаній за 7 днів.",
+        "series": "Дохід"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Кампаній поки немає",
+        "descriptionCanCreate": "Створіть кампанію, щоб упорядкувати купони та керувати ними.",
+        "descriptionNeedsSubscription": "Оформіть підписку, щоб створювати нові кампанії.",
+        "action": "Створіть першу кампанію"
+      },
+      "searchPlaceholder": "Пошук кампаній...",
+      "searchLabel": "Пошук кампаній",
+      "filterAll": "Усі",
+      "status": {
+        "active": "Активна",
+        "draft": "Чернетка",
+        "ended": "Завершена",
+        "paused": "Призупинена"
+      },
+      "noMatches": "Немає кампаній, що відповідають фільтрам.",
+      "clearFilters": "Очистити фільтри",
+      "type": {
+        "weekly": "Щотижнева кампанія",
+        "limited": "Обмежена кампанія",
+        "other": "Кампанія {type}"
+      },
+      "runs": "Триває {start} – {end}",
+      "view": "Переглянути",
+      "stats": {
+        "vouchers": "Купони",
+        "paidPurchases": "Оплачені покупки",
+        "revenue": "Дохід",
+        "price": "Ціна"
+      },
+      "free": "Безкоштовно"
+    },
+    "new": {
+      "iconLetter": "К",
+      "draftNotice": "Нові кампанії створюються як чернетки. Клієнти не бачать їх, доки ви не опублікуєте кампанію на її сторінці."
+    },
+    "edit": {
+      "breadcrumb": "Редагувати",
+      "title": "Редагувати кампанію"
+    },
+    "form": {
+      "basicInfo": "Основна інформація",
+      "nameLabel": "Назва кампанії *",
+      "namePlaceholder": "Святкова пропозиція",
+      "descriptionLabel": "Опис",
+      "descriptionPlaceholder": "Обмежена в часі акція",
+      "typeLabel": "Тип *",
+      "typeOptions": {
+        "limited": "Разова (обмежена)",
+        "weekly": "Щотижнева"
+      },
+      "dates": "Дати",
+      "startDate": "Дата початку *",
+      "endDate": "Дата завершення *",
+      "timezoneHint": "Час указано у вашому місцевому часовому поясі.",
+      "pricing": "Ціна та обмеження",
+      "priceLabel": "Ціна в {currency} (залиште порожнім для безкоштовних купонів)",
+      "pricePreview": "Клієнти платять {price}.",
+      "priceHint": "Введіть суму в {currency}, наприклад 4.50 або 4,50 для {example}.",
+      "maxRedemptions": "Макс. погашень",
+      "maxPurchases": "Макс. покупок",
+      "unlimited": "Без обмежень",
+      "creditLabel": "Кредит рефера (%)",
+      "creditPreview": "Рефери отримують {percent}% від ціни покупки як кредит.",
+      "creditHint": "Частка ціни покупки, що нараховується реферу як кредит, наприклад 5 або 2,5.",
+      "termsSection": "Умови та положення",
+      "termsLabel": "Умови",
+      "termsPlaceholder": "Умови та положення цієї кампанії...",
+      "saving": "Збереження...",
+      "saveChanges": "Зберегти зміни",
+      "creating": "Створення...",
+      "create": "Створити кампанію",
+      "saved": "Зміни кампанії збережено.",
+      "errors": {
+        "invalidDates": "Введіть коректні дати початку та завершення.",
+        "endBeforeStart": "Дата завершення має бути пізніше за дату початку.",
+        "maxRedemptions": "Макс. погашень має бути цілим числом від 1.",
+        "maxPurchases": "Макс. покупок має бути цілим числом від 1.",
+        "saveFailed": "Не вдалося зберегти кампанію"
+      },
+      "priceErrors": {
+        "negative": "Ціна не може бути від’ємною.",
+        "invalid": "Ціна не є коректним числом.",
+        "wholeNumber": "Ціна має бути цілим числом.",
+        "decimals": "Ціна може мати не більше {decimals} знаків після коми.",
+        "tooLarge": "Ціна завелика."
+      },
+      "creditErrors": {
+        "negative": "Кредит рефера не може бути від’ємним.",
+        "invalid": "Кредит рефера не є коректним числом.",
+        "decimals": "Кредит рефера може мати не більше {decimals} знаків після коми.",
+        "tooLarge": "Кредит рефера завеликий.",
+        "tooHigh": "Кредит рефера не може перевищувати 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "Немає опису",
+      "draftNotice": "Ця кампанія — чернетка, тому клієнти її ще не бачать.",
+      "draftNoticeAdmin": "Ця кампанія — чернетка, тому клієнти її ще не бачать. Опублікуйте її, коли будете готові.",
+      "status": "Статус",
+      "type": "Тип",
+      "price": "Ціна",
+      "referrerCredit": "Кредит рефера",
+      "none": "Немає",
+      "stats": {
+        "vouchers": "Купони",
+        "totalPurchases": "Усього покупок",
+        "paidPurchases": "Оплачені покупки"
+      },
+      "terms": "Умови та положення",
+      "promotion": {
+        "title": "Просування",
+        "description": "Платна видимість у щотижневій розсилці та сповіщеннях."
+      },
+      "vouchers": {
+        "title": "Купони",
+        "description": "Купони, згенеровані з цієї кампанії.",
+        "empty": "Купонів ще не згенеровано.",
+        "view": "Переглянути"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Додати до щотижневої розсилки (платно)",
+      "notification": "Просувати в сповіщеннях (платно)",
+      "endDate": "Дата завершення просування",
+      "saving": "Збереження...",
+      "save": "Зберегти налаштування просування",
+      "saved": "Налаштування просування збережено.",
+      "upgradeNeededTitle": "Потрібне оновлення тарифу",
+      "upgradeNeeded": "Просування доступне на вищому тарифі. Оновіть його в розділі «Налаштування та оплата».",
+      "saveFailedStatus": "Не вдалося зберегти налаштування просування (помилка {status}).",
+      "saveFailedNetwork": "Не вдалося зберегти налаштування просування. Перевірте з’єднання та спробуйте ще раз."
+    },
+    "actions": {
+      "adminOnly": "Лише адміністратори продавця можуть публікувати, призупиняти або редагувати кампанії.",
+      "edit": "Редагувати",
+      "publish": {
+        "label": "Опублікувати",
+        "title": "Опублікувати цю кампанію?",
+        "description": "Клієнти одразу зможуть бачити та купувати купони цієї кампанії.",
+        "success": "Кампанію опубліковано. Тепер вона доступна клієнтам."
+      },
+      "pause": {
+        "label": "Призупинити",
+        "title": "Призупинити цю кампанію?",
+        "description": "Кампанія повернеться в чернетки й буде прихована від клієнтів, доки ви знову її не опублікуєте. Уже продані купони залишаються дійсними.",
+        "success": "Кампанію призупинено. Її приховано від клієнтів."
+      },
+      "end": {
+        "label": "Завершити кампанію",
+        "title": "Завершити цю кампанію зараз?",
+        "description": "Кампанія зупиниться негайно, і її не можна буде опублікувати знову. Уже продані купони залишаються дійсними.",
+        "success": "Кампанію завершено."
+      },
+      "updateFailedStatus": "Не вдалося оновити кампанію (помилка {status}).",
+      "updateFailed": "Не вдалося оновити кампанію."
+    },
+    "generate": {
+      "open": "Згенерувати купони",
+      "title": "Генерація купонів",
+      "descriptionPriced": "Створює чернетки купонів зі знижкою {value}, дійсних {start} – {end}. Кожен купон отримує власний код. Вони приховані, доки ви їх не опублікуєте.",
+      "descriptionFree": "Ця кампанія безкоштовна, тому для купонів немає суми. Спершу встановіть ціну кампанії.",
+      "countLabel": "Кількість купонів (1-100)",
+      "generating": "Генерація...",
+      "submit": "Згенерувати",
+      "invalidCount": "Введіть ціле число від 1 до 100",
+      "needsPrice": "Спершу встановіть ціну цієї кампанії. Вартість згенерованих купонів дорівнює ціні кампанії.",
+      "failed": "Не вдалося згенерувати купони",
+      "success": "Згенеровано {count, plural, one {# чернетку купона. Опублікуйте її} few {# чернетки купонів. Опублікуйте їх} many {# чернеток купонів. Опублікуйте їх} other {# чернетки купона. Опублікуйте їх}} на сторінці купонів, коли будете готові."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Активні кампанії",
+      "statLiveVouchers": "Чинні купони",
+      "statRedemptions30d": "Погашення (30 днів)"
+    },
+    "error": {
+      "title": "Щось пішло не так",
+      "description": "У панелі продавця сталася помилка.",
+      "tryAgain": "Спробувати ще раз",
+      "backToMerchants": "Назад до продавців"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Огляд",
+        "offers": "Пропозиції",
+        "inStore": "У магазині",
+        "customers": "Клієнти",
+        "settings": "Налаштування"
+      },
+      "language": "Мова",
+      "opensAppArea": "Відкриває розділ застосунку",
+      "externalLinkTitle": "{label} (відкриває розділ застосунку поза цим продавцем)",
+      "opensOutside": "Відкривається поза розділом продавця",
+      "merchantNavigation": "Продавець",
+      "more": "Більше",
+      "navDashboard": "Панель"
+    },
+    "dashboard": {
+      "title": "Панель продавця",
+      "welcomeBack": "З поверненням, {name}",
+      "viewCampaigns": "Переглянути кампанії",
+      "createVoucher": "Створити купон",
+      "performanceOverview": "Огляд результатів",
+      "performanceOverviewHint": "Активність кампаній і погашення в реальному часі.",
+      "revenueAndCredits": "Дохід і кредити",
+      "revenueAndCreditsHint": "Продажі, кредити та непогашені зобов’язання.",
+      "performanceTrend": "Динаміка результатів",
+      "performanceTrendHint": "Погашення та дохід за останні {days} дн.",
+      "rangeShort": "{days} дн.",
+      "revenue": "Дохід",
+      "chartRedemptions": "Погашення",
+      "chartRevenue": "Дохід ({currency})",
+      "paidOrders": "Оплачені замовлення",
+      "openOrdersView": "Відкрити замовлення",
+      "avgOrder": "Сер. замовлення",
+      "openCampaignRevenue": "Відкрити дохід кампаній",
+      "redemptionRate": "Частка погашень",
+      "openRedemptionQueue": "Відкрити чергу погашень",
+      "pendingConfirmation": "Очікують підтвердження: {count}",
+      "pendingConfirmationHint": "Погашення в магазині, що чекають на ваше підтвердження.",
+      "viewRedemptions": "Переглянути погашення",
+      "actionCenter": "Центр дій",
+      "actionCenterHint": "Пріоритетні завдання для перегляду.",
+      "allCaughtUp": "Усе опрацьовано.",
+      "open": "Відкрити",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# погашення очікує} few {# погашення очікують} many {# погашень очікують} other {# погашення очікує}}",
+        "pendingRedemptionsDetail": "Підтвердьте погашення в магазині",
+        "expiringVouchers": "{count, plural, one {# купон скоро спливає} few {# купони скоро спливають} many {# купонів скоро спливають} other {# купона скоро спливає}}",
+        "expiringVouchersDetail": "Перевірте терміни дії купонів",
+        "endingCampaigns": "{count, plural, one {# кампанія завершується цього тижня} few {# кампанії завершуються цього тижня} many {# кампаній завершуються цього тижня} other {# кампанії завершується цього тижня}}",
+        "endingCampaignsDetail": "Продовжте або дублюйте найкращі кампанії",
+        "upcomingEvents": "{count, plural, one {# майбутня подія} few {# майбутні події} many {# майбутніх подій} other {# майбутньої події}}",
+        "upcomingEventsDetail": "Підготуйте реєстрацію квитків і персонал"
+      },
+      "upcomingEventsTitle": "Майбутні події",
+      "upcomingEventsHint": "Найближчі заплановані події.",
+      "noUpcomingEvents": "Майбутніх подій не заплановано.",
+      "eventStatus": {
+        "published": "опубліковано",
+        "soldOut": "розпродано"
+      },
+      "manageEvents": "Керувати подіями",
+      "topVouchers": "Топ купонів",
+      "topVouchersHint": "Найчастіше погашувані пропозиції.",
+      "noTopVouchers": "Купони ще не погашали. Тут з’являться ваші найпопулярніші купони."
+    },
+    "stats": {
+      "activeVouchers": "Активні купони",
+      "publishedVouchers": "Опубліковані купони",
+      "openVouchers": "Відкрити купони",
+      "activeCampaigns": "Активні кампанії",
+      "runningCampaigns": "Поточні кампанії",
+      "openCampaigns": "Відкрити кампанії",
+      "activeEvents": "Активні події",
+      "publishedEvents": "Опубліковані події",
+      "openEvents": "Відкрити події",
+      "todaysRedemptions": "Погашення сьогодні",
+      "thisWeek": "Цього тижня: {count}",
+      "reviewRedemptions": "Переглянути погашення",
+      "ofWeekly": "від тижневого"
+    },
+    "revenue": {
+      "voucherRevenue": "Дохід від купонів",
+      "paidVoucherSales": "Оплачені продажі купонів",
+      "openCampaignSales": "Відкрити продажі кампаній",
+      "ticketRevenue": "Дохід від квитків",
+      "paidTicketSales": "Оплачені продажі квитків",
+      "openEventSales": "Відкрити продажі подій",
+      "creditsIssued": "Видано кредитів",
+      "totalCreditsDistributed": "Усього розподілено кредитів",
+      "openReferralCredits": "Відкрити реферальні кредити",
+      "outstandingLiability": "Непогашені зобов’язання",
+      "unredeemedValue": "Вартість непогашених купонів",
+      "openVoucherLiability": "Відкрити зобов’язання за купонами"
+    },
+    "recentActivity": {
+      "title": "Остання активність",
+      "empty": "Немає нещодавньої активності",
+      "unknownUser": "Невідомий користувач",
+      "redeemedVoucher": "Погашено купон – {time}",
+      "confirmed": "Підтверджено",
+      "pending": "Очікує"
+    },
+    "liveStats": {
+      "live": "Наживо",
+      "connecting": "Підключення…",
+      "redeemedToday": "<value>{count}</value> <label>погашено сьогодні</label>",
+      "pending": "<value>{count}</value> <label>очікують</label>"
+    },
+    "analytics": {
+      "metaTitle": "Аналітика",
+      "title": "Аналітика",
+      "subtitle": "Відстежуйте ефективність купонів і дохід",
+      "totalRedemptions": "Усього погашень",
+      "confirmedRedemptions": "Підтверджені погашення",
+      "totalDiscounts": "Усього знижок",
+      "givenToCustomers": "Надано клієнтам",
+      "creditsIssued": "Видано кредитів",
+      "totalCreditsDistributed": "Усього розподілено кредитів",
+      "activeVouchers": "Активні купони",
+      "withRedemptions": "З погашеннями",
+      "charts": {
+        "redemptionTrends": "Динаміка погашень (останні 30 днів)",
+        "redemptions": "Погашення",
+        "revenue": "Дохід ({currency})",
+        "topPerforming": "Найефективніші купони",
+        "noRedeemed": "Жоден купон ще не погашено. Тут з’являться найуспішніші.",
+        "byCategory": "Погашення за категоріями",
+        "noCategoryData": "Немає даних за категоріями"
+      }
+    },
+    "ask": {
+      "title": "Запитайте свої дані",
+      "subtitle": "Ставте запитання про дані свого бізнесу звичайною мовою",
+      "emptyTitle": "Запитайте що завгодно про свої дані",
+      "emptyHint": "Спробуйте одну з підказок нижче",
+      "placeholder": "Поставте запитання про свої дані...",
+      "suggestedTitle": "Запропоновані запитання",
+      "suggestions": {
+        "revenueLastWeek": "Який був мій дохід минулого тижня?",
+        "dailyRedemptionsThisMonth": "Покажи щоденні погашення цього місяця",
+        "topVouchersByRevenue": "Топ купонів за доходом минулого місяця",
+        "customersPurchasedLastWeek": "Скільки клієнтів купували минулого тижня?",
+        "referralConversionRate": "Яка конверсія моїх рекомендацій?",
+        "dailyRevenueTrend": "Покажи щоденну динаміку доходу цього місяця",
+        "purchasesYesterday": "Скільки покупок було вчора?",
+        "bestPerformingVouchers": "Які мої найефективніші купони?"
+      },
+      "errorFallback": "На жаль, не вдалося обробити це запитання.",
+      "networkError": "Помилка мережі. Спробуйте ще раз.",
+      "itemLabel": "Елемент {n}"
+    },
+    "reports": {
+      "title": "Фінансові звіти",
+      "subtitle": "Огляд доходу та експорт",
+      "downloadCsv": "Завантажити CSV",
+      "from": "Від",
+      "to": "До",
+      "apply": "Застосувати",
+      "totalRevenue": "Загальний дохід",
+      "platformFees": "Комісії платформи",
+      "netRevenue": "Чистий дохід",
+      "redemptions": "Погашення",
+      "revenueByCurrency": "Дохід за валютами",
+      "netAndFees": "Чистий: {net} • Комісії: {fees}",
+      "monthlyRevenue": "Дохід за місяцями",
+      "noRevenue": "Немає даних про дохід за цей період.",
+      "month": "Місяць",
+      "vouchers": "Купони",
+      "tickets": "Квитки",
+      "total": "Разом"
+    },
+    "scheduled": {
+      "title": "Заплановані звіти",
+      "subtitle": "Налаштуйте автоматичні звіти на email",
+      "backToReports": "← Фінансові звіти",
+      "activeSchedules": "Активні розклади",
+      "loading": "Завантаження...",
+      "noSchedules": "Розкладів ще не налаштовано",
+      "period": {
+        "daily": "Щодня",
+        "weekly": "Щотижня",
+        "monthly": "Щомісяця"
+      },
+      "reportTitle": {
+        "daily": "Щоденний звіт",
+        "weekly": "Щотижневий звіт",
+        "monthly": "Щомісячний звіт"
+      },
+      "recipientCount": "{count, plural, one {# одержувач} few {# одержувачі} many {# одержувачів} other {# одержувача}}",
+      "lastSent": "Востаннє надіслано: {date}",
+      "nextRun": "Наступний: {date}",
+      "pause": "Призупинити",
+      "resume": "Відновити",
+      "createSchedule": "Створити розклад",
+      "frequency": "Частота",
+      "recipients": "Одержувачі",
+      "invalidEmail": "Недійсна адреса email",
+      "emailAlreadyAdded": "Цей email уже додано",
+      "addAtLeastOne": "Додайте принаймні одного одержувача",
+      "saved": "Розклад звітів збережено",
+      "saveFailed": "Не вдалося зберегти розклад",
+      "save": "Зберегти розклад",
+      "previewTitle": "Попередній перегляд звіту",
+      "previewBody": "Заплановані звіти містять дохід, кількість погашень, топ купонів і показники зростання. Звіти надсилаються як гарно оформлені HTML-листи о 8:00 UTC.",
+      "everyMorning": "Щоранку",
+      "everyMonday": "Щопонеділка",
+      "firstOfMonth": "1-го числа щомісяця"
+    },
+    "billing": {
+      "subscribeTo": "Оформити {plan}",
+      "startFailed": "Не вдалося оформити підписку",
+      "portalFailed": "Не вдалося відкрити портал оплати",
+      "manageBilling": "Керувати оплатою",
+      "errorTitle": "Помилка",
+      "close": "Закрити",
+      "usage": "Використано <b>{current}</b> / {max}",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "створень кампаній за цикл",
+        "activeCampaigns": "активних кампаній",
+        "voucherCreatesPerCycle": "створень купонів за цикл",
+        "teamMembers": "учасників команди"
+      },
+      "currentPlanTrial": "Поточний тариф (безкоштовний пробний період)",
+      "planChangesUnavailable": "Зміна тарифу зараз недоступна онлайн.",
+      "paymentsNotSetUp": "Онлайн-платежі на цій платформі ще не налаштовано, тому тут не можна придбати чи змінити тариф. Зверніться до підтримки, якщо хочете змінити тариф.",
+      "features": {
+        "starter": {
+          "vouchers": "500 купонів/місяць",
+          "campaigns": "3 активні кампанії",
+          "teamMembers": "2 учасники команди",
+          "qrRedemption": "Погашення за QR-кодом",
+          "basicAnalytics": "Базова аналітика"
+        },
+        "pro": {
+          "vouchers": "5 000 купонів/місяць",
+          "campaigns": "25 активних кампаній",
+          "teamMembers": "10 учасників команди",
+          "advancedAnalytics": "Розширена аналітика",
+          "customDomain": "Власний домен",
+          "promoBoosts": "Просування пропозицій"
+        },
+        "scale": {
+          "vouchers": "Необмежено купонів",
+          "campaigns": "Необмежено кампаній",
+          "teamMembers": "Необмежено учасників команди",
+          "everythingInPro": "Усе з Pro",
+          "whiteLabel": "Готовність до white-label",
+          "prioritySupport": "Пріоритетна підтримка"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Власник",
+      "admin": "Адміністратор",
+      "finance": "Фінанси",
+      "marketing": "Маркетинг",
+      "support": "Підтримка",
+      "partner_cashier": "Касир",
+      "auditor": "Аудитор"
+    },
+    "orgs": {
+      "title": "B2B-організації",
+      "subtitle": "Робочі простори компаній із кампаніями, купонами та замовленнями.",
+      "loading": "Завантаження організацій...",
+      "loadFailed": "Не вдалося завантажити організації",
+      "empty": "Організацій не знайдено. Попросіть адміністратора запросити вас.",
+      "open": "Відкрити"
+    },
+    "workspace": {
+      "fallbackName": "Організація",
+      "subtitle": "Огляд B2B-простору",
+      "reports": "Звіти",
+      "audit": "Аудит",
+      "partnerKeys": "Партнерські ключі",
+      "backToOrgs": "Назад до організацій",
+      "loading": "Завантаження робочого простору...",
+      "errors": {
+        "loadOrg": "Не вдалося завантажити організацію",
+        "loadCampaigns": "Не вдалося завантажити кампанії",
+        "loadVouchers": "Не вдалося завантажити купони",
+        "loadOrders": "Не вдалося завантажити замовлення",
+        "load": "Не вдалося завантажити",
+        "createCampaign": "Не вдалося створити кампанію",
+        "issueVouchers": "Не вдалося випустити купони",
+        "updateCampaign": "Не вдалося оновити кампанію",
+        "activateCampaign": "Не вдалося активувати кампанію",
+        "pauseCampaign": "Не вдалося призупинити кампанію",
+        "archiveCampaign": "Не вдалося архівувати кампанію"
+      },
+      "stats": {
+        "campaigns": "Кампанії",
+        "vouchers": "Купони",
+        "orders": "Замовлення"
+      },
+      "create": {
+        "title": "Створити кампанію",
+        "name": "Назва кампанії",
+        "value": "Вартість (у копійках)",
+        "currency": "Валюта",
+        "submit": "Створити"
+      },
+      "campaigns": {
+        "title": "Кампанії",
+        "empty": "Кампаній поки немає.",
+        "name": "Назва",
+        "value": "Вартість",
+        "activate": "Активувати",
+        "pause": "Призупинити",
+        "resume": "Відновити",
+        "archive": "Архівувати",
+        "issue": "Випустити {count}"
+      },
+      "recentVouchers": "Останні купони",
+      "noVouchers": "Купонів не випущено.",
+      "recentOrders": "Останні замовлення",
+      "noOrders": "Замовлень поки немає."
+    },
+    "audit": {
+      "title": "Журнал аудиту",
+      "subtitle": "Відстежуйте життєвий цикл купонів і зміни.",
+      "entityType": "Тип об’єкта (voucher, campaign, order)",
+      "entityId": "ID об’єкта",
+      "loading": "Завантаження аудиту...",
+      "loadFailed": "Не вдалося завантажити аудит",
+      "empty": "Немає подій."
+    },
+    "billing": {
+      "metaTitle": "Оплата організації",
+      "title": "Оплата та фінанси",
+      "totalPaidOrders": "Усього оплачених замовлень",
+      "totalRevenue": "Загальний дохід",
+      "vatNumber": "Номер платника ПДВ",
+      "notSet": "Не вказано",
+      "recentOrders": "Останні замовлення",
+      "noOrders": "Замовлень поки немає.",
+      "table": {
+        "date": "Дата",
+        "qty": "К-сть",
+        "total": "Сума",
+        "status": "Статус",
+        "invoice": "Рахунок"
+      }
+    },
+    "keys": {
+      "title": "Партнерські API-ключі",
+      "subtitle": "Використовуйте їх для перевірки та погашення купонів партнерами.",
+      "label": "Назва ключа (необов’язково)",
+      "create": "Створити ключ",
+      "newKey": "Новий ключ (скопіюйте зараз)",
+      "loading": "Завантаження ключів...",
+      "empty": "Ключів поки немає.",
+      "untitled": "Ключ без назви",
+      "created": "Створено {created}",
+      "createdAndLastUsed": "Створено {created} • Востаннє використано {lastUsed}",
+      "revoke": "Відкликати",
+      "errors": {
+        "load": "Не вдалося завантажити ключі",
+        "create": "Не вдалося створити ключ",
+        "revoke": "Не вдалося відкликати ключ"
+      }
+    },
+    "members": {
+      "metaTitle": "Учасники організації",
+      "title": "Учасники",
+      "count": "{count, plural, one {# учасник} few {# учасники} many {# учасників} other {# учасника}}",
+      "pendingInvitations": "Запрошення, що очікують",
+      "expires": "Спливає {date}"
+    },
+    "invite": {
+      "title": "Запросити учасника",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "Адміністратор",
+        "finance": "Фінанси",
+        "marketing": "Маркетинг",
+        "support": "Підтримка",
+        "partner_cashier": "Касир партнера",
+        "auditor": "Аудитор"
+      },
+      "sending": "Надсилання…",
+      "submit": "Надіслати запрошення",
+      "sent": "Запрошення надіслано на {email}.",
+      "failed": "Не вдалося надіслати запрошення. Перевірте email і спробуйте ще раз.",
+      "error": "Щось пішло не так. Спробуйте ще раз."
+    },
+    "reports": {
+      "title": "Звіти",
+      "subtitle": "Звіти про погашення та купони",
+      "backToWorkspace": "Назад до робочого простору",
+      "loadFailed": "Не вдалося завантажити",
+      "tabs": {
+        "redemptions": "Погашення",
+        "vouchers": "Купони"
+      },
+      "totalRedemptions": "Усього погашень",
+      "totalAmountRedeemed": "Загальна сума погашень",
+      "from": "Від",
+      "to": "До",
+      "filter": "Фільтрувати",
+      "pageInfo": "Сторінка {page} з {totalPages} (усього {total})",
+      "redemptionTable": {
+        "date": "Дата",
+        "partner": "Партнер",
+        "amount": "Сума",
+        "status": "Статус",
+        "location": "Місце"
+      },
+      "noRedemptions": "Погашень не знайдено.",
+      "voucherTable": {
+        "campaign": "Кампанія",
+        "status": "Статус",
+        "type": "Тип",
+        "value": "Вартість",
+        "remaining": "Залишок",
+        "redeemed": "Погашено",
+        "issuedTo": "Отримувач",
+        "expires": "Спливає"
+      },
+      "noVouchers": "Купонів не знайдено."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "покупець",
+        "partner": "партнер",
+        "platform_owner": "власник платформи"
+      },
+      "orgStatus": {
+        "active": "активна",
+        "suspended": "призупинена"
+      },
+      "campaignStatus": {
+        "draft": "чернетка",
+        "active": "активна",
+        "paused": "призупинена",
+        "archived": "в архіві"
+      },
+      "voucherStatus": {
+        "created": "створено",
+        "issued": "випущено",
+        "active": "активний",
+        "redeemed": "погашено",
+        "expired": "прострочено",
+        "voided": "анульовано"
+      },
+      "valueType": {
+        "fixed": "фіксована",
+        "percent": "відсоток"
+      },
+      "orderStatus": {
+        "draft": "чернетка",
+        "submitted": "надіслано",
+        "invoiced": "виставлено рахунок",
+        "paid": "оплачено",
+        "cancelled": "скасовано",
+        "refunded": "повернено кошти"
+      },
+      "redemptionStatus": {
+        "approved": "схвалено",
+        "reversed": "скасовано",
+        "failed": "невдало"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Події"
+    },
+    "status": {
+      "draft": "Чернетка",
+      "published": "Активна",
+      "sold_out": "Розпродано",
+      "cancelled": "Скасовано",
+      "ended": "Завершена"
+    },
+    "statusName": {
+      "draft": "Чернетка",
+      "published": "Опубліковано",
+      "sold_out": "Розпродано",
+      "cancelled": "Скасовано",
+      "ended": "Завершено"
+    },
+    "type": {
+      "festival": "Фестиваль",
+      "internal": "Внутрішня подія",
+      "concert": "Концерт",
+      "workshop": "Майстер-клас",
+      "other": "Інше"
+    },
+    "ticketStatus": {
+      "available": "Доступний",
+      "sold": "Продано",
+      "used": "Використано",
+      "cancelled": "Скасовано",
+      "refunded": "Повернено"
+    },
+    "list": {
+      "subtitle": "Керуйте подіями та квитками",
+      "createEvent": "Створити подію",
+      "stats": {
+        "totalTitle": "Усього подій",
+        "totalDescription": "Усі події",
+        "activeTitle": "Активні",
+        "activeDescription": "Опубліковані або розпродані",
+        "soldTitle": "Продано квитків",
+        "soldDescription": "За всіма подіями",
+        "revenueTitle": "Дохід",
+        "revenueDescription": "Оплачені продажі квитків"
+      },
+      "empty": {
+        "title": "Подій поки немає",
+        "description": "Створіть подію, щоб продавати квитки та керувати відвідуваністю.",
+        "cta": "Створіть першу подію"
+      },
+      "card": {
+        "date": "Дата:",
+        "location": "Місце:",
+        "price": "Ціна:",
+        "tickets": "Квитки:",
+        "sold": "Продано {sold} / {capacity}",
+        "free": "Безкоштовно",
+        "view": "Переглянути",
+        "edit": "Редагувати"
+      },
+      "weeklyRevenue": {
+        "title": "Дохід від квитків за тиждень",
+        "description": "Оплачені продажі квитків за 7 днів.",
+        "series": "Дохід"
+      }
+    },
+    "detail": {
+      "noDescription": "Немає опису",
+      "edit": "Редагувати",
+      "status": "Статус",
+      "type": "Тип",
+      "eventDate": "Дата події",
+      "price": "Ціна",
+      "free": "Безкоштовно",
+      "totalTickets": "Усього квитків",
+      "sold": "Продано",
+      "available": "Доступно",
+      "location": "Місце",
+      "terms": "Умови та положення",
+      "ticketsTitle": "Квитки",
+      "ticketsDescription": "Квитки на цю подію",
+      "noTickets": "Квитків ще не згенеровано.",
+      "view": "Переглянути",
+      "redeem": "Погасити"
+    },
+    "form": {
+      "basicInfo": "Основна інформація",
+      "name": "Назва події *",
+      "description": "Опис",
+      "descriptionPlaceholder": "Опишіть свою подію...",
+      "type": "Тип події *",
+      "typeAria": "Тип події",
+      "dateTime": "Дата й час",
+      "eventDate": "Дата події *",
+      "eventTime": "Час початку *",
+      "endDate": "Дата завершення (необов’язково)",
+      "endTime": "Час завершення (необов’язково)",
+      "location": "Місце",
+      "locationName": "Назва місця",
+      "locationPlaceholder": "Головна зала, відкрита сцена",
+      "locationPlaceholderExample": "напр., Головна зала, відкрита сцена",
+      "address": "Повна адреса",
+      "addressPlaceholder": "Вулиця, місто, країна",
+      "ticketDetails": "Деталі квитків",
+      "maxCapacity": "Макс. місткість (квитків) *",
+      "maxCapacityLong": "Макс. місткість (кількість квитків) *",
+      "pricePerTicketCurrency": "Ціна квитка ({currency})",
+      "pricePerTicket": "Ціна квитка",
+      "pricePlaceholderFree": "0.00 (безкоштовно)",
+      "priceHint": "Залиште порожнім для безкоштовних квитків. Напр., 12.50 або 12,50 для {example}.",
+      "currency": "Валюта *",
+      "terms": "Умови та положення",
+      "termsPlaceholder": "Умови події, політика повернення тощо.",
+      "ticketPrice": "Ціна квитка",
+      "endBeforeStart": "Час завершення має бути пізніше за час початку.",
+      "cancel": "Скасувати"
+    },
+    "create": {
+      "submit": "Створити подію",
+      "submitting": "Створення..."
+    },
+    "edit": {
+      "loading": "Завантаження...",
+      "notFound": "Подію не знайдено.",
+      "back": "Назад до події",
+      "title": "Редагувати подію",
+      "subtitle": "Оновіть деталі події.",
+      "submit": "Зберегти зміни",
+      "submitting": "Збереження..."
+    },
+    "publish": {
+      "confirm": "Опублікувати цю подію? Вона стане видимою для всіх, і квитки можна буде купити.",
+      "confirmLabel": "Опублікувати",
+      "failed": "Не вдалося опублікувати подію",
+      "success": "Подію опубліковано!",
+      "published": "Опубліковано",
+      "cannotPublish": "Неможливо опублікувати",
+      "button": "Опублікувати подію",
+      "publishing": "Публікація..."
+    },
+    "generate": {
+      "invalidCount": "Введіть число від 1 до 1000",
+      "tooMany": "Неможливо згенерувати {count} квитків. Максимум доступно: {max}",
+      "failed": "Не вдалося згенерувати квитки",
+      "success": "Згенеровано {count, plural, one {# квиток} few {# квитки} many {# квитків} other {# квитка}}!",
+      "open": "Згенерувати квитки",
+      "title": "Генерація квитків",
+      "description": "Створіть квитки на цю подію",
+      "countLabel": "Кількість квитків (макс.: {max})",
+      "cancel": "Скасувати",
+      "submit": "Згенерувати",
+      "submitting": "Генерація..."
+    },
+    "redeem": {
+      "title": "Погасити квиток",
+      "subtitle": "Відскануйте QR-код або введіть номер квитка",
+      "back": "Назад до події",
+      "scanTitle": "Сканувати квиток",
+      "scanDescription": "Введіть QR-токен або номер квитка",
+      "tokenLabel": "QR-токен / номер квитка",
+      "tokenPlaceholder": "Введіть QR-токен або номер квитка",
+      "scan": "Сканувати",
+      "notFound": "Квиток не знайдено",
+      "found": "Квиток знайдено",
+      "number": "Номер:",
+      "event": "Подія:",
+      "status": "Статус:",
+      "attendee": "Учасник:",
+      "redeemDescription": "Завершіть погашення",
+      "locationLabel": "Місце (необов’язково)",
+      "locationPlaceholder": "напр., Головний вхід, ворота A",
+      "submit": "Погасити квиток",
+      "submitting": "Погашення...",
+      "failed": "Не вдалося погасити квиток",
+      "cannotRedeem": "Цей квиток не можна погасити. Статус: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Панель продавця",
+      "vouchersTitle": "Керування купонами"
+    },
+    "sidebar": {
+      "title": "Продавець",
+      "subtitle": "Консоль GiftHub",
+      "openMenu": "Відкрити меню",
+      "nav": {
+        "overview": "Огляд",
+        "vouchers": "Купони",
+        "giftCards": "Подарункові картки",
+        "credits": "Кредити",
+        "brand": "Бренд"
+      }
+    },
+    "overview": {
+      "title": "Панель продавця",
+      "notConnected": "Ви ще не підключені до жодного продавця."
+    },
+    "noAccess": {
+      "title": "Немає доступу продавця",
+      "overviewHint": "Попросіть адміністратора продавця запросити вас або створіть обліковий запис продавця.",
+      "creditsHint": "Підключіться до облікового запису продавця, щоб бачити дохід і виплати.",
+      "vouchersHint": "Підключіться до облікового запису продавця, щоб керувати купонами.",
+      "exploreCampaigns": "Переглянути кампанії"
+    },
+    "brand": {
+      "title": "Налаштування бренду",
+      "description": "Налаштуйте вигляд бренду на купонах",
+      "logoHeading": "Логотип",
+      "logoHint": "Завантажте логотип продавця (рекомендовано: 200x200 px, PNG або SVG).",
+      "logoPreviewAlt": "Попередній перегляд логотипа",
+      "uploadLogo": "Завантажити логотип",
+      "colorHeading": "Колір бренду",
+      "colorHint": "Задайте основний колір бренду для купонів і кнопок.",
+      "colorLabel": "Колір",
+      "colorHexLabel": "HEX-значення кольору бренду",
+      "save": "Зберегти зміни",
+      "previewHeading": "Попередній перегляд",
+      "previewHint": "Подивіться, як ваш бренд виглядає на купонах.",
+      "sampleMerchant": "Ваш продавець",
+      "sampleTitle": "-20% на наступну покупку",
+      "sampleDescription": "Діє на всі товари. Не поєднується з іншими пропозиціями."
+    },
+    "credits": {
+      "availableBalance": "Доступний баланс",
+      "availableBalanceHint": "Готово до виплати",
+      "pendingRevenue": "Дохід в обробці",
+      "pendingRevenueHint": "Обробляється",
+      "recentRevenue": "Останні надходження",
+      "ticketSale": "Продаж квитка",
+      "voucherSale": "Продаж купона",
+      "noRevenue": "Доходу ще не зафіксовано",
+      "payoutRequests": "Запити на виплату",
+      "noPayoutRequests": "Запитів на виплату поки немає",
+      "requestPayoutHeading": "Запросити виплату",
+      "minimumPayout": "Мінімальна сума виплати: {amount}",
+      "submitting": "Надсилання...",
+      "requestPayout": "Запросити виплату",
+      "requestSubmitted": "Запит на виплату надіслано",
+      "requestFailed": "Не вдалося запросити виплату",
+      "status": {
+        "paid": "виплачено",
+        "pending": "очікує",
+        "requested": "запитано",
+        "completed": "виконано",
+        "failed": "невдало"
+      }
+    },
+    "newVoucher": {
+      "title": "Створити купон",
+      "description": "Створіть і налаштуйте нову кампанію купонів",
+      "detailsHeading": "Деталі купона",
+      "titleLabel": "Заголовок",
+      "titlePlaceholder": "напр., -20% на наступну покупку",
+      "descriptionLabel": "Опис",
+      "descriptionPlaceholder": "Діє на всі товари. Не поєднується з іншими пропозиціями.",
+      "expiryDateLabel": "Дата закінчення",
+      "weeklyLabel": "Тижнева пропозиція",
+      "weeklyHint": "Доступно щотижня обмежений час",
+      "weeklyAria": "Тижнева пропозиція – доступно щотижня обмежений час",
+      "referralLabel": "Увімкнути реферальний кредит",
+      "referralHint": "Користувачі отримують кредит, коли друзі погашають купон",
+      "referralAria": "Увімкнути реферальний кредит – користувачі отримують кредит, коли друзі погашають купон",
+      "brandColorLabel": "Колір бренду",
+      "brandColorHexLabel": "HEX-значення кольору бренду",
+      "saveDraft": "Зберегти чернетку",
+      "createAndPublish": "Створити й опублікувати",
+      "previewHeading": "Попередній перегляд",
+      "sampleMerchant": "Ваш продавець",
+      "sampleTitle": "Заголовок купона",
+      "sampleDescription": "Тут з’явиться опис купона"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Публічна сторінка стане доступною після публікації купона.",
+    "list": {
+      "metaTitle": "Купони",
+      "subtitle": "Керуйте купонами та створюйте нові",
+      "bulkImport": "Масовий імпорт CSV",
+      "stats": {
+        "totalTitle": "Усього купонів",
+        "totalDescription": "Усі створені купони",
+        "activeTitle": "Активні",
+        "activeDescription": "Опубліковані купони",
+        "draftsTitle": "Чернетки",
+        "draftsDescription": "Ще не опубліковані",
+        "pausedEndedTitle": "Призупинені / завершені",
+        "pausedEndedDescription": "Призупинено: {paused}, завершено: {ended}",
+        "redemptionsTitle": "Погашення",
+        "redemptionsDescription": "Усього погашень"
+      },
+      "empty": {
+        "title": "Купонів поки немає",
+        "description": "Почніть зі створення першого купона.",
+        "action": "Створіть перший купон"
+      },
+      "searchPlaceholder": "Пошук за заголовком, префіксом коду або ID",
+      "searchLabel": "Пошук купонів",
+      "statusLabel": "Статус",
+      "statusAll": "Усі статуси",
+      "status": {
+        "published": "Активний",
+        "paused": "Призупинений",
+        "draft": "Чернетка",
+        "ended": "Завершений",
+        "expired": "Прострочений"
+      },
+      "typeLabel": "Тип",
+      "typeAll": "Усі типи",
+      "sortLabel": "Сортувати за",
+      "sort": {
+        "date": "Дата (спочатку нові)",
+        "name": "Назва (А–Я)",
+        "redemptions": "Погашення"
+      },
+      "showing": "Показано {shown} з {total} купонів",
+      "clearFilters": "Очистити фільтри",
+      "noMatches": "Немає купонів, що відповідають фільтрам.",
+      "usage": "Використання",
+      "usageUnlimited": "Використання: {used} – без обмежень",
+      "view": "Переглянути"
+    },
+    "rowActions": {
+      "pauseTitle": "Призупинити купон",
+      "pauseDescription": "Призупинити цей купон? Поки він призупинений, користувачі не зможуть його купити чи погасити.",
+      "pauseConfirm": "Призупинити",
+      "paused": "Купон призупинено",
+      "pauseFailed": "Не вдалося призупинити купон",
+      "loadFailed": "Не вдалося завантажити купон",
+      "duplicateLabel": "Дублювати купон",
+      "duplicated": "Купон продубльовано",
+      "duplicateFailed": "Не вдалося дублювати"
+    },
+    "publish": {
+      "confirmMessage": "Опублікувати цей купон? Він стане видимим для всіх.",
+      "confirmLabel": "Опублікувати",
+      "failed": "Не вдалося опублікувати купон",
+      "success": "Купон опубліковано!",
+      "publishing": "Публікація...",
+      "button": "Опублікувати купон"
+    },
+    "new": {
+      "iconLetter": "К",
+      "created": "Купон створено як чернетку. Опублікуйте його, коли будете готові показати клієнтам."
+    },
+    "edit": {
+      "iconLetter": "Р",
+      "subtitle": "Оновіть деталі та доступність купона.",
+      "updated": "Купон оновлено",
+      "updateFailed": "Не вдалося оновити купон",
+      "updateFailedRetry": "Не вдалося оновити купон. Спробуйте ще раз.",
+      "updating": "Оновлення...",
+      "update": "Оновити купон",
+      "viewPublicPage": "Переглянути публічну сторінку"
+    },
+    "form": {
+      "stepOf": "Крок {current} з {total}",
+      "typeLabel": "Тип",
+      "typeAria": "Тип купона",
+      "customersGetOff": "Клієнти отримують знижку {value}.",
+      "customersGetCredit": "Клієнти отримують кредит {value}.",
+      "percentHint": "Введіть відсоток, напр. 15 або 12,5.",
+      "amountHint": "Введіть суму в {currency}, напр. 4.50 або 4,50 для {example}.",
+      "validityHint": "Купон можна використати з початку першого дня до кінця останнього дня.",
+      "enableWeeklyDropAria": "Увімкнути тижневу пропозицію",
+      "weeklyDropDayAria": "День тижня для тижневої пропозиції",
+      "weeklyDropTimeAria": "Час початку тижневої пропозиції",
+      "headlinePlaceholder": "-15% на ваше замовлення",
+      "finePrintPlaceholder": "Лише для нових клієнтів",
+      "previewFallbackHeadline": "Ваш купон",
+      "previewValidUntil": "Дійсний до {date}",
+      "errors": {
+        "discountAboveZero": "Введіть знижку більше 0%.",
+        "valueAboveZero": "Введіть значення більше 0.",
+        "chooseDates": "Виберіть, коли купон починає та перестає діяти.",
+        "endBeforeStart": "Дата завершення має бути не раніше дати початку.",
+        "invalidValue": "Введіть коректне значення.",
+        "valueMustBePositive": "Значення має бути більше 0",
+        "totalLimitPositive": "Загальний ліміт використань має бути додатним числом",
+        "perUserLimitPositive": "Ліміт на користувача має бути додатним числом"
+      },
+      "discountErrors": {
+        "negative": "Знижка не може бути від’ємною.",
+        "invalid": "Знижка не є коректним числом.",
+        "decimals": "Знижка може мати не більше {decimals} знаків після коми.",
+        "tooLarge": "Знижка завелика.",
+        "tooHigh": "Знижка не може перевищувати 100%."
+      },
+      "valueErrors": {
+        "negative": "Значення не може бути від’ємним.",
+        "invalid": "Значення не є коректним числом.",
+        "wholeNumber": "Значення має бути цілим числом.",
+        "decimals": "Значення може мати не більше {decimals} знаків після коми.",
+        "tooLarge": "Значення завелике."
+      }
+    },
+    "bulkImport": {
+      "back": "Назад до купонів",
+      "title": "Імпорт купонів з таблиці",
+      "intro": "Завантажте CSV-файл (до 500 рядків). Кожен купон створюється як чернетка, тож нічого не з’явиться для клієнтів, доки ви не опублікуєте.",
+      "columns": "Стовпці",
+      "downloadSample": "Завантажити зразок CSV",
+      "columnRequired": "<code>{name}</code> (обов’язково): {help}",
+      "columnOptional": "<code>{name}</code> (необов’язково): {help}",
+      "columnHelp": {
+        "name": "Що клієнти бачать як назву купона, напр. «Весняна кавова пропозиція».",
+        "type": "«amount» (знижка сумою), «percent» (знижка у відсотках) або «credit» (кредит магазину).",
+        "value": "Євро для amount/credit (10 або 10.50), відсотки для percent (15 або 12.5).",
+        "currency": "Трилітерний код, напр. EUR. За замовчуванням — валюта вашого магазину.",
+        "valid_from": "Перший день дії купона: 2026-10-01 або 01.10.2026.",
+        "valid_to": "Останній день дії купона (він дійсний до кінця цього дня).",
+        "code_prefix": "Літери на початку кожного коду, напр. SPRING.",
+        "usage_limit": "Скільки разів його можна використати загалом. Залиште порожнім для необмеженої кількості."
+      },
+      "separatorHint": "Розділяйте стовпці комами або крапками з комою. Якщо використовуєте коми, беріть десяткові суми в лапки («4,50») або використовуйте крапку (4.50).",
+      "chooseFile": "Виберіть CSV-файл",
+      "chooseDifferent": "Натисніть, щоб вибрати інший файл",
+      "browse": "Натисніть, щоб вибрати",
+      "fixRows": "Виправте ці рядки й завантажте файл знову:",
+      "andMore": "…і ще {count}.",
+      "readyToImport": "Готово до імпорту: {count, plural, one {# купон} few {# купони} many {# купонів} other {# купона}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, до {limit} використань} other {}}",
+      "imported": "Імпортовано {count, plural, one {# купон} few {# купони} many {# купонів} other {# купона}} як чернетки.",
+      "viewVouchers": "Переглянути купони",
+      "importing": "Імпорт...",
+      "importCount": "Імпортувати {count, plural, one {# купон} few {# купони} many {# купонів} other {# купона}}",
+      "importVouchers": "Імпортувати купони",
+      "importFailedStatus": "Помилка імпорту (помилка {status}).",
+      "importFailed": "Помилка імпорту"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Заголовок на першому екрані з основною дією."
+        },
+        "value_props": {
+          "label": "Переваги",
+          "description": "Ключові переваги та гарантії."
+        },
+        "featured_products": {
+          "label": "Рекомендовані товари",
+          "description": "Топ товарів із цінами та тегами."
+        },
+        "featured_vouchers": {
+          "label": "Рекомендовані купони",
+          "description": "Картки активних купонів для акцій."
+        },
+        "rental_packages": {
+          "label": "Пакети оренди",
+          "description": "Комплекти оренди та подобові ціни."
+        },
+        "categories": {
+          "label": "Сітка категорій",
+          "description": "Перегляд за типом, призначенням або аудиторією."
+        },
+        "availability": {
+          "label": "Календар доступності",
+          "description": "Доступність і слоти бронювання в реальному часі."
+        },
+        "testimonials": {
+          "label": "Відгуки",
+          "description": "Цитати клієнтів і рейтинги."
+        },
+        "gallery": {
+          "label": "Галерея",
+          "description": "Фото у житті або сценарії використання."
+        },
+        "pricing": {
+          "label": "Таблиця цін",
+          "description": "Прозорі цінові рівні."
+        },
+        "rental_terms": {
+          "label": "Умови оренди",
+          "description": "Застава, страхування та правила повернення."
+        },
+        "faq": {
+          "label": "FAQ",
+          "description": "Відповіді на поширені заперечення."
+        },
+        "newsletter": {
+          "label": "Підписка на розсилку",
+          "description": "Збирайте email-адреси для кампаній."
+        },
+        "contact": {
+          "label": "Блок контактів",
+          "description": "Підтримка в чаті, email або телефоном."
+        },
+        "map": {
+          "label": "Карта розташування",
+          "description": "Пункт видачі або адреса магазину."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Промо-панель",
+          "description": "Закріплена верхня панель для пропозицій і оголошень."
+        },
+        "sticky_cta": {
+          "label": "Закріплена CTA",
+          "description": "Кнопка дії, що лишається видимою під час прокручування."
+        },
+        "chat_widget": {
+          "label": "Віджет чату",
+          "description": "Живий чат або інтеграція з WhatsApp."
+        },
+        "trust_badges": {
+          "label": "Значки довіри",
+          "description": "Значки оплати, безпеки чи якості."
+        },
+        "social_proof": {
+          "label": "Спливне вікно соціального доказу",
+          "description": "Остання активність і покупки."
+        },
+        "countdown": {
+          "label": "Таймер зворотного відліку",
+          "description": "Терміновість для обмежених пропозицій."
+        },
+        "reviews_widget": {
+          "label": "Віджет відгуків",
+          "description": "Вбудуйте Google або Trustpilot."
+        },
+        "language_switch": {
+          "label": "Перемикач мови",
+          "description": "Швидке перемикання мови на сторінці."
+        },
+        "analytics": {
+          "label": "Фрагменти аналітики",
+          "description": "Слоти для пікселів відстеження."
+        },
+        "cookie_banner": {
+          "label": "Банер cookie",
+          "description": "Банер згоди GDPR."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Попередній перегляд",
+      "edit": "Редагувати",
+      "previewEmpty": "Розділів ще не додано. Перейдіть у режим редагування, щоб додати розділи.",
+      "title": "Візуальний редактор",
+      "preview": "Попередній перегляд",
+      "empty": "Розділів поки немає. Натисніть «Додати розділ» нижче, щоб почати.",
+      "collapseSettings": "Згорнути налаштування",
+      "expandSettings": "Розгорнути налаштування",
+      "removeSection": "Видалити розділ {label}",
+      "sectionTitle": "Заголовок розділу",
+      "description": "Опис",
+      "descriptionPlaceholder": "Необов’язковий опис",
+      "backgroundColor": "Колір фону",
+      "layoutVariant": "Варіант макета",
+      "layout": {
+        "default": "За замовчуванням",
+        "centered": "По центру",
+        "wide": "Широкий",
+        "compact": "Компактний"
+      },
+      "addSection": "Додати розділ",
+      "availableSections": "Доступні розділи",
+      "closeCatalog": "Закрити",
+      "allAdded": "Усі доступні розділи вже додано.",
+      "count": "{configured, plural, one {Налаштовано # розділ} few {Налаштовано # розділи} many {Налаштовано # розділів} other {Налаштовано # розділу}} / {available} доступно для додавання"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Чек-лист запуску вітрини",
+        "rental_launch": "Чек-лист запуску сторінки оренди",
+        "campaign_ops": "Щотижневі операції з кампаніями",
+        "support_ops": "Чек-лист готовності підтримки"
+      },
+      "toast": {
+        "saved": "Конструктор сторінок оновлено.",
+        "saveFailed": "Не вдалося зберегти сторінку",
+        "vibeFailed": "Помилка асистента макета",
+        "layoutGenerated": "Макет згенеровано.",
+        "generateFailed": "Не вдалося згенерувати макет",
+        "agentFailed": "Помилка асистента",
+        "planGenerated": "План процесу згенеровано.",
+        "runAgentFailed": "Не вдалося запустити асистента"
+      },
+      "noData": "Немає даних конструктора сторінок.",
+      "title": "Конструктор сторінок",
+      "intro": "Швидко створюйте сторінки вітрини та оренди з модульних розділів і доповнень.",
+      "introAi": "Швидко створюйте сторінки вітрини та оренди з модульних розділів і доповнень, з необов’язковими підказками ШІ.",
+      "tabs": {
+        "store": "Вітрина",
+        "rental": "Оренда"
+      },
+      "details": {
+        "title": "Деталі сторінки",
+        "subtitle": "Заголовок, підзаголовок і макет.",
+        "save": "Зберегти",
+        "pageTitle": "Заголовок сторінки",
+        "subtitleLabel": "Підзаголовок"
+      },
+      "sections": {
+        "title": "Розділи",
+        "subtitle": "Перетягуйте для зміни порядку, розгортайте для налаштування або перегляньте макет.",
+        "suggestLayout": "Запропонувати макет",
+        "suggestionsLeft": "Залишилося підказок макета від ШІ: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Доповнення",
+        "subtitle": "Додаткові віджети та маркетингові шари.",
+        "enable": "Увімкнути доповнення {label}",
+        "disable": "Вимкнути доповнення {label}"
+      },
+      "summary": {
+        "title": "Підсумок",
+        "line": "{title} · {sections, plural, one {# розділ} few {# розділи} many {# розділів} other {# розділу}} · {addons, plural, one {# доповнення} few {# доповнення} many {# доповнень} other {# доповнення}}",
+        "sectionsLabel": "Розділи:",
+        "addonsLabel": "Доповнення:",
+        "none": "Немає"
+      },
+      "assistant": {
+        "title": "Асистент чек-листа запуску",
+        "subtitle": "Створюйте плани дій і робочі чек-листи.",
+        "goalLabel": "Мета процесу",
+        "createChecklist": "Створити чек-лист",
+        "checklistsLeft": "Залишилося чек-листів: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Добірка пропозицій, оренди та купонів від {name}.",
+        "shopProducts": "До товарів",
+        "browseRentals": "Переглянути оренду"
+      },
+      "valueProps": {
+        "rewardsTitle": "Винагороди",
+        "rewardsText": "Вбудовані купонні бонуси.",
+        "stockTitle": "Надійна наявність",
+        "stockText": "Актуальні ціни та наявність.",
+        "datesTitle": "Гнучкі дати",
+        "datesText": "Плануйте оренду без зусиль."
+      },
+      "viewAll": "Переглянути все",
+      "seeAll": "Усі",
+      "products": {
+        "title": "Рекомендовані товари",
+        "empty": "Товарів поки немає.",
+        "fallbackDescription": "Про товар"
+      },
+      "rentals": {
+        "title": "Пакети оренди",
+        "empty": "Оренди поки немає.",
+        "fallbackDescription": "Про оренду",
+        "perDay": "{price} / день"
+      },
+      "categories": {
+        "title": "Категорії",
+        "popular": "Популярне",
+        "business": "Бізнес",
+        "events": "Події",
+        "seasonal": "Сезонне",
+        "corporate": "Для компаній",
+        "custom": "На замовлення"
+      },
+      "availability": {
+        "title": "Доступність наживо",
+        "text": "Перевірте доступність і запросіть пропозицію за лічені хвилини.",
+        "seeCalendar": "Переглянути календар"
+      },
+      "testimonials": {
+        "title": "Що кажуть клієнти",
+        "smooth": "Усе пройшло гладко",
+        "lovedVoucher": "Купон сподобався",
+        "support": "Чудова підтримка"
+      },
+      "gallery": {
+        "title": "Галерея"
+      },
+      "pricing": {
+        "title": "Ціни",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Enterprise",
+        "tierText": "Індивідуальні ціни та підтримка"
+      },
+      "rentalTerms": {
+        "title": "Умови оренди",
+        "text": "Зрозумілі умови застави, отримання та повернення — одразу."
+      },
+      "faq": {
+        "title": "FAQ",
+        "redeem": "Як погасити?",
+        "reschedule": "Чи можна перенести?",
+        "support": "Чи є у вас підтримка?"
+      },
+      "newsletter": {
+        "title": "Будьте в курсі",
+        "text": "Отримуйте нові пропозиції та новинки оренди на пошту.",
+        "emailLabel": "Адреса email",
+        "subscribe": "Підписатися"
+      },
+      "contact": {
+        "title": "Контакти",
+        "emailUs": "Пишіть нам: {email}"
+      },
+      "map": {
+        "text": "Адресу отримання повідомимо після бронювання."
+      },
+      "vouchers": {
+        "title": "Активні купони",
+        "empty": "Немає доступних купонів.",
+        "voucher": "Купон",
+        "view": "Переглянути купон"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Активна",
+      "redeemed": "Погашена",
+      "expired": "Прострочена",
+      "cancelled": "Скасована"
+    },
+    "list": {
+      "metaTitle": "Подарункові картки",
+      "title": "Подарункові картки",
+      "subtitle": "Створюйте подарункові картки та керуйте ними",
+      "newGiftCard": "Нова подарункова картка",
+      "stats": {
+        "total": "Усього подарункових карток",
+        "totalDescription": "Усі видані подарункові картки",
+        "active": "Активні",
+        "activeDescription": "Доступні для погашення",
+        "redeemed": "Погашені",
+        "redeemedDescription": "Завершені погашення",
+        "totalValue": "Загальна вартість",
+        "totalValueDescription": "Вартість виданих подарункових карток"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Подарункових карток поки немає",
+      "emptyDescription": "Створіть подарункову картку з власним брендингом і погашенням за QR-кодом.",
+      "createFirst": "Створіть першу подарункову картку",
+      "searchPlaceholder": "Пошук за заголовком, кодом або повідомленням",
+      "searchLabel": "Пошук подарункових карток",
+      "status": "Статус",
+      "allStatus": "Усі статуси",
+      "sortBy": "Сортувати за",
+      "sortDate": "Дата (спочатку нові)",
+      "sortAmount": "Сума (за спаданням)",
+      "showing": "Показано {shown} з {total, plural, one {# подарункової картки} few {# подарункових карток} many {# подарункових карток} other {# подарункової картки}}",
+      "clearFilters": "Очистити фільтри",
+      "noMatches": "Немає подарункових карток, що відповідають фільтрам.",
+      "defaultHeadline": "Подарункова картка",
+      "noExpiry": "Безстрокова",
+      "validUntil": "Дійсна до: {date}",
+      "redeemedOn": "Погашено: {date}",
+      "details": "Деталі",
+      "view": "Переглянути"
+    },
+    "detail": {
+      "title": "Подарункова картка",
+      "code": "Код {code}",
+      "publicView": "Публічний вигляд",
+      "newGiftCard": "Нова подарункова картка",
+      "detailsTitle": "Деталі подарункової картки",
+      "value": "Вартість",
+      "validFrom": "Дійсна з",
+      "validTo": "Дійсна до",
+      "noExpiry": "Безстрокова",
+      "redeemedAt": "Погашено",
+      "notRedeemed": "Не погашено",
+      "qrTitle": "QR для погашення персоналом",
+      "qrHelp": "Персонал може відсканувати цей QR, щоб погасити й анулювати подарункову картку."
+    },
+    "new": {
+      "title": "Нова подарункова картка",
+      "subtitle": "Налаштуйте та видайте подарункову картку",
+      "created": "Подарункову картку створено.",
+      "cancel": "Скасувати",
+      "creating": "Створення...",
+      "submit": "Створити подарункову картку",
+      "errors": {
+        "amountRequired": "Введіть суму більше 0.",
+        "endBeforeStart": "Дата завершення має бути не раніше дати початку.",
+        "createFailed": "Не вдалося створити подарункову картку"
+      },
+      "amountErrors": {
+        "negative": "Сума не може бути від’ємною.",
+        "invalid": "Сума не є коректним числом.",
+        "wholeNumber": "Сума має бути цілим числом.",
+        "decimals": "Сума може мати не більше {decimals} знаків після коми.",
+        "tooLarge": "Сума завелика."
+      },
+      "priceErrors": {
+        "negative": "Ціна продажу не може бути від’ємною.",
+        "invalid": "Ціна продажу не є коректним числом.",
+        "wholeNumber": "Ціна продажу має бути цілим числом.",
+        "decimals": "Ціна продажу може мати не більше {decimals} знаків після коми.",
+        "tooLarge": "Ціна продажу завелика."
+      },
+      "valueSection": {
+        "title": "Вартість і термін дії",
+        "description": "Задайте суму, валюту та термін дії",
+        "amount": "Сума",
+        "faceValue": "Номінал: {value}.",
+        "amountHelp": "Введіть суму в {currency}, напр. 50 або 49,90 для {example}.",
+        "currency": "Валюта",
+        "validFrom": "Дійсна з",
+        "validTo": "Дійсна до",
+        "noExpiry": "Без терміну дії"
+      },
+      "purchaseSection": {
+        "title": "Продаж клієнтам",
+        "description": "Дозвольте клієнтам купувати цю подарункову картку онлайн",
+        "purchasable": "Доступна для купівлі клієнтами",
+        "salePrice": "Ціна продажу (необов’язково, за замовчуванням — номінал)",
+        "salePricePlaceholder": "Як сума",
+        "customersPay": "Клієнти платять {value}.",
+        "salePriceHelp": "Залиште порожнім, щоб продавати за номіналом. Вкажіть іншу ціну для акцій."
+      },
+      "brandingSection": {
+        "title": "Брендинг і повідомлення",
+        "description": "Заголовок, повідомлення, зображення та кольори",
+        "headline": "Заголовок",
+        "headlinePlaceholder": "Подарунок для поціновувачів кави",
+        "message": "Повідомлення",
+        "messagePlaceholder": "Додайте особисте повідомлення для отримувача",
+        "logoUrl": "URL логотипа",
+        "imageUrl": "URL зображення",
+        "accentColor": "Акцентний колір",
+        "backgroundColor": "Колір фону",
+        "textColor": "Колір тексту",
+        "codePrefix": "Префікс коду (необов’язково)"
+      },
+      "preview": {
+        "title": "Попередній перегляд",
+        "defaultHeadline": "Подарункова картка",
+        "imageAlt": "Подарункова картка",
+        "logoAlt": "Логотип бренду",
+        "notePlaceholder": "Додайте особисту записку"
+      }
+    },
+    "gifts": {
+      "title": "Подарункові товари",
+      "subtitle": "Керуйте своїми товарами в Gift Hub",
+      "dashboard": "Панель",
+      "confirmDelete": "Ви впевнені? Товар буде деактивовано.",
+      "stats": {
+        "total": "Усього",
+        "active": "Активні",
+        "views": "Перегляди",
+        "purchases": "Покупки"
+      },
+      "emptyTitle": "Подарункових товарів поки немає",
+      "emptyDescription": "Додайте перший товар, щоб він з’явився у стрічці Gift Hub.",
+      "emptyApiHint": "Використовуйте API <code>{endpoint}</code>, щоб створювати товари.",
+      "inactive": "Неактивний",
+      "featured": "Рекомендований",
+      "views": "{count, plural, one {# перегляд} few {# перегляди} many {# переглядів} other {# перегляду}}",
+      "purchases": "{count, plural, one {# покупка} few {# покупки} many {# покупок} other {# покупки}}",
+      "conversionRate": "{rate}% конверсії",
+      "activate": "Активувати",
+      "deactivate": "Деактивувати",
+      "delete": "Видалити"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Немає даних",
+      "value": "Значення: <strong>{value}</strong>",
+      "dismiss": "Закрити",
+      "remove": "Видалити",
+      "dialog": "Діалог",
+      "close": "Закрити",
+      "loading": "Завантаження"
+    },
+    "analyticsFunnel": {
+      "empty": "За цей період активності ще немає",
+      "top": "Початок",
+      "drop": "-{rate}% відтоку"
+    },
+    "periodComparison": {
+      "title": "Порівняння періодів",
+      "loading": "Завантаження...",
+      "previous": "Попередній: {value}",
+      "noData": "Немає даних",
+      "period": {
+        "day": "День",
+        "week": "Тиждень",
+        "month": "Місяць",
+        "quarter": "Квартал",
+        "year": "Рік"
+      },
+      "metric": {
+        "revenue": "Дохід",
+        "redemptions": "Погашення",
+        "purchases": "Покупки",
+        "referrals": "Рекомендації",
+        "customers": "Клієнти"
+      }
+    },
+    "trendChart": {
+      "noData": "Немає даних"
+    },
+    "conversionChart": {
+      "noData": "Немає даних",
+      "previous": "попер.: {value}"
+    },
+    "funnelChart": {
+      "empty": "За цей період активності ще немає"
+    },
+    "geoMap": {
+      "noData": "Немає даних",
+      "value": "Значення: <strong>{value}</strong>",
+      "country": {
+        "GB": "Велика Британія",
+        "IE": "Ірландія",
+        "FR": "Франція",
+        "DE": "Німеччина",
+        "ES": "Іспанія",
+        "PT": "Португалія",
+        "IT": "Італія",
+        "NL": "Нідерланди",
+        "BE": "Бельгія",
+        "CH": "Швейцарія",
+        "AT": "Австрія",
+        "PL": "Польща",
+        "CZ": "Чехія",
+        "SE": "Швеція",
+        "NO": "Норвегія",
+        "FI": "Фінляндія",
+        "DK": "Данія",
+        "EE": "Естонія",
+        "LV": "Латвія",
+        "LT": "Литва",
+        "HU": "Угорщина",
+        "RO": "Румунія",
+        "BG": "Болгарія",
+        "GR": "Греція",
+        "HR": "Хорватія",
+        "SK": "Словаччина",
+        "SI": "Словенія",
+        "RS": "Сербія",
+        "UA": "Україна",
+        "BY": "Білорусь"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Очікування даних..."
+    },
+    "pieDonutChart": {
+      "noData": "Немає даних",
+      "total": "Разом"
+    },
+    "activityFeed": {
+      "justNow": "щойно",
+      "minutesAgo": "{count} хв тому",
+      "hoursAgo": "{count} год тому",
+      "daysAgo": "{count} дн. тому",
+      "empty": "Активності поки немає",
+      "loadMore": "Завантажити ще",
+      "eventType": {
+        "purchase": "Покупка",
+        "redemption": "Погашення",
+        "signup": "Реєстрація",
+        "alert": "Сповіщення"
+      }
+    },
+    "dateRange": {
+      "days7": "7 днів",
+      "days30": "30 днів",
+      "days90": "90 днів",
+      "year1": "1 рік",
+      "custom": "Власний"
+    },
+    "chartCard": {
+      "fullscreen": "На весь екран",
+      "exitFullscreen": "Вийти з повноекранного режиму",
+      "retry": "Повторити"
+    },
+    "dashboardHeader": {
+      "export": "Експорт",
+      "exportAs": "Експортувати як {format}"
+    },
+    "dataTable": {
+      "empty": "Немає даних",
+      "showing": "Показано {from}–{to} з {total}",
+      "previousPage": "Попередня сторінка",
+      "nextPage": "Наступна сторінка"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Наживо",
+        "reconnecting": "Перепідключення",
+        "disconnected": "Відключено"
+      },
+      "status": {
+        "connected": "Підключено",
+        "reconnecting": "Перепідключення",
+        "disconnected": "Відключено"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "порівняно з попер. періодом"
+    },
+    "statComparison": {
+      "current": "Поточний",
+      "previous": "Попередній",
+      "change": "зміна"
+    },
+    "aiInsightPanel": {
+      "title": "Інсайти ШІ",
+      "placeholder": "Запитайте ШІ...",
+      "send": "Надіслати"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Наживо",
+        "degraded": "Погіршено",
+        "disconnected": "Офлайн"
+      },
+      "latency": "Затримка: {ms} мс",
+      "lastUpdate": "Останнє оновлення: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Сповіщення",
+      "title": "Сповіщення",
+      "markAllRead": "Позначити все прочитаним",
+      "empty": "Сповіщень немає",
+      "ariaLabelUnread": "Сповіщення ({count} непрочитаних)"
+    },
+    "premiumChartCard": {
+      "info": "Інформація",
+      "fullscreen": "На весь екран",
+      "exitFullscreen": "Вийти з повноекранного режиму",
+      "moreOptions": "Інші параметри",
+      "empty": "Немає даних за цей період"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "порівняно з минулим періодом"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Працює",
+        "degraded": "Погіршено",
+        "outage": "Збій"
+      }
+    },
+    "select": {
+      "placeholder": "Виберіть...",
+      "search": "Пошук...",
+      "empty": "Варіантів не знайдено",
+      "removeOption": "Видалити {label}"
+    },
+    "sidebar": {
+      "expand": "Розгорнути бічну панель",
+      "collapse": "Згорнути бічну панель",
+      "openMenu": "Відкрити меню",
+      "closeMenu": "Закрити меню"
+    },
+    "iconSystem": {
+      "notFound": "Значок «{name}» не знайдено",
+      "badge": "{count, plural, one {# сповіщення} few {# сповіщення} many {# сповіщень} other {# сповіщення}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Бічна панель",
+      "closePanel": "Закрити панель"
+    },
+    "codeBlock": {
+      "copyCode": "Копіювати код",
+      "copied": "Скопійовано",
+      "copy": "Копіювати"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Клієнти",
+      "title": "Клієнти",
+      "summary": "{count, plural, one {# клієнт} few {# клієнти} many {# клієнтів} other {# клієнта}} · загальний дохід {revenue}",
+      "stats": {
+        "totalCustomers": "Усього клієнтів",
+        "totalRevenue": "Загальний дохід",
+        "totalRedemptions": "Усього погашень"
+      },
+      "table": {
+        "customer": "Клієнт",
+        "email": "Email",
+        "purchases": "Покупки",
+        "totalSpent": "Витрачено",
+        "redemptions": "Погашення",
+        "lastPurchase": "Остання покупка"
+      },
+      "empty": "Клієнтів поки немає",
+      "unknown": "Невідомо"
+    },
+    "qrCheckout": {
+      "title": "Миттєва оплата за QR",
+      "subtitle": "Створюйте QR-коди для миттєвої оплати клієнтами",
+      "voucherLabel": "Прив’язати до купона (необов’язково)",
+      "generalOption": "Загальна оплата (без конкретного купона)",
+      "voucherOption": "{type} – {value} {currency} ({status})",
+      "generating": "Генерація...",
+      "generate": "Згенерувати QR-код",
+      "qrAlt": "QR-код для оплати",
+      "scanToCheckout": "Скануйте для оплати",
+      "print": "Друкувати QR-код"
+    },
+    "redemptions": {
+      "metaTitle": "Погашення",
+      "subtitle": "Переглядайте та підтверджуйте погашення купонів.",
+      "stats": {
+        "totalTitle": "Усього погашень",
+        "totalDescription": "Усі подані погашення",
+        "pendingTitle": "Очікують",
+        "pendingDescription": "Чекають на підтвердження",
+        "confirmedTitle": "Підтверджені",
+        "confirmedDescription": "Схвалені погашення",
+        "discountsTitle": "Надано знижок",
+        "discountsDescription": "Підтверджені знижки"
+      },
+      "empty": {
+        "title": "Погашень поки немає",
+        "description": "Погашення з’являться тут, коли клієнти використовуватимуть купони."
+      },
+      "voucherFallback": "Купон",
+      "card": {
+        "order": "Замовлення на {amount}",
+        "discount": "Знижка: {amount}",
+        "discountReferred": "Знижка: {amount} – за рекомендацією {name}",
+        "confirmed": "Підтверджено",
+        "pending": "Очікує",
+        "method": "Спосіб: {method}",
+        "methods": {
+          "online": "Онлайн",
+          "in_store": "У магазині"
+        },
+        "orderReference": "Замовлення: {reference}",
+        "notAvailable": "Н/д",
+        "location": "Місце: {location}",
+        "date": "Дата: {date}"
+      },
+      "confirm": {
+        "prompt": "Підтвердити це погашення? Це розблокує кредит для рефера.",
+        "confirmLabel": "Підтвердити",
+        "success": "Погашення підтверджено. Кредит для рефера розблоковано.",
+        "error": "Не вдалося підтвердити погашення. Спробуйте ще раз.",
+        "confirming": "Підтвердження...",
+        "button": "Підтвердити погашення"
+      },
+      "export": {
+        "success": "Погашення експортовано!",
+        "error": "Не вдалося експортувати погашення",
+        "exporting": "Експорт...",
+        "button": "Експорт CSV"
+      }
+    },
+    "reviews": {
+      "title": "Відгуки",
+      "subtitle": "Відстежуйте відгуки клієнтів і відповідайте на них",
+      "filters": "Фільтри",
+      "reviewCount": "{count, plural, one {# відгук} few {# відгуки} many {# відгуків} other {# відгуку}}",
+      "ratingDistribution": "Розподіл оцінок",
+      "responseRate": "Частка відповідей",
+      "replied": "З відповіддю",
+      "pending": "Очікують",
+      "responseRatePercent": "Відповіді на {percent}%",
+      "filter": {
+        "rating": "Оцінка",
+        "allRatings": "Усі оцінки",
+        "stars": "{count, plural, one {# зірка} few {# зірки} many {# зірок} other {# зірки}}",
+        "replyStatus": "Статус відповіді",
+        "all": "Усі",
+        "needsReply": "Потребують відповіді",
+        "replied": "З відповіддю",
+        "clear": "Очистити"
+      },
+      "loading": "Завантаження відгуків...",
+      "empty": "Відгуків не знайдено.",
+      "anonymous": "Анонім",
+      "verified": "Перевірено",
+      "campaign": "Кампанія: {name}",
+      "voucher": "Купон: {code}",
+      "foundHelpful": "Корисним вважають: {count}",
+      "yourReply": "Ваша відповідь",
+      "replyPlaceholder": "Напишіть відповідь...",
+      "posting": "Публікація...",
+      "postReply": "Опублікувати відповідь",
+      "cancel": "Скасувати",
+      "reply": "Відповісти",
+      "showing": "Показано {from}–{to} з {total}",
+      "pageOf": "Сторінка {page} з {totalPages}",
+      "previousPage": "Попередня сторінка",
+      "nextPage": "Наступна сторінка",
+      "loadFailed": "Не вдалося завантажити відгуки",
+      "replyFailed": "Не вдалося відповісти",
+      "replyPosted": "Відповідь опубліковано"
+    },
+    "scanner": {
+      "title": "Сканер",
+      "subtitle": "Скануйте купони, подарункові картки та квитки",
+      "manual": "Вручну",
+      "camera": "Камера",
+      "scanning": "Сканування...",
+      "cameraDenied": "Доступ до камери заборонено. Дозвольте його в налаштуваннях браузера або введіть код нижче.",
+      "cameraUnavailable": "Камера недоступна. Введіть код нижче.",
+      "pointAtCode": "Наведіть на QR-код для автоматичного сканування",
+      "enterCode": "Введіть код",
+      "codePlaceholder": "Код купона (напр. AUD-CMUI0TG1), посилання на купон, код квитка або подарункової картки",
+      "codeAriaLabel": "Код для сканування",
+      "scan": "Сканувати",
+      "found": {
+        "voucher": "Купон знайдено",
+        "gift_card": "Подарункову картку знайдено",
+        "ticket": "Квиток знайдено"
+      },
+      "info": {
+        "ticketNumber": "Квиток №",
+        "event": "Подія",
+        "type": "Тип",
+        "standard": "Стандартний",
+        "attendee": "Учасник",
+        "code": "Код",
+        "amount": "Сума",
+        "message": "Повідомлення",
+        "voucher": "Купон",
+        "campaign": "Кампанія",
+        "none": "Немає",
+        "value": "Вартість",
+        "validUntil": "Дійсний до"
+      },
+      "redeem": "Погасити",
+      "redeeming": "Погашення...",
+      "cannotRedeem": "Цей елемент не можна погасити (статус: {status})",
+      "redeemed": {
+        "voucher": "Купон погашено!",
+        "gift_card": "Подарункову картку погашено!",
+        "ticket": "Квиток погашено!"
+      },
+      "errors": {
+        "enterCode": "Введіть код",
+        "notFound": "Не знайдено",
+        "scanFailed": "Помилка сканування",
+        "redeemFailed": "Помилка погашення"
+      },
+      "status": {
+        "giftCard": {
+          "active": "активна",
+          "redeemed": "погашена",
+          "expired": "прострочена",
+          "cancelled": "скасована"
+        },
+        "ticket": {
+          "available": "доступний",
+          "sold": "продано",
+          "used": "використано",
+          "cancelled": "скасовано",
+          "refunded": "повернено"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Ціна не може бути від’ємною.",
+      "invalid": "Ціна не є коректним числом.",
+      "wholeNumber": "Ціна має бути цілим числом.",
+      "decimals": "Ціна може мати не більше {decimals} знаків після коми.",
+      "tooLarge": "Ціна завелика."
+    },
+    "appointments": {
+      "title": "Записи",
+      "subtitle": "Керуйте бронюваннями та доступністю",
+      "createSlot": "Створити слот",
+      "form": {
+        "serviceName": "Назва послуги",
+        "price": "Ціна ({currency}, залиште порожнім, якщо безкоштовно)",
+        "startTime": "Час початку",
+        "endTime": "Час завершення",
+        "notes": "Примітки",
+        "creating": "Створення…",
+        "submit": "Створити слот доступності"
+      },
+      "status": {
+        "all": "Усі",
+        "pending": "Очікують",
+        "confirmed": "Підтверджені",
+        "cancelled": "Скасовані",
+        "completed": "Завершені"
+      },
+      "loading": "Завантаження...",
+      "empty": "Записів не знайдено",
+      "bookedBy": "Забронював(-ла): {name}",
+      "confirm": "Підтвердити",
+      "confirmAria": "Підтвердити запис",
+      "cancel": "Скасувати",
+      "cancelAria": "Скасувати запис",
+      "errors": {
+        "endBeforeStart": "Час завершення має бути пізніше за час початку.",
+        "createFailed": "Не вдалося створити слот доступності. Спробуйте ще раз.",
+        "network": "Не вдалося з’єднатися із сервером. Перевірте з’єднання та спробуйте ще раз.",
+        "updateFailed": "Не вдалося оновити запис (помилка {status})."
+      }
+    },
+    "inventory": {
+      "title": "Запаси",
+      "subtitle": "Відстежуйте залишки та керуйте доступністю купонів",
+      "refresh": "Оновити",
+      "summary": {
+        "totalItems": "Усього позицій",
+        "lowStock": "Мало на складі",
+        "outOfStock": "Немає в наявності"
+      },
+      "alerts": {
+        "title": "Сповіщення про низький запас ({count})",
+        "threshold": "{stock} / поріг {threshold}"
+      },
+      "loading": "Завантаження запасів...",
+      "empty": "Купонів не знайдено",
+      "typeVoucher": "Купон {type}",
+      "stockStatus": {
+        "unlimited": "Без обмежень",
+        "outOfStock": "Немає в наявності",
+        "lowStock": "Мало на складі",
+        "inStock": "В наявності"
+      },
+      "stock": "Запас: {stock}",
+      "purchased": "Куплено: {count}",
+      "redeemed": "Погашено: {count}",
+      "validUntil": "Дійсний до {date}",
+      "edit": {
+        "button": "Змінити запас",
+        "stockQuantity": "Кількість у запасі",
+        "threshold": "Поріг низького запасу",
+        "save": "Зберегти",
+        "saving": "Збереження...",
+        "cancel": "Скасувати"
+      },
+      "stockUpdated": "Запас оновлено",
+      "errors": {
+        "loadFailed": "Не вдалося завантажити запаси",
+        "updateFailed": "Не вдалося оновити запас"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "Підказки ШІ на цій платформі ще не налаштовано, тому інструменти автоматичного макета та чек-листів приховано. Ви й далі можете створювати й редагувати сторінки вручну."
+    },
+    "pricing": {
+      "title": "Динамічне ціноутворення",
+      "newRule": "Нове правило",
+      "ruleTypes": {
+        "demand": {
+          "label": "За попитом",
+          "desc": "Коригуйте ціну залежно від співвідношення переглядів і покупок"
+        },
+        "timeOfDay": {
+          "label": "Час доби",
+          "desc": "Ціни в пікові та непікові години"
+        },
+        "inventory": {
+          "label": "Запаси",
+          "desc": "Ціна змінюється залежно від залишку"
+        },
+        "surge": {
+          "label": "Пікова ціна",
+          "desc": "Націнка на особливі події/свята"
+        },
+        "loyalty": {
+          "label": "Лояльність",
+          "desc": "Знижки для постійних клієнтів"
+        }
+      },
+      "form": {
+        "title": "Створити правило ціноутворення",
+        "ruleType": "Тип правила",
+        "priority": "Пріоритет",
+        "priorityPlaceholder": "Вищий = застосовується першим",
+        "config": "Конфігурація (JSON)",
+        "submit": "Створити правило",
+        "cancel": "Скасувати"
+      },
+      "loading": "Завантаження правил...",
+      "empty": "Правил ціноутворення поки немає. Створіть правило, щоб увімкнути динамічне ціноутворення.",
+      "table": {
+        "type": "Тип",
+        "priority": "Пріоритет",
+        "config": "Конфігурація",
+        "status": "Статус",
+        "actions": "Дії"
+      },
+      "active": "Активне",
+      "inactive": "Неактивне",
+      "deleteAria": "Видалити правило ціноутворення",
+      "deleteConfirm": "Видалити це правило ціноутворення?",
+      "delete": "Видалити",
+      "errors": {
+        "invalidJson": "Поле конфігурації має містити коректний JSON."
+      },
+      "preview": {
+        "title": "Попередній перегляд ціни",
+        "description": "Введіть ID купона, щоб побачити, як активні правила вплинуть на його ціну.",
+        "voucherId": "ID купона",
+        "voucherIdPlaceholder": "Введіть ID купона",
+        "calculate": "Розрахувати",
+        "error": "Не вдалося розрахувати ціну",
+        "basePrice": "Базова ціна",
+        "finalPrice": "Кінцева ціна"
+      }
+    },
+    "rentals": {
+      "title": "Бронювання оренди",
+      "subtitle": "Керуйте запитами на оренду та поверненнями",
+      "status": {
+        "all": "Усі",
+        "pending": "Очікують",
+        "approved": "Схвалені",
+        "rejected": "Відхилені",
+        "paid": "Оплачені",
+        "active": "Активні",
+        "returned": "Повернені",
+        "cancelled": "Скасовані"
+      },
+      "empty": "Бронювань оренди не знайдено.",
+      "dates": "{start} – {end} ({days, plural, one {# день} few {# дні} many {# днів} other {# дня}})",
+      "total": "Разом: <strong>{total}</strong> ({rate}/день)",
+      "note": "Примітка: {note}",
+      "rejectedReason": "Відхилено: {reason}",
+      "bookedMeta": "Заброньовано: {date} | Користувач: {user}...",
+      "approve": "Схвалити",
+      "reasonPlaceholder": "Причина (необов’язково)",
+      "confirm": "Підтвердити",
+      "cancel": "Скасувати",
+      "reject": "Відхилити",
+      "markReturned": "Позначити як повернене"
+    },
+    "subscriptionBoxes": {
+      "title": "Бокси за підпискою",
+      "subtitle": "Керуйте регулярними боксами купонів",
+      "newBox": "+ Новий бокс",
+      "cancel": "Скасувати",
+      "form": {
+        "name": "Назва",
+        "description": "Опис",
+        "price": "Ціна ({currency})",
+        "currency": "Валюта",
+        "interval": "Періодичність",
+        "maxItems": "Макс. позицій",
+        "creating": "Створення...",
+        "submit": "Створити бокс"
+      },
+      "interval": {
+        "weekly": "Щотижня",
+        "monthly": "Щомісяця",
+        "quarterly": "Щокварталу"
+      },
+      "created": "Бокс за підпискою створено.",
+      "empty": "Боксів за підпискою поки немає. Створіть перший.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# підписник} few {# підписники} many {# підписників} other {# підписника}}",
+      "items": "{count, plural, one {# позиція} few {# позиції} many {# позицій} other {# позиції}}",
+      "errors": {
+        "priceAboveZero": "Введіть ціну більше 0.",
+        "createFailed": "Не вдалося створити бокс за підпискою (помилка {status}).",
+        "network": "Не вдалося створити бокс за підпискою. Перевірте з’єднання та спробуйте ще раз."
+      },
+      "intervalUnit": {
+        "weekly": "тиждень",
+        "monthly": "місяць",
+        "quarterly": "квартал"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Вебсайт",
+      "supportEmail": "Email підтримки",
+      "logoUrl": "URL логотипа",
+      "primaryColor": "Основний колір",
+      "secondaryColor": "Додатковий колір",
+      "backgroundColor": "Колір фону",
+      "primaryColorHex": "HEX-значення основного кольору",
+      "secondaryColorHex": "HEX-значення додаткового кольору",
+      "backgroundColorHex": "HEX-значення кольору фону",
+      "saving": "Збереження..."
+    },
+    "page": {
+      "metaTitle": "Налаштування продавця",
+      "infoTitle": "Інформація про продавця",
+      "infoSubtitle": "Основні дані продавця",
+      "name": "Назва",
+      "slug": "Slug",
+      "country": "Країна",
+      "defaultCurrency": "Валюта за замовчуванням",
+      "website": "Вебсайт",
+      "supportEmail": "Email підтримки",
+      "completeOnboarding": "Завершити налаштування",
+      "billingTitle": "Оплата",
+      "billingSubtitle": "14 днів безкоштовно, далі тарифи від €19/місяць. 5% комісії з продажу купонів.",
+      "status": "Статус",
+      "trialStatus": "Безкоштовний пробний період — {days, plural, one {залишився # день} few {залишилося # дні} many {залишилося # днів} other {залишилося # дня}}",
+      "statusActive": "Активний",
+      "statusInactive": "Неактивний",
+      "currentPlan": "Поточний тариф",
+      "trialEnds": "Пробний період завершується",
+      "periodEnds": "Поточний період завершується",
+      "manage": "Керувати",
+      "payoutsTitle": "Виплати",
+      "payoutsEnabled": "Обліковий запис Stripe підключено й активовано",
+      "payoutsInProgress": "Налаштування триває — завершіть його, щоб увімкнути виплати",
+      "payoutsNotConnected": "Підключіть Stripe, щоб отримувати виплати за продаж купонів",
+      "webhooksTitle": "Вебхуки",
+      "webhooksSubtitle": "Отримуйте сповіщення про події в реальному часі через HTTP",
+      "notificationsTitle": "Сповіщення",
+      "notificationsSubtitle": "Виберіть, які категорії листів ви отримуєте як учасник команди."
+    },
+    "brandProfile": {
+      "title": "Профіль бренду",
+      "subtitle": "Налаштуйте кольори бренду, логотип і контактні дані.",
+      "updated": "Профіль бренду оновлено!",
+      "updateFailed": "Не вдалося оновити профіль бренду",
+      "save": "Зберегти зміни"
+    },
+    "domains": {
+      "title": "Власні домени",
+      "subtitle": "Підключіть власний домен і підтвердьте його для маршрутизації.",
+      "inputLabel": "Власний домен",
+      "adding": "Додавання...",
+      "add": "Додати домен",
+      "empty": "Доменів не налаштовано.",
+      "statusLine": "Статус: {status}",
+      "statusValue": {
+        "pending": "очікує",
+        "verified": "підтверджено"
+      },
+      "verify": "Підтвердити",
+      "remove": "Видалити",
+      "addedTitle": "Домен додано",
+      "addedDescription": "Перевірте DNS, перш ніж перемикати трафік.",
+      "addErrorTitle": "Помилка домену",
+      "addErrorDescription": "Не вдалося додати домен.",
+      "verifiedTitle": "Домен підтверджено",
+      "verifiedDescription": "Маршрутизацію активовано.",
+      "verifyErrorTitle": "Помилка підтвердження",
+      "verifyErrorDescription": "Не вдалося підтвердити домен.",
+      "removedTitle": "Домен видалено",
+      "removeErrorTitle": "Помилка видалення",
+      "removeErrorDescription": "Не вдалося видалити домен."
+    },
+    "notifications": {
+      "metaTitle": "Налаштування сповіщень",
+      "title": "Налаштування сповіщень",
+      "intro": "Керуйте тим, які категорії листів надходять вам як учаснику <name>{merchantName}</name>. Налаштування персональні — кожен учасник команди керує своїми.",
+      "required": "Обов’язково",
+      "toggle": "Перемкнути: {label}",
+      "unsaved": "Незбережені зміни",
+      "allSaved": "Усі зміни збережено",
+      "saving": "Збереження…",
+      "save": "Зберегти налаштування",
+      "savedTitle": "Налаштування збережено",
+      "saveFailedTitle": "Не вдалося зберегти",
+      "saveFailedDescription": "Не вдалося оновити налаштування сповіщень.",
+      "category": {
+        "orders": {
+          "label": "Нові замовлення та погашення",
+          "description": "Лист, коли купон куплено, погашено або подаровано."
+        },
+        "payouts": {
+          "label": "Виплати",
+          "description": "Надходження, збої та утримання виплат Stripe."
+        },
+        "fraud_alerts": {
+          "label": "Сповіщення про шахрайство та безпеку",
+          "description": "Незвичні погашення, чарджбеки, підозрілі входи команди. Вимкнути не можна."
+        },
+        "campaign_updates": {
+          "label": "Життєвий цикл кампаній",
+          "description": "Кампанію опубліковано, спливає через 7 днів, завершено."
+        },
+        "weekly_digest": {
+          "label": "Щотижневий звіт про результати",
+          "description": "Понеділковий підсумок доходу, погашень і топ купонів за минулий тиждень."
+        },
+        "product_updates": {
+          "label": "Новини продукту від GiftHub",
+          "description": "Нові функції, плани розвитку, корисні поради. Не частіше 1 разу на місяць."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Виплати продавця",
+      "title": "Виплати",
+      "intro": "Підключіть обліковий запис Stripe, щоб кошти від продажу купонів надходили прямо на ваш банківський рахунок. Ми утримуємо 5% комісії платформи; решта автоматично переказується на ваш підключений обліковий запис під час оплати.",
+      "stripeAccount": "Обліковий запис Stripe",
+      "capabilityState": "Стан можливостей",
+      "accountStatus": {
+        "pending": "очікує",
+        "restricted": "обмежено",
+        "enabled": "увімкнено",
+        "disabled": "вимкнено"
+      },
+      "backToSettings": "Назад до налаштувань",
+      "howTitle": "Як працюють виплати",
+      "how1": "Клієнти платять через оплату на платформі. Ми отримуємо повну суму, і вона зберігається на боці Stripe.",
+      "how2": "Після успішного платежу Stripe надсилає ціну продажу мінус нашу комісію 5% прямо на ваш обліковий запис для виплат.",
+      "how3": "Потім Stripe переказує ці кошти на ваш банківський рахунок за графіком, вибраним у налаштуваннях виплат Stripe (зазвичай щодня, через кілька днів після продажу).",
+      "how4": "Чарджбеки та повернення коштів вираховуються з наступної виплати; у разі виявлення шахрайства адміністратори можуть вручну заблокувати ваш баланс.",
+      "badge": {
+        "enabled": {
+          "label": "Виплати увімкнено",
+          "description": "Кошти від продажу купонів Stripe переказує на ваш банківський рахунок за графіком виплат."
+        },
+        "restricted": {
+          "label": "Потрібна додаткова інформація",
+          "description": "Stripe потребує більше інформації, перш ніж увімкнути виплати. Відкрийте посилання на налаштування нижче, щоб продовжити."
+        },
+        "disabled": {
+          "label": "Виплати вимкнено",
+          "description": "Stripe вимкнув виплати для цього облікового запису. Відкрийте панель Stripe, щоб виконати невиконані вимоги."
+        },
+        "notConnected": {
+          "label": "Не підключено",
+          "description": "Ви ще не підключили обліковий запис Stripe. Виплати утримуються до завершення налаштування — тим часом продажі купонів обробляються, але кошти лишаються на балансі платформи."
+        }
+      },
+      "actions": {
+        "startFailed": "Не вдалося розпочати налаштування Stripe",
+        "startNetworkError": "Помилка мережі під час запуску налаштування",
+        "dashboardFailed": "Не вдалося відкрити панель Stripe",
+        "dashboardNetworkError": "Помилка мережі під час відкриття панелі",
+        "disconnectConfirm": "Відключити цей обліковий запис Stripe? Виплати буде призупинено, доки ви не підключите його знову.",
+        "disconnected": "Обліковий запис Stripe відключено",
+        "disconnectFailed": "Не вдалося відключити",
+        "disconnect": "Відключити",
+        "setUp": "Налаштувати виплати через Stripe",
+        "openDashboard": "Відкрити панель Stripe",
+        "continueOnboarding": "Продовжити налаштування"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Не вдалося завантажити дані продавця.",
+      "retry": "Повторити",
+      "loading": "Завантаження...",
+      "title": "Заповніть профіль",
+      "subtitle": "Налаштуйте профіль бренду продавця.",
+      "basicInfo": "Основна інформація",
+      "merchantName": "Назва продавця *",
+      "brandTitle": "Профіль бренду",
+      "brandSubtitle": "Налаштуйте кольори бренду та логотип.",
+      "updateFailed": "Не вдалося оновити продавця",
+      "submit": "Завершити налаштування",
+      "skip": "Пропустити поки що"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Журнал аудиту",
+      "subtitle": "Відстежуйте всі дії в обліковому записі продавця",
+      "filters": "Фільтри",
+      "action": "Дія",
+      "allActions": "Усі дії",
+      "fromDate": "Дата від",
+      "toDate": "Дата до",
+      "apply": "Застосувати",
+      "clear": "Очистити",
+      "loading": "Завантаження журналу аудиту...",
+      "loadFailed": "Не вдалося завантажити журнал аудиту",
+      "empty": "Записів у журналі аудиту не знайдено.",
+      "columns": {
+        "timestamp": "Час",
+        "actor": "Виконавець",
+        "action": "Дія",
+        "resource": "Ресурс",
+        "details": "Деталі"
+      },
+      "unknownActor": "Невідомо",
+      "showing": "Показано {from}–{to} з {total}",
+      "pageOf": "Сторінка {page} з {totalPages}",
+      "previousPage": "Попередня сторінка",
+      "nextPage": "Наступна сторінка",
+      "actions": {
+        "voucherCreated": "Купон створено",
+        "voucherUpdated": "Купон оновлено",
+        "voucherPublished": "Купон опубліковано",
+        "vouchersGenerated": "Купони згенеровано",
+        "campaignCreated": "Кампанію створено",
+        "campaignUpdated": "Кампанію оновлено",
+        "memberInvited": "Учасника команди запрошено",
+        "memberRemoved": "Учасника команди видалено",
+        "memberRoleChanged": "Роль учасника команди змінено",
+        "apiKeyCreated": "API-ключ створено",
+        "apiKeyRevoked": "API-ключ відкликано",
+        "apiKeyUpdated": "API-ключ оновлено",
+        "eventCreated": "Подію створено",
+        "eventUpdated": "Подію оновлено",
+        "eventPublished": "Подію опубліковано",
+        "merchantUpdated": "Продавця оновлено",
+        "reviewReplied": "Відповідь на відгук",
+        "settingsUpdate": "Зміна налаштувань",
+        "settingsView": "Перегляд налаштувань",
+        "ticketRedeemed": "Квиток погашено"
+      },
+      "resources": {
+        "voucher": "Купон",
+        "campaign": "Кампанія",
+        "giftCard": "Подарункова картка",
+        "event": "Подія",
+        "member": "Учасник",
+        "teamMember": "Учасник команди",
+        "apiKey": "API-ключ",
+        "webhook": "Вебхук",
+        "merchant": "Продавець",
+        "user": "Користувач",
+        "review": "Відгук"
+      }
+    },
+    "roles": {
+      "admin": "Адміністратор",
+      "adminDescription": "Повний доступ — керування купонами, кампаніями, учасниками та налаштуваннями",
+      "staff": "Персонал",
+      "staffDescription": "Операційний доступ — підтвердження погашень і перегляд даних",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Учасники команди",
+      "subtitle": "Керуйте командою та рівнями доступу",
+      "inviteMember": "Запросити учасника",
+      "inviteTitle": "Запросити учасника команди",
+      "emailAddress": "Адреса email",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "Користувач повинен мати обліковий запис.",
+      "role": "Роль",
+      "inviting": "Запрошення...",
+      "sendInvitation": "Надіслати запрошення",
+      "cancel": "Скасувати",
+      "save": "Зберегти",
+      "loading": "Завантаження учасників команди...",
+      "loadFailed": "Не вдалося завантажити учасників команди",
+      "empty": "Учасників команди поки немає. Запросіть першого вище.",
+      "columns": {
+        "member": "Учасник",
+        "role": "Роль",
+        "joined": "Приєднався",
+        "actions": "Дії"
+      },
+      "unnamed": "Без імені",
+      "memberRole": "Роль учасника",
+      "changeRole": "Змінити роль",
+      "removeMember": "Видалити учасника",
+      "inviteFailed": "Не вдалося запросити учасника",
+      "invited": "Учасника запрошено",
+      "updateRoleFailed": "Не вдалося оновити роль",
+      "roleUpdated": "Роль оновлено",
+      "removeConfirm": "Видалити {name} з команди?",
+      "remove": "Видалити",
+      "removeFailed": "Не вдалося видалити учасника",
+      "removed": "Учасника видалено"
+    },
+    "inviteForm": {
+      "title": "Запросити учасника команди",
+      "subtitle": "Додайте учасника команди за адресою email.",
+      "email": "Email",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "Користувач повинен мати обліковий запис. Якщо його немає, спершу потрібно зареєструватися.",
+      "role": "Роль",
+      "roleHint": "Адміністратори можуть керувати купонами, кампаніями та учасниками команди. Персонал може підтверджувати погашення.",
+      "inviting": "Запрошення...",
+      "submit": "Запросити учасника",
+      "redirectingToBilling": "{message} Переспрямування до оплати..."
+    },
+    "referrals": {
+      "title": "Аналітика рекомендацій",
+      "subtitle": "Відстежуйте ефективність рекомендацій і винагороди.",
+      "stats": {
+        "total": "Усього рекомендацій",
+        "totalHint": "Усі відстежені рекомендації",
+        "opened": "Відкрито",
+        "openedHint": "Переглянуто або погашено",
+        "redeemed": "Погашено",
+        "redeemedHint": "Конвертовані рекомендації",
+        "conversionRate": "Конверсія",
+        "conversionRateHint": "Погашено / усього"
+      },
+      "statusBreakdown": "Розподіл за статусами",
+      "creditsIssued": "Видано кредитів: {amount}",
+      "noActivity": "Активності рекомендацій поки немає.",
+      "topReferrers": "Топ рефери",
+      "topReferrersHint": "Користувачі з найбільшою кількістю рекомендацій.",
+      "noReferrals": "Рекомендацій поки немає.",
+      "unknownUser": "Невідомий користувач",
+      "referralCount": "{count, plural, one {# рекомендація} few {# рекомендації} many {# рекомендацій} other {# рекомендації}}",
+      "recent": "Останні рекомендації",
+      "recentHint": "Найновіші рекомендації від клієнтів.",
+      "noRecent": "Нещодавніх рекомендацій немає.",
+      "voucherFallback": "Купон",
+      "status": {
+        "created": "Створено",
+        "opened": "Відкрито",
+        "redeemed": "Погашено",
+        "expired": "Прострочено",
+        "blocked": "Заблоковано"
+      }
+    },
+    "emailCampaigns": {
+      "title": "Email-кампанії",
+      "newCampaign": "Нова кампанія",
+      "notConfigured": "Надсилання email на цій платформі ще не налаштовано. Ви можете створювати й переглядати кампанії, але надіслати їх можна буде лише після підключення поштового провайдера.",
+      "notConfiguredShort": "Надсилання email на цій платформі ще не налаштовано",
+      "createTitle": "Створити кампанію",
+      "campaignName": "Назва кампанії",
+      "campaignNamePlaceholder": "Літній розпродаж — розсилка",
+      "subjectLine": "Тема листа",
+      "subjectPlaceholder": "Не пропустіть наші літні пропозиції!",
+      "recipients": "Одержувачі",
+      "recipientFilter": {
+        "all": "Усі клієнти",
+        "redeemed30d": "Погашали за останні 30 днів",
+        "inactive": "Неактивні клієнти"
+      },
+      "schedule": "Розклад (необов’язково)",
+      "emailSections": "Блоки листа",
+      "sectionTypes": {
+        "header": "Заголовок",
+        "text": "Текст",
+        "image": "Зображення",
+        "button": "Кнопка",
+        "divider": "Роздільник",
+        "voucherCard": "Купон"
+      },
+      "creating": "Створення...",
+      "scheduleCampaign": "Запланувати кампанію",
+      "saveDraft": "Зберегти як чернетку",
+      "preview": "Попередній перегляд",
+      "editor": {
+        "moveUp": "Вгору",
+        "moveDown": "Вниз",
+        "removeSection": "Видалити блок",
+        "title": "Заголовок",
+        "subtitle": "Підзаголовок (необов’язково)",
+        "textContent": "Введіть текст...",
+        "imageUrl": "URL зображення",
+        "altText": "Alt-текст",
+        "buttonLabel": "Текст кнопки",
+        "buttonUrl": "URL кнопки",
+        "dividerHint": "Горизонтальна лінія-роздільник",
+        "voucherTitle": "Заголовок купона",
+        "voucherValue": "Вартість (напр. -20%)",
+        "voucherCode": "Код (напр. SAVE20)",
+        "voucherExpiry": "Термін дії (напр. 31 груд. 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Заголовок шапки",
+        "textContent": "Текст...",
+        "imagePlaceholder": "Місце для зображення",
+        "button": "Кнопка",
+        "voucher": "Купон",
+        "validUntil": "Дійсний до {date}"
+      },
+      "loading": "Завантаження...",
+      "empty": "Email-кампаній поки немає",
+      "columns": {
+        "name": "Назва",
+        "subject": "Тема",
+        "status": "Статус",
+        "recipients": "Одержувачі",
+        "opens": "Відкриття",
+        "created": "Створено",
+        "actions": "Дії"
+      },
+      "status": {
+        "draft": "чернетка",
+        "scheduled": "заплановано",
+        "sent": "надіслано"
+      },
+      "send": "Надіслати",
+      "delete": "Видалити",
+      "deleteCampaign": "Видалити кампанію",
+      "toasts": {
+        "missingFields": "Не заповнено поля",
+        "missingFieldsDescription": "Назва й тема обов’язкові.",
+        "created": "Кампанію створено",
+        "error": "Помилка",
+        "createFailed": "Не вдалося створити кампанію.",
+        "sendConfirm": "Надіслати цю кампанію зараз?",
+        "sendFailedStatus": "Не вдалося надіслати (помилка {status}).",
+        "partlySent": "Кампанію надіслано частково",
+        "partlySentDescription": "Надіслано {sent} з {total} одержувачів. Не вдалося надіслати {failed, plural, one {# лист} few {# листи} many {# листів} other {# листа}}.",
+        "sent": "Кампанію надіслано",
+        "sentDescription": "Надіслано {sent, plural, one {# одержувачу} few {# одержувачам} many {# одержувачам} other {# одержувача}}.",
+        "sendFailed": "Помилка надсилання",
+        "deleteConfirm": "Видалити цю кампанію?",
+        "deleted": "Кампанію видалено",
+        "deleteFailed": "Не вдалося видалити."
+      }
+    },
+    "apiKeys": {
+      "title": "API-ключі",
+      "subtitle": "Керуйте API-ключами для програмного доступу до даних продавця",
+      "createKey": "Створити ключ",
+      "createdNotice": "API-ключ створено! Скопіюйте його зараз — більше він не відображатиметься.",
+      "copyKey": "Копіювати ключ",
+      "createTitle": "Створити API-ключ",
+      "keyName": "Назва ключа",
+      "keyNamePlaceholder": "напр., Інтеграція POS (продакшн)",
+      "permissions": "Дозволи",
+      "creating": "Створення...",
+      "submit": "Створити API-ключ",
+      "cancel": "Скасувати",
+      "loading": "Завантаження API-ключів...",
+      "empty": "API-ключів поки немає. Створіть ключ, щоб почати.",
+      "createdOn": "Створено {date}",
+      "lastUsed": "Востаннє використано {date}",
+      "expires": "Спливає {date}",
+      "revokeKey": "Відкликати ключ",
+      "loadFailed": "Не вдалося завантажити API-ключі",
+      "required": "Потрібні назва та принаймні один дозвіл",
+      "createFailed": "Не вдалося створити API-ключ",
+      "created": "API-ключ створено",
+      "revokeConfirm": "Відкликати API-ключ «{name}»? Цю дію не можна скасувати.",
+      "revoke": "Відкликати",
+      "revoked": "API-ключ відкликано",
+      "revokeFailed": "Не вдалося відкликати API-ключ",
+      "copied": "Скопійовано в буфер обміну",
+      "groups": {
+        "vouchers": "Купони",
+        "campaigns": "Кампанії",
+        "giftCards": "Подарункові картки",
+        "customers": "Клієнти",
+        "analytics": "Аналітика",
+        "events": "Події"
+      },
+      "permissionLabels": {
+        "voucherRead": "Читання купонів",
+        "voucherCreate": "Створення купонів",
+        "voucherRedeem": "Погашення купонів",
+        "campaignRead": "Читання кампаній",
+        "campaignCreate": "Створення кампаній",
+        "giftCardRead": "Читання подарункових карток",
+        "giftCardRedeem": "Погашення подарункових карток",
+        "customerRead": "Читання клієнтів",
+        "analyticsRead": "Читання аналітики",
+        "eventRead": "Читання подій",
+        "eventCheckin": "Реєстрація на подіях"
+      }
+    },
+    "webhooks": {
+      "title": "Вебхуки",
+      "subtitle": "Отримуйте сповіщення про події через HTTP",
+      "addWebhook": "Додати вебхук",
+      "secretNotice": "Секрет вебхука (показується лише раз):",
+      "copySecret": "Копіювати секрет",
+      "copied": "Скопійовано!",
+      "newTitle": "Новий вебхук",
+      "endpointUrl": "URL кінцевої точки",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Події",
+      "submit": "Створити вебхук",
+      "loading": "Завантаження...",
+      "empty": "Вебхуків не налаштовано",
+      "createdOn": "Створено {date}",
+      "deliveriesCount": "{count, plural, one {# доставка} few {# доставки} many {# доставок} other {# доставки}}",
+      "sendTest": "Надіслати тест",
+      "viewDeliveries": "Журнал доставок",
+      "disable": "Вимкнути",
+      "enable": "Увімкнути",
+      "deleteWebhook": "Видалити вебхук",
+      "deliveryLog": "Журнал доставок",
+      "noDeliveries": "Доставок поки немає",
+      "deliveryFailed": "Невдало",
+      "attempts": "{count, plural, one {# спроба} few {# спроби} many {# спроб} other {# спроби}}",
+      "loadFailed": "Не вдалося завантажити вебхуки",
+      "required": "Потрібні URL і принаймні одна подія",
+      "created": "Вебхук створено",
+      "createFailed": "Не вдалося створити вебхук",
+      "deleted": "Вебхук видалено",
+      "deleteFailed": "Не вдалося видалити вебхук",
+      "updateFailed": "Не вдалося оновити вебхук",
+      "testDelivered": "Тест доставлено! Статус: {status}",
+      "testFailed": "Тест не вдався: {error}",
+      "statusCode": "Статус {status}",
+      "testSendFailed": "Не вдалося надіслати тестовий вебхук",
+      "loadDeliveriesFailed": "Не вдалося завантажити доставки"
+    }
   }
 }

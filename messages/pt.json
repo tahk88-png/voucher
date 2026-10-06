@@ -2602,5 +2602,2656 @@
       "downloading": "A transferir...",
       "download": "Transferir QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Gira as suas campanhas de vales.",
+      "createCampaign": "Criar campanha",
+      "subscriptionRequired": "Subscrição necessária",
+      "trialEnded": "A sua avaliação gratuita de campanhas de 60 dias terminou. Ative o plano de 9,90/mês para criar novas campanhas.",
+      "stats": {
+        "totalTitle": "Total de campanhas",
+        "totalDescription": "Todas as campanhas",
+        "activeTitle": "Ativas",
+        "activeDescription": "Em curso",
+        "paidTitle": "Compras pagas",
+        "paidDescription": "Pedidos concluídos",
+        "revenueTitle": "Receita",
+        "revenueDescription": "Vendas pagas de vales"
+      },
+      "weeklyRevenue": {
+        "title": "Receita semanal",
+        "description": "Vendas pagas de campanhas nos últimos 7 dias.",
+        "series": "Receita"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Ainda sem campanhas",
+        "descriptionCanCreate": "Crie uma campanha para organizar e gerir os seus vales.",
+        "descriptionNeedsSubscription": "Ative uma subscrição para criar novas campanhas.",
+        "action": "Crie a sua primeira campanha"
+      },
+      "searchPlaceholder": "Pesquisar campanhas...",
+      "searchLabel": "Pesquisar campanhas",
+      "filterAll": "Todas",
+      "status": {
+        "active": "Ativa",
+        "draft": "Rascunho",
+        "ended": "Terminada",
+        "paused": "Em pausa"
+      },
+      "noMatches": "Nenhuma campanha corresponde aos filtros.",
+      "clearFilters": "Limpar filtros",
+      "type": {
+        "weekly": "Campanha semanal",
+        "limited": "Campanha limitada",
+        "other": "Campanha {type}"
+      },
+      "runs": "Decorre de {start} a {end}",
+      "view": "Ver",
+      "stats": {
+        "vouchers": "Vales",
+        "paidPurchases": "Compras pagas",
+        "revenue": "Receita",
+        "price": "Preço"
+      },
+      "free": "Grátis"
+    },
+    "new": {
+      "iconLetter": "C",
+      "draftNotice": "As novas campanhas começam como rascunho. Os clientes só as veem depois de as publicar na página da campanha."
+    },
+    "edit": {
+      "breadcrumb": "Editar",
+      "title": "Editar campanha"
+    },
+    "form": {
+      "basicInfo": "Informações básicas",
+      "nameLabel": "Nome da campanha *",
+      "namePlaceholder": "Especial de festas",
+      "descriptionLabel": "Descrição",
+      "descriptionPlaceholder": "Promoção por tempo limitado",
+      "typeLabel": "Tipo *",
+      "typeOptions": {
+        "limited": "Única (limitada)",
+        "weekly": "Semanal"
+      },
+      "dates": "Datas",
+      "startDate": "Data de início *",
+      "endDate": "Data de fim *",
+      "timezoneHint": "As horas estão no seu fuso horário local.",
+      "pricing": "Preço e limites",
+      "priceLabel": "Preço em {currency} (deixe vazio para vales gratuitos)",
+      "pricePreview": "Os clientes pagam {price}.",
+      "priceHint": "Introduza o valor em {currency}, p. ex. 4.50 ou 4,50 para {example}.",
+      "maxRedemptions": "Máx. de resgates",
+      "maxPurchases": "Máx. de compras",
+      "unlimited": "Ilimitado",
+      "creditLabel": "Crédito do referenciador (%)",
+      "creditPreview": "Os referenciadores ganham {percent}% do preço de compra em crédito.",
+      "creditHint": "Percentagem do preço de compra atribuída ao referenciador como crédito, p. ex. 5 ou 2,5.",
+      "termsSection": "Termos e condições",
+      "termsLabel": "Termos",
+      "termsPlaceholder": "Termos e condições desta campanha...",
+      "saving": "A guardar...",
+      "saveChanges": "Guardar alterações",
+      "creating": "A criar...",
+      "create": "Criar campanha",
+      "saved": "Alterações à campanha guardadas.",
+      "errors": {
+        "invalidDates": "Introduza uma data de início e de fim válidas.",
+        "endBeforeStart": "A data de fim tem de ser posterior à data de início.",
+        "maxRedemptions": "O máximo de resgates tem de ser um número inteiro igual ou superior a 1.",
+        "maxPurchases": "O máximo de compras tem de ser um número inteiro igual ou superior a 1.",
+        "saveFailed": "Falha ao guardar a campanha"
+      },
+      "priceErrors": {
+        "negative": "O preço não pode ser negativo.",
+        "invalid": "O preço não é um número válido.",
+        "wholeNumber": "O preço tem de ser um número inteiro.",
+        "decimals": "O preço pode ter no máximo {decimals} casas decimais.",
+        "tooLarge": "O preço é demasiado elevado."
+      },
+      "creditErrors": {
+        "negative": "O crédito do referenciador não pode ser negativo.",
+        "invalid": "O crédito do referenciador não é um número válido.",
+        "decimals": "O crédito do referenciador pode ter no máximo {decimals} casas decimais.",
+        "tooLarge": "O crédito do referenciador é demasiado elevado.",
+        "tooHigh": "O crédito do referenciador não pode exceder 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "Sem descrição",
+      "draftNotice": "Esta campanha é um rascunho, pelo que os clientes ainda não a veem.",
+      "draftNoticeAdmin": "Esta campanha é um rascunho, pelo que os clientes ainda não a veem. Publique-a quando estiver pronto.",
+      "status": "Estado",
+      "type": "Tipo",
+      "price": "Preço",
+      "referrerCredit": "Crédito do referenciador",
+      "none": "Nenhum",
+      "stats": {
+        "vouchers": "Vales",
+        "totalPurchases": "Total de compras",
+        "paidPurchases": "Compras pagas"
+      },
+      "terms": "Termos e condições",
+      "promotion": {
+        "title": "Promoção",
+        "description": "Visibilidade paga na newsletter semanal e nas notificações."
+      },
+      "vouchers": {
+        "title": "Vales",
+        "description": "Vales gerados a partir desta campanha.",
+        "empty": "Ainda não foram gerados vales.",
+        "view": "Ver"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Incluir na newsletter semanal (pago)",
+      "notification": "Destacar nas notificações (pago)",
+      "endDate": "Data de fim da promoção",
+      "saving": "A guardar...",
+      "save": "Guardar definições de promoção",
+      "saved": "Definições de promoção guardadas.",
+      "upgradeNeededTitle": "Necessário mudar de plano",
+      "upgradeNeeded": "Os destaques promocionais fazem parte de um plano superior. Mude de plano em Definições e faturação para os usar.",
+      "saveFailedStatus": "Não foi possível guardar as definições de promoção (erro {status}).",
+      "saveFailedNetwork": "Não foi possível guardar as definições de promoção. Verifique a ligação e tente novamente."
+    },
+    "actions": {
+      "adminOnly": "Apenas os administradores do comerciante podem publicar, pausar ou editar campanhas.",
+      "edit": "Editar",
+      "publish": {
+        "label": "Publicar",
+        "title": "Publicar esta campanha?",
+        "description": "Os clientes poderão ver e comprar vales desta campanha de imediato.",
+        "success": "Campanha publicada. Já está disponível para os clientes."
+      },
+      "pause": {
+        "label": "Pausar",
+        "title": "Pausar esta campanha?",
+        "description": "A campanha volta a rascunho e fica oculta para os clientes até a publicar novamente. Os vales já vendidos continuam válidos.",
+        "success": "Campanha pausada. Está oculta para os clientes."
+      },
+      "end": {
+        "label": "Terminar campanha",
+        "title": "Terminar esta campanha agora?",
+        "description": "A campanha termina imediatamente e não pode voltar a ser publicada. Os vales já vendidos continuam válidos.",
+        "success": "Campanha terminada."
+      },
+      "updateFailedStatus": "Não foi possível atualizar a campanha (erro {status}).",
+      "updateFailed": "Não foi possível atualizar a campanha."
+    },
+    "generate": {
+      "open": "Gerar vales",
+      "title": "Gerar vales",
+      "descriptionPriced": "Cria vales em rascunho com {value} de desconto, válidos de {start} a {end}. Cada vale recebe o seu próprio código. Ficam ocultos até os publicar.",
+      "descriptionFree": "Esta campanha é gratuita, pelo que não há valor a atribuir aos vales. Defina primeiro um preço na campanha.",
+      "countLabel": "Número de vales (1-100)",
+      "generating": "A gerar...",
+      "submit": "Gerar",
+      "invalidCount": "Introduza um número inteiro entre 1 e 100",
+      "needsPrice": "Defina primeiro um preço nesta campanha. Os vales gerados valem o preço da campanha.",
+      "failed": "Falha ao gerar vales",
+      "success": "{count, plural, one {Foi gerado # vale em rascunho. Publique-o} other {Foram gerados # vales em rascunho. Publique-os}} na página de vales quando estiver pronto."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Campanhas ativas",
+      "statLiveVouchers": "Vales ativos",
+      "statRedemptions30d": "Resgates (30 dias)"
+    },
+    "error": {
+      "title": "Algo correu mal",
+      "description": "Ocorreu um erro no painel do comerciante.",
+      "tryAgain": "Tentar novamente",
+      "backToMerchants": "Voltar aos comerciantes"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Visão geral",
+        "offers": "Ofertas",
+        "inStore": "Na loja",
+        "customers": "Clientes",
+        "settings": "Definições"
+      },
+      "language": "Idioma",
+      "opensAppArea": "Abre a área da app",
+      "externalLinkTitle": "{label} (abre a área da app, fora deste comerciante)",
+      "opensOutside": "Abre fora da área do comerciante",
+      "merchantNavigation": "Comerciante",
+      "more": "Mais",
+      "navDashboard": "Painel"
+    },
+    "dashboard": {
+      "title": "Painel do comerciante",
+      "welcomeBack": "Bem-vindo de volta, {name}",
+      "viewCampaigns": "Ver campanhas",
+      "createVoucher": "Criar vale",
+      "performanceOverview": "Visão geral do desempenho",
+      "performanceOverviewHint": "Atividade das campanhas e resgates em tempo real.",
+      "revenueAndCredits": "Receita e créditos",
+      "revenueAndCreditsHint": "Vendas, créditos e responsabilidades pendentes.",
+      "performanceTrend": "Tendência de desempenho",
+      "performanceTrendHint": "Atividade de resgates e receita nos últimos {days} dias.",
+      "rangeShort": "{days} d",
+      "revenue": "Receita",
+      "chartRedemptions": "Resgates",
+      "chartRevenue": "Receita ({currency})",
+      "paidOrders": "Pedidos pagos",
+      "openOrdersView": "Abrir vista de pedidos",
+      "avgOrder": "Pedido médio",
+      "openCampaignRevenue": "Abrir receita das campanhas",
+      "redemptionRate": "Taxa de resgate",
+      "openRedemptionQueue": "Abrir fila de resgates",
+      "pendingConfirmation": "{count} por confirmar",
+      "pendingConfirmationHint": "Resgates na loja a aguardar a sua aprovação.",
+      "viewRedemptions": "Ver resgates",
+      "actionCenter": "Centro de ações",
+      "actionCenterHint": "Itens prioritários a rever.",
+      "allCaughtUp": "Está tudo em dia.",
+      "open": "Abrir",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# resgate pendente} other {# resgates pendentes}}",
+        "pendingRedemptionsDetail": "Confirmar resgates na loja",
+        "expiringVouchers": "{count, plural, one {# vale a expirar em breve} other {# vales a expirar em breve}}",
+        "expiringVouchersDetail": "Rever as datas de validade dos vales",
+        "endingCampaigns": "{count, plural, one {# campanha termina esta semana} other {# campanhas terminam esta semana}}",
+        "endingCampaignsDetail": "Prolongue ou duplique as suas melhores campanhas",
+        "upcomingEvents": "{count, plural, one {# evento próximo} other {# eventos próximos}}",
+        "upcomingEventsDetail": "Prepare o check-in de bilhetes e a equipa"
+      },
+      "upcomingEventsTitle": "Próximos eventos",
+      "upcomingEventsHint": "Próximos eventos agendados.",
+      "noUpcomingEvents": "Sem eventos agendados.",
+      "eventStatus": {
+        "published": "publicado",
+        "soldOut": "esgotado"
+      },
+      "manageEvents": "Gerir eventos",
+      "topVouchers": "Vales principais",
+      "topVouchersHint": "Ofertas mais resgatadas.",
+      "noTopVouchers": "Ainda não foram resgatados vales. Os seus vales mais resgatados aparecerão aqui."
+    },
+    "stats": {
+      "activeVouchers": "Vales ativos",
+      "publishedVouchers": "Vales publicados",
+      "openVouchers": "Abrir vales",
+      "activeCampaigns": "Campanhas ativas",
+      "runningCampaigns": "Campanhas em curso",
+      "openCampaigns": "Abrir campanhas",
+      "activeEvents": "Eventos ativos",
+      "publishedEvents": "Eventos publicados",
+      "openEvents": "Abrir eventos",
+      "todaysRedemptions": "Resgates de hoje",
+      "thisWeek": "Esta semana: {count}",
+      "reviewRedemptions": "Rever resgates",
+      "ofWeekly": "do total semanal"
+    },
+    "revenue": {
+      "voucherRevenue": "Receita de vales",
+      "paidVoucherSales": "Vendas pagas de vales",
+      "openCampaignSales": "Abrir vendas das campanhas",
+      "ticketRevenue": "Receita de bilhetes",
+      "paidTicketSales": "Vendas pagas de bilhetes",
+      "openEventSales": "Abrir vendas dos eventos",
+      "creditsIssued": "Créditos emitidos",
+      "totalCreditsDistributed": "Total de créditos atribuídos",
+      "openReferralCredits": "Abrir créditos de referência",
+      "outstandingLiability": "Responsabilidade pendente",
+      "unredeemedValue": "Valor de vales não resgatados",
+      "openVoucherLiability": "Abrir responsabilidade de vales"
+    },
+    "recentActivity": {
+      "title": "Atividade recente",
+      "empty": "Sem atividade recente",
+      "unknownUser": "Utilizador desconhecido",
+      "redeemedVoucher": "Vale resgatado - {time}",
+      "confirmed": "Confirmado",
+      "pending": "Pendente"
+    },
+    "liveStats": {
+      "live": "Em direto",
+      "connecting": "A ligar…",
+      "redeemedToday": "<value>{count}</value> <label>resgatados hoje</label>",
+      "pending": "<value>{count}</value> <label>pendentes</label>"
+    },
+    "analytics": {
+      "metaTitle": "Análises",
+      "title": "Análises",
+      "subtitle": "Acompanhe o desempenho e a receita dos seus vales",
+      "totalRedemptions": "Total de resgates",
+      "confirmedRedemptions": "Resgates confirmados",
+      "totalDiscounts": "Total de descontos",
+      "givenToCustomers": "Concedidos aos clientes",
+      "creditsIssued": "Créditos emitidos",
+      "totalCreditsDistributed": "Total de créditos atribuídos",
+      "activeVouchers": "Vales ativos",
+      "withRedemptions": "Com resgates",
+      "charts": {
+        "redemptionTrends": "Tendência de resgates (últimos 30 dias)",
+        "redemptions": "Resgates",
+        "revenue": "Receita ({currency})",
+        "topPerforming": "Vales com melhor desempenho",
+        "noRedeemed": "Ainda não foi resgatado nenhum vale. Os seus vales com melhor desempenho aparecerão aqui.",
+        "byCategory": "Resgates por categoria",
+        "noCategoryData": "Sem dados por categoria"
+      }
+    },
+    "ask": {
+      "title": "Pergunte aos seus dados",
+      "subtitle": "Faça perguntas sobre os dados do seu negócio em linguagem natural",
+      "emptyTitle": "Pergunte o que quiser sobre os seus dados",
+      "emptyHint": "Experimente uma das sugestões abaixo",
+      "placeholder": "Faça uma pergunta sobre os seus dados...",
+      "suggestedTitle": "Perguntas sugeridas",
+      "suggestions": {
+        "revenueLastWeek": "Qual foi a minha receita na semana passada?",
+        "dailyRedemptionsThisMonth": "Mostrar os resgates diários deste mês",
+        "topVouchersByRevenue": "Vales com mais receita no mês passado",
+        "customersPurchasedLastWeek": "Quantos clientes compraram na semana passada?",
+        "referralConversionRate": "Qual é a minha taxa de conversão de referências?",
+        "dailyRevenueTrend": "Mostrar a tendência da receita diária deste mês",
+        "purchasesYesterday": "Quantas compras foram feitas ontem?",
+        "bestPerformingVouchers": "Quais são os meus vales com melhor desempenho?"
+      },
+      "errorFallback": "Lamentamos, não foi possível processar essa pergunta.",
+      "networkError": "Erro de rede. Tente novamente.",
+      "itemLabel": "Item {n}"
+    },
+    "reports": {
+      "title": "Relatórios financeiros",
+      "subtitle": "Visão geral e exportação da receita",
+      "downloadCsv": "Transferir CSV",
+      "from": "De",
+      "to": "Até",
+      "apply": "Aplicar",
+      "totalRevenue": "Receita total",
+      "platformFees": "Taxas da plataforma",
+      "netRevenue": "Receita líquida",
+      "redemptions": "Resgates",
+      "revenueByCurrency": "Receita por moeda",
+      "netAndFees": "Líquido: {net} • Taxas: {fees}",
+      "monthlyRevenue": "Receita mensal",
+      "noRevenue": "Sem dados de receita para este período.",
+      "month": "Mês",
+      "vouchers": "Vales",
+      "tickets": "Bilhetes",
+      "total": "Total"
+    },
+    "scheduled": {
+      "title": "Relatórios agendados",
+      "subtitle": "Configure relatórios automáticos por e-mail",
+      "backToReports": "← Relatórios financeiros",
+      "activeSchedules": "Agendamentos ativos",
+      "loading": "A carregar...",
+      "noSchedules": "Ainda sem agendamentos configurados",
+      "period": {
+        "daily": "Diário",
+        "weekly": "Semanal",
+        "monthly": "Mensal"
+      },
+      "reportTitle": {
+        "daily": "Relatório diário",
+        "weekly": "Relatório semanal",
+        "monthly": "Relatório mensal"
+      },
+      "recipientCount": "{count, plural, one {# destinatário} other {# destinatários}}",
+      "lastSent": "Último envio: {date}",
+      "nextRun": "Próximo: {date}",
+      "pause": "Pausar",
+      "resume": "Retomar",
+      "createSchedule": "Criar agendamento",
+      "frequency": "Frequência",
+      "recipients": "Destinatários",
+      "invalidEmail": "Endereço de e-mail inválido",
+      "emailAlreadyAdded": "E-mail já adicionado",
+      "addAtLeastOne": "Adicione pelo menos um destinatário",
+      "saved": "Agendamento do relatório guardado com sucesso",
+      "saveFailed": "Falha ao guardar o agendamento",
+      "save": "Guardar agendamento",
+      "previewTitle": "Pré-visualização do relatório",
+      "previewBody": "Os relatórios agendados incluem receita, número de resgates, vales principais e métricas de crescimento. São enviados como e-mails HTML bem formatados às 8:00 UTC.",
+      "everyMorning": "Todas as manhãs",
+      "everyMonday": "Todas as segundas-feiras",
+      "firstOfMonth": "Dia 1 de cada mês"
+    },
+    "billing": {
+      "subscribeTo": "Subscrever {plan}",
+      "startFailed": "Falha ao iniciar a subscrição",
+      "portalFailed": "Falha ao abrir o portal de faturação",
+      "manageBilling": "Gerir faturação",
+      "errorTitle": "Erro",
+      "close": "Fechar",
+      "usage": "<b>{current}</b> / {max} utilizados",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "campanhas criadas por ciclo",
+        "activeCampaigns": "campanhas ativas",
+        "voucherCreatesPerCycle": "vales criados por ciclo",
+        "teamMembers": "membros da equipa"
+      },
+      "currentPlanTrial": "Plano atual (avaliação gratuita)",
+      "planChangesUnavailable": "De momento, não é possível alterar o plano online.",
+      "paymentsNotSetUp": "Os pagamentos online ainda não estão configurados nesta plataforma, pelo que não é possível comprar ou alterar planos aqui. Contacte o suporte se quiser alterar o seu plano.",
+      "features": {
+        "starter": {
+          "vouchers": "500 vales/mês",
+          "campaigns": "3 campanhas ativas",
+          "teamMembers": "2 membros da equipa",
+          "qrRedemption": "Resgate por código QR",
+          "basicAnalytics": "Análises básicas"
+        },
+        "pro": {
+          "vouchers": "5000 vales/mês",
+          "campaigns": "25 campanhas ativas",
+          "teamMembers": "10 membros da equipa",
+          "advancedAnalytics": "Análises avançadas",
+          "customDomain": "Domínio personalizado",
+          "promoBoosts": "Destaques promocionais"
+        },
+        "scale": {
+          "vouchers": "Vales ilimitados",
+          "campaigns": "Campanhas ilimitadas",
+          "teamMembers": "Membros da equipa ilimitados",
+          "everythingInPro": "Tudo o que inclui o Pro",
+          "whiteLabel": "Pronto para marca branca",
+          "prioritySupport": "Suporte prioritário"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Proprietário",
+      "admin": "Administrador",
+      "finance": "Finanças",
+      "marketing": "Marketing",
+      "support": "Suporte",
+      "partner_cashier": "Caixa",
+      "auditor": "Auditor"
+    },
+    "orgs": {
+      "title": "Organizações B2B",
+      "subtitle": "Espaços de trabalho de empresas com campanhas, vales e pedidos.",
+      "loading": "A carregar organizações...",
+      "loadFailed": "Falha ao carregar as organizações",
+      "empty": "Nenhuma organização encontrada. Peça a um administrador que o convide.",
+      "open": "Abrir"
+    },
+    "workspace": {
+      "fallbackName": "Organização",
+      "subtitle": "Visão geral do espaço de trabalho B2B",
+      "reports": "Relatórios",
+      "audit": "Auditoria",
+      "partnerKeys": "Chaves de parceiro",
+      "backToOrgs": "Voltar às organizações",
+      "loading": "A carregar o espaço de trabalho...",
+      "errors": {
+        "loadOrg": "Falha ao carregar a organização",
+        "loadCampaigns": "Falha ao carregar as campanhas",
+        "loadVouchers": "Falha ao carregar os vales",
+        "loadOrders": "Falha ao carregar os pedidos",
+        "load": "Falha ao carregar",
+        "createCampaign": "Falha ao criar a campanha",
+        "issueVouchers": "Falha ao emitir os vales",
+        "updateCampaign": "Falha ao atualizar a campanha",
+        "activateCampaign": "Falha ao ativar a campanha",
+        "pauseCampaign": "Falha ao pausar a campanha",
+        "archiveCampaign": "Falha ao arquivar a campanha"
+      },
+      "stats": {
+        "campaigns": "Campanhas",
+        "vouchers": "Vales",
+        "orders": "Pedidos"
+      },
+      "create": {
+        "title": "Criar campanha",
+        "name": "Nome da campanha",
+        "value": "Valor (unidades menores)",
+        "currency": "Moeda",
+        "submit": "Criar"
+      },
+      "campaigns": {
+        "title": "Campanhas",
+        "empty": "Ainda sem campanhas.",
+        "name": "Nome",
+        "value": "Valor",
+        "activate": "Ativar",
+        "pause": "Pausar",
+        "resume": "Retomar",
+        "archive": "Arquivar",
+        "issue": "Emitir {count}"
+      },
+      "recentVouchers": "Vales recentes",
+      "noVouchers": "Nenhum vale emitido.",
+      "recentOrders": "Pedidos recentes",
+      "noOrders": "Ainda sem pedidos."
+    },
+    "audit": {
+      "title": "Registo de auditoria",
+      "subtitle": "Acompanhe o ciclo de vida e as alterações dos vales.",
+      "entityType": "Tipo de entidade (vale, campanha, pedido)",
+      "entityId": "ID da entidade",
+      "loading": "A carregar a auditoria...",
+      "loadFailed": "Falha ao carregar a auditoria",
+      "empty": "Sem eventos."
+    },
+    "billing": {
+      "metaTitle": "Faturação da organização",
+      "title": "Faturação e finanças",
+      "totalPaidOrders": "Total de pedidos pagos",
+      "totalRevenue": "Receita total",
+      "vatNumber": "Número de IVA",
+      "notSet": "Não definido",
+      "recentOrders": "Pedidos recentes",
+      "noOrders": "Ainda sem pedidos.",
+      "table": {
+        "date": "Data",
+        "qty": "Qtd.",
+        "total": "Total",
+        "status": "Estado",
+        "invoice": "Fatura"
+      }
+    },
+    "keys": {
+      "title": "Chaves API de parceiro",
+      "subtitle": "Use-as para a validação e o resgate de vales por parceiros.",
+      "label": "Etiqueta da chave (opcional)",
+      "create": "Criar chave",
+      "newKey": "Nova chave (copie agora)",
+      "loading": "A carregar chaves...",
+      "empty": "Ainda sem chaves.",
+      "untitled": "Chave sem nome",
+      "created": "Criada a {created}",
+      "createdAndLastUsed": "Criada a {created} • Última utilização a {lastUsed}",
+      "revoke": "Revogar",
+      "errors": {
+        "load": "Falha ao carregar as chaves",
+        "create": "Falha ao criar a chave",
+        "revoke": "Falha ao revogar a chave"
+      }
+    },
+    "members": {
+      "metaTitle": "Membros da organização",
+      "title": "Membros",
+      "count": "{count, plural, one {# membro} other {# membros}}",
+      "pendingInvitations": "Convites pendentes",
+      "expires": "Expira a {date}"
+    },
+    "invite": {
+      "title": "Convidar um membro",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "Administrador",
+        "finance": "Finanças",
+        "marketing": "Marketing",
+        "support": "Suporte",
+        "partner_cashier": "Caixa de parceiro",
+        "auditor": "Auditor"
+      },
+      "sending": "A enviar…",
+      "submit": "Enviar convite",
+      "sent": "Convite enviado para {email}.",
+      "failed": "Não foi possível enviar o convite. Verifique o e-mail e tente novamente.",
+      "error": "Algo correu mal. Tente novamente."
+    },
+    "reports": {
+      "title": "Relatórios",
+      "subtitle": "Relatórios de resgates e vales",
+      "backToWorkspace": "Voltar ao espaço de trabalho",
+      "loadFailed": "Falha ao carregar",
+      "tabs": {
+        "redemptions": "Resgates",
+        "vouchers": "Vales"
+      },
+      "totalRedemptions": "Total de resgates",
+      "totalAmountRedeemed": "Valor total resgatado",
+      "from": "De",
+      "to": "Até",
+      "filter": "Filtrar",
+      "pageInfo": "Página {page} de {totalPages} ({total} no total)",
+      "redemptionTable": {
+        "date": "Data",
+        "partner": "Parceiro",
+        "amount": "Valor",
+        "status": "Estado",
+        "location": "Local"
+      },
+      "noRedemptions": "Nenhum resgate encontrado.",
+      "voucherTable": {
+        "campaign": "Campanha",
+        "status": "Estado",
+        "type": "Tipo",
+        "value": "Valor",
+        "remaining": "Restante",
+        "redeemed": "Resgatado",
+        "issuedTo": "Emitido para",
+        "expires": "Expira"
+      },
+      "noVouchers": "Nenhum vale encontrado."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "comprador",
+        "partner": "parceiro",
+        "platform_owner": "proprietário da plataforma"
+      },
+      "orgStatus": {
+        "active": "ativa",
+        "suspended": "suspensa"
+      },
+      "campaignStatus": {
+        "draft": "rascunho",
+        "active": "ativa",
+        "paused": "em pausa",
+        "archived": "arquivada"
+      },
+      "voucherStatus": {
+        "created": "criado",
+        "issued": "emitido",
+        "active": "ativo",
+        "redeemed": "resgatado",
+        "expired": "expirado",
+        "voided": "anulado"
+      },
+      "valueType": {
+        "fixed": "fixo",
+        "percent": "percentagem"
+      },
+      "orderStatus": {
+        "draft": "rascunho",
+        "submitted": "submetido",
+        "invoiced": "faturado",
+        "paid": "pago",
+        "cancelled": "cancelado",
+        "refunded": "reembolsado"
+      },
+      "redemptionStatus": {
+        "approved": "aprovado",
+        "reversed": "revertido",
+        "failed": "falhado"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Eventos"
+    },
+    "status": {
+      "draft": "Rascunho",
+      "published": "Ativo",
+      "sold_out": "Esgotado",
+      "cancelled": "Cancelado",
+      "ended": "Terminado"
+    },
+    "statusName": {
+      "draft": "Rascunho",
+      "published": "Publicado",
+      "sold_out": "Esgotado",
+      "cancelled": "Cancelado",
+      "ended": "Terminado"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Evento interno",
+      "concert": "Concerto",
+      "workshop": "Workshop",
+      "other": "Outro"
+    },
+    "ticketStatus": {
+      "available": "Disponível",
+      "sold": "Vendido",
+      "used": "Utilizado",
+      "cancelled": "Cancelado",
+      "refunded": "Reembolsado"
+    },
+    "list": {
+      "subtitle": "Gira os seus eventos e bilhetes",
+      "createEvent": "Criar evento",
+      "stats": {
+        "totalTitle": "Total de eventos",
+        "totalDescription": "Todos os eventos",
+        "activeTitle": "Ativos",
+        "activeDescription": "Publicados ou esgotados",
+        "soldTitle": "Bilhetes vendidos",
+        "soldDescription": "Em todos os eventos",
+        "revenueTitle": "Receita",
+        "revenueDescription": "Vendas pagas de bilhetes"
+      },
+      "empty": {
+        "title": "Ainda sem eventos",
+        "description": "Crie um evento para vender bilhetes e gerir as presenças.",
+        "cta": "Crie o seu primeiro evento"
+      },
+      "card": {
+        "date": "Data:",
+        "location": "Local:",
+        "price": "Preço:",
+        "tickets": "Bilhetes:",
+        "sold": "{sold} / {capacity} vendidos",
+        "free": "Grátis",
+        "view": "Ver",
+        "edit": "Editar"
+      },
+      "weeklyRevenue": {
+        "title": "Receita semanal de bilhetes",
+        "description": "Vendas pagas de bilhetes nos últimos 7 dias.",
+        "series": "Receita"
+      }
+    },
+    "detail": {
+      "noDescription": "Sem descrição",
+      "edit": "Editar",
+      "status": "Estado",
+      "type": "Tipo",
+      "eventDate": "Data do evento",
+      "price": "Preço",
+      "free": "Grátis",
+      "totalTickets": "Total de bilhetes",
+      "sold": "Vendidos",
+      "available": "Disponíveis",
+      "location": "Local",
+      "terms": "Termos e condições",
+      "ticketsTitle": "Bilhetes",
+      "ticketsDescription": "Bilhetes para este evento",
+      "noTickets": "Ainda não foram gerados bilhetes.",
+      "view": "Ver",
+      "redeem": "Resgatar"
+    },
+    "form": {
+      "basicInfo": "Informações básicas",
+      "name": "Nome do evento *",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Descreva o seu evento...",
+      "type": "Tipo de evento *",
+      "typeAria": "Tipo de evento",
+      "dateTime": "Data e hora",
+      "eventDate": "Data do evento *",
+      "eventTime": "Hora do evento *",
+      "endDate": "Data de fim (opcional)",
+      "endTime": "Hora de fim (opcional)",
+      "location": "Local",
+      "locationName": "Nome do local",
+      "locationPlaceholder": "Salão principal, Palco exterior",
+      "locationPlaceholderExample": "p. ex. Salão principal, Palco exterior",
+      "address": "Morada completa",
+      "addressPlaceholder": "Rua, Cidade, País",
+      "ticketDetails": "Detalhes dos bilhetes",
+      "maxCapacity": "Capacidade máx. (bilhetes) *",
+      "maxCapacityLong": "Capacidade máxima (número de bilhetes) *",
+      "pricePerTicketCurrency": "Preço por bilhete ({currency})",
+      "pricePerTicket": "Preço por bilhete",
+      "pricePlaceholderFree": "0.00 (grátis)",
+      "priceHint": "Deixe vazio para bilhetes gratuitos. P. ex. 12.50 ou 12,50 para {example}.",
+      "currency": "Moeda *",
+      "terms": "Termos e condições",
+      "termsPlaceholder": "Termos do evento, política de reembolso, etc.",
+      "ticketPrice": "Preço do bilhete",
+      "endBeforeStart": "A hora de fim tem de ser posterior à hora de início.",
+      "cancel": "Cancelar"
+    },
+    "create": {
+      "submit": "Criar evento",
+      "submitting": "A criar..."
+    },
+    "edit": {
+      "loading": "A carregar...",
+      "notFound": "Evento não encontrado.",
+      "back": "Voltar ao evento",
+      "title": "Editar evento",
+      "subtitle": "Atualize os detalhes do seu evento.",
+      "submit": "Guardar alterações",
+      "submitting": "A guardar..."
+    },
+    "publish": {
+      "confirm": "Publicar este evento? Ficará visível ao público e será possível comprar bilhetes.",
+      "confirmLabel": "Publicar",
+      "failed": "Falha ao publicar o evento",
+      "success": "Evento publicado com sucesso!",
+      "published": "Publicado",
+      "cannotPublish": "Não é possível publicar",
+      "button": "Publicar evento",
+      "publishing": "A publicar..."
+    },
+    "generate": {
+      "invalidCount": "Introduza um número entre 1 e 1000",
+      "tooMany": "Não é possível gerar {count} bilhetes. Máximo disponível: {max}",
+      "failed": "Falha ao gerar bilhetes",
+      "success": "{count, plural, one {# bilhete gerado} other {# bilhetes gerados}} com sucesso!",
+      "open": "Gerar bilhetes",
+      "title": "Gerar bilhetes",
+      "description": "Crie bilhetes para este evento",
+      "countLabel": "Número de bilhetes (máx.: {max})",
+      "cancel": "Cancelar",
+      "submit": "Gerar",
+      "submitting": "A gerar..."
+    },
+    "redeem": {
+      "title": "Resgatar bilhete",
+      "subtitle": "Leia o código QR ou introduza o número do bilhete",
+      "back": "Voltar ao evento",
+      "scanTitle": "Ler bilhete",
+      "scanDescription": "Introduza o token QR ou o número do bilhete",
+      "tokenLabel": "Token QR / Número do bilhete",
+      "tokenPlaceholder": "Introduza o token QR ou o número do bilhete",
+      "scan": "Ler",
+      "notFound": "Bilhete não encontrado",
+      "found": "Bilhete encontrado",
+      "number": "Número:",
+      "event": "Evento:",
+      "status": "Estado:",
+      "attendee": "Participante:",
+      "redeemDescription": "Conclua o processo de resgate",
+      "locationLabel": "Local (opcional)",
+      "locationPlaceholder": "p. ex. Entrada principal, Porta A",
+      "submit": "Resgatar bilhete",
+      "submitting": "A resgatar...",
+      "failed": "Falha ao resgatar o bilhete",
+      "cannotRedeem": "Este bilhete não pode ser resgatado. Estado: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Painel do comerciante",
+      "vouchersTitle": "Gerir vales"
+    },
+    "sidebar": {
+      "title": "Comerciante",
+      "subtitle": "Consola GiftHub",
+      "openMenu": "Abrir menu",
+      "nav": {
+        "overview": "Visão geral",
+        "vouchers": "Vales",
+        "giftCards": "Cartões-presente",
+        "credits": "Créditos",
+        "brand": "Marca"
+      }
+    },
+    "overview": {
+      "title": "Painel do comerciante",
+      "notConnected": "Ainda não está ligado a nenhum comerciante."
+    },
+    "noAccess": {
+      "title": "Sem acesso de comerciante",
+      "overviewHint": "Peça a um administrador do comerciante que o convide ou crie uma conta de comerciante para começar.",
+      "creditsHint": "Ligue-se a uma conta de comerciante para ver a receita e os pagamentos.",
+      "vouchersHint": "Ligue-se a uma conta de comerciante para gerir vales.",
+      "exploreCampaigns": "Explorar campanhas"
+    },
+    "brand": {
+      "title": "Definições da marca",
+      "description": "Personalize o aspeto da sua marca nos vales",
+      "logoHeading": "Logótipo",
+      "logoHint": "Carregue o logótipo do comerciante (recomendado: 200x200 px, PNG ou SVG).",
+      "logoPreviewAlt": "Pré-visualização do logótipo",
+      "uploadLogo": "Carregar logótipo",
+      "colorHeading": "Cor da marca",
+      "colorHint": "Defina a cor principal da marca para vales e botões.",
+      "colorLabel": "Cor",
+      "colorHexLabel": "Valor hex da cor da marca",
+      "save": "Guardar alterações",
+      "previewHeading": "Pré-visualização",
+      "previewHint": "Veja como a sua marca aparece nos vales.",
+      "sampleMerchant": "O seu comerciante",
+      "sampleTitle": "20% de desconto na próxima compra",
+      "sampleDescription": "Válido em todos os artigos. Não acumulável com outras ofertas."
+    },
+    "credits": {
+      "availableBalance": "Saldo disponível",
+      "availableBalanceHint": "Pronto para pagamento",
+      "pendingRevenue": "Receita pendente",
+      "pendingRevenueHint": "Em processamento",
+      "recentRevenue": "Receita recente",
+      "ticketSale": "Venda de bilhete",
+      "voucherSale": "Venda de vale",
+      "noRevenue": "Ainda sem receita registada",
+      "payoutRequests": "Pedidos de pagamento",
+      "noPayoutRequests": "Ainda sem pedidos de pagamento",
+      "requestPayoutHeading": "Pedir pagamento",
+      "minimumPayout": "Valor mínimo de pagamento: {amount}",
+      "submitting": "A submeter...",
+      "requestPayout": "Pedir pagamento",
+      "requestSubmitted": "Pedido de pagamento submetido",
+      "requestFailed": "Falha ao pedir o pagamento",
+      "status": {
+        "paid": "pago",
+        "pending": "pendente",
+        "requested": "pedido",
+        "completed": "concluído",
+        "failed": "falhado"
+      }
+    },
+    "newVoucher": {
+      "title": "Criar vale",
+      "description": "Desenhe e configure a sua nova campanha de vales",
+      "detailsHeading": "Detalhes do vale",
+      "titleLabel": "Título",
+      "titlePlaceholder": "p. ex. 20% de desconto na próxima compra",
+      "descriptionLabel": "Descrição",
+      "descriptionPlaceholder": "Válido em todos os artigos. Não acumulável com outras ofertas.",
+      "expiryDateLabel": "Data de validade",
+      "weeklyLabel": "Oferta semanal",
+      "weeklyHint": "Disponibilidade semanal por tempo limitado",
+      "weeklyAria": "Oferta semanal - Disponibilidade semanal por tempo limitado",
+      "referralLabel": "Ativar crédito de referência",
+      "referralHint": "Os utilizadores ganham crédito quando os amigos resgatam",
+      "referralAria": "Ativar crédito de referência - Os utilizadores ganham crédito quando os amigos resgatam",
+      "brandColorLabel": "Cor da marca",
+      "brandColorHexLabel": "Valor hex da cor da marca",
+      "saveDraft": "Guardar rascunho",
+      "createAndPublish": "Criar e publicar",
+      "previewHeading": "Pré-visualização",
+      "sampleMerchant": "O seu comerciante",
+      "sampleTitle": "Título do vale",
+      "sampleDescription": "A descrição do vale aparecerá aqui"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "A página pública fica disponível assim que o vale for publicado.",
+    "list": {
+      "metaTitle": "Vales",
+      "subtitle": "Gerir e criar vales",
+      "bulkImport": "Importar CSV em massa",
+      "stats": {
+        "totalTitle": "Total de vales",
+        "totalDescription": "Todos os vales criados",
+        "activeTitle": "Ativos",
+        "activeDescription": "Vales publicados",
+        "draftsTitle": "Rascunhos",
+        "draftsDescription": "Ainda não publicados",
+        "pausedEndedTitle": "Em pausa / terminados",
+        "pausedEndedDescription": "{paused} em pausa, {ended} terminados",
+        "redemptionsTitle": "Resgates",
+        "redemptionsDescription": "Total de resgates"
+      },
+      "empty": {
+        "title": "Ainda sem vales",
+        "description": "Comece por criar o seu primeiro vale.",
+        "action": "Crie o seu primeiro vale"
+      },
+      "searchPlaceholder": "Pesquisar por título, prefixo do código ou ID",
+      "searchLabel": "Pesquisar vales",
+      "statusLabel": "Estado",
+      "statusAll": "Todos os estados",
+      "status": {
+        "published": "Ativo",
+        "paused": "Em pausa",
+        "draft": "Rascunho",
+        "ended": "Terminado",
+        "expired": "Expirado"
+      },
+      "typeLabel": "Tipo",
+      "typeAll": "Todos os tipos",
+      "sortLabel": "Ordenar por",
+      "sort": {
+        "date": "Data (mais recentes)",
+        "name": "Nome (A-Z)",
+        "redemptions": "Resgates"
+      },
+      "showing": "A mostrar {shown} de {total} vales",
+      "clearFilters": "Limpar filtros",
+      "noMatches": "Nenhum vale corresponde aos filtros.",
+      "usage": "Utilização",
+      "usageUnlimited": "Utilização: {used} - Ilimitada",
+      "view": "Ver"
+    },
+    "rowActions": {
+      "pauseTitle": "Pausar vale",
+      "pauseDescription": "Tem a certeza de que pretende pausar este vale? Os utilizadores não o poderão comprar nem resgatar enquanto estiver em pausa.",
+      "pauseConfirm": "Pausar",
+      "paused": "Vale pausado",
+      "pauseFailed": "Falha ao pausar o vale",
+      "loadFailed": "Falha ao carregar o vale",
+      "duplicateLabel": "Duplicar vale",
+      "duplicated": "Vale duplicado",
+      "duplicateFailed": "Falha ao duplicar"
+    },
+    "publish": {
+      "confirmMessage": "Publicar este vale? Ficará visível ao público.",
+      "confirmLabel": "Publicar",
+      "failed": "Falha ao publicar o vale",
+      "success": "Vale publicado com sucesso!",
+      "publishing": "A publicar...",
+      "button": "Publicar vale"
+    },
+    "new": {
+      "iconLetter": "V",
+      "created": "Vale criado como rascunho. Publique-o quando quiser que os clientes o vejam."
+    },
+    "edit": {
+      "iconLetter": "E",
+      "subtitle": "Atualize os detalhes e a disponibilidade do vale.",
+      "updated": "Vale atualizado com sucesso",
+      "updateFailed": "Falha ao atualizar o vale",
+      "updateFailedRetry": "Falha ao atualizar o vale. Tente novamente.",
+      "updating": "A atualizar...",
+      "update": "Atualizar vale",
+      "viewPublicPage": "Ver página pública"
+    },
+    "form": {
+      "stepOf": "Passo {current} de {total}",
+      "typeLabel": "Tipo",
+      "typeAria": "Tipo de vale",
+      "customersGetOff": "Os clientes recebem {value} de desconto.",
+      "customersGetCredit": "Os clientes recebem {value} de crédito.",
+      "percentHint": "Introduza a percentagem, p. ex. 15 ou 12,5.",
+      "amountHint": "Introduza o valor em {currency}, p. ex. 4.50 ou 4,50 para {example}.",
+      "validityHint": "O vale pode ser usado desde o início do primeiro dia até ao fim do último dia.",
+      "enableWeeklyDropAria": "Ativar oferta semanal",
+      "weeklyDropDayAria": "Dia da semana da oferta semanal",
+      "weeklyDropTimeAria": "Hora de início da oferta semanal",
+      "headlinePlaceholder": "15% de desconto na sua encomenda",
+      "finePrintPlaceholder": "Válido apenas para novos clientes",
+      "previewFallbackHeadline": "O seu vale",
+      "previewValidUntil": "Válido até {date}",
+      "errors": {
+        "discountAboveZero": "Introduza um desconto superior a 0%.",
+        "valueAboveZero": "Introduza um valor superior a 0.",
+        "chooseDates": "Escolha quando o vale começa e termina.",
+        "endBeforeStart": "A data de fim tem de ser igual ou posterior à data de início.",
+        "invalidValue": "Introduza um valor válido.",
+        "valueMustBePositive": "O valor tem de ser superior a 0",
+        "totalLimitPositive": "O limite total de utilização tem de ser um número positivo",
+        "perUserLimitPositive": "O limite por utilizador tem de ser um número positivo"
+      },
+      "discountErrors": {
+        "negative": "O desconto não pode ser negativo.",
+        "invalid": "O desconto não é um número válido.",
+        "decimals": "O desconto pode ter no máximo {decimals} casas decimais.",
+        "tooLarge": "O desconto é demasiado elevado.",
+        "tooHigh": "O desconto não pode exceder 100%."
+      },
+      "valueErrors": {
+        "negative": "O valor não pode ser negativo.",
+        "invalid": "O valor não é um número válido.",
+        "wholeNumber": "O valor tem de ser um número inteiro.",
+        "decimals": "O valor pode ter no máximo {decimals} casas decimais.",
+        "tooLarge": "O valor é demasiado elevado."
+      }
+    },
+    "bulkImport": {
+      "back": "Voltar aos vales",
+      "title": "Importar vales a partir de uma folha de cálculo",
+      "intro": "Carregue um ficheiro CSV (até 500 linhas). Cada vale é criado como rascunho, pelo que nada fica ativo até o publicar.",
+      "columns": "Colunas",
+      "downloadSample": "Transferir CSV de exemplo",
+      "columnRequired": "<code>{name}</code> (obrigatório): {help}",
+      "columnOptional": "<code>{name}</code> (opcional): {help}",
+      "columnHelp": {
+        "name": "O título do vale que os clientes veem, p. ex. \"Promoção de café da primavera\".",
+        "type": "\"amount\" (desconto em dinheiro), \"percent\" (desconto percentual) ou \"credit\" (crédito na loja).",
+        "value": "Euros para amount/credit (10 ou 10.50), percentagem para percent (15 ou 12.5).",
+        "currency": "Código de três letras, como EUR. Por predefinição, a moeda da sua loja.",
+        "valid_from": "Primeiro dia em que o vale é válido: 2026-10-01 ou 01.10.2026.",
+        "valid_to": "Último dia em que o vale é válido (mantém-se válido até ao fim desse dia).",
+        "code_prefix": "Letras no início de cada código, p. ex. SPRING.",
+        "usage_limit": "Quantas vezes pode ser usado no total. Deixe vazio para ilimitado."
+      },
+      "separatorHint": "Separe as colunas com vírgulas ou pontos e vírgulas. Se usar vírgulas, coloque os valores decimais entre aspas (\"4,50\") ou use um ponto (4.50).",
+      "chooseFile": "Escolher um ficheiro CSV",
+      "chooseDifferent": "Clique para escolher outro ficheiro",
+      "browse": "Clique para procurar",
+      "fixRows": "Corrija estas linhas e carregue o ficheiro novamente:",
+      "andMore": "…e mais {count}.",
+      "readyToImport": "Pronto para importar {count, plural, one {# vale} other {# vales}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, até {limit} utilizações} other {}}",
+      "imported": "{count, plural, one {# vale importado} other {# vales importados}} como rascunho.",
+      "viewVouchers": "Ver vales",
+      "importing": "A importar...",
+      "importCount": "Importar {count, plural, one {# vale} other {# vales}}",
+      "importVouchers": "Importar vales",
+      "importFailedStatus": "A importação falhou (erro {status}).",
+      "importFailed": "A importação falhou"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Destaque + CTA",
+          "description": "Título no topo da página com a ação principal."
+        },
+        "value_props": {
+          "label": "Propostas de valor",
+          "description": "Benefícios e garantias em resumo."
+        },
+        "featured_products": {
+          "label": "Produtos em destaque",
+          "description": "Produtos principais com preços e etiquetas."
+        },
+        "featured_vouchers": {
+          "label": "Vales em destaque",
+          "description": "Cartões de vales ativos para promoções."
+        },
+        "rental_packages": {
+          "label": "Pacotes de aluguer",
+          "description": "Pacotes de aluguer e preços por dia."
+        },
+        "categories": {
+          "label": "Grelha de categorias",
+          "description": "Explorar por tipo, utilização ou público."
+        },
+        "availability": {
+          "label": "Calendário de disponibilidade",
+          "description": "Disponibilidade e horários de reserva em tempo real."
+        },
+        "testimonials": {
+          "label": "Testemunhos",
+          "description": "Citações de clientes e classificações por estrelas."
+        },
+        "gallery": {
+          "label": "Galeria",
+          "description": "Imagens de estilo de vida ou casos de utilização."
+        },
+        "pricing": {
+          "label": "Tabela de preços",
+          "description": "Escalões de preços transparentes."
+        },
+        "rental_terms": {
+          "label": "Condições de aluguer",
+          "description": "Caução, seguro e política de devolução."
+        },
+        "faq": {
+          "label": "Perguntas frequentes",
+          "description": "Responda às objeções mais comuns."
+        },
+        "newsletter": {
+          "label": "Subscrição da newsletter",
+          "description": "Recolha e-mails para campanhas."
+        },
+        "contact": {
+          "label": "Bloco de contacto",
+          "description": "Suporte por chat, e-mail ou telefone."
+        },
+        "map": {
+          "label": "Mapa de localização",
+          "description": "Ponto de recolha ou localização da loja."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Barra promocional",
+          "description": "Barra fixa no topo para ofertas e alertas."
+        },
+        "sticky_cta": {
+          "label": "CTA fixo",
+          "description": "Botão de ação sempre visível ao percorrer a página."
+        },
+        "chat_widget": {
+          "label": "Widget de chat",
+          "description": "Chat em direto ou integração com WhatsApp."
+        },
+        "trust_badges": {
+          "label": "Selos de confiança",
+          "description": "Selos de pagamento, segurança ou qualidade."
+        },
+        "social_proof": {
+          "label": "Pop-up de prova social",
+          "description": "Atividade e compras recentes."
+        },
+        "countdown": {
+          "label": "Contagem decrescente",
+          "description": "Urgência para ofertas limitadas."
+        },
+        "reviews_widget": {
+          "label": "Widget de avaliações",
+          "description": "Incorpore Google ou Trustpilot."
+        },
+        "language_switch": {
+          "label": "Seletor de idioma",
+          "description": "Mudança rápida de idioma na página."
+        },
+        "analytics": {
+          "label": "Fragmentos de análise",
+          "description": "Espaços para píxeis de rastreio."
+        },
+        "cookie_banner": {
+          "label": "Banner de cookies",
+          "description": "Banner de consentimento RGPD."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Pré-visualização",
+      "edit": "Editar",
+      "previewEmpty": "Ainda não foram adicionadas secções. Mude para o modo de edição para adicionar secções.",
+      "title": "Editor visual",
+      "preview": "Pré-visualizar",
+      "empty": "Ainda sem secções. Clique em \"Adicionar secção\" abaixo para começar.",
+      "collapseSettings": "Recolher definições",
+      "expandSettings": "Expandir definições",
+      "removeSection": "Remover secção {label}",
+      "sectionTitle": "Título da secção",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Descrição opcional",
+      "backgroundColor": "Cor de fundo",
+      "layoutVariant": "Variante de esquema",
+      "layout": {
+        "default": "Predefinido",
+        "centered": "Centrado",
+        "wide": "Largo",
+        "compact": "Compacto"
+      },
+      "addSection": "Adicionar secção",
+      "availableSections": "Secções disponíveis",
+      "closeCatalog": "Fechar",
+      "allAdded": "Todas as secções disponíveis foram adicionadas.",
+      "count": "{configured, plural, one {# secção configurada} other {# secções configuradas}} / {available} disponíveis para adicionar"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Lista de verificação do lançamento da loja",
+        "rental_launch": "Lista de verificação do lançamento da página de aluguer",
+        "campaign_ops": "Operações semanais de campanhas",
+        "support_ops": "Lista de verificação da preparação do suporte"
+      },
+      "toast": {
+        "saved": "Construtor de páginas atualizado.",
+        "saveFailed": "Falha ao guardar a página",
+        "vibeFailed": "O agente Vibe falhou",
+        "layoutGenerated": "Esquema Vibe gerado.",
+        "generateFailed": "Falha ao gerar o esquema",
+        "agentFailed": "O agente falhou",
+        "planGenerated": "Plano de processo gerado.",
+        "runAgentFailed": "Falha ao executar o agente"
+      },
+      "noData": "Sem dados do construtor de páginas.",
+      "title": "Construtor de páginas",
+      "intro": "Crie rapidamente páginas de loja e de aluguer com secções modulares e extras.",
+      "introAi": "Crie rapidamente páginas de loja e de aluguer com secções modulares e extras, com sugestões opcionais de IA.",
+      "tabs": {
+        "store": "Loja",
+        "rental": "Aluguer"
+      },
+      "details": {
+        "title": "Detalhes da página",
+        "subtitle": "Título, subtítulo e esquema.",
+        "save": "Guardar",
+        "pageTitle": "Título da página",
+        "subtitleLabel": "Subtítulo"
+      },
+      "sections": {
+        "title": "Secções",
+        "subtitle": "Arraste para reordenar, expanda para configurar ou pré-visualize o esquema.",
+        "suggestLayout": "Sugerir um esquema",
+        "suggestionsLeft": "Sugestões de esquema por IA restantes: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Extras",
+        "subtitle": "Widgets adicionais e camadas de marketing.",
+        "enable": "Ativar extra {label}",
+        "disable": "Desativar extra {label}"
+      },
+      "summary": {
+        "title": "Resumo em tempo real",
+        "line": "{title} · {sections, plural, one {# secção} other {# secções}} · {addons, plural, one {# extra} other {# extras}}",
+        "sectionsLabel": "Secções:",
+        "addonsLabel": "Extras:",
+        "none": "Nenhum"
+      },
+      "assistant": {
+        "title": "Assistente de lista de verificação de lançamento",
+        "subtitle": "Gere planos de ação e listas de verificação operacionais.",
+        "goalLabel": "Objetivo do processo",
+        "createChecklist": "Criar lista de verificação",
+        "checklistsLeft": "Listas de verificação restantes: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Ofertas, alugueres e vales selecionados de {name}.",
+        "shopProducts": "Comprar produtos",
+        "browseRentals": "Explorar alugueres"
+      },
+      "valueProps": {
+        "rewardsTitle": "Recompensas",
+        "rewardsText": "Incentivos com vales incluídos.",
+        "stockTitle": "Stock fiável",
+        "stockText": "Preços e disponibilidade atualizados.",
+        "datesTitle": "Datas flexíveis",
+        "datesText": "Planeie alugueres com facilidade."
+      },
+      "viewAll": "Ver tudo",
+      "seeAll": "Ver tudo",
+      "products": {
+        "title": "Produtos em destaque",
+        "empty": "Ainda sem produtos.",
+        "fallbackDescription": "Produto em destaque"
+      },
+      "rentals": {
+        "title": "Pacotes de aluguer",
+        "empty": "Ainda sem alugueres.",
+        "fallbackDescription": "Aluguer em destaque",
+        "perDay": "{price} / dia"
+      },
+      "categories": {
+        "title": "Explorar categorias",
+        "popular": "Populares",
+        "business": "Empresas",
+        "events": "Eventos",
+        "seasonal": "Sazonais",
+        "corporate": "Corporativo",
+        "custom": "Personalizado"
+      },
+      "availability": {
+        "title": "Disponibilidade em tempo real",
+        "text": "Verifique a disponibilidade e peça um orçamento em minutos.",
+        "seeCalendar": "Ver calendário"
+      },
+      "testimonials": {
+        "title": "O que dizem os clientes",
+        "smooth": "Processo simples",
+        "lovedVoucher": "Adorei o vale",
+        "support": "Excelente suporte"
+      },
+      "gallery": {
+        "title": "Galeria"
+      },
+      "pricing": {
+        "title": "Preços",
+        "starter": "Starter",
+        "growth": "Crescimento",
+        "enterprise": "Empresarial",
+        "tierText": "Preços e suporte personalizados"
+      },
+      "rentalTerms": {
+        "title": "Condições de aluguer",
+        "text": "Cauções, regras de recolha e política de devolução claras, comunicadas antecipadamente."
+      },
+      "faq": {
+        "title": "Perguntas frequentes",
+        "redeem": "Como faço o resgate?",
+        "reschedule": "Posso reagendar?",
+        "support": "Oferecem suporte?"
+      },
+      "newsletter": {
+        "title": "Mantenha-se a par",
+        "text": "Receba novas ofertas e novidades de aluguer na sua caixa de entrada.",
+        "emailLabel": "Endereço de e-mail",
+        "subscribe": "Subscrever"
+      },
+      "contact": {
+        "title": "Contacto",
+        "emailUs": "Envie-nos um e-mail para {email}"
+      },
+      "map": {
+        "text": "O local de recolha é partilhado após a reserva."
+      },
+      "vouchers": {
+        "title": "Vales ativos",
+        "empty": "Sem vales disponíveis.",
+        "voucher": "Vale",
+        "view": "Ver vale"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Ativo",
+      "redeemed": "Resgatado",
+      "expired": "Expirado",
+      "cancelled": "Cancelado"
+    },
+    "list": {
+      "metaTitle": "Cartões-presente",
+      "title": "Cartões-presente",
+      "subtitle": "Crie e gira cartões-presente",
+      "newGiftCard": "Novo cartão-presente",
+      "stats": {
+        "total": "Total de cartões-presente",
+        "totalDescription": "Todos os cartões-presente emitidos",
+        "active": "Ativos",
+        "activeDescription": "Atualmente resgatáveis",
+        "redeemed": "Resgatados",
+        "redeemedDescription": "Resgates concluídos",
+        "totalValue": "Valor total",
+        "totalValueDescription": "Valor dos cartões-presente emitidos"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Ainda sem cartões-presente",
+      "emptyDescription": "Crie um cartão-presente com a sua marca e resgate por QR.",
+      "createFirst": "Crie o seu primeiro cartão-presente",
+      "searchPlaceholder": "Pesquisar por título, código ou mensagem",
+      "searchLabel": "Pesquisar cartões-presente",
+      "status": "Estado",
+      "allStatus": "Todos os estados",
+      "sortBy": "Ordenar por",
+      "sortDate": "Data (mais recentes)",
+      "sortAmount": "Valor (do mais alto ao mais baixo)",
+      "showing": "A mostrar {shown} de {total, plural, one {# cartão-presente} other {# cartões-presente}}",
+      "clearFilters": "Limpar filtros",
+      "noMatches": "Nenhum cartão-presente corresponde aos filtros.",
+      "defaultHeadline": "Cartão-presente",
+      "noExpiry": "Sem validade",
+      "validUntil": "Válido até: {date}",
+      "redeemedOn": "Resgatado: {date}",
+      "details": "Detalhes",
+      "view": "Ver"
+    },
+    "detail": {
+      "title": "Cartão-presente",
+      "code": "Código {code}",
+      "publicView": "Vista pública",
+      "newGiftCard": "Novo cartão-presente",
+      "detailsTitle": "Detalhes do cartão-presente",
+      "value": "Valor",
+      "validFrom": "Válido desde",
+      "validTo": "Válido até",
+      "noExpiry": "Sem validade",
+      "redeemedAt": "Resgatado em",
+      "notRedeemed": "Não resgatado",
+      "qrTitle": "QR de resgate para a equipa",
+      "qrHelp": "A equipa pode ler este QR para resgatar e invalidar o cartão-presente."
+    },
+    "new": {
+      "title": "Novo cartão-presente",
+      "subtitle": "Personalize e emita um cartão-presente",
+      "created": "Cartão-presente criado.",
+      "cancel": "Cancelar",
+      "creating": "A criar...",
+      "submit": "Criar cartão-presente",
+      "errors": {
+        "amountRequired": "Introduza um valor superior a 0.",
+        "endBeforeStart": "A data de fim tem de ser igual ou posterior à data de início.",
+        "createFailed": "Falha ao criar o cartão-presente"
+      },
+      "amountErrors": {
+        "negative": "O valor não pode ser negativo.",
+        "invalid": "O valor não é um número válido.",
+        "wholeNumber": "O valor tem de ser um número inteiro.",
+        "decimals": "O valor pode ter no máximo {decimals} casas decimais.",
+        "tooLarge": "O valor é demasiado elevado."
+      },
+      "priceErrors": {
+        "negative": "O preço de venda não pode ser negativo.",
+        "invalid": "O preço de venda não é um número válido.",
+        "wholeNumber": "O preço de venda tem de ser um número inteiro.",
+        "decimals": "O preço de venda pode ter no máximo {decimals} casas decimais.",
+        "tooLarge": "O preço de venda é demasiado elevado."
+      },
+      "valueSection": {
+        "title": "Valor e validade",
+        "description": "Defina o valor, a moeda e a validade",
+        "amount": "Valor",
+        "faceValue": "Valor nominal: {value}.",
+        "amountHelp": "Introduza o valor em {currency}, p. ex. 50 ou 49,90 para {example}.",
+        "currency": "Moeda",
+        "validFrom": "Válido desde",
+        "validTo": "Válido até",
+        "noExpiry": "Sem data de validade"
+      },
+      "purchaseSection": {
+        "title": "Compra pelo cliente",
+        "description": "Permita que os clientes comprem este cartão-presente online",
+        "purchasable": "Disponível para compra pelos clientes",
+        "salePrice": "Preço de venda (opcional, por predefinição o valor nominal)",
+        "salePricePlaceholder": "Igual ao valor",
+        "customersPay": "Os clientes pagam {value}.",
+        "salePriceHelp": "Deixe vazio para vender pelo valor nominal. Defina outro preço para promoções."
+      },
+      "brandingSection": {
+        "title": "Marca e mensagem",
+        "description": "Título, mensagem, imagens e cores",
+        "headline": "Título",
+        "headlinePlaceholder": "Presente para amantes de café",
+        "message": "Mensagem",
+        "messagePlaceholder": "Adicione uma mensagem pessoal para o destinatário",
+        "logoUrl": "URL do logótipo",
+        "imageUrl": "URL da imagem",
+        "accentColor": "Cor de destaque",
+        "backgroundColor": "Cor de fundo",
+        "textColor": "Cor do texto",
+        "codePrefix": "Prefixo do código (opcional)"
+      },
+      "preview": {
+        "title": "Pré-visualização",
+        "defaultHeadline": "Cartão-presente",
+        "imageAlt": "Cartão-presente",
+        "logoAlt": "Logótipo da marca",
+        "notePlaceholder": "Adicione uma nota pessoal"
+      }
+    },
+    "gifts": {
+      "title": "Produtos de presente",
+      "subtitle": "Gira os seus produtos no Gift Hub",
+      "dashboard": "Painel",
+      "confirmDelete": "Tem a certeza? O produto será desativado.",
+      "stats": {
+        "total": "Total",
+        "active": "Ativos",
+        "views": "Visualizações",
+        "purchases": "Compras"
+      },
+      "emptyTitle": "Ainda sem produtos de presente",
+      "emptyDescription": "Adicione o seu primeiro produto para aparecer no feed do Gift Hub.",
+      "emptyApiHint": "Use a API em <code>{endpoint}</code> para criar produtos.",
+      "inactive": "Inativo",
+      "featured": "Em destaque",
+      "views": "{count, plural, one {# visualização} other {# visualizações}}",
+      "purchases": "{count, plural, one {# compra} other {# compras}}",
+      "conversionRate": "{rate}% de conversão",
+      "activate": "Ativar",
+      "deactivate": "Desativar",
+      "delete": "Eliminar"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Sem dados disponíveis",
+      "value": "Valor: <strong>{value}</strong>",
+      "dismiss": "Dispensar",
+      "remove": "Remover",
+      "dialog": "Caixa de diálogo",
+      "close": "Fechar",
+      "loading": "A carregar"
+    },
+    "analyticsFunnel": {
+      "empty": "Ainda sem atividade neste período",
+      "top": "Topo",
+      "drop": "Queda de -{rate}%"
+    },
+    "periodComparison": {
+      "title": "Comparação de períodos",
+      "loading": "A carregar...",
+      "previous": "Anterior: {value}",
+      "noData": "Sem dados disponíveis",
+      "period": {
+        "day": "Dia",
+        "week": "Semana",
+        "month": "Mês",
+        "quarter": "Trimestre",
+        "year": "Ano"
+      },
+      "metric": {
+        "revenue": "Receita",
+        "redemptions": "Resgates",
+        "purchases": "Compras",
+        "referrals": "Referências",
+        "customers": "Clientes"
+      }
+    },
+    "trendChart": {
+      "noData": "Sem dados"
+    },
+    "conversionChart": {
+      "noData": "Sem dados disponíveis",
+      "previous": "ant.: {value}"
+    },
+    "funnelChart": {
+      "empty": "Ainda sem atividade neste período"
+    },
+    "geoMap": {
+      "noData": "Sem dados disponíveis",
+      "value": "Valor: <strong>{value}</strong>",
+      "country": {
+        "GB": "Reino Unido",
+        "IE": "Irlanda",
+        "FR": "França",
+        "DE": "Alemanha",
+        "ES": "Espanha",
+        "PT": "Portugal",
+        "IT": "Itália",
+        "NL": "Países Baixos",
+        "BE": "Bélgica",
+        "CH": "Suíça",
+        "AT": "Áustria",
+        "PL": "Polónia",
+        "CZ": "República Checa",
+        "SE": "Suécia",
+        "NO": "Noruega",
+        "FI": "Finlândia",
+        "DK": "Dinamarca",
+        "EE": "Estónia",
+        "LV": "Letónia",
+        "LT": "Lituânia",
+        "HU": "Hungria",
+        "RO": "Roménia",
+        "BG": "Bulgária",
+        "GR": "Grécia",
+        "HR": "Croácia",
+        "SK": "Eslováquia",
+        "SI": "Eslovénia",
+        "RS": "Sérvia",
+        "UA": "Ucrânia",
+        "BY": "Bielorrússia"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "A aguardar dados..."
+    },
+    "pieDonutChart": {
+      "noData": "Sem dados disponíveis",
+      "total": "Total"
+    },
+    "activityFeed": {
+      "justNow": "agora mesmo",
+      "minutesAgo": "há {count} min",
+      "hoursAgo": "há {count} h",
+      "daysAgo": "há {count} d",
+      "empty": "Ainda sem atividade",
+      "loadMore": "Carregar mais",
+      "eventType": {
+        "purchase": "Compra",
+        "redemption": "Resgate",
+        "signup": "Registo",
+        "alert": "Alerta"
+      }
+    },
+    "dateRange": {
+      "days7": "7 dias",
+      "days30": "30 dias",
+      "days90": "90 dias",
+      "year1": "1 ano",
+      "custom": "Personalizado"
+    },
+    "chartCard": {
+      "fullscreen": "Ecrã inteiro",
+      "exitFullscreen": "Sair do ecrã inteiro",
+      "retry": "Tentar novamente"
+    },
+    "dashboardHeader": {
+      "export": "Exportar",
+      "exportAs": "Exportar como {format}"
+    },
+    "dataTable": {
+      "empty": "Sem dados disponíveis",
+      "showing": "A mostrar {from}–{to} de {total}",
+      "previousPage": "Página anterior",
+      "nextPage": "Página seguinte"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Em direto",
+        "reconnecting": "A ligar novamente",
+        "disconnected": "Desligado"
+      },
+      "status": {
+        "connected": "Ligado",
+        "reconnecting": "A ligar novamente",
+        "disconnected": "Desligado"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "vs. período anterior"
+    },
+    "statComparison": {
+      "current": "Atual",
+      "previous": "Anterior",
+      "change": "variação"
+    },
+    "aiInsightPanel": {
+      "title": "Informações de IA",
+      "placeholder": "Faça uma pergunta à IA...",
+      "send": "Enviar"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Em direto",
+        "degraded": "Degradado",
+        "disconnected": "Offline"
+      },
+      "latency": "Latência: {ms} ms",
+      "lastUpdate": "Última atualização: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Notificações",
+      "title": "Notificações",
+      "markAllRead": "Marcar tudo como lido",
+      "empty": "Sem notificações",
+      "ariaLabelUnread": "Notificações ({count} não lidas)"
+    },
+    "premiumChartCard": {
+      "info": "Informação",
+      "fullscreen": "Ecrã inteiro",
+      "exitFullscreen": "Sair do ecrã inteiro",
+      "moreOptions": "Mais opções",
+      "empty": "Sem dados disponíveis para este período"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "vs. último período"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Operacional",
+        "degraded": "Degradado",
+        "outage": "Interrupção"
+      }
+    },
+    "select": {
+      "placeholder": "Selecionar...",
+      "search": "Pesquisar...",
+      "empty": "Nenhuma opção encontrada",
+      "removeOption": "Remover {label}"
+    },
+    "sidebar": {
+      "expand": "Expandir barra lateral",
+      "collapse": "Recolher barra lateral",
+      "openMenu": "Abrir menu",
+      "closeMenu": "Fechar menu"
+    },
+    "iconSystem": {
+      "notFound": "Ícone \"{name}\" não encontrado",
+      "badge": "{count, plural, one {# notificação} other {# notificações}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Painel lateral",
+      "closePanel": "Fechar painel"
+    },
+    "codeBlock": {
+      "copyCode": "Copiar código",
+      "copied": "Copiado",
+      "copy": "Copiar"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Clientes",
+      "title": "Clientes",
+      "summary": "{count, plural, one {# cliente} other {# clientes}} · {revenue} de receita total",
+      "stats": {
+        "totalCustomers": "Total de clientes",
+        "totalRevenue": "Receita total",
+        "totalRedemptions": "Total de resgates"
+      },
+      "table": {
+        "customer": "Cliente",
+        "email": "E-mail",
+        "purchases": "Compras",
+        "totalSpent": "Total gasto",
+        "redemptions": "Resgates",
+        "lastPurchase": "Última compra"
+      },
+      "empty": "Ainda sem clientes",
+      "unknown": "Desconhecido"
+    },
+    "qrCheckout": {
+      "title": "Checkout instantâneo por QR",
+      "subtitle": "Gere códigos QR para um checkout instantâneo dos clientes",
+      "voucherLabel": "Associar a um vale (opcional)",
+      "generalOption": "Checkout geral (sem vale específico)",
+      "voucherOption": "{type} - {value} {currency} ({status})",
+      "generating": "A gerar...",
+      "generate": "Gerar código QR",
+      "qrAlt": "Código QR de checkout",
+      "scanToCheckout": "Leia para fazer o checkout",
+      "print": "Imprimir código QR"
+    },
+    "redemptions": {
+      "metaTitle": "Resgates",
+      "subtitle": "Veja e confirme os resgates de vales.",
+      "stats": {
+        "totalTitle": "Total de resgates",
+        "totalDescription": "Todos os resgates submetidos",
+        "pendingTitle": "Pendentes",
+        "pendingDescription": "A aguardar confirmação",
+        "confirmedTitle": "Confirmados",
+        "confirmedDescription": "Resgates aprovados",
+        "discountsTitle": "Descontos concedidos",
+        "discountsDescription": "Descontos confirmados"
+      },
+      "empty": {
+        "title": "Ainda sem resgates",
+        "description": "Os resgates aparecerão aqui quando os clientes usarem vales."
+      },
+      "voucherFallback": "Vale",
+      "card": {
+        "order": "Pedido de {amount}",
+        "discount": "Desconto: {amount}",
+        "discountReferred": "Desconto: {amount} - Referenciado por {name}",
+        "confirmed": "Confirmado",
+        "pending": "Pendente",
+        "method": "Método: {method}",
+        "methods": {
+          "online": "Online",
+          "in_store": "Na loja"
+        },
+        "orderReference": "Pedido: {reference}",
+        "notAvailable": "N/D",
+        "location": "Local: {location}",
+        "date": "Data: {date}"
+      },
+      "confirm": {
+        "prompt": "Confirmar este resgate? Isto desbloqueia o crédito para o referenciador.",
+        "confirmLabel": "Confirmar",
+        "success": "Resgate confirmado. Crédito desbloqueado para o referenciador.",
+        "error": "Falha ao confirmar o resgate. Tente novamente.",
+        "confirming": "A confirmar...",
+        "button": "Confirmar resgate"
+      },
+      "export": {
+        "success": "Resgates exportados com sucesso!",
+        "error": "Falha ao exportar os resgates",
+        "exporting": "A exportar...",
+        "button": "Exportar CSV"
+      }
+    },
+    "reviews": {
+      "title": "Avaliações",
+      "subtitle": "Acompanhe e responda às avaliações dos clientes",
+      "filters": "Filtros",
+      "reviewCount": "{count, plural, one {# avaliação} other {# avaliações}}",
+      "ratingDistribution": "Distribuição das classificações",
+      "responseRate": "Taxa de resposta",
+      "replied": "Respondidas",
+      "pending": "Pendentes",
+      "responseRatePercent": "{percent}% de taxa de resposta",
+      "filter": {
+        "rating": "Classificação",
+        "allRatings": "Todas as classificações",
+        "stars": "{count, plural, one {# estrela} other {# estrelas}}",
+        "replyStatus": "Estado da resposta",
+        "all": "Todas",
+        "needsReply": "Sem resposta",
+        "replied": "Respondidas",
+        "clear": "Limpar"
+      },
+      "loading": "A carregar avaliações...",
+      "empty": "Nenhuma avaliação encontrada.",
+      "anonymous": "Anónimo",
+      "verified": "Verificada",
+      "campaign": "Campanha: {name}",
+      "voucher": "Vale: {code}",
+      "foundHelpful": "{count} acharam útil",
+      "yourReply": "A sua resposta",
+      "replyPlaceholder": "Escreva a sua resposta...",
+      "posting": "A publicar...",
+      "postReply": "Publicar resposta",
+      "cancel": "Cancelar",
+      "reply": "Responder",
+      "showing": "A mostrar {from}–{to} de {total}",
+      "pageOf": "Página {page} de {totalPages}",
+      "previousPage": "Página anterior",
+      "nextPage": "Página seguinte",
+      "loadFailed": "Falha ao carregar as avaliações",
+      "replyFailed": "Falha ao responder",
+      "replyPosted": "Resposta publicada"
+    },
+    "scanner": {
+      "title": "Leitor",
+      "subtitle": "Leia vales, cartões-presente e bilhetes",
+      "manual": "Manual",
+      "camera": "Câmara",
+      "scanning": "A ler...",
+      "cameraDenied": "O acesso à câmara foi recusado. Permita o acesso à câmara nas definições do navegador ou escreva o código abaixo.",
+      "cameraUnavailable": "Nenhuma câmara disponível. Escreva o código abaixo.",
+      "pointAtCode": "Aponte para um código QR para o ler automaticamente",
+      "enterCode": "Introduzir código",
+      "codePlaceholder": "Código do vale (p. ex. AUD-CMUI0TG1), link do vale, código de bilhete ou de cartão-presente",
+      "codeAriaLabel": "Código a ler",
+      "scan": "Ler",
+      "found": {
+        "voucher": "Vale encontrado",
+        "gift_card": "Cartão-presente encontrado",
+        "ticket": "Bilhete encontrado"
+      },
+      "info": {
+        "ticketNumber": "Bilhete n.º",
+        "event": "Evento",
+        "type": "Tipo",
+        "standard": "Normal",
+        "attendee": "Participante",
+        "code": "Código",
+        "amount": "Valor",
+        "message": "Mensagem",
+        "voucher": "Vale",
+        "campaign": "Campanha",
+        "none": "Nenhum",
+        "value": "Valor",
+        "validUntil": "Válido até"
+      },
+      "redeem": "Resgatar",
+      "redeeming": "A resgatar...",
+      "cannotRedeem": "Este item não pode ser resgatado (estado: {status})",
+      "redeemed": {
+        "voucher": "Vale resgatado com sucesso!",
+        "gift_card": "Cartão-presente resgatado com sucesso!",
+        "ticket": "Bilhete resgatado com sucesso!"
+      },
+      "errors": {
+        "enterCode": "Introduza um código",
+        "notFound": "Não encontrado",
+        "scanFailed": "Falha na leitura",
+        "redeemFailed": "Falha no resgate"
+      },
+      "status": {
+        "giftCard": {
+          "active": "ativo",
+          "redeemed": "resgatado",
+          "expired": "expirado",
+          "cancelled": "cancelado"
+        },
+        "ticket": {
+          "available": "disponível",
+          "sold": "vendido",
+          "used": "utilizado",
+          "cancelled": "cancelado",
+          "refunded": "reembolsado"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "O preço não pode ser negativo.",
+      "invalid": "O preço não é um número válido.",
+      "wholeNumber": "O preço tem de ser um número inteiro.",
+      "decimals": "O preço pode ter no máximo {decimals} casas decimais.",
+      "tooLarge": "O preço é demasiado elevado."
+    },
+    "appointments": {
+      "title": "Marcações",
+      "subtitle": "Gira as reservas e a disponibilidade",
+      "createSlot": "Criar horário",
+      "form": {
+        "serviceName": "Nome do serviço",
+        "price": "Preço ({currency}, deixe vazio se for gratuito)",
+        "startTime": "Hora de início",
+        "endTime": "Hora de fim",
+        "notes": "Notas",
+        "creating": "A criar…",
+        "submit": "Criar horário disponível"
+      },
+      "status": {
+        "all": "Todas",
+        "pending": "Pendente",
+        "confirmed": "Confirmada",
+        "cancelled": "Cancelada",
+        "completed": "Concluída"
+      },
+      "loading": "A carregar...",
+      "empty": "Nenhuma marcação encontrada",
+      "bookedBy": "Reservado por: {name}",
+      "confirm": "Confirmar",
+      "confirmAria": "Confirmar marcação",
+      "cancel": "Cancelar",
+      "cancelAria": "Cancelar marcação",
+      "errors": {
+        "endBeforeStart": "A hora de fim tem de ser posterior à hora de início.",
+        "createFailed": "Não foi possível criar o horário disponível. Tente novamente.",
+        "network": "Não foi possível contactar o servidor. Verifique a ligação e tente novamente.",
+        "updateFailed": "Não foi possível atualizar a marcação (erro {status})."
+      }
+    },
+    "inventory": {
+      "title": "Inventário",
+      "subtitle": "Acompanhe os níveis de stock e gira a disponibilidade dos vales",
+      "refresh": "Atualizar",
+      "summary": {
+        "totalItems": "Total de itens",
+        "lowStock": "Stock baixo",
+        "outOfStock": "Esgotado"
+      },
+      "alerts": {
+        "title": "Alertas de stock baixo ({count})",
+        "threshold": "{stock} / limite de {threshold}"
+      },
+      "loading": "A carregar o inventário...",
+      "empty": "Nenhum vale encontrado",
+      "typeVoucher": "Vale {type}",
+      "stockStatus": {
+        "unlimited": "Ilimitado",
+        "outOfStock": "Esgotado",
+        "lowStock": "Stock baixo",
+        "inStock": "Em stock"
+      },
+      "stock": "Stock: {stock}",
+      "purchased": "Comprados: {count}",
+      "redeemed": "Resgatados: {count}",
+      "validUntil": "Válido até {date}",
+      "edit": {
+        "button": "Editar stock",
+        "stockQuantity": "Quantidade em stock",
+        "threshold": "Limite de stock baixo",
+        "save": "Guardar",
+        "saving": "A guardar...",
+        "cancel": "Cancelar"
+      },
+      "stockUpdated": "Stock atualizado",
+      "errors": {
+        "loadFailed": "Falha ao carregar o inventário",
+        "updateFailed": "Falha ao atualizar o stock"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "As sugestões de IA ainda não estão configuradas nesta plataforma, pelo que as ferramentas automáticas de esquema e listas de verificação estão ocultas. Pode continuar a criar e editar as suas páginas manualmente."
+    },
+    "pricing": {
+      "title": "Preços dinâmicos",
+      "newRule": "Nova regra",
+      "ruleTypes": {
+        "demand": {
+          "label": "Por procura",
+          "desc": "Ajuste o preço com base na relação visualizações/compras"
+        },
+        "timeOfDay": {
+          "label": "Hora do dia",
+          "desc": "Preços para horas de ponta e fora de ponta"
+        },
+        "inventory": {
+          "label": "Inventário",
+          "desc": "O preço varia com o stock restante"
+        },
+        "surge": {
+          "label": "Pico",
+          "desc": "Acréscimo para eventos especiais e feriados"
+        },
+        "loyalty": {
+          "label": "Fidelização",
+          "desc": "Descontos para clientes habituais"
+        }
+      },
+      "form": {
+        "title": "Criar regra de preço",
+        "ruleType": "Tipo de regra",
+        "priority": "Prioridade",
+        "priorityPlaceholder": "Mais alta = aplicada primeiro",
+        "config": "Configuração (JSON)",
+        "submit": "Criar regra",
+        "cancel": "Cancelar"
+      },
+      "loading": "A carregar regras...",
+      "empty": "Ainda sem regras de preço. Crie uma para ativar os preços dinâmicos.",
+      "table": {
+        "type": "Tipo",
+        "priority": "Prioridade",
+        "config": "Configuração",
+        "status": "Estado",
+        "actions": "Ações"
+      },
+      "active": "Ativa",
+      "inactive": "Inativa",
+      "deleteAria": "Eliminar regra de preço",
+      "deleteConfirm": "Eliminar esta regra de preço?",
+      "delete": "Eliminar",
+      "errors": {
+        "invalidJson": "O campo de configuração tem de conter JSON válido."
+      },
+      "preview": {
+        "title": "Pré-visualização do preço",
+        "description": "Introduza o ID de um vale para ver como as regras ativas afetariam o seu preço.",
+        "voucherId": "ID do vale",
+        "voucherIdPlaceholder": "Introduza o ID do vale",
+        "calculate": "Calcular",
+        "error": "Não foi possível calcular o preço",
+        "basePrice": "Preço base",
+        "finalPrice": "Preço final"
+      }
+    },
+    "rentals": {
+      "title": "Reservas de aluguer",
+      "subtitle": "Gira os pedidos de aluguer e as devoluções",
+      "status": {
+        "all": "Todas",
+        "pending": "Pendente",
+        "approved": "Aprovada",
+        "rejected": "Rejeitada",
+        "paid": "Paga",
+        "active": "Ativa",
+        "returned": "Devolvida",
+        "cancelled": "Cancelada"
+      },
+      "empty": "Nenhuma reserva de aluguer encontrada.",
+      "dates": "{start} - {end} ({days, plural, one {# dia} other {# dias}})",
+      "total": "Total: <strong>{total}</strong> ({rate}/dia)",
+      "note": "Nota: {note}",
+      "rejectedReason": "Rejeitada: {reason}",
+      "bookedMeta": "Reservado: {date} | Utilizador: {user}...",
+      "approve": "Aprovar",
+      "reasonPlaceholder": "Motivo (opcional)",
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "reject": "Rejeitar",
+      "markReturned": "Marcar como devolvido"
+    },
+    "subscriptionBoxes": {
+      "title": "Caixas de subscrição",
+      "subtitle": "Gira caixas de vales recorrentes",
+      "newBox": "+ Nova caixa",
+      "cancel": "Cancelar",
+      "form": {
+        "name": "Nome",
+        "description": "Descrição",
+        "price": "Preço ({currency})",
+        "currency": "Moeda",
+        "interval": "Intervalo",
+        "maxItems": "Máx. de itens",
+        "creating": "A criar...",
+        "submit": "Criar caixa"
+      },
+      "interval": {
+        "weekly": "Semanal",
+        "monthly": "Mensal",
+        "quarterly": "Trimestral"
+      },
+      "created": "Caixa de subscrição criada.",
+      "empty": "Ainda sem caixas de subscrição. Crie a sua primeira.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# subscritor} other {# subscritores}}",
+      "items": "{count, plural, one {# item} other {# itens}}",
+      "errors": {
+        "priceAboveZero": "Introduza um preço superior a 0.",
+        "createFailed": "Não foi possível criar a caixa de subscrição (erro {status}).",
+        "network": "Não foi possível criar a caixa de subscrição. Verifique a ligação e tente novamente."
+      },
+      "intervalUnit": {
+        "weekly": "semana",
+        "monthly": "mês",
+        "quarterly": "trimestre"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Website",
+      "supportEmail": "E-mail de suporte",
+      "logoUrl": "URL do logótipo",
+      "primaryColor": "Cor principal",
+      "secondaryColor": "Cor secundária",
+      "backgroundColor": "Cor de fundo",
+      "primaryColorHex": "Valor hex da cor principal",
+      "secondaryColorHex": "Valor hex da cor secundária",
+      "backgroundColorHex": "Valor hex da cor de fundo",
+      "saving": "A guardar..."
+    },
+    "page": {
+      "metaTitle": "Definições do comerciante",
+      "infoTitle": "Informações do comerciante",
+      "infoSubtitle": "Dados básicos do comerciante",
+      "name": "Nome",
+      "slug": "Slug",
+      "country": "País",
+      "defaultCurrency": "Moeda predefinida",
+      "website": "Website",
+      "supportEmail": "E-mail de suporte",
+      "completeOnboarding": "Concluir a configuração inicial",
+      "billingTitle": "Faturação",
+      "billingSubtitle": "Avaliação gratuita de 14 dias e, depois, planos a partir de 19 €/mês. Taxa de transação de 5% sobre as vendas de vales.",
+      "status": "Estado",
+      "trialStatus": "Avaliação gratuita — {days, plural, one {falta # dia} other {faltam # dias}}",
+      "statusActive": "Ativa",
+      "statusInactive": "Inativa",
+      "currentPlan": "Plano atual",
+      "trialEnds": "Fim da avaliação",
+      "periodEnds": "Fim do período atual",
+      "manage": "Gerir",
+      "payoutsTitle": "Pagamentos",
+      "payoutsEnabled": "Conta Stripe ligada e ativada",
+      "payoutsInProgress": "Configuração em curso — conclua-a para ativar os pagamentos",
+      "payoutsNotConnected": "Ligue o Stripe para receber os pagamentos das vendas de vales",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "Receba notificações de eventos em tempo real por HTTP",
+      "notificationsTitle": "Notificações",
+      "notificationsSubtitle": "Escolha as categorias de e-mail que recebe como membro da equipa."
+    },
+    "brandProfile": {
+      "title": "Perfil da marca",
+      "subtitle": "Personalize as cores, o logótipo e as informações de contacto da sua marca.",
+      "updated": "Perfil da marca atualizado com sucesso!",
+      "updateFailed": "Falha ao atualizar o perfil da marca",
+      "save": "Guardar alterações"
+    },
+    "domains": {
+      "title": "Domínios personalizados",
+      "subtitle": "Ligue o seu próprio domínio e verifique-o para o encaminhamento do inquilino.",
+      "inputLabel": "Domínio personalizado",
+      "adding": "A adicionar...",
+      "add": "Adicionar domínio",
+      "empty": "Nenhum domínio configurado.",
+      "statusLine": "Estado: {status}",
+      "statusValue": {
+        "pending": "pendente",
+        "verified": "verificado"
+      },
+      "verify": "Verificar",
+      "remove": "Remover",
+      "addedTitle": "Domínio adicionado",
+      "addedDescription": "Verifique o DNS antes de redirecionar o tráfego.",
+      "addErrorTitle": "Erro no domínio",
+      "addErrorDescription": "Não foi possível adicionar o domínio.",
+      "verifiedTitle": "Domínio verificado",
+      "verifiedDescription": "O encaminhamento do inquilino está agora ativo.",
+      "verifyErrorTitle": "Erro de verificação",
+      "verifyErrorDescription": "Não foi possível verificar o domínio.",
+      "removedTitle": "Domínio removido",
+      "removeErrorTitle": "Erro ao remover",
+      "removeErrorDescription": "Não foi possível remover o domínio."
+    },
+    "notifications": {
+      "metaTitle": "Preferências de notificação",
+      "title": "Preferências de notificação",
+      "intro": "Controle as categorias de e-mail que chegam à sua caixa de entrada como membro de <name>{merchantName}</name>. As preferências são pessoais — cada membro da equipa gere as suas.",
+      "required": "Obrigatória",
+      "toggle": "Ativar/desativar {label}",
+      "unsaved": "Alterações não guardadas",
+      "allSaved": "Todas as alterações guardadas",
+      "saving": "A guardar…",
+      "save": "Guardar preferências",
+      "savedTitle": "Preferências guardadas",
+      "saveFailedTitle": "Falha ao guardar",
+      "saveFailedDescription": "Não foi possível atualizar as suas preferências de notificação.",
+      "category": {
+        "orders": {
+          "label": "Novos pedidos e resgates",
+          "description": "E-mail quando um vale é comprado, resgatado ou oferecido."
+        },
+        "payouts": {
+          "label": "Pagamentos",
+          "description": "Chegadas, falhas e retenções de pagamentos do Stripe."
+        },
+        "fraud_alerts": {
+          "label": "Alertas de fraude e segurança",
+          "description": "Padrões de resgate invulgares, estornos, anomalias de início de sessão da equipa. Não pode ser desativado."
+        },
+        "campaign_updates": {
+          "label": "Ciclo de vida das campanhas",
+          "description": "Campanha publicada, a expirar em 7 dias, terminada."
+        },
+        "weekly_digest": {
+          "label": "Resumo semanal de desempenho",
+          "description": "Resumo à segunda-feira da receita, dos resgates e dos vales principais da semana anterior."
+        },
+        "product_updates": {
+          "label": "Novidades do produto GiftHub",
+          "description": "Novas funcionalidades, roadmap e dicas ocasionais. No máximo 1 por mês."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Pagamentos ao comerciante",
+      "title": "Pagamentos",
+      "intro": "Ligue uma conta Stripe para que as vendas de vales sejam pagas diretamente no seu banco. Cobramos uma taxa de plataforma de 5%; o restante é transferido automaticamente para a sua conta ligada no momento do checkout.",
+      "stripeAccount": "Conta Stripe",
+      "capabilityState": "Estado da capacidade",
+      "accountStatus": {
+        "pending": "pendente",
+        "restricted": "restrita",
+        "enabled": "ativada",
+        "disabled": "desativada"
+      },
+      "backToSettings": "Voltar às definições",
+      "howTitle": "Como funcionam os pagamentos",
+      "how1": "Os clientes pagam no checkout da plataforma. Cobramos o valor total e mantemo-lo no Stripe.",
+      "how2": "Quando um pagamento é concluído, o Stripe envia o preço de venda, deduzida a nossa taxa de 5%, diretamente para a sua conta de pagamentos.",
+      "how3": "Depois, o Stripe transfere esse dinheiro para a sua conta bancária segundo o calendário que escolher nas definições de pagamento do Stripe (normalmente diário, alguns dias após a venda).",
+      "how4": "Os estornos e reembolsos são deduzidos do pagamento seguinte; a equipa de administração pode reter manualmente o seu saldo se detetarmos fraude.",
+      "badge": {
+        "enabled": {
+          "label": "Pagamentos ativados",
+          "description": "Os fundos das vendas de vales são transferidos pelo Stripe para a sua conta bancária segundo o calendário de pagamentos definido."
+        },
+        "restricted": {
+          "label": "São necessárias mais informações",
+          "description": "O Stripe precisa de mais informações antes de ativar os pagamentos. Abra o link de configuração abaixo para continuar."
+        },
+        "disabled": {
+          "label": "Pagamentos desativados",
+          "description": "O Stripe desativou os pagamentos nesta conta. Abra o painel do Stripe para resolver os requisitos pendentes."
+        },
+        "notConnected": {
+          "label": "Não ligado",
+          "description": "Ainda não ligou uma conta Stripe. Os pagamentos ficam retidos até concluir a configuração — entretanto, as vendas de vales continuam a ser processadas, mas os fundos ficam no saldo da plataforma."
+        }
+      },
+      "actions": {
+        "startFailed": "Falha ao iniciar a configuração do Stripe",
+        "startNetworkError": "Erro de rede ao iniciar a configuração",
+        "dashboardFailed": "Não foi possível abrir o painel do Stripe",
+        "dashboardNetworkError": "Erro de rede ao abrir o painel",
+        "disconnectConfirm": "Desligar esta conta Stripe? Os pagamentos ficam suspensos até voltar a ligá-la.",
+        "disconnected": "Conta Stripe desligada",
+        "disconnectFailed": "Falha ao desligar",
+        "disconnect": "Desligar",
+        "setUp": "Configurar pagamentos com o Stripe",
+        "openDashboard": "Abrir painel do Stripe",
+        "continueOnboarding": "Continuar a configuração"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Falha ao carregar os dados do comerciante.",
+      "retry": "Tentar novamente",
+      "loading": "A carregar...",
+      "title": "Complete o seu perfil",
+      "subtitle": "Configure o perfil da marca do comerciante.",
+      "basicInfo": "Informações básicas",
+      "merchantName": "Nome do comerciante *",
+      "brandTitle": "Perfil da marca",
+      "brandSubtitle": "Personalize as cores e o logótipo da sua marca.",
+      "updateFailed": "Falha ao atualizar o comerciante",
+      "submit": "Concluir configuração",
+      "skip": "Saltar por agora"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Registo de auditoria",
+      "subtitle": "Acompanhe todas as ações realizadas na sua conta de comerciante",
+      "filters": "Filtros",
+      "action": "Ação",
+      "allActions": "Todas as ações",
+      "fromDate": "Data inicial",
+      "toDate": "Data final",
+      "apply": "Aplicar",
+      "clear": "Limpar",
+      "loading": "A carregar o registo de auditoria...",
+      "loadFailed": "Falha ao carregar o registo de auditoria",
+      "empty": "Nenhuma entrada no registo de auditoria.",
+      "columns": {
+        "timestamp": "Data e hora",
+        "actor": "Autor",
+        "action": "Ação",
+        "resource": "Recurso",
+        "details": "Detalhes"
+      },
+      "unknownActor": "Desconhecido",
+      "showing": "A mostrar {from}–{to} de {total}",
+      "pageOf": "Página {page} de {totalPages}",
+      "previousPage": "Página anterior",
+      "nextPage": "Página seguinte",
+      "actions": {
+        "voucherCreated": "Vale criado",
+        "voucherUpdated": "Vale atualizado",
+        "voucherPublished": "Vale publicado",
+        "vouchersGenerated": "Vales gerados",
+        "campaignCreated": "Campanha criada",
+        "campaignUpdated": "Campanha atualizada",
+        "memberInvited": "Membro da equipa convidado",
+        "memberRemoved": "Membro da equipa removido",
+        "memberRoleChanged": "Função de membro da equipa alterada",
+        "apiKeyCreated": "Chave API criada",
+        "apiKeyRevoked": "Chave API revogada",
+        "apiKeyUpdated": "Chave API atualizada",
+        "eventCreated": "Evento criado",
+        "eventUpdated": "Evento atualizado",
+        "eventPublished": "Evento publicado",
+        "merchantUpdated": "Comerciante atualizado",
+        "reviewReplied": "Avaliação respondida",
+        "settingsUpdate": "Atualização de definições",
+        "settingsView": "Consulta de definições",
+        "ticketRedeemed": "Bilhete resgatado"
+      },
+      "resources": {
+        "voucher": "Vale",
+        "campaign": "Campanha",
+        "giftCard": "Cartão-presente",
+        "event": "Evento",
+        "member": "Membro",
+        "teamMember": "Membro da equipa",
+        "apiKey": "Chave API",
+        "webhook": "Webhook",
+        "merchant": "Comerciante",
+        "user": "Utilizador",
+        "review": "Avaliação"
+      }
+    },
+    "roles": {
+      "admin": "Administrador",
+      "adminDescription": "Acesso total — gerir vales, campanhas, membros e definições",
+      "staff": "Funcionário",
+      "staffDescription": "Acesso operacional — confirmar resgates e ver dados",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Membros da equipa",
+      "subtitle": "Gira a sua equipa e os respetivos níveis de acesso",
+      "inviteMember": "Convidar membro",
+      "inviteTitle": "Convidar membro da equipa",
+      "emailAddress": "Endereço de e-mail",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "O utilizador tem de ter uma conta existente.",
+      "role": "Função",
+      "inviting": "A convidar...",
+      "sendInvitation": "Enviar convite",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "loading": "A carregar os membros da equipa...",
+      "loadFailed": "Falha ao carregar os membros da equipa",
+      "empty": "Ainda sem membros da equipa. Convide o primeiro membro acima.",
+      "columns": {
+        "member": "Membro",
+        "role": "Função",
+        "joined": "Aderiu",
+        "actions": "Ações"
+      },
+      "unnamed": "Sem nome",
+      "memberRole": "Função do membro",
+      "changeRole": "Alterar função",
+      "removeMember": "Remover membro",
+      "inviteFailed": "Falha ao convidar o membro",
+      "invited": "Membro convidado com sucesso",
+      "updateRoleFailed": "Falha ao atualizar a função",
+      "roleUpdated": "Função atualizada",
+      "removeConfirm": "Remover {name} da equipa?",
+      "remove": "Remover",
+      "removeFailed": "Falha ao remover o membro",
+      "removed": "Membro removido"
+    },
+    "inviteForm": {
+      "title": "Convidar membro da equipa",
+      "subtitle": "Adicione um membro da equipa pelo endereço de e-mail.",
+      "email": "E-mail",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "O utilizador tem de ter uma conta. Se não tiver, tem de se registar primeiro.",
+      "role": "Função",
+      "roleHint": "Os administradores podem gerir vales, campanhas e membros da equipa. Os funcionários podem confirmar resgates.",
+      "inviting": "A convidar...",
+      "submit": "Convidar membro",
+      "redirectingToBilling": "{message} A redirecionar para a faturação..."
+    },
+    "referrals": {
+      "title": "Análise de referências",
+      "subtitle": "Acompanhe o desempenho e as recompensas das referências.",
+      "stats": {
+        "total": "Total de referências",
+        "totalHint": "Todas as referências registadas",
+        "opened": "Abertas",
+        "openedHint": "Vistas ou resgatadas",
+        "redeemed": "Resgatadas",
+        "redeemedHint": "Referências convertidas",
+        "conversionRate": "Taxa de conversão",
+        "conversionRateHint": "Resgatadas / total"
+      },
+      "statusBreakdown": "Distribuição por estado",
+      "creditsIssued": "Créditos emitidos {amount}",
+      "noActivity": "Ainda sem atividade de referências.",
+      "topReferrers": "Principais referenciadores",
+      "topReferrersHint": "Utilizadores que geram mais referências.",
+      "noReferrals": "Ainda sem referências.",
+      "unknownUser": "Utilizador desconhecido",
+      "referralCount": "{count, plural, one {# referência} other {# referências}}",
+      "recent": "Referências recentes",
+      "recentHint": "Últimas referências dos clientes.",
+      "noRecent": "Sem referências recentes.",
+      "voucherFallback": "Vale",
+      "status": {
+        "created": "Criada",
+        "opened": "Aberta",
+        "redeemed": "Resgatada",
+        "expired": "Expirada",
+        "blocked": "Bloqueada"
+      }
+    },
+    "emailCampaigns": {
+      "title": "Campanhas de e-mail",
+      "newCampaign": "Nova campanha",
+      "notConfigured": "O envio de e-mails ainda não está configurado nesta plataforma. Pode criar e pré-visualizar campanhas, mas só poderão ser enviadas depois de ligar um fornecedor de e-mail.",
+      "notConfiguredShort": "O envio de e-mails ainda não está configurado nesta plataforma",
+      "createTitle": "Criar campanha",
+      "campaignName": "Nome da campanha",
+      "campaignNamePlaceholder": "Newsletter de saldos de verão",
+      "subjectLine": "Linha de assunto",
+      "subjectPlaceholder": "Não perca as nossas promoções de verão!",
+      "recipients": "Destinatários",
+      "recipientFilter": {
+        "all": "Todos os clientes",
+        "redeemed30d": "Resgataram nos últimos 30 dias",
+        "inactive": "Clientes inativos"
+      },
+      "schedule": "Agendamento (opcional)",
+      "emailSections": "Secções do e-mail",
+      "sectionTypes": {
+        "header": "Cabeçalho",
+        "text": "Texto",
+        "image": "Imagem",
+        "button": "Botão",
+        "divider": "Divisor",
+        "voucherCard": "Vale"
+      },
+      "creating": "A criar...",
+      "scheduleCampaign": "Agendar campanha",
+      "saveDraft": "Guardar como rascunho",
+      "preview": "Pré-visualizar",
+      "editor": {
+        "moveUp": "Mover para cima",
+        "moveDown": "Mover para baixo",
+        "removeSection": "Remover secção",
+        "title": "Título",
+        "subtitle": "Subtítulo (opcional)",
+        "textContent": "Introduza o conteúdo de texto...",
+        "imageUrl": "URL da imagem",
+        "altText": "Texto alternativo",
+        "buttonLabel": "Texto do botão",
+        "buttonUrl": "URL do botão",
+        "dividerHint": "Linha divisória horizontal",
+        "voucherTitle": "Título do vale",
+        "voucherValue": "Valor (p. ex. 20% DE DESCONTO)",
+        "voucherCode": "Código (p. ex. SAVE20)",
+        "voucherExpiry": "Validade (p. ex. 31 dez. 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Título do cabeçalho",
+        "textContent": "Conteúdo de texto...",
+        "imagePlaceholder": "Marcador de imagem",
+        "button": "Botão",
+        "voucher": "Vale",
+        "validUntil": "Válido até {date}"
+      },
+      "loading": "A carregar...",
+      "empty": "Ainda sem campanhas de e-mail",
+      "columns": {
+        "name": "Nome",
+        "subject": "Assunto",
+        "status": "Estado",
+        "recipients": "Destinatários",
+        "opens": "Aberturas",
+        "created": "Criada",
+        "actions": "Ações"
+      },
+      "status": {
+        "draft": "rascunho",
+        "scheduled": "agendada",
+        "sent": "enviada"
+      },
+      "send": "Enviar",
+      "delete": "Eliminar",
+      "deleteCampaign": "Eliminar campanha",
+      "toasts": {
+        "missingFields": "Campos em falta",
+        "missingFieldsDescription": "O nome e o assunto são obrigatórios.",
+        "created": "Campanha criada",
+        "error": "Erro",
+        "createFailed": "Falha ao criar a campanha.",
+        "sendConfirm": "Tem a certeza de que pretende enviar esta campanha agora?",
+        "sendFailedStatus": "Falha no envio (erro {status}).",
+        "partlySent": "Campanha enviada parcialmente",
+        "partlySentDescription": "Enviada para {sent} de {total} destinatários. {failed, plural, one {Não foi possível enviar # e-mail} other {Não foi possível enviar # e-mails}}.",
+        "sent": "Campanha enviada",
+        "sentDescription": "Enviada para {sent, plural, one {# destinatário} other {# destinatários}}.",
+        "sendFailed": "Falha no envio",
+        "deleteConfirm": "Eliminar esta campanha?",
+        "deleted": "Campanha eliminada",
+        "deleteFailed": "Falha ao eliminar."
+      }
+    },
+    "apiKeys": {
+      "title": "Chaves API",
+      "subtitle": "Gira as chaves API para acesso programático aos dados do seu comerciante",
+      "createKey": "Criar chave",
+      "createdNotice": "Chave API criada! Copie-a agora — não voltará a ser mostrada.",
+      "copyKey": "Copiar chave",
+      "createTitle": "Criar chave API",
+      "keyName": "Nome da chave",
+      "keyNamePlaceholder": "p. ex. Integração POS de produção",
+      "permissions": "Permissões",
+      "creating": "A criar...",
+      "submit": "Criar chave API",
+      "cancel": "Cancelar",
+      "loading": "A carregar chaves API...",
+      "empty": "Ainda sem chaves API. Crie uma para começar.",
+      "createdOn": "Criada a {date}",
+      "lastUsed": "Última utilização a {date}",
+      "expires": "Expira a {date}",
+      "revokeKey": "Revogar chave",
+      "loadFailed": "Falha ao carregar as chaves API",
+      "required": "O nome e pelo menos uma permissão são obrigatórios",
+      "createFailed": "Falha ao criar a chave API",
+      "created": "Chave API criada",
+      "revokeConfirm": "Revogar a chave API \"{name}\"? Esta ação não pode ser anulada.",
+      "revoke": "Revogar",
+      "revoked": "Chave API revogada",
+      "revokeFailed": "Falha ao revogar a chave API",
+      "copied": "Copiado para a área de transferência",
+      "groups": {
+        "vouchers": "Vales",
+        "campaigns": "Campanhas",
+        "giftCards": "Cartões-presente",
+        "customers": "Clientes",
+        "analytics": "Análises",
+        "events": "Eventos"
+      },
+      "permissionLabels": {
+        "voucherRead": "Ler vales",
+        "voucherCreate": "Criar vales",
+        "voucherRedeem": "Resgatar vales",
+        "campaignRead": "Ler campanhas",
+        "campaignCreate": "Criar campanhas",
+        "giftCardRead": "Ler cartões-presente",
+        "giftCardRedeem": "Resgatar cartões-presente",
+        "customerRead": "Ler clientes",
+        "analyticsRead": "Ler análises",
+        "eventRead": "Ler eventos",
+        "eventCheckin": "Check-in em eventos"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "Receba notificações de eventos por HTTP",
+      "addWebhook": "Adicionar webhook",
+      "secretNotice": "Segredo do webhook (mostrado apenas uma vez):",
+      "copySecret": "Copiar segredo",
+      "copied": "Copiado!",
+      "newTitle": "Novo webhook",
+      "endpointUrl": "URL do endpoint",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Eventos",
+      "submit": "Criar webhook",
+      "loading": "A carregar...",
+      "empty": "Nenhum webhook configurado",
+      "createdOn": "Criado a {date}",
+      "deliveriesCount": "{count, plural, one {# entrega} other {# entregas}}",
+      "sendTest": "Enviar teste",
+      "viewDeliveries": "Registo de entregas",
+      "disable": "Desativar",
+      "enable": "Ativar",
+      "deleteWebhook": "Eliminar webhook",
+      "deliveryLog": "Registo de entregas",
+      "noDeliveries": "Ainda sem entregas",
+      "deliveryFailed": "Falhou",
+      "attempts": "{count, plural, one {# tentativa} other {# tentativas}}",
+      "loadFailed": "Falha ao carregar os webhooks",
+      "required": "O URL e pelo menos um evento são obrigatórios",
+      "created": "Webhook criado",
+      "createFailed": "Falha ao criar o webhook",
+      "deleted": "Webhook eliminado",
+      "deleteFailed": "Falha ao eliminar o webhook",
+      "updateFailed": "Falha ao atualizar o webhook",
+      "testDelivered": "Teste entregue! Estado: {status}",
+      "testFailed": "O teste falhou: {error}",
+      "statusCode": "Estado {status}",
+      "testSendFailed": "Falha ao enviar o webhook de teste",
+      "loadDeliveriesFailed": "Falha ao carregar as entregas"
+    }
   }
 }

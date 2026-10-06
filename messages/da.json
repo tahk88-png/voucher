@@ -2602,5 +2602,2656 @@
       "downloading": "Downloader...",
       "download": "Download QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Administrer dine kuponkampagner.",
+      "createCampaign": "Opret kampagne",
+      "subscriptionRequired": "Abonnement påkrævet",
+      "trialEnded": "Din gratis 60-dages kampagneprøveperiode er slut. Start planen til 9,90/md. for at oprette nye kampagner.",
+      "stats": {
+        "totalTitle": "Kampagner i alt",
+        "totalDescription": "Alle kampagner",
+        "activeTitle": "Aktive",
+        "activeDescription": "Kører lige nu",
+        "paidTitle": "Betalte køb",
+        "paidDescription": "Gennemførte ordrer",
+        "revenueTitle": "Omsætning",
+        "revenueDescription": "Salg af betalte kuponer"
+      },
+      "weeklyRevenue": {
+        "title": "Ugentlig omsætning",
+        "description": "Betalt kampagnesalg over 7 dage.",
+        "series": "Omsætning"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Ingen kampagner endnu",
+        "descriptionCanCreate": "Opret en kampagne for at organisere og administrere dine kuponer.",
+        "descriptionNeedsSubscription": "Start et abonnement for at oprette nye kampagner.",
+        "action": "Opret din første kampagne"
+      },
+      "searchPlaceholder": "Søg i kampagner...",
+      "searchLabel": "Søg i kampagner",
+      "filterAll": "Alle",
+      "status": {
+        "active": "Aktiv",
+        "draft": "Kladde",
+        "ended": "Afsluttet",
+        "paused": "Sat på pause"
+      },
+      "noMatches": "Ingen kampagner matcher dine filtre.",
+      "clearFilters": "Ryd filtre",
+      "type": {
+        "weekly": "Ugentlig kampagne",
+        "limited": "Begrænset kampagne",
+        "other": "Kampagne: {type}"
+      },
+      "runs": "Kører {start} - {end}",
+      "view": "Se",
+      "stats": {
+        "vouchers": "Kuponer",
+        "paidPurchases": "Betalte køb",
+        "revenue": "Omsætning",
+        "price": "Pris"
+      },
+      "free": "Gratis"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Nye kampagner starter som kladde. Kunderne kan ikke se dem, før du udgiver dem fra kampagnesiden."
+    },
+    "edit": {
+      "breadcrumb": "Rediger",
+      "title": "Rediger kampagne"
+    },
+    "form": {
+      "basicInfo": "Grundlæggende oplysninger",
+      "nameLabel": "Kampagnenavn *",
+      "namePlaceholder": "Juletilbud",
+      "descriptionLabel": "Beskrivelse",
+      "descriptionPlaceholder": "Tidsbegrænset kampagne",
+      "typeLabel": "Type *",
+      "typeOptions": {
+        "limited": "Engangs (begrænset)",
+        "weekly": "Ugentlig"
+      },
+      "dates": "Datoer",
+      "startDate": "Startdato *",
+      "endDate": "Slutdato *",
+      "timezoneHint": "Tidspunkter er i din lokale tidszone.",
+      "pricing": "Priser og grænser",
+      "priceLabel": "Pris i {currency} (lad feltet stå tomt for gratis kuponer)",
+      "pricePreview": "Kunderne betaler {price}.",
+      "priceHint": "Skriv beløbet i {currency}, f.eks. 4.50 eller 4,50 for {example}.",
+      "maxRedemptions": "Maks. indløsninger",
+      "maxPurchases": "Maks. køb",
+      "unlimited": "Ubegrænset",
+      "creditLabel": "Kredit til anbefaler (%)",
+      "creditPreview": "Anbefalere optjener {percent}% af købsprisen som kredit.",
+      "creditHint": "Andel af købsprisen, der udbetales til anbefaleren som kredit, f.eks. 5 eller 2,5.",
+      "termsSection": "Vilkår og betingelser",
+      "termsLabel": "Vilkår",
+      "termsPlaceholder": "Vilkår og betingelser for denne kampagne...",
+      "saving": "Gemmer...",
+      "saveChanges": "Gem ændringer",
+      "creating": "Opretter...",
+      "create": "Opret kampagne",
+      "saved": "Kampagneændringer gemt.",
+      "errors": {
+        "invalidDates": "Angiv en gyldig start- og slutdato.",
+        "endBeforeStart": "Slutdatoen skal ligge efter startdatoen.",
+        "maxRedemptions": "Maks. indløsninger skal være et helt tal på 1 eller mere.",
+        "maxPurchases": "Maks. køb skal være et helt tal på 1 eller mere.",
+        "saveFailed": "Kampagnen kunne ikke gemmes"
+      },
+      "priceErrors": {
+        "negative": "Prisen kan ikke være negativ.",
+        "invalid": "Prisen er ikke et gyldigt tal.",
+        "wholeNumber": "Prisen skal være et helt tal.",
+        "decimals": "Prisen må højst have {decimals} decimaler.",
+        "tooLarge": "Prisen er for høj."
+      },
+      "creditErrors": {
+        "negative": "Anbefalerkredit kan ikke være negativ.",
+        "invalid": "Anbefalerkredit er ikke et gyldigt tal.",
+        "decimals": "Anbefalerkredit må højst have {decimals} decimaler.",
+        "tooLarge": "Anbefalerkredit er for høj.",
+        "tooHigh": "Anbefalerkredit kan ikke være over 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "Ingen beskrivelse",
+      "draftNotice": "Denne kampagne er en kladde, så kunderne kan ikke se den endnu.",
+      "draftNoticeAdmin": "Denne kampagne er en kladde, så kunderne kan ikke se den endnu. Udgiv den, når du er klar.",
+      "status": "Status",
+      "type": "Type",
+      "price": "Pris",
+      "referrerCredit": "Anbefalerkredit",
+      "none": "Ingen",
+      "stats": {
+        "vouchers": "Kuponer",
+        "totalPurchases": "Køb i alt",
+        "paidPurchases": "Betalte køb"
+      },
+      "terms": "Vilkår og betingelser",
+      "promotion": {
+        "title": "Promovering",
+        "description": "Betalt synlighed i det ugentlige nyhedsbrev og notifikationer."
+      },
+      "vouchers": {
+        "title": "Kuponer",
+        "description": "Kuponer genereret fra denne kampagne.",
+        "empty": "Ingen kuponer genereret endnu.",
+        "view": "Se"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Medtag i ugentligt nyhedsbrev (betalt)",
+      "notification": "Fremhæv i notifikationer (betalt)",
+      "endDate": "Slutdato for promovering",
+      "saving": "Gemmer...",
+      "save": "Gem promoveringsindstillinger",
+      "saved": "Promoveringsindstillinger gemt.",
+      "upgradeNeededTitle": "Opgradering påkrævet",
+      "upgradeNeeded": "Promoveringsboost er en del af en højere plan. Opgrader under Indstillinger og fakturering for at bruge dem.",
+      "saveFailedStatus": "Promoveringsindstillingerne kunne ikke gemmes (fejl {status}).",
+      "saveFailedNetwork": "Promoveringsindstillingerne kunne ikke gemmes. Tjek din forbindelse, og prøv igen."
+    },
+    "actions": {
+      "adminOnly": "Kun forhandleradministratorer kan udgive, sætte på pause eller redigere kampagner.",
+      "edit": "Rediger",
+      "publish": {
+        "label": "Udgiv",
+        "title": "Udgiv denne kampagne?",
+        "description": "Kunderne kan med det samme se og købe kuponer fra denne kampagne.",
+        "success": "Kampagnen er udgivet og nu live for kunderne."
+      },
+      "pause": {
+        "label": "Sæt på pause",
+        "title": "Sæt denne kampagne på pause?",
+        "description": "Kampagnen bliver til en kladde igen og skjules for kunderne, indtil du udgiver den igen. Allerede solgte kuponer forbliver gyldige.",
+        "success": "Kampagnen er sat på pause og skjult for kunderne."
+      },
+      "end": {
+        "label": "Afslut kampagne",
+        "title": "Afslut denne kampagne nu?",
+        "description": "Kampagnen stopper med det samme og kan ikke udgives igen. Allerede solgte kuponer forbliver gyldige.",
+        "success": "Kampagnen er afsluttet."
+      },
+      "updateFailedStatus": "Kampagnen kunne ikke opdateres (fejl {status}).",
+      "updateFailed": "Kampagnen kunne ikke opdateres."
+    },
+    "generate": {
+      "open": "Generer kuponer",
+      "title": "Generer kuponer",
+      "descriptionPriced": "Opretter kuponkladder med {value} i rabat, gyldige {start} – {end}. Hver kupon får sin egen kode. De forbliver skjulte, indtil du udgiver dem.",
+      "descriptionFree": "Denne kampagne er gratis, så der er intet beløb at sætte på kuponerne. Angiv først en pris på kampagnen.",
+      "countLabel": "Antal kuponer (1-100)",
+      "generating": "Genererer...",
+      "submit": "Generer",
+      "invalidCount": "Angiv et helt tal mellem 1 og 100",
+      "needsPrice": "Angiv først en pris på denne kampagne. Genererede kuponer er værd det samme som kampagneprisen.",
+      "failed": "Kuponerne kunne ikke genereres",
+      "success": "{count, plural, one {# kuponkladde genereret. Udgiv den} other {# kuponkladder genereret. Udgiv dem}} fra kuponsiden, når du er klar."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktive kampagner",
+      "statLiveVouchers": "Aktive kuponer",
+      "statRedemptions30d": "Indløsninger (30 dage)"
+    },
+    "error": {
+      "title": "Noget gik galt",
+      "description": "Der opstod en fejl i forhandlerpanelet.",
+      "tryAgain": "Prøv igen",
+      "backToMerchants": "Tilbage til forhandlere"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Oversigt",
+        "offers": "Tilbud",
+        "inStore": "I butikken",
+        "customers": "Kunder",
+        "settings": "Indstillinger"
+      },
+      "language": "Sprog",
+      "opensAppArea": "Åbner appområdet",
+      "externalLinkTitle": "{label} (åbner appområdet uden for denne forhandler)",
+      "opensOutside": "Åbner uden for forhandlerområdet",
+      "merchantNavigation": "Forhandler",
+      "more": "Mere",
+      "navDashboard": "Dashboard"
+    },
+    "dashboard": {
+      "title": "Forhandlerens dashboard",
+      "welcomeBack": "Velkommen tilbage, {name}",
+      "viewCampaigns": "Se kampagner",
+      "createVoucher": "Opret kupon",
+      "performanceOverview": "Resultatoversigt",
+      "performanceOverviewHint": "Live kampagneaktivitet og indløsninger.",
+      "revenueAndCredits": "Omsætning og kreditter",
+      "revenueAndCreditsHint": "Salg, kreditter og udestående forpligtelser.",
+      "performanceTrend": "Resultatudvikling",
+      "performanceTrendHint": "Indløsnings- og omsætningsaktivitet de seneste {days} dage.",
+      "rangeShort": "{days} d.",
+      "revenue": "Omsætning",
+      "chartRedemptions": "Indløsninger",
+      "chartRevenue": "Omsætning ({currency})",
+      "paidOrders": "Betalte ordrer",
+      "openOrdersView": "Åbn ordreoversigten",
+      "avgOrder": "Gns. ordre",
+      "openCampaignRevenue": "Åbn kampagneomsætning",
+      "redemptionRate": "Indløsningsrate",
+      "openRedemptionQueue": "Åbn indløsningskøen",
+      "pendingConfirmation": "{count} afventer bekræftelse",
+      "pendingConfirmationHint": "Indløsninger i butikken, der venter på din godkendelse.",
+      "viewRedemptions": "Se indløsninger",
+      "actionCenter": "Handlingscenter",
+      "actionCenterHint": "Prioriterede punkter at gennemgå.",
+      "allCaughtUp": "Du er helt ajour.",
+      "open": "Åbn",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# afventende indløsning} other {# afventende indløsninger}}",
+        "pendingRedemptionsDetail": "Bekræft indløsninger i butikken",
+        "expiringVouchers": "{count, plural, one {# kupon udløber snart} other {# kuponer udløber snart}}",
+        "expiringVouchersDetail": "Gennemgå kuponernes gyldighedsdatoer",
+        "endingCampaigns": "{count, plural, one {# kampagne slutter denne uge} other {# kampagner slutter denne uge}}",
+        "endingCampaignsDetail": "Forlæng eller dupliker dine bedste kampagner",
+        "upcomingEvents": "{count, plural, one {# kommende begivenhed} other {# kommende begivenheder}}",
+        "upcomingEventsDetail": "Forbered billetindtjekning og bemanding"
+      },
+      "upcomingEventsTitle": "Kommende begivenheder",
+      "upcomingEventsHint": "Næste planlagte begivenheder.",
+      "noUpcomingEvents": "Ingen kommende begivenheder planlagt.",
+      "eventStatus": {
+        "published": "udgivet",
+        "soldOut": "udsolgt"
+      },
+      "manageEvents": "Administrer begivenheder",
+      "topVouchers": "Topkuponer",
+      "topVouchersHint": "Mest indløste tilbud.",
+      "noTopVouchers": "Ingen kuponer er indløst endnu. Dine mest indløste kuponer vises her."
+    },
+    "stats": {
+      "activeVouchers": "Aktive kuponer",
+      "publishedVouchers": "Udgivne kuponer",
+      "openVouchers": "Åbn kuponer",
+      "activeCampaigns": "Aktive kampagner",
+      "runningCampaigns": "Igangværende kampagner",
+      "openCampaigns": "Åbn kampagner",
+      "activeEvents": "Aktive begivenheder",
+      "publishedEvents": "Udgivne begivenheder",
+      "openEvents": "Åbn begivenheder",
+      "todaysRedemptions": "Dagens indløsninger",
+      "thisWeek": "Denne uge: {count}",
+      "reviewRedemptions": "Gennemgå indløsninger",
+      "ofWeekly": "af ugentligt"
+    },
+    "revenue": {
+      "voucherRevenue": "Kuponomsætning",
+      "paidVoucherSales": "Salg af betalte kuponer",
+      "openCampaignSales": "Åbn kampagnesalg",
+      "ticketRevenue": "Billetomsætning",
+      "paidTicketSales": "Salg af betalte billetter",
+      "openEventSales": "Åbn begivenhedssalg",
+      "creditsIssued": "Udstedte kreditter",
+      "totalCreditsDistributed": "Samlet uddelt kredit",
+      "openReferralCredits": "Åbn anbefalingskreditter",
+      "outstandingLiability": "Udestående forpligtelse",
+      "unredeemedValue": "Værdi af ikke-indløste kuponer",
+      "openVoucherLiability": "Åbn kuponforpligtelser"
+    },
+    "recentActivity": {
+      "title": "Seneste aktivitet",
+      "empty": "Ingen nylig aktivitet",
+      "unknownUser": "Ukendt bruger",
+      "redeemedVoucher": "Indløst kupon - {time}",
+      "confirmed": "Bekræftet",
+      "pending": "Afventer"
+    },
+    "liveStats": {
+      "live": "Live",
+      "connecting": "Forbinder…",
+      "redeemedToday": "<value>{count}</value> <label>indløst i dag</label>",
+      "pending": "<value>{count}</value> <label>afventer</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analyser",
+      "title": "Analyser",
+      "subtitle": "Følg dine kuponers resultater og omsætning",
+      "totalRedemptions": "Indløsninger i alt",
+      "confirmedRedemptions": "Bekræftede indløsninger",
+      "totalDiscounts": "Rabatter i alt",
+      "givenToCustomers": "Givet til kunder",
+      "creditsIssued": "Udstedte kreditter",
+      "totalCreditsDistributed": "Samlet uddelt kredit",
+      "activeVouchers": "Aktive kuponer",
+      "withRedemptions": "Med indløsninger",
+      "charts": {
+        "redemptionTrends": "Indløsningstendenser (seneste 30 dage)",
+        "redemptions": "Indløsninger",
+        "revenue": "Omsætning ({currency})",
+        "topPerforming": "Bedst præsterende kuponer",
+        "noRedeemed": "Ingen kuponer er indløst endnu. Dine bedste kuponer vises her.",
+        "byCategory": "Indløsninger efter kategori",
+        "noCategoryData": "Ingen kategoridata tilgængelige"
+      }
+    },
+    "ask": {
+      "title": "Spørg dine data",
+      "subtitle": "Stil spørgsmål om dine forretningsdata med almindeligt sprog",
+      "emptyTitle": "Spørg om hvad som helst i dine data",
+      "emptyHint": "Prøv et af forslagene nedenfor",
+      "placeholder": "Stil et spørgsmål om dine data...",
+      "suggestedTitle": "Foreslåede spørgsmål",
+      "suggestions": {
+        "revenueLastWeek": "Hvad var min omsætning i sidste uge?",
+        "dailyRedemptionsThisMonth": "Vis daglige indløsninger denne måned",
+        "topVouchersByRevenue": "Topkuponer efter omsætning sidste måned",
+        "customersPurchasedLastWeek": "Hvor mange kunder købte i sidste uge?",
+        "referralConversionRate": "Hvad er min konverteringsrate for anbefalinger?",
+        "dailyRevenueTrend": "Vis den daglige omsætningsudvikling denne måned",
+        "purchasesYesterday": "Hvor mange køb blev der foretaget i går?",
+        "bestPerformingVouchers": "Hvilke kuponer klarer sig bedst?"
+      },
+      "errorFallback": "Beklager, jeg kunne ikke behandle det spørgsmål.",
+      "networkError": "Netværksfejl. Prøv igen.",
+      "itemLabel": "Element {n}"
+    },
+    "reports": {
+      "title": "Økonomirapporter",
+      "subtitle": "Omsætningsoversigt og eksport",
+      "downloadCsv": "Download CSV",
+      "from": "Fra",
+      "to": "Til",
+      "apply": "Anvend",
+      "totalRevenue": "Samlet omsætning",
+      "platformFees": "Platformgebyrer",
+      "netRevenue": "Nettoomsætning",
+      "redemptions": "Indløsninger",
+      "revenueByCurrency": "Omsætning pr. valuta",
+      "netAndFees": "Netto: {net} • Gebyrer: {fees}",
+      "monthlyRevenue": "Månedlig omsætning",
+      "noRevenue": "Ingen omsætningsdata for denne periode.",
+      "month": "Måned",
+      "vouchers": "Kuponer",
+      "tickets": "Billetter",
+      "total": "I alt"
+    },
+    "scheduled": {
+      "title": "Planlagte rapporter",
+      "subtitle": "Opsæt automatiske rapporter via e-mail",
+      "backToReports": "← Økonomirapporter",
+      "activeSchedules": "Aktive tidsplaner",
+      "loading": "Indlæser...",
+      "noSchedules": "Ingen tidsplaner opsat endnu",
+      "period": {
+        "daily": "Dagligt",
+        "weekly": "Ugentligt",
+        "monthly": "Månedligt"
+      },
+      "reportTitle": {
+        "daily": "Daglig rapport",
+        "weekly": "Ugentlig rapport",
+        "monthly": "Månedlig rapport"
+      },
+      "recipientCount": "{count, plural, one {# modtager} other {# modtagere}}",
+      "lastSent": "Senest sendt: {date}",
+      "nextRun": "Næste: {date}",
+      "pause": "Sæt på pause",
+      "resume": "Genoptag",
+      "createSchedule": "Opret tidsplan",
+      "frequency": "Hyppighed",
+      "recipients": "Modtagere",
+      "invalidEmail": "Ugyldig e-mailadresse",
+      "emailAlreadyAdded": "E-mailen er allerede tilføjet",
+      "addAtLeastOne": "Tilføj mindst én modtager",
+      "saved": "Rapporttidsplanen er gemt",
+      "saveFailed": "Tidsplanen kunne ikke gemmes",
+      "save": "Gem tidsplan",
+      "previewTitle": "Rapportforhåndsvisning",
+      "previewBody": "Planlagte rapporter indeholder omsætning, antal indløsninger, topkuponer og vækstmålinger. Rapporterne sendes som flot formaterede HTML-e-mails kl. 8:00 UTC.",
+      "everyMorning": "Hver morgen",
+      "everyMonday": "Hver mandag",
+      "firstOfMonth": "Den 1. i hver måned"
+    },
+    "billing": {
+      "subscribeTo": "Abonner på {plan}",
+      "startFailed": "Abonnementet kunne ikke startes",
+      "portalFailed": "Faktureringsportalen kunne ikke åbnes",
+      "manageBilling": "Administrer fakturering",
+      "errorTitle": "Fejl",
+      "close": "Luk",
+      "usage": "<b>{current}</b> / {max} brugt",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "oprettede kampagner pr. periode",
+        "activeCampaigns": "aktive kampagner",
+        "voucherCreatesPerCycle": "oprettede kuponer pr. periode",
+        "teamMembers": "teammedlemmer"
+      },
+      "currentPlanTrial": "Nuværende plan (gratis prøveperiode)",
+      "planChangesUnavailable": "Planændringer er ikke tilgængelige online lige nu.",
+      "paymentsNotSetUp": "Onlinebetalinger er endnu ikke sat op på denne platform, så planer kan ikke købes eller ændres her. Kontakt support, hvis du vil ændre din plan.",
+      "features": {
+        "starter": {
+          "vouchers": "500 kuponer/md.",
+          "campaigns": "3 aktive kampagner",
+          "teamMembers": "2 teammedlemmer",
+          "qrRedemption": "Indløsning med QR-kode",
+          "basicAnalytics": "Grundlæggende analyser"
+        },
+        "pro": {
+          "vouchers": "5.000 kuponer/md.",
+          "campaigns": "25 aktive kampagner",
+          "teamMembers": "10 teammedlemmer",
+          "advancedAnalytics": "Avancerede analyser",
+          "customDomain": "Eget domæne",
+          "promoBoosts": "Promoveringsboost"
+        },
+        "scale": {
+          "vouchers": "Ubegrænsede kuponer",
+          "campaigns": "Ubegrænsede kampagner",
+          "teamMembers": "Ubegrænsede teammedlemmer",
+          "everythingInPro": "Alt i Pro",
+          "whiteLabel": "Klar til white label",
+          "prioritySupport": "Prioriteret support"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Ejer",
+      "admin": "Administrator",
+      "finance": "Økonomi",
+      "marketing": "Marketing",
+      "support": "Support",
+      "partner_cashier": "Kasserer",
+      "auditor": "Revisor"
+    },
+    "orgs": {
+      "title": "B2B-organisationer",
+      "subtitle": "Virksomhedsarbejdsområder med kampagner, kuponer og ordrer.",
+      "loading": "Indlæser organisationer...",
+      "loadFailed": "Organisationerne kunne ikke indlæses",
+      "empty": "Ingen organisationer fundet. Bed en administrator om at invitere dig.",
+      "open": "Åbn"
+    },
+    "workspace": {
+      "fallbackName": "Organisation",
+      "subtitle": "Oversigt over B2B-arbejdsområde",
+      "reports": "Rapporter",
+      "audit": "Revision",
+      "partnerKeys": "Partnernøgler",
+      "backToOrgs": "Tilbage til organisationer",
+      "loading": "Indlæser arbejdsområde...",
+      "errors": {
+        "loadOrg": "Organisationen kunne ikke indlæses",
+        "loadCampaigns": "Kampagnerne kunne ikke indlæses",
+        "loadVouchers": "Kuponerne kunne ikke indlæses",
+        "loadOrders": "Ordrerne kunne ikke indlæses",
+        "load": "Kunne ikke indlæses",
+        "createCampaign": "Kampagnen kunne ikke oprettes",
+        "issueVouchers": "Kuponerne kunne ikke udstedes",
+        "updateCampaign": "Kampagnen kunne ikke opdateres",
+        "activateCampaign": "Kampagnen kunne ikke aktiveres",
+        "pauseCampaign": "Kampagnen kunne ikke sættes på pause",
+        "archiveCampaign": "Kampagnen kunne ikke arkiveres"
+      },
+      "stats": {
+        "campaigns": "Kampagner",
+        "vouchers": "Kuponer",
+        "orders": "Ordrer"
+      },
+      "create": {
+        "title": "Opret kampagne",
+        "name": "Kampagnenavn",
+        "value": "Værdi (mindste enhed)",
+        "currency": "Valuta",
+        "submit": "Opret"
+      },
+      "campaigns": {
+        "title": "Kampagner",
+        "empty": "Ingen kampagner endnu.",
+        "name": "Navn",
+        "value": "Værdi",
+        "activate": "Aktivér",
+        "pause": "Sæt på pause",
+        "resume": "Genoptag",
+        "archive": "Arkivér",
+        "issue": "Udsted {count}"
+      },
+      "recentVouchers": "Seneste kuponer",
+      "noVouchers": "Ingen kuponer udstedt.",
+      "recentOrders": "Seneste ordrer",
+      "noOrders": "Ingen ordrer endnu."
+    },
+    "audit": {
+      "title": "Revisionslog",
+      "subtitle": "Følg kuponernes livscyklus og ændringer.",
+      "entityType": "Enhedstype (kupon, kampagne, ordre)",
+      "entityId": "Enheds-ID",
+      "loading": "Indlæser revisionslog...",
+      "loadFailed": "Revisionsloggen kunne ikke indlæses",
+      "empty": "Ingen hændelser."
+    },
+    "billing": {
+      "metaTitle": "Organisationens fakturering",
+      "title": "Fakturering og økonomi",
+      "totalPaidOrders": "Betalte ordrer i alt",
+      "totalRevenue": "Samlet omsætning",
+      "vatNumber": "Momsnummer",
+      "notSet": "Ikke angivet",
+      "recentOrders": "Seneste ordrer",
+      "noOrders": "Ingen ordrer endnu.",
+      "table": {
+        "date": "Dato",
+        "qty": "Antal",
+        "total": "I alt",
+        "status": "Status",
+        "invoice": "Faktura"
+      }
+    },
+    "keys": {
+      "title": "Partner-API-nøgler",
+      "subtitle": "Bruges til partneres validering og indløsning af kuponer.",
+      "label": "Nøglenavn (valgfrit)",
+      "create": "Opret nøgle",
+      "newKey": "Ny nøgle (kopiér den nu)",
+      "loading": "Indlæser nøgler...",
+      "empty": "Ingen nøgler endnu.",
+      "untitled": "Unavngivet nøgle",
+      "created": "Oprettet {created}",
+      "createdAndLastUsed": "Oprettet {created} • Senest brugt {lastUsed}",
+      "revoke": "Tilbagekald",
+      "errors": {
+        "load": "Nøglerne kunne ikke indlæses",
+        "create": "Nøglen kunne ikke oprettes",
+        "revoke": "Nøglen kunne ikke tilbagekaldes"
+      }
+    },
+    "members": {
+      "metaTitle": "Organisationens medlemmer",
+      "title": "Medlemmer",
+      "count": "{count, plural, one {# medlem} other {# medlemmer}}",
+      "pendingInvitations": "Afventende invitationer",
+      "expires": "Udløber {date}"
+    },
+    "invite": {
+      "title": "Inviter et medlem",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "Administrator",
+        "finance": "Økonomi",
+        "marketing": "Marketing",
+        "support": "Support",
+        "partner_cashier": "Partnerkasserer",
+        "auditor": "Revisor"
+      },
+      "sending": "Sender…",
+      "submit": "Send invitation",
+      "sent": "Invitation sendt til {email}.",
+      "failed": "Invitationen kunne ikke sendes. Tjek e-mailadressen, og prøv igen.",
+      "error": "Noget gik galt. Prøv igen."
+    },
+    "reports": {
+      "title": "Rapporter",
+      "subtitle": "Rapporter over indløsninger og kuponer",
+      "backToWorkspace": "Tilbage til arbejdsområdet",
+      "loadFailed": "Kunne ikke indlæses",
+      "tabs": {
+        "redemptions": "Indløsninger",
+        "vouchers": "Kuponer"
+      },
+      "totalRedemptions": "Indløsninger i alt",
+      "totalAmountRedeemed": "Samlet indløst beløb",
+      "from": "Fra",
+      "to": "Til",
+      "filter": "Filtrer",
+      "pageInfo": "Side {page} af {totalPages} ({total} i alt)",
+      "redemptionTable": {
+        "date": "Dato",
+        "partner": "Partner",
+        "amount": "Beløb",
+        "status": "Status",
+        "location": "Sted"
+      },
+      "noRedemptions": "Ingen indløsninger fundet.",
+      "voucherTable": {
+        "campaign": "Kampagne",
+        "status": "Status",
+        "type": "Type",
+        "value": "Værdi",
+        "remaining": "Resterende",
+        "redeemed": "Indløst",
+        "issuedTo": "Udstedt til",
+        "expires": "Udløber"
+      },
+      "noVouchers": "Ingen kuponer fundet."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "køber",
+        "partner": "partner",
+        "platform_owner": "platformsejer"
+      },
+      "orgStatus": {
+        "active": "aktiv",
+        "suspended": "suspenderet"
+      },
+      "campaignStatus": {
+        "draft": "kladde",
+        "active": "aktiv",
+        "paused": "sat på pause",
+        "archived": "arkiveret"
+      },
+      "voucherStatus": {
+        "created": "oprettet",
+        "issued": "udstedt",
+        "active": "aktiv",
+        "redeemed": "indløst",
+        "expired": "udløbet",
+        "voided": "annulleret"
+      },
+      "valueType": {
+        "fixed": "fast",
+        "percent": "procent"
+      },
+      "orderStatus": {
+        "draft": "kladde",
+        "submitted": "indsendt",
+        "invoiced": "faktureret",
+        "paid": "betalt",
+        "cancelled": "annulleret",
+        "refunded": "refunderet"
+      },
+      "redemptionStatus": {
+        "approved": "godkendt",
+        "reversed": "tilbageført",
+        "failed": "mislykket"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Begivenheder"
+    },
+    "status": {
+      "draft": "Kladde",
+      "published": "Aktiv",
+      "sold_out": "Udsolgt",
+      "cancelled": "Aflyst",
+      "ended": "Afsluttet"
+    },
+    "statusName": {
+      "draft": "Kladde",
+      "published": "Udgivet",
+      "sold_out": "Udsolgt",
+      "cancelled": "Aflyst",
+      "ended": "Afsluttet"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Intern begivenhed",
+      "concert": "Koncert",
+      "workshop": "Workshop",
+      "other": "Andet"
+    },
+    "ticketStatus": {
+      "available": "Tilgængelig",
+      "sold": "Solgt",
+      "used": "Brugt",
+      "cancelled": "Annulleret",
+      "refunded": "Refunderet"
+    },
+    "list": {
+      "subtitle": "Administrer dine begivenheder og billetter",
+      "createEvent": "Opret begivenhed",
+      "stats": {
+        "totalTitle": "Begivenheder i alt",
+        "totalDescription": "Alle begivenheder",
+        "activeTitle": "Aktive",
+        "activeDescription": "Udgivet eller udsolgt",
+        "soldTitle": "Solgte billetter",
+        "soldDescription": "På tværs af alle begivenheder",
+        "revenueTitle": "Omsætning",
+        "revenueDescription": "Salg af betalte billetter"
+      },
+      "empty": {
+        "title": "Ingen begivenheder endnu",
+        "description": "Opret en begivenhed for at sælge billetter og administrere fremmøde.",
+        "cta": "Opret din første begivenhed"
+      },
+      "card": {
+        "date": "Dato:",
+        "location": "Sted:",
+        "price": "Pris:",
+        "tickets": "Billetter:",
+        "sold": "{sold} / {capacity} solgt",
+        "free": "Gratis",
+        "view": "Se",
+        "edit": "Rediger"
+      },
+      "weeklyRevenue": {
+        "title": "Ugentlig billetomsætning",
+        "description": "Betalt billetsalg over 7 dage.",
+        "series": "Omsætning"
+      }
+    },
+    "detail": {
+      "noDescription": "Ingen beskrivelse",
+      "edit": "Rediger",
+      "status": "Status",
+      "type": "Type",
+      "eventDate": "Dato for begivenhed",
+      "price": "Pris",
+      "free": "Gratis",
+      "totalTickets": "Billetter i alt",
+      "sold": "Solgt",
+      "available": "Tilgængelige",
+      "location": "Sted",
+      "terms": "Vilkår og betingelser",
+      "ticketsTitle": "Billetter",
+      "ticketsDescription": "Billetter til denne begivenhed",
+      "noTickets": "Ingen billetter genereret endnu.",
+      "view": "Se",
+      "redeem": "Indløs"
+    },
+    "form": {
+      "basicInfo": "Grundlæggende oplysninger",
+      "name": "Navn på begivenhed *",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Beskriv din begivenhed...",
+      "type": "Type af begivenhed *",
+      "typeAria": "Type af begivenhed",
+      "dateTime": "Dato og tid",
+      "eventDate": "Dato *",
+      "eventTime": "Tidspunkt *",
+      "endDate": "Slutdato (valgfri)",
+      "endTime": "Sluttidspunkt (valgfrit)",
+      "location": "Sted",
+      "locationName": "Stedets navn",
+      "locationPlaceholder": "Store sal, udendørsscene",
+      "locationPlaceholderExample": "f.eks. Store sal, udendørsscene",
+      "address": "Fuld adresse",
+      "addressPlaceholder": "Gade, by, land",
+      "ticketDetails": "Billetdetaljer",
+      "maxCapacity": "Maks. kapacitet (billetter) *",
+      "maxCapacityLong": "Maks. kapacitet (antal billetter) *",
+      "pricePerTicketCurrency": "Pris pr. billet ({currency})",
+      "pricePerTicket": "Pris pr. billet",
+      "pricePlaceholderFree": "0,00 (gratis)",
+      "priceHint": "Lad feltet stå tomt for gratis billetter. F.eks. 12.50 eller 12,50 for {example}.",
+      "currency": "Valuta *",
+      "terms": "Vilkår og betingelser",
+      "termsPlaceholder": "Vilkår for begivenheden, refunderingspolitik osv.",
+      "ticketPrice": "Billetpris",
+      "endBeforeStart": "Sluttidspunktet skal ligge efter starttidspunktet.",
+      "cancel": "Annuller"
+    },
+    "create": {
+      "submit": "Opret begivenhed",
+      "submitting": "Opretter..."
+    },
+    "edit": {
+      "loading": "Indlæser...",
+      "notFound": "Begivenheden blev ikke fundet.",
+      "back": "Tilbage til begivenheden",
+      "title": "Rediger begivenhed",
+      "subtitle": "Opdater detaljerne for din begivenhed.",
+      "submit": "Gem ændringer",
+      "submitting": "Gemmer..."
+    },
+    "publish": {
+      "confirm": "Udgiv denne begivenhed? Den bliver synlig for offentligheden, og der kan købes billetter.",
+      "confirmLabel": "Udgiv",
+      "failed": "Begivenheden kunne ikke udgives",
+      "success": "Begivenheden er udgivet!",
+      "published": "Udgivet",
+      "cannotPublish": "Kan ikke udgives",
+      "button": "Udgiv begivenhed",
+      "publishing": "Udgiver..."
+    },
+    "generate": {
+      "invalidCount": "Angiv et tal mellem 1 og 1000",
+      "tooMany": "Kan ikke generere {count} billetter. Maks. tilgængeligt: {max}",
+      "failed": "Billetterne kunne ikke genereres",
+      "success": "{count, plural, one {# billet} other {# billetter}} genereret!",
+      "open": "Generer billetter",
+      "title": "Generer billetter",
+      "description": "Opret billetter til denne begivenhed",
+      "countLabel": "Antal billetter (maks.: {max})",
+      "cancel": "Annuller",
+      "submit": "Generer",
+      "submitting": "Genererer..."
+    },
+    "redeem": {
+      "title": "Indløs billet",
+      "subtitle": "Scan QR-koden, eller indtast billetnummeret",
+      "back": "Tilbage til begivenheden",
+      "scanTitle": "Scan billet",
+      "scanDescription": "Indtast QR-token eller billetnummer",
+      "tokenLabel": "QR-token/billetnummer",
+      "tokenPlaceholder": "Indtast QR-token eller billetnummer",
+      "scan": "Scan",
+      "notFound": "Billetten blev ikke fundet",
+      "found": "Billet fundet",
+      "number": "Nummer:",
+      "event": "Begivenhed:",
+      "status": "Status:",
+      "attendee": "Deltager:",
+      "redeemDescription": "Gennemfør indløsningen",
+      "locationLabel": "Sted (valgfrit)",
+      "locationPlaceholder": "f.eks. Hovedindgang, Indgang A",
+      "submit": "Indløs billet",
+      "submitting": "Indløser...",
+      "failed": "Billetten kunne ikke indløses",
+      "cannotRedeem": "Denne billet kan ikke indløses. Status: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Forhandlerens dashboard",
+      "vouchersTitle": "Administrer kuponer"
+    },
+    "sidebar": {
+      "title": "Forhandler",
+      "subtitle": "GiftHub-konsol",
+      "openMenu": "Åbn menu",
+      "nav": {
+        "overview": "Oversigt",
+        "vouchers": "Kuponer",
+        "giftCards": "Gavekort",
+        "credits": "Kreditter",
+        "brand": "Brand"
+      }
+    },
+    "overview": {
+      "title": "Forhandlerens dashboard",
+      "notConnected": "Du er endnu ikke tilknyttet nogen forhandlere."
+    },
+    "noAccess": {
+      "title": "Ingen forhandleradgang",
+      "overviewHint": "Bed en forhandleradministrator om at invitere dig, eller opret en forhandlerkonto for at komme i gang.",
+      "creditsHint": "Tilknyt en forhandlerkonto for at se omsætning og udbetalinger.",
+      "vouchersHint": "Tilknyt en forhandlerkonto for at administrere kuponer.",
+      "exploreCampaigns": "Udforsk kampagner"
+    },
+    "brand": {
+      "title": "Brandindstillinger",
+      "description": "Tilpas dit brands udseende på kuponerne",
+      "logoHeading": "Logo",
+      "logoHint": "Upload dit forhandlerlogo (anbefalet: 200x200 px, PNG eller SVG).",
+      "logoPreviewAlt": "Forhåndsvisning af logo",
+      "uploadLogo": "Upload logo",
+      "colorHeading": "Brandfarve",
+      "colorHint": "Angiv din primære brandfarve til kuponer og knapper.",
+      "colorLabel": "Farve",
+      "colorHexLabel": "Brandfarvens hex-værdi",
+      "save": "Gem ændringer",
+      "previewHeading": "Forhåndsvisning",
+      "previewHint": "Se, hvordan dit brand vises på kuponer.",
+      "sampleMerchant": "Din forhandler",
+      "sampleTitle": "20% rabat på dit næste køb",
+      "sampleDescription": "Gælder alle varer. Kan ikke kombineres med andre tilbud."
+    },
+    "credits": {
+      "availableBalance": "Tilgængelig saldo",
+      "availableBalanceHint": "Klar til udbetaling",
+      "pendingRevenue": "Afventende omsætning",
+      "pendingRevenueHint": "Behandles",
+      "recentRevenue": "Seneste omsætning",
+      "ticketSale": "Billetsalg",
+      "voucherSale": "Kuponsalg",
+      "noRevenue": "Ingen omsætning registreret endnu",
+      "payoutRequests": "Udbetalingsanmodninger",
+      "noPayoutRequests": "Ingen udbetalingsanmodninger endnu",
+      "requestPayoutHeading": "Anmod om udbetaling",
+      "minimumPayout": "Mindste udbetalingsbeløb: {amount}",
+      "submitting": "Sender...",
+      "requestPayout": "Anmod om udbetaling",
+      "requestSubmitted": "Udbetalingsanmodning sendt",
+      "requestFailed": "Udbetalingen kunne ikke anmodes",
+      "status": {
+        "paid": "betalt",
+        "pending": "afventer",
+        "requested": "anmodet",
+        "completed": "gennemført",
+        "failed": "mislykket"
+      }
+    },
+    "newVoucher": {
+      "title": "Opret kupon",
+      "description": "Design og konfigurer din nye kuponkampagne",
+      "detailsHeading": "Kupondetaljer",
+      "titleLabel": "Titel",
+      "titlePlaceholder": "f.eks. 20% rabat på dit næste køb",
+      "descriptionLabel": "Beskrivelse",
+      "descriptionPlaceholder": "Gælder alle varer. Kan ikke kombineres med andre tilbud.",
+      "expiryDateLabel": "Udløbsdato",
+      "weeklyLabel": "Ugentligt drop",
+      "weeklyHint": "Tidsbegrænset ugentlig tilgængelighed",
+      "weeklyAria": "Ugentligt drop - tidsbegrænset ugentlig tilgængelighed",
+      "referralLabel": "Aktivér anbefalingskredit",
+      "referralHint": "Brugere optjener kredit, når venner indløser",
+      "referralAria": "Aktivér anbefalingskredit - brugere optjener kredit, når venner indløser",
+      "brandColorLabel": "Brandfarve",
+      "brandColorHexLabel": "Brandfarvens hex-værdi",
+      "saveDraft": "Gem kladde",
+      "createAndPublish": "Opret og udgiv",
+      "previewHeading": "Forhåndsvisning",
+      "sampleMerchant": "Din forhandler",
+      "sampleTitle": "Kupontitel",
+      "sampleDescription": "Kuponbeskrivelsen vises her"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Den offentlige side er tilgængelig, når kuponen er udgivet.",
+    "list": {
+      "metaTitle": "Kuponer",
+      "subtitle": "Administrer og opret kuponer",
+      "bulkImport": "Masseimport af CSV",
+      "stats": {
+        "totalTitle": "Kuponer i alt",
+        "totalDescription": "Alle oprettede kuponer",
+        "activeTitle": "Aktive",
+        "activeDescription": "Udgivne kuponer",
+        "draftsTitle": "Kladder",
+        "draftsDescription": "Endnu ikke udgivet",
+        "pausedEndedTitle": "På pause/afsluttet",
+        "pausedEndedDescription": "{paused} på pause, {ended} afsluttet",
+        "redemptionsTitle": "Indløsninger",
+        "redemptionsDescription": "Indløsninger i alt"
+      },
+      "empty": {
+        "title": "Ingen kuponer endnu",
+        "description": "Kom i gang ved at oprette din første kupon.",
+        "action": "Opret din første kupon"
+      },
+      "searchPlaceholder": "Søg efter overskrift, kodepræfiks eller ID",
+      "searchLabel": "Søg i kuponer",
+      "statusLabel": "Status",
+      "statusAll": "Alle statusser",
+      "status": {
+        "published": "Aktiv",
+        "paused": "På pause",
+        "draft": "Kladde",
+        "ended": "Afsluttet",
+        "expired": "Udløbet"
+      },
+      "typeLabel": "Type",
+      "typeAll": "Alle typer",
+      "sortLabel": "Sortér efter",
+      "sort": {
+        "date": "Dato (nyeste)",
+        "name": "Navn (A-Å)",
+        "redemptions": "Indløsninger"
+      },
+      "showing": "Viser {shown} af {total} kuponer",
+      "clearFilters": "Ryd filtre",
+      "noMatches": "Ingen kuponer matcher dine filtre.",
+      "usage": "Forbrug",
+      "usageUnlimited": "Forbrug: {used} - ubegrænset",
+      "view": "Se"
+    },
+    "rowActions": {
+      "pauseTitle": "Sæt kupon på pause",
+      "pauseDescription": "Er du sikker på, at du vil sætte denne kupon på pause? Brugerne kan ikke købe eller indløse den, mens den er på pause.",
+      "pauseConfirm": "Sæt på pause",
+      "paused": "Kuponen er sat på pause",
+      "pauseFailed": "Kuponen kunne ikke sættes på pause",
+      "loadFailed": "Kuponen kunne ikke indlæses",
+      "duplicateLabel": "Dupliker kupon",
+      "duplicated": "Kuponen er duplikeret",
+      "duplicateFailed": "Kunne ikke duplikeres"
+    },
+    "publish": {
+      "confirmMessage": "Udgiv denne kupon? Den bliver synlig for offentligheden.",
+      "confirmLabel": "Udgiv",
+      "failed": "Kuponen kunne ikke udgives",
+      "success": "Kuponen er udgivet!",
+      "publishing": "Udgiver...",
+      "button": "Udgiv kupon"
+    },
+    "new": {
+      "iconLetter": "K",
+      "created": "Kuponen er oprettet som kladde. Udgiv den, når kunderne må se den."
+    },
+    "edit": {
+      "iconLetter": "R",
+      "subtitle": "Opdater kuponens detaljer og tilgængelighed.",
+      "updated": "Kuponen er opdateret",
+      "updateFailed": "Kuponen kunne ikke opdateres",
+      "updateFailedRetry": "Kuponen kunne ikke opdateres. Prøv igen.",
+      "updating": "Opdaterer...",
+      "update": "Opdater kupon",
+      "viewPublicPage": "Se offentlig side"
+    },
+    "form": {
+      "stepOf": "Trin {current} af {total}",
+      "typeLabel": "Type",
+      "typeAria": "Kupontype",
+      "customersGetOff": "Kunderne får {value} i rabat.",
+      "customersGetCredit": "Kunderne får {value} i kredit.",
+      "percentHint": "Skriv procentsatsen, f.eks. 15 eller 12,5.",
+      "amountHint": "Skriv beløbet i {currency}, f.eks. 4.50 eller 4,50 for {example}.",
+      "validityHint": "Kuponen kan bruges fra starten af den første dag til slutningen af den sidste dag.",
+      "enableWeeklyDropAria": "Aktivér ugentligt drop",
+      "weeklyDropDayAria": "Ugedag for ugentligt drop",
+      "weeklyDropTimeAria": "Starttidspunkt for ugentligt drop",
+      "headlinePlaceholder": "15% rabat på din ordre",
+      "finePrintPlaceholder": "Gælder kun for nye kunder",
+      "previewFallbackHeadline": "Din kupon",
+      "previewValidUntil": "Gyldig til {date}",
+      "errors": {
+        "discountAboveZero": "Angiv en rabat over 0%.",
+        "valueAboveZero": "Angiv en værdi over 0.",
+        "chooseDates": "Vælg, hvornår kuponen starter og slutter.",
+        "endBeforeStart": "Slutdatoen skal være samme dag som eller efter startdatoen.",
+        "invalidValue": "Angiv en gyldig værdi.",
+        "valueMustBePositive": "Værdien skal være større end 0",
+        "totalLimitPositive": "Den samlede brugsgrænse skal være et positivt tal",
+        "perUserLimitPositive": "Grænsen pr. bruger skal være et positivt tal"
+      },
+      "discountErrors": {
+        "negative": "Rabatten kan ikke være negativ.",
+        "invalid": "Rabatten er ikke et gyldigt tal.",
+        "decimals": "Rabatten må højst have {decimals} decimaler.",
+        "tooLarge": "Rabatten er for stor.",
+        "tooHigh": "Rabatten kan ikke være over 100%."
+      },
+      "valueErrors": {
+        "negative": "Værdien kan ikke være negativ.",
+        "invalid": "Værdien er ikke et gyldigt tal.",
+        "wholeNumber": "Værdien skal være et helt tal.",
+        "decimals": "Værdien må højst have {decimals} decimaler.",
+        "tooLarge": "Værdien er for stor."
+      }
+    },
+    "bulkImport": {
+      "back": "Tilbage til kuponer",
+      "title": "Importér kuponer fra et regneark",
+      "intro": "Upload en CSV-fil (op til 500 rækker). Alle kuponer oprettes som kladder, så intet bliver live, før du udgiver det.",
+      "columns": "Kolonner",
+      "downloadSample": "Download eksempel-CSV",
+      "columnRequired": "<code>{name}</code> (påkrævet): {help}",
+      "columnOptional": "<code>{name}</code> (valgfri): {help}",
+      "columnHelp": {
+        "name": "Det, kunderne ser som kupontitel, f.eks. \"Forårskaffetilbud\".",
+        "type": "\"amount\" (beløbsrabat), \"percent\" (procentrabat) eller \"credit\" (butikskredit).",
+        "value": "Euro for amount/credit (10 eller 10.50), procent for percent (15 eller 12.5).",
+        "currency": "Kode på tre bogstaver, f.eks. EUR. Standard er din butiks valuta.",
+        "valid_from": "Første dag, kuponen gælder: 2026-10-01 eller 01.10.2026.",
+        "valid_to": "Sidste dag, kuponen gælder (den er gyldig til slutningen af dagen).",
+        "code_prefix": "Bogstaver i starten af hver kode, f.eks. SPRING.",
+        "usage_limit": "Hvor mange gange den kan bruges i alt. Lad feltet stå tomt for ubegrænset."
+      },
+      "separatorHint": "Adskil kolonner med kommaer eller semikoloner. Hvis du bruger kommaer, skal decimalbeløb stå i anførselstegn (\"4,50\"), eller du kan bruge punktum (4.50).",
+      "chooseFile": "Vælg en CSV-fil",
+      "chooseDifferent": "Klik for at vælge en anden fil",
+      "browse": "Klik for at gennemse",
+      "fixRows": "Ret disse rækker, og upload filen igen:",
+      "andMore": "…og {count} mere.",
+      "readyToImport": "Klar til at importere {count, plural, one {# kupon} other {# kuponer}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, op til {limit} anvendelser} other {}}",
+      "imported": "{count, plural, one {# kupon} other {# kuponer}} importeret som kladder.",
+      "viewVouchers": "Se kuponer",
+      "importing": "Importerer...",
+      "importCount": "Importér {count, plural, one {# kupon} other {# kuponer}}",
+      "importVouchers": "Importér kuponer",
+      "importFailedStatus": "Importen mislykkedes (fejl {status}).",
+      "importFailed": "Importen mislykkedes"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Overskrift øverst på siden med primær handling."
+        },
+        "value_props": {
+          "label": "Fordele",
+          "description": "Hurtige fordele og garantier."
+        },
+        "featured_products": {
+          "label": "Udvalgte produkter",
+          "description": "Topprodukter med priser og tags."
+        },
+        "featured_vouchers": {
+          "label": "Udvalgte kuponer",
+          "description": "Aktive kuponkort til kampagner."
+        },
+        "rental_packages": {
+          "label": "Udlejningspakker",
+          "description": "Udlejningspakker og priser pr. dag."
+        },
+        "categories": {
+          "label": "Kategorigitter",
+          "description": "Gennemse efter type, brug eller målgruppe."
+        },
+        "availability": {
+          "label": "Tilgængelighedskalender",
+          "description": "Live tilgængelighed og ledige tider."
+        },
+        "testimonials": {
+          "label": "Udtalelser",
+          "description": "Kundecitater og stjernebedømmelser."
+        },
+        "gallery": {
+          "label": "Galleri",
+          "description": "Livsstilsbilleder eller brugseksempler."
+        },
+        "pricing": {
+          "label": "Pristabel",
+          "description": "Gennemsigtige prisniveauer."
+        },
+        "rental_terms": {
+          "label": "Lejevilkår",
+          "description": "Depositum, forsikring og returpolitik."
+        },
+        "faq": {
+          "label": "FAQ",
+          "description": "Besvar almindelige indvendinger."
+        },
+        "newsletter": {
+          "label": "Tilmelding til nyhedsbrev",
+          "description": "Indsaml e-mails til kampagner."
+        },
+        "contact": {
+          "label": "Kontaktblok",
+          "description": "Support via chat, e-mail eller telefon."
+        },
+        "map": {
+          "label": "Kort over placering",
+          "description": "Afhentningssted eller butikkens placering."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Kampagnebjælke",
+          "description": "Fastgjort topbjælke til tilbud og meddelelser."
+        },
+        "sticky_cta": {
+          "label": "Fastgjort CTA",
+          "description": "Handlingsknap, der bliver synlig ved scroll."
+        },
+        "chat_widget": {
+          "label": "Chatwidget",
+          "description": "Livechat eller WhatsApp-integration."
+        },
+        "trust_badges": {
+          "label": "Tillidsmærker",
+          "description": "Mærker for betaling, sikkerhed eller kvalitet."
+        },
+        "social_proof": {
+          "label": "Social proof-popup",
+          "description": "Seneste aktivitet og køb."
+        },
+        "countdown": {
+          "label": "Nedtællingsur",
+          "description": "Skaber hast for tidsbegrænsede tilbud."
+        },
+        "reviews_widget": {
+          "label": "Anmeldelseswidget",
+          "description": "Indlejr Google eller Trustpilot."
+        },
+        "language_switch": {
+          "label": "Sprogvælger",
+          "description": "Hurtigt sprogskift på siden."
+        },
+        "analytics": {
+          "label": "Analyse-snippets",
+          "description": "Pladser til sporingspixels."
+        },
+        "cookie_banner": {
+          "label": "Cookiebanner",
+          "description": "Samtykkebanner til GDPR."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Forhåndsvisning",
+      "edit": "Rediger",
+      "previewEmpty": "Ingen sektioner tilføjet endnu. Skift til redigeringstilstand for at tilføje sektioner.",
+      "title": "Visuel editor",
+      "preview": "Forhåndsvisning",
+      "empty": "Ingen sektioner endnu. Klik på \"Tilføj sektion\" nedenfor for at begynde.",
+      "collapseSettings": "Skjul indstillinger",
+      "expandSettings": "Vis indstillinger",
+      "removeSection": "Fjern sektionen {label}",
+      "sectionTitle": "Sektionstitel",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Valgfri beskrivelse",
+      "backgroundColor": "Baggrundsfarve",
+      "layoutVariant": "Layoutvariant",
+      "layout": {
+        "default": "Standard",
+        "centered": "Centreret",
+        "wide": "Bred",
+        "compact": "Kompakt"
+      },
+      "addSection": "Tilføj sektion",
+      "availableSections": "Tilgængelige sektioner",
+      "closeCatalog": "Luk",
+      "allAdded": "Alle tilgængelige sektioner er tilføjet.",
+      "count": "{configured, plural, one {# sektion konfigureret} other {# sektioner konfigureret}} / {available} kan tilføjes"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Tjekliste til lancering af butiksside",
+        "rental_launch": "Tjekliste til lancering af udlejningsside",
+        "campaign_ops": "Ugentlig kampagnedrift",
+        "support_ops": "Tjekliste for supportparathed"
+      },
+      "toast": {
+        "saved": "Sidebyggeren er opdateret.",
+        "saveFailed": "Siden kunne ikke gemmes",
+        "vibeFailed": "Vibe-agenten mislykkedes",
+        "layoutGenerated": "Vibe-layout genereret.",
+        "generateFailed": "Layoutet kunne ikke genereres",
+        "agentFailed": "Agenten mislykkedes",
+        "planGenerated": "Procesplan genereret.",
+        "runAgentFailed": "Agenten kunne ikke køres"
+      },
+      "noData": "Ingen data for sidebyggeren tilgængelige.",
+      "title": "Sidebygger",
+      "intro": "Byg hurtige butiks- og udlejningssider med modulære sektioner og tilføjelser.",
+      "introAi": "Byg hurtige butiks- og udlejningssider med modulære sektioner og tilføjelser – med valgfrie AI-forslag.",
+      "tabs": {
+        "store": "Butik",
+        "rental": "Udlejning"
+      },
+      "details": {
+        "title": "Sidedetaljer",
+        "subtitle": "Titel, undertitel og layout.",
+        "save": "Gem",
+        "pageTitle": "Sidetitel",
+        "subtitleLabel": "Undertitel"
+      },
+      "sections": {
+        "title": "Sektioner",
+        "subtitle": "Træk for at ændre rækkefølge, udvid for at konfigurere, eller se layoutet.",
+        "suggestLayout": "Foreslå et layout",
+        "suggestionsLeft": "AI-layoutforslag tilbage: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Tilføjelser",
+        "subtitle": "Ekstra widgets og marketinglag.",
+        "enable": "Aktivér tilføjelsen {label}",
+        "disable": "Deaktiver tilføjelsen {label}"
+      },
+      "summary": {
+        "title": "Live oversigt",
+        "line": "{title} · {sections, plural, one {# sektion} other {# sektioner}} · {addons, plural, one {# tilføjelse} other {# tilføjelser}}",
+        "sectionsLabel": "Sektioner:",
+        "addonsLabel": "Tilføjelser:",
+        "none": "Ingen"
+      },
+      "assistant": {
+        "title": "Assistent til lanceringstjekliste",
+        "subtitle": "Generer handlingsplaner og driftstjeklister.",
+        "goalLabel": "Procesmål",
+        "createChecklist": "Opret tjekliste",
+        "checklistsLeft": "Tjeklister tilbage: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Udvalgte tilbud, udlejning og kuponer fra {name}.",
+        "shopProducts": "Køb produkter",
+        "browseRentals": "Se udlejning"
+      },
+      "valueProps": {
+        "rewardsTitle": "Belønninger",
+        "rewardsText": "Indbyggede kuponfordele.",
+        "stockTitle": "Pålideligt lager",
+        "stockText": "Opdaterede priser og tilgængelighed.",
+        "datesTitle": "Fleksible datoer",
+        "datesText": "Planlæg udlejning med lethed."
+      },
+      "viewAll": "Se alle",
+      "seeAll": "Se alle",
+      "products": {
+        "title": "Udvalgte produkter",
+        "empty": "Ingen produkter endnu.",
+        "fallbackDescription": "Produkthøjdepunkt"
+      },
+      "rentals": {
+        "title": "Udlejningspakker",
+        "empty": "Ingen udlejning endnu.",
+        "fallbackDescription": "Udlejningshøjdepunkt",
+        "perDay": "{price}/dag"
+      },
+      "categories": {
+        "title": "Gennemse kategorier",
+        "popular": "Populære",
+        "business": "Erhverv",
+        "events": "Begivenheder",
+        "seasonal": "Sæson",
+        "corporate": "Virksomhed",
+        "custom": "Tilpasset"
+      },
+      "availability": {
+        "title": "Live tilgængelighed",
+        "text": "Tjek tilgængelighed, og anmod om et tilbud på få minutter.",
+        "seeCalendar": "Se kalender"
+      },
+      "testimonials": {
+        "title": "Det siger kunderne",
+        "smooth": "Problemfri proces",
+        "lovedVoucher": "Elskede kuponen",
+        "support": "Fantastisk support"
+      },
+      "gallery": {
+        "title": "Galleri"
+      },
+      "pricing": {
+        "title": "Priser",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Enterprise",
+        "tierText": "Tilpassede priser og support"
+      },
+      "rentalTerms": {
+        "title": "Lejevilkår",
+        "text": "Klare regler for depositum, afhentning og returnering oplyst på forhånd."
+      },
+      "faq": {
+        "title": "FAQ",
+        "redeem": "Hvordan indløser jeg?",
+        "reschedule": "Kan jeg ændre tidspunktet?",
+        "support": "Tilbyder I support?"
+      },
+      "newsletter": {
+        "title": "Hold dig opdateret",
+        "text": "Få nye tilbud og udlejningsnyheder i din indbakke.",
+        "emailLabel": "E-mailadresse",
+        "subscribe": "Tilmeld"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "emailUs": "Skriv til os på {email}"
+      },
+      "map": {
+        "text": "Afhentningsstedet oplyses efter booking."
+      },
+      "vouchers": {
+        "title": "Aktive kuponer",
+        "empty": "Ingen kuponer tilgængelige.",
+        "voucher": "Kupon",
+        "view": "Se kupon"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Aktiv",
+      "redeemed": "Indløst",
+      "expired": "Udløbet",
+      "cancelled": "Annulleret"
+    },
+    "list": {
+      "metaTitle": "Gavekort",
+      "title": "Gavekort",
+      "subtitle": "Opret og administrer gavekort",
+      "newGiftCard": "Nyt gavekort",
+      "stats": {
+        "total": "Gavekort i alt",
+        "totalDescription": "Alle udstedte gavekort",
+        "active": "Aktive",
+        "activeDescription": "Kan indløses nu",
+        "redeemed": "Indløst",
+        "redeemedDescription": "Gennemførte indløsninger",
+        "totalValue": "Samlet værdi",
+        "totalValueDescription": "Værdi af udstedte gavekort"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Ingen gavekort endnu",
+      "emptyDescription": "Opret et gavekort med eget branding og QR-indløsning.",
+      "createFirst": "Opret dit første gavekort",
+      "searchPlaceholder": "Søg efter overskrift, kode eller besked",
+      "searchLabel": "Søg i gavekort",
+      "status": "Status",
+      "allStatus": "Alle statusser",
+      "sortBy": "Sortér efter",
+      "sortDate": "Dato (nyeste)",
+      "sortAmount": "Beløb (højeste først)",
+      "showing": "Viser {shown} af {total, plural, one {# gavekort} other {# gavekort}}",
+      "clearFilters": "Ryd filtre",
+      "noMatches": "Ingen gavekort matcher dine filtre.",
+      "defaultHeadline": "Gavekort",
+      "noExpiry": "Ingen udløbsdato",
+      "validUntil": "Gyldig til: {date}",
+      "redeemedOn": "Indløst: {date}",
+      "details": "Detaljer",
+      "view": "Se"
+    },
+    "detail": {
+      "title": "Gavekort",
+      "code": "Kode {code}",
+      "publicView": "Offentlig visning",
+      "newGiftCard": "Nyt gavekort",
+      "detailsTitle": "Gavekortdetaljer",
+      "value": "Værdi",
+      "validFrom": "Gyldig fra",
+      "validTo": "Gyldig til",
+      "noExpiry": "Ingen udløbsdato",
+      "redeemedAt": "Indløst",
+      "notRedeemed": "Ikke indløst",
+      "qrTitle": "QR-kode til indløsning for personale",
+      "qrHelp": "Personalet kan scanne denne QR-kode for at indløse og ugyldiggøre gavekortet."
+    },
+    "new": {
+      "title": "Nyt gavekort",
+      "subtitle": "Tilpas og udsted et gavekort",
+      "created": "Gavekortet er oprettet.",
+      "cancel": "Annuller",
+      "creating": "Opretter...",
+      "submit": "Opret gavekort",
+      "errors": {
+        "amountRequired": "Angiv et beløb over 0.",
+        "endBeforeStart": "Slutdatoen skal være samme dag som eller efter startdatoen.",
+        "createFailed": "Gavekortet kunne ikke oprettes"
+      },
+      "amountErrors": {
+        "negative": "Beløbet kan ikke være negativt.",
+        "invalid": "Beløbet er ikke et gyldigt tal.",
+        "wholeNumber": "Beløbet skal være et helt tal.",
+        "decimals": "Beløbet må højst have {decimals} decimaler.",
+        "tooLarge": "Beløbet er for stort."
+      },
+      "priceErrors": {
+        "negative": "Salgsprisen kan ikke være negativ.",
+        "invalid": "Salgsprisen er ikke et gyldigt tal.",
+        "wholeNumber": "Salgsprisen skal være et helt tal.",
+        "decimals": "Salgsprisen må højst have {decimals} decimaler.",
+        "tooLarge": "Salgsprisen er for høj."
+      },
+      "valueSection": {
+        "title": "Værdi og gyldighed",
+        "description": "Angiv beløb, valuta og udløb",
+        "amount": "Beløb",
+        "faceValue": "Pålydende værdi: {value}.",
+        "amountHelp": "Skriv beløbet i {currency}, f.eks. 50 eller 49,90 for {example}.",
+        "currency": "Valuta",
+        "validFrom": "Gyldig fra",
+        "validTo": "Gyldig til",
+        "noExpiry": "Ingen udløbsdato"
+      },
+      "purchaseSection": {
+        "title": "Køb for kunder",
+        "description": "Lad kunder købe dette gavekort online",
+        "purchasable": "Kan købes af kunder",
+        "salePrice": "Salgspris (valgfri, standard er pålydende værdi)",
+        "salePricePlaceholder": "Samme som beløbet",
+        "customersPay": "Kunderne betaler {value}.",
+        "salePriceHelp": "Lad feltet stå tomt for at sælge til pålydende værdi. Angiv en anden pris til kampagner."
+      },
+      "brandingSection": {
+        "title": "Branding og besked",
+        "description": "Overskrift, besked, billeder og farver",
+        "headline": "Overskrift",
+        "headlinePlaceholder": "Gave til kaffeelskere",
+        "message": "Besked",
+        "messagePlaceholder": "Tilføj en personlig besked til modtageren",
+        "logoUrl": "Logo-URL",
+        "imageUrl": "Billed-URL",
+        "accentColor": "Accentfarve",
+        "backgroundColor": "Baggrundsfarve",
+        "textColor": "Tekstfarve",
+        "codePrefix": "Kodepræfiks (valgfrit)"
+      },
+      "preview": {
+        "title": "Forhåndsvisning",
+        "defaultHeadline": "Gavekort",
+        "imageAlt": "Gavekort",
+        "logoAlt": "Brandlogo",
+        "notePlaceholder": "Tilføj en personlig hilsen"
+      }
+    },
+    "gifts": {
+      "title": "Gaveprodukter",
+      "subtitle": "Administrer dine produkter i Gift Hub",
+      "dashboard": "Dashboard",
+      "confirmDelete": "Er du sikker? Produktet bliver deaktiveret.",
+      "stats": {
+        "total": "I alt",
+        "active": "Aktive",
+        "views": "Visninger",
+        "purchases": "Køb"
+      },
+      "emptyTitle": "Ingen gaveprodukter endnu",
+      "emptyDescription": "Tilføj dit første produkt for at blive vist i Gift Hub-feedet.",
+      "emptyApiHint": "Brug API'et på <code>{endpoint}</code> til at oprette produkter.",
+      "inactive": "Inaktiv",
+      "featured": "Fremhævet",
+      "views": "{count, plural, one {# visning} other {# visninger}}",
+      "purchases": "{count, plural, one {# køb} other {# køb}}",
+      "conversionRate": "{rate}% CVR",
+      "activate": "Aktivér",
+      "deactivate": "Deaktiver",
+      "delete": "Slet"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Ingen data tilgængelige",
+      "value": "Værdi: <strong>{value}</strong>",
+      "dismiss": "Afvis",
+      "remove": "Fjern",
+      "dialog": "Dialog",
+      "close": "Luk",
+      "loading": "Indlæser"
+    },
+    "analyticsFunnel": {
+      "empty": "Ingen aktivitet endnu i denne periode",
+      "top": "Top",
+      "drop": "-{rate}% fald"
+    },
+    "periodComparison": {
+      "title": "Periodesammenligning",
+      "loading": "Indlæser...",
+      "previous": "Forrige: {value}",
+      "noData": "Ingen data tilgængelige",
+      "period": {
+        "day": "Dag",
+        "week": "Uge",
+        "month": "Måned",
+        "quarter": "Kvartal",
+        "year": "År"
+      },
+      "metric": {
+        "revenue": "Omsætning",
+        "redemptions": "Indløsninger",
+        "purchases": "Køb",
+        "referrals": "Anbefalinger",
+        "customers": "Kunder"
+      }
+    },
+    "trendChart": {
+      "noData": "Ingen data"
+    },
+    "conversionChart": {
+      "noData": "Ingen data tilgængelige",
+      "previous": "forrige: {value}"
+    },
+    "funnelChart": {
+      "empty": "Ingen aktivitet endnu i denne periode"
+    },
+    "geoMap": {
+      "noData": "Ingen data tilgængelige",
+      "value": "Værdi: <strong>{value}</strong>",
+      "country": {
+        "GB": "Storbritannien",
+        "IE": "Irland",
+        "FR": "Frankrig",
+        "DE": "Tyskland",
+        "ES": "Spanien",
+        "PT": "Portugal",
+        "IT": "Italien",
+        "NL": "Nederlandene",
+        "BE": "Belgien",
+        "CH": "Schweiz",
+        "AT": "Østrig",
+        "PL": "Polen",
+        "CZ": "Tjekkiet",
+        "SE": "Sverige",
+        "NO": "Norge",
+        "FI": "Finland",
+        "DK": "Danmark",
+        "EE": "Estland",
+        "LV": "Letland",
+        "LT": "Litauen",
+        "HU": "Ungarn",
+        "RO": "Rumænien",
+        "BG": "Bulgarien",
+        "GR": "Grækenland",
+        "HR": "Kroatien",
+        "SK": "Slovakiet",
+        "SI": "Slovenien",
+        "RS": "Serbien",
+        "UA": "Ukraine",
+        "BY": "Hviderusland"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Venter på data..."
+    },
+    "pieDonutChart": {
+      "noData": "Ingen data tilgængelige",
+      "total": "I alt"
+    },
+    "activityFeed": {
+      "justNow": "lige nu",
+      "minutesAgo": "for {count} min. siden",
+      "hoursAgo": "for {count} t. siden",
+      "daysAgo": "for {count} d. siden",
+      "empty": "Ingen aktivitet endnu",
+      "loadMore": "Indlæs flere",
+      "eventType": {
+        "purchase": "Køb",
+        "redemption": "Indløsning",
+        "signup": "Tilmelding",
+        "alert": "Advarsel"
+      }
+    },
+    "dateRange": {
+      "days7": "7 dage",
+      "days30": "30 dage",
+      "days90": "90 dage",
+      "year1": "1 år",
+      "custom": "Tilpasset"
+    },
+    "chartCard": {
+      "fullscreen": "Fuld skærm",
+      "exitFullscreen": "Afslut fuld skærm",
+      "retry": "Prøv igen"
+    },
+    "dashboardHeader": {
+      "export": "Eksporter",
+      "exportAs": "Eksporter som {format}"
+    },
+    "dataTable": {
+      "empty": "Ingen data tilgængelige",
+      "showing": "Viser {from}–{to} af {total}",
+      "previousPage": "Forrige side",
+      "nextPage": "Næste side"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Live",
+        "reconnecting": "Genopretter forbindelse",
+        "disconnected": "Afbrudt"
+      },
+      "status": {
+        "connected": "Forbundet",
+        "reconnecting": "Genopretter forbindelse",
+        "disconnected": "Afbrudt"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "ift. forrige periode"
+    },
+    "statComparison": {
+      "current": "Nuværende",
+      "previous": "Forrige",
+      "change": "ændring"
+    },
+    "aiInsightPanel": {
+      "title": "AI-indsigter",
+      "placeholder": "Stil AI et spørgsmål...",
+      "send": "Send"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Live",
+        "degraded": "Nedsat",
+        "disconnected": "Offline"
+      },
+      "latency": "Latens: {ms} ms",
+      "lastUpdate": "Senest opdateret: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Notifikationer",
+      "title": "Notifikationer",
+      "markAllRead": "Markér alle som læst",
+      "empty": "Ingen notifikationer",
+      "ariaLabelUnread": "Notifikationer ({count} ulæste)"
+    },
+    "premiumChartCard": {
+      "info": "Info",
+      "fullscreen": "Fuld skærm",
+      "exitFullscreen": "Afslut fuld skærm",
+      "moreOptions": "Flere muligheder",
+      "empty": "Ingen data tilgængelige for denne periode"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "ift. sidste periode"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "I drift",
+        "degraded": "Nedsat",
+        "outage": "Nedbrud"
+      }
+    },
+    "select": {
+      "placeholder": "Vælg...",
+      "search": "Søg...",
+      "empty": "Ingen muligheder fundet",
+      "removeOption": "Fjern {label}"
+    },
+    "sidebar": {
+      "expand": "Udvid sidepanel",
+      "collapse": "Skjul sidepanel",
+      "openMenu": "Åbn menu",
+      "closeMenu": "Luk menu"
+    },
+    "iconSystem": {
+      "notFound": "Ikonet \"{name}\" blev ikke fundet",
+      "badge": "{count, plural, one {# notifikation} other {# notifikationer}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Sidepanel",
+      "closePanel": "Luk panel"
+    },
+    "codeBlock": {
+      "copyCode": "Kopiér kode",
+      "copied": "Kopieret",
+      "copy": "Kopiér"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Kunder",
+      "title": "Kunder",
+      "summary": "{count, plural, one {# kunde} other {# kunder}} · {revenue} i samlet omsætning",
+      "stats": {
+        "totalCustomers": "Kunder i alt",
+        "totalRevenue": "Samlet omsætning",
+        "totalRedemptions": "Indløsninger i alt"
+      },
+      "table": {
+        "customer": "Kunde",
+        "email": "E-mail",
+        "purchases": "Køb",
+        "totalSpent": "Brugt i alt",
+        "redemptions": "Indløsninger",
+        "lastPurchase": "Seneste køb"
+      },
+      "empty": "Ingen kunder endnu",
+      "unknown": "Ukendt"
+    },
+    "qrCheckout": {
+      "title": "QR-lynbetaling",
+      "subtitle": "Generer QR-koder til hurtig betaling for kunder",
+      "voucherLabel": "Knyt til kupon (valgfrit)",
+      "generalOption": "Generel betaling (ingen bestemt kupon)",
+      "voucherOption": "{type} - {value} {currency} ({status})",
+      "generating": "Genererer...",
+      "generate": "Generer QR-kode",
+      "qrAlt": "QR-kode til betaling",
+      "scanToCheckout": "Scan for at betale",
+      "print": "Print QR-kode"
+    },
+    "redemptions": {
+      "metaTitle": "Indløsninger",
+      "subtitle": "Se og bekræft kuponindløsninger.",
+      "stats": {
+        "totalTitle": "Indløsninger i alt",
+        "totalDescription": "Alle indsendte indløsninger",
+        "pendingTitle": "Afventer",
+        "pendingDescription": "Venter på bekræftelse",
+        "confirmedTitle": "Bekræftet",
+        "confirmedDescription": "Godkendte indløsninger",
+        "discountsTitle": "Givne rabatter",
+        "discountsDescription": "Bekræftede rabatter"
+      },
+      "empty": {
+        "title": "Ingen indløsninger endnu",
+        "description": "Indløsninger vises her, når kunderne bruger kuponer."
+      },
+      "voucherFallback": "Kupon",
+      "card": {
+        "order": "Ordre på {amount}",
+        "discount": "Rabat: {amount}",
+        "discountReferred": "Rabat: {amount} - anbefalet af {name}",
+        "confirmed": "Bekræftet",
+        "pending": "Afventer",
+        "method": "Metode: {method}",
+        "methods": {
+          "online": "Online",
+          "in_store": "I butikken"
+        },
+        "orderReference": "Ordre: {reference}",
+        "notAvailable": "Ikke relevant",
+        "location": "Sted: {location}",
+        "date": "Dato: {date}"
+      },
+      "confirm": {
+        "prompt": "Bekræft denne indløsning? Det frigiver kredit til anbefaleren.",
+        "confirmLabel": "Bekræft",
+        "success": "Indløsningen er bekræftet. Kredit frigivet til anbefaleren.",
+        "error": "Indløsningen kunne ikke bekræftes. Prøv igen.",
+        "confirming": "Bekræfter...",
+        "button": "Bekræft indløsning"
+      },
+      "export": {
+        "success": "Indløsningerne er eksporteret!",
+        "error": "Indløsningerne kunne ikke eksporteres",
+        "exporting": "Eksporterer...",
+        "button": "Eksporter CSV"
+      }
+    },
+    "reviews": {
+      "title": "Anmeldelser",
+      "subtitle": "Overvåg og besvar kundeanmeldelser",
+      "filters": "Filtre",
+      "reviewCount": "{count, plural, one {# anmeldelse} other {# anmeldelser}}",
+      "ratingDistribution": "Fordeling af bedømmelser",
+      "responseRate": "Svarprocent",
+      "replied": "Besvaret",
+      "pending": "Afventer",
+      "responseRatePercent": "{percent}% svarprocent",
+      "filter": {
+        "rating": "Bedømmelse",
+        "allRatings": "Alle bedømmelser",
+        "stars": "{count, plural, one {# stjerne} other {# stjerner}}",
+        "replyStatus": "Svarstatus",
+        "all": "Alle",
+        "needsReply": "Mangler svar",
+        "replied": "Besvaret",
+        "clear": "Ryd"
+      },
+      "loading": "Indlæser anmeldelser...",
+      "empty": "Ingen anmeldelser fundet.",
+      "anonymous": "Anonym",
+      "verified": "Verificeret",
+      "campaign": "Kampagne: {name}",
+      "voucher": "Kupon: {code}",
+      "foundHelpful": "{count} fandt den nyttig",
+      "yourReply": "Dit svar",
+      "replyPlaceholder": "Skriv dit svar...",
+      "posting": "Sender...",
+      "postReply": "Send svar",
+      "cancel": "Annuller",
+      "reply": "Svar",
+      "showing": "Viser {from}–{to} af {total}",
+      "pageOf": "Side {page} af {totalPages}",
+      "previousPage": "Forrige side",
+      "nextPage": "Næste side",
+      "loadFailed": "Anmeldelserne kunne ikke indlæses",
+      "replyFailed": "Svaret kunne ikke sendes",
+      "replyPosted": "Svaret er sendt"
+    },
+    "scanner": {
+      "title": "Scanner",
+      "subtitle": "Scan kuponer, gavekort og billetter",
+      "manual": "Manuel",
+      "camera": "Kamera",
+      "scanning": "Scanner...",
+      "cameraDenied": "Adgang til kameraet blev nægtet. Tillad kameraadgang i browserens indstillinger, eller indtast koden nedenfor.",
+      "cameraUnavailable": "Der er intet kamera tilgængeligt. Indtast koden nedenfor i stedet.",
+      "pointAtCode": "Ret kameraet mod en QR-kode for at scanne automatisk",
+      "enterCode": "Indtast kode",
+      "codePlaceholder": "Kuponkode (f.eks. AUD-CMUI0TG1), kuponlink, billet- eller gavekortkode",
+      "codeAriaLabel": "Kode, der skal scannes",
+      "scan": "Scan",
+      "found": {
+        "voucher": "Kupon fundet",
+        "gift_card": "Gavekort fundet",
+        "ticket": "Billet fundet"
+      },
+      "info": {
+        "ticketNumber": "Billetnr.",
+        "event": "Begivenhed",
+        "type": "Type",
+        "standard": "Standard",
+        "attendee": "Deltager",
+        "code": "Kode",
+        "amount": "Beløb",
+        "message": "Besked",
+        "voucher": "Kupon",
+        "campaign": "Kampagne",
+        "none": "Ingen",
+        "value": "Værdi",
+        "validUntil": "Gyldig til"
+      },
+      "redeem": "Indløs",
+      "redeeming": "Indløser...",
+      "cannotRedeem": "Dette kan ikke indløses (status: {status})",
+      "redeemed": {
+        "voucher": "Kuponen er indløst!",
+        "gift_card": "Gavekortet er indløst!",
+        "ticket": "Billetten er indløst!"
+      },
+      "errors": {
+        "enterCode": "Indtast en kode",
+        "notFound": "Ikke fundet",
+        "scanFailed": "Scanningen mislykkedes",
+        "redeemFailed": "Indløsningen mislykkedes"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktiv",
+          "redeemed": "indløst",
+          "expired": "udløbet",
+          "cancelled": "annulleret"
+        },
+        "ticket": {
+          "available": "tilgængelig",
+          "sold": "solgt",
+          "used": "brugt",
+          "cancelled": "annulleret",
+          "refunded": "refunderet"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Prisen kan ikke være negativ.",
+      "invalid": "Prisen er ikke et gyldigt tal.",
+      "wholeNumber": "Prisen skal være et helt tal.",
+      "decimals": "Prisen må højst have {decimals} decimaler.",
+      "tooLarge": "Prisen er for høj."
+    },
+    "appointments": {
+      "title": "Aftaler",
+      "subtitle": "Administrer bookinger og tilgængelighed",
+      "createSlot": "Opret tid",
+      "form": {
+        "serviceName": "Navn på ydelse",
+        "price": "Pris ({currency}, lad feltet stå tomt, hvis gratis)",
+        "startTime": "Starttidspunkt",
+        "endTime": "Sluttidspunkt",
+        "notes": "Noter",
+        "creating": "Opretter…",
+        "submit": "Opret ledig tid"
+      },
+      "status": {
+        "all": "Alle",
+        "pending": "Afventer",
+        "confirmed": "Bekræftet",
+        "cancelled": "Aflyst",
+        "completed": "Gennemført"
+      },
+      "loading": "Indlæser...",
+      "empty": "Ingen aftaler fundet",
+      "bookedBy": "Booket af: {name}",
+      "confirm": "Bekræft",
+      "confirmAria": "Bekræft aftale",
+      "cancel": "Aflys",
+      "cancelAria": "Aflys aftale",
+      "errors": {
+        "endBeforeStart": "Sluttidspunktet skal ligge efter starttidspunktet.",
+        "createFailed": "Den ledige tid kunne ikke oprettes. Prøv igen.",
+        "network": "Kunne ikke få forbindelse til serveren. Tjek din forbindelse, og prøv igen.",
+        "updateFailed": "Aftalen kunne ikke opdateres (fejl {status})."
+      }
+    },
+    "inventory": {
+      "title": "Lager",
+      "subtitle": "Følg lagerniveauer, og administrer kuponernes tilgængelighed",
+      "refresh": "Opdater",
+      "summary": {
+        "totalItems": "Varer i alt",
+        "lowStock": "Lav beholdning",
+        "outOfStock": "Udsolgt"
+      },
+      "alerts": {
+        "title": "Advarsler om lav beholdning ({count})",
+        "threshold": "{stock} / {threshold} grænse"
+      },
+      "loading": "Indlæser lager...",
+      "empty": "Ingen kuponer fundet",
+      "typeVoucher": "Kupon: {type}",
+      "stockStatus": {
+        "unlimited": "Ubegrænset",
+        "outOfStock": "Udsolgt",
+        "lowStock": "Lav beholdning",
+        "inStock": "På lager"
+      },
+      "stock": "Beholdning: {stock}",
+      "purchased": "Købt: {count}",
+      "redeemed": "Indløst: {count}",
+      "validUntil": "Gyldig til {date}",
+      "edit": {
+        "button": "Rediger beholdning",
+        "stockQuantity": "Antal på lager",
+        "threshold": "Grænse for lav beholdning",
+        "save": "Gem",
+        "saving": "Gemmer...",
+        "cancel": "Annuller"
+      },
+      "stockUpdated": "Beholdningen er opdateret",
+      "errors": {
+        "loadFailed": "Lageret kunne ikke indlæses",
+        "updateFailed": "Beholdningen kunne ikke opdateres"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "AI-forslag er endnu ikke sat op på denne platform, så værktøjerne til automatisk layout og tjeklister er skjult. Du kan stadig bygge og redigere dine sider manuelt."
+    },
+    "pricing": {
+      "title": "Dynamisk prissætning",
+      "newRule": "Ny regel",
+      "ruleTypes": {
+        "demand": {
+          "label": "Efterspørgselsbaseret",
+          "desc": "Juster prisen ud fra forholdet mellem visninger og køb"
+        },
+        "timeOfDay": {
+          "label": "Tidspunkt på dagen",
+          "desc": "Priser i spidsbelastning og lavsæson-timer"
+        },
+        "inventory": {
+          "label": "Lager",
+          "desc": "Prisændringer ud fra resterende beholdning"
+        },
+        "surge": {
+          "label": "Spidsbelastning",
+          "desc": "Pristillæg ved særlige begivenheder/helligdage"
+        },
+        "loyalty": {
+          "label": "Loyalitet",
+          "desc": "Rabatter til tilbagevendende kunder"
+        }
+      },
+      "form": {
+        "title": "Opret prisregel",
+        "ruleType": "Regeltype",
+        "priority": "Prioritet",
+        "priorityPlaceholder": "Højere = anvendes først",
+        "config": "Konfiguration (JSON)",
+        "submit": "Opret regel",
+        "cancel": "Annuller"
+      },
+      "loading": "Indlæser regler...",
+      "empty": "Ingen prisregler endnu. Opret en for at aktivere dynamisk prissætning.",
+      "table": {
+        "type": "Type",
+        "priority": "Prioritet",
+        "config": "Konfiguration",
+        "status": "Status",
+        "actions": "Handlinger"
+      },
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "deleteAria": "Slet prisregel",
+      "deleteConfirm": "Slet denne prisregel?",
+      "delete": "Slet",
+      "errors": {
+        "invalidJson": "Konfigurationsfeltet skal være gyldig JSON."
+      },
+      "preview": {
+        "title": "Prisforhåndsvisning",
+        "description": "Angiv et kupon-ID for at se, hvordan aktive regler påvirker prisen.",
+        "voucherId": "Kupon-ID",
+        "voucherIdPlaceholder": "Angiv kupon-ID",
+        "calculate": "Beregn",
+        "error": "Prisen kunne ikke beregnes",
+        "basePrice": "Grundpris",
+        "finalPrice": "Endelig pris"
+      }
+    },
+    "rentals": {
+      "title": "Udlejningsbookinger",
+      "subtitle": "Administrer lejeanmodninger og returneringer",
+      "status": {
+        "all": "Alle",
+        "pending": "Afventer",
+        "approved": "Godkendt",
+        "rejected": "Afvist",
+        "paid": "Betalt",
+        "active": "Aktiv",
+        "returned": "Returneret",
+        "cancelled": "Annulleret"
+      },
+      "empty": "Ingen udlejningsbookinger fundet.",
+      "dates": "{start} - {end} ({days, plural, one {# dag} other {# dage}})",
+      "total": "I alt: <strong>{total}</strong> ({rate}/dag)",
+      "note": "Note: {note}",
+      "rejectedReason": "Afvist: {reason}",
+      "bookedMeta": "Booket: {date} | Bruger: {user}...",
+      "approve": "Godkend",
+      "reasonPlaceholder": "Årsag (valgfri)",
+      "confirm": "Bekræft",
+      "cancel": "Annuller",
+      "reject": "Afvis",
+      "markReturned": "Markér som returneret"
+    },
+    "subscriptionBoxes": {
+      "title": "Abonnementsbokse",
+      "subtitle": "Administrer tilbagevendende kuponbokse",
+      "newBox": "+ Ny boks",
+      "cancel": "Annuller",
+      "form": {
+        "name": "Navn",
+        "description": "Beskrivelse",
+        "price": "Pris ({currency})",
+        "currency": "Valuta",
+        "interval": "Interval",
+        "maxItems": "Maks. antal varer",
+        "creating": "Opretter...",
+        "submit": "Opret boks"
+      },
+      "interval": {
+        "weekly": "Ugentligt",
+        "monthly": "Månedligt",
+        "quarterly": "Kvartalsvis"
+      },
+      "created": "Abonnementsboksen er oprettet.",
+      "empty": "Ingen abonnementsbokse endnu. Opret din første.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# abonnent} other {# abonnenter}}",
+      "items": "{count, plural, one {# vare} other {# varer}}",
+      "errors": {
+        "priceAboveZero": "Angiv en pris over 0.",
+        "createFailed": "Abonnementsboksen kunne ikke oprettes (fejl {status}).",
+        "network": "Abonnementsboksen kunne ikke oprettes. Tjek din forbindelse, og prøv igen."
+      },
+      "intervalUnit": {
+        "weekly": "uge",
+        "monthly": "måned",
+        "quarterly": "kvartal"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Websted",
+      "supportEmail": "Support-e-mail",
+      "logoUrl": "Logo-URL",
+      "primaryColor": "Primær farve",
+      "secondaryColor": "Sekundær farve",
+      "backgroundColor": "Baggrundsfarve",
+      "primaryColorHex": "Primær farves hex-værdi",
+      "secondaryColorHex": "Sekundær farves hex-værdi",
+      "backgroundColorHex": "Baggrundsfarvens hex-værdi",
+      "saving": "Gemmer..."
+    },
+    "page": {
+      "metaTitle": "Forhandlerindstillinger",
+      "infoTitle": "Forhandleroplysninger",
+      "infoSubtitle": "Grundlæggende forhandleroplysninger",
+      "name": "Navn",
+      "slug": "Slug",
+      "country": "Land",
+      "defaultCurrency": "Standardvaluta",
+      "website": "Websted",
+      "supportEmail": "Support-e-mail",
+      "completeOnboarding": "Fuldfør onboarding",
+      "billingTitle": "Fakturering",
+      "billingSubtitle": "14 dages gratis prøveperiode, derefter planer fra 19 €/md. 5% transaktionsgebyr på kuponsalg.",
+      "status": "Status",
+      "trialStatus": "Gratis prøveperiode — {days, plural, one {# dag} other {# dage}} tilbage",
+      "statusActive": "Aktiv",
+      "statusInactive": "Inaktiv",
+      "currentPlan": "Nuværende plan",
+      "trialEnds": "Prøveperioden slutter",
+      "periodEnds": "Nuværende periode slutter",
+      "manage": "Administrer",
+      "payoutsTitle": "Udbetalinger",
+      "payoutsEnabled": "Stripe-konto tilknyttet og aktiveret",
+      "payoutsInProgress": "Onboarding i gang — fuldfør den for at aktivere udbetalinger",
+      "payoutsNotConnected": "Tilknyt Stripe for at modtage udbetalinger fra kuponsalg",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "Modtag hændelsesnotifikationer i realtid via HTTP",
+      "notificationsTitle": "Notifikationer",
+      "notificationsSubtitle": "Vælg, hvilke e-mailkategorier du modtager som teammedlem."
+    },
+    "brandProfile": {
+      "title": "Brandprofil",
+      "subtitle": "Tilpas dine brandfarver, dit logo og dine kontaktoplysninger.",
+      "updated": "Brandprofilen er opdateret!",
+      "updateFailed": "Brandprofilen kunne ikke opdateres",
+      "save": "Gem ændringer"
+    },
+    "domains": {
+      "title": "Egne domæner",
+      "subtitle": "Tilknyt dit eget domæne, og verificér det til tenant-routing.",
+      "inputLabel": "Eget domæne",
+      "adding": "Tilføjer...",
+      "add": "Tilføj domæne",
+      "empty": "Ingen domæner konfigureret.",
+      "statusLine": "Status: {status}",
+      "statusValue": {
+        "pending": "afventer",
+        "verified": "verificeret"
+      },
+      "verify": "Verificér",
+      "remove": "Fjern",
+      "addedTitle": "Domæne tilføjet",
+      "addedDescription": "Verificér DNS, før du omdirigerer trafikken.",
+      "addErrorTitle": "Domænefejl",
+      "addErrorDescription": "Domænet kunne ikke tilføjes.",
+      "verifiedTitle": "Domæne verificeret",
+      "verifiedDescription": "Tenant-routing er nu aktiv.",
+      "verifyErrorTitle": "Verificeringsfejl",
+      "verifyErrorDescription": "Domænet kunne ikke verificeres.",
+      "removedTitle": "Domæne fjernet",
+      "removeErrorTitle": "Fejl ved fjernelse",
+      "removeErrorDescription": "Domænet kunne ikke fjernes."
+    },
+    "notifications": {
+      "metaTitle": "Notifikationsindstillinger",
+      "title": "Notifikationsindstillinger",
+      "intro": "Styr, hvilke e-mailkategorier du modtager i din indbakke som medlem af <name>{merchantName}</name>. Indstillingerne er personlige — hvert teammedlem administrerer sine egne.",
+      "required": "Påkrævet",
+      "toggle": "Slå {label} til/fra",
+      "unsaved": "Ikke-gemte ændringer",
+      "allSaved": "Alle ændringer er gemt",
+      "saving": "Gemmer…",
+      "save": "Gem indstillinger",
+      "savedTitle": "Indstillinger gemt",
+      "saveFailedTitle": "Kunne ikke gemme",
+      "saveFailedDescription": "Dine notifikationsindstillinger kunne ikke opdateres.",
+      "category": {
+        "orders": {
+          "label": "Nye ordrer og indløsninger",
+          "description": "E-mail, når en kupon købes, indløses eller gives som gave."
+        },
+        "payouts": {
+          "label": "Udbetalinger",
+          "description": "Modtagne, mislykkede og tilbageholdte Stripe-udbetalinger."
+        },
+        "fraud_alerts": {
+          "label": "Advarsler om svindel og sikkerhed",
+          "description": "Usædvanlige indløsningsmønstre, chargebacks og uregelmæssige teamlogins. Kan ikke slås fra."
+        },
+        "campaign_updates": {
+          "label": "Kampagnens livscyklus",
+          "description": "Kampagne udgivet, udløber om 7 dage, afsluttet."
+        },
+        "weekly_digest": {
+          "label": "Ugentligt resultatoverblik",
+          "description": "Opsummering hver mandag af sidste uges omsætning, indløsninger og topkuponer."
+        },
+        "product_updates": {
+          "label": "Produktnyheder fra GiftHub",
+          "description": "Nye funktioner, roadmap og lejlighedsvise tips. Højst 1 gang om måneden."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Forhandlerudbetalinger",
+      "title": "Udbetalinger",
+      "intro": "Tilknyt en Stripe-konto, så kuponsalg udbetales direkte til din bank. Vi tager et platformgebyr på 5%; resten overføres automatisk til din tilknyttede konto ved betalingen.",
+      "stripeAccount": "Stripe-konto",
+      "capabilityState": "Funktionsstatus",
+      "accountStatus": {
+        "pending": "afventer",
+        "restricted": "begrænset",
+        "enabled": "aktiveret",
+        "disabled": "deaktiveret"
+      },
+      "backToSettings": "Tilbage til indstillinger",
+      "howTitle": "Sådan fungerer udbetalinger",
+      "how1": "Kunderne betaler via platformens checkout. Vi opkræver hele beløbet og opbevarer det hos Stripe.",
+      "how2": "Når en betaling går igennem, sender Stripe salgsprisen minus vores gebyr på 5% direkte til din udbetalingskonto.",
+      "how3": "Stripe udbetaler derefter pengene til din bankkonto efter den tidsplan, du vælger i dine Stripe-udbetalingsindstillinger (normalt dagligt, et par dage efter salget).",
+      "how4": "Chargebacks og refusioner modregnes i din næste udbetaling; administratorteamet kan tilbageholde din saldo manuelt, hvis vi opdager svindel.",
+      "badge": {
+        "enabled": {
+          "label": "Udbetalinger aktiveret",
+          "description": "Midler fra kuponsalg overføres til din bankkonto af Stripe efter den planlagte udbetalingsfrekvens."
+        },
+        "restricted": {
+          "label": "Yderligere oplysninger påkrævet",
+          "description": "Stripe skal bruge flere oplysninger, før udbetalinger kan aktiveres. Åbn onboardinglinket nedenfor for at fortsætte."
+        },
+        "disabled": {
+          "label": "Udbetalinger deaktiveret",
+          "description": "Stripe har deaktiveret udbetalinger på denne konto. Åbn Stripe-dashboardet for at løse de udestående krav."
+        },
+        "notConnected": {
+          "label": "Ikke tilknyttet",
+          "description": "Du har endnu ikke tilknyttet en Stripe-konto. Udbetalinger tilbageholdes, indtil onboardingen er fuldført — i mellemtiden behandles kuponsalg stadig, men midlerne bliver på platformens saldo."
+        }
+      },
+      "actions": {
+        "startFailed": "Stripe-onboardingen kunne ikke startes",
+        "startNetworkError": "Netværksfejl ved start af onboarding",
+        "dashboardFailed": "Stripe-dashboardet kunne ikke åbnes",
+        "dashboardNetworkError": "Netværksfejl ved åbning af dashboardet",
+        "disconnectConfirm": "Fjern tilknytningen til denne Stripe-konto? Udbetalinger sættes på pause, indtil du tilknytter igen.",
+        "disconnected": "Stripe-kontoen er frakoblet",
+        "disconnectFailed": "Kunne ikke frakobles",
+        "disconnect": "Frakobl",
+        "setUp": "Opsæt udbetalinger med Stripe",
+        "openDashboard": "Åbn Stripe-dashboard",
+        "continueOnboarding": "Fortsæt onboarding"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Forhandlerdata kunne ikke indlæses.",
+      "retry": "Prøv igen",
+      "loading": "Indlæser...",
+      "title": "Fuldfør din profil",
+      "subtitle": "Opsæt din forhandlers brandprofil.",
+      "basicInfo": "Grundlæggende oplysninger",
+      "merchantName": "Forhandlernavn *",
+      "brandTitle": "Brandprofil",
+      "brandSubtitle": "Tilpas dine brandfarver og dit logo.",
+      "updateFailed": "Forhandleren kunne ikke opdateres",
+      "submit": "Fuldfør onboarding",
+      "skip": "Spring over for nu"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Revisionslog",
+      "subtitle": "Følg alle handlinger udført på din forhandlerkonto",
+      "filters": "Filtre",
+      "action": "Handling",
+      "allActions": "Alle handlinger",
+      "fromDate": "Fra dato",
+      "toDate": "Til dato",
+      "apply": "Anvend",
+      "clear": "Ryd",
+      "loading": "Indlæser revisionslog...",
+      "loadFailed": "Revisionsloggen kunne ikke indlæses",
+      "empty": "Ingen poster i revisionsloggen.",
+      "columns": {
+        "timestamp": "Tidsstempel",
+        "actor": "Udført af",
+        "action": "Handling",
+        "resource": "Ressource",
+        "details": "Detaljer"
+      },
+      "unknownActor": "Ukendt",
+      "showing": "Viser {from}–{to} af {total}",
+      "pageOf": "Side {page} af {totalPages}",
+      "previousPage": "Forrige side",
+      "nextPage": "Næste side",
+      "actions": {
+        "voucherCreated": "Kupon oprettet",
+        "voucherUpdated": "Kupon opdateret",
+        "voucherPublished": "Kupon udgivet",
+        "vouchersGenerated": "Kuponer genereret",
+        "campaignCreated": "Kampagne oprettet",
+        "campaignUpdated": "Kampagne opdateret",
+        "memberInvited": "Teammedlem inviteret",
+        "memberRemoved": "Teammedlem fjernet",
+        "memberRoleChanged": "Teammedlems rolle ændret",
+        "apiKeyCreated": "API-nøgle oprettet",
+        "apiKeyRevoked": "API-nøgle tilbagekaldt",
+        "apiKeyUpdated": "API-nøgle opdateret",
+        "eventCreated": "Begivenhed oprettet",
+        "eventUpdated": "Begivenhed opdateret",
+        "eventPublished": "Begivenhed udgivet",
+        "merchantUpdated": "Forhandler opdateret",
+        "reviewReplied": "Anmeldelse besvaret",
+        "settingsUpdate": "Indstillinger opdateret",
+        "settingsView": "Indstillinger vist",
+        "ticketRedeemed": "Billet indløst"
+      },
+      "resources": {
+        "voucher": "Kupon",
+        "campaign": "Kampagne",
+        "giftCard": "Gavekort",
+        "event": "Begivenhed",
+        "member": "Medlem",
+        "teamMember": "Teammedlem",
+        "apiKey": "API-nøgle",
+        "webhook": "Webhook",
+        "merchant": "Forhandler",
+        "user": "Bruger",
+        "review": "Anmeldelse"
+      }
+    },
+    "roles": {
+      "admin": "Administrator",
+      "adminDescription": "Fuld adgang — administrer kuponer, kampagner, medlemmer og indstillinger",
+      "staff": "Personale",
+      "staffDescription": "Driftsadgang — bekræft indløsninger og se data",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Teammedlemmer",
+      "subtitle": "Administrer dit team og deres adgangsniveauer",
+      "inviteMember": "Inviter medlem",
+      "inviteTitle": "Inviter teammedlem",
+      "emailAddress": "E-mailadresse",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "Brugeren skal have en eksisterende konto.",
+      "role": "Rolle",
+      "inviting": "Inviterer...",
+      "sendInvitation": "Send invitation",
+      "cancel": "Annuller",
+      "save": "Gem",
+      "loading": "Indlæser teammedlemmer...",
+      "loadFailed": "Teammedlemmerne kunne ikke indlæses",
+      "empty": "Ingen teammedlemmer endnu. Inviter dit første medlem ovenfor.",
+      "columns": {
+        "member": "Medlem",
+        "role": "Rolle",
+        "joined": "Tilmeldt",
+        "actions": "Handlinger"
+      },
+      "unnamed": "Unavngivet",
+      "memberRole": "Medlemsrolle",
+      "changeRole": "Skift rolle",
+      "removeMember": "Fjern medlem",
+      "inviteFailed": "Medlemmet kunne ikke inviteres",
+      "invited": "Medlemmet er inviteret",
+      "updateRoleFailed": "Rollen kunne ikke opdateres",
+      "roleUpdated": "Rollen er opdateret",
+      "removeConfirm": "Fjern {name} fra teamet?",
+      "remove": "Fjern",
+      "removeFailed": "Medlemmet kunne ikke fjernes",
+      "removed": "Medlemmet er fjernet"
+    },
+    "inviteForm": {
+      "title": "Inviter teammedlem",
+      "subtitle": "Tilføj et teammedlem via vedkommendes e-mailadresse.",
+      "email": "E-mail",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "Brugeren skal have en konto. Hvis vedkommende ikke har en, skal vedkommende tilmelde sig først.",
+      "role": "Rolle",
+      "roleHint": "Administratorer kan administrere kuponer, kampagner og teammedlemmer. Personale kan bekræfte indløsninger.",
+      "inviting": "Inviterer...",
+      "submit": "Inviter medlem",
+      "redirectingToBilling": "{message} Omdirigerer til fakturering..."
+    },
+    "referrals": {
+      "title": "Anbefalingsanalyser",
+      "subtitle": "Følg anbefalingernes resultater og belønninger.",
+      "stats": {
+        "total": "Anbefalinger i alt",
+        "totalHint": "Alle registrerede anbefalinger",
+        "opened": "Åbnet",
+        "openedHint": "Set eller indløst",
+        "redeemed": "Indløst",
+        "redeemedHint": "Konverterede anbefalinger",
+        "conversionRate": "Konverteringsrate",
+        "conversionRateHint": "Indløst / i alt"
+      },
+      "statusBreakdown": "Fordeling efter status",
+      "creditsIssued": "Udstedte kreditter {amount}",
+      "noActivity": "Ingen anbefalingsaktivitet endnu.",
+      "topReferrers": "Bedste anbefalere",
+      "topReferrersHint": "Brugere, der skaber flest anbefalinger.",
+      "noReferrals": "Ingen anbefalinger endnu.",
+      "unknownUser": "Ukendt bruger",
+      "referralCount": "{count, plural, one {# anbefaling} other {# anbefalinger}}",
+      "recent": "Seneste anbefalinger",
+      "recentHint": "Nyeste anbefalinger fra kunder.",
+      "noRecent": "Ingen nylige anbefalinger.",
+      "voucherFallback": "Kupon",
+      "status": {
+        "created": "Oprettet",
+        "opened": "Åbnet",
+        "redeemed": "Indløst",
+        "expired": "Udløbet",
+        "blocked": "Blokeret"
+      }
+    },
+    "emailCampaigns": {
+      "title": "E-mailkampagner",
+      "newCampaign": "Ny kampagne",
+      "notConfigured": "Afsendelse af e-mails er endnu ikke sat op på denne platform. Du kan oprette og forhåndsvise kampagner, men de kan ikke sendes, før en e-mailudbyder er tilknyttet.",
+      "notConfiguredShort": "Afsendelse af e-mails er endnu ikke sat op på denne platform",
+      "createTitle": "Opret kampagne",
+      "campaignName": "Kampagnenavn",
+      "campaignNamePlaceholder": "Nyhedsbrev til sommerudsalg",
+      "subjectLine": "Emnelinje",
+      "subjectPlaceholder": "Gå ikke glip af vores sommertilbud!",
+      "recipients": "Modtagere",
+      "recipientFilter": {
+        "all": "Alle kunder",
+        "redeemed30d": "Indløst inden for de seneste 30 dage",
+        "inactive": "Inaktive kunder"
+      },
+      "schedule": "Planlæg (valgfrit)",
+      "emailSections": "E-mailsektioner",
+      "sectionTypes": {
+        "header": "Overskrift",
+        "text": "Tekst",
+        "image": "Billede",
+        "button": "Knap",
+        "divider": "Skillelinje",
+        "voucherCard": "Kupon"
+      },
+      "creating": "Opretter...",
+      "scheduleCampaign": "Planlæg kampagne",
+      "saveDraft": "Gem som kladde",
+      "preview": "Forhåndsvisning",
+      "editor": {
+        "moveUp": "Flyt op",
+        "moveDown": "Flyt ned",
+        "removeSection": "Fjern sektion",
+        "title": "Titel",
+        "subtitle": "Undertitel (valgfri)",
+        "textContent": "Indtast tekstindhold...",
+        "imageUrl": "Billed-URL",
+        "altText": "Alternativ tekst",
+        "buttonLabel": "Knaptekst",
+        "buttonUrl": "Knap-URL",
+        "dividerHint": "Vandret skillelinje",
+        "voucherTitle": "Kupontitel",
+        "voucherValue": "Værdi (f.eks. 20% RABAT)",
+        "voucherCode": "Kode (f.eks. SAVE20)",
+        "voucherExpiry": "Udløb (f.eks. 31. dec. 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Overskriftstitel",
+        "textContent": "Tekstindhold...",
+        "imagePlaceholder": "Pladsholder til billede",
+        "button": "Knap",
+        "voucher": "Kupon",
+        "validUntil": "Gyldig til {date}"
+      },
+      "loading": "Indlæser...",
+      "empty": "Ingen e-mailkampagner endnu",
+      "columns": {
+        "name": "Navn",
+        "subject": "Emne",
+        "status": "Status",
+        "recipients": "Modtagere",
+        "opens": "Åbninger",
+        "created": "Oprettet",
+        "actions": "Handlinger"
+      },
+      "status": {
+        "draft": "kladde",
+        "scheduled": "planlagt",
+        "sent": "sendt"
+      },
+      "send": "Send",
+      "delete": "Slet",
+      "deleteCampaign": "Slet kampagne",
+      "toasts": {
+        "missingFields": "Manglende felter",
+        "missingFieldsDescription": "Navn og emne er påkrævet.",
+        "created": "Kampagne oprettet",
+        "error": "Fejl",
+        "createFailed": "Kampagnen kunne ikke oprettes.",
+        "sendConfirm": "Er du sikker på, at du vil sende denne kampagne nu?",
+        "sendFailedStatus": "Kunne ikke sendes (fejl {status}).",
+        "partlySent": "Kampagnen er delvist sendt",
+        "partlySentDescription": "Sendt til {sent} af {total} modtagere. {failed, plural, one {# e-mail} other {# e-mails}} kunne ikke sendes.",
+        "sent": "Kampagne sendt",
+        "sentDescription": "Sendt til {sent, plural, one {# modtager} other {# modtagere}}.",
+        "sendFailed": "Afsendelse mislykkedes",
+        "deleteConfirm": "Slet denne kampagne?",
+        "deleted": "Kampagne slettet",
+        "deleteFailed": "Kunne ikke slettes."
+      }
+    },
+    "apiKeys": {
+      "title": "API-nøgler",
+      "subtitle": "Administrer API-nøgler til programmatisk adgang til dine forhandlerdata",
+      "createKey": "Opret nøgle",
+      "createdNotice": "API-nøglen er oprettet! Kopiér den nu — den vises ikke igen.",
+      "copyKey": "Kopiér nøgle",
+      "createTitle": "Opret API-nøgle",
+      "keyName": "Nøglenavn",
+      "keyNamePlaceholder": "f.eks. POS-integration (produktion)",
+      "permissions": "Tilladelser",
+      "creating": "Opretter...",
+      "submit": "Opret API-nøgle",
+      "cancel": "Annuller",
+      "loading": "Indlæser API-nøgler...",
+      "empty": "Ingen API-nøgler endnu. Opret en for at komme i gang.",
+      "createdOn": "Oprettet {date}",
+      "lastUsed": "Senest brugt {date}",
+      "expires": "Udløber {date}",
+      "revokeKey": "Tilbagekald nøgle",
+      "loadFailed": "API-nøglerne kunne ikke indlæses",
+      "required": "Navn og mindst én tilladelse er påkrævet",
+      "createFailed": "API-nøglen kunne ikke oprettes",
+      "created": "API-nøgle oprettet",
+      "revokeConfirm": "Tilbagekald API-nøglen \"{name}\"? Handlingen kan ikke fortrydes.",
+      "revoke": "Tilbagekald",
+      "revoked": "API-nøgle tilbagekaldt",
+      "revokeFailed": "API-nøglen kunne ikke tilbagekaldes",
+      "copied": "Kopieret til udklipsholderen",
+      "groups": {
+        "vouchers": "Kuponer",
+        "campaigns": "Kampagner",
+        "giftCards": "Gavekort",
+        "customers": "Kunder",
+        "analytics": "Analyser",
+        "events": "Begivenheder"
+      },
+      "permissionLabels": {
+        "voucherRead": "Læs kuponer",
+        "voucherCreate": "Opret kuponer",
+        "voucherRedeem": "Indløs kuponer",
+        "campaignRead": "Læs kampagner",
+        "campaignCreate": "Opret kampagner",
+        "giftCardRead": "Læs gavekort",
+        "giftCardRedeem": "Indløs gavekort",
+        "customerRead": "Læs kunder",
+        "analyticsRead": "Læs analyser",
+        "eventRead": "Læs begivenheder",
+        "eventCheckin": "Indtjekning til begivenheder"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "Modtag hændelsesnotifikationer via HTTP",
+      "addWebhook": "Tilføj webhook",
+      "secretNotice": "Webhook-hemmelighed (vises kun én gang):",
+      "copySecret": "Kopiér hemmelighed",
+      "copied": "Kopieret!",
+      "newTitle": "Ny webhook",
+      "endpointUrl": "Endpoint-URL",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Hændelser",
+      "submit": "Opret webhook",
+      "loading": "Indlæser...",
+      "empty": "Ingen webhooks konfigureret",
+      "createdOn": "Oprettet {date}",
+      "deliveriesCount": "{count, plural, one {# levering} other {# leveringer}}",
+      "sendTest": "Send test",
+      "viewDeliveries": "Leveringslog",
+      "disable": "Deaktiver",
+      "enable": "Aktivér",
+      "deleteWebhook": "Slet webhook",
+      "deliveryLog": "Leveringslog",
+      "noDeliveries": "Ingen leveringer endnu",
+      "deliveryFailed": "Mislykket",
+      "attempts": "{count, plural, one {# forsøg} other {# forsøg}}",
+      "loadFailed": "Webhooks kunne ikke indlæses",
+      "required": "URL og mindst én hændelse er påkrævet",
+      "created": "Webhook oprettet",
+      "createFailed": "Webhooken kunne ikke oprettes",
+      "deleted": "Webhook slettet",
+      "deleteFailed": "Webhooken kunne ikke slettes",
+      "updateFailed": "Webhooken kunne ikke opdateres",
+      "testDelivered": "Test leveret! Status: {status}",
+      "testFailed": "Testen mislykkedes: {error}",
+      "statusCode": "Status {status}",
+      "testSendFailed": "Testwebhooken kunne ikke sendes",
+      "loadDeliveriesFailed": "Leveringerne kunne ikke indlæses"
+    }
   }
 }

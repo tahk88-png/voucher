@@ -2602,5 +2602,2656 @@
       "downloading": "Stahování...",
       "download": "Stáhnout QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Spravujte své kampaně s poukázkami.",
+      "createCampaign": "Vytvořit kampaň",
+      "subscriptionRequired": "Vyžadováno předplatné",
+      "trialEnded": "Vaše 60denní zkušební období kampaní skončilo. Pro vytváření nových kampaní aktivujte tarif za 9,90 měsíčně.",
+      "stats": {
+        "totalTitle": "Celkem kampaní",
+        "totalDescription": "Všechny kampaně",
+        "activeTitle": "Aktivní",
+        "activeDescription": "Právě probíhají",
+        "paidTitle": "Placené nákupy",
+        "paidDescription": "Dokončené objednávky",
+        "revenueTitle": "Tržby",
+        "revenueDescription": "Placený prodej poukázek"
+      },
+      "weeklyRevenue": {
+        "title": "Týdenní tržby",
+        "description": "Placený prodej z kampaní za 7 dní.",
+        "series": "Tržby"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Zatím žádné kampaně",
+        "descriptionCanCreate": "Vytvořte kampaň pro organizaci a správu svých poukázek.",
+        "descriptionNeedsSubscription": "Pro vytváření nových kampaní aktivujte předplatné.",
+        "action": "Vytvořit první kampaň"
+      },
+      "searchPlaceholder": "Hledat kampaně...",
+      "searchLabel": "Hledat kampaně",
+      "filterAll": "Vše",
+      "status": {
+        "active": "Aktivní",
+        "draft": "Koncept",
+        "ended": "Ukončeno",
+        "paused": "Pozastaveno"
+      },
+      "noMatches": "Vašim filtrům neodpovídají žádné kampaně.",
+      "clearFilters": "Zrušit filtry",
+      "type": {
+        "weekly": "Týdenní kampaň",
+        "limited": "Omezená kampaň",
+        "other": "Kampaň: {type}"
+      },
+      "runs": "Probíhá {start} – {end}",
+      "view": "Zobrazit",
+      "stats": {
+        "vouchers": "Poukázky",
+        "paidPurchases": "Placené nákupy",
+        "revenue": "Tržby",
+        "price": "Cena"
+      },
+      "free": "Zdarma"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Nové kampaně začínají jako koncept. Zákazníci je neuvidí, dokud je nezveřejníte na stránce kampaně."
+    },
+    "edit": {
+      "breadcrumb": "Upravit",
+      "title": "Upravit kampaň"
+    },
+    "form": {
+      "basicInfo": "Základní informace",
+      "nameLabel": "Název kampaně *",
+      "namePlaceholder": "Sváteční nabídka",
+      "descriptionLabel": "Popis",
+      "descriptionPlaceholder": "Časově omezená akce",
+      "typeLabel": "Typ *",
+      "typeOptions": {
+        "limited": "Jednorázová (omezená)",
+        "weekly": "Týdenní"
+      },
+      "dates": "Termíny",
+      "startDate": "Datum zahájení *",
+      "endDate": "Datum ukončení *",
+      "timezoneHint": "Časy jsou ve vašem místním časovém pásmu.",
+      "pricing": "Ceny a limity",
+      "priceLabel": "Cena v {currency} (pro bezplatné poukázky ponechte prázdné)",
+      "pricePreview": "Zákazníci zaplatí {price}.",
+      "priceHint": "Zadejte částku v {currency}, např. 4.50 nebo 4,50 pro {example}.",
+      "maxRedemptions": "Max. počet uplatnění",
+      "maxPurchases": "Max. počet nákupů",
+      "unlimited": "Neomezeně",
+      "creditLabel": "Kredit pro doporučitele (%)",
+      "creditPreview": "Doporučitelé získají {percent} % z kupní ceny jako kredit.",
+      "creditHint": "Podíl z kupní ceny vyplacený doporučiteli jako kredit, např. 5 nebo 2,5.",
+      "termsSection": "Obchodní podmínky",
+      "termsLabel": "Podmínky",
+      "termsPlaceholder": "Obchodní podmínky této kampaně...",
+      "saving": "Ukládání...",
+      "saveChanges": "Uložit změny",
+      "creating": "Vytváření...",
+      "create": "Vytvořit kampaň",
+      "saved": "Změny kampaně uloženy.",
+      "errors": {
+        "invalidDates": "Zadejte platné datum zahájení a ukončení.",
+        "endBeforeStart": "Datum ukončení musí být po datu zahájení.",
+        "maxRedemptions": "Max. počet uplatnění musí být celé číslo 1 nebo vyšší.",
+        "maxPurchases": "Max. počet nákupů musí být celé číslo 1 nebo vyšší.",
+        "saveFailed": "Kampaň se nepodařilo uložit"
+      },
+      "priceErrors": {
+        "negative": "Cena nemůže být záporná.",
+        "invalid": "Cena není platné číslo.",
+        "wholeNumber": "Cena musí být celé číslo.",
+        "decimals": "Cena může mít nejvýše {decimals} desetinných míst.",
+        "tooLarge": "Cena je příliš vysoká."
+      },
+      "creditErrors": {
+        "negative": "Kredit pro doporučitele nemůže být záporný.",
+        "invalid": "Kredit pro doporučitele není platné číslo.",
+        "decimals": "Kredit pro doporučitele může mít nejvýše {decimals} desetinných míst.",
+        "tooLarge": "Kredit pro doporučitele je příliš vysoký.",
+        "tooHigh": "Kredit pro doporučitele nemůže přesáhnout 100 %."
+      }
+    },
+    "detail": {
+      "noDescription": "Bez popisu",
+      "draftNotice": "Tato kampaň je koncept, zákazníci ji zatím nevidí.",
+      "draftNoticeAdmin": "Tato kampaň je koncept, zákazníci ji zatím nevidí. Zveřejněte ji, až budete připraveni.",
+      "status": "Stav",
+      "type": "Typ",
+      "price": "Cena",
+      "referrerCredit": "Kredit pro doporučitele",
+      "none": "Žádný",
+      "stats": {
+        "vouchers": "Poukázky",
+        "totalPurchases": "Celkem nákupů",
+        "paidPurchases": "Placené nákupy"
+      },
+      "terms": "Obchodní podmínky",
+      "promotion": {
+        "title": "Propagace",
+        "description": "Placená viditelnost v týdenním newsletteru a oznámeních."
+      },
+      "vouchers": {
+        "title": "Poukázky",
+        "description": "Poukázky vygenerované z této kampaně.",
+        "empty": "Zatím nebyly vygenerovány žádné poukázky.",
+        "view": "Zobrazit"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Zahrnout do týdenního newsletteru (placené)",
+      "notification": "Zvýraznit v oznámeních (placené)",
+      "endDate": "Datum ukončení propagace",
+      "saving": "Ukládání...",
+      "save": "Uložit nastavení propagace",
+      "saved": "Nastavení propagace uloženo.",
+      "upgradeNeededTitle": "Je potřeba vyšší tarif",
+      "upgradeNeeded": "Zvýraznění propagace jsou součástí vyššího tarifu. Pro jejich použití přejděte na vyšší tarif v sekci Nastavení a fakturace.",
+      "saveFailedStatus": "Nastavení propagace se nepodařilo uložit (chyba {status}).",
+      "saveFailedNetwork": "Nastavení propagace se nepodařilo uložit. Zkontrolujte připojení a zkuste to znovu."
+    },
+    "actions": {
+      "adminOnly": "Kampaně mohou zveřejňovat, pozastavovat nebo upravovat pouze administrátoři obchodníka.",
+      "edit": "Upravit",
+      "publish": {
+        "label": "Zveřejnit",
+        "title": "Zveřejnit tuto kampaň?",
+        "description": "Zákazníci budou moci okamžitě vidět a kupovat poukázky z této kampaně.",
+        "success": "Kampaň zveřejněna. Nyní je pro zákazníky dostupná."
+      },
+      "pause": {
+        "label": "Pozastavit",
+        "title": "Pozastavit tuto kampaň?",
+        "description": "Kampaň se vrátí do konceptu a bude skrytá před zákazníky, dokud ji znovu nezveřejníte. Již prodané poukázky zůstávají platné.",
+        "success": "Kampaň pozastavena. Je skrytá před zákazníky."
+      },
+      "end": {
+        "label": "Ukončit kampaň",
+        "title": "Ukončit tuto kampaň hned?",
+        "description": "Kampaň se okamžitě zastaví a nelze ji znovu zveřejnit. Již prodané poukázky zůstávají platné.",
+        "success": "Kampaň ukončena."
+      },
+      "updateFailedStatus": "Kampaň se nepodařilo aktualizovat (chyba {status}).",
+      "updateFailed": "Kampaň se nepodařilo aktualizovat."
+    },
+    "generate": {
+      "open": "Generovat poukázky",
+      "title": "Generovat poukázky",
+      "descriptionPriced": "Vytvoří koncepty poukázek se slevou {value}, platné {start} – {end}. Každá poukázka má vlastní kód. Zůstanou skryté, dokud je nezveřejníte.",
+      "descriptionFree": "Tato kampaň je zdarma, takže na poukázkách není žádná částka. Nejprve nastavte cenu kampaně.",
+      "countLabel": "Počet poukázek (1–100)",
+      "generating": "Generování...",
+      "submit": "Generovat",
+      "invalidCount": "Zadejte celé číslo od 1 do 100",
+      "needsPrice": "Nejprve nastavte cenu této kampaně. Vygenerované poukázky mají hodnotu ceny kampaně.",
+      "failed": "Poukázky se nepodařilo vygenerovat",
+      "success": "{count, plural, one {Vygenerován # koncept poukázky. Zveřejněte jej} few {Vygenerovány # koncepty poukázek. Zveřejněte je} many {Vygenerováno # konceptu poukázek. Zveřejněte je} other {Vygenerováno # konceptů poukázek. Zveřejněte je}} na stránce poukázek, až budete připraveni."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktivní kampaně",
+      "statLiveVouchers": "Živé poukázky",
+      "statRedemptions30d": "Uplatnění (30 dní)"
+    },
+    "error": {
+      "title": "Něco se pokazilo",
+      "description": "V panelu obchodníka došlo k chybě.",
+      "tryAgain": "Zkusit znovu",
+      "backToMerchants": "Zpět na obchodníky"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Přehled",
+        "offers": "Nabídky",
+        "inStore": "V prodejně",
+        "customers": "Zákazníci",
+        "settings": "Nastavení"
+      },
+      "language": "Jazyk",
+      "opensAppArea": "Otevře část aplikace",
+      "externalLinkTitle": "{label} (otevře část aplikace mimo tohoto obchodníka)",
+      "opensOutside": "Otevře se mimo sekci obchodníka",
+      "merchantNavigation": "Obchodník",
+      "more": "Více",
+      "navDashboard": "Dashboard"
+    },
+    "dashboard": {
+      "title": "Dashboard obchodníka",
+      "welcomeBack": "Vítejte zpět, {name}",
+      "viewCampaigns": "Zobrazit kampaně",
+      "createVoucher": "Vytvořit poukázku",
+      "performanceOverview": "Přehled výkonu",
+      "performanceOverviewHint": "Aktuální aktivita kampaní a uplatnění.",
+      "revenueAndCredits": "Tržby a kredity",
+      "revenueAndCreditsHint": "Prodej, kredity a nesplacené závazky.",
+      "performanceTrend": "Vývoj výkonu",
+      "performanceTrendHint": "Uplatnění a tržby za posledních {days} dní.",
+      "rangeShort": "{days} d",
+      "revenue": "Tržby",
+      "chartRedemptions": "Uplatnění",
+      "chartRevenue": "Tržby ({currency})",
+      "paidOrders": "Zaplacené objednávky",
+      "openOrdersView": "Otevřít přehled objednávek",
+      "avgOrder": "Prům. objednávka",
+      "openCampaignRevenue": "Otevřít tržby kampaní",
+      "redemptionRate": "Míra uplatnění",
+      "openRedemptionQueue": "Otevřít frontu uplatnění",
+      "pendingConfirmation": "{count} čeká na potvrzení",
+      "pendingConfirmationHint": "Uplatnění v prodejně čekající na vaše schválení.",
+      "viewRedemptions": "Zobrazit uplatnění",
+      "actionCenter": "Centrum akcí",
+      "actionCenterHint": "Prioritní položky ke kontrole.",
+      "allCaughtUp": "Vše máte vyřízeno.",
+      "open": "Otevřít",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# čekající uplatnění} few {# čekající uplatnění} many {# čekajícího uplatnění} other {# čekajících uplatnění}}",
+        "pendingRedemptionsDetail": "Potvrďte uplatnění v prodejně",
+        "expiringVouchers": "{count, plural, one {# poukázka brzy vyprší} few {# poukázky brzy vyprší} many {# poukázky brzy vyprší} other {# poukázek brzy vyprší}}",
+        "expiringVouchersDetail": "Zkontrolujte platnost poukázek",
+        "endingCampaigns": "{count, plural, one {# kampaň končí tento týden} few {# kampaně končí tento týden} many {# kampaně končí tento týden} other {# kampaní končí tento týden}}",
+        "endingCampaignsDetail": "Prodlužte nebo duplikujte své nejlepší kampaně",
+        "upcomingEvents": "{count, plural, one {# nadcházející událost} few {# nadcházející události} many {# nadcházející události} other {# nadcházejících událostí}}",
+        "upcomingEventsDetail": "Připravte odbavení vstupenek a personál"
+      },
+      "upcomingEventsTitle": "Nadcházející události",
+      "upcomingEventsHint": "Další naplánované události.",
+      "noUpcomingEvents": "Nejsou naplánovány žádné události.",
+      "eventStatus": {
+        "published": "zveřejněno",
+        "soldOut": "vyprodáno"
+      },
+      "manageEvents": "Spravovat události",
+      "topVouchers": "Nejlepší poukázky",
+      "topVouchersHint": "Nejčastěji uplatněné nabídky.",
+      "noTopVouchers": "Zatím nebyla uplatněna žádná poukázka. Vaše nejčastěji uplatňované poukázky se zobrazí zde."
+    },
+    "stats": {
+      "activeVouchers": "Aktivní poukázky",
+      "publishedVouchers": "Zveřejněné poukázky",
+      "openVouchers": "Otevřít poukázky",
+      "activeCampaigns": "Aktivní kampaně",
+      "runningCampaigns": "Probíhající kampaně",
+      "openCampaigns": "Otevřít kampaně",
+      "activeEvents": "Aktivní události",
+      "publishedEvents": "Zveřejněné události",
+      "openEvents": "Otevřít události",
+      "todaysRedemptions": "Dnešní uplatnění",
+      "thisWeek": "Tento týden: {count}",
+      "reviewRedemptions": "Zkontrolovat uplatnění",
+      "ofWeekly": "z týdne"
+    },
+    "revenue": {
+      "voucherRevenue": "Tržby z poukázek",
+      "paidVoucherSales": "Placený prodej poukázek",
+      "openCampaignSales": "Otevřít prodej kampaní",
+      "ticketRevenue": "Tržby ze vstupenek",
+      "paidTicketSales": "Placený prodej vstupenek",
+      "openEventSales": "Otevřít prodej událostí",
+      "creditsIssued": "Vydané kredity",
+      "totalCreditsDistributed": "Celkem rozdaných kreditů",
+      "openReferralCredits": "Otevřít kredity za doporučení",
+      "outstandingLiability": "Nesplacený závazek",
+      "unredeemedValue": "Hodnota neuplatněných poukázek",
+      "openVoucherLiability": "Otevřít závazky z poukázek"
+    },
+    "recentActivity": {
+      "title": "Nedávná aktivita",
+      "empty": "Žádná nedávná aktivita",
+      "unknownUser": "Neznámý uživatel",
+      "redeemedVoucher": "Uplatněná poukázka – {time}",
+      "confirmed": "Potvrzeno",
+      "pending": "Čeká"
+    },
+    "liveStats": {
+      "live": "Živě",
+      "connecting": "Připojování…",
+      "redeemedToday": "<value>{count}</value> <label>uplatněno dnes</label>",
+      "pending": "<value>{count}</value> <label>čeká</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analytika",
+      "title": "Analytika",
+      "subtitle": "Sledujte výkon a tržby svých poukázek",
+      "totalRedemptions": "Celkem uplatnění",
+      "confirmedRedemptions": "Potvrzená uplatnění",
+      "totalDiscounts": "Celkem slev",
+      "givenToCustomers": "Poskytnuto zákazníkům",
+      "creditsIssued": "Vydané kredity",
+      "totalCreditsDistributed": "Celkem rozdaných kreditů",
+      "activeVouchers": "Aktivní poukázky",
+      "withRedemptions": "S uplatněním",
+      "charts": {
+        "redemptionTrends": "Vývoj uplatnění (posledních 30 dní)",
+        "redemptions": "Uplatnění",
+        "revenue": "Tržby ({currency})",
+        "topPerforming": "Nejúspěšnější poukázky",
+        "noRedeemed": "Zatím nebyla uplatněna žádná poukázka. Vaše nejúspěšnější se zobrazí zde.",
+        "byCategory": "Uplatnění podle kategorie",
+        "noCategoryData": "Údaje o kategoriích nejsou k dispozici"
+      }
+    },
+    "ask": {
+      "title": "Zeptejte se svých dat",
+      "subtitle": "Ptejte se na data svého podniku přirozeným jazykem",
+      "emptyTitle": "Zeptejte se na cokoli o svých datech",
+      "emptyHint": "Vyzkoušejte některý z návrhů níže",
+      "placeholder": "Položte otázku o svých datech...",
+      "suggestedTitle": "Navrhované otázky",
+      "suggestions": {
+        "revenueLastWeek": "Jaké byly moje tržby minulý týden?",
+        "dailyRedemptionsThisMonth": "Ukaž denní uplatnění za tento měsíc",
+        "topVouchersByRevenue": "Nejlepší poukázky podle tržeb za minulý měsíc",
+        "customersPurchasedLastWeek": "Kolik zákazníků nakoupilo minulý týden?",
+        "referralConversionRate": "Jaká je moje konverze doporučení?",
+        "dailyRevenueTrend": "Ukaž vývoj denních tržeb za tento měsíc",
+        "purchasesYesterday": "Kolik nákupů proběhlo včera?",
+        "bestPerformingVouchers": "Které poukázky jsou nejúspěšnější?"
+      },
+      "errorFallback": "Omlouváme se, tuto otázku se nepodařilo zpracovat.",
+      "networkError": "Chyba sítě. Zkuste to prosím znovu.",
+      "itemLabel": "Položka {n}"
+    },
+    "reports": {
+      "title": "Finanční přehledy",
+      "subtitle": "Přehled tržeb a export",
+      "downloadCsv": "Stáhnout CSV",
+      "from": "Od",
+      "to": "Do",
+      "apply": "Použít",
+      "totalRevenue": "Celkové tržby",
+      "platformFees": "Poplatky platformy",
+      "netRevenue": "Čisté tržby",
+      "redemptions": "Uplatnění",
+      "revenueByCurrency": "Tržby podle měny",
+      "netAndFees": "Čisté: {net} • Poplatky: {fees}",
+      "monthlyRevenue": "Měsíční tržby",
+      "noRevenue": "Za toto období nejsou žádné údaje o tržbách.",
+      "month": "Měsíc",
+      "vouchers": "Poukázky",
+      "tickets": "Vstupenky",
+      "total": "Celkem"
+    },
+    "scheduled": {
+      "title": "Plánované přehledy",
+      "subtitle": "Nastavte automatické e-mailové přehledy",
+      "backToReports": "← Finanční přehledy",
+      "activeSchedules": "Aktivní plány",
+      "loading": "Načítání...",
+      "noSchedules": "Zatím nejsou nastaveny žádné plány",
+      "period": {
+        "daily": "Denně",
+        "weekly": "Týdně",
+        "monthly": "Měsíčně"
+      },
+      "reportTitle": {
+        "daily": "Denní přehled",
+        "weekly": "Týdenní přehled",
+        "monthly": "Měsíční přehled"
+      },
+      "recipientCount": "{count, plural, one {# příjemce} few {# příjemci} many {# příjemce} other {# příjemců}}",
+      "lastSent": "Naposledy odesláno: {date}",
+      "nextRun": "Další: {date}",
+      "pause": "Pozastavit",
+      "resume": "Obnovit",
+      "createSchedule": "Vytvořit plán",
+      "frequency": "Frekvence",
+      "recipients": "Příjemci",
+      "invalidEmail": "Neplatná e-mailová adresa",
+      "emailAlreadyAdded": "E-mail již byl přidán",
+      "addAtLeastOne": "Přidejte alespoň jednoho příjemce",
+      "saved": "Plán přehledů byl úspěšně uložen",
+      "saveFailed": "Plán se nepodařilo uložit",
+      "save": "Uložit plán",
+      "previewTitle": "Náhled přehledu",
+      "previewBody": "Plánované přehledy obsahují tržby, počty uplatnění, nejlepší poukázky a ukazatele růstu. Přehledy se odesílají jako přehledně formátované HTML e-maily v 8:00 UTC.",
+      "everyMorning": "Každé ráno",
+      "everyMonday": "Každé pondělí",
+      "firstOfMonth": "1. den každého měsíce"
+    },
+    "billing": {
+      "subscribeTo": "Předplatit {plan}",
+      "startFailed": "Předplatné se nepodařilo spustit",
+      "portalFailed": "Fakturační portál se nepodařilo otevřít",
+      "manageBilling": "Spravovat fakturaci",
+      "errorTitle": "Chyba",
+      "close": "Zavřít",
+      "usage": "Využito <b>{current}</b> / {max}",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "vytvořených kampaní za období",
+        "activeCampaigns": "aktivních kampaní",
+        "voucherCreatesPerCycle": "vytvořených poukázek za období",
+        "teamMembers": "členů týmu"
+      },
+      "currentPlanTrial": "Aktuální tarif (zkušební verze zdarma)",
+      "planChangesUnavailable": "Změny tarifu teď nejsou online k dispozici.",
+      "paymentsNotSetUp": "Online platby na této platformě zatím nejsou nastaveny, takže zde nelze tarify kupovat ani měnit. Pokud chcete změnit tarif, kontaktujte podporu.",
+      "features": {
+        "starter": {
+          "vouchers": "500 poukázek/měsíc",
+          "campaigns": "3 aktivní kampaně",
+          "teamMembers": "2 členové týmu",
+          "qrRedemption": "Uplatnění QR kódem",
+          "basicAnalytics": "Základní analytika"
+        },
+        "pro": {
+          "vouchers": "5 000 poukázek/měsíc",
+          "campaigns": "25 aktivních kampaní",
+          "teamMembers": "10 členů týmu",
+          "advancedAnalytics": "Pokročilá analytika",
+          "customDomain": "Vlastní doména",
+          "promoBoosts": "Zvýraznění propagace"
+        },
+        "scale": {
+          "vouchers": "Neomezeně poukázek",
+          "campaigns": "Neomezeně kampaní",
+          "teamMembers": "Neomezeně členů týmu",
+          "everythingInPro": "Vše z tarifu Pro",
+          "whiteLabel": "Připraveno pro white-label",
+          "prioritySupport": "Prioritní podpora"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Vlastník",
+      "admin": "Administrátor",
+      "finance": "Finance",
+      "marketing": "Marketing",
+      "support": "Podpora",
+      "partner_cashier": "Pokladní",
+      "auditor": "Auditor"
+    },
+    "orgs": {
+      "title": "B2B organizace",
+      "subtitle": "Firemní pracovní prostory s kampaněmi, poukázkami a objednávkami.",
+      "loading": "Načítání organizací...",
+      "loadFailed": "Organizace se nepodařilo načíst",
+      "empty": "Nebyly nalezeny žádné organizace. Požádejte administrátora o pozvánku.",
+      "open": "Otevřít"
+    },
+    "workspace": {
+      "fallbackName": "Organizace",
+      "subtitle": "Přehled B2B pracovního prostoru",
+      "reports": "Přehledy",
+      "audit": "Audit",
+      "partnerKeys": "Partnerské klíče",
+      "backToOrgs": "Zpět na organizace",
+      "loading": "Načítání pracovního prostoru...",
+      "errors": {
+        "loadOrg": "Organizaci se nepodařilo načíst",
+        "loadCampaigns": "Kampaně se nepodařilo načíst",
+        "loadVouchers": "Poukázky se nepodařilo načíst",
+        "loadOrders": "Objednávky se nepodařilo načíst",
+        "load": "Načtení se nezdařilo",
+        "createCampaign": "Kampaň se nepodařilo vytvořit",
+        "issueVouchers": "Poukázky se nepodařilo vydat",
+        "updateCampaign": "Kampaň se nepodařilo aktualizovat",
+        "activateCampaign": "Kampaň se nepodařilo aktivovat",
+        "pauseCampaign": "Kampaň se nepodařilo pozastavit",
+        "archiveCampaign": "Kampaň se nepodařilo archivovat"
+      },
+      "stats": {
+        "campaigns": "Kampaně",
+        "vouchers": "Poukázky",
+        "orders": "Objednávky"
+      },
+      "create": {
+        "title": "Vytvořit kampaň",
+        "name": "Název kampaně",
+        "value": "Hodnota (v haléřích/centech)",
+        "currency": "Měna",
+        "submit": "Vytvořit"
+      },
+      "campaigns": {
+        "title": "Kampaně",
+        "empty": "Zatím žádné kampaně.",
+        "name": "Název",
+        "value": "Hodnota",
+        "activate": "Aktivovat",
+        "pause": "Pozastavit",
+        "resume": "Obnovit",
+        "archive": "Archivovat",
+        "issue": "Vydat {count}"
+      },
+      "recentVouchers": "Nedávné poukázky",
+      "noVouchers": "Nebyly vydány žádné poukázky.",
+      "recentOrders": "Nedávné objednávky",
+      "noOrders": "Zatím žádné objednávky."
+    },
+    "audit": {
+      "title": "Auditní protokol",
+      "subtitle": "Sledujte životní cyklus poukázek a změny.",
+      "entityType": "Typ entity (voucher, campaign, order)",
+      "entityId": "ID entity",
+      "loading": "Načítání auditu...",
+      "loadFailed": "Audit se nepodařilo načíst",
+      "empty": "Žádné události."
+    },
+    "billing": {
+      "metaTitle": "Fakturace organizace",
+      "title": "Fakturace a finance",
+      "totalPaidOrders": "Celkem zaplacených objednávek",
+      "totalRevenue": "Celkové tržby",
+      "vatNumber": "DIČ",
+      "notSet": "Nenastaveno",
+      "recentOrders": "Nedávné objednávky",
+      "noOrders": "Zatím žádné objednávky.",
+      "table": {
+        "date": "Datum",
+        "qty": "Ks",
+        "total": "Celkem",
+        "status": "Stav",
+        "invoice": "Faktura"
+      }
+    },
+    "keys": {
+      "title": "Partnerské API klíče",
+      "subtitle": "Slouží k ověřování a uplatňování poukázek u partnerů.",
+      "label": "Označení klíče (nepovinné)",
+      "create": "Vytvořit klíč",
+      "newKey": "Nový klíč (zkopírujte jej hned)",
+      "loading": "Načítání klíčů...",
+      "empty": "Zatím žádné klíče.",
+      "untitled": "Klíč bez názvu",
+      "created": "Vytvořeno {created}",
+      "createdAndLastUsed": "Vytvořeno {created} • Naposledy použito {lastUsed}",
+      "revoke": "Zneplatnit",
+      "errors": {
+        "load": "Klíče se nepodařilo načíst",
+        "create": "Klíč se nepodařilo vytvořit",
+        "revoke": "Klíč se nepodařilo zneplatnit"
+      }
+    },
+    "members": {
+      "metaTitle": "Členové organizace",
+      "title": "Členové",
+      "count": "{count, plural, one {# člen} few {# členové} many {# člena} other {# členů}}",
+      "pendingInvitations": "Čekající pozvánky",
+      "expires": "Vyprší {date}"
+    },
+    "invite": {
+      "title": "Pozvat člena",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "Administrátor",
+        "finance": "Finance",
+        "marketing": "Marketing",
+        "support": "Podpora",
+        "partner_cashier": "Partnerský pokladní",
+        "auditor": "Auditor"
+      },
+      "sending": "Odesílání…",
+      "submit": "Odeslat pozvánku",
+      "sent": "Pozvánka odeslána na {email}.",
+      "failed": "Pozvánku se nepodařilo odeslat. Zkontrolujte e-mail a zkuste to znovu.",
+      "error": "Něco se pokazilo. Zkuste to prosím znovu."
+    },
+    "reports": {
+      "title": "Přehledy",
+      "subtitle": "Přehledy uplatnění a poukázek",
+      "backToWorkspace": "Zpět do pracovního prostoru",
+      "loadFailed": "Načtení se nezdařilo",
+      "tabs": {
+        "redemptions": "Uplatnění",
+        "vouchers": "Poukázky"
+      },
+      "totalRedemptions": "Celkem uplatnění",
+      "totalAmountRedeemed": "Celková uplatněná částka",
+      "from": "Od",
+      "to": "Do",
+      "filter": "Filtrovat",
+      "pageInfo": "Strana {page} z {totalPages} (celkem {total})",
+      "redemptionTable": {
+        "date": "Datum",
+        "partner": "Partner",
+        "amount": "Částka",
+        "status": "Stav",
+        "location": "Místo"
+      },
+      "noRedemptions": "Nebyla nalezena žádná uplatnění.",
+      "voucherTable": {
+        "campaign": "Kampaň",
+        "status": "Stav",
+        "type": "Typ",
+        "value": "Hodnota",
+        "remaining": "Zbývá",
+        "redeemed": "Uplatněno",
+        "issuedTo": "Vydáno pro",
+        "expires": "Platnost do"
+      },
+      "noVouchers": "Nebyly nalezeny žádné poukázky."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "kupující",
+        "partner": "partner",
+        "platform_owner": "vlastník platformy"
+      },
+      "orgStatus": {
+        "active": "aktivní",
+        "suspended": "pozastaveno"
+      },
+      "campaignStatus": {
+        "draft": "koncept",
+        "active": "aktivní",
+        "paused": "pozastaveno",
+        "archived": "archivováno"
+      },
+      "voucherStatus": {
+        "created": "vytvořeno",
+        "issued": "vydáno",
+        "active": "aktivní",
+        "redeemed": "uplatněno",
+        "expired": "vypršelo",
+        "voided": "zrušeno"
+      },
+      "valueType": {
+        "fixed": "pevná částka",
+        "percent": "procento"
+      },
+      "orderStatus": {
+        "draft": "koncept",
+        "submitted": "odesláno",
+        "invoiced": "fakturováno",
+        "paid": "zaplaceno",
+        "cancelled": "zrušeno",
+        "refunded": "vráceno"
+      },
+      "redemptionStatus": {
+        "approved": "schváleno",
+        "reversed": "stornováno",
+        "failed": "neúspěšné"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Události"
+    },
+    "status": {
+      "draft": "Koncept",
+      "published": "Aktivní",
+      "sold_out": "Vyprodáno",
+      "cancelled": "Zrušeno",
+      "ended": "Ukončeno"
+    },
+    "statusName": {
+      "draft": "Koncept",
+      "published": "Zveřejněno",
+      "sold_out": "Vyprodáno",
+      "cancelled": "Zrušeno",
+      "ended": "Ukončeno"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Interní událost",
+      "concert": "Koncert",
+      "workshop": "Workshop",
+      "other": "Jiné"
+    },
+    "ticketStatus": {
+      "available": "Dostupná",
+      "sold": "Prodaná",
+      "used": "Použitá",
+      "cancelled": "Zrušená",
+      "refunded": "Vrácená"
+    },
+    "list": {
+      "subtitle": "Spravujte své události a vstupenky",
+      "createEvent": "Vytvořit událost",
+      "stats": {
+        "totalTitle": "Celkem událostí",
+        "totalDescription": "Všechny události",
+        "activeTitle": "Aktivní",
+        "activeDescription": "Zveřejněné nebo vyprodané",
+        "soldTitle": "Prodané vstupenky",
+        "soldDescription": "Napříč všemi událostmi",
+        "revenueTitle": "Tržby",
+        "revenueDescription": "Placený prodej vstupenek"
+      },
+      "empty": {
+        "title": "Zatím žádné události",
+        "description": "Vytvořte událost pro prodej vstupenek a správu účasti.",
+        "cta": "Vytvořit první událost"
+      },
+      "card": {
+        "date": "Datum:",
+        "location": "Místo:",
+        "price": "Cena:",
+        "tickets": "Vstupenky:",
+        "sold": "Prodáno {sold} / {capacity}",
+        "free": "Zdarma",
+        "view": "Zobrazit",
+        "edit": "Upravit"
+      },
+      "weeklyRevenue": {
+        "title": "Týdenní tržby ze vstupenek",
+        "description": "Placený prodej vstupenek za 7 dní.",
+        "series": "Tržby"
+      }
+    },
+    "detail": {
+      "noDescription": "Bez popisu",
+      "edit": "Upravit",
+      "status": "Stav",
+      "type": "Typ",
+      "eventDate": "Datum události",
+      "price": "Cena",
+      "free": "Zdarma",
+      "totalTickets": "Celkem vstupenek",
+      "sold": "Prodáno",
+      "available": "Dostupné",
+      "location": "Místo",
+      "terms": "Obchodní podmínky",
+      "ticketsTitle": "Vstupenky",
+      "ticketsDescription": "Vstupenky na tuto událost",
+      "noTickets": "Zatím nebyly vygenerovány žádné vstupenky.",
+      "view": "Zobrazit",
+      "redeem": "Uplatnit"
+    },
+    "form": {
+      "basicInfo": "Základní informace",
+      "name": "Název události *",
+      "description": "Popis",
+      "descriptionPlaceholder": "Popište svou událost...",
+      "type": "Typ události *",
+      "typeAria": "Typ události",
+      "dateTime": "Datum a čas",
+      "eventDate": "Datum události *",
+      "eventTime": "Čas události *",
+      "endDate": "Datum ukončení (nepovinné)",
+      "endTime": "Čas ukončení (nepovinné)",
+      "location": "Místo",
+      "locationName": "Název místa",
+      "locationPlaceholder": "Hlavní sál, venkovní pódium",
+      "locationPlaceholderExample": "např. hlavní sál, venkovní pódium",
+      "address": "Úplná adresa",
+      "addressPlaceholder": "Ulice, město, země",
+      "ticketDetails": "Podrobnosti vstupenek",
+      "maxCapacity": "Max. kapacita (vstupenky) *",
+      "maxCapacityLong": "Max. kapacita (počet vstupenek) *",
+      "pricePerTicketCurrency": "Cena za vstupenku ({currency})",
+      "pricePerTicket": "Cena za vstupenku",
+      "pricePlaceholderFree": "0.00 (zdarma)",
+      "priceHint": "Pro bezplatné vstupenky ponechte prázdné. Např. 12.50 nebo 12,50 pro {example}.",
+      "currency": "Měna *",
+      "terms": "Obchodní podmínky",
+      "termsPlaceholder": "Podmínky události, pravidla vrácení peněz atd.",
+      "ticketPrice": "Cena vstupenky",
+      "endBeforeStart": "Čas ukončení musí být po čase zahájení.",
+      "cancel": "Zrušit"
+    },
+    "create": {
+      "submit": "Vytvořit událost",
+      "submitting": "Vytváření..."
+    },
+    "edit": {
+      "loading": "Načítání...",
+      "notFound": "Událost nebyla nalezena.",
+      "back": "Zpět na událost",
+      "title": "Upravit událost",
+      "subtitle": "Aktualizujte podrobnosti své události.",
+      "submit": "Uložit změny",
+      "submitting": "Ukládání..."
+    },
+    "publish": {
+      "confirm": "Zveřejnit tuto událost? Bude veřejně viditelná a bude možné kupovat vstupenky.",
+      "confirmLabel": "Zveřejnit",
+      "failed": "Událost se nepodařilo zveřejnit",
+      "success": "Událost byla úspěšně zveřejněna!",
+      "published": "Zveřejněno",
+      "cannotPublish": "Nelze zveřejnit",
+      "button": "Zveřejnit událost",
+      "publishing": "Zveřejňování..."
+    },
+    "generate": {
+      "invalidCount": "Zadejte číslo od 1 do 1000",
+      "tooMany": "Nelze vygenerovat {count} vstupenek. Maximum k dispozici: {max}",
+      "failed": "Vstupenky se nepodařilo vygenerovat",
+      "success": "{count, plural, one {Úspěšně vygenerována # vstupenka!} few {Úspěšně vygenerovány # vstupenky!} many {Úspěšně vygenerováno # vstupenky!} other {Úspěšně vygenerováno # vstupenek!}}",
+      "open": "Generovat vstupenky",
+      "title": "Generovat vstupenky",
+      "description": "Vytvořte vstupenky na tuto událost",
+      "countLabel": "Počet vstupenek (max.: {max})",
+      "cancel": "Zrušit",
+      "submit": "Generovat",
+      "submitting": "Generování..."
+    },
+    "redeem": {
+      "title": "Uplatnit vstupenku",
+      "subtitle": "Naskenujte QR kód nebo zadejte číslo vstupenky",
+      "back": "Zpět na událost",
+      "scanTitle": "Naskenovat vstupenku",
+      "scanDescription": "Zadejte QR token nebo číslo vstupenky",
+      "tokenLabel": "QR token / číslo vstupenky",
+      "tokenPlaceholder": "Zadejte QR token nebo číslo vstupenky",
+      "scan": "Skenovat",
+      "notFound": "Vstupenka nebyla nalezena",
+      "found": "Vstupenka nalezena",
+      "number": "Číslo:",
+      "event": "Událost:",
+      "status": "Stav:",
+      "attendee": "Účastník:",
+      "redeemDescription": "Dokončete proces uplatnění",
+      "locationLabel": "Místo (nepovinné)",
+      "locationPlaceholder": "např. hlavní vchod, brána A",
+      "submit": "Uplatnit vstupenku",
+      "submitting": "Uplatňování...",
+      "failed": "Vstupenku se nepodařilo uplatnit",
+      "cannotRedeem": "Tuto vstupenku nelze uplatnit. Stav: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Dashboard obchodníka",
+      "vouchersTitle": "Správa poukázek"
+    },
+    "sidebar": {
+      "title": "Obchodník",
+      "subtitle": "Konzole GiftHub",
+      "openMenu": "Otevřít menu",
+      "nav": {
+        "overview": "Přehled",
+        "vouchers": "Poukázky",
+        "giftCards": "Dárkové karty",
+        "credits": "Kredity",
+        "brand": "Značka"
+      }
+    },
+    "overview": {
+      "title": "Dashboard obchodníka",
+      "notConnected": "Zatím nejste propojeni s žádným obchodníkem."
+    },
+    "noAccess": {
+      "title": "Žádný přístup k obchodníkovi",
+      "overviewHint": "Požádejte administrátora obchodníka o pozvánku, nebo si pro začátek vytvořte účet obchodníka.",
+      "creditsHint": "Pro zobrazení tržeb a výplat se připojte k účtu obchodníka.",
+      "vouchersHint": "Pro správu poukázek se připojte k účtu obchodníka.",
+      "exploreCampaigns": "Prozkoumat kampaně"
+    },
+    "brand": {
+      "title": "Nastavení značky",
+      "description": "Přizpůsobte vzhled své značky na poukázkách",
+      "logoHeading": "Logo",
+      "logoHint": "Nahrajte logo obchodníka (doporučeno: 200×200 px, PNG nebo SVG).",
+      "logoPreviewAlt": "Náhled loga",
+      "uploadLogo": "Nahrát logo",
+      "colorHeading": "Barva značky",
+      "colorHint": "Nastavte hlavní barvu značky pro poukázky a tlačítka.",
+      "colorLabel": "Barva",
+      "colorHexLabel": "Hex hodnota barvy značky",
+      "save": "Uložit změny",
+      "previewHeading": "Náhled",
+      "previewHint": "Podívejte se, jak vaše značka vypadá na poukázkách.",
+      "sampleMerchant": "Váš obchod",
+      "sampleTitle": "Sleva 20 % na další nákup",
+      "sampleDescription": "Platí na veškeré zboží. Nelze kombinovat s jinými nabídkami."
+    },
+    "credits": {
+      "availableBalance": "Dostupný zůstatek",
+      "availableBalanceHint": "Připraveno k výplatě",
+      "pendingRevenue": "Čekající tržby",
+      "pendingRevenueHint": "Zpracovává se",
+      "recentRevenue": "Nedávné tržby",
+      "ticketSale": "Prodej vstupenky",
+      "voucherSale": "Prodej poukázky",
+      "noRevenue": "Zatím nejsou zaznamenány žádné tržby",
+      "payoutRequests": "Žádosti o výplatu",
+      "noPayoutRequests": "Zatím žádné žádosti o výplatu",
+      "requestPayoutHeading": "Požádat o výplatu",
+      "minimumPayout": "Minimální částka výplaty: {amount}",
+      "submitting": "Odesílání...",
+      "requestPayout": "Požádat o výplatu",
+      "requestSubmitted": "Žádost o výplatu odeslána",
+      "requestFailed": "O výplatu se nepodařilo požádat",
+      "status": {
+        "paid": "vyplaceno",
+        "pending": "čeká",
+        "requested": "požádáno",
+        "completed": "dokončeno",
+        "failed": "neúspěšné"
+      }
+    },
+    "newVoucher": {
+      "title": "Vytvořit poukázku",
+      "description": "Navrhněte a nastavte novou kampaň s poukázkami",
+      "detailsHeading": "Podrobnosti poukázky",
+      "titleLabel": "Název",
+      "titlePlaceholder": "např. Sleva 20 % na další nákup",
+      "descriptionLabel": "Popis",
+      "descriptionPlaceholder": "Platí na veškeré zboží. Nelze kombinovat s jinými nabídkami.",
+      "expiryDateLabel": "Datum vypršení",
+      "weeklyLabel": "Týdenní drop",
+      "weeklyHint": "Časově omezená týdenní dostupnost",
+      "weeklyAria": "Týdenní drop – časově omezená týdenní dostupnost",
+      "referralLabel": "Povolit kredit za doporučení",
+      "referralHint": "Uživatelé získají kredit, když přátelé uplatní poukázku",
+      "referralAria": "Povolit kredit za doporučení – uživatelé získají kredit, když přátelé uplatní poukázku",
+      "brandColorLabel": "Barva značky",
+      "brandColorHexLabel": "Hex hodnota barvy značky",
+      "saveDraft": "Uložit koncept",
+      "createAndPublish": "Vytvořit a zveřejnit",
+      "previewHeading": "Náhled",
+      "sampleMerchant": "Váš obchod",
+      "sampleTitle": "Název poukázky",
+      "sampleDescription": "Zde se zobrazí popis poukázky"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Veřejná stránka bude dostupná po zveřejnění poukázky.",
+    "list": {
+      "metaTitle": "Poukázky",
+      "subtitle": "Spravujte a vytvářejte poukázky",
+      "bulkImport": "Hromadný import CSV",
+      "stats": {
+        "totalTitle": "Celkem poukázek",
+        "totalDescription": "Všechny vytvořené poukázky",
+        "activeTitle": "Aktivní",
+        "activeDescription": "Zveřejněné poukázky",
+        "draftsTitle": "Koncepty",
+        "draftsDescription": "Dosud nezveřejněné",
+        "pausedEndedTitle": "Pozastavené / ukončené",
+        "pausedEndedDescription": "Pozastaveno: {paused}, ukončeno: {ended}",
+        "redemptionsTitle": "Uplatnění",
+        "redemptionsDescription": "Celkem uplatnění"
+      },
+      "empty": {
+        "title": "Zatím žádné poukázky",
+        "description": "Začněte vytvořením své první poukázky.",
+        "action": "Vytvořit první poukázku"
+      },
+      "searchPlaceholder": "Hledat podle nadpisu, prefixu kódu nebo ID",
+      "searchLabel": "Hledat poukázky",
+      "statusLabel": "Stav",
+      "statusAll": "Všechny stavy",
+      "status": {
+        "published": "Aktivní",
+        "paused": "Pozastaveno",
+        "draft": "Koncept",
+        "ended": "Ukončeno",
+        "expired": "Vypršelo"
+      },
+      "typeLabel": "Typ",
+      "typeAll": "Všechny typy",
+      "sortLabel": "Řadit podle",
+      "sort": {
+        "date": "Data (nejnovější)",
+        "name": "Názvu (A–Z)",
+        "redemptions": "Uplatnění"
+      },
+      "showing": "Zobrazeno {shown} z {total} poukázek",
+      "clearFilters": "Zrušit filtry",
+      "noMatches": "Vašim filtrům neodpovídají žádné poukázky.",
+      "usage": "Využití",
+      "usageUnlimited": "Využití: {used} – neomezeně",
+      "view": "Zobrazit"
+    },
+    "rowActions": {
+      "pauseTitle": "Pozastavit poukázku",
+      "pauseDescription": "Opravdu chcete tuto poukázku pozastavit? Během pozastavení ji uživatelé nebudou moci koupit ani uplatnit.",
+      "pauseConfirm": "Pozastavit",
+      "paused": "Poukázka pozastavena",
+      "pauseFailed": "Poukázku se nepodařilo pozastavit",
+      "loadFailed": "Poukázku se nepodařilo načíst",
+      "duplicateLabel": "Duplikovat poukázku",
+      "duplicated": "Poukázka duplikována",
+      "duplicateFailed": "Duplikace se nezdařila"
+    },
+    "publish": {
+      "confirmMessage": "Zveřejnit tuto poukázku? Bude veřejně viditelná.",
+      "confirmLabel": "Zveřejnit",
+      "failed": "Poukázku se nepodařilo zveřejnit",
+      "success": "Poukázka byla úspěšně zveřejněna!",
+      "publishing": "Zveřejňování...",
+      "button": "Zveřejnit poukázku"
+    },
+    "new": {
+      "iconLetter": "P",
+      "created": "Poukázka vytvořena jako koncept. Zveřejněte ji, až ji budou mít zákazníci vidět."
+    },
+    "edit": {
+      "iconLetter": "U",
+      "subtitle": "Aktualizujte podrobnosti a dostupnost poukázky.",
+      "updated": "Poukázka byla úspěšně aktualizována",
+      "updateFailed": "Poukázku se nepodařilo aktualizovat",
+      "updateFailedRetry": "Poukázku se nepodařilo aktualizovat. Zkuste to prosím znovu.",
+      "updating": "Aktualizace...",
+      "update": "Aktualizovat poukázku",
+      "viewPublicPage": "Zobrazit veřejnou stránku"
+    },
+    "form": {
+      "stepOf": "Krok {current} z {total}",
+      "typeLabel": "Typ",
+      "typeAria": "Typ poukázky",
+      "customersGetOff": "Zákazníci získají slevu {value}.",
+      "customersGetCredit": "Zákazníci získají kredit {value}.",
+      "percentHint": "Zadejte procento, např. 15 nebo 12,5.",
+      "amountHint": "Zadejte částku v {currency}, např. 4.50 nebo 4,50 pro {example}.",
+      "validityHint": "Poukázku lze použít od začátku prvního dne do konce posledního dne.",
+      "enableWeeklyDropAria": "Povolit týdenní drop",
+      "weeklyDropDayAria": "Den v týdnu pro týdenní drop",
+      "weeklyDropTimeAria": "Čas zahájení týdenního dropu",
+      "headlinePlaceholder": "Sleva 15 % na objednávku",
+      "finePrintPlaceholder": "Platí pouze pro nové zákazníky",
+      "previewFallbackHeadline": "Vaše poukázka",
+      "previewValidUntil": "Platí do {date}",
+      "errors": {
+        "discountAboveZero": "Zadejte slevu vyšší než 0 %.",
+        "valueAboveZero": "Zadejte hodnotu vyšší než 0.",
+        "chooseDates": "Zvolte, kdy poukázka začíná a končí.",
+        "endBeforeStart": "Datum ukončení musí být stejné jako datum zahájení nebo pozdější.",
+        "invalidValue": "Zadejte platnou hodnotu.",
+        "valueMustBePositive": "Hodnota musí být větší než 0",
+        "totalLimitPositive": "Celkový limit použití musí být kladné číslo",
+        "perUserLimitPositive": "Limit na uživatele musí být kladné číslo"
+      },
+      "discountErrors": {
+        "negative": "Sleva nemůže být záporná.",
+        "invalid": "Sleva není platné číslo.",
+        "decimals": "Sleva může mít nejvýše {decimals} desetinných míst.",
+        "tooLarge": "Sleva je příliš vysoká.",
+        "tooHigh": "Sleva nemůže přesáhnout 100 %."
+      },
+      "valueErrors": {
+        "negative": "Hodnota nemůže být záporná.",
+        "invalid": "Hodnota není platné číslo.",
+        "wholeNumber": "Hodnota musí být celé číslo.",
+        "decimals": "Hodnota může mít nejvýše {decimals} desetinných míst.",
+        "tooLarge": "Hodnota je příliš vysoká."
+      }
+    },
+    "bulkImport": {
+      "back": "Zpět na poukázky",
+      "title": "Import poukázek z tabulky",
+      "intro": "Nahrajte soubor CSV (až 500 řádků). Každá poukázka se vytvoří jako koncept, takže nic nebude zveřejněno, dokud to neuděláte sami.",
+      "columns": "Sloupce",
+      "downloadSample": "Stáhnout ukázkový CSV",
+      "columnRequired": "<code>{name}</code> (povinné): {help}",
+      "columnOptional": "<code>{name}</code> (nepovinné): {help}",
+      "columnHelp": {
+        "name": "Název poukázky, který uvidí zákazníci, např. „Jarní kávová nabídka“.",
+        "type": "\"amount\" (sleva v penězích), \"percent\" (procentní sleva) nebo \"credit\" (kredit v obchodě).",
+        "value": "Eura pro amount/credit (10 nebo 10.50), procenta pro percent (15 nebo 12.5).",
+        "currency": "Třípísmenný kód, např. EUR. Výchozí je měna vašeho obchodu.",
+        "valid_from": "První den platnosti poukázky: 2026-10-01 nebo 01.10.2026.",
+        "valid_to": "Poslední den platnosti poukázky (platí do konce tohoto dne).",
+        "code_prefix": "Písmena na začátku každého kódu, např. SPRING.",
+        "usage_limit": "Kolikrát ji lze celkem použít. Pro neomezené použití ponechte prázdné."
+      },
+      "separatorHint": "Sloupce oddělujte čárkami nebo středníky. Pokud používáte čárky, dejte desetinné částky do uvozovek (\"4,50\") nebo použijte tečku (4.50).",
+      "chooseFile": "Vyberte soubor CSV",
+      "chooseDifferent": "Klikněte pro výběr jiného souboru",
+      "browse": "Klikněte pro procházení",
+      "fixRows": "Opravte tyto řádky a nahrajte soubor znovu:",
+      "andMore": "…a dalších {count}.",
+      "readyToImport": "{count, plural, one {Připraveno k importu: # poukázka} few {Připraveno k importu: # poukázky} many {Připraveno k importu: # poukázky} other {Připraveno k importu: # poukázek}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, max. {limit} použití} other {}}",
+      "imported": "{count, plural, one {Importována # poukázka jako koncept.} few {Importovány # poukázky jako koncepty.} many {Importováno # poukázky jako koncepty.} other {Importováno # poukázek jako koncepty.}}",
+      "viewVouchers": "Zobrazit poukázky",
+      "importing": "Importování...",
+      "importCount": "{count, plural, one {Importovat # poukázku} few {Importovat # poukázky} many {Importovat # poukázky} other {Importovat # poukázek}}",
+      "importVouchers": "Importovat poukázky",
+      "importFailedStatus": "Import se nezdařil (chyba {status}).",
+      "importFailed": "Import se nezdařil"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Úvodní nadpis s hlavní akcí."
+        },
+        "value_props": {
+          "label": "Hlavní přínosy",
+          "description": "Stručné výhody a záruky."
+        },
+        "featured_products": {
+          "label": "Doporučené produkty",
+          "description": "Nejlepší produkty s cenami a štítky."
+        },
+        "featured_vouchers": {
+          "label": "Doporučené poukázky",
+          "description": "Karty aktivních poukázek pro propagaci."
+        },
+        "rental_packages": {
+          "label": "Balíčky pronájmu",
+          "description": "Balíčky pronájmu a ceny podle dnů."
+        },
+        "categories": {
+          "label": "Mřížka kategorií",
+          "description": "Procházení podle typu, použití nebo cílové skupiny."
+        },
+        "availability": {
+          "label": "Kalendář dostupnosti",
+          "description": "Aktuální dostupnost a termíny rezervací."
+        },
+        "testimonials": {
+          "label": "Reference",
+          "description": "Citace zákazníků a hvězdičková hodnocení."
+        },
+        "gallery": {
+          "label": "Galerie",
+          "description": "Lifestylové fotografie nebo příklady použití."
+        },
+        "pricing": {
+          "label": "Ceník",
+          "description": "Přehledné cenové úrovně."
+        },
+        "rental_terms": {
+          "label": "Podmínky pronájmu",
+          "description": "Záloha, pojištění a pravidla vrácení."
+        },
+        "faq": {
+          "label": "Časté dotazy",
+          "description": "Odpovědi na běžné námitky."
+        },
+        "newsletter": {
+          "label": "Přihlášení k newsletteru",
+          "description": "Sběr e-mailů pro kampaně."
+        },
+        "contact": {
+          "label": "Kontaktní blok",
+          "description": "Podpora přes chat, e-mail nebo telefon."
+        },
+        "map": {
+          "label": "Mapa s polohou",
+          "description": "Výdejní místo nebo poloha prodejny."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Propagační lišta",
+          "description": "Připnutá horní lišta pro nabídky a upozornění."
+        },
+        "sticky_cta": {
+          "label": "Připnuté CTA",
+          "description": "Trvale viditelné akční tlačítko při posouvání."
+        },
+        "chat_widget": {
+          "label": "Chatovací widget",
+          "description": "Živý chat nebo integrace WhatsApp."
+        },
+        "trust_badges": {
+          "label": "Odznaky důvěry",
+          "description": "Odznaky plateb, bezpečnosti nebo kvality."
+        },
+        "social_proof": {
+          "label": "Vyskakovací sociální důkaz",
+          "description": "Nedávná aktivita a nákupy."
+        },
+        "countdown": {
+          "label": "Odpočet",
+          "description": "Naléhavost u omezených nabídek."
+        },
+        "reviews_widget": {
+          "label": "Widget recenzí",
+          "description": "Vložení Google nebo Trustpilot."
+        },
+        "language_switch": {
+          "label": "Přepínač jazyka",
+          "description": "Rychlé přepnutí jazyka na stránce."
+        },
+        "analytics": {
+          "label": "Analytické skripty",
+          "description": "Místa pro sledovací pixely."
+        },
+        "cookie_banner": {
+          "label": "Cookie lišta",
+          "description": "Lišta pro souhlas podle GDPR."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Náhled",
+      "edit": "Upravit",
+      "previewEmpty": "Zatím nebyly přidány žádné sekce. Pro přidání sekcí přepněte do režimu úprav.",
+      "title": "Vizuální editor",
+      "preview": "Náhled",
+      "empty": "Zatím žádné sekce. Začněte kliknutím na „Přidat sekci“ níže.",
+      "collapseSettings": "Sbalit nastavení",
+      "expandSettings": "Rozbalit nastavení",
+      "removeSection": "Odebrat sekci {label}",
+      "sectionTitle": "Nadpis sekce",
+      "description": "Popis",
+      "descriptionPlaceholder": "Nepovinný popis",
+      "backgroundColor": "Barva pozadí",
+      "layoutVariant": "Varianta rozložení",
+      "layout": {
+        "default": "Výchozí",
+        "centered": "Na střed",
+        "wide": "Široké",
+        "compact": "Kompaktní"
+      },
+      "addSection": "Přidat sekci",
+      "availableSections": "Dostupné sekce",
+      "closeCatalog": "Zavřít",
+      "allAdded": "Všechny dostupné sekce již byly přidány.",
+      "count": "{configured, plural, one {# nastavená sekce} few {# nastavené sekce} many {# nastavené sekce} other {# nastavených sekcí}} / {available} k přidání"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Kontrolní seznam spuštění obchodu",
+        "rental_launch": "Kontrolní seznam spuštění stránky pronájmu",
+        "campaign_ops": "Týdenní provoz kampaní",
+        "support_ops": "Kontrolní seznam připravenosti podpory"
+      },
+      "toast": {
+        "saved": "Tvůrce stránek aktualizován.",
+        "saveFailed": "Stránku se nepodařilo uložit",
+        "vibeFailed": "Vibe agent selhal",
+        "layoutGenerated": "Vibe rozložení vygenerováno.",
+        "generateFailed": "Rozložení se nepodařilo vygenerovat",
+        "agentFailed": "Agent selhal",
+        "planGenerated": "Plán procesu vygenerován.",
+        "runAgentFailed": "Agenta se nepodařilo spustit"
+      },
+      "noData": "Data tvůrce stránek nejsou k dispozici.",
+      "title": "Tvůrce stránek",
+      "intro": "Rychle vytvářejte stránky obchodu a pronájmu z modulárních sekcí a doplňků.",
+      "introAi": "Rychle vytvářejte stránky obchodu a pronájmu z modulárních sekcí a doplňků, s volitelnými návrhy od AI.",
+      "tabs": {
+        "store": "Obchod",
+        "rental": "Pronájem"
+      },
+      "details": {
+        "title": "Podrobnosti stránky",
+        "subtitle": "Nadpis, podnadpis a rozložení.",
+        "save": "Uložit",
+        "pageTitle": "Nadpis stránky",
+        "subtitleLabel": "Podnadpis"
+      },
+      "sections": {
+        "title": "Sekce",
+        "subtitle": "Přetažením změníte pořadí, rozbalením nastavíte, nebo si zobrazte náhled rozložení.",
+        "suggestLayout": "Navrhnout rozložení",
+        "suggestionsLeft": "Zbývající návrhy rozložení od AI: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Doplňky",
+        "subtitle": "Další widgety a marketingové prvky.",
+        "enable": "Zapnout doplněk {label}",
+        "disable": "Vypnout doplněk {label}"
+      },
+      "summary": {
+        "title": "Živý souhrn",
+        "line": "{title} · {sections, plural, one {# sekce} few {# sekce} many {# sekce} other {# sekcí}} · {addons, plural, one {# doplněk} few {# doplňky} many {# doplňku} other {# doplňků}}",
+        "sectionsLabel": "Sekce:",
+        "addonsLabel": "Doplňky:",
+        "none": "Žádné"
+      },
+      "assistant": {
+        "title": "Asistent kontrolního seznamu spuštění",
+        "subtitle": "Generujte akční plány a provozní kontrolní seznamy.",
+        "goalLabel": "Cíl procesu",
+        "createChecklist": "Vytvořit kontrolní seznam",
+        "checklistsLeft": "Zbývající kontrolní seznamy: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Vybrané nabídky, pronájmy a poukázky od {name}.",
+        "shopProducts": "Nakupovat produkty",
+        "browseRentals": "Procházet pronájmy"
+      },
+      "valueProps": {
+        "rewardsTitle": "Odměny",
+        "rewardsText": "Vestavěné pobídky s poukázkami.",
+        "stockTitle": "Spolehlivé zásoby",
+        "stockText": "Aktuální ceny a dostupnost.",
+        "datesTitle": "Flexibilní termíny",
+        "datesText": "Snadné plánování pronájmů."
+      },
+      "viewAll": "Zobrazit vše",
+      "seeAll": "Zobrazit vše",
+      "products": {
+        "title": "Doporučené produkty",
+        "empty": "Zatím žádné produkty.",
+        "fallbackDescription": "Zajímavý produkt"
+      },
+      "rentals": {
+        "title": "Balíčky pronájmu",
+        "empty": "Zatím žádné pronájmy.",
+        "fallbackDescription": "Zajímavý pronájem",
+        "perDay": "{price} / den"
+      },
+      "categories": {
+        "title": "Procházet kategorie",
+        "popular": "Oblíbené",
+        "business": "Podnikání",
+        "events": "Události",
+        "seasonal": "Sezónní",
+        "corporate": "Firemní",
+        "custom": "Na míru"
+      },
+      "availability": {
+        "title": "Aktuální dostupnost",
+        "text": "Ověřte dostupnost a během pár minut si vyžádejte nabídku.",
+        "seeCalendar": "Zobrazit kalendář"
+      },
+      "testimonials": {
+        "title": "Co říkají zákazníci",
+        "smooth": "Hladký průběh",
+        "lovedVoucher": "Poukázka se mi moc líbila",
+        "support": "Skvělá podpora"
+      },
+      "gallery": {
+        "title": "Galerie"
+      },
+      "pricing": {
+        "title": "Ceník",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Enterprise",
+        "tierText": "Individuální ceny a podpora"
+      },
+      "rentalTerms": {
+        "title": "Podmínky pronájmu",
+        "text": "Jasné zálohy, pravidla vyzvednutí a vrácení sdělená předem."
+      },
+      "faq": {
+        "title": "Časté dotazy",
+        "redeem": "Jak poukázku uplatním?",
+        "reschedule": "Mohu změnit termín?",
+        "support": "Nabízíte podporu?"
+      },
+      "newsletter": {
+        "title": "Buďte v obraze",
+        "text": "Dostávejte nové nabídky a novinky v pronájmu do e-mailu.",
+        "emailLabel": "E-mailová adresa",
+        "subscribe": "Přihlásit se"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "emailUs": "Napište nám na {email}"
+      },
+      "map": {
+        "text": "Místo vyzvednutí sdělíme po rezervaci."
+      },
+      "vouchers": {
+        "title": "Aktivní poukázky",
+        "empty": "Žádné dostupné poukázky.",
+        "voucher": "Poukázka",
+        "view": "Zobrazit poukázku"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Aktivní",
+      "redeemed": "Uplatněná",
+      "expired": "Prošlá",
+      "cancelled": "Zrušená"
+    },
+    "list": {
+      "metaTitle": "Dárkové karty",
+      "title": "Dárkové karty",
+      "subtitle": "Vytvářejte a spravujte dárkové karty",
+      "newGiftCard": "Nová dárková karta",
+      "stats": {
+        "total": "Celkem dárkových karet",
+        "totalDescription": "Všechny vydané dárkové karty",
+        "active": "Aktivní",
+        "activeDescription": "Aktuálně uplatnitelné",
+        "redeemed": "Uplatněné",
+        "redeemedDescription": "Dokončená uplatnění",
+        "totalValue": "Celková hodnota",
+        "totalValueDescription": "Hodnota vydaných dárkových karet"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Zatím žádné dárkové karty",
+      "emptyDescription": "Vytvořte dárkovou kartu s vlastním brandingem a uplatněním přes QR.",
+      "createFirst": "Vytvořit první dárkovou kartu",
+      "searchPlaceholder": "Hledat podle nadpisu, kódu nebo zprávy",
+      "searchLabel": "Hledat dárkové karty",
+      "status": "Stav",
+      "allStatus": "Všechny stavy",
+      "sortBy": "Řadit podle",
+      "sortDate": "Data (nejnovější)",
+      "sortAmount": "Částky (od nejvyšší)",
+      "showing": "Zobrazeno {shown} z {total, plural, one {# dárkové karty} few {# dárkových karet} many {# dárkové karty} other {# dárkových karet}}",
+      "clearFilters": "Zrušit filtry",
+      "noMatches": "Vašim filtrům neodpovídají žádné dárkové karty.",
+      "defaultHeadline": "Dárková karta",
+      "noExpiry": "Bez omezení platnosti",
+      "validUntil": "Platí do: {date}",
+      "redeemedOn": "Uplatněno: {date}",
+      "details": "Podrobnosti",
+      "view": "Zobrazit"
+    },
+    "detail": {
+      "title": "Dárková karta",
+      "code": "Kód {code}",
+      "publicView": "Veřejné zobrazení",
+      "newGiftCard": "Nová dárková karta",
+      "detailsTitle": "Podrobnosti dárkové karty",
+      "value": "Hodnota",
+      "validFrom": "Platí od",
+      "validTo": "Platí do",
+      "noExpiry": "Bez omezení platnosti",
+      "redeemedAt": "Uplatněno",
+      "notRedeemed": "Neuplatněno",
+      "qrTitle": "QR pro uplatnění personálem",
+      "qrHelp": "Personál může naskenovat tento QR kód, aby dárkovou kartu uplatnil a zneplatnil."
+    },
+    "new": {
+      "title": "Nová dárková karta",
+      "subtitle": "Přizpůsobte a vydejte dárkovou kartu",
+      "created": "Dárková karta vytvořena.",
+      "cancel": "Zrušit",
+      "creating": "Vytváření...",
+      "submit": "Vytvořit dárkovou kartu",
+      "errors": {
+        "amountRequired": "Zadejte částku vyšší než 0.",
+        "endBeforeStart": "Datum ukončení musí být stejné jako datum zahájení nebo pozdější.",
+        "createFailed": "Dárkovou kartu se nepodařilo vytvořit"
+      },
+      "amountErrors": {
+        "negative": "Částka nemůže být záporná.",
+        "invalid": "Částka není platné číslo.",
+        "wholeNumber": "Částka musí být celé číslo.",
+        "decimals": "Částka může mít nejvýše {decimals} desetinných míst.",
+        "tooLarge": "Částka je příliš vysoká."
+      },
+      "priceErrors": {
+        "negative": "Prodejní cena nemůže být záporná.",
+        "invalid": "Prodejní cena není platné číslo.",
+        "wholeNumber": "Prodejní cena musí být celé číslo.",
+        "decimals": "Prodejní cena může mít nejvýše {decimals} desetinných míst.",
+        "tooLarge": "Prodejní cena je příliš vysoká."
+      },
+      "valueSection": {
+        "title": "Hodnota a platnost",
+        "description": "Nastavte částku, měnu a platnost",
+        "amount": "Částka",
+        "faceValue": "Nominální hodnota: {value}.",
+        "amountHelp": "Zadejte částku v {currency}, např. 50 nebo 49,90 pro {example}.",
+        "currency": "Měna",
+        "validFrom": "Platí od",
+        "validTo": "Platí do",
+        "noExpiry": "Bez data vypršení"
+      },
+      "purchaseSection": {
+        "title": "Nákup zákazníkem",
+        "description": "Umožněte zákazníkům koupit tuto dárkovou kartu online",
+        "purchasable": "K dispozici k nákupu zákazníky",
+        "salePrice": "Prodejní cena (nepovinné, výchozí je nominální hodnota)",
+        "salePricePlaceholder": "Stejná jako částka",
+        "customersPay": "Zákazníci zaplatí {value}.",
+        "salePriceHelp": "Pro prodej za nominální hodnotu ponechte prázdné. Pro akce nastavte jinou cenu."
+      },
+      "brandingSection": {
+        "title": "Branding a zpráva",
+        "description": "Nadpis, zpráva, obrázky a barvy",
+        "headline": "Nadpis",
+        "headlinePlaceholder": "Dárek pro milovníky kávy",
+        "message": "Zpráva",
+        "messagePlaceholder": "Přidejte osobní zprávu pro příjemce",
+        "logoUrl": "URL loga",
+        "imageUrl": "URL obrázku",
+        "accentColor": "Akcentová barva",
+        "backgroundColor": "Barva pozadí",
+        "textColor": "Barva textu",
+        "codePrefix": "Prefix kódu (nepovinné)"
+      },
+      "preview": {
+        "title": "Náhled",
+        "defaultHeadline": "Dárková karta",
+        "imageAlt": "Dárková karta",
+        "logoAlt": "Logo značky",
+        "notePlaceholder": "Přidejte osobní vzkaz"
+      }
+    },
+    "gifts": {
+      "title": "Dárkové produkty",
+      "subtitle": "Spravujte své produkty v Gift Hubu",
+      "dashboard": "Dashboard",
+      "confirmDelete": "Opravdu? Tím produkt deaktivujete.",
+      "stats": {
+        "total": "Celkem",
+        "active": "Aktivní",
+        "views": "Zobrazení",
+        "purchases": "Nákupy"
+      },
+      "emptyTitle": "Zatím žádné dárkové produkty",
+      "emptyDescription": "Přidejte svůj první produkt, aby se zobrazil ve feedu Gift Hubu.",
+      "emptyApiHint": "K vytváření produktů použijte API na <code>{endpoint}</code>.",
+      "inactive": "Neaktivní",
+      "featured": "Doporučené",
+      "views": "{count, plural, one {# zobrazení} few {# zobrazení} many {# zobrazení} other {# zobrazení}}",
+      "purchases": "{count, plural, one {# nákup} few {# nákupy} many {# nákupu} other {# nákupů}}",
+      "conversionRate": "{rate} % konverze",
+      "activate": "Aktivovat",
+      "deactivate": "Deaktivovat",
+      "delete": "Smazat"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Žádná data k dispozici",
+      "value": "Hodnota: <strong>{value}</strong>",
+      "dismiss": "Zavřít",
+      "remove": "Odebrat",
+      "dialog": "Dialog",
+      "close": "Zavřít",
+      "loading": "Načítání"
+    },
+    "analyticsFunnel": {
+      "empty": "Za toto období zatím žádná aktivita",
+      "top": "Vrchol",
+      "drop": "Pokles o {rate} %"
+    },
+    "periodComparison": {
+      "title": "Porovnání období",
+      "loading": "Načítání...",
+      "previous": "Předchozí: {value}",
+      "noData": "Žádná data k dispozici",
+      "period": {
+        "day": "Den",
+        "week": "Týden",
+        "month": "Měsíc",
+        "quarter": "Čtvrtletí",
+        "year": "Rok"
+      },
+      "metric": {
+        "revenue": "Tržby",
+        "redemptions": "Uplatnění",
+        "purchases": "Nákupy",
+        "referrals": "Doporučení",
+        "customers": "Zákazníci"
+      }
+    },
+    "trendChart": {
+      "noData": "Žádná data"
+    },
+    "conversionChart": {
+      "noData": "Žádná data k dispozici",
+      "previous": "předch.: {value}"
+    },
+    "funnelChart": {
+      "empty": "Za toto období zatím žádná aktivita"
+    },
+    "geoMap": {
+      "noData": "Žádná data k dispozici",
+      "value": "Hodnota: <strong>{value}</strong>",
+      "country": {
+        "GB": "Spojené království",
+        "IE": "Irsko",
+        "FR": "Francie",
+        "DE": "Německo",
+        "ES": "Španělsko",
+        "PT": "Portugalsko",
+        "IT": "Itálie",
+        "NL": "Nizozemsko",
+        "BE": "Belgie",
+        "CH": "Švýcarsko",
+        "AT": "Rakousko",
+        "PL": "Polsko",
+        "CZ": "Česko",
+        "SE": "Švédsko",
+        "NO": "Norsko",
+        "FI": "Finsko",
+        "DK": "Dánsko",
+        "EE": "Estonsko",
+        "LV": "Lotyšsko",
+        "LT": "Litva",
+        "HU": "Maďarsko",
+        "RO": "Rumunsko",
+        "BG": "Bulharsko",
+        "GR": "Řecko",
+        "HR": "Chorvatsko",
+        "SK": "Slovensko",
+        "SI": "Slovinsko",
+        "RS": "Srbsko",
+        "UA": "Ukrajina",
+        "BY": "Bělorusko"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Čekání na data..."
+    },
+    "pieDonutChart": {
+      "noData": "Žádná data k dispozici",
+      "total": "Celkem"
+    },
+    "activityFeed": {
+      "justNow": "právě teď",
+      "minutesAgo": "před {count} min",
+      "hoursAgo": "před {count} h",
+      "daysAgo": "před {count} d",
+      "empty": "Zatím žádná aktivita",
+      "loadMore": "Načíst další",
+      "eventType": {
+        "purchase": "Nákup",
+        "redemption": "Uplatnění",
+        "signup": "Registrace",
+        "alert": "Upozornění"
+      }
+    },
+    "dateRange": {
+      "days7": "7 dní",
+      "days30": "30 dní",
+      "days90": "90 dní",
+      "year1": "1 rok",
+      "custom": "Vlastní"
+    },
+    "chartCard": {
+      "fullscreen": "Celá obrazovka",
+      "exitFullscreen": "Ukončit celou obrazovku",
+      "retry": "Zkusit znovu"
+    },
+    "dashboardHeader": {
+      "export": "Exportovat",
+      "exportAs": "Exportovat jako {format}"
+    },
+    "dataTable": {
+      "empty": "Žádná data k dispozici",
+      "showing": "Zobrazeno {from}–{to} z {total}",
+      "previousPage": "Předchozí stránka",
+      "nextPage": "Další stránka"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Živě",
+        "reconnecting": "Znovu se připojuje",
+        "disconnected": "Odpojeno"
+      },
+      "status": {
+        "connected": "Připojeno",
+        "reconnecting": "Znovu se připojuje",
+        "disconnected": "Odpojeno"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "oproti předchozímu období"
+    },
+    "statComparison": {
+      "current": "Aktuální",
+      "previous": "Předchozí",
+      "change": "změna"
+    },
+    "aiInsightPanel": {
+      "title": "AI přehledy",
+      "placeholder": "Zeptejte se AI...",
+      "send": "Odeslat"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Živě",
+        "degraded": "Omezený provoz",
+        "disconnected": "Offline"
+      },
+      "latency": "Latence: {ms} ms",
+      "lastUpdate": "Poslední aktualizace: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Oznámení",
+      "title": "Oznámení",
+      "markAllRead": "Označit vše jako přečtené",
+      "empty": "Žádná oznámení",
+      "ariaLabelUnread": "Oznámení (nepřečtená: {count})"
+    },
+    "premiumChartCard": {
+      "info": "Informace",
+      "fullscreen": "Celá obrazovka",
+      "exitFullscreen": "Ukončit celou obrazovku",
+      "moreOptions": "Další možnosti",
+      "empty": "Za toto období nejsou k dispozici žádná data"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "oproti minulému období"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "V provozu",
+        "degraded": "Omezený provoz",
+        "outage": "Výpadek"
+      }
+    },
+    "select": {
+      "placeholder": "Vyberte...",
+      "search": "Hledat...",
+      "empty": "Nebyly nalezeny žádné možnosti",
+      "removeOption": "Odebrat {label}"
+    },
+    "sidebar": {
+      "expand": "Rozbalit postranní panel",
+      "collapse": "Sbalit postranní panel",
+      "openMenu": "Otevřít menu",
+      "closeMenu": "Zavřít menu"
+    },
+    "iconSystem": {
+      "notFound": "Ikona „{name}“ nebyla nalezena",
+      "badge": "{count, plural, one {# oznámení} few {# oznámení} many {# oznámení} other {# oznámení}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Postranní panel",
+      "closePanel": "Zavřít panel"
+    },
+    "codeBlock": {
+      "copyCode": "Kopírovat kód",
+      "copied": "Zkopírováno",
+      "copy": "Kopírovat"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Zákazníci",
+      "title": "Zákazníci",
+      "summary": "{count, plural, one {# zákazník} few {# zákazníci} many {# zákazníka} other {# zákazníků}} · celkové tržby {revenue}",
+      "stats": {
+        "totalCustomers": "Celkem zákazníků",
+        "totalRevenue": "Celkové tržby",
+        "totalRedemptions": "Celkem uplatnění"
+      },
+      "table": {
+        "customer": "Zákazník",
+        "email": "E-mail",
+        "purchases": "Nákupy",
+        "totalSpent": "Celkem utraceno",
+        "redemptions": "Uplatnění",
+        "lastPurchase": "Poslední nákup"
+      },
+      "empty": "Zatím žádní zákazníci",
+      "unknown": "Neznámý"
+    },
+    "qrCheckout": {
+      "title": "Okamžitá QR platba",
+      "subtitle": "Generujte QR kódy pro okamžitou platbu zákazníků",
+      "voucherLabel": "Propojit s poukázkou (nepovinné)",
+      "generalOption": "Obecná platba (bez konkrétní poukázky)",
+      "voucherOption": "{type} – {value} {currency} ({status})",
+      "generating": "Generování...",
+      "generate": "Generovat QR kód",
+      "qrAlt": "QR kód pro platbu",
+      "scanToCheckout": "Naskenujte a zaplaťte",
+      "print": "Vytisknout QR kód"
+    },
+    "redemptions": {
+      "metaTitle": "Uplatnění",
+      "subtitle": "Zobrazujte a potvrzujte uplatnění poukázek.",
+      "stats": {
+        "totalTitle": "Celkem uplatnění",
+        "totalDescription": "Všechna odeslaná uplatnění",
+        "pendingTitle": "Čekající",
+        "pendingDescription": "Čeká na potvrzení",
+        "confirmedTitle": "Potvrzená",
+        "confirmedDescription": "Schválená uplatnění",
+        "discountsTitle": "Poskytnuté slevy",
+        "discountsDescription": "Potvrzené slevy"
+      },
+      "empty": {
+        "title": "Zatím žádná uplatnění",
+        "description": "Uplatnění se zde zobrazí, až zákazníci použijí poukázky."
+      },
+      "voucherFallback": "Poukázka",
+      "card": {
+        "order": "Objednávka za {amount}",
+        "discount": "Sleva: {amount}",
+        "discountReferred": "Sleva: {amount} – doporučil/a {name}",
+        "confirmed": "Potvrzeno",
+        "pending": "Čeká",
+        "method": "Způsob: {method}",
+        "methods": {
+          "online": "Online",
+          "in_store": "V prodejně"
+        },
+        "orderReference": "Objednávka: {reference}",
+        "notAvailable": "N/A",
+        "location": "Místo: {location}",
+        "date": "Datum: {date}"
+      },
+      "confirm": {
+        "prompt": "Potvrdit toto uplatnění? Tím se doporučiteli uvolní kredit.",
+        "confirmLabel": "Potvrdit",
+        "success": "Uplatnění potvrzeno. Kredit pro doporučitele byl uvolněn.",
+        "error": "Uplatnění se nepodařilo potvrdit. Zkuste to prosím znovu.",
+        "confirming": "Potvrzování...",
+        "button": "Potvrdit uplatnění"
+      },
+      "export": {
+        "success": "Uplatnění byla úspěšně exportována!",
+        "error": "Uplatnění se nepodařilo exportovat",
+        "exporting": "Exportování...",
+        "button": "Exportovat CSV"
+      }
+    },
+    "reviews": {
+      "title": "Recenze",
+      "subtitle": "Sledujte recenze zákazníků a odpovídejte na ně",
+      "filters": "Filtry",
+      "reviewCount": "{count, plural, one {# recenze} few {# recenze} many {# recenze} other {# recenzí}}",
+      "ratingDistribution": "Rozložení hodnocení",
+      "responseRate": "Míra odpovědí",
+      "replied": "Zodpovězeno",
+      "pending": "Čeká",
+      "responseRatePercent": "Míra odpovědí {percent} %",
+      "filter": {
+        "rating": "Hodnocení",
+        "allRatings": "Všechna hodnocení",
+        "stars": "{count, plural, one {# hvězdička} few {# hvězdičky} many {# hvězdičky} other {# hvězdiček}}",
+        "replyStatus": "Stav odpovědi",
+        "all": "Vše",
+        "needsReply": "Čeká na odpověď",
+        "replied": "Zodpovězeno",
+        "clear": "Zrušit"
+      },
+      "loading": "Načítání recenzí...",
+      "empty": "Nebyly nalezeny žádné recenze.",
+      "anonymous": "Anonym",
+      "verified": "Ověřeno",
+      "campaign": "Kampaň: {name}",
+      "voucher": "Poukázka: {code}",
+      "foundHelpful": "Užitečné pro {count}",
+      "yourReply": "Vaše odpověď",
+      "replyPlaceholder": "Napište odpověď...",
+      "posting": "Odesílání...",
+      "postReply": "Odeslat odpověď",
+      "cancel": "Zrušit",
+      "reply": "Odpovědět",
+      "showing": "Zobrazeno {from}–{to} z {total}",
+      "pageOf": "Strana {page} z {totalPages}",
+      "previousPage": "Předchozí stránka",
+      "nextPage": "Další stránka",
+      "loadFailed": "Recenze se nepodařilo načíst",
+      "replyFailed": "Odpověď se nepodařilo odeslat",
+      "replyPosted": "Odpověď zveřejněna"
+    },
+    "scanner": {
+      "title": "Skener",
+      "subtitle": "Skenujte poukázky, dárkové karty a vstupenky",
+      "manual": "Ručně",
+      "camera": "Kamera",
+      "scanning": "Skenování...",
+      "cameraDenied": "Přístup ke kameře byl zamítnut. Povolte přístup ke kameře v nastavení prohlížeče, nebo zadejte kód níže.",
+      "cameraUnavailable": "Není k dispozici žádná kamera. Zadejte kód níže.",
+      "pointAtCode": "Namiřte na QR kód pro automatické naskenování",
+      "enterCode": "Zadejte kód",
+      "codePlaceholder": "Kód poukázky (např. AUD-CMUI0TG1), odkaz na poukázku, kód vstupenky nebo dárkové karty",
+      "codeAriaLabel": "Kód ke skenování",
+      "scan": "Skenovat",
+      "found": {
+        "voucher": "Poukázka nalezena",
+        "gift_card": "Dárková karta nalezena",
+        "ticket": "Vstupenka nalezena"
+      },
+      "info": {
+        "ticketNumber": "Vstupenka č.",
+        "event": "Událost",
+        "type": "Typ",
+        "standard": "Standardní",
+        "attendee": "Účastník",
+        "code": "Kód",
+        "amount": "Částka",
+        "message": "Zpráva",
+        "voucher": "Poukázka",
+        "campaign": "Kampaň",
+        "none": "Žádná",
+        "value": "Hodnota",
+        "validUntil": "Platí do"
+      },
+      "redeem": "Uplatnit",
+      "redeeming": "Uplatňování...",
+      "cannotRedeem": "Tuto položku nelze uplatnit (stav: {status})",
+      "redeemed": {
+        "voucher": "Poukázka byla úspěšně uplatněna!",
+        "gift_card": "Dárková karta byla úspěšně uplatněna!",
+        "ticket": "Vstupenka byla úspěšně uplatněna!"
+      },
+      "errors": {
+        "enterCode": "Zadejte kód",
+        "notFound": "Nenalezeno",
+        "scanFailed": "Skenování se nezdařilo",
+        "redeemFailed": "Uplatnění se nezdařilo"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktivní",
+          "redeemed": "uplatněná",
+          "expired": "prošlá",
+          "cancelled": "zrušená"
+        },
+        "ticket": {
+          "available": "dostupná",
+          "sold": "prodaná",
+          "used": "použitá",
+          "cancelled": "zrušená",
+          "refunded": "vrácená"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Cena nemůže být záporná.",
+      "invalid": "Cena není platné číslo.",
+      "wholeNumber": "Cena musí být celé číslo.",
+      "decimals": "Cena může mít nejvýše {decimals} desetinných míst.",
+      "tooLarge": "Cena je příliš vysoká."
+    },
+    "appointments": {
+      "title": "Rezervace termínů",
+      "subtitle": "Spravujte rezervace a dostupnost",
+      "createSlot": "Vytvořit termín",
+      "form": {
+        "serviceName": "Název služby",
+        "price": "Cena ({currency}, pokud je zdarma, ponechte prázdné)",
+        "startTime": "Čas zahájení",
+        "endTime": "Čas ukončení",
+        "notes": "Poznámky",
+        "creating": "Vytváření…",
+        "submit": "Vytvořit volný termín"
+      },
+      "status": {
+        "all": "Vše",
+        "pending": "Čeká",
+        "confirmed": "Potvrzeno",
+        "cancelled": "Zrušeno",
+        "completed": "Dokončeno"
+      },
+      "loading": "Načítání...",
+      "empty": "Nebyly nalezeny žádné rezervace",
+      "bookedBy": "Rezervoval/a: {name}",
+      "confirm": "Potvrdit",
+      "confirmAria": "Potvrdit rezervaci",
+      "cancel": "Zrušit",
+      "cancelAria": "Zrušit rezervaci",
+      "errors": {
+        "endBeforeStart": "Čas ukončení musí být po čase zahájení.",
+        "createFailed": "Volný termín se nepodařilo vytvořit. Zkuste to prosím znovu.",
+        "network": "Nepodařilo se spojit se serverem. Zkontrolujte připojení a zkuste to znovu.",
+        "updateFailed": "Rezervaci se nepodařilo aktualizovat (chyba {status})."
+      }
+    },
+    "inventory": {
+      "title": "Sklad",
+      "subtitle": "Sledujte stav zásob a spravujte dostupnost poukázek",
+      "refresh": "Obnovit",
+      "summary": {
+        "totalItems": "Celkem položek",
+        "lowStock": "Nízké zásoby",
+        "outOfStock": "Vyprodáno"
+      },
+      "alerts": {
+        "title": "Upozornění na nízké zásoby ({count})",
+        "threshold": "{stock} / limit {threshold}"
+      },
+      "loading": "Načítání skladu...",
+      "empty": "Nebyly nalezeny žádné poukázky",
+      "typeVoucher": "Poukázka: {type}",
+      "stockStatus": {
+        "unlimited": "Neomezeně",
+        "outOfStock": "Vyprodáno",
+        "lowStock": "Nízké zásoby",
+        "inStock": "Skladem"
+      },
+      "stock": "Zásoba: {stock}",
+      "purchased": "Zakoupeno: {count}",
+      "redeemed": "Uplatněno: {count}",
+      "validUntil": "Platí do {date}",
+      "edit": {
+        "button": "Upravit zásobu",
+        "stockQuantity": "Množství na skladě",
+        "threshold": "Limit nízkých zásob",
+        "save": "Uložit",
+        "saving": "Ukládání...",
+        "cancel": "Zrušit"
+      },
+      "stockUpdated": "Zásoba aktualizována",
+      "errors": {
+        "loadFailed": "Sklad se nepodařilo načíst",
+        "updateFailed": "Zásobu se nepodařilo aktualizovat"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "Návrhy od AI na této platformě zatím nejsou nastaveny, proto jsou nástroje pro automatické rozložení a kontrolní seznamy skryté. Stránky můžete i nadále vytvářet a upravovat ručně."
+    },
+    "pricing": {
+      "title": "Dynamické ceny",
+      "newRule": "Nové pravidlo",
+      "ruleTypes": {
+        "demand": {
+          "label": "Podle poptávky",
+          "desc": "Úprava ceny podle poměru zobrazení a nákupů"
+        },
+        "timeOfDay": {
+          "label": "Denní doba",
+          "desc": "Ceny ve špičce a mimo špičku"
+        },
+        "inventory": {
+          "label": "Zásoby",
+          "desc": "Změna ceny podle zbývajících zásob"
+        },
+        "surge": {
+          "label": "Příplatek",
+          "desc": "Přirážka při zvláštních akcích a svátcích"
+        },
+        "loyalty": {
+          "label": "Věrnost",
+          "desc": "Slevy pro vracející se zákazníky"
+        }
+      },
+      "form": {
+        "title": "Vytvořit cenové pravidlo",
+        "ruleType": "Typ pravidla",
+        "priority": "Priorita",
+        "priorityPlaceholder": "Vyšší = použije se dříve",
+        "config": "Konfigurace (JSON)",
+        "submit": "Vytvořit pravidlo",
+        "cancel": "Zrušit"
+      },
+      "loading": "Načítání pravidel...",
+      "empty": "Zatím žádná cenová pravidla. Vytvořte pravidlo a zapněte dynamické ceny.",
+      "table": {
+        "type": "Typ",
+        "priority": "Priorita",
+        "config": "Konfigurace",
+        "status": "Stav",
+        "actions": "Akce"
+      },
+      "active": "Aktivní",
+      "inactive": "Neaktivní",
+      "deleteAria": "Smazat cenové pravidlo",
+      "deleteConfirm": "Smazat toto cenové pravidlo?",
+      "delete": "Smazat",
+      "errors": {
+        "invalidJson": "Pole konfigurace musí obsahovat platný JSON."
+      },
+      "preview": {
+        "title": "Náhled ceny",
+        "description": "Zadejte ID poukázky a uvidíte, jak by aktivní pravidla ovlivnila její cenu.",
+        "voucherId": "ID poukázky",
+        "voucherIdPlaceholder": "Zadejte ID poukázky",
+        "calculate": "Vypočítat",
+        "error": "Cenu se nepodařilo vypočítat",
+        "basePrice": "Základní cena",
+        "finalPrice": "Konečná cena"
+      }
+    },
+    "rentals": {
+      "title": "Rezervace pronájmů",
+      "subtitle": "Spravujte žádosti o pronájem a vrácení",
+      "status": {
+        "all": "Vše",
+        "pending": "Čeká",
+        "approved": "Schváleno",
+        "rejected": "Zamítnuto",
+        "paid": "Zaplaceno",
+        "active": "Aktivní",
+        "returned": "Vráceno",
+        "cancelled": "Zrušeno"
+      },
+      "empty": "Nebyly nalezeny žádné rezervace pronájmů.",
+      "dates": "{start} – {end} ({days, plural, one {# den} few {# dny} many {# dne} other {# dní}})",
+      "total": "Celkem: <strong>{total}</strong> ({rate}/den)",
+      "note": "Poznámka: {note}",
+      "rejectedReason": "Zamítnuto: {reason}",
+      "bookedMeta": "Rezervováno: {date} | Uživatel: {user}...",
+      "approve": "Schválit",
+      "reasonPlaceholder": "Důvod (nepovinné)",
+      "confirm": "Potvrdit",
+      "cancel": "Zrušit",
+      "reject": "Zamítnout",
+      "markReturned": "Označit jako vrácené"
+    },
+    "subscriptionBoxes": {
+      "title": "Předplatitelské boxy",
+      "subtitle": "Spravujte opakované boxy s poukázkami",
+      "newBox": "+ Nový box",
+      "cancel": "Zrušit",
+      "form": {
+        "name": "Název",
+        "description": "Popis",
+        "price": "Cena ({currency})",
+        "currency": "Měna",
+        "interval": "Interval",
+        "maxItems": "Max. počet položek",
+        "creating": "Vytváření...",
+        "submit": "Vytvořit box"
+      },
+      "interval": {
+        "weekly": "Týdně",
+        "monthly": "Měsíčně",
+        "quarterly": "Čtvrtletně"
+      },
+      "created": "Předplatitelský box vytvořen.",
+      "empty": "Zatím žádné předplatitelské boxy. Vytvořte svůj první.",
+      "pricePerInterval": "{price} / {interval}",
+      "subscribers": "{count, plural, one {# předplatitel} few {# předplatitelé} many {# předplatitele} other {# předplatitelů}}",
+      "items": "{count, plural, one {# položka} few {# položky} many {# položky} other {# položek}}",
+      "errors": {
+        "priceAboveZero": "Zadejte cenu vyšší než 0.",
+        "createFailed": "Předplatitelský box se nepodařilo vytvořit (chyba {status}).",
+        "network": "Předplatitelský box se nepodařilo vytvořit. Zkontrolujte připojení a zkuste to znovu."
+      },
+      "intervalUnit": {
+        "weekly": "týden",
+        "monthly": "měsíc",
+        "quarterly": "čtvrtletí"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Web",
+      "supportEmail": "E-mail podpory",
+      "logoUrl": "URL loga",
+      "primaryColor": "Hlavní barva",
+      "secondaryColor": "Doplňková barva",
+      "backgroundColor": "Barva pozadí",
+      "primaryColorHex": "Hex hodnota hlavní barvy",
+      "secondaryColorHex": "Hex hodnota doplňkové barvy",
+      "backgroundColorHex": "Hex hodnota barvy pozadí",
+      "saving": "Ukládání..."
+    },
+    "page": {
+      "metaTitle": "Nastavení obchodníka",
+      "infoTitle": "Informace o obchodníkovi",
+      "infoSubtitle": "Základní údaje obchodníka",
+      "name": "Název",
+      "slug": "Slug",
+      "country": "Země",
+      "defaultCurrency": "Výchozí měna",
+      "website": "Web",
+      "supportEmail": "E-mail podpory",
+      "completeOnboarding": "Dokončit registraci",
+      "billingTitle": "Fakturace",
+      "billingSubtitle": "14denní zkušební verze zdarma, poté tarify od 19 €/měsíc. Transakční poplatek 5 % z prodeje poukázek.",
+      "status": "Stav",
+      "trialStatus": "Zkušební verze zdarma – {days, plural, one {zbývá # den} few {zbývají # dny} many {zbývá # dne} other {zbývá # dní}}",
+      "statusActive": "Aktivní",
+      "statusInactive": "Neaktivní",
+      "currentPlan": "Aktuální tarif",
+      "trialEnds": "Zkušební verze končí",
+      "periodEnds": "Aktuální období končí",
+      "manage": "Spravovat",
+      "payoutsTitle": "Výplaty",
+      "payoutsEnabled": "Účet Stripe je propojen a aktivní",
+      "payoutsInProgress": "Registrace probíhá – dokončete ji pro zapnutí výplat",
+      "payoutsNotConnected": "Propojte Stripe a přijímejte výplaty z prodeje poukázek",
+      "webhooksTitle": "Webhooky",
+      "webhooksSubtitle": "Dostávejte oznámení o událostech v reálném čase přes HTTP",
+      "notificationsTitle": "Oznámení",
+      "notificationsSubtitle": "Vyberte, které kategorie e-mailů chcete jako člen týmu dostávat."
+    },
+    "brandProfile": {
+      "title": "Profil značky",
+      "subtitle": "Přizpůsobte barvy značky, logo a kontaktní údaje.",
+      "updated": "Profil značky byl úspěšně aktualizován!",
+      "updateFailed": "Profil značky se nepodařilo aktualizovat",
+      "save": "Uložit změny"
+    },
+    "domains": {
+      "title": "Vlastní domény",
+      "subtitle": "Připojte vlastní doménu a ověřte ji pro směrování.",
+      "inputLabel": "Vlastní doména",
+      "adding": "Přidávání...",
+      "add": "Přidat doménu",
+      "empty": "Nejsou nastaveny žádné domény.",
+      "statusLine": "Stav: {status}",
+      "statusValue": {
+        "pending": "čeká",
+        "verified": "ověřeno"
+      },
+      "verify": "Ověřit",
+      "remove": "Odebrat",
+      "addedTitle": "Doména přidána",
+      "addedDescription": "Před přesměrováním provozu ověřte DNS.",
+      "addErrorTitle": "Chyba domény",
+      "addErrorDescription": "Doménu se nepodařilo přidat.",
+      "verifiedTitle": "Doména ověřena",
+      "verifiedDescription": "Směrování je nyní aktivní.",
+      "verifyErrorTitle": "Chyba ověření",
+      "verifyErrorDescription": "Doménu se nepodařilo ověřit.",
+      "removedTitle": "Doména odebrána",
+      "removeErrorTitle": "Chyba odebrání",
+      "removeErrorDescription": "Doménu se nepodařilo odebrat."
+    },
+    "notifications": {
+      "metaTitle": "Nastavení oznámení",
+      "title": "Nastavení oznámení",
+      "intro": "Určete, které kategorie e-mailů vám jako členovi <name>{merchantName}</name> přijdou do schránky. Nastavení je osobní – každý člen týmu si spravuje své vlastní.",
+      "required": "Povinné",
+      "toggle": "Přepnout {label}",
+      "unsaved": "Neuložené změny",
+      "allSaved": "Všechny změny uloženy",
+      "saving": "Ukládání…",
+      "save": "Uložit nastavení",
+      "savedTitle": "Nastavení uloženo",
+      "saveFailedTitle": "Uložení se nezdařilo",
+      "saveFailedDescription": "Nastavení oznámení se nepodařilo aktualizovat.",
+      "category": {
+        "orders": {
+          "label": "Nové objednávky a uplatnění",
+          "description": "E-mail, když je poukázka zakoupena, uplatněna nebo darována."
+        },
+        "payouts": {
+          "label": "Výplaty",
+          "description": "Připsání, selhání a pozastavení výplat ze Stripe."
+        },
+        "fraud_alerts": {
+          "label": "Upozornění na podvody a zabezpečení",
+          "description": "Neobvyklé vzorce uplatnění, chargebacky, anomálie při přihlášení týmu. Nelze vypnout."
+        },
+        "campaign_updates": {
+          "label": "Životní cyklus kampaní",
+          "description": "Kampaň zveřejněna, vyprší za 7 dní, ukončena."
+        },
+        "weekly_digest": {
+          "label": "Týdenní souhrn výkonu",
+          "description": "Pondělní rekapitulace tržeb, uplatnění a nejlepších poukázek za minulý týden."
+        },
+        "product_updates": {
+          "label": "Novinky GiftHub",
+          "description": "Nové funkce, plány a občasné tipy. Nejvýše 1× měsíčně."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Výplaty obchodníka",
+      "title": "Výplaty",
+      "intro": "Propojte účet Stripe, aby tržby z prodeje poukázek chodily přímo na váš bankovní účet. Účtujeme poplatek platformy 5 %; zbytek se automaticky převede na váš propojený účet při platbě.",
+      "stripeAccount": "Účet Stripe",
+      "capabilityState": "Stav funkcí",
+      "accountStatus": {
+        "pending": "čeká",
+        "restricted": "omezeno",
+        "enabled": "aktivní",
+        "disabled": "vypnuto"
+      },
+      "backToSettings": "Zpět do nastavení",
+      "howTitle": "Jak fungují výplaty",
+      "how1": "Zákazníci platí v pokladně platformy. Celou částku vybereme a držíme ji na straně Stripe.",
+      "how2": "Jakmile platba projde, Stripe pošle prodejní cenu sníženou o náš 5% poplatek přímo na váš výplatní účet.",
+      "how3": "Stripe pak tyto peníze vyplatí na váš bankovní účet podle harmonogramu, který zvolíte v nastavení výplat Stripe (obvykle denně, pár dní po prodeji).",
+      "how4": "Chargebacky a refundace se odečtou z vaší příští výplaty; pokud zjistíme podvod, může administrátorský tým váš zůstatek ručně zablokovat.",
+      "badge": {
+        "enabled": {
+          "label": "Výplaty zapnuty",
+          "description": "Prostředky z prodeje poukázek převádí Stripe na váš bankovní účet podle nastaveného harmonogramu výplat."
+        },
+        "restricted": {
+          "label": "Jsou potřeba další údaje",
+          "description": "Stripe potřebuje před zapnutím výplat další informace. Pokračujte otevřením odkazu k registraci níže."
+        },
+        "disabled": {
+          "label": "Výplaty vypnuty",
+          "description": "Stripe výplaty na tomto účtu vypnul. Otevřete dashboard Stripe a vyřešte nesplněné požadavky."
+        },
+        "notConnected": {
+          "label": "Nepropojeno",
+          "description": "Zatím nemáte propojený účet Stripe. Výplaty jsou pozastaveny až do dokončení registrace – prodej poukázek mezitím probíhá, ale prostředky zůstávají na zůstatku platformy."
+        }
+      },
+      "actions": {
+        "startFailed": "Registraci ve Stripe se nepodařilo zahájit",
+        "startNetworkError": "Chyba sítě při zahájení registrace",
+        "dashboardFailed": "Dashboard Stripe se nepodařilo otevřít",
+        "dashboardNetworkError": "Chyba sítě při otevírání dashboardu",
+        "disconnectConfirm": "Odpojit tento účet Stripe? Výplaty budou pozastaveny, dokud jej znovu nepropojíte.",
+        "disconnected": "Účet Stripe odpojen",
+        "disconnectFailed": "Odpojení se nezdařilo",
+        "disconnect": "Odpojit",
+        "setUp": "Nastavit výplaty přes Stripe",
+        "openDashboard": "Otevřít dashboard Stripe",
+        "continueOnboarding": "Pokračovat v registraci"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Data obchodníka se nepodařilo načíst.",
+      "retry": "Zkusit znovu",
+      "loading": "Načítání...",
+      "title": "Dokončete svůj profil",
+      "subtitle": "Nastavte profil značky obchodníka.",
+      "basicInfo": "Základní informace",
+      "merchantName": "Název obchodníka *",
+      "brandTitle": "Profil značky",
+      "brandSubtitle": "Přizpůsobte barvy a logo značky.",
+      "updateFailed": "Obchodníka se nepodařilo aktualizovat",
+      "submit": "Dokončit registraci",
+      "skip": "Prozatím přeskočit"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Auditní protokol",
+      "subtitle": "Sledujte všechny akce provedené na vašem účtu obchodníka",
+      "filters": "Filtry",
+      "action": "Akce",
+      "allActions": "Všechny akce",
+      "fromDate": "Od data",
+      "toDate": "Do data",
+      "apply": "Použít",
+      "clear": "Zrušit",
+      "loading": "Načítání auditního protokolu...",
+      "loadFailed": "Auditní protokol se nepodařilo načíst",
+      "empty": "Nebyly nalezeny žádné záznamy auditního protokolu.",
+      "columns": {
+        "timestamp": "Čas",
+        "actor": "Provedl/a",
+        "action": "Akce",
+        "resource": "Zdroj",
+        "details": "Podrobnosti"
+      },
+      "unknownActor": "Neznámý",
+      "showing": "Zobrazeno {from}–{to} z {total}",
+      "pageOf": "Strana {page} z {totalPages}",
+      "previousPage": "Předchozí stránka",
+      "nextPage": "Další stránka",
+      "actions": {
+        "voucherCreated": "Poukázka vytvořena",
+        "voucherUpdated": "Poukázka aktualizována",
+        "voucherPublished": "Poukázka zveřejněna",
+        "vouchersGenerated": "Poukázky vygenerovány",
+        "campaignCreated": "Kampaň vytvořena",
+        "campaignUpdated": "Kampaň aktualizována",
+        "memberInvited": "Člen týmu pozván",
+        "memberRemoved": "Člen týmu odebrán",
+        "memberRoleChanged": "Role člena týmu změněna",
+        "apiKeyCreated": "API klíč vytvořen",
+        "apiKeyRevoked": "API klíč zneplatněn",
+        "apiKeyUpdated": "API klíč aktualizován",
+        "eventCreated": "Událost vytvořena",
+        "eventUpdated": "Událost aktualizována",
+        "eventPublished": "Událost zveřejněna",
+        "merchantUpdated": "Obchodník aktualizován",
+        "reviewReplied": "Odpověď na recenzi",
+        "settingsUpdate": "Změna nastavení",
+        "settingsView": "Zobrazení nastavení",
+        "ticketRedeemed": "Vstupenka uplatněna"
+      },
+      "resources": {
+        "voucher": "Poukázka",
+        "campaign": "Kampaň",
+        "giftCard": "Dárková karta",
+        "event": "Událost",
+        "member": "Člen",
+        "teamMember": "Člen týmu",
+        "apiKey": "API klíč",
+        "webhook": "Webhook",
+        "merchant": "Obchodník",
+        "user": "Uživatel",
+        "review": "Recenze"
+      }
+    },
+    "roles": {
+      "admin": "Administrátor",
+      "adminDescription": "Plný přístup – správa poukázek, kampaní, členů a nastavení",
+      "staff": "Personál",
+      "staffDescription": "Provozní přístup – potvrzování uplatnění a zobrazení dat",
+      "optionWithDescription": "{label} – {description}"
+    },
+    "members": {
+      "title": "Členové týmu",
+      "subtitle": "Spravujte svůj tým a jeho úrovně přístupu",
+      "inviteMember": "Pozvat člena",
+      "inviteTitle": "Pozvat člena týmu",
+      "emailAddress": "E-mailová adresa",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "Uživatel musí mít existující účet.",
+      "role": "Role",
+      "inviting": "Odesílání pozvánky...",
+      "sendInvitation": "Odeslat pozvánku",
+      "cancel": "Zrušit",
+      "save": "Uložit",
+      "loading": "Načítání členů týmu...",
+      "loadFailed": "Členy týmu se nepodařilo načíst",
+      "empty": "Zatím žádní členové týmu. Pozvěte prvního člena výše.",
+      "columns": {
+        "member": "Člen",
+        "role": "Role",
+        "joined": "Připojen/a",
+        "actions": "Akce"
+      },
+      "unnamed": "Bez jména",
+      "memberRole": "Role člena",
+      "changeRole": "Změnit roli",
+      "removeMember": "Odebrat člena",
+      "inviteFailed": "Člena se nepodařilo pozvat",
+      "invited": "Člen byl úspěšně pozván",
+      "updateRoleFailed": "Roli se nepodařilo aktualizovat",
+      "roleUpdated": "Role aktualizována",
+      "removeConfirm": "Odebrat {name} z týmu?",
+      "remove": "Odebrat",
+      "removeFailed": "Člena se nepodařilo odebrat",
+      "removed": "Člen odebrán"
+    },
+    "inviteForm": {
+      "title": "Pozvat člena týmu",
+      "subtitle": "Přidejte člena týmu pomocí jeho e-mailové adresy.",
+      "email": "E-mail",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "Uživatel musí mít účet. Pokud jej nemá, musí se nejprve zaregistrovat.",
+      "role": "Role",
+      "roleHint": "Administrátoři mohou spravovat poukázky, kampaně a členy týmu. Personál může potvrzovat uplatnění.",
+      "inviting": "Odesílání pozvánky...",
+      "submit": "Pozvat člena",
+      "redirectingToBilling": "{message} Přesměrování na fakturaci..."
+    },
+    "referrals": {
+      "title": "Analýza doporučení",
+      "subtitle": "Sledujte výkon doporučení a odměny.",
+      "stats": {
+        "total": "Celkem doporučení",
+        "totalHint": "Všechna sledovaná doporučení",
+        "opened": "Otevřená",
+        "openedHint": "Zobrazená nebo uplatněná",
+        "redeemed": "Uplatněná",
+        "redeemedHint": "Konvertovaná doporučení",
+        "conversionRate": "Míra konverze",
+        "conversionRateHint": "Uplatněná / celkem"
+      },
+      "statusBreakdown": "Rozložení stavů",
+      "creditsIssued": "Vydané kredity {amount}",
+      "noActivity": "Zatím žádná aktivita doporučení.",
+      "topReferrers": "Nejlepší doporučitelé",
+      "topReferrersHint": "Uživatelé s nejvíce doporučeními.",
+      "noReferrals": "Zatím žádná doporučení.",
+      "unknownUser": "Neznámý uživatel",
+      "referralCount": "{count, plural, one {# doporučení} few {# doporučení} many {# doporučení} other {# doporučení}}",
+      "recent": "Nedávná doporučení",
+      "recentHint": "Nejnovější doporučení od zákazníků.",
+      "noRecent": "Žádná nedávná doporučení.",
+      "voucherFallback": "Poukázka",
+      "status": {
+        "created": "Vytvořeno",
+        "opened": "Otevřeno",
+        "redeemed": "Uplatněno",
+        "expired": "Vypršelo",
+        "blocked": "Zablokováno"
+      }
+    },
+    "emailCampaigns": {
+      "title": "E-mailové kampaně",
+      "newCampaign": "Nová kampaň",
+      "notConfigured": "Odesílání e-mailů na této platformě zatím není nastaveno. Kampaně můžete vytvářet a prohlížet, ale odeslat je půjde až po připojení poskytovatele e-mailů.",
+      "notConfiguredShort": "Odesílání e-mailů na této platformě zatím není nastaveno",
+      "createTitle": "Vytvořit kampaň",
+      "campaignName": "Název kampaně",
+      "campaignNamePlaceholder": "Newsletter k letnímu výprodeji",
+      "subjectLine": "Předmět",
+      "subjectPlaceholder": "Nenechte si ujít naše letní nabídky!",
+      "recipients": "Příjemci",
+      "recipientFilter": {
+        "all": "Všichni zákazníci",
+        "redeemed30d": "Uplatnili za posledních 30 dní",
+        "inactive": "Neaktivní zákazníci"
+      },
+      "schedule": "Naplánovat (nepovinné)",
+      "emailSections": "Sekce e-mailu",
+      "sectionTypes": {
+        "header": "Záhlaví",
+        "text": "Text",
+        "image": "Obrázek",
+        "button": "Tlačítko",
+        "divider": "Oddělovač",
+        "voucherCard": "Poukázka"
+      },
+      "creating": "Vytváření...",
+      "scheduleCampaign": "Naplánovat kampaň",
+      "saveDraft": "Uložit jako koncept",
+      "preview": "Náhled",
+      "editor": {
+        "moveUp": "Posunout nahoru",
+        "moveDown": "Posunout dolů",
+        "removeSection": "Odebrat sekci",
+        "title": "Nadpis",
+        "subtitle": "Podnadpis (nepovinné)",
+        "textContent": "Zadejte text...",
+        "imageUrl": "URL obrázku",
+        "altText": "Alternativní text",
+        "buttonLabel": "Text tlačítka",
+        "buttonUrl": "URL tlačítka",
+        "dividerHint": "Vodorovná oddělovací čára",
+        "voucherTitle": "Název poukázky",
+        "voucherValue": "Hodnota (např. SLEVA 20 %)",
+        "voucherCode": "Kód (např. SAVE20)",
+        "voucherExpiry": "Platnost (např. 31. 12. 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Nadpis záhlaví",
+        "textContent": "Text...",
+        "imagePlaceholder": "Zástupný obrázek",
+        "button": "Tlačítko",
+        "voucher": "Poukázka",
+        "validUntil": "Platí do {date}"
+      },
+      "loading": "Načítání...",
+      "empty": "Zatím žádné e-mailové kampaně",
+      "columns": {
+        "name": "Název",
+        "subject": "Předmět",
+        "status": "Stav",
+        "recipients": "Příjemci",
+        "opens": "Otevření",
+        "created": "Vytvořeno",
+        "actions": "Akce"
+      },
+      "status": {
+        "draft": "koncept",
+        "scheduled": "naplánováno",
+        "sent": "odesláno"
+      },
+      "send": "Odeslat",
+      "delete": "Smazat",
+      "deleteCampaign": "Smazat kampaň",
+      "toasts": {
+        "missingFields": "Chybějící pole",
+        "missingFieldsDescription": "Název a předmět jsou povinné.",
+        "created": "Kampaň vytvořena",
+        "error": "Chyba",
+        "createFailed": "Kampaň se nepodařilo vytvořit.",
+        "sendConfirm": "Opravdu chcete tuto kampaň odeslat hned teď?",
+        "sendFailedStatus": "Odeslání se nezdařilo (chyba {status}).",
+        "partlySent": "Kampaň byla odeslána částečně",
+        "partlySentDescription": "Odesláno {sent} z {total} příjemců. {failed, plural, one {# e-mail se nepodařilo odeslat} few {# e-maily se nepodařilo odeslat} many {# e-mailu se nepodařilo odeslat} other {# e-mailů se nepodařilo odeslat}}.",
+        "sent": "Kampaň odeslána",
+        "sentDescription": "{sent, plural, one {Odesláno # příjemci.} few {Odesláno # příjemcům.} many {Odesláno # příjemce.} other {Odesláno # příjemcům.}}",
+        "sendFailed": "Odeslání se nezdařilo",
+        "deleteConfirm": "Smazat tuto kampaň?",
+        "deleted": "Kampaň smazána",
+        "deleteFailed": "Smazání se nezdařilo."
+      }
+    },
+    "apiKeys": {
+      "title": "API klíče",
+      "subtitle": "Spravujte API klíče pro programový přístup k datům obchodníka",
+      "createKey": "Vytvořit klíč",
+      "createdNotice": "API klíč vytvořen! Zkopírujte si jej hned – znovu se už nezobrazí.",
+      "copyKey": "Kopírovat klíč",
+      "createTitle": "Vytvořit API klíč",
+      "keyName": "Název klíče",
+      "keyNamePlaceholder": "např. Produkční integrace pokladny",
+      "permissions": "Oprávnění",
+      "creating": "Vytváření...",
+      "submit": "Vytvořit API klíč",
+      "cancel": "Zrušit",
+      "loading": "Načítání API klíčů...",
+      "empty": "Zatím žádné API klíče. Začněte vytvořením klíče.",
+      "createdOn": "Vytvořeno {date}",
+      "lastUsed": "Naposledy použito {date}",
+      "expires": "Vyprší {date}",
+      "revokeKey": "Zneplatnit klíč",
+      "loadFailed": "API klíče se nepodařilo načíst",
+      "required": "Je vyžadován název a alespoň jedno oprávnění",
+      "createFailed": "API klíč se nepodařilo vytvořit",
+      "created": "API klíč vytvořen",
+      "revokeConfirm": "Zneplatnit API klíč „{name}“? Tuto akci nelze vrátit.",
+      "revoke": "Zneplatnit",
+      "revoked": "API klíč zneplatněn",
+      "revokeFailed": "API klíč se nepodařilo zneplatnit",
+      "copied": "Zkopírováno do schránky",
+      "groups": {
+        "vouchers": "Poukázky",
+        "campaigns": "Kampaně",
+        "giftCards": "Dárkové karty",
+        "customers": "Zákazníci",
+        "analytics": "Analytika",
+        "events": "Události"
+      },
+      "permissionLabels": {
+        "voucherRead": "Čtení poukázek",
+        "voucherCreate": "Vytváření poukázek",
+        "voucherRedeem": "Uplatňování poukázek",
+        "campaignRead": "Čtení kampaní",
+        "campaignCreate": "Vytváření kampaní",
+        "giftCardRead": "Čtení dárkových karet",
+        "giftCardRedeem": "Uplatňování dárkových karet",
+        "customerRead": "Čtení zákazníků",
+        "analyticsRead": "Čtení analytiky",
+        "eventRead": "Čtení událostí",
+        "eventCheckin": "Odbavení na událostech"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooky",
+      "subtitle": "Dostávejte oznámení o událostech přes HTTP",
+      "addWebhook": "Přidat webhook",
+      "secretNotice": "Tajný klíč webhooku (zobrazí se jen jednou):",
+      "copySecret": "Kopírovat tajný klíč",
+      "copied": "Zkopírováno!",
+      "newTitle": "Nový webhook",
+      "endpointUrl": "URL endpointu",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Události",
+      "submit": "Vytvořit webhook",
+      "loading": "Načítání...",
+      "empty": "Nejsou nastaveny žádné webhooky",
+      "createdOn": "Vytvořeno {date}",
+      "deliveriesCount": "{count, plural, one {# doručení} few {# doručení} many {# doručení} other {# doručení}}",
+      "sendTest": "Odeslat test",
+      "viewDeliveries": "Protokol doručení",
+      "disable": "Vypnout",
+      "enable": "Zapnout",
+      "deleteWebhook": "Smazat webhook",
+      "deliveryLog": "Protokol doručení",
+      "noDeliveries": "Zatím žádná doručení",
+      "deliveryFailed": "Neúspěšné",
+      "attempts": "{count, plural, one {# pokus} few {# pokusy} many {# pokusu} other {# pokusů}}",
+      "loadFailed": "Webhooky se nepodařilo načíst",
+      "required": "Je vyžadována URL a alespoň jedna událost",
+      "created": "Webhook vytvořen",
+      "createFailed": "Webhook se nepodařilo vytvořit",
+      "deleted": "Webhook smazán",
+      "deleteFailed": "Webhook se nepodařilo smazat",
+      "updateFailed": "Webhook se nepodařilo aktualizovat",
+      "testDelivered": "Test doručen! Stav: {status}",
+      "testFailed": "Test se nezdařil: {error}",
+      "statusCode": "Stav {status}",
+      "testSendFailed": "Testovací webhook se nepodařilo odeslat",
+      "loadDeliveriesFailed": "Doručení se nepodařilo načíst"
+    }
   }
 }
