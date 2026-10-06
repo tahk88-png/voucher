@@ -1,15 +1,19 @@
 import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo/page-metadata';
+import HubShell from '@/components/layout/hub-shell';
+import { getTranslations } from 'next-intl/server';
 
 // Gifts catalogue is a client component (filters/search), so SEO metadata
 // lives here in a co-located server layout. Highly indexable commerce page.
-export const metadata: Metadata = pageMetadata({
-  title: 'Gift Cards & Gifting',
-  description:
-    'Browse and buy digital gift cards from local merchants. Send a thoughtful gift in seconds — delivered by email, redeemable in-store or online.',
-  path: '/gifts',
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('giftsPages.meta');
+  return pageMetadata({
+    title: t('title'),
+    description: t('description'),
+    path: '/gifts',
+  });
+}
 
 export default function GiftsLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <HubShell>{children}</HubShell>;
 }

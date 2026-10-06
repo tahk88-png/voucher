@@ -1,5 +1,5 @@
 /**
- * Vouchr mobile theme — mirrors the web "warm" design system
+ * GiftHub mobile theme — mirrors the web "warm" design system
  * (app/globals.css design tokens) so the apps feel like one product.
  */
 

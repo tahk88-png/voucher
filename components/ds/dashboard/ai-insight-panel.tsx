@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Sparkles, ChevronDown, ChevronUp, Send } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 /* ═══════════════════════════════════════════════════════════════
    AI INSIGHT PANEL — AI-powered insights with typewriter effect
@@ -55,6 +56,7 @@ export function AiInsightPanel({
   defaultCollapsed = false,
   className = '',
 }: AiInsightPanelProps) {
+  const t = useTranslations('dsComponents.aiInsightPanel');
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -117,7 +119,7 @@ export function AiInsightPanel({
             className="text-sm font-semibold"
             style={{ color: 'var(--ds-text-primary)' }}
           >
-            AI Insights
+            {t('title')}
           </span>
           {loading && <LoadingDots />}
         </div>
@@ -207,14 +209,14 @@ export function AiInsightPanel({
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask AI a question..."
+                placeholder={t('placeholder')}
                 className="flex-1 bg-transparent text-sm outline-none placeholder:opacity-40"
                 style={{ color: 'var(--ds-text-primary)' }}
               />
               <button
                 type="submit"
                 disabled={!input.trim()}
-                aria-label="Send"
+                aria-label={t('send')}
                 className="ml-2 shrink-0 rounded-lg p-1.5 transition-all duration-200"
                 style={{
                   background: input.trim()

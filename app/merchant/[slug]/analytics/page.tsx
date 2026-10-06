@@ -1,12 +1,14 @@
+import type { Metadata } from 'next';
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Analytics', noIndex: true });
+import { getTranslations } from 'next-intl/server';
 
 import { notFound, redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
-import { formatCurrency } from '@/lib/utils';
+import { formatPrice } from '@/lib/currency-constants';
+
 import { StatsCard } from '@/components/ui/stats-card';
 import { BarChart3, DollarSign, TrendingUp, Users } from 'lucide-react';
 import { AnalyticsCharts } from './analytics-charts';
@@ -14,6 +16,15 @@ import { getRedemptionTrends } from '@/lib/analytics/get-redemption-trends';
 import { getVoucherPerformance } from '@/lib/analytics/get-voucher-performance';
 import { getCategoryBreakdown } from '@/lib/analytics/get-category-breakdown';
 import { CardSkeleton } from '@/components/ui/loading-skeletons';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('merchantDashboard.analytics');
+  return pageMetadata({ title: t('metaTitle'), noIndex: true });
+}
+
+const formatCurrency = (minor: number, currency: string) => formatPrice(minor, currency.toUpperCase(), 'en-GB');
+
+const VOUCHER_TYPE_KEYS = ['percentage', 'fixed_amount', 'credit_amount'] as const;
 
 export default async function AnalyticsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -31,6 +42,9 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ slug
   }
 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
+
+  const t = await getTranslations('merchantDashboard.analytics');
+  const tLabels = await getTranslations('labels');
 
   // Get analytics data
   const [
@@ -102,38 +116,48 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ slug
   const totalDiscounts = totalRevenue._sum.discountApplied || 0;
   const creditsIssued = totalCreditsIssued._sum.amount || 0;
 
+  // getCategoryBreakdown() names slices after the voucher type ("Fixed_amount");
+  // show the translated type label instead.
+  const categoryData = categoryBreakdown.map((slice) => {
+    const key = slice.name.toLowerCase();
+    const typeKey = VOUCHER_TYPE_KEYS.find((type) => type === key);
+    if (typeKey) return { ...slice, name: tLabels(`voucherType.${typeKey}`) };
+    if (key === 'other') return { ...slice, name: tLabels('category.other') };
+    return slice;
+  });
+
   return (
     <div className="p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Analytics</h1>
-          <p className="text-sm text-[var(--text-muted)]">Track your voucher performance and revenue</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
+          <p className="text-sm text-[var(--text-muted)]">{t('subtitle')}</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatsCard
-            title="Total Redemptions"
+            title={t('totalRedemptions')}
             value={totalRedemptions}
-            description="Confirmed redemptions"
+            description={t('confirmedRedemptions')}
             icon={Users}
           />
           <StatsCard
-            title="Total Discounts"
+            title={t('totalDiscounts')}
             value={formatCurrency(totalDiscounts, merchant.defaultCurrency)}
-            description="Given to customers"
+            description={t('givenToCustomers')}
             icon={DollarSign}
           />
           <StatsCard
-            title="Credits Issued"
+            title={t('creditsIssued')}
             value={formatCurrency(creditsIssued, merchant.defaultCurrency)}
-            description="Total credits distributed"
+            description={t('totalCreditsDistributed')}
             icon={TrendingUp}
           />
           <StatsCard
-            title="Active Vouchers"
+            title={t('activeVouchers')}
             value={topVouchers.filter((v) => v._count.redemptions > 0).length}
-            description="With redemptions"
+            description={t('withRedemptions')}
             icon={BarChart3}
           />
         </div>
@@ -143,7 +167,8 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ slug
           <AnalyticsCharts
             redemptionTrends={redemptionTrends}
             voucherPerformance={voucherPerformance}
-            categoryBreakdown={categoryBreakdown}
+            categoryBreakdown={categoryData}
+            currency={merchant.defaultCurrency.toUpperCase()}
           />
         </Suspense>
       </div>

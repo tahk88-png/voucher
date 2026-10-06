@@ -1,6 +1,4 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Gift Cards', noIndex: true });
-
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -14,6 +12,11 @@ import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { getTranslations } from 'next-intl/server';
 import GiftCardsListClient from './gift-cards-list-client';
 
+export async function generateMetadata() {
+  const t = await getTranslations('merchantGiftCards');
+  return pageMetadata({ title: t('list.metaTitle'), noIndex: true });
+}
+
 export default async function GiftCardsListPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const session = await auth();
@@ -25,6 +28,7 @@ export default async function GiftCardsListPage({ params }: { params: Promise<{ 
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
 
   const t = await getTranslations('nav');
+  const tg = await getTranslations('merchantGiftCards.list');
 
   const giftCards = await prisma.giftCard.findMany({
     where: { merchantId: merchant.id },
@@ -63,38 +67,38 @@ export default async function GiftCardsListPage({ params }: { params: Promise<{ 
               <Gift className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-[var(--text)]">Gift cards</h1>
-              <p className="text-sm text-[var(--text-muted)]">Create and manage gift cards</p>
+              <h1 className="text-2xl font-semibold text-[var(--text)]">{tg('title')}</h1>
+              <p className="text-sm text-[var(--text-muted)]">{tg('subtitle')}</p>
             </div>
           </div>
           <WarmButton asChild>
-            <Link href={`/merchant/${slug}/gift-cards/new`}>New gift card</Link>
+            <Link href={`/merchant/${slug}/gift-cards/new`}>{tg('newGiftCard')}</Link>
           </WarmButton>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
           <StatsCard
-            title="Total gift cards"
+            title={tg('stats.total')}
             value={totalGiftCards}
-            description="All issued gift cards"
+            description={tg('stats.totalDescription')}
             icon={Gift}
           />
           <StatsCard
-            title="Active"
+            title={tg('stats.active')}
             value={activeGiftCards}
-            description="Currently redeemable"
+            description={tg('stats.activeDescription')}
             icon={TrendingUp}
           />
           <StatsCard
-            title="Redeemed"
+            title={tg('stats.redeemed')}
             value={redeemedGiftCards}
-            description="Completed redemptions"
+            description={tg('stats.redeemedDescription')}
             icon={CheckCircle2}
           />
           <StatsCard
-            title="Total value"
+            title={tg('stats.totalValue')}
             value={formatCurrency(totalValue, merchant.defaultCurrency)}
-            description="Issued gift card value"
+            description={tg('stats.totalValueDescription')}
             icon={DollarSign}
           />
         </div>

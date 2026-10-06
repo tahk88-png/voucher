@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 // scope threw "Missing API key" while `next build` collected page data for
 // this route, which broke the build anywhere RESEND_API_KEY is absent —
 // including CI and the Docker image build.
-import { resend } from '@/lib/resend';
+import { resend, isResendConfigured } from '@/lib/resend';
 import { prisma } from '@/lib/prisma';
 import { requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import { logger } from '@/lib/logger';
@@ -114,6 +114,19 @@ export async function POST(
       return NextResponse.json({ error: 'Campaign already sent' }, { status: 400 });
     }
 
+    // Campaign emails go out through Resend. Without it every send fails, so
+    // refuse up front instead of "sending" to nobody and marking it sent.
+    if (!isResendConfigured()) {
+      return NextResponse.json(
+        {
+          error:
+            "Email sending isn't set up on this platform yet, so this campaign can't be sent. It is still saved as a draft. Contact support to enable email sending.",
+          code: 'EMAIL_PROVIDER_NOT_CONFIGURED',
+        },
+        { status: 503 }
+      );
+    }
+
     // Get recipients based on filter
     const recipients = await getRecipients(merchant.id, campaign.recipientFilter);
 
@@ -139,6 +152,7 @@ export async function POST(
 
     // Send emails in batches
     let sentCount = 0;
+    let failedCount = 0;
     const batchSize = 50;
 
     for (let i = 0; i < recipients.length; i += batchSize) {
@@ -168,13 +182,15 @@ export async function POST(
           sentCount++;
         } catch (err) {
           // Log error but continue sending to other recipients
+          failedCount++;
           logger.error('Failed to send email', { recipient: recipient.email, error: err instanceof Error ? err.message : String(err) });
+          // "failed" = the provider refused the send (not a recipient bounce).
           await prisma.emailCampaignDelivery.create({
             data: {
               campaignId: campaign.id,
               userId: recipient.id,
               email: recipient.email,
-              status: 'bounced',
+              status: 'failed',
             },
           });
         }
@@ -183,7 +199,21 @@ export async function POST(
       await Promise.allSettled(sendPromises);
     }
 
-    // Update campaign status
+    // Nothing went out: keep the campaign as it was so it can be retried,
+    // and say so instead of reporting success.
+    if (sentCount === 0) {
+      return NextResponse.json(
+        {
+          error: `None of the ${recipients.length} emails could be sent. The campaign has not been marked as sent; please try again later.`,
+          code: 'EMAIL_SEND_FAILED',
+          recipientCount: 0,
+          failedCount,
+          totalRecipients: recipients.length,
+        },
+        { status: 502 }
+      );
+    }
+
     await prisma.emailCampaign.update({
       where: { id: campaign.id },
       data: {
@@ -195,7 +225,9 @@ export async function POST(
 
     return NextResponse.json({
       success: true,
+      partial: failedCount > 0,
       recipientCount: sentCount,
+      failedCount,
       totalRecipients: recipients.length,
     });
   });

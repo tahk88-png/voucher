@@ -199,6 +199,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   pages: {
     signIn: '/login',
+    // Auth errors (e.g. a wrong password) land back on /login?error=<code>,
+    // which shows a friendly message instead of the bare /api/auth/error page.
+    error: '/login',
   },
   callbacks: {
     async jwt({ token, user, account, profile }) {

@@ -1,5 +1,10 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Merchant Payouts', noIndex: true });
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata() {
+  const t = await getTranslations('merchantSettings.payouts');
+  return pageMetadata({ title: t('metaTitle'), noIndex: true });
+}
 
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -9,7 +14,6 @@ import { requireMerchantRole } from '@/lib/rbac';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { getTranslations } from 'next-intl/server';
 import PayoutActions from './payout-actions';
 import { CheckCircle2, AlertCircle, Clock } from 'lucide-react';
 
@@ -24,50 +28,33 @@ import { CheckCircle2, AlertCircle, Clock } from 'lucide-react';
  */
 
 type StatusBadge = {
-  label: string;
+  /** Key under merchantSettings.payouts.badge for the label/description. */
+  key: 'enabled' | 'restricted' | 'disabled' | 'notConnected';
   color: 'green' | 'amber' | 'red' | 'gray';
   icon: typeof CheckCircle2;
-  description: string;
 };
+
+const ACCOUNT_STATUSES = ['pending', 'restricted', 'enabled', 'disabled'] as const;
+type AccountStatus = (typeof ACCOUNT_STATUSES)[number];
+
+function isAccountStatus(status: string): status is AccountStatus {
+  return (ACCOUNT_STATUSES as readonly string[]).includes(status);
+}
 
 function badgeFor(
   status: string | null | undefined,
   payoutsEnabled: boolean,
 ): StatusBadge {
   if (payoutsEnabled) {
-    return {
-      label: 'Payouts enabled',
-      color: 'green',
-      icon: CheckCircle2,
-      description:
-        'Funds from voucher sales are transferred to your bank account by Stripe on the scheduled payout cadence.',
-    };
+    return { key: 'enabled', color: 'green', icon: CheckCircle2 };
   }
   if (status === 'restricted') {
-    return {
-      label: 'Additional info required',
-      color: 'amber',
-      icon: AlertCircle,
-      description:
-        'Stripe needs more information before payouts can be enabled. Open the onboarding link below to continue.',
-    };
+    return { key: 'restricted', color: 'amber', icon: AlertCircle };
   }
   if (status === 'disabled') {
-    return {
-      label: 'Payouts disabled',
-      color: 'red',
-      icon: AlertCircle,
-      description:
-        'Stripe has disabled payouts on this account. Open the Stripe dashboard to resolve the outstanding requirements.',
-    };
+    return { key: 'disabled', color: 'red', icon: AlertCircle };
   }
-  return {
-    label: 'Not connected',
-    color: 'gray',
-    icon: Clock,
-    description:
-      "You haven't connected a Stripe account yet. Payouts are held until onboarding is complete — in the meantime voucher sales still process but funds stay on the platform balance.",
-  };
+  return { key: 'notConnected', color: 'gray', icon: Clock };
 }
 
 export default async function PayoutsSettingsPage({
@@ -99,6 +86,8 @@ export default async function PayoutsSettingsPage({
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
 
   const t = await getTranslations('nav');
+  const tp = await getTranslations('merchantSettings.payouts');
+  const accountStatus = merchant.stripeAccountStatus ?? 'pending';
 
   const badge = badgeFor(merchant.stripeAccountStatus, merchant.payoutsEnabled);
   const Icon = badge.icon;
@@ -117,14 +106,12 @@ export default async function PayoutsSettingsPage({
           items={[
             { label: t('dashboard'), href: `/merchant/${slug}/dashboard` },
             { label: t('settings'), href: `/merchant/${slug}/settings` },
-            { label: 'Payouts' },
+            { label: tp('title') },
           ]}
         />
-        <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">Payouts</h1>
+        <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">{tp('title')}</h1>
         <p className="text-sm text-[var(--text-muted)] mb-6">
-          Connect a Stripe account so voucher sales are paid directly to your bank.
-          We take a 5% platform fee; the rest is transferred to your connected
-          account automatically at checkout time.
+          {tp('intro')}
         </p>
 
         <WarmCard padding="lg" className="mb-4 bg-[var(--surface)] border border-[var(--border)]">
@@ -136,19 +123,19 @@ export default async function PayoutsSettingsPage({
               <Icon className="h-5 w-5" />
             </div>
             <div className="flex-1">
-              <h2 className="text-base font-semibold text-[var(--text)]">{badge.label}</h2>
-              <p className="mt-1 text-sm text-[var(--text-muted)]">{badge.description}</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">{tp(`badge.${badge.key}.label`)}</h2>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">{tp(`badge.${badge.key}.description`)}</p>
 
               {merchant.stripeAccountId ? (
                 <dl className="mt-4 grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
                   <div>
-                    <dt className="font-medium text-[var(--text)]">Stripe account</dt>
+                    <dt className="font-medium text-[var(--text)]">{tp('stripeAccount')}</dt>
                     <dd className="font-mono text-[var(--text-muted)]">{merchant.stripeAccountId}</dd>
                   </div>
                   <div>
-                    <dt className="font-medium text-[var(--text)]">Capability state</dt>
+                    <dt className="font-medium text-[var(--text)]">{tp('capabilityState')}</dt>
                     <dd className="text-[var(--text-muted)]">
-                      {merchant.stripeAccountStatus ?? 'pending'}
+                      {isAccountStatus(accountStatus) ? tp(`accountStatus.${accountStatus}`) : accountStatus}
                     </dd>
                   </div>
                 </dl>
@@ -163,31 +150,18 @@ export default async function PayoutsSettingsPage({
               payoutsEnabled={merchant.payoutsEnabled}
             />
             <WarmButton asChild size="sm" variant="outline">
-              <Link href={`/merchant/${slug}/settings`}>Back to settings</Link>
+              <Link href={`/merchant/${slug}/settings`}>{tp('backToSettings')}</Link>
             </WarmButton>
           </div>
         </WarmCard>
 
         <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
-          <h2 className="text-base font-semibold text-[var(--text)]">How payouts work</h2>
+          <h2 className="text-base font-semibold text-[var(--text)]">{tp('howTitle')}</h2>
           <ul className="mt-3 space-y-2 text-sm text-[var(--text-muted)] list-disc pl-5">
-            <li>
-              Customers pay on the platform checkout. We collect the full amount
-              and hold it on Stripe&apos;s side.
-            </li>
-            <li>
-              On successful capture, Stripe transfers the net (sale price minus
-              our 5% fee) directly to your connected account via
-              <span className="font-mono"> transfer_data</span>.
-            </li>
-            <li>
-              Stripe pays out to your bank on the cadence configured in your
-              Express dashboard (typically daily, with a 2-day rolling reserve).
-            </li>
-            <li>
-              Chargebacks and refunds net out of your next payout; the admin
-              team can place a manual hold on your balance if we detect fraud.
-            </li>
+            <li>{tp('how1')}</li>
+            <li>{tp('how2')}</li>
+            <li>{tp('how3')}</li>
+            <li>{tp('how4')}</li>
           </ul>
         </WarmCard>
       </div>

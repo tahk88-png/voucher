@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 /* ═══════════════════════════════════════════════════════════════
    LIVE PULSE INDICATOR — Real-time connection status
@@ -25,24 +26,21 @@ export interface LivePulseIndicatorProps {
 
 const statusConfig: Record<
   ConnectionStatus,
-  { color: string; glow: string; label: string; pulse: boolean }
+  { color: string; glow: string; pulse: boolean }
 > = {
   connected: {
     color: 'var(--ds-success, #4e8a5b)',
     glow: 'rgba(78, 138, 91, 0.4)',
-    label: 'Live',
     pulse: true,
   },
   degraded: {
     color: 'var(--ds-warning, #be8a2e)',
     glow: 'rgba(190, 138, 46, 0.4)',
-    label: 'Degraded',
     pulse: true,
   },
   disconnected: {
     color: 'var(--ds-error, #c84b36)',
     glow: 'rgba(200, 75, 54, 0.3)',
-    label: 'Offline',
     pulse: false,
   },
 };
@@ -55,8 +53,9 @@ export function LivePulseIndicator({
   lastUpdate,
   className = '',
 }: LivePulseIndicatorProps) {
+  const t = useTranslations('dsComponents.livePulseIndicator');
   const cfg = statusConfig[status];
-  const displayLabel = labelOverride ?? cfg.label;
+  const displayLabel = labelOverride ?? t(`status.${status}`);
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
@@ -128,12 +127,12 @@ export function LivePulseIndicator({
             </span>
             {latencyMs != null && (
               <span style={{ color: 'var(--ds-text-secondary)' }}>
-                Latency: {latencyMs}ms
+                {t('latency', { ms: latencyMs })}
               </span>
             )}
             {lastUpdate && (
               <span style={{ color: 'var(--ds-text-tertiary)' }}>
-                Last update: {new Date(lastUpdate).toLocaleTimeString()}
+                {t('lastUpdate', { time: new Date(lastUpdate).toLocaleTimeString() })}
               </span>
             )}
           </div>

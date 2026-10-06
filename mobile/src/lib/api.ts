@@ -1,5 +1,5 @@
 /**
- * Thin typed REST client for the Vouchr backend (the existing Next.js
+ * Thin typed REST client for the GiftHub backend (the existing Next.js
  * app/api/* routes). Auth is bearer-token based: the auth context calls
  * setAuthToken() after login / session restore, and every request attaches
  * `Authorization: Bearer <token>` so the backend's verifyMobileToken path

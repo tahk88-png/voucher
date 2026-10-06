@@ -5,9 +5,12 @@ import { safeParseJson } from '@/lib/utils';
 import { formatCurrency } from '@/lib/utils';
 import { WarmCard } from '@/components/warm-card';
 import EventPurchaseClient from './event-purchase-client';
+import { getTranslations } from 'next-intl/server';
 
 export default async function PublicEventPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const t = await getTranslations('purchase');
+  const tLabels = await getTranslations('labels');
   const event = await prisma.event.findUnique({
     where: { id },
     include: {
@@ -32,7 +35,7 @@ export default async function PublicEventPage({ params }: { params: Promise<{ id
       <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#fcfbf8] via-[#f4f1ea] to-[#f6e1d7]">
         <WarmCard padding="lg" className="max-w-md text-center bg-white">
           <p className="text-sm text-[#6B5744]">
-            This event is not available for ticket purchase.
+            {t('event.notAvailable')}
           </p>
         </WarmCard>
       </div>
@@ -79,19 +82,19 @@ export default async function PublicEventPage({ params }: { params: Promise<{ id
                   style={{ backgroundColor: accentColor }}
                   aria-hidden="true"
                 />
-                {event.merchant?.name || 'Event'}
+                {event.merchant?.name || t('fields.event')}
               </div>
               <h1 className="text-2xl sm:text-3xl font-semibold text-[#2D2721] mt-2">
                 {event.name}
               </h1>
               <p className="text-sm text-[#6B5744] mt-2">
-                {event.description || 'Join us for this amazing event!'}
+                {event.description || t('event.descriptionFallback')}
               </p>
             </div>
             {event.merchant?.brandLogoUrl && (
               <Image
                 src={event.merchant.brandLogoUrl}
-                alt={`${event.merchant?.name || 'Merchant'} logo`}
+                alt={t('logoAlt', { name: event.merchant?.name || t('merchantFallback') })}
                 width={160}
                 height={48}
                 className="h-12 w-auto object-contain"
@@ -103,7 +106,7 @@ export default async function PublicEventPage({ params }: { params: Promise<{ id
           <div className="grid gap-4 sm:grid-cols-2 mt-6 text-sm">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">
-                Date & Time
+                {t('fields.dateTime')}
               </p>
               <p className="text-lg font-semibold text-[#2D2721]">
                 {new Date(event.eventDate).toLocaleString()}
@@ -112,7 +115,7 @@ export default async function PublicEventPage({ params }: { params: Promise<{ id
             {event.location && (
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">
-                  Location
+                  {t('fields.location')}
                 </p>
                 <p className="text-lg font-semibold text-[#2D2721]">{event.location}</p>
                 {event.locationAddress && (
@@ -121,24 +124,24 @@ export default async function PublicEventPage({ params }: { params: Promise<{ id
               </div>
             )}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Price</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.price')}</p>
               <p className="text-lg font-semibold text-[#2D2721]">
-                {event.price > 0 ? formatCurrency(event.price, event.currency) : 'Free'}
+                {event.price > 0 ? formatCurrency(event.price, event.currency) : tLabels('free')}
               </p>
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">
-                Available Tickets
+                {t('event.availableTickets')}
               </p>
               <p className="text-lg font-semibold text-[#2D2721]">
-                {isSoldOut ? 'Sold Out' : `${availableTickets} available`}
+                {isSoldOut ? t('event.soldOut') : t('event.availableCount', { count: availableTickets })}
               </p>
             </div>
           </div>
 
           {event.terms && (
             <div className="pt-4 mt-6 border-t border-[rgba(139,115,85,0.15)]">
-              <p className="text-sm font-semibold text-[#2D2721] mb-2">Terms & Conditions</p>
+              <p className="text-sm font-semibold text-[#2D2721] mb-2">{t('event.terms')}</p>
               <p className="text-sm text-[#6B5744] whitespace-pre-wrap">{event.terms}</p>
             </div>
           )}
@@ -146,8 +149,8 @@ export default async function PublicEventPage({ params }: { params: Promise<{ id
 
         {isSoldOut ? (
           <WarmCard padding="lg" className="text-center bg-white">
-            <p className="text-lg font-semibold text-[#2D2721] mb-2">This event is sold out</p>
-            <p className="text-sm text-[#6B5744]">All tickets have been purchased.</p>
+            <p className="text-lg font-semibold text-[#2D2721] mb-2">{t('event.soldOutTitle')}</p>
+            <p className="text-sm text-[#6B5744]">{t('event.soldOutDescription')}</p>
           </WarmCard>
         ) : (
           <EventPurchaseClient

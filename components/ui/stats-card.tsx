@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { LucideIcon, TrendingUp, TrendingDown } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -26,9 +27,10 @@ export function StatsCard({
   icon: Icon,
   trend,
   href,
-  actionLabel = "Open",
+  actionLabel,
   className,
 }: StatsCardProps) {
+  const t = useTranslations("ui")
   const card = (
     <WarmCard padding="lg" className={cn("", className)}>
       <div className="flex items-start justify-between">
@@ -63,7 +65,7 @@ export function StatsCard({
           )}
           {href && (
             <span className="mt-3 inline-flex text-xs font-semibold text-primary">
-              {actionLabel}
+              {actionLabel ?? t("statsCard.open")}
             </span>
           )}
         </div>

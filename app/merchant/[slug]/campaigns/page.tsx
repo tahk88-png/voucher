@@ -1,5 +1,4 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Campaigns', noIndex: true });
 
 import { notFound, redirect } from 'next/navigation';
 import { eachDayOfInterval, format, startOfDay, subDays } from 'date-fns';
@@ -12,12 +11,18 @@ import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { formatCurrency } from '@/lib/utils';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { Megaphone, TrendingUp, Ticket, DollarSign } from 'lucide-react';
 import { StartSubscriptionButton } from '@/components/billing-actions';
 import { StatsCard } from '@/components/ui/stats-card';
 import { AreaChart } from '@/components/ui/charts';
+import { isSupportedLocale, localeToIntlLocale } from '@/lib/locale-config';
 import CampaignsListClient from './campaigns-list-client';
+
+export async function generateMetadata() {
+  const t = await getTranslations('nav');
+  return pageMetadata({ title: t('campaigns'), noIndex: true });
+}
 
 export default async function CampaignsPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -37,6 +42,8 @@ export default async function CampaignsPage({ params }: { params: Promise<{ slug
   const isAdmin = memberRecord?.role === 'merchant_admin';
 
   const t = await getTranslations('nav');
+  const tc = await getTranslations('merchantCampaigns');
+  const locale = await getLocale();
   const billing = await getMerchantBillingStatus(merchant.id);
 
   const campaigns = await prisma.campaign.findMany({
@@ -117,8 +124,12 @@ export default async function CampaignsPage({ params }: { params: Promise<{ slug
 
   const dayBuckets = eachDayOfInterval({ start: rangeStart, end: rangeEnd });
   const dayIndex = new Map(dayBuckets.map((day, index) => [format(day, 'yyyy-MM-dd'), index]));
+  // Short weekday names in the UI language ("Mon" in English).
+  const weekdayFormat = new Intl.DateTimeFormat(isSupportedLocale(locale) ? localeToIntlLocale[locale] : 'en-GB', {
+    weekday: 'short',
+  });
   const chartData = dayBuckets.map((day) => ({
-    date: format(day, 'EEE'),
+    date: weekdayFormat.format(day),
     revenue: 0,
   }));
 
@@ -142,11 +153,11 @@ export default async function CampaignsPage({ params }: { params: Promise<{ slug
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
             <h1 className="text-2xl font-semibold text-[var(--text)]">{t('campaigns')}</h1>
-            <p className="text-sm text-[var(--text-muted)]">Manage your voucher campaigns.</p>
+            <p className="text-sm text-[var(--text-muted)]">{tc('overview.subtitle')}</p>
           </div>
           {isAdmin && (billing.active || billing.inTrial) ? (
             <WarmButton asChild>
-              <Link href={`/merchant/${slug}/campaigns/new`}>Create campaign</Link>
+              <Link href={`/merchant/${slug}/campaigns/new`}>{tc('overview.createCampaign')}</Link>
             </WarmButton>
           ) : isAdmin ? (
             <StartSubscriptionButton slug={slug} />
@@ -157,11 +168,8 @@ export default async function CampaignsPage({ params }: { params: Promise<{ slug
           <WarmCard padding="lg" className="bg-[var(--bg)] border border-[var(--border)]">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <p className="text-sm font-medium text-[var(--text)]">Subscription required</p>
-                <p className="text-sm text-[var(--text-muted)]">
-                  Your free 60-day campaign trial has ended. Start the 9.90/month plan to create new
-                  campaigns.
-                </p>
+                <p className="text-sm font-medium text-[var(--text)]">{tc('overview.subscriptionRequired')}</p>
+                <p className="text-sm text-[var(--text-muted)]">{tc('overview.trialEnded')}</p>
               </div>
               <StartSubscriptionButton slug={slug} />
             </div>
@@ -170,27 +178,27 @@ export default async function CampaignsPage({ params }: { params: Promise<{ slug
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatsCard
-            title="Total campaigns"
+            title={tc('overview.stats.totalTitle')}
             value={totalCampaigns}
-            description="All campaigns"
+            description={tc('overview.stats.totalDescription')}
             icon={Megaphone}
           />
           <StatsCard
-            title="Active"
+            title={tc('overview.stats.activeTitle')}
             value={activeCampaigns}
-            description="Currently running"
+            description={tc('overview.stats.activeDescription')}
             icon={TrendingUp}
           />
           <StatsCard
-            title="Paid purchases"
+            title={tc('overview.stats.paidTitle')}
             value={totalPaidPurchases}
-            description="Completed orders"
+            description={tc('overview.stats.paidDescription')}
             icon={Ticket}
           />
           <StatsCard
-            title="Revenue"
+            title={tc('overview.stats.revenueTitle')}
             value={formatCurrency(totalRevenue, merchant.defaultCurrency)}
-            description="Paid voucher sales"
+            description={tc('overview.stats.revenueDescription')}
             icon={DollarSign}
           />
         </div>
@@ -209,14 +217,14 @@ export default async function CampaignsPage({ params }: { params: Promise<{ slug
             <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base font-semibold text-[var(--text)]">Weekly revenue</h2>
-                  <p className="text-sm text-[var(--text-muted)]">Paid campaign sales over 7 days.</p>
+                  <h2 className="text-base font-semibold text-[var(--text)]">{tc('overview.weeklyRevenue.title')}</h2>
+                  <p className="text-sm text-[var(--text-muted)]">{tc('overview.weeklyRevenue.description')}</p>
                 </div>
                 <span className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{merchant.defaultCurrency}</span>
               </div>
               <AreaChart
                 data={chartData}
-                areas={[{ dataKey: 'revenue', name: 'Revenue', color: '#9DB5A5' }]}
+                areas={[{ dataKey: 'revenue', name: tc('overview.weeklyRevenue.series'), color: '#9DB5A5' }]}
                 xAxisKey="date"
                 height={240}
                 showLegend={false}

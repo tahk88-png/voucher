@@ -1,7 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import { StarRating } from './star-rating';
 import { ReviewForm } from './review-form';
 import { ThumbsUp } from 'lucide-react';
@@ -35,21 +38,28 @@ interface ReviewListProps {
   merchantId?: string;
   voucherId?: string;
   campaignId?: string;
+  /** Whether the visitor is signed in. Writing and voting need an account. */
+  signedIn: boolean;
 }
 
 type SortOption = 'newest' | 'highest' | 'helpful';
 
-export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProps) {
+export function ReviewList({ merchantId, voucherId, campaignId, signedIn }: ReviewListProps) {
+  const t = useTranslations('reviews.list');
+  const locale = useLocale();
+  const pathname = usePathname();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [total, setTotal] = useState(0);
   const [avgRating, setAvgRating] = useState(0);
   const [sort, setSort] = useState<SortOption>('newest');
   const [loading, setLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
   const [offset, setOffset] = useState(0);
   const limit = 10;
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
+    setLoadFailed(false);
     try {
       const params = new URLSearchParams();
       if (merchantId) params.set('merchantId', merchantId);
@@ -67,7 +77,7 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
       setTotal(data.total);
       setAvgRating(data.avgRating);
     } catch {
-      // Silently fail — empty state is shown
+      setLoadFailed(true);
     } finally {
       setLoading(false);
     }
@@ -95,7 +105,9 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
 
   return (
     <div className="space-y-6">
-      {/* Summary */}
+      {/* Summary and sorting only mean something once there are reviews;
+          "0.0" with sort buttons over an empty list read as a bad rating. */}
+      {total > 0 && (
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div className="flex items-center gap-3">
           <StarRating rating={avgRating} size="lg" showCount={total} />
@@ -108,27 +120,43 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
           {(['newest', 'highest', 'helpful'] as SortOption[]).map((s) => (
             <button
               key={s}
+              type="button"
+              aria-pressed={sort === s}
               onClick={() => { setSort(s); setOffset(0); }}
               className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
               style={{
                 backgroundColor: sort === s ? 'var(--primary)' : 'var(--surface)',
-                color: sort === s ? 'var(--primary-foreground)' : 'var(--text-secondary)',
+                color: sort === s ? 'var(--primary-foreground)' : 'var(--text-muted)',
                 border: sort === s ? 'none' : '1px solid var(--border)',
               }}
             >
-              {s === 'newest' ? 'Newest' : s === 'highest' ? 'Highest' : 'Most Helpful'}
+              {t(`sort.${s}`)}
             </button>
           ))}
         </div>
       </div>
+      )}
 
-      {/* Review Form */}
-      <ReviewForm
-        merchantId={merchantId}
-        voucherId={voucherId}
-        campaignId={campaignId}
-        onSubmit={fetchReviews}
-      />
+      {/* Review Form — signed-out visitors used to get the form and then an
+          "Unauthorized" error on submit. */}
+      {signedIn ? (
+        <ReviewForm
+          merchantId={merchantId}
+          voucherId={voucherId}
+          campaignId={campaignId}
+          onSubmit={fetchReviews}
+        />
+      ) : (
+        <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
+          <Link
+            href={`/login?callbackUrl=${encodeURIComponent(pathname || '/')}`}
+            className="font-medium underline underline-offset-2"
+            style={{ color: 'var(--primary)' }}
+          >
+            {t('signInToReview')}
+          </Link>
+        </p>
+      )}
 
       {/* Reviews */}
       {loading ? (
@@ -144,12 +172,28 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
             </div>
           ))}
         </div>
+      ) : loadFailed ? (
+        <div
+          role="alert"
+          className="rounded-xl p-6 text-center"
+          style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
+        >
+          <p style={{ color: 'var(--text-muted)' }}>{t('loadFailed')}</p>
+          <button
+            type="button"
+            onClick={fetchReviews}
+            className="mt-2 text-sm font-medium underline underline-offset-2"
+            style={{ color: 'var(--primary)' }}
+          >
+            {t('tryAgain')}
+          </button>
+        </div>
       ) : reviews.length === 0 ? (
         <div
           className="rounded-xl p-8 text-center"
           style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
         >
-          <p style={{ color: 'var(--text-secondary)' }}>No reviews yet. Be the first to review!</p>
+          <p style={{ color: 'var(--text-muted)' }}>{t('empty')}</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -172,25 +216,25 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
                   ) : (
                     <div
                       className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium"
-                      style={{ backgroundColor: 'var(--muted)', color: 'var(--text-secondary)' }}
+                      style={{ backgroundColor: 'var(--muted)', color: 'var(--text-muted)' }}
                     >
                       {(review.user.name || '?')[0].toUpperCase()}
                     </div>
                   )}
                   <div>
                     <p className="text-sm font-medium" style={{ color: 'var(--text)' }}>
-                      {review.user.name || 'Anonymous'}
+                      {review.user.name || t('anonymous')}
                       {review.verified && (
                         <span
                           className="ml-2 text-xs px-1.5 py-0.5 rounded"
                           style={{ backgroundColor: 'var(--primary)', color: 'var(--primary-foreground)' }}
                         >
-                          Verified
+                          {t('verified')}
                         </span>
                       )}
                     </p>
-                    <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                      {new Date(review.createdAt).toLocaleDateString(undefined, {
+                    <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                      {new Date(review.createdAt).toLocaleDateString(locale, {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric',
@@ -208,24 +252,31 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
               )}
 
               {review.comment && (
-                <p className="mt-1.5 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                <p className="mt-1.5 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                   {review.comment}
                 </p>
               )}
 
               <div className="mt-3 flex items-center gap-2">
+                {signedIn ? (
                 <button
+                  type="button"
                   onClick={() => handleVote(review.id, true)}
                   className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs transition-colors hover:opacity-80"
                   style={{
                     backgroundColor: 'var(--background)',
                     border: '1px solid var(--border)',
-                    color: 'var(--text-secondary)',
+                    color: 'var(--text-muted)',
                   }}
                 >
-                  <ThumbsUp size={13} />
-                  Helpful ({review.helpful})
+                  <ThumbsUp size={13} aria-hidden="true" />
+                  {t('helpfulButton', { count: review.helpful })}
                 </button>
+                ) : review.helpful > 0 ? (
+                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                    {t('foundHelpful', { count: review.helpful })}
+                  </span>
+                ) : null}
               </div>
             </div>
           ))}
@@ -241,10 +292,10 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
             className="px-3 py-1.5 rounded-lg text-sm transition-opacity disabled:opacity-30"
             style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text)' }}
           >
-            Previous
+            {t('previous')}
           </button>
-          <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-            Page {currentPage} of {totalPages}
+          <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
+            {t('pageOf', { current: currentPage, total: totalPages })}
           </span>
           <button
             onClick={() => setOffset(offset + limit)}
@@ -252,7 +303,7 @@ export function ReviewList({ merchantId, voucherId, campaignId }: ReviewListProp
             className="px-3 py-1.5 rounded-lg text-sm transition-opacity disabled:opacity-30"
             style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text)' }}
           >
-            Next
+            {t('next')}
           </button>
         </div>
       )}

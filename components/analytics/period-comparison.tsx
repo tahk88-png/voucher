@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { WarmCard } from '@/components/warm-card';
 import { TrendChart } from '@/components/analytics/trend-chart';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 type Period = 'day' | 'week' | 'month' | 'quarter' | 'year';
 type Metric = 'revenue' | 'redemptions' | 'purchases' | 'referrals' | 'customers';
@@ -24,23 +25,12 @@ interface PeriodComparisonProps {
   defaultPeriod?: Period;
 }
 
-const PERIOD_LABELS: Record<Period, string> = {
-  day: 'Day',
-  week: 'Week',
-  month: 'Month',
-  quarter: 'Quarter',
-  year: 'Year',
-};
+const PERIODS: Period[] = ['day', 'week', 'month', 'quarter', 'year'];
 
-const METRIC_LABELS: Record<Metric, string> = {
-  revenue: 'Revenue',
-  redemptions: 'Redemptions',
-  purchases: 'Purchases',
-  referrals: 'Referrals',
-  customers: 'Customers',
-};
+const METRICS: Metric[] = ['revenue', 'redemptions', 'purchases', 'referrals', 'customers'];
 
 export function PeriodComparison({ slug, defaultMetric = 'revenue', defaultPeriod = 'month' }: PeriodComparisonProps) {
+  const t = useTranslations('dsComponents.periodComparison');
   const [metric, setMetric] = useState<Metric>(defaultMetric);
   const [period, setPeriod] = useState<Period>(defaultPeriod);
   const [data, setData] = useState<ComparisonData | null>(null);
@@ -71,19 +61,19 @@ export function PeriodComparison({ slug, defaultMetric = 'revenue', defaultPerio
     <WarmCard padding="lg" className="bg-white">
       {/* Header with selectors */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-        <h3 className="text-lg font-semibold text-[var(--text)]">Period Comparison</h3>
+        <h3 className="text-lg font-semibold text-[var(--text)]">{t('title')}</h3>
         <div className="flex gap-2">
           <select
             value={metric}
             onChange={(e) => setMetric(e.target.value as Metric)}
             className="px-3 py-1.5 rounded-lg border border-[var(--border)] text-sm bg-white text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
           >
-            {(Object.keys(METRIC_LABELS) as Metric[]).map((m) => (
-              <option key={m} value={m}>{METRIC_LABELS[m]}</option>
+            {METRICS.map((m) => (
+              <option key={m} value={m}>{t(`metric.${m}`)}</option>
             ))}
           </select>
           <div className="flex rounded-lg border border-[var(--border)] overflow-hidden">
-            {(Object.keys(PERIOD_LABELS) as Period[]).map((p) => (
+            {PERIODS.map((p) => (
               <button
                 key={p}
                 onClick={() => setPeriod(p)}
@@ -93,7 +83,7 @@ export function PeriodComparison({ slug, defaultMetric = 'revenue', defaultPerio
                     : 'bg-white text-[var(--text-muted)] hover:bg-[var(--surface-dim)]'
                 }`}
               >
-                {PERIOD_LABELS[p]}
+                {t(`period.${p}`)}
               </button>
             ))}
           </div>
@@ -102,7 +92,7 @@ export function PeriodComparison({ slug, defaultMetric = 'revenue', defaultPerio
 
       {loading ? (
         <div className="flex items-center justify-center h-32 text-[var(--text-muted)]">
-          Loading...
+          {t('loading')}
         </div>
       ) : data ? (
         <div className="space-y-4">
@@ -113,7 +103,7 @@ export function PeriodComparison({ slug, defaultMetric = 'revenue', defaultPerio
                 {formatValue(data.current)}
               </div>
               <div className="text-sm text-[var(--text-muted)]">
-                Previous: {formatValue(data.previous)}
+                {t('previous', { value: formatValue(data.previous) })}
               </div>
             </div>
 
@@ -151,7 +141,7 @@ export function PeriodComparison({ slug, defaultMetric = 'revenue', defaultPerio
         </div>
       ) : (
         <div className="text-sm text-[var(--text-muted)] text-center py-8">
-          No data available
+          {t('noData')}
         </div>
       )}
     </WarmCard>

@@ -12,7 +12,8 @@ import {
   Lock,
   type LucideIcon,
 } from 'lucide-react';
-import { BADGES, type BadgeDefinition } from '@/lib/gamification-constants';
+import { useLocale, useTranslations } from 'next-intl';
+import { orderBadgesForDisplay } from '@/app/(user)/app/_components/badges';
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Trophy,
@@ -33,90 +34,86 @@ interface EarnedBadge {
 
 interface BadgeDisplayProps {
   badges: EarnedBadge[];
+  /** Also list the badges not earned yet (as locked). */
   showAll?: boolean;
 }
 
+/**
+ * Badge grid with visible, translated names. Earned badges come first; locked
+ * ones keep their own icon (dimmed, with a lock) so they are distinguishable.
+ */
 export function BadgeDisplay({ badges, showAll = false }: BadgeDisplayProps) {
-  const earnedSet = new Set(badges.map((b) => b.badgeType));
-  const displayBadges = showAll ? BADGES : BADGES.filter((b) => earnedSet.has(b.type));
+  const t = useTranslations('achievements');
+  const locale = useLocale();
+  const earnedAtByType = new Map(badges.map((b) => [b.badgeType, b.earnedAt]));
+  const ordered = orderBadgesForDisplay(earnedAtByType.keys());
+  const displayBadges = showAll ? ordered : ordered.filter((b) => b.earned);
 
-  if (displayBadges.length === 0 && !showAll) {
+  if (displayBadges.length === 0) {
     return (
       <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-        No badges earned yet.
+        {t('noBadgesYet')}
       </p>
     );
   }
 
   return (
-    <div className="flex flex-wrap gap-3">
+    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
       {displayBadges.map((badge) => {
-        const earned = earnedSet.has(badge.type);
-        const earnedData = badges.find((b) => b.badgeType === badge.type);
+        const Icon = ICON_MAP[badge.icon] || Star;
+        const name = t(`badges.${badge.type}.name` as never);
+        const description = t(`badges.${badge.type}.description` as never);
+        const earnedAt = earnedAtByType.get(badge.type);
         return (
-          <BadgeIcon
+          <li
             key={badge.type}
-            badge={badge}
-            earned={earned}
-            earnedAt={earnedData?.earnedAt}
-          />
+            className="flex flex-col items-center text-center gap-2 rounded-xl p-3"
+            style={{
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--border)',
+              opacity: badge.earned ? 1 : 0.7,
+            }}
+          >
+            <div
+              className="relative w-12 h-12 rounded-xl flex items-center justify-center"
+              style={{ backgroundColor: badge.earned ? 'var(--primary)' : 'var(--muted)' }}
+            >
+              <Icon
+                size={22}
+                aria-hidden="true"
+                style={{ color: badge.earned ? 'var(--primary-foreground)' : 'var(--text-secondary)' }}
+              />
+              {!badge.earned && (
+                <span
+                  className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
+                >
+                  <Lock size={11} aria-hidden="true" style={{ color: 'var(--text-secondary)' }} />
+                </span>
+              )}
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-medium leading-tight" style={{ color: 'var(--text)' }}>
+                {name}
+              </p>
+              <p className="text-xs mt-1 leading-snug" style={{ color: 'var(--text-secondary)' }}>
+                {description}
+              </p>
+              <p className="text-[11px] mt-1" style={{ color: 'var(--text-secondary)' }}>
+                {badge.earned && earnedAt
+                  ? t('earnedOn', {
+                      date: new Date(earnedAt).toLocaleDateString(locale, {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      }),
+                    })
+                  : t('locked')}
+              </p>
+            </div>
+          </li>
         );
       })}
-    </div>
-  );
-}
-
-function BadgeIcon({
-  badge,
-  earned,
-  earnedAt,
-}: {
-  badge: BadgeDefinition;
-  earned: boolean;
-  earnedAt?: string | Date;
-}) {
-  const Icon = earned ? (ICON_MAP[badge.icon] || Star) : Lock;
-
-  return (
-    <div className="group relative" title={`${badge.name}: ${badge.description}`}>
-      <div
-        className={`w-14 h-14 rounded-xl flex items-center justify-center transition-transform ${
-          earned ? 'hover:scale-110' : ''
-        }`}
-        style={{
-          backgroundColor: earned ? 'var(--primary)' : 'var(--muted)',
-          opacity: earned ? 1 : 0.4,
-        }}
-      >
-        <Icon
-          size={24}
-          style={{
-            color: earned ? 'var(--primary-foreground)' : 'var(--text-secondary)',
-          }}
-        />
-      </div>
-
-      {/* Tooltip */}
-      <div
-        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 rounded-lg text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10"
-        style={{
-          backgroundColor: 'var(--text)',
-          color: 'var(--background)',
-        }}
-      >
-        <p className="font-medium">{badge.name}</p>
-        <p className="mt-0.5 opacity-80">{badge.description}</p>
-        {earned && earnedAt && (
-          <p className="mt-0.5 opacity-60">
-            Earned{' '}
-            {new Date(earnedAt).toLocaleDateString(undefined, {
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric',
-            })}
-          </p>
-        )}
-      </div>
-    </div>
+    </ul>
   );
 }

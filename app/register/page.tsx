@@ -2,9 +2,9 @@
 
 import { Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   Gift, ArrowLeft, AlertCircle, Mail, Lock, User,
-  CheckCircle, Shield, Sparkles, Zap,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,13 +13,13 @@ import PasswordStrengthMeter from "@/components/password-strength-meter";
 import { checkPasswordStrength } from "@/lib/password-strength";
 
 function RegisterForm() {
+  const t = useTranslations("authPages.register");
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
 
   const passwordResult = checkPasswordStrength(password);
 
@@ -28,7 +28,7 @@ function RegisterForm() {
     setError(null);
 
     if (passwordResult.score < 2) {
-      setError("Password is too weak. Please choose a stronger password.");
+      setError(t("errorWeak"));
       return;
     }
 
@@ -50,47 +50,24 @@ function RegisterForm() {
       if (!res.ok) {
         if (data.details) {
           const msgs = Object.values(data.details).flat();
-          setError(msgs.join(". ") || "Invalid input.");
+          setError(msgs.join(". ") || t("errorInvalid"));
         } else {
-          setError(data.error || "Something went wrong.");
+          setError(data.error || t("errorFallback"));
         }
         setIsLoading(false);
         return;
       }
 
-      setSuccess(true);
+      // Registration does not send a verification e-mail: go straight to
+      // sign-in with the address prefilled.
+      const normalizedEmail = email.trim().toLowerCase();
+      router.push(`/login?registered=1&email=${encodeURIComponent(normalizedEmail)}`);
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError(t("errorGeneric"));
     } finally {
       setIsLoading(false);
     }
   };
-
-  if (success) {
-    return (
-      <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF7E0] via-[#FFFBF5] to-[#F0E8FF]" />
-        <div className="relative z-10 w-full max-w-[420px] animate-slide-up">
-          <div className="glass rounded-[var(--r-xl)] shadow-xl p-8 text-center">
-            <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="h-8 w-8 text-green-600" />
-            </div>
-            <h1 className="text-xl font-bold text-[var(--text)] mb-2">Account Created!</h1>
-            <p className="text-sm text-[var(--text-muted)] mb-6">
-              We sent a verification code to <span className="font-medium text-[var(--text)]">{email}</span>.
-              Sign in to verify your email and get started.
-            </p>
-            <button
-              onClick={() => router.push("/login")}
-              className="w-full h-12 rounded-[var(--r-sm)] gradient-brand font-semibold text-[var(--text)] shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-200 btn-press"
-            >
-              Go to Sign In
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
@@ -104,7 +81,7 @@ function RegisterForm() {
           className="flex items-center gap-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors px-3 py-1.5 rounded-full hover:bg-white/60 backdrop-blur-sm"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
-          <span>Back to homepage</span>
+          <span>{t("backToHome")}</span>
         </Link>
       </div>
 
@@ -116,8 +93,8 @@ function RegisterForm() {
             </div>
             <span className="text-2xl font-bold text-[var(--text)] tracking-tight">GiftHub</span>
           </div>
-          <h1 className="text-xl font-bold text-[var(--text)]">Create your account</h1>
-          <p className="text-sm text-[var(--text-muted)] mt-0.5">Start discovering and managing vouchers</p>
+          <h1 className="text-xl font-bold text-[var(--text)]">{t("title")}</h1>
+          <p className="text-sm text-[var(--text-muted)] mt-0.5">{t("subtitle")}</p>
         </div>
 
         <div className="glass rounded-[var(--r-xl)] shadow-xl overflow-hidden">
@@ -131,13 +108,14 @@ function RegisterForm() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium text-[var(--text)]">Full name</Label>
+                <Label htmlFor="register-name" className="text-sm font-medium text-[var(--text)]">{t("nameLabel")}</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
+                    id="register-name"
                     type="text"
                     autoComplete="name"
-                    placeholder="Jane Doe"
+                    placeholder={t("namePlaceholder")}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-white"
@@ -147,13 +125,14 @@ function RegisterForm() {
               </div>
 
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium text-[var(--text)]">Email address</Label>
+                <Label htmlFor="register-email" className="text-sm font-medium text-[var(--text)]">{t("emailLabel")}</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
+                    id="register-email"
                     type="email"
                     autoComplete="email"
-                    placeholder="you@example.com"
+                    placeholder={t("emailPlaceholder")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-white"
@@ -163,13 +142,14 @@ function RegisterForm() {
               </div>
 
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium text-[var(--text)]">Password</Label>
+                <Label htmlFor="register-password" className="text-sm font-medium text-[var(--text)]">{t("passwordLabel")}</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-muted)] pointer-events-none" />
                   <Input
+                    id="register-password"
                     type="password"
                     autoComplete="new-password"
-                    placeholder="Min. 8 characters"
+                    placeholder={t("passwordPlaceholder")}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="pl-10 h-12 rounded-[var(--r-sm)] border-[var(--border)] focus:border-[var(--primary)] focus:ring-1 focus:ring-[var(--primary)] bg-white"
@@ -183,43 +163,29 @@ function RegisterForm() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-12 rounded-[var(--r-sm)] gradient-brand font-semibold text-[var(--text)] shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-200 btn-press disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full h-12 rounded-[var(--r-sm)] gradient-brand font-semibold text-[var(--primary-foreground)] shadow-md hover:shadow-lg hover:brightness-105 transition-all duration-200 btn-press disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
                     <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-                    Creating account...
+                    {t("submitting")}
                   </>
                 ) : (
-                  "Create account"
+                  t("submit")
                 )}
               </button>
             </form>
 
             <div className="mt-4 text-center">
               <p className="text-sm text-[var(--text-muted)]">
-                Already have an account?{" "}
+                {t("haveAccount")}{" "}
                 <Link href="/login" className="font-medium text-[var(--primary)] hover:underline">
-                  Sign in
+                  {t("signIn")}
                 </Link>
               </p>
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-4 py-3 px-6 border-t border-[var(--border)] bg-[var(--surface-muted)]">
-            <div className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-              <Shield className="w-3 h-3" />
-              <span>SSL</span>
-            </div>
-            <div className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-              <Sparkles className="w-3 h-3" />
-              <span>GiftHub</span>
-            </div>
-            <div className="flex items-center gap-1 text-xs text-[var(--text-muted)]">
-              <Zap className="w-3 h-3" />
-              <span>Fast</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>

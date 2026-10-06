@@ -53,13 +53,14 @@ function PaymentCancelContent() {
 }
 
 export default function PaymentCancelPage() {
+  const tCommon = useTranslations('common');
   return (
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center p-4">
           <WarmCard padding="lg" className="w-full max-w-md bg-white">
             <div className="flex flex-col items-center gap-4">
-              <p className="text-sm text-[#6B5744]">Loading...</p>
+              <p className="text-sm text-[#6B5744]">{tCommon('loading')}</p>
             </div>
           </WarmCard>
         </div>

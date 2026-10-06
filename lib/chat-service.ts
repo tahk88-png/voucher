@@ -1,37 +1,51 @@
 import { prisma } from './prisma';
 import { isAiConfigured } from './ai';
 import { getContactEmail } from './app-url';
+import { publicContactEmail } from './contact-address';
 import OpenAI from 'openai';
 
 const DEFAULT_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini';
 
 /**
- * Returns a comprehensive system prompt about the Vouchr platform.
+ * Where to send people for human help: the support mailbox when a real one is
+ * configured, otherwise the contact form (a placeholder address such as
+ * support@localhost is never handed out as real).
+ */
+export function getHumanSupportHint(): string {
+  const email = publicContactEmail(getContactEmail());
+  return email ? email : 'our team via the contact form at /contact';
+}
+
+// Whole-word greeting (Unicode-aware, so Cyrillic works too).
+const GREETING = /(^|[^\p{L}])(hi|hello|hey|hallo|tere|привет)(?=$|[^\p{L}])/iu;
+
+/**
+ * Returns a comprehensive system prompt about the GiftHub platform.
  */
 export function getSystemPrompt(): string {
-  return `You are Vouchr Assistant, a helpful AI support agent for the Vouchr platform.
+  return `You are GiftHub Assistant, an automated AI assistant for the GiftHub platform. You are not a human; if asked, say so.
 
-ABOUT VOUCHR:
-Vouchr is a modern voucher, gift card, and event ticketing platform that connects merchants with customers. Merchants can create campaigns, issue vouchers, sell gift cards, and manage events with ticket sales.
+ABOUT GIFTHUB:
+GiftHub is a modern voucher, gift card, and event ticketing platform that connects merchants with customers. Merchants can create campaigns, issue vouchers, sell gift cards, and manage events with ticket sales.
 
 KEY FEATURES:
 - Vouchers: Percentage or fixed-amount discounts issued by merchants. Can be redeemed at checkout using a code or QR scan.
 - Gift Cards: Prepaid store credit cards that can be purchased and sent as gifts. Available in various denominations.
 - Event Tickets: Digital tickets for merchant-hosted events (concerts, workshops, etc.) with QR-code entry.
 - Referral Program: Earn rewards by referring friends. Both referrer and referee get benefits.
-- Cashback: Earn cashback on qualifying purchases through Vouchr.
+- Cashback: Earn cashback on qualifying purchases through GiftHub.
 
 COMMON QUESTIONS:
 - Redemption: Go to the merchant's location or website, present your voucher code or QR code at checkout.
 - Gift Card Balance: Check your balance in the app under "My Gift Cards" or contact the merchant.
 - Expired Vouchers: Unfortunately, expired vouchers cannot be redeemed. Check validity dates in your account.
 - Refunds: Refund policies vary by merchant. Contact the merchant directly for refund requests.
-- Account Issues: For login problems, try the "Forgot Password" link or use magic link login via email.
+- Account Issues: For login problems, try the "Forgot password?" link on the sign-in page.
 - Billing: All payments are processed securely through Stripe. Receipts are emailed after purchase.
 
 SUPPORT POLICIES:
 - Be friendly, concise, and helpful.
-- If you don't know the answer, suggest contacting ${getContactEmail()}.
+- If you don't know the answer, suggest contacting ${getHumanSupportHint()}.
 - Never share personal data or make promises about refunds/compensation.
 - For technical issues, suggest clearing browser cache, trying a different browser, or checking internet connection.
 - Escalate complex billing disputes or account security issues to human support.
@@ -117,7 +131,7 @@ export async function processMessage(
 
       aiContent = response.choices[0]?.message?.content || 'I apologize, I was unable to generate a response. Please try again.';
     } catch {
-      aiContent = `I apologize, I'm having trouble connecting right now. Please try again in a moment, or contact ${getContactEmail()} for immediate help.`;
+      aiContent = `I apologize, I'm having trouble connecting right now. Please try again in a moment, or contact ${getHumanSupportHint()}.`;
     }
   } else {
     // Fallback when AI is not configured
@@ -145,11 +159,11 @@ export async function processMessage(
 /**
  * Basic keyword-matching fallback when OpenAI is not configured.
  */
-function getFallbackResponse(message: string): string {
+export function getFallbackResponse(message: string): string {
   const lower = message.toLowerCase();
 
   if (lower.includes('refund') || lower.includes('money back')) {
-    return `Refund policies are set by each merchant. Please contact the merchant directly for refund requests. If you need further help, reach out to ${getContactEmail()}.`;
+    return `Refund policies are set by each merchant. Please contact the merchant directly for refund requests. If you need further help, reach out to ${getHumanSupportHint()}.`;
   }
   if (lower.includes('gift card') || lower.includes('balance')) {
     return 'You can check your gift card balance in the app under "My Gift Cards". Each card shows its remaining balance and expiry date.';
@@ -161,11 +175,12 @@ function getFallbackResponse(message: string): string {
     return 'Your event tickets are available in your account under "My Tickets". Show the QR code at the venue entrance for check-in.';
   }
   if (lower.includes('password') || lower.includes('login') || lower.includes('sign in')) {
-    return 'If you\'re having trouble logging in, try the "Forgot Password" link on the login page, or use the magic link option to receive a login link via email.';
+    return 'If you\'re having trouble signing in, use the "Forgot password?" link on the sign-in page to reset your password.';
   }
-  if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) {
-    return 'Hello! Welcome to Vouchr support. How can I help you today?';
+  // Whole words only: includes('hi') used to match "this", "which", "shipping"…
+  if (GREETING.test(message)) {
+    return 'Hello! I\'m GiftHub\'s automated assistant. How can I help you today?';
   }
 
-  return `Thank you for your message. For the best assistance, please describe your issue in detail. You can also reach our support team at ${getContactEmail()}.`;
+  return `Thank you for your message. For the best assistance, please describe your issue in detail. You can also reach ${getHumanSupportHint()}.`;
 }

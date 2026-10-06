@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import { Input } from "@/components/ui/input"
@@ -42,6 +43,11 @@ interface OrderItem {
 
 export default function B2BOrgDetailPage() {
   const params = useParams()
+  const t = useTranslations("b2b.workspace")
+  const tc = useTranslations("common")
+  const te = useTranslations("b2b.enums")
+  const enumLabel = (group: string, value: string) =>
+    te.has(`${group}.${value}`) ? te(`${group}.${value}`) : value
   const orgId = typeof params?.orgId === "string" ? params.orgId : params?.orgId?.[0]
 
   const [org, setOrg] = useState<OrgItem | null>(null)
@@ -79,10 +85,10 @@ export default function B2BOrgDetailPage() {
       const voucherData = await voucherRes.json()
       const orderData = await orderRes.json()
 
-      if (!orgRes.ok) throw new Error(orgData?.error || "Failed to load org")
-      if (!campaignRes.ok) throw new Error(campaignData?.error || "Failed to load campaigns")
-      if (!voucherRes.ok) throw new Error(voucherData?.error || "Failed to load vouchers")
-      if (!orderRes.ok) throw new Error(orderData?.error || "Failed to load orders")
+      if (!orgRes.ok) throw new Error(orgData?.error || t("errors.loadOrg"))
+      if (!campaignRes.ok) throw new Error(campaignData?.error || t("errors.loadCampaigns"))
+      if (!voucherRes.ok) throw new Error(voucherData?.error || t("errors.loadVouchers"))
+      if (!orderRes.ok) throw new Error(orderData?.error || t("errors.loadOrders"))
 
       const orgMatch = (orgData.orgs ?? []).find((item: OrgItem) => item.id === orgId) ?? null
       setOrg(orgMatch)
@@ -90,11 +96,11 @@ export default function B2BOrgDetailPage() {
       setVouchers(voucherData.vouchers ?? [])
       setOrders(orderData.orders ?? [])
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load")
+      setError(err instanceof Error ? err.message : t("errors.load"))
     } finally {
       setLoading(false)
     }
-  }, [orgId])
+  }, [orgId, t])
 
   useEffect(() => {
     refresh()
@@ -125,11 +131,11 @@ export default function B2BOrgDetailPage() {
         }),
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || "Failed to create campaign")
+      if (!res.ok) throw new Error(data?.error || t("errors.createCampaign"))
       setCampaignName("")
       await refresh()
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create campaign")
+      setError(err instanceof Error ? err.message : t("errors.createCampaign"))
     } finally {
       setCreating(false)
     }
@@ -145,10 +151,10 @@ export default function B2BOrgDetailPage() {
         body: JSON.stringify({ quantity: 10, activateNow: true }),
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || "Failed to issue vouchers")
+      if (!res.ok) throw new Error(data?.error || t("errors.issueVouchers"))
       await refresh()
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to issue vouchers")
+      setError(err instanceof Error ? err.message : t("errors.issueVouchers"))
     }
   }
 
@@ -169,15 +175,22 @@ export default function B2BOrgDetailPage() {
         body: JSON.stringify({ name: editName, valueAmount: editValue }),
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || "Failed to update campaign")
+      if (!res.ok) throw new Error(data?.error || t("errors.updateCampaign"))
       setEditingId(null)
       await refresh()
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to update campaign")
+      setError(err instanceof Error ? err.message : t("errors.updateCampaign"))
     } finally {
       setSaving(false)
     }
   }
+
+  const campaignActionError = (action: "activate" | "pause" | "archive") =>
+    action === "activate"
+      ? t("errors.activateCampaign")
+      : action === "pause"
+        ? t("errors.pauseCampaign")
+        : t("errors.archiveCampaign")
 
   const handleCampaignAction = async (campaignId: string, action: "activate" | "pause" | "archive") => {
     if (!orgId) return
@@ -187,10 +200,10 @@ export default function B2BOrgDetailPage() {
         method: "POST",
       })
       const data = await res.json()
-      if (!res.ok) throw new Error(data?.error || `Failed to ${action} campaign`)
+      if (!res.ok) throw new Error(data?.error || campaignActionError(action))
       await refresh()
     } catch (err) {
-      setError(err instanceof Error ? err.message : `Failed to ${action} campaign`)
+      setError(err instanceof Error ? err.message : campaignActionError(action))
     }
   }
 
@@ -198,130 +211,130 @@ export default function B2BOrgDetailPage() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#2D2721]">{org?.name ?? "Organization"}</h1>
-          <p className="text-[#6B5744]">B2B workspace overview</p>
+          <h1 className="text-3xl font-bold text-[#2D2721]">{org?.name ?? t("fallbackName")}</h1>
+          <p className="text-[#6B5744]">{t("subtitle")}</p>
         </div>
         <div className="flex items-center gap-2">
           <WarmButton asChild variant="outline" size="sm">
-            <Link href={`/app/b2b/orgs/${orgId}/reports`}>Reports</Link>
+            <Link href={`/app/b2b/orgs/${orgId}/reports`}>{t("reports")}</Link>
           </WarmButton>
           <WarmButton asChild variant="outline" size="sm">
-            <Link href={`/app/b2b/orgs/${orgId}/audit`}>Audit</Link>
+            <Link href={`/app/b2b/orgs/${orgId}/audit`}>{t("audit")}</Link>
           </WarmButton>
           <WarmButton asChild variant="outline" size="sm">
-            <Link href={`/app/b2b/orgs/${orgId}/keys`}>Partner Keys</Link>
+            <Link href={`/app/b2b/orgs/${orgId}/keys`}>{t("partnerKeys")}</Link>
           </WarmButton>
           <WarmButton asChild variant="outline" size="sm">
-            <Link href="/app/b2b">Back to orgs</Link>
+            <Link href="/app/b2b">{t("backToOrgs")}</Link>
           </WarmButton>
         </div>
       </div>
 
-      {loading && <div className="text-sm text-[#8B7355]">Loading workspace...</div>}
+      {loading && <div className="text-sm text-[#8B7355]">{t("loading")}</div>}
       {error && <div className="text-sm text-red-600">{error}</div>}
 
       <div className="grid gap-4 md:grid-cols-3">
         <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-          <div className="text-xs text-[#8B7355] uppercase">Campaigns</div>
+          <div className="text-xs text-[#8B7355] uppercase">{t("stats.campaigns")}</div>
           <div className="text-2xl font-semibold text-[#2D2721] mt-2">{totals.campaigns}</div>
         </WarmCard>
         <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-          <div className="text-xs text-[#8B7355] uppercase">Vouchers</div>
+          <div className="text-xs text-[#8B7355] uppercase">{t("stats.vouchers")}</div>
           <div className="text-2xl font-semibold text-[#2D2721] mt-2">{totals.vouchers}</div>
         </WarmCard>
         <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-          <div className="text-xs text-[#8B7355] uppercase">Orders</div>
+          <div className="text-xs text-[#8B7355] uppercase">{t("stats.orders")}</div>
           <div className="text-2xl font-semibold text-[#2D2721] mt-2">{totals.orders}</div>
         </WarmCard>
       </div>
 
       <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-        <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Create campaign</h2>
+        <h2 className="text-lg font-semibold text-[#2D2721] mb-4">{t("create.title")}</h2>
         <div className="grid gap-3 md:grid-cols-4">
           <div className="space-y-1.5">
             <label htmlFor="b2b-campaign-name" className="text-sm font-medium text-[#2D2721]">
-              Campaign name
+              {t("create.name")}
             </label>
             <Input
               id="b2b-campaign-name"
-              placeholder="Campaign name"
+              placeholder={t("create.name")}
               value={campaignName}
               onChange={(e) => setCampaignName(e.target.value)}
             />
           </div>
           <div className="space-y-1.5">
             <label htmlFor="b2b-campaign-value" className="text-sm font-medium text-[#2D2721]">
-              Value (minor units)
+              {t("create.value")}
             </label>
             <Input
               id="b2b-campaign-value"
               type="number"
-              placeholder="Value (minor units)"
+              placeholder={t("create.value")}
               value={campaignValue}
               onChange={(e) => setCampaignValue(Number(e.target.value))}
             />
           </div>
           <div className="space-y-1.5">
             <label htmlFor="b2b-campaign-currency" className="text-sm font-medium text-[#2D2721]">
-              Currency
+              {t("create.currency")}
             </label>
             <Input
               id="b2b-campaign-currency"
-              placeholder="Currency"
+              placeholder={t("create.currency")}
               value={campaignCurrency}
               onChange={(e) => setCampaignCurrency(e.target.value.toUpperCase())}
             />
           </div>
           <WarmButton onClick={handleCreateCampaign} isLoading={creating}>
-            Create
+            {t("create.submit")}
           </WarmButton>
         </div>
       </WarmCard>
 
       <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-[#2D2721]">Campaigns</h2>
+          <h2 className="text-lg font-semibold text-[#2D2721]">{t("campaigns.title")}</h2>
         </div>
         <div className="space-y-3">
-          {campaigns.length === 0 && <div className="text-sm text-[#8B7355]">No campaigns yet.</div>}
+          {campaigns.length === 0 && <div className="text-sm text-[#8B7355]">{t("campaigns.empty")}</div>}
           {campaigns.map((campaign) => (
             <div key={campaign.id} className="border border-[rgba(139,115,85,0.15)] rounded-[16px] p-4">
               {editingId === campaign.id ? (
                 <div className="grid gap-3 md:grid-cols-4 items-end">
                   <div className="space-y-1.5">
-                    <label className="text-xs text-[#8B7355]">Name</label>
+                    <label className="text-xs text-[#8B7355]">{t("campaigns.name")}</label>
                     <Input value={editName} onChange={(e) => setEditName(e.target.value)} />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs text-[#8B7355]">Value</label>
+                    <label className="text-xs text-[#8B7355]">{t("campaigns.value")}</label>
                     <Input type="number" value={editValue} onChange={(e) => setEditValue(Number(e.target.value))} />
                   </div>
-                  <WarmButton size="sm" onClick={handleSaveEdit} isLoading={saving}>Save</WarmButton>
-                  <WarmButton size="sm" variant="outline" onClick={() => setEditingId(null)}>Cancel</WarmButton>
+                  <WarmButton size="sm" onClick={handleSaveEdit} isLoading={saving}>{tc("save")}</WarmButton>
+                  <WarmButton size="sm" variant="outline" onClick={() => setEditingId(null)}>{tc("cancel")}</WarmButton>
                 </div>
               ) : (
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <div className="font-medium text-[#2D2721]">{campaign.name}</div>
                     <div className="text-xs text-[#8B7355]">
-                      {campaign.status} &bull; {campaign.valueType} &bull; {campaign.valueAmount} {campaign.currency}
+                      {enumLabel("campaignStatus", campaign.status)} &bull; {enumLabel("valueType", campaign.valueType)} &bull; {campaign.valueAmount} {campaign.currency}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     {campaign.status === "draft" && (
-                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "activate")}>Activate</WarmButton>
+                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "activate")}>{t("campaigns.activate")}</WarmButton>
                     )}
                     {campaign.status === "active" && (
-                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "pause")}>Pause</WarmButton>
+                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "pause")}>{t("campaigns.pause")}</WarmButton>
                     )}
                     {campaign.status === "paused" && (
-                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "activate")}>Resume</WarmButton>
+                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "activate")}>{t("campaigns.resume")}</WarmButton>
                     )}
                     {campaign.status !== "archived" && (
-                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "archive")}>Archive</WarmButton>
+                      <WarmButton size="sm" variant="outline" onClick={() => handleCampaignAction(campaign.id, "archive")}>{t("campaigns.archive")}</WarmButton>
                     )}
-                    <WarmButton size="sm" variant="outline" onClick={() => startEditing(campaign)}>Edit</WarmButton>
-                    <WarmButton size="sm" variant="outline" onClick={() => handleBulkIssue(campaign.id)}>Issue 10</WarmButton>
+                    <WarmButton size="sm" variant="outline" onClick={() => startEditing(campaign)}>{tc("edit")}</WarmButton>
+                    <WarmButton size="sm" variant="outline" onClick={() => handleBulkIssue(campaign.id)}>{t("campaigns.issue", { count: 10 })}</WarmButton>
                   </div>
                 </div>
               )}
@@ -332,37 +345,37 @@ export default function B2BOrgDetailPage() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-          <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Recent Vouchers</h2>
+          <h2 className="text-lg font-semibold text-[#2D2721] mb-4">{t("recentVouchers")}</h2>
           <div className="space-y-3">
             {vouchers.slice(0, 5).map((voucher) => (
               <div key={voucher.id} className="flex items-center justify-between text-sm">
                 <div>
                   <div className="font-medium text-[#2D2721]">{voucher.code}</div>
-                  <div className="text-xs text-[#8B7355]">{voucher.status}</div>
+                  <div className="text-xs text-[#8B7355]">{enumLabel("voucherStatus", voucher.status)}</div>
                 </div>
                 <div className="text-[#6B5744]">
                   {voucher.remainingValueAmount ?? voucher.initialValueAmount}
                 </div>
               </div>
             ))}
-            {vouchers.length === 0 && <div className="text-sm text-[#8B7355]">No vouchers issued.</div>}
+            {vouchers.length === 0 && <div className="text-sm text-[#8B7355]">{t("noVouchers")}</div>}
           </div>
         </WarmCard>
         <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-          <h2 className="text-lg font-semibold text-[#2D2721] mb-4">Recent Orders</h2>
+          <h2 className="text-lg font-semibold text-[#2D2721] mb-4">{t("recentOrders")}</h2>
           <div className="space-y-3">
             {orders.slice(0, 5).map((order) => (
               <div key={order.id} className="flex items-center justify-between text-sm">
                 <div>
                   <div className="font-medium text-[#2D2721]">{order.id.slice(0, 8)}</div>
-                  <div className="text-xs text-[#8B7355]">{order.status}</div>
+                  <div className="text-xs text-[#8B7355]">{enumLabel("orderStatus", order.status)}</div>
                 </div>
                 <div className="text-[#6B5744]">
                   {order.totalAmount} {order.currency}
                 </div>
               </div>
             ))}
-            {orders.length === 0 && <div className="text-sm text-[#8B7355]">No orders yet.</div>}
+            {orders.length === 0 && <div className="text-sm text-[#8B7355]">{t("noOrders")}</div>}
           </div>
         </WarmCard>
       </div>

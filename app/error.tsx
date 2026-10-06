@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 
@@ -11,6 +12,9 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const t = useTranslations('site.error');
+  const tCommon = useTranslations('common');
+
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       // eslint-disable-next-line no-console
@@ -21,12 +25,12 @@ export default function Error({
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <WarmCard padding="lg" className="max-w-md w-full text-center bg-[var(--surface)]">
-        <h1 className="text-xl font-semibold text-[var(--text)]">Something went wrong</h1>
+        <h1 className="text-xl font-semibold text-[var(--text)]">{t('title')}</h1>
         <p className="text-sm text-[var(--text-muted)] mt-2">
-          An error occurred while loading this page.
+          {t('description')}
         </p>
         <div className="mt-4">
-          <WarmButton onClick={reset}>Try again</WarmButton>
+          <WarmButton onClick={reset}>{tCommon('tryAgain')}</WarmButton>
         </div>
       </WarmCard>
     </div>

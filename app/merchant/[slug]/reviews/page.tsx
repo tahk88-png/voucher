@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { Badge } from '@/components/ui/badge';
@@ -93,6 +94,7 @@ function RatingBar({ rating, count, total }: { rating: number; count: number; to
 export default function ReviewsPage() {
   const params = useParams();
   const slug = params.slug as string;
+  const t = useTranslations('merchantStore.reviews');
   const [data, setData] = useState<ReviewsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -112,9 +114,9 @@ export default function ReviewsPage() {
     fetch(`/api/merchant/${slug}/reviews?${params}`)
       .then((res) => res.json())
       .then(setData)
-      .catch(() => showError('Failed to load reviews'))
+      .catch(() => showError(t('loadFailed')))
       .finally(() => setLoading(false));
-  }, [slug, page, ratingFilter, replyFilter]);
+  }, [slug, page, ratingFilter, replyFilter, t]);
 
   useEffect(() => {
     fetchReviews();
@@ -131,7 +133,7 @@ export default function ReviewsPage() {
       });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        throw new Error(err?.error || 'Failed to reply');
+        throw new Error(err?.error || t('replyFailed'));
       }
       const updated = await res.json();
       setData((prev) =>
@@ -149,9 +151,9 @@ export default function ReviewsPage() {
       );
       setReplyingTo(null);
       setReplyText('');
-      showSuccess('Reply posted');
+      showSuccess(t('replyPosted'));
     } catch (err) {
-      showError(err instanceof Error ? err.message : 'Failed to reply');
+      showError(err instanceof Error ? err.message : t('replyFailed'));
     } finally {
       setSubmitting(false);
     }
@@ -163,9 +165,9 @@ export default function ReviewsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Reviews</h1>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
           <p className="text-sm text-[var(--text-muted)]">
-            Monitor and respond to customer reviews
+            {t('subtitle')}
           </p>
         </div>
         <WarmButton
@@ -173,7 +175,7 @@ export default function ReviewsPage() {
           variant="outline"
           onClick={() => setShowFilters(!showFilters)}
         >
-          <Filter className="h-4 w-4 mr-1" /> Filters
+          <Filter className="h-4 w-4 mr-1" /> {t('filters')}
         </WarmButton>
       </div>
 
@@ -184,12 +186,12 @@ export default function ReviewsPage() {
             <p className="text-4xl font-bold text-[var(--text)]">{stats.avgRating}</p>
             <StarRating rating={Math.round(stats.avgRating)} size="lg" />
             <p className="text-sm text-[var(--text-muted)] mt-1">
-              {stats.totalReviews} {stats.totalReviews === 1 ? 'review' : 'reviews'}
+              {t('reviewCount', { count: stats.totalReviews })}
             </p>
           </WarmCard>
 
           <WarmCard padding="lg" className="bg-[var(--surface)]">
-            <p className="text-sm font-medium text-[var(--text)] mb-3">Rating Distribution</p>
+            <p className="text-sm font-medium text-[var(--text)] mb-3">{t('ratingDistribution')}</p>
             <div className="space-y-1.5">
               {[5, 4, 3, 2, 1].map((r) => (
                 <RatingBar
@@ -203,20 +205,22 @@ export default function ReviewsPage() {
           </WarmCard>
 
           <WarmCard padding="lg" className="bg-[var(--surface)]">
-            <p className="text-sm font-medium text-[var(--text)] mb-3">Response Rate</p>
+            <p className="text-sm font-medium text-[var(--text)] mb-3">{t('responseRate')}</p>
             <div className="flex items-center justify-center gap-4">
               <div className="text-center">
                 <p className="text-2xl font-bold text-green-600">{stats.repliedCount}</p>
-                <p className="text-xs text-[var(--text-muted)]">Replied</p>
+                <p className="text-xs text-[var(--text-muted)]">{t('replied')}</p>
               </div>
               <div className="text-center">
                 <p className="text-2xl font-bold text-amber-600">{stats.unrepliedCount}</p>
-                <p className="text-xs text-[var(--text-muted)]">Pending</p>
+                <p className="text-xs text-[var(--text-muted)]">{t('pending')}</p>
               </div>
             </div>
             {stats.totalReviews > 0 && (
               <p className="text-center text-sm text-[var(--text-muted)] mt-2">
-                {Math.round((stats.repliedCount / stats.totalReviews) * 100)}% response rate
+                {t('responseRatePercent', {
+                  percent: Math.round((stats.repliedCount / stats.totalReviews) * 100),
+                })}
               </p>
             )}
           </WarmCard>
@@ -228,7 +232,7 @@ export default function ReviewsPage() {
         <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex flex-wrap gap-4">
             <div>
-              <label className="text-xs font-medium text-[var(--text-muted)]">Rating</label>
+              <label className="text-xs font-medium text-[var(--text-muted)]">{t('filter.rating')}</label>
               <select
                 className="block h-9 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 text-sm mt-1"
                 value={ratingFilter}
@@ -237,16 +241,16 @@ export default function ReviewsPage() {
                   setPage(1);
                 }}
               >
-                <option value="">All ratings</option>
+                <option value="">{t('filter.allRatings')}</option>
                 {[5, 4, 3, 2, 1].map((r) => (
                   <option key={r} value={r}>
-                    {r} Star{r !== 1 ? 's' : ''}
+                    {t('filter.stars', { count: r })}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="text-xs font-medium text-[var(--text-muted)]">Reply Status</label>
+              <label className="text-xs font-medium text-[var(--text-muted)]">{t('filter.replyStatus')}</label>
               <select
                 className="block h-9 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 text-sm mt-1"
                 value={replyFilter}
@@ -255,9 +259,9 @@ export default function ReviewsPage() {
                   setPage(1);
                 }}
               >
-                <option value="">All</option>
-                <option value="false">Needs reply</option>
-                <option value="true">Replied</option>
+                <option value="">{t('filter.all')}</option>
+                <option value="false">{t('filter.needsReply')}</option>
+                <option value="true">{t('filter.replied')}</option>
               </select>
             </div>
             <div className="flex items-end">
@@ -270,7 +274,7 @@ export default function ReviewsPage() {
                   setPage(1);
                 }}
               >
-                Clear
+                {t('filter.clear')}
               </WarmButton>
             </div>
           </div>
@@ -279,11 +283,11 @@ export default function ReviewsPage() {
 
       {/* Reviews List */}
       {loading ? (
-        <p className="text-sm text-[var(--text-muted)]">Loading reviews...</p>
+        <p className="text-sm text-[var(--text-muted)]">{t('loading')}</p>
       ) : !data || data.items.length === 0 ? (
         <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <MessageSquare className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
-          <p className="text-[var(--text-muted)]">No reviews found.</p>
+          <p className="text-[var(--text-muted)]">{t('empty')}</p>
         </WarmCard>
       ) : (
         <>
@@ -299,16 +303,16 @@ export default function ReviewsPage() {
                       </div>
                       <div>
                         <p className="font-medium text-sm text-[var(--text)]">
-                          {review.user.name || 'Anonymous'}
+                          {review.user.name || t('anonymous')}
                         </p>
                         <p className="text-xs text-[var(--text-muted)]">
-                          {new Date(review.createdAt).toLocaleDateString()}
+                          {new Date(review.createdAt).toLocaleDateString('en-GB')}
                         </p>
                       </div>
                       <StarRating rating={review.rating} />
                       {review.verified && (
                         <Badge variant="secondary" className="text-xs bg-green-100 text-green-800">
-                          Verified
+                          {t('verified')}
                         </Badge>
                       )}
                     </div>
@@ -325,27 +329,27 @@ export default function ReviewsPage() {
                     <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
                       {review.campaign && (
                         <Badge variant="outline" className="text-xs">
-                          Campaign: {review.campaign.name}
+                          {t('campaign', { name: review.campaign.name })}
                         </Badge>
                       )}
                       {review.voucher?.codePrefix && (
                         <Badge variant="outline" className="text-xs">
-                          Voucher: {review.voucher.codePrefix}
+                          {t('voucher', { code: review.voucher.codePrefix })}
                         </Badge>
                       )}
                       {review.helpful > 0 && (
-                        <span>{review.helpful} found helpful</span>
+                        <span>{t('foundHelpful', { count: review.helpful })}</span>
                       )}
                     </div>
 
                     {/* Merchant Reply */}
                     {review.merchantReply && (
                       <div className="mt-3 pl-4 border-l-2 border-[var(--primary)] bg-[var(--surface)] rounded-r p-3">
-                        <p className="text-xs font-medium text-[var(--text)] mb-1">Your reply</p>
+                        <p className="text-xs font-medium text-[var(--text)] mb-1">{t('yourReply')}</p>
                         <p className="text-sm text-[var(--text-muted)]">{review.merchantReply}</p>
                         {review.merchantReplyAt && (
                           <p className="text-xs text-[var(--text-muted)] mt-1">
-                            {new Date(review.merchantReplyAt).toLocaleDateString()}
+                            {new Date(review.merchantReplyAt).toLocaleDateString('en-GB')}
                           </p>
                         )}
                       </div>
@@ -356,7 +360,7 @@ export default function ReviewsPage() {
                       <div className="mt-3 space-y-2">
                         <textarea
                           className="w-full rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm min-h-[80px] resize-y"
-                          placeholder="Write your reply..."
+                          placeholder={t('replyPlaceholder')}
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}
                           maxLength={2000}
@@ -368,7 +372,7 @@ export default function ReviewsPage() {
                             disabled={submitting || !replyText.trim()}
                           >
                             <Send className="h-3.5 w-3.5 mr-1" />
-                            {submitting ? 'Posting...' : 'Post Reply'}
+                            {submitting ? t('posting') : t('postReply')}
                           </WarmButton>
                           <WarmButton
                             size="sm"
@@ -378,7 +382,7 @@ export default function ReviewsPage() {
                               setReplyText('');
                             }}
                           >
-                            Cancel
+                            {t('cancel')}
                           </WarmButton>
                           <span className="text-xs text-[var(--text-muted)] ml-auto">
                             {replyText.length}/2000
@@ -398,7 +402,7 @@ export default function ReviewsPage() {
                         setReplyText('');
                       }}
                     >
-                      <MessageSquare className="h-3.5 w-3.5 mr-1" /> Reply
+                      <MessageSquare className="h-3.5 w-3.5 mr-1" /> {t('reply')}
                     </WarmButton>
                   )}
                 </div>
@@ -409,25 +413,30 @@ export default function ReviewsPage() {
           {/* Pagination */}
           <div className="flex items-center justify-between">
             <p className="text-sm text-[var(--text-muted)]">
-              Showing {(data.page - 1) * data.pageSize + 1}–
-              {Math.min(data.page * data.pageSize, data.total)} of {data.total}
+              {t('showing', {
+                from: (data.page - 1) * data.pageSize + 1,
+                to: Math.min(data.page * data.pageSize, data.total),
+                total: data.total,
+              })}
             </p>
             <div className="flex items-center gap-2">
               <WarmButton
                 size="sm"
                 variant="outline"
                 disabled={!data.hasPrevPage}
+                aria-label={t('previousPage')}
                 onClick={() => setPage((p) => p - 1)}
               >
                 <ChevronLeft className="h-4 w-4" />
               </WarmButton>
               <span className="text-sm text-[var(--text-muted)]">
-                Page {data.page} of {data.totalPages}
+                {t('pageOf', { page: data.page, totalPages: data.totalPages })}
               </span>
               <WarmButton
                 size="sm"
                 variant="outline"
                 disabled={!data.hasNextPage}
+                aria-label={t('nextPage')}
                 onClick={() => setPage((p) => p + 1)}
               >
                 <ChevronRight className="h-4 w-4" />

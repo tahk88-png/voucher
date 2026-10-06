@@ -3,12 +3,39 @@ import { prisma } from '@/lib/prisma';
 import { AccessControlError, accessErrorResponse, requireMerchantProfileAccessBySlug, requireMerchantCapability } from '@/lib/access-control';
 import { withErrorHandler } from '@/lib/error-handler';
 import { CacheKeys, invalidateCache } from '@/lib/cache';
+import { Prisma } from '@prisma/client';
+import { z } from 'zod';
+import { parseVoucherCsv, type VoucherCsvRow } from '@/lib/voucher-csv';
+import { SUPPORTED_CURRENCIES } from '@/lib/currency-constants';
+
+const MAX_ROWS = 500;
+
+const jsonRowsSchema = z
+  .array(
+    z
+      .object({
+        name: z.string().max(200).optional(),
+        type: z.enum(['percentage', 'fixed_amount', 'credit_amount']),
+        value: z.number().int().positive(),
+        currency: z
+          .string()
+          .transform((c) => c.toUpperCase())
+          .refine((c) => (SUPPORTED_CURRENCIES as readonly string[]).includes(c), 'Unsupported currency'),
+        validFrom: z.string().datetime(),
+        validTo: z.string().datetime(),
+        codePrefix: z.string().max(10).optional(),
+        usageLimitTotal: z.number().int().positive().optional(),
+      })
+      .refine((r) => new Date(r.validTo) > new Date(r.validFrom), 'valid_to must be after valid_from')
+      .refine((r) => r.type !== 'percentage' || r.value <= 10000, "A percentage can't be more than 100%")
+  )
+  .max(MAX_ROWS);
 
 export const dynamic = 'force-dynamic';
 
 // POST /api/merchant/[slug]/vouchers/bulk-import
-// Body: multipart with CSV file or JSON array
-// CSV columns: type,value,currency,validFrom,validTo,codePrefix,usageLimitTotal
+// Body: CSV text (see lib/voucher-csv.ts for columns; values in euros/percent)
+// or a JSON array of already-converted rows (minor units / basis points).
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{slug: string}> }
@@ -21,55 +48,40 @@ export async function POST(
     await requireMerchantCapability(merchant.id, merchant.slug, 'voucher.create');
 
     const contentType = req.headers.get('content-type') || '';
-    let rows: Array<{
-      type: string;
-      value: number;
-      currency: string;
-      validFrom: string;
-      validTo: string;
-      codePrefix?: string;
-      usageLimitTotal?: number;
-    }> = [];
+    const merchantSettings = await prisma.merchant.findUnique({
+      where: { id: merchant.id },
+      select: { defaultCurrency: true },
+    });
+    let rows: VoucherCsvRow[] = [];
 
     if (contentType.includes('application/json')) {
-      rows = await req.json();
+      // JSON rows are already converted: value in minor units / basis points.
+      const parsed = jsonRowsSchema.safeParse(await req.json());
+      if (!parsed.success) {
+        const first = parsed.error.errors[0];
+        return NextResponse.json(
+          { error: `Row ${typeof first?.path[0] === 'number' ? first.path[0] + 1 : '?'}: ${first?.message ?? 'invalid data'}` },
+          { status: 400 }
+        );
+      }
+      rows = parsed.data;
     } else {
-      // Parse CSV text
-      const text = await req.text();
-      const lines = text.split('\n').filter(l => l.trim());
-      if (lines.length < 2) {
-        return NextResponse.json({ error: 'CSV must have header and at least one row' }, { status: 400 });
+      // CSV as merchants type it: euros / percent, "," or ";" separated.
+      // Dates are whole days in UTC here (the upload page converts in the
+      // merchant's own time zone and posts JSON instead).
+      const result = parseVoucherCsv(await req.text(), {
+        defaultCurrency: merchantSettings?.defaultCurrency,
+        dayBoundary: 'utc',
+        maxRows: MAX_ROWS,
+      });
+      if (result.errors.length > 0) {
+        return NextResponse.json({ error: result.errors.slice(0, 10).join(' '), errors: result.errors }, { status: 400 });
       }
-      const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/"/g, ''));
-      for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
-        const row: Record<string, string> = {};
-        headers.forEach((h, idx) => { row[h] = values[idx] || ''; });
-        rows.push({
-          type: row['type'] || 'fixed_amount',
-          value: parseInt(row['value'] || '0', 10),
-          currency: row['currency'] || 'EUR',
-          validFrom: row['validfrom'] || row['valid_from'] || new Date().toISOString(),
-          validTo: row['validto'] || row['valid_to'] || new Date(Date.now() + 30 * 86400000).toISOString(),
-          codePrefix: row['codeprefix'] || row['code_prefix'] || undefined,
-          usageLimitTotal: row['usagelimittotal'] || row['usage_limit_total'] ? parseInt(row['usagelimittotal'] || row['usage_limit_total'], 10) : undefined,
-        });
-      }
+      rows = result.rows;
     }
 
     if (rows.length === 0) return NextResponse.json({ error: 'No rows to import' }, { status: 400 });
-    if (rows.length > 500) return NextResponse.json({ error: 'Max 500 vouchers per import' }, { status: 400 });
-
-    // Validate
-    const validTypes = ['percentage', 'fixed_amount', 'credit_amount'];
-    for (const row of rows) {
-      if (!validTypes.includes(row.type)) {
-        return NextResponse.json({ error: `Invalid type: ${row.type}` }, { status: 400 });
-      }
-      if (!row.value || row.value <= 0) {
-        return NextResponse.json({ error: 'Each voucher needs a positive value' }, { status: 400 });
-      }
-    }
+    if (rows.length > MAX_ROWS) return NextResponse.json({ error: `Max ${MAX_ROWS} vouchers per import` }, { status: 400 });
 
     const created = await prisma.$transaction(
       rows.map(row => prisma.voucher.create({
@@ -77,11 +89,12 @@ export async function POST(
           merchantId: merchant.id,
           type: row.type,
           value: row.value,
-          currency: row.currency,
+          currency: row.currency.toUpperCase(),
           validFrom: new Date(row.validFrom),
           validTo: new Date(row.validTo),
           codePrefix: row.codePrefix,
           usageLimitTotal: row.usageLimitTotal,
+          designJson: row.name ? { headline: row.name } : Prisma.DbNull,
           status: 'draft',
         },
       }))
@@ -92,6 +105,7 @@ export async function POST(
         merchantId: merchant.id,
         actorUserId: profile.userId,
         action: 'voucher.bulk_import',
+        resourceType: 'voucher',
         payloadJson: { count: created.length },
       },
     });

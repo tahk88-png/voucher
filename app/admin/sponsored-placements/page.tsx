@@ -62,11 +62,11 @@ const STATUS_BADGE: Record<string, string> = {
 };
 
 function formatCents(cents: number): string {
-  return (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'EUR' });
+  return (cents / 100).toLocaleString('en-GB', { style: 'currency', currency: 'EUR' });
 }
 
 function formatDate(d: string): string {
-  return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  return new Date(d).toLocaleDateString('en-GB', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
 function getStatus(p: Placement): string {

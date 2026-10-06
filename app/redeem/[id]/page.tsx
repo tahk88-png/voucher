@@ -4,9 +4,11 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { unlockCreditForRedemption } from '@/lib/credits';
 import { WarmCard } from '@/components/warm-card';
+import { getTranslations } from 'next-intl/server';
 
 export default async function RedeemByQrPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const t = await getTranslations('purchase');
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
@@ -21,8 +23,8 @@ export default async function RedeemByQrPage({ params }: { params: Promise<{ id:
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-[#FAF7F2]">
         <WarmCard padding="lg" className="max-w-md w-full bg-white text-center">
-          <h1 className="text-lg font-semibold text-[#2D2721]">Redemption not found</h1>
-          <p className="text-sm text-[#6B5744] mt-2">The QR code is invalid or expired.</p>
+          <h1 className="text-lg font-semibold text-[#2D2721]">{t('redeem.notFoundTitle')}</h1>
+          <p className="text-sm text-[#6B5744] mt-2">{t('redeem.notFoundDescription')}</p>
         </WarmCard>
       </div>
     );
@@ -46,11 +48,11 @@ export default async function RedeemByQrPage({ params }: { params: Promise<{ id:
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#FAF7F2]">
       <WarmCard padding="lg" className="max-w-md w-full bg-white text-center">
-        <h1 className="text-lg font-semibold text-[#2D2721]">Voucher redeemed</h1>
+        <h1 className="text-lg font-semibold text-[#2D2721]">{t('redeem.title')}</h1>
         <p className="text-sm text-[#6B5744] mt-2">
           {redemption.confirmedAt
-            ? 'This voucher was already redeemed.'
-            : 'Redemption confirmed successfully.'}
+            ? t('redeem.alreadyRedeemed')
+            : t('redeem.confirmed')}
         </p>
       </WarmCard>
     </div>

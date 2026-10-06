@@ -6,6 +6,8 @@
  * Shows count + conversion % at each stage, color-coded.
  */
 
+import { useTranslations } from 'next-intl';
+
 interface FunnelStage {
   name: string;
   count: number;
@@ -20,10 +22,11 @@ interface FunnelChartProps {
 }
 
 export function FunnelChart({ stages }: FunnelChartProps) {
-  if (!stages || stages.length === 0) {
+  const t = useTranslations('dsComponents.analyticsFunnel');
+  if (!stages || stages.length === 0 || stages.every((s) => !(s.count > 0))) {
     return (
       <div className="flex items-center justify-center h-48 text-[var(--text-muted)]">
-        No funnel data available
+        {t('empty')}
       </div>
     );
   }
@@ -54,7 +57,7 @@ export function FunnelChart({ stages }: FunnelChartProps) {
                   }}
                 >
                   <span className="text-white text-sm font-bold whitespace-nowrap">
-                    {stage.count.toLocaleString()}
+                    {stage.count.toLocaleString('en-GB')}
                   </span>
                   {widthPercent > 25 && (
                     <span className="text-white/80 text-xs whitespace-nowrap">
@@ -68,7 +71,7 @@ export function FunnelChart({ stages }: FunnelChartProps) {
             {/* Conversion indicator */}
             <div className="w-20 shrink-0 text-right">
               {idx === 0 ? (
-                <span className="text-xs text-[var(--text-muted)]">Top</span>
+                <span className="text-xs text-[var(--text-muted)]">{t('top')}</span>
               ) : (
                 <div>
                   <span
@@ -83,7 +86,7 @@ export function FunnelChart({ stages }: FunnelChartProps) {
                     {stage.conversionRate}%
                   </span>
                   <div className="text-[10px] text-[var(--text-muted)]">
-                    -{stage.dropOffRate}% drop
+                    {t('drop', { rate: stage.dropOffRate })}
                   </div>
                 </div>
               )}

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { Check, ChevronsUpDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { WarmButton } from "@/components/warm-button"
@@ -31,12 +32,13 @@ export function Combobox({
   options,
   value,
   onValueChange,
-  placeholder = "Select option...",
-  emptyText = "No option found.",
-  searchPlaceholder = "Search...",
+  placeholder,
+  emptyText,
+  searchPlaceholder,
   disabled,
   className,
 }: ComboboxProps) {
+  const t = useTranslations("ui")
   const [open, setOpen] = React.useState(false)
   const [search, setSearch] = React.useState("")
 
@@ -57,7 +59,7 @@ export function Combobox({
           disabled={disabled}
         >
           <span className="truncate">
-            {selectedOption ? selectedOption.label : placeholder}
+            {selectedOption ? selectedOption.label : (placeholder ?? t("combobox.placeholder"))}
           </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </WarmButton>
@@ -65,7 +67,7 @@ export function Combobox({
       <PopoverContent className="w-full p-0" align="start">
         <div className="p-2">
           <Input
-            placeholder={searchPlaceholder}
+            placeholder={searchPlaceholder ?? t("combobox.search")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="h-9"
@@ -74,7 +76,7 @@ export function Combobox({
         <div className="max-h-[200px] overflow-y-auto p-1">
           {filteredOptions.length === 0 ? (
             <div className="py-6 text-center text-sm text-[var(--text-faint)]">
-              {emptyText}
+              {emptyText ?? t("combobox.empty")}
             </div>
           ) : (
             filteredOptions.map((option) => (

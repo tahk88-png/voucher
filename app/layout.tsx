@@ -73,7 +73,6 @@ export const metadata: Metadata = {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE],
-    creator: "@vouchr",
   },
   appleWebApp: {
     capable: true,

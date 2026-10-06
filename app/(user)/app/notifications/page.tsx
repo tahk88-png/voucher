@@ -30,12 +30,20 @@ export default async function NotificationsPage() {
             <h1 className="text-2xl font-semibold text-[#2D2721]">{tNav('notifications')}</h1>
             <p className="text-sm text-[#6B5744]">{t('description')}</p>
           </div>
-          <MarkAllReadButton label={t('markAllRead')} />
+          <MarkAllReadButton
+            label={t('markAllRead')}
+            errorLabel={t('markAllReadFailed')}
+            disabled={!notifications.some((note) => !note.readAt)}
+          />
         </div>
 
         {notifications.length === 0 ? (
-          <WarmCard padding="lg" className="bg-white text-center text-[#6B5744]">
-            {t('empty')}
+          <WarmCard padding="lg" className="bg-white text-center text-[#6B5744] space-y-3">
+            <p>{t('empty')}</p>
+            <p className="text-sm">{t('emptyHint')}</p>
+            <WarmButton asChild variant="outline" size="sm">
+              <Link href="/campaigns">{t('browseOffers')}</Link>
+            </WarmButton>
           </WarmCard>
         ) : (
           notifications.map((note) => (

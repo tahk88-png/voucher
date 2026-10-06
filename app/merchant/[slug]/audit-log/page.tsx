@@ -9,6 +9,8 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { showError } from '@/lib/toast-helpers';
 import { ChevronLeft, ChevronRight, Search, Filter, Clock } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { AUDIT_ACTION_MESSAGE_KEYS, formatAuditAction, resolveAuditResource } from '@/lib/audit-labels';
 
 interface AuditLogEntry {
   id: string;
@@ -76,6 +78,14 @@ export default function AuditLogPage() {
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
   const [showFilters, setShowFilters] = useState(false);
+  const t = useTranslations('merchantTeam.auditLog');
+  const locale = useLocale();
+  const dateLocale = locale === 'en' ? 'en-GB' : locale;
+
+  const actionLabel = (action: string): string => {
+    const key = AUDIT_ACTION_MESSAGE_KEYS[action];
+    return key ? t(`actions.${key}` as Parameters<typeof t>[0]) : formatAuditAction(action);
+  };
 
   const fetchLogs = useCallback(() => {
     setLoading(true);
@@ -87,9 +97,9 @@ export default function AuditLogPage() {
     fetch(`/api/merchant/${slug}/audit-log?${params}`)
       .then((res) => res.json())
       .then(setData)
-      .catch(() => showError('Failed to load audit log'))
+      .catch(() => showError(t('loadFailed')))
       .finally(() => setLoading(false));
-  }, [slug, page, actionFilter, dateFrom, dateTo]);
+  }, [slug, page, actionFilter, dateFrom, dateTo, t]);
 
   useEffect(() => {
     fetchLogs();
@@ -110,9 +120,9 @@ export default function AuditLogPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Audit Log</h1>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
           <p className="text-sm text-[var(--text-muted)]">
-            Track all actions performed on your merchant account
+            {t('subtitle')}
           </p>
         </div>
         <WarmButton
@@ -120,7 +130,7 @@ export default function AuditLogPage() {
           variant="outline"
           onClick={() => setShowFilters(!showFilters)}
         >
-          <Filter className="h-4 w-4 mr-1" /> Filters
+          <Filter className="h-4 w-4 mr-1" /> {t('filters')}
         </WarmButton>
       </div>
 
@@ -128,23 +138,23 @@ export default function AuditLogPage() {
         <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <Label htmlFor="action-filter">Action</Label>
+              <Label htmlFor="action-filter">{t('action')}</Label>
               <select
                 id="action-filter"
                 className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1 text-sm"
                 value={actionFilter}
                 onChange={(e) => setActionFilter(e.target.value)}
               >
-                <option value="">All actions</option>
+                <option value="">{t('allActions')}</option>
                 {data?.actions.map((action) => (
                   <option key={action} value={action}>
-                    {action}
+                    {actionLabel(action)}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <Label htmlFor="date-from">From Date</Label>
+              <Label htmlFor="date-from">{t('fromDate')}</Label>
               <Input
                 id="date-from"
                 type="date"
@@ -154,7 +164,7 @@ export default function AuditLogPage() {
               />
             </div>
             <div>
-              <Label htmlFor="date-to">To Date</Label>
+              <Label htmlFor="date-to">{t('toDate')}</Label>
               <Input
                 id="date-to"
                 type="date"
@@ -166,21 +176,21 @@ export default function AuditLogPage() {
           </div>
           <div className="flex gap-2 mt-4">
             <WarmButton size="sm" onClick={handleApplyFilters}>
-              <Search className="h-4 w-4 mr-1" /> Apply
+              <Search className="h-4 w-4 mr-1" /> {t('apply')}
             </WarmButton>
             <WarmButton size="sm" variant="outline" onClick={handleClearFilters}>
-              Clear
+              {t('clear')}
             </WarmButton>
           </div>
         </WarmCard>
       )}
 
       {loading ? (
-        <p className="text-sm text-[var(--text-muted)]">Loading audit log...</p>
+        <p className="text-sm text-[var(--text-muted)]">{t('loading')}</p>
       ) : !data || data.items.length === 0 ? (
         <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <Clock className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
-          <p className="text-[var(--text-muted)]">No audit log entries found.</p>
+          <p className="text-[var(--text-muted)]">{t('empty')}</p>
         </WarmCard>
       ) : (
         <>
@@ -189,11 +199,11 @@ export default function AuditLogPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-[var(--border)] bg-[var(--surface)]">
-                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">Timestamp</th>
-                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">Actor</th>
-                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">Action</th>
-                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">Resource</th>
-                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">Details</th>
+                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.timestamp')}</th>
+                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.actor')}</th>
+                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.action')}</th>
+                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.resource')}</th>
+                    <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.details')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -201,32 +211,37 @@ export default function AuditLogPage() {
                     <tr key={log.id} className="border-b border-[var(--border)] last:border-0 hover:bg-[var(--surface)]">
                       <td className="px-4 py-3 whitespace-nowrap text-[var(--text-muted)]">
                         <div className="text-xs">
-                          {new Date(log.createdAt).toLocaleDateString()}
+                          {new Date(log.createdAt).toLocaleDateString(dateLocale, { day: 'numeric', month: 'short', year: 'numeric' })}
                         </div>
                         <div className="text-xs text-[var(--text-muted)]">
-                          {new Date(log.createdAt).toLocaleTimeString()}
+                          {new Date(log.createdAt).toLocaleTimeString(dateLocale, { hour: '2-digit', minute: '2-digit' })}
                         </div>
                       </td>
                       <td className="px-4 py-3">
-                        <p className="font-medium text-[var(--text)]">{log.actor.name || 'Unknown'}</p>
+                        <p className="font-medium text-[var(--text)]">{log.actor.name || t('unknownActor')}</p>
                         <p className="text-xs text-[var(--text-muted)]">{log.actor.email}</p>
                       </td>
                       <td className="px-4 py-3">
                         <Badge className={`${getActionColor(log.action)} border-0`}>
-                          {log.action}
+                          {actionLabel(log.action)}
                         </Badge>
                       </td>
                       <td className="px-4 py-3 text-[var(--text-muted)]">
-                        {log.resourceType && (
-                          <span className="text-xs">
-                            {log.resourceType}
-                            {log.resourceId && (
-                              <span className="text-[var(--text-muted)] ml-1">
-                                #{log.resourceId.slice(0, 8)}
-                              </span>
-                            )}
-                          </span>
-                        )}
+                        {(() => {
+                          const resource = resolveAuditResource(log);
+                          if (!resource) return <span className="text-xs">—</span>;
+                          return (
+                            <span className="text-xs">
+                              {resource.kind ? t(`resources.${resource.kind}` as Parameters<typeof t>[0]) : resource.label}
+                              {resource.name && <span className="text-[var(--text)] ml-1">“{resource.name}”</span>}
+                              {resource.id && (
+                                <span className="text-[var(--text-muted)] ml-1 font-mono">
+                                  #{resource.id.slice(0, 8)}
+                                </span>
+                              )}
+                            </span>
+                          );
+                        })()}
                       </td>
                       <td className="px-4 py-3 text-xs text-[var(--text-muted)] max-w-xs truncate">
                         {log.reason || formatPayload(log.payloadJson)}
@@ -241,8 +256,11 @@ export default function AuditLogPage() {
           {/* Pagination */}
           <div className="flex items-center justify-between">
             <p className="text-sm text-[var(--text-muted)]">
-              Showing {(data.page - 1) * data.pageSize + 1}–
-              {Math.min(data.page * data.pageSize, data.total)} of {data.total}
+              {t('showing', {
+                from: (data.page - 1) * data.pageSize + 1,
+                to: Math.min(data.page * data.pageSize, data.total),
+                total: data.total,
+              })}
             </p>
             <div className="flex items-center gap-2">
               <WarmButton
@@ -250,17 +268,19 @@ export default function AuditLogPage() {
                 variant="outline"
                 disabled={!data.hasPrevPage}
                 onClick={() => setPage((p) => p - 1)}
+                aria-label={t('previousPage')}
               >
                 <ChevronLeft className="h-4 w-4" />
               </WarmButton>
               <span className="text-sm text-[var(--text-muted)]">
-                Page {data.page} of {data.totalPages}
+                {t('pageOf', { page: data.page, totalPages: data.totalPages })}
               </span>
               <WarmButton
                 size="sm"
                 variant="outline"
                 disabled={!data.hasNextPage}
                 onClick={() => setPage((p) => p + 1)}
+                aria-label={t('nextPage')}
               >
                 <ChevronRight className="h-4 w-4" />
               </WarmButton>

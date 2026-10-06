@@ -1,18 +1,29 @@
 import type { Metadata } from 'next';
+import { LegalEntityDetails } from '@/components/site/legal-entity';
+
+// The operator details come from runtime env (see LegalEntityDetails), so
+// render per request instead of baking in build-time values.
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Voucher Platform',
+  title: 'Privacy Policy',
   description: 'How we collect, use, and protect your data',
 };
 
 export default function PrivacyPage() {
   return (
-    <main className="max-w-3xl mx-auto px-4 py-12">
+    <article className="max-w-3xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-8" style={{ color: 'var(--text)' }}>
         Privacy Policy
       </h1>
       <div className="space-y-6 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
         <p><strong>Last updated:</strong> March 2026</p>
+
+        <section aria-labelledby="operator-heading">
+          <h2 id="operator-heading" className="text-xl font-semibold mb-3" style={{ color: 'var(--text)' }}>Who we are</h2>
+          <p className="mb-2">GiftHub is operated by:</p>
+          <LegalEntityDetails />
+        </section>
 
         <section>
           <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text)' }}>1. Data We Collect</h2>
@@ -67,7 +78,7 @@ export default function PrivacyPage() {
 
         <section>
           <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text)' }}>8. Security</h2>
-          <p>We protect your data with: encrypted connections (TLS), hashed passwords (bcrypt), rate limiting, fraud detection, two-factor authentication support, and regular security audits.</p>
+          <p>We protect your data with: encrypted connections (TLS), hashed passwords (scrypt), rate limiting, fraud detection, and two-factor authentication support.</p>
         </section>
 
         <section>
@@ -80,6 +91,6 @@ export default function PrivacyPage() {
           <p>Data Protection Officer: <a href="/contact" className="underline" style={{ color: 'var(--primary)' }}>Contact us</a></p>
         </section>
       </div>
-    </main>
+    </article>
   );
 }

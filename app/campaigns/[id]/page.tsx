@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import { getPreferredLocale } from "@/lib/request-locale"
 import { toQueryString, type SearchParams } from "@/lib/search-params"
 import { routing } from "@/routing"
+import HubShell from "@/components/layout/hub-shell"
 
 import CampaignDetailPage, {
   generateMetadata as generateLocaleMetadata,
@@ -34,5 +35,9 @@ export default async function CampaignAliasPage({
     redirect(`/${locale}/campaigns/${id}${toQueryString(sp)}`)
   }
 
-  return <CampaignDetailPage params={Promise.resolve({ locale: routing.defaultLocale, id })} />
+  return (
+    <HubShell>
+      <CampaignDetailPage params={Promise.resolve({ locale: routing.defaultLocale, id })} />
+    </HubShell>
+  )
 }

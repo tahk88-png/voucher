@@ -1,6 +1,7 @@
 'use client';
 
 import { type ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 
 /* ═══════════════════════════════════════════
    SIZE + COLOR TYPES
@@ -53,8 +54,10 @@ export function Spinner({
   size = 'md',
   color = 'primary',
   className = '',
-  label = 'Loading',
+  label: labelProp,
 }: SpinnerProps) {
+  const t = useTranslations('dsComponents.common');
+  const label = labelProp ?? t('loading');
   const s = sizeMap[size].spinner;
   const strokeWidth = size === 'sm' ? 2.5 : size === 'lg' ? 3.5 : 3;
   const r = (s - strokeWidth) / 2;
@@ -125,12 +128,13 @@ interface DotsProps {
 }
 
 export function Dots({ size = 'md', color = 'primary', className = '' }: DotsProps) {
+  const t = useTranslations('dsComponents.common');
   const d = sizeMap[size].dot;
   const gap = size === 'sm' ? 'gap-1' : size === 'lg' ? 'gap-2' : 'gap-1.5';
   const bgClass = colorValues[color].bg;
 
   return (
-    <div className={`inline-flex items-center ${gap} ${className}`} role="status" aria-label="Loading">
+    <div className={`inline-flex items-center ${gap} ${className}`} role="status" aria-label={t('loading')}>
       {[0, 1, 2].map((i) => (
         <span
           key={i}
@@ -142,7 +146,7 @@ export function Dots({ size = 'md', color = 'primary', className = '' }: DotsPro
           }}
         />
       ))}
-      <span className="sr-only">Loading</span>
+      <span className="sr-only">{t('loading')}</span>
     </div>
   );
 }

@@ -2,7 +2,10 @@ import { Suspense } from "react"
 import { prisma } from "@/lib/prisma"
 import { StatsCard } from "@/components/ui/stats-card"
 import { DollarSign, CreditCard, TrendingUp, AlertCircle } from "lucide-react"
-import { formatCurrency } from "@/lib/utils"
+import { formatPrice } from "@/lib/currency-constants"
+import { getTranslations } from "next-intl/server"
+
+const formatCurrency = (minor: number, currency: string) => formatPrice(minor, currency.toUpperCase(), "en-GB")
 
 async function RevenueStatsContent({
   merchantId,
@@ -13,6 +16,7 @@ async function RevenueStatsContent({
   merchantSlug: string
   currency: string
 }) {
+  const t = await getTranslations("merchantDashboard.revenue")
   const [
     totalCreditsIssued,
     totalRevenue,
@@ -69,36 +73,36 @@ async function RevenueStatsContent({
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <StatsCard
-        title="Voucher Revenue"
+        title={t("voucherRevenue")}
         value={formatCurrency(voucherRevenue, currency)}
-        description="Paid voucher sales"
+        description={t("paidVoucherSales")}
         icon={DollarSign}
         href={`/merchant/${merchantSlug}/campaigns`}
-        actionLabel="Open campaign sales"
+        actionLabel={t("openCampaignSales")}
       />
       <StatsCard
-        title="Ticket Revenue"
+        title={t("ticketRevenue")}
         value={formatCurrency(ticketRevenueValue, currency)}
-        description="Paid ticket sales"
+        description={t("paidTicketSales")}
         icon={TrendingUp}
         href={`/merchant/${merchantSlug}/events`}
-        actionLabel="Open event sales"
+        actionLabel={t("openEventSales")}
       />
       <StatsCard
-        title="Credits Issued"
+        title={t("creditsIssued")}
         value={formatCurrency(creditsIssued, currency)}
-        description="Total credits distributed"
+        description={t("totalCreditsDistributed")}
         icon={CreditCard}
         href={`/merchant/${merchantSlug}/referrals`}
-        actionLabel="Open referral credits"
+        actionLabel={t("openReferralCredits")}
       />
       <StatsCard
-        title="Outstanding Liability"
+        title={t("outstandingLiability")}
         value={formatCurrency(outstandingLiability, currency)}
-        description="Unredeemed voucher value"
+        description={t("unredeemedValue")}
         icon={AlertCircle}
         href={`/merchant/${merchantSlug}/vouchers`}
-        actionLabel="Open voucher liability"
+        actionLabel={t("openVoucherLiability")}
       />
     </div>
   )

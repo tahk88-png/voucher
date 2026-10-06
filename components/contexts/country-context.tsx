@@ -47,17 +47,50 @@ function parseStoredCountryCode(storedValue: string | null): string | null {
   }
 }
 
+// Set once the visitor picks a marketplace themselves. The app used to default
+// to "US", so a stored "US" without this marker is that old default, not a choice.
+export const countryExplicitChoiceKey = "selectedCountryExplicit"
+const legacyDefaultCountryCode = "US"
+
+function safeGetItem(key: string): string | null {
+  try {
+    return window.localStorage.getItem(key)
+  } catch {
+    return null
+  }
+}
+
+function safeSetItem(key: string, value: string) {
+  try {
+    window.localStorage.setItem(key, value)
+  } catch {
+    // Storage unavailable (private mode, blocked site data): the choice lasts for this visit only.
+  }
+}
+
+/**
+ * Resolves the stored marketplace. Returns null (use the default) when nothing
+ * valid is stored, or when the stored value is the legacy "US" default that
+ * the visitor never chose explicitly.
+ */
+export function resolveStoredCountryCode(storedValue: string | null, explicitMarker: string | null): string | null {
+  const parsedCountryCode = parseStoredCountryCode(storedValue)
+  if (!parsedCountryCode) {
+    return null
+  }
+  if (parsedCountryCode === legacyDefaultCountryCode && !explicitMarker) {
+    return null
+  }
+  return getCountryByCode(parsedCountryCode) ? parsedCountryCode : null
+}
+
 function readStoredCountry(): Country | null {
   if (typeof window === "undefined") {
     return null
   }
 
-  const parsedCountryCode = parseStoredCountryCode(window.localStorage.getItem(countryStorageKey))
-  if (!parsedCountryCode) {
-    return null
-  }
-
-  return getCountryByCode(parsedCountryCode) ?? null
+  const code = resolveStoredCountryCode(safeGetItem(countryStorageKey), safeGetItem(countryExplicitChoiceKey))
+  return code ? getCountryByCode(code) ?? null : null
 }
 
 function getDefaultCountry(): Country {
@@ -79,11 +112,15 @@ export function CountryProvider({ children }: { children: React.ReactNode }) {
       return
     }
 
-    window.localStorage.setItem(countryStorageKey, selectedCountry.code)
+    safeSetItem(countryStorageKey, selectedCountry.code)
   }, [selectedCountry.code])
 
+  // Only called from user actions (the marketplace selector), so it marks the choice as explicit.
   const setSelectedCountry = useCallback(
     (country: Country) => {
+      if (typeof window !== "undefined") {
+        safeSetItem(countryExplicitChoiceKey, "1")
+      }
       setSelectedCountryState(country)
     },
     []

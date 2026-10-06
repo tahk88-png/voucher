@@ -19,7 +19,7 @@ export function generatePageMetadata({
   keywords = [],
 }: PageMetadataOptions): Metadata {
   // `title` is rendered through the root layout's `%s | SITE_NAME` template, so
-  // it must NOT carry the site name itself or every page reads "… | Vouchr | Vouchr".
+  // it must NOT carry the site name itself or every page reads "… | GiftHub | GiftHub".
   // OG/Twitter titles bypass that template, so they keep the full form.
   const fullTitle = `${title} | ${SITE_NAME}`
   const url = toAbsoluteUrl(path)
@@ -81,7 +81,7 @@ export function generateVoucherMetadata({
   const pageTitle = `${title} - ${merchantName}`
   const fullTitle = `${pageTitle} | ${SITE_NAME}`
   const formattedValue = `${currency} ${(value / 100).toFixed(2)}`
-  const fullDescription = `${description} Worth ${formattedValue}. ${merchantName} on Vouchr.`
+  const fullDescription = `${description} Worth ${formattedValue}. ${merchantName} on GiftHub.`
   const path = `/voucher/${voucherId}`
   const url = toAbsoluteUrl(path)
 

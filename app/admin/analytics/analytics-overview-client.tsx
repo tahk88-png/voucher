@@ -68,7 +68,7 @@ const navLinks = [
 ];
 
 function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-GB', {
     style: 'currency',
     currency: 'EUR',
     minimumFractionDigits: 0,

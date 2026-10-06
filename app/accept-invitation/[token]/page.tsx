@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Users, CheckCircle2, AlertCircle } from 'lucide-react';
@@ -12,16 +13,26 @@ import { WarmButton } from '@/components/warm-button';
  * Accept logic lives in POST /api/orgs/invitations/accept; this page is the
  * UI that lets an invitee accept (or sign in first and return here).
  */
+// What the page says after a response: a stable kind (translated at render)
+// or the server's own error text.
+type InvitationMessage =
+  | { kind: 'joined'; orgName: string }
+  | { kind: 'accepted' }
+  | { kind: 'notAccepted' }
+  | { kind: 'generic' }
+  | { kind: 'server'; text: string };
+
 export default function AcceptInvitationPage() {
+  const t = useTranslations('authPages.acceptInvitation');
   const params = useParams<{ token: string }>();
   const token = params?.token;
   const [status, setStatus] = useState<'idle' | 'accepting' | 'done' | 'error'>('idle');
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<InvitationMessage | null>(null);
 
   const handleAccept = async () => {
     if (!token) return;
     setStatus('accepting');
-    setMessage('');
+    setMessage(null);
     try {
       const res = await fetch('/api/orgs/invitations/accept', {
         method: 'POST',
@@ -39,19 +50,36 @@ export default function AcceptInvitationPage() {
 
       if (res.ok) {
         setStatus('done');
-        setMessage(data.orgName ? `You've joined ${data.orgName}.` : 'Invitation accepted.');
+        setMessage(data.orgName ? { kind: 'joined', orgName: String(data.orgName) } : { kind: 'accepted' });
         setTimeout(() => {
           window.location.href = data.orgId ? `/app/b2b/orgs/${data.orgId}` : '/app/b2b';
         }, 1200);
       } else {
         setStatus('error');
-        setMessage(data.error || 'This invitation could not be accepted.');
+        setMessage(data.error ? { kind: 'server', text: String(data.error) } : { kind: 'notAccepted' });
       }
     } catch {
       setStatus('error');
-      setMessage('Something went wrong. Please try again.');
+      setMessage({ kind: 'generic' });
     }
   };
+
+  const messageText = (() => {
+    switch (message?.kind) {
+      case 'joined':
+        return t('joined', { orgName: message.orgName });
+      case 'accepted':
+        return t('accepted');
+      case 'notAccepted':
+        return t('errorNotAccepted');
+      case 'generic':
+        return t('errorGeneric');
+      case 'server':
+        return message.text;
+      default:
+        return '';
+    }
+  })();
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-[var(--bg)] [background-image:var(--gradient-mesh-1),var(--gradient-mesh-2)]">
@@ -72,25 +100,25 @@ export default function AcceptInvitationPage() {
 
         {status === 'done' ? (
           <>
-            <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">Welcome aboard!</h1>
-            <p className="text-[var(--text-muted)]">{message} Redirecting…</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">{t('welcomeTitle')}</h1>
+            <p className="text-[var(--text-muted)]">{messageText || t('accepted')}</p>
           </>
         ) : status === 'error' ? (
           <>
-            <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">Invitation problem</h1>
-            <p className="text-[var(--text-muted)] mb-6">{message}</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">{t('problemTitle')}</h1>
+            <p className="text-[var(--text-muted)] mb-6">{messageText}</p>
             <WarmButton asChild variant="secondary">
-              <Link href="/app/b2b">Go to your organizations</Link>
+              <Link href="/app/b2b">{t('goToOrgs')}</Link>
             </WarmButton>
           </>
         ) : (
           <>
-            <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">You&apos;ve been invited</h1>
+            <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">{t('invitedTitle')}</h1>
             <p className="text-[var(--text-muted)] mb-7">
-              Accept this invitation to join the organization. You may be asked to sign in first.
+              {t('invitedDesc')}
             </p>
             <WarmButton onClick={handleAccept} isLoading={status === 'accepting'} disabled={!token} fullWidth size="lg">
-              {status === 'accepting' ? 'Accepting…' : 'Accept invitation'}
+              {status === 'accepting' ? t('accepting') : t('accept')}
             </WarmButton>
           </>
         )}

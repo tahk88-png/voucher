@@ -19,6 +19,8 @@ export default function OnboardingPage() {
   const [merchant, setMerchant] = useState<any>(null);
   const [fetchError, setFetchError] = useState(false);
   const t = useTranslations();
+  const tp = useTranslations('merchantSettings.onboarding');
+  const tf = useTranslations('merchantSettings.form');
 
   const loadMerchant = useCallback(() => {
     setFetchError(false);
@@ -62,7 +64,7 @@ export default function OnboardingPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.error || 'Failed to update merchant');
+        throw new Error(error.error || tp('updateFailed'));
       }
 
       showSuccess(t('success.merchantProfileUpdated'));
@@ -77,14 +79,14 @@ export default function OnboardingPage() {
   if (fetchError) {
     return (
       <div className="p-4 flex flex-col items-center gap-4 text-center">
-        <p className="text-sm text-[#c84b36]">Failed to load merchant data.</p>
-        <WarmButton size="sm" onClick={loadMerchant}>Retry</WarmButton>
+        <p className="text-sm text-[#c84b36]">{tp('loadFailed')}</p>
+        <WarmButton size="sm" onClick={loadMerchant}>{tp('retry')}</WarmButton>
       </div>
     );
   }
 
   if (!merchant) {
-    return <div className="p-4 text-sm text-[var(--text-muted)]">Loading...</div>;
+    return <div className="p-4 text-sm text-[var(--text-muted)]">{tp('loading')}</div>;
   }
 
   const brandColors =
@@ -95,16 +97,16 @@ export default function OnboardingPage() {
     <div className="p-4 sm:p-6">
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Complete your profile</h1>
-          <p className="text-sm text-[var(--text-muted)]">Set up your merchant brand profile.</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{tp('title')}</h1>
+          <p className="text-sm text-[var(--text-muted)]">{tp('subtitle')}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
-            <h2 className="text-base font-semibold text-[var(--text)]">Basic information</h2>
+            <h2 className="text-base font-semibold text-[var(--text)]">{tp('basicInfo')}</h2>
             <div className="space-y-4 mt-4">
               <div>
-                <Label htmlFor="name">Merchant name *</Label>
+                <Label htmlFor="name">{tp('merchantName')}</Label>
                 <Input
                   id="name"
                   name="name"
@@ -114,7 +116,7 @@ export default function OnboardingPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="website">Website</Label>
+                <Label htmlFor="website">{tf('website')}</Label>
                 <Input
                   id="website"
                   name="website"
@@ -125,7 +127,7 @@ export default function OnboardingPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="supportEmail">Support email</Label>
+                <Label htmlFor="supportEmail">{tf('supportEmail')}</Label>
                 <Input
                   id="supportEmail"
                   name="supportEmail"
@@ -140,12 +142,12 @@ export default function OnboardingPage() {
 
           <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
             <div>
-              <h2 className="text-base font-semibold text-[var(--text)]">Brand profile</h2>
-              <p className="text-sm text-[var(--text-muted)]">Customize your brand colors and logo.</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">{tp('brandTitle')}</h2>
+              <p className="text-sm text-[var(--text-muted)]">{tp('brandSubtitle')}</p>
             </div>
             <div className="space-y-4 mt-4">
               <div>
-                <Label htmlFor="brandLogoUrl">Logo URL</Label>
+                <Label htmlFor="brandLogoUrl">{tf('logoUrl')}</Label>
                 <Input
                   id="brandLogoUrl"
                   name="brandLogoUrl"
@@ -156,7 +158,7 @@ export default function OnboardingPage() {
                 />
               </div>
               <div>
-                <Label htmlFor="primaryColor">Primary color</Label>
+                <Label htmlFor="primaryColor">{tf('primaryColor')}</Label>
                 <div className="flex gap-2">
                   <Input
                     id="primaryColor"
@@ -170,7 +172,7 @@ export default function OnboardingPage() {
                     defaultValue={brandColors.primary}
                     placeholder="#FFC857"
                     className="flex-1 border-[var(--border)]"
-                    aria-label="Primary color hex value"
+                    aria-label={tf('primaryColorHex')}
                     onChange={(e) => {
                       const colorInput = document.getElementById('primaryColor') as HTMLInputElement;
                       if (colorInput) colorInput.value = e.target.value;
@@ -179,7 +181,7 @@ export default function OnboardingPage() {
                 </div>
               </div>
               <div>
-                <Label htmlFor="secondaryColor">Secondary color</Label>
+                <Label htmlFor="secondaryColor">{tf('secondaryColor')}</Label>
                 <div className="flex gap-2">
                   <Input
                     id="secondaryColor"
@@ -193,7 +195,7 @@ export default function OnboardingPage() {
                     defaultValue={brandColors.secondary}
                     placeholder="#71717a"
                     className="flex-1 border-[var(--border)]"
-                    aria-label="Secondary color hex value"
+                    aria-label={tf('secondaryColorHex')}
                     onChange={(e) => {
                       const colorInput = document.getElementById('secondaryColor') as HTMLInputElement;
                       if (colorInput) colorInput.value = e.target.value;
@@ -202,7 +204,7 @@ export default function OnboardingPage() {
                 </div>
               </div>
               <div>
-                <Label htmlFor="backgroundColor">Background color</Label>
+                <Label htmlFor="backgroundColor">{tf('backgroundColor')}</Label>
                 <div className="flex gap-2">
                   <Input
                     id="backgroundColor"
@@ -216,7 +218,7 @@ export default function OnboardingPage() {
                     defaultValue={brandColors.background}
                     placeholder="#fafafa"
                     className="flex-1 border-[var(--border)]"
-                    aria-label="Background color hex value"
+                    aria-label={tf('backgroundColorHex')}
                     onChange={(e) => {
                       const colorInput = document.getElementById('backgroundColor') as HTMLInputElement;
                       if (colorInput) colorInput.value = e.target.value;
@@ -229,7 +231,7 @@ export default function OnboardingPage() {
 
           <div className="flex gap-4">
             <WarmButton type="submit" disabled={isLoading}>
-              {isLoading ? 'Saving...' : 'Complete onboarding'}
+              {isLoading ? tf('saving') : tp('submit')}
             </WarmButton>
             <WarmButton
               type="button"
@@ -248,7 +250,7 @@ export default function OnboardingPage() {
                 router.push(`/merchant/${merchantSlug}/dashboard`);
               }}
             >
-              Skip for now
+              {tp('skip')}
             </WarmButton>
           </div>
         </form>

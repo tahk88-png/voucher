@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { Package } from 'lucide-react';
 import { WarmButton } from '@/components/warm-button';
 import { showSuccess, showError } from '@/lib/toast-helpers';
+
+const INTERVALS = ['weekly', 'monthly', 'quarterly'];
 
 interface PublicBox {
   id: string;
@@ -18,6 +21,10 @@ interface PublicBox {
 }
 
 export default function PublicSubscriptionBoxesPage() {
+  const t = useTranslations('shop.boxes');
+  const locale = useLocale();
+  const intervalLabel = (interval: string) =>
+    INTERVALS.includes(interval) ? t(`interval.${interval}`) : interval;
   const [boxes, setBoxes] = useState<PublicBox[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +38,7 @@ export default function PublicSubscriptionBoxesPage() {
 
   const formatPrice = (cents: number, currency: string) => {
     try {
-      return new Intl.NumberFormat('en', { style: 'currency', currency }).format(cents / 100);
+      return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(cents / 100);
     } catch {
       return `${(cents / 100).toFixed(2)} ${currency}`;
     }
@@ -47,10 +54,10 @@ export default function PublicSubscriptionBoxesPage() {
       return;
     }
     if (res.ok) {
-      showSuccess('You are now subscribed. Check your email for details.', 'Subscribed');
+      showSuccess(t('subscribedMessage'), t('subscribedTitle'));
     } else {
       const data = await res.json().catch(() => ({}));
-      showError(data.error || 'Failed to subscribe. Please try again.');
+      showError(data.error || t('subscribeFailed'));
     }
   };
 
@@ -58,9 +65,9 @@ export default function PublicSubscriptionBoxesPage() {
     <div className="min-h-screen bg-[var(--bg)] [background-image:var(--gradient-mesh-1),var(--gradient-mesh-3)]">
       <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
         <div className="text-center mb-10">
-          <h1 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-3">Subscription Boxes</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold text-[var(--text)] mb-3">{t('title')}</h1>
           <p className="text-[var(--text-muted)] text-lg max-w-2xl mx-auto">
-            Receive curated vouchers delivered to you on a recurring basis from top merchants.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -70,7 +77,7 @@ export default function PublicSubscriptionBoxesPage() {
           </div>
         ) : boxes.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-[var(--text-muted)] text-lg">No subscription boxes available yet. Check back soon!</p>
+            <p className="text-[var(--text-muted)] text-lg">{t('empty')}</p>
           </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -88,24 +95,24 @@ export default function PublicSubscriptionBoxesPage() {
                       {box.name}
                     </h3>
                   </Link>
-                  <p className="text-sm text-[var(--text-muted)]">by {box.merchantName}</p>
+                  <p className="text-sm text-[var(--text-muted)]">{t('byMerchant', { name: box.merchantName })}</p>
                 </div>
                 <div className="p-6">
                   {box.description && <p className="text-sm text-[var(--text-muted)] mb-4 line-clamp-2">{box.description}</p>}
                   <div className="flex items-center justify-between gap-3">
                     <div>
                       <span className="text-2xl font-bold text-[var(--text)]">{formatPrice(box.priceCents, box.currency)}</span>
-                      <span className="text-sm text-[var(--text-muted)]">/{box.interval}</span>
+                      <span className="text-sm text-[var(--text-muted)]">{t('perInterval', { interval: intervalLabel(box.interval) })}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Link
                         href={`/subscription-boxes/${box.id}`}
                         className="text-sm font-medium text-[var(--primary-hover)] hover:underline"
                       >
-                        Details
+                        {t('details')}
                       </Link>
                       <WarmButton size="sm" onClick={() => handleSubscribe(box.id)}>
-                        Subscribe
+                        {t('subscribe')}
                       </WarmButton>
                     </div>
                   </div>

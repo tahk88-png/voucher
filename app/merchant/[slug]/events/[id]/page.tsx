@@ -7,9 +7,24 @@ import { formatCurrency } from '@/lib/utils';
 import GenerateTicketsButton from './generate-tickets-button';
 import PublishEventButton from './publish-button';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { isSupportedLocale, localeToIntlLocale } from '@/lib/locale-config';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
+
+const EVENT_STATUSES = ['draft', 'published', 'sold_out', 'cancelled', 'ended'] as const;
+type EventStatus = (typeof EVENT_STATUSES)[number];
+const isEventStatus = (value: string): value is EventStatus =>
+  (EVENT_STATUSES as readonly string[]).includes(value);
+
+const EVENT_TYPES = ['festival', 'internal', 'concert', 'workshop', 'other'] as const;
+type EventType = (typeof EVENT_TYPES)[number];
+const isEventType = (value: string): value is EventType => (EVENT_TYPES as readonly string[]).includes(value);
+
+const TICKET_STATUSES = ['available', 'sold', 'used', 'cancelled', 'refunded'] as const;
+type TicketStatus = (typeof TICKET_STATUSES)[number];
+const isTicketStatus = (value: string): value is TicketStatus =>
+  (TICKET_STATUSES as readonly string[]).includes(value);
 
 export default async function EventDetailPage({
   params,
@@ -54,6 +69,9 @@ export default async function EventDetailPage({
 
   const availableTickets = event.maxCapacity - soldTickets;
   const t = await getTranslations('nav');
+  const tE = await getTranslations('merchantEvents');
+  const locale = await getLocale();
+  const intlLocale = isSupportedLocale(locale) ? localeToIntlLocale[locale] : 'en-GB';
 
   return (
     <div className="p-4 sm:p-6">
@@ -69,11 +87,11 @@ export default async function EventDetailPage({
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl font-semibold text-[var(--text)]">{event.name}</h1>
-              <p className="text-sm text-[var(--text-muted)]">{event.description || 'No description'}</p>
+              <p className="text-sm text-[var(--text-muted)]">{event.description || tE('detail.noDescription')}</p>
             </div>
             <div className="flex gap-2">
               <WarmButton asChild variant="outline" size="sm">
-                <Link href={`/merchant/${slug}/events/${event.id}/edit`}>Edit</Link>
+                <Link href={`/merchant/${slug}/events/${event.id}/edit`}>{tE('detail.edit')}</Link>
               </WarmButton>
               <PublishEventButton eventId={event.id} currentStatus={event.status} />
             </div>
@@ -82,12 +100,18 @@ export default async function EventDetailPage({
 
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
           {[
-            { label: 'Status', value: event.status },
-            { label: 'Type', value: event.type },
-            { label: 'Event date', value: new Date(event.eventDate).toLocaleString() },
             {
-              label: 'Price',
-              value: event.price > 0 ? formatCurrency(event.price, event.currency) : 'Free',
+              label: tE('detail.status'),
+              value: isEventStatus(event.status) ? tE(`statusName.${event.status}`) : event.status,
+            },
+            { label: tE('detail.type'), value: isEventType(event.type) ? tE(`type.${event.type}`) : event.type },
+            {
+              label: tE('detail.eventDate'),
+              value: new Date(event.eventDate).toLocaleString(intlLocale, { dateStyle: 'medium', timeStyle: 'short' }),
+            },
+            {
+              label: tE('detail.price'),
+              value: event.price > 0 ? formatCurrency(event.price, event.currency) : tE('detail.free'),
             },
           ].map((item) => (
             <WarmCard key={item.label} padding="lg" className="bg-[var(--surface)]">
@@ -99,9 +123,9 @@ export default async function EventDetailPage({
 
         <div className="grid gap-4 sm:grid-cols-3 mb-6">
           {[
-            { label: 'Total tickets', value: event._count.tickets },
-            { label: 'Sold', value: soldTickets },
-            { label: 'Available', value: availableTickets },
+            { label: tE('detail.totalTickets'), value: event._count.tickets },
+            { label: tE('detail.sold'), value: soldTickets },
+            { label: tE('detail.available'), value: availableTickets },
           ].map((item) => (
             <WarmCard key={item.label} padding="lg" className="bg-[var(--surface)] text-center">
               <p className="text-sm text-[var(--text-faint)]">{item.label}</p>
@@ -112,7 +136,7 @@ export default async function EventDetailPage({
 
         {event.location && (
           <WarmCard padding="lg" className="bg-[var(--surface)] mb-6">
-            <p className="text-sm text-[var(--text-faint)]">Location</p>
+            <p className="text-sm text-[var(--text-faint)]">{tE('detail.location')}</p>
             <p className="text-sm text-[var(--text)] mt-1">{event.location}</p>
             {event.locationAddress && (
               <p className="text-sm text-[var(--text-muted)]">{event.locationAddress}</p>
@@ -122,7 +146,7 @@ export default async function EventDetailPage({
 
         {event.terms && (
           <WarmCard padding="lg" className="bg-[var(--surface)] mb-6">
-            <p className="text-sm text-[var(--text-faint)]">Terms and conditions</p>
+            <p className="text-sm text-[var(--text-faint)]">{tE('detail.terms')}</p>
             <p className="text-sm text-[var(--text)] mt-1 whitespace-pre-wrap">{event.terms}</p>
           </WarmCard>
         )}
@@ -130,8 +154,8 @@ export default async function EventDetailPage({
         <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-base font-semibold text-[var(--text)]">Tickets</h2>
-              <p className="text-sm text-[var(--text-muted)]">Tickets for this event</p>
+              <h2 className="text-base font-semibold text-[var(--text)]">{tE('detail.ticketsTitle')}</h2>
+              <p className="text-sm text-[var(--text-muted)]">{tE('detail.ticketsDescription')}</p>
             </div>
             <GenerateTicketsButton
               eventId={event.id}
@@ -145,7 +169,7 @@ export default async function EventDetailPage({
           </div>
           {event.tickets.length === 0 ? (
             <div className="text-center py-8">
-              <p className="text-[var(--text-muted)] text-sm mb-4">No tickets generated yet.</p>
+              <p className="text-[var(--text-muted)] text-sm mb-4">{tE('detail.noTickets')}</p>
               <GenerateTicketsButton
                 eventId={event.id}
                 merchantSlug={slug}
@@ -165,16 +189,18 @@ export default async function EventDetailPage({
                 >
                   <div>
                     <p className="font-medium text-[var(--text)]">{ticket.ticketNumber}</p>
-                    <p className="text-sm text-[var(--text-faint)] capitalize">{ticket.status}</p>
+                    <p className="text-sm text-[var(--text-faint)] capitalize">
+                      {isTicketStatus(ticket.status) ? tE(`ticketStatus.${ticket.status}`) : ticket.status}
+                    </p>
                   </div>
                   <div className="flex gap-2">
                     <WarmButton asChild variant="outline" size="sm">
-                      <Link href={`/tickets/${ticket.id}`}>View</Link>
+                      <Link href={`/tickets/${ticket.id}`}>{tE('detail.view')}</Link>
                     </WarmButton>
                     {ticket.status === 'sold' && (
                       <WarmButton asChild variant="outline" size="sm">
                         <Link href={`/merchant/${slug}/events/${event.id}/redeem?ticket=${ticket.id}`}>
-                          Redeem
+                          {tE('detail.redeem')}
                         </Link>
                       </WarmButton>
                     )}

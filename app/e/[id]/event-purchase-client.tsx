@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { formatCurrency } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface EventPurchaseClientProps {
   event: {
@@ -32,6 +33,8 @@ export default function EventPurchaseClient({
   availableTickets,
   brandColors,
 }: EventPurchaseClientProps) {
+  const t = useTranslations('purchase');
+  const tPayment = useTranslations('payment');
   const [selectedTicketId, setSelectedTicketId] = useState<string | null>(
     availableTickets.length > 0 ? availableTickets[0].id : null
   );
@@ -42,7 +45,7 @@ export default function EventPurchaseClient({
 
   const handlePurchase = async () => {
     if (!selectedTicketId) {
-      showError('Please select a ticket');
+      showError(t('eventPurchase.selectTicketError'));
       return;
     }
 
@@ -59,14 +62,14 @@ export default function EventPurchaseClient({
 
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.error || 'Failed to purchase ticket');
+        throw new Error(error.error || t('eventPurchase.purchaseFailed'));
       }
 
       const { url } = await res.json();
       // Redirect to Stripe checkout
       window.location.href = url;
     } catch (error) {
-      showError(error instanceof Error ? error.message : 'Failed to purchase ticket');
+      showError(error instanceof Error ? error.message : t('eventPurchase.purchaseFailed'));
       setIsPurchasing(false);
     }
   };
@@ -75,8 +78,8 @@ export default function EventPurchaseClient({
     <WarmCard padding="lg" className="bg-white">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-lg font-semibold text-[#2D2721]">Purchase ticket</h2>
-          <p className="text-sm text-[#6B5744]">Select a ticket and complete your purchase</p>
+          <h2 className="text-lg font-semibold text-[#2D2721]">{t('eventPurchase.title')}</h2>
+          <p className="text-sm text-[#6B5744]">{t('eventPurchase.description')}</p>
         </div>
         <div
           className="h-3 w-3 rounded-full mt-2"
@@ -89,12 +92,12 @@ export default function EventPurchaseClient({
         {availableTickets.length > 0 ? (
           <>
             <div>
-              <Label htmlFor="ticket">Select ticket</Label>
+              <Label htmlFor="ticket">{t('eventPurchase.selectTicket')}</Label>
               <select
                 id="ticket"
                 value={selectedTicketId || ''}
                 onChange={(e) => setSelectedTicketId(e.target.value)}
-                aria-label="Select ticket"
+                aria-label={t('eventPurchase.selectTicket')}
                 className="mt-1 w-full rounded-[14px] border border-[rgba(139,115,85,0.15)] bg-white px-3 py-2 text-sm text-[#2D2721] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/60"
               >
                 {availableTickets.map((ticket) => (
@@ -106,31 +109,31 @@ export default function EventPurchaseClient({
             </div>
 
             <div>
-              <Label htmlFor="attendeeName">Attendee name (optional)</Label>
+              <Label htmlFor="attendeeName">{t('eventPurchase.attendeeNameLabel')}</Label>
               <Input
                 id="attendeeName"
                 value={attendeeName}
                 onChange={(e) => setAttendeeName(e.target.value)}
-                placeholder="Name of the person attending"
+                placeholder={t('eventPurchase.attendeeNamePlaceholder')}
                 className="mt-1 border-[rgba(139,115,85,0.15)]"
               />
             </div>
 
             <div>
-              <Label htmlFor="attendeeEmail">Attendee email (optional)</Label>
+              <Label htmlFor="attendeeEmail">{t('eventPurchase.attendeeEmailLabel')}</Label>
               <Input
                 id="attendeeEmail"
                 type="email"
                 value={attendeeEmail}
                 onChange={(e) => setAttendeeEmail(e.target.value)}
-                placeholder="Email for ticket delivery"
+                placeholder={t('eventPurchase.attendeeEmailPlaceholder')}
                 className="mt-1 border-[rgba(139,115,85,0.15)]"
               />
             </div>
 
             <div className="pt-4 border-t border-[rgba(139,115,85,0.15)]">
               <div className="flex justify-between items-center mb-4">
-                <span className="text-sm font-medium text-[#6B5744]">Total</span>
+                <span className="text-sm font-medium text-[#6B5744]">{t('eventPurchase.total')}</span>
                 <span className="text-2xl font-semibold text-[#2D2721]">
                   {formatCurrency(event.price, event.currency)}
                 </span>
@@ -141,15 +144,15 @@ export default function EventPurchaseClient({
                 className="w-full"
                 size="lg"
               >
-                {isPurchasing ? 'Processing...' : 'Purchase ticket'}
+                {isPurchasing ? tPayment('processing') : t('eventPurchase.submit')}
               </WarmButton>
             </div>
           </>
         ) : (
           <div className="text-center py-8">
-            <p className="text-sm text-[#6B5744]">No tickets available at the moment.</p>
+            <p className="text-sm text-[#6B5744]">{t('eventPurchase.noTickets')}</p>
             <p className="text-sm text-[#8B7355] mt-2">
-              Please check back later or contact the event organizer.
+              {t('eventPurchase.checkBackLater')}
             </p>
           </div>
         )}

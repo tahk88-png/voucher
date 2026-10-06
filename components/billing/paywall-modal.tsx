@@ -7,6 +7,9 @@ import { StartSubscriptionButton, ManageBillingButton } from '@/components/billi
 import { AlertCircle, ArrowUp, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
+/** Plan limits that evaluateEntitlement() can report (lib/access-control/monetization). */
+const LIMIT_KEYS = ['campaignCreatesPerCycle', 'activeCampaigns', 'voucherCreatesPerCycle', 'teamMembers'];
+
 type PaywallModalProps = {
   open: boolean;
   onClose: () => void;
@@ -30,6 +33,7 @@ export default function PaywallModal({
   hasStripeCustomer,
 }: PaywallModalProps) {
   const t = useTranslations('billing');
+  const tm = useTranslations('merchantDashboard.billing');
   if (!open) return null;
 
   const targetTier = (requiredPlan ?? 'pro') as PlanTier;
@@ -41,7 +45,7 @@ export default function PaywallModal({
       <WarmCard padding="xl" className="max-w-md w-full relative">
         <button
           onClick={onClose}
-          aria-label="Close"
+          aria-label={tm('close')}
           className="absolute top-4 right-4 p-1 rounded-full hover:bg-[#FAF7F2] transition-colors"
         >
           <X className="h-5 w-5 text-[#8B7355]" />
@@ -60,8 +64,18 @@ export default function PaywallModal({
         {limit && (
           <div className="p-3 bg-[#f6e1d7] rounded-[var(--r-sm)] border border-[#cc785c]/30 mb-4">
             <p className="text-sm text-[#2D2721]">
-              <span className="font-semibold">{limit.current}</span> / {limit.max} used
-              <span className="text-[#8B7355] ml-1">({limit.key.replace(/([A-Z])/g, ' $1').toLowerCase()})</span>
+              {tm.rich('usage', {
+                current: limit.current,
+                max: limit.max,
+                b: (chunks) => <span className="font-semibold">{chunks}</span>,
+              })}
+              <span className="text-[#8B7355] ml-1">
+                (
+                {LIMIT_KEYS.includes(limit.key)
+                  ? tm(`limitKeys.${limit.key}`)
+                  : limit.key.replace(/([A-Z])/g, ' $1').toLowerCase()}
+                )
+              </span>
             </p>
           </div>
         )}

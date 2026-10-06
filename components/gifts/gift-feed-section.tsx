@@ -3,6 +3,7 @@
 import { GiftCard } from './gift-card';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 interface FeedItem {
   id: string;
@@ -31,6 +32,7 @@ interface GiftFeedSectionProps {
 }
 
 export function GiftFeedSection({ title, subtitle, items, viewAllHref, onTrack }: GiftFeedSectionProps) {
+  const t = useTranslations('giftsPages.feedSection');
   if (items.length === 0) return null;
 
   return (
@@ -45,7 +47,7 @@ export function GiftFeedSection({ title, subtitle, items, viewAllHref, onTrack }
             href={viewAllHref}
             className="text-sm text-[var(--primary)] font-medium flex items-center gap-0.5 hover:underline"
           >
-            View all <ChevronRight className="h-4 w-4" />
+            {t('viewAll')} <ChevronRight className="h-4 w-4" />
           </Link>
         )}
       </div>

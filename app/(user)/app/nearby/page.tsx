@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { WarmCard } from "@/components/warm-card";
 import { WarmButton } from "@/components/warm-button";
 import { DistanceBadge } from "@/components/distance-badge";
@@ -30,14 +31,28 @@ interface NearbyMerchant {
   activeVoucherCount: number;
 }
 
+/** Keys under account.nearby.errors; the message is translated when rendered. */
+type NearbyError =
+  | "fetchFailed"
+  | "geolocationUnsupported"
+  | "permissionDenied"
+  | "positionUnavailable"
+  | "timeout"
+  | "locationFailed"
+  | "ipLocationFailed";
+
+/** Coordinates from the browser, or the approximate IP-based location from the API. */
+type LocationLabel = { kind: "coords"; text: string } | { kind: "approximate" } | null;
+
 export default function NearbyPage() {
+  const t = useTranslations("account");
   const [merchants, setMerchants] = useState<NearbyMerchant[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<NearbyError | null>(null);
   const [radius, setRadius] = useState(10);
   const [userLat, setUserLat] = useState<number | null>(null);
   const [userLon, setUserLon] = useState<number | null>(null);
-  const [locationLabel, setLocationLabel] = useState<string>("");
+  const [locationLabel, setLocationLabel] = useState<LocationLabel>(null);
   const [mapBounds, setMapBounds] = useState<{
     minLat: number;
     maxLat: number;
@@ -78,7 +93,7 @@ export default function NearbyPage() {
           });
         }
       } catch {
-        setError("Could not load nearby merchants. Please try again.");
+        setError("fetchFailed");
       } finally {
         setLoading(false);
       }
@@ -88,7 +103,7 @@ export default function NearbyPage() {
 
   const handleUseMyLocation = useCallback(() => {
     if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser.");
+      setError("geolocationUnsupported");
       return;
     }
 
@@ -99,25 +114,23 @@ export default function NearbyPage() {
         const lon = position.coords.longitude;
         setUserLat(lat);
         setUserLon(lon);
-        setLocationLabel(`${lat.toFixed(4)}, ${lon.toFixed(4)}`);
+        setLocationLabel({ kind: "coords", text: `${lat.toFixed(4)}, ${lon.toFixed(4)}` });
         fetchNearby(lat, lon, radius);
       },
       (err) => {
         setLoading(false);
         switch (err.code) {
           case err.PERMISSION_DENIED:
-            setError(
-              "Location access denied. Please enable location in your browser settings."
-            );
+            setError("permissionDenied");
             break;
           case err.POSITION_UNAVAILABLE:
-            setError("Location unavailable. Try again later.");
+            setError("positionUnavailable");
             break;
           case err.TIMEOUT:
-            setError("Location request timed out. Try again.");
+            setError("timeout");
             break;
           default:
-            setError("Could not get your location.");
+            setError("locationFailed");
         }
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
@@ -134,7 +147,7 @@ export default function NearbyPage() {
           if (data.meta) {
             setUserLat(data.meta.lat);
             setUserLon(data.meta.lon);
-            setLocationLabel("Approximate location (IP-based)");
+            setLocationLabel({ kind: "approximate" });
           }
           setMerchants(data.merchants || []);
 
@@ -159,7 +172,7 @@ export default function NearbyPage() {
           }
         })
         .catch(() => {
-          setError("Could not determine your location.");
+          setError("ipLocationFailed");
         })
         .finally(() => setLoading(false));
     }
@@ -191,10 +204,10 @@ export default function NearbyPage() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-semibold text-[var(--text)]">
-          Nearby Offers
+          {t("nearby.title")}
         </h1>
         <p className="text-sm text-[var(--text-muted)]">
-          Find deals and vouchers from merchants near you
+          {t("nearby.subtitle")}
         </p>
       </div>
 
@@ -209,13 +222,17 @@ export default function NearbyPage() {
               className="flex-shrink-0"
             >
               <Navigation className="h-4 w-4 mr-2" />
-              Use my location
+              {t("nearby.useMyLocation")}
             </WarmButton>
 
             {locationLabel && (
               <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
                 <MapPin className="h-4 w-4 shrink-0" />
-                <span>{locationLabel}</span>
+                <span>
+                  {locationLabel.kind === "approximate"
+                    ? t("nearby.approximateLocation")
+                    : locationLabel.text}
+                </span>
               </div>
             )}
           </div>
@@ -223,7 +240,7 @@ export default function NearbyPage() {
           {/* Radius slider */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label className="text-sm font-medium">Search radius</Label>
+              <Label className="text-sm font-medium">{t("nearby.searchRadius")}</Label>
               <span className="text-sm font-semibold text-[var(--primary)]">
                 {radius} km
               </span>
@@ -250,7 +267,7 @@ export default function NearbyPage() {
         <WarmCard padding="md" className="border-[var(--danger)]/30 bg-[var(--danger)]/5">
           <div className="flex items-center gap-3 text-[var(--danger)]">
             <AlertCircle className="h-5 w-5 shrink-0" />
-            <p className="text-sm">{error}</p>
+            <p className="text-sm">{t(`nearby.errors.${error}`)}</p>
           </div>
         </WarmCard>
       )}
@@ -273,7 +290,7 @@ export default function NearbyPage() {
               <div
                 className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
                 style={toMapPosition(userLat, userLon)}
-                title="Your location"
+                title={t("nearby.yourLocation")}
               >
                 <div className="relative">
                   <div className="absolute inset-0 h-5 w-5 rounded-full bg-[var(--primary)] animate-ping opacity-30" />
@@ -311,7 +328,7 @@ export default function NearbyPage() {
 
             {/* Map label */}
             <div className="absolute bottom-2 right-2 px-2 py-1 bg-[var(--surface)]/80 backdrop-blur-sm rounded-[var(--r-sm)] text-xs text-[var(--text-faint)]">
-              {merchants.length} merchant{merchants.length !== 1 ? "s" : ""} within {radius} km
+              {t("nearby.mapLabel", { count: merchants.length, radius })}
             </div>
           </div>
         </WarmCard>
@@ -328,7 +345,7 @@ export default function NearbyPage() {
       {merchants.length > 0 && (
         <div className="space-y-3">
           <h2 className="text-lg font-semibold text-[var(--text)]">
-            {merchants.length} merchant{merchants.length !== 1 ? "s" : ""} nearby
+            {t("nearby.merchantsNearby", { count: merchants.length })}
           </h2>
 
           {merchants.map((merchant) => (
@@ -375,8 +392,7 @@ export default function NearbyPage() {
                     <div className="flex items-center gap-1.5 mt-2 text-xs text-[var(--text-faint)]">
                       <Ticket className="h-3.5 w-3.5" />
                       <span>
-                        {merchant.activeVoucherCount} active voucher
-                        {merchant.activeVoucherCount !== 1 ? "s" : ""}
+                        {t("nearby.activeVouchers", { count: merchant.activeVoucherCount })}
                       </span>
                     </div>
                   </div>
@@ -393,17 +409,16 @@ export default function NearbyPage() {
           <div className="py-10 text-center">
             <MapPin className="h-12 w-12 mx-auto text-[var(--text-faint)] mb-4" />
             <h3 className="text-lg font-semibold text-[var(--text)] mb-2">
-              No merchants nearby
+              {t("nearby.emptyTitle")}
             </h3>
             <p className="text-sm text-[var(--text-muted)] mb-4">
-              Try increasing the search radius or check back later for new
-              offers in your area.
+              {t("nearby.emptyBody")}
             </p>
             <WarmButton
               onClick={() => handleRadiusChange(Math.min(radius + 10, 50))}
               variant="outline"
             >
-              Expand to {Math.min(radius + 10, 50)} km
+              {t("nearby.expandRadius", { radius: Math.min(radius + 10, 50) })}
             </WarmButton>
           </div>
         </WarmCard>

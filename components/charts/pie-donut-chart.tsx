@@ -11,6 +11,7 @@ import {
   Sector,
   type TooltipProps,
 } from "recharts"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 interface PieDonutDatum {
@@ -83,6 +84,7 @@ export function PieDonutChart({
   showLegend = true,
   className,
 }: PieDonutChartProps) {
+  const t = useTranslations("dsComponents.pieDonutChart")
   const [activeIndex, setActiveIndex] = React.useState<number | undefined>(undefined)
 
   if (!data || data.length === 0) {
@@ -94,7 +96,7 @@ export function PieDonutChart({
         )}
         style={{ height }}
       >
-        <p className="text-sm text-[var(--text-muted)]">No data available</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("noData")}</p>
       </div>
     )
   }
@@ -167,7 +169,7 @@ export function PieDonutChart({
               dominantBaseline="central"
               className="fill-[var(--text-muted)] text-xs"
             >
-              {activeValue ? activeValue.name : "Total"}
+              {activeValue ? activeValue.name : t("total")}
             </text>
           )}
         </PieChart>

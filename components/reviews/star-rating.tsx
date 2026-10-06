@@ -2,6 +2,7 @@
 
 import { Star } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface StarRatingProps {
   rating: number;
@@ -24,6 +25,7 @@ export function StarRating({
   interactive = false,
   onChange,
 }: StarRatingProps) {
+  const t = useTranslations('reviews.stars');
   const [hoverRating, setHoverRating] = useState(0);
   const iconSize = sizeMap[size];
   const displayRating = interactive && hoverRating > 0 ? hoverRating : rating;
@@ -43,7 +45,7 @@ export function StarRating({
             onClick={() => interactive && onChange?.(star)}
             onMouseEnter={() => interactive && setHoverRating(star)}
             onMouseLeave={() => interactive && setHoverRating(0)}
-            aria-label={`${star} star${star !== 1 ? 's' : ''}`}
+            aria-label={t('starLabel', { count: star })}
           >
             {halfFilled ? (
               <div className="relative" style={{ width: iconSize, height: iconSize }}>

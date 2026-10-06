@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { AppealStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { logger } from "@/lib/logger";
 import { withErrorHandler } from "@/lib/error-handler";
@@ -12,11 +13,21 @@ export async function GET(req: NextRequest) {
     );
 
     const { searchParams } = new URL(req.url);
-    const status = searchParams.get("status") ?? undefined;
+    const status = searchParams.get("status") || undefined;
     const { cursor, limit } = parseCursorParams(searchParams);
 
-    const where: Record<string, unknown> = {};
-    if (status) where.status = status;
+    // Only real AppealStatus values reach Prisma; anything else used to
+    // throw a validation error and surface as a 500.
+    const validStatuses = Object.values(AppealStatus) as string[];
+    if (status && !validStatuses.includes(status)) {
+      return NextResponse.json(
+        { error: `Unknown status. Use one of: ${validStatuses.join(", ")}.` },
+        { status: 400 }
+      );
+    }
+
+    const where: { status?: AppealStatus } = {};
+    if (status) where.status = status as AppealStatus;
 
     logger.info("Admin fetching appeals list", {
       adminUserId: admin.userId,

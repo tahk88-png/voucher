@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import { showConfirm } from '@/lib/confirm-helpers';
 import { Plus, Trash2, Shield, UserCog, Eye, Users } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Member {
   id: string;
@@ -25,9 +26,9 @@ interface Member {
 }
 
 const ROLE_OPTIONS = [
-  { value: 'merchant_admin', label: 'Admin', description: 'Full access — manage vouchers, campaigns, members, and settings' },
-  { value: 'merchant_staff', label: 'Staff', description: 'Operational access — confirm redemptions and view data' },
-];
+  { value: 'merchant_admin', labelKey: 'admin', descriptionKey: 'adminDescription' },
+  { value: 'merchant_staff', labelKey: 'staff', descriptionKey: 'staffDescription' },
+] as const;
 
 const ROLE_COLORS: Record<string, string> = {
   merchant_admin: 'bg-amber-100 text-amber-800 border-amber-200',
@@ -38,10 +39,6 @@ const ROLE_ICONS: Record<string, React.ReactNode> = {
   merchant_admin: <Shield className="h-3 w-3" />,
   merchant_staff: <UserCog className="h-3 w-3" />,
 };
-
-function getRoleLabel(role: string): string {
-  return ROLE_OPTIONS.find((r) => r.value === role)?.label ?? role;
-}
 
 export default function MembersPage() {
   const params = useParams();
@@ -54,6 +51,15 @@ export default function MembersPage() {
   const [inviting, setInviting] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editRole, setEditRole] = useState('');
+  const t = useTranslations('merchantTeam.members');
+  const tRoles = useTranslations('merchantTeam.roles');
+  const locale = useLocale();
+  const dateLocale = locale === 'en' ? 'en-GB' : locale;
+
+  const getRoleLabel = (role: string): string => {
+    const option = ROLE_OPTIONS.find((r) => r.value === role);
+    return option ? tRoles(option.labelKey) : role;
+  };
 
   const fetchMembers = useCallback(() => {
     fetch(`/api/merchant/${slug}/members`)
@@ -61,9 +67,9 @@ export default function MembersPage() {
       .then((data) => {
         if (Array.isArray(data)) setMembers(data);
       })
-      .catch(() => showError('Failed to load team members'))
+      .catch(() => showError(t('loadFailed')))
       .finally(() => setLoading(false));
-  }, [slug]);
+  }, [slug, t]);
 
   useEffect(() => {
     fetchMembers();
@@ -81,16 +87,16 @@ export default function MembersPage() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || 'Failed to invite member');
+        throw new Error(data?.error || t('inviteFailed'));
       }
       const member = await res.json();
       setMembers((prev) => [...prev, member]);
       setInviteEmail('');
       setInviteRole('merchant_staff');
       setShowInvite(false);
-      showSuccess('Member invited successfully');
+      showSuccess(t('invited'));
     } catch (err) {
-      showError(err instanceof Error ? err.message : 'Failed to invite member');
+      showError(err instanceof Error ? err.message : t('inviteFailed'));
     } finally {
       setInviting(false);
     }
@@ -105,33 +111,33 @@ export default function MembersPage() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || 'Failed to update role');
+        throw new Error(data?.error || t('updateRoleFailed'));
       }
       const updated = await res.json();
       setMembers((prev) => prev.map((m) => (m.id === memberId ? updated : m)));
       setEditingId(null);
-      showSuccess('Role updated');
+      showSuccess(t('roleUpdated'));
     } catch (err) {
-      showError(err instanceof Error ? err.message : 'Failed to update role');
+      showError(err instanceof Error ? err.message : t('updateRoleFailed'));
     }
   };
 
   const handleRemove = async (memberId: string, memberName: string) => {
-    showConfirm(`Remove ${memberName} from the team?`, async () => {
+    showConfirm(t('removeConfirm', { name: memberName }), async () => {
       try {
         const res = await fetch(`/api/merchant/${slug}/members/${memberId}`, {
           method: 'DELETE',
         });
         if (!res.ok) {
           const data = await res.json().catch(() => ({}));
-          throw new Error(data?.error || 'Failed to remove member');
+          throw new Error(data?.error || t('removeFailed'));
         }
         setMembers((prev) => prev.filter((m) => m.id !== memberId));
-        showSuccess('Member removed');
+        showSuccess(t('removed'));
       } catch (err) {
-        showError(err instanceof Error ? err.message : 'Failed to remove member');
+        showError(err instanceof Error ? err.message : t('removeFailed'));
       }
-    }, { confirmLabel: 'Remove', variant: 'destructive' });
+    }, { confirmLabel: t('remove'), variant: 'destructive' });
     return;
   };
 
@@ -139,37 +145,37 @@ export default function MembersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Team Members</h1>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
           <p className="text-sm text-[var(--text-muted)]">
-            Manage your team and their access levels
+            {t('subtitle')}
           </p>
         </div>
         <WarmButton size="sm" onClick={() => setShowInvite(!showInvite)}>
-          <Plus className="h-4 w-4 mr-1" /> Invite Member
+          <Plus className="h-4 w-4 mr-1" /> {t('inviteMember')}
         </WarmButton>
       </div>
 
       {showInvite && (
         <WarmCard padding="lg" className="bg-[var(--surface)]">
-          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Invite Team Member</h2>
+          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t('inviteTitle')}</h2>
           <form onSubmit={handleInvite} className="space-y-4">
             <div>
-              <Label htmlFor="invite-email">Email Address</Label>
+              <Label htmlFor="invite-email">{t('emailAddress')}</Label>
               <Input
                 id="invite-email"
                 type="email"
                 value={inviteEmail}
                 onChange={(e) => setInviteEmail(e.target.value)}
-                placeholder="colleague@company.com"
+                placeholder={t('emailPlaceholder')}
                 required
                 className="border-[var(--border)]"
               />
               <p className="text-xs text-[var(--text-muted)] mt-1">
-                The user must have an existing account.
+                {t('emailHint')}
               </p>
             </div>
             <div>
-              <Label htmlFor="invite-role">Role</Label>
+              <Label htmlFor="invite-role">{t('role')}</Label>
               <select
                 id="invite-role"
                 className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1 text-sm"
@@ -178,17 +184,17 @@ export default function MembersPage() {
               >
                 {ROLE_OPTIONS.map((r) => (
                   <option key={r.value} value={r.value}>
-                    {r.label} — {r.description}
+                    {tRoles('optionWithDescription', { label: tRoles(r.labelKey), description: tRoles(r.descriptionKey) })}
                   </option>
                 ))}
               </select>
             </div>
             <div className="flex gap-2">
               <WarmButton type="submit" disabled={inviting}>
-                {inviting ? 'Inviting...' : 'Send Invitation'}
+                {inviting ? t('inviting') : t('sendInvitation')}
               </WarmButton>
               <WarmButton type="button" variant="outline" onClick={() => setShowInvite(false)}>
-                Cancel
+                {t('cancel')}
               </WarmButton>
             </div>
           </form>
@@ -196,11 +202,11 @@ export default function MembersPage() {
       )}
 
       {loading ? (
-        <p className="text-sm text-[var(--text-muted)]">Loading team members...</p>
+        <p className="text-sm text-[var(--text-muted)]">{t('loading')}</p>
       ) : members.length === 0 ? (
         <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
           <Users className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
-          <p className="text-[var(--text-muted)]">No team members yet. Invite your first member above.</p>
+          <p className="text-[var(--text-muted)]">{t('empty')}</p>
         </WarmCard>
       ) : (
         <WarmCard padding="none" className="bg-[var(--surface)] overflow-hidden">
@@ -208,10 +214,10 @@ export default function MembersPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[var(--border)] bg-[var(--surface)]">
-                  <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">Member</th>
-                  <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">Role</th>
-                  <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">Joined</th>
-                  <th className="text-right px-4 py-3 font-medium text-[var(--text-muted)]">Actions</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.member')}</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.role')}</th>
+                  <th className="text-left px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.joined')}</th>
+                  <th className="text-right px-4 py-3 font-medium text-[var(--text-muted)]">{t('columns.actions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -224,7 +230,7 @@ export default function MembersPage() {
                         </div>
                         <div>
                           <p className="font-medium text-[var(--text)]">
-                            {member.user.name || 'Unnamed'}
+                            {member.user.name || t('unnamed')}
                           </p>
                           <p className="text-xs text-[var(--text-muted)]">{member.user.email}</p>
                         </div>
@@ -237,17 +243,17 @@ export default function MembersPage() {
                             className="h-8 rounded-md border border-[var(--border)] bg-[var(--surface)] px-2 text-sm"
                             value={editRole}
                             onChange={(e) => setEditRole(e.target.value)}
-                            aria-label="Member role"
+                            aria-label={t('memberRole')}
                           >
                             {ROLE_OPTIONS.map((r) => (
-                              <option key={r.value} value={r.value}>{r.label}</option>
+                              <option key={r.value} value={r.value}>{tRoles(r.labelKey)}</option>
                             ))}
                           </select>
                           <WarmButton size="sm" onClick={() => handleChangeRole(member.id)}>
-                            Save
+                            {t('save')}
                           </WarmButton>
                           <WarmButton size="sm" variant="outline" onClick={() => setEditingId(null)}>
-                            Cancel
+                            {t('cancel')}
                           </WarmButton>
                         </div>
                       ) : (
@@ -261,7 +267,7 @@ export default function MembersPage() {
                       )}
                     </td>
                     <td className="px-4 py-3 text-[var(--text-muted)]">
-                      {new Date(member.createdAt).toLocaleDateString()}
+                      {new Date(member.createdAt).toLocaleDateString(dateLocale)}
                     </td>
                     <td className="px-4 py-3 text-right">
                       <div className="flex items-center justify-end gap-1">
@@ -272,7 +278,7 @@ export default function MembersPage() {
                             setEditingId(member.id);
                             setEditRole(member.role);
                           }}
-                          title="Change role"
+                          title={t('changeRole')}
                         >
                           <Eye className="h-3.5 w-3.5" />
                         </WarmButton>
@@ -280,7 +286,7 @@ export default function MembersPage() {
                           size="sm"
                           variant="outline"
                           onClick={() => handleRemove(member.id, member.user.name || member.user.email)}
-                          title="Remove member"
+                          title={t('removeMember')}
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </WarmButton>

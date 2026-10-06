@@ -5,6 +5,7 @@ import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import { Clock, Eye, EyeOff } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useFormatter, useTranslations } from "next-intl"
 
 interface QRCodePanelProps {
   code?: string
@@ -21,6 +22,8 @@ export function QRCodePanel({
   showCode = false,
   className,
 }: QRCodePanelProps) {
+  const t = useTranslations("purchase")
+  const format = useFormatter()
   const expiryDateObj = expiryDate
     ? typeof expiryDate === "string"
       ? new Date(expiryDate)
@@ -28,12 +31,12 @@ export function QRCodePanel({
     : null
 
   const [qrDataUrl, setQrDataUrl] = React.useState<string | null>(null)
-  const [qrError, setQrError] = React.useState<string | null>(null)
+  const [qrError, setQrError] = React.useState(false)
 
   React.useEffect(() => {
     if (!code) {
       setQrDataUrl(null)
-      setQrError(null)
+      setQrError(false)
       return
     }
     let isMounted = true
@@ -45,11 +48,11 @@ export function QRCodePanel({
         const data = await res.json()
         if (isMounted) {
           setQrDataUrl(data.dataUrl)
-          setQrError(null)
+          setQrError(false)
         }
-      } catch (error) {
+      } catch {
         if (isMounted) {
-          setQrError(error instanceof Error ? error.message : "Failed to generate QR code")
+          setQrError(true)
         }
       }
     }
@@ -72,17 +75,17 @@ export function QRCodePanel({
           <div className="flex justify-center">
             <div className="w-full aspect-square bg-[var(--surface)] p-4 rounded-lg border-2 border-[var(--border)] flex items-center justify-center">
               {qrError ? (
-                <p className="text-xs text-[var(--text-faint)]">{qrError}</p>
+                <p className="text-xs text-[var(--text-faint)]">{t("qrPanel.generateFailed")}</p>
               ) : qrDataUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={qrDataUrl} alt="QR code" className="h-full w-full object-contain" />
+                <img src={qrDataUrl} alt={t("qrPanel.qrAlt")} className="h-full w-full object-contain" />
               ) : showPlaceholder ? (
                 <div className="h-full w-full rounded-md border-2 border-dashed border-[var(--border)] bg-[var(--bg-2)] flex items-center justify-center">
-                  <p className="text-xs text-[var(--text-faint)]">QR code will appear here</p>
+                  <p className="text-xs text-[var(--text-faint)]">{t("qrPanel.placeholder")}</p>
                 </div>
               ) : (
                 <p className="text-xs text-[var(--text-faint)]">
-                  {isGenerating ? "Generating QR..." : "QR unavailable"}
+                  {isGenerating ? t("qrPanel.generating") : t("qrPanel.unavailable")}
                 </p>
               )}
             </div>
@@ -94,12 +97,12 @@ export function QRCodePanel({
                 {showCode ? (
                   <>
                     <EyeOff className="h-4 w-4 mr-2" />
-                    Hide code
+                    {t("qrPanel.hideCode")}
                   </>
                 ) : (
                   <>
                     <Eye className="h-4 w-4 mr-2" />
-                    Show code
+                    {t("qrPanel.showCode")}
                   </>
                 )}
               </WarmButton>
@@ -118,17 +121,19 @@ export function QRCodePanel({
             <div className="flex items-center justify-center gap-2 text-sm text-[var(--text-muted)]">
               <Clock className="h-4 w-4" />
               <span>
-                Expires {expiryDateObj.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
+                {t("qrPanel.expires", {
+                  date: format.dateTime(expiryDateObj, {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  }),
                 })}
               </span>
             </div>
           )}
 
           <div className="text-center">
-            <p className="text-xs text-[var(--text-faint)]">Code refreshes every 30 seconds</p>
+            <p className="text-xs text-[var(--text-faint)]">{t("qrPanel.refreshNote")}</p>
           </div>
         </div>
       </WarmCard>

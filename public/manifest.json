@@ -1,6 +1,6 @@
 {
-  "name": "Vouchr",
-  "short_name": "Vouchr",
+  "name": "GiftHub",
+  "short_name": "GiftHub",
   "description": "Pay for results, not reach. Referral vouchers and merchant credit.",
   "start_url": "/",
   "display": "standalone",

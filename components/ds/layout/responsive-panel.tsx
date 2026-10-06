@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useCallback, useRef, type ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 
 export interface ResponsivePanelProps {
   open: boolean;
@@ -25,6 +26,7 @@ export function ResponsivePanel({
   children,
   title,
 }: ResponsivePanelProps) {
+  const t = useTranslations('dsComponents.responsivePanel');
   const panelRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = useCallback(
@@ -72,7 +74,7 @@ export function ResponsivePanel({
         ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-label={title || 'Side panel'}
+        aria-label={title || t('sidePanel')}
         className={[
           'fixed top-0 z-50 h-full w-full flex flex-col',
           sizeMap[size],
@@ -116,7 +118,7 @@ export function ResponsivePanel({
               onClick={onClose}
               className="inline-flex items-center justify-center w-8 h-8 rounded-md transition-colors"
               style={{ color: 'var(--ds-text-secondary)' }}
-              aria-label="Close panel"
+              aria-label={t('closePanel')}
             >
               <svg
                 width="18"

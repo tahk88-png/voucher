@@ -7,6 +7,7 @@ import GiftCardQr from '@/components/gift-card-qr';
 import { safeParseJson, formatCurrency } from '@/lib/utils';
 import { GiftCardDesign } from '@/types';
 import { WarmCard } from '@/components/warm-card';
+import { getTranslations } from 'next-intl/server';
 
 // A /g/[code] URL embeds the secret gift-card code (a bearer instrument) and
 // renders its value + redemption QR. Keep it out of search indexes — robots.txt
@@ -16,8 +17,14 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+const STATUS_KEYS = ['active', 'redeemed', 'expired', 'cancelled'] as const;
+type KnownStatus = (typeof STATUS_KEYS)[number];
+const isKnownStatus = (value: string): value is KnownStatus =>
+  (STATUS_KEYS as readonly string[]).includes(value);
+
 export default async function GiftCardPublicPage({ params }: { params: Promise<{ code: string }> }) {
   const { code: rawCode } = await params;
+  const t = await getTranslations('giftsPages.publicCard');
   const code = normalizeGiftCardCode(rawCode);
   const giftCard = await prisma.giftCard.findUnique({
     where: { code },
@@ -27,7 +34,7 @@ export default async function GiftCardPublicPage({ params }: { params: Promise<{
   if (!giftCard) notFound();
 
   const design = safeParseJson<GiftCardDesign>(giftCard.designJson);
-  const headline = design?.headline || 'Gift card';
+  const headline = design?.headline || t('defaultHeadline');
   const now = new Date();
   const expired = giftCard.validTo ? giftCard.validTo < now : false;
   const status = expired && giftCard.status === 'active' ? 'expired' : giftCard.status;
@@ -51,7 +58,7 @@ export default async function GiftCardPublicPage({ params }: { params: Promise<{
             <div className="relative h-40 w-full overflow-hidden bg-[#FAF7F2]">
               <Image
                 src={giftCard.imageUrl}
-                alt="Gift card"
+                alt={t('imageAlt')}
                 fill
                 sizes="(max-width: 768px) 100vw, 640px"
                 className="object-cover"
@@ -65,7 +72,7 @@ export default async function GiftCardPublicPage({ params }: { params: Promise<{
               {giftCard.logoUrl ? (
                 <Image
                   src={giftCard.logoUrl}
-                  alt="Brand logo"
+                  alt={t('logoAlt')}
                   width={32}
                   height={32}
                   className="h-8 w-8 object-contain"
@@ -81,19 +88,19 @@ export default async function GiftCardPublicPage({ params }: { params: Promise<{
         </div>
 
         <div className="text-sm text-[#6B5744] space-y-1 mt-6">
-          <p>Merchant: {giftCard.merchant?.name || 'Merchant'}</p>
-          <p>Code: {code}</p>
-          <p>Valid until: {giftCard.validTo ? giftCard.validTo.toLocaleDateString() : 'No expiry'}</p>
+          <p>{t('merchant', { name: giftCard.merchant?.name || t('merchantFallback') })}</p>
+          <p>{t('code', { code })}</p>
+          <p>{t('validUntil', { date: giftCard.validTo ? giftCard.validTo.toLocaleDateString() : t('noExpiry') })}</p>
         </div>
 
         {status === 'active' ? (
           <div className="flex flex-col items-center gap-3 text-center mt-6">
             <GiftCardQr qrText={redeemUrl} />
-            <p className="text-sm text-[#6B5744]">Show this QR to staff to redeem the gift card.</p>
+            <p className="text-sm text-[#6B5744]">{t('showQr')}</p>
           </div>
         ) : (
           <div className="rounded-lg border border-dashed border-[rgba(139,115,85,0.15)] p-4 text-center text-sm text-[#8B7355] mt-6">
-            This gift card is {status}.
+            {t('statusMessage', { status: isKnownStatus(status) ? t(`status.${status}`) : status })}
           </div>
         )}
       </WarmCard>

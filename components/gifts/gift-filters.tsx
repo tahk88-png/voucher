@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import { WarmButton } from '@/components/warm-button';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface FilterOption {
   id: string;
@@ -30,12 +31,13 @@ interface GiftFiltersProps {
   }) => void;
 }
 
-const BUDGET_RANGES = [
-  { label: 'Under €25', min: 0, max: 2500 },
-  { label: '€25–€50', min: 2500, max: 5000 },
-  { label: '€50–€100', min: 5000, max: 10000 },
-  { label: '€100–€200', min: 10000, max: 20000 },
-  { label: '€200+', min: 20000, max: undefined },
+// `id` is a stable React key; only the "Under €25" label has words to translate.
+const BUDGET_RANGES: { id: string; label?: string; min: number; max: number | undefined }[] = [
+  { id: 'under25', min: 0, max: 2500 },
+  { id: '25-50', label: '€25–€50', min: 2500, max: 5000 },
+  { id: '50-100', label: '€50–€100', min: 5000, max: 10000 },
+  { id: '100-200', label: '€100–€200', min: 10000, max: 20000 },
+  { id: '200+', label: '€200+', min: 20000, max: undefined },
 ];
 
 export function GiftFilters({
@@ -49,6 +51,7 @@ export function GiftFilters({
   budgetMax,
   onFilterChange,
 }: GiftFiltersProps) {
+  const t = useTranslations('giftsPages.filters');
   const [showFilters, setShowFilters] = useState(false);
   const [cat, setCat] = useState(selectedCategory || '');
   const [occ, setOcc] = useState(selectedOccasion || '');
@@ -96,7 +99,7 @@ export function GiftFilters({
           className="shrink-0"
         >
           <SlidersHorizontal className="h-4 w-4 mr-1" />
-          Filters
+          {t('toggle')}
         </WarmButton>
 
         {/* Category chips */}
@@ -121,7 +124,7 @@ export function GiftFilters({
             onClick={clearAll}
             className="px-3 py-1.5 rounded-full text-sm font-medium text-red-600 bg-red-50 border border-red-200 hover:bg-red-100 shrink-0 flex items-center gap-1"
           >
-            <X className="h-3 w-3" /> Clear
+            <X className="h-3 w-3" /> {t('clear')}
           </button>
         )}
       </div>
@@ -131,7 +134,7 @@ export function GiftFilters({
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)]">
           {/* Occasions */}
           <div>
-            <label className="text-sm font-semibold text-[var(--text)] mb-2 block">Occasion</label>
+            <label className="text-sm font-semibold text-[var(--text)] mb-2 block">{t('occasion')}</label>
             <div className="flex flex-wrap gap-1.5">
               {occasions.map((o) => (
                 <button
@@ -153,7 +156,7 @@ export function GiftFilters({
 
           {/* Personas */}
           <div>
-            <label className="text-sm font-semibold text-[var(--text)] mb-2 block">Who is it for?</label>
+            <label className="text-sm font-semibold text-[var(--text)] mb-2 block">{t('persona')}</label>
             <div className="flex flex-wrap gap-1.5">
               {personas.map((p) => (
                 <button
@@ -175,13 +178,13 @@ export function GiftFilters({
 
           {/* Budget */}
           <div>
-            <label className="text-sm font-semibold text-[var(--text)] mb-2 block">Budget</label>
+            <label className="text-sm font-semibold text-[var(--text)] mb-2 block">{t('budget')}</label>
             <div className="flex flex-wrap gap-1.5">
               {BUDGET_RANGES.map((range) => {
                 const isActive = bMin === range.min && bMax === range.max;
                 return (
                   <button
-                    key={range.label}
+                    key={range.id}
                     onClick={() => {
                       if (isActive) {
                         setBMin(undefined);
@@ -198,7 +201,7 @@ export function GiftFilters({
                         : 'bg-[var(--surface-dim)] text-[var(--text-muted)] border-transparent hover:border-[var(--primary)]'
                     )}
                   >
-                    {range.label}
+                    {range.label ?? t('budgetUnder', { amount: '€25' })}
                   </button>
                 );
               })}

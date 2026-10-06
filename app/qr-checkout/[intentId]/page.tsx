@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface IntentData {
   intentId: string;
@@ -15,6 +16,9 @@ export default function QRCheckoutPage() {
   const { intentId } = useParams<{ intentId: string }>();
   const searchParams = useSearchParams();
   const urlStatus = searchParams.get('status');
+  const t = useTranslations('purchase');
+  const tVoucher = useTranslations('voucher');
+  const tCommon = useTranslations('common');
 
   const [intent, setIntent] = useState<IntentData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -60,8 +64,8 @@ export default function QRCheckoutPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="text-2xl font-bold text-[#2D2721] mb-2">Checkout Complete</h1>
-          <p className="text-[#6b5e52]">Your purchase has been confirmed. Check your email for details.</p>
+          <h1 className="text-2xl font-bold text-[#2D2721] mb-2">{t('qrCheckout.completeTitle')}</h1>
+          <p className="text-[#6b5e52]">{t('qrCheckout.completeDescription')}</p>
         </div>
       </div>
     );
@@ -77,7 +81,7 @@ export default function QRCheckoutPage() {
               <path d="M20 6h-2.18c.11-.31.18-.65.18-1a3 3 0 0 0-3-3c-1.05 0-1.95.56-2.5 1.38L12 4l-.5-.62A2.988 2.988 0 0 0 9 2 3 3 0 0 0 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z" />
             </svg>
           </div>
-          <h1 className="text-xl font-bold text-white">QR Checkout</h1>
+          <h1 className="text-xl font-bold text-white">{t('qrCheckout.title')}</h1>
           {intent?.merchant && (
             <p className="text-white/70 mt-1">{intent.merchant.name}</p>
           )}
@@ -88,7 +92,7 @@ export default function QRCheckoutPage() {
           {intent?.voucher && (
             <div className="bg-[#faf8f5] rounded-xl p-4 mb-6">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-[#6b5e52]">Voucher</span>
+                <span className="text-sm text-[#6b5e52]">{tVoucher('title')}</span>
                 <span className="font-semibold text-[#2D2721]">
                   {intent.voucher.type === 'percentage'
                     ? `${intent.voucher.value / 100}%`
@@ -103,7 +107,7 @@ export default function QRCheckoutPage() {
               href={intent.checkoutUrl}
               className="block w-full text-center bg-gradient-to-r from-[#cc785c] to-[#b5613f] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:opacity-90 transition"
             >
-              Pay Now
+              {t('qrCheckout.payNow')}
             </a>
           ) : (
             <button
@@ -111,7 +115,7 @@ export default function QRCheckoutPage() {
               disabled={confirming}
               className="w-full bg-gradient-to-r from-[#cc785c] to-[#b5613f] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:opacity-90 transition disabled:opacity-50"
             >
-              {confirming ? 'Confirming...' : 'Confirm'}
+              {confirming ? t('qrCheckout.confirming') : tCommon('confirm')}
             </button>
           )}
         </div>

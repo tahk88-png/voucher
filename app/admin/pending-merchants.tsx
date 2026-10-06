@@ -72,7 +72,7 @@ export default function PendingMerchants({ merchants: initial }: { merchants: Pe
           <div key={m.id} className="flex items-center justify-between p-3 bg-[var(--surface-dim)] rounded-xl">
             <div>
               <div className="font-medium text-[var(--text)] text-sm">{m.name}</div>
-              <div className="text-xs text-[var(--text-faint)]">{m.slug} &middot; {new Date(m.createdAt).toLocaleDateString()}</div>
+              <div className="text-xs text-[var(--text-faint)]">{m.slug} &middot; {new Date(m.createdAt).toLocaleDateString('en-GB')}</div>
             </div>
             <div className="flex gap-2">
               <WarmButton size="sm" onClick={() => handleApprove(m.id)} disabled={loading === m.id}>

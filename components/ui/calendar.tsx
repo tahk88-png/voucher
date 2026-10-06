@@ -3,6 +3,8 @@
 import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
+import { et as etLocale } from "date-fns/locale"
+import { useLocale, useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -15,6 +17,8 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+  const t = useTranslations("ui")
+  const locale = useLocale()
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -43,7 +47,7 @@ function Calendar({
         ),
         day_range_end: "day-range-end",
         day_selected:
-          "gradient-brand text-[var(--text)] hover:gradient-brand hover:text-[var(--text)] focus:gradient-brand focus:text-[var(--text)]",
+          "gradient-brand text-[var(--primary-foreground)] hover:gradient-brand hover:text-[var(--primary-foreground)] focus:gradient-brand focus:text-[var(--primary-foreground)]",
         day_today: "bg-[var(--surface-muted)] text-[var(--text)] font-bold",
         day_outside:
           "day-outside text-[var(--text-faint)]/50 opacity-50 aria-selected:bg-[var(--surface-muted)]/50 aria-selected:text-[var(--text-faint)] aria-selected:opacity-30",
@@ -58,6 +62,12 @@ function Calendar({
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
       }}
       {...props}
+      locale={props.locale ?? (locale === "et" ? etLocale : undefined)}
+      labels={{
+        labelPrevious: () => t("calendar.previousMonth"),
+        labelNext: () => t("calendar.nextMonth"),
+        ...props.labels,
+      }}
     />
   )
 }

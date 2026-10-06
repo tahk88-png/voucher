@@ -6,6 +6,7 @@ import { Heart, ExternalLink, ShoppingCart } from 'lucide-react';
 import { WarmCard } from '@/components/warm-card';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface GiftCardProps {
   id: string;
@@ -41,6 +42,7 @@ export function GiftCard({
   feedModule,
   onTrack,
 }: GiftCardProps) {
+  const t = useTranslations('giftsPages.card');
   const [saved, setSaved] = useState(false);
 
   const price = (priceCents / 100).toFixed(2);
@@ -80,7 +82,7 @@ export function GiftCard({
           {/* Featured badge */}
           {isFeatured && (
             <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-bold bg-[var(--primary)] text-[var(--primary-foreground)]">
-              Featured
+              {t('featured')}
             </span>
           )}
 
@@ -94,7 +96,7 @@ export function GiftCard({
           {/* Save button */}
           <button
             onClick={handleSave}
-            aria-label={saved ? 'Unsave' : 'Save'}
+            aria-label={saved ? t('unsave') : t('save')}
             aria-pressed={saved}
             className="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors"
           >
@@ -140,7 +142,7 @@ export function GiftCard({
               onClick={handleAffiliateClick}
               className="flex items-center gap-1 mt-2 text-xs text-[var(--primary)] hover:underline"
             >
-              <ExternalLink className="h-3 w-3" /> Buy now
+              <ExternalLink className="h-3 w-3" /> {t('buyNow')}
             </a>
           )}
         </div>

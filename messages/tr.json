@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Abonelik kutuları",
     "pricing": "Fiyat kuralları",
     "webhooks": "Webhook'lar",
-    "apiKeys": "API anahtarları"
+    "apiKeys": "API anahtarları",
+    "marketplace": "Pazar yeri",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "expandSidebar": "Kenar çubuğunu genişlet",
+    "collapseSidebar": "Kenar çubuğunu daralt",
+    "sectionShop": "Alışveriş",
+    "sectionRewards": "Ödüller",
+    "sectionAccount": "Hesap",
+    "mainNavigation": "Ana gezinme",
+    "quickNavigation": "Hızlı gezinme",
+    "logoutFailed": "Çıkış yapılamadı. Lütfen tekrar deneyin."
   },
   "voucher": {
     "title": "Kupon",
@@ -184,7 +195,11 @@
     "creditApplied": "Kredi uygulandı",
     "finalTotal": "Toplam",
     "pageDescription": "Kullanılabilir ve kilitli kredilerinizi takip edin.",
-    "noMerchantWallets": "Henüz işletme cüzdanı yok."
+    "noMerchantWallets": "Henüz işletme cüzdanı yok.",
+    "noCreditYet": "Henüz krediniz yok",
+    "noCreditYetBody": "Paylaştığınız bir kuponu bir arkadaşınız kullandığında kredi kazanırsınız. Kredi burada her işletme için ayrı ayrı görünür.",
+    "shareToEarn": "Kupon paylaş",
+    "findVoucherToShare": "Paylaşmak için kupon bul"
   },
   "redemption": {
     "title": "Kullanımlar",
@@ -244,7 +259,12 @@
     "merchantLabel": "İşletme",
     "voucherLabel": "Kupon",
     "linkField": "Bağlantı",
-    "codeField": "Kod"
+    "codeField": "Kod",
+    "linkCopied": "Bağlantı kopyalandı",
+    "howItWorksTitle": "Tavsiyeler nasıl çalışır?",
+    "howItWorksBody": "Bir kupon açın ve Paylaş'a dokunun. O kupon için size özel bir bağlantı alırsınız. Bir arkadaşınız kuponu kullandığında işletmeden kredi kazanırsınız.",
+    "findVoucher": "Paylaşmak için kupon bul",
+    "linkForVoucher": "{voucher} için tavsiye bağlantısı"
   },
   "analytics": {
     "title": "Analizler",
@@ -404,7 +424,7 @@
     "footerPrivacy": "Gizlilik",
     "footerDocs": "Dokümantasyon",
     "footerSupport": "Destek",
-    "footerCopyright": "© 2024 Vouchr. Tüm hakları saklıdır.",
+    "footerCopyright": "© GiftHub. Tüm hakları saklıdır.",
     "badge": "Kupon, hediye kartı ve bilet promosyonları başlatın",
     "headline": "Premium marka deneyimi gibi hissettiren kampanyalar",
     "subheadline": "QR kullanımı, tavsiyeler ve otomatik kredi ile kupon ve hediye kartı kampanyaları oluşturun. Sadece sonuçlar için ödeyin.",
@@ -516,7 +536,9 @@
     "viewVouchers": "Kuponları görüntüle",
     "redeemed": "Kullanıldı",
     "friendLabel": "Arkadaş",
-    "voucherLabel": "Kupon"
+    "voucherLabel": "Kupon",
+    "offersLinkTitle": "Güncel fırsatların bağlantısı",
+    "offersLinkDescription": "Arkadaşlarınızı GiftHub'daki tüm güncel fırsatlara yönlendirin. Bu bağlantı kredi kazandırmaz; kredi kazanmak için belirli bir kuponu kendi sayfasından paylaşın."
   },
   "billing": {
     "upgradeRequired": "Yükseltme gerekli",
@@ -618,14 +640,34 @@
     "inApp": "Uygulama içi",
     "pushBeta": "Push (beta)",
     "saving": "Kaydediliyor...",
-    "savePreferences": "Tercihleri kaydet"
+    "savePreferences": "Tercihleri kaydet",
+    "noPreferencesTitle": "Henüz ayarlanacak bir şey yok",
+    "noPreferencesBody": "Bildirim ayarları her işletme için ayrı yönetilir. Henüz bildirim ayarı olan bir işletmeniz yok.",
+    "saved": "Tercihler kaydedildi",
+    "saveFailed": "Tercihleriniz kaydedilemedi. Lütfen tekrar deneyin.",
+    "markAllReadFailed": "Bildirimler okundu olarak işaretlenemedi. Lütfen tekrar deneyin.",
+    "emptyHint": "Kuponlarınız ve fırsatlarla ilgili güncellemeler burada görünecek.",
+    "browseOffers": "Fırsatlara göz at"
   },
   "settingsPage": {
     "description": "Hesap tercihlerinizi yönetin.",
     "joined": "Katılım",
     "recently": "yakın zamanda",
     "accountAccessTitle": "Hesap erişimi",
-    "accountAccessDescription": "Hesabınızı güvence altına alın ve erişimi yönetin."
+    "accountAccessDescription": "Hesabınızı güvence altına alın ve erişimi yönetin.",
+    "pushDescription": "GiftHub açık olmasa bile bu cihazda bildirim alın.",
+    "changePasswordTitle": "Şifreyi değiştir",
+    "changePasswordDescription": "Hesap şifrenizi güncelleyin.",
+    "setPasswordTitle": "Şifre belirle",
+    "setPasswordDescription": "E-posta adresiniz ve şifrenizle giriş yapmak için bir şifre belirleyin.",
+    "twoFactorTitle": "İki faktörlü kimlik doğrulama",
+    "twoFactorDescription": "Bir doğrulama uygulaması veya geçiş anahtarıyla ekstra bir güvenlik katmanı ekleyin.",
+    "twoFactorManage": "Güvenliği yönet",
+    "sessionsTitle": "Etkin oturumlar",
+    "sessionsDescription": "Hesabınızın nerelerde açık olduğunu görün.",
+    "sessionsView": "Oturumları görüntüle",
+    "deleteTitle": "Hesabı sil",
+    "deleteDescription": "Hesabınızı kalıcı olarak silin ve verilerinizi anonimleştirin. Bu işlem geri alınamaz."
   },
   "profile": {
     "title": "Profil",
@@ -633,5 +675,4583 @@
     "accountInformation": "Hesap bilgileri",
     "emailPreferences": "E-posta tercihleri",
     "appSettings": "Uygulama ayarları"
+  },
+  "dashboard": {
+    "roleShopper": "Alışveriş yapan",
+    "roleAdmin": "Yönetici",
+    "roleStaff": "Personel",
+    "rolePlatformAdmin": "Platform yöneticisi",
+    "availableCredit": "Kullanılabilir kredi",
+    "pendingCredit": "{amount} beklemede",
+    "creditExplainer": "Paylaştığınız kuponları arkadaşlarınız kullandığında kazandığınız kredi. Krediyi, onu veren işletmede harcayabilirsiniz.",
+    "viewCreditDetails": "Kredi ayrıntılarını görüntüle",
+    "successfulReferrals": "Başarılı tavsiyeler",
+    "checkInPoints": "Check-in puanları",
+    "shareTitle": "Kupon paylaşın, kredi kazanın",
+    "shareDescription": "Size özel bağlantıyı almak için herhangi bir kuponu açıp Paylaş'a dokunun. Bir arkadaşınız kuponu kullandığında kredi kazanırsınız.",
+    "openShareCenter": "Paylaşım Merkezi'ni aç",
+    "sharedSummary": "Paylaşılan kuponlar: {count} · Kullanılan: {redeemed}",
+    "achievementsTitle": "Başarılar",
+    "badgesEarned": "Kazanılan rozetler: {earned} / {total}",
+    "viewAchievements": "Başarıları görüntüle",
+    "availableOffers": "Mevcut fırsatlar",
+    "browseAll": "Tümüne göz at",
+    "noActiveOffers": "Şu anda yayında fırsat yok. Yakında tekrar bakın.",
+    "validUntil": "Son geçerlilik: {date}",
+    "recentActivity": "Son etkinlikler",
+    "noRecentActivity": "Henüz etkinlik yok.",
+    "creditFrom": "{merchant} kredisi",
+    "referralAt": "Tavsiye · {merchant}",
+    "creditStatus": {
+      "locked": "beklemede",
+      "available": "kullanılabilir",
+      "used": "kullanıldı",
+      "expired": "süresi doldu",
+      "reversed": "iptal edildi"
+    },
+    "referralStatus": {
+      "created": "Bağlantı oluşturuldu",
+      "opened": "Açıldı",
+      "redeemed": "Kullanıldı",
+      "expired": "Süresi doldu",
+      "blocked": "Engellendi"
+    },
+    "myMerchants": "İşletmelerim",
+    "merchantDashboard": "İşletme paneli",
+    "sellTitle": "GiftHub'da satış yapın",
+    "sellDescription": "Müşterilerinize kupon sunmak mı istiyorsunuz? Bizimle iletişime geçin, işletme hesabınızı kurmanıza yardımcı olalım.",
+    "contactUs": "Bize ulaşın",
+    "exploreVouchers": "Kuponları keşfet"
+  },
+  "wishlist": {
+    "title": "İstek listem",
+    "emptyTitle": "İstek listeniz boş",
+    "emptyBody": "Beğendiğiniz kuponları, işletmeleri ve kampanyaları kaydedin; daha sonra burada bulun.",
+    "browseOffers": "Fırsatlara göz at"
+  },
+  "push": {
+    "enable": "Anlık bildirimleri aç",
+    "enabled": "Anlık bildirimler açık",
+    "enabledToast": "Anlık bildirimler açıldı",
+    "disable": "Kapat",
+    "disabledToast": "Anlık bildirimler kapatıldı",
+    "enableFailed": "Anlık bildirimler açılamadı. Lütfen tekrar deneyin.",
+    "disableFailed": "Anlık bildirimler kapatılamadı. Lütfen tekrar deneyin.",
+    "unsupported": "Bu tarayıcı anlık bildirimleri desteklemiyor.",
+    "blocked": "Bildirimler engellendi. Açmak için tarayıcı ayarlarınızdan bildirimlere izin verin."
+  },
+  "sessions": {
+    "title": "Etkin oturumlar",
+    "description": "Hesabınızın nerelerde açık olduğunu görün.",
+    "backToSettings": "Ayarlara dön",
+    "deviceOn": "{os} üzerinde {browser}",
+    "unknownDevice": "Bilinmeyen cihaz",
+    "thisDevice": "Bu cihaz",
+    "signedInHere": "Şu anda bu cihazda oturum açmış durumdasınız.",
+    "otherDevicesTitle": "Diğer cihazlar",
+    "otherDevicesNone": "Oturum açmış olabileceğiniz diğer cihazları listeleyemiyoruz. Olağan dışı bir şey fark ederseniz şifrenizi değiştirin ve iki faktörlü kimlik doğrulamayı açın.",
+    "securitySettings": "Güvenlik ayarları",
+    "lastActive": "Son etkinlik: {time}",
+    "logout": "Çıkış yap",
+    "logoutAll": "Diğer tüm cihazlardan çıkış yap",
+    "logoutAllBody": "Diğer cihazlardaki tüm oturumları sonlandırın.",
+    "loadFailed": "Oturumlarınız yüklenemedi.",
+    "revokeFailed": "Oturum sonlandırılamadı. Lütfen tekrar deneyin.",
+    "revoked": "Oturum sonlandırıldı.",
+    "revokedAll": "Diğer cihazlardaki oturumlar sonlandırıldı."
+  },
+  "achievements": {
+    "title": "Başarılar",
+    "checkIn": "Bugün için check-in yap",
+    "checkingIn": "Check-in yapılıyor…",
+    "checkedInToday": "Bugün check-in yapıldı",
+    "checkInFailed": "Check-in başarısız oldu. Lütfen tekrar deneyin.",
+    "checkInSaved": "Check-in kaydedildi",
+    "newBadge": "Yeni rozet: {name}",
+    "checkInPoints": "Check-in puanları",
+    "level": "Seviye",
+    "levelValue": "Seviye {level}",
+    "levelProgress": "Sonraki seviyeye ilerleme",
+    "badgesLabel": "Rozetler",
+    "noBadgesYet": "Henüz rozet kazanılmadı.",
+    "earnedOn": "Kazanıldı: {date}",
+    "locked": "Henüz kazanılmadı",
+    "howToEarn": "Nasıl puan kazanılır?",
+    "earnRuleCheckIn": "Günde bir kez check-in yapın",
+    "pointsShort": "+{points} puan",
+    "pointsExplainer": "Puanlar ve seviyeler ne kadar aktif olduğunuzu gösterir. Paraya veya kupona dönüştürülemezler.",
+    "currentStreak": "Mevcut seri (gün)",
+    "longestStreak": "En uzun seri (gün)",
+    "milestone": "Seri hedefine ulaşıldı!",
+    "badges": {
+      "first_purchase": {
+        "name": "İlk satın alma",
+        "description": "İlk kuponunuzu satın aldınız"
+      },
+      "first_redemption": {
+        "name": "İlk kullanım",
+        "description": "İlk kuponunuzu kullandınız"
+      },
+      "5_referrals": {
+        "name": "Bağlantı ustası",
+        "description": "Arkadaşlarınızla 5 kupon paylaştınız"
+      },
+      "10_referrals": {
+        "name": "Fenomen",
+        "description": "Arkadaşlarınızla 10 kupon paylaştınız"
+      },
+      "streak_7": {
+        "name": "Haftanın savaşçısı",
+        "description": "Art arda 7 gün check-in yaptınız"
+      },
+      "streak_30": {
+        "name": "Ayın ustası",
+        "description": "Art arda 30 gün check-in yaptınız"
+      },
+      "review_writer": {
+        "name": "Eleştirmen",
+        "description": "İlk yorumunuzu yayınladınız"
+      },
+      "big_spender": {
+        "name": "Büyük harcamacı",
+        "description": "Kuponlara toplamda 10.000'den fazla harcadınız"
+      },
+      "early_adopter": {
+        "name": "Erken katılımcı",
+        "description": "GiftHub'a 2028'den önce katıldınız"
+      },
+      "social_sharer": {
+        "name": "Sosyal paylaşımcı",
+        "description": "Sosyal medyada bir kupon paylaştınız"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Sadakat",
+    "notActiveTitle": "Sadakat seviyeleri henüz kullanılamıyor",
+    "notActiveBody": "Satın alımlar henüz sadakat puanı kazandırmıyor ve ödeme sırasında seviye indirimleri veya ayrıcalıkları uygulanmıyor; bu nedenle burada gösterilecek bir seviye yok.",
+    "earnTodayTitle": "Bugün neler kazanabilirsiniz?",
+    "earnCreditTitle": "Tavsiye kredisi",
+    "earnCreditBody": "Bir kupon paylaşın. Bir arkadaşınız onu kullandığında, o işletmede harcayabileceğiniz kredi kazanırsınız.",
+    "earnCreditLink": "Kredinizi görüntüleyin",
+    "earnPointsTitle": "Check-in puanları",
+    "earnPointsBody": "Seri oluşturmak, seviye atlamak ve rozetlerin kilidini açmak için her gün check-in yapın.",
+    "earnPointsLink": "Başarıları görüntüle",
+    "historyTitle": "Puan geçmişi",
+    "pointsBalance": "Bakiye: {points} puan"
+  },
+  "welcome": {
+    "greeting": "Merhaba {name}!",
+    "progress": "Başlangıç ilerlemesi",
+    "setUpSecurity": "2FA veya geçiş anahtarı ayarla",
+    "skip": "Atla",
+    "next": "İleri",
+    "getStarted": "Başlayın",
+    "steps": {
+      "welcome": {
+        "title": "GiftHub'a hoş geldiniz!",
+        "subtitle": "Neler yapabileceğinize hızlı bir bakış."
+      },
+      "discover": {
+        "title": "Fırsatları keşfedin",
+        "subtitle": "Yerel işletmelerin kuponlarına, hediye kartlarına ve etkinliklerine göz atın.",
+        "features": {
+          "vouchers": "Dijital kuponlar",
+          "giftCards": "Arkadaşlar ve aile için hediye kartları",
+          "nearby": "Yakınınızdaki fırsatlar"
+        }
+      },
+      "wallet": {
+        "title": "Tüm kuponlarınız tek bir yerde",
+        "subtitle": "Satın aldığınız her şey hesabınıza kaydedilir.",
+        "features": {
+          "qr": "Mağazada hızlı kullanım için QR kodları",
+          "expiry": "Kuponun süresi dolmadan önce e-posta hatırlatıcıları"
+        }
+      },
+      "rewards": {
+        "title": "Ödüller kazanın",
+        "subtitle": "Kuponları arkadaşlarınızla paylaşın, onlar kullandığında kredi kazanın.",
+        "features": {
+          "referralCredit": "Başarılı tavsiyeler için işletme kredisi",
+          "checkIns": "Günlük check-in'ler ve seriler",
+          "badges": "Kilidi açılacak rozetler"
+        }
+      },
+      "notifications": {
+        "title": "Haberdar olun",
+        "subtitle": "Bu cihazda bildirimleri açın."
+      },
+      "security": {
+        "title": "Hesabınızı güvenceye alın",
+        "subtitle": "Bir geçiş anahtarı veya iki faktörlü kimlik doğrulama ekleyin."
+      }
+    }
+  },
+  "labels": {
+    "free": "Ücretsiz",
+    "valueOff": "{value} indirim",
+    "valueCredit": "{value} kredi",
+    "valueDiscount": "{value} indirim",
+    "demo": "Demo",
+    "demoHint": "Platformun nasıl çalıştığını gösteren örnek içerik. Gerçek bir teklif değildir.",
+    "category": {
+      "cafe": "Kafe ve fırın",
+      "beauty": "Güzellik ve sağlık",
+      "fitness": "Fitness ve spor",
+      "events": "Etkinlikler ve biletler",
+      "workshops": "Atölyeler ve kurslar",
+      "family": "Aile ve çocuk",
+      "travel": "Seyahat ve konaklama",
+      "outdoor": "Doğa ve macera",
+      "other": "Diğer",
+      "all": "Tüm kategoriler"
+    },
+    "voucherType": {
+      "percentage": "Yüzde indirim",
+      "fixed_amount": "Tutar indirimi",
+      "credit_amount": "Mağaza kredisi"
+    },
+    "voucherStatus": {
+      "draft": "Taslak",
+      "published": "Yayında",
+      "paused": "Duraklatıldı",
+      "ended": "Sona erdi",
+      "expired": "Süresi doldu"
+    },
+    "campaignStatus": {
+      "draft": "Taslak",
+      "active": "Yayında",
+      "ended": "Sona erdi"
+    },
+    "campaignType": {
+      "limited": "Tek seferlik teklif",
+      "weekly": "Haftalık teklif"
+    },
+    "campaignTypeHelp": {
+      "limited": "Başlangıç ve bitiş tarihleri arasında, stoklar tükenene kadar bir kez geçerlidir.",
+      "weekly": "Müşterilerin bitiş tarihine kadar her hafta yeniden yararlanabileceği tekrarlayan haftalık teklif."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Örnek teklif · satışta değil",
+    "notOnSale": "Henüz satışta değil",
+    "purchases": "{count, plural, one {# satın alma} other {# satın alma}}",
+    "freeToClaim": "Ücretsiz alın",
+    "onSaleNow": "Şimdi satışta"
+  },
+  "account": {
+    "error": {
+      "title": "Bir şeyler ters gitti",
+      "fallback": "Beklenmeyen bir hata oluştu.",
+      "retry": "Tekrar dene"
+    },
+    "dashboard": {
+      "metaTitle": "Dashboard'um"
+    },
+    "cashback": {
+      "metaTitle": "Nakit iade ve krediler",
+      "title": "Nakit iade ve krediler",
+      "description": "Alışveriş yaptığınız tüm işletmelerde kazandığınız tüm krediler.",
+      "lockedPending": "Kilitli (beklemede)",
+      "used": "Kullanıldı",
+      "expiringTitle": "30 gün içinde süresi dolacak",
+      "expiresOn": "{merchant} — son kullanma {date}",
+      "expiresSoon": "{merchant} — süresi yakında doluyor",
+      "byMerchant": "İşletmeye göre",
+      "lastActivity": "Son etkinlik {date}",
+      "readyToSpend": "Harcamaya hazır",
+      "viewMerchantWallet": "İşletme cüzdanını görüntüle →"
+    },
+    "nearby": {
+      "title": "Yakındaki teklifler",
+      "subtitle": "Yakınınızdaki işletmelerden fırsatlar ve kuponlar bulun",
+      "useMyLocation": "Konumumu kullan",
+      "approximateLocation": "Yaklaşık konum (IP tabanlı)",
+      "searchRadius": "Arama yarıçapı",
+      "yourLocation": "Konumunuz",
+      "mapLabel": "{radius} km içinde {count, plural, one {# işletme} other {# işletme}}",
+      "merchantsNearby": "Yakında {count, plural, one {# işletme} other {# işletme}}",
+      "activeVouchers": "{count, plural, one {# aktif kupon} other {# aktif kupon}}",
+      "emptyTitle": "Yakında işletme yok",
+      "emptyBody": "Arama yarıçapını artırmayı deneyin veya bölgenizdeki yeni teklifler için daha sonra tekrar bakın.",
+      "expandRadius": "{radius} km'ye genişlet",
+      "errors": {
+        "fetchFailed": "Yakındaki işletmeler yüklenemedi. Lütfen tekrar deneyin.",
+        "geolocationUnsupported": "Tarayıcınız konum belirlemeyi desteklemiyor.",
+        "permissionDenied": "Konum erişimi reddedildi. Lütfen tarayıcı ayarlarınızdan konumu etkinleştirin.",
+        "positionUnavailable": "Konum kullanılamıyor. Daha sonra tekrar deneyin.",
+        "timeout": "Konum isteği zaman aşımına uğradı. Tekrar deneyin.",
+        "locationFailed": "Konumunuz alınamadı.",
+        "ipLocationFailed": "Konumunuz belirlenemedi."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Bildirim ayarları"
+    },
+    "redeem": {
+      "notFound": "Kupon bulunamadı.",
+      "codeUnavailable": "Kupon kodu mevcut değil.",
+      "backToWallet": "Cüzdana dön",
+      "back": "Geri"
+    },
+    "referrals": {
+      "metaTitle": "Tavsiyelerim",
+      "completedCount": "Tamamlanan: {count}"
+    },
+    "voucherDetail": {
+      "back": "Geri",
+      "merchantFallback": "İşletme",
+      "termsTitle": "Şartlar ve koşullar",
+      "terms1": "Bu kupon yukarıda gösterilen son kullanma tarihine kadar geçerlidir. Aksi belirtilmedikçe diğer teklif veya promosyonlarla birleştirilemez.",
+      "terms2": "Kupon satın alma sırasında ibraz edilmelidir. Nakit değeri yoktur. Nakde çevrilemez veya iade edilemez.",
+      "terms3": "Kuponun kopyalandığı, değiştirildiği veya hileli şekilde kullanıldığı anlaşılırsa işletme kullanımı reddetme hakkını saklı tutar.",
+      "terms4": "Sorularınız veya sorunlarınız için lütfen doğrudan işletmeyle iletişime geçin."
+    },
+    "vouchers": {
+      "unknownMerchant": "Bilinmiyor",
+      "paidAmount": "Ödenen: {amount}",
+      "activeCount": "Aktif ({count})",
+      "pastCount": "Geçmiş ({count})"
+    },
+    "voucherCard": {
+      "showQr": "QR kodu göster",
+      "close": "Kapat",
+      "qrHint": "Mağazada kullanmak için bu QR kodu işletmeye gösterin."
+    },
+    "wallet": {
+      "metaTitle": "Cüzdanım"
+    },
+    "wishlist": {
+      "unknownItem": "Bilinmeyen ürün",
+      "merchant": "İşletme",
+      "campaign": "Kampanya",
+      "validUntil": "Son geçerlilik: {date}",
+      "alertOn": "Uyarı açık",
+      "noAlert": "Uyarı yok",
+      "view": "Görüntüle"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Kampanya kullanılamıyor",
+      "metaDescriptionFallback": "{merchant} işletmesinden teklif.",
+      "breadcrumbLabel": "İçerik haritası",
+      "breadcrumbCampaigns": "Kampanyalar",
+      "demoNotice": "<strong>Örnek teklif.</strong> Bu sayfa, bir teklifin GiftHub'da nasıl göründüğünü gösterir. İşletme ve teklif örnektir: buradaki hiçbir şey satın alınamaz veya kullanılamaz.",
+      "verifiedPartner": "Doğrulanmış iş ortağı",
+      "aboutTitle": "Bu teklif hakkında",
+      "descriptionFallback": "GiftHub'daki bir işletmeden özel teklif.",
+      "howItWorks": {
+        "title": "Nasıl çalışır",
+        "claimTitle": "Kuponu alın",
+        "buyTitle": "Kuponu satın alın",
+        "buyText": "Online olarak güvenle ödeyin veya teklif ücretsizse ücretsiz alın.",
+        "qrTitle": "QR kodunuzu alın",
+        "qrText": "Kupon, kişisel bir QR kodla GiftHub cüzdanınıza kaydedilir.",
+        "showTitle": "Yerinde gösterin",
+        "showText": "{merchant} kodu tarar ve indirim uygulanır."
+      },
+      "termsTitle": "Şartlar",
+      "voucherOptionsTitle": "Kupon seçenekleri",
+      "voucherFallbackTitle": "Kupon",
+      "viewVoucher": "Kuponu görüntüle",
+      "reviewsTitle": "Yorumlar",
+      "purchaseLabel": "Satın alma",
+      "buyNow": "Hemen satın al",
+      "getFreeVoucher": "Ücretsiz kupon al",
+      "sampleOffer": "Örnek teklif",
+      "notOnSaleYet": "Henüz satışta değil",
+      "demoNotForSale": "Bu örnek içeriktir, bu nedenle satın alınamaz.",
+      "noVoucherYet": "{merchant} bu teklif için henüz kupon yayınlamadı. Daha sonra tekrar bakın.",
+      "offerRuns": "Teklif süresi",
+      "bought": "Satın alındı",
+      "boughtCount": "{count, plural, one {# kez} other {# kez}}",
+      "website": "Web sitesi",
+      "allOffersFrom": "{merchant} işletmesinin tüm teklifleri",
+      "moreFrom": "{merchant} işletmesinden daha fazlası"
+    },
+    "list": {
+      "allCategories": "Tümü",
+      "badge": "Canlı kampanya pazar yeri",
+      "heroTitle": "Avrupa'nın en popüler tekliflerini keşfedin",
+      "heroSubtitle": "Pazarınızdaki en iyi işletmelerden seçilmiş kuponlara, hediyelere ve deneyimlere göz atın.",
+      "searchLabel": "Kampanya ara",
+      "searchPlaceholder": "Kampanya, işletme veya hizmet arayın...",
+      "campaignCount": "{count, plural, one {<b>#</b> kampanya} other {<b>#</b> kampanya}}",
+      "voucherCount": "{count, plural, one {<b>#</b> kupon satışta} other {<b>#</b> kupon satışta}}",
+      "merchantCount": "{count, plural, one {<b>#</b> işletme} other {<b>#</b> işletme}}",
+      "categoriesLabel": "Kategoriler",
+      "unavailableTitle": "Kampanyalar geçici olarak kullanılamıyor",
+      "unavailableText": "Veritabanına bağlanılamadı. Lütfen birazdan tekrar deneyin.",
+      "emptyTitle": "Teklif bulunamadı",
+      "emptyText": "Farklı bir arama yapın veya başka bir kategori seçin.",
+      "tryAgain": "Tekrar dene",
+      "clearFilters": "Filtreleri temizle"
+    },
+    "listError": {
+      "title": "Kampanyalar yüklenemedi",
+      "fallbackMessage": "Kampanyalar yüklenirken beklenmeyen bir hata oluştu.",
+      "tryAgain": "Tekrar dene"
+    },
+    "filters": {
+      "sortBy": "Sırala",
+      "sort": {
+        "newest": "En yeni",
+        "oldest": "En eski",
+        "priceLow": "Fiyat: Düşükten yükseğe",
+        "priceHigh": "Fiyat: Yüksekten düşüğe",
+        "popular": "En popüler",
+        "expiring": "Süresi yakında dolacak"
+      },
+      "merchant": "İşletme",
+      "allMerchants": "Tüm işletmeler",
+      "minPrice": "Min. fiyat",
+      "minPricePlaceholder": "Min. €",
+      "maxPrice": "Maks. fiyat",
+      "maxPricePlaceholder": "Maks. €"
+    },
+    "tenantList": {
+      "title": "Kuponlar",
+      "subtitle": "{merchant} işletmesinin aktif teklifleri.",
+      "empty": "Henüz mevcut kupon yok.",
+      "voucher": "Kupon",
+      "viewVoucher": "Kuponu görüntüle"
+    },
+    "deals": {
+      "metaTitle": "Fırsatlar",
+      "metaDescription": "En iyi kupon fırsatlarını keşfedin"
+    },
+    "campaignShare": {
+      "share": "Paylaş",
+      "copied": "Kopyalandı",
+      "linkCopied": "Bağlantı kopyalandı",
+      "copyFailed": "Kopyalanamadı"
+    },
+    "shareSheet": {
+      "share": "Paylaş",
+      "title": {
+        "voucher": "Bu kuponu paylaşın",
+        "campaign": "Bu kampanyayı paylaşın",
+        "merchant": "Bu işletmeyi paylaşın"
+      },
+      "close": "Kapat",
+      "referralShareText": "{title} - Paylaş ve %10 geri kazan!",
+      "referralNote": "Arkadaşlarınız kullandığında <b>paylaşın ve %10 kazanın</b>!",
+      "targets": {
+        "email": "E-posta",
+        "copy": "Bağlantıyı kopyala"
+      },
+      "copied": "Kopyalandı!",
+      "linkCopiedToClipboard": "Bağlantı panoya kopyalandı!",
+      "linkCopied": "Bağlantı kopyalandı!",
+      "shareLinkLabel": "Paylaşım bağlantısı",
+      "copyLink": "Bağlantıyı kopyala"
+    },
+    "wishlistButton": {
+      "add": "İstek listesine ekle",
+      "remove": "İstek listesinden çıkar"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# yıldız} other {# yıldız}}"
+    },
+    "form": {
+      "title": "Yorum yaz",
+      "ratingLabel": "Puan",
+      "titleLabel": "Başlık (isteğe bağlı)",
+      "titlePlaceholder": "Deneyiminizi özetleyin",
+      "commentLabel": "Yorum (isteğe bağlı)",
+      "commentPlaceholder": "Deneyiminizi paylaşın...",
+      "submit": "Yorumu gönder",
+      "submitting": "Gönderiliyor...",
+      "ratingRequired": "Lütfen bir puan seçin",
+      "submitFailed": "Yorum gönderilemedi",
+      "alreadyReviewed": "Bu öğe için zaten yorum yaptınız",
+      "signInRequired": "Yorum yazmak için giriş yapın",
+      "thankYou": "Yorumunuz için teşekkürler!",
+      "writeAnother": "Başka bir yorum yaz"
+    },
+    "list": {
+      "sort": {
+        "newest": "En yeni",
+        "highest": "En yüksek",
+        "helpful": "En faydalı"
+      },
+      "signInToReview": "Yorum yazmak için giriş yapın",
+      "loadFailed": "Yorumlar yüklenemedi.",
+      "tryAgain": "Tekrar dene",
+      "empty": "Henüz yorum yok.",
+      "anonymous": "Anonim",
+      "verified": "Doğrulanmış",
+      "helpfulButton": "Faydalı ({count})",
+      "foundHelpful": "{count} kişi bunu faydalı buldu",
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "pageOf": "Sayfa {current}/{total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "İptal",
+      "saving": "Kaydediliyor…",
+      "somethingWentWrong": "Bir şeyler ters gitti"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Kimlik doğrulanmadı",
+      "unauthorized": "Yetkisiz",
+      "tooManyAttempts": "Çok fazla deneme",
+      "validationFailed": "Doğrulama başarısız oldu",
+      "unexpected": "Beklenmeyen bir hata oluştu",
+      "databaseFailed": "Veritabanı işlemi başarısız oldu",
+      "serviceUnavailable": "Hizmet geçici olarak kullanılamıyor",
+      "newPasswordTooShort": "Yeni şifre en az 8 karakter olmalıdır",
+      "userNotFound": "Kullanıcı bulunamadı",
+      "currentPasswordRequired": "Mevcut şifre gereklidir",
+      "currentPasswordIncorrect": "Mevcut şifre yanlış",
+      "deletionUnavailable": "Hesap silme geçici olarak kullanılamıyor. Lütfen destekle iletişime geçin.",
+      "totpAlreadyEnabledReconfigure": "2FA zaten etkin. Yeniden yapılandırmak için önce devre dışı bırakın.",
+      "sixDigitCodeRequired": "6 haneli bir kod gereklidir",
+      "totpSetupMissing": "TOTP kurulumu bulunamadı. Lütfen önce kurulum işlemini başlatın.",
+      "totpAlreadyEnabled": "2FA zaten etkin",
+      "invalidSetupCode": "Geçersiz kod. Lütfen kimlik doğrulama uygulamanızı kontrol edip tekrar deneyin.",
+      "verificationCodeRequired": "Doğrulama kodu gereklidir",
+      "totpNotEnabled": "2FA şu anda etkin değil",
+      "invalidDisableCode": "Geçersiz kod. Mevcut TOTP kodunuzu veya bir yedek kodu girin.",
+      "passkeyOptionsFailed": "Kayıt seçenekleri alınamadı",
+      "passkeyGenerateOptionsFailed": "Kayıt seçenekleri oluşturulamadı",
+      "registrationFailed": "Kayıt başarısız oldu",
+      "passkeyRegistrationFailed": "Geçiş anahtarı kaydı başarısız oldu",
+      "passkeyChallengeExpired": "Doğrulama isteğinin süresi doldu veya bulunamadı",
+      "verificationFailed": "Doğrulama başarısız oldu",
+      "passkeyVerifyFailed": "Kayıt doğrulanamadı"
+    },
+    "settings": {
+      "joinedOn": "Katılma tarihi: {date}",
+      "joinedRecently": "Yakın zamanda katıldı"
+    },
+    "profileForm": {
+      "nameLabel": "Ad",
+      "namePlaceholder": "Adınız",
+      "emailLabel": "E-posta",
+      "emailLocked": "E-posta değiştirilemez",
+      "save": "Değişiklikleri kaydet",
+      "updated": "Profil güncellendi",
+      "nameRequired": "Ad gereklidir",
+      "updateFailed": "Profil güncellenemedi"
+    },
+    "passwordForm": {
+      "currentLabel": "Mevcut şifre",
+      "newLabel": "Yeni şifre",
+      "setLabel": "Şifre belirle",
+      "confirmLabel": "Şifreyi onayla",
+      "showPassword": "Şifreyi göster",
+      "hidePassword": "Şifreyi gizle",
+      "change": "Şifreyi değiştir",
+      "set": "Şifre belirle",
+      "updated": "Şifre başarıyla güncellendi",
+      "tooShort": "Şifre en az {min} karakter olmalıdır",
+      "mismatch": "Şifreler eşleşmiyor",
+      "changeFailed": "Şifre değiştirilemedi"
+    },
+    "deleteDialog": {
+      "trigger": "Hesabı sil",
+      "title": "Hesabınız silinsin mi?",
+      "description": "Bu işlem kalıcıdır. Profiliniz, oturumlarınız ve bildirim ayarlarınız silinecek. Satın alma geçmişi anonimleştirilecek.",
+      "typeToConfirm": "Onaylamak için <strong>{word}</strong> yazın:",
+      "confirm": "Kalıcı olarak sil",
+      "deleting": "Siliniyor…",
+      "failed": "Hesap silinemedi"
+    },
+    "passkeys": {
+      "title": "Geçiş anahtarları",
+      "description": "Cihazınızın parmak izi, yüz tanıma veya PIN'i ile şifresiz giriş yapın.",
+      "add": "Geçiş anahtarı ekle",
+      "namePlaceholder": "ör. \"MacBook Touch ID\"",
+      "addSubmit": "Ekle",
+      "adding": "Ekleniyor…",
+      "unsupported": "Bu tarayıcı geçiş anahtarlarını desteklemiyor. Chrome, Safari veya Edge'in güncel bir sürümünü deneyin.",
+      "empty": "Henüz geçiş anahtarı yok. Şifresiz girişi etkinleştirmek için bir tane ekleyin.",
+      "devicePasskey": "Cihaz geçiş anahtarı",
+      "passkey": "Geçiş anahtarı",
+      "added": "Eklenme: {date}",
+      "lastUsed": "Son kullanım: {date}",
+      "synced": "Senkronize",
+      "removeConfirm": "Kaldırılsın mı?",
+      "remove": "Kaldır",
+      "removeLabel": "Geçiş anahtarını kaldır",
+      "loadFailed": "Geçiş anahtarları yüklenemedi",
+      "removeFailed": "Geçiş anahtarı kaldırılamadı"
+    },
+    "security": {
+      "title": "Güvenlik",
+      "description": "İki faktörlü kimlik doğrulamayı ve güvenlik ayarlarını yönetin",
+      "loading": "Yükleniyor...",
+      "backToSettings": "Ayarlara dön",
+      "enabledMessage": "İki faktörlü kimlik doğrulama artık etkin!",
+      "disabledMessage": "İki faktörlü kimlik doğrulama devre dışı bırakıldı",
+      "errors": {
+        "statusLoadFailed": "İki faktörlü kimlik doğrulama durumunuz yüklenemedi",
+        "setupFailed": "Kurulum başlatılamadı",
+        "verifyFailed": "Doğrulama başarısız oldu",
+        "disableFailed": "2FA devre dışı bırakılamadı"
+      },
+      "status": {
+        "title": "İki faktörlü kimlik doğrulama",
+        "enabledBody": "Hesabınız bir kimlik doğrulama uygulamasıyla korunuyor.",
+        "disabledBody": "Kimlik doğrulama uygulamanızdan kod isteyerek hesabınıza ek bir güvenlik katmanı ekleyin.",
+        "enabled": "Etkin",
+        "notEnabled": "Etkin değil"
+      },
+      "setup": {
+        "title": "Kimlik doğrulama uygulamasını kurun",
+        "description": "Doğrulama kodları oluşturmak için Google Authenticator, Authy veya 1Password gibi bir uygulama kullanın.",
+        "enable": "2FA'yı etkinleştir"
+      },
+      "scan": {
+        "title": "QR kodu tarayın veya anahtarı elle girin",
+        "qrAlt": "Bu QR kodu kimlik doğrulama uygulamanızla tarayın",
+        "manualKey": "Veya bu anahtarı elle girin:",
+        "copySecret": "Gizli anahtarı kopyala"
+      },
+      "verify": {
+        "title": "Doğrulama kodunu girin",
+        "codeLabel": "Uygulamanızdaki 6 haneli kod",
+        "submit": "Doğrula ve etkinleştir"
+      },
+      "backupCodes": {
+        "title": "Yedek kodlarınızı kaydedin",
+        "description": "Bu kodları güvenli bir yerde saklayın. Kimlik doğrulama uygulamanıza erişiminizi kaybederseniz giriş yapmak için bu kodlardan birini kullanabilirsiniz. Her kod yalnızca bir kez kullanılabilir.",
+        "copy": "Kodları kopyala",
+        "copied": "Kopyalandı!",
+        "download": "İndir",
+        "done": "Tamam"
+      },
+      "backupFile": {
+        "title": "GiftHub - İki faktörlü kimlik doğrulama yedek kodları",
+        "instructions": "Bu kodları güvenli bir yerde saklayın. Her kod yalnızca bir kez kullanılabilir.",
+        "generated": "Oluşturulma: {date}"
+      },
+      "disable": {
+        "title": "İki faktörlü kimlik doğrulamayı devre dışı bırak",
+        "description": "Bu işlem hesabınızdaki ek güvenlik katmanını kaldırır.",
+        "button": "2FA'yı devre dışı bırak",
+        "confirmTitle": "2FA'yı devre dışı bırakmayı onaylayın",
+        "confirmDescription": "Kimlik doğrulama uygulamanızdaki güncel 6 haneli kodu veya bir yedek kodu girin.",
+        "codeLabel": "Doğrulama kodu",
+        "codePlaceholder": "000000 veya XXXX-XXXX",
+        "confirm": "Devre dışı bırakmayı onayla"
+      },
+      "quickLinks": {
+        "title": "Güvenlik kısayolları",
+        "sessions": "Aktif oturumları görüntüle",
+        "changePassword": "Şifreyi değiştir"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Sonuç için ödeyin, erişim için değil. İşletmeye ait tavsiye altyapısı: markalı kuponlar ve mağaza kredisi."
+    },
+    "error": {
+      "unexpected": "Beklenmeyen bir hata oluştu."
+    },
+    "hero": {
+      "badge": "Yerel işletmeler için kuponlar ve tavsiyeler",
+      "title": "Müşterileriniz <highlight>yeni müşterilerinizi</highlight> getirsin",
+      "subtitle": "Kupon kampanyaları oluşturun. Müşterileriniz bunları paylaşır, kredi kazanır ve arkadaşlarını getirir. Her tavsiyeyi takip edin. Yeni müşteri başına maliyetinizi tam olarak görün.",
+      "ctaMerchant": "İşletme olarak başla",
+      "ctaExplore": "Kampanyaları keşfet",
+      "noCardRequired": "Kredi kartı gerekmez",
+      "freeTrial": "{days} gün ücretsiz deneme",
+      "cancelAnytime": "İstediğiniz zaman iptal edin"
+    },
+    "stats": {
+      "activeCampaigns": "Aktif kampanyalar",
+      "merchants": "İşletmeler",
+      "processedValue": "İşlem hacmi"
+    },
+    "merchantsTitle": "Platformdaki işletmeler",
+    "values": {
+      "referral": {
+        "title": "Tavsiye motoru",
+        "description": "Müşterileriniz fırsatları paylaşır ve otomatik olarak yeni müşteriler getirir"
+      },
+      "vouchers": {
+        "title": "Dijital kuponlar",
+        "description": "Esnek kurallarla dakikalar içinde indirim kampanyaları oluşturun"
+      },
+      "qr": {
+        "title": "QR ile kullanım",
+        "description": "Mağazada yalnızca bir telefonla tarayın ve doğrulayın. Donanım gerekmez"
+      },
+      "analytics": {
+        "title": "Gerçek zamanlı analizler",
+        "description": "Her kampanyanın maliyetini ve getirisini tam olarak görün. Tahmine gerek yok"
+      }
+    },
+    "howItWorks": {
+      "title": "Nasıl çalışır",
+      "subtitle": "Basit üç adımlı süreçle dakikalar içinde başlayın",
+      "steps": {
+        "create": {
+          "title": "Kampanya oluşturun",
+          "description": "2 dakikada bir kupon kurun: indirim, tarih aralığı, maksimum kullanım. Hepsi bu."
+        },
+        "share": {
+          "title": "Müşteriler paylaşır",
+          "description": "Her alıcı bir tavsiye bağlantısı alır. Paylaşır, kredi kazanır, arkadaşlarını getirir."
+        },
+        "grow": {
+          "title": "Büyümeyi izleyin",
+          "description": "Her tavsiye zincirini takip edin, yeni müşteri başına maliyetinizi görün, ROI'yi ölçün."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Popüler kampanyaları keşfedin",
+      "subtitle": "Avrupa genelinde kuponları, fırsatları ve deneyimleri keşfedin",
+      "showing": "{count, plural, one {# aktif kampanya} other {# aktif kampanya}} gösteriliyor.",
+      "showingWithOnSale": "{count, plural, one {# aktif kampanya} other {# aktif kampanya}} gösteriliyor — {onSale} tanesi şu anda satışta.",
+      "emptyTitle": "Şu anda yayında kampanya yok",
+      "emptyBody": "Teklifler, işletmeler yayınlar yayınlamaz burada görünür.",
+      "viewAll": "Tüm kampanyaları görüntüle"
+    },
+    "pricing": {
+      "title": "Basit, şeffaf fiyatlandırma",
+      "subtitle": "İşletmenize uygun planı seçin. Yıllık faturalandırma 10 aylık ücrete denk gelir.",
+      "billingPeriod": "Faturalandırma dönemi",
+      "monthly": "Aylık",
+      "annual": "Yıllık",
+      "save": "%17 tasarruf",
+      "mostPopular": "En popüler",
+      "perMonth": "/ay",
+      "perYear": "{price}/yıl (2 ay ücretsiz)",
+      "startTrial": "Ücretsiz denemeyi başlat",
+      "footer": "Tüm planlarda {days} gün ücretsiz deneme · Kupon satışlarında %{percent} işlem ücreti · İstediğiniz zaman iptal edin",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {Ayda # kupon} other {Ayda # kupon}}",
+        "activeCampaigns": "{count, plural, one {# aktif kampanya} other {# aktif kampanya}}",
+        "teamMembers": "{count, plural, one {# ekip üyesi} other {# ekip üyesi}}",
+        "qrRedemption": "QR kod ile kullanım",
+        "basicAnalytics": "Temel analizler",
+        "advancedAnalytics": "Gelişmiş analizler",
+        "customDomain": "Özel alan adı",
+        "promoBoosts": "Promosyon desteği (e-posta + push)",
+        "unlimitedVouchers": "Sınırsız kupon",
+        "unlimitedCampaigns": "Sınırsız kampanya",
+        "unlimitedTeamMembers": "Sınırsız ekip üyesi",
+        "everythingInPlan": "{plan} planındaki her şey"
+      }
+    },
+    "calculator": {
+      "title": "ROI'nizi hesaplayın",
+      "subtitle": "GiftHub ile ne kadar kazanabileceğinizi görmek için kaydırıcıları sürükleyin",
+      "monthlyPurchases": "Aylık kupon satın alımları",
+      "purchasesValue": "{count, plural, one {# satın alma} other {# satın alma}}",
+      "averageTicket": "Ortalama sepet tutarı",
+      "referralRate": "Tavsiye dönüşüm oranı",
+      "monthlyRevenue": "Aylık gelir",
+      "referralCustomers": "Tavsiyeyle gelen yeni müşteriler",
+      "perMonthValue": "{value}/ay",
+      "referralRevenue": "Tavsiye geliri",
+      "estimatedRoi": "Tahmini ROI",
+      "platformCost": "Platform maliyeti",
+      "platformCostValue": "{plan}/ay plan + {fees} ücret (%{percent}) = <strong>{total}/ay</strong>",
+      "disclaimer": "Yalnızca girdiğiniz değerlere dayalı bir örnektir — tahmin değildir."
+    },
+    "why": {
+      "title": "İşletmeler GiftHub'ı neden seviyor",
+      "body": "Marjlarınızı korurken ve müşteri ilişkilerinize sahip çıkarken müşteri tabanınızı büyütün ve gelirinizi artırın.",
+      "benefits": {
+        "referralEngine": "Her kampanyada yerleşik tavsiye motoru",
+        "analytics": "Gerçek zamanlı analizler: edinme başına maliyet, ROI",
+        "qr": "QR ile kullanım — POS donanımı gerekmez",
+        "languages": "{count, plural, one {# dilde} other {# dilde}} kullanılabilir",
+        "flatPlan": "Sabit aylık plan — Groupon gibi gelir paylaşımı değil",
+        "ownData": "Müşteri verileriniz size aittir",
+        "fee": "Kupon satışlarında %{percent} işlem ücreti, gizli maliyet yok"
+      }
+    },
+    "compare": {
+      "title": "Groupon ve GiftHub",
+      "hint": "Karşılaştırmak için sürükleyin",
+      "beforeTitle": "Groupon ile",
+      "afterTitle": "GiftHub ile",
+      "sliderLabel": "{before} ve {after} karşılaştırması",
+      "before": {
+        "revenueShare": "Platformun aldığı büyük gelir payı",
+        "ownsRelationship": "Müşteri ilişkisi platforma ait",
+        "noDataAccess": "Müşteri verilerine erişim yok",
+        "raceToBottom": "Dibe doğru fiyat yarışı",
+        "lostBrand": "Kaybolan marka kimliği"
+      },
+      "after": {
+        "flatFee": "Sabit {minPrice}–{maxPrice}/ay + %{percent} ücret",
+        "ownData": "Tüm müşteri verileri size ait",
+        "referralEngine": "Yerleşik tavsiye motoru",
+        "yourBrand": "Sizin markanız, sizin kurallarınız",
+        "roiAnalytics": "Gerçek zamanlı ROI analizleri"
+      }
+    },
+    "faq": {
+      "title": "Sıkça sorulan sorular",
+      "subtitle": "GiftHub hakkında bilmeniz gereken her şey",
+      "items": {
+        "groupon": {
+          "question": "Bunun Groupon'dan farkı nedir?",
+          "answer": "Groupon tarzı fırsat siteleri genellikle her satıştan büyük bir pay alır ve müşteri ilişkisini sahiplenir. Biz sabit aylık ücret ({price}/ay'dan başlayan) ve kupon satışlarında %{percent} alırız. Müşterileriniz, verileriniz ve marjlarınız sizde kalır."
+        },
+        "referral": {
+          "question": "Tavsiye sistemi nasıl çalışır?",
+          "answer": "Kupon satın alan her müşteri benzersiz bir tavsiye bağlantısı alır. Bağlantıyı paylaştığında ve bir arkadaşı satın aldığında ikisi de kredi kazanır. Her tavsiye zinciri takip edilir, böylece yeni müşterilerin sizi nasıl bulduğunu tam olarak görürsünüz."
+        },
+        "trial": {
+          "question": "{days} günlük deneme süresinden sonra ne olur?",
+          "answer": "Bir plan seçersiniz ({starter}, {pro} veya {scale}). Abone olmazsanız yayınlanmış mevcut kuponlarınız müşteriler için aktif kalır, ancak abone olana kadar yeni kampanya oluşturamazsınız."
+        },
+        "qr": {
+          "question": "QR ile kullanım için özel donanım gerekir mi?",
+          "answer": "Hayır. Personeliniz herhangi bir telefon tarayıcısında mobil tarayıcıyı açar, müşterinin QR kodunu tarar ve işlem tamamlanır. Uygulama indirme veya POS entegrasyonu gerekmez."
+        },
+        "fee": {
+          "question": "%{percent} işlem ücreti nedir?",
+          "answer": "Bir müşteri platform üzerinden kupon satın aldığında ödemeden %{percent} keseriz. Planınızın üzerine başka platform ücreti yoktur."
+        }
+      }
+    },
+    "cta": {
+      "title": "Müşteri kiralamayı bırakın. Kendi ordunuzu kurun.",
+      "body": "İlk kampanyanızı dakikalar içinde oluşturun. Gerisini müşterileriniz halleder. {days} gün ücretsiz deneme.",
+      "getStarted": "Ücretsiz başla",
+      "browse": "Kampanyalara göz at"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Ödeme demosu",
+      "subtitle": "Demo ödeme sayfası",
+      "creditBalance": "Kredi bakiyesi",
+      "availableAmount": "{amount} kullanılabilir",
+      "lockedAmount": "{amount} kilitli",
+      "orderSummary": "Sipariş özeti",
+      "orderAmount": "Sipariş tutarı",
+      "creditToApply": "Uygulanacak kredi",
+      "maxAmount": "Maks.: {amount}",
+      "subtotal": "Ara toplam",
+      "creditAppliedLine": "Uygulanan kredi",
+      "total": "Toplam",
+      "processing": "İşleniyor...",
+      "submit": "Krediyi uygula ve siparişi tamamla",
+      "creditApplied": "Kredi başarıyla uygulandı! Sipariş toplamı: {total}",
+      "errors": {
+        "missingAmounts": "Lütfen hem sipariş tutarını hem de kredi tutarını girin",
+        "applyFailed": "Kredi uygulanamadı"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - Mevcut kuponlar",
+      "emptyTitle": "Mevcut kupon yok",
+      "emptyDescription": "{merchant} işletmesinin yeni kupon teklifleri için daha sonra tekrar bakın.",
+      "specialOffer": "Özel teklif",
+      "validUntil": "Son geçerlilik: {date}",
+      "viewAndShare": "Görüntüle ve paylaş"
+    },
+    "wallet": {
+      "subtitle": "Kredi cüzdanı",
+      "availableToUse": "Kullanılabilir",
+      "useCredit": "Kredi kullan",
+      "noCreditToUse": "Kullanılacak kredi yok",
+      "locked": "Kilitli",
+      "lockedDescription": "İlgili satın alma onaylandığında kilidi açılır.",
+      "historyTitle": "Kredi geçmişi",
+      "historyDescription": "{merchant} hesap dökümü",
+      "historyEmpty": "Henüz kredi geçmişi yok.",
+      "expires": "Son kullanma: {date}",
+      "creditStatus": {
+        "locked": "kilitli",
+        "available": "kullanılabilir",
+        "used": "kullanıldı",
+        "expired": "süresi doldu",
+        "reversed": "iptal edildi"
+      }
+    },
+    "error": {
+      "title": "Bir şeyler ters gitti",
+      "description": "Portal yüklenemedi. Lütfen sayfayı yenileyin veya daha sonra tekrar deneyin.",
+      "backToPortal": "Portala dön"
+    },
+    "payments": {
+      "voucherFallback": "Kupon",
+      "status": {
+        "pending": "beklemede",
+        "paid": "ödendi",
+        "failed": "başarısız",
+        "refunded": "iade edildi"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "mevcut",
+        "sold": "satıldı",
+        "used": "kullanıldı",
+        "cancelled": "iptal edildi",
+        "refunded": "iade edildi"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Bir şeyler ters gitti",
+      "description": "Bu sayfa yüklenirken bir hata oluştu."
+    },
+    "notFound": {
+      "metaTitle": "Sayfa bulunamadı"
+    },
+    "header": {
+      "mainNavLabel": "Ana menü",
+      "signIn": "Giriş yap"
+    },
+    "footer": {
+      "navLabel": "Alt bilgi",
+      "copyright": "© {year} GiftHub. Avrupa'da üretildi."
+    },
+    "navLinks": {
+      "campaigns": "Kampanyalar",
+      "merchants": "İşletmeler",
+      "explore": "Keşfet",
+      "search": "Ara",
+      "faq": "SSS",
+      "contact": "İletişim",
+      "privacy": "Gizlilik",
+      "terms": "Şartlar",
+      "home": "Ana sayfa",
+      "about": "Hakkımızda",
+      "vouchers": "Kuponlar",
+      "shop": "Mağaza",
+      "rent": "Kirala"
+    },
+    "chat": {
+      "openAssistant": "Otomatik asistanı aç",
+      "closeAssistant": "Otomatik asistanı kapat",
+      "dialogLabel": "GiftHub otomatik asistanı",
+      "title": "GiftHub Asistan",
+      "subtitle": "Otomatik asistan",
+      "newChat": "Yeni sohbet",
+      "closeChat": "Sohbeti kapat",
+      "greeting": "Merhaba!",
+      "intro": "Ben otomatik bir asistanım. Kuponlar, hediye kartları, biletler veya hesabınız hakkında soru sorabilirsiniz.",
+      "inputLabel": "Otomatik asistana mesaj",
+      "placeholder": "Bir mesaj yazın...",
+      "send": "Mesaj gönder",
+      "sendError": "Üzgünüm, mesajınız gönderilemedi. Lütfen tekrar deneyin."
+    },
+    "cookies": {
+      "regionLabel": "Çerez tercihleri",
+      "intro": "Deneyiminizi iyileştirmek için çerezler kullanıyoruz. Zorunlu çerezler her zaman etkindir; isteğe bağlı olanlardan hangilerine izin vereceğinizi siz seçersiniz. <link>Gizlilik politikası</link>",
+      "optionalLegend": "İsteğe bağlı çerezler",
+      "necessary": "Zorunlu",
+      "alwaysOn": "(her zaman açık)",
+      "analytics": "Analiz",
+      "marketing": "Pazarlama",
+      "preferences": "Tercihler",
+      "saveError": "Seçiminiz kaydedilemedi. Lütfen tekrar deneyin.",
+      "acceptAll": "Tümünü kabul et",
+      "declineOptional": "İsteğe bağlıları reddet",
+      "customize": "Özelleştir",
+      "savePreferences": "Tercihleri kaydet"
+    },
+    "currency": {
+      "selectLabel": "Para birimi seçin"
+    },
+    "language": {
+      "selectLabel": "Dil seçin",
+      "selectInterfaceLabel": "Arayüz dilini seçin ({language})",
+      "unknown": "bilinmiyor",
+      "interfaceOnly": "Yalnızca arayüz metinlerini değiştirir",
+      "uiName": "{name} (Arayüz)"
+    },
+    "country": {
+      "selectLabel": "Pazar yeri seçin ({country})",
+      "heading": "Pazar yeri seçin",
+      "description": "Yalnızca ülkeyi, para birimini ve pazar verilerini değiştirir",
+      "tip": "<strong>İpucu:</strong> Pazar yeri, verileri ve para birimini filtreler. Arayüz dili ayrı olarak yapılandırılır."
+    },
+    "roleSwitcher": {
+      "myDashboard": "Dashboard'um",
+      "platformAdmin": "Platform yöneticisi",
+      "admin": "Yönetici",
+      "staff": "Personel",
+      "switchContext": "Bağlamı değiştir"
+    },
+    "legalEntity": {
+      "operator": "İşletmeci",
+      "registeredAddress": "Kayıtlı adres",
+      "registryCode": "Sicil kodu",
+      "operatorPlaceholder": "[şirket adı eklenecek]",
+      "addressPlaceholder": "[kayıtlı adres eklenecek]",
+      "registryCodePlaceholder": "[sicil kodu eklenecek]"
+    },
+    "theme": {
+      "dark": "Koyu mod",
+      "light": "Açık mod",
+      "system": "Sistem teması"
+    },
+    "voiceSearch": {
+      "start": "Sesli aramayı başlat",
+      "stop": "Dinlemeyi durdur",
+      "tooltip": "Sesli arama",
+      "tapToStop": "Durdurmak için dokunun"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Merkez yüklenemedi",
+      "description": "İşletmeler yüklenirken beklenmeyen bir hata oluştu.",
+      "retry": "Tekrar dene"
+    },
+    "hub": {
+      "metaTitle": "İşletmeler",
+      "metaDescription": "GiftHub'daki yerel işletmeler ve güncel teklifleri",
+      "title": "Yerel işletmeler",
+      "subtitle": "Kafeler, salonlar, stüdyolar ve daha fazlası: GiftHub'da kimlerin olduğunu ve şu anda neler sunduklarını görün.",
+      "loadError": "İşletmeler yüklenemedi",
+      "loadErrorHint": "Lütfen birazdan tekrar deneyin.",
+      "retry": "Tekrar dene",
+      "emptyTitle": "Henüz işletme yok",
+      "emptyHint": "İşletmeler katılır katılmaz burada görünür.",
+      "joinCta": "İşletme olarak katılın",
+      "noOffers": "Şu anda teklif yok",
+      "offerCount": "{count, plural, one {# teklif} other {# teklif}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Bulunamadı",
+      "metaDescription": "{name} işletmesinin kuponlarına, kampanyalarına ve tekliflerine göz atın",
+      "offerCount": "{count, plural, one {# teklif} other {# teklif}}",
+      "website": "Web sitesi",
+      "contact": "İletişim",
+      "sampleNotice": "<strong>Örnek işletme.</strong> Bu sayfa, bir işletmenin GiftHub'da nasıl göründüğünü gösterir. Teklifleri örnektir ve satın alınamaz.",
+      "offersHeading": "Teklifler",
+      "noOffers": "Şu anda teklif yok",
+      "noOffersHint": "{name} işletmesinin yeni teklifleri burada görünecek.",
+      "browseOther": "Diğer tekliflere göz at",
+      "validUntil": "Son geçerlilik: {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Kampanyalar",
+      "mainNav": "Ana menü",
+      "signIn": "Giriş yap"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Yerel işletmeleri keşfedin",
+      "hubHeroSubtitle": "GiftHub'daki işletmelerin kampanyalarına, kuponlarına, kiralamalarına ve mağazalarına göz atın.",
+      "tenantHeroSubtitle": "Ürünleri, kiralamaları ve kuponları tek bir yerde keşfedin.",
+      "browseCampaigns": "Kampanyalara göz at",
+      "getStarted": "Başla",
+      "featuredMerchants": "Öne çıkan işletmeler",
+      "noMerchants": "Henüz işletme yok.",
+      "visitNamed": "{name} sayfasını ziyaret et",
+      "visitMerchant": "İşletmeyi ziyaret et",
+      "featuredProducts": "Öne çıkan ürünler",
+      "noProducts": "Mevcut ürün yok.",
+      "rentalHighlights": "Öne çıkan kiralamalar",
+      "noRentals": "Mevcut kiralama yok.",
+      "perDay": "{price} / gün",
+      "activeVouchers": "Aktif kuponlar",
+      "noStandaloneVouchers": "Şu anda burada bağımsız kupon yok — <link>{count, plural, one {# aktif kampanyaya} other {# aktif kampanyaya}} göz atın</link>.",
+      "noVouchers": "Mevcut kupon yok.",
+      "voucher": "Kupon",
+      "viewVoucher": "Kuponu görüntüle",
+      "stats": {
+        "campaigns": "Kampanyalar",
+        "vouchers": "Kuponlar",
+        "products": "Ürünler",
+        "rentals": "Kiralamalar"
+      },
+      "statsUnavailable": "İstatistikler kullanılamıyor."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Mağaza",
+      "subtitle": "Ürünlere göz atın ve sepete ekleyin."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Ödeme talebi oluşturuldu",
+      "intentCreatedDescription": "{amount} tutarında {id} talebi",
+      "checkoutErrorTitle": "Ödeme hatası",
+      "checkoutErrorDescription": "Ödeme talebi oluşturulamadı.",
+      "empty": "Henüz mevcut ürün yok.",
+      "productHighlight": "Öne çıkan ürün",
+      "add": "Ekle",
+      "cart": "Sepet",
+      "cartEmpty": "Sepet boş.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Kaldır",
+      "total": "Toplam",
+      "creatingIntent": "Talep oluşturuluyor...",
+      "checkoutIntent": "Ödeme talebi"
+    },
+    "rentPage": {
+      "metaTitle": "Kiralama pazar yeri",
+      "metaDescription": "Kiralık ürünlere göz atın",
+      "title": "Kiralamalar",
+      "subtitle": "Tarihleri seçin ve kiralama teklifi isteyin."
+    },
+    "rentClient": {
+      "selectDatesError": "Lütfen kiralama tarihlerini seçin.",
+      "bookingFailed": "Rezervasyon başarısız oldu",
+      "bookingCreated": "{name} için rezervasyon talebi oluşturuldu. Toplam: {total}.",
+      "bookingSubmitted": "Rezervasyon gönderildi",
+      "bookingCreateFailed": "Kiralama rezervasyonu oluşturulamadı.",
+      "bookingCancelled": "Rezervasyon iptal edildi.",
+      "cancelFailed": "Rezervasyon iptal edilemedi.",
+      "datesHeading": "Kiralama tarihleri",
+      "startDate": "Başlangıç tarihi",
+      "endDate": "Bitiş tarihi",
+      "daysSelected": "{count, plural, one {# kiralama günü seçildi.} other {# kiralama günü seçildi.}}",
+      "selectDatesHint": "Fiyatı hesaplamak için tarihleri seçin.",
+      "empty": "Henüz mevcut kiralama yok.",
+      "rentalHighlight": "Öne çıkan kiralama",
+      "perDay": "{price} / gün",
+      "weeklyRate": "Haftalık: {price}",
+      "select": "Seç",
+      "selectedHeading": "Seçilen kiralama",
+      "estimatedTotal": "Tahmini toplam",
+      "notesLabel": "Notlar (isteğe bağlı)",
+      "notesPlaceholder": "Özel istekleriniz...",
+      "submitting": "Rezervasyon gönderiliyor...",
+      "requestBooking": "Kiralama rezervasyonu iste",
+      "myBookings": "Rezervasyonlarım",
+      "noBookings": "Henüz kiralama rezervasyonu yok. Başlamak için yukarıdan bir ürün seçin.",
+      "bookingRange": "{start} - {end} ({days, plural, one {# gün} other {# gün}})",
+      "bookingTotal": "Toplam: {total}",
+      "rejectionReason": "Neden: {reason}",
+      "cancelling": "İptal ediliyor...",
+      "cancel": "İptal et",
+      "status": {
+        "pending": "beklemede",
+        "approved": "onaylandı",
+        "rejected": "reddedildi",
+        "paid": "ödendi",
+        "active": "aktif",
+        "returned": "iade edildi",
+        "cancelled": "iptal edildi"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Abonelik kutuları",
+      "metaDescription": "En sevdiğiniz yerel işletmelerin özenle seçilmiş aylık kupon kutularına abone olun — her dönem yeni teklifler, istediğiniz zaman iptal.",
+      "title": "Abonelik kutuları",
+      "subtitle": "En iyi işletmelerden özenle seçilmiş kuponları düzenli olarak alın.",
+      "empty": "Henüz mevcut abonelik kutusu yok. Yakında tekrar bakın!",
+      "byMerchant": "{name} tarafından",
+      "perInterval": "/{interval}",
+      "details": "Ayrıntılar",
+      "subscribe": "Abone ol",
+      "subscribedTitle": "Abone olundu",
+      "subscribedMessage": "Artık abonesiniz. Ayrıntılar için e-postanızı kontrol edin.",
+      "subscribeFailed": "Abone olunamadı. Lütfen tekrar deneyin.",
+      "notFoundTitle": "Kutu bulunamadı",
+      "notFoundHint": "Bu abonelik kutusu kullanılamıyor.",
+      "browseAll": "← Tüm kutulara göz at",
+      "backToAll": "← Tüm abonelik kutuları",
+      "subscriberCount": "{count, plural, one {# abone} other {# abone}}",
+      "whatsInside": "İçinde neler var",
+      "curatingNext": "Her {period} en fazla {count, plural, one {# seçilmiş kupon} other {# seçilmiş kupon}}. Bir sonraki gönderim hazırlanıyor.",
+      "percentVoucher": "%{value} indirim kuponu",
+      "amountVoucher": "{amount} değerinde kupon",
+      "curatedVoucher": "Seçilmiş kupon",
+      "subscribing": "Abone olunuyor…",
+      "subscribeWithPrice": "Abone ol — {price}/{interval}",
+      "interval": {
+        "weekly": "hafta",
+        "monthly": "ay",
+        "quarterly": "çeyrek"
+      },
+      "intervalEach": {
+        "weekly": "hafta",
+        "monthly": "ay",
+        "quarterly": "çeyrek"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Ara",
+    "metaDescription": "GiftHub'daki işletmelerin yayındaki kampanyalarını ve kuponlarını arayın.",
+    "loadingSearch": "Arama yükleniyor",
+    "title": "Teklif ara",
+    "subtitle": "GiftHub'daki işletmelerin kampanyalarını ve kuponlarını bulun",
+    "queryLabel": "Kampanya, kupon ve işletme ara",
+    "queryPlaceholder": "Kampanya, kupon, işletme arayın...",
+    "toggleFilters": "Filtreleri aç/kapat",
+    "filtersTitle": "Filtreler",
+    "closeFilters": "Filtreleri kapat",
+    "error": "Arama şu anda kullanılamıyor. Lütfen birazdan tekrar deneyin.",
+    "campaignsHeading": "Kampanyalar",
+    "vouchersHeading": "Kuponlar",
+    "browseMarketplace": "Satıştaki her şeye <link>kampanya pazar yerinde</link> göz atın.",
+    "campaignEnds": "Bitiş: {date}",
+    "filters": {
+      "title": "Filtreler",
+      "clearAll": "Tümünü temizle",
+      "category": "Kategori",
+      "discountType": "İndirim türü",
+      "minDiscount": "Min. indirim",
+      "minDiscountAria": "Minimum indirim",
+      "maxPrice": "Maks. fiyat",
+      "maxPriceAria": "Euro cinsinden maksimum fiyat",
+      "any": "Herhangi",
+      "sortBy": "Sırala",
+      "types": {
+        "all": "Tüm türler",
+        "percentage": "Yüzde indirim",
+        "fixed_amount": "Sabit tutar",
+        "credit_amount": "Mağaza kredisi"
+      },
+      "sort": {
+        "newest": "Önce en yeni",
+        "popular": "En popüler",
+        "expiring": "Süresi yakında dolacak"
+      }
+    },
+    "results": {
+      "chipCategory": "Kategori: {value}",
+      "chipType": "Tür: {value}",
+      "chipMinDiscount": "Min. %{value} indirim",
+      "chipMaxPrice": "Maks. €{value}",
+      "chipSort": "Sıralama: {value}",
+      "removeFilter": "{label} filtresini kaldır",
+      "searching": "Aranıyor...",
+      "count": "{total, plural, one {<num>#</num> sonuç} other {<num>#</num> sonuç}}",
+      "countForQuery": "{total, plural, one {“<hl>{query}</hl>” için <num>#</num> sonuç} other {“<hl>{query}</hl>” için <num>#</num> sonuç}}",
+      "flash": "Flaş",
+      "voucherFallback": "Kupon",
+      "expires": "Son kullanma: {date}",
+      "redeemed": "{count} kez kullanıldı",
+      "noResultsTitle": "Sonuç bulunamadı",
+      "noResultsQuery": "\"{query}\" ile eşleşen kupon yok. Filtrelerinizi değiştirmeyi deneyin.",
+      "noResultsHint": "Belirli bir kupon, işletme veya kategori aramayı deneyin."
+    }
+  },
+  "faq": {
+    "metaTitle": "Sıkça sorulan sorular",
+    "metaDescription": "Kupon ve hediye kartlarını satın alma, kullanma ve yönetme hakkında sık sorulan soruların yanıtları — ödemeler, iadeler, son kullanma tarihleri ve işletme desteği.",
+    "title": "Sıkça sorulan sorular",
+    "subtitle": "Platformumuz hakkında sık sorulan soruların yanıtlarını bulun.",
+    "categories": {
+      "general": "Genel",
+      "purchasing": "Satın alma ve ödemeler",
+      "vouchers": "Kuponlar ve kullanım",
+      "account": "Hesap ve güvenlik",
+      "merchants": "İşletmeler için",
+      "loyalty": "Sadakat ve ödüller"
+    },
+    "items": {
+      "whatIs": {
+        "q": "GiftHub nedir?",
+        "a": "GiftHub, işletmeleri müşterilerle buluşturan bir dijital kupon, hediye kartı ve etkinlik bileti pazar yeridir. İşletmeler dijital ürünler oluşturup satabilir; müşteriler de bunları satın alabilir, hediye edebilir ve kullanabilir."
+      },
+      "isFree": {
+        "q": "Platformu kullanmak ücretsiz mi?",
+        "a": "Göz atmak ve hesap oluşturmak ücretsizdir. Müşteriler yalnızca satın aldıkları ürünler için ödeme yapar. İşletmeler aylık bir plan ücreti ve kupon satışlarında %{fee} işlem ücreti öder."
+      },
+      "countries": {
+        "q": "Hangi ülkeler destekleniyor?",
+        "a": "AB genelindeki işletmeleri ve müşterileri {currencies} para birimi ve {languages} dil ile destekliyoruz."
+      },
+      "howToBuy": {
+        "q": "Nasıl kupon satın alırım?",
+        "a": "Mevcut kuponlara göz atın, \"Satın al\"a tıklayın ve ödemeyi Stripe üzerinden tamamlayın. Kuponunuz ödemeden hemen sonra cüzdanınızda görünür."
+      },
+      "paymentMethods": {
+        "q": "Hangi ödeme yöntemleri kabul ediliyor?",
+        "a": "Ödemeler Stripe tarafından güvenli şekilde işlenir. Satın alımınız için kullanılabilen ödeme yöntemleri ödeme sırasında gösterilir."
+      },
+      "refund": {
+        "q": "İade alabilir miyim?",
+        "a": "İade politikaları her işletme tarafından belirlenir. Satın almadan önce kupon ayrıntıları sayfasındaki iade politikasını kontrol edin."
+      },
+      "howToRedeem": {
+        "q": "Kuponu nasıl kullanırım?",
+        "a": "Cüzdanınızı açın, kuponu seçin ve QR kodu işletmeye gösterin. İşletme kullanımı onaylamak için kodu tarar. Kodu elle girerek de kullanabilirsiniz."
+      },
+      "expiry": {
+        "q": "Kuponun süresi dolduğunda ne olur?",
+        "a": "Süresi dolmuş kuponlar kullanılamaz. Süre dolmadan önce bildirim alırsınız. Son kullanma tarihleri için cüzdanınızı kontrol edin."
+      },
+      "gift": {
+        "q": "Birine kupon hediye edebilir miyim?",
+        "a": "Evet! Satın alırken \"Hediye olarak gönder\"i seçin ve alıcının e-posta adresini girin. Alıcı kuponu kişiselleştirilmiş bir mesajla alır."
+      },
+      "twoFactor": {
+        "q": "İki faktörlü kimlik doğrulamayı nasıl etkinleştiririm?",
+        "a": "Ayarlar → Güvenlik → İki faktörlü kimlik doğrulama bölümüne gidin. TOTP (Google Authenticator) kurabilir veya geçiş anahtarı (biyometrik) kimlik doğrulaması kullanabilirsiniz."
+      },
+      "biometrics": {
+        "q": "Biyometrik verilerle giriş yapabilir miyim?",
+        "a": "Evet! Geçiş anahtarı ile kimlik doğrulamayı destekliyoruz — Face ID, parmak izi veya Windows Hello ile giriş yapın. Ayarlar → Güvenlik bölümünden kurun."
+      },
+      "deleteAccount": {
+        "q": "Hesabımı nasıl silerim?",
+        "a": "Ayarlar → Gizlilik → Hesabı sil bölümüne gidin. GDPR uyumluluk politikamız gereği tüm verileriniz 30 gün içinde silinir. Önce verilerinizi dışa aktarabilirsiniz."
+      },
+      "startSelling": {
+        "q": "Satışa nasıl başlarım?",
+        "a": "İşletme olarak kaydolun, başlangıç sürecini tamamlayın ve ilk kuponunuzu oluşturun. Profiliniz onaylandıktan hemen sonra satışa başlayabilirsiniz."
+      },
+      "fees": {
+        "q": "Platform ücretleri nelerdir?",
+        "a": "{trialDays} günlük ücretsiz denemeden sonra planlar aylık {starter} {starterPrice}, {pro} {proPrice} veya {scale} {scalePrice} tutarındadır (yıllık faturalandırmada 2 ay ücretsiz); buna ek olarak kupon satışlarında ödemeden düşülen %{fee} işlem ücreti alınır."
+      },
+      "integrations": {
+        "q": "Mevcut sistemlerimle entegre edebilir miyim?",
+        "a": "Evet! Webhook'lar (gerçek zamanlı olay bildirimleri için), API anahtarları (programatik erişim için) ve Zapier/Slack/Discord entegrasyonları sunuyoruz."
+      },
+      "trackSales": {
+        "q": "Satışlarımı nasıl takip ederim?",
+        "a": "İşletme dashboard'unuz gelir, kullanımlar, müşteri içgörüleri ve yapay zeka destekli doğal dil sorguları (\"geçen haftanın gelirini göster\") dahil gerçek zamanlı analizler sunar."
+      },
+      "loyalty": {
+        "q": "Sadakat programı nasıl çalışır?",
+        "a": "Satın alma, günlük giriş, tavsiye ve yorum yazarak puan kazanın. Puanlar, artan avantajlar sunan seviyelerin kilidini açar (Bronz → Gümüş → Altın → Platin → Elmas)."
+      },
+      "badges": {
+        "q": "Rozetler ve seriler nedir?",
+        "a": "Rozetler, belirli hedeflere ulaştığınızda (ilk satın alma, 10 tavsiye vb.) kazandığınız başarılardır. Seriler art arda etkin olduğunuz günleri takip eder ve düzenliliği ödüllendirir."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Bize ulaşın",
+    "metaDescription": "GiftHub ekibiyle iletişime geçin — kuponlarınız, işletme kaydı, faturalandırma veya iş birliği talepleriyle ilgili sorular.",
+    "title": "Bize ulaşın",
+    "subtitle": "Bir sorunuz mu var? Sizden haber almaktan memnuniyet duyarız.",
+    "email": "E-posta",
+    "assistantTitle": "Otomatik asistan",
+    "assistantText": "Köşedeki sohbet düğmesinden kuponlar ve hesabınız hakkında hızlı yanıtlar alın. Otomatiktir, bir insan değildir.",
+    "name": "Ad",
+    "subject": "Konu",
+    "message": "Mesaj",
+    "sent": "Mesaj gönderildi! Size en kısa sürede dönüş yapacağız.",
+    "unavailableWithEmail": "İletişim formu şu anda kullanılamıyor. Lütfen bize {email} adresinden e-posta gönderin.",
+    "unavailable": "İletişim formu şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.",
+    "error": "Gönderilemedi. Lütfen birazdan tekrar deneyin.",
+    "sending": "Gönderiliyor...",
+    "send": "Mesaj gönder"
+  },
+  "leaderboardPage": {
+    "metaTitle": "En iyi işletmeler",
+    "metaDescription": "Son 30 günde GiftHub'da en çok kupon kullanımına sahip işletmeler",
+    "title": "En iyi işletmeler",
+    "subtitle": "Son 30 günde en çok kupon kullanımı",
+    "rank": "{rank}. sıra",
+    "redemptions": "{count, plural, one {<num>#</num><label>kullanım</label>} other {<num>#</num><label>kullanım</label>}}",
+    "empty": "Son 30 günde henüz kullanım olmadığından gösterilecek sıralama yok.",
+    "browseCampaigns": "Yayındaki kampanyalara göz at"
+  },
+  "ui": {
+    "close": "Kapat",
+    "more": "Daha fazla",
+    "loading": "Yükleniyor...",
+    "breadcrumb": {
+      "label": "içerik haritası"
+    },
+    "pagination": {
+      "label": "sayfalama",
+      "previousAria": "Önceki sayfaya git",
+      "previous": "Önceki",
+      "nextAria": "Sonraki sayfaya git",
+      "next": "Sonraki",
+      "morePages": "Daha fazla sayfa"
+    },
+    "toast": {
+      "dismiss": "Bildirimi kapat"
+    },
+    "calendar": {
+      "previousMonth": "Önceki aya git",
+      "nextMonth": "Sonraki aya git"
+    },
+    "datePicker": {
+      "placeholder": "Tarih seçin"
+    },
+    "combobox": {
+      "placeholder": "Seçenek seçin...",
+      "empty": "Seçenek bulunamadı.",
+      "search": "Ara..."
+    },
+    "searchInput": {
+      "clear": "Aramayı temizle"
+    },
+    "searchResults": {
+      "empty": "Sonuç bulunamadı",
+      "noResultsFor": "\"{query}\" için sonuç bulunamadı. Farklı anahtar kelimeler deneyin."
+    },
+    "commandPalette": {
+      "placeholder": "Ara...",
+      "noResults": "Sonuç bulunamadı",
+      "toOpen": "açmak için",
+      "other": "Diğer",
+      "hostPlaceholder": "Nereye gitmek istiyorsunuz?",
+      "categories": {
+        "navigate": "Gezin",
+        "discover": "Keşfet",
+        "account": "Hesap"
+      },
+      "items": {
+        "home": {
+          "label": "Ana sayfa",
+          "description": "Giriş sayfası"
+        },
+        "app": {
+          "label": "Dashboard'um",
+          "description": "Kuponlarınız, cüzdanınız ve etkinliğiniz"
+        },
+        "vouchers": {
+          "label": "Kuponlarım"
+        },
+        "wallet": {
+          "label": "Cüzdan",
+          "description": "Kredi bakiyeleri"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "Hediyelere göz atın ve gönderin"
+        },
+        "campaigns": {
+          "label": "Kampanyalar",
+          "description": "Aktif kupon kampanyaları"
+        },
+        "hub": {
+          "label": "İşletme merkezi",
+          "description": "İşletmelere göz atın"
+        },
+        "deals": {
+          "label": "Fırsatlar"
+        },
+        "settings": {
+          "label": "Ayarlar",
+          "description": "Hesap ve tercihler"
+        },
+        "admin": {
+          "label": "Yönetim",
+          "description": "Platform yönetimi"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Onayla",
+      "cancel": "İptal"
+    },
+    "dataTable": {
+      "noResults": "Sonuç yok."
+    },
+    "fileUpload": {
+      "maxFiles": "En fazla {maxFiles, plural, one {# dosyaya} other {# dosyaya}} izin verilir",
+      "tooLarge": "Dosyalar {maxSize} MB'tan küçük olmalıdır",
+      "dropHere": "Dosyaları buraya bırakın",
+      "dragDrop": "Dosyaları buraya sürükleyip bırakın",
+      "browseHint": "veya göz atmak için tıklayın (dosya başına en fazla {maxSize} MB)",
+      "select": "Dosya seç",
+      "remove": "{name} öğesini kaldır"
+    },
+    "imageUpload": {
+      "notImage": "Lütfen bir görsel dosyası yükleyin",
+      "tooLarge": "Görsel {maxSize} MB'tan küçük olmalıdır",
+      "previewAlt": "Önizleme",
+      "remove": "Görseli kaldır",
+      "dropHere": "Görseli buraya bırakın",
+      "upload": "Görsel yükle",
+      "hint": "En fazla {maxSize} MB PNG, JPG, GIF",
+      "select": "Görsel seç"
+    },
+    "statsCard": {
+      "open": "Aç"
+    },
+    "cashbackBadge": {
+      "label": "%{percent} nakit iade"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Aktif",
+        "redeemed": "Kullanıldı",
+        "expired": "Süresi doldu"
+      },
+      "redeem": "Kullan",
+      "expires": "Son kullanma: {date}",
+      "merchantAlt": "İşletme"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Giriş yap",
+      "register": "Hesap oluştur",
+      "resetPassword": "Şifreyi sıfırla"
+    },
+    "error": {
+      "title": "Bir şeyler ters gitti",
+      "fallback": "Beklenmeyen bir hata oluştu.",
+      "tryAgain": "Tekrar dene"
+    },
+    "login": {
+      "welcome": "Tekrar hoş geldiniz",
+      "subtitle": "GiftHub hesabınıza giriş yapın",
+      "tabMagic": "Sihirli bağlantı",
+      "tabPassword": "Şifre",
+      "tabSocial": "Sosyal",
+      "tabPasskey": "Geçiş anahtarı",
+      "emailLabel": "E-posta adresi",
+      "emailPlaceholder": "siz@ornek.com",
+      "passwordLabel": "Şifre",
+      "sendCode": "Giriş kodu gönder",
+      "sending": "Gönderiliyor…",
+      "signIn": "Giriş yap",
+      "signingIn": "Giriş yapılıyor…",
+      "otpTitle": "E-postanızı kontrol edin!",
+      "otpDesc": "<b>{email}</b> adresine 6 haneli bir kod gönderdik",
+      "otpLabel": "Kodu girin",
+      "verify": "Kodu doğrula",
+      "verifying": "Doğrulanıyor…",
+      "resend": "Kodu yeniden gönder",
+      "backToEmail": "Geri",
+      "orContinueWith": "Veya şununla devam edin",
+      "continueWith": "{provider} ile devam et",
+      "errorWrongCode": "Geçersiz veya süresi dolmuş kod. Lütfen tekrar deneyin.",
+      "errorWrongPass": "Geçersiz e-posta veya şifre.",
+      "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+      "errorEmailUnavailable": "E-posta ile giriş şu anda kullanılamıyor — şifrenizi kullanın.",
+      "errorCredentialsSignin": "E-posta veya şifre yanlış.",
+      "errorAuthGeneric": "Giriş başarısız oldu. Lütfen tekrar deneyin.",
+      "backToHome": "Ana sayfaya dön",
+      "socialDesc": "Tercih ettiğiniz hesapla anında giriş yapın",
+      "noAccount": "Henüz hesabınız yok mu?",
+      "createAccount": "Hesap oluştur",
+      "noAccountSub": "Kodla giriş yapmak, yeni bir e-posta için hesap oluşturur.",
+      "registered": "Hesap oluşturuldu — e-postanız ve şifrenizle giriş yapın.",
+      "magicDesc": "E-postanıza 6 haneli bir kod göndereceğiz. Şifre gerekmez.",
+      "passwordDesc": "E-postanız ve şifrenizle giriş yapın.",
+      "forgotPassword": "Şifrenizi mi unuttunuz?",
+      "demo": "Demo hesapları",
+      "demoRole": {
+        "platformAdmin": "Platform yöneticisi",
+        "merchantAdmin": "İşletme yöneticisi",
+        "merchantStaff": "İşletme personeli",
+        "endUser": "Son kullanıcı"
+      },
+      "passkeyDesc": "Parmak iziniz, yüzünüz veya güvenlik anahtarınızla anında giriş yapın.",
+      "passkeyButton": "Geçiş anahtarıyla giriş yap",
+      "passkeyAuthenticating": "Kimlik doğrulanıyor…"
+    },
+    "register": {
+      "backToHome": "Ana sayfaya dön",
+      "title": "Hesabınızı oluşturun",
+      "subtitle": "Kuponları keşfetmeye ve yönetmeye başlayın",
+      "nameLabel": "Ad soyad",
+      "namePlaceholder": "Ayşe Yılmaz",
+      "emailLabel": "E-posta adresi",
+      "emailPlaceholder": "siz@ornek.com",
+      "passwordLabel": "Şifre",
+      "passwordPlaceholder": "En az 8 karakter",
+      "submit": "Hesap oluştur",
+      "submitting": "Hesap oluşturuluyor...",
+      "haveAccount": "Zaten hesabınız var mı?",
+      "signIn": "Giriş yap",
+      "errorWeak": "Şifre çok zayıf. Lütfen daha güçlü bir şifre seçin.",
+      "errorInvalid": "Geçersiz giriş.",
+      "errorFallback": "Bir şeyler ters gitti.",
+      "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
+    },
+    "resetPassword": {
+      "title": "Şifrenizi sıfırlayın",
+      "subtitle": "Yeni şifrenizi aşağıya girin",
+      "newPassword": "Yeni şifre",
+      "confirmPassword": "Şifreyi onayla",
+      "submit": "Yeni şifre belirle",
+      "submitting": "Sıfırlanıyor…",
+      "success": "Şifre sıfırlandı!",
+      "successDesc": "Şifreniz güncellendi. Artık giriş yapabilirsiniz.",
+      "goToLogin": "Girişe git",
+      "errorMismatch": "Şifreler eşleşmiyor",
+      "errorShort": "Şifre en az 8 karakter olmalıdır",
+      "errorWeak": "Şifre çok zayıf. Lütfen daha güçlü bir şifre seçin.",
+      "errorExpired": "Bu sıfırlama bağlantısı geçersiz veya süresi dolmuş.",
+      "forgotTitle": "Şifrenizi mi unuttunuz?",
+      "forgotSubtitle": "E-postanızı girin, size bir sıfırlama bağlantısı gönderelim",
+      "emailLabel": "E-posta adresi",
+      "emailPlaceholder": "siz@ornek.com",
+      "sendLink": "Sıfırlama bağlantısı gönder",
+      "sending": "Gönderiliyor…",
+      "linkSent": "E-postanızı kontrol edin!",
+      "linkSentDesc": "Bu e-postayla kayıtlı bir hesap varsa sıfırlama bağlantısı gönderdik.",
+      "backToLogin": "Girişe dön"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Aramıza hoş geldiniz!",
+      "joined": "{orgName} kuruluşuna katıldınız. Yönlendiriliyor…",
+      "accepted": "Davet kabul edildi. Yönlendiriliyor…",
+      "problemTitle": "Davet sorunu",
+      "errorNotAccepted": "Bu davet kabul edilemedi.",
+      "errorGeneric": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+      "goToOrgs": "Kuruluşlarınıza gidin",
+      "invitedTitle": "Davet edildiniz",
+      "invitedDesc": "Kuruluşa katılmak için bu daveti kabul edin. Önce giriş yapmanız istenebilir.",
+      "accepting": "Kabul ediliyor…",
+      "accept": "Daveti kabul et"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Hediye kartları ve hediyeler",
+      "description": "Yerel işletmelerin dijital hediye kartlarına göz atın ve satın alın. Saniyeler içinde anlamlı bir hediye gönderin — e-postayla teslim edilir, mağazada veya online kullanılabilir."
+    },
+    "publicCard": {
+      "defaultHeadline": "Hediye kartı",
+      "imageAlt": "Hediye kartı",
+      "logoAlt": "Marka logosu",
+      "merchant": "İşletme: {name}",
+      "merchantFallback": "İşletme",
+      "code": "Kod: {code}",
+      "validUntil": "Son geçerlilik: {date}",
+      "noExpiry": "Süresiz",
+      "showQr": "Hediye kartını kullanmak için bu QR'yi personele gösterin.",
+      "statusMessage": "Bu hediye kartının durumu: {status}.",
+      "status": {
+        "active": "aktif",
+        "redeemed": "kullanıldı",
+        "expired": "süresi doldu",
+        "cancelled": "iptal edildi"
+      }
+    },
+    "purchase": {
+      "title": "Hediye kartı satın al",
+      "loading": "Yükleniyor...",
+      "notAvailable": "Hediye kartı mevcut değil",
+      "defaultHeadline": "Hediye kartı",
+      "imageAlt": "Hediye kartı",
+      "logoAlt": "Marka",
+      "fromMerchant": "{merchant} işletmesinden",
+      "form": {
+        "recipientEmail": "Alıcının e-postası (isteğe bağlı)",
+        "recipientEmailPlaceholder": "Hediye kartını bu e-postaya gönder",
+        "recipientName": "Alıcının adı",
+        "recipientNamePlaceholder": "Kime",
+        "senderName": "Adınız",
+        "senderNamePlaceholder": "Kimden",
+        "message": "Kişisel mesaj (isteğe bağlı)",
+        "messagePlaceholder": "Kişisel bir mesaj ekleyin..."
+      },
+      "total": "Toplam:",
+      "processing": "İşleniyor...",
+      "buy": "Hediye kartı satın al",
+      "errors": {
+        "notFound": "Hediye kartı bulunamadı veya satın alınamıyor",
+        "loadFailed": "Hediye kartı yüklenemedi",
+        "purchaseFailed": "Satın alma başarısız oldu",
+        "generic": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
+      }
+    },
+    "product": {
+      "notFound": "Hediye bulunamadı",
+      "backToHub": "Gift Hub'a dön",
+      "imageAlt": "{title} {index}",
+      "featured": "Öne çıkan",
+      "lowStock": "Stokta yalnızca {count} adet kaldı",
+      "buyNow": "Hemen satın al",
+      "addToCart": "Sepete ekle",
+      "saveToWishlist": "İstek listesine kaydet",
+      "removeFromWishlist": "İstek listesinden çıkar",
+      "share": "Bu hediyeyi paylaş",
+      "upsellsTitle": "Bunları da beğenebilirsiniz"
+    },
+    "claim": {
+      "metaTitle": "Hediyenizi alın",
+      "alreadyClaimedTitle": "Hediye zaten alındı",
+      "alreadyClaimedBody": "Bu hediye zaten alınmış.",
+      "expiredTitle": "Hediyenin süresi doldu",
+      "expiredBody": "Üzgünüz, bu hediye bağlantısının süresi doldu.",
+      "title": "Bir hediyeniz var!",
+      "signedInHint": "Bu kuponu cüzdanınıza eklemek için aşağıya tıklayın.",
+      "signedOutHint": "Bu kuponu almak için giriş yapın.",
+      "claimButton": "Hediyeyi al",
+      "signInButton": "Almak için giriş yap"
+    },
+    "error": {
+      "title": "Gift Hub yüklenemedi",
+      "fallback": "Hediyeler yüklenirken beklenmeyen bir hata oluştu.",
+      "retry": "Tekrar dene"
+    },
+    "hub": {
+      "title": "Hediyeler",
+      "subtitle": "Her özel gün için mükemmel hediyeyi bulun",
+      "loadError": "Hediyeler yüklenemedi",
+      "retry": "Tekrar dene",
+      "emptyCatalog": {
+        "title": "Henüz listelenmiş hediye yok",
+        "body": "Bu arada yerel işletmelerin kuponları da güzel birer hediye olabilir."
+      },
+      "noMatches": "Bu filtrelerle eşleşen hediye yok",
+      "clearFilters": "Filtreleri temizle",
+      "browseCampaigns": "Kampanyalara göz at",
+      "allGifts": "Tüm hediyeler",
+      "loadMore": "Daha fazla yükle"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Hediye kartı bulunamadı",
+        "body": "QR kod geçersiz veya süresi dolmuş."
+      },
+      "notActive": {
+        "title": "Hediye kartı henüz aktif değil",
+        "body": "Bu hediye kartı daha sonra geçerli olacak."
+      },
+      "expired": {
+        "title": "Hediye kartının süresi doldu",
+        "body": "Bu hediye kartı artık geçerli değil."
+      },
+      "result": {
+        "title": "Hediye kartı kullanıldı",
+        "confirmed": "Kullanım başarıyla onaylandı.",
+        "alreadyRedeemedOrCancelled": "Bu hediye kartı zaten kullanılmış veya iptal edilmiş.",
+        "alreadyRedeemedOrInvalid": "Bu hediye kartı zaten kullanılmış veya geçersiz."
+      }
+    },
+    "qr": {
+      "error": "QR kod oluşturulamadı",
+      "generating": "QR oluşturuluyor...",
+      "alt": "QR kod"
+    },
+    "wizard": {
+      "title": "Yapay zeka hediye bulucu",
+      "subtitle": "Hediye alacağınız kişiden bahsedin, mükemmel hediyeyi bulalım",
+      "steps": {
+        "recipient": "Hediye kimin için?",
+        "occasion": "Özel gün nedir?",
+        "budget": "Bütçeniz nedir?"
+      },
+      "recipients": {
+        "partner": "Partner",
+        "friend": "Arkadaş",
+        "parent": "Ebeveyn",
+        "colleague": "İş arkadaşı",
+        "child": "Çocuk",
+        "teacher": "Öğretmen"
+      },
+      "occasions": {
+        "birthday": "Doğum günü",
+        "christmas": "Yılbaşı",
+        "anniversary": "Yıl dönümü",
+        "thankYou": "Teşekkür",
+        "justBecause": "Sebepsiz",
+        "graduation": "Mezuniyet"
+      },
+      "summary": {
+        "for": "Kime: {recipient}",
+        "budget": "Bütçe: {amount}"
+      },
+      "submit": "Mükemmel hediyeleri bul",
+      "error": "Öneriler oluşturulamadı. Lütfen tekrar deneyin.",
+      "results": {
+        "found": "Sizin için {count, plural, one {# hediye} other {# hediye}} bulduk:",
+        "empty": "Eşleşen ürün bulunamadı. Kriterlerinizi değiştirmeyi deneyin."
+      },
+      "startOver": "Baştan başla"
+    },
+    "card": {
+      "featured": "Öne çıkan",
+      "save": "Kaydet",
+      "unsave": "Kaydetme",
+      "buyNow": "Hemen satın al"
+    },
+    "feedSection": {
+      "viewAll": "Tümünü görüntüle"
+    },
+    "filters": {
+      "toggle": "Filtreler",
+      "clear": "Temizle",
+      "occasion": "Özel gün",
+      "persona": "Kimin için?",
+      "budget": "Bütçe",
+      "budgetUnder": "{amount} altı"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Fırsatları paylaşın ve ödül kazanın"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Beklenmeyen bir hata oluştu."
+    },
+    "logoAlt": "{name} logosu",
+    "merchantFallback": "İşletme",
+    "validUntil": "Son geçerlilik: {date}",
+    "validUntilWithLimit": "Son geçerlilik: {date} - İlk {count, plural, one {# kullanım} other {# kullanım}}",
+    "offAtMerchant": "{merchant} işletmesinde {value} indirim",
+    "fields": {
+      "event": "Etkinlik",
+      "dateTime": "Tarih ve saat",
+      "location": "Konum",
+      "price": "Fiyat",
+      "status": "Durum",
+      "attendee": "Katılımcı",
+      "usedAt": "Kullanım zamanı"
+    },
+    "ticketStatus": {
+      "available": "Mevcut",
+      "sold": "Satıldı",
+      "used": "Kullanıldı",
+      "cancelled": "İptal edildi",
+      "refunded": "İade edildi"
+    },
+    "event": {
+      "notAvailable": "Bu etkinlik için bilet satın alınamıyor.",
+      "descriptionFallback": "Bu harika etkinlikte bize katılın!",
+      "availableTickets": "Mevcut biletler",
+      "soldOut": "Tükendi",
+      "availableCount": "{count} adet mevcut",
+      "terms": "Şartlar ve koşullar",
+      "soldOutTitle": "Bu etkinliğin biletleri tükendi",
+      "soldOutDescription": "Tüm biletler satın alındı."
+    },
+    "eventPurchase": {
+      "title": "Bilet satın al",
+      "description": "Bir bilet seçin ve satın alma işleminizi tamamlayın",
+      "selectTicket": "Bilet seçin",
+      "attendeeNameLabel": "Katılımcı adı (isteğe bağlı)",
+      "attendeeNamePlaceholder": "Katılacak kişinin adı",
+      "attendeeEmailLabel": "Katılımcı e-postası (isteğe bağlı)",
+      "attendeeEmailPlaceholder": "Biletin gönderileceği e-posta",
+      "total": "Toplam",
+      "submit": "Bilet satın al",
+      "noTickets": "Şu anda mevcut bilet yok.",
+      "checkBackLater": "Lütfen daha sonra tekrar bakın veya etkinlik organizatörüyle iletişime geçin.",
+      "selectTicketError": "Lütfen bir bilet seçin",
+      "purchaseFailed": "Bilet satın alınamadı"
+    },
+    "ticket": {
+      "noPermission": "Bu bileti görüntüleme izniniz yok.",
+      "heading": "Bilet #{number}",
+      "qrTitle": "QR kod",
+      "qrDescription": "Bu QR kodu etkinlik girişinde gösterin",
+      "qrAlt": "Bilet QR kodu",
+      "qrUnavailable": "QR kod mevcut değil",
+      "ticketNumber": "Bilet numarası: <strong>{number}</strong>",
+      "used": "Bilet kullanıldı",
+      "detailsTitle": "Bilet ayrıntıları",
+      "detailsDescription": "Biletinizle ilgili önemli bilgiler",
+      "staffCanRedeem": "İşletme personeli olarak bu bileti etkinlikte kullandırabilirsiniz."
+    },
+    "redeem": {
+      "notFoundTitle": "Kullanım bulunamadı",
+      "notFoundDescription": "QR kod geçersiz veya süresi dolmuş.",
+      "title": "Kupon kullanıldı",
+      "alreadyRedeemed": "Bu kupon zaten kullanılmış.",
+      "confirmed": "Kullanım başarıyla onaylandı."
+    },
+    "qrCheckout": {
+      "title": "QR ile ödeme",
+      "completeTitle": "Ödeme tamamlandı",
+      "completeDescription": "Satın alma işleminiz onaylandı. Ayrıntılar için e-postanızı kontrol edin.",
+      "payNow": "Şimdi öde",
+      "confirming": "Onaylanıyor..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Kupon bulunamadı",
+      "notFoundDescription": "Aradığınız kupon bulunamadı.",
+      "descriptionFallback": "Özel kupon teklifi",
+      "shareText": "{merchant} işletmesinin bu kuponuna göz atın",
+      "copyCode": "Kupon kodunu kopyala",
+      "qrAlt": "{code} kuponu için QR kod",
+      "print": "Kuponu yazdır"
+    },
+    "referralPage": {
+      "voucherFrom": "<highlight>{name}</highlight> size bir kupon gönderdi",
+      "qrAlt": "{code} kuponu için kullanım QR kodu",
+      "offAtMerchantShared": "{merchant} işletmesinde {value} indirim - Bir arkadaşınız paylaştı!"
+    },
+    "bnpl": {
+      "title": "Taksitle öde",
+      "description": "{amount} tutarındaki ödemenizi kolay aylık taksitlere bölün.",
+      "perMonth": "/ay",
+      "planNoInterest": "{months} taksit (%0 faiz)",
+      "planWithFee": "{months} taksit (%{rate} ücret)",
+      "monthlyPayments": "{count, plural, one {# aylık ödeme} other {# aylık ödeme}}",
+      "total": "Toplam: {amount}",
+      "noExtraCost": "Ek maliyet yok",
+      "payNow": "Şimdi {amount} öde"
+    },
+    "qrPanel": {
+      "qrAlt": "QR kod",
+      "generateFailed": "QR kod oluşturulamadı",
+      "placeholder": "QR kod burada görünecek",
+      "generating": "QR oluşturuluyor...",
+      "unavailable": "QR kullanılamıyor",
+      "hideCode": "Kodu gizle",
+      "showCode": "Kodu göster",
+      "expires": "Son kullanma: {date}",
+      "refreshNote": "Kod her 30 saniyede bir yenilenir"
+    },
+    "qrDownload": {
+      "success": "QR kod başarıyla indirildi!",
+      "failed": "QR kod indirilemedi",
+      "downloading": "İndiriliyor...",
+      "download": "QR'yi indir"
+    }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Kupon kampanyalarınızı yönetin.",
+      "createCampaign": "Kampanya oluştur",
+      "subscriptionRequired": "Abonelik gerekli",
+      "trialEnded": "60 günlük ücretsiz kampanya denemeniz sona erdi. Yeni kampanya oluşturmak için aylık 9.90 planını başlatın.",
+      "stats": {
+        "totalTitle": "Toplam kampanya",
+        "totalDescription": "Tüm kampanyalar",
+        "activeTitle": "Aktif",
+        "activeDescription": "Şu anda yayında",
+        "paidTitle": "Ücretli satın almalar",
+        "paidDescription": "Tamamlanan siparişler",
+        "revenueTitle": "Gelir",
+        "revenueDescription": "Ücretli kupon satışları"
+      },
+      "weeklyRevenue": {
+        "title": "Haftalık gelir",
+        "description": "Son 7 gündeki ücretli kampanya satışları.",
+        "series": "Gelir"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Henüz kampanya yok",
+        "descriptionCanCreate": "Kuponlarınızı düzenlemek ve yönetmek için bir kampanya oluşturun.",
+        "descriptionNeedsSubscription": "Yeni kampanya oluşturmak için bir abonelik başlatın.",
+        "action": "İlk kampanyanızı oluşturun"
+      },
+      "searchPlaceholder": "Kampanya ara...",
+      "searchLabel": "Kampanya ara",
+      "filterAll": "Tümü",
+      "status": {
+        "active": "Aktif",
+        "draft": "Taslak",
+        "ended": "Sona erdi",
+        "paused": "Duraklatıldı"
+      },
+      "noMatches": "Filtrelerinizle eşleşen kampanya yok.",
+      "clearFilters": "Filtreleri temizle",
+      "type": {
+        "weekly": "Haftalık kampanya",
+        "limited": "Sınırlı kampanya",
+        "other": "{type} kampanyası"
+      },
+      "runs": "{start} - {end} arası",
+      "view": "Görüntüle",
+      "stats": {
+        "vouchers": "Kuponlar",
+        "paidPurchases": "Ücretli satın almalar",
+        "revenue": "Gelir",
+        "price": "Fiyat"
+      },
+      "free": "Ücretsiz"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Yeni kampanyalar taslak olarak başlar. Kampanya sayfasından yayınlayana kadar müşteriler bunları göremez."
+    },
+    "edit": {
+      "breadcrumb": "Düzenle",
+      "title": "Kampanyayı düzenle"
+    },
+    "form": {
+      "basicInfo": "Temel bilgiler",
+      "nameLabel": "Kampanya adı *",
+      "namePlaceholder": "Bayram Fırsatı",
+      "descriptionLabel": "Açıklama",
+      "descriptionPlaceholder": "Sınırlı süreli promosyon",
+      "typeLabel": "Tür *",
+      "typeOptions": {
+        "limited": "Tek seferlik (sınırlı)",
+        "weekly": "Haftalık"
+      },
+      "dates": "Tarihler",
+      "startDate": "Başlangıç tarihi *",
+      "endDate": "Bitiş tarihi *",
+      "timezoneHint": "Saatler yerel saat diliminizdedir.",
+      "pricing": "Fiyatlandırma ve limitler",
+      "priceLabel": "{currency} cinsinden fiyat (ücretsiz kuponlar için boş bırakın)",
+      "pricePreview": "Müşteriler {price} öder.",
+      "priceHint": "Tutarı {currency} cinsinden girin, ör. {example} için 4.50 veya 4,50.",
+      "maxRedemptions": "Maks. kullanım",
+      "maxPurchases": "Maks. satın alma",
+      "unlimited": "Sınırsız",
+      "creditLabel": "Tavsiye eden kredisi (%)",
+      "creditPreview": "Tavsiye edenler satın alma fiyatının %{percent} kadarını kredi olarak kazanır.",
+      "creditHint": "Satın alma fiyatının tavsiye edene kredi olarak ödenen payı, ör. 5 veya 2,5.",
+      "termsSection": "Şartlar ve koşullar",
+      "termsLabel": "Şartlar",
+      "termsPlaceholder": "Bu kampanyanın şartları ve koşulları...",
+      "saving": "Kaydediliyor...",
+      "saveChanges": "Değişiklikleri kaydet",
+      "creating": "Oluşturuluyor...",
+      "create": "Kampanya oluştur",
+      "saved": "Kampanya değişiklikleri kaydedildi.",
+      "errors": {
+        "invalidDates": "Lütfen geçerli bir başlangıç ve bitiş tarihi girin.",
+        "endBeforeStart": "Bitiş tarihi başlangıç tarihinden sonra olmalıdır.",
+        "maxRedemptions": "Maks. kullanım 1 veya daha büyük bir tam sayı olmalıdır.",
+        "maxPurchases": "Maks. satın alma 1 veya daha büyük bir tam sayı olmalıdır.",
+        "saveFailed": "Kampanya kaydedilemedi"
+      },
+      "priceErrors": {
+        "negative": "Fiyat negatif olamaz.",
+        "invalid": "Fiyat geçerli bir sayı değil.",
+        "wholeNumber": "Fiyat tam sayı olmalıdır.",
+        "decimals": "Fiyat en fazla {decimals} ondalık basamak içerebilir.",
+        "tooLarge": "Fiyat çok yüksek."
+      },
+      "creditErrors": {
+        "negative": "Tavsiye eden kredisi negatif olamaz.",
+        "invalid": "Tavsiye eden kredisi geçerli bir sayı değil.",
+        "decimals": "Tavsiye eden kredisi en fazla {decimals} ondalık basamak içerebilir.",
+        "tooLarge": "Tavsiye eden kredisi çok yüksek.",
+        "tooHigh": "Tavsiye eden kredisi %100'den fazla olamaz."
+      }
+    },
+    "detail": {
+      "noDescription": "Açıklama yok",
+      "draftNotice": "Bu kampanya bir taslak, bu nedenle müşteriler henüz göremez.",
+      "draftNoticeAdmin": "Bu kampanya bir taslak, bu nedenle müşteriler henüz göremez. Hazır olduğunuzda yayınlayın.",
+      "status": "Durum",
+      "type": "Tür",
+      "price": "Fiyat",
+      "referrerCredit": "Tavsiye eden kredisi",
+      "none": "Yok",
+      "stats": {
+        "vouchers": "Kuponlar",
+        "totalPurchases": "Toplam satın alma",
+        "paidPurchases": "Ücretli satın almalar"
+      },
+      "terms": "Şartlar ve koşullar",
+      "promotion": {
+        "title": "Promosyon",
+        "description": "Haftalık bülten ve bildirimlerde ücretli görünürlük."
+      },
+      "vouchers": {
+        "title": "Kuponlar",
+        "description": "Bu kampanyadan oluşturulan kuponlar.",
+        "empty": "Henüz kupon oluşturulmadı.",
+        "view": "Görüntüle"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Haftalık bültene ekle (ücretli)",
+      "notification": "Bildirimlerde öne çıkar (ücretli)",
+      "endDate": "Promosyon bitiş tarihi",
+      "saving": "Kaydediliyor...",
+      "save": "Promosyon ayarlarını kaydet",
+      "saved": "Promosyon ayarları kaydedildi.",
+      "upgradeNeededTitle": "Yükseltme gerekli",
+      "upgradeNeeded": "Promosyon öne çıkarmaları daha üst bir plana dahildir. Kullanmak için Ayarlar ve Faturalandırma bölümünden yükseltin.",
+      "saveFailedStatus": "Promosyon ayarları kaydedilemedi (hata {status}).",
+      "saveFailedNetwork": "Promosyon ayarları kaydedilemedi. Bağlantınızı kontrol edip tekrar deneyin."
+    },
+    "actions": {
+      "adminOnly": "Kampanyaları yalnızca işletme yöneticileri yayınlayabilir, duraklatabilir veya düzenleyebilir.",
+      "edit": "Düzenle",
+      "publish": {
+        "label": "Yayınla",
+        "title": "Bu kampanya yayınlansın mı?",
+        "description": "Müşteriler bu kampanyadaki kuponları hemen görebilecek ve satın alabilecek.",
+        "success": "Kampanya yayınlandı. Artık müşteriler için yayında."
+      },
+      "pause": {
+        "label": "Duraklat",
+        "title": "Bu kampanya duraklatılsın mı?",
+        "description": "Kampanya taslağa döner ve tekrar yayınlayana kadar müşterilerden gizlenir. Satılmış kuponlar geçerli kalır.",
+        "success": "Kampanya duraklatıldı. Müşterilerden gizlendi."
+      },
+      "end": {
+        "label": "Kampanyayı sonlandır",
+        "title": "Bu kampanya şimdi sonlandırılsın mı?",
+        "description": "Kampanya hemen durur ve tekrar yayınlanamaz. Satılmış kuponlar geçerli kalır.",
+        "success": "Kampanya sonlandırıldı."
+      },
+      "updateFailedStatus": "Kampanya güncellenemedi (hata {status}).",
+      "updateFailed": "Kampanya güncellenemedi."
+    },
+    "generate": {
+      "open": "Kupon oluştur",
+      "title": "Kupon oluştur",
+      "descriptionPriced": "{start} – {end} tarihleri arasında geçerli, {value} indirimli taslak kuponlar oluşturur. Her kupon kendi kodunu alır. Siz yayınlayana kadar gizli kalırlar.",
+      "descriptionFree": "Bu kampanya ücretsiz, bu nedenle kuponlara yazılacak bir tutar yok. Önce kampanyaya bir fiyat belirleyin.",
+      "countLabel": "Kupon sayısı (1-100)",
+      "generating": "Oluşturuluyor...",
+      "submit": "Oluştur",
+      "invalidCount": "Lütfen 1 ile 100 arasında bir tam sayı girin",
+      "needsPrice": "Önce bu kampanyaya bir fiyat belirleyin. Oluşturulan kuponların değeri kampanya fiyatına eşittir.",
+      "failed": "Kuponlar oluşturulamadı",
+      "success": "{count, plural, one {# taslak kupon oluşturuldu. Hazır olduğunuzda kupon sayfasından yayınlayın} other {# taslak kupon oluşturuldu. Hazır olduğunuzda kupon sayfasından yayınlayın}}."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktif kampanyalar",
+      "statLiveVouchers": "Yayındaki kuponlar",
+      "statRedemptions30d": "Kullanımlar (30 gün)"
+    },
+    "error": {
+      "title": "Bir şeyler ters gitti",
+      "description": "İşletme panelinde bir hata oluştu.",
+      "tryAgain": "Tekrar dene",
+      "backToMerchants": "İşletmelere dön"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Genel bakış",
+        "offers": "Teklifler",
+        "inStore": "Mağazada",
+        "customers": "Müşteriler",
+        "settings": "Ayarlar"
+      },
+      "language": "Dil",
+      "opensAppArea": "Uygulama alanını açar",
+      "externalLinkTitle": "{label} (bu işletmenin dışında, uygulama alanını açar)",
+      "opensOutside": "İşletme alanının dışında açılır",
+      "merchantNavigation": "İşletme",
+      "more": "Daha fazla",
+      "navDashboard": "Dashboard"
+    },
+    "dashboard": {
+      "title": "İşletme dashboard",
+      "welcomeBack": "Tekrar hoş geldiniz, {name}",
+      "viewCampaigns": "Kampanyaları görüntüle",
+      "createVoucher": "Kupon oluştur",
+      "performanceOverview": "Performans özeti",
+      "performanceOverviewHint": "Canlı kampanya etkinliği ve kullanımlar.",
+      "revenueAndCredits": "Gelir ve krediler",
+      "revenueAndCreditsHint": "Satışlar, krediler ve açık yükümlülük.",
+      "performanceTrend": "Performans trendi",
+      "performanceTrendHint": "Son {days} günün kullanım ve gelir etkinliği.",
+      "rangeShort": "{days}G",
+      "revenue": "Gelir",
+      "chartRedemptions": "Kullanımlar",
+      "chartRevenue": "Gelir ({currency})",
+      "paidOrders": "Ücretli siparişler",
+      "openOrdersView": "Sipariş görünümünü aç",
+      "avgOrder": "Ort. sipariş",
+      "openCampaignRevenue": "Kampanya gelirini aç",
+      "redemptionRate": "Kullanım oranı",
+      "openRedemptionQueue": "Kullanım kuyruğunu aç",
+      "pendingConfirmation": "{count} onay bekliyor",
+      "pendingConfirmationHint": "Onayınızı bekleyen mağaza içi kullanımlar.",
+      "viewRedemptions": "Kullanımları görüntüle",
+      "actionCenter": "İşlem merkezi",
+      "actionCenterHint": "İncelenecek öncelikli öğeler.",
+      "allCaughtUp": "Her şey güncel.",
+      "open": "Aç",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# bekleyen kullanım} other {# bekleyen kullanım}}",
+        "pendingRedemptionsDetail": "Mağaza içi kullanımları onaylayın",
+        "expiringVouchers": "{count, plural, one {Süresi yakında dolacak # kupon} other {Süresi yakında dolacak # kupon}}",
+        "expiringVouchersDetail": "Kupon geçerlilik tarihlerini gözden geçirin",
+        "endingCampaigns": "{count, plural, one {Bu hafta sona erecek # kampanya} other {Bu hafta sona erecek # kampanya}}",
+        "endingCampaignsDetail": "En iyi kampanyalarınızı uzatın veya çoğaltın",
+        "upcomingEvents": "{count, plural, one {# yaklaşan etkinlik} other {# yaklaşan etkinlik}}",
+        "upcomingEventsDetail": "Bilet girişlerini ve personel planlamasını hazırlayın"
+      },
+      "upcomingEventsTitle": "Yaklaşan etkinlikler",
+      "upcomingEventsHint": "Sıradaki planlanmış etkinlikler.",
+      "noUpcomingEvents": "Planlanmış yaklaşan etkinlik yok.",
+      "eventStatus": {
+        "published": "yayında",
+        "soldOut": "tükendi"
+      },
+      "manageEvents": "Etkinlikleri yönet",
+      "topVouchers": "En iyi kuponlar",
+      "topVouchersHint": "En çok kullanılan teklifler.",
+      "noTopVouchers": "Henüz kullanılan kupon yok. En çok kullanılan kuponlarınız burada görünecek."
+    },
+    "stats": {
+      "activeVouchers": "Aktif kuponlar",
+      "publishedVouchers": "Yayınlanan kuponlar",
+      "openVouchers": "Kuponları aç",
+      "activeCampaigns": "Aktif kampanyalar",
+      "runningCampaigns": "Yayındaki kampanyalar",
+      "openCampaigns": "Kampanyaları aç",
+      "activeEvents": "Aktif etkinlikler",
+      "publishedEvents": "Yayınlanan etkinlikler",
+      "openEvents": "Etkinlikleri aç",
+      "todaysRedemptions": "Bugünkü kullanımlar",
+      "thisWeek": "Bu hafta: {count}",
+      "reviewRedemptions": "Kullanımları incele",
+      "ofWeekly": "haftalıktan"
+    },
+    "revenue": {
+      "voucherRevenue": "Kupon geliri",
+      "paidVoucherSales": "Ücretli kupon satışları",
+      "openCampaignSales": "Kampanya satışlarını aç",
+      "ticketRevenue": "Bilet geliri",
+      "paidTicketSales": "Ücretli bilet satışları",
+      "openEventSales": "Etkinlik satışlarını aç",
+      "creditsIssued": "Verilen krediler",
+      "totalCreditsDistributed": "Dağıtılan toplam kredi",
+      "openReferralCredits": "Tavsiye kredilerini aç",
+      "outstandingLiability": "Açık yükümlülük",
+      "unredeemedValue": "Kullanılmamış kupon değeri",
+      "openVoucherLiability": "Kupon yükümlülüğünü aç"
+    },
+    "recentActivity": {
+      "title": "Son etkinlikler",
+      "empty": "Son etkinlik yok",
+      "unknownUser": "Bilinmeyen kullanıcı",
+      "redeemedVoucher": "Kupon kullanıldı - {time}",
+      "confirmed": "Onaylandı",
+      "pending": "Beklemede"
+    },
+    "liveStats": {
+      "live": "Canlı",
+      "connecting": "Bağlanıyor…",
+      "redeemedToday": "<value>{count}</value> <label>bugün kullanıldı</label>",
+      "pending": "<value>{count}</value> <label>beklemede</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analizler",
+      "title": "Analizler",
+      "subtitle": "Kupon performansınızı ve gelirinizi takip edin",
+      "totalRedemptions": "Toplam kullanım",
+      "confirmedRedemptions": "Onaylanmış kullanımlar",
+      "totalDiscounts": "Toplam indirim",
+      "givenToCustomers": "Müşterilere verilen",
+      "creditsIssued": "Verilen krediler",
+      "totalCreditsDistributed": "Dağıtılan toplam kredi",
+      "activeVouchers": "Aktif kuponlar",
+      "withRedemptions": "Kullanımı olanlar",
+      "charts": {
+        "redemptionTrends": "Kullanım trendleri (son 30 gün)",
+        "redemptions": "Kullanımlar",
+        "revenue": "Gelir ({currency})",
+        "topPerforming": "En iyi performans gösteren kuponlar",
+        "noRedeemed": "Henüz kullanılan kupon yok. En iyi performans gösterenler burada görünecek.",
+        "byCategory": "Kategoriye göre kullanımlar",
+        "noCategoryData": "Kategori verisi yok"
+      }
+    },
+    "ask": {
+      "title": "Verilerinize sorun",
+      "subtitle": "İşletme verileriniz hakkında doğal dilde soru sorun",
+      "emptyTitle": "Verileriniz hakkında her şeyi sorun",
+      "emptyHint": "Aşağıdaki önerilerden birini deneyin",
+      "placeholder": "Verileriniz hakkında bir soru sorun...",
+      "suggestedTitle": "Önerilen sorular",
+      "suggestions": {
+        "revenueLastWeek": "Geçen hafta gelirim ne kadardı?",
+        "dailyRedemptionsThisMonth": "Bu ayın günlük kullanımlarını göster",
+        "topVouchersByRevenue": "Geçen ay gelire göre en iyi kuponlar",
+        "customersPurchasedLastWeek": "Geçen hafta kaç müşteri satın aldı?",
+        "referralConversionRate": "Tavsiye dönüşüm oranım nedir?",
+        "dailyRevenueTrend": "Bu ayın günlük gelir trendini göster",
+        "purchasesYesterday": "Dün kaç satın alma yapıldı?",
+        "bestPerformingVouchers": "En iyi performans gösteren kuponlarım hangileri?"
+      },
+      "errorFallback": "Üzgünüz, bu soru işlenemedi.",
+      "networkError": "Ağ hatası. Lütfen tekrar deneyin.",
+      "itemLabel": "Öğe {n}"
+    },
+    "reports": {
+      "title": "Finansal raporlar",
+      "subtitle": "Gelir özeti ve dışa aktarma",
+      "downloadCsv": "CSV indir",
+      "from": "Başlangıç",
+      "to": "Bitiş",
+      "apply": "Uygula",
+      "totalRevenue": "Toplam gelir",
+      "platformFees": "Platform ücretleri",
+      "netRevenue": "Net gelir",
+      "redemptions": "Kullanımlar",
+      "revenueByCurrency": "Para birimine göre gelir",
+      "netAndFees": "Net: {net} • Ücretler: {fees}",
+      "monthlyRevenue": "Aylık gelir",
+      "noRevenue": "Bu dönem için gelir verisi yok.",
+      "month": "Ay",
+      "vouchers": "Kuponlar",
+      "tickets": "Biletler",
+      "total": "Toplam"
+    },
+    "scheduled": {
+      "title": "Planlanmış raporlar",
+      "subtitle": "Otomatik e-posta raporlarını yapılandırın",
+      "backToReports": "← Finansal raporlar",
+      "activeSchedules": "Aktif planlamalar",
+      "loading": "Yükleniyor...",
+      "noSchedules": "Henüz yapılandırılmış planlama yok",
+      "period": {
+        "daily": "Günlük",
+        "weekly": "Haftalık",
+        "monthly": "Aylık"
+      },
+      "reportTitle": {
+        "daily": "Günlük rapor",
+        "weekly": "Haftalık rapor",
+        "monthly": "Aylık rapor"
+      },
+      "recipientCount": "{count, plural, one {# alıcı} other {# alıcı}}",
+      "lastSent": "Son gönderim: {date}",
+      "nextRun": "Sonraki: {date}",
+      "pause": "Duraklat",
+      "resume": "Devam ettir",
+      "createSchedule": "Planlama oluştur",
+      "frequency": "Sıklık",
+      "recipients": "Alıcılar",
+      "invalidEmail": "Geçersiz e-posta adresi",
+      "emailAlreadyAdded": "E-posta zaten eklendi",
+      "addAtLeastOne": "En az bir alıcı ekleyin",
+      "saved": "Rapor planlaması başarıyla kaydedildi",
+      "saveFailed": "Planlama kaydedilemedi",
+      "save": "Planlamayı kaydet",
+      "previewTitle": "Rapor önizlemesi",
+      "previewBody": "Planlanmış raporlar gelir, kullanım sayıları, en iyi kuponlar ve büyüme metriklerini içerir. Raporlar UTC 08:00'de özenle biçimlendirilmiş HTML e-postalar olarak gönderilir.",
+      "everyMorning": "Her sabah",
+      "everyMonday": "Her pazartesi",
+      "firstOfMonth": "Her ayın 1'i"
+    },
+    "billing": {
+      "subscribeTo": "{plan} planına abone ol",
+      "startFailed": "Abonelik başlatılamadı",
+      "portalFailed": "Faturalandırma portalı açılamadı",
+      "manageBilling": "Faturalandırmayı yönet",
+      "errorTitle": "Hata",
+      "close": "Kapat",
+      "usage": "<b>{current}</b> / {max} kullanıldı",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "dönem başına kampanya oluşturma",
+        "activeCampaigns": "aktif kampanya",
+        "voucherCreatesPerCycle": "dönem başına kupon oluşturma",
+        "teamMembers": "ekip üyesi"
+      },
+      "currentPlanTrial": "Mevcut plan (ücretsiz deneme)",
+      "planChangesUnavailable": "Plan değişiklikleri şu anda çevrimiçi olarak yapılamıyor.",
+      "paymentsNotSetUp": "Bu platformda çevrimiçi ödemeler henüz ayarlanmadığı için planlar burada satın alınamaz veya değiştirilemez. Planınızı değiştirmek istiyorsanız destek ekibiyle iletişime geçin.",
+      "features": {
+        "starter": {
+          "vouchers": "Ayda 500 kupon",
+          "campaigns": "3 aktif kampanya",
+          "teamMembers": "2 ekip üyesi",
+          "qrRedemption": "QR kodla kullanım",
+          "basicAnalytics": "Temel analizler"
+        },
+        "pro": {
+          "vouchers": "Ayda 5.000 kupon",
+          "campaigns": "25 aktif kampanya",
+          "teamMembers": "10 ekip üyesi",
+          "advancedAnalytics": "Gelişmiş analizler",
+          "customDomain": "Özel alan adı",
+          "promoBoosts": "Promosyon öne çıkarmaları"
+        },
+        "scale": {
+          "vouchers": "Sınırsız kupon",
+          "campaigns": "Sınırsız kampanya",
+          "teamMembers": "Sınırsız ekip üyesi",
+          "everythingInPro": "Pro'daki her şey",
+          "whiteLabel": "Beyaz etikete hazır",
+          "prioritySupport": "Öncelikli destek"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Sahip",
+      "admin": "Yönetici",
+      "finance": "Finans",
+      "marketing": "Pazarlama",
+      "support": "Destek",
+      "partner_cashier": "Kasiyer",
+      "auditor": "Denetçi"
+    },
+    "orgs": {
+      "title": "B2B organizasyonlar",
+      "subtitle": "Kampanyalar, kuponlar ve siparişler içeren şirket çalışma alanları.",
+      "loading": "Organizasyonlar yükleniyor...",
+      "loadFailed": "Organizasyonlar yüklenemedi",
+      "empty": "Organizasyon bulunamadı. Sizi davet etmesi için bir yöneticiye başvurun.",
+      "open": "Aç"
+    },
+    "workspace": {
+      "fallbackName": "Organizasyon",
+      "subtitle": "B2B çalışma alanına genel bakış",
+      "reports": "Raporlar",
+      "audit": "Denetim",
+      "partnerKeys": "İş ortağı anahtarları",
+      "backToOrgs": "Organizasyonlara dön",
+      "loading": "Çalışma alanı yükleniyor...",
+      "errors": {
+        "loadOrg": "Organizasyon yüklenemedi",
+        "loadCampaigns": "Kampanyalar yüklenemedi",
+        "loadVouchers": "Kuponlar yüklenemedi",
+        "loadOrders": "Siparişler yüklenemedi",
+        "load": "Yüklenemedi",
+        "createCampaign": "Kampanya oluşturulamadı",
+        "issueVouchers": "Kuponlar düzenlenemedi",
+        "updateCampaign": "Kampanya güncellenemedi",
+        "activateCampaign": "Kampanya etkinleştirilemedi",
+        "pauseCampaign": "Kampanya duraklatılamadı",
+        "archiveCampaign": "Kampanya arşivlenemedi"
+      },
+      "stats": {
+        "campaigns": "Kampanyalar",
+        "vouchers": "Kuponlar",
+        "orders": "Siparişler"
+      },
+      "create": {
+        "title": "Kampanya oluştur",
+        "name": "Kampanya adı",
+        "value": "Değer (küçük birim)",
+        "currency": "Para birimi",
+        "submit": "Oluştur"
+      },
+      "campaigns": {
+        "title": "Kampanyalar",
+        "empty": "Henüz kampanya yok.",
+        "name": "Ad",
+        "value": "Değer",
+        "activate": "Etkinleştir",
+        "pause": "Duraklat",
+        "resume": "Devam ettir",
+        "archive": "Arşivle",
+        "issue": "{count} düzenle"
+      },
+      "recentVouchers": "Son kuponlar",
+      "noVouchers": "Düzenlenmiş kupon yok.",
+      "recentOrders": "Son siparişler",
+      "noOrders": "Henüz sipariş yok."
+    },
+    "audit": {
+      "title": "Denetim kaydı",
+      "subtitle": "Kupon yaşam döngüsünü ve değişiklikleri takip edin.",
+      "entityType": "Varlık türü (voucher, campaign, order)",
+      "entityId": "Varlık kimliği",
+      "loading": "Denetim kaydı yükleniyor...",
+      "loadFailed": "Denetim kaydı yüklenemedi",
+      "empty": "Olay yok."
+    },
+    "billing": {
+      "metaTitle": "Organizasyon faturalandırması",
+      "title": "Faturalandırma ve finans",
+      "totalPaidOrders": "Toplam ücretli sipariş",
+      "totalRevenue": "Toplam gelir",
+      "vatNumber": "KDV numarası",
+      "notSet": "Ayarlanmadı",
+      "recentOrders": "Son siparişler",
+      "noOrders": "Henüz sipariş yok.",
+      "table": {
+        "date": "Tarih",
+        "qty": "Adet",
+        "total": "Toplam",
+        "status": "Durum",
+        "invoice": "Fatura"
+      }
+    },
+    "keys": {
+      "title": "İş ortağı API anahtarları",
+      "subtitle": "Bunları iş ortağı kupon doğrulama ve kullanımı için kullanın.",
+      "label": "Anahtar etiketi (isteğe bağlı)",
+      "create": "Anahtar oluştur",
+      "newKey": "Yeni anahtar (şimdi kopyalayın)",
+      "loading": "Anahtarlar yükleniyor...",
+      "empty": "Henüz anahtar yok.",
+      "untitled": "Adsız anahtar",
+      "created": "Oluşturulma: {created}",
+      "createdAndLastUsed": "Oluşturulma: {created} • Son kullanım: {lastUsed}",
+      "revoke": "İptal et",
+      "errors": {
+        "load": "Anahtarlar yüklenemedi",
+        "create": "Anahtar oluşturulamadı",
+        "revoke": "Anahtar iptal edilemedi"
+      }
+    },
+    "members": {
+      "metaTitle": "Organizasyon üyeleri",
+      "title": "Üyeler",
+      "count": "{count, plural, one {# üye} other {# üye}}",
+      "pendingInvitations": "Bekleyen davetler",
+      "expires": "Son geçerlilik: {date}"
+    },
+    "invite": {
+      "title": "Üye davet et",
+      "emailPlaceholder": "ekiparkadasi@example.com",
+      "roles": {
+        "admin": "Yönetici",
+        "finance": "Finans",
+        "marketing": "Pazarlama",
+        "support": "Destek",
+        "partner_cashier": "İş ortağı kasiyeri",
+        "auditor": "Denetçi"
+      },
+      "sending": "Gönderiliyor…",
+      "submit": "Davet gönder",
+      "sent": "Davet {email} adresine gönderildi.",
+      "failed": "Davet gönderilemedi. Lütfen e-posta adresini kontrol edip tekrar deneyin.",
+      "error": "Bir şeyler ters gitti. Lütfen tekrar deneyin."
+    },
+    "reports": {
+      "title": "Raporlar",
+      "subtitle": "Kullanım ve kupon raporları",
+      "backToWorkspace": "Çalışma alanına dön",
+      "loadFailed": "Yüklenemedi",
+      "tabs": {
+        "redemptions": "Kullanımlar",
+        "vouchers": "Kuponlar"
+      },
+      "totalRedemptions": "Toplam kullanım",
+      "totalAmountRedeemed": "Kullanılan toplam tutar",
+      "from": "Başlangıç",
+      "to": "Bitiş",
+      "filter": "Filtrele",
+      "pageInfo": "Sayfa {page} / {totalPages} (toplam {total})",
+      "redemptionTable": {
+        "date": "Tarih",
+        "partner": "İş ortağı",
+        "amount": "Tutar",
+        "status": "Durum",
+        "location": "Konum"
+      },
+      "noRedemptions": "Kullanım bulunamadı.",
+      "voucherTable": {
+        "campaign": "Kampanya",
+        "status": "Durum",
+        "type": "Tür",
+        "value": "Değer",
+        "remaining": "Kalan",
+        "redeemed": "Kullanılan",
+        "issuedTo": "Verilen kişi",
+        "expires": "Son geçerlilik"
+      },
+      "noVouchers": "Kupon bulunamadı."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "alıcı",
+        "partner": "iş ortağı",
+        "platform_owner": "platform sahibi"
+      },
+      "orgStatus": {
+        "active": "aktif",
+        "suspended": "askıya alındı"
+      },
+      "campaignStatus": {
+        "draft": "taslak",
+        "active": "aktif",
+        "paused": "duraklatıldı",
+        "archived": "arşivlendi"
+      },
+      "voucherStatus": {
+        "created": "oluşturuldu",
+        "issued": "düzenlendi",
+        "active": "aktif",
+        "redeemed": "kullanıldı",
+        "expired": "süresi doldu",
+        "voided": "geçersiz kılındı"
+      },
+      "valueType": {
+        "fixed": "sabit",
+        "percent": "yüzde"
+      },
+      "orderStatus": {
+        "draft": "taslak",
+        "submitted": "gönderildi",
+        "invoiced": "faturalandı",
+        "paid": "ödendi",
+        "cancelled": "iptal edildi",
+        "refunded": "iade edildi"
+      },
+      "redemptionStatus": {
+        "approved": "onaylandı",
+        "reversed": "geri alındı",
+        "failed": "başarısız"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Etkinlikler"
+    },
+    "status": {
+      "draft": "Taslak",
+      "published": "Aktif",
+      "sold_out": "Tükendi",
+      "cancelled": "İptal edildi",
+      "ended": "Sona erdi"
+    },
+    "statusName": {
+      "draft": "Taslak",
+      "published": "Yayınlandı",
+      "sold_out": "Tükendi",
+      "cancelled": "İptal edildi",
+      "ended": "Sona erdi"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Şirket içi etkinlik",
+      "concert": "Konser",
+      "workshop": "Atölye",
+      "other": "Diğer"
+    },
+    "ticketStatus": {
+      "available": "Mevcut",
+      "sold": "Satıldı",
+      "used": "Kullanıldı",
+      "cancelled": "İptal edildi",
+      "refunded": "İade edildi"
+    },
+    "list": {
+      "subtitle": "Etkinliklerinizi ve biletlerinizi yönetin",
+      "createEvent": "Etkinlik oluştur",
+      "stats": {
+        "totalTitle": "Toplam etkinlik",
+        "totalDescription": "Tüm etkinlikler",
+        "activeTitle": "Aktif",
+        "activeDescription": "Yayında veya tükendi",
+        "soldTitle": "Satılan biletler",
+        "soldDescription": "Tüm etkinliklerde",
+        "revenueTitle": "Gelir",
+        "revenueDescription": "Ücretli bilet satışları"
+      },
+      "empty": {
+        "title": "Henüz etkinlik yok",
+        "description": "Bilet satmak ve katılımı yönetmek için bir etkinlik oluşturun.",
+        "cta": "İlk etkinliğinizi oluşturun"
+      },
+      "card": {
+        "date": "Tarih:",
+        "location": "Konum:",
+        "price": "Fiyat:",
+        "tickets": "Biletler:",
+        "sold": "{sold} / {capacity} satıldı",
+        "free": "Ücretsiz",
+        "view": "Görüntüle",
+        "edit": "Düzenle"
+      },
+      "weeklyRevenue": {
+        "title": "Haftalık bilet geliri",
+        "description": "Son 7 gündeki ücretli bilet satışları.",
+        "series": "Gelir"
+      }
+    },
+    "detail": {
+      "noDescription": "Açıklama yok",
+      "edit": "Düzenle",
+      "status": "Durum",
+      "type": "Tür",
+      "eventDate": "Etkinlik tarihi",
+      "price": "Fiyat",
+      "free": "Ücretsiz",
+      "totalTickets": "Toplam bilet",
+      "sold": "Satılan",
+      "available": "Mevcut",
+      "location": "Konum",
+      "terms": "Şartlar ve koşullar",
+      "ticketsTitle": "Biletler",
+      "ticketsDescription": "Bu etkinliğin biletleri",
+      "noTickets": "Henüz bilet oluşturulmadı.",
+      "view": "Görüntüle",
+      "redeem": "Kullan"
+    },
+    "form": {
+      "basicInfo": "Temel bilgiler",
+      "name": "Etkinlik adı *",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "Etkinliğinizi tanımlayın...",
+      "type": "Etkinlik türü *",
+      "typeAria": "Etkinlik türü",
+      "dateTime": "Tarih ve saat",
+      "eventDate": "Etkinlik tarihi *",
+      "eventTime": "Etkinlik saati *",
+      "endDate": "Bitiş tarihi (isteğe bağlı)",
+      "endTime": "Bitiş saati (isteğe bağlı)",
+      "location": "Konum",
+      "locationName": "Konum adı",
+      "locationPlaceholder": "Ana Salon, Açık Hava Sahnesi",
+      "locationPlaceholderExample": "ör. Ana Salon, Açık Hava Sahnesi",
+      "address": "Tam adres",
+      "addressPlaceholder": "Sokak adresi, Şehir, Ülke",
+      "ticketDetails": "Bilet detayları",
+      "maxCapacity": "Maks. kapasite (bilet) *",
+      "maxCapacityLong": "Maks. kapasite (bilet sayısı) *",
+      "pricePerTicketCurrency": "Bilet başına fiyat ({currency})",
+      "pricePerTicket": "Bilet başına fiyat",
+      "pricePlaceholderFree": "0.00 (ücretsiz)",
+      "priceHint": "Ücretsiz biletler için boş bırakın. ör. {example} için 12.50 veya 12,50.",
+      "currency": "Para birimi *",
+      "terms": "Şartlar ve koşullar",
+      "termsPlaceholder": "Etkinlik şartları, iade politikası vb.",
+      "ticketPrice": "Bilet fiyatı",
+      "endBeforeStart": "Bitiş saati başlangıç saatinden sonra olmalıdır.",
+      "cancel": "İptal"
+    },
+    "create": {
+      "submit": "Etkinlik oluştur",
+      "submitting": "Oluşturuluyor..."
+    },
+    "edit": {
+      "loading": "Yükleniyor...",
+      "notFound": "Etkinlik bulunamadı.",
+      "back": "Etkinliğe dön",
+      "title": "Etkinliği düzenle",
+      "subtitle": "Etkinlik detaylarınızı güncelleyin.",
+      "submit": "Değişiklikleri kaydet",
+      "submitting": "Kaydediliyor..."
+    },
+    "publish": {
+      "confirm": "Bu etkinlik yayınlansın mı? Herkese görünür olacak ve biletler satın alınabilecek.",
+      "confirmLabel": "Yayınla",
+      "failed": "Etkinlik yayınlanamadı",
+      "success": "Etkinlik başarıyla yayınlandı!",
+      "published": "Yayınlandı",
+      "cannotPublish": "Yayınlanamıyor",
+      "button": "Etkinliği yayınla",
+      "publishing": "Yayınlanıyor..."
+    },
+    "generate": {
+      "invalidCount": "Lütfen 1 ile 1000 arasında bir sayı girin",
+      "tooMany": "{count} bilet oluşturulamıyor. Mevcut maksimum: {max}",
+      "failed": "Biletler oluşturulamadı",
+      "success": "{count, plural, one {# bilet başarıyla oluşturuldu!} other {# bilet başarıyla oluşturuldu!}}",
+      "open": "Bilet oluştur",
+      "title": "Bilet oluştur",
+      "description": "Bu etkinlik için bilet oluşturun",
+      "countLabel": "Bilet sayısı (maks.: {max})",
+      "cancel": "İptal",
+      "submit": "Oluştur",
+      "submitting": "Oluşturuluyor..."
+    },
+    "redeem": {
+      "title": "Bileti kullan",
+      "subtitle": "QR kodu tarayın veya bilet numarasını girin",
+      "back": "Etkinliğe dön",
+      "scanTitle": "Bileti tara",
+      "scanDescription": "QR token veya bilet numarasını girin",
+      "tokenLabel": "QR token / bilet numarası",
+      "tokenPlaceholder": "QR token veya bilet numarasını girin",
+      "scan": "Tara",
+      "notFound": "Bilet bulunamadı",
+      "found": "Bilet bulundu",
+      "number": "Numara:",
+      "event": "Etkinlik:",
+      "status": "Durum:",
+      "attendee": "Katılımcı:",
+      "redeemDescription": "Kullanım işlemini tamamlayın",
+      "locationLabel": "Konum (isteğe bağlı)",
+      "locationPlaceholder": "ör. Ana Giriş, A Kapısı",
+      "submit": "Bileti kullan",
+      "submitting": "Kullanılıyor...",
+      "failed": "Bilet kullanılamadı",
+      "cannotRedeem": "Bu bilet kullanılamaz. Durum: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "İşletme dashboard",
+      "vouchersTitle": "Kuponları yönet"
+    },
+    "sidebar": {
+      "title": "İşletme",
+      "subtitle": "GiftHub konsolu",
+      "openMenu": "Menüyü aç",
+      "nav": {
+        "overview": "Genel bakış",
+        "vouchers": "Kuponlar",
+        "giftCards": "Hediye kartları",
+        "credits": "Krediler",
+        "brand": "Marka"
+      }
+    },
+    "overview": {
+      "title": "İşletme dashboard",
+      "notConnected": "Henüz hiçbir işletmeye bağlı değilsiniz."
+    },
+    "noAccess": {
+      "title": "İşletme erişimi yok",
+      "overviewHint": "Sizi davet etmesi için bir işletme yöneticisine başvurun veya başlamak için bir işletme hesabı oluşturun.",
+      "creditsHint": "Gelir ve ödemeleri görüntülemek için bir işletme hesabına bağlanın.",
+      "vouchersHint": "Kuponları yönetmek için bir işletme hesabına bağlanın.",
+      "exploreCampaigns": "Kampanyaları keşfet"
+    },
+    "brand": {
+      "title": "Marka ayarları",
+      "description": "Kuponlardaki marka görünümünüzü özelleştirin",
+      "logoHeading": "Logo",
+      "logoHint": "İşletme logonuzu yükleyin (önerilen: 200x200px, PNG veya SVG).",
+      "logoPreviewAlt": "Logo önizlemesi",
+      "uploadLogo": "Logo yükle",
+      "colorHeading": "Marka rengi",
+      "colorHint": "Kuponlar ve düğmeler için ana marka renginizi belirleyin.",
+      "colorLabel": "Renk",
+      "colorHexLabel": "Marka rengi hex değeri",
+      "save": "Değişiklikleri kaydet",
+      "previewHeading": "Önizleme",
+      "previewHint": "Markanızın kuponlarda nasıl göründüğünü görün.",
+      "sampleMerchant": "İşletmeniz",
+      "sampleTitle": "Sonraki alışverişinizde %20 indirim",
+      "sampleDescription": "Tüm ürünlerde geçerlidir. Diğer tekliflerle birleştirilemez."
+    },
+    "credits": {
+      "availableBalance": "Kullanılabilir bakiye",
+      "availableBalanceHint": "Ödemeye hazır",
+      "pendingRevenue": "Bekleyen gelir",
+      "pendingRevenueHint": "İşleniyor",
+      "recentRevenue": "Son gelirler",
+      "ticketSale": "Bilet satışı",
+      "voucherSale": "Kupon satışı",
+      "noRevenue": "Henüz kaydedilmiş gelir yok",
+      "payoutRequests": "Ödeme talepleri",
+      "noPayoutRequests": "Henüz ödeme talebi yok",
+      "requestPayoutHeading": "Ödeme talep et",
+      "minimumPayout": "Minimum ödeme tutarı: {amount}",
+      "submitting": "Gönderiliyor...",
+      "requestPayout": "Ödeme talep et",
+      "requestSubmitted": "Ödeme talebi gönderildi",
+      "requestFailed": "Ödeme talep edilemedi",
+      "status": {
+        "paid": "ödendi",
+        "pending": "beklemede",
+        "requested": "talep edildi",
+        "completed": "tamamlandı",
+        "failed": "başarısız"
+      }
+    },
+    "newVoucher": {
+      "title": "Kupon oluştur",
+      "description": "Yeni kupon kampanyanızı tasarlayın ve yapılandırın",
+      "detailsHeading": "Kupon detayları",
+      "titleLabel": "Başlık",
+      "titlePlaceholder": "ör. Sonraki alışverişinizde %20 indirim",
+      "descriptionLabel": "Açıklama",
+      "descriptionPlaceholder": "Tüm ürünlerde geçerlidir. Diğer tekliflerle birleştirilemez.",
+      "expiryDateLabel": "Son kullanma tarihi",
+      "weeklyLabel": "Haftalık fırsat",
+      "weeklyHint": "Sınırlı süreli haftalık kullanılabilirlik",
+      "weeklyAria": "Haftalık fırsat - Sınırlı süreli haftalık kullanılabilirlik",
+      "referralLabel": "Tavsiye kredisini etkinleştir",
+      "referralHint": "Arkadaşları kullandığında kullanıcılar kredi kazanır",
+      "referralAria": "Tavsiye kredisini etkinleştir - Arkadaşları kullandığında kullanıcılar kredi kazanır",
+      "brandColorLabel": "Marka rengi",
+      "brandColorHexLabel": "Marka rengi hex değeri",
+      "saveDraft": "Taslağı kaydet",
+      "createAndPublish": "Oluştur ve yayınla",
+      "previewHeading": "Önizleme",
+      "sampleMerchant": "İşletmeniz",
+      "sampleTitle": "Kupon başlığı",
+      "sampleDescription": "Kupon açıklaması burada görünecek"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Herkese açık sayfa, kupon yayınlandıktan sonra kullanılabilir.",
+    "list": {
+      "metaTitle": "Kuponlar",
+      "subtitle": "Kupon oluşturun ve yönetin",
+      "bulkImport": "CSV ile toplu içe aktar",
+      "stats": {
+        "totalTitle": "Toplam kupon",
+        "totalDescription": "Oluşturulan tüm kuponlar",
+        "activeTitle": "Aktif",
+        "activeDescription": "Yayınlanan kuponlar",
+        "draftsTitle": "Taslaklar",
+        "draftsDescription": "Henüz yayınlanmadı",
+        "pausedEndedTitle": "Duraklatılan / sona eren",
+        "pausedEndedDescription": "{paused} duraklatıldı, {ended} sona erdi",
+        "redemptionsTitle": "Kullanımlar",
+        "redemptionsDescription": "Toplam kullanım"
+      },
+      "empty": {
+        "title": "Henüz kupon yok",
+        "description": "İlk kuponunuzu oluşturarak başlayın.",
+        "action": "İlk kuponunuzu oluşturun"
+      },
+      "searchPlaceholder": "Başlık, kod öneki veya kimliğe göre arayın",
+      "searchLabel": "Kupon ara",
+      "statusLabel": "Durum",
+      "statusAll": "Tüm durumlar",
+      "status": {
+        "published": "Aktif",
+        "paused": "Duraklatıldı",
+        "draft": "Taslak",
+        "ended": "Sona erdi",
+        "expired": "Süresi doldu"
+      },
+      "typeLabel": "Tür",
+      "typeAll": "Tüm türler",
+      "sortLabel": "Sırala",
+      "sort": {
+        "date": "Tarih (en yeni)",
+        "name": "Ad (A-Z)",
+        "redemptions": "Kullanımlar"
+      },
+      "showing": "{total} kupondan {shown} tanesi gösteriliyor",
+      "clearFilters": "Filtreleri temizle",
+      "noMatches": "Filtrelerinizle eşleşen kupon yok.",
+      "usage": "Kullanım",
+      "usageUnlimited": "Kullanım: {used} - Sınırsız",
+      "view": "Görüntüle"
+    },
+    "rowActions": {
+      "pauseTitle": "Kuponu duraklat",
+      "pauseDescription": "Bu kuponu duraklatmak istediğinizden emin misiniz? Duraklatıldığı sürece kullanıcılar kuponu satın alamaz veya kullanamaz.",
+      "pauseConfirm": "Duraklat",
+      "paused": "Kupon duraklatıldı",
+      "pauseFailed": "Kupon duraklatılamadı",
+      "loadFailed": "Kupon yüklenemedi",
+      "duplicateLabel": "Kuponu çoğalt",
+      "duplicated": "Kupon çoğaltıldı",
+      "duplicateFailed": "Çoğaltılamadı"
+    },
+    "publish": {
+      "confirmMessage": "Bu kupon yayınlansın mı? Herkese görünür olacak.",
+      "confirmLabel": "Yayınla",
+      "failed": "Kupon yayınlanamadı",
+      "success": "Kupon başarıyla yayınlandı!",
+      "publishing": "Yayınlanıyor...",
+      "button": "Kuponu yayınla"
+    },
+    "new": {
+      "iconLetter": "K",
+      "created": "Kupon taslak olarak oluşturuldu. Müşterilerin görmesine hazır olduğunuzda yayınlayın."
+    },
+    "edit": {
+      "iconLetter": "D",
+      "subtitle": "Kupon detaylarını ve kullanılabilirliğini güncelleyin.",
+      "updated": "Kupon başarıyla güncellendi",
+      "updateFailed": "Kupon güncellenemedi",
+      "updateFailedRetry": "Kupon güncellenemedi. Lütfen tekrar deneyin.",
+      "updating": "Güncelleniyor...",
+      "update": "Kuponu güncelle",
+      "viewPublicPage": "Herkese açık sayfayı görüntüle"
+    },
+    "form": {
+      "stepOf": "Adım {current} / {total}",
+      "typeLabel": "Tür",
+      "typeAria": "Kupon türü",
+      "customersGetOff": "Müşteriler {value} indirim alır.",
+      "customersGetCredit": "Müşteriler {value} kredi alır.",
+      "percentHint": "Yüzdeyi girin, ör. 15 veya 12,5.",
+      "amountHint": "Tutarı {currency} cinsinden girin, ör. {example} için 4.50 veya 4,50.",
+      "validityHint": "Kupon, ilk günün başından son günün sonuna kadar kullanılabilir.",
+      "enableWeeklyDropAria": "Haftalık fırsatı etkinleştir",
+      "weeklyDropDayAria": "Haftalık fırsat günü",
+      "weeklyDropTimeAria": "Haftalık fırsat başlangıç saati",
+      "headlinePlaceholder": "Siparişinizde %15 indirim",
+      "finePrintPlaceholder": "Yalnızca yeni müşteriler için geçerlidir",
+      "previewFallbackHeadline": "Kuponunuz",
+      "previewValidUntil": "{date} tarihine kadar geçerli",
+      "errors": {
+        "discountAboveZero": "%0'dan büyük bir indirim girin.",
+        "valueAboveZero": "0'dan büyük bir değer girin.",
+        "chooseDates": "Kuponun ne zaman başlayıp biteceğini seçin.",
+        "endBeforeStart": "Bitiş tarihi başlangıç tarihiyle aynı veya sonra olmalıdır.",
+        "invalidValue": "Geçerli bir değer girin.",
+        "valueMustBePositive": "Değer 0'dan büyük olmalıdır",
+        "totalLimitPositive": "Toplam kullanım limiti pozitif bir sayı olmalıdır",
+        "perUserLimitPositive": "Kullanıcı başına limit pozitif bir sayı olmalıdır"
+      },
+      "discountErrors": {
+        "negative": "İndirim negatif olamaz.",
+        "invalid": "İndirim geçerli bir sayı değil.",
+        "decimals": "İndirim en fazla {decimals} ondalık basamak içerebilir.",
+        "tooLarge": "İndirim çok yüksek.",
+        "tooHigh": "İndirim %100'den fazla olamaz."
+      },
+      "valueErrors": {
+        "negative": "Değer negatif olamaz.",
+        "invalid": "Değer geçerli bir sayı değil.",
+        "wholeNumber": "Değer tam sayı olmalıdır.",
+        "decimals": "Değer en fazla {decimals} ondalık basamak içerebilir.",
+        "tooLarge": "Değer çok yüksek."
+      }
+    },
+    "bulkImport": {
+      "back": "Kuponlara dön",
+      "title": "Kuponları bir tablodan içe aktarın",
+      "intro": "Bir CSV dosyası yükleyin (en fazla 500 satır). Her kupon taslak olarak oluşturulur, bu nedenle siz yayınlayana kadar hiçbiri yayına girmez.",
+      "columns": "Sütunlar",
+      "downloadSample": "Örnek CSV indir",
+      "columnRequired": "<code>{name}</code> (zorunlu): {help}",
+      "columnOptional": "<code>{name}</code> (isteğe bağlı): {help}",
+      "columnHelp": {
+        "name": "Müşterilerin kupon başlığı olarak gördüğü metin, ör. \"Bahar kahve fırsatı\".",
+        "type": "\"amount\" (tutar indirimi), \"percent\" (yüzde indirimi) veya \"credit\" (mağaza kredisi).",
+        "value": "amount/credit için euro (10 veya 10.50), percent için yüzde (15 veya 12.5).",
+        "currency": "EUR gibi üç harfli kod. Varsayılan olarak mağazanızın para birimi kullanılır.",
+        "valid_from": "Kuponun geçerli olduğu ilk gün: 2026-10-01 veya 01.10.2026.",
+        "valid_to": "Kuponun geçerli olduğu son gün (o günün sonuna kadar geçerli kalır).",
+        "code_prefix": "Her kodun başındaki harfler, ör. BAHAR.",
+        "usage_limit": "Toplamda kaç kez kullanılabileceği. Sınırsız için boş bırakın."
+      },
+      "separatorHint": "Sütunları virgül veya noktalı virgülle ayırın. Virgül kullanıyorsanız ondalıklı tutarları tırnak içine alın (\"4,50\") veya nokta kullanın (4.50).",
+      "chooseFile": "Bir CSV dosyası seçin",
+      "chooseDifferent": "Farklı bir dosya seçmek için tıklayın",
+      "browse": "Göz atmak için tıklayın",
+      "fixRows": "Bu satırları düzeltip dosyayı tekrar yükleyin:",
+      "andMore": "…ve {count} tane daha.",
+      "readyToImport": "{count, plural, one {# kupon} other {# kupon}} içe aktarılmaya hazır:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, en fazla {limit} kullanım} other {}}",
+      "imported": "{count, plural, one {# kupon} other {# kupon}} taslak olarak içe aktarıldı.",
+      "viewVouchers": "Kuponları görüntüle",
+      "importing": "İçe aktarılıyor...",
+      "importCount": "{count, plural, one {# kuponu içe aktar} other {# kuponu içe aktar}}",
+      "importVouchers": "Kuponları içe aktar",
+      "importFailedStatus": "İçe aktarma başarısız oldu (hata {status}).",
+      "importFailed": "İçe aktarma başarısız oldu"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Ana eylemle birlikte ekranın üst kısmında başlık."
+        },
+        "value_props": {
+          "label": "Değer önerileri",
+          "description": "Kısa avantajlar ve garantiler."
+        },
+        "featured_products": {
+          "label": "Öne çıkan ürünler",
+          "description": "Fiyat ve etiketlerle en iyi ürünler."
+        },
+        "featured_vouchers": {
+          "label": "Öne çıkan kuponlar",
+          "description": "Promosyonlar için aktif kupon kartları."
+        },
+        "rental_packages": {
+          "label": "Kiralama paketleri",
+          "description": "Kiralama paketleri ve gün bazlı fiyatlandırma."
+        },
+        "categories": {
+          "label": "Kategori ızgarası",
+          "description": "Türe, kullanıma veya hedef kitleye göre göz atın."
+        },
+        "availability": {
+          "label": "Müsaitlik takvimi",
+          "description": "Canlı müsaitlik ve rezervasyon zamanları."
+        },
+        "testimonials": {
+          "label": "Müşteri yorumları",
+          "description": "Müşteri alıntıları ve yıldız puanları."
+        },
+        "gallery": {
+          "label": "Galeri",
+          "description": "Yaşam tarzı görselleri veya kullanım örnekleri."
+        },
+        "pricing": {
+          "label": "Fiyat tablosu",
+          "description": "Şeffaf fiyat kademeleri."
+        },
+        "rental_terms": {
+          "label": "Kiralama şartları",
+          "description": "Depozito, sigorta ve iade politikası."
+        },
+        "faq": {
+          "label": "SSS",
+          "description": "Sık karşılaşılan itirazları yanıtlayın."
+        },
+        "newsletter": {
+          "label": "Bülten kaydı",
+          "description": "Kampanyalar için e-posta adresi toplayın."
+        },
+        "contact": {
+          "label": "İletişim bloğu",
+          "description": "Sohbet, e-posta veya telefon desteği."
+        },
+        "map": {
+          "label": "Konum haritası",
+          "description": "Teslim alma noktası veya mağaza konumu."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Promosyon çubuğu",
+          "description": "Teklifler ve duyurular için sabit üst çubuk."
+        },
+        "sticky_cta": {
+          "label": "Sabit CTA",
+          "description": "Kaydırırken sabit kalan eylem düğmesi."
+        },
+        "chat_widget": {
+          "label": "Sohbet widget'ı",
+          "description": "Canlı sohbet veya WhatsApp entegrasyonu."
+        },
+        "trust_badges": {
+          "label": "Güven rozetleri",
+          "description": "Ödeme, güvenlik veya kalite rozetleri."
+        },
+        "social_proof": {
+          "label": "Sosyal kanıt açılır penceresi",
+          "description": "Son etkinlikler ve satın almalar."
+        },
+        "countdown": {
+          "label": "Geri sayım sayacı",
+          "description": "Sınırlı teklifler için aciliyet."
+        },
+        "reviews_widget": {
+          "label": "Değerlendirme widget'ı",
+          "description": "Google veya Trustpilot yerleştirin."
+        },
+        "language_switch": {
+          "label": "Dil değiştirici",
+          "description": "Sayfada hızlı dil değiştirme."
+        },
+        "analytics": {
+          "label": "Analiz kod parçaları",
+          "description": "İzleme için piksel alanları."
+        },
+        "cookie_banner": {
+          "label": "Çerez bildirimi",
+          "description": "KVKK/GDPR onay bildirimi."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Önizleme",
+      "edit": "Düzenle",
+      "previewEmpty": "Henüz bölüm eklenmedi. Bölüm eklemek için düzenleme moduna geçin.",
+      "title": "Görsel düzenleyici",
+      "preview": "Önizleme",
+      "empty": "Henüz bölüm yok. Oluşturmaya başlamak için aşağıdaki \"Bölüm ekle\"ye tıklayın.",
+      "collapseSettings": "Ayarları daralt",
+      "expandSettings": "Ayarları genişlet",
+      "removeSection": "{label} bölümünü kaldır",
+      "sectionTitle": "Bölüm başlığı",
+      "description": "Açıklama",
+      "descriptionPlaceholder": "İsteğe bağlı açıklama",
+      "backgroundColor": "Arka plan rengi",
+      "layoutVariant": "Yerleşim varyantı",
+      "layout": {
+        "default": "Varsayılan",
+        "centered": "Ortalanmış",
+        "wide": "Geniş",
+        "compact": "Kompakt"
+      },
+      "addSection": "Bölüm ekle",
+      "availableSections": "Kullanılabilir bölümler",
+      "closeCatalog": "Kapat",
+      "allAdded": "Kullanılabilir tüm bölümler eklendi.",
+      "count": "{configured, plural, one {# bölüm yapılandırıldı} other {# bölüm yapılandırıldı}} / eklenebilecek {available} bölüm"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Vitrin lansmanı kontrol listesi",
+        "rental_launch": "Kiralama sayfası lansmanı kontrol listesi",
+        "campaign_ops": "Haftalık kampanya operasyonları",
+        "support_ops": "Destek hazırlığı kontrol listesi"
+      },
+      "toast": {
+        "saved": "Sayfa oluşturucu güncellendi.",
+        "saveFailed": "Sayfa kaydedilemedi",
+        "vibeFailed": "Vibe asistanı başarısız oldu",
+        "layoutGenerated": "Vibe yerleşimi oluşturuldu.",
+        "generateFailed": "Yerleşim oluşturulamadı",
+        "agentFailed": "Asistan başarısız oldu",
+        "planGenerated": "Süreç planı oluşturuldu.",
+        "runAgentFailed": "Asistan çalıştırılamadı"
+      },
+      "noData": "Sayfa oluşturucu verisi yok.",
+      "title": "Sayfa oluşturucu",
+      "intro": "Modüler bölümler ve eklentilerle hızlıca vitrin ve kiralama sayfaları oluşturun.",
+      "introAi": "Modüler bölümler ve eklentilerle, isteğe bağlı yapay zekâ önerileriyle hızlıca vitrin ve kiralama sayfaları oluşturun.",
+      "tabs": {
+        "store": "Vitrin",
+        "rental": "Kiralama"
+      },
+      "details": {
+        "title": "Sayfa detayları",
+        "subtitle": "Başlık, alt başlık ve yerleşim.",
+        "save": "Kaydet",
+        "pageTitle": "Sayfa başlığı",
+        "subtitleLabel": "Alt başlık"
+      },
+      "sections": {
+        "title": "Bölümler",
+        "subtitle": "Sıralamak için sürükleyin, yapılandırmak için genişletin veya yerleşiminizi önizleyin.",
+        "suggestLayout": "Yerleşim öner",
+        "suggestionsLeft": "Kalan yapay zekâ yerleşim önerisi: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Eklentiler",
+        "subtitle": "Ek widget'lar ve pazarlama katmanları.",
+        "enable": "{label} eklentisini etkinleştir",
+        "disable": "{label} eklentisini devre dışı bırak"
+      },
+      "summary": {
+        "title": "Canlı özet",
+        "line": "{title} · {sections, plural, one {# bölüm} other {# bölüm}} · {addons, plural, one {# eklenti} other {# eklenti}}",
+        "sectionsLabel": "Bölümler:",
+        "addonsLabel": "Eklentiler:",
+        "none": "Yok"
+      },
+      "assistant": {
+        "title": "Lansman kontrol listesi asistanı",
+        "subtitle": "Eylem planları ve operasyonel kontrol listeleri oluşturun.",
+        "goalLabel": "Süreç hedefi",
+        "createChecklist": "Kontrol listesi oluştur",
+        "checklistsLeft": "Kalan kontrol listesi: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "{name} tarafından seçilmiş teklifler, kiralamalar ve kuponlar.",
+        "shopProducts": "Ürünleri incele",
+        "browseRentals": "Kiralamalara göz at"
+      },
+      "valueProps": {
+        "rewardsTitle": "Ödüller",
+        "rewardsText": "Kupon teşvikleri dahil.",
+        "stockTitle": "Güvenilir stok",
+        "stockText": "Güncel fiyat ve müsaitlik.",
+        "datesTitle": "Esnek tarihler",
+        "datesText": "Kiralamaları kolayca planlayın."
+      },
+      "viewAll": "Tümünü görüntüle",
+      "seeAll": "Tümünü gör",
+      "products": {
+        "title": "Öne çıkan ürünler",
+        "empty": "Henüz ürün yok.",
+        "fallbackDescription": "Öne çıkan ürün"
+      },
+      "rentals": {
+        "title": "Kiralama paketleri",
+        "empty": "Henüz kiralama yok.",
+        "fallbackDescription": "Öne çıkan kiralama",
+        "perDay": "{price} / gün"
+      },
+      "categories": {
+        "title": "Kategorilere göz at",
+        "popular": "Popüler",
+        "business": "İş",
+        "events": "Etkinlikler",
+        "seasonal": "Sezonluk",
+        "corporate": "Kurumsal",
+        "custom": "Özel"
+      },
+      "availability": {
+        "title": "Canlı müsaitlik",
+        "text": "Müsaitliği kontrol edin ve dakikalar içinde teklif isteyin.",
+        "seeCalendar": "Takvimi gör"
+      },
+      "testimonials": {
+        "title": "Müşteriler ne diyor",
+        "smooth": "Sorunsuz süreç",
+        "lovedVoucher": "Kuponu çok beğendim",
+        "support": "Harika destek"
+      },
+      "gallery": {
+        "title": "Galeri"
+      },
+      "pricing": {
+        "title": "Fiyatlandırma",
+        "starter": "Starter",
+        "growth": "Büyüme",
+        "enterprise": "Kurumsal",
+        "tierText": "Özel fiyatlandırma ve destek"
+      },
+      "rentalTerms": {
+        "title": "Kiralama şartları",
+        "text": "Depozito, teslim alma kuralları ve iade politikası baştan açıkça paylaşılır."
+      },
+      "faq": {
+        "title": "SSS",
+        "redeem": "Nasıl kullanırım?",
+        "reschedule": "Tarihi değiştirebilir miyim?",
+        "support": "Destek sunuyor musunuz?"
+      },
+      "newsletter": {
+        "title": "Haberdar olun",
+        "text": "Yeni teklifleri ve kiralama duyurularını gelen kutunuzda alın.",
+        "emailLabel": "E-posta adresi",
+        "subscribe": "Abone ol"
+      },
+      "contact": {
+        "title": "İletişim",
+        "emailUs": "Bize {email} adresinden yazın"
+      },
+      "map": {
+        "text": "Teslim alma konumu rezervasyondan sonra paylaşılır."
+      },
+      "vouchers": {
+        "title": "Aktif kuponlar",
+        "empty": "Mevcut kupon yok.",
+        "voucher": "Kupon",
+        "view": "Kuponu görüntüle"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Aktif",
+      "redeemed": "Kullanıldı",
+      "expired": "Süresi doldu",
+      "cancelled": "İptal edildi"
+    },
+    "list": {
+      "metaTitle": "Hediye kartları",
+      "title": "Hediye kartları",
+      "subtitle": "Hediye kartı oluşturun ve yönetin",
+      "newGiftCard": "Yeni hediye kartı",
+      "stats": {
+        "total": "Toplam hediye kartı",
+        "totalDescription": "Düzenlenen tüm hediye kartları",
+        "active": "Aktif",
+        "activeDescription": "Şu anda kullanılabilir",
+        "redeemed": "Kullanıldı",
+        "redeemedDescription": "Tamamlanan kullanımlar",
+        "totalValue": "Toplam değer",
+        "totalValueDescription": "Düzenlenen hediye kartı değeri"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Henüz hediye kartı yok",
+      "emptyDescription": "Özel markalı ve QR ile kullanılabilen bir hediye kartı oluşturun.",
+      "createFirst": "İlk hediye kartınızı oluşturun",
+      "searchPlaceholder": "Başlık, kod veya mesaja göre arayın",
+      "searchLabel": "Hediye kartı ara",
+      "status": "Durum",
+      "allStatus": "Tüm durumlar",
+      "sortBy": "Sırala",
+      "sortDate": "Tarih (en yeni)",
+      "sortAmount": "Tutar (yüksekten düşüğe)",
+      "showing": "{total, plural, one {# hediye kartından} other {# hediye kartından}} {shown} tanesi gösteriliyor",
+      "clearFilters": "Filtreleri temizle",
+      "noMatches": "Filtrelerinizle eşleşen hediye kartı yok.",
+      "defaultHeadline": "Hediye kartı",
+      "noExpiry": "Süresiz",
+      "validUntil": "Son geçerlilik: {date}",
+      "redeemedOn": "Kullanıldı: {date}",
+      "details": "Detaylar",
+      "view": "Görüntüle"
+    },
+    "detail": {
+      "title": "Hediye kartı",
+      "code": "Kod {code}",
+      "publicView": "Herkese açık görünüm",
+      "newGiftCard": "Yeni hediye kartı",
+      "detailsTitle": "Hediye kartı detayları",
+      "value": "Değer",
+      "validFrom": "Geçerlilik başlangıcı",
+      "validTo": "Geçerlilik bitişi",
+      "noExpiry": "Süresiz",
+      "redeemedAt": "Kullanılma zamanı",
+      "notRedeemed": "Kullanılmadı",
+      "qrTitle": "Personel kullanım QR'ı",
+      "qrHelp": "Personel, hediye kartını kullanmak ve geçersiz kılmak için bu QR'ı tarayabilir."
+    },
+    "new": {
+      "title": "Yeni hediye kartı",
+      "subtitle": "Hediye kartını özelleştirin ve düzenleyin",
+      "created": "Hediye kartı oluşturuldu.",
+      "cancel": "İptal",
+      "creating": "Oluşturuluyor...",
+      "submit": "Hediye kartı oluştur",
+      "errors": {
+        "amountRequired": "0'dan büyük bir tutar girin.",
+        "endBeforeStart": "Bitiş tarihi başlangıç tarihiyle aynı veya sonra olmalıdır.",
+        "createFailed": "Hediye kartı oluşturulamadı"
+      },
+      "amountErrors": {
+        "negative": "Tutar negatif olamaz.",
+        "invalid": "Tutar geçerli bir sayı değil.",
+        "wholeNumber": "Tutar tam sayı olmalıdır.",
+        "decimals": "Tutar en fazla {decimals} ondalık basamak içerebilir.",
+        "tooLarge": "Tutar çok yüksek."
+      },
+      "priceErrors": {
+        "negative": "Satış fiyatı negatif olamaz.",
+        "invalid": "Satış fiyatı geçerli bir sayı değil.",
+        "wholeNumber": "Satış fiyatı tam sayı olmalıdır.",
+        "decimals": "Satış fiyatı en fazla {decimals} ondalık basamak içerebilir.",
+        "tooLarge": "Satış fiyatı çok yüksek."
+      },
+      "valueSection": {
+        "title": "Değer ve geçerlilik",
+        "description": "Tutarı, para birimini ve son kullanma tarihini belirleyin",
+        "amount": "Tutar",
+        "faceValue": "Nominal değer: {value}.",
+        "amountHelp": "Tutarı {currency} cinsinden girin, ör. {example} için 50 veya 49,90.",
+        "currency": "Para birimi",
+        "validFrom": "Geçerlilik başlangıcı",
+        "validTo": "Geçerlilik bitişi",
+        "noExpiry": "Son kullanma tarihi yok"
+      },
+      "purchaseSection": {
+        "title": "Müşteri satın alımı",
+        "description": "Müşterilerin bu hediye kartını online satın almasına izin verin",
+        "purchasable": "Müşteri satın alımına açık",
+        "salePrice": "Satış fiyatı (isteğe bağlı, varsayılan nominal değer)",
+        "salePricePlaceholder": "Tutarla aynı",
+        "customersPay": "Müşteriler {value} öder.",
+        "salePriceHelp": "Nominal değerden satmak için boş bırakın. Promosyonlar için farklı bir fiyat belirleyin."
+      },
+      "brandingSection": {
+        "title": "Marka ve mesaj",
+        "description": "Başlık, mesaj, görseller ve renkler",
+        "headline": "Başlık",
+        "headlinePlaceholder": "Kahve severlere hediye",
+        "message": "Mesaj",
+        "messagePlaceholder": "Alıcı için kişisel bir mesaj ekleyin",
+        "logoUrl": "Logo URL'si",
+        "imageUrl": "Görsel URL'si",
+        "accentColor": "Vurgu rengi",
+        "backgroundColor": "Arka plan rengi",
+        "textColor": "Metin rengi",
+        "codePrefix": "Kod öneki (isteğe bağlı)"
+      },
+      "preview": {
+        "title": "Önizleme",
+        "defaultHeadline": "Hediye kartı",
+        "imageAlt": "Hediye kartı",
+        "logoAlt": "Marka logosu",
+        "notePlaceholder": "Kişisel bir not ekleyin"
+      }
+    },
+    "gifts": {
+      "title": "Hediye ürünleri",
+      "subtitle": "Gift Hub'daki ürünlerinizi yönetin",
+      "dashboard": "Dashboard",
+      "confirmDelete": "Emin misiniz? Bu işlem ürünü devre dışı bırakır.",
+      "stats": {
+        "total": "Toplam",
+        "active": "Aktif",
+        "views": "Görüntülenme",
+        "purchases": "Satın alma"
+      },
+      "emptyTitle": "Henüz hediye ürünü yok",
+      "emptyDescription": "Gift Hub akışında görünmek için ilk ürününüzü ekleyin.",
+      "emptyApiHint": "Ürün oluşturmak için <code>{endpoint}</code> adresindeki API'yi kullanın.",
+      "inactive": "Pasif",
+      "featured": "Öne çıkan",
+      "views": "{count, plural, one {# görüntülenme} other {# görüntülenme}}",
+      "purchases": "{count, plural, one {# satın alma} other {# satın alma}}",
+      "conversionRate": "%{rate} dönüşüm",
+      "activate": "Etkinleştir",
+      "deactivate": "Devre dışı bırak",
+      "delete": "Sil"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Veri yok",
+      "value": "Değer: <strong>{value}</strong>",
+      "dismiss": "Kapat",
+      "remove": "Kaldır",
+      "dialog": "İletişim kutusu",
+      "close": "Kapat",
+      "loading": "Yükleniyor"
+    },
+    "analyticsFunnel": {
+      "empty": "Bu dönem için henüz etkinlik yok",
+      "top": "Üst",
+      "drop": "-%{rate} düşüş"
+    },
+    "periodComparison": {
+      "title": "Dönem karşılaştırması",
+      "loading": "Yükleniyor...",
+      "previous": "Önceki: {value}",
+      "noData": "Veri yok",
+      "period": {
+        "day": "Gün",
+        "week": "Hafta",
+        "month": "Ay",
+        "quarter": "Çeyrek",
+        "year": "Yıl"
+      },
+      "metric": {
+        "revenue": "Gelir",
+        "redemptions": "Kullanımlar",
+        "purchases": "Satın almalar",
+        "referrals": "Tavsiyeler",
+        "customers": "Müşteriler"
+      }
+    },
+    "trendChart": {
+      "noData": "Veri yok"
+    },
+    "conversionChart": {
+      "noData": "Veri yok",
+      "previous": "önceki: {value}"
+    },
+    "funnelChart": {
+      "empty": "Bu dönem için henüz etkinlik yok"
+    },
+    "geoMap": {
+      "noData": "Veri yok",
+      "value": "Değer: <strong>{value}</strong>",
+      "country": {
+        "GB": "Birleşik Krallık",
+        "IE": "İrlanda",
+        "FR": "Fransa",
+        "DE": "Almanya",
+        "ES": "İspanya",
+        "PT": "Portekiz",
+        "IT": "İtalya",
+        "NL": "Hollanda",
+        "BE": "Belçika",
+        "CH": "İsviçre",
+        "AT": "Avusturya",
+        "PL": "Polonya",
+        "CZ": "Çekya",
+        "SE": "İsveç",
+        "NO": "Norveç",
+        "FI": "Finlandiya",
+        "DK": "Danimarka",
+        "EE": "Estonya",
+        "LV": "Letonya",
+        "LT": "Litvanya",
+        "HU": "Macaristan",
+        "RO": "Romanya",
+        "BG": "Bulgaristan",
+        "GR": "Yunanistan",
+        "HR": "Hırvatistan",
+        "SK": "Slovakya",
+        "SI": "Slovenya",
+        "RS": "Sırbistan",
+        "UA": "Ukrayna",
+        "BY": "Belarus"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Veri bekleniyor..."
+    },
+    "pieDonutChart": {
+      "noData": "Veri yok",
+      "total": "Toplam"
+    },
+    "activityFeed": {
+      "justNow": "az önce",
+      "minutesAgo": "{count} dk önce",
+      "hoursAgo": "{count} sa önce",
+      "daysAgo": "{count} g önce",
+      "empty": "Henüz etkinlik yok",
+      "loadMore": "Daha fazla yükle",
+      "eventType": {
+        "purchase": "Satın alma",
+        "redemption": "Kullanım",
+        "signup": "Kayıt",
+        "alert": "Uyarı"
+      }
+    },
+    "dateRange": {
+      "days7": "7 gün",
+      "days30": "30 gün",
+      "days90": "90 gün",
+      "year1": "1 yıl",
+      "custom": "Özel"
+    },
+    "chartCard": {
+      "fullscreen": "Tam ekran",
+      "exitFullscreen": "Tam ekrandan çık",
+      "retry": "Tekrar dene"
+    },
+    "dashboardHeader": {
+      "export": "Dışa aktar",
+      "exportAs": "{format} olarak dışa aktar"
+    },
+    "dataTable": {
+      "empty": "Veri yok",
+      "showing": "{total} kayıttan {from}–{to} gösteriliyor",
+      "previousPage": "Önceki sayfa",
+      "nextPage": "Sonraki sayfa"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Canlı",
+        "reconnecting": "Yeniden bağlanıyor",
+        "disconnected": "Bağlantı kesildi"
+      },
+      "status": {
+        "connected": "Bağlı",
+        "reconnecting": "Yeniden bağlanıyor",
+        "disconnected": "Bağlantı kesildi"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "önceki döneme göre"
+    },
+    "statComparison": {
+      "current": "Mevcut",
+      "previous": "Önceki",
+      "change": "değişim"
+    },
+    "aiInsightPanel": {
+      "title": "Yapay zekâ içgörüleri",
+      "placeholder": "Yapay zekâya bir soru sorun...",
+      "send": "Gönder"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Canlı",
+        "degraded": "Yavaşladı",
+        "disconnected": "Çevrimdışı"
+      },
+      "latency": "Gecikme: {ms} ms",
+      "lastUpdate": "Son güncelleme: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Bildirimler",
+      "title": "Bildirimler",
+      "markAllRead": "Tümünü okundu işaretle",
+      "empty": "Bildirim yok",
+      "ariaLabelUnread": "Bildirimler ({count} okunmamış)"
+    },
+    "premiumChartCard": {
+      "info": "Bilgi",
+      "fullscreen": "Tam ekran",
+      "exitFullscreen": "Tam ekrandan çık",
+      "moreOptions": "Diğer seçenekler",
+      "empty": "Bu dönem için veri yok"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "son döneme göre"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Çalışıyor",
+        "degraded": "Yavaşladı",
+        "outage": "Kesinti"
+      }
+    },
+    "select": {
+      "placeholder": "Seçin...",
+      "search": "Ara...",
+      "empty": "Seçenek bulunamadı",
+      "removeOption": "{label} öğesini kaldır"
+    },
+    "sidebar": {
+      "expand": "Kenar çubuğunu genişlet",
+      "collapse": "Kenar çubuğunu daralt",
+      "openMenu": "Menüyü aç",
+      "closeMenu": "Menüyü kapat"
+    },
+    "iconSystem": {
+      "notFound": "\"{name}\" simgesi bulunamadı",
+      "badge": "{count, plural, one {# bildirim} other {# bildirim}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Yan panel",
+      "closePanel": "Paneli kapat"
+    },
+    "codeBlock": {
+      "copyCode": "Kodu kopyala",
+      "copied": "Kopyalandı",
+      "copy": "Kopyala"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Müşteriler",
+      "title": "Müşteriler",
+      "summary": "{count, plural, one {# müşteri} other {# müşteri}} · toplam {revenue} gelir",
+      "stats": {
+        "totalCustomers": "Toplam müşteri",
+        "totalRevenue": "Toplam gelir",
+        "totalRedemptions": "Toplam kullanım"
+      },
+      "table": {
+        "customer": "Müşteri",
+        "email": "E-posta",
+        "purchases": "Satın almalar",
+        "totalSpent": "Toplam harcama",
+        "redemptions": "Kullanımlar",
+        "lastPurchase": "Son satın alma"
+      },
+      "empty": "Henüz müşteri yok",
+      "unknown": "Bilinmiyor"
+    },
+    "qrCheckout": {
+      "title": "QR ile anında ödeme",
+      "subtitle": "Anında müşteri ödemesi için QR kodlar oluşturun",
+      "voucherLabel": "Kupona bağla (isteğe bağlı)",
+      "generalOption": "Genel ödeme (belirli bir kupon yok)",
+      "voucherOption": "{type} - {value} {currency} ({status})",
+      "generating": "Oluşturuluyor...",
+      "generate": "QR kod oluştur",
+      "qrAlt": "Ödeme QR kodu",
+      "scanToCheckout": "Ödeme için tarayın",
+      "print": "QR kodu yazdır"
+    },
+    "redemptions": {
+      "metaTitle": "Kullanımlar",
+      "subtitle": "Kupon kullanımlarını görüntüleyin ve onaylayın.",
+      "stats": {
+        "totalTitle": "Toplam kullanım",
+        "totalDescription": "Gönderilen tüm kullanımlar",
+        "pendingTitle": "Beklemede",
+        "pendingDescription": "Onay bekliyor",
+        "confirmedTitle": "Onaylandı",
+        "confirmedDescription": "Onaylanan kullanımlar",
+        "discountsTitle": "Verilen indirimler",
+        "discountsDescription": "Onaylanan indirimler"
+      },
+      "empty": {
+        "title": "Henüz kullanım yok",
+        "description": "Müşteriler kupon kullandığında kullanımlar burada görünecek."
+      },
+      "voucherFallback": "Kupon",
+      "card": {
+        "order": "{amount} sipariş",
+        "discount": "İndirim: {amount}",
+        "discountReferred": "İndirim: {amount} - Tavsiye eden: {name}",
+        "confirmed": "Onaylandı",
+        "pending": "Beklemede",
+        "method": "Yöntem: {method}",
+        "methods": {
+          "online": "Online",
+          "in_store": "Mağazada"
+        },
+        "orderReference": "Sipariş: {reference}",
+        "notAvailable": "Yok",
+        "location": "Konum: {location}",
+        "date": "Tarih: {date}"
+      },
+      "confirm": {
+        "prompt": "Bu kullanım onaylansın mı? Bu işlem tavsiye edenin kredisinin kilidini açar.",
+        "confirmLabel": "Onayla",
+        "success": "Kullanım onaylandı. Tavsiye edenin kredisinin kilidi açıldı.",
+        "error": "Kullanım onaylanamadı. Lütfen tekrar deneyin.",
+        "confirming": "Onaylanıyor...",
+        "button": "Kullanımı onayla"
+      },
+      "export": {
+        "success": "Kullanımlar başarıyla dışa aktarıldı!",
+        "error": "Kullanımlar dışa aktarılamadı",
+        "exporting": "Dışa aktarılıyor...",
+        "button": "CSV dışa aktar"
+      }
+    },
+    "reviews": {
+      "title": "Değerlendirmeler",
+      "subtitle": "Müşteri değerlendirmelerini takip edin ve yanıtlayın",
+      "filters": "Filtreler",
+      "reviewCount": "{count, plural, one {# değerlendirme} other {# değerlendirme}}",
+      "ratingDistribution": "Puan dağılımı",
+      "responseRate": "Yanıt oranı",
+      "replied": "Yanıtlandı",
+      "pending": "Beklemede",
+      "responseRatePercent": "%{percent} yanıt oranı",
+      "filter": {
+        "rating": "Puan",
+        "allRatings": "Tüm puanlar",
+        "stars": "{count, plural, one {# yıldız} other {# yıldız}}",
+        "replyStatus": "Yanıt durumu",
+        "all": "Tümü",
+        "needsReply": "Yanıt bekliyor",
+        "replied": "Yanıtlandı",
+        "clear": "Temizle"
+      },
+      "loading": "Değerlendirmeler yükleniyor...",
+      "empty": "Değerlendirme bulunamadı.",
+      "anonymous": "Anonim",
+      "verified": "Doğrulanmış",
+      "campaign": "Kampanya: {name}",
+      "voucher": "Kupon: {code}",
+      "foundHelpful": "{count} kişi faydalı buldu",
+      "yourReply": "Yanıtınız",
+      "replyPlaceholder": "Yanıtınızı yazın...",
+      "posting": "Gönderiliyor...",
+      "postReply": "Yanıtı gönder",
+      "cancel": "İptal",
+      "reply": "Yanıtla",
+      "showing": "{total} kayıttan {from}–{to} gösteriliyor",
+      "pageOf": "Sayfa {page} / {totalPages}",
+      "previousPage": "Önceki sayfa",
+      "nextPage": "Sonraki sayfa",
+      "loadFailed": "Değerlendirmeler yüklenemedi",
+      "replyFailed": "Yanıt gönderilemedi",
+      "replyPosted": "Yanıt gönderildi"
+    },
+    "scanner": {
+      "title": "Tarayıcı",
+      "subtitle": "Kupon, hediye kartı ve bilet tarayın",
+      "manual": "Manuel",
+      "camera": "Kamera",
+      "scanning": "Taranıyor...",
+      "cameraDenied": "Kamera erişimi reddedildi. Tarayıcı ayarlarınızdan kamera erişimine izin verin veya kodu aşağıya yazın.",
+      "cameraUnavailable": "Kullanılabilir kamera yok. Bunun yerine kodu aşağıya yazın.",
+      "pointAtCode": "Otomatik taramak için kamerayı bir QR koda tutun",
+      "enterCode": "Kodu girin",
+      "codePlaceholder": "Kupon kodu (ör. AUD-CMUI0TG1), kupon bağlantısı, bilet veya hediye kartı kodu",
+      "codeAriaLabel": "Taranacak kod",
+      "scan": "Tara",
+      "found": {
+        "voucher": "Kupon bulundu",
+        "gift_card": "Hediye kartı bulundu",
+        "ticket": "Bilet bulundu"
+      },
+      "info": {
+        "ticketNumber": "Bilet no.",
+        "event": "Etkinlik",
+        "type": "Tür",
+        "standard": "Standart",
+        "attendee": "Katılımcı",
+        "code": "Kod",
+        "amount": "Tutar",
+        "message": "Mesaj",
+        "voucher": "Kupon",
+        "campaign": "Kampanya",
+        "none": "Yok",
+        "value": "Değer",
+        "validUntil": "Son geçerlilik"
+      },
+      "redeem": "Kullan",
+      "redeeming": "Kullanılıyor...",
+      "cannotRedeem": "Bu öğe kullanılamaz (durum: {status})",
+      "redeemed": {
+        "voucher": "Kupon başarıyla kullanıldı!",
+        "gift_card": "Hediye kartı başarıyla kullanıldı!",
+        "ticket": "Bilet başarıyla kullanıldı!"
+      },
+      "errors": {
+        "enterCode": "Lütfen bir kod girin",
+        "notFound": "Bulunamadı",
+        "scanFailed": "Tarama başarısız oldu",
+        "redeemFailed": "Kullanım başarısız oldu"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktif",
+          "redeemed": "kullanıldı",
+          "expired": "süresi doldu",
+          "cancelled": "iptal edildi"
+        },
+        "ticket": {
+          "available": "mevcut",
+          "sold": "satıldı",
+          "used": "kullanıldı",
+          "cancelled": "iptal edildi",
+          "refunded": "iade edildi"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Fiyat negatif olamaz.",
+      "invalid": "Fiyat geçerli bir sayı değil.",
+      "wholeNumber": "Fiyat tam sayı olmalıdır.",
+      "decimals": "Fiyat en fazla {decimals} ondalık basamak içerebilir.",
+      "tooLarge": "Fiyat çok yüksek."
+    },
+    "appointments": {
+      "title": "Randevular",
+      "subtitle": "Rezervasyonları ve müsaitliği yönetin",
+      "createSlot": "Zaman aralığı oluştur",
+      "form": {
+        "serviceName": "Hizmet adı",
+        "price": "Fiyat ({currency}, ücretsizse boş bırakın)",
+        "startTime": "Başlangıç saati",
+        "endTime": "Bitiş saati",
+        "notes": "Notlar",
+        "creating": "Oluşturuluyor…",
+        "submit": "Müsaitlik aralığı oluştur"
+      },
+      "status": {
+        "all": "Tümü",
+        "pending": "Beklemede",
+        "confirmed": "Onaylandı",
+        "cancelled": "İptal edildi",
+        "completed": "Tamamlandı"
+      },
+      "loading": "Yükleniyor...",
+      "empty": "Randevu bulunamadı",
+      "bookedBy": "Rezervasyonu yapan: {name}",
+      "confirm": "Onayla",
+      "confirmAria": "Randevuyu onayla",
+      "cancel": "İptal",
+      "cancelAria": "Randevuyu iptal et",
+      "errors": {
+        "endBeforeStart": "Bitiş saati başlangıç saatinden sonra olmalıdır.",
+        "createFailed": "Müsaitlik aralığı oluşturulamadı. Lütfen tekrar deneyin.",
+        "network": "Sunucuya ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin.",
+        "updateFailed": "Randevu güncellenemedi (hata {status})."
+      }
+    },
+    "inventory": {
+      "title": "Stok",
+      "subtitle": "Stok seviyelerini takip edin ve kupon kullanılabilirliğini yönetin",
+      "refresh": "Yenile",
+      "summary": {
+        "totalItems": "Toplam ürün",
+        "lowStock": "Düşük stok",
+        "outOfStock": "Stokta yok"
+      },
+      "alerts": {
+        "title": "Düşük stok uyarıları ({count})",
+        "threshold": "{stock} / {threshold} eşik"
+      },
+      "loading": "Stok yükleniyor...",
+      "empty": "Kupon bulunamadı",
+      "typeVoucher": "{type} kuponu",
+      "stockStatus": {
+        "unlimited": "Sınırsız",
+        "outOfStock": "Stokta yok",
+        "lowStock": "Düşük stok",
+        "inStock": "Stokta var"
+      },
+      "stock": "Stok: {stock}",
+      "purchased": "Satın alınan: {count}",
+      "redeemed": "Kullanılan: {count}",
+      "validUntil": "{date} tarihine kadar geçerli",
+      "edit": {
+        "button": "Stoku düzenle",
+        "stockQuantity": "Stok miktarı",
+        "threshold": "Düşük stok eşiği",
+        "save": "Kaydet",
+        "saving": "Kaydediliyor...",
+        "cancel": "İptal"
+      },
+      "stockUpdated": "Stok güncellendi",
+      "errors": {
+        "loadFailed": "Stok yüklenemedi",
+        "updateFailed": "Stok güncellenemedi"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "Bu platformda yapay zekâ önerileri henüz ayarlanmadığı için otomatik yerleşim ve kontrol listesi araçları gizlidir. Sayfalarınızı yine de elle oluşturup düzenleyebilirsiniz."
+    },
+    "pricing": {
+      "title": "Dinamik fiyatlandırma",
+      "newRule": "Yeni kural",
+      "ruleTypes": {
+        "demand": {
+          "label": "Talebe dayalı",
+          "desc": "Fiyatı görüntülenme/satın alma oranına göre ayarlayın"
+        },
+        "timeOfDay": {
+          "label": "Günün saati",
+          "desc": "Yoğun ve sakin saat fiyatlandırması"
+        },
+        "inventory": {
+          "label": "Stok",
+          "desc": "Kalan stoka göre fiyat değişikliği"
+        },
+        "surge": {
+          "label": "Yoğunluk",
+          "desc": "Özel etkinlik/tatil fiyat artışı"
+        },
+        "loyalty": {
+          "label": "Sadakat",
+          "desc": "Tekrar gelen müşterilere indirim"
+        }
+      },
+      "form": {
+        "title": "Fiyatlandırma kuralı oluştur",
+        "ruleType": "Kural türü",
+        "priority": "Öncelik",
+        "priorityPlaceholder": "Yüksek = önce uygulanır",
+        "config": "Yapılandırma (JSON)",
+        "submit": "Kural oluştur",
+        "cancel": "İptal"
+      },
+      "loading": "Kurallar yükleniyor...",
+      "empty": "Henüz fiyatlandırma kuralı yok. Dinamik fiyatlandırmayı etkinleştirmek için bir kural oluşturun.",
+      "table": {
+        "type": "Tür",
+        "priority": "Öncelik",
+        "config": "Yapılandırma",
+        "status": "Durum",
+        "actions": "İşlemler"
+      },
+      "active": "Aktif",
+      "inactive": "Pasif",
+      "deleteAria": "Fiyatlandırma kuralını sil",
+      "deleteConfirm": "Bu fiyatlandırma kuralı silinsin mi?",
+      "delete": "Sil",
+      "errors": {
+        "invalidJson": "Yapılandırma alanı geçerli bir JSON olmalıdır."
+      },
+      "preview": {
+        "title": "Fiyat önizlemesi",
+        "description": "Aktif kuralların fiyatı nasıl etkileyeceğini görmek için bir kupon kimliği girin.",
+        "voucherId": "Kupon kimliği",
+        "voucherIdPlaceholder": "Kupon kimliğini girin",
+        "calculate": "Hesapla",
+        "error": "Fiyat hesaplanamadı",
+        "basePrice": "Temel fiyat",
+        "finalPrice": "Nihai fiyat"
+      }
+    },
+    "rentals": {
+      "title": "Kiralama rezervasyonları",
+      "subtitle": "Kiralama taleplerini ve iadeleri yönetin",
+      "status": {
+        "all": "Tümü",
+        "pending": "Beklemede",
+        "approved": "Onaylandı",
+        "rejected": "Reddedildi",
+        "paid": "Ödendi",
+        "active": "Aktif",
+        "returned": "İade edildi",
+        "cancelled": "İptal edildi"
+      },
+      "empty": "Kiralama rezervasyonu bulunamadı.",
+      "dates": "{start} - {end} ({days, plural, one {# gün} other {# gün}})",
+      "total": "Toplam: <strong>{total}</strong> ({rate}/gün)",
+      "note": "Not: {note}",
+      "rejectedReason": "Reddedildi: {reason}",
+      "bookedMeta": "Rezervasyon: {date} | Kullanıcı: {user}...",
+      "approve": "Onayla",
+      "reasonPlaceholder": "Gerekçe (isteğe bağlı)",
+      "confirm": "Onayla",
+      "cancel": "İptal",
+      "reject": "Reddet",
+      "markReturned": "İade edildi olarak işaretle"
+    },
+    "subscriptionBoxes": {
+      "title": "Abonelik kutuları",
+      "subtitle": "Yinelenen kupon kutularını yönetin",
+      "newBox": "+ Yeni kutu",
+      "cancel": "İptal",
+      "form": {
+        "name": "Ad",
+        "description": "Açıklama",
+        "price": "Fiyat ({currency})",
+        "currency": "Para birimi",
+        "interval": "Sıklık",
+        "maxItems": "Maks. ürün",
+        "creating": "Oluşturuluyor...",
+        "submit": "Kutu oluştur"
+      },
+      "interval": {
+        "weekly": "Haftalık",
+        "monthly": "Aylık",
+        "quarterly": "Üç aylık"
+      },
+      "created": "Abonelik kutusu oluşturuldu.",
+      "empty": "Henüz abonelik kutusu yok. İlkini oluşturun.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# abone} other {# abone}}",
+      "items": "{count, plural, one {# ürün} other {# ürün}}",
+      "errors": {
+        "priceAboveZero": "0'dan büyük bir fiyat girin.",
+        "createFailed": "Abonelik kutusu oluşturulamadı (hata {status}).",
+        "network": "Abonelik kutusu oluşturulamadı. Bağlantınızı kontrol edip tekrar deneyin."
+      },
+      "intervalUnit": {
+        "weekly": "hafta",
+        "monthly": "ay",
+        "quarterly": "çeyrek"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Web sitesi",
+      "supportEmail": "Destek e-postası",
+      "logoUrl": "Logo URL'si",
+      "primaryColor": "Ana renk",
+      "secondaryColor": "İkincil renk",
+      "backgroundColor": "Arka plan rengi",
+      "primaryColorHex": "Ana renk hex değeri",
+      "secondaryColorHex": "İkincil renk hex değeri",
+      "backgroundColorHex": "Arka plan rengi hex değeri",
+      "saving": "Kaydediliyor..."
+    },
+    "page": {
+      "metaTitle": "İşletme ayarları",
+      "infoTitle": "İşletme bilgileri",
+      "infoSubtitle": "Temel işletme detayları",
+      "name": "Ad",
+      "slug": "Slug",
+      "country": "Ülke",
+      "defaultCurrency": "Varsayılan para birimi",
+      "website": "Web sitesi",
+      "supportEmail": "Destek e-postası",
+      "completeOnboarding": "Kurulumu tamamla",
+      "billingTitle": "Faturalandırma",
+      "billingSubtitle": "14 gün ücretsiz deneme, ardından aylık 19 €'dan başlayan planlar. Kupon satışlarında %5 işlem ücreti.",
+      "status": "Durum",
+      "trialStatus": "Ücretsiz deneme — {days, plural, one {# gün} other {# gün}} kaldı",
+      "statusActive": "Aktif",
+      "statusInactive": "Pasif",
+      "currentPlan": "Mevcut plan",
+      "trialEnds": "Deneme bitişi",
+      "periodEnds": "Mevcut dönem bitişi",
+      "manage": "Yönet",
+      "payoutsTitle": "Ödemeler",
+      "payoutsEnabled": "Stripe hesabı bağlı ve etkin",
+      "payoutsInProgress": "Kurulum devam ediyor — ödemeleri etkinleştirmek için tamamlayın",
+      "payoutsNotConnected": "Kupon satışı ödemelerini almak için Stripe'ı bağlayın",
+      "webhooksTitle": "Webhook'lar",
+      "webhooksSubtitle": "HTTP üzerinden gerçek zamanlı olay bildirimleri alın",
+      "notificationsTitle": "Bildirimler",
+      "notificationsSubtitle": "Ekip üyesi olarak hangi e-posta kategorilerini alacağınızı seçin."
+    },
+    "brandProfile": {
+      "title": "Marka profili",
+      "subtitle": "Marka renklerinizi, logonuzu ve iletişim bilgilerinizi özelleştirin.",
+      "updated": "Marka profili başarıyla güncellendi!",
+      "updateFailed": "Marka profili güncellenemedi",
+      "save": "Değişiklikleri kaydet"
+    },
+    "domains": {
+      "title": "Özel alan adları",
+      "subtitle": "Kendi alan adınızı bağlayın ve yönlendirme için doğrulayın.",
+      "inputLabel": "Özel alan adı",
+      "adding": "Ekleniyor...",
+      "add": "Alan adı ekle",
+      "empty": "Yapılandırılmış alan adı yok.",
+      "statusLine": "Durum: {status}",
+      "statusValue": {
+        "pending": "beklemede",
+        "verified": "doğrulandı"
+      },
+      "verify": "Doğrula",
+      "remove": "Kaldır",
+      "addedTitle": "Alan adı eklendi",
+      "addedDescription": "Trafiği yönlendirmeden önce DNS'i doğrulayın.",
+      "addErrorTitle": "Alan adı hatası",
+      "addErrorDescription": "Alan adı eklenemedi.",
+      "verifiedTitle": "Alan adı doğrulandı",
+      "verifiedDescription": "Yönlendirme artık aktif.",
+      "verifyErrorTitle": "Doğrulama hatası",
+      "verifyErrorDescription": "Alan adı doğrulanamadı.",
+      "removedTitle": "Alan adı kaldırıldı",
+      "removeErrorTitle": "Kaldırma hatası",
+      "removeErrorDescription": "Alan adı kaldırılamadı."
+    },
+    "notifications": {
+      "metaTitle": "Bildirim tercihleri",
+      "title": "Bildirim tercihleri",
+      "intro": "<name>{merchantName}</name> üyesi olarak gelen kutunuza hangi e-posta kategorilerinin geleceğini kontrol edin. Tercihler kişiseldir — her ekip üyesi kendi tercihlerini yönetir.",
+      "required": "Zorunlu",
+      "toggle": "{label} aç/kapat",
+      "unsaved": "Kaydedilmemiş değişiklikler",
+      "allSaved": "Tüm değişiklikler kaydedildi",
+      "saving": "Kaydediliyor…",
+      "save": "Tercihleri kaydet",
+      "savedTitle": "Tercihler kaydedildi",
+      "saveFailedTitle": "Kaydetme başarısız oldu",
+      "saveFailedDescription": "Bildirim tercihleriniz güncellenemedi.",
+      "category": {
+        "orders": {
+          "label": "Yeni siparişler ve kullanımlar",
+          "description": "Bir kupon satın alındığında, kullanıldığında veya hediye edildiğinde e-posta."
+        },
+        "payouts": {
+          "label": "Ödemeler",
+          "description": "Stripe ödeme girişleri, başarısız ödemeler ve blokajlar."
+        },
+        "fraud_alerts": {
+          "label": "Dolandırıcılık ve güvenlik uyarıları",
+          "description": "Olağandışı kullanım örüntüleri, ters ibrazlar, ekip girişlerindeki anormallikler. Devre dışı bırakılamaz."
+        },
+        "campaign_updates": {
+          "label": "Kampanya yaşam döngüsü",
+          "description": "Kampanya yayınlandı, 7 gün içinde sona eriyor, sona erdi."
+        },
+        "weekly_digest": {
+          "label": "Haftalık performans özeti",
+          "description": "Geçen haftanın gelirleri, kullanımları ve en iyi kuponlarının pazartesi özeti."
+        },
+        "product_updates": {
+          "label": "GiftHub'dan ürün haberleri",
+          "description": "Yeni özellikler, yol haritası, ara sıra ipuçları. Ayda en fazla 1 kez."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "İşletme ödemeleri",
+      "title": "Ödemeler",
+      "intro": "Kupon satışlarının doğrudan bankanıza ödenmesi için bir Stripe hesabı bağlayın. %5 platform ücreti alıyoruz; kalanı ödeme sırasında bağlı hesabınıza otomatik olarak aktarılır.",
+      "stripeAccount": "Stripe hesabı",
+      "capabilityState": "Yetkinlik durumu",
+      "accountStatus": {
+        "pending": "beklemede",
+        "restricted": "kısıtlı",
+        "enabled": "etkin",
+        "disabled": "devre dışı"
+      },
+      "backToSettings": "Ayarlara dön",
+      "howTitle": "Ödemeler nasıl çalışır?",
+      "how1": "Müşteriler platformun ödeme sayfasında öder. Tutarın tamamını tahsil eder ve Stripe tarafında tutarız.",
+      "how2": "Bir ödeme gerçekleştiğinde Stripe, satış fiyatından %5 ücretimizi düşerek kalanı doğrudan ödeme hesabınıza gönderir.",
+      "how3": "Stripe daha sonra bu tutarı, Stripe ödeme ayarlarınızda seçtiğiniz takvime göre (genellikle her gün, satıştan birkaç gün sonra) banka hesabınıza öder.",
+      "how4": "Ters ibrazlar ve iadeler bir sonraki ödemenizden düşülür; dolandırıcılık tespit edersek yönetici ekip bakiyenize manuel blokaj koyabilir.",
+      "badge": {
+        "enabled": {
+          "label": "Ödemeler etkin",
+          "description": "Kupon satışlarından gelen tutarlar, planlanan ödeme takvimine göre Stripe tarafından banka hesabınıza aktarılır."
+        },
+        "restricted": {
+          "label": "Ek bilgi gerekli",
+          "description": "Ödemelerin etkinleştirilebilmesi için Stripe'ın daha fazla bilgiye ihtiyacı var. Devam etmek için aşağıdaki kurulum bağlantısını açın."
+        },
+        "disabled": {
+          "label": "Ödemeler devre dışı",
+          "description": "Stripe bu hesapta ödemeleri devre dışı bıraktı. Bekleyen gereksinimleri çözmek için Stripe dashboard'u açın."
+        },
+        "notConnected": {
+          "label": "Bağlı değil",
+          "description": "Henüz bir Stripe hesabı bağlamadınız. Kurulum tamamlanana kadar ödemeler bekletilir — bu sürede kupon satışları işlenmeye devam eder ancak tutarlar platform bakiyesinde kalır."
+        }
+      },
+      "actions": {
+        "startFailed": "Stripe kurulumu başlatılamadı",
+        "startNetworkError": "Kurulum başlatılırken ağ hatası",
+        "dashboardFailed": "Stripe dashboard açılamadı",
+        "dashboardNetworkError": "Dashboard açılırken ağ hatası",
+        "disconnectConfirm": "Bu Stripe hesabının bağlantısı kesilsin mi? Yeniden bağlanana kadar ödemeler duraklatılır.",
+        "disconnected": "Stripe hesabının bağlantısı kesildi",
+        "disconnectFailed": "Bağlantı kesilemedi",
+        "disconnect": "Bağlantıyı kes",
+        "setUp": "Stripe ile ödemeleri ayarla",
+        "openDashboard": "Stripe dashboard'u aç",
+        "continueOnboarding": "Kuruluma devam et"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "İşletme verileri yüklenemedi.",
+      "retry": "Tekrar dene",
+      "loading": "Yükleniyor...",
+      "title": "Profilinizi tamamlayın",
+      "subtitle": "İşletme marka profilinizi ayarlayın.",
+      "basicInfo": "Temel bilgiler",
+      "merchantName": "İşletme adı *",
+      "brandTitle": "Marka profili",
+      "brandSubtitle": "Marka renklerinizi ve logonuzu özelleştirin.",
+      "updateFailed": "İşletme güncellenemedi",
+      "submit": "Kurulumu tamamla",
+      "skip": "Şimdilik atla"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Denetim kaydı",
+      "subtitle": "İşletme hesabınızda gerçekleştirilen tüm işlemleri takip edin",
+      "filters": "Filtreler",
+      "action": "İşlem",
+      "allActions": "Tüm işlemler",
+      "fromDate": "Başlangıç tarihi",
+      "toDate": "Bitiş tarihi",
+      "apply": "Uygula",
+      "clear": "Temizle",
+      "loading": "Denetim kaydı yükleniyor...",
+      "loadFailed": "Denetim kaydı yüklenemedi",
+      "empty": "Denetim kaydı bulunamadı.",
+      "columns": {
+        "timestamp": "Zaman damgası",
+        "actor": "İşlemi yapan",
+        "action": "İşlem",
+        "resource": "Kaynak",
+        "details": "Detaylar"
+      },
+      "unknownActor": "Bilinmiyor",
+      "showing": "{total} kayıttan {from}–{to} gösteriliyor",
+      "pageOf": "Sayfa {page} / {totalPages}",
+      "previousPage": "Önceki sayfa",
+      "nextPage": "Sonraki sayfa",
+      "actions": {
+        "voucherCreated": "Kupon oluşturuldu",
+        "voucherUpdated": "Kupon güncellendi",
+        "voucherPublished": "Kupon yayınlandı",
+        "vouchersGenerated": "Kuponlar oluşturuldu",
+        "campaignCreated": "Kampanya oluşturuldu",
+        "campaignUpdated": "Kampanya güncellendi",
+        "memberInvited": "Ekip üyesi davet edildi",
+        "memberRemoved": "Ekip üyesi kaldırıldı",
+        "memberRoleChanged": "Ekip üyesinin rolü değiştirildi",
+        "apiKeyCreated": "API anahtarı oluşturuldu",
+        "apiKeyRevoked": "API anahtarı iptal edildi",
+        "apiKeyUpdated": "API anahtarı güncellendi",
+        "eventCreated": "Etkinlik oluşturuldu",
+        "eventUpdated": "Etkinlik güncellendi",
+        "eventPublished": "Etkinlik yayınlandı",
+        "merchantUpdated": "İşletme güncellendi",
+        "reviewReplied": "Değerlendirme yanıtlandı",
+        "settingsUpdate": "Ayarlar güncellendi",
+        "settingsView": "Ayarlar görüntülendi",
+        "ticketRedeemed": "Bilet kullanıldı"
+      },
+      "resources": {
+        "voucher": "Kupon",
+        "campaign": "Kampanya",
+        "giftCard": "Hediye kartı",
+        "event": "Etkinlik",
+        "member": "Üye",
+        "teamMember": "Ekip üyesi",
+        "apiKey": "API anahtarı",
+        "webhook": "Webhook",
+        "merchant": "İşletme",
+        "user": "Kullanıcı",
+        "review": "Değerlendirme"
+      }
+    },
+    "roles": {
+      "admin": "Yönetici",
+      "adminDescription": "Tam erişim — kuponları, kampanyaları, üyeleri ve ayarları yönetme",
+      "staff": "Personel",
+      "staffDescription": "Operasyonel erişim — kullanımları onaylama ve verileri görüntüleme",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Ekip üyeleri",
+      "subtitle": "Ekibinizi ve erişim seviyelerini yönetin",
+      "inviteMember": "Üye davet et",
+      "inviteTitle": "Ekip üyesi davet et",
+      "emailAddress": "E-posta adresi",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "Kullanıcının mevcut bir hesabı olmalıdır.",
+      "role": "Rol",
+      "inviting": "Davet ediliyor...",
+      "sendInvitation": "Davet gönder",
+      "cancel": "İptal",
+      "save": "Kaydet",
+      "loading": "Ekip üyeleri yükleniyor...",
+      "loadFailed": "Ekip üyeleri yüklenemedi",
+      "empty": "Henüz ekip üyesi yok. İlk üyenizi yukarıdan davet edin.",
+      "columns": {
+        "member": "Üye",
+        "role": "Rol",
+        "joined": "Katılma tarihi",
+        "actions": "İşlemler"
+      },
+      "unnamed": "Adsız",
+      "memberRole": "Üye rolü",
+      "changeRole": "Rolü değiştir",
+      "removeMember": "Üyeyi kaldır",
+      "inviteFailed": "Üye davet edilemedi",
+      "invited": "Üye başarıyla davet edildi",
+      "updateRoleFailed": "Rol güncellenemedi",
+      "roleUpdated": "Rol güncellendi",
+      "removeConfirm": "{name} ekipten kaldırılsın mı?",
+      "remove": "Kaldır",
+      "removeFailed": "Üye kaldırılamadı",
+      "removed": "Üye kaldırıldı"
+    },
+    "inviteForm": {
+      "title": "Ekip üyesi davet et",
+      "subtitle": "E-posta adresiyle bir ekip üyesi ekleyin.",
+      "email": "E-posta",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "Kullanıcının bir hesabı olmalıdır. Hesabı yoksa önce kaydolması gerekir.",
+      "role": "Rol",
+      "roleHint": "Yöneticiler kuponları, kampanyaları ve ekip üyelerini yönetebilir. Personel kullanımları onaylayabilir.",
+      "inviting": "Davet ediliyor...",
+      "submit": "Üye davet et",
+      "redirectingToBilling": "{message} Faturalandırmaya yönlendiriliyor..."
+    },
+    "referrals": {
+      "title": "Tavsiye analizi",
+      "subtitle": "Tavsiye performansını ve ödülleri takip edin.",
+      "stats": {
+        "total": "Toplam tavsiye",
+        "totalHint": "Takip edilen tüm tavsiyeler",
+        "opened": "Açıldı",
+        "openedHint": "Görüntülendi veya kullanıldı",
+        "redeemed": "Kullanıldı",
+        "redeemedHint": "Dönüşen tavsiyeler",
+        "conversionRate": "Dönüşüm oranı",
+        "conversionRateHint": "Kullanılan / toplam"
+      },
+      "statusBreakdown": "Durum dağılımı",
+      "creditsIssued": "Verilen krediler {amount}",
+      "noActivity": "Henüz tavsiye etkinliği yok.",
+      "topReferrers": "En çok tavsiye edenler",
+      "topReferrersHint": "En çok tavsiye getiren kullanıcılar.",
+      "noReferrals": "Henüz tavsiye yok.",
+      "unknownUser": "Bilinmeyen kullanıcı",
+      "referralCount": "{count, plural, one {# tavsiye} other {# tavsiye}}",
+      "recent": "Son tavsiyeler",
+      "recentHint": "Müşterilerden gelen en son tavsiyeler.",
+      "noRecent": "Son tavsiye yok.",
+      "voucherFallback": "Kupon",
+      "status": {
+        "created": "Oluşturuldu",
+        "opened": "Açıldı",
+        "redeemed": "Kullanıldı",
+        "expired": "Süresi doldu",
+        "blocked": "Engellendi"
+      }
+    },
+    "emailCampaigns": {
+      "title": "E-posta kampanyaları",
+      "newCampaign": "Yeni kampanya",
+      "notConfigured": "Bu platformda e-posta gönderimi henüz ayarlanmadı. Kampanya oluşturup önizleyebilirsiniz, ancak bir e-posta sağlayıcısı bağlanana kadar gönderilemezler.",
+      "notConfiguredShort": "Bu platformda e-posta gönderimi henüz ayarlanmadı",
+      "createTitle": "Kampanya oluştur",
+      "campaignName": "Kampanya adı",
+      "campaignNamePlaceholder": "Yaz indirimi bülteni",
+      "subjectLine": "Konu satırı",
+      "subjectPlaceholder": "Yaz fırsatlarımızı kaçırmayın!",
+      "recipients": "Alıcılar",
+      "recipientFilter": {
+        "all": "Tüm müşteriler",
+        "redeemed30d": "Son 30 günde kullananlar",
+        "inactive": "Pasif müşteriler"
+      },
+      "schedule": "Planlama (isteğe bağlı)",
+      "emailSections": "E-posta bölümleri",
+      "sectionTypes": {
+        "header": "Başlık",
+        "text": "Metin",
+        "image": "Görsel",
+        "button": "Düğme",
+        "divider": "Ayırıcı",
+        "voucherCard": "Kupon"
+      },
+      "creating": "Oluşturuluyor...",
+      "scheduleCampaign": "Kampanyayı planla",
+      "saveDraft": "Taslak olarak kaydet",
+      "preview": "Önizleme",
+      "editor": {
+        "moveUp": "Yukarı taşı",
+        "moveDown": "Aşağı taşı",
+        "removeSection": "Bölümü kaldır",
+        "title": "Başlık",
+        "subtitle": "Alt başlık (isteğe bağlı)",
+        "textContent": "Metin içeriğini girin...",
+        "imageUrl": "Görsel URL'si",
+        "altText": "Alternatif metin",
+        "buttonLabel": "Düğme etiketi",
+        "buttonUrl": "Düğme URL'si",
+        "dividerHint": "Yatay ayırıcı çizgi",
+        "voucherTitle": "Kupon başlığı",
+        "voucherValue": "Değer (ör. %20 İNDİRİM)",
+        "voucherCode": "Kod (ör. KAZAN20)",
+        "voucherExpiry": "Son kullanma (ör. 31 Ara 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Başlık metni",
+        "textContent": "Metin içeriği...",
+        "imagePlaceholder": "Görsel alanı",
+        "button": "Düğme",
+        "voucher": "Kupon",
+        "validUntil": "{date} tarihine kadar geçerli"
+      },
+      "loading": "Yükleniyor...",
+      "empty": "Henüz e-posta kampanyası yok",
+      "columns": {
+        "name": "Ad",
+        "subject": "Konu",
+        "status": "Durum",
+        "recipients": "Alıcılar",
+        "opens": "Açılmalar",
+        "created": "Oluşturulma",
+        "actions": "İşlemler"
+      },
+      "status": {
+        "draft": "taslak",
+        "scheduled": "planlandı",
+        "sent": "gönderildi"
+      },
+      "send": "Gönder",
+      "delete": "Sil",
+      "deleteCampaign": "Kampanyayı sil",
+      "toasts": {
+        "missingFields": "Eksik alanlar",
+        "missingFieldsDescription": "Ad ve konu zorunludur.",
+        "created": "Kampanya oluşturuldu",
+        "error": "Hata",
+        "createFailed": "Kampanya oluşturulamadı.",
+        "sendConfirm": "Bu kampanyayı şimdi göndermek istediğinizden emin misiniz?",
+        "sendFailedStatus": "Gönderilemedi (hata {status}).",
+        "partlySent": "Kampanya kısmen gönderildi",
+        "partlySentDescription": "{total} alıcıdan {sent} tanesine gönderildi. {failed, plural, one {# e-posta} other {# e-posta}} gönderilemedi.",
+        "sent": "Kampanya gönderildi",
+        "sentDescription": "{sent, plural, one {# alıcıya} other {# alıcıya}} gönderildi.",
+        "sendFailed": "Gönderim başarısız oldu",
+        "deleteConfirm": "Bu kampanya silinsin mi?",
+        "deleted": "Kampanya silindi",
+        "deleteFailed": "Silinemedi."
+      }
+    },
+    "apiKeys": {
+      "title": "API anahtarları",
+      "subtitle": "İşletme verilerinize programatik erişim için API anahtarlarını yönetin",
+      "createKey": "Anahtar oluştur",
+      "createdNotice": "API anahtarı oluşturuldu! Şimdi kopyalayın — tekrar gösterilmeyecek.",
+      "copyKey": "Anahtarı kopyala",
+      "createTitle": "API anahtarı oluştur",
+      "keyName": "Anahtar adı",
+      "keyNamePlaceholder": "ör. Canlı POS entegrasyonu",
+      "permissions": "İzinler",
+      "creating": "Oluşturuluyor...",
+      "submit": "API anahtarı oluştur",
+      "cancel": "İptal",
+      "loading": "API anahtarları yükleniyor...",
+      "empty": "Henüz API anahtarı yok. Başlamak için bir tane oluşturun.",
+      "createdOn": "Oluşturulma: {date}",
+      "lastUsed": "Son kullanım: {date}",
+      "expires": "Son geçerlilik: {date}",
+      "revokeKey": "Anahtarı iptal et",
+      "loadFailed": "API anahtarları yüklenemedi",
+      "required": "Ad ve en az bir izin gereklidir",
+      "createFailed": "API anahtarı oluşturulamadı",
+      "created": "API anahtarı oluşturuldu",
+      "revokeConfirm": "\"{name}\" API anahtarı iptal edilsin mi? Bu işlem geri alınamaz.",
+      "revoke": "İptal et",
+      "revoked": "API anahtarı iptal edildi",
+      "revokeFailed": "API anahtarı iptal edilemedi",
+      "copied": "Panoya kopyalandı",
+      "groups": {
+        "vouchers": "Kuponlar",
+        "campaigns": "Kampanyalar",
+        "giftCards": "Hediye kartları",
+        "customers": "Müşteriler",
+        "analytics": "Analizler",
+        "events": "Etkinlikler"
+      },
+      "permissionLabels": {
+        "voucherRead": "Kuponları okuma",
+        "voucherCreate": "Kupon oluşturma",
+        "voucherRedeem": "Kupon kullanma",
+        "campaignRead": "Kampanyaları okuma",
+        "campaignCreate": "Kampanya oluşturma",
+        "giftCardRead": "Hediye kartlarını okuma",
+        "giftCardRedeem": "Hediye kartı kullanma",
+        "customerRead": "Müşterileri okuma",
+        "analyticsRead": "Analizleri okuma",
+        "eventRead": "Etkinlikleri okuma",
+        "eventCheckin": "Etkinlik girişi"
+      }
+    },
+    "webhooks": {
+      "title": "Webhook'lar",
+      "subtitle": "HTTP üzerinden olay bildirimleri alın",
+      "addWebhook": "Webhook ekle",
+      "secretNotice": "Webhook gizli anahtarı (yalnızca bir kez gösterilir):",
+      "copySecret": "Gizli anahtarı kopyala",
+      "copied": "Kopyalandı!",
+      "newTitle": "Yeni webhook",
+      "endpointUrl": "Endpoint URL'si",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Olaylar",
+      "submit": "Webhook oluştur",
+      "loading": "Yükleniyor...",
+      "empty": "Yapılandırılmış webhook yok",
+      "createdOn": "Oluşturulma: {date}",
+      "deliveriesCount": "{count, plural, one {# teslimat} other {# teslimat}}",
+      "sendTest": "Test gönder",
+      "viewDeliveries": "Teslimat kaydı",
+      "disable": "Devre dışı bırak",
+      "enable": "Etkinleştir",
+      "deleteWebhook": "Webhook'u sil",
+      "deliveryLog": "Teslimat kaydı",
+      "noDeliveries": "Henüz teslimat yok",
+      "deliveryFailed": "Başarısız",
+      "attempts": "{count, plural, one {# deneme} other {# deneme}}",
+      "loadFailed": "Webhook'lar yüklenemedi",
+      "required": "URL ve en az bir olay gerekli",
+      "created": "Webhook oluşturuldu",
+      "createFailed": "Webhook oluşturulamadı",
+      "deleted": "Webhook silindi",
+      "deleteFailed": "Webhook silinemedi",
+      "updateFailed": "Webhook güncellenemedi",
+      "testDelivered": "Test teslim edildi! Durum: {status}",
+      "testFailed": "Test başarısız: {error}",
+      "statusCode": "Durum {status}",
+      "testSendFailed": "Test webhook'u gönderilemedi",
+      "loadDeliveriesFailed": "Teslimatlar yüklenemedi"
+    }
   }
 }

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { SearchInput } from "@/components/ui/search-input";
+import { Suspense, useState, useCallback, useEffect, useRef } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { VoiceSearchButton } from "@/components/voice-search-button";
 import {
   SearchFiltersPanel,
@@ -13,7 +14,65 @@ import {
   type SearchResult,
 } from "@/components/search/search-results";
 import { WarmButton } from "@/components/warm-button";
-import { SlidersHorizontal, X } from "lucide-react";
+import { WarmCard } from "@/components/warm-card";
+import { Input } from "@/components/ui/input";
+import { formatCurrency } from "@/lib/utils";
+import { isCampaignCategoryId } from "@/lib/campaign-categories";
+import { Loader2, Search, SlidersHorizontal, Ticket, X } from "lucide-react";
+
+/** An active campaign matching the query (see /api/search). */
+interface CampaignResult {
+  id: string;
+  name: string;
+  description: string | null;
+  price: number | null;
+  currency: string;
+  endDate: string;
+  /** Stable category id (labels.category.<id>); categoryLabel is the API's English label. */
+  categoryId?: string;
+  categoryLabel: string;
+  merchant: { id: string; name: string; slug: string; brandLogoUrl: string | null };
+}
+
+function CampaignResultCard({ campaign }: { campaign: CampaignResult }) {
+  const t = useTranslations("searchPage");
+  const tLabels = useTranslations("labels");
+  const locale = useLocale();
+  const priceLabel =
+    campaign.price && campaign.price > 0 ? formatCurrency(campaign.price, campaign.currency) : tLabels("free");
+  const categoryLabel = isCampaignCategoryId(campaign.categoryId)
+    ? tLabels(`category.${campaign.categoryId}`)
+    : campaign.categoryLabel;
+  const endDate = new Date(campaign.endDate).toLocaleDateString(locale === "en" ? "en-GB" : locale, {
+    day: "numeric",
+    month: "short",
+  });
+  return (
+    <Link
+      href={`/campaigns/${campaign.id}`}
+      className="block rounded-[var(--r-lg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]"
+    >
+      <WarmCard hover padding="none" className="h-full overflow-hidden">
+        <div className="p-4 space-y-2">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-xs font-medium text-[var(--text-muted)] truncate">{campaign.merchant.name}</span>
+            <span className="shrink-0 rounded-full bg-[var(--surface-dim)] px-2 py-0.5 text-[11px] font-medium text-[var(--text-muted)]">
+              {categoryLabel}
+            </span>
+          </div>
+          <h3 className="text-sm font-semibold text-[var(--text)] line-clamp-2">{campaign.name}</h3>
+          {campaign.description && (
+            <p className="text-xs text-[var(--text-muted)] line-clamp-2">{campaign.description}</p>
+          )}
+          <div className="flex items-center justify-between text-xs text-[var(--text-muted)] pt-1">
+            <span>{t("campaignEnds", { date: endDate })}</span>
+            <span className="font-semibold text-[var(--text)]">{priceLabel}</span>
+          </div>
+        </div>
+      </WarmCard>
+    </Link>
+  );
+}
 
 const DEFAULT_FILTERS: SearchFilters = {
   category: "",
@@ -24,7 +83,22 @@ const DEFAULT_FILTERS: SearchFilters = {
 };
 
 export default function SearchPage() {
-  const router = useRouter();
+  const t = useTranslations("searchPage");
+  return (
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center py-24">
+          <Loader2 className="h-8 w-8 animate-spin text-[var(--primary)]" aria-label={t("loadingSearch")} />
+        </div>
+      }
+    >
+      <SearchPageContent />
+    </Suspense>
+  );
+}
+
+function SearchPageContent() {
+  const t = useTranslations("searchPage");
   const searchParams = useSearchParams();
 
   const [query, setQuery] = useState(searchParams.get("q") || "");
@@ -36,6 +110,8 @@ export default function SearchPage() {
     maxPrice: parseInt(searchParams.get("maxPrice") || "0"),
   });
   const [results, setResults] = useState<SearchResult[]>([]);
+  const [campaigns, setCampaigns] = useState<CampaignResult[]>([]);
+  const [searchError, setSearchError] = useState(false);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(
     parseInt(searchParams.get("page") || "1")
@@ -48,6 +124,7 @@ export default function SearchPage() {
   const performSearch = useCallback(
     async (q: string, f: SearchFilters, p: number) => {
       setLoading(true);
+      setSearchError(false);
       try {
         const params = new URLSearchParams();
         if (q) params.set("q", q);
@@ -64,6 +141,7 @@ export default function SearchPage() {
         const data = await res.json();
 
         setResults(data.results || []);
+        setCampaigns(data.campaigns || []);
         setTotal(data.meta?.total || 0);
         setTotalPages(data.meta?.totalPages || 0);
 
@@ -87,6 +165,7 @@ export default function SearchPage() {
         );
       } catch (err) {
         console.error("Search error:", err);
+        setSearchError(true);
       } finally {
         setLoading(false);
       }
@@ -101,6 +180,12 @@ export default function SearchPage() {
   }, []);
 
   // Debounced search on query change
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
+
   const handleQueryChange = useCallback(
     (q: string) => {
       setQuery(q);
@@ -156,6 +241,7 @@ export default function SearchPage() {
 
   const handleVoiceResult = useCallback(
     (transcript: string) => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
       setQuery(transcript);
       setPage(1);
       performSearch(transcript, filters, 1);
@@ -164,36 +250,56 @@ export default function SearchPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[var(--bg)]">
+    <div className="bg-[var(--bg)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 space-y-6">
         {/* Header */}
         <div>
           <h1 className="text-2xl font-semibold text-[var(--text)]">
-            Search Vouchers
+            {t("title")}
           </h1>
           <p className="text-sm text-[var(--text-muted)]">
-            Find the best deals, discounts, and offers
+            {t("subtitle")}
           </p>
         </div>
 
         {/* Search bar with voice */}
-        <div className="flex gap-2">
-          <div className="flex-1">
-            <SearchInput
-              placeholder="Search vouchers, merchants, campaigns..."
-              onSearch={handleQueryChange}
-              isLoading={loading}
-              defaultValue={query}
+        <form
+          role="search"
+          className="flex gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (debounceRef.current) clearTimeout(debounceRef.current);
+            setPage(1);
+            performSearch(query, filters, 1);
+          }}
+        >
+          <div className="flex-1 relative">
+            <label htmlFor="search-query" className="sr-only">
+              {t("queryLabel")}
+            </label>
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-muted)] pointer-events-none" aria-hidden="true" />
+            <Input
+              id="search-query"
+              type="search"
+              value={query}
+              onChange={(e) => handleQueryChange(e.target.value)}
+              placeholder={t("queryPlaceholder")}
+              className="pl-9 pr-9"
             />
+            {loading && (
+              <Loader2 className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-[var(--primary)]" aria-hidden="true" />
+            )}
           </div>
           <VoiceSearchButton onResult={handleVoiceResult} />
           {/* Mobile filter toggle */}
           <div className="lg:hidden">
             <WarmButton
+              type="button"
               variant="outline"
               size="icon"
               onClick={() => setShowMobileFilters(!showMobileFilters)}
-              aria-label="Toggle filters"
+              aria-label={t("toggleFilters")}
+              aria-expanded={showMobileFilters}
             >
               {showMobileFilters ? (
                 <X className="h-4 w-4" />
@@ -202,7 +308,7 @@ export default function SearchPage() {
               )}
             </WarmButton>
           </div>
-        </div>
+        </form>
 
         {/* Main layout */}
         <div className="flex gap-6">
@@ -228,11 +334,11 @@ export default function SearchPage() {
                 <div className="p-4">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-semibold text-[var(--text)]">
-                      Filters
+                      {t("filtersTitle")}
                     </h2>
                     <button
                       onClick={() => setShowMobileFilters(false)}
-                      aria-label="Close filters"
+                      aria-label={t("closeFilters")}
                       className="h-8 w-8 flex items-center justify-center rounded-[var(--r-sm)] hover:bg-[var(--surface-dim)]"
                     >
                       <X className="h-5 w-5 text-[var(--text-muted)]" />
@@ -255,8 +361,35 @@ export default function SearchPage() {
           )}
 
           {/* Results */}
-          <div className="flex-1 min-w-0">
-            <SearchResults
+          <div className="flex-1 min-w-0 space-y-8">
+            {searchError && (
+              <p role="alert" className="text-sm text-[var(--danger)]">
+                {t("error")}
+              </p>
+            )}
+
+            {campaigns.length > 0 && (
+              <section aria-labelledby="search-campaigns-heading" className="space-y-3">
+                <h2 id="search-campaigns-heading" className="text-lg font-semibold text-[var(--text)]">
+                  {t("campaignsHeading")}{" "}
+                  <span className="text-sm font-normal text-[var(--text-muted)]">({campaigns.length})</span>
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {campaigns.map((campaign) => (
+                    <CampaignResultCard key={campaign.id} campaign={campaign} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Voucher results. When campaigns matched but no vouchers did,
+                skip the voucher list so the page doesn't claim "No results". */}
+            {(results.length > 0 || campaigns.length === 0 || page > 1) && (
+              <section aria-label={t("vouchersHeading")} className="space-y-3">
+                {campaigns.length > 0 && (
+                  <h2 className="text-lg font-semibold text-[var(--text)]">{t("vouchersHeading")}</h2>
+                )}
+                <SearchResults
               results={results}
               total={total}
               page={page}
@@ -266,7 +399,24 @@ export default function SearchPage() {
               filters={filters}
               onPageChange={handlePageChange}
               onRemoveFilter={handleRemoveFilter}
-            />
+                />
+              </section>
+            )}
+
+            {!loading && !searchError && campaigns.length === 0 && results.length === 0 && (
+              <WarmCard padding="lg" className="text-center">
+                <p className="text-sm text-[var(--text-muted)]">
+                  <Ticket className="inline h-4 w-4 mr-1 align-[-2px]" aria-hidden="true" />
+                  {t.rich("browseMarketplace", {
+                    link: (chunks) => (
+                      <Link href="/campaigns" className="font-medium text-[var(--primary)] hover:underline">
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
+                </p>
+              </WarmCard>
+            )}
           </div>
         </div>
       </div>

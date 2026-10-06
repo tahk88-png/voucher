@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import {
   Dialog,
   DialogContent,
@@ -30,13 +31,14 @@ export function ConfirmationDialog({
   onOpenChange,
   title,
   description,
-  confirmLabel = "Confirm",
-  cancelLabel = "Cancel",
+  confirmLabel,
+  cancelLabel,
   onConfirm,
   onCancel,
   variant = "default",
   isLoading = false,
 }: ConfirmationDialogProps) {
+  const t = useTranslations("ui")
   const [isProcessing, setIsProcessing] = React.useState(false)
 
   const handleConfirm = async () => {
@@ -77,7 +79,7 @@ export function ConfirmationDialog({
             }}
             disabled={isProcessing || isLoading}
           >
-            {cancelLabel}
+            {cancelLabel ?? t("confirmDialog.cancel")}
           </WarmButton>
           <WarmButton
             type="button"
@@ -86,7 +88,7 @@ export function ConfirmationDialog({
             disabled={isProcessing || isLoading}
             isLoading={isProcessing || isLoading}
           >
-            {confirmLabel}
+            {confirmLabel ?? t("confirmDialog.confirm")}
           </WarmButton>
         </DialogFooter>
       </DialogContent>

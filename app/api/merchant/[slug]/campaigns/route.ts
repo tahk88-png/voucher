@@ -18,6 +18,9 @@ const createCampaignSchema = z.object({
   maxPurchases: z.number().int().positive().nullable(),
   terms: z.string().optional(),
   creditPercentage: z.number().int().min(0).max(10000).nullable(), // basis points (0-10000 = 0-100%)
+}).refine((d) => new Date(d.endDate).getTime() > new Date(d.startDate).getTime(), {
+  message: 'The end date must be after the start date.',
+  path: ['endDate'],
 });
 
 const CAMPAIGNS_DEFAULT_PAGE_SIZE = 20;
@@ -72,6 +75,8 @@ export async function POST(
         merchantId: merchant.id,
         actorUserId: profile.userId,
         action: 'campaign.created',
+        resourceType: 'campaign',
+        resourceId: campaign.id,
         payloadJson: {
           campaignId: campaign.id,
           name: campaign.name,

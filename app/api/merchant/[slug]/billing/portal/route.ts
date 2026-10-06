@@ -11,7 +11,10 @@ export async function POST(
   const { slug } = await params;
 
   if (!isStripeConfigured()) {
-    return NextResponse.json({ error: 'Stripe is not configured' }, { status: 503 });
+    return NextResponse.json(
+      { error: "Online payments aren't set up on this platform yet, so plans can't be bought or changed here. Please contact support.", code: 'BILLING_NOT_CONFIGURED' },
+      { status: 503 }
+    );
   }
 
   const session = await auth();

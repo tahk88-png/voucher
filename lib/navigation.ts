@@ -70,6 +70,72 @@ export async function getNavigationLinks({
   }
 }
 
+/**
+ * Links in the site footer. Static on purpose: the footer renders on every
+ * page (root layout) and must not depend on the database.
+ */
+export const PUBLIC_FOOTER_LINKS: NavigationLinkItem[] = [
+  { id: "footer-campaigns", label: "Campaigns", href: "/campaigns" },
+  { id: "footer-faq", label: "FAQ", href: "/faq" },
+  { id: "footer-contact", label: "Contact", href: "/contact" },
+  { id: "footer-privacy", label: "Privacy", href: "/privacy" },
+  { id: "footer-terms", label: "Terms", href: "/terms" },
+]
+
+// Internal platform terms that older seeded navigation rows still carry.
+const PUBLIC_LABELS: Record<string, string> = {
+  hub: "Explore",
+  tenants: "Merchants",
+}
+
+/** Replaces internal jargon in link labels with visitor-facing words. */
+export function toPublicNavLinks(links: NavigationLinkItem[]): NavigationLinkItem[] {
+  return links.map((link) => ({
+    ...link,
+    label: PUBLIC_LABELS[link.label.trim().toLowerCase()] ?? link.label,
+  }))
+}
+
+/** Keys under the `site.navLinks` messages for the platform's standard link labels. */
+export const NAV_LINK_LABEL_KEYS = [
+  "campaigns",
+  "merchants",
+  "explore",
+  "search",
+  "faq",
+  "contact",
+  "privacy",
+  "terms",
+  "home",
+  "about",
+  "vouchers",
+  "shop",
+  "rent",
+] as const
+export type NavLinkLabelKey = (typeof NAV_LINK_LABEL_KEYS)[number]
+
+/**
+ * The translation key for a standard link label (fallback links and seeded
+ * rows such as "Campaigns" or "Hub"), or null for a custom label configured in
+ * the database, which is shown as entered.
+ */
+export function navLinkLabelKey(label: string): NavLinkLabelKey | null {
+  const normalized = label.trim().toLowerCase()
+  const publicLabel = (PUBLIC_LABELS[normalized] ?? normalized).toLowerCase()
+  return (NAV_LINK_LABEL_KEYS as readonly string[]).includes(publicLabel) ? (publicLabel as NavLinkLabelKey) : null
+}
+
+/** Shows standard link labels in the visitor's language; custom labels stay as configured. */
+export function localizeNavLinks(
+  links: NavigationLinkItem[],
+  translate: (key: NavLinkLabelKey) => string,
+): NavigationLinkItem[] {
+  return links.map((link) => {
+    const key = navLinkLabelKey(link.label)
+    return key ? { ...link, label: translate(key) } : link
+  })
+}
+
 export function getFallbackNavigation(scope: NavigationScope): {
   header: NavigationLinkItem[]
   footer: NavigationLinkItem[]
@@ -77,13 +143,12 @@ export function getFallbackNavigation(scope: NavigationScope): {
   if (scope === "hub") {
     return {
       header: [
-        { id: "hub-home", label: "Hub", href: "/hub" },
         { id: "hub-campaigns", label: "Campaigns", href: "/campaigns" },
+        { id: "hub-home", label: "Merchants", href: "/hub" },
+        { id: "hub-search", label: "Search", href: "/search" },
+        { id: "hub-faq", label: "FAQ", href: "/faq" },
       ],
-      footer: [
-        { id: "hub-privacy", label: "Privacy", href: "/privacy" },
-        { id: "hub-terms", label: "Terms", href: "/terms" },
-      ],
+      footer: PUBLIC_FOOTER_LINKS,
     }
   }
 

@@ -9,6 +9,10 @@ import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { useTranslations } from 'next-intl';
+import { apiErrorMessage } from '@/lib/api-error-message';
+import { parseMoneyToMinor, toDateInputValue } from '@/lib/money-input';
+import { CurrencySelect, exampleAmount } from '../../_components/currency-select';
+import { useMerchantSettings } from '../../_components/merchant-settings-context';
 
 export default function NewEventPage() {
   const params = useParams();
@@ -17,19 +21,35 @@ export default function NewEventPage() {
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations();
   const tNav = useTranslations('nav');
+  const tE = useTranslations('merchantEvents');
+  const tF = useTranslations('merchantEvents.form');
+  const { defaultCurrency } = useMerchantSettings();
+  const [currency, setCurrency] = useState(defaultCurrency);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
+    const price = parseMoneyToMinor(String(formData.get('price') ?? ''), currency, tF('ticketPrice'));
+    if (!price.ok) {
+      showError(price.error);
+      return;
+    }
+    setIsLoading(true);
     const eventDate = formData.get('eventDate') as string;
     const eventTime = formData.get('eventTime') as string;
     const eventEndDate = formData.get('eventEndDate') as string;
     const eventEndTime = formData.get('eventEndTime') as string;
 
-    const eventDateTime = eventDate && eventTime ? `${eventDate}T${eventTime}:00` : null;
-    const eventEndDateTime = eventEndDate && eventEndTime ? `${eventEndDate}T${eventEndTime}:00` : null;
+    // Local wall-clock time → ISO (UTC) so the server stores the instant the merchant meant.
+    const eventDateTime = eventDate && eventTime ? new Date(`${eventDate}T${eventTime}:00`).toISOString() : null;
+    const eventEndDateTime =
+      eventEndDate && eventEndTime ? new Date(`${eventEndDate}T${eventEndTime}:00`).toISOString() : null;
+    if (eventDateTime && eventEndDateTime && new Date(eventEndDateTime) <= new Date(eventDateTime)) {
+      showError(tF('endBeforeStart'));
+      setIsLoading(false);
+      return;
+    }
 
     const data = {
       name: formData.get('name') as string,
@@ -40,8 +60,8 @@ export default function NewEventPage() {
       location: (formData.get('location') as string) || undefined,
       locationAddress: (formData.get('locationAddress') as string) || undefined,
       maxCapacity: parseInt(formData.get('maxCapacity') as string, 10),
-      price: Math.round(parseFloat(formData.get('price') as string) * 100) || 0,
-      currency: (formData.get('currency') as string) || 'USD',
+      price: price.value ?? 0,
+      currency,
       terms: (formData.get('terms') as string) || undefined,
     };
 
@@ -53,8 +73,8 @@ export default function NewEventPage() {
       });
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || 'Failed to create event');
+        const error = await res.json().catch(() => ({}));
+        throw new Error(apiErrorMessage(error, t('success.failedToCreateEvent')));
       }
 
       const event = await res.json();
@@ -67,7 +87,7 @@ export default function NewEventPage() {
     }
   };
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = toDateInputValue(new Date());
 
   return (
     <div className="p-4 sm:p-6">
@@ -91,60 +111,60 @@ export default function NewEventPage() {
 
         <form onSubmit={handleSubmit}>
           <WarmCard padding="lg" className="bg-[var(--surface)] mb-4">
-            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Basic information</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{tF('basicInfo')}</h2>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="name">Event name *</Label>
+                <Label htmlFor="name">{tF('name')}</Label>
                 <Input id="name" name="name" required className="border-[var(--border)]" />
               </div>
               <div>
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">{tF('description')}</Label>
                 <textarea
                   id="description"
                   name="description"
                   className="w-full min-h-[100px] px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
-                  placeholder="Describe your event..."
+                  placeholder={tF('descriptionPlaceholder')}
                 />
               </div>
               <div>
-                <Label htmlFor="type">Event type *</Label>
+                <Label htmlFor="type">{tF('type')}</Label>
                 <select
                   id="type"
                   name="type"
                   required
-                  aria-label="Event type"
+                  aria-label={tF('typeAria')}
                   className="w-full px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
                 >
-                  <option value="festival">Festival</option>
-                  <option value="internal">Internal event</option>
-                  <option value="concert">Concert</option>
-                  <option value="workshop">Workshop</option>
-                  <option value="other">Other</option>
+                  <option value="festival">{tE('type.festival')}</option>
+                  <option value="internal">{tE('type.internal')}</option>
+                  <option value="concert">{tE('type.concert')}</option>
+                  <option value="workshop">{tE('type.workshop')}</option>
+                  <option value="other">{tE('type.other')}</option>
                 </select>
               </div>
             </div>
           </WarmCard>
 
           <WarmCard padding="lg" className="bg-[var(--surface)] mb-4">
-            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Date and time</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{tF('dateTime')}</h2>
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="eventDate">Event date *</Label>
+                  <Label htmlFor="eventDate">{tF('eventDate')}</Label>
                   <Input id="eventDate" name="eventDate" type="date" required min={today} className="border-[var(--border)]" />
                 </div>
                 <div>
-                  <Label htmlFor="eventTime">Event time *</Label>
+                  <Label htmlFor="eventTime">{tF('eventTime')}</Label>
                   <Input id="eventTime" name="eventTime" type="time" required className="border-[var(--border)]" />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="eventEndDate">End date (optional)</Label>
+                  <Label htmlFor="eventEndDate">{tF('endDate')}</Label>
                   <Input id="eventEndDate" name="eventEndDate" type="date" min={today} className="border-[var(--border)]" />
                 </div>
                 <div>
-                  <Label htmlFor="eventEndTime">End time (optional)</Label>
+                  <Label htmlFor="eventEndTime">{tF('endTime')}</Label>
                   <Input id="eventEndTime" name="eventEndTime" type="time" className="border-[var(--border)]" />
                 </div>
               </div>
@@ -152,24 +172,24 @@ export default function NewEventPage() {
           </WarmCard>
 
           <WarmCard padding="lg" className="bg-[var(--surface)] mb-4">
-            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Location</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{tF('location')}</h2>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="location">Location name</Label>
-                <Input id="location" name="location" placeholder="Main Hall, Outdoor Stage" className="border-[var(--border)]" />
+                <Label htmlFor="location">{tF('locationName')}</Label>
+                <Input id="location" name="location" placeholder={tF('locationPlaceholder')} className="border-[var(--border)]" />
               </div>
               <div>
-                <Label htmlFor="locationAddress">Full address</Label>
-                <Input id="locationAddress" name="locationAddress" placeholder="Street address, City, Country" className="border-[var(--border)]" />
+                <Label htmlFor="locationAddress">{tF('address')}</Label>
+                <Input id="locationAddress" name="locationAddress" placeholder={tF('addressPlaceholder')} className="border-[var(--border)]" />
               </div>
             </div>
           </WarmCard>
 
           <WarmCard padding="lg" className="bg-[var(--surface)] mb-4">
-            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Ticket details</h2>
+            <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{tF('ticketDetails')}</h2>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="maxCapacity">Max capacity (tickets) *</Label>
+                <Label htmlFor="maxCapacity">{tF('maxCapacity')}</Label>
                 <Input
                   id="maxCapacity"
                   name="maxCapacity"
@@ -182,53 +202,32 @@ export default function NewEventPage() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="price">Price per ticket *</Label>
+                  <Label htmlFor="price">{tF('pricePerTicketCurrency', { currency })}</Label>
                   <Input
                     id="price"
                     name="price"
-                    type="number"
-                    step="0.01"
-                    min="0"
-                    required
+                    type="text"
+                    inputMode="decimal"
+                    autoComplete="off"
                     placeholder="0.00"
                     className="border-[var(--border)]"
                   />
+                  <p className="text-xs text-[var(--text-muted)] mt-1">
+                    {tF('priceHint', { example: exampleAmount(currency, 12.5) })}
+                  </p>
                 </div>
                 <div>
-                  <Label htmlFor="currency">Currency *</Label>
-                  <select
-                    id="currency"
-                    name="currency"
-                    required
-                    aria-label="Currency"
-                    className="w-full px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
-                  >
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="GBP">GBP</option>
-                    <option value="SEK">SEK</option>
-                    <option value="NOK">NOK</option>
-                    <option value="DKK">DKK</option>
-                    <option value="PLN">PLN</option>
-                    <option value="CZK">CZK</option>
-                    <option value="HUF">HUF</option>
-                    <option value="RON">RON</option>
-                    <option value="BGN">BGN</option>
-                    <option value="HRK">HRK</option>
-                    <option value="RSD">RSD</option>
-                    <option value="ALL">ALL</option>
-                    <option value="MKD">MKD</option>
-                    <option value="BAM">BAM</option>
-                  </select>
+                  <Label htmlFor="currency">{tF('currency')}</Label>
+                  <CurrencySelect id="currency" name="currency" value={currency} onChange={setCurrency} />
                 </div>
               </div>
               <div>
-                <Label htmlFor="terms">Terms and conditions</Label>
+                <Label htmlFor="terms">{tF('terms')}</Label>
                 <textarea
                   id="terms"
                   name="terms"
                   className="w-full min-h-[80px] px-3 py-2 text-sm border border-[var(--border)] rounded-md bg-[var(--surface)]"
-                  placeholder="Event terms, refund policy, etc."
+                  placeholder={tF('termsPlaceholder')}
                 />
               </div>
             </div>
@@ -236,10 +235,10 @@ export default function NewEventPage() {
 
           <div className="flex gap-4">
             <WarmButton type="submit" disabled={isLoading}>
-              {isLoading ? 'Creating...' : 'Create event'}
+              {isLoading ? tE('create.submitting') : tE('create.submit')}
             </WarmButton>
             <WarmButton type="button" variant="outline" onClick={() => router.back()}>
-              Cancel
+              {tF('cancel')}
             </WarmButton>
           </div>
         </form>

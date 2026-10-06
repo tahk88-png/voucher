@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import * as LucideIcons from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -47,6 +48,7 @@ export function IconSystem({
   badge,
   className = '',
 }: IconSystemProps) {
+  const t = useTranslations('dsComponents.iconSystem');
   const pascalName = toPascalCase(name);
   const IconComponent = (LucideIcons as Record<string, unknown>)[pascalName] as
     | React.ComponentType<{ size: number; className?: string; style?: React.CSSProperties }>
@@ -63,7 +65,7 @@ export function IconSystem({
           background: 'var(--ds-bg-glass)',
           border: '1px solid var(--ds-border-default)',
         }}
-        title={`Icon "${name}" not found`}
+        title={t('notFound', { name })}
       />
     );
   }
@@ -95,7 +97,7 @@ export function IconSystem({
             background: 'var(--ds-error)',
             color: '#fff',
           }}
-          aria-label={`${badge} notifications`}
+          aria-label={t('badge', { count: badge })}
         >
           {badge > 99 ? '99+' : badge}
         </span>

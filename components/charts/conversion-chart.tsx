@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 interface ConversionDatum {
@@ -20,6 +21,7 @@ export function ConversionChart({
   height,
   className,
 }: ConversionChartProps) {
+  const t = useTranslations("dsComponents.conversionChart")
   const [animated, setAnimated] = React.useState(false)
 
   React.useEffect(() => {
@@ -36,7 +38,7 @@ export function ConversionChart({
         )}
         style={{ height: height ?? 300 }}
       >
-        <p className="text-sm text-[var(--text-muted)]">No data available</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("noData")}</p>
       </div>
     )
   }
@@ -102,7 +104,7 @@ export function ConversionChart({
                 }}
               />
               <span className="absolute inset-y-0 left-2 flex items-center text-[10px] text-[var(--text-muted)]">
-                prev: {item.previousValue.toLocaleString()}
+                {t("previous", { value: item.previousValue.toLocaleString() })}
               </span>
             </div>
           </div>

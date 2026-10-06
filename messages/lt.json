@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Prenumeratos dėžutės",
     "pricing": "Kainodaros taisyklės",
     "webhooks": "Webhooks",
-    "apiKeys": "API raktai"
+    "apiKeys": "API raktai",
+    "marketplace": "Prekyvietė",
+    "openMenu": "Atidaryti meniu",
+    "closeMenu": "Uždaryti meniu",
+    "expandSidebar": "Išskleisti šoninę juostą",
+    "collapseSidebar": "Suskleisti šoninę juostą",
+    "sectionShop": "Parduotuvė",
+    "sectionRewards": "Apdovanojimai",
+    "sectionAccount": "Paskyra",
+    "mainNavigation": "Pagrindinė navigacija",
+    "quickNavigation": "Greitoji navigacija",
+    "logoutFailed": "Nepavyko atsijungti. Bandykite dar kartą."
   },
   "voucher": {
     "title": "Kuponas",
@@ -184,7 +195,11 @@
     "creditApplied": "Pritaikytas kreditas",
     "finalTotal": "Iš viso",
     "pageDescription": "Sekite savo turimus ir užrakintus kreditus.",
-    "noMerchantWallets": "Prekybininkų piniginių dar nėra."
+    "noMerchantWallets": "Prekybininkų piniginių dar nėra.",
+    "noCreditYet": "Kreditų dar nėra",
+    "noCreditYetBody": "Kreditą gaunate, kai draugas panaudoja jūsų pasidalintą kuponą. Jis rodomas čia pagal kiekvieną prekybininką.",
+    "shareToEarn": "Pasidalinti kuponu",
+    "findVoucherToShare": "Rasti kuponą, kuriuo galima pasidalinti"
   },
   "redemption": {
     "title": "Panaudojimai",
@@ -244,7 +259,12 @@
     "merchantLabel": "Prekybininkas",
     "voucherLabel": "Kuponas",
     "linkField": "Nuoroda",
-    "codeField": "Kodas"
+    "codeField": "Kodas",
+    "linkCopied": "Nuoroda nukopijuota",
+    "howItWorksTitle": "Kaip veikia rekomendacijos",
+    "howItWorksBody": "Atidarykite kuponą ir bakstelėkite „Dalintis“. Gausite asmeninę to kupono nuorodą. Kai draugas jį panaudos, gausite prekybininko kreditą.",
+    "findVoucher": "Rasti kuponą, kuriuo galima pasidalinti",
+    "linkForVoucher": "Rekomendacijos nuoroda: {voucher}"
   },
   "analytics": {
     "title": "Analitika",
@@ -404,7 +424,7 @@
     "footerPrivacy": "Privatumas",
     "footerDocs": "Dokumentacija",
     "footerSupport": "Pagalba",
-    "footerCopyright": "© 2024 Vouchr. Visos teisės saugomos.",
+    "footerCopyright": "© GiftHub. Visos teisės saugomos.",
     "badge": "Paleiskite kuponus, dovanų korteles ir bilietų akcijas",
     "headline": "Kampanijos, kurios atrodo kaip aukščiausios klasės prekės ženklas",
     "subheadline": "Kurkite kuponų ir dovanų kortelių kampanijas su QR panaudojimu, rekomendacijomis ir automatiniu kreditu. Mokėkite tik už rezultatus.",
@@ -516,7 +536,9 @@
     "viewVouchers": "Peržiūrėti kuponus",
     "redeemed": "Panaudota",
     "friendLabel": "Draugas",
-    "voucherLabel": "Kuponas"
+    "voucherLabel": "Kuponas",
+    "offersLinkTitle": "Nuoroda į dabartinius pasiūlymus",
+    "offersLinkDescription": "Nukreipkite draugus į visus dabartinius GiftHub pasiūlymus. Ši nuoroda kredito neuždirba; norėdami uždirbti, pasidalinkite konkrečiu kuponu iš jo puslapio."
   },
   "billing": {
     "upgradeRequired": "Reikalingas naujovinimas",
@@ -618,14 +640,34 @@
     "inApp": "Programėlėje",
     "pushBeta": "Push (beta)",
     "saving": "Saugoma...",
-    "savePreferences": "Išsaugoti nuostatas"
+    "savePreferences": "Išsaugoti nuostatas",
+    "noPreferencesTitle": "Kol kas nėra ką nustatyti",
+    "noPreferencesBody": "Pranešimų nustatymai valdomi kiekvienam prekybininkui atskirai. Kol kas neturite prekybininkų su pranešimų nustatymais.",
+    "saved": "Nuostatos išsaugotos",
+    "saveFailed": "Nepavyko išsaugoti jūsų nuostatų. Bandykite dar kartą.",
+    "markAllReadFailed": "Nepavyko pažymėti pranešimų kaip perskaitytų. Bandykite dar kartą.",
+    "emptyHint": "Čia bus rodomos naujienos apie jūsų kuponus ir pasiūlymus.",
+    "browseOffers": "Naršyti pasiūlymus"
   },
   "settingsPage": {
     "description": "Valdykite savo paskyros nustatymus.",
     "joined": "Prisijungė",
     "recently": "neseniai",
     "accountAccessTitle": "Prieiga prie paskyros",
-    "accountAccessDescription": "Apsaugokite savo paskyrą ir valdykite prieigą."
+    "accountAccessDescription": "Apsaugokite savo paskyrą ir valdykite prieigą.",
+    "pushDescription": "Gaukite pranešimus šiame įrenginyje, net kai GiftHub neatidarytas.",
+    "changePasswordTitle": "Keisti slaptažodį",
+    "changePasswordDescription": "Atnaujinkite savo paskyros slaptažodį.",
+    "setPasswordTitle": "Nustatyti slaptažodį",
+    "setPasswordDescription": "Nustatykite slaptažodį, kad galėtumėte prisijungti el. paštu ir slaptažodžiu.",
+    "twoFactorTitle": "Dviejų veiksnių autentifikavimas",
+    "twoFactorDescription": "Pridėkite papildomą apsaugos lygmenį naudodami autentifikavimo programėlę arba prieigos raktą.",
+    "twoFactorManage": "Valdyti saugumą",
+    "sessionsTitle": "Aktyvios sesijos",
+    "sessionsDescription": "Peržiūrėkite, kur esate prisijungę prie savo paskyros.",
+    "sessionsView": "Peržiūrėti sesijas",
+    "deleteTitle": "Ištrinti paskyrą",
+    "deleteDescription": "Visam laikui ištrinkite savo paskyrą ir anonimizuokite duomenis. Šio veiksmo atšaukti negalima."
   },
   "profile": {
     "title": "Profilis",
@@ -633,5 +675,4583 @@
     "accountInformation": "Paskyros informacija",
     "emailPreferences": "El. pašto nustatymai",
     "appSettings": "Programėlės nustatymai"
+  },
+  "dashboard": {
+    "roleShopper": "Pirkėjas",
+    "roleAdmin": "Administratorius",
+    "roleStaff": "Darbuotojas",
+    "rolePlatformAdmin": "Platformos administratorius",
+    "availableCredit": "Galimas kreditas",
+    "pendingCredit": "Laukiama: {amount}",
+    "creditExplainer": "Kreditas, kurį gaunate, kai draugai panaudoja jūsų pasidalintus kuponus. Jį galite išleisti pas jį išdavusį prekybininką.",
+    "viewCreditDetails": "Peržiūrėti kredito informaciją",
+    "successfulReferrals": "Sėkmingos rekomendacijos",
+    "checkInPoints": "Registravimosi taškai",
+    "shareTitle": "Pasidalinkite kuponu ir uždirbkite kreditą",
+    "shareDescription": "Atidarykite bet kurį kuponą ir bakstelėkite „Dalintis“, kad gautumėte asmeninę nuorodą. Kai draugas jį panaudos, uždirbsite kreditą.",
+    "openShareCenter": "Atidaryti dalinimosi centrą",
+    "sharedSummary": "Pasidalinti kuponai: {count} · Panaudoti: {redeemed}",
+    "achievementsTitle": "Pasiekimai",
+    "badgesEarned": "Gauti ženkleliai: {earned} iš {total}",
+    "viewAchievements": "Peržiūrėti pasiekimus",
+    "availableOffers": "Galimi pasiūlymai",
+    "browseAll": "Naršyti viską",
+    "noActiveOffers": "Šiuo metu aktyvių pasiūlymų nėra. Užsukite netrukus.",
+    "validUntil": "Galioja iki {date}",
+    "recentActivity": "Naujausia veikla",
+    "noRecentActivity": "Veiklos dar nėra.",
+    "creditFrom": "Prekybininko {merchant} kreditas",
+    "referralAt": "Rekomendacija · {merchant}",
+    "creditStatus": {
+      "locked": "laukiama",
+      "available": "galimas",
+      "used": "panaudotas",
+      "expired": "nebegalioja",
+      "reversed": "atšauktas"
+    },
+    "referralStatus": {
+      "created": "Nuoroda sukurta",
+      "opened": "Atidaryta",
+      "redeemed": "Panaudota",
+      "expired": "Nebegalioja",
+      "blocked": "Užblokuota"
+    },
+    "myMerchants": "Mano prekybininkai",
+    "merchantDashboard": "Prekybininko skydelis",
+    "sellTitle": "Parduokite per GiftHub",
+    "sellDescription": "Norite siūlyti kuponus savo klientams? Susisiekite su mumis ir padėsime susikurti prekybininko paskyrą.",
+    "contactUs": "Susisiekite su mumis",
+    "exploreVouchers": "Naršyti kuponus"
+  },
+  "wishlist": {
+    "title": "Mano norų sąrašas",
+    "emptyTitle": "Jūsų norų sąrašas tuščias",
+    "emptyBody": "Išsaugokite patinkančius kuponus, prekybininkus ir kampanijas, kad vėliau rastumėte juos čia.",
+    "browseOffers": "Naršyti pasiūlymus"
+  },
+  "push": {
+    "enable": "Įjungti tiesioginius pranešimus",
+    "enabled": "Tiesioginiai pranešimai įjungti",
+    "enabledToast": "Tiesioginiai pranešimai įjungti",
+    "disable": "Išjungti",
+    "disabledToast": "Tiesioginiai pranešimai išjungti",
+    "enableFailed": "Nepavyko įjungti tiesioginių pranešimų. Bandykite dar kartą.",
+    "disableFailed": "Nepavyko išjungti tiesioginių pranešimų. Bandykite dar kartą.",
+    "unsupported": "Ši naršyklė nepalaiko tiesioginių pranešimų.",
+    "blocked": "Pranešimai užblokuoti. Norėdami juos įjungti, leiskite juos naršyklės nustatymuose."
+  },
+  "sessions": {
+    "title": "Aktyvios sesijos",
+    "description": "Peržiūrėkite, kur esate prisijungę prie savo paskyros.",
+    "backToSettings": "Grįžti į nustatymus",
+    "deviceOn": "{browser}, {os}",
+    "unknownDevice": "Nežinomas įrenginys",
+    "thisDevice": "Šis įrenginys",
+    "signedInHere": "Šiuo metu esate prisijungę čia.",
+    "otherDevicesTitle": "Kiti įrenginiai",
+    "otherDevicesNone": "Negalime parodyti kitų įrenginių, kuriuose galite būti prisijungę. Jei pastebėsite ką nors neįprasto, pakeiskite slaptažodį ir įjunkite dviejų veiksnių autentifikavimą.",
+    "securitySettings": "Saugumo nustatymai",
+    "lastActive": "Paskutinį kartą aktyvus {time}",
+    "logout": "Atsijungti",
+    "logoutAll": "Atsijungti visur kitur",
+    "logoutAllBody": "Baigti visas sesijas kituose įrenginiuose.",
+    "loadFailed": "Nepavyko įkelti jūsų sesijų.",
+    "revokeFailed": "Nepavyko baigti sesijos. Bandykite dar kartą.",
+    "revoked": "Sesija baigta.",
+    "revokedAll": "Sesijos kituose įrenginiuose baigtos."
+  },
+  "achievements": {
+    "title": "Pasiekimai",
+    "checkIn": "Užsiregistruoti šiandien",
+    "checkingIn": "Registruojama…",
+    "checkedInToday": "Šiandien užsiregistruota",
+    "checkInFailed": "Užsiregistruoti nepavyko. Bandykite dar kartą.",
+    "checkInSaved": "Registracija išsaugota",
+    "newBadge": "Naujas ženklelis: {name}",
+    "checkInPoints": "Registravimosi taškai",
+    "level": "Lygis",
+    "levelValue": "{level} lygis",
+    "levelProgress": "Pažanga iki kito lygio",
+    "badgesLabel": "Ženkleliai",
+    "noBadgesYet": "Ženklelių dar negauta.",
+    "earnedOn": "Gauta {date}",
+    "locked": "Dar negauta",
+    "howToEarn": "Kaip uždirbti taškų",
+    "earnRuleCheckIn": "Užsiregistruokite kartą per dieną",
+    "pointsShort": "+{points} tšk.",
+    "pointsExplainer": "Taškai ir lygiai rodo, kiek esate aktyvūs. Jų negalima iškeisti į pinigus ar kuponus.",
+    "currentStreak": "Dabartinė serija (dienos)",
+    "longestStreak": "Ilgiausia serija (dienos)",
+    "milestone": "Pasiektas serijos etapas!",
+    "badges": {
+      "first_purchase": {
+        "name": "Pirmasis pirkinys",
+        "description": "Įsigijote pirmąjį kuponą"
+      },
+      "first_redemption": {
+        "name": "Pirmasis panaudojimas",
+        "description": "Panaudojote pirmąjį kuponą"
+      },
+      "5_referrals": {
+        "name": "Jungėjas",
+        "description": "Pasidalinote 5 kuponais su draugais"
+      },
+      "10_referrals": {
+        "name": "Influenceris",
+        "description": "Pasidalinote 10 kuponų su draugais"
+      },
+      "streak_7": {
+        "name": "Savaitės karys",
+        "description": "Registravotės 7 dienas iš eilės"
+      },
+      "streak_30": {
+        "name": "Mėnesio meistras",
+        "description": "Registravotės 30 dienų iš eilės"
+      },
+      "review_writer": {
+        "name": "Recenzentas",
+        "description": "Paskelbėte pirmąjį atsiliepimą"
+      },
+      "big_spender": {
+        "name": "Didysis pirkėjas",
+        "description": "Iš viso kuponams išleidote daugiau nei 10 000"
+      },
+      "early_adopter": {
+        "name": "Pradininkas",
+        "description": "Prisijungėte prie GiftHub iki 2028 m."
+      },
+      "social_sharer": {
+        "name": "Socialinis dalintojas",
+        "description": "Pasidalinote kuponu socialiniuose tinkluose"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Lojalumas",
+    "notActiveTitle": "Lojalumo lygiai dar neprieinami",
+    "notActiveBody": "Už pirkinius lojalumo taškai dar nesuteikiami, o atsiskaitant netaikomos jokios lygių nuolaidos ar privalumai, todėl čia nėra rodomų lygių.",
+    "earnTodayTitle": "Ką galite uždirbti jau šiandien",
+    "earnCreditTitle": "Rekomendacijų kreditas",
+    "earnCreditBody": "Pasidalinkite kuponu. Kai draugas jį panaudos, gausite kreditą, kurį galėsite išleisti pas tą prekybininką.",
+    "earnCreditLink": "Peržiūrėti savo kreditą",
+    "earnPointsTitle": "Registravimosi taškai",
+    "earnPointsBody": "Registruokitės kasdien, kad sukurtumėte seriją, kiltumėte lygiais ir atrakintumėte ženklelius.",
+    "earnPointsLink": "Peržiūrėti pasiekimus",
+    "historyTitle": "Taškų istorija",
+    "pointsBalance": "Taškų likutis: {points}"
+  },
+  "welcome": {
+    "greeting": "Sveiki, {name}!",
+    "progress": "Pradinės sąrankos eiga",
+    "setUpSecurity": "Nustatyti 2FA arba prieigos raktą",
+    "skip": "Praleisti",
+    "next": "Toliau",
+    "getStarted": "Pradėti",
+    "steps": {
+      "welcome": {
+        "title": "Sveiki atvykę į GiftHub!",
+        "subtitle": "Štai trumpa apžvalga, ką galite daryti."
+      },
+      "discover": {
+        "title": "Atraskite pasiūlymus",
+        "subtitle": "Naršykite vietinių prekybininkų kuponus, dovanų korteles ir renginius.",
+        "features": {
+          "vouchers": "Skaitmeniniai kuponai",
+          "giftCards": "Dovanų kortelės draugams ir šeimai",
+          "nearby": "Pasiūlymai netoliese"
+        }
+      },
+      "wallet": {
+        "title": "Visi jūsų kuponai vienoje vietoje",
+        "subtitle": "Viskas, ką perkate, išsaugoma jūsų paskyroje.",
+        "features": {
+          "qr": "QR kodai greitam panaudojimui parduotuvėje",
+          "expiry": "Priminimai el. paštu prieš baigiantis kupono galiojimui"
+        }
+      },
+      "rewards": {
+        "title": "Uždirbkite apdovanojimų",
+        "subtitle": "Dalinkitės kuponais su draugais ir uždirbkite kreditą, kai jie juos panaudoja.",
+        "features": {
+          "referralCredit": "Prekybininko kreditas už sėkmingas rekomendacijas",
+          "checkIns": "Kasdienės registracijos ir serijos",
+          "badges": "Atrakinami ženkleliai"
+        }
+      },
+      "notifications": {
+        "title": "Būkite informuoti",
+        "subtitle": "Įjunkite pranešimus šiame įrenginyje."
+      },
+      "security": {
+        "title": "Apsaugokite savo paskyrą",
+        "subtitle": "Pridėkite prieigos raktą arba dviejų veiksnių autentifikavimą."
+      }
+    }
+  },
+  "labels": {
+    "free": "Nemokamai",
+    "valueOff": "-{value}",
+    "valueCredit": "{value} kredito",
+    "valueDiscount": "{value} nuolaida",
+    "demo": "Demo",
+    "demoHint": "Pavyzdinis turinys, rodantis, kaip veikia platforma. Tai nėra tikras pasiūlymas.",
+    "category": {
+      "cafe": "Kavinės ir kepyklos",
+      "beauty": "Grožis ir sveikatingumas",
+      "fitness": "Sportas ir fitnesas",
+      "events": "Renginiai ir bilietai",
+      "workshops": "Dirbtuvės ir kursai",
+      "family": "Šeimai ir vaikams",
+      "travel": "Kelionės ir apgyvendinimas",
+      "outdoor": "Gamta ir nuotykiai",
+      "other": "Kita",
+      "all": "Visos kategorijos"
+    },
+    "voucherType": {
+      "percentage": "Procentinė nuolaida",
+      "fixed_amount": "Sumos nuolaida",
+      "credit_amount": "Parduotuvės kreditas"
+    },
+    "voucherStatus": {
+      "draft": "Juodraštis",
+      "published": "Paskelbtas",
+      "paused": "Pristabdytas",
+      "ended": "Pasibaigęs",
+      "expired": "Nebegalioja"
+    },
+    "campaignStatus": {
+      "draft": "Juodraštis",
+      "active": "Aktyvi",
+      "ended": "Pasibaigusi"
+    },
+    "campaignType": {
+      "limited": "Vienkartinis pasiūlymas",
+      "weekly": "Savaitinis pasiūlymas"
+    },
+    "campaignTypeHelp": {
+      "limited": "Vyksta vieną kartą nuo pradžios iki pabaigos datos, kol yra atsargų.",
+      "weekly": "Kas savaitę pasikartojantis pasiūlymas, kuriuo klientai gali pasinaudoti kiekvieną savaitę iki pabaigos datos."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Pavyzdinis pasiūlymas · neparduodamas",
+    "notOnSale": "Dar neparduodama",
+    "purchases": "{count, plural, one {# pirkimas} few {# pirkimai} many {# pirkimo} other {# pirkimų}}",
+    "freeToClaim": "Gaukite nemokamai",
+    "onSaleNow": "Jau parduodama"
+  },
+  "account": {
+    "error": {
+      "title": "Kažkas nutiko",
+      "fallback": "Įvyko netikėta klaida.",
+      "retry": "Bandyti dar kartą"
+    },
+    "dashboard": {
+      "metaTitle": "Mano skydelis"
+    },
+    "cashback": {
+      "metaTitle": "Pinigų grąžinimas ir kreditai",
+      "title": "Pinigų grąžinimas ir kreditai",
+      "description": "Visas uždirbtas kreditas iš visų prekybininkų, pas kuriuos perkate.",
+      "lockedPending": "Užrakinta (laukiama)",
+      "used": "Panaudota",
+      "expiringTitle": "Baigiasi per 30 dienų",
+      "expiresOn": "{merchant} — galioja iki {date}",
+      "expiresSoon": "{merchant} — netrukus baigsis",
+      "byMerchant": "Pagal prekybininką",
+      "lastActivity": "Paskutinė veikla {date}",
+      "readyToSpend": "Galima išleisti",
+      "viewMerchantWallet": "Žiūrėti prekybininko piniginę →"
+    },
+    "nearby": {
+      "title": "Pasiūlymai netoliese",
+      "subtitle": "Raskite pasiūlymų ir kuponų iš netoliese esančių prekybininkų",
+      "useMyLocation": "Naudoti mano vietą",
+      "approximateLocation": "Apytikslė vieta (pagal IP)",
+      "searchRadius": "Paieškos spindulys",
+      "yourLocation": "Jūsų vieta",
+      "mapLabel": "{count, plural, one {# prekybininkas} few {# prekybininkai} many {# prekybininko} other {# prekybininkų}} {radius} km spinduliu",
+      "merchantsNearby": "{count, plural, one {# prekybininkas} few {# prekybininkai} many {# prekybininko} other {# prekybininkų}} netoliese",
+      "activeVouchers": "{count, plural, one {# aktyvus kuponas} few {# aktyvūs kuponai} many {# aktyvaus kupono} other {# aktyvių kuponų}}",
+      "emptyTitle": "Netoliese prekybininkų nėra",
+      "emptyBody": "Padidinkite paieškos spindulį arba užsukite vėliau – gali atsirasti naujų pasiūlymų jūsų apylinkėse.",
+      "expandRadius": "Išplėsti iki {radius} km",
+      "errors": {
+        "fetchFailed": "Nepavyko įkelti netoliese esančių prekybininkų. Bandykite dar kartą.",
+        "geolocationUnsupported": "Jūsų naršyklė nepalaiko geolokacijos.",
+        "permissionDenied": "Prieiga prie vietos uždrausta. Įjunkite vietos nustatymą naršyklės nustatymuose.",
+        "positionUnavailable": "Vieta nepasiekiama. Bandykite vėliau.",
+        "timeout": "Baigėsi vietos užklausos laikas. Bandykite dar kartą.",
+        "locationFailed": "Nepavyko nustatyti jūsų vietos.",
+        "ipLocationFailed": "Nepavyko nustatyti jūsų vietos."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Pranešimų nustatymai"
+    },
+    "redeem": {
+      "notFound": "Kuponas nerastas.",
+      "codeUnavailable": "Kupono kodas nepasiekiamas.",
+      "backToWallet": "Atgal į piniginę",
+      "back": "Atgal"
+    },
+    "referrals": {
+      "metaTitle": "Mano rekomendacijos",
+      "completedCount": "Užbaigta: {count}"
+    },
+    "voucherDetail": {
+      "back": "Atgal",
+      "merchantFallback": "Prekybininkas",
+      "termsTitle": "Taisyklės ir sąlygos",
+      "terms1": "Šis kuponas galioja iki aukščiau nurodytos datos. Jo negalima derinti su kitais pasiūlymais ar akcijomis, nebent nurodyta kitaip.",
+      "terms2": "Kuponą būtina pateikti pirkimo metu. Jis neturi piniginės vertės, negali būti iškeistas į grynuosius pinigus ar grąžintas.",
+      "terms3": "Prekybininkas pasilieka teisę atsisakyti priimti kuponą, jei jis atrodo nukopijuotas, pakeistas ar naudojamas nesąžiningai.",
+      "terms4": "Kilus klausimų ar problemų, kreipkitės tiesiogiai į prekybininką."
+    },
+    "vouchers": {
+      "unknownMerchant": "Nežinomas",
+      "paidAmount": "Sumokėta: {amount}",
+      "activeCount": "Aktyvūs ({count})",
+      "pastCount": "Ankstesni ({count})"
+    },
+    "voucherCard": {
+      "showQr": "Rodyti QR kodą",
+      "close": "Uždaryti",
+      "qrHint": "Parodykite šį QR kodą prekybininkui, kad panaudotumėte kuponą parduotuvėje."
+    },
+    "wallet": {
+      "metaTitle": "Mano piniginė"
+    },
+    "wishlist": {
+      "unknownItem": "Nežinoma prekė",
+      "merchant": "Prekybininkas",
+      "campaign": "Kampanija",
+      "validUntil": "Galioja iki {date}",
+      "alertOn": "Priminimas įjungtas",
+      "noAlert": "Be priminimo",
+      "view": "Žiūrėti"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Kampanija nepasiekiama",
+      "metaDescriptionFallback": "Pasiūlymas iš {merchant}.",
+      "breadcrumbLabel": "Naršymo kelias",
+      "breadcrumbCampaigns": "Kampanijos",
+      "demoNotice": "<strong>Pavyzdinis pasiūlymas.</strong> Šiame puslapyje parodyta, kaip pasiūlymas atrodo GiftHub platformoje. Įmonė ir pasiūlymas yra pavyzdiniai: čia nieko negalima nei įsigyti, nei panaudoti.",
+      "verifiedPartner": "Patvirtintas partneris",
+      "aboutTitle": "Apie šį pasiūlymą",
+      "descriptionFallback": "Ypatingas prekybininko pasiūlymas GiftHub platformoje.",
+      "howItWorks": {
+        "title": "Kaip tai veikia",
+        "claimTitle": "Gaukite kuponą",
+        "buyTitle": "Įsigykite kuponą",
+        "buyText": "Saugiai sumokėkite internetu arba gaukite kuponą nemokamai, jei pasiūlymas nemokamas.",
+        "qrTitle": "Gaukite QR kodą",
+        "qrText": "Kuponas išsaugomas jūsų GiftHub piniginėje su asmeniniu QR kodu.",
+        "showTitle": "Parodykite vietoje",
+        "showText": "{merchant} nuskenuoja kodą ir pritaiko nuolaidą."
+      },
+      "termsTitle": "Sąlygos",
+      "voucherOptionsTitle": "Kuponų pasirinkimai",
+      "voucherFallbackTitle": "Kuponas",
+      "viewVoucher": "Žiūrėti kuponą",
+      "reviewsTitle": "Atsiliepimai",
+      "purchaseLabel": "Pirkimas",
+      "buyNow": "Pirkti dabar",
+      "getFreeVoucher": "Gauti nemokamą kuponą",
+      "sampleOffer": "Pavyzdinis pasiūlymas",
+      "notOnSaleYet": "Dar neparduodama",
+      "demoNotForSale": "Tai pavyzdinis turinys, todėl jo įsigyti negalima.",
+      "noVoucherYet": "{merchant} dar nepaskelbė šio pasiūlymo kupono. Užsukite vėliau.",
+      "offerRuns": "Pasiūlymas galioja",
+      "bought": "Įsigyta",
+      "boughtCount": "{count, plural, one {# kartą} few {# kartus} many {# karto} other {# kartų}}",
+      "website": "Svetainė",
+      "allOffersFrom": "Visi {merchant} pasiūlymai",
+      "moreFrom": "Daugiau iš {merchant}"
+    },
+    "list": {
+      "allCategories": "Visos",
+      "badge": "Aktyvių kampanijų prekyvietė",
+      "heroTitle": "Atraskite karščiausius pasiūlymus Europoje",
+      "heroSubtitle": "Naršykite kuponus, dovanas ir patirtis, kurias atrinkome iš geriausių jūsų rinkos prekybininkų.",
+      "searchLabel": "Ieškoti kampanijų",
+      "searchPlaceholder": "Ieškokite kampanijų, prekybininkų ar paslaugų...",
+      "campaignCount": "{count, plural, one {<b>#</b> kampanija} few {<b>#</b> kampanijos} many {<b>#</b> kampanijos} other {<b>#</b> kampanijų}}",
+      "voucherCount": "{count, plural, one {<b>#</b> parduodamas kuponas} few {<b>#</b> parduodami kuponai} many {<b>#</b> parduodamo kupono} other {<b>#</b> parduodamų kuponų}}",
+      "merchantCount": "{count, plural, one {<b>#</b> prekybininkas} few {<b>#</b> prekybininkai} many {<b>#</b> prekybininko} other {<b>#</b> prekybininkų}}",
+      "categoriesLabel": "Kategorijos",
+      "unavailableTitle": "Kampanijos laikinai nepasiekiamos",
+      "unavailableText": "Nepavyko prisijungti prie duomenų bazės. Netrukus bandykite dar kartą.",
+      "emptyTitle": "Pasiūlymų nerasta",
+      "emptyText": "Pabandykite kitą paiešką arba pasirinkite kitą kategoriją.",
+      "tryAgain": "Bandyti dar kartą",
+      "clearFilters": "Išvalyti filtrus"
+    },
+    "listError": {
+      "title": "Nepavyko įkelti kampanijų",
+      "fallbackMessage": "Įkeliant kampanijas įvyko netikėta klaida.",
+      "tryAgain": "Bandyti dar kartą"
+    },
+    "filters": {
+      "sortBy": "Rikiuoti pagal",
+      "sort": {
+        "newest": "Naujausi",
+        "oldest": "Seniausi",
+        "priceLow": "Kaina: nuo mažiausios",
+        "priceHigh": "Kaina: nuo didžiausios",
+        "popular": "Populiariausi",
+        "expiring": "Greitai baigsis"
+      },
+      "merchant": "Prekybininkas",
+      "allMerchants": "Visi prekybininkai",
+      "minPrice": "Min. kaina",
+      "minPricePlaceholder": "Min. €",
+      "maxPrice": "Maks. kaina",
+      "maxPricePlaceholder": "Maks. €"
+    },
+    "tenantList": {
+      "title": "Kuponai",
+      "subtitle": "Aktyvūs {merchant} pasiūlymai.",
+      "empty": "Kuponų dar nėra.",
+      "voucher": "Kuponas",
+      "viewVoucher": "Žiūrėti kuponą"
+    },
+    "deals": {
+      "metaTitle": "Pasiūlymai",
+      "metaDescription": "Atraskite geriausius kuponų pasiūlymus"
+    },
+    "campaignShare": {
+      "share": "Dalintis",
+      "copied": "Nukopijuota",
+      "linkCopied": "Nuoroda nukopijuota",
+      "copyFailed": "Nepavyko nukopijuoti"
+    },
+    "shareSheet": {
+      "share": "Dalintis",
+      "title": {
+        "voucher": "Dalintis šiuo kuponu",
+        "campaign": "Dalintis šia kampanija",
+        "merchant": "Dalintis šiuo prekybininku"
+      },
+      "close": "Uždaryti",
+      "referralShareText": "{title} – dalinkitės ir susigrąžinkite 10 %!",
+      "referralNote": "<b>Dalinkitės ir uždirbkite 10 %</b>, kai jūsų draugai panaudos kuponą!",
+      "targets": {
+        "email": "El. paštas",
+        "copy": "Kopijuoti nuorodą"
+      },
+      "copied": "Nukopijuota!",
+      "linkCopiedToClipboard": "Nuoroda nukopijuota į iškarpinę!",
+      "linkCopied": "Nuoroda nukopijuota!",
+      "shareLinkLabel": "Bendrinimo nuoroda",
+      "copyLink": "Kopijuoti nuorodą"
+    },
+    "wishlistButton": {
+      "add": "Įtraukti į norų sąrašą",
+      "remove": "Pašalinti iš norų sąrašo"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# žvaigždutė} few {# žvaigždutės} many {# žvaigždutės} other {# žvaigždučių}}"
+    },
+    "form": {
+      "title": "Parašyti atsiliepimą",
+      "ratingLabel": "Įvertinimas",
+      "titleLabel": "Pavadinimas (neprivalomas)",
+      "titlePlaceholder": "Trumpai apibūdinkite savo patirtį",
+      "commentLabel": "Komentaras (neprivalomas)",
+      "commentPlaceholder": "Pasidalinkite savo patirtimi...",
+      "submit": "Pateikti atsiliepimą",
+      "submitting": "Pateikiama...",
+      "ratingRequired": "Pasirinkite įvertinimą",
+      "submitFailed": "Nepavyko pateikti atsiliepimo",
+      "alreadyReviewed": "Jūs jau įvertinote šį elementą",
+      "signInRequired": "Prisijunkite, kad parašytumėte atsiliepimą",
+      "thankYou": "Ačiū už jūsų atsiliepimą!",
+      "writeAnother": "Parašyti dar vieną atsiliepimą"
+    },
+    "list": {
+      "sort": {
+        "newest": "Naujausi",
+        "highest": "Aukščiausiai įvertinti",
+        "helpful": "Naudingiausi"
+      },
+      "signInToReview": "Prisijunkite, kad parašytumėte atsiliepimą",
+      "loadFailed": "Nepavyko įkelti atsiliepimų.",
+      "tryAgain": "Bandyti dar kartą",
+      "empty": "Atsiliepimų dar nėra.",
+      "anonymous": "Anonimas",
+      "verified": "Patvirtinta",
+      "helpfulButton": "Naudinga ({count})",
+      "foundHelpful": "{count} tai pasirodė naudinga",
+      "previous": "Ankstesnis",
+      "next": "Kitas",
+      "pageOf": "{current} psl. iš {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Atšaukti",
+      "saving": "Išsaugoma…",
+      "somethingWentWrong": "Kažkas nutiko"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Neprisijungta",
+      "unauthorized": "Neturite teisių",
+      "tooManyAttempts": "Per daug bandymų",
+      "validationFailed": "Patikrinimas nepavyko",
+      "unexpected": "Įvyko netikėta klaida",
+      "databaseFailed": "Duomenų bazės operacija nepavyko",
+      "serviceUnavailable": "Paslauga laikinai nepasiekiama",
+      "newPasswordTooShort": "Naujas slaptažodis turi būti bent 8 simbolių",
+      "userNotFound": "Vartotojas nerastas",
+      "currentPasswordRequired": "Būtina įvesti dabartinį slaptažodį",
+      "currentPasswordIncorrect": "Neteisingas dabartinis slaptažodis",
+      "deletionUnavailable": "Paskyros ištrynimas laikinai negalimas. Susisiekite su pagalbos komanda.",
+      "totpAlreadyEnabledReconfigure": "2FA jau įjungta. Norėdami nustatyti iš naujo, pirmiausia ją išjunkite.",
+      "sixDigitCodeRequired": "Būtinas 6 skaitmenų kodas",
+      "totpSetupMissing": "TOTP nustatymas nerastas. Pirmiausia pradėkite nustatymo procesą.",
+      "totpAlreadyEnabled": "2FA jau įjungta",
+      "invalidSetupCode": "Neteisingas kodas. Patikrinkite autentifikavimo programėlę ir bandykite dar kartą.",
+      "verificationCodeRequired": "Būtinas patvirtinimo kodas",
+      "totpNotEnabled": "2FA šiuo metu neįjungta",
+      "invalidDisableCode": "Neteisingas kodas. Įveskite dabartinį TOTP kodą arba atsarginį kodą.",
+      "passkeyOptionsFailed": "Nepavyko gauti registracijos parinkčių",
+      "passkeyGenerateOptionsFailed": "Nepavyko sugeneruoti registracijos parinkčių",
+      "registrationFailed": "Registracija nepavyko",
+      "passkeyRegistrationFailed": "Nepavyko užregistruoti prieigos rakto",
+      "passkeyChallengeExpired": "Užklausa nebegalioja arba nerasta",
+      "verificationFailed": "Patvirtinimas nepavyko",
+      "passkeyVerifyFailed": "Nepavyko patvirtinti registracijos"
+    },
+    "settings": {
+      "joinedOn": "Prisijungė {date}",
+      "joinedRecently": "Prisijungė neseniai"
+    },
+    "profileForm": {
+      "nameLabel": "Vardas",
+      "namePlaceholder": "Jūsų vardas",
+      "emailLabel": "El. paštas",
+      "emailLocked": "El. pašto adreso pakeisti negalima",
+      "save": "Išsaugoti pakeitimus",
+      "updated": "Profilis atnaujintas",
+      "nameRequired": "Vardas privalomas",
+      "updateFailed": "Nepavyko atnaujinti profilio"
+    },
+    "passwordForm": {
+      "currentLabel": "Dabartinis slaptažodis",
+      "newLabel": "Naujas slaptažodis",
+      "setLabel": "Nustatyti slaptažodį",
+      "confirmLabel": "Pakartokite slaptažodį",
+      "showPassword": "Rodyti slaptažodį",
+      "hidePassword": "Slėpti slaptažodį",
+      "change": "Keisti slaptažodį",
+      "set": "Nustatyti slaptažodį",
+      "updated": "Slaptažodis sėkmingai atnaujintas",
+      "tooShort": "Slaptažodis turi būti bent {min} simbolių",
+      "mismatch": "Slaptažodžiai nesutampa",
+      "changeFailed": "Nepavyko pakeisti slaptažodžio"
+    },
+    "deleteDialog": {
+      "trigger": "Ištrinti paskyrą",
+      "title": "Ištrinti jūsų paskyrą?",
+      "description": "Šis veiksmas negrįžtamas. Jūsų profilis, sesijos ir pranešimų nustatymai bus ištrinti. Pirkimų istorija bus anonimizuota.",
+      "typeToConfirm": "Įveskite <strong>{word}</strong>, kad patvirtintumėte:",
+      "confirm": "Ištrinti visam laikui",
+      "deleting": "Trinama…",
+      "failed": "Nepavyko ištrinti paskyros"
+    },
+    "passkeys": {
+      "title": "Prieigos raktai",
+      "description": "Prisijunkite be slaptažodžio naudodami įrenginio piršto atspaudą, veido atpažinimą arba PIN kodą.",
+      "add": "Pridėti prieigos raktą",
+      "namePlaceholder": "pvz., „MacBook Touch ID“",
+      "addSubmit": "Pridėti",
+      "adding": "Pridedama…",
+      "unsupported": "Ši naršyklė nepalaiko prieigos raktų. Išbandykite naujesnę Chrome, Safari arba Edge versiją.",
+      "empty": "Prieigos raktų dar nėra. Pridėkite raktą, kad galėtumėte prisijungti be slaptažodžio.",
+      "devicePasskey": "Įrenginio prieigos raktas",
+      "passkey": "Prieigos raktas",
+      "added": "Pridėta {date}",
+      "lastUsed": "Paskutinį kartą naudota {date}",
+      "synced": "Sinchronizuota",
+      "removeConfirm": "Pašalinti?",
+      "remove": "Pašalinti",
+      "removeLabel": "Pašalinti prieigos raktą",
+      "loadFailed": "Nepavyko įkelti prieigos raktų",
+      "removeFailed": "Nepavyko pašalinti prieigos rakto"
+    },
+    "security": {
+      "title": "Sauga",
+      "description": "Valdykite dviejų veiksnių autentifikavimą ir saugos nustatymus",
+      "loading": "Kraunama...",
+      "backToSettings": "Atgal į nustatymus",
+      "enabledMessage": "Dviejų veiksnių autentifikavimas įjungtas!",
+      "disabledMessage": "Dviejų veiksnių autentifikavimas išjungtas",
+      "errors": {
+        "statusLoadFailed": "Nepavyko įkelti dviejų veiksnių autentifikavimo būsenos",
+        "setupFailed": "Nepavyko pradėti nustatymo",
+        "verifyFailed": "Patvirtinimas nepavyko",
+        "disableFailed": "Nepavyko išjungti 2FA"
+      },
+      "status": {
+        "title": "Dviejų veiksnių autentifikavimas",
+        "enabledBody": "Jūsų paskyra apsaugota autentifikavimo programėle.",
+        "disabledBody": "Papildomai apsaugokite paskyrą – prisijungiant bus prašoma kodo iš autentifikavimo programėlės.",
+        "enabled": "Įjungta",
+        "notEnabled": "Neįjungta"
+      },
+      "setup": {
+        "title": "Nustatyti autentifikavimo programėlę",
+        "description": "Patvirtinimo kodams generuoti naudokite programėlę, pvz., Google Authenticator, Authy ar 1Password.",
+        "enable": "Įjungti 2FA"
+      },
+      "scan": {
+        "title": "Nuskenuokite QR kodą arba įveskite raktą rankiniu būdu",
+        "qrAlt": "Nuskenuokite šį QR kodą autentifikavimo programėle",
+        "manualKey": "Arba įveskite šį raktą rankiniu būdu:",
+        "copySecret": "Kopijuoti slaptąjį raktą"
+      },
+      "verify": {
+        "title": "Įveskite patvirtinimo kodą",
+        "codeLabel": "6 skaitmenų kodas iš programėlės",
+        "submit": "Patvirtinti ir įjungti"
+      },
+      "backupCodes": {
+        "title": "Išsaugokite atsarginius kodus",
+        "description": "Laikykite šiuos kodus saugioje vietoje. Jei prarasite prieigą prie autentifikavimo programėlės, galėsite prisijungti vienu iš šių kodų. Kiekvieną kodą galima panaudoti tik vieną kartą.",
+        "copy": "Kopijuoti kodus",
+        "copied": "Nukopijuota!",
+        "download": "Atsisiųsti",
+        "done": "Baigta"
+      },
+      "backupFile": {
+        "title": "GiftHub – dviejų veiksnių autentifikavimo atsarginiai kodai",
+        "instructions": "Išsaugokite šiuos kodus saugioje vietoje. Kiekvieną kodą galima panaudoti tik vieną kartą.",
+        "generated": "Sugeneruota: {date}"
+      },
+      "disable": {
+        "title": "Išjungti dviejų veiksnių autentifikavimą",
+        "description": "Taip pašalinsite papildomą paskyros apsaugos lygmenį.",
+        "button": "Išjungti 2FA",
+        "confirmTitle": "Patvirtinkite 2FA išjungimą",
+        "confirmDescription": "Įveskite dabartinį 6 skaitmenų kodą iš autentifikavimo programėlės arba atsarginį kodą.",
+        "codeLabel": "Patvirtinimo kodas",
+        "codePlaceholder": "000000 arba XXXX-XXXX",
+        "confirm": "Patvirtinti išjungimą"
+      },
+      "quickLinks": {
+        "title": "Saugos nuorodos",
+        "sessions": "Peržiūrėti aktyvias sesijas",
+        "changePassword": "Keisti slaptažodį"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Mokėkite už rezultatus, ne už pasiekiamumą. Prekybininkui priklausanti rekomendacijų infrastruktūra: firminiai kuponai ir parduotuvės kreditas."
+    },
+    "error": {
+      "unexpected": "Įvyko netikėta klaida."
+    },
+    "hero": {
+      "badge": "Kuponai ir rekomendacijos vietos verslui",
+      "title": "Jūsų klientai parduoda <highlight>jūsų naujiems klientams</highlight>",
+      "subtitle": "Kurkite kuponų kampanijas. Jūsų klientai jomis dalinasi, uždirba kreditų ir atveda draugų. Sekite kiekvieną rekomendaciją. Matykite tikslią kiekvieno naujo kliento kainą.",
+      "ctaMerchant": "Pradėti kaip prekybininkas",
+      "ctaExplore": "Naršyti kampanijas",
+      "noCardRequired": "Kredito kortelė nereikalinga",
+      "freeTrial": "{days} d. nemokamas bandomasis laikotarpis",
+      "cancelAnytime": "Atšaukite bet kada"
+    },
+    "stats": {
+      "activeCampaigns": "Aktyvios kampanijos",
+      "merchants": "Prekybininkai",
+      "processedValue": "Apdorota vertė"
+    },
+    "merchantsTitle": "Platformos prekybininkai",
+    "values": {
+      "referral": {
+        "title": "Rekomendacijų variklis",
+        "description": "Jūsų klientai dalinasi pasiūlymais ir automatiškai atveda naujų klientų"
+      },
+      "vouchers": {
+        "title": "Skaitmeniniai kuponai",
+        "description": "Per kelias minutes sukurkite nuolaidų kampanijas su lanksčiomis taisyklėmis"
+      },
+      "qr": {
+        "title": "Panaudojimas su QR",
+        "description": "Nuskenuokite ir patvirtinkite parduotuvėje vien telefonu. Jokios papildomos įrangos"
+      },
+      "analytics": {
+        "title": "Analitika realiuoju laiku",
+        "description": "Tiksliai matykite, kiek kiekviena kampanija kainuoja ir ką atneša. Jokių spėlionių"
+      }
+    },
+    "howItWorks": {
+      "title": "Kaip tai veikia",
+      "subtitle": "Pradėkite per kelias minutes – tik trys paprasti žingsniai",
+      "steps": {
+        "create": {
+          "title": "Sukurkite kampaniją",
+          "description": "Sukurkite kuponą per 2 minutes: nuolaida, datos, maksimalus panaudojimų skaičius. Viskas."
+        },
+        "share": {
+          "title": "Klientai juo dalinasi",
+          "description": "Kiekvienas pirkėjas gauna rekomendacijos nuorodą. Jis ja dalinasi, uždirba kredito ir atveda draugų."
+        },
+        "grow": {
+          "title": "Stebėkite augimą",
+          "description": "Sekite kiekvieną rekomendacijų grandinę, matykite naujo kliento kainą, matuokite ROI."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Populiarios kampanijos",
+      "subtitle": "Atraskite kuponus, pasiūlymus ir patirtis visoje Europoje",
+      "showing": "Rodoma {count, plural, one {# aktyvi kampanija} few {# aktyvios kampanijos} many {# aktyvios kampanijos} other {# aktyvių kampanijų}}.",
+      "showingWithOnSale": "Rodoma {count, plural, one {# aktyvi kampanija} few {# aktyvios kampanijos} many {# aktyvios kampanijos} other {# aktyvių kampanijų}} – {onSale} jau parduodamos.",
+      "emptyTitle": "Šiuo metu aktyvių kampanijų nėra",
+      "emptyBody": "Pasiūlymai čia atsiras, kai tik prekybininkai juos paskelbs.",
+      "viewAll": "Žiūrėti visas kampanijas"
+    },
+    "pricing": {
+      "title": "Paprasta ir skaidri kainodara",
+      "subtitle": "Pasirinkite jūsų verslui tinkantį planą. Metinis planas kainuoja kaip 10 mėnesių.",
+      "billingPeriod": "Atsiskaitymo laikotarpis",
+      "monthly": "Mėnesinis",
+      "annual": "Metinis",
+      "save": "Sutaupykite 17 %",
+      "mostPopular": "Populiariausias",
+      "perMonth": "/mėn.",
+      "perYear": "{price}/metus (2 mėnesiai nemokamai)",
+      "startTrial": "Pradėti nemokamą bandymą",
+      "footer": "Visuose planuose – {days} d. nemokamas bandomasis laikotarpis · {percent} % transakcijos mokestis nuo kuponų pardavimų · Atšaukite bet kada",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# kuponas/mėn.} few {# kuponai/mėn.} many {# kupono/mėn.} other {# kuponų/mėn.}}",
+        "activeCampaigns": "{count, plural, one {# aktyvi kampanija} few {# aktyvios kampanijos} many {# aktyvios kampanijos} other {# aktyvių kampanijų}}",
+        "teamMembers": "{count, plural, one {# komandos narys} few {# komandos nariai} many {# komandos nario} other {# komandos narių}}",
+        "qrRedemption": "Panaudojimas QR kodu",
+        "basicAnalytics": "Pagrindinė analitika",
+        "advancedAnalytics": "Išplėstinė analitika",
+        "customDomain": "Nuosavas domenas",
+        "promoBoosts": "Reklaminiai postūmiai (el. paštas + push)",
+        "unlimitedVouchers": "Neriboti kuponai",
+        "unlimitedCampaigns": "Neribotos kampanijos",
+        "unlimitedTeamMembers": "Neriboti komandos nariai",
+        "everythingInPlan": "Viskas, kas yra {plan} plane"
+      }
+    },
+    "calculator": {
+      "title": "Apskaičiuokite savo ROI",
+      "subtitle": "Tempkite slankiklius ir pažiūrėkite, kiek galėtumėte uždirbti su GiftHub",
+      "monthlyPurchases": "Kuponų pirkimai per mėnesį",
+      "purchasesValue": "{count, plural, one {# pirkimas} few {# pirkimai} many {# pirkimo} other {# pirkimų}}",
+      "averageTicket": "Vidutinė čekio vertė",
+      "referralRate": "Rekomendacijų konversija",
+      "monthlyRevenue": "Mėnesio pajamos",
+      "referralCustomers": "Nauji klientai per rekomendacijas",
+      "perMonthValue": "{value}/mėn.",
+      "referralRevenue": "Pajamos iš rekomendacijų",
+      "estimatedRoi": "Numatomas ROI",
+      "platformCost": "Platformos kaina",
+      "platformCostValue": "{plan}/mėn. planas + {fees} mokesčių ({percent} %) = <strong>{total}/mėn.</strong>",
+      "disclaimer": "Tik iliustracija pagal jūsų įvestas reikšmes – ne prognozė."
+    },
+    "why": {
+      "title": "Kodėl prekybininkai renkasi GiftHub",
+      "body": "Plėskite klientų ratą ir didinkite pajamas – išlaikydami maržas ir patys valdydami ryšius su klientais.",
+      "benefits": {
+        "referralEngine": "Integruotas rekomendacijų variklis kiekvienoje kampanijoje",
+        "analytics": "Analitika realiuoju laiku: kliento pritraukimo kaina, ROI",
+        "qr": "Panaudojimas QR kodu – nereikia POS įrangos",
+        "languages": "Prieinama {count, plural, one {# kalba} few {# kalbomis} many {# kalbos} other {# kalbų}}",
+        "flatPlan": "Fiksuotas mėnesinis planas – ne pajamų dalis, kaip Groupon",
+        "ownData": "Jūsų klientų duomenys priklauso jums",
+        "fee": "{percent} % transakcijos mokestis nuo kuponų pardavimų, jokių paslėptų išlaidų"
+      }
+    },
+    "compare": {
+      "title": "Groupon prieš GiftHub",
+      "hint": "Tempkite, kad palygintumėte",
+      "beforeTitle": "Su Groupon",
+      "afterTitle": "Su GiftHub",
+      "sliderLabel": "Palyginti {before} ir {after}",
+      "before": {
+        "revenueShare": "Didelę pajamų dalį pasiima platforma",
+        "ownsRelationship": "Ryšį su klientu valdo platforma",
+        "noDataAccess": "Jokios prieigos prie klientų duomenų",
+        "raceToBottom": "Kainų mažinimo lenktynės",
+        "lostBrand": "Prarastas prekės ženklo tapatumas"
+      },
+      "after": {
+        "flatFee": "Fiksuotas {minPrice}–{maxPrice}/mėn. + {percent} % mokestis",
+        "ownData": "Visi klientų duomenys priklauso jums",
+        "referralEngine": "Integruotas rekomendacijų variklis",
+        "yourBrand": "Jūsų prekės ženklas, jūsų taisyklės",
+        "roiAnalytics": "ROI analitika realiuoju laiku"
+      }
+    },
+    "faq": {
+      "title": "Dažniausiai užduodami klausimai",
+      "subtitle": "Viskas, ką reikia žinoti apie GiftHub",
+      "items": {
+        "groupon": {
+          "question": "Kuo tai skiriasi nuo Groupon?",
+          "answer": "Groupon tipo pasiūlymų svetainės paprastai pasilieka didelę kiekvieno pardavimo dalį ir valdo ryšį su klientu. Mes taikome fiksuotą mėnesio mokestį (nuo {price}/mėn.) ir {percent} % nuo kuponų pardavimų. Klientai, duomenys ir maržos lieka jums."
+        },
+        "referral": {
+          "question": "Kaip veikia rekomendacijų sistema?",
+          "answer": "Kiekvienas kuponą įsigijęs klientas gauna unikalią rekomendacijos nuorodą. Kai jis ja pasidalina ir draugas įsigyja kuponą, abu uždirba kredito. Kiekviena rekomendacijų grandinė sekama, todėl tiksliai matote, kaip jus randa nauji klientai."
+        },
+        "trial": {
+          "question": "Kas vyksta pasibaigus {days} d. bandomajam laikotarpiui?",
+          "answer": "Pasirenkate planą ({starter}, {pro} arba {scale}). Jei neužsiprenumeruosite, jūsų jau paskelbti kuponai klientams liks aktyvūs, tačiau naujų kampanijų kurti negalėsite, kol neužsiprenumeruosite."
+        },
+        "qr": {
+          "question": "Ar panaudojimui QR kodu reikia specialios įrangos?",
+          "answer": "Ne. Jūsų darbuotojai atidaro mobilųjį skenerį bet kurio telefono naršyklėje, nuskenuoja kliento QR kodą – ir viskas. Nereikia nei atsisiųsti programėlės, nei integruoti su POS."
+        },
+        "fee": {
+          "question": "Kas yra {percent} % transakcijos mokestis?",
+          "answer": "Kai klientas platformoje įsigyja kuponą, iš išmokos išskaičiuojame {percent} %. Jokių kitų platformos mokesčių be jūsų plano nėra."
+        }
+      }
+    },
+    "cta": {
+      "title": "Nustokite nuomotis klientus. Užsiauginkite savo armiją.",
+      "body": "Sukurkite pirmąją kampaniją per kelias minutes. Visa kita padarys jūsų klientai. {days} d. nemokamas bandomasis laikotarpis.",
+      "getStarted": "Pradėti nemokamai",
+      "browse": "Naršyti kampanijas"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Atsiskaitymo demonstracija",
+      "subtitle": "Demonstracinis atsiskaitymo puslapis",
+      "creditBalance": "Kredito likutis",
+      "availableAmount": "Galima naudoti {amount}",
+      "lockedAmount": "Užrakinta {amount}",
+      "orderSummary": "Užsakymo suvestinė",
+      "orderAmount": "Užsakymo suma",
+      "creditToApply": "Pritaikomas kreditas",
+      "maxAmount": "Maks.: {amount}",
+      "subtotal": "Tarpinė suma",
+      "creditAppliedLine": "Pritaikytas kreditas",
+      "total": "Iš viso",
+      "processing": "Apdorojama...",
+      "submit": "Pritaikyti kreditą ir užbaigti užsakymą",
+      "creditApplied": "Kreditas sėkmingai pritaikytas! Užsakymo suma: {total}",
+      "errors": {
+        "missingAmounts": "Įveskite užsakymo sumą ir kredito sumą",
+        "applyFailed": "Nepavyko pritaikyti kredito"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} – galimi kuponai",
+      "emptyTitle": "Kuponų nėra",
+      "emptyDescription": "Užsukite vėliau – {merchant} gali paskelbti naujų kuponų pasiūlymų.",
+      "specialOffer": "Ypatingas pasiūlymas",
+      "validUntil": "Galioja iki {date}",
+      "viewAndShare": "Žiūrėti ir dalintis"
+    },
+    "wallet": {
+      "subtitle": "Kreditų piniginė",
+      "availableToUse": "Galima naudoti",
+      "useCredit": "Naudoti kreditą",
+      "noCreditToUse": "Nėra naudotino kredito",
+      "locked": "Užrakinta",
+      "lockedDescription": "Atrakinama, kai patvirtinamas susijęs pirkimas.",
+      "historyTitle": "Kreditų istorija",
+      "historyDescription": "{merchant} kreditų žurnalas",
+      "historyEmpty": "Kreditų istorijos dar nėra.",
+      "expires": "Galioja iki {date}",
+      "creditStatus": {
+        "locked": "užrakinta",
+        "available": "galima naudoti",
+        "used": "panaudota",
+        "expired": "nebegalioja",
+        "reversed": "atšaukta"
+      }
+    },
+    "error": {
+      "title": "Kažkas nutiko",
+      "description": "Nepavyko įkelti portalo. Atnaujinkite puslapį arba bandykite vėliau.",
+      "backToPortal": "Atgal į portalą"
+    },
+    "payments": {
+      "voucherFallback": "Kuponas",
+      "status": {
+        "pending": "laukiama",
+        "paid": "apmokėta",
+        "failed": "nepavyko",
+        "refunded": "grąžinta"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "laisvas",
+        "sold": "parduotas",
+        "used": "panaudotas",
+        "cancelled": "atšauktas",
+        "refunded": "grąžintas"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Kažkas nutiko",
+      "description": "Įkeliant šį puslapį įvyko klaida."
+    },
+    "notFound": {
+      "metaTitle": "Puslapis nerastas"
+    },
+    "header": {
+      "mainNavLabel": "Pagrindinis",
+      "signIn": "Prisijungti"
+    },
+    "footer": {
+      "navLabel": "Poraštė",
+      "copyright": "© {year} GiftHub. Sukurta Europoje."
+    },
+    "navLinks": {
+      "campaigns": "Kampanijos",
+      "merchants": "Prekybininkai",
+      "explore": "Atrasti",
+      "search": "Paieška",
+      "faq": "DUK",
+      "contact": "Kontaktai",
+      "privacy": "Privatumas",
+      "terms": "Sąlygos",
+      "home": "Pradžia",
+      "about": "Apie mus",
+      "vouchers": "Kuponai",
+      "shop": "Parduotuvė",
+      "rent": "Nuoma"
+    },
+    "chat": {
+      "openAssistant": "Atidaryti automatinį asistentą",
+      "closeAssistant": "Uždaryti automatinį asistentą",
+      "dialogLabel": "GiftHub automatinis asistentas",
+      "title": "GiftHub asistentas",
+      "subtitle": "Automatinis asistentas",
+      "newChat": "Naujas pokalbis",
+      "closeChat": "Uždaryti pokalbį",
+      "greeting": "Sveiki!",
+      "intro": "Esu automatinis asistentas. Klauskite apie kuponus, dovanų korteles, bilietus ar savo paskyrą.",
+      "inputLabel": "Žinutė automatiniam asistentui",
+      "placeholder": "Rašykite žinutę...",
+      "send": "Siųsti žinutę",
+      "sendError": "Atsiprašome, nepavyko išsiųsti jūsų žinutės. Bandykite dar kartą."
+    },
+    "cookies": {
+      "regionLabel": "Slapukų nuostatos",
+      "intro": "Naudojame slapukus, kad pagerintume jūsų patirtį. Būtinieji slapukai visada aktyvūs; kuriuos papildomus leisti, renkatės jūs. <link>Privatumo politika</link>",
+      "optionalLegend": "Papildomi slapukai",
+      "necessary": "Būtinieji",
+      "alwaysOn": "(visada įjungti)",
+      "analytics": "Analitikos",
+      "marketing": "Rinkodaros",
+      "preferences": "Nuostatų",
+      "saveError": "Nepavyko išsaugoti jūsų pasirinkimo. Bandykite dar kartą.",
+      "acceptAll": "Priimti visus",
+      "declineOptional": "Atmesti papildomus",
+      "customize": "Tinkinti",
+      "savePreferences": "Išsaugoti nuostatas"
+    },
+    "currency": {
+      "selectLabel": "Pasirinkti valiutą"
+    },
+    "language": {
+      "selectLabel": "Pasirinkti kalbą",
+      "selectInterfaceLabel": "Pasirinkti sąsajos kalbą ({language})",
+      "unknown": "nežinoma",
+      "interfaceOnly": "Keičia tik sąsajos tekstą",
+      "uiName": "{name} (sąsaja)"
+    },
+    "country": {
+      "selectLabel": "Pasirinkti prekyvietę ({country})",
+      "heading": "Pasirinkite prekyvietę",
+      "description": "Keičia tik šalį, valiutą ir rinkos duomenis",
+      "tip": "<strong>Patarimas:</strong> prekyvietė filtruoja duomenis ir valiutą. Sąsajos kalba nustatoma atskirai."
+    },
+    "roleSwitcher": {
+      "myDashboard": "Mano skydelis",
+      "platformAdmin": "Platformos administratorius",
+      "admin": "Administratorius",
+      "staff": "Darbuotojas",
+      "switchContext": "Perjungti aplinką"
+    },
+    "legalEntity": {
+      "operator": "Operatorius",
+      "registeredAddress": "Registracijos adresas",
+      "registryCode": "Įmonės kodas",
+      "operatorPlaceholder": "[įmonės pavadinimas bus pridėtas]",
+      "addressPlaceholder": "[registracijos adresas bus pridėtas]",
+      "registryCodePlaceholder": "[įmonės kodas bus pridėtas]"
+    },
+    "theme": {
+      "dark": "Tamsus režimas",
+      "light": "Šviesus režimas",
+      "system": "Sistemos tema"
+    },
+    "voiceSearch": {
+      "start": "Pradėti paiešką balsu",
+      "stop": "Nustoti klausytis",
+      "tooltip": "Paieška balsu",
+      "tapToStop": "Bakstelėkite, kad sustabdytumėte"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Nepavyko įkelti katalogo",
+      "description": "Įkeliant prekybininkus įvyko netikėta klaida.",
+      "retry": "Bandyti dar kartą"
+    },
+    "hub": {
+      "metaTitle": "Prekybininkai",
+      "metaDescription": "Vietos verslai GiftHub platformoje ir jų dabartiniai pasiūlymai",
+      "title": "Vietos prekybininkai",
+      "subtitle": "Kavinės, salonai, studijos ir dar daugiau: pažiūrėkite, kas yra GiftHub ir ką jie šiuo metu siūlo.",
+      "loadError": "Nepavyko įkelti prekybininkų",
+      "loadErrorHint": "Netrukus bandykite dar kartą.",
+      "retry": "Bandyti dar kartą",
+      "emptyTitle": "Prekybininkų dar nėra",
+      "emptyHint": "Verslai čia atsiras, kai tik prisijungs.",
+      "joinCta": "Prisijungti kaip prekybininkas",
+      "noOffers": "Šiuo metu pasiūlymų nėra",
+      "offerCount": "{count, plural, one {# pasiūlymas} few {# pasiūlymai} many {# pasiūlymo} other {# pasiūlymų}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Nerasta",
+      "metaDescription": "Naršykite {name} kuponus, kampanijas ir pasiūlymus",
+      "offerCount": "{count, plural, one {# pasiūlymas} few {# pasiūlymai} many {# pasiūlymo} other {# pasiūlymų}}",
+      "website": "Svetainė",
+      "contact": "Kontaktai",
+      "sampleNotice": "<strong>Pavyzdinis verslas.</strong> Šiame puslapyje parodyta, kaip prekybininkas atrodo GiftHub platformoje. Jo pasiūlymai yra pavyzdiniai ir jų įsigyti negalima.",
+      "offersHeading": "Pasiūlymai",
+      "noOffers": "Šiuo metu pasiūlymų nėra",
+      "noOffersHint": "Nauji {name} pasiūlymai atsiras čia.",
+      "browseOther": "Naršyti kitus pasiūlymus",
+      "validUntil": "Galioja iki {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Kampanijos",
+      "mainNav": "Pagrindinis",
+      "signIn": "Prisijungti"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Atraskite vietos prekybininkus",
+      "hubHeroSubtitle": "Naršykite GiftHub prekybininkų kampanijas, kuponus, nuomos pasiūlymus ir parduotuves.",
+      "tenantHeroSubtitle": "Prekės, nuoma ir kuponai vienoje vietoje.",
+      "browseCampaigns": "Naršyti kampanijas",
+      "getStarted": "Pradėti",
+      "featuredMerchants": "Rekomenduojami prekybininkai",
+      "noMerchants": "Prekybininkų dar nėra.",
+      "visitNamed": "Aplankyti {name}",
+      "visitMerchant": "Aplankyti prekybininką",
+      "featuredProducts": "Rekomenduojamos prekės",
+      "noProducts": "Prekių nėra.",
+      "rentalHighlights": "Išskirtiniai nuomos pasiūlymai",
+      "noRentals": "Nuomos pasiūlymų nėra.",
+      "perDay": "{price} / d.",
+      "activeVouchers": "Aktyvūs kuponai",
+      "noStandaloneVouchers": "Atskirų kuponų čia šiuo metu nėra – <link>naršykite {count, plural, one {# aktyvią kampaniją} few {# aktyvias kampanijas} many {# aktyvios kampanijos} other {# aktyvių kampanijų}}</link>.",
+      "noVouchers": "Kuponų nėra.",
+      "voucher": "Kuponas",
+      "viewVoucher": "Žiūrėti kuponą",
+      "stats": {
+        "campaigns": "Kampanijos",
+        "vouchers": "Kuponai",
+        "products": "Prekės",
+        "rentals": "Nuoma"
+      },
+      "statsUnavailable": "Statistika nepasiekiama."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Parduotuvė",
+      "subtitle": "Naršykite prekes ir dėkite jas į krepšelį."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Atsiskaitymo ketinimas sukurtas",
+      "intentCreatedDescription": "Ketinimas {id} sumai {amount}",
+      "checkoutErrorTitle": "Atsiskaitymo klaida",
+      "checkoutErrorDescription": "Nepavyko sukurti atsiskaitymo ketinimo.",
+      "empty": "Prekių dar nėra.",
+      "productHighlight": "Išskirtinė prekė",
+      "add": "Pridėti",
+      "cart": "Krepšelis",
+      "cartEmpty": "Krepšelis tuščias.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Pašalinti",
+      "total": "Iš viso",
+      "creatingIntent": "Kuriamas ketinimas...",
+      "checkoutIntent": "Atsiskaitymo ketinimas"
+    },
+    "rentPage": {
+      "metaTitle": "Nuomos prekyvietė",
+      "metaDescription": "Naršykite nuomojamus daiktus",
+      "title": "Nuoma",
+      "subtitle": "Pasirinkite datas ir užklauskite nuomos kainos."
+    },
+    "rentClient": {
+      "selectDatesError": "Pasirinkite nuomos datas.",
+      "bookingFailed": "Rezervacija nepavyko",
+      "bookingCreated": "Sukurta {name} rezervacijos užklausa. Iš viso: {total}.",
+      "bookingSubmitted": "Rezervacija pateikta",
+      "bookingCreateFailed": "Nepavyko sukurti nuomos rezervacijos.",
+      "bookingCancelled": "Rezervacija atšaukta.",
+      "cancelFailed": "Nepavyko atšaukti rezervacijos.",
+      "datesHeading": "Nuomos datos",
+      "startDate": "Pradžios data",
+      "endDate": "Pabaigos data",
+      "daysSelected": "{count, plural, one {Pasirinkta # nuomos diena.} few {Pasirinktos # nuomos dienos.} many {Pasirinkta # nuomos dienos.} other {Pasirinkta # nuomos dienų.}}",
+      "selectDatesHint": "Pasirinkite datas, kad apskaičiuotume kainą.",
+      "empty": "Nuomos pasiūlymų dar nėra.",
+      "rentalHighlight": "Išskirtinis nuomos pasiūlymas",
+      "perDay": "{price} / d.",
+      "weeklyRate": "Savaitei: {price}",
+      "select": "Pasirinkti",
+      "selectedHeading": "Pasirinkta nuoma",
+      "estimatedTotal": "Numatoma suma",
+      "notesLabel": "Pastabos (neprivaloma)",
+      "notesPlaceholder": "Ypatingi pageidavimai...",
+      "submitting": "Pateikiama rezervacija...",
+      "requestBooking": "Užsakyti nuomą",
+      "myBookings": "Mano rezervacijos",
+      "noBookings": "Nuomos rezervacijų dar nėra. Norėdami pradėti, pasirinkite daiktą aukščiau.",
+      "bookingRange": "{start} – {end} ({days, plural, one {# diena} few {# dienos} many {# dienos} other {# dienų}})",
+      "bookingTotal": "Iš viso: {total}",
+      "rejectionReason": "Priežastis: {reason}",
+      "cancelling": "Atšaukiama...",
+      "cancel": "Atšaukti",
+      "status": {
+        "pending": "laukiama",
+        "approved": "patvirtinta",
+        "rejected": "atmesta",
+        "paid": "apmokėta",
+        "active": "aktyvi",
+        "returned": "grąžinta",
+        "cancelled": "atšaukta"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Prenumeratos dėžutės",
+      "metaDescription": "Užsiprenumeruokite kas mėnesį atrenkamas kuponų dėžutes iš mėgstamų vietos prekybininkų – nauji pasiūlymai kiekvieną laikotarpį, atšaukite bet kada.",
+      "title": "Prenumeratos dėžutės",
+      "subtitle": "Reguliariai gaukite atrinktus geriausių prekybininkų kuponus.",
+      "empty": "Prenumeratos dėžučių dar nėra. Užsukite netrukus!",
+      "byMerchant": "– {name}",
+      "perInterval": "/{interval}",
+      "details": "Išsamiau",
+      "subscribe": "Prenumeruoti",
+      "subscribedTitle": "Užsiprenumeruota",
+      "subscribedMessage": "Prenumerata aktyvuota. Išsamią informaciją rasite el. pašte.",
+      "subscribeFailed": "Nepavyko užsiprenumeruoti. Bandykite dar kartą.",
+      "notFoundTitle": "Dėžutė nerasta",
+      "notFoundHint": "Ši prenumeratos dėžutė nepasiekiama.",
+      "browseAll": "← Naršyti visas dėžutes",
+      "backToAll": "← Visos prenumeratos dėžutės",
+      "subscriberCount": "{count, plural, one {# prenumeratorius} few {# prenumeratoriai} many {# prenumeratoriaus} other {# prenumeratorių}}",
+      "whatsInside": "Kas viduje",
+      "curatingNext": "Iki {count, plural, one {# atrinkto kupono} few {# atrinktų kuponų} many {# atrinkto kupono} other {# atrinktų kuponų}} kas {period}. Kitas siuntinys šiuo metu atrenkamas.",
+      "percentVoucher": "{value} % nuolaidos kuponas",
+      "amountVoucher": "{amount} kuponas",
+      "curatedVoucher": "Atrinktas kuponas",
+      "subscribing": "Prenumeruojama…",
+      "subscribeWithPrice": "Prenumeruoti – {price}/{interval}",
+      "interval": {
+        "weekly": "sav.",
+        "monthly": "mėn.",
+        "quarterly": "ketv."
+      },
+      "intervalEach": {
+        "weekly": "savaitę",
+        "monthly": "mėnesį",
+        "quarterly": "ketvirtį"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Paieška",
+    "metaDescription": "Ieškokite aktyvių GiftHub prekybininkų kampanijų ir kuponų.",
+    "loadingSearch": "Kraunama paieška",
+    "title": "Ieškoti pasiūlymų",
+    "subtitle": "Raskite GiftHub prekybininkų kampanijas ir kuponus",
+    "queryLabel": "Ieškoti kampanijų, kuponų ir prekybininkų",
+    "queryPlaceholder": "Ieškokite kampanijų, kuponų, prekybininkų...",
+    "toggleFilters": "Rodyti / slėpti filtrus",
+    "filtersTitle": "Filtrai",
+    "closeFilters": "Uždaryti filtrus",
+    "error": "Paieška šiuo metu nepasiekiama. Netrukus bandykite dar kartą.",
+    "campaignsHeading": "Kampanijos",
+    "vouchersHeading": "Kuponai",
+    "browseMarketplace": "Naršykite viską, kas parduodama, <link>kampanijų prekyvietėje</link>.",
+    "campaignEnds": "Baigiasi {date}",
+    "filters": {
+      "title": "Filtrai",
+      "clearAll": "Išvalyti viską",
+      "category": "Kategorija",
+      "discountType": "Nuolaidos tipas",
+      "minDiscount": "Min. nuolaida",
+      "minDiscountAria": "Mažiausia nuolaida",
+      "maxPrice": "Maks. kaina",
+      "maxPriceAria": "Didžiausia kaina eurais",
+      "any": "Bet kokia",
+      "sortBy": "Rikiuoti pagal",
+      "types": {
+        "all": "Visi tipai",
+        "percentage": "Procentinė nuolaida",
+        "fixed_amount": "Fiksuota suma",
+        "credit_amount": "Parduotuvės kreditas"
+      },
+      "sort": {
+        "newest": "Naujausi pirmiau",
+        "popular": "Populiariausi",
+        "expiring": "Greitai baigsis"
+      }
+    },
+    "results": {
+      "chipCategory": "Kategorija: {value}",
+      "chipType": "Tipas: {value}",
+      "chipMinDiscount": "Min. {value} % nuolaida",
+      "chipMaxPrice": "Maks. {value} €",
+      "chipSort": "Rikiavimas: {value}",
+      "removeFilter": "Pašalinti filtrą „{label}“",
+      "searching": "Ieškoma...",
+      "count": "{total, plural, one {<num>#</num> rezultatas} few {<num>#</num> rezultatai} many {<num>#</num> rezultato} other {<num>#</num> rezultatų}}",
+      "countForQuery": "{total, plural, one {<num>#</num> rezultatas pagal „<hl>{query}</hl>“} few {<num>#</num> rezultatai pagal „<hl>{query}</hl>“} many {<num>#</num> rezultato pagal „<hl>{query}</hl>“} other {<num>#</num> rezultatų pagal „<hl>{query}</hl>“}}",
+      "flash": "Žaibiškas",
+      "voucherFallback": "Kuponas",
+      "expires": "Galioja iki {date}",
+      "redeemed": "Panaudota: {count}",
+      "noResultsTitle": "Rezultatų nerasta",
+      "noResultsQuery": "Pagal „{query}“ kuponų nerasta. Pabandykite pakeisti filtrus.",
+      "noResultsHint": "Pabandykite ieškoti konkretaus kupono, prekybininko ar kategorijos."
+    }
+  },
+  "faq": {
+    "metaTitle": "Dažniausiai užduodami klausimai",
+    "metaDescription": "Atsakymai į dažnus klausimus apie kuponų ir dovanų kortelių pirkimą, panaudojimą ir valdymą – mokėjimus, grąžinimus, galiojimą ir pagalbą prekybininkams.",
+    "title": "Dažniausiai užduodami klausimai",
+    "subtitle": "Raskite atsakymus į dažnus klausimus apie mūsų platformą.",
+    "categories": {
+      "general": "Bendra informacija",
+      "purchasing": "Pirkimai ir mokėjimai",
+      "vouchers": "Kuponai ir panaudojimas",
+      "account": "Paskyra ir sauga",
+      "merchants": "Prekybininkams",
+      "loyalty": "Lojalumas ir apdovanojimai"
+    },
+    "items": {
+      "whatIs": {
+        "q": "Kas yra GiftHub?",
+        "a": "GiftHub – tai skaitmeninių kuponų, dovanų kortelių ir renginių bilietų prekyvietė, jungianti prekybininkus ir klientus. Prekybininkai gali kurti ir parduoti skaitmeninius produktus, o klientai – juos pirkti, dovanoti ir panaudoti."
+      },
+      "isFree": {
+        "q": "Ar platforma nemokama?",
+        "a": "Naršyti ir susikurti paskyrą nemokama. Klientai moka tik už įsigytus produktus. Prekybininkai moka mėnesinį plano mokestį ir {fee} % transakcijos mokestį nuo kuponų pardavimų."
+      },
+      "countries": {
+        "q": "Kurios šalys palaikomos?",
+        "a": "Aptarnaujame prekybininkus ir klientus visoje ES, palaikome {currencies} valiutų ir {languages} kalbų."
+      },
+      "howToBuy": {
+        "q": "Kaip įsigyti kuponą?",
+        "a": "Naršykite galimus kuponus, spustelėkite „Pirkti“ ir atsiskaitykite per Stripe. Kuponas atsiras jūsų piniginėje iškart po apmokėjimo."
+      },
+      "paymentMethods": {
+        "q": "Kokie mokėjimo būdai priimami?",
+        "a": "Mokėjimus saugiai apdoroja Stripe. Jūsų pirkimui galimi mokėjimo būdai rodomi atsiskaitant."
+      },
+      "refund": {
+        "q": "Ar galiu susigrąžinti pinigus?",
+        "a": "Pinigų grąžinimo taisykles nustato kiekvienas prekybininkas. Prieš pirkdami patikrinkite konkrečias grąžinimo sąlygas kupono informacijos puslapyje."
+      },
+      "howToRedeem": {
+        "q": "Kaip panaudoti kuponą?",
+        "a": "Atidarykite piniginę, pasirinkite kuponą ir parodykite QR kodą prekybininkui. Jis jį nuskenuos ir patvirtins panaudojimą. Kuponą taip pat galite panaudoti įvesdami kodą rankiniu būdu."
+      },
+      "expiry": {
+        "q": "Kas nutinka, kai kupono galiojimas baigiasi?",
+        "a": "Nebegaliojančių kuponų panaudoti negalima. Prieš baigiantis galiojimui gausite pranešimą. Galiojimo datas rasite savo piniginėje."
+      },
+      "gift": {
+        "q": "Ar galiu padovanoti kuponą kitam žmogui?",
+        "a": "Taip! Pirkdami pasirinkite „Siųsti kaip dovaną“ ir įveskite gavėjo el. pašto adresą. Jis gaus kuponą su asmenine žinute."
+      },
+      "twoFactor": {
+        "q": "Kaip įjungti dviejų veiksnių autentifikavimą?",
+        "a": "Eikite į Nustatymai → Sauga → Dviejų veiksnių autentifikavimas. Galite nustatyti TOTP (Google Authenticator) arba naudoti prieigos raktą (biometrinį autentifikavimą)."
+      },
+      "biometrics": {
+        "q": "Ar galiu prisijungti biometriniais duomenimis?",
+        "a": "Taip! Palaikome prisijungimą prieigos raktu – prisijunkite su Face ID, piršto atspaudu arba Windows Hello. Nustatykite tai skiltyje Nustatymai → Sauga."
+      },
+      "deleteAccount": {
+        "q": "Kaip ištrinti paskyrą?",
+        "a": "Eikite į Nustatymai → Privatumas → Ištrinti paskyrą. Pagal mūsų BDAR atitikties politiką visi jūsų duomenys bus ištrinti per 30 dienų. Prieš tai galite eksportuoti savo duomenis."
+      },
+      "startSelling": {
+        "q": "Kaip pradėti parduoti?",
+        "a": "Užsiregistruokite kaip prekybininkas, užbaikite įvedimo procesą ir sukurkite pirmąjį kuponą. Parduoti galėsite iškart po profilio patvirtinimo."
+      },
+      "fees": {
+        "q": "Kokie yra platformos mokesčiai?",
+        "a": "Po {trialDays} d. nemokamo bandomojo laikotarpio planai kainuoja: {starter} – {starterPrice}, {pro} – {proPrice} arba {scale} – {scalePrice} per mėnesį (mokant už metus – 2 mėnesiai nemokamai), plius {fee} % transakcijos mokestis nuo kuponų pardavimų, išskaičiuojamas iš išmokos."
+      },
+      "integrations": {
+        "q": "Ar galiu integruoti su esamomis sistemomis?",
+        "a": "Taip! Siūlome webhooks (pranešimams apie įvykius realiuoju laiku), API raktus (programinei prieigai) ir Zapier / Slack / Discord integracijas."
+      },
+      "trackSales": {
+        "q": "Kaip sekti pardavimus?",
+        "a": "Prekybininko skydelyje matysite analitiką realiuoju laiku: pajamas, panaudojimus, įžvalgas apie klientus ir DI valdomas užklausas natūralia kalba („parodyk praėjusios savaitės pajamas“)."
+      },
+      "loyalty": {
+        "q": "Kaip veikia lojalumo programa?",
+        "a": "Taškus renkate pirkdami, kasdien užsiregistruodami, rekomenduodami ir rašydami atsiliepimus. Taškai atrakina lygius (Bronzinis → Sidabrinis → Auksinis → Platininis → Deimantinis) su vis didesnėmis privilegijomis."
+      },
+      "badges": {
+        "q": "Kas yra ženkleliai ir serijos?",
+        "a": "Ženkleliai – tai pasiekimai už svarbius etapus (pirmasis pirkimas, 10 rekomendacijų ir pan.). Serijos skaičiuoja iš eilės einančias aktyvumo dienas ir apdovanoja už nuoseklumą."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Susisiekite su mumis",
+    "metaDescription": "Susisiekite su GiftHub komanda – klausimai apie jūsų kuponus, prekybininkų prijungimą, sąskaitas ar partnerystę.",
+    "title": "Susisiekite su mumis",
+    "subtitle": "Turite klausimų? Mielai jus išklausysime.",
+    "email": "El. paštas",
+    "assistantTitle": "Automatinis asistentas",
+    "assistantText": "Greiti atsakymai apie kuponus ir jūsų paskyrą – spustelėkite pokalbio mygtuką kampe. Tai automatinis asistentas, ne žmogus.",
+    "name": "Vardas",
+    "subject": "Tema",
+    "message": "Žinutė",
+    "sent": "Žinutė išsiųsta! Netrukus su jumis susisieksime.",
+    "unavailableWithEmail": "Kontaktų forma šiuo metu nepasiekiama. Rašykite mums el. paštu {email}.",
+    "unavailable": "Kontaktų forma šiuo metu nepasiekiama. Bandykite vėliau.",
+    "error": "Nepavyko išsiųsti. Netrukus bandykite dar kartą.",
+    "sending": "Siunčiama...",
+    "send": "Siųsti žinutę"
+  },
+  "leaderboardPage": {
+    "metaTitle": "Populiariausi prekybininkai",
+    "metaDescription": "Prekybininkai, kurių kuponai GiftHub platformoje per pastarąsias 30 dienų panaudoti dažniausiai",
+    "title": "Populiariausi prekybininkai",
+    "subtitle": "Daugiausia kuponų panaudojimų per pastarąsias 30 dienų",
+    "rank": "{rank} vieta",
+    "redemptions": "{count, plural, one {<num>#</num><label>panaudojimas</label>} few {<num>#</num><label>panaudojimai</label>} many {<num>#</num><label>panaudojimo</label>} other {<num>#</num><label>panaudojimų</label>}}",
+    "empty": "Per pastarąsias 30 dienų panaudojimų dar nebuvo, todėl reitingo nėra.",
+    "browseCampaigns": "Naršyti aktyvias kampanijas"
+  },
+  "ui": {
+    "close": "Uždaryti",
+    "more": "Daugiau",
+    "loading": "Kraunama...",
+    "breadcrumb": {
+      "label": "naršymo kelias"
+    },
+    "pagination": {
+      "label": "puslapiavimas",
+      "previousAria": "Į ankstesnį puslapį",
+      "previous": "Ankstesnis",
+      "nextAria": "Į kitą puslapį",
+      "next": "Kitas",
+      "morePages": "Daugiau puslapių"
+    },
+    "toast": {
+      "dismiss": "Uždaryti pranešimą"
+    },
+    "calendar": {
+      "previousMonth": "Į ankstesnį mėnesį",
+      "nextMonth": "Į kitą mėnesį"
+    },
+    "datePicker": {
+      "placeholder": "Pasirinkite datą"
+    },
+    "combobox": {
+      "placeholder": "Pasirinkite...",
+      "empty": "Parinkčių nerasta.",
+      "search": "Ieškoti..."
+    },
+    "searchInput": {
+      "clear": "Išvalyti paiešką"
+    },
+    "searchResults": {
+      "empty": "Rezultatų nerasta",
+      "noResultsFor": "Pagal „{query}“ rezultatų nerasta. Pabandykite kitus raktinius žodžius."
+    },
+    "commandPalette": {
+      "placeholder": "Ieškoti...",
+      "noResults": "Rezultatų nerasta",
+      "toOpen": "atidaryti",
+      "other": "Kita",
+      "hostPlaceholder": "Kur norite eiti?",
+      "categories": {
+        "navigate": "Naršymas",
+        "discover": "Atrasti",
+        "account": "Paskyra"
+      },
+      "items": {
+        "home": {
+          "label": "Pradžia",
+          "description": "Pagrindinis puslapis"
+        },
+        "app": {
+          "label": "Mano skydelis",
+          "description": "Jūsų kuponai, piniginė ir veikla"
+        },
+        "vouchers": {
+          "label": "Mano kuponai"
+        },
+        "wallet": {
+          "label": "Piniginė",
+          "description": "Kreditų likučiai"
+        },
+        "gifts": {
+          "label": "Dovanų centras",
+          "description": "Naršykite ir siųskite dovanas"
+        },
+        "campaigns": {
+          "label": "Kampanijos",
+          "description": "Aktyvios kuponų kampanijos"
+        },
+        "hub": {
+          "label": "Prekybininkų katalogas",
+          "description": "Naršyti prekybininkus"
+        },
+        "deals": {
+          "label": "Pasiūlymai"
+        },
+        "settings": {
+          "label": "Nustatymai",
+          "description": "Paskyra ir nuostatos"
+        },
+        "admin": {
+          "label": "Administravimas",
+          "description": "Platformos administravimas"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Patvirtinti",
+      "cancel": "Atšaukti"
+    },
+    "dataTable": {
+      "noResults": "Rezultatų nėra."
+    },
+    "fileUpload": {
+      "maxFiles": "Leidžiama daugiausia {maxFiles, plural, one {# failas} few {# failai} many {# failo} other {# failų}}",
+      "tooLarge": "Failai turi būti mažesni nei {maxSize} MB",
+      "dropHere": "Numeskite failus čia",
+      "dragDrop": "Nutempkite failus čia",
+      "browseHint": "arba spustelėkite ir pasirinkite (iki {maxSize} MB vienam failui)",
+      "select": "Pasirinkti failus",
+      "remove": "Pašalinti {name}"
+    },
+    "imageUpload": {
+      "notImage": "Įkelkite paveikslėlio failą",
+      "tooLarge": "Paveikslėlis turi būti mažesnis nei {maxSize} MB",
+      "previewAlt": "Peržiūra",
+      "remove": "Pašalinti paveikslėlį",
+      "dropHere": "Numeskite paveikslėlį čia",
+      "upload": "Įkelti paveikslėlį",
+      "hint": "PNG, JPG, GIF iki {maxSize} MB",
+      "select": "Pasirinkti paveikslėlį"
+    },
+    "statsCard": {
+      "open": "Atidaryti"
+    },
+    "cashbackBadge": {
+      "label": "{percent} % pinigų grąžinimas"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Aktyvus",
+        "redeemed": "Panaudotas",
+        "expired": "Nebegalioja"
+      },
+      "redeem": "Panaudoti",
+      "expires": "Galioja iki {date}",
+      "merchantAlt": "Prekybininkas"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Prisijungti",
+      "register": "Sukurti paskyrą",
+      "resetPassword": "Atkurti slaptažodį"
+    },
+    "error": {
+      "title": "Kažkas nutiko",
+      "fallback": "Įvyko netikėta klaida.",
+      "tryAgain": "Bandyti dar kartą"
+    },
+    "login": {
+      "welcome": "Sveiki sugrįžę",
+      "subtitle": "Prisijunkite prie savo GiftHub paskyros",
+      "tabMagic": "Vienkartinis kodas",
+      "tabPassword": "Slaptažodis",
+      "tabSocial": "Socialiniai tinklai",
+      "tabPasskey": "Prieigos raktas",
+      "emailLabel": "El. pašto adresas",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Slaptažodis",
+      "sendCode": "Siųsti prisijungimo kodą",
+      "sending": "Siunčiama…",
+      "signIn": "Prisijungti",
+      "signingIn": "Jungiamasi…",
+      "otpTitle": "Patikrinkite el. paštą!",
+      "otpDesc": "Išsiuntėme 6 skaitmenų kodą adresu <b>{email}</b>",
+      "otpLabel": "Įveskite kodą",
+      "verify": "Patvirtinti kodą",
+      "verifying": "Tikrinama…",
+      "resend": "Siųsti kodą iš naujo",
+      "backToEmail": "Atgal",
+      "orContinueWith": "Arba tęskite su",
+      "continueWith": "Tęsti su {provider}",
+      "errorWrongCode": "Kodas neteisingas arba nebegalioja. Bandykite dar kartą.",
+      "errorWrongPass": "Neteisingas el. pašto adresas arba slaptažodis.",
+      "errorGeneric": "Kažkas nutiko. Bandykite dar kartą.",
+      "errorEmailUnavailable": "Prisijungimas el. paštu šiuo metu negalimas – naudokite slaptažodį.",
+      "errorCredentialsSignin": "Neteisingas el. pašto adresas arba slaptažodis.",
+      "errorAuthGeneric": "Prisijungti nepavyko. Bandykite dar kartą.",
+      "backToHome": "Atgal į pradžią",
+      "socialDesc": "Prisijunkite akimirksniu su pageidaujama paskyra",
+      "noAccount": "Dar neturite paskyros?",
+      "createAccount": "Sukurti paskyrą",
+      "noAccountSub": "Prisijungus kodu su nauju el. pašto adresu, paskyra sukuriama automatiškai.",
+      "registered": "Paskyra sukurta – prisijunkite el. pašto adresu ir slaptažodžiu.",
+      "magicDesc": "Išsiųsime 6 skaitmenų kodą į jūsų el. paštą. Slaptažodžio nereikia.",
+      "passwordDesc": "Prisijunkite el. pašto adresu ir slaptažodžiu.",
+      "forgotPassword": "Pamiršote slaptažodį?",
+      "demo": "Demonstracinės paskyros",
+      "demoRole": {
+        "platformAdmin": "Platformos administratorius",
+        "merchantAdmin": "Prekybininko administratorius",
+        "merchantStaff": "Prekybininko darbuotojas",
+        "endUser": "Galutinis vartotojas"
+      },
+      "passkeyDesc": "Prisijunkite akimirksniu piršto atspaudu, veido atpažinimu arba saugos raktu.",
+      "passkeyButton": "Prisijungti prieigos raktu",
+      "passkeyAuthenticating": "Autentifikuojama…"
+    },
+    "register": {
+      "backToHome": "Atgal į pradžią",
+      "title": "Susikurkite paskyrą",
+      "subtitle": "Pradėkite atrasti ir valdyti kuponus",
+      "nameLabel": "Vardas ir pavardė",
+      "namePlaceholder": "Vardenis Pavardenis",
+      "emailLabel": "El. pašto adresas",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Slaptažodis",
+      "passwordPlaceholder": "Ne mažiau kaip 8 simboliai",
+      "submit": "Sukurti paskyrą",
+      "submitting": "Kuriama paskyra...",
+      "haveAccount": "Jau turite paskyrą?",
+      "signIn": "Prisijungti",
+      "errorWeak": "Slaptažodis per silpnas. Pasirinkite stipresnį slaptažodį.",
+      "errorInvalid": "Neteisingi duomenys.",
+      "errorFallback": "Kažkas nutiko.",
+      "errorGeneric": "Kažkas nutiko. Bandykite dar kartą."
+    },
+    "resetPassword": {
+      "title": "Atkurkite slaptažodį",
+      "subtitle": "Žemiau įveskite naują slaptažodį",
+      "newPassword": "Naujas slaptažodis",
+      "confirmPassword": "Pakartokite slaptažodį",
+      "submit": "Nustatyti naują slaptažodį",
+      "submitting": "Atkuriama…",
+      "success": "Slaptažodis atkurtas!",
+      "successDesc": "Jūsų slaptažodis atnaujintas. Dabar galite prisijungti.",
+      "goToLogin": "Eiti į prisijungimą",
+      "errorMismatch": "Slaptažodžiai nesutampa",
+      "errorShort": "Slaptažodis turi būti bent 8 simbolių",
+      "errorWeak": "Slaptažodis per silpnas. Pasirinkite stipresnį slaptažodį.",
+      "errorExpired": "Ši atkūrimo nuoroda neteisinga arba nebegalioja.",
+      "forgotTitle": "Pamiršote slaptažodį?",
+      "forgotSubtitle": "Įveskite el. pašto adresą ir atsiųsime atkūrimo nuorodą",
+      "emailLabel": "El. pašto adresas",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Siųsti atkūrimo nuorodą",
+      "sending": "Siunčiama…",
+      "linkSent": "Patikrinkite el. paštą!",
+      "linkSentDesc": "Jei paskyra su šiuo el. pašto adresu egzistuoja, išsiuntėme atkūrimo nuorodą.",
+      "backToLogin": "Atgal į prisijungimą"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Sveiki prisijungę!",
+      "joined": "Prisijungėte prie {orgName}. Nukreipiama…",
+      "accepted": "Kvietimas priimtas. Nukreipiama…",
+      "problemTitle": "Kvietimo problema",
+      "errorNotAccepted": "Šio kvietimo priimti nepavyko.",
+      "errorGeneric": "Kažkas nutiko. Bandykite dar kartą.",
+      "goToOrgs": "Eiti į jūsų organizacijas",
+      "invitedTitle": "Jus pakvietė",
+      "invitedDesc": "Priimkite kvietimą ir prisijunkite prie organizacijos. Gali tekti pirmiausia prisijungti prie paskyros.",
+      "accepting": "Priimama…",
+      "accept": "Priimti kvietimą"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Dovanų kortelės ir dovanos",
+      "description": "Naršykite ir pirkite skaitmenines vietos prekybininkų dovanų korteles. Išsiųskite apgalvotą dovaną per kelias sekundes – ji pristatoma el. paštu, panaudojama parduotuvėje arba internetu."
+    },
+    "publicCard": {
+      "defaultHeadline": "Dovanų kortelė",
+      "imageAlt": "Dovanų kortelė",
+      "logoAlt": "Prekės ženklo logotipas",
+      "merchant": "Prekybininkas: {name}",
+      "merchantFallback": "Prekybininkas",
+      "code": "Kodas: {code}",
+      "validUntil": "Galioja iki: {date}",
+      "noExpiry": "Neterminuota",
+      "showQr": "Parodykite šį QR kodą darbuotojui, kad panaudotumėte dovanų kortelę.",
+      "statusMessage": "Ši dovanų kortelė yra {status}.",
+      "status": {
+        "active": "aktyvi",
+        "redeemed": "panaudota",
+        "expired": "nebegaliojanti",
+        "cancelled": "atšaukta"
+      }
+    },
+    "purchase": {
+      "title": "Pirkti dovanų kortelę",
+      "loading": "Kraunama...",
+      "notAvailable": "Dovanų kortelė nepasiekiama",
+      "defaultHeadline": "Dovanų kortelė",
+      "imageAlt": "Dovanų kortelė",
+      "logoAlt": "Prekės ženklas",
+      "fromMerchant": "iš {merchant}",
+      "form": {
+        "recipientEmail": "Gavėjo el. paštas (neprivaloma)",
+        "recipientEmailPlaceholder": "Siųsti dovanų kortelę šiuo adresu",
+        "recipientName": "Gavėjo vardas",
+        "recipientNamePlaceholder": "Kam",
+        "senderName": "Jūsų vardas",
+        "senderNamePlaceholder": "Nuo",
+        "message": "Asmeninė žinutė (neprivaloma)",
+        "messagePlaceholder": "Pridėkite asmeninę žinutę..."
+      },
+      "total": "Iš viso:",
+      "processing": "Apdorojama...",
+      "buy": "Pirkti dovanų kortelę",
+      "errors": {
+        "notFound": "Dovanų kortelė nerasta arba jos negalima įsigyti",
+        "loadFailed": "Nepavyko įkelti dovanų kortelės",
+        "purchaseFailed": "Pirkimas nepavyko",
+        "generic": "Kažkas nutiko. Bandykite dar kartą."
+      }
+    },
+    "product": {
+      "notFound": "Dovana nerasta",
+      "backToHub": "Atgal į Dovanų centrą",
+      "imageAlt": "{title} {index}",
+      "featured": "Rekomenduojama",
+      "lowStock": "Liko tik {count} vnt.",
+      "buyNow": "Pirkti dabar",
+      "addToCart": "Į krepšelį",
+      "saveToWishlist": "Išsaugoti norų sąraše",
+      "removeFromWishlist": "Pašalinti iš norų sąrašo",
+      "share": "Dalintis šia dovana",
+      "upsellsTitle": "Jums taip pat gali patikti"
+    },
+    "claim": {
+      "metaTitle": "Atsiimkite dovaną",
+      "alreadyClaimedTitle": "Dovana jau atsiimta",
+      "alreadyClaimedBody": "Ši dovana jau atsiimta.",
+      "expiredTitle": "Dovana nebegalioja",
+      "expiredBody": "Atsiprašome, ši dovanos nuoroda nebegalioja.",
+      "title": "Jūs gavote dovaną!",
+      "signedInHint": "Spustelėkite žemiau, kad įtrauktumėte šį kuponą į savo piniginę.",
+      "signedOutHint": "Prisijunkite, kad atsiimtumėte šį kuponą.",
+      "claimButton": "Atsiimti dovaną",
+      "signInButton": "Prisijungti ir atsiimti"
+    },
+    "error": {
+      "title": "Nepavyko įkelti Dovanų centro",
+      "fallback": "Įkeliant dovanas įvyko netikėta klaida.",
+      "retry": "Bandyti dar kartą"
+    },
+    "hub": {
+      "title": "Dovanos",
+      "subtitle": "Raskite tobulą dovaną kiekvienai progai",
+      "loadError": "Nepavyko įkelti dovanų",
+      "retry": "Bandyti dar kartą",
+      "emptyCatalog": {
+        "title": "Dovanų dar nėra",
+        "body": "Kol kas puikia dovana gali tapti ir vietos prekybininkų kuponai."
+      },
+      "noMatches": "Pagal šiuos filtrus dovanų nerasta",
+      "clearFilters": "Išvalyti filtrus",
+      "browseCampaigns": "Naršyti kampanijas",
+      "allGifts": "Visos dovanos",
+      "loadMore": "Įkelti daugiau"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Dovanų kortelė nerasta",
+        "body": "QR kodas neteisingas arba nebegalioja."
+      },
+      "notActive": {
+        "title": "Dovanų kortelė dar neaktyvi",
+        "body": "Ši dovanų kortelė įsigalios vėliau."
+      },
+      "expired": {
+        "title": "Dovanų kortelė nebegalioja",
+        "body": "Ši dovanų kortelė nebegalioja."
+      },
+      "result": {
+        "title": "Dovanų kortelė panaudota",
+        "confirmed": "Panaudojimas sėkmingai patvirtintas.",
+        "alreadyRedeemedOrCancelled": "Ši dovanų kortelė jau panaudota arba atšaukta.",
+        "alreadyRedeemedOrInvalid": "Ši dovanų kortelė jau panaudota arba negalioja."
+      }
+    },
+    "qr": {
+      "error": "Nepavyko sugeneruoti QR kodo",
+      "generating": "Generuojamas QR...",
+      "alt": "QR kodas"
+    },
+    "wizard": {
+      "title": "DI dovanų paieška",
+      "subtitle": "Papasakokite apie gavėją, o mes rasime tobulą dovaną",
+      "steps": {
+        "recipient": "Kam skirta dovana?",
+        "occasion": "Kokia proga?",
+        "budget": "Koks jūsų biudžetas?"
+      },
+      "recipients": {
+        "partner": "Partneriui",
+        "friend": "Draugui",
+        "parent": "Tėvams",
+        "colleague": "Kolegai",
+        "child": "Vaikui",
+        "teacher": "Mokytojui"
+      },
+      "occasions": {
+        "birthday": "Gimtadienis",
+        "christmas": "Kalėdos",
+        "anniversary": "Jubiliejus",
+        "thankYou": "Padėka",
+        "justBecause": "Be progos",
+        "graduation": "Mokslų baigimas"
+      },
+      "summary": {
+        "for": "Kam: {recipient}",
+        "budget": "Biudžetas: {amount}"
+      },
+      "submit": "Rasti tobulas dovanas",
+      "error": "Nepavyko sugeneruoti rekomendacijų. Bandykite dar kartą.",
+      "results": {
+        "found": "Radome jums {count, plural, one {# dovaną} few {# dovanas} many {# dovanos} other {# dovanų}}:",
+        "empty": "Tinkamų produktų nerasta. Pabandykite pakeisti kriterijus."
+      },
+      "startOver": "Pradėti iš naujo"
+    },
+    "card": {
+      "featured": "Rekomenduojama",
+      "save": "Išsaugoti",
+      "unsave": "Pašalinti",
+      "buyNow": "Pirkti dabar"
+    },
+    "feedSection": {
+      "viewAll": "Žiūrėti visus"
+    },
+    "filters": {
+      "toggle": "Filtrai",
+      "clear": "Išvalyti",
+      "occasion": "Proga",
+      "persona": "Kam skirta?",
+      "budget": "Biudžetas",
+      "budgetUnder": "Iki {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Dalinkitės pasiūlymais ir gaukite apdovanojimų"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Įvyko netikėta klaida."
+    },
+    "logoAlt": "{name} logotipas",
+    "merchantFallback": "Prekybininkas",
+    "validUntil": "Galioja iki {date}",
+    "validUntilWithLimit": "Galioja iki {date} – {count, plural, one {pirmas # panaudojimas} few {pirmi # panaudojimai} many {pirmo # panaudojimo} other {pirmų # panaudojimų}}",
+    "offAtMerchant": "{value} nuolaida pas {merchant}",
+    "fields": {
+      "event": "Renginys",
+      "dateTime": "Data ir laikas",
+      "location": "Vieta",
+      "price": "Kaina",
+      "status": "Būsena",
+      "attendee": "Dalyvis",
+      "usedAt": "Panaudota"
+    },
+    "ticketStatus": {
+      "available": "Laisvas",
+      "sold": "Parduotas",
+      "used": "Panaudotas",
+      "cancelled": "Atšauktas",
+      "refunded": "Grąžintas"
+    },
+    "event": {
+      "notAvailable": "Bilietų į šį renginį įsigyti negalima.",
+      "descriptionFallback": "Prisijunkite prie šio nuostabaus renginio!",
+      "availableTickets": "Laisvi bilietai",
+      "soldOut": "Išparduota",
+      "availableCount": "Laisva: {count}",
+      "terms": "Taisyklės ir sąlygos",
+      "soldOutTitle": "Šis renginys išparduotas",
+      "soldOutDescription": "Visi bilietai jau nupirkti."
+    },
+    "eventPurchase": {
+      "title": "Pirkti bilietą",
+      "description": "Pasirinkite bilietą ir užbaikite pirkimą",
+      "selectTicket": "Pasirinkite bilietą",
+      "attendeeNameLabel": "Dalyvio vardas (neprivaloma)",
+      "attendeeNamePlaceholder": "Renginyje dalyvausiančio asmens vardas",
+      "attendeeEmailLabel": "Dalyvio el. paštas (neprivaloma)",
+      "attendeeEmailPlaceholder": "El. paštas bilietui pristatyti",
+      "total": "Iš viso",
+      "submit": "Pirkti bilietą",
+      "noTickets": "Šiuo metu laisvų bilietų nėra.",
+      "checkBackLater": "Užsukite vėliau arba susisiekite su renginio organizatoriumi.",
+      "selectTicketError": "Pasirinkite bilietą",
+      "purchaseFailed": "Nepavyko įsigyti bilieto"
+    },
+    "ticket": {
+      "noPermission": "Neturite teisės peržiūrėti šio bilieto.",
+      "heading": "Bilietas #{number}",
+      "qrTitle": "QR kodas",
+      "qrDescription": "Parodykite šį QR kodą prie renginio įėjimo",
+      "qrAlt": "Bilieto QR kodas",
+      "qrUnavailable": "QR kodas nepasiekiamas",
+      "ticketNumber": "Bilieto numeris: <strong>{number}</strong>",
+      "used": "Bilietas jau panaudotas",
+      "detailsTitle": "Bilieto informacija",
+      "detailsDescription": "Svarbi informacija apie jūsų bilietą",
+      "staffCanRedeem": "Kaip prekybininko darbuotojas galite panaudoti šį bilietą renginyje."
+    },
+    "redeem": {
+      "notFoundTitle": "Panaudojimas nerastas",
+      "notFoundDescription": "QR kodas neteisingas arba nebegalioja.",
+      "title": "Kuponas panaudotas",
+      "alreadyRedeemed": "Šis kuponas jau panaudotas.",
+      "confirmed": "Panaudojimas sėkmingai patvirtintas."
+    },
+    "qrCheckout": {
+      "title": "Atsiskaitymas QR kodu",
+      "completeTitle": "Atsiskaitymas baigtas",
+      "completeDescription": "Jūsų pirkimas patvirtintas. Išsamią informaciją rasite el. pašte.",
+      "payNow": "Mokėti dabar",
+      "confirming": "Tvirtinama..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Kuponas nerastas",
+      "notFoundDescription": "Ieškomo kupono rasti nepavyko.",
+      "descriptionFallback": "Išskirtinis kupono pasiūlymas",
+      "shareText": "Pažiūrėkite šį {merchant} kuponą",
+      "copyCode": "Kopijuoti kupono kodą",
+      "qrAlt": "Kupono {code} QR kodas",
+      "print": "Spausdinti kuponą"
+    },
+    "referralPage": {
+      "voucherFrom": "Gavote kuponą nuo <highlight>{name}</highlight>",
+      "qrAlt": "Kupono {code} panaudojimo QR kodas",
+      "offAtMerchantShared": "{value} nuolaida pas {merchant} – pasidalino draugas!"
+    },
+    "bnpl": {
+      "title": "Mokėkite dalimis",
+      "description": "Padalinkite {amount} mokėjimą į patogias mėnesines įmokas.",
+      "perMonth": "/mėn.",
+      "planNoInterest": "{months}x (0 % palūkanų)",
+      "planWithFee": "{months}x ({rate} % mokestis)",
+      "monthlyPayments": "{count, plural, one {# mėnesinė įmoka} few {# mėnesinės įmokos} many {# mėnesinės įmokos} other {# mėnesinių įmokų}}",
+      "total": "Iš viso: {amount}",
+      "noExtraCost": "Be papildomų išlaidų",
+      "payNow": "Mokėti {amount} dabar"
+    },
+    "qrPanel": {
+      "qrAlt": "QR kodas",
+      "generateFailed": "Nepavyko sugeneruoti QR kodo",
+      "placeholder": "QR kodas bus rodomas čia",
+      "generating": "Generuojamas QR...",
+      "unavailable": "QR nepasiekiamas",
+      "hideCode": "Slėpti kodą",
+      "showCode": "Rodyti kodą",
+      "expires": "Galioja iki {date}",
+      "refreshNote": "Kodas atnaujinamas kas 30 sekundžių"
+    },
+    "qrDownload": {
+      "success": "QR kodas sėkmingai atsisiųstas!",
+      "failed": "Nepavyko atsisiųsti QR kodo",
+      "downloading": "Atsisiunčiama...",
+      "download": "Atsisiųsti QR"
+    }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Tvarkykite savo kuponų kampanijas.",
+      "createCampaign": "Sukurti kampaniją",
+      "subscriptionRequired": "Reikalinga prenumerata",
+      "trialEnded": "Nemokamas 60 dienų kampanijų bandomasis laikotarpis baigėsi. Užsisakykite 9.90/mėn. planą, kad galėtumėte kurti naujas kampanijas.",
+      "stats": {
+        "totalTitle": "Iš viso kampanijų",
+        "totalDescription": "Visos kampanijos",
+        "activeTitle": "Aktyvios",
+        "activeDescription": "Šiuo metu vykdomos",
+        "paidTitle": "Apmokėti pirkimai",
+        "paidDescription": "Įvykdyti užsakymai",
+        "revenueTitle": "Pajamos",
+        "revenueDescription": "Apmokėtų kuponų pardavimai"
+      },
+      "weeklyRevenue": {
+        "title": "Savaitės pajamos",
+        "description": "Apmokėti kampanijų pardavimai per 7 dienas.",
+        "series": "Pajamos"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Kampanijų dar nėra",
+        "descriptionCanCreate": "Sukurkite kampaniją, kad galėtumėte tvarkyti ir valdyti savo kuponus.",
+        "descriptionNeedsSubscription": "Užsisakykite prenumeratą, kad galėtumėte kurti naujas kampanijas.",
+        "action": "Sukurkite pirmąją kampaniją"
+      },
+      "searchPlaceholder": "Ieškoti kampanijų...",
+      "searchLabel": "Ieškoti kampanijų",
+      "filterAll": "Visos",
+      "status": {
+        "active": "Aktyvi",
+        "draft": "Juodraštis",
+        "ended": "Pasibaigusi",
+        "paused": "Pristabdyta"
+      },
+      "noMatches": "Nėra filtrus atitinkančių kampanijų.",
+      "clearFilters": "Išvalyti filtrus",
+      "type": {
+        "weekly": "Savaitinė kampanija",
+        "limited": "Ribota kampanija",
+        "other": "Kampanija: {type}"
+      },
+      "runs": "Vyksta {start} – {end}",
+      "view": "Peržiūrėti",
+      "stats": {
+        "vouchers": "Kuponai",
+        "paidPurchases": "Apmokėti pirkimai",
+        "revenue": "Pajamos",
+        "price": "Kaina"
+      },
+      "free": "Nemokama"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Naujos kampanijos sukuriamos kaip juodraščiai. Klientai jų nemato, kol nepaskelbsite jų kampanijos puslapyje."
+    },
+    "edit": {
+      "breadcrumb": "Redaguoti",
+      "title": "Redaguoti kampaniją"
+    },
+    "form": {
+      "basicInfo": "Pagrindinė informacija",
+      "nameLabel": "Kampanijos pavadinimas *",
+      "namePlaceholder": "Šventinis pasiūlymas",
+      "descriptionLabel": "Aprašymas",
+      "descriptionPlaceholder": "Ribotos trukmės akcija",
+      "typeLabel": "Tipas *",
+      "typeOptions": {
+        "limited": "Vienkartinė (ribota)",
+        "weekly": "Savaitinė"
+      },
+      "dates": "Datos",
+      "startDate": "Pradžios data *",
+      "endDate": "Pabaigos data *",
+      "timezoneHint": "Laikas nurodomas jūsų vietos laiko juostoje.",
+      "pricing": "Kainodara ir apribojimai",
+      "priceLabel": "Kaina, {currency} (palikite tuščią nemokamiems kuponams)",
+      "pricePreview": "Klientai mokės {price}.",
+      "priceHint": "Įveskite sumą valiuta {currency}, pvz., 4.50 arba 4,50, kad būtų {example}.",
+      "maxRedemptions": "Maks. panaudojimų",
+      "maxPurchases": "Maks. pirkimų",
+      "unlimited": "Neribota",
+      "creditLabel": "Rekomenduotojo kreditas (%)",
+      "creditPreview": "Rekomenduotojai gauna {percent}% pirkimo kainos kreditu.",
+      "creditHint": "Pirkimo kainos dalis, išmokama rekomenduotojui kreditu, pvz., 5 arba 2,5.",
+      "termsSection": "Taisyklės ir sąlygos",
+      "termsLabel": "Sąlygos",
+      "termsPlaceholder": "Šios kampanijos taisyklės ir sąlygos...",
+      "saving": "Išsaugoma...",
+      "saveChanges": "Išsaugoti pakeitimus",
+      "creating": "Kuriama...",
+      "create": "Sukurti kampaniją",
+      "saved": "Kampanijos pakeitimai išsaugoti.",
+      "errors": {
+        "invalidDates": "Įveskite tinkamą pradžios ir pabaigos datą.",
+        "endBeforeStart": "Pabaigos data turi būti vėlesnė nei pradžios data.",
+        "maxRedemptions": "Maks. panaudojimų skaičius turi būti sveikasis skaičius, ne mažesnis nei 1.",
+        "maxPurchases": "Maks. pirkimų skaičius turi būti sveikasis skaičius, ne mažesnis nei 1.",
+        "saveFailed": "Nepavyko išsaugoti kampanijos"
+      },
+      "priceErrors": {
+        "negative": "Kaina negali būti neigiama.",
+        "invalid": "Kaina nėra tinkamas skaičius.",
+        "wholeNumber": "Kaina turi būti sveikasis skaičius.",
+        "decimals": "Kaina gali turėti ne daugiau kaip {decimals} skaitmenis po kablelio.",
+        "tooLarge": "Kaina per didelė."
+      },
+      "creditErrors": {
+        "negative": "Rekomenduotojo kreditas negali būti neigiamas.",
+        "invalid": "Rekomenduotojo kreditas nėra tinkamas skaičius.",
+        "decimals": "Rekomenduotojo kreditas gali turėti ne daugiau kaip {decimals} skaitmenis po kablelio.",
+        "tooLarge": "Rekomenduotojo kreditas per didelis.",
+        "tooHigh": "Rekomenduotojo kreditas negali viršyti 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "Aprašymo nėra",
+      "draftNotice": "Ši kampanija yra juodraštis, todėl klientai jos dar nemato.",
+      "draftNoticeAdmin": "Ši kampanija yra juodraštis, todėl klientai jos dar nemato. Paskelbkite ją, kai būsite pasiruošę.",
+      "status": "Būsena",
+      "type": "Tipas",
+      "price": "Kaina",
+      "referrerCredit": "Rekomenduotojo kreditas",
+      "none": "Nėra",
+      "stats": {
+        "vouchers": "Kuponai",
+        "totalPurchases": "Iš viso pirkimų",
+        "paidPurchases": "Apmokėti pirkimai"
+      },
+      "terms": "Taisyklės ir sąlygos",
+      "promotion": {
+        "title": "Reklama",
+        "description": "Mokamas matomumas savaitiniame naujienlaiškyje ir pranešimuose."
+      },
+      "vouchers": {
+        "title": "Kuponai",
+        "description": "Iš šios kampanijos sugeneruoti kuponai.",
+        "empty": "Kuponų dar nesugeneruota.",
+        "view": "Peržiūrėti"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Įtraukti į savaitinį naujienlaiškį (mokama)",
+      "notification": "Išryškinti pranešimuose (mokama)",
+      "endDate": "Reklamos pabaigos data",
+      "saving": "Išsaugoma...",
+      "save": "Išsaugoti reklamos nustatymus",
+      "saved": "Reklamos nustatymai išsaugoti.",
+      "upgradeNeededTitle": "Reikia aukštesnio plano",
+      "upgradeNeeded": "Reklamos išryškinimai įeina į aukštesnį planą. Atnaujinkite planą skiltyje „Nustatymai ir atsiskaitymas“.",
+      "saveFailedStatus": "Nepavyko išsaugoti reklamos nustatymų (klaida {status}).",
+      "saveFailedNetwork": "Nepavyko išsaugoti reklamos nustatymų. Patikrinkite ryšį ir bandykite dar kartą."
+    },
+    "actions": {
+      "adminOnly": "Tik prekybininko administratoriai gali skelbti, pristabdyti ar redaguoti kampanijas.",
+      "edit": "Redaguoti",
+      "publish": {
+        "label": "Paskelbti",
+        "title": "Paskelbti šią kampaniją?",
+        "description": "Klientai iškart galės matyti ir pirkti šios kampanijos kuponus.",
+        "success": "Kampanija paskelbta. Dabar ji matoma klientams."
+      },
+      "pause": {
+        "label": "Pristabdyti",
+        "title": "Pristabdyti šią kampaniją?",
+        "description": "Kampanija grąžinama į juodraščius ir paslepiama nuo klientų, kol vėl ją paskelbsite. Jau parduoti kuponai lieka galioti.",
+        "success": "Kampanija pristabdyta. Klientai jos nemato."
+      },
+      "end": {
+        "label": "Baigti kampaniją",
+        "title": "Baigti šią kampaniją dabar?",
+        "description": "Kampanija sustabdoma iškart ir jos nebebus galima vėl paskelbti. Jau parduoti kuponai lieka galioti.",
+        "success": "Kampanija baigta."
+      },
+      "updateFailedStatus": "Nepavyko atnaujinti kampanijos (klaida {status}).",
+      "updateFailed": "Nepavyko atnaujinti kampanijos."
+    },
+    "generate": {
+      "open": "Generuoti kuponus",
+      "title": "Generuoti kuponus",
+      "descriptionPriced": "Sukuriami {value} nuolaidos kuponų juodraščiai, galiojantys {start} – {end}. Kiekvienas kuponas gauna savo kodą. Jie lieka paslėpti, kol jų nepaskelbsite.",
+      "descriptionFree": "Ši kampanija nemokama, todėl kuponams nėra kokios sumos priskirti. Pirmiausia nustatykite kampanijos kainą.",
+      "countLabel": "Kuponų skaičius (1–100)",
+      "generating": "Generuojama...",
+      "submit": "Generuoti",
+      "invalidCount": "Įveskite sveikąjį skaičių nuo 1 iki 100",
+      "needsPrice": "Pirmiausia nustatykite šios kampanijos kainą. Sugeneruotų kuponų vertė lygi kampanijos kainai.",
+      "failed": "Nepavyko sugeneruoti kuponų",
+      "success": "{count, plural, one {Sugeneruotas # kupono juodraštis. Paskelbkite jį} few {Sugeneruoti # kuponų juodraščiai. Paskelbkite juos} many {Sugeneruota # kupono juodraščio. Paskelbkite juos} other {Sugeneruota # kuponų juodraščių. Paskelbkite juos}} kuponų puslapyje, kai būsite pasiruošę."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktyvios kampanijos",
+      "statLiveVouchers": "Aktyvūs kuponai",
+      "statRedemptions30d": "Panaudojimai (30 d.)"
+    },
+    "error": {
+      "title": "Kažkas nutiko",
+      "description": "Prekybininko skydelyje įvyko klaida.",
+      "tryAgain": "Bandyti dar kartą",
+      "backToMerchants": "Atgal į prekybininkus"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Apžvalga",
+        "offers": "Pasiūlymai",
+        "inStore": "Parduotuvėje",
+        "customers": "Klientai",
+        "settings": "Nustatymai"
+      },
+      "language": "Kalba",
+      "opensAppArea": "Atidaro programėlės sritį",
+      "externalLinkTitle": "{label} (atidaro programėlės sritį už šio prekybininko ribų)",
+      "opensOutside": "Atidaroma už prekybininko srities ribų",
+      "merchantNavigation": "Prekybininkas",
+      "more": "Daugiau",
+      "navDashboard": "Skydelis"
+    },
+    "dashboard": {
+      "title": "Prekybininko skydelis",
+      "welcomeBack": "Sveiki sugrįžę, {name}",
+      "viewCampaigns": "Peržiūrėti kampanijas",
+      "createVoucher": "Sukurti kuponą",
+      "performanceOverview": "Rezultatų apžvalga",
+      "performanceOverviewHint": "Kampanijų veikla ir panaudojimai realiuoju laiku.",
+      "revenueAndCredits": "Pajamos ir kreditai",
+      "revenueAndCreditsHint": "Pardavimai, kreditai ir neįvykdyti įsipareigojimai.",
+      "performanceTrend": "Rezultatų tendencija",
+      "performanceTrendHint": "Paskutinių {days} d. panaudojimų ir pajamų veikla.",
+      "rangeShort": "{days} d.",
+      "revenue": "Pajamos",
+      "chartRedemptions": "Panaudojimai",
+      "chartRevenue": "Pajamos ({currency})",
+      "paidOrders": "Apmokėti užsakymai",
+      "openOrdersView": "Atidaryti užsakymų rodinį",
+      "avgOrder": "Vid. užsakymas",
+      "openCampaignRevenue": "Atidaryti kampanijų pajamas",
+      "redemptionRate": "Panaudojimo rodiklis",
+      "openRedemptionQueue": "Atidaryti panaudojimų eilę",
+      "pendingConfirmation": "Laukia patvirtinimo: {count}",
+      "pendingConfirmationHint": "Panaudojimai parduotuvėje, laukiantys jūsų patvirtinimo.",
+      "viewRedemptions": "Peržiūrėti panaudojimus",
+      "actionCenter": "Veiksmų centras",
+      "actionCenterHint": "Prioritetiniai elementai peržiūrai.",
+      "allCaughtUp": "Viskas sutvarkyta.",
+      "open": "Atidaryti",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# laukiantis panaudojimas} few {# laukiantys panaudojimai} many {# laukiančio panaudojimo} other {# laukiančių panaudojimų}}",
+        "pendingRedemptionsDetail": "Patvirtinkite panaudojimus parduotuvėje",
+        "expiringVouchers": "{count, plural, one {# kuponas netrukus baigs galioti} few {# kuponai netrukus baigs galioti} many {# kupono netrukus baigs galioti} other {# kuponų netrukus baigs galioti}}",
+        "expiringVouchersDetail": "Peržiūrėkite kuponų galiojimo datas",
+        "endingCampaigns": "{count, plural, one {# kampanija baigiasi šią savaitę} few {# kampanijos baigiasi šią savaitę} many {# kampanijos baigiasi šią savaitę} other {# kampanijų baigiasi šią savaitę}}",
+        "endingCampaignsDetail": "Pratęskite arba dubliuokite geriausias kampanijas",
+        "upcomingEvents": "{count, plural, one {# artėjantis renginys} few {# artėjantys renginiai} many {# artėjančio renginio} other {# artėjančių renginių}}",
+        "upcomingEventsDetail": "Pasiruoškite bilietų tikrinimui ir personalui"
+      },
+      "upcomingEventsTitle": "Artėjantys renginiai",
+      "upcomingEventsHint": "Artimiausi suplanuoti renginiai.",
+      "noUpcomingEvents": "Artėjančių renginių nesuplanuota.",
+      "eventStatus": {
+        "published": "paskelbtas",
+        "soldOut": "išparduota"
+      },
+      "manageEvents": "Tvarkyti renginius",
+      "topVouchers": "Populiariausi kuponai",
+      "topVouchersHint": "Dažniausiai panaudojami pasiūlymai.",
+      "noTopVouchers": "Kol kas nepanaudotas nė vienas kuponas. Čia bus rodomi dažniausiai panaudojami jūsų kuponai."
+    },
+    "stats": {
+      "activeVouchers": "Aktyvūs kuponai",
+      "publishedVouchers": "Paskelbti kuponai",
+      "openVouchers": "Atidaryti kuponus",
+      "activeCampaigns": "Aktyvios kampanijos",
+      "runningCampaigns": "Vykdomos kampanijos",
+      "openCampaigns": "Atidaryti kampanijas",
+      "activeEvents": "Aktyvūs renginiai",
+      "publishedEvents": "Paskelbti renginiai",
+      "openEvents": "Atidaryti renginius",
+      "todaysRedemptions": "Šiandienos panaudojimai",
+      "thisWeek": "Šią savaitę: {count}",
+      "reviewRedemptions": "Peržiūrėti panaudojimus",
+      "ofWeekly": "savaitės"
+    },
+    "revenue": {
+      "voucherRevenue": "Kuponų pajamos",
+      "paidVoucherSales": "Apmokėti kuponų pardavimai",
+      "openCampaignSales": "Atidaryti kampanijų pardavimus",
+      "ticketRevenue": "Bilietų pajamos",
+      "paidTicketSales": "Apmokėti bilietų pardavimai",
+      "openEventSales": "Atidaryti renginių pardavimus",
+      "creditsIssued": "Suteikti kreditai",
+      "totalCreditsDistributed": "Iš viso išdalyta kreditų",
+      "openReferralCredits": "Atidaryti rekomendacijų kreditus",
+      "outstandingLiability": "Neįvykdyti įsipareigojimai",
+      "unredeemedValue": "Nepanaudotų kuponų vertė",
+      "openVoucherLiability": "Atidaryti kuponų įsipareigojimus"
+    },
+    "recentActivity": {
+      "title": "Naujausia veikla",
+      "empty": "Naujausios veiklos nėra",
+      "unknownUser": "Nežinomas vartotojas",
+      "redeemedVoucher": "Panaudotas kuponas – {time}",
+      "confirmed": "Patvirtinta",
+      "pending": "Laukiama"
+    },
+    "liveStats": {
+      "live": "Tiesiogiai",
+      "connecting": "Jungiamasi…",
+      "redeemedToday": "<value>{count}</value> <label>panaudota šiandien</label>",
+      "pending": "<value>{count}</value> <label>laukia</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analitika",
+      "title": "Analitika",
+      "subtitle": "Stebėkite kuponų rezultatus ir pajamas",
+      "totalRedemptions": "Iš viso panaudojimų",
+      "confirmedRedemptions": "Patvirtinti panaudojimai",
+      "totalDiscounts": "Iš viso nuolaidų",
+      "givenToCustomers": "Suteikta klientams",
+      "creditsIssued": "Suteikti kreditai",
+      "totalCreditsDistributed": "Iš viso išdalyta kreditų",
+      "activeVouchers": "Aktyvūs kuponai",
+      "withRedemptions": "Su panaudojimais",
+      "charts": {
+        "redemptionTrends": "Panaudojimų tendencijos (paskutinės 30 d.)",
+        "redemptions": "Panaudojimai",
+        "revenue": "Pajamos ({currency})",
+        "topPerforming": "Geriausi kuponai",
+        "noRedeemed": "Kol kas nepanaudotas nė vienas kuponas. Čia bus rodomi geriausi jūsų kuponai.",
+        "byCategory": "Panaudojimai pagal kategoriją",
+        "noCategoryData": "Kategorijų duomenų nėra"
+      }
+    },
+    "ask": {
+      "title": "Klauskite savo duomenų",
+      "subtitle": "Užduokite klausimus apie savo verslo duomenis įprasta kalba",
+      "emptyTitle": "Klauskite bet ko apie savo duomenis",
+      "emptyHint": "Išbandykite vieną iš toliau pateiktų pasiūlymų",
+      "placeholder": "Užduokite klausimą apie savo duomenis...",
+      "suggestedTitle": "Siūlomi klausimai",
+      "suggestions": {
+        "revenueLastWeek": "Kokios buvo mano pajamos praėjusią savaitę?",
+        "dailyRedemptionsThisMonth": "Parodyk šio mėnesio dienos panaudojimus",
+        "topVouchersByRevenue": "Praėjusio mėnesio pelningiausi kuponai",
+        "customersPurchasedLastWeek": "Kiek klientų pirko praėjusią savaitę?",
+        "referralConversionRate": "Koks mano rekomendacijų konversijos rodiklis?",
+        "dailyRevenueTrend": "Parodyk šio mėnesio dienos pajamų tendenciją",
+        "purchasesYesterday": "Kiek pirkimų atlikta vakar?",
+        "bestPerformingVouchers": "Kurie mano kuponai sekasi geriausiai?"
+      },
+      "errorFallback": "Atsiprašome, nepavyko apdoroti šio klausimo.",
+      "networkError": "Tinklo klaida. Bandykite dar kartą.",
+      "itemLabel": "Elementas {n}"
+    },
+    "reports": {
+      "title": "Finansinės ataskaitos",
+      "subtitle": "Pajamų apžvalga ir eksportas",
+      "downloadCsv": "Atsisiųsti CSV",
+      "from": "Nuo",
+      "to": "Iki",
+      "apply": "Taikyti",
+      "totalRevenue": "Bendros pajamos",
+      "platformFees": "Platformos mokesčiai",
+      "netRevenue": "Grynosios pajamos",
+      "redemptions": "Panaudojimai",
+      "revenueByCurrency": "Pajamos pagal valiutą",
+      "netAndFees": "Grynosios: {net} • Mokesčiai: {fees}",
+      "monthlyRevenue": "Mėnesio pajamos",
+      "noRevenue": "Šiam laikotarpiui pajamų duomenų nėra.",
+      "month": "Mėnuo",
+      "vouchers": "Kuponai",
+      "tickets": "Bilietai",
+      "total": "Iš viso"
+    },
+    "scheduled": {
+      "title": "Suplanuotos ataskaitos",
+      "subtitle": "Nustatykite automatines ataskaitas el. paštu",
+      "backToReports": "← Finansinės ataskaitos",
+      "activeSchedules": "Aktyvūs tvarkaraščiai",
+      "loading": "Kraunama...",
+      "noSchedules": "Tvarkaraščių dar nenustatyta",
+      "period": {
+        "daily": "Kasdien",
+        "weekly": "Kas savaitę",
+        "monthly": "Kas mėnesį"
+      },
+      "reportTitle": {
+        "daily": "Dienos ataskaita",
+        "weekly": "Savaitės ataskaita",
+        "monthly": "Mėnesio ataskaita"
+      },
+      "recipientCount": "{count, plural, one {# gavėjas} few {# gavėjai} many {# gavėjo} other {# gavėjų}}",
+      "lastSent": "Paskutinį kartą išsiųsta: {date}",
+      "nextRun": "Kitas: {date}",
+      "pause": "Pristabdyti",
+      "resume": "Tęsti",
+      "createSchedule": "Sukurti tvarkaraštį",
+      "frequency": "Dažnumas",
+      "recipients": "Gavėjai",
+      "invalidEmail": "Neteisingas el. pašto adresas",
+      "emailAlreadyAdded": "Šis el. pašto adresas jau pridėtas",
+      "addAtLeastOne": "Pridėkite bent vieną gavėją",
+      "saved": "Ataskaitos tvarkaraštis išsaugotas",
+      "saveFailed": "Nepavyko išsaugoti tvarkaraščio",
+      "save": "Išsaugoti tvarkaraštį",
+      "previewTitle": "Ataskaitos peržiūra",
+      "previewBody": "Suplanuotose ataskaitose pateikiamos pajamos, panaudojimų skaičiai, populiariausi kuponai ir augimo rodikliai. Ataskaitos siunčiamos tvarkingai suformatuotais HTML laiškais 8:00 UTC.",
+      "everyMorning": "Kiekvieną rytą",
+      "everyMonday": "Kiekvieną pirmadienį",
+      "firstOfMonth": "Kiekvieno mėnesio 1 d."
+    },
+    "billing": {
+      "subscribeTo": "Užsisakyti {plan}",
+      "startFailed": "Nepavyko pradėti prenumeratos",
+      "portalFailed": "Nepavyko atidaryti atsiskaitymų portalo",
+      "manageBilling": "Tvarkyti atsiskaitymus",
+      "errorTitle": "Klaida",
+      "close": "Uždaryti",
+      "usage": "Išnaudota <b>{current}</b> / {max}",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "sukurtos kampanijos per ciklą",
+        "activeCampaigns": "aktyvios kampanijos",
+        "voucherCreatesPerCycle": "sukurti kuponai per ciklą",
+        "teamMembers": "komandos nariai"
+      },
+      "currentPlanTrial": "Dabartinis planas (nemokamas bandomasis laikotarpis)",
+      "planChangesUnavailable": "Plano pakeitimai internetu šiuo metu negalimi.",
+      "paymentsNotSetUp": "Mokėjimai internetu šioje platformoje dar nenustatyti, todėl planų čia įsigyti ar pakeisti negalima. Jei norite pakeisti planą, susisiekite su pagalbos tarnyba.",
+      "features": {
+        "starter": {
+          "vouchers": "500 kuponų per mėn.",
+          "campaigns": "3 aktyvios kampanijos",
+          "teamMembers": "2 komandos nariai",
+          "qrRedemption": "Panaudojimas QR kodu",
+          "basicAnalytics": "Pagrindinė analitika"
+        },
+        "pro": {
+          "vouchers": "5 000 kuponų per mėn.",
+          "campaigns": "25 aktyvios kampanijos",
+          "teamMembers": "10 komandos narių",
+          "advancedAnalytics": "Išplėstinė analitika",
+          "customDomain": "Nuosavas domenas",
+          "promoBoosts": "Reklamos išryškinimai"
+        },
+        "scale": {
+          "vouchers": "Neriboti kuponai",
+          "campaigns": "Neribotos kampanijos",
+          "teamMembers": "Neriboti komandos nariai",
+          "everythingInPro": "Viskas, kas yra Pro",
+          "whiteLabel": "Paruošta baltajai etiketei",
+          "prioritySupport": "Prioritetinė pagalba"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Savininkas",
+      "admin": "Administratorius",
+      "finance": "Finansai",
+      "marketing": "Rinkodara",
+      "support": "Pagalba",
+      "partner_cashier": "Kasininkas",
+      "auditor": "Auditorius"
+    },
+    "orgs": {
+      "title": "B2B organizacijos",
+      "subtitle": "Įmonių darbo erdvės su kampanijomis, kuponais ir užsakymais.",
+      "loading": "Kraunamos organizacijos...",
+      "loadFailed": "Nepavyko įkelti organizacijų",
+      "empty": "Organizacijų nerasta. Paprašykite administratoriaus jus pakviesti.",
+      "open": "Atidaryti"
+    },
+    "workspace": {
+      "fallbackName": "Organizacija",
+      "subtitle": "B2B darbo erdvės apžvalga",
+      "reports": "Ataskaitos",
+      "audit": "Auditas",
+      "partnerKeys": "Partnerių raktai",
+      "backToOrgs": "Atgal į organizacijas",
+      "loading": "Kraunama darbo erdvė...",
+      "errors": {
+        "loadOrg": "Nepavyko įkelti organizacijos",
+        "loadCampaigns": "Nepavyko įkelti kampanijų",
+        "loadVouchers": "Nepavyko įkelti kuponų",
+        "loadOrders": "Nepavyko įkelti užsakymų",
+        "load": "Nepavyko įkelti",
+        "createCampaign": "Nepavyko sukurti kampanijos",
+        "issueVouchers": "Nepavyko išduoti kuponų",
+        "updateCampaign": "Nepavyko atnaujinti kampanijos",
+        "activateCampaign": "Nepavyko aktyvuoti kampanijos",
+        "pauseCampaign": "Nepavyko pristabdyti kampanijos",
+        "archiveCampaign": "Nepavyko archyvuoti kampanijos"
+      },
+      "stats": {
+        "campaigns": "Kampanijos",
+        "vouchers": "Kuponai",
+        "orders": "Užsakymai"
+      },
+      "create": {
+        "title": "Sukurti kampaniją",
+        "name": "Kampanijos pavadinimas",
+        "value": "Vertė (mažiausiais vienetais)",
+        "currency": "Valiuta",
+        "submit": "Sukurti"
+      },
+      "campaigns": {
+        "title": "Kampanijos",
+        "empty": "Kampanijų dar nėra.",
+        "name": "Pavadinimas",
+        "value": "Vertė",
+        "activate": "Aktyvuoti",
+        "pause": "Pristabdyti",
+        "resume": "Tęsti",
+        "archive": "Archyvuoti",
+        "issue": "Išduoti {count}"
+      },
+      "recentVouchers": "Naujausi kuponai",
+      "noVouchers": "Išduotų kuponų nėra.",
+      "recentOrders": "Naujausi užsakymai",
+      "noOrders": "Užsakymų dar nėra."
+    },
+    "audit": {
+      "title": "Audito žurnalas",
+      "subtitle": "Stebėkite kuponų gyvavimo ciklą ir pakeitimus.",
+      "entityType": "Objekto tipas (voucher, campaign, order)",
+      "entityId": "Objekto ID",
+      "loading": "Kraunamas auditas...",
+      "loadFailed": "Nepavyko įkelti audito",
+      "empty": "Įvykių nėra."
+    },
+    "billing": {
+      "metaTitle": "Organizacijos atsiskaitymai",
+      "title": "Atsiskaitymai ir finansai",
+      "totalPaidOrders": "Iš viso apmokėtų užsakymų",
+      "totalRevenue": "Bendros pajamos",
+      "vatNumber": "PVM mokėtojo kodas",
+      "notSet": "Nenustatyta",
+      "recentOrders": "Naujausi užsakymai",
+      "noOrders": "Užsakymų dar nėra.",
+      "table": {
+        "date": "Data",
+        "qty": "Kiekis",
+        "total": "Iš viso",
+        "status": "Būsena",
+        "invoice": "Sąskaita faktūra"
+      }
+    },
+    "keys": {
+      "title": "Partnerių API raktai",
+      "subtitle": "Naudokite juos partnerių kuponų tikrinimui ir panaudojimui.",
+      "label": "Rakto pavadinimas (neprivalomas)",
+      "create": "Sukurti raktą",
+      "newKey": "Naujas raktas (nukopijuokite dabar)",
+      "loading": "Kraunami raktai...",
+      "empty": "Raktų dar nėra.",
+      "untitled": "Raktas be pavadinimo",
+      "created": "Sukurta {created}",
+      "createdAndLastUsed": "Sukurta {created} • Paskutinį kartą naudota {lastUsed}",
+      "revoke": "Atšaukti",
+      "errors": {
+        "load": "Nepavyko įkelti raktų",
+        "create": "Nepavyko sukurti rakto",
+        "revoke": "Nepavyko atšaukti rakto"
+      }
+    },
+    "members": {
+      "metaTitle": "Organizacijos nariai",
+      "title": "Nariai",
+      "count": "{count, plural, one {# narys} few {# nariai} many {# nario} other {# narių}}",
+      "pendingInvitations": "Laukiantys kvietimai",
+      "expires": "Galioja iki {date}"
+    },
+    "invite": {
+      "title": "Pakviesti narį",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "Administratorius",
+        "finance": "Finansai",
+        "marketing": "Rinkodara",
+        "support": "Pagalba",
+        "partner_cashier": "Partnerio kasininkas",
+        "auditor": "Auditorius"
+      },
+      "sending": "Siunčiama…",
+      "submit": "Siųsti kvietimą",
+      "sent": "Kvietimas išsiųstas adresu {email}.",
+      "failed": "Nepavyko išsiųsti kvietimo. Patikrinkite el. pašto adresą ir bandykite dar kartą.",
+      "error": "Kažkas nutiko. Bandykite dar kartą."
+    },
+    "reports": {
+      "title": "Ataskaitos",
+      "subtitle": "Panaudojimų ir kuponų ataskaitos",
+      "backToWorkspace": "Atgal į darbo erdvę",
+      "loadFailed": "Nepavyko įkelti",
+      "tabs": {
+        "redemptions": "Panaudojimai",
+        "vouchers": "Kuponai"
+      },
+      "totalRedemptions": "Iš viso panaudojimų",
+      "totalAmountRedeemed": "Bendra panaudota suma",
+      "from": "Nuo",
+      "to": "Iki",
+      "filter": "Filtruoti",
+      "pageInfo": "{page} puslapis iš {totalPages} (iš viso {total})",
+      "redemptionTable": {
+        "date": "Data",
+        "partner": "Partneris",
+        "amount": "Suma",
+        "status": "Būsena",
+        "location": "Vieta"
+      },
+      "noRedemptions": "Panaudojimų nerasta.",
+      "voucherTable": {
+        "campaign": "Kampanija",
+        "status": "Būsena",
+        "type": "Tipas",
+        "value": "Vertė",
+        "remaining": "Likutis",
+        "redeemed": "Panaudota",
+        "issuedTo": "Kam išduotas",
+        "expires": "Galioja iki"
+      },
+      "noVouchers": "Kuponų nerasta."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "pirkėjas",
+        "partner": "partneris",
+        "platform_owner": "platformos savininkas"
+      },
+      "orgStatus": {
+        "active": "aktyvi",
+        "suspended": "sustabdyta"
+      },
+      "campaignStatus": {
+        "draft": "juodraštis",
+        "active": "aktyvi",
+        "paused": "pristabdyta",
+        "archived": "archyvuota"
+      },
+      "voucherStatus": {
+        "created": "sukurtas",
+        "issued": "išduotas",
+        "active": "aktyvus",
+        "redeemed": "panaudotas",
+        "expired": "nebegalioja",
+        "voided": "anuliuotas"
+      },
+      "valueType": {
+        "fixed": "fiksuota",
+        "percent": "procentinė"
+      },
+      "orderStatus": {
+        "draft": "juodraštis",
+        "submitted": "pateiktas",
+        "invoiced": "išrašyta sąskaita",
+        "paid": "apmokėtas",
+        "cancelled": "atšauktas",
+        "refunded": "grąžinti pinigai"
+      },
+      "redemptionStatus": {
+        "approved": "patvirtintas",
+        "reversed": "atšauktas",
+        "failed": "nepavyko"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Renginiai"
+    },
+    "status": {
+      "draft": "Juodraštis",
+      "published": "Aktyvus",
+      "sold_out": "Išparduota",
+      "cancelled": "Atšauktas",
+      "ended": "Pasibaigęs"
+    },
+    "statusName": {
+      "draft": "Juodraštis",
+      "published": "Paskelbtas",
+      "sold_out": "Išparduota",
+      "cancelled": "Atšauktas",
+      "ended": "Pasibaigęs"
+    },
+    "type": {
+      "festival": "Festivalis",
+      "internal": "Vidinis renginys",
+      "concert": "Koncertas",
+      "workshop": "Dirbtuvės",
+      "other": "Kita"
+    },
+    "ticketStatus": {
+      "available": "Laisvas",
+      "sold": "Parduotas",
+      "used": "Panaudotas",
+      "cancelled": "Atšauktas",
+      "refunded": "Grąžinti pinigai"
+    },
+    "list": {
+      "subtitle": "Tvarkykite savo renginius ir bilietus",
+      "createEvent": "Sukurti renginį",
+      "stats": {
+        "totalTitle": "Iš viso renginių",
+        "totalDescription": "Visi renginiai",
+        "activeTitle": "Aktyvūs",
+        "activeDescription": "Paskelbti arba išparduoti",
+        "soldTitle": "Parduota bilietų",
+        "soldDescription": "Visuose renginiuose",
+        "revenueTitle": "Pajamos",
+        "revenueDescription": "Apmokėti bilietų pardavimai"
+      },
+      "empty": {
+        "title": "Renginių dar nėra",
+        "description": "Sukurkite renginį, kad galėtumėte parduoti bilietus ir valdyti dalyvius.",
+        "cta": "Sukurkite pirmąjį renginį"
+      },
+      "card": {
+        "date": "Data:",
+        "location": "Vieta:",
+        "price": "Kaina:",
+        "tickets": "Bilietai:",
+        "sold": "Parduota {sold} / {capacity}",
+        "free": "Nemokama",
+        "view": "Peržiūrėti",
+        "edit": "Redaguoti"
+      },
+      "weeklyRevenue": {
+        "title": "Savaitės bilietų pajamos",
+        "description": "Apmokėti bilietų pardavimai per 7 dienas.",
+        "series": "Pajamos"
+      }
+    },
+    "detail": {
+      "noDescription": "Aprašymo nėra",
+      "edit": "Redaguoti",
+      "status": "Būsena",
+      "type": "Tipas",
+      "eventDate": "Renginio data",
+      "price": "Kaina",
+      "free": "Nemokama",
+      "totalTickets": "Iš viso bilietų",
+      "sold": "Parduota",
+      "available": "Laisvi",
+      "location": "Vieta",
+      "terms": "Taisyklės ir sąlygos",
+      "ticketsTitle": "Bilietai",
+      "ticketsDescription": "Šio renginio bilietai",
+      "noTickets": "Bilietų dar nesugeneruota.",
+      "view": "Peržiūrėti",
+      "redeem": "Panaudoti"
+    },
+    "form": {
+      "basicInfo": "Pagrindinė informacija",
+      "name": "Renginio pavadinimas *",
+      "description": "Aprašymas",
+      "descriptionPlaceholder": "Aprašykite savo renginį...",
+      "type": "Renginio tipas *",
+      "typeAria": "Renginio tipas",
+      "dateTime": "Data ir laikas",
+      "eventDate": "Renginio data *",
+      "eventTime": "Renginio laikas *",
+      "endDate": "Pabaigos data (neprivaloma)",
+      "endTime": "Pabaigos laikas (neprivalomas)",
+      "location": "Vieta",
+      "locationName": "Vietos pavadinimas",
+      "locationPlaceholder": "Pagrindinė salė, lauko scena",
+      "locationPlaceholderExample": "pvz., Pagrindinė salė, lauko scena",
+      "address": "Visas adresas",
+      "addressPlaceholder": "Gatvė, miestas, šalis",
+      "ticketDetails": "Bilietų informacija",
+      "maxCapacity": "Maks. talpa (bilietai) *",
+      "maxCapacityLong": "Maks. talpa (bilietų skaičius) *",
+      "pricePerTicketCurrency": "Bilieto kaina ({currency})",
+      "pricePerTicket": "Bilieto kaina",
+      "pricePlaceholderFree": "0.00 (nemokamai)",
+      "priceHint": "Palikite tuščią nemokamiems bilietams. Pvz., 12.50 arba 12,50, kad būtų {example}.",
+      "currency": "Valiuta *",
+      "terms": "Taisyklės ir sąlygos",
+      "termsPlaceholder": "Renginio sąlygos, pinigų grąžinimo tvarka ir pan.",
+      "ticketPrice": "Bilieto kaina",
+      "endBeforeStart": "Pabaigos laikas turi būti vėlesnis nei pradžios laikas.",
+      "cancel": "Atšaukti"
+    },
+    "create": {
+      "submit": "Sukurti renginį",
+      "submitting": "Kuriama..."
+    },
+    "edit": {
+      "loading": "Kraunama...",
+      "notFound": "Renginys nerastas.",
+      "back": "Atgal į renginį",
+      "title": "Redaguoti renginį",
+      "subtitle": "Atnaujinkite renginio informaciją.",
+      "submit": "Išsaugoti pakeitimus",
+      "submitting": "Išsaugoma..."
+    },
+    "publish": {
+      "confirm": "Paskelbti šį renginį? Jis bus matomas viešai ir bus galima pirkti bilietus.",
+      "confirmLabel": "Paskelbti",
+      "failed": "Nepavyko paskelbti renginio",
+      "success": "Renginys sėkmingai paskelbtas!",
+      "published": "Paskelbtas",
+      "cannotPublish": "Negalima paskelbti",
+      "button": "Paskelbti renginį",
+      "publishing": "Skelbiama..."
+    },
+    "generate": {
+      "invalidCount": "Įveskite skaičių nuo 1 iki 1000",
+      "tooMany": "Negalima sugeneruoti {count} bilietų. Daugiausia galima: {max}",
+      "failed": "Nepavyko sugeneruoti bilietų",
+      "success": "{count, plural, one {Sėkmingai sugeneruotas # bilietas!} few {Sėkmingai sugeneruoti # bilietai!} many {Sėkmingai sugeneruota # bilieto!} other {Sėkmingai sugeneruota # bilietų!}}",
+      "open": "Generuoti bilietus",
+      "title": "Generuoti bilietus",
+      "description": "Sukurkite bilietus šiam renginiui",
+      "countLabel": "Bilietų skaičius (maks.: {max})",
+      "cancel": "Atšaukti",
+      "submit": "Generuoti",
+      "submitting": "Generuojama..."
+    },
+    "redeem": {
+      "title": "Panaudoti bilietą",
+      "subtitle": "Nuskenuokite QR kodą arba įveskite bilieto numerį",
+      "back": "Atgal į renginį",
+      "scanTitle": "Skenuoti bilietą",
+      "scanDescription": "Įveskite QR žetoną arba bilieto numerį",
+      "tokenLabel": "QR žetonas / bilieto numeris",
+      "tokenPlaceholder": "Įveskite QR žetoną arba bilieto numerį",
+      "scan": "Skenuoti",
+      "notFound": "Bilietas nerastas",
+      "found": "Bilietas rastas",
+      "number": "Numeris:",
+      "event": "Renginys:",
+      "status": "Būsena:",
+      "attendee": "Dalyvis:",
+      "redeemDescription": "Užbaikite panaudojimą",
+      "locationLabel": "Vieta (neprivaloma)",
+      "locationPlaceholder": "pvz., Pagrindinis įėjimas, A vartai",
+      "submit": "Panaudoti bilietą",
+      "submitting": "Panaudojama...",
+      "failed": "Nepavyko panaudoti bilieto",
+      "cannotRedeem": "Šio bilieto panaudoti negalima. Būsena: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Prekybininko skydelis",
+      "vouchersTitle": "Kuponų valdymas"
+    },
+    "sidebar": {
+      "title": "Prekybininkas",
+      "subtitle": "GiftHub konsolė",
+      "openMenu": "Atidaryti meniu",
+      "nav": {
+        "overview": "Apžvalga",
+        "vouchers": "Kuponai",
+        "giftCards": "Dovanų kortelės",
+        "credits": "Kreditai",
+        "brand": "Prekės ženklas"
+      }
+    },
+    "overview": {
+      "title": "Prekybininko skydelis",
+      "notConnected": "Dar nesate susietas su jokiu prekybininku."
+    },
+    "noAccess": {
+      "title": "Nėra prieigos prie prekybininko",
+      "overviewHint": "Paprašykite prekybininko administratoriaus jus pakviesti arba susikurkite prekybininko paskyrą.",
+      "creditsHint": "Prisijunkite prie prekybininko paskyros, kad matytumėte pajamas ir išmokas.",
+      "vouchersHint": "Prisijunkite prie prekybininko paskyros, kad galėtumėte tvarkyti kuponus.",
+      "exploreCampaigns": "Naršyti kampanijas"
+    },
+    "brand": {
+      "title": "Prekės ženklo nustatymai",
+      "description": "Pritaikykite prekės ženklo išvaizdą kuponuose",
+      "logoHeading": "Logotipas",
+      "logoHint": "Įkelkite prekybininko logotipą (rekomenduojama: 200x200 px, PNG arba SVG).",
+      "logoPreviewAlt": "Logotipo peržiūra",
+      "uploadLogo": "Įkelti logotipą",
+      "colorHeading": "Prekės ženklo spalva",
+      "colorHint": "Nustatykite pagrindinę prekės ženklo spalvą kuponams ir mygtukams.",
+      "colorLabel": "Spalva",
+      "colorHexLabel": "Prekės ženklo spalvos hex reikšmė",
+      "save": "Išsaugoti pakeitimus",
+      "previewHeading": "Peržiūra",
+      "previewHint": "Pažiūrėkite, kaip jūsų prekės ženklas atrodo kuponuose.",
+      "sampleMerchant": "Jūsų prekybininkas",
+      "sampleTitle": "20% nuolaida kitam pirkiniui",
+      "sampleDescription": "Galioja visoms prekėms. Negalima derinti su kitais pasiūlymais."
+    },
+    "credits": {
+      "availableBalance": "Turimas likutis",
+      "availableBalanceHint": "Paruošta išmokėti",
+      "pendingRevenue": "Laukiamos pajamos",
+      "pendingRevenueHint": "Apdorojama",
+      "recentRevenue": "Naujausios pajamos",
+      "ticketSale": "Bilieto pardavimas",
+      "voucherSale": "Kupono pardavimas",
+      "noRevenue": "Pajamų dar neužfiksuota",
+      "payoutRequests": "Išmokų prašymai",
+      "noPayoutRequests": "Išmokų prašymų dar nėra",
+      "requestPayoutHeading": "Prašyti išmokos",
+      "minimumPayout": "Mažiausia išmokos suma: {amount}",
+      "submitting": "Pateikiama...",
+      "requestPayout": "Prašyti išmokos",
+      "requestSubmitted": "Išmokos prašymas pateiktas",
+      "requestFailed": "Nepavyko pateikti išmokos prašymo",
+      "status": {
+        "paid": "išmokėta",
+        "pending": "laukiama",
+        "requested": "paprašyta",
+        "completed": "įvykdyta",
+        "failed": "nepavyko"
+      }
+    },
+    "newVoucher": {
+      "title": "Sukurti kuponą",
+      "description": "Sukurkite ir sukonfigūruokite naują kuponų kampaniją",
+      "detailsHeading": "Kupono informacija",
+      "titleLabel": "Pavadinimas",
+      "titlePlaceholder": "pvz., 20% nuolaida kitam pirkiniui",
+      "descriptionLabel": "Aprašymas",
+      "descriptionPlaceholder": "Galioja visoms prekėms. Negalima derinti su kitais pasiūlymais.",
+      "expiryDateLabel": "Galiojimo pabaiga",
+      "weeklyLabel": "Savaitinis pasiūlymas",
+      "weeklyHint": "Ribotą laiką kiekvieną savaitę",
+      "weeklyAria": "Savaitinis pasiūlymas – ribotą laiką kiekvieną savaitę",
+      "referralLabel": "Įjungti rekomendacijos kreditą",
+      "referralHint": "Vartotojai gauna kreditą, kai draugai panaudoja kuponą",
+      "referralAria": "Įjungti rekomendacijos kreditą – vartotojai gauna kreditą, kai draugai panaudoja kuponą",
+      "brandColorLabel": "Prekės ženklo spalva",
+      "brandColorHexLabel": "Prekės ženklo spalvos hex reikšmė",
+      "saveDraft": "Išsaugoti juodraštį",
+      "createAndPublish": "Sukurti ir paskelbti",
+      "previewHeading": "Peržiūra",
+      "sampleMerchant": "Jūsų prekybininkas",
+      "sampleTitle": "Kupono pavadinimas",
+      "sampleDescription": "Čia bus rodomas kupono aprašymas"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Viešas puslapis bus pasiekiamas, kai kuponas bus paskelbtas.",
+    "list": {
+      "metaTitle": "Kuponai",
+      "subtitle": "Tvarkykite ir kurkite kuponus",
+      "bulkImport": "Masinis importas iš CSV",
+      "stats": {
+        "totalTitle": "Iš viso kuponų",
+        "totalDescription": "Visi sukurti kuponai",
+        "activeTitle": "Aktyvūs",
+        "activeDescription": "Paskelbti kuponai",
+        "draftsTitle": "Juodraščiai",
+        "draftsDescription": "Dar nepaskelbti",
+        "pausedEndedTitle": "Pristabdyti / pasibaigę",
+        "pausedEndedDescription": "Pristabdyta: {paused}, pasibaigę: {ended}",
+        "redemptionsTitle": "Panaudojimai",
+        "redemptionsDescription": "Iš viso panaudojimų"
+      },
+      "empty": {
+        "title": "Kuponų dar nėra",
+        "description": "Pradėkite sukurdami pirmąjį kuponą.",
+        "action": "Sukurkite pirmąjį kuponą"
+      },
+      "searchPlaceholder": "Ieškokite pagal antraštę, kodo priešdėlį ar ID",
+      "searchLabel": "Ieškoti kuponų",
+      "statusLabel": "Būsena",
+      "statusAll": "Visos būsenos",
+      "status": {
+        "published": "Aktyvus",
+        "paused": "Pristabdytas",
+        "draft": "Juodraštis",
+        "ended": "Pasibaigęs",
+        "expired": "Nebegalioja"
+      },
+      "typeLabel": "Tipas",
+      "typeAll": "Visi tipai",
+      "sortLabel": "Rikiuoti pagal",
+      "sort": {
+        "date": "Datą (naujausi)",
+        "name": "Pavadinimą (A–Z)",
+        "redemptions": "Panaudojimus"
+      },
+      "showing": "Rodoma kuponų: {shown} iš {total}",
+      "clearFilters": "Išvalyti filtrus",
+      "noMatches": "Nėra filtrus atitinkančių kuponų.",
+      "usage": "Naudojimas",
+      "usageUnlimited": "Naudojimas: {used} – neribota",
+      "view": "Peržiūrėti"
+    },
+    "rowActions": {
+      "pauseTitle": "Pristabdyti kuponą",
+      "pauseDescription": "Ar tikrai norite pristabdyti šį kuponą? Kol jis pristabdytas, vartotojai negalės jo pirkti ar panaudoti.",
+      "pauseConfirm": "Pristabdyti",
+      "paused": "Kuponas pristabdytas",
+      "pauseFailed": "Nepavyko pristabdyti kupono",
+      "loadFailed": "Nepavyko įkelti kupono",
+      "duplicateLabel": "Dubliuoti kuponą",
+      "duplicated": "Kuponas dubliuotas",
+      "duplicateFailed": "Nepavyko dubliuoti"
+    },
+    "publish": {
+      "confirmMessage": "Paskelbti šį kuponą? Jis bus matomas viešai.",
+      "confirmLabel": "Paskelbti",
+      "failed": "Nepavyko paskelbti kupono",
+      "success": "Kuponas sėkmingai paskelbtas!",
+      "publishing": "Skelbiama...",
+      "button": "Paskelbti kuponą"
+    },
+    "new": {
+      "iconLetter": "K",
+      "created": "Kuponas sukurtas kaip juodraštis. Paskelbkite jį, kai būsite pasiruošę jį parodyti klientams."
+    },
+    "edit": {
+      "iconLetter": "R",
+      "subtitle": "Atnaujinkite kupono informaciją ir prieinamumą.",
+      "updated": "Kuponas sėkmingai atnaujintas",
+      "updateFailed": "Nepavyko atnaujinti kupono",
+      "updateFailedRetry": "Nepavyko atnaujinti kupono. Bandykite dar kartą.",
+      "updating": "Atnaujinama...",
+      "update": "Atnaujinti kuponą",
+      "viewPublicPage": "Peržiūrėti viešą puslapį"
+    },
+    "form": {
+      "stepOf": "{current} žingsnis iš {total}",
+      "typeLabel": "Tipas",
+      "typeAria": "Kupono tipas",
+      "customersGetOff": "Klientai gauna {value} nuolaidą.",
+      "customersGetCredit": "Klientai gauna {value} kredito.",
+      "percentHint": "Įveskite procentą, pvz., 15 arba 12,5.",
+      "amountHint": "Įveskite sumą valiuta {currency}, pvz., 4.50 arba 4,50, kad būtų {example}.",
+      "validityHint": "Kuponą galima naudoti nuo pirmosios dienos pradžios iki paskutinės dienos pabaigos.",
+      "enableWeeklyDropAria": "Įjungti savaitinį pasiūlymą",
+      "weeklyDropDayAria": "Savaitinio pasiūlymo savaitės diena",
+      "weeklyDropTimeAria": "Savaitinio pasiūlymo pradžios laikas",
+      "headlinePlaceholder": "15% nuolaida užsakymui",
+      "finePrintPlaceholder": "Galioja tik naujiems klientams",
+      "previewFallbackHeadline": "Jūsų kuponas",
+      "previewValidUntil": "Galioja iki {date}",
+      "errors": {
+        "discountAboveZero": "Įveskite didesnę nei 0% nuolaidą.",
+        "valueAboveZero": "Įveskite didesnę nei 0 vertę.",
+        "chooseDates": "Pasirinkite, kada kuponas prasideda ir baigiasi.",
+        "endBeforeStart": "Pabaigos data turi būti tokia pati kaip pradžios data arba vėlesnė.",
+        "invalidValue": "Įveskite tinkamą vertę.",
+        "valueMustBePositive": "Vertė turi būti didesnė nei 0",
+        "totalLimitPositive": "Bendras naudojimo limitas turi būti teigiamas skaičius",
+        "perUserLimitPositive": "Limitas vienam vartotojui turi būti teigiamas skaičius"
+      },
+      "discountErrors": {
+        "negative": "Nuolaida negali būti neigiama.",
+        "invalid": "Nuolaida nėra tinkamas skaičius.",
+        "decimals": "Nuolaida gali turėti ne daugiau kaip {decimals} skaitmenis po kablelio.",
+        "tooLarge": "Nuolaida per didelė.",
+        "tooHigh": "Nuolaida negali viršyti 100%."
+      },
+      "valueErrors": {
+        "negative": "Vertė negali būti neigiama.",
+        "invalid": "Vertė nėra tinkamas skaičius.",
+        "wholeNumber": "Vertė turi būti sveikasis skaičius.",
+        "decimals": "Vertė gali turėti ne daugiau kaip {decimals} skaitmenis po kablelio.",
+        "tooLarge": "Vertė per didelė."
+      }
+    },
+    "bulkImport": {
+      "back": "Atgal į kuponus",
+      "title": "Importuoti kuponus iš skaičiuoklės",
+      "intro": "Įkelkite CSV failą (iki 500 eilučių). Kiekvienas kuponas sukuriamas kaip juodraštis, todėl niekas nebus paskelbta, kol to nepadarysite.",
+      "columns": "Stulpeliai",
+      "downloadSample": "Atsisiųsti CSV pavyzdį",
+      "columnRequired": "<code>{name}</code> (privalomas): {help}",
+      "columnOptional": "<code>{name}</code> (neprivalomas): {help}",
+      "columnHelp": {
+        "name": "Kupono pavadinimas, kurį mato klientai, pvz., „Pavasario kavos pasiūlymas“.",
+        "type": "„amount“ (nuolaida suma), „percent“ (nuolaida procentais) arba „credit“ (parduotuvės kreditas).",
+        "value": "Eurai, jei amount/credit (10 arba 10.50), procentai, jei percent (15 arba 12.5).",
+        "currency": "Trijų raidžių kodas, pvz., EUR. Numatytoji – jūsų parduotuvės valiuta.",
+        "valid_from": "Pirmoji kupono galiojimo diena: 2026-10-01 arba 01.10.2026.",
+        "valid_to": "Paskutinė kupono galiojimo diena (jis galioja iki tos dienos pabaigos).",
+        "code_prefix": "Raidės kiekvieno kodo pradžioje, pvz., SPRING.",
+        "usage_limit": "Kiek kartų iš viso jį galima panaudoti. Palikite tuščią, jei neribota."
+      },
+      "separatorHint": "Stulpelius atskirkite kableliais arba kabliataškiais. Jei naudojate kablelius, dešimtaines sumas rašykite kabutėse („4,50“) arba naudokite tašką (4.50).",
+      "chooseFile": "Pasirinkite CSV failą",
+      "chooseDifferent": "Spustelėkite, kad pasirinktumėte kitą failą",
+      "browse": "Spustelėkite, kad naršytumėte",
+      "fixRows": "Pataisykite šias eilutes ir įkelkite failą dar kartą:",
+      "andMore": "…ir dar {count}.",
+      "readyToImport": "{count, plural, one {Paruošta importuoti # kuponą:} few {Paruošta importuoti # kuponus:} many {Paruošta importuoti # kupono:} other {Paruošta importuoti # kuponų:}}",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, iki {limit} panaudojimų} other {}}",
+      "imported": "{count, plural, one {Importuotas # kuponas kaip juodraštis.} few {Importuoti # kuponai kaip juodraščiai.} many {Importuota # kupono kaip juodraščių.} other {Importuota # kuponų kaip juodraščių.}}",
+      "viewVouchers": "Peržiūrėti kuponus",
+      "importing": "Importuojama...",
+      "importCount": "{count, plural, one {Importuoti # kuponą} few {Importuoti # kuponus} many {Importuoti # kupono} other {Importuoti # kuponų}}",
+      "importVouchers": "Importuoti kuponus",
+      "importFailedStatus": "Importas nepavyko (klaida {status}).",
+      "importFailed": "Importas nepavyko"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Pagrindinis blokas + CTA",
+          "description": "Pirmame ekrane matoma antraštė su pagrindiniu veiksmu."
+        },
+        "value_props": {
+          "label": "Privalumai",
+          "description": "Trumpi privalumai ir garantijos."
+        },
+        "featured_products": {
+          "label": "Rekomenduojami produktai",
+          "description": "Populiariausi produktai su kainomis ir žymomis."
+        },
+        "featured_vouchers": {
+          "label": "Rekomenduojami kuponai",
+          "description": "Aktyvių kuponų kortelės akcijoms."
+        },
+        "rental_packages": {
+          "label": "Nuomos paketai",
+          "description": "Nuomos rinkiniai ir dienos kainos."
+        },
+        "categories": {
+          "label": "Kategorijų tinklelis",
+          "description": "Naršymas pagal tipą, paskirtį ar auditoriją."
+        },
+        "availability": {
+          "label": "Užimtumo kalendorius",
+          "description": "Laisvumas realiuoju laiku ir rezervacijos laikai."
+        },
+        "testimonials": {
+          "label": "Atsiliepimai",
+          "description": "Klientų citatos ir įvertinimai žvaigždutėmis."
+        },
+        "gallery": {
+          "label": "Galerija",
+          "description": "Gyvenimo būdo nuotraukos ar naudojimo pavyzdžiai."
+        },
+        "pricing": {
+          "label": "Kainų lentelė",
+          "description": "Aiškūs kainų lygiai."
+        },
+        "rental_terms": {
+          "label": "Nuomos sąlygos",
+          "description": "Užstatas, draudimas ir grąžinimo tvarka."
+        },
+        "faq": {
+          "label": "DUK",
+          "description": "Atsakymai į dažniausias abejones."
+        },
+        "newsletter": {
+          "label": "Naujienlaiškio prenumerata",
+          "description": "Rinkite el. pašto adresus kampanijoms."
+        },
+        "contact": {
+          "label": "Kontaktų blokas",
+          "description": "Pagalba pokalbiu, el. paštu ar telefonu."
+        },
+        "map": {
+          "label": "Vietos žemėlapis",
+          "description": "Atsiėmimo punktas ar parduotuvės vieta."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Akcijų juosta",
+          "description": "Fiksuota viršutinė juosta pasiūlymams ir pranešimams."
+        },
+        "sticky_cta": {
+          "label": "Fiksuotas CTA",
+          "description": "Slenkant nuolat matomas veiksmo mygtukas."
+        },
+        "chat_widget": {
+          "label": "Pokalbių valdiklis",
+          "description": "Tiesioginis pokalbis arba WhatsApp integracija."
+        },
+        "trust_badges": {
+          "label": "Patikimumo ženkleliai",
+          "description": "Mokėjimo, saugumo ar kokybės ženkleliai."
+        },
+        "social_proof": {
+          "label": "Socialinio įrodymo iššokantis langas",
+          "description": "Naujausia veikla ir pirkimai."
+        },
+        "countdown": {
+          "label": "Atgalinis laikmatis",
+          "description": "Skubos jausmas ribotiems pasiūlymams."
+        },
+        "reviews_widget": {
+          "label": "Atsiliepimų valdiklis",
+          "description": "Įterpkite Google arba Trustpilot."
+        },
+        "language_switch": {
+          "label": "Kalbos perjungiklis",
+          "description": "Greitas kalbos perjungimas puslapyje."
+        },
+        "analytics": {
+          "label": "Analitikos fragmentai",
+          "description": "Vietos sekimo pikseliams."
+        },
+        "cookie_banner": {
+          "label": "Slapukų juosta",
+          "description": "BDAR sutikimo juosta."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Peržiūra",
+      "edit": "Redaguoti",
+      "previewEmpty": "Skilčių dar nepridėta. Perjunkite į redagavimo režimą, kad pridėtumėte skilčių.",
+      "title": "Vizualinis redaktorius",
+      "preview": "Peržiūra",
+      "empty": "Skilčių dar nėra. Spustelėkite „Pridėti skiltį“ žemiau ir pradėkite kurti.",
+      "collapseSettings": "Suskleisti nustatymus",
+      "expandSettings": "Išskleisti nustatymus",
+      "removeSection": "Pašalinti skiltį „{label}“",
+      "sectionTitle": "Skilties pavadinimas",
+      "description": "Aprašymas",
+      "descriptionPlaceholder": "Neprivalomas aprašymas",
+      "backgroundColor": "Fono spalva",
+      "layoutVariant": "Išdėstymo variantas",
+      "layout": {
+        "default": "Numatytasis",
+        "centered": "Centruotas",
+        "wide": "Platus",
+        "compact": "Kompaktiškas"
+      },
+      "addSection": "Pridėti skiltį",
+      "availableSections": "Galimos skiltys",
+      "closeCatalog": "Uždaryti",
+      "allAdded": "Pridėtos visos galimos skiltys.",
+      "count": "{configured, plural, one {Sukonfigūruota # skiltis} few {Sukonfigūruotos # skiltys} many {Sukonfigūruota # skilties} other {Sukonfigūruota # skilčių}} / galima pridėti: {available}"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Parduotuvės paleidimo kontrolinis sąrašas",
+        "rental_launch": "Nuomos puslapio paleidimo kontrolinis sąrašas",
+        "campaign_ops": "Savaitinis kampanijų valdymas",
+        "support_ops": "Pagalbos pasirengimo kontrolinis sąrašas"
+      },
+      "toast": {
+        "saved": "Puslapių kūrėjas atnaujintas.",
+        "saveFailed": "Nepavyko išsaugoti puslapio",
+        "vibeFailed": "Vibe agentui nepavyko",
+        "layoutGenerated": "Vibe išdėstymas sugeneruotas.",
+        "generateFailed": "Nepavyko sugeneruoti išdėstymo",
+        "agentFailed": "Agentui nepavyko",
+        "planGenerated": "Proceso planas sugeneruotas.",
+        "runAgentFailed": "Nepavyko paleisti agento"
+      },
+      "noData": "Puslapių kūrėjo duomenų nėra.",
+      "title": "Puslapių kūrėjas",
+      "intro": "Greitai kurkite parduotuvės ir nuomos puslapius iš modulinių skilčių ir priedų.",
+      "introAi": "Greitai kurkite parduotuvės ir nuomos puslapius iš modulinių skilčių ir priedų, pasinaudodami DI pasiūlymais.",
+      "tabs": {
+        "store": "Parduotuvė",
+        "rental": "Nuoma"
+      },
+      "details": {
+        "title": "Puslapio informacija",
+        "subtitle": "Pavadinimas, paantraštė ir išdėstymas.",
+        "save": "Išsaugoti",
+        "pageTitle": "Puslapio pavadinimas",
+        "subtitleLabel": "Paantraštė"
+      },
+      "sections": {
+        "title": "Skiltys",
+        "subtitle": "Vilkite, kad pakeistumėte tvarką, išskleiskite, kad sukonfigūruotumėte, arba peržiūrėkite išdėstymą.",
+        "suggestLayout": "Pasiūlyti išdėstymą",
+        "suggestionsLeft": "Liko DI išdėstymo pasiūlymų: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Priedai",
+        "subtitle": "Papildomi valdikliai ir rinkodaros sluoksniai.",
+        "enable": "Įjungti priedą „{label}“",
+        "disable": "Išjungti priedą „{label}“"
+      },
+      "summary": {
+        "title": "Suvestinė realiuoju laiku",
+        "line": "{title} · {sections, plural, one {# skiltis} few {# skiltys} many {# skilties} other {# skilčių}} · {addons, plural, one {# priedas} few {# priedai} many {# priedo} other {# priedų}}",
+        "sectionsLabel": "Skiltys:",
+        "addonsLabel": "Priedai:",
+        "none": "Nėra"
+      },
+      "assistant": {
+        "title": "Paleidimo kontrolinio sąrašo asistentas",
+        "subtitle": "Generuokite veiksmų planus ir darbo kontrolinius sąrašus.",
+        "goalLabel": "Proceso tikslas",
+        "createChecklist": "Sukurti kontrolinį sąrašą",
+        "checklistsLeft": "Liko kontrolinių sąrašų: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Atrinkti {name} pasiūlymai, nuoma ir kuponai.",
+        "shopProducts": "Pirkti produktus",
+        "browseRentals": "Naršyti nuomą"
+      },
+      "valueProps": {
+        "rewardsTitle": "Apdovanojimai",
+        "rewardsText": "Kuponų paskatos jau įtrauktos.",
+        "stockTitle": "Patikimos atsargos",
+        "stockText": "Aktualios kainos ir prieinamumas.",
+        "datesTitle": "Lanksčios datos",
+        "datesText": "Lengvai planuokite nuomą."
+      },
+      "viewAll": "Žiūrėti viską",
+      "seeAll": "Žiūrėti viską",
+      "products": {
+        "title": "Rekomenduojami produktai",
+        "empty": "Produktų dar nėra.",
+        "fallbackDescription": "Išskirtinis produktas"
+      },
+      "rentals": {
+        "title": "Nuomos paketai",
+        "empty": "Nuomos pasiūlymų dar nėra.",
+        "fallbackDescription": "Išskirtinis nuomos pasiūlymas",
+        "perDay": "{price} / d."
+      },
+      "categories": {
+        "title": "Naršyti kategorijas",
+        "popular": "Populiaru",
+        "business": "Verslui",
+        "events": "Renginiai",
+        "seasonal": "Sezoniniai",
+        "corporate": "Įmonėms",
+        "custom": "Individualūs"
+      },
+      "availability": {
+        "title": "Laisvumas realiuoju laiku",
+        "text": "Patikrinkite laisvumą ir per kelias minutes gaukite pasiūlymą.",
+        "seeCalendar": "Žiūrėti kalendorių"
+      },
+      "testimonials": {
+        "title": "Ką sako klientai",
+        "smooth": "Sklandus procesas",
+        "lovedVoucher": "Kuponas labai patiko",
+        "support": "Puiki pagalba"
+      },
+      "gallery": {
+        "title": "Galerija"
+      },
+      "pricing": {
+        "title": "Kainos",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Enterprise",
+        "tierText": "Individualios kainos ir pagalba"
+      },
+      "rentalTerms": {
+        "title": "Nuomos sąlygos",
+        "text": "Aiškūs užstatai, atsiėmimo taisyklės ir grąžinimo tvarka – iš anksto."
+      },
+      "faq": {
+        "title": "DUK",
+        "redeem": "Kaip panaudoti?",
+        "reschedule": "Ar galiu pakeisti laiką?",
+        "support": "Ar teikiate pagalbą?"
+      },
+      "newsletter": {
+        "title": "Būkite informuoti",
+        "text": "Gaukite naujus pasiūlymus ir nuomos naujienas į savo el. paštą.",
+        "emailLabel": "El. pašto adresas",
+        "subscribe": "Prenumeruoti"
+      },
+      "contact": {
+        "title": "Kontaktai",
+        "emailUs": "Rašykite mums adresu {email}"
+      },
+      "map": {
+        "text": "Atsiėmimo vieta pateikiama po rezervacijos."
+      },
+      "vouchers": {
+        "title": "Aktyvūs kuponai",
+        "empty": "Kuponų nėra.",
+        "voucher": "Kuponas",
+        "view": "Peržiūrėti kuponą"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Aktyvi",
+      "redeemed": "Panaudota",
+      "expired": "Nebegalioja",
+      "cancelled": "Atšaukta"
+    },
+    "list": {
+      "metaTitle": "Dovanų kortelės",
+      "title": "Dovanų kortelės",
+      "subtitle": "Kurkite ir tvarkykite dovanų korteles",
+      "newGiftCard": "Nauja dovanų kortelė",
+      "stats": {
+        "total": "Iš viso dovanų kortelių",
+        "totalDescription": "Visos išduotos dovanų kortelės",
+        "active": "Aktyvios",
+        "activeDescription": "Šiuo metu galima panaudoti",
+        "redeemed": "Panaudotos",
+        "redeemedDescription": "Įvykdyti panaudojimai",
+        "totalValue": "Bendra vertė",
+        "totalValueDescription": "Išduotų dovanų kortelių vertė"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Dovanų kortelių dar nėra",
+      "emptyDescription": "Sukurkite dovanų kortelę su savo prekės ženklu ir panaudojimu QR kodu.",
+      "createFirst": "Sukurkite pirmąją dovanų kortelę",
+      "searchPlaceholder": "Ieškokite pagal antraštę, kodą ar žinutę",
+      "searchLabel": "Ieškoti dovanų kortelių",
+      "status": "Būsena",
+      "allStatus": "Visos būsenos",
+      "sortBy": "Rikiuoti pagal",
+      "sortDate": "Datą (naujausios)",
+      "sortAmount": "Sumą (nuo didžiausios)",
+      "showing": "Rodoma {shown} iš {total, plural, one {# dovanų kortelės} few {# dovanų kortelių} many {# dovanų kortelės} other {# dovanų kortelių}}",
+      "clearFilters": "Išvalyti filtrus",
+      "noMatches": "Nėra filtrus atitinkančių dovanų kortelių.",
+      "defaultHeadline": "Dovanų kortelė",
+      "noExpiry": "Neterminuota",
+      "validUntil": "Galioja iki: {date}",
+      "redeemedOn": "Panaudota: {date}",
+      "details": "Informacija",
+      "view": "Peržiūrėti"
+    },
+    "detail": {
+      "title": "Dovanų kortelė",
+      "code": "Kodas {code}",
+      "publicView": "Viešas rodinys",
+      "newGiftCard": "Nauja dovanų kortelė",
+      "detailsTitle": "Dovanų kortelės informacija",
+      "value": "Vertė",
+      "validFrom": "Galioja nuo",
+      "validTo": "Galioja iki",
+      "noExpiry": "Neterminuota",
+      "redeemedAt": "Panaudota",
+      "notRedeemed": "Nepanaudota",
+      "qrTitle": "Darbuotojų panaudojimo QR kodas",
+      "qrHelp": "Darbuotojai gali nuskenuoti šį QR kodą, kad panaudotų ir anuliuotų dovanų kortelę."
+    },
+    "new": {
+      "title": "Nauja dovanų kortelė",
+      "subtitle": "Pritaikykite ir išduokite dovanų kortelę",
+      "created": "Dovanų kortelė sukurta.",
+      "cancel": "Atšaukti",
+      "creating": "Kuriama...",
+      "submit": "Sukurti dovanų kortelę",
+      "errors": {
+        "amountRequired": "Įveskite didesnę nei 0 sumą.",
+        "endBeforeStart": "Pabaigos data turi būti tokia pati kaip pradžios data arba vėlesnė.",
+        "createFailed": "Nepavyko sukurti dovanų kortelės"
+      },
+      "amountErrors": {
+        "negative": "Suma negali būti neigiama.",
+        "invalid": "Suma nėra tinkamas skaičius.",
+        "wholeNumber": "Suma turi būti sveikasis skaičius.",
+        "decimals": "Suma gali turėti ne daugiau kaip {decimals} skaitmenis po kablelio.",
+        "tooLarge": "Suma per didelė."
+      },
+      "priceErrors": {
+        "negative": "Pardavimo kaina negali būti neigiama.",
+        "invalid": "Pardavimo kaina nėra tinkamas skaičius.",
+        "wholeNumber": "Pardavimo kaina turi būti sveikasis skaičius.",
+        "decimals": "Pardavimo kaina gali turėti ne daugiau kaip {decimals} skaitmenis po kablelio.",
+        "tooLarge": "Pardavimo kaina per didelė."
+      },
+      "valueSection": {
+        "title": "Vertė ir galiojimas",
+        "description": "Nustatykite sumą, valiutą ir galiojimo pabaigą",
+        "amount": "Suma",
+        "faceValue": "Nominali vertė: {value}.",
+        "amountHelp": "Įveskite sumą valiuta {currency}, pvz., 50 arba 49,90, kad būtų {example}.",
+        "currency": "Valiuta",
+        "validFrom": "Galioja nuo",
+        "validTo": "Galioja iki",
+        "noExpiry": "Be galiojimo pabaigos"
+      },
+      "purchaseSection": {
+        "title": "Pirkimas klientams",
+        "description": "Leiskite klientams įsigyti šią dovanų kortelę internetu",
+        "purchasable": "Klientai gali įsigyti",
+        "salePrice": "Pardavimo kaina (neprivaloma, pagal nutylėjimą – nominali vertė)",
+        "salePricePlaceholder": "Tokia pati kaip suma",
+        "customersPay": "Klientai mokės {value}.",
+        "salePriceHelp": "Palikite tuščią, kad parduotumėte nominalia verte. Akcijoms nustatykite kitą kainą."
+      },
+      "brandingSection": {
+        "title": "Prekės ženklas ir žinutė",
+        "description": "Antraštė, žinutė, vaizdai ir spalvos",
+        "headline": "Antraštė",
+        "headlinePlaceholder": "Dovana kavos mėgėjams",
+        "message": "Žinutė",
+        "messagePlaceholder": "Pridėkite asmeninę žinutę gavėjui",
+        "logoUrl": "Logotipo URL",
+        "imageUrl": "Vaizdo URL",
+        "accentColor": "Akcento spalva",
+        "backgroundColor": "Fono spalva",
+        "textColor": "Teksto spalva",
+        "codePrefix": "Kodo priešdėlis (neprivalomas)"
+      },
+      "preview": {
+        "title": "Peržiūra",
+        "defaultHeadline": "Dovanų kortelė",
+        "imageAlt": "Dovanų kortelė",
+        "logoAlt": "Prekės ženklo logotipas",
+        "notePlaceholder": "Pridėkite asmeninį palinkėjimą"
+      }
+    },
+    "gifts": {
+      "title": "Dovanų produktai",
+      "subtitle": "Tvarkykite savo produktus Gift Hub",
+      "dashboard": "Skydelis",
+      "confirmDelete": "Ar tikrai? Produktas bus išjungtas.",
+      "stats": {
+        "total": "Iš viso",
+        "active": "Aktyvūs",
+        "views": "Peržiūros",
+        "purchases": "Pirkimai"
+      },
+      "emptyTitle": "Dovanų produktų dar nėra",
+      "emptyDescription": "Pridėkite pirmąjį produktą, kad jis atsirastų Gift Hub sraute.",
+      "emptyApiHint": "Produktams kurti naudokite API adresu <code>{endpoint}</code>.",
+      "inactive": "Neaktyvus",
+      "featured": "Rekomenduojamas",
+      "views": "{count, plural, one {# peržiūra} few {# peržiūros} many {# peržiūros} other {# peržiūrų}}",
+      "purchases": "{count, plural, one {# pirkimas} few {# pirkimai} many {# pirkimo} other {# pirkimų}}",
+      "conversionRate": "{rate}% konversija",
+      "activate": "Aktyvuoti",
+      "deactivate": "Išjungti",
+      "delete": "Ištrinti"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Duomenų nėra",
+      "value": "Vertė: <strong>{value}</strong>",
+      "dismiss": "Atmesti",
+      "remove": "Pašalinti",
+      "dialog": "Dialogo langas",
+      "close": "Uždaryti",
+      "loading": "Kraunama"
+    },
+    "analyticsFunnel": {
+      "empty": "Šiuo laikotarpiu veiklos dar nėra",
+      "top": "Viršus",
+      "drop": "-{rate}% kritimas"
+    },
+    "periodComparison": {
+      "title": "Laikotarpių palyginimas",
+      "loading": "Kraunama...",
+      "previous": "Ankstesnis: {value}",
+      "noData": "Duomenų nėra",
+      "period": {
+        "day": "Diena",
+        "week": "Savaitė",
+        "month": "Mėnuo",
+        "quarter": "Ketvirtis",
+        "year": "Metai"
+      },
+      "metric": {
+        "revenue": "Pajamos",
+        "redemptions": "Panaudojimai",
+        "purchases": "Pirkimai",
+        "referrals": "Rekomendacijos",
+        "customers": "Klientai"
+      }
+    },
+    "trendChart": {
+      "noData": "Duomenų nėra"
+    },
+    "conversionChart": {
+      "noData": "Duomenų nėra",
+      "previous": "ankst.: {value}"
+    },
+    "funnelChart": {
+      "empty": "Šiuo laikotarpiu veiklos dar nėra"
+    },
+    "geoMap": {
+      "noData": "Duomenų nėra",
+      "value": "Vertė: <strong>{value}</strong>",
+      "country": {
+        "GB": "Jungtinė Karalystė",
+        "IE": "Airija",
+        "FR": "Prancūzija",
+        "DE": "Vokietija",
+        "ES": "Ispanija",
+        "PT": "Portugalija",
+        "IT": "Italija",
+        "NL": "Nyderlandai",
+        "BE": "Belgija",
+        "CH": "Šveicarija",
+        "AT": "Austrija",
+        "PL": "Lenkija",
+        "CZ": "Čekija",
+        "SE": "Švedija",
+        "NO": "Norvegija",
+        "FI": "Suomija",
+        "DK": "Danija",
+        "EE": "Estija",
+        "LV": "Latvija",
+        "LT": "Lietuva",
+        "HU": "Vengrija",
+        "RO": "Rumunija",
+        "BG": "Bulgarija",
+        "GR": "Graikija",
+        "HR": "Kroatija",
+        "SK": "Slovakija",
+        "SI": "Slovėnija",
+        "RS": "Serbija",
+        "UA": "Ukraina",
+        "BY": "Baltarusija"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Laukiama duomenų..."
+    },
+    "pieDonutChart": {
+      "noData": "Duomenų nėra",
+      "total": "Iš viso"
+    },
+    "activityFeed": {
+      "justNow": "ką tik",
+      "minutesAgo": "prieš {count} min.",
+      "hoursAgo": "prieš {count} val.",
+      "daysAgo": "prieš {count} d.",
+      "empty": "Veiklos dar nėra",
+      "loadMore": "Įkelti daugiau",
+      "eventType": {
+        "purchase": "Pirkimas",
+        "redemption": "Panaudojimas",
+        "signup": "Registracija",
+        "alert": "Įspėjimas"
+      }
+    },
+    "dateRange": {
+      "days7": "7 dienos",
+      "days30": "30 dienų",
+      "days90": "90 dienų",
+      "year1": "1 metai",
+      "custom": "Pasirinktinis"
+    },
+    "chartCard": {
+      "fullscreen": "Visas ekranas",
+      "exitFullscreen": "Išeiti iš viso ekrano",
+      "retry": "Bandyti dar kartą"
+    },
+    "dashboardHeader": {
+      "export": "Eksportuoti",
+      "exportAs": "Eksportuoti kaip {format}"
+    },
+    "dataTable": {
+      "empty": "Duomenų nėra",
+      "showing": "Rodoma {from}–{to} iš {total}",
+      "previousPage": "Ankstesnis puslapis",
+      "nextPage": "Kitas puslapis"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Tiesiogiai",
+        "reconnecting": "Jungiamasi iš naujo",
+        "disconnected": "Atsijungta"
+      },
+      "status": {
+        "connected": "Prisijungta",
+        "reconnecting": "Jungiamasi iš naujo",
+        "disconnected": "Atsijungta"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "palyginti su ankstesniu laikotarpiu"
+    },
+    "statComparison": {
+      "current": "Dabartinis",
+      "previous": "Ankstesnis",
+      "change": "pokytis"
+    },
+    "aiInsightPanel": {
+      "title": "DI įžvalgos",
+      "placeholder": "Užduokite klausimą DI...",
+      "send": "Siųsti"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Tiesiogiai",
+        "degraded": "Sutrikęs",
+        "disconnected": "Neprisijungta"
+      },
+      "latency": "Delsa: {ms} ms",
+      "lastUpdate": "Paskutinis atnaujinimas: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Pranešimai",
+      "title": "Pranešimai",
+      "markAllRead": "Pažymėti visus kaip perskaitytus",
+      "empty": "Pranešimų nėra",
+      "ariaLabelUnread": "Pranešimai (neperskaityta: {count})"
+    },
+    "premiumChartCard": {
+      "info": "Informacija",
+      "fullscreen": "Visas ekranas",
+      "exitFullscreen": "Išeiti iš viso ekrano",
+      "moreOptions": "Daugiau parinkčių",
+      "empty": "Šiam laikotarpiui duomenų nėra"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "palyginti su praėjusiu laikotarpiu"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Veikia",
+        "degraded": "Sutrikęs",
+        "outage": "Neveikia"
+      }
+    },
+    "select": {
+      "placeholder": "Pasirinkite...",
+      "search": "Ieškoti...",
+      "empty": "Parinkčių nerasta",
+      "removeOption": "Pašalinti {label}"
+    },
+    "sidebar": {
+      "expand": "Išskleisti šoninę juostą",
+      "collapse": "Suskleisti šoninę juostą",
+      "openMenu": "Atidaryti meniu",
+      "closeMenu": "Uždaryti meniu"
+    },
+    "iconSystem": {
+      "notFound": "Piktograma „{name}“ nerasta",
+      "badge": "{count, plural, one {# pranešimas} few {# pranešimai} many {# pranešimo} other {# pranešimų}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Šoninis skydelis",
+      "closePanel": "Uždaryti skydelį"
+    },
+    "codeBlock": {
+      "copyCode": "Kopijuoti kodą",
+      "copied": "Nukopijuota",
+      "copy": "Kopijuoti"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Klientai",
+      "title": "Klientai",
+      "summary": "{count, plural, one {# klientas} few {# klientai} many {# kliento} other {# klientų}} · bendros pajamos {revenue}",
+      "stats": {
+        "totalCustomers": "Iš viso klientų",
+        "totalRevenue": "Bendros pajamos",
+        "totalRedemptions": "Iš viso panaudojimų"
+      },
+      "table": {
+        "customer": "Klientas",
+        "email": "El. paštas",
+        "purchases": "Pirkimai",
+        "totalSpent": "Iš viso išleista",
+        "redemptions": "Panaudojimai",
+        "lastPurchase": "Paskutinis pirkimas"
+      },
+      "empty": "Klientų dar nėra",
+      "unknown": "Nežinomas"
+    },
+    "qrCheckout": {
+      "title": "Greitas atsiskaitymas QR kodu",
+      "subtitle": "Generuokite QR kodus greitam klientų atsiskaitymui",
+      "voucherLabel": "Susieti su kuponu (neprivaloma)",
+      "generalOption": "Bendras atsiskaitymas (be konkretaus kupono)",
+      "voucherOption": "{type} – {value} {currency} ({status})",
+      "generating": "Generuojama...",
+      "generate": "Generuoti QR kodą",
+      "qrAlt": "Atsiskaitymo QR kodas",
+      "scanToCheckout": "Nuskenuokite ir atsiskaitykite",
+      "print": "Spausdinti QR kodą"
+    },
+    "redemptions": {
+      "metaTitle": "Panaudojimai",
+      "subtitle": "Peržiūrėkite ir patvirtinkite kuponų panaudojimus.",
+      "stats": {
+        "totalTitle": "Iš viso panaudojimų",
+        "totalDescription": "Visi pateikti panaudojimai",
+        "pendingTitle": "Laukiantys",
+        "pendingDescription": "Laukia patvirtinimo",
+        "confirmedTitle": "Patvirtinti",
+        "confirmedDescription": "Patvirtinti panaudojimai",
+        "discountsTitle": "Suteiktos nuolaidos",
+        "discountsDescription": "Patvirtintos nuolaidos"
+      },
+      "empty": {
+        "title": "Panaudojimų dar nėra",
+        "description": "Panaudojimai bus rodomi čia, kai klientai panaudos kuponus."
+      },
+      "voucherFallback": "Kuponas",
+      "card": {
+        "order": "Užsakymas {amount}",
+        "discount": "Nuolaida: {amount}",
+        "discountReferred": "Nuolaida: {amount} – rekomendavo {name}",
+        "confirmed": "Patvirtinta",
+        "pending": "Laukiama",
+        "method": "Būdas: {method}",
+        "methods": {
+          "online": "Internetu",
+          "in_store": "Parduotuvėje"
+        },
+        "orderReference": "Užsakymas: {reference}",
+        "notAvailable": "Nėra",
+        "location": "Vieta: {location}",
+        "date": "Data: {date}"
+      },
+      "confirm": {
+        "prompt": "Patvirtinti šį panaudojimą? Rekomenduotojui bus atrakintas kreditas.",
+        "confirmLabel": "Patvirtinti",
+        "success": "Panaudojimas patvirtintas. Rekomenduotojo kreditas atrakintas.",
+        "error": "Nepavyko patvirtinti panaudojimo. Bandykite dar kartą.",
+        "confirming": "Tvirtinama...",
+        "button": "Patvirtinti panaudojimą"
+      },
+      "export": {
+        "success": "Panaudojimai sėkmingai eksportuoti!",
+        "error": "Nepavyko eksportuoti panaudojimų",
+        "exporting": "Eksportuojama...",
+        "button": "Eksportuoti CSV"
+      }
+    },
+    "reviews": {
+      "title": "Atsiliepimai",
+      "subtitle": "Stebėkite klientų atsiliepimus ir į juos atsakykite",
+      "filters": "Filtrai",
+      "reviewCount": "{count, plural, one {# atsiliepimas} few {# atsiliepimai} many {# atsiliepimo} other {# atsiliepimų}}",
+      "ratingDistribution": "Įvertinimų pasiskirstymas",
+      "responseRate": "Atsakymų rodiklis",
+      "replied": "Atsakyta",
+      "pending": "Laukiama",
+      "responseRatePercent": "Atsakyta į {percent}%",
+      "filter": {
+        "rating": "Įvertinimas",
+        "allRatings": "Visi įvertinimai",
+        "stars": "{count, plural, one {# žvaigždutė} few {# žvaigždutės} many {# žvaigždutės} other {# žvaigždučių}}",
+        "replyStatus": "Atsakymo būsena",
+        "all": "Visi",
+        "needsReply": "Reikia atsakyti",
+        "replied": "Atsakyta",
+        "clear": "Išvalyti"
+      },
+      "loading": "Kraunami atsiliepimai...",
+      "empty": "Atsiliepimų nerasta.",
+      "anonymous": "Anonimas",
+      "verified": "Patvirtintas",
+      "campaign": "Kampanija: {name}",
+      "voucher": "Kuponas: {code}",
+      "foundHelpful": "Naudingu pažymėjo: {count}",
+      "yourReply": "Jūsų atsakymas",
+      "replyPlaceholder": "Parašykite atsakymą...",
+      "posting": "Skelbiama...",
+      "postReply": "Paskelbti atsakymą",
+      "cancel": "Atšaukti",
+      "reply": "Atsakyti",
+      "showing": "Rodoma {from}–{to} iš {total}",
+      "pageOf": "{page} puslapis iš {totalPages}",
+      "previousPage": "Ankstesnis puslapis",
+      "nextPage": "Kitas puslapis",
+      "loadFailed": "Nepavyko įkelti atsiliepimų",
+      "replyFailed": "Nepavyko atsakyti",
+      "replyPosted": "Atsakymas paskelbtas"
+    },
+    "scanner": {
+      "title": "Skeneris",
+      "subtitle": "Skenuokite kuponus, dovanų korteles ir bilietus",
+      "manual": "Rankiniu būdu",
+      "camera": "Kamera",
+      "scanning": "Skenuojama...",
+      "cameraDenied": "Prieiga prie kameros atmesta. Leiskite prieigą prie kameros naršyklės nustatymuose arba įveskite kodą žemiau.",
+      "cameraUnavailable": "Kameros nėra. Įveskite kodą žemiau.",
+      "pointAtCode": "Nukreipkite į QR kodą – jis bus nuskenuotas automatiškai",
+      "enterCode": "Įveskite kodą",
+      "codePlaceholder": "Kupono kodas (pvz., AUD-CMUI0TG1), kupono nuoroda, bilieto ar dovanų kortelės kodas",
+      "codeAriaLabel": "Skenuojamas kodas",
+      "scan": "Skenuoti",
+      "found": {
+        "voucher": "Kuponas rastas",
+        "gift_card": "Dovanų kortelė rasta",
+        "ticket": "Bilietas rastas"
+      },
+      "info": {
+        "ticketNumber": "Bilieto Nr.",
+        "event": "Renginys",
+        "type": "Tipas",
+        "standard": "Standartinis",
+        "attendee": "Dalyvis",
+        "code": "Kodas",
+        "amount": "Suma",
+        "message": "Žinutė",
+        "voucher": "Kuponas",
+        "campaign": "Kampanija",
+        "none": "Nėra",
+        "value": "Vertė",
+        "validUntil": "Galioja iki"
+      },
+      "redeem": "Panaudoti",
+      "redeeming": "Panaudojama...",
+      "cannotRedeem": "Šio elemento panaudoti negalima (būsena: {status})",
+      "redeemed": {
+        "voucher": "Kuponas sėkmingai panaudotas!",
+        "gift_card": "Dovanų kortelė sėkmingai panaudota!",
+        "ticket": "Bilietas sėkmingai panaudotas!"
+      },
+      "errors": {
+        "enterCode": "Įveskite kodą",
+        "notFound": "Nerasta",
+        "scanFailed": "Nuskenuoti nepavyko",
+        "redeemFailed": "Panaudoti nepavyko"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktyvi",
+          "redeemed": "panaudota",
+          "expired": "nebegalioja",
+          "cancelled": "atšaukta"
+        },
+        "ticket": {
+          "available": "laisvas",
+          "sold": "parduotas",
+          "used": "panaudotas",
+          "cancelled": "atšauktas",
+          "refunded": "grąžinti pinigai"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Kaina negali būti neigiama.",
+      "invalid": "Kaina nėra tinkamas skaičius.",
+      "wholeNumber": "Kaina turi būti sveikasis skaičius.",
+      "decimals": "Kaina gali turėti ne daugiau kaip {decimals} skaitmenis po kablelio.",
+      "tooLarge": "Kaina per didelė."
+    },
+    "appointments": {
+      "title": "Rezervacijos",
+      "subtitle": "Tvarkykite rezervacijas ir laisvus laikus",
+      "createSlot": "Sukurti laiką",
+      "form": {
+        "serviceName": "Paslaugos pavadinimas",
+        "price": "Kaina ({currency}, palikite tuščią, jei nemokama)",
+        "startTime": "Pradžios laikas",
+        "endTime": "Pabaigos laikas",
+        "notes": "Pastabos",
+        "creating": "Kuriama…",
+        "submit": "Sukurti laisvą laiką"
+      },
+      "status": {
+        "all": "Visos",
+        "pending": "Laukiama",
+        "confirmed": "Patvirtinta",
+        "cancelled": "Atšaukta",
+        "completed": "Įvykdyta"
+      },
+      "loading": "Kraunama...",
+      "empty": "Rezervacijų nerasta",
+      "bookedBy": "Rezervavo: {name}",
+      "confirm": "Patvirtinti",
+      "confirmAria": "Patvirtinti rezervaciją",
+      "cancel": "Atšaukti",
+      "cancelAria": "Atšaukti rezervaciją",
+      "errors": {
+        "endBeforeStart": "Pabaigos laikas turi būti vėlesnis nei pradžios laikas.",
+        "createFailed": "Nepavyko sukurti laisvo laiko. Bandykite dar kartą.",
+        "network": "Nepavyko pasiekti serverio. Patikrinkite ryšį ir bandykite dar kartą.",
+        "updateFailed": "Nepavyko atnaujinti rezervacijos (klaida {status})."
+      }
+    },
+    "inventory": {
+      "title": "Atsargos",
+      "subtitle": "Stebėkite atsargų lygį ir valdykite kuponų prieinamumą",
+      "refresh": "Atnaujinti",
+      "summary": {
+        "totalItems": "Iš viso prekių",
+        "lowStock": "Mažai atsargų",
+        "outOfStock": "Išparduota"
+      },
+      "alerts": {
+        "title": "Įspėjimai apie mažas atsargas ({count})",
+        "threshold": "{stock} / riba {threshold}"
+      },
+      "loading": "Kraunamos atsargos...",
+      "empty": "Kuponų nerasta",
+      "typeVoucher": "Kuponas: {type}",
+      "stockStatus": {
+        "unlimited": "Neribota",
+        "outOfStock": "Išparduota",
+        "lowStock": "Mažai atsargų",
+        "inStock": "Yra"
+      },
+      "stock": "Atsargos: {stock}",
+      "purchased": "Nupirkta: {count}",
+      "redeemed": "Panaudota: {count}",
+      "validUntil": "Galioja iki {date}",
+      "edit": {
+        "button": "Redaguoti atsargas",
+        "stockQuantity": "Atsargų kiekis",
+        "threshold": "Mažų atsargų riba",
+        "save": "Išsaugoti",
+        "saving": "Išsaugoma...",
+        "cancel": "Atšaukti"
+      },
+      "stockUpdated": "Atsargos atnaujintos",
+      "errors": {
+        "loadFailed": "Nepavyko įkelti atsargų",
+        "updateFailed": "Nepavyko atnaujinti atsargų"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "DI pasiūlymai šioje platformoje dar nenustatyti, todėl automatinio išdėstymo ir kontrolinių sąrašų įrankiai paslėpti. Puslapius vis tiek galite kurti ir redaguoti rankiniu būdu."
+    },
+    "pricing": {
+      "title": "Dinaminė kainodara",
+      "newRule": "Nauja taisyklė",
+      "ruleTypes": {
+        "demand": {
+          "label": "Pagal paklausą",
+          "desc": "Koreguokite kainą pagal peržiūrų ir pirkimų santykį"
+        },
+        "timeOfDay": {
+          "label": "Paros laikas",
+          "desc": "Skirtingos kainos piko ir ne piko valandomis"
+        },
+        "inventory": {
+          "label": "Atsargos",
+          "desc": "Kaina keičiasi pagal likusias atsargas"
+        },
+        "surge": {
+          "label": "Padidėjusi paklausa",
+          "desc": "Antkainis ypatingiems renginiams ir šventėms"
+        },
+        "loyalty": {
+          "label": "Lojalumas",
+          "desc": "Nuolaidos nuolatiniams klientams"
+        }
+      },
+      "form": {
+        "title": "Sukurti kainodaros taisyklę",
+        "ruleType": "Taisyklės tipas",
+        "priority": "Prioritetas",
+        "priorityPlaceholder": "Didesnis = taikomas pirmiau",
+        "config": "Konfigūracija (JSON)",
+        "submit": "Sukurti taisyklę",
+        "cancel": "Atšaukti"
+      },
+      "loading": "Kraunamos taisyklės...",
+      "empty": "Kainodaros taisyklių dar nėra. Sukurkite taisyklę, kad įjungtumėte dinaminę kainodarą.",
+      "table": {
+        "type": "Tipas",
+        "priority": "Prioritetas",
+        "config": "Konfigūracija",
+        "status": "Būsena",
+        "actions": "Veiksmai"
+      },
+      "active": "Aktyvi",
+      "inactive": "Neaktyvi",
+      "deleteAria": "Ištrinti kainodaros taisyklę",
+      "deleteConfirm": "Ištrinti šią kainodaros taisyklę?",
+      "delete": "Ištrinti",
+      "errors": {
+        "invalidJson": "Konfigūracijos laukas turi būti tinkamas JSON."
+      },
+      "preview": {
+        "title": "Kainos peržiūra",
+        "description": "Įveskite kupono ID, kad pamatytumėte, kaip aktyvios taisyklės paveiktų jo kainą.",
+        "voucherId": "Kupono ID",
+        "voucherIdPlaceholder": "Įveskite kupono ID",
+        "calculate": "Apskaičiuoti",
+        "error": "Nepavyko apskaičiuoti kainos",
+        "basePrice": "Bazinė kaina",
+        "finalPrice": "Galutinė kaina"
+      }
+    },
+    "rentals": {
+      "title": "Nuomos užsakymai",
+      "subtitle": "Tvarkykite nuomos užklausas ir grąžinimus",
+      "status": {
+        "all": "Visi",
+        "pending": "Laukiama",
+        "approved": "Patvirtinta",
+        "rejected": "Atmesta",
+        "paid": "Apmokėta",
+        "active": "Aktyvi",
+        "returned": "Grąžinta",
+        "cancelled": "Atšaukta"
+      },
+      "empty": "Nuomos užsakymų nerasta.",
+      "dates": "{start} – {end} ({days, plural, one {# diena} few {# dienos} many {# dienos} other {# dienų}})",
+      "total": "Iš viso: <strong>{total}</strong> ({rate}/d.)",
+      "note": "Pastaba: {note}",
+      "rejectedReason": "Atmesta: {reason}",
+      "bookedMeta": "Užsakyta: {date} | Vartotojas: {user}...",
+      "approve": "Patvirtinti",
+      "reasonPlaceholder": "Priežastis (neprivaloma)",
+      "confirm": "Patvirtinti",
+      "cancel": "Atšaukti",
+      "reject": "Atmesti",
+      "markReturned": "Pažymėti kaip grąžintą"
+    },
+    "subscriptionBoxes": {
+      "title": "Prenumeratos dėžutės",
+      "subtitle": "Tvarkykite periodines kuponų dėžutes",
+      "newBox": "+ Nauja dėžutė",
+      "cancel": "Atšaukti",
+      "form": {
+        "name": "Pavadinimas",
+        "description": "Aprašymas",
+        "price": "Kaina ({currency})",
+        "currency": "Valiuta",
+        "interval": "Periodiškumas",
+        "maxItems": "Maks. prekių",
+        "creating": "Kuriama...",
+        "submit": "Sukurti dėžutę"
+      },
+      "interval": {
+        "weekly": "Kas savaitę",
+        "monthly": "Kas mėnesį",
+        "quarterly": "Kas ketvirtį"
+      },
+      "created": "Prenumeratos dėžutė sukurta.",
+      "empty": "Prenumeratos dėžučių dar nėra. Sukurkite pirmąją.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# prenumeratorius} few {# prenumeratoriai} many {# prenumeratoriaus} other {# prenumeratorių}}",
+      "items": "{count, plural, one {# prekė} few {# prekės} many {# prekės} other {# prekių}}",
+      "errors": {
+        "priceAboveZero": "Įveskite didesnę nei 0 kainą.",
+        "createFailed": "Nepavyko sukurti prenumeratos dėžutės (klaida {status}).",
+        "network": "Nepavyko sukurti prenumeratos dėžutės. Patikrinkite ryšį ir bandykite dar kartą."
+      },
+      "intervalUnit": {
+        "weekly": "sav.",
+        "monthly": "mėn.",
+        "quarterly": "ketv."
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Svetainė",
+      "supportEmail": "Pagalbos el. paštas",
+      "logoUrl": "Logotipo URL",
+      "primaryColor": "Pagrindinė spalva",
+      "secondaryColor": "Antrinė spalva",
+      "backgroundColor": "Fono spalva",
+      "primaryColorHex": "Pagrindinės spalvos hex reikšmė",
+      "secondaryColorHex": "Antrinės spalvos hex reikšmė",
+      "backgroundColorHex": "Fono spalvos hex reikšmė",
+      "saving": "Išsaugoma..."
+    },
+    "page": {
+      "metaTitle": "Prekybininko nustatymai",
+      "infoTitle": "Prekybininko informacija",
+      "infoSubtitle": "Pagrindiniai prekybininko duomenys",
+      "name": "Pavadinimas",
+      "slug": "Slug",
+      "country": "Šalis",
+      "defaultCurrency": "Numatytoji valiuta",
+      "website": "Svetainė",
+      "supportEmail": "Pagalbos el. paštas",
+      "completeOnboarding": "Užbaigti įvedimą",
+      "billingTitle": "Atsiskaitymai",
+      "billingSubtitle": "14 dienų nemokamas bandomasis laikotarpis, vėliau planai nuo 19 €/mėn. 5% mokestis už kuponų pardavimus.",
+      "status": "Būsena",
+      "trialStatus": "Nemokamas bandomasis laikotarpis – liko {days, plural, one {# diena} few {# dienos} many {# dienos} other {# dienų}}",
+      "statusActive": "Aktyvi",
+      "statusInactive": "Neaktyvi",
+      "currentPlan": "Dabartinis planas",
+      "trialEnds": "Bandomasis laikotarpis baigiasi",
+      "periodEnds": "Dabartinis laikotarpis baigiasi",
+      "manage": "Tvarkyti",
+      "payoutsTitle": "Išmokos",
+      "payoutsEnabled": "Stripe paskyra prijungta ir įjungta",
+      "payoutsInProgress": "Įvedimas vyksta – užbaikite, kad įjungtumėte išmokas",
+      "payoutsNotConnected": "Prijunkite Stripe, kad gautumėte išmokas už kuponų pardavimus",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "Gaukite pranešimus apie įvykius realiuoju laiku per HTTP",
+      "notificationsTitle": "Pranešimai",
+      "notificationsSubtitle": "Pasirinkite, kokių kategorijų el. laiškus gaunate kaip komandos narys."
+    },
+    "brandProfile": {
+      "title": "Prekės ženklo profilis",
+      "subtitle": "Pritaikykite prekės ženklo spalvas, logotipą ir kontaktinę informaciją.",
+      "updated": "Prekės ženklo profilis sėkmingai atnaujintas!",
+      "updateFailed": "Nepavyko atnaujinti prekės ženklo profilio",
+      "save": "Išsaugoti pakeitimus"
+    },
+    "domains": {
+      "title": "Nuosavi domenai",
+      "subtitle": "Prijunkite savo domeną ir patvirtinkite jį nuomininko maršrutizavimui.",
+      "inputLabel": "Nuosavas domenas",
+      "adding": "Pridedama...",
+      "add": "Pridėti domeną",
+      "empty": "Domenų nesukonfigūruota.",
+      "statusLine": "Būsena: {status}",
+      "statusValue": {
+        "pending": "laukiama",
+        "verified": "patvirtintas"
+      },
+      "verify": "Patvirtinti",
+      "remove": "Pašalinti",
+      "addedTitle": "Domenas pridėtas",
+      "addedDescription": "Prieš nukreipdami srautą, patvirtinkite DNS.",
+      "addErrorTitle": "Domeno klaida",
+      "addErrorDescription": "Nepavyko pridėti domeno.",
+      "verifiedTitle": "Domenas patvirtintas",
+      "verifiedDescription": "Nuomininko maršrutizavimas dabar aktyvus.",
+      "verifyErrorTitle": "Patvirtinimo klaida",
+      "verifyErrorDescription": "Nepavyko patvirtinti domeno.",
+      "removedTitle": "Domenas pašalintas",
+      "removeErrorTitle": "Pašalinimo klaida",
+      "removeErrorDescription": "Nepavyko pašalinti domeno."
+    },
+    "notifications": {
+      "metaTitle": "Pranešimų nustatymai",
+      "title": "Pranešimų nustatymai",
+      "intro": "Valdykite, kokių kategorijų el. laiškus gaunate kaip <name>{merchantName}</name> narys. Nustatymai asmeniniai – kiekvienas komandos narys juos tvarko pats.",
+      "required": "Privaloma",
+      "toggle": "Perjungti: {label}",
+      "unsaved": "Neišsaugoti pakeitimai",
+      "allSaved": "Visi pakeitimai išsaugoti",
+      "saving": "Išsaugoma…",
+      "save": "Išsaugoti nustatymus",
+      "savedTitle": "Nustatymai išsaugoti",
+      "saveFailedTitle": "Išsaugoti nepavyko",
+      "saveFailedDescription": "Nepavyko atnaujinti pranešimų nustatymų.",
+      "category": {
+        "orders": {
+          "label": "Nauji užsakymai ir panaudojimai",
+          "description": "El. laiškas, kai kuponas nuperkamas, panaudojamas ar padovanojamas."
+        },
+        "payouts": {
+          "label": "Išmokos",
+          "description": "Gautos, nepavykusios ir sulaikytos Stripe išmokos."
+        },
+        "fraud_alerts": {
+          "label": "Sukčiavimo ir saugumo įspėjimai",
+          "description": "Neįprasti panaudojimo modeliai, mokėjimų užginčijimai, komandos prisijungimų anomalijos. Išjungti negalima."
+        },
+        "campaign_updates": {
+          "label": "Kampanijų eiga",
+          "description": "Kampanija paskelbta, baigiasi po 7 dienų, pasibaigė."
+        },
+        "weekly_digest": {
+          "label": "Savaitės rezultatų suvestinė",
+          "description": "Pirmadienio praėjusios savaitės pajamų, panaudojimų ir populiariausių kuponų apžvalga."
+        },
+        "product_updates": {
+          "label": "GiftHub produkto naujienos",
+          "description": "Naujos funkcijos, planai, kartais patarimai. Ne dažniau kaip kartą per mėnesį."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Prekybininko išmokos",
+      "title": "Išmokos",
+      "intro": "Prijunkite Stripe paskyrą, kad pajamos už kuponų pardavimus būtų mokamos tiesiai į jūsų banką. Imame 5% platformos mokestį, o likutis atsiskaitymo metu automatiškai pervedamas į prijungtą paskyrą.",
+      "stripeAccount": "Stripe paskyra",
+      "capabilityState": "Funkcijų būsena",
+      "accountStatus": {
+        "pending": "laukiama",
+        "restricted": "apribota",
+        "enabled": "įjungta",
+        "disabled": "išjungta"
+      },
+      "backToSettings": "Atgal į nustatymus",
+      "howTitle": "Kaip veikia išmokos",
+      "how1": "Klientai moka per platformos atsiskaitymą. Surenkame visą sumą ir laikome ją Stripe pusėje.",
+      "how2": "Kai mokėjimas įvykdomas, Stripe pardavimo kainą, atėmus 5% mūsų mokestį, perveda tiesiai į jūsų išmokų paskyrą.",
+      "how3": "Tada Stripe perveda šiuos pinigus į jūsų banko sąskaitą pagal grafiką, kurį pasirenkate Stripe išmokų nustatymuose (paprastai kasdien, praėjus kelioms dienoms po pardavimo).",
+      "how4": "Mokėjimų užginčijimai ir grąžinimai išskaičiuojami iš kitos išmokos; nustačiusi sukčiavimą, administratorių komanda gali rankiniu būdu sulaikyti jūsų likutį.",
+      "badge": {
+        "enabled": {
+          "label": "Išmokos įjungtos",
+          "description": "Lėšas už kuponų pardavimus Stripe perveda į jūsų banko sąskaitą pagal išmokų grafiką."
+        },
+        "restricted": {
+          "label": "Reikia papildomos informacijos",
+          "description": "Prieš įjungiant išmokas, Stripe reikia daugiau informacijos. Norėdami tęsti, atidarykite toliau pateiktą įvedimo nuorodą."
+        },
+        "disabled": {
+          "label": "Išmokos išjungtos",
+          "description": "Stripe išjungė šios paskyros išmokas. Atidarykite Stripe skydelį ir įvykdykite likusius reikalavimus."
+        },
+        "notConnected": {
+          "label": "Neprijungta",
+          "description": "Dar neprijungėte Stripe paskyros. Išmokos sulaikomos, kol bus užbaigtas įvedimas – tuo metu kuponų pardavimai vis tiek apdorojami, bet lėšos lieka platformos balanse."
+        }
+      },
+      "actions": {
+        "startFailed": "Nepavyko pradėti Stripe įvedimo",
+        "startNetworkError": "Tinklo klaida pradedant įvedimą",
+        "dashboardFailed": "Nepavyko atidaryti Stripe skydelio",
+        "dashboardNetworkError": "Tinklo klaida atidarant skydelį",
+        "disconnectConfirm": "Atjungti šią Stripe paskyrą? Išmokos bus sustabdytos, kol vėl ją prijungsite.",
+        "disconnected": "Stripe paskyra atjungta",
+        "disconnectFailed": "Nepavyko atjungti",
+        "disconnect": "Atjungti",
+        "setUp": "Nustatyti išmokas su Stripe",
+        "openDashboard": "Atidaryti Stripe skydelį",
+        "continueOnboarding": "Tęsti įvedimą"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Nepavyko įkelti prekybininko duomenų.",
+      "retry": "Bandyti dar kartą",
+      "loading": "Kraunama...",
+      "title": "Užpildykite profilį",
+      "subtitle": "Sukurkite prekybininko prekės ženklo profilį.",
+      "basicInfo": "Pagrindinė informacija",
+      "merchantName": "Prekybininko pavadinimas *",
+      "brandTitle": "Prekės ženklo profilis",
+      "brandSubtitle": "Pritaikykite prekės ženklo spalvas ir logotipą.",
+      "updateFailed": "Nepavyko atnaujinti prekybininko",
+      "submit": "Užbaigti įvedimą",
+      "skip": "Kol kas praleisti"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Audito žurnalas",
+      "subtitle": "Stebėkite visus veiksmus, atliktus jūsų prekybininko paskyroje",
+      "filters": "Filtrai",
+      "action": "Veiksmas",
+      "allActions": "Visi veiksmai",
+      "fromDate": "Nuo datos",
+      "toDate": "Iki datos",
+      "apply": "Taikyti",
+      "clear": "Išvalyti",
+      "loading": "Kraunamas audito žurnalas...",
+      "loadFailed": "Nepavyko įkelti audito žurnalo",
+      "empty": "Audito žurnalo įrašų nerasta.",
+      "columns": {
+        "timestamp": "Laikas",
+        "actor": "Vykdytojas",
+        "action": "Veiksmas",
+        "resource": "Išteklius",
+        "details": "Išsami informacija"
+      },
+      "unknownActor": "Nežinomas",
+      "showing": "Rodoma {from}–{to} iš {total}",
+      "pageOf": "{page} puslapis iš {totalPages}",
+      "previousPage": "Ankstesnis puslapis",
+      "nextPage": "Kitas puslapis",
+      "actions": {
+        "voucherCreated": "Kuponas sukurtas",
+        "voucherUpdated": "Kuponas atnaujintas",
+        "voucherPublished": "Kuponas paskelbtas",
+        "vouchersGenerated": "Kuponai sugeneruoti",
+        "campaignCreated": "Kampanija sukurta",
+        "campaignUpdated": "Kampanija atnaujinta",
+        "memberInvited": "Pakviestas komandos narys",
+        "memberRemoved": "Pašalintas komandos narys",
+        "memberRoleChanged": "Pakeistas komandos nario vaidmuo",
+        "apiKeyCreated": "API raktas sukurtas",
+        "apiKeyRevoked": "API raktas atšauktas",
+        "apiKeyUpdated": "API raktas atnaujintas",
+        "eventCreated": "Renginys sukurtas",
+        "eventUpdated": "Renginys atnaujintas",
+        "eventPublished": "Renginys paskelbtas",
+        "merchantUpdated": "Prekybininkas atnaujintas",
+        "reviewReplied": "Atsakyta į atsiliepimą",
+        "settingsUpdate": "Nustatymų atnaujinimas",
+        "settingsView": "Nustatymų peržiūra",
+        "ticketRedeemed": "Bilietas panaudotas"
+      },
+      "resources": {
+        "voucher": "Kuponas",
+        "campaign": "Kampanija",
+        "giftCard": "Dovanų kortelė",
+        "event": "Renginys",
+        "member": "Narys",
+        "teamMember": "Komandos narys",
+        "apiKey": "API raktas",
+        "webhook": "Webhook",
+        "merchant": "Prekybininkas",
+        "user": "Vartotojas",
+        "review": "Atsiliepimas"
+      }
+    },
+    "roles": {
+      "admin": "Administratorius",
+      "adminDescription": "Visa prieiga – kuponų, kampanijų, narių ir nustatymų valdymas",
+      "staff": "Darbuotojas",
+      "staffDescription": "Darbinė prieiga – panaudojimų tvirtinimas ir duomenų peržiūra",
+      "optionWithDescription": "{label} – {description}"
+    },
+    "members": {
+      "title": "Komandos nariai",
+      "subtitle": "Tvarkykite savo komandą ir jos prieigos lygius",
+      "inviteMember": "Pakviesti narį",
+      "inviteTitle": "Pakviesti komandos narį",
+      "emailAddress": "El. pašto adresas",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "Vartotojas turi turėti paskyrą.",
+      "role": "Vaidmuo",
+      "inviting": "Kviečiama...",
+      "sendInvitation": "Siųsti kvietimą",
+      "cancel": "Atšaukti",
+      "save": "Išsaugoti",
+      "loading": "Kraunami komandos nariai...",
+      "loadFailed": "Nepavyko įkelti komandos narių",
+      "empty": "Komandos narių dar nėra. Pakvieskite pirmąjį narį aukščiau.",
+      "columns": {
+        "member": "Narys",
+        "role": "Vaidmuo",
+        "joined": "Prisijungė",
+        "actions": "Veiksmai"
+      },
+      "unnamed": "Be vardo",
+      "memberRole": "Nario vaidmuo",
+      "changeRole": "Keisti vaidmenį",
+      "removeMember": "Pašalinti narį",
+      "inviteFailed": "Nepavyko pakviesti nario",
+      "invited": "Narys sėkmingai pakviestas",
+      "updateRoleFailed": "Nepavyko atnaujinti vaidmens",
+      "roleUpdated": "Vaidmuo atnaujintas",
+      "removeConfirm": "Pašalinti {name} iš komandos?",
+      "remove": "Pašalinti",
+      "removeFailed": "Nepavyko pašalinti nario",
+      "removed": "Narys pašalintas"
+    },
+    "inviteForm": {
+      "title": "Pakviesti komandos narį",
+      "subtitle": "Pridėkite komandos narį pagal el. pašto adresą.",
+      "email": "El. paštas",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "Vartotojas turi turėti paskyrą. Jei jos neturi, pirmiausia turi užsiregistruoti.",
+      "role": "Vaidmuo",
+      "roleHint": "Administratoriai gali tvarkyti kuponus, kampanijas ir komandos narius. Darbuotojai gali tvirtinti panaudojimus.",
+      "inviting": "Kviečiama...",
+      "submit": "Pakviesti narį",
+      "redirectingToBilling": "{message} Nukreipiama į atsiskaitymus..."
+    },
+    "referrals": {
+      "title": "Rekomendacijų analitika",
+      "subtitle": "Stebėkite rekomendacijų rezultatus ir atlygius.",
+      "stats": {
+        "total": "Iš viso rekomendacijų",
+        "totalHint": "Visos sekamos rekomendacijos",
+        "opened": "Atidaryta",
+        "openedHint": "Peržiūrėta arba panaudota",
+        "redeemed": "Panaudota",
+        "redeemedHint": "Konvertuotos rekomendacijos",
+        "conversionRate": "Konversijos rodiklis",
+        "conversionRateHint": "Panaudota / iš viso"
+      },
+      "statusBreakdown": "Pasiskirstymas pagal būseną",
+      "creditsIssued": "Suteikta kreditų: {amount}",
+      "noActivity": "Rekomendacijų veiklos dar nėra.",
+      "topReferrers": "Aktyviausi rekomenduotojai",
+      "topReferrersHint": "Vartotojai, atvedantys daugiausia rekomendacijų.",
+      "noReferrals": "Rekomendacijų dar nėra.",
+      "unknownUser": "Nežinomas vartotojas",
+      "referralCount": "{count, plural, one {# rekomendacija} few {# rekomendacijos} many {# rekomendacijos} other {# rekomendacijų}}",
+      "recent": "Naujausios rekomendacijos",
+      "recentHint": "Naujausios klientų rekomendacijos.",
+      "noRecent": "Naujų rekomendacijų nėra.",
+      "voucherFallback": "Kuponas",
+      "status": {
+        "created": "Sukurta",
+        "opened": "Atidaryta",
+        "redeemed": "Panaudota",
+        "expired": "Nebegalioja",
+        "blocked": "Užblokuota"
+      }
+    },
+    "emailCampaigns": {
+      "title": "El. pašto kampanijos",
+      "newCampaign": "Nauja kampanija",
+      "notConfigured": "El. laiškų siuntimas šioje platformoje dar nenustatytas. Kampanijas galite kurti ir peržiūrėti, bet jų nebus galima išsiųsti, kol nebus prijungtas el. pašto paslaugų teikėjas.",
+      "notConfiguredShort": "El. laiškų siuntimas šioje platformoje dar nenustatytas",
+      "createTitle": "Sukurti kampaniją",
+      "campaignName": "Kampanijos pavadinimas",
+      "campaignNamePlaceholder": "Vasaros išpardavimo naujienlaiškis",
+      "subjectLine": "Tema",
+      "subjectPlaceholder": "Nepraleiskite mūsų vasaros pasiūlymų!",
+      "recipients": "Gavėjai",
+      "recipientFilter": {
+        "all": "Visi klientai",
+        "redeemed30d": "Panaudoję per paskutines 30 dienų",
+        "inactive": "Neaktyvūs klientai"
+      },
+      "schedule": "Suplanuoti (neprivaloma)",
+      "emailSections": "Laiško skiltys",
+      "sectionTypes": {
+        "header": "Antraštė",
+        "text": "Tekstas",
+        "image": "Vaizdas",
+        "button": "Mygtukas",
+        "divider": "Skirtukas",
+        "voucherCard": "Kuponas"
+      },
+      "creating": "Kuriama...",
+      "scheduleCampaign": "Suplanuoti kampaniją",
+      "saveDraft": "Išsaugoti juodraštį",
+      "preview": "Peržiūra",
+      "editor": {
+        "moveUp": "Perkelti aukštyn",
+        "moveDown": "Perkelti žemyn",
+        "removeSection": "Pašalinti skiltį",
+        "title": "Pavadinimas",
+        "subtitle": "Paantraštė (neprivaloma)",
+        "textContent": "Įveskite tekstą...",
+        "imageUrl": "Vaizdo URL",
+        "altText": "Alternatyvusis tekstas",
+        "buttonLabel": "Mygtuko tekstas",
+        "buttonUrl": "Mygtuko URL",
+        "dividerHint": "Horizontali skiriamoji linija",
+        "voucherTitle": "Kupono pavadinimas",
+        "voucherValue": "Vertė (pvz., -20%)",
+        "voucherCode": "Kodas (pvz., SAVE20)",
+        "voucherExpiry": "Galioja iki (pvz., 2026-12-31)"
+      },
+      "previewContent": {
+        "headerTitle": "Antraštės pavadinimas",
+        "textContent": "Teksto turinys...",
+        "imagePlaceholder": "Vaizdo vieta",
+        "button": "Mygtukas",
+        "voucher": "Kuponas",
+        "validUntil": "Galioja iki {date}"
+      },
+      "loading": "Kraunama...",
+      "empty": "El. pašto kampanijų dar nėra",
+      "columns": {
+        "name": "Pavadinimas",
+        "subject": "Tema",
+        "status": "Būsena",
+        "recipients": "Gavėjai",
+        "opens": "Atidarymai",
+        "created": "Sukurta",
+        "actions": "Veiksmai"
+      },
+      "status": {
+        "draft": "juodraštis",
+        "scheduled": "suplanuota",
+        "sent": "išsiųsta"
+      },
+      "send": "Siųsti",
+      "delete": "Ištrinti",
+      "deleteCampaign": "Ištrinti kampaniją",
+      "toasts": {
+        "missingFields": "Trūksta laukų",
+        "missingFieldsDescription": "Pavadinimas ir tema privalomi.",
+        "created": "Kampanija sukurta",
+        "error": "Klaida",
+        "createFailed": "Nepavyko sukurti kampanijos.",
+        "sendConfirm": "Ar tikrai norite išsiųsti šią kampaniją dabar?",
+        "sendFailedStatus": "Nepavyko išsiųsti (klaida {status}).",
+        "partlySent": "Kampanija išsiųsta iš dalies",
+        "partlySentDescription": "Išsiųsta {sent} iš {total} gavėjų. Nepavyko išsiųsti {failed, plural, one {# laiško} few {# laiškų} many {# laiško} other {# laiškų}}.",
+        "sent": "Kampanija išsiųsta",
+        "sentDescription": "Išsiųsta {sent, plural, one {# gavėjui} few {# gavėjams} many {# gavėjo} other {# gavėjų}}.",
+        "sendFailed": "Išsiųsti nepavyko",
+        "deleteConfirm": "Ištrinti šią kampaniją?",
+        "deleted": "Kampanija ištrinta",
+        "deleteFailed": "Nepavyko ištrinti."
+      }
+    },
+    "apiKeys": {
+      "title": "API raktai",
+      "subtitle": "Tvarkykite API raktus programinei prieigai prie prekybininko duomenų",
+      "createKey": "Sukurti raktą",
+      "createdNotice": "API raktas sukurtas! Nukopijuokite jį dabar – jis daugiau nebus rodomas.",
+      "copyKey": "Kopijuoti raktą",
+      "createTitle": "Sukurti API raktą",
+      "keyName": "Rakto pavadinimas",
+      "keyNamePlaceholder": "pvz., Gamybinė POS integracija",
+      "permissions": "Teisės",
+      "creating": "Kuriama...",
+      "submit": "Sukurti API raktą",
+      "cancel": "Atšaukti",
+      "loading": "Kraunami API raktai...",
+      "empty": "API raktų dar nėra. Sukurkite raktą ir pradėkite.",
+      "createdOn": "Sukurta {date}",
+      "lastUsed": "Paskutinį kartą naudota {date}",
+      "expires": "Galioja iki {date}",
+      "revokeKey": "Atšaukti raktą",
+      "loadFailed": "Nepavyko įkelti API raktų",
+      "required": "Būtinas pavadinimas ir bent viena teisė",
+      "createFailed": "Nepavyko sukurti API rakto",
+      "created": "API raktas sukurtas",
+      "revokeConfirm": "Atšaukti API raktą „{name}“? Šio veiksmo anuliuoti negalima.",
+      "revoke": "Atšaukti",
+      "revoked": "API raktas atšauktas",
+      "revokeFailed": "Nepavyko atšaukti API rakto",
+      "copied": "Nukopijuota į iškarpinę",
+      "groups": {
+        "vouchers": "Kuponai",
+        "campaigns": "Kampanijos",
+        "giftCards": "Dovanų kortelės",
+        "customers": "Klientai",
+        "analytics": "Analitika",
+        "events": "Renginiai"
+      },
+      "permissionLabels": {
+        "voucherRead": "Skaityti kuponus",
+        "voucherCreate": "Kurti kuponus",
+        "voucherRedeem": "Panaudoti kuponus",
+        "campaignRead": "Skaityti kampanijas",
+        "campaignCreate": "Kurti kampanijas",
+        "giftCardRead": "Skaityti dovanų korteles",
+        "giftCardRedeem": "Panaudoti dovanų korteles",
+        "customerRead": "Skaityti klientus",
+        "analyticsRead": "Skaityti analitiką",
+        "eventRead": "Skaityti renginius",
+        "eventCheckin": "Registruoti renginių dalyvius"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "Gaukite pranešimus apie įvykius per HTTP",
+      "addWebhook": "Pridėti webhook",
+      "secretNotice": "Webhook slaptasis raktas (rodomas tik kartą):",
+      "copySecret": "Kopijuoti slaptąjį raktą",
+      "copied": "Nukopijuota!",
+      "newTitle": "Naujas webhook",
+      "endpointUrl": "Galinio taško URL",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Įvykiai",
+      "submit": "Sukurti webhook",
+      "loading": "Kraunama...",
+      "empty": "Webhook nesukonfigūruota",
+      "createdOn": "Sukurta {date}",
+      "deliveriesCount": "{count, plural, one {# pristatymas} few {# pristatymai} many {# pristatymo} other {# pristatymų}}",
+      "sendTest": "Siųsti bandomąjį",
+      "viewDeliveries": "Pristatymų žurnalas",
+      "disable": "Išjungti",
+      "enable": "Įjungti",
+      "deleteWebhook": "Ištrinti webhook",
+      "deliveryLog": "Pristatymų žurnalas",
+      "noDeliveries": "Pristatymų dar nėra",
+      "deliveryFailed": "Nepavyko",
+      "attempts": "{count, plural, one {# bandymas} few {# bandymai} many {# bandymo} other {# bandymų}}",
+      "loadFailed": "Nepavyko įkelti webhook",
+      "required": "Būtinas URL ir bent vienas įvykis",
+      "created": "Webhook sukurtas",
+      "createFailed": "Nepavyko sukurti webhook",
+      "deleted": "Webhook ištrintas",
+      "deleteFailed": "Nepavyko ištrinti webhook",
+      "updateFailed": "Nepavyko atnaujinti webhook",
+      "testDelivered": "Bandomasis pristatytas! Būsena: {status}",
+      "testFailed": "Bandymas nepavyko: {error}",
+      "statusCode": "Būsena {status}",
+      "testSendFailed": "Nepavyko išsiųsti bandomojo webhook",
+      "loadDeliveriesFailed": "Nepavyko įkelti pristatymų"
+    }
   }
 }

@@ -99,6 +99,7 @@ function PaymentSuccessContent() {
 }
 
 export default function PaymentSuccessPage() {
+  const tCommon = useTranslations('common');
   return (
     <Suspense
       fallback={
@@ -106,7 +107,7 @@ export default function PaymentSuccessPage() {
           <WarmCard padding="lg" className="w-full max-w-md bg-white">
             <div className="flex flex-col items-center gap-4">
               <Loader2 className="h-8 w-8 animate-spin text-[var(--danger)]" />
-              <p className="text-sm text-[var(--text-muted)]">Loading...</p>
+              <p className="text-sm text-[var(--text-muted)]">{tCommon('loading')}</p>
             </div>
           </WarmCard>
         </div>

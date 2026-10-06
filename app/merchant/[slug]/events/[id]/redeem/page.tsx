@@ -21,6 +21,12 @@ export default function TicketRedeemPage() {
   const [isRedeeming, setIsRedeeming] = useState(false);
   const [ticketInfo, setTicketInfo] = useState<any>(null);
   const t = useTranslations();
+  const tR = useTranslations('merchantEvents.redeem');
+  const tE = useTranslations('merchantEvents');
+  const ticketStatusLabel = (status: string) =>
+    ['available', 'sold', 'used', 'cancelled', 'refunded'].includes(status)
+      ? tE(`ticketStatus.${status as 'available' | 'sold' | 'used' | 'cancelled' | 'refunded'}`)
+      : status;
 
   useEffect(() => {
     if (ticketId && !ticketInfo) {
@@ -47,7 +53,7 @@ export default function TicketRedeemPage() {
       const res = await fetch(`/api/tickets/qr/${qrToken}`);
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.error || 'Ticket not found');
+        throw new Error(error.error || tR('notFound'));
       }
 
       const ticket = await res.json();
@@ -79,7 +85,7 @@ export default function TicketRedeemPage() {
 
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.error || 'Failed to redeem ticket');
+        throw new Error(error.error || tR('failed'));
       }
 
       const result = await res.json();
@@ -99,28 +105,28 @@ export default function TicketRedeemPage() {
     <div className="min-h-screen p-4 sm:p-6 bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
       <div className="max-w-2xl mx-auto space-y-6">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Redeem ticket</h1>
-          <p className="text-sm text-[var(--text-muted)]">Scan QR code or enter ticket number</p>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{tR('title')}</h1>
+          <p className="text-sm text-[var(--text-muted)]">{tR('subtitle')}</p>
         </div>
 
         <WarmButton asChild variant="ghost" size="sm" className="w-fit">
-          <Link href={`/merchant/${merchantSlug}/events/${eventId}`}>Back to event</Link>
+          <Link href={`/merchant/${merchantSlug}/events/${eventId}`}>{tR('back')}</Link>
         </WarmButton>
 
         <WarmCard padding="lg" className="bg-[var(--surface)]">
           <div>
-            <h2 className="text-lg font-semibold text-[var(--text)]">Scan ticket</h2>
-            <p className="text-sm text-[var(--text-muted)]">Enter QR token or ticket number</p>
+            <h2 className="text-lg font-semibold text-[var(--text)]">{tR('scanTitle')}</h2>
+            <p className="text-sm text-[var(--text-muted)]">{tR('scanDescription')}</p>
           </div>
           <div className="space-y-4 mt-4">
             <div>
-              <Label htmlFor="qrToken">QR Token / Ticket Number</Label>
+              <Label htmlFor="qrToken">{tR('tokenLabel')}</Label>
               <div className="flex gap-2">
                 <Input
                   id="qrToken"
                   value={qrToken}
                   onChange={(e) => setQrToken(e.target.value)}
-                  placeholder="Enter QR token or ticket number"
+                  placeholder={tR('tokenPlaceholder')}
                   className="border-[var(--border)]"
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
@@ -129,27 +135,27 @@ export default function TicketRedeemPage() {
                   }}
                 />
                 <WarmButton onClick={handleQRScan} disabled={isRedeeming || !qrToken} size="sm">
-                  Scan
+                  {tR('scan')}
                 </WarmButton>
               </div>
             </div>
 
             {ticketInfo && (
               <div className="p-4 bg-[var(--bg)] rounded-2xl border border-[var(--border)] space-y-2">
-                <p className="font-semibold text-[var(--text)]">Ticket found</p>
+                <p className="font-semibold text-[var(--text)]">{tR('found')}</p>
                 <p className="text-sm text-[var(--text-muted)]">
-                  <span className="text-[var(--text-faint)]">Number:</span> {ticketInfo.ticketNumber}
+                  <span className="text-[var(--text-faint)]">{tR('number')}</span> {ticketInfo.ticketNumber}
                 </p>
                 <p className="text-sm text-[var(--text-muted)]">
-                  <span className="text-[var(--text-faint)]">Event:</span> {ticketInfo.event.name}
+                  <span className="text-[var(--text-faint)]">{tR('event')}</span> {ticketInfo.event.name}
                 </p>
                 <p className="text-sm text-[var(--text-muted)]">
-                  <span className="text-[var(--text-faint)]">Status:</span>{' '}
-                  <span className="capitalize text-[var(--text)]">{ticketInfo.status}</span>
+                  <span className="text-[var(--text-faint)]">{tR('status')}</span>{' '}
+                  <span className="capitalize text-[var(--text)]">{ticketStatusLabel(ticketInfo.status)}</span>
                 </p>
                 {ticketInfo.purchase?.attendeeName && (
                   <p className="text-sm text-[var(--text-muted)]">
-                    <span className="text-[var(--text-faint)]">Attendee:</span>{' '}
+                    <span className="text-[var(--text-faint)]">{tR('attendee')}</span>{' '}
                     {ticketInfo.purchase.attendeeName}
                   </p>
                 )}
@@ -161,22 +167,22 @@ export default function TicketRedeemPage() {
         {ticketInfo && ticketInfo.status === 'sold' && (
           <WarmCard padding="lg" className="bg-[var(--surface)]">
             <div>
-              <h2 className="text-lg font-semibold text-[var(--text)]">Redeem ticket</h2>
-              <p className="text-sm text-[var(--text-muted)]">Complete the redemption process</p>
+              <h2 className="text-lg font-semibold text-[var(--text)]">{tR('title')}</h2>
+              <p className="text-sm text-[var(--text-muted)]">{tR('redeemDescription')}</p>
             </div>
             <div className="space-y-4 mt-4">
               <div>
-                <Label htmlFor="location">Location (optional)</Label>
+                <Label htmlFor="location">{tR('locationLabel')}</Label>
                 <Input
                   id="location"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  placeholder="e.g., Main Entrance, Gate A"
+                  placeholder={tR('locationPlaceholder')}
                   className="border-[var(--border)]"
                 />
               </div>
               <WarmButton onClick={handleRedeem} disabled={isRedeeming} className="w-full" size="lg">
-                {isRedeeming ? 'Redeeming...' : 'Redeem ticket'}
+                {isRedeeming ? tR('submitting') : tR('submit')}
               </WarmButton>
             </div>
           </WarmCard>
@@ -185,7 +191,7 @@ export default function TicketRedeemPage() {
         {ticketInfo && ticketInfo.status !== 'sold' && (
           <WarmCard padding="lg" className="bg-[var(--surface)] text-center">
             <p className="text-sm text-[var(--text-muted)]">
-              This ticket cannot be redeemed. Status: {ticketInfo.status}
+              {tR('cannotRedeem', { status: ticketStatusLabel(ticketInfo.status) })}
             </p>
           </WarmCard>
         )}

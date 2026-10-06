@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Globe } from 'lucide-react';
@@ -37,6 +37,7 @@ function persistLocaleSelection(locale: SupportedLocale) {
 
 export default function LanguageSelector() {
   const locale = useLocale();
+  const t = useTranslations('site.language');
   const router = useRouter();
   const pathname = usePathname();
 
@@ -57,7 +58,7 @@ export default function LanguageSelector() {
     <div className="flex items-center gap-2">
       <Globe className="h-4 w-4 text-[var(--text-faint)]" />
       <Select value={locale} onValueChange={handleLanguageChange}>
-        <SelectTrigger className="w-[180px]" aria-label="Select language">
+        <SelectTrigger className="w-[180px]" aria-label={t('selectLabel')}>
           <SelectValue>
             {languageEmojis[locale as SupportedLocale] || ''} {languageNames[locale as SupportedLocale] || locale}
           </SelectValue>

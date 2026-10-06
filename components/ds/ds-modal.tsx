@@ -8,6 +8,7 @@ import React, {
   type KeyboardEvent,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslations } from 'next-intl';
 
 /* ─── Types ─── */
 export type DsModalSize = 'sm' | 'md' | 'lg' | 'full';
@@ -46,6 +47,7 @@ export function DsModal({
   children,
   className = '',
 }: DsModalProps) {
+  const t = useTranslations('dsComponents.common');
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
 
@@ -137,7 +139,7 @@ export function DsModal({
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label={typeof title === 'string' ? title : 'Dialog'}
+        aria-label={typeof title === 'string' ? title : t('dialog')}
         tabIndex={-1}
         onKeyDown={handleKeyDown}
         className={[
@@ -163,7 +165,7 @@ export function DsModal({
                 type="button"
                 onClick={onClose}
                 className="ml-auto p-1 rounded-md text-[var(--text-faint)] hover:text-[var(--text)] hover:bg-[var(--surface-dim)] transition-colors"
-                aria-label="Close"
+                aria-label={t('close')}
               >
                 <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
                   <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

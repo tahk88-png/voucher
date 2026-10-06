@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma"
 import { requireMerchantRole } from "@/lib/rbac"
 import { getDefaultBuilderConfig, type PageBuilderConfig } from "@/lib/page-builder"
 import PageBuilderClient from "@/components/page-builder/page-builder-client"
+import { isAiConfigured } from "@/lib/ai"
+import { getTranslations } from "next-intl/server"
 
 export default async function PageBuilderPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -25,6 +27,7 @@ export default async function PageBuilderPage({ params }: { params: Promise<{ sl
     where: { merchantId: merchant.id },
   })
 
+  const t = await getTranslations("merchantCatalog.pageBuilder")
   const storeConfig = getDefaultBuilderConfig("store")
   const rentalConfig = getDefaultBuilderConfig("rental")
 
@@ -44,11 +47,20 @@ export default async function PageBuilderPage({ params }: { params: Promise<{ sl
   })
 
   return (
-    <div className="p-4 sm:p-6">
+    <div className="p-4 sm:p-6 min-w-0">
+      {!isAiConfigured() && (
+        <p
+          role="status"
+          className="mb-4 rounded-[var(--r-sm)] border border-l-4 border-[var(--border)] border-l-[color:var(--warning)] bg-[var(--surface)] p-3 text-sm text-[var(--text)]"
+        >
+          {t("aiNotConfigured")}
+        </p>
+      )}
       <PageBuilderClient
         merchantSlug={merchant.slug}
         merchantName={merchant.name}
         initialPages={merged}
+        aiEnabled={isAiConfigured()}
       />
     </div>
   )

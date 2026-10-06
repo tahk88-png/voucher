@@ -5,6 +5,7 @@ import { WarmCard } from "@/components/warm-card"
 import { Badge } from "@/components/ui/badge"
 import { WarmButton } from "@/components/warm-button"
 import { Clock } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 
 export interface VoucherCardProps {
   merchantLogo?: string
@@ -25,15 +26,15 @@ export interface VoucherCardProps {
 const statusConfig = {
   active: {
     variant: "success" as const,
-    defaultLabel: "Active",
+    labelKey: "active",
   },
   redeemed: {
     variant: "secondary" as const,
-    defaultLabel: "Used",
+    labelKey: "redeemed",
   },
   expired: {
     variant: "muted" as const,
-    defaultLabel: "Expired",
+    labelKey: "expired",
   },
 } as const
 
@@ -52,20 +53,22 @@ export function VoucherCard({
   className,
   children,
 }: VoucherCardProps) {
+  const t = useTranslations("ui")
+  const locale = useLocale()
   const statusInfo = statusConfig[status]
-  const displayStatusLabel = statusLabel || statusInfo.defaultLabel
+  const displayStatusLabel = statusLabel || t(`voucherCard.status.${statusInfo.labelKey}`)
 
   const expiryDateObj = typeof expiryDate === "string" ? new Date(expiryDate) : expiryDate
-  const formattedExpiry = expiryDateObj.toLocaleDateString("en-US", {
+  const formattedExpiry = expiryDateObj.toLocaleDateString(locale, {
     month: "short",
     day: "numeric",
     year: "numeric",
   })
 
   const getActionLabel = () => {
-    if (status === "redeemed") return "Used"
-    if (status === "expired") return "Expired"
-    return "Redeem"
+    if (status === "redeemed") return t("voucherCard.status.redeemed")
+    if (status === "expired") return t("voucherCard.status.expired")
+    return t("voucherCard.redeem")
   }
 
   const logoUrl = merchantLogoUrl || merchantLogo
@@ -96,7 +99,7 @@ export function VoucherCard({
             <div className="flex-shrink-0">
               <Image
                 src={logoUrl}
-                alt={merchantName || "Merchant"}
+                alt={merchantName || t("voucherCard.merchantAlt")}
                 width={48}
                 height={48}
                 className="rounded-lg object-contain bg-white/80 p-1.5 shadow-sm"
@@ -120,7 +123,7 @@ export function VoucherCard({
 
         <div className="flex items-center gap-1.5 text-xs text-[var(--text-faint)]">
           <Clock className="h-3.5 w-3.5 shrink-0" />
-          <span>Expires {formattedExpiry}</span>
+          <span>{t("voucherCard.expires", { date: formattedExpiry })}</span>
         </div>
 
         {code && (

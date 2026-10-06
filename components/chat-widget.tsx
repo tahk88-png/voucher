@@ -1,7 +1,15 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback, type FormEvent, type KeyboardEvent } from 'react';
+import { useState, useRef, useEffect, useCallback, useId, type FormEvent, type KeyboardEvent } from 'react';
+import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
+
+/** Areas with a fixed bottom tab bar (h-16) below the lg breakpoint. */
+function hasBottomTabBar(pathname: string | null): boolean {
+  if (!pathname) return false;
+  return /^\/(app|merchant)(\/|$)/.test(pathname);
+}
 
 interface ChatMessage {
   id: string;
@@ -11,6 +19,7 @@ interface ChatMessage {
 }
 
 export function ChatWidget() {
+  const t = useTranslations('site.chat');
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
@@ -18,6 +27,10 @@ export function ChatWidget() {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const launcherRef = useRef<HTMLButtonElement>(null);
+  const inputId = useId();
+  const pathname = usePathname();
+  const aboveTabBar = hasBottomTabBar(pathname);
 
   // Load sessionId from localStorage on mount
   useEffect(() => {
@@ -106,14 +119,14 @@ export function ChatWidget() {
         {
           id: `error-${Date.now()}`,
           role: 'assistant',
-          content: 'Sorry, I had trouble sending your message. Please try again.',
+          content: t('sendError'),
           createdAt: new Date().toISOString(),
         },
       ]);
     } finally {
       setIsTyping(false);
     }
-  }, [input, isTyping, sessionId]);
+  }, [input, isTyping, sessionId, t]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -127,6 +140,11 @@ export function ChatWidget() {
     }
   }
 
+  function close() {
+    setIsOpen(false);
+    launcherRef.current?.focus();
+  }
+
   function startNewChat() {
     setMessages([]);
     setSessionId(null);
@@ -135,17 +153,28 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* Spacer so the floating launcher never permanently covers the last
+          CTA on a phone: the page can always scroll past it. */}
+      <div aria-hidden="true" className="chat-launcher-spacer h-20 lg:hidden" />
+
+      {/* Floating Chat Button. Below lg it sits above the app/merchant bottom
+          tab bar; it is hidden while the cookie banner is open (globals.css). */}
       <button
+        ref={launcherRef}
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
         className={cn(
-          'fixed bottom-5 right-5 z-50 flex items-center justify-center',
+          'chat-launcher fixed right-4 sm:right-5 z-50 flex items-center justify-center',
+          aboveTabBar
+            ? 'bottom-[calc(4rem+env(safe-area-inset-bottom)+0.75rem)] lg:bottom-5'
+            : 'bottom-[calc(env(safe-area-inset-bottom)+1rem)] sm:bottom-5',
           'w-14 h-14 rounded-full shadow-lg transition-all duration-300',
           'bg-[var(--primary,#6366f1)] text-white',
           'hover:scale-110 hover:shadow-xl active:scale-95',
           isOpen && 'rotate-0'
         )}
-        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+        aria-label={isOpen ? t('closeAssistant') : t('openAssistant')}
       >
         {isOpen ? (
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -173,7 +202,11 @@ export function ChatWidget() {
             : 'opacity-0 translate-y-4 scale-95 pointer-events-none sm:translate-y-8'
         )}
         role="dialog"
-        aria-label="Support Chat"
+        aria-label={t('dialogLabel')}
+        aria-hidden={!isOpen}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') close();
+        }}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border,#e5e7eb)] bg-[var(--primary,#6366f1)] text-white shrink-0">
@@ -184,25 +217,29 @@ export function ChatWidget() {
               </svg>
             </div>
             <div>
-              <h3 className="font-semibold text-sm">Vouchr Support</h3>
-              <p className="text-xs text-white/70">Typically replies instantly</p>
+              <h3 className="font-semibold text-sm">{t('title')}</h3>
+              <p className="text-xs text-white/90">{t('subtitle')}</p>
             </div>
           </div>
           <div className="flex items-center gap-1">
             <button
+              type="button"
+              tabIndex={isOpen ? 0 : -1}
               onClick={startNewChat}
               className="p-1.5 rounded-lg hover:bg-white/20 transition-colors"
-              aria-label="New chat"
-              title="New chat"
+              aria-label={t('newChat')}
+              title={t('newChat')}
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
             </button>
             <button
-              onClick={() => setIsOpen(false)}
+              type="button"
+              tabIndex={isOpen ? 0 : -1}
+              onClick={close}
               className="p-1.5 rounded-lg hover:bg-white/20 transition-colors sm:hidden"
-              aria-label="Close chat"
+              aria-label={t('closeChat')}
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -220,9 +257,9 @@ export function ChatWidget() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
                 </svg>
               </div>
-              <p className="text-sm font-medium text-[var(--text,#111827)]">Hi there!</p>
+              <p className="text-sm font-medium text-[var(--text,#111827)]">{t('greeting')}</p>
               <p className="text-xs text-[var(--text-muted,#6b7280)] mt-1">
-                Ask me anything about vouchers, gift cards, tickets, or your account.
+                {t('intro')}
               </p>
             </div>
           )}
@@ -269,12 +306,17 @@ export function ChatWidget() {
           onSubmit={handleSubmit}
           className="shrink-0 border-t border-[var(--border,#e5e7eb)] px-3 py-2.5 flex items-end gap-2 bg-[var(--surface,#ffffff)]"
         >
+          <label htmlFor={inputId} className="sr-only">
+            {t('inputLabel')}
+          </label>
           <textarea
+            id={inputId}
+            tabIndex={isOpen ? 0 : -1}
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type a message..."
+            placeholder={t('placeholder')}
             rows={1}
             className={cn(
               'flex-1 resize-none bg-[var(--surface-dim,#f3f4f6)] rounded-xl px-3.5 py-2.5',
@@ -294,6 +336,7 @@ export function ChatWidget() {
           />
           <button
             type="submit"
+            tabIndex={isOpen ? 0 : -1}
             disabled={!input.trim() || isTyping}
             className={cn(
               'shrink-0 w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200',
@@ -301,7 +344,7 @@ export function ChatWidget() {
               'hover:opacity-90 active:scale-95',
               'disabled:opacity-40 disabled:cursor-not-allowed'
             )}
-            aria-label="Send message"
+            aria-label={t('send')}
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />

@@ -7,6 +7,7 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { showError, showSuccess } from '@/lib/toast-helpers';
+import { useTranslations } from 'next-intl';
 
 interface GenerateTicketsButtonProps {
   eventId: string;
@@ -27,16 +28,17 @@ export default function GenerateTicketsButton({
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [count, setCount] = useState('1');
+  const t = useTranslations('merchantEvents.generate');
 
   const handleGenerate = async () => {
     if (!count || parseInt(count) < 1 || parseInt(count) > 1000) {
-      showError('Please enter a number between 1 and 1000');
+      showError(t('invalidCount'));
       return;
     }
 
     const maxCanGenerate = event.maxCapacity - event.currentTickets;
     if (parseInt(count) > maxCanGenerate) {
-      showError(`Cannot generate ${count} tickets. Maximum available: ${maxCanGenerate}`);
+      showError(t('tooMany', { count, max: maxCanGenerate }));
       return;
     }
 
@@ -52,15 +54,15 @@ export default function GenerateTicketsButton({
 
       if (!res.ok) {
         const error = await res.json();
-        throw new Error(error.error || 'Failed to generate tickets');
+        throw new Error(error.error || t('failed'));
       }
 
       const result = await res.json();
-      showSuccess(`Generated ${result.count} tickets successfully!`);
+      showSuccess(t('success', { count: Number(result.count) }));
       setIsOpen(false);
       router.refresh();
     } catch (error) {
-      showError(error instanceof Error ? error.message : 'Failed to generate tickets');
+      showError(error instanceof Error ? error.message : t('failed'));
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +71,7 @@ export default function GenerateTicketsButton({
   if (!isOpen) {
     return (
       <WarmButton onClick={() => setIsOpen(true)} size="sm">
-        Generate Tickets
+        {t('open')}
       </WarmButton>
     );
   }
@@ -82,12 +84,12 @@ export default function GenerateTicketsButton({
       className="absolute z-10 w-full max-w-sm right-0 top-full mt-2 bg-[var(--surface)] border border-[var(--border)] shadow-warm"
     >
       <div className="space-y-1">
-        <h3 className="text-sm font-semibold text-[var(--text)]">Generate tickets</h3>
-        <p className="text-xs text-[var(--text-muted)]">Create tickets for this event</p>
+        <h3 className="text-sm font-semibold text-[var(--text)]">{t('title')}</h3>
+        <p className="text-xs text-[var(--text-muted)]">{t('description')}</p>
       </div>
       <div className="space-y-4 mt-4">
         <div>
-          <Label htmlFor="count">Number of tickets (max: {maxCanGenerate})</Label>
+          <Label htmlFor="count">{t('countLabel', { max: maxCanGenerate })}</Label>
           <Input
             id="count"
             type="number"
@@ -101,10 +103,10 @@ export default function GenerateTicketsButton({
         </div>
         <div className="flex gap-2 justify-end">
           <WarmButton onClick={() => setIsOpen(false)} variant="outline" size="sm">
-            Cancel
+            {t('cancel')}
           </WarmButton>
           <WarmButton onClick={handleGenerate} disabled={isLoading} size="sm">
-            {isLoading ? 'Generating...' : 'Generate'}
+            {isLoading ? t('submitting') : t('submit')}
           </WarmButton>
         </div>
       </div>

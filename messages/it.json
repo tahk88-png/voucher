@@ -64,7 +64,18 @@
     "subscriptionBoxes": "Box in abbonamento",
     "pricing": "Regole di prezzo",
     "webhooks": "Webhook",
-    "apiKeys": "Chiavi API"
+    "apiKeys": "Chiavi API",
+    "marketplace": "Marketplace",
+    "openMenu": "Apri menu",
+    "closeMenu": "Chiudi menu",
+    "expandSidebar": "Espandi barra laterale",
+    "collapseSidebar": "Comprimi barra laterale",
+    "sectionShop": "Shop",
+    "sectionRewards": "Premi",
+    "sectionAccount": "Account",
+    "mainNavigation": "Navigazione principale",
+    "quickNavigation": "Navigazione rapida",
+    "logoutFailed": "Impossibile uscire. Riprova."
   },
   "voucher": {
     "title": "Voucher",
@@ -184,7 +195,11 @@
     "creditApplied": "Credito applicato",
     "finalTotal": "Totale",
     "pageDescription": "Monitora i tuoi crediti disponibili e bloccati.",
-    "noMerchantWallets": "Nessun portafoglio merchant ancora."
+    "noMerchantWallets": "Nessun portafoglio merchant ancora.",
+    "noCreditYet": "Nessun credito ancora",
+    "noCreditYetBody": "Guadagni credito quando un amico riscatta un voucher che hai condiviso. Lo trovi qui, diviso per merchant.",
+    "shareToEarn": "Condividi un voucher",
+    "findVoucherToShare": "Trova un voucher da condividere"
   },
   "redemption": {
     "title": "Riscatti",
@@ -244,7 +259,12 @@
     "merchantLabel": "Merchant",
     "voucherLabel": "Voucher",
     "linkField": "Link",
-    "codeField": "Codice"
+    "codeField": "Codice",
+    "linkCopied": "Link copiato",
+    "howItWorksTitle": "Come funzionano i referral",
+    "howItWorksBody": "Apri un voucher e tocca Condividi. Riceverai un link personale per quel voucher. Quando un amico lo riscatta, guadagni credito dal merchant.",
+    "findVoucher": "Trova un voucher da condividere",
+    "linkForVoucher": "Link referral per {voucher}"
   },
   "analytics": {
     "title": "Analitiche",
@@ -404,7 +424,7 @@
     "footerPrivacy": "Privacy",
     "footerDocs": "Documentazione",
     "footerSupport": "Supporto",
-    "footerCopyright": "© 2024 Vouchr. Tutti i diritti riservati.",
+    "footerCopyright": "© GiftHub. Tutti i diritti riservati.",
     "badge": "Lancia voucher, gift card e promo biglietti",
     "headline": "Campagne dall'aspetto premium",
     "subheadline": "Crea campagne di voucher e gift card con riscatto QR, referral e credito automatico. Paga solo per i risultati.",
@@ -516,7 +536,9 @@
     "viewVouchers": "Vedi voucher",
     "redeemed": "Riscattato",
     "friendLabel": "Amico",
-    "voucherLabel": "Voucher"
+    "voucherLabel": "Voucher",
+    "offersLinkTitle": "Link alle offerte attuali",
+    "offersLinkDescription": "Invia agli amici tutte le offerte attuali su GiftHub. Questo link non fa guadagnare credito; per guadagnarlo, condividi un voucher specifico dalla sua pagina."
   },
   "billing": {
     "upgradeRequired": "Aggiornamento richiesto",
@@ -618,14 +640,34 @@
     "inApp": "In-app",
     "pushBeta": "Push (beta)",
     "saving": "Salvataggio...",
-    "savePreferences": "Salva preferenze"
+    "savePreferences": "Salva preferenze",
+    "noPreferencesTitle": "Ancora niente da configurare",
+    "noPreferencesBody": "Le impostazioni delle notifiche sono gestite per merchant. Non hai ancora merchant con impostazioni di notifica.",
+    "saved": "Preferenze salvate",
+    "saveFailed": "Impossibile salvare le preferenze. Riprova.",
+    "markAllReadFailed": "Impossibile segnare le notifiche come lette. Riprova.",
+    "emptyHint": "Qui compariranno gli aggiornamenti sui tuoi voucher e sulle offerte.",
+    "browseOffers": "Sfoglia le offerte"
   },
   "settingsPage": {
     "description": "Gestisci le preferenze del tuo account.",
     "joined": "Iscritto",
     "recently": "di recente",
     "accountAccessTitle": "Accesso all'account",
-    "accountAccessDescription": "Proteggi il tuo account e gestisci l'accesso."
+    "accountAccessDescription": "Proteggi il tuo account e gestisci l'accesso.",
+    "pushDescription": "Ricevi notifiche su questo dispositivo, anche quando GiftHub non è aperto.",
+    "changePasswordTitle": "Cambia password",
+    "changePasswordDescription": "Aggiorna la password del tuo account.",
+    "setPasswordTitle": "Imposta una password",
+    "setPasswordDescription": "Imposta una password per accedere con email e password.",
+    "twoFactorTitle": "Autenticazione a due fattori",
+    "twoFactorDescription": "Aggiungi un ulteriore livello di sicurezza con un'app di autenticazione o una passkey.",
+    "twoFactorManage": "Gestisci sicurezza",
+    "sessionsTitle": "Sessioni attive",
+    "sessionsDescription": "Scopri dove è stato effettuato l'accesso al tuo account.",
+    "sessionsView": "Visualizza sessioni",
+    "deleteTitle": "Elimina account",
+    "deleteDescription": "Elimina definitivamente il tuo account e rendi anonimi i tuoi dati. L'operazione non può essere annullata."
   },
   "profile": {
     "title": "Profilo",
@@ -633,5 +675,4583 @@
     "accountInformation": "Informazioni account",
     "emailPreferences": "Preferenze email",
     "appSettings": "Impostazioni app"
+  },
+  "dashboard": {
+    "roleShopper": "Acquirente",
+    "roleAdmin": "Amministratore",
+    "roleStaff": "Staff",
+    "rolePlatformAdmin": "Amministratore della piattaforma",
+    "availableCredit": "Credito disponibile",
+    "pendingCredit": "{amount} in sospeso",
+    "creditExplainer": "Il credito che guadagni quando gli amici riscattano i voucher che hai condiviso. Puoi spenderlo presso il merchant che lo ha emesso.",
+    "viewCreditDetails": "Visualizza dettagli del credito",
+    "successfulReferrals": "Referral riusciti",
+    "checkInPoints": "Punti check-in",
+    "shareTitle": "Condividi un voucher, guadagna credito",
+    "shareDescription": "Apri un voucher qualsiasi e tocca Condividi per ottenere il tuo link personale. Quando un amico lo riscatta, guadagni credito.",
+    "openShareCenter": "Apri il centro condivisione",
+    "sharedSummary": "Voucher condivisi: {count} · Riscattati: {redeemed}",
+    "achievementsTitle": "Obiettivi",
+    "badgesEarned": "Badge ottenuti: {earned} su {total}",
+    "viewAchievements": "Visualizza obiettivi",
+    "availableOffers": "Offerte disponibili",
+    "browseAll": "Sfoglia tutto",
+    "noActiveOffers": "Al momento non ci sono offerte attive. Torna a trovarci presto.",
+    "validUntil": "Valido fino al {date}",
+    "recentActivity": "Attività recente",
+    "noRecentActivity": "Ancora nessuna attività.",
+    "creditFrom": "Credito da {merchant}",
+    "referralAt": "Referral · {merchant}",
+    "creditStatus": {
+      "locked": "in sospeso",
+      "available": "disponibile",
+      "used": "utilizzato",
+      "expired": "scaduto",
+      "reversed": "stornato"
+    },
+    "referralStatus": {
+      "created": "Link creato",
+      "opened": "Aperto",
+      "redeemed": "Riscattato",
+      "expired": "Scaduto",
+      "blocked": "Bloccato"
+    },
+    "myMerchants": "I miei merchant",
+    "merchantDashboard": "Dashboard merchant",
+    "sellTitle": "Vendi su GiftHub",
+    "sellDescription": "Vuoi offrire voucher ai tuoi clienti? Contattaci e ti aiuteremo a configurare un account merchant.",
+    "contactUs": "Contattaci",
+    "exploreVouchers": "Esplora i voucher"
+  },
+  "wishlist": {
+    "title": "La mia lista dei desideri",
+    "emptyTitle": "La tua lista dei desideri è vuota",
+    "emptyBody": "Salva voucher, merchant e campagne che ti piacciono per ritrovarli qui in seguito.",
+    "browseOffers": "Sfoglia le offerte"
+  },
+  "push": {
+    "enable": "Attiva le notifiche push",
+    "enabled": "Le notifiche push sono attive",
+    "enabledToast": "Notifiche push attivate",
+    "disable": "Disattiva",
+    "disabledToast": "Notifiche push disattivate",
+    "enableFailed": "Impossibile attivare le notifiche push. Riprova.",
+    "disableFailed": "Impossibile disattivare le notifiche push. Riprova.",
+    "unsupported": "Questo browser non supporta le notifiche push.",
+    "blocked": "Le notifiche sono bloccate. Consentile nelle impostazioni del browser per attivarle."
+  },
+  "sessions": {
+    "title": "Sessioni attive",
+    "description": "Scopri dove è stato effettuato l'accesso al tuo account.",
+    "backToSettings": "Torna alle impostazioni",
+    "deviceOn": "{browser} su {os}",
+    "unknownDevice": "Dispositivo sconosciuto",
+    "thisDevice": "Questo dispositivo",
+    "signedInHere": "Hai effettuato l'accesso qui in questo momento.",
+    "otherDevicesTitle": "Altri dispositivi",
+    "otherDevicesNone": "Non possiamo elencare gli altri dispositivi su cui potresti aver effettuato l'accesso. Se noti qualcosa di insolito, cambia la password e attiva l'autenticazione a due fattori.",
+    "securitySettings": "Impostazioni di sicurezza",
+    "lastActive": "Ultima attività {time}",
+    "logout": "Esci",
+    "logoutAll": "Esci da tutti gli altri dispositivi",
+    "logoutAllBody": "Termina tutte le sessioni sugli altri dispositivi.",
+    "loadFailed": "Impossibile caricare le sessioni.",
+    "revokeFailed": "Impossibile terminare la sessione. Riprova.",
+    "revoked": "Sessione terminata.",
+    "revokedAll": "Sessioni sugli altri dispositivi terminate."
+  },
+  "achievements": {
+    "title": "Obiettivi",
+    "checkIn": "Fai il check-in di oggi",
+    "checkingIn": "Check-in in corso…",
+    "checkedInToday": "Check-in di oggi effettuato",
+    "checkInFailed": "Check-in non riuscito. Riprova.",
+    "checkInSaved": "Check-in salvato",
+    "newBadge": "Nuovo badge: {name}",
+    "checkInPoints": "Punti check-in",
+    "level": "Livello",
+    "levelValue": "Livello {level}",
+    "levelProgress": "Progresso verso il livello successivo",
+    "badgesLabel": "Badge",
+    "noBadgesYet": "Nessun badge ottenuto finora.",
+    "earnedOn": "Ottenuto il {date}",
+    "locked": "Non ancora ottenuto",
+    "howToEarn": "Come guadagnare punti",
+    "earnRuleCheckIn": "Fai il check-in una volta al giorno",
+    "pointsShort": "+{points} pt",
+    "pointsExplainer": "Punti e livelli mostrano quanto sei attivo. Non possono essere convertiti in denaro o voucher.",
+    "currentStreak": "Serie attuale (giorni)",
+    "longestStreak": "Serie più lunga (giorni)",
+    "milestone": "Traguardo della serie raggiunto!",
+    "badges": {
+      "first_purchase": {
+        "name": "Primo acquisto",
+        "description": "Hai acquistato il tuo primo voucher"
+      },
+      "first_redemption": {
+        "name": "Primo riscatto",
+        "description": "Hai riscattato il tuo primo voucher"
+      },
+      "5_referrals": {
+        "name": "Connettore",
+        "description": "Hai condiviso 5 voucher con gli amici"
+      },
+      "10_referrals": {
+        "name": "Influencer",
+        "description": "Hai condiviso 10 voucher con gli amici"
+      },
+      "streak_7": {
+        "name": "Guerriero della settimana",
+        "description": "Check-in per 7 giorni di fila"
+      },
+      "streak_30": {
+        "name": "Maestro del mese",
+        "description": "Check-in per 30 giorni di fila"
+      },
+      "review_writer": {
+        "name": "Recensore",
+        "description": "Hai pubblicato la tua prima recensione"
+      },
+      "big_spender": {
+        "name": "Grande spendaccione",
+        "description": "Hai speso oltre 10.000 in voucher in totale"
+      },
+      "early_adopter": {
+        "name": "Pioniere",
+        "description": "Ti sei iscritto a GiftHub prima del 2028"
+      },
+      "social_sharer": {
+        "name": "Condivisore social",
+        "description": "Hai condiviso un voucher sui social media"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "Fedeltà",
+    "notActiveTitle": "I livelli fedeltà non sono ancora disponibili",
+    "notActiveBody": "Gli acquisti non fanno ancora guadagnare punti fedeltà e al checkout non vengono applicati sconti o vantaggi di livello, quindi qui non ci sono livelli da mostrare.",
+    "earnTodayTitle": "Cosa puoi guadagnare oggi",
+    "earnCreditTitle": "Credito referral",
+    "earnCreditBody": "Condividi un voucher. Quando un amico lo riscatta, ricevi credito da spendere presso quel merchant.",
+    "earnCreditLink": "Visualizza il tuo credito",
+    "earnPointsTitle": "Punti check-in",
+    "earnPointsBody": "Fai il check-in ogni giorno per costruire una serie, salire di livello e sbloccare badge.",
+    "earnPointsLink": "Visualizza obiettivi",
+    "historyTitle": "Cronologia punti",
+    "pointsBalance": "Saldo: {points} punti"
+  },
+  "welcome": {
+    "greeting": "Ciao, {name}!",
+    "progress": "Avanzamento configurazione iniziale",
+    "setUpSecurity": "Configura la 2FA o una passkey",
+    "skip": "Salta",
+    "next": "Avanti",
+    "getStarted": "Inizia",
+    "steps": {
+      "welcome": {
+        "title": "Benvenuto su GiftHub!",
+        "subtitle": "Ecco un breve tour di ciò che puoi fare."
+      },
+      "discover": {
+        "title": "Scopri le offerte",
+        "subtitle": "Sfoglia voucher, gift card ed eventi dei merchant locali.",
+        "features": {
+          "vouchers": "Voucher digitali",
+          "giftCards": "Gift card per amici e familiari",
+          "nearby": "Offerte vicino a te"
+        }
+      },
+      "wallet": {
+        "title": "I tuoi voucher in un unico posto",
+        "subtitle": "Tutto ciò che acquisti viene salvato nel tuo account.",
+        "features": {
+          "qr": "Codici QR per un riscatto rapido in negozio",
+          "expiry": "Promemoria via email prima della scadenza di un voucher"
+        }
+      },
+      "rewards": {
+        "title": "Guadagna premi",
+        "subtitle": "Condividi voucher con gli amici e guadagna credito quando li riscattano.",
+        "features": {
+          "referralCredit": "Credito presso il merchant per i referral riusciti",
+          "checkIns": "Check-in giornalieri e serie",
+          "badges": "Badge da sbloccare"
+        }
+      },
+      "notifications": {
+        "title": "Resta aggiornato",
+        "subtitle": "Attiva le notifiche su questo dispositivo."
+      },
+      "security": {
+        "title": "Proteggi il tuo account",
+        "subtitle": "Aggiungi una passkey o l'autenticazione a due fattori."
+      }
+    }
+  },
+  "labels": {
+    "free": "Gratis",
+    "valueOff": "{value} di sconto",
+    "valueCredit": "{value} di credito",
+    "valueDiscount": "{value} di sconto",
+    "demo": "Demo",
+    "demoHint": "Contenuto di esempio che mostra come funziona la piattaforma. Non è un'offerta reale.",
+    "category": {
+      "cafe": "Caffè e pasticceria",
+      "beauty": "Bellezza e benessere",
+      "fitness": "Fitness e sport",
+      "events": "Eventi e biglietti",
+      "workshops": "Workshop e corsi",
+      "family": "Famiglia e bambini",
+      "travel": "Viaggi e soggiorni",
+      "outdoor": "Outdoor e avventura",
+      "other": "Altro",
+      "all": "Tutte le categorie"
+    },
+    "voucherType": {
+      "percentage": "Sconto percentuale",
+      "fixed_amount": "Sconto a importo fisso",
+      "credit_amount": "Credito negozio"
+    },
+    "voucherStatus": {
+      "draft": "Bozza",
+      "published": "Pubblicato",
+      "paused": "In pausa",
+      "ended": "Terminato",
+      "expired": "Scaduto"
+    },
+    "campaignStatus": {
+      "draft": "Bozza",
+      "active": "Attiva",
+      "ended": "Terminata"
+    },
+    "campaignType": {
+      "limited": "Offerta singola",
+      "weekly": "Offerta settimanale"
+    },
+    "campaignTypeHelp": {
+      "limited": "Si svolge una sola volta tra la data di inizio e quella di fine, fino a esaurimento scorte.",
+      "weekly": "Un'offerta settimanale ricorrente a cui i clienti possono tornare ogni settimana fino alla data di fine."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "Offerta di esempio · non in vendita",
+    "notOnSale": "Non ancora in vendita",
+    "purchases": "{count, plural, one {# acquisto} other {# acquisti}}",
+    "freeToClaim": "Gratis da richiedere",
+    "onSaleNow": "In vendita ora"
+  },
+  "account": {
+    "error": {
+      "title": "Qualcosa è andato storto",
+      "fallback": "Si è verificato un errore imprevisto.",
+      "retry": "Riprova"
+    },
+    "dashboard": {
+      "metaTitle": "La mia dashboard"
+    },
+    "cashback": {
+      "metaTitle": "Cashback e crediti",
+      "title": "Cashback e crediti",
+      "description": "Tutto il credito che hai guadagnato, presso ogni merchant da cui acquisti.",
+      "lockedPending": "Bloccato (in sospeso)",
+      "used": "Utilizzato",
+      "expiringTitle": "In scadenza entro 30 giorni",
+      "expiresOn": "{merchant} — scade il {date}",
+      "expiresSoon": "{merchant} — in scadenza a breve",
+      "byMerchant": "Per merchant",
+      "lastActivity": "Ultima attività: {date}",
+      "readyToSpend": "Pronto da spendere",
+      "viewMerchantWallet": "Vedi portafoglio del merchant →"
+    },
+    "nearby": {
+      "title": "Offerte vicine",
+      "subtitle": "Trova offerte e voucher dei merchant vicino a te",
+      "useMyLocation": "Usa la mia posizione",
+      "approximateLocation": "Posizione approssimativa (basata sull'IP)",
+      "searchRadius": "Raggio di ricerca",
+      "yourLocation": "La tua posizione",
+      "mapLabel": "{count, plural, one {# merchant} other {# merchant}} entro {radius} km",
+      "merchantsNearby": "{count, plural, one {# merchant vicino} other {# merchant vicini}}",
+      "activeVouchers": "{count, plural, one {# voucher attivo} other {# voucher attivi}}",
+      "emptyTitle": "Nessun merchant nelle vicinanze",
+      "emptyBody": "Prova ad ampliare il raggio di ricerca o torna più tardi per nuove offerte nella tua zona.",
+      "expandRadius": "Estendi a {radius} km",
+      "errors": {
+        "fetchFailed": "Impossibile caricare i merchant vicini. Riprova.",
+        "geolocationUnsupported": "La geolocalizzazione non è supportata dal tuo browser.",
+        "permissionDenied": "Accesso alla posizione negato. Attiva la posizione nelle impostazioni del browser.",
+        "positionUnavailable": "Posizione non disponibile. Riprova più tardi.",
+        "timeout": "Tempo scaduto per la richiesta di posizione. Riprova.",
+        "locationFailed": "Impossibile ottenere la tua posizione.",
+        "ipLocationFailed": "Impossibile determinare la tua posizione."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "Impostazioni notifiche"
+    },
+    "redeem": {
+      "notFound": "Voucher non trovato.",
+      "codeUnavailable": "Codice voucher non disponibile.",
+      "backToWallet": "Torna al portafoglio",
+      "back": "Indietro"
+    },
+    "referrals": {
+      "metaTitle": "I miei referral",
+      "completedCount": "Completati: {count}"
+    },
+    "voucherDetail": {
+      "back": "Indietro",
+      "merchantFallback": "Merchant",
+      "termsTitle": "Termini e condizioni",
+      "terms1": "Questo voucher è valido fino alla data di scadenza indicata sopra. Non è cumulabile con altre offerte o promozioni, salvo diversa indicazione.",
+      "terms2": "Il voucher deve essere presentato al momento dell'acquisto. Non ha valore in denaro. Non può essere convertito in contanti né rimborsato.",
+      "terms3": "Il merchant si riserva il diritto di rifiutare il riscatto se il voucher risulta duplicato, manomesso o utilizzato in modo fraudolento.",
+      "terms4": "Per domande o problemi, contatta direttamente il merchant."
+    },
+    "vouchers": {
+      "unknownMerchant": "Sconosciuto",
+      "paidAmount": "Pagato: {amount}",
+      "activeCount": "Attivi ({count})",
+      "pastCount": "Passati ({count})"
+    },
+    "voucherCard": {
+      "showQr": "Mostra codice QR",
+      "close": "Chiudi",
+      "qrHint": "Mostra questo codice QR al merchant per riscattarlo in negozio."
+    },
+    "wallet": {
+      "metaTitle": "Il mio portafoglio"
+    },
+    "wishlist": {
+      "unknownItem": "Elemento sconosciuto",
+      "merchant": "Merchant",
+      "campaign": "Campagna",
+      "validUntil": "Valido fino al {date}",
+      "alertOn": "Avviso attivo",
+      "noAlert": "Nessun avviso",
+      "view": "Visualizza"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "Campagna non disponibile",
+      "metaDescriptionFallback": "Offerta di {merchant}.",
+      "breadcrumbLabel": "Percorso di navigazione",
+      "breadcrumbCampaigns": "Campagne",
+      "demoNotice": "<strong>Offerta di esempio.</strong> Questa pagina mostra come appare un'offerta su GiftHub. L'attività e l'offerta sono esempi: nulla qui può essere acquistato o riscattato.",
+      "verifiedPartner": "Partner verificato",
+      "aboutTitle": "Informazioni sull'offerta",
+      "descriptionFallback": "Offerta speciale di un merchant su GiftHub.",
+      "howItWorks": {
+        "title": "Come funziona",
+        "claimTitle": "Richiedi il voucher",
+        "buyTitle": "Acquista il voucher",
+        "buyText": "Paga in modo sicuro online, oppure richiedilo gratis quando l'offerta è gratuita.",
+        "qrTitle": "Ricevi il tuo codice QR",
+        "qrText": "Il voucher viene salvato nel tuo portafoglio GiftHub con un codice QR personale.",
+        "showTitle": "Mostralo sul posto",
+        "showText": "{merchant} scansiona il codice e lo sconto viene applicato."
+      },
+      "termsTitle": "Condizioni",
+      "voucherOptionsTitle": "Opzioni voucher",
+      "voucherFallbackTitle": "Voucher",
+      "viewVoucher": "Vedi voucher",
+      "reviewsTitle": "Recensioni",
+      "purchaseLabel": "Acquisto",
+      "buyNow": "Acquista ora",
+      "getFreeVoucher": "Ottieni voucher gratis",
+      "sampleOffer": "Offerta di esempio",
+      "notOnSaleYet": "Non ancora in vendita",
+      "demoNotForSale": "Questo è un contenuto di esempio, quindi non può essere acquistato.",
+      "noVoucherYet": "{merchant} non ha ancora pubblicato un voucher per questa offerta. Torna più tardi.",
+      "offerRuns": "Periodo dell'offerta",
+      "bought": "Acquistato",
+      "boughtCount": "{count, plural, one {# volta} other {# volte}}",
+      "website": "Sito web",
+      "allOffersFrom": "Tutte le offerte di {merchant}",
+      "moreFrom": "Altro da {merchant}"
+    },
+    "list": {
+      "allCategories": "Tutte",
+      "badge": "Marketplace di campagne attive",
+      "heroTitle": "Scopri le offerte più calde d'Europa",
+      "heroSubtitle": "Sfoglia voucher, regali ed esperienze selezionati dai migliori merchant del tuo mercato.",
+      "searchLabel": "Cerca campagne",
+      "searchPlaceholder": "Cerca campagne, merchant o servizi...",
+      "campaignCount": "{count, plural, one {<b>#</b> campagna} other {<b>#</b> campagne}}",
+      "voucherCount": "{count, plural, one {<b>#</b> voucher in vendita} other {<b>#</b> voucher in vendita}}",
+      "merchantCount": "{count, plural, one {<b>#</b> merchant} other {<b>#</b> merchant}}",
+      "categoriesLabel": "Categorie",
+      "unavailableTitle": "Campagne temporaneamente non disponibili",
+      "unavailableText": "Impossibile connettersi al database. Riprova tra un momento.",
+      "emptyTitle": "Nessuna offerta trovata",
+      "emptyText": "Prova una ricerca diversa o scegli un'altra categoria.",
+      "tryAgain": "Riprova",
+      "clearFilters": "Cancella filtri"
+    },
+    "listError": {
+      "title": "Impossibile caricare le campagne",
+      "fallbackMessage": "Si è verificato un errore imprevisto durante il caricamento delle campagne.",
+      "tryAgain": "Riprova"
+    },
+    "filters": {
+      "sortBy": "Ordina per",
+      "sort": {
+        "newest": "Più recenti",
+        "oldest": "Meno recenti",
+        "priceLow": "Prezzo: dal più basso",
+        "priceHigh": "Prezzo: dal più alto",
+        "popular": "Più popolari",
+        "expiring": "In scadenza"
+      },
+      "merchant": "Merchant",
+      "allMerchants": "Tutti i merchant",
+      "minPrice": "Prezzo min.",
+      "minPricePlaceholder": "Min €",
+      "maxPrice": "Prezzo max.",
+      "maxPricePlaceholder": "Max €"
+    },
+    "tenantList": {
+      "title": "Voucher",
+      "subtitle": "Offerte attive di {merchant}.",
+      "empty": "Nessun voucher ancora disponibile.",
+      "voucher": "Voucher",
+      "viewVoucher": "Vedi voucher"
+    },
+    "deals": {
+      "metaTitle": "Offerte",
+      "metaDescription": "Scopri le migliori offerte voucher"
+    },
+    "campaignShare": {
+      "share": "Condividi",
+      "copied": "Copiato",
+      "linkCopied": "Link copiato",
+      "copyFailed": "Copia non riuscita"
+    },
+    "shareSheet": {
+      "share": "Condividi",
+      "title": {
+        "voucher": "Condividi questo voucher",
+        "campaign": "Condividi questa campagna",
+        "merchant": "Condividi questo merchant"
+      },
+      "close": "Chiudi",
+      "referralShareText": "{title} - Condividi e ricevi il 10% indietro!",
+      "referralNote": "<b>Condividi e guadagna il 10%</b> quando i tuoi amici riscattano!",
+      "targets": {
+        "email": "Email",
+        "copy": "Copia link"
+      },
+      "copied": "Copiato!",
+      "linkCopiedToClipboard": "Link copiato negli appunti!",
+      "linkCopied": "Link copiato!",
+      "shareLinkLabel": "Link di condivisione",
+      "copyLink": "Copia link"
+    },
+    "wishlistButton": {
+      "add": "Aggiungi alla lista dei desideri",
+      "remove": "Rimuovi dalla lista dei desideri"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, one {# stella} other {# stelle}}"
+    },
+    "form": {
+      "title": "Scrivi una recensione",
+      "ratingLabel": "Valutazione",
+      "titleLabel": "Titolo (facoltativo)",
+      "titlePlaceholder": "Riassumi la tua esperienza",
+      "commentLabel": "Commento (facoltativo)",
+      "commentPlaceholder": "Condividi la tua esperienza...",
+      "submit": "Invia recensione",
+      "submitting": "Invio in corso...",
+      "ratingRequired": "Seleziona una valutazione",
+      "submitFailed": "Impossibile inviare la recensione",
+      "alreadyReviewed": "Hai già recensito questo elemento",
+      "signInRequired": "Accedi per scrivere una recensione",
+      "thankYou": "Grazie per la tua recensione!",
+      "writeAnother": "Scrivi un'altra recensione"
+    },
+    "list": {
+      "sort": {
+        "newest": "Più recenti",
+        "highest": "Più alte",
+        "helpful": "Più utili"
+      },
+      "signInToReview": "Accedi per scrivere una recensione",
+      "loadFailed": "Impossibile caricare le recensioni.",
+      "tryAgain": "Riprova",
+      "empty": "Nessuna recensione ancora.",
+      "anonymous": "Anonimo",
+      "verified": "Verificata",
+      "helpfulButton": "Utile ({count})",
+      "foundHelpful": "{count} l'hanno trovata utile",
+      "previous": "Precedente",
+      "next": "Successiva",
+      "pageOf": "Pagina {current} di {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "Annulla",
+      "saving": "Salvataggio…",
+      "somethingWentWrong": "Qualcosa è andato storto"
+    },
+    "apiErrors": {
+      "notAuthenticated": "Non autenticato",
+      "unauthorized": "Non autorizzato",
+      "tooManyAttempts": "Troppi tentativi",
+      "validationFailed": "Convalida non riuscita",
+      "unexpected": "Si è verificato un errore imprevisto",
+      "databaseFailed": "Operazione sul database non riuscita",
+      "serviceUnavailable": "Servizio temporaneamente non disponibile",
+      "newPasswordTooShort": "La nuova password deve contenere almeno 8 caratteri",
+      "userNotFound": "Utente non trovato",
+      "currentPasswordRequired": "La password attuale è obbligatoria",
+      "currentPasswordIncorrect": "La password attuale non è corretta",
+      "deletionUnavailable": "L'eliminazione dell'account non è temporaneamente disponibile. Contatta l'assistenza.",
+      "totpAlreadyEnabledReconfigure": "La 2FA è già attiva. Disattivala prima di riconfigurarla.",
+      "sixDigitCodeRequired": "È richiesto un codice di 6 cifre",
+      "totpSetupMissing": "Nessuna configurazione TOTP trovata. Avvia prima la procedura di configurazione.",
+      "totpAlreadyEnabled": "La 2FA è già attiva",
+      "invalidSetupCode": "Codice non valido. Controlla l'app di autenticazione e riprova.",
+      "verificationCodeRequired": "È richiesto un codice di verifica",
+      "totpNotEnabled": "La 2FA non è attualmente attiva",
+      "invalidDisableCode": "Codice non valido. Inserisci il codice TOTP attuale o un codice di backup.",
+      "passkeyOptionsFailed": "Impossibile ottenere le opzioni di registrazione",
+      "passkeyGenerateOptionsFailed": "Impossibile generare le opzioni di registrazione",
+      "registrationFailed": "Registrazione non riuscita",
+      "passkeyRegistrationFailed": "Registrazione della passkey non riuscita",
+      "passkeyChallengeExpired": "Challenge scaduta o non trovata",
+      "verificationFailed": "Verifica non riuscita",
+      "passkeyVerifyFailed": "Impossibile verificare la registrazione"
+    },
+    "settings": {
+      "joinedOn": "Iscritto dal {date}",
+      "joinedRecently": "Iscritto di recente"
+    },
+    "profileForm": {
+      "nameLabel": "Nome",
+      "namePlaceholder": "Il tuo nome",
+      "emailLabel": "Email",
+      "emailLocked": "L'email non può essere modificata",
+      "save": "Salva modifiche",
+      "updated": "Profilo aggiornato",
+      "nameRequired": "Il nome è obbligatorio",
+      "updateFailed": "Impossibile aggiornare il profilo"
+    },
+    "passwordForm": {
+      "currentLabel": "Password attuale",
+      "newLabel": "Nuova password",
+      "setLabel": "Imposta password",
+      "confirmLabel": "Conferma password",
+      "showPassword": "Mostra password",
+      "hidePassword": "Nascondi password",
+      "change": "Cambia password",
+      "set": "Imposta password",
+      "updated": "Password aggiornata correttamente",
+      "tooShort": "La password deve contenere almeno {min} caratteri",
+      "mismatch": "Le password non corrispondono",
+      "changeFailed": "Impossibile cambiare la password"
+    },
+    "deleteDialog": {
+      "trigger": "Elimina account",
+      "title": "Eliminare il tuo account?",
+      "description": "Questa azione è definitiva. Il profilo, le sessioni e le impostazioni delle notifiche verranno eliminati. La cronologia degli acquisti verrà resa anonima.",
+      "typeToConfirm": "Digita <strong>{word}</strong> per confermare:",
+      "confirm": "Elimina definitivamente",
+      "deleting": "Eliminazione…",
+      "failed": "Impossibile eliminare l'account"
+    },
+    "passkeys": {
+      "title": "Passkey",
+      "description": "Accedi senza password usando l'impronta digitale, il volto o il PIN del tuo dispositivo.",
+      "add": "Aggiungi passkey",
+      "namePlaceholder": "es. \"MacBook Touch ID\"",
+      "addSubmit": "Aggiungi",
+      "adding": "Aggiunta…",
+      "unsupported": "Questo browser non supporta le passkey. Prova una versione recente di Chrome, Safari o Edge.",
+      "empty": "Nessuna passkey ancora. Aggiungine una per accedere senza password.",
+      "devicePasskey": "Passkey del dispositivo",
+      "passkey": "Passkey",
+      "added": "Aggiunta il {date}",
+      "lastUsed": "Ultimo utilizzo: {date}",
+      "synced": "Sincronizzata",
+      "removeConfirm": "Rimuovere?",
+      "remove": "Rimuovi",
+      "removeLabel": "Rimuovi passkey",
+      "loadFailed": "Impossibile caricare le passkey",
+      "removeFailed": "Impossibile rimuovere la passkey"
+    },
+    "security": {
+      "title": "Sicurezza",
+      "description": "Gestisci l'autenticazione a due fattori e le impostazioni di sicurezza",
+      "loading": "Caricamento...",
+      "backToSettings": "Torna alle impostazioni",
+      "enabledMessage": "L'autenticazione a due fattori è ora attiva!",
+      "disabledMessage": "L'autenticazione a due fattori è stata disattivata",
+      "errors": {
+        "statusLoadFailed": "Impossibile caricare lo stato dell'autenticazione a due fattori",
+        "setupFailed": "Impossibile avviare la configurazione",
+        "verifyFailed": "Verifica non riuscita",
+        "disableFailed": "Impossibile disattivare la 2FA"
+      },
+      "status": {
+        "title": "Autenticazione a due fattori",
+        "enabledBody": "Il tuo account è protetto da un'app di autenticazione.",
+        "disabledBody": "Aggiungi un ulteriore livello di sicurezza al tuo account richiedendo un codice dalla tua app di autenticazione.",
+        "enabled": "Attiva",
+        "notEnabled": "Non attiva"
+      },
+      "setup": {
+        "title": "Configura l'app di autenticazione",
+        "description": "Usa un'app come Google Authenticator, Authy o 1Password per generare i codici di verifica.",
+        "enable": "Attiva 2FA"
+      },
+      "scan": {
+        "title": "Scansiona il codice QR o inserisci la chiave manualmente",
+        "qrAlt": "Scansiona questo codice QR con la tua app di autenticazione",
+        "manualKey": "Oppure inserisci questa chiave manualmente:",
+        "copySecret": "Copia chiave segreta"
+      },
+      "verify": {
+        "title": "Inserisci il codice di verifica",
+        "codeLabel": "Codice di 6 cifre dalla tua app",
+        "submit": "Verifica e attiva"
+      },
+      "backupCodes": {
+        "title": "Salva i tuoi codici di backup",
+        "description": "Conserva questi codici in un luogo sicuro. Se perdi l'accesso alla tua app di autenticazione, puoi usare uno di questi codici per accedere. Ogni codice può essere usato una sola volta.",
+        "copy": "Copia codici",
+        "copied": "Copiati!",
+        "download": "Scarica",
+        "done": "Fatto"
+      },
+      "backupFile": {
+        "title": "GiftHub - Codici di backup per l'autenticazione a due fattori",
+        "instructions": "Salva questi codici in un luogo sicuro. Ogni codice può essere usato una sola volta.",
+        "generated": "Generati il: {date}"
+      },
+      "disable": {
+        "title": "Disattiva l'autenticazione a due fattori",
+        "description": "Questo rimuoverà il livello di sicurezza aggiuntivo dal tuo account.",
+        "button": "Disattiva 2FA",
+        "confirmTitle": "Conferma disattivazione 2FA",
+        "confirmDescription": "Inserisci il codice attuale di 6 cifre dalla tua app di autenticazione oppure un codice di backup.",
+        "codeLabel": "Codice di verifica",
+        "codePlaceholder": "000000 o XXXX-XXXX",
+        "confirm": "Conferma disattivazione"
+      },
+      "quickLinks": {
+        "title": "Link rapidi sicurezza",
+        "sessions": "Vedi sessioni attive",
+        "changePassword": "Cambia password"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "Paga per i risultati, non per la visibilità. Infrastruttura referral gestita dal merchant: voucher brandizzati e credito negozio."
+    },
+    "error": {
+      "unexpected": "Si è verificato un errore imprevisto."
+    },
+    "hero": {
+      "badge": "Voucher e referral per attività locali",
+      "title": "I tuoi clienti vendono ai <highlight>tuoi prossimi clienti</highlight>",
+      "subtitle": "Crea campagne voucher. I tuoi clienti le condividono, guadagnano crediti e portano amici. Monitora ogni referral. Scopri il costo esatto di ogni nuovo cliente.",
+      "ctaMerchant": "Inizia come merchant",
+      "ctaExplore": "Esplora le campagne",
+      "noCardRequired": "Nessuna carta di credito richiesta",
+      "freeTrial": "Prova gratuita di {days} giorni",
+      "cancelAnytime": "Disdici quando vuoi"
+    },
+    "stats": {
+      "activeCampaigns": "Campagne attive",
+      "merchants": "Merchant",
+      "processedValue": "Valore elaborato"
+    },
+    "merchantsTitle": "Merchant sulla piattaforma",
+    "values": {
+      "referral": {
+        "title": "Motore referral",
+        "description": "I tuoi clienti condividono le offerte e portano nuovi clienti in automatico"
+      },
+      "vouchers": {
+        "title": "Voucher digitali",
+        "description": "Crea in pochi minuti campagne sconto con regole flessibili"
+      },
+      "qr": {
+        "title": "Riscatto con QR",
+        "description": "Scansiona e convalida in negozio con un semplice telefono. Nessun hardware necessario"
+      },
+      "analytics": {
+        "title": "Analitiche in tempo reale",
+        "description": "Scopri esattamente quanto costa e quanto rende ogni campagna. Niente congetture"
+      }
+    },
+    "howItWorks": {
+      "title": "Come funziona",
+      "subtitle": "Inizia in pochi minuti con un semplice processo in tre passi",
+      "steps": {
+        "create": {
+          "title": "Crea una campagna",
+          "description": "Configura un voucher in 2 minuti: sconto, periodo di validità, utilizzi massimi. Fatto."
+        },
+        "share": {
+          "title": "I clienti lo condividono",
+          "description": "Ogni acquirente riceve un link referral. Lo condivide, guadagna credito e porta amici."
+        },
+        "grow": {
+          "title": "Guardalo crescere",
+          "description": "Monitora ogni catena di referral, scopri il costo per nuovo cliente, misura il ROI."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "Esplora le campagne più popolari",
+      "subtitle": "Scopri voucher, offerte ed esperienze in tutta Europa",
+      "showing": "{count, plural, one {Visualizzata # campagna attiva} other {Visualizzate # campagne attive}}.",
+      "showingWithOnSale": "{count, plural, one {Visualizzata # campagna attiva} other {Visualizzate # campagne attive}} — {onSale} in vendita ora.",
+      "emptyTitle": "Nessuna campagna attiva al momento",
+      "emptyBody": "Le offerte appaiono qui non appena i merchant le pubblicano.",
+      "viewAll": "Vedi tutte le campagne"
+    },
+    "pricing": {
+      "title": "Prezzi semplici e trasparenti",
+      "subtitle": "Scegli il piano adatto alla tua attività. La fatturazione annuale costa quanto 10 mesi.",
+      "billingPeriod": "Periodo di fatturazione",
+      "monthly": "Mensile",
+      "annual": "Annuale",
+      "save": "Risparmia il 17%",
+      "mostPopular": "Più scelto",
+      "perMonth": "/mese",
+      "perYear": "{price}/anno (2 mesi gratis)",
+      "startTrial": "Inizia la prova gratuita",
+      "footer": "Tutti i piani includono una prova gratuita di {days} giorni · commissione del {percent}% sulle vendite di voucher · Disdici quando vuoi",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, one {# voucher/mese} other {# voucher/mese}}",
+        "activeCampaigns": "{count, plural, one {# campagna attiva} other {# campagne attive}}",
+        "teamMembers": "{count, plural, one {# membro del team} other {# membri del team}}",
+        "qrRedemption": "Riscatto con codice QR",
+        "basicAnalytics": "Analitiche di base",
+        "advancedAnalytics": "Analitiche avanzate",
+        "customDomain": "Dominio personalizzato",
+        "promoBoosts": "Boost promozionali (email + push)",
+        "unlimitedVouchers": "Voucher illimitati",
+        "unlimitedCampaigns": "Campagne illimitate",
+        "unlimitedTeamMembers": "Membri del team illimitati",
+        "everythingInPlan": "Tutto ciò che include {plan}"
+      }
+    },
+    "calculator": {
+      "title": "Calcola il tuo ROI",
+      "subtitle": "Sposta i cursori per vedere quanto potresti guadagnare con GiftHub",
+      "monthlyPurchases": "Acquisti di voucher al mese",
+      "purchasesValue": "{count, plural, one {# acquisto} other {# acquisti}}",
+      "averageTicket": "Scontrino medio",
+      "referralRate": "Tasso di conversione referral",
+      "monthlyRevenue": "Ricavi mensili",
+      "referralCustomers": "Nuovi clienti da referral",
+      "perMonthValue": "{value}/mese",
+      "referralRevenue": "Ricavi da referral",
+      "estimatedRoi": "ROI stimato",
+      "platformCost": "Costo della piattaforma",
+      "platformCostValue": "Piano da {plan}/mese + {fees} di commissioni ({percent}%) = <strong>{total}/mese</strong>",
+      "disclaimer": "Solo a titolo illustrativo, basato sui valori inseriti: non è una previsione."
+    },
+    "why": {
+      "title": "Perché i merchant amano GiftHub",
+      "body": "Fai crescere la tua clientela e aumenta i ricavi, mantenendo i tuoi margini e la proprietà delle relazioni con i clienti.",
+      "benefits": {
+        "referralEngine": "Motore referral integrato in ogni campagna",
+        "analytics": "Analitiche in tempo reale: costo per acquisizione, ROI",
+        "qr": "Riscatto con QR: nessun hardware POS necessario",
+        "languages": "Disponibile in {count, plural, one {# lingua} other {# lingue}}",
+        "flatPlan": "Canone mensile fisso, non una percentuale sui ricavi come Groupon",
+        "ownData": "I dati dei clienti sono tuoi",
+        "fee": "Commissione del {percent}% sulle vendite di voucher, nessun costo nascosto"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "Trascina per confrontare",
+      "beforeTitle": "Con Groupon",
+      "afterTitle": "Con GiftHub",
+      "sliderLabel": "Confronta {before} e {after}",
+      "before": {
+        "revenueShare": "Ampia quota dei ricavi trattenuta dalla piattaforma",
+        "ownsRelationship": "La piattaforma possiede la relazione con il cliente",
+        "noDataAccess": "Nessun accesso ai dati dei clienti",
+        "raceToBottom": "Corsa al ribasso dei prezzi",
+        "lostBrand": "Identità del brand persa"
+      },
+      "after": {
+        "flatFee": "Canone fisso {minPrice}–{maxPrice}/mese + commissione del {percent}%",
+        "ownData": "Tutti i dati dei clienti sono tuoi",
+        "referralEngine": "Motore referral integrato",
+        "yourBrand": "Il tuo brand, le tue regole",
+        "roiAnalytics": "Analisi del ROI in tempo reale"
+      }
+    },
+    "faq": {
+      "title": "Domande frequenti",
+      "subtitle": "Tutto ciò che devi sapere su GiftHub",
+      "items": {
+        "groupon": {
+          "question": "In cosa è diverso da Groupon?",
+          "answer": "I siti di offerte in stile Groupon di solito trattengono un'ampia quota di ogni vendita e possiedono la relazione con il cliente. Noi applichiamo un canone mensile fisso (da {price}/mese) più il {percent}% sulle vendite di voucher. Clienti, dati e margini restano tuoi."
+        },
+        "referral": {
+          "question": "Come funziona il sistema referral?",
+          "answer": "Ogni cliente che acquista un voucher riceve un link referral unico. Quando lo condivide e un amico acquista, entrambi guadagnano credito. Ogni catena di referral viene tracciata, così vedi esattamente come ti trovano i nuovi clienti."
+        },
+        "trial": {
+          "question": "Cosa succede dopo la prova di {days} giorni?",
+          "answer": "Scegli un piano ({starter}, {pro} o {scale}). Se non ti abboni, i voucher già pubblicati restano attivi per i clienti, ma non potrai creare nuove campagne finché non ti abboni."
+        },
+        "qr": {
+          "question": "Mi serve hardware speciale per il riscatto con QR?",
+          "answer": "No. Il tuo staff apre lo scanner mobile nel browser di qualsiasi telefono, scansiona il codice QR del cliente ed è fatto. Nessuna app da scaricare, nessuna integrazione POS necessaria."
+        },
+        "fee": {
+          "question": "Cos'è la commissione del {percent}%?",
+          "answer": "Quando un cliente acquista un voucher tramite la piattaforma, tratteniamo il {percent}% dal pagamento a te destinato. Non ci sono altre commissioni oltre al tuo piano."
+        }
+      }
+    },
+    "cta": {
+      "title": "Smetti di affittare clienti. Costruisci il tuo esercito.",
+      "body": "Crea la tua prima campagna in pochi minuti. Al resto pensano i tuoi clienti. Prova gratuita di {days} giorni.",
+      "getStarted": "Inizia gratis",
+      "browse": "Sfoglia le campagne"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "Demo checkout",
+      "subtitle": "Pagina di checkout dimostrativa",
+      "creditBalance": "Saldo crediti",
+      "availableAmount": "{amount} disponibili",
+      "lockedAmount": "{amount} bloccati",
+      "orderSummary": "Riepilogo ordine",
+      "orderAmount": "Importo ordine",
+      "creditToApply": "Credito da applicare",
+      "maxAmount": "Max: {amount}",
+      "subtotal": "Subtotale",
+      "creditAppliedLine": "Credito applicato",
+      "total": "Totale",
+      "processing": "Elaborazione...",
+      "submit": "Applica credito e completa l'ordine",
+      "creditApplied": "Credito applicato correttamente! Totale ordine: {total}",
+      "errors": {
+        "missingAmounts": "Inserisci sia l'importo dell'ordine sia l'importo del credito",
+        "applyFailed": "Impossibile applicare il credito"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - Voucher disponibili",
+      "emptyTitle": "Nessun voucher disponibile",
+      "emptyDescription": "Torna più tardi per nuove offerte voucher di {merchant}.",
+      "specialOffer": "Offerta speciale",
+      "validUntil": "Valido fino al {date}",
+      "viewAndShare": "Vedi e condividi"
+    },
+    "wallet": {
+      "subtitle": "Portafoglio crediti",
+      "availableToUse": "Disponibile da usare",
+      "useCredit": "Usa credito",
+      "noCreditToUse": "Nessun credito da usare",
+      "locked": "Bloccato",
+      "lockedDescription": "Si sblocca quando l'acquisto collegato viene confermato.",
+      "historyTitle": "Cronologia crediti",
+      "historyDescription": "Registro per {merchant}",
+      "historyEmpty": "Nessuna cronologia crediti ancora.",
+      "expires": "Scade il {date}",
+      "creditStatus": {
+        "locked": "bloccato",
+        "available": "disponibile",
+        "used": "utilizzato",
+        "expired": "scaduto",
+        "reversed": "stornato"
+      }
+    },
+    "error": {
+      "title": "Qualcosa è andato storto",
+      "description": "Impossibile caricare il portale. Aggiorna la pagina o riprova più tardi.",
+      "backToPortal": "Torna al portale"
+    },
+    "payments": {
+      "voucherFallback": "Voucher",
+      "status": {
+        "pending": "in attesa",
+        "paid": "pagato",
+        "failed": "non riuscito",
+        "refunded": "rimborsato"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "disponibile",
+        "sold": "venduto",
+        "used": "utilizzato",
+        "cancelled": "annullato",
+        "refunded": "rimborsato"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "Qualcosa è andato storto",
+      "description": "Si è verificato un errore durante il caricamento di questa pagina."
+    },
+    "notFound": {
+      "metaTitle": "Pagina non trovata"
+    },
+    "header": {
+      "mainNavLabel": "Principale",
+      "signIn": "Accedi"
+    },
+    "footer": {
+      "navLabel": "Piè di pagina",
+      "copyright": "© {year} GiftHub. Made in Europe."
+    },
+    "navLinks": {
+      "campaigns": "Campagne",
+      "merchants": "Merchant",
+      "explore": "Esplora",
+      "search": "Cerca",
+      "faq": "FAQ",
+      "contact": "Contatti",
+      "privacy": "Privacy",
+      "terms": "Termini",
+      "home": "Home",
+      "about": "Chi siamo",
+      "vouchers": "Voucher",
+      "shop": "Shop",
+      "rent": "Noleggio"
+    },
+    "chat": {
+      "openAssistant": "Apri assistente automatico",
+      "closeAssistant": "Chiudi assistente automatico",
+      "dialogLabel": "Assistente automatico GiftHub",
+      "title": "Assistente GiftHub",
+      "subtitle": "Assistente automatico",
+      "newChat": "Nuova chat",
+      "closeChat": "Chiudi chat",
+      "greeting": "Ciao!",
+      "intro": "Sono un assistente automatico. Chiedimi di voucher, gift card, biglietti o del tuo account.",
+      "inputLabel": "Messaggio all'assistente automatico",
+      "placeholder": "Scrivi un messaggio...",
+      "send": "Invia messaggio",
+      "sendError": "Spiacenti, non è stato possibile inviare il messaggio. Riprova."
+    },
+    "cookies": {
+      "regionLabel": "Preferenze cookie",
+      "intro": "Usiamo i cookie per migliorare la tua esperienza. I cookie necessari sono sempre attivi; scegli tu quali cookie facoltativi consentire. <link>Informativa sulla privacy</link>",
+      "optionalLegend": "Cookie facoltativi",
+      "necessary": "Necessari",
+      "alwaysOn": "(sempre attivi)",
+      "analytics": "Analitici",
+      "marketing": "Marketing",
+      "preferences": "Preferenze",
+      "saveError": "Impossibile salvare la tua scelta. Riprova.",
+      "acceptAll": "Accetta tutti",
+      "declineOptional": "Rifiuta facoltativi",
+      "customize": "Personalizza",
+      "savePreferences": "Salva preferenze"
+    },
+    "currency": {
+      "selectLabel": "Seleziona valuta"
+    },
+    "language": {
+      "selectLabel": "Seleziona lingua",
+      "selectInterfaceLabel": "Seleziona lingua dell'interfaccia ({language})",
+      "unknown": "sconosciuta",
+      "interfaceOnly": "Cambia solo i testi dell'interfaccia",
+      "uiName": "{name} (UI)"
+    },
+    "country": {
+      "selectLabel": "Seleziona marketplace ({country})",
+      "heading": "Seleziona marketplace",
+      "description": "Cambia solo paese, valuta e dati di mercato",
+      "tip": "<strong>Suggerimento:</strong> il marketplace filtra dati e valuta. La lingua dell'interfaccia si configura separatamente."
+    },
+    "roleSwitcher": {
+      "myDashboard": "La mia dashboard",
+      "platformAdmin": "Admin piattaforma",
+      "admin": "Admin",
+      "staff": "Staff",
+      "switchContext": "Cambia contesto"
+    },
+    "legalEntity": {
+      "operator": "Gestore",
+      "registeredAddress": "Sede legale",
+      "registryCode": "Numero di registro",
+      "operatorPlaceholder": "[ragione sociale da aggiungere]",
+      "addressPlaceholder": "[sede legale da aggiungere]",
+      "registryCodePlaceholder": "[numero di registro da aggiungere]"
+    },
+    "theme": {
+      "dark": "Modalità scura",
+      "light": "Modalità chiara",
+      "system": "Tema di sistema"
+    },
+    "voiceSearch": {
+      "start": "Avvia ricerca vocale",
+      "stop": "Interrompi ascolto",
+      "tooltip": "Ricerca vocale",
+      "tapToStop": "Tocca per interrompere"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "Impossibile caricare l'hub",
+      "description": "Si è verificato un errore imprevisto durante il caricamento dei merchant.",
+      "retry": "Riprova"
+    },
+    "hub": {
+      "metaTitle": "Merchant",
+      "metaDescription": "Attività locali su GiftHub e le loro offerte attuali",
+      "title": "Merchant locali",
+      "subtitle": "Caffè, saloni, studi e altro: scopri chi è su GiftHub e cosa offre in questo momento.",
+      "loadError": "Impossibile caricare i merchant",
+      "loadErrorHint": "Riprova tra un momento.",
+      "retry": "Riprova",
+      "emptyTitle": "Nessun merchant ancora",
+      "emptyHint": "Le attività appaiono qui non appena si iscrivono.",
+      "joinCta": "Iscriviti come merchant",
+      "noOffers": "Nessuna offerta al momento",
+      "offerCount": "{count, plural, one {# offerta} other {# offerte}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "Non trovato",
+      "metaDescription": "Sfoglia voucher, campagne e offerte di {name}",
+      "offerCount": "{count, plural, one {# offerta} other {# offerte}}",
+      "website": "Sito web",
+      "contact": "Contatti",
+      "sampleNotice": "<strong>Attività di esempio.</strong> Questa pagina mostra come appare un merchant su GiftHub. Le sue offerte sono esempi e non possono essere acquistate.",
+      "offersHeading": "Offerte",
+      "noOffers": "Nessuna offerta al momento",
+      "noOffersHint": "Le nuove offerte di {name} appariranno qui.",
+      "browseOther": "Sfoglia altre offerte",
+      "validUntil": "Valido fino al {date}"
+    },
+    "tenantShell": {
+      "campaigns": "Campagne",
+      "mainNav": "Principale",
+      "signIn": "Accedi"
+    },
+    "sitePage": {
+      "hubHeroTitle": "Scopri i merchant locali",
+      "hubHeroSubtitle": "Sfoglia campagne, voucher, noleggi e negozi dei merchant su GiftHub.",
+      "tenantHeroSubtitle": "Esplora prodotti, noleggi e voucher in un unico posto.",
+      "browseCampaigns": "Sfoglia le campagne",
+      "getStarted": "Inizia",
+      "featuredMerchants": "Merchant in evidenza",
+      "noMerchants": "Nessun merchant ancora.",
+      "visitNamed": "Visita {name}",
+      "visitMerchant": "Visita il merchant",
+      "featuredProducts": "Prodotti in evidenza",
+      "noProducts": "Nessun prodotto disponibile.",
+      "rentalHighlights": "Noleggi in evidenza",
+      "noRentals": "Nessun noleggio disponibile.",
+      "perDay": "{price} / giorno",
+      "activeVouchers": "Voucher attivi",
+      "noStandaloneVouchers": "Nessun voucher singolo al momento: <link>sfoglia {count, plural, one {# campagna attiva} other {# campagne attive}}</link>.",
+      "noVouchers": "Nessun voucher disponibile.",
+      "voucher": "Voucher",
+      "viewVoucher": "Vedi voucher",
+      "stats": {
+        "campaigns": "Campagne",
+        "vouchers": "Voucher",
+        "products": "Prodotti",
+        "rentals": "Noleggi"
+      },
+      "statsUnavailable": "Statistiche non disponibili."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "Shop",
+      "subtitle": "Sfoglia i prodotti e aggiungili al carrello."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "Intent di checkout creato",
+      "intentCreatedDescription": "Intent {id} per {amount}",
+      "checkoutErrorTitle": "Errore di checkout",
+      "checkoutErrorDescription": "Impossibile creare l'intent di checkout.",
+      "empty": "Nessun prodotto ancora disponibile.",
+      "productHighlight": "Prodotto in evidenza",
+      "add": "Aggiungi",
+      "cart": "Carrello",
+      "cartEmpty": "Il carrello è vuoto.",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "Rimuovi",
+      "total": "Totale",
+      "creatingIntent": "Creazione intent...",
+      "checkoutIntent": "Intent di checkout"
+    },
+    "rentPage": {
+      "metaTitle": "Marketplace noleggi",
+      "metaDescription": "Sfoglia gli articoli a noleggio",
+      "title": "Noleggi",
+      "subtitle": "Scegli le date e richiedi un preventivo di noleggio."
+    },
+    "rentClient": {
+      "selectDatesError": "Seleziona le date del noleggio.",
+      "bookingFailed": "Prenotazione non riuscita",
+      "bookingCreated": "Richiesta di prenotazione creata per {name}. Totale: {total}.",
+      "bookingSubmitted": "Prenotazione inviata",
+      "bookingCreateFailed": "Impossibile creare la prenotazione del noleggio.",
+      "bookingCancelled": "Prenotazione annullata.",
+      "cancelFailed": "Impossibile annullare la prenotazione.",
+      "datesHeading": "Date del noleggio",
+      "startDate": "Data di inizio",
+      "endDate": "Data di fine",
+      "daysSelected": "{count, plural, one {# giorno di noleggio selezionato.} other {# giorni di noleggio selezionati.}}",
+      "selectDatesHint": "Seleziona le date per calcolare il prezzo.",
+      "empty": "Nessun noleggio ancora disponibile.",
+      "rentalHighlight": "Noleggio in evidenza",
+      "perDay": "{price} / giorno",
+      "weeklyRate": "Settimanale: {price}",
+      "select": "Seleziona",
+      "selectedHeading": "Noleggio selezionato",
+      "estimatedTotal": "Totale stimato",
+      "notesLabel": "Note (facoltative)",
+      "notesPlaceholder": "Eventuali richieste particolari...",
+      "submitting": "Invio prenotazione...",
+      "requestBooking": "Richiedi prenotazione noleggio",
+      "myBookings": "Le mie prenotazioni",
+      "noBookings": "Nessuna prenotazione di noleggio ancora. Seleziona un articolo qui sopra per iniziare.",
+      "bookingRange": "{start} - {end} ({days, plural, one {# giorno} other {# giorni}})",
+      "bookingTotal": "Totale: {total}",
+      "rejectionReason": "Motivo: {reason}",
+      "cancelling": "Annullamento...",
+      "cancel": "Annulla",
+      "status": {
+        "pending": "in attesa",
+        "approved": "approvato",
+        "rejected": "rifiutato",
+        "paid": "pagato",
+        "active": "attivo",
+        "returned": "restituito",
+        "cancelled": "annullato"
+      }
+    },
+    "boxes": {
+      "metaTitle": "Box in abbonamento",
+      "metaDescription": "Abbonati a box mensili di voucher selezionati dai tuoi merchant locali preferiti: nuove offerte a ogni ciclo, disdici quando vuoi.",
+      "title": "Box in abbonamento",
+      "subtitle": "Ricevi periodicamente voucher selezionati dai migliori merchant.",
+      "empty": "Nessun box in abbonamento ancora disponibile. Torna presto!",
+      "byMerchant": "di {name}",
+      "perInterval": "/{interval}",
+      "details": "Dettagli",
+      "subscribe": "Abbonati",
+      "subscribedTitle": "Abbonamento attivo",
+      "subscribedMessage": "Ora sei abbonato. Controlla la tua email per i dettagli.",
+      "subscribeFailed": "Impossibile completare l'abbonamento. Riprova.",
+      "notFoundTitle": "Box non trovato",
+      "notFoundHint": "Questo box in abbonamento non è disponibile.",
+      "browseAll": "← Sfoglia tutti i box",
+      "backToAll": "← Tutti i box in abbonamento",
+      "subscriberCount": "{count, plural, one {# abbonato} other {# abbonati}}",
+      "whatsInside": "Cosa contiene",
+      "curatingNext": "Fino a {count, plural, one {# voucher selezionato} other {# voucher selezionati}} ogni {period}. La prossima consegna è in preparazione.",
+      "percentVoucher": "Voucher con {value}% di sconto",
+      "amountVoucher": "Voucher da {amount}",
+      "curatedVoucher": "Voucher selezionato",
+      "subscribing": "Abbonamento in corso…",
+      "subscribeWithPrice": "Abbonati — {price}/{interval}",
+      "interval": {
+        "weekly": "settimana",
+        "monthly": "mese",
+        "quarterly": "trimestre"
+      },
+      "intervalEach": {
+        "weekly": "settimana",
+        "monthly": "mese",
+        "quarterly": "trimestre"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "Cerca",
+    "metaDescription": "Cerca campagne e voucher attivi dei merchant su GiftHub.",
+    "loadingSearch": "Caricamento ricerca",
+    "title": "Cerca offerte",
+    "subtitle": "Trova campagne e voucher dei merchant su GiftHub",
+    "queryLabel": "Cerca campagne, voucher e merchant",
+    "queryPlaceholder": "Cerca campagne, voucher, merchant...",
+    "toggleFilters": "Mostra/nascondi filtri",
+    "filtersTitle": "Filtri",
+    "closeFilters": "Chiudi filtri",
+    "error": "La ricerca non è disponibile al momento. Riprova tra un momento.",
+    "campaignsHeading": "Campagne",
+    "vouchersHeading": "Voucher",
+    "browseMarketplace": "Sfoglia tutto ciò che è in vendita nel <link>marketplace delle campagne</link>.",
+    "campaignEnds": "Termina il {date}",
+    "filters": {
+      "title": "Filtri",
+      "clearAll": "Cancella tutto",
+      "category": "Categoria",
+      "discountType": "Tipo di sconto",
+      "minDiscount": "Sconto min.",
+      "minDiscountAria": "Sconto minimo",
+      "maxPrice": "Prezzo max.",
+      "maxPriceAria": "Prezzo massimo in euro",
+      "any": "Qualsiasi",
+      "sortBy": "Ordina per",
+      "types": {
+        "all": "Tutti i tipi",
+        "percentage": "Sconto percentuale",
+        "fixed_amount": "Importo fisso",
+        "credit_amount": "Credito negozio"
+      },
+      "sort": {
+        "newest": "Più recenti",
+        "popular": "Più popolari",
+        "expiring": "In scadenza"
+      }
+    },
+    "results": {
+      "chipCategory": "Categoria: {value}",
+      "chipType": "Tipo: {value}",
+      "chipMinDiscount": "Min. {value}% di sconto",
+      "chipMaxPrice": "Max €{value}",
+      "chipSort": "Ordine: {value}",
+      "removeFilter": "Rimuovi filtro {label}",
+      "searching": "Ricerca in corso...",
+      "count": "{total, plural, one {<num>#</num> risultato} other {<num>#</num> risultati}}",
+      "countForQuery": "{total, plural, one {<num>#</num> risultato per “<hl>{query}</hl>”} other {<num>#</num> risultati per “<hl>{query}</hl>”}}",
+      "flash": "Flash",
+      "voucherFallback": "Voucher",
+      "expires": "Scade il {date}",
+      "redeemed": "{count} riscattati",
+      "noResultsTitle": "Nessun risultato trovato",
+      "noResultsQuery": "Nessun voucher corrisponde a \"{query}\". Prova a modificare i filtri.",
+      "noResultsHint": "Prova a cercare un voucher, un merchant o una categoria specifici."
+    }
+  },
+  "faq": {
+    "metaTitle": "Domande frequenti",
+    "metaDescription": "Risposte alle domande più comuni su acquisto, riscatto e gestione di voucher e gift card: pagamenti, rimborsi, scadenze e assistenza ai merchant.",
+    "title": "Domande frequenti",
+    "subtitle": "Trova le risposte alle domande più comuni sulla nostra piattaforma.",
+    "categories": {
+      "general": "Generale",
+      "purchasing": "Acquisti e pagamenti",
+      "vouchers": "Voucher e riscatto",
+      "account": "Account e sicurezza",
+      "merchants": "Per i merchant",
+      "loyalty": "Fedeltà e premi"
+    },
+    "items": {
+      "whatIs": {
+        "q": "Cos'è GiftHub?",
+        "a": "GiftHub è un marketplace di voucher digitali, gift card e biglietti per eventi che mette in contatto merchant e clienti. I merchant possono creare e vendere prodotti digitali, e i clienti possono acquistarli, regalarli e riscattarli."
+      },
+      "isFree": {
+        "q": "La piattaforma è gratuita?",
+        "a": "Navigare e creare un account è gratuito. I clienti pagano solo i prodotti che acquistano. I merchant pagano un piano mensile più una commissione del {fee}% sulle vendite di voucher."
+      },
+      "countries": {
+        "q": "Quali paesi sono supportati?",
+        "a": "Supportiamo merchant e clienti in tutta l'UE, con {currencies} valute e {languages} lingue."
+      },
+      "howToBuy": {
+        "q": "Come acquisto un voucher?",
+        "a": "Sfoglia i voucher disponibili, fai clic su \"Acquista\" e completa il pagamento tramite Stripe. Il voucher apparirà nel tuo portafoglio subito dopo il pagamento."
+      },
+      "paymentMethods": {
+        "q": "Quali metodi di pagamento sono accettati?",
+        "a": "I pagamenti sono elaborati in modo sicuro da Stripe. I metodi di pagamento disponibili per il tuo acquisto vengono mostrati al checkout."
+      },
+      "refund": {
+        "q": "Posso ottenere un rimborso?",
+        "a": "Le politiche di rimborso sono stabilite dai singoli merchant. Prima di acquistare, controlla la politica di rimborso nella pagina dei dettagli del voucher."
+      },
+      "howToRedeem": {
+        "q": "Come riscatto un voucher?",
+        "a": "Apri il portafoglio, seleziona il voucher e mostra il codice QR al merchant, che lo scansionerà per confermare il riscatto. Puoi anche riscattarlo inserendo un codice manualmente."
+      },
+      "expiry": {
+        "q": "Cosa succede quando un voucher scade?",
+        "a": "I voucher scaduti non possono essere riscattati. Riceverai una notifica prima della scadenza. Controlla le date di scadenza nel tuo portafoglio."
+      },
+      "gift": {
+        "q": "Posso regalare un voucher a qualcuno?",
+        "a": "Sì! Al momento dell'acquisto, seleziona \"Invia come regalo\" e inserisci l'email del destinatario. Riceverà il voucher con un messaggio personalizzato."
+      },
+      "twoFactor": {
+        "q": "Come attivo l'autenticazione a due fattori?",
+        "a": "Vai su Impostazioni → Sicurezza → Autenticazione a due fattori. Puoi configurare il TOTP (Google Authenticator) oppure usare l'autenticazione con passkey (biometrica)."
+      },
+      "biometrics": {
+        "q": "Posso accedere con i dati biometrici?",
+        "a": "Sì! Supportiamo l'autenticazione con passkey: accedi con Face ID, impronta digitale o Windows Hello. Configurala in Impostazioni → Sicurezza."
+      },
+      "deleteAccount": {
+        "q": "Come elimino il mio account?",
+        "a": "Vai su Impostazioni → Privacy → Elimina account. Tutti i tuoi dati verranno cancellati entro 30 giorni, in conformità con la nostra politica GDPR. Puoi prima esportare i tuoi dati."
+      },
+      "startSelling": {
+        "q": "Come inizio a vendere?",
+        "a": "Registrati come merchant, completa la procedura di onboarding e crea il tuo primo voucher. Puoi iniziare a vendere subito dopo l'approvazione del profilo."
+      },
+      "fees": {
+        "q": "Quali sono le commissioni della piattaforma?",
+        "a": "Dopo una prova gratuita di {trialDays} giorni, i piani costano {starter} {starterPrice}, {pro} {proPrice} o {scale} {scalePrice} al mese (fatturazione annuale: 2 mesi gratis), più una commissione del {fee}% sulle vendite di voucher, trattenuta dal pagamento."
+      },
+      "integrations": {
+        "q": "Posso integrarlo con i miei sistemi esistenti?",
+        "a": "Sì! Offriamo webhook (per notifiche di eventi in tempo reale), chiavi API (per l'accesso programmatico) e integrazioni con Zapier/Slack/Discord."
+      },
+      "trackSales": {
+        "q": "Come monitoro le mie vendite?",
+        "a": "La dashboard merchant mostra analitiche in tempo reale, tra cui ricavi, riscatti, informazioni sui clienti e domande in linguaggio naturale basate sull'IA (\"mostrami i ricavi della settimana scorsa\")."
+      },
+      "loyalty": {
+        "q": "Come funziona il programma fedeltà?",
+        "a": "Guadagna punti con gli acquisti, i check-in giornalieri, i referral e le recensioni. I punti sbloccano livelli (Bronzo → Argento → Oro → Platino → Diamante) con vantaggi crescenti."
+      },
+      "badges": {
+        "q": "Cosa sono i badge e le serie?",
+        "a": "I badge sono riconoscimenti ottenuti al raggiungimento di traguardi (primo acquisto, 10 referral, ecc.). Le serie contano i giorni consecutivi di attività e premiano la costanza."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "Contattaci",
+    "metaDescription": "Contatta il team GiftHub per domande sui tuoi voucher, sull'onboarding dei merchant, sulla fatturazione o per proposte di partnership.",
+    "title": "Contattaci",
+    "subtitle": "Hai una domanda? Saremo felici di sentirti.",
+    "email": "Email",
+    "assistantTitle": "Assistente automatico",
+    "assistantText": "Risposte rapide su voucher e account dal pulsante chat nell'angolo. È un servizio automatico, non una persona.",
+    "name": "Nome",
+    "subject": "Oggetto",
+    "message": "Messaggio",
+    "sent": "Messaggio inviato! Ti risponderemo presto.",
+    "unavailableWithEmail": "Il modulo di contatto non è disponibile al momento. Scrivici a {email}.",
+    "unavailable": "Il modulo di contatto non è disponibile al momento. Riprova più tardi.",
+    "error": "Invio non riuscito. Riprova tra un momento.",
+    "sending": "Invio in corso...",
+    "send": "Invia messaggio"
+  },
+  "leaderboardPage": {
+    "metaTitle": "Migliori merchant",
+    "metaDescription": "I merchant con più riscatti di voucher su GiftHub negli ultimi 30 giorni",
+    "title": "Migliori merchant",
+    "subtitle": "Più riscatti di voucher negli ultimi 30 giorni",
+    "rank": "Posizione {rank}",
+    "redemptions": "{count, plural, one {<num>#</num><label>riscatto</label>} other {<num>#</num><label>riscatti</label>}}",
+    "empty": "Nessun riscatto negli ultimi 30 giorni, quindi non c'è ancora una classifica da mostrare.",
+    "browseCampaigns": "Sfoglia le campagne attive"
+  },
+  "ui": {
+    "close": "Chiudi",
+    "more": "Altro",
+    "loading": "Caricamento...",
+    "breadcrumb": {
+      "label": "percorso di navigazione"
+    },
+    "pagination": {
+      "label": "paginazione",
+      "previousAria": "Vai alla pagina precedente",
+      "previous": "Precedente",
+      "nextAria": "Vai alla pagina successiva",
+      "next": "Successiva",
+      "morePages": "Altre pagine"
+    },
+    "toast": {
+      "dismiss": "Chiudi notifica"
+    },
+    "calendar": {
+      "previousMonth": "Vai al mese precedente",
+      "nextMonth": "Vai al mese successivo"
+    },
+    "datePicker": {
+      "placeholder": "Scegli una data"
+    },
+    "combobox": {
+      "placeholder": "Seleziona un'opzione...",
+      "empty": "Nessuna opzione trovata.",
+      "search": "Cerca..."
+    },
+    "searchInput": {
+      "clear": "Cancella ricerca"
+    },
+    "searchResults": {
+      "empty": "Nessun risultato trovato",
+      "noResultsFor": "Nessun risultato trovato per \"{query}\". Prova con parole chiave diverse."
+    },
+    "commandPalette": {
+      "placeholder": "Cerca...",
+      "noResults": "Nessun risultato trovato",
+      "toOpen": "per aprire",
+      "other": "Altro",
+      "hostPlaceholder": "Dove vuoi andare?",
+      "categories": {
+        "navigate": "Naviga",
+        "discover": "Scopri",
+        "account": "Account"
+      },
+      "items": {
+        "home": {
+          "label": "Home",
+          "description": "Pagina iniziale"
+        },
+        "app": {
+          "label": "La mia dashboard",
+          "description": "I tuoi voucher, il portafoglio e le attività"
+        },
+        "vouchers": {
+          "label": "I miei voucher"
+        },
+        "wallet": {
+          "label": "Portafoglio",
+          "description": "Saldi crediti"
+        },
+        "gifts": {
+          "label": "Gift Hub",
+          "description": "Sfoglia e invia regali"
+        },
+        "campaigns": {
+          "label": "Campagne",
+          "description": "Campagne voucher attive"
+        },
+        "hub": {
+          "label": "Hub merchant",
+          "description": "Sfoglia i merchant"
+        },
+        "deals": {
+          "label": "Offerte"
+        },
+        "settings": {
+          "label": "Impostazioni",
+          "description": "Account e preferenze"
+        },
+        "admin": {
+          "label": "Admin",
+          "description": "Amministrazione della piattaforma"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "Conferma",
+      "cancel": "Annulla"
+    },
+    "dataTable": {
+      "noResults": "Nessun risultato."
+    },
+    "fileUpload": {
+      "maxFiles": "Massimo {maxFiles, plural, one {# file consentito} other {# file consentiti}}",
+      "tooLarge": "I file devono essere inferiori a {maxSize} MB",
+      "dropHere": "Rilascia i file qui",
+      "dragDrop": "Trascina e rilascia i file qui",
+      "browseHint": "oppure fai clic per sfogliare (max {maxSize} MB per file)",
+      "select": "Seleziona file",
+      "remove": "Rimuovi {name}"
+    },
+    "imageUpload": {
+      "notImage": "Carica un file immagine",
+      "tooLarge": "L'immagine deve essere inferiore a {maxSize} MB",
+      "previewAlt": "Anteprima",
+      "remove": "Rimuovi immagine",
+      "dropHere": "Rilascia l'immagine qui",
+      "upload": "Carica immagine",
+      "hint": "PNG, JPG, GIF fino a {maxSize} MB",
+      "select": "Seleziona immagine"
+    },
+    "statsCard": {
+      "open": "Apri"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% di cashback"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "Attivo",
+        "redeemed": "Utilizzato",
+        "expired": "Scaduto"
+      },
+      "redeem": "Riscatta",
+      "expires": "Scade il {date}",
+      "merchantAlt": "Merchant"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "Accedi",
+      "register": "Crea account",
+      "resetPassword": "Reimposta password"
+    },
+    "error": {
+      "title": "Qualcosa è andato storto",
+      "fallback": "Si è verificato un errore imprevisto.",
+      "tryAgain": "Riprova"
+    },
+    "login": {
+      "welcome": "Bentornato",
+      "subtitle": "Accedi al tuo account GiftHub",
+      "tabMagic": "Link magico",
+      "tabPassword": "Password",
+      "tabSocial": "Social",
+      "tabPasskey": "Passkey",
+      "emailLabel": "Indirizzo email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "sendCode": "Invia codice di accesso",
+      "sending": "Invio…",
+      "signIn": "Accedi",
+      "signingIn": "Accesso in corso…",
+      "otpTitle": "Controlla la tua email!",
+      "otpDesc": "Abbiamo inviato un codice di 6 cifre a <b>{email}</b>",
+      "otpLabel": "Inserisci il codice",
+      "verify": "Verifica codice",
+      "verifying": "Verifica…",
+      "resend": "Invia di nuovo il codice",
+      "backToEmail": "Indietro",
+      "orContinueWith": "Oppure continua con",
+      "continueWith": "Continua con {provider}",
+      "errorWrongCode": "Codice non valido o scaduto. Riprova.",
+      "errorWrongPass": "Email o password non validi.",
+      "errorGeneric": "Qualcosa è andato storto. Riprova.",
+      "errorEmailUnavailable": "L'accesso tramite email non è disponibile al momento: usa la tua password.",
+      "errorCredentialsSignin": "Email o password errati.",
+      "errorAuthGeneric": "Accesso non riuscito. Riprova.",
+      "backToHome": "Torna alla home",
+      "socialDesc": "Accedi subito con l'account che preferisci",
+      "noAccount": "Non hai ancora un account?",
+      "createAccount": "Crea account",
+      "noAccountSub": "Accedendo con un codice si crea un account per una nuova email.",
+      "registered": "Account creato: accedi con email e password.",
+      "magicDesc": "Ti invieremo un codice di 6 cifre via email. Nessuna password necessaria.",
+      "passwordDesc": "Accedi con email e password.",
+      "forgotPassword": "Password dimenticata?",
+      "demo": "Account demo",
+      "demoRole": {
+        "platformAdmin": "Admin piattaforma",
+        "merchantAdmin": "Admin merchant",
+        "merchantStaff": "Staff merchant",
+        "endUser": "Utente finale"
+      },
+      "passkeyDesc": "Accedi subito con impronta digitale, volto o chiave di sicurezza.",
+      "passkeyButton": "Accedi con passkey",
+      "passkeyAuthenticating": "Autenticazione…"
+    },
+    "register": {
+      "backToHome": "Torna alla home",
+      "title": "Crea il tuo account",
+      "subtitle": "Inizia a scoprire e gestire i voucher",
+      "nameLabel": "Nome e cognome",
+      "namePlaceholder": "Mario Rossi",
+      "emailLabel": "Indirizzo email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Min. 8 caratteri",
+      "submit": "Crea account",
+      "submitting": "Creazione account...",
+      "haveAccount": "Hai già un account?",
+      "signIn": "Accedi",
+      "errorWeak": "La password è troppo debole. Scegline una più sicura.",
+      "errorInvalid": "Dati non validi.",
+      "errorFallback": "Qualcosa è andato storto.",
+      "errorGeneric": "Qualcosa è andato storto. Riprova."
+    },
+    "resetPassword": {
+      "title": "Reimposta la password",
+      "subtitle": "Inserisci qui sotto la nuova password",
+      "newPassword": "Nuova password",
+      "confirmPassword": "Conferma password",
+      "submit": "Imposta nuova password",
+      "submitting": "Reimpostazione…",
+      "success": "Password reimpostata!",
+      "successDesc": "La tua password è stata aggiornata. Ora puoi accedere.",
+      "goToLogin": "Vai all'accesso",
+      "errorMismatch": "Le password non corrispondono",
+      "errorShort": "La password deve contenere almeno 8 caratteri",
+      "errorWeak": "La password è troppo debole. Scegline una più sicura.",
+      "errorExpired": "Questo link di reimpostazione non è valido o è scaduto.",
+      "forgotTitle": "Hai dimenticato la password?",
+      "forgotSubtitle": "Inserisci la tua email e ti invieremo un link di reimpostazione",
+      "emailLabel": "Indirizzo email",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "Invia link di reimpostazione",
+      "sending": "Invio…",
+      "linkSent": "Controlla la tua email!",
+      "linkSentDesc": "Se esiste un account con questa email, ti abbiamo inviato un link di reimpostazione.",
+      "backToLogin": "Torna all'accesso"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "Benvenuto a bordo!",
+      "joined": "Ti sei unito a {orgName}. Reindirizzamento…",
+      "accepted": "Invito accettato. Reindirizzamento…",
+      "problemTitle": "Problema con l'invito",
+      "errorNotAccepted": "Non è stato possibile accettare questo invito.",
+      "errorGeneric": "Qualcosa è andato storto. Riprova.",
+      "goToOrgs": "Vai alle tue organizzazioni",
+      "invitedTitle": "Hai ricevuto un invito",
+      "invitedDesc": "Accetta questo invito per unirti all'organizzazione. Potrebbe esserti chiesto di accedere prima.",
+      "accepting": "Accettazione…",
+      "accept": "Accetta invito"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "Gift card e regali",
+      "description": "Sfoglia e acquista gift card digitali dei merchant locali. Invia un regalo pensato in pochi secondi: consegnato via email, utilizzabile in negozio o online."
+    },
+    "publicCard": {
+      "defaultHeadline": "Gift card",
+      "imageAlt": "Gift card",
+      "logoAlt": "Logo del brand",
+      "merchant": "Merchant: {name}",
+      "merchantFallback": "Merchant",
+      "code": "Codice: {code}",
+      "validUntil": "Valida fino al: {date}",
+      "noExpiry": "Nessuna scadenza",
+      "showQr": "Mostra questo QR al personale per riscattare la gift card.",
+      "statusMessage": "Questa gift card è {status}.",
+      "status": {
+        "active": "attiva",
+        "redeemed": "riscattata",
+        "expired": "scaduta",
+        "cancelled": "annullata"
+      }
+    },
+    "purchase": {
+      "title": "Acquista gift card",
+      "loading": "Caricamento...",
+      "notAvailable": "Gift card non disponibile",
+      "defaultHeadline": "Gift card",
+      "imageAlt": "Gift card",
+      "logoAlt": "Brand",
+      "fromMerchant": "da {merchant}",
+      "form": {
+        "recipientEmail": "Email del destinatario (facoltativa)",
+        "recipientEmailPlaceholder": "Invia la gift card a questa email",
+        "recipientName": "Nome del destinatario",
+        "recipientNamePlaceholder": "A",
+        "senderName": "Il tuo nome",
+        "senderNamePlaceholder": "Da",
+        "message": "Messaggio personale (facoltativo)",
+        "messagePlaceholder": "Aggiungi un messaggio personale..."
+      },
+      "total": "Totale:",
+      "processing": "Elaborazione...",
+      "buy": "Acquista gift card",
+      "errors": {
+        "notFound": "Gift card non trovata o non disponibile per l'acquisto",
+        "loadFailed": "Impossibile caricare la gift card",
+        "purchaseFailed": "Acquisto non riuscito",
+        "generic": "Qualcosa è andato storto. Riprova."
+      }
+    },
+    "product": {
+      "notFound": "Regalo non trovato",
+      "backToHub": "Torna al Gift Hub",
+      "imageAlt": "{title} {index}",
+      "featured": "In evidenza",
+      "lowStock": "Solo {count} rimasti in magazzino",
+      "buyNow": "Acquista ora",
+      "addToCart": "Aggiungi al carrello",
+      "saveToWishlist": "Salva nella lista dei desideri",
+      "removeFromWishlist": "Rimuovi dalla lista dei desideri",
+      "share": "Condividi questo regalo",
+      "upsellsTitle": "Potrebbe piacerti anche"
+    },
+    "claim": {
+      "metaTitle": "Ritira il tuo regalo",
+      "alreadyClaimedTitle": "Regalo già ritirato",
+      "alreadyClaimedBody": "Questo regalo è già stato ritirato.",
+      "expiredTitle": "Regalo scaduto",
+      "expiredBody": "Spiacenti, questo link regalo è scaduto.",
+      "title": "Hai ricevuto un regalo!",
+      "signedInHint": "Fai clic qui sotto per aggiungere questo voucher al tuo portafoglio.",
+      "signedOutHint": "Accedi per ritirare questo voucher.",
+      "claimButton": "Ritira il regalo",
+      "signInButton": "Accedi per ritirarlo"
+    },
+    "error": {
+      "title": "Impossibile caricare il Gift Hub",
+      "fallback": "Si è verificato un errore imprevisto durante il caricamento dei regali.",
+      "retry": "Riprova"
+    },
+    "hub": {
+      "title": "Regali",
+      "subtitle": "Trova il regalo perfetto per ogni occasione",
+      "loadError": "Impossibile caricare i regali",
+      "retry": "Riprova",
+      "emptyCatalog": {
+        "title": "Nessun regalo ancora disponibile",
+        "body": "Nel frattempo, anche i voucher dei merchant locali sono ottimi regali."
+      },
+      "noMatches": "Nessun regalo corrisponde a questi filtri",
+      "clearFilters": "Cancella filtri",
+      "browseCampaigns": "Sfoglia le campagne",
+      "allGifts": "Tutti i regali",
+      "loadMore": "Carica altri"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "Gift card non trovata",
+        "body": "Il codice QR non è valido o è scaduto."
+      },
+      "notActive": {
+        "title": "Gift card non ancora attiva",
+        "body": "Questa gift card sarà valida più avanti."
+      },
+      "expired": {
+        "title": "Gift card scaduta",
+        "body": "Questa gift card non è più valida."
+      },
+      "result": {
+        "title": "Gift card riscattata",
+        "confirmed": "Riscatto confermato con successo.",
+        "alreadyRedeemedOrCancelled": "Questa gift card è già stata riscattata o annullata.",
+        "alreadyRedeemedOrInvalid": "Questa gift card è già stata riscattata o non è valida."
+      }
+    },
+    "qr": {
+      "error": "Impossibile generare il codice QR",
+      "generating": "Generazione QR...",
+      "alt": "Codice QR"
+    },
+    "wizard": {
+      "title": "Trova regali con l'IA",
+      "subtitle": "Raccontaci del destinatario e troveremo il regalo perfetto",
+      "steps": {
+        "recipient": "Per chi è il regalo?",
+        "occasion": "Qual è l'occasione?",
+        "budget": "Qual è il tuo budget?"
+      },
+      "recipients": {
+        "partner": "Partner",
+        "friend": "Amico",
+        "parent": "Genitore",
+        "colleague": "Collega",
+        "child": "Bambino",
+        "teacher": "Insegnante"
+      },
+      "occasions": {
+        "birthday": "Compleanno",
+        "christmas": "Natale",
+        "anniversary": "Anniversario",
+        "thankYou": "Ringraziamento",
+        "justBecause": "Senza motivo",
+        "graduation": "Laurea"
+      },
+      "summary": {
+        "for": "Per: {recipient}",
+        "budget": "Budget: {amount}"
+      },
+      "submit": "Trova i regali perfetti",
+      "error": "Impossibile generare i suggerimenti. Riprova.",
+      "results": {
+        "found": "Abbiamo trovato {count, plural, one {# regalo} other {# regali}} per te:",
+        "empty": "Nessun prodotto corrispondente. Prova a modificare i criteri."
+      },
+      "startOver": "Ricomincia"
+    },
+    "card": {
+      "featured": "In evidenza",
+      "save": "Salva",
+      "unsave": "Rimuovi",
+      "buyNow": "Acquista ora"
+    },
+    "feedSection": {
+      "viewAll": "Vedi tutti"
+    },
+    "filters": {
+      "toggle": "Filtri",
+      "clear": "Cancella",
+      "occasion": "Occasione",
+      "persona": "Per chi è?",
+      "budget": "Budget",
+      "budgetUnder": "Meno di {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "Condividi offerte e guadagna premi"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "Si è verificato un errore imprevisto."
+    },
+    "logoAlt": "Logo di {name}",
+    "merchantFallback": "Merchant",
+    "validUntil": "Valido fino al {date}",
+    "validUntilWithLimit": "Valido fino al {date} - {count, plural, one {Primo utilizzo} other {Primi # utilizzi}}",
+    "offAtMerchant": "{value} di sconto da {merchant}",
+    "fields": {
+      "event": "Evento",
+      "dateTime": "Data e ora",
+      "location": "Luogo",
+      "price": "Prezzo",
+      "status": "Stato",
+      "attendee": "Partecipante",
+      "usedAt": "Utilizzato il"
+    },
+    "ticketStatus": {
+      "available": "Disponibile",
+      "sold": "Venduto",
+      "used": "Utilizzato",
+      "cancelled": "Annullato",
+      "refunded": "Rimborsato"
+    },
+    "event": {
+      "notAvailable": "I biglietti per questo evento non sono acquistabili.",
+      "descriptionFallback": "Partecipa a questo fantastico evento!",
+      "availableTickets": "Biglietti disponibili",
+      "soldOut": "Esaurito",
+      "availableCount": "{count} disponibili",
+      "terms": "Termini e condizioni",
+      "soldOutTitle": "Questo evento è esaurito",
+      "soldOutDescription": "Tutti i biglietti sono stati venduti."
+    },
+    "eventPurchase": {
+      "title": "Acquista biglietto",
+      "description": "Seleziona un biglietto e completa l'acquisto",
+      "selectTicket": "Seleziona biglietto",
+      "attendeeNameLabel": "Nome del partecipante (facoltativo)",
+      "attendeeNamePlaceholder": "Nome della persona che partecipa",
+      "attendeeEmailLabel": "Email del partecipante (facoltativa)",
+      "attendeeEmailPlaceholder": "Email per la consegna del biglietto",
+      "total": "Totale",
+      "submit": "Acquista biglietto",
+      "noTickets": "Nessun biglietto disponibile al momento.",
+      "checkBackLater": "Torna più tardi o contatta l'organizzatore dell'evento.",
+      "selectTicketError": "Seleziona un biglietto",
+      "purchaseFailed": "Impossibile acquistare il biglietto"
+    },
+    "ticket": {
+      "noPermission": "Non hai l'autorizzazione per visualizzare questo biglietto.",
+      "heading": "Biglietto n. {number}",
+      "qrTitle": "Codice QR",
+      "qrDescription": "Mostra questo codice QR all'ingresso dell'evento",
+      "qrAlt": "Codice QR del biglietto",
+      "qrUnavailable": "Codice QR non disponibile",
+      "ticketNumber": "Numero biglietto: <strong>{number}</strong>",
+      "used": "Il biglietto è stato utilizzato",
+      "detailsTitle": "Dettagli del biglietto",
+      "detailsDescription": "Informazioni importanti sul tuo biglietto",
+      "staffCanRedeem": "Come membro dello staff del merchant, puoi riscattare questo biglietto all'evento."
+    },
+    "redeem": {
+      "notFoundTitle": "Riscatto non trovato",
+      "notFoundDescription": "Il codice QR non è valido o è scaduto.",
+      "title": "Voucher riscattato",
+      "alreadyRedeemed": "Questo voucher è già stato riscattato.",
+      "confirmed": "Riscatto confermato con successo."
+    },
+    "qrCheckout": {
+      "title": "Checkout QR",
+      "completeTitle": "Checkout completato",
+      "completeDescription": "Il tuo acquisto è stato confermato. Controlla la tua email per i dettagli.",
+      "payNow": "Paga ora",
+      "confirming": "Conferma in corso..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "Voucher non trovato",
+      "notFoundDescription": "Il voucher che stai cercando non è stato trovato.",
+      "descriptionFallback": "Offerta voucher esclusiva",
+      "shareText": "Dai un'occhiata a questo voucher di {merchant}",
+      "copyCode": "Copia codice voucher",
+      "qrAlt": "Codice QR del voucher {code}",
+      "print": "Stampa voucher"
+    },
+    "referralPage": {
+      "voucherFrom": "Hai ricevuto un voucher da <highlight>{name}</highlight>",
+      "qrAlt": "Codice QR di riscatto del voucher {code}",
+      "offAtMerchantShared": "{value} di sconto da {merchant} - Condiviso da un amico!"
+    },
+    "bnpl": {
+      "title": "Paga a rate",
+      "description": "Dividi il pagamento di {amount} in comode rate mensili.",
+      "perMonth": "/mese",
+      "planNoInterest": "{months}x (0% di interessi)",
+      "planWithFee": "{months}x ({rate}% di commissione)",
+      "monthlyPayments": "{count, plural, one {# rata mensile} other {# rate mensili}}",
+      "total": "Totale: {amount}",
+      "noExtraCost": "Nessun costo aggiuntivo",
+      "payNow": "Paga {amount} ora"
+    },
+    "qrPanel": {
+      "qrAlt": "Codice QR",
+      "generateFailed": "Impossibile generare il codice QR",
+      "placeholder": "Il codice QR apparirà qui",
+      "generating": "Generazione QR...",
+      "unavailable": "QR non disponibile",
+      "hideCode": "Nascondi codice",
+      "showCode": "Mostra codice",
+      "expires": "Scade il {date}",
+      "refreshNote": "Il codice si aggiorna ogni 30 secondi"
+    },
+    "qrDownload": {
+      "success": "Codice QR scaricato correttamente!",
+      "failed": "Impossibile scaricare il codice QR",
+      "downloading": "Download in corso...",
+      "download": "Scarica QR"
+    }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Gestisci le tue campagne voucher.",
+      "createCampaign": "Crea campagna",
+      "subscriptionRequired": "Abbonamento richiesto",
+      "trialEnded": "La prova gratuita di 60 giorni per le campagne è terminata. Attiva il piano da 9,90/mese per creare nuove campagne.",
+      "stats": {
+        "totalTitle": "Campagne totali",
+        "totalDescription": "Tutte le campagne",
+        "activeTitle": "Attive",
+        "activeDescription": "Attualmente in corso",
+        "paidTitle": "Acquisti pagati",
+        "paidDescription": "Ordini completati",
+        "revenueTitle": "Ricavi",
+        "revenueDescription": "Vendite voucher pagate"
+      },
+      "weeklyRevenue": {
+        "title": "Ricavi settimanali",
+        "description": "Vendite pagate delle campagne negli ultimi 7 giorni.",
+        "series": "Ricavi"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Nessuna campagna ancora",
+        "descriptionCanCreate": "Crea una campagna per organizzare e gestire i tuoi voucher.",
+        "descriptionNeedsSubscription": "Attiva un abbonamento per creare nuove campagne.",
+        "action": "Crea la tua prima campagna"
+      },
+      "searchPlaceholder": "Cerca campagne...",
+      "searchLabel": "Cerca campagne",
+      "filterAll": "Tutte",
+      "status": {
+        "active": "Attiva",
+        "draft": "Bozza",
+        "ended": "Terminata",
+        "paused": "In pausa"
+      },
+      "noMatches": "Nessuna campagna corrisponde ai filtri.",
+      "clearFilters": "Cancella filtri",
+      "type": {
+        "weekly": "Campagna settimanale",
+        "limited": "Campagna limitata",
+        "other": "Campagna {type}"
+      },
+      "runs": "Dal {start} al {end}",
+      "view": "Visualizza",
+      "stats": {
+        "vouchers": "Voucher",
+        "paidPurchases": "Acquisti pagati",
+        "revenue": "Ricavi",
+        "price": "Prezzo"
+      },
+      "free": "Gratis"
+    },
+    "new": {
+      "iconLetter": "C",
+      "draftNotice": "Le nuove campagne partono come bozza. I clienti non le vedono finché non le pubblichi dalla pagina della campagna."
+    },
+    "edit": {
+      "breadcrumb": "Modifica",
+      "title": "Modifica campagna"
+    },
+    "form": {
+      "basicInfo": "Informazioni di base",
+      "nameLabel": "Nome campagna *",
+      "namePlaceholder": "Speciale festività",
+      "descriptionLabel": "Descrizione",
+      "descriptionPlaceholder": "Promozione a tempo limitato",
+      "typeLabel": "Tipo *",
+      "typeOptions": {
+        "limited": "Una tantum (limitata)",
+        "weekly": "Settimanale"
+      },
+      "dates": "Date",
+      "startDate": "Data di inizio *",
+      "endDate": "Data di fine *",
+      "timezoneHint": "Gli orari sono nel tuo fuso orario locale.",
+      "pricing": "Prezzi e limiti",
+      "priceLabel": "Prezzo in {currency} (lascia vuoto per voucher gratuiti)",
+      "pricePreview": "I clienti pagano {price}.",
+      "priceHint": "Inserisci l'importo in {currency}, ad es. 4.50 o 4,50 per {example}.",
+      "maxRedemptions": "Riscatti massimi",
+      "maxPurchases": "Acquisti massimi",
+      "unlimited": "Illimitati",
+      "creditLabel": "Credito referral (%)",
+      "creditPreview": "Chi segnala guadagna il {percent}% del prezzo d'acquisto come credito.",
+      "creditHint": "Quota del prezzo d'acquisto riconosciuta come credito a chi segnala, ad es. 5 o 2,5.",
+      "termsSection": "Termini e condizioni",
+      "termsLabel": "Termini",
+      "termsPlaceholder": "Termini e condizioni di questa campagna...",
+      "saving": "Salvataggio...",
+      "saveChanges": "Salva modifiche",
+      "creating": "Creazione...",
+      "create": "Crea campagna",
+      "saved": "Modifiche alla campagna salvate.",
+      "errors": {
+        "invalidDates": "Inserisci una data di inizio e di fine valide.",
+        "endBeforeStart": "La data di fine deve essere successiva alla data di inizio.",
+        "maxRedemptions": "I riscatti massimi devono essere un numero intero pari o superiore a 1.",
+        "maxPurchases": "Gli acquisti massimi devono essere un numero intero pari o superiore a 1.",
+        "saveFailed": "Impossibile salvare la campagna"
+      },
+      "priceErrors": {
+        "negative": "Il prezzo non può essere negativo.",
+        "invalid": "Il prezzo non è un numero valido.",
+        "wholeNumber": "Il prezzo deve essere un numero intero.",
+        "decimals": "Il prezzo può avere al massimo {decimals} cifre decimali.",
+        "tooLarge": "Il prezzo è troppo alto."
+      },
+      "creditErrors": {
+        "negative": "Il credito referral non può essere negativo.",
+        "invalid": "Il credito referral non è un numero valido.",
+        "decimals": "Il credito referral può avere al massimo {decimals} cifre decimali.",
+        "tooLarge": "Il credito referral è troppo alto.",
+        "tooHigh": "Il credito referral non può superare il 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "Nessuna descrizione",
+      "draftNotice": "Questa campagna è una bozza, quindi i clienti non possono ancora vederla.",
+      "draftNoticeAdmin": "Questa campagna è una bozza, quindi i clienti non possono ancora vederla. Pubblicala quando sei pronto.",
+      "status": "Stato",
+      "type": "Tipo",
+      "price": "Prezzo",
+      "referrerCredit": "Credito referral",
+      "none": "Nessuno",
+      "stats": {
+        "vouchers": "Voucher",
+        "totalPurchases": "Acquisti totali",
+        "paidPurchases": "Acquisti pagati"
+      },
+      "terms": "Termini e condizioni",
+      "promotion": {
+        "title": "Promozione",
+        "description": "Visibilità a pagamento nella newsletter settimanale e nelle notifiche."
+      },
+      "vouchers": {
+        "title": "Voucher",
+        "description": "Voucher generati da questa campagna.",
+        "empty": "Nessun voucher generato ancora.",
+        "view": "Visualizza"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Includi nella newsletter settimanale (a pagamento)",
+      "notification": "Metti in evidenza nelle notifiche (a pagamento)",
+      "endDate": "Data di fine promozione",
+      "saving": "Salvataggio...",
+      "save": "Salva impostazioni promozione",
+      "saved": "Impostazioni promozione salvate.",
+      "upgradeNeededTitle": "Upgrade necessario",
+      "upgradeNeeded": "Le promozioni in evidenza fanno parte di un piano superiore. Esegui l'upgrade in Impostazioni e fatturazione per usarle.",
+      "saveFailedStatus": "Impossibile salvare le impostazioni promozione (errore {status}).",
+      "saveFailedNetwork": "Impossibile salvare le impostazioni promozione. Controlla la connessione e riprova."
+    },
+    "actions": {
+      "adminOnly": "Solo gli admin del merchant possono pubblicare, mettere in pausa o modificare le campagne.",
+      "edit": "Modifica",
+      "publish": {
+        "label": "Pubblica",
+        "title": "Pubblicare questa campagna?",
+        "description": "I clienti potranno vedere e acquistare subito i voucher di questa campagna.",
+        "success": "Campagna pubblicata. Ora è visibile ai clienti."
+      },
+      "pause": {
+        "label": "Metti in pausa",
+        "title": "Mettere in pausa questa campagna?",
+        "description": "La campagna torna in bozza e resta nascosta ai clienti finché non la pubblichi di nuovo. I voucher già venduti restano validi.",
+        "success": "Campagna in pausa. Ora è nascosta ai clienti."
+      },
+      "end": {
+        "label": "Termina campagna",
+        "title": "Terminare subito questa campagna?",
+        "description": "La campagna si interrompe immediatamente e non potrà più essere pubblicata. I voucher già venduti restano validi.",
+        "success": "Campagna terminata."
+      },
+      "updateFailedStatus": "Impossibile aggiornare la campagna (errore {status}).",
+      "updateFailed": "Impossibile aggiornare la campagna."
+    },
+    "generate": {
+      "open": "Genera voucher",
+      "title": "Genera voucher",
+      "descriptionPriced": "Crea voucher in bozza con uno sconto di {value}, validi dal {start} al {end}. Ogni voucher ha un codice univoco. Restano nascosti finché non li pubblichi.",
+      "descriptionFree": "Questa campagna è gratuita, quindi non c'è un importo da assegnare ai voucher. Imposta prima un prezzo per la campagna.",
+      "countLabel": "Numero di voucher (1-100)",
+      "generating": "Generazione...",
+      "submit": "Genera",
+      "invalidCount": "Inserisci un numero intero tra 1 e 100",
+      "needsPrice": "Imposta prima un prezzo per questa campagna. I voucher generati valgono quanto il prezzo della campagna.",
+      "failed": "Impossibile generare i voucher",
+      "success": "{count, plural, one {Generato # voucher in bozza. Pubblicalo} other {Generati # voucher in bozza. Pubblicali}} dalla pagina dei voucher quando sei pronto."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Campagne attive",
+      "statLiveVouchers": "Voucher attivi",
+      "statRedemptions30d": "Riscatti (30 giorni)"
+    },
+    "error": {
+      "title": "Qualcosa è andato storto",
+      "description": "Si è verificato un errore nel pannello merchant.",
+      "tryAgain": "Riprova",
+      "backToMerchants": "Torna ai merchant"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Panoramica",
+        "offers": "Offerte",
+        "inStore": "In negozio",
+        "customers": "Clienti",
+        "settings": "Impostazioni"
+      },
+      "language": "Lingua",
+      "opensAppArea": "Apre l'area app",
+      "externalLinkTitle": "{label} (apre l'area app, fuori da questo merchant)",
+      "opensOutside": "Si apre fuori dall'area merchant",
+      "merchantNavigation": "Merchant",
+      "more": "Altro",
+      "navDashboard": "Dashboard"
+    },
+    "dashboard": {
+      "title": "Dashboard merchant",
+      "welcomeBack": "Bentornato, {name}",
+      "viewCampaigns": "Vedi campagne",
+      "createVoucher": "Crea voucher",
+      "performanceOverview": "Panoramica delle prestazioni",
+      "performanceOverviewHint": "Attività delle campagne e riscatti in tempo reale.",
+      "revenueAndCredits": "Ricavi e crediti",
+      "revenueAndCreditsHint": "Vendite, crediti e passività in sospeso.",
+      "performanceTrend": "Andamento delle prestazioni",
+      "performanceTrendHint": "Riscatti e ricavi degli ultimi {days} giorni.",
+      "rangeShort": "{days}g",
+      "revenue": "Ricavi",
+      "chartRedemptions": "Riscatti",
+      "chartRevenue": "Ricavi ({currency})",
+      "paidOrders": "Ordini pagati",
+      "openOrdersView": "Apri vista ordini",
+      "avgOrder": "Ordine medio",
+      "openCampaignRevenue": "Apri ricavi campagne",
+      "redemptionRate": "Tasso di riscatto",
+      "openRedemptionQueue": "Apri coda riscatti",
+      "pendingConfirmation": "{count} in attesa di conferma",
+      "pendingConfirmationHint": "Riscatti in negozio in attesa della tua approvazione.",
+      "viewRedemptions": "Vedi riscatti",
+      "actionCenter": "Centro azioni",
+      "actionCenterHint": "Elementi prioritari da controllare.",
+      "allCaughtUp": "Sei in pari con tutto.",
+      "open": "Apri",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# riscatto in attesa} other {# riscatti in attesa}}",
+        "pendingRedemptionsDetail": "Conferma i riscatti in negozio",
+        "expiringVouchers": "{count, plural, one {# voucher in scadenza} other {# voucher in scadenza}}",
+        "expiringVouchersDetail": "Controlla le date di validità dei voucher",
+        "endingCampaigns": "{count, plural, one {# campagna termina questa settimana} other {# campagne terminano questa settimana}}",
+        "endingCampaignsDetail": "Estendi o duplica le tue campagne migliori",
+        "upcomingEvents": "{count, plural, one {# evento in arrivo} other {# eventi in arrivo}}",
+        "upcomingEventsDetail": "Prepara check-in dei biglietti e personale"
+      },
+      "upcomingEventsTitle": "Prossimi eventi",
+      "upcomingEventsHint": "Prossimi eventi in programma.",
+      "noUpcomingEvents": "Nessun evento in programma.",
+      "eventStatus": {
+        "published": "pubblicato",
+        "soldOut": "esaurito"
+      },
+      "manageEvents": "Gestisci eventi",
+      "topVouchers": "Voucher top",
+      "topVouchersHint": "Offerte più riscattate.",
+      "noTopVouchers": "Nessun voucher è stato ancora riscattato. Qui compariranno i tuoi voucher più riscattati."
+    },
+    "stats": {
+      "activeVouchers": "Voucher attivi",
+      "publishedVouchers": "Voucher pubblicati",
+      "openVouchers": "Apri voucher",
+      "activeCampaigns": "Campagne attive",
+      "runningCampaigns": "Campagne in corso",
+      "openCampaigns": "Apri campagne",
+      "activeEvents": "Eventi attivi",
+      "publishedEvents": "Eventi pubblicati",
+      "openEvents": "Apri eventi",
+      "todaysRedemptions": "Riscatti di oggi",
+      "thisWeek": "Questa settimana: {count}",
+      "reviewRedemptions": "Controlla riscatti",
+      "ofWeekly": "della settimana"
+    },
+    "revenue": {
+      "voucherRevenue": "Ricavi voucher",
+      "paidVoucherSales": "Vendite voucher pagate",
+      "openCampaignSales": "Apri vendite campagne",
+      "ticketRevenue": "Ricavi biglietti",
+      "paidTicketSales": "Vendite biglietti pagate",
+      "openEventSales": "Apri vendite eventi",
+      "creditsIssued": "Crediti emessi",
+      "totalCreditsDistributed": "Crediti totali distribuiti",
+      "openReferralCredits": "Apri crediti referral",
+      "outstandingLiability": "Passività in sospeso",
+      "unredeemedValue": "Valore voucher non riscattati",
+      "openVoucherLiability": "Apri passività voucher"
+    },
+    "recentActivity": {
+      "title": "Attività recente",
+      "empty": "Nessuna attività recente",
+      "unknownUser": "Utente sconosciuto",
+      "redeemedVoucher": "Voucher riscattato - {time}",
+      "confirmed": "Confermato",
+      "pending": "In attesa"
+    },
+    "liveStats": {
+      "live": "Live",
+      "connecting": "Connessione…",
+      "redeemedToday": "<value>{count}</value> <label>riscattati oggi</label>",
+      "pending": "<value>{count}</value> <label>in attesa</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analitiche",
+      "title": "Analitiche",
+      "subtitle": "Monitora prestazioni e ricavi dei tuoi voucher",
+      "totalRedemptions": "Riscatti totali",
+      "confirmedRedemptions": "Riscatti confermati",
+      "totalDiscounts": "Sconti totali",
+      "givenToCustomers": "Concessi ai clienti",
+      "creditsIssued": "Crediti emessi",
+      "totalCreditsDistributed": "Crediti totali distribuiti",
+      "activeVouchers": "Voucher attivi",
+      "withRedemptions": "Con riscatti",
+      "charts": {
+        "redemptionTrends": "Andamento riscatti (ultimi 30 giorni)",
+        "redemptions": "Riscatti",
+        "revenue": "Ricavi ({currency})",
+        "topPerforming": "Voucher più performanti",
+        "noRedeemed": "Nessun voucher è stato ancora riscattato. Qui compariranno i più performanti.",
+        "byCategory": "Riscatti per categoria",
+        "noCategoryData": "Nessun dato per categoria disponibile"
+      }
+    },
+    "ask": {
+      "title": "Interroga i tuoi dati",
+      "subtitle": "Fai domande sui dati della tua attività in linguaggio naturale",
+      "emptyTitle": "Chiedi qualsiasi cosa sui tuoi dati",
+      "emptyHint": "Prova uno dei suggerimenti qui sotto",
+      "placeholder": "Fai una domanda sui tuoi dati...",
+      "suggestedTitle": "Domande suggerite",
+      "suggestions": {
+        "revenueLastWeek": "Quanto ho incassato la settimana scorsa?",
+        "dailyRedemptionsThisMonth": "Mostra i riscatti giornalieri di questo mese",
+        "topVouchersByRevenue": "Voucher con più ricavi il mese scorso",
+        "customersPurchasedLastWeek": "Quanti clienti hanno acquistato la settimana scorsa?",
+        "referralConversionRate": "Qual è il mio tasso di conversione referral?",
+        "dailyRevenueTrend": "Mostra l'andamento dei ricavi giornalieri di questo mese",
+        "purchasesYesterday": "Quanti acquisti sono stati fatti ieri?",
+        "bestPerformingVouchers": "Quali sono i miei voucher più performanti?"
+      },
+      "errorFallback": "Spiacenti, non sono riuscito a elaborare la domanda.",
+      "networkError": "Errore di rete. Riprova.",
+      "itemLabel": "Elemento {n}"
+    },
+    "reports": {
+      "title": "Report finanziari",
+      "subtitle": "Panoramica ed esportazione dei ricavi",
+      "downloadCsv": "Scarica CSV",
+      "from": "Dal",
+      "to": "Al",
+      "apply": "Applica",
+      "totalRevenue": "Ricavi totali",
+      "platformFees": "Commissioni piattaforma",
+      "netRevenue": "Ricavi netti",
+      "redemptions": "Riscatti",
+      "revenueByCurrency": "Ricavi per valuta",
+      "netAndFees": "Netto: {net} • Commissioni: {fees}",
+      "monthlyRevenue": "Ricavi mensili",
+      "noRevenue": "Nessun dato sui ricavi per questo periodo.",
+      "month": "Mese",
+      "vouchers": "Voucher",
+      "tickets": "Biglietti",
+      "total": "Totale"
+    },
+    "scheduled": {
+      "title": "Report programmati",
+      "subtitle": "Configura report automatici via email",
+      "backToReports": "← Report finanziari",
+      "activeSchedules": "Programmazioni attive",
+      "loading": "Caricamento...",
+      "noSchedules": "Nessuna programmazione configurata",
+      "period": {
+        "daily": "Giornaliero",
+        "weekly": "Settimanale",
+        "monthly": "Mensile"
+      },
+      "reportTitle": {
+        "daily": "Report giornaliero",
+        "weekly": "Report settimanale",
+        "monthly": "Report mensile"
+      },
+      "recipientCount": "{count, plural, one {# destinatario} other {# destinatari}}",
+      "lastSent": "Ultimo invio: {date}",
+      "nextRun": "Prossimo: {date}",
+      "pause": "Pausa",
+      "resume": "Riprendi",
+      "createSchedule": "Crea programmazione",
+      "frequency": "Frequenza",
+      "recipients": "Destinatari",
+      "invalidEmail": "Indirizzo email non valido",
+      "emailAlreadyAdded": "Email già aggiunta",
+      "addAtLeastOne": "Aggiungi almeno un destinatario",
+      "saved": "Programmazione report salvata",
+      "saveFailed": "Impossibile salvare la programmazione",
+      "save": "Salva programmazione",
+      "previewTitle": "Anteprima report",
+      "previewBody": "I report programmati includono ricavi, numero di riscatti, voucher top e metriche di crescita. Vengono inviati come email HTML ben formattate alle 8:00 UTC.",
+      "everyMorning": "Ogni mattina",
+      "everyMonday": "Ogni lunedì",
+      "firstOfMonth": "Il 1° di ogni mese"
+    },
+    "billing": {
+      "subscribeTo": "Abbonati a {plan}",
+      "startFailed": "Impossibile avviare l'abbonamento",
+      "portalFailed": "Impossibile aprire il portale di fatturazione",
+      "manageBilling": "Gestisci fatturazione",
+      "errorTitle": "Errore",
+      "close": "Chiudi",
+      "usage": "<b>{current}</b> / {max} utilizzati",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "campagne create per ciclo",
+        "activeCampaigns": "campagne attive",
+        "voucherCreatesPerCycle": "voucher creati per ciclo",
+        "teamMembers": "membri del team"
+      },
+      "currentPlanTrial": "Piano attuale (prova gratuita)",
+      "planChangesUnavailable": "Al momento non è possibile cambiare piano online.",
+      "paymentsNotSetUp": "I pagamenti online non sono ancora attivi su questa piattaforma, quindi qui non puoi acquistare o cambiare piano. Contatta l'assistenza se vuoi cambiare piano.",
+      "features": {
+        "starter": {
+          "vouchers": "500 voucher/mese",
+          "campaigns": "3 campagne attive",
+          "teamMembers": "2 membri del team",
+          "qrRedemption": "Riscatto con codice QR",
+          "basicAnalytics": "Analitiche di base"
+        },
+        "pro": {
+          "vouchers": "5.000 voucher/mese",
+          "campaigns": "25 campagne attive",
+          "teamMembers": "10 membri del team",
+          "advancedAnalytics": "Analitiche avanzate",
+          "customDomain": "Dominio personalizzato",
+          "promoBoosts": "Promozioni in evidenza"
+        },
+        "scale": {
+          "vouchers": "Voucher illimitati",
+          "campaigns": "Campagne illimitate",
+          "teamMembers": "Membri del team illimitati",
+          "everythingInPro": "Tutto ciò che include Pro",
+          "whiteLabel": "Pronto per il white label",
+          "prioritySupport": "Assistenza prioritaria"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Proprietario",
+      "admin": "Admin",
+      "finance": "Finanza",
+      "marketing": "Marketing",
+      "support": "Assistenza",
+      "partner_cashier": "Cassiere",
+      "auditor": "Revisore"
+    },
+    "orgs": {
+      "title": "Organizzazioni B2B",
+      "subtitle": "Workspace aziendali con campagne, voucher e ordini.",
+      "loading": "Caricamento organizzazioni...",
+      "loadFailed": "Impossibile caricare le organizzazioni",
+      "empty": "Nessuna organizzazione trovata. Chiedi a un admin di invitarti.",
+      "open": "Apri"
+    },
+    "workspace": {
+      "fallbackName": "Organizzazione",
+      "subtitle": "Panoramica del workspace B2B",
+      "reports": "Report",
+      "audit": "Audit",
+      "partnerKeys": "Chiavi partner",
+      "backToOrgs": "Torna alle organizzazioni",
+      "loading": "Caricamento workspace...",
+      "errors": {
+        "loadOrg": "Impossibile caricare l'organizzazione",
+        "loadCampaigns": "Impossibile caricare le campagne",
+        "loadVouchers": "Impossibile caricare i voucher",
+        "loadOrders": "Impossibile caricare gli ordini",
+        "load": "Caricamento non riuscito",
+        "createCampaign": "Impossibile creare la campagna",
+        "issueVouchers": "Impossibile emettere i voucher",
+        "updateCampaign": "Impossibile aggiornare la campagna",
+        "activateCampaign": "Impossibile attivare la campagna",
+        "pauseCampaign": "Impossibile mettere in pausa la campagna",
+        "archiveCampaign": "Impossibile archiviare la campagna"
+      },
+      "stats": {
+        "campaigns": "Campagne",
+        "vouchers": "Voucher",
+        "orders": "Ordini"
+      },
+      "create": {
+        "title": "Crea campagna",
+        "name": "Nome campagna",
+        "value": "Valore (unità minori)",
+        "currency": "Valuta",
+        "submit": "Crea"
+      },
+      "campaigns": {
+        "title": "Campagne",
+        "empty": "Nessuna campagna ancora.",
+        "name": "Nome",
+        "value": "Valore",
+        "activate": "Attiva",
+        "pause": "Pausa",
+        "resume": "Riprendi",
+        "archive": "Archivia",
+        "issue": "Emetti {count}"
+      },
+      "recentVouchers": "Voucher recenti",
+      "noVouchers": "Nessun voucher emesso.",
+      "recentOrders": "Ordini recenti",
+      "noOrders": "Nessun ordine ancora."
+    },
+    "audit": {
+      "title": "Registro audit",
+      "subtitle": "Monitora il ciclo di vita e le modifiche dei voucher.",
+      "entityType": "Tipo di entità (voucher, campagna, ordine)",
+      "entityId": "ID entità",
+      "loading": "Caricamento audit...",
+      "loadFailed": "Impossibile caricare l'audit",
+      "empty": "Nessun evento."
+    },
+    "billing": {
+      "metaTitle": "Fatturazione organizzazione",
+      "title": "Fatturazione e finanza",
+      "totalPaidOrders": "Ordini pagati totali",
+      "totalRevenue": "Ricavi totali",
+      "vatNumber": "Partita IVA",
+      "notSet": "Non impostata",
+      "recentOrders": "Ordini recenti",
+      "noOrders": "Nessun ordine ancora.",
+      "table": {
+        "date": "Data",
+        "qty": "Qtà",
+        "total": "Totale",
+        "status": "Stato",
+        "invoice": "Fattura"
+      }
+    },
+    "keys": {
+      "title": "Chiavi API partner",
+      "subtitle": "Usale per la convalida e il riscatto dei voucher da parte dei partner.",
+      "label": "Etichetta chiave (facoltativa)",
+      "create": "Crea chiave",
+      "newKey": "Nuova chiave (copiala ora)",
+      "loading": "Caricamento chiavi...",
+      "empty": "Nessuna chiave ancora.",
+      "untitled": "Chiave senza nome",
+      "created": "Creata {created}",
+      "createdAndLastUsed": "Creata {created} • Ultimo uso {lastUsed}",
+      "revoke": "Revoca",
+      "errors": {
+        "load": "Impossibile caricare le chiavi",
+        "create": "Impossibile creare la chiave",
+        "revoke": "Impossibile revocare la chiave"
+      }
+    },
+    "members": {
+      "metaTitle": "Membri dell'organizzazione",
+      "title": "Membri",
+      "count": "{count, plural, one {# membro} other {# membri}}",
+      "pendingInvitations": "Inviti in sospeso",
+      "expires": "Scade il {date}"
+    },
+    "invite": {
+      "title": "Invita un membro",
+      "emailPlaceholder": "collega@example.com",
+      "roles": {
+        "admin": "Admin",
+        "finance": "Finanza",
+        "marketing": "Marketing",
+        "support": "Assistenza",
+        "partner_cashier": "Cassiere partner",
+        "auditor": "Revisore"
+      },
+      "sending": "Invio…",
+      "submit": "Invia invito",
+      "sent": "Invito inviato a {email}.",
+      "failed": "Impossibile inviare l'invito. Controlla l'email e riprova.",
+      "error": "Qualcosa è andato storto. Riprova."
+    },
+    "reports": {
+      "title": "Report",
+      "subtitle": "Report su riscatti e voucher",
+      "backToWorkspace": "Torna al workspace",
+      "loadFailed": "Caricamento non riuscito",
+      "tabs": {
+        "redemptions": "Riscatti",
+        "vouchers": "Voucher"
+      },
+      "totalRedemptions": "Riscatti totali",
+      "totalAmountRedeemed": "Importo totale riscattato",
+      "from": "Dal",
+      "to": "Al",
+      "filter": "Filtra",
+      "pageInfo": "Pagina {page} di {totalPages} ({total} in totale)",
+      "redemptionTable": {
+        "date": "Data",
+        "partner": "Partner",
+        "amount": "Importo",
+        "status": "Stato",
+        "location": "Sede"
+      },
+      "noRedemptions": "Nessun riscatto trovato.",
+      "voucherTable": {
+        "campaign": "Campagna",
+        "status": "Stato",
+        "type": "Tipo",
+        "value": "Valore",
+        "remaining": "Residuo",
+        "redeemed": "Riscattato",
+        "issuedTo": "Emesso a",
+        "expires": "Scadenza"
+      },
+      "noVouchers": "Nessun voucher trovato."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "acquirente",
+        "partner": "partner",
+        "platform_owner": "proprietario piattaforma"
+      },
+      "orgStatus": {
+        "active": "attiva",
+        "suspended": "sospesa"
+      },
+      "campaignStatus": {
+        "draft": "bozza",
+        "active": "attiva",
+        "paused": "in pausa",
+        "archived": "archiviata"
+      },
+      "voucherStatus": {
+        "created": "creato",
+        "issued": "emesso",
+        "active": "attivo",
+        "redeemed": "riscattato",
+        "expired": "scaduto",
+        "voided": "annullato"
+      },
+      "valueType": {
+        "fixed": "fisso",
+        "percent": "percentuale"
+      },
+      "orderStatus": {
+        "draft": "bozza",
+        "submitted": "inviato",
+        "invoiced": "fatturato",
+        "paid": "pagato",
+        "cancelled": "annullato",
+        "refunded": "rimborsato"
+      },
+      "redemptionStatus": {
+        "approved": "approvato",
+        "reversed": "stornato",
+        "failed": "non riuscito"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Eventi"
+    },
+    "status": {
+      "draft": "Bozza",
+      "published": "Attivo",
+      "sold_out": "Esaurito",
+      "cancelled": "Annullato",
+      "ended": "Terminato"
+    },
+    "statusName": {
+      "draft": "Bozza",
+      "published": "Pubblicato",
+      "sold_out": "Esaurito",
+      "cancelled": "Annullato",
+      "ended": "Terminato"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Evento interno",
+      "concert": "Concerto",
+      "workshop": "Workshop",
+      "other": "Altro"
+    },
+    "ticketStatus": {
+      "available": "Disponibile",
+      "sold": "Venduto",
+      "used": "Utilizzato",
+      "cancelled": "Annullato",
+      "refunded": "Rimborsato"
+    },
+    "list": {
+      "subtitle": "Gestisci i tuoi eventi e biglietti",
+      "createEvent": "Crea evento",
+      "stats": {
+        "totalTitle": "Eventi totali",
+        "totalDescription": "Tutti gli eventi",
+        "activeTitle": "Attivi",
+        "activeDescription": "Pubblicati o esauriti",
+        "soldTitle": "Biglietti venduti",
+        "soldDescription": "In tutti gli eventi",
+        "revenueTitle": "Ricavi",
+        "revenueDescription": "Vendite biglietti pagate"
+      },
+      "empty": {
+        "title": "Nessun evento ancora",
+        "description": "Crea un evento per vendere biglietti e gestire le presenze.",
+        "cta": "Crea il tuo primo evento"
+      },
+      "card": {
+        "date": "Data:",
+        "location": "Luogo:",
+        "price": "Prezzo:",
+        "tickets": "Biglietti:",
+        "sold": "{sold} / {capacity} venduti",
+        "free": "Gratis",
+        "view": "Visualizza",
+        "edit": "Modifica"
+      },
+      "weeklyRevenue": {
+        "title": "Ricavi settimanali dai biglietti",
+        "description": "Vendite biglietti pagate negli ultimi 7 giorni.",
+        "series": "Ricavi"
+      }
+    },
+    "detail": {
+      "noDescription": "Nessuna descrizione",
+      "edit": "Modifica",
+      "status": "Stato",
+      "type": "Tipo",
+      "eventDate": "Data evento",
+      "price": "Prezzo",
+      "free": "Gratis",
+      "totalTickets": "Biglietti totali",
+      "sold": "Venduti",
+      "available": "Disponibili",
+      "location": "Luogo",
+      "terms": "Termini e condizioni",
+      "ticketsTitle": "Biglietti",
+      "ticketsDescription": "Biglietti per questo evento",
+      "noTickets": "Nessun biglietto generato ancora.",
+      "view": "Visualizza",
+      "redeem": "Riscatta"
+    },
+    "form": {
+      "basicInfo": "Informazioni di base",
+      "name": "Nome evento *",
+      "description": "Descrizione",
+      "descriptionPlaceholder": "Descrivi il tuo evento...",
+      "type": "Tipo di evento *",
+      "typeAria": "Tipo di evento",
+      "dateTime": "Data e ora",
+      "eventDate": "Data evento *",
+      "eventTime": "Ora evento *",
+      "endDate": "Data di fine (facoltativa)",
+      "endTime": "Ora di fine (facoltativa)",
+      "location": "Luogo",
+      "locationName": "Nome del luogo",
+      "locationPlaceholder": "Sala principale, Palco all'aperto",
+      "locationPlaceholderExample": "ad es. Sala principale, Palco all'aperto",
+      "address": "Indirizzo completo",
+      "addressPlaceholder": "Via, Città, Paese",
+      "ticketDetails": "Dettagli biglietti",
+      "maxCapacity": "Capienza massima (biglietti) *",
+      "maxCapacityLong": "Capienza massima (numero di biglietti) *",
+      "pricePerTicketCurrency": "Prezzo per biglietto ({currency})",
+      "pricePerTicket": "Prezzo per biglietto",
+      "pricePlaceholderFree": "0.00 (gratis)",
+      "priceHint": "Lascia vuoto per biglietti gratuiti. Ad es. 12.50 o 12,50 per {example}.",
+      "currency": "Valuta *",
+      "terms": "Termini e condizioni",
+      "termsPlaceholder": "Termini dell'evento, politica di rimborso, ecc.",
+      "ticketPrice": "Prezzo del biglietto",
+      "endBeforeStart": "L'ora di fine deve essere successiva all'ora di inizio.",
+      "cancel": "Annulla"
+    },
+    "create": {
+      "submit": "Crea evento",
+      "submitting": "Creazione..."
+    },
+    "edit": {
+      "loading": "Caricamento...",
+      "notFound": "Evento non trovato.",
+      "back": "Torna all'evento",
+      "title": "Modifica evento",
+      "subtitle": "Aggiorna i dettagli dell'evento.",
+      "submit": "Salva modifiche",
+      "submitting": "Salvataggio..."
+    },
+    "publish": {
+      "confirm": "Pubblicare questo evento? Sarà visibile al pubblico e i biglietti potranno essere acquistati.",
+      "confirmLabel": "Pubblica",
+      "failed": "Impossibile pubblicare l'evento",
+      "success": "Evento pubblicato!",
+      "published": "Pubblicato",
+      "cannotPublish": "Impossibile pubblicare",
+      "button": "Pubblica evento",
+      "publishing": "Pubblicazione..."
+    },
+    "generate": {
+      "invalidCount": "Inserisci un numero tra 1 e 1000",
+      "tooMany": "Impossibile generare {count} biglietti. Massimo disponibile: {max}",
+      "failed": "Impossibile generare i biglietti",
+      "success": "{count, plural, one {Generato # biglietto!} other {Generati # biglietti!}}",
+      "open": "Genera biglietti",
+      "title": "Genera biglietti",
+      "description": "Crea biglietti per questo evento",
+      "countLabel": "Numero di biglietti (max: {max})",
+      "cancel": "Annulla",
+      "submit": "Genera",
+      "submitting": "Generazione..."
+    },
+    "redeem": {
+      "title": "Riscatta biglietto",
+      "subtitle": "Scansiona il codice QR o inserisci il numero del biglietto",
+      "back": "Torna all'evento",
+      "scanTitle": "Scansiona biglietto",
+      "scanDescription": "Inserisci il token QR o il numero del biglietto",
+      "tokenLabel": "Token QR / Numero biglietto",
+      "tokenPlaceholder": "Inserisci il token QR o il numero del biglietto",
+      "scan": "Scansiona",
+      "notFound": "Biglietto non trovato",
+      "found": "Biglietto trovato",
+      "number": "Numero:",
+      "event": "Evento:",
+      "status": "Stato:",
+      "attendee": "Partecipante:",
+      "redeemDescription": "Completa il riscatto",
+      "locationLabel": "Luogo (facoltativo)",
+      "locationPlaceholder": "ad es. Ingresso principale, Varco A",
+      "submit": "Riscatta biglietto",
+      "submitting": "Riscatto...",
+      "failed": "Impossibile riscattare il biglietto",
+      "cannotRedeem": "Questo biglietto non può essere riscattato. Stato: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Dashboard merchant",
+      "vouchersTitle": "Gestisci voucher"
+    },
+    "sidebar": {
+      "title": "Merchant",
+      "subtitle": "Console GiftHub",
+      "openMenu": "Apri menu",
+      "nav": {
+        "overview": "Panoramica",
+        "vouchers": "Voucher",
+        "giftCards": "Gift card",
+        "credits": "Crediti",
+        "brand": "Brand"
+      }
+    },
+    "overview": {
+      "title": "Dashboard merchant",
+      "notConnected": "Non sei ancora collegato a nessun merchant."
+    },
+    "noAccess": {
+      "title": "Nessun accesso merchant",
+      "overviewHint": "Chiedi a un admin del merchant di invitarti oppure crea un account merchant per iniziare.",
+      "creditsHint": "Collegati a un account merchant per vedere ricavi e pagamenti.",
+      "vouchersHint": "Collegati a un account merchant per gestire i voucher.",
+      "exploreCampaigns": "Esplora campagne"
+    },
+    "brand": {
+      "title": "Impostazioni brand",
+      "description": "Personalizza l'aspetto del tuo brand sui voucher",
+      "logoHeading": "Logo",
+      "logoHint": "Carica il logo del tuo merchant (consigliato: 200x200 px, PNG o SVG).",
+      "logoPreviewAlt": "Anteprima logo",
+      "uploadLogo": "Carica logo",
+      "colorHeading": "Colore del brand",
+      "colorHint": "Imposta il colore principale del brand per voucher e pulsanti.",
+      "colorLabel": "Colore",
+      "colorHexLabel": "Valore esadecimale del colore del brand",
+      "save": "Salva modifiche",
+      "previewHeading": "Anteprima",
+      "previewHint": "Guarda come appare il tuo brand sui voucher.",
+      "sampleMerchant": "Il tuo merchant",
+      "sampleTitle": "20% di sconto sul prossimo acquisto",
+      "sampleDescription": "Valido su tutti gli articoli. Non cumulabile con altre offerte."
+    },
+    "credits": {
+      "availableBalance": "Saldo disponibile",
+      "availableBalanceHint": "Pronto per il pagamento",
+      "pendingRevenue": "Ricavi in sospeso",
+      "pendingRevenueHint": "In elaborazione",
+      "recentRevenue": "Ricavi recenti",
+      "ticketSale": "Vendita biglietto",
+      "voucherSale": "Vendita voucher",
+      "noRevenue": "Nessun ricavo registrato ancora",
+      "payoutRequests": "Richieste di pagamento",
+      "noPayoutRequests": "Nessuna richiesta di pagamento ancora",
+      "requestPayoutHeading": "Richiedi pagamento",
+      "minimumPayout": "Importo minimo di pagamento: {amount}",
+      "submitting": "Invio...",
+      "requestPayout": "Richiedi pagamento",
+      "requestSubmitted": "Richiesta di pagamento inviata",
+      "requestFailed": "Impossibile richiedere il pagamento",
+      "status": {
+        "paid": "pagato",
+        "pending": "in attesa",
+        "requested": "richiesto",
+        "completed": "completato",
+        "failed": "non riuscito"
+      }
+    },
+    "newVoucher": {
+      "title": "Crea voucher",
+      "description": "Progetta e configura la tua nuova campagna voucher",
+      "detailsHeading": "Dettagli voucher",
+      "titleLabel": "Titolo",
+      "titlePlaceholder": "ad es. 20% di sconto sul prossimo acquisto",
+      "descriptionLabel": "Descrizione",
+      "descriptionPlaceholder": "Valido su tutti gli articoli. Non cumulabile con altre offerte.",
+      "expiryDateLabel": "Data di scadenza",
+      "weeklyLabel": "Offerta settimanale",
+      "weeklyHint": "Disponibilità settimanale a tempo limitato",
+      "weeklyAria": "Offerta settimanale - Disponibilità settimanale a tempo limitato",
+      "referralLabel": "Attiva credito referral",
+      "referralHint": "Gli utenti guadagnano credito quando gli amici riscattano",
+      "referralAria": "Attiva credito referral - Gli utenti guadagnano credito quando gli amici riscattano",
+      "brandColorLabel": "Colore del brand",
+      "brandColorHexLabel": "Valore esadecimale del colore del brand",
+      "saveDraft": "Salva bozza",
+      "createAndPublish": "Crea e pubblica",
+      "previewHeading": "Anteprima",
+      "sampleMerchant": "Il tuo merchant",
+      "sampleTitle": "Titolo del voucher",
+      "sampleDescription": "Qui comparirà la descrizione del voucher"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "La pagina pubblica sarà disponibile dopo la pubblicazione del voucher.",
+    "list": {
+      "metaTitle": "Voucher",
+      "subtitle": "Gestisci e crea voucher",
+      "bulkImport": "Importa CSV in blocco",
+      "stats": {
+        "totalTitle": "Voucher totali",
+        "totalDescription": "Tutti i voucher creati",
+        "activeTitle": "Attivi",
+        "activeDescription": "Voucher pubblicati",
+        "draftsTitle": "Bozze",
+        "draftsDescription": "Non ancora pubblicati",
+        "pausedEndedTitle": "In pausa / terminati",
+        "pausedEndedDescription": "{paused} in pausa, {ended} terminati",
+        "redemptionsTitle": "Riscatti",
+        "redemptionsDescription": "Riscatti totali"
+      },
+      "empty": {
+        "title": "Nessun voucher ancora",
+        "description": "Inizia creando il tuo primo voucher.",
+        "action": "Crea il tuo primo voucher"
+      },
+      "searchPlaceholder": "Cerca per titolo, prefisso del codice o ID",
+      "searchLabel": "Cerca voucher",
+      "statusLabel": "Stato",
+      "statusAll": "Tutti gli stati",
+      "status": {
+        "published": "Attivo",
+        "paused": "In pausa",
+        "draft": "Bozza",
+        "ended": "Terminato",
+        "expired": "Scaduto"
+      },
+      "typeLabel": "Tipo",
+      "typeAll": "Tutti i tipi",
+      "sortLabel": "Ordina per",
+      "sort": {
+        "date": "Data (più recenti)",
+        "name": "Nome (A-Z)",
+        "redemptions": "Riscatti"
+      },
+      "showing": "{shown} di {total} voucher",
+      "clearFilters": "Cancella filtri",
+      "noMatches": "Nessun voucher corrisponde ai filtri.",
+      "usage": "Utilizzo",
+      "usageUnlimited": "Utilizzo: {used} - Illimitato",
+      "view": "Visualizza"
+    },
+    "rowActions": {
+      "pauseTitle": "Metti in pausa il voucher",
+      "pauseDescription": "Vuoi davvero mettere in pausa questo voucher? Mentre è in pausa, gli utenti non potranno acquistarlo né riscattarlo.",
+      "pauseConfirm": "Metti in pausa",
+      "paused": "Voucher in pausa",
+      "pauseFailed": "Impossibile mettere in pausa il voucher",
+      "loadFailed": "Impossibile caricare il voucher",
+      "duplicateLabel": "Duplica voucher",
+      "duplicated": "Voucher duplicato",
+      "duplicateFailed": "Duplicazione non riuscita"
+    },
+    "publish": {
+      "confirmMessage": "Pubblicare questo voucher? Sarà visibile al pubblico.",
+      "confirmLabel": "Pubblica",
+      "failed": "Impossibile pubblicare il voucher",
+      "success": "Voucher pubblicato!",
+      "publishing": "Pubblicazione...",
+      "button": "Pubblica voucher"
+    },
+    "new": {
+      "iconLetter": "V",
+      "created": "Voucher creato come bozza. Pubblicalo quando vuoi che i clienti lo vedano."
+    },
+    "edit": {
+      "iconLetter": "M",
+      "subtitle": "Aggiorna dettagli e disponibilità del voucher.",
+      "updated": "Voucher aggiornato",
+      "updateFailed": "Impossibile aggiornare il voucher",
+      "updateFailedRetry": "Impossibile aggiornare il voucher. Riprova.",
+      "updating": "Aggiornamento...",
+      "update": "Aggiorna voucher",
+      "viewPublicPage": "Vedi pagina pubblica"
+    },
+    "form": {
+      "stepOf": "Passo {current} di {total}",
+      "typeLabel": "Tipo",
+      "typeAria": "Tipo di voucher",
+      "customersGetOff": "I clienti ottengono {value} di sconto.",
+      "customersGetCredit": "I clienti ottengono {value} di credito.",
+      "percentHint": "Inserisci la percentuale, ad es. 15 o 12,5.",
+      "amountHint": "Inserisci l'importo in {currency}, ad es. 4.50 o 4,50 per {example}.",
+      "validityHint": "Il voucher può essere usato dall'inizio del primo giorno fino alla fine dell'ultimo.",
+      "enableWeeklyDropAria": "Attiva offerta settimanale",
+      "weeklyDropDayAria": "Giorno della settimana per l'offerta settimanale",
+      "weeklyDropTimeAria": "Ora di inizio dell'offerta settimanale",
+      "headlinePlaceholder": "15% di sconto sul tuo ordine",
+      "finePrintPlaceholder": "Valido solo per i nuovi clienti",
+      "previewFallbackHeadline": "Il tuo voucher",
+      "previewValidUntil": "Valido fino al {date}",
+      "errors": {
+        "discountAboveZero": "Inserisci uno sconto superiore allo 0%.",
+        "valueAboveZero": "Inserisci un valore superiore a 0.",
+        "chooseDates": "Scegli quando inizia e finisce il voucher.",
+        "endBeforeStart": "La data di fine deve essere uguale o successiva alla data di inizio.",
+        "invalidValue": "Inserisci un valore valido.",
+        "valueMustBePositive": "Il valore deve essere maggiore di 0",
+        "totalLimitPositive": "Il limite di utilizzo totale deve essere un numero positivo",
+        "perUserLimitPositive": "Il limite per utente deve essere un numero positivo"
+      },
+      "discountErrors": {
+        "negative": "Lo sconto non può essere negativo.",
+        "invalid": "Lo sconto non è un numero valido.",
+        "decimals": "Lo sconto può avere al massimo {decimals} cifre decimali.",
+        "tooLarge": "Lo sconto è troppo alto.",
+        "tooHigh": "Lo sconto non può superare il 100%."
+      },
+      "valueErrors": {
+        "negative": "Il valore non può essere negativo.",
+        "invalid": "Il valore non è un numero valido.",
+        "wholeNumber": "Il valore deve essere un numero intero.",
+        "decimals": "Il valore può avere al massimo {decimals} cifre decimali.",
+        "tooLarge": "Il valore è troppo alto."
+      }
+    },
+    "bulkImport": {
+      "back": "Torna ai voucher",
+      "title": "Importa voucher da un foglio di calcolo",
+      "intro": "Carica un file CSV (fino a 500 righe). Ogni voucher viene creato come bozza, quindi nulla va online finché non lo pubblichi.",
+      "columns": "Colonne",
+      "downloadSample": "Scarica CSV di esempio",
+      "columnRequired": "<code>{name}</code> (obbligatoria): {help}",
+      "columnOptional": "<code>{name}</code> (facoltativa): {help}",
+      "columnHelp": {
+        "name": "Il titolo del voucher visibile ai clienti, ad es. \"Offerta caffè di primavera\".",
+        "type": "\"amount\" (sconto in denaro), \"percent\" (sconto percentuale) o \"credit\" (credito nel negozio).",
+        "value": "Euro per amount/credit (10 o 10.50), percentuale per percent (15 o 12.5).",
+        "currency": "Codice di tre lettere come EUR. Per impostazione predefinita, la valuta del tuo negozio.",
+        "valid_from": "Primo giorno di validità del voucher: 2026-10-01 o 01.10.2026.",
+        "valid_to": "Ultimo giorno di validità del voucher (resta valido fino alla fine di quel giorno).",
+        "code_prefix": "Lettere all'inizio di ogni codice, ad es. SPRING.",
+        "usage_limit": "Quante volte può essere usato in totale. Lascia vuoto per utilizzi illimitati."
+      },
+      "separatorHint": "Separa le colonne con virgole o punti e virgola. Se usi le virgole, metti gli importi decimali tra virgolette (\"4,50\") oppure usa il punto (4.50).",
+      "chooseFile": "Scegli un file CSV",
+      "chooseDifferent": "Clicca per scegliere un altro file",
+      "browse": "Clicca per sfogliare",
+      "fixRows": "Correggi queste righe e carica di nuovo il file:",
+      "andMore": "…e altri {count}.",
+      "readyToImport": "Pronti per l'importazione: {count, plural, one {# voucher} other {# voucher}}",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, fino a {limit} utilizzi} other {}}",
+      "imported": "{count, plural, one {Importato # voucher come bozza.} other {Importati # voucher come bozze.}}",
+      "viewVouchers": "Vedi voucher",
+      "importing": "Importazione...",
+      "importCount": "Importa {count, plural, one {# voucher} other {# voucher}}",
+      "importVouchers": "Importa voucher",
+      "importFailedStatus": "Importazione non riuscita (errore {status}).",
+      "importFailed": "Importazione non riuscita"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Titolo in primo piano con azione principale."
+        },
+        "value_props": {
+          "label": "Punti di forza",
+          "description": "Vantaggi e garanzie in breve."
+        },
+        "featured_products": {
+          "label": "Prodotti in evidenza",
+          "description": "Prodotti top con prezzi e tag."
+        },
+        "featured_vouchers": {
+          "label": "Voucher in evidenza",
+          "description": "Schede dei voucher attivi per le promozioni."
+        },
+        "rental_packages": {
+          "label": "Pacchetti noleggio",
+          "description": "Pacchetti di noleggio e prezzi giornalieri."
+        },
+        "categories": {
+          "label": "Griglia categorie",
+          "description": "Sfoglia per tipo, uso o pubblico."
+        },
+        "availability": {
+          "label": "Calendario disponibilità",
+          "description": "Disponibilità in tempo reale e fasce prenotabili."
+        },
+        "testimonials": {
+          "label": "Testimonianze",
+          "description": "Citazioni dei clienti e valutazioni a stelle."
+        },
+        "gallery": {
+          "label": "Galleria",
+          "description": "Immagini lifestyle o casi d'uso."
+        },
+        "pricing": {
+          "label": "Tabella prezzi",
+          "description": "Fasce di prezzo trasparenti."
+        },
+        "rental_terms": {
+          "label": "Condizioni di noleggio",
+          "description": "Deposito, assicurazione e politica di reso."
+        },
+        "faq": {
+          "label": "FAQ",
+          "description": "Rispondi alle obiezioni più comuni."
+        },
+        "newsletter": {
+          "label": "Iscrizione newsletter",
+          "description": "Raccogli email per le campagne."
+        },
+        "contact": {
+          "label": "Blocco contatti",
+          "description": "Assistenza via chat, email o telefono."
+        },
+        "map": {
+          "label": "Mappa della sede",
+          "description": "Punto di ritiro o posizione del negozio."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Barra promozionale",
+          "description": "Barra fissa in alto per offerte e avvisi."
+        },
+        "sticky_cta": {
+          "label": "CTA fissa",
+          "description": "Pulsante d'azione sempre visibile durante lo scorrimento."
+        },
+        "chat_widget": {
+          "label": "Widget chat",
+          "description": "Chat dal vivo o integrazione WhatsApp."
+        },
+        "trust_badges": {
+          "label": "Badge di fiducia",
+          "description": "Badge di pagamento, sicurezza o qualità."
+        },
+        "social_proof": {
+          "label": "Popup di riprova sociale",
+          "description": "Attività e acquisti recenti."
+        },
+        "countdown": {
+          "label": "Conto alla rovescia",
+          "description": "Urgenza per le offerte limitate."
+        },
+        "reviews_widget": {
+          "label": "Widget recensioni",
+          "description": "Incorpora Google o Trustpilot."
+        },
+        "language_switch": {
+          "label": "Selettore lingua",
+          "description": "Cambio rapido della lingua nella pagina."
+        },
+        "analytics": {
+          "label": "Snippet di analitiche",
+          "description": "Spazi per pixel di tracciamento."
+        },
+        "cookie_banner": {
+          "label": "Banner cookie",
+          "description": "Banner di consenso GDPR."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Anteprima",
+      "edit": "Modifica",
+      "previewEmpty": "Nessuna sezione aggiunta. Passa alla modalità modifica per aggiungere sezioni.",
+      "title": "Editor visivo",
+      "preview": "Anteprima",
+      "empty": "Nessuna sezione ancora. Clicca \"Aggiungi sezione\" qui sotto per iniziare.",
+      "collapseSettings": "Comprimi impostazioni",
+      "expandSettings": "Espandi impostazioni",
+      "removeSection": "Rimuovi sezione {label}",
+      "sectionTitle": "Titolo della sezione",
+      "description": "Descrizione",
+      "descriptionPlaceholder": "Descrizione facoltativa",
+      "backgroundColor": "Colore di sfondo",
+      "layoutVariant": "Variante di layout",
+      "layout": {
+        "default": "Predefinito",
+        "centered": "Centrato",
+        "wide": "Largo",
+        "compact": "Compatto"
+      },
+      "addSection": "Aggiungi sezione",
+      "availableSections": "Sezioni disponibili",
+      "closeCatalog": "Chiudi",
+      "allAdded": "Hai aggiunto tutte le sezioni disponibili.",
+      "count": "{configured, plural, one {# sezione configurata} other {# sezioni configurate}} / {available} disponibili da aggiungere"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Checklist di lancio della vetrina",
+        "rental_launch": "Checklist di lancio della pagina noleggi",
+        "campaign_ops": "Operazioni settimanali delle campagne",
+        "support_ops": "Checklist di preparazione dell'assistenza"
+      },
+      "toast": {
+        "saved": "Page builder aggiornato.",
+        "saveFailed": "Impossibile salvare la pagina",
+        "vibeFailed": "Agente Vibe non riuscito",
+        "layoutGenerated": "Layout Vibe generato.",
+        "generateFailed": "Impossibile generare il layout",
+        "agentFailed": "Agente non riuscito",
+        "planGenerated": "Piano di processo generato.",
+        "runAgentFailed": "Impossibile eseguire l'agente"
+      },
+      "noData": "Nessun dato del page builder disponibile.",
+      "title": "Page builder",
+      "intro": "Crea rapidamente pagine vetrina e noleggio con sezioni modulari e add-on.",
+      "introAi": "Crea rapidamente pagine vetrina e noleggio con sezioni modulari e add-on, con suggerimenti IA facoltativi.",
+      "tabs": {
+        "store": "Vetrina",
+        "rental": "Noleggio"
+      },
+      "details": {
+        "title": "Dettagli pagina",
+        "subtitle": "Titolo, sottotitolo e layout.",
+        "save": "Salva",
+        "pageTitle": "Titolo pagina",
+        "subtitleLabel": "Sottotitolo"
+      },
+      "sections": {
+        "title": "Sezioni",
+        "subtitle": "Trascina per riordinare, espandi per configurare o visualizza l'anteprima del layout.",
+        "suggestLayout": "Suggerisci un layout",
+        "suggestionsLeft": "Suggerimenti di layout IA rimasti: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Add-on",
+        "subtitle": "Widget extra e livelli di marketing.",
+        "enable": "Attiva add-on {label}",
+        "disable": "Disattiva add-on {label}"
+      },
+      "summary": {
+        "title": "Riepilogo in tempo reale",
+        "line": "{title} · {sections, plural, one {# sezione} other {# sezioni}} · {addons, plural, one {# add-on} other {# add-on}}",
+        "sectionsLabel": "Sezioni:",
+        "addonsLabel": "Add-on:",
+        "none": "Nessuno"
+      },
+      "assistant": {
+        "title": "Assistente checklist di lancio",
+        "subtitle": "Genera piani d'azione e checklist operative.",
+        "goalLabel": "Obiettivo del processo",
+        "createChecklist": "Crea checklist",
+        "checklistsLeft": "Checklist rimaste: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Offerte, noleggi e voucher selezionati da {name}.",
+        "shopProducts": "Acquista prodotti",
+        "browseRentals": "Sfoglia noleggi"
+      },
+      "valueProps": {
+        "rewardsTitle": "Premi",
+        "rewardsText": "Incentivi voucher integrati.",
+        "stockTitle": "Disponibilità affidabile",
+        "stockText": "Prezzi e disponibilità aggiornati.",
+        "datesTitle": "Date flessibili",
+        "datesText": "Pianifica i noleggi con facilità."
+      },
+      "viewAll": "Vedi tutti",
+      "seeAll": "Vedi tutto",
+      "products": {
+        "title": "Prodotti in evidenza",
+        "empty": "Nessun prodotto ancora.",
+        "fallbackDescription": "Prodotto in evidenza"
+      },
+      "rentals": {
+        "title": "Pacchetti noleggio",
+        "empty": "Nessun noleggio ancora.",
+        "fallbackDescription": "Noleggio in evidenza",
+        "perDay": "{price} / giorno"
+      },
+      "categories": {
+        "title": "Sfoglia categorie",
+        "popular": "Popolari",
+        "business": "Business",
+        "events": "Eventi",
+        "seasonal": "Stagionali",
+        "corporate": "Aziendali",
+        "custom": "Personalizzati"
+      },
+      "availability": {
+        "title": "Disponibilità in tempo reale",
+        "text": "Verifica la disponibilità e richiedi un preventivo in pochi minuti.",
+        "seeCalendar": "Vedi calendario"
+      },
+      "testimonials": {
+        "title": "Cosa dicono i clienti",
+        "smooth": "Processo semplice",
+        "lovedVoucher": "Il voucher è piaciuto molto",
+        "support": "Assistenza eccellente"
+      },
+      "gallery": {
+        "title": "Galleria"
+      },
+      "pricing": {
+        "title": "Prezzi",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Enterprise",
+        "tierText": "Prezzi e assistenza su misura"
+      },
+      "rentalTerms": {
+        "title": "Condizioni di noleggio",
+        "text": "Depositi, regole di ritiro e politica di reso chiari, comunicati in anticipo."
+      },
+      "faq": {
+        "title": "FAQ",
+        "redeem": "Come si riscatta?",
+        "reschedule": "Posso cambiare data?",
+        "support": "Offrite assistenza?"
+      },
+      "newsletter": {
+        "title": "Resta aggiornato",
+        "text": "Ricevi nuove offerte e novità sui noleggi nella tua casella di posta.",
+        "emailLabel": "Indirizzo email",
+        "subscribe": "Iscriviti"
+      },
+      "contact": {
+        "title": "Contatti",
+        "emailUs": "Scrivici a {email}"
+      },
+      "map": {
+        "text": "Il luogo di ritiro viene comunicato dopo la prenotazione."
+      },
+      "vouchers": {
+        "title": "Voucher attivi",
+        "empty": "Nessun voucher disponibile.",
+        "voucher": "Voucher",
+        "view": "Vedi voucher"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Attiva",
+      "redeemed": "Riscattata",
+      "expired": "Scaduta",
+      "cancelled": "Annullata"
+    },
+    "list": {
+      "metaTitle": "Gift card",
+      "title": "Gift card",
+      "subtitle": "Crea e gestisci gift card",
+      "newGiftCard": "Nuova gift card",
+      "stats": {
+        "total": "Gift card totali",
+        "totalDescription": "Tutte le gift card emesse",
+        "active": "Attive",
+        "activeDescription": "Attualmente riscattabili",
+        "redeemed": "Riscattate",
+        "redeemedDescription": "Riscatti completati",
+        "totalValue": "Valore totale",
+        "totalValueDescription": "Valore delle gift card emesse"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Nessuna gift card ancora",
+      "emptyDescription": "Crea una gift card con il tuo branding e riscatto tramite QR.",
+      "createFirst": "Crea la tua prima gift card",
+      "searchPlaceholder": "Cerca per titolo, codice o messaggio",
+      "searchLabel": "Cerca gift card",
+      "status": "Stato",
+      "allStatus": "Tutti gli stati",
+      "sortBy": "Ordina per",
+      "sortDate": "Data (più recenti)",
+      "sortAmount": "Importo (dal più alto)",
+      "showing": "{shown} di {total, plural, one {# gift card} other {# gift card}}",
+      "clearFilters": "Cancella filtri",
+      "noMatches": "Nessuna gift card corrisponde ai filtri.",
+      "defaultHeadline": "Gift card",
+      "noExpiry": "Nessuna scadenza",
+      "validUntil": "Valida fino al: {date}",
+      "redeemedOn": "Riscattata il: {date}",
+      "details": "Dettagli",
+      "view": "Visualizza"
+    },
+    "detail": {
+      "title": "Gift card",
+      "code": "Codice {code}",
+      "publicView": "Vista pubblica",
+      "newGiftCard": "Nuova gift card",
+      "detailsTitle": "Dettagli gift card",
+      "value": "Valore",
+      "validFrom": "Valida dal",
+      "validTo": "Valida fino al",
+      "noExpiry": "Nessuna scadenza",
+      "redeemedAt": "Riscattata il",
+      "notRedeemed": "Non riscattata",
+      "qrTitle": "QR di riscatto per lo staff",
+      "qrHelp": "Lo staff può scansionare questo QR per riscattare e invalidare la gift card."
+    },
+    "new": {
+      "title": "Nuova gift card",
+      "subtitle": "Personalizza ed emetti una gift card",
+      "created": "Gift card creata.",
+      "cancel": "Annulla",
+      "creating": "Creazione...",
+      "submit": "Crea gift card",
+      "errors": {
+        "amountRequired": "Inserisci un importo superiore a 0.",
+        "endBeforeStart": "La data di fine deve essere uguale o successiva alla data di inizio.",
+        "createFailed": "Impossibile creare la gift card"
+      },
+      "amountErrors": {
+        "negative": "L'importo non può essere negativo.",
+        "invalid": "L'importo non è un numero valido.",
+        "wholeNumber": "L'importo deve essere un numero intero.",
+        "decimals": "L'importo può avere al massimo {decimals} cifre decimali.",
+        "tooLarge": "L'importo è troppo alto."
+      },
+      "priceErrors": {
+        "negative": "Il prezzo di vendita non può essere negativo.",
+        "invalid": "Il prezzo di vendita non è un numero valido.",
+        "wholeNumber": "Il prezzo di vendita deve essere un numero intero.",
+        "decimals": "Il prezzo di vendita può avere al massimo {decimals} cifre decimali.",
+        "tooLarge": "Il prezzo di vendita è troppo alto."
+      },
+      "valueSection": {
+        "title": "Valore e validità",
+        "description": "Imposta importo, valuta e scadenza",
+        "amount": "Importo",
+        "faceValue": "Valore nominale: {value}.",
+        "amountHelp": "Inserisci l'importo in {currency}, ad es. 50 o 49,90 per {example}.",
+        "currency": "Valuta",
+        "validFrom": "Valida dal",
+        "validTo": "Valida fino al",
+        "noExpiry": "Nessuna data di scadenza"
+      },
+      "purchaseSection": {
+        "title": "Acquisto da parte dei clienti",
+        "description": "Consenti ai clienti di acquistare questa gift card online",
+        "purchasable": "Acquistabile dai clienti",
+        "salePrice": "Prezzo di vendita (facoltativo, predefinito: valore nominale)",
+        "salePricePlaceholder": "Uguale all'importo",
+        "customersPay": "I clienti pagano {value}.",
+        "salePriceHelp": "Lascia vuoto per vendere al valore nominale. Imposta un prezzo diverso per le promozioni."
+      },
+      "brandingSection": {
+        "title": "Branding e messaggio",
+        "description": "Titolo, messaggio, immagini e colori",
+        "headline": "Titolo",
+        "headlinePlaceholder": "Regalo per gli amanti del caffè",
+        "message": "Messaggio",
+        "messagePlaceholder": "Aggiungi un messaggio personale per il destinatario",
+        "logoUrl": "URL del logo",
+        "imageUrl": "URL dell'immagine",
+        "accentColor": "Colore d'accento",
+        "backgroundColor": "Colore di sfondo",
+        "textColor": "Colore del testo",
+        "codePrefix": "Prefisso del codice (facoltativo)"
+      },
+      "preview": {
+        "title": "Anteprima",
+        "defaultHeadline": "Gift card",
+        "imageAlt": "Gift card",
+        "logoAlt": "Logo del brand",
+        "notePlaceholder": "Aggiungi una nota personale"
+      }
+    },
+    "gifts": {
+      "title": "Prodotti regalo",
+      "subtitle": "Gestisci i tuoi prodotti nel Gift Hub",
+      "dashboard": "Dashboard",
+      "confirmDelete": "Sei sicuro? Il prodotto verrà disattivato.",
+      "stats": {
+        "total": "Totale",
+        "active": "Attivi",
+        "views": "Visualizzazioni",
+        "purchases": "Acquisti"
+      },
+      "emptyTitle": "Nessun prodotto regalo ancora",
+      "emptyDescription": "Aggiungi il tuo primo prodotto per comparire nel feed del Gift Hub.",
+      "emptyApiHint": "Usa l'API su <code>{endpoint}</code> per creare prodotti.",
+      "inactive": "Inattivo",
+      "featured": "In evidenza",
+      "views": "{count, plural, one {# visualizzazione} other {# visualizzazioni}}",
+      "purchases": "{count, plural, one {# acquisto} other {# acquisti}}",
+      "conversionRate": "{rate}% CVR",
+      "activate": "Attiva",
+      "deactivate": "Disattiva",
+      "delete": "Elimina"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Nessun dato disponibile",
+      "value": "Valore: <strong>{value}</strong>",
+      "dismiss": "Ignora",
+      "remove": "Rimuovi",
+      "dialog": "Finestra di dialogo",
+      "close": "Chiudi",
+      "loading": "Caricamento"
+    },
+    "analyticsFunnel": {
+      "empty": "Nessuna attività in questo periodo",
+      "top": "Inizio",
+      "drop": "-{rate}% di abbandono"
+    },
+    "periodComparison": {
+      "title": "Confronto tra periodi",
+      "loading": "Caricamento...",
+      "previous": "Precedente: {value}",
+      "noData": "Nessun dato disponibile",
+      "period": {
+        "day": "Giorno",
+        "week": "Settimana",
+        "month": "Mese",
+        "quarter": "Trimestre",
+        "year": "Anno"
+      },
+      "metric": {
+        "revenue": "Ricavi",
+        "redemptions": "Riscatti",
+        "purchases": "Acquisti",
+        "referrals": "Referral",
+        "customers": "Clienti"
+      }
+    },
+    "trendChart": {
+      "noData": "Nessun dato"
+    },
+    "conversionChart": {
+      "noData": "Nessun dato disponibile",
+      "previous": "prec.: {value}"
+    },
+    "funnelChart": {
+      "empty": "Nessuna attività in questo periodo"
+    },
+    "geoMap": {
+      "noData": "Nessun dato disponibile",
+      "value": "Valore: <strong>{value}</strong>",
+      "country": {
+        "GB": "Regno Unito",
+        "IE": "Irlanda",
+        "FR": "Francia",
+        "DE": "Germania",
+        "ES": "Spagna",
+        "PT": "Portogallo",
+        "IT": "Italia",
+        "NL": "Paesi Bassi",
+        "BE": "Belgio",
+        "CH": "Svizzera",
+        "AT": "Austria",
+        "PL": "Polonia",
+        "CZ": "Repubblica Ceca",
+        "SE": "Svezia",
+        "NO": "Norvegia",
+        "FI": "Finlandia",
+        "DK": "Danimarca",
+        "EE": "Estonia",
+        "LV": "Lettonia",
+        "LT": "Lituania",
+        "HU": "Ungheria",
+        "RO": "Romania",
+        "BG": "Bulgaria",
+        "GR": "Grecia",
+        "HR": "Croazia",
+        "SK": "Slovacchia",
+        "SI": "Slovenia",
+        "RS": "Serbia",
+        "UA": "Ucraina",
+        "BY": "Bielorussia"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "In attesa di dati..."
+    },
+    "pieDonutChart": {
+      "noData": "Nessun dato disponibile",
+      "total": "Totale"
+    },
+    "activityFeed": {
+      "justNow": "proprio ora",
+      "minutesAgo": "{count} min fa",
+      "hoursAgo": "{count} h fa",
+      "daysAgo": "{count} g fa",
+      "empty": "Nessuna attività ancora",
+      "loadMore": "Carica altro",
+      "eventType": {
+        "purchase": "Acquisto",
+        "redemption": "Riscatto",
+        "signup": "Registrazione",
+        "alert": "Avviso"
+      }
+    },
+    "dateRange": {
+      "days7": "7 giorni",
+      "days30": "30 giorni",
+      "days90": "90 giorni",
+      "year1": "1 anno",
+      "custom": "Personalizzato"
+    },
+    "chartCard": {
+      "fullscreen": "Schermo intero",
+      "exitFullscreen": "Esci da schermo intero",
+      "retry": "Riprova"
+    },
+    "dashboardHeader": {
+      "export": "Esporta",
+      "exportAs": "Esporta come {format}"
+    },
+    "dataTable": {
+      "empty": "Nessun dato disponibile",
+      "showing": "{from}–{to} di {total}",
+      "previousPage": "Pagina precedente",
+      "nextPage": "Pagina successiva"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Live",
+        "reconnecting": "Riconnessione",
+        "disconnected": "Disconnesso"
+      },
+      "status": {
+        "connected": "Connesso",
+        "reconnecting": "Riconnessione",
+        "disconnected": "Disconnesso"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "vs periodo prec."
+    },
+    "statComparison": {
+      "current": "Attuale",
+      "previous": "Precedente",
+      "change": "variazione"
+    },
+    "aiInsightPanel": {
+      "title": "Insight IA",
+      "placeholder": "Fai una domanda all'IA...",
+      "send": "Invia"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Live",
+        "degraded": "Prestazioni ridotte",
+        "disconnected": "Offline"
+      },
+      "latency": "Latenza: {ms} ms",
+      "lastUpdate": "Ultimo aggiornamento: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Notifiche",
+      "title": "Notifiche",
+      "markAllRead": "Segna tutte come lette",
+      "empty": "Nessuna notifica",
+      "ariaLabelUnread": "Notifiche ({count} non lette)"
+    },
+    "premiumChartCard": {
+      "info": "Info",
+      "fullscreen": "Schermo intero",
+      "exitFullscreen": "Esci da schermo intero",
+      "moreOptions": "Altre opzioni",
+      "empty": "Nessun dato disponibile per questo periodo"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "vs periodo precedente"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Operativo",
+        "degraded": "Prestazioni ridotte",
+        "outage": "Interruzione"
+      }
+    },
+    "select": {
+      "placeholder": "Seleziona...",
+      "search": "Cerca...",
+      "empty": "Nessuna opzione trovata",
+      "removeOption": "Rimuovi {label}"
+    },
+    "sidebar": {
+      "expand": "Espandi barra laterale",
+      "collapse": "Comprimi barra laterale",
+      "openMenu": "Apri menu",
+      "closeMenu": "Chiudi menu"
+    },
+    "iconSystem": {
+      "notFound": "Icona \"{name}\" non trovata",
+      "badge": "{count, plural, one {# notifica} other {# notifiche}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Pannello laterale",
+      "closePanel": "Chiudi pannello"
+    },
+    "codeBlock": {
+      "copyCode": "Copia codice",
+      "copied": "Copiato",
+      "copy": "Copia"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Clienti",
+      "title": "Clienti",
+      "summary": "{count, plural, one {# cliente} other {# clienti}} · {revenue} di ricavi totali",
+      "stats": {
+        "totalCustomers": "Clienti totali",
+        "totalRevenue": "Ricavi totali",
+        "totalRedemptions": "Riscatti totali"
+      },
+      "table": {
+        "customer": "Cliente",
+        "email": "Email",
+        "purchases": "Acquisti",
+        "totalSpent": "Spesa totale",
+        "redemptions": "Riscatti",
+        "lastPurchase": "Ultimo acquisto"
+      },
+      "empty": "Nessun cliente ancora",
+      "unknown": "Sconosciuto"
+    },
+    "qrCheckout": {
+      "title": "Checkout istantaneo con QR",
+      "subtitle": "Genera codici QR per un checkout istantaneo dei clienti",
+      "voucherLabel": "Collega a un voucher (facoltativo)",
+      "generalOption": "Checkout generico (nessun voucher specifico)",
+      "voucherOption": "{type} - {value} {currency} ({status})",
+      "generating": "Generazione...",
+      "generate": "Genera codice QR",
+      "qrAlt": "Codice QR per il checkout",
+      "scanToCheckout": "Scansiona per pagare",
+      "print": "Stampa codice QR"
+    },
+    "redemptions": {
+      "metaTitle": "Riscatti",
+      "subtitle": "Visualizza e conferma i riscatti dei voucher.",
+      "stats": {
+        "totalTitle": "Riscatti totali",
+        "totalDescription": "Tutti i riscatti inviati",
+        "pendingTitle": "In attesa",
+        "pendingDescription": "In attesa di conferma",
+        "confirmedTitle": "Confermati",
+        "confirmedDescription": "Riscatti approvati",
+        "discountsTitle": "Sconti concessi",
+        "discountsDescription": "Sconti confermati"
+      },
+      "empty": {
+        "title": "Nessun riscatto ancora",
+        "description": "I riscatti compariranno qui quando i clienti useranno i voucher."
+      },
+      "voucherFallback": "Voucher",
+      "card": {
+        "order": "Ordine da {amount}",
+        "discount": "Sconto: {amount}",
+        "discountReferred": "Sconto: {amount} - Segnalato da {name}",
+        "confirmed": "Confermato",
+        "pending": "In attesa",
+        "method": "Metodo: {method}",
+        "methods": {
+          "online": "Online",
+          "in_store": "In negozio"
+        },
+        "orderReference": "Ordine: {reference}",
+        "notAvailable": "N/D",
+        "location": "Sede: {location}",
+        "date": "Data: {date}"
+      },
+      "confirm": {
+        "prompt": "Confermare questo riscatto? Il credito verrà sbloccato per chi ha segnalato.",
+        "confirmLabel": "Conferma",
+        "success": "Riscatto confermato. Credito sbloccato per chi ha segnalato.",
+        "error": "Impossibile confermare il riscatto. Riprova.",
+        "confirming": "Conferma in corso...",
+        "button": "Conferma riscatto"
+      },
+      "export": {
+        "success": "Riscatti esportati!",
+        "error": "Impossibile esportare i riscatti",
+        "exporting": "Esportazione...",
+        "button": "Esporta CSV"
+      }
+    },
+    "reviews": {
+      "title": "Recensioni",
+      "subtitle": "Monitora e rispondi alle recensioni dei clienti",
+      "filters": "Filtri",
+      "reviewCount": "{count, plural, one {# recensione} other {# recensioni}}",
+      "ratingDistribution": "Distribuzione delle valutazioni",
+      "responseRate": "Tasso di risposta",
+      "replied": "Con risposta",
+      "pending": "In attesa",
+      "responseRatePercent": "{percent}% di risposte",
+      "filter": {
+        "rating": "Valutazione",
+        "allRatings": "Tutte le valutazioni",
+        "stars": "{count, plural, one {# stella} other {# stelle}}",
+        "replyStatus": "Stato della risposta",
+        "all": "Tutte",
+        "needsReply": "Da rispondere",
+        "replied": "Con risposta",
+        "clear": "Cancella"
+      },
+      "loading": "Caricamento recensioni...",
+      "empty": "Nessuna recensione trovata.",
+      "anonymous": "Anonimo",
+      "verified": "Verificata",
+      "campaign": "Campagna: {name}",
+      "voucher": "Voucher: {code}",
+      "foundHelpful": "Utile per {count}",
+      "yourReply": "La tua risposta",
+      "replyPlaceholder": "Scrivi la tua risposta...",
+      "posting": "Pubblicazione...",
+      "postReply": "Pubblica risposta",
+      "cancel": "Annulla",
+      "reply": "Rispondi",
+      "showing": "{from}–{to} di {total}",
+      "pageOf": "Pagina {page} di {totalPages}",
+      "previousPage": "Pagina precedente",
+      "nextPage": "Pagina successiva",
+      "loadFailed": "Impossibile caricare le recensioni",
+      "replyFailed": "Impossibile inviare la risposta",
+      "replyPosted": "Risposta pubblicata"
+    },
+    "scanner": {
+      "title": "Scanner",
+      "subtitle": "Scansiona voucher, gift card e biglietti",
+      "manual": "Manuale",
+      "camera": "Fotocamera",
+      "scanning": "Scansione...",
+      "cameraDenied": "Accesso alla fotocamera negato. Consenti l'accesso alla fotocamera nelle impostazioni del browser o digita il codice qui sotto.",
+      "cameraUnavailable": "Nessuna fotocamera disponibile. Digita invece il codice qui sotto.",
+      "pointAtCode": "Inquadra un codice QR per la scansione automatica",
+      "enterCode": "Inserisci codice",
+      "codePlaceholder": "Codice voucher (ad es. AUD-CMUI0TG1), link del voucher, codice biglietto o gift card",
+      "codeAriaLabel": "Codice da scansionare",
+      "scan": "Scansiona",
+      "found": {
+        "voucher": "Voucher trovato",
+        "gift_card": "Gift card trovata",
+        "ticket": "Biglietto trovato"
+      },
+      "info": {
+        "ticketNumber": "Biglietto n.",
+        "event": "Evento",
+        "type": "Tipo",
+        "standard": "Standard",
+        "attendee": "Partecipante",
+        "code": "Codice",
+        "amount": "Importo",
+        "message": "Messaggio",
+        "voucher": "Voucher",
+        "campaign": "Campagna",
+        "none": "Nessuna",
+        "value": "Valore",
+        "validUntil": "Valido fino al"
+      },
+      "redeem": "Riscatta",
+      "redeeming": "Riscatto...",
+      "cannotRedeem": "Questo elemento non può essere riscattato (stato: {status})",
+      "redeemed": {
+        "voucher": "Voucher riscattato!",
+        "gift_card": "Gift card riscattata!",
+        "ticket": "Biglietto riscattato!"
+      },
+      "errors": {
+        "enterCode": "Inserisci un codice",
+        "notFound": "Non trovato",
+        "scanFailed": "Scansione non riuscita",
+        "redeemFailed": "Riscatto non riuscito"
+      },
+      "status": {
+        "giftCard": {
+          "active": "attiva",
+          "redeemed": "riscattata",
+          "expired": "scaduta",
+          "cancelled": "annullata"
+        },
+        "ticket": {
+          "available": "disponibile",
+          "sold": "venduto",
+          "used": "utilizzato",
+          "cancelled": "annullato",
+          "refunded": "rimborsato"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Il prezzo non può essere negativo.",
+      "invalid": "Il prezzo non è un numero valido.",
+      "wholeNumber": "Il prezzo deve essere un numero intero.",
+      "decimals": "Il prezzo può avere al massimo {decimals} cifre decimali.",
+      "tooLarge": "Il prezzo è troppo alto."
+    },
+    "appointments": {
+      "title": "Appuntamenti",
+      "subtitle": "Gestisci prenotazioni e disponibilità",
+      "createSlot": "Crea fascia oraria",
+      "form": {
+        "serviceName": "Nome del servizio",
+        "price": "Prezzo ({currency}, lascia vuoto se gratuito)",
+        "startTime": "Ora di inizio",
+        "endTime": "Ora di fine",
+        "notes": "Note",
+        "creating": "Creazione…",
+        "submit": "Crea fascia di disponibilità"
+      },
+      "status": {
+        "all": "Tutti",
+        "pending": "In attesa",
+        "confirmed": "Confermati",
+        "cancelled": "Annullati",
+        "completed": "Completati"
+      },
+      "loading": "Caricamento...",
+      "empty": "Nessun appuntamento trovato",
+      "bookedBy": "Prenotato da: {name}",
+      "confirm": "Conferma",
+      "confirmAria": "Conferma appuntamento",
+      "cancel": "Annulla",
+      "cancelAria": "Annulla appuntamento",
+      "errors": {
+        "endBeforeStart": "L'ora di fine deve essere successiva all'ora di inizio.",
+        "createFailed": "Impossibile creare la fascia di disponibilità. Riprova.",
+        "network": "Impossibile raggiungere il server. Controlla la connessione e riprova.",
+        "updateFailed": "Impossibile aggiornare l'appuntamento (errore {status})."
+      }
+    },
+    "inventory": {
+      "title": "Inventario",
+      "subtitle": "Monitora le scorte e gestisci la disponibilità dei voucher",
+      "refresh": "Aggiorna",
+      "summary": {
+        "totalItems": "Articoli totali",
+        "lowStock": "Scorte basse",
+        "outOfStock": "Esauriti"
+      },
+      "alerts": {
+        "title": "Avvisi scorte basse ({count})",
+        "threshold": "{stock} / soglia {threshold}"
+      },
+      "loading": "Caricamento inventario...",
+      "empty": "Nessun voucher trovato",
+      "typeVoucher": "Voucher {type}",
+      "stockStatus": {
+        "unlimited": "Illimitato",
+        "outOfStock": "Esaurito",
+        "lowStock": "Scorte basse",
+        "inStock": "Disponibile"
+      },
+      "stock": "Scorte: {stock}",
+      "purchased": "Acquistati: {count}",
+      "redeemed": "Riscattati: {count}",
+      "validUntil": "Valido fino al {date}",
+      "edit": {
+        "button": "Modifica scorte",
+        "stockQuantity": "Quantità in magazzino",
+        "threshold": "Soglia scorte basse",
+        "save": "Salva",
+        "saving": "Salvataggio...",
+        "cancel": "Annulla"
+      },
+      "stockUpdated": "Scorte aggiornate",
+      "errors": {
+        "loadFailed": "Impossibile caricare l'inventario",
+        "updateFailed": "Impossibile aggiornare le scorte"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "I suggerimenti IA non sono ancora attivi su questa piattaforma, quindi gli strumenti automatici per layout e checklist sono nascosti. Puoi comunque creare e modificare le tue pagine manualmente."
+    },
+    "pricing": {
+      "title": "Prezzi dinamici",
+      "newRule": "Nuova regola",
+      "ruleTypes": {
+        "demand": {
+          "label": "In base alla domanda",
+          "desc": "Adegua il prezzo in base al rapporto visualizzazioni/acquisti"
+        },
+        "timeOfDay": {
+          "label": "Fascia oraria",
+          "desc": "Prezzi per ore di punta e fuori punta"
+        },
+        "inventory": {
+          "label": "Inventario",
+          "desc": "Il prezzo cambia in base alle scorte rimanenti"
+        },
+        "surge": {
+          "label": "Picco",
+          "desc": "Maggiorazione per eventi speciali/festività"
+        },
+        "loyalty": {
+          "label": "Fedeltà",
+          "desc": "Sconti per i clienti abituali"
+        }
+      },
+      "form": {
+        "title": "Crea regola di prezzo",
+        "ruleType": "Tipo di regola",
+        "priority": "Priorità",
+        "priorityPlaceholder": "Più alta = applicata prima",
+        "config": "Configurazione (JSON)",
+        "submit": "Crea regola",
+        "cancel": "Annulla"
+      },
+      "loading": "Caricamento regole...",
+      "empty": "Nessuna regola di prezzo ancora. Creane una per attivare i prezzi dinamici.",
+      "table": {
+        "type": "Tipo",
+        "priority": "Priorità",
+        "config": "Config.",
+        "status": "Stato",
+        "actions": "Azioni"
+      },
+      "active": "Attiva",
+      "inactive": "Inattiva",
+      "deleteAria": "Elimina regola di prezzo",
+      "deleteConfirm": "Eliminare questa regola di prezzo?",
+      "delete": "Elimina",
+      "errors": {
+        "invalidJson": "Il campo di configurazione deve contenere JSON valido."
+      },
+      "preview": {
+        "title": "Anteprima prezzo",
+        "description": "Inserisci l'ID di un voucher per vedere come le regole attive ne influenzerebbero il prezzo.",
+        "voucherId": "ID voucher",
+        "voucherIdPlaceholder": "Inserisci l'ID del voucher",
+        "calculate": "Calcola",
+        "error": "Impossibile calcolare il prezzo",
+        "basePrice": "Prezzo base",
+        "finalPrice": "Prezzo finale"
+      }
+    },
+    "rentals": {
+      "title": "Prenotazioni noleggio",
+      "subtitle": "Gestisci richieste di noleggio e restituzioni",
+      "status": {
+        "all": "Tutte",
+        "pending": "In attesa",
+        "approved": "Approvate",
+        "rejected": "Rifiutate",
+        "paid": "Pagate",
+        "active": "Attive",
+        "returned": "Restituite",
+        "cancelled": "Annullate"
+      },
+      "empty": "Nessuna prenotazione di noleggio trovata.",
+      "dates": "{start} - {end} ({days, plural, one {# giorno} other {# giorni}})",
+      "total": "Totale: <strong>{total}</strong> ({rate}/giorno)",
+      "note": "Nota: {note}",
+      "rejectedReason": "Rifiutata: {reason}",
+      "bookedMeta": "Prenotata: {date} | Utente: {user}...",
+      "approve": "Approva",
+      "reasonPlaceholder": "Motivo (facoltativo)",
+      "confirm": "Conferma",
+      "cancel": "Annulla",
+      "reject": "Rifiuta",
+      "markReturned": "Segna come restituito"
+    },
+    "subscriptionBoxes": {
+      "title": "Box in abbonamento",
+      "subtitle": "Gestisci box di voucher ricorrenti",
+      "newBox": "+ Nuova box",
+      "cancel": "Annulla",
+      "form": {
+        "name": "Nome",
+        "description": "Descrizione",
+        "price": "Prezzo ({currency})",
+        "currency": "Valuta",
+        "interval": "Intervallo",
+        "maxItems": "Articoli massimi",
+        "creating": "Creazione...",
+        "submit": "Crea box"
+      },
+      "interval": {
+        "weekly": "Settimanale",
+        "monthly": "Mensile",
+        "quarterly": "Trimestrale"
+      },
+      "created": "Box in abbonamento creata.",
+      "empty": "Nessuna box in abbonamento ancora. Crea la tua prima.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# abbonato} other {# abbonati}}",
+      "items": "{count, plural, one {# articolo} other {# articoli}}",
+      "errors": {
+        "priceAboveZero": "Inserisci un prezzo superiore a 0.",
+        "createFailed": "Impossibile creare la box in abbonamento (errore {status}).",
+        "network": "Impossibile creare la box in abbonamento. Controlla la connessione e riprova."
+      },
+      "intervalUnit": {
+        "weekly": "settimana",
+        "monthly": "mese",
+        "quarterly": "trimestre"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Sito web",
+      "supportEmail": "Email di assistenza",
+      "logoUrl": "URL del logo",
+      "primaryColor": "Colore primario",
+      "secondaryColor": "Colore secondario",
+      "backgroundColor": "Colore di sfondo",
+      "primaryColorHex": "Valore esadecimale del colore primario",
+      "secondaryColorHex": "Valore esadecimale del colore secondario",
+      "backgroundColorHex": "Valore esadecimale del colore di sfondo",
+      "saving": "Salvataggio..."
+    },
+    "page": {
+      "metaTitle": "Impostazioni merchant",
+      "infoTitle": "Informazioni merchant",
+      "infoSubtitle": "Dati di base del merchant",
+      "name": "Nome",
+      "slug": "Slug",
+      "country": "Paese",
+      "defaultCurrency": "Valuta predefinita",
+      "website": "Sito web",
+      "supportEmail": "Email di assistenza",
+      "completeOnboarding": "Completa l'onboarding",
+      "billingTitle": "Fatturazione",
+      "billingSubtitle": "14 giorni di prova gratuita, poi piani da 19 €/mese. Commissione del 5% sulle vendite di voucher.",
+      "status": "Stato",
+      "trialStatus": "Prova gratuita: {days, plural, one {# giorno rimanente} other {# giorni rimanenti}}",
+      "statusActive": "Attivo",
+      "statusInactive": "Inattivo",
+      "currentPlan": "Piano attuale",
+      "trialEnds": "Fine della prova",
+      "periodEnds": "Fine del periodo attuale",
+      "manage": "Gestisci",
+      "payoutsTitle": "Pagamenti",
+      "payoutsEnabled": "Account Stripe collegato e attivo",
+      "payoutsInProgress": "Onboarding in corso: completalo per attivare i pagamenti",
+      "payoutsNotConnected": "Collega Stripe per ricevere i pagamenti delle vendite di voucher",
+      "webhooksTitle": "Webhook",
+      "webhooksSubtitle": "Ricevi notifiche degli eventi in tempo reale via HTTP",
+      "notificationsTitle": "Notifiche",
+      "notificationsSubtitle": "Scegli quali categorie di email ricevere come membro del team."
+    },
+    "brandProfile": {
+      "title": "Profilo del brand",
+      "subtitle": "Personalizza colori, logo e contatti del tuo brand.",
+      "updated": "Profilo del brand aggiornato!",
+      "updateFailed": "Impossibile aggiornare il profilo del brand",
+      "save": "Salva modifiche"
+    },
+    "domains": {
+      "title": "Domini personalizzati",
+      "subtitle": "Collega il tuo dominio e verificalo per il routing del tenant.",
+      "inputLabel": "Dominio personalizzato",
+      "adding": "Aggiunta...",
+      "add": "Aggiungi dominio",
+      "empty": "Nessun dominio configurato.",
+      "statusLine": "Stato: {status}",
+      "statusValue": {
+        "pending": "in attesa",
+        "verified": "verificato"
+      },
+      "verify": "Verifica",
+      "remove": "Rimuovi",
+      "addedTitle": "Dominio aggiunto",
+      "addedDescription": "Verifica il DNS prima di spostare il traffico.",
+      "addErrorTitle": "Errore dominio",
+      "addErrorDescription": "Impossibile aggiungere il dominio.",
+      "verifiedTitle": "Dominio verificato",
+      "verifiedDescription": "Il routing del tenant è ora attivo.",
+      "verifyErrorTitle": "Errore di verifica",
+      "verifyErrorDescription": "Impossibile verificare il dominio.",
+      "removedTitle": "Dominio rimosso",
+      "removeErrorTitle": "Errore di rimozione",
+      "removeErrorDescription": "Impossibile rimuovere il dominio."
+    },
+    "notifications": {
+      "metaTitle": "Preferenze di notifica",
+      "title": "Preferenze di notifica",
+      "intro": "Scegli quali categorie di email ricevere come membro di <name>{merchantName}</name>. Le preferenze sono personali: ogni membro del team gestisce le proprie.",
+      "required": "Obbligatoria",
+      "toggle": "Attiva/disattiva {label}",
+      "unsaved": "Modifiche non salvate",
+      "allSaved": "Tutte le modifiche salvate",
+      "saving": "Salvataggio…",
+      "save": "Salva preferenze",
+      "savedTitle": "Preferenze salvate",
+      "saveFailedTitle": "Salvataggio non riuscito",
+      "saveFailedDescription": "Impossibile aggiornare le preferenze di notifica.",
+      "category": {
+        "orders": {
+          "label": "Nuovi ordini e riscatti",
+          "description": "Email quando un voucher viene acquistato, riscattato o regalato."
+        },
+        "payouts": {
+          "label": "Pagamenti",
+          "description": "Accrediti, errori e blocchi dei pagamenti Stripe."
+        },
+        "fraud_alerts": {
+          "label": "Avvisi di frode e sicurezza",
+          "description": "Riscatti anomali, chargeback, accessi sospetti del team. Non può essere disattivata."
+        },
+        "campaign_updates": {
+          "label": "Ciclo di vita delle campagne",
+          "description": "Campagna pubblicata, in scadenza tra 7 giorni, terminata."
+        },
+        "weekly_digest": {
+          "label": "Riepilogo settimanale delle prestazioni",
+          "description": "Ogni lunedì, il riepilogo di ricavi, riscatti e voucher top della settimana scorsa."
+        },
+        "product_updates": {
+          "label": "Novità di prodotto da GiftHub",
+          "description": "Nuove funzionalità, roadmap, consigli occasionali. Non più di 1 al mese."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Pagamenti merchant",
+      "title": "Pagamenti",
+      "intro": "Collega un account Stripe per ricevere i ricavi delle vendite di voucher direttamente sul tuo conto. Tratteniamo una commissione del 5%; il resto viene trasferito automaticamente al tuo account collegato al momento del checkout.",
+      "stripeAccount": "Account Stripe",
+      "capabilityState": "Stato delle funzionalità",
+      "accountStatus": {
+        "pending": "in attesa",
+        "restricted": "limitato",
+        "enabled": "attivo",
+        "disabled": "disattivato"
+      },
+      "backToSettings": "Torna alle impostazioni",
+      "howTitle": "Come funzionano i pagamenti",
+      "how1": "I clienti pagano al checkout della piattaforma. Incassiamo l'intero importo e lo teniamo su Stripe.",
+      "how2": "Quando un pagamento va a buon fine, Stripe invia il prezzo di vendita meno la nostra commissione del 5% direttamente al tuo account di pagamento.",
+      "how3": "Stripe versa poi l'importo sul tuo conto bancario secondo la cadenza scelta nelle impostazioni di pagamento di Stripe (di solito ogni giorno, un paio di giorni dopo la vendita).",
+      "how4": "Chargeback e rimborsi vengono detratti dal pagamento successivo; il team admin può bloccare manualmente il tuo saldo in caso di frode.",
+      "badge": {
+        "enabled": {
+          "label": "Pagamenti attivi",
+          "description": "Stripe trasferisce i fondi delle vendite di voucher sul tuo conto bancario secondo la cadenza di pagamento programmata."
+        },
+        "restricted": {
+          "label": "Servono altre informazioni",
+          "description": "Stripe ha bisogno di altre informazioni prima di attivare i pagamenti. Apri il link di onboarding qui sotto per continuare."
+        },
+        "disabled": {
+          "label": "Pagamenti disattivati",
+          "description": "Stripe ha disattivato i pagamenti su questo account. Apri la dashboard di Stripe per risolvere i requisiti in sospeso."
+        },
+        "notConnected": {
+          "label": "Non collegato",
+          "description": "Non hai ancora collegato un account Stripe. I pagamenti restano bloccati finché non completi l'onboarding: nel frattempo le vendite di voucher vengono comunque elaborate, ma i fondi restano sul saldo della piattaforma."
+        }
+      },
+      "actions": {
+        "startFailed": "Impossibile avviare l'onboarding Stripe",
+        "startNetworkError": "Errore di rete durante l'avvio dell'onboarding",
+        "dashboardFailed": "Impossibile aprire la dashboard di Stripe",
+        "dashboardNetworkError": "Errore di rete durante l'apertura della dashboard",
+        "disconnectConfirm": "Scollegare questo account Stripe? I pagamenti verranno sospesi finché non lo ricolleghi.",
+        "disconnected": "Account Stripe scollegato",
+        "disconnectFailed": "Impossibile scollegare",
+        "disconnect": "Scollega",
+        "setUp": "Configura i pagamenti con Stripe",
+        "openDashboard": "Apri la dashboard di Stripe",
+        "continueOnboarding": "Continua l'onboarding"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Impossibile caricare i dati del merchant.",
+      "retry": "Riprova",
+      "loading": "Caricamento...",
+      "title": "Completa il tuo profilo",
+      "subtitle": "Configura il profilo del brand del tuo merchant.",
+      "basicInfo": "Informazioni di base",
+      "merchantName": "Nome del merchant *",
+      "brandTitle": "Profilo del brand",
+      "brandSubtitle": "Personalizza colori e logo del tuo brand.",
+      "updateFailed": "Impossibile aggiornare il merchant",
+      "submit": "Completa l'onboarding",
+      "skip": "Salta per ora"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Registro audit",
+      "subtitle": "Monitora tutte le azioni eseguite sul tuo account merchant",
+      "filters": "Filtri",
+      "action": "Azione",
+      "allActions": "Tutte le azioni",
+      "fromDate": "Dalla data",
+      "toDate": "Alla data",
+      "apply": "Applica",
+      "clear": "Cancella",
+      "loading": "Caricamento registro audit...",
+      "loadFailed": "Impossibile caricare il registro audit",
+      "empty": "Nessuna voce nel registro audit.",
+      "columns": {
+        "timestamp": "Data e ora",
+        "actor": "Autore",
+        "action": "Azione",
+        "resource": "Risorsa",
+        "details": "Dettagli"
+      },
+      "unknownActor": "Sconosciuto",
+      "showing": "{from}–{to} di {total}",
+      "pageOf": "Pagina {page} di {totalPages}",
+      "previousPage": "Pagina precedente",
+      "nextPage": "Pagina successiva",
+      "actions": {
+        "voucherCreated": "Voucher creato",
+        "voucherUpdated": "Voucher aggiornato",
+        "voucherPublished": "Voucher pubblicato",
+        "vouchersGenerated": "Voucher generati",
+        "campaignCreated": "Campagna creata",
+        "campaignUpdated": "Campagna aggiornata",
+        "memberInvited": "Membro del team invitato",
+        "memberRemoved": "Membro del team rimosso",
+        "memberRoleChanged": "Ruolo del membro modificato",
+        "apiKeyCreated": "Chiave API creata",
+        "apiKeyRevoked": "Chiave API revocata",
+        "apiKeyUpdated": "Chiave API aggiornata",
+        "eventCreated": "Evento creato",
+        "eventUpdated": "Evento aggiornato",
+        "eventPublished": "Evento pubblicato",
+        "merchantUpdated": "Merchant aggiornato",
+        "reviewReplied": "Risposta a recensione",
+        "settingsUpdate": "Impostazioni aggiornate",
+        "settingsView": "Impostazioni visualizzate",
+        "ticketRedeemed": "Biglietto riscattato"
+      },
+      "resources": {
+        "voucher": "Voucher",
+        "campaign": "Campagna",
+        "giftCard": "Gift card",
+        "event": "Evento",
+        "member": "Membro",
+        "teamMember": "Membro del team",
+        "apiKey": "Chiave API",
+        "webhook": "Webhook",
+        "merchant": "Merchant",
+        "user": "Utente",
+        "review": "Recensione"
+      }
+    },
+    "roles": {
+      "admin": "Admin",
+      "adminDescription": "Accesso completo: gestione di voucher, campagne, membri e impostazioni",
+      "staff": "Staff",
+      "staffDescription": "Accesso operativo: conferma dei riscatti e consultazione dei dati",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Membri del team",
+      "subtitle": "Gestisci il tuo team e i livelli di accesso",
+      "inviteMember": "Invita membro",
+      "inviteTitle": "Invita un membro del team",
+      "emailAddress": "Indirizzo email",
+      "emailPlaceholder": "collega@azienda.com",
+      "emailHint": "L'utente deve avere già un account.",
+      "role": "Ruolo",
+      "inviting": "Invito in corso...",
+      "sendInvitation": "Invia invito",
+      "cancel": "Annulla",
+      "save": "Salva",
+      "loading": "Caricamento membri del team...",
+      "loadFailed": "Impossibile caricare i membri del team",
+      "empty": "Nessun membro del team ancora. Invita il primo membro qui sopra.",
+      "columns": {
+        "member": "Membro",
+        "role": "Ruolo",
+        "joined": "Iscritto il",
+        "actions": "Azioni"
+      },
+      "unnamed": "Senza nome",
+      "memberRole": "Ruolo del membro",
+      "changeRole": "Cambia ruolo",
+      "removeMember": "Rimuovi membro",
+      "inviteFailed": "Impossibile invitare il membro",
+      "invited": "Membro invitato",
+      "updateRoleFailed": "Impossibile aggiornare il ruolo",
+      "roleUpdated": "Ruolo aggiornato",
+      "removeConfirm": "Rimuovere {name} dal team?",
+      "remove": "Rimuovi",
+      "removeFailed": "Impossibile rimuovere il membro",
+      "removed": "Membro rimosso"
+    },
+    "inviteForm": {
+      "title": "Invita un membro del team",
+      "subtitle": "Aggiungi un membro del team tramite il suo indirizzo email.",
+      "email": "Email",
+      "emailPlaceholder": "membro@example.com",
+      "emailHint": "L'utente deve avere un account. Se non ce l'ha, deve prima registrarsi.",
+      "role": "Ruolo",
+      "roleHint": "Gli admin possono gestire voucher, campagne e membri del team. Lo staff può confermare i riscatti.",
+      "inviting": "Invito in corso...",
+      "submit": "Invita membro",
+      "redirectingToBilling": "{message} Reindirizzamento alla fatturazione..."
+    },
+    "referrals": {
+      "title": "Analitiche referral",
+      "subtitle": "Monitora prestazioni e premi dei referral.",
+      "stats": {
+        "total": "Referral totali",
+        "totalHint": "Tutti i referral tracciati",
+        "opened": "Aperti",
+        "openedHint": "Visualizzati o riscattati",
+        "redeemed": "Riscattati",
+        "redeemedHint": "Referral convertiti",
+        "conversionRate": "Tasso di conversione",
+        "conversionRateHint": "Riscattati / totali"
+      },
+      "statusBreakdown": "Distribuzione per stato",
+      "creditsIssued": "Crediti emessi {amount}",
+      "noActivity": "Nessuna attività referral ancora.",
+      "topReferrers": "Migliori segnalatori",
+      "topReferrersHint": "Utenti che generano più referral.",
+      "noReferrals": "Nessun referral ancora.",
+      "unknownUser": "Utente sconosciuto",
+      "referralCount": "{count, plural, one {# referral} other {# referral}}",
+      "recent": "Referral recenti",
+      "recentHint": "Ultimi referral dai clienti.",
+      "noRecent": "Nessun referral recente.",
+      "voucherFallback": "Voucher",
+      "status": {
+        "created": "Creato",
+        "opened": "Aperto",
+        "redeemed": "Riscattato",
+        "expired": "Scaduto",
+        "blocked": "Bloccato"
+      }
+    },
+    "emailCampaigns": {
+      "title": "Campagne email",
+      "newCampaign": "Nuova campagna",
+      "notConfigured": "L'invio di email non è ancora configurato su questa piattaforma. Puoi creare campagne e vederne l'anteprima, ma non potranno essere inviate finché non viene collegato un provider email.",
+      "notConfiguredShort": "L'invio di email non è ancora configurato su questa piattaforma",
+      "createTitle": "Crea campagna",
+      "campaignName": "Nome campagna",
+      "campaignNamePlaceholder": "Newsletter saldi estivi",
+      "subjectLine": "Oggetto",
+      "subjectPlaceholder": "Non perderti le nostre offerte estive!",
+      "recipients": "Destinatari",
+      "recipientFilter": {
+        "all": "Tutti i clienti",
+        "redeemed30d": "Hanno riscattato negli ultimi 30 giorni",
+        "inactive": "Clienti inattivi"
+      },
+      "schedule": "Programmazione (facoltativa)",
+      "emailSections": "Sezioni email",
+      "sectionTypes": {
+        "header": "Intestazione",
+        "text": "Testo",
+        "image": "Immagine",
+        "button": "Pulsante",
+        "divider": "Separatore",
+        "voucherCard": "Voucher"
+      },
+      "creating": "Creazione...",
+      "scheduleCampaign": "Programma campagna",
+      "saveDraft": "Salva come bozza",
+      "preview": "Anteprima",
+      "editor": {
+        "moveUp": "Sposta su",
+        "moveDown": "Sposta giù",
+        "removeSection": "Rimuovi sezione",
+        "title": "Titolo",
+        "subtitle": "Sottotitolo (facoltativo)",
+        "textContent": "Inserisci il testo...",
+        "imageUrl": "URL dell'immagine",
+        "altText": "Testo alternativo",
+        "buttonLabel": "Etichetta del pulsante",
+        "buttonUrl": "URL del pulsante",
+        "dividerHint": "Linea di separazione orizzontale",
+        "voucherTitle": "Titolo del voucher",
+        "voucherValue": "Valore (ad es. 20% DI SCONTO)",
+        "voucherCode": "Codice (ad es. SAVE20)",
+        "voucherExpiry": "Scadenza (ad es. 31 dic 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Titolo intestazione",
+        "textContent": "Contenuto testuale...",
+        "imagePlaceholder": "Segnaposto immagine",
+        "button": "Pulsante",
+        "voucher": "Voucher",
+        "validUntil": "Valido fino al {date}"
+      },
+      "loading": "Caricamento...",
+      "empty": "Nessuna campagna email ancora",
+      "columns": {
+        "name": "Nome",
+        "subject": "Oggetto",
+        "status": "Stato",
+        "recipients": "Destinatari",
+        "opens": "Aperture",
+        "created": "Creata",
+        "actions": "Azioni"
+      },
+      "status": {
+        "draft": "bozza",
+        "scheduled": "programmata",
+        "sent": "inviata"
+      },
+      "send": "Invia",
+      "delete": "Elimina",
+      "deleteCampaign": "Elimina campagna",
+      "toasts": {
+        "missingFields": "Campi mancanti",
+        "missingFieldsDescription": "Nome e oggetto sono obbligatori.",
+        "created": "Campagna creata",
+        "error": "Errore",
+        "createFailed": "Impossibile creare la campagna.",
+        "sendConfirm": "Vuoi davvero inviare subito questa campagna?",
+        "sendFailedStatus": "Invio non riuscito (errore {status}).",
+        "partlySent": "Campagna inviata in parte",
+        "partlySentDescription": "Inviata a {sent} destinatari su {total}. {failed, plural, one {# email non è stata inviata.} other {# email non sono state inviate.}}",
+        "sent": "Campagna inviata",
+        "sentDescription": "Inviata a {sent, plural, one {# destinatario} other {# destinatari}}.",
+        "sendFailed": "Invio non riuscito",
+        "deleteConfirm": "Eliminare questa campagna?",
+        "deleted": "Campagna eliminata",
+        "deleteFailed": "Eliminazione non riuscita."
+      }
+    },
+    "apiKeys": {
+      "title": "Chiavi API",
+      "subtitle": "Gestisci le chiavi API per l'accesso programmatico ai dati del tuo merchant",
+      "createKey": "Crea chiave",
+      "createdNotice": "Chiave API creata! Copiala ora: non verrà più mostrata.",
+      "copyKey": "Copia chiave",
+      "createTitle": "Crea chiave API",
+      "keyName": "Nome della chiave",
+      "keyNamePlaceholder": "ad es. Integrazione POS di produzione",
+      "permissions": "Autorizzazioni",
+      "creating": "Creazione...",
+      "submit": "Crea chiave API",
+      "cancel": "Annulla",
+      "loading": "Caricamento chiavi API...",
+      "empty": "Nessuna chiave API ancora. Creane una per iniziare.",
+      "createdOn": "Creata il {date}",
+      "lastUsed": "Ultimo uso {date}",
+      "expires": "Scade il {date}",
+      "revokeKey": "Revoca chiave",
+      "loadFailed": "Impossibile caricare le chiavi API",
+      "required": "Sono obbligatori il nome e almeno un'autorizzazione",
+      "createFailed": "Impossibile creare la chiave API",
+      "created": "Chiave API creata",
+      "revokeConfirm": "Revocare la chiave API \"{name}\"? L'azione non può essere annullata.",
+      "revoke": "Revoca",
+      "revoked": "Chiave API revocata",
+      "revokeFailed": "Impossibile revocare la chiave API",
+      "copied": "Copiato negli appunti",
+      "groups": {
+        "vouchers": "Voucher",
+        "campaigns": "Campagne",
+        "giftCards": "Gift card",
+        "customers": "Clienti",
+        "analytics": "Analitiche",
+        "events": "Eventi"
+      },
+      "permissionLabels": {
+        "voucherRead": "Leggi voucher",
+        "voucherCreate": "Crea voucher",
+        "voucherRedeem": "Riscatta voucher",
+        "campaignRead": "Leggi campagne",
+        "campaignCreate": "Crea campagne",
+        "giftCardRead": "Leggi gift card",
+        "giftCardRedeem": "Riscatta gift card",
+        "customerRead": "Leggi clienti",
+        "analyticsRead": "Leggi analitiche",
+        "eventRead": "Leggi eventi",
+        "eventCheckin": "Check-in eventi"
+      }
+    },
+    "webhooks": {
+      "title": "Webhook",
+      "subtitle": "Ricevi notifiche degli eventi via HTTP",
+      "addWebhook": "Aggiungi webhook",
+      "secretNotice": "Secret del webhook (mostrato una sola volta):",
+      "copySecret": "Copia secret",
+      "copied": "Copiato!",
+      "newTitle": "Nuovo webhook",
+      "endpointUrl": "URL dell'endpoint",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Eventi",
+      "submit": "Crea webhook",
+      "loading": "Caricamento...",
+      "empty": "Nessun webhook configurato",
+      "createdOn": "Creato il {date}",
+      "deliveriesCount": "{count, plural, one {# consegna} other {# consegne}}",
+      "sendTest": "Invia test",
+      "viewDeliveries": "Registro consegne",
+      "disable": "Disattiva",
+      "enable": "Attiva",
+      "deleteWebhook": "Elimina webhook",
+      "deliveryLog": "Registro consegne",
+      "noDeliveries": "Nessuna consegna ancora",
+      "deliveryFailed": "Non riuscita",
+      "attempts": "{count, plural, one {# tentativo} other {# tentativi}}",
+      "loadFailed": "Impossibile caricare i webhook",
+      "required": "Sono obbligatori l'URL e almeno un evento",
+      "created": "Webhook creato",
+      "createFailed": "Impossibile creare il webhook",
+      "deleted": "Webhook eliminato",
+      "deleteFailed": "Impossibile eliminare il webhook",
+      "updateFailed": "Impossibile aggiornare il webhook",
+      "testDelivered": "Test consegnato! Stato: {status}",
+      "testFailed": "Test non riuscito: {error}",
+      "statusCode": "Stato {status}",
+      "testSendFailed": "Impossibile inviare il webhook di test",
+      "loadDeliveriesFailed": "Impossibile caricare le consegne"
+    }
   }
 }

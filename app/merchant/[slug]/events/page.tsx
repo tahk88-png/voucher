@@ -1,5 +1,4 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Events', noIndex: true });
 
 import { notFound, redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -9,20 +8,27 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { formatCurrency } from '@/lib/utils';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { isSupportedLocale, localeToIntlLocale } from '@/lib/locale-config';
 import { Calendar, DollarSign, Ticket, TrendingUp } from 'lucide-react';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { StatsCard } from '@/components/ui/stats-card';
 import { AreaChart } from '@/components/ui/charts';
 
-const statusLabel: Record<string, string> = {
-  draft: 'Draft',
-  published: 'Active',
-  sold_out: 'Sold out',
-  cancelled: 'Cancelled',
-  ended: 'Ended',
-};
+const EVENT_STATUSES = ['draft', 'published', 'sold_out', 'cancelled', 'ended'] as const;
+type EventStatus = (typeof EVENT_STATUSES)[number];
+const isEventStatus = (value: string): value is EventStatus =>
+  (EVENT_STATUSES as readonly string[]).includes(value);
+
+const EVENT_TYPES = ['festival', 'internal', 'concert', 'workshop', 'other'] as const;
+type EventType = (typeof EVENT_TYPES)[number];
+const isEventType = (value: string): value is EventType => (EVENT_TYPES as readonly string[]).includes(value);
+
+export async function generateMetadata() {
+  const t = await getTranslations('merchantEvents');
+  return pageMetadata({ title: t('meta.title'), noIndex: true });
+}
 
 const statusStyles: Record<string, string> = {
   draft: 'bg-[#F2EDE3] text-[var(--text-muted)]',
@@ -43,6 +49,10 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
 
   const t = await getTranslations('nav');
+  const tE = await getTranslations('merchantEvents');
+  const locale = await getLocale();
+  const intlLocale = isSupportedLocale(locale) ? localeToIntlLocale[locale] : 'en-GB';
+  const weekdayFormat = new Intl.DateTimeFormat(intlLocale, { weekday: 'short' });
 
   const events = await prisma.event.findMany({
     where: { merchantId: merchant.id },
@@ -108,7 +118,7 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
   const dayBuckets = eachDayOfInterval({ start: rangeStart, end: rangeEnd });
   const dayIndex = new Map(dayBuckets.map((day, index) => [format(day, 'yyyy-MM-dd'), index]));
   const chartData = dayBuckets.map((day) => ({
-    date: format(day, 'EEE'),
+    date: weekdayFormat.format(day),
     revenue: 0,
   }));
 
@@ -136,22 +146,37 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
             </div>
             <div>
               <h1 className="text-2xl font-semibold text-[var(--text)]">{t('events')}</h1>
-              <p className="text-sm text-[var(--text-muted)]">Manage your events and tickets</p>
+              <p className="text-sm text-[var(--text-muted)]">{tE('list.subtitle')}</p>
             </div>
           </div>
           <WarmButton asChild>
-            <Link href={`/merchant/${slug}/events/new`}>Create event</Link>
+            <Link href={`/merchant/${slug}/events/new`}>{tE('list.createEvent')}</Link>
           </WarmButton>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
-          <StatsCard title="Total events" value={totalEvents} description="All events" icon={Calendar} />
-          <StatsCard title="Active" value={activeEvents} description="Published or sold out" icon={TrendingUp} />
-          <StatsCard title="Tickets sold" value={totalSoldTickets} description="Across all events" icon={Ticket} />
           <StatsCard
-            title="Revenue"
+            title={tE('list.stats.totalTitle')}
+            value={totalEvents}
+            description={tE('list.stats.totalDescription')}
+            icon={Calendar}
+          />
+          <StatsCard
+            title={tE('list.stats.activeTitle')}
+            value={activeEvents}
+            description={tE('list.stats.activeDescription')}
+            icon={TrendingUp}
+          />
+          <StatsCard
+            title={tE('list.stats.soldTitle')}
+            value={totalSoldTickets}
+            description={tE('list.stats.soldDescription')}
+            icon={Ticket}
+          />
+          <StatsCard
+            title={tE('list.stats.revenueTitle')}
             value={formatCurrency(revenueTotal, merchant.defaultCurrency)}
-            description="Paid ticket sales"
+            description={tE('list.stats.revenueDescription')}
             icon={DollarSign}
           />
         </div>
@@ -163,13 +188,13 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
                 <Calendar className="h-8 w-8 text-[var(--text-faint)]" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2 text-[var(--text)]">No events yet</h3>
+                <h3 className="text-lg font-semibold mb-2 text-[var(--text)]">{tE('list.empty.title')}</h3>
                 <p className="text-sm text-[var(--text-muted)] mb-4">
-                  Create an event to sell tickets and manage attendance.
+                  {tE('list.empty.description')}
                 </p>
               </div>
               <WarmButton asChild>
-                <Link href={`/merchant/${slug}/events/new`}>Create your first event</Link>
+                <Link href={`/merchant/${slug}/events/new`}>{tE('list.empty.cta')}</Link>
               </WarmButton>
             </div>
           </WarmCard>
@@ -178,7 +203,7 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
             <div className="lg:col-span-2">
               <div className="grid gap-4 sm:grid-cols-2">
                 {eventsWithStats.map((event) => {
-                  const statusText = statusLabel[event.status] || event.status;
+                  const statusText = isEventStatus(event.status) ? tE(`status.${event.status}`) : event.status;
                   const statusClass = statusStyles[event.status] || statusStyles.draft;
                   const pct = event.maxCapacity > 0 ? Math.min(100, (event.soldTickets / event.maxCapacity) * 100) : 0;
                   return (
@@ -187,11 +212,7 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
                         <div>
                           <h3 className="text-lg font-semibold text-[var(--text)]">{event.name}</h3>
                           <p className="text-sm text-[var(--text-faint)]">
-                            {event.type === 'festival'
-                              ? 'Festival'
-                              : event.type === 'internal'
-                              ? 'Internal event'
-                              : event.type}
+                            {isEventType(event.type) ? tE(`type.${event.type}`) : event.type}
                           </p>
                         </div>
                         <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${statusClass}`}>
@@ -201,27 +222,27 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
 
                       <div className="mt-3 space-y-2 text-sm text-[var(--text-muted)]">
                         <div className="flex justify-between">
-                          <span>Date:</span>
+                          <span>{tE('list.card.date')}</span>
                           <span className="font-medium text-[var(--text)]">
-                            {new Date(event.eventDate).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+                            {new Date(event.eventDate).toLocaleDateString(intlLocale, { dateStyle: 'medium' })}
                           </span>
                         </div>
                         {event.location && (
                           <div className="flex justify-between">
-                            <span>Location:</span>
+                            <span>{tE('list.card.location')}</span>
                             <span className="font-medium text-[var(--text)] truncate ml-2">{event.location}</span>
                           </div>
                         )}
                         <div className="flex justify-between">
-                          <span>Price:</span>
+                          <span>{tE('list.card.price')}</span>
                           <span className="font-medium text-[var(--text)]">
-                            {event.price > 0 ? formatCurrency(event.price, event.currency) : 'Free'}
+                            {event.price > 0 ? formatCurrency(event.price, event.currency) : tE('list.card.free')}
                           </span>
                         </div>
                         <div className="flex justify-between">
-                          <span>Tickets:</span>
+                          <span>{tE('list.card.tickets')}</span>
                           <span className="font-medium text-[var(--text)]">
-                            {event.soldTickets} / {event.maxCapacity} sold
+                            {tE('list.card.sold', { sold: event.soldTickets, capacity: event.maxCapacity })}
                           </span>
                         </div>
                       </div>
@@ -234,10 +255,10 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
 
                       <div className="mt-4 flex gap-2">
                         <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                          <Link href={`/merchant/${slug}/events/${event.id}`}>View</Link>
+                          <Link href={`/merchant/${slug}/events/${event.id}`}>{tE('list.card.view')}</Link>
                         </WarmButton>
                         <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                          <Link href={`/merchant/${slug}/events/${event.id}/edit`}>Edit</Link>
+                          <Link href={`/merchant/${slug}/events/${event.id}/edit`}>{tE('list.card.edit')}</Link>
                         </WarmButton>
                       </div>
                     </WarmCard>
@@ -250,14 +271,14 @@ export default async function EventsPage({ params }: { params: Promise<{ slug: s
               <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h2 className="text-base font-semibold text-[var(--text)]">Weekly ticket revenue</h2>
-                    <p className="text-sm text-[var(--text-muted)]">Paid ticket sales over 7 days.</p>
+                    <h2 className="text-base font-semibold text-[var(--text)]">{tE('list.weeklyRevenue.title')}</h2>
+                    <p className="text-sm text-[var(--text-muted)]">{tE('list.weeklyRevenue.description')}</p>
                   </div>
                   <span className="text-xs uppercase tracking-wide text-[var(--text-faint)]">{merchant.defaultCurrency}</span>
                 </div>
                 <AreaChart
                   data={chartData}
-                  areas={[{ dataKey: 'revenue', name: 'Revenue', color: '#cc785c' }]}
+                  areas={[{ dataKey: 'revenue', name: tE('list.weeklyRevenue.series'), color: '#cc785c' }]}
                   xAxisKey="date"
                   height={240}
                   showLegend={false}

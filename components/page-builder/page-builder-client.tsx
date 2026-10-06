@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import { useTranslations } from "next-intl"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import { Input } from "@/components/ui/input"
@@ -40,27 +41,27 @@ interface PageBuilderClientProps {
   merchantSlug: string
   merchantName: string
   initialPages: PageBuilderConfig[]
+  /** False when no AI provider is configured: the AI tools are hidden. */
+  aiEnabled: boolean
 }
 
+// Labels are translated at render time (pageBuilder.client.process.<id>);
+// `goal` is sent to the AI as-is.
 const processOptions = [
   {
     id: "store_launch",
-    label: "Storefront launch checklist",
     goal: "Launch a store page with vouchers, campaigns, and clean checkout flow.",
   },
   {
     id: "rental_launch",
-    label: "Rental page launch checklist",
     goal: "Launch a rental page with availability, deposit, and pickup flow.",
   },
   {
     id: "campaign_ops",
-    label: "Weekly campaign operations",
     goal: "Keep weekly campaigns fresh, with promotion and analytics tasks.",
   },
   {
     id: "support_ops",
-    label: "Support readiness checklist",
     goal: "Set up support, FAQs, and response templates for customers.",
   },
 ]
@@ -69,7 +70,14 @@ export default function PageBuilderClient({
   merchantSlug,
   merchantName,
   initialPages,
+  aiEnabled,
 }: PageBuilderClientProps) {
+  const t = useTranslations("pageBuilder")
+  /** Human-readable name for a stored section/add-on id. */
+  const sectionLabel = (id: string) =>
+    PAGE_SECTION_CATALOG.some((item) => item.id === id) ? t(`catalog.sections.${id}.label`) : id
+  const addonLabel = (id: string) =>
+    PAGE_ADDON_CATALOG.some((item) => item.id === id) ? t(`catalog.addons.${id}.label`) : id
   const [pages, setPages] = useState<PageBuilderConfig[]>(initialPages)
   const [activeType, setActiveType] = useState<PageBuilderType>("store")
   const [isSaving, setIsSaving] = useState(false)
@@ -117,15 +125,15 @@ export default function PageBuilderClient({
       })
       const payload = await res.json()
       if (!res.ok) {
-        throw new Error(payload.error || "Failed to save page")
+        throw new Error(payload.error || t("client.toast.saveFailed"))
       }
       const updated = payload.page as PageBuilderConfig
       setPages((prev) =>
         prev.map((page) => (page.type === activeType ? { ...page, ...updated } : page))
       )
-      showSuccess("Page builder updated.")
+      showSuccess(t("client.toast.saved"))
     } catch (error) {
-      showError(error instanceof Error ? error.message : "Failed to save page")
+      showError(error instanceof Error ? error.message : t("client.toast.saveFailed"))
     } finally {
       setIsSaving(false)
     }
@@ -151,7 +159,7 @@ export default function PageBuilderClient({
       const payload = await res.json()
       if (!res.ok) {
         setVibeUsage(payload.usage || null)
-        throw new Error(payload.error || "Vibe agent failed")
+        throw new Error(payload.error || t("client.toast.vibeFailed"))
       }
       const content = payload.content as VibeResponse
       const filteredSections = content.sections.filter((id) =>
@@ -167,9 +175,9 @@ export default function PageBuilderClient({
         addons: filteredAddons,
       })
       setVibeUsage(payload.usage || null)
-      showSuccess("Vibe layout generated.")
+      showSuccess(t("client.toast.layoutGenerated"))
     } catch (error) {
-      showError(error instanceof Error ? error.message : "Failed to generate layout")
+      showError(error instanceof Error ? error.message : t("client.toast.generateFailed"))
     } finally {
       setIsGenerating(false)
     }
@@ -193,13 +201,13 @@ export default function PageBuilderClient({
       const payload = await res.json()
       if (!res.ok) {
         setAgentUsage(payload.usage || null)
-        throw new Error(payload.error || "Agent failed")
+        throw new Error(payload.error || t("client.toast.agentFailed"))
       }
       setAgentResult(payload.content as AgentResult)
       setAgentUsage(payload.usage || null)
-      showSuccess("Process plan generated.")
+      showSuccess(t("client.toast.planGenerated"))
     } catch (error) {
-      showError(error instanceof Error ? error.message : "Failed to run agent")
+      showError(error instanceof Error ? error.message : t("client.toast.runAgentFailed"))
     } finally {
       setAgentLoading(false)
     }
@@ -208,7 +216,7 @@ export default function PageBuilderClient({
   if (!activePage) {
     return (
       <div className="max-w-4xl mx-auto">
-        <WarmCard padding="lg">No page builder data available.</WarmCard>
+        <WarmCard padding="lg">{t("client.noData")}</WarmCard>
       </div>
     )
   }
@@ -216,16 +224,16 @@ export default function PageBuilderClient({
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold text-[var(--text)]">Page Builder</h1>
+        <h1 className="text-3xl font-bold text-[var(--text)]">{t("client.title")}</h1>
         <p className="text-[var(--text-muted)]">
-          Build fast storefront and rental pages with modular sections, add-ons, and AI help.
+          {aiEnabled ? t("client.introAi") : t("client.intro")}
         </p>
       </div>
 
       <Tabs value={activeType} onValueChange={(value) => setActiveType(value as PageBuilderType)}>
         <TabsList className="bg-[var(--surface)] border border-[var(--border)]">
-          <TabsTrigger value="store">Storefront</TabsTrigger>
-          <TabsTrigger value="rental">Rental</TabsTrigger>
+          <TabsTrigger value="store">{t("client.tabs.store")}</TabsTrigger>
+          <TabsTrigger value="rental">{t("client.tabs.rental")}</TabsTrigger>
         </TabsList>
 
         {(["store", "rental"] as PageBuilderType[]).map((type) => (
@@ -236,18 +244,18 @@ export default function PageBuilderClient({
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center justify-between gap-4 mb-4">
                     <div>
-                      <h2 className="text-lg font-semibold text-[var(--text)]">Page details</h2>
-                      <p className="text-sm text-[var(--text-muted)]">Title, subtitle, and layout.</p>
+                      <h2 className="text-lg font-semibold text-[var(--text)]">{t("client.details.title")}</h2>
+                      <p className="text-sm text-[var(--text-muted)]">{t("client.details.subtitle")}</p>
                     </div>
                     <WarmButton onClick={handleSave} isLoading={isSaving}>
                       <Save className="h-4 w-4 mr-2" />
-                      Save
+                      {t("client.details.save")}
                     </WarmButton>
                   </div>
                   <div className="space-y-4">
                     <div>
                       <label htmlFor="page-builder-title" className="text-sm font-medium text-[var(--text)]">
-                        Page title
+                        {t("client.details.pageTitle")}
                       </label>
                       <Input
                         id="page-builder-title"
@@ -258,7 +266,7 @@ export default function PageBuilderClient({
                     </div>
                     <div>
                       <label htmlFor="page-builder-subtitle" className="text-sm font-medium text-[var(--text)]">
-                        Subtitle
+                        {t("client.details.subtitleLabel")}
                       </label>
                       <Input
                         id="page-builder-subtitle"
@@ -274,19 +282,24 @@ export default function PageBuilderClient({
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center justify-between gap-4 mb-4">
                     <div>
-                      <h2 className="text-lg font-semibold text-[var(--text)]">Sections</h2>
+                      <h2 className="text-lg font-semibold text-[var(--text)]">{t("client.sections.title")}</h2>
                       <p className="text-sm text-[var(--text-muted)]">
-                        Drag to reorder, expand to configure, or preview your layout.
+                        {t("client.sections.subtitle")}
                       </p>
                     </div>
-                    <WarmButton variant="outline" onClick={handleGenerate} isLoading={isGenerating}>
-                      <Sparkles className="h-4 w-4 mr-2" />
-                      Vibe generate
-                    </WarmButton>
+                    {aiEnabled && (
+                      <WarmButton variant="outline" onClick={handleGenerate} isLoading={isGenerating}>
+                        <Sparkles className="h-4 w-4 mr-2" />
+                        {t("client.sections.suggestLayout")}
+                      </WarmButton>
+                    )}
                   </div>
                   {vibeUsage && (
                     <p className="text-xs text-[var(--text-faint)] mb-4">
-                      Vibe uses left: {vibeUsage.remaining}/{vibeUsage.limit}
+                      {t("client.sections.suggestionsLeft", {
+                        remaining: vibeUsage.remaining,
+                        limit: vibeUsage.limit,
+                      })}
                     </p>
                   )}
                   <DragDropEditor
@@ -300,11 +313,12 @@ export default function PageBuilderClient({
 
                 {/* Add-ons */}
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
-                  <h2 className="text-lg font-semibold text-[var(--text)] mb-2">Add-ons</h2>
-                  <p className="text-sm text-[var(--text-muted)] mb-4">Extra widgets and marketing layers.</p>
+                  <h2 className="text-lg font-semibold text-[var(--text)] mb-2">{t("client.addons.title")}</h2>
+                  <p className="text-sm text-[var(--text-muted)] mb-4">{t("client.addons.subtitle")}</p>
                   <div className="grid gap-3 sm:grid-cols-2">
                     {PAGE_ADDON_CATALOG.map((addon) => {
                       const enabled = activePage.addons.includes(addon.id)
+                      const label = addonLabel(addon.id)
                       return (
                         <button
                           key={addon.id}
@@ -316,10 +330,16 @@ export default function PageBuilderClient({
                               : "border-[#F2EDE3] bg-[var(--surface)] hover:border-[var(--primary)]"
                           }`}
                           aria-pressed={enabled}
-                          aria-label={`${enabled ? "Disable" : "Enable"} add-on ${addon.label}`}
+                          aria-label={
+                            enabled
+                              ? t("client.addons.disable", { label })
+                              : t("client.addons.enable", { label })
+                          }
                         >
-                          <div className="font-medium text-[var(--text)]">{addon.label}</div>
-                          <div className="text-xs text-[var(--text-faint)] mt-1">{addon.description}</div>
+                          <div className="font-medium text-[var(--text)]">{label}</div>
+                          <div className="text-xs text-[var(--text-faint)] mt-1">
+                            {t(`catalog.addons.${addon.id}.description`)}
+                          </div>
                         </button>
                       )
                     })}
@@ -330,32 +350,39 @@ export default function PageBuilderClient({
               {/* Sidebar */}
               <div className="space-y-6">
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
-                  <h3 className="text-base font-semibold text-[var(--text)] mb-2">Live summary</h3>
+                  <h3 className="text-base font-semibold text-[var(--text)] mb-2">{t("client.summary.title")}</h3>
                   <p className="text-sm text-[var(--text-muted)] mb-4">
-                    {activePage.title} - {activePage.sections.length} sections - {activePage.addons.length} add-ons
+                    {t("client.summary.line", {
+                      title: activePage.title,
+                      sections: activePage.sections.length,
+                      addons: activePage.addons.length,
+                    })}
                   </p>
                   <div className="space-y-2 text-xs text-[var(--text-faint)]">
                     <div>
-                      <span className="font-semibold text-[var(--text)]">Sections:</span>{" "}
-                      {activePage.sections.join(", ")}
+                      <span className="font-semibold text-[var(--text)]">{t("client.summary.sectionsLabel")}</span>{" "}
+                      {activePage.sections.map((id) => sectionLabel(id)).join(", ")}
                     </div>
                     <div>
-                      <span className="font-semibold text-[var(--text)]">Add-ons:</span>{" "}
-                      {activePage.addons.length ? activePage.addons.join(", ") : "None"}
+                      <span className="font-semibold text-[var(--text)]">{t("client.summary.addonsLabel")}</span>{" "}
+                      {activePage.addons.length
+                        ? activePage.addons.map((id) => addonLabel(id)).join(", ")
+                        : t("client.summary.none")}
                     </div>
                   </div>
                 </WarmCard>
 
+                {aiEnabled && (
                 <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex items-center gap-2 mb-3">
                     <Bot className="h-4 w-4 text-[var(--danger)]" />
-                  <h3 className="text-base font-semibold text-[var(--text)]">GPT process agent</h3>
+                  <h3 className="text-base font-semibold text-[var(--text)]">{t("client.assistant.title")}</h3>
                 </div>
                 <p className="text-sm text-[var(--text-muted)] mb-4">
-                  Generate action plans and operational checklists.
+                  {t("client.assistant.subtitle")}
                 </p>
                 <label htmlFor="page-builder-agent-goal" className="text-sm font-medium text-[var(--text)]">
-                  Process goal
+                  {t("client.assistant.goalLabel")}
                 </label>
                 <select
                   id="page-builder-agent-goal"
@@ -365,7 +392,7 @@ export default function PageBuilderClient({
                   >
                     {processOptions.map((option) => (
                       <option key={option.id} value={option.id}>
-                        {option.label}
+                        {t(`client.process.${option.id}`)}
                       </option>
                     ))}
                   </select>
@@ -375,14 +402,18 @@ export default function PageBuilderClient({
                     variant="outline"
                     className="w-full mt-3"
                   >
-                    Run agent
+                    {t("client.assistant.createChecklist")}
                   </WarmButton>
                   {agentUsage && (
                     <p className="text-xs text-[var(--text-faint)] mt-2">
-                      Agent uses left: {agentUsage.remaining}/{agentUsage.limit}
+                      {t("client.assistant.checklistsLeft", {
+                        remaining: agentUsage.remaining,
+                        limit: agentUsage.limit,
+                      })}
                     </p>
                   )}
                 </WarmCard>
+                )}
 
                 {agentResult && (
                   <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">

@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation"
+import { getTranslations } from "next-intl/server"
 import TenantShell from "@/components/layout/tenant-shell"
 import ShopClient from "@/components/shop/shop-client"
 import { prisma } from "@/lib/prisma"
@@ -10,6 +11,7 @@ export default async function ShopPage() {
     redirect("/hub")
   }
 
+  const t = await getTranslations("shop.shopPage")
   const products = await prisma.product.findMany({
     where: { merchantId: context.tenant.id, status: "active" },
     orderBy: { createdAt: "desc" },
@@ -19,8 +21,8 @@ export default async function ShopPage() {
     <TenantShell merchant={context.tenant}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Shop</h1>
-          <p className="text-sm text-[#6B5744]">Browse products and add them to cart.</p>
+          <h1 className="text-2xl font-semibold text-[#2D2721]">{t("title")}</h1>
+          <p className="text-sm text-[#6B5744]">{t("subtitle")}</p>
         </div>
         <ShopClient
           merchantId={context.tenant.id}

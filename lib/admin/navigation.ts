@@ -23,15 +23,23 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
   // Users & Moderation
   { label: "Users", href: "/admin/users", icon: "Users", requiredPermission: "admin.users.read", section: "Users & Moderation" },
   { label: "Moderation", href: "/admin/moderation", icon: "Shield", requiredPermission: "admin.moderation.read", section: "Users & Moderation" },
+  { label: "Appeals", href: "/admin/appeals", icon: "FileText", requiredPermission: "admin.moderation.appeal_review", section: "Users & Moderation" },
+  { label: "Fraud", href: "/admin/fraud", icon: "Shield", requiredPermission: "admin.moderation.read", section: "Users & Moderation" },
   { label: "Support", href: "/admin/support", icon: "Headphones", requiredPermission: "admin.support.read", section: "Users & Moderation" },
 
   // Business
   { label: "Merchants", href: "/admin/merchants", icon: "Store", requiredPermission: "admin.merchants.read", section: "Business" },
+  { label: "Sponsored Placements", href: "/admin/sponsored-placements", icon: "BarChart3", requiredPermission: "admin.merchants.read", section: "Business" },
   { label: "Billing", href: "/admin/billing", icon: "CreditCard", requiredPermission: "admin.billing.read", section: "Business" },
-  { label: "Connect", href: "/admin/connect", icon: "Banknote", requiredPermission: "admin.billing.read", section: "Business" },
+  { label: "Payouts (Connect)", href: "/admin/connect", icon: "CreditCard", requiredPermission: "admin.billing.read", section: "Business" },
+  { label: "VAT", href: "/admin/vat", icon: "FileText", requiredPermission: "admin.billing.read", section: "Business" },
 
   // Analytics
   { label: "Analytics", href: "/admin/analytics", icon: "BarChart3", requiredPermission: "admin.analytics.read", section: "Analytics" },
+  { label: "A/B Tests", href: "/admin/ab-tests", icon: "Flag", requiredPermission: "admin.flags.read", section: "Analytics" },
+
+  // Marketplace content
+  { label: "Gifts", href: "/admin/gifts", icon: "Store", requiredPermission: "admin.flags.read", section: "Marketplace" },
 
   // Operations
   { label: "Email System", href: "/admin/email", icon: "Mail", requiredPermission: "admin.email.read", section: "Operations" },

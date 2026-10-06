@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { TrendingUp, TrendingDown } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export interface StatComparisonProps {
   current: number
@@ -18,7 +19,7 @@ function formatValue(
 ): string {
   switch (format) {
     case 'currency':
-      return `${currencySymbol}${value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+      return `${currencySymbol}${value.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
     case 'percent':
       return `${value.toFixed(1)}%`
     case 'number':
@@ -32,8 +33,9 @@ export function StatComparison({
   previous,
   label,
   format = 'number',
-  currencySymbol = '$',
+  currencySymbol = '€',
 }: StatComparisonProps) {
+  const t = useTranslations('dsComponents.statComparison')
   const [entered, setEntered] = useState(false)
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export function StatComparison({
       <div className="mb-2">
         <div className="flex items-center justify-between mb-1">
           <span className="text-xs" style={{ color: 'var(--text-muted, #6b7280)' }}>
-            Current
+            {t('current')}
           </span>
           <span className="text-base font-bold" style={{ color: 'var(--text, #111)' }}>
             {formatValue(current, format, currencySymbol)}
@@ -89,7 +91,7 @@ export function StatComparison({
       <div className="mb-3">
         <div className="flex items-center justify-between mb-1">
           <span className="text-xs" style={{ color: 'var(--text-muted, #6b7280)' }}>
-            Previous
+            {t('previous')}
           </span>
           <span className="text-sm font-medium" style={{ color: 'var(--text-muted, #6b7280)' }}>
             {formatValue(previous, format, currencySymbol)}
@@ -121,7 +123,7 @@ export function StatComparison({
           {change.toFixed(1)}%
         </span>
         <span className="text-xs" style={{ color: 'var(--text-muted, #6b7280)' }}>
-          change
+          {t('change')}
         </span>
       </div>
     </div>

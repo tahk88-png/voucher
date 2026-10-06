@@ -10,6 +10,7 @@ import React, {
   type ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { useTranslations } from 'next-intl';
 
 /* ─── Types ─── */
 export type DsNotificationType = 'info' | 'success' | 'warning' | 'error';
@@ -80,6 +81,7 @@ function Toast({
   position: DsNotificationPosition;
   onDismiss: (id: string) => void;
 }) {
+  const t = useTranslations('dsComponents.common');
   const [progress, setProgress] = useState(100);
   const [exiting, setExiting] = useState(false);
   const startRef = useRef(Date.now());
@@ -151,7 +153,7 @@ function Toast({
             setTimeout(() => onDismiss(item.id), 200);
           }}
           className="flex-shrink-0 p-1 rounded-md text-[var(--text-faint)] hover:text-[var(--text)] hover:bg-[var(--surface-dim)] transition-colors"
-          aria-label="Dismiss"
+          aria-label={t('dismiss')}
         >
           <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
             <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

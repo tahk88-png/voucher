@@ -1,5 +1,10 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Customers', noIndex: true });
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata() {
+  const t = await getTranslations('merchantStore');
+  return pageMetadata({ title: t('customers.metaTitle'), noIndex: true });
+}
 
 import { redirect } from 'next/navigation';
 import { requireMerchantProfileAccessBySlug, AccessControlError } from '@/lib/access-control';
@@ -14,6 +19,7 @@ export default async function CustomersPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params;
+  const t = await getTranslations('merchantStore');
 
   let merchant: { id: string; name: string; defaultCurrency: string };
   try {
@@ -69,7 +75,7 @@ export default async function CustomersPage({
       const user = userMap.get(p.userId);
       return {
         userId: p.userId,
-        name: user?.name || 'Unknown',
+        name: user?.name || t('customers.unknown'),
         email: user?.email || '',
         purchases: p._count.id,
         totalSpent: p._sum.amount || 0,
@@ -86,24 +92,27 @@ export default async function CustomersPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[var(--text)]">Customers</h1>
+          <h1 className="text-2xl font-semibold text-[var(--text)]">{t('customers.title')}</h1>
           <p className="text-sm text-[var(--text-muted)]">
-            {totalCustomers} customers &middot; {formatCurrency(totalRevenue, merchant.defaultCurrency)} total revenue
+            {t('customers.summary', {
+              count: totalCustomers,
+              revenue: formatCurrency(totalRevenue, merchant.defaultCurrency),
+            })}
           </p>
         </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
         <WarmCard padding="lg" className="bg-[var(--surface)]">
-          <div className="text-sm font-semibold text-[var(--text-faint)]">Total Customers</div>
+          <div className="text-sm font-semibold text-[var(--text-faint)]">{t('customers.stats.totalCustomers')}</div>
           <div className="text-3xl font-bold text-[var(--text)] mt-1">{totalCustomers}</div>
         </WarmCard>
         <WarmCard padding="lg" className="bg-[var(--surface)]">
-          <div className="text-sm font-semibold text-[var(--text-faint)]">Total Revenue</div>
+          <div className="text-sm font-semibold text-[var(--text-faint)]">{t('customers.stats.totalRevenue')}</div>
           <div className="text-3xl font-bold text-[var(--text)] mt-1">{formatCurrency(totalRevenue, merchant.defaultCurrency)}</div>
         </WarmCard>
         <WarmCard padding="lg" className="bg-[var(--surface)]">
-          <div className="text-sm font-semibold text-[var(--text-faint)]">Total Redemptions</div>
+          <div className="text-sm font-semibold text-[var(--text-faint)]">{t('customers.stats.totalRedemptions')}</div>
           <div className="text-3xl font-bold text-[var(--text)] mt-1">{customers.reduce((s, c) => s + c.redemptions, 0)}</div>
         </WarmCard>
       </div>
@@ -113,12 +122,12 @@ export default async function CustomersPage({
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[var(--border)] bg-[#FFF9ED]/50">
-                <th className="text-left px-4 py-3 font-semibold text-[var(--text-faint)]">Customer</th>
-                <th className="text-left px-4 py-3 font-semibold text-[var(--text-faint)]">Email</th>
-                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">Purchases</th>
-                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">Total Spent</th>
-                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">Redemptions</th>
-                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">Last Purchase</th>
+                <th className="text-left px-4 py-3 font-semibold text-[var(--text-faint)]">{t('customers.table.customer')}</th>
+                <th className="text-left px-4 py-3 font-semibold text-[var(--text-faint)]">{t('customers.table.email')}</th>
+                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">{t('customers.table.purchases')}</th>
+                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">{t('customers.table.totalSpent')}</th>
+                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">{t('customers.table.redemptions')}</th>
+                <th className="text-right px-4 py-3 font-semibold text-[var(--text-faint)]">{t('customers.table.lastPurchase')}</th>
               </tr>
             </thead>
             <tbody>
@@ -127,7 +136,7 @@ export default async function CustomersPage({
                   <td colSpan={6} className="px-4 py-12 text-center">
                     <div className="flex flex-col items-center gap-2">
                       <Users className="h-8 w-8 text-[var(--text-faint)]/50" />
-                      <span className="text-[var(--text-muted)]">No customers yet</span>
+                      <span className="text-[var(--text-muted)]">{t('customers.empty')}</span>
                     </div>
                   </td>
                 </tr>
@@ -141,7 +150,7 @@ export default async function CustomersPage({
                     <td className="px-4 py-3 text-right text-[var(--text)]">{customer.redemptions}</td>
                     <td className="px-4 py-3 text-right text-[var(--text-muted)]">
                       {customer.lastPurchase
-                        ? new Date(customer.lastPurchase).toLocaleDateString()
+                        ? new Date(customer.lastPurchase).toLocaleDateString('en-GB')
                         : '—'}
                     </td>
                   </tr>

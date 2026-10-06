@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useTranslations } from 'next-intl';
 
 /* ═══════════════════════════════════════════════════════════════
    STATUS GRID — System status overview
@@ -47,12 +48,6 @@ const statusColors: Record<StatusLevel, { dot: string; glow: string; text: strin
   },
 };
 
-const statusLabel: Record<StatusLevel, string> = {
-  operational: 'Operational',
-  degraded: 'Degraded',
-  outage: 'Outage',
-};
-
 export function StatusGrid({ items, columns = 2, className = '' }: StatusGridProps) {
   return (
     <div
@@ -69,6 +64,7 @@ export function StatusGrid({ items, columns = 2, className = '' }: StatusGridPro
 }
 
 function StatusCard({ item, index }: { item: StatusItem; index: number }) {
+  const t = useTranslations('dsComponents.statusGrid');
   const clr = statusColors[item.status];
   const cardRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -136,7 +132,7 @@ function StatusCard({ item, index }: { item: StatusItem; index: number }) {
               className="text-[10px]"
               style={{ color: clr.text, opacity: 0.8 }}
             >
-              {statusLabel[item.status]}
+              {t(`status.${item.status}`)}
             </span>
             {item.value && (
               <span

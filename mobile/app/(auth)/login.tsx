@@ -43,7 +43,7 @@ export default function LoginScreen() {
               <ThemedText style={{ fontSize: 32 }}>🎁</ThemedText>
             </View>
             <ThemedText variant="h1" style={{ textAlign: 'center' }}>
-              Welcome to Vouchr
+              Welcome to GiftHub
             </ThemedText>
             <ThemedText variant="bodyMuted" style={{ textAlign: 'center', marginTop: 4, marginBottom: spacing.xl }}>
               Sign in to your wallet, vouchers & rewards.

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback, type ReactNode } from 'react';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 /* ═══════════════════════════════════════════════════════════════
    PREMIUM METRIC CARD — Ultra-premium KPI card
@@ -100,12 +101,13 @@ export function PremiumMetricCard({
   trend = 0,
   sparkline,
   icon,
-  comparisonText = 'vs last period',
+  comparisonText,
   size = 'full',
   loading = false,
   className = '',
   onClick,
 }: PremiumMetricCardProps) {
+  const t = useTranslations('dsComponents.premiumMetricCard');
   const animatedValue = useCountUp(value);
   const isCompact = size === 'compact';
 
@@ -235,7 +237,7 @@ export function PremiumMetricCard({
           className="text-xs"
           style={{ color: 'var(--ds-text-tertiary)' }}
         >
-          {comparisonText}
+          {comparisonText ?? t('vsLastPeriod')}
         </span>
 
         {/* Sparkline pushed right */}

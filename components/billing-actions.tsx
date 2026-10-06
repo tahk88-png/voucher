@@ -2,6 +2,7 @@
 
 import { WarmButton } from '@/components/warm-button';
 import { showError } from '@/lib/toast-helpers';
+import { useTranslations } from 'next-intl';
 
 async function redirectTo(url: string) {
   window.location.href = url;
@@ -16,6 +17,7 @@ export function StartSubscriptionButton({
   planTier?: 'starter' | 'pro' | 'scale';
   label?: string;
 }) {
+  const t = useTranslations('merchantDashboard.billing');
   return (
     <WarmButton
       onClick={async () => {
@@ -27,20 +29,21 @@ export function StartSubscriptionButton({
           });
           const data = await res.json();
           if (!res.ok) {
-            throw new Error(data.error || 'Failed to start subscription');
+            throw new Error(data.error || t('startFailed'));
           }
           await redirectTo(data.url);
         } catch (error) {
-          showError(error instanceof Error ? error.message : 'Failed to start subscription');
+          showError(error instanceof Error ? error.message : t('startFailed'), t('errorTitle'));
         }
       }}
     >
-      {label || `Subscribe to ${planTier.charAt(0).toUpperCase() + planTier.slice(1)}`}
+      {label || t('subscribeTo', { plan: planTier.charAt(0).toUpperCase() + planTier.slice(1) })}
     </WarmButton>
   );
 }
 
 export function ManageBillingButton({ slug }: { slug: string }) {
+  const t = useTranslations('merchantDashboard.billing');
   return (
     <WarmButton
       variant="outline"
@@ -51,15 +54,15 @@ export function ManageBillingButton({ slug }: { slug: string }) {
           });
           const data = await res.json();
           if (!res.ok) {
-            throw new Error(data.error || 'Failed to open billing portal');
+            throw new Error(data.error || t('portalFailed'));
           }
           await redirectTo(data.url);
         } catch (error) {
-          showError(error instanceof Error ? error.message : 'Failed to open billing portal');
+          showError(error instanceof Error ? error.message : t('portalFailed'), t('errorTitle'));
         }
       }}
     >
-      Manage billing
+      {t('manageBilling')}
     </WarmButton>
   );
 }

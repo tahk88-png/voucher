@@ -8,13 +8,9 @@ import { Input } from '@/components/ui/input';
 import { safeParseJson, formatCurrency } from '@/lib/utils';
 import { Gift, Search, Filter } from 'lucide-react';
 import { GiftCardDesign } from '@/types';
+import { useLocale, useTranslations } from 'next-intl';
 
-const statusLabel: Record<string, string> = {
-  active: 'Active',
-  redeemed: 'Redeemed',
-  expired: 'Expired',
-  cancelled: 'Cancelled',
-};
+const KNOWN_STATUSES = ['active', 'redeemed', 'expired', 'cancelled'];
 
 type GiftCard = {
   id: string;
@@ -39,6 +35,11 @@ export default function GiftCardsListClient({
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'date' | 'amount' | 'status'>('date');
+  const t = useTranslations('merchantGiftCards');
+  const locale = useLocale();
+  const dateLocale = locale === 'en' ? 'en-GB' : locale;
+  const statusText = (status: string) =>
+    KNOWN_STATUSES.includes(status) ? t(`status.${status}`) : status;
 
   const filteredAndSorted = useMemo(() => {
     let filtered = [...initialGiftCards];
@@ -83,13 +84,13 @@ export default function GiftCardsListClient({
             <Gift className="h-8 w-8 text-[var(--text-faint)]" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-2 text-[var(--text)]">No gift cards yet</h3>
+            <h3 className="text-lg font-semibold mb-2 text-[var(--text)]">{t('listClient.emptyTitle')}</h3>
             <p className="text-sm text-[var(--text-muted)] mb-4">
-              Create a gift card with custom branding and QR redemption.
+              {t('listClient.emptyDescription')}
             </p>
           </div>
           <WarmButton asChild>
-            <Link href={`/merchant/${merchantSlug}/gift-cards/new`}>Create your first gift card</Link>
+            <Link href={`/merchant/${merchantSlug}/gift-cards/new`}>{t('listClient.createFirst')}</Link>
           </WarmButton>
         </div>
       </WarmCard>
@@ -104,18 +105,18 @@ export default function GiftCardsListClient({
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-faint)]" />
             <Input
               type="text"
-              placeholder="Search by headline, code, or message"
+              placeholder={t('listClient.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 border-[var(--border)] bg-[var(--surface)]"
-              aria-label="Search gift cards"
+              aria-label={t('listClient.searchLabel')}
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label htmlFor="gift-card-status-filter" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
-                Status
+                {t('listClient.status')}
               </label>
               <select
                 id="gift-card-status-filter"
@@ -123,16 +124,16 @@ export default function GiftCardsListClient({
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
-                <option value="all">All status</option>
-                <option value="active">Active</option>
-                <option value="redeemed">Redeemed</option>
-                <option value="expired">Expired</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="all">{t('listClient.allStatus')}</option>
+                <option value="active">{t('status.active')}</option>
+                <option value="redeemed">{t('status.redeemed')}</option>
+                <option value="expired">{t('status.expired')}</option>
+                <option value="cancelled">{t('status.cancelled')}</option>
               </select>
             </div>
             <div className="sm:col-span-2">
               <label htmlFor="gift-card-sort-by" className="text-sm font-medium mb-2 block text-[var(--text-muted)]">
-                Sort by
+                {t('listClient.sortBy')}
               </label>
               <select
                 id="gift-card-sort-by"
@@ -140,9 +141,9 @@ export default function GiftCardsListClient({
                 onChange={(e) => setSortBy(e.target.value as 'date' | 'amount' | 'status')}
                 className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
               >
-                <option value="date">Date (newest)</option>
-                <option value="amount">Amount (high to low)</option>
-                <option value="status">Status</option>
+                <option value="date">{t('listClient.sortDate')}</option>
+                <option value="amount">{t('listClient.sortAmount')}</option>
+                <option value="status">{t('listClient.status')}</option>
               </select>
             </div>
           </div>
@@ -151,7 +152,7 @@ export default function GiftCardsListClient({
             <div className="flex items-center gap-2 text-sm text-[var(--text-faint)]">
               <Filter className="h-4 w-4" />
               <span>
-                Showing {filteredAndSorted.length} of {initialGiftCards.length} gift cards
+                {t('listClient.showing', { shown: filteredAndSorted.length, total: initialGiftCards.length })}
               </span>
               <WarmButton
                 variant="ghost"
@@ -161,7 +162,7 @@ export default function GiftCardsListClient({
                   setStatusFilter('all');
                 }}
               >
-                Clear filters
+                {t('listClient.clearFilters')}
               </WarmButton>
             </div>
           ) : null}
@@ -170,16 +171,16 @@ export default function GiftCardsListClient({
 
       {filteredAndSorted.length === 0 ? (
         <WarmCard padding="lg" className="bg-[var(--surface)] text-center py-16">
-          <p className="text-[var(--text-muted)]">No gift cards match your filters.</p>
+          <p className="text-[var(--text-muted)]">{t('listClient.noMatches')}</p>
         </WarmCard>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filteredAndSorted.map((card) => {
             const design = safeParseJson<GiftCardDesign>(card.designJson);
-            const headline = (design?.headline as string) || 'Gift card';
+            const headline = (design?.headline as string) || t('listClient.defaultHeadline');
             const validTo = card.validTo
               ? new Date(card.validTo).toLocaleDateString(undefined, { dateStyle: 'medium' })
-              : 'No expiry';
+              : t('listClient.noExpiry');
 
             return (
               <WarmCard key={card.id} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
@@ -199,22 +200,22 @@ export default function GiftCardsListClient({
                         : 'bg-[#F2EDE3] text-[var(--text-faint)]'
                     }`}
                   >
-                    {statusLabel[card.status] || card.status}
+                    {statusText(card.status)}
                   </span>
                 </div>
 
                 <div className="text-sm text-[var(--text-muted)] space-y-1">
-                  <p>Valid until: {validTo}</p>
+                  <p>{t('listClient.validUntil', { date: validTo })}</p>
                   {card.redeemedAt ? (
-                    <p>Redeemed: {new Date(card.redeemedAt).toLocaleDateString()}</p>
+                    <p>{t('listClient.redeemedOn', { date: new Date(card.redeemedAt).toLocaleDateString(dateLocale) })}</p>
                   ) : null}
                 </div>
                 <div className="flex gap-2 mt-4">
                   <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                    <Link href={`/merchant/${merchantSlug}/gift-cards/${card.id}`}>Details</Link>
+                    <Link href={`/merchant/${merchantSlug}/gift-cards/${card.id}`}>{t('listClient.details')}</Link>
                   </WarmButton>
                   <WarmButton asChild variant="outline" size="sm" className="flex-1">
-                    <Link href={`/g/${card.code}`}>View</Link>
+                    <Link href={`/g/${card.code}`}>{t('listClient.view')}</Link>
                   </WarmButton>
                 </div>
               </WarmCard>

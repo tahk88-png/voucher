@@ -1,5 +1,10 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Redemptions', noIndex: true });
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata() {
+  const t = await getTranslations('merchantStore');
+  return pageMetadata({ title: t('redemptions.metaTitle'), noIndex: true });
+}
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
@@ -11,7 +16,6 @@ import { StatsCard } from '@/components/ui/stats-card';
 import ConfirmRedemptionButton from './confirm-button';
 import ExportRedemptionsButton from './export-button';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { getTranslations } from 'next-intl/server';
 import { CheckCircle2, Clock, Gift, TrendingUp } from 'lucide-react';
 
 export default async function RedemptionsPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -32,6 +36,7 @@ export default async function RedemptionsPage({ params }: { params: Promise<{ sl
   await requireMerchantRole(session.user.id, merchant.id, 'merchant_staff');
 
   const t = await getTranslations('nav');
+  const tr = await getTranslations('merchantStore.redemptions');
 
   const [
     redemptions,
@@ -84,34 +89,34 @@ export default async function RedemptionsPage({ params }: { params: Promise<{ sl
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
             <h1 className="text-2xl font-semibold text-[var(--text)]">{t('redemptions')}</h1>
-            <p className="text-sm text-[var(--text-muted)]">View and confirm voucher redemptions.</p>
+            <p className="text-sm text-[var(--text-muted)]">{tr('subtitle')}</p>
           </div>
           {redemptions.length > 0 && <ExportRedemptionsButton merchantSlug={slug} />}
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatsCard
-            title="Total redemptions"
+            title={tr('stats.totalTitle')}
             value={totalRedemptions}
-            description="All submitted redemptions"
+            description={tr('stats.totalDescription')}
             icon={TrendingUp}
           />
           <StatsCard
-            title="Pending"
+            title={tr('stats.pendingTitle')}
             value={pendingRedemptions}
-            description="Awaiting confirmation"
+            description={tr('stats.pendingDescription')}
             icon={Clock}
           />
           <StatsCard
-            title="Confirmed"
+            title={tr('stats.confirmedTitle')}
             value={confirmedRedemptions}
-            description="Approved redemptions"
+            description={tr('stats.confirmedDescription')}
             icon={CheckCircle2}
           />
           <StatsCard
-            title="Discounts given"
+            title={tr('stats.discountsTitle')}
             value={formatCurrency(discountTotal, merchant.defaultCurrency)}
-            description="Confirmed discounts"
+            description={tr('stats.discountsDescription')}
             icon={Gift}
           />
         </div>
@@ -123,9 +128,9 @@ export default async function RedemptionsPage({ params }: { params: Promise<{ sl
                 <CheckCircle2 className="h-8 w-8 text-[var(--text-faint)]" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-[var(--text)] mb-2">No redemptions yet</h3>
+                <h3 className="text-lg font-semibold text-[var(--text)] mb-2">{tr('empty.title')}</h3>
                 <p className="text-sm text-[var(--text-muted)]">
-                  Redemptions will appear here when customers use vouchers.
+                  {tr('empty.description')}
                 </p>
               </div>
             </div>
@@ -134,19 +139,25 @@ export default async function RedemptionsPage({ params }: { params: Promise<{ sl
           <div className="space-y-4">
             {redemptions.map((redemption) => {
               const design = safeParseJson<{ headline?: string }>(redemption.voucher?.designJson);
-              const headline = design?.headline ?? 'Voucher';
+              const headline = design?.headline ?? tr('voucherFallback');
               return (
                 <WarmCard key={redemption.id} padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <h2 className="text-base font-semibold text-[var(--text)]">
-                        {formatCurrency(redemption.amountBeforeDiscount, redemption.currency)} order
+                        {tr('card.order', {
+                          amount: formatCurrency(redemption.amountBeforeDiscount, redemption.currency),
+                        })}
                       </h2>
                       <p className="text-sm text-[var(--text-muted)]">
-                        Discount: {formatCurrency(redemption.discountApplied, redemption.currency)}
-                        {redemption.referral && (
-                          <> - Referred by {redemption.referral.referrer.name || redemption.referral.referrer.email}</>
-                        )}
+                        {redemption.referral
+                          ? tr('card.discountReferred', {
+                              amount: formatCurrency(redemption.discountApplied, redemption.currency),
+                              name: redemption.referral.referrer.name || redemption.referral.referrer.email,
+                            })
+                          : tr('card.discount', {
+                              amount: formatCurrency(redemption.discountApplied, redemption.currency),
+                            })}
                       </p>
                       <p className="text-xs text-[var(--text-faint)] mt-1">{headline}</p>
                     </div>
@@ -157,14 +168,25 @@ export default async function RedemptionsPage({ params }: { params: Promise<{ sl
                           : 'bg-[#FFE5B4] text-[var(--text-muted)]'
                       }`}
                     >
-                      {redemption.confirmedAt ? 'Confirmed' : 'Pending'}
+                      {redemption.confirmedAt ? tr('card.confirmed') : tr('card.pending')}
                     </span>
                   </div>
                   <div className="text-sm text-[var(--text-muted)] mt-4 space-y-1">
-                    <p>Method: {redemption.method}</p>
-                    <p>Order: {redemption.orderReference || 'N/A'}</p>
-                    {redemption.location && <p>Location: {redemption.location}</p>}
-                    <p>Date: {new Date(redemption.createdAt).toLocaleString()}</p>
+                    <p>
+                      {tr('card.method', {
+                        method:
+                          redemption.method === 'online' || redemption.method === 'in_store'
+                            ? tr(`card.methods.${redemption.method}`)
+                            : redemption.method,
+                      })}
+                    </p>
+                    <p>{tr('card.orderReference', { reference: redemption.orderReference || tr('card.notAvailable') })}</p>
+                    {redemption.location && <p>{tr('card.location', { location: redemption.location })}</p>}
+                    <p>
+                      {tr('card.date', {
+                        date: new Date(redemption.createdAt).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }),
+                      })}
+                    </p>
                   </div>
                   {!redemption.confirmedAt && (
                     <div className="mt-4">

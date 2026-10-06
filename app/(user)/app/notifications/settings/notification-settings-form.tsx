@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
+import { showError, showSuccess } from '@/lib/toast-helpers';
 
 type MerchantSubscription = {
   merchantId: string;
@@ -16,8 +17,11 @@ type MerchantSubscription = {
 
 export default function NotificationSettingsForm({
   initialSubscriptions,
+  pushAvailable,
 }: {
   initialSubscriptions: MerchantSubscription[];
+  /** Hide the push toggle when web push isn't configured on this deployment. */
+  pushAvailable: boolean;
 }) {
   const t = useTranslations('notifications');
   const [subscriptions, setSubscriptions] = useState(initialSubscriptions);
@@ -34,7 +38,7 @@ export default function NotificationSettingsForm({
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      await Promise.all(
+      const results = await Promise.all(
         subscriptions.map((sub) =>
           fetch(`/api/merchant/${sub.merchantSlug}/subscriptions`, {
             method: 'POST',
@@ -42,11 +46,19 @@ export default function NotificationSettingsForm({
             body: JSON.stringify({
               emailEnabled: sub.emailEnabled,
               inAppEnabled: sub.inAppEnabled,
-              pushEnabled: sub.pushEnabled,
+              ...(pushAvailable ? { pushEnabled: sub.pushEnabled } : {}),
             }),
           })
         )
       );
+      if (results.some((res) => !res.ok)) {
+        showError(t('saveFailed'));
+      } else {
+        showSuccess(t('saved'));
+      }
+    } catch (error) {
+      console.error('Saving notification preferences failed', error);
+      showError(t('saveFailed'));
     } finally {
       setIsSaving(false);
     }
@@ -62,7 +74,7 @@ export default function NotificationSettingsForm({
               <p className="text-sm text-[#8B7355]">@{sub.merchantSlug}</p>
             </div>
           </div>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          <div className={`mt-4 grid gap-3 ${pushAvailable ? 'sm:grid-cols-3' : 'sm:grid-cols-2'}`}>
             <label className="flex items-center gap-2 text-sm text-[#6B5744]">
               <input
                 type="checkbox"
@@ -81,15 +93,17 @@ export default function NotificationSettingsForm({
               />
               {t('inApp')}
             </label>
-            <label className="flex items-center gap-2 text-sm text-[#6B5744]">
-              <input
-                type="checkbox"
-                checked={sub.pushEnabled}
-                onChange={() => toggle(sub.merchantId, 'pushEnabled')}
-                className="h-4 w-4 accent-[var(--primary)]"
-              />
-              {t('pushBeta')}
-            </label>
+            {pushAvailable && (
+              <label className="flex items-center gap-2 text-sm text-[#6B5744]">
+                <input
+                  type="checkbox"
+                  checked={sub.pushEnabled}
+                  onChange={() => toggle(sub.merchantId, 'pushEnabled')}
+                  className="h-4 w-4 accent-[var(--primary)]"
+                />
+                {t('pushBeta')}
+              </label>
+            )}
           </div>
         </WarmCard>
       ))}

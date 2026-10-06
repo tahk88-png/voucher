@@ -1,7 +1,6 @@
 import { notFound, redirect } from 'next/navigation';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
+import { AccessControlError, requireMerchantProfileAccessBySlug } from '@/lib/access-control';
 import EditVoucherForm from './edit-voucher-form';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
 import { getTranslations } from 'next-intl/server';
@@ -12,23 +11,19 @@ export default async function EditVoucherPage({
   params: Promise<{ slug: string; id: string }>;
 }) {
   const { slug, id: voucherId } = await params;
-  const session = await auth();
-  if (!session?.user?.id) {
-    redirect('/login');
+  let merchant: { id: string };
+  try {
+    ({ merchant } = await requireMerchantProfileAccessBySlug(slug, 'merchant_admin'));
+  } catch (error) {
+    if (error instanceof AccessControlError && error.status === 404) notFound();
+    if (error instanceof AccessControlError && error.status === 401) redirect('/login');
+    // Staff can't edit vouchers; send them back to the list instead of a 500.
+    redirect(`/merchant/${slug}/vouchers`);
   }
-
-  const merchant = await prisma.merchant.findUnique({
-    where: { slug },
-  });
-
-  if (!merchant) {
-    notFound();
-  }
-
-  await requireMerchantRole(session.user.id, merchant.id, 'merchant_admin');
 
   const t = await getTranslations('nav');
   const tVoucher = await getTranslations('voucher');
+  const tPage = await getTranslations('merchantVouchers.edit');
 
   const voucher = await prisma.voucher.findUnique({
     where: { id: voucherId },
@@ -50,11 +45,11 @@ export default async function EditVoucherPage({
         />
         <div className="flex items-center gap-4 mb-6">
           <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
-            <span className="text-white font-bold text-lg">E</span>
+            <span className="text-white font-bold text-lg">{tPage('iconLetter')}</span>
           </div>
           <div>
             <h1 className="text-2xl font-semibold text-[var(--text)]">{tVoucher('edit')}</h1>
-            <p className="text-sm text-[var(--text-muted)]">Update voucher details and availability.</p>
+            <p className="text-sm text-[var(--text-muted)]">{tPage('subtitle')}</p>
           </div>
         </div>
 

@@ -13,8 +13,23 @@ function generateOTP(): string {
   return crypto.randomInt(100000, 999999).toString();
 }
 
+const EMAIL_UNAVAILABLE_MESSAGE = "Email sign-in isn't available right now — use your password.";
+
+function emailUnavailable() {
+  return NextResponse.json(
+    { error: EMAIL_UNAVAILABLE_MESSAGE, code: 'EMAIL_SIGN_IN_UNAVAILABLE' },
+    { status: 503 },
+  );
+}
+
 export async function POST(req: NextRequest) {
   return withErrorHandler(async () => {
+    const { sendEmail, isResendConfigured } = await import('@/lib/resend');
+    if (!isResendConfigured()) {
+      logger.warn('[send-otp] Resend not configured, email sign-in unavailable');
+      return emailUnavailable();
+    }
+
     // IP-based rate limit: 5 requests per 5 minutes (distributed via Redis)
     const ip = getClientIp(req);
     const ipCheck = await rateLimitDistributed(`otp:ip:${ip}`, 5, 5 * 60 * 1000);
@@ -55,31 +70,29 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Send OTP via email
+    // Send OTP via email. If delivery fails, the user cannot sign in with a
+    // code, so say so instead of pretending it was sent.
     try {
-      const { sendEmail, isResendConfigured } = await import('@/lib/resend');
-      if (isResendConfigured()) {
-        await sendEmail({
-          to: normalizedEmail,
-          subject: 'Your GiftHub sign-in code',
-          html: `
-            <div style="font-family: sans-serif; max-width: 400px; margin: 0 auto; padding: 32px;">
-              <h2 style="color: #2D2721; margin-bottom: 8px;">Your sign-in code</h2>
-              <p style="color: #6B5744; margin-bottom: 24px;">Enter this code to sign in to GiftHub. It expires in 10 minutes.</p>
-              <div style="background: #f6e1d7; border: 2px solid #cc785c; border-radius: 12px; padding: 24px; text-align: center;">
-                <span style="font-size: 36px; font-weight: bold; letter-spacing: 8px; color: #2D2721;">${otp}</span>
-              </div>
-              <p style="color: #6B5744; margin-top: 24px; font-size: 14px;">If you didn&apos;t request this, you can safely ignore this email.</p>
+      await sendEmail({
+        to: normalizedEmail,
+        subject: 'Your GiftHub sign-in code',
+        html: `
+          <div style="font-family: sans-serif; max-width: 400px; margin: 0 auto; padding: 32px;">
+            <h2 style="color: #2D2721; margin-bottom: 8px;">Your sign-in code</h2>
+            <p style="color: #6B5744; margin-bottom: 24px;">Enter this code to sign in to GiftHub. It expires in 10 minutes.</p>
+            <div style="background: #f6e1d7; border: 2px solid #cc785c; border-radius: 12px; padding: 24px; text-align: center;">
+              <span style="font-size: 36px; font-weight: bold; letter-spacing: 8px; color: #2D2721;">${otp}</span>
             </div>
-          `,
-          text: `Your GiftHub sign-in code is: ${otp}\n\nThis code expires in 10 minutes.\n\nIf you didn't request this, you can safely ignore this email.`,
-          tags: [{ name: 'type', value: 'otp' }],
-        });
-      } else {
-        logger.warn('[send-otp] Resend not configured, OTP not emailed');
-      }
+            <p style="color: #6B5744; margin-top: 24px; font-size: 14px;">If you didn&apos;t request this, you can safely ignore this email.</p>
+          </div>
+        `,
+        text: `Your GiftHub sign-in code is: ${otp}\n\nThis code expires in 10 minutes.\n\nIf you didn't request this, you can safely ignore this email.`,
+        tags: [{ name: 'type', value: 'otp' }],
+      });
     } catch (emailErr) {
       logger.error('[send-otp] Email failed', { error: emailErr instanceof Error ? emailErr.message : String(emailErr) });
+      await prisma.verificationToken.deleteMany({ where: { email: normalizedEmail } });
+      return emailUnavailable();
     }
 
     return NextResponse.json({ sent: true });

@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Input } from '@/components/ui/input';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
@@ -24,12 +25,8 @@ type CampaignItem = {
   revenue: number;
 };
 
-const statusLabel: Record<string, string> = {
-  active: 'Active',
-  draft: 'Draft',
-  ended: 'Ended',
-  paused: 'Paused',
-};
+/** Statuses with a label under merchantCampaigns.list.status.* (others show the raw value). */
+const LABELLED_STATUSES = ['active', 'draft', 'ended', 'paused'];
 
 const statusStyles: Record<string, string> = {
   active: 'bg-[#4e8a5b] text-white',
@@ -50,6 +47,7 @@ export default function CampaignsListClient({
   canCreate: boolean;
 }) {
   const router = useRouter();
+  const t = useTranslations('merchantCampaigns');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
@@ -68,19 +66,24 @@ export default function CampaignsListClient({
     return filtered;
   }, [campaigns, searchQuery, statusFilter]);
 
+  const statusLabel = (status: string) =>
+    LABELLED_STATUSES.includes(status) ? t(`list.status.${status}`) : status;
+  const typeLabel = (type: string) =>
+    type === 'weekly' || type === 'limited' ? t(`list.type.${type}`) : t('list.type.other', { type });
+
   if (campaigns.length === 0) {
     const description = canCreate
-      ? 'Create a campaign to organize and manage your vouchers.'
-      : 'Start a subscription to create new campaigns.';
+      ? t('list.empty.descriptionCanCreate')
+      : t('list.empty.descriptionNeedsSubscription');
     return (
       <EmptyState
         icon={Megaphone}
-        title="No campaigns yet"
+        title={t('list.empty.title')}
         description={description}
         action={
           canCreate
             ? {
-                label: 'Create your first campaign',
+                label: t('list.empty.action'),
                 onClick: () => router.push(`/merchant/${merchantSlug}/campaigns/new`),
               }
             : undefined
@@ -97,11 +100,11 @@ export default function CampaignsListClient({
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--text-faint)]" />
             <Input
               type="text"
-              placeholder="Search campaigns..."
+              placeholder={t('list.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 border-[var(--border)] bg-[var(--surface)]"
-              aria-label="Search campaigns"
+              aria-label={t('list.searchLabel')}
             />
           </div>
           <div className="flex flex-wrap gap-2">
@@ -115,7 +118,7 @@ export default function CampaignsListClient({
                     : 'bg-[var(--surface)] text-[var(--text-muted)] border border-[var(--border)] hover:border-[rgba(139,115,85,0.3)]'
                 }`}
               >
-                {status === 'all' ? 'All' : statusLabel[status] || status}
+                {status === 'all' ? t('list.filterAll') : statusLabel(status)}
               </button>
             ))}
           </div>
@@ -124,7 +127,7 @@ export default function CampaignsListClient({
 
       {filteredCampaigns.length === 0 ? (
         <WarmCard padding="lg" className="bg-[var(--surface)] text-center py-12">
-          <p className="text-[var(--text-muted)]">No campaigns match your filters.</p>
+          <p className="text-[var(--text-muted)]">{t('list.noMatches')}</p>
           <WarmButton
             variant="outline"
             className="mt-4"
@@ -133,13 +136,13 @@ export default function CampaignsListClient({
               setStatusFilter('all');
             }}
           >
-            Clear filters
+            {t('list.clearFilters')}
           </WarmButton>
         </WarmCard>
       ) : (
         <div className="space-y-4">
           {filteredCampaigns.map((campaign) => {
-            const statusText = statusLabel[campaign.status] || campaign.status;
+            const statusText = statusLabel(campaign.status);
             const statusClass = statusStyles[campaign.status] || statusStyles.draft;
             const startLabel = new Date(campaign.startDate).toLocaleDateString(undefined, { dateStyle: 'medium' });
             const endLabel = new Date(campaign.endDate).toLocaleDateString(undefined, { dateStyle: 'medium' });
@@ -154,35 +157,37 @@ export default function CampaignsListClient({
                         {statusText}
                       </span>
                     </div>
-                    <p className="text-sm text-[var(--text-muted)] capitalize">{campaign.type} campaign</p>
-                    <p className="text-xs text-[var(--text-faint)]">Runs {startLabel} - {endLabel}</p>
+                    <p className="text-sm text-[var(--text-muted)]">{typeLabel(campaign.type)}</p>
+                    <p className="text-xs text-[var(--text-faint)]">
+                      {t('list.runs', { start: startLabel, end: endLabel })}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2">
                     <WarmButton asChild variant="outline" size="sm">
-                      <Link href={`/merchant/${merchantSlug}/campaigns/${campaign.id}`}>View</Link>
+                      <Link href={`/merchant/${merchantSlug}/campaigns/${campaign.id}`}>{t('list.view')}</Link>
                     </WarmButton>
                   </div>
                 </div>
 
                 <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
                   <div>
-                    <div className="text-xs text-[var(--text-faint)]">Vouchers</div>
+                    <div className="text-xs text-[var(--text-faint)]">{t('list.stats.vouchers')}</div>
                     <div className="font-semibold text-[var(--text)]">{campaign.vouchers}</div>
                   </div>
                   <div>
-                    <div className="text-xs text-[var(--text-faint)]">Paid purchases</div>
+                    <div className="text-xs text-[var(--text-faint)]">{t('list.stats.paidPurchases')}</div>
                     <div className="font-semibold text-[var(--text)]">{campaign.paidPurchases}</div>
                   </div>
                   <div>
-                    <div className="text-xs text-[var(--text-faint)]">Revenue</div>
+                    <div className="text-xs text-[var(--text-faint)]">{t('list.stats.revenue')}</div>
                     <div className="font-semibold text-[var(--text)]">
                       {formatCurrency(campaign.revenue, currency)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs text-[var(--text-faint)]">Price</div>
+                    <div className="text-xs text-[var(--text-faint)]">{t('list.stats.price')}</div>
                     <div className="font-semibold text-[var(--text)]">
-                      {campaign.price != null ? formatCurrency(campaign.price, currency) : 'Free'}
+                      {campaign.price != null ? formatCurrency(campaign.price, currency) : t('list.free')}
                     </div>
                   </div>
                 </div>

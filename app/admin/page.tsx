@@ -99,15 +99,15 @@ export default async function AdminPage() {
   return (
     <div className="min-h-screen bg-[#FAF7F2] p-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="flex items-center gap-4 mb-8">
-          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
+        <div className="flex flex-wrap items-center gap-4 mb-8">
+          <div className="w-12 h-12 rounded-[14px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm flex-shrink-0">
             <span className="text-white font-bold text-lg">A</span>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 min-w-[12rem]">
             <h1 className="text-3xl font-bold text-[#2D2721]">Platform Admin</h1>
             <p className="text-[#6B5744]">Overview of merchants, users, and voucher activity.</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <WarmButton asChild variant="outline" size="sm">
               <Link href="/admin/control-panel" className="inline-flex items-center gap-2">
                 <Shield className="h-4 w-4" />
@@ -123,7 +123,7 @@ export default async function AdminPage() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6 mb-6">
+        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6 mb-6">
           {[
             { label: 'Merchants', value: String(merchantCount), accent: 'border-b-[#cc785c]' },
             { label: 'Users', value: String(userCount), accent: 'border-b-[#5e7e92]' },
@@ -134,7 +134,7 @@ export default async function AdminPage() {
           ].map((stat) => (
             <WarmCard key={stat.label} padding="lg" className={`bg-white border-b-4 ${stat.accent}`}>
               <div className="text-sm font-semibold text-[#8B7355]">{stat.label}</div>
-              <div className="text-3xl font-bold text-[#2D2721] mt-2">{stat.value}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#2D2721] mt-2 tabular-nums break-words">{stat.value}</div>
             </WarmCard>
           ))}
         </div>
@@ -146,13 +146,21 @@ export default async function AdminPage() {
           </WarmCard>
         )}
 
+        {/* MerchantsTable and AuditLogView render their own cards; wrapping
+            them in another WarmCard produced a double border. */}
         <div className="grid gap-6 lg:grid-cols-2">
-          <WarmCard padding="lg" className="bg-white">
+          <div className="min-w-0">
             <MerchantsTable />
-          </WarmCard>
-          <WarmCard padding="lg" className="bg-white">
+            <Link href="/admin/merchants" className="mt-2 inline-block text-sm text-[var(--primary)] hover:underline">
+              All merchants →
+            </Link>
+          </div>
+          <div className="min-w-0">
             <AuditLogView initialLogs={serializedAuditLogs} />
-          </WarmCard>
+            <Link href="/admin/audit-log" className="mt-2 inline-block text-sm text-[var(--primary)] hover:underline">
+              Full audit log →
+            </Link>
+          </div>
         </div>
       </div>
     </div>

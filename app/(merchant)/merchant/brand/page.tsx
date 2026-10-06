@@ -9,8 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { VoucherCard } from "@/components/ui/voucher-card"
 import { Upload } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export default function BrandPage() {
+  const t = useTranslations("merchantLegacy.brand")
   const [brandColor, setBrandColor] = useState("#3B82F6")
   const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined)
 
@@ -28,8 +30,8 @@ export default function BrandPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Brand Settings"
-        description="Customize your brand appearance across vouchers"
+        title={t("title")}
+        description={t("description")}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -37,9 +39,9 @@ export default function BrandPage() {
         <div className="space-y-6">
           <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
             <div>
-              <h2 className="text-base font-semibold text-[#2D2721]">Logo</h2>
+              <h2 className="text-base font-semibold text-[#2D2721]">{t("logoHeading")}</h2>
               <p className="text-sm text-[#6B5744]">
-                Upload your merchant logo (recommended: 200x200px, PNG or SVG).
+                {t("logoHint")}
               </p>
             </div>
             <div className="space-y-4 mt-4">
@@ -48,7 +50,7 @@ export default function BrandPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={logoUrl}
-                    alt="Logo preview"
+                    alt={t("logoPreviewAlt")}
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -58,7 +60,7 @@ export default function BrandPage() {
                   <WarmButton variant="outline" asChild>
                     <span>
                       <Upload className="h-4 w-4 mr-2" />
-                      Upload Logo
+                      {t("uploadLogo")}
                     </span>
                   </WarmButton>
                 </Label>
@@ -75,13 +77,13 @@ export default function BrandPage() {
 
           <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
             <div>
-              <h2 className="text-base font-semibold text-[#2D2721]">Brand color</h2>
+              <h2 className="text-base font-semibold text-[#2D2721]">{t("colorHeading")}</h2>
               <p className="text-sm text-[#6B5744]">
-                Set your primary brand color for vouchers and buttons.
+                {t("colorHint")}
               </p>
             </div>
             <div className="space-y-2 mt-4">
-              <Label htmlFor="brandColor">Color</Label>
+              <Label htmlFor="brandColor">{t("colorLabel")}</Label>
               <div className="flex gap-2">
                 <Input
                   id="brandColor"
@@ -94,27 +96,27 @@ export default function BrandPage() {
                   value={brandColor}
                   onChange={(e) => setBrandColor(e.target.value)}
                   className="flex-1 font-mono border-[rgba(139,115,85,0.15)]"
-                  aria-label="Brand color hex value"
+                  aria-label={t("colorHexLabel")}
                 />
               </div>
             </div>
           </WarmCard>
 
-          <WarmButton className="w-full">Save changes</WarmButton>
+          <WarmButton className="w-full">{t("save")}</WarmButton>
         </div>
 
         {/* Preview */}
         <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
           <div>
-            <h2 className="text-base font-semibold text-[#2D2721]">Preview</h2>
-            <p className="text-sm text-[#6B5744]">See how your brand appears on vouchers.</p>
+            <h2 className="text-base font-semibold text-[#2D2721]">{t("previewHeading")}</h2>
+            <p className="text-sm text-[#6B5744]">{t("previewHint")}</p>
           </div>
           <div className="mt-4">
             <VoucherCard
-              merchantName="Your Merchant"
+              merchantName={t("sampleMerchant")}
               merchantLogoUrl={logoUrl}
-              title="20% Off Your Next Purchase"
-              description="Valid on all items. Cannot be combined with other offers."
+              title={t("sampleTitle")}
+              description={t("sampleDescription")}
               expiryDate={new Date("2024-12-31")}
               status="active"
               accentColor={brandColor}

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 interface HeatmapChartProps {
@@ -60,6 +61,7 @@ export function HeatmapChart({
   height,
   className,
 }: HeatmapChartProps) {
+  const t = useTranslations("dsComponents.common")
   const [tooltip, setTooltip] = React.useState<{
     x: number
     y: number
@@ -77,7 +79,7 @@ export function HeatmapChart({
         )}
         style={{ height: height ?? 300 }}
       >
-        <p className="text-sm text-[var(--text-muted)]">No data available</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("noData")}</p>
       </div>
     )
   }
@@ -175,7 +177,10 @@ export function HeatmapChart({
             {yLabels[tooltip.row]} / {xLabels[tooltip.col]}
           </p>
           <p className="text-xs text-[var(--text-muted)]">
-            Value: <span className="font-medium text-[var(--text)]">{tooltip.value.toLocaleString()}</span>
+            {t.rich("value", {
+              value: tooltip.value.toLocaleString(),
+              strong: (chunks) => <span className="font-medium text-[var(--text)]">{chunks}</span>,
+            })}
           </p>
         </div>
       )}

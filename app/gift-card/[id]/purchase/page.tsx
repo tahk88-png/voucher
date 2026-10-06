@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
+import { useTranslations } from 'next-intl';
 
 interface GiftCardData {
   id: string;
@@ -33,6 +34,7 @@ function formatCurrency(amount: number, currency: string): string {
 export default function GiftCardPurchasePage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
+  const t = useTranslations('giftsPages.purchase');
 
   const [giftCard, setGiftCard] = useState<GiftCardData | null>(null);
   const [merchantName, setMerchantName] = useState('');
@@ -51,7 +53,7 @@ export default function GiftCardPurchasePage() {
         // Fetch gift card details directly
         const res = await fetch(`/api/gift-cards/${id}/details`);
         if (!res.ok) {
-          setError('Gift card not found or not available for purchase');
+          setError(t('errors.notFound'));
           return;
         }
         const data = await res.json();
@@ -61,13 +63,13 @@ export default function GiftCardPurchasePage() {
           setMessage(data.giftCard.message);
         }
       } catch {
-        setError('Failed to load gift card');
+        setError(t('errors.loadFailed'));
       } finally {
         setLoading(false);
       }
     }
     load();
-  }, [id]);
+  }, [id, t]);
 
   async function handlePurchase() {
     setPurchasing(true);
@@ -88,7 +90,7 @@ export default function GiftCardPurchasePage() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || 'Purchase failed');
+        setError(data.error || t('errors.purchaseFailed'));
         setPurchasing(false);
         return;
       }
@@ -97,7 +99,7 @@ export default function GiftCardPurchasePage() {
         window.location.href = data.url;
       }
     } catch {
-      setError('Something went wrong. Please try again.');
+      setError(t('errors.generic'));
       setPurchasing(false);
     }
   }
@@ -105,7 +107,7 @@ export default function GiftCardPurchasePage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
-        <div className="animate-pulse text-[#8B7355]">Loading...</div>
+        <div className="animate-pulse text-[#8B7355]">{t('loading')}</div>
       </div>
     );
   }
@@ -114,20 +116,20 @@ export default function GiftCardPurchasePage() {
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
         <WarmCard padding="lg" className="max-w-md w-full text-center">
-          <p className="text-[#6B5744]">{error || 'Gift card not available'}</p>
+          <p className="text-[#6B5744]">{error || t('notAvailable')}</p>
         </WarmCard>
       </div>
     );
   }
 
   const design = giftCard.designJson;
-  const headline = design?.headline || 'Gift Card';
+  const headline = design?.headline || t('defaultHeadline');
   const displayPrice = giftCard.price ?? giftCard.amount;
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
       <WarmCard padding="lg" className="max-w-lg w-full bg-white">
-        <h1 className="text-xl font-semibold text-[#2D2721] mb-4">Purchase Gift Card</h1>
+        <h1 className="text-xl font-semibold text-[#2D2721] mb-4">{t('title')}</h1>
 
         {/* Gift card preview */}
         <div
@@ -141,7 +143,7 @@ export default function GiftCardPurchasePage() {
             <div className="relative h-36 w-full overflow-hidden bg-[#FAF7F2]">
               <Image
                 src={giftCard.imageUrl}
-                alt="Gift card"
+                alt={t('imageAlt')}
                 fill
                 sizes="(max-width: 768px) 100vw, 640px"
                 className="object-cover"
@@ -155,7 +157,7 @@ export default function GiftCardPurchasePage() {
               {giftCard.logoUrl && (
                 <Image
                   src={giftCard.logoUrl}
-                  alt="Brand"
+                  alt={t('logoAlt')}
                   width={28}
                   height={28}
                   className="h-7 w-7 object-contain"
@@ -166,50 +168,50 @@ export default function GiftCardPurchasePage() {
             <p className="text-2xl font-semibold" style={{ color: design?.accentColor || '#f4b400' }}>
               {formatCurrency(giftCard.amount, giftCard.currency)}
             </p>
-            <p className="text-xs text-[#6B5744]">from {merchantName}</p>
+            <p className="text-xs text-[#6B5744]">{t('fromMerchant', { merchant: merchantName })}</p>
           </div>
         </div>
 
         {/* Purchase form */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-[#2D2721] mb-1">Recipient email (optional)</label>
+            <label className="block text-sm font-medium text-[#2D2721] mb-1">{t('form.recipientEmail')}</label>
             <input
               type="email"
               value={recipientEmail}
               onChange={e => setRecipientEmail(e.target.value)}
-              placeholder="Send gift card to this email"
+              placeholder={t('form.recipientEmailPlaceholder')}
               className="w-full rounded-lg border border-[rgba(139,115,85,0.2)] bg-white px-3 py-2 text-sm text-[#2D2721] placeholder:text-[#8B7355]/50 focus:outline-none focus:ring-2 focus:ring-[#f4b400]/40"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-[#2D2721] mb-1">Recipient name</label>
+              <label className="block text-sm font-medium text-[#2D2721] mb-1">{t('form.recipientName')}</label>
               <input
                 type="text"
                 value={recipientName}
                 onChange={e => setRecipientName(e.target.value)}
-                placeholder="To"
+                placeholder={t('form.recipientNamePlaceholder')}
                 className="w-full rounded-lg border border-[rgba(139,115,85,0.2)] bg-white px-3 py-2 text-sm text-[#2D2721] placeholder:text-[#8B7355]/50 focus:outline-none focus:ring-2 focus:ring-[#f4b400]/40"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-[#2D2721] mb-1">Your name</label>
+              <label className="block text-sm font-medium text-[#2D2721] mb-1">{t('form.senderName')}</label>
               <input
                 type="text"
                 value={senderName}
                 onChange={e => setSenderName(e.target.value)}
-                placeholder="From"
+                placeholder={t('form.senderNamePlaceholder')}
                 className="w-full rounded-lg border border-[rgba(139,115,85,0.2)] bg-white px-3 py-2 text-sm text-[#2D2721] placeholder:text-[#8B7355]/50 focus:outline-none focus:ring-2 focus:ring-[#f4b400]/40"
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#2D2721] mb-1">Personal message (optional)</label>
+            <label className="block text-sm font-medium text-[#2D2721] mb-1">{t('form.message')}</label>
             <textarea
               value={message}
               onChange={e => setMessage(e.target.value)}
-              placeholder="Add a personal message..."
+              placeholder={t('form.messagePlaceholder')}
               rows={2}
               maxLength={500}
               className="w-full rounded-lg border border-[rgba(139,115,85,0.2)] bg-white px-3 py-2 text-sm text-[#2D2721] placeholder:text-[#8B7355]/50 focus:outline-none focus:ring-2 focus:ring-[#f4b400]/40 resize-none"
@@ -222,7 +224,7 @@ export default function GiftCardPurchasePage() {
 
           <div className="flex items-center justify-between pt-2">
             <div>
-              <span className="text-sm text-[#6B5744]">Total:</span>
+              <span className="text-sm text-[#6B5744]">{t('total')}</span>
               <span className="ml-2 text-lg font-semibold text-[#2D2721]">
                 {formatCurrency(displayPrice, giftCard.currency)}
               </span>
@@ -231,7 +233,7 @@ export default function GiftCardPurchasePage() {
               onClick={handlePurchase}
               disabled={purchasing}
             >
-              {purchasing ? 'Processing...' : 'Buy Gift Card'}
+              {purchasing ? t('processing') : t('buy')}
             </WarmButton>
           </div>
         </div>

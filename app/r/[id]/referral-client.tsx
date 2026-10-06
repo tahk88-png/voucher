@@ -36,6 +36,7 @@ export default function ReferralClient({
 }: ReferralClientProps) {
   const tPlaceholder = useTranslations('placeholders');
   const tReferral = useTranslations('referral');
+  const tPurchase = useTranslations('purchase');
   const router = useRouter();
   const qrRef = useRef<HTMLDivElement>(null);
   const [orderAmount, setOrderAmount] = useState('');
@@ -119,7 +120,10 @@ export default function ReferralClient({
         }}
       />
       <p className="text-sm text-[#6B5744] mt-2 mb-4 text-center">
-        {tReferral('voucherFrom')} <span className="font-medium text-[#2D2721]">{fromName}</span>
+        {tPurchase.rich('referralPage.voucherFrom', {
+          name: fromName,
+          highlight: (chunks) => <span className="font-medium text-[#2D2721]">{chunks}</span>,
+        })}
       </p>
 
       <WarmCard padding="none" className="w-full max-w-[400px] shadow-warm bg-white overflow-hidden">
@@ -127,7 +131,7 @@ export default function ReferralClient({
           {voucher.merchant.brandLogoUrl && (
             <Image
               src={voucher.merchant.brandLogoUrl}
-              alt={`${voucher.merchant.name} logo`}
+              alt={tPurchase('logoAlt', { name: voucher.merchant.name })}
               width={160}
               height={40}
               className="h-10 w-auto object-contain mb-4"
@@ -206,7 +210,7 @@ export default function ReferralClient({
                 <p className="text-sm text-[#6B5744]">{tReferral('showQrAtRegister')}</p>
                 <Image
                   src={qrImage}
-                  alt={`Redemption QR code for voucher ${voucherCode}`}
+                  alt={tPurchase('referralPage.qrAlt', { code: voucherCode })}
                   width={200}
                   height={200}
                   className="rounded-lg border border-[rgba(139,115,85,0.15)]"
@@ -217,12 +221,16 @@ export default function ReferralClient({
 
           <div className="pt-4 border-t border-[rgba(139,115,85,0.15)]">
             <p className="text-sm font-medium mb-3 text-center text-[#6B5744]">
-              Share on social media
+              {tReferral('shareOnSocialMedia')}
             </p>
             <SocialShare
               url={typeof window !== 'undefined' ? window.location.href : ''}
               title={headline}
-              description={`${getVoucherValue()} off at ${voucher.merchant.name}${referral ? ' - Shared by a friend!' : ''}`}
+              description={
+                referral
+                  ? tPurchase('referralPage.offAtMerchantShared', { value: getVoucherValue(), merchant: voucher.merchant.name })
+                  : tPurchase('offAtMerchant', { value: getVoucherValue(), merchant: voucher.merchant.name })
+              }
               variant="outline"
               size="sm"
               className="justify-center"
@@ -230,8 +238,9 @@ export default function ReferralClient({
           </div>
 
           <p className="text-sm text-[#6B5744]">
-            {tReferral('validUntil')}{' '}
-            {new Date(voucher.validTo).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+            {tPurchase('validUntil', {
+              date: new Date(voucher.validTo).toLocaleDateString(undefined, { dateStyle: 'medium' }),
+            })}
           </p>
           {design?.finePrint && <p className="text-xs text-[#8B7355]">{design.finePrint}</p>}
         </div>

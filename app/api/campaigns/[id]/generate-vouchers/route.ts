@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Prisma } from '@prisma/client';
-import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { requireMerchantRole } from '@/lib/rbac';
-import { requireMerchantCapability } from '@/lib/access-control';
+import { requireMerchantCapability, requireMerchantProfileAccessById } from '@/lib/access-control';
 import { withErrorHandler } from '@/lib/error-handler';
 import { CacheKeys, invalidateCache } from '@/lib/cache';
 import { z } from 'zod';
@@ -13,7 +11,7 @@ const generateVouchersSchema = z.object({
   voucherData: z.object({
     type: z.enum(['percentage', 'fixed_amount', 'credit_amount']),
     value: z.number().int().positive(),
-    currency: z.string(),
+    currency: z.string().length(3),
     validFrom: z.string().datetime(),
     validTo: z.string().datetime(),
     usageLimitTotal: z.number().int().positive().nullable().optional(),
@@ -29,21 +27,18 @@ export async function POST(
 ) {
   return withErrorHandler(async () => {
     const { id } = await params;
-    const session = await auth();
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
 
     const campaign = await prisma.campaign.findUnique({
       where: { id },
       include: { merchant: true },
     });
 
-    if (!campaign) {
+    if (!campaign || campaign.deletedAt) {
       return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
     }
 
-    await requireMerchantRole(session.user.id, campaign.merchantId, 'merchant_admin');
+    // AccessControlError → 401/403 JSON (requireMerchantRole threw a plain Error → 500).
+    const { profile } = await requireMerchantProfileAccessById(campaign.merchantId, 'merchant_admin');
     // Bulk generation (up to 100/call) must respect the plan's
     // voucher.create entitlement, same as the single-create endpoint.
     await requireMerchantCapability(campaign.merchantId, campaign.merchant.slug, 'voucher.create');
@@ -61,13 +56,14 @@ export async function POST(
           status: 'draft', // Start as draft, merchant can publish later
           type: voucherData.type,
           value: voucherData.value,
-          currency: voucherData.currency,
+          currency: voucherData.currency.toUpperCase(),
           validFrom: new Date(voucherData.validFrom),
           validTo: new Date(voucherData.validTo),
           usageLimitTotal: voucherData.usageLimitTotal ?? null,
           usageLimitPerUser: voucherData.usageLimitPerUser ?? null,
           codePrefix: voucherData.codePrefix ?? null,
-          designJson: voucherData.designJson ? JSON.stringify(voucherData.designJson) : Prisma.DbNull,
+          // Store as a JSON object (not a stringified blob) so designJson.headline is readable.
+          designJson: voucherData.designJson ? (voucherData.designJson as Prisma.InputJsonValue) : Prisma.DbNull,
         },
       });
       vouchers.push(voucher);
@@ -77,8 +73,10 @@ export async function POST(
     await prisma.auditLog.create({
       data: {
         merchantId: campaign.merchantId,
-        actorUserId: session.user.id,
+        actorUserId: profile.userId,
         action: 'vouchers.generated',
+        resourceType: 'campaign',
+        resourceId: campaign.id,
         payloadJson: {
           campaignId: campaign.id,
           count: vouchers.length,

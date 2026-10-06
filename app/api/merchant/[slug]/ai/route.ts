@@ -167,7 +167,13 @@ export async function POST(
   return withErrorHandler(async () => {
     const { slug } = await params;
     if (!isAiConfigured()) {
-      return NextResponse.json({ error: 'AI is not configured' }, { status: 503 });
+      return NextResponse.json(
+        {
+          error: "AI suggestions aren't set up on this platform yet. You can still edit your page by hand.",
+          code: 'AI_NOT_CONFIGURED',
+        },
+        { status: 503 }
+      );
     }
 
     const session = await auth();

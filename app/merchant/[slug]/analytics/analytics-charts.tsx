@@ -2,6 +2,7 @@
 
 import { LineChart, BarChart, PieChart } from "@/components/ui/charts"
 import { WarmCard } from "@/components/warm-card"
+import { useTranslations } from "next-intl"
 
 interface RedemptionTrend {
   date: string
@@ -24,25 +25,30 @@ interface AnalyticsChartsProps {
   redemptionTrends: RedemptionTrend[]
   voucherPerformance: VoucherPerformance[]
   categoryBreakdown: CategoryData[]
+  /** ISO currency of the revenue series (the merchant's default currency). */
+  currency?: string
 }
 
 export function AnalyticsCharts({
   redemptionTrends,
   voucherPerformance,
   categoryBreakdown,
+  currency = "EUR",
 }: AnalyticsChartsProps) {
+  const t = useTranslations("merchantDashboard.analytics.charts")
+  const topVouchers = voucherPerformance.filter((v) => v.redemptions > 0).slice(0, 5)
   return (
     <div className="space-y-6">
       {/* Redemption Trends */}
       <WarmCard padding="lg">
         <h3 className="text-lg font-semibold text-[var(--text)] mb-4">
-          Redemption Trends (Last 30 Days)
+          {t("redemptionTrends")}
         </h3>
         <LineChart
           data={redemptionTrends}
           lines={[
-            { dataKey: "count", name: "Redemptions", color: "#cc785c" },
-            { dataKey: "revenue", name: "Revenue ($)", color: "#5e7e92" },
+            { dataKey: "count", name: t("redemptions"), color: "#cc785c" },
+            { dataKey: "revenue", name: t("revenue", { currency }), color: "#5e7e92" },
           ]}
           xAxisKey="date"
           height={350}
@@ -55,25 +61,31 @@ export function AnalyticsCharts({
         {/* Top Performing Vouchers */}
         <WarmCard padding="lg">
           <h3 className="text-lg font-semibold text-[var(--text)] mb-4">
-            Top Performing Vouchers
+            {t("topPerforming")}
           </h3>
-          <BarChart
-            data={voucherPerformance.slice(0, 5)}
-            bars={[
-              { dataKey: "redemptions", name: "Redemptions", color: "#FFC857" },
-            ]}
-            xAxisKey="name"
-            height={300}
-            showGrid
-            showLegend={false}
-            layout="horizontal"
-          />
+          {topVouchers.length > 0 ? (
+            <BarChart
+              data={topVouchers}
+              bars={[
+                { dataKey: "redemptions", name: t("redemptions"), color: "#FFC857" },
+              ]}
+              xAxisKey="name"
+              height={300}
+              showGrid
+              showLegend={false}
+              layout="horizontal"
+            />
+          ) : (
+            <div className="h-[300px] flex items-center justify-center text-center px-6 text-[var(--text-faint)]">
+              {t("noRedeemed")}
+            </div>
+          )}
         </WarmCard>
 
         {/* Category Breakdown */}
         <WarmCard padding="lg">
           <h3 className="text-lg font-semibold text-[var(--text)] mb-4">
-            Redemptions by Category
+            {t("byCategory")}
           </h3>
           {categoryBreakdown.length > 0 ? (
             <PieChart
@@ -85,7 +97,7 @@ export function AnalyticsCharts({
             />
           ) : (
             <div className="h-[300px] flex items-center justify-center text-[var(--text-faint)]">
-              No category data available
+              {t("noCategoryData")}
             </div>
           )}
         </WarmCard>

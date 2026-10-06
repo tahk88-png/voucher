@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useRef, useState } from "react"
+import { useTranslations } from "next-intl"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import {
@@ -54,16 +55,19 @@ export default function DragDropEditor({
   const [catalogOpen, setCatalogOpen] = useState(false)
   const [previewMode, setPreviewMode] = useState(false)
   const dragNodeRef = useRef<HTMLDivElement | null>(null)
+  const t = useTranslations("pageBuilder")
 
   const availableSections = PAGE_SECTION_CATALOG.filter((s) =>
     s.types.includes(activeType)
   )
 
+  const isKnownSection = (id: string) => PAGE_SECTION_CATALOG.some((s) => s.id === id)
+
   const catalogLabel = (id: string) =>
-    PAGE_SECTION_CATALOG.find((s) => s.id === id)?.label ?? id
+    isKnownSection(id) ? t(`catalog.sections.${id}.label`) : id
 
   const catalogDescription = (id: string) =>
-    PAGE_SECTION_CATALOG.find((s) => s.id === id)?.description ?? ""
+    isKnownSection(id) ? t(`catalog.sections.${id}.description`) : ""
 
   /* ---- drag handlers ---- */
 
@@ -201,17 +205,17 @@ export default function DragDropEditor({
     return (
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-[var(--text)]">Preview</h2>
+          <h2 className="text-lg font-semibold text-[var(--text)]">{t("editor.previewTitle")}</h2>
           <WarmButton variant="outline" size="sm" onClick={() => setPreviewMode(false)}>
             <Edit2 className="h-4 w-4 mr-1" />
-            Edit
+            {t("editor.edit")}
           </WarmButton>
         </div>
         <WarmCard padding="lg" className="bg-[var(--surface)] border border-[var(--border)]">
           <div className="space-y-4">
             {sections.length === 0 && (
               <p className="text-center text-[var(--text-muted)] py-8">
-                No sections added yet. Switch to edit mode to add sections.
+                {t("editor.previewEmpty")}
               </p>
             )}
             {sections.map((sectionId) => {
@@ -244,11 +248,11 @@ export default function DragDropEditor({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-[var(--text)]">Visual editor</h2>
+        <h2 className="text-lg font-semibold text-[var(--text)]">{t("editor.title")}</h2>
         <div className="flex items-center gap-2">
           <WarmButton variant="outline" size="sm" onClick={() => setPreviewMode(true)}>
             <Eye className="h-4 w-4 mr-1" />
-            Preview
+            {t("editor.preview")}
           </WarmButton>
         </div>
       </div>
@@ -258,7 +262,7 @@ export default function DragDropEditor({
         {sections.length === 0 && (
           <WarmCard padding="lg" className="border border-dashed border-[var(--border)] bg-transparent text-center">
             <p className="text-[var(--text-muted)] text-sm">
-              No sections yet. Click &quot;Add section&quot; below to start building.
+              {t("editor.empty")}
             </p>
           </WarmCard>
         )}
@@ -348,7 +352,7 @@ export default function DragDropEditor({
                       type="button"
                       onClick={() => toggleExpand(sectionId)}
                       className="h-8 w-8 rounded-lg flex items-center justify-center hover:bg-[var(--surface-dim)] transition-colors"
-                      aria-label={isExpanded ? "Collapse settings" : "Expand settings"}
+                      aria-label={isExpanded ? t("editor.collapseSettings") : t("editor.expandSettings")}
                     >
                       {isExpanded ? (
                         <ChevronUp className="h-4 w-4 text-[var(--text-muted)]" />
@@ -362,7 +366,7 @@ export default function DragDropEditor({
                       type="button"
                       onClick={() => removeSection(index)}
                       className="h-8 w-8 rounded-lg flex items-center justify-center hover:bg-red-50 transition-colors group"
-                      aria-label={`Remove ${label} section`}
+                      aria-label={t("editor.removeSection", { label })}
                     >
                       <Trash2 className="h-4 w-4 text-[var(--text-muted)] group-hover:text-red-500" />
                     </button>
@@ -382,7 +386,7 @@ export default function DragDropEditor({
                         {/* Title override */}
                         <div>
                           <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">
-                            Section title
+                            {t("editor.sectionTitle")}
                           </label>
                           <Input
                             value={settings?.title ?? ""}
@@ -395,12 +399,12 @@ export default function DragDropEditor({
                         {/* Description override */}
                         <div>
                           <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">
-                            Description
+                            {t("editor.description")}
                           </label>
                           <Input
                             value={settings?.description ?? ""}
                             onChange={(e) => updateSetting(sectionId, "description", e.target.value)}
-                            placeholder="Optional description"
+                            placeholder={t("editor.descriptionPlaceholder")}
                             className="border-[var(--border)] text-sm h-9"
                           />
                         </div>
@@ -408,7 +412,7 @@ export default function DragDropEditor({
                         {/* Background color */}
                         <div>
                           <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">
-                            Background color
+                            {t("editor.backgroundColor")}
                           </label>
                           <div className="flex items-center gap-2">
                             <input
@@ -429,7 +433,7 @@ export default function DragDropEditor({
                         {/* Layout variant */}
                         <div>
                           <label className="text-xs font-medium text-[var(--text-muted)] mb-1 block">
-                            Layout variant
+                            {t("editor.layoutVariant")}
                           </label>
                           <select
                             value={settings?.layoutVariant ?? "default"}
@@ -442,10 +446,10 @@ export default function DragDropEditor({
                             }
                             className="w-full h-9 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)]"
                           >
-                            <option value="default">Default</option>
-                            <option value="centered">Centered</option>
-                            <option value="wide">Wide</option>
-                            <option value="compact">Compact</option>
+                            <option value="default">{t("editor.layout.default")}</option>
+                            <option value="centered">{t("editor.layout.centered")}</option>
+                            <option value="wide">{t("editor.layout.wide")}</option>
+                            <option value="compact">{t("editor.layout.compact")}</option>
                           </select>
                         </div>
                       </div>
@@ -491,7 +495,7 @@ export default function DragDropEditor({
           onClick={() => setCatalogOpen((prev) => !prev)}
         >
           <Plus className="h-4 w-4 mr-1" />
-          Add section
+          {t("editor.addSection")}
         </WarmButton>
 
         {catalogOpen && (
@@ -507,11 +511,12 @@ export default function DragDropEditor({
               <div className="p-2">
                 <div className="flex items-center justify-between px-2 py-1 mb-1">
                   <span className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
-                    Available sections
+                    {t("editor.availableSections")}
                   </span>
                   <button
                     type="button"
                     onClick={() => setCatalogOpen(false)}
+                    aria-label={t("editor.closeCatalog")}
                     className="h-6 w-6 rounded flex items-center justify-center hover:bg-[var(--surface-dim)]"
                   >
                     <X className="h-3 w-3 text-[var(--text-muted)]" />
@@ -520,7 +525,7 @@ export default function DragDropEditor({
 
                 {unaddedSections.length === 0 ? (
                   <p className="text-sm text-[var(--text-muted)] text-center py-4">
-                    All available sections have been added.
+                    {t("editor.allAdded")}
                   </p>
                 ) : (
                   unaddedSections.map((section) => {
@@ -541,10 +546,10 @@ export default function DragDropEditor({
                         </div>
                         <div className="min-w-0">
                           <p className="text-sm font-medium text-[var(--text)] truncate">
-                            {section.label}
+                            {catalogLabel(section.id)}
                           </p>
                           <p className="text-xs text-[var(--text-muted)] truncate">
-                            {section.description}
+                            {catalogDescription(section.id)}
                           </p>
                         </div>
                         <Plus className="h-4 w-4 text-[var(--text-muted)] shrink-0 ml-auto" />
@@ -560,9 +565,10 @@ export default function DragDropEditor({
 
       {/* Section count */}
       <p className="text-xs text-[var(--text-muted)] text-center">
-        {sections.length} section{sections.length !== 1 ? "s" : ""} configured
-        {" / "}
-        {unaddedSections.length} available to add
+        {t("editor.count", {
+          configured: sections.length,
+          available: unaddedSections.length,
+        })}
       </p>
     </div>
   )

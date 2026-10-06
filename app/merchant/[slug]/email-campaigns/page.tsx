@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, Plus, Send, Eye, Trash2, GripVertical, ArrowUp, ArrowDown, Clock } from 'lucide-react';
 import { showConfirm } from '@/lib/confirm-helpers';
+import { useLocale, useTranslations } from 'next-intl';
 
 type SectionType = 'header' | 'text' | 'image' | 'button' | 'divider' | 'voucher-card';
 
@@ -44,14 +45,30 @@ interface Campaign {
   createdAt: string;
 }
 
-const SECTION_TYPES: { type: SectionType; label: string; icon: string }[] = [
-  { type: 'header', label: 'Header', icon: 'H' },
-  { type: 'text', label: 'Text', icon: 'T' },
-  { type: 'image', label: 'Image', icon: 'I' },
-  { type: 'button', label: 'Button', icon: 'B' },
-  { type: 'divider', label: 'Divider', icon: '—' },
-  { type: 'voucher-card', label: 'Voucher', icon: 'V' },
+const SECTION_TYPE_KEYS = {
+  header: 'header',
+  text: 'text',
+  image: 'image',
+  button: 'button',
+  divider: 'divider',
+  'voucher-card': 'voucherCard',
+} as const satisfies Record<SectionType, string>;
+
+const SECTION_TYPES: { type: SectionType; icon: string }[] = [
+  { type: 'header', icon: 'H' },
+  { type: 'text', icon: 'T' },
+  { type: 'image', icon: 'I' },
+  { type: 'button', icon: 'B' },
+  { type: 'divider', icon: '—' },
+  { type: 'voucher-card', icon: 'V' },
 ];
+
+const CAMPAIGN_STATUSES = ['draft', 'scheduled', 'sent'] as const;
+type CampaignStatus = (typeof CAMPAIGN_STATUSES)[number];
+
+function isCampaignStatus(status: string): status is CampaignStatus {
+  return (CAMPAIGN_STATUSES as readonly string[]).includes(status);
+}
 
 const STATUS_COLORS: Record<string, string> = {
   draft: 'bg-gray-100 text-gray-700',
@@ -72,61 +89,62 @@ function SectionEditor({ section, onChange, onRemove, onMoveUp, onMoveDown, isFi
   isFirst: boolean;
   isLast: boolean;
 }) {
+  const t = useTranslations('merchantTeam.emailCampaigns');
   return (
     <div className="border border-[var(--border)] rounded-lg p-3 bg-[var(--surface)]">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <GripVertical className="h-4 w-4 text-[var(--text-muted)] cursor-grab" />
-          <span className="text-xs font-semibold uppercase text-[var(--text-muted)]">{section.type}</span>
+          <span className="text-xs font-semibold uppercase text-[var(--text-muted)]">{t(`sectionTypes.${SECTION_TYPE_KEYS[section.type]}`)}</span>
         </div>
         <div className="flex items-center gap-1">
-          <button onClick={onMoveUp} disabled={isFirst} className="p-1 rounded hover:bg-[var(--surface)] disabled:opacity-30" aria-label="Move up">
+          <button onClick={onMoveUp} disabled={isFirst} className="p-1 rounded hover:bg-[var(--surface)] disabled:opacity-30" aria-label={t('editor.moveUp')}>
             <ArrowUp className="h-3 w-3" />
           </button>
-          <button onClick={onMoveDown} disabled={isLast} className="p-1 rounded hover:bg-[var(--surface)] disabled:opacity-30" aria-label="Move down">
+          <button onClick={onMoveDown} disabled={isLast} className="p-1 rounded hover:bg-[var(--surface)] disabled:opacity-30" aria-label={t('editor.moveDown')}>
             <ArrowDown className="h-3 w-3" />
           </button>
-          <button onClick={onRemove} className="p-1 rounded hover:bg-red-50 text-red-500" aria-label="Remove section">
+          <button onClick={onRemove} className="p-1 rounded hover:bg-red-50 text-red-500" aria-label={t('editor.removeSection')}>
             <Trash2 className="h-3 w-3" />
           </button>
         </div>
       </div>
       {section.type === 'header' && (
         <div className="space-y-2">
-          <Input placeholder="Title" value={section.title || ''} onChange={e => onChange({ ...section, title: e.target.value })} />
-          <Input placeholder="Subtitle (optional)" value={section.subtitle || ''} onChange={e => onChange({ ...section, subtitle: e.target.value })} />
+          <Input placeholder={t('editor.title')} value={section.title || ''} onChange={e => onChange({ ...section, title: e.target.value })} />
+          <Input placeholder={t('editor.subtitle')} value={section.subtitle || ''} onChange={e => onChange({ ...section, subtitle: e.target.value })} />
         </div>
       )}
       {section.type === 'text' && (
         <textarea
           className="w-full border border-[var(--border)] rounded-md p-2 text-sm min-h-[80px] resize-y"
-          placeholder="Enter text content..."
+          placeholder={t('editor.textContent')}
           value={section.content || ''}
           onChange={e => onChange({ ...section, content: e.target.value })}
         />
       )}
       {section.type === 'image' && (
         <div className="space-y-2">
-          <Input placeholder="Image URL" value={section.src || ''} onChange={e => onChange({ ...section, src: e.target.value })} />
-          <Input placeholder="Alt text" value={section.alt || ''} onChange={e => onChange({ ...section, alt: e.target.value })} />
+          <Input placeholder={t('editor.imageUrl')} value={section.src || ''} onChange={e => onChange({ ...section, src: e.target.value })} />
+          <Input placeholder={t('editor.altText')} value={section.alt || ''} onChange={e => onChange({ ...section, alt: e.target.value })} />
         </div>
       )}
       {section.type === 'button' && (
         <div className="space-y-2">
-          <Input placeholder="Button label" value={section.label || ''} onChange={e => onChange({ ...section, label: e.target.value })} />
-          <Input placeholder="Button URL" value={section.href || ''} onChange={e => onChange({ ...section, href: e.target.value })} />
+          <Input placeholder={t('editor.buttonLabel')} value={section.label || ''} onChange={e => onChange({ ...section, label: e.target.value })} />
+          <Input placeholder={t('editor.buttonUrl')} value={section.href || ''} onChange={e => onChange({ ...section, href: e.target.value })} />
           <Input type="color" value={section.color || '#8B7355'} onChange={e => onChange({ ...section, color: e.target.value })} />
         </div>
       )}
       {section.type === 'divider' && (
-        <p className="text-xs text-[var(--text-muted)]">Horizontal divider line</p>
+        <p className="text-xs text-[var(--text-muted)]">{t('editor.dividerHint')}</p>
       )}
       {section.type === 'voucher-card' && (
         <div className="space-y-2">
-          <Input placeholder="Voucher title" value={section.voucherTitle || ''} onChange={e => onChange({ ...section, voucherTitle: e.target.value })} />
-          <Input placeholder="Value (e.g. 20% OFF)" value={section.voucherValue || ''} onChange={e => onChange({ ...section, voucherValue: e.target.value })} />
-          <Input placeholder="Code (e.g. SAVE20)" value={section.voucherCode || ''} onChange={e => onChange({ ...section, voucherCode: e.target.value })} />
-          <Input placeholder="Expiry (e.g. Dec 31, 2026)" value={section.voucherExpiry || ''} onChange={e => onChange({ ...section, voucherExpiry: e.target.value })} />
+          <Input placeholder={t('editor.voucherTitle')} value={section.voucherTitle || ''} onChange={e => onChange({ ...section, voucherTitle: e.target.value })} />
+          <Input placeholder={t('editor.voucherValue')} value={section.voucherValue || ''} onChange={e => onChange({ ...section, voucherValue: e.target.value })} />
+          <Input placeholder={t('editor.voucherCode')} value={section.voucherCode || ''} onChange={e => onChange({ ...section, voucherCode: e.target.value })} />
+          <Input placeholder={t('editor.voucherExpiry')} value={section.voucherExpiry || ''} onChange={e => onChange({ ...section, voucherExpiry: e.target.value })} />
         </div>
       )}
     </div>
@@ -136,6 +154,9 @@ function SectionEditor({ section, onChange, onRemove, onMoveUp, onMoveDown, isFi
 export default function EmailCampaignsPage() {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
+  const t = useTranslations('merchantTeam.emailCampaigns');
+  const locale = useLocale();
+  const dateLocale = locale === 'en' ? 'en-GB' : locale;
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
@@ -151,6 +172,8 @@ export default function EmailCampaignsPage() {
   const [scheduledAt, setScheduledAt] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  // null = unknown (older API); false = no email provider on the platform.
+  const [emailConfigured, setEmailConfigured] = useState<boolean | null>(null);
   const previewRef = useRef<HTMLIFrameElement>(null);
 
   const fetchCampaigns = useCallback(async () => {
@@ -160,6 +183,7 @@ export default function EmailCampaignsPage() {
       if (res.ok) {
         const data = await res.json();
         setCampaigns(data.campaigns || []);
+        setEmailConfigured(typeof data.emailConfigured === 'boolean' ? data.emailConfigured : null);
       }
     } finally {
       setLoading(false);
@@ -192,7 +216,7 @@ export default function EmailCampaignsPage() {
 
   const handleCreate = async () => {
     if (!name.trim() || !subject.trim()) {
-      toast({ title: 'Missing fields', description: 'Name and subject are required.', variant: 'destructive' });
+      toast({ title: t('toasts.missingFields'), description: t('toasts.missingFieldsDescription'), variant: 'destructive' });
       return;
     }
     setSubmitting(true);
@@ -209,7 +233,7 @@ export default function EmailCampaignsPage() {
         }),
       });
       if (!res.ok) throw new Error('Failed to create');
-      toast({ title: 'Campaign created' });
+      toast({ title: t('toasts.created') });
       setShowCreate(false);
       setName('');
       setSubject('');
@@ -220,89 +244,109 @@ export default function EmailCampaignsPage() {
       setScheduledAt('');
       fetchCampaigns();
     } catch {
-      toast({ title: 'Error', description: 'Failed to create campaign.', variant: 'destructive' });
+      toast({ title: t('toasts.error'), description: t('toasts.createFailed'), variant: 'destructive' });
     } finally {
       setSubmitting(false);
     }
   };
 
   const handleSend = async (campaignId: string) => {
-    showConfirm('Are you sure you want to send this campaign now?', async () => {
+    showConfirm(t('toasts.sendConfirm'), async () => {
       try {
         const res = await fetch(`/api/merchant/${slug}/email-campaigns/${campaignId}/send`, { method: 'POST' });
+        const data = await res.json().catch(() => ({}));
         if (!res.ok) {
-          const data = await res.json();
-          throw new Error(data.error || 'Failed to send');
+          if (data?.code === 'EMAIL_PROVIDER_NOT_CONFIGURED') setEmailConfigured(false);
+          throw new Error(data.error || t('toasts.sendFailedStatus', { status: res.status }));
         }
-        const data = await res.json();
-        toast({ title: 'Campaign sent', description: `Delivered to ${data.recipientCount} recipients.` });
+        const sent = Number(data.recipientCount) || 0;
+        const failed = Number(data.failedCount) || 0;
+        if (failed > 0) {
+          toast({
+            title: t('toasts.partlySent'),
+            description: t('toasts.partlySentDescription', { sent, total: sent + failed, failed }),
+            variant: 'warning',
+          });
+        } else {
+          toast({
+            title: t('toasts.sent'),
+            description: t('toasts.sentDescription', { sent }),
+            variant: 'success',
+          });
+        }
         fetchCampaigns();
       } catch (err: any) {
-        toast({ title: 'Send failed', description: err.message, variant: 'destructive' });
+        toast({ title: t('toasts.sendFailed'), description: err.message, variant: 'destructive' });
       }
-    }, { confirmLabel: 'Send', variant: 'warning' });
+    }, { confirmLabel: t('send'), variant: 'warning' });
     return;
   };
 
   const handleDelete = async (campaignId: string) => {
-    showConfirm('Delete this campaign?', async () => {
+    showConfirm(t('toasts.deleteConfirm'), async () => {
       try {
         await fetch(`/api/merchant/${slug}/email-campaigns/${campaignId}`, { method: 'DELETE' });
-        toast({ title: 'Campaign deleted' });
+        toast({ title: t('toasts.deleted') });
         fetchCampaigns();
       } catch {
-        toast({ title: 'Error', description: 'Failed to delete.', variant: 'destructive' });
+        toast({ title: t('toasts.error'), description: t('toasts.deleteFailed'), variant: 'destructive' });
       }
-    }, { confirmLabel: 'Delete', variant: 'destructive' });
+    }, { confirmLabel: t('delete'), variant: 'destructive' });
     return;
   };
 
   return (
-    <div className="p-6 space-y-6 max-w-6xl mx-auto">
-      <div className="flex items-center justify-between">
+    <div className="p-4 sm:p-6 space-y-6 max-w-6xl mx-auto">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <Mail className="h-6 w-6 text-[var(--primary)]" />
-          <h1 className="text-2xl font-bold text-[var(--text)]">Email Campaigns</h1>
+          <h1 className="text-2xl font-bold text-[var(--text)]">{t('title')}</h1>
         </div>
         <WarmButton onClick={() => setShowCreate(!showCreate)}>
-          <Plus className="h-4 w-4 mr-1" /> New Campaign
+          <Plus className="h-4 w-4 mr-1" /> {t('newCampaign')}
         </WarmButton>
       </div>
 
+      {emailConfigured === false && (
+        <div role="status" className="rounded-[var(--r-sm)] border border-l-4 border-[var(--border)] border-l-[color:var(--warning)] bg-[var(--surface)] p-4 text-sm text-[var(--text)]">
+          {t('notConfigured')}
+        </div>
+      )}
+
       {showCreate && (
         <WarmCard padding="lg">
-          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Create Campaign</h2>
+          <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t('createTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left: Builder */}
             <div className="space-y-4">
               <div>
-                <Label htmlFor="campaign-name">Campaign Name</Label>
-                <Input id="campaign-name" value={name} onChange={e => setName(e.target.value)} placeholder="Summer Sale Newsletter" />
+                <Label htmlFor="campaign-name">{t('campaignName')}</Label>
+                <Input id="campaign-name" value={name} onChange={e => setName(e.target.value)} placeholder={t('campaignNamePlaceholder')} />
               </div>
               <div>
-                <Label htmlFor="campaign-subject">Subject Line</Label>
-                <Input id="campaign-subject" value={subject} onChange={e => setSubject(e.target.value)} placeholder="Don't miss our summer deals!" />
+                <Label htmlFor="campaign-subject">{t('subjectLine')}</Label>
+                <Input id="campaign-subject" value={subject} onChange={e => setSubject(e.target.value)} placeholder={t('subjectPlaceholder')} />
               </div>
               <div>
-                <Label htmlFor="recipient-filter">Recipients</Label>
+                <Label htmlFor="recipient-filter">{t('recipients')}</Label>
                 <select
                   id="recipient-filter"
                   value={recipientFilter}
                   onChange={e => setRecipientFilter(e.target.value as 'all' | 'redeemed_30d' | 'inactive')}
                   className="w-full border border-[var(--border)] rounded-md p-2 text-sm bg-[var(--surface)]"
                 >
-                  <option value="all">All customers</option>
-                  <option value="redeemed_30d">Redeemed in last 30 days</option>
-                  <option value="inactive">Inactive customers</option>
+                  <option value="all">{t('recipientFilter.all')}</option>
+                  <option value="redeemed_30d">{t('recipientFilter.redeemed30d')}</option>
+                  <option value="inactive">{t('recipientFilter.inactive')}</option>
                 </select>
               </div>
               <div>
-                <Label htmlFor="scheduled-at">Schedule (optional)</Label>
+                <Label htmlFor="scheduled-at">{t('schedule')}</Label>
                 <Input id="scheduled-at" type="datetime-local" value={scheduledAt} onChange={e => setScheduledAt(e.target.value)} />
               </div>
 
               <div>
-                <Label>Email Sections</Label>
+                <Label>{t('emailSections')}</Label>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {SECTION_TYPES.map(st => (
                     <button
@@ -310,7 +354,7 @@ export default function EmailCampaignsPage() {
                       onClick={() => addSection(st.type)}
                       className="px-3 py-1.5 text-xs font-medium rounded-lg border border-[var(--border)] hover:bg-[var(--surface)] transition-colors"
                     >
-                      <span className="font-bold mr-1">{st.icon}</span> {st.label}
+                      <span className="font-bold mr-1">{st.icon}</span> {t(`sectionTypes.${SECTION_TYPE_KEYS[st.type]}`)}
                     </button>
                   ))}
                 </div>
@@ -332,10 +376,10 @@ export default function EmailCampaignsPage() {
 
               <div className="flex gap-2">
                 <WarmButton onClick={handleCreate} disabled={submitting}>
-                  {submitting ? 'Creating...' : scheduledAt ? 'Schedule Campaign' : 'Save as Draft'}
+                  {submitting ? t('creating') : scheduledAt ? t('scheduleCampaign') : t('saveDraft')}
                 </WarmButton>
                 <WarmButton variant="outline" onClick={() => setShowPreview(!showPreview)}>
-                  <Eye className="h-4 w-4 mr-1" /> Preview
+                  <Eye className="h-4 w-4 mr-1" /> {t('preview')}
                 </WarmButton>
               </div>
             </div>
@@ -344,7 +388,7 @@ export default function EmailCampaignsPage() {
             {showPreview && (
               <div className="border border-[var(--border)] rounded-lg overflow-hidden bg-[#F5F0EB]">
                 <div className="bg-[var(--surface)] px-3 py-2 border-b border-[var(--border)] text-xs text-[var(--text-muted)]">
-                  Preview
+                  {t('preview')}
                 </div>
                 <div className="p-4">
                   <div className="bg-[var(--surface)] rounded-lg shadow-sm p-6 max-w-md mx-auto space-y-4">
@@ -352,35 +396,35 @@ export default function EmailCampaignsPage() {
                       <div key={s.id}>
                         {s.type === 'header' && (
                           <div className="text-center">
-                            <h2 className="text-xl font-bold text-[var(--text)]">{s.title || 'Header Title'}</h2>
+                            <h2 className="text-xl font-bold text-[var(--text)]">{s.title || t('previewContent.headerTitle')}</h2>
                             {s.subtitle && <p className="text-sm text-[var(--text-muted)] mt-1">{s.subtitle}</p>}
                           </div>
                         )}
-                        {s.type === 'text' && <p className="text-sm text-[var(--text)] leading-relaxed">{s.content || 'Text content...'}</p>}
+                        {s.type === 'text' && <p className="text-sm text-[var(--text)] leading-relaxed">{s.content || t('previewContent.textContent')}</p>}
                         {s.type === 'image' && (
                           <div className="text-center">
                             {s.src ? (
                               <Image src={s.src} alt={s.alt || ''} width={600} height={400} unoptimized className="max-w-full h-auto rounded-lg mx-auto" />
                             ) : (
-                              <div className="bg-gray-100 rounded-lg h-32 flex items-center justify-center text-gray-400 text-sm">Image placeholder</div>
+                              <div className="bg-gray-100 rounded-lg h-32 flex items-center justify-center text-gray-400 text-sm">{t('previewContent.imagePlaceholder')}</div>
                             )}
                           </div>
                         )}
                         {s.type === 'button' && (
                           <div className="text-center">
                             <span className="inline-block px-6 py-3 rounded-lg text-white font-semibold text-sm" style={{ backgroundColor: s.color || '#8B7355' }}>
-                              {s.label || 'Button'}
+                              {s.label || t('previewContent.button')}
                             </span>
                           </div>
                         )}
                         {s.type === 'divider' && <hr className="border-t border-[#E8E0D8]" />}
                         {s.type === 'voucher-card' && (
                           <div className="border-2 border-dashed border-[#8B7355] rounded-xl p-4 text-center bg-[#FAF7F4]">
-                            <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider">Voucher</p>
-                            <p className="text-lg font-bold text-[var(--text)]">{s.voucherTitle || 'Voucher'}</p>
+                            <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider">{t('previewContent.voucher')}</p>
+                            <p className="text-lg font-bold text-[var(--text)]">{s.voucherTitle || t('previewContent.voucher')}</p>
                             <p className="text-2xl font-extrabold text-[var(--text-faint)]">{s.voucherValue || '---'}</p>
                             {s.voucherCode && <code className="text-sm bg-[var(--surface)] px-3 py-1 rounded border border-[#E8E0D8] inline-block mt-1">{s.voucherCode}</code>}
-                            {s.voucherExpiry && <p className="text-xs text-[#9B8A7A] mt-1">Valid until {s.voucherExpiry}</p>}
+                            {s.voucherExpiry && <p className="text-xs text-[#9B8A7A] mt-1">{t('previewContent.validUntil', { date: s.voucherExpiry })}</p>}
                           </div>
                         )}
                       </div>
@@ -396,24 +440,24 @@ export default function EmailCampaignsPage() {
       {/* Campaign List */}
       <WarmCard padding="none">
         {loading ? (
-          <div className="flex items-center justify-center h-48 text-[var(--text-muted)]">Loading...</div>
+          <div className="flex items-center justify-center h-48 text-[var(--text-muted)]">{t('loading')}</div>
         ) : campaigns.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-48 gap-2 text-[var(--text-muted)]">
             <Mail className="h-8 w-8 opacity-30" />
-            <p>No email campaigns yet</p>
+            <p>{t('empty')}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="border-b border-[var(--border)] bg-[var(--surface)]">
                 <tr className="text-left text-[var(--text-muted)]">
-                  <th className="px-4 py-3 font-semibold">Name</th>
-                  <th className="px-4 py-3 font-semibold">Subject</th>
-                  <th className="px-4 py-3 font-semibold">Status</th>
-                  <th className="px-4 py-3 font-semibold">Recipients</th>
-                  <th className="px-4 py-3 font-semibold">Opens</th>
-                  <th className="px-4 py-3 font-semibold">Created</th>
-                  <th className="px-4 py-3 font-semibold">Actions</th>
+                  <th className="px-4 py-3 font-semibold">{t('columns.name')}</th>
+                  <th className="px-4 py-3 font-semibold">{t('columns.subject')}</th>
+                  <th className="px-4 py-3 font-semibold">{t('columns.status')}</th>
+                  <th className="px-4 py-3 font-semibold">{t('columns.recipients')}</th>
+                  <th className="px-4 py-3 font-semibold">{t('columns.opens')}</th>
+                  <th className="px-4 py-3 font-semibold">{t('columns.created')}</th>
+                  <th className="px-4 py-3 font-semibold">{t('columns.actions')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--border)]">
@@ -423,26 +467,31 @@ export default function EmailCampaignsPage() {
                     <td className="px-4 py-3 text-[var(--text-muted)]">{c.subject}</td>
                     <td className="px-4 py-3">
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[c.status] || 'bg-gray-100 text-gray-600'}`}>
-                        {c.status}
+                        {isCampaignStatus(c.status) ? t(`status.${c.status}`) : c.status}
                       </span>
                     </td>
                     <td className="px-4 py-3 text-[var(--text-muted)]">{c.recipientCount}</td>
                     <td className="px-4 py-3 text-[var(--text-muted)]">{c.openCount}</td>
-                    <td className="px-4 py-3 text-[var(--text-muted)] text-xs">{new Date(c.createdAt).toLocaleDateString()}</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)] text-xs">{new Date(c.createdAt).toLocaleDateString(dateLocale)}</td>
                     <td className="px-4 py-3">
                       <div className="flex gap-1">
                         {c.status !== 'sent' && (
-                          <WarmButton size="sm" onClick={() => handleSend(c.id)}>
-                            <Send className="h-3 w-3 mr-1" /> Send
+                          <WarmButton
+                            size="sm"
+                            onClick={() => handleSend(c.id)}
+                            disabled={emailConfigured === false}
+                            title={emailConfigured === false ? t('notConfiguredShort') : undefined}
+                          >
+                            <Send className="h-3 w-3 mr-1" /> {t('send')}
                           </WarmButton>
                         )}
                         {c.status === 'scheduled' && (
                           <span className="flex items-center text-xs text-blue-600">
                             <Clock className="h-3 w-3 mr-1" />
-                            {c.scheduledAt ? new Date(c.scheduledAt).toLocaleString() : ''}
+                            {c.scheduledAt ? new Date(c.scheduledAt).toLocaleString(dateLocale, { dateStyle: 'medium', timeStyle: 'short' }) : ''}
                           </span>
                         )}
-                        <WarmButton size="sm" variant="outline" onClick={() => handleDelete(c.id)}>
+                        <WarmButton size="sm" variant="outline" onClick={() => handleDelete(c.id)} aria-label={t('deleteCampaign')}>
                           <Trash2 className="h-3 w-3" />
                         </WarmButton>
                       </div>

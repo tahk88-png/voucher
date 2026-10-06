@@ -12,6 +12,7 @@ import {
   Legend,
   type TooltipProps,
 } from "recharts"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 interface AnimatedLineChartProps {
@@ -70,6 +71,7 @@ export function AnimatedLineChart({
   xAxisKey = "name",
   className,
 }: AnimatedLineChartProps) {
+  const t = useTranslations("dsComponents.common")
   if (!data || data.length === 0) {
     return (
       <div
@@ -79,7 +81,7 @@ export function AnimatedLineChart({
         )}
         style={{ height }}
       >
-        <p className="text-sm text-[var(--text-muted)]">No data available</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("noData")}</p>
       </div>
     )
   }

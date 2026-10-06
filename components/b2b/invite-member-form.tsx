@@ -5,20 +5,16 @@ import { useRouter } from 'next/navigation';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { UserPlus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 // Roles the org invitation API accepts (excluding "owner" — ownership is
 // transferred, not invited).
-const ROLE_OPTIONS: { value: string; label: string }[] = [
-  { value: 'admin', label: 'Admin' },
-  { value: 'finance', label: 'Finance' },
-  { value: 'marketing', label: 'Marketing' },
-  { value: 'support', label: 'Support' },
-  { value: 'partner_cashier', label: 'Partner Cashier' },
-  { value: 'auditor', label: 'Auditor' },
-];
+// Labels come from b2b.invite.roles.<value>.
+const ROLE_OPTIONS = ['admin', 'finance', 'marketing', 'support', 'partner_cashier', 'auditor'] as const;
 
 export function InviteMemberForm({ orgId }: { orgId: string }) {
   const router = useRouter();
+  const t = useTranslations('b2b.invite');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('admin');
   const [submitting, setSubmitting] = useState(false);
@@ -37,18 +33,18 @@ export function InviteMemberForm({ orgId }: { orgId: string }) {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
-        setMessage({ kind: 'ok', text: `Invitation sent to ${email.trim()}.` });
+        setMessage({ kind: 'ok', text: t('sent', { email: email.trim() }) });
         setEmail('');
         router.refresh(); // re-render the server page to show the new pending invite
       } else {
         const text =
           typeof data.error === 'string'
             ? data.error
-            : 'Could not send the invitation. Please check the email and try again.';
+            : t('failed');
         setMessage({ kind: 'err', text });
       }
     } catch {
-      setMessage({ kind: 'err', text: 'Something went wrong. Please try again.' });
+      setMessage({ kind: 'err', text: t('error') });
     } finally {
       setSubmitting(false);
     }
@@ -58,7 +54,7 @@ export function InviteMemberForm({ orgId }: { orgId: string }) {
     <WarmCard padding="lg">
       <div className="flex items-center gap-2 mb-3">
         <UserPlus className="h-5 w-5 text-[var(--primary)]" />
-        <h2 className="text-lg font-semibold text-[var(--text)]">Invite a member</h2>
+        <h2 className="text-lg font-semibold text-[var(--text)]">{t('title')}</h2>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
         <input
@@ -66,7 +62,7 @@ export function InviteMemberForm({ orgId }: { orgId: string }) {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="teammate@example.com"
+          placeholder={t('emailPlaceholder')}
           className="flex-1 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/40"
         />
         <select
@@ -75,13 +71,13 @@ export function InviteMemberForm({ orgId }: { orgId: string }) {
           className="rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/40"
         >
           {ROLE_OPTIONS.map((r) => (
-            <option key={r.value} value={r.value}>
-              {r.label}
+            <option key={r} value={r}>
+              {t(`roles.${r}`)}
             </option>
           ))}
         </select>
         <WarmButton type="submit" disabled={submitting}>
-          {submitting ? 'Sending…' : 'Send invite'}
+          {submitting ? t('sending') : t('submit')}
         </WarmButton>
       </form>
       {message && (

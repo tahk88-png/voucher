@@ -34,7 +34,7 @@ export function EmailLayout({ preview, children }: EmailLayoutProps) {
         <Container style={containerStyle}>
           {/* Brand header */}
           <Section style={headerStyle}>
-            <Text style={logoStyle}>Vouchr</Text>
+            <Text style={logoStyle}>GiftHub</Text>
           </Section>
 
           {/* Content */}
@@ -44,7 +44,7 @@ export function EmailLayout({ preview, children }: EmailLayoutProps) {
           <Hr style={hrStyle} />
           <Section style={footerStyle}>
             <Text style={footerTextStyle}>
-              This email was sent by Vouchr. If you have questions, reply to this email.
+              This email was sent by GiftHub. If you have questions, reply to this email.
             </Text>
           </Section>
         </Container>

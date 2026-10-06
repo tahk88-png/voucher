@@ -51,7 +51,7 @@ export default function UserAnalyticsClient({ data }: { data: UserAnalyticsData 
       key: 'totalSpent',
       header: 'Total Spent',
       render: (row) =>
-        new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(row.totalSpent as number),
+        new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'EUR' }).format(row.totalSpent as number),
     },
   ];
 

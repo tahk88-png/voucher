@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
+import { useTranslations } from 'next-intl';
 
 export default function AppError({
   error,
@@ -12,6 +13,9 @@ export default function AppError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const t = useTranslations('portal.error');
+  const tCommon = useTranslations('common');
+
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       console.error('[App Error]', error);
@@ -21,14 +25,14 @@ export default function AppError({
   return (
     <div className="flex min-h-[50vh] items-center justify-center p-8">
       <WarmCard padding="lg" className="w-full max-w-md bg-white">
-        <h1 className="text-lg font-semibold text-[#2D2721]">Something went wrong</h1>
+        <h1 className="text-lg font-semibold text-[#2D2721]">{t('title')}</h1>
         <p className="text-sm text-[#6B5744] mt-2">
-          The portal failed to load. Please refresh the page or try again later.
+          {t('description')}
         </p>
         <div className="flex flex-wrap gap-3 mt-4">
-          <WarmButton onClick={reset}>Try again</WarmButton>
+          <WarmButton onClick={reset}>{tCommon('tryAgain')}</WarmButton>
           <WarmButton variant="outline" asChild>
-            <Link href="/app">Back to portal</Link>
+            <Link href="/app">{t('backToPortal')}</Link>
           </WarmButton>
         </div>
       </WarmCard>

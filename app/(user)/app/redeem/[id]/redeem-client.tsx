@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import { QRCodePanel } from "@/components/qr-code-panel"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
@@ -16,15 +17,16 @@ export default function RedeemClient({
   code: string
   expiryDate: string
 }) {
+  const t = useTranslations("account")
   const [showCode, setShowCode] = useState(false)
 
   if (!code) {
     return (
       <div className="p-4 sm:p-6">
         <WarmCard padding="lg" className="max-w-lg bg-white">
-          <p className="text-sm text-[#6B5744]">Voucher code not available.</p>
+          <p className="text-sm text-[#6B5744]">{t("redeem.codeUnavailable")}</p>
           <WarmButton asChild variant="outline" className="mt-4">
-            <Link href="/app">Back to wallet</Link>
+            <Link href="/app">{t("redeem.backToWallet")}</Link>
           </WarmButton>
         </WarmCard>
       </div>
@@ -39,7 +41,7 @@ export default function RedeemClient({
           variant="ghost"
           size="sm"
           className="h-10 w-10 p-0 bg-white/80 backdrop-blur-sm"
-          aria-label="Back"
+          aria-label={t("redeem.back")}
         >
           <Link href={`/app/voucher/${voucherId}`}>
             <ArrowLeft className="h-4 w-4" />

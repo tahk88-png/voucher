@@ -1,14 +1,20 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'My Wallet', noIndex: true });
-
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { WarmCard } from '@/components/warm-card';
+import Link from 'next/link';
 import { Wallet } from 'lucide-react';
+import { WarmButton } from '@/components/warm-button';
 import { getCreditBalance } from '@/lib/credits';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { getCurrencyLocale } from '@/lib/i18n-utils';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('account');
+  return pageMetadata({ title: t('wallet.metaTitle'), noIndex: true });
+}
 
 export default async function WalletPage() {
   const session = await auth();
@@ -18,35 +24,30 @@ export default async function WalletPage() {
   const sessionUser = session.user;
   const userId = sessionUser.id;
 
-  const user = await prisma.user.findUnique({
-    where: { id: sessionUser.id },
-    include: {
-      merchantMembers: {
-        include: {
-          merchant: true,
-        },
-      },
-    },
-  });
-  if (!user) {
-    redirect('/login');
-  }
   const locale = await getLocale();
   const tNav = await getTranslations('nav');
   const tWallet = await getTranslations('wallet');
+  const tDashboard = await getTranslations('dashboard');
+
+  // Credit belongs to the shopper, per issuing merchant. List every merchant the
+  // user holds credit with (not the merchants they happen to work for).
+  const merchants = await prisma.merchant.findMany({
+    where: { creditLedgers: { some: { userId } } },
+    select: { id: true, name: true, defaultCurrency: true },
+    orderBy: { name: 'asc' },
+  });
 
   const merchantBalances = await Promise.all(
-    (user.merchantMembers ?? []).map(async (member) => {
-      try {
-        const merchantId = member.merchant?.id ?? '';
-        if (!merchantId) return { member, balance: null };
-        const balance = await getCreditBalance(userId, merchantId);
-        return { member, balance };
-      } catch {
-        return { member, balance: null };
-      }
-    })
+    merchants.map(async (merchant) => ({
+      merchant,
+      balance: await getCreditBalance(userId, merchant.id),
+    }))
   );
+
+  const creditStatusLabel = (status: string) =>
+    ['locked', 'available', 'used', 'expired', 'reversed'].includes(status)
+      ? tDashboard(`creditStatus.${status}` as never)
+      : status;
 
   const formatCurrency = (amount: number, currency: string) =>
     new Intl.NumberFormat(getCurrencyLocale(locale), {
@@ -67,46 +68,54 @@ export default async function WalletPage() {
             <div className="w-14 h-14 rounded-full bg-[#FFF9ED] flex items-center justify-center">
               <Wallet className="h-6 w-6 text-[#8B7355]" />
             </div>
-            <div>{tWallet('noMerchantWallets')}</div>
+            <div className="font-medium text-[#2D2721]">{tWallet('noCreditYet')}</div>
+            <p className="text-sm max-w-md">{tWallet('noCreditYetBody')}</p>
+            <div className="flex flex-wrap justify-center gap-3 pt-2">
+              <WarmButton asChild size="sm">
+                <Link href="/app/share">{tWallet('shareToEarn')}</Link>
+              </WarmButton>
+              <WarmButton asChild size="sm" variant="outline">
+                <Link href="/campaigns">{tDashboard('exploreVouchers')}</Link>
+              </WarmButton>
+            </div>
           </div>
         </WarmCard>
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
-          {merchantBalances.map(({ member, balance }) => {
-            const currency = balance?.currency || member.merchant.defaultCurrency || 'USD';
+          {merchantBalances.map(({ merchant, balance }) => {
+            const currency = balance.credits.length > 0 ? balance.currency : merchant.defaultCurrency || 'EUR';
             return (
-              <WarmCard key={member.merchantId} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
+              <WarmCard key={merchant.id} padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
                 <div className="space-y-4">
                   <div>
-                    <h2 className="text-lg font-semibold text-[#2D2721]">{member.merchant.name}</h2>
-                    <p className="text-xs text-[#8B7355]">Role: {member.role}</p>
+                    <h2 className="text-lg font-semibold text-[#2D2721]">{merchant.name}</h2>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-3">
                     <div>
                       <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">{tWallet('available')}</div>
                       <div className="text-lg font-semibold text-[#2D2721]">
-                        {formatCurrency(balance?.available ?? 0, currency)}
+                        {formatCurrency(balance.available, currency)}
                       </div>
                     </div>
                     <div>
                       <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">{tWallet('locked')}</div>
                       <div className="text-lg font-semibold text-[#2D2721]">
-                        {formatCurrency(balance?.locked ?? 0, currency)}
+                        {formatCurrency(balance.locked, currency)}
                       </div>
                     </div>
                     <div>
                       <div className="text-xs uppercase tracking-wide text-[#8B7355] font-semibold">{tWallet('total')}</div>
                       <div className="text-lg font-semibold text-[#2D2721]">
-                        {formatCurrency(balance?.total ?? 0, currency)}
+                        {formatCurrency(balance.total, currency)}
                       </div>
                     </div>
                   </div>
 
-                  {balance?.credits?.length ? (
+                  {balance.credits.length ? (
                     <div className="border-t border-[#F0E2C9] pt-4 space-y-2">
                       {balance.credits.slice(0, 3).map((credit) => (
                         <div key={credit.id} className="flex items-center justify-between text-sm text-[#6B5744]">
-                          <span>{credit.status}</span>
+                          <span>{creditStatusLabel(credit.status)}</span>
                           <span>{formatCurrency(credit.amount, currency)}</span>
                         </div>
                       ))}

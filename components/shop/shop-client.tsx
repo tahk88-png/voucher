@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
+import { useTranslations } from "next-intl"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { useToast } from "@/hooks/use-toast"
@@ -23,6 +24,7 @@ export default function ShopClient({
   currency: string
   products: Product[]
 }) {
+  const t = useTranslations("shop.shopClient")
   const { toast } = useToast()
   const [cart, setCart] = useState<CartItem[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -83,17 +85,17 @@ export default function ShopClient({
       }
       const data = await res.json()
       toast({
-        title: "Checkout intent created",
-        description: `Intent ${data.intentId} for ${formatCurrency(
-          data.total,
-          currency
-        )}`,
+        title: t("intentCreatedTitle"),
+        description: t("intentCreatedDescription", {
+          id: data.intentId,
+          amount: formatCurrency(data.total, currency),
+        }),
       })
       setCart([])
     } catch (error) {
       toast({
-        title: "Checkout error",
-        description: "Unable to create checkout intent.",
+        title: t("checkoutErrorTitle"),
+        description: t("checkoutErrorDescription"),
         variant: "destructive",
       })
     } finally {
@@ -106,7 +108,7 @@ export default function ShopClient({
       <div className="grid gap-6 sm:grid-cols-2">
         {products.length === 0 ? (
           <WarmCard padding="lg" className="bg-[var(--surface)] col-span-full text-center">
-            <p className="text-[var(--text-muted)]">No products available yet.</p>
+            <p className="text-[var(--text-muted)]">{t("empty")}</p>
           </WarmCard>
         ) : (
           products.map((product) => (
@@ -115,14 +117,14 @@ export default function ShopClient({
                 <div className="flex-1">
                   <p className="font-semibold text-[var(--text)]">{product.name}</p>
                   <p className="text-sm text-[var(--text-muted)] mt-1">
-                    {product.description || "Product highlight"}
+                    {product.description || t("productHighlight")}
                   </p>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-lg font-bold text-[var(--text)]">
                     {formatCurrency(product.price, product.currency || currency)}
                   </span>
-                  <WarmButton onClick={() => addToCart(product)}>Add</WarmButton>
+                  <WarmButton onClick={() => addToCart(product)}>{t("add")}</WarmButton>
                 </div>
               </div>
             </WarmCard>
@@ -130,9 +132,9 @@ export default function ShopClient({
         )}
       </div>
       <WarmCard padding="lg" className="bg-[var(--surface)] h-fit">
-        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Cart</h2>
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t("cart")}</h2>
         {cart.length === 0 ? (
-          <p className="text-sm text-[var(--text-muted)]">Cart is empty.</p>
+          <p className="text-sm text-[var(--text-muted)]">{t("cartEmpty")}</p>
         ) : (
           <div className="space-y-3">
             {cart.map((item) => (
@@ -140,21 +142,21 @@ export default function ShopClient({
                 <div>
                   <p className="text-sm font-semibold text-[var(--text)]">{item.name}</p>
                   <p className="text-xs text-[var(--text-muted)]">
-                    {item.quantity} x {formatCurrency(item.price, currency)}
+                    {t("lineQuantity", { quantity: item.quantity, price: formatCurrency(item.price, currency) })}
                   </p>
                 </div>
                 <button
                   className="text-xs text-[var(--danger)] hover:underline"
                   onClick={() => removeFromCart(item.id)}
                 >
-                  Remove
+                  {t("remove")}
                 </button>
               </div>
             ))}
           </div>
         )}
         <div className="mt-4 flex items-center justify-between border-t border-[var(--border)]/60 pt-4">
-          <span className="text-sm font-semibold text-[var(--text)]">Total</span>
+          <span className="text-sm font-semibold text-[var(--text)]">{t("total")}</span>
           <span className="text-lg font-bold text-[var(--text)]">
             {formatCurrency(total, currency)}
           </span>
@@ -164,7 +166,7 @@ export default function ShopClient({
           onClick={submitCheckout}
           disabled={cart.length === 0 || isSubmitting}
         >
-          {isSubmitting ? "Creating intent..." : "Checkout intent"}
+          {isSubmitting ? t("creatingIntent") : t("checkoutIntent")}
         </WarmButton>
       </WarmCard>
     </div>

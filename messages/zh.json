@@ -64,7 +64,18 @@
     "subscriptionBoxes": "订阅盒",
     "pricing": "定价规则",
     "webhooks": "Webhooks",
-    "apiKeys": "API 密钥"
+    "apiKeys": "API 密钥",
+    "marketplace": "市场",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "expandSidebar": "展开侧边栏",
+    "collapseSidebar": "收起侧边栏",
+    "sectionShop": "购物",
+    "sectionRewards": "奖励",
+    "sectionAccount": "账户",
+    "mainNavigation": "主导航",
+    "quickNavigation": "快速导航",
+    "logoutFailed": "无法退出登录，请重试。"
   },
   "voucher": {
     "title": "优惠券",
@@ -184,7 +195,11 @@
     "creditApplied": "已用积分",
     "finalTotal": "合计",
     "pageDescription": "查看您的可用积分和冻结积分。",
-    "noMerchantWallets": "还没有商家钱包。"
+    "noMerchantWallets": "还没有商家钱包。",
+    "noCreditYet": "还没有积分",
+    "noCreditYetBody": "当好友使用您分享的优惠券时，您即可获得积分。积分会按商家分别显示在这里。",
+    "shareToEarn": "分享优惠券",
+    "findVoucherToShare": "查找可分享的优惠券"
   },
   "redemption": {
     "title": "使用记录",
@@ -244,7 +259,12 @@
     "merchantLabel": "商家",
     "voucherLabel": "优惠券",
     "linkField": "链接",
-    "codeField": "代码"
+    "codeField": "代码",
+    "linkCopied": "链接已复制",
+    "howItWorksTitle": "推荐如何运作",
+    "howItWorksBody": "打开一张优惠券并点击“分享”，即可获得该优惠券的专属链接。当好友使用后，您将获得该商家提供的积分。",
+    "findVoucher": "查找可分享的优惠券",
+    "linkForVoucher": "{voucher} 的推荐链接"
   },
   "analytics": {
     "title": "数据分析",
@@ -404,7 +424,7 @@
     "footerPrivacy": "隐私政策",
     "footerDocs": "文档",
     "footerSupport": "客服支持",
-    "footerCopyright": "© 2024 Vouchr. All rights reserved.",
+    "footerCopyright": "© GiftHub. All rights reserved.",
     "badge": "发布优惠券、礼品卡和门票促销",
     "headline": "如同高端品牌体验般的营销活动",
     "subheadline": "构建带有 QR 使用、推荐和自动积分的优惠券与礼品卡活动。只为效果付费。",
@@ -516,7 +536,9 @@
     "viewVouchers": "查看优惠券",
     "redeemed": "已使用",
     "friendLabel": "朋友",
-    "voucherLabel": "优惠券"
+    "voucherLabel": "优惠券",
+    "offersLinkTitle": "当前优惠链接",
+    "offersLinkDescription": "将 GiftHub 上所有当前优惠分享给好友。此链接不会为您赚取积分；如需赚取积分，请在具体优惠券页面分享该优惠券。"
   },
   "billing": {
     "upgradeRequired": "需要升级",
@@ -618,14 +640,34 @@
     "inApp": "应用内",
     "pushBeta": "推送通知（测试版）",
     "saving": "保存中...",
-    "savePreferences": "保存偏好设置"
+    "savePreferences": "保存偏好设置",
+    "noPreferencesTitle": "暂无可设置的内容",
+    "noPreferencesBody": "通知设置按商家分别管理。您目前还没有设置了通知选项的商家。",
+    "saved": "偏好设置已保存",
+    "saveFailed": "无法保存您的偏好设置，请重试。",
+    "markAllReadFailed": "无法将通知标记为已读，请重试。",
+    "emptyHint": "有关您的优惠券和优惠的动态将显示在这里。",
+    "browseOffers": "浏览优惠"
   },
   "settingsPage": {
     "description": "管理您的账户偏好设置。",
     "joined": "注册时间",
     "recently": "最近",
     "accountAccessTitle": "账户访问",
-    "accountAccessDescription": "保护您的账户并管理访问权限。"
+    "accountAccessDescription": "保护您的账户并管理访问权限。",
+    "pushDescription": "即使未打开 GiftHub，也能在此设备上接收通知。",
+    "changePasswordTitle": "修改密码",
+    "changePasswordDescription": "更新您的账户密码。",
+    "setPasswordTitle": "设置密码",
+    "setPasswordDescription": "设置密码后即可使用邮箱和密码登录。",
+    "twoFactorTitle": "双重身份验证",
+    "twoFactorDescription": "使用身份验证器应用或通行密钥，为账户增加一层额外保护。",
+    "twoFactorManage": "管理安全设置",
+    "sessionsTitle": "活跃会话",
+    "sessionsDescription": "查看您的账户在哪些地方处于登录状态。",
+    "sessionsView": "查看会话",
+    "deleteTitle": "删除账户",
+    "deleteDescription": "永久删除您的账户并对数据进行匿名化处理。此操作无法撤销。"
   },
   "profile": {
     "title": "个人资料",
@@ -633,5 +675,4583 @@
     "accountInformation": "账户信息",
     "emailPreferences": "邮件偏好",
     "appSettings": "应用设置"
+  },
+  "dashboard": {
+    "roleShopper": "购物者",
+    "roleAdmin": "管理员",
+    "roleStaff": "员工",
+    "rolePlatformAdmin": "平台管理员",
+    "availableCredit": "可用积分",
+    "pendingCredit": "{amount} 待确认",
+    "creditExplainer": "当好友使用您分享的优惠券时获得的积分，可在发放该积分的商家处使用。",
+    "viewCreditDetails": "查看积分详情",
+    "successfulReferrals": "成功推荐",
+    "checkInPoints": "签到积分",
+    "shareTitle": "分享优惠券，赚取积分",
+    "shareDescription": "打开任意优惠券并点击“分享”即可获得专属链接。好友使用后，您即可获得积分。",
+    "openShareCenter": "打开分享中心",
+    "sharedSummary": "已分享优惠券：{count} · 已使用：{redeemed}",
+    "achievementsTitle": "成就",
+    "badgesEarned": "已获得徽章：{earned} / {total}",
+    "viewAchievements": "查看成就",
+    "availableOffers": "可用优惠",
+    "browseAll": "查看全部",
+    "noActiveOffers": "目前没有进行中的优惠，请稍后再来看看。",
+    "validUntil": "有效期至 {date}",
+    "recentActivity": "最近动态",
+    "noRecentActivity": "暂无动态。",
+    "creditFrom": "来自 {merchant} 的积分",
+    "referralAt": "推荐 · {merchant}",
+    "creditStatus": {
+      "locked": "待确认",
+      "available": "可用",
+      "used": "已使用",
+      "expired": "已过期",
+      "reversed": "已撤销"
+    },
+    "referralStatus": {
+      "created": "链接已创建",
+      "opened": "已打开",
+      "redeemed": "已使用",
+      "expired": "已过期",
+      "blocked": "已屏蔽"
+    },
+    "myMerchants": "我的商家",
+    "merchantDashboard": "商家后台",
+    "sellTitle": "在 GiftHub 上销售",
+    "sellDescription": "想为您的顾客提供优惠券？联系我们，我们将协助您开通商家账户。",
+    "contactUs": "联系我们",
+    "exploreVouchers": "探索优惠券"
+  },
+  "wishlist": {
+    "title": "我的心愿单",
+    "emptyTitle": "您的心愿单是空的",
+    "emptyBody": "收藏喜欢的优惠券、商家和活动，之后可在这里找到它们。",
+    "browseOffers": "浏览优惠"
+  },
+  "push": {
+    "enable": "开启推送通知",
+    "enabled": "推送通知已开启",
+    "enabledToast": "已开启推送通知",
+    "disable": "关闭",
+    "disabledToast": "已关闭推送通知",
+    "enableFailed": "无法开启推送通知，请重试。",
+    "disableFailed": "无法关闭推送通知，请重试。",
+    "unsupported": "此浏览器不支持推送通知。",
+    "blocked": "通知已被屏蔽。请在浏览器设置中允许通知以开启此功能。"
+  },
+  "sessions": {
+    "title": "活跃会话",
+    "description": "查看您的账户在哪些地方处于登录状态。",
+    "backToSettings": "返回设置",
+    "deviceOn": "{os} 上的 {browser}",
+    "unknownDevice": "未知设备",
+    "thisDevice": "此设备",
+    "signedInHere": "您当前已在此设备登录。",
+    "otherDevicesTitle": "其他设备",
+    "otherDevicesNone": "我们无法列出您可能已登录的其他设备。如发现任何异常，请修改密码并开启双重身份验证。",
+    "securitySettings": "安全设置",
+    "lastActive": "最近活跃：{time}",
+    "logout": "退出登录",
+    "logoutAll": "退出所有其他设备",
+    "logoutAllBody": "结束其他设备上的所有会话。",
+    "loadFailed": "无法加载您的会话。",
+    "revokeFailed": "无法结束该会话，请重试。",
+    "revoked": "会话已结束。",
+    "revokedAll": "其他设备上的会话已结束。"
+  },
+  "achievements": {
+    "title": "成就",
+    "checkIn": "今日签到",
+    "checkingIn": "正在签到…",
+    "checkedInToday": "今日已签到",
+    "checkInFailed": "签到失败，请重试。",
+    "checkInSaved": "签到成功",
+    "newBadge": "新徽章：{name}",
+    "checkInPoints": "签到积分",
+    "level": "等级",
+    "levelValue": "等级 {level}",
+    "levelProgress": "距下一等级的进度",
+    "badgesLabel": "徽章",
+    "noBadgesYet": "还没有获得徽章。",
+    "earnedOn": "获得于 {date}",
+    "locked": "尚未获得",
+    "howToEarn": "如何赚取积分",
+    "earnRuleCheckIn": "每天签到一次",
+    "pointsShort": "+{points} 分",
+    "pointsExplainer": "积分和等级体现您的活跃程度，不能兑换现金或优惠券。",
+    "currentStreak": "当前连续签到（天）",
+    "longestStreak": "最长连续签到（天）",
+    "milestone": "达成连续签到里程碑！",
+    "badges": {
+      "first_purchase": {
+        "name": "首次购买",
+        "description": "购买了第一张优惠券"
+      },
+      "first_redemption": {
+        "name": "首次使用",
+        "description": "使用了第一张优惠券"
+      },
+      "5_referrals": {
+        "name": "人脉达人",
+        "description": "与好友分享了 5 张优惠券"
+      },
+      "10_referrals": {
+        "name": "影响力达人",
+        "description": "与好友分享了 10 张优惠券"
+      },
+      "streak_7": {
+        "name": "每周勇士",
+        "description": "连续签到 7 天"
+      },
+      "streak_30": {
+        "name": "月度大师",
+        "description": "连续签到 30 天"
+      },
+      "review_writer": {
+        "name": "评论家",
+        "description": "发布了第一条评价"
+      },
+      "big_spender": {
+        "name": "消费达人",
+        "description": "累计在优惠券上消费超过 10,000"
+      },
+      "early_adopter": {
+        "name": "早期用户",
+        "description": "在 2028 年之前加入 GiftHub"
+      },
+      "social_sharer": {
+        "name": "社交分享达人",
+        "description": "在社交媒体上分享了优惠券"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "会员忠诚",
+    "notActiveTitle": "会员等级暂未开放",
+    "notActiveBody": "目前购物尚不能获得会员积分，结账时也不会应用等级折扣或权益，因此这里暂无可显示的等级。",
+    "earnTodayTitle": "您现在可以获得的奖励",
+    "earnCreditTitle": "推荐积分",
+    "earnCreditBody": "分享一张优惠券。好友使用后，您将获得可在该商家处使用的积分。",
+    "earnCreditLink": "查看您的积分",
+    "earnPointsTitle": "签到积分",
+    "earnPointsBody": "每天签到，累积连续签到天数、提升等级并解锁徽章。",
+    "earnPointsLink": "查看成就",
+    "historyTitle": "积分记录",
+    "pointsBalance": "余额：{points} 分"
+  },
+  "welcome": {
+    "greeting": "您好，{name}！",
+    "progress": "新手引导进度",
+    "setUpSecurity": "设置双重验证或通行密钥",
+    "skip": "跳过",
+    "next": "下一步",
+    "getStarted": "开始使用",
+    "steps": {
+      "welcome": {
+        "title": "欢迎来到 GiftHub！",
+        "subtitle": "快速了解您可以在这里做什么。"
+      },
+      "discover": {
+        "title": "发现优惠",
+        "subtitle": "浏览本地商家的优惠券、礼品卡和活动。",
+        "features": {
+          "vouchers": "电子优惠券",
+          "giftCards": "送给亲友的礼品卡",
+          "nearby": "您附近的优惠"
+        }
+      },
+      "wallet": {
+        "title": "优惠券集中管理",
+        "subtitle": "您购买的所有商品都会保存到您的账户中。",
+        "features": {
+          "qr": "二维码，到店快速核销",
+          "expiry": "优惠券到期前的邮件提醒"
+        }
+      },
+      "rewards": {
+        "title": "赚取奖励",
+        "subtitle": "与好友分享优惠券，好友使用后即可获得积分。",
+        "features": {
+          "referralCredit": "成功推荐可获得商家积分",
+          "checkIns": "每日签到与连续签到",
+          "badges": "可解锁的徽章"
+        }
+      },
+      "notifications": {
+        "title": "随时掌握动态",
+        "subtitle": "在此设备上开启通知。"
+      },
+      "security": {
+        "title": "保护您的账户",
+        "subtitle": "添加通行密钥或双重身份验证。"
+      }
+    }
+  },
+  "labels": {
+    "free": "免费",
+    "valueOff": "减 {value}",
+    "valueCredit": "{value} 积分",
+    "valueDiscount": "{value} 折扣",
+    "demo": "演示",
+    "demoHint": "用于展示平台运作方式的示例内容，并非真实优惠。",
+    "category": {
+      "cafe": "咖啡与烘焙",
+      "beauty": "美容与养生",
+      "fitness": "健身与运动",
+      "events": "赛事活动与门票",
+      "workshops": "工作坊与课程",
+      "family": "亲子家庭",
+      "travel": "旅行与住宿",
+      "outdoor": "户外与探险",
+      "other": "其他",
+      "all": "全部类别"
+    },
+    "voucherType": {
+      "percentage": "百分比折扣",
+      "fixed_amount": "立减金额",
+      "credit_amount": "店铺积分"
+    },
+    "voucherStatus": {
+      "draft": "草稿",
+      "published": "已发布",
+      "paused": "已暂停",
+      "ended": "已结束",
+      "expired": "已过期"
+    },
+    "campaignStatus": {
+      "draft": "草稿",
+      "active": "进行中",
+      "ended": "已结束"
+    },
+    "campaignType": {
+      "limited": "限时优惠",
+      "weekly": "每周优惠"
+    },
+    "campaignTypeHelp": {
+      "limited": "在开始日期和结束日期之间进行一次，售完即止。",
+      "weekly": "每周循环的优惠，顾客在结束日期前每周都可再次参与。"
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "示例优惠 · 非卖品",
+    "notOnSale": "尚未开售",
+    "purchases": "{count, plural, other {# 次购买}}",
+    "freeToClaim": "免费领取",
+    "onSaleNow": "正在热卖"
+  },
+  "account": {
+    "error": {
+      "title": "出错了",
+      "fallback": "发生意外错误。",
+      "retry": "重试"
+    },
+    "dashboard": {
+      "metaTitle": "我的 Dashboard"
+    },
+    "cashback": {
+      "metaTitle": "返现与积分",
+      "title": "返现与积分",
+      "description": "您在所有消费商家处获得的每一笔积分。",
+      "lockedPending": "冻结（待确认）",
+      "used": "已使用",
+      "expiringTitle": "30 天内到期",
+      "expiresOn": "{merchant} — {date} 到期",
+      "expiresSoon": "{merchant} — 即将到期",
+      "byMerchant": "按商家",
+      "lastActivity": "最近活动：{date}",
+      "readyToSpend": "可用于消费",
+      "viewMerchantWallet": "查看商家钱包 →"
+    },
+    "nearby": {
+      "title": "附近优惠",
+      "subtitle": "查找您附近商家的优惠和优惠券",
+      "useMyLocation": "使用我的位置",
+      "approximateLocation": "大致位置（基于 IP）",
+      "searchRadius": "搜索范围",
+      "yourLocation": "您的位置",
+      "mapLabel": "{radius} 公里内有 {count, plural, other {# 家商家}}",
+      "merchantsNearby": "附近有 {count, plural, other {# 家商家}}",
+      "activeVouchers": "{count, plural, other {# 张有效优惠券}}",
+      "emptyTitle": "附近暂无商家",
+      "emptyBody": "请尝试扩大搜索范围，或稍后再来查看您所在区域的新优惠。",
+      "expandRadius": "扩大到 {radius} 公里",
+      "errors": {
+        "fetchFailed": "无法加载附近商家，请重试。",
+        "geolocationUnsupported": "您的浏览器不支持定位功能。",
+        "permissionDenied": "位置访问被拒绝。请在浏览器设置中开启定位权限。",
+        "positionUnavailable": "无法获取位置，请稍后重试。",
+        "timeout": "定位请求超时，请重试。",
+        "locationFailed": "无法获取您的位置。",
+        "ipLocationFailed": "无法确定您的位置。"
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "通知设置"
+    },
+    "redeem": {
+      "notFound": "未找到优惠券。",
+      "codeUnavailable": "优惠券码不可用。",
+      "backToWallet": "返回钱包",
+      "back": "返回"
+    },
+    "referrals": {
+      "metaTitle": "我的推荐",
+      "completedCount": "已完成：{count}"
+    },
+    "voucherDetail": {
+      "back": "返回",
+      "merchantFallback": "商家",
+      "termsTitle": "条款与条件",
+      "terms1": "本优惠券在上方所示到期日前有效。除非另有说明，不得与其他优惠或促销同时使用。",
+      "terms2": "购买时须出示本优惠券。无现金价值，不可兑换现金或退款。",
+      "terms3": "如优惠券疑似被复制、篡改或欺诈使用，商家有权拒绝核销。",
+      "terms4": "如有疑问或问题，请直接联系商家。"
+    },
+    "vouchers": {
+      "unknownMerchant": "未知",
+      "paidAmount": "已付：{amount}",
+      "activeCount": "有效（{count}）",
+      "pastCount": "历史（{count}）"
+    },
+    "voucherCard": {
+      "showQr": "显示 QR 码",
+      "close": "关闭",
+      "qrHint": "到店时向商家出示此 QR 码即可使用。"
+    },
+    "wallet": {
+      "metaTitle": "我的钱包"
+    },
+    "wishlist": {
+      "unknownItem": "未知项目",
+      "merchant": "商家",
+      "campaign": "活动",
+      "validUntil": "有效期至 {date}",
+      "alertOn": "已开启提醒",
+      "noAlert": "未设提醒",
+      "view": "查看"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "活动不可用",
+      "metaDescriptionFallback": "来自 {merchant} 的优惠。",
+      "breadcrumbLabel": "面包屑导航",
+      "breadcrumbCampaigns": "活动",
+      "demoNotice": "<strong>示例优惠。</strong>此页面展示优惠在 GiftHub 上的呈现效果。商家和优惠均为示例，此处内容均无法购买或使用。",
+      "verifiedPartner": "认证合作伙伴",
+      "aboutTitle": "优惠详情",
+      "descriptionFallback": "GiftHub 商家的特别优惠。",
+      "howItWorks": {
+        "title": "使用方式",
+        "claimTitle": "领取优惠券",
+        "buyTitle": "购买优惠券",
+        "buyText": "在线安全支付；免费优惠可直接免费领取。",
+        "qrTitle": "获取 QR 码",
+        "qrText": "优惠券将保存在您的 GiftHub 钱包中，并附带专属 QR 码。",
+        "showTitle": "到店出示",
+        "showText": "{merchant} 扫码后即可享受折扣。"
+      },
+      "termsTitle": "条款",
+      "voucherOptionsTitle": "优惠券选项",
+      "voucherFallbackTitle": "优惠券",
+      "viewVoucher": "查看优惠券",
+      "reviewsTitle": "评价",
+      "purchaseLabel": "购买",
+      "buyNow": "立即购买",
+      "getFreeVoucher": "免费领取优惠券",
+      "sampleOffer": "示例优惠",
+      "notOnSaleYet": "尚未开售",
+      "demoNotForSale": "这是示例内容，无法购买。",
+      "noVoucherYet": "{merchant} 尚未为此优惠发布优惠券，请稍后再来查看。",
+      "offerRuns": "优惠期间",
+      "bought": "已购",
+      "boughtCount": "{count, plural, other {# 次}}",
+      "website": "网站",
+      "allOffersFrom": "{merchant} 的全部优惠",
+      "moreFrom": "{merchant} 的更多优惠"
+    },
+    "list": {
+      "allCategories": "全部",
+      "badge": "实时活动市场",
+      "heroTitle": "发现欧洲最热门的优惠",
+      "heroSubtitle": "浏览精选自您所在市场顶级商家的优惠券、礼品和体验。",
+      "searchLabel": "搜索活动",
+      "searchPlaceholder": "搜索活动、商家或服务…",
+      "campaignCount": "{count, plural, other {<b>#</b> 个活动}}",
+      "voucherCount": "{count, plural, other {<b>#</b> 张优惠券在售}}",
+      "merchantCount": "{count, plural, other {<b>#</b> 家商家}}",
+      "categoriesLabel": "类别",
+      "unavailableTitle": "活动暂时不可用",
+      "unavailableText": "无法连接数据库，请稍后重试。",
+      "emptyTitle": "未找到优惠",
+      "emptyText": "请尝试其他搜索词或选择其他类别。",
+      "tryAgain": "重试",
+      "clearFilters": "清除筛选"
+    },
+    "listError": {
+      "title": "无法加载活动",
+      "fallbackMessage": "加载活动时发生意外错误。",
+      "tryAgain": "重试"
+    },
+    "filters": {
+      "sortBy": "排序方式",
+      "sort": {
+        "newest": "最新",
+        "oldest": "最早",
+        "priceLow": "价格：从低到高",
+        "priceHigh": "价格：从高到低",
+        "popular": "最受欢迎",
+        "expiring": "即将到期"
+      },
+      "merchant": "商家",
+      "allMerchants": "全部商家",
+      "minPrice": "最低价格",
+      "minPricePlaceholder": "最低 €",
+      "maxPrice": "最高价格",
+      "maxPricePlaceholder": "最高 €"
+    },
+    "tenantList": {
+      "title": "优惠券",
+      "subtitle": "{merchant} 的有效优惠。",
+      "empty": "暂无可用优惠券。",
+      "voucher": "优惠券",
+      "viewVoucher": "查看优惠券"
+    },
+    "deals": {
+      "metaTitle": "优惠",
+      "metaDescription": "发现最划算的优惠券"
+    },
+    "campaignShare": {
+      "share": "分享",
+      "copied": "已复制",
+      "linkCopied": "链接已复制",
+      "copyFailed": "复制失败"
+    },
+    "shareSheet": {
+      "share": "分享",
+      "title": {
+        "voucher": "分享这张优惠券",
+        "campaign": "分享此活动",
+        "merchant": "分享此商家"
+      },
+      "close": "关闭",
+      "referralShareText": "{title} - 分享即可获得 10% 返现！",
+      "referralNote": "好友使用后，<b>分享即赚 10%</b>！",
+      "targets": {
+        "email": "邮件",
+        "copy": "复制链接"
+      },
+      "copied": "已复制！",
+      "linkCopiedToClipboard": "链接已复制到剪贴板！",
+      "linkCopied": "链接已复制！",
+      "shareLinkLabel": "分享链接",
+      "copyLink": "复制链接"
+    },
+    "wishlistButton": {
+      "add": "加入心愿单",
+      "remove": "从心愿单移除"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, other {# 星}}"
+    },
+    "form": {
+      "title": "撰写评价",
+      "ratingLabel": "评分",
+      "titleLabel": "标题（可选）",
+      "titlePlaceholder": "概括您的体验",
+      "commentLabel": "评论（可选）",
+      "commentPlaceholder": "分享您的体验…",
+      "submit": "提交评价",
+      "submitting": "提交中…",
+      "ratingRequired": "请选择评分",
+      "submitFailed": "评价提交失败",
+      "alreadyReviewed": "您已评价过此项目",
+      "signInRequired": "登录后即可撰写评价",
+      "thankYou": "感谢您的评价！",
+      "writeAnother": "再写一条评价"
+    },
+    "list": {
+      "sort": {
+        "newest": "最新",
+        "highest": "评分最高",
+        "helpful": "最有帮助"
+      },
+      "signInToReview": "登录后即可撰写评价",
+      "loadFailed": "无法加载评价。",
+      "tryAgain": "重试",
+      "empty": "还没有评价。",
+      "anonymous": "匿名",
+      "verified": "已验证",
+      "helpfulButton": "有帮助（{count}）",
+      "foundHelpful": "{count} 人认为有帮助",
+      "previous": "上一页",
+      "next": "下一页",
+      "pageOf": "第 {current} 页，共 {total} 页"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "取消",
+      "saving": "保存中…",
+      "somethingWentWrong": "出错了"
+    },
+    "apiErrors": {
+      "notAuthenticated": "未登录",
+      "unauthorized": "未授权",
+      "tooManyAttempts": "尝试次数过多",
+      "validationFailed": "验证失败",
+      "unexpected": "发生意外错误",
+      "databaseFailed": "数据库操作失败",
+      "serviceUnavailable": "服务暂时不可用",
+      "newPasswordTooShort": "新密码至少需要 8 个字符",
+      "userNotFound": "未找到用户",
+      "currentPasswordRequired": "请输入当前密码",
+      "currentPasswordIncorrect": "当前密码不正确",
+      "deletionUnavailable": "账户删除功能暂时不可用，请联系客服。",
+      "totpAlreadyEnabledReconfigure": "双重验证已开启。如需重新配置，请先关闭。",
+      "sixDigitCodeRequired": "请输入 6 位验证码",
+      "totpSetupMissing": "未找到 TOTP 设置，请先开始设置流程。",
+      "totpAlreadyEnabled": "双重验证已开启",
+      "invalidSetupCode": "验证码无效。请检查您的身份验证器应用后重试。",
+      "verificationCodeRequired": "请输入验证码",
+      "totpNotEnabled": "目前未开启双重验证",
+      "invalidDisableCode": "验证码无效。请输入当前的 TOTP 验证码或备用码。",
+      "passkeyOptionsFailed": "无法获取注册选项",
+      "passkeyGenerateOptionsFailed": "无法生成注册选项",
+      "registrationFailed": "注册失败",
+      "passkeyRegistrationFailed": "通行密钥注册失败",
+      "passkeyChallengeExpired": "验证请求已过期或不存在",
+      "verificationFailed": "验证失败",
+      "passkeyVerifyFailed": "无法验证注册"
+    },
+    "settings": {
+      "joinedOn": "{date} 加入",
+      "joinedRecently": "最近加入"
+    },
+    "profileForm": {
+      "nameLabel": "姓名",
+      "namePlaceholder": "您的姓名",
+      "emailLabel": "邮箱",
+      "emailLocked": "邮箱无法更改",
+      "save": "保存更改",
+      "updated": "个人资料已更新",
+      "nameRequired": "请输入姓名",
+      "updateFailed": "个人资料更新失败"
+    },
+    "passwordForm": {
+      "currentLabel": "当前密码",
+      "newLabel": "新密码",
+      "setLabel": "设置密码",
+      "confirmLabel": "确认密码",
+      "showPassword": "显示密码",
+      "hidePassword": "隐藏密码",
+      "change": "修改密码",
+      "set": "设置密码",
+      "updated": "密码更新成功",
+      "tooShort": "密码至少需要 {min} 个字符",
+      "mismatch": "两次输入的密码不一致",
+      "changeFailed": "密码修改失败"
+    },
+    "deleteDialog": {
+      "trigger": "删除账户",
+      "title": "确定删除您的账户？",
+      "description": "此操作不可撤销。您的个人资料、会话和通知设置将被删除，购买记录将被匿名化。",
+      "typeToConfirm": "请输入 <strong>{word}</strong> 以确认：",
+      "confirm": "永久删除",
+      "deleting": "删除中…",
+      "failed": "账户删除失败"
+    },
+    "passkeys": {
+      "title": "通行密钥",
+      "description": "使用设备的指纹、面容或 PIN 码免密码登录。",
+      "add": "添加通行密钥",
+      "namePlaceholder": "例如“MacBook Touch ID”",
+      "addSubmit": "添加",
+      "adding": "添加中…",
+      "unsupported": "此浏览器不支持通行密钥。请使用最新版本的 Chrome、Safari 或 Edge。",
+      "empty": "还没有通行密钥。添加一个即可开启免密码登录。",
+      "devicePasskey": "设备通行密钥",
+      "passkey": "通行密钥",
+      "added": "{date} 添加",
+      "lastUsed": "最近使用：{date}",
+      "synced": "已同步",
+      "removeConfirm": "确定移除？",
+      "remove": "移除",
+      "removeLabel": "移除通行密钥",
+      "loadFailed": "无法加载通行密钥",
+      "removeFailed": "通行密钥移除失败"
+    },
+    "security": {
+      "title": "安全",
+      "description": "管理双重身份验证和安全设置",
+      "loading": "加载中…",
+      "backToSettings": "返回设置",
+      "enabledMessage": "双重身份验证已开启！",
+      "disabledMessage": "双重身份验证已关闭",
+      "errors": {
+        "statusLoadFailed": "无法加载您的双重身份验证状态",
+        "setupFailed": "无法开始设置",
+        "verifyFailed": "验证失败",
+        "disableFailed": "无法关闭双重验证"
+      },
+      "status": {
+        "title": "双重身份验证",
+        "enabledBody": "您的账户已受身份验证器应用保护。",
+        "disabledBody": "登录时要求输入身份验证器应用中的验证码，为您的账户增加一层额外保护。",
+        "enabled": "已开启",
+        "notEnabled": "未开启"
+      },
+      "setup": {
+        "title": "设置身份验证器应用",
+        "description": "使用 Google Authenticator、Authy 或 1Password 等应用生成验证码。",
+        "enable": "开启双重验证"
+      },
+      "scan": {
+        "title": "扫描 QR 码或手动输入密钥",
+        "qrAlt": "使用身份验证器应用扫描此 QR 码",
+        "manualKey": "或手动输入此密钥：",
+        "copySecret": "复制密钥"
+      },
+      "verify": {
+        "title": "输入验证码",
+        "codeLabel": "应用中的 6 位验证码",
+        "submit": "验证并开启"
+      },
+      "backupCodes": {
+        "title": "保存您的备用码",
+        "description": "请妥善保存这些备用码。如果无法使用身份验证器应用，可以用其中一个备用码登录。每个备用码只能使用一次。",
+        "copy": "复制备用码",
+        "copied": "已复制！",
+        "download": "下载",
+        "done": "完成"
+      },
+      "backupFile": {
+        "title": "GiftHub - 双重身份验证备用码",
+        "instructions": "请将这些备用码保存在安全的地方。每个备用码只能使用一次。",
+        "generated": "生成时间：{date}"
+      },
+      "disable": {
+        "title": "关闭双重身份验证",
+        "description": "这将移除您账户的额外安全保护。",
+        "button": "关闭双重验证",
+        "confirmTitle": "确认关闭双重验证",
+        "confirmDescription": "请输入身份验证器应用中当前的 6 位验证码，或一个备用码。",
+        "codeLabel": "验证码",
+        "codePlaceholder": "000000 或 XXXX-XXXX",
+        "confirm": "确认关闭"
+      },
+      "quickLinks": {
+        "title": "安全快捷入口",
+        "sessions": "查看活跃会话",
+        "changePassword": "修改密码"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "为效果付费，而非曝光。商家自主的推荐基础设施：品牌优惠券与店铺积分。"
+    },
+    "error": {
+      "unexpected": "发生意外错误。"
+    },
+    "hero": {
+      "badge": "面向本地商家的优惠券与推荐",
+      "title": "让老顾客为您带来<highlight>新顾客</highlight>",
+      "subtitle": "创建优惠券活动。顾客分享优惠券、赚取积分并带来好友。追踪每一次推荐，精确了解每位新顾客的获客成本。",
+      "ctaMerchant": "成为商家",
+      "ctaExplore": "浏览活动",
+      "noCardRequired": "无需信用卡",
+      "freeTrial": "{days} 天免费试用",
+      "cancelAnytime": "随时取消"
+    },
+    "stats": {
+      "activeCampaigns": "进行中的活动",
+      "merchants": "商家",
+      "processedValue": "交易总额"
+    },
+    "merchantsTitle": "平台上的商家",
+    "values": {
+      "referral": {
+        "title": "推荐引擎",
+        "description": "顾客分享优惠，自动为您带来新顾客"
+      },
+      "vouchers": {
+        "title": "电子优惠券",
+        "description": "几分钟内创建规则灵活的折扣活动"
+      },
+      "qr": {
+        "title": "QR 核销",
+        "description": "用手机即可在店内扫码核验，无需额外硬件"
+      },
+      "analytics": {
+        "title": "实时数据分析",
+        "description": "清楚了解每个活动的成本与回报，告别猜测"
+      }
+    },
+    "howItWorks": {
+      "title": "使用方式",
+      "subtitle": "简单三步，几分钟即可上手",
+      "steps": {
+        "create": {
+          "title": "创建活动",
+          "description": "2 分钟设置一张优惠券：折扣、日期范围、使用上限，搞定。"
+        },
+        "share": {
+          "title": "顾客分享",
+          "description": "每位买家都会获得推荐链接。分享链接、赚取积分、带来好友。"
+        },
+        "grow": {
+          "title": "见证增长",
+          "description": "追踪每条推荐链，查看每位新顾客的获客成本，衡量 ROI。"
+        }
+      }
+    },
+    "campaigns": {
+      "title": "浏览热门活动",
+      "subtitle": "发现遍布欧洲的优惠券、优惠和体验",
+      "showing": "共 {count, plural, other {# 个进行中的活动}}。",
+      "showingWithOnSale": "共 {count, plural, other {# 个进行中的活动}}，其中 {onSale} 个正在销售。",
+      "emptyTitle": "目前没有进行中的活动",
+      "emptyBody": "商家发布优惠后，会立即显示在这里。",
+      "viewAll": "查看全部活动"
+    },
+    "pricing": {
+      "title": "简单透明的价格",
+      "subtitle": "选择适合您业务的方案。按年付费只需支付 10 个月的费用。",
+      "billingPeriod": "计费周期",
+      "monthly": "按月",
+      "annual": "按年",
+      "save": "节省 17%",
+      "mostPopular": "最受欢迎",
+      "perMonth": "/月",
+      "perYear": "{price}/年（免 2 个月）",
+      "startTrial": "开始免费试用",
+      "footer": "所有方案均含 {days} 天免费试用 · 优惠券销售收取 {percent}% 交易费 · 随时取消",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, other {每月 # 张优惠券}}",
+        "activeCampaigns": "{count, plural, other {# 个进行中的活动}}",
+        "teamMembers": "{count, plural, other {# 名团队成员}}",
+        "qrRedemption": "QR 码核销",
+        "basicAnalytics": "基础数据分析",
+        "advancedAnalytics": "高级数据分析",
+        "customDomain": "自定义域名",
+        "promoBoosts": "推广加速（邮件 + 推送）",
+        "unlimitedVouchers": "无限优惠券",
+        "unlimitedCampaigns": "无限活动",
+        "unlimitedTeamMembers": "无限团队成员",
+        "everythingInPlan": "包含 {plan} 的全部功能"
+      }
+    },
+    "calculator": {
+      "title": "计算您的 ROI",
+      "subtitle": "拖动滑块，看看使用 GiftHub 能为您带来多少收入",
+      "monthlyPurchases": "每月优惠券购买量",
+      "purchasesValue": "{count, plural, other {# 次购买}}",
+      "averageTicket": "平均客单价",
+      "referralRate": "推荐转化率",
+      "monthlyRevenue": "月收入",
+      "referralCustomers": "推荐新客",
+      "perMonthValue": "{value}/月",
+      "referralRevenue": "推荐收入",
+      "estimatedRoi": "预估 ROI",
+      "platformCost": "平台费用",
+      "platformCostValue": "{plan}/月方案 + {fees} 手续费（{percent}%）= <strong>{total}/月</strong>",
+      "disclaimer": "仅为基于您输入数值的示意，并非预测。"
+    },
+    "why": {
+      "title": "商家为何青睐 GiftHub",
+      "body": "扩大客户群、提升收入，同时保住利润，并掌握自己的客户关系。",
+      "benefits": {
+        "referralEngine": "每个活动均内置推荐引擎",
+        "analytics": "实时数据分析：获客成本、ROI",
+        "qr": "QR 核销，无需 POS 硬件",
+        "languages": "支持 {count, plural, other {# 种语言}}",
+        "flatPlan": "固定月费，不像 Groupon 那样收入分成",
+        "ownData": "客户数据归您所有",
+        "fee": "优惠券销售收取 {percent}% 交易费，无隐藏费用"
+      }
+    },
+    "compare": {
+      "title": "Groupon vs GiftHub",
+      "hint": "拖动以对比",
+      "beforeTitle": "使用 Groupon",
+      "afterTitle": "使用 GiftHub",
+      "sliderLabel": "对比 {before} 和 {after}",
+      "before": {
+        "revenueShare": "平台抽取高额收入分成",
+        "ownsRelationship": "客户关系归平台所有",
+        "noDataAccess": "无法获取客户数据",
+        "raceToBottom": "陷入低价竞争",
+        "lostBrand": "失去品牌辨识度"
+      },
+      "after": {
+        "flatFee": "固定 {minPrice}–{maxPrice}/月 + {percent}% 手续费",
+        "ownData": "客户数据完全归您所有",
+        "referralEngine": "内置推荐引擎",
+        "yourBrand": "您的品牌，您做主",
+        "roiAnalytics": "实时 ROI 分析"
+      }
+    },
+    "faq": {
+      "title": "常见问题",
+      "subtitle": "关于 GiftHub 您需要了解的一切",
+      "items": {
+        "groupon": {
+          "question": "这与 Groupon 有什么不同？",
+          "answer": "Groupon 类团购网站通常会从每笔销售中抽取大量分成，并掌握客户关系。我们收取固定月费（{price}/月起），外加优惠券销售额的 {percent}%。您的客户、数据和利润都归您所有。"
+        },
+        "referral": {
+          "question": "推荐系统是如何运作的？",
+          "answer": "每位购买优惠券的顾客都会获得专属推荐链接。分享后，只要好友完成购买，双方都能获得积分。每条推荐链都会被追踪，让您清楚了解新顾客是如何找到您的。"
+        },
+        "trial": {
+          "question": "{days} 天试用期结束后会怎样？",
+          "answer": "您可以选择方案（{starter}、{pro} 或 {scale}）。如果不订阅，已发布的优惠券对顾客仍然有效，但在订阅前无法创建新活动。"
+        },
+        "qr": {
+          "question": "QR 核销需要专门的硬件吗？",
+          "answer": "不需要。店员在任意手机浏览器中打开移动扫码页面，扫描顾客的 QR 码即可完成。无需下载 App，也无需对接 POS。"
+        },
+        "fee": {
+          "question": "{percent}% 交易费是什么？",
+          "answer": "当顾客通过平台购买优惠券时，我们会从结算款中扣除 {percent}%。除方案费用外，平台不收取其他任何费用。"
+        }
+      }
+    },
+    "cta": {
+      "title": "别再“租”客户了，打造属于您自己的客户大军。",
+      "body": "几分钟即可创建您的第一个活动，剩下的交给您的顾客。{days} 天免费试用。",
+      "getStarted": "免费开始",
+      "browse": "浏览活动"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "结账演示",
+      "subtitle": "演示结账页面",
+      "creditBalance": "积分余额",
+      "availableAmount": "可用 {amount}",
+      "lockedAmount": "冻结 {amount}",
+      "orderSummary": "订单摘要",
+      "orderAmount": "订单金额",
+      "creditToApply": "使用的积分",
+      "maxAmount": "最多：{amount}",
+      "subtotal": "小计",
+      "creditAppliedLine": "已用积分",
+      "total": "合计",
+      "processing": "处理中…",
+      "submit": "使用积分并完成订单",
+      "creditApplied": "积分使用成功！订单总额：{total}",
+      "errors": {
+        "missingAmounts": "请输入订单金额和积分金额",
+        "applyFailed": "积分使用失败"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - 可用优惠券",
+      "emptyTitle": "暂无可用优惠券",
+      "emptyDescription": "请稍后再来查看 {merchant} 的新优惠券。",
+      "specialOffer": "特别优惠",
+      "validUntil": "有效期至 {date}",
+      "viewAndShare": "查看并分享"
+    },
+    "wallet": {
+      "subtitle": "积分钱包",
+      "availableToUse": "可用",
+      "useCredit": "使用积分",
+      "noCreditToUse": "没有可用积分",
+      "locked": "冻结",
+      "lockedDescription": "关联购买确认后解冻。",
+      "historyTitle": "积分记录",
+      "historyDescription": "{merchant} 的积分明细",
+      "historyEmpty": "还没有积分记录。",
+      "expires": "{date} 到期",
+      "creditStatus": {
+        "locked": "冻结",
+        "available": "可用",
+        "used": "已使用",
+        "expired": "已过期",
+        "reversed": "已撤销"
+      }
+    },
+    "error": {
+      "title": "出错了",
+      "description": "门户加载失败。请刷新页面或稍后重试。",
+      "backToPortal": "返回门户"
+    },
+    "payments": {
+      "voucherFallback": "优惠券",
+      "status": {
+        "pending": "待处理",
+        "paid": "已支付",
+        "failed": "失败",
+        "refunded": "已退款"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "可用",
+        "sold": "已售出",
+        "used": "已使用",
+        "cancelled": "已取消",
+        "refunded": "已退款"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "出错了",
+      "description": "加载此页面时出错。"
+    },
+    "notFound": {
+      "metaTitle": "页面未找到"
+    },
+    "header": {
+      "mainNavLabel": "主导航",
+      "signIn": "登录"
+    },
+    "footer": {
+      "navLabel": "页脚",
+      "copyright": "© {year} GiftHub。欧洲制造。"
+    },
+    "navLinks": {
+      "campaigns": "活动",
+      "merchants": "商家",
+      "explore": "探索",
+      "search": "搜索",
+      "faq": "FAQ",
+      "contact": "联系我们",
+      "privacy": "隐私",
+      "terms": "条款",
+      "home": "首页",
+      "about": "关于",
+      "vouchers": "优惠券",
+      "shop": "商店",
+      "rent": "租赁"
+    },
+    "chat": {
+      "openAssistant": "打开智能助手",
+      "closeAssistant": "关闭智能助手",
+      "dialogLabel": "GiftHub 智能助手",
+      "title": "GiftHub 助手",
+      "subtitle": "智能助手",
+      "newChat": "新对话",
+      "closeChat": "关闭对话",
+      "greeting": "您好！",
+      "intro": "我是智能助手。您可以咨询优惠券、礼品卡、门票或账户相关问题。",
+      "inputLabel": "发送给智能助手的消息",
+      "placeholder": "输入消息…",
+      "send": "发送消息",
+      "sendError": "抱歉，消息发送失败，请重试。"
+    },
+    "cookies": {
+      "regionLabel": "Cookie 偏好设置",
+      "intro": "我们使用 Cookie 来改善您的体验。必要 Cookie 始终启用；可选 Cookie 由您决定是否允许。<link>隐私政策</link>",
+      "optionalLegend": "可选 Cookie",
+      "necessary": "必要",
+      "alwaysOn": "（始终启用）",
+      "analytics": "分析",
+      "marketing": "营销",
+      "preferences": "偏好",
+      "saveError": "无法保存您的选择，请重试。",
+      "acceptAll": "全部接受",
+      "declineOptional": "拒绝可选 Cookie",
+      "customize": "自定义",
+      "savePreferences": "保存偏好设置"
+    },
+    "currency": {
+      "selectLabel": "选择货币"
+    },
+    "language": {
+      "selectLabel": "选择语言",
+      "selectInterfaceLabel": "选择界面语言（{language}）",
+      "unknown": "未知",
+      "interfaceOnly": "仅更改界面文字",
+      "uiName": "{name}（界面）"
+    },
+    "country": {
+      "selectLabel": "选择市场（{country}）",
+      "heading": "选择市场",
+      "description": "仅更改国家、货币和市场数据",
+      "tip": "<strong>提示：</strong>市场用于筛选数据和货币，界面语言需单独设置。"
+    },
+    "roleSwitcher": {
+      "myDashboard": "我的 Dashboard",
+      "platformAdmin": "平台管理员",
+      "admin": "管理员",
+      "staff": "员工",
+      "switchContext": "切换身份"
+    },
+    "legalEntity": {
+      "operator": "运营方",
+      "registeredAddress": "注册地址",
+      "registryCode": "注册编号",
+      "operatorPlaceholder": "[待添加公司名称]",
+      "addressPlaceholder": "[待添加注册地址]",
+      "registryCodePlaceholder": "[待添加注册编号]"
+    },
+    "theme": {
+      "dark": "深色模式",
+      "light": "浅色模式",
+      "system": "跟随系统"
+    },
+    "voiceSearch": {
+      "start": "开始语音搜索",
+      "stop": "停止收听",
+      "tooltip": "语音搜索",
+      "tapToStop": "点击停止"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "无法加载商家中心",
+      "description": "加载商家时发生意外错误。",
+      "retry": "重试"
+    },
+    "hub": {
+      "metaTitle": "商家",
+      "metaDescription": "GiftHub 上的本地商家及其当前优惠",
+      "title": "本地商家",
+      "subtitle": "咖啡馆、沙龙、工作室等：看看哪些商家入驻了 GiftHub，以及他们正在提供的优惠。",
+      "loadError": "无法加载商家",
+      "loadErrorHint": "请稍后重试。",
+      "retry": "重试",
+      "emptyTitle": "还没有商家",
+      "emptyHint": "商家入驻后会立即显示在这里。",
+      "joinCta": "成为商家",
+      "noOffers": "目前暂无优惠",
+      "offerCount": "{count, plural, other {# 个优惠}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "未找到",
+      "metaDescription": "浏览 {name} 的优惠券、活动和优惠",
+      "offerCount": "{count, plural, other {# 个优惠}}",
+      "website": "网站",
+      "contact": "联系",
+      "sampleNotice": "<strong>示例商家。</strong>此页面展示商家在 GiftHub 上的呈现效果。其优惠均为示例，无法购买。",
+      "offersHeading": "优惠",
+      "noOffers": "目前暂无优惠",
+      "noOffersHint": "{name} 的新优惠将显示在这里。",
+      "browseOther": "浏览其他优惠",
+      "validUntil": "有效期至 {date}"
+    },
+    "tenantShell": {
+      "campaigns": "活动",
+      "mainNav": "主导航",
+      "signIn": "登录"
+    },
+    "sitePage": {
+      "hubHeroTitle": "发现本地商家",
+      "hubHeroSubtitle": "浏览 GiftHub 商家的活动、优惠券、租赁和店铺。",
+      "tenantHeroSubtitle": "一站式浏览商品、租赁和优惠券。",
+      "browseCampaigns": "浏览活动",
+      "getStarted": "开始使用",
+      "featuredMerchants": "精选商家",
+      "noMerchants": "还没有商家。",
+      "visitNamed": "访问 {name}",
+      "visitMerchant": "访问商家",
+      "featuredProducts": "精选商品",
+      "noProducts": "暂无商品。",
+      "rentalHighlights": "精选租赁",
+      "noRentals": "暂无可租赁物品。",
+      "perDay": "{price} / 天",
+      "activeVouchers": "有效优惠券",
+      "noStandaloneVouchers": "目前没有单独发放的优惠券 — <link>浏览 {count, plural, other {# 个进行中的活动}}</link>。",
+      "noVouchers": "暂无可用优惠券。",
+      "voucher": "优惠券",
+      "viewVoucher": "查看优惠券",
+      "stats": {
+        "campaigns": "活动",
+        "vouchers": "优惠券",
+        "products": "商品",
+        "rentals": "租赁"
+      },
+      "statsUnavailable": "统计数据不可用。"
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "商店",
+      "subtitle": "浏览商品并加入购物车。"
+    },
+    "shopClient": {
+      "intentCreatedTitle": "已创建结账意向",
+      "intentCreatedDescription": "意向 {id}，金额 {amount}",
+      "checkoutErrorTitle": "结账出错",
+      "checkoutErrorDescription": "无法创建结账意向。",
+      "empty": "暂无商品。",
+      "productHighlight": "商品亮点",
+      "add": "添加",
+      "cart": "购物车",
+      "cartEmpty": "购物车是空的。",
+      "lineQuantity": "{quantity} x {price}",
+      "remove": "移除",
+      "total": "合计",
+      "creatingIntent": "正在创建意向…",
+      "checkoutIntent": "结账意向"
+    },
+    "rentPage": {
+      "metaTitle": "租赁市场",
+      "metaDescription": "浏览可租赁物品",
+      "title": "租赁",
+      "subtitle": "选择日期并申请租赁报价。"
+    },
+    "rentClient": {
+      "selectDatesError": "请选择租赁日期。",
+      "bookingFailed": "预订失败",
+      "bookingCreated": "已为 {name} 创建预订申请。合计：{total}。",
+      "bookingSubmitted": "预订已提交",
+      "bookingCreateFailed": "无法创建租赁预订。",
+      "bookingCancelled": "预订已取消。",
+      "cancelFailed": "预订取消失败。",
+      "datesHeading": "租赁日期",
+      "startDate": "开始日期",
+      "endDate": "结束日期",
+      "daysSelected": "{count, plural, other {已选择 # 个租赁日。}}",
+      "selectDatesHint": "选择日期以计算价格。",
+      "empty": "暂无可租赁物品。",
+      "rentalHighlight": "租赁亮点",
+      "perDay": "{price} / 天",
+      "weeklyRate": "按周：{price}",
+      "select": "选择",
+      "selectedHeading": "已选租赁",
+      "estimatedTotal": "预估合计",
+      "notesLabel": "备注（可选）",
+      "notesPlaceholder": "如有特殊要求请填写…",
+      "submitting": "正在提交预订…",
+      "requestBooking": "申请租赁预订",
+      "myBookings": "我的预订",
+      "noBookings": "还没有租赁预订。请从上方选择物品开始。",
+      "bookingRange": "{start} - {end}（{days, plural, other {# 天}}）",
+      "bookingTotal": "合计：{total}",
+      "rejectionReason": "原因：{reason}",
+      "cancelling": "取消中…",
+      "cancel": "取消",
+      "status": {
+        "pending": "待处理",
+        "approved": "已批准",
+        "rejected": "已拒绝",
+        "paid": "已支付",
+        "active": "进行中",
+        "returned": "已归还",
+        "cancelled": "已取消"
+      }
+    },
+    "boxes": {
+      "metaTitle": "订阅盒",
+      "metaDescription": "订阅您喜爱的本地商家精选的每月优惠券盒，每期都有新优惠，随时可取消。",
+      "title": "订阅盒",
+      "subtitle": "定期收到顶级商家精选的优惠券。",
+      "empty": "暂无订阅盒，敬请期待！",
+      "byMerchant": "来自 {name}",
+      "perInterval": "/{interval}",
+      "details": "详情",
+      "subscribe": "订阅",
+      "subscribedTitle": "已订阅",
+      "subscribedMessage": "订阅成功，详情请查看您的邮箱。",
+      "subscribeFailed": "订阅失败，请重试。",
+      "notFoundTitle": "未找到订阅盒",
+      "notFoundHint": "此订阅盒不可用。",
+      "browseAll": "← 浏览全部订阅盒",
+      "backToAll": "← 全部订阅盒",
+      "subscriberCount": "{count, plural, other {# 位订阅者}}",
+      "whatsInside": "盒内内容",
+      "curatingNext": "{period}最多 {count, plural, other {# 张精选优惠券}}。下一期正在精选中。",
+      "percentVoucher": "{value}% 折扣优惠券",
+      "amountVoucher": "{amount} 优惠券",
+      "curatedVoucher": "精选优惠券",
+      "subscribing": "订阅中…",
+      "subscribeWithPrice": "订阅 — {price}/{interval}",
+      "interval": {
+        "weekly": "周",
+        "monthly": "月",
+        "quarterly": "季度"
+      },
+      "intervalEach": {
+        "weekly": "每周",
+        "monthly": "每月",
+        "quarterly": "每季度"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "搜索",
+    "metaDescription": "搜索 GiftHub 商家正在进行的活动和优惠券。",
+    "loadingSearch": "正在加载搜索",
+    "title": "搜索优惠",
+    "subtitle": "查找 GiftHub 商家的活动和优惠券",
+    "queryLabel": "搜索活动、优惠券和商家",
+    "queryPlaceholder": "搜索活动、优惠券、商家…",
+    "toggleFilters": "显示/隐藏筛选",
+    "filtersTitle": "筛选",
+    "closeFilters": "关闭筛选",
+    "error": "搜索暂时不可用，请稍后重试。",
+    "campaignsHeading": "活动",
+    "vouchersHeading": "优惠券",
+    "browseMarketplace": "在<link>活动市场</link>中浏览所有在售内容。",
+    "campaignEnds": "{date} 结束",
+    "filters": {
+      "title": "筛选",
+      "clearAll": "全部清除",
+      "category": "类别",
+      "discountType": "折扣类型",
+      "minDiscount": "最低折扣",
+      "minDiscountAria": "最低折扣",
+      "maxPrice": "最高价格",
+      "maxPriceAria": "最高价格（欧元）",
+      "any": "不限",
+      "sortBy": "排序方式",
+      "types": {
+        "all": "全部类型",
+        "percentage": "百分比折扣",
+        "fixed_amount": "固定金额",
+        "credit_amount": "店铺积分"
+      },
+      "sort": {
+        "newest": "最新优先",
+        "popular": "最受欢迎",
+        "expiring": "即将到期"
+      }
+    },
+    "results": {
+      "chipCategory": "类别：{value}",
+      "chipType": "类型：{value}",
+      "chipMinDiscount": "最低 {value}% 折扣",
+      "chipMaxPrice": "最高 €{value}",
+      "chipSort": "排序：{value}",
+      "removeFilter": "移除“{label}”筛选",
+      "searching": "搜索中…",
+      "count": "{total, plural, other {<num>#</num> 条结果}}",
+      "countForQuery": "{total, plural, other {“<hl>{query}</hl>”的 <num>#</num> 条结果}}",
+      "flash": "限时抢",
+      "voucherFallback": "优惠券",
+      "expires": "{date} 到期",
+      "redeemed": "已使用 {count} 次",
+      "noResultsTitle": "未找到结果",
+      "noResultsQuery": "没有与“{query}”匹配的优惠券，请尝试调整筛选条件。",
+      "noResultsHint": "请尝试搜索具体的优惠券、商家或类别。"
+    }
+  },
+  "faq": {
+    "metaTitle": "常见问题",
+    "metaDescription": "关于购买、使用和管理优惠券及礼品卡的常见问题解答，涵盖支付、退款、有效期和商家支持。",
+    "title": "常见问题",
+    "subtitle": "查找关于我们平台的常见问题解答。",
+    "categories": {
+      "general": "一般问题",
+      "purchasing": "购买与支付",
+      "vouchers": "优惠券与使用",
+      "account": "账户与安全",
+      "merchants": "商家专区",
+      "loyalty": "会员忠诚与奖励"
+    },
+    "items": {
+      "whatIs": {
+        "q": "GiftHub 是什么？",
+        "a": "GiftHub 是一个连接商家与顾客的电子优惠券、礼品卡和赛事门票交易平台。商家可以创建并销售数字产品，顾客可以购买、赠送和使用它们。"
+      },
+      "isFree": {
+        "q": "平台可以免费使用吗？",
+        "a": "浏览和注册账户均免费。顾客只需为所购买的产品付费。商家需支付月度方案费用，外加优惠券销售额 {fee}% 的交易费。"
+      },
+      "countries": {
+        "q": "支持哪些国家？",
+        "a": "我们支持欧盟各地的商家和顾客，提供 {currencies} 种货币和 {languages} 种语言。"
+      },
+      "howToBuy": {
+        "q": "如何购买优惠券？",
+        "a": "浏览可用优惠券，点击“购买”，并通过 Stripe 完成结账。付款后，优惠券会立即出现在您的钱包中。"
+      },
+      "paymentMethods": {
+        "q": "支持哪些支付方式？",
+        "a": "所有付款均由 Stripe 安全处理。可用的支付方式会在结账时显示。"
+      },
+      "refund": {
+        "q": "可以退款吗？",
+        "a": "退款政策由各商家自行制定。购买前请在优惠券详情页查看具体的退款政策。"
+      },
+      "howToRedeem": {
+        "q": "如何使用优惠券？",
+        "a": "打开钱包，选择优惠券，并向商家出示 QR 码。商家扫码后即可确认使用。您也可以手动输入代码使用。"
+      },
+      "expiry": {
+        "q": "优惠券过期后会怎样？",
+        "a": "过期的优惠券无法使用。到期前您会收到通知。请在钱包中查看有效期。"
+      },
+      "gift": {
+        "q": "可以把优惠券送给别人吗？",
+        "a": "可以！购买时选择“作为礼物发送”，并输入收件人的邮箱。对方将收到优惠券以及您的个性化留言。"
+      },
+      "twoFactor": {
+        "q": "如何开启双重身份验证？",
+        "a": "前往“设置 → 安全 → 双重身份验证”。您可以设置 TOTP（Google Authenticator），或使用通行密钥（生物识别）验证。"
+      },
+      "biometrics": {
+        "q": "可以使用生物识别登录吗？",
+        "a": "可以！我们支持通行密钥验证，可使用面容 ID、指纹或 Windows Hello 登录。请在“设置 → 安全”中进行设置。"
+      },
+      "deleteAccount": {
+        "q": "如何删除我的账户？",
+        "a": "前往“设置 → 隐私 → 删除账户”。根据我们的 GDPR 合规政策，您的所有数据将在 30 天内删除。您可以先导出数据。"
+      },
+      "startSelling": {
+        "q": "如何开始销售？",
+        "a": "注册成为商家，完成入驻流程，然后创建您的第一张优惠券。资料审核通过后即可立即开始销售。"
+      },
+      "fees": {
+        "q": "平台收取哪些费用？",
+        "a": "{trialDays} 天免费试用结束后，方案费用为每月 {starter} {starterPrice}、{pro} {proPrice} 或 {scale} {scalePrice}（按年付费免 2 个月），另收取优惠券销售额 {fee}% 的交易费，从结算款中扣除。"
+      },
+      "integrations": {
+        "q": "可以与现有系统集成吗？",
+        "a": "可以！我们提供 Webhook（实时事件通知）、API 密钥（程序化访问），以及 Zapier/Slack/Discord 集成。"
+      },
+      "trackSales": {
+        "q": "如何追踪我的销售情况？",
+        "a": "商家 Dashboard 提供实时数据分析，包括收入、使用情况、客户洞察，以及 AI 驱动的自然语言查询（例如“显示上周的收入”）。"
+      },
+      "loyalty": {
+        "q": "会员忠诚计划如何运作？",
+        "a": "通过购物、每日签到、推荐好友和撰写评价赚取积分。积分可解锁会员等级（青铜 → 白银 → 黄金 → 铂金 → 钻石），等级越高权益越多。"
+      },
+      "badges": {
+        "q": "什么是徽章和连续签到？",
+        "a": "徽章是达成里程碑（首次购买、10 次推荐等）时获得的成就。连续签到记录您连续活跃的天数，奖励坚持不懈的您。"
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "联系我们",
+    "metaDescription": "联系 GiftHub 团队：优惠券问题、商家入驻、账单或合作咨询。",
+    "title": "联系我们",
+    "subtitle": "有疑问？欢迎随时联系我们。",
+    "email": "邮箱",
+    "assistantTitle": "智能助手",
+    "assistantText": "点击角落的聊天按钮，快速获取有关优惠券和账户的解答。这是自动化助手，并非真人。",
+    "name": "姓名",
+    "subject": "主题",
+    "message": "留言",
+    "sent": "消息已发送！我们会尽快回复您。",
+    "unavailableWithEmail": "联系表单暂时不可用，请发送邮件至 {email}。",
+    "unavailable": "联系表单暂时不可用，请稍后重试。",
+    "error": "发送失败，请稍后重试。",
+    "sending": "发送中…",
+    "send": "发送消息"
+  },
+  "leaderboardPage": {
+    "metaTitle": "热门商家",
+    "metaDescription": "过去 30 天在 GiftHub 上优惠券使用次数最多的商家",
+    "title": "热门商家",
+    "subtitle": "过去 30 天优惠券使用次数最多",
+    "rank": "第 {rank} 名",
+    "redemptions": "{count, plural, other {<num>#</num><label>次使用</label>}}",
+    "empty": "过去 30 天还没有使用记录，暂无排名。",
+    "browseCampaigns": "浏览进行中的活动"
+  },
+  "ui": {
+    "close": "关闭",
+    "more": "更多",
+    "loading": "加载中…",
+    "breadcrumb": {
+      "label": "面包屑导航"
+    },
+    "pagination": {
+      "label": "分页",
+      "previousAria": "上一页",
+      "previous": "上一页",
+      "nextAria": "下一页",
+      "next": "下一页",
+      "morePages": "更多页"
+    },
+    "toast": {
+      "dismiss": "关闭通知"
+    },
+    "calendar": {
+      "previousMonth": "上个月",
+      "nextMonth": "下个月"
+    },
+    "datePicker": {
+      "placeholder": "选择日期"
+    },
+    "combobox": {
+      "placeholder": "请选择…",
+      "empty": "未找到选项。",
+      "search": "搜索…"
+    },
+    "searchInput": {
+      "clear": "清除搜索"
+    },
+    "searchResults": {
+      "empty": "未找到结果",
+      "noResultsFor": "未找到“{query}”的相关结果，请尝试其他关键词。"
+    },
+    "commandPalette": {
+      "placeholder": "搜索…",
+      "noResults": "未找到结果",
+      "toOpen": "打开",
+      "other": "其他",
+      "hostPlaceholder": "您想去哪里？",
+      "categories": {
+        "navigate": "导航",
+        "discover": "发现",
+        "account": "账户"
+      },
+      "items": {
+        "home": {
+          "label": "首页",
+          "description": "着陆页"
+        },
+        "app": {
+          "label": "我的 Dashboard",
+          "description": "您的优惠券、钱包和动态"
+        },
+        "vouchers": {
+          "label": "我的优惠券"
+        },
+        "wallet": {
+          "label": "钱包",
+          "description": "积分余额"
+        },
+        "gifts": {
+          "label": "礼品中心",
+          "description": "浏览并赠送礼品"
+        },
+        "campaigns": {
+          "label": "活动",
+          "description": "进行中的优惠券活动"
+        },
+        "hub": {
+          "label": "商家中心",
+          "description": "浏览商家"
+        },
+        "deals": {
+          "label": "优惠"
+        },
+        "settings": {
+          "label": "设置",
+          "description": "账户与偏好设置"
+        },
+        "admin": {
+          "label": "管理",
+          "description": "平台管理"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "确认",
+      "cancel": "取消"
+    },
+    "dataTable": {
+      "noResults": "无结果。"
+    },
+    "fileUpload": {
+      "maxFiles": "最多允许 {maxFiles, plural, other {# 个文件}}",
+      "tooLarge": "文件大小须小于 {maxSize}MB",
+      "dropHere": "将文件拖放到此处",
+      "dragDrop": "拖放文件到此处",
+      "browseHint": "或点击浏览（每个文件最大 {maxSize}MB）",
+      "select": "选择文件",
+      "remove": "移除 {name}"
+    },
+    "imageUpload": {
+      "notImage": "请上传图片文件",
+      "tooLarge": "图片大小须小于 {maxSize}MB",
+      "previewAlt": "预览",
+      "remove": "移除图片",
+      "dropHere": "将图片拖放到此处",
+      "upload": "上传图片",
+      "hint": "PNG、JPG、GIF，最大 {maxSize}MB",
+      "select": "选择图片"
+    },
+    "statsCard": {
+      "open": "打开"
+    },
+    "cashbackBadge": {
+      "label": "{percent}% 返现"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "有效",
+        "redeemed": "已使用",
+        "expired": "已过期"
+      },
+      "redeem": "使用",
+      "expires": "{date} 到期",
+      "merchantAlt": "商家"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "登录",
+      "register": "创建账户",
+      "resetPassword": "重置密码"
+    },
+    "error": {
+      "title": "出错了",
+      "fallback": "发生意外错误。",
+      "tryAgain": "重试"
+    },
+    "login": {
+      "welcome": "欢迎回来",
+      "subtitle": "登录您的 GiftHub 账户",
+      "tabMagic": "邮箱验证码",
+      "tabPassword": "密码",
+      "tabSocial": "社交账号",
+      "tabPasskey": "通行密钥",
+      "emailLabel": "邮箱地址",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "密码",
+      "sendCode": "发送登录验证码",
+      "sending": "发送中…",
+      "signIn": "登录",
+      "signingIn": "登录中…",
+      "otpTitle": "请查收邮件！",
+      "otpDesc": "我们已向 <b>{email}</b> 发送了 6 位验证码",
+      "otpLabel": "输入验证码",
+      "verify": "验证",
+      "verifying": "验证中…",
+      "resend": "重新发送验证码",
+      "backToEmail": "返回",
+      "orContinueWith": "或通过以下方式继续",
+      "continueWith": "使用 {provider} 继续",
+      "errorWrongCode": "验证码无效或已过期，请重试。",
+      "errorWrongPass": "邮箱或密码无效。",
+      "errorGeneric": "出错了，请重试。",
+      "errorEmailUnavailable": "邮箱登录暂时不可用，请使用密码登录。",
+      "errorCredentialsSignin": "邮箱或密码错误。",
+      "errorAuthGeneric": "登录失败，请重试。",
+      "backToHome": "返回首页",
+      "socialDesc": "使用您常用的账号一键登录",
+      "noAccount": "还没有账户？",
+      "createAccount": "创建账户",
+      "noAccountSub": "使用验证码登录新邮箱时，将自动为您创建账户。",
+      "registered": "账户已创建，请使用邮箱和密码登录。",
+      "magicDesc": "我们会向您的邮箱发送 6 位验证码，无需密码。",
+      "passwordDesc": "使用邮箱和密码登录。",
+      "forgotPassword": "忘记密码？",
+      "demo": "演示账户",
+      "demoRole": {
+        "platformAdmin": "平台管理员",
+        "merchantAdmin": "商家管理员",
+        "merchantStaff": "商家员工",
+        "endUser": "普通用户"
+      },
+      "passkeyDesc": "使用指纹、面容或安全密钥即时登录。",
+      "passkeyButton": "使用通行密钥登录",
+      "passkeyAuthenticating": "验证中…"
+    },
+    "register": {
+      "backToHome": "返回首页",
+      "title": "创建您的账户",
+      "subtitle": "开始发现和管理优惠券",
+      "nameLabel": "姓名",
+      "namePlaceholder": "张三",
+      "emailLabel": "邮箱地址",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "密码",
+      "passwordPlaceholder": "至少 8 个字符",
+      "submit": "创建账户",
+      "submitting": "正在创建账户…",
+      "haveAccount": "已有账户？",
+      "signIn": "登录",
+      "errorWeak": "密码强度太弱，请设置更安全的密码。",
+      "errorInvalid": "输入无效。",
+      "errorFallback": "出错了。",
+      "errorGeneric": "出错了，请重试。"
+    },
+    "resetPassword": {
+      "title": "重置密码",
+      "subtitle": "请在下方输入新密码",
+      "newPassword": "新密码",
+      "confirmPassword": "确认密码",
+      "submit": "设置新密码",
+      "submitting": "重置中…",
+      "success": "密码已重置！",
+      "successDesc": "您的密码已更新，现在可以登录了。",
+      "goToLogin": "前往登录",
+      "errorMismatch": "两次输入的密码不一致",
+      "errorShort": "密码至少需要 8 个字符",
+      "errorWeak": "密码强度太弱，请设置更安全的密码。",
+      "errorExpired": "此重置链接无效或已过期。",
+      "forgotTitle": "忘记密码？",
+      "forgotSubtitle": "输入您的邮箱，我们将向您发送重置链接",
+      "emailLabel": "邮箱地址",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "发送重置链接",
+      "sending": "发送中…",
+      "linkSent": "请查收邮件！",
+      "linkSentDesc": "如果该邮箱已注册账户，我们已向其发送重置链接。",
+      "backToLogin": "返回登录"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "欢迎加入！",
+      "joined": "您已加入 {orgName}。正在跳转…",
+      "accepted": "邀请已接受。正在跳转…",
+      "problemTitle": "邀请出现问题",
+      "errorNotAccepted": "无法接受此邀请。",
+      "errorGeneric": "出错了，请重试。",
+      "goToOrgs": "前往您的组织",
+      "invitedTitle": "您收到了邀请",
+      "invitedDesc": "接受此邀请即可加入该组织。您可能需要先登录。",
+      "accepting": "正在接受…",
+      "accept": "接受邀请"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "礼品卡与送礼",
+      "description": "浏览并购买本地商家的电子礼品卡。几秒钟送出一份贴心礼物，通过邮件送达，可到店或在线使用。"
+    },
+    "publicCard": {
+      "defaultHeadline": "礼品卡",
+      "imageAlt": "礼品卡",
+      "logoAlt": "品牌标志",
+      "merchant": "商家：{name}",
+      "merchantFallback": "商家",
+      "code": "代码：{code}",
+      "validUntil": "有效期至：{date}",
+      "noExpiry": "永久有效",
+      "showQr": "向工作人员出示此 QR 码即可使用礼品卡。",
+      "statusMessage": "此礼品卡{status}。",
+      "status": {
+        "active": "有效",
+        "redeemed": "已使用",
+        "expired": "已过期",
+        "cancelled": "已取消"
+      }
+    },
+    "purchase": {
+      "title": "购买礼品卡",
+      "loading": "加载中…",
+      "notAvailable": "礼品卡不可用",
+      "defaultHeadline": "礼品卡",
+      "imageAlt": "礼品卡",
+      "logoAlt": "品牌",
+      "fromMerchant": "来自 {merchant}",
+      "form": {
+        "recipientEmail": "收件人邮箱（可选）",
+        "recipientEmailPlaceholder": "将礼品卡发送至此邮箱",
+        "recipientName": "收件人姓名",
+        "recipientNamePlaceholder": "收件人",
+        "senderName": "您的姓名",
+        "senderNamePlaceholder": "赠送人",
+        "message": "个性化留言（可选）",
+        "messagePlaceholder": "添加个性化留言…"
+      },
+      "total": "合计：",
+      "processing": "处理中…",
+      "buy": "购买礼品卡",
+      "errors": {
+        "notFound": "未找到礼品卡或该礼品卡暂不可购买",
+        "loadFailed": "无法加载礼品卡",
+        "purchaseFailed": "购买失败",
+        "generic": "出错了，请重试。"
+      }
+    },
+    "product": {
+      "notFound": "未找到礼品",
+      "backToHub": "返回礼品中心",
+      "imageAlt": "{title} {index}",
+      "featured": "精选",
+      "lowStock": "仅剩 {count} 件",
+      "buyNow": "立即购买",
+      "addToCart": "加入购物车",
+      "saveToWishlist": "加入心愿单",
+      "removeFromWishlist": "从心愿单移除",
+      "share": "分享此礼品",
+      "upsellsTitle": "猜您喜欢"
+    },
+    "claim": {
+      "metaTitle": "领取您的礼物",
+      "alreadyClaimedTitle": "礼物已被领取",
+      "alreadyClaimedBody": "此礼物已被领取。",
+      "expiredTitle": "礼物已过期",
+      "expiredBody": "抱歉，此礼物链接已过期。",
+      "title": "您收到了一份礼物！",
+      "signedInHint": "点击下方按钮，将此优惠券添加到您的钱包。",
+      "signedOutHint": "登录后即可领取此优惠券。",
+      "claimButton": "领取礼物",
+      "signInButton": "登录领取"
+    },
+    "error": {
+      "title": "无法加载礼品中心",
+      "fallback": "加载礼品时发生意外错误。",
+      "retry": "重试"
+    },
+    "hub": {
+      "title": "礼品",
+      "subtitle": "为每个场合找到完美礼物",
+      "loadError": "无法加载礼品",
+      "retry": "重试",
+      "emptyCatalog": {
+        "title": "暂无上架礼品",
+        "body": "在此期间，本地商家的优惠券也是不错的礼物。"
+      },
+      "noMatches": "没有符合筛选条件的礼品",
+      "clearFilters": "清除筛选",
+      "browseCampaigns": "浏览活动",
+      "allGifts": "全部礼品",
+      "loadMore": "加载更多"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "未找到礼品卡",
+        "body": "QR 码无效或已过期。"
+      },
+      "notActive": {
+        "title": "礼品卡尚未生效",
+        "body": "此礼品卡将在稍后生效。"
+      },
+      "expired": {
+        "title": "礼品卡已过期",
+        "body": "此礼品卡已失效。"
+      },
+      "result": {
+        "title": "礼品卡已使用",
+        "confirmed": "已成功确认使用。",
+        "alreadyRedeemedOrCancelled": "此礼品卡已被使用或已取消。",
+        "alreadyRedeemedOrInvalid": "此礼品卡已被使用或无效。"
+      }
+    },
+    "qr": {
+      "error": "QR 码生成失败",
+      "generating": "正在生成 QR 码…",
+      "alt": "QR 码"
+    },
+    "wizard": {
+      "title": "AI 礼物推荐",
+      "subtitle": "告诉我们收礼人的情况，我们为您找到完美礼物",
+      "steps": {
+        "recipient": "礼物送给谁？",
+        "occasion": "什么场合？",
+        "budget": "您的预算是多少？"
+      },
+      "recipients": {
+        "partner": "伴侣",
+        "friend": "朋友",
+        "parent": "父母",
+        "colleague": "同事",
+        "child": "孩子",
+        "teacher": "老师"
+      },
+      "occasions": {
+        "birthday": "生日",
+        "christmas": "圣诞节",
+        "anniversary": "纪念日",
+        "thankYou": "感谢",
+        "justBecause": "无特别理由",
+        "graduation": "毕业"
+      },
+      "summary": {
+        "for": "送给：{recipient}",
+        "budget": "预算：{amount}"
+      },
+      "submit": "寻找完美礼物",
+      "error": "无法生成推荐，请重试。",
+      "results": {
+        "found": "我们为您找到了 {count, plural, other {# 件礼物}}：",
+        "empty": "未找到匹配的商品，请尝试调整条件。"
+      },
+      "startOver": "重新开始"
+    },
+    "card": {
+      "featured": "精选",
+      "save": "收藏",
+      "unsave": "取消收藏",
+      "buyNow": "立即购买"
+    },
+    "feedSection": {
+      "viewAll": "查看全部"
+    },
+    "filters": {
+      "toggle": "筛选",
+      "clear": "清除",
+      "occasion": "场合",
+      "persona": "送给谁？",
+      "budget": "预算",
+      "budgetUnder": "{amount} 以下"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "分享优惠，赚取奖励"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "发生意外错误。"
+    },
+    "logoAlt": "{name} 标志",
+    "merchantFallback": "商家",
+    "validUntil": "有效期至 {date}",
+    "validUntilWithLimit": "有效期至 {date} - 限前 {count, plural, other {# 次使用}}",
+    "offAtMerchant": "{merchant} 减 {value}",
+    "fields": {
+      "event": "赛事活动",
+      "dateTime": "日期和时间",
+      "location": "地点",
+      "price": "价格",
+      "status": "状态",
+      "attendee": "参与者",
+      "usedAt": "使用时间"
+    },
+    "ticketStatus": {
+      "available": "可用",
+      "sold": "已售出",
+      "used": "已使用",
+      "cancelled": "已取消",
+      "refunded": "已退款"
+    },
+    "event": {
+      "notAvailable": "此赛事活动暂不支持购票。",
+      "descriptionFallback": "欢迎参加这场精彩的赛事活动！",
+      "availableTickets": "可购门票",
+      "soldOut": "已售罄",
+      "availableCount": "剩余 {count} 张",
+      "terms": "条款与条件",
+      "soldOutTitle": "此赛事活动门票已售罄",
+      "soldOutDescription": "所有门票均已售出。"
+    },
+    "eventPurchase": {
+      "title": "购买门票",
+      "description": "选择门票并完成购买",
+      "selectTicket": "选择门票",
+      "attendeeNameLabel": "参与者姓名（可选）",
+      "attendeeNamePlaceholder": "参加者的姓名",
+      "attendeeEmailLabel": "参与者邮箱（可选）",
+      "attendeeEmailPlaceholder": "用于接收门票的邮箱",
+      "total": "合计",
+      "submit": "购买门票",
+      "noTickets": "目前暂无可购门票。",
+      "checkBackLater": "请稍后再来查看，或联系活动主办方。",
+      "selectTicketError": "请选择门票",
+      "purchaseFailed": "门票购买失败"
+    },
+    "ticket": {
+      "noPermission": "您无权查看此门票。",
+      "heading": "门票 #{number}",
+      "qrTitle": "QR 码",
+      "qrDescription": "在活动入口出示此 QR 码",
+      "qrAlt": "门票 QR 码",
+      "qrUnavailable": "QR 码不可用",
+      "ticketNumber": "门票编号：<strong>{number}</strong>",
+      "used": "门票已使用",
+      "detailsTitle": "门票详情",
+      "detailsDescription": "关于您门票的重要信息",
+      "staffCanRedeem": "作为商家员工，您可以在活动现场核销此门票。"
+    },
+    "redeem": {
+      "notFoundTitle": "未找到使用记录",
+      "notFoundDescription": "QR 码无效或已过期。",
+      "title": "优惠券已使用",
+      "alreadyRedeemed": "此优惠券已被使用。",
+      "confirmed": "已成功确认使用。"
+    },
+    "qrCheckout": {
+      "title": "QR 结账",
+      "completeTitle": "结账完成",
+      "completeDescription": "您的购买已确认，详情请查看邮件。",
+      "payNow": "立即支付",
+      "confirming": "确认中…"
+    },
+    "voucherPage": {
+      "notFoundTitle": "未找到优惠券",
+      "notFoundDescription": "找不到您要查找的优惠券。",
+      "descriptionFallback": "专属优惠券",
+      "shareText": "看看这张来自 {merchant} 的优惠券",
+      "copyCode": "复制优惠券码",
+      "qrAlt": "优惠券 {code} 的 QR 码",
+      "print": "打印优惠券"
+    },
+    "referralPage": {
+      "voucherFrom": "您收到了一张来自 <highlight>{name}</highlight> 的优惠券",
+      "qrAlt": "优惠券 {code} 的使用 QR 码",
+      "offAtMerchantShared": "{merchant} 减 {value} - 好友分享！"
+    },
+    "bnpl": {
+      "title": "分期付款",
+      "description": "将 {amount} 的付款分成轻松的月度分期。",
+      "perMonth": "/月",
+      "planNoInterest": "{months} 期（0% 利息）",
+      "planWithFee": "{months} 期（{rate}% 手续费）",
+      "monthlyPayments": "{count, plural, other {分 # 个月付款}}",
+      "total": "合计：{amount}",
+      "noExtraCost": "无额外费用",
+      "payNow": "立即支付 {amount}"
+    },
+    "qrPanel": {
+      "qrAlt": "QR 码",
+      "generateFailed": "QR 码生成失败",
+      "placeholder": "QR 码将显示在这里",
+      "generating": "正在生成 QR 码…",
+      "unavailable": "QR 码不可用",
+      "hideCode": "隐藏代码",
+      "showCode": "显示代码",
+      "expires": "{date} 到期",
+      "refreshNote": "代码每 30 秒刷新一次"
+    },
+    "qrDownload": {
+      "success": "QR 码下载成功！",
+      "failed": "QR 码下载失败",
+      "downloading": "下载中…",
+      "download": "下载 QR 码"
+    }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "管理您的优惠券活动。",
+      "createCampaign": "创建活动",
+      "subscriptionRequired": "需要订阅",
+      "trialEnded": "您的 60 天免费活动试用期已结束。开通 9.90/月的套餐即可创建新活动。",
+      "stats": {
+        "totalTitle": "活动总数",
+        "totalDescription": "全部活动",
+        "activeTitle": "进行中",
+        "activeDescription": "当前正在进行",
+        "paidTitle": "付费购买",
+        "paidDescription": "已完成订单",
+        "revenueTitle": "收入",
+        "revenueDescription": "付费优惠券销售额"
+      },
+      "weeklyRevenue": {
+        "title": "每周收入",
+        "description": "近 7 天的付费活动销售额。",
+        "series": "收入"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "还没有活动",
+        "descriptionCanCreate": "创建活动来组织和管理您的优惠券。",
+        "descriptionNeedsSubscription": "开通订阅即可创建新活动。",
+        "action": "创建您的第一个活动"
+      },
+      "searchPlaceholder": "搜索活动...",
+      "searchLabel": "搜索活动",
+      "filterAll": "全部",
+      "status": {
+        "active": "进行中",
+        "draft": "草稿",
+        "ended": "已结束",
+        "paused": "已暂停"
+      },
+      "noMatches": "没有符合筛选条件的活动。",
+      "clearFilters": "清除筛选",
+      "type": {
+        "weekly": "每周活动",
+        "limited": "限时活动",
+        "other": "{type}活动"
+      },
+      "runs": "活动期 {start} - {end}",
+      "view": "查看",
+      "stats": {
+        "vouchers": "优惠券",
+        "paidPurchases": "付费购买",
+        "revenue": "收入",
+        "price": "价格"
+      },
+      "free": "免费"
+    },
+    "new": {
+      "iconLetter": "活",
+      "draftNotice": "新活动会先保存为草稿。在活动页面发布之前，顾客无法看到。"
+    },
+    "edit": {
+      "breadcrumb": "编辑",
+      "title": "编辑活动"
+    },
+    "form": {
+      "basicInfo": "基本信息",
+      "nameLabel": "活动名称 *",
+      "namePlaceholder": "节日特惠",
+      "descriptionLabel": "描述",
+      "descriptionPlaceholder": "限时促销",
+      "typeLabel": "类型 *",
+      "typeOptions": {
+        "limited": "一次性（限时）",
+        "weekly": "每周"
+      },
+      "dates": "日期",
+      "startDate": "开始日期 *",
+      "endDate": "结束日期 *",
+      "timezoneHint": "时间按您当地时区显示。",
+      "pricing": "价格与限制",
+      "priceLabel": "价格（{currency}，免费优惠券请留空）",
+      "pricePreview": "顾客需支付 {price}。",
+      "priceHint": "请输入 {currency} 金额，例如 4.50 或 4,50 表示 {example}。",
+      "maxRedemptions": "最多使用次数",
+      "maxPurchases": "最多购买次数",
+      "unlimited": "不限",
+      "creditLabel": "推荐人积分（%）",
+      "creditPreview": "推荐人可获得购买价格 {percent}% 的积分。",
+      "creditHint": "按购买价格的比例以积分形式发放给推荐人，例如 5 或 2,5。",
+      "termsSection": "条款与条件",
+      "termsLabel": "条款",
+      "termsPlaceholder": "此活动的条款与条件...",
+      "saving": "保存中...",
+      "saveChanges": "保存更改",
+      "creating": "创建中...",
+      "create": "创建活动",
+      "saved": "活动更改已保存。",
+      "errors": {
+        "invalidDates": "请输入有效的开始和结束日期。",
+        "endBeforeStart": "结束日期必须晚于开始日期。",
+        "maxRedemptions": "最多使用次数必须是大于等于 1 的整数。",
+        "maxPurchases": "最多购买次数必须是大于等于 1 的整数。",
+        "saveFailed": "保存活动失败"
+      },
+      "priceErrors": {
+        "negative": "价格不能为负数。",
+        "invalid": "价格不是有效数字。",
+        "wholeNumber": "价格必须是整数。",
+        "decimals": "价格最多保留 {decimals} 位小数。",
+        "tooLarge": "价格过大。"
+      },
+      "creditErrors": {
+        "negative": "推荐人积分不能为负数。",
+        "invalid": "推荐人积分不是有效数字。",
+        "decimals": "推荐人积分最多保留 {decimals} 位小数。",
+        "tooLarge": "推荐人积分过大。",
+        "tooHigh": "推荐人积分不能超过 100%。"
+      }
+    },
+    "detail": {
+      "noDescription": "暂无描述",
+      "draftNotice": "此活动为草稿，顾客暂时无法看到。",
+      "draftNoticeAdmin": "此活动为草稿，顾客暂时无法看到。准备好后即可发布。",
+      "status": "状态",
+      "type": "类型",
+      "price": "价格",
+      "referrerCredit": "推荐人积分",
+      "none": "无",
+      "stats": {
+        "vouchers": "优惠券",
+        "totalPurchases": "购买总数",
+        "paidPurchases": "付费购买"
+      },
+      "terms": "条款与条件",
+      "promotion": {
+        "title": "推广",
+        "description": "在每周简报和通知中获得付费曝光。"
+      },
+      "vouchers": {
+        "title": "优惠券",
+        "description": "由此活动生成的优惠券。",
+        "empty": "尚未生成优惠券。",
+        "view": "查看"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "加入每周简报（付费）",
+      "notification": "在通知中提升曝光（付费）",
+      "endDate": "推广结束日期",
+      "saving": "保存中...",
+      "save": "保存推广设置",
+      "saved": "推广设置已保存。",
+      "upgradeNeededTitle": "需要升级",
+      "upgradeNeeded": "推广加速属于更高级的套餐。请在“设置与账单”中升级后使用。",
+      "saveFailedStatus": "无法保存推广设置（错误 {status}）。",
+      "saveFailedNetwork": "无法保存推广设置。请检查网络连接后重试。"
+    },
+    "actions": {
+      "adminOnly": "只有商家管理员可以发布、暂停或编辑活动。",
+      "edit": "编辑",
+      "publish": {
+        "label": "发布",
+        "title": "发布此活动？",
+        "description": "顾客将立即可以查看并购买此活动中的优惠券。",
+        "success": "活动已发布，顾客现在可以看到。"
+      },
+      "pause": {
+        "label": "暂停",
+        "title": "暂停此活动？",
+        "description": "活动将恢复为草稿，在您再次发布前对顾客隐藏。已售出的优惠券仍然有效。",
+        "success": "活动已暂停，已对顾客隐藏。"
+      },
+      "end": {
+        "label": "结束活动",
+        "title": "立即结束此活动？",
+        "description": "活动将立即停止，且无法再次发布。已售出的优惠券仍然有效。",
+        "success": "活动已结束。"
+      },
+      "updateFailedStatus": "无法更新活动（错误 {status}）。",
+      "updateFailed": "无法更新活动。"
+    },
+    "generate": {
+      "open": "生成优惠券",
+      "title": "生成优惠券",
+      "descriptionPriced": "将创建减免 {value} 的草稿优惠券，有效期 {start} – {end}。每张优惠券都有独立代码，发布前不会对外显示。",
+      "descriptionFree": "此活动为免费活动，没有可设置在优惠券上的金额。请先为活动设置价格。",
+      "countLabel": "优惠券数量（1-100）",
+      "generating": "生成中...",
+      "submit": "生成",
+      "invalidCount": "请输入 1 到 100 之间的整数",
+      "needsPrice": "请先为此活动设置价格。生成的优惠券面值等于活动价格。",
+      "failed": "生成优惠券失败",
+      "success": "已生成 {count, plural, other {# 张草稿优惠券。准备好后可}}在优惠券页面发布。"
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "进行中的活动",
+      "statLiveVouchers": "已上线优惠券",
+      "statRedemptions30d": "使用次数（30 天）"
+    },
+    "error": {
+      "title": "出错了",
+      "description": "商家后台发生错误。",
+      "tryAgain": "重试",
+      "backToMerchants": "返回商家列表"
+    },
+    "shell": {
+      "groups": {
+        "overview": "概览",
+        "offers": "优惠",
+        "inStore": "门店",
+        "customers": "顾客",
+        "settings": "设置"
+      },
+      "language": "语言",
+      "opensAppArea": "打开应用区域",
+      "externalLinkTitle": "{label}（打开应用区域，离开此商家后台）",
+      "opensOutside": "在商家后台之外打开",
+      "merchantNavigation": "商家",
+      "more": "更多",
+      "navDashboard": "Dashboard"
+    },
+    "dashboard": {
+      "title": "商家 Dashboard",
+      "welcomeBack": "欢迎回来，{name}",
+      "viewCampaigns": "查看活动",
+      "createVoucher": "创建优惠券",
+      "performanceOverview": "业绩概览",
+      "performanceOverviewHint": "实时活动动态与使用情况。",
+      "revenueAndCredits": "收入与积分",
+      "revenueAndCreditsHint": "销售额、积分及未结负债。",
+      "performanceTrend": "业绩趋势",
+      "performanceTrendHint": "近 {days} 天的使用与收入动态。",
+      "rangeShort": "{days}天",
+      "revenue": "收入",
+      "chartRedemptions": "使用次数",
+      "chartRevenue": "收入（{currency}）",
+      "paidOrders": "付费订单",
+      "openOrdersView": "打开订单视图",
+      "avgOrder": "平均订单额",
+      "openCampaignRevenue": "打开活动收入",
+      "redemptionRate": "使用率",
+      "openRedemptionQueue": "打开使用队列",
+      "pendingConfirmation": "{count} 个待确认",
+      "pendingConfirmationHint": "等待您确认的到店使用。",
+      "viewRedemptions": "查看使用记录",
+      "actionCenter": "待办中心",
+      "actionCenterHint": "需要优先处理的事项。",
+      "allCaughtUp": "所有事项均已处理完毕。",
+      "open": "打开",
+      "actions": {
+        "pendingRedemptions": "{count, plural, other {# 个待处理使用}}",
+        "pendingRedemptionsDetail": "确认到店使用",
+        "expiringVouchers": "{count, plural, other {# 张优惠券即将过期}}",
+        "expiringVouchersDetail": "检查优惠券有效期",
+        "endingCampaigns": "{count, plural, other {# 个活动本周结束}}",
+        "endingCampaignsDetail": "延长或复制您表现最好的活动",
+        "upcomingEvents": "{count, plural, other {# 场即将举行的赛事活动}}",
+        "upcomingEventsDetail": "准备门票检票和人员安排"
+      },
+      "upcomingEventsTitle": "即将举行的赛事活动",
+      "upcomingEventsHint": "接下来已安排的赛事活动。",
+      "noUpcomingEvents": "暂无即将举行的赛事活动。",
+      "eventStatus": {
+        "published": "已发布",
+        "soldOut": "已售罄"
+      },
+      "manageEvents": "管理赛事活动",
+      "topVouchers": "热门优惠券",
+      "topVouchersHint": "使用次数最多的优惠。",
+      "noTopVouchers": "还没有优惠券被使用。使用次数最多的优惠券将显示在这里。"
+    },
+    "stats": {
+      "activeVouchers": "有效优惠券",
+      "publishedVouchers": "已发布优惠券",
+      "openVouchers": "打开优惠券",
+      "activeCampaigns": "进行中的活动",
+      "runningCampaigns": "正在进行的活动",
+      "openCampaigns": "打开活动",
+      "activeEvents": "进行中的赛事活动",
+      "publishedEvents": "已发布赛事活动",
+      "openEvents": "打开赛事活动",
+      "todaysRedemptions": "今日使用",
+      "thisWeek": "本周：{count}",
+      "reviewRedemptions": "查看使用记录",
+      "ofWeekly": "占本周"
+    },
+    "revenue": {
+      "voucherRevenue": "优惠券收入",
+      "paidVoucherSales": "付费优惠券销售额",
+      "openCampaignSales": "打开活动销售",
+      "ticketRevenue": "门票收入",
+      "paidTicketSales": "付费门票销售额",
+      "openEventSales": "打开赛事活动销售",
+      "creditsIssued": "已发放积分",
+      "totalCreditsDistributed": "累计发放积分",
+      "openReferralCredits": "打开推荐积分",
+      "outstandingLiability": "未结负债",
+      "unredeemedValue": "未使用优惠券价值",
+      "openVoucherLiability": "打开优惠券负债"
+    },
+    "recentActivity": {
+      "title": "最近动态",
+      "empty": "暂无最近动态",
+      "unknownUser": "未知用户",
+      "redeemedVoucher": "使用了优惠券 - {time}",
+      "confirmed": "已确认",
+      "pending": "待确认"
+    },
+    "liveStats": {
+      "live": "实时",
+      "connecting": "连接中…",
+      "redeemedToday": "<label>今日已使用</label> <value>{count}</value>",
+      "pending": "<label>待确认</label> <value>{count}</value>"
+    },
+    "analytics": {
+      "metaTitle": "数据分析",
+      "title": "数据分析",
+      "subtitle": "追踪优惠券表现与收入",
+      "totalRedemptions": "总使用次数",
+      "confirmedRedemptions": "已确认使用",
+      "totalDiscounts": "折扣总额",
+      "givenToCustomers": "让利给顾客",
+      "creditsIssued": "已发放积分",
+      "totalCreditsDistributed": "累计发放积分",
+      "activeVouchers": "有效优惠券",
+      "withRedemptions": "有使用记录",
+      "charts": {
+        "redemptionTrends": "使用趋势（近 30 天）",
+        "redemptions": "使用次数",
+        "revenue": "收入（{currency}）",
+        "topPerforming": "表现最佳的优惠券",
+        "noRedeemed": "还没有优惠券被使用。表现最佳的优惠券将显示在这里。",
+        "byCategory": "按类别统计使用",
+        "noCategoryData": "暂无类别数据"
+      }
+    },
+    "ask": {
+      "title": "智能问数",
+      "subtitle": "用自然语言询问您的业务数据",
+      "emptyTitle": "关于数据，尽管问",
+      "emptyHint": "试试下面的建议问题",
+      "placeholder": "输入关于数据的问题...",
+      "suggestedTitle": "建议问题",
+      "suggestions": {
+        "revenueLastWeek": "上周我的收入是多少？",
+        "dailyRedemptionsThisMonth": "显示本月每日使用次数",
+        "topVouchersByRevenue": "上月收入最高的优惠券",
+        "customersPurchasedLastWeek": "上周有多少顾客购买？",
+        "referralConversionRate": "我的推荐转化率是多少？",
+        "dailyRevenueTrend": "显示本月每日收入趋势",
+        "purchasesYesterday": "昨天有多少笔购买？",
+        "bestPerformingVouchers": "哪些优惠券表现最好？"
+      },
+      "errorFallback": "抱歉，无法处理这个问题。",
+      "networkError": "网络错误，请重试。",
+      "itemLabel": "项目 {n}"
+    },
+    "reports": {
+      "title": "财务报表",
+      "subtitle": "收入概览与导出",
+      "downloadCsv": "下载 CSV",
+      "from": "从",
+      "to": "至",
+      "apply": "应用",
+      "totalRevenue": "总收入",
+      "platformFees": "平台费用",
+      "netRevenue": "净收入",
+      "redemptions": "使用次数",
+      "revenueByCurrency": "按货币统计收入",
+      "netAndFees": "净额：{net} • 费用：{fees}",
+      "monthlyRevenue": "月度收入",
+      "noRevenue": "此期间没有收入数据。",
+      "month": "月份",
+      "vouchers": "优惠券",
+      "tickets": "门票",
+      "total": "合计"
+    },
+    "scheduled": {
+      "title": "定时报表",
+      "subtitle": "设置自动发送的邮件报表",
+      "backToReports": "← 财务报表",
+      "activeSchedules": "已启用的计划",
+      "loading": "加载中...",
+      "noSchedules": "尚未设置任何计划",
+      "period": {
+        "daily": "每日",
+        "weekly": "每周",
+        "monthly": "每月"
+      },
+      "reportTitle": {
+        "daily": "日报",
+        "weekly": "周报",
+        "monthly": "月报"
+      },
+      "recipientCount": "{count, plural, other {# 位收件人}}",
+      "lastSent": "上次发送：{date}",
+      "nextRun": "下次：{date}",
+      "pause": "暂停",
+      "resume": "恢复",
+      "createSchedule": "创建计划",
+      "frequency": "频率",
+      "recipients": "收件人",
+      "invalidEmail": "邮箱地址无效",
+      "emailAlreadyAdded": "该邮箱已添加",
+      "addAtLeastOne": "请至少添加一位收件人",
+      "saved": "报表计划已保存",
+      "saveFailed": "保存计划失败",
+      "save": "保存计划",
+      "previewTitle": "报表预览",
+      "previewBody": "定时报表包含收入、使用次数、热门优惠券和增长指标，将于 UTC 时间上午 8:00 以精美排版的 HTML 邮件发送。",
+      "everyMorning": "每天早上",
+      "everyMonday": "每周一",
+      "firstOfMonth": "每月 1 日"
+    },
+    "billing": {
+      "subscribeTo": "订阅 {plan}",
+      "startFailed": "无法开通订阅",
+      "portalFailed": "无法打开账单门户",
+      "manageBilling": "管理账单",
+      "errorTitle": "错误",
+      "close": "关闭",
+      "usage": "已用 <b>{current}</b> / {max}",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "每周期可创建活动数",
+        "activeCampaigns": "进行中的活动",
+        "voucherCreatesPerCycle": "每周期可创建优惠券数",
+        "teamMembers": "团队成员"
+      },
+      "currentPlanTrial": "当前套餐（免费试用）",
+      "planChangesUnavailable": "目前无法在线更改套餐。",
+      "paymentsNotSetUp": "本平台尚未开通在线支付，因此无法在此购买或更改套餐。如需更改套餐，请联系客服。",
+      "features": {
+        "starter": {
+          "vouchers": "每月 500 张优惠券",
+          "campaigns": "3 个进行中的活动",
+          "teamMembers": "2 名团队成员",
+          "qrRedemption": "QR 码核销",
+          "basicAnalytics": "基础数据分析"
+        },
+        "pro": {
+          "vouchers": "每月 5,000 张优惠券",
+          "campaigns": "25 个进行中的活动",
+          "teamMembers": "10 名团队成员",
+          "advancedAnalytics": "高级数据分析",
+          "customDomain": "自定义域名",
+          "promoBoosts": "推广加速"
+        },
+        "scale": {
+          "vouchers": "不限优惠券数量",
+          "campaigns": "不限活动数量",
+          "teamMembers": "不限团队成员",
+          "everythingInPro": "包含 Pro 全部功能",
+          "whiteLabel": "支持白标",
+          "prioritySupport": "优先支持"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "所有者",
+      "admin": "管理员",
+      "finance": "财务",
+      "marketing": "市场营销",
+      "support": "客服",
+      "partner_cashier": "收银员",
+      "auditor": "审计员"
+    },
+    "orgs": {
+      "title": "B2B 组织",
+      "subtitle": "包含活动、优惠券和订单的企业工作区。",
+      "loading": "正在加载组织...",
+      "loadFailed": "加载组织失败",
+      "empty": "未找到组织。请联系管理员邀请您。",
+      "open": "打开"
+    },
+    "workspace": {
+      "fallbackName": "组织",
+      "subtitle": "B2B 工作区概览",
+      "reports": "报表",
+      "audit": "审计",
+      "partnerKeys": "合作伙伴密钥",
+      "backToOrgs": "返回组织列表",
+      "loading": "正在加载工作区...",
+      "errors": {
+        "loadOrg": "加载组织失败",
+        "loadCampaigns": "加载活动失败",
+        "loadVouchers": "加载优惠券失败",
+        "loadOrders": "加载订单失败",
+        "load": "加载失败",
+        "createCampaign": "创建活动失败",
+        "issueVouchers": "发放优惠券失败",
+        "updateCampaign": "更新活动失败",
+        "activateCampaign": "启用活动失败",
+        "pauseCampaign": "暂停活动失败",
+        "archiveCampaign": "归档活动失败"
+      },
+      "stats": {
+        "campaigns": "活动",
+        "vouchers": "优惠券",
+        "orders": "订单"
+      },
+      "create": {
+        "title": "创建活动",
+        "name": "活动名称",
+        "value": "面值（最小货币单位）",
+        "currency": "货币",
+        "submit": "创建"
+      },
+      "campaigns": {
+        "title": "活动",
+        "empty": "还没有活动。",
+        "name": "名称",
+        "value": "面值",
+        "activate": "启用",
+        "pause": "暂停",
+        "resume": "恢复",
+        "archive": "归档",
+        "issue": "发放 {count} 张"
+      },
+      "recentVouchers": "最近的优惠券",
+      "noVouchers": "尚未发放优惠券。",
+      "recentOrders": "最近的订单",
+      "noOrders": "还没有订单。"
+    },
+    "audit": {
+      "title": "审计日志",
+      "subtitle": "追踪优惠券生命周期和变更。",
+      "entityType": "实体类型（voucher、campaign、order）",
+      "entityId": "实体 ID",
+      "loading": "正在加载审计记录...",
+      "loadFailed": "加载审计记录失败",
+      "empty": "暂无事件。"
+    },
+    "billing": {
+      "metaTitle": "组织账单",
+      "title": "账单与财务",
+      "totalPaidOrders": "已付订单总数",
+      "totalRevenue": "总收入",
+      "vatNumber": "增值税号",
+      "notSet": "未设置",
+      "recentOrders": "最近的订单",
+      "noOrders": "还没有订单。",
+      "table": {
+        "date": "日期",
+        "qty": "数量",
+        "total": "合计",
+        "status": "状态",
+        "invoice": "发票"
+      }
+    },
+    "keys": {
+      "title": "合作伙伴 API 密钥",
+      "subtitle": "用于合作伙伴验证和核销优惠券。",
+      "label": "密钥标签（可选）",
+      "create": "创建密钥",
+      "newKey": "新密钥（请立即复制）",
+      "loading": "正在加载密钥...",
+      "empty": "还没有密钥。",
+      "untitled": "未命名密钥",
+      "created": "创建于 {created}",
+      "createdAndLastUsed": "创建于 {created} • 最近使用 {lastUsed}",
+      "revoke": "撤销",
+      "errors": {
+        "load": "加载密钥失败",
+        "create": "创建密钥失败",
+        "revoke": "撤销密钥失败"
+      }
+    },
+    "members": {
+      "metaTitle": "组织成员",
+      "title": "成员",
+      "count": "{count, plural, other {# 名成员}}",
+      "pendingInvitations": "待接受的邀请",
+      "expires": "{date} 过期"
+    },
+    "invite": {
+      "title": "邀请成员",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "管理员",
+        "finance": "财务",
+        "marketing": "市场营销",
+        "support": "客服",
+        "partner_cashier": "合作伙伴收银员",
+        "auditor": "审计员"
+      },
+      "sending": "发送中…",
+      "submit": "发送邀请",
+      "sent": "邀请已发送至 {email}。",
+      "failed": "无法发送邀请。请检查邮箱地址后重试。",
+      "error": "出错了，请重试。"
+    },
+    "reports": {
+      "title": "报表",
+      "subtitle": "核销与优惠券报表",
+      "backToWorkspace": "返回工作区",
+      "loadFailed": "加载失败",
+      "tabs": {
+        "redemptions": "核销",
+        "vouchers": "优惠券"
+      },
+      "totalRedemptions": "总核销次数",
+      "totalAmountRedeemed": "核销总金额",
+      "from": "从",
+      "to": "至",
+      "filter": "筛选",
+      "pageInfo": "第 {page} / {totalPages} 页（共 {total} 条）",
+      "redemptionTable": {
+        "date": "日期",
+        "partner": "合作伙伴",
+        "amount": "金额",
+        "status": "状态",
+        "location": "地点"
+      },
+      "noRedemptions": "未找到核销记录。",
+      "voucherTable": {
+        "campaign": "活动",
+        "status": "状态",
+        "type": "类型",
+        "value": "面值",
+        "remaining": "剩余",
+        "redeemed": "已核销",
+        "issuedTo": "发放对象",
+        "expires": "到期"
+      },
+      "noVouchers": "未找到优惠券。"
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "买方",
+        "partner": "合作伙伴",
+        "platform_owner": "平台方"
+      },
+      "orgStatus": {
+        "active": "正常",
+        "suspended": "已停用"
+      },
+      "campaignStatus": {
+        "draft": "草稿",
+        "active": "进行中",
+        "paused": "已暂停",
+        "archived": "已归档"
+      },
+      "voucherStatus": {
+        "created": "已创建",
+        "issued": "已发放",
+        "active": "有效",
+        "redeemed": "已核销",
+        "expired": "已过期",
+        "voided": "已作废"
+      },
+      "valueType": {
+        "fixed": "固定金额",
+        "percent": "百分比"
+      },
+      "orderStatus": {
+        "draft": "草稿",
+        "submitted": "已提交",
+        "invoiced": "已开票",
+        "paid": "已支付",
+        "cancelled": "已取消",
+        "refunded": "已退款"
+      },
+      "redemptionStatus": {
+        "approved": "已批准",
+        "reversed": "已撤销",
+        "failed": "失败"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "赛事活动"
+    },
+    "status": {
+      "draft": "草稿",
+      "published": "进行中",
+      "sold_out": "已售罄",
+      "cancelled": "已取消",
+      "ended": "已结束"
+    },
+    "statusName": {
+      "draft": "草稿",
+      "published": "已发布",
+      "sold_out": "已售罄",
+      "cancelled": "已取消",
+      "ended": "已结束"
+    },
+    "type": {
+      "festival": "节庆",
+      "internal": "内部活动",
+      "concert": "音乐会",
+      "workshop": "工作坊",
+      "other": "其他"
+    },
+    "ticketStatus": {
+      "available": "可售",
+      "sold": "已售",
+      "used": "已使用",
+      "cancelled": "已取消",
+      "refunded": "已退款"
+    },
+    "list": {
+      "subtitle": "管理您的赛事活动和门票",
+      "createEvent": "创建赛事活动",
+      "stats": {
+        "totalTitle": "赛事活动总数",
+        "totalDescription": "全部赛事活动",
+        "activeTitle": "进行中",
+        "activeDescription": "已发布或已售罄",
+        "soldTitle": "已售门票",
+        "soldDescription": "所有赛事活动合计",
+        "revenueTitle": "收入",
+        "revenueDescription": "付费门票销售额"
+      },
+      "empty": {
+        "title": "还没有赛事活动",
+        "description": "创建赛事活动以销售门票和管理参与者。",
+        "cta": "创建您的第一个赛事活动"
+      },
+      "card": {
+        "date": "日期：",
+        "location": "地点：",
+        "price": "价格：",
+        "tickets": "门票：",
+        "sold": "已售 {sold} / {capacity}",
+        "free": "免费",
+        "view": "查看",
+        "edit": "编辑"
+      },
+      "weeklyRevenue": {
+        "title": "每周门票收入",
+        "description": "近 7 天的付费门票销售额。",
+        "series": "收入"
+      }
+    },
+    "detail": {
+      "noDescription": "暂无描述",
+      "edit": "编辑",
+      "status": "状态",
+      "type": "类型",
+      "eventDate": "活动日期",
+      "price": "价格",
+      "free": "免费",
+      "totalTickets": "门票总数",
+      "sold": "已售",
+      "available": "可售",
+      "location": "地点",
+      "terms": "条款与条件",
+      "ticketsTitle": "门票",
+      "ticketsDescription": "此赛事活动的门票",
+      "noTickets": "尚未生成门票。",
+      "view": "查看",
+      "redeem": "核销"
+    },
+    "form": {
+      "basicInfo": "基本信息",
+      "name": "赛事活动名称 *",
+      "description": "描述",
+      "descriptionPlaceholder": "描述您的赛事活动...",
+      "type": "类型 *",
+      "typeAria": "赛事活动类型",
+      "dateTime": "日期和时间",
+      "eventDate": "活动日期 *",
+      "eventTime": "活动时间 *",
+      "endDate": "结束日期（可选）",
+      "endTime": "结束时间（可选）",
+      "location": "地点",
+      "locationName": "地点名称",
+      "locationPlaceholder": "主厅、户外舞台",
+      "locationPlaceholderExample": "例如：主厅、户外舞台",
+      "address": "完整地址",
+      "addressPlaceholder": "街道地址、城市、国家",
+      "ticketDetails": "门票详情",
+      "maxCapacity": "最大容量（门票）*",
+      "maxCapacityLong": "最大容量（门票数量）*",
+      "pricePerTicketCurrency": "单张门票价格（{currency}）",
+      "pricePerTicket": "单张门票价格",
+      "pricePlaceholderFree": "0.00（免费）",
+      "priceHint": "免费门票请留空。例如 12.50 或 12,50 表示 {example}。",
+      "currency": "货币 *",
+      "terms": "条款与条件",
+      "termsPlaceholder": "活动条款、退款政策等",
+      "ticketPrice": "门票价格",
+      "endBeforeStart": "结束时间必须晚于开始时间。",
+      "cancel": "取消"
+    },
+    "create": {
+      "submit": "创建赛事活动",
+      "submitting": "创建中..."
+    },
+    "edit": {
+      "loading": "加载中...",
+      "notFound": "未找到赛事活动。",
+      "back": "返回赛事活动",
+      "title": "编辑赛事活动",
+      "subtitle": "更新您的赛事活动详情。",
+      "submit": "保存更改",
+      "submitting": "保存中..."
+    },
+    "publish": {
+      "confirm": "发布此赛事活动？发布后将对公众可见，并可购买门票。",
+      "confirmLabel": "发布",
+      "failed": "发布赛事活动失败",
+      "success": "赛事活动已成功发布！",
+      "published": "已发布",
+      "cannotPublish": "无法发布",
+      "button": "发布赛事活动",
+      "publishing": "发布中..."
+    },
+    "generate": {
+      "invalidCount": "请输入 1 到 1000 之间的数字",
+      "tooMany": "无法生成 {count} 张门票。最多可生成：{max}",
+      "failed": "生成门票失败",
+      "success": "已成功生成 {count, plural, other {# 张门票}}！",
+      "open": "生成门票",
+      "title": "生成门票",
+      "description": "为此赛事活动创建门票",
+      "countLabel": "门票数量（最多：{max}）",
+      "cancel": "取消",
+      "submit": "生成",
+      "submitting": "生成中..."
+    },
+    "redeem": {
+      "title": "核销门票",
+      "subtitle": "扫描 QR 码或输入票号",
+      "back": "返回赛事活动",
+      "scanTitle": "扫描门票",
+      "scanDescription": "输入 QR 令牌或票号",
+      "tokenLabel": "QR 令牌 / 票号",
+      "tokenPlaceholder": "输入 QR 令牌或票号",
+      "scan": "扫描",
+      "notFound": "未找到门票",
+      "found": "已找到门票",
+      "number": "票号：",
+      "event": "赛事活动：",
+      "status": "状态：",
+      "attendee": "参与者：",
+      "redeemDescription": "完成核销流程",
+      "locationLabel": "地点（可选）",
+      "locationPlaceholder": "例如：正门、A 入口",
+      "submit": "核销门票",
+      "submitting": "核销中...",
+      "failed": "核销门票失败",
+      "cannotRedeem": "此门票无法核销。状态：{status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "商家 Dashboard",
+      "vouchersTitle": "管理优惠券"
+    },
+    "sidebar": {
+      "title": "商家",
+      "subtitle": "GiftHub 控制台",
+      "openMenu": "打开菜单",
+      "nav": {
+        "overview": "概览",
+        "vouchers": "优惠券",
+        "giftCards": "礼品卡",
+        "credits": "积分",
+        "brand": "品牌"
+      }
+    },
+    "overview": {
+      "title": "商家 Dashboard",
+      "notConnected": "您尚未关联任何商家。"
+    },
+    "noAccess": {
+      "title": "无商家访问权限",
+      "overviewHint": "请联系商家管理员邀请您，或创建商家账户开始使用。",
+      "creditsHint": "关联商家账户后即可查看收入和提现。",
+      "vouchersHint": "关联商家账户后即可管理优惠券。",
+      "exploreCampaigns": "浏览活动"
+    },
+    "brand": {
+      "title": "品牌设置",
+      "description": "自定义品牌在优惠券上的外观",
+      "logoHeading": "Logo",
+      "logoHint": "上传商家 Logo（建议：200x200px，PNG 或 SVG）。",
+      "logoPreviewAlt": "Logo 预览",
+      "uploadLogo": "上传 Logo",
+      "colorHeading": "品牌色",
+      "colorHint": "设置用于优惠券和按钮的品牌主色。",
+      "colorLabel": "颜色",
+      "colorHexLabel": "品牌色十六进制值",
+      "save": "保存更改",
+      "previewHeading": "预览",
+      "previewHint": "查看品牌在优惠券上的显示效果。",
+      "sampleMerchant": "您的商家",
+      "sampleTitle": "下次购物享 8 折",
+      "sampleDescription": "全场商品适用，不可与其他优惠同享。"
+    },
+    "credits": {
+      "availableBalance": "可用余额",
+      "availableBalanceHint": "可提现",
+      "pendingRevenue": "待结算收入",
+      "pendingRevenueHint": "处理中",
+      "recentRevenue": "最近收入",
+      "ticketSale": "门票销售",
+      "voucherSale": "优惠券销售",
+      "noRevenue": "暂无收入记录",
+      "payoutRequests": "提现申请",
+      "noPayoutRequests": "还没有提现申请",
+      "requestPayoutHeading": "申请提现",
+      "minimumPayout": "最低提现金额：{amount}",
+      "submitting": "提交中...",
+      "requestPayout": "申请提现",
+      "requestSubmitted": "提现申请已提交",
+      "requestFailed": "提现申请失败",
+      "status": {
+        "paid": "已支付",
+        "pending": "待处理",
+        "requested": "已申请",
+        "completed": "已完成",
+        "failed": "失败"
+      }
+    },
+    "newVoucher": {
+      "title": "创建优惠券",
+      "description": "设计并配置新的优惠券活动",
+      "detailsHeading": "优惠券详情",
+      "titleLabel": "标题",
+      "titlePlaceholder": "例如：下次购物享 8 折",
+      "descriptionLabel": "描述",
+      "descriptionPlaceholder": "全场商品适用，不可与其他优惠同享。",
+      "expiryDateLabel": "到期日期",
+      "weeklyLabel": "每周特惠",
+      "weeklyHint": "每周限时开放",
+      "weeklyAria": "每周特惠 - 每周限时开放",
+      "referralLabel": "启用推荐积分",
+      "referralHint": "好友使用后，用户可获得积分",
+      "referralAria": "启用推荐积分 - 好友使用后，用户可获得积分",
+      "brandColorLabel": "品牌色",
+      "brandColorHexLabel": "品牌色十六进制值",
+      "saveDraft": "保存草稿",
+      "createAndPublish": "创建并发布",
+      "previewHeading": "预览",
+      "sampleMerchant": "您的商家",
+      "sampleTitle": "优惠券标题",
+      "sampleDescription": "优惠券描述将显示在这里"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "优惠券发布后即可访问公开页面。",
+    "list": {
+      "metaTitle": "优惠券",
+      "subtitle": "管理和创建优惠券",
+      "bulkImport": "批量导入 CSV",
+      "stats": {
+        "totalTitle": "优惠券总数",
+        "totalDescription": "已创建的全部优惠券",
+        "activeTitle": "有效",
+        "activeDescription": "已发布的优惠券",
+        "draftsTitle": "草稿",
+        "draftsDescription": "尚未发布",
+        "pausedEndedTitle": "已暂停 / 已结束",
+        "pausedEndedDescription": "{paused} 张已暂停，{ended} 张已结束",
+        "redemptionsTitle": "使用次数",
+        "redemptionsDescription": "总使用次数"
+      },
+      "empty": {
+        "title": "还没有优惠券",
+        "description": "从创建第一张优惠券开始吧。",
+        "action": "创建您的第一张优惠券"
+      },
+      "searchPlaceholder": "按标题、代码前缀或 ID 搜索",
+      "searchLabel": "搜索优惠券",
+      "statusLabel": "状态",
+      "statusAll": "全部状态",
+      "status": {
+        "published": "有效",
+        "paused": "已暂停",
+        "draft": "草稿",
+        "ended": "已结束",
+        "expired": "已过期"
+      },
+      "typeLabel": "类型",
+      "typeAll": "全部类型",
+      "sortLabel": "排序方式",
+      "sort": {
+        "date": "日期（最新）",
+        "name": "名称（A-Z）",
+        "redemptions": "使用次数"
+      },
+      "showing": "显示 {shown} / {total} 张优惠券",
+      "clearFilters": "清除筛选",
+      "noMatches": "没有符合筛选条件的优惠券。",
+      "usage": "使用情况",
+      "usageUnlimited": "使用情况：{used} - 不限",
+      "view": "查看"
+    },
+    "rowActions": {
+      "pauseTitle": "暂停优惠券",
+      "pauseDescription": "确定要暂停此优惠券吗？暂停期间用户将无法购买或使用。",
+      "pauseConfirm": "暂停",
+      "paused": "优惠券已暂停",
+      "pauseFailed": "暂停优惠券失败",
+      "loadFailed": "加载优惠券失败",
+      "duplicateLabel": "复制优惠券",
+      "duplicated": "优惠券已复制",
+      "duplicateFailed": "复制失败"
+    },
+    "publish": {
+      "confirmMessage": "发布此优惠券？发布后将对公众可见。",
+      "confirmLabel": "发布",
+      "failed": "发布优惠券失败",
+      "success": "优惠券已成功发布！",
+      "publishing": "发布中...",
+      "button": "发布优惠券"
+    },
+    "new": {
+      "iconLetter": "券",
+      "created": "优惠券已创建为草稿。准备好让顾客看到时再发布。"
+    },
+    "edit": {
+      "iconLetter": "编",
+      "subtitle": "更新优惠券详情和可用性。",
+      "updated": "优惠券已更新",
+      "updateFailed": "更新优惠券失败",
+      "updateFailedRetry": "更新优惠券失败，请重试。",
+      "updating": "更新中...",
+      "update": "更新优惠券",
+      "viewPublicPage": "查看公开页面"
+    },
+    "form": {
+      "stepOf": "第 {current} 步，共 {total} 步",
+      "typeLabel": "类型",
+      "typeAria": "优惠券类型",
+      "customersGetOff": "顾客可减免 {value}。",
+      "customersGetCredit": "顾客可获得 {value} 积分。",
+      "percentHint": "请输入百分比，例如 15 或 12,5。",
+      "amountHint": "请输入 {currency} 金额，例如 4.50 或 4,50 表示 {example}。",
+      "validityHint": "优惠券自首日开始起至末日结束前均可使用。",
+      "enableWeeklyDropAria": "启用每周特惠",
+      "weeklyDropDayAria": "每周特惠的星期",
+      "weeklyDropTimeAria": "每周特惠开始时间",
+      "headlinePlaceholder": "订单享 85 折",
+      "finePrintPlaceholder": "仅限新顾客",
+      "previewFallbackHeadline": "您的优惠券",
+      "previewValidUntil": "有效期至 {date}",
+      "errors": {
+        "discountAboveZero": "请输入大于 0% 的折扣。",
+        "valueAboveZero": "请输入大于 0 的面值。",
+        "chooseDates": "请选择优惠券的开始和结束日期。",
+        "endBeforeStart": "结束日期不能早于开始日期。",
+        "invalidValue": "请输入有效的面值。",
+        "valueMustBePositive": "面值必须大于 0",
+        "totalLimitPositive": "总使用次数限制必须为正数",
+        "perUserLimitPositive": "每人限制必须为正数"
+      },
+      "discountErrors": {
+        "negative": "折扣不能为负数。",
+        "invalid": "折扣不是有效数字。",
+        "decimals": "折扣最多保留 {decimals} 位小数。",
+        "tooLarge": "折扣过大。",
+        "tooHigh": "折扣不能超过 100%。"
+      },
+      "valueErrors": {
+        "negative": "面值不能为负数。",
+        "invalid": "面值不是有效数字。",
+        "wholeNumber": "面值必须是整数。",
+        "decimals": "面值最多保留 {decimals} 位小数。",
+        "tooLarge": "面值过大。"
+      }
+    },
+    "bulkImport": {
+      "back": "返回优惠券",
+      "title": "从表格导入优惠券",
+      "intro": "上传 CSV 文件（最多 500 行）。每张优惠券都会创建为草稿，发布前不会上线。",
+      "columns": "列",
+      "downloadSample": "下载示例 CSV",
+      "columnRequired": "<code>{name}</code>（必填）：{help}",
+      "columnOptional": "<code>{name}</code>（可选）：{help}",
+      "columnHelp": {
+        "name": "顾客看到的优惠券标题，例如“春季咖啡优惠”。",
+        "type": "\"amount\"（减免金额）、\"percent\"（百分比折扣）或 \"credit\"（店铺积分）。",
+        "value": "amount/credit 填欧元金额（10 或 10.50），percent 填百分比（15 或 12.5）。",
+        "currency": "三位字母代码，如 EUR。默认为您店铺的货币。",
+        "valid_from": "优惠券生效首日：2026-10-01 或 01.10.2026。",
+        "valid_to": "优惠券有效的最后一天（当天结束前均有效）。",
+        "code_prefix": "每个代码开头的字母，例如 SPRING。",
+        "usage_limit": "总共可使用的次数。留空表示不限。"
+      },
+      "separatorHint": "用逗号或分号分隔各列。如果使用逗号，小数金额请加引号（\"4,50\"）或使用小数点（4.50）。",
+      "chooseFile": "选择 CSV 文件",
+      "chooseDifferent": "点击选择其他文件",
+      "browse": "点击浏览",
+      "fixRows": "请修正以下行后重新上传文件：",
+      "andMore": "…以及另外 {count} 条。",
+      "readyToImport": "准备导入 {count, plural, other {# 张优惠券}}：",
+      "rowSummary": "{hasName, select, yes {{name}：} other {}}{value}，{from} – {to}{hasLimit, select, yes {，最多使用 {limit} 次} other {}}",
+      "imported": "已将 {count, plural, other {# 张优惠券}}导入为草稿。",
+      "viewVouchers": "查看优惠券",
+      "importing": "导入中...",
+      "importCount": "导入 {count, plural, other {# 张优惠券}}",
+      "importVouchers": "导入优惠券",
+      "importFailedStatus": "导入失败（错误 {status}）。",
+      "importFailed": "导入失败"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "主视觉 + CTA",
+          "description": "首屏标题与主要操作按钮。"
+        },
+        "value_props": {
+          "label": "核心卖点",
+          "description": "简要列出优势与保障。"
+        },
+        "featured_products": {
+          "label": "精选商品",
+          "description": "热门商品及价格和标签。"
+        },
+        "featured_vouchers": {
+          "label": "精选优惠券",
+          "description": "用于促销的有效优惠券卡片。"
+        },
+        "rental_packages": {
+          "label": "租赁套餐",
+          "description": "租赁组合与按天计价。"
+        },
+        "categories": {
+          "label": "分类网格",
+          "description": "按类型、用途或人群浏览。"
+        },
+        "availability": {
+          "label": "可预订日历",
+          "description": "实时可用情况与预订时段。"
+        },
+        "testimonials": {
+          "label": "顾客评价",
+          "description": "顾客评语与星级评分。"
+        },
+        "gallery": {
+          "label": "图库",
+          "description": "生活场景图或使用案例。"
+        },
+        "pricing": {
+          "label": "价格表",
+          "description": "透明的价格档位。"
+        },
+        "rental_terms": {
+          "label": "租赁条款",
+          "description": "押金、保险和归还政策。"
+        },
+        "faq": {
+          "label": "常见问题",
+          "description": "解答常见疑虑。"
+        },
+        "newsletter": {
+          "label": "订阅简报",
+          "description": "收集邮箱用于营销活动。"
+        },
+        "contact": {
+          "label": "联系方式",
+          "description": "在线聊天、邮件或电话支持。"
+        },
+        "map": {
+          "label": "位置地图",
+          "description": "自提点或门店位置。"
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "促销横幅",
+          "description": "固定在顶部的优惠和提醒栏。"
+        },
+        "sticky_cta": {
+          "label": "悬浮 CTA",
+          "description": "滚动时始终显示的操作按钮。"
+        },
+        "chat_widget": {
+          "label": "聊天插件",
+          "description": "在线聊天或 WhatsApp 集成。"
+        },
+        "trust_badges": {
+          "label": "信任徽章",
+          "description": "支付、安全或品质徽章。"
+        },
+        "social_proof": {
+          "label": "社交证明弹窗",
+          "description": "最近的动态和购买。"
+        },
+        "countdown": {
+          "label": "倒计时",
+          "description": "为限时优惠营造紧迫感。"
+        },
+        "reviews_widget": {
+          "label": "评价插件",
+          "description": "嵌入 Google 或 Trustpilot。"
+        },
+        "language_switch": {
+          "label": "语言切换",
+          "description": "页面上的快速语言切换。"
+        },
+        "analytics": {
+          "label": "统计代码",
+          "description": "用于追踪的像素代码位。"
+        },
+        "cookie_banner": {
+          "label": "Cookie 横幅",
+          "description": "GDPR 同意横幅。"
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "预览",
+      "edit": "编辑",
+      "previewEmpty": "尚未添加任何版块。切换到编辑模式即可添加。",
+      "title": "可视化编辑器",
+      "preview": "预览",
+      "empty": "还没有版块。点击下方的“添加版块”开始搭建。",
+      "collapseSettings": "收起设置",
+      "expandSettings": "展开设置",
+      "removeSection": "移除{label}版块",
+      "sectionTitle": "版块标题",
+      "description": "描述",
+      "descriptionPlaceholder": "可选描述",
+      "backgroundColor": "背景色",
+      "layoutVariant": "布局样式",
+      "layout": {
+        "default": "默认",
+        "centered": "居中",
+        "wide": "宽屏",
+        "compact": "紧凑"
+      },
+      "addSection": "添加版块",
+      "availableSections": "可用版块",
+      "closeCatalog": "关闭",
+      "allAdded": "所有可用版块均已添加。",
+      "count": "已配置 {configured, plural, other {# 个版块}} / 可添加 {available} 个"
+    },
+    "client": {
+      "process": {
+        "store_launch": "店铺上线检查清单",
+        "rental_launch": "租赁页面上线检查清单",
+        "campaign_ops": "每周活动运营",
+        "support_ops": "客服就绪检查清单"
+      },
+      "toast": {
+        "saved": "页面搭建器已更新。",
+        "saveFailed": "保存页面失败",
+        "vibeFailed": "Vibe 助手运行失败",
+        "layoutGenerated": "Vibe 布局已生成。",
+        "generateFailed": "生成布局失败",
+        "agentFailed": "助手运行失败",
+        "planGenerated": "流程计划已生成。",
+        "runAgentFailed": "运行助手失败"
+      },
+      "noData": "暂无页面搭建器数据。",
+      "title": "页面搭建器",
+      "intro": "使用模块化版块和插件，快速搭建店铺和租赁页面。",
+      "introAi": "使用模块化版块和插件快速搭建店铺和租赁页面，还可获取 AI 建议。",
+      "tabs": {
+        "store": "店铺",
+        "rental": "租赁"
+      },
+      "details": {
+        "title": "页面详情",
+        "subtitle": "标题、副标题和布局。",
+        "save": "保存",
+        "pageTitle": "页面标题",
+        "subtitleLabel": "副标题"
+      },
+      "sections": {
+        "title": "版块",
+        "subtitle": "拖动调整顺序，展开进行配置，或预览布局。",
+        "suggestLayout": "推荐布局",
+        "suggestionsLeft": "剩余 AI 布局建议次数：{remaining}/{limit}"
+      },
+      "addons": {
+        "title": "插件",
+        "subtitle": "额外的小组件和营销工具。",
+        "enable": "启用插件{label}",
+        "disable": "停用插件{label}"
+      },
+      "summary": {
+        "title": "实时摘要",
+        "line": "{title} · {sections, plural, other {# 个版块}} · {addons, plural, other {# 个插件}}",
+        "sectionsLabel": "版块：",
+        "addonsLabel": "插件：",
+        "none": "无"
+      },
+      "assistant": {
+        "title": "上线清单助手",
+        "subtitle": "生成行动计划和运营检查清单。",
+        "goalLabel": "流程目标",
+        "createChecklist": "创建清单",
+        "checklistsLeft": "剩余清单次数：{remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "{name} 精选的优惠、租赁和优惠券。",
+        "shopProducts": "选购商品",
+        "browseRentals": "浏览租赁"
+      },
+      "valueProps": {
+        "rewardsTitle": "奖励",
+        "rewardsText": "内置优惠券激励。",
+        "stockTitle": "库存可靠",
+        "stockText": "价格和库存实时更新。",
+        "datesTitle": "日期灵活",
+        "datesText": "轻松规划租赁。"
+      },
+      "viewAll": "查看全部",
+      "seeAll": "查看全部",
+      "products": {
+        "title": "精选商品",
+        "empty": "还没有商品。",
+        "fallbackDescription": "商品亮点"
+      },
+      "rentals": {
+        "title": "租赁套餐",
+        "empty": "还没有租赁项目。",
+        "fallbackDescription": "租赁亮点",
+        "perDay": "{price} / 天"
+      },
+      "categories": {
+        "title": "浏览分类",
+        "popular": "热门",
+        "business": "商务",
+        "events": "活动",
+        "seasonal": "季节限定",
+        "corporate": "企业",
+        "custom": "定制"
+      },
+      "availability": {
+        "title": "实时可用情况",
+        "text": "几分钟内即可查询可用情况并获取报价。",
+        "seeCalendar": "查看日历"
+      },
+      "testimonials": {
+        "title": "顾客评价",
+        "smooth": "流程顺畅",
+        "lovedVoucher": "很喜欢这张优惠券",
+        "support": "服务很棒"
+      },
+      "gallery": {
+        "title": "图库"
+      },
+      "pricing": {
+        "title": "价格",
+        "starter": "入门版",
+        "growth": "成长版",
+        "enterprise": "企业版",
+        "tierText": "定制价格与支持"
+      },
+      "rentalTerms": {
+        "title": "租赁条款",
+        "text": "押金、取货规则和归还政策提前说明清楚。"
+      },
+      "faq": {
+        "title": "常见问题",
+        "redeem": "如何使用？",
+        "reschedule": "可以改期吗？",
+        "support": "提供客服支持吗？"
+      },
+      "newsletter": {
+        "title": "获取最新动态",
+        "text": "新优惠和新租赁项目将发送到您的邮箱。",
+        "emailLabel": "邮箱地址",
+        "subscribe": "订阅"
+      },
+      "contact": {
+        "title": "联系我们",
+        "emailUs": "发送邮件至 {email}"
+      },
+      "map": {
+        "text": "预订后将告知取货地点。"
+      },
+      "vouchers": {
+        "title": "有效优惠券",
+        "empty": "暂无可用优惠券。",
+        "voucher": "优惠券",
+        "view": "查看优惠券"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "有效",
+      "redeemed": "已使用",
+      "expired": "已过期",
+      "cancelled": "已取消"
+    },
+    "list": {
+      "metaTitle": "礼品卡",
+      "title": "礼品卡",
+      "subtitle": "创建和管理礼品卡",
+      "newGiftCard": "新建礼品卡",
+      "stats": {
+        "total": "礼品卡总数",
+        "totalDescription": "已发放的全部礼品卡",
+        "active": "有效",
+        "activeDescription": "当前可使用",
+        "redeemed": "已使用",
+        "redeemedDescription": "已完成使用",
+        "totalValue": "总价值",
+        "totalValueDescription": "已发放礼品卡的价值"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "还没有礼品卡",
+      "emptyDescription": "创建带有自定义品牌和 QR 核销的礼品卡。",
+      "createFirst": "创建您的第一张礼品卡",
+      "searchPlaceholder": "按标题、代码或留言搜索",
+      "searchLabel": "搜索礼品卡",
+      "status": "状态",
+      "allStatus": "全部状态",
+      "sortBy": "排序方式",
+      "sortDate": "日期（最新）",
+      "sortAmount": "金额（从高到低）",
+      "showing": "显示 {shown} / {total, plural, other {# 张礼品卡}}",
+      "clearFilters": "清除筛选",
+      "noMatches": "没有符合筛选条件的礼品卡。",
+      "defaultHeadline": "礼品卡",
+      "noExpiry": "无过期时间",
+      "validUntil": "有效期至：{date}",
+      "redeemedOn": "使用时间：{date}",
+      "details": "详情",
+      "view": "查看"
+    },
+    "detail": {
+      "title": "礼品卡",
+      "code": "代码 {code}",
+      "publicView": "公开页面",
+      "newGiftCard": "新建礼品卡",
+      "detailsTitle": "礼品卡详情",
+      "value": "面值",
+      "validFrom": "生效日期",
+      "validTo": "截止日期",
+      "noExpiry": "无过期时间",
+      "redeemedAt": "使用时间",
+      "notRedeemed": "未使用",
+      "qrTitle": "店员核销 QR 码",
+      "qrHelp": "店员扫描此 QR 码即可核销礼品卡并使其失效。"
+    },
+    "new": {
+      "title": "新建礼品卡",
+      "subtitle": "自定义并发放礼品卡",
+      "created": "礼品卡已创建。",
+      "cancel": "取消",
+      "creating": "创建中...",
+      "submit": "创建礼品卡",
+      "errors": {
+        "amountRequired": "请输入大于 0 的金额。",
+        "endBeforeStart": "结束日期不能早于开始日期。",
+        "createFailed": "创建礼品卡失败"
+      },
+      "amountErrors": {
+        "negative": "金额不能为负数。",
+        "invalid": "金额不是有效数字。",
+        "wholeNumber": "金额必须是整数。",
+        "decimals": "金额最多保留 {decimals} 位小数。",
+        "tooLarge": "金额过大。"
+      },
+      "priceErrors": {
+        "negative": "售价不能为负数。",
+        "invalid": "售价不是有效数字。",
+        "wholeNumber": "售价必须是整数。",
+        "decimals": "售价最多保留 {decimals} 位小数。",
+        "tooLarge": "售价过大。"
+      },
+      "valueSection": {
+        "title": "面值与有效期",
+        "description": "设置金额、货币和到期时间",
+        "amount": "金额",
+        "faceValue": "面值：{value}。",
+        "amountHelp": "请输入 {currency} 金额，例如 50 或 49,90 表示 {example}。",
+        "currency": "货币",
+        "validFrom": "生效日期",
+        "validTo": "截止日期",
+        "noExpiry": "无到期日期"
+      },
+      "purchaseSection": {
+        "title": "顾客购买",
+        "description": "允许顾客在线购买此礼品卡",
+        "purchasable": "开放顾客购买",
+        "salePrice": "售价（可选，默认等于面值）",
+        "salePricePlaceholder": "与金额相同",
+        "customersPay": "顾客需支付 {value}。",
+        "salePriceHelp": "留空则按面值出售。促销时可设置不同价格。"
+      },
+      "brandingSection": {
+        "title": "品牌与留言",
+        "description": "标题、留言、图片和颜色",
+        "headline": "标题",
+        "headlinePlaceholder": "送给咖啡爱好者的礼物",
+        "message": "留言",
+        "messagePlaceholder": "为收礼人添加一段个性化留言",
+        "logoUrl": "Logo URL",
+        "imageUrl": "图片 URL",
+        "accentColor": "强调色",
+        "backgroundColor": "背景色",
+        "textColor": "文字颜色",
+        "codePrefix": "代码前缀（可选）"
+      },
+      "preview": {
+        "title": "预览",
+        "defaultHeadline": "礼品卡",
+        "imageAlt": "礼品卡",
+        "logoAlt": "品牌 Logo",
+        "notePlaceholder": "添加个性化留言"
+      }
+    },
+    "gifts": {
+      "title": "礼品商品",
+      "subtitle": "在 Gift Hub 中管理您的商品",
+      "dashboard": "Dashboard",
+      "confirmDelete": "确定吗？此操作将停用该商品。",
+      "stats": {
+        "total": "总数",
+        "active": "已上架",
+        "views": "浏览量",
+        "purchases": "购买量"
+      },
+      "emptyTitle": "还没有礼品商品",
+      "emptyDescription": "添加第一件商品，即可出现在 Gift Hub 信息流中。",
+      "emptyApiHint": "使用 <code>{endpoint}</code> API 创建商品。",
+      "inactive": "未上架",
+      "featured": "精选",
+      "views": "{count, plural, other {# 次浏览}}",
+      "purchases": "{count, plural, other {# 次购买}}",
+      "conversionRate": "转化率 {rate}%",
+      "activate": "上架",
+      "deactivate": "下架",
+      "delete": "删除"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "暂无数据",
+      "value": "数值：<strong>{value}</strong>",
+      "dismiss": "忽略",
+      "remove": "移除",
+      "dialog": "对话框",
+      "close": "关闭",
+      "loading": "加载中"
+    },
+    "analyticsFunnel": {
+      "empty": "此期间暂无动态",
+      "top": "顶部",
+      "drop": "流失 {rate}%"
+    },
+    "periodComparison": {
+      "title": "周期对比",
+      "loading": "加载中...",
+      "previous": "上期：{value}",
+      "noData": "暂无数据",
+      "period": {
+        "day": "日",
+        "week": "周",
+        "month": "月",
+        "quarter": "季度",
+        "year": "年"
+      },
+      "metric": {
+        "revenue": "收入",
+        "redemptions": "使用次数",
+        "purchases": "购买量",
+        "referrals": "推荐",
+        "customers": "顾客"
+      }
+    },
+    "trendChart": {
+      "noData": "暂无数据"
+    },
+    "conversionChart": {
+      "noData": "暂无数据",
+      "previous": "上期：{value}"
+    },
+    "funnelChart": {
+      "empty": "此期间暂无动态"
+    },
+    "geoMap": {
+      "noData": "暂无数据",
+      "value": "数值：<strong>{value}</strong>",
+      "country": {
+        "GB": "英国",
+        "IE": "爱尔兰",
+        "FR": "法国",
+        "DE": "德国",
+        "ES": "西班牙",
+        "PT": "葡萄牙",
+        "IT": "意大利",
+        "NL": "荷兰",
+        "BE": "比利时",
+        "CH": "瑞士",
+        "AT": "奥地利",
+        "PL": "波兰",
+        "CZ": "捷克",
+        "SE": "瑞典",
+        "NO": "挪威",
+        "FI": "芬兰",
+        "DK": "丹麦",
+        "EE": "爱沙尼亚",
+        "LV": "拉脱维亚",
+        "LT": "立陶宛",
+        "HU": "匈牙利",
+        "RO": "罗马尼亚",
+        "BG": "保加利亚",
+        "GR": "希腊",
+        "HR": "克罗地亚",
+        "SK": "斯洛伐克",
+        "SI": "斯洛文尼亚",
+        "RS": "塞尔维亚",
+        "UA": "乌克兰",
+        "BY": "白俄罗斯"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "等待数据..."
+    },
+    "pieDonutChart": {
+      "noData": "暂无数据",
+      "total": "合计"
+    },
+    "activityFeed": {
+      "justNow": "刚刚",
+      "minutesAgo": "{count} 分钟前",
+      "hoursAgo": "{count} 小时前",
+      "daysAgo": "{count} 天前",
+      "empty": "暂无动态",
+      "loadMore": "加载更多",
+      "eventType": {
+        "purchase": "购买",
+        "redemption": "使用",
+        "signup": "注册",
+        "alert": "提醒"
+      }
+    },
+    "dateRange": {
+      "days7": "7 天",
+      "days30": "30 天",
+      "days90": "90 天",
+      "year1": "1 年",
+      "custom": "自定义"
+    },
+    "chartCard": {
+      "fullscreen": "全屏",
+      "exitFullscreen": "退出全屏",
+      "retry": "重试"
+    },
+    "dashboardHeader": {
+      "export": "导出",
+      "exportAs": "导出为 {format}"
+    },
+    "dataTable": {
+      "empty": "暂无数据",
+      "showing": "显示第 {from}–{to} 条，共 {total} 条",
+      "previousPage": "上一页",
+      "nextPage": "下一页"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "实时",
+        "reconnecting": "重新连接中",
+        "disconnected": "已断开"
+      },
+      "status": {
+        "connected": "已连接",
+        "reconnecting": "重新连接中",
+        "disconnected": "已断开"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "较上期"
+    },
+    "statComparison": {
+      "current": "本期",
+      "previous": "上期",
+      "change": "变化"
+    },
+    "aiInsightPanel": {
+      "title": "AI 洞察",
+      "placeholder": "向 AI 提问...",
+      "send": "发送"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "实时",
+        "degraded": "性能下降",
+        "disconnected": "离线"
+      },
+      "latency": "延迟：{ms}ms",
+      "lastUpdate": "最近更新：{time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "通知",
+      "title": "通知",
+      "markAllRead": "全部标为已读",
+      "empty": "暂无通知",
+      "ariaLabelUnread": "通知（{count} 条未读）"
+    },
+    "premiumChartCard": {
+      "info": "信息",
+      "fullscreen": "全屏",
+      "exitFullscreen": "退出全屏",
+      "moreOptions": "更多选项",
+      "empty": "此期间暂无数据"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "较上期"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "正常运行",
+        "degraded": "性能下降",
+        "outage": "服务中断"
+      }
+    },
+    "select": {
+      "placeholder": "请选择...",
+      "search": "搜索...",
+      "empty": "未找到选项",
+      "removeOption": "移除{label}"
+    },
+    "sidebar": {
+      "expand": "展开侧边栏",
+      "collapse": "收起侧边栏",
+      "openMenu": "打开菜单",
+      "closeMenu": "关闭菜单"
+    },
+    "iconSystem": {
+      "notFound": "未找到图标“{name}”",
+      "badge": "{count, plural, other {# 条通知}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "侧边面板",
+      "closePanel": "关闭面板"
+    },
+    "codeBlock": {
+      "copyCode": "复制代码",
+      "copied": "已复制",
+      "copy": "复制"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "顾客",
+      "title": "顾客",
+      "summary": "{count, plural, other {# 位顾客}} · 总收入 {revenue}",
+      "stats": {
+        "totalCustomers": "顾客总数",
+        "totalRevenue": "总收入",
+        "totalRedemptions": "总使用次数"
+      },
+      "table": {
+        "customer": "顾客",
+        "email": "邮箱",
+        "purchases": "购买次数",
+        "totalSpent": "消费总额",
+        "redemptions": "使用次数",
+        "lastPurchase": "最近购买"
+      },
+      "empty": "还没有顾客",
+      "unknown": "未知"
+    },
+    "qrCheckout": {
+      "title": "QR 快捷结账",
+      "subtitle": "生成 QR 码，让顾客即时结账",
+      "voucherLabel": "关联优惠券（可选）",
+      "generalOption": "通用结账（不指定优惠券）",
+      "voucherOption": "{type} - {value} {currency}（{status}）",
+      "generating": "生成中...",
+      "generate": "生成 QR 码",
+      "qrAlt": "结账 QR 码",
+      "scanToCheckout": "扫码结账",
+      "print": "打印 QR 码"
+    },
+    "redemptions": {
+      "metaTitle": "使用记录",
+      "subtitle": "查看并确认优惠券使用。",
+      "stats": {
+        "totalTitle": "总使用次数",
+        "totalDescription": "全部已提交的使用",
+        "pendingTitle": "待确认",
+        "pendingDescription": "等待确认",
+        "confirmedTitle": "已确认",
+        "confirmedDescription": "已批准的使用",
+        "discountsTitle": "已让利金额",
+        "discountsDescription": "已确认的折扣"
+      },
+      "empty": {
+        "title": "还没有使用记录",
+        "description": "顾客使用优惠券后，记录将显示在这里。"
+      },
+      "voucherFallback": "优惠券",
+      "card": {
+        "order": "订单 {amount}",
+        "discount": "折扣：{amount}",
+        "discountReferred": "折扣：{amount} - 推荐人：{name}",
+        "confirmed": "已确认",
+        "pending": "待确认",
+        "method": "方式：{method}",
+        "methods": {
+          "online": "在线",
+          "in_store": "到店"
+        },
+        "orderReference": "订单：{reference}",
+        "notAvailable": "无",
+        "location": "地点：{location}",
+        "date": "日期：{date}"
+      },
+      "confirm": {
+        "prompt": "确认此次使用？确认后推荐人的积分将解锁。",
+        "confirmLabel": "确认",
+        "success": "已确认使用，推荐人的积分已解锁。",
+        "error": "确认使用失败，请重试。",
+        "confirming": "确认中...",
+        "button": "确认使用"
+      },
+      "export": {
+        "success": "使用记录已成功导出！",
+        "error": "导出使用记录失败",
+        "exporting": "导出中...",
+        "button": "导出 CSV"
+      }
+    },
+    "reviews": {
+      "title": "评价",
+      "subtitle": "查看并回复顾客评价",
+      "filters": "筛选",
+      "reviewCount": "{count, plural, other {# 条评价}}",
+      "ratingDistribution": "评分分布",
+      "responseRate": "回复率",
+      "replied": "已回复",
+      "pending": "待回复",
+      "responseRatePercent": "回复率 {percent}%",
+      "filter": {
+        "rating": "评分",
+        "allRatings": "全部评分",
+        "stars": "{count, plural, other {# 星}}",
+        "replyStatus": "回复状态",
+        "all": "全部",
+        "needsReply": "待回复",
+        "replied": "已回复",
+        "clear": "清除"
+      },
+      "loading": "正在加载评价...",
+      "empty": "未找到评价。",
+      "anonymous": "匿名",
+      "verified": "已验证",
+      "campaign": "活动：{name}",
+      "voucher": "优惠券：{code}",
+      "foundHelpful": "{count} 人觉得有用",
+      "yourReply": "您的回复",
+      "replyPlaceholder": "撰写回复...",
+      "posting": "发布中...",
+      "postReply": "发布回复",
+      "cancel": "取消",
+      "reply": "回复",
+      "showing": "显示第 {from}–{to} 条，共 {total} 条",
+      "pageOf": "第 {page} / {totalPages} 页",
+      "previousPage": "上一页",
+      "nextPage": "下一页",
+      "loadFailed": "加载评价失败",
+      "replyFailed": "回复失败",
+      "replyPosted": "回复已发布"
+    },
+    "scanner": {
+      "title": "扫码核销",
+      "subtitle": "扫描优惠券、礼品卡和门票",
+      "manual": "手动",
+      "camera": "相机",
+      "scanning": "扫描中...",
+      "cameraDenied": "相机访问被拒绝。请在浏览器设置中允许访问相机，或在下方输入代码。",
+      "cameraUnavailable": "没有可用的相机。请在下方输入代码。",
+      "pointAtCode": "对准 QR 码即可自动扫描",
+      "enterCode": "输入代码",
+      "codePlaceholder": "优惠券码（如 AUD-CMUI0TG1）、优惠券链接、门票或礼品卡代码",
+      "codeAriaLabel": "要扫描的代码",
+      "scan": "扫描",
+      "found": {
+        "voucher": "已找到优惠券",
+        "gift_card": "已找到礼品卡",
+        "ticket": "已找到门票"
+      },
+      "info": {
+        "ticketNumber": "票号",
+        "event": "赛事活动",
+        "type": "类型",
+        "standard": "标准",
+        "attendee": "参与者",
+        "code": "代码",
+        "amount": "金额",
+        "message": "留言",
+        "voucher": "优惠券",
+        "campaign": "活动",
+        "none": "无",
+        "value": "面值",
+        "validUntil": "有效期至"
+      },
+      "redeem": "核销",
+      "redeeming": "核销中...",
+      "cannotRedeem": "该项目无法核销（状态：{status}）",
+      "redeemed": {
+        "voucher": "优惠券核销成功！",
+        "gift_card": "礼品卡核销成功！",
+        "ticket": "门票核销成功！"
+      },
+      "errors": {
+        "enterCode": "请输入代码",
+        "notFound": "未找到",
+        "scanFailed": "扫描失败",
+        "redeemFailed": "核销失败"
+      },
+      "status": {
+        "giftCard": {
+          "active": "有效",
+          "redeemed": "已使用",
+          "expired": "已过期",
+          "cancelled": "已取消"
+        },
+        "ticket": {
+          "available": "可售",
+          "sold": "已售",
+          "used": "已使用",
+          "cancelled": "已取消",
+          "refunded": "已退款"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "价格不能为负数。",
+      "invalid": "价格不是有效数字。",
+      "wholeNumber": "价格必须是整数。",
+      "decimals": "价格最多保留 {decimals} 位小数。",
+      "tooLarge": "价格过大。"
+    },
+    "appointments": {
+      "title": "预约",
+      "subtitle": "管理预订和可预约时段",
+      "createSlot": "创建时段",
+      "form": {
+        "serviceName": "服务名称",
+        "price": "价格（{currency}，免费请留空）",
+        "startTime": "开始时间",
+        "endTime": "结束时间",
+        "notes": "备注",
+        "creating": "创建中…",
+        "submit": "创建可预约时段"
+      },
+      "status": {
+        "all": "全部",
+        "pending": "待确认",
+        "confirmed": "已确认",
+        "cancelled": "已取消",
+        "completed": "已完成"
+      },
+      "loading": "加载中...",
+      "empty": "未找到预约",
+      "bookedBy": "预约人：{name}",
+      "confirm": "确认",
+      "confirmAria": "确认预约",
+      "cancel": "取消",
+      "cancelAria": "取消预约",
+      "errors": {
+        "endBeforeStart": "结束时间必须晚于开始时间。",
+        "createFailed": "无法创建可预约时段，请重试。",
+        "network": "无法连接服务器。请检查网络连接后重试。",
+        "updateFailed": "无法更新预约（错误 {status}）。"
+      }
+    },
+    "inventory": {
+      "title": "库存",
+      "subtitle": "追踪库存水平并管理优惠券可用性",
+      "refresh": "刷新",
+      "summary": {
+        "totalItems": "项目总数",
+        "lowStock": "库存不足",
+        "outOfStock": "缺货"
+      },
+      "alerts": {
+        "title": "库存不足提醒（{count}）",
+        "threshold": "{stock} / 阈值 {threshold}"
+      },
+      "loading": "正在加载库存...",
+      "empty": "未找到优惠券",
+      "typeVoucher": "{type}优惠券",
+      "stockStatus": {
+        "unlimited": "不限",
+        "outOfStock": "缺货",
+        "lowStock": "库存不足",
+        "inStock": "有库存"
+      },
+      "stock": "库存：{stock}",
+      "purchased": "已购买：{count}",
+      "redeemed": "已使用：{count}",
+      "validUntil": "有效期至 {date}",
+      "edit": {
+        "button": "编辑库存",
+        "stockQuantity": "库存数量",
+        "threshold": "库存不足阈值",
+        "save": "保存",
+        "saving": "保存中...",
+        "cancel": "取消"
+      },
+      "stockUpdated": "库存已更新",
+      "errors": {
+        "loadFailed": "加载库存失败",
+        "updateFailed": "更新库存失败"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "本平台尚未启用 AI 建议，因此自动布局和清单工具已隐藏。您仍可手动搭建和编辑页面。"
+    },
+    "pricing": {
+      "title": "动态定价",
+      "newRule": "新建规则",
+      "ruleTypes": {
+        "demand": {
+          "label": "按需求",
+          "desc": "根据浏览/购买比例调整价格"
+        },
+        "timeOfDay": {
+          "label": "按时段",
+          "desc": "高峰与非高峰时段定价"
+        },
+        "inventory": {
+          "label": "按库存",
+          "desc": "根据剩余库存调整价格"
+        },
+        "surge": {
+          "label": "高峰加价",
+          "desc": "特殊活动/节假日加价"
+        },
+        "loyalty": {
+          "label": "忠诚度",
+          "desc": "回头客折扣"
+        }
+      },
+      "form": {
+        "title": "创建定价规则",
+        "ruleType": "规则类型",
+        "priority": "优先级",
+        "priorityPlaceholder": "数值越高越先应用",
+        "config": "配置（JSON）",
+        "submit": "创建规则",
+        "cancel": "取消"
+      },
+      "loading": "正在加载规则...",
+      "empty": "还没有定价规则。创建规则即可启用动态定价。",
+      "table": {
+        "type": "类型",
+        "priority": "优先级",
+        "config": "配置",
+        "status": "状态",
+        "actions": "操作"
+      },
+      "active": "启用",
+      "inactive": "停用",
+      "deleteAria": "删除定价规则",
+      "deleteConfirm": "删除此定价规则？",
+      "delete": "删除",
+      "errors": {
+        "invalidJson": "配置字段必须是有效的 JSON。"
+      },
+      "preview": {
+        "title": "价格预览",
+        "description": "输入优惠券 ID，查看已启用规则对其价格的影响。",
+        "voucherId": "优惠券 ID",
+        "voucherIdPlaceholder": "输入优惠券 ID",
+        "calculate": "计算",
+        "error": "无法计算价格",
+        "basePrice": "基础价格",
+        "finalPrice": "最终价格"
+      }
+    },
+    "rentals": {
+      "title": "租赁预订",
+      "subtitle": "管理租赁申请和归还",
+      "status": {
+        "all": "全部",
+        "pending": "待处理",
+        "approved": "已批准",
+        "rejected": "已拒绝",
+        "paid": "已支付",
+        "active": "租赁中",
+        "returned": "已归还",
+        "cancelled": "已取消"
+      },
+      "empty": "未找到租赁预订。",
+      "dates": "{start} - {end}（{days, plural, other {# 天}}）",
+      "total": "合计：<strong>{total}</strong>（{rate}/天）",
+      "note": "备注：{note}",
+      "rejectedReason": "已拒绝：{reason}",
+      "bookedMeta": "预订时间：{date} | 用户：{user}...",
+      "approve": "批准",
+      "reasonPlaceholder": "原因（可选）",
+      "confirm": "确认",
+      "cancel": "取消",
+      "reject": "拒绝",
+      "markReturned": "标记为已归还"
+    },
+    "subscriptionBoxes": {
+      "title": "订阅盒",
+      "subtitle": "管理定期发放的优惠券订阅盒",
+      "newBox": "+ 新建订阅盒",
+      "cancel": "取消",
+      "form": {
+        "name": "名称",
+        "description": "描述",
+        "price": "价格（{currency}）",
+        "currency": "货币",
+        "interval": "周期",
+        "maxItems": "最多项目数",
+        "creating": "创建中...",
+        "submit": "创建订阅盒"
+      },
+      "interval": {
+        "weekly": "每周",
+        "monthly": "每月",
+        "quarterly": "每季度"
+      },
+      "created": "订阅盒已创建。",
+      "empty": "还没有订阅盒。创建您的第一个吧。",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, other {# 位订阅者}}",
+      "items": "{count, plural, other {# 个项目}}",
+      "errors": {
+        "priceAboveZero": "请输入大于 0 的价格。",
+        "createFailed": "无法创建订阅盒（错误 {status}）。",
+        "network": "无法创建订阅盒。请检查网络连接后重试。"
+      },
+      "intervalUnit": {
+        "weekly": "周",
+        "monthly": "月",
+        "quarterly": "季度"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "网站",
+      "supportEmail": "客服邮箱",
+      "logoUrl": "Logo URL",
+      "primaryColor": "主色",
+      "secondaryColor": "副色",
+      "backgroundColor": "背景色",
+      "primaryColorHex": "主色十六进制值",
+      "secondaryColorHex": "副色十六进制值",
+      "backgroundColorHex": "背景色十六进制值",
+      "saving": "保存中..."
+    },
+    "page": {
+      "metaTitle": "商家设置",
+      "infoTitle": "商家信息",
+      "infoSubtitle": "商家基本信息",
+      "name": "名称",
+      "slug": "Slug",
+      "country": "国家/地区",
+      "defaultCurrency": "默认货币",
+      "website": "网站",
+      "supportEmail": "客服邮箱",
+      "completeOnboarding": "完成入驻设置",
+      "billingTitle": "账单",
+      "billingSubtitle": "14 天免费试用，之后套餐每月 €19 起。优惠券销售收取 5% 交易费。",
+      "status": "状态",
+      "trialStatus": "免费试用 — 剩余 {days, plural, other {# 天}}",
+      "statusActive": "有效",
+      "statusInactive": "未激活",
+      "currentPlan": "当前套餐",
+      "trialEnds": "试用结束",
+      "periodEnds": "当前周期结束",
+      "manage": "管理",
+      "payoutsTitle": "提现",
+      "payoutsEnabled": "Stripe 账户已关联并启用",
+      "payoutsInProgress": "入驻进行中 — 完成后即可启用提现",
+      "payoutsNotConnected": "关联 Stripe 以接收优惠券销售款项",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "通过 HTTP 接收实时事件通知",
+      "notificationsTitle": "通知",
+      "notificationsSubtitle": "选择您作为团队成员接收的邮件类别。"
+    },
+    "brandProfile": {
+      "title": "品牌资料",
+      "subtitle": "自定义品牌颜色、Logo 和联系信息。",
+      "updated": "品牌资料已成功更新！",
+      "updateFailed": "更新品牌资料失败",
+      "save": "保存更改"
+    },
+    "domains": {
+      "title": "自定义域名",
+      "subtitle": "关联您自己的域名并完成验证，以启用租户路由。",
+      "inputLabel": "自定义域名",
+      "adding": "添加中...",
+      "add": "添加域名",
+      "empty": "尚未配置域名。",
+      "statusLine": "状态：{status}",
+      "statusValue": {
+        "pending": "待验证",
+        "verified": "已验证"
+      },
+      "verify": "验证",
+      "remove": "移除",
+      "addedTitle": "域名已添加",
+      "addedDescription": "切换流量前请先验证 DNS。",
+      "addErrorTitle": "域名错误",
+      "addErrorDescription": "无法添加域名。",
+      "verifiedTitle": "域名已验证",
+      "verifiedDescription": "租户路由现已生效。",
+      "verifyErrorTitle": "验证错误",
+      "verifyErrorDescription": "无法验证域名。",
+      "removedTitle": "域名已移除",
+      "removeErrorTitle": "移除错误",
+      "removeErrorDescription": "无法移除域名。"
+    },
+    "notifications": {
+      "metaTitle": "通知偏好",
+      "title": "通知偏好",
+      "intro": "设置您作为 <name>{merchantName}</name> 成员时接收哪些类别的邮件。偏好为个人设置，每位团队成员各自管理。",
+      "required": "必需",
+      "toggle": "切换{label}",
+      "unsaved": "有未保存的更改",
+      "allSaved": "所有更改已保存",
+      "saving": "保存中…",
+      "save": "保存偏好",
+      "savedTitle": "偏好已保存",
+      "saveFailedTitle": "保存失败",
+      "saveFailedDescription": "无法更新您的通知偏好。",
+      "category": {
+        "orders": {
+          "label": "新订单与使用",
+          "description": "优惠券被购买、使用或赠送时发送邮件。"
+        },
+        "payouts": {
+          "label": "提现",
+          "description": "Stripe 提现到账、失败和冻结。"
+        },
+        "fraud_alerts": {
+          "label": "欺诈与安全提醒",
+          "description": "异常使用模式、拒付、团队登录异常。无法关闭。"
+        },
+        "campaign_updates": {
+          "label": "活动生命周期",
+          "description": "活动发布、7 天内到期、已结束。"
+        },
+        "weekly_digest": {
+          "label": "每周业绩摘要",
+          "description": "每周一回顾上周的收入、使用次数和热门优惠券。"
+        },
+        "product_updates": {
+          "label": "GiftHub 产品动态",
+          "description": "新功能、路线图和不定期小贴士。每月最多 1 封。"
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "商家提现",
+      "title": "提现",
+      "intro": "关联 Stripe 账户后，优惠券销售款项将直接打入您的银行账户。我们收取 5% 的平台费，其余款项会在结账时自动转入您关联的账户。",
+      "stripeAccount": "Stripe 账户",
+      "capabilityState": "功能状态",
+      "accountStatus": {
+        "pending": "待处理",
+        "restricted": "受限",
+        "enabled": "已启用",
+        "disabled": "已停用"
+      },
+      "backToSettings": "返回设置",
+      "howTitle": "提现如何运作",
+      "how1": "顾客在平台结账页付款。我们收取全额款项并暂存在 Stripe。",
+      "how2": "付款成功后，Stripe 会将售价扣除 5% 平台费后的金额直接转入您的收款账户。",
+      "how3": "随后 Stripe 会按照您在 Stripe 提现设置中选择的周期将款项打入您的银行账户（通常为每日，在销售后几天内）。",
+      "how4": "拒付和退款将从您的下一笔提现中扣除；如发现欺诈行为，管理团队可以手动冻结您的余额。",
+      "badge": {
+        "enabled": {
+          "label": "提现已启用",
+          "description": "Stripe 会按计划的提现周期将优惠券销售款项转入您的银行账户。"
+        },
+        "restricted": {
+          "label": "需要补充信息",
+          "description": "Stripe 需要更多信息才能启用提现。请打开下方的入驻链接继续。"
+        },
+        "disabled": {
+          "label": "提现已停用",
+          "description": "Stripe 已停用此账户的提现。请打开 Stripe 控制台处理未完成的要求。"
+        },
+        "notConnected": {
+          "label": "未关联",
+          "description": "您尚未关联 Stripe 账户。完成入驻前提现将被暂缓——在此期间优惠券销售仍可正常进行，但款项会保留在平台余额中。"
+        }
+      },
+      "actions": {
+        "startFailed": "无法开始 Stripe 入驻",
+        "startNetworkError": "开始入驻时发生网络错误",
+        "dashboardFailed": "无法打开 Stripe 控制台",
+        "dashboardNetworkError": "打开控制台时发生网络错误",
+        "disconnectConfirm": "断开此 Stripe 账户？重新关联前提现将暂停。",
+        "disconnected": "Stripe 账户已断开",
+        "disconnectFailed": "断开失败",
+        "disconnect": "断开",
+        "setUp": "通过 Stripe 设置提现",
+        "openDashboard": "打开 Stripe 控制台",
+        "continueOnboarding": "继续入驻"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "加载商家数据失败。",
+      "retry": "重试",
+      "loading": "加载中...",
+      "title": "完善您的资料",
+      "subtitle": "设置您的商家品牌资料。",
+      "basicInfo": "基本信息",
+      "merchantName": "商家名称 *",
+      "brandTitle": "品牌资料",
+      "brandSubtitle": "自定义品牌颜色和 Logo。",
+      "updateFailed": "更新商家失败",
+      "submit": "完成入驻设置",
+      "skip": "暂时跳过"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "审计日志",
+      "subtitle": "追踪商家账户上执行的所有操作",
+      "filters": "筛选",
+      "action": "操作",
+      "allActions": "全部操作",
+      "fromDate": "开始日期",
+      "toDate": "结束日期",
+      "apply": "应用",
+      "clear": "清除",
+      "loading": "正在加载审计日志...",
+      "loadFailed": "加载审计日志失败",
+      "empty": "未找到审计日志记录。",
+      "columns": {
+        "timestamp": "时间",
+        "actor": "操作人",
+        "action": "操作",
+        "resource": "资源",
+        "details": "详情"
+      },
+      "unknownActor": "未知",
+      "showing": "显示第 {from}–{to} 条，共 {total} 条",
+      "pageOf": "第 {page} / {totalPages} 页",
+      "previousPage": "上一页",
+      "nextPage": "下一页",
+      "actions": {
+        "voucherCreated": "创建了优惠券",
+        "voucherUpdated": "更新了优惠券",
+        "voucherPublished": "发布了优惠券",
+        "vouchersGenerated": "生成了优惠券",
+        "campaignCreated": "创建了活动",
+        "campaignUpdated": "更新了活动",
+        "memberInvited": "邀请了团队成员",
+        "memberRemoved": "移除了团队成员",
+        "memberRoleChanged": "更改了团队成员角色",
+        "apiKeyCreated": "创建了 API 密钥",
+        "apiKeyRevoked": "撤销了 API 密钥",
+        "apiKeyUpdated": "更新了 API 密钥",
+        "eventCreated": "创建了赛事活动",
+        "eventUpdated": "更新了赛事活动",
+        "eventPublished": "发布了赛事活动",
+        "merchantUpdated": "更新了商家信息",
+        "reviewReplied": "回复了评价",
+        "settingsUpdate": "更新了设置",
+        "settingsView": "查看了设置",
+        "ticketRedeemed": "核销了门票"
+      },
+      "resources": {
+        "voucher": "优惠券",
+        "campaign": "活动",
+        "giftCard": "礼品卡",
+        "event": "赛事活动",
+        "member": "成员",
+        "teamMember": "团队成员",
+        "apiKey": "API 密钥",
+        "webhook": "Webhook",
+        "merchant": "商家",
+        "user": "用户",
+        "review": "评价"
+      }
+    },
+    "roles": {
+      "admin": "管理员",
+      "adminDescription": "完全权限——管理优惠券、活动、成员和设置",
+      "staff": "店员",
+      "staffDescription": "操作权限——确认使用并查看数据",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "团队成员",
+      "subtitle": "管理团队及其访问权限",
+      "inviteMember": "邀请成员",
+      "inviteTitle": "邀请团队成员",
+      "emailAddress": "邮箱地址",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "该用户必须已有账户。",
+      "role": "角色",
+      "inviting": "邀请中...",
+      "sendInvitation": "发送邀请",
+      "cancel": "取消",
+      "save": "保存",
+      "loading": "正在加载团队成员...",
+      "loadFailed": "加载团队成员失败",
+      "empty": "还没有团队成员。请在上方邀请第一位成员。",
+      "columns": {
+        "member": "成员",
+        "role": "角色",
+        "joined": "加入时间",
+        "actions": "操作"
+      },
+      "unnamed": "未命名",
+      "memberRole": "成员角色",
+      "changeRole": "更改角色",
+      "removeMember": "移除成员",
+      "inviteFailed": "邀请成员失败",
+      "invited": "成员邀请成功",
+      "updateRoleFailed": "更新角色失败",
+      "roleUpdated": "角色已更新",
+      "removeConfirm": "将 {name} 移出团队？",
+      "remove": "移除",
+      "removeFailed": "移除成员失败",
+      "removed": "成员已移除"
+    },
+    "inviteForm": {
+      "title": "邀请团队成员",
+      "subtitle": "通过邮箱地址添加团队成员。",
+      "email": "邮箱",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "用户必须已有账户。如果还没有，需要先注册。",
+      "role": "角色",
+      "roleHint": "管理员可以管理优惠券、活动和团队成员。店员可以确认使用。",
+      "inviting": "邀请中...",
+      "submit": "邀请成员",
+      "redirectingToBilling": "{message} 正在跳转到账单页面..."
+    },
+    "referrals": {
+      "title": "推荐分析",
+      "subtitle": "追踪推荐表现和奖励。",
+      "stats": {
+        "total": "推荐总数",
+        "totalHint": "所有已追踪的推荐",
+        "opened": "已查看",
+        "openedHint": "已查看或已使用",
+        "redeemed": "已使用",
+        "redeemedHint": "已转化的推荐",
+        "conversionRate": "转化率",
+        "conversionRateHint": "已使用 / 总数"
+      },
+      "statusBreakdown": "状态分布",
+      "creditsIssued": "已发放积分 {amount}",
+      "noActivity": "暂无推荐动态。",
+      "topReferrers": "最佳推荐人",
+      "topReferrersHint": "带来推荐最多的用户。",
+      "noReferrals": "还没有推荐。",
+      "unknownUser": "未知用户",
+      "referralCount": "{count, plural, other {# 次推荐}}",
+      "recent": "最近的推荐",
+      "recentHint": "顾客的最新推荐。",
+      "noRecent": "暂无最近推荐。",
+      "voucherFallback": "优惠券",
+      "status": {
+        "created": "已创建",
+        "opened": "已查看",
+        "redeemed": "已使用",
+        "expired": "已过期",
+        "blocked": "已屏蔽"
+      }
+    },
+    "emailCampaigns": {
+      "title": "邮件营销",
+      "newCampaign": "新建邮件活动",
+      "notConfigured": "本平台尚未开通邮件发送。您可以创建和预览邮件活动，但在接入邮件服务商之前无法发送。",
+      "notConfiguredShort": "本平台尚未开通邮件发送",
+      "createTitle": "创建邮件活动",
+      "campaignName": "活动名称",
+      "campaignNamePlaceholder": "夏季促销简报",
+      "subjectLine": "邮件主题",
+      "subjectPlaceholder": "夏季优惠，不容错过！",
+      "recipients": "收件人",
+      "recipientFilter": {
+        "all": "全部顾客",
+        "redeemed30d": "近 30 天有使用的顾客",
+        "inactive": "不活跃顾客"
+      },
+      "schedule": "定时发送（可选）",
+      "emailSections": "邮件版块",
+      "sectionTypes": {
+        "header": "页眉",
+        "text": "文本",
+        "image": "图片",
+        "button": "按钮",
+        "divider": "分隔线",
+        "voucherCard": "优惠券"
+      },
+      "creating": "创建中...",
+      "scheduleCampaign": "定时发送",
+      "saveDraft": "保存为草稿",
+      "preview": "预览",
+      "editor": {
+        "moveUp": "上移",
+        "moveDown": "下移",
+        "removeSection": "移除版块",
+        "title": "标题",
+        "subtitle": "副标题（可选）",
+        "textContent": "输入文本内容...",
+        "imageUrl": "图片 URL",
+        "altText": "替代文本",
+        "buttonLabel": "按钮文字",
+        "buttonUrl": "按钮 URL",
+        "dividerHint": "水平分隔线",
+        "voucherTitle": "优惠券标题",
+        "voucherValue": "面值（例如 8 折）",
+        "voucherCode": "代码（例如 SAVE20）",
+        "voucherExpiry": "到期日（例如 2026年12月31日）"
+      },
+      "previewContent": {
+        "headerTitle": "页眉标题",
+        "textContent": "文本内容...",
+        "imagePlaceholder": "图片占位",
+        "button": "按钮",
+        "voucher": "优惠券",
+        "validUntil": "有效期至 {date}"
+      },
+      "loading": "加载中...",
+      "empty": "还没有邮件活动",
+      "columns": {
+        "name": "名称",
+        "subject": "主题",
+        "status": "状态",
+        "recipients": "收件人",
+        "opens": "打开数",
+        "created": "创建时间",
+        "actions": "操作"
+      },
+      "status": {
+        "draft": "草稿",
+        "scheduled": "已排期",
+        "sent": "已发送"
+      },
+      "send": "发送",
+      "delete": "删除",
+      "deleteCampaign": "删除邮件活动",
+      "toasts": {
+        "missingFields": "缺少必填项",
+        "missingFieldsDescription": "名称和主题为必填项。",
+        "created": "邮件活动已创建",
+        "error": "错误",
+        "createFailed": "创建邮件活动失败。",
+        "sendConfirm": "确定要立即发送此邮件活动吗？",
+        "sendFailedStatus": "发送失败（错误 {status}）。",
+        "partlySent": "邮件活动部分发送成功",
+        "partlySentDescription": "已发送给 {sent} / {total} 位收件人。{failed, plural, other {# 封邮件}}未能发送。",
+        "sent": "邮件活动已发送",
+        "sentDescription": "已发送给 {sent, plural, other {# 位收件人}}。",
+        "sendFailed": "发送失败",
+        "deleteConfirm": "删除此邮件活动？",
+        "deleted": "邮件活动已删除",
+        "deleteFailed": "删除失败。"
+      }
+    },
+    "apiKeys": {
+      "title": "API 密钥",
+      "subtitle": "管理以编程方式访问商家数据的 API 密钥",
+      "createKey": "创建密钥",
+      "createdNotice": "API 密钥已创建！请立即复制——它不会再次显示。",
+      "copyKey": "复制密钥",
+      "createTitle": "创建 API 密钥",
+      "keyName": "密钥名称",
+      "keyNamePlaceholder": "例如：生产环境 POS 集成",
+      "permissions": "权限",
+      "creating": "创建中...",
+      "submit": "创建 API 密钥",
+      "cancel": "取消",
+      "loading": "正在加载 API 密钥...",
+      "empty": "还没有 API 密钥。创建一个即可开始使用。",
+      "createdOn": "创建于 {date}",
+      "lastUsed": "最近使用 {date}",
+      "expires": "{date} 过期",
+      "revokeKey": "撤销密钥",
+      "loadFailed": "加载 API 密钥失败",
+      "required": "名称和至少一项权限为必填",
+      "createFailed": "创建 API 密钥失败",
+      "created": "API 密钥已创建",
+      "revokeConfirm": "撤销 API 密钥“{name}”？此操作无法撤消。",
+      "revoke": "撤销",
+      "revoked": "API 密钥已撤销",
+      "revokeFailed": "撤销 API 密钥失败",
+      "copied": "已复制到剪贴板",
+      "groups": {
+        "vouchers": "优惠券",
+        "campaigns": "活动",
+        "giftCards": "礼品卡",
+        "customers": "顾客",
+        "analytics": "数据分析",
+        "events": "赛事活动"
+      },
+      "permissionLabels": {
+        "voucherRead": "读取优惠券",
+        "voucherCreate": "创建优惠券",
+        "voucherRedeem": "核销优惠券",
+        "campaignRead": "读取活动",
+        "campaignCreate": "创建活动",
+        "giftCardRead": "读取礼品卡",
+        "giftCardRedeem": "核销礼品卡",
+        "customerRead": "读取顾客",
+        "analyticsRead": "读取数据分析",
+        "eventRead": "读取赛事活动",
+        "eventCheckin": "赛事活动检票"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "通过 HTTP 接收事件通知",
+      "addWebhook": "添加 Webhook",
+      "secretNotice": "Webhook 密钥（仅显示一次）：",
+      "copySecret": "复制密钥",
+      "copied": "已复制！",
+      "newTitle": "新建 Webhook",
+      "endpointUrl": "端点 URL",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "事件",
+      "submit": "创建 Webhook",
+      "loading": "加载中...",
+      "empty": "尚未配置 Webhook",
+      "createdOn": "创建于 {date}",
+      "deliveriesCount": "{count, plural, other {# 次投递}}",
+      "sendTest": "发送测试",
+      "viewDeliveries": "投递日志",
+      "disable": "停用",
+      "enable": "启用",
+      "deleteWebhook": "删除 Webhook",
+      "deliveryLog": "投递日志",
+      "noDeliveries": "暂无投递记录",
+      "deliveryFailed": "失败",
+      "attempts": "{count, plural, other {# 次尝试}}",
+      "loadFailed": "加载 Webhook 失败",
+      "required": "URL 和至少一个事件为必填",
+      "created": "Webhook 已创建",
+      "createFailed": "创建 Webhook 失败",
+      "deleted": "Webhook 已删除",
+      "deleteFailed": "删除 Webhook 失败",
+      "updateFailed": "更新 Webhook 失败",
+      "testDelivered": "测试已送达！状态：{status}",
+      "testFailed": "测试失败：{error}",
+      "statusCode": "状态 {status}",
+      "testSendFailed": "发送测试 Webhook 失败",
+      "loadDeliveriesFailed": "加载投递记录失败"
+    }
   }
 }

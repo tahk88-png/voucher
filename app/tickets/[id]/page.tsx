@@ -6,6 +6,7 @@ import { WarmCard } from '@/components/warm-card';
 import TicketViewClient from './ticket-view-client';
 import QRCode from 'qrcode';
 import { logger } from '@/lib/logger';
+import { getTranslations } from 'next-intl/server';
 
 async function generateQRCode(text: string): Promise<string> {
   try {
@@ -18,6 +19,7 @@ async function generateQRCode(text: string): Promise<string> {
 
 export default async function TicketPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const t = await getTranslations('purchase');
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
@@ -54,7 +56,7 @@ export default async function TicketPage({ params }: { params: Promise<{ id: str
       <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#FFFBF5] via-[#FFF9ED] to-[#FFE5B4]">
         <WarmCard padding="lg" className="max-w-md text-center bg-white">
           <p className="text-sm text-[#6B5744]">
-            You don&apos;t have permission to view this ticket.
+            {t('ticket.noPermission')}
           </p>
         </WarmCard>
       </div>
@@ -74,25 +76,25 @@ export default async function TicketPage({ params }: { params: Promise<{ id: str
         <WarmCard padding="lg" className="bg-white">
           <div className="flex flex-col gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">
-              Ticket #{ticket.ticketNumber}
+              {t('ticket.heading', { number: ticket.ticketNumber })}
             </p>
             <h1 className="text-2xl font-semibold text-[#2D2721]">{ticket.event.name}</h1>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 mt-6 text-sm">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Event</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.event')}</p>
               <p className="text-lg font-semibold text-[#2D2721]">{ticket.event.name}</p>
             </div>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Date & Time</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.dateTime')}</p>
               <p className="text-lg font-semibold text-[#2D2721]">
                 {new Date(ticket.event.eventDate).toLocaleString()}
               </p>
             </div>
             {ticket.event.location && (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Location</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.location')}</p>
                 <p className="text-lg font-semibold text-[#2D2721]">{ticket.event.location}</p>
                 {ticket.event.locationAddress && (
                   <p className="text-sm text-[#6B5744]">{ticket.event.locationAddress}</p>
@@ -100,18 +102,18 @@ export default async function TicketPage({ params }: { params: Promise<{ id: str
               </div>
             )}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Status</p>
-              <p className="text-lg font-semibold capitalize text-[#2D2721]">{ticket.status}</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.status')}</p>
+              <p className="text-lg font-semibold capitalize text-[#2D2721]">{t.has(`ticketStatus.${ticket.status}`) ? t(`ticketStatus.${ticket.status}`) : ticket.status}</p>
             </div>
             {ticket.purchase?.attendeeName && (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Attendee</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.attendee')}</p>
                 <p className="text-lg font-semibold text-[#2D2721]">{ticket.purchase.attendeeName}</p>
               </div>
             )}
             {ticket.usedAt && (
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">Used At</p>
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#8B7355]">{t('fields.usedAt')}</p>
                 <p className="text-lg font-semibold text-[#2D2721]">
                   {new Date(ticket.usedAt).toLocaleString()}
                 </p>

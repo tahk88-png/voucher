@@ -1,7 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { WarmButton } from '@/components/warm-button';
+import { showError, showSuccess } from '@/lib/toast-helpers';
+import { apiErrorMessage } from '@/lib/api-error-message';
+import { parsePaywallResponse } from '@/lib/paywall-utils';
+import { toDatetimeLocalValue } from '@/lib/money-input';
 
 type PromotionState = {
   promotedWeeklyEmail: boolean;
@@ -14,9 +20,17 @@ export default function CampaignPromotionForm({
   initial,
 }: {
   campaignId: string;
+  /** promotedUntil as an ISO string (or null). */
   initial: PromotionState;
 }) {
-  const [state, setState] = useState<PromotionState>(initial);
+  const router = useRouter();
+  const t = useTranslations('merchantCampaigns');
+  const tCommon = useTranslations('common');
+  // The input holds local wall-clock time; convert the stored ISO instant.
+  const [state, setState] = useState<PromotionState>({
+    ...initial,
+    promotedUntil: initial.promotedUntil ? toDatetimeLocalValue(new Date(initial.promotedUntil)) : null,
+  });
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = async () => {
@@ -25,7 +39,7 @@ export default function CampaignPromotionForm({
       const promotedUntil = state.promotedUntil
         ? new Date(state.promotedUntil).toISOString()
         : null;
-      await fetch(`/api/campaigns/${campaignId}`, {
+      const res = await fetch(`/api/campaigns/${campaignId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -34,6 +48,23 @@ export default function CampaignPromotionForm({
           promotedUntil,
         }),
       });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 402) {
+          const paywall = parsePaywallResponse(body);
+          showError(paywall?.message || t('promotion.upgradeNeeded'), t('promotion.upgradeNeededTitle'));
+          return;
+        }
+        showError(
+          apiErrorMessage(body, t('promotion.saveFailedStatus', { status: res.status })),
+          tCommon('error'),
+        );
+        return;
+      }
+      showSuccess(t('promotion.saved'), tCommon('success'));
+      router.refresh();
+    } catch {
+      showError(t('promotion.saveFailedNetwork'), tCommon('error'));
     } finally {
       setIsSaving(false);
     }
@@ -50,7 +81,7 @@ export default function CampaignPromotionForm({
           }
           className="h-4 w-4 accent-[#cc785c]"
         />
-        Include in weekly newsletter (paid)
+        {t('promotion.weeklyEmail')}
       </label>
       <label className="flex items-center gap-2 text-sm text-[var(--text-muted)]">
         <input
@@ -61,10 +92,10 @@ export default function CampaignPromotionForm({
           }
           className="h-4 w-4 accent-[#cc785c]"
         />
-        Boost in notifications (paid)
+        {t('promotion.notification')}
       </label>
       <label className="flex flex-col gap-1 text-sm text-[var(--text-muted)]">
-        Promotion end date
+        {t('promotion.endDate')}
         <input
           type="datetime-local"
           value={state.promotedUntil || ''}
@@ -73,7 +104,7 @@ export default function CampaignPromotionForm({
         />
       </label>
       <WarmButton onClick={handleSave} disabled={isSaving}>
-        {isSaving ? 'Saving...' : 'Save promotion settings'}
+        {isSaving ? t('promotion.saving') : t('promotion.save')}
       </WarmButton>
     </div>
   );

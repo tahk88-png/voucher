@@ -8,6 +8,7 @@ import React, {
   useEffect,
   type ReactNode,
 } from 'react';
+import { useTranslations } from 'next-intl';
 
 /* ─── Types ─── */
 export interface DsSidebarItem {
@@ -142,6 +143,7 @@ export function DsSidebar({
   footer,
   className = '',
 }: DsSidebarProps) {
+  const t = useTranslations('dsComponents.sidebar');
   const [internalCollapsed, setInternalCollapsed] = useState(false);
   const collapsed = controlledCollapsed ?? internalCollapsed;
 
@@ -188,7 +190,7 @@ export function DsSidebar({
             type="button"
             onClick={toggleCollapse}
             className="w-full flex items-center justify-center p-1.5 rounded-md text-[var(--text-faint)] hover:bg-[var(--surface-muted)] hover:text-[var(--text)] transition-colors"
-            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-label={collapsed ? t('expand') : t('collapse')}
           >
             <svg
               className={`w-4 h-4 transition-transform duration-200 ${collapsed ? 'rotate-180' : ''}`}
@@ -241,7 +243,7 @@ export function DsSidebar({
         type="button"
         onClick={() => setMobileOpen(true)}
         className="md:hidden fixed top-3 left-3 z-[9998] p-2 rounded-md bg-[var(--glass-bg)] backdrop-blur-lg border border-[var(--glass-border)] shadow-md"
-        aria-label="Open menu"
+        aria-label={t('openMenu')}
       >
         <svg className="w-5 h-5 text-[var(--text)]" viewBox="0 0 20 20" fill="none">
           <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -265,7 +267,7 @@ export function DsSidebar({
                     type="button"
                     onClick={() => setMobileOpen(false)}
                     className="p-1 rounded-md text-[var(--text-faint)] hover:text-[var(--text)]"
-                    aria-label="Close menu"
+                    aria-label={t('closeMenu')}
                   >
                     <svg className="w-5 h-5" viewBox="0 0 20 20" fill="none">
                       <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

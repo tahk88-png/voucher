@@ -166,7 +166,7 @@ export default function RateLimitsDashboardPage() {
                         <td className="px-4 py-2 text-[var(--text-muted)] text-xs">
                           <div className="flex items-center gap-1">
                             <Clock className="h-3 w-3" />
-                            {o.lastSeen ? new Date(o.lastSeen).toLocaleString() : '-'}
+                            {o.lastSeen ? new Date(o.lastSeen).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' }) : '-'}
                           </div>
                         </td>
                       </tr>

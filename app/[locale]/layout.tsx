@@ -1,15 +1,10 @@
 import type { Metadata } from 'next';
 import { logger } from '@/lib/logger';
-import NextLink from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/routing';
-import LanguageSelector from '@/components/language-selector';
-import { Link } from '@/routing';
-import { WarmButton } from '@/components/warm-button';
-import { getTranslations } from 'next-intl/server';
-import { Gift } from 'lucide-react';
+import HubShell from '@/components/layout/hub-shell';
 import {
   buildLocaleAlternates,
   DEFAULT_OG_IMAGE,
@@ -43,7 +38,9 @@ export async function generateMetadata({
   const canonicalPath = getLocalePath(locale, '/');
 
   return {
-    title: SITE_NAME,
+    // absolute: the root layout's "%s | GiftHub" template would otherwise
+    // render "GiftHub | GiftHub".
+    title: { absolute: SITE_NAME },
     description,
     alternates: {
       canonical: canonicalPath,
@@ -93,37 +90,10 @@ export default async function LocaleLayout({
     throw err;
   }
 
-  const t = await getTranslations('nav');
-
   return (
     <NextIntlClientProvider messages={messages}>
-      <div className="min-h-screen flex flex-col">
-        <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-[rgba(139,115,85,0.1)]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex items-center justify-between gap-4">
-              <NextLink href="/" className="flex items-center gap-2">
-                <span className="w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#cc785c] to-[#b5613f] flex items-center justify-center shadow-warm">
-                  <Gift className="h-6 w-6 text-white" />
-                </span>
-                <span className="text-xl font-bold text-[#2D2721]">GiftHub</span>
-              </NextLink>
-
-              <div className="flex items-center gap-3">
-                <div className="hidden md:block">
-                  <LanguageSelector />
-                </div>
-                <WarmButton asChild variant="ghost">
-                  <Link href="/campaigns">{t('campaigns')}</Link>
-                </WarmButton>
-                <WarmButton asChild>
-                  <Link href="/login">{t('login')}</Link>
-                </WarmButton>
-              </div>
-            </div>
-          </div>
-        </header>
-        <main className="flex-1">{children}</main>
-      </div>
+      {/* Same header (with the mobile menu) as every other public page. */}
+      <HubShell>{children}</HubShell>
     </NextIntlClientProvider>
   );
 }

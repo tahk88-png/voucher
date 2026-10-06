@@ -30,20 +30,23 @@
   --surface-dim:  #ece7dd;
   --text:         #1f1d18;
   --text-muted:   #6b655b;
-  --text-faint:   #948e80;
+  /* #948e80 was 3.3:1 on white; this is ≥4.5:1 on white and on --bg. */
+  --text-faint:   #736d61;
   --border:       #e6e1d5;
   --border-strong: #d6cfbf;
-  --ring:         rgba(204, 120, 92, 0.40);
+  --ring:         rgba(164, 86, 59, 0.45);
 
   /* ── Brand — Clay / "book cloth" ── */
-  --primary:            #cc785c;
-  --primary-hover:      #b5613f;
+  /* Clay darkened for WCAG AA: white text on #cc785c was only 3.3:1.
+     #a4563b gives 5.3:1 with white and 4.7:1 as text on --bg. */
+  --primary:            #a4563b;
+  --primary-hover:      #8f4a32;
   --primary-foreground:  #ffffff;
   --accent:             #f0e7dd;
   --accent-foreground:  #4f291a;
 
   /* ── States — warm-shifted ── */
-  --success:     #4e8a5b;
+  --success:     #3f7a4c; /* 5.1:1 with white (was 4.1:1) */
   --warning:     #c88a3c;
   --danger:      #c84b36;
   --info:        #4b6678;
@@ -69,8 +72,9 @@
   --r-full: 9999px;
 
   /* ── Gradients (raw stops) — warm, single-family ── */
-  --gradient-brand-from: #cc785c;
-  --gradient-brand-to:   #b5613f;
+  /* Both stops keep white text ≥4.5:1 (see --primary). */
+  --gradient-brand-from: #a4563b;
+  --gradient-brand-to:   #8f4a32;
   --gradient-mesh-1: radial-gradient(ellipse at 15% 0%, rgba(204,120,92,0.06) 0%, transparent 55%);
   --gradient-mesh-2: radial-gradient(ellipse at 100% 8%, rgba(94,126,146,0.045) 0%, transparent 50%);
   --gradient-mesh-3: radial-gradient(ellipse at 50% 100%, rgba(190,138,46,0.035) 0%, transparent 60%);
@@ -143,7 +147,7 @@
     --card-foreground: 43 13% 11%;
     --popover: 45 33% 98%;
     --popover-foreground: 43 13% 11%;
-    --hsl-primary: 15 52% 58%;
+    --hsl-primary: 15 47% 44%; /* = --primary (#a4563b) */
     --hsl-primary-foreground: 0 0% 100%;
     --secondary: 38 28% 90%;
     --secondary-foreground: 40 13% 18%;
@@ -714,4 +718,10 @@ input[type="range"]::-moz-range-thumb {
   border: 3px solid white;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   cursor: pointer;
+}
+
+/* The chat launcher would sit on top of the cookie banner's buttons; hide it
+   while the banner is open (components/cookie-consent-banner.tsx sets this). */
+html[data-cookie-banner="open"] .chat-launcher {
+  display: none;
 }

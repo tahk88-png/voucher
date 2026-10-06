@@ -64,7 +64,18 @@
     "subscriptionBoxes": "صناديق الاشتراك",
     "pricing": "قواعد التسعير",
     "webhooks": "Webhooks",
-    "apiKeys": "مفاتيح API"
+    "apiKeys": "مفاتيح API",
+    "marketplace": "السوق",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "expandSidebar": "توسيع الشريط الجانبي",
+    "collapseSidebar": "طي الشريط الجانبي",
+    "sectionShop": "التسوق",
+    "sectionRewards": "المكافآت",
+    "sectionAccount": "الحساب",
+    "mainNavigation": "التنقل الرئيسي",
+    "quickNavigation": "التنقل السريع",
+    "logoutFailed": "تعذّر تسجيل الخروج. يُرجى المحاولة مرة أخرى."
   },
   "voucher": {
     "title": "قسيمة",
@@ -184,7 +195,11 @@
     "creditApplied": "الرصيد المطبّق",
     "finalTotal": "الإجمالي",
     "pageDescription": "تتبع رصيدك المتاح والمجمّد.",
-    "noMerchantWallets": "لا توجد محافظ تجار بعد."
+    "noMerchantWallets": "لا توجد محافظ تجار بعد.",
+    "noCreditYet": "لا يوجد رصيد بعد",
+    "noCreditYetBody": "تحصل على رصيد عندما يستخدم صديقك قسيمة شاركتها معه. يظهر الرصيد هنا لكل تاجر.",
+    "shareToEarn": "شارك قسيمة",
+    "findVoucherToShare": "ابحث عن قسيمة لمشاركتها"
   },
   "redemption": {
     "title": "سجل الاستخدام",
@@ -244,7 +259,12 @@
     "merchantLabel": "التاجر",
     "voucherLabel": "القسيمة",
     "linkField": "الرابط",
-    "codeField": "الرمز"
+    "codeField": "الرمز",
+    "linkCopied": "تم نسخ الرابط",
+    "howItWorksTitle": "كيف تعمل الإحالات",
+    "howItWorksBody": "افتح قسيمة واضغط على «مشاركة». ستحصل على رابط شخصي لتلك القسيمة. عندما يستخدمها صديقك، تحصل على رصيد من التاجر.",
+    "findVoucher": "ابحث عن قسيمة لمشاركتها",
+    "linkForVoucher": "رابط الإحالة لـ {voucher}"
   },
   "analytics": {
     "title": "التحليلات",
@@ -404,7 +424,7 @@
     "footerPrivacy": "الخصوصية",
     "footerDocs": "التوثيق",
     "footerSupport": "الدعم",
-    "footerCopyright": "© 2024 Vouchr. All rights reserved.",
+    "footerCopyright": "© GiftHub. All rights reserved.",
     "badge": "أطلق قسائم وبطاقات هدايا وعروض تذاكر",
     "headline": "حملات تبدو كتجربة علامة تجارية فاخرة",
     "subheadline": "ابنِ حملات قسائم وبطاقات هدايا مع استخدام QR والإحالات والرصيد التلقائي. ادفع فقط مقابل النتائج.",
@@ -516,7 +536,9 @@
     "viewVouchers": "عرض القسائم",
     "redeemed": "مستخدمة",
     "friendLabel": "صديق",
-    "voucherLabel": "قسيمة"
+    "voucherLabel": "قسيمة",
+    "offersLinkTitle": "رابط العروض الحالية",
+    "offersLinkDescription": "أرسل لأصدقائك رابطًا لجميع العروض الحالية على GiftHub. لا يمنحك هذا الرابط رصيدًا؛ لكسب الرصيد، شارك قسيمة محددة من صفحتها."
   },
   "billing": {
     "upgradeRequired": "الترقية مطلوبة",
@@ -618,14 +640,34 @@
     "inApp": "داخل التطبيق",
     "pushBeta": "إشعارات فورية (تجريبي)",
     "saving": "جارٍ الحفظ...",
-    "savePreferences": "حفظ التفضيلات"
+    "savePreferences": "حفظ التفضيلات",
+    "noPreferencesTitle": "لا يوجد ما يمكن إعداده بعد",
+    "noPreferencesBody": "تُدار إعدادات الإشعارات لكل تاجر على حدة. ليس لديك أي تجار لديهم إعدادات إشعارات بعد.",
+    "saved": "تم حفظ التفضيلات",
+    "saveFailed": "تعذّر حفظ تفضيلاتك. يُرجى المحاولة مرة أخرى.",
+    "markAllReadFailed": "تعذّر تعليم الإشعارات كمقروءة. يُرجى المحاولة مرة أخرى.",
+    "emptyHint": "ستظهر هنا التحديثات المتعلقة بقسائمك وعروضك.",
+    "browseOffers": "تصفّح العروض"
   },
   "settingsPage": {
     "description": "إدارة تفضيلات حسابك.",
     "joined": "تاريخ الانضمام",
     "recently": "مؤخراً",
     "accountAccessTitle": "الوصول للحساب",
-    "accountAccessDescription": "حماية حسابك وإدارة الوصول."
+    "accountAccessDescription": "حماية حسابك وإدارة الوصول.",
+    "pushDescription": "تلقَّ الإشعارات على هذا الجهاز، حتى عندما يكون GiftHub مغلقًا.",
+    "changePasswordTitle": "تغيير كلمة المرور",
+    "changePasswordDescription": "حدّث كلمة مرور حسابك.",
+    "setPasswordTitle": "تعيين كلمة مرور",
+    "setPasswordDescription": "عيّن كلمة مرور لتسجيل الدخول باستخدام بريدك الإلكتروني وكلمة المرور.",
+    "twoFactorTitle": "المصادقة الثنائية",
+    "twoFactorDescription": "أضف طبقة أمان إضافية باستخدام تطبيق مصادقة أو مفتاح مرور.",
+    "twoFactorManage": "إدارة الأمان",
+    "sessionsTitle": "الجلسات النشطة",
+    "sessionsDescription": "اطّلع على الأماكن التي سُجّل فيها الدخول إلى حسابك.",
+    "sessionsView": "عرض الجلسات",
+    "deleteTitle": "حذف الحساب",
+    "deleteDescription": "احذف حسابك نهائيًا واجعل بياناتك مجهولة الهوية. لا يمكن التراجع عن ذلك."
   },
   "profile": {
     "title": "الملف الشخصي",
@@ -633,5 +675,4583 @@
     "accountInformation": "معلومات الحساب",
     "emailPreferences": "تفضيلات البريد الإلكتروني",
     "appSettings": "إعدادات التطبيق"
+  },
+  "dashboard": {
+    "roleShopper": "متسوّق",
+    "roleAdmin": "مسؤول",
+    "roleStaff": "موظف",
+    "rolePlatformAdmin": "مسؤول المنصة",
+    "availableCredit": "الرصيد المتاح",
+    "pendingCredit": "{amount} قيد الانتظار",
+    "creditExplainer": "رصيد تكسبه عندما يستخدم أصدقاؤك قسائم شاركتها معهم. يمكنك إنفاقه لدى التاجر الذي أصدره.",
+    "viewCreditDetails": "عرض تفاصيل الرصيد",
+    "successfulReferrals": "الإحالات الناجحة",
+    "checkInPoints": "نقاط تسجيل الحضور",
+    "shareTitle": "شارك قسيمة واكسب رصيدًا",
+    "shareDescription": "افتح أي قسيمة واضغط على «مشاركة» للحصول على رابطك الشخصي. عندما يستخدمها صديقك، تكسب رصيدًا.",
+    "openShareCenter": "فتح مركز المشاركة",
+    "sharedSummary": "القسائم المُشارَكة: {count} · المُستخدَمة: {redeemed}",
+    "achievementsTitle": "الإنجازات",
+    "badgesEarned": "الشارات المكتسبة: {earned} من {total}",
+    "viewAchievements": "عرض الإنجازات",
+    "availableOffers": "العروض المتاحة",
+    "browseAll": "تصفّح الكل",
+    "noActiveOffers": "لا توجد عروض متاحة حاليًا. عُد قريبًا.",
+    "validUntil": "صالح حتى {date}",
+    "recentActivity": "النشاط الأخير",
+    "noRecentActivity": "لا يوجد نشاط بعد.",
+    "creditFrom": "رصيد من {merchant}",
+    "referralAt": "إحالة · {merchant}",
+    "creditStatus": {
+      "locked": "قيد الانتظار",
+      "available": "متاح",
+      "used": "مُستخدَم",
+      "expired": "منتهي الصلاحية",
+      "reversed": "مُلغى"
+    },
+    "referralStatus": {
+      "created": "تم إنشاء الرابط",
+      "opened": "تم الفتح",
+      "redeemed": "تم الاستخدام",
+      "expired": "منتهي الصلاحية",
+      "blocked": "محظور"
+    },
+    "myMerchants": "تجّاري",
+    "merchantDashboard": "لوحة تحكم التاجر",
+    "sellTitle": "بِع على GiftHub",
+    "sellDescription": "هل تريد تقديم قسائم لعملائك؟ تواصل معنا وسنساعدك في إعداد حساب تاجر.",
+    "contactUs": "تواصل معنا",
+    "exploreVouchers": "استكشف القسائم"
+  },
+  "wishlist": {
+    "title": "قائمة أمنياتي",
+    "emptyTitle": "قائمة أمنياتك فارغة",
+    "emptyBody": "احفظ القسائم والتجار والحملات التي تعجبك لتجدها هنا لاحقًا.",
+    "browseOffers": "تصفّح العروض"
+  },
+  "push": {
+    "enable": "تفعيل الإشعارات الفورية",
+    "enabled": "الإشعارات الفورية مفعّلة",
+    "enabledToast": "تم تفعيل الإشعارات الفورية",
+    "disable": "إيقاف",
+    "disabledToast": "تم إيقاف الإشعارات الفورية",
+    "enableFailed": "تعذّر تفعيل الإشعارات الفورية. يُرجى المحاولة مرة أخرى.",
+    "disableFailed": "تعذّر إيقاف الإشعارات الفورية. يُرجى المحاولة مرة أخرى.",
+    "unsupported": "هذا المتصفح لا يدعم الإشعارات الفورية.",
+    "blocked": "الإشعارات محظورة. اسمح بها في إعدادات المتصفح لتفعيلها."
+  },
+  "sessions": {
+    "title": "الجلسات النشطة",
+    "description": "اطّلع على الأماكن التي سُجّل فيها الدخول إلى حسابك.",
+    "backToSettings": "العودة إلى الإعدادات",
+    "deviceOn": "{browser} على {os}",
+    "unknownDevice": "جهاز غير معروف",
+    "thisDevice": "هذا الجهاز",
+    "signedInHere": "أنت مسجّل الدخول هنا الآن.",
+    "otherDevicesTitle": "أجهزة أخرى",
+    "otherDevicesNone": "لا يمكننا عرض الأجهزة الأخرى التي قد تكون مسجّلًا الدخول عليها. إذا لاحظت أي شيء غير معتاد، فغيّر كلمة المرور وفعّل المصادقة الثنائية.",
+    "securitySettings": "إعدادات الأمان",
+    "lastActive": "آخر نشاط {time}",
+    "logout": "تسجيل الخروج",
+    "logoutAll": "تسجيل الخروج من جميع الأجهزة الأخرى",
+    "logoutAllBody": "إنهاء جميع الجلسات على الأجهزة الأخرى.",
+    "loadFailed": "تعذّر تحميل جلساتك.",
+    "revokeFailed": "تعذّر إنهاء الجلسة. يُرجى المحاولة مرة أخرى.",
+    "revoked": "تم إنهاء الجلسة.",
+    "revokedAll": "تم إنهاء الجلسات على الأجهزة الأخرى."
+  },
+  "achievements": {
+    "title": "الإنجازات",
+    "checkIn": "سجّل حضورك اليوم",
+    "checkingIn": "جارٍ تسجيل الحضور…",
+    "checkedInToday": "تم تسجيل الحضور اليوم",
+    "checkInFailed": "فشل تسجيل الحضور. يُرجى المحاولة مرة أخرى.",
+    "checkInSaved": "تم حفظ تسجيل الحضور",
+    "newBadge": "شارة جديدة: {name}",
+    "checkInPoints": "نقاط تسجيل الحضور",
+    "level": "المستوى",
+    "levelValue": "المستوى {level}",
+    "levelProgress": "التقدّم نحو المستوى التالي",
+    "badgesLabel": "الشارات",
+    "noBadgesYet": "لم تكتسب أي شارات بعد.",
+    "earnedOn": "اكتُسبت في {date}",
+    "locked": "لم تُكتسب بعد",
+    "howToEarn": "كيف تكسب النقاط",
+    "earnRuleCheckIn": "سجّل حضورك مرة واحدة يوميًا",
+    "pointsShort": "+{points} نقطة",
+    "pointsExplainer": "تُظهر النقاط والمستويات مدى نشاطك. لا يمكن استبدالها بالمال أو بالقسائم.",
+    "currentStreak": "السلسلة الحالية (أيام)",
+    "longestStreak": "أطول سلسلة (أيام)",
+    "milestone": "لقد بلغت إنجازًا جديدًا في سلسلتك!",
+    "badges": {
+      "first_purchase": {
+        "name": "أول عملية شراء",
+        "description": "اشتريت قسيمتك الأولى"
+      },
+      "first_redemption": {
+        "name": "أول استخدام",
+        "description": "استخدمت قسيمتك الأولى"
+      },
+      "5_referrals": {
+        "name": "حلقة الوصل",
+        "description": "شاركت 5 قسائم مع أصدقائك"
+      },
+      "10_referrals": {
+        "name": "المؤثّر",
+        "description": "شاركت 10 قسائم مع أصدقائك"
+      },
+      "streak_7": {
+        "name": "بطل الأسبوع",
+        "description": "سجّلت حضورك 7 أيام متتالية"
+      },
+      "streak_30": {
+        "name": "سيد الشهر",
+        "description": "سجّلت حضورك 30 يومًا متتاليًا"
+      },
+      "review_writer": {
+        "name": "المُقيِّم",
+        "description": "نشرت أول تقييم لك"
+      },
+      "big_spender": {
+        "name": "المنفق الكبير",
+        "description": "أنفقت أكثر من 10,000 على القسائم إجمالًا"
+      },
+      "early_adopter": {
+        "name": "من الأوائل",
+        "description": "انضممت إلى GiftHub قبل عام 2028"
+      },
+      "social_sharer": {
+        "name": "ناشر اجتماعي",
+        "description": "شاركت قسيمة على وسائل التواصل الاجتماعي"
+      }
+    }
+  },
+  "loyalty": {
+    "title": "الولاء",
+    "notActiveTitle": "مستويات الولاء غير متاحة بعد",
+    "notActiveBody": "لا تمنحك المشتريات نقاط ولاء بعد، ولا تُطبَّق أي خصومات أو مزايا للمستويات عند الدفع، لذلك لا توجد مستويات لعرضها هنا.",
+    "earnTodayTitle": "ما يمكنك كسبه اليوم",
+    "earnCreditTitle": "رصيد الإحالة",
+    "earnCreditBody": "شارك قسيمة. عندما يستخدمها صديقك، تحصل على رصيد لإنفاقه لدى ذلك التاجر.",
+    "earnCreditLink": "عرض رصيدك",
+    "earnPointsTitle": "نقاط تسجيل الحضور",
+    "earnPointsBody": "سجّل حضورك يوميًا لبناء سلسلة، والارتقاء في المستوى، وفتح الشارات.",
+    "earnPointsLink": "عرض الإنجازات",
+    "historyTitle": "سجل النقاط",
+    "pointsBalance": "رصيد النقاط: {points}"
+  },
+  "welcome": {
+    "greeting": "مرحبًا، {name}!",
+    "progress": "تقدّم الإعداد",
+    "setUpSecurity": "إعداد المصادقة الثنائية أو مفتاح مرور",
+    "skip": "تخطٍّ",
+    "next": "التالي",
+    "getStarted": "ابدأ الآن",
+    "steps": {
+      "welcome": {
+        "title": "مرحبًا بك في GiftHub!",
+        "subtitle": "إليك جولة سريعة على ما يمكنك فعله."
+      },
+      "discover": {
+        "title": "اكتشف العروض",
+        "subtitle": "تصفّح القسائم وبطاقات الهدايا والفعاليات من التجار المحليين.",
+        "features": {
+          "vouchers": "قسائم رقمية",
+          "giftCards": "بطاقات هدايا للأصدقاء والعائلة",
+          "nearby": "عروض بالقرب منك"
+        }
+      },
+      "wallet": {
+        "title": "قسائمك في مكان واحد",
+        "subtitle": "كل ما تشتريه يُحفظ في حسابك.",
+        "features": {
+          "qr": "رموز QR للاستخدام السريع في المتجر",
+          "expiry": "تذكيرات بالبريد الإلكتروني قبل انتهاء صلاحية القسيمة"
+        }
+      },
+      "rewards": {
+        "title": "اكسب المكافآت",
+        "subtitle": "شارك القسائم مع أصدقائك واكسب رصيدًا عندما يستخدمونها.",
+        "features": {
+          "referralCredit": "رصيد لدى التاجر مقابل الإحالات الناجحة",
+          "checkIns": "تسجيل حضور يومي وسلاسل متتالية",
+          "badges": "شارات لفتحها"
+        }
+      },
+      "notifications": {
+        "title": "ابقَ على اطلاع",
+        "subtitle": "فعّل الإشعارات على هذا الجهاز."
+      },
+      "security": {
+        "title": "أمّن حسابك",
+        "subtitle": "أضف مفتاح مرور أو المصادقة الثنائية."
+      }
+    }
+  },
+  "labels": {
+    "free": "مجاني",
+    "valueOff": "خصم {value}",
+    "valueCredit": "رصيد {value}",
+    "valueDiscount": "خصم {value}",
+    "demo": "تجريبي",
+    "demoHint": "محتوى نموذجي يوضّح طريقة عمل المنصة. ليس عرضاً حقيقياً.",
+    "category": {
+      "cafe": "مقاهٍ ومخابز",
+      "beauty": "تجميل وعافية",
+      "fitness": "لياقة ورياضة",
+      "events": "فعاليات وتذاكر",
+      "workshops": "ورش عمل ودورات",
+      "family": "العائلة والأطفال",
+      "travel": "سفر وإقامة",
+      "outdoor": "أنشطة خارجية ومغامرات",
+      "other": "أخرى",
+      "all": "جميع الفئات"
+    },
+    "voucherType": {
+      "percentage": "خصم بنسبة مئوية",
+      "fixed_amount": "خصم بمبلغ ثابت",
+      "credit_amount": "رصيد المتجر"
+    },
+    "voucherStatus": {
+      "draft": "مسودة",
+      "published": "منشورة",
+      "paused": "متوقفة مؤقتاً",
+      "ended": "منتهية",
+      "expired": "منتهية الصلاحية"
+    },
+    "campaignStatus": {
+      "draft": "مسودة",
+      "active": "نشطة",
+      "ended": "منتهية"
+    },
+    "campaignType": {
+      "limited": "عرض لمرة واحدة",
+      "weekly": "عرض أسبوعي"
+    },
+    "campaignTypeHelp": {
+      "limited": "يُطرح مرة واحدة بين تاريخ البدء وتاريخ الانتهاء، حتى نفاد الكمية.",
+      "weekly": "عرض أسبوعي متكرر يمكن للعملاء العودة إليه كل أسبوع حتى تاريخ الانتهاء."
+    }
+  },
+  "campaignCard": {
+    "sampleOffer": "عرض نموذجي · غير معروض للبيع",
+    "notOnSale": "غير متاح للبيع بعد",
+    "purchases": "{count, plural, zero {لا توجد عمليات شراء} one {عملية شراء واحدة} two {عمليتا شراء} few {# عمليات شراء} many {# عملية شراء} other {# عملية شراء}}",
+    "freeToClaim": "احصل عليه مجاناً",
+    "onSaleNow": "متاح للبيع الآن"
+  },
+  "account": {
+    "error": {
+      "title": "حدث خطأ ما",
+      "fallback": "حدث خطأ غير متوقع.",
+      "retry": "حاول مجدداً"
+    },
+    "dashboard": {
+      "metaTitle": "لوحة التحكم"
+    },
+    "cashback": {
+      "metaTitle": "الاسترداد النقدي والرصيد",
+      "title": "الاسترداد النقدي والرصيد",
+      "description": "كل الرصيد الذي كسبته لدى جميع التجار الذين تتسوق منهم.",
+      "lockedPending": "مجمّد (قيد الانتظار)",
+      "used": "مُستخدَم",
+      "expiringTitle": "ينتهي خلال 30 يوماً",
+      "expiresOn": "{merchant} — ينتهي في {date}",
+      "expiresSoon": "{merchant} — ينتهي قريباً",
+      "byMerchant": "حسب التاجر",
+      "lastActivity": "آخر نشاط {date}",
+      "readyToSpend": "جاهز للاستخدام",
+      "viewMerchantWallet": "عرض محفظة التاجر ←"
+    },
+    "nearby": {
+      "title": "عروض قريبة منك",
+      "subtitle": "اعثر على العروض والقسائم من التجار القريبين منك",
+      "useMyLocation": "استخدم موقعي",
+      "approximateLocation": "موقع تقريبي (بناءً على IP)",
+      "searchRadius": "نطاق البحث",
+      "yourLocation": "موقعك",
+      "mapLabel": "{count, plural, zero {لا يوجد تجار} one {تاجر واحد} two {تاجران} few {# تجار} many {# تاجراً} other {# تاجر}} ضمن {radius} كم",
+      "merchantsNearby": "{count, plural, zero {لا يوجد تجار قريبون} one {تاجر واحد قريب} two {تاجران قريبان} few {# تجار قريبين} many {# تاجراً قريباً} other {# تاجر قريب}}",
+      "activeVouchers": "{count, plural, zero {لا توجد قسائم نشطة} one {قسيمة نشطة واحدة} two {قسيمتان نشطتان} few {# قسائم نشطة} many {# قسيمة نشطة} other {# قسيمة نشطة}}",
+      "emptyTitle": "لا يوجد تجار بالقرب منك",
+      "emptyBody": "جرّب توسيع نطاق البحث أو تحقق لاحقاً من العروض الجديدة في منطقتك.",
+      "expandRadius": "توسيع النطاق إلى {radius} كم",
+      "errors": {
+        "fetchFailed": "تعذّر تحميل التجار القريبين. يُرجى المحاولة مجدداً.",
+        "geolocationUnsupported": "متصفحك لا يدعم تحديد الموقع الجغرافي.",
+        "permissionDenied": "تم رفض الوصول إلى الموقع. يُرجى تفعيل الموقع من إعدادات المتصفح.",
+        "positionUnavailable": "الموقع غير متاح. حاول مجدداً لاحقاً.",
+        "timeout": "انتهت مهلة طلب الموقع. حاول مجدداً.",
+        "locationFailed": "تعذّر الحصول على موقعك.",
+        "ipLocationFailed": "تعذّر تحديد موقعك."
+      }
+    },
+    "notificationSettings": {
+      "metaTitle": "إعدادات الإشعارات"
+    },
+    "redeem": {
+      "notFound": "لم يتم العثور على القسيمة.",
+      "codeUnavailable": "رمز القسيمة غير متاح.",
+      "backToWallet": "العودة إلى المحفظة",
+      "back": "رجوع"
+    },
+    "referrals": {
+      "metaTitle": "إحالاتي",
+      "completedCount": "المكتملة: {count}"
+    },
+    "voucherDetail": {
+      "back": "رجوع",
+      "merchantFallback": "التاجر",
+      "termsTitle": "الشروط والأحكام",
+      "terms1": "هذه القسيمة صالحة حتى تاريخ الانتهاء الموضّح أعلاه. لا يمكن دمجها مع عروض أو تخفيضات أخرى ما لم يُذكر خلاف ذلك.",
+      "terms2": "يجب تقديم القسيمة عند الشراء. ليس لها قيمة نقدية، ولا يمكن استبدالها نقداً أو استرداد قيمتها.",
+      "terms3": "يحتفظ التاجر بحق رفض استخدام القسيمة إذا بدت مكررة أو معدّلة أو مستخدمة بطريقة احتيالية.",
+      "terms4": "للاستفسارات أو المشكلات، يُرجى التواصل مع التاجر مباشرةً."
+    },
+    "vouchers": {
+      "unknownMerchant": "غير معروف",
+      "paidAmount": "المدفوع: {amount}",
+      "activeCount": "النشطة ({count})",
+      "pastCount": "السابقة ({count})"
+    },
+    "voucherCard": {
+      "showQr": "عرض رمز QR",
+      "close": "إغلاق",
+      "qrHint": "أظهر رمز QR هذا للتاجر لاستخدام القسيمة في المتجر."
+    },
+    "wallet": {
+      "metaTitle": "محفظتي"
+    },
+    "wishlist": {
+      "unknownItem": "عنصر غير معروف",
+      "merchant": "التاجر",
+      "campaign": "الحملة",
+      "validUntil": "صالحة حتى {date}",
+      "alertOn": "التنبيه مفعّل",
+      "noAlert": "بلا تنبيه",
+      "view": "عرض"
+    }
+  },
+  "offers": {
+    "detail": {
+      "unavailableTitle": "الحملة غير متاحة",
+      "metaDescriptionFallback": "عرض من {merchant}.",
+      "breadcrumbLabel": "مسار التنقل",
+      "breadcrumbCampaigns": "الحملات",
+      "demoNotice": "<strong>عرض نموذجي.</strong> توضّح هذه الصفحة شكل العرض على GiftHub. النشاط التجاري والعرض مجرد أمثلة: لا يمكن شراء أو استخدام أي شيء هنا.",
+      "verifiedPartner": "شريك موثّق",
+      "aboutTitle": "عن هذا العرض",
+      "descriptionFallback": "عرض خاص من أحد التجار على GiftHub.",
+      "howItWorks": {
+        "title": "كيف يعمل",
+        "claimTitle": "احصل على القسيمة",
+        "buyTitle": "اشترِ القسيمة",
+        "buyText": "ادفع بأمان عبر الإنترنت، أو احصل عليها مجاناً إذا كان العرض مجانياً.",
+        "qrTitle": "احصل على رمز QR",
+        "qrText": "تُحفظ القسيمة في محفظتك على GiftHub مع رمز QR شخصي.",
+        "showTitle": "أظهرها في المكان",
+        "showText": "يمسح {merchant} الرمز ويُطبَّق الخصم."
+      },
+      "termsTitle": "الشروط",
+      "voucherOptionsTitle": "خيارات القسيمة",
+      "voucherFallbackTitle": "قسيمة",
+      "viewVoucher": "عرض القسيمة",
+      "reviewsTitle": "التقييمات",
+      "purchaseLabel": "الشراء",
+      "buyNow": "اشترِ الآن",
+      "getFreeVoucher": "احصل على قسيمة مجانية",
+      "sampleOffer": "عرض نموذجي",
+      "notOnSaleYet": "غير متاح للبيع بعد",
+      "demoNotForSale": "هذا محتوى نموذجي، لذا لا يمكن شراؤه.",
+      "noVoucherYet": "لم ينشر {merchant} قسيمة لهذا العرض بعد. تحقق لاحقاً.",
+      "offerRuns": "مدة العرض",
+      "bought": "تم الشراء",
+      "boughtCount": "{count, plural, zero {ولا مرة} one {مرة واحدة} two {مرتين} few {# مرات} many {# مرة} other {# مرة}}",
+      "website": "الموقع الإلكتروني",
+      "allOffersFrom": "جميع العروض من {merchant}",
+      "moreFrom": "المزيد من {merchant}"
+    },
+    "list": {
+      "allCategories": "الكل",
+      "badge": "سوق الحملات المباشرة",
+      "heroTitle": "اكتشف أفضل العروض في أوروبا",
+      "heroSubtitle": "تصفّح القسائم والهدايا والتجارب المختارة من أفضل التجار في سوقك.",
+      "searchLabel": "البحث في الحملات",
+      "searchPlaceholder": "ابحث عن حملات أو تجار أو خدمات...",
+      "campaignCount": "{count, plural, zero {<b>#</b> حملة} one {<b>#</b> حملة} two {<b>#</b> حملتان} few {<b>#</b> حملات} many {<b>#</b> حملة} other {<b>#</b> حملة}}",
+      "voucherCount": "{count, plural, zero {<b>#</b> قسيمة معروضة للبيع} one {<b>#</b> قسيمة معروضة للبيع} two {<b>#</b> قسيمتان معروضتان للبيع} few {<b>#</b> قسائم معروضة للبيع} many {<b>#</b> قسيمة معروضة للبيع} other {<b>#</b> قسيمة معروضة للبيع}}",
+      "merchantCount": "{count, plural, zero {<b>#</b> تاجر} one {<b>#</b> تاجر} two {<b>#</b> تاجران} few {<b>#</b> تجار} many {<b>#</b> تاجراً} other {<b>#</b> تاجر}}",
+      "categoriesLabel": "الفئات",
+      "unavailableTitle": "الحملات غير متاحة مؤقتاً",
+      "unavailableText": "تعذّر الاتصال بقاعدة البيانات. يُرجى المحاولة مجدداً بعد قليل.",
+      "emptyTitle": "لم يتم العثور على عروض",
+      "emptyText": "جرّب بحثاً مختلفاً أو اختر فئة أخرى.",
+      "tryAgain": "حاول مجدداً",
+      "clearFilters": "مسح عوامل التصفية"
+    },
+    "listError": {
+      "title": "تعذّر تحميل الحملات",
+      "fallbackMessage": "حدث خطأ غير متوقع أثناء تحميل الحملات.",
+      "tryAgain": "حاول مجدداً"
+    },
+    "filters": {
+      "sortBy": "ترتيب حسب",
+      "sort": {
+        "newest": "الأحدث",
+        "oldest": "الأقدم",
+        "priceLow": "السعر: من الأقل إلى الأعلى",
+        "priceHigh": "السعر: من الأعلى إلى الأقل",
+        "popular": "الأكثر رواجاً",
+        "expiring": "ينتهي قريباً"
+      },
+      "merchant": "التاجر",
+      "allMerchants": "جميع التجار",
+      "minPrice": "أدنى سعر",
+      "minPricePlaceholder": "الحد الأدنى €",
+      "maxPrice": "أعلى سعر",
+      "maxPricePlaceholder": "الحد الأقصى €"
+    },
+    "tenantList": {
+      "title": "القسائم",
+      "subtitle": "العروض النشطة من {merchant}.",
+      "empty": "لا توجد قسائم متاحة بعد.",
+      "voucher": "قسيمة",
+      "viewVoucher": "عرض القسيمة"
+    },
+    "deals": {
+      "metaTitle": "العروض",
+      "metaDescription": "اكتشف أفضل عروض القسائم"
+    },
+    "campaignShare": {
+      "share": "مشاركة",
+      "copied": "تم النسخ",
+      "linkCopied": "تم نسخ الرابط",
+      "copyFailed": "فشل النسخ"
+    },
+    "shareSheet": {
+      "share": "مشاركة",
+      "title": {
+        "voucher": "شارك هذه القسيمة",
+        "campaign": "شارك هذه الحملة",
+        "merchant": "شارك هذا التاجر"
+      },
+      "close": "إغلاق",
+      "referralShareText": "{title} - شارك واسترد 10%!",
+      "referralNote": "<b>شارك واكسب 10%</b> عندما يستخدم أصدقاؤك القسيمة!",
+      "targets": {
+        "email": "البريد الإلكتروني",
+        "copy": "نسخ الرابط"
+      },
+      "copied": "تم النسخ!",
+      "linkCopiedToClipboard": "تم نسخ الرابط إلى الحافظة!",
+      "linkCopied": "تم نسخ الرابط!",
+      "shareLinkLabel": "رابط المشاركة",
+      "copyLink": "نسخ الرابط"
+    },
+    "wishlistButton": {
+      "add": "إضافة إلى قائمة الأمنيات",
+      "remove": "إزالة من قائمة الأمنيات"
+    }
+  },
+  "reviews": {
+    "stars": {
+      "starLabel": "{count, plural, zero {لا نجوم} one {نجمة واحدة} two {نجمتان} few {# نجوم} many {# نجمة} other {# نجمة}}"
+    },
+    "form": {
+      "title": "اكتب تقييماً",
+      "ratingLabel": "التقييم",
+      "titleLabel": "العنوان (اختياري)",
+      "titlePlaceholder": "لخّص تجربتك",
+      "commentLabel": "التعليق (اختياري)",
+      "commentPlaceholder": "شارك تجربتك...",
+      "submit": "إرسال التقييم",
+      "submitting": "جارٍ الإرسال...",
+      "ratingRequired": "يُرجى اختيار تقييم",
+      "submitFailed": "تعذّر إرسال التقييم",
+      "alreadyReviewed": "لقد قيّمت هذا العنصر من قبل",
+      "signInRequired": "سجّل الدخول لكتابة تقييم",
+      "thankYou": "شكراً على تقييمك!",
+      "writeAnother": "اكتب تقييماً آخر"
+    },
+    "list": {
+      "sort": {
+        "newest": "الأحدث",
+        "highest": "الأعلى تقييماً",
+        "helpful": "الأكثر فائدة"
+      },
+      "signInToReview": "سجّل الدخول لكتابة تقييم",
+      "loadFailed": "تعذّر تحميل التقييمات.",
+      "tryAgain": "حاول مجدداً",
+      "empty": "لا توجد تقييمات بعد.",
+      "anonymous": "مجهول",
+      "verified": "موثّق",
+      "helpfulButton": "مفيد ({count})",
+      "foundHelpful": "وجده {count} مفيداً",
+      "previous": "السابق",
+      "next": "التالي",
+      "pageOf": "الصفحة {current} من {total}"
+    }
+  },
+  "accountSecurity": {
+    "common": {
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ…",
+      "somethingWentWrong": "حدث خطأ ما"
+    },
+    "apiErrors": {
+      "notAuthenticated": "لم تتم المصادقة",
+      "unauthorized": "غير مصرّح",
+      "tooManyAttempts": "محاولات كثيرة جداً",
+      "validationFailed": "فشل التحقق من البيانات",
+      "unexpected": "حدث خطأ غير متوقع",
+      "databaseFailed": "فشلت عملية قاعدة البيانات",
+      "serviceUnavailable": "الخدمة غير متاحة مؤقتاً",
+      "newPasswordTooShort": "يجب أن تتكون كلمة المرور الجديدة من 8 أحرف على الأقل",
+      "userNotFound": "المستخدم غير موجود",
+      "currentPasswordRequired": "كلمة المرور الحالية مطلوبة",
+      "currentPasswordIncorrect": "كلمة المرور الحالية غير صحيحة",
+      "deletionUnavailable": "حذف الحساب غير متاح مؤقتاً. يُرجى التواصل مع الدعم.",
+      "totpAlreadyEnabledReconfigure": "المصادقة الثنائية مفعّلة بالفعل. عطّلها أولاً لإعادة إعدادها.",
+      "sixDigitCodeRequired": "مطلوب رمز من 6 أرقام",
+      "totpSetupMissing": "لم يتم العثور على إعداد TOTP. يُرجى بدء عملية الإعداد أولاً.",
+      "totpAlreadyEnabled": "المصادقة الثنائية مفعّلة بالفعل",
+      "invalidSetupCode": "رمز غير صالح. تحقق من تطبيق المصادقة وحاول مجدداً.",
+      "verificationCodeRequired": "رمز التحقق مطلوب",
+      "totpNotEnabled": "المصادقة الثنائية غير مفعّلة حالياً",
+      "invalidDisableCode": "رمز غير صالح. أدخل رمز TOTP الحالي أو رمزاً احتياطياً.",
+      "passkeyOptionsFailed": "تعذّر الحصول على خيارات التسجيل",
+      "passkeyGenerateOptionsFailed": "تعذّر إنشاء خيارات التسجيل",
+      "registrationFailed": "فشل التسجيل",
+      "passkeyRegistrationFailed": "فشل تسجيل مفتاح المرور",
+      "passkeyChallengeExpired": "انتهت صلاحية التحقق أو لم يتم العثور عليه",
+      "verificationFailed": "فشل التحقق",
+      "passkeyVerifyFailed": "تعذّر التحقق من التسجيل"
+    },
+    "settings": {
+      "joinedOn": "انضم في {date}",
+      "joinedRecently": "انضم مؤخراً"
+    },
+    "profileForm": {
+      "nameLabel": "الاسم",
+      "namePlaceholder": "اسمك",
+      "emailLabel": "البريد الإلكتروني",
+      "emailLocked": "لا يمكن تغيير البريد الإلكتروني",
+      "save": "حفظ التغييرات",
+      "updated": "تم تحديث الملف الشخصي",
+      "nameRequired": "الاسم مطلوب",
+      "updateFailed": "تعذّر تحديث الملف الشخصي"
+    },
+    "passwordForm": {
+      "currentLabel": "كلمة المرور الحالية",
+      "newLabel": "كلمة المرور الجديدة",
+      "setLabel": "تعيين كلمة المرور",
+      "confirmLabel": "تأكيد كلمة المرور",
+      "showPassword": "إظهار كلمة المرور",
+      "hidePassword": "إخفاء كلمة المرور",
+      "change": "تغيير كلمة المرور",
+      "set": "تعيين كلمة المرور",
+      "updated": "تم تحديث كلمة المرور بنجاح",
+      "tooShort": "يجب أن تتكون كلمة المرور من {min} أحرف على الأقل",
+      "mismatch": "كلمتا المرور غير متطابقتين",
+      "changeFailed": "تعذّر تغيير كلمة المرور"
+    },
+    "deleteDialog": {
+      "trigger": "حذف الحساب",
+      "title": "هل تريد حذف حسابك؟",
+      "description": "هذا الإجراء نهائي. سيتم حذف ملفك الشخصي وجلساتك وإعدادات الإشعارات، وسيتم إخفاء هوية سجل مشترياتك.",
+      "typeToConfirm": "اكتب <strong>{word}</strong> للتأكيد:",
+      "confirm": "حذف نهائياً",
+      "deleting": "جارٍ الحذف…",
+      "failed": "تعذّر حذف الحساب"
+    },
+    "passkeys": {
+      "title": "مفاتيح المرور",
+      "description": "سجّل الدخول دون كلمة مرور باستخدام بصمة الإصبع أو الوجه أو رمز PIN على جهازك.",
+      "add": "إضافة مفتاح مرور",
+      "namePlaceholder": "مثلاً: «MacBook Touch ID»",
+      "addSubmit": "إضافة",
+      "adding": "جارٍ الإضافة…",
+      "unsupported": "هذا المتصفح لا يدعم مفاتيح المرور. جرّب إصداراً حديثاً من Chrome أو Safari أو Edge.",
+      "empty": "لا توجد مفاتيح مرور بعد. أضف مفتاحاً لتفعيل تسجيل الدخول دون كلمة مرور.",
+      "devicePasskey": "مفتاح مرور الجهاز",
+      "passkey": "مفتاح مرور",
+      "added": "أُضيف في {date}",
+      "lastUsed": "آخر استخدام {date}",
+      "synced": "متزامن",
+      "removeConfirm": "إزالة؟",
+      "remove": "إزالة",
+      "removeLabel": "إزالة مفتاح المرور",
+      "loadFailed": "تعذّر تحميل مفاتيح المرور",
+      "removeFailed": "تعذّرت إزالة مفتاح المرور"
+    },
+    "security": {
+      "title": "الأمان",
+      "description": "إدارة المصادقة الثنائية وإعدادات الأمان",
+      "loading": "جارٍ التحميل...",
+      "backToSettings": "العودة إلى الإعدادات",
+      "enabledMessage": "تم تفعيل المصادقة الثنائية!",
+      "disabledMessage": "تم تعطيل المصادقة الثنائية",
+      "errors": {
+        "statusLoadFailed": "تعذّر تحميل حالة المصادقة الثنائية",
+        "setupFailed": "تعذّر بدء الإعداد",
+        "verifyFailed": "فشل التحقق",
+        "disableFailed": "تعذّر تعطيل المصادقة الثنائية"
+      },
+      "status": {
+        "title": "المصادقة الثنائية",
+        "enabledBody": "حسابك محمي بتطبيق مصادقة.",
+        "disabledBody": "أضف طبقة حماية إضافية لحسابك عبر طلب رمز من تطبيق المصادقة.",
+        "enabled": "مفعّلة",
+        "notEnabled": "غير مفعّلة"
+      },
+      "setup": {
+        "title": "إعداد تطبيق المصادقة",
+        "description": "استخدم تطبيقاً مثل Google Authenticator أو Authy أو 1Password لإنشاء رموز التحقق.",
+        "enable": "تفعيل المصادقة الثنائية"
+      },
+      "scan": {
+        "title": "امسح رمز QR أو أدخل المفتاح يدوياً",
+        "qrAlt": "امسح رمز QR هذا باستخدام تطبيق المصادقة",
+        "manualKey": "أو أدخل هذا المفتاح يدوياً:",
+        "copySecret": "نسخ المفتاح السري"
+      },
+      "verify": {
+        "title": "أدخل رمز التحقق",
+        "codeLabel": "الرمز المكوّن من 6 أرقام من تطبيقك",
+        "submit": "تحقق وفعّل"
+      },
+      "backupCodes": {
+        "title": "احفظ رموزك الاحتياطية",
+        "description": "احفظ هذه الرموز في مكان آمن. إذا فقدت الوصول إلى تطبيق المصادقة، يمكنك استخدام أحدها لتسجيل الدخول. يمكن استخدام كل رمز مرة واحدة فقط.",
+        "copy": "نسخ الرموز",
+        "copied": "تم النسخ!",
+        "download": "تنزيل",
+        "done": "تم"
+      },
+      "backupFile": {
+        "title": "GiftHub - الرموز الاحتياطية للمصادقة الثنائية",
+        "instructions": "احفظ هذه الرموز في مكان آمن. يمكن استخدام كل رمز مرة واحدة فقط.",
+        "generated": "تاريخ الإنشاء: {date}"
+      },
+      "disable": {
+        "title": "تعطيل المصادقة الثنائية",
+        "description": "سيؤدي هذا إلى إزالة طبقة الحماية الإضافية من حسابك.",
+        "button": "تعطيل المصادقة الثنائية",
+        "confirmTitle": "تأكيد تعطيل المصادقة الثنائية",
+        "confirmDescription": "أدخل الرمز الحالي المكوّن من 6 أرقام من تطبيق المصادقة، أو رمزاً احتياطياً.",
+        "codeLabel": "رمز التحقق",
+        "codePlaceholder": "000000 أو XXXX-XXXX",
+        "confirm": "تأكيد التعطيل"
+      },
+      "quickLinks": {
+        "title": "روابط الأمان السريعة",
+        "sessions": "عرض الجلسات النشطة",
+        "changePassword": "تغيير كلمة المرور"
+      }
+    }
+  },
+  "home": {
+    "meta": {
+      "description": "ادفع مقابل النتائج، لا مقابل الوصول. بنية إحالة يملكها التاجر: قسائم تحمل علامتك التجارية ورصيد للمتجر."
+    },
+    "error": {
+      "unexpected": "حدث خطأ غير متوقع."
+    },
+    "hero": {
+      "badge": "قسائم وإحالات للأنشطة التجارية المحلية",
+      "title": "عملاؤك يجلبون لك <highlight>عملاءك القادمين</highlight>",
+      "subtitle": "أنشئ حملات قسائم. يشاركها عملاؤك، ويكسبون رصيداً، ويجلبون أصدقاءهم. تتبّع كل إحالة، واعرف تكلفتك الدقيقة لكل عميل جديد.",
+      "ctaMerchant": "ابدأ كتاجر",
+      "ctaExplore": "استكشف الحملات",
+      "noCardRequired": "لا حاجة إلى بطاقة ائتمان",
+      "freeTrial": "تجربة مجانية لمدة {days} يوماً",
+      "cancelAnytime": "إلغاء في أي وقت"
+    },
+    "stats": {
+      "activeCampaigns": "الحملات النشطة",
+      "merchants": "التجار",
+      "processedValue": "القيمة المُعالجة"
+    },
+    "merchantsTitle": "التجار على المنصة",
+    "values": {
+      "referral": {
+        "title": "محرك الإحالات",
+        "description": "يشارك عملاؤك العروض ويجلبون عملاء جدداً تلقائياً"
+      },
+      "vouchers": {
+        "title": "قسائم رقمية",
+        "description": "أنشئ حملات خصم بقواعد مرنة في دقائق"
+      },
+      "qr": {
+        "title": "الاستخدام عبر QR",
+        "description": "امسح وتحقق في المتجر بهاتف فقط، دون الحاجة إلى أي أجهزة"
+      },
+      "analytics": {
+        "title": "تحليلات فورية",
+        "description": "اعرف بدقة تكلفة كل حملة وعائدها، دون تخمين"
+      }
+    },
+    "howItWorks": {
+      "title": "كيف يعمل",
+      "subtitle": "ابدأ في دقائق بثلاث خطوات بسيطة",
+      "steps": {
+        "create": {
+          "title": "أنشئ حملة",
+          "description": "أعِدّ قسيمة في دقيقتين: الخصم، والفترة الزمنية، والحد الأقصى للاستخدام. انتهى."
+        },
+        "share": {
+          "title": "يشاركها العملاء",
+          "description": "يحصل كل مشترٍ على رابط إحالة. يشاركه، ويكسب رصيداً، ويجلب أصدقاءه."
+        },
+        "grow": {
+          "title": "شاهد نموّك",
+          "description": "تتبّع كل سلسلة إحالات، واعرف تكلفتك لكل عميل جديد، وقِس العائد على الاستثمار."
+        }
+      }
+    },
+    "campaigns": {
+      "title": "استكشف الحملات الرائجة",
+      "subtitle": "اكتشف القسائم والعروض والتجارب في جميع أنحاء أوروبا",
+      "showing": "عرض {count, plural, zero {# حملة نشطة} one {حملة نشطة واحدة} two {حملتين نشطتين} few {# حملات نشطة} many {# حملة نشطة} other {# حملة نشطة}}.",
+      "showingWithOnSale": "عرض {count, plural, zero {# حملة نشطة} one {حملة نشطة واحدة} two {حملتين نشطتين} few {# حملات نشطة} many {# حملة نشطة} other {# حملة نشطة}} — {onSale} منها متاحة للبيع الآن.",
+      "emptyTitle": "لا توجد حملات نشطة حالياً",
+      "emptyBody": "تظهر العروض هنا فور نشرها من قِبل التجار.",
+      "viewAll": "عرض جميع الحملات"
+    },
+    "pricing": {
+      "title": "أسعار بسيطة وشفافة",
+      "subtitle": "اختر الخطة المناسبة لنشاطك التجاري. الفوترة السنوية تكلّف ما يعادل 10 أشهر فقط.",
+      "billingPeriod": "فترة الفوترة",
+      "monthly": "شهري",
+      "annual": "سنوي",
+      "save": "وفّر 17%",
+      "mostPopular": "الأكثر رواجاً",
+      "perMonth": "/شهرياً",
+      "perYear": "{price}/سنوياً (شهران مجاناً)",
+      "startTrial": "ابدأ التجربة المجانية",
+      "footer": "تشمل جميع الخطط تجربة مجانية لمدة {days} يوماً · رسوم معاملات {percent}% على مبيعات القسائم · إلغاء في أي وقت",
+      "planName": {
+        "starter": "Starter",
+        "pro": "Pro",
+        "scale": "Scale"
+      },
+      "features": {
+        "vouchersPerMonth": "{count, plural, zero {# قسيمة/شهرياً} one {قسيمة واحدة/شهرياً} two {قسيمتان/شهرياً} few {# قسائم/شهرياً} many {# قسيمة/شهرياً} other {# قسيمة/شهرياً}}",
+        "activeCampaigns": "{count, plural, zero {# حملة نشطة} one {حملة نشطة واحدة} two {حملتان نشطتان} few {# حملات نشطة} many {# حملة نشطة} other {# حملة نشطة}}",
+        "teamMembers": "{count, plural, zero {# عضو في الفريق} one {عضو واحد في الفريق} two {عضوان في الفريق} few {# أعضاء في الفريق} many {# عضواً في الفريق} other {# عضو في الفريق}}",
+        "qrRedemption": "استخدام القسائم عبر رمز QR",
+        "basicAnalytics": "تحليلات أساسية",
+        "advancedAnalytics": "تحليلات متقدمة",
+        "customDomain": "نطاق مخصص",
+        "promoBoosts": "تعزيزات ترويجية (بريد إلكتروني + إشعارات)",
+        "unlimitedVouchers": "قسائم غير محدودة",
+        "unlimitedCampaigns": "حملات غير محدودة",
+        "unlimitedTeamMembers": "أعضاء فريق غير محدودين",
+        "everythingInPlan": "كل ما في {plan}"
+      }
+    },
+    "calculator": {
+      "title": "احسب عائدك على الاستثمار",
+      "subtitle": "حرّك المؤشرات لترى كم يمكنك أن تكسب مع GiftHub",
+      "monthlyPurchases": "مشتريات القسائم الشهرية",
+      "purchasesValue": "{count, plural, zero {# عملية شراء} one {عملية شراء واحدة} two {عمليتا شراء} few {# عمليات شراء} many {# عملية شراء} other {# عملية شراء}}",
+      "averageTicket": "متوسط قيمة الطلب",
+      "referralRate": "معدل تحويل الإحالات",
+      "monthlyRevenue": "الإيرادات الشهرية",
+      "referralCustomers": "عملاء جدد عبر الإحالة",
+      "perMonthValue": "{value}/شهرياً",
+      "referralRevenue": "إيرادات الإحالات",
+      "estimatedRoi": "العائد المتوقع على الاستثمار",
+      "platformCost": "تكلفة المنصة",
+      "platformCostValue": "خطة {plan}/شهرياً + رسوم {fees} ({percent}%) = <strong>{total}/شهرياً</strong>",
+      "disclaimer": "للتوضيح فقط، بناءً على القيم التي تُدخلها — وليست توقعات."
+    },
+    "why": {
+      "title": "لماذا يحب التجار GiftHub",
+      "body": "وسّع قاعدة عملائك وزِد إيراداتك — مع الحفاظ على هوامش ربحك وامتلاك علاقتك بعملائك.",
+      "benefits": {
+        "referralEngine": "محرك إحالات مدمج في كل حملة",
+        "analytics": "تحليلات فورية: تكلفة اكتساب العميل والعائد على الاستثمار",
+        "qr": "استخدام القسائم عبر QR — دون الحاجة إلى أجهزة نقاط بيع",
+        "languages": "متاح بـ{count, plural, zero {# لغة} one {لغة واحدة} two {لغتين} few {# لغات} many {# لغة} other {# لغة}}",
+        "flatPlan": "اشتراك شهري ثابت — لا تقاسم للإيرادات كما في Groupon",
+        "ownData": "أنت تملك بيانات عملائك",
+        "fee": "رسوم معاملات {percent}% على مبيعات القسائم، دون تكاليف خفية"
+      }
+    },
+    "compare": {
+      "title": "Groupon مقابل GiftHub",
+      "hint": "اسحب للمقارنة",
+      "beforeTitle": "مع Groupon",
+      "afterTitle": "مع GiftHub",
+      "sliderLabel": "قارن بين {before} و{after}",
+      "before": {
+        "revenueShare": "حصة كبيرة من الإيرادات تأخذها المنصة",
+        "ownsRelationship": "المنصة تملك العلاقة مع العميل",
+        "noDataAccess": "لا وصول إلى بيانات العملاء",
+        "raceToBottom": "سباق نحو أدنى الأسعار",
+        "lostBrand": "ضياع هوية العلامة التجارية"
+      },
+      "after": {
+        "flatFee": "اشتراك ثابت {minPrice}–{maxPrice}/شهرياً + رسوم {percent}%",
+        "ownData": "أنت تملك جميع بيانات العملاء",
+        "referralEngine": "محرك إحالات مدمج",
+        "yourBrand": "علامتك التجارية، قواعدك",
+        "roiAnalytics": "تحليلات فورية للعائد على الاستثمار"
+      }
+    },
+    "faq": {
+      "title": "الأسئلة الشائعة",
+      "subtitle": "كل ما تحتاج معرفته عن GiftHub",
+      "items": {
+        "groupon": {
+          "question": "ما الفرق بينكم وبين Groupon؟",
+          "answer": "عادةً ما تحتفظ مواقع العروض المشابهة لـGroupon بحصة كبيرة من كل عملية بيع وتملك العلاقة مع العميل. نحن نفرض رسوماً شهرية ثابتة (بدءاً من {price}/شهرياً) إضافة إلى {percent}% على مبيعات القسائم. تحتفظ أنت بعملائك وبياناتك وهوامش ربحك."
+        },
+        "referral": {
+          "question": "كيف يعمل نظام الإحالة؟",
+          "answer": "يحصل كل عميل يشتري قسيمة على رابط إحالة فريد. عندما يشاركه ويشتري صديقه، يكسب كلاهما رصيداً. تُتتبَّع كل سلسلة إحالات لتعرف بدقة كيف يصل إليك العملاء الجدد."
+        },
+        "trial": {
+          "question": "ماذا يحدث بعد انتهاء التجربة المجانية لمدة {days} يوماً؟",
+          "answer": "تختار خطة ({starter} أو {pro} أو {scale}). إذا لم تشترك، تبقى قسائمك المنشورة نشطة للعملاء، لكن لا يمكنك إنشاء حملات جديدة حتى تشترك."
+        },
+        "qr": {
+          "question": "هل أحتاج إلى أجهزة خاصة لاستخدام القسائم عبر QR؟",
+          "answer": "لا. يفتح موظفوك الماسح عبر متصفح أي هاتف، ويمسحون رمز QR الخاص بالعميل، وانتهى الأمر. لا حاجة لتنزيل تطبيق ولا لربط نظام نقاط البيع."
+        },
+        "fee": {
+          "question": "ما رسوم المعاملات البالغة {percent}%؟",
+          "answer": "عندما يشتري عميل قسيمة عبر المنصة، نقتطع {percent}% من المبلغ المحوَّل إليك. لا توجد أي رسوم أخرى للمنصة إضافة إلى خطتك."
+        }
+      }
+    },
+    "cta": {
+      "title": "توقف عن استئجار العملاء. ابنِ جيشك الخاص.",
+      "body": "أنشئ حملتك الأولى في دقائق، ويتولى عملاؤك الباقي. تجربة مجانية لمدة {days} يوماً.",
+      "getStarted": "ابدأ مجاناً",
+      "browse": "تصفح الحملات"
+    }
+  },
+  "portal": {
+    "checkoutDemo": {
+      "title": "عرض تجريبي للدفع",
+      "subtitle": "صفحة دفع تجريبية",
+      "creditBalance": "رصيدك",
+      "availableAmount": "{amount} متاح",
+      "lockedAmount": "{amount} مجمّد",
+      "orderSummary": "ملخص الطلب",
+      "orderAmount": "مبلغ الطلب",
+      "creditToApply": "الرصيد المراد استخدامه",
+      "maxAmount": "الحد الأقصى: {amount}",
+      "subtotal": "المجموع الفرعي",
+      "creditAppliedLine": "الرصيد المطبّق",
+      "total": "الإجمالي",
+      "processing": "جارٍ المعالجة...",
+      "submit": "استخدم الرصيد وأكمل الطلب",
+      "creditApplied": "تم تطبيق الرصيد بنجاح! إجمالي الطلب: {total}",
+      "errors": {
+        "missingAmounts": "يُرجى إدخال مبلغ الطلب ومبلغ الرصيد",
+        "applyFailed": "تعذّر تطبيق الرصيد"
+      }
+    },
+    "vouchers": {
+      "title": "{merchant} - القسائم المتاحة",
+      "emptyTitle": "لا توجد قسائم متاحة",
+      "emptyDescription": "تحقق لاحقاً من عروض القسائم الجديدة من {merchant}.",
+      "specialOffer": "عرض خاص",
+      "validUntil": "صالحة حتى {date}",
+      "viewAndShare": "عرض ومشاركة"
+    },
+    "wallet": {
+      "subtitle": "محفظة الرصيد",
+      "availableToUse": "متاح للاستخدام",
+      "useCredit": "استخدام الرصيد",
+      "noCreditToUse": "لا يوجد رصيد للاستخدام",
+      "locked": "مجمّد",
+      "lockedDescription": "يُفعَّل عند تأكيد عملية الشراء المرتبطة.",
+      "historyTitle": "سجل الرصيد",
+      "historyDescription": "سجل الحركات لدى {merchant}",
+      "historyEmpty": "لا يوجد سجل رصيد بعد.",
+      "expires": "ينتهي في {date}",
+      "creditStatus": {
+        "locked": "مجمّد",
+        "available": "متاح",
+        "used": "مُستخدَم",
+        "expired": "منتهي الصلاحية",
+        "reversed": "مُلغى"
+      }
+    },
+    "error": {
+      "title": "حدث خطأ ما",
+      "description": "تعذّر تحميل البوابة. يُرجى تحديث الصفحة أو المحاولة لاحقاً.",
+      "backToPortal": "العودة إلى البوابة"
+    },
+    "payments": {
+      "voucherFallback": "قسيمة",
+      "status": {
+        "pending": "قيد الانتظار",
+        "paid": "مدفوع",
+        "failed": "فشل",
+        "refunded": "مُسترَد"
+      }
+    },
+    "tickets": {
+      "status": {
+        "available": "متاحة",
+        "sold": "مُباعة",
+        "used": "مُستخدَمة",
+        "cancelled": "ملغاة",
+        "refunded": "مُستردّة"
+      }
+    }
+  },
+  "site": {
+    "error": {
+      "title": "حدث خطأ ما",
+      "description": "حدث خطأ أثناء تحميل هذه الصفحة."
+    },
+    "notFound": {
+      "metaTitle": "الصفحة غير موجودة"
+    },
+    "header": {
+      "mainNavLabel": "الرئيسية",
+      "signIn": "تسجيل الدخول"
+    },
+    "footer": {
+      "navLabel": "تذييل الصفحة",
+      "copyright": "© {year} GiftHub. صُنع في أوروبا."
+    },
+    "navLinks": {
+      "campaigns": "الحملات",
+      "merchants": "التجار",
+      "explore": "استكشف",
+      "search": "بحث",
+      "faq": "الأسئلة الشائعة",
+      "contact": "تواصل معنا",
+      "privacy": "الخصوصية",
+      "terms": "الشروط",
+      "home": "الرئيسية",
+      "about": "من نحن",
+      "vouchers": "القسائم",
+      "shop": "المتجر",
+      "rent": "الاستئجار"
+    },
+    "chat": {
+      "openAssistant": "فتح المساعد الآلي",
+      "closeAssistant": "إغلاق المساعد الآلي",
+      "dialogLabel": "المساعد الآلي لـGiftHub",
+      "title": "مساعد GiftHub",
+      "subtitle": "مساعد آلي",
+      "newChat": "محادثة جديدة",
+      "closeChat": "إغلاق المحادثة",
+      "greeting": "مرحباً!",
+      "intro": "أنا مساعد آلي. اسألني عن القسائم أو بطاقات الهدايا أو التذاكر أو حسابك.",
+      "inputLabel": "رسالة إلى المساعد الآلي",
+      "placeholder": "اكتب رسالة...",
+      "send": "إرسال الرسالة",
+      "sendError": "عذراً، واجهت مشكلة في إرسال رسالتك. يُرجى المحاولة مجدداً."
+    },
+    "cookies": {
+      "regionLabel": "تفضيلات ملفات تعريف الارتباط",
+      "intro": "نستخدم ملفات تعريف الارتباط لتحسين تجربتك. ملفات تعريف الارتباط الضرورية نشطة دائماً، وأنت تختار ما تسمح به من الملفات الاختيارية. <link>سياسة الخصوصية</link>",
+      "optionalLegend": "ملفات تعريف الارتباط الاختيارية",
+      "necessary": "ضرورية",
+      "alwaysOn": "(مفعّلة دائماً)",
+      "analytics": "التحليلات",
+      "marketing": "التسويق",
+      "preferences": "التفضيلات",
+      "saveError": "تعذّر حفظ اختيارك. يُرجى المحاولة مجدداً.",
+      "acceptAll": "قبول الكل",
+      "declineOptional": "رفض الاختيارية",
+      "customize": "تخصيص",
+      "savePreferences": "حفظ التفضيلات"
+    },
+    "currency": {
+      "selectLabel": "اختر العملة"
+    },
+    "language": {
+      "selectLabel": "اختر اللغة",
+      "selectInterfaceLabel": "اختر لغة الواجهة ({language})",
+      "unknown": "غير معروفة",
+      "interfaceOnly": "يغيّر نصوص الواجهة فقط",
+      "uiName": "{name} (الواجهة)"
+    },
+    "country": {
+      "selectLabel": "اختر السوق ({country})",
+      "heading": "اختر السوق",
+      "description": "يغيّر الدولة والعملة وبيانات السوق فقط",
+      "tip": "<strong>نصيحة:</strong> يحدد السوق البيانات والعملة المعروضة. تُضبط لغة الواجهة بشكل منفصل."
+    },
+    "roleSwitcher": {
+      "myDashboard": "لوحة التحكم",
+      "platformAdmin": "مسؤول المنصة",
+      "admin": "المسؤول",
+      "staff": "الموظفون",
+      "switchContext": "تبديل السياق"
+    },
+    "legalEntity": {
+      "operator": "المشغّل",
+      "registeredAddress": "العنوان المسجّل",
+      "registryCode": "رقم السجل التجاري",
+      "operatorPlaceholder": "[سيُضاف اسم الشركة]",
+      "addressPlaceholder": "[سيُضاف العنوان المسجّل]",
+      "registryCodePlaceholder": "[سيُضاف رقم السجل التجاري]"
+    },
+    "theme": {
+      "dark": "الوضع الداكن",
+      "light": "الوضع الفاتح",
+      "system": "مظهر النظام"
+    },
+    "voiceSearch": {
+      "start": "بدء البحث الصوتي",
+      "stop": "إيقاف الاستماع",
+      "tooltip": "البحث الصوتي",
+      "tapToStop": "اضغط للإيقاف"
+    }
+  },
+  "directory": {
+    "hubError": {
+      "title": "تعذّر تحميل الدليل",
+      "description": "حدث خطأ غير متوقع أثناء تحميل التجار.",
+      "retry": "حاول مجدداً"
+    },
+    "hub": {
+      "metaTitle": "التجار",
+      "metaDescription": "الأنشطة التجارية المحلية على GiftHub وعروضها الحالية",
+      "title": "التجار المحليون",
+      "subtitle": "مقاهٍ وصالونات واستوديوهات والمزيد: تعرّف على من يوجد على GiftHub وما يقدّمه الآن.",
+      "loadError": "تعذّر تحميل التجار",
+      "loadErrorHint": "يُرجى المحاولة مجدداً بعد قليل.",
+      "retry": "حاول مجدداً",
+      "emptyTitle": "لا يوجد تجار بعد",
+      "emptyHint": "تظهر الأنشطة التجارية هنا فور انضمامها.",
+      "joinCta": "انضم كتاجر",
+      "noOffers": "لا توجد عروض حالياً",
+      "offerCount": "{count, plural, zero {لا توجد عروض} one {عرض واحد} two {عرضان} few {# عروض} many {# عرضاً} other {# عرض}}"
+    },
+    "merchantPage": {
+      "notFoundTitle": "غير موجود",
+      "metaDescription": "تصفّح القسائم والحملات والعروض من {name}",
+      "offerCount": "{count, plural, zero {لا توجد عروض} one {عرض واحد} two {عرضان} few {# عروض} many {# عرضاً} other {# عرض}}",
+      "website": "الموقع الإلكتروني",
+      "contact": "تواصل",
+      "sampleNotice": "<strong>نشاط تجاري نموذجي.</strong> توضّح هذه الصفحة شكل صفحة التاجر على GiftHub. عروضه مجرد أمثلة ولا يمكن شراؤها.",
+      "offersHeading": "العروض",
+      "noOffers": "لا توجد عروض حالياً",
+      "noOffersHint": "ستظهر العروض الجديدة من {name} هنا.",
+      "browseOther": "تصفح عروضاً أخرى",
+      "validUntil": "صالح حتى {date}"
+    },
+    "tenantShell": {
+      "campaigns": "الحملات",
+      "mainNav": "الرئيسية",
+      "signIn": "تسجيل الدخول"
+    },
+    "sitePage": {
+      "hubHeroTitle": "اكتشف التجار المحليين",
+      "hubHeroSubtitle": "تصفّح الحملات والقسائم وخدمات الاستئجار والمتاجر من التجار على GiftHub.",
+      "tenantHeroSubtitle": "استكشف المنتجات وخدمات الاستئجار والقسائم في مكان واحد.",
+      "browseCampaigns": "تصفح الحملات",
+      "getStarted": "ابدأ الآن",
+      "featuredMerchants": "تجار مميزون",
+      "noMerchants": "لا يوجد تجار بعد.",
+      "visitNamed": "زيارة {name}",
+      "visitMerchant": "زيارة التاجر",
+      "featuredProducts": "منتجات مميزة",
+      "noProducts": "لا توجد منتجات متاحة.",
+      "rentalHighlights": "أبرز عناصر الاستئجار",
+      "noRentals": "لا توجد عناصر متاحة للاستئجار.",
+      "perDay": "{price} / يوم",
+      "activeVouchers": "القسائم النشطة",
+      "noStandaloneVouchers": "لا توجد قسائم مستقلة هنا حالياً — <link>تصفّح {count, plural, zero {# حملة نشطة} one {حملة نشطة واحدة} two {حملتين نشطتين} few {# حملات نشطة} many {# حملة نشطة} other {# حملة نشطة}}</link>.",
+      "noVouchers": "لا توجد قسائم متاحة.",
+      "voucher": "قسيمة",
+      "viewVoucher": "عرض القسيمة",
+      "stats": {
+        "campaigns": "الحملات",
+        "vouchers": "القسائم",
+        "products": "المنتجات",
+        "rentals": "عناصر الاستئجار"
+      },
+      "statsUnavailable": "الإحصائيات غير متاحة."
+    }
+  },
+  "shop": {
+    "shopPage": {
+      "title": "المتجر",
+      "subtitle": "تصفّح المنتجات وأضفها إلى السلة."
+    },
+    "shopClient": {
+      "intentCreatedTitle": "تم إنشاء طلب الدفع",
+      "intentCreatedDescription": "الطلب {id} بقيمة {amount}",
+      "checkoutErrorTitle": "خطأ في الدفع",
+      "checkoutErrorDescription": "تعذّر إنشاء طلب الدفع.",
+      "empty": "لا توجد منتجات متاحة بعد.",
+      "productHighlight": "منتج مميز",
+      "add": "إضافة",
+      "cart": "السلة",
+      "cartEmpty": "السلة فارغة.",
+      "lineQuantity": "{quantity} × {price}",
+      "remove": "إزالة",
+      "total": "الإجمالي",
+      "creatingIntent": "جارٍ إنشاء طلب الدفع...",
+      "checkoutIntent": "إنشاء طلب الدفع"
+    },
+    "rentPage": {
+      "metaTitle": "سوق الاستئجار",
+      "metaDescription": "تصفّح العناصر المتاحة للاستئجار",
+      "title": "الاستئجار",
+      "subtitle": "اختر التواريخ واطلب عرض سعر للاستئجار."
+    },
+    "rentClient": {
+      "selectDatesError": "يُرجى اختيار تواريخ الاستئجار.",
+      "bookingFailed": "فشل الحجز",
+      "bookingCreated": "تم إنشاء طلب حجز لـ{name}. الإجمالي: {total}.",
+      "bookingSubmitted": "تم إرسال الحجز",
+      "bookingCreateFailed": "تعذّر إنشاء حجز الاستئجار.",
+      "bookingCancelled": "تم إلغاء الحجز.",
+      "cancelFailed": "تعذّر إلغاء الحجز.",
+      "datesHeading": "تواريخ الاستئجار",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "daysSelected": "{count, plural, zero {لم يتم اختيار أي يوم استئجار.} one {تم اختيار يوم استئجار واحد.} two {تم اختيار يومَي استئجار.} few {تم اختيار # أيام استئجار.} many {تم اختيار # يوم استئجار.} other {تم اختيار # يوم استئجار.}}",
+      "selectDatesHint": "اختر التواريخ لحساب السعر.",
+      "empty": "لا توجد عناصر متاحة للاستئجار بعد.",
+      "rentalHighlight": "عنصر استئجار مميز",
+      "perDay": "{price} / يوم",
+      "weeklyRate": "أسبوعياً: {price}",
+      "select": "اختيار",
+      "selectedHeading": "العنصر المختار",
+      "estimatedTotal": "الإجمالي التقديري",
+      "notesLabel": "ملاحظات (اختياري)",
+      "notesPlaceholder": "أي طلبات خاصة...",
+      "submitting": "جارٍ إرسال الحجز...",
+      "requestBooking": "طلب حجز استئجار",
+      "myBookings": "حجوزاتي",
+      "noBookings": "لا توجد حجوزات استئجار بعد. اختر عنصراً أعلاه للبدء.",
+      "bookingRange": "{start} - {end} ({days, plural, zero {# يوم} one {يوم واحد} two {يومان} few {# أيام} many {# يوماً} other {# يوم}})",
+      "bookingTotal": "الإجمالي: {total}",
+      "rejectionReason": "السبب: {reason}",
+      "cancelling": "جارٍ الإلغاء...",
+      "cancel": "إلغاء",
+      "status": {
+        "pending": "قيد الانتظار",
+        "approved": "مقبول",
+        "rejected": "مرفوض",
+        "paid": "مدفوع",
+        "active": "نشط",
+        "returned": "تمت الإعادة",
+        "cancelled": "ملغى"
+      }
+    },
+    "boxes": {
+      "metaTitle": "صناديق الاشتراك",
+      "metaDescription": "اشترك في صناديق قسائم شهرية مختارة من تجارك المحليين المفضلين — عروض جديدة في كل دورة، مع إمكانية الإلغاء في أي وقت.",
+      "title": "صناديق الاشتراك",
+      "subtitle": "احصل على قسائم مختارة تصلك بشكل دوري من أفضل التجار.",
+      "empty": "لا توجد صناديق اشتراك متاحة بعد. تحقق قريباً!",
+      "byMerchant": "من {name}",
+      "perInterval": "/{interval}",
+      "details": "التفاصيل",
+      "subscribe": "اشترك",
+      "subscribedTitle": "تم الاشتراك",
+      "subscribedMessage": "أنت مشترك الآن. تحقق من بريدك الإلكتروني للاطلاع على التفاصيل.",
+      "subscribeFailed": "تعذّر الاشتراك. يُرجى المحاولة مجدداً.",
+      "notFoundTitle": "الصندوق غير موجود",
+      "notFoundHint": "صندوق الاشتراك هذا غير متاح.",
+      "browseAll": "→ تصفح جميع الصناديق",
+      "backToAll": "→ جميع صناديق الاشتراك",
+      "subscriberCount": "{count, plural, zero {لا يوجد مشتركون} one {مشترك واحد} two {مشتركان} few {# مشتركين} many {# مشتركاً} other {# مشترك}}",
+      "whatsInside": "محتويات الصندوق",
+      "curatingNext": "حتى {count, plural, zero {# قسيمة مختارة} one {قسيمة مختارة واحدة} two {قسيمتين مختارتين} few {# قسائم مختارة} many {# قسيمة مختارة} other {# قسيمة مختارة}} {period}. يجري الآن اختيار محتوى الشحنة القادمة.",
+      "percentVoucher": "قسيمة خصم {value}%",
+      "amountVoucher": "قسيمة بقيمة {amount}",
+      "curatedVoucher": "قسيمة مختارة",
+      "subscribing": "جارٍ الاشتراك…",
+      "subscribeWithPrice": "اشترك — {price}/{interval}",
+      "interval": {
+        "weekly": "أسبوع",
+        "monthly": "شهر",
+        "quarterly": "ربع سنة"
+      },
+      "intervalEach": {
+        "weekly": "أسبوعياً",
+        "monthly": "شهرياً",
+        "quarterly": "كل ربع سنة"
+      }
+    }
+  },
+  "searchPage": {
+    "metaTitle": "بحث",
+    "metaDescription": "ابحث في الحملات والقسائم النشطة من التجار على GiftHub.",
+    "loadingSearch": "جارٍ تحميل البحث",
+    "title": "البحث في العروض",
+    "subtitle": "اعثر على الحملات والقسائم من التجار على GiftHub",
+    "queryLabel": "ابحث في الحملات والقسائم والتجار",
+    "queryPlaceholder": "ابحث عن حملات أو قسائم أو تجار...",
+    "toggleFilters": "إظهار/إخفاء عوامل التصفية",
+    "filtersTitle": "عوامل التصفية",
+    "closeFilters": "إغلاق عوامل التصفية",
+    "error": "البحث غير متاح حالياً. يُرجى المحاولة مجدداً بعد قليل.",
+    "campaignsHeading": "الحملات",
+    "vouchersHeading": "القسائم",
+    "browseMarketplace": "تصفّح كل ما هو معروض للبيع في <link>سوق الحملات</link>.",
+    "campaignEnds": "تنتهي في {date}",
+    "filters": {
+      "title": "عوامل التصفية",
+      "clearAll": "مسح الكل",
+      "category": "الفئة",
+      "discountType": "نوع الخصم",
+      "minDiscount": "أدنى خصم",
+      "minDiscountAria": "الحد الأدنى للخصم",
+      "maxPrice": "أعلى سعر",
+      "maxPriceAria": "الحد الأقصى للسعر باليورو",
+      "any": "أي",
+      "sortBy": "ترتيب حسب",
+      "types": {
+        "all": "جميع الأنواع",
+        "percentage": "خصم بنسبة مئوية",
+        "fixed_amount": "مبلغ ثابت",
+        "credit_amount": "رصيد المتجر"
+      },
+      "sort": {
+        "newest": "الأحدث أولاً",
+        "popular": "الأكثر رواجاً",
+        "expiring": "ينتهي قريباً"
+      }
+    },
+    "results": {
+      "chipCategory": "الفئة: {value}",
+      "chipType": "النوع: {value}",
+      "chipMinDiscount": "خصم {value}% على الأقل",
+      "chipMaxPrice": "حتى €{value}",
+      "chipSort": "الترتيب: {value}",
+      "removeFilter": "إزالة عامل التصفية {label}",
+      "searching": "جارٍ البحث...",
+      "count": "{total, plural, zero {<num>#</num> نتيجة} one {<num>#</num> نتيجة} two {<num>#</num> نتيجتان} few {<num>#</num> نتائج} many {<num>#</num> نتيجة} other {<num>#</num> نتيجة}}",
+      "countForQuery": "{total, plural, zero {<num>#</num> نتيجة لـ«<hl>{query}</hl>»} one {<num>#</num> نتيجة لـ«<hl>{query}</hl>»} two {<num>#</num> نتيجتان لـ«<hl>{query}</hl>»} few {<num>#</num> نتائج لـ«<hl>{query}</hl>»} many {<num>#</num> نتيجة لـ«<hl>{query}</hl>»} other {<num>#</num> نتيجة لـ«<hl>{query}</hl>»}}",
+      "flash": "عرض خاطف",
+      "voucherFallback": "قسيمة",
+      "expires": "تنتهي في {date}",
+      "redeemed": "استُخدمت {count} مرة",
+      "noResultsTitle": "لم يتم العثور على نتائج",
+      "noResultsQuery": "لا توجد قسائم تطابق «{query}». جرّب تعديل عوامل التصفية.",
+      "noResultsHint": "جرّب البحث عن قسيمة أو تاجر أو فئة محددة."
+    }
+  },
+  "faq": {
+    "metaTitle": "الأسئلة الشائعة",
+    "metaDescription": "إجابات عن الأسئلة الشائعة حول شراء القسائم وبطاقات الهدايا واستخدامها وإدارتها — المدفوعات والاسترداد وانتهاء الصلاحية ودعم التجار.",
+    "title": "الأسئلة الشائعة",
+    "subtitle": "اعثر على إجابات للأسئلة الشائعة حول منصتنا.",
+    "categories": {
+      "general": "عام",
+      "purchasing": "الشراء والمدفوعات",
+      "vouchers": "القسائم واستخدامها",
+      "account": "الحساب والأمان",
+      "merchants": "للتجار",
+      "loyalty": "الولاء والمكافآت"
+    },
+    "items": {
+      "whatIs": {
+        "q": "ما هو GiftHub؟",
+        "a": "GiftHub سوق رقمي للقسائم وبطاقات الهدايا وتذاكر الفعاليات يربط التجار بالعملاء. يمكن للتجار إنشاء منتجات رقمية وبيعها، ويمكن للعملاء شراؤها وإهداؤها واستخدامها."
+      },
+      "isFree": {
+        "q": "هل استخدام المنصة مجاني؟",
+        "a": "التصفح وإنشاء الحساب مجانيان. يدفع العملاء فقط مقابل المنتجات التي يشترونها. ويدفع التجار اشتراكاً شهرياً إضافة إلى رسوم معاملات بنسبة {fee}% على مبيعات القسائم."
+      },
+      "countries": {
+        "q": "ما الدول المدعومة؟",
+        "a": "ندعم التجار والعملاء في جميع أنحاء الاتحاد الأوروبي، بـ{currencies} عملات و{languages} لغة."
+      },
+      "howToBuy": {
+        "q": "كيف أشتري قسيمة؟",
+        "a": "تصفّح القسائم المتاحة، واضغط على «شراء»، وأكمل الدفع عبر Stripe. ستظهر قسيمتك في محفظتك فور الدفع."
+      },
+      "paymentMethods": {
+        "q": "ما طرق الدفع المقبولة؟",
+        "a": "تتم معالجة المدفوعات بأمان عبر Stripe. تظهر طرق الدفع المتاحة لعملية الشراء عند الدفع."
+      },
+      "refund": {
+        "q": "هل يمكنني استرداد المبلغ؟",
+        "a": "يحدد كل تاجر سياسة الاسترداد الخاصة به. راجع صفحة تفاصيل القسيمة للاطلاع على سياسة الاسترداد قبل الشراء."
+      },
+      "howToRedeem": {
+        "q": "كيف أستخدم قسيمة؟",
+        "a": "افتح محفظتك، واختر القسيمة، وأظهر رمز QR للتاجر ليمسحه ويؤكد الاستخدام. يمكنك أيضاً استخدامها بإدخال الرمز يدوياً."
+      },
+      "expiry": {
+        "q": "ماذا يحدث عند انتهاء صلاحية القسيمة؟",
+        "a": "لا يمكن استخدام القسائم منتهية الصلاحية. ستتلقى إشعاراً قبل انتهاء الصلاحية. تحقق من تواريخ الانتهاء في محفظتك."
+      },
+      "gift": {
+        "q": "هل يمكنني إهداء قسيمة لشخص ما؟",
+        "a": "نعم! عند الشراء، اختر «إرسال كهدية» وأدخل البريد الإلكتروني للمستلم. سيتلقى القسيمة مع رسالة شخصية."
+      },
+      "twoFactor": {
+        "q": "كيف أفعّل المصادقة الثنائية؟",
+        "a": "انتقل إلى الإعدادات ← الأمان ← المصادقة الثنائية. يمكنك إعداد TOTP (Google Authenticator) أو استخدام مفتاح مرور (المصادقة الحيوية)."
+      },
+      "biometrics": {
+        "q": "هل يمكنني تسجيل الدخول بالبصمة أو الوجه؟",
+        "a": "نعم! ندعم المصادقة بمفاتيح المرور — سجّل الدخول باستخدام Face ID أو بصمة الإصبع أو Windows Hello. أعِدّها من الإعدادات ← الأمان."
+      },
+      "deleteAccount": {
+        "q": "كيف أحذف حسابي؟",
+        "a": "انتقل إلى الإعدادات ← الخصوصية ← حذف الحساب. ستُمحى جميع بياناتك خلال 30 يوماً وفقاً لسياسة الامتثال للائحة GDPR. يمكنك تصدير بياناتك أولاً."
+      },
+      "startSelling": {
+        "q": "كيف أبدأ البيع؟",
+        "a": "سجّل كتاجر، وأكمل خطوات الإعداد، وأنشئ قسيمتك الأولى. يمكنك البدء بالبيع فور الموافقة على ملفك."
+      },
+      "fees": {
+        "q": "ما رسوم المنصة؟",
+        "a": "بعد تجربة مجانية لمدة {trialDays} يوماً، تكلّف الخطط {starter} {starterPrice} أو {pro} {proPrice} أو {scale} {scalePrice} شهرياً (الفوترة السنوية: شهران مجاناً)، إضافة إلى رسوم معاملات بنسبة {fee}% على مبيعات القسائم تُقتطع من المبلغ المحوَّل إليك."
+      },
+      "integrations": {
+        "q": "هل يمكنني الربط مع أنظمتي الحالية؟",
+        "a": "نعم! نوفّر خطافات الويب (webhooks) لإشعارات الأحداث الفورية، ومفاتيح API للوصول البرمجي، وتكاملات مع Zapier وSlack وDiscord."
+      },
+      "trackSales": {
+        "q": "كيف أتتبع مبيعاتي؟",
+        "a": "تعرض لوحة تحكم التاجر تحليلات فورية تشمل الإيرادات وعمليات الاستخدام ورؤى العملاء، إضافة إلى استعلامات باللغة الطبيعية مدعومة بالذكاء الاصطناعي («اعرض إيرادات الأسبوع الماضي»)."
+      },
+      "loyalty": {
+        "q": "كيف يعمل برنامج الولاء؟",
+        "a": "اكسب النقاط عبر الشراء، وتسجيل الحضور اليومي، والإحالات، وكتابة التقييمات. تفتح النقاط مستويات (برونزي ← فضي ← ذهبي ← بلاتيني ← ماسي) بمزايا متزايدة."
+      },
+      "badges": {
+        "q": "ما هي الشارات وسلاسل النشاط؟",
+        "a": "الشارات إنجازات تُكسب عند بلوغ محطات معينة (أول عملية شراء، 10 إحالات، وغيرها). وتتتبع سلاسل النشاط الأيام المتتالية من النشاط وتكافئ المواظبة."
+      }
+    }
+  },
+  "contact": {
+    "metaTitle": "تواصل معنا",
+    "metaDescription": "تواصل مع فريق GiftHub — أسئلة حول قسائمك، أو انضمام التجار، أو الفوترة، أو استفسارات الشراكة.",
+    "title": "تواصل معنا",
+    "subtitle": "هل لديك سؤال؟ يسعدنا أن نسمع منك.",
+    "email": "البريد الإلكتروني",
+    "assistantTitle": "المساعد الآلي",
+    "assistantText": "إجابات سريعة عن القسائم وحسابك عبر زر المحادثة في الزاوية. إنه مساعد آلي، وليس شخصاً.",
+    "name": "الاسم",
+    "subject": "الموضوع",
+    "message": "الرسالة",
+    "sent": "تم إرسال الرسالة! سنرد عليك قريباً.",
+    "unavailableWithEmail": "نموذج التواصل غير متاح حالياً. يُرجى مراسلتنا على {email}.",
+    "unavailable": "نموذج التواصل غير متاح حالياً. يُرجى المحاولة لاحقاً.",
+    "error": "تعذّر الإرسال. يُرجى المحاولة مجدداً بعد قليل.",
+    "sending": "جارٍ الإرسال...",
+    "send": "إرسال الرسالة"
+  },
+  "leaderboardPage": {
+    "metaTitle": "أفضل التجار",
+    "metaDescription": "التجار الأكثر استخداماً للقسائم على GiftHub خلال آخر 30 يوماً",
+    "title": "أفضل التجار",
+    "subtitle": "الأكثر استخداماً للقسائم خلال آخر 30 يوماً",
+    "rank": "المرتبة {rank}",
+    "redemptions": "{count, plural, zero {<num>#</num><label>عملية استخدام</label>} one {<num>#</num><label>عملية استخدام</label>} two {<num>#</num><label>عمليتا استخدام</label>} few {<num>#</num><label>عمليات استخدام</label>} many {<num>#</num><label>عملية استخدام</label>} other {<num>#</num><label>عملية استخدام</label>}}",
+    "empty": "لا توجد عمليات استخدام خلال آخر 30 يوماً بعد، لذا لا يوجد ترتيب لعرضه.",
+    "browseCampaigns": "تصفح الحملات النشطة"
+  },
+  "ui": {
+    "close": "إغلاق",
+    "more": "المزيد",
+    "loading": "جارٍ التحميل...",
+    "breadcrumb": {
+      "label": "مسار التنقل"
+    },
+    "pagination": {
+      "label": "التنقل بين الصفحات",
+      "previousAria": "الانتقال إلى الصفحة السابقة",
+      "previous": "السابق",
+      "nextAria": "الانتقال إلى الصفحة التالية",
+      "next": "التالي",
+      "morePages": "مزيد من الصفحات"
+    },
+    "toast": {
+      "dismiss": "تجاهل الإشعار"
+    },
+    "calendar": {
+      "previousMonth": "الانتقال إلى الشهر السابق",
+      "nextMonth": "الانتقال إلى الشهر التالي"
+    },
+    "datePicker": {
+      "placeholder": "اختر تاريخاً"
+    },
+    "combobox": {
+      "placeholder": "اختر خياراً...",
+      "empty": "لم يتم العثور على خيارات.",
+      "search": "بحث..."
+    },
+    "searchInput": {
+      "clear": "مسح البحث"
+    },
+    "searchResults": {
+      "empty": "لم يتم العثور على نتائج",
+      "noResultsFor": "لم يتم العثور على نتائج لـ«{query}». جرّب كلمات مختلفة."
+    },
+    "commandPalette": {
+      "placeholder": "بحث...",
+      "noResults": "لم يتم العثور على نتائج",
+      "toOpen": "للفتح",
+      "other": "أخرى",
+      "hostPlaceholder": "إلى أين تريد الذهاب؟",
+      "categories": {
+        "navigate": "التنقل",
+        "discover": "استكشف",
+        "account": "الحساب"
+      },
+      "items": {
+        "home": {
+          "label": "الرئيسية",
+          "description": "الصفحة الرئيسية"
+        },
+        "app": {
+          "label": "لوحة التحكم",
+          "description": "قسائمك ومحفظتك ونشاطك"
+        },
+        "vouchers": {
+          "label": "قسائمي"
+        },
+        "wallet": {
+          "label": "المحفظة",
+          "description": "أرصدتك"
+        },
+        "gifts": {
+          "label": "مركز الهدايا",
+          "description": "تصفّح الهدايا وأرسلها"
+        },
+        "campaigns": {
+          "label": "الحملات",
+          "description": "حملات القسائم النشطة"
+        },
+        "hub": {
+          "label": "دليل التجار",
+          "description": "تصفّح التجار"
+        },
+        "deals": {
+          "label": "العروض"
+        },
+        "settings": {
+          "label": "الإعدادات",
+          "description": "الحساب والتفضيلات"
+        },
+        "admin": {
+          "label": "الإدارة",
+          "description": "إدارة المنصة"
+        }
+      }
+    },
+    "confirmDialog": {
+      "confirm": "تأكيد",
+      "cancel": "إلغاء"
+    },
+    "dataTable": {
+      "noResults": "لا توجد نتائج."
+    },
+    "fileUpload": {
+      "maxFiles": "الحد الأقصى المسموح {maxFiles, plural, zero {# ملف} one {ملف واحد} two {ملفان} few {# ملفات} many {# ملفاً} other {# ملف}}",
+      "tooLarge": "يجب أن يكون حجم الملفات أقل من {maxSize} ميغابايت",
+      "dropHere": "أفلت الملفات هنا",
+      "dragDrop": "اسحب الملفات وأفلتها هنا",
+      "browseHint": "أو انقر للتصفح (الحد الأقصى {maxSize} ميغابايت لكل ملف)",
+      "select": "اختر الملفات",
+      "remove": "إزالة {name}"
+    },
+    "imageUpload": {
+      "notImage": "يُرجى رفع ملف صورة",
+      "tooLarge": "يجب أن يكون حجم الصورة أقل من {maxSize} ميغابايت",
+      "previewAlt": "معاينة",
+      "remove": "إزالة الصورة",
+      "dropHere": "أفلت الصورة هنا",
+      "upload": "رفع صورة",
+      "hint": "PNG أو JPG أو GIF حتى {maxSize} ميغابايت",
+      "select": "اختر صورة"
+    },
+    "statsCard": {
+      "open": "فتح"
+    },
+    "cashbackBadge": {
+      "label": "استرداد نقدي {percent}%"
+    },
+    "voucherCard": {
+      "status": {
+        "active": "نشطة",
+        "redeemed": "مستخدمة",
+        "expired": "منتهية الصلاحية"
+      },
+      "redeem": "استخدام",
+      "expires": "تنتهي في {date}",
+      "merchantAlt": "التاجر"
+    }
+  },
+  "authPages": {
+    "meta": {
+      "signIn": "تسجيل الدخول",
+      "register": "إنشاء حساب",
+      "resetPassword": "إعادة تعيين كلمة المرور"
+    },
+    "error": {
+      "title": "حدث خطأ ما",
+      "fallback": "حدث خطأ غير متوقع.",
+      "tryAgain": "حاول مجدداً"
+    },
+    "login": {
+      "welcome": "مرحباً بعودتك",
+      "subtitle": "سجّل الدخول إلى حسابك على GiftHub",
+      "tabMagic": "رابط سحري",
+      "tabPassword": "كلمة المرور",
+      "tabSocial": "التواصل الاجتماعي",
+      "tabPasskey": "مفتاح المرور",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "كلمة المرور",
+      "sendCode": "إرسال رمز الدخول",
+      "sending": "جارٍ الإرسال…",
+      "signIn": "تسجيل الدخول",
+      "signingIn": "جارٍ تسجيل الدخول…",
+      "otpTitle": "تحقق من بريدك الإلكتروني!",
+      "otpDesc": "أرسلنا رمزاً من 6 أرقام إلى <b>{email}</b>",
+      "otpLabel": "أدخل الرمز",
+      "verify": "تحقق من الرمز",
+      "verifying": "جارٍ التحقق…",
+      "resend": "إعادة إرسال الرمز",
+      "backToEmail": "رجوع",
+      "orContinueWith": "أو تابع باستخدام",
+      "continueWith": "المتابعة باستخدام {provider}",
+      "errorWrongCode": "الرمز غير صالح أو منتهي الصلاحية. يُرجى المحاولة مجدداً.",
+      "errorWrongPass": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+      "errorGeneric": "حدث خطأ ما. يُرجى المحاولة مجدداً.",
+      "errorEmailUnavailable": "تسجيل الدخول عبر البريد الإلكتروني غير متاح حالياً — استخدم كلمة المرور.",
+      "errorCredentialsSignin": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+      "errorAuthGeneric": "فشل تسجيل الدخول. يُرجى المحاولة مجدداً.",
+      "backToHome": "العودة إلى الصفحة الرئيسية",
+      "socialDesc": "سجّل الدخول فوراً باستخدام حسابك المفضل",
+      "noAccount": "ليس لديك حساب بعد؟",
+      "createAccount": "إنشاء حساب",
+      "noAccountSub": "تسجيل الدخول برمز ينشئ حساباً جديداً لأي بريد إلكتروني جديد.",
+      "registered": "تم إنشاء الحساب — سجّل الدخول ببريدك الإلكتروني وكلمة المرور.",
+      "magicDesc": "سنرسل رمزاً من 6 أرقام إلى بريدك الإلكتروني. لا حاجة إلى كلمة مرور.",
+      "passwordDesc": "سجّل الدخول ببريدك الإلكتروني وكلمة المرور.",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "demo": "حسابات تجريبية",
+      "demoRole": {
+        "platformAdmin": "مسؤول المنصة",
+        "merchantAdmin": "مسؤول التاجر",
+        "merchantStaff": "موظف التاجر",
+        "endUser": "مستخدم نهائي"
+      },
+      "passkeyDesc": "سجّل الدخول فوراً ببصمة الإصبع أو الوجه أو مفتاح الأمان.",
+      "passkeyButton": "تسجيل الدخول بمفتاح المرور",
+      "passkeyAuthenticating": "جارٍ المصادقة…"
+    },
+    "register": {
+      "backToHome": "العودة إلى الصفحة الرئيسية",
+      "title": "أنشئ حسابك",
+      "subtitle": "ابدأ باكتشاف القسائم وإدارتها",
+      "nameLabel": "الاسم الكامل",
+      "namePlaceholder": "سارة أحمد",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "8 أحرف على الأقل",
+      "submit": "إنشاء حساب",
+      "submitting": "جارٍ إنشاء الحساب...",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول",
+      "errorWeak": "كلمة المرور ضعيفة جداً. يُرجى اختيار كلمة مرور أقوى.",
+      "errorInvalid": "إدخال غير صالح.",
+      "errorFallback": "حدث خطأ ما.",
+      "errorGeneric": "حدث خطأ ما. يُرجى المحاولة مجدداً."
+    },
+    "resetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "أدخل كلمة المرور الجديدة أدناه",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "submit": "تعيين كلمة المرور الجديدة",
+      "submitting": "جارٍ إعادة التعيين…",
+      "success": "تمت إعادة تعيين كلمة المرور!",
+      "successDesc": "تم تحديث كلمة المرور. يمكنك الآن تسجيل الدخول.",
+      "goToLogin": "الانتقال إلى تسجيل الدخول",
+      "errorMismatch": "كلمتا المرور غير متطابقتين",
+      "errorShort": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+      "errorWeak": "كلمة المرور ضعيفة جداً. يُرجى اختيار كلمة مرور أقوى.",
+      "errorExpired": "رابط إعادة التعيين هذا غير صالح أو منتهي الصلاحية.",
+      "forgotTitle": "نسيت كلمة المرور؟",
+      "forgotSubtitle": "أدخل بريدك الإلكتروني وسنرسل لك رابطاً لإعادة التعيين",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "you@example.com",
+      "sendLink": "إرسال رابط إعادة التعيين",
+      "sending": "جارٍ الإرسال…",
+      "linkSent": "تحقق من بريدك الإلكتروني!",
+      "linkSentDesc": "إذا كان هناك حساب مرتبط بهذا البريد الإلكتروني، فقد أرسلنا رابط إعادة التعيين.",
+      "backToLogin": "العودة إلى تسجيل الدخول"
+    },
+    "acceptInvitation": {
+      "welcomeTitle": "مرحباً بك معنا!",
+      "joined": "لقد انضممت إلى {orgName}. جارٍ إعادة التوجيه…",
+      "accepted": "تم قبول الدعوة. جارٍ إعادة التوجيه…",
+      "problemTitle": "مشكلة في الدعوة",
+      "errorNotAccepted": "تعذّر قبول هذه الدعوة.",
+      "errorGeneric": "حدث خطأ ما. يُرجى المحاولة مجدداً.",
+      "goToOrgs": "الانتقال إلى مؤسساتك",
+      "invitedTitle": "لقد تمت دعوتك",
+      "invitedDesc": "اقبل هذه الدعوة للانضمام إلى المؤسسة. قد يُطلب منك تسجيل الدخول أولاً.",
+      "accepting": "جارٍ القبول…",
+      "accept": "قبول الدعوة"
+    }
+  },
+  "giftsPages": {
+    "meta": {
+      "title": "بطاقات الهدايا والإهداء",
+      "description": "تصفّح بطاقات الهدايا الرقمية من التجار المحليين واشترِها. أرسل هدية مميزة في ثوانٍ — تُرسل بالبريد الإلكتروني وتُستخدم في المتجر أو عبر الإنترنت."
+    },
+    "publicCard": {
+      "defaultHeadline": "بطاقة هدايا",
+      "imageAlt": "بطاقة هدايا",
+      "logoAlt": "شعار العلامة التجارية",
+      "merchant": "التاجر: {name}",
+      "merchantFallback": "التاجر",
+      "code": "الرمز: {code}",
+      "validUntil": "صالحة حتى: {date}",
+      "noExpiry": "بلا تاريخ انتهاء",
+      "showQr": "أظهر رمز QR هذا للموظف لاستخدام بطاقة الهدايا.",
+      "statusMessage": "حالة بطاقة الهدايا هذه: {status}.",
+      "status": {
+        "active": "نشطة",
+        "redeemed": "مستخدمة",
+        "expired": "منتهية الصلاحية",
+        "cancelled": "ملغاة"
+      }
+    },
+    "purchase": {
+      "title": "شراء بطاقة هدايا",
+      "loading": "جارٍ التحميل...",
+      "notAvailable": "بطاقة الهدايا غير متاحة",
+      "defaultHeadline": "بطاقة هدايا",
+      "imageAlt": "بطاقة هدايا",
+      "logoAlt": "العلامة التجارية",
+      "fromMerchant": "من {merchant}",
+      "form": {
+        "recipientEmail": "البريد الإلكتروني للمستلم (اختياري)",
+        "recipientEmailPlaceholder": "أرسل بطاقة الهدايا إلى هذا البريد الإلكتروني",
+        "recipientName": "اسم المستلم",
+        "recipientNamePlaceholder": "إلى",
+        "senderName": "اسمك",
+        "senderNamePlaceholder": "من",
+        "message": "رسالة شخصية (اختياري)",
+        "messagePlaceholder": "أضف رسالة شخصية..."
+      },
+      "total": "الإجمالي:",
+      "processing": "جارٍ المعالجة...",
+      "buy": "شراء بطاقة الهدايا",
+      "errors": {
+        "notFound": "بطاقة الهدايا غير موجودة أو غير متاحة للشراء",
+        "loadFailed": "تعذّر تحميل بطاقة الهدايا",
+        "purchaseFailed": "فشلت عملية الشراء",
+        "generic": "حدث خطأ ما. يُرجى المحاولة مجدداً."
+      }
+    },
+    "product": {
+      "notFound": "الهدية غير موجودة",
+      "backToHub": "العودة إلى مركز الهدايا",
+      "imageAlt": "{title} {index}",
+      "featured": "مميز",
+      "lowStock": "متبقٍ {count} فقط في المخزون",
+      "buyNow": "اشترِ الآن",
+      "addToCart": "أضف إلى السلة",
+      "saveToWishlist": "حفظ في قائمة الأمنيات",
+      "removeFromWishlist": "إزالة من قائمة الأمنيات",
+      "share": "شارك هذه الهدية",
+      "upsellsTitle": "قد يعجبك أيضاً"
+    },
+    "claim": {
+      "metaTitle": "استلم هديتك",
+      "alreadyClaimedTitle": "تم استلام الهدية بالفعل",
+      "alreadyClaimedBody": "تم استلام هذه الهدية من قبل.",
+      "expiredTitle": "انتهت صلاحية الهدية",
+      "expiredBody": "عذراً، انتهت صلاحية رابط الهدية هذا.",
+      "title": "لديك هدية!",
+      "signedInHint": "اضغط أدناه لإضافة هذه القسيمة إلى محفظتك.",
+      "signedOutHint": "سجّل الدخول لاستلام هذه القسيمة.",
+      "claimButton": "استلام الهدية",
+      "signInButton": "سجّل الدخول للاستلام"
+    },
+    "error": {
+      "title": "تعذّر تحميل مركز الهدايا",
+      "fallback": "حدث خطأ غير متوقع أثناء تحميل الهدايا.",
+      "retry": "حاول مجدداً"
+    },
+    "hub": {
+      "title": "الهدايا",
+      "subtitle": "اعثر على الهدية المثالية لكل مناسبة",
+      "loadError": "تعذّر تحميل الهدايا",
+      "retry": "حاول مجدداً",
+      "emptyCatalog": {
+        "title": "لا توجد هدايا معروضة بعد",
+        "body": "في هذه الأثناء، تُعدّ قسائم التجار المحليين هدايا رائعة أيضاً."
+      },
+      "noMatches": "لا توجد هدايا تطابق عوامل التصفية هذه",
+      "clearFilters": "مسح عوامل التصفية",
+      "browseCampaigns": "تصفح الحملات",
+      "allGifts": "جميع الهدايا",
+      "loadMore": "تحميل المزيد"
+    },
+    "redeem": {
+      "notFound": {
+        "title": "بطاقة الهدايا غير موجودة",
+        "body": "رمز QR غير صالح أو منتهي الصلاحية."
+      },
+      "notActive": {
+        "title": "بطاقة الهدايا غير مفعّلة بعد",
+        "body": "ستصبح بطاقة الهدايا هذه صالحة في وقت لاحق."
+      },
+      "expired": {
+        "title": "انتهت صلاحية بطاقة الهدايا",
+        "body": "بطاقة الهدايا هذه لم تعد صالحة."
+      },
+      "result": {
+        "title": "تم استخدام بطاقة الهدايا",
+        "confirmed": "تم تأكيد الاستخدام بنجاح.",
+        "alreadyRedeemedOrCancelled": "تم استخدام بطاقة الهدايا هذه أو إلغاؤها من قبل.",
+        "alreadyRedeemedOrInvalid": "تم استخدام بطاقة الهدايا هذه من قبل أو أنها غير صالحة."
+      }
+    },
+    "qr": {
+      "error": "تعذّر إنشاء رمز QR",
+      "generating": "جارٍ إنشاء رمز QR...",
+      "alt": "رمز QR"
+    },
+    "wizard": {
+      "title": "مساعد اختيار الهدايا بالذكاء الاصطناعي",
+      "subtitle": "أخبرنا عن المستلم وسنجد لك الهدية المثالية",
+      "steps": {
+        "recipient": "لمن الهدية؟",
+        "occasion": "ما المناسبة؟",
+        "budget": "ما ميزانيتك؟"
+      },
+      "recipients": {
+        "partner": "شريك الحياة",
+        "friend": "صديق",
+        "parent": "أحد الوالدين",
+        "colleague": "زميل",
+        "child": "طفل",
+        "teacher": "معلّم"
+      },
+      "occasions": {
+        "birthday": "عيد ميلاد",
+        "christmas": "عيد الميلاد المجيد",
+        "anniversary": "ذكرى سنوية",
+        "thankYou": "شكر وتقدير",
+        "justBecause": "بلا مناسبة",
+        "graduation": "تخرّج"
+      },
+      "summary": {
+        "for": "لـ: {recipient}",
+        "budget": "الميزانية: {amount}"
+      },
+      "submit": "اعثر على الهدايا المثالية",
+      "error": "تعذّر إنشاء الاقتراحات. يُرجى المحاولة مجدداً.",
+      "results": {
+        "found": "وجدنا لك {count, plural, zero {# هدية} one {هدية واحدة} two {هديتين} few {# هدايا} many {# هدية} other {# هدية}}:",
+        "empty": "لم يتم العثور على منتجات مطابقة. جرّب تعديل معاييرك."
+      },
+      "startOver": "البدء من جديد"
+    },
+    "card": {
+      "featured": "مميز",
+      "save": "حفظ",
+      "unsave": "إلغاء الحفظ",
+      "buyNow": "اشترِ الآن"
+    },
+    "feedSection": {
+      "viewAll": "عرض الكل"
+    },
+    "filters": {
+      "toggle": "عوامل التصفية",
+      "clear": "مسح",
+      "occasion": "المناسبة",
+      "persona": "لمن الهدية؟",
+      "budget": "الميزانية",
+      "budgetUnder": "أقل من {amount}"
+    }
+  },
+  "purchase": {
+    "meta": {
+      "referralsDescription": "شارك العروض واكسب المكافآت"
+    },
+    "paymentErrorBoundary": {
+      "unexpected": "حدث خطأ غير متوقع."
+    },
+    "logoAlt": "شعار {name}",
+    "merchantFallback": "التاجر",
+    "validUntil": "صالحة حتى {date}",
+    "validUntilWithLimit": "صالحة حتى {date} - {count, plural, zero {أول # استخدام} one {الاستخدام الأول فقط} two {أول استخدامين} few {أول # استخدامات} many {أول # استخداماً} other {أول # استخدام}}",
+    "offAtMerchant": "خصم {value} لدى {merchant}",
+    "fields": {
+      "event": "الفعالية",
+      "dateTime": "التاريخ والوقت",
+      "location": "الموقع",
+      "price": "السعر",
+      "status": "الحالة",
+      "attendee": "الحاضر",
+      "usedAt": "تاريخ الاستخدام"
+    },
+    "ticketStatus": {
+      "available": "متاحة",
+      "sold": "مُباعة",
+      "used": "مستخدمة",
+      "cancelled": "ملغاة",
+      "refunded": "مُستردّة"
+    },
+    "event": {
+      "notAvailable": "هذه الفعالية غير متاحة لشراء التذاكر.",
+      "descriptionFallback": "انضم إلينا في هذه الفعالية الرائعة!",
+      "availableTickets": "التذاكر المتاحة",
+      "soldOut": "نفدت التذاكر",
+      "availableCount": "{count} متاحة",
+      "terms": "الشروط والأحكام",
+      "soldOutTitle": "نفدت تذاكر هذه الفعالية",
+      "soldOutDescription": "تم شراء جميع التذاكر."
+    },
+    "eventPurchase": {
+      "title": "شراء تذكرة",
+      "description": "اختر تذكرة وأكمل عملية الشراء",
+      "selectTicket": "اختر تذكرة",
+      "attendeeNameLabel": "اسم الحاضر (اختياري)",
+      "attendeeNamePlaceholder": "اسم الشخص الذي سيحضر",
+      "attendeeEmailLabel": "البريد الإلكتروني للحاضر (اختياري)",
+      "attendeeEmailPlaceholder": "البريد الإلكتروني لاستلام التذكرة",
+      "total": "الإجمالي",
+      "submit": "شراء التذكرة",
+      "noTickets": "لا توجد تذاكر متاحة حالياً.",
+      "checkBackLater": "يُرجى التحقق لاحقاً أو التواصل مع منظم الفعالية.",
+      "selectTicketError": "يُرجى اختيار تذكرة",
+      "purchaseFailed": "تعذّر شراء التذكرة"
+    },
+    "ticket": {
+      "noPermission": "ليس لديك إذن لعرض هذه التذكرة.",
+      "heading": "التذكرة رقم {number}",
+      "qrTitle": "رمز QR",
+      "qrDescription": "أظهر رمز QR هذا عند مدخل الفعالية",
+      "qrAlt": "رمز QR للتذكرة",
+      "qrUnavailable": "رمز QR غير متاح",
+      "ticketNumber": "رقم التذكرة: <strong>{number}</strong>",
+      "used": "تم استخدام التذكرة",
+      "detailsTitle": "تفاصيل التذكرة",
+      "detailsDescription": "معلومات مهمة حول تذكرتك",
+      "staffCanRedeem": "بصفتك موظفاً لدى التاجر، يمكنك استخدام هذه التذكرة في الفعالية."
+    },
+    "redeem": {
+      "notFoundTitle": "عملية الاستخدام غير موجودة",
+      "notFoundDescription": "رمز QR غير صالح أو منتهي الصلاحية.",
+      "title": "تم استخدام القسيمة",
+      "alreadyRedeemed": "تم استخدام هذه القسيمة من قبل.",
+      "confirmed": "تم تأكيد الاستخدام بنجاح."
+    },
+    "qrCheckout": {
+      "title": "الدفع عبر QR",
+      "completeTitle": "اكتمل الدفع",
+      "completeDescription": "تم تأكيد عملية الشراء. تحقق من بريدك الإلكتروني للاطلاع على التفاصيل.",
+      "payNow": "ادفع الآن",
+      "confirming": "جارٍ التأكيد..."
+    },
+    "voucherPage": {
+      "notFoundTitle": "القسيمة غير موجودة",
+      "notFoundDescription": "تعذّر العثور على القسيمة التي تبحث عنها.",
+      "descriptionFallback": "عرض قسيمة حصري",
+      "shareText": "اطّلع على هذه القسيمة من {merchant}",
+      "copyCode": "نسخ رمز القسيمة",
+      "qrAlt": "رمز QR للقسيمة {code}",
+      "print": "طباعة القسيمة"
+    },
+    "referralPage": {
+      "voucherFrom": "حصلت على قسيمة من <highlight>{name}</highlight>",
+      "qrAlt": "رمز QR لاستخدام القسيمة {code}",
+      "offAtMerchantShared": "خصم {value} لدى {merchant} - شاركها معك صديق!"
+    },
+    "bnpl": {
+      "title": "الدفع بالتقسيط",
+      "description": "قسّم دفعتك البالغة {amount} على أقساط شهرية سهلة.",
+      "perMonth": "/شهرياً",
+      "planNoInterest": "{months}× (بدون فوائد)",
+      "planWithFee": "{months}× (رسوم {rate}%)",
+      "monthlyPayments": "{count, plural, zero {# دفعة شهرية} one {دفعة شهرية واحدة} two {دفعتان شهريتان} few {# دفعات شهرية} many {# دفعة شهرية} other {# دفعة شهرية}}",
+      "total": "الإجمالي: {amount}",
+      "noExtraCost": "بلا تكلفة إضافية",
+      "payNow": "ادفع {amount} الآن"
+    },
+    "qrPanel": {
+      "qrAlt": "رمز QR",
+      "generateFailed": "تعذّر إنشاء رمز QR",
+      "placeholder": "سيظهر رمز QR هنا",
+      "generating": "جارٍ إنشاء رمز QR...",
+      "unavailable": "رمز QR غير متاح",
+      "hideCode": "إخفاء الرمز",
+      "showCode": "إظهار الرمز",
+      "expires": "ينتهي في {date}",
+      "refreshNote": "يتجدد الرمز كل 30 ثانية"
+    },
+    "qrDownload": {
+      "success": "تم تنزيل رمز QR بنجاح!",
+      "failed": "تعذّر تنزيل رمز QR",
+      "downloading": "جارٍ التنزيل...",
+      "download": "تنزيل رمز QR"
+    }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "أدِر حملات القسائم الخاصة بك.",
+      "createCampaign": "إنشاء حملة",
+      "subscriptionRequired": "الاشتراك مطلوب",
+      "trialEnded": "انتهت فترة التجربة المجانية للحملات البالغة 60 يوماً. اشترك في خطة 9.90 شهرياً لإنشاء حملات جديدة.",
+      "stats": {
+        "totalTitle": "إجمالي الحملات",
+        "totalDescription": "جميع الحملات",
+        "activeTitle": "نشطة",
+        "activeDescription": "قيد التشغيل حالياً",
+        "paidTitle": "المشتريات المدفوعة",
+        "paidDescription": "الطلبات المكتملة",
+        "revenueTitle": "الإيرادات",
+        "revenueDescription": "مبيعات القسائم المدفوعة"
+      },
+      "weeklyRevenue": {
+        "title": "الإيرادات الأسبوعية",
+        "description": "مبيعات الحملات المدفوعة خلال 7 أيام.",
+        "series": "الإيرادات"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "لا توجد حملات بعد",
+        "descriptionCanCreate": "أنشئ حملة لتنظيم قسائمك وإدارتها.",
+        "descriptionNeedsSubscription": "اشترك لإنشاء حملات جديدة.",
+        "action": "أنشئ حملتك الأولى"
+      },
+      "searchPlaceholder": "ابحث في الحملات...",
+      "searchLabel": "البحث في الحملات",
+      "filterAll": "الكل",
+      "status": {
+        "active": "نشطة",
+        "draft": "مسودة",
+        "ended": "منتهية",
+        "paused": "متوقفة مؤقتاً"
+      },
+      "noMatches": "لا توجد حملات تطابق عوامل التصفية.",
+      "clearFilters": "مسح عوامل التصفية",
+      "type": {
+        "weekly": "حملة أسبوعية",
+        "limited": "حملة محدودة",
+        "other": "حملة {type}"
+      },
+      "runs": "من {start} إلى {end}",
+      "view": "عرض",
+      "stats": {
+        "vouchers": "القسائم",
+        "paidPurchases": "المشتريات المدفوعة",
+        "revenue": "الإيرادات",
+        "price": "السعر"
+      },
+      "free": "مجاني"
+    },
+    "new": {
+      "iconLetter": "ح",
+      "draftNotice": "تبدأ الحملات الجديدة كمسودة. لن يراها العملاء حتى تنشرها من صفحة الحملة."
+    },
+    "edit": {
+      "breadcrumb": "تعديل",
+      "title": "تعديل الحملة"
+    },
+    "form": {
+      "basicInfo": "المعلومات الأساسية",
+      "nameLabel": "اسم الحملة *",
+      "namePlaceholder": "عرض العطلات",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "عرض لفترة محدودة",
+      "typeLabel": "النوع *",
+      "typeOptions": {
+        "limited": "لمرة واحدة (محدودة)",
+        "weekly": "أسبوعية"
+      },
+      "dates": "التواريخ",
+      "startDate": "تاريخ البدء *",
+      "endDate": "تاريخ الانتهاء *",
+      "timezoneHint": "الأوقات حسب منطقتك الزمنية المحلية.",
+      "pricing": "التسعير والحدود",
+      "priceLabel": "السعر بعملة {currency} (اتركه فارغاً للقسائم المجانية)",
+      "pricePreview": "يدفع العملاء {price}.",
+      "priceHint": "اكتب المبلغ بعملة {currency}، مثل 4.50 أو 4,50 لـ{example}.",
+      "maxRedemptions": "الحد الأقصى لمرات الاستخدام",
+      "maxPurchases": "الحد الأقصى للمشتريات",
+      "unlimited": "غير محدود",
+      "creditLabel": "رصيد المُحيل (%)",
+      "creditPreview": "يكسب المُحيلون {percent}% من سعر الشراء كرصيد.",
+      "creditHint": "نسبة من سعر الشراء تُمنح للمُحيل كرصيد، مثل 5 أو 2,5.",
+      "termsSection": "الشروط والأحكام",
+      "termsLabel": "الشروط",
+      "termsPlaceholder": "الشروط والأحكام الخاصة بهذه الحملة...",
+      "saving": "جارٍ الحفظ...",
+      "saveChanges": "حفظ التغييرات",
+      "creating": "جارٍ الإنشاء...",
+      "create": "إنشاء حملة",
+      "saved": "تم حفظ تغييرات الحملة.",
+      "errors": {
+        "invalidDates": "يُرجى إدخال تاريخ بدء وتاريخ انتهاء صالحين.",
+        "endBeforeStart": "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء.",
+        "maxRedemptions": "يجب أن يكون الحد الأقصى لمرات الاستخدام عدداً صحيحاً يساوي 1 أو أكثر.",
+        "maxPurchases": "يجب أن يكون الحد الأقصى للمشتريات عدداً صحيحاً يساوي 1 أو أكثر.",
+        "saveFailed": "فشل حفظ الحملة"
+      },
+      "priceErrors": {
+        "negative": "لا يمكن أن يكون السعر سالباً.",
+        "invalid": "السعر ليس رقماً صالحاً.",
+        "wholeNumber": "يجب أن يكون السعر عدداً صحيحاً.",
+        "decimals": "يمكن أن يحتوي السعر على {decimals} منازل عشرية كحد أقصى.",
+        "tooLarge": "السعر كبير جداً."
+      },
+      "creditErrors": {
+        "negative": "لا يمكن أن يكون رصيد المُحيل سالباً.",
+        "invalid": "رصيد المُحيل ليس رقماً صالحاً.",
+        "decimals": "يمكن أن يحتوي رصيد المُحيل على {decimals} منازل عشرية كحد أقصى.",
+        "tooLarge": "رصيد المُحيل كبير جداً.",
+        "tooHigh": "لا يمكن أن يتجاوز رصيد المُحيل 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "لا يوجد وصف",
+      "draftNotice": "هذه الحملة مسودة، لذا لا يمكن للعملاء رؤيتها بعد.",
+      "draftNoticeAdmin": "هذه الحملة مسودة، لذا لا يمكن للعملاء رؤيتها بعد. انشرها عندما تكون جاهزاً.",
+      "status": "الحالة",
+      "type": "النوع",
+      "price": "السعر",
+      "referrerCredit": "رصيد المُحيل",
+      "none": "لا يوجد",
+      "stats": {
+        "vouchers": "القسائم",
+        "totalPurchases": "إجمالي المشتريات",
+        "paidPurchases": "المشتريات المدفوعة"
+      },
+      "terms": "الشروط والأحكام",
+      "promotion": {
+        "title": "الترويج",
+        "description": "ظهور مدفوع في النشرة الأسبوعية والإشعارات."
+      },
+      "vouchers": {
+        "title": "القسائم",
+        "description": "القسائم المُنشأة من هذه الحملة.",
+        "empty": "لم تُنشأ أي قسائم بعد.",
+        "view": "عرض"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "التضمين في النشرة الأسبوعية (مدفوع)",
+      "notification": "تعزيز في الإشعارات (مدفوع)",
+      "endDate": "تاريخ انتهاء الترويج",
+      "saving": "جارٍ الحفظ...",
+      "save": "حفظ إعدادات الترويج",
+      "saved": "تم حفظ إعدادات الترويج.",
+      "upgradeNeededTitle": "الترقية مطلوبة",
+      "upgradeNeeded": "تعزيزات الترويج متاحة في خطة أعلى. قم بالترقية من الإعدادات والفوترة لاستخدامها.",
+      "saveFailedStatus": "تعذّر حفظ إعدادات الترويج (الخطأ {status}).",
+      "saveFailedNetwork": "تعذّر حفظ إعدادات الترويج. تحقق من اتصالك وحاول مجدداً."
+    },
+    "actions": {
+      "adminOnly": "يمكن لمسؤولي التاجر فقط نشر الحملات أو إيقافها مؤقتاً أو تعديلها.",
+      "edit": "تعديل",
+      "publish": {
+        "label": "نشر",
+        "title": "نشر هذه الحملة؟",
+        "description": "سيتمكن العملاء من رؤية قسائم هذه الحملة وشرائها فوراً.",
+        "success": "تم نشر الحملة. أصبحت متاحة الآن للعملاء."
+      },
+      "pause": {
+        "label": "إيقاف مؤقت",
+        "title": "إيقاف هذه الحملة مؤقتاً؟",
+        "description": "ستعود الحملة إلى حالة المسودة وتُخفى عن العملاء حتى تنشرها مجدداً. تظل القسائم المُباعة صالحة.",
+        "success": "تم إيقاف الحملة مؤقتاً. أصبحت مخفية عن العملاء."
+      },
+      "end": {
+        "label": "إنهاء الحملة",
+        "title": "إنهاء هذه الحملة الآن؟",
+        "description": "تتوقف الحملة فوراً ولا يمكن نشرها مجدداً. تظل القسائم المُباعة صالحة.",
+        "success": "تم إنهاء الحملة."
+      },
+      "updateFailedStatus": "تعذّر تحديث الحملة (الخطأ {status}).",
+      "updateFailed": "تعذّر تحديث الحملة."
+    },
+    "generate": {
+      "open": "إنشاء قسائم",
+      "title": "إنشاء قسائم",
+      "descriptionPriced": "يُنشئ قسائم مسودة بخصم {value}، صالحة من {start} إلى {end}. تحصل كل قسيمة على رمز خاص بها. تظل مخفية حتى تنشرها.",
+      "descriptionFree": "هذه الحملة مجانية، لذا لا يوجد مبلغ لوضعه على القسائم. حدّد سعراً للحملة أولاً.",
+      "countLabel": "عدد القسائم (1-100)",
+      "generating": "جارٍ الإنشاء...",
+      "submit": "إنشاء",
+      "invalidCount": "يُرجى إدخال عدد صحيح بين 1 و100",
+      "needsPrice": "حدّد سعراً لهذه الحملة أولاً. قيمة القسائم المُنشأة تساوي سعر الحملة.",
+      "failed": "فشل إنشاء القسائم",
+      "success": "{count, plural, zero {لم تُنشأ أي قسيمة مسودة} one {تم إنشاء قسيمة مسودة واحدة. انشرها} two {تم إنشاء قسيمتين مسودتين. انشرهما} few {تم إنشاء # قسائم مسودة. انشرها} many {تم إنشاء # قسيمة مسودة. انشرها} other {تم إنشاء # قسيمة مسودة. انشرها}} من صفحة القسائم عندما تكون جاهزاً."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "الحملات النشطة",
+      "statLiveVouchers": "القسائم المنشورة",
+      "statRedemptions30d": "مرات الاستخدام (30 يوماً)"
+    },
+    "error": {
+      "title": "حدث خطأ ما",
+      "description": "حدث خطأ في لوحة التاجر.",
+      "tryAgain": "حاول مجدداً",
+      "backToMerchants": "العودة إلى التجار"
+    },
+    "shell": {
+      "groups": {
+        "overview": "نظرة عامة",
+        "offers": "العروض",
+        "inStore": "في المتجر",
+        "customers": "العملاء",
+        "settings": "الإعدادات"
+      },
+      "language": "اللغة",
+      "opensAppArea": "يفتح قسم التطبيق",
+      "externalLinkTitle": "{label} (يفتح قسم التطبيق خارج هذا التاجر)",
+      "opensOutside": "يفتح خارج قسم التاجر",
+      "merchantNavigation": "التاجر",
+      "more": "المزيد",
+      "navDashboard": "لوحة التحكم"
+    },
+    "dashboard": {
+      "title": "لوحة تحكم التاجر",
+      "welcomeBack": "مرحباً بعودتك، {name}",
+      "viewCampaigns": "عرض الحملات",
+      "createVoucher": "إنشاء قسيمة",
+      "performanceOverview": "نظرة عامة على الأداء",
+      "performanceOverviewHint": "نشاط الحملات ومرات الاستخدام مباشرةً.",
+      "revenueAndCredits": "الإيرادات والرصيد",
+      "revenueAndCreditsHint": "المبيعات والرصيد والالتزامات المستحقة.",
+      "performanceTrend": "اتجاه الأداء",
+      "performanceTrendHint": "نشاط الاستخدام والإيرادات خلال آخر {days} يوماً.",
+      "rangeShort": "{days} ي",
+      "revenue": "الإيرادات",
+      "chartRedemptions": "مرات الاستخدام",
+      "chartRevenue": "الإيرادات ({currency})",
+      "paidOrders": "الطلبات المدفوعة",
+      "openOrdersView": "فتح عرض الطلبات",
+      "avgOrder": "متوسط الطلب",
+      "openCampaignRevenue": "فتح إيرادات الحملات",
+      "redemptionRate": "معدل الاستخدام",
+      "openRedemptionQueue": "فتح قائمة انتظار الاستخدام",
+      "pendingConfirmation": "{count} بانتظار التأكيد",
+      "pendingConfirmationHint": "عمليات استخدام في المتجر بانتظار موافقتك.",
+      "viewRedemptions": "عرض عمليات الاستخدام",
+      "actionCenter": "مركز الإجراءات",
+      "actionCenterHint": "عناصر ذات أولوية للمراجعة.",
+      "allCaughtUp": "لا يوجد ما يتطلب انتباهك.",
+      "open": "فتح",
+      "actions": {
+        "pendingRedemptions": "{count, plural, zero {لا توجد عمليات استخدام معلّقة} one {عملية استخدام معلّقة واحدة} two {عمليتا استخدام معلّقتان} few {# عمليات استخدام معلّقة} many {# عملية استخدام معلّقة} other {# عملية استخدام معلّقة}}",
+        "pendingRedemptionsDetail": "تأكيد عمليات الاستخدام في المتجر",
+        "expiringVouchers": "{count, plural, zero {لا توجد قسائم تنتهي قريباً} one {قسيمة واحدة تنتهي قريباً} two {قسيمتان تنتهيان قريباً} few {# قسائم تنتهي قريباً} many {# قسيمة تنتهي قريباً} other {# قسيمة تنتهي قريباً}}",
+        "expiringVouchersDetail": "راجع تواريخ صلاحية القسائم",
+        "endingCampaigns": "{count, plural, zero {لا توجد حملات تنتهي هذا الأسبوع} one {حملة واحدة تنتهي هذا الأسبوع} two {حملتان تنتهيان هذا الأسبوع} few {# حملات تنتهي هذا الأسبوع} many {# حملة تنتهي هذا الأسبوع} other {# حملة تنتهي هذا الأسبوع}}",
+        "endingCampaignsDetail": "مدّد أفضل حملاتك أو كرّرها",
+        "upcomingEvents": "{count, plural, zero {لا توجد فعاليات قادمة} one {فعالية قادمة واحدة} two {فعاليتان قادمتان} few {# فعاليات قادمة} many {# فعالية قادمة} other {# فعالية قادمة}}",
+        "upcomingEventsDetail": "جهّز تسجيل حضور التذاكر والموظفين"
+      },
+      "upcomingEventsTitle": "الفعاليات القادمة",
+      "upcomingEventsHint": "الفعاليات المجدولة التالية.",
+      "noUpcomingEvents": "لا توجد فعاليات قادمة مجدولة.",
+      "eventStatus": {
+        "published": "منشورة",
+        "soldOut": "نفدت التذاكر"
+      },
+      "manageEvents": "إدارة الفعاليات",
+      "topVouchers": "أفضل القسائم",
+      "topVouchersHint": "العروض الأكثر استخداماً.",
+      "noTopVouchers": "لم تُستخدم أي قسيمة بعد. ستظهر هنا قسائمك الأكثر استخداماً."
+    },
+    "stats": {
+      "activeVouchers": "القسائم النشطة",
+      "publishedVouchers": "القسائم المنشورة",
+      "openVouchers": "فتح القسائم",
+      "activeCampaigns": "الحملات النشطة",
+      "runningCampaigns": "الحملات الجارية",
+      "openCampaigns": "فتح الحملات",
+      "activeEvents": "الفعاليات النشطة",
+      "publishedEvents": "الفعاليات المنشورة",
+      "openEvents": "فتح الفعاليات",
+      "todaysRedemptions": "استخدامات اليوم",
+      "thisWeek": "هذا الأسبوع: {count}",
+      "reviewRedemptions": "مراجعة عمليات الاستخدام",
+      "ofWeekly": "من الإجمالي الأسبوعي"
+    },
+    "revenue": {
+      "voucherRevenue": "إيرادات القسائم",
+      "paidVoucherSales": "مبيعات القسائم المدفوعة",
+      "openCampaignSales": "فتح مبيعات الحملات",
+      "ticketRevenue": "إيرادات التذاكر",
+      "paidTicketSales": "مبيعات التذاكر المدفوعة",
+      "openEventSales": "فتح مبيعات الفعاليات",
+      "creditsIssued": "الرصيد الممنوح",
+      "totalCreditsDistributed": "إجمالي الرصيد الموزّع",
+      "openReferralCredits": "فتح رصيد الإحالات",
+      "outstandingLiability": "الالتزامات المستحقة",
+      "unredeemedValue": "قيمة القسائم غير المستخدمة",
+      "openVoucherLiability": "فتح التزامات القسائم"
+    },
+    "recentActivity": {
+      "title": "النشاط الأخير",
+      "empty": "لا يوجد نشاط حديث",
+      "unknownUser": "مستخدم غير معروف",
+      "redeemedVoucher": "استخدم قسيمة - {time}",
+      "confirmed": "مؤكَّد",
+      "pending": "قيد الانتظار"
+    },
+    "liveStats": {
+      "live": "مباشر",
+      "connecting": "جارٍ الاتصال…",
+      "redeemedToday": "<value>{count}</value> <label>استخدام اليوم</label>",
+      "pending": "<value>{count}</value> <label>قيد الانتظار</label>"
+    },
+    "analytics": {
+      "metaTitle": "التحليلات",
+      "title": "التحليلات",
+      "subtitle": "تتبّع أداء قسائمك وإيراداتك",
+      "totalRedemptions": "إجمالي مرات الاستخدام",
+      "confirmedRedemptions": "عمليات الاستخدام المؤكدة",
+      "totalDiscounts": "إجمالي الخصومات",
+      "givenToCustomers": "الممنوحة للعملاء",
+      "creditsIssued": "الرصيد الممنوح",
+      "totalCreditsDistributed": "إجمالي الرصيد الموزّع",
+      "activeVouchers": "القسائم النشطة",
+      "withRedemptions": "التي لها استخدامات",
+      "charts": {
+        "redemptionTrends": "اتجاهات الاستخدام (آخر 30 يوماً)",
+        "redemptions": "مرات الاستخدام",
+        "revenue": "الإيرادات ({currency})",
+        "topPerforming": "القسائم الأفضل أداءً",
+        "noRedeemed": "لم تُستخدم أي قسيمة بعد. ستظهر هنا قسائمك الأفضل أداءً.",
+        "byCategory": "مرات الاستخدام حسب الفئة",
+        "noCategoryData": "لا تتوفر بيانات للفئات"
+      }
+    },
+    "ask": {
+      "title": "اسأل بياناتك",
+      "subtitle": "اطرح أسئلة حول بيانات نشاطك التجاري بلغة طبيعية",
+      "emptyTitle": "اسأل أي شيء عن بياناتك",
+      "emptyHint": "جرّب أحد الاقتراحات أدناه",
+      "placeholder": "اطرح سؤالاً عن بياناتك...",
+      "suggestedTitle": "أسئلة مقترحة",
+      "suggestions": {
+        "revenueLastWeek": "كم كانت إيراداتي الأسبوع الماضي؟",
+        "dailyRedemptionsThisMonth": "اعرض مرات الاستخدام اليومية هذا الشهر",
+        "topVouchersByRevenue": "أفضل القسائم حسب الإيرادات الشهر الماضي",
+        "customersPurchasedLastWeek": "كم عدد العملاء الذين اشتروا الأسبوع الماضي؟",
+        "referralConversionRate": "ما معدل تحويل الإحالات لديّ؟",
+        "dailyRevenueTrend": "اعرض اتجاه الإيرادات اليومية هذا الشهر",
+        "purchasesYesterday": "كم عدد عمليات الشراء التي تمت أمس؟",
+        "bestPerformingVouchers": "ما القسائم الأفضل أداءً لديّ؟"
+      },
+      "errorFallback": "عذراً، تعذّرت معالجة هذا السؤال.",
+      "networkError": "خطأ في الشبكة. يُرجى المحاولة مجدداً.",
+      "itemLabel": "العنصر {n}"
+    },
+    "reports": {
+      "title": "التقارير المالية",
+      "subtitle": "نظرة عامة على الإيرادات وتصديرها",
+      "downloadCsv": "تنزيل CSV",
+      "from": "من",
+      "to": "إلى",
+      "apply": "تطبيق",
+      "totalRevenue": "إجمالي الإيرادات",
+      "platformFees": "رسوم المنصة",
+      "netRevenue": "صافي الإيرادات",
+      "redemptions": "مرات الاستخدام",
+      "revenueByCurrency": "الإيرادات حسب العملة",
+      "netAndFees": "الصافي: {net} • الرسوم: {fees}",
+      "monthlyRevenue": "الإيرادات الشهرية",
+      "noRevenue": "لا توجد بيانات إيرادات لهذه الفترة.",
+      "month": "الشهر",
+      "vouchers": "القسائم",
+      "tickets": "التذاكر",
+      "total": "الإجمالي"
+    },
+    "scheduled": {
+      "title": "التقارير المجدولة",
+      "subtitle": "إعداد تقارير البريد الإلكتروني التلقائية",
+      "backToReports": "→ التقارير المالية",
+      "activeSchedules": "الجداول النشطة",
+      "loading": "جارٍ التحميل...",
+      "noSchedules": "لم يتم إعداد أي جداول بعد",
+      "period": {
+        "daily": "يومي",
+        "weekly": "أسبوعي",
+        "monthly": "شهري"
+      },
+      "reportTitle": {
+        "daily": "التقرير اليومي",
+        "weekly": "التقرير الأسبوعي",
+        "monthly": "التقرير الشهري"
+      },
+      "recipientCount": "{count, plural, zero {لا يوجد مستلمون} one {مستلم واحد} two {مستلمان} few {# مستلمين} many {# مستلماً} other {# مستلم}}",
+      "lastSent": "آخر إرسال: {date}",
+      "nextRun": "التالي: {date}",
+      "pause": "إيقاف مؤقت",
+      "resume": "استئناف",
+      "createSchedule": "إنشاء جدول",
+      "frequency": "التكرار",
+      "recipients": "المستلمون",
+      "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+      "emailAlreadyAdded": "البريد الإلكتروني مُضاف بالفعل",
+      "addAtLeastOne": "أضف مستلماً واحداً على الأقل",
+      "saved": "تم حفظ جدول التقرير بنجاح",
+      "saveFailed": "فشل حفظ الجدول",
+      "save": "حفظ الجدول",
+      "previewTitle": "معاينة التقرير",
+      "previewBody": "تتضمن التقارير المجدولة الإيرادات وأعداد مرات الاستخدام وأفضل القسائم ومؤشرات النمو. تُرسل التقارير كرسائل بريد إلكتروني HTML منسّقة بعناية في الساعة 8:00 صباحاً بتوقيت UTC.",
+      "everyMorning": "كل صباح",
+      "everyMonday": "كل يوم اثنين",
+      "firstOfMonth": "اليوم الأول من كل شهر"
+    },
+    "billing": {
+      "subscribeTo": "الاشتراك في {plan}",
+      "startFailed": "فشل بدء الاشتراك",
+      "portalFailed": "فشل فتح بوابة الفوترة",
+      "manageBilling": "إدارة الفوترة",
+      "errorTitle": "خطأ",
+      "close": "إغلاق",
+      "usage": "تم استخدام <b>{current}</b> / {max}",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "حملات مُنشأة لكل دورة",
+        "activeCampaigns": "حملات نشطة",
+        "voucherCreatesPerCycle": "قسائم مُنشأة لكل دورة",
+        "teamMembers": "أعضاء الفريق"
+      },
+      "currentPlanTrial": "الخطة الحالية (تجربة مجانية)",
+      "planChangesUnavailable": "تغيير الخطة غير متاح عبر الإنترنت حالياً.",
+      "paymentsNotSetUp": "لم يتم إعداد المدفوعات عبر الإنترنت على هذه المنصة بعد، لذا لا يمكن شراء الخطط أو تغييرها هنا. تواصل مع الدعم إذا أردت تغيير خطتك.",
+      "features": {
+        "starter": {
+          "vouchers": "500 قسيمة شهرياً",
+          "campaigns": "3 حملات نشطة",
+          "teamMembers": "عضوان في الفريق",
+          "qrRedemption": "الاستخدام عبر رمز QR",
+          "basicAnalytics": "تحليلات أساسية"
+        },
+        "pro": {
+          "vouchers": "5,000 قسيمة شهرياً",
+          "campaigns": "25 حملة نشطة",
+          "teamMembers": "10 أعضاء في الفريق",
+          "advancedAnalytics": "تحليلات متقدمة",
+          "customDomain": "نطاق مخصص",
+          "promoBoosts": "تعزيزات ترويجية"
+        },
+        "scale": {
+          "vouchers": "قسائم غير محدودة",
+          "campaigns": "حملات غير محدودة",
+          "teamMembers": "أعضاء فريق بلا حدود",
+          "everythingInPro": "كل ما في Pro",
+          "whiteLabel": "جاهز للعلامة البيضاء",
+          "prioritySupport": "دعم ذو أولوية"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "المالك",
+      "admin": "المسؤول",
+      "finance": "المالية",
+      "marketing": "التسويق",
+      "support": "الدعم",
+      "partner_cashier": "أمين الصندوق",
+      "auditor": "المدقق"
+    },
+    "orgs": {
+      "title": "مؤسسات B2B",
+      "subtitle": "مساحات عمل الشركات مع الحملات والقسائم والطلبات.",
+      "loading": "جارٍ تحميل المؤسسات...",
+      "loadFailed": "فشل تحميل المؤسسات",
+      "empty": "لم يتم العثور على مؤسسات. اطلب من المسؤول دعوتك.",
+      "open": "فتح"
+    },
+    "workspace": {
+      "fallbackName": "المؤسسة",
+      "subtitle": "نظرة عامة على مساحة عمل B2B",
+      "reports": "التقارير",
+      "audit": "التدقيق",
+      "partnerKeys": "مفاتيح الشركاء",
+      "backToOrgs": "العودة إلى المؤسسات",
+      "loading": "جارٍ تحميل مساحة العمل...",
+      "errors": {
+        "loadOrg": "فشل تحميل المؤسسة",
+        "loadCampaigns": "فشل تحميل الحملات",
+        "loadVouchers": "فشل تحميل القسائم",
+        "loadOrders": "فشل تحميل الطلبات",
+        "load": "فشل التحميل",
+        "createCampaign": "فشل إنشاء الحملة",
+        "issueVouchers": "فشل إصدار القسائم",
+        "updateCampaign": "فشل تحديث الحملة",
+        "activateCampaign": "فشل تفعيل الحملة",
+        "pauseCampaign": "فشل إيقاف الحملة مؤقتاً",
+        "archiveCampaign": "فشل أرشفة الحملة"
+      },
+      "stats": {
+        "campaigns": "الحملات",
+        "vouchers": "القسائم",
+        "orders": "الطلبات"
+      },
+      "create": {
+        "title": "إنشاء حملة",
+        "name": "اسم الحملة",
+        "value": "القيمة (بالوحدات الصغرى)",
+        "currency": "العملة",
+        "submit": "إنشاء"
+      },
+      "campaigns": {
+        "title": "الحملات",
+        "empty": "لا توجد حملات بعد.",
+        "name": "الاسم",
+        "value": "القيمة",
+        "activate": "تفعيل",
+        "pause": "إيقاف مؤقت",
+        "resume": "استئناف",
+        "archive": "أرشفة",
+        "issue": "إصدار {count}"
+      },
+      "recentVouchers": "أحدث القسائم",
+      "noVouchers": "لم تُصدر أي قسائم.",
+      "recentOrders": "أحدث الطلبات",
+      "noOrders": "لا توجد طلبات بعد."
+    },
+    "audit": {
+      "title": "سجل التدقيق",
+      "subtitle": "تتبّع دورة حياة القسائم والتغييرات.",
+      "entityType": "نوع الكيان (قسيمة، حملة، طلب)",
+      "entityId": "معرّف الكيان",
+      "loading": "جارٍ تحميل سجل التدقيق...",
+      "loadFailed": "فشل تحميل سجل التدقيق",
+      "empty": "لا توجد أحداث."
+    },
+    "billing": {
+      "metaTitle": "فوترة المؤسسة",
+      "title": "الفوترة والمالية",
+      "totalPaidOrders": "إجمالي الطلبات المدفوعة",
+      "totalRevenue": "إجمالي الإيرادات",
+      "vatNumber": "الرقم الضريبي",
+      "notSet": "غير محدد",
+      "recentOrders": "أحدث الطلبات",
+      "noOrders": "لا توجد طلبات بعد.",
+      "table": {
+        "date": "التاريخ",
+        "qty": "الكمية",
+        "total": "الإجمالي",
+        "status": "الحالة",
+        "invoice": "الفاتورة"
+      }
+    },
+    "keys": {
+      "title": "مفاتيح API للشركاء",
+      "subtitle": "استخدمها للتحقق من قسائم الشركاء واستخدامها.",
+      "label": "تسمية المفتاح (اختياري)",
+      "create": "إنشاء مفتاح",
+      "newKey": "مفتاح جديد (انسخه الآن)",
+      "loading": "جارٍ تحميل المفاتيح...",
+      "empty": "لا توجد مفاتيح بعد.",
+      "untitled": "مفتاح بلا عنوان",
+      "created": "أُنشئ في {created}",
+      "createdAndLastUsed": "أُنشئ في {created} • آخر استخدام {lastUsed}",
+      "revoke": "إبطال",
+      "errors": {
+        "load": "فشل تحميل المفاتيح",
+        "create": "فشل إنشاء المفتاح",
+        "revoke": "فشل إبطال المفتاح"
+      }
+    },
+    "members": {
+      "metaTitle": "أعضاء المؤسسة",
+      "title": "الأعضاء",
+      "count": "{count, plural, zero {لا يوجد أعضاء} one {عضو واحد} two {عضوان} few {# أعضاء} many {# عضواً} other {# عضو}}",
+      "pendingInvitations": "الدعوات المعلّقة",
+      "expires": "تنتهي في {date}"
+    },
+    "invite": {
+      "title": "دعوة عضو",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "المسؤول",
+        "finance": "المالية",
+        "marketing": "التسويق",
+        "support": "الدعم",
+        "partner_cashier": "أمين صندوق الشريك",
+        "auditor": "المدقق"
+      },
+      "sending": "جارٍ الإرسال…",
+      "submit": "إرسال الدعوة",
+      "sent": "تم إرسال الدعوة إلى {email}.",
+      "failed": "تعذّر إرسال الدعوة. يُرجى التحقق من البريد الإلكتروني والمحاولة مجدداً.",
+      "error": "حدث خطأ ما. يُرجى المحاولة مجدداً."
+    },
+    "reports": {
+      "title": "التقارير",
+      "subtitle": "تقارير الاستخدام والقسائم",
+      "backToWorkspace": "العودة إلى مساحة العمل",
+      "loadFailed": "فشل التحميل",
+      "tabs": {
+        "redemptions": "عمليات الاستخدام",
+        "vouchers": "القسائم"
+      },
+      "totalRedemptions": "إجمالي مرات الاستخدام",
+      "totalAmountRedeemed": "إجمالي المبلغ المستخدم",
+      "from": "من",
+      "to": "إلى",
+      "filter": "تصفية",
+      "pageInfo": "الصفحة {page} من {totalPages} (الإجمالي {total})",
+      "redemptionTable": {
+        "date": "التاريخ",
+        "partner": "الشريك",
+        "amount": "المبلغ",
+        "status": "الحالة",
+        "location": "الموقع"
+      },
+      "noRedemptions": "لم يتم العثور على عمليات استخدام.",
+      "voucherTable": {
+        "campaign": "الحملة",
+        "status": "الحالة",
+        "type": "النوع",
+        "value": "القيمة",
+        "remaining": "المتبقي",
+        "redeemed": "المستخدم",
+        "issuedTo": "صادرة لـ",
+        "expires": "تنتهي في"
+      },
+      "noVouchers": "لم يتم العثور على قسائم."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "مشترٍ",
+        "partner": "شريك",
+        "platform_owner": "مالك المنصة"
+      },
+      "orgStatus": {
+        "active": "نشطة",
+        "suspended": "معلّقة"
+      },
+      "campaignStatus": {
+        "draft": "مسودة",
+        "active": "نشطة",
+        "paused": "متوقفة مؤقتاً",
+        "archived": "مؤرشفة"
+      },
+      "voucherStatus": {
+        "created": "مُنشأة",
+        "issued": "صادرة",
+        "active": "نشطة",
+        "redeemed": "مستخدمة",
+        "expired": "منتهية الصلاحية",
+        "voided": "ملغاة"
+      },
+      "valueType": {
+        "fixed": "ثابت",
+        "percent": "نسبة مئوية"
+      },
+      "orderStatus": {
+        "draft": "مسودة",
+        "submitted": "مُرسل",
+        "invoiced": "مُفوتر",
+        "paid": "مدفوع",
+        "cancelled": "ملغى",
+        "refunded": "مُسترد"
+      },
+      "redemptionStatus": {
+        "approved": "مقبول",
+        "reversed": "معكوس",
+        "failed": "فاشل"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "الفعاليات"
+    },
+    "status": {
+      "draft": "مسودة",
+      "published": "نشطة",
+      "sold_out": "نفدت التذاكر",
+      "cancelled": "ملغاة",
+      "ended": "منتهية"
+    },
+    "statusName": {
+      "draft": "مسودة",
+      "published": "منشورة",
+      "sold_out": "نفدت التذاكر",
+      "cancelled": "ملغاة",
+      "ended": "منتهية"
+    },
+    "type": {
+      "festival": "مهرجان",
+      "internal": "فعالية داخلية",
+      "concert": "حفل موسيقي",
+      "workshop": "ورشة عمل",
+      "other": "أخرى"
+    },
+    "ticketStatus": {
+      "available": "متاحة",
+      "sold": "مُباعة",
+      "used": "مستخدمة",
+      "cancelled": "ملغاة",
+      "refunded": "مُستردّة"
+    },
+    "list": {
+      "subtitle": "أدِر فعالياتك وتذاكرك",
+      "createEvent": "إنشاء فعالية",
+      "stats": {
+        "totalTitle": "إجمالي الفعاليات",
+        "totalDescription": "جميع الفعاليات",
+        "activeTitle": "نشطة",
+        "activeDescription": "منشورة أو نفدت تذاكرها",
+        "soldTitle": "التذاكر المُباعة",
+        "soldDescription": "عبر جميع الفعاليات",
+        "revenueTitle": "الإيرادات",
+        "revenueDescription": "مبيعات التذاكر المدفوعة"
+      },
+      "empty": {
+        "title": "لا توجد فعاليات بعد",
+        "description": "أنشئ فعالية لبيع التذاكر وإدارة الحضور.",
+        "cta": "أنشئ فعاليتك الأولى"
+      },
+      "card": {
+        "date": "التاريخ:",
+        "location": "الموقع:",
+        "price": "السعر:",
+        "tickets": "التذاكر:",
+        "sold": "بيع {sold} / {capacity}",
+        "free": "مجاني",
+        "view": "عرض",
+        "edit": "تعديل"
+      },
+      "weeklyRevenue": {
+        "title": "إيرادات التذاكر الأسبوعية",
+        "description": "مبيعات التذاكر المدفوعة خلال 7 أيام.",
+        "series": "الإيرادات"
+      }
+    },
+    "detail": {
+      "noDescription": "لا يوجد وصف",
+      "edit": "تعديل",
+      "status": "الحالة",
+      "type": "النوع",
+      "eventDate": "تاريخ الفعالية",
+      "price": "السعر",
+      "free": "مجاني",
+      "totalTickets": "إجمالي التذاكر",
+      "sold": "المُباعة",
+      "available": "المتاحة",
+      "location": "الموقع",
+      "terms": "الشروط والأحكام",
+      "ticketsTitle": "التذاكر",
+      "ticketsDescription": "تذاكر هذه الفعالية",
+      "noTickets": "لم تُنشأ أي تذاكر بعد.",
+      "view": "عرض",
+      "redeem": "استخدام"
+    },
+    "form": {
+      "basicInfo": "المعلومات الأساسية",
+      "name": "اسم الفعالية *",
+      "description": "الوصف",
+      "descriptionPlaceholder": "صف فعاليتك...",
+      "type": "نوع الفعالية *",
+      "typeAria": "نوع الفعالية",
+      "dateTime": "التاريخ والوقت",
+      "eventDate": "تاريخ الفعالية *",
+      "eventTime": "وقت الفعالية *",
+      "endDate": "تاريخ الانتهاء (اختياري)",
+      "endTime": "وقت الانتهاء (اختياري)",
+      "location": "الموقع",
+      "locationName": "اسم الموقع",
+      "locationPlaceholder": "القاعة الرئيسية، المسرح الخارجي",
+      "locationPlaceholderExample": "مثال: القاعة الرئيسية، المسرح الخارجي",
+      "address": "العنوان الكامل",
+      "addressPlaceholder": "الشارع، المدينة، الدولة",
+      "ticketDetails": "تفاصيل التذاكر",
+      "maxCapacity": "السعة القصوى (تذاكر) *",
+      "maxCapacityLong": "السعة القصوى (عدد التذاكر) *",
+      "pricePerTicketCurrency": "سعر التذكرة ({currency})",
+      "pricePerTicket": "سعر التذكرة",
+      "pricePlaceholderFree": "0.00 (مجاني)",
+      "priceHint": "اتركه فارغاً للتذاكر المجانية. مثال: 12.50 أو 12,50 لـ{example}.",
+      "currency": "العملة *",
+      "terms": "الشروط والأحكام",
+      "termsPlaceholder": "شروط الفعالية، سياسة الاسترداد، وغيرها.",
+      "ticketPrice": "سعر التذكرة",
+      "endBeforeStart": "يجب أن يكون وقت الانتهاء بعد وقت البدء.",
+      "cancel": "إلغاء"
+    },
+    "create": {
+      "submit": "إنشاء فعالية",
+      "submitting": "جارٍ الإنشاء..."
+    },
+    "edit": {
+      "loading": "جارٍ التحميل...",
+      "notFound": "الفعالية غير موجودة.",
+      "back": "العودة إلى الفعالية",
+      "title": "تعديل الفعالية",
+      "subtitle": "حدّث تفاصيل فعاليتك.",
+      "submit": "حفظ التغييرات",
+      "submitting": "جارٍ الحفظ..."
+    },
+    "publish": {
+      "confirm": "نشر هذه الفعالية؟ ستكون مرئية للجميع ويمكن شراء التذاكر.",
+      "confirmLabel": "نشر",
+      "failed": "فشل نشر الفعالية",
+      "success": "تم نشر الفعالية بنجاح!",
+      "published": "منشورة",
+      "cannotPublish": "لا يمكن النشر",
+      "button": "نشر الفعالية",
+      "publishing": "جارٍ النشر..."
+    },
+    "generate": {
+      "invalidCount": "يُرجى إدخال رقم بين 1 و1000",
+      "tooMany": "لا يمكن إنشاء {count} تذكرة. الحد الأقصى المتاح: {max}",
+      "failed": "فشل إنشاء التذاكر",
+      "success": "{count, plural, zero {لم تُنشأ أي تذكرة} one {تم إنشاء تذكرة واحدة بنجاح!} two {تم إنشاء تذكرتين بنجاح!} few {تم إنشاء # تذاكر بنجاح!} many {تم إنشاء # تذكرة بنجاح!} other {تم إنشاء # تذكرة بنجاح!}}",
+      "open": "إنشاء تذاكر",
+      "title": "إنشاء تذاكر",
+      "description": "أنشئ تذاكر لهذه الفعالية",
+      "countLabel": "عدد التذاكر (الحد الأقصى: {max})",
+      "cancel": "إلغاء",
+      "submit": "إنشاء",
+      "submitting": "جارٍ الإنشاء..."
+    },
+    "redeem": {
+      "title": "استخدام التذكرة",
+      "subtitle": "امسح رمز QR أو أدخل رقم التذكرة",
+      "back": "العودة إلى الفعالية",
+      "scanTitle": "مسح التذكرة",
+      "scanDescription": "أدخل رمز QR أو رقم التذكرة",
+      "tokenLabel": "رمز QR / رقم التذكرة",
+      "tokenPlaceholder": "أدخل رمز QR أو رقم التذكرة",
+      "scan": "مسح",
+      "notFound": "التذكرة غير موجودة",
+      "found": "تم العثور على التذكرة",
+      "number": "الرقم:",
+      "event": "الفعالية:",
+      "status": "الحالة:",
+      "attendee": "الحاضر:",
+      "redeemDescription": "أكمل عملية الاستخدام",
+      "locationLabel": "الموقع (اختياري)",
+      "locationPlaceholder": "مثال: المدخل الرئيسي، البوابة A",
+      "submit": "استخدام التذكرة",
+      "submitting": "جارٍ الاستخدام...",
+      "failed": "فشل استخدام التذكرة",
+      "cannotRedeem": "لا يمكن استخدام هذه التذكرة. الحالة: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "لوحة تحكم التاجر",
+      "vouchersTitle": "إدارة القسائم"
+    },
+    "sidebar": {
+      "title": "التاجر",
+      "subtitle": "وحدة تحكم GiftHub",
+      "openMenu": "فتح القائمة",
+      "nav": {
+        "overview": "نظرة عامة",
+        "vouchers": "القسائم",
+        "giftCards": "بطاقات الهدايا",
+        "credits": "الرصيد",
+        "brand": "العلامة التجارية"
+      }
+    },
+    "overview": {
+      "title": "لوحة تحكم التاجر",
+      "notConnected": "لست مرتبطاً بأي تاجر بعد."
+    },
+    "noAccess": {
+      "title": "لا يوجد وصول إلى التاجر",
+      "overviewHint": "اطلب من مسؤول التاجر دعوتك، أو أنشئ حساب تاجر للبدء.",
+      "creditsHint": "اربط حساب تاجر لعرض الإيرادات والتحويلات.",
+      "vouchersHint": "اربط حساب تاجر لإدارة القسائم.",
+      "exploreCampaigns": "استكشف الحملات"
+    },
+    "brand": {
+      "title": "إعدادات العلامة التجارية",
+      "description": "خصّص مظهر علامتك التجارية على القسائم",
+      "logoHeading": "الشعار",
+      "logoHint": "ارفع شعار متجرك (يُوصى بـ 200x200 بكسل، PNG أو SVG).",
+      "logoPreviewAlt": "معاينة الشعار",
+      "uploadLogo": "رفع الشعار",
+      "colorHeading": "لون العلامة التجارية",
+      "colorHint": "حدّد اللون الأساسي لعلامتك التجارية للقسائم والأزرار.",
+      "colorLabel": "اللون",
+      "colorHexLabel": "قيمة hex للون العلامة التجارية",
+      "save": "حفظ التغييرات",
+      "previewHeading": "معاينة",
+      "previewHint": "شاهد كيف تظهر علامتك التجارية على القسائم.",
+      "sampleMerchant": "متجرك",
+      "sampleTitle": "خصم 20% على مشترياتك القادمة",
+      "sampleDescription": "صالحة على جميع المنتجات. لا يمكن دمجها مع عروض أخرى."
+    },
+    "credits": {
+      "availableBalance": "الرصيد المتاح",
+      "availableBalanceHint": "جاهز للتحويل",
+      "pendingRevenue": "الإيرادات المعلّقة",
+      "pendingRevenueHint": "قيد المعالجة",
+      "recentRevenue": "الإيرادات الأخيرة",
+      "ticketSale": "بيع تذكرة",
+      "voucherSale": "بيع قسيمة",
+      "noRevenue": "لم تُسجّل أي إيرادات بعد",
+      "payoutRequests": "طلبات التحويل",
+      "noPayoutRequests": "لا توجد طلبات تحويل بعد",
+      "requestPayoutHeading": "طلب تحويل",
+      "minimumPayout": "الحد الأدنى لمبلغ التحويل: {amount}",
+      "submitting": "جارٍ الإرسال...",
+      "requestPayout": "طلب تحويل",
+      "requestSubmitted": "تم إرسال طلب التحويل",
+      "requestFailed": "فشل طلب التحويل",
+      "status": {
+        "paid": "مدفوع",
+        "pending": "قيد الانتظار",
+        "requested": "مطلوب",
+        "completed": "مكتمل",
+        "failed": "فاشل"
+      }
+    },
+    "newVoucher": {
+      "title": "إنشاء قسيمة",
+      "description": "صمّم حملة قسائمك الجديدة واضبط إعداداتها",
+      "detailsHeading": "تفاصيل القسيمة",
+      "titleLabel": "العنوان",
+      "titlePlaceholder": "مثال: خصم 20% على مشترياتك القادمة",
+      "descriptionLabel": "الوصف",
+      "descriptionPlaceholder": "صالحة على جميع المنتجات. لا يمكن دمجها مع عروض أخرى.",
+      "expiryDateLabel": "تاريخ انتهاء الصلاحية",
+      "weeklyLabel": "العرض الأسبوعي",
+      "weeklyHint": "متاح أسبوعياً لفترة محدودة",
+      "weeklyAria": "العرض الأسبوعي - متاح أسبوعياً لفترة محدودة",
+      "referralLabel": "تفعيل رصيد الإحالة",
+      "referralHint": "يكسب المستخدمون رصيداً عندما يستخدم أصدقاؤهم القسيمة",
+      "referralAria": "تفعيل رصيد الإحالة - يكسب المستخدمون رصيداً عندما يستخدم أصدقاؤهم القسيمة",
+      "brandColorLabel": "لون العلامة التجارية",
+      "brandColorHexLabel": "قيمة hex للون العلامة التجارية",
+      "saveDraft": "حفظ المسودة",
+      "createAndPublish": "إنشاء ونشر",
+      "previewHeading": "معاينة",
+      "sampleMerchant": "متجرك",
+      "sampleTitle": "عنوان القسيمة",
+      "sampleDescription": "سيظهر وصف القسيمة هنا"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "تتوفر الصفحة العامة بعد نشر القسيمة.",
+    "list": {
+      "metaTitle": "القسائم",
+      "subtitle": "إدارة القسائم وإنشاؤها",
+      "bulkImport": "استيراد جماعي من CSV",
+      "stats": {
+        "totalTitle": "إجمالي القسائم",
+        "totalDescription": "جميع القسائم المُنشأة",
+        "activeTitle": "نشطة",
+        "activeDescription": "القسائم المنشورة",
+        "draftsTitle": "المسودات",
+        "draftsDescription": "لم تُنشر بعد",
+        "pausedEndedTitle": "متوقفة / منتهية",
+        "pausedEndedDescription": "{paused} متوقفة مؤقتاً، {ended} منتهية",
+        "redemptionsTitle": "مرات الاستخدام",
+        "redemptionsDescription": "إجمالي مرات الاستخدام"
+      },
+      "empty": {
+        "title": "لا توجد قسائم بعد",
+        "description": "ابدأ بإنشاء قسيمتك الأولى.",
+        "action": "أنشئ قسيمتك الأولى"
+      },
+      "searchPlaceholder": "ابحث بالعنوان أو بادئة الرمز أو المعرّف",
+      "searchLabel": "البحث في القسائم",
+      "statusLabel": "الحالة",
+      "statusAll": "جميع الحالات",
+      "status": {
+        "published": "نشطة",
+        "paused": "متوقفة مؤقتاً",
+        "draft": "مسودة",
+        "ended": "منتهية",
+        "expired": "منتهية الصلاحية"
+      },
+      "typeLabel": "النوع",
+      "typeAll": "جميع الأنواع",
+      "sortLabel": "ترتيب حسب",
+      "sort": {
+        "date": "التاريخ (الأحدث)",
+        "name": "الاسم (أ-ي)",
+        "redemptions": "مرات الاستخدام"
+      },
+      "showing": "عرض {shown} من أصل {total} قسيمة",
+      "clearFilters": "مسح عوامل التصفية",
+      "noMatches": "لا توجد قسائم تطابق عوامل التصفية.",
+      "usage": "الاستخدام",
+      "usageUnlimited": "الاستخدام: {used} - غير محدود",
+      "view": "عرض"
+    },
+    "rowActions": {
+      "pauseTitle": "إيقاف القسيمة مؤقتاً",
+      "pauseDescription": "هل تريد بالتأكيد إيقاف هذه القسيمة مؤقتاً؟ لن يتمكن المستخدمون من شرائها أو استخدامها أثناء الإيقاف.",
+      "pauseConfirm": "إيقاف مؤقت",
+      "paused": "تم إيقاف القسيمة مؤقتاً",
+      "pauseFailed": "فشل إيقاف القسيمة مؤقتاً",
+      "loadFailed": "فشل تحميل القسيمة",
+      "duplicateLabel": "تكرار القسيمة",
+      "duplicated": "تم تكرار القسيمة",
+      "duplicateFailed": "فشل التكرار"
+    },
+    "publish": {
+      "confirmMessage": "نشر هذه القسيمة؟ ستكون مرئية للجميع.",
+      "confirmLabel": "نشر",
+      "failed": "فشل نشر القسيمة",
+      "success": "تم نشر القسيمة بنجاح!",
+      "publishing": "جارٍ النشر...",
+      "button": "نشر القسيمة"
+    },
+    "new": {
+      "iconLetter": "ق",
+      "created": "تم إنشاء القسيمة كمسودة. انشرها عندما تكون جاهزاً ليراها العملاء."
+    },
+    "edit": {
+      "iconLetter": "ت",
+      "subtitle": "حدّث تفاصيل القسيمة وتوفّرها.",
+      "updated": "تم تحديث القسيمة بنجاح",
+      "updateFailed": "فشل تحديث القسيمة",
+      "updateFailedRetry": "فشل تحديث القسيمة. يُرجى المحاولة مجدداً.",
+      "updating": "جارٍ التحديث...",
+      "update": "تحديث القسيمة",
+      "viewPublicPage": "عرض الصفحة العامة"
+    },
+    "form": {
+      "stepOf": "الخطوة {current} من {total}",
+      "typeLabel": "النوع",
+      "typeAria": "نوع القسيمة",
+      "customersGetOff": "يحصل العملاء على خصم {value}.",
+      "customersGetCredit": "يحصل العملاء على رصيد بقيمة {value}.",
+      "percentHint": "اكتب النسبة المئوية، مثل 15 أو 12,5.",
+      "amountHint": "اكتب المبلغ بعملة {currency}، مثل 4.50 أو 4,50 لـ{example}.",
+      "validityHint": "يمكن استخدام القسيمة من بداية اليوم الأول حتى نهاية اليوم الأخير.",
+      "enableWeeklyDropAria": "تفعيل العرض الأسبوعي",
+      "weeklyDropDayAria": "يوم الأسبوع للعرض الأسبوعي",
+      "weeklyDropTimeAria": "وقت بدء العرض الأسبوعي",
+      "headlinePlaceholder": "خصم 15% على طلبك",
+      "finePrintPlaceholder": "صالحة للعملاء الجدد فقط",
+      "previewFallbackHeadline": "قسيمتك",
+      "previewValidUntil": "صالحة حتى {date}",
+      "errors": {
+        "discountAboveZero": "أدخل خصماً أكبر من 0%.",
+        "valueAboveZero": "أدخل قيمة أكبر من 0.",
+        "chooseDates": "اختر تاريخ بدء القسيمة وانتهائها.",
+        "endBeforeStart": "يجب أن يكون تاريخ الانتهاء في تاريخ البدء أو بعده.",
+        "invalidValue": "أدخل قيمة صالحة.",
+        "valueMustBePositive": "يجب أن تكون القيمة أكبر من 0",
+        "totalLimitPositive": "يجب أن يكون الحد الإجمالي للاستخدام رقماً موجباً",
+        "perUserLimitPositive": "يجب أن يكون الحد لكل مستخدم رقماً موجباً"
+      },
+      "discountErrors": {
+        "negative": "لا يمكن أن يكون الخصم سالباً.",
+        "invalid": "الخصم ليس رقماً صالحاً.",
+        "decimals": "يمكن أن يحتوي الخصم على {decimals} منازل عشرية كحد أقصى.",
+        "tooLarge": "الخصم كبير جداً.",
+        "tooHigh": "لا يمكن أن يتجاوز الخصم 100%."
+      },
+      "valueErrors": {
+        "negative": "لا يمكن أن تكون القيمة سالبة.",
+        "invalid": "القيمة ليست رقماً صالحاً.",
+        "wholeNumber": "يجب أن تكون القيمة عدداً صحيحاً.",
+        "decimals": "يمكن أن تحتوي القيمة على {decimals} منازل عشرية كحد أقصى.",
+        "tooLarge": "القيمة كبيرة جداً."
+      }
+    },
+    "bulkImport": {
+      "back": "العودة إلى القسائم",
+      "title": "استيراد القسائم من جدول بيانات",
+      "intro": "ارفع ملف CSV (حتى 500 صف). تُنشأ كل قسيمة كمسودة، فلا يُنشر شيء حتى تنشره بنفسك.",
+      "columns": "الأعمدة",
+      "downloadSample": "تنزيل نموذج CSV",
+      "columnRequired": "<code>{name}</code> (إلزامي): {help}",
+      "columnOptional": "<code>{name}</code> (اختياري): {help}",
+      "columnHelp": {
+        "name": "عنوان القسيمة كما يراه العملاء، مثل «عرض القهوة الربيعي».",
+        "type": "«amount» (خصم بمبلغ)، أو «percent» (خصم بنسبة مئوية)، أو «credit» (رصيد المتجر).",
+        "value": "باليورو لـ amount/credit (10 أو 10.50)، وبالنسبة المئوية لـ percent (15 أو 12.5).",
+        "currency": "رمز من ثلاثة أحرف مثل EUR. يُستخدم افتراضياً عملة متجرك.",
+        "valid_from": "أول يوم تعمل فيه القسيمة: 2026-10-01 أو 01.10.2026.",
+        "valid_to": "آخر يوم تعمل فيه القسيمة (تبقى صالحة حتى نهاية ذلك اليوم).",
+        "code_prefix": "أحرف في بداية كل رمز، مثل SPRING.",
+        "usage_limit": "عدد مرات الاستخدام الإجمالي المسموح بها. اتركه فارغاً لعدد غير محدود."
+      },
+      "separatorHint": "افصل الأعمدة بفواصل أو فواصل منقوطة. إذا استخدمت الفواصل، فضع المبالغ العشرية بين علامتي تنصيص (\"4,50\") أو استخدم النقطة (4.50).",
+      "chooseFile": "اختر ملف CSV",
+      "chooseDifferent": "انقر لاختيار ملف آخر",
+      "browse": "انقر للتصفح",
+      "fixRows": "أصلح هذه الصفوف وارفع الملف مجدداً:",
+      "andMore": "…و{count} أخرى.",
+      "readyToImport": "{count, plural, zero {لا توجد قسائم جاهزة للاستيراد:} one {قسيمة واحدة جاهزة للاستيراد:} two {قسيمتان جاهزتان للاستيراد:} few {# قسائم جاهزة للاستيراد:} many {# قسيمة جاهزة للاستيراد:} other {# قسيمة جاهزة للاستيراد:}}",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}، {from} – {to}{hasLimit, select, yes {، حتى {limit} استخدام} other {}}",
+      "imported": "{count, plural, zero {لم تُستورد أي قسيمة.} one {تم استيراد قسيمة واحدة كمسودة.} two {تم استيراد قسيمتين كمسودات.} few {تم استيراد # قسائم كمسودات.} many {تم استيراد # قسيمة كمسودات.} other {تم استيراد # قسيمة كمسودات.}}",
+      "viewVouchers": "عرض القسائم",
+      "importing": "جارٍ الاستيراد...",
+      "importCount": "{count, plural, zero {استيراد # قسيمة} one {استيراد قسيمة واحدة} two {استيراد قسيمتين} few {استيراد # قسائم} many {استيراد # قسيمة} other {استيراد # قسيمة}}",
+      "importVouchers": "استيراد القسائم",
+      "importFailedStatus": "فشل الاستيراد (الخطأ {status}).",
+      "importFailed": "فشل الاستيراد"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "الواجهة الرئيسية + زر الإجراء",
+          "description": "عنوان رئيسي في أعلى الصفحة مع إجراء أساسي."
+        },
+        "value_props": {
+          "label": "عروض القيمة",
+          "description": "مزايا وضمانات سريعة."
+        },
+        "featured_products": {
+          "label": "منتجات مميزة",
+          "description": "أفضل المنتجات مع الأسعار والوسوم."
+        },
+        "featured_vouchers": {
+          "label": "قسائم مميزة",
+          "description": "بطاقات القسائم النشطة للعروض الترويجية."
+        },
+        "rental_packages": {
+          "label": "باقات الاستئجار",
+          "description": "باقات استئجار وتسعير حسب الأيام."
+        },
+        "categories": {
+          "label": "شبكة الفئات",
+          "description": "تصفّح حسب النوع أو الاستخدام أو الجمهور."
+        },
+        "availability": {
+          "label": "تقويم التوفّر",
+          "description": "التوفّر المباشر ومواعيد الحجز."
+        },
+        "testimonials": {
+          "label": "آراء العملاء",
+          "description": "اقتباسات العملاء وتقييمات النجوم."
+        },
+        "gallery": {
+          "label": "معرض الصور",
+          "description": "صور أسلوب الحياة أو حالات الاستخدام."
+        },
+        "pricing": {
+          "label": "جدول الأسعار",
+          "description": "مستويات تسعير شفافة."
+        },
+        "rental_terms": {
+          "label": "شروط الاستئجار",
+          "description": "التأمين المسترد والتأمين وسياسة الإرجاع."
+        },
+        "faq": {
+          "label": "الأسئلة الشائعة",
+          "description": "أجب عن الاعتراضات الشائعة."
+        },
+        "newsletter": {
+          "label": "الاشتراك في النشرة",
+          "description": "اجمع عناوين البريد الإلكتروني للحملات."
+        },
+        "contact": {
+          "label": "قسم التواصل",
+          "description": "الدعم عبر الدردشة أو البريد الإلكتروني أو الهاتف."
+        },
+        "map": {
+          "label": "خريطة الموقع",
+          "description": "نقطة الاستلام أو موقع المتجر."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "شريط العروض",
+          "description": "شريط علوي ثابت للعروض والتنبيهات."
+        },
+        "sticky_cta": {
+          "label": "زر إجراء ثابت",
+          "description": "زر إجراء يبقى ظاهراً أثناء التمرير."
+        },
+        "chat_widget": {
+          "label": "أداة الدردشة",
+          "description": "دردشة مباشرة أو تكامل مع WhatsApp."
+        },
+        "trust_badges": {
+          "label": "شارات الثقة",
+          "description": "شارات الدفع أو الأمان أو الجودة."
+        },
+        "social_proof": {
+          "label": "نافذة الإثبات الاجتماعي",
+          "description": "النشاط والمشتريات الأخيرة."
+        },
+        "countdown": {
+          "label": "مؤقت العد التنازلي",
+          "description": "إحساس بالإلحاح للعروض المحدودة."
+        },
+        "reviews_widget": {
+          "label": "أداة التقييمات",
+          "description": "تضمين Google أو Trustpilot."
+        },
+        "language_switch": {
+          "label": "مبدّل اللغة",
+          "description": "تبديل سريع للغة على الصفحة."
+        },
+        "analytics": {
+          "label": "مقتطفات التحليلات",
+          "description": "مواضع بكسلات للتتبع."
+        },
+        "cookie_banner": {
+          "label": "شريط ملفات تعريف الارتباط",
+          "description": "شريط موافقة متوافق مع GDPR."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "معاينة",
+      "edit": "تعديل",
+      "previewEmpty": "لم تُضف أي أقسام بعد. انتقل إلى وضع التعديل لإضافة أقسام.",
+      "title": "المحرّر المرئي",
+      "preview": "معاينة",
+      "empty": "لا توجد أقسام بعد. انقر على «إضافة قسم» أدناه لبدء البناء.",
+      "collapseSettings": "طي الإعدادات",
+      "expandSettings": "توسيع الإعدادات",
+      "removeSection": "إزالة قسم {label}",
+      "sectionTitle": "عنوان القسم",
+      "description": "الوصف",
+      "descriptionPlaceholder": "وصف اختياري",
+      "backgroundColor": "لون الخلفية",
+      "layoutVariant": "نمط التخطيط",
+      "layout": {
+        "default": "افتراضي",
+        "centered": "في المنتصف",
+        "wide": "عريض",
+        "compact": "مضغوط"
+      },
+      "addSection": "إضافة قسم",
+      "availableSections": "الأقسام المتاحة",
+      "closeCatalog": "إغلاق",
+      "allAdded": "تمت إضافة جميع الأقسام المتاحة.",
+      "count": "{configured, plural, zero {لا توجد أقسام مُعدّة} one {قسم واحد مُعدّ} two {قسمان مُعدّان} few {# أقسام مُعدّة} many {# قسماً مُعدّاً} other {# قسم مُعدّ}} / {available} متاحة للإضافة"
+    },
+    "client": {
+      "process": {
+        "store_launch": "قائمة التحقق لإطلاق واجهة المتجر",
+        "rental_launch": "قائمة التحقق لإطلاق صفحة الاستئجار",
+        "campaign_ops": "عمليات الحملات الأسبوعية",
+        "support_ops": "قائمة التحقق لجاهزية الدعم"
+      },
+      "toast": {
+        "saved": "تم تحديث منشئ الصفحات.",
+        "saveFailed": "فشل حفظ الصفحة",
+        "vibeFailed": "فشل وكيل Vibe",
+        "layoutGenerated": "تم إنشاء تخطيط Vibe.",
+        "generateFailed": "فشل إنشاء التخطيط",
+        "agentFailed": "فشل الوكيل",
+        "planGenerated": "تم إنشاء خطة العملية.",
+        "runAgentFailed": "فشل تشغيل الوكيل"
+      },
+      "noData": "لا تتوفر بيانات لمنشئ الصفحات.",
+      "title": "منشئ الصفحات",
+      "intro": "أنشئ صفحات متجر واستئجار بسرعة باستخدام أقسام وإضافات قابلة للتركيب.",
+      "introAi": "أنشئ صفحات متجر واستئجار بسرعة باستخدام أقسام وإضافات قابلة للتركيب، مع اقتراحات اختيارية بالذكاء الاصطناعي.",
+      "tabs": {
+        "store": "واجهة المتجر",
+        "rental": "الاستئجار"
+      },
+      "details": {
+        "title": "تفاصيل الصفحة",
+        "subtitle": "العنوان والعنوان الفرعي والتخطيط.",
+        "save": "حفظ",
+        "pageTitle": "عنوان الصفحة",
+        "subtitleLabel": "العنوان الفرعي"
+      },
+      "sections": {
+        "title": "الأقسام",
+        "subtitle": "اسحب لإعادة الترتيب، أو وسّع للإعداد، أو عاين التخطيط.",
+        "suggestLayout": "اقترح تخطيطاً",
+        "suggestionsLeft": "اقتراحات التخطيط بالذكاء الاصطناعي المتبقية: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "الإضافات",
+        "subtitle": "أدوات إضافية وطبقات تسويقية.",
+        "enable": "تفعيل الإضافة {label}",
+        "disable": "تعطيل الإضافة {label}"
+      },
+      "summary": {
+        "title": "ملخص مباشر",
+        "line": "{title} · {sections, plural, zero {لا أقسام} one {قسم واحد} two {قسمان} few {# أقسام} many {# قسماً} other {# قسم}} · {addons, plural, zero {لا إضافات} one {إضافة واحدة} two {إضافتان} few {# إضافات} many {# إضافة} other {# إضافة}}",
+        "sectionsLabel": "الأقسام:",
+        "addonsLabel": "الإضافات:",
+        "none": "لا يوجد"
+      },
+      "assistant": {
+        "title": "مساعد قائمة التحقق للإطلاق",
+        "subtitle": "أنشئ خطط عمل وقوائم تحقق تشغيلية.",
+        "goalLabel": "هدف العملية",
+        "createChecklist": "إنشاء قائمة تحقق",
+        "checklistsLeft": "قوائم التحقق المتبقية: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "عروض واستئجارات وقسائم مختارة من {name}.",
+        "shopProducts": "تسوّق المنتجات",
+        "browseRentals": "تصفّح الاستئجارات"
+      },
+      "valueProps": {
+        "rewardsTitle": "المكافآت",
+        "rewardsText": "حوافز القسائم مدمجة.",
+        "stockTitle": "مخزون موثوق",
+        "stockText": "أسعار وتوفّر محدّثان.",
+        "datesTitle": "تواريخ مرنة",
+        "datesText": "خطّط للاستئجار بسهولة."
+      },
+      "viewAll": "عرض الكل",
+      "seeAll": "عرض الكل",
+      "products": {
+        "title": "منتجات مميزة",
+        "empty": "لا توجد منتجات بعد.",
+        "fallbackDescription": "منتج مميز"
+      },
+      "rentals": {
+        "title": "باقات الاستئجار",
+        "empty": "لا توجد استئجارات بعد.",
+        "fallbackDescription": "استئجار مميز",
+        "perDay": "{price} / يوم"
+      },
+      "categories": {
+        "title": "تصفّح الفئات",
+        "popular": "الأكثر شيوعاً",
+        "business": "الأعمال",
+        "events": "الفعاليات",
+        "seasonal": "موسمية",
+        "corporate": "الشركات",
+        "custom": "مخصصة"
+      },
+      "availability": {
+        "title": "التوفّر المباشر",
+        "text": "تحقق من التوفّر واطلب عرض سعر خلال دقائق.",
+        "seeCalendar": "عرض التقويم"
+      },
+      "testimonials": {
+        "title": "ماذا يقول العملاء",
+        "smooth": "عملية سلسة",
+        "lovedVoucher": "أحببت القسيمة",
+        "support": "دعم ممتاز"
+      },
+      "gallery": {
+        "title": "معرض الصور"
+      },
+      "pricing": {
+        "title": "الأسعار",
+        "starter": "Starter",
+        "growth": "النمو",
+        "enterprise": "المؤسسات",
+        "tierText": "تسعير ودعم مخصصان"
+      },
+      "rentalTerms": {
+        "title": "شروط الاستئجار",
+        "text": "تأمينات واضحة وقواعد الاستلام وسياسة الإرجاع موضّحة مسبقاً."
+      },
+      "faq": {
+        "title": "الأسئلة الشائعة",
+        "redeem": "كيف أستخدم القسيمة؟",
+        "reschedule": "هل يمكنني تغيير الموعد؟",
+        "support": "هل تقدمون الدعم؟"
+      },
+      "newsletter": {
+        "title": "ابقَ على اطلاع",
+        "text": "احصل على العروض الجديدة وإصدارات الاستئجار في بريدك الوارد.",
+        "emailLabel": "البريد الإلكتروني",
+        "subscribe": "اشترك"
+      },
+      "contact": {
+        "title": "تواصل معنا",
+        "emailUs": "راسلنا على {email}"
+      },
+      "map": {
+        "text": "يُرسل موقع الاستلام بعد الحجز."
+      },
+      "vouchers": {
+        "title": "القسائم النشطة",
+        "empty": "لا توجد قسائم متاحة.",
+        "voucher": "قسيمة",
+        "view": "عرض القسيمة"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "نشطة",
+      "redeemed": "مستخدمة",
+      "expired": "منتهية الصلاحية",
+      "cancelled": "ملغاة"
+    },
+    "list": {
+      "metaTitle": "بطاقات الهدايا",
+      "title": "بطاقات الهدايا",
+      "subtitle": "إنشاء بطاقات الهدايا وإدارتها",
+      "newGiftCard": "بطاقة هدايا جديدة",
+      "stats": {
+        "total": "إجمالي بطاقات الهدايا",
+        "totalDescription": "جميع بطاقات الهدايا الصادرة",
+        "active": "نشطة",
+        "activeDescription": "قابلة للاستخدام حالياً",
+        "redeemed": "مستخدمة",
+        "redeemedDescription": "عمليات الاستخدام المكتملة",
+        "totalValue": "القيمة الإجمالية",
+        "totalValueDescription": "قيمة بطاقات الهدايا الصادرة"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "لا توجد بطاقات هدايا بعد",
+      "emptyDescription": "أنشئ بطاقة هدايا بعلامتك التجارية مع الاستخدام عبر رمز QR.",
+      "createFirst": "أنشئ بطاقة الهدايا الأولى",
+      "searchPlaceholder": "ابحث بالعنوان أو الرمز أو الرسالة",
+      "searchLabel": "البحث في بطاقات الهدايا",
+      "status": "الحالة",
+      "allStatus": "جميع الحالات",
+      "sortBy": "ترتيب حسب",
+      "sortDate": "التاريخ (الأحدث)",
+      "sortAmount": "المبلغ (من الأعلى إلى الأقل)",
+      "showing": "عرض {shown} من {total, plural, zero {# بطاقة هدايا} one {بطاقة هدايا واحدة} two {بطاقتَي هدايا} few {# بطاقات هدايا} many {# بطاقة هدايا} other {# بطاقة هدايا}}",
+      "clearFilters": "مسح عوامل التصفية",
+      "noMatches": "لا توجد بطاقات هدايا تطابق عوامل التصفية.",
+      "defaultHeadline": "بطاقة هدايا",
+      "noExpiry": "بلا انتهاء صلاحية",
+      "validUntil": "صالحة حتى: {date}",
+      "redeemedOn": "استُخدمت في: {date}",
+      "details": "التفاصيل",
+      "view": "عرض"
+    },
+    "detail": {
+      "title": "بطاقة هدايا",
+      "code": "الرمز {code}",
+      "publicView": "العرض العام",
+      "newGiftCard": "بطاقة هدايا جديدة",
+      "detailsTitle": "تفاصيل بطاقة الهدايا",
+      "value": "القيمة",
+      "validFrom": "صالحة من",
+      "validTo": "صالحة حتى",
+      "noExpiry": "بلا انتهاء صلاحية",
+      "redeemedAt": "تاريخ الاستخدام",
+      "notRedeemed": "غير مستخدمة",
+      "qrTitle": "رمز QR للاستخدام من قِبل الموظفين",
+      "qrHelp": "يمكن للموظفين مسح رمز QR هذا لاستخدام بطاقة الهدايا وإبطالها."
+    },
+    "new": {
+      "title": "بطاقة هدايا جديدة",
+      "subtitle": "خصّص بطاقة هدايا وأصدرها",
+      "created": "تم إنشاء بطاقة الهدايا.",
+      "cancel": "إلغاء",
+      "creating": "جارٍ الإنشاء...",
+      "submit": "إنشاء بطاقة هدايا",
+      "errors": {
+        "amountRequired": "أدخل مبلغاً أكبر من 0.",
+        "endBeforeStart": "يجب أن يكون تاريخ الانتهاء في تاريخ البدء أو بعده.",
+        "createFailed": "فشل إنشاء بطاقة الهدايا"
+      },
+      "amountErrors": {
+        "negative": "لا يمكن أن يكون المبلغ سالباً.",
+        "invalid": "المبلغ ليس رقماً صالحاً.",
+        "wholeNumber": "يجب أن يكون المبلغ عدداً صحيحاً.",
+        "decimals": "يمكن أن يحتوي المبلغ على {decimals} منازل عشرية كحد أقصى.",
+        "tooLarge": "المبلغ كبير جداً."
+      },
+      "priceErrors": {
+        "negative": "لا يمكن أن يكون سعر البيع سالباً.",
+        "invalid": "سعر البيع ليس رقماً صالحاً.",
+        "wholeNumber": "يجب أن يكون سعر البيع عدداً صحيحاً.",
+        "decimals": "يمكن أن يحتوي سعر البيع على {decimals} منازل عشرية كحد أقصى.",
+        "tooLarge": "سعر البيع كبير جداً."
+      },
+      "valueSection": {
+        "title": "القيمة والصلاحية",
+        "description": "حدّد المبلغ والعملة وتاريخ الانتهاء",
+        "amount": "المبلغ",
+        "faceValue": "القيمة الاسمية: {value}.",
+        "amountHelp": "اكتب المبلغ بعملة {currency}، مثل 50 أو 49,90 لـ{example}.",
+        "currency": "العملة",
+        "validFrom": "صالحة من",
+        "validTo": "صالحة حتى",
+        "noExpiry": "بلا تاريخ انتهاء"
+      },
+      "purchaseSection": {
+        "title": "شراء العملاء",
+        "description": "اسمح للعملاء بشراء بطاقة الهدايا هذه عبر الإنترنت",
+        "purchasable": "متاحة للشراء من قِبل العملاء",
+        "salePrice": "سعر البيع (اختياري، القيمة الاسمية افتراضياً)",
+        "salePricePlaceholder": "مثل المبلغ",
+        "customersPay": "يدفع العملاء {value}.",
+        "salePriceHelp": "اتركه فارغاً للبيع بالقيمة الاسمية. حدّد سعراً مختلفاً للعروض الترويجية."
+      },
+      "brandingSection": {
+        "title": "العلامة التجارية والرسالة",
+        "description": "العنوان والرسالة والصور والألوان",
+        "headline": "العنوان",
+        "headlinePlaceholder": "هدية لعشاق القهوة",
+        "message": "الرسالة",
+        "messagePlaceholder": "أضف رسالة شخصية للمستلم",
+        "logoUrl": "URL الشعار",
+        "imageUrl": "URL الصورة",
+        "accentColor": "لون التمييز",
+        "backgroundColor": "لون الخلفية",
+        "textColor": "لون النص",
+        "codePrefix": "بادئة الرمز (اختياري)"
+      },
+      "preview": {
+        "title": "معاينة",
+        "defaultHeadline": "بطاقة هدايا",
+        "imageAlt": "بطاقة هدايا",
+        "logoAlt": "شعار العلامة التجارية",
+        "notePlaceholder": "أضف ملاحظة شخصية"
+      }
+    },
+    "gifts": {
+      "title": "منتجات الهدايا",
+      "subtitle": "أدِر منتجاتك في مركز الهدايا",
+      "dashboard": "لوحة التحكم",
+      "confirmDelete": "هل أنت متأكد؟ سيؤدي هذا إلى إلغاء تفعيل المنتج.",
+      "stats": {
+        "total": "الإجمالي",
+        "active": "نشطة",
+        "views": "المشاهدات",
+        "purchases": "المشتريات"
+      },
+      "emptyTitle": "لا توجد منتجات هدايا بعد",
+      "emptyDescription": "أضف منتجك الأول ليظهر في موجز مركز الهدايا.",
+      "emptyApiHint": "استخدم API على <code>{endpoint}</code> لإنشاء المنتجات.",
+      "inactive": "غير نشط",
+      "featured": "مميز",
+      "views": "{count, plural, zero {لا مشاهدات} one {مشاهدة واحدة} two {مشاهدتان} few {# مشاهدات} many {# مشاهدة} other {# مشاهدة}}",
+      "purchases": "{count, plural, zero {لا مشتريات} one {عملية شراء واحدة} two {عمليتا شراء} few {# عمليات شراء} many {# عملية شراء} other {# عملية شراء}}",
+      "conversionRate": "معدل التحويل {rate}%",
+      "activate": "تفعيل",
+      "deactivate": "إلغاء التفعيل",
+      "delete": "حذف"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "لا تتوفر بيانات",
+      "value": "القيمة: <strong>{value}</strong>",
+      "dismiss": "تجاهل",
+      "remove": "إزالة",
+      "dialog": "مربع حوار",
+      "close": "إغلاق",
+      "loading": "جارٍ التحميل"
+    },
+    "analyticsFunnel": {
+      "empty": "لا يوجد نشاط بعد لهذه الفترة",
+      "top": "الأعلى",
+      "drop": "انخفاض -{rate}%"
+    },
+    "periodComparison": {
+      "title": "مقارنة الفترات",
+      "loading": "جارٍ التحميل...",
+      "previous": "السابق: {value}",
+      "noData": "لا تتوفر بيانات",
+      "period": {
+        "day": "يوم",
+        "week": "أسبوع",
+        "month": "شهر",
+        "quarter": "ربع سنة",
+        "year": "سنة"
+      },
+      "metric": {
+        "revenue": "الإيرادات",
+        "redemptions": "مرات الاستخدام",
+        "purchases": "المشتريات",
+        "referrals": "الإحالات",
+        "customers": "العملاء"
+      }
+    },
+    "trendChart": {
+      "noData": "لا توجد بيانات"
+    },
+    "conversionChart": {
+      "noData": "لا تتوفر بيانات",
+      "previous": "السابق: {value}"
+    },
+    "funnelChart": {
+      "empty": "لا يوجد نشاط بعد لهذه الفترة"
+    },
+    "geoMap": {
+      "noData": "لا تتوفر بيانات",
+      "value": "القيمة: <strong>{value}</strong>",
+      "country": {
+        "GB": "المملكة المتحدة",
+        "IE": "أيرلندا",
+        "FR": "فرنسا",
+        "DE": "ألمانيا",
+        "ES": "إسبانيا",
+        "PT": "البرتغال",
+        "IT": "إيطاليا",
+        "NL": "هولندا",
+        "BE": "بلجيكا",
+        "CH": "سويسرا",
+        "AT": "النمسا",
+        "PL": "بولندا",
+        "CZ": "التشيك",
+        "SE": "السويد",
+        "NO": "النرويج",
+        "FI": "فنلندا",
+        "DK": "الدنمارك",
+        "EE": "إستونيا",
+        "LV": "لاتفيا",
+        "LT": "ليتوانيا",
+        "HU": "المجر",
+        "RO": "رومانيا",
+        "BG": "بلغاريا",
+        "GR": "اليونان",
+        "HR": "كرواتيا",
+        "SK": "سلوفاكيا",
+        "SI": "سلوفينيا",
+        "RS": "صربيا",
+        "UA": "أوكرانيا",
+        "BY": "بيلاروسيا"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "في انتظار البيانات..."
+    },
+    "pieDonutChart": {
+      "noData": "لا تتوفر بيانات",
+      "total": "الإجمالي"
+    },
+    "activityFeed": {
+      "justNow": "الآن",
+      "minutesAgo": "منذ {count} د",
+      "hoursAgo": "منذ {count} س",
+      "daysAgo": "منذ {count} ي",
+      "empty": "لا يوجد نشاط بعد",
+      "loadMore": "تحميل المزيد",
+      "eventType": {
+        "purchase": "شراء",
+        "redemption": "استخدام",
+        "signup": "تسجيل",
+        "alert": "تنبيه"
+      }
+    },
+    "dateRange": {
+      "days7": "7 أيام",
+      "days30": "30 يوماً",
+      "days90": "90 يوماً",
+      "year1": "سنة واحدة",
+      "custom": "مخصص"
+    },
+    "chartCard": {
+      "fullscreen": "ملء الشاشة",
+      "exitFullscreen": "الخروج من ملء الشاشة",
+      "retry": "إعادة المحاولة"
+    },
+    "dashboardHeader": {
+      "export": "تصدير",
+      "exportAs": "تصدير بصيغة {format}"
+    },
+    "dataTable": {
+      "empty": "لا تتوفر بيانات",
+      "showing": "عرض {from}–{to} من {total}",
+      "previousPage": "الصفحة السابقة",
+      "nextPage": "الصفحة التالية"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "مباشر",
+        "reconnecting": "جارٍ إعادة الاتصال",
+        "disconnected": "غير متصل"
+      },
+      "status": {
+        "connected": "متصل",
+        "reconnecting": "جارٍ إعادة الاتصال",
+        "disconnected": "غير متصل"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "مقارنة بالفترة السابقة"
+    },
+    "statComparison": {
+      "current": "الحالية",
+      "previous": "السابقة",
+      "change": "التغيّر"
+    },
+    "aiInsightPanel": {
+      "title": "رؤى الذكاء الاصطناعي",
+      "placeholder": "اطرح سؤالاً على الذكاء الاصطناعي...",
+      "send": "إرسال"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "مباشر",
+        "degraded": "أداء متراجع",
+        "disconnected": "غير متصل"
+      },
+      "latency": "زمن الاستجابة: {ms} مللي ثانية",
+      "lastUpdate": "آخر تحديث: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "الإشعارات",
+      "title": "الإشعارات",
+      "markAllRead": "تعليم الكل كمقروء",
+      "empty": "لا توجد إشعارات",
+      "ariaLabelUnread": "الإشعارات ({count} غير مقروءة)"
+    },
+    "premiumChartCard": {
+      "info": "معلومات",
+      "fullscreen": "ملء الشاشة",
+      "exitFullscreen": "الخروج من ملء الشاشة",
+      "moreOptions": "خيارات إضافية",
+      "empty": "لا تتوفر بيانات لهذه الفترة"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "مقارنة بالفترة الماضية"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "يعمل",
+        "degraded": "أداء متراجع",
+        "outage": "انقطاع"
+      }
+    },
+    "select": {
+      "placeholder": "اختر...",
+      "search": "بحث...",
+      "empty": "لم يتم العثور على خيارات",
+      "removeOption": "إزالة {label}"
+    },
+    "sidebar": {
+      "expand": "توسيع الشريط الجانبي",
+      "collapse": "طي الشريط الجانبي",
+      "openMenu": "فتح القائمة",
+      "closeMenu": "إغلاق القائمة"
+    },
+    "iconSystem": {
+      "notFound": "لم يتم العثور على الأيقونة «{name}»",
+      "badge": "{count, plural, zero {لا إشعارات} one {إشعار واحد} two {إشعاران} few {# إشعارات} many {# إشعاراً} other {# إشعار}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "اللوحة الجانبية",
+      "closePanel": "إغلاق اللوحة"
+    },
+    "codeBlock": {
+      "copyCode": "نسخ الشيفرة",
+      "copied": "تم النسخ",
+      "copy": "نسخ"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "العملاء",
+      "title": "العملاء",
+      "summary": "{count, plural, zero {لا عملاء} one {عميل واحد} two {عميلان} few {# عملاء} many {# عميلاً} other {# عميل}} · إجمالي الإيرادات {revenue}",
+      "stats": {
+        "totalCustomers": "إجمالي العملاء",
+        "totalRevenue": "إجمالي الإيرادات",
+        "totalRedemptions": "إجمالي مرات الاستخدام"
+      },
+      "table": {
+        "customer": "العميل",
+        "email": "البريد الإلكتروني",
+        "purchases": "المشتريات",
+        "totalSpent": "إجمالي الإنفاق",
+        "redemptions": "مرات الاستخدام",
+        "lastPurchase": "آخر عملية شراء"
+      },
+      "empty": "لا يوجد عملاء بعد",
+      "unknown": "غير معروف"
+    },
+    "qrCheckout": {
+      "title": "الدفع الفوري عبر QR",
+      "subtitle": "أنشئ رموز QR لدفع فوري للعملاء",
+      "voucherLabel": "ربط بقسيمة (اختياري)",
+      "generalOption": "دفع عام (بدون قسيمة محددة)",
+      "voucherOption": "{type} - {value} {currency} ({status})",
+      "generating": "جارٍ الإنشاء...",
+      "generate": "إنشاء رمز QR",
+      "qrAlt": "رمز QR للدفع",
+      "scanToCheckout": "امسح للدفع",
+      "print": "طباعة رمز QR"
+    },
+    "redemptions": {
+      "metaTitle": "عمليات الاستخدام",
+      "subtitle": "عرض عمليات استخدام القسائم وتأكيدها.",
+      "stats": {
+        "totalTitle": "إجمالي مرات الاستخدام",
+        "totalDescription": "جميع عمليات الاستخدام المُرسلة",
+        "pendingTitle": "قيد الانتظار",
+        "pendingDescription": "بانتظار التأكيد",
+        "confirmedTitle": "مؤكدة",
+        "confirmedDescription": "عمليات الاستخدام المعتمدة",
+        "discountsTitle": "الخصومات الممنوحة",
+        "discountsDescription": "الخصومات المؤكدة"
+      },
+      "empty": {
+        "title": "لا توجد عمليات استخدام بعد",
+        "description": "ستظهر عمليات الاستخدام هنا عندما يستخدم العملاء القسائم."
+      },
+      "voucherFallback": "قسيمة",
+      "card": {
+        "order": "طلب بقيمة {amount}",
+        "discount": "الخصم: {amount}",
+        "discountReferred": "الخصم: {amount} - بإحالة من {name}",
+        "confirmed": "مؤكدة",
+        "pending": "قيد الانتظار",
+        "method": "الطريقة: {method}",
+        "methods": {
+          "online": "عبر الإنترنت",
+          "in_store": "في المتجر"
+        },
+        "orderReference": "الطلب: {reference}",
+        "notAvailable": "غير متوفر",
+        "location": "الموقع: {location}",
+        "date": "التاريخ: {date}"
+      },
+      "confirm": {
+        "prompt": "تأكيد عملية الاستخدام هذه؟ سيؤدي ذلك إلى تحرير الرصيد للمُحيل.",
+        "confirmLabel": "تأكيد",
+        "success": "تم تأكيد الاستخدام. تم تحرير الرصيد للمُحيل.",
+        "error": "فشل تأكيد الاستخدام. يُرجى المحاولة مجدداً.",
+        "confirming": "جارٍ التأكيد...",
+        "button": "تأكيد الاستخدام"
+      },
+      "export": {
+        "success": "تم تصدير عمليات الاستخدام بنجاح!",
+        "error": "فشل تصدير عمليات الاستخدام",
+        "exporting": "جارٍ التصدير...",
+        "button": "تصدير CSV"
+      }
+    },
+    "reviews": {
+      "title": "التقييمات",
+      "subtitle": "تابع تقييمات العملاء وردّ عليها",
+      "filters": "عوامل التصفية",
+      "reviewCount": "{count, plural, zero {لا تقييمات} one {تقييم واحد} two {تقييمان} few {# تقييمات} many {# تقييماً} other {# تقييم}}",
+      "ratingDistribution": "توزيع التقييمات",
+      "responseRate": "معدل الرد",
+      "replied": "تم الرد",
+      "pending": "قيد الانتظار",
+      "responseRatePercent": "معدل الرد {percent}%",
+      "filter": {
+        "rating": "التقييم",
+        "allRatings": "جميع التقييمات",
+        "stars": "{count, plural, zero {لا نجوم} one {نجمة واحدة} two {نجمتان} few {# نجوم} many {# نجمة} other {# نجمة}}",
+        "replyStatus": "حالة الرد",
+        "all": "الكل",
+        "needsReply": "بحاجة إلى رد",
+        "replied": "تم الرد",
+        "clear": "مسح"
+      },
+      "loading": "جارٍ تحميل التقييمات...",
+      "empty": "لم يتم العثور على تقييمات.",
+      "anonymous": "مجهول",
+      "verified": "موثّق",
+      "campaign": "الحملة: {name}",
+      "voucher": "القسيمة: {code}",
+      "foundHelpful": "وجده {count} مفيداً",
+      "yourReply": "ردّك",
+      "replyPlaceholder": "اكتب ردّك...",
+      "posting": "جارٍ النشر...",
+      "postReply": "نشر الرد",
+      "cancel": "إلغاء",
+      "reply": "رد",
+      "showing": "عرض {from}–{to} من {total}",
+      "pageOf": "الصفحة {page} من {totalPages}",
+      "previousPage": "الصفحة السابقة",
+      "nextPage": "الصفحة التالية",
+      "loadFailed": "فشل تحميل التقييمات",
+      "replyFailed": "فشل الرد",
+      "replyPosted": "تم نشر الرد"
+    },
+    "scanner": {
+      "title": "الماسح",
+      "subtitle": "امسح القسائم وبطاقات الهدايا والتذاكر",
+      "manual": "يدوي",
+      "camera": "الكاميرا",
+      "scanning": "جارٍ المسح...",
+      "cameraDenied": "تم رفض الوصول إلى الكاميرا. اسمح بالوصول إلى الكاميرا من إعدادات المتصفح، أو اكتب الرمز أدناه.",
+      "cameraUnavailable": "لا تتوفر كاميرا. اكتب الرمز أدناه بدلاً من ذلك.",
+      "pointAtCode": "وجّه الكاميرا نحو رمز QR للمسح تلقائياً",
+      "enterCode": "أدخل الرمز",
+      "codePlaceholder": "رمز القسيمة (مثل AUD-CMUI0TG1)، أو رابط القسيمة، أو رمز التذكرة أو بطاقة الهدايا",
+      "codeAriaLabel": "الرمز المراد مسحه",
+      "scan": "مسح",
+      "found": {
+        "voucher": "تم العثور على القسيمة",
+        "gift_card": "تم العثور على بطاقة الهدايا",
+        "ticket": "تم العثور على التذكرة"
+      },
+      "info": {
+        "ticketNumber": "رقم التذكرة",
+        "event": "الفعالية",
+        "type": "النوع",
+        "standard": "عادية",
+        "attendee": "الحاضر",
+        "code": "الرمز",
+        "amount": "المبلغ",
+        "message": "الرسالة",
+        "voucher": "القسيمة",
+        "campaign": "الحملة",
+        "none": "لا يوجد",
+        "value": "القيمة",
+        "validUntil": "صالحة حتى"
+      },
+      "redeem": "استخدام",
+      "redeeming": "جارٍ الاستخدام...",
+      "cannotRedeem": "لا يمكن استخدام هذا العنصر (الحالة: {status})",
+      "redeemed": {
+        "voucher": "تم استخدام القسيمة بنجاح!",
+        "gift_card": "تم استخدام بطاقة الهدايا بنجاح!",
+        "ticket": "تم استخدام التذكرة بنجاح!"
+      },
+      "errors": {
+        "enterCode": "يُرجى إدخال رمز",
+        "notFound": "غير موجود",
+        "scanFailed": "فشل المسح",
+        "redeemFailed": "فشل الاستخدام"
+      },
+      "status": {
+        "giftCard": {
+          "active": "نشطة",
+          "redeemed": "مستخدمة",
+          "expired": "منتهية الصلاحية",
+          "cancelled": "ملغاة"
+        },
+        "ticket": {
+          "available": "متاحة",
+          "sold": "مُباعة",
+          "used": "مستخدمة",
+          "cancelled": "ملغاة",
+          "refunded": "مُستردّة"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "لا يمكن أن يكون السعر سالباً.",
+      "invalid": "السعر ليس رقماً صالحاً.",
+      "wholeNumber": "يجب أن يكون السعر عدداً صحيحاً.",
+      "decimals": "يمكن أن يحتوي السعر على {decimals} منازل عشرية كحد أقصى.",
+      "tooLarge": "السعر كبير جداً."
+    },
+    "appointments": {
+      "title": "المواعيد",
+      "subtitle": "إدارة الحجوزات والتوفّر",
+      "createSlot": "إنشاء موعد متاح",
+      "form": {
+        "serviceName": "اسم الخدمة",
+        "price": "السعر ({currency}، اتركه فارغاً إذا كان مجانياً)",
+        "startTime": "وقت البدء",
+        "endTime": "وقت الانتهاء",
+        "notes": "ملاحظات",
+        "creating": "جارٍ الإنشاء…",
+        "submit": "إنشاء موعد متاح"
+      },
+      "status": {
+        "all": "الكل",
+        "pending": "قيد الانتظار",
+        "confirmed": "مؤكد",
+        "cancelled": "ملغى",
+        "completed": "مكتمل"
+      },
+      "loading": "جارٍ التحميل...",
+      "empty": "لم يتم العثور على مواعيد",
+      "bookedBy": "حجزه: {name}",
+      "confirm": "تأكيد",
+      "confirmAria": "تأكيد الموعد",
+      "cancel": "إلغاء",
+      "cancelAria": "إلغاء الموعد",
+      "errors": {
+        "endBeforeStart": "يجب أن يكون وقت الانتهاء بعد وقت البدء.",
+        "createFailed": "تعذّر إنشاء الموعد المتاح. يُرجى المحاولة مجدداً.",
+        "network": "تعذّر الوصول إلى الخادم. تحقق من اتصالك وحاول مجدداً.",
+        "updateFailed": "تعذّر تحديث الموعد (الخطأ {status})."
+      }
+    },
+    "inventory": {
+      "title": "المخزون",
+      "subtitle": "تتبّع مستويات المخزون وأدِر توفّر القسائم",
+      "refresh": "تحديث",
+      "summary": {
+        "totalItems": "إجمالي العناصر",
+        "lowStock": "مخزون منخفض",
+        "outOfStock": "نفد من المخزون"
+      },
+      "alerts": {
+        "title": "تنبيهات انخفاض المخزون ({count})",
+        "threshold": "{stock} / الحد {threshold}"
+      },
+      "loading": "جارٍ تحميل المخزون...",
+      "empty": "لم يتم العثور على قسائم",
+      "typeVoucher": "قسيمة {type}",
+      "stockStatus": {
+        "unlimited": "غير محدود",
+        "outOfStock": "نفد من المخزون",
+        "lowStock": "مخزون منخفض",
+        "inStock": "متوفر"
+      },
+      "stock": "المخزون: {stock}",
+      "purchased": "المشتراة: {count}",
+      "redeemed": "المستخدمة: {count}",
+      "validUntil": "صالحة حتى {date}",
+      "edit": {
+        "button": "تعديل المخزون",
+        "stockQuantity": "كمية المخزون",
+        "threshold": "حد انخفاض المخزون",
+        "save": "حفظ",
+        "saving": "جارٍ الحفظ...",
+        "cancel": "إلغاء"
+      },
+      "stockUpdated": "تم تحديث المخزون",
+      "errors": {
+        "loadFailed": "فشل تحميل المخزون",
+        "updateFailed": "فشل تحديث المخزون"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "لم يتم إعداد اقتراحات الذكاء الاصطناعي على هذه المنصة بعد، لذا أدوات التخطيط التلقائي وقوائم التحقق مخفية. لا يزال بإمكانك إنشاء صفحاتك وتعديلها يدوياً."
+    },
+    "pricing": {
+      "title": "التسعير الديناميكي",
+      "newRule": "قاعدة جديدة",
+      "ruleTypes": {
+        "demand": {
+          "label": "حسب الطلب",
+          "desc": "اضبط السعر حسب نسبة المشاهدات إلى المشتريات"
+        },
+        "timeOfDay": {
+          "label": "حسب وقت اليوم",
+          "desc": "تسعير ساعات الذروة مقابل خارجها"
+        },
+        "inventory": {
+          "label": "حسب المخزون",
+          "desc": "تغيير السعر حسب المخزون المتبقي"
+        },
+        "surge": {
+          "label": "زيادة مؤقتة",
+          "desc": "زيادة الأسعار في المناسبات والعطلات"
+        },
+        "loyalty": {
+          "label": "الولاء",
+          "desc": "خصومات للعملاء المتكررين"
+        }
+      },
+      "form": {
+        "title": "إنشاء قاعدة تسعير",
+        "ruleType": "نوع القاعدة",
+        "priority": "الأولوية",
+        "priorityPlaceholder": "الأعلى يُطبَّق أولاً",
+        "config": "الإعدادات (JSON)",
+        "submit": "إنشاء القاعدة",
+        "cancel": "إلغاء"
+      },
+      "loading": "جارٍ تحميل القواعد...",
+      "empty": "لا توجد قواعد تسعير بعد. أنشئ قاعدة لتفعيل التسعير الديناميكي.",
+      "table": {
+        "type": "النوع",
+        "priority": "الأولوية",
+        "config": "الإعدادات",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      },
+      "active": "نشطة",
+      "inactive": "غير نشطة",
+      "deleteAria": "حذف قاعدة التسعير",
+      "deleteConfirm": "حذف قاعدة التسعير هذه؟",
+      "delete": "حذف",
+      "errors": {
+        "invalidJson": "يجب أن يحتوي حقل الإعدادات على JSON صالح."
+      },
+      "preview": {
+        "title": "معاينة السعر",
+        "description": "أدخل معرّف قسيمة لمعرفة تأثير القواعد النشطة على سعرها.",
+        "voucherId": "معرّف القسيمة",
+        "voucherIdPlaceholder": "أدخل معرّف القسيمة",
+        "calculate": "احسب",
+        "error": "تعذّر حساب السعر",
+        "basePrice": "السعر الأساسي",
+        "finalPrice": "السعر النهائي"
+      }
+    },
+    "rentals": {
+      "title": "حجوزات الاستئجار",
+      "subtitle": "إدارة طلبات الاستئجار والإرجاع",
+      "status": {
+        "all": "الكل",
+        "pending": "قيد الانتظار",
+        "approved": "مقبول",
+        "rejected": "مرفوض",
+        "paid": "مدفوع",
+        "active": "نشط",
+        "returned": "مُعاد",
+        "cancelled": "ملغى"
+      },
+      "empty": "لم يتم العثور على حجوزات استئجار.",
+      "dates": "{start} - {end} ({days, plural, zero {# يوم} one {يوم واحد} two {يومان} few {# أيام} many {# يوماً} other {# يوم}})",
+      "total": "الإجمالي: <strong>{total}</strong> ({rate}/يوم)",
+      "note": "ملاحظة: {note}",
+      "rejectedReason": "مرفوض: {reason}",
+      "bookedMeta": "تاريخ الحجز: {date} | المستخدم: {user}...",
+      "approve": "قبول",
+      "reasonPlaceholder": "السبب (اختياري)",
+      "confirm": "تأكيد",
+      "cancel": "إلغاء",
+      "reject": "رفض",
+      "markReturned": "تعليم كمُعاد"
+    },
+    "subscriptionBoxes": {
+      "title": "صناديق الاشتراك",
+      "subtitle": "إدارة صناديق القسائم المتكررة",
+      "newBox": "+ صندوق جديد",
+      "cancel": "إلغاء",
+      "form": {
+        "name": "الاسم",
+        "description": "الوصف",
+        "price": "السعر ({currency})",
+        "currency": "العملة",
+        "interval": "الدورة",
+        "maxItems": "الحد الأقصى للعناصر",
+        "creating": "جارٍ الإنشاء...",
+        "submit": "إنشاء صندوق"
+      },
+      "interval": {
+        "weekly": "أسبوعي",
+        "monthly": "شهري",
+        "quarterly": "ربع سنوي"
+      },
+      "created": "تم إنشاء صندوق الاشتراك.",
+      "empty": "لا توجد صناديق اشتراك بعد. أنشئ أول صندوق.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, zero {لا مشتركين} one {مشترك واحد} two {مشتركان} few {# مشتركين} many {# مشتركاً} other {# مشترك}}",
+      "items": "{count, plural, zero {لا عناصر} one {عنصر واحد} two {عنصران} few {# عناصر} many {# عنصراً} other {# عنصر}}",
+      "errors": {
+        "priceAboveZero": "أدخل سعراً أكبر من 0.",
+        "createFailed": "تعذّر إنشاء صندوق الاشتراك (الخطأ {status}).",
+        "network": "تعذّر إنشاء صندوق الاشتراك. تحقق من اتصالك وحاول مجدداً."
+      },
+      "intervalUnit": {
+        "weekly": "أسبوع",
+        "monthly": "شهر",
+        "quarterly": "ربع سنة"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "الموقع الإلكتروني",
+      "supportEmail": "بريد الدعم",
+      "logoUrl": "URL الشعار",
+      "primaryColor": "اللون الأساسي",
+      "secondaryColor": "اللون الثانوي",
+      "backgroundColor": "لون الخلفية",
+      "primaryColorHex": "قيمة hex للون الأساسي",
+      "secondaryColorHex": "قيمة hex للون الثانوي",
+      "backgroundColorHex": "قيمة hex للون الخلفية",
+      "saving": "جارٍ الحفظ..."
+    },
+    "page": {
+      "metaTitle": "إعدادات التاجر",
+      "infoTitle": "معلومات التاجر",
+      "infoSubtitle": "التفاصيل الأساسية للتاجر",
+      "name": "الاسم",
+      "slug": "المعرّف النصي (Slug)",
+      "country": "الدولة",
+      "defaultCurrency": "العملة الافتراضية",
+      "website": "الموقع الإلكتروني",
+      "supportEmail": "بريد الدعم",
+      "completeOnboarding": "إكمال الإعداد",
+      "billingTitle": "الفوترة",
+      "billingSubtitle": "تجربة مجانية لمدة 14 يوماً، ثم خطط تبدأ من 19€ شهرياً. رسوم معاملات 5% على مبيعات القسائم.",
+      "status": "الحالة",
+      "trialStatus": "تجربة مجانية — {days, plural, zero {لم يتبقَّ أي يوم} one {يتبقى يوم واحد} two {يتبقى يومان} few {تتبقى # أيام} many {يتبقى # يوماً} other {يتبقى # يوم}}",
+      "statusActive": "نشط",
+      "statusInactive": "غير نشط",
+      "currentPlan": "الخطة الحالية",
+      "trialEnds": "تنتهي التجربة",
+      "periodEnds": "تنتهي الفترة الحالية",
+      "manage": "إدارة",
+      "payoutsTitle": "التحويلات",
+      "payoutsEnabled": "حساب Stripe مرتبط ومفعّل",
+      "payoutsInProgress": "الإعداد قيد التقدم — أكمله لتفعيل التحويلات",
+      "payoutsNotConnected": "اربط Stripe لتلقي عائدات مبيعات القسائم",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "تلقَّ إشعارات الأحداث فورياً عبر HTTP",
+      "notificationsTitle": "الإشعارات",
+      "notificationsSubtitle": "اختر فئات البريد الإلكتروني التي تتلقاها بصفتك عضواً في الفريق."
+    },
+    "brandProfile": {
+      "title": "ملف العلامة التجارية",
+      "subtitle": "خصّص ألوان علامتك التجارية وشعارها ومعلومات التواصل.",
+      "updated": "تم تحديث ملف العلامة التجارية بنجاح!",
+      "updateFailed": "فشل تحديث ملف العلامة التجارية",
+      "save": "حفظ التغييرات"
+    },
+    "domains": {
+      "title": "النطاقات المخصصة",
+      "subtitle": "اربط نطاقك الخاص وتحقق منه لتوجيه الزوار إلى متجرك.",
+      "inputLabel": "النطاق المخصص",
+      "adding": "جارٍ الإضافة...",
+      "add": "إضافة نطاق",
+      "empty": "لم يتم إعداد أي نطاقات.",
+      "statusLine": "الحالة: {status}",
+      "statusValue": {
+        "pending": "قيد الانتظار",
+        "verified": "تم التحقق"
+      },
+      "verify": "تحقق",
+      "remove": "إزالة",
+      "addedTitle": "تمت إضافة النطاق",
+      "addedDescription": "تحقق من إعدادات DNS قبل تحويل حركة المرور.",
+      "addErrorTitle": "خطأ في النطاق",
+      "addErrorDescription": "تعذّرت إضافة النطاق.",
+      "verifiedTitle": "تم التحقق من النطاق",
+      "verifiedDescription": "توجيه المتجر نشط الآن.",
+      "verifyErrorTitle": "خطأ في التحقق",
+      "verifyErrorDescription": "تعذّر التحقق من النطاق.",
+      "removedTitle": "تمت إزالة النطاق",
+      "removeErrorTitle": "خطأ في الإزالة",
+      "removeErrorDescription": "تعذّرت إزالة النطاق."
+    },
+    "notifications": {
+      "metaTitle": "تفضيلات الإشعارات",
+      "title": "تفضيلات الإشعارات",
+      "intro": "تحكّم في فئات البريد الإلكتروني التي تصل إلى بريدك الوارد بصفتك عضواً في <name>{merchantName}</name>. التفضيلات شخصية — يدير كل عضو في الفريق تفضيلاته الخاصة.",
+      "required": "إلزامي",
+      "toggle": "تبديل {label}",
+      "unsaved": "تغييرات غير محفوظة",
+      "allSaved": "تم حفظ جميع التغييرات",
+      "saving": "جارٍ الحفظ…",
+      "save": "حفظ التفضيلات",
+      "savedTitle": "تم حفظ التفضيلات",
+      "saveFailedTitle": "فشل الحفظ",
+      "saveFailedDescription": "تعذّر تحديث تفضيلات الإشعارات.",
+      "category": {
+        "orders": {
+          "label": "الطلبات وعمليات الاستخدام الجديدة",
+          "description": "بريد إلكتروني عند شراء قسيمة أو استخدامها أو إهدائها."
+        },
+        "payouts": {
+          "label": "التحويلات",
+          "description": "وصول تحويلات Stripe وفشلها وتعليقها."
+        },
+        "fraud_alerts": {
+          "label": "تنبيهات الاحتيال والأمان",
+          "description": "أنماط استخدام غير معتادة، واسترجاع المدفوعات، وحالات تسجيل دخول غير طبيعية للفريق. لا يمكن تعطيلها."
+        },
+        "campaign_updates": {
+          "label": "دورة حياة الحملة",
+          "description": "نشر الحملة، وقرب انتهائها خلال 7 أيام، وانتهاؤها."
+        },
+        "weekly_digest": {
+          "label": "ملخص الأداء الأسبوعي",
+          "description": "ملخص كل يوم اثنين لإيرادات الأسبوع الماضي ومرات الاستخدام وأفضل القسائم."
+        },
+        "product_updates": {
+          "label": "أخبار المنتج من GiftHub",
+          "description": "ميزات جديدة وخارطة الطريق ونصائح عرضية. رسالة واحدة شهرياً كحد أقصى."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "تحويلات التاجر",
+      "title": "التحويلات",
+      "intro": "اربط حساب Stripe لتُدفع مبيعات القسائم مباشرة إلى حسابك البنكي. نقتطع رسوم منصة بنسبة 5%، ويُحوَّل الباقي تلقائياً إلى حسابك المرتبط عند الدفع.",
+      "stripeAccount": "حساب Stripe",
+      "capabilityState": "حالة الإمكانية",
+      "accountStatus": {
+        "pending": "قيد الانتظار",
+        "restricted": "مقيّد",
+        "enabled": "مفعّل",
+        "disabled": "معطّل"
+      },
+      "backToSettings": "العودة إلى الإعدادات",
+      "howTitle": "كيف تعمل التحويلات",
+      "how1": "يدفع العملاء عبر صفحة الدفع في المنصة. نحصّل المبلغ كاملاً ونحتفظ به لدى Stripe.",
+      "how2": "عند إتمام الدفع، يرسل Stripe سعر البيع مخصوماً منه رسومنا البالغة 5% مباشرة إلى حساب التحويل الخاص بك.",
+      "how3": "بعد ذلك يدفع Stripe المبلغ إلى حسابك البنكي وفق الجدول الذي تختاره في إعدادات التحويل في Stripe (عادةً يومياً، بعد يومين تقريباً من البيع).",
+      "how4": "تُخصم المبالغ المستردة واسترجاع المدفوعات من تحويلك التالي؛ ويمكن لفريق الإدارة تجميد رصيدك يدوياً إذا اكتشفنا احتيالاً.",
+      "badge": {
+        "enabled": {
+          "label": "التحويلات مفعّلة",
+          "description": "يحوّل Stripe أموال مبيعات القسائم إلى حسابك البنكي وفق جدول التحويل المحدد."
+        },
+        "restricted": {
+          "label": "مطلوب معلومات إضافية",
+          "description": "يحتاج Stripe إلى مزيد من المعلومات قبل تفعيل التحويلات. افتح رابط الإعداد أدناه للمتابعة."
+        },
+        "disabled": {
+          "label": "التحويلات معطّلة",
+          "description": "عطّل Stripe التحويلات على هذا الحساب. افتح لوحة تحكم Stripe لاستيفاء المتطلبات المعلّقة."
+        },
+        "notConnected": {
+          "label": "غير مرتبط",
+          "description": "لم تربط حساب Stripe بعد. تُحتجز التحويلات حتى اكتمال الإعداد — في الأثناء تستمر معالجة مبيعات القسائم لكن الأموال تبقى في رصيد المنصة."
+        }
+      },
+      "actions": {
+        "startFailed": "فشل بدء إعداد Stripe",
+        "startNetworkError": "خطأ في الشبكة أثناء بدء الإعداد",
+        "dashboardFailed": "تعذّر فتح لوحة تحكم Stripe",
+        "dashboardNetworkError": "خطأ في الشبكة أثناء فتح لوحة التحكم",
+        "disconnectConfirm": "فصل حساب Stripe هذا؟ ستتوقف التحويلات مؤقتاً حتى تعيد الربط.",
+        "disconnected": "تم فصل حساب Stripe",
+        "disconnectFailed": "فشل الفصل",
+        "disconnect": "فصل",
+        "setUp": "إعداد التحويلات عبر Stripe",
+        "openDashboard": "فتح لوحة تحكم Stripe",
+        "continueOnboarding": "متابعة الإعداد"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "فشل تحميل بيانات التاجر.",
+      "retry": "إعادة المحاولة",
+      "loading": "جارٍ التحميل...",
+      "title": "أكمل ملفك الشخصي",
+      "subtitle": "أعِدّ ملف العلامة التجارية لمتجرك.",
+      "basicInfo": "المعلومات الأساسية",
+      "merchantName": "اسم التاجر *",
+      "brandTitle": "ملف العلامة التجارية",
+      "brandSubtitle": "خصّص ألوان علامتك التجارية وشعارها.",
+      "updateFailed": "فشل تحديث التاجر",
+      "submit": "إكمال الإعداد",
+      "skip": "تخطٍّ الآن"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "سجل التدقيق",
+      "subtitle": "تتبّع جميع الإجراءات المنفّذة على حساب التاجر",
+      "filters": "عوامل التصفية",
+      "action": "الإجراء",
+      "allActions": "جميع الإجراءات",
+      "fromDate": "من تاريخ",
+      "toDate": "إلى تاريخ",
+      "apply": "تطبيق",
+      "clear": "مسح",
+      "loading": "جارٍ تحميل سجل التدقيق...",
+      "loadFailed": "فشل تحميل سجل التدقيق",
+      "empty": "لم يتم العثور على إدخالات في سجل التدقيق.",
+      "columns": {
+        "timestamp": "الوقت",
+        "actor": "المنفّذ",
+        "action": "الإجراء",
+        "resource": "المورد",
+        "details": "التفاصيل"
+      },
+      "unknownActor": "غير معروف",
+      "showing": "عرض {from}–{to} من {total}",
+      "pageOf": "الصفحة {page} من {totalPages}",
+      "previousPage": "الصفحة السابقة",
+      "nextPage": "الصفحة التالية",
+      "actions": {
+        "voucherCreated": "إنشاء قسيمة",
+        "voucherUpdated": "تحديث قسيمة",
+        "voucherPublished": "نشر قسيمة",
+        "vouchersGenerated": "إنشاء قسائم",
+        "campaignCreated": "إنشاء حملة",
+        "campaignUpdated": "تحديث حملة",
+        "memberInvited": "دعوة عضو فريق",
+        "memberRemoved": "إزالة عضو فريق",
+        "memberRoleChanged": "تغيير دور عضو فريق",
+        "apiKeyCreated": "إنشاء مفتاح API",
+        "apiKeyRevoked": "إبطال مفتاح API",
+        "apiKeyUpdated": "تحديث مفتاح API",
+        "eventCreated": "إنشاء فعالية",
+        "eventUpdated": "تحديث فعالية",
+        "eventPublished": "نشر فعالية",
+        "merchantUpdated": "تحديث التاجر",
+        "reviewReplied": "الرد على تقييم",
+        "settingsUpdate": "تحديث الإعدادات",
+        "settingsView": "عرض الإعدادات",
+        "ticketRedeemed": "استخدام تذكرة"
+      },
+      "resources": {
+        "voucher": "قسيمة",
+        "campaign": "حملة",
+        "giftCard": "بطاقة هدايا",
+        "event": "فعالية",
+        "member": "عضو",
+        "teamMember": "عضو فريق",
+        "apiKey": "مفتاح API",
+        "webhook": "Webhook",
+        "merchant": "التاجر",
+        "user": "مستخدم",
+        "review": "تقييم"
+      }
+    },
+    "roles": {
+      "admin": "مسؤول",
+      "adminDescription": "وصول كامل — إدارة القسائم والحملات والأعضاء والإعدادات",
+      "staff": "موظف",
+      "staffDescription": "وصول تشغيلي — تأكيد عمليات الاستخدام وعرض البيانات",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "أعضاء الفريق",
+      "subtitle": "أدِر فريقك ومستويات وصولهم",
+      "inviteMember": "دعوة عضو",
+      "inviteTitle": "دعوة عضو إلى الفريق",
+      "emailAddress": "البريد الإلكتروني",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "يجب أن يكون لدى المستخدم حساب قائم.",
+      "role": "الدور",
+      "inviting": "جارٍ الدعوة...",
+      "sendInvitation": "إرسال الدعوة",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "loading": "جارٍ تحميل أعضاء الفريق...",
+      "loadFailed": "فشل تحميل أعضاء الفريق",
+      "empty": "لا يوجد أعضاء في الفريق بعد. ادعُ أول عضو أعلاه.",
+      "columns": {
+        "member": "العضو",
+        "role": "الدور",
+        "joined": "تاريخ الانضمام",
+        "actions": "الإجراءات"
+      },
+      "unnamed": "بلا اسم",
+      "memberRole": "دور العضو",
+      "changeRole": "تغيير الدور",
+      "removeMember": "إزالة العضو",
+      "inviteFailed": "فشلت دعوة العضو",
+      "invited": "تمت دعوة العضو بنجاح",
+      "updateRoleFailed": "فشل تحديث الدور",
+      "roleUpdated": "تم تحديث الدور",
+      "removeConfirm": "إزالة {name} من الفريق؟",
+      "remove": "إزالة",
+      "removeFailed": "فشلت إزالة العضو",
+      "removed": "تمت إزالة العضو"
+    },
+    "inviteForm": {
+      "title": "دعوة عضو إلى الفريق",
+      "subtitle": "أضف عضواً إلى الفريق عبر بريده الإلكتروني.",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "يجب أن يكون لدى المستخدم حساب. إن لم يكن لديه حساب، فعليه التسجيل أولاً.",
+      "role": "الدور",
+      "roleHint": "يمكن للمسؤولين إدارة القسائم والحملات وأعضاء الفريق. ويمكن للموظفين تأكيد عمليات الاستخدام.",
+      "inviting": "جارٍ الدعوة...",
+      "submit": "دعوة عضو",
+      "redirectingToBilling": "{message} جارٍ التحويل إلى الفوترة..."
+    },
+    "referrals": {
+      "title": "تحليلات الإحالات",
+      "subtitle": "تتبّع أداء الإحالات والمكافآت.",
+      "stats": {
+        "total": "إجمالي الإحالات",
+        "totalHint": "جميع الإحالات المتتبَّعة",
+        "opened": "تم الفتح",
+        "openedHint": "تمت مشاهدتها أو استخدامها",
+        "redeemed": "مستخدمة",
+        "redeemedHint": "الإحالات المحوَّلة",
+        "conversionRate": "معدل التحويل",
+        "conversionRateHint": "المستخدمة / الإجمالي"
+      },
+      "statusBreakdown": "التوزيع حسب الحالة",
+      "creditsIssued": "الرصيد الممنوح {amount}",
+      "noActivity": "لا يوجد نشاط إحالات بعد.",
+      "topReferrers": "أبرز المُحيلين",
+      "topReferrersHint": "المستخدمون الأكثر جلباً للإحالات.",
+      "noReferrals": "لا توجد إحالات بعد.",
+      "unknownUser": "مستخدم غير معروف",
+      "referralCount": "{count, plural, zero {لا إحالات} one {إحالة واحدة} two {إحالتان} few {# إحالات} many {# إحالة} other {# إحالة}}",
+      "recent": "أحدث الإحالات",
+      "recentHint": "آخر الإحالات من العملاء.",
+      "noRecent": "لا توجد إحالات حديثة.",
+      "voucherFallback": "قسيمة",
+      "status": {
+        "created": "مُنشأة",
+        "opened": "تم الفتح",
+        "redeemed": "مستخدمة",
+        "expired": "منتهية الصلاحية",
+        "blocked": "محظورة"
+      }
+    },
+    "emailCampaigns": {
+      "title": "حملات البريد الإلكتروني",
+      "newCampaign": "حملة جديدة",
+      "notConfigured": "لم يتم إعداد إرسال البريد الإلكتروني على هذه المنصة بعد. يمكنك إنشاء الحملات ومعاينتها، لكن لا يمكن إرسالها حتى يتم ربط مزوّد بريد إلكتروني.",
+      "notConfiguredShort": "لم يتم إعداد إرسال البريد الإلكتروني على هذه المنصة بعد",
+      "createTitle": "إنشاء حملة",
+      "campaignName": "اسم الحملة",
+      "campaignNamePlaceholder": "نشرة تخفيضات الصيف",
+      "subjectLine": "سطر الموضوع",
+      "subjectPlaceholder": "لا تفوّت عروض الصيف!",
+      "recipients": "المستلمون",
+      "recipientFilter": {
+        "all": "جميع العملاء",
+        "redeemed30d": "استخدموا قسيمة خلال آخر 30 يوماً",
+        "inactive": "العملاء غير النشطين"
+      },
+      "schedule": "الجدولة (اختياري)",
+      "emailSections": "أقسام البريد الإلكتروني",
+      "sectionTypes": {
+        "header": "الترويسة",
+        "text": "نص",
+        "image": "صورة",
+        "button": "زر",
+        "divider": "فاصل",
+        "voucherCard": "قسيمة"
+      },
+      "creating": "جارٍ الإنشاء...",
+      "scheduleCampaign": "جدولة الحملة",
+      "saveDraft": "حفظ كمسودة",
+      "preview": "معاينة",
+      "editor": {
+        "moveUp": "نقل لأعلى",
+        "moveDown": "نقل لأسفل",
+        "removeSection": "إزالة القسم",
+        "title": "العنوان",
+        "subtitle": "العنوان الفرعي (اختياري)",
+        "textContent": "أدخل المحتوى النصي...",
+        "imageUrl": "URL الصورة",
+        "altText": "النص البديل",
+        "buttonLabel": "نص الزر",
+        "buttonUrl": "URL الزر",
+        "dividerHint": "خط فاصل أفقي",
+        "voucherTitle": "عنوان القسيمة",
+        "voucherValue": "القيمة (مثل خصم 20%)",
+        "voucherCode": "الرمز (مثل SAVE20)",
+        "voucherExpiry": "تاريخ الانتهاء (مثل 31 ديسمبر 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "عنوان الترويسة",
+        "textContent": "المحتوى النصي...",
+        "imagePlaceholder": "عنصر نائب للصورة",
+        "button": "زر",
+        "voucher": "قسيمة",
+        "validUntil": "صالحة حتى {date}"
+      },
+      "loading": "جارٍ التحميل...",
+      "empty": "لا توجد حملات بريد إلكتروني بعد",
+      "columns": {
+        "name": "الاسم",
+        "subject": "الموضوع",
+        "status": "الحالة",
+        "recipients": "المستلمون",
+        "opens": "مرات الفتح",
+        "created": "تاريخ الإنشاء",
+        "actions": "الإجراءات"
+      },
+      "status": {
+        "draft": "مسودة",
+        "scheduled": "مجدولة",
+        "sent": "مُرسلة"
+      },
+      "send": "إرسال",
+      "delete": "حذف",
+      "deleteCampaign": "حذف الحملة",
+      "toasts": {
+        "missingFields": "حقول ناقصة",
+        "missingFieldsDescription": "الاسم والموضوع مطلوبان.",
+        "created": "تم إنشاء الحملة",
+        "error": "خطأ",
+        "createFailed": "فشل إنشاء الحملة.",
+        "sendConfirm": "هل تريد بالتأكيد إرسال هذه الحملة الآن؟",
+        "sendFailedStatus": "فشل الإرسال (الخطأ {status}).",
+        "partlySent": "تم إرسال الحملة جزئياً",
+        "partlySentDescription": "تم الإرسال إلى {sent} من أصل {total} مستلم. {failed, plural, zero {لم تفشل أي رسالة} one {تعذّر إرسال رسالة واحدة} two {تعذّر إرسال رسالتين} few {تعذّر إرسال # رسائل} many {تعذّر إرسال # رسالة} other {تعذّر إرسال # رسالة}}.",
+        "sent": "تم إرسال الحملة",
+        "sentDescription": "تم الإرسال إلى {sent, plural, zero {# مستلم} one {مستلم واحد} two {مستلمَين} few {# مستلمين} many {# مستلماً} other {# مستلم}}.",
+        "sendFailed": "فشل الإرسال",
+        "deleteConfirm": "حذف هذه الحملة؟",
+        "deleted": "تم حذف الحملة",
+        "deleteFailed": "فشل الحذف."
+      }
+    },
+    "apiKeys": {
+      "title": "مفاتيح API",
+      "subtitle": "أدِر مفاتيح API للوصول البرمجي إلى بيانات متجرك",
+      "createKey": "إنشاء مفتاح",
+      "createdNotice": "تم إنشاء مفتاح API! انسخه الآن — لن يُعرض مرة أخرى.",
+      "copyKey": "نسخ المفتاح",
+      "createTitle": "إنشاء مفتاح API",
+      "keyName": "اسم المفتاح",
+      "keyNamePlaceholder": "مثال: تكامل نقطة البيع للإنتاج",
+      "permissions": "الأذونات",
+      "creating": "جارٍ الإنشاء...",
+      "submit": "إنشاء مفتاح API",
+      "cancel": "إلغاء",
+      "loading": "جارٍ تحميل مفاتيح API...",
+      "empty": "لا توجد مفاتيح API بعد. أنشئ مفتاحاً للبدء.",
+      "createdOn": "أُنشئ في {date}",
+      "lastUsed": "آخر استخدام {date}",
+      "expires": "ينتهي في {date}",
+      "revokeKey": "إبطال المفتاح",
+      "loadFailed": "فشل تحميل مفاتيح API",
+      "required": "الاسم وإذن واحد على الأقل مطلوبان",
+      "createFailed": "فشل إنشاء مفتاح API",
+      "created": "تم إنشاء مفتاح API",
+      "revokeConfirm": "إبطال مفتاح API «{name}»؟ لا يمكن التراجع عن هذا الإجراء.",
+      "revoke": "إبطال",
+      "revoked": "تم إبطال مفتاح API",
+      "revokeFailed": "فشل إبطال مفتاح API",
+      "copied": "تم النسخ إلى الحافظة",
+      "groups": {
+        "vouchers": "القسائم",
+        "campaigns": "الحملات",
+        "giftCards": "بطاقات الهدايا",
+        "customers": "العملاء",
+        "analytics": "التحليلات",
+        "events": "الفعاليات"
+      },
+      "permissionLabels": {
+        "voucherRead": "قراءة القسائم",
+        "voucherCreate": "إنشاء القسائم",
+        "voucherRedeem": "استخدام القسائم",
+        "campaignRead": "قراءة الحملات",
+        "campaignCreate": "إنشاء الحملات",
+        "giftCardRead": "قراءة بطاقات الهدايا",
+        "giftCardRedeem": "استخدام بطاقات الهدايا",
+        "customerRead": "قراءة العملاء",
+        "analyticsRead": "قراءة التحليلات",
+        "eventRead": "قراءة الفعاليات",
+        "eventCheckin": "تسجيل الحضور في الفعاليات"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "تلقَّ إشعارات الأحداث عبر HTTP",
+      "addWebhook": "إضافة Webhook",
+      "secretNotice": "سر Webhook (يُعرض مرة واحدة فقط):",
+      "copySecret": "نسخ السر",
+      "copied": "تم النسخ!",
+      "newTitle": "Webhook جديد",
+      "endpointUrl": "URL نقطة النهاية",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "الأحداث",
+      "submit": "إنشاء Webhook",
+      "loading": "جارٍ التحميل...",
+      "empty": "لم يتم إعداد أي Webhooks",
+      "createdOn": "أُنشئ في {date}",
+      "deliveriesCount": "{count, plural, zero {لا عمليات تسليم} one {عملية تسليم واحدة} two {عمليتا تسليم} few {# عمليات تسليم} many {# عملية تسليم} other {# عملية تسليم}}",
+      "sendTest": "إرسال اختبار",
+      "viewDeliveries": "سجل التسليم",
+      "disable": "تعطيل",
+      "enable": "تفعيل",
+      "deleteWebhook": "حذف Webhook",
+      "deliveryLog": "سجل التسليم",
+      "noDeliveries": "لا توجد عمليات تسليم بعد",
+      "deliveryFailed": "فشل",
+      "attempts": "{count, plural, zero {لا محاولات} one {محاولة واحدة} two {محاولتان} few {# محاولات} many {# محاولة} other {# محاولة}}",
+      "loadFailed": "فشل تحميل Webhooks",
+      "required": "مطلوب URL وحدث واحد على الأقل",
+      "created": "تم إنشاء Webhook",
+      "createFailed": "فشل إنشاء Webhook",
+      "deleted": "تم حذف Webhook",
+      "deleteFailed": "فشل حذف Webhook",
+      "updateFailed": "فشل تحديث Webhook",
+      "testDelivered": "تم تسليم الاختبار! الحالة: {status}",
+      "testFailed": "فشل الاختبار: {error}",
+      "statusCode": "الحالة {status}",
+      "testSendFailed": "فشل إرسال Webhook الاختباري",
+      "loadDeliveriesFailed": "فشل تحميل عمليات التسليم"
+    }
   }
 }

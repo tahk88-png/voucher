@@ -8,10 +8,14 @@ import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Breadcrumbs from '@/components/navigation/breadcrumbs';
-import { showError } from '@/lib/toast-helpers';
-import { formatCurrency } from '@/lib/utils';
+import { showError, showSuccess } from '@/lib/toast-helpers';
+import { apiErrorMessage } from '@/lib/api-error-message';
+import { formatPrice } from '@/lib/currency-constants';
+import { endOfLocalDay, parseMoneyToMinor, startOfLocalDay, toDateInputValue } from '@/lib/money-input';
+import { CurrencySelect, exampleAmount } from '../../_components/currency-select';
+import { useMerchantSettings } from '../../_components/merchant-settings-context';
 import { sanitizeCssValue } from '@/lib/sanitize-css';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 type FormData = {
   amount: string;
@@ -31,11 +35,8 @@ type FormData = {
   price: string;
 };
 
-const initial: FormData = {
+const initial: Omit<FormData, 'currency' | 'validFrom' | 'validTo'> = {
   amount: '',
-  currency: 'USD',
-  validFrom: new Date().toISOString().split('T')[0],
-  validTo: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   noExpiry: false,
   headline: '',
   message: '',
@@ -49,10 +50,33 @@ const initial: FormData = {
   price: '',
 };
 
+// Labels passed to lib/money-input. Its error messages are English sentences
+// built from the label; moneyErrorKind maps them back to a translation key.
+const AMOUNT_LABEL = 'Amount';
+const PRICE_LABEL = 'Sale price';
+
+type MoneyErrorKind = 'negative' | 'invalid' | 'wholeNumber' | 'decimals' | 'tooLarge';
+
+function moneyErrorKind(error: string, label: string): { kind: MoneyErrorKind; decimals: number } | null {
+  if (error === `${label} can't be negative.`) return { kind: 'negative', decimals: 0 };
+  if (error === `${label} isn't a valid number.`) return { kind: 'invalid', decimals: 0 };
+  if (error === `${label} must be a whole number.`) return { kind: 'wholeNumber', decimals: 0 };
+  if (error === `${label} is too large.`) return { kind: 'tooLarge', decimals: 0 };
+  const match = /at most (\d+) decimal places\.$/.exec(error);
+  if (error.startsWith(`${label} can have at most `) && match) return { kind: 'decimals', decimals: Number(match[1]) };
+  return null;
+}
+
+function priceLocaleFor(locale: string): string {
+  return !locale || locale === 'en' ? 'en-GB' : locale;
+}
+
 function GiftCardPreview({ form }: { form: FormData }) {
-  const amountNum = parseInt(form.amount, 10) || 0;
-  const amountStr = formatCurrency(amountNum * 100, form.currency);
-  const headline = form.headline || 'Gift card';
+  const t = useTranslations('merchantGiftCards.new');
+  const locale = useLocale();
+  const parsed = parseMoneyToMinor(form.amount, form.currency, AMOUNT_LABEL);
+  const amountStr = parsed.ok && parsed.value !== null ? formatPrice(parsed.value, form.currency, priceLocaleFor(locale)) : '—';
+  const headline = form.headline || t('preview.defaultHeadline');
   return (
     <div className="rounded-2xl border border-[var(--border)] shadow-lg overflow-hidden bg-[var(--bg)]">
       <style
@@ -65,7 +89,7 @@ function GiftCardPreview({ form }: { form: FormData }) {
           <div className="relative h-36 w-full overflow-hidden bg-[#FAF7F2]">
             <Image
               src={form.imageUrl}
-              alt="Gift card"
+              alt={t('preview.imageAlt')}
               fill
               sizes="(max-width: 1024px) 100vw, 360px"
               className="object-cover"
@@ -79,7 +103,7 @@ function GiftCardPreview({ form }: { form: FormData }) {
             {form.logoUrl ? (
               <Image
                 src={form.logoUrl}
-                alt="Brand logo"
+                alt={t('preview.logoAlt')}
                 width={32}
                 height={32}
                 className="h-8 w-8 object-contain"
@@ -91,7 +115,7 @@ function GiftCardPreview({ form }: { form: FormData }) {
           {form.message ? (
             <p className="text-sm text-[var(--text-muted)]">{form.message}</p>
           ) : (
-            <p className="text-sm text-[var(--text-muted)]">Add a personal note</p>
+            <p className="text-sm text-[var(--text-muted)]">{t('preview.notePlaceholder')}</p>
           )}
         </div>
       </div>
@@ -104,24 +128,45 @@ export default function NewGiftCardPage() {
   const router = useRouter();
   const merchantSlug = params.slug as string;
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<FormData>(initial);
+  const { defaultCurrency } = useMerchantSettings();
+  const [formData, setFormData] = useState<FormData>(() => ({
+    ...initial,
+    currency: defaultCurrency,
+    validFrom: toDateInputValue(new Date()),
+    validTo: toDateInputValue(new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)),
+  }));
+  const amountPreview = parseMoneyToMinor(formData.amount, formData.currency, AMOUNT_LABEL);
+  const pricePreview = parseMoneyToMinor(formData.price, formData.currency, PRICE_LABEL);
   const tNav = useTranslations('nav');
+  const t = useTranslations('merchantGiftCards.new');
+  const locale = useLocale();
+  const priceLocale = priceLocaleFor(locale);
+  const moneyError = (error: string, label: string, group: 'amountErrors' | 'priceErrors') => {
+    const parsed = moneyErrorKind(error, label);
+    return parsed ? t(`${group}.${parsed.kind}`, { decimals: parsed.decimals }) : error;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const amountNum = parseInt(formData.amount, 10);
-      if (Number.isNaN(amountNum)) {
-        throw new Error('Invalid amount');
+      const amount = parseMoneyToMinor(formData.amount, formData.currency, AMOUNT_LABEL);
+      if (!amount.ok) throw new Error(moneyError(amount.error, AMOUNT_LABEL, 'amountErrors'));
+      if (amount.value === null || amount.value <= 0) throw new Error(t('errors.amountRequired'));
+      const price = parseMoneyToMinor(formData.price, formData.currency, PRICE_LABEL);
+      if (!price.ok) throw new Error(moneyError(price.error, PRICE_LABEL, 'priceErrors'));
+
+      const validFrom = startOfLocalDay(formData.validFrom);
+      const validTo = formData.noExpiry ? null : endOfLocalDay(formData.validTo);
+      if (validTo && validTo.getTime() < validFrom.getTime()) {
+        throw new Error(t('errors.endBeforeStart'));
       }
 
-      const priceNum = formData.price ? parseInt(formData.price, 10) : null;
       const body = {
-        amount: amountNum * 100,
+        amount: amount.value,
         currency: formData.currency,
-        validFrom: new Date(formData.validFrom).toISOString(),
-        validTo: formData.noExpiry ? null : new Date(formData.validTo).toISOString(),
+        validFrom: validFrom.toISOString(),
+        validTo: validTo ? validTo.toISOString() : null,
         message: formData.message || null,
         imageUrl: formData.imageUrl || null,
         logoUrl: formData.logoUrl || null,
@@ -133,7 +178,7 @@ export default function NewGiftCardPage() {
         },
         codePrefix: formData.codePrefix || undefined,
         purchasable: formData.purchasable,
-        price: priceNum !== null ? priceNum * 100 : null,
+        price: formData.purchasable ? price.value : null,
       };
 
       const res = await fetch(`/api/merchant/${merchantSlug}/gift-cards`, {
@@ -144,13 +189,14 @@ export default function NewGiftCardPage() {
 
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
-        throw new Error(d.error || 'Failed to create gift card');
+        throw new Error(apiErrorMessage(d, t('errors.createFailed')));
       }
 
       const giftCard = await res.json();
+      showSuccess(t('created'));
       router.push(`/merchant/${merchantSlug}/gift-cards/${giftCard.id}`);
     } catch (error) {
-      showError(error instanceof Error ? error.message : 'Failed to create gift card');
+      showError(error instanceof Error ? error.message : t('errors.createFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -163,7 +209,7 @@ export default function NewGiftCardPage() {
           items={[
             { label: tNav('dashboard'), href: `/merchant/${merchantSlug}/dashboard` },
             { label: tNav('giftCards'), href: `/merchant/${merchantSlug}/gift-cards` },
-            { label: 'New gift card' },
+            { label: t('title') },
           ]}
         />
 
@@ -172,8 +218,8 @@ export default function NewGiftCardPage() {
             <span className="text-white font-bold text-lg">G</span>
           </div>
           <div>
-            <h1 className="text-2xl font-semibold text-[var(--text)]">New gift card</h1>
-            <p className="text-sm text-[var(--text-muted)]">Customize and issue a gift card</p>
+            <h1 className="text-2xl font-semibold text-[var(--text)]">{t('title')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">{t('subtitle')}</p>
           </div>
         </div>
 
@@ -181,37 +227,47 @@ export default function NewGiftCardPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <WarmCard padding="lg" className="bg-[var(--surface)]">
               <div>
-                <h2 className="text-base font-semibold text-[var(--text)]">Value and validity</h2>
-                <p className="text-sm text-[var(--text-muted)]">Set amount, currency, and expiration</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">{t('valueSection.title')}</h2>
+                <p className="text-sm text-[var(--text-muted)]">{t('valueSection.description')}</p>
               </div>
               <div className="space-y-4 mt-4">
                 <div>
-                  <Label htmlFor="gift-amount">Amount</Label>
+                  <Label htmlFor="gift-amount">{t('valueSection.amount')}</Label>
                   <Input
                     id="gift-amount"
-                    type="number"
+                    type="text"
+                    inputMode="decimal"
+                    autoComplete="off"
                     value={formData.amount}
                     onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
-                    placeholder="50"
+                    placeholder="50.00"
                     required
+                    aria-describedby="gift-amount-help"
                     className="mt-1 border-[var(--border)]"
                   />
+                  <p
+                    id="gift-amount-help"
+                    className={`text-xs mt-1 ${amountPreview.ok ? 'text-[var(--text-muted)]' : 'text-[var(--danger)]'}`}
+                  >
+                    {!amountPreview.ok
+                      ? moneyError(amountPreview.error, AMOUNT_LABEL, 'amountErrors')
+                      : amountPreview.value !== null
+                        ? t('valueSection.faceValue', { value: formatPrice(amountPreview.value, formData.currency, priceLocale) })
+                        : t('valueSection.amountHelp', { currency: formData.currency, example: exampleAmount(formData.currency, 49.9) })}
+                  </p>
                 </div>
                 <div>
-                  <Label htmlFor="gift-currency">Currency</Label>
-                  <Input
+                  <Label htmlFor="gift-currency">{t('valueSection.currency')}</Label>
+                  <CurrencySelect
                     id="gift-currency"
-                    type="text"
                     value={formData.currency}
-                    onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
-                    maxLength={3}
-                    required
-                    className="mt-1 border-[var(--border)]"
+                    onChange={(currency) => setFormData({ ...formData, currency })}
+                    className="mt-1"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="gift-valid-from">Valid from</Label>
+                    <Label htmlFor="gift-valid-from">{t('valueSection.validFrom')}</Label>
                     <Input
                       id="gift-valid-from"
                       type="date"
@@ -222,10 +278,11 @@ export default function NewGiftCardPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="gift-valid-to">Valid to</Label>
+                    <Label htmlFor="gift-valid-to">{t('valueSection.validTo')}</Label>
                     <Input
                       id="gift-valid-to"
                       type="date"
+                      min={formData.validFrom || undefined}
                       value={formData.validTo}
                       onChange={(e) => setFormData({ ...formData, validTo: e.target.value })}
                       disabled={formData.noExpiry}
@@ -241,15 +298,15 @@ export default function NewGiftCardPage() {
                     onChange={(e) => setFormData({ ...formData, noExpiry: e.target.checked })}
                     className="h-4 w-4 rounded border-input"
                   />
-                  <Label htmlFor="no-expiry">No expiry date</Label>
+                  <Label htmlFor="no-expiry">{t('valueSection.noExpiry')}</Label>
                 </div>
               </div>
             </WarmCard>
 
             <WarmCard padding="lg" className="bg-[var(--surface)]">
               <div>
-                <h2 className="text-base font-semibold text-[var(--text)]">Customer purchase</h2>
-                <p className="text-sm text-[var(--text-muted)]">Allow customers to buy this gift card online</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">{t('purchaseSection.title')}</h2>
+                <p className="text-sm text-[var(--text-muted)]">{t('purchaseSection.description')}</p>
               </div>
               <div className="space-y-4 mt-4">
                 <div className="flex items-center gap-2">
@@ -260,21 +317,27 @@ export default function NewGiftCardPage() {
                     onChange={(e) => setFormData({ ...formData, purchasable: e.target.checked })}
                     className="h-4 w-4 rounded border-input"
                   />
-                  <Label htmlFor="purchasable">Available for customer purchase</Label>
+                  <Label htmlFor="purchasable">{t('purchaseSection.purchasable')}</Label>
                 </div>
                 {formData.purchasable && (
                   <div>
-                    <Label htmlFor="gift-price">Sale price (optional, defaults to face value)</Label>
+                    <Label htmlFor="gift-price">{t('purchaseSection.salePrice')}</Label>
                     <Input
                       id="gift-price"
-                      type="number"
+                      type="text"
+                      inputMode="decimal"
+                      autoComplete="off"
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                      placeholder={formData.amount || 'Same as amount'}
+                      placeholder={formData.amount || t('purchaseSection.salePricePlaceholder')}
                       className="mt-1 border-[var(--border)]"
                     />
-                    <p className="text-xs text-[var(--text-faint)] mt-1">
-                      Leave empty to sell at face value. Set a different price for promotions.
+                    <p className={`text-xs mt-1 ${pricePreview.ok ? 'text-[var(--text-faint)]' : 'text-[var(--danger)]'}`}>
+                      {!pricePreview.ok
+                        ? moneyError(pricePreview.error, PRICE_LABEL, 'priceErrors')
+                        : pricePreview.value !== null
+                          ? t('purchaseSection.customersPay', { value: formatPrice(pricePreview.value, formData.currency, priceLocale) })
+                          : t('purchaseSection.salePriceHelp')}
                     </p>
                   </div>
                 )}
@@ -283,35 +346,35 @@ export default function NewGiftCardPage() {
 
             <WarmCard padding="lg" className="bg-[var(--surface)]">
               <div>
-                <h2 className="text-base font-semibold text-[var(--text)]">Branding and message</h2>
-                <p className="text-sm text-[var(--text-muted)]">Headline, message, images, and colors</p>
+                <h2 className="text-base font-semibold text-[var(--text)]">{t('brandingSection.title')}</h2>
+                <p className="text-sm text-[var(--text-muted)]">{t('brandingSection.description')}</p>
               </div>
               <div className="space-y-4 mt-4">
                 <div>
-                  <Label htmlFor="gift-headline">Headline</Label>
+                  <Label htmlFor="gift-headline">{t('brandingSection.headline')}</Label>
                   <Input
                     id="gift-headline"
                     type="text"
                     value={formData.headline}
                     onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
-                    placeholder="Gift for coffee lovers"
+                    placeholder={t('brandingSection.headlinePlaceholder')}
                     className="mt-1 border-[var(--border)]"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="gift-message">Message</Label>
+                  <Label htmlFor="gift-message">{t('brandingSection.message')}</Label>
                   <textarea
                     id="gift-message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Add a personal message for the recipient"
+                    placeholder={t('brandingSection.messagePlaceholder')}
                     rows={3}
                     className="w-full mt-1 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="gift-logo-url">Logo URL</Label>
+                    <Label htmlFor="gift-logo-url">{t('brandingSection.logoUrl')}</Label>
                     <Input
                       id="gift-logo-url"
                       type="url"
@@ -322,7 +385,7 @@ export default function NewGiftCardPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="gift-image-url">Image URL</Label>
+                    <Label htmlFor="gift-image-url">{t('brandingSection.imageUrl')}</Label>
                     <Input
                       id="gift-image-url"
                       type="url"
@@ -335,7 +398,7 @@ export default function NewGiftCardPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <Label htmlFor="gift-accent-color">Accent color</Label>
+                    <Label htmlFor="gift-accent-color">{t('brandingSection.accentColor')}</Label>
                     <Input
                       id="gift-accent-color"
                       type="color"
@@ -345,7 +408,7 @@ export default function NewGiftCardPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="gift-background-color">Background color</Label>
+                    <Label htmlFor="gift-background-color">{t('brandingSection.backgroundColor')}</Label>
                     <Input
                       id="gift-background-color"
                       type="color"
@@ -357,7 +420,7 @@ export default function NewGiftCardPage() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="gift-text-color">Text color</Label>
+                    <Label htmlFor="gift-text-color">{t('brandingSection.textColor')}</Label>
                     <Input
                       id="gift-text-color"
                       type="color"
@@ -368,7 +431,7 @@ export default function NewGiftCardPage() {
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="gift-code-prefix">Code prefix (optional)</Label>
+                  <Label htmlFor="gift-code-prefix">{t('brandingSection.codePrefix')}</Label>
                   <Input
                     id="gift-code-prefix"
                     type="text"
@@ -391,24 +454,24 @@ export default function NewGiftCardPage() {
                 className="flex-1"
                 onClick={() => router.push(`/merchant/${merchantSlug}/gift-cards`)}
               >
-                Cancel
+                {t('cancel')}
               </WarmButton>
               <WarmButton type="submit" disabled={isLoading} className="flex-1">
-                {isLoading ? 'Creating...' : 'Create gift card'}
+                {isLoading ? t('creating') : t('submit')}
               </WarmButton>
             </div>
           </form>
 
           <aside className="hidden lg:block">
             <div className="sticky top-6">
-              <p className="text-sm font-medium text-[var(--text-faint)] mb-3">Preview</p>
+              <p className="text-sm font-medium text-[var(--text-faint)] mb-3">{t('preview.title')}</p>
               <GiftCardPreview form={formData} />
             </div>
           </aside>
         </div>
 
         <div className="mt-8 lg:hidden">
-          <p className="text-sm font-medium text-[var(--text-faint)] mb-3">Preview</p>
+          <p className="text-sm font-medium text-[var(--text-faint)] mb-3">{t('preview.title')}</p>
           <GiftCardPreview form={formData} />
         </div>
       </div>

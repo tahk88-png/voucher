@@ -127,7 +127,7 @@ export default function AdminUsersClient({
                   </td>
                   <td className="px-4 py-3 text-right text-[#2D2721]">{user._count.voucherPurchases}</td>
                   <td className="px-4 py-3 text-right text-[#2D2721]">{user._count.merchantMembers > 0 ? "Yes" : "No"}</td>
-                  <td className="px-4 py-3 text-right text-[#6B5744]">{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <td className="px-4 py-3 text-right text-[#6B5744]">{new Date(user.createdAt).toLocaleDateString('en-GB')}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-center gap-1">
                       {user.status === "active" ? (

@@ -7,10 +7,30 @@ import { WarmButton } from '@/components/warm-button';
 import { WarmCard } from '@/components/warm-card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { formatCurrency, safeParseJson } from '@/lib/utils';
+import { safeParseJson } from '@/lib/utils';
+import { apiErrorMessage } from '@/lib/api-error-message';
+import {
+  basisPointsToInputString,
+  endOfLocalDay,
+  minorToInputString,
+  normalizeCurrency,
+  parseMoneyToMinor,
+  parsePercentToBasisPoints,
+  startOfLocalDay,
+  toDateInputValue,
+} from '@/lib/money-input';
+import { formatVoucherValue } from '@/lib/voucher-display';
+import {
+  AMOUNT_LABEL,
+  PERCENT_LABEL,
+  describeVoucherValueT,
+  displayLocaleFor,
+  voucherValueErrorMessage,
+} from '../voucher-i18n';
+import { CurrencySelect, exampleAmount } from '../../_components/currency-select';
 import { sanitizeCssValue } from '@/lib/sanitize-css';
 import { showError, showSuccess } from '@/lib/toast-helpers';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Voucher } from '@prisma/client';
 import { VoucherDesign, WeeklyDropConfig } from '@/types';
 import PublishVoucherButton from './publish-button';
@@ -36,11 +56,26 @@ type FormData = {
   codePrefix: string;
 };
 
+function parseVoucherValue(form: Pick<FormData, 'type' | 'value' | 'currency'>) {
+  return form.type === 'percentage'
+    ? parsePercentToBasisPoints(form.value, PERCENT_LABEL)
+    : parseMoneyToMinor(form.value, form.currency, AMOUNT_LABEL);
+}
+
 function VoucherPreview({ form }: { form: FormData }) {
-  const val = parseInt(form.value, 10) || 0;
+  const t = useTranslations('merchantVouchers.form');
+  const tLabels = useTranslations('labels');
+  const displayLocale = displayLocaleFor(useLocale());
+  const parsed = parseVoucherValue(form);
   const valueStr =
-    form.type === 'percentage' ? `${val}%` : formatCurrency(val * 100, form.currency);
-  const headline = form.designHeadline || 'Voucher';
+    parsed.ok && parsed.value !== null
+      ? formatVoucherValue({ type: form.type, value: parsed.value, currency: form.currency }, displayLocale)
+      : '—';
+  const headline =
+    form.designHeadline ||
+    (parsed.ok && parsed.value !== null
+      ? describeVoucherValueT(tLabels, { type: form.type, value: parsed.value, currency: form.currency }, displayLocale)
+      : t('previewFallbackHeadline'));
   return (
     <div className="voucher-preview w-full max-w-[320px] mx-auto lg:mx-0 rounded-2xl border border-[var(--border)] shadow-warm overflow-hidden bg-[var(--preview-bg)]">
       <style
@@ -54,7 +89,9 @@ function VoucherPreview({ form }: { form: FormData }) {
       </div>
       <div className="px-5 py-4">
         <p className="text-sm text-[var(--text-muted)]">
-          Valid until {new Date(form.validTo).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+          {t('previewValidUntil', {
+            date: form.validTo ? endOfLocalDay(form.validTo).toLocaleDateString(displayLocale, { dateStyle: 'medium' }) : '—',
+          })}
         </p>
         {form.designFinePrint && <p className="text-xs text-[var(--text-faint)] mt-2">{form.designFinePrint}</p>}
       </div>
@@ -69,21 +106,25 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
   const [weeklyDropsEnabled, setWeeklyDropsEnabled] = useState(false);
   const t = useTranslations();
   const tVoucher = useTranslations('voucher');
+  const tForm = useTranslations('merchantVouchers.form');
+  const tMv = useTranslations('merchantVouchers');
+  const displayLocale = displayLocaleFor(useLocale());
 
   const design = safeParseJson<VoucherDesign>(voucher.designJson);
   const weeklyDrop = safeParseJson<WeeklyDropConfig>(voucher.weeklyDropJson);
 
+  const currency = normalizeCurrency(voucher.currency);
   const valueDisplay =
     voucher.type === 'percentage'
-      ? (voucher.value / 100).toString()
-      : (voucher.value / 100).toString();
+      ? basisPointsToInputString(voucher.value)
+      : minorToInputString(voucher.value, currency);
 
   const [formData, setFormData] = useState<FormData>({
     type: voucher.type as 'percentage' | 'fixed_amount' | 'credit_amount',
     value: valueDisplay,
-    currency: voucher.currency,
-    validFrom: new Date(voucher.validFrom).toISOString().split('T')[0],
-    validTo: new Date(voucher.validTo).toISOString().split('T')[0],
+    currency,
+    validFrom: toDateInputValue(new Date(voucher.validFrom)),
+    validTo: toDateInputValue(new Date(voucher.validTo)),
     usageLimitTotal: voucher.usageLimitTotal?.toString() || '',
     usageLimitPerUser: voucher.usageLimitPerUser?.toString() || '',
     weeklyDropEnabled: voucher.weeklyDropEnabled,
@@ -118,28 +159,29 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
     e.preventDefault();
     setIsLoading(true);
     try {
-      const valueNum = parseInt(formData.value, 10);
-      if (Number.isNaN(valueNum) || valueNum <= 0) {
-        throw new Error('Value must be greater than 0');
+      const parsedValue = parseVoucherValue(formData);
+      if (!parsedValue.ok) throw new Error(voucherValueErrorMessage(tMv, formData.type, parsedValue.error));
+      if (parsedValue.value === null || parsedValue.value <= 0) {
+        throw new Error(tForm('errors.valueMustBePositive'));
       }
 
-      const validFromDate = new Date(formData.validFrom);
-      const validToDate = new Date(formData.validTo);
-      if (validFromDate >= validToDate) {
-        throw new Error('Valid to date must be after valid from date');
+      const validFromDate = startOfLocalDay(formData.validFrom);
+      const validToDate = endOfLocalDay(formData.validTo);
+      if (validToDate.getTime() < validFromDate.getTime()) {
+        throw new Error(tForm('errors.endBeforeStart'));
       }
 
       if (formData.usageLimitTotal) {
         const totalLimit = parseInt(formData.usageLimitTotal, 10);
         if (Number.isNaN(totalLimit) || totalLimit <= 0) {
-          throw new Error('Total usage limit must be a positive number');
+          throw new Error(tForm('errors.totalLimitPositive'));
         }
       }
 
       if (formData.usageLimitPerUser) {
         const perUserLimit = parseInt(formData.usageLimitPerUser, 10);
         if (Number.isNaN(perUserLimit) || perUserLimit <= 0) {
-          throw new Error('Per user limit must be a positive number');
+          throw new Error(tForm('errors.perUserLimitPositive'));
         }
       }
 
@@ -162,10 +204,10 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
 
       const body = {
         type: formData.type,
-        value: formData.type === 'percentage' ? valueNum * 100 : valueNum * 100,
+        value: parsedValue.value,
         currency: formData.currency,
-        validFrom: new Date(formData.validFrom).toISOString(),
-        validTo: new Date(formData.validTo).toISOString(),
+        validFrom: validFromDate.toISOString(),
+        validTo: validToDate.toISOString(),
         usageLimitTotal: formData.usageLimitTotal ? parseInt(formData.usageLimitTotal, 10) : null,
         usageLimitPerUser: formData.usageLimitPerUser ? parseInt(formData.usageLimitPerUser, 10) : null,
         weeklyDropEnabled: formData.weeklyDropEnabled,
@@ -182,21 +224,15 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
 
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
-        const errorMsg = d.error || 'Failed to update voucher';
-        if (typeof errorMsg === 'string') {
-          throw new Error(errorMsg);
-        } else if (Array.isArray(d.error)) {
-          const firstError = d.error[0];
-          throw new Error(firstError?.message || 'Please check your input and try again');
+        if (Array.isArray(d?.error) && d.error[0]?.message) {
+          throw new Error(d.error[0].message);
         }
-        throw new Error('Failed to update voucher. Please try again.');
+        throw new Error(apiErrorMessage(d, tMv('edit.updateFailedRetry')));
       }
-      showSuccess(tVoucher('updated') || 'Voucher updated successfully');
+      showSuccess(tMv('edit.updated'));
       router.refresh();
     } catch (e) {
-      const errorMessage = e instanceof Error
-        ? e.message
-        : t('success.failedToUpdateVoucher') || 'Failed to update voucher';
+      const errorMessage = e instanceof Error ? e.message : tMv('edit.updateFailed');
       showError(errorMessage);
     } finally {
       setIsLoading(false);
@@ -214,10 +250,10 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
             </div>
             <div className="space-y-4 mt-4">
               <div>
-                <Label htmlFor="voucher-type">Type</Label>
+                <Label htmlFor="voucher-type">{tForm('typeLabel')}</Label>
                 <select
                   id="voucher-type"
-                  aria-label="Voucher type"
+                  aria-label={tForm('typeAria')}
                   className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1"
                   value={formData.type}
                   onChange={(e) =>
@@ -235,26 +271,53 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                 </Label>
                 <Input
                   id="edit-voucher-value"
-                  type="number"
+                  type="text"
+                  inputMode="decimal"
+                  autoComplete="off"
                   value={formData.value}
                   onChange={(e) => setFormData({ ...formData, value: e.target.value })}
                   required
-                  placeholder={formData.type === 'percentage' ? '15' : '5'}
+                  placeholder={formData.type === 'percentage' ? '15' : '4.50'}
+                  aria-describedby="edit-voucher-value-help"
                   className="mt-1 border-[var(--border)]"
                 />
+                {(() => {
+                  const parsed = parseVoucherValue(formData);
+                  return (
+                    <p
+                      id="edit-voucher-value-help"
+                      className={`text-xs mt-1 ${parsed.ok ? 'text-[var(--text-muted)]' : 'text-[var(--danger)]'}`}
+                    >
+                      {!parsed.ok
+                        ? voucherValueErrorMessage(tMv, formData.type, parsed.error)
+                        : parsed.value !== null
+                          ? tForm(formData.type === 'credit_amount' ? 'customersGetCredit' : 'customersGetOff', {
+                              value: formatVoucherValue(
+                                { type: formData.type, value: parsed.value, currency: formData.currency },
+                                displayLocale,
+                              ),
+                            })
+                          : formData.type === 'percentage'
+                            ? tForm('percentHint')
+                            : tForm('amountHint', {
+                                currency: formData.currency,
+                                example: exampleAmount(formData.currency, 4.5),
+                              })}
+                    </p>
+                  );
+                })()}
               </div>
-              <div>
-                <Label htmlFor="edit-voucher-currency">{tVoucher('currency')}</Label>
-                <Input
-                  id="edit-voucher-currency"
-                  type="text"
-                  value={formData.currency}
-                  onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
-                  required
-                  maxLength={3}
-                  className="mt-1 border-[var(--border)]"
-                />
-              </div>
+              {formData.type !== 'percentage' && (
+                <div>
+                  <Label htmlFor="edit-voucher-currency">{tVoucher('currency')}</Label>
+                  <CurrencySelect
+                    id="edit-voucher-currency"
+                    value={formData.currency}
+                    onChange={(c) => setFormData({ ...formData, currency: c })}
+                    className="mt-1"
+                  />
+                </div>
+              )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="edit-voucher-valid-from">{tVoucher('validFrom')}</Label>
@@ -272,6 +335,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   <Input
                     id="edit-voucher-valid-to"
                     type="date"
+                    min={formData.validFrom || undefined}
                     value={formData.validTo}
                     onChange={(e) => setFormData({ ...formData, validTo: e.target.value })}
                     required
@@ -330,7 +394,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                     setFormData({ ...formData, weeklyDropEnabled: e.target.checked })
                   }
                   className="h-4 w-4 accent-[#cc785c]"
-                  aria-label="Enable weekly drop"
+                  aria-label={tForm('enableWeeklyDropAria')}
                 />
                 <Label htmlFor="weeklyDropEnabled">{tVoucher('enableWeeklyDrop')}</Label>
               </div>
@@ -340,7 +404,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                     <Label htmlFor="weeklyDropDay">{tVoucher('dayOfWeek')}</Label>
                     <select
                       id="weeklyDropDay"
-                      aria-label="Day of week for weekly drop"
+                      aria-label={tForm('weeklyDropDayAria')}
                       className="w-full h-10 rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-2 mt-1"
                       value={formData.weeklyDropDay}
                       onChange={(e) => setFormData({ ...formData, weeklyDropDay: e.target.value })}
@@ -367,7 +431,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                         value={formData.weeklyDropTime}
                         onChange={(e) => setFormData({ ...formData, weeklyDropTime: e.target.value })}
                         className="mt-1 border-[var(--border)]"
-                        aria-label="Weekly drop start time"
+                        aria-label={tForm('weeklyDropTimeAria')}
                       />
                     </div>
                     <div>
@@ -421,7 +485,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   type="text"
                   value={formData.designHeadline}
                   onChange={(e) => setFormData({ ...formData, designHeadline: e.target.value })}
-                  placeholder="15% off your order"
+                  placeholder={tForm('headlinePlaceholder')}
                   className="mt-1 border-[var(--border)]"
                 />
               </div>
@@ -432,7 +496,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   type="text"
                   value={formData.designFinePrint}
                   onChange={(e) => setFormData({ ...formData, designFinePrint: e.target.value })}
-                  placeholder="Valid for new customers only"
+                  placeholder={tForm('finePrintPlaceholder')}
                   className="mt-1 border-[var(--border)]"
                 />
               </div>
@@ -493,7 +557,7 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
                   {t('common.back')}
                 </WarmButton>
                 <WarmButton type="submit" disabled={isLoading} className="flex-1">
-                  {isLoading ? tVoucher('updating') || 'Updating...' : tVoucher('update') || 'Update voucher'}
+                  {isLoading ? tMv('edit.updating') : tMv('edit.update')}
                 </WarmButton>
               </div>
             </div>
@@ -506,9 +570,20 @@ export default function EditVoucherForm({ voucher, merchantSlug }: { voucher: Vo
           <p className="text-sm font-medium text-[var(--text-muted)] mb-3">{tVoucher('preview')}</p>
           <VoucherPreview form={formData} />
           <div className="mt-4 space-y-2">
-            <WarmButton asChild variant="outline" className="w-full">
-              <Link href={`/v/${voucher.id}`}>View public page</Link>
-            </WarmButton>
+            {voucher.status === 'published' ? (
+              <WarmButton asChild variant="outline" className="w-full">
+                <Link href={`/v/${voucher.id}`}>{tMv('edit.viewPublicPage')}</Link>
+              </WarmButton>
+            ) : (
+              <div>
+                <WarmButton variant="outline" className="w-full" disabled aria-describedby="public-page-hint">
+                  {tMv('edit.viewPublicPage')}
+                </WarmButton>
+                <p id="public-page-hint" className="mt-1 text-xs text-[var(--text-muted)]">
+                  {tMv('publicPageHint')}
+                </p>
+              </div>
+            )}
             {voucher.status !== 'published' && <PublishVoucherButton voucherId={voucher.id} />}
           </div>
         </div>

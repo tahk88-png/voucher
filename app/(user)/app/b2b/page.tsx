@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 
@@ -14,6 +15,9 @@ interface OrgItem {
 }
 
 export default function B2BOrgsPage() {
+  const t = useTranslations("b2b")
+  const enumLabel = (group: string, value: string) =>
+    t.has(`enums.${group}.${value}`) ? t(`enums.${group}.${value}`) : value
   const [orgs, setOrgs] = useState<OrgItem[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -26,10 +30,10 @@ export default function B2BOrgsPage() {
       try {
         const res = await fetch("/api/orgs")
         const data = await res.json()
-        if (!res.ok) throw new Error(data?.error || "Failed to load orgs")
+        if (!res.ok) throw new Error(data?.error || t("orgs.loadFailed"))
         if (active) setOrgs(data.orgs ?? [])
       } catch (err) {
-        if (active) setError(err instanceof Error ? err.message : "Failed to load orgs")
+        if (active) setError(err instanceof Error ? err.message : t("orgs.loadFailed"))
       } finally {
         if (active) setLoading(false)
       }
@@ -38,21 +42,21 @@ export default function B2BOrgsPage() {
     return () => {
       active = false
     }
-  }, [])
+  }, [t])
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-[#2D2721]">B2B Organizations</h1>
-        <p className="text-[#6B5744]">Company workspaces with campaigns, vouchers, and orders.</p>
+        <h1 className="text-3xl font-bold text-[#2D2721]">{t("orgs.title")}</h1>
+        <p className="text-[#6B5744]">{t("orgs.subtitle")}</p>
       </div>
 
-      {loading && <div className="text-sm text-[#8B7355]">Loading organizations...</div>}
+      {loading && <div className="text-sm text-[#8B7355]">{t("orgs.loading")}</div>}
       {error && <div className="text-sm text-red-600">{error}</div>}
 
       {!loading && !error && orgs.length === 0 && (
         <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
-          <div className="text-[#6B5744]">No organizations found. Ask an admin to invite you.</div>
+          <div className="text-[#6B5744]">{t("orgs.empty")}</div>
         </WarmCard>
       )}
 
@@ -63,11 +67,11 @@ export default function B2BOrgsPage() {
               <div>
                 <h2 className="text-xl font-semibold text-[#2D2721]">{org.name}</h2>
                 <div className="text-xs text-[#8B7355] uppercase tracking-wide mt-1">
-                  {org.type} · {org.status} · {org.role}
+                  {enumLabel("orgType", org.type)} · {enumLabel("orgStatus", org.status)} · {t.has(`roles.${org.role}`) ? t(`roles.${org.role}`) : org.role}
                 </div>
               </div>
               <WarmButton asChild size="sm">
-                <Link href={`/app/b2b/orgs/${org.id}`}>Open</Link>
+                <Link href={`/app/b2b/orgs/${org.id}`}>{t("orgs.open")}</Link>
               </WarmButton>
             </div>
           </WarmCard>

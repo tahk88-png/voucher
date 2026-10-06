@@ -1,5 +1,10 @@
 import { pageMetadata } from '@/lib/seo/page-metadata';
-export const metadata = pageMetadata({ title: 'Notification preferences', noIndex: true });
+import { getTranslations } from 'next-intl/server';
+
+export async function generateMetadata() {
+  const t = await getTranslations('merchantSettings.notifications');
+  return pageMetadata({ title: t('metaTitle'), noIndex: true });
+}
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
@@ -39,24 +44,27 @@ export default async function MerchantNotificationsPage({
     select: { notificationPrefs: true },
   });
   const preferences = resolvePrefs(member?.notificationPrefs);
+  const t = await getTranslations('merchantSettings.notifications');
+  const tNav = await getTranslations('nav');
 
   return (
     <div className="p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
         <Breadcrumbs
           items={[
-            { label: 'Dashboard', href: `/merchant/${merchant.slug}/dashboard` },
-            { label: 'Settings', href: `/merchant/${merchant.slug}/settings` },
-            { label: 'Notifications' },
+            { label: tNav('dashboard'), href: `/merchant/${merchant.slug}/dashboard` },
+            { label: tNav('settings'), href: `/merchant/${merchant.slug}/settings` },
+            { label: tNav('notifications') },
           ]}
         />
         <h1 className="text-2xl font-semibold text-[var(--text)] mb-2">
-          Notification preferences
+          {t('title')}
         </h1>
         <p className="text-sm text-[var(--text-muted)] mb-6">
-          Control which email categories arrive in your inbox as a member of{' '}
-          <span className="font-medium text-[var(--text)]">{merchant.name}</span>.
-          Preferences are personal — each team member manages their own.
+          {t.rich('intro', {
+            merchantName: merchant.name,
+            name: (chunks) => <span className="font-medium text-[var(--text)]">{chunks}</span>,
+          })}
         </p>
 
         <NotificationPreferencesForm

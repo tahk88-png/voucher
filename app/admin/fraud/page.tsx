@@ -264,7 +264,7 @@ export default function FraudDashboardPage() {
                         </span>
                       </td>
                       <td className="px-4 py-3 text-[var(--text-muted)] text-xs whitespace-nowrap">
-                        {new Date(item.createdAt).toLocaleDateString()}
+                        {new Date(item.createdAt).toLocaleDateString('en-GB')}
                       </td>
                       <td className="px-4 py-3">
                         {item.fraudStatus === 'pending' && (

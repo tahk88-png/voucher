@@ -74,6 +74,8 @@ export async function POST(req: NextRequest) {
         merchantId: merchant.id,
         actorUserId: profile.userId,
         action: 'campaign.created',
+        resourceType: 'campaign',
+        resourceId: campaign.id,
         payloadJson: {
           campaignId: campaign.id,
           name: campaign.name,

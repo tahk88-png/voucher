@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma"
 import { logger } from "@/lib/logger"
 import Stripe from "stripe"
+import { PLAN_CATALOG, resolveBilling } from "@/lib/access-control/monetization"
 
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY
@@ -12,36 +13,90 @@ function getStripe() {
 // Subscription Overview
 // ---------------------------------------------------------------------------
 
+/**
+ * One row per merchant with its effective billing state.
+ *
+ * Merchants on the built-in free trial (or a trial granted outside Stripe)
+ * have no MerchantSubscription row, so listing only that table showed
+ * "No data found" while merchants were trialling Pro. The effective state
+ * comes from resolveBilling, the same logic that gates features.
+ *
+ * `status` filters on the effective state: trial | active | grace | locked.
+ */
 export async function getSubscriptionOverview(filters: {
   status?: string
   merchantId?: string
   page?: number
   limit?: number
-}): Promise<{ subscriptions: any[]; total: number }> {
-  const page = filters.page ?? 1
+}): Promise<{ subscriptions: SubscriptionOverviewRow[]; total: number }> {
+  const page = Math.max(1, filters.page ?? 1)
   const limit = filters.limit ?? 20
-  const skip = (page - 1) * limit
+  const now = new Date()
 
-  const where: any = {}
-  if (filters.status) where.status = filters.status
-  if (filters.merchantId) where.merchantId = filters.merchantId
+  const merchants = await prisma.merchant.findMany({
+    where: {
+      deletedAt: null,
+      ...(filters.merchantId ? { id: filters.merchantId } : {}),
+    },
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      isActive: true,
+      createdAt: true,
+      subscription: true,
+    },
+    orderBy: { createdAt: "desc" },
+  })
 
-  const [subscriptions, total] = await Promise.all([
-    prisma.merchantSubscription.findMany({
-      where,
-      include: {
-        merchant: {
-          select: { id: true, name: true, slug: true, isActive: true },
-        },
+  const rows: SubscriptionOverviewRow[] = merchants.map((m) => {
+    const billing = resolveBilling(
+      {
+        createdAt: m.createdAt,
+        subscriptionStatus: m.subscription?.status ?? null,
+        subscriptionPriceId: m.subscription?.priceId ?? null,
+        trialEndsAt: m.subscription?.trialEndsAt ?? null,
+        currentPeriodEnd: m.subscription?.currentPeriodEnd ?? null,
       },
-      orderBy: { createdAt: "desc" },
-      skip,
-      take: limit,
-    }),
-    prisma.merchantSubscription.count({ where }),
-  ])
+      now
+    )
+    const plan = PLAN_CATALOG[billing.planTier]
+    const paying = billing.billingState === "active" && !!m.subscription?.stripeSubscriptionId
+    return {
+      id: m.subscription?.id ?? `merchant:${m.id}`,
+      merchantId: m.id,
+      merchantName: m.name,
+      merchantSlug: m.slug,
+      merchantActive: m.isActive,
+      plan: plan.label,
+      status: billing.billingState,
+      stripeStatus: m.subscription?.status ?? null,
+      source: m.subscription?.stripeSubscriptionId ? "stripe" : "platform",
+      // Only a Stripe-billed active plan has a real monthly charge.
+      amount: paying ? plan.monthlyPriceCents : null,
+      trialEndsAt: billing.billingState === "trial" ? billing.trialEndsAt : null,
+      currentPeriodEnd: m.subscription?.currentPeriodEnd ?? null,
+    }
+  })
 
-  return { subscriptions, total }
+  const filtered = filters.status ? rows.filter((r) => r.status === filters.status) : rows
+  const start = (page - 1) * limit
+  return { subscriptions: filtered.slice(start, start + limit), total: filtered.length }
+}
+
+export type SubscriptionOverviewRow = {
+  id: string
+  merchantId: string
+  merchantName: string
+  merchantSlug: string
+  merchantActive: boolean
+  plan: string
+  status: "trial" | "active" | "grace" | "locked"
+  stripeStatus: string | null
+  source: "stripe" | "platform"
+  amount: number | null
+  trialEndsAt: Date | null
+  currentPeriodEnd: Date | null
 }
 
 // ---------------------------------------------------------------------------

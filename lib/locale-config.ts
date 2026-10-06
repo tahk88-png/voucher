@@ -39,6 +39,37 @@ export function isSupportedLocale(locale: string): locale is SupportedLocale {
   return (supportedLocales as readonly string[]).includes(locale)
 }
 
+// Browser language tags whose base differs from our locale code.
+const LANGUAGE_ALIASES: Record<string, SupportedLocale> = {
+  nb: "no", // Norwegian Bokmål
+  nn: "no", // Norwegian Nynorsk
+}
+
+/**
+ * First supported language in an Accept-Language header, in the visitor's
+ * order of preference ("et-EE,et;q=0.9,en;q=0.8" → "et"); null when none is
+ * supported. Quality values are respected; "*" is ignored.
+ */
+export function localeFromAcceptLanguage(header: string | null | undefined): SupportedLocale | null {
+  if (!header) return null
+  const ranked = header
+    .split(",")
+    .map((part, index) => {
+      const [tag, ...params] = part.trim().toLowerCase().split(";")
+      const q = params.map((p) => p.trim()).find((p) => p.startsWith("q="))
+      const quality = q ? Number.parseFloat(q.slice(2)) : 1
+      return { tag: tag.trim(), quality: Number.isFinite(quality) ? quality : 0, index }
+    })
+    .filter((entry) => entry.tag && entry.tag !== "*" && entry.quality > 0)
+    .sort((a, b) => b.quality - a.quality || a.index - b.index)
+  for (const { tag } of ranked) {
+    const base = tag.split("-")[0]
+    const locale = LANGUAGE_ALIASES[base] ?? base
+    if (isSupportedLocale(locale)) return locale
+  }
+  return null
+}
+
 export interface LanguageOption {
   code: SupportedLocale
   name: string
@@ -48,7 +79,7 @@ export interface LanguageOption {
 }
 
 export const languageOptions: LanguageOption[] = [
-  { code: "en", name: "English", nativeName: "English", flag: "US", emoji: "\u{1F1FA}\u{1F1F8}" },
+  { code: "en", name: "English", nativeName: "English", flag: "GB", emoji: "\u{1F1EC}\u{1F1E7}" },
   { code: "et", name: "Estonian", nativeName: "Eesti", flag: "EE", emoji: "\u{1F1EA}\u{1F1EA}" },
   { code: "es", name: "Spanish", nativeName: "Espa\u00f1ol", flag: "ES", emoji: "\u{1F1EA}\u{1F1F8}" },
   { code: "fr", name: "French", nativeName: "Fran\u00e7ais", flag: "FR", emoji: "\u{1F1EB}\u{1F1F7}" },
@@ -78,6 +109,7 @@ export const languageOptions: LanguageOption[] = [
 export interface CountryOption {
   code: string
   name: string
+  /** Emoji flag (regional-indicator pair), rendered as-is next to the name. */
   flag: string
   currency: string
   localeTag: string
@@ -85,37 +117,39 @@ export interface CountryOption {
 }
 
 export const countryOptions: CountryOption[] = [
-  { code: "US", name: "United States", flag: "US", currency: "$", localeTag: "en-US", language: "en" },
-  { code: "EE", name: "Estonia", flag: "EE", currency: "EUR", localeTag: "et-EE", language: "et" },
-  { code: "ES", name: "Spain", flag: "ES", currency: "EUR", localeTag: "es-ES", language: "es" },
-  { code: "FR", name: "France", flag: "FR", currency: "EUR", localeTag: "fr-FR", language: "fr" },
-  { code: "DE", name: "Germany", flag: "DE", currency: "EUR", localeTag: "de-DE", language: "de" },
-  { code: "FI", name: "Finland", flag: "FI", currency: "EUR", localeTag: "fi-FI", language: "fi" },
-  { code: "SE", name: "Sweden", flag: "SE", currency: "SEK", localeTag: "sv-SE", language: "sv" },
-  { code: "NO", name: "Norway", flag: "NO", currency: "NOK", localeTag: "nb-NO", language: "no" },
-  { code: "DK", name: "Denmark", flag: "DK", currency: "DKK", localeTag: "da-DK", language: "da" },
-  { code: "LV", name: "Latvia", flag: "LV", currency: "EUR", localeTag: "lv-LV", language: "lv" },
-  { code: "LT", name: "Lithuania", flag: "LT", currency: "EUR", localeTag: "lt-LT", language: "lt" },
-  { code: "PL", name: "Poland", flag: "PL", currency: "PLN", localeTag: "pl-PL", language: "pl" },
-  { code: "UA", name: "Ukraine", flag: "UA", currency: "UAH", localeTag: "uk-UA", language: "uk" },
-  { code: "IT", name: "Italy", flag: "IT", currency: "EUR", localeTag: "it-IT", language: "it" },
-  { code: "RU", name: "Russia", flag: "RU", currency: "RUB", localeTag: "ru-RU", language: "ru" },
-  { code: "PT", name: "Portugal", flag: "PT", currency: "EUR", localeTag: "pt-PT", language: "pt" },
-  { code: "NL", name: "Netherlands", flag: "NL", currency: "EUR", localeTag: "nl-NL", language: "nl" },
-  { code: "CZ", name: "Czech Republic", flag: "CZ", currency: "CZK", localeTag: "cs-CZ", language: "cs" },
-  { code: "RO", name: "Romania", flag: "RO", currency: "RON", localeTag: "ro-RO", language: "ro" },
-  { code: "HU", name: "Hungary", flag: "HU", currency: "HUF", localeTag: "hu-HU", language: "hu" },
-  { code: "TR", name: "Turkey", flag: "TR", currency: "TRY", localeTag: "tr-TR", language: "tr" },
-  { code: "JP", name: "Japan", flag: "JP", currency: "JPY", localeTag: "ja-JP", language: "ja" },
-  { code: "KR", name: "South Korea", flag: "KR", currency: "KRW", localeTag: "ko-KR", language: "ko" },
-  { code: "CN", name: "China", flag: "CN", currency: "CNY", localeTag: "zh-CN", language: "zh" },
-  { code: "SA", name: "Saudi Arabia", flag: "SA", currency: "SAR", localeTag: "ar-SA", language: "ar" },
+  { code: "EE", name: "Estonia", flag: "\u{1F1EA}\u{1F1EA}", currency: "EUR", localeTag: "et-EE", language: "et" },
+  { code: "ES", name: "Spain", flag: "\u{1F1EA}\u{1F1F8}", currency: "EUR", localeTag: "es-ES", language: "es" },
+  { code: "FR", name: "France", flag: "\u{1F1EB}\u{1F1F7}", currency: "EUR", localeTag: "fr-FR", language: "fr" },
+  { code: "DE", name: "Germany", flag: "\u{1F1E9}\u{1F1EA}", currency: "EUR", localeTag: "de-DE", language: "de" },
+  { code: "FI", name: "Finland", flag: "\u{1F1EB}\u{1F1EE}", currency: "EUR", localeTag: "fi-FI", language: "fi" },
+  { code: "SE", name: "Sweden", flag: "\u{1F1F8}\u{1F1EA}", currency: "SEK", localeTag: "sv-SE", language: "sv" },
+  { code: "NO", name: "Norway", flag: "\u{1F1F3}\u{1F1F4}", currency: "NOK", localeTag: "nb-NO", language: "no" },
+  { code: "DK", name: "Denmark", flag: "\u{1F1E9}\u{1F1F0}", currency: "DKK", localeTag: "da-DK", language: "da" },
+  { code: "LV", name: "Latvia", flag: "\u{1F1F1}\u{1F1FB}", currency: "EUR", localeTag: "lv-LV", language: "lv" },
+  { code: "LT", name: "Lithuania", flag: "\u{1F1F1}\u{1F1F9}", currency: "EUR", localeTag: "lt-LT", language: "lt" },
+  { code: "PL", name: "Poland", flag: "\u{1F1F5}\u{1F1F1}", currency: "PLN", localeTag: "pl-PL", language: "pl" },
+  { code: "UA", name: "Ukraine", flag: "\u{1F1FA}\u{1F1E6}", currency: "UAH", localeTag: "uk-UA", language: "uk" },
+  { code: "IT", name: "Italy", flag: "\u{1F1EE}\u{1F1F9}", currency: "EUR", localeTag: "it-IT", language: "it" },
+  { code: "RU", name: "Russia", flag: "\u{1F1F7}\u{1F1FA}", currency: "RUB", localeTag: "ru-RU", language: "ru" },
+  { code: "PT", name: "Portugal", flag: "\u{1F1F5}\u{1F1F9}", currency: "EUR", localeTag: "pt-PT", language: "pt" },
+  { code: "NL", name: "Netherlands", flag: "\u{1F1F3}\u{1F1F1}", currency: "EUR", localeTag: "nl-NL", language: "nl" },
+  { code: "CZ", name: "Czech Republic", flag: "\u{1F1E8}\u{1F1FF}", currency: "CZK", localeTag: "cs-CZ", language: "cs" },
+  { code: "RO", name: "Romania", flag: "\u{1F1F7}\u{1F1F4}", currency: "RON", localeTag: "ro-RO", language: "ro" },
+  { code: "HU", name: "Hungary", flag: "\u{1F1ED}\u{1F1FA}", currency: "HUF", localeTag: "hu-HU", language: "hu" },
+  { code: "TR", name: "Turkey", flag: "\u{1F1F9}\u{1F1F7}", currency: "TRY", localeTag: "tr-TR", language: "tr" },
+  { code: "JP", name: "Japan", flag: "\u{1F1EF}\u{1F1F5}", currency: "JPY", localeTag: "ja-JP", language: "ja" },
+  { code: "KR", name: "South Korea", flag: "\u{1F1F0}\u{1F1F7}", currency: "KRW", localeTag: "ko-KR", language: "ko" },
+  { code: "CN", name: "China", flag: "\u{1F1E8}\u{1F1F3}", currency: "CNY", localeTag: "zh-CN", language: "zh" },
+  { code: "SA", name: "Saudi Arabia", flag: "\u{1F1F8}\u{1F1E6}", currency: "SAR", localeTag: "ar-SA", language: "ar" },
+  { code: "US", name: "United States", flag: "\u{1F1FA}\u{1F1F8}", currency: "USD", localeTag: "en-US", language: "en" },
 ]
 
-export const defaultCountryCode = "US"
+// A European marketplace: visitors without a stored choice start in Estonia
+// (EUR). English maps to the same default rather than to the United States.
+export const defaultCountryCode = "EE"
 
 export const localeToCountryCode: Record<SupportedLocale, string> = {
-  en: "US",
+  en: "EE",
   et: "EE",
   es: "ES",
   fr: "FR",
@@ -153,7 +187,8 @@ export function getCountryByLocale(locale: SupportedLocale): CountryOption {
 }
 
 export const localeToIntlLocale: Record<SupportedLocale, string> = {
-  en: "en-US",
+  // British English: day-first dates and "€" formatting for a European audience
+  en: "en-GB",
   et: "et-EE",
   es: "es-ES",
   fr: "fr-FR",

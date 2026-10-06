@@ -17,6 +17,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
   const router = useRouter()
   const pathname = usePathname()
   const tLanguage = useTranslations("language")
+  const t = useTranslations("site.language")
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const menuId = useId()
@@ -64,7 +65,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-controls={menuId}
-          aria-label={`Select interface language (${selectedLang?.code?.toUpperCase() || "unknown"})`}
+          aria-label={t("selectInterfaceLabel", { language: selectedLang?.code?.toUpperCase() || t("unknown") })}
         >
           <span className="text-lg">{selectedLang?.emoji}</span>
           <span className="text-sm font-medium text-[var(--text)] hidden sm:inline">
@@ -83,7 +84,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
                     onClick={() => handleLanguageSelect(lang.code)}
                     className={`w-full flex items-center justify-between gap-3 px-3 py-2 rounded-[10px] transition-all duration-150 ease-smooth ${
                       language === lang.code
-                        ? "gradient-brand text-[var(--text)]"
+                        ? "gradient-brand text-[var(--primary-foreground)]"
                         : "hover:bg-[var(--bg)] text-[var(--text-muted)]"
                     }`}
                   >
@@ -113,14 +114,14 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls={menuId}
-        aria-label={`Select interface language (${selectedLang?.nativeName || "unknown"})`}
+        aria-label={t("selectInterfaceLabel", { language: selectedLang?.nativeName || t("unknown") })}
       >
         <Globe className="h-5 w-5 text-[var(--primary)]" />
         <div className="flex items-center gap-2 flex-1">
           <span className="text-xl">{selectedLang?.emoji}</span>
           <div className="text-left">
             <div className="text-sm font-semibold text-[var(--text)]">{selectedLang?.nativeName}</div>
-            <div className="text-xs text-[var(--text-faint)]">{selectedLang?.name} (UI)</div>
+            <div className="text-xs text-[var(--text-faint)]">{t("uiName", { name: selectedLang?.name ?? "" })}</div>
           </div>
         </div>
         <ChevronDown className={`h-5 w-5 text-[var(--text-faint)] transition-transform ${isOpen ? "rotate-180" : ""}`} />
@@ -135,7 +136,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
           <WarmCard padding="md" className="shadow-warm-lg">
             <div className="mb-3">
               <div className="text-xs font-semibold text-[var(--text-faint)] uppercase tracking-wide">{tLanguage("select")}</div>
-              <div className="text-xs text-[var(--text-faint)] mt-1">Changes interface text only</div>
+              <div className="text-xs text-[var(--text-faint)] mt-1">{t("interfaceOnly")}</div>
             </div>
             <div className="space-y-1.5 max-h-[400px] overflow-y-auto pr-1 scrollbar-thin">
               {availableLanguages.map((lang) => (
@@ -144,7 +145,7 @@ export function LanguageSelector({ variant = "default" }: LanguageSelectorProps)
                   onClick={() => handleLanguageSelect(lang.code)}
                   className={`w-full flex items-center justify-between gap-3 px-4 py-2.5 rounded-[12px] transition-all duration-150 ease-smooth ${
                     language === lang.code
-                      ? "gradient-brand text-[var(--text)] shadow-warm"
+                      ? "gradient-brand text-[var(--primary-foreground)] shadow-warm"
                       : "hover:bg-[var(--bg)] text-[var(--text-muted)]"
                   }`}
                 >

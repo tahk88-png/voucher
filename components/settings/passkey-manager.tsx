@@ -1,10 +1,12 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import { Fingerprint, Trash2, Plus, ShieldCheck } from 'lucide-react';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
 import { usePasskey } from '@/hooks/use-passkey';
+import { apiErrorText } from '@/components/settings/api-error-text';
 
 type Passkey = {
   id: string;
@@ -21,6 +23,8 @@ type Passkey = {
  * register, list, and remove passkeys from the security settings page.
  */
 export function PasskeyManager() {
+  const t = useTranslations('accountSecurity');
+  const locale = useLocale();
   const { startRegistration, isLoading: registering, error: registerError } = usePasskey();
   const [passkeys, setPasskeys] = useState<Passkey[]>([]);
   const [loading, setLoading] = useState(true);
@@ -34,15 +38,16 @@ export function PasskeyManager() {
   const load = useCallback(async () => {
     try {
       const res = await fetch('/api/auth/passkey/list');
-      if (!res.ok) throw new Error('Failed to load passkeys');
+      if (!res.ok) throw new Error(`Loading passkeys failed (HTTP ${res.status})`);
       const data = await res.json();
       setPasskeys(data.passkeys ?? []);
     } catch (err) {
-      setLocalError(err instanceof Error ? err.message : 'Failed to load passkeys');
+      console.error('Loading passkeys failed', err);
+      setLocalError(t('passkeys.loadFailed'));
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     setSupported(typeof window !== 'undefined' && !!window.PublicKeyCredential);
@@ -64,16 +69,18 @@ export function PasskeyManager() {
     setLocalError(null);
     try {
       const res = await fetch(`/api/auth/passkey/list?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Failed to remove passkey');
+      if (!res.ok) throw new Error(`Removing the passkey failed (HTTP ${res.status})`);
       setPasskeys((prev) => prev.filter((p) => p.id !== id));
     } catch (err) {
-      setLocalError(err instanceof Error ? err.message : 'Failed to remove passkey');
+      console.error('Removing passkey failed', err);
+      setLocalError(t('passkeys.removeFailed'));
     } finally {
       setDeletingId(null);
     }
-  }, []);
+  }, [t]);
 
-  const error = localError || registerError;
+  const error = localError || (registerError ? apiErrorText(t, registerError, registerError) : null);
+  const formatDate = (iso: string) => new Date(iso).toLocaleDateString(locale);
 
   return (
     <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
@@ -83,16 +90,16 @@ export function PasskeyManager() {
             <Fingerprint className="h-5 w-5 text-[#8B7355]" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-[#2D2721]">Passkeys</h2>
+            <h2 className="text-lg font-semibold text-[#2D2721]">{t('passkeys.title')}</h2>
             <p className="text-sm text-[#6B5744] mt-0.5">
-              Sign in without a password using your device&apos;s fingerprint, face, or PIN.
+              {t('passkeys.description')}
             </p>
           </div>
         </div>
         {supported && !showNameForm && (
           <WarmButton onClick={() => setShowNameForm(true)} disabled={registering} className="shrink-0">
             <Plus className="h-4 w-4 mr-1" />
-            Add passkey
+            {t('passkeys.add')}
           </WarmButton>
         )}
       </div>
@@ -104,21 +111,21 @@ export function PasskeyManager() {
             type="text"
             value={nameInput}
             onChange={(e) => setNameInput(e.target.value)}
-            placeholder='e.g. "MacBook Touch ID"'
+            placeholder={t('passkeys.namePlaceholder')}
             className="flex-1 rounded-lg border border-[rgba(139,115,85,0.3)] px-3 py-2 text-sm text-[#2D2721] bg-white focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
           />
           <WarmButton type="submit" size="sm" disabled={registering}>
-            {registering ? 'Adding…' : 'Add'}
+            {registering ? t('passkeys.adding') : t('passkeys.addSubmit')}
           </WarmButton>
           <WarmButton type="button" size="sm" variant="ghost" onClick={() => { setShowNameForm(false); setNameInput(''); }}>
-            Cancel
+            {t('common.cancel')}
           </WarmButton>
         </form>
       )}
 
       {!supported && (
         <p className="mt-4 text-sm text-[#6B5744]">
-          This browser doesn&apos;t support passkeys. Try a recent version of Chrome, Safari, or Edge.
+          {t('passkeys.unsupported')}
         </p>
       )}
 
@@ -134,7 +141,7 @@ export function PasskeyManager() {
           </div>
         ) : passkeys.length === 0 ? (
           <div className="text-center py-6 text-sm text-[#6B5744]">
-            No passkeys yet. Add one to enable passwordless sign-in.
+            {t('passkeys.empty')}
           </div>
         ) : (
           passkeys.map((pk) => (
@@ -146,18 +153,22 @@ export function PasskeyManager() {
                 <ShieldCheck className="h-4 w-4 text-[#9DB5A5] shrink-0" />
                 <div className="min-w-0">
                   <p className="text-sm font-medium text-[#2D2721] truncate">
-                    {pk.friendlyName || (pk.deviceType === 'singleDevice' ? 'Device passkey' : 'Passkey')}
+                    {pk.friendlyName || (pk.deviceType === 'singleDevice' ? t('passkeys.devicePasskey') : t('passkeys.passkey'))}
                   </p>
                   <p className="text-xs text-[#6B5744]">
-                    Added {new Date(pk.createdAt).toLocaleDateString()}
-                    {pk.lastUsedAt ? ` · Last used ${new Date(pk.lastUsedAt).toLocaleDateString()}` : ''}
-                    {pk.backedUp ? ' · Synced' : ''}
+                    {[
+                      t('passkeys.added', { date: formatDate(pk.createdAt) }),
+                      pk.lastUsedAt ? t('passkeys.lastUsed', { date: formatDate(pk.lastUsedAt) }) : null,
+                      pk.backedUp ? t('passkeys.synced') : null,
+                    ]
+                      .filter(Boolean)
+                      .join(' · ')}
                   </p>
                 </div>
               </div>
               {confirmDeleteId === pk.id ? (
                 <div className="flex items-center gap-1 shrink-0">
-                  <span className="text-xs text-[#6B5744] mr-1">Remove?</span>
+                  <span className="text-xs text-[#6B5744] mr-1">{t('passkeys.removeConfirm')}</span>
                   <WarmButton
                     size="sm"
                     variant="ghost"
@@ -165,7 +176,7 @@ export function PasskeyManager() {
                     onClick={() => handleDelete(pk.id)}
                     disabled={deletingId === pk.id}
                   >
-                    {deletingId === pk.id ? '…' : 'Remove'}
+                    {deletingId === pk.id ? '…' : t('passkeys.remove')}
                   </WarmButton>
                   <WarmButton
                     size="sm"
@@ -173,7 +184,7 @@ export function PasskeyManager() {
                     className="text-xs px-2 py-1"
                     onClick={() => setConfirmDeleteId(null)}
                   >
-                    Cancel
+                    {t('common.cancel')}
                   </WarmButton>
                 </div>
               ) : (
@@ -181,7 +192,7 @@ export function PasskeyManager() {
                   type="button"
                   onClick={() => setConfirmDeleteId(pk.id)}
                   disabled={deletingId === pk.id}
-                  aria-label="Remove passkey"
+                  aria-label={t('passkeys.removeLabel')}
                   className="p-2 rounded-lg text-[var(--danger)] hover:bg-[var(--danger)]/10 transition-colors disabled:opacity-50"
                 >
                   <Trash2 className="h-4 w-4" />

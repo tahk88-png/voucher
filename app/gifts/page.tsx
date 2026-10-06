@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import Link from 'next/link';
 import { Gift, Loader2 } from 'lucide-react';
 import { GiftCard } from '@/components/gifts/gift-card';
 import { GiftFilters } from '@/components/gifts/gift-filters';
 import { GiftFeedSection } from '@/components/gifts/gift-feed-section';
 import { AIGiftWizard } from '@/components/gifts/ai-gift-wizard';
+import { useTranslations } from 'next-intl';
 
 interface FeedItem {
   id: string;
@@ -41,11 +43,16 @@ interface FilterOption {
 }
 
 export default function GiftsPage() {
+  const t = useTranslations('giftsPages.hub');
   const [items, setItems] = useState<FeedItem[]>([]);
   const [modules, setModules] = useState<Module[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [cursor, setCursor] = useState<string | null>(null);
+  const [feedError, setFeedError] = useState(false);
+  // True once an unfiltered load came back with nothing: there is no gift
+  // catalogue yet, so filters and the AI finder would lead nowhere.
+  const [catalogEmpty, setCatalogEmpty] = useState(false);
   const [categories, setCategories] = useState<FilterOption[]>([]);
   const [occasions, setOccasions] = useState<FilterOption[]>([]);
   const [personas, setPersonas] = useState<FilterOption[]>([]);
@@ -79,6 +86,8 @@ export default function GiftsPage() {
   const loadFeed = useCallback(async (isAppend = false) => {
     if (isAppend) setLoadingMore(true);
     else setLoading(true);
+    setFeedError(false);
+    const unfiltered = Object.values(filters).every((value) => value == null || value === '');
 
     const params = new URLSearchParams();
     if (filters.category) params.set('category', filters.category);
@@ -99,10 +108,18 @@ export default function GiftsPage() {
       } else {
         setItems(data.items || []);
         setModules(data.modules || []);
+        if (unfiltered) {
+          const moduleItems = (data.modules || []).reduce(
+            (sum: number, mod: Module) => sum + (mod.items?.length || 0),
+            0,
+          );
+          setCatalogEmpty((data.items || []).length === 0 && moduleItems === 0);
+        }
       }
       setCursor(data.nextCursor);
-    } catch {
-      // silent fail
+    } catch (err) {
+      console.error('Gift feed failed to load', err);
+      setFeedError(true);
     } finally {
       setLoading(false);
       setLoadingMore(false);
@@ -138,17 +155,20 @@ export default function GiftsPage() {
             <Gift className="h-5 w-5 text-[var(--primary-foreground)]" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-[var(--text)]">Gift Hub</h1>
-            <p className="text-sm text-[var(--text-muted)]">Find the perfect gift for every occasion</p>
+            <h1 className="text-2xl font-bold text-[var(--text)]">{t('title')}</h1>
+            <p className="text-sm text-[var(--text-muted)]">{t('subtitle')}</p>
           </div>
         </div>
 
-        {/* AI Wizard */}
-        <div className="mb-6">
-          <AIGiftWizard />
-        </div>
+        {/* AI Wizard and filters only when there is a catalogue to search. */}
+        {!catalogEmpty && (
+          <div className="mb-6">
+            <AIGiftWizard />
+          </div>
+        )}
 
         {/* Filters */}
+        {!catalogEmpty && (
         <div className="mb-6">
           <GiftFilters
             categories={categories}
@@ -162,6 +182,7 @@ export default function GiftsPage() {
             onFilterChange={setFilters}
           />
         </div>
+        )}
 
         {/* Feed modules */}
         {modules.map((mod) => (
@@ -178,15 +199,51 @@ export default function GiftsPage() {
           <div className="flex items-center justify-center py-20">
             <Loader2 className="h-8 w-8 animate-spin text-[var(--primary)]" />
           </div>
+        ) : feedError ? (
+          <div role="alert" className="text-center py-20">
+            <p className="text-lg font-medium text-[var(--text)]">{t('loadError')}</p>
+            <button
+              type="button"
+              onClick={() => loadFeed(false)}
+              className="mt-3 text-sm font-medium text-[var(--primary)] underline underline-offset-2"
+            >
+              {t('retry')}
+            </button>
+          </div>
         ) : items.length === 0 ? (
           <div className="text-center py-20">
-            <Gift className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" />
-            <p className="text-lg font-medium text-[var(--text)]">No gifts found</p>
-            <p className="text-sm text-[var(--text-muted)]">Try adjusting your filters or check back later</p>
+            <Gift className="h-12 w-12 mx-auto text-[var(--text-muted)] mb-3" aria-hidden="true" />
+            {catalogEmpty ? (
+              <>
+                <p className="text-lg font-medium text-[var(--text)]">{t('emptyCatalog.title')}</p>
+                <p className="text-sm text-[var(--text-muted)] mt-1">
+                  {t('emptyCatalog.body')}
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-lg font-medium text-[var(--text)]">{t('noMatches')}</p>
+                <button
+                  type="button"
+                  onClick={() => setFilters({})}
+                  className="mt-2 text-sm font-medium text-[var(--primary)] underline underline-offset-2"
+                >
+                  {t('clearFilters')}
+                </button>
+              </>
+            )}
+            <div className="mt-5">
+              <Link
+                href="/campaigns"
+                className="inline-flex items-center px-5 py-2.5 rounded-xl bg-[var(--primary)] text-[var(--primary-foreground)] text-sm font-semibold hover:bg-[var(--primary-hover)]"
+              >
+                {t('browseCampaigns')}
+              </Link>
+            </div>
           </div>
         ) : (
           <>
-            <h2 className="text-xl font-bold text-[var(--text)] mb-4">All Gifts</h2>
+            <h2 className="text-xl font-bold text-[var(--text)] mb-4">{t('allGifts')}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
               {items.map((item) => (
                 <GiftCard key={item.id} {...item} onTrack={handleTrack} />
@@ -197,6 +254,7 @@ export default function GiftsPage() {
             {cursor && (
               <div className="flex justify-center mt-8">
                 <button
+                  type="button"
                   onClick={() => loadFeed(true)}
                   disabled={loadingMore}
                   className="px-6 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-sm font-medium text-[var(--text)] hover:border-[var(--primary)] transition-all disabled:opacity-50"
@@ -204,7 +262,7 @@ export default function GiftsPage() {
                   {loadingMore ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   ) : (
-                    'Load more'
+                    t('loadMore')
                   )}
                 </button>
               </div>

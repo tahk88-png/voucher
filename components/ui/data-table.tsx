@@ -10,6 +10,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
 
@@ -22,6 +23,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const t = useTranslations("ui")
   const [sorting, setSorting] = React.useState<SortingState>([])
 
   const table = useReactTable({
@@ -84,7 +86,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center text-[var(--text-faint)]"
                 >
-                  No results.
+                  {t("dataTable.noResults")}
                 </td>
               </tr>
             )}

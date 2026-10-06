@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { MetricSkeleton } from './loading-skeleton'
 
 export interface MetricCardProps {
@@ -97,6 +98,7 @@ export function MetricCard({
   loading = false,
   compact = false,
 }: MetricCardProps) {
+  const t = useTranslations('dsComponents.metricCard')
   const [entered, setEntered] = useState(false)
 
   useEffect(() => {
@@ -171,7 +173,7 @@ export function MetricCard({
             {change.toFixed(1)}%
           </span>
           <span className="text-xs" style={{ color: 'var(--text-muted, #6b7280)' }}>
-            vs prev period
+            {t('vsPrevPeriod')}
           </span>
         </div>
       )}

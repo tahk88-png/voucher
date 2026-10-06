@@ -1,5 +1,6 @@
 import { cookies, headers } from "next/headers"
 import { routing } from "@/routing"
+import { localeFromAcceptLanguage } from "@/lib/locale-config"
 
 const LOCALE_COOKIE_NAME = "NEXT_LOCALE"
 
@@ -11,16 +12,8 @@ export async function getPreferredLocale(): Promise<string> {
   }
 
   const headerStore = await headers()
-  const acceptLanguage = headerStore.get("accept-language") || ""
-  for (const part of acceptLanguage.split(",")) {
-    const tag = part.split(";")[0]?.trim().toLowerCase()
-    if (!tag) continue
-
-    const base = tag.split("-")[0]
-    if (routing.locales.includes(base as (typeof routing.locales)[number])) {
-      return base
-    }
-  }
+  const fromBrowser = localeFromAcceptLanguage(headerStore.get("accept-language"))
+  if (fromBrowser) return fromBrowser
 
   return routing.defaultLocale
 }

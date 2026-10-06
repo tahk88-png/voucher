@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 interface LiveActivityChartProps {
@@ -52,6 +53,7 @@ export function LiveActivityChart({
   color = "var(--primary)",
   className,
 }: LiveActivityChartProps) {
+  const t = useTranslations("dsComponents.liveActivityChart")
   const svgRef = React.useRef<SVGSVGElement>(null)
   const [dims, setDims] = React.useState({ width: 400, height })
 
@@ -77,7 +79,7 @@ export function LiveActivityChart({
         )}
         style={{ height }}
       >
-        <p className="text-sm text-[var(--text-muted)]">Waiting for data...</p>
+        <p className="text-sm text-[var(--text-muted)]">{t("waiting")}</p>
       </div>
     )
   }

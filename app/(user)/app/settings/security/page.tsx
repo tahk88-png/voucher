@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { WarmCard } from "@/components/warm-card";
 import { WarmButton } from "@/components/warm-button";
 import { Input } from "@/components/ui/input";
@@ -19,10 +20,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { PasskeyManager } from "@/components/settings/passkey-manager";
+import { apiErrorText } from "@/components/settings/api-error-text";
 
 type SetupStep = "idle" | "scanning" | "verifying" | "complete" | "disabling";
 
 export default function SecurityPage() {
+  const t = useTranslations("accountSecurity");
   const [step, setStep] = useState<SetupStep>("idle");
   const [totpEnabled, setTotpEnabled] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -46,26 +49,22 @@ export default function SecurityPage() {
 
   const checkStatus = useCallback(async () => {
     try {
-      // We check if TOTP is enabled by trying setup — if it returns 400 with "already enabled", it's on
-      // Better approach: just try to fetch, and handle the response
-      const res = await fetch("/api/auth/totp/setup", { method: "POST" });
-      const data = await res.json();
-
-      if (res.ok) {
-        // Setup returned successfully, meaning 2FA is NOT yet enabled (or was pending)
-        // Clean up — we don't want to start setup automatically
-        setTotpEnabled(false);
-      } else if (data.error?.includes("already enabled")) {
-        setTotpEnabled(true);
-      } else {
-        setTotpEnabled(false);
+      // Read-only status check. Setup (which generates a new secret) only runs
+      // when the user clicks "Enable 2FA".
+      const res = await fetch("/api/auth/totp/status", { cache: "no-store" });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data) {
+        setError(apiErrorText(t, data?.error, t("security.errors.statusLoadFailed")));
+        return;
       }
-    } catch {
-      // ignore
+      setTotpEnabled(Boolean(data.enabled));
+    } catch (err) {
+      console.error("Loading 2FA status failed", err);
+      setError(t("security.errors.statusLoadFailed"));
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     checkStatus();
@@ -78,7 +77,7 @@ export default function SecurityPage() {
       const res = await fetch("/api/auth/totp/setup", { method: "POST" });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Failed to start setup");
+        setError(apiErrorText(t, data.error, t("security.errors.setupFailed")));
         setStep("idle");
         return;
       }
@@ -86,7 +85,7 @@ export default function SecurityPage() {
       setUri(data.uri);
       setBackupCodes(data.backupCodes);
     } catch {
-      setError("Failed to start setup");
+      setError(t("security.errors.setupFailed"));
       setStep("idle");
     }
   }
@@ -103,15 +102,15 @@ export default function SecurityPage() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Verification failed");
+        setError(apiErrorText(t, data.error, t("security.errors.verifyFailed")));
         setVerifying(false);
         return;
       }
       setTotpEnabled(true);
       setStep("complete");
-      setSuccessMsg("Two-factor authentication is now enabled!");
+      setSuccessMsg(t("security.enabledMessage"));
     } catch {
-      setError("Verification failed");
+      setError(t("security.errors.verifyFailed"));
     } finally {
       setVerifying(false);
     }
@@ -129,16 +128,16 @@ export default function SecurityPage() {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "Failed to disable 2FA");
+        setError(apiErrorText(t, data.error, t("security.errors.disableFailed")));
         setDisabling(false);
         return;
       }
       setTotpEnabled(false);
       setStep("idle");
       setDisableCode("");
-      setSuccessMsg("Two-factor authentication has been disabled");
+      setSuccessMsg(t("security.disabledMessage"));
     } catch {
-      setError("Failed to disable 2FA");
+      setError(t("security.errors.disableFailed"));
     } finally {
       setDisabling(false);
     }
@@ -158,14 +157,14 @@ export default function SecurityPage() {
 
   function downloadBackupCodes() {
     const content = [
-      "GiftHub - Two-Factor Authentication Backup Codes",
+      t("security.backupFile.title"),
       "================================================",
       "",
-      "Save these codes in a safe place. Each code can only be used once.",
+      t("security.backupFile.instructions"),
       "",
       ...backupCodes.map((code, i) => `${i + 1}. ${code}`),
       "",
-      `Generated: ${new Date().toISOString()}`,
+      t("security.backupFile.generated", { date: new Date().toISOString() }),
     ].join("\n");
 
     const blob = new Blob([content], { type: "text/plain" });
@@ -184,12 +183,13 @@ export default function SecurityPage() {
           <Link
             href="/app/settings"
             className="p-2 rounded-lg hover:bg-[var(--surface)] transition-colors"
+            aria-label={t("security.backToSettings")}
           >
-            <ArrowLeft className="h-4 w-4 text-[var(--text-muted)]" />
+            <ArrowLeft className="h-4 w-4 text-[var(--text-muted)]" aria-hidden="true" />
           </Link>
           <div>
-            <h1 className="text-2xl font-semibold text-[#2D2721]">Security</h1>
-            <p className="text-sm text-[#6B5744]">Loading...</p>
+            <h1 className="text-2xl font-semibold text-[#2D2721]">{t("security.title")}</h1>
+            <p className="text-sm text-[#6B5744]">{t("security.loading")}</p>
           </div>
         </div>
         <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
@@ -208,13 +208,14 @@ export default function SecurityPage() {
         <Link
           href="/app/settings"
           className="p-2 rounded-lg hover:bg-[var(--surface)] transition-colors"
+          aria-label={t("security.backToSettings")}
         >
-          <ArrowLeft className="h-4 w-4 text-[var(--text-muted)]" />
+          <ArrowLeft className="h-4 w-4 text-[var(--text-muted)]" aria-hidden="true" />
         </Link>
         <div>
-          <h1 className="text-2xl font-semibold text-[#2D2721]">Security</h1>
+          <h1 className="text-2xl font-semibold text-[#2D2721]">{t("security.title")}</h1>
           <p className="text-sm text-[#6B5744]">
-            Manage two-factor authentication and security settings
+            {t("security.description")}
           </p>
         </div>
       </div>
@@ -249,12 +250,12 @@ export default function SecurityPage() {
           </div>
           <div className="flex-1">
             <div className="text-lg font-semibold text-[#2D2721]">
-              Two-Factor Authentication
+              {t("security.status.title")}
             </div>
             <p className="text-sm text-[#6B5744] mt-1">
               {totpEnabled
-                ? "Your account is protected with an authenticator app."
-                : "Add an extra layer of security to your account by requiring a code from your authenticator app."}
+                ? t("security.status.enabledBody")
+                : t("security.status.disabledBody")}
             </p>
             <div className="mt-1">
               <span
@@ -264,7 +265,7 @@ export default function SecurityPage() {
                     : "bg-gray-100 text-gray-600"
                 }`}
               >
-                {totpEnabled ? "Enabled" : "Not enabled"}
+                {totpEnabled ? t("security.status.enabled") : t("security.status.notEnabled")}
               </span>
             </div>
           </div>
@@ -277,15 +278,14 @@ export default function SecurityPage() {
           <div className="text-center py-4">
             <Smartphone className="h-10 w-10 text-[#8B7355] mx-auto mb-3" />
             <h3 className="text-sm font-semibold text-[#2D2721] mb-1">
-              Set up authenticator app
+              {t("security.setup.title")}
             </h3>
             <p className="text-sm text-[#6B5744] mb-4 max-w-sm mx-auto">
-              Use an app like Google Authenticator, Authy, or 1Password to
-              generate verification codes.
+              {t("security.setup.description")}
             </p>
             <WarmButton onClick={startSetup}>
               <Key className="h-4 w-4 mr-2" />
-              Enable 2FA
+              {t("security.setup.enable")}
             </WarmButton>
           </div>
         </WarmCard>
@@ -300,7 +300,7 @@ export default function SecurityPage() {
                   1
                 </div>
                 <h3 className="text-sm font-semibold text-[#2D2721]">
-                  Scan QR code or enter key manually
+                  {t("security.scan.title")}
                 </h3>
               </div>
 
@@ -310,7 +310,7 @@ export default function SecurityPage() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(uri)}`}
-                    alt="Scan this QR code with your authenticator app"
+                    alt={t("security.scan.qrAlt")}
                     width={200}
                     height={200}
                     className="rounded"
@@ -319,7 +319,7 @@ export default function SecurityPage() {
 
                 <div className="text-center">
                   <p className="text-xs text-[#8B7355] mb-2">
-                    Or enter this key manually:
+                    {t("security.scan.manualKey")}
                   </p>
                   <div className="flex items-center gap-2 bg-[#FFF9ED] rounded-lg px-3 py-2">
                     <code className="text-sm font-mono text-[#2D2721] select-all break-all">
@@ -328,7 +328,7 @@ export default function SecurityPage() {
                     <button
                       onClick={() => copyToClipboard(secret, "secret")}
                       className="p-1 hover:bg-white/50 rounded transition-colors shrink-0"
-                      title="Copy secret"
+                      title={t("security.scan.copySecret")}
                     >
                       {copiedSecret ? (
                         <Check className="h-4 w-4 text-green-600" />
@@ -349,14 +349,14 @@ export default function SecurityPage() {
                   2
                 </div>
                 <h3 className="text-sm font-semibold text-[#2D2721]">
-                  Enter verification code
+                  {t("security.verify.title")}
                 </h3>
               </div>
 
               <form onSubmit={handleVerify} className="space-y-3">
                 <div>
                   <Label className="text-sm font-medium text-[var(--text)]">
-                    6-digit code from your app
+                    {t("security.verify.codeLabel")}
                   </Label>
                   <Input
                     type="text"
@@ -379,7 +379,7 @@ export default function SecurityPage() {
                     disabled={verifyCode.length !== 6}
                     fullWidth
                   >
-                    Verify and enable
+                    {t("security.verify.submit")}
                   </WarmButton>
                   <WarmButton
                     type="button"
@@ -390,7 +390,7 @@ export default function SecurityPage() {
                       setError(null);
                     }}
                   >
-                    Cancel
+                    {t("common.cancel")}
                   </WarmButton>
                 </div>
               </form>
@@ -407,14 +407,12 @@ export default function SecurityPage() {
                 3
               </div>
               <h3 className="text-sm font-semibold text-[#2D2721]">
-                Save your backup codes
+                {t("security.backupCodes.title")}
               </h3>
             </div>
 
             <p className="text-sm text-[#6B5744]">
-              Store these codes safely. If you lose access to your authenticator
-              app, you can use one of these codes to sign in. Each code can only
-              be used once.
+              {t("security.backupCodes.description")}
             </p>
 
             <div className="bg-[#FFF9ED] rounded-lg p-4">
@@ -443,7 +441,7 @@ export default function SecurityPage() {
                 ) : (
                   <Copy className="h-3.5 w-3.5 mr-1" />
                 )}
-                {copiedBackup ? "Copied!" : "Copy codes"}
+                {copiedBackup ? t("security.backupCodes.copied") : t("security.backupCodes.copy")}
               </WarmButton>
               <WarmButton
                 variant="outline"
@@ -451,7 +449,7 @@ export default function SecurityPage() {
                 onClick={downloadBackupCodes}
               >
                 <Download className="h-3.5 w-3.5 mr-1" />
-                Download
+                {t("security.backupCodes.download")}
               </WarmButton>
             </div>
 
@@ -465,7 +463,7 @@ export default function SecurityPage() {
                 setVerifyCode("");
               }}
             >
-              Done
+              {t("security.backupCodes.done")}
             </WarmButton>
           </div>
         </WarmCard>
@@ -480,10 +478,10 @@ export default function SecurityPage() {
             </div>
             <div>
               <div className="text-sm font-semibold text-[#2D2721]">
-                Disable two-factor authentication
+                {t("security.disable.title")}
               </div>
               <div className="text-sm text-[#6B5744]">
-                This will remove the extra security layer from your account.
+                {t("security.disable.description")}
               </div>
             </div>
           </div>
@@ -496,7 +494,7 @@ export default function SecurityPage() {
               setSuccessMsg(null);
             }}
           >
-            Disable 2FA
+            {t("security.disable.button")}
           </WarmButton>
         </WarmCard>
       )}
@@ -505,19 +503,18 @@ export default function SecurityPage() {
         <WarmCard padding="lg" className="bg-white border border-red-200">
           <form onSubmit={handleDisable} className="space-y-4">
             <h3 className="text-sm font-semibold text-[#2D2721]">
-              Confirm disable 2FA
+              {t("security.disable.confirmTitle")}
             </h3>
             <p className="text-sm text-[#6B5744]">
-              Enter your current 6-digit code from your authenticator app, or a
-              backup code.
+              {t("security.disable.confirmDescription")}
             </p>
             <div>
               <Label className="text-sm font-medium text-[var(--text)]">
-                Verification code
+                {t("security.disable.codeLabel")}
               </Label>
               <Input
                 type="text"
-                placeholder="000000 or XXXX-XXXX"
+                placeholder={t("security.disable.codePlaceholder")}
                 value={disableCode}
                 onChange={(e) => setDisableCode(e.target.value)}
                 className="mt-1"
@@ -531,7 +528,7 @@ export default function SecurityPage() {
                 disabled={!disableCode.trim()}
                 className="bg-red-500 hover:bg-red-600 text-white"
               >
-                Confirm disable
+                {t("security.disable.confirm")}
               </WarmButton>
               <WarmButton
                 type="button"
@@ -542,7 +539,7 @@ export default function SecurityPage() {
                   setError(null);
                 }}
               >
-                Cancel
+                {t("common.cancel")}
               </WarmButton>
             </div>
           </form>
@@ -555,7 +552,7 @@ export default function SecurityPage() {
       {/* Quick links */}
       <WarmCard padding="lg" className="bg-white border border-[rgba(139,115,85,0.15)]">
         <div className="text-sm font-semibold text-[#2D2721] mb-3">
-          Security quick links
+          {t("security.quickLinks.title")}
         </div>
         <div className="space-y-2">
           <Link
@@ -563,14 +560,14 @@ export default function SecurityPage() {
             className="flex items-center gap-2 text-sm text-[var(--primary)] hover:underline"
           >
             <Shield className="h-4 w-4" />
-            View active sessions
+            {t("security.quickLinks.sessions")}
           </Link>
           <Link
             href="/app/settings"
             className="flex items-center gap-2 text-sm text-[var(--primary)] hover:underline"
           >
             <Key className="h-4 w-4" />
-            Change password
+            {t("security.quickLinks.changePassword")}
           </Link>
         </div>
       </WarmCard>

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { WarmButton } from '@/components/warm-button';
 import { showSuccess, showError } from '@/lib/toast-helpers';
 import { showConfirm } from '@/lib/confirm-helpers';
+import { useTranslations } from 'next-intl';
 
 interface PublishEventButtonProps {
   eventId: string;
@@ -17,9 +18,10 @@ export default function PublishEventButton({
 }: PublishEventButtonProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const t = useTranslations('merchantEvents.publish');
 
   const handlePublish = async () => {
-    showConfirm('Publish this event? It will be visible to the public and tickets can be purchased.', async () => {
+    showConfirm(t('confirm'), async () => {
       setIsLoading(true);
       try {
         const response = await fetch(`/api/events/${eventId}/publish`, {
@@ -28,13 +30,13 @@ export default function PublishEventButton({
 
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.error || 'Failed to publish event');
+          throw new Error(error.error || t('failed'));
         }
 
         router.refresh();
-        showSuccess('Event published successfully!');
+        showSuccess(t('success'));
       } catch (error) {
-        const message = error instanceof Error ? error.message : 'Failed to publish event';
+        const message = error instanceof Error ? error.message : t('failed');
         showError(message);
         if (process.env.NODE_ENV === 'development') {
           console.error(error);
@@ -42,14 +44,14 @@ export default function PublishEventButton({
       } finally {
         setIsLoading(false);
       }
-    }, { confirmLabel: 'Publish' });
+    }, { confirmLabel: t('confirmLabel') });
     return;
   };
 
   if (currentStatus === 'published') {
     return (
       <WarmButton variant="outline" disabled>
-        Published
+        {t('published')}
       </WarmButton>
     );
   }
@@ -57,14 +59,14 @@ export default function PublishEventButton({
   if (currentStatus === 'cancelled' || currentStatus === 'ended') {
     return (
       <WarmButton variant="outline" disabled>
-        Cannot Publish
+        {t('cannotPublish')}
       </WarmButton>
     );
   }
 
   return (
     <WarmButton onClick={handlePublish} disabled={isLoading}>
-      {isLoading ? 'Publishing...' : 'Publish Event'}
+      {isLoading ? t('publishing') : t('button')}
     </WarmButton>
   );
 }

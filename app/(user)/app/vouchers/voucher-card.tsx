@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { QRCodeSVG } from 'qrcode.react';
 import { WarmCard } from '@/components/warm-card';
 import { WarmButton } from '@/components/warm-button';
@@ -39,6 +40,7 @@ export function VoucherCard({
   freeLabel,
   amount,
 }: PurchaseCardProps) {
+  const t = useTranslations('account');
   const [showQr, setShowQr] = useState(false);
   const isActive = displayStatus === 'active';
   const isExpired = displayStatus === 'expired';
@@ -93,7 +95,7 @@ export function VoucherCard({
               onClick={(e) => { e.preventDefault(); setShowQr(true); }}
             >
               <QrCode className="h-3.5 w-3.5" />
-              Show QR code
+              {t('voucherCard.showQr')}
             </WarmButton>
           </div>
         )}
@@ -113,7 +115,7 @@ export function VoucherCard({
               <h3 className="font-semibold text-[var(--text)]">{title}</h3>
               <button
                 onClick={() => setShowQr(false)}
-                aria-label="Close"
+                aria-label={t('voucherCard.close')}
                 className="p-1 rounded-full hover:bg-[var(--surface-dim)] transition-colors"
               >
                 <X className="h-4 w-4 text-[var(--text-muted)]" />
@@ -132,7 +134,7 @@ export function VoucherCard({
               {voucherId}
             </p>
             <p className="text-xs text-[var(--text-muted)] text-center">
-              Show this QR code to the merchant to redeem in-store.
+              {t('voucherCard.qrHint')}
             </p>
           </div>
         </div>

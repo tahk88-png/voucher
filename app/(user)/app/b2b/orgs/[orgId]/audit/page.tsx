@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { WarmCard } from "@/components/warm-card"
 import { WarmButton } from "@/components/warm-button"
 import { Input } from "@/components/ui/input"
@@ -18,6 +19,8 @@ interface AuditEvent {
 
 export default function B2BAuditPage() {
   const params = useParams()
+  const t = useTranslations("b2b.audit")
+  const tc = useTranslations("common")
   const orgId = typeof params?.orgId === "string" ? params.orgId : params?.orgId?.[0]
 
   const [events, setEvents] = useState<AuditEvent[]>([])
@@ -39,10 +42,10 @@ export default function B2BAuditPage() {
       try {
         const res = await fetch(`/api/orgs/${orgId}/audit?${params.toString()}`)
         const data = await res.json()
-        if (!res.ok) throw new Error(data?.error || "Failed to load audit")
+        if (!res.ok) throw new Error(data?.error || t("loadFailed"))
         if (active) setEvents(data.events ?? [])
       } catch (err) {
-        if (active) setError(err instanceof Error ? err.message : "Failed to load audit")
+        if (active) setError(err instanceof Error ? err.message : t("loadFailed"))
       } finally {
         if (active) setLoading(false)
       }
@@ -51,17 +54,17 @@ export default function B2BAuditPage() {
     return () => {
       active = false
     }
-  }, [orgId, entityType, entityId])
+  }, [orgId, entityType, entityId, t])
 
   return (
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#2D2721]">Audit Log</h1>
-          <p className="text-[#6B5744]">Track voucher lifecycle and changes.</p>
+          <h1 className="text-3xl font-bold text-[#2D2721]">{t("title")}</h1>
+          <p className="text-[#6B5744]">{t("subtitle")}</p>
         </div>
         <WarmButton asChild variant="outline" size="sm">
-          <Link href={`/app/b2b/orgs/${orgId}`}>Back</Link>
+          <Link href={`/app/b2b/orgs/${orgId}`}>{tc("back")}</Link>
         </WarmButton>
       </div>
 
@@ -69,22 +72,22 @@ export default function B2BAuditPage() {
         <div className="grid gap-3 md:grid-cols-3">
           <div className="space-y-1.5">
             <label htmlFor="audit-entity-type" className="text-sm font-medium text-[#2D2721]">
-              Entity type (voucher, campaign, order)
+              {t("entityType")}
             </label>
             <Input
               id="audit-entity-type"
-              placeholder="Entity type (voucher, campaign, order)"
+              placeholder={t("entityType")}
               value={entityType}
               onChange={(e) => setEntityType(e.target.value)}
             />
           </div>
           <div className="space-y-1.5">
             <label htmlFor="audit-entity-id" className="text-sm font-medium text-[#2D2721]">
-              Entity ID
+              {t("entityId")}
             </label>
             <Input
               id="audit-entity-id"
-              placeholder="Entity ID"
+              placeholder={t("entityId")}
               value={entityId}
               onChange={(e) => setEntityId(e.target.value)}
             />
@@ -92,12 +95,12 @@ export default function B2BAuditPage() {
         </div>
       </WarmCard>
 
-      {loading && <div className="text-sm text-[#8B7355]">Loading audit...</div>}
+      {loading && <div className="text-sm text-[#8B7355]">{t("loading")}</div>}
       {error && <div className="text-sm text-red-600">{error}</div>}
 
       <WarmCard padding="lg" className="border border-[rgba(139,115,85,0.15)]">
         <div className="space-y-3">
-          {events.length === 0 && !loading && <div className="text-sm text-[#8B7355]">No events.</div>}
+          {events.length === 0 && !loading && <div className="text-sm text-[#8B7355]">{t("empty")}</div>}
           {events.map((event) => (
             <div key={event.id} className="flex items-center justify-between text-sm border-b border-[#F0E2C9] pb-2">
               <div>

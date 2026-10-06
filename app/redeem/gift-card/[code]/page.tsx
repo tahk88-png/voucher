@@ -4,9 +4,11 @@ import { prisma } from '@/lib/prisma';
 import { requireMerchantRole } from '@/lib/rbac';
 import { WarmCard } from '@/components/warm-card';
 import { normalizeGiftCardCode } from '@/lib/gift-cards';
+import { getTranslations } from 'next-intl/server';
 
 export default async function RedeemGiftCardPage({ params }: { params: Promise<{ code: string }> }) {
   const { code: rawCode } = await params;
+  const t = await getTranslations('giftsPages.redeem');
   const session = await auth();
   if (!session?.user?.id) {
     redirect('/login');
@@ -22,8 +24,8 @@ export default async function RedeemGiftCardPage({ params }: { params: Promise<{
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-[#FAF7F2]">
         <WarmCard padding="lg" className="max-w-md w-full bg-white text-center">
-          <h1 className="text-lg font-semibold text-[#2D2721]">Gift card not found</h1>
-          <p className="text-sm text-[#6B5744] mt-2">The QR code is invalid or expired.</p>
+          <h1 className="text-lg font-semibold text-[#2D2721]">{t('notFound.title')}</h1>
+          <p className="text-sm text-[#6B5744] mt-2">{t('notFound.body')}</p>
         </WarmCard>
       </div>
     );
@@ -36,8 +38,8 @@ export default async function RedeemGiftCardPage({ params }: { params: Promise<{
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-[#FAF7F2]">
         <WarmCard padding="lg" className="max-w-md w-full bg-white text-center">
-          <h1 className="text-lg font-semibold text-[#2D2721]">Gift card not active yet</h1>
-          <p className="text-sm text-[#6B5744] mt-2">This gift card becomes valid later.</p>
+          <h1 className="text-lg font-semibold text-[#2D2721]">{t('notActive.title')}</h1>
+          <p className="text-sm text-[#6B5744] mt-2">{t('notActive.body')}</p>
         </WarmCard>
       </div>
     );
@@ -53,16 +55,16 @@ export default async function RedeemGiftCardPage({ params }: { params: Promise<{
     return (
       <div className="min-h-screen flex items-center justify-center p-4 bg-[#FAF7F2]">
         <WarmCard padding="lg" className="max-w-md w-full bg-white text-center">
-          <h1 className="text-lg font-semibold text-[#2D2721]">Gift card expired</h1>
-          <p className="text-sm text-[#6B5744] mt-2">This gift card is no longer valid.</p>
+          <h1 className="text-lg font-semibold text-[#2D2721]">{t('expired.title')}</h1>
+          <p className="text-sm text-[#6B5744] mt-2">{t('expired.body')}</p>
         </WarmCard>
       </div>
     );
   }
 
-  let message = 'Redemption confirmed successfully.';
+  let message = t('result.confirmed');
   if (giftCard.status !== 'active') {
-    message = 'This gift card was already redeemed or cancelled.';
+    message = t('result.alreadyRedeemedOrCancelled');
   } else {
     const updated = await prisma.giftCard.updateMany({
       where: {
@@ -78,14 +80,14 @@ export default async function RedeemGiftCardPage({ params }: { params: Promise<{
       },
     });
     if (updated.count === 0) {
-      message = 'This gift card was already redeemed or invalid.';
+      message = t('result.alreadyRedeemedOrInvalid');
     }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#FAF7F2]">
       <WarmCard padding="lg" className="max-w-md w-full bg-white text-center">
-        <h1 className="text-lg font-semibold text-[#2D2721]">Gift card redeemed</h1>
+        <h1 className="text-lg font-semibold text-[#2D2721]">{t('result.title')}</h1>
         <p className="text-sm text-[#6B5744] mt-2">{message}</p>
       </WarmCard>
     </div>

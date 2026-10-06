@@ -2,10 +2,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function GiftCardQr({ qrText }: { qrText: string }) {
+  const t = useTranslations('giftsPages.qr');
   const [dataUrl, setDataUrl] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -19,9 +21,9 @@ export default function GiftCardQr({ qrText }: { qrText: string }) {
         if (isMounted) {
           setDataUrl(data.dataUrl);
         }
-      } catch (err) {
+      } catch {
         if (isMounted) {
-          setError(err instanceof Error ? err.message : 'Failed to generate QR code');
+          setError(true);
         }
       }
     }
@@ -32,12 +34,12 @@ export default function GiftCardQr({ qrText }: { qrText: string }) {
   }, [qrText]);
 
   if (error) {
-    return <p className="text-sm text-[var(--danger)]">{error}</p>;
+    return <p className="text-sm text-[var(--danger)]">{t('error')}</p>;
   }
 
   if (!dataUrl) {
-    return <p className="text-sm text-[var(--text-muted)]">Generating QR...</p>;
+    return <p className="text-sm text-[var(--text-muted)]">{t('generating')}</p>;
   }
 
-  return <img src={dataUrl} alt="QR code" className="h-40 w-40" />;
+  return <img src={dataUrl} alt={t('alt')} className="h-40 w-40" />;
 }

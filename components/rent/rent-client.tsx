@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
 import { WarmButton } from "@/components/warm-button"
 import { WarmCard } from "@/components/warm-card"
 import { Input } from "@/components/ui/input"
@@ -43,6 +44,8 @@ const STATUS_COLORS: Record<string, string> = {
   cancelled: "bg-gray-100 text-gray-500",
 }
 
+const BOOKING_STATUSES = Object.keys(STATUS_COLORS)
+
 export default function RentClient({
   merchantId,
   currency,
@@ -52,6 +55,10 @@ export default function RentClient({
   currency: string
   rentals: RentalItem[]
 }) {
+  const t = useTranslations("shop.rentClient")
+  const locale = useLocale()
+  const statusLabel = (status: string) =>
+    BOOKING_STATUSES.includes(status) ? t(`status.${status}`) : status
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
   const [notes, setNotes] = useState("")
@@ -109,7 +116,7 @@ export default function RentClient({
   const submitBooking = async () => {
     if (!selection || isSubmitting) return
     if (!startDate || !endDate) {
-      showError("Please select rental dates.")
+      showError(t("selectDatesError"))
       return
     }
     setIsSubmitting(true)
@@ -128,19 +135,22 @@ export default function RentClient({
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}))
-        throw new Error(err.error || "Booking failed")
+        throw new Error(err.error || t("bookingFailed"))
       }
 
       const data = await res.json()
       showSuccess(
-        `Booking request created for ${data.booking.rentalItem?.name || selection.name}. Total: ${formatCurrency(data.booking.totalPrice, data.booking.currency)}.`,
-        "Booking submitted"
+        t("bookingCreated", {
+          name: data.booking.rentalItem?.name || selection.name,
+          total: formatCurrency(data.booking.totalPrice, data.booking.currency),
+        }),
+        t("bookingSubmitted")
       )
       setSelection(null)
       setNotes("")
       fetchBookings()
     } catch (error) {
-      showError(error instanceof Error ? error.message : "Unable to create rental booking.")
+      showError(error instanceof Error ? error.message : t("bookingCreateFailed"))
     } finally {
       setIsSubmitting(false)
     }
@@ -155,21 +165,21 @@ export default function RentClient({
         body: JSON.stringify({ status: "cancelled" }),
       })
       if (res.ok) {
-        showSuccess("Booking cancelled.")
+        showSuccess(t("bookingCancelled"))
         fetchBookings()
       } else {
         const err = await res.json().catch(() => ({}))
-        showError(err.error || "Failed to cancel booking.")
+        showError(err.error || t("cancelFailed"))
       }
     } catch {
-      showError("Failed to cancel booking.")
+      showError(t("cancelFailed"))
     } finally {
       setCancellingId(null)
     }
   }
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString("en", {
+    return new Date(dateStr).toLocaleDateString(locale, {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -179,11 +189,11 @@ export default function RentClient({
   return (
     <div className="space-y-6">
       <WarmCard padding="lg" className="bg-[var(--surface)]">
-        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">Rental dates</h2>
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t("datesHeading")}</h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-1.5">
             <label htmlFor="rental-start-date" className="text-sm font-medium text-[var(--text)]">
-              Start date
+              {t("startDate")}
             </label>
             <Input
               id="rental-start-date"
@@ -194,7 +204,7 @@ export default function RentClient({
           </div>
           <div className="space-y-1.5">
             <label htmlFor="rental-end-date" className="text-sm font-medium text-[var(--text)]">
-              End date
+              {t("endDate")}
             </label>
             <Input
               id="rental-end-date"
@@ -205,32 +215,32 @@ export default function RentClient({
           </div>
         </div>
         <p className="text-sm text-[var(--text-muted)] mt-3">
-          {days > 0 ? `${days} rental days selected.` : "Select dates to calculate pricing."}
+          {days > 0 ? t("daysSelected", { count: days }) : t("selectDatesHint")}
         </p>
       </WarmCard>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {rentals.length === 0 ? (
           <WarmCard padding="lg" className="bg-[var(--surface)] col-span-full text-center">
-            <p className="text-[var(--text-muted)]">No rentals available yet.</p>
+            <p className="text-[var(--text-muted)]">{t("empty")}</p>
           </WarmCard>
         ) : (
           rentals.map((item) => (
             <WarmCard key={item.id} padding="lg" className="bg-[var(--surface)]">
               <p className="font-semibold text-[var(--text)]">{item.name}</p>
               <p className="text-sm text-[var(--text-muted)] mt-1">
-                {item.description || "Rental highlight"}
+                {item.description || t("rentalHighlight")}
               </p>
               <p className="mt-3 text-[var(--text)] font-bold">
-                {formatCurrency(item.dailyRate, item.currency)} / day
+                {t("perDay", { price: formatCurrency(item.dailyRate, item.currency) })}
               </p>
               {item.weeklyRate ? (
                 <p className="text-sm text-[var(--text-muted)]">
-                  Weekly: {formatCurrency(item.weeklyRate, item.currency)}
+                  {t("weeklyRate", { price: formatCurrency(item.weeklyRate, item.currency) })}
                 </p>
               ) : null}
               <WarmButton className="mt-4" onClick={() => selectRental(item)}>
-                Select
+                {t("select")}
               </WarmButton>
             </WarmCard>
           ))
@@ -239,42 +249,42 @@ export default function RentClient({
 
       {selection ? (
         <WarmCard padding="lg" className="bg-[var(--surface)]">
-          <h3 className="text-lg font-semibold text-[var(--text)] mb-2">Selected rental</h3>
+          <h3 className="text-lg font-semibold text-[var(--text)] mb-2">{t("selectedHeading")}</h3>
           <p className="text-sm text-[var(--text-muted)]">{selection.name}</p>
           <div className="mt-3 flex items-center justify-between">
-            <span className="text-sm text-[var(--text-muted)]">Estimated total</span>
+            <span className="text-sm text-[var(--text-muted)]">{t("estimatedTotal")}</span>
             <span className="text-lg font-bold text-[var(--text)]">
               {formatCurrency(total, selection.currency)}
             </span>
           </div>
           <div className="mt-3 space-y-1.5">
             <label htmlFor="rental-notes" className="text-sm font-medium text-[var(--text)]">
-              Notes (optional)
+              {t("notesLabel")}
             </label>
             <Input
               id="rental-notes"
               type="text"
-              placeholder="Any special requests..."
+              placeholder={t("notesPlaceholder")}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
             />
           </div>
           <WarmButton className="w-full mt-4" onClick={submitBooking} disabled={isSubmitting}>
-            {isSubmitting ? "Submitting booking..." : "Request rental booking"}
+            {isSubmitting ? t("submitting") : t("requestBooking")}
           </WarmButton>
         </WarmCard>
       ) : null}
 
       {/* My Bookings Section */}
       <WarmCard padding="lg" className="bg-[var(--surface)]">
-        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">My Bookings</h2>
+        <h2 className="text-lg font-semibold text-[var(--text)] mb-4">{t("myBookings")}</h2>
         {bookingsLoading ? (
           <div className="flex justify-center py-6">
             <div className="animate-spin h-6 w-6 border-3 border-[var(--primary)] border-t-transparent rounded-full" />
           </div>
         ) : bookings.length === 0 ? (
           <p className="text-sm text-[var(--text-muted)] text-center py-4">
-            No rental bookings yet. Select an item above to get started.
+            {t("noBookings")}
           </p>
         ) : (
           <div className="space-y-3">
@@ -294,18 +304,22 @@ export default function RentClient({
                           STATUS_COLORS[booking.status] || "bg-gray-100 text-gray-700"
                         }`}
                       >
-                        {booking.status}
+                        {statusLabel(booking.status)}
                       </span>
                     </div>
                     <p className="text-sm text-[var(--text-muted)]">
-                      {formatDate(booking.startDate)} - {formatDate(booking.endDate)} ({booking.days} days)
+                      {t("bookingRange", {
+                        start: formatDate(booking.startDate),
+                        end: formatDate(booking.endDate),
+                        days: booking.days,
+                      })}
                     </p>
                     <p className="text-sm text-[var(--text-muted)]">
-                      Total: {formatCurrency(booking.totalPrice, booking.currency)}
+                      {t("bookingTotal", { total: formatCurrency(booking.totalPrice, booking.currency) })}
                     </p>
                     {booking.rejectionReason && (
                       <p className="text-sm text-red-600 mt-1">
-                        Reason: {booking.rejectionReason}
+                        {t("rejectionReason", { reason: booking.rejectionReason })}
                       </p>
                     )}
                   </div>
@@ -316,7 +330,7 @@ export default function RentClient({
                       onClick={() => cancelBooking(booking.id)}
                       disabled={cancellingId === booking.id}
                     >
-                      {cancellingId === booking.id ? "Cancelling..." : "Cancel"}
+                      {cancellingId === booking.id ? t("cancelling") : t("cancel")}
                     </WarmButton>
                   )}
                 </div>

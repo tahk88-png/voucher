@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Maximize2, MoreHorizontal, Info, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 /* ═══════════════════════════════════════════════════════════════
    PREMIUM CHART CARD — Premium chart container with glass styling
@@ -55,10 +56,11 @@ export function PremiumChartCard({
   children,
   loading = false,
   empty = false,
-  emptyMessage = 'No data available for this period',
+  emptyMessage,
   className = '',
   resizable = false,
 }: PremiumChartCardProps) {
+  const t = useTranslations('dsComponents.premiumChartCard');
   const cardRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
@@ -127,7 +129,7 @@ export function PremiumChartCard({
               <button
                 className="relative shrink-0"
                 onClick={() => setShowInfo((v) => !v)}
-                aria-label="Info"
+                aria-label={t('info')}
               >
                 <Info
                   size={14}
@@ -195,7 +197,7 @@ export function PremiumChartCard({
             style={{ color: 'var(--ds-text-tertiary)' }}
             onMouseEnter={(e) => { (e.currentTarget.style.color as string) && (e.currentTarget.style.color = 'var(--ds-text-secondary)'); }}
             onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--ds-text-tertiary)'; }}
-            aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+            aria-label={isFullscreen ? t('exitFullscreen') : t('fullscreen')}
           >
             {isFullscreen ? <X size={16} /> : <Maximize2 size={16} />}
           </button>
@@ -206,7 +208,7 @@ export function PremiumChartCard({
               style={{ color: 'var(--ds-text-tertiary)' }}
               onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--ds-text-secondary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--ds-text-tertiary)'; }}
-              aria-label="More options"
+              aria-label={t('moreOptions')}
             >
               <MoreHorizontal size={16} />
             </button>
@@ -219,7 +221,7 @@ export function PremiumChartCard({
         {loading ? (
           <ChartSkeleton />
         ) : empty ? (
-          <EmptyState message={emptyMessage} />
+          <EmptyState message={emptyMessage ?? t('empty')} />
         ) : (
           children
         )}

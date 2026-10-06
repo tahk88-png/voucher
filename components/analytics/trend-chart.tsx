@@ -6,6 +6,8 @@
  * Renders a smooth line with an optional fill gradient beneath it.
  */
 
+import { useTranslations } from 'next-intl';
+
 interface TrendChartProps {
   data: Array<{ date: string; value: number }>;
   height?: number;
@@ -23,13 +25,14 @@ export function TrendChart({
   showLabels = false,
   showGrid = false,
 }: TrendChartProps) {
+  const t = useTranslations('dsComponents.trendChart');
   if (!data || data.length === 0) {
     return (
       <div
         className="flex items-center justify-center text-sm text-[var(--text-muted)]"
         style={{ height }}
       >
-        No data
+        {t('noData')}
       </div>
     );
   }

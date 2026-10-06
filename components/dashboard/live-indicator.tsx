@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface LiveIndicatorProps {
   connected: boolean;
@@ -21,6 +22,7 @@ export function LiveIndicator({
   label,
   details,
 }: LiveIndicatorProps) {
+  const t = useTranslations('dsComponents.liveIndicator');
   const [showTooltip, setShowTooltip] = useState(false);
 
   const status = connected ? 'connected' : reconnecting ? 'reconnecting' : 'disconnected';
@@ -32,13 +34,7 @@ export function LiveIndicator({
         ? '#eab308'
         : '#ef4444';
 
-  const statusLabel =
-    label ??
-    (status === 'connected'
-      ? 'Live'
-      : status === 'reconnecting'
-        ? 'Reconnecting'
-        : 'Disconnected');
+  const statusLabel = label ?? t(`label.${status}`);
 
   return (
     <div
@@ -86,7 +82,7 @@ export function LiveIndicator({
             color: 'var(--text, #111)',
           }}
         >
-          <div className="font-semibold capitalize">{status}</div>
+          <div className="font-semibold">{t(`status.${status}`)}</div>
           {details && (
             <div style={{ color: 'var(--text-muted, #6b7280)' }}>{details}</div>
           )}
