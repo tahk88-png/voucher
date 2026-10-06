@@ -2602,5 +2602,2656 @@
       "downloading": "Laster ned …",
       "download": "Last ned QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Administrer kupongkampanjene dine.",
+      "createCampaign": "Opprett kampanje",
+      "subscriptionRequired": "Abonnement kreves",
+      "trialEnded": "Den gratis 60-dagers prøveperioden for kampanjer er over. Start planen til 9,90/mnd for å opprette nye kampanjer.",
+      "stats": {
+        "totalTitle": "Totalt kampanjer",
+        "totalDescription": "Alle kampanjer",
+        "activeTitle": "Aktive",
+        "activeDescription": "Pågår nå",
+        "paidTitle": "Betalte kjøp",
+        "paidDescription": "Fullførte bestillinger",
+        "revenueTitle": "Inntekter",
+        "revenueDescription": "Betalt kupongsalg"
+      },
+      "weeklyRevenue": {
+        "title": "Ukentlige inntekter",
+        "description": "Betalt kampanjesalg siste 7 dager.",
+        "series": "Inntekter"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Ingen kampanjer ennå",
+        "descriptionCanCreate": "Opprett en kampanje for å organisere og administrere kupongene dine.",
+        "descriptionNeedsSubscription": "Start et abonnement for å opprette nye kampanjer.",
+        "action": "Opprett din første kampanje"
+      },
+      "searchPlaceholder": "Søk i kampanjer ...",
+      "searchLabel": "Søk i kampanjer",
+      "filterAll": "Alle",
+      "status": {
+        "active": "Aktiv",
+        "draft": "Utkast",
+        "ended": "Avsluttet",
+        "paused": "Satt på pause"
+      },
+      "noMatches": "Ingen kampanjer samsvarer med filtrene.",
+      "clearFilters": "Fjern filtre",
+      "type": {
+        "weekly": "Ukentlig kampanje",
+        "limited": "Begrenset kampanje",
+        "other": "Kampanje: {type}"
+      },
+      "runs": "Pågår {start} – {end}",
+      "view": "Vis",
+      "stats": {
+        "vouchers": "Kuponger",
+        "paidPurchases": "Betalte kjøp",
+        "revenue": "Inntekter",
+        "price": "Pris"
+      },
+      "free": "Gratis"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Nye kampanjer starter som utkast. Kundene ser dem ikke før du publiserer fra kampanjesiden."
+    },
+    "edit": {
+      "breadcrumb": "Rediger",
+      "title": "Rediger kampanje"
+    },
+    "form": {
+      "basicInfo": "Grunnleggende informasjon",
+      "nameLabel": "Kampanjenavn *",
+      "namePlaceholder": "Høytidstilbud",
+      "descriptionLabel": "Beskrivelse",
+      "descriptionPlaceholder": "Tidsbegrenset kampanje",
+      "typeLabel": "Type *",
+      "typeOptions": {
+        "limited": "Engangs (begrenset)",
+        "weekly": "Ukentlig"
+      },
+      "dates": "Datoer",
+      "startDate": "Startdato *",
+      "endDate": "Sluttdato *",
+      "timezoneHint": "Tidspunktene er i din lokale tidssone.",
+      "pricing": "Pris og grenser",
+      "priceLabel": "Pris i {currency} (la stå tomt for gratis kuponger)",
+      "pricePreview": "Kundene betaler {price}.",
+      "priceHint": "Skriv beløpet i {currency}, f.eks. 4.50 eller 4,50 for {example}.",
+      "maxRedemptions": "Maks. innløsninger",
+      "maxPurchases": "Maks. kjøp",
+      "unlimited": "Ubegrenset",
+      "creditLabel": "Kreditt til anbefaler (%)",
+      "creditPreview": "Anbefalere tjener {percent} % av kjøpesummen som kreditt.",
+      "creditHint": "Andel av kjøpesummen som betales til anbefaleren som kreditt, f.eks. 5 eller 2,5.",
+      "termsSection": "Vilkår og betingelser",
+      "termsLabel": "Vilkår",
+      "termsPlaceholder": "Vilkår og betingelser for denne kampanjen ...",
+      "saving": "Lagrer ...",
+      "saveChanges": "Lagre endringer",
+      "creating": "Oppretter ...",
+      "create": "Opprett kampanje",
+      "saved": "Kampanjeendringene er lagret.",
+      "errors": {
+        "invalidDates": "Angi en gyldig start- og sluttdato.",
+        "endBeforeStart": "Sluttdatoen må være etter startdatoen.",
+        "maxRedemptions": "Maks. innløsninger må være et heltall på 1 eller mer.",
+        "maxPurchases": "Maks. kjøp må være et heltall på 1 eller mer.",
+        "saveFailed": "Kunne ikke lagre kampanjen"
+      },
+      "priceErrors": {
+        "negative": "Prisen kan ikke være negativ.",
+        "invalid": "Prisen er ikke et gyldig tall.",
+        "wholeNumber": "Prisen må være et heltall.",
+        "decimals": "Prisen kan ha maks. {decimals} desimaler.",
+        "tooLarge": "Prisen er for høy."
+      },
+      "creditErrors": {
+        "negative": "Kreditt til anbefaler kan ikke være negativ.",
+        "invalid": "Kreditt til anbefaler er ikke et gyldig tall.",
+        "decimals": "Kreditt til anbefaler kan ha maks. {decimals} desimaler.",
+        "tooLarge": "Kreditt til anbefaler er for høy.",
+        "tooHigh": "Kreditt til anbefaler kan ikke være mer enn 100 %."
+      }
+    },
+    "detail": {
+      "noDescription": "Ingen beskrivelse",
+      "draftNotice": "Denne kampanjen er et utkast, så kundene kan ikke se den ennå.",
+      "draftNoticeAdmin": "Denne kampanjen er et utkast, så kundene kan ikke se den ennå. Publiser den når du er klar.",
+      "status": "Status",
+      "type": "Type",
+      "price": "Pris",
+      "referrerCredit": "Kreditt til anbefaler",
+      "none": "Ingen",
+      "stats": {
+        "vouchers": "Kuponger",
+        "totalPurchases": "Totalt kjøp",
+        "paidPurchases": "Betalte kjøp"
+      },
+      "terms": "Vilkår og betingelser",
+      "promotion": {
+        "title": "Markedsføring",
+        "description": "Betalt synlighet i ukentlig nyhetsbrev og varsler."
+      },
+      "vouchers": {
+        "title": "Kuponger",
+        "description": "Kuponger generert fra denne kampanjen.",
+        "empty": "Ingen kuponger generert ennå.",
+        "view": "Vis"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Ta med i ukentlig nyhetsbrev (betalt)",
+      "notification": "Fremhev i varsler (betalt)",
+      "endDate": "Sluttdato for markedsføring",
+      "saving": "Lagrer ...",
+      "save": "Lagre markedsføringsinnstillinger",
+      "saved": "Markedsføringsinnstillingene er lagret.",
+      "upgradeNeededTitle": "Oppgradering nødvendig",
+      "upgradeNeeded": "Fremheving er en del av en høyere plan. Oppgrader under Innstillinger og fakturering for å bruke det.",
+      "saveFailedStatus": "Kunne ikke lagre markedsføringsinnstillingene (feil {status}).",
+      "saveFailedNetwork": "Kunne ikke lagre markedsføringsinnstillingene. Sjekk tilkoblingen og prøv igjen."
+    },
+    "actions": {
+      "adminOnly": "Bare handleradministratorer kan publisere, sette på pause eller redigere kampanjer.",
+      "edit": "Rediger",
+      "publish": {
+        "label": "Publiser",
+        "title": "Publisere denne kampanjen?",
+        "description": "Kundene kan se og kjøpe kuponger fra denne kampanjen med en gang.",
+        "success": "Kampanjen er publisert og nå synlig for kundene."
+      },
+      "pause": {
+        "label": "Sett på pause",
+        "title": "Sette denne kampanjen på pause?",
+        "description": "Kampanjen går tilbake til utkast og skjules for kundene til du publiserer den igjen. Kuponger som allerede er solgt, er fortsatt gyldige.",
+        "success": "Kampanjen er satt på pause og skjult for kundene."
+      },
+      "end": {
+        "label": "Avslutt kampanje",
+        "title": "Avslutte denne kampanjen nå?",
+        "description": "Kampanjen stopper umiddelbart og kan ikke publiseres igjen. Kuponger som allerede er solgt, er fortsatt gyldige.",
+        "success": "Kampanjen er avsluttet."
+      },
+      "updateFailedStatus": "Kunne ikke oppdatere kampanjen (feil {status}).",
+      "updateFailed": "Kunne ikke oppdatere kampanjen."
+    },
+    "generate": {
+      "open": "Generer kuponger",
+      "title": "Generer kuponger",
+      "descriptionPriced": "Oppretter kupongutkast verdt {value} i rabatt, gyldige {start}–{end}. Hver kupong får sin egen kode. De forblir skjult til du publiserer dem.",
+      "descriptionFree": "Denne kampanjen er gratis, så det finnes ikke noe beløp å sette på kupongene. Angi en pris på kampanjen først.",
+      "countLabel": "Antall kuponger (1–100)",
+      "generating": "Genererer ...",
+      "submit": "Generer",
+      "invalidCount": "Angi et heltall mellom 1 og 100",
+      "needsPrice": "Angi en pris på denne kampanjen først. Genererte kuponger er verdt kampanjeprisen.",
+      "failed": "Kunne ikke generere kuponger",
+      "success": "Genererte {count, plural, one {# kupongutkast. Publiser det} other {# kupongutkast. Publiser dem}} fra kupongsiden når du er klar."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktive kampanjer",
+      "statLiveVouchers": "Aktive kuponger",
+      "statRedemptions30d": "Innløsninger (30 dager)"
+    },
+    "error": {
+      "title": "Noe gikk galt",
+      "description": "Det oppstod en feil i handlerpanelet.",
+      "tryAgain": "Prøv igjen",
+      "backToMerchants": "Tilbake til handlere"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Oversikt",
+        "offers": "Tilbud",
+        "inStore": "I butikk",
+        "customers": "Kunder",
+        "settings": "Innstillinger"
+      },
+      "language": "Språk",
+      "opensAppArea": "Åpner appområdet",
+      "externalLinkTitle": "{label} (åpner appområdet, utenfor denne handleren)",
+      "opensOutside": "Åpnes utenfor handlerområdet",
+      "merchantNavigation": "Handler",
+      "more": "Mer",
+      "navDashboard": "Dashbord"
+    },
+    "dashboard": {
+      "title": "Handlerdashbord",
+      "welcomeBack": "Velkommen tilbake, {name}",
+      "viewCampaigns": "Se kampanjer",
+      "createVoucher": "Opprett kupong",
+      "performanceOverview": "Resultatoversikt",
+      "performanceOverviewHint": "Kampanjeaktivitet og innløsninger i sanntid.",
+      "revenueAndCredits": "Inntekter og kreditter",
+      "revenueAndCreditsHint": "Salg, kreditter og utestående forpliktelser.",
+      "performanceTrend": "Resultatutvikling",
+      "performanceTrendHint": "Innløsninger og inntekter de siste {days} dagene.",
+      "rangeShort": "{days} d",
+      "revenue": "Inntekter",
+      "chartRedemptions": "Innløsninger",
+      "chartRevenue": "Inntekter ({currency})",
+      "paidOrders": "Betalte bestillinger",
+      "openOrdersView": "Åpne bestillingsoversikten",
+      "avgOrder": "Snittordre",
+      "openCampaignRevenue": "Åpne kampanjeinntekter",
+      "redemptionRate": "Innløsningsrate",
+      "openRedemptionQueue": "Åpne innløsningskøen",
+      "pendingConfirmation": "{count} venter på bekreftelse",
+      "pendingConfirmationHint": "Innløsninger i butikk som venter på godkjenningen din.",
+      "viewRedemptions": "Se innløsninger",
+      "actionCenter": "Handlingssenter",
+      "actionCenterHint": "Prioriterte saker å gå gjennom.",
+      "allCaughtUp": "Du er helt à jour.",
+      "open": "Åpne",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# ventende innløsning} other {# ventende innløsninger}}",
+        "pendingRedemptionsDetail": "Bekreft innløsninger i butikk",
+        "expiringVouchers": "{count, plural, one {# kupong utløper snart} other {# kuponger utløper snart}}",
+        "expiringVouchersDetail": "Gå gjennom gyldighetsdatoene for kupongene",
+        "endingCampaigns": "{count, plural, one {# kampanje avsluttes denne uken} other {# kampanjer avsluttes denne uken}}",
+        "endingCampaignsDetail": "Forleng eller dupliser de beste kampanjene dine",
+        "upcomingEvents": "{count, plural, one {# kommende arrangement} other {# kommende arrangementer}}",
+        "upcomingEventsDetail": "Forbered billettinnsjekk og bemanning"
+      },
+      "upcomingEventsTitle": "Kommende arrangementer",
+      "upcomingEventsHint": "Neste planlagte arrangementer.",
+      "noUpcomingEvents": "Ingen kommende arrangementer planlagt.",
+      "eventStatus": {
+        "published": "publisert",
+        "soldOut": "utsolgt"
+      },
+      "manageEvents": "Administrer arrangementer",
+      "topVouchers": "Toppkuponger",
+      "topVouchersHint": "Mest innløste tilbud.",
+      "noTopVouchers": "Ingen kuponger er innløst ennå. De mest innløste kupongene dine vises her."
+    },
+    "stats": {
+      "activeVouchers": "Aktive kuponger",
+      "publishedVouchers": "Publiserte kuponger",
+      "openVouchers": "Åpne kuponger",
+      "activeCampaigns": "Aktive kampanjer",
+      "runningCampaigns": "Pågående kampanjer",
+      "openCampaigns": "Åpne kampanjer",
+      "activeEvents": "Aktive arrangementer",
+      "publishedEvents": "Publiserte arrangementer",
+      "openEvents": "Åpne arrangementer",
+      "todaysRedemptions": "Dagens innløsninger",
+      "thisWeek": "Denne uken: {count}",
+      "reviewRedemptions": "Gå gjennom innløsninger",
+      "ofWeekly": "av ukentlig"
+    },
+    "revenue": {
+      "voucherRevenue": "Kuponginntekter",
+      "paidVoucherSales": "Betalt kupongsalg",
+      "openCampaignSales": "Åpne kampanjesalg",
+      "ticketRevenue": "Billettinntekter",
+      "paidTicketSales": "Betalt billettsalg",
+      "openEventSales": "Åpne arrangementssalg",
+      "creditsIssued": "Utstedte kreditter",
+      "totalCreditsDistributed": "Totalt utdelte kreditter",
+      "openReferralCredits": "Åpne anbefalingskreditter",
+      "outstandingLiability": "Utestående forpliktelser",
+      "unredeemedValue": "Verdi av uinnløste kuponger",
+      "openVoucherLiability": "Åpne kupongforpliktelser"
+    },
+    "recentActivity": {
+      "title": "Nylig aktivitet",
+      "empty": "Ingen nylig aktivitet",
+      "unknownUser": "Ukjent bruker",
+      "redeemedVoucher": "Innløste kupong – {time}",
+      "confirmed": "Bekreftet",
+      "pending": "Venter"
+    },
+    "liveStats": {
+      "live": "Live",
+      "connecting": "Kobler til …",
+      "redeemedToday": "<value>{count}</value> <label>innløst i dag</label>",
+      "pending": "<value>{count}</value> <label>venter</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analyse",
+      "title": "Analyse",
+      "subtitle": "Følg med på kupongresultater og inntekter",
+      "totalRedemptions": "Totalt innløsninger",
+      "confirmedRedemptions": "Bekreftede innløsninger",
+      "totalDiscounts": "Totale rabatter",
+      "givenToCustomers": "Gitt til kunder",
+      "creditsIssued": "Utstedte kreditter",
+      "totalCreditsDistributed": "Totalt utdelte kreditter",
+      "activeVouchers": "Aktive kuponger",
+      "withRedemptions": "Med innløsninger",
+      "charts": {
+        "redemptionTrends": "Innløsningstrender (siste 30 dager)",
+        "redemptions": "Innløsninger",
+        "revenue": "Inntekter ({currency})",
+        "topPerforming": "Kuponger med best resultater",
+        "noRedeemed": "Ingen kuponger er innløst ennå. De beste kupongene dine vises her.",
+        "byCategory": "Innløsninger etter kategori",
+        "noCategoryData": "Ingen kategoridata tilgjengelig"
+      }
+    },
+    "ask": {
+      "title": "Spør dataene dine",
+      "subtitle": "Still spørsmål om forretningsdataene dine på vanlig språk",
+      "emptyTitle": "Spør om hva som helst i dataene dine",
+      "emptyHint": "Prøv ett av forslagene nedenfor",
+      "placeholder": "Still et spørsmål om dataene dine ...",
+      "suggestedTitle": "Foreslåtte spørsmål",
+      "suggestions": {
+        "revenueLastWeek": "Hva var inntektene mine forrige uke?",
+        "dailyRedemptionsThisMonth": "Vis daglige innløsninger denne måneden",
+        "topVouchersByRevenue": "Toppkuponger etter inntekter forrige måned",
+        "customersPurchasedLastWeek": "Hvor mange kunder kjøpte forrige uke?",
+        "referralConversionRate": "Hva er konverteringsraten for anbefalinger?",
+        "dailyRevenueTrend": "Vis daglig inntektsutvikling denne måneden",
+        "purchasesYesterday": "Hvor mange kjøp ble gjort i går?",
+        "bestPerformingVouchers": "Hvilke kuponger gir best resultater?"
+      },
+      "errorFallback": "Beklager, jeg kunne ikke behandle det spørsmålet.",
+      "networkError": "Nettverksfeil. Prøv igjen.",
+      "itemLabel": "Element {n}"
+    },
+    "reports": {
+      "title": "Økonomirapporter",
+      "subtitle": "Inntektsoversikt og eksport",
+      "downloadCsv": "Last ned CSV",
+      "from": "Fra",
+      "to": "Til",
+      "apply": "Bruk",
+      "totalRevenue": "Totale inntekter",
+      "platformFees": "Plattformgebyrer",
+      "netRevenue": "Nettoinntekter",
+      "redemptions": "Innløsninger",
+      "revenueByCurrency": "Inntekter etter valuta",
+      "netAndFees": "Netto: {net} • Gebyrer: {fees}",
+      "monthlyRevenue": "Månedlige inntekter",
+      "noRevenue": "Ingen inntektsdata for denne perioden.",
+      "month": "Måned",
+      "vouchers": "Kuponger",
+      "tickets": "Billetter",
+      "total": "Totalt"
+    },
+    "scheduled": {
+      "title": "Planlagte rapporter",
+      "subtitle": "Sett opp automatiske e-postrapporter",
+      "backToReports": "← Økonomirapporter",
+      "activeSchedules": "Aktive tidsplaner",
+      "loading": "Laster ...",
+      "noSchedules": "Ingen tidsplaner satt opp ennå",
+      "period": {
+        "daily": "Daglig",
+        "weekly": "Ukentlig",
+        "monthly": "Månedlig"
+      },
+      "reportTitle": {
+        "daily": "Daglig rapport",
+        "weekly": "Ukentlig rapport",
+        "monthly": "Månedlig rapport"
+      },
+      "recipientCount": "{count, plural, one {# mottaker} other {# mottakere}}",
+      "lastSent": "Sist sendt: {date}",
+      "nextRun": "Neste: {date}",
+      "pause": "Sett på pause",
+      "resume": "Gjenoppta",
+      "createSchedule": "Opprett tidsplan",
+      "frequency": "Frekvens",
+      "recipients": "Mottakere",
+      "invalidEmail": "Ugyldig e-postadresse",
+      "emailAlreadyAdded": "E-postadressen er allerede lagt til",
+      "addAtLeastOne": "Legg til minst én mottaker",
+      "saved": "Rapportplanen er lagret",
+      "saveFailed": "Kunne ikke lagre tidsplanen",
+      "save": "Lagre tidsplan",
+      "previewTitle": "Forhåndsvisning av rapport",
+      "previewBody": "Planlagte rapporter inneholder inntekter, antall innløsninger, toppkuponger og vekstmålinger. Rapportene sendes som pent formaterte HTML-e-poster kl. 08:00 UTC.",
+      "everyMorning": "Hver morgen",
+      "everyMonday": "Hver mandag",
+      "firstOfMonth": "Den 1. hver måned"
+    },
+    "billing": {
+      "subscribeTo": "Abonner på {plan}",
+      "startFailed": "Kunne ikke starte abonnementet",
+      "portalFailed": "Kunne ikke åpne faktureringsportalen",
+      "manageBilling": "Administrer fakturering",
+      "errorTitle": "Feil",
+      "close": "Lukk",
+      "usage": "<b>{current}</b> / {max} brukt",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "nye kampanjer per periode",
+        "activeCampaigns": "aktive kampanjer",
+        "voucherCreatesPerCycle": "nye kuponger per periode",
+        "teamMembers": "teammedlemmer"
+      },
+      "currentPlanTrial": "Nåværende plan (gratis prøveperiode)",
+      "planChangesUnavailable": "Planendringer er ikke tilgjengelige på nett akkurat nå.",
+      "paymentsNotSetUp": "Nettbetaling er ikke satt opp på denne plattformen ennå, så planer kan ikke kjøpes eller endres her. Kontakt kundestøtte hvis du vil endre plan.",
+      "features": {
+        "starter": {
+          "vouchers": "500 kuponger/mnd",
+          "campaigns": "3 aktive kampanjer",
+          "teamMembers": "2 teammedlemmer",
+          "qrRedemption": "Innløsning med QR-kode",
+          "basicAnalytics": "Grunnleggende analyse"
+        },
+        "pro": {
+          "vouchers": "5 000 kuponger/mnd",
+          "campaigns": "25 aktive kampanjer",
+          "teamMembers": "10 teammedlemmer",
+          "advancedAnalytics": "Avansert analyse",
+          "customDomain": "Eget domene",
+          "promoBoosts": "Kampanjefremheving"
+        },
+        "scale": {
+          "vouchers": "Ubegrenset antall kuponger",
+          "campaigns": "Ubegrenset antall kampanjer",
+          "teamMembers": "Ubegrenset antall teammedlemmer",
+          "everythingInPro": "Alt i Pro",
+          "whiteLabel": "Klar for white label",
+          "prioritySupport": "Prioritert kundestøtte"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Eier",
+      "admin": "Administrator",
+      "finance": "Økonomi",
+      "marketing": "Markedsføring",
+      "support": "Kundestøtte",
+      "partner_cashier": "Kasserer",
+      "auditor": "Revisor"
+    },
+    "orgs": {
+      "title": "B2B-organisasjoner",
+      "subtitle": "Bedriftsarbeidsområder med kampanjer, kuponger og bestillinger.",
+      "loading": "Laster organisasjoner ...",
+      "loadFailed": "Kunne ikke laste organisasjoner",
+      "empty": "Fant ingen organisasjoner. Be en administrator om å invitere deg.",
+      "open": "Åpne"
+    },
+    "workspace": {
+      "fallbackName": "Organisasjon",
+      "subtitle": "Oversikt over B2B-arbeidsområdet",
+      "reports": "Rapporter",
+      "audit": "Revisjon",
+      "partnerKeys": "Partnernøkler",
+      "backToOrgs": "Tilbake til organisasjoner",
+      "loading": "Laster arbeidsområdet ...",
+      "errors": {
+        "loadOrg": "Kunne ikke laste organisasjonen",
+        "loadCampaigns": "Kunne ikke laste kampanjer",
+        "loadVouchers": "Kunne ikke laste kuponger",
+        "loadOrders": "Kunne ikke laste bestillinger",
+        "load": "Kunne ikke laste",
+        "createCampaign": "Kunne ikke opprette kampanjen",
+        "issueVouchers": "Kunne ikke utstede kuponger",
+        "updateCampaign": "Kunne ikke oppdatere kampanjen",
+        "activateCampaign": "Kunne ikke aktivere kampanjen",
+        "pauseCampaign": "Kunne ikke sette kampanjen på pause",
+        "archiveCampaign": "Kunne ikke arkivere kampanjen"
+      },
+      "stats": {
+        "campaigns": "Kampanjer",
+        "vouchers": "Kuponger",
+        "orders": "Bestillinger"
+      },
+      "create": {
+        "title": "Opprett kampanje",
+        "name": "Kampanjenavn",
+        "value": "Verdi (minste valutaenhet)",
+        "currency": "Valuta",
+        "submit": "Opprett"
+      },
+      "campaigns": {
+        "title": "Kampanjer",
+        "empty": "Ingen kampanjer ennå.",
+        "name": "Navn",
+        "value": "Verdi",
+        "activate": "Aktiver",
+        "pause": "Sett på pause",
+        "resume": "Gjenoppta",
+        "archive": "Arkiver",
+        "issue": "Utsted {count}"
+      },
+      "recentVouchers": "Nylige kuponger",
+      "noVouchers": "Ingen kuponger utstedt.",
+      "recentOrders": "Nylige bestillinger",
+      "noOrders": "Ingen bestillinger ennå."
+    },
+    "audit": {
+      "title": "Revisjonslogg",
+      "subtitle": "Følg kupongenes livssyklus og endringer.",
+      "entityType": "Enhetstype (kupong, kampanje, bestilling)",
+      "entityId": "Enhets-ID",
+      "loading": "Laster revisjonslogg ...",
+      "loadFailed": "Kunne ikke laste revisjonsloggen",
+      "empty": "Ingen hendelser."
+    },
+    "billing": {
+      "metaTitle": "Organisasjonsfakturering",
+      "title": "Fakturering og økonomi",
+      "totalPaidOrders": "Totalt betalte bestillinger",
+      "totalRevenue": "Totale inntekter",
+      "vatNumber": "MVA-nummer",
+      "notSet": "Ikke angitt",
+      "recentOrders": "Nylige bestillinger",
+      "noOrders": "Ingen bestillinger ennå.",
+      "table": {
+        "date": "Dato",
+        "qty": "Antall",
+        "total": "Totalt",
+        "status": "Status",
+        "invoice": "Faktura"
+      }
+    },
+    "keys": {
+      "title": "API-nøkler for partnere",
+      "subtitle": "Bruk disse til validering og innløsning av kuponger hos partnere.",
+      "label": "Nøkkelnavn (valgfritt)",
+      "create": "Opprett nøkkel",
+      "newKey": "Ny nøkkel (kopier nå)",
+      "loading": "Laster nøkler ...",
+      "empty": "Ingen nøkler ennå.",
+      "untitled": "Nøkkel uten navn",
+      "created": "Opprettet {created}",
+      "createdAndLastUsed": "Opprettet {created} • Sist brukt {lastUsed}",
+      "revoke": "Tilbakekall",
+      "errors": {
+        "load": "Kunne ikke laste nøkler",
+        "create": "Kunne ikke opprette nøkkel",
+        "revoke": "Kunne ikke tilbakekalle nøkkel"
+      }
+    },
+    "members": {
+      "metaTitle": "Organisasjonsmedlemmer",
+      "title": "Medlemmer",
+      "count": "{count, plural, one {# medlem} other {# medlemmer}}",
+      "pendingInvitations": "Ventende invitasjoner",
+      "expires": "Utløper {date}"
+    },
+    "invite": {
+      "title": "Inviter et medlem",
+      "emailPlaceholder": "teammate@example.com",
+      "roles": {
+        "admin": "Administrator",
+        "finance": "Økonomi",
+        "marketing": "Markedsføring",
+        "support": "Kundestøtte",
+        "partner_cashier": "Partnerkasserer",
+        "auditor": "Revisor"
+      },
+      "sending": "Sender …",
+      "submit": "Send invitasjon",
+      "sent": "Invitasjonen er sendt til {email}.",
+      "failed": "Kunne ikke sende invitasjonen. Sjekk e-postadressen og prøv igjen.",
+      "error": "Noe gikk galt. Prøv igjen."
+    },
+    "reports": {
+      "title": "Rapporter",
+      "subtitle": "Innløsnings- og kupongrapporter",
+      "backToWorkspace": "Tilbake til arbeidsområdet",
+      "loadFailed": "Kunne ikke laste",
+      "tabs": {
+        "redemptions": "Innløsninger",
+        "vouchers": "Kuponger"
+      },
+      "totalRedemptions": "Totalt innløsninger",
+      "totalAmountRedeemed": "Totalt innløst beløp",
+      "from": "Fra",
+      "to": "Til",
+      "filter": "Filtrer",
+      "pageInfo": "Side {page} av {totalPages} ({total} totalt)",
+      "redemptionTable": {
+        "date": "Dato",
+        "partner": "Partner",
+        "amount": "Beløp",
+        "status": "Status",
+        "location": "Sted"
+      },
+      "noRedemptions": "Fant ingen innløsninger.",
+      "voucherTable": {
+        "campaign": "Kampanje",
+        "status": "Status",
+        "type": "Type",
+        "value": "Verdi",
+        "remaining": "Gjenstår",
+        "redeemed": "Innløst",
+        "issuedTo": "Utstedt til",
+        "expires": "Utløper"
+      },
+      "noVouchers": "Fant ingen kuponger."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "kjøper",
+        "partner": "partner",
+        "platform_owner": "plattformeier"
+      },
+      "orgStatus": {
+        "active": "aktiv",
+        "suspended": "suspendert"
+      },
+      "campaignStatus": {
+        "draft": "utkast",
+        "active": "aktiv",
+        "paused": "satt på pause",
+        "archived": "arkivert"
+      },
+      "voucherStatus": {
+        "created": "opprettet",
+        "issued": "utstedt",
+        "active": "aktiv",
+        "redeemed": "innløst",
+        "expired": "utløpt",
+        "voided": "annullert"
+      },
+      "valueType": {
+        "fixed": "fast",
+        "percent": "prosent"
+      },
+      "orderStatus": {
+        "draft": "utkast",
+        "submitted": "sendt inn",
+        "invoiced": "fakturert",
+        "paid": "betalt",
+        "cancelled": "kansellert",
+        "refunded": "refundert"
+      },
+      "redemptionStatus": {
+        "approved": "godkjent",
+        "reversed": "reversert",
+        "failed": "mislyktes"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Arrangementer"
+    },
+    "status": {
+      "draft": "Utkast",
+      "published": "Aktiv",
+      "sold_out": "Utsolgt",
+      "cancelled": "Avlyst",
+      "ended": "Avsluttet"
+    },
+    "statusName": {
+      "draft": "Utkast",
+      "published": "Publisert",
+      "sold_out": "Utsolgt",
+      "cancelled": "Avlyst",
+      "ended": "Avsluttet"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Internt arrangement",
+      "concert": "Konsert",
+      "workshop": "Workshop",
+      "other": "Annet"
+    },
+    "ticketStatus": {
+      "available": "Tilgjengelig",
+      "sold": "Solgt",
+      "used": "Brukt",
+      "cancelled": "Kansellert",
+      "refunded": "Refundert"
+    },
+    "list": {
+      "subtitle": "Administrer arrangementer og billetter",
+      "createEvent": "Opprett arrangement",
+      "stats": {
+        "totalTitle": "Totalt arrangementer",
+        "totalDescription": "Alle arrangementer",
+        "activeTitle": "Aktive",
+        "activeDescription": "Publisert eller utsolgt",
+        "soldTitle": "Solgte billetter",
+        "soldDescription": "På tvers av alle arrangementer",
+        "revenueTitle": "Inntekter",
+        "revenueDescription": "Betalt billettsalg"
+      },
+      "empty": {
+        "title": "Ingen arrangementer ennå",
+        "description": "Opprett et arrangement for å selge billetter og holde oversikt over deltakere.",
+        "cta": "Opprett ditt første arrangement"
+      },
+      "card": {
+        "date": "Dato:",
+        "location": "Sted:",
+        "price": "Pris:",
+        "tickets": "Billetter:",
+        "sold": "{sold} / {capacity} solgt",
+        "free": "Gratis",
+        "view": "Vis",
+        "edit": "Rediger"
+      },
+      "weeklyRevenue": {
+        "title": "Ukentlige billettinntekter",
+        "description": "Betalt billettsalg siste 7 dager.",
+        "series": "Inntekter"
+      }
+    },
+    "detail": {
+      "noDescription": "Ingen beskrivelse",
+      "edit": "Rediger",
+      "status": "Status",
+      "type": "Type",
+      "eventDate": "Arrangementsdato",
+      "price": "Pris",
+      "free": "Gratis",
+      "totalTickets": "Totalt billetter",
+      "sold": "Solgt",
+      "available": "Tilgjengelig",
+      "location": "Sted",
+      "terms": "Vilkår og betingelser",
+      "ticketsTitle": "Billetter",
+      "ticketsDescription": "Billetter til dette arrangementet",
+      "noTickets": "Ingen billetter generert ennå.",
+      "view": "Vis",
+      "redeem": "Løs inn"
+    },
+    "form": {
+      "basicInfo": "Grunnleggende informasjon",
+      "name": "Navn på arrangement *",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Beskriv arrangementet ...",
+      "type": "Type arrangement *",
+      "typeAria": "Type arrangement",
+      "dateTime": "Dato og klokkeslett",
+      "eventDate": "Arrangementsdato *",
+      "eventTime": "Klokkeslett *",
+      "endDate": "Sluttdato (valgfritt)",
+      "endTime": "Sluttid (valgfritt)",
+      "location": "Sted",
+      "locationName": "Navn på sted",
+      "locationPlaceholder": "Storsalen, utescenen",
+      "locationPlaceholderExample": "f.eks. Storsalen, utescenen",
+      "address": "Full adresse",
+      "addressPlaceholder": "Gateadresse, by, land",
+      "ticketDetails": "Billettdetaljer",
+      "maxCapacity": "Maks. kapasitet (billetter) *",
+      "maxCapacityLong": "Maks. kapasitet (antall billetter) *",
+      "pricePerTicketCurrency": "Pris per billett ({currency})",
+      "pricePerTicket": "Pris per billett",
+      "pricePlaceholderFree": "0,00 (gratis)",
+      "priceHint": "La stå tomt for gratis billetter. F.eks. 12.50 eller 12,50 for {example}.",
+      "currency": "Valuta *",
+      "terms": "Vilkår og betingelser",
+      "termsPlaceholder": "Vilkår for arrangementet, refusjonsregler osv.",
+      "ticketPrice": "Billettpris",
+      "endBeforeStart": "Sluttidspunktet må være etter starttidspunktet.",
+      "cancel": "Avbryt"
+    },
+    "create": {
+      "submit": "Opprett arrangement",
+      "submitting": "Oppretter ..."
+    },
+    "edit": {
+      "loading": "Laster ...",
+      "notFound": "Fant ikke arrangementet.",
+      "back": "Tilbake til arrangementet",
+      "title": "Rediger arrangement",
+      "subtitle": "Oppdater detaljene for arrangementet.",
+      "submit": "Lagre endringer",
+      "submitting": "Lagrer ..."
+    },
+    "publish": {
+      "confirm": "Publisere dette arrangementet? Det blir synlig for alle, og billetter kan kjøpes.",
+      "confirmLabel": "Publiser",
+      "failed": "Kunne ikke publisere arrangementet",
+      "success": "Arrangementet er publisert!",
+      "published": "Publisert",
+      "cannotPublish": "Kan ikke publiseres",
+      "button": "Publiser arrangement",
+      "publishing": "Publiserer ..."
+    },
+    "generate": {
+      "invalidCount": "Angi et tall mellom 1 og 1000",
+      "tooMany": "Kan ikke generere {count} billetter. Maks. tilgjengelig: {max}",
+      "failed": "Kunne ikke generere billetter",
+      "success": "{count, plural, one {# billett} other {# billetter}} generert!",
+      "open": "Generer billetter",
+      "title": "Generer billetter",
+      "description": "Opprett billetter til dette arrangementet",
+      "countLabel": "Antall billetter (maks. {max})",
+      "cancel": "Avbryt",
+      "submit": "Generer",
+      "submitting": "Genererer ..."
+    },
+    "redeem": {
+      "title": "Løs inn billett",
+      "subtitle": "Skann QR-koden eller skriv inn billettnummeret",
+      "back": "Tilbake til arrangementet",
+      "scanTitle": "Skann billett",
+      "scanDescription": "Skriv inn QR-token eller billettnummer",
+      "tokenLabel": "QR-token / billettnummer",
+      "tokenPlaceholder": "Skriv inn QR-token eller billettnummer",
+      "scan": "Skann",
+      "notFound": "Fant ikke billetten",
+      "found": "Billett funnet",
+      "number": "Nummer:",
+      "event": "Arrangement:",
+      "status": "Status:",
+      "attendee": "Deltaker:",
+      "redeemDescription": "Fullfør innløsningen",
+      "locationLabel": "Sted (valgfritt)",
+      "locationPlaceholder": "f.eks. Hovedinngang, port A",
+      "submit": "Løs inn billett",
+      "submitting": "Løser inn ...",
+      "failed": "Kunne ikke løse inn billetten",
+      "cannotRedeem": "Denne billetten kan ikke løses inn. Status: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Handlerdashbord",
+      "vouchersTitle": "Administrer kuponger"
+    },
+    "sidebar": {
+      "title": "Handler",
+      "subtitle": "GiftHub-konsoll",
+      "openMenu": "Åpne meny",
+      "nav": {
+        "overview": "Oversikt",
+        "vouchers": "Kuponger",
+        "giftCards": "Gavekort",
+        "credits": "Kreditter",
+        "brand": "Merkevare"
+      }
+    },
+    "overview": {
+      "title": "Handlerdashbord",
+      "notConnected": "Du er ikke koblet til noen handlere ennå."
+    },
+    "noAccess": {
+      "title": "Ingen handlertilgang",
+      "overviewHint": "Be en handleradministrator om å invitere deg, eller opprett en handlerkonto for å komme i gang.",
+      "creditsHint": "Koble til en handlerkonto for å se inntekter og utbetalinger.",
+      "vouchersHint": "Koble til en handlerkonto for å administrere kuponger.",
+      "exploreCampaigns": "Utforsk kampanjer"
+    },
+    "brand": {
+      "title": "Merkevareinnstillinger",
+      "description": "Tilpass hvordan merkevaren din ser ut på kupongene",
+      "logoHeading": "Logo",
+      "logoHint": "Last opp handlerlogoen din (anbefalt: 200x200 px, PNG eller SVG).",
+      "logoPreviewAlt": "Forhåndsvisning av logo",
+      "uploadLogo": "Last opp logo",
+      "colorHeading": "Merkevarefarge",
+      "colorHint": "Velg hovedfargen for merkevaren din på kuponger og knapper.",
+      "colorLabel": "Farge",
+      "colorHexLabel": "Hex-verdi for merkevarefarge",
+      "save": "Lagre endringer",
+      "previewHeading": "Forhåndsvisning",
+      "previewHint": "Se hvordan merkevaren din vises på kupongene.",
+      "sampleMerchant": "Din bedrift",
+      "sampleTitle": "20 % rabatt på neste kjøp",
+      "sampleDescription": "Gjelder alle varer. Kan ikke kombineres med andre tilbud."
+    },
+    "credits": {
+      "availableBalance": "Tilgjengelig saldo",
+      "availableBalanceHint": "Klar for utbetaling",
+      "pendingRevenue": "Ventende inntekter",
+      "pendingRevenueHint": "Behandles",
+      "recentRevenue": "Nylige inntekter",
+      "ticketSale": "Billettsalg",
+      "voucherSale": "Kupongsalg",
+      "noRevenue": "Ingen inntekter registrert ennå",
+      "payoutRequests": "Utbetalingsforespørsler",
+      "noPayoutRequests": "Ingen utbetalingsforespørsler ennå",
+      "requestPayoutHeading": "Be om utbetaling",
+      "minimumPayout": "Minste utbetalingsbeløp: {amount}",
+      "submitting": "Sender ...",
+      "requestPayout": "Be om utbetaling",
+      "requestSubmitted": "Utbetalingsforespørselen er sendt",
+      "requestFailed": "Kunne ikke be om utbetaling",
+      "status": {
+        "paid": "betalt",
+        "pending": "venter",
+        "requested": "forespurt",
+        "completed": "fullført",
+        "failed": "mislyktes"
+      }
+    },
+    "newVoucher": {
+      "title": "Opprett kupong",
+      "description": "Utform og sett opp den nye kupongkampanjen din",
+      "detailsHeading": "Kupongdetaljer",
+      "titleLabel": "Tittel",
+      "titlePlaceholder": "f.eks. 20 % rabatt på neste kjøp",
+      "descriptionLabel": "Beskrivelse",
+      "descriptionPlaceholder": "Gjelder alle varer. Kan ikke kombineres med andre tilbud.",
+      "expiryDateLabel": "Utløpsdato",
+      "weeklyLabel": "Ukens tilbud",
+      "weeklyHint": "Tidsbegrenset tilgjengelighet hver uke",
+      "weeklyAria": "Ukens tilbud – tidsbegrenset tilgjengelighet hver uke",
+      "referralLabel": "Aktiver anbefalingskreditt",
+      "referralHint": "Brukere tjener kreditt når venner løser inn",
+      "referralAria": "Aktiver anbefalingskreditt – brukere tjener kreditt når venner løser inn",
+      "brandColorLabel": "Merkevarefarge",
+      "brandColorHexLabel": "Hex-verdi for merkevarefarge",
+      "saveDraft": "Lagre utkast",
+      "createAndPublish": "Opprett og publiser",
+      "previewHeading": "Forhåndsvisning",
+      "sampleMerchant": "Din bedrift",
+      "sampleTitle": "Kupongtittel",
+      "sampleDescription": "Kupongbeskrivelsen vises her"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Den offentlige siden blir tilgjengelig når kupongen er publisert.",
+    "list": {
+      "metaTitle": "Kuponger",
+      "subtitle": "Administrer og opprett kuponger",
+      "bulkImport": "Masseimport fra CSV",
+      "stats": {
+        "totalTitle": "Totalt kuponger",
+        "totalDescription": "Alle opprettede kuponger",
+        "activeTitle": "Aktive",
+        "activeDescription": "Publiserte kuponger",
+        "draftsTitle": "Utkast",
+        "draftsDescription": "Ikke publisert ennå",
+        "pausedEndedTitle": "Pauset / avsluttet",
+        "pausedEndedDescription": "{paused} pauset, {ended} avsluttet",
+        "redemptionsTitle": "Innløsninger",
+        "redemptionsDescription": "Totalt innløsninger"
+      },
+      "empty": {
+        "title": "Ingen kuponger ennå",
+        "description": "Kom i gang ved å opprette din første kupong.",
+        "action": "Opprett din første kupong"
+      },
+      "searchPlaceholder": "Søk etter overskrift, kodeprefiks eller ID",
+      "searchLabel": "Søk i kuponger",
+      "statusLabel": "Status",
+      "statusAll": "Alle statuser",
+      "status": {
+        "published": "Aktiv",
+        "paused": "Satt på pause",
+        "draft": "Utkast",
+        "ended": "Avsluttet",
+        "expired": "Utløpt"
+      },
+      "typeLabel": "Type",
+      "typeAll": "Alle typer",
+      "sortLabel": "Sorter etter",
+      "sort": {
+        "date": "Dato (nyeste)",
+        "name": "Navn (A–Å)",
+        "redemptions": "Innløsninger"
+      },
+      "showing": "Viser {shown} av {total} kuponger",
+      "clearFilters": "Fjern filtre",
+      "noMatches": "Ingen kuponger samsvarer med filtrene.",
+      "usage": "Bruk",
+      "usageUnlimited": "Bruk: {used} – ubegrenset",
+      "view": "Vis"
+    },
+    "rowActions": {
+      "pauseTitle": "Sett kupong på pause",
+      "pauseDescription": "Er du sikker på at du vil sette denne kupongen på pause? Brukerne kan ikke kjøpe eller løse den inn mens den er satt på pause.",
+      "pauseConfirm": "Sett på pause",
+      "paused": "Kupongen er satt på pause",
+      "pauseFailed": "Kunne ikke sette kupongen på pause",
+      "loadFailed": "Kunne ikke laste kupongen",
+      "duplicateLabel": "Dupliser kupong",
+      "duplicated": "Kupongen er duplisert",
+      "duplicateFailed": "Kunne ikke duplisere"
+    },
+    "publish": {
+      "confirmMessage": "Publisere denne kupongen? Den blir synlig for alle.",
+      "confirmLabel": "Publiser",
+      "failed": "Kunne ikke publisere kupongen",
+      "success": "Kupongen er publisert!",
+      "publishing": "Publiserer ...",
+      "button": "Publiser kupong"
+    },
+    "new": {
+      "iconLetter": "K",
+      "created": "Kupongen er opprettet som utkast. Publiser den når du er klar til at kundene skal se den."
+    },
+    "edit": {
+      "iconLetter": "R",
+      "subtitle": "Oppdater kupongdetaljer og tilgjengelighet.",
+      "updated": "Kupongen er oppdatert",
+      "updateFailed": "Kunne ikke oppdatere kupongen",
+      "updateFailedRetry": "Kunne ikke oppdatere kupongen. Prøv igjen.",
+      "updating": "Oppdaterer ...",
+      "update": "Oppdater kupong",
+      "viewPublicPage": "Se offentlig side"
+    },
+    "form": {
+      "stepOf": "Trinn {current} av {total}",
+      "typeLabel": "Type",
+      "typeAria": "Kupongtype",
+      "customersGetOff": "Kundene får {value} i rabatt.",
+      "customersGetCredit": "Kundene får {value} i kreditt.",
+      "percentHint": "Skriv inn prosenten, f.eks. 15 eller 12,5.",
+      "amountHint": "Skriv beløpet i {currency}, f.eks. 4.50 eller 4,50 for {example}.",
+      "validityHint": "Kupongen kan brukes fra starten av første dag til slutten av siste dag.",
+      "enableWeeklyDropAria": "Aktiver ukens tilbud",
+      "weeklyDropDayAria": "Ukedag for ukens tilbud",
+      "weeklyDropTimeAria": "Starttid for ukens tilbud",
+      "headlinePlaceholder": "15 % rabatt på bestillingen",
+      "finePrintPlaceholder": "Gjelder kun for nye kunder",
+      "previewFallbackHeadline": "Din kupong",
+      "previewValidUntil": "Gyldig til {date}",
+      "errors": {
+        "discountAboveZero": "Angi en rabatt over 0 %.",
+        "valueAboveZero": "Angi en verdi over 0.",
+        "chooseDates": "Velg når kupongen starter og slutter.",
+        "endBeforeStart": "Sluttdatoen må være samme dag som eller etter startdatoen.",
+        "invalidValue": "Angi en gyldig verdi.",
+        "valueMustBePositive": "Verdien må være større enn 0",
+        "totalLimitPositive": "Total bruksgrense må være et positivt tall",
+        "perUserLimitPositive": "Grensen per bruker må være et positivt tall"
+      },
+      "discountErrors": {
+        "negative": "Rabatten kan ikke være negativ.",
+        "invalid": "Rabatten er ikke et gyldig tall.",
+        "decimals": "Rabatten kan ha maks. {decimals} desimaler.",
+        "tooLarge": "Rabatten er for stor.",
+        "tooHigh": "Rabatten kan ikke være mer enn 100 %."
+      },
+      "valueErrors": {
+        "negative": "Verdien kan ikke være negativ.",
+        "invalid": "Verdien er ikke et gyldig tall.",
+        "wholeNumber": "Verdien må være et heltall.",
+        "decimals": "Verdien kan ha maks. {decimals} desimaler.",
+        "tooLarge": "Verdien er for stor."
+      }
+    },
+    "bulkImport": {
+      "back": "Tilbake til kuponger",
+      "title": "Importer kuponger fra et regneark",
+      "intro": "Last opp en CSV-fil (opptil 500 rader). Alle kuponger opprettes som utkast, så ingenting blir synlig før du publiserer.",
+      "columns": "Kolonner",
+      "downloadSample": "Last ned eksempel-CSV",
+      "columnRequired": "<code>{name}</code> (påkrevd): {help}",
+      "columnOptional": "<code>{name}</code> (valgfritt): {help}",
+      "columnHelp": {
+        "name": "Det kundene ser som kupongtittel, f.eks. «Kaffetilbud i vår».",
+        "type": "\"amount\" (beløpsrabatt), \"percent\" (prosentrabatt) eller \"credit\" (butikkreditt).",
+        "value": "Euro for amount/credit (10 eller 10.50), prosent for percent (15 eller 12.5).",
+        "currency": "Kode på tre bokstaver, f.eks. EUR. Standard er butikkens valuta.",
+        "valid_from": "Første dag kupongen gjelder: 2026-10-01 eller 01.10.2026.",
+        "valid_to": "Siste dag kupongen gjelder (den er gyldig til slutten av dagen).",
+        "code_prefix": "Bokstaver i starten av hver kode, f.eks. SPRING.",
+        "usage_limit": "Hvor mange ganger den kan brukes totalt. La stå tomt for ubegrenset."
+      },
+      "separatorHint": "Skill kolonnene med komma eller semikolon. Bruker du komma, må desimalbeløp stå i anførselstegn (\"4,50\") eller skrives med punktum (4.50).",
+      "chooseFile": "Velg en CSV-fil",
+      "chooseDifferent": "Klikk for å velge en annen fil",
+      "browse": "Klikk for å bla gjennom",
+      "fixRows": "Rett opp disse radene og last opp filen på nytt:",
+      "andMore": "… og {count} til.",
+      "readyToImport": "Klar til å importere {count, plural, one {# kupong} other {# kuponger}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, opptil {limit} bruk} other {}}",
+      "imported": "Importerte {count, plural, one {# kupong} other {# kuponger}} som utkast.",
+      "viewVouchers": "Se kuponger",
+      "importing": "Importerer ...",
+      "importCount": "Importer {count, plural, one {# kupong} other {# kuponger}}",
+      "importVouchers": "Importer kuponger",
+      "importFailedStatus": "Importen mislyktes (feil {status}).",
+      "importFailed": "Importen mislyktes"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Overskrift øverst på siden med hovedhandling."
+        },
+        "value_props": {
+          "label": "Fordeler",
+          "description": "Raske fordeler og garantier."
+        },
+        "featured_products": {
+          "label": "Utvalgte produkter",
+          "description": "Toppprodukter med priser og merker."
+        },
+        "featured_vouchers": {
+          "label": "Utvalgte kuponger",
+          "description": "Aktive kupongkort for kampanjer."
+        },
+        "rental_packages": {
+          "label": "Utleiepakker",
+          "description": "Utleiepakker og dagspriser."
+        },
+        "categories": {
+          "label": "Kategorirutenett",
+          "description": "Bla etter type, bruk eller målgruppe."
+        },
+        "availability": {
+          "label": "Tilgjengelighetskalender",
+          "description": "Sanntidstilgjengelighet og bookingtider."
+        },
+        "testimonials": {
+          "label": "Kundeomtaler",
+          "description": "Kundesitater og stjernevurderinger."
+        },
+        "gallery": {
+          "label": "Galleri",
+          "description": "Livsstilsbilder eller brukseksempler."
+        },
+        "pricing": {
+          "label": "Pristabell",
+          "description": "Oversiktlige prisnivåer."
+        },
+        "rental_terms": {
+          "label": "Leievilkår",
+          "description": "Depositum, forsikring og returregler."
+        },
+        "faq": {
+          "label": "Vanlige spørsmål",
+          "description": "Svar på vanlige innvendinger."
+        },
+        "newsletter": {
+          "label": "Påmelding til nyhetsbrev",
+          "description": "Samle inn e-postadresser til kampanjer."
+        },
+        "contact": {
+          "label": "Kontaktblokk",
+          "description": "Støtte via chat, e-post eller telefon."
+        },
+        "map": {
+          "label": "Kart",
+          "description": "Hentested eller butikkens beliggenhet."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Kampanjelinje",
+          "description": "Fast toppstripe for tilbud og varsler."
+        },
+        "sticky_cta": {
+          "label": "Fast CTA",
+          "description": "Handlingsknapp som blir værende ved rulling."
+        },
+        "chat_widget": {
+          "label": "Chatwidget",
+          "description": "Livechat eller WhatsApp-integrasjon."
+        },
+        "trust_badges": {
+          "label": "Tillitsmerker",
+          "description": "Merker for betaling, sikkerhet eller kvalitet."
+        },
+        "social_proof": {
+          "label": "Sosialt bevis-popup",
+          "description": "Nylig aktivitet og kjøp."
+        },
+        "countdown": {
+          "label": "Nedtelling",
+          "description": "Skaper hast for begrensede tilbud."
+        },
+        "reviews_widget": {
+          "label": "Anmeldelseswidget",
+          "description": "Bygg inn Google eller Trustpilot."
+        },
+        "language_switch": {
+          "label": "Språkvelger",
+          "description": "Rask språkveksling på siden."
+        },
+        "analytics": {
+          "label": "Analysekode",
+          "description": "Plass til sporingspiksler."
+        },
+        "cookie_banner": {
+          "label": "Informasjonskapselbanner",
+          "description": "Samtykkebanner for GDPR."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Forhåndsvisning",
+      "edit": "Rediger",
+      "previewEmpty": "Ingen seksjoner lagt til ennå. Bytt til redigeringsmodus for å legge til seksjoner.",
+      "title": "Visuell redigering",
+      "preview": "Forhåndsvis",
+      "empty": "Ingen seksjoner ennå. Klikk på «Legg til seksjon» nedenfor for å begynne.",
+      "collapseSettings": "Skjul innstillinger",
+      "expandSettings": "Vis innstillinger",
+      "removeSection": "Fjern seksjonen {label}",
+      "sectionTitle": "Seksjonstittel",
+      "description": "Beskrivelse",
+      "descriptionPlaceholder": "Valgfri beskrivelse",
+      "backgroundColor": "Bakgrunnsfarge",
+      "layoutVariant": "Oppsettvariant",
+      "layout": {
+        "default": "Standard",
+        "centered": "Sentrert",
+        "wide": "Bred",
+        "compact": "Kompakt"
+      },
+      "addSection": "Legg til seksjon",
+      "availableSections": "Tilgjengelige seksjoner",
+      "closeCatalog": "Lukk",
+      "allAdded": "Alle tilgjengelige seksjoner er lagt til.",
+      "count": "{configured, plural, one {# seksjon satt opp} other {# seksjoner satt opp}} / {available} tilgjengelige"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Sjekkliste for lansering av nettbutikk",
+        "rental_launch": "Sjekkliste for lansering av utleieside",
+        "campaign_ops": "Ukentlig kampanjedrift",
+        "support_ops": "Sjekkliste for kundestøtteberedskap"
+      },
+      "toast": {
+        "saved": "Sidebyggeren er oppdatert.",
+        "saveFailed": "Kunne ikke lagre siden",
+        "vibeFailed": "Vibe-agenten mislyktes",
+        "layoutGenerated": "Vibe-oppsett generert.",
+        "generateFailed": "Kunne ikke generere oppsett",
+        "agentFailed": "Agenten mislyktes",
+        "planGenerated": "Prosessplan generert.",
+        "runAgentFailed": "Kunne ikke kjøre agenten"
+      },
+      "noData": "Ingen sidebyggerdata tilgjengelig.",
+      "title": "Sidebygger",
+      "intro": "Bygg raske butikk- og utleiesider med modulære seksjoner og tillegg.",
+      "introAi": "Bygg raske butikk- og utleiesider med modulære seksjoner og tillegg, med valgfrie AI-forslag.",
+      "tabs": {
+        "store": "Butikk",
+        "rental": "Utleie"
+      },
+      "details": {
+        "title": "Sidedetaljer",
+        "subtitle": "Tittel, undertittel og oppsett.",
+        "save": "Lagre",
+        "pageTitle": "Sidetittel",
+        "subtitleLabel": "Undertittel"
+      },
+      "sections": {
+        "title": "Seksjoner",
+        "subtitle": "Dra for å endre rekkefølge, utvid for å konfigurere, eller forhåndsvis oppsettet.",
+        "suggestLayout": "Foreslå et oppsett",
+        "suggestionsLeft": "AI-forslag til oppsett igjen: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Tillegg",
+        "subtitle": "Ekstra widgeter og markedsføringslag.",
+        "enable": "Aktiver tillegget {label}",
+        "disable": "Deaktiver tillegget {label}"
+      },
+      "summary": {
+        "title": "Sanntidssammendrag",
+        "line": "{title} · {sections, plural, one {# seksjon} other {# seksjoner}} · {addons, plural, one {# tillegg} other {# tillegg}}",
+        "sectionsLabel": "Seksjoner:",
+        "addonsLabel": "Tillegg:",
+        "none": "Ingen"
+      },
+      "assistant": {
+        "title": "Assistent for lanseringssjekkliste",
+        "subtitle": "Generer handlingsplaner og driftssjekklister.",
+        "goalLabel": "Mål for prosessen",
+        "createChecklist": "Opprett sjekkliste",
+        "checklistsLeft": "Sjekklister igjen: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Utvalgte tilbud, utleie og kuponger fra {name}.",
+        "shopProducts": "Handle produkter",
+        "browseRentals": "Se utleie"
+      },
+      "valueProps": {
+        "rewardsTitle": "Belønninger",
+        "rewardsText": "Innebygde kupongfordeler.",
+        "stockTitle": "Pålitelig lager",
+        "stockText": "Oppdaterte priser og tilgjengelighet.",
+        "datesTitle": "Fleksible datoer",
+        "datesText": "Planlegg utleie enkelt."
+      },
+      "viewAll": "Se alle",
+      "seeAll": "Se alle",
+      "products": {
+        "title": "Utvalgte produkter",
+        "empty": "Ingen produkter ennå.",
+        "fallbackDescription": "Produktfremheving"
+      },
+      "rentals": {
+        "title": "Utleiepakker",
+        "empty": "Ingen utleie ennå.",
+        "fallbackDescription": "Utleiefremheving",
+        "perDay": "{price} / dag"
+      },
+      "categories": {
+        "title": "Bla i kategorier",
+        "popular": "Populært",
+        "business": "Bedrift",
+        "events": "Arrangementer",
+        "seasonal": "Sesong",
+        "corporate": "Firma",
+        "custom": "Tilpasset"
+      },
+      "availability": {
+        "title": "Tilgjengelighet i sanntid",
+        "text": "Sjekk tilgjengelighet og be om tilbud på få minutter.",
+        "seeCalendar": "Se kalender"
+      },
+      "testimonials": {
+        "title": "Hva kundene sier",
+        "smooth": "Smidig prosess",
+        "lovedVoucher": "Elsket kupongen",
+        "support": "Supert kundestøtte"
+      },
+      "gallery": {
+        "title": "Galleri"
+      },
+      "pricing": {
+        "title": "Priser",
+        "starter": "Starter",
+        "growth": "Vekst",
+        "enterprise": "Enterprise",
+        "tierText": "Tilpassede priser og støtte"
+      },
+      "rentalTerms": {
+        "title": "Leievilkår",
+        "text": "Tydelige regler for depositum, henting og retur – opplyst på forhånd."
+      },
+      "faq": {
+        "title": "Vanlige spørsmål",
+        "redeem": "Hvordan løser jeg inn?",
+        "reschedule": "Kan jeg endre tidspunkt?",
+        "support": "Tilbyr dere kundestøtte?"
+      },
+      "newsletter": {
+        "title": "Hold deg oppdatert",
+        "text": "Få nye tilbud og utleienyheter rett i innboksen.",
+        "emailLabel": "E-postadresse",
+        "subscribe": "Abonner"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "emailUs": "Send oss en e-post på {email}"
+      },
+      "map": {
+        "text": "Hentestedet oppgis etter booking."
+      },
+      "vouchers": {
+        "title": "Aktive kuponger",
+        "empty": "Ingen kuponger tilgjengelig.",
+        "voucher": "Kupong",
+        "view": "Se kupong"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Aktivt",
+      "redeemed": "Innløst",
+      "expired": "Utløpt",
+      "cancelled": "Kansellert"
+    },
+    "list": {
+      "metaTitle": "Gavekort",
+      "title": "Gavekort",
+      "subtitle": "Opprett og administrer gavekort",
+      "newGiftCard": "Nytt gavekort",
+      "stats": {
+        "total": "Totalt gavekort",
+        "totalDescription": "Alle utstedte gavekort",
+        "active": "Aktive",
+        "activeDescription": "Kan løses inn nå",
+        "redeemed": "Innløst",
+        "redeemedDescription": "Fullførte innløsninger",
+        "totalValue": "Total verdi",
+        "totalValueDescription": "Verdi av utstedte gavekort"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Ingen gavekort ennå",
+      "emptyDescription": "Opprett et gavekort med egen merkevare og innløsning via QR.",
+      "createFirst": "Opprett ditt første gavekort",
+      "searchPlaceholder": "Søk etter overskrift, kode eller melding",
+      "searchLabel": "Søk i gavekort",
+      "status": "Status",
+      "allStatus": "Alle statuser",
+      "sortBy": "Sorter etter",
+      "sortDate": "Dato (nyeste)",
+      "sortAmount": "Beløp (høyest først)",
+      "showing": "Viser {shown} av {total, plural, one {# gavekort} other {# gavekort}}",
+      "clearFilters": "Fjern filtre",
+      "noMatches": "Ingen gavekort samsvarer med filtrene.",
+      "defaultHeadline": "Gavekort",
+      "noExpiry": "Utløper ikke",
+      "validUntil": "Gyldig til: {date}",
+      "redeemedOn": "Innløst: {date}",
+      "details": "Detaljer",
+      "view": "Vis"
+    },
+    "detail": {
+      "title": "Gavekort",
+      "code": "Kode {code}",
+      "publicView": "Offentlig visning",
+      "newGiftCard": "Nytt gavekort",
+      "detailsTitle": "Gavekortdetaljer",
+      "value": "Verdi",
+      "validFrom": "Gyldig fra",
+      "validTo": "Gyldig til",
+      "noExpiry": "Utløper ikke",
+      "redeemedAt": "Innløst",
+      "notRedeemed": "Ikke innløst",
+      "qrTitle": "QR for innløsning av personalet",
+      "qrHelp": "Personalet kan skanne denne QR-koden for å løse inn og ugyldiggjøre gavekortet."
+    },
+    "new": {
+      "title": "Nytt gavekort",
+      "subtitle": "Tilpass og utsted et gavekort",
+      "created": "Gavekortet er opprettet.",
+      "cancel": "Avbryt",
+      "creating": "Oppretter ...",
+      "submit": "Opprett gavekort",
+      "errors": {
+        "amountRequired": "Angi et beløp over 0.",
+        "endBeforeStart": "Sluttdatoen må være samme dag som eller etter startdatoen.",
+        "createFailed": "Kunne ikke opprette gavekortet"
+      },
+      "amountErrors": {
+        "negative": "Beløpet kan ikke være negativt.",
+        "invalid": "Beløpet er ikke et gyldig tall.",
+        "wholeNumber": "Beløpet må være et heltall.",
+        "decimals": "Beløpet kan ha maks. {decimals} desimaler.",
+        "tooLarge": "Beløpet er for stort."
+      },
+      "priceErrors": {
+        "negative": "Salgsprisen kan ikke være negativ.",
+        "invalid": "Salgsprisen er ikke et gyldig tall.",
+        "wholeNumber": "Salgsprisen må være et heltall.",
+        "decimals": "Salgsprisen kan ha maks. {decimals} desimaler.",
+        "tooLarge": "Salgsprisen er for høy."
+      },
+      "valueSection": {
+        "title": "Verdi og gyldighet",
+        "description": "Angi beløp, valuta og utløpsdato",
+        "amount": "Beløp",
+        "faceValue": "Pålydende verdi: {value}.",
+        "amountHelp": "Skriv beløpet i {currency}, f.eks. 50 eller 49,90 for {example}.",
+        "currency": "Valuta",
+        "validFrom": "Gyldig fra",
+        "validTo": "Gyldig til",
+        "noExpiry": "Ingen utløpsdato"
+      },
+      "purchaseSection": {
+        "title": "Kjøp for kunder",
+        "description": "La kundene kjøpe dette gavekortet på nett",
+        "purchasable": "Kan kjøpes av kunder",
+        "salePrice": "Salgspris (valgfritt, standard er pålydende verdi)",
+        "salePricePlaceholder": "Samme som beløpet",
+        "customersPay": "Kundene betaler {value}.",
+        "salePriceHelp": "La stå tomt for å selge til pålydende verdi. Angi en annen pris for kampanjer."
+      },
+      "brandingSection": {
+        "title": "Merkevare og melding",
+        "description": "Overskrift, melding, bilder og farger",
+        "headline": "Overskrift",
+        "headlinePlaceholder": "Gave til kaffeelskere",
+        "message": "Melding",
+        "messagePlaceholder": "Legg til en personlig melding til mottakeren",
+        "logoUrl": "Logo-URL",
+        "imageUrl": "Bilde-URL",
+        "accentColor": "Aksentfarge",
+        "backgroundColor": "Bakgrunnsfarge",
+        "textColor": "Tekstfarge",
+        "codePrefix": "Kodeprefiks (valgfritt)"
+      },
+      "preview": {
+        "title": "Forhåndsvisning",
+        "defaultHeadline": "Gavekort",
+        "imageAlt": "Gavekort",
+        "logoAlt": "Merkevarelogo",
+        "notePlaceholder": "Legg til en personlig hilsen"
+      }
+    },
+    "gifts": {
+      "title": "Gaveprodukter",
+      "subtitle": "Administrer produktene dine i Gift Hub",
+      "dashboard": "Dashbord",
+      "confirmDelete": "Er du sikker? Produktet blir deaktivert.",
+      "stats": {
+        "total": "Totalt",
+        "active": "Aktive",
+        "views": "Visninger",
+        "purchases": "Kjøp"
+      },
+      "emptyTitle": "Ingen gaveprodukter ennå",
+      "emptyDescription": "Legg til ditt første produkt for å vises i Gift Hub-feeden.",
+      "emptyApiHint": "Bruk API-et på <code>{endpoint}</code> for å opprette produkter.",
+      "inactive": "Inaktiv",
+      "featured": "Fremhevet",
+      "views": "{count, plural, one {# visning} other {# visninger}}",
+      "purchases": "{count, plural, one {# kjøp} other {# kjøp}}",
+      "conversionRate": "{rate} % konvertering",
+      "activate": "Aktiver",
+      "deactivate": "Deaktiver",
+      "delete": "Slett"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Ingen data tilgjengelig",
+      "value": "Verdi: <strong>{value}</strong>",
+      "dismiss": "Lukk",
+      "remove": "Fjern",
+      "dialog": "Dialog",
+      "close": "Lukk",
+      "loading": "Laster"
+    },
+    "analyticsFunnel": {
+      "empty": "Ingen aktivitet i denne perioden ennå",
+      "top": "Topp",
+      "drop": "-{rate} % frafall"
+    },
+    "periodComparison": {
+      "title": "Periodesammenligning",
+      "loading": "Laster ...",
+      "previous": "Forrige: {value}",
+      "noData": "Ingen data tilgjengelig",
+      "period": {
+        "day": "Dag",
+        "week": "Uke",
+        "month": "Måned",
+        "quarter": "Kvartal",
+        "year": "År"
+      },
+      "metric": {
+        "revenue": "Inntekter",
+        "redemptions": "Innløsninger",
+        "purchases": "Kjøp",
+        "referrals": "Anbefalinger",
+        "customers": "Kunder"
+      }
+    },
+    "trendChart": {
+      "noData": "Ingen data"
+    },
+    "conversionChart": {
+      "noData": "Ingen data tilgjengelig",
+      "previous": "forrige: {value}"
+    },
+    "funnelChart": {
+      "empty": "Ingen aktivitet i denne perioden ennå"
+    },
+    "geoMap": {
+      "noData": "Ingen data tilgjengelig",
+      "value": "Verdi: <strong>{value}</strong>",
+      "country": {
+        "GB": "Storbritannia",
+        "IE": "Irland",
+        "FR": "Frankrike",
+        "DE": "Tyskland",
+        "ES": "Spania",
+        "PT": "Portugal",
+        "IT": "Italia",
+        "NL": "Nederland",
+        "BE": "Belgia",
+        "CH": "Sveits",
+        "AT": "Østerrike",
+        "PL": "Polen",
+        "CZ": "Tsjekkia",
+        "SE": "Sverige",
+        "NO": "Norge",
+        "FI": "Finland",
+        "DK": "Danmark",
+        "EE": "Estland",
+        "LV": "Latvia",
+        "LT": "Litauen",
+        "HU": "Ungarn",
+        "RO": "Romania",
+        "BG": "Bulgaria",
+        "GR": "Hellas",
+        "HR": "Kroatia",
+        "SK": "Slovakia",
+        "SI": "Slovenia",
+        "RS": "Serbia",
+        "UA": "Ukraina",
+        "BY": "Belarus"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Venter på data ..."
+    },
+    "pieDonutChart": {
+      "noData": "Ingen data tilgjengelig",
+      "total": "Totalt"
+    },
+    "activityFeed": {
+      "justNow": "akkurat nå",
+      "minutesAgo": "{count} min siden",
+      "hoursAgo": "{count} t siden",
+      "daysAgo": "{count} d siden",
+      "empty": "Ingen aktivitet ennå",
+      "loadMore": "Last inn flere",
+      "eventType": {
+        "purchase": "Kjøp",
+        "redemption": "Innløsning",
+        "signup": "Registrering",
+        "alert": "Varsel"
+      }
+    },
+    "dateRange": {
+      "days7": "7 dager",
+      "days30": "30 dager",
+      "days90": "90 dager",
+      "year1": "1 år",
+      "custom": "Egendefinert"
+    },
+    "chartCard": {
+      "fullscreen": "Fullskjerm",
+      "exitFullscreen": "Avslutt fullskjerm",
+      "retry": "Prøv igjen"
+    },
+    "dashboardHeader": {
+      "export": "Eksporter",
+      "exportAs": "Eksporter som {format}"
+    },
+    "dataTable": {
+      "empty": "Ingen data tilgjengelig",
+      "showing": "Viser {from}–{to} av {total}",
+      "previousPage": "Forrige side",
+      "nextPage": "Neste side"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Live",
+        "reconnecting": "Kobler til på nytt",
+        "disconnected": "Frakoblet"
+      },
+      "status": {
+        "connected": "Tilkoblet",
+        "reconnecting": "Kobler til på nytt",
+        "disconnected": "Frakoblet"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "mot forrige periode"
+    },
+    "statComparison": {
+      "current": "Nåværende",
+      "previous": "Forrige",
+      "change": "endring"
+    },
+    "aiInsightPanel": {
+      "title": "AI-innsikt",
+      "placeholder": "Still AI et spørsmål ...",
+      "send": "Send"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Live",
+        "degraded": "Redusert",
+        "disconnected": "Frakoblet"
+      },
+      "latency": "Forsinkelse: {ms} ms",
+      "lastUpdate": "Sist oppdatert: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Varsler",
+      "title": "Varsler",
+      "markAllRead": "Merk alle som lest",
+      "empty": "Ingen varsler",
+      "ariaLabelUnread": "Varsler ({count} uleste)"
+    },
+    "premiumChartCard": {
+      "info": "Info",
+      "fullscreen": "Fullskjerm",
+      "exitFullscreen": "Avslutt fullskjerm",
+      "moreOptions": "Flere alternativer",
+      "empty": "Ingen data tilgjengelig for denne perioden"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "mot forrige periode"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "I drift",
+        "degraded": "Redusert",
+        "outage": "Driftsavbrudd"
+      }
+    },
+    "select": {
+      "placeholder": "Velg ...",
+      "search": "Søk ...",
+      "empty": "Fant ingen alternativer",
+      "removeOption": "Fjern {label}"
+    },
+    "sidebar": {
+      "expand": "Utvid sidefeltet",
+      "collapse": "Skjul sidefeltet",
+      "openMenu": "Åpne meny",
+      "closeMenu": "Lukk meny"
+    },
+    "iconSystem": {
+      "notFound": "Fant ikke ikonet «{name}»",
+      "badge": "{count, plural, one {# varsel} other {# varsler}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Sidepanel",
+      "closePanel": "Lukk panelet"
+    },
+    "codeBlock": {
+      "copyCode": "Kopier kode",
+      "copied": "Kopiert",
+      "copy": "Kopier"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Kunder",
+      "title": "Kunder",
+      "summary": "{count, plural, one {# kunde} other {# kunder}} · {revenue} i totale inntekter",
+      "stats": {
+        "totalCustomers": "Totalt kunder",
+        "totalRevenue": "Totale inntekter",
+        "totalRedemptions": "Totalt innløsninger"
+      },
+      "table": {
+        "customer": "Kunde",
+        "email": "E-post",
+        "purchases": "Kjøp",
+        "totalSpent": "Totalt brukt",
+        "redemptions": "Innløsninger",
+        "lastPurchase": "Siste kjøp"
+      },
+      "empty": "Ingen kunder ennå",
+      "unknown": "Ukjent"
+    },
+    "qrCheckout": {
+      "title": "Hurtigkasse med QR",
+      "subtitle": "Generer QR-koder for rask betaling for kunder",
+      "voucherLabel": "Koble til kupong (valgfritt)",
+      "generalOption": "Generell betaling (ingen bestemt kupong)",
+      "voucherOption": "{type} – {value} {currency} ({status})",
+      "generating": "Genererer ...",
+      "generate": "Generer QR-kode",
+      "qrAlt": "QR-kode for betaling",
+      "scanToCheckout": "Skann for å betale",
+      "print": "Skriv ut QR-kode"
+    },
+    "redemptions": {
+      "metaTitle": "Innløsninger",
+      "subtitle": "Se og bekreft kuponginnløsninger.",
+      "stats": {
+        "totalTitle": "Totalt innløsninger",
+        "totalDescription": "Alle innsendte innløsninger",
+        "pendingTitle": "Venter",
+        "pendingDescription": "Venter på bekreftelse",
+        "confirmedTitle": "Bekreftet",
+        "confirmedDescription": "Godkjente innløsninger",
+        "discountsTitle": "Gitte rabatter",
+        "discountsDescription": "Bekreftede rabatter"
+      },
+      "empty": {
+        "title": "Ingen innløsninger ennå",
+        "description": "Innløsninger vises her når kundene bruker kuponger."
+      },
+      "voucherFallback": "Kupong",
+      "card": {
+        "order": "Bestilling på {amount}",
+        "discount": "Rabatt: {amount}",
+        "discountReferred": "Rabatt: {amount} – anbefalt av {name}",
+        "confirmed": "Bekreftet",
+        "pending": "Venter",
+        "method": "Metode: {method}",
+        "methods": {
+          "online": "På nett",
+          "in_store": "I butikk"
+        },
+        "orderReference": "Bestilling: {reference}",
+        "notAvailable": "I/T",
+        "location": "Sted: {location}",
+        "date": "Dato: {date}"
+      },
+      "confirm": {
+        "prompt": "Bekrefte denne innløsningen? Da frigjøres kreditten til anbefaleren.",
+        "confirmLabel": "Bekreft",
+        "success": "Innløsningen er bekreftet. Kreditten er frigjort for anbefaleren.",
+        "error": "Kunne ikke bekrefte innløsningen. Prøv igjen.",
+        "confirming": "Bekrefter ...",
+        "button": "Bekreft innløsning"
+      },
+      "export": {
+        "success": "Innløsningene er eksportert!",
+        "error": "Kunne ikke eksportere innløsninger",
+        "exporting": "Eksporterer ...",
+        "button": "Eksporter CSV"
+      }
+    },
+    "reviews": {
+      "title": "Anmeldelser",
+      "subtitle": "Følg med på og svar på kundeanmeldelser",
+      "filters": "Filtre",
+      "reviewCount": "{count, plural, one {# anmeldelse} other {# anmeldelser}}",
+      "ratingDistribution": "Fordeling av vurderinger",
+      "responseRate": "Svarprosent",
+      "replied": "Besvart",
+      "pending": "Venter",
+      "responseRatePercent": "{percent} % svarprosent",
+      "filter": {
+        "rating": "Vurdering",
+        "allRatings": "Alle vurderinger",
+        "stars": "{count, plural, one {# stjerne} other {# stjerner}}",
+        "replyStatus": "Svarstatus",
+        "all": "Alle",
+        "needsReply": "Trenger svar",
+        "replied": "Besvart",
+        "clear": "Fjern"
+      },
+      "loading": "Laster anmeldelser ...",
+      "empty": "Fant ingen anmeldelser.",
+      "anonymous": "Anonym",
+      "verified": "Bekreftet",
+      "campaign": "Kampanje: {name}",
+      "voucher": "Kupong: {code}",
+      "foundHelpful": "{count} syntes dette var nyttig",
+      "yourReply": "Ditt svar",
+      "replyPlaceholder": "Skriv svaret ditt ...",
+      "posting": "Publiserer ...",
+      "postReply": "Publiser svar",
+      "cancel": "Avbryt",
+      "reply": "Svar",
+      "showing": "Viser {from}–{to} av {total}",
+      "pageOf": "Side {page} av {totalPages}",
+      "previousPage": "Forrige side",
+      "nextPage": "Neste side",
+      "loadFailed": "Kunne ikke laste anmeldelser",
+      "replyFailed": "Kunne ikke svare",
+      "replyPosted": "Svaret er publisert"
+    },
+    "scanner": {
+      "title": "Skanner",
+      "subtitle": "Skann kuponger, gavekort og billetter",
+      "manual": "Manuelt",
+      "camera": "Kamera",
+      "scanning": "Skanner ...",
+      "cameraDenied": "Kameratilgang ble avslått. Tillat kameratilgang i nettleserinnstillingene, eller skriv inn koden nedenfor.",
+      "cameraUnavailable": "Ingen kamera tilgjengelig. Skriv inn koden nedenfor i stedet.",
+      "pointAtCode": "Pek mot en QR-kode for å skanne automatisk",
+      "enterCode": "Skriv inn kode",
+      "codePlaceholder": "Kupongkode (f.eks. AUD-CMUI0TG1), kupongkobling, billett- eller gavekortkode",
+      "codeAriaLabel": "Kode som skal skannes",
+      "scan": "Skann",
+      "found": {
+        "voucher": "Kupong funnet",
+        "gift_card": "Gavekort funnet",
+        "ticket": "Billett funnet"
+      },
+      "info": {
+        "ticketNumber": "Billett nr.",
+        "event": "Arrangement",
+        "type": "Type",
+        "standard": "Standard",
+        "attendee": "Deltaker",
+        "code": "Kode",
+        "amount": "Beløp",
+        "message": "Melding",
+        "voucher": "Kupong",
+        "campaign": "Kampanje",
+        "none": "Ingen",
+        "value": "Verdi",
+        "validUntil": "Gyldig til"
+      },
+      "redeem": "Løs inn",
+      "redeeming": "Løser inn ...",
+      "cannotRedeem": "Dette kan ikke løses inn (status: {status})",
+      "redeemed": {
+        "voucher": "Kupongen er innløst!",
+        "gift_card": "Gavekortet er innløst!",
+        "ticket": "Billetten er innløst!"
+      },
+      "errors": {
+        "enterCode": "Skriv inn en kode",
+        "notFound": "Ikke funnet",
+        "scanFailed": "Skanningen mislyktes",
+        "redeemFailed": "Innløsningen mislyktes"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktivt",
+          "redeemed": "innløst",
+          "expired": "utløpt",
+          "cancelled": "kansellert"
+        },
+        "ticket": {
+          "available": "tilgjengelig",
+          "sold": "solgt",
+          "used": "brukt",
+          "cancelled": "kansellert",
+          "refunded": "refundert"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Prisen kan ikke være negativ.",
+      "invalid": "Prisen er ikke et gyldig tall.",
+      "wholeNumber": "Prisen må være et heltall.",
+      "decimals": "Prisen kan ha maks. {decimals} desimaler.",
+      "tooLarge": "Prisen er for høy."
+    },
+    "appointments": {
+      "title": "Avtaler",
+      "subtitle": "Administrer bookinger og tilgjengelighet",
+      "createSlot": "Opprett tidspunkt",
+      "form": {
+        "serviceName": "Tjenestenavn",
+        "price": "Pris ({currency}, la stå tomt hvis gratis)",
+        "startTime": "Starttid",
+        "endTime": "Sluttid",
+        "notes": "Notater",
+        "creating": "Oppretter …",
+        "submit": "Opprett ledig tidspunkt"
+      },
+      "status": {
+        "all": "Alle",
+        "pending": "Venter",
+        "confirmed": "Bekreftet",
+        "cancelled": "Avlyst",
+        "completed": "Fullført"
+      },
+      "loading": "Laster ...",
+      "empty": "Fant ingen avtaler",
+      "bookedBy": "Booket av: {name}",
+      "confirm": "Bekreft",
+      "confirmAria": "Bekreft avtale",
+      "cancel": "Avlys",
+      "cancelAria": "Avlys avtale",
+      "errors": {
+        "endBeforeStart": "Sluttidspunktet må være etter starttidspunktet.",
+        "createFailed": "Kunne ikke opprette det ledige tidspunktet. Prøv igjen.",
+        "network": "Fikk ikke kontakt med serveren. Sjekk tilkoblingen og prøv igjen.",
+        "updateFailed": "Kunne ikke oppdatere avtalen (feil {status})."
+      }
+    },
+    "inventory": {
+      "title": "Lager",
+      "subtitle": "Følg lagernivåer og styr tilgjengeligheten for kuponger",
+      "refresh": "Oppdater",
+      "summary": {
+        "totalItems": "Totalt varer",
+        "lowStock": "Lite på lager",
+        "outOfStock": "Utsolgt"
+      },
+      "alerts": {
+        "title": "Varsler om lavt lager ({count})",
+        "threshold": "{stock} / {threshold} grense"
+      },
+      "loading": "Laster lager ...",
+      "empty": "Fant ingen kuponger",
+      "typeVoucher": "Kupong: {type}",
+      "stockStatus": {
+        "unlimited": "Ubegrenset",
+        "outOfStock": "Utsolgt",
+        "lowStock": "Lite på lager",
+        "inStock": "På lager"
+      },
+      "stock": "Lager: {stock}",
+      "purchased": "Kjøpt: {count}",
+      "redeemed": "Innløst: {count}",
+      "validUntil": "Gyldig til {date}",
+      "edit": {
+        "button": "Rediger lager",
+        "stockQuantity": "Antall på lager",
+        "threshold": "Grense for lavt lager",
+        "save": "Lagre",
+        "saving": "Lagrer ...",
+        "cancel": "Avbryt"
+      },
+      "stockUpdated": "Lageret er oppdatert",
+      "errors": {
+        "loadFailed": "Kunne ikke laste lageret",
+        "updateFailed": "Kunne ikke oppdatere lageret"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "AI-forslag er ikke satt opp på denne plattformen ennå, så verktøyene for automatisk oppsett og sjekklister er skjult. Du kan fortsatt bygge og redigere sidene manuelt."
+    },
+    "pricing": {
+      "title": "Dynamisk prising",
+      "newRule": "Ny regel",
+      "ruleTypes": {
+        "demand": {
+          "label": "Etterspørselsbasert",
+          "desc": "Juster prisen etter forholdet mellom visninger og kjøp"
+        },
+        "timeOfDay": {
+          "label": "Tid på døgnet",
+          "desc": "Ulike priser i rushtid og lavtrafikk"
+        },
+        "inventory": {
+          "label": "Lager",
+          "desc": "Prisen endres etter gjenværende lager"
+        },
+        "surge": {
+          "label": "Topptillegg",
+          "desc": "Påslag ved spesielle arrangementer og høytider"
+        },
+        "loyalty": {
+          "label": "Lojalitet",
+          "desc": "Rabatter for faste kunder"
+        }
+      },
+      "form": {
+        "title": "Opprett prisregel",
+        "ruleType": "Regeltype",
+        "priority": "Prioritet",
+        "priorityPlaceholder": "Høyere = brukes først",
+        "config": "Konfigurasjon (JSON)",
+        "submit": "Opprett regel",
+        "cancel": "Avbryt"
+      },
+      "loading": "Laster regler ...",
+      "empty": "Ingen prisregler ennå. Opprett en for å aktivere dynamisk prising.",
+      "table": {
+        "type": "Type",
+        "priority": "Prioritet",
+        "config": "Konfig.",
+        "status": "Status",
+        "actions": "Handlinger"
+      },
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "deleteAria": "Slett prisregel",
+      "deleteConfirm": "Slette denne prisregelen?",
+      "delete": "Slett",
+      "errors": {
+        "invalidJson": "Konfigurasjonsfeltet må være gyldig JSON."
+      },
+      "preview": {
+        "title": "Forhåndsvisning av pris",
+        "description": "Skriv inn en kupong-ID for å se hvordan aktive regler påvirker prisen.",
+        "voucherId": "Kupong-ID",
+        "voucherIdPlaceholder": "Skriv inn kupong-ID",
+        "calculate": "Beregn",
+        "error": "Kunne ikke beregne prisen",
+        "basePrice": "Grunnpris",
+        "finalPrice": "Endelig pris"
+      }
+    },
+    "rentals": {
+      "title": "Utleiebookinger",
+      "subtitle": "Administrer leieforespørsler og returer",
+      "status": {
+        "all": "Alle",
+        "pending": "Venter",
+        "approved": "Godkjent",
+        "rejected": "Avvist",
+        "paid": "Betalt",
+        "active": "Aktiv",
+        "returned": "Returnert",
+        "cancelled": "Kansellert"
+      },
+      "empty": "Fant ingen utleiebookinger.",
+      "dates": "{start} – {end} ({days, plural, one {# dag} other {# dager}})",
+      "total": "Totalt: <strong>{total}</strong> ({rate}/dag)",
+      "note": "Merknad: {note}",
+      "rejectedReason": "Avvist: {reason}",
+      "bookedMeta": "Booket: {date} | Bruker: {user} ...",
+      "approve": "Godkjenn",
+      "reasonPlaceholder": "Begrunnelse (valgfritt)",
+      "confirm": "Bekreft",
+      "cancel": "Avbryt",
+      "reject": "Avvis",
+      "markReturned": "Merk som returnert"
+    },
+    "subscriptionBoxes": {
+      "title": "Abonnementsbokser",
+      "subtitle": "Administrer gjentakende kupongbokser",
+      "newBox": "+ Ny boks",
+      "cancel": "Avbryt",
+      "form": {
+        "name": "Navn",
+        "description": "Beskrivelse",
+        "price": "Pris ({currency})",
+        "currency": "Valuta",
+        "interval": "Intervall",
+        "maxItems": "Maks. antall varer",
+        "creating": "Oppretter ...",
+        "submit": "Opprett boks"
+      },
+      "interval": {
+        "weekly": "Ukentlig",
+        "monthly": "Månedlig",
+        "quarterly": "Kvartalsvis"
+      },
+      "created": "Abonnementsboksen er opprettet.",
+      "empty": "Ingen abonnementsbokser ennå. Opprett din første.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# abonnent} other {# abonnenter}}",
+      "items": "{count, plural, one {# vare} other {# varer}}",
+      "errors": {
+        "priceAboveZero": "Angi en pris over 0.",
+        "createFailed": "Kunne ikke opprette abonnementsboksen (feil {status}).",
+        "network": "Kunne ikke opprette abonnementsboksen. Sjekk tilkoblingen og prøv igjen."
+      },
+      "intervalUnit": {
+        "weekly": "uke",
+        "monthly": "mnd",
+        "quarterly": "kvartal"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Nettsted",
+      "supportEmail": "E-post for kundestøtte",
+      "logoUrl": "Logo-URL",
+      "primaryColor": "Primærfarge",
+      "secondaryColor": "Sekundærfarge",
+      "backgroundColor": "Bakgrunnsfarge",
+      "primaryColorHex": "Hex-verdi for primærfarge",
+      "secondaryColorHex": "Hex-verdi for sekundærfarge",
+      "backgroundColorHex": "Hex-verdi for bakgrunnsfarge",
+      "saving": "Lagrer ..."
+    },
+    "page": {
+      "metaTitle": "Handlerinnstillinger",
+      "infoTitle": "Handlerinformasjon",
+      "infoSubtitle": "Grunnleggende handlerdetaljer",
+      "name": "Navn",
+      "slug": "Slug",
+      "country": "Land",
+      "defaultCurrency": "Standardvaluta",
+      "website": "Nettsted",
+      "supportEmail": "E-post for kundestøtte",
+      "completeOnboarding": "Fullfør oppstarten",
+      "billingTitle": "Fakturering",
+      "billingSubtitle": "14 dagers gratis prøveperiode, deretter planer fra 19 €/mnd. 5 % transaksjonsgebyr på kupongsalg.",
+      "status": "Status",
+      "trialStatus": "Gratis prøveperiode – {days, plural, one {# dag} other {# dager}} igjen",
+      "statusActive": "Aktiv",
+      "statusInactive": "Inaktiv",
+      "currentPlan": "Nåværende plan",
+      "trialEnds": "Prøveperioden slutter",
+      "periodEnds": "Nåværende periode slutter",
+      "manage": "Administrer",
+      "payoutsTitle": "Utbetalinger",
+      "payoutsEnabled": "Stripe-kontoen er koblet til og aktivert",
+      "payoutsInProgress": "Oppsett pågår – fullfør for å aktivere utbetalinger",
+      "payoutsNotConnected": "Koble til Stripe for å motta utbetalinger fra kupongsalg",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "Motta hendelsesvarsler i sanntid via HTTP",
+      "notificationsTitle": "Varsler",
+      "notificationsSubtitle": "Velg hvilke e-postkategorier du får som teammedlem."
+    },
+    "brandProfile": {
+      "title": "Merkevareprofil",
+      "subtitle": "Tilpass merkevarefarger, logo og kontaktinformasjon.",
+      "updated": "Merkevareprofilen er oppdatert!",
+      "updateFailed": "Kunne ikke oppdatere merkevareprofilen",
+      "save": "Lagre endringer"
+    },
+    "domains": {
+      "title": "Egne domener",
+      "subtitle": "Koble til ditt eget domene og bekreft det for ruting.",
+      "inputLabel": "Eget domene",
+      "adding": "Legger til ...",
+      "add": "Legg til domene",
+      "empty": "Ingen domener satt opp.",
+      "statusLine": "Status: {status}",
+      "statusValue": {
+        "pending": "venter",
+        "verified": "bekreftet"
+      },
+      "verify": "Bekreft",
+      "remove": "Fjern",
+      "addedTitle": "Domenet er lagt til",
+      "addedDescription": "Bekreft DNS før du flytter trafikken.",
+      "addErrorTitle": "Domenefeil",
+      "addErrorDescription": "Kunne ikke legge til domenet.",
+      "verifiedTitle": "Domenet er bekreftet",
+      "verifiedDescription": "Rutingen er nå aktiv.",
+      "verifyErrorTitle": "Bekreftelsesfeil",
+      "verifyErrorDescription": "Kunne ikke bekrefte domenet.",
+      "removedTitle": "Domenet er fjernet",
+      "removeErrorTitle": "Feil ved fjerning",
+      "removeErrorDescription": "Kunne ikke fjerne domenet."
+    },
+    "notifications": {
+      "metaTitle": "Varslingsinnstillinger",
+      "title": "Varslingsinnstillinger",
+      "intro": "Velg hvilke e-postkategorier du får i innboksen som medlem av <name>{merchantName}</name>. Innstillingene er personlige – hvert teammedlem styrer sine egne.",
+      "required": "Påkrevd",
+      "toggle": "Slå av/på {label}",
+      "unsaved": "Ulagrede endringer",
+      "allSaved": "Alle endringer er lagret",
+      "saving": "Lagrer …",
+      "save": "Lagre innstillinger",
+      "savedTitle": "Innstillingene er lagret",
+      "saveFailedTitle": "Lagring mislyktes",
+      "saveFailedDescription": "Kunne ikke oppdatere varslingsinnstillingene dine.",
+      "category": {
+        "orders": {
+          "label": "Nye bestillinger og innløsninger",
+          "description": "E-post når en kupong kjøpes, løses inn eller gis bort."
+        },
+        "payouts": {
+          "label": "Utbetalinger",
+          "description": "Mottatte, mislykkede og tilbakeholdte Stripe-utbetalinger."
+        },
+        "fraud_alerts": {
+          "label": "Svindel- og sikkerhetsvarsler",
+          "description": "Uvanlige innløsningsmønstre, tilbakeføringer og avvik ved teaminnlogging. Kan ikke slås av."
+        },
+        "campaign_updates": {
+          "label": "Kampanjeforløp",
+          "description": "Kampanje publisert, utløper om 7 dager, avsluttet."
+        },
+        "weekly_digest": {
+          "label": "Ukentlig resultatoppsummering",
+          "description": "Oppsummering hver mandag av forrige ukes inntekter, innløsninger og toppkuponger."
+        },
+        "product_updates": {
+          "label": "Produktnyheter fra GiftHub",
+          "description": "Nye funksjoner, veikart og tips innimellom. Maks. én gang i måneden."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Utbetalinger til handler",
+      "title": "Utbetalinger",
+      "intro": "Koble til en Stripe-konto slik at kupongsalg betales direkte til banken din. Vi tar et plattformgebyr på 5 %; resten overføres automatisk til den tilkoblede kontoen ved betaling.",
+      "stripeAccount": "Stripe-konto",
+      "capabilityState": "Funksjonsstatus",
+      "accountStatus": {
+        "pending": "venter",
+        "restricted": "begrenset",
+        "enabled": "aktivert",
+        "disabled": "deaktivert"
+      },
+      "backToSettings": "Tilbake til innstillinger",
+      "howTitle": "Slik fungerer utbetalinger",
+      "how1": "Kundene betaler i plattformens kasse. Vi krever inn hele beløpet og holder det hos Stripe.",
+      "how2": "Når en betaling går gjennom, sender Stripe salgsprisen minus gebyret vårt på 5 % direkte til utbetalingskontoen din.",
+      "how3": "Stripe betaler deretter pengene inn på bankkontoen din etter tidsplanen du velger i utbetalingsinnstillingene i Stripe (vanligvis daglig, et par dager etter salget).",
+      "how4": "Tilbakeføringer og refusjoner trekkes fra neste utbetaling; administratorene kan holde tilbake saldoen manuelt hvis vi oppdager svindel.",
+      "badge": {
+        "enabled": {
+          "label": "Utbetalinger aktivert",
+          "description": "Midler fra kupongsalg overføres til bankkontoen din av Stripe etter den planlagte utbetalingsfrekvensen."
+        },
+        "restricted": {
+          "label": "Mer informasjon kreves",
+          "description": "Stripe trenger mer informasjon før utbetalinger kan aktiveres. Åpne oppsettslenken nedenfor for å fortsette."
+        },
+        "disabled": {
+          "label": "Utbetalinger deaktivert",
+          "description": "Stripe har deaktivert utbetalinger på denne kontoen. Åpne Stripe-dashbordet for å løse de utestående kravene."
+        },
+        "notConnected": {
+          "label": "Ikke tilkoblet",
+          "description": "Du har ikke koblet til en Stripe-konto ennå. Utbetalinger holdes tilbake til oppsettet er fullført – i mellomtiden behandles kupongsalg som vanlig, men midlene blir stående på plattformsaldoen."
+        }
+      },
+      "actions": {
+        "startFailed": "Kunne ikke starte Stripe-oppsettet",
+        "startNetworkError": "Nettverksfeil ved start av oppsettet",
+        "dashboardFailed": "Kunne ikke åpne Stripe-dashbordet",
+        "dashboardNetworkError": "Nettverksfeil ved åpning av dashbordet",
+        "disconnectConfirm": "Koble fra denne Stripe-kontoen? Utbetalinger stanses til du kobler til igjen.",
+        "disconnected": "Stripe-kontoen er koblet fra",
+        "disconnectFailed": "Kunne ikke koble fra",
+        "disconnect": "Koble fra",
+        "setUp": "Sett opp utbetalinger med Stripe",
+        "openDashboard": "Åpne Stripe-dashbordet",
+        "continueOnboarding": "Fortsett oppsettet"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Kunne ikke laste handlerdata.",
+      "retry": "Prøv igjen",
+      "loading": "Laster ...",
+      "title": "Fullfør profilen din",
+      "subtitle": "Sett opp merkevareprofilen for bedriften din.",
+      "basicInfo": "Grunnleggende informasjon",
+      "merchantName": "Handlernavn *",
+      "brandTitle": "Merkevareprofil",
+      "brandSubtitle": "Tilpass merkevarefarger og logo.",
+      "updateFailed": "Kunne ikke oppdatere handleren",
+      "submit": "Fullfør oppstarten",
+      "skip": "Hopp over nå"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Revisjonslogg",
+      "subtitle": "Følg alle handlinger som er utført på handlerkontoen din",
+      "filters": "Filtre",
+      "action": "Handling",
+      "allActions": "Alle handlinger",
+      "fromDate": "Fra dato",
+      "toDate": "Til dato",
+      "apply": "Bruk",
+      "clear": "Fjern",
+      "loading": "Laster revisjonslogg ...",
+      "loadFailed": "Kunne ikke laste revisjonsloggen",
+      "empty": "Fant ingen oppføringer i revisjonsloggen.",
+      "columns": {
+        "timestamp": "Tidspunkt",
+        "actor": "Utført av",
+        "action": "Handling",
+        "resource": "Ressurs",
+        "details": "Detaljer"
+      },
+      "unknownActor": "Ukjent",
+      "showing": "Viser {from}–{to} av {total}",
+      "pageOf": "Side {page} av {totalPages}",
+      "previousPage": "Forrige side",
+      "nextPage": "Neste side",
+      "actions": {
+        "voucherCreated": "Kupong opprettet",
+        "voucherUpdated": "Kupong oppdatert",
+        "voucherPublished": "Kupong publisert",
+        "vouchersGenerated": "Kuponger generert",
+        "campaignCreated": "Kampanje opprettet",
+        "campaignUpdated": "Kampanje oppdatert",
+        "memberInvited": "Teammedlem invitert",
+        "memberRemoved": "Teammedlem fjernet",
+        "memberRoleChanged": "Rolle for teammedlem endret",
+        "apiKeyCreated": "API-nøkkel opprettet",
+        "apiKeyRevoked": "API-nøkkel tilbakekalt",
+        "apiKeyUpdated": "API-nøkkel oppdatert",
+        "eventCreated": "Arrangement opprettet",
+        "eventUpdated": "Arrangement oppdatert",
+        "eventPublished": "Arrangement publisert",
+        "merchantUpdated": "Handler oppdatert",
+        "reviewReplied": "Anmeldelse besvart",
+        "settingsUpdate": "Innstillinger oppdatert",
+        "settingsView": "Innstillinger vist",
+        "ticketRedeemed": "Billett innløst"
+      },
+      "resources": {
+        "voucher": "Kupong",
+        "campaign": "Kampanje",
+        "giftCard": "Gavekort",
+        "event": "Arrangement",
+        "member": "Medlem",
+        "teamMember": "Teammedlem",
+        "apiKey": "API-nøkkel",
+        "webhook": "Webhook",
+        "merchant": "Handler",
+        "user": "Bruker",
+        "review": "Anmeldelse"
+      }
+    },
+    "roles": {
+      "admin": "Administrator",
+      "adminDescription": "Full tilgang – administrer kuponger, kampanjer, medlemmer og innstillinger",
+      "staff": "Ansatt",
+      "staffDescription": "Driftstilgang – bekreft innløsninger og se data",
+      "optionWithDescription": "{label} – {description}"
+    },
+    "members": {
+      "title": "Teammedlemmer",
+      "subtitle": "Administrer teamet og tilgangsnivåene deres",
+      "inviteMember": "Inviter medlem",
+      "inviteTitle": "Inviter teammedlem",
+      "emailAddress": "E-postadresse",
+      "emailPlaceholder": "colleague@company.com",
+      "emailHint": "Brukeren må ha en eksisterende konto.",
+      "role": "Rolle",
+      "inviting": "Inviterer ...",
+      "sendInvitation": "Send invitasjon",
+      "cancel": "Avbryt",
+      "save": "Lagre",
+      "loading": "Laster teammedlemmer ...",
+      "loadFailed": "Kunne ikke laste teammedlemmer",
+      "empty": "Ingen teammedlemmer ennå. Inviter ditt første medlem ovenfor.",
+      "columns": {
+        "member": "Medlem",
+        "role": "Rolle",
+        "joined": "Ble med",
+        "actions": "Handlinger"
+      },
+      "unnamed": "Uten navn",
+      "memberRole": "Medlemsrolle",
+      "changeRole": "Endre rolle",
+      "removeMember": "Fjern medlem",
+      "inviteFailed": "Kunne ikke invitere medlemmet",
+      "invited": "Medlemmet er invitert",
+      "updateRoleFailed": "Kunne ikke oppdatere rollen",
+      "roleUpdated": "Rollen er oppdatert",
+      "removeConfirm": "Fjerne {name} fra teamet?",
+      "remove": "Fjern",
+      "removeFailed": "Kunne ikke fjerne medlemmet",
+      "removed": "Medlemmet er fjernet"
+    },
+    "inviteForm": {
+      "title": "Inviter teammedlem",
+      "subtitle": "Legg til et teammedlem med e-postadressen.",
+      "email": "E-post",
+      "emailPlaceholder": "member@example.com",
+      "emailHint": "Brukeren må ha en konto. Har vedkommende ikke det, må hen registrere seg først.",
+      "role": "Rolle",
+      "roleHint": "Administratorer kan administrere kuponger, kampanjer og teammedlemmer. Ansatte kan bekrefte innløsninger.",
+      "inviting": "Inviterer ...",
+      "submit": "Inviter medlem",
+      "redirectingToBilling": "{message} Sender deg til fakturering ..."
+    },
+    "referrals": {
+      "title": "Anbefalingsanalyse",
+      "subtitle": "Følg resultater og belønninger for anbefalinger.",
+      "stats": {
+        "total": "Totalt anbefalinger",
+        "totalHint": "Alle registrerte anbefalinger",
+        "opened": "Åpnet",
+        "openedHint": "Sett eller innløst",
+        "redeemed": "Innløst",
+        "redeemedHint": "Konverterte anbefalinger",
+        "conversionRate": "Konverteringsrate",
+        "conversionRateHint": "Innløst / totalt"
+      },
+      "statusBreakdown": "Fordeling etter status",
+      "creditsIssued": "Utstedte kreditter {amount}",
+      "noActivity": "Ingen anbefalingsaktivitet ennå.",
+      "topReferrers": "Toppanbefalere",
+      "topReferrersHint": "Brukerne som står for flest anbefalinger.",
+      "noReferrals": "Ingen anbefalinger ennå.",
+      "unknownUser": "Ukjent bruker",
+      "referralCount": "{count, plural, one {# anbefaling} other {# anbefalinger}}",
+      "recent": "Nylige anbefalinger",
+      "recentHint": "De siste anbefalingene fra kunder.",
+      "noRecent": "Ingen nylige anbefalinger.",
+      "voucherFallback": "Kupong",
+      "status": {
+        "created": "Opprettet",
+        "opened": "Åpnet",
+        "redeemed": "Innløst",
+        "expired": "Utløpt",
+        "blocked": "Blokkert"
+      }
+    },
+    "emailCampaigns": {
+      "title": "E-postkampanjer",
+      "newCampaign": "Ny kampanje",
+      "notConfigured": "E-postutsending er ikke satt opp på denne plattformen ennå. Du kan opprette og forhåndsvise kampanjer, men de kan ikke sendes før en e-postleverandør er koblet til.",
+      "notConfiguredShort": "E-postutsending er ikke satt opp på denne plattformen ennå",
+      "createTitle": "Opprett kampanje",
+      "campaignName": "Kampanjenavn",
+      "campaignNamePlaceholder": "Nyhetsbrev for sommersalg",
+      "subjectLine": "Emnelinje",
+      "subjectPlaceholder": "Ikke gå glipp av sommertilbudene våre!",
+      "recipients": "Mottakere",
+      "recipientFilter": {
+        "all": "Alle kunder",
+        "redeemed30d": "Innløst siste 30 dager",
+        "inactive": "Inaktive kunder"
+      },
+      "schedule": "Planlegg (valgfritt)",
+      "emailSections": "E-postseksjoner",
+      "sectionTypes": {
+        "header": "Topptekst",
+        "text": "Tekst",
+        "image": "Bilde",
+        "button": "Knapp",
+        "divider": "Skillelinje",
+        "voucherCard": "Kupong"
+      },
+      "creating": "Oppretter ...",
+      "scheduleCampaign": "Planlegg kampanje",
+      "saveDraft": "Lagre som utkast",
+      "preview": "Forhåndsvisning",
+      "editor": {
+        "moveUp": "Flytt opp",
+        "moveDown": "Flytt ned",
+        "removeSection": "Fjern seksjon",
+        "title": "Tittel",
+        "subtitle": "Undertittel (valgfritt)",
+        "textContent": "Skriv inn tekst ...",
+        "imageUrl": "Bilde-URL",
+        "altText": "Alternativ tekst",
+        "buttonLabel": "Knappetekst",
+        "buttonUrl": "Knappe-URL",
+        "dividerHint": "Horisontal skillelinje",
+        "voucherTitle": "Kupongtittel",
+        "voucherValue": "Verdi (f.eks. 20 % RABATT)",
+        "voucherCode": "Kode (f.eks. SAVE20)",
+        "voucherExpiry": "Utløper (f.eks. 31. des. 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Overskrift",
+        "textContent": "Tekstinnhold ...",
+        "imagePlaceholder": "Plassholder for bilde",
+        "button": "Knapp",
+        "voucher": "Kupong",
+        "validUntil": "Gyldig til {date}"
+      },
+      "loading": "Laster ...",
+      "empty": "Ingen e-postkampanjer ennå",
+      "columns": {
+        "name": "Navn",
+        "subject": "Emne",
+        "status": "Status",
+        "recipients": "Mottakere",
+        "opens": "Åpninger",
+        "created": "Opprettet",
+        "actions": "Handlinger"
+      },
+      "status": {
+        "draft": "utkast",
+        "scheduled": "planlagt",
+        "sent": "sendt"
+      },
+      "send": "Send",
+      "delete": "Slett",
+      "deleteCampaign": "Slett kampanje",
+      "toasts": {
+        "missingFields": "Manglende felt",
+        "missingFieldsDescription": "Navn og emne er påkrevd.",
+        "created": "Kampanjen er opprettet",
+        "error": "Feil",
+        "createFailed": "Kunne ikke opprette kampanjen.",
+        "sendConfirm": "Er du sikker på at du vil sende denne kampanjen nå?",
+        "sendFailedStatus": "Kunne ikke sende (feil {status}).",
+        "partlySent": "Kampanjen er delvis sendt",
+        "partlySentDescription": "Sendt til {sent} av {total} mottakere. {failed, plural, one {# e-post} other {# e-poster}} kunne ikke sendes.",
+        "sent": "Kampanjen er sendt",
+        "sentDescription": "Sendt til {sent, plural, one {# mottaker} other {# mottakere}}.",
+        "sendFailed": "Sending mislyktes",
+        "deleteConfirm": "Slette denne kampanjen?",
+        "deleted": "Kampanjen er slettet",
+        "deleteFailed": "Kunne ikke slette."
+      }
+    },
+    "apiKeys": {
+      "title": "API-nøkler",
+      "subtitle": "Administrer API-nøkler for programmatisk tilgang til handlerdataene dine",
+      "createKey": "Opprett nøkkel",
+      "createdNotice": "API-nøkkelen er opprettet! Kopier den nå – den vises ikke igjen.",
+      "copyKey": "Kopier nøkkel",
+      "createTitle": "Opprett API-nøkkel",
+      "keyName": "Nøkkelnavn",
+      "keyNamePlaceholder": "f.eks. Kassesystem-integrasjon (produksjon)",
+      "permissions": "Tillatelser",
+      "creating": "Oppretter ...",
+      "submit": "Opprett API-nøkkel",
+      "cancel": "Avbryt",
+      "loading": "Laster API-nøkler ...",
+      "empty": "Ingen API-nøkler ennå. Opprett en for å komme i gang.",
+      "createdOn": "Opprettet {date}",
+      "lastUsed": "Sist brukt {date}",
+      "expires": "Utløper {date}",
+      "revokeKey": "Tilbakekall nøkkel",
+      "loadFailed": "Kunne ikke laste API-nøkler",
+      "required": "Navn og minst én tillatelse er påkrevd",
+      "createFailed": "Kunne ikke opprette API-nøkkel",
+      "created": "API-nøkkelen er opprettet",
+      "revokeConfirm": "Tilbakekalle API-nøkkelen «{name}»? Dette kan ikke angres.",
+      "revoke": "Tilbakekall",
+      "revoked": "API-nøkkelen er tilbakekalt",
+      "revokeFailed": "Kunne ikke tilbakekalle API-nøkkelen",
+      "copied": "Kopiert til utklippstavlen",
+      "groups": {
+        "vouchers": "Kuponger",
+        "campaigns": "Kampanjer",
+        "giftCards": "Gavekort",
+        "customers": "Kunder",
+        "analytics": "Analyse",
+        "events": "Arrangementer"
+      },
+      "permissionLabels": {
+        "voucherRead": "Les kuponger",
+        "voucherCreate": "Opprett kuponger",
+        "voucherRedeem": "Løs inn kuponger",
+        "campaignRead": "Les kampanjer",
+        "campaignCreate": "Opprett kampanjer",
+        "giftCardRead": "Les gavekort",
+        "giftCardRedeem": "Løs inn gavekort",
+        "customerRead": "Les kunder",
+        "analyticsRead": "Les analyse",
+        "eventRead": "Les arrangementer",
+        "eventCheckin": "Innsjekk på arrangementer"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "Motta hendelsesvarsler via HTTP",
+      "addWebhook": "Legg til webhook",
+      "secretNotice": "Webhook-hemmelighet (vises bare én gang):",
+      "copySecret": "Kopier hemmelighet",
+      "copied": "Kopiert!",
+      "newTitle": "Ny webhook",
+      "endpointUrl": "Endepunkt-URL",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Hendelser",
+      "submit": "Opprett webhook",
+      "loading": "Laster ...",
+      "empty": "Ingen webhooks satt opp",
+      "createdOn": "Opprettet {date}",
+      "deliveriesCount": "{count, plural, one {# levering} other {# leveringer}}",
+      "sendTest": "Send test",
+      "viewDeliveries": "Leveringslogg",
+      "disable": "Deaktiver",
+      "enable": "Aktiver",
+      "deleteWebhook": "Slett webhook",
+      "deliveryLog": "Leveringslogg",
+      "noDeliveries": "Ingen leveringer ennå",
+      "deliveryFailed": "Mislyktes",
+      "attempts": "{count, plural, one {# forsøk} other {# forsøk}}",
+      "loadFailed": "Kunne ikke laste webhooks",
+      "required": "URL og minst én hendelse er påkrevd",
+      "created": "Webhooken er opprettet",
+      "createFailed": "Kunne ikke opprette webhook",
+      "deleted": "Webhooken er slettet",
+      "deleteFailed": "Kunne ikke slette webhook",
+      "updateFailed": "Kunne ikke oppdatere webhook",
+      "testDelivered": "Testen er levert! Status: {status}",
+      "testFailed": "Testen mislyktes: {error}",
+      "statusCode": "Status {status}",
+      "testSendFailed": "Kunne ikke sende test-webhook",
+      "loadDeliveriesFailed": "Kunne ikke laste leveringer"
+    }
   }
 }

@@ -4499,8 +4499,759 @@
         "voucher": "Kupon",
         "campaign": "Kampania",
         "none": "Brak",
-        "value": "Wartość"
+        "value": "Wartość",
+        "validUntil": "Ważny do"
+      },
+      "redeem": "Zrealizuj",
+      "redeeming": "Realizowanie...",
+      "cannotRedeem": "Nie można zrealizować tej pozycji (status: {status})",
+      "redeemed": {
+        "voucher": "Kupon zrealizowany!",
+        "gift_card": "Karta podarunkowa zrealizowana!",
+        "ticket": "Bilet zrealizowany!"
+      },
+      "errors": {
+        "enterCode": "Wpisz kod",
+        "notFound": "Nie znaleziono",
+        "scanFailed": "Skanowanie nie powiodło się",
+        "redeemFailed": "Realizacja nie powiodła się"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktywna",
+          "redeemed": "zrealizowana",
+          "expired": "wygasła",
+          "cancelled": "anulowana"
+        },
+        "ticket": {
+          "available": "dostępny",
+          "sold": "sprzedany",
+          "used": "wykorzystany",
+          "cancelled": "anulowany",
+          "refunded": "zwrócony"
+        }
       }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Cena nie może być ujemna.",
+      "invalid": "Cena nie jest prawidłową liczbą.",
+      "wholeNumber": "Cena musi być liczbą całkowitą.",
+      "decimals": "Cena może mieć maksymalnie {decimals} miejsc po przecinku.",
+      "tooLarge": "Cena jest za wysoka."
+    },
+    "appointments": {
+      "title": "Wizyty",
+      "subtitle": "Zarządzaj rezerwacjami i dostępnością",
+      "createSlot": "Utwórz termin",
+      "form": {
+        "serviceName": "Nazwa usługi",
+        "price": "Cena ({currency}, zostaw puste, jeśli bezpłatna)",
+        "startTime": "Godzina rozpoczęcia",
+        "endTime": "Godzina zakończenia",
+        "notes": "Notatki",
+        "creating": "Tworzenie…",
+        "submit": "Utwórz wolny termin"
+      },
+      "status": {
+        "all": "Wszystkie",
+        "pending": "Oczekujące",
+        "confirmed": "Potwierdzone",
+        "cancelled": "Anulowane",
+        "completed": "Zakończone"
+      },
+      "loading": "Wczytywanie...",
+      "empty": "Nie znaleziono wizyt",
+      "bookedBy": "Zarezerwował(a): {name}",
+      "confirm": "Potwierdź",
+      "confirmAria": "Potwierdź wizytę",
+      "cancel": "Anuluj",
+      "cancelAria": "Anuluj wizytę",
+      "errors": {
+        "endBeforeStart": "Godzina zakończenia musi być późniejsza niż godzina rozpoczęcia.",
+        "createFailed": "Nie udało się utworzyć wolnego terminu. Spróbuj ponownie.",
+        "network": "Brak połączenia z serwerem. Sprawdź połączenie i spróbuj ponownie.",
+        "updateFailed": "Nie udało się zaktualizować wizyty (błąd {status})."
+      }
+    },
+    "inventory": {
+      "title": "Magazyn",
+      "subtitle": "Śledź stany magazynowe i zarządzaj dostępnością kuponów",
+      "refresh": "Odśwież",
+      "summary": {
+        "totalItems": "Wszystkie pozycje",
+        "lowStock": "Niski stan",
+        "outOfStock": "Brak na stanie"
+      },
+      "alerts": {
+        "title": "Alerty niskiego stanu ({count})",
+        "threshold": "{stock} / próg {threshold}"
+      },
+      "loading": "Wczytywanie magazynu...",
+      "empty": "Nie znaleziono kuponów",
+      "typeVoucher": "Kupon: {type}",
+      "stockStatus": {
+        "unlimited": "Bez limitu",
+        "outOfStock": "Brak na stanie",
+        "lowStock": "Niski stan",
+        "inStock": "Dostępny"
+      },
+      "stock": "Stan: {stock}",
+      "purchased": "Kupiono: {count}",
+      "redeemed": "Zrealizowano: {count}",
+      "validUntil": "Ważny do {date}",
+      "edit": {
+        "button": "Edytuj stan",
+        "stockQuantity": "Ilość na stanie",
+        "threshold": "Próg niskiego stanu",
+        "save": "Zapisz",
+        "saving": "Zapisywanie...",
+        "cancel": "Anuluj"
+      },
+      "stockUpdated": "Stan zaktualizowany",
+      "errors": {
+        "loadFailed": "Nie udało się wczytać magazynu",
+        "updateFailed": "Nie udało się zaktualizować stanu"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "Sugestie AI nie są jeszcze skonfigurowane na tej platformie, więc narzędzia automatycznego układu i list kontrolnych są ukryte. Nadal możesz ręcznie tworzyć i edytować strony."
+    },
+    "pricing": {
+      "title": "Dynamiczne ceny",
+      "newRule": "Nowa reguła",
+      "ruleTypes": {
+        "demand": {
+          "label": "Według popytu",
+          "desc": "Dostosuj cenę na podstawie stosunku wyświetleń do zakupów"
+        },
+        "timeOfDay": {
+          "label": "Pora dnia",
+          "desc": "Ceny w godzinach szczytu i poza nimi"
+        },
+        "inventory": {
+          "label": "Stan magazynowy",
+          "desc": "Zmiana ceny w zależności od pozostałego zapasu"
+        },
+        "surge": {
+          "label": "Szczyt popytu",
+          "desc": "Narzut na wydarzenia specjalne i święta"
+        },
+        "loyalty": {
+          "label": "Lojalność",
+          "desc": "Zniżki dla powracających klientów"
+        }
+      },
+      "form": {
+        "title": "Utwórz regułę cenową",
+        "ruleType": "Typ reguły",
+        "priority": "Priorytet",
+        "priorityPlaceholder": "Wyższy = stosowany najpierw",
+        "config": "Konfiguracja (JSON)",
+        "submit": "Utwórz regułę",
+        "cancel": "Anuluj"
+      },
+      "loading": "Wczytywanie reguł...",
+      "empty": "Brak reguł cenowych. Utwórz regułę, aby włączyć dynamiczne ceny.",
+      "table": {
+        "type": "Typ",
+        "priority": "Priorytet",
+        "config": "Konfiguracja",
+        "status": "Status",
+        "actions": "Akcje"
+      },
+      "active": "Aktywna",
+      "inactive": "Nieaktywna",
+      "deleteAria": "Usuń regułę cenową",
+      "deleteConfirm": "Usunąć tę regułę cenową?",
+      "delete": "Usuń",
+      "errors": {
+        "invalidJson": "Pole konfiguracji musi zawierać prawidłowy JSON."
+      },
+      "preview": {
+        "title": "Podgląd ceny",
+        "description": "Wpisz ID kuponu, aby zobaczyć, jak aktywne reguły wpłyną na jego cenę.",
+        "voucherId": "ID kuponu",
+        "voucherIdPlaceholder": "Wpisz ID kuponu",
+        "calculate": "Oblicz",
+        "error": "Nie udało się obliczyć ceny",
+        "basePrice": "Cena bazowa",
+        "finalPrice": "Cena końcowa"
+      }
+    },
+    "rentals": {
+      "title": "Rezerwacje wynajmu",
+      "subtitle": "Zarządzaj prośbami o wynajem i zwrotami",
+      "status": {
+        "all": "Wszystkie",
+        "pending": "Oczekujące",
+        "approved": "Zatwierdzone",
+        "rejected": "Odrzucone",
+        "paid": "Opłacone",
+        "active": "Aktywne",
+        "returned": "Zwrócone",
+        "cancelled": "Anulowane"
+      },
+      "empty": "Nie znaleziono rezerwacji wynajmu.",
+      "dates": "{start} - {end} ({days, plural, one {# dzień} few {# dni} many {# dni} other {# dnia}})",
+      "total": "Razem: <strong>{total}</strong> ({rate}/dzień)",
+      "note": "Uwaga: {note}",
+      "rejectedReason": "Odrzucono: {reason}",
+      "bookedMeta": "Zarezerwowano: {date} | Użytkownik: {user}...",
+      "approve": "Zatwierdź",
+      "reasonPlaceholder": "Powód (opcjonalnie)",
+      "confirm": "Potwierdź",
+      "cancel": "Anuluj",
+      "reject": "Odrzuć",
+      "markReturned": "Oznacz jako zwrócone"
+    },
+    "subscriptionBoxes": {
+      "title": "Pudełka subskrypcyjne",
+      "subtitle": "Zarządzaj cyklicznymi pudełkami z kuponami",
+      "newBox": "+ Nowe pudełko",
+      "cancel": "Anuluj",
+      "form": {
+        "name": "Nazwa",
+        "description": "Opis",
+        "price": "Cena ({currency})",
+        "currency": "Waluta",
+        "interval": "Częstotliwość",
+        "maxItems": "Maks. liczba pozycji",
+        "creating": "Tworzenie...",
+        "submit": "Utwórz pudełko"
+      },
+      "interval": {
+        "weekly": "Co tydzień",
+        "monthly": "Co miesiąc",
+        "quarterly": "Co kwartał"
+      },
+      "created": "Pudełko subskrypcyjne utworzone.",
+      "empty": "Brak pudełek subskrypcyjnych. Utwórz pierwsze.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# subskrybent} few {# subskrybentów} many {# subskrybentów} other {# subskrybenta}}",
+      "items": "{count, plural, one {# pozycja} few {# pozycje} many {# pozycji} other {# pozycji}}",
+      "errors": {
+        "priceAboveZero": "Podaj cenę większą niż 0.",
+        "createFailed": "Nie udało się utworzyć pudełka subskrypcyjnego (błąd {status}).",
+        "network": "Nie udało się utworzyć pudełka subskrypcyjnego. Sprawdź połączenie i spróbuj ponownie."
+      },
+      "intervalUnit": {
+        "weekly": "tydzień",
+        "monthly": "miesiąc",
+        "quarterly": "kwartał"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Strona internetowa",
+      "supportEmail": "E-mail wsparcia",
+      "logoUrl": "URL logo",
+      "primaryColor": "Kolor główny",
+      "secondaryColor": "Kolor dodatkowy",
+      "backgroundColor": "Kolor tła",
+      "primaryColorHex": "Wartość hex koloru głównego",
+      "secondaryColorHex": "Wartość hex koloru dodatkowego",
+      "backgroundColorHex": "Wartość hex koloru tła",
+      "saving": "Zapisywanie..."
+    },
+    "page": {
+      "metaTitle": "Ustawienia sprzedawcy",
+      "infoTitle": "Informacje o sprzedawcy",
+      "infoSubtitle": "Podstawowe dane sprzedawcy",
+      "name": "Nazwa",
+      "slug": "Slug",
+      "country": "Kraj",
+      "defaultCurrency": "Domyślna waluta",
+      "website": "Strona internetowa",
+      "supportEmail": "E-mail wsparcia",
+      "completeOnboarding": "Dokończ wdrożenie",
+      "billingTitle": "Rozliczenia",
+      "billingSubtitle": "14-dniowy bezpłatny okres próbny, potem plany od 19 €/miesiąc. 5% prowizji od sprzedaży kuponów.",
+      "status": "Status",
+      "trialStatus": "Bezpłatny okres próbny — {days, plural, one {pozostał # dzień} few {pozostały # dni} many {pozostało # dni} other {pozostało # dnia}}",
+      "statusActive": "Aktywna",
+      "statusInactive": "Nieaktywna",
+      "currentPlan": "Obecny plan",
+      "trialEnds": "Koniec okresu próbnego",
+      "periodEnds": "Koniec bieżącego okresu",
+      "manage": "Zarządzaj",
+      "payoutsTitle": "Wypłaty",
+      "payoutsEnabled": "Konto Stripe połączone i aktywne",
+      "payoutsInProgress": "Wdrożenie w toku — dokończ je, aby włączyć wypłaty",
+      "payoutsNotConnected": "Połącz Stripe, aby otrzymywać wypłaty ze sprzedaży kuponów",
+      "webhooksTitle": "Webhooki",
+      "webhooksSubtitle": "Otrzymuj powiadomienia o zdarzeniach w czasie rzeczywistym przez HTTP",
+      "notificationsTitle": "Powiadomienia",
+      "notificationsSubtitle": "Wybierz, jakie kategorie e-maili otrzymujesz jako członek zespołu."
+    },
+    "brandProfile": {
+      "title": "Profil marki",
+      "subtitle": "Dostosuj kolory marki, logo i dane kontaktowe.",
+      "updated": "Profil marki zaktualizowany!",
+      "updateFailed": "Nie udało się zaktualizować profilu marki",
+      "save": "Zapisz zmiany"
+    },
+    "domains": {
+      "title": "Własne domeny",
+      "subtitle": "Połącz własną domenę i zweryfikuj ją na potrzeby routingu.",
+      "inputLabel": "Własna domena",
+      "adding": "Dodawanie...",
+      "add": "Dodaj domenę",
+      "empty": "Brak skonfigurowanych domen.",
+      "statusLine": "Status: {status}",
+      "statusValue": {
+        "pending": "oczekuje",
+        "verified": "zweryfikowana"
+      },
+      "verify": "Zweryfikuj",
+      "remove": "Usuń",
+      "addedTitle": "Domena dodana",
+      "addedDescription": "Zweryfikuj DNS przed przełączeniem ruchu.",
+      "addErrorTitle": "Błąd domeny",
+      "addErrorDescription": "Nie udało się dodać domeny.",
+      "verifiedTitle": "Domena zweryfikowana",
+      "verifiedDescription": "Routing domeny jest już aktywny.",
+      "verifyErrorTitle": "Błąd weryfikacji",
+      "verifyErrorDescription": "Nie udało się zweryfikować domeny.",
+      "removedTitle": "Domena usunięta",
+      "removeErrorTitle": "Błąd usuwania",
+      "removeErrorDescription": "Nie udało się usunąć domeny."
+    },
+    "notifications": {
+      "metaTitle": "Preferencje powiadomień",
+      "title": "Preferencje powiadomień",
+      "intro": "Decyduj, jakie kategorie e-maili trafiają do Twojej skrzynki jako członka <name>{merchantName}</name>. Preferencje są osobiste — każdy członek zespołu zarządza własnymi.",
+      "required": "Wymagane",
+      "toggle": "Przełącz: {label}",
+      "unsaved": "Niezapisane zmiany",
+      "allSaved": "Wszystkie zmiany zapisane",
+      "saving": "Zapisywanie…",
+      "save": "Zapisz preferencje",
+      "savedTitle": "Preferencje zapisane",
+      "saveFailedTitle": "Zapis nie powiódł się",
+      "saveFailedDescription": "Nie udało się zaktualizować preferencji powiadomień.",
+      "category": {
+        "orders": {
+          "label": "Nowe zamówienia i realizacje",
+          "description": "E-mail, gdy kupon zostanie kupiony, zrealizowany lub podarowany."
+        },
+        "payouts": {
+          "label": "Wypłaty",
+          "description": "Wpływy wypłat Stripe, nieudane wypłaty i blokady."
+        },
+        "fraud_alerts": {
+          "label": "Alerty nadużyć i bezpieczeństwa",
+          "description": "Nietypowe wzorce realizacji, obciążenia zwrotne, anomalie logowania zespołu. Nie można wyłączyć."
+        },
+        "campaign_updates": {
+          "label": "Cykl życia kampanii",
+          "description": "Kampania opublikowana, wygasa za 7 dni, zakończona."
+        },
+        "weekly_digest": {
+          "label": "Tygodniowe podsumowanie wyników",
+          "description": "Poniedziałkowe podsumowanie przychodu, realizacji i najlepszych kuponów z zeszłego tygodnia."
+        },
+        "product_updates": {
+          "label": "Nowości produktowe od GiftHub",
+          "description": "Nowe funkcje, plany rozwoju, okazjonalne porady. Nie częściej niż raz w miesiącu."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Wypłaty sprzedawcy",
+      "title": "Wypłaty",
+      "intro": "Połącz konto Stripe, aby środki ze sprzedaży kuponów trafiały bezpośrednio na Twoje konto bankowe. Pobieramy 5% prowizji platformy; reszta jest automatycznie przekazywana na połączone konto w momencie płatności.",
+      "stripeAccount": "Konto Stripe",
+      "capabilityState": "Stan funkcji",
+      "accountStatus": {
+        "pending": "oczekuje",
+        "restricted": "ograniczone",
+        "enabled": "włączone",
+        "disabled": "wyłączone"
+      },
+      "backToSettings": "Wróć do ustawień",
+      "howTitle": "Jak działają wypłaty",
+      "how1": "Klienci płacą w kasie platformy. Pobieramy pełną kwotę i przechowujemy ją po stronie Stripe.",
+      "how2": "Po przejściu płatności Stripe przesyła cenę sprzedaży pomniejszoną o naszą 5% prowizję bezpośrednio na Twoje konto wypłat.",
+      "how3": "Następnie Stripe przelewa te środki na Twoje konto bankowe zgodnie z harmonogramem ustawionym w ustawieniach wypłat Stripe (zwykle codziennie, kilka dni po sprzedaży).",
+      "how4": "Obciążenia zwrotne i zwroty są potrącane z kolejnej wypłaty; w razie wykrycia nadużycia administratorzy mogą ręcznie zablokować Twoje saldo.",
+      "badge": {
+        "enabled": {
+          "label": "Wypłaty włączone",
+          "description": "Środki ze sprzedaży kuponów są przelewane przez Stripe na Twoje konto bankowe zgodnie z harmonogramem wypłat."
+        },
+        "restricted": {
+          "label": "Wymagane dodatkowe informacje",
+          "description": "Stripe potrzebuje więcej informacji, zanim wypłaty zostaną włączone. Otwórz poniższy link do wdrożenia, aby kontynuować."
+        },
+        "disabled": {
+          "label": "Wypłaty wyłączone",
+          "description": "Stripe wyłączył wypłaty na tym koncie. Otwórz panel Stripe, aby spełnić brakujące wymagania."
+        },
+        "notConnected": {
+          "label": "Niepołączone",
+          "description": "Nie połączono jeszcze konta Stripe. Wypłaty są wstrzymane do zakończenia wdrożenia — w tym czasie sprzedaż kuponów nadal działa, ale środki pozostają na saldzie platformy."
+        }
+      },
+      "actions": {
+        "startFailed": "Nie udało się rozpocząć wdrożenia Stripe",
+        "startNetworkError": "Błąd sieci podczas rozpoczynania wdrożenia",
+        "dashboardFailed": "Nie udało się otworzyć panelu Stripe",
+        "dashboardNetworkError": "Błąd sieci podczas otwierania panelu",
+        "disconnectConfirm": "Odłączyć to konto Stripe? Wypłaty zostaną wstrzymane do ponownego połączenia.",
+        "disconnected": "Konto Stripe odłączone",
+        "disconnectFailed": "Nie udało się odłączyć",
+        "disconnect": "Odłącz",
+        "setUp": "Skonfiguruj wypłaty ze Stripe",
+        "openDashboard": "Otwórz panel Stripe",
+        "continueOnboarding": "Kontynuuj wdrożenie"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Nie udało się wczytać danych sprzedawcy.",
+      "retry": "Ponów",
+      "loading": "Wczytywanie...",
+      "title": "Uzupełnij profil",
+      "subtitle": "Skonfiguruj profil marki sprzedawcy.",
+      "basicInfo": "Podstawowe informacje",
+      "merchantName": "Nazwa sprzedawcy *",
+      "brandTitle": "Profil marki",
+      "brandSubtitle": "Dostosuj kolory marki i logo.",
+      "updateFailed": "Nie udało się zaktualizować sprzedawcy",
+      "submit": "Zakończ wdrożenie",
+      "skip": "Pomiń na razie"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Dziennik audytu",
+      "subtitle": "Śledź wszystkie działania wykonane na koncie sprzedawcy",
+      "filters": "Filtry",
+      "action": "Działanie",
+      "allActions": "Wszystkie działania",
+      "fromDate": "Od dnia",
+      "toDate": "Do dnia",
+      "apply": "Zastosuj",
+      "clear": "Wyczyść",
+      "loading": "Wczytywanie dziennika audytu...",
+      "loadFailed": "Nie udało się wczytać dziennika audytu",
+      "empty": "Nie znaleziono wpisów w dzienniku audytu.",
+      "columns": {
+        "timestamp": "Czas",
+        "actor": "Wykonawca",
+        "action": "Działanie",
+        "resource": "Zasób",
+        "details": "Szczegóły"
+      },
+      "unknownActor": "Nieznany",
+      "showing": "Wyświetlono {from}–{to} z {total}",
+      "pageOf": "Strona {page} z {totalPages}",
+      "previousPage": "Poprzednia strona",
+      "nextPage": "Następna strona",
+      "actions": {
+        "voucherCreated": "Utworzono kupon",
+        "voucherUpdated": "Zaktualizowano kupon",
+        "voucherPublished": "Opublikowano kupon",
+        "vouchersGenerated": "Wygenerowano kupony",
+        "campaignCreated": "Utworzono kampanię",
+        "campaignUpdated": "Zaktualizowano kampanię",
+        "memberInvited": "Zaproszono członka zespołu",
+        "memberRemoved": "Usunięto członka zespołu",
+        "memberRoleChanged": "Zmieniono rolę członka zespołu",
+        "apiKeyCreated": "Utworzono klucz API",
+        "apiKeyRevoked": "Unieważniono klucz API",
+        "apiKeyUpdated": "Zaktualizowano klucz API",
+        "eventCreated": "Utworzono wydarzenie",
+        "eventUpdated": "Zaktualizowano wydarzenie",
+        "eventPublished": "Opublikowano wydarzenie",
+        "merchantUpdated": "Zaktualizowano sprzedawcę",
+        "reviewReplied": "Odpowiedziano na opinię",
+        "settingsUpdate": "Zmiana ustawień",
+        "settingsView": "Wyświetlenie ustawień",
+        "ticketRedeemed": "Zrealizowano bilet"
+      },
+      "resources": {
+        "voucher": "Kupon",
+        "campaign": "Kampania",
+        "giftCard": "Karta podarunkowa",
+        "event": "Wydarzenie",
+        "member": "Członek",
+        "teamMember": "Członek zespołu",
+        "apiKey": "Klucz API",
+        "webhook": "Webhook",
+        "merchant": "Sprzedawca",
+        "user": "Użytkownik",
+        "review": "Opinia"
+      }
+    },
+    "roles": {
+      "admin": "Administrator",
+      "adminDescription": "Pełny dostęp — zarządzanie kuponami, kampaniami, członkami i ustawieniami",
+      "staff": "Personel",
+      "staffDescription": "Dostęp operacyjny — potwierdzanie realizacji i podgląd danych",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Członkowie zespołu",
+      "subtitle": "Zarządzaj zespołem i poziomami dostępu",
+      "inviteMember": "Zaproś członka",
+      "inviteTitle": "Zaproś członka zespołu",
+      "emailAddress": "Adres e-mail",
+      "emailPlaceholder": "wspolpracownik@firma.pl",
+      "emailHint": "Użytkownik musi mieć już konto.",
+      "role": "Rola",
+      "inviting": "Zapraszanie...",
+      "sendInvitation": "Wyślij zaproszenie",
+      "cancel": "Anuluj",
+      "save": "Zapisz",
+      "loading": "Wczytywanie członków zespołu...",
+      "loadFailed": "Nie udało się wczytać członków zespołu",
+      "empty": "Brak członków zespołu. Zaproś pierwszego powyżej.",
+      "columns": {
+        "member": "Członek",
+        "role": "Rola",
+        "joined": "Dołączył(a)",
+        "actions": "Akcje"
+      },
+      "unnamed": "Bez nazwy",
+      "memberRole": "Rola członka",
+      "changeRole": "Zmień rolę",
+      "removeMember": "Usuń członka",
+      "inviteFailed": "Nie udało się zaprosić członka",
+      "invited": "Członek zaproszony",
+      "updateRoleFailed": "Nie udało się zmienić roli",
+      "roleUpdated": "Rola zmieniona",
+      "removeConfirm": "Usunąć użytkownika {name} z zespołu?",
+      "remove": "Usuń",
+      "removeFailed": "Nie udało się usunąć członka",
+      "removed": "Członek usunięty"
+    },
+    "inviteForm": {
+      "title": "Zaproś członka zespołu",
+      "subtitle": "Dodaj członka zespołu po adresie e-mail.",
+      "email": "E-mail",
+      "emailPlaceholder": "czlonek@przyklad.pl",
+      "emailHint": "Użytkownik musi mieć konto. Jeśli go nie ma, musi się najpierw zarejestrować.",
+      "role": "Rola",
+      "roleHint": "Administratorzy mogą zarządzać kuponami, kampaniami i członkami zespołu. Personel może potwierdzać realizacje.",
+      "inviting": "Zapraszanie...",
+      "submit": "Zaproś członka",
+      "redirectingToBilling": "{message} Przekierowanie do rozliczeń..."
+    },
+    "referrals": {
+      "title": "Analityka poleceń",
+      "subtitle": "Śledź skuteczność poleceń i nagrody.",
+      "stats": {
+        "total": "Wszystkie polecenia",
+        "totalHint": "Wszystkie śledzone polecenia",
+        "opened": "Otwarte",
+        "openedHint": "Wyświetlone lub zrealizowane",
+        "redeemed": "Zrealizowane",
+        "redeemedHint": "Skuteczne polecenia",
+        "conversionRate": "Wskaźnik konwersji",
+        "conversionRateHint": "Zrealizowane / wszystkie"
+      },
+      "statusBreakdown": "Podział według statusu",
+      "creditsIssued": "Wydane kredyty: {amount}",
+      "noActivity": "Brak aktywności poleceń.",
+      "topReferrers": "Najlepsi polecający",
+      "topReferrersHint": "Użytkownicy z największą liczbą poleceń.",
+      "noReferrals": "Brak poleceń.",
+      "unknownUser": "Nieznany użytkownik",
+      "referralCount": "{count, plural, one {# polecenie} few {# polecenia} many {# poleceń} other {# polecenia}}",
+      "recent": "Ostatnie polecenia",
+      "recentHint": "Najnowsze polecenia od klientów.",
+      "noRecent": "Brak ostatnich poleceń.",
+      "voucherFallback": "Kupon",
+      "status": {
+        "created": "Utworzone",
+        "opened": "Otwarte",
+        "redeemed": "Zrealizowane",
+        "expired": "Wygasłe",
+        "blocked": "Zablokowane"
+      }
+    },
+    "emailCampaigns": {
+      "title": "Kampanie e-mail",
+      "newCampaign": "Nowa kampania",
+      "notConfigured": "Wysyłka e-maili nie jest jeszcze skonfigurowana na tej platformie. Możesz tworzyć kampanie i wyświetlać ich podgląd, ale nie da się ich wysłać, dopóki nie zostanie podłączony dostawca e-mail.",
+      "notConfiguredShort": "Wysyłka e-maili nie jest jeszcze skonfigurowana na tej platformie",
+      "createTitle": "Utwórz kampanię",
+      "campaignName": "Nazwa kampanii",
+      "campaignNamePlaceholder": "Newsletter letniej wyprzedaży",
+      "subjectLine": "Temat",
+      "subjectPlaceholder": "Nie przegap letnich okazji!",
+      "recipients": "Odbiorcy",
+      "recipientFilter": {
+        "all": "Wszyscy klienci",
+        "redeemed30d": "Realizacja w ostatnich 30 dniach",
+        "inactive": "Nieaktywni klienci"
+      },
+      "schedule": "Harmonogram (opcjonalnie)",
+      "emailSections": "Sekcje e-maila",
+      "sectionTypes": {
+        "header": "Nagłówek",
+        "text": "Tekst",
+        "image": "Obraz",
+        "button": "Przycisk",
+        "divider": "Separator",
+        "voucherCard": "Kupon"
+      },
+      "creating": "Tworzenie...",
+      "scheduleCampaign": "Zaplanuj kampanię",
+      "saveDraft": "Zapisz jako szkic",
+      "preview": "Podgląd",
+      "editor": {
+        "moveUp": "Przenieś w górę",
+        "moveDown": "Przenieś w dół",
+        "removeSection": "Usuń sekcję",
+        "title": "Tytuł",
+        "subtitle": "Podtytuł (opcjonalnie)",
+        "textContent": "Wpisz treść...",
+        "imageUrl": "URL obrazu",
+        "altText": "Tekst alternatywny",
+        "buttonLabel": "Etykieta przycisku",
+        "buttonUrl": "URL przycisku",
+        "dividerHint": "Pozioma linia oddzielająca",
+        "voucherTitle": "Tytuł kuponu",
+        "voucherValue": "Wartość (np. -20%)",
+        "voucherCode": "Kod (np. RABAT20)",
+        "voucherExpiry": "Ważność (np. 31 grudnia 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Tytuł nagłówka",
+        "textContent": "Treść...",
+        "imagePlaceholder": "Miejsce na obraz",
+        "button": "Przycisk",
+        "voucher": "Kupon",
+        "validUntil": "Ważny do {date}"
+      },
+      "loading": "Wczytywanie...",
+      "empty": "Brak kampanii e-mail",
+      "columns": {
+        "name": "Nazwa",
+        "subject": "Temat",
+        "status": "Status",
+        "recipients": "Odbiorcy",
+        "opens": "Otwarcia",
+        "created": "Utworzono",
+        "actions": "Akcje"
+      },
+      "status": {
+        "draft": "szkic",
+        "scheduled": "zaplanowana",
+        "sent": "wysłana"
+      },
+      "send": "Wyślij",
+      "delete": "Usuń",
+      "deleteCampaign": "Usuń kampanię",
+      "toasts": {
+        "missingFields": "Brakujące pola",
+        "missingFieldsDescription": "Nazwa i temat są wymagane.",
+        "created": "Kampania utworzona",
+        "error": "Błąd",
+        "createFailed": "Nie udało się utworzyć kampanii.",
+        "sendConfirm": "Czy na pewno chcesz teraz wysłać tę kampanię?",
+        "sendFailedStatus": "Nie udało się wysłać (błąd {status}).",
+        "partlySent": "Kampania wysłana częściowo",
+        "partlySentDescription": "Wysłano do {sent} z {total} odbiorców. {failed, plural, one {Nie udało się wysłać # e-maila.} few {Nie udało się wysłać # e-maili.} many {Nie udało się wysłać # e-maili.} other {Nie udało się wysłać # e-maila.}}",
+        "sent": "Kampania wysłana",
+        "sentDescription": "{sent, plural, one {Wysłano do # odbiorcy.} few {Wysłano do # odbiorców.} many {Wysłano do # odbiorców.} other {Wysłano do # odbiorcy.}}",
+        "sendFailed": "Wysyłka nie powiodła się",
+        "deleteConfirm": "Usunąć tę kampanię?",
+        "deleted": "Kampania usunięta",
+        "deleteFailed": "Nie udało się usunąć."
+      }
+    },
+    "apiKeys": {
+      "title": "Klucze API",
+      "subtitle": "Zarządzaj kluczami API do programowego dostępu do danych sprzedawcy",
+      "createKey": "Utwórz klucz",
+      "createdNotice": "Klucz API utworzony! Skopiuj go teraz — nie zostanie pokazany ponownie.",
+      "copyKey": "Kopiuj klucz",
+      "createTitle": "Utwórz klucz API",
+      "keyName": "Nazwa klucza",
+      "keyNamePlaceholder": "np. Integracja POS (produkcja)",
+      "permissions": "Uprawnienia",
+      "creating": "Tworzenie...",
+      "submit": "Utwórz klucz API",
+      "cancel": "Anuluj",
+      "loading": "Wczytywanie kluczy API...",
+      "empty": "Brak kluczy API. Utwórz pierwszy, aby zacząć.",
+      "createdOn": "Utworzono {date}",
+      "lastUsed": "Ostatnio użyto {date}",
+      "expires": "Wygasa {date}",
+      "revokeKey": "Unieważnij klucz",
+      "loadFailed": "Nie udało się wczytać kluczy API",
+      "required": "Wymagana jest nazwa i co najmniej jedno uprawnienie",
+      "createFailed": "Nie udało się utworzyć klucza API",
+      "created": "Klucz API utworzony",
+      "revokeConfirm": "Unieważnić klucz API „{name}”? Tej operacji nie można cofnąć.",
+      "revoke": "Unieważnij",
+      "revoked": "Klucz API unieważniony",
+      "revokeFailed": "Nie udało się unieważnić klucza API",
+      "copied": "Skopiowano do schowka",
+      "groups": {
+        "vouchers": "Kupony",
+        "campaigns": "Kampanie",
+        "giftCards": "Karty podarunkowe",
+        "customers": "Klienci",
+        "analytics": "Analityka",
+        "events": "Wydarzenia"
+      },
+      "permissionLabels": {
+        "voucherRead": "Odczyt kuponów",
+        "voucherCreate": "Tworzenie kuponów",
+        "voucherRedeem": "Realizacja kuponów",
+        "campaignRead": "Odczyt kampanii",
+        "campaignCreate": "Tworzenie kampanii",
+        "giftCardRead": "Odczyt kart podarunkowych",
+        "giftCardRedeem": "Realizacja kart podarunkowych",
+        "customerRead": "Odczyt klientów",
+        "analyticsRead": "Odczyt analityki",
+        "eventRead": "Odczyt wydarzeń",
+        "eventCheckin": "Odprawa na wydarzenia"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooki",
+      "subtitle": "Otrzymuj powiadomienia o zdarzeniach przez HTTP",
+      "addWebhook": "Dodaj webhook",
+      "secretNotice": "Sekret webhooka (pokazywany tylko raz):",
+      "copySecret": "Kopiuj sekret",
+      "copied": "Skopiowano!",
+      "newTitle": "Nowy webhook",
+      "endpointUrl": "URL punktu końcowego",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Zdarzenia",
+      "submit": "Utwórz webhook",
+      "loading": "Wczytywanie...",
+      "empty": "Brak skonfigurowanych webhooków",
+      "createdOn": "Utworzono {date}",
+      "deliveriesCount": "{count, plural, one {# dostarczenie} few {# dostarczenia} many {# dostarczeń} other {# dostarczenia}}",
+      "sendTest": "Wyślij test",
+      "viewDeliveries": "Dziennik dostarczeń",
+      "disable": "Wyłącz",
+      "enable": "Włącz",
+      "deleteWebhook": "Usuń webhook",
+      "deliveryLog": "Dziennik dostarczeń",
+      "noDeliveries": "Brak dostarczeń",
+      "deliveryFailed": "Niepowodzenie",
+      "attempts": "{count, plural, one {# próba} few {# próby} many {# prób} other {# próby}}",
+      "loadFailed": "Nie udało się wczytać webhooków",
+      "required": "Wymagany jest URL i co najmniej jedno zdarzenie",
+      "created": "Webhook utworzony",
+      "createFailed": "Nie udało się utworzyć webhooka",
+      "deleted": "Webhook usunięty",
+      "deleteFailed": "Nie udało się usunąć webhooka",
+      "updateFailed": "Nie udało się zaktualizować webhooka",
+      "testDelivered": "Test dostarczony! Status: {status}",
+      "testFailed": "Test nie powiódł się: {error}",
+      "statusCode": "Status {status}",
+      "testSendFailed": "Nie udało się wysłać testowego webhooka",
+      "loadDeliveriesFailed": "Nie udało się wczytać dostarczeń"
     }
   }
 }
