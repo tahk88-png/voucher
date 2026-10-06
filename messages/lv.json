@@ -2602,5 +2602,2656 @@
       "downloading": "Lejupielādē...",
       "download": "Lejupielādēt QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Pārvaldiet savas kuponu kampaņas.",
+      "createCampaign": "Izveidot kampaņu",
+      "subscriptionRequired": "Nepieciešams abonements",
+      "trialEnded": "Jūsu 60 dienu bezmaksas kampaņu izmēģinājums ir beidzies. Aktivizējiet plānu par 9,90 mēnesī, lai veidotu jaunas kampaņas.",
+      "stats": {
+        "totalTitle": "Kampaņas kopā",
+        "totalDescription": "Visas kampaņas",
+        "activeTitle": "Aktīvās",
+        "activeDescription": "Pašlaik norisinās",
+        "paidTitle": "Apmaksātie pirkumi",
+        "paidDescription": "Pabeigtie pasūtījumi",
+        "revenueTitle": "Ieņēmumi",
+        "revenueDescription": "Apmaksāto kuponu pārdošana"
+      },
+      "weeklyRevenue": {
+        "title": "Nedēļas ieņēmumi",
+        "description": "Apmaksāto kampaņu pārdošana 7 dienu laikā.",
+        "series": "Ieņēmumi"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Vēl nav kampaņu",
+        "descriptionCanCreate": "Izveidojiet kampaņu, lai organizētu un pārvaldītu savus kuponus.",
+        "descriptionNeedsSubscription": "Aktivizējiet abonementu, lai veidotu jaunas kampaņas.",
+        "action": "Izveidojiet savu pirmo kampaņu"
+      },
+      "searchPlaceholder": "Meklēt kampaņas...",
+      "searchLabel": "Meklēt kampaņas",
+      "filterAll": "Visas",
+      "status": {
+        "active": "Aktīva",
+        "draft": "Melnraksts",
+        "ended": "Beigusies",
+        "paused": "Apturēta"
+      },
+      "noMatches": "Neviena kampaņa neatbilst filtriem.",
+      "clearFilters": "Notīrīt filtrus",
+      "type": {
+        "weekly": "Nedēļas kampaņa",
+        "limited": "Ierobežota kampaņa",
+        "other": "Kampaņa: {type}"
+      },
+      "runs": "Norisinās {start} - {end}",
+      "view": "Skatīt",
+      "stats": {
+        "vouchers": "Kuponi",
+        "paidPurchases": "Apmaksātie pirkumi",
+        "revenue": "Ieņēmumi",
+        "price": "Cena"
+      },
+      "free": "Bezmaksas"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Jaunas kampaņas tiek izveidotas kā melnraksts. Klienti tās neredz, kamēr nepublicējat tās kampaņas lapā."
+    },
+    "edit": {
+      "breadcrumb": "Rediģēt",
+      "title": "Rediģēt kampaņu"
+    },
+    "form": {
+      "basicInfo": "Pamatinformācija",
+      "nameLabel": "Kampaņas nosaukums *",
+      "namePlaceholder": "Svētku piedāvājums",
+      "descriptionLabel": "Apraksts",
+      "descriptionPlaceholder": "Ierobežota laika akcija",
+      "typeLabel": "Veids *",
+      "typeOptions": {
+        "limited": "Vienreizēja (ierobežota)",
+        "weekly": "Nedēļas"
+      },
+      "dates": "Datumi",
+      "startDate": "Sākuma datums *",
+      "endDate": "Beigu datums *",
+      "timezoneHint": "Laiki norādīti jūsu vietējā laika joslā.",
+      "pricing": "Cena un ierobežojumi",
+      "priceLabel": "Cena {currency} (bezmaksas kuponiem atstājiet tukšu)",
+      "pricePreview": "Klienti maksā {price}.",
+      "priceHint": "Ievadiet summu {currency}, piem., 4.50 vai 4,50, lai iegūtu {example}.",
+      "maxRedemptions": "Maks. izmantošanas",
+      "maxPurchases": "Maks. pirkumi",
+      "unlimited": "Neierobežoti",
+      "creditLabel": "Ieteicēja kredīts (%)",
+      "creditPreview": "Ieteicēji nopelna {percent}% no pirkuma cenas kā kredītu.",
+      "creditHint": "Pirkuma cenas daļa, ko ieteicējs saņem kā kredītu, piem., 5 vai 2,5.",
+      "termsSection": "Noteikumi un nosacījumi",
+      "termsLabel": "Noteikumi",
+      "termsPlaceholder": "Šīs kampaņas noteikumi un nosacījumi...",
+      "saving": "Saglabā...",
+      "saveChanges": "Saglabāt izmaiņas",
+      "creating": "Izveido...",
+      "create": "Izveidot kampaņu",
+      "saved": "Kampaņas izmaiņas saglabātas.",
+      "errors": {
+        "invalidDates": "Lūdzu, ievadiet derīgu sākuma un beigu datumu.",
+        "endBeforeStart": "Beigu datumam jābūt pēc sākuma datuma.",
+        "maxRedemptions": "Maks. izmantošanu skaitam jābūt veselam skaitlim, vismaz 1.",
+        "maxPurchases": "Maks. pirkumu skaitam jābūt veselam skaitlim, vismaz 1.",
+        "saveFailed": "Neizdevās saglabāt kampaņu"
+      },
+      "priceErrors": {
+        "negative": "Cena nevar būt negatīva.",
+        "invalid": "Cena nav derīgs skaitlis.",
+        "wholeNumber": "Cenai jābūt veselam skaitlim.",
+        "decimals": "Cenai var būt ne vairāk kā {decimals} zīmes aiz komata.",
+        "tooLarge": "Cena ir pārāk liela."
+      },
+      "creditErrors": {
+        "negative": "Ieteicēja kredīts nevar būt negatīvs.",
+        "invalid": "Ieteicēja kredīts nav derīgs skaitlis.",
+        "decimals": "Ieteicēja kredītam var būt ne vairāk kā {decimals} zīmes aiz komata.",
+        "tooLarge": "Ieteicēja kredīts ir pārāk liels.",
+        "tooHigh": "Ieteicēja kredīts nevar pārsniegt 100%."
+      }
+    },
+    "detail": {
+      "noDescription": "Nav apraksta",
+      "draftNotice": "Šī kampaņa ir melnraksts, tāpēc klienti to vēl neredz.",
+      "draftNoticeAdmin": "Šī kampaņa ir melnraksts, tāpēc klienti to vēl neredz. Publicējiet to, kad esat gatavs.",
+      "status": "Statuss",
+      "type": "Veids",
+      "price": "Cena",
+      "referrerCredit": "Ieteicēja kredīts",
+      "none": "Nav",
+      "stats": {
+        "vouchers": "Kuponi",
+        "totalPurchases": "Pirkumi kopā",
+        "paidPurchases": "Apmaksātie pirkumi"
+      },
+      "terms": "Noteikumi un nosacījumi",
+      "promotion": {
+        "title": "Popularizēšana",
+        "description": "Maksas redzamība nedēļas jaunumu vēstulē un paziņojumos."
+      },
+      "vouchers": {
+        "title": "Kuponi",
+        "description": "No šīs kampaņas ģenerētie kuponi.",
+        "empty": "Vēl nav ģenerētu kuponu.",
+        "view": "Skatīt"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Iekļaut nedēļas jaunumu vēstulē (maksas)",
+      "notification": "Izcelt paziņojumos (maksas)",
+      "endDate": "Popularizēšanas beigu datums",
+      "saving": "Saglabā...",
+      "save": "Saglabāt popularizēšanas iestatījumus",
+      "saved": "Popularizēšanas iestatījumi saglabāti.",
+      "upgradeNeededTitle": "Nepieciešams augstāks plāns",
+      "upgradeNeeded": "Popularizēšanas iespējas ir pieejamas augstākā plānā. Jauniniet plānu sadaļā Iestatījumi un norēķini, lai tās izmantotu.",
+      "saveFailedStatus": "Neizdevās saglabāt popularizēšanas iestatījumus (kļūda {status}).",
+      "saveFailedNetwork": "Neizdevās saglabāt popularizēšanas iestatījumus. Pārbaudiet savienojumu un mēģiniet vēlreiz."
+    },
+    "actions": {
+      "adminOnly": "Tikai tirgotāja administratori var publicēt, apturēt vai rediģēt kampaņas.",
+      "edit": "Rediģēt",
+      "publish": {
+        "label": "Publicēt",
+        "title": "Publicēt šo kampaņu?",
+        "description": "Klienti uzreiz varēs redzēt un iegādāties šīs kampaņas kuponus.",
+        "success": "Kampaņa publicēta. Tagad tā ir redzama klientiem."
+      },
+      "pause": {
+        "label": "Apturēt",
+        "title": "Apturēt šo kampaņu?",
+        "description": "Kampaņa atgriezīsies melnraksta statusā un būs paslēpta no klientiem, līdz to atkal publicēsiet. Jau pārdotie kuponi paliek derīgi.",
+        "success": "Kampaņa apturēta. Tā ir paslēpta no klientiem."
+      },
+      "end": {
+        "label": "Beigt kampaņu",
+        "title": "Beigt šo kampaņu tūlīt?",
+        "description": "Kampaņa tiks nekavējoties apturēta, un to vairs nevarēs publicēt. Jau pārdotie kuponi paliek derīgi.",
+        "success": "Kampaņa beigta."
+      },
+      "updateFailedStatus": "Neizdevās atjaunināt kampaņu (kļūda {status}).",
+      "updateFailed": "Neizdevās atjaunināt kampaņu."
+    },
+    "generate": {
+      "open": "Ģenerēt kuponus",
+      "title": "Ģenerēt kuponus",
+      "descriptionPriced": "Izveido kuponu melnrakstus ar {value} atlaidi, derīgus {start} – {end}. Katram kuponam ir savs kods. Tie paliek paslēpti, līdz tos publicējat.",
+      "descriptionFree": "Šī kampaņa ir bezmaksas, tāpēc kuponiem nav summas. Vispirms iestatiet kampaņai cenu.",
+      "countLabel": "Kuponu skaits (1-100)",
+      "generating": "Ģenerē...",
+      "submit": "Ģenerēt",
+      "invalidCount": "Lūdzu, ievadiet veselu skaitli no 1 līdz 100",
+      "needsPrice": "Vispirms iestatiet šai kampaņai cenu. Ģenerēto kuponu vērtība ir vienāda ar kampaņas cenu.",
+      "failed": "Neizdevās ģenerēt kuponus",
+      "success": "{count, plural, zero {Ģenerēti # kuponu melnraksti. Publicējiet tos} one {Ģenerēts # kupona melnraksts. Publicējiet to} other {Ģenerēti # kuponu melnraksti. Publicējiet tos}} kuponu lapā, kad esat gatavs."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktīvās kampaņas",
+      "statLiveVouchers": "Aktīvie kuponi",
+      "statRedemptions30d": "Izmantošanas (30 dienas)"
+    },
+    "error": {
+      "title": "Kaut kas nogāja greizi",
+      "description": "Tirgotāja panelī radās kļūda.",
+      "tryAgain": "Mēģināt vēlreiz",
+      "backToMerchants": "Atpakaļ pie tirgotājiem"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Pārskats",
+        "offers": "Piedāvājumi",
+        "inStore": "Veikalā",
+        "customers": "Klienti",
+        "settings": "Iestatījumi"
+      },
+      "language": "Valoda",
+      "opensAppArea": "Atver lietotnes sadaļu",
+      "externalLinkTitle": "{label} (atver lietotnes sadaļu ārpus šī tirgotāja)",
+      "opensOutside": "Atver ārpus tirgotāja sadaļas",
+      "merchantNavigation": "Tirgotājs",
+      "more": "Vairāk",
+      "navDashboard": "Panelis"
+    },
+    "dashboard": {
+      "title": "Tirgotāja panelis",
+      "welcomeBack": "Laipni lūdzam atpakaļ, {name}",
+      "viewCampaigns": "Skatīt kampaņas",
+      "createVoucher": "Izveidot kuponu",
+      "performanceOverview": "Darbības pārskats",
+      "performanceOverviewHint": "Kampaņu aktivitāte un izmantošanas reāllaikā.",
+      "revenueAndCredits": "Ieņēmumi un kredīti",
+      "revenueAndCreditsHint": "Pārdošana, kredīti un neizpildītās saistības.",
+      "performanceTrend": "Darbības tendence",
+      "performanceTrendHint": "Izmantošanu un ieņēmumu aktivitāte pēdējās {days} dienās.",
+      "rangeShort": "{days} d.",
+      "revenue": "Ieņēmumi",
+      "chartRedemptions": "Izmantošanas",
+      "chartRevenue": "Ieņēmumi ({currency})",
+      "paidOrders": "Apmaksātie pasūtījumi",
+      "openOrdersView": "Atvērt pasūtījumu skatu",
+      "avgOrder": "Vid. pasūtījums",
+      "openCampaignRevenue": "Atvērt kampaņu ieņēmumus",
+      "redemptionRate": "Izmantošanas līmenis",
+      "openRedemptionQueue": "Atvērt izmantošanu rindu",
+      "pendingConfirmation": "{count} gaida apstiprinājumu",
+      "pendingConfirmationHint": "Izmantošanas veikalā, kas gaida jūsu apstiprinājumu.",
+      "viewRedemptions": "Skatīt izmantošanas",
+      "actionCenter": "Darbību centrs",
+      "actionCenterHint": "Prioritāri pārskatāmie vienumi.",
+      "allCaughtUp": "Viss ir izdarīts.",
+      "open": "Atvērt",
+      "actions": {
+        "pendingRedemptions": "{count, plural, zero {# gaidošu izmantošanu} one {# gaidoša izmantošana} other {# gaidošas izmantošanas}}",
+        "pendingRedemptionsDetail": "Apstipriniet izmantošanas veikalā",
+        "expiringVouchers": "{count, plural, zero {# kuponiem drīz beigsies derīgums} one {# kuponam drīz beigsies derīgums} other {# kuponiem drīz beigsies derīgums}}",
+        "expiringVouchersDetail": "Pārskatiet kuponu derīguma datumus",
+        "endingCampaigns": "{count, plural, zero {# kampaņas beidzas šonedēļ} one {# kampaņa beidzas šonedēļ} other {# kampaņas beidzas šonedēļ}}",
+        "endingCampaignsDetail": "Pagariniet vai dublējiet savas labākās kampaņas",
+        "upcomingEvents": "{count, plural, zero {# gaidāmu pasākumu} one {# gaidāms pasākums} other {# gaidāmi pasākumi}}",
+        "upcomingEventsDetail": "Sagatavojiet biļešu reģistrāciju un personālu"
+      },
+      "upcomingEventsTitle": "Gaidāmie pasākumi",
+      "upcomingEventsHint": "Nākamie ieplānotie pasākumi.",
+      "noUpcomingEvents": "Nav ieplānotu pasākumu.",
+      "eventStatus": {
+        "published": "publicēts",
+        "soldOut": "izpārdots"
+      },
+      "manageEvents": "Pārvaldīt pasākumus",
+      "topVouchers": "Populārākie kuponi",
+      "topVouchersHint": "Visvairāk izmantotie piedāvājumi.",
+      "noTopVouchers": "Neviens kupons vēl nav izmantots. Šeit parādīsies jūsu visvairāk izmantotie kuponi."
+    },
+    "stats": {
+      "activeVouchers": "Aktīvie kuponi",
+      "publishedVouchers": "Publicētie kuponi",
+      "openVouchers": "Atvērt kuponus",
+      "activeCampaigns": "Aktīvās kampaņas",
+      "runningCampaigns": "Notiekošās kampaņas",
+      "openCampaigns": "Atvērt kampaņas",
+      "activeEvents": "Aktīvie pasākumi",
+      "publishedEvents": "Publicētie pasākumi",
+      "openEvents": "Atvērt pasākumus",
+      "todaysRedemptions": "Šodienas izmantošanas",
+      "thisWeek": "Šonedēļ: {count}",
+      "reviewRedemptions": "Pārskatīt izmantošanas",
+      "ofWeekly": "no nedēļas"
+    },
+    "revenue": {
+      "voucherRevenue": "Kuponu ieņēmumi",
+      "paidVoucherSales": "Apmaksāto kuponu pārdošana",
+      "openCampaignSales": "Atvērt kampaņu pārdošanu",
+      "ticketRevenue": "Biļešu ieņēmumi",
+      "paidTicketSales": "Apmaksāto biļešu pārdošana",
+      "openEventSales": "Atvērt pasākumu pārdošanu",
+      "creditsIssued": "Piešķirtie kredīti",
+      "totalCreditsDistributed": "Kopā piešķirtie kredīti",
+      "openReferralCredits": "Atvērt ieteikumu kredītus",
+      "outstandingLiability": "Neizpildītās saistības",
+      "unredeemedValue": "Neizmantoto kuponu vērtība",
+      "openVoucherLiability": "Atvērt kuponu saistības"
+    },
+    "recentActivity": {
+      "title": "Nesenā aktivitāte",
+      "empty": "Nav nesenas aktivitātes",
+      "unknownUser": "Nezināms lietotājs",
+      "redeemedVoucher": "Izmantoja kuponu - {time}",
+      "confirmed": "Apstiprināts",
+      "pending": "Gaida"
+    },
+    "liveStats": {
+      "live": "Tiešraidē",
+      "connecting": "Savienojas…",
+      "redeemedToday": "<value>{count}</value> <label>izmantoti šodien</label>",
+      "pending": "<value>{count}</value> <label>gaida</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analītika",
+      "title": "Analītika",
+      "subtitle": "Sekojiet kuponu rezultātiem un ieņēmumiem",
+      "totalRedemptions": "Izmantošanas kopā",
+      "confirmedRedemptions": "Apstiprinātās izmantošanas",
+      "totalDiscounts": "Atlaides kopā",
+      "givenToCustomers": "Piešķirtas klientiem",
+      "creditsIssued": "Piešķirtie kredīti",
+      "totalCreditsDistributed": "Kopā piešķirtie kredīti",
+      "activeVouchers": "Aktīvie kuponi",
+      "withRedemptions": "Ar izmantošanām",
+      "charts": {
+        "redemptionTrends": "Izmantošanu tendences (pēdējās 30 dienas)",
+        "redemptions": "Izmantošanas",
+        "revenue": "Ieņēmumi ({currency})",
+        "topPerforming": "Veiksmīgākie kuponi",
+        "noRedeemed": "Neviens kupons vēl nav izmantots. Šeit parādīsies jūsu veiksmīgākie kuponi.",
+        "byCategory": "Izmantošanas pa kategorijām",
+        "noCategoryData": "Nav pieejamu kategoriju datu"
+      }
+    },
+    "ask": {
+      "title": "Jautājiet saviem datiem",
+      "subtitle": "Uzdodiet jautājumus par sava uzņēmuma datiem dabiskā valodā",
+      "emptyTitle": "Jautājiet jebko par saviem datiem",
+      "emptyHint": "Izmēģiniet kādu no ieteikumiem zemāk",
+      "placeholder": "Uzdodiet jautājumu par saviem datiem...",
+      "suggestedTitle": "Ieteiktie jautājumi",
+      "suggestions": {
+        "revenueLastWeek": "Kādi bija mani ieņēmumi pagājušajā nedēļā?",
+        "dailyRedemptionsThisMonth": "Parādi ikdienas izmantošanas šomēnes",
+        "topVouchersByRevenue": "Populārākie kuponi pēc ieņēmumiem pagājušajā mēnesī",
+        "customersPurchasedLastWeek": "Cik klientu iepirkās pagājušajā nedēļā?",
+        "referralConversionRate": "Kāds ir mans ieteikumu konversijas līmenis?",
+        "dailyRevenueTrend": "Parādi ikdienas ieņēmumu tendenci šomēnes",
+        "purchasesYesterday": "Cik pirkumu tika veikts vakar?",
+        "bestPerformingVouchers": "Kuri ir mani veiksmīgākie kuponi?"
+      },
+      "errorFallback": "Diemžēl neizdevās apstrādāt šo jautājumu.",
+      "networkError": "Tīkla kļūda. Lūdzu, mēģiniet vēlreiz.",
+      "itemLabel": "Vienums {n}"
+    },
+    "reports": {
+      "title": "Finanšu atskaites",
+      "subtitle": "Ieņēmumu pārskats un eksports",
+      "downloadCsv": "Lejupielādēt CSV",
+      "from": "No",
+      "to": "Līdz",
+      "apply": "Lietot",
+      "totalRevenue": "Ieņēmumi kopā",
+      "platformFees": "Platformas komisijas",
+      "netRevenue": "Neto ieņēmumi",
+      "redemptions": "Izmantošanas",
+      "revenueByCurrency": "Ieņēmumi pa valūtām",
+      "netAndFees": "Neto: {net} • Komisijas: {fees}",
+      "monthlyRevenue": "Mēneša ieņēmumi",
+      "noRevenue": "Šim periodam nav ieņēmumu datu.",
+      "month": "Mēnesis",
+      "vouchers": "Kuponi",
+      "tickets": "Biļetes",
+      "total": "Kopā"
+    },
+    "scheduled": {
+      "title": "Ieplānotās atskaites",
+      "subtitle": "Iestatiet automātiskas atskaites e-pastā",
+      "backToReports": "← Finanšu atskaites",
+      "activeSchedules": "Aktīvie grafiki",
+      "loading": "Ielādē...",
+      "noSchedules": "Vēl nav iestatītu grafiku",
+      "period": {
+        "daily": "Katru dienu",
+        "weekly": "Katru nedēļu",
+        "monthly": "Katru mēnesi"
+      },
+      "reportTitle": {
+        "daily": "Dienas atskaite",
+        "weekly": "Nedēļas atskaite",
+        "monthly": "Mēneša atskaite"
+      },
+      "recipientCount": "{count, plural, zero {# saņēmēju} one {# saņēmējs} other {# saņēmēji}}",
+      "lastSent": "Pēdējo reizi nosūtīts: {date}",
+      "nextRun": "Nākamais: {date}",
+      "pause": "Apturēt",
+      "resume": "Atsākt",
+      "createSchedule": "Izveidot grafiku",
+      "frequency": "Biežums",
+      "recipients": "Saņēmēji",
+      "invalidEmail": "Nederīga e-pasta adrese",
+      "emailAlreadyAdded": "E-pasts jau pievienots",
+      "addAtLeastOne": "Pievienojiet vismaz vienu saņēmēju",
+      "saved": "Atskaišu grafiks veiksmīgi saglabāts",
+      "saveFailed": "Neizdevās saglabāt grafiku",
+      "save": "Saglabāt grafiku",
+      "previewTitle": "Atskaites priekšskatījums",
+      "previewBody": "Ieplānotās atskaites ietver ieņēmumus, izmantošanu skaitu, populārākos kuponus un izaugsmes rādītājus. Atskaites tiek nosūtītas kā glīti noformēti HTML e-pasti plkst. 8:00 UTC.",
+      "everyMorning": "Katru rītu",
+      "everyMonday": "Katru pirmdienu",
+      "firstOfMonth": "Katra mēneša 1. datumā"
+    },
+    "billing": {
+      "subscribeTo": "Abonēt {plan}",
+      "startFailed": "Neizdevās sākt abonementu",
+      "portalFailed": "Neizdevās atvērt norēķinu portālu",
+      "manageBilling": "Pārvaldīt norēķinus",
+      "errorTitle": "Kļūda",
+      "close": "Aizvērt",
+      "usage": "<b>{current}</b> / {max} izmantoti",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "kampaņu izveides ciklā",
+        "activeCampaigns": "aktīvās kampaņas",
+        "voucherCreatesPerCycle": "kuponu izveides ciklā",
+        "teamMembers": "komandas dalībnieki"
+      },
+      "currentPlanTrial": "Pašreizējais plāns (bezmaksas izmēģinājums)",
+      "planChangesUnavailable": "Plāna maiņa tiešsaistē pašlaik nav pieejama.",
+      "paymentsNotSetUp": "Tiešsaistes maksājumi šajā platformā vēl nav iestatīti, tāpēc plānus šeit nevar iegādāties vai mainīt. Ja vēlaties mainīt plānu, sazinieties ar atbalstu.",
+      "features": {
+        "starter": {
+          "vouchers": "500 kuponi mēnesī",
+          "campaigns": "3 aktīvas kampaņas",
+          "teamMembers": "2 komandas dalībnieki",
+          "qrRedemption": "Izmantošana ar QR kodu",
+          "basicAnalytics": "Pamata analītika"
+        },
+        "pro": {
+          "vouchers": "5000 kuponu mēnesī",
+          "campaigns": "25 aktīvas kampaņas",
+          "teamMembers": "10 komandas dalībnieku",
+          "advancedAnalytics": "Paplašināta analītika",
+          "customDomain": "Pielāgots domēns",
+          "promoBoosts": "Popularizēšanas iespējas"
+        },
+        "scale": {
+          "vouchers": "Neierobežoti kuponi",
+          "campaigns": "Neierobežotas kampaņas",
+          "teamMembers": "Neierobežots komandas dalībnieku skaits",
+          "everythingInPro": "Viss, kas ir Pro",
+          "whiteLabel": "Gatavs white-label risinājumam",
+          "prioritySupport": "Prioritārs atbalsts"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Īpašnieks",
+      "admin": "Administrators",
+      "finance": "Finanses",
+      "marketing": "Mārketings",
+      "support": "Atbalsts",
+      "partner_cashier": "Kasieris",
+      "auditor": "Auditors"
+    },
+    "orgs": {
+      "title": "B2B organizācijas",
+      "subtitle": "Uzņēmumu darbvietas ar kampaņām, kuponiem un pasūtījumiem.",
+      "loading": "Ielādē organizācijas...",
+      "loadFailed": "Neizdevās ielādēt organizācijas",
+      "empty": "Nav atrasta neviena organizācija. Lūdziet administratoram jūs uzaicināt.",
+      "open": "Atvērt"
+    },
+    "workspace": {
+      "fallbackName": "Organizācija",
+      "subtitle": "B2B darbvietas pārskats",
+      "reports": "Atskaites",
+      "audit": "Audits",
+      "partnerKeys": "Partneru atslēgas",
+      "backToOrgs": "Atpakaļ uz organizācijām",
+      "loading": "Ielādē darbvietu...",
+      "errors": {
+        "loadOrg": "Neizdevās ielādēt organizāciju",
+        "loadCampaigns": "Neizdevās ielādēt kampaņas",
+        "loadVouchers": "Neizdevās ielādēt kuponus",
+        "loadOrders": "Neizdevās ielādēt pasūtījumus",
+        "load": "Neizdevās ielādēt",
+        "createCampaign": "Neizdevās izveidot kampaņu",
+        "issueVouchers": "Neizdevās izsniegt kuponus",
+        "updateCampaign": "Neizdevās atjaunināt kampaņu",
+        "activateCampaign": "Neizdevās aktivizēt kampaņu",
+        "pauseCampaign": "Neizdevās apturēt kampaņu",
+        "archiveCampaign": "Neizdevās arhivēt kampaņu"
+      },
+      "stats": {
+        "campaigns": "Kampaņas",
+        "vouchers": "Kuponi",
+        "orders": "Pasūtījumi"
+      },
+      "create": {
+        "title": "Izveidot kampaņu",
+        "name": "Kampaņas nosaukums",
+        "value": "Vērtība (centos)",
+        "currency": "Valūta",
+        "submit": "Izveidot"
+      },
+      "campaigns": {
+        "title": "Kampaņas",
+        "empty": "Vēl nav kampaņu.",
+        "name": "Nosaukums",
+        "value": "Vērtība",
+        "activate": "Aktivizēt",
+        "pause": "Apturēt",
+        "resume": "Atsākt",
+        "archive": "Arhivēt",
+        "issue": "Izsniegt {count}"
+      },
+      "recentVouchers": "Nesenie kuponi",
+      "noVouchers": "Nav izsniegtu kuponu.",
+      "recentOrders": "Nesenie pasūtījumi",
+      "noOrders": "Vēl nav pasūtījumu."
+    },
+    "audit": {
+      "title": "Audita žurnāls",
+      "subtitle": "Sekojiet kuponu dzīves ciklam un izmaiņām.",
+      "entityType": "Objekta veids (kupons, kampaņa, pasūtījums)",
+      "entityId": "Objekta ID",
+      "loading": "Ielādē auditu...",
+      "loadFailed": "Neizdevās ielādēt auditu",
+      "empty": "Nav notikumu."
+    },
+    "billing": {
+      "metaTitle": "Organizācijas norēķini",
+      "title": "Norēķini un finanses",
+      "totalPaidOrders": "Apmaksātie pasūtījumi kopā",
+      "totalRevenue": "Ieņēmumi kopā",
+      "vatNumber": "PVN numurs",
+      "notSet": "Nav iestatīts",
+      "recentOrders": "Nesenie pasūtījumi",
+      "noOrders": "Vēl nav pasūtījumu.",
+      "table": {
+        "date": "Datums",
+        "qty": "Daudz.",
+        "total": "Kopā",
+        "status": "Statuss",
+        "invoice": "Rēķins"
+      }
+    },
+    "keys": {
+      "title": "Partneru API atslēgas",
+      "subtitle": "Izmantojiet tās partneru kuponu validācijai un izmantošanai.",
+      "label": "Atslēgas nosaukums (neobligāts)",
+      "create": "Izveidot atslēgu",
+      "newKey": "Jaunā atslēga (nokopējiet tūlīt)",
+      "loading": "Ielādē atslēgas...",
+      "empty": "Vēl nav atslēgu.",
+      "untitled": "Atslēga bez nosaukuma",
+      "created": "Izveidota {created}",
+      "createdAndLastUsed": "Izveidota {created} • Pēdējoreiz izmantota {lastUsed}",
+      "revoke": "Atsaukt",
+      "errors": {
+        "load": "Neizdevās ielādēt atslēgas",
+        "create": "Neizdevās izveidot atslēgu",
+        "revoke": "Neizdevās atsaukt atslēgu"
+      }
+    },
+    "members": {
+      "metaTitle": "Organizācijas dalībnieki",
+      "title": "Dalībnieki",
+      "count": "{count, plural, zero {# dalībnieku} one {# dalībnieks} other {# dalībnieki}}",
+      "pendingInvitations": "Gaidošie ielūgumi",
+      "expires": "Derīgs līdz {date}"
+    },
+    "invite": {
+      "title": "Uzaicināt dalībnieku",
+      "emailPlaceholder": "kolega@piemers.lv",
+      "roles": {
+        "admin": "Administrators",
+        "finance": "Finanses",
+        "marketing": "Mārketings",
+        "support": "Atbalsts",
+        "partner_cashier": "Partnera kasieris",
+        "auditor": "Auditors"
+      },
+      "sending": "Sūta…",
+      "submit": "Sūtīt ielūgumu",
+      "sent": "Ielūgums nosūtīts uz {email}.",
+      "failed": "Neizdevās nosūtīt ielūgumu. Lūdzu, pārbaudiet e-pastu un mēģiniet vēlreiz.",
+      "error": "Kaut kas nogāja greizi. Lūdzu, mēģiniet vēlreiz."
+    },
+    "reports": {
+      "title": "Atskaites",
+      "subtitle": "Izmantošanu un kuponu atskaites",
+      "backToWorkspace": "Atpakaļ uz darbvietu",
+      "loadFailed": "Neizdevās ielādēt",
+      "tabs": {
+        "redemptions": "Izmantošanas",
+        "vouchers": "Kuponi"
+      },
+      "totalRedemptions": "Izmantošanas kopā",
+      "totalAmountRedeemed": "Kopā izmantotā summa",
+      "from": "No",
+      "to": "Līdz",
+      "filter": "Filtrēt",
+      "pageInfo": "Lapa {page} no {totalPages} (kopā {total})",
+      "redemptionTable": {
+        "date": "Datums",
+        "partner": "Partneris",
+        "amount": "Summa",
+        "status": "Statuss",
+        "location": "Vieta"
+      },
+      "noRedemptions": "Izmantošanas nav atrastas.",
+      "voucherTable": {
+        "campaign": "Kampaņa",
+        "status": "Statuss",
+        "type": "Veids",
+        "value": "Vērtība",
+        "remaining": "Atlikums",
+        "redeemed": "Izmantots",
+        "issuedTo": "Izsniegts",
+        "expires": "Derīgs līdz"
+      },
+      "noVouchers": "Kuponi nav atrasti."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "pircējs",
+        "partner": "partneris",
+        "platform_owner": "platformas īpašnieks"
+      },
+      "orgStatus": {
+        "active": "aktīva",
+        "suspended": "apturēta"
+      },
+      "campaignStatus": {
+        "draft": "melnraksts",
+        "active": "aktīva",
+        "paused": "apturēta",
+        "archived": "arhivēta"
+      },
+      "voucherStatus": {
+        "created": "izveidots",
+        "issued": "izsniegts",
+        "active": "aktīvs",
+        "redeemed": "izmantots",
+        "expired": "beidzies",
+        "voided": "anulēts"
+      },
+      "valueType": {
+        "fixed": "fiksēta",
+        "percent": "procenti"
+      },
+      "orderStatus": {
+        "draft": "melnraksts",
+        "submitted": "iesniegts",
+        "invoiced": "izrakstīts rēķins",
+        "paid": "apmaksāts",
+        "cancelled": "atcelts",
+        "refunded": "atmaksāts"
+      },
+      "redemptionStatus": {
+        "approved": "apstiprināta",
+        "reversed": "stornēta",
+        "failed": "neizdevās"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Pasākumi"
+    },
+    "status": {
+      "draft": "Melnraksts",
+      "published": "Aktīvs",
+      "sold_out": "Izpārdots",
+      "cancelled": "Atcelts",
+      "ended": "Beidzies"
+    },
+    "statusName": {
+      "draft": "Melnraksts",
+      "published": "Publicēts",
+      "sold_out": "Izpārdots",
+      "cancelled": "Atcelts",
+      "ended": "Beidzies"
+    },
+    "type": {
+      "festival": "Festivāls",
+      "internal": "Iekšējs pasākums",
+      "concert": "Koncerts",
+      "workshop": "Darbnīca",
+      "other": "Cits"
+    },
+    "ticketStatus": {
+      "available": "Pieejama",
+      "sold": "Pārdota",
+      "used": "Izmantota",
+      "cancelled": "Atcelta",
+      "refunded": "Atmaksāta"
+    },
+    "list": {
+      "subtitle": "Pārvaldiet savus pasākumus un biļetes",
+      "createEvent": "Izveidot pasākumu",
+      "stats": {
+        "totalTitle": "Pasākumi kopā",
+        "totalDescription": "Visi pasākumi",
+        "activeTitle": "Aktīvie",
+        "activeDescription": "Publicēti vai izpārdoti",
+        "soldTitle": "Pārdotās biļetes",
+        "soldDescription": "Visos pasākumos",
+        "revenueTitle": "Ieņēmumi",
+        "revenueDescription": "Apmaksāto biļešu pārdošana"
+      },
+      "empty": {
+        "title": "Vēl nav pasākumu",
+        "description": "Izveidojiet pasākumu, lai pārdotu biļetes un pārvaldītu apmeklējumu.",
+        "cta": "Izveidojiet savu pirmo pasākumu"
+      },
+      "card": {
+        "date": "Datums:",
+        "location": "Vieta:",
+        "price": "Cena:",
+        "tickets": "Biļetes:",
+        "sold": "Pārdotas {sold} / {capacity}",
+        "free": "Bezmaksas",
+        "view": "Skatīt",
+        "edit": "Rediģēt"
+      },
+      "weeklyRevenue": {
+        "title": "Nedēļas biļešu ieņēmumi",
+        "description": "Apmaksāto biļešu pārdošana 7 dienu laikā.",
+        "series": "Ieņēmumi"
+      }
+    },
+    "detail": {
+      "noDescription": "Nav apraksta",
+      "edit": "Rediģēt",
+      "status": "Statuss",
+      "type": "Veids",
+      "eventDate": "Pasākuma datums",
+      "price": "Cena",
+      "free": "Bezmaksas",
+      "totalTickets": "Biļetes kopā",
+      "sold": "Pārdotas",
+      "available": "Pieejamas",
+      "location": "Vieta",
+      "terms": "Noteikumi un nosacījumi",
+      "ticketsTitle": "Biļetes",
+      "ticketsDescription": "Šī pasākuma biļetes",
+      "noTickets": "Vēl nav ģenerētu biļešu.",
+      "view": "Skatīt",
+      "redeem": "Izmantot"
+    },
+    "form": {
+      "basicInfo": "Pamatinformācija",
+      "name": "Pasākuma nosaukums *",
+      "description": "Apraksts",
+      "descriptionPlaceholder": "Aprakstiet savu pasākumu...",
+      "type": "Pasākuma veids *",
+      "typeAria": "Pasākuma veids",
+      "dateTime": "Datums un laiks",
+      "eventDate": "Pasākuma datums *",
+      "eventTime": "Pasākuma laiks *",
+      "endDate": "Beigu datums (neobligāts)",
+      "endTime": "Beigu laiks (neobligāts)",
+      "location": "Vieta",
+      "locationName": "Vietas nosaukums",
+      "locationPlaceholder": "Galvenā zāle, Brīvdabas skatuve",
+      "locationPlaceholderExample": "piem., Galvenā zāle, Brīvdabas skatuve",
+      "address": "Pilna adrese",
+      "addressPlaceholder": "Ielas adrese, Pilsēta, Valsts",
+      "ticketDetails": "Biļešu informācija",
+      "maxCapacity": "Maks. ietilpība (biļetes) *",
+      "maxCapacityLong": "Maks. ietilpība (biļešu skaits) *",
+      "pricePerTicketCurrency": "Biļetes cena ({currency})",
+      "pricePerTicket": "Biļetes cena",
+      "pricePlaceholderFree": "0.00 (bezmaksas)",
+      "priceHint": "Bezmaksas biļetēm atstājiet tukšu. Piem., 12.50 vai 12,50, lai iegūtu {example}.",
+      "currency": "Valūta *",
+      "terms": "Noteikumi un nosacījumi",
+      "termsPlaceholder": "Pasākuma noteikumi, atgriešanas politika utt.",
+      "ticketPrice": "Biļetes cena",
+      "endBeforeStart": "Beigu laikam jābūt pēc sākuma laika.",
+      "cancel": "Atcelt"
+    },
+    "create": {
+      "submit": "Izveidot pasākumu",
+      "submitting": "Izveido..."
+    },
+    "edit": {
+      "loading": "Ielādē...",
+      "notFound": "Pasākums nav atrasts.",
+      "back": "Atpakaļ uz pasākumu",
+      "title": "Rediģēt pasākumu",
+      "subtitle": "Atjauniniet pasākuma informāciju.",
+      "submit": "Saglabāt izmaiņas",
+      "submitting": "Saglabā..."
+    },
+    "publish": {
+      "confirm": "Publicēt šo pasākumu? Tas būs publiski redzams, un biļetes varēs iegādāties.",
+      "confirmLabel": "Publicēt",
+      "failed": "Neizdevās publicēt pasākumu",
+      "success": "Pasākums veiksmīgi publicēts!",
+      "published": "Publicēts",
+      "cannotPublish": "Nevar publicēt",
+      "button": "Publicēt pasākumu",
+      "publishing": "Publicē..."
+    },
+    "generate": {
+      "invalidCount": "Lūdzu, ievadiet skaitli no 1 līdz 1000",
+      "tooMany": "Nevar ģenerēt {count} biļetes. Maksimāli pieejams: {max}",
+      "failed": "Neizdevās ģenerēt biļetes",
+      "success": "{count, plural, zero {Veiksmīgi ģenerētas # biļetes!} one {Veiksmīgi ģenerēta # biļete!} other {Veiksmīgi ģenerētas # biļetes!}}",
+      "open": "Ģenerēt biļetes",
+      "title": "Ģenerēt biļetes",
+      "description": "Izveidojiet biļetes šim pasākumam",
+      "countLabel": "Biļešu skaits (maks.: {max})",
+      "cancel": "Atcelt",
+      "submit": "Ģenerēt",
+      "submitting": "Ģenerē..."
+    },
+    "redeem": {
+      "title": "Izmantot biļeti",
+      "subtitle": "Noskenējiet QR kodu vai ievadiet biļetes numuru",
+      "back": "Atpakaļ uz pasākumu",
+      "scanTitle": "Skenēt biļeti",
+      "scanDescription": "Ievadiet QR kodu vai biļetes numuru",
+      "tokenLabel": "QR kods / biļetes numurs",
+      "tokenPlaceholder": "Ievadiet QR kodu vai biļetes numuru",
+      "scan": "Skenēt",
+      "notFound": "Biļete nav atrasta",
+      "found": "Biļete atrasta",
+      "number": "Numurs:",
+      "event": "Pasākums:",
+      "status": "Statuss:",
+      "attendee": "Apmeklētājs:",
+      "redeemDescription": "Pabeidziet izmantošanas procesu",
+      "locationLabel": "Vieta (neobligāts)",
+      "locationPlaceholder": "piem., Galvenā ieeja, A vārti",
+      "submit": "Izmantot biļeti",
+      "submitting": "Izmanto...",
+      "failed": "Neizdevās izmantot biļeti",
+      "cannotRedeem": "Šo biļeti nevar izmantot. Statuss: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Tirgotāja panelis",
+      "vouchersTitle": "Pārvaldīt kuponus"
+    },
+    "sidebar": {
+      "title": "Tirgotājs",
+      "subtitle": "GiftHub konsole",
+      "openMenu": "Atvērt izvēlni",
+      "nav": {
+        "overview": "Pārskats",
+        "vouchers": "Kuponi",
+        "giftCards": "Dāvanu kartes",
+        "credits": "Kredīti",
+        "brand": "Zīmols"
+      }
+    },
+    "overview": {
+      "title": "Tirgotāja panelis",
+      "notConnected": "Jūs vēl neesat pievienots nevienam tirgotājam."
+    },
+    "noAccess": {
+      "title": "Nav piekļuves tirgotājam",
+      "overviewHint": "Lūdziet tirgotāja administratoram jūs uzaicināt vai izveidojiet tirgotāja kontu, lai sāktu.",
+      "creditsHint": "Pievienojieties tirgotāja kontam, lai skatītu ieņēmumus un izmaksas.",
+      "vouchersHint": "Pievienojieties tirgotāja kontam, lai pārvaldītu kuponus.",
+      "exploreCampaigns": "Apskatīt kampaņas"
+    },
+    "brand": {
+      "title": "Zīmola iestatījumi",
+      "description": "Pielāgojiet sava zīmola izskatu kuponos",
+      "logoHeading": "Logotips",
+      "logoHint": "Augšupielādējiet tirgotāja logotipu (ieteicams: 200x200 px, PNG vai SVG).",
+      "logoPreviewAlt": "Logotipa priekšskatījums",
+      "uploadLogo": "Augšupielādēt logotipu",
+      "colorHeading": "Zīmola krāsa",
+      "colorHint": "Iestatiet zīmola pamatkrāsu kuponiem un pogām.",
+      "colorLabel": "Krāsa",
+      "colorHexLabel": "Zīmola krāsas hex vērtība",
+      "save": "Saglabāt izmaiņas",
+      "previewHeading": "Priekšskatījums",
+      "previewHint": "Skatiet, kā jūsu zīmols izskatās kuponos.",
+      "sampleMerchant": "Jūsu uzņēmums",
+      "sampleTitle": "20% atlaide nākamajam pirkumam",
+      "sampleDescription": "Derīgs visām precēm. Nav apvienojams ar citiem piedāvājumiem."
+    },
+    "credits": {
+      "availableBalance": "Pieejamais atlikums",
+      "availableBalanceHint": "Gatavs izmaksai",
+      "pendingRevenue": "Gaidāmie ieņēmumi",
+      "pendingRevenueHint": "Tiek apstrādāti",
+      "recentRevenue": "Nesenie ieņēmumi",
+      "ticketSale": "Biļešu pārdošana",
+      "voucherSale": "Kuponu pārdošana",
+      "noRevenue": "Vēl nav reģistrētu ieņēmumu",
+      "payoutRequests": "Izmaksu pieprasījumi",
+      "noPayoutRequests": "Vēl nav izmaksu pieprasījumu",
+      "requestPayoutHeading": "Pieprasīt izmaksu",
+      "minimumPayout": "Minimālā izmaksas summa: {amount}",
+      "submitting": "Iesniedz...",
+      "requestPayout": "Pieprasīt izmaksu",
+      "requestSubmitted": "Izmaksas pieprasījums iesniegts",
+      "requestFailed": "Neizdevās pieprasīt izmaksu",
+      "status": {
+        "paid": "izmaksāts",
+        "pending": "gaida",
+        "requested": "pieprasīts",
+        "completed": "pabeigts",
+        "failed": "neizdevās"
+      }
+    },
+    "newVoucher": {
+      "title": "Izveidot kuponu",
+      "description": "Izstrādājiet un konfigurējiet savu jauno kuponu kampaņu",
+      "detailsHeading": "Kupona informācija",
+      "titleLabel": "Nosaukums",
+      "titlePlaceholder": "piem., 20% atlaide nākamajam pirkumam",
+      "descriptionLabel": "Apraksts",
+      "descriptionPlaceholder": "Derīgs visām precēm. Nav apvienojams ar citiem piedāvājumiem.",
+      "expiryDateLabel": "Derīguma termiņš",
+      "weeklyLabel": "Nedēļas piedāvājums",
+      "weeklyHint": "Ierobežota laika pieejamība katru nedēļu",
+      "weeklyAria": "Nedēļas piedāvājums - ierobežota laika pieejamība katru nedēļu",
+      "referralLabel": "Ieslēgt ieteikumu kredītu",
+      "referralHint": "Lietotāji nopelna kredītu, kad draugi izmanto kuponu",
+      "referralAria": "Ieslēgt ieteikumu kredītu - lietotāji nopelna kredītu, kad draugi izmanto kuponu",
+      "brandColorLabel": "Zīmola krāsa",
+      "brandColorHexLabel": "Zīmola krāsas hex vērtība",
+      "saveDraft": "Saglabāt melnrakstu",
+      "createAndPublish": "Izveidot un publicēt",
+      "previewHeading": "Priekšskatījums",
+      "sampleMerchant": "Jūsu uzņēmums",
+      "sampleTitle": "Kupona nosaukums",
+      "sampleDescription": "Šeit parādīsies kupona apraksts"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Publiskā lapa būs pieejama, kad kupons tiks publicēts.",
+    "list": {
+      "metaTitle": "Kuponi",
+      "subtitle": "Pārvaldiet un veidojiet kuponus",
+      "bulkImport": "Masveida CSV imports",
+      "stats": {
+        "totalTitle": "Kuponi kopā",
+        "totalDescription": "Visi izveidotie kuponi",
+        "activeTitle": "Aktīvie",
+        "activeDescription": "Publicētie kuponi",
+        "draftsTitle": "Melnraksti",
+        "draftsDescription": "Vēl nav publicēti",
+        "pausedEndedTitle": "Apturēti / beigušies",
+        "pausedEndedDescription": "{paused} apturēti, {ended} beigušies",
+        "redemptionsTitle": "Izmantošanas",
+        "redemptionsDescription": "Izmantošanas kopā"
+      },
+      "empty": {
+        "title": "Vēl nav kuponu",
+        "description": "Sāciet, izveidojot savu pirmo kuponu.",
+        "action": "Izveidojiet savu pirmo kuponu"
+      },
+      "searchPlaceholder": "Meklēt pēc virsraksta, koda prefiksa vai ID",
+      "searchLabel": "Meklēt kuponus",
+      "statusLabel": "Statuss",
+      "statusAll": "Visi statusi",
+      "status": {
+        "published": "Aktīvs",
+        "paused": "Apturēts",
+        "draft": "Melnraksts",
+        "ended": "Beidzies",
+        "expired": "Derīgums beidzies"
+      },
+      "typeLabel": "Veids",
+      "typeAll": "Visi veidi",
+      "sortLabel": "Kārtot pēc",
+      "sort": {
+        "date": "Datuma (jaunākie)",
+        "name": "Nosaukuma (A-Z)",
+        "redemptions": "Izmantošanām"
+      },
+      "showing": "Rāda {shown} no {total} kuponiem",
+      "clearFilters": "Notīrīt filtrus",
+      "noMatches": "Neviens kupons neatbilst filtriem.",
+      "usage": "Lietojums",
+      "usageUnlimited": "Lietojums: {used} - neierobežots",
+      "view": "Skatīt"
+    },
+    "rowActions": {
+      "pauseTitle": "Apturēt kuponu",
+      "pauseDescription": "Vai tiešām vēlaties apturēt šo kuponu? Kamēr tas ir apturēts, lietotāji to nevarēs iegādāties vai izmantot.",
+      "pauseConfirm": "Apturēt",
+      "paused": "Kupons apturēts",
+      "pauseFailed": "Neizdevās apturēt kuponu",
+      "loadFailed": "Neizdevās ielādēt kuponu",
+      "duplicateLabel": "Dublēt kuponu",
+      "duplicated": "Kupons dublēts",
+      "duplicateFailed": "Neizdevās dublēt"
+    },
+    "publish": {
+      "confirmMessage": "Publicēt šo kuponu? Tas būs publiski redzams.",
+      "confirmLabel": "Publicēt",
+      "failed": "Neizdevās publicēt kuponu",
+      "success": "Kupons veiksmīgi publicēts!",
+      "publishing": "Publicē...",
+      "button": "Publicēt kuponu"
+    },
+    "new": {
+      "iconLetter": "K",
+      "created": "Kupons izveidots kā melnraksts. Publicējiet to, kad esat gatavs to rādīt klientiem."
+    },
+    "edit": {
+      "iconLetter": "R",
+      "subtitle": "Atjauniniet kupona informāciju un pieejamību.",
+      "updated": "Kupons veiksmīgi atjaunināts",
+      "updateFailed": "Neizdevās atjaunināt kuponu",
+      "updateFailedRetry": "Neizdevās atjaunināt kuponu. Lūdzu, mēģiniet vēlreiz.",
+      "updating": "Atjaunina...",
+      "update": "Atjaunināt kuponu",
+      "viewPublicPage": "Skatīt publisko lapu"
+    },
+    "form": {
+      "stepOf": "Solis {current} no {total}",
+      "typeLabel": "Veids",
+      "typeAria": "Kupona veids",
+      "customersGetOff": "Klienti saņem {value} atlaidi.",
+      "customersGetCredit": "Klienti saņem {value} kredītu.",
+      "percentHint": "Ievadiet procentus, piem., 15 vai 12,5.",
+      "amountHint": "Ievadiet summu {currency}, piem., 4.50 vai 4,50, lai iegūtu {example}.",
+      "validityHint": "Kuponu var izmantot no pirmās dienas sākuma līdz pēdējās dienas beigām.",
+      "enableWeeklyDropAria": "Ieslēgt nedēļas piedāvājumu",
+      "weeklyDropDayAria": "Nedēļas piedāvājuma diena",
+      "weeklyDropTimeAria": "Nedēļas piedāvājuma sākuma laiks",
+      "headlinePlaceholder": "15% atlaide jūsu pasūtījumam",
+      "finePrintPlaceholder": "Derīgs tikai jauniem klientiem",
+      "previewFallbackHeadline": "Jūsu kupons",
+      "previewValidUntil": "Derīgs līdz {date}",
+      "errors": {
+        "discountAboveZero": "Ievadiet atlaidi, kas lielāka par 0%.",
+        "valueAboveZero": "Ievadiet vērtību, kas lielāka par 0.",
+        "chooseDates": "Izvēlieties kupona sākuma un beigu datumu.",
+        "endBeforeStart": "Beigu datumam jābūt tajā pašā dienā vai pēc sākuma datuma.",
+        "invalidValue": "Ievadiet derīgu vērtību.",
+        "valueMustBePositive": "Vērtībai jābūt lielākai par 0",
+        "totalLimitPositive": "Kopējam lietošanas ierobežojumam jābūt pozitīvam skaitlim",
+        "perUserLimitPositive": "Ierobežojumam katram lietotājam jābūt pozitīvam skaitlim"
+      },
+      "discountErrors": {
+        "negative": "Atlaide nevar būt negatīva.",
+        "invalid": "Atlaide nav derīgs skaitlis.",
+        "decimals": "Atlaidei var būt ne vairāk kā {decimals} zīmes aiz komata.",
+        "tooLarge": "Atlaide ir pārāk liela.",
+        "tooHigh": "Atlaide nevar pārsniegt 100%."
+      },
+      "valueErrors": {
+        "negative": "Vērtība nevar būt negatīva.",
+        "invalid": "Vērtība nav derīgs skaitlis.",
+        "wholeNumber": "Vērtībai jābūt veselam skaitlim.",
+        "decimals": "Vērtībai var būt ne vairāk kā {decimals} zīmes aiz komata.",
+        "tooLarge": "Vērtība ir pārāk liela."
+      }
+    },
+    "bulkImport": {
+      "back": "Atpakaļ uz kuponiem",
+      "title": "Importēt kuponus no izklājlapas",
+      "intro": "Augšupielādējiet CSV failu (līdz 500 rindām). Katrs kupons tiek izveidots kā melnraksts, tāpēc nekas netiek publicēts, kamēr to neizdarāt jūs.",
+      "columns": "Kolonnas",
+      "downloadSample": "Lejupielādēt CSV paraugu",
+      "columnRequired": "<code>{name}</code> (obligāta): {help}",
+      "columnOptional": "<code>{name}</code> (neobligāta): {help}",
+      "columnHelp": {
+        "name": "Kupona nosaukums, ko redz klienti, piem., \"Pavasara kafijas piedāvājums\".",
+        "type": "\"amount\" (summas atlaide), \"percent\" (procentuāla atlaide) vai \"credit\" (veikala kredīts).",
+        "value": "Eiro veidiem amount/credit (10 vai 10.50), procenti veidam percent (15 vai 12.5).",
+        "currency": "Trīs burtu kods, piemēram, EUR. Pēc noklusējuma – jūsu veikala valūta.",
+        "valid_from": "Pirmā kupona derīguma diena: 2026-10-01 vai 01.10.2026.",
+        "valid_to": "Pēdējā kupona derīguma diena (tas ir derīgs līdz šīs dienas beigām).",
+        "code_prefix": "Burti katra koda sākumā, piem., SPRING.",
+        "usage_limit": "Cik reižu to kopumā var izmantot. Atstājiet tukšu, ja neierobežoti."
+      },
+      "separatorHint": "Atdaliet kolonnas ar komatiem vai semikoliem. Ja izmantojat komatus, decimālās summas ielieciet pēdiņās (\"4,50\") vai izmantojiet punktu (4.50).",
+      "chooseFile": "Izvēlieties CSV failu",
+      "chooseDifferent": "Noklikšķiniet, lai izvēlētos citu failu",
+      "browse": "Noklikšķiniet, lai pārlūkotu",
+      "fixRows": "Izlabojiet šīs rindas un augšupielādējiet failu vēlreiz:",
+      "andMore": "…un vēl {count}.",
+      "readyToImport": "Gatavs importēšanai: {count, plural, zero {# kuponu} one {# kupons} other {# kuponi}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, līdz {limit} lietojumiem} other {}}",
+      "imported": "{count, plural, zero {Importēti # kuponu} one {Importēts # kupons} other {Importēti # kuponi}} kā melnraksti.",
+      "viewVouchers": "Skatīt kuponus",
+      "importing": "Importē...",
+      "importCount": "{count, plural, zero {Importēt # kuponu} one {Importēt # kuponu} other {Importēt # kuponus}}",
+      "importVouchers": "Importēt kuponus",
+      "importFailedStatus": "Imports neizdevās (kļūda {status}).",
+      "importFailed": "Imports neizdevās"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Galvenais bloks + CTA",
+          "description": "Virsraksts lapas augšdaļā ar galveno darbību."
+        },
+        "value_props": {
+          "label": "Priekšrocības",
+          "description": "Īsas priekšrocības un garantijas."
+        },
+        "featured_products": {
+          "label": "Izceltie produkti",
+          "description": "Populārākie produkti ar cenām un birkām."
+        },
+        "featured_vouchers": {
+          "label": "Izceltie kuponi",
+          "description": "Aktīvo kuponu kartītes akcijām."
+        },
+        "rental_packages": {
+          "label": "Nomas paketes",
+          "description": "Nomas komplekti un cenas pa dienām."
+        },
+        "categories": {
+          "label": "Kategoriju režģis",
+          "description": "Pārlūkošana pēc veida, lietojuma vai auditorijas."
+        },
+        "availability": {
+          "label": "Pieejamības kalendārs",
+          "description": "Pieejamība un rezervācijas laiki reāllaikā."
+        },
+        "testimonials": {
+          "label": "Atsauksmes",
+          "description": "Klientu citāti un zvaigžņu vērtējumi."
+        },
+        "gallery": {
+          "label": "Galerija",
+          "description": "Dzīvesstila attēli vai lietošanas piemēri."
+        },
+        "pricing": {
+          "label": "Cenu tabula",
+          "description": "Pārskatāmi cenu līmeņi."
+        },
+        "rental_terms": {
+          "label": "Nomas noteikumi",
+          "description": "Depozīts, apdrošināšana un atgriešanas politika."
+        },
+        "faq": {
+          "label": "BUJ",
+          "description": "Atbildes uz biežākajām šaubām."
+        },
+        "newsletter": {
+          "label": "Jaunumu abonēšana",
+          "description": "Vāciet e-pastus kampaņām."
+        },
+        "contact": {
+          "label": "Kontaktu bloks",
+          "description": "Atbalsts tērzēšanā, e-pastā vai pa tālruni."
+        },
+        "map": {
+          "label": "Atrašanās vietas karte",
+          "description": "Saņemšanas punkts vai veikala atrašanās vieta."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Akciju josla",
+          "description": "Fiksēta augšējā josla piedāvājumiem un paziņojumiem."
+        },
+        "sticky_cta": {
+          "label": "Fiksēta CTA poga",
+          "description": "Ritinot vienmēr redzama darbības poga."
+        },
+        "chat_widget": {
+          "label": "Tērzēšanas logrīks",
+          "description": "Tiešsaistes tērzēšana vai WhatsApp integrācija."
+        },
+        "trust_badges": {
+          "label": "Uzticības zīmes",
+          "description": "Maksājumu, drošības vai kvalitātes zīmes."
+        },
+        "social_proof": {
+          "label": "Sociālā pierādījuma uznirstošais logs",
+          "description": "Nesenā aktivitāte un pirkumi."
+        },
+        "countdown": {
+          "label": "Atpakaļskaitīšanas taimeris",
+          "description": "Steidzamības sajūta ierobežotiem piedāvājumiem."
+        },
+        "reviews_widget": {
+          "label": "Atsauksmju logrīks",
+          "description": "Iegult Google vai Trustpilot."
+        },
+        "language_switch": {
+          "label": "Valodas pārslēgs",
+          "description": "Ātra valodas maiņa lapā."
+        },
+        "analytics": {
+          "label": "Analītikas fragmenti",
+          "description": "Pikseļu vietas izsekošanai."
+        },
+        "cookie_banner": {
+          "label": "Sīkdatņu paziņojums",
+          "description": "VDAR piekrišanas paziņojums."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Priekšskatījums",
+      "edit": "Rediģēt",
+      "previewEmpty": "Vēl nav pievienotu sadaļu. Pārslēdzieties uz rediģēšanas režīmu, lai pievienotu sadaļas.",
+      "title": "Vizuālais redaktors",
+      "preview": "Priekšskatījums",
+      "empty": "Vēl nav sadaļu. Noklikšķiniet uz \"Pievienot sadaļu\" zemāk, lai sāktu veidot.",
+      "collapseSettings": "Sakļaut iestatījumus",
+      "expandSettings": "Izvērst iestatījumus",
+      "removeSection": "Noņemt sadaļu {label}",
+      "sectionTitle": "Sadaļas virsraksts",
+      "description": "Apraksts",
+      "descriptionPlaceholder": "Neobligāts apraksts",
+      "backgroundColor": "Fona krāsa",
+      "layoutVariant": "Izkārtojuma variants",
+      "layout": {
+        "default": "Noklusējuma",
+        "centered": "Centrēts",
+        "wide": "Plats",
+        "compact": "Kompakts"
+      },
+      "addSection": "Pievienot sadaļu",
+      "availableSections": "Pieejamās sadaļas",
+      "closeCatalog": "Aizvērt",
+      "allAdded": "Visas pieejamās sadaļas ir pievienotas.",
+      "count": "{configured, plural, zero {# sadaļas konfigurētas} one {# sadaļa konfigurēta} other {# sadaļas konfigurētas}} / {available} pieejamas pievienošanai"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Veikala lapas palaišanas kontrolsaraksts",
+        "rental_launch": "Nomas lapas palaišanas kontrolsaraksts",
+        "campaign_ops": "Iknedēļas kampaņu darbības",
+        "support_ops": "Atbalsta gatavības kontrolsaraksts"
+      },
+      "toast": {
+        "saved": "Lapu veidotājs atjaunināts.",
+        "saveFailed": "Neizdevās saglabāt lapu",
+        "vibeFailed": "Vibe aģenta kļūda",
+        "layoutGenerated": "Vibe izkārtojums ģenerēts.",
+        "generateFailed": "Neizdevās ģenerēt izkārtojumu",
+        "agentFailed": "Aģenta kļūda",
+        "planGenerated": "Procesa plāns ģenerēts.",
+        "runAgentFailed": "Neizdevās palaist aģentu"
+      },
+      "noData": "Nav pieejamu lapu veidotāja datu.",
+      "title": "Lapu veidotājs",
+      "intro": "Ātri veidojiet veikala un nomas lapas ar moduļu sadaļām un papildinājumiem.",
+      "introAi": "Ātri veidojiet veikala un nomas lapas ar moduļu sadaļām un papildinājumiem, pēc izvēles ar MI ieteikumiem.",
+      "tabs": {
+        "store": "Veikals",
+        "rental": "Noma"
+      },
+      "details": {
+        "title": "Lapas informācija",
+        "subtitle": "Virsraksts, apakšvirsraksts un izkārtojums.",
+        "save": "Saglabāt",
+        "pageTitle": "Lapas virsraksts",
+        "subtitleLabel": "Apakšvirsraksts"
+      },
+      "sections": {
+        "title": "Sadaļas",
+        "subtitle": "Velciet, lai mainītu secību, izvērsiet, lai konfigurētu, vai priekšskatiet izkārtojumu.",
+        "suggestLayout": "Ieteikt izkārtojumu",
+        "suggestionsLeft": "Atlikušie MI izkārtojuma ieteikumi: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Papildinājumi",
+        "subtitle": "Papildu logrīki un mārketinga slāņi.",
+        "enable": "Ieslēgt papildinājumu {label}",
+        "disable": "Izslēgt papildinājumu {label}"
+      },
+      "summary": {
+        "title": "Kopsavilkums reāllaikā",
+        "line": "{title} · {sections, plural, zero {# sadaļu} one {# sadaļa} other {# sadaļas}} · {addons, plural, zero {# papildinājumu} one {# papildinājums} other {# papildinājumi}}",
+        "sectionsLabel": "Sadaļas:",
+        "addonsLabel": "Papildinājumi:",
+        "none": "Nav"
+      },
+      "assistant": {
+        "title": "Palaišanas kontrolsaraksta asistents",
+        "subtitle": "Ģenerējiet rīcības plānus un darbības kontrolsarakstus.",
+        "goalLabel": "Procesa mērķis",
+        "createChecklist": "Izveidot kontrolsarakstu",
+        "checklistsLeft": "Atlikušie kontrolsaraksti: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Atlasīti {name} piedāvājumi, noma un kuponi.",
+        "shopProducts": "Iepirkties",
+        "browseRentals": "Pārlūkot nomu"
+      },
+      "valueProps": {
+        "rewardsTitle": "Atlīdzības",
+        "rewardsText": "Iebūvēti kuponu stimuli.",
+        "stockTitle": "Uzticami krājumi",
+        "stockText": "Aktuālas cenas un pieejamība.",
+        "datesTitle": "Elastīgi datumi",
+        "datesText": "Viegli plānojiet nomu."
+      },
+      "viewAll": "Skatīt visu",
+      "seeAll": "Skatīt visus",
+      "products": {
+        "title": "Izceltie produkti",
+        "empty": "Vēl nav produktu.",
+        "fallbackDescription": "Izcelts produkts"
+      },
+      "rentals": {
+        "title": "Nomas paketes",
+        "empty": "Vēl nav nomas piedāvājumu.",
+        "fallbackDescription": "Izcelts nomas piedāvājums",
+        "perDay": "{price} / dienā"
+      },
+      "categories": {
+        "title": "Pārlūkot kategorijas",
+        "popular": "Populāri",
+        "business": "Biznesam",
+        "events": "Pasākumi",
+        "seasonal": "Sezonāli",
+        "corporate": "Korporatīvi",
+        "custom": "Pielāgoti"
+      },
+      "availability": {
+        "title": "Pieejamība reāllaikā",
+        "text": "Pārbaudiet pieejamību un pieprasiet cenu piedāvājumu dažu minūšu laikā.",
+        "seeCalendar": "Skatīt kalendāru"
+      },
+      "testimonials": {
+        "title": "Ko saka klienti",
+        "smooth": "Raits process",
+        "lovedVoucher": "Kupons ļoti patika",
+        "support": "Lielisks atbalsts"
+      },
+      "gallery": {
+        "title": "Galerija"
+      },
+      "pricing": {
+        "title": "Cenas",
+        "starter": "Starter",
+        "growth": "Izaugsme",
+        "enterprise": "Uzņēmumiem",
+        "tierText": "Individuālas cenas un atbalsts"
+      },
+      "rentalTerms": {
+        "title": "Nomas noteikumi",
+        "text": "Skaidri depozīta, saņemšanas un atgriešanas noteikumi jau iepriekš."
+      },
+      "faq": {
+        "title": "BUJ",
+        "redeem": "Kā izmantot kuponu?",
+        "reschedule": "Vai varu mainīt laiku?",
+        "support": "Vai piedāvājat atbalstu?"
+      },
+      "newsletter": {
+        "title": "Esiet informēts",
+        "text": "Saņemiet jaunus piedāvājumus un nomas jaunumus savā e-pastā.",
+        "emailLabel": "E-pasta adrese",
+        "subscribe": "Abonēt"
+      },
+      "contact": {
+        "title": "Kontakti",
+        "emailUs": "Rakstiet mums uz {email}"
+      },
+      "map": {
+        "text": "Saņemšanas vieta tiks paziņota pēc rezervācijas."
+      },
+      "vouchers": {
+        "title": "Aktīvie kuponi",
+        "empty": "Nav pieejamu kuponu.",
+        "voucher": "Kupons",
+        "view": "Skatīt kuponu"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Aktīva",
+      "redeemed": "Izmantota",
+      "expired": "Beigusies",
+      "cancelled": "Atcelta"
+    },
+    "list": {
+      "metaTitle": "Dāvanu kartes",
+      "title": "Dāvanu kartes",
+      "subtitle": "Veidojiet un pārvaldiet dāvanu kartes",
+      "newGiftCard": "Jauna dāvanu karte",
+      "stats": {
+        "total": "Dāvanu kartes kopā",
+        "totalDescription": "Visas izsniegtās dāvanu kartes",
+        "active": "Aktīvās",
+        "activeDescription": "Pašlaik izmantojamas",
+        "redeemed": "Izmantotās",
+        "redeemedDescription": "Pabeigtās izmantošanas",
+        "totalValue": "Kopējā vērtība",
+        "totalValueDescription": "Izsniegto dāvanu karšu vērtība"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Vēl nav dāvanu karšu",
+      "emptyDescription": "Izveidojiet dāvanu karti ar savu zīmolu un izmantošanu ar QR kodu.",
+      "createFirst": "Izveidojiet savu pirmo dāvanu karti",
+      "searchPlaceholder": "Meklēt pēc virsraksta, koda vai ziņas",
+      "searchLabel": "Meklēt dāvanu kartes",
+      "status": "Statuss",
+      "allStatus": "Visi statusi",
+      "sortBy": "Kārtot pēc",
+      "sortDate": "Datuma (jaunākās)",
+      "sortAmount": "Summas (no lielākās)",
+      "showing": "Rāda {shown} no {total, plural, zero {# dāvanu kartēm} one {# dāvanu kartes} other {# dāvanu kartēm}}",
+      "clearFilters": "Notīrīt filtrus",
+      "noMatches": "Neviena dāvanu karte neatbilst filtriem.",
+      "defaultHeadline": "Dāvanu karte",
+      "noExpiry": "Bez termiņa",
+      "validUntil": "Derīga līdz: {date}",
+      "redeemedOn": "Izmantota: {date}",
+      "details": "Informācija",
+      "view": "Skatīt"
+    },
+    "detail": {
+      "title": "Dāvanu karte",
+      "code": "Kods {code}",
+      "publicView": "Publiskais skats",
+      "newGiftCard": "Jauna dāvanu karte",
+      "detailsTitle": "Dāvanu kartes informācija",
+      "value": "Vērtība",
+      "validFrom": "Derīga no",
+      "validTo": "Derīga līdz",
+      "noExpiry": "Bez termiņa",
+      "redeemedAt": "Izmantota",
+      "notRedeemed": "Nav izmantota",
+      "qrTitle": "QR kods darbinieku izmantošanai",
+      "qrHelp": "Darbinieki var noskenēt šo QR kodu, lai izmantotu un anulētu dāvanu karti."
+    },
+    "new": {
+      "title": "Jauna dāvanu karte",
+      "subtitle": "Pielāgojiet un izsniedziet dāvanu karti",
+      "created": "Dāvanu karte izveidota.",
+      "cancel": "Atcelt",
+      "creating": "Izveido...",
+      "submit": "Izveidot dāvanu karti",
+      "errors": {
+        "amountRequired": "Ievadiet summu, kas lielāka par 0.",
+        "endBeforeStart": "Beigu datumam jābūt tajā pašā dienā vai pēc sākuma datuma.",
+        "createFailed": "Neizdevās izveidot dāvanu karti"
+      },
+      "amountErrors": {
+        "negative": "Summa nevar būt negatīva.",
+        "invalid": "Summa nav derīgs skaitlis.",
+        "wholeNumber": "Summai jābūt veselam skaitlim.",
+        "decimals": "Summai var būt ne vairāk kā {decimals} zīmes aiz komata.",
+        "tooLarge": "Summa ir pārāk liela."
+      },
+      "priceErrors": {
+        "negative": "Pārdošanas cena nevar būt negatīva.",
+        "invalid": "Pārdošanas cena nav derīgs skaitlis.",
+        "wholeNumber": "Pārdošanas cenai jābūt veselam skaitlim.",
+        "decimals": "Pārdošanas cenai var būt ne vairāk kā {decimals} zīmes aiz komata.",
+        "tooLarge": "Pārdošanas cena ir pārāk liela."
+      },
+      "valueSection": {
+        "title": "Vērtība un derīgums",
+        "description": "Iestatiet summu, valūtu un derīguma termiņu",
+        "amount": "Summa",
+        "faceValue": "Nominālvērtība: {value}.",
+        "amountHelp": "Ievadiet summu {currency}, piem., 50 vai 49,90, lai iegūtu {example}.",
+        "currency": "Valūta",
+        "validFrom": "Derīga no",
+        "validTo": "Derīga līdz",
+        "noExpiry": "Bez derīguma termiņa"
+      },
+      "purchaseSection": {
+        "title": "Klientu pirkums",
+        "description": "Ļaujiet klientiem iegādāties šo dāvanu karti tiešsaistē",
+        "purchasable": "Pieejama iegādei klientiem",
+        "salePrice": "Pārdošanas cena (neobligāta, pēc noklusējuma – nominālvērtība)",
+        "salePricePlaceholder": "Tāda pati kā summa",
+        "customersPay": "Klienti maksā {value}.",
+        "salePriceHelp": "Atstājiet tukšu, lai pārdotu par nominālvērtību. Akcijām iestatiet citu cenu."
+      },
+      "brandingSection": {
+        "title": "Zīmols un ziņa",
+        "description": "Virsraksts, ziņa, attēli un krāsas",
+        "headline": "Virsraksts",
+        "headlinePlaceholder": "Dāvana kafijas cienītājiem",
+        "message": "Ziņa",
+        "messagePlaceholder": "Pievienojiet personīgu ziņu saņēmējam",
+        "logoUrl": "Logotipa URL",
+        "imageUrl": "Attēla URL",
+        "accentColor": "Akcenta krāsa",
+        "backgroundColor": "Fona krāsa",
+        "textColor": "Teksta krāsa",
+        "codePrefix": "Koda prefikss (neobligāts)"
+      },
+      "preview": {
+        "title": "Priekšskatījums",
+        "defaultHeadline": "Dāvanu karte",
+        "imageAlt": "Dāvanu karte",
+        "logoAlt": "Zīmola logotips",
+        "notePlaceholder": "Pievienojiet personīgu piezīmi"
+      }
+    },
+    "gifts": {
+      "title": "Dāvanu produkti",
+      "subtitle": "Pārvaldiet savus produktus Gift Hub",
+      "dashboard": "Panelis",
+      "confirmDelete": "Vai esat pārliecināts? Produkts tiks deaktivizēts.",
+      "stats": {
+        "total": "Kopā",
+        "active": "Aktīvie",
+        "views": "Skatījumi",
+        "purchases": "Pirkumi"
+      },
+      "emptyTitle": "Vēl nav dāvanu produktu",
+      "emptyDescription": "Pievienojiet savu pirmo produktu, lai tas parādītos Gift Hub plūsmā.",
+      "emptyApiHint": "Izmantojiet API <code>{endpoint}</code>, lai izveidotu produktus.",
+      "inactive": "Neaktīvs",
+      "featured": "Izcelts",
+      "views": "{count, plural, zero {# skatījumu} one {# skatījums} other {# skatījumi}}",
+      "purchases": "{count, plural, zero {# pirkumu} one {# pirkums} other {# pirkumi}}",
+      "conversionRate": "{rate}% CVR",
+      "activate": "Aktivizēt",
+      "deactivate": "Deaktivizēt",
+      "delete": "Dzēst"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Nav pieejamu datu",
+      "value": "Vērtība: <strong>{value}</strong>",
+      "dismiss": "Nerādīt",
+      "remove": "Noņemt",
+      "dialog": "Dialoglodziņš",
+      "close": "Aizvērt",
+      "loading": "Ielādē"
+    },
+    "analyticsFunnel": {
+      "empty": "Šajā periodā vēl nav aktivitātes",
+      "top": "Sākums",
+      "drop": "-{rate}% kritums"
+    },
+    "periodComparison": {
+      "title": "Periodu salīdzinājums",
+      "loading": "Ielādē...",
+      "previous": "Iepriekšējais: {value}",
+      "noData": "Nav pieejamu datu",
+      "period": {
+        "day": "Diena",
+        "week": "Nedēļa",
+        "month": "Mēnesis",
+        "quarter": "Ceturksnis",
+        "year": "Gads"
+      },
+      "metric": {
+        "revenue": "Ieņēmumi",
+        "redemptions": "Izmantošanas",
+        "purchases": "Pirkumi",
+        "referrals": "Ieteikumi",
+        "customers": "Klienti"
+      }
+    },
+    "trendChart": {
+      "noData": "Nav datu"
+    },
+    "conversionChart": {
+      "noData": "Nav pieejamu datu",
+      "previous": "iepr.: {value}"
+    },
+    "funnelChart": {
+      "empty": "Šajā periodā vēl nav aktivitātes"
+    },
+    "geoMap": {
+      "noData": "Nav pieejamu datu",
+      "value": "Vērtība: <strong>{value}</strong>",
+      "country": {
+        "GB": "Apvienotā Karaliste",
+        "IE": "Īrija",
+        "FR": "Francija",
+        "DE": "Vācija",
+        "ES": "Spānija",
+        "PT": "Portugāle",
+        "IT": "Itālija",
+        "NL": "Nīderlande",
+        "BE": "Beļģija",
+        "CH": "Šveice",
+        "AT": "Austrija",
+        "PL": "Polija",
+        "CZ": "Čehija",
+        "SE": "Zviedrija",
+        "NO": "Norvēģija",
+        "FI": "Somija",
+        "DK": "Dānija",
+        "EE": "Igaunija",
+        "LV": "Latvija",
+        "LT": "Lietuva",
+        "HU": "Ungārija",
+        "RO": "Rumānija",
+        "BG": "Bulgārija",
+        "GR": "Grieķija",
+        "HR": "Horvātija",
+        "SK": "Slovākija",
+        "SI": "Slovēnija",
+        "RS": "Serbija",
+        "UA": "Ukraina",
+        "BY": "Baltkrievija"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Gaida datus..."
+    },
+    "pieDonutChart": {
+      "noData": "Nav pieejamu datu",
+      "total": "Kopā"
+    },
+    "activityFeed": {
+      "justNow": "tikko",
+      "minutesAgo": "pirms {count} min",
+      "hoursAgo": "pirms {count} h",
+      "daysAgo": "pirms {count} d.",
+      "empty": "Vēl nav aktivitātes",
+      "loadMore": "Ielādēt vairāk",
+      "eventType": {
+        "purchase": "Pirkums",
+        "redemption": "Izmantošana",
+        "signup": "Reģistrācija",
+        "alert": "Brīdinājums"
+      }
+    },
+    "dateRange": {
+      "days7": "7 dienas",
+      "days30": "30 dienas",
+      "days90": "90 dienas",
+      "year1": "1 gads",
+      "custom": "Pielāgots"
+    },
+    "chartCard": {
+      "fullscreen": "Pilnekrāna režīms",
+      "exitFullscreen": "Iziet no pilnekrāna",
+      "retry": "Mēģināt vēlreiz"
+    },
+    "dashboardHeader": {
+      "export": "Eksportēt",
+      "exportAs": "Eksportēt kā {format}"
+    },
+    "dataTable": {
+      "empty": "Nav pieejamu datu",
+      "showing": "Rāda {from}–{to} no {total}",
+      "previousPage": "Iepriekšējā lapa",
+      "nextPage": "Nākamā lapa"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Tiešraidē",
+        "reconnecting": "Atjauno savienojumu",
+        "disconnected": "Atvienots"
+      },
+      "status": {
+        "connected": "Savienots",
+        "reconnecting": "Atjauno savienojumu",
+        "disconnected": "Atvienots"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "pret iepr. periodu"
+    },
+    "statComparison": {
+      "current": "Pašreizējais",
+      "previous": "Iepriekšējais",
+      "change": "izmaiņas"
+    },
+    "aiInsightPanel": {
+      "title": "MI ieskati",
+      "placeholder": "Uzdodiet jautājumu MI...",
+      "send": "Sūtīt"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Tiešraidē",
+        "degraded": "Traucēts",
+        "disconnected": "Bezsaistē"
+      },
+      "latency": "Aizkave: {ms} ms",
+      "lastUpdate": "Pēdējā atjaunināšana: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Paziņojumi",
+      "title": "Paziņojumi",
+      "markAllRead": "Atzīmēt visus kā lasītus",
+      "empty": "Nav paziņojumu",
+      "ariaLabelUnread": "Paziņojumi ({count} nelasīti)"
+    },
+    "premiumChartCard": {
+      "info": "Informācija",
+      "fullscreen": "Pilnekrāna režīms",
+      "exitFullscreen": "Iziet no pilnekrāna",
+      "moreOptions": "Vairāk iespēju",
+      "empty": "Šim periodam nav pieejamu datu"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "pret iepr. periodu"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "Darbojas",
+        "degraded": "Traucēts",
+        "outage": "Darbības pārtraukums"
+      }
+    },
+    "select": {
+      "placeholder": "Izvēlieties...",
+      "search": "Meklēt...",
+      "empty": "Nav atrastu opciju",
+      "removeOption": "Noņemt {label}"
+    },
+    "sidebar": {
+      "expand": "Izvērst sānjoslu",
+      "collapse": "Sakļaut sānjoslu",
+      "openMenu": "Atvērt izvēlni",
+      "closeMenu": "Aizvērt izvēlni"
+    },
+    "iconSystem": {
+      "notFound": "Ikona \"{name}\" nav atrasta",
+      "badge": "{count, plural, zero {# paziņojumu} one {# paziņojums} other {# paziņojumi}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Sānu panelis",
+      "closePanel": "Aizvērt paneli"
+    },
+    "codeBlock": {
+      "copyCode": "Kopēt kodu",
+      "copied": "Nokopēts",
+      "copy": "Kopēt"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Klienti",
+      "title": "Klienti",
+      "summary": "{count, plural, zero {# klientu} one {# klients} other {# klienti}} · kopējie ieņēmumi {revenue}",
+      "stats": {
+        "totalCustomers": "Klienti kopā",
+        "totalRevenue": "Ieņēmumi kopā",
+        "totalRedemptions": "Izmantošanas kopā"
+      },
+      "table": {
+        "customer": "Klients",
+        "email": "E-pasts",
+        "purchases": "Pirkumi",
+        "totalSpent": "Iztērēts kopā",
+        "redemptions": "Izmantošanas",
+        "lastPurchase": "Pēdējais pirkums"
+      },
+      "empty": "Vēl nav klientu",
+      "unknown": "Nezināms"
+    },
+    "qrCheckout": {
+      "title": "Tūlītējs QR norēķins",
+      "subtitle": "Ģenerējiet QR kodus tūlītējam klientu norēķinam",
+      "voucherLabel": "Piesaistīt kuponam (neobligāti)",
+      "generalOption": "Vispārējs norēķins (bez konkrēta kupona)",
+      "voucherOption": "{type} - {value} {currency} ({status})",
+      "generating": "Ģenerē...",
+      "generate": "Ģenerēt QR kodu",
+      "qrAlt": "Norēķina QR kods",
+      "scanToCheckout": "Noskenējiet, lai norēķinātos",
+      "print": "Drukāt QR kodu"
+    },
+    "redemptions": {
+      "metaTitle": "Izmantošanas",
+      "subtitle": "Skatiet un apstipriniet kuponu izmantošanas.",
+      "stats": {
+        "totalTitle": "Izmantošanas kopā",
+        "totalDescription": "Visas iesniegtās izmantošanas",
+        "pendingTitle": "Gaida",
+        "pendingDescription": "Gaida apstiprinājumu",
+        "confirmedTitle": "Apstiprinātas",
+        "confirmedDescription": "Apstiprinātās izmantošanas",
+        "discountsTitle": "Piešķirtās atlaides",
+        "discountsDescription": "Apstiprinātās atlaides"
+      },
+      "empty": {
+        "title": "Vēl nav izmantošanu",
+        "description": "Izmantošanas parādīsies šeit, kad klienti izmantos kuponus."
+      },
+      "voucherFallback": "Kupons",
+      "card": {
+        "order": "Pasūtījums {amount}",
+        "discount": "Atlaide: {amount}",
+        "discountReferred": "Atlaide: {amount} - Ieteica {name}",
+        "confirmed": "Apstiprināts",
+        "pending": "Gaida",
+        "method": "Metode: {method}",
+        "methods": {
+          "online": "Tiešsaistē",
+          "in_store": "Veikalā"
+        },
+        "orderReference": "Pasūtījums: {reference}",
+        "notAvailable": "Nav",
+        "location": "Vieta: {location}",
+        "date": "Datums: {date}"
+      },
+      "confirm": {
+        "prompt": "Apstiprināt šo izmantošanu? Tādējādi ieteicējam tiks atbloķēts kredīts.",
+        "confirmLabel": "Apstiprināt",
+        "success": "Izmantošana apstiprināta. Ieteicējam atbloķēts kredīts.",
+        "error": "Neizdevās apstiprināt izmantošanu. Lūdzu, mēģiniet vēlreiz.",
+        "confirming": "Apstiprina...",
+        "button": "Apstiprināt izmantošanu"
+      },
+      "export": {
+        "success": "Izmantošanas veiksmīgi eksportētas!",
+        "error": "Neizdevās eksportēt izmantošanas",
+        "exporting": "Eksportē...",
+        "button": "Eksportēt CSV"
+      }
+    },
+    "reviews": {
+      "title": "Atsauksmes",
+      "subtitle": "Sekojiet klientu atsauksmēm un atbildiet uz tām",
+      "filters": "Filtri",
+      "reviewCount": "{count, plural, zero {# atsauksmju} one {# atsauksme} other {# atsauksmes}}",
+      "ratingDistribution": "Vērtējumu sadalījums",
+      "responseRate": "Atbilžu līmenis",
+      "replied": "Atbildēts",
+      "pending": "Gaida",
+      "responseRatePercent": "{percent}% atbilžu līmenis",
+      "filter": {
+        "rating": "Vērtējums",
+        "allRatings": "Visi vērtējumi",
+        "stars": "{count, plural, zero {# zvaigznes} one {# zvaigzne} other {# zvaigznes}}",
+        "replyStatus": "Atbildes statuss",
+        "all": "Visas",
+        "needsReply": "Jāatbild",
+        "replied": "Atbildēts",
+        "clear": "Notīrīt"
+      },
+      "loading": "Ielādē atsauksmes...",
+      "empty": "Atsauksmes nav atrastas.",
+      "anonymous": "Anonīms",
+      "verified": "Verificēts",
+      "campaign": "Kampaņa: {name}",
+      "voucher": "Kupons: {code}",
+      "foundHelpful": "Noderīga {count} lietotājiem",
+      "yourReply": "Jūsu atbilde",
+      "replyPlaceholder": "Uzrakstiet savu atbildi...",
+      "posting": "Publicē...",
+      "postReply": "Publicēt atbildi",
+      "cancel": "Atcelt",
+      "reply": "Atbildēt",
+      "showing": "Rāda {from}–{to} no {total}",
+      "pageOf": "Lapa {page} no {totalPages}",
+      "previousPage": "Iepriekšējā lapa",
+      "nextPage": "Nākamā lapa",
+      "loadFailed": "Neizdevās ielādēt atsauksmes",
+      "replyFailed": "Neizdevās atbildēt",
+      "replyPosted": "Atbilde publicēta"
+    },
+    "scanner": {
+      "title": "Skeneris",
+      "subtitle": "Skenējiet kuponus, dāvanu kartes un biļetes",
+      "manual": "Manuāli",
+      "camera": "Kamera",
+      "scanning": "Skenē...",
+      "cameraDenied": "Piekļuve kamerai tika liegta. Atļaujiet piekļuvi kamerai pārlūkprogrammas iestatījumos vai ievadiet kodu zemāk.",
+      "cameraUnavailable": "Kamera nav pieejama. Tā vietā ievadiet kodu zemāk.",
+      "pointAtCode": "Pavērsiet kameru pret QR kodu, lai to automātiski noskenētu",
+      "enterCode": "Ievadiet kodu",
+      "codePlaceholder": "Kupona kods (piem., AUD-CMUI0TG1), kupona saite, biļetes vai dāvanu kartes kods",
+      "codeAriaLabel": "Skenējamais kods",
+      "scan": "Skenēt",
+      "found": {
+        "voucher": "Kupons atrasts",
+        "gift_card": "Dāvanu karte atrasta",
+        "ticket": "Biļete atrasta"
+      },
+      "info": {
+        "ticketNumber": "Biļetes Nr.",
+        "event": "Pasākums",
+        "type": "Veids",
+        "standard": "Standarta",
+        "attendee": "Apmeklētājs",
+        "code": "Kods",
+        "amount": "Summa",
+        "message": "Ziņa",
+        "voucher": "Kupons",
+        "campaign": "Kampaņa",
+        "none": "Nav",
+        "value": "Vērtība",
+        "validUntil": "Derīgs līdz"
+      },
+      "redeem": "Izmantot",
+      "redeeming": "Izmanto...",
+      "cannotRedeem": "Šo vienumu nevar izmantot (statuss: {status})",
+      "redeemed": {
+        "voucher": "Kupons veiksmīgi izmantots!",
+        "gift_card": "Dāvanu karte veiksmīgi izmantota!",
+        "ticket": "Biļete veiksmīgi izmantota!"
+      },
+      "errors": {
+        "enterCode": "Lūdzu, ievadiet kodu",
+        "notFound": "Nav atrasts",
+        "scanFailed": "Skenēšana neizdevās",
+        "redeemFailed": "Izmantošana neizdevās"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktīva",
+          "redeemed": "izmantota",
+          "expired": "beigusies",
+          "cancelled": "atcelta"
+        },
+        "ticket": {
+          "available": "pieejama",
+          "sold": "pārdota",
+          "used": "izmantota",
+          "cancelled": "atcelta",
+          "refunded": "atmaksāta"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Cena nevar būt negatīva.",
+      "invalid": "Cena nav derīgs skaitlis.",
+      "wholeNumber": "Cenai jābūt veselam skaitlim.",
+      "decimals": "Cenai var būt ne vairāk kā {decimals} zīmes aiz komata.",
+      "tooLarge": "Cena ir pārāk liela."
+    },
+    "appointments": {
+      "title": "Pieraksti",
+      "subtitle": "Pārvaldiet rezervācijas un pieejamību",
+      "createSlot": "Izveidot laiku",
+      "form": {
+        "serviceName": "Pakalpojuma nosaukums",
+        "price": "Cena ({currency}, bezmaksas gadījumā atstājiet tukšu)",
+        "startTime": "Sākuma laiks",
+        "endTime": "Beigu laiks",
+        "notes": "Piezīmes",
+        "creating": "Izveido…",
+        "submit": "Izveidot pieejamo laiku"
+      },
+      "status": {
+        "all": "Visi",
+        "pending": "Gaida",
+        "confirmed": "Apstiprināts",
+        "cancelled": "Atcelts",
+        "completed": "Pabeigts"
+      },
+      "loading": "Ielādē...",
+      "empty": "Pieraksti nav atrasti",
+      "bookedBy": "Rezervēja: {name}",
+      "confirm": "Apstiprināt",
+      "confirmAria": "Apstiprināt pierakstu",
+      "cancel": "Atcelt",
+      "cancelAria": "Atcelt pierakstu",
+      "errors": {
+        "endBeforeStart": "Beigu laikam jābūt pēc sākuma laika.",
+        "createFailed": "Neizdevās izveidot pieejamo laiku. Lūdzu, mēģiniet vēlreiz.",
+        "network": "Neizdevās sazināties ar serveri. Pārbaudiet savienojumu un mēģiniet vēlreiz.",
+        "updateFailed": "Neizdevās atjaunināt pierakstu (kļūda {status})."
+      }
+    },
+    "inventory": {
+      "title": "Krājumi",
+      "subtitle": "Sekojiet krājumu līmenim un pārvaldiet kuponu pieejamību",
+      "refresh": "Atsvaidzināt",
+      "summary": {
+        "totalItems": "Vienības kopā",
+        "lowStock": "Mazs atlikums",
+        "outOfStock": "Nav krājumā"
+      },
+      "alerts": {
+        "title": "Brīdinājumi par mazu atlikumu ({count})",
+        "threshold": "{stock} / slieksnis {threshold}"
+      },
+      "loading": "Ielādē krājumus...",
+      "empty": "Kuponi nav atrasti",
+      "typeVoucher": "Kupons: {type}",
+      "stockStatus": {
+        "unlimited": "Neierobežots",
+        "outOfStock": "Nav krājumā",
+        "lowStock": "Mazs atlikums",
+        "inStock": "Ir krājumā"
+      },
+      "stock": "Krājums: {stock}",
+      "purchased": "Iegādāti: {count}",
+      "redeemed": "Izmantoti: {count}",
+      "validUntil": "Derīgs līdz {date}",
+      "edit": {
+        "button": "Rediģēt krājumu",
+        "stockQuantity": "Krājuma daudzums",
+        "threshold": "Maza atlikuma slieksnis",
+        "save": "Saglabāt",
+        "saving": "Saglabā...",
+        "cancel": "Atcelt"
+      },
+      "stockUpdated": "Krājums atjaunināts",
+      "errors": {
+        "loadFailed": "Neizdevās ielādēt krājumus",
+        "updateFailed": "Neizdevās atjaunināt krājumu"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "MI ieteikumi šajā platformā vēl nav iestatīti, tāpēc automātiskā izkārtojuma un kontrolsarakstu rīki ir paslēpti. Lapas joprojām varat veidot un rediģēt manuāli."
+    },
+    "pricing": {
+      "title": "Dinamiskā cenu noteikšana",
+      "newRule": "Jauns noteikums",
+      "ruleTypes": {
+        "demand": {
+          "label": "Pēc pieprasījuma",
+          "desc": "Pielāgo cenu pēc skatījumu un pirkumu attiecības"
+        },
+        "timeOfDay": {
+          "label": "Diennakts laiks",
+          "desc": "Atšķirīgas cenas maksimumstundās un ārpus tām"
+        },
+        "inventory": {
+          "label": "Krājumi",
+          "desc": "Cena mainās atkarībā no atlikušā krājuma"
+        },
+        "surge": {
+          "label": "Piemaksa",
+          "desc": "Uzcenojums īpašiem pasākumiem un svētkiem"
+        },
+        "loyalty": {
+          "label": "Lojalitāte",
+          "desc": "Atlaides pastāvīgajiem klientiem"
+        }
+      },
+      "form": {
+        "title": "Izveidot cenu noteikumu",
+        "ruleType": "Noteikuma veids",
+        "priority": "Prioritāte",
+        "priorityPlaceholder": "Augstāka = tiek piemērota pirmā",
+        "config": "Konfigurācija (JSON)",
+        "submit": "Izveidot noteikumu",
+        "cancel": "Atcelt"
+      },
+      "loading": "Ielādē noteikumus...",
+      "empty": "Vēl nav cenu noteikumu. Izveidojiet noteikumu, lai ieslēgtu dinamisko cenu noteikšanu.",
+      "table": {
+        "type": "Veids",
+        "priority": "Prioritāte",
+        "config": "Konfigurācija",
+        "status": "Statuss",
+        "actions": "Darbības"
+      },
+      "active": "Aktīvs",
+      "inactive": "Neaktīvs",
+      "deleteAria": "Dzēst cenu noteikumu",
+      "deleteConfirm": "Dzēst šo cenu noteikumu?",
+      "delete": "Dzēst",
+      "errors": {
+        "invalidJson": "Konfigurācijas laukam jābūt derīgam JSON."
+      },
+      "preview": {
+        "title": "Cenas priekšskatījums",
+        "description": "Ievadiet kupona ID, lai redzētu, kā aktīvie noteikumi ietekmētu tā cenu.",
+        "voucherId": "Kupona ID",
+        "voucherIdPlaceholder": "Ievadiet kupona ID",
+        "calculate": "Aprēķināt",
+        "error": "Neizdevās aprēķināt cenu",
+        "basePrice": "Bāzes cena",
+        "finalPrice": "Galīgā cena"
+      }
+    },
+    "rentals": {
+      "title": "Nomas rezervācijas",
+      "subtitle": "Pārvaldiet nomas pieprasījumus un atgriešanu",
+      "status": {
+        "all": "Visas",
+        "pending": "Gaida",
+        "approved": "Apstiprināta",
+        "rejected": "Noraidīta",
+        "paid": "Apmaksāta",
+        "active": "Aktīva",
+        "returned": "Atgriezta",
+        "cancelled": "Atcelta"
+      },
+      "empty": "Nomas rezervācijas nav atrastas.",
+      "dates": "{start} - {end} ({days, plural, zero {# dienas} one {# diena} other {# dienas}})",
+      "total": "Kopā: <strong>{total}</strong> ({rate}/dienā)",
+      "note": "Piezīme: {note}",
+      "rejectedReason": "Noraidīta: {reason}",
+      "bookedMeta": "Rezervēta: {date} | Lietotājs: {user}...",
+      "approve": "Apstiprināt",
+      "reasonPlaceholder": "Iemesls (neobligāts)",
+      "confirm": "Apstiprināt",
+      "cancel": "Atcelt",
+      "reject": "Noraidīt",
+      "markReturned": "Atzīmēt kā atgrieztu"
+    },
+    "subscriptionBoxes": {
+      "title": "Abonēšanas kastes",
+      "subtitle": "Pārvaldiet regulārās kuponu kastes",
+      "newBox": "+ Jauna kaste",
+      "cancel": "Atcelt",
+      "form": {
+        "name": "Nosaukums",
+        "description": "Apraksts",
+        "price": "Cena ({currency})",
+        "currency": "Valūta",
+        "interval": "Intervāls",
+        "maxItems": "Maks. vienību skaits",
+        "creating": "Izveido...",
+        "submit": "Izveidot kasti"
+      },
+      "interval": {
+        "weekly": "Katru nedēļu",
+        "monthly": "Katru mēnesi",
+        "quarterly": "Katru ceturksni"
+      },
+      "created": "Abonēšanas kaste izveidota.",
+      "empty": "Vēl nav abonēšanas kastu. Izveidojiet savu pirmo kasti.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, zero {# abonentu} one {# abonents} other {# abonenti}}",
+      "items": "{count, plural, zero {# vienību} one {# vienība} other {# vienības}}",
+      "errors": {
+        "priceAboveZero": "Ievadiet cenu, kas lielāka par 0.",
+        "createFailed": "Neizdevās izveidot abonēšanas kasti (kļūda {status}).",
+        "network": "Neizdevās izveidot abonēšanas kasti. Pārbaudiet savienojumu un mēģiniet vēlreiz."
+      },
+      "intervalUnit": {
+        "weekly": "nedēļā",
+        "monthly": "mēnesī",
+        "quarterly": "ceturksnī"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Tīmekļa vietne",
+      "supportEmail": "Atbalsta e-pasts",
+      "logoUrl": "Logotipa URL",
+      "primaryColor": "Pamatkrāsa",
+      "secondaryColor": "Papildkrāsa",
+      "backgroundColor": "Fona krāsa",
+      "primaryColorHex": "Pamatkrāsas hex vērtība",
+      "secondaryColorHex": "Papildkrāsas hex vērtība",
+      "backgroundColorHex": "Fona krāsas hex vērtība",
+      "saving": "Saglabā..."
+    },
+    "page": {
+      "metaTitle": "Tirgotāja iestatījumi",
+      "infoTitle": "Tirgotāja informācija",
+      "infoSubtitle": "Tirgotāja pamatinformācija",
+      "name": "Nosaukums",
+      "slug": "Slug",
+      "country": "Valsts",
+      "defaultCurrency": "Noklusējuma valūta",
+      "website": "Tīmekļa vietne",
+      "supportEmail": "Atbalsta e-pasts",
+      "completeOnboarding": "Pabeigt iestatīšanu",
+      "billingTitle": "Norēķini",
+      "billingSubtitle": "14 dienu bezmaksas izmēģinājums, pēc tam plāni no 19 € mēnesī. 5% darījumu komisija no kuponu pārdošanas.",
+      "status": "Statuss",
+      "trialStatus": "Bezmaksas izmēģinājums — {days, plural, zero {atlikušas # dienas} one {atlikusi # diena} other {atlikušas # dienas}}",
+      "statusActive": "Aktīvs",
+      "statusInactive": "Neaktīvs",
+      "currentPlan": "Pašreizējais plāns",
+      "trialEnds": "Izmēģinājums beidzas",
+      "periodEnds": "Pašreizējais periods beidzas",
+      "manage": "Pārvaldīt",
+      "payoutsTitle": "Izmaksas",
+      "payoutsEnabled": "Stripe konts pievienots un aktivizēts",
+      "payoutsInProgress": "Iestatīšana procesā — pabeidziet to, lai ieslēgtu izmaksas",
+      "payoutsNotConnected": "Pievienojiet Stripe, lai saņemtu izmaksas par kuponu pārdošanu",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "Saņemiet paziņojumus par notikumiem reāllaikā caur HTTP",
+      "notificationsTitle": "Paziņojumi",
+      "notificationsSubtitle": "Izvēlieties, kuras e-pasta kategorijas saņemat kā komandas dalībnieks."
+    },
+    "brandProfile": {
+      "title": "Zīmola profils",
+      "subtitle": "Pielāgojiet zīmola krāsas, logotipu un kontaktinformāciju.",
+      "updated": "Zīmola profils veiksmīgi atjaunināts!",
+      "updateFailed": "Neizdevās atjaunināt zīmola profilu",
+      "save": "Saglabāt izmaiņas"
+    },
+    "domains": {
+      "title": "Pielāgoti domēni",
+      "subtitle": "Pievienojiet savu domēnu un verificējiet to maršrutēšanai.",
+      "inputLabel": "Pielāgots domēns",
+      "adding": "Pievieno...",
+      "add": "Pievienot domēnu",
+      "empty": "Nav iestatītu domēnu.",
+      "statusLine": "Statuss: {status}",
+      "statusValue": {
+        "pending": "gaida",
+        "verified": "verificēts"
+      },
+      "verify": "Verificēt",
+      "remove": "Noņemt",
+      "addedTitle": "Domēns pievienots",
+      "addedDescription": "Pirms datplūsmas pārslēgšanas verificējiet DNS.",
+      "addErrorTitle": "Domēna kļūda",
+      "addErrorDescription": "Neizdevās pievienot domēnu.",
+      "verifiedTitle": "Domēns verificēts",
+      "verifiedDescription": "Maršrutēšana tagad ir aktīva.",
+      "verifyErrorTitle": "Verifikācijas kļūda",
+      "verifyErrorDescription": "Neizdevās verificēt domēnu.",
+      "removedTitle": "Domēns noņemts",
+      "removeErrorTitle": "Noņemšanas kļūda",
+      "removeErrorDescription": "Neizdevās noņemt domēnu."
+    },
+    "notifications": {
+      "metaTitle": "Paziņojumu iestatījumi",
+      "title": "Paziņojumu iestatījumi",
+      "intro": "Nosakiet, kuras e-pasta kategorijas saņemat kā <name>{merchantName}</name> dalībnieks. Iestatījumi ir personīgi — katrs komandas dalībnieks pārvalda savus.",
+      "required": "Obligāts",
+      "toggle": "Pārslēgt: {label}",
+      "unsaved": "Nesaglabātas izmaiņas",
+      "allSaved": "Visas izmaiņas saglabātas",
+      "saving": "Saglabā…",
+      "save": "Saglabāt iestatījumus",
+      "savedTitle": "Iestatījumi saglabāti",
+      "saveFailedTitle": "Saglabāšana neizdevās",
+      "saveFailedDescription": "Neizdevās atjaunināt jūsu paziņojumu iestatījumus.",
+      "category": {
+        "orders": {
+          "label": "Jauni pasūtījumi un izmantošanas",
+          "description": "E-pasts, kad kupons tiek iegādāts, izmantots vai uzdāvināts."
+        },
+        "payouts": {
+          "label": "Izmaksas",
+          "description": "Stripe izmaksu saņemšana, kļūmes un aizturēšana."
+        },
+        "fraud_alerts": {
+          "label": "Krāpšanas un drošības brīdinājumi",
+          "description": "Neparasti izmantošanas modeļi, maksājumu apstrīdējumi, aizdomīgas komandas pieteikšanās. Nevar izslēgt."
+        },
+        "campaign_updates": {
+          "label": "Kampaņu dzīves cikls",
+          "description": "Kampaņa publicēta, beidzas pēc 7 dienām, beigusies."
+        },
+        "weekly_digest": {
+          "label": "Nedēļas rezultātu kopsavilkums",
+          "description": "Pirmdienas pārskats par iepriekšējās nedēļas ieņēmumiem, izmantošanām un populārākajiem kuponiem."
+        },
+        "product_updates": {
+          "label": "GiftHub produktu jaunumi",
+          "description": "Jaunas funkcijas, attīstības plāns, pa kādam padomam. Ne biežāk kā reizi mēnesī."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Tirgotāja izmaksas",
+      "title": "Izmaksas",
+      "intro": "Pievienojiet Stripe kontu, lai ieņēmumi no kuponu pārdošanas tiktu izmaksāti tieši uz jūsu bankas kontu. Mēs ieturam 5% platformas komisiju; pārējais norēķina brīdī automātiski tiek pārskaitīts uz jūsu pievienoto kontu.",
+      "stripeAccount": "Stripe konts",
+      "capabilityState": "Iespēju statuss",
+      "accountStatus": {
+        "pending": "gaida",
+        "restricted": "ierobežots",
+        "enabled": "aktivizēts",
+        "disabled": "deaktivizēts"
+      },
+      "backToSettings": "Atpakaļ uz iestatījumiem",
+      "howTitle": "Kā notiek izmaksas",
+      "how1": "Klienti maksā platformas norēķinā. Mēs iekasējam visu summu un glabājam to Stripe pusē.",
+      "how2": "Kad maksājums ir veiksmīgs, Stripe nosūta pārdošanas cenu, atskaitot mūsu 5% komisiju, tieši uz jūsu izmaksu kontu.",
+      "how3": "Pēc tam Stripe pārskaita šo naudu uz jūsu bankas kontu pēc grafika, ko izvēlaties Stripe izmaksu iestatījumos (parasti katru dienu, pāris dienas pēc pārdošanas).",
+      "how4": "Maksājumu apstrīdējumi un atmaksas tiek ieskaitīti nākamajā izmaksā; ja konstatēsim krāpšanu, administratoru komanda var manuāli aizturēt jūsu atlikumu.",
+      "badge": {
+        "enabled": {
+          "label": "Izmaksas ieslēgtas",
+          "description": "Stripe pārskaita līdzekļus no kuponu pārdošanas uz jūsu bankas kontu saskaņā ar izmaksu grafiku."
+        },
+        "restricted": {
+          "label": "Nepieciešama papildu informācija",
+          "description": "Stripe ir nepieciešama papildu informācija, pirms var ieslēgt izmaksas. Atveriet zemāk esošo iestatīšanas saiti, lai turpinātu."
+        },
+        "disabled": {
+          "label": "Izmaksas izslēgtas",
+          "description": "Stripe ir izslēdzis izmaksas šim kontam. Atveriet Stripe paneli, lai izpildītu neizpildītās prasības."
+        },
+        "notConnected": {
+          "label": "Nav pievienots",
+          "description": "Jūs vēl neesat pievienojis Stripe kontu. Izmaksas tiek aizturētas, līdz iestatīšana ir pabeigta — tikmēr kuponu pārdošana notiek, bet līdzekļi paliek platformas atlikumā."
+        }
+      },
+      "actions": {
+        "startFailed": "Neizdevās sākt Stripe iestatīšanu",
+        "startNetworkError": "Tīkla kļūda, sākot iestatīšanu",
+        "dashboardFailed": "Neizdevās atvērt Stripe paneli",
+        "dashboardNetworkError": "Tīkla kļūda, atverot paneli",
+        "disconnectConfirm": "Atvienot šo Stripe kontu? Izmaksas tiks apturētas, līdz to atkal pievienosiet.",
+        "disconnected": "Stripe konts atvienots",
+        "disconnectFailed": "Neizdevās atvienot",
+        "disconnect": "Atvienot",
+        "setUp": "Iestatīt izmaksas ar Stripe",
+        "openDashboard": "Atvērt Stripe paneli",
+        "continueOnboarding": "Turpināt iestatīšanu"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Neizdevās ielādēt tirgotāja datus.",
+      "retry": "Mēģināt vēlreiz",
+      "loading": "Ielādē...",
+      "title": "Pabeidziet savu profilu",
+      "subtitle": "Iestatiet sava tirgotāja zīmola profilu.",
+      "basicInfo": "Pamatinformācija",
+      "merchantName": "Tirgotāja nosaukums *",
+      "brandTitle": "Zīmola profils",
+      "brandSubtitle": "Pielāgojiet zīmola krāsas un logotipu.",
+      "updateFailed": "Neizdevās atjaunināt tirgotāju",
+      "submit": "Pabeigt iestatīšanu",
+      "skip": "Pagaidām izlaist"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Audita žurnāls",
+      "subtitle": "Sekojiet visām darbībām, kas veiktas jūsu tirgotāja kontā",
+      "filters": "Filtri",
+      "action": "Darbība",
+      "allActions": "Visas darbības",
+      "fromDate": "No datuma",
+      "toDate": "Līdz datumam",
+      "apply": "Lietot",
+      "clear": "Notīrīt",
+      "loading": "Ielādē audita žurnālu...",
+      "loadFailed": "Neizdevās ielādēt audita žurnālu",
+      "empty": "Audita žurnāla ieraksti nav atrasti.",
+      "columns": {
+        "timestamp": "Laiks",
+        "actor": "Izpildītājs",
+        "action": "Darbība",
+        "resource": "Resurss",
+        "details": "Detaļas"
+      },
+      "unknownActor": "Nezināms",
+      "showing": "Rāda {from}–{to} no {total}",
+      "pageOf": "Lapa {page} no {totalPages}",
+      "previousPage": "Iepriekšējā lapa",
+      "nextPage": "Nākamā lapa",
+      "actions": {
+        "voucherCreated": "Kupons izveidots",
+        "voucherUpdated": "Kupons atjaunināts",
+        "voucherPublished": "Kupons publicēts",
+        "vouchersGenerated": "Kuponi ģenerēti",
+        "campaignCreated": "Kampaņa izveidota",
+        "campaignUpdated": "Kampaņa atjaunināta",
+        "memberInvited": "Komandas dalībnieks uzaicināts",
+        "memberRemoved": "Komandas dalībnieks noņemts",
+        "memberRoleChanged": "Komandas dalībnieka loma mainīta",
+        "apiKeyCreated": "API atslēga izveidota",
+        "apiKeyRevoked": "API atslēga atsaukta",
+        "apiKeyUpdated": "API atslēga atjaunināta",
+        "eventCreated": "Pasākums izveidots",
+        "eventUpdated": "Pasākums atjaunināts",
+        "eventPublished": "Pasākums publicēts",
+        "merchantUpdated": "Tirgotājs atjaunināts",
+        "reviewReplied": "Atbildēts uz atsauksmi",
+        "settingsUpdate": "Iestatījumu atjaunināšana",
+        "settingsView": "Iestatījumu skatīšana",
+        "ticketRedeemed": "Biļete izmantota"
+      },
+      "resources": {
+        "voucher": "Kupons",
+        "campaign": "Kampaņa",
+        "giftCard": "Dāvanu karte",
+        "event": "Pasākums",
+        "member": "Dalībnieks",
+        "teamMember": "Komandas dalībnieks",
+        "apiKey": "API atslēga",
+        "webhook": "Webhook",
+        "merchant": "Tirgotājs",
+        "user": "Lietotājs",
+        "review": "Atsauksme"
+      }
+    },
+    "roles": {
+      "admin": "Administrators",
+      "adminDescription": "Pilna piekļuve — kuponu, kampaņu, dalībnieku un iestatījumu pārvaldība",
+      "staff": "Darbinieks",
+      "staffDescription": "Operatīvā piekļuve — izmantošanu apstiprināšana un datu skatīšana",
+      "optionWithDescription": "{label} — {description}"
+    },
+    "members": {
+      "title": "Komandas dalībnieki",
+      "subtitle": "Pārvaldiet savu komandu un tās piekļuves līmeņus",
+      "inviteMember": "Uzaicināt dalībnieku",
+      "inviteTitle": "Uzaicināt komandas dalībnieku",
+      "emailAddress": "E-pasta adrese",
+      "emailPlaceholder": "kolega@uznemums.lv",
+      "emailHint": "Lietotājam jau jābūt kontam.",
+      "role": "Loma",
+      "inviting": "Uzaicina...",
+      "sendInvitation": "Sūtīt ielūgumu",
+      "cancel": "Atcelt",
+      "save": "Saglabāt",
+      "loading": "Ielādē komandas dalībniekus...",
+      "loadFailed": "Neizdevās ielādēt komandas dalībniekus",
+      "empty": "Vēl nav komandas dalībnieku. Uzaiciniet pirmo dalībnieku augstāk.",
+      "columns": {
+        "member": "Dalībnieks",
+        "role": "Loma",
+        "joined": "Pievienojās",
+        "actions": "Darbības"
+      },
+      "unnamed": "Bez vārda",
+      "memberRole": "Dalībnieka loma",
+      "changeRole": "Mainīt lomu",
+      "removeMember": "Noņemt dalībnieku",
+      "inviteFailed": "Neizdevās uzaicināt dalībnieku",
+      "invited": "Dalībnieks veiksmīgi uzaicināts",
+      "updateRoleFailed": "Neizdevās atjaunināt lomu",
+      "roleUpdated": "Loma atjaunināta",
+      "removeConfirm": "Noņemt {name} no komandas?",
+      "remove": "Noņemt",
+      "removeFailed": "Neizdevās noņemt dalībnieku",
+      "removed": "Dalībnieks noņemts"
+    },
+    "inviteForm": {
+      "title": "Uzaicināt komandas dalībnieku",
+      "subtitle": "Pievienojiet komandas dalībnieku pēc e-pasta adreses.",
+      "email": "E-pasts",
+      "emailPlaceholder": "dalibnieks@piemers.lv",
+      "emailHint": "Lietotājam jābūt kontam. Ja tāda nav, vispirms jāreģistrējas.",
+      "role": "Loma",
+      "roleHint": "Administratori var pārvaldīt kuponus, kampaņas un komandas dalībniekus. Darbinieki var apstiprināt izmantošanas.",
+      "inviting": "Uzaicina...",
+      "submit": "Uzaicināt dalībnieku",
+      "redirectingToBilling": "{message} Novirza uz norēķiniem..."
+    },
+    "referrals": {
+      "title": "Ieteikumu analītika",
+      "subtitle": "Sekojiet ieteikumu rezultātiem un atlīdzībām.",
+      "stats": {
+        "total": "Ieteikumi kopā",
+        "totalHint": "Visi izsekotie ieteikumi",
+        "opened": "Atvērti",
+        "openedHint": "Skatīti vai izmantoti",
+        "redeemed": "Izmantoti",
+        "redeemedHint": "Konvertētie ieteikumi",
+        "conversionRate": "Konversijas līmenis",
+        "conversionRateHint": "Izmantoti / kopā"
+      },
+      "statusBreakdown": "Statusu sadalījums",
+      "creditsIssued": "Piešķirtie kredīti: {amount}",
+      "noActivity": "Vēl nav ieteikumu aktivitātes.",
+      "topReferrers": "Labākie ieteicēji",
+      "topReferrersHint": "Lietotāji ar visvairāk ieteikumiem.",
+      "noReferrals": "Vēl nav ieteikumu.",
+      "unknownUser": "Nezināms lietotājs",
+      "referralCount": "{count, plural, zero {# ieteikumu} one {# ieteikums} other {# ieteikumi}}",
+      "recent": "Nesenie ieteikumi",
+      "recentHint": "Jaunākie klientu ieteikumi.",
+      "noRecent": "Nav nesenu ieteikumu.",
+      "voucherFallback": "Kupons",
+      "status": {
+        "created": "Izveidots",
+        "opened": "Atvērts",
+        "redeemed": "Izmantots",
+        "expired": "Beidzies",
+        "blocked": "Bloķēts"
+      }
+    },
+    "emailCampaigns": {
+      "title": "E-pasta kampaņas",
+      "newCampaign": "Jauna kampaņa",
+      "notConfigured": "E-pasta sūtīšana šajā platformā vēl nav iestatīta. Kampaņas varat veidot un priekšskatīt, taču tās nevarēs nosūtīt, kamēr nebūs pievienots e-pasta pakalpojumu sniedzējs.",
+      "notConfiguredShort": "E-pasta sūtīšana šajā platformā vēl nav iestatīta",
+      "createTitle": "Izveidot kampaņu",
+      "campaignName": "Kampaņas nosaukums",
+      "campaignNamePlaceholder": "Vasaras izpārdošanas jaunumi",
+      "subjectLine": "Temats",
+      "subjectPlaceholder": "Nepalaidiet garām mūsu vasaras piedāvājumus!",
+      "recipients": "Saņēmēji",
+      "recipientFilter": {
+        "all": "Visi klienti",
+        "redeemed30d": "Izmantojuši pēdējo 30 dienu laikā",
+        "inactive": "Neaktīvie klienti"
+      },
+      "schedule": "Grafiks (neobligāts)",
+      "emailSections": "E-pasta sadaļas",
+      "sectionTypes": {
+        "header": "Galvene",
+        "text": "Teksts",
+        "image": "Attēls",
+        "button": "Poga",
+        "divider": "Atdalītājs",
+        "voucherCard": "Kupons"
+      },
+      "creating": "Izveido...",
+      "scheduleCampaign": "Ieplānot kampaņu",
+      "saveDraft": "Saglabāt kā melnrakstu",
+      "preview": "Priekšskatījums",
+      "editor": {
+        "moveUp": "Pārvietot uz augšu",
+        "moveDown": "Pārvietot uz leju",
+        "removeSection": "Noņemt sadaļu",
+        "title": "Virsraksts",
+        "subtitle": "Apakšvirsraksts (neobligāts)",
+        "textContent": "Ievadiet tekstu...",
+        "imageUrl": "Attēla URL",
+        "altText": "Alternatīvais teksts",
+        "buttonLabel": "Pogas teksts",
+        "buttonUrl": "Pogas URL",
+        "dividerHint": "Horizontāla atdalītājlīnija",
+        "voucherTitle": "Kupona nosaukums",
+        "voucherValue": "Vērtība (piem., -20%)",
+        "voucherCode": "Kods (piem., SAVE20)",
+        "voucherExpiry": "Derīgs līdz (piem., 31.12.2026.)"
+      },
+      "previewContent": {
+        "headerTitle": "Galvenes virsraksts",
+        "textContent": "Teksts...",
+        "imagePlaceholder": "Attēla vieta",
+        "button": "Poga",
+        "voucher": "Kupons",
+        "validUntil": "Derīgs līdz {date}"
+      },
+      "loading": "Ielādē...",
+      "empty": "Vēl nav e-pasta kampaņu",
+      "columns": {
+        "name": "Nosaukums",
+        "subject": "Temats",
+        "status": "Statuss",
+        "recipients": "Saņēmēji",
+        "opens": "Atvērumi",
+        "created": "Izveidota",
+        "actions": "Darbības"
+      },
+      "status": {
+        "draft": "melnraksts",
+        "scheduled": "ieplānota",
+        "sent": "nosūtīta"
+      },
+      "send": "Sūtīt",
+      "delete": "Dzēst",
+      "deleteCampaign": "Dzēst kampaņu",
+      "toasts": {
+        "missingFields": "Trūkst lauku",
+        "missingFieldsDescription": "Nosaukums un temats ir obligāti.",
+        "created": "Kampaņa izveidota",
+        "error": "Kļūda",
+        "createFailed": "Neizdevās izveidot kampaņu.",
+        "sendConfirm": "Vai tiešām vēlaties nosūtīt šo kampaņu tūlīt?",
+        "sendFailedStatus": "Neizdevās nosūtīt (kļūda {status}).",
+        "partlySent": "Kampaņa nosūtīta daļēji",
+        "partlySentDescription": "Nosūtīta {sent} no {total} saņēmējiem. {failed, plural, zero {# e-pastus} one {# e-pastu} other {# e-pastus}} neizdevās nosūtīt.",
+        "sent": "Kampaņa nosūtīta",
+        "sentDescription": "Nosūtīta {sent, plural, zero {# saņēmējiem} one {# saņēmējam} other {# saņēmējiem}}.",
+        "sendFailed": "Nosūtīšana neizdevās",
+        "deleteConfirm": "Dzēst šo kampaņu?",
+        "deleted": "Kampaņa dzēsta",
+        "deleteFailed": "Neizdevās dzēst."
+      }
+    },
+    "apiKeys": {
+      "title": "API atslēgas",
+      "subtitle": "Pārvaldiet API atslēgas programmatiskai piekļuvei tirgotāja datiem",
+      "createKey": "Izveidot atslēgu",
+      "createdNotice": "API atslēga izveidota! Nokopējiet to tūlīt — tā vairs netiks parādīta.",
+      "copyKey": "Kopēt atslēgu",
+      "createTitle": "Izveidot API atslēgu",
+      "keyName": "Atslēgas nosaukums",
+      "keyNamePlaceholder": "piem., Produkcijas POS integrācija",
+      "permissions": "Atļaujas",
+      "creating": "Izveido...",
+      "submit": "Izveidot API atslēgu",
+      "cancel": "Atcelt",
+      "loading": "Ielādē API atslēgas...",
+      "empty": "Vēl nav API atslēgu. Izveidojiet atslēgu, lai sāktu.",
+      "createdOn": "Izveidota {date}",
+      "lastUsed": "Pēdējoreiz izmantota {date}",
+      "expires": "Derīga līdz {date}",
+      "revokeKey": "Atsaukt atslēgu",
+      "loadFailed": "Neizdevās ielādēt API atslēgas",
+      "required": "Nepieciešams nosaukums un vismaz viena atļauja",
+      "createFailed": "Neizdevās izveidot API atslēgu",
+      "created": "API atslēga izveidota",
+      "revokeConfirm": "Atsaukt API atslēgu \"{name}\"? Šo darbību nevar atsaukt.",
+      "revoke": "Atsaukt",
+      "revoked": "API atslēga atsaukta",
+      "revokeFailed": "Neizdevās atsaukt API atslēgu",
+      "copied": "Nokopēts starpliktuvē",
+      "groups": {
+        "vouchers": "Kuponi",
+        "campaigns": "Kampaņas",
+        "giftCards": "Dāvanu kartes",
+        "customers": "Klienti",
+        "analytics": "Analītika",
+        "events": "Pasākumi"
+      },
+      "permissionLabels": {
+        "voucherRead": "Lasīt kuponus",
+        "voucherCreate": "Veidot kuponus",
+        "voucherRedeem": "Izmantot kuponus",
+        "campaignRead": "Lasīt kampaņas",
+        "campaignCreate": "Veidot kampaņas",
+        "giftCardRead": "Lasīt dāvanu kartes",
+        "giftCardRedeem": "Izmantot dāvanu kartes",
+        "customerRead": "Lasīt klientus",
+        "analyticsRead": "Lasīt analītiku",
+        "eventRead": "Lasīt pasākumus",
+        "eventCheckin": "Pasākumu reģistrācija"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "Saņemiet paziņojumus par notikumiem caur HTTP",
+      "addWebhook": "Pievienot webhook",
+      "secretNotice": "Webhook noslēpums (tiek parādīts tikai vienreiz):",
+      "copySecret": "Kopēt noslēpumu",
+      "copied": "Nokopēts!",
+      "newTitle": "Jauns webhook",
+      "endpointUrl": "Galapunkta URL",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Notikumi",
+      "submit": "Izveidot webhook",
+      "loading": "Ielādē...",
+      "empty": "Nav iestatītu webhook",
+      "createdOn": "Izveidots {date}",
+      "deliveriesCount": "{count, plural, zero {# piegāžu} one {# piegāde} other {# piegādes}}",
+      "sendTest": "Sūtīt testu",
+      "viewDeliveries": "Piegāžu žurnāls",
+      "disable": "Izslēgt",
+      "enable": "Ieslēgt",
+      "deleteWebhook": "Dzēst webhook",
+      "deliveryLog": "Piegāžu žurnāls",
+      "noDeliveries": "Vēl nav piegāžu",
+      "deliveryFailed": "Neizdevās",
+      "attempts": "{count, plural, zero {# mēģinājumu} one {# mēģinājums} other {# mēģinājumi}}",
+      "loadFailed": "Neizdevās ielādēt webhooks",
+      "required": "Nepieciešams URL un vismaz viens notikums",
+      "created": "Webhook izveidots",
+      "createFailed": "Neizdevās izveidot webhook",
+      "deleted": "Webhook dzēsts",
+      "deleteFailed": "Neizdevās dzēst webhook",
+      "updateFailed": "Neizdevās atjaunināt webhook",
+      "testDelivered": "Tests piegādāts! Statuss: {status}",
+      "testFailed": "Tests neizdevās: {error}",
+      "statusCode": "Statuss {status}",
+      "testSendFailed": "Neizdevās nosūtīt testa webhook",
+      "loadDeliveriesFailed": "Neizdevās ielādēt piegādes"
+    }
   }
 }

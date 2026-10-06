@@ -2602,5 +2602,2656 @@
       "downloading": "Laddar ner...",
       "download": "Ladda ner QR"
     }
+  },
+  "merchantCampaigns": {
+    "overview": {
+      "subtitle": "Hantera dina kupongkampanjer.",
+      "createCampaign": "Skapa kampanj",
+      "subscriptionRequired": "Prenumeration krävs",
+      "trialEnded": "Din kostnadsfria 60-dagars kampanjprovperiod har löpt ut. Starta planen för 9,90/månad för att skapa nya kampanjer.",
+      "stats": {
+        "totalTitle": "Kampanjer totalt",
+        "totalDescription": "Alla kampanjer",
+        "activeTitle": "Aktiva",
+        "activeDescription": "Pågår just nu",
+        "paidTitle": "Betalda köp",
+        "paidDescription": "Slutförda beställningar",
+        "revenueTitle": "Intäkter",
+        "revenueDescription": "Betald kupongförsäljning"
+      },
+      "weeklyRevenue": {
+        "title": "Veckointäkter",
+        "description": "Betald kampanjförsäljning de senaste 7 dagarna.",
+        "series": "Intäkter"
+      }
+    },
+    "list": {
+      "empty": {
+        "title": "Inga kampanjer ännu",
+        "descriptionCanCreate": "Skapa en kampanj för att organisera och hantera dina kuponger.",
+        "descriptionNeedsSubscription": "Starta en prenumeration för att skapa nya kampanjer.",
+        "action": "Skapa din första kampanj"
+      },
+      "searchPlaceholder": "Sök kampanjer...",
+      "searchLabel": "Sök kampanjer",
+      "filterAll": "Alla",
+      "status": {
+        "active": "Aktiv",
+        "draft": "Utkast",
+        "ended": "Avslutad",
+        "paused": "Pausad"
+      },
+      "noMatches": "Inga kampanjer matchar dina filter.",
+      "clearFilters": "Rensa filter",
+      "type": {
+        "weekly": "Veckokampanj",
+        "limited": "Begränsad kampanj",
+        "other": "Kampanj: {type}"
+      },
+      "runs": "Pågår {start} – {end}",
+      "view": "Visa",
+      "stats": {
+        "vouchers": "Kuponger",
+        "paidPurchases": "Betalda köp",
+        "revenue": "Intäkter",
+        "price": "Pris"
+      },
+      "free": "Gratis"
+    },
+    "new": {
+      "iconLetter": "K",
+      "draftNotice": "Nya kampanjer skapas som utkast. Kunderna ser dem inte förrän du publicerar från kampanjsidan."
+    },
+    "edit": {
+      "breadcrumb": "Redigera",
+      "title": "Redigera kampanj"
+    },
+    "form": {
+      "basicInfo": "Grundläggande information",
+      "nameLabel": "Kampanjnamn *",
+      "namePlaceholder": "Julerbjudande",
+      "descriptionLabel": "Beskrivning",
+      "descriptionPlaceholder": "Tidsbegränsat erbjudande",
+      "typeLabel": "Typ *",
+      "typeOptions": {
+        "limited": "Engångs (begränsad)",
+        "weekly": "Varje vecka"
+      },
+      "dates": "Datum",
+      "startDate": "Startdatum *",
+      "endDate": "Slutdatum *",
+      "timezoneHint": "Tiderna anges i din lokala tidszon.",
+      "pricing": "Pris och gränser",
+      "priceLabel": "Pris i {currency} (lämna tomt för gratiskuponger)",
+      "pricePreview": "Kunderna betalar {price}.",
+      "priceHint": "Ange beloppet i {currency}, t.ex. 4.50 eller 4,50 för {example}.",
+      "maxRedemptions": "Max antal inlösningar",
+      "maxPurchases": "Max antal köp",
+      "unlimited": "Obegränsat",
+      "creditLabel": "Kredit till rekommendatören (%)",
+      "creditPreview": "Rekommendatörer tjänar {percent} % av köpesumman som kredit.",
+      "creditHint": "Andel av köpesumman som betalas ut till rekommendatören som kredit, t.ex. 5 eller 2,5.",
+      "termsSection": "Villkor",
+      "termsLabel": "Villkor",
+      "termsPlaceholder": "Villkor för den här kampanjen...",
+      "saving": "Sparar...",
+      "saveChanges": "Spara ändringar",
+      "creating": "Skapar...",
+      "create": "Skapa kampanj",
+      "saved": "Kampanjändringarna har sparats.",
+      "errors": {
+        "invalidDates": "Ange ett giltigt start- och slutdatum.",
+        "endBeforeStart": "Slutdatumet måste vara efter startdatumet.",
+        "maxRedemptions": "Max antal inlösningar måste vara ett heltal, minst 1.",
+        "maxPurchases": "Max antal köp måste vara ett heltal, minst 1.",
+        "saveFailed": "Det gick inte att spara kampanjen"
+      },
+      "priceErrors": {
+        "negative": "Priset kan inte vara negativt.",
+        "invalid": "Priset är inte ett giltigt tal.",
+        "wholeNumber": "Priset måste vara ett heltal.",
+        "decimals": "Priset får ha högst {decimals} decimaler.",
+        "tooLarge": "Priset är för högt."
+      },
+      "creditErrors": {
+        "negative": "Rekommendationskrediten kan inte vara negativ.",
+        "invalid": "Rekommendationskrediten är inte ett giltigt tal.",
+        "decimals": "Rekommendationskrediten får ha högst {decimals} decimaler.",
+        "tooLarge": "Rekommendationskrediten är för stor.",
+        "tooHigh": "Rekommendationskrediten får inte överstiga 100 %."
+      }
+    },
+    "detail": {
+      "noDescription": "Ingen beskrivning",
+      "draftNotice": "Kampanjen är ett utkast, så kunderna kan inte se den än.",
+      "draftNoticeAdmin": "Kampanjen är ett utkast, så kunderna kan inte se den än. Publicera den när du är redo.",
+      "status": "Status",
+      "type": "Typ",
+      "price": "Pris",
+      "referrerCredit": "Rekommendationskredit",
+      "none": "Ingen",
+      "stats": {
+        "vouchers": "Kuponger",
+        "totalPurchases": "Köp totalt",
+        "paidPurchases": "Betalda köp"
+      },
+      "terms": "Villkor",
+      "promotion": {
+        "title": "Marknadsföring",
+        "description": "Betald synlighet i veckans nyhetsbrev och i notiser."
+      },
+      "vouchers": {
+        "title": "Kuponger",
+        "description": "Kuponger som skapats från den här kampanjen.",
+        "empty": "Inga kuponger har skapats ännu.",
+        "view": "Visa"
+      }
+    },
+    "promotion": {
+      "weeklyEmail": "Ta med i veckans nyhetsbrev (betalt)",
+      "notification": "Lyft fram i notiser (betalt)",
+      "endDate": "Slutdatum för marknadsföring",
+      "saving": "Sparar...",
+      "save": "Spara marknadsföringsinställningar",
+      "saved": "Marknadsföringsinställningarna har sparats.",
+      "upgradeNeededTitle": "Uppgradering krävs",
+      "upgradeNeeded": "Marknadsföringslyft ingår i en högre plan. Uppgradera under Inställningar och fakturering för att använda dem.",
+      "saveFailedStatus": "Det gick inte att spara marknadsföringsinställningarna (fel {status}).",
+      "saveFailedNetwork": "Det gick inte att spara marknadsföringsinställningarna. Kontrollera anslutningen och försök igen."
+    },
+    "actions": {
+      "adminOnly": "Endast handlarens administratörer kan publicera, pausa eller redigera kampanjer.",
+      "edit": "Redigera",
+      "publish": {
+        "label": "Publicera",
+        "title": "Publicera kampanjen?",
+        "description": "Kunderna kan se och köpa kuponger från kampanjen direkt.",
+        "success": "Kampanjen har publicerats och är nu synlig för kunderna."
+      },
+      "pause": {
+        "label": "Pausa",
+        "title": "Pausa kampanjen?",
+        "description": "Kampanjen blir ett utkast igen och döljs för kunderna tills du publicerar den på nytt. Redan sålda kuponger förblir giltiga.",
+        "success": "Kampanjen har pausats och är dold för kunderna."
+      },
+      "end": {
+        "label": "Avsluta kampanj",
+        "title": "Avsluta kampanjen nu?",
+        "description": "Kampanjen stoppas omedelbart och kan inte publiceras igen. Redan sålda kuponger förblir giltiga.",
+        "success": "Kampanjen har avslutats."
+      },
+      "updateFailedStatus": "Det gick inte att uppdatera kampanjen (fel {status}).",
+      "updateFailed": "Det gick inte att uppdatera kampanjen."
+    },
+    "generate": {
+      "open": "Skapa kuponger",
+      "title": "Skapa kuponger",
+      "descriptionPriced": "Skapar kupongutkast värda {value} i rabatt, giltiga {start} – {end}. Varje kupong får en egen kod. De förblir dolda tills du publicerar dem.",
+      "descriptionFree": "Kampanjen är gratis, så det finns inget belopp att sätta på kupongerna. Ange först ett pris för kampanjen.",
+      "countLabel": "Antal kuponger (1–100)",
+      "generating": "Skapar...",
+      "submit": "Skapa",
+      "invalidCount": "Ange ett heltal mellan 1 och 100",
+      "needsPrice": "Ange först ett pris för kampanjen. De skapade kupongerna är värda kampanjpriset.",
+      "failed": "Det gick inte att skapa kuponger",
+      "success": "{count, plural, one {# kupongutkast har skapats. Publicera det} other {# kupongutkast har skapats. Publicera dem}} från kupongsidan när du är redo."
+    }
+  },
+  "merchantDashboard": {
+    "layout": {
+      "statActiveCampaigns": "Aktiva kampanjer",
+      "statLiveVouchers": "Aktiva kuponger",
+      "statRedemptions30d": "Inlösningar (30 dagar)"
+    },
+    "error": {
+      "title": "Något gick fel",
+      "description": "Ett fel uppstod i handlarpanelen.",
+      "tryAgain": "Försök igen",
+      "backToMerchants": "Tillbaka till handlare"
+    },
+    "shell": {
+      "groups": {
+        "overview": "Översikt",
+        "offers": "Erbjudanden",
+        "inStore": "I butik",
+        "customers": "Kunder",
+        "settings": "Inställningar"
+      },
+      "language": "Språk",
+      "opensAppArea": "Öppnar appområdet",
+      "externalLinkTitle": "{label} (öppnar appområdet, utanför den här handlaren)",
+      "opensOutside": "Öppnas utanför handlarområdet",
+      "merchantNavigation": "Handlare",
+      "more": "Mer",
+      "navDashboard": "Instrumentpanel"
+    },
+    "dashboard": {
+      "title": "Handlarpanel",
+      "welcomeBack": "Välkommen tillbaka, {name}",
+      "viewCampaigns": "Visa kampanjer",
+      "createVoucher": "Skapa kupong",
+      "performanceOverview": "Resultatöversikt",
+      "performanceOverviewHint": "Aktuell kampanjaktivitet och inlösningar.",
+      "revenueAndCredits": "Intäkter och krediter",
+      "revenueAndCreditsHint": "Försäljning, krediter och utestående åtaganden.",
+      "performanceTrend": "Resultattrend",
+      "performanceTrendHint": "Inlösningar och intäkter de senaste {days} dagarna.",
+      "rangeShort": "{days} d",
+      "revenue": "Intäkter",
+      "chartRedemptions": "Inlösningar",
+      "chartRevenue": "Intäkter ({currency})",
+      "paidOrders": "Betalda beställningar",
+      "openOrdersView": "Öppna beställningsvyn",
+      "avgOrder": "Snittorder",
+      "openCampaignRevenue": "Öppna kampanjintäkter",
+      "redemptionRate": "Inlösningsgrad",
+      "openRedemptionQueue": "Öppna inlösningskön",
+      "pendingConfirmation": "{count} väntar på bekräftelse",
+      "pendingConfirmationHint": "Inlösningar i butik som väntar på ditt godkännande.",
+      "viewRedemptions": "Visa inlösningar",
+      "actionCenter": "Åtgärdscenter",
+      "actionCenterHint": "Prioriterade saker att granska.",
+      "allCaughtUp": "Allt är klart för tillfället.",
+      "open": "Öppna",
+      "actions": {
+        "pendingRedemptions": "{count, plural, one {# väntande inlösen} other {# väntande inlösningar}}",
+        "pendingRedemptionsDetail": "Bekräfta inlösningar i butik",
+        "expiringVouchers": "{count, plural, one {# kupong går snart ut} other {# kuponger går snart ut}}",
+        "expiringVouchersDetail": "Se över kupongernas giltighetsdatum",
+        "endingCampaigns": "{count, plural, one {# kampanj slutar denna vecka} other {# kampanjer slutar denna vecka}}",
+        "endingCampaignsDetail": "Förläng eller duplicera dina bästa kampanjer",
+        "upcomingEvents": "{count, plural, one {# kommande evenemang} other {# kommande evenemang}}",
+        "upcomingEventsDetail": "Förbered biljettincheckning och bemanning"
+      },
+      "upcomingEventsTitle": "Kommande evenemang",
+      "upcomingEventsHint": "Nästa schemalagda evenemang.",
+      "noUpcomingEvents": "Inga kommande evenemang schemalagda.",
+      "eventStatus": {
+        "published": "publicerat",
+        "soldOut": "slutsålt"
+      },
+      "manageEvents": "Hantera evenemang",
+      "topVouchers": "Populäraste kupongerna",
+      "topVouchersHint": "Mest inlösta erbjudanden.",
+      "noTopVouchers": "Inga kuponger har lösts in ännu. Dina mest inlösta kuponger visas här."
+    },
+    "stats": {
+      "activeVouchers": "Aktiva kuponger",
+      "publishedVouchers": "Publicerade kuponger",
+      "openVouchers": "Öppna kuponger",
+      "activeCampaigns": "Aktiva kampanjer",
+      "runningCampaigns": "Pågående kampanjer",
+      "openCampaigns": "Öppna kampanjer",
+      "activeEvents": "Aktiva evenemang",
+      "publishedEvents": "Publicerade evenemang",
+      "openEvents": "Öppna evenemang",
+      "todaysRedemptions": "Dagens inlösningar",
+      "thisWeek": "Denna vecka: {count}",
+      "reviewRedemptions": "Granska inlösningar",
+      "ofWeekly": "av veckans"
+    },
+    "revenue": {
+      "voucherRevenue": "Kupongintäkter",
+      "paidVoucherSales": "Betald kupongförsäljning",
+      "openCampaignSales": "Öppna kampanjförsäljning",
+      "ticketRevenue": "Biljettintäkter",
+      "paidTicketSales": "Betald biljettförsäljning",
+      "openEventSales": "Öppna evenemangsförsäljning",
+      "creditsIssued": "Utgivna krediter",
+      "totalCreditsDistributed": "Totalt utdelade krediter",
+      "openReferralCredits": "Öppna rekommendationskrediter",
+      "outstandingLiability": "Utestående åtagande",
+      "unredeemedValue": "Värde för ej inlösta kuponger",
+      "openVoucherLiability": "Öppna kupongåtaganden"
+    },
+    "recentActivity": {
+      "title": "Senaste aktivitet",
+      "empty": "Ingen aktivitet nyligen",
+      "unknownUser": "Okänd användare",
+      "redeemedVoucher": "Löste in kupong – {time}",
+      "confirmed": "Bekräftad",
+      "pending": "Väntande"
+    },
+    "liveStats": {
+      "live": "Live",
+      "connecting": "Ansluter…",
+      "redeemedToday": "<value>{count}</value> <label>inlösta i dag</label>",
+      "pending": "<value>{count}</value> <label>väntande</label>"
+    },
+    "analytics": {
+      "metaTitle": "Analys",
+      "title": "Analys",
+      "subtitle": "Följ dina kupongers resultat och intäkter",
+      "totalRedemptions": "Inlösningar totalt",
+      "confirmedRedemptions": "Bekräftade inlösningar",
+      "totalDiscounts": "Rabatter totalt",
+      "givenToCustomers": "Givna till kunder",
+      "creditsIssued": "Utgivna krediter",
+      "totalCreditsDistributed": "Totalt utdelade krediter",
+      "activeVouchers": "Aktiva kuponger",
+      "withRedemptions": "Med inlösningar",
+      "charts": {
+        "redemptionTrends": "Inlösningstrender (senaste 30 dagarna)",
+        "redemptions": "Inlösningar",
+        "revenue": "Intäkter ({currency})",
+        "topPerforming": "Bäst presterande kuponger",
+        "noRedeemed": "Ingen kupong har lösts in ännu. Dina bästa kuponger visas här.",
+        "byCategory": "Inlösningar per kategori",
+        "noCategoryData": "Inga kategoridata tillgängliga"
+      }
+    },
+    "ask": {
+      "title": "Fråga dina data",
+      "subtitle": "Ställ frågor om din verksamhets data med vanligt språk",
+      "emptyTitle": "Fråga vad som helst om dina data",
+      "emptyHint": "Prova något av förslagen nedan",
+      "placeholder": "Ställ en fråga om dina data...",
+      "suggestedTitle": "Föreslagna frågor",
+      "suggestions": {
+        "revenueLastWeek": "Hur stora var mina intäkter förra veckan?",
+        "dailyRedemptionsThisMonth": "Visa dagliga inlösningar den här månaden",
+        "topVouchersByRevenue": "Populäraste kupongerna efter intäkter förra månaden",
+        "customersPurchasedLastWeek": "Hur många kunder köpte något förra veckan?",
+        "referralConversionRate": "Vilken konverteringsgrad har mina rekommendationer?",
+        "dailyRevenueTrend": "Visa den dagliga intäktstrenden den här månaden",
+        "purchasesYesterday": "Hur många köp gjordes i går?",
+        "bestPerformingVouchers": "Vilka kuponger presterar bäst?"
+      },
+      "errorFallback": "Tyvärr kunde jag inte behandla den frågan.",
+      "networkError": "Nätverksfel. Försök igen.",
+      "itemLabel": "Objekt {n}"
+    },
+    "reports": {
+      "title": "Finansiella rapporter",
+      "subtitle": "Intäktsöversikt och export",
+      "downloadCsv": "Ladda ner CSV",
+      "from": "Från",
+      "to": "Till",
+      "apply": "Tillämpa",
+      "totalRevenue": "Totala intäkter",
+      "platformFees": "Plattformsavgifter",
+      "netRevenue": "Nettointäkter",
+      "redemptions": "Inlösningar",
+      "revenueByCurrency": "Intäkter per valuta",
+      "netAndFees": "Netto: {net} • Avgifter: {fees}",
+      "monthlyRevenue": "Månadsintäkter",
+      "noRevenue": "Inga intäktsdata för den här perioden.",
+      "month": "Månad",
+      "vouchers": "Kuponger",
+      "tickets": "Biljetter",
+      "total": "Totalt"
+    },
+    "scheduled": {
+      "title": "Schemalagda rapporter",
+      "subtitle": "Ställ in automatiska rapporter via e-post",
+      "backToReports": "← Finansiella rapporter",
+      "activeSchedules": "Aktiva scheman",
+      "loading": "Laddar...",
+      "noSchedules": "Inga scheman har ställts in ännu",
+      "period": {
+        "daily": "Dagligen",
+        "weekly": "Varje vecka",
+        "monthly": "Varje månad"
+      },
+      "reportTitle": {
+        "daily": "Daglig rapport",
+        "weekly": "Veckorapport",
+        "monthly": "Månadsrapport"
+      },
+      "recipientCount": "{count, plural, one {# mottagare} other {# mottagare}}",
+      "lastSent": "Senast skickad: {date}",
+      "nextRun": "Nästa: {date}",
+      "pause": "Pausa",
+      "resume": "Återuppta",
+      "createSchedule": "Skapa schema",
+      "frequency": "Frekvens",
+      "recipients": "Mottagare",
+      "invalidEmail": "Ogiltig e-postadress",
+      "emailAlreadyAdded": "E-postadressen är redan tillagd",
+      "addAtLeastOne": "Lägg till minst en mottagare",
+      "saved": "Rapportschemat har sparats",
+      "saveFailed": "Det gick inte att spara schemat",
+      "save": "Spara schema",
+      "previewTitle": "Förhandsvisning av rapport",
+      "previewBody": "Schemalagda rapporter innehåller intäkter, antal inlösningar, populäraste kuponger och tillväxtmått. Rapporterna skickas som snyggt formaterade HTML-mejl kl. 08:00 UTC.",
+      "everyMorning": "Varje morgon",
+      "everyMonday": "Varje måndag",
+      "firstOfMonth": "Den 1:a varje månad"
+    },
+    "billing": {
+      "subscribeTo": "Prenumerera på {plan}",
+      "startFailed": "Det gick inte att starta prenumerationen",
+      "portalFailed": "Det gick inte att öppna faktureringsportalen",
+      "manageBilling": "Hantera fakturering",
+      "errorTitle": "Fel",
+      "close": "Stäng",
+      "usage": "<b>{current}</b> / {max} använda",
+      "limitKeys": {
+        "campaignCreatesPerCycle": "nya kampanjer per period",
+        "activeCampaigns": "aktiva kampanjer",
+        "voucherCreatesPerCycle": "nya kuponger per period",
+        "teamMembers": "teammedlemmar"
+      },
+      "currentPlanTrial": "Nuvarande plan (gratis provperiod)",
+      "planChangesUnavailable": "Det går inte att byta plan online just nu.",
+      "paymentsNotSetUp": "Onlinebetalningar är inte konfigurerade på plattformen ännu, så planer kan inte köpas eller ändras här. Kontakta supporten om du vill byta plan.",
+      "features": {
+        "starter": {
+          "vouchers": "500 kuponger/månad",
+          "campaigns": "3 aktiva kampanjer",
+          "teamMembers": "2 teammedlemmar",
+          "qrRedemption": "Inlösen med QR-kod",
+          "basicAnalytics": "Grundläggande analys"
+        },
+        "pro": {
+          "vouchers": "5 000 kuponger/månad",
+          "campaigns": "25 aktiva kampanjer",
+          "teamMembers": "10 teammedlemmar",
+          "advancedAnalytics": "Avancerad analys",
+          "customDomain": "Egen domän",
+          "promoBoosts": "Marknadsföringslyft"
+        },
+        "scale": {
+          "vouchers": "Obegränsat antal kuponger",
+          "campaigns": "Obegränsat antal kampanjer",
+          "teamMembers": "Obegränsat antal teammedlemmar",
+          "everythingInPro": "Allt i Pro",
+          "whiteLabel": "Redo för white label",
+          "prioritySupport": "Prioriterad support"
+        }
+      }
+    }
+  },
+  "b2b": {
+    "roles": {
+      "owner": "Ägare",
+      "admin": "Admin",
+      "finance": "Ekonomi",
+      "marketing": "Marknadsföring",
+      "support": "Support",
+      "partner_cashier": "Kassör",
+      "auditor": "Revisor"
+    },
+    "orgs": {
+      "title": "B2B-organisationer",
+      "subtitle": "Företagsarbetsytor med kampanjer, kuponger och beställningar.",
+      "loading": "Laddar organisationer...",
+      "loadFailed": "Det gick inte att ladda organisationer",
+      "empty": "Inga organisationer hittades. Be en administratör att bjuda in dig.",
+      "open": "Öppna"
+    },
+    "workspace": {
+      "fallbackName": "Organisation",
+      "subtitle": "Översikt över B2B-arbetsytan",
+      "reports": "Rapporter",
+      "audit": "Granskning",
+      "partnerKeys": "Partnernycklar",
+      "backToOrgs": "Tillbaka till organisationer",
+      "loading": "Laddar arbetsyta...",
+      "errors": {
+        "loadOrg": "Det gick inte att ladda organisationen",
+        "loadCampaigns": "Det gick inte att ladda kampanjer",
+        "loadVouchers": "Det gick inte att ladda kuponger",
+        "loadOrders": "Det gick inte att ladda beställningar",
+        "load": "Det gick inte att ladda",
+        "createCampaign": "Det gick inte att skapa kampanjen",
+        "issueVouchers": "Det gick inte att utfärda kuponger",
+        "updateCampaign": "Det gick inte att uppdatera kampanjen",
+        "activateCampaign": "Det gick inte att aktivera kampanjen",
+        "pauseCampaign": "Det gick inte att pausa kampanjen",
+        "archiveCampaign": "Det gick inte att arkivera kampanjen"
+      },
+      "stats": {
+        "campaigns": "Kampanjer",
+        "vouchers": "Kuponger",
+        "orders": "Beställningar"
+      },
+      "create": {
+        "title": "Skapa kampanj",
+        "name": "Kampanjnamn",
+        "value": "Värde (minsta enhet)",
+        "currency": "Valuta",
+        "submit": "Skapa"
+      },
+      "campaigns": {
+        "title": "Kampanjer",
+        "empty": "Inga kampanjer ännu.",
+        "name": "Namn",
+        "value": "Värde",
+        "activate": "Aktivera",
+        "pause": "Pausa",
+        "resume": "Återuppta",
+        "archive": "Arkivera",
+        "issue": "Utfärda {count}"
+      },
+      "recentVouchers": "Senaste kuponger",
+      "noVouchers": "Inga kuponger utfärdade.",
+      "recentOrders": "Senaste beställningar",
+      "noOrders": "Inga beställningar ännu."
+    },
+    "audit": {
+      "title": "Granskningslogg",
+      "subtitle": "Följ kupongernas livscykel och ändringar.",
+      "entityType": "Objekttyp (voucher, campaign, order)",
+      "entityId": "Objekt-ID",
+      "loading": "Laddar granskningslogg...",
+      "loadFailed": "Det gick inte att ladda granskningsloggen",
+      "empty": "Inga händelser."
+    },
+    "billing": {
+      "metaTitle": "Organisationens fakturering",
+      "title": "Fakturering och ekonomi",
+      "totalPaidOrders": "Betalda beställningar totalt",
+      "totalRevenue": "Totala intäkter",
+      "vatNumber": "Momsregistreringsnummer",
+      "notSet": "Inte angivet",
+      "recentOrders": "Senaste beställningar",
+      "noOrders": "Inga beställningar ännu.",
+      "table": {
+        "date": "Datum",
+        "qty": "Antal",
+        "total": "Totalt",
+        "status": "Status",
+        "invoice": "Faktura"
+      }
+    },
+    "keys": {
+      "title": "Partner-API-nycklar",
+      "subtitle": "Används för validering och inlösen av kuponger hos partner.",
+      "label": "Nyckelns namn (valfritt)",
+      "create": "Skapa nyckel",
+      "newKey": "Ny nyckel (kopiera nu)",
+      "loading": "Laddar nycklar...",
+      "empty": "Inga nycklar ännu.",
+      "untitled": "Namnlös nyckel",
+      "created": "Skapad {created}",
+      "createdAndLastUsed": "Skapad {created} • Senast använd {lastUsed}",
+      "revoke": "Återkalla",
+      "errors": {
+        "load": "Det gick inte att ladda nycklar",
+        "create": "Det gick inte att skapa nyckeln",
+        "revoke": "Det gick inte att återkalla nyckeln"
+      }
+    },
+    "members": {
+      "metaTitle": "Organisationens medlemmar",
+      "title": "Medlemmar",
+      "count": "{count, plural, one {# medlem} other {# medlemmar}}",
+      "pendingInvitations": "Väntande inbjudningar",
+      "expires": "Går ut {date}"
+    },
+    "invite": {
+      "title": "Bjud in en medlem",
+      "emailPlaceholder": "kollega@exempel.se",
+      "roles": {
+        "admin": "Admin",
+        "finance": "Ekonomi",
+        "marketing": "Marknadsföring",
+        "support": "Support",
+        "partner_cashier": "Partnerkassör",
+        "auditor": "Revisor"
+      },
+      "sending": "Skickar…",
+      "submit": "Skicka inbjudan",
+      "sent": "Inbjudan skickad till {email}.",
+      "failed": "Det gick inte att skicka inbjudan. Kontrollera e-postadressen och försök igen.",
+      "error": "Något gick fel. Försök igen."
+    },
+    "reports": {
+      "title": "Rapporter",
+      "subtitle": "Rapporter om inlösningar och kuponger",
+      "backToWorkspace": "Tillbaka till arbetsytan",
+      "loadFailed": "Det gick inte att ladda",
+      "tabs": {
+        "redemptions": "Inlösningar",
+        "vouchers": "Kuponger"
+      },
+      "totalRedemptions": "Inlösningar totalt",
+      "totalAmountRedeemed": "Totalt inlöst belopp",
+      "from": "Från",
+      "to": "Till",
+      "filter": "Filtrera",
+      "pageInfo": "Sida {page} av {totalPages} ({total} totalt)",
+      "redemptionTable": {
+        "date": "Datum",
+        "partner": "Partner",
+        "amount": "Belopp",
+        "status": "Status",
+        "location": "Plats"
+      },
+      "noRedemptions": "Inga inlösningar hittades.",
+      "voucherTable": {
+        "campaign": "Kampanj",
+        "status": "Status",
+        "type": "Typ",
+        "value": "Värde",
+        "remaining": "Kvar",
+        "redeemed": "Inlöst",
+        "issuedTo": "Utfärdad till",
+        "expires": "Går ut"
+      },
+      "noVouchers": "Inga kuponger hittades."
+    },
+    "enums": {
+      "orgType": {
+        "buyer": "köpare",
+        "partner": "partner",
+        "platform_owner": "plattformsägare"
+      },
+      "orgStatus": {
+        "active": "aktiv",
+        "suspended": "avstängd"
+      },
+      "campaignStatus": {
+        "draft": "utkast",
+        "active": "aktiv",
+        "paused": "pausad",
+        "archived": "arkiverad"
+      },
+      "voucherStatus": {
+        "created": "skapad",
+        "issued": "utfärdad",
+        "active": "aktiv",
+        "redeemed": "inlöst",
+        "expired": "utgången",
+        "voided": "makulerad"
+      },
+      "valueType": {
+        "fixed": "fast",
+        "percent": "procent"
+      },
+      "orderStatus": {
+        "draft": "utkast",
+        "submitted": "skickad",
+        "invoiced": "fakturerad",
+        "paid": "betald",
+        "cancelled": "avbruten",
+        "refunded": "återbetald"
+      },
+      "redemptionStatus": {
+        "approved": "godkänd",
+        "reversed": "återförd",
+        "failed": "misslyckad"
+      }
+    }
+  },
+  "merchantEvents": {
+    "meta": {
+      "title": "Evenemang"
+    },
+    "status": {
+      "draft": "Utkast",
+      "published": "Aktivt",
+      "sold_out": "Slutsålt",
+      "cancelled": "Inställt",
+      "ended": "Avslutat"
+    },
+    "statusName": {
+      "draft": "Utkast",
+      "published": "Publicerat",
+      "sold_out": "Slutsålt",
+      "cancelled": "Inställt",
+      "ended": "Avslutat"
+    },
+    "type": {
+      "festival": "Festival",
+      "internal": "Internt evenemang",
+      "concert": "Konsert",
+      "workshop": "Workshop",
+      "other": "Övrigt"
+    },
+    "ticketStatus": {
+      "available": "Tillgänglig",
+      "sold": "Såld",
+      "used": "Använd",
+      "cancelled": "Annullerad",
+      "refunded": "Återbetald"
+    },
+    "list": {
+      "subtitle": "Hantera dina evenemang och biljetter",
+      "createEvent": "Skapa evenemang",
+      "stats": {
+        "totalTitle": "Evenemang totalt",
+        "totalDescription": "Alla evenemang",
+        "activeTitle": "Aktiva",
+        "activeDescription": "Publicerade eller slutsålda",
+        "soldTitle": "Sålda biljetter",
+        "soldDescription": "För alla evenemang",
+        "revenueTitle": "Intäkter",
+        "revenueDescription": "Betald biljettförsäljning"
+      },
+      "empty": {
+        "title": "Inga evenemang ännu",
+        "description": "Skapa ett evenemang för att sälja biljetter och hantera deltagare.",
+        "cta": "Skapa ditt första evenemang"
+      },
+      "card": {
+        "date": "Datum:",
+        "location": "Plats:",
+        "price": "Pris:",
+        "tickets": "Biljetter:",
+        "sold": "{sold} / {capacity} sålda",
+        "free": "Gratis",
+        "view": "Visa",
+        "edit": "Redigera"
+      },
+      "weeklyRevenue": {
+        "title": "Biljettintäkter per vecka",
+        "description": "Betald biljettförsäljning de senaste 7 dagarna.",
+        "series": "Intäkter"
+      }
+    },
+    "detail": {
+      "noDescription": "Ingen beskrivning",
+      "edit": "Redigera",
+      "status": "Status",
+      "type": "Typ",
+      "eventDate": "Evenemangsdatum",
+      "price": "Pris",
+      "free": "Gratis",
+      "totalTickets": "Biljetter totalt",
+      "sold": "Sålda",
+      "available": "Tillgängliga",
+      "location": "Plats",
+      "terms": "Villkor",
+      "ticketsTitle": "Biljetter",
+      "ticketsDescription": "Biljetter till det här evenemanget",
+      "noTickets": "Inga biljetter har skapats ännu.",
+      "view": "Visa",
+      "redeem": "Lös in"
+    },
+    "form": {
+      "basicInfo": "Grundläggande information",
+      "name": "Evenemangets namn *",
+      "description": "Beskrivning",
+      "descriptionPlaceholder": "Beskriv ditt evenemang...",
+      "type": "Typ av evenemang *",
+      "typeAria": "Typ av evenemang",
+      "dateTime": "Datum och tid",
+      "eventDate": "Datum *",
+      "eventTime": "Tid *",
+      "endDate": "Slutdatum (valfritt)",
+      "endTime": "Sluttid (valfritt)",
+      "location": "Plats",
+      "locationName": "Platsens namn",
+      "locationPlaceholder": "Stora salen, Utomhusscenen",
+      "locationPlaceholderExample": "t.ex. Stora salen, Utomhusscenen",
+      "address": "Fullständig adress",
+      "addressPlaceholder": "Gatuadress, Ort, Land",
+      "ticketDetails": "Biljettinformation",
+      "maxCapacity": "Max kapacitet (biljetter) *",
+      "maxCapacityLong": "Max kapacitet (antal biljetter) *",
+      "pricePerTicketCurrency": "Pris per biljett ({currency})",
+      "pricePerTicket": "Pris per biljett",
+      "pricePlaceholderFree": "0,00 (gratis)",
+      "priceHint": "Lämna tomt för gratisbiljetter. T.ex. 12.50 eller 12,50 för {example}.",
+      "currency": "Valuta *",
+      "terms": "Villkor",
+      "termsPlaceholder": "Villkor för evenemanget, återbetalningsregler osv.",
+      "ticketPrice": "Biljettpris",
+      "endBeforeStart": "Sluttiden måste vara efter starttiden.",
+      "cancel": "Avbryt"
+    },
+    "create": {
+      "submit": "Skapa evenemang",
+      "submitting": "Skapar..."
+    },
+    "edit": {
+      "loading": "Laddar...",
+      "notFound": "Evenemanget hittades inte.",
+      "back": "Tillbaka till evenemanget",
+      "title": "Redigera evenemang",
+      "subtitle": "Uppdatera evenemangets uppgifter.",
+      "submit": "Spara ändringar",
+      "submitting": "Sparar..."
+    },
+    "publish": {
+      "confirm": "Publicera evenemanget? Det blir synligt för alla och biljetter kan köpas.",
+      "confirmLabel": "Publicera",
+      "failed": "Det gick inte att publicera evenemanget",
+      "success": "Evenemanget har publicerats!",
+      "published": "Publicerat",
+      "cannotPublish": "Kan inte publiceras",
+      "button": "Publicera evenemang",
+      "publishing": "Publicerar..."
+    },
+    "generate": {
+      "invalidCount": "Ange ett tal mellan 1 och 1000",
+      "tooMany": "Det går inte att skapa {count} biljetter. Max tillgängligt: {max}",
+      "failed": "Det gick inte att skapa biljetter",
+      "success": "{count, plural, one {# biljett har skapats!} other {# biljetter har skapats!}}",
+      "open": "Skapa biljetter",
+      "title": "Skapa biljetter",
+      "description": "Skapa biljetter till det här evenemanget",
+      "countLabel": "Antal biljetter (max: {max})",
+      "cancel": "Avbryt",
+      "submit": "Skapa",
+      "submitting": "Skapar..."
+    },
+    "redeem": {
+      "title": "Lös in biljett",
+      "subtitle": "Skanna QR-koden eller ange biljettnumret",
+      "back": "Tillbaka till evenemanget",
+      "scanTitle": "Skanna biljett",
+      "scanDescription": "Ange QR-token eller biljettnummer",
+      "tokenLabel": "QR-token/biljettnummer",
+      "tokenPlaceholder": "Ange QR-token eller biljettnummer",
+      "scan": "Skanna",
+      "notFound": "Biljetten hittades inte",
+      "found": "Biljetten hittades",
+      "number": "Nummer:",
+      "event": "Evenemang:",
+      "status": "Status:",
+      "attendee": "Deltagare:",
+      "redeemDescription": "Slutför inlösen",
+      "locationLabel": "Plats (valfritt)",
+      "locationPlaceholder": "t.ex. Huvudentrén, Grind A",
+      "submit": "Lös in biljett",
+      "submitting": "Löser in...",
+      "failed": "Det gick inte att lösa in biljetten",
+      "cannotRedeem": "Biljetten kan inte lösas in. Status: {status}"
+    }
+  },
+  "merchantLegacy": {
+    "metadata": {
+      "overviewTitle": "Handlarpanel",
+      "vouchersTitle": "Hantera kuponger"
+    },
+    "sidebar": {
+      "title": "Handlare",
+      "subtitle": "GiftHub-konsol",
+      "openMenu": "Öppna meny",
+      "nav": {
+        "overview": "Översikt",
+        "vouchers": "Kuponger",
+        "giftCards": "Presentkort",
+        "credits": "Krediter",
+        "brand": "Varumärke"
+      }
+    },
+    "overview": {
+      "title": "Handlarpanel",
+      "notConnected": "Du är inte kopplad till någon handlare ännu."
+    },
+    "noAccess": {
+      "title": "Ingen handlaråtkomst",
+      "overviewHint": "Be en administratör hos handlaren att bjuda in dig, eller skapa ett handlarkonto för att komma igång.",
+      "creditsHint": "Koppla till ett handlarkonto för att se intäkter och utbetalningar.",
+      "vouchersHint": "Koppla till ett handlarkonto för att hantera kuponger.",
+      "exploreCampaigns": "Utforska kampanjer"
+    },
+    "brand": {
+      "title": "Varumärkesinställningar",
+      "description": "Anpassa hur ditt varumärke ser ut på kupongerna",
+      "logoHeading": "Logotyp",
+      "logoHint": "Ladda upp din logotyp (rekommenderat: 200x200 px, PNG eller SVG).",
+      "logoPreviewAlt": "Förhandsvisning av logotyp",
+      "uploadLogo": "Ladda upp logotyp",
+      "colorHeading": "Varumärkesfärg",
+      "colorHint": "Ange din primära varumärkesfärg för kuponger och knappar.",
+      "colorLabel": "Färg",
+      "colorHexLabel": "Hexvärde för varumärkesfärg",
+      "save": "Spara ändringar",
+      "previewHeading": "Förhandsvisning",
+      "previewHint": "Se hur ditt varumärke visas på kupongerna.",
+      "sampleMerchant": "Din butik",
+      "sampleTitle": "20 % rabatt på ditt nästa köp",
+      "sampleDescription": "Gäller alla varor. Kan inte kombineras med andra erbjudanden."
+    },
+    "credits": {
+      "availableBalance": "Tillgängligt saldo",
+      "availableBalanceHint": "Redo för utbetalning",
+      "pendingRevenue": "Väntande intäkter",
+      "pendingRevenueHint": "Behandlas",
+      "recentRevenue": "Senaste intäkter",
+      "ticketSale": "Biljettförsäljning",
+      "voucherSale": "Kupongförsäljning",
+      "noRevenue": "Inga intäkter registrerade ännu",
+      "payoutRequests": "Utbetalningsbegäranden",
+      "noPayoutRequests": "Inga utbetalningsbegäranden ännu",
+      "requestPayoutHeading": "Begär utbetalning",
+      "minimumPayout": "Lägsta utbetalningsbelopp: {amount}",
+      "submitting": "Skickar...",
+      "requestPayout": "Begär utbetalning",
+      "requestSubmitted": "Utbetalningsbegäran har skickats",
+      "requestFailed": "Det gick inte att begära utbetalning",
+      "status": {
+        "paid": "betald",
+        "pending": "väntande",
+        "requested": "begärd",
+        "completed": "slutförd",
+        "failed": "misslyckad"
+      }
+    },
+    "newVoucher": {
+      "title": "Skapa kupong",
+      "description": "Utforma och konfigurera din nya kupongkampanj",
+      "detailsHeading": "Kupongdetaljer",
+      "titleLabel": "Titel",
+      "titlePlaceholder": "t.ex. 20 % rabatt på ditt nästa köp",
+      "descriptionLabel": "Beskrivning",
+      "descriptionPlaceholder": "Gäller alla varor. Kan inte kombineras med andra erbjudanden.",
+      "expiryDateLabel": "Utgångsdatum",
+      "weeklyLabel": "Veckans drop",
+      "weeklyHint": "Tidsbegränsad tillgänglighet varje vecka",
+      "weeklyAria": "Veckans drop – tidsbegränsad tillgänglighet varje vecka",
+      "referralLabel": "Aktivera rekommendationskredit",
+      "referralHint": "Användare tjänar kredit när vänner löser in",
+      "referralAria": "Aktivera rekommendationskredit – användare tjänar kredit när vänner löser in",
+      "brandColorLabel": "Varumärkesfärg",
+      "brandColorHexLabel": "Hexvärde för varumärkesfärg",
+      "saveDraft": "Spara utkast",
+      "createAndPublish": "Skapa och publicera",
+      "previewHeading": "Förhandsvisning",
+      "sampleMerchant": "Din butik",
+      "sampleTitle": "Kupongens titel",
+      "sampleDescription": "Kupongens beskrivning visas här"
+    }
+  },
+  "merchantVouchers": {
+    "publicPageHint": "Den publika sidan blir tillgänglig när kupongen har publicerats.",
+    "list": {
+      "metaTitle": "Kuponger",
+      "subtitle": "Hantera och skapa kuponger",
+      "bulkImport": "Massimport via CSV",
+      "stats": {
+        "totalTitle": "Kuponger totalt",
+        "totalDescription": "Alla skapade kuponger",
+        "activeTitle": "Aktiva",
+        "activeDescription": "Publicerade kuponger",
+        "draftsTitle": "Utkast",
+        "draftsDescription": "Ännu inte publicerade",
+        "pausedEndedTitle": "Pausade/avslutade",
+        "pausedEndedDescription": "{paused} pausade, {ended} avslutade",
+        "redemptionsTitle": "Inlösningar",
+        "redemptionsDescription": "Inlösningar totalt"
+      },
+      "empty": {
+        "title": "Inga kuponger ännu",
+        "description": "Kom igång genom att skapa din första kupong.",
+        "action": "Skapa din första kupong"
+      },
+      "searchPlaceholder": "Sök på rubrik, kodprefix eller ID",
+      "searchLabel": "Sök kuponger",
+      "statusLabel": "Status",
+      "statusAll": "Alla statusar",
+      "status": {
+        "published": "Aktiv",
+        "paused": "Pausad",
+        "draft": "Utkast",
+        "ended": "Avslutad",
+        "expired": "Utgången"
+      },
+      "typeLabel": "Typ",
+      "typeAll": "Alla typer",
+      "sortLabel": "Sortera efter",
+      "sort": {
+        "date": "Datum (nyast)",
+        "name": "Namn (A–Ö)",
+        "redemptions": "Inlösningar"
+      },
+      "showing": "Visar {shown} av {total} kuponger",
+      "clearFilters": "Rensa filter",
+      "noMatches": "Inga kuponger matchar dina filter.",
+      "usage": "Användning",
+      "usageUnlimited": "Användning: {used} – obegränsat",
+      "view": "Visa"
+    },
+    "rowActions": {
+      "pauseTitle": "Pausa kupong",
+      "pauseDescription": "Vill du pausa kupongen? Användare kan inte köpa eller lösa in den medan den är pausad.",
+      "pauseConfirm": "Pausa",
+      "paused": "Kupongen har pausats",
+      "pauseFailed": "Det gick inte att pausa kupongen",
+      "loadFailed": "Det gick inte att ladda kupongen",
+      "duplicateLabel": "Duplicera kupong",
+      "duplicated": "Kupongen har duplicerats",
+      "duplicateFailed": "Det gick inte att duplicera"
+    },
+    "publish": {
+      "confirmMessage": "Publicera kupongen? Den blir synlig för alla.",
+      "confirmLabel": "Publicera",
+      "failed": "Det gick inte att publicera kupongen",
+      "success": "Kupongen har publicerats!",
+      "publishing": "Publicerar...",
+      "button": "Publicera kupong"
+    },
+    "new": {
+      "iconLetter": "K",
+      "created": "Kupongen har skapats som utkast. Publicera den när du vill att kunderna ska se den."
+    },
+    "edit": {
+      "iconLetter": "R",
+      "subtitle": "Uppdatera kupongens uppgifter och tillgänglighet.",
+      "updated": "Kupongen har uppdaterats",
+      "updateFailed": "Det gick inte att uppdatera kupongen",
+      "updateFailedRetry": "Det gick inte att uppdatera kupongen. Försök igen.",
+      "updating": "Uppdaterar...",
+      "update": "Uppdatera kupong",
+      "viewPublicPage": "Visa publik sida"
+    },
+    "form": {
+      "stepOf": "Steg {current} av {total}",
+      "typeLabel": "Typ",
+      "typeAria": "Kupongtyp",
+      "customersGetOff": "Kunderna får {value} i rabatt.",
+      "customersGetCredit": "Kunderna får {value} i kredit.",
+      "percentHint": "Ange procentsatsen, t.ex. 15 eller 12,5.",
+      "amountHint": "Ange beloppet i {currency}, t.ex. 4.50 eller 4,50 för {example}.",
+      "validityHint": "Kupongen kan användas från början av första dagen till slutet av sista dagen.",
+      "enableWeeklyDropAria": "Aktivera veckans drop",
+      "weeklyDropDayAria": "Veckodag för veckans drop",
+      "weeklyDropTimeAria": "Starttid för veckans drop",
+      "headlinePlaceholder": "15 % rabatt på din beställning",
+      "finePrintPlaceholder": "Gäller endast nya kunder",
+      "previewFallbackHeadline": "Din kupong",
+      "previewValidUntil": "Giltig till {date}",
+      "errors": {
+        "discountAboveZero": "Ange en rabatt över 0 %.",
+        "valueAboveZero": "Ange ett värde över 0.",
+        "chooseDates": "Välj när kupongen börjar och slutar gälla.",
+        "endBeforeStart": "Slutdatumet måste vara samma dag som eller efter startdatumet.",
+        "invalidValue": "Ange ett giltigt värde.",
+        "valueMustBePositive": "Värdet måste vara större än 0",
+        "totalLimitPositive": "Den totala användningsgränsen måste vara ett positivt tal",
+        "perUserLimitPositive": "Gränsen per användare måste vara ett positivt tal"
+      },
+      "discountErrors": {
+        "negative": "Rabatten kan inte vara negativ.",
+        "invalid": "Rabatten är inte ett giltigt tal.",
+        "decimals": "Rabatten får ha högst {decimals} decimaler.",
+        "tooLarge": "Rabatten är för stor.",
+        "tooHigh": "Rabatten får inte överstiga 100 %."
+      },
+      "valueErrors": {
+        "negative": "Värdet kan inte vara negativt.",
+        "invalid": "Värdet är inte ett giltigt tal.",
+        "wholeNumber": "Värdet måste vara ett heltal.",
+        "decimals": "Värdet får ha högst {decimals} decimaler.",
+        "tooLarge": "Värdet är för stort."
+      }
+    },
+    "bulkImport": {
+      "back": "Tillbaka till kuponger",
+      "title": "Importera kuponger från ett kalkylark",
+      "intro": "Ladda upp en CSV-fil (högst 500 rader). Alla kuponger skapas som utkast, så inget blir synligt förrän du publicerar.",
+      "columns": "Kolumner",
+      "downloadSample": "Ladda ner exempel-CSV",
+      "columnRequired": "<code>{name}</code> (obligatorisk): {help}",
+      "columnOptional": "<code>{name}</code> (valfri): {help}",
+      "columnHelp": {
+        "name": "Kupongens titel som kunderna ser, t.ex. \"Vårens kaffeerbjudande\".",
+        "type": "\"amount\" (beloppsrabatt), \"percent\" (procentrabatt) eller \"credit\" (butikskredit).",
+        "value": "Euro för amount/credit (10 eller 10.50), procent för percent (15 eller 12.5).",
+        "currency": "Kod med tre bokstäver, t.ex. EUR. Standard är din butiks valuta.",
+        "valid_from": "Första dagen kupongen gäller: 2026-10-01 eller 01.10.2026.",
+        "valid_to": "Sista dagen kupongen gäller (den är giltig till slutet av dagen).",
+        "code_prefix": "Bokstäver i början av varje kod, t.ex. SPRING.",
+        "usage_limit": "Hur många gånger den kan användas totalt. Lämna tomt för obegränsat."
+      },
+      "separatorHint": "Separera kolumner med kommatecken eller semikolon. Om du använder kommatecken, sätt decimalbelopp inom citattecken (\"4,50\") eller använd punkt (4.50).",
+      "chooseFile": "Välj en CSV-fil",
+      "chooseDifferent": "Klicka för att välja en annan fil",
+      "browse": "Klicka för att bläddra",
+      "fixRows": "Rätta de här raderna och ladda upp filen igen:",
+      "andMore": "…och {count} till.",
+      "readyToImport": "Redo att importera {count, plural, one {# kupong} other {# kuponger}}:",
+      "rowSummary": "{hasName, select, yes {{name}: } other {}}{value}, {from} – {to}{hasLimit, select, yes {, upp till {limit} användningar} other {}}",
+      "imported": "{count, plural, one {# kupong} other {# kuponger}} har importerats som utkast.",
+      "viewVouchers": "Visa kuponger",
+      "importing": "Importerar...",
+      "importCount": "Importera {count, plural, one {# kupong} other {# kuponger}}",
+      "importVouchers": "Importera kuponger",
+      "importFailedStatus": "Importen misslyckades (fel {status}).",
+      "importFailed": "Importen misslyckades"
+    }
+  },
+  "pageBuilder": {
+    "catalog": {
+      "sections": {
+        "hero": {
+          "label": "Hero + CTA",
+          "description": "Rubrik högst upp med huvudåtgärd."
+        },
+        "value_props": {
+          "label": "Fördelar",
+          "description": "Snabba fördelar och garantier."
+        },
+        "featured_products": {
+          "label": "Utvalda produkter",
+          "description": "Toppprodukter med priser och taggar."
+        },
+        "featured_vouchers": {
+          "label": "Utvalda kuponger",
+          "description": "Aktiva kupongkort för kampanjer."
+        },
+        "rental_packages": {
+          "label": "Hyrpaket",
+          "description": "Hyrpaket och dagspriser."
+        },
+        "categories": {
+          "label": "Kategorirutnät",
+          "description": "Bläddra efter typ, användning eller målgrupp."
+        },
+        "availability": {
+          "label": "Tillgänglighetskalender",
+          "description": "Aktuell tillgänglighet och bokningstider."
+        },
+        "testimonials": {
+          "label": "Kundomdömen",
+          "description": "Kundcitat och stjärnbetyg."
+        },
+        "gallery": {
+          "label": "Galleri",
+          "description": "Miljöbilder eller användningsexempel."
+        },
+        "pricing": {
+          "label": "Pristabell",
+          "description": "Tydliga prisnivåer."
+        },
+        "rental_terms": {
+          "label": "Hyresvillkor",
+          "description": "Deposition, försäkring och returpolicy."
+        },
+        "faq": {
+          "label": "Vanliga frågor",
+          "description": "Besvara vanliga invändningar."
+        },
+        "newsletter": {
+          "label": "Nyhetsbrevsanmälan",
+          "description": "Samla in e-postadresser för kampanjer."
+        },
+        "contact": {
+          "label": "Kontaktblock",
+          "description": "Support via chatt, e-post eller telefon."
+        },
+        "map": {
+          "label": "Karta",
+          "description": "Upphämtningsställe eller butikens läge."
+        }
+      },
+      "addons": {
+        "promo_bar": {
+          "label": "Kampanjfält",
+          "description": "Fast toppfält för erbjudanden och meddelanden."
+        },
+        "sticky_cta": {
+          "label": "Fast CTA",
+          "description": "Åtgärdsknapp som syns vid scrollning."
+        },
+        "chat_widget": {
+          "label": "Chattwidget",
+          "description": "Livechatt eller WhatsApp-integration."
+        },
+        "trust_badges": {
+          "label": "Förtroendemärken",
+          "description": "Märken för betalning, säkerhet eller kvalitet."
+        },
+        "social_proof": {
+          "label": "Socialt bevis-popup",
+          "description": "Senaste aktivitet och köp."
+        },
+        "countdown": {
+          "label": "Nedräkningstimer",
+          "description": "Skapar känsla av brådska för begränsade erbjudanden."
+        },
+        "reviews_widget": {
+          "label": "Recensionswidget",
+          "description": "Bädda in Google eller Trustpilot."
+        },
+        "language_switch": {
+          "label": "Språkväljare",
+          "description": "Snabbt språkbyte på sidan."
+        },
+        "analytics": {
+          "label": "Analyskod",
+          "description": "Platser för spårningspixlar."
+        },
+        "cookie_banner": {
+          "label": "Cookiebanner",
+          "description": "Samtyckesbanner enligt GDPR."
+        }
+      }
+    },
+    "editor": {
+      "previewTitle": "Förhandsvisning",
+      "edit": "Redigera",
+      "previewEmpty": "Inga sektioner har lagts till ännu. Växla till redigeringsläge för att lägga till sektioner.",
+      "title": "Visuell redigerare",
+      "preview": "Förhandsvisning",
+      "empty": "Inga sektioner ännu. Klicka på \"Lägg till sektion\" nedan för att börja bygga.",
+      "collapseSettings": "Fäll ihop inställningar",
+      "expandSettings": "Visa inställningar",
+      "removeSection": "Ta bort sektionen {label}",
+      "sectionTitle": "Sektionsrubrik",
+      "description": "Beskrivning",
+      "descriptionPlaceholder": "Valfri beskrivning",
+      "backgroundColor": "Bakgrundsfärg",
+      "layoutVariant": "Layoutvariant",
+      "layout": {
+        "default": "Standard",
+        "centered": "Centrerad",
+        "wide": "Bred",
+        "compact": "Kompakt"
+      },
+      "addSection": "Lägg till sektion",
+      "availableSections": "Tillgängliga sektioner",
+      "closeCatalog": "Stäng",
+      "allAdded": "Alla tillgängliga sektioner har lagts till.",
+      "count": "{configured, plural, one {# sektion konfigurerad} other {# sektioner konfigurerade}} / {available} tillgängliga att lägga till"
+    },
+    "client": {
+      "process": {
+        "store_launch": "Checklista för butikslansering",
+        "rental_launch": "Checklista för lansering av hyrsida",
+        "campaign_ops": "Veckovis kampanjdrift",
+        "support_ops": "Checklista för supportberedskap"
+      },
+      "toast": {
+        "saved": "Sidbyggaren har uppdaterats.",
+        "saveFailed": "Det gick inte att spara sidan",
+        "vibeFailed": "Vibe-agenten misslyckades",
+        "layoutGenerated": "Vibe-layout har skapats.",
+        "generateFailed": "Det gick inte att skapa layouten",
+        "agentFailed": "Agenten misslyckades",
+        "planGenerated": "Processplanen har skapats.",
+        "runAgentFailed": "Det gick inte att köra agenten"
+      },
+      "noData": "Inga sidbyggardata tillgängliga.",
+      "title": "Sidbyggare",
+      "intro": "Bygg butiks- och hyrsidor snabbt med modulära sektioner och tillägg.",
+      "introAi": "Bygg butiks- och hyrsidor snabbt med modulära sektioner och tillägg, med valfria AI-förslag.",
+      "tabs": {
+        "store": "Butik",
+        "rental": "Uthyrning"
+      },
+      "details": {
+        "title": "Siduppgifter",
+        "subtitle": "Titel, underrubrik och layout.",
+        "save": "Spara",
+        "pageTitle": "Sidtitel",
+        "subtitleLabel": "Underrubrik"
+      },
+      "sections": {
+        "title": "Sektioner",
+        "subtitle": "Dra för att ändra ordning, expandera för att konfigurera eller förhandsgranska layouten.",
+        "suggestLayout": "Föreslå en layout",
+        "suggestionsLeft": "AI-layoutförslag kvar: {remaining}/{limit}"
+      },
+      "addons": {
+        "title": "Tillägg",
+        "subtitle": "Extra widgetar och marknadsföringslager.",
+        "enable": "Aktivera tillägget {label}",
+        "disable": "Inaktivera tillägget {label}"
+      },
+      "summary": {
+        "title": "Sammanfattning",
+        "line": "{title} · {sections, plural, one {# sektion} other {# sektioner}} · {addons, plural, one {# tillägg} other {# tillägg}}",
+        "sectionsLabel": "Sektioner:",
+        "addonsLabel": "Tillägg:",
+        "none": "Inga"
+      },
+      "assistant": {
+        "title": "Assistent för lanseringschecklista",
+        "subtitle": "Skapa handlingsplaner och checklistor för driften.",
+        "goalLabel": "Processmål",
+        "createChecklist": "Skapa checklista",
+        "checklistsLeft": "Checklistor kvar: {remaining}/{limit}"
+      }
+    },
+    "renderer": {
+      "hero": {
+        "subtitle": "Utvalda erbjudanden, uthyrning och kuponger från {name}.",
+        "shopProducts": "Handla produkter",
+        "browseRentals": "Bläddra bland uthyrning"
+      },
+      "valueProps": {
+        "rewardsTitle": "Belöningar",
+        "rewardsText": "Kupongförmåner ingår.",
+        "stockTitle": "Pålitligt lager",
+        "stockText": "Aktuella priser och tillgänglighet.",
+        "datesTitle": "Flexibla datum",
+        "datesText": "Planera uthyrning enkelt."
+      },
+      "viewAll": "Visa alla",
+      "seeAll": "Se alla",
+      "products": {
+        "title": "Utvalda produkter",
+        "empty": "Inga produkter ännu.",
+        "fallbackDescription": "Produkthöjdpunkt"
+      },
+      "rentals": {
+        "title": "Hyrpaket",
+        "empty": "Inga hyrobjekt ännu.",
+        "fallbackDescription": "Hyrhöjdpunkt",
+        "perDay": "{price}/dag"
+      },
+      "categories": {
+        "title": "Bläddra bland kategorier",
+        "popular": "Populärt",
+        "business": "Företag",
+        "events": "Evenemang",
+        "seasonal": "Säsong",
+        "corporate": "Företagskunder",
+        "custom": "Anpassat"
+      },
+      "availability": {
+        "title": "Aktuell tillgänglighet",
+        "text": "Kontrollera tillgängligheten och begär offert på några minuter.",
+        "seeCalendar": "Se kalender"
+      },
+      "testimonials": {
+        "title": "Vad kunderna säger",
+        "smooth": "Smidig process",
+        "lovedVoucher": "Älskade kupongen",
+        "support": "Fantastisk support"
+      },
+      "gallery": {
+        "title": "Galleri"
+      },
+      "pricing": {
+        "title": "Priser",
+        "starter": "Starter",
+        "growth": "Growth",
+        "enterprise": "Enterprise",
+        "tierText": "Anpassade priser och support"
+      },
+      "rentalTerms": {
+        "title": "Hyresvillkor",
+        "text": "Tydliga regler för deposition, upphämtning och retur redan från början."
+      },
+      "faq": {
+        "title": "Vanliga frågor",
+        "redeem": "Hur löser jag in?",
+        "reschedule": "Kan jag boka om?",
+        "support": "Erbjuder ni support?"
+      },
+      "newsletter": {
+        "title": "Håll dig uppdaterad",
+        "text": "Få nya erbjudanden och hyrnyheter direkt i inkorgen.",
+        "emailLabel": "E-postadress",
+        "subscribe": "Prenumerera"
+      },
+      "contact": {
+        "title": "Kontakt",
+        "emailUs": "Mejla oss på {email}"
+      },
+      "map": {
+        "text": "Upphämtningsplatsen meddelas efter bokning."
+      },
+      "vouchers": {
+        "title": "Aktiva kuponger",
+        "empty": "Inga kuponger tillgängliga.",
+        "voucher": "Kupong",
+        "view": "Visa kupong"
+      }
+    }
+  },
+  "merchantGiftCards": {
+    "status": {
+      "active": "Aktivt",
+      "redeemed": "Inlöst",
+      "expired": "Utgånget",
+      "cancelled": "Annullerat"
+    },
+    "list": {
+      "metaTitle": "Presentkort",
+      "title": "Presentkort",
+      "subtitle": "Skapa och hantera presentkort",
+      "newGiftCard": "Nytt presentkort",
+      "stats": {
+        "total": "Presentkort totalt",
+        "totalDescription": "Alla utfärdade presentkort",
+        "active": "Aktiva",
+        "activeDescription": "Kan lösas in nu",
+        "redeemed": "Inlösta",
+        "redeemedDescription": "Slutförda inlösningar",
+        "totalValue": "Totalt värde",
+        "totalValueDescription": "Värde för utfärdade presentkort"
+      }
+    },
+    "listClient": {
+      "emptyTitle": "Inga presentkort ännu",
+      "emptyDescription": "Skapa ett presentkort med egen design och inlösen via QR.",
+      "createFirst": "Skapa ditt första presentkort",
+      "searchPlaceholder": "Sök på rubrik, kod eller meddelande",
+      "searchLabel": "Sök presentkort",
+      "status": "Status",
+      "allStatus": "Alla statusar",
+      "sortBy": "Sortera efter",
+      "sortDate": "Datum (nyast)",
+      "sortAmount": "Belopp (högst först)",
+      "showing": "Visar {shown} av {total, plural, one {# presentkort} other {# presentkort}}",
+      "clearFilters": "Rensa filter",
+      "noMatches": "Inga presentkort matchar dina filter.",
+      "defaultHeadline": "Presentkort",
+      "noExpiry": "Inget utgångsdatum",
+      "validUntil": "Giltigt till: {date}",
+      "redeemedOn": "Inlöst: {date}",
+      "details": "Detaljer",
+      "view": "Visa"
+    },
+    "detail": {
+      "title": "Presentkort",
+      "code": "Kod {code}",
+      "publicView": "Publik vy",
+      "newGiftCard": "Nytt presentkort",
+      "detailsTitle": "Presentkortsdetaljer",
+      "value": "Värde",
+      "validFrom": "Giltigt från",
+      "validTo": "Giltigt till",
+      "noExpiry": "Inget utgångsdatum",
+      "redeemedAt": "Inlöst",
+      "notRedeemed": "Inte inlöst",
+      "qrTitle": "QR-kod för inlösen av personal",
+      "qrHelp": "Personalen kan skanna QR-koden för att lösa in presentkortet och göra det ogiltigt."
+    },
+    "new": {
+      "title": "Nytt presentkort",
+      "subtitle": "Anpassa och utfärda ett presentkort",
+      "created": "Presentkortet har skapats.",
+      "cancel": "Avbryt",
+      "creating": "Skapar...",
+      "submit": "Skapa presentkort",
+      "errors": {
+        "amountRequired": "Ange ett belopp över 0.",
+        "endBeforeStart": "Slutdatumet måste vara samma dag som eller efter startdatumet.",
+        "createFailed": "Det gick inte att skapa presentkortet"
+      },
+      "amountErrors": {
+        "negative": "Beloppet kan inte vara negativt.",
+        "invalid": "Beloppet är inte ett giltigt tal.",
+        "wholeNumber": "Beloppet måste vara ett heltal.",
+        "decimals": "Beloppet får ha högst {decimals} decimaler.",
+        "tooLarge": "Beloppet är för stort."
+      },
+      "priceErrors": {
+        "negative": "Försäljningspriset kan inte vara negativt.",
+        "invalid": "Försäljningspriset är inte ett giltigt tal.",
+        "wholeNumber": "Försäljningspriset måste vara ett heltal.",
+        "decimals": "Försäljningspriset får ha högst {decimals} decimaler.",
+        "tooLarge": "Försäljningspriset är för högt."
+      },
+      "valueSection": {
+        "title": "Värde och giltighet",
+        "description": "Ange belopp, valuta och utgångsdatum",
+        "amount": "Belopp",
+        "faceValue": "Nominellt värde: {value}.",
+        "amountHelp": "Ange beloppet i {currency}, t.ex. 50 eller 49,90 för {example}.",
+        "currency": "Valuta",
+        "validFrom": "Giltigt från",
+        "validTo": "Giltigt till",
+        "noExpiry": "Inget utgångsdatum"
+      },
+      "purchaseSection": {
+        "title": "Köp för kunder",
+        "description": "Låt kunderna köpa presentkortet online",
+        "purchasable": "Tillgängligt för kunder att köpa",
+        "salePrice": "Försäljningspris (valfritt, standard är nominellt värde)",
+        "salePricePlaceholder": "Samma som beloppet",
+        "customersPay": "Kunderna betalar {value}.",
+        "salePriceHelp": "Lämna tomt för att sälja till nominellt värde. Ange ett annat pris för kampanjer."
+      },
+      "brandingSection": {
+        "title": "Design och meddelande",
+        "description": "Rubrik, meddelande, bilder och färger",
+        "headline": "Rubrik",
+        "headlinePlaceholder": "Present till kaffeälskare",
+        "message": "Meddelande",
+        "messagePlaceholder": "Lägg till ett personligt meddelande till mottagaren",
+        "logoUrl": "Logotypens URL",
+        "imageUrl": "Bildens URL",
+        "accentColor": "Accentfärg",
+        "backgroundColor": "Bakgrundsfärg",
+        "textColor": "Textfärg",
+        "codePrefix": "Kodprefix (valfritt)"
+      },
+      "preview": {
+        "title": "Förhandsvisning",
+        "defaultHeadline": "Presentkort",
+        "imageAlt": "Presentkort",
+        "logoAlt": "Varumärkeslogotyp",
+        "notePlaceholder": "Lägg till en personlig hälsning"
+      }
+    },
+    "gifts": {
+      "title": "Presentprodukter",
+      "subtitle": "Hantera dina produkter i Gift Hub",
+      "dashboard": "Instrumentpanel",
+      "confirmDelete": "Är du säker? Produkten inaktiveras.",
+      "stats": {
+        "total": "Totalt",
+        "active": "Aktiva",
+        "views": "Visningar",
+        "purchases": "Köp"
+      },
+      "emptyTitle": "Inga presentprodukter ännu",
+      "emptyDescription": "Lägg till din första produkt för att synas i Gift Hub-flödet.",
+      "emptyApiHint": "Använd API:t på <code>{endpoint}</code> för att skapa produkter.",
+      "inactive": "Inaktiv",
+      "featured": "Utvald",
+      "views": "{count, plural, one {# visning} other {# visningar}}",
+      "purchases": "{count, plural, one {# köp} other {# köp}}",
+      "conversionRate": "{rate} % konv.",
+      "activate": "Aktivera",
+      "deactivate": "Inaktivera",
+      "delete": "Radera"
+    }
+  },
+  "dsComponents": {
+    "common": {
+      "noData": "Inga data tillgängliga",
+      "value": "Värde: <strong>{value}</strong>",
+      "dismiss": "Stäng",
+      "remove": "Ta bort",
+      "dialog": "Dialogruta",
+      "close": "Stäng",
+      "loading": "Laddar"
+    },
+    "analyticsFunnel": {
+      "empty": "Ingen aktivitet ännu under perioden",
+      "top": "Topp",
+      "drop": "−{rate} % bortfall"
+    },
+    "periodComparison": {
+      "title": "Periodjämförelse",
+      "loading": "Laddar...",
+      "previous": "Föregående: {value}",
+      "noData": "Inga data tillgängliga",
+      "period": {
+        "day": "Dag",
+        "week": "Vecka",
+        "month": "Månad",
+        "quarter": "Kvartal",
+        "year": "År"
+      },
+      "metric": {
+        "revenue": "Intäkter",
+        "redemptions": "Inlösningar",
+        "purchases": "Köp",
+        "referrals": "Rekommendationer",
+        "customers": "Kunder"
+      }
+    },
+    "trendChart": {
+      "noData": "Inga data"
+    },
+    "conversionChart": {
+      "noData": "Inga data tillgängliga",
+      "previous": "föreg.: {value}"
+    },
+    "funnelChart": {
+      "empty": "Ingen aktivitet ännu under perioden"
+    },
+    "geoMap": {
+      "noData": "Inga data tillgängliga",
+      "value": "Värde: <strong>{value}</strong>",
+      "country": {
+        "GB": "Storbritannien",
+        "IE": "Irland",
+        "FR": "Frankrike",
+        "DE": "Tyskland",
+        "ES": "Spanien",
+        "PT": "Portugal",
+        "IT": "Italien",
+        "NL": "Nederländerna",
+        "BE": "Belgien",
+        "CH": "Schweiz",
+        "AT": "Österrike",
+        "PL": "Polen",
+        "CZ": "Tjeckien",
+        "SE": "Sverige",
+        "NO": "Norge",
+        "FI": "Finland",
+        "DK": "Danmark",
+        "EE": "Estland",
+        "LV": "Lettland",
+        "LT": "Litauen",
+        "HU": "Ungern",
+        "RO": "Rumänien",
+        "BG": "Bulgarien",
+        "GR": "Grekland",
+        "HR": "Kroatien",
+        "SK": "Slovakien",
+        "SI": "Slovenien",
+        "RS": "Serbien",
+        "UA": "Ukraina",
+        "BY": "Belarus"
+      }
+    },
+    "liveActivityChart": {
+      "waiting": "Väntar på data..."
+    },
+    "pieDonutChart": {
+      "noData": "Inga data tillgängliga",
+      "total": "Totalt"
+    },
+    "activityFeed": {
+      "justNow": "just nu",
+      "minutesAgo": "{count} min sedan",
+      "hoursAgo": "{count} h sedan",
+      "daysAgo": "{count} d sedan",
+      "empty": "Ingen aktivitet ännu",
+      "loadMore": "Läs in fler",
+      "eventType": {
+        "purchase": "Köp",
+        "redemption": "Inlösen",
+        "signup": "Registrering",
+        "alert": "Varning"
+      }
+    },
+    "dateRange": {
+      "days7": "7 dagar",
+      "days30": "30 dagar",
+      "days90": "90 dagar",
+      "year1": "1 år",
+      "custom": "Anpassat"
+    },
+    "chartCard": {
+      "fullscreen": "Helskärm",
+      "exitFullscreen": "Avsluta helskärm",
+      "retry": "Försök igen"
+    },
+    "dashboardHeader": {
+      "export": "Exportera",
+      "exportAs": "Exportera som {format}"
+    },
+    "dataTable": {
+      "empty": "Inga data tillgängliga",
+      "showing": "Visar {from}–{to} av {total}",
+      "previousPage": "Föregående sida",
+      "nextPage": "Nästa sida"
+    },
+    "liveIndicator": {
+      "label": {
+        "connected": "Live",
+        "reconnecting": "Återansluter",
+        "disconnected": "Frånkopplad"
+      },
+      "status": {
+        "connected": "Ansluten",
+        "reconnecting": "Återansluter",
+        "disconnected": "Frånkopplad"
+      }
+    },
+    "metricCard": {
+      "vsPrevPeriod": "jämfört med föregående period"
+    },
+    "statComparison": {
+      "current": "Nuvarande",
+      "previous": "Föregående",
+      "change": "förändring"
+    },
+    "aiInsightPanel": {
+      "title": "AI-insikter",
+      "placeholder": "Ställ en fråga till AI...",
+      "send": "Skicka"
+    },
+    "livePulseIndicator": {
+      "status": {
+        "connected": "Live",
+        "degraded": "Försämrad",
+        "disconnected": "Offline"
+      },
+      "latency": "Latens: {ms} ms",
+      "lastUpdate": "Senast uppdaterad: {time}"
+    },
+    "notificationBell": {
+      "ariaLabel": "Notiser",
+      "title": "Notiser",
+      "markAllRead": "Markera alla som lästa",
+      "empty": "Inga notiser",
+      "ariaLabelUnread": "Notiser ({count} olästa)"
+    },
+    "premiumChartCard": {
+      "info": "Info",
+      "fullscreen": "Helskärm",
+      "exitFullscreen": "Avsluta helskärm",
+      "moreOptions": "Fler alternativ",
+      "empty": "Inga data tillgängliga för perioden"
+    },
+    "premiumMetricCard": {
+      "vsLastPeriod": "jämfört med förra perioden"
+    },
+    "statusGrid": {
+      "status": {
+        "operational": "I drift",
+        "degraded": "Försämrad",
+        "outage": "Avbrott"
+      }
+    },
+    "select": {
+      "placeholder": "Välj...",
+      "search": "Sök...",
+      "empty": "Inga alternativ hittades",
+      "removeOption": "Ta bort {label}"
+    },
+    "sidebar": {
+      "expand": "Expandera sidofältet",
+      "collapse": "Fäll ihop sidofältet",
+      "openMenu": "Öppna meny",
+      "closeMenu": "Stäng meny"
+    },
+    "iconSystem": {
+      "notFound": "Ikonen \"{name}\" hittades inte",
+      "badge": "{count, plural, one {# notis} other {# notiser}}"
+    },
+    "responsivePanel": {
+      "sidePanel": "Sidopanel",
+      "closePanel": "Stäng panelen"
+    },
+    "codeBlock": {
+      "copyCode": "Kopiera kod",
+      "copied": "Kopierat",
+      "copy": "Kopiera"
+    }
+  },
+  "merchantStore": {
+    "customers": {
+      "metaTitle": "Kunder",
+      "title": "Kunder",
+      "summary": "{count, plural, one {# kund} other {# kunder}} · {revenue} i totala intäkter",
+      "stats": {
+        "totalCustomers": "Kunder totalt",
+        "totalRevenue": "Totala intäkter",
+        "totalRedemptions": "Inlösningar totalt"
+      },
+      "table": {
+        "customer": "Kund",
+        "email": "E-post",
+        "purchases": "Köp",
+        "totalSpent": "Totalt spenderat",
+        "redemptions": "Inlösningar",
+        "lastPurchase": "Senaste köp"
+      },
+      "empty": "Inga kunder ännu",
+      "unknown": "Okänd"
+    },
+    "qrCheckout": {
+      "title": "Snabbkassa med QR",
+      "subtitle": "Skapa QR-koder för snabb kundbetalning",
+      "voucherLabel": "Länka till kupong (valfritt)",
+      "generalOption": "Allmän kassa (ingen specifik kupong)",
+      "voucherOption": "{type} – {value} {currency} ({status})",
+      "generating": "Skapar...",
+      "generate": "Skapa QR-kod",
+      "qrAlt": "QR-kod för kassan",
+      "scanToCheckout": "Skanna för att betala",
+      "print": "Skriv ut QR-kod"
+    },
+    "redemptions": {
+      "metaTitle": "Inlösningar",
+      "subtitle": "Visa och bekräfta kupongsinlösningar.",
+      "stats": {
+        "totalTitle": "Inlösningar totalt",
+        "totalDescription": "Alla inskickade inlösningar",
+        "pendingTitle": "Väntande",
+        "pendingDescription": "Väntar på bekräftelse",
+        "confirmedTitle": "Bekräftade",
+        "confirmedDescription": "Godkända inlösningar",
+        "discountsTitle": "Givna rabatter",
+        "discountsDescription": "Bekräftade rabatter"
+      },
+      "empty": {
+        "title": "Inga inlösningar ännu",
+        "description": "Inlösningar visas här när kunder använder kuponger."
+      },
+      "voucherFallback": "Kupong",
+      "card": {
+        "order": "Order på {amount}",
+        "discount": "Rabatt: {amount}",
+        "discountReferred": "Rabatt: {amount} – rekommenderad av {name}",
+        "confirmed": "Bekräftad",
+        "pending": "Väntande",
+        "method": "Metod: {method}",
+        "methods": {
+          "online": "Online",
+          "in_store": "I butik"
+        },
+        "orderReference": "Order: {reference}",
+        "notAvailable": "–",
+        "location": "Plats: {location}",
+        "date": "Datum: {date}"
+      },
+      "confirm": {
+        "prompt": "Bekräfta inlösen? Det frigör kredit för rekommendatören.",
+        "confirmLabel": "Bekräfta",
+        "success": "Inlösen har bekräftats. Kredit har frigjorts för rekommendatören.",
+        "error": "Det gick inte att bekräfta inlösen. Försök igen.",
+        "confirming": "Bekräftar...",
+        "button": "Bekräfta inlösen"
+      },
+      "export": {
+        "success": "Inlösningarna har exporterats!",
+        "error": "Det gick inte att exportera inlösningarna",
+        "exporting": "Exporterar...",
+        "button": "Exportera CSV"
+      }
+    },
+    "reviews": {
+      "title": "Recensioner",
+      "subtitle": "Bevaka och svara på kundrecensioner",
+      "filters": "Filter",
+      "reviewCount": "{count, plural, one {# recension} other {# recensioner}}",
+      "ratingDistribution": "Betygsfördelning",
+      "responseRate": "Svarsfrekvens",
+      "replied": "Besvarade",
+      "pending": "Väntande",
+      "responseRatePercent": "{percent} % svarsfrekvens",
+      "filter": {
+        "rating": "Betyg",
+        "allRatings": "Alla betyg",
+        "stars": "{count, plural, one {# stjärna} other {# stjärnor}}",
+        "replyStatus": "Svarsstatus",
+        "all": "Alla",
+        "needsReply": "Behöver svar",
+        "replied": "Besvarade",
+        "clear": "Rensa"
+      },
+      "loading": "Laddar recensioner...",
+      "empty": "Inga recensioner hittades.",
+      "anonymous": "Anonym",
+      "verified": "Verifierad",
+      "campaign": "Kampanj: {name}",
+      "voucher": "Kupong: {code}",
+      "foundHelpful": "{count} tyckte den var hjälpsam",
+      "yourReply": "Ditt svar",
+      "replyPlaceholder": "Skriv ditt svar...",
+      "posting": "Publicerar...",
+      "postReply": "Publicera svar",
+      "cancel": "Avbryt",
+      "reply": "Svara",
+      "showing": "Visar {from}–{to} av {total}",
+      "pageOf": "Sida {page} av {totalPages}",
+      "previousPage": "Föregående sida",
+      "nextPage": "Nästa sida",
+      "loadFailed": "Det gick inte att ladda recensionerna",
+      "replyFailed": "Det gick inte att svara",
+      "replyPosted": "Svaret har publicerats"
+    },
+    "scanner": {
+      "title": "Scanner",
+      "subtitle": "Skanna kuponger, presentkort och biljetter",
+      "manual": "Manuellt",
+      "camera": "Kamera",
+      "scanning": "Skannar...",
+      "cameraDenied": "Kameraåtkomst nekades. Tillåt kameraåtkomst i webbläsarens inställningar eller skriv in koden nedan.",
+      "cameraUnavailable": "Ingen kamera är tillgänglig. Skriv in koden nedan i stället.",
+      "pointAtCode": "Rikta mot en QR-kod för att skanna automatiskt",
+      "enterCode": "Ange kod",
+      "codePlaceholder": "Kupongkod (t.ex. AUD-CMUI0TG1), kuponglänk, biljett- eller presentkortskod",
+      "codeAriaLabel": "Kod att skanna",
+      "scan": "Skanna",
+      "found": {
+        "voucher": "Kupong hittades",
+        "gift_card": "Presentkort hittades",
+        "ticket": "Biljett hittades"
+      },
+      "info": {
+        "ticketNumber": "Biljett nr",
+        "event": "Evenemang",
+        "type": "Typ",
+        "standard": "Standard",
+        "attendee": "Deltagare",
+        "code": "Kod",
+        "amount": "Belopp",
+        "message": "Meddelande",
+        "voucher": "Kupong",
+        "campaign": "Kampanj",
+        "none": "Ingen",
+        "value": "Värde",
+        "validUntil": "Giltig till"
+      },
+      "redeem": "Lös in",
+      "redeeming": "Löser in...",
+      "cannotRedeem": "Det här kan inte lösas in (status: {status})",
+      "redeemed": {
+        "voucher": "Kupongen har lösts in!",
+        "gift_card": "Presentkortet har lösts in!",
+        "ticket": "Biljetten har lösts in!"
+      },
+      "errors": {
+        "enterCode": "Ange en kod",
+        "notFound": "Hittades inte",
+        "scanFailed": "Skanningen misslyckades",
+        "redeemFailed": "Inlösen misslyckades"
+      },
+      "status": {
+        "giftCard": {
+          "active": "aktivt",
+          "redeemed": "inlöst",
+          "expired": "utgånget",
+          "cancelled": "annullerat"
+        },
+        "ticket": {
+          "available": "tillgänglig",
+          "sold": "såld",
+          "used": "använd",
+          "cancelled": "annullerad",
+          "refunded": "återbetald"
+        }
+      }
+    }
+  },
+  "merchantCatalog": {
+    "priceErrors": {
+      "negative": "Priset kan inte vara negativt.",
+      "invalid": "Priset är inte ett giltigt tal.",
+      "wholeNumber": "Priset måste vara ett heltal.",
+      "decimals": "Priset får ha högst {decimals} decimaler.",
+      "tooLarge": "Priset är för högt."
+    },
+    "appointments": {
+      "title": "Bokningar",
+      "subtitle": "Hantera bokningar och tillgänglighet",
+      "createSlot": "Skapa tid",
+      "form": {
+        "serviceName": "Tjänstens namn",
+        "price": "Pris ({currency}, lämna tomt om gratis)",
+        "startTime": "Starttid",
+        "endTime": "Sluttid",
+        "notes": "Anteckningar",
+        "creating": "Skapar…",
+        "submit": "Skapa ledig tid"
+      },
+      "status": {
+        "all": "Alla",
+        "pending": "Väntande",
+        "confirmed": "Bekräftade",
+        "cancelled": "Avbokade",
+        "completed": "Genomförda"
+      },
+      "loading": "Laddar...",
+      "empty": "Inga bokningar hittades",
+      "bookedBy": "Bokad av: {name}",
+      "confirm": "Bekräfta",
+      "confirmAria": "Bekräfta bokningen",
+      "cancel": "Avboka",
+      "cancelAria": "Avboka bokningen",
+      "errors": {
+        "endBeforeStart": "Sluttiden måste vara efter starttiden.",
+        "createFailed": "Det gick inte att skapa den lediga tiden. Försök igen.",
+        "network": "Det gick inte att nå servern. Kontrollera anslutningen och försök igen.",
+        "updateFailed": "Det gick inte att uppdatera bokningen (fel {status})."
+      }
+    },
+    "inventory": {
+      "title": "Lager",
+      "subtitle": "Följ lagersaldon och hantera kupongernas tillgänglighet",
+      "refresh": "Uppdatera",
+      "summary": {
+        "totalItems": "Artiklar totalt",
+        "lowStock": "Lågt lager",
+        "outOfStock": "Slut i lager"
+      },
+      "alerts": {
+        "title": "Varningar om lågt lager ({count})",
+        "threshold": "{stock} / {threshold} gräns"
+      },
+      "loading": "Laddar lager...",
+      "empty": "Inga kuponger hittades",
+      "typeVoucher": "Kupong: {type}",
+      "stockStatus": {
+        "unlimited": "Obegränsat",
+        "outOfStock": "Slut i lager",
+        "lowStock": "Lågt lager",
+        "inStock": "I lager"
+      },
+      "stock": "Lager: {stock}",
+      "purchased": "Köpta: {count}",
+      "redeemed": "Inlösta: {count}",
+      "validUntil": "Giltig till {date}",
+      "edit": {
+        "button": "Redigera lager",
+        "stockQuantity": "Lagersaldo",
+        "threshold": "Gräns för lågt lager",
+        "save": "Spara",
+        "saving": "Sparar...",
+        "cancel": "Avbryt"
+      },
+      "stockUpdated": "Lagret har uppdaterats",
+      "errors": {
+        "loadFailed": "Det gick inte att ladda lagret",
+        "updateFailed": "Det gick inte att uppdatera lagret"
+      }
+    },
+    "pageBuilder": {
+      "aiNotConfigured": "AI-förslag är inte konfigurerade på plattformen ännu, så verktygen för automatisk layout och checklistor är dolda. Du kan fortfarande bygga och redigera dina sidor manuellt."
+    },
+    "pricing": {
+      "title": "Dynamisk prissättning",
+      "newRule": "Ny regel",
+      "ruleTypes": {
+        "demand": {
+          "label": "Efterfrågebaserad",
+          "desc": "Justera priset utifrån förhållandet mellan visningar och köp"
+        },
+        "timeOfDay": {
+          "label": "Tid på dygnet",
+          "desc": "Olika priser för hög- och lågtrafik"
+        },
+        "inventory": {
+          "label": "Lager",
+          "desc": "Priset ändras utifrån återstående lager"
+        },
+        "surge": {
+          "label": "Topptillägg",
+          "desc": "Påslag vid särskilda evenemang/helgdagar"
+        },
+        "loyalty": {
+          "label": "Lojalitet",
+          "desc": "Rabatter för återkommande kunder"
+        }
+      },
+      "form": {
+        "title": "Skapa prisregel",
+        "ruleType": "Regeltyp",
+        "priority": "Prioritet",
+        "priorityPlaceholder": "Högre = tillämpas först",
+        "config": "Konfiguration (JSON)",
+        "submit": "Skapa regel",
+        "cancel": "Avbryt"
+      },
+      "loading": "Laddar regler...",
+      "empty": "Inga prisregler ännu. Skapa en för att aktivera dynamisk prissättning.",
+      "table": {
+        "type": "Typ",
+        "priority": "Prioritet",
+        "config": "Konfiguration",
+        "status": "Status",
+        "actions": "Åtgärder"
+      },
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "deleteAria": "Radera prisregel",
+      "deleteConfirm": "Radera prisregeln?",
+      "delete": "Radera",
+      "errors": {
+        "invalidJson": "Konfigurationsfältet måste innehålla giltig JSON."
+      },
+      "preview": {
+        "title": "Förhandsvisning av pris",
+        "description": "Ange ett kupong-ID för att se hur aktiva regler påverkar priset.",
+        "voucherId": "Kupong-ID",
+        "voucherIdPlaceholder": "Ange kupong-ID",
+        "calculate": "Beräkna",
+        "error": "Det gick inte att beräkna priset",
+        "basePrice": "Grundpris",
+        "finalPrice": "Slutpris"
+      }
+    },
+    "rentals": {
+      "title": "Hyrbokningar",
+      "subtitle": "Hantera hyrförfrågningar och returer",
+      "status": {
+        "all": "Alla",
+        "pending": "Väntande",
+        "approved": "Godkända",
+        "rejected": "Avvisade",
+        "paid": "Betalda",
+        "active": "Aktiva",
+        "returned": "Returnerade",
+        "cancelled": "Avbokade"
+      },
+      "empty": "Inga hyrbokningar hittades.",
+      "dates": "{start} – {end} ({days, plural, one {# dag} other {# dagar}})",
+      "total": "Totalt: <strong>{total}</strong> ({rate}/dag)",
+      "note": "Anteckning: {note}",
+      "rejectedReason": "Avvisad: {reason}",
+      "bookedMeta": "Bokad: {date} | Användare: {user}...",
+      "approve": "Godkänn",
+      "reasonPlaceholder": "Anledning (valfritt)",
+      "confirm": "Bekräfta",
+      "cancel": "Avbryt",
+      "reject": "Avvisa",
+      "markReturned": "Markera som returnerad"
+    },
+    "subscriptionBoxes": {
+      "title": "Prenumerationslådor",
+      "subtitle": "Hantera återkommande kuponglådor",
+      "newBox": "+ Ny låda",
+      "cancel": "Avbryt",
+      "form": {
+        "name": "Namn",
+        "description": "Beskrivning",
+        "price": "Pris ({currency})",
+        "currency": "Valuta",
+        "interval": "Intervall",
+        "maxItems": "Max antal artiklar",
+        "creating": "Skapar...",
+        "submit": "Skapa låda"
+      },
+      "interval": {
+        "weekly": "Varje vecka",
+        "monthly": "Varje månad",
+        "quarterly": "Varje kvartal"
+      },
+      "created": "Prenumerationslådan har skapats.",
+      "empty": "Inga prenumerationslådor ännu. Skapa din första.",
+      "pricePerInterval": "{price}/{interval}",
+      "subscribers": "{count, plural, one {# prenumerant} other {# prenumeranter}}",
+      "items": "{count, plural, one {# artikel} other {# artiklar}}",
+      "errors": {
+        "priceAboveZero": "Ange ett pris över 0.",
+        "createFailed": "Det gick inte att skapa prenumerationslådan (fel {status}).",
+        "network": "Det gick inte att skapa prenumerationslådan. Kontrollera anslutningen och försök igen."
+      },
+      "intervalUnit": {
+        "weekly": "vecka",
+        "monthly": "månad",
+        "quarterly": "kvartal"
+      }
+    }
+  },
+  "merchantSettings": {
+    "form": {
+      "website": "Webbplats",
+      "supportEmail": "E-post för support",
+      "logoUrl": "Logotypens URL",
+      "primaryColor": "Primärfärg",
+      "secondaryColor": "Sekundärfärg",
+      "backgroundColor": "Bakgrundsfärg",
+      "primaryColorHex": "Hexvärde för primärfärg",
+      "secondaryColorHex": "Hexvärde för sekundärfärg",
+      "backgroundColorHex": "Hexvärde för bakgrundsfärg",
+      "saving": "Sparar..."
+    },
+    "page": {
+      "metaTitle": "Handlarinställningar",
+      "infoTitle": "Handlarinformation",
+      "infoSubtitle": "Grundläggande uppgifter om handlaren",
+      "name": "Namn",
+      "slug": "Slug",
+      "country": "Land",
+      "defaultCurrency": "Standardvaluta",
+      "website": "Webbplats",
+      "supportEmail": "E-post för support",
+      "completeOnboarding": "Slutför introduktionen",
+      "billingTitle": "Fakturering",
+      "billingSubtitle": "14 dagars gratis provperiod, därefter planer från 19 €/månad. 5 % transaktionsavgift på kupongförsäljning.",
+      "status": "Status",
+      "trialStatus": "Gratis provperiod – {days, plural, one {# dag} other {# dagar}} kvar",
+      "statusActive": "Aktiv",
+      "statusInactive": "Inaktiv",
+      "currentPlan": "Nuvarande plan",
+      "trialEnds": "Provperioden slutar",
+      "periodEnds": "Nuvarande period slutar",
+      "manage": "Hantera",
+      "payoutsTitle": "Utbetalningar",
+      "payoutsEnabled": "Stripe-kontot är anslutet och aktiverat",
+      "payoutsInProgress": "Registrering pågår – slutför den för att aktivera utbetalningar",
+      "payoutsNotConnected": "Anslut Stripe för att få utbetalningar från kupongförsäljning",
+      "webhooksTitle": "Webhooks",
+      "webhooksSubtitle": "Ta emot händelsenotiser i realtid via HTTP",
+      "notificationsTitle": "Notiser",
+      "notificationsSubtitle": "Välj vilka e-postkategorier du får som teammedlem."
+    },
+    "brandProfile": {
+      "title": "Varumärkesprofil",
+      "subtitle": "Anpassa varumärkets färger, logotyp och kontaktuppgifter.",
+      "updated": "Varumärkesprofilen har uppdaterats!",
+      "updateFailed": "Det gick inte att uppdatera varumärkesprofilen",
+      "save": "Spara ändringar"
+    },
+    "domains": {
+      "title": "Egna domäner",
+      "subtitle": "Anslut din egen domän och verifiera den för routning.",
+      "inputLabel": "Egen domän",
+      "adding": "Lägger till...",
+      "add": "Lägg till domän",
+      "empty": "Inga domäner har konfigurerats.",
+      "statusLine": "Status: {status}",
+      "statusValue": {
+        "pending": "väntande",
+        "verified": "verifierad"
+      },
+      "verify": "Verifiera",
+      "remove": "Ta bort",
+      "addedTitle": "Domänen har lagts till",
+      "addedDescription": "Verifiera DNS innan du flyttar över trafiken.",
+      "addErrorTitle": "Domänfel",
+      "addErrorDescription": "Det gick inte att lägga till domänen.",
+      "verifiedTitle": "Domänen har verifierats",
+      "verifiedDescription": "Routningen är nu aktiv.",
+      "verifyErrorTitle": "Verifieringsfel",
+      "verifyErrorDescription": "Det gick inte att verifiera domänen.",
+      "removedTitle": "Domänen har tagits bort",
+      "removeErrorTitle": "Fel vid borttagning",
+      "removeErrorDescription": "Det gick inte att ta bort domänen."
+    },
+    "notifications": {
+      "metaTitle": "Notisinställningar",
+      "title": "Notisinställningar",
+      "intro": "Styr vilka e-postkategorier som hamnar i din inkorg som medlem i <name>{merchantName}</name>. Inställningarna är personliga – varje teammedlem hanterar sina egna.",
+      "required": "Obligatorisk",
+      "toggle": "Växla {label}",
+      "unsaved": "Osparade ändringar",
+      "allSaved": "Alla ändringar har sparats",
+      "saving": "Sparar…",
+      "save": "Spara inställningar",
+      "savedTitle": "Inställningarna har sparats",
+      "saveFailedTitle": "Det gick inte att spara",
+      "saveFailedDescription": "Det gick inte att uppdatera dina notisinställningar.",
+      "category": {
+        "orders": {
+          "label": "Nya beställningar och inlösningar",
+          "description": "E-post när en kupong köps, löses in eller ges bort."
+        },
+        "payouts": {
+          "label": "Utbetalningar",
+          "description": "Mottagna, misslyckade och spärrade utbetalningar från Stripe."
+        },
+        "fraud_alerts": {
+          "label": "Bedrägeri- och säkerhetsvarningar",
+          "description": "Ovanliga inlösningsmönster, återkrav och avvikande inloggningar i teamet. Kan inte inaktiveras."
+        },
+        "campaign_updates": {
+          "label": "Kampanjens livscykel",
+          "description": "Kampanj publicerad, upphör om 7 dagar, avslutad."
+        },
+        "weekly_digest": {
+          "label": "Veckosammanfattning av resultat",
+          "description": "Sammanfattning varje måndag av förra veckans intäkter, inlösningar och populäraste kuponger."
+        },
+        "product_updates": {
+          "label": "Produktnyheter från GiftHub",
+          "description": "Nya funktioner, färdplan och tips då och då. Högst 1 gång/månad."
+        }
+      }
+    },
+    "payouts": {
+      "metaTitle": "Utbetalningar till handlare",
+      "title": "Utbetalningar",
+      "intro": "Anslut ett Stripe-konto så betalas kupongförsäljningen direkt till din bank. Vi tar en plattformsavgift på 5 %; resten förs automatiskt över till ditt anslutna konto vid köptillfället.",
+      "stripeAccount": "Stripe-konto",
+      "capabilityState": "Funktionsstatus",
+      "accountStatus": {
+        "pending": "väntande",
+        "restricted": "begränsat",
+        "enabled": "aktiverat",
+        "disabled": "inaktiverat"
+      },
+      "backToSettings": "Tillbaka till inställningar",
+      "howTitle": "Så fungerar utbetalningar",
+      "how1": "Kunderna betalar i plattformens kassa. Vi tar emot hela beloppet och håller det hos Stripe.",
+      "how2": "När en betalning går igenom skickar Stripe försäljningspriset minus vår avgift på 5 % direkt till ditt utbetalningskonto.",
+      "how3": "Stripe betalar sedan ut pengarna till ditt bankkonto enligt det schema du väljer i dina utbetalningsinställningar hos Stripe (vanligtvis dagligen, ett par dagar efter försäljningen).",
+      "how4": "Återkrav och återbetalningar dras av från nästa utbetalning; administratörerna kan spärra ditt saldo manuellt om vi upptäcker bedrägeri.",
+      "badge": {
+        "enabled": {
+          "label": "Utbetalningar aktiverade",
+          "description": "Pengar från kupongförsäljning förs över till ditt bankkonto av Stripe enligt utbetalningsschemat."
+        },
+        "restricted": {
+          "label": "Mer information krävs",
+          "description": "Stripe behöver mer information innan utbetalningar kan aktiveras. Öppna registreringslänken nedan för att fortsätta."
+        },
+        "disabled": {
+          "label": "Utbetalningar inaktiverade",
+          "description": "Stripe har inaktiverat utbetalningar för kontot. Öppna Stripes instrumentpanel för att åtgärda de utestående kraven."
+        },
+        "notConnected": {
+          "label": "Inte anslutet",
+          "description": "Du har inte anslutit något Stripe-konto ännu. Utbetalningar hålls inne tills registreringen är klar – under tiden behandlas kupongförsäljningen ändå, men pengarna stannar på plattformens saldo."
+        }
+      },
+      "actions": {
+        "startFailed": "Det gick inte att starta registreringen hos Stripe",
+        "startNetworkError": "Nätverksfel när registreringen skulle startas",
+        "dashboardFailed": "Det gick inte att öppna Stripes instrumentpanel",
+        "dashboardNetworkError": "Nätverksfel när instrumentpanelen skulle öppnas",
+        "disconnectConfirm": "Koppla från Stripe-kontot? Utbetalningar pausas tills du ansluter igen.",
+        "disconnected": "Stripe-kontot har kopplats från",
+        "disconnectFailed": "Det gick inte att koppla från",
+        "disconnect": "Koppla från",
+        "setUp": "Konfigurera utbetalningar med Stripe",
+        "openDashboard": "Öppna Stripes instrumentpanel",
+        "continueOnboarding": "Fortsätt registreringen"
+      }
+    },
+    "onboarding": {
+      "loadFailed": "Det gick inte att ladda handlarens uppgifter.",
+      "retry": "Försök igen",
+      "loading": "Laddar...",
+      "title": "Slutför din profil",
+      "subtitle": "Konfigurera handlarens varumärkesprofil.",
+      "basicInfo": "Grundläggande information",
+      "merchantName": "Handlarens namn *",
+      "brandTitle": "Varumärkesprofil",
+      "brandSubtitle": "Anpassa varumärkets färger och logotyp.",
+      "updateFailed": "Det gick inte att uppdatera handlaren",
+      "submit": "Slutför introduktionen",
+      "skip": "Hoppa över tills vidare"
+    }
+  },
+  "merchantTeam": {
+    "auditLog": {
+      "title": "Granskningslogg",
+      "subtitle": "Följ alla åtgärder som utförts på ditt handlarkonto",
+      "filters": "Filter",
+      "action": "Åtgärd",
+      "allActions": "Alla åtgärder",
+      "fromDate": "Från datum",
+      "toDate": "Till datum",
+      "apply": "Tillämpa",
+      "clear": "Rensa",
+      "loading": "Laddar granskningslogg...",
+      "loadFailed": "Det gick inte att ladda granskningsloggen",
+      "empty": "Inga poster i granskningsloggen hittades.",
+      "columns": {
+        "timestamp": "Tidpunkt",
+        "actor": "Utförd av",
+        "action": "Åtgärd",
+        "resource": "Resurs",
+        "details": "Detaljer"
+      },
+      "unknownActor": "Okänd",
+      "showing": "Visar {from}–{to} av {total}",
+      "pageOf": "Sida {page} av {totalPages}",
+      "previousPage": "Föregående sida",
+      "nextPage": "Nästa sida",
+      "actions": {
+        "voucherCreated": "Kupong skapad",
+        "voucherUpdated": "Kupong uppdaterad",
+        "voucherPublished": "Kupong publicerad",
+        "vouchersGenerated": "Kuponger skapade",
+        "campaignCreated": "Kampanj skapad",
+        "campaignUpdated": "Kampanj uppdaterad",
+        "memberInvited": "Teammedlem inbjuden",
+        "memberRemoved": "Teammedlem borttagen",
+        "memberRoleChanged": "Teammedlems roll ändrad",
+        "apiKeyCreated": "API-nyckel skapad",
+        "apiKeyRevoked": "API-nyckel återkallad",
+        "apiKeyUpdated": "API-nyckel uppdaterad",
+        "eventCreated": "Evenemang skapat",
+        "eventUpdated": "Evenemang uppdaterat",
+        "eventPublished": "Evenemang publicerat",
+        "merchantUpdated": "Handlare uppdaterad",
+        "reviewReplied": "Recension besvarad",
+        "settingsUpdate": "Inställningar uppdaterade",
+        "settingsView": "Inställningar visade",
+        "ticketRedeemed": "Biljett inlöst"
+      },
+      "resources": {
+        "voucher": "Kupong",
+        "campaign": "Kampanj",
+        "giftCard": "Presentkort",
+        "event": "Evenemang",
+        "member": "Medlem",
+        "teamMember": "Teammedlem",
+        "apiKey": "API-nyckel",
+        "webhook": "Webhook",
+        "merchant": "Handlare",
+        "user": "Användare",
+        "review": "Recension"
+      }
+    },
+    "roles": {
+      "admin": "Admin",
+      "adminDescription": "Full åtkomst – hantera kuponger, kampanjer, medlemmar och inställningar",
+      "staff": "Personal",
+      "staffDescription": "Operativ åtkomst – bekräfta inlösningar och visa data",
+      "optionWithDescription": "{label} – {description}"
+    },
+    "members": {
+      "title": "Teammedlemmar",
+      "subtitle": "Hantera ditt team och deras behörigheter",
+      "inviteMember": "Bjud in medlem",
+      "inviteTitle": "Bjud in teammedlem",
+      "emailAddress": "E-postadress",
+      "emailPlaceholder": "kollega@foretag.se",
+      "emailHint": "Användaren måste ha ett befintligt konto.",
+      "role": "Roll",
+      "inviting": "Bjuder in...",
+      "sendInvitation": "Skicka inbjudan",
+      "cancel": "Avbryt",
+      "save": "Spara",
+      "loading": "Laddar teammedlemmar...",
+      "loadFailed": "Det gick inte att ladda teammedlemmar",
+      "empty": "Inga teammedlemmar ännu. Bjud in din första medlem ovan.",
+      "columns": {
+        "member": "Medlem",
+        "role": "Roll",
+        "joined": "Gick med",
+        "actions": "Åtgärder"
+      },
+      "unnamed": "Namnlös",
+      "memberRole": "Medlemmens roll",
+      "changeRole": "Ändra roll",
+      "removeMember": "Ta bort medlem",
+      "inviteFailed": "Det gick inte att bjuda in medlemmen",
+      "invited": "Medlemmen har bjudits in",
+      "updateRoleFailed": "Det gick inte att uppdatera rollen",
+      "roleUpdated": "Rollen har uppdaterats",
+      "removeConfirm": "Ta bort {name} från teamet?",
+      "remove": "Ta bort",
+      "removeFailed": "Det gick inte att ta bort medlemmen",
+      "removed": "Medlemmen har tagits bort"
+    },
+    "inviteForm": {
+      "title": "Bjud in teammedlem",
+      "subtitle": "Lägg till en teammedlem med e-postadress.",
+      "email": "E-post",
+      "emailPlaceholder": "medlem@exempel.se",
+      "emailHint": "Användaren måste ha ett konto. Om personen inte har något måste hen registrera sig först.",
+      "role": "Roll",
+      "roleHint": "Administratörer kan hantera kuponger, kampanjer och teammedlemmar. Personal kan bekräfta inlösningar.",
+      "inviting": "Bjuder in...",
+      "submit": "Bjud in medlem",
+      "redirectingToBilling": "{message} Omdirigerar till fakturering..."
+    },
+    "referrals": {
+      "title": "Rekommendationsanalys",
+      "subtitle": "Följ rekommendationernas resultat och belöningar.",
+      "stats": {
+        "total": "Rekommendationer totalt",
+        "totalHint": "Alla spårade rekommendationer",
+        "opened": "Öppnade",
+        "openedHint": "Visade eller inlösta",
+        "redeemed": "Inlösta",
+        "redeemedHint": "Konverterade rekommendationer",
+        "conversionRate": "Konverteringsgrad",
+        "conversionRateHint": "Inlösta/totalt"
+      },
+      "statusBreakdown": "Fördelning per status",
+      "creditsIssued": "Utgivna krediter {amount}",
+      "noActivity": "Ingen rekommendationsaktivitet ännu.",
+      "topReferrers": "Toppreferenter",
+      "topReferrersHint": "Användare som står för flest rekommendationer.",
+      "noReferrals": "Inga rekommendationer ännu.",
+      "unknownUser": "Okänd användare",
+      "referralCount": "{count, plural, one {# rekommendation} other {# rekommendationer}}",
+      "recent": "Senaste rekommendationer",
+      "recentHint": "De senaste rekommendationerna från kunder.",
+      "noRecent": "Inga rekommendationer nyligen.",
+      "voucherFallback": "Kupong",
+      "status": {
+        "created": "Skapad",
+        "opened": "Öppnad",
+        "redeemed": "Inlöst",
+        "expired": "Utgången",
+        "blocked": "Blockerad"
+      }
+    },
+    "emailCampaigns": {
+      "title": "E-postkampanjer",
+      "newCampaign": "Ny kampanj",
+      "notConfigured": "E-postutskick är inte konfigurerat på plattformen ännu. Du kan skapa och förhandsgranska kampanjer, men de kan inte skickas förrän en e-postleverantör är ansluten.",
+      "notConfiguredShort": "E-postutskick är inte konfigurerat på plattformen ännu",
+      "createTitle": "Skapa kampanj",
+      "campaignName": "Kampanjnamn",
+      "campaignNamePlaceholder": "Nyhetsbrev för sommarrean",
+      "subjectLine": "Ämnesrad",
+      "subjectPlaceholder": "Missa inte våra sommarerbjudanden!",
+      "recipients": "Mottagare",
+      "recipientFilter": {
+        "all": "Alla kunder",
+        "redeemed30d": "Har löst in de senaste 30 dagarna",
+        "inactive": "Inaktiva kunder"
+      },
+      "schedule": "Schemaläggning (valfritt)",
+      "emailSections": "E-postsektioner",
+      "sectionTypes": {
+        "header": "Rubrik",
+        "text": "Text",
+        "image": "Bild",
+        "button": "Knapp",
+        "divider": "Avdelare",
+        "voucherCard": "Kupong"
+      },
+      "creating": "Skapar...",
+      "scheduleCampaign": "Schemalägg kampanj",
+      "saveDraft": "Spara som utkast",
+      "preview": "Förhandsvisning",
+      "editor": {
+        "moveUp": "Flytta upp",
+        "moveDown": "Flytta ned",
+        "removeSection": "Ta bort sektion",
+        "title": "Rubrik",
+        "subtitle": "Underrubrik (valfritt)",
+        "textContent": "Skriv textinnehåll...",
+        "imageUrl": "Bildens URL",
+        "altText": "Alternativtext",
+        "buttonLabel": "Knapptext",
+        "buttonUrl": "Knappens URL",
+        "dividerHint": "Horisontell avdelarlinje",
+        "voucherTitle": "Kupongens titel",
+        "voucherValue": "Värde (t.ex. 20 % RABATT)",
+        "voucherCode": "Kod (t.ex. SAVE20)",
+        "voucherExpiry": "Utgångsdatum (t.ex. 31 dec 2026)"
+      },
+      "previewContent": {
+        "headerTitle": "Rubrik",
+        "textContent": "Textinnehåll...",
+        "imagePlaceholder": "Bildplatshållare",
+        "button": "Knapp",
+        "voucher": "Kupong",
+        "validUntil": "Giltig till {date}"
+      },
+      "loading": "Laddar...",
+      "empty": "Inga e-postkampanjer ännu",
+      "columns": {
+        "name": "Namn",
+        "subject": "Ämne",
+        "status": "Status",
+        "recipients": "Mottagare",
+        "opens": "Öppningar",
+        "created": "Skapad",
+        "actions": "Åtgärder"
+      },
+      "status": {
+        "draft": "utkast",
+        "scheduled": "schemalagd",
+        "sent": "skickad"
+      },
+      "send": "Skicka",
+      "delete": "Radera",
+      "deleteCampaign": "Radera kampanj",
+      "toasts": {
+        "missingFields": "Fält saknas",
+        "missingFieldsDescription": "Namn och ämne är obligatoriska.",
+        "created": "Kampanjen har skapats",
+        "error": "Fel",
+        "createFailed": "Det gick inte att skapa kampanjen.",
+        "sendConfirm": "Vill du skicka kampanjen nu?",
+        "sendFailedStatus": "Det gick inte att skicka (fel {status}).",
+        "partlySent": "Kampanjen skickades delvis",
+        "partlySentDescription": "Skickad till {sent} av {total} mottagare. {failed, plural, one {# mejl} other {# mejl}} kunde inte skickas.",
+        "sent": "Kampanjen har skickats",
+        "sentDescription": "Skickad till {sent, plural, one {# mottagare} other {# mottagare}}.",
+        "sendFailed": "Utskicket misslyckades",
+        "deleteConfirm": "Radera kampanjen?",
+        "deleted": "Kampanjen har raderats",
+        "deleteFailed": "Det gick inte att radera."
+      }
+    },
+    "apiKeys": {
+      "title": "API-nycklar",
+      "subtitle": "Hantera API-nycklar för programmatisk åtkomst till dina handlardata",
+      "createKey": "Skapa nyckel",
+      "createdNotice": "API-nyckeln har skapats! Kopiera den nu – den visas inte igen.",
+      "copyKey": "Kopiera nyckel",
+      "createTitle": "Skapa API-nyckel",
+      "keyName": "Nyckelns namn",
+      "keyNamePlaceholder": "t.ex. Kassaintegration produktion",
+      "permissions": "Behörigheter",
+      "creating": "Skapar...",
+      "submit": "Skapa API-nyckel",
+      "cancel": "Avbryt",
+      "loading": "Laddar API-nycklar...",
+      "empty": "Inga API-nycklar ännu. Skapa en för att komma igång.",
+      "createdOn": "Skapad {date}",
+      "lastUsed": "Senast använd {date}",
+      "expires": "Går ut {date}",
+      "revokeKey": "Återkalla nyckel",
+      "loadFailed": "Det gick inte att ladda API-nycklar",
+      "required": "Namn och minst en behörighet krävs",
+      "createFailed": "Det gick inte att skapa API-nyckeln",
+      "created": "API-nyckeln har skapats",
+      "revokeConfirm": "Återkalla API-nyckeln \"{name}\"? Det går inte att ångra.",
+      "revoke": "Återkalla",
+      "revoked": "API-nyckeln har återkallats",
+      "revokeFailed": "Det gick inte att återkalla API-nyckeln",
+      "copied": "Kopierat till urklipp",
+      "groups": {
+        "vouchers": "Kuponger",
+        "campaigns": "Kampanjer",
+        "giftCards": "Presentkort",
+        "customers": "Kunder",
+        "analytics": "Analys",
+        "events": "Evenemang"
+      },
+      "permissionLabels": {
+        "voucherRead": "Läsa kuponger",
+        "voucherCreate": "Skapa kuponger",
+        "voucherRedeem": "Lösa in kuponger",
+        "campaignRead": "Läsa kampanjer",
+        "campaignCreate": "Skapa kampanjer",
+        "giftCardRead": "Läsa presentkort",
+        "giftCardRedeem": "Lösa in presentkort",
+        "customerRead": "Läsa kunder",
+        "analyticsRead": "Läsa analys",
+        "eventRead": "Läsa evenemang",
+        "eventCheckin": "Checka in på evenemang"
+      }
+    },
+    "webhooks": {
+      "title": "Webhooks",
+      "subtitle": "Ta emot händelsenotiser via HTTP",
+      "addWebhook": "Lägg till webhook",
+      "secretNotice": "Webhook-hemlighet (visas bara en gång):",
+      "copySecret": "Kopiera hemlighet",
+      "copied": "Kopierat!",
+      "newTitle": "Ny webhook",
+      "endpointUrl": "Endpoint-URL",
+      "endpointPlaceholder": "https://your-api.com/webhook",
+      "events": "Händelser",
+      "submit": "Skapa webhook",
+      "loading": "Laddar...",
+      "empty": "Inga webhooks har konfigurerats",
+      "createdOn": "Skapad {date}",
+      "deliveriesCount": "{count, plural, one {# leverans} other {# leveranser}}",
+      "sendTest": "Skicka test",
+      "viewDeliveries": "Leveranslogg",
+      "disable": "Inaktivera",
+      "enable": "Aktivera",
+      "deleteWebhook": "Radera webhook",
+      "deliveryLog": "Leveranslogg",
+      "noDeliveries": "Inga leveranser ännu",
+      "deliveryFailed": "Misslyckad",
+      "attempts": "{count, plural, one {# försök} other {# försök}}",
+      "loadFailed": "Det gick inte att ladda webhooks",
+      "required": "URL och minst en händelse krävs",
+      "created": "Webhooken har skapats",
+      "createFailed": "Det gick inte att skapa webhooken",
+      "deleted": "Webhooken har raderats",
+      "deleteFailed": "Det gick inte att radera webhooken",
+      "updateFailed": "Det gick inte att uppdatera webhooken",
+      "testDelivered": "Testet har levererats! Status: {status}",
+      "testFailed": "Testet misslyckades: {error}",
+      "statusCode": "Status {status}",
+      "testSendFailed": "Det gick inte att skicka testwebhooken",
+      "loadDeliveriesFailed": "Det gick inte att ladda leveranserna"
+    }
   }
 }
